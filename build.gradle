@@ -32,9 +32,15 @@ application {
     mainClass.set("seedu.duke.Duke")
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'seedu.duke.Duke'
+    }
+}
+
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    archiveBaseName.set('duke')
+    archiveClassifier.set('')
     dependsOn("distZip", "distTar")
 }
 
