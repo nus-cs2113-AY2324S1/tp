@@ -1,5 +1,3 @@
-theme : minima
-
 # User Guide
 
 ## Introduction
