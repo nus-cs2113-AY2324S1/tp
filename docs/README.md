@@ -1,4 +1,4 @@
-# Duke
+# Hi
 
 {Give product intro here}
 
