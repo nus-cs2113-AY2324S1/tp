@@ -1,8 +1,8 @@
-package rene.command;
+package quizhub.command;
 
-import rene.storage.Storage;
-import rene.tasklist.TaskList;
-import rene.ui.Ui;
+import quizhub.storage.Storage;
+import quizhub.quizlist.QuizList;
+import quizhub.ui.Ui;
 /**
  * Represents a command to delete a task.
  */
@@ -26,7 +26,7 @@ public class CommandDelete extends Command {
      * @param dataStorage Hard disk storage for storing task data.
      */
     @Override
-    public void executeCommand(Ui ui, Storage dataStorage, TaskList tasks){
+    public void executeCommand(Ui ui, Storage dataStorage, QuizList tasks){
         String taskName = tasks.viewTaskByIndex(taskIndex);
         if(!taskName.equals("Task Not Found")) {
             tasks.deleteTaskByIndex(taskIndex);

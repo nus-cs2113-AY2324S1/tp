@@ -1,8 +1,8 @@
-package rene.task;
+package quizhub.quiz;
 /**
  * Represents all tasks in the task list in general.
  */
-public class Task {
+public class Quiz {
     public enum TaskType {TODO, EVENT, DEADLINE, DEFAULT};
     private TaskType taskType;
     private String description;
@@ -23,7 +23,7 @@ public class Task {
      * Creates a new task with a blank description,
      * not done status and default task type.
      */
-    public Task(){
+    public Quiz(){
         description = "";
         done = false;
         taskType = TaskType.DEFAULT;
@@ -34,7 +34,7 @@ public class Task {
      *
      * @param description Description given to the task.
      */
-    public Task(String description){
+    public Quiz(String description){
         this.description = description;
         done = false;
         taskType = TaskType.DEFAULT;
@@ -46,7 +46,7 @@ public class Task {
      * @param description Description given to the task.
      * @param taskType Type given to the task.
      */
-    public Task(String description, TaskType taskType){
+    public Quiz(String description, TaskType taskType){
         this.description = description;
         done = false;
         this.taskType = taskType;

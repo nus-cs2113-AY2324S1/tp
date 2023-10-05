@@ -1,13 +1,13 @@
-package rene.command;
+package quizhub.command;
 
-import rene.storage.Storage;
-import rene.task.Task;
-import rene.tasklist.TaskList;
-import rene.ui.Ui;
+import quizhub.storage.Storage;
+import quizhub.quiz.Quiz;
+import quizhub.quizlist.QuizList;
+import quizhub.ui.Ui;
 /**
- * Represents a command to add a todo task.
+ * Represents a command to add a quiz question.
  */
-public class CommandTodo extends Command {
+public class CommandAdd extends Command {
 
     private String userInput;
     /**
@@ -15,8 +15,8 @@ public class CommandTodo extends Command {
      *
      * @param userInput User input containing details of the todo task.
      */
-    public CommandTodo(String userInput){
-        super(CommandType.TODO);
+    public CommandAdd(String userInput){
+        super(CommandType.ADD);
         this.userInput = userInput;
     }
     /**
@@ -27,8 +27,8 @@ public class CommandTodo extends Command {
      * @param dataStorage Hard disk storage for storing task data.
      */
     @Override
-    public void executeCommand(Ui ui, Storage dataStorage, TaskList tasks){
-        tasks.addToTaskList(userInput, Task.TaskType.TODO, true);
+    public void executeCommand(Ui ui, Storage dataStorage, QuizList tasks){
+        tasks.addToTaskList(userInput, Quiz.TaskType.TODO, true);
         dataStorage.updateData(tasks);
     }
 

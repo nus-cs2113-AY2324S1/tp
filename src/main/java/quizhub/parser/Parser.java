@@ -1,16 +1,12 @@
-package rene.parser;
+package quizhub.parser;
 
-import rene.command.Command;
-import rene.command.CommandMark;
-import rene.command.CommandUnmark;
-import rene.command.CommandList;
-import rene.command.CommandExit;
-import rene.command.CommandDelete;
-import rene.command.CommandTodo;
-import rene.command.CommandDeadline;
-import rene.command.CommandEvent;
-import rene.command.CommandFind;
-import rene.exception.ReneExceptions;
+import quizhub.command.Command;
+import quizhub.command.CommandList;
+import quizhub.command.CommandExit;
+import quizhub.command.CommandDelete;
+import quizhub.command.CommandTodo;
+import quizhub.command.CommandFind;
+import quizhub.exception.QuizHubExceptions;
 /**
  * Represents a parser that converts user inputs into command objects.
  */
@@ -52,13 +48,13 @@ public class Parser {
                 case "find":
                     return new CommandFind(userInput);
                 default:
-                    throw new ReneExceptions("Invalid Input");
+                    throw new QuizHubExceptions("Invalid Input");
             }
         }
         catch(NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex){
             System.out.println("    Pwease enter valid integer index!");
         }
-        catch (ReneExceptions exception){
+        catch (QuizHubExceptions exception){
             String exceptionMessage = exception.getMessage();
             if (exceptionMessage.equals("Invalid Input")) {
                 System.out.println("    Pwease enter a valid command :0");

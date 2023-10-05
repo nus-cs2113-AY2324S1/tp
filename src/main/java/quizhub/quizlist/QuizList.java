@@ -1,10 +1,8 @@
-package rene.tasklist;
+package quizhub.quizlist;
 
-import rene.task.Task;
-import rene.task.ToDo;
-import rene.task.Deadline;
-import rene.task.Event;
-import rene.exception.ReneExceptions;
+import quizhub.quiz.Quiz;
+import quizhub.quiz.ShortAnsQn;
+import quizhub.exception.QuizHubExceptions;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,8 +12,8 @@ import java.util.ArrayList;
  * Represents the list of tasks currently registered in the chatbot.
  * This list is created on program start and disposed on program termination.
  */
-public class TaskList {
-    private ArrayList<Task> allTasks; //array of inputs
+public class QuizList {
+    private ArrayList<Quiz> allTasks; //array of inputs
     DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern( "dd-MM-yyyy HH:mm" );
     /**
      * Adds a user-requested task to the current task list.
@@ -27,22 +25,22 @@ public class TaskList {
      * @param taskType The type of task to be added (TODO, DEADLINE, EVENT).
      * @param showMessage If true, program will print response message on CLI after task is added.
      */
-    public void addToTaskList(String input, Task.TaskType taskType, boolean showMessage){
+    public void addToTaskList(String input, Quiz.TaskType taskType, boolean showMessage){
         switch (taskType) {
             case TODO:
                 try {
                     String toDoDescription = input.split("todo")[1].strip();
                     if (toDoDescription.equals("")) {
-                        throw new ReneExceptions("Incomplete Command");
+                        throw new QuizHubExceptions("Incomplete Command");
                     }
-                    allTasks.add(new ToDo(toDoDescription));
+                    allTasks.add(new ShortAnsQn(toDoDescription));
                     if (showMessage) {
                         System.out.println("    I have added the following task OwO:");
                         System.out.printf("      [T][] %s\n", viewTaskByIndex(getTaskListSize()));
                         System.out.println("    Now you have " + getTaskListSize() + " tasks in the list! UWU");
                     }
                     break;
-                } catch (ArrayIndexOutOfBoundsException | ReneExceptions incompleteCommand) {
+                } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
                     System.out.println("    Ohnus! You did not use give todo a name!");
                     System.out.println("    Pwease format your input as todo [task name]!");
                     return;
@@ -62,14 +60,14 @@ public class TaskList {
                 try {
                     deadlineDescription = deadlineDetails[0].strip();
                     if (deadlineDescription.equals("")) {
-                        throw new ReneExceptions("Incomplete Deadline Description");
+                        throw new QuizHubExceptions("Incomplete Deadline Description");
                     }
                     deadlineTiming = deadlineDetails[1].strip().split("by")[1].strip();
                     if (deadlineTiming.equals("")) {
-                        throw new ReneExceptions("Incomplete Due Time");
+                        throw new QuizHubExceptions("Incomplete Due Time");
                     }
                     LocalDateTime  deadlineDateTime = LocalDateTime.parse(deadlineTiming, inputDateTimeFormatter);
-                    allTasks.add(new Deadline(deadlineDescription, deadlineDateTime));
+                    allTasks.add(new ShortAnsQn("Steven Halim"));
                     if (showMessage) {
                         System.out.println("    I have added the following task OwO:");
                         System.out.printf("      [D][] %s\n", viewTaskByIndex(getTaskListSize()));
@@ -84,7 +82,7 @@ public class TaskList {
                     System.out.println("    Ohnus! You did not use give a correct date time for due time!");
                     System.out.println("    Pwease format your deadline as dd-MM-yyyy HH:mm!");
                     return;
-                } catch (ReneExceptions incompleteCommand) {
+                } catch (QuizHubExceptions incompleteCommand) {
                     String exceptionMessage = incompleteCommand.getMessage();
                     switch (exceptionMessage) {
                         case "Incomplete Deadline Description":
@@ -119,11 +117,11 @@ public class TaskList {
                 try {
                     eventDescription = eventDetails[0].strip();
                     if (eventDescription.equals("")) {
-                        throw new ReneExceptions("Incomplete Event Description");
+                        throw new QuizHubExceptions("Incomplete Event Description");
                     }
                     eventStartTiming = eventDetails[1].strip().split("from")[1].strip();
                     if (eventStartTiming.equals("")) {
-                        throw new ReneExceptions("Incomplete Start Time");
+                        throw new QuizHubExceptions("Incomplete Start Time");
                     }
                     eventStartDateTime = LocalDateTime.parse(eventStartTiming, inputDateTimeFormatter);
                 } catch (IndexOutOfBoundsException incompleteCommand) {
@@ -135,7 +133,7 @@ public class TaskList {
                     System.out.println("    Ohnus! You did not use give a correct date time for start time!");
                     System.out.println("    Pwease format your deadline as dd-MM-yyyy HH:mm !");
                     return;
-                } catch (ReneExceptions incompleteCommand) {
+                } catch (QuizHubExceptions incompleteCommand) {
                     String exceptionMessage = incompleteCommand.getMessage();
                     switch (exceptionMessage) {
                         case "Incomplete Event Description":
@@ -155,13 +153,13 @@ public class TaskList {
                 try {
                     eventEndTiming = eventDetails[2].strip().split("to")[1].strip();
                     if (eventEndTiming.equals("")) {
-                        throw new ReneExceptions("Incomplete Start Time");
+                        throw new QuizHubExceptions("Incomplete Start Time");
                     }
                     eventEndDateTime = LocalDateTime .parse(eventEndTiming, inputDateTimeFormatter);
                     if(eventEndDateTime.isBefore(eventStartDateTime)){
-                        throw new ReneExceptions("Invalid end time");
+                        throw new QuizHubExceptions("Invalid end time");
                     }
-                    allTasks.add(new Event(eventDescription, eventStartDateTime, eventEndDateTime));
+                    allTasks.add(new ShortAnsQn("Steven Halim"));
                     if (showMessage) {
                         System.out.println("    I have added the following task OwO:");
                         System.out.printf("      [E][] %s\n", viewTaskByIndex(getTaskListSize()));
@@ -176,7 +174,7 @@ public class TaskList {
                     System.out.println("    Ohnus! You did not use give a correct date time for end time!");
                     System.out.println("    Pwease format your deadline as dd-MM-yyyy HH:mm!");
                     return;
-                } catch (ReneExceptions incorrectCommand) {
+                } catch (QuizHubExceptions incorrectCommand) {
                     String exceptionMessage = incorrectCommand.getMessage();
                     switch (exceptionMessage) {
                         case "Invalid end time":
@@ -201,7 +199,7 @@ public class TaskList {
      * @param asList If true, prints out the index of the task in the task list
      *               in addition to the details of the task.
      */
-    public void printTask(Task task, boolean asList){
+    public void printTask(Quiz task, boolean asList){
         int taskIndex = allTasks.indexOf(task);
         switch(task.getTaskType()) {
             case TODO:
@@ -269,7 +267,7 @@ public class TaskList {
             System.out.println("    No tasks found! Time to add some OWO");
         }
         else {
-            for (Task task : allTasks) {
+            for (Quiz task : allTasks) {
                 printTask(task, true);
             }
         }
@@ -285,7 +283,7 @@ public class TaskList {
         try{
             allTasks.get(index-1).markAsDone();
             if(showMessage) {
-                Task task = allTasks.get(index - 1);
+                Quiz task = allTasks.get(index - 1);
                 System.out.println("    Roger that! I have marked the following task as done >w< !");
                 printTask(task, false);
             }
@@ -299,7 +297,7 @@ public class TaskList {
     public void markTaskAsNotDone(int index){
         try{
             allTasks.get(index-1).markAsNotDone();
-            Task task = allTasks.get(index-1);
+            Quiz task = allTasks.get(index-1);
             System.out.println("    Roger that! I have unmarked the following task as done >w< !");
             printTask(task, false);
         } catch (IndexOutOfBoundsException invalidIndex){
@@ -313,7 +311,7 @@ public class TaskList {
      */
     public void deleteTaskByIndex(int index){
         try{
-            Task task = allTasks.get(index-1);
+            Quiz task = allTasks.get(index-1);
             allTasks.remove(index - 1);
             System.out.println("    Roger that! I have deleted the following task >w< !");
             printTask(task, false);
@@ -351,13 +349,13 @@ public class TaskList {
      * @param keyword Description keyword(s) used to search for matches.
      */
     public void searchListByDescription(String keyword){
-        ArrayList<Task> matchedTasks = new ArrayList<>();
+        ArrayList<Quiz> matchedTasks = new ArrayList<>();
         if(allTasks.isEmpty()){
             System.out.println("    Task list is empty! Time to add some OWO");
         }
         else {
             System.out.println("    Here are tasks that matched your search:");
-            for (Task task : allTasks) {
+            for (Quiz task : allTasks) {
                 if(task.getTaskDescription().contains(keyword)){
                     matchedTasks.add(task);
                     printTask(task, true);
@@ -374,13 +372,13 @@ public class TaskList {
      * @param dateTime Date and time used to search for matches.
      */
     public void searchListByTime(String dateTime){
-        ArrayList<Task> matchedTasks = new ArrayList<>();
+        ArrayList<Quiz> matchedTasks = new ArrayList<>();
         if(allTasks.isEmpty()){
             System.out.println("    Task list is empty! Time to add some OWO");
         }
         else {
             System.out.println("    Here are tasks that matched your search:");
-            for (Task task : allTasks) {
+            for (Quiz task : allTasks) {
                 if(task.getTaskTiming(true).contains(dateTime)){
                     matchedTasks.add(task);
                     printTask(task, true);
@@ -439,13 +437,13 @@ public class TaskList {
     /**
      * Returns a list of all tasks in the current task list.
      */
-    public ArrayList<Task> getAllTasks(){
+    public ArrayList<Quiz> getAllTasks(){
         return allTasks;
     }
     /**
      * Creates a new empty task list.
      */
-    public TaskList(){
+    public QuizList(){
         allTasks = new ArrayList<>();
     }
 }
