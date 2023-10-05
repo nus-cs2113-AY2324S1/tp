@@ -14,8 +14,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
-
         Scanner in = new Scanner(System.in);
+
+        
         System.out.println("Hello " + in.nextLine());
     }
 }
