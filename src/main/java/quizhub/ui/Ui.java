@@ -1,7 +1,7 @@
 package quizhub.ui;
 
 import quizhub.storage.Storage;
-import quizhub.quizlist.QuizList;
+import quizhub.questionlist.QuizList;
 
 import java.util.Scanner;
 /**

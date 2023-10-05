@@ -1,7 +1,7 @@
 package quizhub.command;
 
 import quizhub.storage.Storage;
-import quizhub.quizlist.QuizList;
+import quizhub.questionlist.QuizList;
 import quizhub.ui.Ui;
 /**
  * Represents a command to search for a task.

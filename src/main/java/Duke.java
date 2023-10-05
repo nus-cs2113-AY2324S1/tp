@@ -1,6 +1,6 @@
 import quizhub.command.Command;
 import quizhub.parser.Parser;
-import quizhub.quizlist.QuizList;
+import quizhub.questionlist.QuizList;
 import quizhub.ui.Ui;
 import quizhub.storage.Storage;
 

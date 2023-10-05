@@ -1,6 +1,6 @@
 package quizhub.storage;
-import quizhub.quiz.Quiz;
-import quizhub.quizlist.QuizList;
+import quizhub.question.Quiz;
+import quizhub.questionlist.QuizList;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,9 +1,9 @@
-package quizhub.quiz;
+package quizhub.question;
 /**
  * Represents all tasks in the task list in general.
  */
-public class Quiz {
-    public enum TaskType {TODO, EVENT, DEADLINE, DEFAULT};
+public class Question {
+    public enum TaskType {SHORTANSWER, DEFAULT};
     private TaskType taskType;
     private String description;
     private boolean done;
@@ -23,7 +23,7 @@ public class Quiz {
      * Creates a new task with a blank description,
      * not done status and default task type.
      */
-    public Quiz(){
+    public Question(){
         description = "";
         done = false;
         taskType = TaskType.DEFAULT;
@@ -34,7 +34,7 @@ public class Quiz {
      *
      * @param description Description given to the task.
      */
-    public Quiz(String description){
+    public Question(String description){
         this.description = description;
         done = false;
         taskType = TaskType.DEFAULT;
@@ -46,7 +46,7 @@ public class Quiz {
      * @param description Description given to the task.
      * @param taskType Type given to the task.
      */
-    public Quiz(String description, TaskType taskType){
+    public Question(String description, TaskType taskType){
         this.description = description;
         done = false;
         this.taskType = taskType;

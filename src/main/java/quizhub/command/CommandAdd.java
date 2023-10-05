@@ -1,8 +1,8 @@
 package quizhub.command;
 
 import quizhub.storage.Storage;
-import quizhub.quiz.Quiz;
-import quizhub.quizlist.QuizList;
+import quizhub.question.Quiz;
+import quizhub.questionlist.QuizList;
 import quizhub.ui.Ui;
 /**
  * Represents a command to add a quiz question.
