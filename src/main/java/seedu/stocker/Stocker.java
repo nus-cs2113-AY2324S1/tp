@@ -1,8 +1,8 @@
-package seedu.duke;
+package seedu.stocker;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Stocker {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
