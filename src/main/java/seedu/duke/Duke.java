@@ -7,12 +7,12 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+        String logo = " _____ _ _   _   _ _   _ ____  \n"
+                + "|  ___(_) |_| \\ | | | | / ___| \n"
+                + "| |_  | | __|  \\| | | | \\___ \\ \n"
+                + "|  _| | | |_| |\\  | |_| |___) |\n"
+                + "|_|   |_|\\__|_| \\_|\\___/|____/ \n";
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
@@ -20,7 +20,7 @@ public class Duke {
         String userInput = in.nextLine();
 
         while (!userInput.equals("exit")) {
-            System.out.println("Hello " + userInput);
+            System.out.println("You said: " + userInput);
             userInput = in.nextLine();
         }
         System.out.println("Goodbye now!");
