@@ -1,4 +1,4 @@
-package seedu.financialplanner.ui;
+package seedu.financialplanner.utils;
 
 import java.util.Scanner;
 
