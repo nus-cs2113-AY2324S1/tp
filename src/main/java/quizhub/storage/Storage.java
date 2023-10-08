@@ -1,6 +1,6 @@
 package quizhub.storage;
-import quizhub.question.Quiz;
-import quizhub.questionlist.QuizList;
+import quizhub.question.Question;
+import quizhub.questionlist.QuestionList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * Represents the hard disk storage where
- * task data is stored, read and updated.
+ * question data is stored, read and updated.
  */
 public class Storage {
     private File dataFile;
     /**
-     * Creates a new storage for storing task data.
+     * Creates a new storage for storing question data.
      *
      * @param filePath The file location in hard disk where data is stored and read from.
      */
@@ -34,62 +34,63 @@ public class Storage {
         fileWriter.close();
     }
     /**
-     * Build a new task list from data stored in hard disk.
-     * Used at program start to build the current task list.
+     * Build a new question list from data stored in hard disk.
+     * Used at program start to build the current question list.
      *
-     * @param tasks The task list to be built.
+     * @param questions The question list to be built.
      */
-    public void buildCurrentListFromFile(QuizList tasks){
+    public void buildCurrentListFromFile(QuestionList questions){
         try {
             if (dataFile.createNewFile()) {
-                System.out.println("    Task-list created: " + dataFile.getName());
+                System.out.println("    Question-list created: " + dataFile.getName());
             }
         } catch(NullPointerException | IOException invalidFilePath){
             System.out.println("    " + invalidFilePath.getMessage());
         }
-        int taskIndex = 0;
+        int questionIndex = 0;
         try {
             Scanner fileScanner = new Scanner(dataFile);
             if (fileScanner.hasNext()) {
                 fileScanner.nextLine();
                 while (fileScanner.hasNext()) {
-                    taskIndex++;
-                    String nextTask = fileScanner.nextLine();
-                    String[] taskSubStrings = nextTask.split("\\|");
-                    String taskType = taskSubStrings[0].strip();
-                    String taskDoneStatus = taskSubStrings[1].strip();
-                    String taskDescription = taskSubStrings[2].strip();
+                    questionIndex++;
+                    String nextQuestion = fileScanner.nextLine();
+                    String[] questionSubStrings = nextQuestion.split("\\|");
+                    String questionType = questionSubStrings[0].strip();
+                    String questionDoneStatus = questionSubStrings[1].strip();
+                    String questionDescription = questionSubStrings[2].strip();
 
-                    switch (taskType) {
-                        case "T": tasks.addToTaskList("todo " + taskDescription,
-                                Quiz.TaskType.TODO, false);
-                            if (taskDoneStatus.equals("done")) {
-                                tasks.markTaskAsDone(taskIndex, false);
+                    // TODO : change this entire code chunk, right now they're all default
+                    switch (questionType) {
+                        case "T": questions.addToQuestionList("todo " + questionDescription,
+                                Question.qnType.DEFAULT, false);
+                            if (questionDoneStatus.equals("done")) {
+                                questions.markQuestionAsDone(questionIndex, false);
                             }
                             break;
                         case "D":
-                            String dueTime = taskSubStrings[3].replace("(by:", "")
+                            String dueTime = questionSubStrings[3].replace("(by:", "")
                                     .replace(")", "").strip();
-                            tasks.addToTaskList("deadline " + taskDescription + " /by " + dueTime,
-                                    Quiz.TaskType.DEADLINE, false);
-                            if (taskDoneStatus.equals("done")) {
-                                tasks.markTaskAsDone(taskIndex, false);
+                            questions.addToQuestionList("deadline " + questionDescription + " /by " + dueTime,
+                                    Question.qnType.DEFAULT, false);
+                            if (questionDoneStatus.equals("done")) {
+                                questions.markQuestionAsDone(questionIndex, false);
                             }
 
                             break;
                         case "E":
-                            String[] taskTimings = taskSubStrings[3].strip().split("\\(from:")[1]
+                            String[] questionTimings = questionSubStrings[3].strip().split("\\(from:")[1]
                                     .split("to:");
-                            String startTime = taskTimings[0];
-                            String endTime = taskTimings[1].split("\\)")[0];
-                            tasks.addToTaskList("event " + taskDescription + " /from " + startTime
-                                    + " /to " + endTime, Quiz.TaskType.EVENT, false);
-                            if (taskDoneStatus.equals("done")) {
-                                tasks.markTaskAsDone(taskIndex, false);
+                            String startTime = questionTimings[0];
+                            String endTime = questionTimings[1].split("\\)")[0];
+                            questions.addToQuestionList("event " + questionDescription + " /from " + startTime
+                                    + " /to " + endTime, Question.qnType.DEFAULT, false);
+                            if (questionDoneStatus.equals("done")) {
+                                questions.markQuestionAsDone(questionIndex, false);
                             }
                             break;
                         default:
-                            System.out.println(nextTask);
+                            System.out.println(nextQuestion);
                             break;
                     }
 
@@ -102,65 +103,68 @@ public class Storage {
         }
     }
     /**
-     * Build a new task list from data stored in hard disk.
-     * Prints out the tasks in the list in CLI.
+     * Build a new question list from data stored in hard disk.
+     * Prints out the questions in the list in CLI.
      *
-     * @param tasks The task list that has been built.
+     * @param questions The question list that has been built.
      */
-    public void loadData(QuizList tasks) {
-        buildCurrentListFromFile(tasks);
-        if (tasks.getTaskListSize() > 0) {
-            System.out.println("    You currently have the following tasks uWu");
-            tasks.printTaskList();
+    public void loadData(QuestionList questions) {
+        buildCurrentListFromFile(questions);
+        if (questions.getQuestionListSize() > 0) {
+            System.out.println("    You currently have the following questions uWu");
+            questions.printQuestionList();
         } else {
-            System.out.println("    You currently have no saved tasks uWu");
+            System.out.println("    You currently have no saved questions uWu");
         }
     }
     /**
      * Overwrites all existing data in storage with
-     * the current tasks in the task list.
-     * Used after every task change and on program termination.
+     * the current questions in the question list.
+     * Used after every question change and on program termination.
      *
-     * @param tasks The task list to overwrite current data with.
+     * @param questions The question list to overwrite current data with.
      */
-    public void updateData(QuizList tasks){
+    public void updateData(QuestionList questions){
         try{
             //flush all current records
-            writeToFile(dataFile.getPath(), "Latest Tasks" + System.lineSeparator(), false);
-            ArrayList<Quiz> allTasks = tasks.getAllTasks();
-            for (Quiz task: allTasks) {
-                switch (task.getTaskType()) {
+            writeToFile(dataFile.getPath(), "Latest Questions" + System.lineSeparator(), false);
+            ArrayList<Question> allQuestions = questions.getAllQns();
+            for (Question question: allQuestions) {
+                switch (question.getQuestionType()) {
+                    /*
                     case TODO:
-                        if (task.taskIsDone()) {
-                            writeToFile(dataFile.getPath(), "T | done |  " + task.getTaskDescription()
+                        if (question.questionIsDone()) {
+                            writeToFile(dataFile.getPath(), "T | done |  " + question.getQuestionDescription()
                                     + System.lineSeparator(), true);
                         } else {
-                            writeToFile(dataFile.getPath(), "T | undone |  " + task.getTaskDescription()
+                            writeToFile(dataFile.getPath(), "T | undone |  " + question.getQuestionDescription()
                                     + System.lineSeparator(), true);
                         }
                         break;
                     case DEADLINE:
-                        if (task.taskIsDone()) {
-                            writeToFile(dataFile.getPath(), "D | done |  " + task.getTaskDescription()
-                                    + " | "  + task.getTaskTiming(true)
+                        if (question.questionIsDone()) {
+                            writeToFile(dataFile.getPath(), "D | done |  " + question.getQuestionDescription()
+                                    + " | "  + question.getQuestionTiming(true)
                                     + System.lineSeparator(), true);
                         } else {
-                            writeToFile(dataFile.getPath(), "D | undone |  " + task.getTaskDescription()
-                                    + " | "  + task.getTaskTiming(true)
+                            writeToFile(dataFile.getPath(), "D | undone |  " + question.getQuestionDescription()
+                                    + " | "  + question.getQuestionTiming(true)
                                     + System.lineSeparator(), true);
                         }
                         break;
                     case EVENT:
-                        if (task.taskIsDone()) {
-                            writeToFile(dataFile.getPath(), "E | done |  " + task.getTaskDescription()
-                                    + " | "  + task.getTaskTiming(true)
+                        if (question.questionIsDone()) {
+                            writeToFile(dataFile.getPath(), "E | done |  " + question.getQuestionDescription()
+                                    + " | "  + question.getQuestionTiming(true)
                                     + System.lineSeparator(), true);
                         } else {
-                            writeToFile(dataFile.getPath(), "E | undone |  " + task.getTaskDescription()
-                                    + " | "  + task.getTaskTiming(true)
+                            writeToFile(dataFile.getPath(), "E | undone |  " + question.getQuestionDescription()
+                                    + " | "  + question.getQuestionTiming(true)
                                     + System.lineSeparator(), true);
                         }
                         break;
+
+                     */
                 }
             }
 

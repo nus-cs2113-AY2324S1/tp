@@ -3,8 +3,8 @@ package quizhub.question;
  * Represents all tasks in the task list in general.
  */
 public class Question {
-    public enum TaskType {SHORTANSWER, DEFAULT};
-    private TaskType taskType;
+    public enum qnType {SHORTANSWER, DEFAULT};
+    private qnType qnType;
     private String description;
     private boolean done;
     /**
@@ -26,7 +26,7 @@ public class Question {
     public Question(){
         description = "";
         done = false;
-        taskType = TaskType.DEFAULT;
+        qnType = qnType.DEFAULT;
     }
     /**
      * Creates a new task with a given description,
@@ -37,42 +37,42 @@ public class Question {
     public Question(String description){
         this.description = description;
         done = false;
-        taskType = TaskType.DEFAULT;
+        qnType = qnType.DEFAULT;
     }
     /**
      * Creates a new task with a given description,
      * not done status and given task type.
      *
      * @param description Description given to the task.
-     * @param taskType Type given to the task.
+     * @param qnType Type given to the task.
      */
-    public Question(String description, TaskType taskType){
+    public Question(String description, qnType qnType){
         this.description = description;
         done = false;
-        this.taskType = taskType;
+        this.qnType = qnType;
     }
     /**
      * Checks if a task has been done.
      */
-    public boolean taskIsDone(){
+    public boolean questionIsDone(){
         return done;
     }
     /**
      * Returns task description.
      */
-    public String getTaskDescription(){
+    public String getQuestionDescription(){
         return description;
     }
     /**
      * Returns task timing details.
      */
-    public String getTaskTiming(boolean useDefaultTiming){
+    public String getQuestionTiming(boolean useDefaultTiming){
         return "";
     }
     /**
      * Returns task type.
      */
-    public TaskType getTaskType(){
-        return taskType;
+    public qnType getQuestionType(){
+        return qnType;
     }
 }

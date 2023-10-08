@@ -9,6 +9,6 @@ public class ShortAnsQn extends Question {
      * @param description Task description.
      */
     public ShortAnsQn(String description){
-        super(description, TaskType.SHORTANSWER);
+        super(description, qnType.SHORTANSWER);
     }
 }
