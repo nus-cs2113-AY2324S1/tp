@@ -7,20 +7,20 @@ import quizhub.ui.Ui;
 /**
  * Represents a command to add a quiz question.
  */
-public class CommandAdd extends Command {
+public class CommandShortAnswer extends Command {
 
     private String userInput;
     /**
-     * Creates a new todo command to add a todo task.
+     * Creates a new question command to add a SHORTANSWER question
      *
-     * @param userInput User input containing details of the todo task.
+     * @param userInput User input containing details of the SHORTANSWER question
      */
-    public CommandAdd(String userInput){
+    public CommandShortAnswer(String userInput){
         super(CommandType.ADD);
         this.userInput = userInput;
     }
     /**
-     * Adds the todo task and updates storage data.
+     * Adds the SHORTANSWER question and updates storage data.
      *
      * @param ui User interface for interactions with user through CLI.
      * @param questions Current question list in the program.
@@ -28,7 +28,7 @@ public class CommandAdd extends Command {
      */
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
-        questions.addToQuestionList(userInput, Question.qnType.DEFAULT, true);
+        questions.addToQuestionList(userInput, Question.qnType.SHORTANSWER, true);
         dataStorage.updateData(questions);
     }
 

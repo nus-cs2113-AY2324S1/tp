@@ -1,14 +1,20 @@
 package quizhub.question;
 /**
- * Represents todo tasks in the current task list
+ * Represents Short Answer Questions. This means answers are a simple string
  */
 public class ShortAnsQn extends Question {
+    private String answer;
     /**
-     * Creates a new task of type todo.
+     * Creates a new task of type SHORTANSWER.
      *
      * @param description Task description.
      */
-    public ShortAnsQn(String description){
+    public ShortAnsQn(String description, String answer){
         super(description, qnType.SHORTANSWER);
+        this.answer = answer;
+    }
+
+    public String getQuestionAnswer() {
+        return this.answer;
     }
 }
