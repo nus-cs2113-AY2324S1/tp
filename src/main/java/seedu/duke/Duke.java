@@ -7,6 +7,26 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        greetUser();
+        String name = in.nextLine();
+        System.out.println("Hi, " + name + ", what would you like to do?");
+        String userInput = in.nextLine();
+
+        while (!userInput.equals("exit")) {
+            userInput = userInput.toLowerCase();
+
+            if (userInput.equals("hello")) {
+                System.out.println("Hello to you as well, " + name + "!");
+            } else {
+                System.out.println(name + " said: " + userInput);
+            }
+            userInput = in.nextLine();
+        }
+        System.out.println("Goodbye now!");
+    }
+
+    public static void greetUser() {
         String logo = " _____ _ _   _   _ _   _ ____  \n"
                 + "|  ___(_) |_| \\ | | | | / ___| \n"
                 + "| |_  | | __|  \\| | | | \\___ \\ \n"
@@ -16,13 +36,5 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
-        Scanner in = new Scanner(System.in);
-        String userInput = in.nextLine();
-
-        while (!userInput.equals("exit")) {
-            System.out.println("You said: " + userInput);
-            userInput = in.nextLine();
-        }
-        System.out.println("Goodbye now!");
     }
 }
