@@ -4,7 +4,6 @@ import quizhub.command.Command;
 import quizhub.command.CommandList;
 import quizhub.command.CommandExit;
 import quizhub.command.CommandDelete;
-import quizhub.command.CommandTodo;
 import quizhub.command.CommandFind;
 import quizhub.exception.QuizHubExceptions;
 /**
@@ -27,6 +26,7 @@ public class Parser {
                     return new CommandExit();
                 case "list":
                     return new CommandList();
+                    /*
                 case "mark":
                     commandDetails = userInput.split(" ")[1];
                     taskIndex = Integer.parseInt(commandDetails.strip());
@@ -35,16 +35,19 @@ public class Parser {
                     commandDetails = userInput.split(" ")[1];
                     taskIndex = Integer.parseInt(commandDetails.strip());
                     return new CommandUnmark(taskIndex);
+                     */
                 case "delete":
                     commandDetails = userInput.split(" ")[1];
                     taskIndex = Integer.parseInt(commandDetails.strip());
                     return new CommandDelete(taskIndex);
+                    /*
                 case "todo":
                     return new CommandTodo(userInput);
                 case "deadline":
                     return new CommandDeadline(userInput);
                 case "event":
                     return new CommandEvent(userInput);
+                     */
                 case "find":
                     return new CommandFind(userInput);
                 default:
@@ -58,6 +61,7 @@ public class Parser {
             String exceptionMessage = exception.getMessage();
             if (exceptionMessage.equals("Invalid Input")) {
                 System.out.println("    Pwease enter a valid command :0");
+                // TODO : CHANGE THIS
                 System.out.println("    Valid commands are: todo,\n" +
                         "                        deadline /by [time],\n" +
                         "                        event /from [start] /to [end],\n" +

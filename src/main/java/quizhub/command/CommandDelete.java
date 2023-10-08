@@ -1,36 +1,36 @@
 package quizhub.command;
 
 import quizhub.storage.Storage;
-import quizhub.questionlist.QuizList;
+import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 /**
  * Represents a command to delete a task.
  */
 public class CommandDelete extends Command {
-    private int taskIndex;
+    private int qnIndex;
     /**
      * Creates a new delete command for a task of specified index.
      *
-     * @param taskIndex Index of the task to be deleted.
+     * @param qnIndex Index of the question to be deleted.
      */
-    public CommandDelete(int taskIndex){
+    public CommandDelete(int qnIndex){
         super(CommandType.DELETE);
-        this.taskIndex = taskIndex;
+        this.qnIndex = qnIndex;
     }
     /**
      * Checks if specified task exists.
      * Deletes the specified task and updates storage data.
      *
      * @param ui User interface for interactions with user through CLI.
-     * @param tasks Current task list in the program.
+     * @param questions Current question list in the program.
      * @param dataStorage Hard disk storage for storing task data.
      */
     @Override
-    public void executeCommand(Ui ui, Storage dataStorage, QuizList tasks){
-        String taskName = tasks.viewTaskByIndex(taskIndex);
+    public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
+        String taskName = questions.viewQuestionByIndex(qnIndex);
         if(!taskName.equals("Task Not Found")) {
-            tasks.deleteTaskByIndex(taskIndex);
-            dataStorage.updateData(tasks);
+            questions.deleteQuestionByIndex(qnIndex);
+            dataStorage.updateData(questions);
         }
     }
 }

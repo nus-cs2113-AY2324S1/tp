@@ -1,6 +1,6 @@
 import quizhub.command.Command;
 import quizhub.parser.Parser;
-import quizhub.questionlist.QuizList;
+import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 import quizhub.storage.Storage;
 
@@ -13,7 +13,7 @@ import quizhub.storage.Storage;
 public class Duke {
     private Ui ui;
     private Storage dataStorage;
-    private QuizList tasks;
+    private QuestionList questions;
     private Parser parser;
     /**
      * Initiates the program with the necessary components.
@@ -23,8 +23,8 @@ public class Duke {
      */
     public Duke(String filePath){
         dataStorage = new Storage(filePath);
-        tasks = new QuizList();
-        ui = new Ui(dataStorage, tasks);
+        questions = new QuestionList();
+        ui = new Ui(dataStorage, questions);
         parser = new Parser();
     }
     /**
@@ -41,7 +41,7 @@ public class Duke {
             ui.showLine();
             Command command = parser.parseCommand(fullCommand);
             toExit = command.toExit();
-            command.executeCommand(ui, dataStorage, tasks);
+            command.executeCommand(ui, dataStorage, questions);
             if(!toExit){
                 ui.showLine();
             }

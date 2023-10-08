@@ -1,7 +1,7 @@
 package quizhub.ui;
 
 import quizhub.storage.Storage;
-import quizhub.questionlist.QuizList;
+import quizhub.questionlist.QuestionList;
 
 import java.util.Scanner;
 /**
@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner input = new Scanner(System.in);  // Create a Scanner object
     private Storage dataStorage;
-    private QuizList tasks;
+    private QuestionList tasks;
     /**
      * Print out separating line in CLI to mark
      * start and end of chatbot replies.
@@ -59,7 +59,7 @@ public class Ui {
      * @param tasks A record of all tasks documented that is built on program start and disposed on program exit.
      * @param dataStorage The hard disk record of all tasks documented that persists even on program exit.
      */
-    public Ui(Storage dataStorage, QuizList tasks){
+    public Ui(Storage dataStorage, QuestionList tasks){
         this.dataStorage = dataStorage;
         this.tasks = tasks;
     }
