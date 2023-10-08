@@ -2,14 +2,17 @@ package seedu.financialplanner;
 
 import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.Exit;
+import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
 
 public class FinancialPlanner {
     private Ui ui;
+    private FinancialList financialList;
 
     public FinancialPlanner() {
         ui = new Ui();
+        financialList = new FinancialList();
     }
 
     public void run() {
@@ -19,7 +22,7 @@ public class FinancialPlanner {
 
         while (!(command instanceof Exit)) {
             input = ui.input();
-            command = Parser.parse(input);
+            command = Parser.parse(input, financialList);
             command.execute(ui);
         }
         ui.exitMessage();
