@@ -32,10 +32,10 @@ public class Question {
      * Creates a new task with a given description,
      * not done status and default task type.
      *
-     * @param description Description given to the task.
+     * @param questionBody Description given to the task.
      */
-    public Question(String description){
-        this.description = description;
+    public Question(String questionBody){
+        this.description = questionBody;
         done = false;
         qnType = qnType.DEFAULT;
     }
@@ -43,11 +43,11 @@ public class Question {
      * Creates a new task with a given description,
      * not done status and given task type.
      *
-     * @param description Description given to the task.
+     * @param questionBody Description given to the task.
      * @param qnType Type given to the task.
      */
-    public Question(String description, qnType qnType){
-        this.description = description;
+    public Question(String questionBody, qnType qnType){
+        this.description = questionBody;
         done = false;
         this.qnType = qnType;
     }

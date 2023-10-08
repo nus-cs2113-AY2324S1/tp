@@ -1,10 +1,6 @@
 package quizhub.parser;
 
-import quizhub.command.Command;
-import quizhub.command.CommandList;
-import quizhub.command.CommandExit;
-import quizhub.command.CommandDelete;
-import quizhub.command.CommandFind;
+import quizhub.command.*;
 import quizhub.exception.QuizHubExceptions;
 /**
  * Represents a parser that converts user inputs into command objects.
@@ -36,18 +32,12 @@ public class Parser {
                     taskIndex = Integer.parseInt(commandDetails.strip());
                     return new CommandUnmark(taskIndex);
                      */
+                case "short":
+                    return new CommandShortAnswer(userInput);
                 case "delete":
                     commandDetails = userInput.split(" ")[1];
                     taskIndex = Integer.parseInt(commandDetails.strip());
                     return new CommandDelete(taskIndex);
-                    /*
-                case "todo":
-                    return new CommandTodo(userInput);
-                case "deadline":
-                    return new CommandDeadline(userInput);
-                case "event":
-                    return new CommandEvent(userInput);
-                     */
                 case "find":
                     return new CommandFind(userInput);
                 default:
@@ -62,15 +52,10 @@ public class Parser {
             if (exceptionMessage.equals("Invalid Input")) {
                 System.out.println("    Pwease enter a valid command :0");
                 // TODO : CHANGE THIS
-                System.out.println("    Valid commands are: todo,\n" +
-                        "                        deadline /by [time],\n" +
-                        "                        event /from [start] /to [end],\n" +
+                System.out.println("    Valid commands are: short [question]/[answer],\n" +
                         "                        list,\n" +
-                        "                        mark [task number],\n" +
-                        "                        unmark [task number],\n" +
                         "                        delete [task number],\n" +
                         "                        find /description [description]\n" +
-                        "                        find /time [time]\n" +
                         "                        bye");
             }
         }

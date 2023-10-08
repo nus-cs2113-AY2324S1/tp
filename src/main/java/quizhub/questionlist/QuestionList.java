@@ -27,20 +27,22 @@ public class QuestionList {
         switch (qnType) {
             case SHORTANSWER:
                 try {
-                    String toDoDescription = input.split("todo")[1].strip();
-                    if (toDoDescription.equals("")) {
+                    String[] inputTokens = input.split("short")[1].strip().split("/");
+                    String description = inputTokens[0];
+                    String answer = inputTokens[1];
+                    if (description.equals("") || answer.equals("")) {
                         throw new QuizHubExceptions("Incomplete Command");
                     }
-                    allQns.add(new ShortAnsQn(toDoDescription));
+                    allQns.add(new ShortAnsQn(description, answer));
                     if (showMessage) {
                         System.out.println("    I have added the following question OwO:");
-                        System.out.printf("      [T][] %s\n", viewQuestionByIndex(getQuestionListSize()));
+                        System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
                         System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
                     }
                     break;
                 } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
-                    System.out.println("    Ohnus! You did not use give todo a name!");
-                    System.out.println("    Pwease format your input as todo [question name]!");
+                    System.out.println("    Ohnus! You did not make a proper question!");
+                    System.out.println("    Pwease format your input as short [question]/[answer]!");
                     return;
                 }
         }
@@ -58,16 +60,16 @@ public class QuestionList {
             case SHORTANSWER:
                 if (question.questionIsDone()) {
                     if(asList){
-                        System.out.printf("    %d: [T][X] %s\n", qnIndex+1, question.getQuestionDescription());
+                        System.out.printf("    %d: [S][X] %s\n", qnIndex+1, question.getQuestionDescription());
                     } else{
-                        System.out.printf("        [T][X] %s\n", question.getQuestionDescription());
+                        System.out.printf("        [S][X] %s\n", question.getQuestionDescription());
                     }
 
                 } else {
                     if(asList){
-                        System.out.printf("    %d: [T][] %s\n", qnIndex+1, question.getQuestionDescription());
+                        System.out.printf("    %d: [S][] %s\n", qnIndex+1, question.getQuestionDescription());
                     } else{
-                        System.out.printf("        [T][] %s\n", question.getQuestionDescription());
+                        System.out.printf("        [S][] %s\n", question.getQuestionDescription());
                     }
                 }
                 break;
