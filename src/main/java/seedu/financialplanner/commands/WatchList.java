@@ -1,5 +1,6 @@
 package seedu.financialplanner.commands;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -50,19 +51,14 @@ public class WatchList extends Command {
             // System.out.println(ja.toJSONString());
             Iterator itr = ja.iterator();
             System.out.print("Symbol");
-            System.out.print("  ");
+            System.out.print("    ");
             System.out.print("Price");
             System.out.print("     ");
             System.out.print("Company Name");
             System.out.println();
             while (itr.hasNext()) {
                 JSONObject stock = (JSONObject) itr.next();
-                System.out.print(stock.get("symbol"));
-                System.out.print("    ");
-                System.out.print(stock.get("price"));
-                System.out.print("    ");
-                System.out.print(stock.get("name"));
-                System.out.println();
+                printStockInfo(stock);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -72,5 +68,12 @@ public class WatchList extends Command {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void printStockInfo(JSONObject stock) {
+        String symbol = StringUtils.rightPad((String) stock.get("symbol"), 10);
+        String price = StringUtils.rightPad(stock.get("price").toString(), 10);
+        String name = StringUtils.rightPad((String) stock.get("name"), 10);
+        System.out.println(symbol + price + name);
     }
 }
