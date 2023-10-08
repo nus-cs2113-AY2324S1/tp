@@ -1,6 +1,6 @@
 package quizhub.question;
 /**
- * Represents all tasks in the task list in general.
+ * Represents all questions in the question list in general.
  */
 public class Question {
     public enum qnType {SHORTANSWER, DEFAULT};
@@ -8,20 +8,20 @@ public class Question {
     private String description;
     private boolean done;
     /**
-     * Mark a task as done.
+     * Mark a question as done.
      */
     public void markAsDone(){
         done = true;
     }
     /**
-     * Mark a task as not done.
+     * Mark a question as not done.
      */
     public void markAsNotDone(){
         done = false;
     }
     /**
-     * Creates a new task with a blank description,
-     * not done status and default task type.
+     * Creates a new question with a blank description,
+     * not done status and default question type.
      */
     public Question(){
         description = "";
@@ -29,10 +29,10 @@ public class Question {
         qnType = qnType.DEFAULT;
     }
     /**
-     * Creates a new task with a given description,
+     * Creates a new question with a given description,
      * not done status and default task type.
      *
-     * @param questionBody Description given to the task.
+     * @param questionBody Description given to the question.
      */
     public Question(String questionBody){
         this.description = questionBody;
@@ -40,11 +40,11 @@ public class Question {
         qnType = qnType.DEFAULT;
     }
     /**
-     * Creates a new task with a given description,
-     * not done status and given task type.
+     * Creates a new question with a given description,
+     * not done status and given question type.
      *
-     * @param questionBody Description given to the task.
-     * @param qnType Type given to the task.
+     * @param questionBody Description given to the question.
+     * @param qnType Type given to the question.
      */
     public Question(String questionBody, qnType qnType){
         this.description = questionBody;
@@ -52,19 +52,19 @@ public class Question {
         this.qnType = qnType;
     }
     /**
-     * Checks if a task has been done.
+     * Checks if a question has been done.
      */
     public boolean questionIsDone(){
         return done;
     }
     /**
-     * Returns task description.
+     * Returns question description.
      */
     public String getQuestionDescription(){
         return description;
     }
     /**
-     * Returns task timing details.
+     * Returns question timing details.
      */
     public String getQuestionTiming(boolean useDefaultTiming){
         return "";
@@ -74,5 +74,10 @@ public class Question {
      */
     public qnType getQuestionType(){
         return qnType;
+    }
+    public void editQuestion(String newDescription, String newAnswer){
+        if(!newDescription.equals("")){
+            this.description = newDescription;
+        }
     }
 }

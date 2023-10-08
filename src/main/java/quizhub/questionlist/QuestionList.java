@@ -7,7 +7,7 @@ import quizhub.exception.QuizHubExceptions;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 /**
- * Represents the list of questions currently registered in the chatbot.
+ * Represents the list of questions currently registered in Quizhub.
  * This list is created on program start and disposed on program termination.
  */
 public class QuestionList {
@@ -20,7 +20,7 @@ public class QuestionList {
      * the user input and builds a Question object to be added.
      *
      * @param input The full user input from CLI.
-     * @param qnType The type of question to be added (TODO, DEADLINE, EVENT).
+     * @param qnType The type of question to be added (SHORTANSWER).
      * @param showMessage If true, program will print response message on CLI after question is added.
      */
     public void addToQuestionList(String input, Question.qnType qnType, boolean showMessage){
@@ -41,8 +41,8 @@ public class QuestionList {
                     }
                     break;
                 } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
-                    System.out.println("    Ohnus! You did not make a proper question!");
-                    System.out.println("    Pwease format your input as short [question]/[answer]!");
+                    System.out.println("    Ono! You did not input a proper question!");
+                    System.out.println("    Please format your input as short [question]/[answer]!");
                     return;
                 }
         }
@@ -104,7 +104,7 @@ public class QuestionList {
                 printQuestion(question, false);
             }
         } catch (IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ohnuuu! Please enter valid question number *sobs*");
+            System.out.println("    Ono! Please enter valid question number *sobs*");
         }
     }
     /**
@@ -117,7 +117,7 @@ public class QuestionList {
             System.out.println("    Roger that! I have unmarked the following question as done >w< !");
             printQuestion(question, false);
         } catch (IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ohnuuu! Please enter valid question number *sobs*");
+            System.out.println("    Ono! Please enter valid question number *sobs*");
         }
     }
     /**
@@ -133,7 +133,7 @@ public class QuestionList {
             printQuestion(question, false);
             System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
         } catch (IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ohnuuu! Please enter valid question number *sobs*");
+            System.out.println("    Ono! Please enter valid question number *sobs*");
         }
     }
     /**
@@ -151,8 +151,27 @@ public class QuestionList {
                     return "Question Not Found";
             }
         } catch(NullPointerException | IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ohnuuu! Please enter valid question number *sobs*");
+            System.out.println("    Ono! Please enter valid question number *sobs*");
             return "Question Not Found";
+        }
+    }
+
+    /**
+     * Delete a question from the current question list.
+     *
+     * @param index The list index of the question to be deleted.
+     */
+    public void editQuestionByIndex(int index, String newDescription, String newAnswer){
+        try{
+            Question question = allQns.get(index-1);
+            question.editQuestion(newDescription, newAnswer);
+            System.out.println("    Roger that! I have edited the following question >w< !");
+            printQuestion(question, false);
+            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+        } catch (IndexOutOfBoundsException invalidIndex){
+            if(index != 0){
+                System.out.println("    Ono! Please enter valid question number *sobs*");
+            }
         }
     }
     /**
@@ -215,8 +234,8 @@ public class QuestionList {
             searchDetails = input.split("find")[1].strip().split("/");
             searchInfo = searchDetails[1].strip().split(" ");
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ohnus! You did not indicate if you are searching by description or time :<");
-            System.out.println("    Pwease format your input as find /description [description] " +
+            System.out.println("    Ono! You did not indicate if you are searching by description or time :<");
+            System.out.println("    Please format your input as find /description [description] " +
                                     "or find /time [time]!");
             return;
         }
@@ -234,8 +253,8 @@ public class QuestionList {
                     break;
             }
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ohnus! You did not indicate the keywords you are searching by :<");
-            System.out.println("    Pwease format your input as find /description [description] " +
+            System.out.println("    Ono! You did not indicate the keywords you are searching by :<");
+            System.out.println("    Please format your input as find /description [description] " +
                                     "or find /time [time]!");
         }
 
