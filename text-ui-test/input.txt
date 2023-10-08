@@ -1,1 +1,2 @@
+add income a/5000 t/work r/30
 exit
