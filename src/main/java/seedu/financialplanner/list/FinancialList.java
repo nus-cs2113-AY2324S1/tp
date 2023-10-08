@@ -39,4 +39,10 @@ public class FinancialList {
         list.add(toAdd);
         printAddedCashflow("income");
     }
+
+    public void addExpense(double value, String type, int recur) {
+        Expense toAdd = new Expense(value, type, recur);
+        list.add(toAdd);
+        printAddedCashflow("expense");
+    }
 }

@@ -4,6 +4,7 @@ import seedu.financialplanner.list.FinancialList;
 
 public class Entry extends Command{
     private static final String INCOME = "income";
+    private static final String EXPENSE = "expense";
     protected String entryType;
     protected String[] parameters;
     protected FinancialList list;
@@ -26,12 +27,16 @@ public class Entry extends Command{
     }
 
     private void addEntry() {
+        double value = Double.parseDouble(parameters[0].substring(2));
+        String type = parameters[1].substring(2);
+        int recur = determineRecur();
+
         switch (entryType) {
         case INCOME:
-            double value = Double.parseDouble(parameters[0].substring(2));
-            String type = parameters[1].substring(2);
-            int recur = determineRecur();
             list.addIncome(value, type, recur);
+            break;
+        case EXPENSE:
+            list.addExpense(value, type, recur);
             break;
         default:
             System.out.println("Unidentified entry.");
