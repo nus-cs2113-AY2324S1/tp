@@ -6,30 +6,38 @@ public class Entry extends Command{
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
     protected String entryType;
-    protected String[] parameters;
+    protected String parameters;
     protected FinancialList list;
 
     public Entry(String entryParameters, FinancialList list) {
         String[] split = entryParameters.split(" ", 2);
         this.entryType = split[0];
-        String restOfInput = split[1];
-        this.parameters = restOfInput.split(" ");
+        this.parameters = split[1];
         this.list = list;
         addEntry();
     }
 
     private int determineRecur() {
-        if (parameters.length == 3) {
-            String recur = parameters[2].substring(2);
+        if (parameters.contains("r/")) {
+            int indexOfRecur = parameters.indexOf("r/");
+            String recur = parameters.substring(indexOfRecur + 2).trim();
             return Integer.parseInt(recur);
         }
         return 0;
     }
 
     private void addEntry() {
-        double value = Double.parseDouble(parameters[0].substring(2));
-        String type = parameters[1].substring(2);
         int recur = determineRecur();
+        int indexOfAmount = parameters.indexOf("a/");
+        int indexOfType = parameters.indexOf("t/");
+        double value = Double.parseDouble(parameters.substring(indexOfAmount + 2, indexOfType).trim());
+        String type;
+        if (recur == 0) {
+            type = parameters.substring(indexOfType + 2).trim();
+        } else {
+            int indexOfRecur = parameters.indexOf("r/");
+            type = parameters.substring(indexOfType + 2, indexOfRecur).trim();
+        }
 
         switch (entryType) {
         case INCOME:
