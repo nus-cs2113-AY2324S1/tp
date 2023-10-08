@@ -3,9 +3,11 @@ package seedu.financialplanner.utils;
 import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.Exit;
 import seedu.financialplanner.commands.Invalid;
+import seedu.financialplanner.commands.WatchList;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
+    private static final String WATCHLIST_COMMAND = "watchlist";
 
     public static Command parse(String input) {
         String[] split = input.split(" ", 2);
@@ -15,6 +17,8 @@ public class Parser {
         switch (command) {
         case EXIT_COMMAND:
             return new Exit();
+        case WATCHLIST_COMMAND:
+            return new WatchList();
         default:
             return new Invalid();
         }
