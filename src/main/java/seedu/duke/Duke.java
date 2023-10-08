@@ -9,19 +9,17 @@ public class Duke {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         greetUser();
-        String name = in.nextLine();
+        String name = in.nextLine().strip();
         System.out.println("Hi, " + name + ", what would you like to do?");
-        String userInput = in.nextLine();
+        String userInput = in.nextLine().strip().toLowerCase();
 
         while (!userInput.equals("exit")) {
-            userInput = userInput.toLowerCase();
-
             if (userInput.equals("hello")) {
                 System.out.println("Hello to you as well, " + name + "!");
             } else {
                 System.out.println(name + " said: " + userInput);
             }
-            userInput = in.nextLine();
+            userInput = in.nextLine().strip().toLowerCase();
         }
         System.out.println("Goodbye now!");
     }
@@ -35,6 +33,5 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
-
     }
 }
