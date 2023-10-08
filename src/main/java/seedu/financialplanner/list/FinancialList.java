@@ -5,9 +5,7 @@ import java.util.ArrayList;
 public class FinancialList {
     protected ArrayList<Cashflow> list = new ArrayList<>();
 
-    public ArrayList<Cashflow> getList() {
-        return list;
-    }
+
     private void printAddedCashflow(String line) {
         System.out.println("Added " + line + "to the list.");
     }
