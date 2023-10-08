@@ -8,4 +8,12 @@ public class FinancialList {
     public ArrayList<Cashflow> getList() {
         return list;
     }
+    private void printAddedCashflow(String line) {
+        System.out.println("Added " + line + "to the list.");
+    }
+    public void addIncome(double value, String type, int recur) {
+        Income toAdd = new Income(value, type, recur);
+        list.add(toAdd);
+        printAddedCashflow("income");
+    }
 }

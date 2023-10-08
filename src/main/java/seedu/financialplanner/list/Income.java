@@ -3,10 +3,10 @@ package seedu.financialplanner.list;
 public class Income extends Cashflow{
     public Income(double value, String type, int recur) {
         super(value, type, recur);
-        addIncome(value);
+        addIncomeValue(value);
     }
 
-    private void addIncome(double value) {
+    private void addIncomeValue(double value) {
         balance += value;
     }
 }
