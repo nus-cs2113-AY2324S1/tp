@@ -1,8 +1,8 @@
-package rene.command;
+package quizhub.command;
 
-import rene.storage.Storage;
-import rene.tasklist.TaskList;
-import rene.ui.Ui;
+import quizhub.storage.Storage;
+import quizhub.questionlist.QuizList;
+import quizhub.ui.Ui;
 /**
  * Represents a command to list all tasks.
  */
@@ -21,7 +21,7 @@ public class CommandList extends Command {
      * @param dataStorage Hard disk storage for storing task data.
      */
     @Override
-    public void executeCommand(Ui ui, Storage dataStorage, TaskList tasks){
+    public void executeCommand(Ui ui, Storage dataStorage, QuizList tasks){
         tasks.printTaskList();
     }
 }

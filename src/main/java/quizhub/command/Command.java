@@ -1,13 +1,13 @@
-package rene.command;
+package quizhub.command;
 
-import rene.storage.Storage;
-import rene.tasklist.TaskList;
-import rene.ui.Ui;
+import quizhub.storage.Storage;
+import quizhub.questionlist.QuizList;
+import quizhub.ui.Ui;
 /**
  * Represents a user command to execute an action.
  */
 public class Command {
-    public enum CommandType {TODO, DEADLINE, EVENT, DELETE, LIST, MARK, UNMARK, FIND, EXIT};
+    public enum CommandType {HELP, ADD, LIST, EDIT, DELETE, START, END, RESULT, EXIT};
     private CommandType commandType;
     /**
      * Creates a new blank command.
@@ -28,7 +28,7 @@ public class Command {
      * @param tasks Current task list in the program.
      * @param dataStorage Hard disk storage for storing task data.
      */
-    public void executeCommand(Ui ui, Storage dataStorage, TaskList tasks){}
+    public void executeCommand(Ui ui, Storage dataStorage, QuizList tasks){}
     /**
      * Checks if the latest command calls for program termination.
      */

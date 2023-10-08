@@ -1,4 +1,4 @@
-package rene.command;
+package quizhub.command;
 /**
  * Represents a command to exit the program.
  */

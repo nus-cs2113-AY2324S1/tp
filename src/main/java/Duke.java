@@ -1,8 +1,8 @@
-import rene.command.Command;
-import rene.parser.Parser;
-import rene.tasklist.TaskList;
-import rene.ui.Ui;
-import rene.storage.Storage;
+import quizhub.command.Command;
+import quizhub.parser.Parser;
+import quizhub.questionlist.QuizList;
+import quizhub.ui.Ui;
+import quizhub.storage.Storage;
 
 /**
  * The main program running for the Duke chatbot.
@@ -13,7 +13,7 @@ import rene.storage.Storage;
 public class Duke {
     private Ui ui;
     private Storage dataStorage;
-    private TaskList tasks;
+    private QuizList tasks;
     private Parser parser;
     /**
      * Initiates the program with the necessary components.
@@ -23,7 +23,7 @@ public class Duke {
      */
     public Duke(String filePath){
         dataStorage = new Storage(filePath);
-        tasks = new TaskList();
+        tasks = new QuizList();
         ui = new Ui(dataStorage, tasks);
         parser = new Parser();
     }

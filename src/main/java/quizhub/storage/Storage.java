@@ -1,6 +1,6 @@
-package rene.storage;
-import rene.task.Task;
-import rene.tasklist.TaskList;
+package quizhub.storage;
+import quizhub.question.Quiz;
+import quizhub.questionlist.QuizList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -39,7 +39,7 @@ public class Storage {
      *
      * @param tasks The task list to be built.
      */
-    public void buildCurrentListFromFile(TaskList tasks){
+    public void buildCurrentListFromFile(QuizList tasks){
         try {
             if (dataFile.createNewFile()) {
                 System.out.println("    Task-list created: " + dataFile.getName());
@@ -62,7 +62,7 @@ public class Storage {
 
                     switch (taskType) {
                         case "T": tasks.addToTaskList("todo " + taskDescription,
-                                Task.TaskType.TODO, false);
+                                Quiz.TaskType.TODO, false);
                             if (taskDoneStatus.equals("done")) {
                                 tasks.markTaskAsDone(taskIndex, false);
                             }
@@ -71,7 +71,7 @@ public class Storage {
                             String dueTime = taskSubStrings[3].replace("(by:", "")
                                     .replace(")", "").strip();
                             tasks.addToTaskList("deadline " + taskDescription + " /by " + dueTime,
-                                    Task.TaskType.DEADLINE, false);
+                                    Quiz.TaskType.DEADLINE, false);
                             if (taskDoneStatus.equals("done")) {
                                 tasks.markTaskAsDone(taskIndex, false);
                             }
@@ -83,7 +83,7 @@ public class Storage {
                             String startTime = taskTimings[0];
                             String endTime = taskTimings[1].split("\\)")[0];
                             tasks.addToTaskList("event " + taskDescription + " /from " + startTime
-                                    + " /to " + endTime, Task.TaskType.EVENT, false);
+                                    + " /to " + endTime, Quiz.TaskType.EVENT, false);
                             if (taskDoneStatus.equals("done")) {
                                 tasks.markTaskAsDone(taskIndex, false);
                             }
@@ -107,7 +107,7 @@ public class Storage {
      *
      * @param tasks The task list that has been built.
      */
-    public void loadData(TaskList tasks) {
+    public void loadData(QuizList tasks) {
         buildCurrentListFromFile(tasks);
         if (tasks.getTaskListSize() > 0) {
             System.out.println("    You currently have the following tasks uWu");
@@ -123,12 +123,12 @@ public class Storage {
      *
      * @param tasks The task list to overwrite current data with.
      */
-    public void updateData(TaskList tasks){
+    public void updateData(QuizList tasks){
         try{
             //flush all current records
             writeToFile(dataFile.getPath(), "Latest Tasks" + System.lineSeparator(), false);
-            ArrayList<Task> allTasks = tasks.getAllTasks();
-            for (Task task: allTasks) {
+            ArrayList<Quiz> allTasks = tasks.getAllTasks();
+            for (Quiz task: allTasks) {
                 switch (task.getTaskType()) {
                     case TODO:
                         if (task.taskIsDone()) {

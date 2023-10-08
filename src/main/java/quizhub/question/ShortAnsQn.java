@@ -1,14 +1,14 @@
-package rene.task;
+package quizhub.question;
 /**
  * Represents todo tasks in the current task list
  */
-public class ToDo extends Task {
+public class ShortAnsQn extends Question {
     /**
      * Creates a new task of type todo.
      *
      * @param description Task description.
      */
-    public ToDo(String description){
-        super(description, TaskType.TODO);
+    public ShortAnsQn(String description){
+        super(description, TaskType.SHORTANSWER);
     }
 }
