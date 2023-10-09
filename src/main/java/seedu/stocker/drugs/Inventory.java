@@ -7,7 +7,7 @@ public class Inventory {
     public ArrayList<Drug> allDrugs;
 
     public Inventory() {
-        allDrugs = new ArrayList<>();
+        this.allDrugs = new ArrayList<>();
     }
 
     public void addDrug(Drug drug) {
