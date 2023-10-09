@@ -90,25 +90,6 @@ public class Ui {
 
         return fullInputLine;
     }
-
-    // public void uiBegin() {
-    //     Scanner input = new Scanner(System.in);
-    //     String instruction = input.next();
-    //
-    //     while(instruction.equals("bye") != true) {
-    //         switch (instruction) {
-    //         case "help":
-    //             printversion1Help();
-    //             instruction = input.next();
-    //             break;
-    //
-    //         default:
-    //             instruction = input.next();
-    //
-    //         }
-    //     }
-    //     System.out.println("Bye! See you soon!");
-    // }
     
     /** Shows message(s) to the user */
     public void showToUser(String... message) {
