@@ -10,13 +10,6 @@ public class FitTrack {
     private final Ui ui;
     private boolean isRunning;
 
-    /**
-     * Main entry-point for the FitTrack application.
-     */
-    public static void main(String[] args) {
-        new FitTrack().run();
-    }
-
     private FitTrack() {
         ui = new Ui();
 
@@ -25,6 +18,13 @@ public class FitTrack {
         works = new WorkList();
 
         isRunning = true;
+    }
+
+    /**
+     * Main entry-point for the FitTrack application.
+     */
+    public static void main(String[] args) {
+        new FitTrack().run();
     }
 
     private void run() {
