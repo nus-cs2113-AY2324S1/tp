@@ -1,8 +1,6 @@
 package seedu.financialplanner.investments;
 
-import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -13,7 +11,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class WatchList {
     private ArrayList<Stock> stocks;
