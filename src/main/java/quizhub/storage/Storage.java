@@ -62,36 +62,15 @@ public class Storage {
 
                     // TODO : change this entire code chunk, right now they're all default
                     switch (questionType) {
-                        case "T": questions.addToQuestionList("todo " + questionDescription,
-                                Question.qnType.DEFAULT, false);
-                            if (questionDoneStatus.equals("done")) {
-                                questions.markQuestionAsDone(questionIndex, false);
-                            }
-                            break;
-                        case "D":
-                            String dueTime = questionSubStrings[3].replace("(by:", "")
-                                    .replace(")", "").strip();
-                            questions.addToQuestionList("deadline " + questionDescription + " /by " + dueTime,
-                                    Question.qnType.DEFAULT, false);
-                            if (questionDoneStatus.equals("done")) {
-                                questions.markQuestionAsDone(questionIndex, false);
-                            }
-
-                            break;
-                        case "E":
-                            String[] questionTimings = questionSubStrings[3].strip().split("\\(from:")[1]
-                                    .split("to:");
-                            String startTime = questionTimings[0];
-                            String endTime = questionTimings[1].split("\\)")[0];
-                            questions.addToQuestionList("event " + questionDescription + " /from " + startTime
-                                    + " /to " + endTime, Question.qnType.DEFAULT, false);
-                            if (questionDoneStatus.equals("done")) {
-                                questions.markQuestionAsDone(questionIndex, false);
-                            }
-                            break;
-                        default:
-                            System.out.println(nextQuestion);
-                            break;
+                    case "S": questions.addToQuestionList("short " + questionDescription,
+                            Question.qnType.SHORTANSWER, false);
+                        if (questionDoneStatus.equals("done")) {
+                            questions.markQuestionAsDone(questionIndex, false);
+                        }
+                        break;
+                    default:
+                        System.out.println(nextQuestion);
+                        break;
                     }
 
 
@@ -131,40 +110,18 @@ public class Storage {
             ArrayList<Question> allQuestions = questions.getAllQns();
             for (Question question: allQuestions) {
                 switch (question.getQuestionType()) {
-                    /*
-                    case TODO:
-                        if (question.questionIsDone()) {
-                            writeToFile(dataFile.getPath(), "T | done |  " + question.getQuestionDescription()
-                                    + System.lineSeparator(), true);
-                        } else {
-                            writeToFile(dataFile.getPath(), "T | undone |  " + question.getQuestionDescription()
-                                    + System.lineSeparator(), true);
-                        }
-                        break;
-                    case DEADLINE:
-                        if (question.questionIsDone()) {
-                            writeToFile(dataFile.getPath(), "D | done |  " + question.getQuestionDescription()
-                                    + " | "  + question.getQuestionTiming(true)
-                                    + System.lineSeparator(), true);
-                        } else {
-                            writeToFile(dataFile.getPath(), "D | undone |  " + question.getQuestionDescription()
-                                    + " | "  + question.getQuestionTiming(true)
-                                    + System.lineSeparator(), true);
-                        }
-                        break;
-                    case EVENT:
-                        if (question.questionIsDone()) {
-                            writeToFile(dataFile.getPath(), "E | done |  " + question.getQuestionDescription()
-                                    + " | "  + question.getQuestionTiming(true)
-                                    + System.lineSeparator(), true);
-                        } else {
-                            writeToFile(dataFile.getPath(), "E | undone |  " + question.getQuestionDescription()
-                                    + " | "  + question.getQuestionTiming(true)
-                                    + System.lineSeparator(), true);
-                        }
-                        break;
+                case SHORTANSWER:
+                    if (question.questionIsDone()) {
+                        writeToFile(dataFile.getPath(), "S | done |  " + question.getQuestionDescription()
+                                + System.lineSeparator(), true);
+                    } else {
+                        writeToFile(dataFile.getPath(), "S | undone |  " + question.getQuestionDescription()
+                                + System.lineSeparator(), true);
+                    }
+                    break;
 
-                     */
+                default:
+                    break;
                 }
             }
 

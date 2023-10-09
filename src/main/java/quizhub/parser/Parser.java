@@ -22,40 +22,40 @@ public class Parser {
                     return new CommandExit();
                 case "list":
                     return new CommandList();
-                    /*
-                case "mark":
-                    commandDetails = userInput.split(" ")[1];
-                    taskIndex = Integer.parseInt(commandDetails.strip());
-                    return new CommandMark(taskIndex);
-                case "unmark":
-                    commandDetails = userInput.split(" ")[1];
-                    taskIndex = Integer.parseInt(commandDetails.strip());
-                    return new CommandUnmark(taskIndex);
-                     */
                 case "short":
                     return new CommandShortAnswer(userInput);
+                case "start":
+                    return new CommandStart();
+                case "edit":
+                    return new CommandEdit(userInput);
                 case "delete":
                     commandDetails = userInput.split(" ")[1];
                     taskIndex = Integer.parseInt(commandDetails.strip());
                     return new CommandDelete(taskIndex);
                 case "find":
                     return new CommandFind(userInput);
+                case "help":
+                    return new CommandHelp();
                 default:
                     throw new QuizHubExceptions("Invalid Input");
             }
         }
         catch(NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex){
-            System.out.println("    Pwease enter valid integer index!");
+            System.out.println("    Please enter valid integer index!");
         }
         catch (QuizHubExceptions exception){
             String exceptionMessage = exception.getMessage();
             if (exceptionMessage.equals("Invalid Input")) {
-                System.out.println("    Pwease enter a valid command :0");
+                System.out.println("    Please enter a valid command :0");
                 // TODO : CHANGE THIS
                 System.out.println("    Valid commands are: short [question]/[answer],\n" +
                         "                        list,\n" +
-                        "                        delete [task number],\n" +
-                        "                        find /description [description]\n" +
+                        "                        start,\n" +
+                        "                        edit [question number] /question,\n" +
+                        "                        edit [question number] /answer,\n" +
+                        "                        delete [question number],\n" +
+                        "                        find /description [question description]\n" +
+                        "                        help,\n" +
                         "                        bye");
             }
         }

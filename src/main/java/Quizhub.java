@@ -10,7 +10,7 @@ import quizhub.storage.Storage;
  * hard disk data (dataStorage) and supports
  * dynamic data manipulation.
  */
-public class Duke {
+public class Quizhub {
     private Ui ui;
     private Storage dataStorage;
     private QuestionList questions;
@@ -21,7 +21,7 @@ public class Duke {
      * @param filePath File location where data is
      *                 written to and read from by the program.
      */
-    public Duke(String filePath){
+    public Quizhub(String filePath){
         dataStorage = new Storage(filePath);
         questions = new QuestionList();
         ui = new Ui(dataStorage, questions);
@@ -50,6 +50,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-         new Duke("tasklist.txt").run();
+         new Quizhub("tasklist.txt").run();
     }
 }

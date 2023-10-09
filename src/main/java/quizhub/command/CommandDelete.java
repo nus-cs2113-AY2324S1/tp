@@ -28,7 +28,7 @@ public class CommandDelete extends Command {
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
         String taskName = questions.viewQuestionByIndex(qnIndex);
-        if(!taskName.equals("Task Not Found")) {
+        if(!taskName.equals("Question Not Found")) {
             questions.deleteQuestionByIndex(qnIndex);
             dataStorage.updateData(questions);
         }
