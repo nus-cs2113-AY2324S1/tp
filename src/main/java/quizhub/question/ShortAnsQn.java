@@ -28,7 +28,6 @@ public class ShortAnsQn extends Question {
             this.answer = newAnswer;
         }
     }
-
     /**
      * Returns question-answer pair, separated by a vertical bar.
      */

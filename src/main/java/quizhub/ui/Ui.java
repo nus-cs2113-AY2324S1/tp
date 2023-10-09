@@ -2,6 +2,7 @@ package quizhub.ui;
 
 import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
+import quizhub.question.Question;
 
 import java.util.Scanner;
 /**
@@ -62,6 +63,21 @@ public class Ui {
     public Ui(Storage dataStorage, QuestionList tasks){
         this.dataStorage = dataStorage;
         this.tasks = tasks;
+    }
+
+    public void displayQuestion(Question question, int currentQuestionIndex, int totalQuestions) {
+        showLine();
+        System.out.println("Question " + currentQuestionIndex + " / " + totalQuestions + ":");
+        System.out.println(question.getQuestionDescription());
+        System.out.print("Your Answer: ");
+    }
+
+    /**
+     * dupliacation of readCommand for readability
+     * @return
+     */
+    public String getUserInput() {
+        return input.nextLine();
     }
 }
 

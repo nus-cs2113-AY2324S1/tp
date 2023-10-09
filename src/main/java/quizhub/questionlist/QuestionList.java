@@ -3,6 +3,7 @@ package quizhub.questionlist;
 import quizhub.question.Question;
 import quizhub.question.ShortAnsQn;
 import quizhub.exception.QuizHubExceptions;
+import quizhub.ui.Ui;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -277,4 +278,61 @@ public class QuestionList {
     public QuestionList(){
         allQns = new ArrayList<Question>();
     }
+
+    /**
+     * Retrieves the answer for a question by its index in the question list.
+     *
+     * @param index The index of the question in the list.
+     * @return The answer to the question, or null if the index is invalid or the question is of a different type.
+     */
+    public String getAnswerByIndex(int index) {
+        try {
+            Question question = allQns.get(index - 1);
+            if (question instanceof ShortAnsQn) {
+                return ((ShortAnsQn) question).getQuestionAnswer();
+            } else {
+                System.out.println("    This question is not a Short Answer question.");
+                return null; // Return null for questions of other types
+            }
+        } catch (IndexOutOfBoundsException invalidIndex) {
+            System.out.println("    Ono! Please enter a valid question number *sobs*");
+            return null; // Return null for invalid indexes
+        }
+    }
+
+    public void startQuiz(Ui ui) {
+        if (allQns.isEmpty()) {
+            System.out.println("No questions found! Add questions before starting the quiz.");
+            return;
+        }
+
+        System.out.println("Starting the quiz...");
+        int totalQuestions = allQns.size();
+        int correctAnswers = 0;
+
+        for (int i = 0; i < totalQuestions; i++) {
+            Question question = allQns.get(i);
+
+            ui.displayQuestion(question, i + 1, totalQuestions);
+            String correctAnswer = getAnswerByIndex(i + 1); // Get the correct answer by index
+            String userAnswer = ui.getUserInput();
+
+            if (userAnswer.equalsIgnoreCase(correctAnswer)) {
+                System.out.println("Correct!");
+                correctAnswers++;
+            } else {
+                System.out.println("Wrong!");
+            }
+
+            int questionsLeft = totalQuestions - (i + 1);
+            if (questionsLeft > 0) {
+                System.out.println("Questions left: " + questionsLeft);
+            } else {
+                System.out.println("Quiz completed!");
+            }
+        }
+
+        System.out.println("Your score: " + correctAnswers + "/" + totalQuestions);
+    }
+
 }
