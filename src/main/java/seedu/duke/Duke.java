@@ -1,12 +1,11 @@
 package seedu.duke;
 
-import java.util.Scanner;
-
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+        Input input = new Input();
         String logo = "    ______           __    __         __  ___  \n"
                     + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\ \n"
                     + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/ \n"
@@ -17,16 +16,15 @@ public class Duke {
         System.out.println("Here is the link to the user guide:"
                 + "https://docs.google.com/document/d/15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
 
-        Scanner in = new Scanner(System.in);
-        String input;
+        String inputString;
         do {
-            input = in.nextLine();
-            if (input.equals("bye")) {
+            inputString = input.getInputString();
+            if (inputString.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
             } else {
                 System.out.println("Sorry, I don't understand what you mean.");
             } 
-        } while (!input.equals("bye"));
+        } while (!inputString.equals("bye"));
         
     }
 }
