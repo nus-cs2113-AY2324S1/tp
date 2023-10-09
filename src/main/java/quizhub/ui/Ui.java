@@ -18,22 +18,25 @@ public class Ui {
      * start and end of chatbot replies.
      */
     public void showLine(){
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n");
     }
     /**
-     * Displays opening message to welcome users
+     * Displays app logo and opening message to welcome users
      * on the launch of chatbot.
      */
     public void displayOpeningMessage(){
-            String logo = "     _____ \n"
-                        + "    |  __  \\  ____  __   _   ____ \n"
-                        + "    | |__  | /  _  \\|  \\| |/  _  \\\n"
-                        + "    | |  \\ \\|   ___/| \\ | |   ___/\n"
-                        + "    |_|   \\_\\\\____| |_|\\__|\\____|\n";
-            System.out.println("    Hello from\n" + logo);
+            String logo =  "    _______          _________ _______                    ______  \n" +  
+                        "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
+                        "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
+                        "   | |   | || |   | |   | |       /   )| (___) || |   | || (__/ / \n" +
+                        "   | |   | || |   | |   | |      /   / |  ___  || |   | ||  __ (  \n" +
+                        "   | | /\\| || |   | |   | |     /   /  | (   ) || |   | || (  \\ \\ \n" +
+                        "   | (_\\ \\ || (___) |___) (___ /   (_/\\| )   ( || (___) || )___) )\n" +
+                        "   (____\\/_)(_______)\\_______/(_______/|/     \\|(_______)|/ \\___/";
+            System.out.println(logo);
             showLine();
-            System.out.println("    I am Rene Kokoro!");
-            System.out.println("    Let me record your tasks!! *blushes*");
+            System.out.println("    Welcome to Quizhub!!!\n");
+            System.out.println("    Let the quizzing begin XDD");
             System.out.println();
             dataStorage.loadData(tasks);
             showLine();
@@ -50,8 +53,9 @@ public class Ui {
      */
     public void displayClosingMessage(){
         dataStorage.updateData(tasks);
-        System.out.println("    Aww you are leaving? *sniffs*");
-        System.out.println("    Well... hope to see you again soon!");
+        System.out.println("    Are you sure you want to stop quizzing?");
+        System.out.println("    Well... hope you had fun quizzing :D");
+        System.out.println("    See you again soon!");
         showLine();
     }
     /**
