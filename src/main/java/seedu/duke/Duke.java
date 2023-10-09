@@ -16,6 +16,15 @@ public class Duke {
         System.out.println("What is your name?");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        String input;
+        do {
+            input = in.nextLine();
+            if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+            } else {
+                System.out.println("Sorry, I don't understand what you mean.");
+            } 
+        } while (!input.equals("bye"));
+        
     }
 }
