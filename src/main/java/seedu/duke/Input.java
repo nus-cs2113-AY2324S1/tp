@@ -11,7 +11,9 @@ public class Input {
     }
 
     public String getInputString() {
-        inputString = in.nextLine();
+        if (in.hasNextLine()) {
+            inputString = in.nextLine();
+        }
         return inputString;
     }
 }
