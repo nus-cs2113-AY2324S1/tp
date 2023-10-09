@@ -1,14 +1,6 @@
 package fittrack.parser;
 
-import fittrack.command.AddMealCommand;
-import fittrack.command.AddWorkCommand;
-import fittrack.command.Command;
-import fittrack.command.DeleteMealCommand;
-import fittrack.command.DeleteWorkCommand;
-import fittrack.command.EditProfileCommand;
-import fittrack.command.ExitCommand;
-import fittrack.command.HelpCommand;
-import fittrack.command.SetCalorieSurplusLimitCommand;
+import fittrack.command.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,8 +19,6 @@ public class CommandParser {
         final String args = matcher.group("args");
 
         switch (word) {
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case EditProfileCommand.COMMAND_WORD:
@@ -43,6 +33,16 @@ public class CommandParser {
             return new DeleteWorkCommand();
         case SetCalorieSurplusLimitCommand.COMMAND_WORD:
             return new SetCalorieSurplusLimitCommand();
+        case CheckHeightCommand.COMMAND_WORD:
+            return new CheckHeightCommand();
+        case CheckWeightCommand.COMMAND_WORD:
+            return new CheckWeightCommand();
+        case CheckCalorieSurplusLimitCommand.COMMAND_WORD:
+            return new CheckCalorieSurplusLimitCommand();
+        case ListWorkoutCommand.COMMAND_WORD:
+            return new ListWorkoutCommand();
+        case SetDailyCalorieLimitCommand.COMMAND_WORD:
+            return new SetDailyCalorieLimitCommand();
         default:
             return new HelpCommand();
         }
