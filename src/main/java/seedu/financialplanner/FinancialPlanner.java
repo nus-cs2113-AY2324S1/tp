@@ -22,8 +22,8 @@ public class FinancialPlanner {
 
         while (!(command instanceof Exit)) {
             input = ui.input();
-            command = Parser.parse(input, financialList);
-            command.execute(ui);
+            command = Parser.parse(input);
+            command.execute(ui, financialList);
         }
         ui.exitMessage();
     }

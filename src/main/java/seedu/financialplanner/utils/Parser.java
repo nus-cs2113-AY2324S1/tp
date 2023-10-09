@@ -9,11 +9,11 @@ import seedu.financialplanner.list.FinancialList;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
-    private static final String ADD_ENTRY = "add";
+    private static final String ADD_ENTRY_COMMAND = "add";
 
 
 
-    public static Command parse(String input, FinancialList list) {
+    public static Command parse(String input) {
         String[] split = input.split(" ", 2);
         String command = split[0].toLowerCase();
         String restOfInput = split.length > 1 ? split[1] : ""; // checks if rest of input is empty
@@ -21,8 +21,8 @@ public class Parser {
         switch (command) {
         case EXIT_COMMAND:
             return new Exit();
-        case ADD_ENTRY:
-            return new Entry(restOfInput, list);
+        case ADD_ENTRY_COMMAND:
+            return new Entry(restOfInput);
         default:
             return new Invalid();
         }

@@ -1,2 +1,17 @@
-	Welcome to your Financial Planner. Type something to get started.
-	Exiting Financial Planner. Goodbye.
+Welcome to your Financial Planner. Type something to get started.
+Added income of value: 5000.00 to the list.
+type: work
+recurring every: 30 days
+balance: 5000.00
+Added income of value: 123.12 to the list.
+type: allowance
+balance: 5123.12
+Added expense of value: 100.00 to the list.
+type: daily necessities
+recurring every: 30 days
+balance: 5023.12
+Added expense of value: 123.21 to the list.
+type: books
+balance: 4899.91
+Unknown command. Please try again.
+Exiting Financial Planner. Goodbye.

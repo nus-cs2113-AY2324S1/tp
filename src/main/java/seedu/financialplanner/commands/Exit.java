@@ -1,5 +1,6 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.utils.Ui;
 
 public class Exit extends Command {
@@ -7,6 +8,6 @@ public class Exit extends Command {
     }
 
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, FinancialList financialList) {
     }
 }

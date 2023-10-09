@@ -1,23 +1,18 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.utils.Ui;
 
 public class Entry extends Command{
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
-    protected String entryType;
-    protected String parameters;
-    protected FinancialList list;
+    protected String input;
 
-    public Entry(String entryParameters, FinancialList list) {
-        String[] split = entryParameters.split(" ", 2);
-        this.entryType = split[0];
-        this.parameters = split[1];
-        this.list = list;
-        addEntry();
+    public Entry(String input) {
+        this.input = input;
     }
 
-    private int determineRecur() {
+    private int determineRecur(String parameters) {
         if (parameters.contains("r/")) {
             int indexOfRecur = parameters.indexOf("r/");
             String recur = parameters.substring(indexOfRecur + 2).trim();
@@ -26,8 +21,12 @@ public class Entry extends Command{
         return 0;
     }
 
-    private void addEntry() {
-        int recur = determineRecur();
+    @Override
+    public void execute(Ui ui, FinancialList list) {
+        String[] split = input.split(" ", 2);
+        String entryType = split[0];
+        String parameters = split[1];
+        int recur = determineRecur(parameters);
         int indexOfAmount = parameters.indexOf("a/");
         int indexOfType = parameters.indexOf("t/");
         double value = Double.parseDouble(parameters.substring(indexOfAmount + 2, indexOfType).trim());
@@ -47,7 +46,7 @@ public class Entry extends Command{
             list.addExpense(value, type, recur);
             break;
         default:
-            System.out.println("Unidentified entry.");
+            ui.showMessage("Unidentified entry.");
             break;
         }
     }
