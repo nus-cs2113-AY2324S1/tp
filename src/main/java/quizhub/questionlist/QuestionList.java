@@ -292,21 +292,25 @@ public class QuestionList {
                 return ((ShortAnsQn) question).getQuestionAnswer();
             } else {
                 System.out.println("    This question is not a Short Answer question.");
-                return null; // Return null for questions of other types
+                return null;
             }
         } catch (IndexOutOfBoundsException invalidIndex) {
             System.out.println("    Ono! Please enter a valid question number *sobs*");
-            return null; // Return null for invalid indexes
+            return null;
         }
     }
-
+    /**
+     * Starts a quiz session using the provided user interface (UI).
+     *
+     * @param ui The user interface to interact with the user.
+     */
     public void startQuiz(Ui ui) {
         if (allQns.isEmpty()) {
-            System.out.println("No questions found! Add questions before starting the quiz.");
+            System.out.println("    No questions found! Add questions before starting the quiz.");
             return;
         }
 
-        System.out.println("Starting the quiz...");
+        System.out.println("    Starting the quiz...");
         int totalQuestions = allQns.size();
         int correctAnswers = 0;
 
@@ -318,21 +322,19 @@ public class QuestionList {
             String userAnswer = ui.getUserInput();
 
             if (userAnswer.equalsIgnoreCase(correctAnswer)) {
-                System.out.println("Correct!");
+                System.out.println("    Correct!");
                 correctAnswers++;
             } else {
-                System.out.println("Wrong!");
+                System.out.println("    Wrong!");
             }
 
             int questionsLeft = totalQuestions - (i + 1);
             if (questionsLeft > 0) {
-                System.out.println("Questions left: " + questionsLeft);
+                System.out.println("    Questions left: " + questionsLeft);
             } else {
-                System.out.println("Quiz completed!");
+                System.out.println("    Quiz completed!");
             }
         }
-
-        System.out.println("Your score: " + correctAnswers + "/" + totalQuestions);
+        System.out.println("    Your score: " + correctAnswers + "/" + totalQuestions);
     }
-
 }

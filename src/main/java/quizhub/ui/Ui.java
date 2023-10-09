@@ -64,16 +64,34 @@ public class Ui {
         this.dataStorage = dataStorage;
         this.tasks = tasks;
     }
-
+    /**
+     * Displays a question along with its index in a set of questions and the total count of questions.
+     * Extracts and displays the question part from the question description, which is in the "question/answer" format.
+     * If the format is invalid or missing, it prompts the user to edit the question via the edit function.
+     *
+     * @param question           The Question object containing the question description.
+     * @param currentQuestionIndex The index of the current question in the set of questions.
+     * @param totalQuestions     The total count of questions in the set.
+     */
     public void displayQuestion(Question question, int currentQuestionIndex, int totalQuestions) {
         showLine();
-        System.out.println("Question " + currentQuestionIndex + " / " + totalQuestions + ":");
-        System.out.println(question.getQuestionDescription());
-        System.out.print("Your Answer: ");
+        System.out.println("    Question " + currentQuestionIndex + " / " + totalQuestions + ":");
+        String questionDescription = question.getQuestionDescription(); // getQuestionDescription returns question/answer
+        String[] parts = questionDescription.split("/");
+
+        if (parts.length >= 1) {
+            // Extract and display the question part
+            System.out.println("    " + parts[0]); // part[0] returns the question part
+        } else {
+            // Handle the case where the format is invalid
+            System.out.println("    Invalid question format, please edit this question via the edit function");
+        }
+
+        System.out.print("  Your Answer: ");
     }
 
     /**
-     * dupliacation of readCommand for readability
+     * duplication of readCommand for readability
      * @return
      */
     public String getUserInput() {
