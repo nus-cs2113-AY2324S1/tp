@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.financialplanner.investments.Stock;
 import seedu.financialplanner.investments.WatchList;
+import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.Iterator;
 
 public class WatchListCommand extends Command {
     @Override
-    public void execute(Ui ui, WatchList watchList) {
+    public void execute(Ui ui, FinancialList financialList, WatchList watchList) {
         JSONArray stocks = watchList.fetchFMPStockPrices();
         ui.printWatchListHeader();
         for (Object o : stocks) {
