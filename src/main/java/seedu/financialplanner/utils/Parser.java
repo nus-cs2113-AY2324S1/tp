@@ -4,8 +4,6 @@ import seedu.financialplanner.commands.Entry;
 import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.Exit;
 import seedu.financialplanner.commands.Invalid;
-import seedu.financialplanner.list.FinancialList;
-
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
