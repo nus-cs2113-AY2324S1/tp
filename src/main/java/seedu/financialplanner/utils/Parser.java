@@ -1,10 +1,12 @@
 package seedu.financialplanner.utils;
 
-import seedu.financialplanner.commands.Entry;
+
 import seedu.financialplanner.commands.Command;
+import seedu.financialplanner.commands.Entry;
 import seedu.financialplanner.commands.Exit;
-import seedu.financialplanner.commands.Invalid;
 import seedu.financialplanner.commands.WatchListCommand;
+import seedu.financialplanner.commands.Invalid;
+import seedu.financialplanner.commands.AddStockCommand;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
@@ -12,6 +14,8 @@ public class Parser {
     private static final String WATCHLIST_COMMAND = "watchlist";
 
     private static final String ADD_ENTRY_COMMAND = "add";
+
+    private static final String ADD_STOCK_COMMAND = "addstock";
 
     public static Command parse(String input) {
         String[] split = input.split(" ", 2);
@@ -25,8 +29,18 @@ public class Parser {
             return new WatchListCommand();
         case ADD_ENTRY_COMMAND:
             return new Entry(restOfInput);
+        case ADD_STOCK_COMMAND:
+            return parseAddStock(restOfInput);
         default:
             return new Invalid();
         }
+    }
+
+    private static Command parseAddStock(String restOfInput) {
+        String[] split = restOfInput.trim().split("m/|s/");
+        // TODO: check error here
+        String exchange = split[1].trim();
+        String stockCode = split[2].trim();
+        return new AddStockCommand(exchange, stockCode);
     }
 }

@@ -3,6 +3,7 @@ package seedu.financialplanner.investments;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -19,9 +20,16 @@ public class WatchList {
 
     public WatchList() {
         stocks = new ArrayList<>();
-        stocks.add(new Stock("AAPL", "NASDAQ"));
-        stocks.add(new Stock("META", "NASDAQ"));
-        stocks.add(new Stock("GOOGL", "NASDAQ"));
+        try {
+            Stock apple = new Stock("AAPL", "NASDAQ");
+            stocks.add(apple);
+            Stock meta = new Stock("META", "NASDAQ");
+            stocks.add(meta);
+            Stock google = new Stock("GOOGL", "NASDAQ");
+            stocks.add(google);
+        } catch (FinancialPlannerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public JSONArray fetchFMPStockPrices() {
@@ -49,5 +57,12 @@ public class WatchList {
             throw new RuntimeException(e);
         }
         return (JSONArray) obj;
+    }
+
+    public String addStock(String market, String stockCode) throws FinancialPlannerException {
+        Stock newStock = null;
+        newStock = new Stock(stockCode, market);
+        stocks.add(newStock);
+        return newStock.getStockName();
     }
 }
