@@ -1,6 +1,6 @@
 package seedu.stocker;
 
-import seedu.stocker.commands.Ui;
+import seedu.stocker.ui.Ui;
 
 
 

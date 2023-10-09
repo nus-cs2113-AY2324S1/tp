@@ -1,4 +1,4 @@
-package seedu.stocker.commands;
+package seedu.stocker.ui;
 
 import java.util.Scanner;
 
