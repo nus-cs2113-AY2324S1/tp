@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Duke {
     private Ui ui;
 
+    //ui
     public void run() {
         ui = new Ui();
         Ui.printWelcomeMessage();
