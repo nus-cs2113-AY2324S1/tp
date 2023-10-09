@@ -18,13 +18,16 @@ public class Stock {
     private String market;
     private String stockName;
 
-    public Stock(String symbol, String market) {
+    public Stock(String symbol, String market) throws FinancialPlannerException {
         this.symbol = symbol;
         this.market = market;
-        this.stockName = getStockName(symbol,market);
+        this.stockName = getStockNameFromAPI(symbol,market);
     }
 
-    public String getStockName(String symbol, String market) {
+    public String getStockName() {
+        return stockName;
+    }
+    public String getStockNameFromAPI(String symbol, String market) throws FinancialPlannerException {
         final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/search-ticker?query=";
         final String API_KEY = "rNCNMmSLUR3BAyeKFHwN69QGzE8fmig1";
         String requestURI = String.format("%s%s&exchange=%s&apikey=%s", API_ENDPOINT,symbol,market,API_KEY);
@@ -39,19 +42,26 @@ public class Stock {
             Object obj = new JSONParser().parse(response.body());
 
             JSONArray ja = (JSONArray) obj;
-            if (ja.size() != 1) {
+            if (ja.isEmpty()) {
                 throw new FinancialPlannerException("stock not found");
-            } else {
-                JSONObject stock = (JSONObject) ja.get(0);
-                return (String) stock.get("name");
             }
+            JSONObject stock = (JSONObject) ja.get(0);
+            String symbolFound = (String) stock.get("symbol");
+            // TODO: Might need to use AMEX when NYSE is used
+            // TODO: Need to check if it is added already
+            // TODO: add a cap to adding
+            // TODO: Separate based on market
+            // TODO: add other info
+            // TODO: testing
+            if (!symbolFound.equals(symbol)) {
+                throw new FinancialPlannerException("Stock not found");
+            }
+            return (String) stock.get("name");
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
-        } catch (FinancialPlannerException e) {
             throw new RuntimeException(e);
         }
     }
