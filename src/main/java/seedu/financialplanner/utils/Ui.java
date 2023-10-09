@@ -3,6 +3,7 @@ package seedu.financialplanner.utils;
 import java.util.Scanner;
 
 public class Ui {
+    private Scanner in = new Scanner(System.in);
     public Ui() {
     }
 
@@ -11,15 +12,14 @@ public class Ui {
     }
 
     public void welcomeMessage() {
-        showMessage("\tWelcome to your Financial Planner. Type something to get started.");
+        showMessage("Welcome to your Financial Planner. Type something to get started.");
     }
 
     public void exitMessage() {
-        showMessage("\tExiting Financial Planner. Goodbye.");
+        showMessage("Exiting Financial Planner. Goodbye.");
     }
 
     public String input() {
-        Scanner in = new Scanner(System.in);
         return in.nextLine().trim();
     }
 }
