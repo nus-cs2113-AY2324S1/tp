@@ -43,7 +43,6 @@ public class Stock {
                 throw new FinancialPlannerException("stock not found");
             } else {
                 JSONObject stock = (JSONObject) ja.get(0);
-                System.out.println(stock.get("name"));
                 return (String) stock.get("name");
             }
         } catch (IOException e) {

@@ -3,7 +3,7 @@ package seedu.financialplanner.utils;
 import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.Exit;
 import seedu.financialplanner.commands.Invalid;
-import seedu.financialplanner.commands.WatchList;
+import seedu.financialplanner.commands.WatchListCommand;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
@@ -18,7 +18,7 @@ public class Parser {
         case EXIT_COMMAND:
             return new Exit();
         case WATCHLIST_COMMAND:
-            return new WatchList();
+            return new WatchListCommand();
         default:
             return new Invalid();
         }
