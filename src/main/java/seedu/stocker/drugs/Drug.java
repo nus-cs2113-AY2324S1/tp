@@ -2,7 +2,7 @@ package seedu.stocker.drugs;
 
 public class Drug {
 
-    String name;
+    public String name;
     String expiryDate;
     Long quantity;
 
