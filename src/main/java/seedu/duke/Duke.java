@@ -14,7 +14,8 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Welcome to 'CashLeh?'! Your one-stop app for managing your finances!");
         System.out.println("Here is the link to the user guide:"
-                + "https://docs.google.com/document/d/15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
+                + "https://docs.google.com/document/d/"
+                + "15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
 
         String inputString;
         do {
