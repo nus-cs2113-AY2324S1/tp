@@ -22,8 +22,8 @@ public class Storage {
         }
     }
 
-    public void load(FinancialList list) {
-
+    public void load(FinancialList list) throws FinancialPlannerException {
+        LoadData.load(list);
     }
 
     public void save(FinancialList list) throws FinancialPlannerException {

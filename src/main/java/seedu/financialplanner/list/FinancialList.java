@@ -45,4 +45,8 @@ public class FinancialList {
         list.add(toAdd);
         printAddedCashflow("expense");
     }
+
+    public void load(Cashflow entry) {
+        list.add(entry);
+    }
 }

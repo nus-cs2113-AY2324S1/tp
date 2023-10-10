@@ -15,7 +15,7 @@ public class FinancialPlanner {
     private FinancialList financialList;
     private Storage storage;
 
-    public FinancialPlanner() {
+    public FinancialPlanner() throws FinancialPlannerException {
         ui = new Ui();
         financialList = new FinancialList();
         watchList = new WatchList();
@@ -47,6 +47,10 @@ public class FinancialPlanner {
     }
 
     public static void main(String[] args) {
-        new FinancialPlanner().run();
+        try {
+            new FinancialPlanner().run();
+        } catch (FinancialPlannerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

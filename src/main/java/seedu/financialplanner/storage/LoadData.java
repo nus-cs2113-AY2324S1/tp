@@ -1,0 +1,58 @@
+package seedu.financialplanner.storage;
+
+import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.list.Cashflow;
+import seedu.financialplanner.list.Expense;
+import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.Income;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public abstract class LoadData {
+    private static final String FILE_PATH = "data/data.txt";
+
+    public static void load(FinancialList financialList) throws FinancialPlannerException {
+        try {
+            Scanner inputFile = new Scanner(new FileReader(FILE_PATH));
+            String line;
+            System.out.println("Loading existing file...");
+
+            while(inputFile.hasNext()) {
+                line = inputFile.nextLine();
+                final Cashflow entry = getEntry(line);
+
+                financialList.load(entry);
+            }
+            inputFile.close();
+        } catch (IOException e) {
+            System.out.println("File not found. Creating new file...");
+        }
+    }
+
+    private static Cashflow getEntry(String line) throws FinancialPlannerException {
+        String[] split = line.split("\\|");
+        String type = split[0].trim();
+        double value;
+        int recur;
+        Cashflow entry;
+
+        switch (type) {
+        case "I":
+            value = Double.parseDouble(split[1].trim());
+            recur = Integer.parseInt(split[3].trim());
+            entry = new Income(value, split[2].trim(), recur);
+            break;
+        case "E":
+            value = Double.parseDouble(split[1].trim());
+            recur = Integer.parseInt(split[3].trim());
+            entry = new Expense(value, split[2].trim(), recur);
+            break;
+        default:
+            throw new FinancialPlannerException("Error loading file");
+        }
+
+        return entry;
+    }
+}
