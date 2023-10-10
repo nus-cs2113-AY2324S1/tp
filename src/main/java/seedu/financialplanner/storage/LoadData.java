@@ -5,6 +5,7 @@ import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.Expense;
 import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.list.Income;
+import seedu.financialplanner.utils.Ui;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,11 +14,11 @@ import java.util.Scanner;
 public abstract class LoadData {
     private static final String FILE_PATH = "data/data.txt";
 
-    public static void load(FinancialList financialList) throws FinancialPlannerException {
+    public static void load(FinancialList financialList, Ui ui) throws FinancialPlannerException {
         try {
             Scanner inputFile = new Scanner(new FileReader(FILE_PATH));
             String line;
-            System.out.println("Loading existing file...");
+            ui.showMessage("Loading existing file...");
 
             while(inputFile.hasNext()) {
                 line = inputFile.nextLine();
@@ -27,8 +28,27 @@ public abstract class LoadData {
             }
             inputFile.close();
         } catch (IOException e) {
-            System.out.println("File not found. Creating new file...");
+            ui.showMessage("File not found. Creating new file...");
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException | FinancialPlannerException e) {
+            ui.showMessage("File appears to be corrupted. Do you want to create a new file? (Y/N)");
+            if (createNewFile(ui)) {
+                financialList.list.clear();
+            } else {
+                String message = "Please fix the corrupted file, which can be found in data/data.txt.";
+                ui.showMessage(message);
+                throw new FinancialPlannerException(message);
+            }
         }
+    }
+
+    private static boolean createNewFile(Ui ui) {
+        String line = ui.input();
+        while (!line.equalsIgnoreCase("y") && !line.equalsIgnoreCase("n")) {
+            ui.showMessage("Unknown input. Please enter Y or N only.");
+            line = ui.input();
+        }
+
+        return line.equalsIgnoreCase("y");
     }
 
     private static Cashflow getEntry(String line) throws FinancialPlannerException {

@@ -6,7 +6,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class FinancialList {
-    public ArrayList<Cashflow> list = new ArrayList<>();
+    public ArrayList<Cashflow> list;
+
+    public FinancialList() {
+        this.list = new ArrayList<>();
+    }
 
     private void printAddedCashflow(String line) {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
