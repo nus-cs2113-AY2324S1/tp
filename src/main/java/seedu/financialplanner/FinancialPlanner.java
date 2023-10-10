@@ -30,8 +30,12 @@ public class FinancialPlanner {
 
         while (!(command instanceof Exit)) {
             input = ui.input();
-            command = Parser.parse(input);
-            command.execute(ui, financialList, watchList);
+            try {
+                command = Parser.parse(input);
+                command.execute(ui, financialList, watchList);
+            } catch (FinancialPlannerException e) {
+                ui.showMessage(e.getMessage());
+            }
         }
 
         save();
