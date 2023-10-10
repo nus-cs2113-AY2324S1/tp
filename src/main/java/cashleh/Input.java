@@ -1,4 +1,4 @@
-package seedu.duke;
+package cashleh;
 
 import java.util.Scanner;
 
