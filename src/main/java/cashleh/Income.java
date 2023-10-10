@@ -1,4 +1,4 @@
-package seedu.cashleh;
+package cashleh;
 
 import java.time.LocalDate;
 

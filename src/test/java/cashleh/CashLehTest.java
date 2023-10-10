@@ -1,4 +1,4 @@
-package seedu.cashleh;
+package cashleh;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

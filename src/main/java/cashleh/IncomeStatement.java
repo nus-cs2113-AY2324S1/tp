@@ -1,4 +1,6 @@
-package seedu.cashleh;
+package cashleh;
+
+import cashleh.Income;
 
 import java.util.ArrayList;
 import java.util.List;

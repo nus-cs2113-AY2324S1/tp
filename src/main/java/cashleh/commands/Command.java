@@ -1,7 +1,7 @@
-package seedu.cashleh.commands;
+package cashleh.commands;
 
-import seedu.cashleh.Income;
-import seedu.cashleh.IncomeStatement;
+import cashleh.Income;
+import cashleh.IncomeStatement;
 
 public class Command {
     protected IncomeStatement incomeStatement;
@@ -10,7 +10,6 @@ public class Command {
         this.index = index;
     }
     public Command() {
-        //throw new UnsupportedOperationException("A generic command is not executable. Please define a subclass.");
     }
     public int getIndex() {
         return this.index;

@@ -1,6 +1,6 @@
-package seedu.cashleh.commands;
+package cashleh.commands;
 
-import seedu.cashleh.Income;
+import cashleh.Income;
 
 import java.time.LocalDate;
 

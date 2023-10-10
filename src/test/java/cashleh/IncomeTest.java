@@ -1,5 +1,6 @@
-package seedu.cashleh;
+package cashleh;
 
+import cashleh.Income;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

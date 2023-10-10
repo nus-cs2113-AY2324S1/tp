@@ -1,4 +1,4 @@
-package seedu.cashleh.commands;
+package cashleh.commands;
 
 public class DeleteIncome extends Command {
     public static final String COMMAND = "deleteIncome";
