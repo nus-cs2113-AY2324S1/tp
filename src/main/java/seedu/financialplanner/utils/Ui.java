@@ -41,4 +41,8 @@ public class Ui {
         String name = StringUtils.rightPad((String) stock.get("name"), 10);
         System.out.println(symbol + price + name);
     }
+
+    public static void printCorruptedFileError(String message) {
+        System.out.println(message);
+    }
 }

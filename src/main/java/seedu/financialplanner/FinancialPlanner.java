@@ -49,7 +49,8 @@ public class FinancialPlanner {
     public static void main(String[] args) {
         try {
             new FinancialPlanner().run();
-        } catch (FinancialPlannerException ignored) {
+        } catch (FinancialPlannerException e) {
+            Ui.printCorruptedFileError(e.getMessage());
         }
     }
 }

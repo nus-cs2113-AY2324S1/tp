@@ -34,9 +34,8 @@ public abstract class LoadData {
             if (createNewFile(ui)) {
                 financialList.list.clear();
             } else {
-                String message = "Please fix the corrupted file, which can be found in data/data.txt.";
-                ui.showMessage(message);
-                throw new FinancialPlannerException(message);
+                throw new FinancialPlannerException("Please fix the corrupted file, " +
+                        "which can be found in data/data.txt.");
             }
         }
     }
