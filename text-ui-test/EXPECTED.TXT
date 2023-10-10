@@ -15,5 +15,11 @@ balance: 5023.12
 Added expense of value: 123.21 to the list.
 type: books
 balance: 4899.91
+You have successfully added:
+Microsoft Corporation
+Use Watchlist to view it!
+You have successfully added:
+GameStop Corp.
+Use Watchlist to view it!
 Unknown command. Please try again.
 Exiting Financial Planner. Goodbye.

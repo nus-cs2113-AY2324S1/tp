@@ -41,8 +41,15 @@ public class Ui {
         String name = StringUtils.rightPad((String) stock.get("name"), 10);
         System.out.println(symbol + price + name);
     }
-
+    
     public static void printCorruptedFileError(String message) {
         System.out.println(message);
+    }
+
+    public void printAddStock(String stockName) {
+        System.out.println("You have successfully added:");
+        System.out.println(stockName);
+        System.out.println("Use Watchlist to view it!");
+
     }
 }
