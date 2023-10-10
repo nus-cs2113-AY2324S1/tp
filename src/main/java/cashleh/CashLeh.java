@@ -26,9 +26,9 @@ public class CashLeh {
         do {
             inputString = input.getInputString();
             if (inputString.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                ui.printText("Bye. Hope to see you again soon!");
             } else {
-                System.out.println("Sorry, I don't understand what you mean.");
+                ui.printText("Sorry, I don't understand what you mean.");
             } 
         } while (!inputString.equals("bye"));
     }
