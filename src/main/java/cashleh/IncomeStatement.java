@@ -1,7 +1,5 @@
 package cashleh;
 
-import cashleh.Income;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

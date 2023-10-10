@@ -1,12 +1,10 @@
 package cashleh;
 
-import cashleh.Income;
-import cashleh.IncomeStatement;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IncomeStatementTest {
     IncomeStatement testStatement = new IncomeStatement();
