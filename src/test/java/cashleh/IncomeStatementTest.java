@@ -32,7 +32,7 @@ class IncomeStatementTest {
         testStatement.add(testIncome);
         testStatement.add(testIncome);
         System.out.println(testStatement);
-        assertEquals(testStatement.toString(), "\t+ S$ 200: pocket money (date: 2023-10-10, One time)"
-        	+ "\n\t+ S$ 200: pocket money (date: 2023-10-10, One time)");
+        assertEquals(testStatement.toString(), "\t+ S$ 200: pocket money (date: 2023-10-10, One time)\n\t"
+                + "+ S$ 200: pocket money (date: 2023-10-10, One time)");
     }
 }
