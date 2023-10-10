@@ -2,7 +2,7 @@ package seedu.stocker.commands;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HelpCommandTest {
     @Test
@@ -22,8 +22,6 @@ class HelpCommandTest {
                 + "|| bye: Exits the program.\n"
                 + "|| Example: bye";
 
-        assertEquals(expectedOutput,new CommandResult(expectedOutput).feedbackToUser);
+        assertEquals(expectedOutput, new CommandResult(expectedOutput).feedbackToUser);
     }
-
-
 }
