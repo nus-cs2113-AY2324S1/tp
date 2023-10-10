@@ -35,11 +35,16 @@ public class Ui {
         return scanNextLine();
     }
 
+    public void printBlankLine() {
+        System.out.println();
+    }
+
     public void printWelcome() {
         System.out.println("Welcome!");
     }
 
     public void printCommandResult(CommandResult commandResult) {
         System.out.println(commandResult.getFeedback());
+        printBlankLine();
     }
 }
