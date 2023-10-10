@@ -9,6 +9,6 @@ public class DeleteIncome extends Command {
     public void execute() {
         String incomeBeingDeleted = getIncome().toString();
         incomeStatement.delete(getIndex());
-        System.out.println("The following income was deleted:\n\t" + incomeBeingDeleted);
+        System.out.println("The following income was deleted:\n" + incomeBeingDeleted);
     }
 }

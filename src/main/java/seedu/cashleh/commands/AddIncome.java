@@ -16,6 +16,6 @@ public class AddIncome extends Command {
     @Override
     public void execute() {
         incomeStatement.add(incomeToAdd);
-        System.out.println("The following income was added:\n\t" + getIncome());
+        System.out.println("The following income was added:\n" + getIncome());
     }
 }

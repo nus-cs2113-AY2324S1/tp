@@ -52,6 +52,6 @@ public class Income {
     }
     @Override
     public String toString() {
-        return String.format("+ %s %d: %s (date: %s, %s)", currency, amount, description, date, isOneTimeIncome());
+        return String.format("\t+ %s %d: %s (date: %s, %s)", currency, amount, description, date, isOneTimeIncome());
     }
 }
