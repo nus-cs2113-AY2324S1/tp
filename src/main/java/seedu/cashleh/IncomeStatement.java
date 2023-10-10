@@ -2,6 +2,7 @@ package seedu.cashleh;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IncomeStatement {
     private ArrayList<Income> incomeStatement = new ArrayList<>();
@@ -20,5 +21,12 @@ public class IncomeStatement {
     }
     public int getNumberOfEntries() {
         return incomeStatement.size();
+    }
+    public double getSumOfEntries() {
+        return incomeStatement.stream().mapToDouble(Income::getAmount).sum();
+    }
+    @Override
+    public String toString() {
+        return incomeStatement.stream().map(Income::toString).collect(Collectors.joining("\n"));
     }
 }

@@ -18,6 +18,12 @@ public class Command {
     public Income getIncome() {
         return incomeStatement.get(getIndex());
     }
+    public IncomeStatement getIncomeStatement() {
+        return incomeStatement;
+    }
+    public double getIncomeSum() {
+        return incomeStatement.getSumOfEntries();
+    }
     public void execute() {}
     public void setIncomeStatement(IncomeStatement incomeStatement) {
         this.incomeStatement = incomeStatement;
