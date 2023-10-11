@@ -41,6 +41,11 @@ public class LoginSystem {
         while (!input.equals("1") | !input.equals("2")) {
             System.out.println("Invalid Input, enter 1 or 2 only!");
             input = in.nextLine();
+            if (input.equals("1")) {
+                return "1";
+            } else if (input.equals("2")) {
+                return "2";
+            }
         }
         in.close();
         return "An error occurred";
