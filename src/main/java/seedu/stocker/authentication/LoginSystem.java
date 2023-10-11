@@ -15,7 +15,6 @@ public class LoginSystem {
     private HashMap<String, String> users;
 
 
-
     public LoginSystem() throws IOException {
         users = new HashMap<>();
         loginStatus = false;
@@ -23,10 +22,8 @@ public class LoginSystem {
         File holder = new File("./users.txt");
         if (holder.exists() == false) {
             holder.createNewFile();
-            System.out.println("File created: " + holder.getName());
         } else {
-            System.out.println(holder.getAbsolutePath());
-            System.out.println("File already exists.");
+
         }
     }
 
@@ -38,20 +35,19 @@ public class LoginSystem {
     public String authenticateUserChoice() {
         Scanner in = new Scanner(System.in);
 
+        String choice = in.nextLine();
 
-        String input = in.nextLine();
-
-        if (input.equals("1")) {
+        if (choice.equals("1")) {
             return "1";
-        } else if (input.equals("2")) {
+        } else if (choice.equals("2")) {
             return "2";
         }
-        while (!input.equals("1") | !input.equals("2")) {
+        while (choice != "1" | choice != "2") {
             System.out.println("Invalid Input, enter 1 or 2 only!");
-            input = in.nextLine();
-            if (input.equals("1")) {
+            choice = in.nextLine();
+            if (choice.equals("1")) {
                 return "1";
-            } else if (input.equals("2")) {
+            } else if (choice.equals("2")) {
                 return "2";
             }
         }
@@ -68,7 +64,18 @@ public class LoginSystem {
         String password = input.nextLine();
 
         if (users.containsKey(username)) {
-            System.out.println("User already exists.");
+            System.out.println("User already exists. Please make user with different name or choose 2");
+            System.out.println();
+            System.out.println("Key in the respective number 1 or 2 based on your needs \n"
+                    + "1.Register user \n" + "2.Login ");
+
+            String reselect =authenticateUserChoice();
+            if (reselect.equals("1")) {
+                newUserCreator();
+
+            } else if (reselect.equals("2")) {
+                loginExistingUser();
+            }
         } else {
             users.put(username, password);
             System.out.println("Registration successful.");
@@ -86,19 +93,21 @@ public class LoginSystem {
         String usernameInput = input.nextLine();
         System.out.println("Enter your password:");
         String passwordInput = input.nextLine();
+
         if (!users.containsKey(usernameInput)) {
             System.out.println("Invalid username or password. Please try again.");
             System.out.println();
             System.out.println("Key in the respective number 1 or 2 based on your needs \n"
                     + "1.Register user \n" + "2.Login ");
 
-            String choice = input.nextLine();
-            if (choice.equals("1")) {
+            String reselect =authenticateUserChoice();
+            if (reselect.equals("1")) {
                 newUserCreator();
 
-            } else if (choice.equals("2")) {
+            } else if (reselect.equals("2")) {
                 loginExistingUser();
             }
+
         } else {
             if (users.get(usernameInput).equals(passwordInput)) {
                 System.out.println("Login successful.");
@@ -108,11 +117,12 @@ public class LoginSystem {
                 System.out.println();
                 System.out.println("Key in the respective number 1 or 2 based on your needs \n"
                         + "1.Register user \n" + "2.Login ");
-                String choice = input.nextLine();
-                if (choice.equals("1")) {
+
+                String reselect =authenticateUserChoice();
+                if (reselect.equals("1")) {
                     newUserCreator();
 
-                } else if (choice.equals("2")) {
+                } else if (reselect.equals("2")) {
                     loginExistingUser();
                 }
             }
