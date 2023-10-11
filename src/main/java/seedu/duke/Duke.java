@@ -1,5 +1,4 @@
 package seedu.duke;
-
 import seedu.duke.Ui.Ui;
 import seedu.duke.Commands.Parser;
 
