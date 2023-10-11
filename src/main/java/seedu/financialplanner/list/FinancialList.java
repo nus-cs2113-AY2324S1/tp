@@ -6,7 +6,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class FinancialList {
-    protected ArrayList<Cashflow> list = new ArrayList<>();
+    public ArrayList<Cashflow> list;
+
+    public FinancialList() {
+        this.list = new ArrayList<>();
+    }
 
     private void printAddedCashflow(String line) {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
@@ -44,5 +48,9 @@ public class FinancialList {
         Expense toAdd = new Expense(value, type, recur);
         list.add(toAdd);
         printAddedCashflow("expense");
+    }
+
+    public void load(Cashflow entry) {
+        list.add(entry);
     }
 }

@@ -18,4 +18,8 @@ public class Cashflow {
         this.type = null;
         this.recur = 0;
     }
+
+    public String formatString() {
+        return this.value + " | " + this.type + " | " + this.recur;
+    }
 }
