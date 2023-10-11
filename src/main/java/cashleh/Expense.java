@@ -1,8 +1,8 @@
 package cashleh;
 public class Expense {
+    private static double totalExpense = 0.0;
     private String description;
     private double amount;
-    private static double totalExpense = 0;
 
     public Expense(String description, double amount) {
         this.description = description;

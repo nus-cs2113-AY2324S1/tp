@@ -13,6 +13,8 @@ public class ViewExpenses extends Command {
                 + Expense.getTotalExpense() + System.lineSeparator() +
                 "Here are the expenses in your list:" + getExpenseStatement());
     }
+}
+
 //    public static void viewExpenses(ArrayList<Expense> expenseList) {
 //        System.out.println("Your total expense is: " + Expense.getTotalExpense());
 //        System.out.println("Here are the expenses in your list:");
@@ -21,5 +23,3 @@ public class ViewExpenses extends Command {
 //            System.out.println(expenseList.get(i));
 //        }
 //    }
-
-}

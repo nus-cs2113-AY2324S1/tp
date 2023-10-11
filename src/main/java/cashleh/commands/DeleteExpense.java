@@ -36,9 +36,10 @@ public class DeleteExpense extends Command {
 //                if (expenseList.isEmpty()) {
 //                    throw new CashLehException("Expense list is empty.");
 //                }
-//                throw new CashLehException("Invalid expense index. Please provide valid expense index" + " < " + (expenseList.size() + 1) + " to delete expense.");
+//                throw new CashLehException("Invalid expense index. Please provide valid expense index" +
+//                " < " + (expenseList.size() + 1) + " to delete expense.");
 //            }
 //        } catch (CashLehException e) {
 //            System.out.println("Error: " + e.getMessage());
 //        }
-//    }
+//

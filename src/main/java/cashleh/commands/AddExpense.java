@@ -9,7 +9,8 @@ public class AddExpense extends Command {
 
     public AddExpense(String description, double amount) throws CashLehException {
         if (description.isEmpty() || amount <= 0) {
-            throw new CashLehException("Invalid expense. Please include description and amount of expense in following format:" +
+            throw new CashLehException("Invalid expense. Please include description and " +
+                    "amount of expense in following format:" +
                     "\"addExpense <DESCRIPTION> /amt <AMOUNT>\"");
         }
         this.expenseToAdd = new Expense(description, amount);
