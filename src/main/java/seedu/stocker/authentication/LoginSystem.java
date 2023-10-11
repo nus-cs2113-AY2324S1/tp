@@ -69,7 +69,7 @@ public class LoginSystem {
             System.out.println("Key in the respective number 1 or 2 based on your needs \n"
                     + "1.Register user \n" + "2.Login ");
 
-            String reselect =authenticateUserChoice();
+            String reselect = authenticateUserChoice();
             if (reselect.equals("1")) {
                 newUserCreator();
 
@@ -100,7 +100,7 @@ public class LoginSystem {
             System.out.println("Key in the respective number 1 or 2 based on your needs \n"
                     + "1.Register user \n" + "2.Login ");
 
-            String reselect =authenticateUserChoice();
+            String reselect = authenticateUserChoice();
             if (reselect.equals("1")) {
                 newUserCreator();
 
@@ -118,7 +118,7 @@ public class LoginSystem {
                 System.out.println("Key in the respective number 1 or 2 based on your needs \n"
                         + "1.Register user \n" + "2.Login ");
 
-                String reselect =authenticateUserChoice();
+                String reselect = authenticateUserChoice();
                 if (reselect.equals("1")) {
                     newUserCreator();
 
@@ -138,10 +138,8 @@ public class LoginSystem {
                 users.entrySet()) {
 
             // put key and value separated by a colon
-
             writer.write(entry.getKey() + ":"
                     + entry.getValue());
-
 
             // new line
             writer.newLine();
