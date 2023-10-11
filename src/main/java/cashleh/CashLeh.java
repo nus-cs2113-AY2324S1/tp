@@ -16,7 +16,8 @@ public class CashLeh {
         String userGuideLink = ("Here is the link to the user guide:"
                 + "https://docs.google.com/document/d/"
                 + "15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
-        String[] greetingLines = {userGuideLink, logo, "Welcome to 'CashLeh?'! Your one-stop app for managing your finances!", "What is your name?"};
+        String[] greetingLines = {userGuideLink, logo, "Welcome to 'CashLeh?'! " +
+                "Your one-stop app for managing your finances!", "What is your name?"};
 
         ui.printMultipleText(greetingLines);
 
