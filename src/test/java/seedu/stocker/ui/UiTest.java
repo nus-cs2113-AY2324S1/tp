@@ -46,9 +46,9 @@ class UiTest {
 
     @Test
     public void getIndexedListForViewing_success() {
-        String expectedOutput = "\t1. Paracetamol" + System.getProperty("line.separator")
-            +  "\t2. Ibuprofene" + System.getProperty("line.separator")
-            +  "\t3. Doliprane" + System.getProperty("line.separator");
+        String expectedOutput = "\t1. Paracetamol" + System.lineSeparator()
+            +  "\t2. Ibuprofene" + System.lineSeparator()
+            +  "\t3. Doliprane" + System.lineSeparator();
 
         List<String> input = Arrays.asList("Paracetamol", "Ibuprofene", "Doliprane");
         assertEquals(expectedOutput, new Ui().getIndexedListForViewing(input));
