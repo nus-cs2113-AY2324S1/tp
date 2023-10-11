@@ -47,7 +47,6 @@ public class LoginSystem {
                 return "2";
             }
         }
-        in.close();
         return "An error occurred";
     }
 
@@ -66,7 +65,6 @@ public class LoginSystem {
             users.put(username, password);
             System.out.println("Registration successful.");
         }
-        input.close();
         writeNewUserToFile();
 
     }
@@ -89,12 +87,11 @@ public class LoginSystem {
             }
         }
 
-        input.close();
 
     }
 
     public void writeNewUserToFile() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("./users.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("./users.txt",true));
 
         for (Map.Entry<String, String> entry :
                 users.entrySet()) {
