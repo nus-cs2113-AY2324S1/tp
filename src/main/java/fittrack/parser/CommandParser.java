@@ -2,7 +2,7 @@ package fittrack.parser;
 
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkCommand;
-import fittrack.command.CheckCalorieSurplusLimitCommand;
+import fittrack.command.CheckDailyCalorieSurplusLimitCommand;
 import fittrack.command.CheckHeightCommand;
 import fittrack.command.CheckWeightCommand;
 import fittrack.command.Command;
@@ -13,8 +13,7 @@ import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
 import fittrack.command.ListWorkoutCommand;
-import fittrack.command.SetCalorieSurplusLimitCommand;
-import fittrack.command.SetDailyCalorieLimitCommand;
+import fittrack.command.SetDailyCalorieSurplusLimitCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,18 +63,16 @@ public class CommandParser {
             return new AddWorkCommand();
         case DeleteWorkCommand.COMMAND_WORD:
             return new DeleteWorkCommand();
-        case SetCalorieSurplusLimitCommand.COMMAND_WORD:
-            return new SetCalorieSurplusLimitCommand();
         case CheckHeightCommand.COMMAND_WORD:
             return new CheckHeightCommand();
         case CheckWeightCommand.COMMAND_WORD:
             return new CheckWeightCommand();
-        case CheckCalorieSurplusLimitCommand.COMMAND_WORD:
-            return new CheckCalorieSurplusLimitCommand();
+        case CheckDailyCalorieSurplusLimitCommand.COMMAND_WORD:
+            return new CheckDailyCalorieSurplusLimitCommand();
         case ListWorkoutCommand.COMMAND_WORD:
             return new ListWorkoutCommand();
-        case SetDailyCalorieLimitCommand.COMMAND_WORD:
-            return new SetDailyCalorieLimitCommand();
+        case SetDailyCalorieSurplusLimitCommand.COMMAND_WORD:
+            return new SetDailyCalorieSurplusLimitCommand();
         default:
             return new InvalidCommand(word);
         }
