@@ -2,7 +2,7 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-public class ListWorkoutCommand extends Command{
+public class ListWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "listWorkout";
 
     @Override

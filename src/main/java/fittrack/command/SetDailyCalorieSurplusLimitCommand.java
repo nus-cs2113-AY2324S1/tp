@@ -2,7 +2,7 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-public class SetDailyCalorieLimitCommand extends Command{
+public class SetDailyCalorieSurplusLimitCommand extends Command {
     public static final String COMMAND_WORD = "setDCL";
 
     @Override
