@@ -2,8 +2,6 @@ package seedu.duke;
 
 import seedu.duke.Ui.Ui;
 import seedu.duke.Commands.Parser;
-import java.util.Scanner;
-
 
 public class Duke {
     private Ui ui;
