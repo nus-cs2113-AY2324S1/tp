@@ -20,16 +20,16 @@ public class Duke {
                 String command = Parser.parse(fullCommand);
                 String[] parts = command.split("-", 2);
                 switch (parts[0]) {
-                    case "exit":
-                        isExit = true;
-                        ui.showLineDivider();
-                        break;
+                case "exit":
+                    isExit = true;
+                    ui.showLineDivider();
+                    break;
 
-                    default:
-                        ui.showLineDivider();
-                        System.out.println("Invalid command. Please try again.");
-                        ui.showLineDivider();
-                        break;
+                default:
+                    ui.showLineDivider();
+                    System.out.println("Invalid command. Please try again.");
+                    ui.showLineDivider();
+                    break;
                 }
             } catch (KaChinnnngException e) {
                 System.out.println(e.getMessage());
