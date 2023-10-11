@@ -139,7 +139,7 @@ public class Ui {
         final StringBuilder formatted = new StringBuilder();
         int displayIndex = DISPLAYED_INDEX_OFFSET;
         for (String listItem : listItems) {
-            formatted.append(getIndexedListItem(displayIndex, listItem)).append("\n");
+            formatted.append(getIndexedListItem(displayIndex, listItem)).append(LS);
             displayIndex++;
         }
         return formatted.toString();
