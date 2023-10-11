@@ -1,11 +1,5 @@
 package cashleh;
 
-import java.util.ArrayList;
-
-import static cashleh.commands.AddExpense.addExpense;
-import static cashleh.commands.DeleteExpense.deleteExpense;
-import static cashleh.commands.ViewExpenses.viewExpenses;
-
 public class CashLeh {
     private final Ui ui = new Ui();
     private final Input input = new Input();
@@ -30,17 +24,10 @@ public class CashLeh {
         ui.printMultipleText(greetingLines);
         String inputString = input.getInputString();
         ui.printText("Hello " + inputString);
-        ArrayList<Expense> expenseList = new ArrayList<>();
         do {
             inputString = input.getInputString();
             if (inputString.equals("bye")) {
                 ui.printText("Bye. Hope to see you again soon!");
-            } else if (inputString.startsWith("addExpense")) {
-                addExpense(expenseList, inputString);
-            } else if (inputString.startsWith("deleteExpense")) {
-                deleteExpense(expenseList, inputString);
-            } else if (inputString.startsWith("viewExpenses")) {
-                viewExpenses(expenseList);
             } else {
                 ui.printText("Sorry, I don't understand what you mean.");
             }
