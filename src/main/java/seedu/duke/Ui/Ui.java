@@ -1,5 +1,6 @@
 package seedu.duke.Ui;
 import java.util.Scanner;
+import seedu.duke.Commands.KaChinnnngException;
 //import java.util.ArrayList;
 
 /**
@@ -13,8 +14,12 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public String readCommand() {
-        return scanner.nextLine();
+    public String readCommand() throws KaChinnnngException {
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine();
+        } else {
+            throw new KaChinnnngException("No input provided by the user.");
+        }
     }
 
     public void showLineDivider() {
