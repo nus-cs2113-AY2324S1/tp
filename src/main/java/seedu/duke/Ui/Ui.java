@@ -2,7 +2,9 @@ package seedu.duke.Ui;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+/**
+ * This class handles the user interface of the program.
+ */
 public class Ui {
     private static final String lineDivider = "____________________________________________________________";
 
