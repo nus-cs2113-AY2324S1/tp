@@ -1,12 +1,12 @@
-Here is the link to the user guide:https://docs.google.com/document/d/15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link
-    ______           __    __         __  ___  
+	____________________________________________________________
+	Here is the link to the user guide:https://docs.google.com/document/d/15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link
+	    ______           __    __         __  ___  
    / ____/___ ______/ /_  / /   ___  / /_/__ \ 
   / /   / __ `/ ___/ __ \/ /   / _ \/ __ \/ _/ 
  / /___/ /_/ (__  ) / / / /___/  __/ / / /_/   
  \____/\__,_/____/_/ /_/_____/\___/_/ /_(_)    
 
-Welcome to 'CashLeh?'! Your one-stop app for managing your finances!
-	____________________________________________________________
+	Welcome to 'CashLeh?'! Your one-stop app for managing your finances!
 	What is your name?
 	____________________________________________________________
 	____________________________________________________________
