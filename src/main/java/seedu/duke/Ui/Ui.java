@@ -1,6 +1,6 @@
 package seedu.duke.Ui;
 import java.util.Scanner;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 /**
  * This class handles the user interface of the program.
