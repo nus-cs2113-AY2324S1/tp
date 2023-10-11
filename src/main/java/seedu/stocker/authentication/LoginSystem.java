@@ -110,14 +110,14 @@ public class LoginSystem {
     }
 
     public int run() throws IOException {
-       String choice = showWelcomeMessage();
-       if (choice.equals("1")){
-           newUserCreator();
+        String choice = showWelcomeMessage();
+        if (choice.equals("1")) {
+            newUserCreator();
 
-       }else if(choice.equals("2")){
-           loginExistingUser();
-       }
-       return 0;
+        } else if (choice.equals("2")) {
+            loginExistingUser();
+        }
+        return 0;
     }
 
 
