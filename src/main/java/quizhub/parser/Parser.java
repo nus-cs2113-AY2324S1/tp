@@ -6,6 +6,7 @@ import quizhub.exception.QuizHubExceptions;
  * Represents a parser that converts user inputs into command objects.
  */
 public class Parser {
+
     /**
      * Analyses and extracts relevant information from user input
      * to create a new Command object of the right type.
@@ -15,7 +16,18 @@ public class Parser {
     public Command parseCommand(String userInput) {
         String commandTitle = userInput.split(" ")[0];
         String commandDetails;
+        String invalidCommandFeedback = "    Valid commands are: short [question]/[answer],\n" +
+                "                        list,\n" +
+                "                        start,\n" +
+                "                        edit [question number] /question,\n" +
+                "                        edit [question number] /answer,\n" +
+                "                        delete [question number],\n" +
+                "                        find /description [question description]\n" +
+                "                        help,\n" +
+                "                        bye";
+        String invalidIntegerFeedback = "    Please enter valid integer index!";
         int taskIndex;
+
         try {
             switch (commandTitle) {
                 case "bye":
@@ -37,29 +49,15 @@ public class Parser {
                 case "help":
                     return new CommandHelp();
                 default:
-                    throw new QuizHubExceptions("Invalid Input");
+                    return new CommandInvalid(invalidCommandFeedback);
             }
         }
-        catch(NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex){
-            System.out.println("    Please enter valid integer index!");
+        catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
+            return new CommandInvalid(invalidIntegerFeedback);
         }
-        catch (QuizHubExceptions exception){
-            String exceptionMessage = exception.getMessage();
-            if (exceptionMessage.equals("Invalid Input")) {
-                System.out.println("    Please enter a valid command :0");
-                // TODO : CHANGE THIS
-                System.out.println("    Valid commands are: short [question]/[answer],\n" +
-                        "                        list,\n" +
-                        "                        start,\n" +
-                        "                        edit [question number] /question,\n" +
-                        "                        edit [question number] /answer,\n" +
-                        "                        delete [question number],\n" +
-                        "                        find /description [question description]\n" +
-                        "                        help,\n" +
-                        "                        bye");
-            }
+        catch (Exception error) {
+            return new CommandInvalid(invalidCommandFeedback);
         }
-        return new Command();
     }
 
 }

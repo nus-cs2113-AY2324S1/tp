@@ -101,5 +101,10 @@ public class Ui {
     public String getUserInput() {
         return input.nextLine();
     }
+
+    public void showInvalidCommandHelp( String feedback ) {
+        System.out.println("    Please enter a valid command :0");
+        System.out.println(feedback);
+    }
 }
 
