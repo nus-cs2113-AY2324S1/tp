@@ -2,8 +2,8 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-public class AddMealCommand extends Command {
-    public static final String COMMAND_WORD = "addmeal";
+public class SetDailyCalorieSurplusLimitCommand extends Command {
+    public static final String COMMAND_WORD = "setDCL";
 
     @Override
     public CommandResult execute() {
@@ -20,3 +20,4 @@ public class AddMealCommand extends Command {
         return null;
     }
 }
+
