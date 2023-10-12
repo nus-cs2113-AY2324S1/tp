@@ -1,6 +1,7 @@
 package seedu.duke.ui;
 import java.util.Scanner;
 import seedu.duke.commands.KaChinnnngException;
+import seedu.duke.financialrecords.Income;
 //import java.util.ArrayList;
 
 /**
@@ -41,5 +42,9 @@ public class Ui {
     public void printGoodbyeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(lineDivider);
+    }
+
+    public void printIncomeAddedMessage(Income income) {
+        System.out.println("Got it. I've added this income: \n" + income.toString());
     }
 }
