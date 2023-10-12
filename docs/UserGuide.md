@@ -2,20 +2,57 @@
 
 ## Introduction
 
-{Give a product intro}
+Are you ready to embark on a journey towards a healthier, 
+more active lifestyle? Introducing FitTrack, 
+your ultimate fitness and nutrition companion. 
+FitTrack is more than just an app; 
+it's your personal guide to achieving your health and fitness goals.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `FitTrack` from [here](https://github.com/AY2324S1-CS2113-W12-4/tp).
+3. You should find the jar file in your default downloads folder. Please place the jar file into a separate folder that will be used as your `home folder`.
+4. Open a command terminal, and change the current working directory to the `home folder`.
+5. Type ```java -jar tp.jar``` in the terminal to open the application. You should see the welcome message "Hi!" on the next line.
+6. The application is now ready for you to use! Type `help` to see a list of commands that you will be able to use in the application.
+
 
 ## Features 
 
-{Give detailed description of each feature}
+* [Viewing help : `help`](#View-Help-Guide-help)
+* [Exiting the application : `bye`](#Exiting-the-application-bye)
 
-### Adding a todo: `todo`
+### View Help Guide: `help`
+Shows the list of commands with the command format and short explanation.
+
+**Example of usage:**
+
+```
+help
+```
+
+**Expected output:**
+```
+Help List
+```
+
+### Exiting the application: `bye`
+Exits Skippy Chat Bot application.
+
+**Example of usage:**
+
+```
+bye
+```
+
+**Expected output:**
+```
+Saving...
+Goodbye! Hope to see you again soon!
+```
+
+### Editing Your Profile: `editProfile`
 Adds a new item to the list of todo items.
 
 Format: `todo n/TODO_NAME d/DEADLINE`
