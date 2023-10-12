@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.Commands.KaChinnnngException;
 import seedu.duke.Ui.Ui;
-import seedu.duke.Commands.Parser;
+import seedu.duke.Parser.Parser;
 
 public class Duke {
     private Ui ui;

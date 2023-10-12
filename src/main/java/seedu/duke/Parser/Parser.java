@@ -1,4 +1,4 @@
-package seedu.duke.Commands;
+package seedu.duke.Parser;
 
 /*
  * parser class to parse user input
