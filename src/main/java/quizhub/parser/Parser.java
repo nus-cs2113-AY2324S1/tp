@@ -1,12 +1,22 @@
 package quizhub.parser;
 
 import quizhub.command.*;
-import quizhub.exception.QuizHubExceptions;
+
 /**
  * Represents a parser that converts user inputs into command objects.
  */
 public class Parser {
 
+    public static final String INVALID_COMMAND_FEEDBACK = "    Valid commands are: short [question]/[answer],\n" +
+            "                        list,\n" +
+            "                        start,\n" +
+            "                        edit [question number] /question,\n" +
+            "                        edit [question number] /answer,\n" +
+            "                        delete [question number],\n" +
+            "                        find /description [question description]\n" +
+            "                        help,\n" +
+            "                        bye";
+    public static final String INVALID_INTEGER_INDEX = "    Please enter valid integer index!";
     /**
      * Analyses and extracts relevant information from user input
      * to create a new Command object of the right type.
@@ -14,18 +24,12 @@ public class Parser {
      * @param userInput The full user CLI input.
      */
     public Command parseCommand(String userInput) {
-        String commandTitle = userInput.split(" ")[0];
+        String[] commandTokens = userInput.split(" ");
+        if (commandTokens.length == 0) {
+            return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
+        }
+        String commandTitle = commandTokens[0];
         String commandDetails;
-        String invalidCommandFeedback = "    Valid commands are: short [question]/[answer],\n" +
-                "                        list,\n" +
-                "                        start,\n" +
-                "                        edit [question number] /question,\n" +
-                "                        edit [question number] /answer,\n" +
-                "                        delete [question number],\n" +
-                "                        find /description [question description]\n" +
-                "                        help,\n" +
-                "                        bye";
-        String invalidIntegerFeedback = "    Please enter valid integer index!";
         int taskIndex;
 
         try {
@@ -41,7 +45,7 @@ public class Parser {
                 case "edit":
                     return new CommandEdit(userInput);
                 case "delete":
-                    commandDetails = userInput.split(" ")[1];
+                    commandDetails = commandTokens[1].strip();
                     taskIndex = Integer.parseInt(commandDetails.strip());
                     return new CommandDelete(taskIndex);
                 case "find":
@@ -49,14 +53,14 @@ public class Parser {
                 case "help":
                     return new CommandHelp();
                 default:
-                    return new CommandInvalid(invalidCommandFeedback);
+                    return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
             }
         }
         catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
-            return new CommandInvalid(invalidIntegerFeedback);
+            return new CommandInvalid(INVALID_INTEGER_INDEX);
         }
         catch (Exception error) {
-            return new CommandInvalid(invalidCommandFeedback);
+            return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
         }
     }
 
