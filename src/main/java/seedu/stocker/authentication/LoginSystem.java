@@ -12,56 +12,53 @@ import java.util.Scanner;
 
 public class LoginSystem {
     public boolean loginStatus;
-    private HashMap<String, String> users;
+    private final Scanner in;
+    private final HashMap<String, String> users;
 
 
     public LoginSystem() throws IOException {
         users = new HashMap<>();
         loginStatus = false;
+        this.in = new Scanner(System.in);
 
         File holder = new File("./users.txt");
-        if (holder.exists() == false) {
+        if (!holder.exists()) {
             holder.createNewFile();
-        } else {
-
         }
     }
 
     public void showWelcomeMessage() {
-        System.out.println("Welcome! Key in the respective number 1 or 2 based on your needs \n"
-                + "1.Register user \n" + "2.Login ");
+        System.out.println("Welcome! Key in the respective number 1 or 2 based on your needs");
+        System.out.println("1.Register user");
+        System.out.println("2.Login");
     }
 
     public String authenticateUserChoice() {
-        Scanner in = new Scanner(System.in);
 
-        String choice = in.nextLine();
+        while (in.hasNextLine()) {
+            String choice = in.nextLine();
 
-        if (choice.equals("1")) {
-            return "1";
-        } else if (choice.equals("2")) {
-            return "2";
-        }
-        while (choice != "1" | choice != "2") {
-            System.out.println("Invalid Input, enter 1 or 2 only!");
-            choice = in.nextLine();
+
             if (choice.equals("1")) {
                 return "1";
             } else if (choice.equals("2")) {
                 return "2";
+            } else {
+                System.out.println("Invalid Input, enter 1 or 2 only!");
+                return authenticateUserChoice();
             }
         }
-        return "An error occurred";
+        return "error";
     }
 
     public void newUserCreator() throws IOException {
-        Scanner input = new Scanner(System.in);
+
 
         System.out.println("Enter your username:");
-        String username = input.nextLine();
+        String username = in.nextLine();
 
         System.out.println("Enter your password:");
-        String password = input.nextLine();
+        String password = in.nextLine();
 
         if (users.containsKey(username)) {
             System.out.println("User already exists. Please make user with different name or choose 2");
@@ -87,12 +84,11 @@ public class LoginSystem {
 
     public void loginExistingUser() throws IOException {
 
-        Scanner input = new Scanner(System.in);
 
         System.out.println("Enter your username:");
-        String usernameInput = input.nextLine();
+        String usernameInput = in.nextLine();
         System.out.println("Enter your password:");
-        String passwordInput = input.nextLine();
+        String passwordInput = in.nextLine();
 
         if (!users.containsKey(usernameInput)) {
             System.out.println("Invalid username or password. Please try again.");
@@ -136,11 +132,9 @@ public class LoginSystem {
 
         for (Map.Entry<String, String> entry :
                 users.entrySet()) {
-
             // put key and value separated by a colon
             writer.write(entry.getKey() + ":"
                     + entry.getValue());
-
             // new line
             writer.newLine();
         }
@@ -159,8 +153,6 @@ public class LoginSystem {
                 String key = parts[0];
                 String value = parts[1];
                 users.put(key, value);
-            } else {
-                System.out.println("ignoring line: " + line);
             }
         }
     }
