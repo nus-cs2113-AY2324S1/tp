@@ -26,12 +26,18 @@ public class Ui {
         System.out.println(lineDivider);
     }
 
+    /**
+     * Prints the welcome message when the program starts.
+     */
     public static void printWelcomeMessage() {
         System.out.println(lineDivider);
         System.out.println("Welcome to KaChinnnngggg! How may i assist you today?");
         System.out.println(lineDivider);
     }
 
+    /**
+     * Prints the goodbye message when the program ends.
+     */
     public void printGoodbyeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(lineDivider);
