@@ -8,6 +8,9 @@ public class Entry extends Command{
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
     protected String input;
+    protected double value;
+    protected String type;
+    protected int recur;
 
     public Entry(String input) {
         this.input = input;
@@ -27,16 +30,15 @@ public class Entry extends Command{
         String[] split = input.split(" ", 2);
         String entryType = split[0];
         String parameters = split[1];
-        int recur = determineRecur(parameters);
+        this.recur = determineRecur(parameters);
         int indexOfAmount = parameters.indexOf("a/");
         int indexOfType = parameters.indexOf("t/");
-        double value = Double.parseDouble(parameters.substring(indexOfAmount + 2, indexOfType).trim());
-        String type;
+        this.value = Double.parseDouble(parameters.substring(indexOfAmount + 2, indexOfType).trim());
         if (recur == 0) {
-            type = parameters.substring(indexOfType + 2).trim();
+            this.type = parameters.substring(indexOfType + 2).trim();
         } else {
             int indexOfRecur = parameters.indexOf("r/");
-            type = parameters.substring(indexOfType + 2, indexOfRecur).trim();
+            this.type = parameters.substring(indexOfType + 2, indexOfRecur).trim();
         }
 
         switch (entryType) {

@@ -27,7 +27,7 @@ public class FinancialList {
 
     //@author mhadidg-reused
     //Reused from https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
-    public static double round(double value, int places) {
+    public double round(double value, int places) {
         if (places < 0) {
             throw new IllegalArgumentException();
         }
@@ -52,5 +52,11 @@ public class FinancialList {
 
     public void load(Cashflow entry) {
         list.add(entry);
+    }
+    public Cashflow get(int index) {
+        return list.get(index);
+    }
+    public int size() {
+        return list.size();
     }
 }
