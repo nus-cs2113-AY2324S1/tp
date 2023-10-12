@@ -3,9 +3,8 @@ package seedu.financialplanner.investments;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
-import seedu.financialplanner.exceptions.FinancialPlannerException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class WatchListTest {
 
