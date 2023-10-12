@@ -10,6 +10,8 @@ public class Parser {
 
         if (commandLowerCase.equals("bye")) {
             return "exit";
+        } else if (commandLowerCase.startsWith("add income")) {
+            return "add_income";
         }
         return "invalid";
     }

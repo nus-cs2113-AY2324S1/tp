@@ -3,15 +3,22 @@ package seedu.duke;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
+import seedu.duke.financialrecords.Income;
+import seedu.duke.commands.IncomeManager;
+import java.util.ArrayList;
 
 public class Duke {
     private Ui ui;
+    private ArrayList<Income> incomes;
 
+    public Duke() {
+        ui = new Ui();
+        incomes = new ArrayList<>();
+    }
     /**
      * This method runs the program.
      */
     public void run() {
-        ui = new Ui();
         Ui.printWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
@@ -24,6 +31,23 @@ public class Duke {
                     isExit = true;
                     ui.showLineDivider();
                     break;
+
+                case "add_income":
+                    try{
+                        IncomeManager incomeCommand = new IncomeManager(fullCommand);
+                        incomeCommand.execute();
+                        Income newIncome = incomeCommand.getNewIncome();
+                        incomes.add(newIncome);
+                        ui.showLineDivider();
+                        ui.printIncomeAddedMessage(newIncome);
+                        ui.showLineDivider();
+                    } catch (KaChinnnngException e) {
+                        ui.showLineDivider();
+                        System.out.println(e.getMessage());
+                        ui.showLineDivider();
+                    }
+                    break;
+
 
                 default:
                     ui.showLineDivider();
