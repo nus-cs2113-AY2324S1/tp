@@ -6,6 +6,7 @@ import seedu.duke.parser.Parser;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.commands.IncomeManager;
 import java.util.ArrayList;
+import seedu.duke.commands.IncomeLister;
 
 public class Duke {
     private Ui ui;
@@ -48,6 +49,10 @@ public class Duke {
                     }
                     break;
 
+                case "list_income":
+                    ui.showLineDivider();
+                    new IncomeLister(incomes, ui).listIncomes();
+                    break;
 
                 default:
                     ui.showLineDivider();

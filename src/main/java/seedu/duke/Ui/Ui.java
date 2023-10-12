@@ -47,4 +47,8 @@ public class Ui {
     public void printIncomeAddedMessage(Income income) {
         System.out.println("Got it. I've added this income: \n" + income.toString());
     }
+
+    public void printListIncomeMessage() {
+        System.out.println("Here are your incomes:");
+    }
 }
