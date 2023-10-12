@@ -53,4 +53,10 @@ public class FinancialList {
     public void load(Cashflow entry) {
         list.add(entry);
     }
+    public Cashflow get(int index) {
+        return list.get(index);
+    }
+    public int size() {
+        return list.size();
+    }
 }
