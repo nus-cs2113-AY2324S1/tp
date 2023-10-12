@@ -6,7 +6,7 @@ import quizhub.ui.Ui;
 
 public class CommandInvalid extends Command {
 
-    private String feedback;
+     public String feedback;
 
     public CommandInvalid(String feedback) {
         super(CommandType.INVALID);
