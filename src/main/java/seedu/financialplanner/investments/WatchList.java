@@ -65,4 +65,12 @@ public class WatchList {
         stocks.add(newStock);
         return newStock.getStockName();
     }
+
+    public int size(){
+        return stocks.size();
+    }
+
+    public Stock get(int index){
+        return stocks.get(index);
+    }
 }
