@@ -16,7 +16,6 @@ public class FitTrack {
 
     private FitTrack() {
         ui = new Ui();
-
         userProfile = new UserProfile();
         meals = new MealList();
         works = new WorkList();
