@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.commands.CommandResult;
 
-import static seedu.stocker.common.Messages.MESSAGE_WELCOME;
-import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
+import static seedu.stocker.common.Messages.*;
 
 public class Ui {
 
@@ -96,6 +95,10 @@ public class Ui {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
+    }
+
+    public void showLoginMessage(){
+        showToUser(DIVIDER,MESSAGE_LOGIN_WELCOME,DIVIDER);
     }
 
     public void showWelcomeMessage() {

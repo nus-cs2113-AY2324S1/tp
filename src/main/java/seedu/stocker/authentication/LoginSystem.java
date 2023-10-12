@@ -27,12 +27,6 @@ public class LoginSystem {
         }
     }
 
-    public void showWelcomeMessage() {
-        System.out.println("Welcome! Key in the respective number 1 or 2 based on your needs");
-        System.out.println("1.Register user");
-        System.out.println("2.Login");
-    }
-
     public String authenticateUserChoice() {
 
         while (in.hasNextLine()) {
@@ -159,7 +153,6 @@ public class LoginSystem {
 
     public int run() throws IOException {
         loadExistingUsers();
-        showWelcomeMessage();
         String choice = authenticateUserChoice();
         if (choice.equals("1")) {
             newUserCreator();

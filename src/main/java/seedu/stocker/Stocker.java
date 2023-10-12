@@ -17,18 +17,18 @@ public class Stocker {
     private Inventory inventory;
 
     public static void main(String[] launchArgs) throws IOException {
-        Stocker login = new Stocker();
-        if (login.login() == true) {
-            new Stocker().run();
-        }
+        new Stocker().run();
     }
 
     /**
      * Runs Login System.
      */
-    public boolean login() throws IOException {
+    public boolean startLogin() throws IOException {
+        this.ui = new Ui();
+        ui.showLoginMessage();
         LoginSystem system = new LoginSystem();
         system.run();
+
         if (system.loginStatus == true) {
             return true;
         } else {
@@ -40,7 +40,7 @@ public class Stocker {
     /**
      * Runs the program until termination.
      */
-    public void run() {
+    public void run() throws IOException {
         start();
         runCommandLoopUntilExitCommand();
         exit();
@@ -49,10 +49,14 @@ public class Stocker {
     /**
      * Sets up the required objects, and prints the welcome message.
      */
-    private void start() {
+    private void start() throws IOException {
         this.ui = new Ui();
         this.inventory = new Inventory();
-        ui.showWelcomeMessage();
+        ui.showLoginMessage();
+        boolean checker = startLogin();
+        if(checker == true){
+            ui.showWelcomeMessage();
+        }
     }
 
     /**
