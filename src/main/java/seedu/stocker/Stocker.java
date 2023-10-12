@@ -1,5 +1,6 @@
 package seedu.stocker;
 
+import seedu.stocker.authentication.LoginSystem;
 import seedu.stocker.ui.Ui;
 import seedu.stocker.parser.Parser;
 import seedu.stocker.commands.Command;
@@ -7,6 +8,7 @@ import seedu.stocker.commands.CommandResult;
 import seedu.stocker.commands.ExitCommand;
 import seedu.stocker.drugs.Inventory;
 
+import java.io.IOException;
 
 
 public class Stocker {
@@ -14,11 +16,30 @@ public class Stocker {
     private Ui ui;
     private Inventory inventory;
 
-    public static void main(String[] launchArgs) {
-        new Stocker().run();
+    public static void main(String[] launchArgs) throws IOException {
+        Stocker login = new Stocker();
+        if (login.login() == true) {
+            new Stocker().run();
+        }
     }
 
-    /** Runs the program until termination.  */
+    /**
+     * Runs Login System.
+     */
+    public boolean login() throws IOException {
+        LoginSystem system = new LoginSystem();
+        system.run();
+        if (system.loginStatus == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         start();
         runCommandLoopUntilExitCommand();
@@ -27,7 +48,6 @@ public class Stocker {
 
     /**
      * Sets up the required objects, and prints the welcome message.
-     *
      */
     private void start() {
         this.ui = new Ui();
@@ -35,13 +55,17 @@ public class Stocker {
         ui.showWelcomeMessage();
     }
 
-    /** Prints the Goodbye message and exits. */
+    /**
+     * Prints the Goodbye message and exits.
+     */
     private void exit() {
         ui.showGoodbyeMessage();
         System.exit(0);
     }
 
-    /** Reads the user command and executes it, until the user issues the exit command.  */
+    /**
+     * Reads the user command and executes it, until the user issues the exit command.
+     */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
