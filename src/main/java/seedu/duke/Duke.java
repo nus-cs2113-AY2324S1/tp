@@ -1,8 +1,8 @@
 package seedu.duke;
 
-import seedu.duke.Commands.KaChinnnngException;
-import seedu.duke.Ui.Ui;
-import seedu.duke.Parser.Parser;
+import seedu.duke.commands.KaChinnnngException;
+import seedu.duke.ui.Ui;
+import seedu.duke.parser.Parser;
 
 public class Duke {
     private Ui ui;
