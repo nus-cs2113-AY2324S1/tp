@@ -1,1 +1,4 @@
 James Gosling
+hello
+bye
+exit

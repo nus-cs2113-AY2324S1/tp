@@ -1,9 +1,16 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ _____ _ _   _   _ _   _ ____
+|  ___(_) |_| \ | | | | / ___|
+| |_  | | __|  \| | | | \___ \
+|  _| | | |_| |\  | |_| |___) |
+|_|   |_|\__|_| \_|\___/|____/
 
 What is your name?
-Hello James Gosling
+James Gosling
+Hi, James Gosling, what would you like to do?
+hello
+Hello to you as well, James Gosling!
+bye
+James Gosling said: bye
+exit
+Goodbye now!
