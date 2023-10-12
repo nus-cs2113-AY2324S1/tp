@@ -9,4 +9,9 @@ public class Expense extends Cashflow {
     private void addIncomeValue(double value) {
         balance -= value;
     }
+
+    @Override
+    public String formatString() {
+        return "E | " + super.formatString();
+    }
 }

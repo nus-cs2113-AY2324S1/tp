@@ -1,1 +1,8 @@
+add income a/5000 t/work r/30
+add income a/123.12 t/allowance
+add expense a/100 t/daily necessities r/30
+add expense a/123.21 t/books
+addstock m/NASDAQ s/MSFT
+addstock m/NYSE s/GME
+sdf
 exit
