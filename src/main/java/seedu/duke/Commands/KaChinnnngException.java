@@ -1,4 +1,4 @@
-package seedu.duke.Commands;
+package seedu.duke.commands;
 
 public class KaChinnnngException extends Exception{
     public KaChinnnngException(String message) {

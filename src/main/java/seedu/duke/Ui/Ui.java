@@ -1,6 +1,6 @@
-package seedu.duke.Ui;
+package seedu.duke.ui;
 import java.util.Scanner;
-import seedu.duke.Commands.KaChinnnngException;
+import seedu.duke.commands.KaChinnnngException;
 //import java.util.ArrayList;
 
 /**

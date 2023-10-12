@@ -1,6 +1,6 @@
-package seedu.duke.FinancialRecord;
+package seedu.duke.financialrecord;
 
-import seedu.duke.Commands.KaChinnnngException;
+import seedu.duke.commands.KaChinnnngException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -60,7 +60,8 @@ public abstract class FinancialRecord{
         this.amount = amount;
     }
 
-public String toString() {
+    public String toString() {
         return "";
     }
+
 }
