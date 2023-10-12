@@ -14,13 +14,14 @@ public class FinancialPlanner {
     private WatchList watchList;
     private FinancialList financialList;
     private Storage storage;
+    private static final String FILE_PATH = "data/data.txt";
 
     public FinancialPlanner() throws FinancialPlannerException {
         ui = new Ui();
         financialList = new FinancialList();
         watchList = new WatchList();
         storage = new Storage();
-        storage.load(financialList, ui);
+        storage.load(financialList, ui, FILE_PATH);
     }
 
     public void run() {
@@ -44,7 +45,7 @@ public class FinancialPlanner {
 
     public void save() {
         try {
-            storage.save(financialList);
+            storage.save(financialList, FILE_PATH);
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
         }

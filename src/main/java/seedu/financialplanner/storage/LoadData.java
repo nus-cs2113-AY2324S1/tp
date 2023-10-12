@@ -12,11 +12,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public abstract class LoadData {
-    private static final String FILE_PATH = "data/data.txt";
-
-    public static void load(FinancialList financialList, Ui ui) throws FinancialPlannerException {
+    public static void load(FinancialList financialList, Ui ui, String filePath) throws FinancialPlannerException {
         try {
-            Scanner inputFile = new Scanner(new FileReader(FILE_PATH));
+            Scanner inputFile = new Scanner(new FileReader(filePath));
             String line;
             ui.showMessage("Loading existing file...");
 

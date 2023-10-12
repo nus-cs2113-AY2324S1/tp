@@ -11,11 +11,8 @@ import seedu.financialplanner.commands.Find;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
-
     private static final String WATCHLIST_COMMAND = "watchlist";
-
     private static final String ADD_ENTRY_COMMAND = "add";
-
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
 

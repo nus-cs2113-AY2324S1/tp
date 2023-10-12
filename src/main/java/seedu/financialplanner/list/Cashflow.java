@@ -22,4 +22,10 @@ public class Cashflow {
     public String formatString() {
         return this.value + " | " + this.type + " | " + this.recur;
     }
+
+    // temp
+    @Override
+    public String toString() {
+        return this.value + " " + this.type + " " + this.recur;
+    }
 }
