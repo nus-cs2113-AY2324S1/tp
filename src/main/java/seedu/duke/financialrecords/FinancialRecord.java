@@ -1,4 +1,4 @@
-package seedu.duke.financialrecord;
+package seedu.duke.financialrecords;
 
 import seedu.duke.commands.KaChinnnngException;
 import java.time.LocalDate;
