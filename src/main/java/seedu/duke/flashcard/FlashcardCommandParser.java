@@ -1,6 +1,10 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.flashcard.command.*;
+import seedu.duke.flashcard.command.FlashcardCommand;
+import seedu.duke.flashcard.command.CreateFlashcardCommand;
+import seedu.duke.flashcard.command.ListFlashcardsCommand;
+import seedu.duke.flashcard.command.StartReviewCommand;
+import seedu.duke.flashcard.command.UnknownCommand;
 
 public class FlashcardCommandParser {
     public FlashcardCommand parseInput(String input) {
