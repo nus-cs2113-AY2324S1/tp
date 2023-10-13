@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.flashcard.FlashcardComponent;
-import seedu.duke.flashcard.command.UnknownCommand;
 
 import java.util.ArrayList;
 
