@@ -56,7 +56,6 @@ public class Stock {
             if (!symbolFound.equals(symbol)) {
                 throw new FinancialPlannerException("Stock not found");
             }
-            System.out.println(stock.get("2. name"));
             market = (String) stock.get("4. region");
             return (String) stock.get("2. name");
         } catch (IOException e) {
