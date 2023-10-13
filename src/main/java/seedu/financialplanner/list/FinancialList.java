@@ -1,15 +1,16 @@
 package seedu.financialplanner.list;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class FinancialList {
-    public ArrayList<Cashflow> list;
+    public static final FinancialList INSTANCE = new FinancialList();
 
-    public FinancialList() {
-        this.list = new ArrayList<>();
+    public final ArrayList<Cashflow> list = new ArrayList<>();
+
+    private FinancialList() {
     }
 
     private void printAddedCashflow(String line) {

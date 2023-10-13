@@ -6,8 +6,14 @@ import org.json.simple.JSONObject;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner in = new Scanner(System.in);
-    public Ui() {
+    public static final Ui INSTANCE = new Ui();
+    private final Scanner in = new Scanner(System.in);
+
+    private Ui() {
+    }
+
+    public static void printCorruptedFileError(String message) {
+        System.out.println(message);
     }
 
     public void showMessage(String message) {
@@ -40,10 +46,6 @@ public class Ui {
         String price = StringUtils.rightPad(stock.get("price").toString(), 10);
         String name = StringUtils.rightPad((String) stock.get("name"), 10);
         System.out.println(symbol + price + name);
-    }
-    
-    public static void printCorruptedFileError(String message) {
-        System.out.println(message);
     }
 
     public void printAddStock(String stockName) {
