@@ -10,6 +10,7 @@ import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
 
 public class FinancialPlanner {
+    private static final String FILE_PATH = "data/data.txt";
     private Ui ui;
     private WatchList watchList;
     private FinancialList financialList;
@@ -20,7 +21,7 @@ public class FinancialPlanner {
         financialList = new FinancialList();
         watchList = new WatchList();
         storage = new Storage();
-        storage.load(financialList, ui);
+        storage.load(financialList, ui, FILE_PATH);
     }
 
     public void run() {
@@ -44,7 +45,7 @@ public class FinancialPlanner {
 
     public void save() {
         try {
-            storage.save(financialList);
+            storage.save(financialList, FILE_PATH);
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
         }

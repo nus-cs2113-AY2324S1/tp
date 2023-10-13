@@ -23,11 +23,11 @@ public class Storage {
         }
     }
 
-    public void load(FinancialList list, Ui ui) throws FinancialPlannerException {
-        LoadData.load(list, ui);
+    public void load(FinancialList list, Ui ui, String filePath) throws FinancialPlannerException {
+        LoadData.load(list, ui, filePath);
     }
 
-    public void save(FinancialList list) throws FinancialPlannerException {
-        SaveData.save(list);
+    public void save(FinancialList list, String filePath) throws FinancialPlannerException {
+        SaveData.save(list, filePath);
     }
 }

@@ -8,11 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public abstract class SaveData {
-    private static final String FILE_PATH = "data/data.txt";
-
-    public static void save(FinancialList financialList) throws FinancialPlannerException {
+    public static void save(FinancialList financialList, String filePath) throws FinancialPlannerException {
         try {
-            FileWriter fw = new FileWriter(FILE_PATH);
+            FileWriter fw = new FileWriter(filePath);
             for (Cashflow entry : financialList.list) {
                 fw.write(entry.formatString() + "\n");
             }
