@@ -18,19 +18,18 @@ public class Stock {
     private String market;
     private String stockName;
 
-    public Stock(String symbol, String market) throws FinancialPlannerException {
+    public Stock(String symbol) throws FinancialPlannerException {
         this.symbol = symbol;
-        this.market = market;
-        this.stockName = getStockNameFromAPI(symbol,market);
+        this.stockName = getStockNameFromAPI(symbol);
     }
 
     public String getStockName() {
         return stockName;
     }
-    public String getStockNameFromAPI(String symbol, String market) throws FinancialPlannerException {
-        final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/search-ticker?query=";
-        final String API_KEY = "rNCNMmSLUR3BAyeKFHwN69QGzE8fmig1";
-        String requestURI = String.format("%s%s&exchange=%s&apikey=%s", API_ENDPOINT,symbol,market,API_KEY);
+    public String getStockNameFromAPI(String symbol) throws FinancialPlannerException {
+        final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
+        final String API_KEY = "LNKL0548PHY2F0QU";
+        String requestURI = String.format("%s%s&apikey=%s", API_ENDPOINT,symbol,API_KEY);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder(URI.create(requestURI))
                 .header("accept", "application/json")
@@ -41,12 +40,13 @@ public class Stock {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             Object obj = new JSONParser().parse(response.body());
 
-            JSONArray ja = (JSONArray) obj;
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray ja = (JSONArray) jsonObject.get("bestMatches");
             if (ja.isEmpty()) {
                 throw new FinancialPlannerException("stock not found");
             }
             JSONObject stock = (JSONObject) ja.get(0);
-            String symbolFound = (String) stock.get("symbol");
+            String symbolFound = (String) stock.get("1. symbol");
             // TODO: Might need to use AMEX when NYSE is used
             // TODO: Need to check if it is added already
             // TODO: add a cap to adding
@@ -56,7 +56,9 @@ public class Stock {
             if (!symbolFound.equals(symbol)) {
                 throw new FinancialPlannerException("Stock not found");
             }
-            return (String) stock.get("name");
+            System.out.println(stock.get("2. name"));
+            market = (String) stock.get("4. region");
+            return (String) stock.get("2. name");
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
