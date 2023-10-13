@@ -6,11 +6,9 @@ import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.utils.Ui;
 
 public class AddStockCommand extends Command {
-    private final String market;
     private final String stockCode;
 
-    public AddStockCommand(String market, String stockCode) {
-        this.market = market;
+    public AddStockCommand(String stockCode) {
         this.stockCode = stockCode;
     }
 
@@ -18,7 +16,7 @@ public class AddStockCommand extends Command {
     public void execute(Ui ui, FinancialList financialList, WatchList watchList) {
         String stockName = null;
         try {
-            stockName = watchList.addStock(market, stockCode);
+            stockName = watchList.addStock(stockCode);
             ui.printAddStock(stockName);
         } catch (FinancialPlannerException e) {
             System.out.println(e.getMessage());

@@ -26,6 +26,6 @@ class WatchListTest {
         WatchList wl = WatchList.INSTANCE;
         String market = "NYSE";
         String stockCode = "GME";
-        assertEquals("GameStop Corp.", wl.addStock(market, stockCode));
+        assertEquals("GameStop Corp.", wl.addStock(stockCode));
     }
 }

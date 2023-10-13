@@ -42,6 +42,6 @@ public class Parser {
         // TODO: check error here
         String exchange = split[1].trim();
         String stockCode = split[2].trim();
-        return new AddStockCommand(exchange, stockCode);
+        return new AddStockCommand(stockCode);
     }
 }
