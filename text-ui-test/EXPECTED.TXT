@@ -6,7 +6,5 @@ Hello from
 |_|   |_|\__|_| \_|\___/|____/
 
 What is your name?
-James Gosling
 Hi, James Gosling, what would you like to do?
-exit
 Goodbye now!
