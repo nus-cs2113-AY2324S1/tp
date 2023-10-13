@@ -6,13 +6,14 @@ import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Storage {
+    public static final Storage INSTANCE = new Storage();
     private final Path path = Paths.get("data");
 
-    public Storage() {
+    private Storage() {
         if (!Files.exists(path)) {
             try {
                 System.out.println("Directory doesn't exist. Creating directory...");

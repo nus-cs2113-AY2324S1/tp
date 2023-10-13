@@ -14,11 +14,11 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class WatchList {
-    private ArrayList<Stock> stocks;
+    public static final WatchList INSTANCE = new WatchList();
+    private final ArrayList<Stock> stocks;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "rNCNMmSLUR3BAyeKFHwN69QGzE8fmig1";
-
-    public WatchList() {
+    private WatchList() {
         stocks = new ArrayList<>();
         try {
             Stock apple = new Stock("AAPL", "NASDAQ");
@@ -38,7 +38,7 @@ public class WatchList {
         for (Stock stock : stocks) {
             queryStocks.append(stock.toString());
         }
-        String requestURI = String.format("%s%s?apikey=%s", API_ENDPOINT, queryStocks,API_KEY);
+        String requestURI = String.format("%s%s?apikey=%s", API_ENDPOINT, queryStocks, API_KEY);
         HttpRequest request = HttpRequest.newBuilder(URI.create(requestURI))
                 .header("accept", "application/json")
                 .GET()
@@ -66,11 +66,11 @@ public class WatchList {
         return newStock.getStockName();
     }
 
-    public int size(){
+    public int size() {
         return stocks.size();
     }
 
-    public Stock get(int index){
+    public Stock get(int index) {
         return stocks.get(index);
     }
 }

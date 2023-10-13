@@ -8,9 +8,9 @@ import seedu.financialplanner.utils.Ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EntryTest {
-    private Ui ui = new Ui();
-    private FinancialList financialList = new FinancialList();
-    private WatchList watchList = new WatchList();
+    private Ui ui = Ui.INSTANCE;
+    private FinancialList financialList = FinancialList.INSTANCE;
+    private WatchList watchList = WatchList.INSTANCE;
 
     @Test
     void testExecute() {
