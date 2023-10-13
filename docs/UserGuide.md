@@ -21,7 +21,8 @@ it's your personal guide to achieving your health and fitness goals.
 ## Features 
 
 * [Viewing help : `help`](#View-Help-Guide-help)
-* [Exiting the application : `bye`](#Exiting-the-application-bye)
+* [Exiting the application : `exit`](#Exiting-the-application-exit)
+* [Viewing list of workout : `listWorkout`](#viewing-list-of-all-tasks-list)
 
 ### View Help Guide: `help`
 Shows the list of commands with the command format and short explanation.
@@ -34,16 +35,18 @@ help
 
 **Expected output:**
 ```
-Help List
+Help List:
+    1.
+    2.
 ```
 
-### Exiting the application: `bye`
+### Exiting the application: `exit`
 Exits Skippy Chat Bot application.
 
 **Example of usage:**
 
 ```
-bye
+exit
 ```
 
 **Expected output:**
@@ -52,19 +55,57 @@ Saving...
 Goodbye! Hope to see you again soon!
 ```
 
+### Viewing List of All Tasks: `listWorkout`
+Lists all the workouts.
+
+Format: `listWorkout`
+
+**Example of usage:**
+```
+listWorkout
+```
+
+**Expected output:**
+```
+Here are your workouts:
+1. Leg day
+2. Walk
+3. Run
+```
+
 ### Editing Your Profile: `editProfile`
-Adds a new item to the list of todo items.
+Allows user to edit their profile details
 
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Format: `editProfile`
 
 Example of usage: 
+```
+editProfile
+```
+Expected output:
+```
+Done! I have edited your profile!
+Name: John
+Height: 180 cm
+Weight: 70 kg
+```
 
-`todo n/Write the rest of the User Guide d/next week`
+### Adding a Meal: `addmeal`
+Allows user to edit their profile details
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Format: `editProfile`
+
+Example of usage:
+```
+editProfile
+```
+Expected output:
+```
+Done! I have edited your profile!
+Name: John
+Height: 180 cm
+Weight: 70 kg
+```
 
 ## FAQ
 
@@ -74,6 +115,15 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Add Meal `addmeal`
+* Add Work `addwork`
+* Check Daily Calorie Surplus Limit `checkcsl`
+* Check Height `checkHeight`
+* Check Weight `checkWeight`
+* Delete Meal `deletemeal`
+* Delete Work `deletework`
+* Edit Profile `editProfile`
+* Exit Application `bye`
+* Help List `help`
+* List all workouts `listWorkout`
+* Set Daily Calorie Surplus Limit `setdcl`
