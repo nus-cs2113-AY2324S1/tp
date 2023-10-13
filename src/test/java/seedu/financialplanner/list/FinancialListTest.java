@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FinancialListTest {
-    FinancialList testList = FinancialList.INSTANCE;
-    DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+    private FinancialList testList = FinancialList.INSTANCE;
+    private DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
     @Test
     void testAddIncomeAndExpense() {
-
+        Cashflow.balance = 0;
         testList.addIncome(15, "work", 30);
         Cashflow testIncome = testList.list.get(0);
         double roundedValue = testList.round(testIncome.value, 2);
