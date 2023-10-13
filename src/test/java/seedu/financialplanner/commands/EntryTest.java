@@ -25,5 +25,6 @@ class EntryTest {
         assertEquals(15, testEntry.value);
         assertEquals("double mcspicy", testEntry.type);
         assertEquals(0, testEntry.recur);
+        financialList.list.clear();
     }
 }

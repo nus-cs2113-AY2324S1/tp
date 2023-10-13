@@ -52,5 +52,6 @@ class FinancialListTest {
         assertEquals("Apple Music", testExpense.type);
         assertEquals(30, testExpense.recur);
         assertEquals("1.00", decimalFormat.format(roundedBalance));
+        testList.list.clear();
     }
 }
