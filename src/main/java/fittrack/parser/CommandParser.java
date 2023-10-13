@@ -85,7 +85,7 @@ public class CommandParser {
      * @throws RegexMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    public double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
+    public static double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
             throw new RegexMatchFailException();

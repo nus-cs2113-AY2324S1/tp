@@ -8,7 +8,7 @@ public class ExitCommand extends Command {
     private static final String USAGE = "Type `exit` to exit.";
     private static final String HELP = DESCRIPTION + "\n" + USAGE;
 
-    private static final String MESSAGE_EXIT = "bye!";
+    private static final String MESSAGE_EXIT = "Goodbye! Hope to see you soon!";
 
     public static boolean isExit(Command command) {
         return command instanceof ExitCommand;
