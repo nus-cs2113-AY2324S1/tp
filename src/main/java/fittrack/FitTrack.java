@@ -71,6 +71,7 @@ public class FitTrack {
         profile = CommandParser.parseProfile(input);
         userProfile = new UserProfile(name, profile[0], profile[1]);
         ui.printProfileDetails(name, profile);
+        ui.closeScanner();
     }
 
     private void end() {
