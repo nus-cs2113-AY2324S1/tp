@@ -6,13 +6,14 @@ import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Storage {
+    public static final Storage INSTANCE = new Storage();
     private final Path path = Paths.get("data");
 
-    public Storage() {
+    private Storage() {
         if (!Files.exists(path)) {
             try {
                 System.out.println("Directory doesn't exist. Creating directory...");
@@ -23,11 +24,11 @@ public class Storage {
         }
     }
 
-    public void load(FinancialList list, Ui ui) throws FinancialPlannerException {
-        LoadData.load(list, ui);
+    public void load(FinancialList list, Ui ui, String filePath) throws FinancialPlannerException {
+        LoadData.load(list, ui, filePath);
     }
 
-    public void save(FinancialList list) throws FinancialPlannerException {
-        SaveData.save(list);
+    public void save(FinancialList list, String filePath) throws FinancialPlannerException {
+        SaveData.save(list, filePath);
     }
 }

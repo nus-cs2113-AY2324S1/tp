@@ -11,11 +11,8 @@ import seedu.financialplanner.commands.Find;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
-
     private static final String WATCHLIST_COMMAND = "watchlist";
-
     private static final String ADD_ENTRY_COMMAND = "add";
-
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
 
@@ -41,10 +38,9 @@ public class Parser {
     }
 
     private static Command parseAddStock(String restOfInput) {
-        String[] split = restOfInput.trim().split("m/|s/");
+        String[] split = restOfInput.trim().split("s/");
         // TODO: check error here
-        String exchange = split[1].trim();
-        String stockCode = split[2].trim();
-        return new AddStockCommand(exchange, stockCode);
+        String stockCode = split[1].trim();
+        return new AddStockCommand(stockCode);
     }
 }

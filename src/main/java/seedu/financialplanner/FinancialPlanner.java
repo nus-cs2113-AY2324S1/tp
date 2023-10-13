@@ -10,20 +10,27 @@ import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
 
 public class FinancialPlanner {
-    private Ui ui;
-    private WatchList watchList;
-    private FinancialList financialList;
-    private Storage storage;
 
-    public FinancialPlanner() throws FinancialPlannerException {
-        ui = new Ui();
-        financialList = new FinancialList();
-        watchList = new WatchList();
-        storage = new Storage();
-        storage.load(financialList, ui);
+    private static final String FILE_PATH = "data/data.txt";
+    private final Storage storage = Storage.INSTANCE;
+    private final Ui ui = Ui.INSTANCE;
+    private final WatchList watchList = WatchList.INSTANCE;
+    private final FinancialList financialList = FinancialList.INSTANCE;
+
+    private FinancialPlanner() {
+    }
+
+    public static void main(String[] args) {
+        new FinancialPlanner().run();
     }
 
     public void run() {
+        try {
+            storage.load(financialList, ui, FILE_PATH);
+        } catch (FinancialPlannerException e) {
+            ui.showMessage(e.getMessage());
+        }
+
         ui.welcomeMessage();
         String input;
         Command command = null;
@@ -44,17 +51,9 @@ public class FinancialPlanner {
 
     public void save() {
         try {
-            storage.save(financialList);
+            storage.save(financialList, FILE_PATH);
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            new FinancialPlanner().run();
-        } catch (FinancialPlannerException e) {
-            Ui.printCorruptedFileError(e.getMessage());
         }
     }
 }

@@ -14,18 +14,18 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class WatchList {
-    private ArrayList<Stock> stocks;
+    public static final WatchList INSTANCE = new WatchList();
+    private final ArrayList<Stock> stocks;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
-    private final String API_KEY = "rNCNMmSLUR3BAyeKFHwN69QGzE8fmig1";
-
-    public WatchList() {
+    private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
+    private WatchList() {
         stocks = new ArrayList<>();
         try {
-            Stock apple = new Stock("AAPL", "NASDAQ");
+            Stock apple = new Stock("AAPL");
             stocks.add(apple);
-            Stock meta = new Stock("META", "NASDAQ");
+            Stock meta = new Stock("META");
             stocks.add(meta);
-            Stock google = new Stock("GOOGL", "NASDAQ");
+            Stock google = new Stock("GOOGL");
             stocks.add(google);
         } catch (FinancialPlannerException e) {
             System.out.println(e.getMessage());
@@ -38,7 +38,7 @@ public class WatchList {
         for (Stock stock : stocks) {
             queryStocks.append(stock.toString());
         }
-        String requestURI = String.format("%s%s?apikey=%s", API_ENDPOINT, queryStocks,API_KEY);
+        String requestURI = String.format("%s%s?apikey=%s", API_ENDPOINT, queryStocks, API_KEY);
         HttpRequest request = HttpRequest.newBuilder(URI.create(requestURI))
                 .header("accept", "application/json")
                 .GET()
@@ -59,18 +59,18 @@ public class WatchList {
         return (JSONArray) obj;
     }
 
-    public String addStock(String market, String stockCode) throws FinancialPlannerException {
+    public String addStock(String stockCode) throws FinancialPlannerException {
         Stock newStock = null;
-        newStock = new Stock(stockCode, market);
+        newStock = new Stock(stockCode);
         stocks.add(newStock);
         return newStock.getStockName();
     }
 
-    public int size(){
+    public int size() {
         return stocks.size();
     }
 
-    public Stock get(int index){
+    public Stock get(int index) {
         return stocks.get(index);
     }
 }

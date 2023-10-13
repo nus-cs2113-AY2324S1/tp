@@ -11,7 +11,7 @@ class WatchListTest {
 
     @Test
     void fetchFMPStockPrices() {
-        WatchList wl = new WatchList();
+        WatchList wl = WatchList.INSTANCE;
         JSONArray obj = wl.fetchFMPStockPrices();
         JSONObject apple = (JSONObject) obj.get(0);
         assertNotNull(apple.get("price"));
@@ -23,9 +23,9 @@ class WatchListTest {
 
     @Test
     void addStock() throws Exception {
-        WatchList wl = new WatchList();
+        WatchList wl = WatchList.INSTANCE;
         String market = "NYSE";
         String stockCode = "GME";
-        assertEquals("GameStop Corp.", wl.addStock(market, stockCode));
+        assertEquals("Gamestop Corporation - Class A", wl.addStock(stockCode));
     }
 }
