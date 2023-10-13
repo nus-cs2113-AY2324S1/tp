@@ -2,7 +2,6 @@ package seedu.financialplanner.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.utils.Ui;
 
