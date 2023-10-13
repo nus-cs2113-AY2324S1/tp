@@ -1,4 +1,9 @@
 package seedu.duke.flashcard.command;
 
-public class FlashcardCommand {
+import seedu.duke.flashcard.FlashcardList;
+
+import java.util.Scanner;
+
+public abstract class FlashcardCommand {
+    public abstract void execute(Scanner scanner, FlashcardList flashcardList);
 }
