@@ -1,4 +1,5 @@
-/**Implementation of the Expense class
+/**
+ * Implementation of the Expense class
  * Basic expense class inherits from FinancialRecord and does not include any additional attributes
  * Attribute "amount" contains a negative double which will make it easier to tally up the net total at the end
  */
