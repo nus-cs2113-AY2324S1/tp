@@ -1,0 +1,2 @@
+I | 123.12 | allowance | 0
+E | 100.0 | daily necessities | 30
