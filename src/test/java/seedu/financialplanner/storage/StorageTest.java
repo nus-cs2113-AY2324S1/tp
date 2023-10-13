@@ -31,7 +31,7 @@ public class StorageTest {
     }
 
     @Test
-    public void loadInvalidData_UserInputNo() {
+    public void loadInvalidData_userInputNo() {
         Storage storage = new Storage();
         FinancialList test = new FinancialList();
         ByteArrayInputStream in = new ByteArrayInputStream("n".getBytes());

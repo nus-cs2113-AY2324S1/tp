@@ -10,11 +10,11 @@ import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
 
 public class FinancialPlanner {
+    private static final String FILE_PATH = "data/data.txt";
     private Ui ui;
     private WatchList watchList;
     private FinancialList financialList;
     private Storage storage;
-    private static final String FILE_PATH = "data/data.txt";
 
     public FinancialPlanner() throws FinancialPlannerException {
         ui = new Ui();
