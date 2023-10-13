@@ -2,7 +2,6 @@ package seedu.duke.flashcard;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Flashcard {
     private String frontText;
