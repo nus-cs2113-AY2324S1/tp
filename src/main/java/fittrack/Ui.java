@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner in;
+    private final String LINE = "____________________________________________________________";
 
     /**
      * Constructs UI of FitTrack.
@@ -22,7 +23,7 @@ public class Ui {
      *
      * @return user input as a line of string
      */
-    private String scanNextLine() {
+    public String scanNextLine() {
         return in.nextLine();
     }
 
@@ -35,16 +36,39 @@ public class Ui {
         return scanNextLine();
     }
 
+    public void closeScanner() {
+        in.close();
+    }
+
     public void printBlankLine() {
         System.out.println();
     }
 
+    public void printLine() {
+        System.out.println(LINE);
+    }
+
     public void printWelcome() {
-        System.out.println("Welcome!");
+        System.out.println("Welcome to FitTrack!");
     }
 
     public void printCommandResult(CommandResult commandResult) {
         System.out.println(commandResult.getFeedback());
         printBlankLine();
+    }
+
+    /**
+     * Prints greetings to user and the height and weight that
+     * the user has entered.
+     *
+     * @param name name of the user
+     * @param profile array containing the height and weight
+     */
+    public void printProfileDetails(String name, double[] profile) {
+        printLine();
+        System.out.println("Hi " + name + "! Nice to meet you!");
+        System.out.println("Height: " + profile[0]);
+        System.out.println("Weight: " + profile[1]);
+        printLine();
     }
 }
