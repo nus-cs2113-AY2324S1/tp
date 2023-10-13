@@ -38,10 +38,9 @@ public class Parser {
     }
 
     private static Command parseAddStock(String restOfInput) {
-        String[] split = restOfInput.trim().split("m/|s/");
+        String[] split = restOfInput.trim().split("s/");
         // TODO: check error here
-        String exchange = split[1].trim();
-        String stockCode = split[2].trim();
+        String stockCode = split[1].trim();
         return new AddStockCommand(stockCode);
     }
 }
