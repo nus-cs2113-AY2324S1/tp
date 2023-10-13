@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FinancialListTest {
-    FinancialList testList = new FinancialList();
-    DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+    private FinancialList testList = new FinancialList();
+    private DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
     @Test
     void testAddIncomeAndExpense() {
