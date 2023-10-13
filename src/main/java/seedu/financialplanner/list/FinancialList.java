@@ -58,7 +58,7 @@ public class FinancialList {
     public String getList() {
         String output = "";
         for (Cashflow entry : list) {
-            output += entry.toString() + "\n";
+            output += entry.formatString() + "\n";
         }
         return output;
     }
