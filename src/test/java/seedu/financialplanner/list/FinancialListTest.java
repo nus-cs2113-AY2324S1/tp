@@ -12,7 +12,7 @@ class FinancialListTest {
 
     @Test
     void testAddIncomeAndExpense() {
-
+        Cashflow.balance = 0;
         testList.addIncome(15, "work", 30);
         Cashflow testIncome = testList.list.get(0);
         double roundedValue = testList.round(testIncome.value, 2);
@@ -52,6 +52,5 @@ class FinancialListTest {
         assertEquals("Apple Music", testExpense.type);
         assertEquals(30, testExpense.recur);
         assertEquals("1.00", decimalFormat.format(roundedBalance));
-        testList.list.clear();
     }
 }

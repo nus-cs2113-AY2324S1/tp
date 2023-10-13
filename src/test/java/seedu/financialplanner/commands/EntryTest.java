@@ -2,6 +2,7 @@ package seedu.financialplanner.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.financialplanner.investments.WatchList;
+import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.utils.Ui;
 
@@ -25,6 +26,5 @@ class EntryTest {
         assertEquals(15, testEntry.value);
         assertEquals("double mcspicy", testEntry.type);
         assertEquals(0, testEntry.recur);
-        financialList.list.clear();
     }
 }
