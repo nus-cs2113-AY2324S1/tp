@@ -22,7 +22,15 @@ it's your personal guide to achieving your health and fitness goals.
 
 * [Viewing help : `help`](#View-Help-Guide-help)
 * [Exiting the application : `exit`](#Exiting-the-application-exit)
-* [Viewing list of workout : `listWorkout`](#viewing-list-of-all-tasks-list)
+* [Viewing list of workout : `listWorkout`](#viewing-list-of-all-tasks-listworkout)
+* [Adding a Meal : `addmeal`](#adding-a-meal-addmeal)
+* [Checking daily calorie surplus limit : `checkcsl`](#check-daily-calorie-surplus-limit-checkcsl)
+* [Checking Your Height : `checkHeight`](#checking-your-height-checkheight)
+* [Checking Your Weight : `checkWeight`](#checking-your-weight-checkheight)
+* [Delete a Meal : `deletemeal`](#delete-a-meal-deletemeal)
+* [Delete a Workout : `deletework`](#delete-a-workout-deletework)
+* [Set Daily Calorie Surplus Limit : `setcsl`](#set-daily-calorie-surplus-limit-setcsl)
+
 
 ### View Help Guide: `help`
 Shows the list of commands with the command format and short explanation.
@@ -55,7 +63,7 @@ Saving...
 Goodbye! Hope to see you again soon!
 ```
 
-### Viewing List of All Tasks: `listWorkout`
+### Viewing List of All Workouts: `listWorkout`
 Lists all the workouts.
 
 Format: `listWorkout`
@@ -74,7 +82,7 @@ Here are your workouts:
 ```
 
 ### Editing Your Profile: `editProfile`
-Allows user to edit their profile details
+Allows user to edit their profile details.
 
 Format: `editProfile`
 
@@ -91,27 +99,124 @@ Weight: 70 kg
 ```
 
 ### Adding a Meal: `addmeal`
-Allows user to edit their profile details
+Allows user to add meals they have consumed.
 
-Format: `editProfile`
+Format: `addmeal <description>`
 
 Example of usage:
 ```
-editProfile
+addmeal pasta
 ```
 Expected output:
 ```
-Done! I have edited your profile!
-Name: John
-Height: 180 cm
-Weight: 70 kg
+Done! I have added a meal:
+ 1. pasta
+```
+
+### Adding a Workout: `addworkout`
+Allows user to add workouts they have done.
+
+Format: `addworkout <description>`
+
+Example of usage:
+```
+addmeal run
+```
+Expected output:
+```
+Done! I have added a workout:
+ 1. run
+```
+
+### Check Daily Calorie Surplus Limit: `checkcsl`
+Allows user to check their daily calorie surplus limit.
+
+Format: `checkcsl`
+
+Example of usage:
+```
+checkcsl
+```
+Expected output:
+```
+Daily Calorie Surplus Limit: 200 cal
+```
+
+### Checking Your Height: `checkHeight`
+Allows user to check their current height in cm.
+
+Format: `checkHeight`
+
+Example of usage:
+```
+checkHeight
+```
+Expected output:
+```
+Your current height is 180 cm
+```
+
+### Checking Your Weight: `checkWeight`
+Allows user to check their current weight in kg.
+
+Format: `checkWeight`
+
+Example of usage:
+```
+checkWeight
+```
+Expected output:
+```
+Your current weight is 70 kg
+```
+
+### Delete a Meal: `deletemeal`
+Allows user to delete a meal they have added.
+
+Format: `deletemeal <index of meal>`
+
+Example of usage:
+```
+deletemeal 1
+```
+Expected output:
+```
+Sure! I've removed pasta from the list.
+```
+
+### Delete a Workout: `deletework`
+Allows user to delete a workout they have added.
+
+Format: `deletework <index of workout>`
+
+Example of usage:
+```
+deletemeal 1
+```
+Expected output:
+```
+Sure! I've removed run from the list.
+```
+
+### Set Daily Calorie Surplus Limit: `setcsl`
+Allows user to set their daily calorie surplus limit.
+
+Format: `setcsl`
+
+Example of usage:
+```
+setcsl
+```
+Expected output:
+```
+Daily Calorie Surplus Limit set to 200 cal
 ```
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I edit my profile? 
 
-**A**: {your answer here}
+**A**: Simply type editProfile and hit enter. The App will prompt you to re-enter your details.
 
 ## Command Summary
 
@@ -126,4 +231,4 @@ Weight: 70 kg
 * Exit Application `bye`
 * Help List `help`
 * List all workouts `listWorkout`
-* Set Daily Calorie Surplus Limit `setdcl`
+* Set Daily Calorie Surplus Limit `setcsl`
