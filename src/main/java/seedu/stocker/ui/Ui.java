@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.commands.CommandResult;
 
-import static seedu.stocker.common.Messages.MESSAGE_LOGIN_WELCOME;
-import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
-import static seedu.stocker.common.Messages.MESSAGE_WELCOME;
+import static seedu.stocker.common.Messages.*;
 
 public class Ui {
 
@@ -102,6 +100,15 @@ public class Ui {
     public void showLoginMessage(){
         showToUser(DIVIDER,MESSAGE_LOGIN_WELCOME,DIVIDER);
     }
+
+    public void showUsernameMessage(){ showToUser(MESSAGE_USERNAME_INPUT);}
+    public void showPasswordMessage(){ showToUser(MESSAGE_PASSWORD_INPUT);}
+    public void showSuccessfulRegistrationMessage(){showToUser(MESSAGE_SUCCESSFUL_REGISTRATION);}
+    public void showSuccessfulLoginMessage(){showToUser(MESSAGE_SUCCESSFUL_LOGIN);}
+    public void showInvalidChoiceMessage(){showToUser(MESSAGE_INVALID_CHOICE);}
+    public void showUserAlreadyExistMessage(){showToUser(MESSAGE_USER_ALREADY_EXIST);}
+    public void showEnterChoiceAgainMessage(){showToUser(MESSAGE_LOGIN_WELCOME);}
+    public void showInvalidUsernameOrPasswordMessage(){showToUser(MESSAGE_INVALID_USERNAME_OR_PASSWORD);}
 
     public void showWelcomeMessage() {
         showToUser(MESSAGE_WELCOME, DIVIDER, DIVIDER);
