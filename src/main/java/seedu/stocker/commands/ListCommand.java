@@ -1,7 +1,6 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.drugs.Drug;
-import seedu.stocker.drugs.Inventory;
 import java.util.List;
 
 /**
@@ -13,7 +12,8 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all drugs in the inventory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all drug information that is being "
+            + "tracked by the system. \n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all drugs in the inventory.";
