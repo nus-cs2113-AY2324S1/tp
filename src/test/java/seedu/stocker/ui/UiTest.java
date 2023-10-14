@@ -17,7 +17,7 @@ class UiTest {
         System.setOut(new PrintStream(outContent));
 
         Ui toTest = new Ui();
-        toTest.printversion1Help();
+        toTest.printVersion1Help();
 
         String expectedOutput = "Here are a list of possible commands" + System.getProperty("line.separator")
                 + "1. add - Add a drug into the system" + System.getProperty("line.separator")

@@ -42,7 +42,7 @@ public class Ui {
         this.out = out;
     }
 
-    public void printversion1Help(){
+    public void printVersion1Help(){
         System.out.println("Here are a list of possible commands");
         System.out.println("1. add - Add a drug into the system");
         System.out.println("2. delete - Remove a drug from the system");
@@ -87,9 +87,8 @@ public class Ui {
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
-        String fullInputLine = in.nextLine();
 
-        return fullInputLine;
+        return in.nextLine();
     }
     
     /** Shows message(s) to the user */
