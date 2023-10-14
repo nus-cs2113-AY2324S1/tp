@@ -54,7 +54,8 @@ public class Stocker {
         this.inventory = new Inventory();
         ui.showLoginMessage();
         boolean checker = startLogin();
-        if(checker == true){
+        assert checker == true;
+        if(checker){
             ui.showWelcomeMessage();
         }
     }
