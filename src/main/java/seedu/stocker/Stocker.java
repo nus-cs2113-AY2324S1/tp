@@ -52,7 +52,6 @@ public class Stocker {
     private void start() throws IOException {
         this.ui = new Ui();
         this.inventory = new Inventory();
-        ui.showLoginMessage();
         boolean checker = startLogin();
         assert checker == true;
         if(checker){
