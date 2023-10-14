@@ -1,6 +1,7 @@
 package seedu.stocker.drugs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory {
 
@@ -12,5 +13,9 @@ public class Inventory {
 
     public void addDrug(Drug drug) {
         this.allDrugs.add(drug);
+    }
+
+    public List<Drug> getAllDrugs() {
+        return this.allDrugs;
     }
 }
