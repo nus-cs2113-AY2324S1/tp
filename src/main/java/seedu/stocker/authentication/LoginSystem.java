@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Represents a login system used for authentication of users.
+ * User information is saved within a hashtable and uploaded
+ * into txt file for future reference.
+ */
 public class LoginSystem {
     public boolean loginStatus;
     private final Scanner in;
@@ -31,6 +36,12 @@ public class LoginSystem {
         }
     }
 
+    /**
+     * Returns user choice of whether they wish to register a new user
+     * or if they would want to login using an existing user.
+     *
+     * @return choice of registering or logging into the system
+     */
     public String authenticateUserChoice() {
 
         while (in.hasNextLine()) {
@@ -49,6 +60,13 @@ public class LoginSystem {
         return "error";
     }
 
+    /**
+     * Creates a new user with input username and password from user.
+     * Username and password are saved into a txt file for future
+     * reference.
+     *
+     * @throws IOException if inappropriate output is entered.
+     */
     public void newUserCreator() throws IOException {
 
 
@@ -79,6 +97,12 @@ public class LoginSystem {
 
     }
 
+    /**
+     * Login existing user by asking for username and password input
+     * from user.
+     *
+     * @throws IOException if inappropriate input is entered.
+     */
     public void loginExistingUser() throws IOException {
 
 
@@ -123,6 +147,11 @@ public class LoginSystem {
 
     }
 
+    /**
+     * Writes new user creation into a txt file to save for future reference
+     *
+     * @throws IOException
+     */
     public void writeNewUserToFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("./users.txt", true));
 
@@ -140,6 +169,13 @@ public class LoginSystem {
 
     }
 
+    /**
+     * Loads existing users from txt file into hash table
+     * for login system to use for authentication when
+     * user tries to login.
+     *
+     * @throws IOException if fail to read from txt file
+     */
     public void loadExistingUsers() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("./users.txt"));
         String line;
@@ -153,7 +189,14 @@ public class LoginSystem {
         }
     }
 
-    public int run() throws IOException {
+    /**
+     * Runs login system by loading user information into hash table
+     * and get input for user to check for authentication.
+     *
+     * @throws IOException if unable to read from txt file to
+     *         load users
+     */
+    public void run() throws IOException {
         loadExistingUsers();
         String choice = authenticateUserChoice();
         if (choice.equals("1")) {
@@ -162,8 +205,7 @@ public class LoginSystem {
         } else if (choice.equals("2")) {
             loginExistingUser();
         }
-        return 0;
-    }
 
+    }
 
 }
