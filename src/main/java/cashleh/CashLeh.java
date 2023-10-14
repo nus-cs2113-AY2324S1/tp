@@ -32,8 +32,12 @@ public class CashLeh {
         Command command = null;
         while (!(command instanceof Exit)) {
             inputString = input.getInputString();
-            command = parser.parse(inputString);
-            command.execute();
+            try {
+                command = parser.parse(inputString);
+                command.execute();
+            } catch (CashLehException e) {
+                ui.printText(e.getMessage());
+            }
         }
     }
 

@@ -12,7 +12,7 @@ public class Parser {
     private static final String VIEW_EXPENSES = "viewExpenses";
     private static final String EXIT = "exit";
 
-    public Command parse(String input) {
+    public Command parse(String input) throws CashLehException {
         String command = input.contains(" ") ? input.split(" ")[0] : input;
         switch (command) {
 //        case ADD_INCOME:
@@ -30,7 +30,7 @@ public class Parser {
         case EXIT:
             return new Exit();
         default:
-            return null;
+            throw new CashLehException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
     }
 }
