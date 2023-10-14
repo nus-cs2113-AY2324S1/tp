@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.commands.CommandResult;
 
-import static seedu.stocker.common.Messages.MESSAGE_WELCOME;
+import static seedu.stocker.common.Messages.MESSAGE_LOGIN_WELCOME;
 import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
+import static seedu.stocker.common.Messages.MESSAGE_WELCOME;
 
 public class Ui {
 
@@ -41,7 +42,7 @@ public class Ui {
         this.out = out;
     }
 
-    public void printversion1Help(){
+    public void printVersion1Help(){
         System.out.println("Here are a list of possible commands");
         System.out.println("1. add - Add a drug into the system");
         System.out.println("2. delete - Remove a drug from the system");
@@ -86,9 +87,9 @@ public class Ui {
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
-        String fullInputLine = in.nextLine();
+        String fullUserInput = in.nextLine();
 
-        return fullInputLine;
+        return fullUserInput;
     }
     
     /** Shows message(s) to the user */
@@ -96,6 +97,10 @@ public class Ui {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
+    }
+
+    public void showLoginMessage(){
+        showToUser(DIVIDER,MESSAGE_LOGIN_WELCOME,DIVIDER);
     }
 
     public void showWelcomeMessage() {
