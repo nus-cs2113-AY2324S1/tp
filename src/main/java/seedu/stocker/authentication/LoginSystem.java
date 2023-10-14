@@ -1,5 +1,7 @@
 package seedu.stocker.authentication;
 
+import seedu.stocker.ui.Ui;
+
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -13,6 +15,7 @@ import java.util.Scanner;
 public class LoginSystem {
     public boolean loginStatus;
     private final Scanner in;
+    private Ui interactor;
     private final HashMap<String, String> users;
 
 
@@ -20,6 +23,7 @@ public class LoginSystem {
         users = new HashMap<>();
         loginStatus = false;
         this.in = new Scanner(System.in);
+        interactor = new Ui();
 
         File holder = new File("./users.txt");
         if (!holder.exists()) {
@@ -38,7 +42,7 @@ public class LoginSystem {
             } else if (choice.equals("2")) {
                 return "2";
             } else {
-                System.out.println("Invalid Input, enter 1 or 2 only!");
+                interactor.showInvalidChoiceMessage();
                 return authenticateUserChoice();
             }
         }
@@ -48,17 +52,16 @@ public class LoginSystem {
     public void newUserCreator() throws IOException {
 
 
-        System.out.println("Enter your username:");
+        interactor.showUsernameMessage();
         String username = in.nextLine();
 
-        System.out.println("Enter your password:");
+        interactor.showPasswordMessage();
         String password = in.nextLine();
 
         if (users.containsKey(username)) {
-            System.out.println("User already exists. Please make user with different name or choose 2");
+            interactor.showUserAlreadyExistMessage();
             System.out.println();
-            System.out.println("Key in the respective number 1 or 2 based on your needs \n"
-                    + "1.Register user \n" + "2.Login ");
+            interactor.showEnterChoiceAgainMessage();
 
             String reselect = authenticateUserChoice();
             if (reselect.equals("1")) {
@@ -69,7 +72,7 @@ public class LoginSystem {
             }
         } else {
             users.put(username, password);
-            System.out.println("Registration successful.");
+            interactor.showSuccessfulRegistrationMessage();
             loginStatus = true;
         }
         writeNewUserToFile();
@@ -79,16 +82,16 @@ public class LoginSystem {
     public void loginExistingUser() throws IOException {
 
 
-        System.out.println("Enter your username:");
+        interactor.showUsernameMessage();
         String usernameInput = in.nextLine();
-        System.out.println("Enter your password:");
+
+        interactor.showPasswordMessage();
         String passwordInput = in.nextLine();
 
         if (!users.containsKey(usernameInput)) {
-            System.out.println("Invalid username or password. Please try again.");
+            interactor.showInvalidUsernameOrPasswordMessage();
             System.out.println();
-            System.out.println("Key in the respective number 1 or 2 based on your needs \n"
-                    + "1.Register user \n" + "2.Login ");
+            interactor.showEnterChoiceAgainMessage();
 
             String reselect = authenticateUserChoice();
             if (reselect.equals("1")) {
@@ -100,13 +103,12 @@ public class LoginSystem {
 
         } else {
             if (users.get(usernameInput).equals(passwordInput)) {
-                System.out.println("Login successful.");
+                interactor.showSuccessfulLoginMessage();
                 loginStatus = true;
             } else {
-                System.out.println("Invalid username or password. Please try again");
+                interactor.showInvalidUsernameOrPasswordMessage();
                 System.out.println();
-                System.out.println("Key in the respective number 1 or 2 based on your needs \n"
-                        + "1.Register user \n" + "2.Login ");
+                interactor.showEnterChoiceAgainMessage();
 
                 String reselect = authenticateUserChoice();
                 if (reselect.equals("1")) {
