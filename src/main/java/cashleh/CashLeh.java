@@ -1,5 +1,6 @@
 package cashleh;
 
+import Exceptions.CashLehException;
 import cashleh.commands.Command;
 import cashleh.commands.Exit;
 
@@ -7,6 +8,8 @@ public class CashLeh {
     private final Ui ui = new Ui();
     private final Input input = new Input();
     private final Parser parser = new Parser();
+    private final ExpenseStatement expenseStatement = new ExpenseStatement();
+    private final IncomeStatement incomeStatement = new IncomeStatement();
 
     /**
      * Main entry-point for the application.
@@ -34,9 +37,11 @@ public class CashLeh {
             inputString = input.getInputString();
             try {
                 command = parser.parse(inputString);
-                command.execute();
+                command.execute(expenseStatement, incomeStatement);
             } catch (CashLehException e) {
-                ui.printText(e.getMessage());
+                ui.printMultipleText(new String[] {
+                        e.getMessage()
+                });
             }
         }
     }
