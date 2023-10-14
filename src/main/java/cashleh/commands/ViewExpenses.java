@@ -1,17 +1,13 @@
 package cashleh.commands;
 
 import cashleh.Expense;
+import cashleh.ExpenseStatement;
+import cashleh.IncomeStatement;
 
 public class ViewExpenses extends Command {
-
-    public static final String COMMAND = "viewExpenses";
-    public ViewExpenses() {
-    }
     @Override
-    public void execute() {
-        System.out.println("The current sum of all your expenses amounts to: "
-                + Expense.getTotalExpense() + System.lineSeparator() +
-                "Here are the expenses in your list:" + getExpenseStatement());
+    public void execute(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
+        expenseStatement.getExpenses();
     }
 }
 
