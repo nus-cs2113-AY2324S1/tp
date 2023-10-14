@@ -1,10 +1,7 @@
 package seedu.duke;
 
-<<<<<<< Updated upstream
-import commands.*;
-=======
 import command.*;
->>>>>>> Stashed changes
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
