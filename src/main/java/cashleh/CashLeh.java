@@ -3,11 +3,12 @@ package cashleh;
 public class CashLeh {
     private final Ui ui = new Ui();
     private final Input input = new Input();
+
     /**
      * Main entry-point for the application.
      */
     public void run() {
-        
+
         String logo = "    ______           __    __         __  ___  \n"
                     + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\ \n"
                     + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/ \n"
@@ -30,7 +31,7 @@ public class CashLeh {
                 ui.printText("Bye. Hope to see you again soon!");
             } else {
                 ui.printText("Sorry, I don't understand what you mean.");
-            } 
+            }
         } while (!inputString.equals("bye"));
     }
 
