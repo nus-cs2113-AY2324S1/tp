@@ -87,8 +87,9 @@ public class Ui {
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
+        String fullUserInput = in.nextLine();
 
-        return in.nextLine();
+        return fullUserInput;
     }
     
     /** Shows message(s) to the user */
