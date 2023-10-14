@@ -1,8 +1,12 @@
 package cashleh;
 
+import cashleh.commands.Command;
+import cashleh.commands.Exit;
+
 public class CashLeh {
     private final Ui ui = new Ui();
     private final Input input = new Input();
+    private final Parser parser = new Parser();
 
     /**
      * Main entry-point for the application.
@@ -25,14 +29,12 @@ public class CashLeh {
         String inputString = input.getInputString();
         ui.printText("Hello " + inputString);
 
-        do {
+        Command command = null;
+        while (!(command instanceof Exit)) {
             inputString = input.getInputString();
-            if (inputString.equals("bye")) {
-                ui.printText("Bye. Hope to see you again soon!");
-            } else {
-                ui.printText("Sorry, I don't understand what you mean.");
-            }
-        } while (!inputString.equals("bye"));
+            command = parser.parse(inputString);
+            command.execute();
+        }
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package cashleh;
 
 import cashleh.commands.Command;
+import cashleh.commands.Exit;
 
 public class Parser {
     private static final String ADD_INCOME = "addIncome";
@@ -14,23 +15,22 @@ public class Parser {
     public Command parse(String input) {
         String command = input.contains(" ") ? input.split(" ")[0] : input;
         switch (command) {
-        case ADD_INCOME:
-            break;
-        case DELETE_INCOME:
-            break;
-        case VIEW_INCOMES:
-            break;
-        case ADD_EXPENSE:
-            break;
-        case DELETE_EXPENSE:
-            break;
-        case VIEW_EXPENSES:
-            break;
+//        case ADD_INCOME:
+//            break;
+//        case DELETE_INCOME:
+//            break;
+//        case VIEW_INCOMES:
+//            break;
+//        case ADD_EXPENSE:
+//            break;
+//        case DELETE_EXPENSE:
+//            break;
+//        case VIEW_EXPENSES:
+//            break;
         case EXIT:
-            break;
+            return new Exit();
         default:
-
+            return null;
         }
-
     }
 }
