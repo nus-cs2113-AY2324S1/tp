@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.commands.CommandResult;
 
-import static seedu.stocker.common.Messages.*;
+import static seedu.stocker.common.Messages.MESSAGE_LOGIN_WELCOME;
+import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
+import static seedu.stocker.common.Messages.MESSAGE_WELCOME;
 
 public class Ui {
 
