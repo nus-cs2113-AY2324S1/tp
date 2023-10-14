@@ -85,7 +85,7 @@ public class LoginSystem {
         interactor.showUsernameMessage();
         String usernameInput = in.nextLine();
 
-       interactor.showPasswordMessage();
+        interactor.showPasswordMessage();
         String passwordInput = in.nextLine();
 
         if (!users.containsKey(usernameInput)) {
