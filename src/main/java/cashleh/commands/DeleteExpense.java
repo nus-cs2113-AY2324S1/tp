@@ -1,19 +1,15 @@
 package cashleh.commands;
-
-import cashleh.CashLehException;
+import cashleh.exception.CashLehException;
 
 public class DeleteExpense extends Command {
     public static final String COMMAND = "deleteExpense";
 
-    public DeleteExpense(int expenseIndexToDelete) throws CashLehException {
+    public DeleteExpense(int expenseIndexToDelete) {
         super(expenseIndexToDelete);
-        if (expenseIndexToDelete > expenseStatement.getNumberOfExpenses()) {
-            throw new CashLehException("Invalid input format. Please provide a valid task index to delete.");
-        }
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CashLehException {
         String expenseBeingDeleted = getExpense().toString();
         expenseStatement.deleteExpense(getIndex());
         System.out.println("The following income was deleted:\n" + expenseBeingDeleted);

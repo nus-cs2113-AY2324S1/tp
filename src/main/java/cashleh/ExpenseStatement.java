@@ -23,7 +23,6 @@ public class ExpenseStatement {
     public int getNumberOfExpenses() {
         return expenseStatement.size();
     }
-
     @Override
     public String toString() {
         return expenseStatement.stream().map(Expense::toString).collect(Collectors.joining("\n"));
