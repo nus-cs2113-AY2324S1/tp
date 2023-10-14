@@ -3,16 +3,12 @@ package seedu.stocker.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.stocker.commands.Command;
-import seedu.stocker.commands.AddCommand;
-import seedu.stocker.commands.ExitCommand;
-import seedu.stocker.commands.HelpCommand;
-import seedu.stocker.commands.IncorrectCommand;
+import seedu.stocker.commands.*;
+import seedu.stocker.drugs.Inventory;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class Parser {
-
     /**
      * Parses user input into command for execution.
      *
@@ -30,16 +26,19 @@ public class Parser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return prepareAddCommand(arguments);
+            case AddCommand.COMMAND_WORD:
+                return prepareAddCommand(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-        default:
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
+            default:
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
     }
 
