@@ -1,4 +1,4 @@
-package Parser;
+package seedu.duke.parser;
 
 /**
  * Parse everything received from the users on terminal
