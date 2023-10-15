@@ -1,16 +1,14 @@
 package seedu.financialplanner.visualisations;
 
-import com.sun.source.tree.Tree;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.Expense;
 import seedu.financialplanner.list.FinancialList;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Categorizer {
-    public static Map<String, Double> SortExpenses(FinancialList financialList) {
+    public static Map<String, Double> sortExpenses(FinancialList financialList) {
         Map<String, Double> expensesByCat = new HashMap<>();
         for (Cashflow e: financialList.list) {
             if (e instanceof Expense) {

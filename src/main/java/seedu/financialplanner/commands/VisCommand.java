@@ -18,6 +18,6 @@ public class VisCommand extends Command {
     }
     @Override
     public void execute(Ui ui, FinancialList financialList, WatchList watchList) throws FinancialPlannerException {
-        Visualizer.displayChart(chart, Categorizer.SortExpenses(financialList));
+        Visualizer.displayChart(chart, Categorizer.sortExpenses(financialList));
     }
 }
