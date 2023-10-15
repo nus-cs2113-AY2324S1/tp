@@ -2,17 +2,20 @@ package seedu.financialplanner.utils;
 
 
 import seedu.financialplanner.commands.Command;
-import seedu.financialplanner.commands.Entry;
+import seedu.financialplanner.commands.AddCashflowCommand;
+import seedu.financialplanner.commands.DeleteCashflowCommand;
 import seedu.financialplanner.commands.Exit;
 import seedu.financialplanner.commands.WatchListCommand;
 import seedu.financialplanner.commands.Invalid;
 import seedu.financialplanner.commands.AddStockCommand;
 import seedu.financialplanner.commands.Find;
 
+
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
     private static final String WATCHLIST_COMMAND = "watchlist";
     private static final String ADD_ENTRY_COMMAND = "add";
+    private static final String DELETE_ENTRY_COMMAND = "delete";
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
 
