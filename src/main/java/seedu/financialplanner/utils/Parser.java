@@ -8,6 +8,7 @@ import seedu.financialplanner.commands.WatchListCommand;
 import seedu.financialplanner.commands.Invalid;
 import seedu.financialplanner.commands.AddStockCommand;
 import seedu.financialplanner.commands.Find;
+import seedu.financialplanner.commands.BudgetCommand;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
@@ -15,6 +16,7 @@ public class Parser {
     private static final String ADD_ENTRY_COMMAND = "add";
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
+    private static final String SET_BUDGET_COMMAND = "setbudget";
 
     public static Command parse(String input) {
         String[] split = input.split(" ", 2);
@@ -32,6 +34,8 @@ public class Parser {
             return parseAddStock(restOfInput);
         case FIND_COMMAND:
             return new Find(restOfInput);
+        case SET_BUDGET_COMMAND:
+            return new BudgetCommand(restOfInput);
         default:
             return new Invalid();
         }
