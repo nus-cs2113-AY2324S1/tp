@@ -10,7 +10,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new drug to the drug list. "
-            + "Parameters: NAME, EXPIRY DATE, QUANTITY,  \n"
+            + "Parameters: NAME, EXPIRY DATE, QUANTITY,  " + System.lineSeparator()
             + "Example: " + COMMAND_WORD
             + " /n Doliprane /d 12/06/2035 /q 52";
 

@@ -7,18 +7,24 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions. "
+            + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute() {
         return new CommandResult(
-                AddCommand.MESSAGE_USAGE
-                + "\n" + DeleteCommand.MESSAGE_USAGE
-                + "\n" + HelpCommand.MESSAGE_USAGE
-                + "\n" + ListCommand.MESSAGE_USAGE
-                + "\n" + FindCommand.MESSAGE_USAGE
-                + "\n" + ExitCommand.MESSAGE_USAGE
+                System.lineSeparator() + AddCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + DeleteCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + HelpCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + ListCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + FindCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + ExitCommand.MESSAGE_USAGE
         );
     }
 }

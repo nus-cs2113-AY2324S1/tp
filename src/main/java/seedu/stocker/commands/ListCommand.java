@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all drug information that is being "
-            + "tracked by the system. \n"
+            + "tracked by the system. " + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all drugs in the inventory.";
