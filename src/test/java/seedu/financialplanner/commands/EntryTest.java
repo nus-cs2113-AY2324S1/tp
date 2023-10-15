@@ -14,15 +14,15 @@ class EntryTest {
 
     @Test
     void testExecute() {
-        Entry testEntry = new Entry("income a/300 t/work r/30");
+        AddCashflowCommand testEntry = new AddCashflowCommand("income a/300 t/work r/30");
         testEntry.execute(ui, cashflowList, watchList);
-        assertEquals(300, testEntry.value);
+        assertEquals(300, testEntry.amount);
         assertEquals("work", testEntry.type);
         assertEquals(30, testEntry.recur);
 
-        testEntry = new Entry("expense a/15 t/double mcspicy");
+        testEntry = new AddCashflowCommand("expense a/15 t/double mcspicy");
         testEntry.execute(ui, cashflowList, watchList);
-        assertEquals(15, testEntry.value);
+        assertEquals(15, testEntry.amount);
         assertEquals("double mcspicy", testEntry.type);
         assertEquals(0, testEntry.recur);
     }
