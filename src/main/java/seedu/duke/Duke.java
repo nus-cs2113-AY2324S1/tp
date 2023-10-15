@@ -1,37 +1,105 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.CommandResult;
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.parser.Parser;
+//import seedu.addressbook.storage.StorageFile;
+//import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
+//import seedu.addressbook.storage.StorageFile.StorageOperationException;
+import seedu.duke.ui.TextUi;
 
+
+/**
+ * Entry point of the Address Book application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
+
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Version info of the program.
      */
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        greetUser();
-        String name = in.nextLine().strip();
-        System.out.println("Hi, " + name + ", what would you like to do?");
-        String userInput = in.nextLine().strip().toLowerCase();
+    public static final String VERSION = "AddressBook Level 2 - Version 1.0";
 
-        while (!userInput.equals("exit")) {
-            if (userInput.equals("hello")) {
-                System.out.println("Hello to you as well, " + name + "!");
-            } else {
-                System.out.println(name + " said: " + userInput);
-            }
-            userInput = in.nextLine().strip().toLowerCase();
+    private TextUi ui;
+
+    //    private StorageFile storage;
+    public static void main(String... launchArgs) {
+        new Duke().run(launchArgs);
+    }
+
+    /**
+     * Runs the program until termination.
+     */
+    public void run(String[] launchArgs) {
+        start(launchArgs);
+        runCommandLoopUntilExitCommand();
+        exit();
+    }
+
+    /**
+     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
+     *
+     * @param launchArgs arguments supplied by the user at program launch
+     */
+    private void start(String[] launchArgs) {
+        try {
+            this.ui = new TextUi();
+            // this.storage = initializeStorage(launchArgs);
+            ui.showWelcomeMessage(VERSION, "storage.getPath()");
+
+        } catch (Exception e) { // TODO: change to specific storage exceptions later
+            ui.showInitFailedMessage();
+            throw new RuntimeException(e);
         }
-        System.out.println("Goodbye now!");
     }
 
-    public static void greetUser() {
-        String logo = " _____ _ _   _   _ _   _ ____  \n"
-                + "|  ___(_) |_| \\ | | | | / ___| \n"
-                + "| |_  | | __|  \\| | | | \\___ \\ \n"
-                + "|  _| | | |_| |\\  | |_| |___) |\n"
-                + "|_|   |_|\\__|_| \\_|\\___/|____/ \n";
-
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    /**
+     * Prints the Goodbye message and exits.
+     */
+    private void exit() {
+        ui.showGoodbyeMessage();
+        System.exit(0);
     }
+
+    /**
+     * Reads the user command and executes it, until the user issues the exit command.
+     */
+    private void runCommandLoopUntilExitCommand() {
+        Command command;
+        do {
+            String userCommandText = ui.getUserCommand();
+            command = new Parser().parseCommand(userCommandText);
+            CommandResult result = executeCommand(command);
+            ui.showResultToUser(result);
+
+        } while (!ExitCommand.isExit(command));
+    }
+
+    /**
+     * Executes the command and returns the result.
+     *
+     * @param command user command
+     * @return result of the command
+     */
+    private CommandResult executeCommand(Command command) {
+        try {
+            CommandResult result = command.execute();
+            // storage.save(addressBook);
+            return result;
+        } catch (Exception e) {
+            ui.showToUser(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    //    /**
+    //     * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
+    //     * @param launchArgs arguments supplied by the user at program launch
+    //     * @throws InvalidStorageFilePathException if the target file path is incorrect.
+    //     */
+    //    private StorageFile initializeStorage(String[] launchArgs) throws InvalidStorageFilePathException {
+    //        boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
+    //        return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
+    //    }
 }
