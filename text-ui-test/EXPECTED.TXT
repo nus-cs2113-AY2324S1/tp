@@ -21,5 +21,6 @@ Use Watchlist to view it!
 You have successfully added:
 Gamestop Corporation - Class A
 Use Watchlist to view it!
+A monthly budget of 5000.00 has been set.
 Unknown command. Please try again.
 Exiting Financial Planner. Goodbye.
