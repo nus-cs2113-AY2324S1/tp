@@ -14,6 +14,10 @@ public class Parser {
             return "add_income";
         } else if (commandLowerCase.equals("list income")) {
             return "list_income";
+        } else if (commandLowerCase.startsWith("add expense")) {
+            return "add_expense";
+        } else if (commandLowerCase.equals(("list expense"))) {
+            return "list_expense";
         }
         return "invalid";
     }
