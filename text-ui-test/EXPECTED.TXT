@@ -1,20 +1,50 @@
 Directory doesn't exist. Creating directory...
 File not found. Creating new file...
 Welcome to your Financial Planner. Type something to get started.
-Added income of value: 5000.00 to the list.
-type: work
-recurring every: 30 days
-balance: 5000.00
-Added income of value: 123.12 to the list.
-type: allowance
-balance: 5123.12
-Added expense of value: 100.00 to the list.
-type: daily necessities
-recurring every: 30 days
-balance: 5023.12
-Added expense of value: 123.21 to the list.
-type: books
-balance: 4899.91
+You have added an Income
+   Type: work
+   Amount: 5000.00
+   Recurring every: 30 days
+to the Financial Planner.
+Balance: 5000.00
+You have added an Income
+   Type: allowance
+   Amount: 123.12
+to the Financial Planner.
+Balance: 5123.12
+You have added an Expense
+   Type: daily necessities
+   Amount: 100.00
+   Recurring every: 30 days
+to the Financial Planner.
+Balance: 5023.12
+You have added an Expense
+   Type: books
+   Amount: 123.21
+to the Financial Planner.
+Balance: 4899.91
+You have removed an Income
+   Type: allowance
+   Amount: 123.12
+from the Financial Planner.
+Balance: 4776.79
+You have removed an Income
+   Type: work
+   Amount: 5000.00
+   Recurring every: 30 days
+from the Financial Planner.
+Balance: -223.21
+You have removed an Expense
+   Type: books
+   Amount: 123.21
+from the Financial Planner.
+Balance: -100.00
+You have removed an Expense
+   Type: daily necessities
+   Amount: 100.00
+   Recurring every: 30 days
+from the Financial Planner.
+Balance: 0.00
 You have successfully added:
 Microsoft Corporation
 Use Watchlist to view it!
