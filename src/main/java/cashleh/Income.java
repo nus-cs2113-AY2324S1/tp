@@ -3,8 +3,8 @@ package cashleh;
 import java.time.LocalDate;
 
 public class Income {
-    protected double amount;
     protected static double totalIncome = 0; // sum of all incomes
+    protected double amount;
     protected String description;
     protected String currency; // SGD by default
     protected LocalDate date;

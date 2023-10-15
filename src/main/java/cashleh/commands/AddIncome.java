@@ -4,8 +4,7 @@ import cashleh.CashLehException;
 import cashleh.Income;
 
 import java.time.LocalDate;
-import java.util.logging.*;
-
+import java.util.logging.Level;
 public class AddIncome extends Command {
     public static final String COMMAND = "addIncome";
     private final Income incomeToAdd;

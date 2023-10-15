@@ -5,7 +5,7 @@ import cashleh.IncomeStatement;
 import cashleh.Expense;
 import cashleh.ExpenseStatement;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
 
 public class Command {
     protected static Logger logger = Logger.getLogger("CommandLogger");
