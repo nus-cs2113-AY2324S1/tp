@@ -56,15 +56,16 @@ public class Ui {
 
     }
     public void printAddedCashflow(Cashflow entry) {
-        System.out.println("You have added:");
+        System.out.print("You have added an ");
         System.out.println(entry);
         System.out.println("to the Financial Planner.");
         System.out.println("Balance: " + entry.formatBalance());
     }
 
     public void printDeletedCashflow(Cashflow entry) {
-        System.out.println("You have removed:");
+        System.out.print("You have removed an ");
         System.out.println(entry);
         System.out.println("from the Financial Planner.");
+        System.out.println("Balance: " + entry.formatBalance());
     }
 }

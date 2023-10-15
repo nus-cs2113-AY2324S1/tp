@@ -14,8 +14,8 @@ import seedu.financialplanner.commands.Find;
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
     private static final String WATCHLIST_COMMAND = "watchlist";
-    private static final String ADD_ENTRY_COMMAND = "add";
-    private static final String DELETE_ENTRY_COMMAND = "delete";
+    private static final String ADD_CASHFLOW_COMMAND = "add";
+    private static final String DELETE_CASHFLOW_COMMAND = "delete";
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
 
@@ -29,10 +29,10 @@ public class Parser {
             return new Exit();
         case WATCHLIST_COMMAND:
             return new WatchListCommand();
-        case ADD_ENTRY_COMMAND:
+        case ADD_CASHFLOW_COMMAND:
             return parseAddCashflow(restOfInput);
-        case DELETE_ENTRY_COMMAND:
-            return new DeleteCashflowCommand(restOfInput);
+        case DELETE_CASHFLOW_COMMAND:
+            return parseDeleteCashflow(restOfInput);
         case ADD_STOCK_COMMAND:
             return parseAddStock(restOfInput);
         case FIND_COMMAND:
@@ -76,5 +76,22 @@ public class Parser {
         }
 
         return new AddCashflowCommand(cashflowType, amount, type, recur);
+    }
+
+    public static Command parseDeleteCashflow(String restOfInput) {
+        String[] split = restOfInput.split(" ", 2);
+
+        if (split.length == 1) {
+            String stringIndex = split[0].trim();
+            int index = Integer.parseInt(stringIndex);
+
+            return new DeleteCashflowCommand(index);
+        }
+
+        String cashflowType = split[0];
+        String stringIndex = split[1].trim();
+        int index = Integer.parseInt(stringIndex);
+
+        return new DeleteCashflowCommand(cashflowType, index);
     }
 }

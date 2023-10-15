@@ -16,7 +16,8 @@ public class Cashflow {
         this.type = type;
         this.recur = recur;
     }
-
+    public void deleteCashflowvalue() {
+    }
     public Cashflow() {
         this.amount = 0;
         this.type = null;
@@ -37,11 +38,11 @@ public class Cashflow {
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
-        String string = "Type: " + type + System.lineSeparator()
-                + "Amount:" + decimalFormat.format(round(amount, 2));
+        String string = "   Type: " + type + System.lineSeparator()
+                + "   Amount: " + decimalFormat.format(round(amount, 2));
 
         if (recur != 0) {
-            string += System.lineSeparator() + "Recurring every: " + recur + "days.";
+            string += System.lineSeparator() + "   Recurring every: " + recur + " days";
         }
 
         return string;

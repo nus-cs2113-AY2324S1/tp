@@ -3,11 +3,16 @@ package seedu.financialplanner.list;
 public class Expense extends Cashflow {
     public Expense(double amount, String type, int recur) {
         super(amount, type, recur);
-        addIncomeValue(amount);
+        addExpenseValue();
     }
 
-    private void addIncomeValue(double value) {
-        balance -= value;
+    private void addExpenseValue() {
+        balance -= this.amount;
+    }
+
+    @Override
+    public void deleteCashflowvalue() {
+        balance += this.amount;
     }
 
     @Override

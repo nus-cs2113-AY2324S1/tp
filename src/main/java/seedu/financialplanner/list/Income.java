@@ -3,12 +3,18 @@ package seedu.financialplanner.list;
 public class Income extends Cashflow{
     public Income(double amount, String type, int recur) {
         super(amount, type, recur);
-        addIncomeValue(amount);
+        addIncomeValue();
     }
 
-    private void addIncomeValue(double value) {
-        balance += value;
+    private void addIncomeValue() {
+        balance += this.amount;
     }
+
+    @Override
+    public void deleteCashflowvalue() {
+        balance -= this.amount;
+    }
+
     @Override
     public String toString() {
         return "Income" + System.lineSeparator() + super.toString();
