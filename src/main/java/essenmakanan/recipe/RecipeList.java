@@ -14,6 +14,14 @@ public class RecipeList extends ArrayList<Recipe> {
         recipes.add(new Recipe(recipeTitle));
     }
 
+    public void addRecipe(String title, String[] steps) {
+        recipes.add(new Recipe(title, steps));
+    }
+
+    public ArrayList<Recipe> getRecipes() {
+        return recipes;
+    }
+
     public void deleteRecipe(Recipe recipe) {
         remove(recipe);
     }
