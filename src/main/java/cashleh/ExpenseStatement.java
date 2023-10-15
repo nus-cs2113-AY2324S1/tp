@@ -1,6 +1,5 @@
 package cashleh;
 
-import Exceptions.CashLehException;
 import Exceptions.CashLehMissingTransactionException;
 
 import java.util.ArrayList;
@@ -18,9 +17,9 @@ public class ExpenseStatement {
     public void addExpense(Expense expenseToAdd) {
         expenseStatement.add(expenseToAdd);
     }
-    public void deleteExpense(int expenseIndexToDelete) throws CashLehMissingTransactionException {
+    public void deleteExpense(int expenseIndex) throws CashLehMissingTransactionException {
         try {
-            expenseStatement.remove(expenseIndexToDelete);
+            expenseStatement.remove(expenseIndex);
         } catch(IndexOutOfBoundsException e) {
             throw new CashLehMissingTransactionException();
         }

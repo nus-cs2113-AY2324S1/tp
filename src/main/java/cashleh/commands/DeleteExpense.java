@@ -1,6 +1,5 @@
 package cashleh.commands;
 
-import Exceptions.CashLehException;
 import Exceptions.CashLehMissingTransactionException;
 import cashleh.ExpenseStatement;
 import cashleh.IncomeStatement;
