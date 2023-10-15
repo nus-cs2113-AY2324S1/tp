@@ -20,13 +20,13 @@ public class AddCashflowCommand extends Command{
     }
 
     @Override
-    public void execute(Ui ui, CashflowList list, WatchList watchList) {
+    public void execute(Ui ui, CashflowList cashflowList, WatchList watchList) {
         switch (cashflowType) {
         case INCOME:
-            list.addIncome(amount, type, recur);
+            cashflowList.addIncome(amount, type, recur);
             break;
         case EXPENSE:
-            list.addExpense(amount, type, recur);
+            cashflowList.addExpense(amount, type, recur);
             break;
         default:
             ui.showMessage("Unidentified entry.");
