@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.list.Expense;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.list.Income;
 import seedu.financialplanner.utils.Ui;
 
@@ -24,16 +24,16 @@ public class StorageTest {
     @Test
     public void loadValidData() throws FinancialPlannerException {
         Storage storage = Storage.INSTANCE;
-        FinancialList test = FinancialList.INSTANCE;
+        CashflowList test = CashflowList.INSTANCE;
         storage.load(test, Ui.INSTANCE, "src/test/testData/ValidData.txt");
-        FinancialList expected = getTestData();
+        CashflowList expected = getTestData();
         assertEquals(expected.getList(), test.getList());
     }
 
     @Test
     public void loadInvalidData_userInputNo() {
         Storage storage = Storage.INSTANCE;
-        FinancialList test = FinancialList.INSTANCE;
+        CashflowList test = CashflowList.INSTANCE;
         ByteArrayInputStream in = new ByteArrayInputStream("n".getBytes());
         System.setIn(in);
         assertThrows(FinancialPlannerException.class,
@@ -42,7 +42,7 @@ public class StorageTest {
 
     @Test
     public void saveValidData() throws FinancialPlannerException, IOException {
-        FinancialList expected = getTestData();
+        CashflowList expected = getTestData();
         Storage storage = Storage.INSTANCE;
         storage.save(expected, String.valueOf(testFolder.resolve("temp.txt")));
         assertEquals(Files.readAllLines(Path.of("src/test/testData/ValidData.txt")),
@@ -51,13 +51,13 @@ public class StorageTest {
 
     @Test
     public void saveNonExistentFile() {
-        FinancialList expected = getTestData();
+        CashflowList expected = getTestData();
         Storage storage = Storage.INSTANCE;
         assertThrows(FinancialPlannerException.class, () -> storage.save(expected, ""));
     }
 
-    private FinancialList getTestData() {
-        FinancialList list = FinancialList.INSTANCE;
+    private CashflowList getTestData() {
+        CashflowList list = CashflowList.INSTANCE;
         list.load(new Income(123.12, "allowance", 0));
         list.load(new Expense(100, "daily necessities", 30));
         return list;

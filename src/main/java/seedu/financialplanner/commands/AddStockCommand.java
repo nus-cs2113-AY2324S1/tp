@@ -2,7 +2,7 @@ package seedu.financialplanner.commands;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 public class AddStockCommand extends Command {
@@ -13,7 +13,7 @@ public class AddStockCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, FinancialList financialList, WatchList watchList) {
+    public void execute(Ui ui, CashflowList cashflowList, WatchList watchList) {
         String stockName = null;
         try {
             stockName = watchList.addStock(stockCode);

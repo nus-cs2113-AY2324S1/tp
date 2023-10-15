@@ -1,22 +1,24 @@
 package seedu.financialplanner.list;
 
+import seedu.financialplanner.utils.Ui;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class FinancialList {
-    public static final FinancialList INSTANCE = new FinancialList();
+public class CashflowList {
+    public static final CashflowList INSTANCE = new CashflowList();
 
     public final ArrayList<Cashflow> list = new ArrayList<>();
 
-    private FinancialList() {
+    private CashflowList() {
     }
 
     private void printAddedCashflow(String line) {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
-        Cashflow cashflow = list.get(list.size() - 1);
+        Cashflow cashflow = get(list.size() - 1);
         System.out.print("Added " + line + " of value: ");
         System.out.println(decimalFormat.format(round(cashflow.value, 2)) + " to the list.");
         System.out.println("type: " + cashflow.type);
@@ -49,6 +51,22 @@ public class FinancialList {
         Expense toAdd = new Expense(value, type, recur);
         list.add(toAdd);
         printAddedCashflow("expense");
+    }
+
+    public void delete(int index) {
+        int listIndex = index - 1;
+
+        Cashflow toRemove = get(listIndex);
+        list.remove(listIndex);
+        Ui.INSTANCE.printDeletedCashflow(toRemove);
+    }
+
+    public void deleteIncome(int index) {
+        int listIndex = index - 1;
+
+        Cashflow toRemove = get(listIndex);
+        list.remove(listIndex);
+        Ui.INSTANCE.printDeletedCashflow(toRemove);
     }
 
     public void load(Cashflow entry) {

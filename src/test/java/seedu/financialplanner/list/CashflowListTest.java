@@ -6,8 +6,8 @@ import java.text.DecimalFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class FinancialListTest {
-    private FinancialList testList = FinancialList.INSTANCE;
+class CashflowListTest {
+    private CashflowList testList = CashflowList.INSTANCE;
     private DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
     @Test

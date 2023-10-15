@@ -1,7 +1,7 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 public class Entry extends Command{
@@ -26,7 +26,7 @@ public class Entry extends Command{
     }
 
     @Override
-    public void execute(Ui ui, FinancialList list, WatchList watchList) {
+    public void execute(Ui ui, CashflowList list, WatchList watchList) {
         String[] split = input.split(" ", 2);
         String entryType = split[0];
         String parameters = split[1];
