@@ -3,7 +3,7 @@ package seedu.financialplanner.storage;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.Expense;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.list.Income;
 import seedu.financialplanner.utils.Ui;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public abstract class LoadData {
-    public static void load(FinancialList financialList, Ui ui, String filePath) throws FinancialPlannerException {
+    public static void load(CashflowList cashflowList, Ui ui, String filePath) throws FinancialPlannerException {
         try {
             Scanner inputFile = new Scanner(new FileReader(filePath));
             String line;
@@ -22,7 +22,7 @@ public abstract class LoadData {
                 line = inputFile.nextLine();
                 final Cashflow entry = getEntry(line);
 
-                financialList.load(entry);
+                cashflowList.load(entry);
             }
             inputFile.close();
         } catch (IOException e) {
@@ -30,7 +30,7 @@ public abstract class LoadData {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException | FinancialPlannerException e) {
             ui.showMessage("File appears to be corrupted. Do you want to create a new file? (Y/N)");
             if (createNewFile(ui)) {
-                financialList.list.clear();
+                cashflowList.list.clear();
             } else {
                 throw new FinancialPlannerException("Please fix the corrupted file, " +
                         "which can be found in data/data.txt.");

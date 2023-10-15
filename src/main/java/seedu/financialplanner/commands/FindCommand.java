@@ -1,7 +1,7 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
@@ -19,14 +19,14 @@ public class FindCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        FinancialList financialList = FinancialList.INSTANCE;
+        CashflowList cashflowList = CashflowList.INSTANCE;
         Ui ui = Ui.INSTANCE;
         WatchList watchList = WatchList.INSTANCE;
         ArrayList<String> foundedFinancialList = new ArrayList<>();
         ArrayList<String> foundedWatchList = new ArrayList<>();
-        for (int i = 0; i < financialList.size(); i++) {
-            if (financialList.get(i).formatString().contains(description)) {
-                foundedFinancialList.add(financialList.get(i).formatString());
+        for (int i = 0; i < cashflowList.size(); i++) {
+            if (cashflowList.get(i).formatString().contains(description)) {
+                foundedFinancialList.add(cashflowList.get(i).formatString());
             }
         }
         if (!foundedFinancialList.isEmpty()) {

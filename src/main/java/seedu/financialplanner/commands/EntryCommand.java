@@ -1,7 +1,7 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.enumerations.EntryCategory;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
@@ -54,10 +54,10 @@ public class EntryCommand extends AbstractCommand {
     public void execute() {
         switch (category) {
         case INCOME:
-            FinancialList.INSTANCE.addIncome(amount, type, recur);
+            CashflowList.INSTANCE.addIncome(amount, type, recur);
             break;
         case EXPENSE:
-            FinancialList.INSTANCE.addExpense(amount, type, recur);
+            CashflowList.INSTANCE.addExpense(amount, type, recur);
             break;
         default:
             Ui.INSTANCE.showMessage("Unidentified entry.");
