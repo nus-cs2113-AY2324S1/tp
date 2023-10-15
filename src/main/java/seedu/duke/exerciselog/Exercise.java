@@ -26,7 +26,7 @@ public class Exercise {
     }
 
     public String toString() {
-        return "Exercise: " + name + ", Calories Burned: " + Integer.toString(caloriesBurned) + " Calories";
+        return "Exercise: " + name + ", Calories Burned: " + Integer.toString(caloriesBurned) + " Calories\n";
     }
 
     public boolean equals(Exercise e) {

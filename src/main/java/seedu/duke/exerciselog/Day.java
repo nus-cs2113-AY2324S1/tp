@@ -31,4 +31,15 @@ public class Day {
     public Integer getNumberOfExercises() {
         return exercises.size();
     }
+
+    public String toString() {
+        if (exercises.isEmpty()) {
+            return "\tNO EXCERCISES FOR THIS DAY!\n";
+        }
+        String newString = "";
+        for (Exercise e: exercises) {
+            newString += "\t" + e.toString();
+        }
+        return newString;
+    }
 }

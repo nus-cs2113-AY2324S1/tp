@@ -7,18 +7,18 @@ public class Log {
 
     public Log() {
         exerciseLog = new ArrayList<>();
-        exerciseLog.add(new Month(31)); // Jan 31
-        exerciseLog.add(new Month(29)); // Feb 29
-        exerciseLog.add(new Month(31)); // Mar 31
-        exerciseLog.add(new Month(30)); // Apr 30
-        exerciseLog.add(new Month(31)); // May 31
-        exerciseLog.add(new Month(30)); // Jun 30
-        exerciseLog.add(new Month(31)); // Jul 31
-        exerciseLog.add(new Month(31)); // Aug 31
-        exerciseLog.add(new Month(30)); // Sep 30
-        exerciseLog.add(new Month(31)); // Oct 31
-        exerciseLog.add(new Month(30)); // Nov 30
-        exerciseLog.add(new Month(31)); // Dec 31
+        exerciseLog.add(new Month(31, "jan")); // Jan 31
+        exerciseLog.add(new Month(29, "feb")); // Feb 29
+        exerciseLog.add(new Month(31, "mar")); // Mar 31
+        exerciseLog.add(new Month(30, "apr")); // Apr 30
+        exerciseLog.add(new Month(31, "may")); // May 31
+        exerciseLog.add(new Month(30, "jun")); // Jun 30
+        exerciseLog.add(new Month(31, "jul")); // Jul 31
+        exerciseLog.add(new Month(31, "aug")); // Aug 31
+        exerciseLog.add(new Month(30, "sep")); // Sep 30
+        exerciseLog.add(new Month(31, "oct")); // Oct 31
+        exerciseLog.add(new Month(30, "nov")); // Nov 30
+        exerciseLog.add(new Month(31, "dec")); // Dec 31
     }
 
     public String addExercise(int month, int day, String exerciseName, int caloriesBurned) {
@@ -51,5 +51,25 @@ public class Log {
 
     public ArrayList<ArrayList<Exercise>> getExercisesForMonth(int month) {
         return exerciseLog.get(month - 1).getExercisesForMonth();
+    }
+
+    public Month getMonth(int month) {
+        return exerciseLog.get(month - 1);
+    }
+
+    public Day getDay(int month, int day) {
+        return exerciseLog.get(month - 1).getDay(day - 1);
+    }
+
+    public int getSize() {
+        return exerciseLog.size();
+    }
+
+    public String toString() {
+        String newString = "";
+        for (Month m: exerciseLog) {
+            newString += m.toString() + "\n";
+        }
+        return newString;
     }
 }
