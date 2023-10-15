@@ -2,7 +2,6 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Expense;
-import seedu.duke.financialrecords.FinancialRecord;
 import seedu.duke.financialrecords.Food;
 import seedu.duke.financialrecords.Transport;
 import seedu.duke.financialrecords.Utilities;
