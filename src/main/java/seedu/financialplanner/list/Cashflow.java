@@ -22,4 +22,12 @@ public class Cashflow {
     public String formatString() {
         return this.value + " | " + this.type + " | " + this.recur;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getValue() {
+        return value;
+    }
 }

@@ -8,7 +8,6 @@ import seedu.financialplanner.list.FinancialList;
 import seedu.financialplanner.storage.Storage;
 import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
-import seedu.financialplanner.visualisations.PieChartVisual;
 
 public class FinancialPlanner {
 
@@ -45,8 +44,6 @@ public class FinancialPlanner {
                 ui.showMessage(e.getMessage());
             }
         }
-        PieChartVisual test  = new PieChartVisual();
-        test.displayPieChart();
         save();
         ui.exitMessage();
     }
