@@ -30,7 +30,7 @@ public class CashflowList {
 
         Cashflow toRemove = get(listIndex);
         list.remove(listIndex);
-        Cashflow.balance -= toRemove.amount;
+        toRemove.deleteCashflowvalue();
         Ui.INSTANCE.printDeletedCashflow(toRemove);
     }
     //helper method to find the index of a given cashflow in the overall list
@@ -85,7 +85,7 @@ public class CashflowList {
 
         Cashflow toRemove = get(listIndex);
         list.remove(listIndex);
-        Cashflow.balance -= toRemove.amount;
+        toRemove.deleteCashflowvalue();
         Ui.INSTANCE.printDeletedCashflow(toRemove);
     }
 
