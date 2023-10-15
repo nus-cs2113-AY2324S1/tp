@@ -21,7 +21,7 @@ public class BudgetCommand extends Command {
             throw new FinancialPlannerException("Please ensure b/ is included in the command.");
         }
         String budgetString = input.substring(budgetIndex + BUDGET_DELIMITTER.length()).trim();
-        double budget = Double.parseDouble(budgetString); //add error handling here
+        double budget = Double.parseDouble(budgetString); //todo: add error handling here
 
         financialList.setBudget(new Budget(budget));
     }

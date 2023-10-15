@@ -6,5 +6,5 @@ public class Budget extends Cashflow {
         super(value, null, MONTH);
     }
 
-    //add storage for budget
+    //todo: add storage for budget
 }

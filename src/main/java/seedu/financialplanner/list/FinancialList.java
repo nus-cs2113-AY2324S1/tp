@@ -54,9 +54,7 @@ public class FinancialList {
     public void setBudget(Budget budget) {
         list.add(budget);
 
-        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
-        System.out.println("A monthly budget of " + decimalFormat.format(round(budget.value, 2))
-                + " has been set.");
+        System.out.println("A monthly budget of " + String.format("%.2f", budget.value) + " has been set.");
     }
 
     public void load(Cashflow entry) {
