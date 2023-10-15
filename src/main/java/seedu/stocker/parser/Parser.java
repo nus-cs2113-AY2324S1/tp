@@ -5,14 +5,14 @@ import java.util.regex.Pattern;
 
 import seedu.stocker.commands.Command;
 import seedu.stocker.commands.AddCommand;
-import seedu.stocker.commands.ExitCommand;
+import seedu.stocker.commands.ListCommand;
 import seedu.stocker.commands.HelpCommand;
+import seedu.stocker.commands.ExitCommand;
 import seedu.stocker.commands.IncorrectCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class Parser {
-
     /**
      * Parses user input into command for execution.
      *
@@ -38,6 +38,10 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }

@@ -17,27 +17,27 @@ class UiTest {
         System.setOut(new PrintStream(outContent));
 
         Ui toTest = new Ui();
-        toTest.printversion1Help();
+        toTest.printVersion1Help();
 
-        String expectedOutput = "Here are a list of possible commands" + System.getProperty("line.separator")
-                + "1. add - Add a drug into the system" + System.getProperty("line.separator")
-                + "2. delete - Remove a drug from the system" + System.getProperty("line.separator")
-                + "3. list - List all current drugs in the system" + System.getProperty("line.separator")
-                + "4. find - Find a specific drug in the system" + System.getProperty("line.separator")
-                + "5. help - List all available commands" + System.getProperty("line.separator")
-                + System.getProperty("line.separator") + System.getProperty("line.separator")
-                + "Here is the formatting for the commands" + System.getProperty("line.separator")
-                + "For add:" + System.getProperty("line.separator")
-                + "add /n <drug name> /d <expiry date> /q <quantity>" + System.getProperty("line.separator")
-                + System.getProperty("line.separator")
-                + "For delete:" + System.getProperty("line.separator")
-                + "delete /n <drug name>" + System.getProperty("line.separator") + System.getProperty("line.separator")
-                + "For list:" + System.getProperty("line.separator")
-                + "list" + System.getProperty("line.separator") + System.getProperty("line.separator")
-                + "For find:" + System.getProperty("line.separator")
-                + "find <keyword>" + System.getProperty("line.separator") + System.getProperty("line.separator")
-                + "For help:" + System.getProperty("line.separator")
-                + "help" + System.getProperty("line.separator");
+        String expectedOutput = "Here are a list of possible commands" + System.lineSeparator()
+                + "1. add - Add a drug into the system" + System.lineSeparator()
+                + "2. delete - Remove a drug from the system" + System.lineSeparator()
+                + "3. list - List all current drugs in the system" + System.lineSeparator()
+                + "4. find - Find a specific drug in the system" + System.lineSeparator()
+                + "5. help - List all available commands" +System.lineSeparator()
+                + System.lineSeparator()+ System.lineSeparator()
+                + "Here is the formatting for the commands" + System.lineSeparator()
+                + "For add:" + System.lineSeparator()
+                + "add /n <drug name> /d <expiry date> /q <quantity>" + System.lineSeparator()
+                + System.lineSeparator()
+                + "For delete:" + System.lineSeparator()
+                + "delete /n <drug name>" + System.lineSeparator() + System.lineSeparator()
+                + "For list:" + System.lineSeparator()
+                + "list" +System.lineSeparator() + System.lineSeparator()
+                + "For find:" + System.lineSeparator()
+                + "find <keyword>" + System.lineSeparator() +System.lineSeparator()
+                + "For help:" + System.lineSeparator()
+                + "help" + System.lineSeparator();
 
         assertEquals(expectedOutput, outContent.toString());
 

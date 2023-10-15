@@ -16,6 +16,11 @@ can get your inventory management tasks done faster than traditional GUI apps.
 
 ## Features 
 
+### Feature-Login System
+
+Authentication system that allows user to register as a user or login
+as an existing user.
+
 ### Feature-add
 
 Adds a drug into the inventory list.
@@ -40,6 +45,38 @@ uses and how to format them in the command line.
 
 ## Usage
 
+### `Login System`- Create new user or login existing user
+
+Login system is automatically launched at the start of the programme.
+
+**Registering a user**
+
+> Step 1 : Enter 1 to select option to register a user.
+> 
+> Step 2: Enter desired username and password.
+> 
+> Upon successful creation, registration success message is observed
+
+Expected outcome:
+
+```
+Registration successful.
+```
+
+**Login an existing user**
+
+> Step 1 : Enter 2 to select option to login a user.
+>
+> Step 2: Enter registered username and password.
+>
+> Upon successful creation, successful login message is observed.
+
+Expected outcome:
+
+```
+Login Successful.
+```
+
 ### `add` - Adds drug into inventory list
 
 Adds a drug to be tracked by the system.
@@ -57,10 +94,7 @@ Example of usage:
 Expected outcome:
 
 ```
-added : Panadol
-Expiry : 12 June 2026
-Quantity : 300
-There are now 1 type of drugs in the system
+New drug added in the inventory: Panadol
 ```
 ### `delete` - Deletes a drug being tracked by the system
 
@@ -99,8 +133,9 @@ Example of usage:
 Expected outcome:
 
 ```
-Here are a list of drugs in the system:
-1. Panadol / 26 June 2023/  [300]
+1. Name: Panadol, Expiry Date: 12 June 2026/  Quantity: 300
+
+Listed all drugs in the inventory.
 ```
 ### `find` - Finds drugs whose names contain any of the given keywords
 
@@ -151,20 +186,24 @@ Example of usage:
 Expected outcome:
 
 ```
-1. add
-Format: add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY
-
-2. delete
-Format: delete /n DRUG_NAME
-
-3. list
-Format: list
-
-4. find
-Format: find KEYWORD [MORE_KEYWORDS]
-
-5. help
-Format : help
+|| 
+|| add: Adds a new drug to the drug list. Parameters: NAME, EXPIRY DATE, QUANTITY,  
+|| Example: add /n Doliprane /d 12/06/2035 /q 52
+|| 
+|| delete: Removes a drug from drug list. Parameters: Name  
+|| Example: delete <Drug Name>
+|| 
+|| help: Shows program usage instructions. 
+|| Example: help
+|| 
+|| list: List all drug information that is being tracked by the system. 
+|| Example: list
+|| 
+|| find: Finds drug in inventory 
+|| Example: find panadol
+|| 
+|| bye: Exits the program.
+|| Example: bye
 ```
 
 ## FAQ

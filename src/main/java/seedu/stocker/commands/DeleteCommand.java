@@ -5,7 +5,7 @@ public class DeleteCommand  extends Command{
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a drug from drug list. "
-            + "Parameters: Name  \n"
+            + "Parameters: Name  " + System.lineSeparator()
             + "Example: " + COMMAND_WORD
             + " <Drug Name>";
 

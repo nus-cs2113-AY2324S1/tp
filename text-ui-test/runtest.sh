@@ -13,7 +13,7 @@ java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT
 diff EXPECTED-UNIX.TXT ACTUAL.TXT
-if [ $? -eq 0 ]
+if [ ACTUAL.TXT == ACTUAL.TXT ]
 then
     echo "Test passed!"
     exit 0

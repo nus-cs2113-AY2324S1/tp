@@ -1,5 +1,7 @@
 package seedu.stocker.authentication;
 
+import seedu.stocker.ui.Ui;
+
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -10,9 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Represents a login system used for authentication of users.
+ * User information is saved within a hashtable and uploaded
+ * into txt file for future reference.
+ */
 public class LoginSystem {
     public boolean loginStatus;
     private final Scanner in;
+    private Ui interactor;
     private final HashMap<String, String> users;
 
 
@@ -20,6 +28,7 @@ public class LoginSystem {
         users = new HashMap<>();
         loginStatus = false;
         this.in = new Scanner(System.in);
+        interactor = new Ui();
 
         File holder = new File("./users.txt");
         if (!holder.exists()) {
@@ -27,47 +36,65 @@ public class LoginSystem {
         }
     }
 
-    public void showWelcomeMessage() {
-        System.out.println("Welcome! Key in the respective number 1 or 2 based on your needs");
-        System.out.println("1.Register user");
-        System.out.println("2.Login");
-    }
-
+    /**
+     * Returns user choice of whether they wish to register a new user
+     * or if they would want to login using an existing user.
+     *
+     * @return choice of registering or logging into the system
+     */
     public String authenticateUserChoice() {
 
         while (in.hasNextLine()) {
             String choice = in.nextLine();
-
 
             if (choice.equals("1")) {
                 return "1";
             } else if (choice.equals("2")) {
                 return "2";
             } else {
-                System.out.println("Invalid Input, enter 1 or 2 only!");
+                interactor.showInvalidChoiceMessage();
                 return authenticateUserChoice();
             }
         }
         return "error";
     }
 
+    /**
+     * Creates a new user with input username and password from user.
+     * Username and password are saved into a txt file for future
+     * reference.
+     *
+     * @throws IOException if inappropriate output is entered.
+     */
     public void newUserCreator() throws IOException {
 
 
-        System.out.println("Enter your username:");
+        interactor.showUsernameMessage();
         String username = in.nextLine();
 
-        System.out.println("Enter your password:");
+        while (username.equals("")) {
+            interactor.showBlankNameMessage();
+            username = in.nextLine();
+        }
+
+        interactor.showPasswordMessage();
         String password = in.nextLine();
 
+        while (password.equals("")) {
+            interactor.showBlankPasswordMessage();
+            password = in.nextLine();
+        }
+        assert(username.equals("") == false);
+        assert (password.equals("") == false);
+
         if (users.containsKey(username)) {
-            System.out.println("User already exists. Please make user with different name or choose 2");
+            interactor.showUserAlreadyExistMessage();
             System.out.println();
-            System.out.println("Key in the respective number 1 or 2 based on your needs \n"
-                    + "1.Register user \n" + "2.Login ");
+            interactor.showEnterChoiceAgainMessage();
 
             String reselect = authenticateUserChoice();
             if (reselect.equals("1")) {
+
                 newUserCreator();
 
             } else if (reselect.equals("2")) {
@@ -75,26 +102,32 @@ public class LoginSystem {
             }
         } else {
             users.put(username, password);
-            System.out.println("Registration successful.");
+            interactor.showSuccessfulRegistrationMessage();
             loginStatus = true;
         }
         writeNewUserToFile();
 
     }
 
+    /**
+     * Login existing user by asking for username and password input
+     * from user.
+     *
+     * @throws IOException if inappropriate input is entered.
+     */
     public void loginExistingUser() throws IOException {
 
 
-        System.out.println("Enter your username:");
+        interactor.showUsernameMessage();
         String usernameInput = in.nextLine();
-        System.out.println("Enter your password:");
+
+        interactor.showPasswordMessage();
         String passwordInput = in.nextLine();
 
         if (!users.containsKey(usernameInput)) {
-            System.out.println("Invalid username or password. Please try again.");
+            interactor.showInvalidUsernameOrPasswordMessage();
             System.out.println();
-            System.out.println("Key in the respective number 1 or 2 based on your needs \n"
-                    + "1.Register user \n" + "2.Login ");
+            interactor.showEnterChoiceAgainMessage();
 
             String reselect = authenticateUserChoice();
             if (reselect.equals("1")) {
@@ -106,13 +139,12 @@ public class LoginSystem {
 
         } else {
             if (users.get(usernameInput).equals(passwordInput)) {
-                System.out.println("Login successful.");
+                interactor.showSuccessfulLoginMessage();
                 loginStatus = true;
             } else {
-                System.out.println("Invalid username or password. Please try again");
+                interactor.showInvalidUsernameOrPasswordMessage();
                 System.out.println();
-                System.out.println("Key in the respective number 1 or 2 based on your needs \n"
-                        + "1.Register user \n" + "2.Login ");
+                interactor.showEnterChoiceAgainMessage();
 
                 String reselect = authenticateUserChoice();
                 if (reselect.equals("1")) {
@@ -127,6 +159,11 @@ public class LoginSystem {
 
     }
 
+    /**
+     * Writes new user creation into a txt file to save for future reference
+     *
+     * @throws IOException
+     */
     public void writeNewUserToFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("./users.txt", true));
 
@@ -144,6 +181,13 @@ public class LoginSystem {
 
     }
 
+    /**
+     * Loads existing users from txt file into hash table
+     * for login system to use for authentication when
+     * user tries to login.
+     *
+     * @throws IOException if fail to read from txt file
+     */
     public void loadExistingUsers() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("./users.txt"));
         String line;
@@ -157,9 +201,15 @@ public class LoginSystem {
         }
     }
 
-    public int run() throws IOException {
+    /**
+     * Runs login system by loading user information into hash table
+     * and get input for user to check for authentication.
+     *
+     * @throws IOException if unable to read from txt file to
+     *                     load users
+     */
+    public void run() throws IOException {
         loadExistingUsers();
-        showWelcomeMessage();
         String choice = authenticateUserChoice();
         if (choice.equals("1")) {
             newUserCreator();
@@ -167,8 +217,7 @@ public class LoginSystem {
         } else if (choice.equals("2")) {
             loginExistingUser();
         }
-        return 0;
-    }
 
+    }
 
 }

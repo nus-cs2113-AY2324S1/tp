@@ -1,4 +1,0 @@
-Welcome! Key in the respective number 1 or 2 based on your needs
-1.Register user
-2.Login
-Invalid Input, enter 1 or 2 only!

@@ -4,7 +4,7 @@ public class FindCommand  extends Command{
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds drug in inventory \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds drug in inventory "+System.lineSeparator()
             + "Example: " + COMMAND_WORD + " panadol";
 
     //edit function to give find functionality

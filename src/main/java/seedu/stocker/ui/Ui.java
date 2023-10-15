@@ -10,23 +10,42 @@ import java.util.ArrayList;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.commands.CommandResult;
 
+import static seedu.stocker.common.Messages.MESSAGE_USERNAME_INPUT;
+import static seedu.stocker.common.Messages.MESSAGE_USER_ALREADY_EXIST;
+import static seedu.stocker.common.Messages.MESSAGE_LOGIN_WELCOME;
+import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_LOGIN;
+import static seedu.stocker.common.Messages.MESSAGE_NO_BLANK_NAME_ALLOWED;
+import static seedu.stocker.common.Messages.MESSAGE_NO_BLANK_PASSWORD_ALLOWED;
+import static seedu.stocker.common.Messages.MESSAGE_PASSWORD_INPUT;
 import static seedu.stocker.common.Messages.MESSAGE_WELCOME;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_CHOICE;
 import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_USERNAME_OR_PASSWORD;
+import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_REGISTRATION;
+
 
 public class Ui {
 
-    /** Offset required to convert between 1-indexing and 0-indexing.  */
+    /**
+     * Offset required to convert between 1-indexing and 0-indexing.
+     */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
-    /** A decorative prefix added to the beginning of lines printed by Jerry */
+    /**
+     * A decorative prefix added to the beginning of lines printed by Jerry
+     */
     private static final String LINE_PREFIX = "|| ";
 
     private static final String DIVIDER = "===================================================";
 
-    /** A platform independent line separator. */
+    /**
+     * A platform independent line separator.
+     */
     private static final String LS = System.lineSeparator();
 
-    /** Format of indexed list item */
+    /**
+     * Format of indexed list item
+     */
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
     private final Scanner in;
@@ -41,7 +60,7 @@ public class Ui {
         this.out = out;
     }
 
-    public void printversion1Help(){
+    public void printVersion1Help() {
         System.out.println("Here are a list of possible commands");
         System.out.println("1. add - Add a drug into the system");
         System.out.println("2. delete - Remove a drug from the system");
@@ -77,25 +96,72 @@ public class Ui {
         System.out.println("help");
 
     }
-    
+
     /**
      * Prompts for the command and reads the text entered by the user.
      * Ignores empty, pure whitespace, and comment lines.
      * Echos the command back to the user.
+     *
      * @return command (full line) entered by the user
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
-        String fullInputLine = in.nextLine();
+        String fullUserInput = in.nextLine();
 
-        return fullInputLine;
+        return fullUserInput;
     }
-    
-    /** Shows message(s) to the user */
+
+    /**
+     * Shows message(s) to the user
+     */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
+    }
+
+    public void showLoginMessage() {
+        showToUser(DIVIDER, MESSAGE_LOGIN_WELCOME, DIVIDER);
+    }
+
+    public void showUsernameMessage() {
+        showToUser(MESSAGE_USERNAME_INPUT);
+    }
+
+    public void showPasswordMessage() {
+        showToUser(MESSAGE_PASSWORD_INPUT);
+    }
+
+    public void showSuccessfulRegistrationMessage() {
+        showToUser(MESSAGE_SUCCESSFUL_REGISTRATION);
+    }
+
+    public void showSuccessfulLoginMessage() {
+        showToUser(MESSAGE_SUCCESSFUL_LOGIN);
+    }
+
+    public void showInvalidChoiceMessage() {
+        showToUser(MESSAGE_INVALID_CHOICE);
+    }
+
+    public void showUserAlreadyExistMessage() {
+        showToUser(MESSAGE_USER_ALREADY_EXIST);
+    }
+
+    public void showEnterChoiceAgainMessage() {
+        showToUser(MESSAGE_LOGIN_WELCOME);
+    }
+
+    public void showInvalidUsernameOrPasswordMessage() {
+        showToUser(MESSAGE_INVALID_USERNAME_OR_PASSWORD);
+    }
+
+    public void showBlankNameMessage() {
+        showToUser(MESSAGE_NO_BLANK_NAME_ALLOWED);
+    }
+
+    public void showBlankPasswordMessage() {
+        showToUser(MESSAGE_NO_BLANK_PASSWORD_ALLOWED);
     }
 
     public void showWelcomeMessage() {
@@ -118,7 +184,9 @@ public class Ui {
         showToUser(result.feedbackToUser, DIVIDER);
     }
 
-    /** Shows a list of strings to the user, formatted as an indexed list. */
+    /**
+     * Shows a list of strings to the user, formatted as an indexed list.
+     */
     private void showToUserAsIndexedList(List<String> list) {
         showToUser(getIndexedListForViewing(list));
     }
@@ -134,7 +202,9 @@ public class Ui {
         showToUserAsIndexedList(formattedDrugs);
     }
 
-    /** Formats a list of strings as a viewable indexed list. */
+    /**
+     * Formats a list of strings as a viewable indexed list.
+     */
     public static String getIndexedListForViewing(List<String> listItems) {
         final StringBuilder formatted = new StringBuilder();
         int displayIndex = DISPLAYED_INDEX_OFFSET;
