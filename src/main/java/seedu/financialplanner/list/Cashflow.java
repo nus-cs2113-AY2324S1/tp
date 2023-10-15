@@ -18,11 +18,7 @@ public class Cashflow {
     }
     public void deleteCashflowvalue() {
     }
-    public Cashflow() {
-        this.amount = 0;
-        this.type = null;
-        this.recur = 0;
-    }
+
     //@author mhadidg-reused
     //Reused from https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
     public static double round(double value, int places) {
