@@ -30,5 +30,6 @@ public class EssenMakanan {
                 isUsing = false;
             }
         }
+        System.exit(0);
     }
 }
