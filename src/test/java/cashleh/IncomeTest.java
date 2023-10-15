@@ -19,6 +19,6 @@ class IncomeTest {
 
     @Test
     void testToString() {
-        assertEquals(testIncome.toString(), "\t+ S$ 200: pocket money (date: 2023-10-10, One time)");
+        assertEquals(testIncome.toString(), "\t+ S$ 200.0: pocket money (date: 2023-10-10, One time)");
     }
 }
