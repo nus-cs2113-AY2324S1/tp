@@ -5,7 +5,10 @@ import cashleh.IncomeStatement;
 import cashleh.Expense;
 import cashleh.ExpenseStatement;
 
+import java.util.logging.*;
+
 public class Command {
+    protected static Logger logger = Logger.getLogger("CommandLogger");
     protected IncomeStatement incomeStatement;
     protected ExpenseStatement expenseStatement;
     private int index;
