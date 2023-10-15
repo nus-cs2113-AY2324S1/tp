@@ -1,7 +1,14 @@
 package seedu.financialplanner.utils;
 
 
-import seedu.financialplanner.commands.*;
+import seedu.financialplanner.commands.Command;
+import seedu.financialplanner.commands.Entry;
+import seedu.financialplanner.commands.Exit;
+import seedu.financialplanner.commands.WatchListCommand;
+import seedu.financialplanner.commands.Invalid;
+import seedu.financialplanner.commands.AddStockCommand;
+import seedu.financialplanner.commands.Find;
+import seedu.financialplanner.commands.VisCommand;
 
 public class Parser {
     private static final String EXIT_COMMAND = "exit";
