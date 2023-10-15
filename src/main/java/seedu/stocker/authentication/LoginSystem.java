@@ -47,7 +47,6 @@ public class LoginSystem {
         while (in.hasNextLine()) {
             String choice = in.nextLine();
 
-
             if (choice.equals("1")) {
                 return "1";
             } else if (choice.equals("2")) {
@@ -73,8 +72,20 @@ public class LoginSystem {
         interactor.showUsernameMessage();
         String username = in.nextLine();
 
+        while (username.equals("")) {
+            interactor.showBlankNameMessage();
+            username = in.nextLine();
+        }
+
         interactor.showPasswordMessage();
         String password = in.nextLine();
+
+        while (password.equals("")) {
+            interactor.showBlankPasswordMessage();
+            password = in.nextLine();
+        }
+        assert(username.equals("") == false);
+        assert (password.equals("") == false);
 
         if (users.containsKey(username)) {
             interactor.showUserAlreadyExistMessage();
@@ -83,6 +94,7 @@ public class LoginSystem {
 
             String reselect = authenticateUserChoice();
             if (reselect.equals("1")) {
+
                 newUserCreator();
 
             } else if (reselect.equals("2")) {
@@ -194,7 +206,7 @@ public class LoginSystem {
      * and get input for user to check for authentication.
      *
      * @throws IOException if unable to read from txt file to
-     *         load users
+     *                     load users
      */
     public void run() throws IOException {
         loadExistingUsers();

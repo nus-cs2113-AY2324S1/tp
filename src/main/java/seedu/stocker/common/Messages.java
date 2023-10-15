@@ -20,4 +20,8 @@ public class Messages {
     public static final String MESSAGE_USER_ALREADY_EXIST = "User already exists. Please make user with "
             + "different name or choose 2";
     public static final String MESSAGE_INVALID_USERNAME_OR_PASSWORD = "Invalid username or password. Please try again";
+    public static final String MESSAGE_NO_BLANK_NAME_ALLOWED = "No blank name allowed. "
+            + "Enter your desired username again";
+    public static final String MESSAGE_NO_BLANK_PASSWORD_ALLOWED = "No blank password allowed. "
+            + "Enter your desired password again";
 }
