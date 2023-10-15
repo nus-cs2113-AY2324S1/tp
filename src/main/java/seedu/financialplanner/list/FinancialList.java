@@ -10,9 +10,6 @@ public class FinancialList {
 
     public final ArrayList<Cashflow> list = new ArrayList<>();
 
-    private FinancialList() {
-    }
-
     private void printAddedCashflow(String line) {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
