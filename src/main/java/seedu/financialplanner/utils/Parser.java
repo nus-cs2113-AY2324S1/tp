@@ -1,46 +1,93 @@
 package seedu.financialplanner.utils;
 
+import seedu.financialplanner.commands.*;
 
-import seedu.financialplanner.commands.Command;
-import seedu.financialplanner.commands.Entry;
-import seedu.financialplanner.commands.Exit;
-import seedu.financialplanner.commands.WatchListCommand;
-import seedu.financialplanner.commands.Invalid;
-import seedu.financialplanner.commands.AddStockCommand;
-import seedu.financialplanner.commands.Find;
+import java.util.*;
 
 public class Parser {
-    private static final String EXIT_COMMAND = "exit";
-    private static final String WATCHLIST_COMMAND = "watchlist";
-    private static final String ADD_ENTRY_COMMAND = "add";
-    private static final String ADD_STOCK_COMMAND = "addstock";
-    private static final String FIND_COMMAND = "find";
+    private static final String EXIT_COMMAND_NAME = "exit";
+    private static final String WATCHLIST_COMMAND_NAME = "watchlist";
+    private static final String ADD_ENTRY_COMMAND_NAME = "add";
+    private static final String ADD_STOCK_COMMAND_NAME = "addstock";
+    private static final String FIND_COMMAND_NAME = "find";
 
-    public static Command parse(String input) {
-        String[] split = input.split(" ", 2);
-        String command = split[0].toLowerCase();
-        String restOfInput = split.length > 1 ? split[1] : ""; // checks if rest of input is empty
-
-        switch (command) {
-        case EXIT_COMMAND:
-            return new Exit();
-        case WATCHLIST_COMMAND:
-            return new WatchListCommand();
-        case ADD_ENTRY_COMMAND:
-            return new Entry(restOfInput);
-        case ADD_STOCK_COMMAND:
-            return parseAddStock(restOfInput);
-        case FIND_COMMAND:
-            return new Find(restOfInput);
-        default:
-            return new Invalid();
-        }
+    public static AbstractCommand parseCommand(String input) throws IllegalArgumentException {
+        RawCommand rawCommand = parseRawCommand(input);
+        return parseCommand(rawCommand);
     }
 
-    private static Command parseAddStock(String restOfInput) {
-        String[] split = restOfInput.trim().split("s/");
-        // TODO: check error here
-        String stockCode = split[1].trim();
-        return new AddStockCommand(stockCode);
+    public static RawCommand parseRawCommand(String input) throws IllegalArgumentException{
+        Iterator<String> iterator = Arrays.stream(input.split(" ")).iterator();
+        if (!iterator.hasNext()) {
+            throw new IllegalArgumentException("Command cannot be empty");
+        }
+        String commandName = iterator.next();
+        List<String> args = new ArrayList<>();
+        Map<String, String> extraArgs = new HashMap<>();
+
+        List<String> extraArgumentContentBuffer = new ArrayList<>();
+        String currentExtraArgumentName = null;
+
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+            if (next.startsWith("/")) {
+                // Save previous extra argument when next extra argument is found
+                if (currentExtraArgumentName != null) {
+                    if (extraArgs.containsKey(currentExtraArgumentName)) {
+                        throw new IllegalArgumentException(String.format("Duplicate extra argument name: %s", currentExtraArgumentName));
+                    } else {
+                        extraArgs.put(currentExtraArgumentName, String.join(" ", extraArgumentContentBuffer));
+                        extraArgumentContentBuffer.clear();
+                    }
+                }
+
+                if (next.length() == 1) {
+                    throw new IllegalArgumentException("Extra argument name cannot be empty");
+                }
+
+                currentExtraArgumentName =next.substring(1);
+
+            } else {
+                if (currentExtraArgumentName == null) {
+                    args.add(next);
+                } else {
+                    extraArgumentContentBuffer.add(next);
+                }
+            }
+        }
+        // Save previous extra argument at the very end
+        if (currentExtraArgumentName != null) {
+            if (extraArgs.containsKey(currentExtraArgumentName)) {
+                throw new IllegalArgumentException(String.format("Duplicate extra argument name: %s", currentExtraArgumentName));
+            } else {
+                extraArgs.put(currentExtraArgumentName, String.join(" ", extraArgumentContentBuffer));
+                extraArgumentContentBuffer.clear();
+            }
+        }
+
+        return new RawCommand(commandName, args, extraArgs);
+    }
+
+    public static AbstractCommand parseCommand(RawCommand rawCommand) throws IllegalArgumentException{
+        switch (rawCommand.getCommandName()) {
+            case EXIT_COMMAND_NAME: {
+                return new ExitCommand(rawCommand);
+            }
+            case WATCHLIST_COMMAND_NAME: {
+                return new WatchListCommand(rawCommand);
+            }
+            case ADD_ENTRY_COMMAND_NAME: {
+                return new EntryCommand(rawCommand);
+            }
+            case ADD_STOCK_COMMAND_NAME: {
+                return new AddStockCommand(rawCommand);
+            }
+            case FIND_COMMAND_NAME: {
+                return new FindCommand(rawCommand);
+            }
+            default: {
+                return new InvalidCommand();
+            }
+        }
     }
 }
