@@ -55,8 +55,16 @@ public class Ui {
         System.out.println("Use Watchlist to view it!");
 
     }
+    public void printAddedCashflow(Cashflow entry) {
+        System.out.println("You have added:");
+        System.out.println(entry);
+        System.out.println("to the Financial Planner.");
+        System.out.println("Balance: " + entry.formatBalance());
+    }
 
-    public void printDeletedCashflow(Cashflow type) {
-
+    public void printDeletedCashflow(Cashflow entry) {
+        System.out.println("You have removed:");
+        System.out.println(entry);
+        System.out.println("from the Financial Planner.");
     }
 }
