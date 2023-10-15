@@ -1,12 +1,15 @@
 package cashleh;
 
-import Exceptions.CashLehException;
-import Exceptions.CashLehParsingException;
-import cashleh.commands.*;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import exceptions.CashLehException;
+import exceptions.CashLehParsingException;
+import cashleh.commands.Command;
+import cashleh.commands.AddIncome;
+import cashleh.commands.AddExpense;
+import cashleh.commands.ViewIncomes;
+import cashleh.commands.ViewExpenses;
+import cashleh.commands.DeleteExpense;
+import cashleh.commands.DeleteIncome;
+import cashleh.commands.Exit;
 
 public class Parser {
     private static final String ADD_INCOME = "addIncome";
@@ -50,10 +53,14 @@ public class Parser {
         String expenseName = expenseInfo[0].trim();
         String expenseAmtString = expenseInfo[1].trim();
         if (expenseName.isEmpty()) {
-            throw new CashLehParsingException("Oopsie! An expense without a description is like a CashLeh transaction without its story - not as fun!");
+            throw new CashLehParsingException(
+                "Oopsie! An expense without a description is like a CashLeh transaction without its story - not as fun!"
+            );
         }
         if (expenseAmtString.isEmpty()) {
-            throw new CashLehParsingException("Oopsie! An expense without the amount is like a wallet without cash, so not 'CashLeh'!");
+            throw new CashLehParsingException(
+                "Oopsie! An expense without the amount is like a wallet without cash, so not 'CashLeh'!"
+            );
         }
 
         double expenseAmt;
@@ -73,10 +80,14 @@ public class Parser {
         String incomeName = incomeInfo[0].trim();
         String incomeAmtString = incomeInfo[1].trim();
         if (incomeName.isEmpty()) {
-            throw new CashLehParsingException("Oopsie! An income without a description is like a CashLeh transaction without its story - not as fun!");
+            throw new CashLehParsingException(
+                "Oopsie! An income without a description is like a CashLeh transaction without its story - not as fun!"
+            );
         }
         if (incomeAmtString.isEmpty()) {
-            throw new CashLehParsingException("Oopsie! An income without the amount is like a wallet without cash, so not 'CashLeh'!");
+            throw new CashLehParsingException(
+                "Oopsie! An income without the amount is like a wallet without cash, so not 'CashLeh'!"
+            );
         }
 
         double incomeAmt;
@@ -100,6 +111,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Eh, that's not the kind of number we flaunt in CashLeh!");
         }
-        return transactionType.equals(DELETE_EXPENSE) ? new DeleteExpense(transactionIndex) : new DeleteIncome(transactionIndex);
+        return transactionType.equals(DELETE_EXPENSE) ?
+            new DeleteExpense(transactionIndex) : new DeleteIncome(transactionIndex);
     }
 }

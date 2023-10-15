@@ -1,6 +1,6 @@
 package cashleh.commands;
 
-import Exceptions.CashLehMissingTransactionException;
+import exceptions.CashLehMissingTransactionException;
 import cashleh.ExpenseStatement;
 import cashleh.IncomeStatement;
 import cashleh.Ui;
@@ -13,13 +13,16 @@ public class DeleteExpense extends Command {
     }
 
     @Override
-    public void execute(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) throws CashLehMissingTransactionException {
+    public void execute(
+        ExpenseStatement expenseStatement,
+        IncomeStatement incomeStatement
+    ) throws CashLehMissingTransactionException {
         try {
             String expenseBeingDeleted = expenseStatement.getExpense(expenseIndex - 1).toString();
             expenseStatement.deleteExpense(expenseIndex - 1);
             ui.printMultipleText(new String[] {
-                    "Noted! CashLeh has removed the following expense:",
-                    expenseBeingDeleted
+                "Noted! CashLeh has removed the following expense:",
+                expenseBeingDeleted
             });
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();

@@ -1,6 +1,5 @@
 package cashleh.commands;
 
-import cashleh.Expense;
 import cashleh.ExpenseStatement;
 import cashleh.IncomeStatement;
 

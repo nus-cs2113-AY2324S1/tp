@@ -1,6 +1,6 @@
 package cashleh;
 
-import Exceptions.CashLehException;
+import exceptions.CashLehException;
 import cashleh.commands.Command;
 import cashleh.commands.Exit;
 

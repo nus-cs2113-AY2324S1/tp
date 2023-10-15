@@ -1,6 +1,5 @@
 package cashleh.commands;
 
-import Exceptions.CashLehException;
 import cashleh.Expense;
 import cashleh.ExpenseStatement;
 import cashleh.IncomeStatement;
@@ -17,10 +16,7 @@ public class AddExpense extends Command {
     @Override
     public void execute(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
         expenseStatement.addExpense(expenseToAdd);
-        ui.printMultipleText(new String[] {
-                "The following expense was added:",
-                expenseToAdd.toString()
-        });
+        ui.printMultipleText(new String[] {"The following expense was added:", expenseToAdd.toString()});
     }
 }
 

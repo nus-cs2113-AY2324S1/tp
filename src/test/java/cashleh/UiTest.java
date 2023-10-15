@@ -16,6 +16,7 @@ public class UiTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
+    @SuppressWarnings("checkstyle:membername")
     private final String HORIZONTAL_LINE = "\t____________________________________________________________";
     private final String SEPARATOR = System.lineSeparator();
 
