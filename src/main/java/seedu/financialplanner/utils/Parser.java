@@ -30,7 +30,9 @@ public class Parser {
         case WATCHLIST_COMMAND:
             return new WatchListCommand();
         case ADD_ENTRY_COMMAND:
-            return new Entry(restOfInput);
+            return parseAddCashflow(restOfInput);
+        case DELETE_ENTRY_COMMAND:
+            return new DeleteCashflowCommand(restOfInput);
         case ADD_STOCK_COMMAND:
             return parseAddStock(restOfInput);
         case FIND_COMMAND:
@@ -45,5 +47,34 @@ public class Parser {
         // TODO: check error here
         String stockCode = split[1].trim();
         return new AddStockCommand(stockCode);
+    }
+    private static int determineRecur(String parameters) {
+        if (parameters.contains("r/")) {
+            int indexOfRecur = parameters.indexOf("r/");
+            String recur = parameters.substring(indexOfRecur + 2).trim();
+            return Integer.parseInt(recur);
+        }
+        return 0;
+    }
+    public static Command parseAddCashflow(String restOfInput) {
+        String type;
+        double amount;
+        int recur;
+
+        String[] split = restOfInput.split(" ", 2);
+        String cashflowType = split[0];
+        String parameters = split[1];
+        recur = determineRecur(parameters);
+        int indexOfAmount = parameters.indexOf("a/");
+        int indexOfType = parameters.indexOf("t/");
+        amount = Double.parseDouble(parameters.substring(indexOfAmount + 2, indexOfType).trim());
+        if (recur == 0) {
+            type = parameters.substring(indexOfType + 2).trim();
+        } else {
+            int indexOfRecur = parameters.indexOf("r/");
+            type = parameters.substring(indexOfType + 2, indexOfRecur).trim();
+        }
+
+        return new AddCashflowCommand(cashflowType, amount, type, recur);
     }
 }

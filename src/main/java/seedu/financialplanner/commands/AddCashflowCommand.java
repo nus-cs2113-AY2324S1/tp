@@ -7,41 +7,21 @@ import seedu.financialplanner.utils.Ui;
 public class AddCashflowCommand extends Command{
     private static final String INCOME = "income";
     private static final String EXPENSE = "expense";
-    protected String input;
+    protected String cashflowType;
     protected double amount;
     protected String type;
     protected int recur;
 
-    public AddCashflowCommand(String input) {
-        this.input = input;
-    }
-
-    private int determineRecur(String parameters) {
-        if (parameters.contains("r/")) {
-            int indexOfRecur = parameters.indexOf("r/");
-            String recur = parameters.substring(indexOfRecur + 2).trim();
-            return Integer.parseInt(recur);
-        }
-        return 0;
+    public AddCashflowCommand(String cashflowType, double amount, String type, int recur) {
+        this.cashflowType = cashflowType;
+        this.amount = amount;
+        this.type = type;
+        this.recur = recur;
     }
 
     @Override
     public void execute(Ui ui, CashflowList list, WatchList watchList) {
-        String[] split = input.split(" ", 2);
-        String entryType = split[0];
-        String parameters = split[1];
-        this.recur = determineRecur(parameters);
-        int indexOfAmount = parameters.indexOf("a/");
-        int indexOfType = parameters.indexOf("t/");
-        this.amount = Double.parseDouble(parameters.substring(indexOfAmount + 2, indexOfType).trim());
-        if (recur == 0) {
-            this.type = parameters.substring(indexOfType + 2).trim();
-        } else {
-            int indexOfRecur = parameters.indexOf("r/");
-            this.type = parameters.substring(indexOfType + 2, indexOfRecur).trim();
-        }
-
-        switch (entryType) {
+        switch (cashflowType) {
         case INCOME:
             list.addIncome(amount, type, recur);
             break;
