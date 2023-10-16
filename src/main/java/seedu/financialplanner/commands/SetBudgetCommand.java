@@ -18,7 +18,7 @@ public class SetBudgetCommand extends AbstractCommand {
         }
         rawCommand.extraArgs.remove("b");
 
-        if (Budget.getInitialBudget() != 0) {
+        if (Budget.hasBudget()) {
             throw new FinancialPlannerException("There is an existing budget, did you mean updatebudget?");
         }
     }

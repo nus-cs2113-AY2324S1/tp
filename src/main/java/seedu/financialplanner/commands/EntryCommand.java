@@ -1,10 +1,14 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.enumerations.EntryCategory;
+import seedu.financialplanner.list.Budget;
+import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
+
+import static java.lang.Math.abs;
 
 public class EntryCommand extends AbstractCommand {
     protected double amount;
@@ -57,11 +61,25 @@ public class EntryCommand extends AbstractCommand {
             CashflowList.INSTANCE.addIncome(amount, type, recur);
             break;
         case EXPENSE:
-            CashflowList.INSTANCE.addExpense(amount, type, recur);
+            CashflowList list = CashflowList.INSTANCE;
+            list.addExpense(amount, type, recur);
+            if (Budget.hasBudget()) {
+                deductFromBudget(list.list.get(list.list.size() - 1));
+            }
             break;
         default:
             Ui.INSTANCE.showMessage("Unidentified entry.");
             break;
+        }
+    }
+
+    private static void deductFromBudget(Cashflow entry) {
+        double expenseAmount = entry.getValue();
+        Budget.deduct(expenseAmount);
+        if (Budget.getCurrentBudget() <= 0) {
+            Ui.INSTANCE.showMessage("You have exceeded your current budget by: " + abs(Budget.getCurrentBudget()));
+        } else if (Budget.getCurrentBudget() > 0) {
+            Ui.INSTANCE.showMessage("Your remaining budget is: " + Budget.getCurrentBudget());
         }
     }
 }

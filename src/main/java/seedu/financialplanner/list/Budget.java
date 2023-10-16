@@ -22,13 +22,17 @@ public abstract class Budget {
         return currentBudget;
     }
 
-    public static void setCurrentBudget(double currentBudget) {
-        Budget.currentBudget = currentBudget;
+    public static void deduct(double amount) {
+        Budget.currentBudget -= amount;
     }
 
     public static void load(double initial, double current) {
         initialBudget = initial;
         currentBudget = current;
+    }
+
+    public static boolean hasBudget() {
+        return initialBudget != 0;
     }
 
     public static String formatString() {
