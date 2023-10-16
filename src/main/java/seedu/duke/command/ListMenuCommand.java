@@ -1,8 +1,10 @@
 package seedu.duke.command;
 
 import seedu.duke.data.Menu;
-//import seedu.duke.data.dish.Dish;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.UserOutput;
+
+import java.text.DecimalFormat;
 
 import java.text.DecimalFormat;
 
@@ -10,8 +12,8 @@ import java.text.DecimalFormat;
  * Lists all dishes in the menu to the user.
  */
 public class ListMenuCommand extends Command {
-
     public static final String COMMAND_WORD = "list_menu";
+
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     /**
      * Iterates through the menu arraylist, outputting the dish name and dish price.
@@ -22,8 +24,12 @@ public class ListMenuCommand extends Command {
 
     @Override
     public void execute(Menu menu, Ui ui) {
-        /*for (String d : menu) {
-            System.out.println(d);
-        }*/
+        ui.showToUser(UserOutput.LIST_MESSAGE.message);
+        for(int i =0; i < menu.getSize(); i++) {
+            String indexNum = String.valueOf(i+1);
+            String dishName = menu.getDish(i).getName();
+            String dishPrice = dollarValue.format(menu.getDish(i).getPrice());
+            ui.showToUser(indexNum + "." + dishName + " $" + dishPrice);
+        }
     };
 }

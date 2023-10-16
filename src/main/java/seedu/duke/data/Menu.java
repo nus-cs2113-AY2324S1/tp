@@ -10,4 +10,20 @@ public class Menu {
     public Menu(ArrayList<Dish> menuItems) {
         this.menuItems = menuItems;
     }
+
+    public ArrayList<Dish> getMenuItemsList() {
+        return menuItems;
+    }
+    public int getSize() {
+        return menuItems.size();
+    }
+    public Dish getDish(int menuID) {
+        return menuItems.get(menuID);
+    }
+    public void removeDish(int menuID) {
+        menuItems.remove(menuID);
+    }
+    public void addDish(Dish dish) {
+        menuItems.add(dish);
+    }
 }
