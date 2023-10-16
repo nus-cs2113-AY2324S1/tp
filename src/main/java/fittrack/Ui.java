@@ -2,6 +2,8 @@ package fittrack;
 
 import fittrack.command.CommandResult;
 
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -9,6 +11,12 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String LINE = "____________________________________________________________";
+    private static final String LOGO = "___________.__  __ ___________                     __\n"
+                                     + "\\_   _____/|__|/  |\\__    ___/___________    ____ |  | __\n"
+                                     + " |    __)  |  \\   __\\|    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n"
+                                     + " |     \\   |  ||  |  |    |   |  | \\/ __ \\  \\___|    <\n"
+                                     + " \\___  /   |__||__|  |____|   |__|  (____  /\\___  >__|_ \\";
+
 
     private final Scanner in;
 
@@ -36,11 +44,7 @@ public class Ui {
     public String scanCommandLine() {
         return scanNextLine();
     }
-
-    public void closeScanner() {
-        in.close();
-    }
-
+    
     public void printBlankLine() {
         System.out.println();
     }
@@ -48,6 +52,7 @@ public class Ui {
 
     public void printWelcome() {
         System.out.println("Welcome to FitTrack!");
+        System.out.println(LOGO);
     }
 
     public void printCommandResult(CommandResult commandResult) {
