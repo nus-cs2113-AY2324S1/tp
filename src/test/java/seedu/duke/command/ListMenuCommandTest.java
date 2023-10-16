@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 class ListMenuCommandTest {
     @Test
-    public static void main(String[] args) {
+    public static void execute_outputTwoDishes_() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice", 2.50F));
         menuItems.add(new Dish("Chicken Curry", 4.30F));
