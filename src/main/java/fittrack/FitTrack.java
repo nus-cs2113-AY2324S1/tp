@@ -4,7 +4,7 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
-import fittrack.parser.RegexMatchFailException;
+import fittrack.parser.PatternMatchFailException;
 
 /**
  * Represents the main part of FitTrack.
@@ -14,7 +14,6 @@ public class FitTrack {
     private final MealList mealList;
     private final WorkList works;
     private final Ui ui;
-    private String name;
 
     private FitTrack() {
         ui = new Ui();
@@ -39,7 +38,7 @@ public class FitTrack {
         ui.printWelcome();
         try {
             profileSettings();
-        } catch (RegexMatchFailException e) {
+        } catch (PatternMatchFailException e) {
             System.out.println("Wrong format. h/<height> w/<weight>");
         }
     }
@@ -64,13 +63,13 @@ public class FitTrack {
     /**
      * Gets user profile details when program starts.
      */
-    private void profileSettings() throws RegexMatchFailException {
+    private void profileSettings() throws PatternMatchFailException {
         System.out.println("Please enter your name:");
-        name = ui.scanNextLine();
+        String name = ui.scanNextLine();
         System.out.println("Please enter your height (in cm) and weight (in kg):");
         String input = ui.scanNextLine();
         double[] profile;
-        profile = CommandParser.parseProfile(input);
+        profile = new CommandParser().parseProfile(input);
         userProfile = new UserProfile(name, profile[0], profile[1]);
         ui.printProfileDetails(name, profile);
     }

@@ -84,15 +84,16 @@ public class CommandParser {
 
     /**
      * Parses user profile, format of `h/(HEIGHT) w/(WEIGHT)`.
+     *
      * @param profile profile as a string
      * @return height and weight as a double array
-     * @throws RegexMatchFailException if regex match fails
+     * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    public static double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
+    public double[] parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
-            throw new RegexMatchFailException();
+            throw new PatternMatchFailException();
         }
 
         final String height = matcher.group("height");
@@ -102,6 +103,7 @@ public class CommandParser {
     }
 
     public String getFirstWord(String str) {
+        assert str != null && !str.isEmpty();
         return str.split("\\s")[0];
     }
 }
