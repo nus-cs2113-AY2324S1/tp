@@ -14,6 +14,9 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.IncorrectCommand;
 import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.logcommands.DeleteLogCommand;
+import seedu.duke.commands.logcommands.LogCommand;
+import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.data.exception.IllegalValueException;
 
 /**
@@ -70,6 +73,15 @@ public class Parser {
         //        case ViewAllCommand.COMMAND_WORD:
         //            return prepareViewAll(arguments);
         //
+        case LogCommand.COMMAND_WORD:
+            return new LogCommand();
+
+        case DeleteLogCommand.COMMAND_WORD:
+            return new DeleteLogCommand();
+
+        case ViewLogCommand.COMMAND_WORD:
+            return new ViewLogCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
