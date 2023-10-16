@@ -2,6 +2,7 @@ package seedu.duke.ui;
 import java.util.Scanner;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Income;
+import seedu.duke.financialrecords.Expense;
 //import java.util.ArrayList;
 
 /**
@@ -50,5 +51,13 @@ public class Ui {
 
     public void printListIncomeMessage() {
         System.out.println("Here are your incomes:");
+    }
+
+    public void printExpenseAddedMessage(Expense expense) {
+        System.out.println("Got it. I've added this expense: \n" + expense.toString());
+    }
+
+    public void printListExpenseMessage() {
+        System.out.println("Here are your expenses:");
     }
 }
