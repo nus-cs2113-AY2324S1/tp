@@ -51,7 +51,7 @@ public class CashflowList {
     //in the overall list
     private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) {
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
-        
+
         switch (category) {
         case INCOME:
             return findCashflowIndexFromIncomeIndex(cashflowIndex);

@@ -55,7 +55,7 @@ public class AddCashflowCommand extends AbstractCommand {
             rawCommand.extraArgs.remove("r");
         }
         if (recur < 0) {
-            throw new IllegalArgumentException("Amount cannot be negative");
+            throw new IllegalArgumentException("Recurring value cannot be negative");
         }
 
         if (!rawCommand.extraArgs.isEmpty()) {
