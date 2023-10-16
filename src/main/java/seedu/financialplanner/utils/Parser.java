@@ -1,7 +1,5 @@
 package seedu.financialplanner.utils;
 
-
-
 import seedu.financialplanner.commands.AbstractCommand;
 import seedu.financialplanner.commands.AddStockCommand;
 import seedu.financialplanner.commands.EntryCommand;
@@ -35,27 +33,20 @@ public class Parser {
 
     public static AbstractCommand parseCommand(RawCommand rawCommand) throws FinancialPlannerException {
         switch (rawCommand.getCommandName()) {
-        case EXIT_COMMAND: {
+        case EXIT_COMMAND:
             return new ExitCommand(rawCommand);
-        }
-        case WATCHLIST_COMMAND: {
+        case WATCHLIST_COMMAND:
             return new WatchListCommand(rawCommand);
-        }
-        case ADD_ENTRY_COMMAND: {
+        case ADD_ENTRY_COMMAND:
             return new EntryCommand(rawCommand);
-        }
-        case ADD_STOCK_COMMAND: {
+        case ADD_STOCK_COMMAND:
             return new AddStockCommand(rawCommand);
-        }
-        case FIND_COMMAND: {
+        case FIND_COMMAND:
             return new FindCommand(rawCommand);
-        }
-        case BUDGET_COMMAND: {
+        case BUDGET_COMMAND:
             return new BudgetCommand(rawCommand);
-        }
-        default: {
+        default:
             return new InvalidCommand();
-        }
         }
     }
     public static RawCommand parseRawCommand(String input) throws IllegalArgumentException{
