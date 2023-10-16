@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 /**
- * Deletes a task identified using it's last displayed index from the task list.
+ * Deletes a menu item identified using it's last displayed index from the menu.
  */
 public class DeleteCommand extends Command {
 
