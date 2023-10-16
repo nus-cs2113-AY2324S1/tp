@@ -5,12 +5,12 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class FinancialList {
-    public static final FinancialList INSTANCE = new FinancialList();
+public class CashflowList {
+    public static final CashflowList INSTANCE = new CashflowList();
 
     public final ArrayList<Cashflow> list = new ArrayList<>();
 
-    private FinancialList() {
+    private CashflowList() {
     }
 
     private void printAddedCashflow(String line) {
