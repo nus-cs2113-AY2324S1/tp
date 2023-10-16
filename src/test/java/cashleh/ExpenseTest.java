@@ -15,5 +15,5 @@ class ExpenseTest {
     void testToString() {
         assertEquals(testExpense.toString(), "milk tea (amount: 2.50)");
     }
-
 }
+
