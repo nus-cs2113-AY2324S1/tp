@@ -10,6 +10,8 @@ import seedu.stocker.commands.HelpCommand;
 import seedu.stocker.commands.ExitCommand;
 import seedu.stocker.commands.IncorrectCommand;
 import seedu.stocker.commands.FindCommand;
+import seedu.stocker.commands.DeleteCommand;
+
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -37,7 +39,10 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return new FindCommand(arguments);
 
-        case ExitCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommand(arguments);
+
+            case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
