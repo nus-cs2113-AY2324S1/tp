@@ -77,9 +77,11 @@ public class EntryCommand extends AbstractCommand {
         double expenseAmount = entry.getValue();
         Budget.deduct(expenseAmount);
         if (Budget.getCurrentBudget() <= 0) {
-            Ui.INSTANCE.showMessage("You have exceeded your current budget by: " + abs(Budget.getCurrentBudget()));
+            Ui.INSTANCE.showMessage("You have exceeded your current budget by: " +
+                    String.format("%.2f", abs(Budget.getCurrentBudget())));
         } else if (Budget.getCurrentBudget() > 0) {
-            Ui.INSTANCE.showMessage("Your remaining budget for the month is: " + Budget.getCurrentBudget());
+            Ui.INSTANCE.showMessage("Your remaining budget for the month is: " +
+                    String.format("%.2f", Budget.getCurrentBudget()));
         }
     }
 }
