@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Commands.UsageInstructions;
+import seedu.duke.commands.UsageInstructions;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
@@ -9,6 +9,9 @@ import seedu.duke.commands.IncomeManager;
 import java.util.ArrayList;
 import seedu.duke.commands.IncomeLister;
 
+/**
+ * This class is the main class of the program.
+ */
 public class Duke {
     private Ui ui;
     private ArrayList<Income> incomes;
