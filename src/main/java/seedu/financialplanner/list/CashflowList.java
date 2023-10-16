@@ -51,11 +51,6 @@ public class CashflowList {
         printAddedCashflow("expense");
     }
 
-    public void setBudget(Budget budget) {
-        list.add(budget);
-
-        System.out.println("A monthly budget of " + String.format("%.2f", budget.value) + " has been set.");
-    }
 
     public void load(Cashflow entry) {
         list.add(entry);
