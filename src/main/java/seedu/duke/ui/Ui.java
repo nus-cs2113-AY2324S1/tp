@@ -48,6 +48,15 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows delete message to user
+     *
+     * @param menuItem String of menu item deleted
+     */
+    public void showDeleteMessage(String menuItem) {
+        showToUser("Okies! " + menuItem + " deleted! :)");
+    }
+
     /** Shows messages(s) to the user **/
     public void showToUser(String... message) {
         for (String m: message) {
