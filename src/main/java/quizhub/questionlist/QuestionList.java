@@ -300,6 +300,21 @@ public class QuestionList {
         }
     }
     /**
+     * Retrieves the question by its index in the question list.
+     *
+     * @param index The index of the question in the list.
+     * @return The question, or null if the index is invalid or the question is of a different type.
+     */
+    public String getQuestionTextByIndex(int index) {
+        if (index >= 0 && index < allQns.size()) {
+            Question question = allQns.get(index);
+            return question.toString(); // Use the toString() method to get the text of the question
+        }
+        return null; // Handle invalid index
+    }
+
+
+    /**
      * Starts a quiz session using the provided user interface (UI).
      *
      * @param ui The user interface to interact with the user.

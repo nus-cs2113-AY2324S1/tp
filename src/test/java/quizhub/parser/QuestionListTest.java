@@ -32,6 +32,22 @@ public class QuestionListTest {
     }
 
     @Test
+    public void testAddQuestionToListAndStorage() {
+        // Add a question to the question list
+        questionList.addToQuestionList("short What is 2 + 2?/4", Question.qnType.SHORTANSWER, false);
+
+        // Store the question in the mock storage
+        mockStorage.saveData(questionList.toString());
+
+        // Retrieve questions from the mock storage (without clearing the list)
+        mockStorage.loadData(questionList);
+
+        // Verify that the question was added to the list and retrieved from storage
+        assertEquals(1, questionList.getQuestionListSize()); // Check the size of the list (includes the retrieved question)
+        assertEquals("short What is 2 + 2?/4", questionList.getQuestionTextByIndex(0));
+    }
+
+    @Test
     public void testStartQuizWithNoQuestions() {
         // Ensure the quiz doesn't start if there are no questions
         questionList.startQuiz(mockUi);
