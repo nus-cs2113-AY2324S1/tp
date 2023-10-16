@@ -23,4 +23,10 @@ public class Ui {
     public void showGoodbye() {
         System.out.println(UserOutput.GOODBYE_MESSAGE.message);
     }
+    /** Shows messages(s) to the user **/
+    public void showToUser(String... message) {
+        for (String m: message) {
+            System.out.println(m);
+        }
+    }
 }
