@@ -3,7 +3,13 @@ package seedu.stocker.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.stocker.commands.*;
+import seedu.stocker.commands.Command;
+import seedu.stocker.commands.AddCommand;
+import seedu.stocker.commands.ListCommand;
+import seedu.stocker.commands.HelpCommand;
+import seedu.stocker.commands.ExitCommand;
+import seedu.stocker.commands.IncorrectCommand;
+import seedu.stocker.commands.FindCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
