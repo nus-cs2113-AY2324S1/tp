@@ -61,22 +61,22 @@ class CashflowListTest {
     @Test
     void testDeleteIncomeAndExpense() {
         testList.deleteCashflow(CashflowCategory.INCOME, 2);
-        assertEquals(3, testList.size());
+        assertEquals(3, testList.list.size());
         double roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-15.00", decimalFormat.format(roundedBalance));
 
         testList.delete(1);
-        assertEquals(2, testList.size());
+        assertEquals(2, testList.list.size());
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-30.00", decimalFormat.format(roundedBalance));
 
         testList.deleteCashflow(CashflowCategory.EXPENSE, 2);
-        assertEquals(1, testList.size());
+        assertEquals(1, testList.list.size());
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-10.00", decimalFormat.format(roundedBalance));
 
         testList.delete(1);
-        assertEquals(0, testList.size());
+        assertEquals(0, testList.list.size());
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("0.00", decimalFormat.format(roundedBalance));
     }
