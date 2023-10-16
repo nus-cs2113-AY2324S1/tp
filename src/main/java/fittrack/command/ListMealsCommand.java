@@ -1,6 +1,5 @@
 package fittrack.command;
 
-import fittrack.MealList;
 import fittrack.parser.CommandParser;
 
 public class ListMealsCommand extends Command {

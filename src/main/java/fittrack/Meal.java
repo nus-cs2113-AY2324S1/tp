@@ -1,25 +1,25 @@
 package fittrack;
 
 public class Meal {
-    private String mealName;
+    private String name;
     private float calories;
 
-    public Meal(String mealName, float calories) {
-        this.mealName = mealName;
+    public Meal(String name, float calories) {
+        this.name = name;
         this.calories = calories;
     }
 
     public float getCalories() {
-        return this.calories;
+        return calories;
     }
 
-    public String getMealName() {
-        return mealName;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return("Meal name: " + this.mealName + "\nCalories: " + this.calories);
+        return "Meal name: " + this.name + "\nCalories: " + this.calories;
     }
 
 }
