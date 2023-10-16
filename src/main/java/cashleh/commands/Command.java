@@ -1,6 +1,10 @@
 package cashleh.commands;
+
+import cashleh.Expense;
+import cashleh.ExpenseStatement;
+import cashleh.Income;
+import cashleh.IncomeStatement;
 import cashleh.exception.CashLehException;
-import cashleh.*;
 
 public class Command {
     protected IncomeStatement incomeStatement;

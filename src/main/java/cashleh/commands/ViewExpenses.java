@@ -1,7 +1,6 @@
 package cashleh.commands;
 
 import cashleh.Expense;
-import cashleh.ExpenseStatement;
 
 public class ViewExpenses extends Command {
 
