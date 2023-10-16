@@ -6,6 +6,7 @@ package seedu.duke.ui;
 public enum UserOutput {
     WELCOME_MESSAGE("Hello! Welcome to CafeCTRL!"),
     GOODBYE_MESSAGE("Goodbye <3 Have a great day ahead!"),
+    LIST_MESSAGE("Ah, behold, the grand menu of delights!"),
     ADD_DISH_MESSAGE("You have added the following dish...");
 
     public final String message;

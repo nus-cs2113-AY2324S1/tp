@@ -79,6 +79,7 @@ public class Ui {
         showToUser("Okies! " + menuItem + " deleted! :)");
     }
 
+
     /**
      * Shows messages(s) to the user
      * @param message string(s) of messages to print
