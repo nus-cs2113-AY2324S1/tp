@@ -1,5 +1,5 @@
 package seedu.duke.command;
 
-class CommandTest {
+class AddDishCommandTest {
 
 }
