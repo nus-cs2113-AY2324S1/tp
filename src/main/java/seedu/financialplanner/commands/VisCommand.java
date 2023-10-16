@@ -30,6 +30,6 @@ public class VisCommand extends AbstractCommand {
     }
     @Override
     public void execute() throws FinancialPlannerException {
-        Visualizer.displayChart(chart, Categorizer.sortExpenses(CashflowList.INSTANCE));
+        Visualizer.displayChart(chart, Categorizer.sortType(CashflowList.INSTANCE, type));
     }
 }
