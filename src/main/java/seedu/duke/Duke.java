@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.Commands.UsageInstructions;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
@@ -52,6 +53,10 @@ public class Duke {
                 case "list_income":
                     ui.showLineDivider();
                     new IncomeLister(incomes, ui).listIncomes();
+                    break;
+
+                case "help":
+                    new UsageInstructions(ui).getHelp();
                     break;
 
                 default:
