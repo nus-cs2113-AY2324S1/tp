@@ -2,26 +2,26 @@ package fittrack.command;
 
 import fittrack.MealList;
 import fittrack.UserProfile;
-import fittrack.WorkList;
+import fittrack.WorkoutList;
 import fittrack.parser.CommandParser;
-import fittrack.parser.PatternMatchFailException;
+import fittrack.parser.ParseException;
 
 public abstract class Command {
     protected UserProfile userProfile;
     protected MealList mealList;
-    protected WorkList workList;
+    protected WorkoutList workoutList;
 
     /**
      * Set data of the command for execution.
      *
      * @param userProfile user profile
      * @param mealList meal list
-     * @param workList work list
+     * @param workoutList work list
      */
-    public void setData(UserProfile userProfile, MealList mealList, WorkList workList) {
+    public void setData(UserProfile userProfile, MealList mealList, WorkoutList workoutList) {
         this.userProfile = userProfile;
         this.mealList = mealList;
-        this.workList = workList;
+        this.workoutList = workoutList;
     }
 
     /**
@@ -36,8 +36,9 @@ public abstract class Command {
      *
      * @param args arguments as a string
      * @param parser parser
+     * @throws ParseException if parse fails
      */
-    public abstract void setArguments(String args, CommandParser parser) throws PatternMatchFailException;
+    public abstract void setArguments(String args, CommandParser parser) throws ParseException;
 
     /**
      * Returns help of the command.

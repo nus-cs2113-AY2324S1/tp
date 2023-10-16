@@ -2,14 +2,14 @@ package fittrack;
 
 public class Meal {
     private String name;
-    private float calories;
+    private double calories;
 
     public Meal(String name, float calories) {
         this.name = name;
         this.calories = calories;
     }
 
-    public float getCalories() {
+    public double getCalories() {
         return calories;
     }
 

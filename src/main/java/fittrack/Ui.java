@@ -8,7 +8,6 @@ import java.util.Scanner;
  * Represents the user interface of FitTrack.
  */
 public class Ui {
-    private static final String LINE = "____________________________________________________________";
     private static final String LOGO = "___________.__  __ ___________                     __\n"
                                      + "\\_   _____/|__|/  |\\__    ___/___________    ____ |  | __\n"
                                      + " |    __)  |  \\   __\\|    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n"
@@ -47,7 +46,6 @@ public class Ui {
         System.out.println();
     }
 
-
     public void printWelcome() {
         System.out.println("Welcome to FitTrack!");
         System.out.println(LOGO);
@@ -59,14 +57,14 @@ public class Ui {
     }
 
     /**
-     * Prints greetings to user and the height and weight that
-     * the user has entered.
+     * Prints greetings to user and the profile of the user.
      *
-     * @param profile array containing the height and weight
+     * @param profile user profile
      */
-    public void printProfileDetails(double[] profile) {
-        System.out.println("Here are your profile settings");
-        System.out.println("Height: " + profile[0]);
-        System.out.println("Weight: " + profile[1]);
+    public void printProfileDetails(UserProfile profile) {
+        System.out.println("Here are your profile settings.");
+        System.out.println("Height: " + profile.getHeight());
+        System.out.println("Weight: " + profile.getWeight());
+        System.out.println("Daily calorie surplus limit: " + profile.getDailyCalorieLimit());
     }
 }
