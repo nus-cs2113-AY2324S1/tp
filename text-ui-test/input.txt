@@ -4,5 +4,8 @@ add expense /a 100 /t daily necessities /r 30
 add expense /a 123.21 /t books
 addstock /s MSFT
 addstock /s GME
+budget set /b 5000
+budget update /b 3000
+add expense /a 200 /t airpods
 sdf
 exit

@@ -1,6 +1,7 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
 
@@ -14,6 +15,7 @@ public abstract class SaveData {
             for (Cashflow entry : cashflowList.list) {
                 fw.write(entry.formatString() + "\n");
             }
+            fw.write(Budget.formatString() + "\n");
             fw.close();
         } catch (IOException e) {
             throw new FinancialPlannerException("Error saving file.");
