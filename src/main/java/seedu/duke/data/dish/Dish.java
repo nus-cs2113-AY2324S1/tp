@@ -12,4 +12,16 @@ public class Dish {
         this.ingredients = ingredients;
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public float getPrice() {
+        return price;
+    }
 }
