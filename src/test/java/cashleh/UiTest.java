@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
+    private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
+    private static final String SEPARATOR = System.lineSeparator();
     Ui testUi = new Ui();
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    private final String HORIZONTAL_LINE = "\t____________________________________________________________";
-    private final String SEPARATOR = System.lineSeparator();
 
     @BeforeEach
     public void setUp() {

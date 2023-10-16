@@ -1,22 +1,33 @@
 package cashleh.commands;
 
-import cashleh.CashLehException;
+import exceptions.CashLehMissingTransactionException;
+import cashleh.ExpenseStatement;
+import cashleh.IncomeStatement;
+import cashleh.Ui;
 
 public class DeleteExpense extends Command {
-    public static final String COMMAND = "deleteExpense";
-
-    public DeleteExpense(int expenseIndexToDelete) throws CashLehException {
-        super(expenseIndexToDelete);
-        if (expenseIndexToDelete > expenseStatement.getNumberOfExpenses()) {
-            throw new CashLehException("Invalid input format. Please provide a valid task index to delete.");
-        }
+    private final int expenseIndex;
+    private final Ui ui = new Ui();
+    public DeleteExpense(int expenseIndex) {
+        this.expenseIndex = expenseIndex;
     }
 
     @Override
-    public void execute() {
-        String expenseBeingDeleted = getExpense().toString();
-        expenseStatement.deleteExpense(getIndex());
-        System.out.println("The following income was deleted:\n" + expenseBeingDeleted);
+    public void execute(
+        ExpenseStatement expenseStatement,
+        IncomeStatement incomeStatement
+    ) throws CashLehMissingTransactionException {
+        try {
+            String expenseBeingDeleted = expenseStatement.getExpense(expenseIndex - 1).toString();
+            expenseStatement.deleteExpense(expenseIndex - 1);
+            ui.printMultipleText(new String[] {
+                "Noted! CashLeh has removed the following expense:",
+                expenseBeingDeleted
+            });
+        } catch (CashLehMissingTransactionException e) {
+            throw new CashLehMissingTransactionException();
+        }
+
     }
 }
 

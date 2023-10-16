@@ -1,29 +1,22 @@
 package cashleh.commands;
 
-import cashleh.CashLehException;
 import cashleh.Expense;
+import cashleh.ExpenseStatement;
+import cashleh.IncomeStatement;
+import cashleh.Ui;
 
 public class AddExpense extends Command {
-    public static final String COMMAND = "addExpense";
     private final Expense expenseToAdd;
-
-    public AddExpense(String description, double amount) throws CashLehException {
-        if (description.isEmpty() || amount <= 0) {
-            throw new CashLehException("Invalid expense. Please include description and " +
-                    "amount of expense in following format:" +
-                    "\"addExpense <DESCRIPTION> /amt <AMOUNT>\"");
-        }
-        this.expenseToAdd = new Expense(description, amount);
-    }
+    private final Ui ui = new Ui();
 
     public AddExpense(Expense expenseToAdd) {
         this.expenseToAdd = expenseToAdd;
     }
 
     @Override
-    public void execute() {
+    public void execute(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
         expenseStatement.addExpense(expenseToAdd);
-        System.out.println("The following expense was added:\n" + getExpense());
+        ui.printMultipleText(new String[] {"The following expense was added:", expenseToAdd.toString()});
     }
 }
 
