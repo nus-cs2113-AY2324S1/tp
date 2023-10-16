@@ -12,8 +12,10 @@ import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
+import fittrack.command.ListMealsCommand;
 import fittrack.command.ListWorkoutCommand;
 import fittrack.command.SetDailyCalorieSurplusLimitCommand;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,7 +23,7 @@ import java.util.regex.Pattern;
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
     public static final String ALL_COMMAND_WORDS =
-            "help, exit, editprofile, addmeal, deletemeal, addwork, deletework, setlimit, listall";
+            "help, exit, editprofile, addmeal, deletemeal, addwork, deletework, setlimit, listall, listmeals";
 
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
@@ -73,6 +75,8 @@ public class CommandParser {
             return new ListWorkoutCommand();
         case SetDailyCalorieSurplusLimitCommand.COMMAND_WORD:
             return new SetDailyCalorieSurplusLimitCommand();
+        case ListMealsCommand.COMMAND_WORD:
+            return new ListMealsCommand();
         default:
             return new InvalidCommand(word);
         }
@@ -86,6 +90,7 @@ public class CommandParser {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
+
     public double[] parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
@@ -97,6 +102,7 @@ public class CommandParser {
 
         return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
     }
+
 
     public String getFirstWord(String str) {
         assert str != null && !str.isEmpty();

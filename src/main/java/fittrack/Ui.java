@@ -8,6 +8,8 @@ import java.util.Scanner;
  * Represents the user interface of FitTrack.
  */
 public class Ui {
+    private static final String LINE = "____________________________________________________________";
+
     private final Scanner in;
 
     /**
