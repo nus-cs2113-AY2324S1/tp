@@ -32,7 +32,7 @@ public class CommandParser {
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)"
     );
 
-    public Command parseCommand(String userCommandLine) {
+    public Command parseCommand(String userCommandLine) throws PatternMatchFailException {
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
             Command command = new InvalidCommand(userCommandLine);

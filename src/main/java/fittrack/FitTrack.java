@@ -24,11 +24,11 @@ public class FitTrack {
     /**
      * Main entry-point for the FitTrack application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PatternMatchFailException {
         new FitTrack().run();
     }
 
-    private void run() {
+    private void run() throws PatternMatchFailException {
         start();
         loopCommandExecution();
         end();
@@ -39,19 +39,17 @@ public class FitTrack {
         try {
             profileSettings();
         } catch (PatternMatchFailException e) {
-            System.out.println("Wrong format. h/<height> w/<weight>");
+            System.out.println("Wrong format. Please enter h/<height> w/<weight>");
         }
     }
 
-    private void loopCommandExecution() {
+    private void loopCommandExecution() throws PatternMatchFailException {
         Command command;
         do {
             String userCommandLine = ui.scanCommandLine();
             command = new CommandParser().parseCommand(userCommandLine);
             CommandResult commandResult = executeCommand(command);
             ui.printCommandResult(commandResult);
-
-
         } while (!ExitCommand.isExit(command));
     }
 
@@ -64,16 +62,12 @@ public class FitTrack {
      * Gets user profile details when program starts.
      */
     private void profileSettings() throws PatternMatchFailException {
-        System.out.println("Please enter your name:");
-        String name = ui.scanNextLine();
         System.out.println("Please enter your height (in cm) and weight (in kg):");
         String input = ui.scanNextLine();
         double[] profile;
-
         profile = new CommandParser().parseProfile(input);
-        userProfile = new UserProfile(name, profile[0], profile[1]);
-        ui.printProfileDetails(name, profile);
-
+        userProfile = new UserProfile(profile[0], profile[1]);
+        ui.printProfileDetails(profile);
     }
 
     private void end() {

@@ -1,8 +1,12 @@
 Welcome to FitTrack!
-Please enter your name:
 Please enter your height (in cm) and weight (in kg):
-Hi Andy! Nice to meet you!
-Height: 180.0
-Weight: 80.0
+Wrong format. Please enter h/<height> w/<weight>
+`h/180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+I've edited the following:
+Height: 170.0
+Weight: 70.0
+
 Goodbye! Hope to see you soon!
 
