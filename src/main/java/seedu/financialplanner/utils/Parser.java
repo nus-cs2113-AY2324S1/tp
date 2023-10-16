@@ -7,6 +7,7 @@ import seedu.financialplanner.commands.DeleteCashflowCommand;
 import seedu.financialplanner.commands.ExitCommand;
 import seedu.financialplanner.commands.FindCommand;
 import seedu.financialplanner.commands.InvalidCommand;
+import seedu.financialplanner.commands.ListCommand;
 import seedu.financialplanner.commands.RawCommand;
 import seedu.financialplanner.commands.WatchListCommand;
 import seedu.financialplanner.commands.VisCommand;
@@ -31,6 +32,7 @@ public class Parser {
     private static final String BUDGET_COMMAND = "budget";
     private static final String VISUALIZATION_COMMAND = "vis";
     private static final String ADD_REMINDER_COMMAND = "addreminder";
+    private static final String LIST_COMMAND = "list";
     public static AbstractCommand parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
         return parseCommand(rawCommand);
@@ -56,6 +58,8 @@ public class Parser {
             return new VisCommand(rawCommand);
         case ADD_REMINDER_COMMAND:
             return new AddReminderCommand(rawCommand);
+        case LIST_COMMAND:
+            return new ListCommand(rawCommand);
         default:
             return new InvalidCommand();
         }

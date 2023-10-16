@@ -6,21 +6,20 @@ import seedu.financialplanner.utils.Ui;
 
 public class DeleteCashflowCommand extends AbstractCommand{
 
-    protected CashflowCategory category = CashflowCategory.EMPTY;
+    protected CashflowCategory category = null;
     protected int index;
 
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
-        String stringCategory;
+        String stringCategory = null;
 
         if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
-        } else {
+        } else if (rawCommand.args.size() == 2) {
             stringCategory = rawCommand.args.get(0);
-
-            handleInvalidCategory(stringCategory);
-
             stringIndex = rawCommand.args.get(1);
+        } else {
+            throw new IllegalArgumentException("Incorrect arguments.");
         }
 
         try {
@@ -28,25 +27,26 @@ public class DeleteCashflowCommand extends AbstractCommand{
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Index must be an integer");
         }
-    }
 
-    private void handleInvalidCategory(String stringCategory) {
-        try {
-            category = CashflowCategory.valueOf(stringCategory.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Entry must be either income or expense");
+        if (stringCategory != null) {
+            try {
+                category = CashflowCategory.valueOf(stringCategory.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Entry must be either income or expense");
+            }
         }
     }
 
     @Override
     public void execute() {
+        if (category == null) {
+            handleDeleteCashflowWithoutCategory();
+            return;
+        }
         switch (category) {
         case INCOME:
         case EXPENSE:
             handleDeleteCashflowWithCategory();
-            break;
-        case EMPTY:
-            handleDeleteCashflowWithoutCategory();
             break;
         default:
             Ui.INSTANCE.showMessage("Unidentified entry.");
