@@ -4,6 +4,8 @@ import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.utils.Ui;
 
+import java.util.ArrayList;
+
 public class BudgetCommand extends AbstractCommand {
     private double budget;
     private String command;
@@ -32,6 +34,11 @@ public class BudgetCommand extends AbstractCommand {
             throw new IllegalArgumentException("Budget must be a number.");
         }
         rawCommand.extraArgs.remove("b");
+
+        if (!rawCommand.extraArgs.isEmpty()) {
+            String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
+            throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
+        }
     }
 
     @Override
