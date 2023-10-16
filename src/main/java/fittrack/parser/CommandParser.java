@@ -16,7 +16,6 @@ import fittrack.command.ViewMealsCommand;
 import fittrack.command.ViewWeightCommand;
 import fittrack.command.ViewWorkoutsCommand;
 
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,16 +34,22 @@ public class CommandParser {
     public Command parseCommand(String userCommandLine) {
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
-            Command command = new InvalidCommand(userCommandLine);
-            command.setArguments(null, this);
-            return command;
+            InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
+            invalidCommand.setArguments(null, this);
+            return invalidCommand;
         }
 
         final String word = matcher.group("word").strip();
         final String args = matcher.group("args").strip();
 
         Command command = getBlankCommand(word);
-        command.setArguments(args, this);
+        try {
+            command.setArguments(args, this);
+        } catch (ParseException e) {
+            InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
+            invalidCommand.setArguments(null, this);
+            return invalidCommand;
+        }
         return command;
     }
 
@@ -96,14 +101,17 @@ public class CommandParser {
 
         final String height = matcher.group("height");
         final String weight = matcher.group("weight");
-        final String dailyCalorieSurplusLimit = matcher.group("calLimit");
+        final String dailyCalorieLimit = matcher.group("calLimit");
 
-        return new UserProfile(
-                null,
-                Double.parseDouble(height),
-                Double.parseDouble(weight),
-                Double.parseDouble(dailyCalorieSurplusLimit)
-        );
+        try {
+            return new UserProfile(
+                    Double.parseDouble(height),
+                    Double.parseDouble(weight),
+                    Double.parseDouble(dailyCalorieLimit)
+            );
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
+        }
     }
 
     // TODO: Make a parse method for a meal.

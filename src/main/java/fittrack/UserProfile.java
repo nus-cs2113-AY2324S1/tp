@@ -1,28 +1,18 @@
 package fittrack;
 
 public class UserProfile {
-    private String name;
     private double height;
     private double weight;
-    private double dailyCalorieSurplusLimit;
+    private double dailyCalorieLimit;
 
     public UserProfile() {
-        this(null, 0, 0, 0);
+        this(0, 0, 0);
     }
 
-    public UserProfile(String name, double height, double weight, double dailyCalorieSurplusLimit) {
-        setName(name);
+    public UserProfile(double height, double weight, double dailyCalorieLimit) {
         setHeight(height);
         setWeight(weight);
-        setDailyCalorieSurplusLimit(dailyCalorieSurplusLimit);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        setDailyCalorieLimit(dailyCalorieLimit);
     }
 
     public double getHeight() {
@@ -41,11 +31,17 @@ public class UserProfile {
         this.weight = weight;
     }
 
-    public double getDailyCalorieSurplusLimit() {
-        return dailyCalorieSurplusLimit;
+    public double getDailyCalorieLimit() {
+        return dailyCalorieLimit;
     }
 
-    public void setDailyCalorieSurplusLimit(double dailyCalorieSurplusLimit) {
-        this.dailyCalorieSurplusLimit = dailyCalorieSurplusLimit;
+    public void setDailyCalorieLimit(double dailyCalorieLimit) {
+        this.dailyCalorieLimit = dailyCalorieLimit;
+    }
+
+    public String toString() {
+        return "Height: " + this.height + "\n" +
+                "Weight: " + this.weight + "\n" +
+                "Daily calorie limit: " + this.dailyCalorieLimit;
     }
 }

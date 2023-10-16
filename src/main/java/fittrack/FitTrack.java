@@ -4,6 +4,7 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
+import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
 
 /**
@@ -41,7 +42,9 @@ public class FitTrack {
         try {
             profileSettings();
         } catch (PatternMatchFailException e) {
-            System.out.println("Wrong format. h/<height> w/<weight>");
+            System.out.println("Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>");
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter numbers for height, weight, and daily calorie limit.");
         }
     }
 
@@ -63,21 +66,16 @@ public class FitTrack {
     /**
      * Gets user profile details when program starts.
      */
-    private void profileSettings() throws PatternMatchFailException {
-        System.out.println("Please enter your name:");
-        String name = ui.scanNextLine();
-        userProfile.setName(name);
-
+    private void profileSettings() throws PatternMatchFailException, NumberFormatException {
         System.out.println(
-                "Please enter your height (in cm), weight (in kg), " +
-                "and daily calorie surplus limit (in kcal):"
+                "Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):"
         );
         String input = ui.scanNextLine();
 
         UserProfile profile = new CommandParser().parseProfile(input);
         userProfile.setHeight(profile.getHeight());
         userProfile.setWeight(profile.getWeight());
-        userProfile.setDailyCalorieSurplusLimit(profile.getDailyCalorieSurplusLimit());
+        userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
         ui.printProfileDetails(userProfile);
     }
 

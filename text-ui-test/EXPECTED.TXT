@@ -1,8 +1,13 @@
 Welcome to FitTrack!
-Please enter your name:
-Please enter your height (in cm) and weight (in kg):
-Hi Andy! Nice to meet you!
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Here are your profile settings.
 Height: 180.0
 Weight: 80.0
+Daily calorie surplus limit: 2000.0
+I've edited the following:
+Height: 170.0
+Weight: 70.0
+Daily calorie limit: 1500.0
+
 Goodbye! Hope to see you soon!
 
