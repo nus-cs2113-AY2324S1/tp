@@ -18,6 +18,10 @@ public class BudgetCommand extends AbstractCommand {
             throw new FinancialPlannerException("There is an existing budget, did you mean update?");
         }
 
+        if (command.equals("update") && !Budget.hasBudget()) {
+            throw new FinancialPlannerException("There is no budget set yet, did you mean set?");
+        }
+
         if (!rawCommand.extraArgs.containsKey("b")) {
             throw new IllegalArgumentException("Missing /b argument.");
         }
