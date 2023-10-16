@@ -1,10 +1,7 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.Expense;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.list.Income;
+import seedu.financialplanner.list.*;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.FileReader;
@@ -65,6 +62,10 @@ public abstract class LoadData {
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
             entry = new Expense(value, split[2].trim(), recur);
+            break;
+        case "B":
+            value = Double.parseDouble(split[1].trim());
+            entry = new Budget(value);
             break;
         default:
             throw new FinancialPlannerException("Error loading file");

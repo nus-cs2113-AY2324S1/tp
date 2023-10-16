@@ -1,28 +1,25 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.FinancialList;
-import seedu.financialplanner.utils.Ui;
+import seedu.financialplanner.list.CashflowList;
 
-public class BudgetCommand extends Command {
-    private static final String BUDGET_DELIMITTER = "b/";
-    private String input;
+public class BudgetCommand extends AbstractCommand {
+    private double budget;
 
-    public BudgetCommand(String input) {
-        this.input = input;
+    public BudgetCommand(RawCommand rawCommand) throws IllegalArgumentException {
+        if (!rawCommand.extraArgs.containsKey("b")) {
+            throw new IllegalArgumentException("Missing /b argument.");
+        }
+        try {
+            budget = Double.parseDouble(rawCommand.extraArgs.get("b"));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Budget must be a number.");
+        }
+        rawCommand.extraArgs.remove("b");
     }
 
     @Override
-    public void execute(Ui ui, FinancialList financialList, WatchList watchList) throws FinancialPlannerException {
-        int budgetIndex = input.indexOf(BUDGET_DELIMITTER);
-        if (budgetIndex == -1) {
-            throw new FinancialPlannerException("Please ensure b/ is included in the command.");
-        }
-        String budgetString = input.substring(budgetIndex + BUDGET_DELIMITTER.length()).trim();
-        double budget = Double.parseDouble(budgetString); //todo: add error handling here
-
-        financialList.setBudget(new Budget(budget));
+    public void execute() throws Exception {
+        CashflowList.INSTANCE.setBudget(new Budget(budget));
     }
 }

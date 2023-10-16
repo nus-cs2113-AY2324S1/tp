@@ -11,6 +11,7 @@ import seedu.financialplanner.commands.InvalidCommand;
 import seedu.financialplanner.commands.RawCommand;
 import seedu.financialplanner.commands.WatchListCommand;
 import seedu.financialplanner.commands.BudgetCommand;
+import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class Parser {
         return parseCommand(rawCommand);
     }
 
-    public static AbstractCommand parseCommand(RawCommand rawCommand) throws IllegalArgumentException{
+    public static AbstractCommand parseCommand(RawCommand rawCommand) throws IllegalArgumentException {
         switch (rawCommand.getCommandName()) {
         case EXIT_COMMAND: {
             return new ExitCommand(rawCommand);
@@ -49,6 +50,8 @@ public class Parser {
         case FIND_COMMAND: {
             return new FindCommand(rawCommand);
         }
+        case SET_BUDGET_COMMAND:
+            return new BudgetCommand(rawCommand);
         default: {
             return new InvalidCommand();
         }
