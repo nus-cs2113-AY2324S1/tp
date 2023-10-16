@@ -4,7 +4,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import seedu.financialplanner.commands.EntryCommand;
+import seedu.financialplanner.commands.AddCashflowCommand;
 import seedu.financialplanner.utils.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +26,7 @@ public class BudgetTest {
     @Test
     @Order(2)
     public void testNewExpense() {
-        EntryCommand testExpense = new EntryCommand(Parser.parseRawCommand("add expense /a 50 /t food"));
+        AddCashflowCommand testExpense = new AddCashflowCommand(Parser.parseRawCommand("add expense /a 50 /t food"));
         testExpense.execute();
         assertEquals(450, Budget.getCurrentBudget());
     }
