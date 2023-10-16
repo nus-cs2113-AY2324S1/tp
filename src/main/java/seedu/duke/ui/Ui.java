@@ -23,6 +23,11 @@ public class Ui {
     public void showGoodbye() {
         System.out.println(UserOutput.GOODBYE_MESSAGE.message);
     }
+
+    public void showDeleteMessage(String menuItem) {
+        showToUser("Okies! " + menuItem + " deleted! :)");
+    }
+
     /** Shows messages(s) to the user **/
     public void showToUser(String... message) {
         for (String m: message) {
