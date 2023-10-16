@@ -64,12 +64,4 @@ public class CashflowList {
         }
         return output;
     }
-
-    public Cashflow get(int index) {
-        return list.get(index);
-    }
-
-    public int size() {
-        return list.size();
-    }
 }

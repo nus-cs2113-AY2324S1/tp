@@ -24,9 +24,9 @@ public class FindCommand extends AbstractCommand {
         WatchList watchList = WatchList.INSTANCE;
         ArrayList<String> foundedFinancialList = new ArrayList<>();
         ArrayList<String> foundedWatchList = new ArrayList<>();
-        for (int i = 0; i < cashflowList.size(); i++) {
-            if (cashflowList.get(i).formatString().contains(description)) {
-                foundedFinancialList.add(cashflowList.get(i).formatString());
+        for (int i = 0; i < cashflowList.list.size(); i++) {
+            if (cashflowList.list.get(i).formatString().contains(description)) {
+                foundedFinancialList.add(cashflowList.list.get(i).formatString());
             }
         }
         if (!foundedFinancialList.isEmpty()) {
