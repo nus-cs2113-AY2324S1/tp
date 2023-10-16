@@ -105,11 +105,4 @@ public class Parser {
 
         return new RawCommand(commandName, args, extraArgs);
     }
-
-//    private static Command parseVis(String restOfInput) {
-//        String[] split = restOfInput.trim().split("t/|c/");
-//        String type = split[1].trim();
-//        String chart = split[2].trim();
-//        return new VisCommand(type, chart);
-//    }
 }
