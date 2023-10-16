@@ -1,6 +1,5 @@
 package fittrack.command;
 
-import fittrack.Meal;
 import fittrack.Workout;
 import fittrack.WorkoutList;
 import fittrack.parser.CommandParser;
@@ -16,7 +15,8 @@ public class AddWorkoutCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return null;
+        WorkoutList.addToList(newWorkout);
+        return new CommandResult("I've added the following workout:" + "\n" + newWorkout.toString());
     }
 
     @Override
