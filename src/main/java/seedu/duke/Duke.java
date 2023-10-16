@@ -6,8 +6,6 @@ import seedu.duke.parser.Parser;
 import seedu.duke.ui.Ui;
 import seedu.duke.command.ExitCommand;
 
-import java.util.Scanner;
-
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.

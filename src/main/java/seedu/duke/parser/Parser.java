@@ -24,26 +24,27 @@ public class Parser {
      * @return the command based on the user input
      */
     public static Command parseCommand(Menu menu, String userInput) {
-        String command[] = userInput.split(" ");
+        String[] command = userInput.split(" ");
         switch (command[0].toLowerCase()) {
-            case ListMenuCommand.COMMAND_WORD:
-                return new ListMenuCommand();
-            /*case ListIngredientCommand.COMMAND_WORD:
-                return prepareListIngredient(menu,userInput);
-            case DeleteDishCommand.COMMAND_WORD:
-                return prepareDelete(menu,userInput);*/
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
-            case AddDishCommand.COMMAND_WORD:
-                //return new AddDishCommand();
-                return new IncorrectCommand("DEXTER DO WORK");
-            default:
-                return new IncorrectCommand("Whoa there, tiger! Your command has left me scratching my virtual head. Let's try that again, shall we?");
+        case ListMenuCommand.COMMAND_WORD:
+            return new ListMenuCommand();
+        /*case ListIngredientCommand.COMMAND_WORD:
+            return prepareListIngredient(menu,userInput);
+        case DeleteDishCommand.COMMAND_WORD:
+            return prepareDelete(menu,userInput);*/
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case AddDishCommand.COMMAND_WORD:
+            //return new AddDishCommand();
+            return new IncorrectCommand("DEXTER DO WORK");
+        default:
+            return new IncorrectCommand("Your command has left me scratching my virtual head. " +
+                    "Let's try that again, shall we?");
         }
     }
 
     /**
-     *
+     * Parses arguments in the context of the ListIngredient command.
      * @param menu
      * @param userInput
      * @return the prepared command
@@ -82,7 +83,8 @@ public class Parser {
      * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
-    private static int parseArgsAsDisplayedIndex(Menu menu, String userInput, String command) throws ParseException, NumberFormatException {
+    private static int parseArgsAsDisplayedIndex(Menu menu, String userInput, String command)
+            throws ParseException, NumberFormatException {
         String formattedString = userInput.replace(command, "").trim();
         int listIndex = Integer.parseInt(formattedString);
         return listIndex;
