@@ -51,6 +51,7 @@ public class CashflowList {
         printAddedCashflow("expense");
     }
 
+
     public void load(Cashflow entry) {
         list.add(entry);
     }
@@ -62,13 +63,5 @@ public class CashflowList {
             output += entry.formatString() + "\n";
         }
         return output;
-    }
-
-    public Cashflow get(int index) {
-        return list.get(index);
-    }
-
-    public int size() {
-        return list.size();
     }
 }
