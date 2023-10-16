@@ -57,4 +57,8 @@ public class Cashflow {
     public String formatString() {
         return this.amount + " | " + this.type + " | " + this.recur;
     }
+
+    public String getType() {
+        return type;
+    }
 }
