@@ -40,9 +40,6 @@ public class DeleteCashflowCommand extends AbstractCommand{
 
     @Override
     public void execute() {
-        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
-        assert index != 0;
-
         switch (category) {
         case INCOME:
         case EXPENSE:
