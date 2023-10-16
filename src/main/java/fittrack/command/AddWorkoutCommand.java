@@ -27,6 +27,6 @@ public class AddWorkoutCommand extends Command {
 
     @Override
     protected String getHelp() {
-        return null;
+        return HELP;
     }
 }
