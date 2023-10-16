@@ -46,7 +46,7 @@ public class BudgetCommand extends AbstractCommand {
         switch (command) {
         case "set":
             Budget.setBudget(budget);
-            Ui.INSTANCE.showMessage("A monthly budget of " + String.format("%.2f", Budget.getInitialBudget())
+            Ui.INSTANCE.showMessage("A monthly budget of " + Budget.getInitialBudgetString()
                     + " has been set.");
             break;
         case "update":

@@ -80,12 +80,12 @@ public class Ui {
 
     public void printBudgetBeforeUpdate() {
         showMessage("Budget has been updated:\nOld initial budget: " +
-                String.format("%.2f", Budget.getInitialBudget()) + "\nOld current budget: " +
-                String.format("%.2f", Budget.getCurrentBudget()));
+                Budget.getInitialBudgetString() + "\nOld current budget: " +
+                Budget.getCurrentBudgetString());
     }
 
     public void printBudgetAfterUpdate() {
-        showMessage("New initial budget: " + String.format("%.2f", Budget.getInitialBudget()) +
-                "\nNew current budget: " + String.format("%.2f", Budget.getCurrentBudget()));
+        showMessage("New initial budget: " + Budget.getInitialBudgetString() +
+                "\nNew current budget: " + Budget.getCurrentBudgetString());
     }
 }
