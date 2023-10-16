@@ -4,7 +4,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.utils.Ui;
-
 import java.util.ArrayList;
 
 public class WatchListCommand extends AbstractCommand {
@@ -18,6 +17,7 @@ public class WatchListCommand extends AbstractCommand {
     public void execute() {
         JSONArray stocks = WatchList.INSTANCE.fetchFMPStockPrices();
         Ui.INSTANCE.printWatchListHeader();
+
         for (Object o : stocks) {
             JSONObject stock = (JSONObject) o;
             Ui.INSTANCE.printStockInfo(stock);

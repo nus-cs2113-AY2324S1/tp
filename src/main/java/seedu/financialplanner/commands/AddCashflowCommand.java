@@ -1,25 +1,25 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.enumerations.EntryCategory;
+import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
-
 import static java.lang.Math.abs;
 
-public class EntryCommand extends AbstractCommand {
+public class AddCashflowCommand extends AbstractCommand {
+
     protected double amount;
-    protected EntryCategory category;
+    protected CashflowCategory category;
     protected String type;
     protected int recur = 0;
 
-    public EntryCommand(RawCommand rawCommand) throws IllegalArgumentException {
+    public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
         try {
-            category = EntryCategory.valueOf(typeString.toUpperCase());
+            category = CashflowCategory.valueOf(typeString.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Entry must be either income or expense");
         }
@@ -74,7 +74,7 @@ public class EntryCommand extends AbstractCommand {
     }
 
     private static void deductFromBudget(Cashflow entry) {
-        double expenseAmount = entry.getValue();
+        double expenseAmount = entry.getAmount();
         Budget.deduct(expenseAmount);
         if (Budget.getCurrentBudget() <= 0) {
             Ui.INSTANCE.showMessage("You have exceeded your current budget by: " +

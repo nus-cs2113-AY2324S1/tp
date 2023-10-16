@@ -26,6 +26,7 @@ public class AddStockCommand extends AbstractCommand {
         Ui ui = Ui.INSTANCE;
         WatchList watchList = WatchList.INSTANCE;
         String stockName;
+
         try {
             stockName = watchList.addStock(stockCode);
             ui.printAddStock(stockName);
