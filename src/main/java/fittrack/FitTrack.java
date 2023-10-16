@@ -74,6 +74,5 @@ public class FitTrack {
     }
 
     private void end() {
-        ui.closeScanner();
     }
 }
