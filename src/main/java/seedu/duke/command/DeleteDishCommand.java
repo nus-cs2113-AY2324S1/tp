@@ -8,8 +8,20 @@ import seedu.duke.ui.Ui;
  */
 public class DeleteDishCommand extends Command {
 
+    private int dishIndex;
+
+    /**
+     * Constructor for DeleteDishCommand
+     *
+     * @param index index of menu item to be deleted
+     */
+    public DeleteDishCommand(int index) {
+        this.dishIndex = index;
+    }
+
     @Override
     public void execute(Menu menu, Ui ui) {
-
+        menu.remove(dishIndex);
+        ui.showDeleteMessage(menu.getDish(dishIndex).toString());
     };
 }
