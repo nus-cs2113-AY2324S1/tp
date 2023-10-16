@@ -10,15 +10,17 @@ import fittrack.parser.PatternMatchFailException;
  * Represents the main part of FitTrack.
  */
 public class FitTrack {
-    private UserProfile userProfile;
+    private final UserProfile userProfile;
     private final MealList mealList;
-    private final WorkList workList;
+    private final WorkoutList workoutList;
     private final Ui ui;
 
     private FitTrack() {
         ui = new Ui();
+
+        userProfile = new UserProfile();
         mealList = new MealList();
-        workList = new WorkList();
+        workoutList = new WorkoutList();
     }
 
     /**
@@ -50,13 +52,11 @@ public class FitTrack {
             command = new CommandParser().parseCommand(userCommandLine);
             CommandResult commandResult = executeCommand(command);
             ui.printCommandResult(commandResult);
-
-
         } while (!ExitCommand.isExit(command));
     }
 
     private CommandResult executeCommand(Command command) {
-        command.setData(userProfile, mealList, workList);
+        command.setData(userProfile, mealList, workoutList);
         return command.execute();
     }
 
@@ -66,14 +66,19 @@ public class FitTrack {
     private void profileSettings() throws PatternMatchFailException {
         System.out.println("Please enter your name:");
         String name = ui.scanNextLine();
-        System.out.println("Please enter your height (in cm) and weight (in kg):");
+        userProfile.setName(name);
+
+        System.out.println(
+                "Please enter your height (in cm), weight (in kg), " +
+                "and daily calorie surplus limit (in kcal):"
+        );
         String input = ui.scanNextLine();
-        double[] profile;
 
-        profile = new CommandParser().parseProfile(input);
-        userProfile = new UserProfile(name, profile[0], profile[1]);
-        ui.printProfileDetails(name, profile);
-
+        UserProfile profile = new CommandParser().parseProfile(input);
+        userProfile.setHeight(profile.getHeight());
+        userProfile.setWeight(profile.getWeight());
+        userProfile.setDailyCalorieSurplusLimit(profile.getDailyCalorieSurplusLimit());
+        ui.printProfileDetails(userProfile);
     }
 
     private void end() {

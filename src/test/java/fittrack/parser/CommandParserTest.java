@@ -1,5 +1,6 @@
 package fittrack.parser;
 
+import fittrack.UserProfile;
 import fittrack.command.Command;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
@@ -30,9 +31,10 @@ class CommandParserTest {
     @Test
     void parseProfile_h180w80_success() {
         try {
-            double[] profile = new CommandParser().parseProfile("h/180 w/80");
-            assertEquals(180., profile[0]);
-            assertEquals(80., profile[1]);
+            UserProfile profile = new CommandParser().parseProfile("h/180 w/80 l/2000");
+            assertEquals(180., profile.getHeight());
+            assertEquals(80., profile.getWeight());
+            assertEquals(2000., profile.getDailyCalorieSurplusLimit());
         } catch (PatternMatchFailException e) {
             throw new RuntimeException(e);
         }
@@ -41,13 +43,13 @@ class CommandParserTest {
     @Test
     void parseProfile_fail() {
         CommandParser parser = new CommandParser();
-        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/ w/"));
-        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/180 w/"));
-        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/ w/80"));
-        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/180 80"));
-        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("180 w/80"));
-        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("180 80"));
-        assertThrows(NumberFormatException.class, () -> parser.parseProfile("h/180 w/eighty"));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/ w/ l/"));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/180 w/80 l/"));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/ w/80 l/2000"));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("h/180 80 2000"));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("180 w/80 l/2000"));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("180 80 2000"));
+        assertThrows(NumberFormatException.class, () -> parser.parseProfile("h/180 w/eighty l/2000"));
     }
 
     @Test

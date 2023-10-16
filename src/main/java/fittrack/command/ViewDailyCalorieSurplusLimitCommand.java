@@ -2,8 +2,8 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-public class DeleteWorkCommand extends Command {
-    public static final String COMMAND_WORD = "deletework";
+public class ViewDailyCalorieSurplusLimitCommand extends Command {
+    public static final String COMMAND_WORD = "viewlimit";
 
     @Override
     public CommandResult execute() {

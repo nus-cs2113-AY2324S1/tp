@@ -1,20 +1,20 @@
 package fittrack.parser;
 
+import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
-import fittrack.command.AddWorkCommand;
-import fittrack.command.CheckDailyCalorieSurplusLimitCommand;
-import fittrack.command.CheckHeightCommand;
-import fittrack.command.CheckWeightCommand;
+import fittrack.command.AddWorkoutCommand;
 import fittrack.command.Command;
 import fittrack.command.DeleteMealCommand;
-import fittrack.command.DeleteWorkCommand;
+import fittrack.command.DeleteWorkoutCommand;
 import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
-import fittrack.command.ListMealsCommand;
-import fittrack.command.ListWorkoutCommand;
-import fittrack.command.SetDailyCalorieSurplusLimitCommand;
+import fittrack.command.ViewDailyCalorieSurplusLimitCommand;
+import fittrack.command.ViewHeightCommand;
+import fittrack.command.ViewMealsCommand;
+import fittrack.command.ViewWeightCommand;
+import fittrack.command.ViewWorkoutsCommand;
 
 
 import java.util.regex.Matcher;
@@ -29,7 +29,7 @@ public class CommandParser {
             "(?<word>\\S+)(?<args>.*)"
     );
     private static final Pattern PROFILE_PATTERN = Pattern.compile(
-            "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)"
+            "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)\\s+l/(?<calLimit>\\S+)"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -57,26 +57,24 @@ public class CommandParser {
             return new ExitCommand();
         case EditProfileCommand.COMMAND_WORD:
             return new EditProfileCommand();
+        case ViewHeightCommand.COMMAND_WORD:
+            return new ViewHeightCommand();
+        case ViewWeightCommand.COMMAND_WORD:
+            return new ViewWeightCommand();
+        case ViewDailyCalorieSurplusLimitCommand.COMMAND_WORD:
+            return new ViewDailyCalorieSurplusLimitCommand();
         case AddMealCommand.COMMAND_WORD:
             return new AddMealCommand();
         case DeleteMealCommand.COMMAND_WORD:
             return new DeleteMealCommand();
-        case AddWorkCommand.COMMAND_WORD:
-            return new AddWorkCommand();
-        case DeleteWorkCommand.COMMAND_WORD:
-            return new DeleteWorkCommand();
-        case CheckHeightCommand.COMMAND_WORD:
-            return new CheckHeightCommand();
-        case CheckWeightCommand.COMMAND_WORD:
-            return new CheckWeightCommand();
-        case CheckDailyCalorieSurplusLimitCommand.COMMAND_WORD:
-            return new CheckDailyCalorieSurplusLimitCommand();
-        case ListWorkoutCommand.COMMAND_WORD:
-            return new ListWorkoutCommand();
-        case SetDailyCalorieSurplusLimitCommand.COMMAND_WORD:
-            return new SetDailyCalorieSurplusLimitCommand();
-        case ListMealsCommand.COMMAND_WORD:
-            return new ListMealsCommand();
+        case ViewMealsCommand.COMMAND_WORD:
+            return new ViewMealsCommand();
+        case AddWorkoutCommand.COMMAND_WORD:
+            return new AddWorkoutCommand();
+        case DeleteWorkoutCommand.COMMAND_WORD:
+            return new DeleteWorkoutCommand();
+        case ViewWorkoutsCommand.COMMAND_WORD:
+            return new ViewWorkoutsCommand();
         default:
             return new InvalidCommand(word);
         }
@@ -90,8 +88,7 @@ public class CommandParser {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-
-    public double[] parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
+    public UserProfile parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
@@ -99,10 +96,19 @@ public class CommandParser {
 
         final String height = matcher.group("height");
         final String weight = matcher.group("weight");
+        final String dailyCalorieSurplusLimit = matcher.group("calLimit");
 
-        return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
+        return new UserProfile(
+                null,
+                Double.parseDouble(height),
+                Double.parseDouble(weight),
+                Double.parseDouble(dailyCalorieSurplusLimit)
+        );
     }
 
+    // TODO: Make a parse method for a meal.
+
+    // TODO: Make a parse method for a work.
 
     public String getFirstWord(String str) {
         assert str != null && !str.isEmpty();

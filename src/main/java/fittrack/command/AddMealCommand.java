@@ -7,7 +7,7 @@ import fittrack.parser.CommandParser;
 public class AddMealCommand extends Command {
     public static final String COMMAND_WORD = "addmeal";
 
-    Meal newMeal;
+    private Meal newMeal;
 
     @Override
     public CommandResult execute() {
@@ -16,8 +16,11 @@ public class AddMealCommand extends Command {
     }
 
     @Override
-
     public void setArguments(String args, CommandParser parser) {
+        // TODO: Try to make parse method in CommandParser and
+        // TODO: use the method by parser.parseXXX();
+        // TODO: Refer to CommandParser.parseProfile().
+
         // why is there a need for a command parser,
         // a argument parser makes more sense here since command is already known
         // TODO error handling
@@ -28,6 +31,7 @@ public class AddMealCommand extends Command {
 
     @Override
     protected String getHelp() {
+        // TODO: Write help. Refer to HelpCommand or ViewMealsCommand.
         return null;
     }
 }
