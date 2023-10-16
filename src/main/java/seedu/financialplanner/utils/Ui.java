@@ -2,6 +2,7 @@ package seedu.financialplanner.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
+import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 
 import java.util.Scanner;
@@ -75,5 +76,16 @@ public class Ui {
         System.out.println(entry);
         System.out.println("from the Financial Planner.");
         System.out.println("Balance: " + entry.formatBalance());
+    }
+
+    public void printBudgetBeforeUpdate() {
+        showMessage("Budget has been updated:\nOld initial budget: " +
+                String.format("%.2f", Budget.getInitialBudget()) + "\nOld current budget: " +
+                String.format("%.2f", Budget.getCurrentBudget()));
+    }
+
+    public void printBudgetAfterUpdate() {
+        showMessage("New initial budget: " + String.format("%.2f", Budget.getInitialBudget()) +
+                "\nNew current budget: " + String.format("%.2f", Budget.getCurrentBudget()));
     }
 }

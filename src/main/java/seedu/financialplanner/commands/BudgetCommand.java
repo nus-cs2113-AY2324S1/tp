@@ -43,12 +43,10 @@ public class BudgetCommand extends AbstractCommand {
                     + " has been set.");
             break;
         case "update":
-            Ui.INSTANCE.showMessage("Budget has been updated:\nOld initial budget: " +
-                    String.format("%.2f", Budget.getInitialBudget()) + "\nOld current budget: " +
-                    String.format("%.2f", Budget.getCurrentBudget()));
+            Ui.INSTANCE.printBudgetBeforeUpdate();
             Budget.updateBudget(budget);
-            Ui.INSTANCE.showMessage("New initial budget: " + String.format("%.2f", Budget.getInitialBudget()) +
-                    "\nNew current budget: " + String.format("%.2f", Budget.getCurrentBudget()));
+            Ui.INSTANCE.printBudgetAfterUpdate();
+
             if (Budget.getCurrentBudget() <= 0) {
                 Ui.INSTANCE.showMessage("You have exceeded your budget, please update to a larger budget or " +
                         "reset the current budget to initial budget.");

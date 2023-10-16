@@ -1,7 +1,10 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.list.*;
-import seedu.financialplanner.utils.Parser;
+import seedu.financialplanner.list.Budget;
+import seedu.financialplanner.list.Cashflow;
+import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.list.Income;
+import seedu.financialplanner.list.Expense;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
@@ -17,16 +20,13 @@ public class OverviewCommand extends AbstractCommand {
     @Override
     public void execute() throws Exception {
         CashflowList list = CashflowList.INSTANCE;
-        AbstractCommand watchlist = new WatchListCommand(Parser.parseRawCommand("watchlist"));
         Ui.INSTANCE.showMessage("Here is an overview of your financials:\n" +
                 "Total balance: " + String.format("%.2f", Cashflow.getBalance()) + "\n" +
                 "Highest income: " + getHighestIncome(list) + "\n" +
                 "Highest expense: " + getHighestExpense(list) + "\n" +
-                "Remaining budget for the month: " + getBudgetDesc() + "\n" +
-                "Watchlist: ");
-        //todo: maybe indicate if income/expense is recurring
+                "Remaining budget for the month: " + getBudgetDesc());
+        //todo: indicate description of income/expense
         //todo: goal disparity
-        watchlist.execute();
         //todo: add educational tip
     }
 

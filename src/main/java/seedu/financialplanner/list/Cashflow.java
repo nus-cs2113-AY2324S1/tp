@@ -58,10 +58,6 @@ public class Cashflow {
         return balance;
     }
 
-    public double getValue() {
-        return value;
-    }
-
     public String formatString() {
         return this.amount + " | " + this.type + " | " + this.recur;
     }
