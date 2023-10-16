@@ -1,3 +1,9 @@
-Welcome!
-bye!
-
+Welcome to FitTrack!
+Please enter your name:
+Please enter your height (in cm) and weight (in kg):
+____________________________________________________________
+Hi John! Nice to meet you!
+Height: 180.0
+Weight: 80.0
+____________________________________________________________
+Goodbye! Hope to see you soon!
