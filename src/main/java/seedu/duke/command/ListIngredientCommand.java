@@ -9,6 +9,6 @@ import seedu.duke.ui.Ui;
 public class ListIngredientCommand extends Command{
     @Override
     public void execute(Menu menu, Ui ui) {
-
+        ui.printIngredients(menu, index);
     };
 }
