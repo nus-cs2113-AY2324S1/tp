@@ -27,8 +27,6 @@ public class ListCommand extends AbstractCommand{
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Entry must be either income or expense");
             }
-        } else {
-
         }
     }
 
