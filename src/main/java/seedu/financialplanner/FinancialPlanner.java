@@ -31,6 +31,7 @@ public class FinancialPlanner {
             ui.showMessage(e.getMessage());
         }
 
+        FinancialPlannerLogger.initialise();
         ui.welcomeMessage();
         String input;
         AbstractCommand command = null;
