@@ -9,12 +9,18 @@ import seedu.duke.exerciselog.Log;
 public class DeleteLogCommand extends Command {
 
     public String feedbackToUser;
+    private List<String> exerciseDetails;
 
     public DeleteLogCommand() {
         super();
     }
 
-    public CommandResult execute(Log exerciseLog, List<String> exerciseDetails) {
+    public DeleteLogCommand(List<String> exerciseDetails) {
+        super();
+        this.exerciseDetails = exerciseDetails;
+    }
+
+    public CommandResult execute(Log exerciseLog) {
         int month = Integer.parseInt(exerciseDetails.get(0));
         int day = Integer.parseInt(exerciseDetails.get(1));
         String exerciseName = exerciseDetails.get(2);
