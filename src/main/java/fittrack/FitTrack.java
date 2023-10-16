@@ -69,9 +69,11 @@ public class FitTrack {
         System.out.println("Please enter your height (in cm) and weight (in kg):");
         String input = ui.scanNextLine();
         double[] profile;
+
         profile = new CommandParser().parseProfile(input);
         userProfile = new UserProfile(name, profile[0], profile[1]);
         ui.printProfileDetails(name, profile);
+
     }
 
     private void end() {

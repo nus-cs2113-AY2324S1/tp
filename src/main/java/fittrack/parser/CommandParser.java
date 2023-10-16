@@ -90,6 +90,7 @@ public class CommandParser {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
+
     public double[] parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
@@ -101,6 +102,7 @@ public class CommandParser {
 
         return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
     }
+
 
     public String getFirstWord(String str) {
         assert str != null && !str.isEmpty();
