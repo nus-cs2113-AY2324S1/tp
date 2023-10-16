@@ -26,5 +26,15 @@ public class RecipeList extends ArrayList<Recipe> {
         remove(recipe);
     }
 
+    public void viewAllRecipes() {
+        for (Recipe recipe : recipes) {
+            System.out.println(recipe);
+        }
+    }
+
+    public Recipe getRecipeByIndex(int index) {
+        return recipes.get(index);
+    }
+
 
 }
