@@ -1,5 +1,6 @@
 package cashleh;
 
+import cashleh.transaction.Expense;
 import exceptions.CashLehMissingTransactionException;
 
 import java.util.ArrayList;
