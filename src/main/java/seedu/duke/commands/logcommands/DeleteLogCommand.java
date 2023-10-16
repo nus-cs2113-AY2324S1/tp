@@ -7,7 +7,7 @@ import seedu.duke.commands.CommandResult;
 import seedu.duke.exerciselog.Log;
 
 public class DeleteLogCommand extends Command {
-
+    public static final String COMMAND_WORD = "delete";
     public String feedbackToUser;
     private List<String> exerciseDetails;
 

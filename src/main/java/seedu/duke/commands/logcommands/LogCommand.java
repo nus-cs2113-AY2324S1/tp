@@ -7,7 +7,7 @@ import seedu.duke.commands.CommandResult;
 import seedu.duke.exerciselog.Log;
 
 public class LogCommand extends Command {
-
+    public static final String COMMAND_WORD = "log";
     public String feedbackToUser;
     private List<String> exerciseDetails;
 

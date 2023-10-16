@@ -12,7 +12,7 @@ enum ViewType {
 }
 
 public class ViewLogCommand extends Command {
-
+    public static final String COMMAND_WORD = "view";
     private ViewType view;
     private int month;
     private int day;
