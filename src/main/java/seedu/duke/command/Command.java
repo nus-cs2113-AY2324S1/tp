@@ -8,7 +8,7 @@ import seedu.duke.ui.Ui;
  */
 public class Command {
 
-    private int index;
+    protected int index;
 
     public void setIndex(int index) {
         this.index = index;

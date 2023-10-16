@@ -13,8 +13,15 @@ public class Dish {
         this.price = price;
     }
 
+    public String getName() {
+        return name;
+    }
 
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public float getPrice() {
+        return price;
     }
 }
