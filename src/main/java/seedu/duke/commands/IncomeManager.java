@@ -45,6 +45,7 @@ public class IncomeManager extends Commands{
      * @throws KaChinnnngException if there is an error in the command
      */
     private HashMap<String, String> extractIncomeFields(String details) throws KaChinnnngException{
+        // uses a HashMap to store the fields of the income
         HashMap<String,String> incomeFields = new HashMap<>();
 
         String[] parts = details.split("/description|/date|/amount");
