@@ -1,20 +1,6 @@
 package fittrack.parser;
 
-import fittrack.command.AddMealCommand;
-import fittrack.command.AddWorkCommand;
-import fittrack.command.CheckDailyCalorieSurplusLimitCommand;
-import fittrack.command.CheckHeightCommand;
-import fittrack.command.CheckWeightCommand;
-import fittrack.command.Command;
-import fittrack.command.DeleteMealCommand;
-import fittrack.command.DeleteWorkCommand;
-import fittrack.command.EditProfileCommand;
-import fittrack.command.ExitCommand;
-import fittrack.command.HelpCommand;
-import fittrack.command.InvalidCommand;
-import fittrack.command.ListMealsCommand;
-import fittrack.command.ListWorkoutCommand;
-import fittrack.command.SetDailyCalorieSurplusLimitCommand;
+import fittrack.command.*;
 
 
 import java.util.regex.Matcher;
@@ -23,7 +9,7 @@ import java.util.regex.Pattern;
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
     public static final String ALL_COMMAND_WORDS =
-            "help, exit, editprofile, addmeal, deletemeal, addwork, deletework, setlimit, listall, listmeals";
+            "help, exit, editprofile, addmeal, deletemeal, addwork, deletework, setlimit, listall, listmeals, viewprofile";
 
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
@@ -77,6 +63,8 @@ public class CommandParser {
             return new SetDailyCalorieSurplusLimitCommand();
         case ListMealsCommand.COMMAND_WORD:
             return new ListMealsCommand();
+        case ViewProfileCommand.COMMAND_WORD:
+            return new ViewProfileCommand();
         default:
             return new InvalidCommand(word);
         }
