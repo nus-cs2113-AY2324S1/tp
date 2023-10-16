@@ -14,6 +14,6 @@ public class ListIngredientCommand extends Command{
             + "Example: " + COMMAND_WORD + " 1";
     @Override
     public void execute(Menu menu, Ui ui) {
-
+        ui.printIngredients(menu, index);
     };
 }
