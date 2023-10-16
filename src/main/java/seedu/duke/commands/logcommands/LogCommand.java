@@ -1,7 +1,9 @@
-package seedu.duke.commands;
+package seedu.duke.commands.logcommands;
 
 import java.util.List;
 
+import seedu.duke.commands.Command;
+import seedu.duke.commands.CommandResult;
 import seedu.duke.exerciselog.Log;
 
 public class LogCommand extends Command {
