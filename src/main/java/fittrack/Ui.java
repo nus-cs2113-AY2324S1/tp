@@ -2,8 +2,6 @@ package fittrack;
 
 import fittrack.command.CommandResult;
 
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -44,7 +42,7 @@ public class Ui {
     public String scanCommandLine() {
         return scanNextLine();
     }
-    
+
     public void printBlankLine() {
         System.out.println();
     }
