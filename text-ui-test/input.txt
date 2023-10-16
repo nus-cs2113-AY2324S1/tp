@@ -8,5 +8,8 @@ delete expense 2
 delete 1
 addstock /s MSFT
 addstock /s GME
+budget set /b 5000
+budget update /b 3000
+add expense /a 200 /t airpods
 sdf
 exit

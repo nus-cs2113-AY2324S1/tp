@@ -9,6 +9,8 @@ import seedu.financialplanner.commands.FindCommand;
 import seedu.financialplanner.commands.InvalidCommand;
 import seedu.financialplanner.commands.RawCommand;
 import seedu.financialplanner.commands.WatchListCommand;
+import seedu.financialplanner.commands.BudgetCommand;
+import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,35 +19,36 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
-
 public class Parser {
-    private static final String EXIT_COMMAND_NAME = "exit";
-    private static final String WATCHLIST_COMMAND_NAME = "watchlist";
-    private static final String ADD_CASHFLOW_COMMAND_NAME = "add";
-    private static final String DELETE_CASHFLOW_COMMAND_NAME = "delete";
-    private static final String ADD_STOCK_COMMAND_NAME = "addstock";
-    private static final String FIND_COMMAND_NAME = "find";
+    private static final String EXIT_COMMAND = "exit";
+    private static final String WATCHLIST_COMMAND = "watchlist";
+    private static final String ADD_CASHFLOW_COMMAND = "add";
+    private static final String DELETE_CASHFLOW_COMMAND = "delete";
+    private static final String ADD_STOCK_COMMAND = "addstock";
+    private static final String FIND_COMMAND = "find";
+    private static final String BUDGET_COMMAND = "budget";
 
-    public static AbstractCommand parseCommand(String input) throws IllegalArgumentException {
+    public static AbstractCommand parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
         return parseCommand(rawCommand);
     }
 
-    public static AbstractCommand parseCommand(RawCommand rawCommand) throws IllegalArgumentException{
+    public static AbstractCommand parseCommand(RawCommand rawCommand) throws FinancialPlannerException {
         switch (rawCommand.getCommandName()) {
-        case EXIT_COMMAND_NAME:
+        case EXIT_COMMAND:
             return new ExitCommand(rawCommand);
-        case WATCHLIST_COMMAND_NAME:
+        case WATCHLIST_COMMAND:
             return new WatchListCommand(rawCommand);
-        case ADD_CASHFLOW_COMMAND_NAME:
+        case ADD_CASHFLOW_COMMAND:
             return new AddCashflowCommand(rawCommand);
-        case DELETE_CASHFLOW_COMMAND_NAME:
+        case DELETE_CASHFLOW_COMMAND:
             return new DeleteCashflowCommand(rawCommand);
-        case ADD_STOCK_COMMAND_NAME:
+        case ADD_STOCK_COMMAND:
             return new AddStockCommand(rawCommand);
-        case FIND_COMMAND_NAME:
+        case FIND_COMMAND:
             return new FindCommand(rawCommand);
+        case BUDGET_COMMAND:
+            return new BudgetCommand(rawCommand);
         default:
             return new InvalidCommand();
         }

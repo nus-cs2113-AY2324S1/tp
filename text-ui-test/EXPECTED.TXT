@@ -51,5 +51,15 @@ Use Watchlist to view it!
 You have successfully added:
 Gamestop Corporation - Class A
 Use Watchlist to view it!
+A monthly budget of 5000.00 has been set.
+Budget has been updated:
+Old initial budget: 5000.00
+Old current budget: 5000.00
+New initial budget: 3000.00
+New current budget: 3000.00
+Added expense of value: 200.00 to the list.
+type: airpods
+balance: 4699.91
+Your remaining budget for the month is: 2800.00
 Unknown command. Please try again.
 Exiting Financial Planner. Goodbye.

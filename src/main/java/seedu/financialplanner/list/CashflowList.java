@@ -27,7 +27,7 @@ public class CashflowList {
     public void delete(int index) {
         int listIndex = index - 1;
 
-        Cashflow toRemove = get(listIndex);
+        Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
         toRemove.deleteCashflowvalue();
         Ui.INSTANCE.printDeletedCashflow(toRemove);
@@ -82,11 +82,12 @@ public class CashflowList {
     public void deleteCashflow(CashflowCategory category, int index) {
         int listIndex = cashflowIndexFinder(category, index);
 
-        Cashflow toRemove = get(listIndex);
+        Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
         toRemove.deleteCashflowvalue();
         Ui.INSTANCE.printDeletedCashflow(toRemove);
     }
+
 
     public void load(Cashflow entry) {
         list.add(entry);
@@ -99,13 +100,5 @@ public class CashflowList {
             output += entry.formatString() + "\n";
         }
         return output;
-    }
-
-    public Cashflow get(int index) {
-        return list.get(index);
-    }
-
-    public int size() {
-        return list.size();
     }
 }

@@ -1,12 +1,16 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.enumerations.CashflowCategory;
+import seedu.financialplanner.list.Budget;
+import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
+import static java.lang.Math.abs;
 
 public class AddCashflowCommand extends AbstractCommand {
+
     protected double amount;
     protected CashflowCategory category;
     protected String type;
@@ -57,11 +61,27 @@ public class AddCashflowCommand extends AbstractCommand {
             CashflowList.INSTANCE.addIncome(amount, type, recur);
             break;
         case EXPENSE:
-            CashflowList.INSTANCE.addExpense(amount, type, recur);
+            CashflowList list = CashflowList.INSTANCE;
+            list.addExpense(amount, type, recur);
+            if (Budget.hasBudget()) {
+                deductFromBudget(list.list.get(list.list.size() - 1));
+            }
             break;
         default:
             Ui.INSTANCE.showMessage("Unidentified entry.");
             break;
+        }
+    }
+
+    private static void deductFromBudget(Cashflow entry) {
+        double expenseAmount = entry.getAmount();
+        Budget.deduct(expenseAmount);
+        if (Budget.getCurrentBudget() <= 0) {
+            Ui.INSTANCE.showMessage("You have exceeded your current budget by: " +
+                    String.format("%.2f", abs(Budget.getCurrentBudget())));
+        } else if (Budget.getCurrentBudget() > 0) {
+            Ui.INSTANCE.showMessage("Your remaining budget for the month is: " +
+                    String.format("%.2f", Budget.getCurrentBudget()));
         }
     }
 }

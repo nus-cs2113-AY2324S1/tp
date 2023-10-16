@@ -50,6 +50,10 @@ public class Cashflow {
         return decimalFormat.format(round(Cashflow.balance, 2));
     }
 
+    public double getAmount() {
+        return this.amount;
+    }
+
     public String formatString() {
         return this.amount + " | " + this.type + " | " + this.recur;
     }

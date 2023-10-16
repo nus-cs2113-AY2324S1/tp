@@ -1,10 +1,11 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.Expense;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.list.Income;
+import seedu.financialplanner.list.Expense;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.FileReader;
@@ -20,9 +21,21 @@ public abstract class LoadData {
 
             while(inputFile.hasNext()) {
                 line = inputFile.nextLine();
-                final Cashflow entry = getEntry(line);
+                String[] split = line.split("\\|");
+                String type = split[0].trim();
+                switch (type) {
+                case "I":
+                case "E":
+                    final Cashflow entry = getEntry(type, split);
+                    cashflowList.load(entry);
+                    break;
+                case "B":
+                    loadBudget(split);
+                    break;
+                default:
+                    throw new FinancialPlannerException("Error loading file");
+                }
 
-                cashflowList.load(entry);
             }
             inputFile.close();
         } catch (IOException e) {
@@ -38,6 +51,12 @@ public abstract class LoadData {
         }
     }
 
+    private static void loadBudget(String[] split) {
+        double initial = Double.parseDouble(split[1].trim());
+        double current = Double.parseDouble(split[2].trim());
+        Budget.load(initial, current);
+    }
+
     private static boolean createNewFile(Ui ui) {
         String line = ui.input();
         while (!line.equalsIgnoreCase("y") && !line.equalsIgnoreCase("n")) {
@@ -48,9 +67,7 @@ public abstract class LoadData {
         return line.equalsIgnoreCase("y");
     }
 
-    private static Cashflow getEntry(String line) throws FinancialPlannerException {
-        String[] split = line.split("\\|");
-        String type = split[0].trim();
+    private static Cashflow getEntry(String type, String[] split) throws FinancialPlannerException {
         double value;
         int recur;
         Cashflow entry;
