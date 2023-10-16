@@ -35,7 +35,8 @@ public class Parser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
             case AddDishCommand.COMMAND_WORD:
-                return new AddDishCommand();
+                //return new AddDishCommand();
+                return new IncorrectCommand("DEXTER DO WORK");
             default:
                 return new IncorrectCommand("Whoa there, tiger! Your command has left me scratching my virtual head. Let's try that again, shall we?");
         }
