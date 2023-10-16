@@ -13,7 +13,7 @@ public class CommandParser {
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
     );
-    private static final Pattern me = Pattern.compile(
+    private static final Pattern PROFILE_PATTERN = Pattern.compile(
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)"
     );
 
@@ -75,17 +75,17 @@ public class CommandParser {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-//    public static double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
-//        final Matcher matcher = PROFILE_PATTERN.matcher(profile);
-//        if (!matcher.matches()) {
-//            throw new RegexMatchFailException();
-//        }
-//
-//        final String height = matcher.group("height");
-//        final String weight = matcher.group("weight");
-//
-//        return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
-//    }
+    public double[] parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
+        final Matcher matcher = PROFILE_PATTERN.matcher(profile);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        final String height = matcher.group("height");
+        final String weight = matcher.group("weight");
+
+        return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
+    }
 
 
     public String getFirstWord(String str) {
