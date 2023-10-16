@@ -30,6 +30,7 @@ public class Ui {
         System.out.println("Hello from\n" + LOGO);
         System.out.println(LINE);
         System.out.println("What can I do for you?");
+        System.out.println("Hint: To view a list of all possible commands, please enter 'help'.");
         System.out.println(LINE);
     }
 
@@ -89,17 +90,14 @@ public class Ui {
 
     public static void showHelpMenu() {
         System.out.println(LINE);
-        System.out.println("- `list` :\n    Shows a list of all tasks.\n"
-                + "- `todo DESCRIPTION` :\n    Adds a todo to the current list of tasks.\n"
-                + "- `deadline DESCRIPTION /by DATETIME` :\n    Adds a deadline to the current list of tasks.\n"
-                + "- `event DESCRIPTION /from START_DATETIME /to END_DATETIME` :\n"
-                + "    Adds an event to the current list of tasks.\n"
-                + "- `find KEYWORD` :\n    Finds tasks whose description contain the given keyword.\n"
-                + "- `delete INDEX` :\n    Deletes the specified task from the list of tasks.\n"
-                + "- `mark INDEX` :\n    Marks the specified task from the list of tasks as done.\n"
-                + "- `unmark INDEX` :\n    Marks the specified task from the list of tasks as not done.\n"
-                + "- `bye` :\n    Exits the program.");
+        System.out.println("- `list` :\n    Show a list of all entries.\n"
+                + "- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION]` :\n    Add an allowance.\n"
+                + "- `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION]` :\n    Add an expense.\n"
+                + "- `delete ENTRY_NUMBER` :\n    Delete an entry.\n"
+                + "- `view ENTRY_NUMBER` :\n    View an entry detail.\n"
+                + "- `exit` :\n    Exit the program.");
         System.out.println(LINE);
     }
+
 }
 
