@@ -13,6 +13,7 @@ public class FlashcardList {
         return flashcards;
     }
 
+
     public void add(Flashcard flashcard) {
         flashcards.add(flashcard);
     }
