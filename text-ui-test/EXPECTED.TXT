@@ -1,4 +1,9 @@
 Welcome to FitTrack!
+___________.__  __ ___________                     __
+\_   _____/|__|/  |\__    ___/___________    ____ |  | __
+ |    __)  |  \   __\|    |  \_  __ \__  \ _/ ___\|  |/ /
+ |     \   |  ||  |  |    |   |  | \/ __ \  \___|    <
+ \___  /   |__||__|  |____|   |__|  (____  /\___  >__|_ \
 Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
 Here are your profile settings.
 Height: 180.0
