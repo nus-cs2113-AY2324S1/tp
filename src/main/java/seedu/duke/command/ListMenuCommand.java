@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.data.Menu;
-import seedu.duke.data.dish.Dish;
+//import seedu.duke.data.dish.Dish;
 import seedu.duke.ui.Ui;
 
 /**
@@ -10,7 +10,7 @@ import seedu.duke.ui.Ui;
 public class ListMenuCommand extends Command {
     @Override
     public void execute(Menu menu, Ui ui) {
-/*        for (String d : menu) {
+        /*for (String d : menu) {
             System.out.println(d);
         }*/
     };
