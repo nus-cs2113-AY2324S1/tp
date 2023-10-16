@@ -62,8 +62,8 @@ public class Ui {
      * @param name name of the user
      * @param profile array containing the height and weight
      */
-    public void printProfileDetails(String name, double[] profile) {
-        System.out.println("Hi " + name + "! Nice to meet you!");
+    public void printProfileDetails(double[] profile) {
+        System.out.println("Here are your profile settings");
         System.out.println("Height: " + profile[0]);
         System.out.println("Weight: " + profile[1]);
     }

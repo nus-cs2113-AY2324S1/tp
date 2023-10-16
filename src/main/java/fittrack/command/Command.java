@@ -4,6 +4,7 @@ import fittrack.MealList;
 import fittrack.UserProfile;
 import fittrack.WorkList;
 import fittrack.parser.CommandParser;
+import fittrack.parser.PatternMatchFailException;
 
 public abstract class Command {
     protected UserProfile userProfile;
@@ -36,7 +37,7 @@ public abstract class Command {
      * @param args arguments as a string
      * @param parser parser
      */
-    public abstract void setArguments(String args, CommandParser parser);
+    public abstract void setArguments(String args, CommandParser parser) throws PatternMatchFailException;
 
     /**
      * Returns help of the command.
