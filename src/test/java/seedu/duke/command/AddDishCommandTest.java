@@ -17,9 +17,10 @@ class AddDishCommandTest {
         ArrayList<Dish> menuItems = new ArrayList<>();
         Menu menu = new Menu(menuItems);
         Ui ui = new Ui();
-        //adding a dish to the menu
+        //creating a dish
         ingredients.add(new Ingredient("chicken", "100g"));
         Dish dish = new Dish("Chicken Rice", ingredients, (float) 1.00);
+        
         AddDishCommand addDishCommand = new AddDishCommand(dish);
 
         addDishCommand.execute(menu, ui);
