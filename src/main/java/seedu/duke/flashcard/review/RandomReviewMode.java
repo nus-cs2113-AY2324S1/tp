@@ -1,2 +1,7 @@
-package seedu.duke.flashcard.reviewmode;public class RandomReview {
+//@@author wendelinwemhoener
+
+package seedu.duke.flashcard.review;
+
+public class RandomReviewMode extends ReviewMode {
+
 }

@@ -1,4 +1,8 @@
+//@@author wendelinwemhoener
+
 package seedu.duke.flashcard;
+
+import seedu.duke.flashcard.review.FlashcardReview;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,11 +33,9 @@ public class Flashcard {
     }
 
     public String toString() {
-        return "-".repeat(80) + System.lineSeparator()
-                + "front text: " + frontText + System.lineSeparator()
+        return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()
                 + "tags: " + tags.toString() + System.lineSeparator()
-                + "next review due on: " + nextReviewOn + System.lineSeparator()
-                + "-".repeat(80);
+                + "next review due on: " + nextReviewOn + System.lineSeparator();
     }
 }

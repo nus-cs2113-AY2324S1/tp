@@ -1,8 +1,8 @@
 //@@author wendelinwemhoener
 
-package seedu.duke.flashcard;
+package seedu.duke.flashcard.review;
 
-public enum FlashcardDifficulty {
+public enum ReviewDifficulty {
     EASY,
     GOOD,
     HARD,

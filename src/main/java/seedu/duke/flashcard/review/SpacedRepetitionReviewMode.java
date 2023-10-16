@@ -1,2 +1,6 @@
-package seedu.duke.flashcard.reviewmode;public class SpacedRepetitionReview {
+//@@author wendelinwemhoener
+
+package seedu.duke.flashcard.review;
+
+public class SpacedRepetitionReviewMode extends ReviewMode {
 }

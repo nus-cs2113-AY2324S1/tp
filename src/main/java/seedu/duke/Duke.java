@@ -1,3 +1,5 @@
+//@@author wendelinwemhoener
+
 package seedu.duke;
 
 import seedu.duke.flashcard.Flashcard;
@@ -19,6 +21,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input;
         boolean shouldTerminate = false;
+
         while (!shouldTerminate) {
             input = scanner.nextLine();
 
