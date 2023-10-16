@@ -3,6 +3,7 @@
 package seedu.duke.flashcard.command;
 
 import seedu.duke.flashcard.FlashcardList;
+import seedu.duke.flashcard.review.FlashcardReview;
 import seedu.duke.flashcard.review.RandomReviewMode;
 import seedu.duke.flashcard.review.ReviewByTagMode;
 import seedu.duke.flashcard.review.ReviewMode;
@@ -34,25 +35,25 @@ public class StartReviewCommand extends FlashcardCommand {
             return;
         }
 
-        ReviewMode reviewMode = createReviewMode(choice);
+        ReviewMode reviewMode = createReviewMode(choice, flashcardList);
 
         if (reviewMode instanceof RandomReviewMode) {
-
+            reviewMode.startReviewSession(scanner);
         } else {
             System.out.println("This review mode hasn't yet been implemented." +
                     " Sorry!");
         }
     }
 
-    private ReviewMode createReviewMode(String choice) {
+    private ReviewMode createReviewMode(String choice, FlashcardList flashcardList) {
         ReviewMode reviewMode = null;
 
         if (choice.equals("a")) {
-            reviewMode = new RandomReviewMode();
+            reviewMode = new RandomReviewMode(flashcardList);
         } else if (choice.equals("b")) {
-            reviewMode = new SpacedRepetitionReviewMode();
+            reviewMode = new SpacedRepetitionReviewMode(flashcardList);
         } else if (choice.equals("c")) {
-            reviewMode = new ReviewByTagMode();
+            reviewMode = new ReviewByTagMode(flashcardList);
         }
 
         assert reviewMode != null;

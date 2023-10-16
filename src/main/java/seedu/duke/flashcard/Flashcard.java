@@ -12,7 +12,11 @@ public class Flashcard {
     private String backText;
     private ArrayList<String> tags;
     private ArrayList<FlashcardReview> reviews;
-    private LocalDateTime nextReviewOn;
+    private LocalDateTime lastReviewOn;
+
+    public void setLastReviewOn(LocalDateTime lastReviewOn) {
+        this.lastReviewOn = lastReviewOn;
+    }
 
     public Flashcard(String frontText, String backText) {
         this.frontText = frontText;
@@ -21,7 +25,7 @@ public class Flashcard {
         tags = new ArrayList<>();
         reviews = new ArrayList<>();
 
-        nextReviewOn = null;
+        lastReviewOn = null;
     }
 
     public String getFrontText() {
@@ -36,6 +40,6 @@ public class Flashcard {
         return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()
                 + "tags: " + tags.toString() + System.lineSeparator()
-                + "next review due on: " + nextReviewOn + System.lineSeparator();
+                + "next review due on: " + lastReviewOn + System.lineSeparator();
     }
 }
