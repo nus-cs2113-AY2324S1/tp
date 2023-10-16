@@ -10,4 +10,8 @@ public class Menu {
     public Menu(ArrayList<Dish> menuItems) {
         this.menuItems = menuItems;
     }
+
+    public ArrayList<Dish> getMenuItemsList() {
+        return menuItems;
+    }
 }
