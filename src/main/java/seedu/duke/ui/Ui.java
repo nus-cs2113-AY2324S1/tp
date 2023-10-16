@@ -24,6 +24,11 @@ public class Ui {
         System.out.println(UserOutput.GOODBYE_MESSAGE.message);
     }
 
+    /**
+     * Shows delete message to user
+     *
+     * @param menuItem String of menu item deleted
+     */
     public void showDeleteMessage(String menuItem) {
         showToUser("Okies! " + menuItem + " deleted! :)");
     }
