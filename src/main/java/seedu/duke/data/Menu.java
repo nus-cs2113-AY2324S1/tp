@@ -20,10 +20,10 @@ public class Menu {
     public Dish getDish(int menuID) {
         return menuItems.get(menuID);
     }
-    public void remove(int menuID) {
+    public void removeDish(int menuID) {
         menuItems.remove(menuID);
     }
-    public void add(Dish dish) {
+    public void addDish(Dish dish) {
         menuItems.add(dish);
     }
 }
