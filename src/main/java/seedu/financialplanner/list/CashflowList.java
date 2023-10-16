@@ -13,30 +13,45 @@ public class CashflowList {
     }
 
     public void addIncome(double value, String type, int recur) {
+        int existingListSize = list.size();
+
         Income toAdd = new Income(value, type, recur);
         list.add(toAdd);
         Ui.INSTANCE.printAddedCashflow(toAdd);
+
+        int newListSize = list.size();
+        assert newListSize == existingListSize + 1;
     }
 
     public void addExpense(double value, String type, int recur) {
+        int existingListSize = list.size();
+
         Expense toAdd = new Expense(value, type, recur);
         list.add(toAdd);
         Ui.INSTANCE.printAddedCashflow(toAdd);
+
+        int newListSize = list.size();
+        assert newListSize == existingListSize + 1;
     }
 
     public void delete(int index) {
+        int existingListSize = list.size();
         int listIndex = index - 1;
 
         Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
         toRemove.deleteCashflowvalue();
         Ui.INSTANCE.printDeletedCashflow(toRemove);
+
+        int newListSize = list.size();
+        assert newListSize == existingListSize - 1;
     }
     //helper method to find the index of a given cashflow in the overall list
     //given its index in its respective list. e.g. "income 3" is the third income
     //in the overall list
     private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) {
-
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        
         switch (category) {
         case INCOME:
             return findCashflowIndexFromIncomeIndex(cashflowIndex);
@@ -80,12 +95,16 @@ public class CashflowList {
     }
 
     public void deleteCashflow(CashflowCategory category, int index) {
+        int existingListSize = list.size();
         int listIndex = cashflowIndexFinder(category, index);
 
         Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
         toRemove.deleteCashflowvalue();
         Ui.INSTANCE.printDeletedCashflow(toRemove);
+
+        int newListSize = list.size();
+        assert newListSize == existingListSize - 1;
     }
 
 
