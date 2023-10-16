@@ -8,7 +8,7 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddDishCommandTest {
     @Test
@@ -20,7 +20,7 @@ class AddDishCommandTest {
         //creating a dish
         ingredients.add(new Ingredient("chicken", "100g"));
         Dish dish = new Dish("Chicken Rice", ingredients, (float) 1.00);
-        
+
         AddDishCommand addDishCommand = new AddDishCommand(dish);
 
         addDishCommand.execute(menu, ui);
