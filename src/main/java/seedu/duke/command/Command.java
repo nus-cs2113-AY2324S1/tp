@@ -7,6 +7,13 @@ import seedu.duke.ui.Ui;
  * Represents an executable command.
  */
 public class Command {
+
+    private int index;
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     /**
      * Executes the command and returns the result.
      */
