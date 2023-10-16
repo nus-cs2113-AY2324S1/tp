@@ -14,8 +14,17 @@ public abstract class Budget {
         return initialBudget;
     }
 
-    public static void setInitialBudget(double initialBudget) {
-        Budget.initialBudget = initialBudget;
+    public static void updateBudget(double budget) {
+        double diff;
+        if (budget > initialBudget) {
+            diff = budget - initialBudget;
+            initialBudget = budget;
+            currentBudget += diff;
+        } else if (budget < initialBudget) {
+            diff = initialBudget - budget;
+            initialBudget = budget;
+            currentBudget -= diff;
+        }
     }
 
     public static double getCurrentBudget() {

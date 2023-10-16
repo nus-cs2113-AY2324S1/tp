@@ -10,7 +10,7 @@ import seedu.financialplanner.commands.FindCommand;
 import seedu.financialplanner.commands.InvalidCommand;
 import seedu.financialplanner.commands.RawCommand;
 import seedu.financialplanner.commands.WatchListCommand;
-import seedu.financialplanner.commands.SetBudgetCommand;
+import seedu.financialplanner.commands.BudgetCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class Parser {
     private static final String ADD_ENTRY_COMMAND = "add";
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
-    private static final String SET_BUDGET_COMMAND = "setbudget";
+    private static final String BUDGET_COMMAND = "budget";
 
     public static AbstractCommand parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
@@ -50,8 +50,8 @@ public class Parser {
         case FIND_COMMAND: {
             return new FindCommand(rawCommand);
         }
-        case SET_BUDGET_COMMAND: {
-            return new SetBudgetCommand(rawCommand);
+        case BUDGET_COMMAND: {
+            return new BudgetCommand(rawCommand);
         }
         default: {
             return new InvalidCommand();

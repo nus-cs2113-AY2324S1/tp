@@ -79,7 +79,7 @@ public class EntryCommand extends AbstractCommand {
         if (Budget.getCurrentBudget() <= 0) {
             Ui.INSTANCE.showMessage("You have exceeded your current budget by: " + abs(Budget.getCurrentBudget()));
         } else if (Budget.getCurrentBudget() > 0) {
-            Ui.INSTANCE.showMessage("Your remaining budget is: " + Budget.getCurrentBudget());
+            Ui.INSTANCE.showMessage("Your remaining budget for the month is: " + Budget.getCurrentBudget());
         }
     }
 }
