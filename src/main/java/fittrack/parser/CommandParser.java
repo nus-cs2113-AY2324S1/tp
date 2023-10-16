@@ -1,6 +1,21 @@
 package fittrack.parser;
 
-import fittrack.command.*;
+import fittrack.command.AddMealCommand;
+import fittrack.command.AddWorkCommand;
+import fittrack.command.CheckDailyCalorieSurplusLimitCommand;
+import fittrack.command.CheckHeightCommand;
+import fittrack.command.CheckWeightCommand;
+import fittrack.command.Command;
+import fittrack.command.DeleteMealCommand;
+import fittrack.command.DeleteWorkCommand;
+import fittrack.command.EditProfileCommand;
+import fittrack.command.ExitCommand;
+import fittrack.command.HelpCommand;
+import fittrack.command.InvalidCommand;
+import fittrack.command.ListMealsCommand;
+import fittrack.command.ListWorkoutCommand;
+import fittrack.command.SetDailyCalorieSurplusLimitCommand;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,7 +28,7 @@ public class CommandParser {
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
     );
-    private static final Pattern me = Pattern.compile(
+    private static final Pattern PROFILE_PATTERN = Pattern.compile(
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)"
     );
 
@@ -74,17 +89,17 @@ public class CommandParser {
      * @throws RegexMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-//    public static double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
-//        final Matcher matcher = PROFILE_PATTERN.matcher(profile);
-//        if (!matcher.matches()) {
-//            throw new RegexMatchFailException();
-//        }
-//
-//        final String height = matcher.group("height");
-//        final String weight = matcher.group("weight");
-//
-//        return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
-//    }
+    public static double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
+        final Matcher matcher = PROFILE_PATTERN.matcher(profile);
+        if (!matcher.matches()) {
+            throw new RegexMatchFailException();
+        }
+
+        final String height = matcher.group("height");
+        final String weight = matcher.group("weight");
+
+        return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
+    }
 
     public String getFirstWord(String str) {
         return str.split("\\s")[0];

@@ -16,7 +16,8 @@ public class AddMealCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) { //why is there a need for a command parser, a argument parser makes more sense here since command is already known
+    public void setArguments(String args, CommandParser parser) { //why is there a need for a command parser,
+        // a argument parser makes more sense here since command is already known
         //TODO error handling
         String[] mealArgs = args.split("/cals");
         newMeal = new Meal(mealArgs[0], Float.parseFloat(mealArgs[1]));
