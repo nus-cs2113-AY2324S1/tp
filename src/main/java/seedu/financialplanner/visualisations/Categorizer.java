@@ -1,6 +1,5 @@
 package seedu.financialplanner.visualisations;
 
-import seedu.financialplanner.FinancialPlanner;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
@@ -12,7 +11,8 @@ import java.util.Map;
 
 public class Categorizer {
 
-    public static Map<String, Double> sortType(CashflowList cashflowList, String type) throws FinancialPlannerException {
+    public static Map<String, Double> sortType(CashflowList cashflowList, String type)
+            throws FinancialPlannerException {
         switch (type) {
         case "expense":
             return sortExpenses(cashflowList);
