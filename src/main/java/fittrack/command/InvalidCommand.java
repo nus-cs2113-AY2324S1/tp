@@ -3,11 +3,11 @@ package fittrack.command;
 import fittrack.parser.CommandParser;
 
 public class InvalidCommand extends Command {
-    private final String inputWord;
+    private final String inputLine;
     private HelpCommand helpCommand;
 
-    public InvalidCommand(String inputWord) {
-        this.inputWord = inputWord;
+    public InvalidCommand(String inputLine) {
+        this.inputLine = inputLine;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class InvalidCommand extends Command {
     @Override
     public void setArguments(String args, CommandParser parser) {
         helpCommand = new HelpCommand();
-        helpCommand.setArguments(inputWord, parser);
+        helpCommand.setArguments(inputLine, parser);
     }
 
     @Override

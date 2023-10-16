@@ -2,8 +2,8 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-public class ViewMealCommand extends Command {
-    public static final String COMMAND_WORD = "viewmeal";
+public class ViewMealsCommand extends Command {
+    public static final String COMMAND_WORD = "viewmeals";
     private static final String DESCRIPTION =
             String.format("`%s` shows the list of all meals.", COMMAND_WORD);
     private static final String USAGE =
@@ -12,8 +12,8 @@ public class ViewMealCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        // TODO: get a list of meals and make them to lines of strings.
-        return null;
+        String feedback = "These are the meals you have consumed: \n" + mealList.toString();
+        return new CommandResult(feedback);
     }
 
     @Override

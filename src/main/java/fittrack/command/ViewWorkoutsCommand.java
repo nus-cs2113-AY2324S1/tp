@@ -2,8 +2,8 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-public class CheckHeightCommand extends Command {
-    public static final String COMMAND_WORD = "checkHeight";
+public class ViewWorkoutsCommand extends Command {
+    public static final String COMMAND_WORD = "viewworkouts";
 
     @Override
     public CommandResult execute() {
@@ -20,3 +20,4 @@ public class CheckHeightCommand extends Command {
         return null;
     }
 }
+
