@@ -12,13 +12,13 @@ import fittrack.parser.PatternMatchFailException;
 public class FitTrack {
     private UserProfile userProfile;
     private final MealList mealList;
-    private final WorkList works;
+    private final WorkList workList;
     private final Ui ui;
 
     private FitTrack() {
         ui = new Ui();
         mealList = new MealList();
-        works = new WorkList();
+        workList = new WorkList();
     }
 
     /**
@@ -56,7 +56,7 @@ public class FitTrack {
     }
 
     private CommandResult executeCommand(Command command) {
-        command.setData(userProfile, mealList, works);
+        command.setData(userProfile, mealList, workList);
         return command.execute();
     }
 
