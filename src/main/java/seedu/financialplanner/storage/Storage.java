@@ -1,7 +1,7 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
@@ -24,11 +24,11 @@ public class Storage {
         }
     }
 
-    public void load(FinancialList list, Ui ui, String filePath) throws FinancialPlannerException {
+    public void load(CashflowList list, Ui ui, String filePath) throws FinancialPlannerException {
         LoadData.load(list, ui, filePath);
     }
 
-    public void save(FinancialList list, String filePath) throws FinancialPlannerException {
+    public void save(CashflowList list, String filePath) throws FinancialPlannerException {
         SaveData.save(list, filePath);
     }
 }
