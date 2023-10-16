@@ -44,7 +44,6 @@ public class FinancialPlanner {
                 ui.showMessage(e.getMessage());
             }
         }
-
         save();
         ui.exitMessage();
     }

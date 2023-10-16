@@ -8,6 +8,7 @@ import seedu.financialplanner.commands.FindCommand;
 import seedu.financialplanner.commands.InvalidCommand;
 import seedu.financialplanner.commands.RawCommand;
 import seedu.financialplanner.commands.WatchListCommand;
+import seedu.financialplanner.commands.VisCommand;
 import seedu.financialplanner.commands.BudgetCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
@@ -25,6 +26,7 @@ public class Parser {
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
     private static final String BUDGET_COMMAND = "budget";
+    private static final String VISUALIZATION_COMMAND = "vis";
 
     public static AbstractCommand parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
@@ -45,10 +47,13 @@ public class Parser {
             return new FindCommand(rawCommand);
         case BUDGET_COMMAND:
             return new BudgetCommand(rawCommand);
+        case VISUALIZATION_COMMAND:
+            return new VisCommand(rawCommand);
         default:
             return new InvalidCommand();
         }
     }
+
     public static RawCommand parseRawCommand(String input) throws IllegalArgumentException{
         Iterator<String> iterator = Arrays.stream(input.split(" ")).iterator();
         if (!iterator.hasNext()) {
@@ -102,5 +107,4 @@ public class Parser {
 
         return new RawCommand(commandName, args, extraArgs);
     }
-
 }
