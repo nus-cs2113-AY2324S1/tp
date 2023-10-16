@@ -1,3 +1,5 @@
+//@@author wendelinwemhoener
+
 package seedu.duke.flashcard.command;
 
 import seedu.duke.flashcard.Flashcard;
@@ -15,5 +17,8 @@ public class CreateFlashcardCommand extends FlashcardCommand {
         Flashcard flashcard = new Flashcard(frontPageText, backPageText);
 
         flashcardList.add(flashcard);
+
+        System.out.println("    Success! Flashcard has been added to your " +
+                "collection.");
     }
 }

@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Wendelin Wemhoener - Project Portfolio Page
 
 ## Overview
 

@@ -1,3 +1,5 @@
+//@@author wendelinwemhoener
+
 package seedu.duke.flashcard;
 
 import seedu.duke.flashcard.command.FlashcardCommand;
@@ -16,6 +18,8 @@ public class FlashcardComponent {
 
     public FlashcardComponent(ArrayList<Flashcard> flashcards) {
         parser = new FlashcardCommandParser();
+
+        //@@author junhyeong0411
         storage = new FlashcardStorage("./flashcard.txt");
         try {
             flashcardList = storage.loadFlashcards();
@@ -25,9 +29,8 @@ public class FlashcardComponent {
             flashcardList = new FlashcardList(flashcards);
         }
 
-
+        //@@author wendelinwemhoener
         ui = new FlashcardUi(flashcardList);
-
     }
 
     public boolean isResponsible(String input) {
@@ -42,9 +45,15 @@ public class FlashcardComponent {
 
     public void processInput(String input) {
         FlashcardCommand command = parser.parseInput(input);
+        assert !(command instanceof UnknownCommand) : "Command cannot be " +
+                "unknown";
+
         ui.executeCommand(command);
 
+        //@@author junhyeong0411
         // save after every commands
         storage.saveFlashcards(flashcardList.getFlashcards());
+
+        //@@author wendelinwemhoener
     }
 }

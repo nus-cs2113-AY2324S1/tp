@@ -1,3 +1,5 @@
+//@@author wendelinwemhoener
+
 package seedu.duke.flashcard;
 
 import java.util.ArrayList;
