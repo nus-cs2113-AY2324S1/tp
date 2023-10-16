@@ -59,7 +59,6 @@ public class Ui {
      * Prints greetings to user and the height and weight that
      * the user has entered.
      *
-     * @param name name of the user
      * @param profile array containing the height and weight
      */
     public void printProfileDetails(double[] profile) {
