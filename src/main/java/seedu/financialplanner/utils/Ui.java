@@ -2,18 +2,27 @@ package seedu.financialplanner.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
+import seedu.financialplanner.list.Cashflow;
 
 import java.util.Scanner;
 
 public class Ui {
     public static final Ui INSTANCE = new Ui();
-    private final Scanner in = new Scanner(System.in);
+    private Scanner Scanner = new Scanner(System.in);
 
     private Ui() {
     }
 
     public static void printCorruptedFileError(String message) {
         System.out.println(message);
+    }
+
+    public Scanner getScanner() {
+        return Scanner;
+    }
+
+    public void setScanner(Scanner scanner) {
+        this.Scanner = scanner;
     }
 
     public void showMessage(String message) {
@@ -29,7 +38,7 @@ public class Ui {
     }
 
     public String input() {
-        return in.nextLine().trim();
+        return Scanner.nextLine().trim();
     }
 
     public void printWatchListHeader() {
@@ -53,5 +62,18 @@ public class Ui {
         System.out.println(stockName);
         System.out.println("Use Watchlist to view it!");
 
+    }
+    public void printAddedCashflow(Cashflow entry) {
+        System.out.print("You have added an ");
+        System.out.println(entry);
+        System.out.println("to the Financial Planner.");
+        System.out.println("Balance: " + entry.formatBalance());
+    }
+
+    public void printDeletedCashflow(Cashflow entry) {
+        System.out.print("You have removed an ");
+        System.out.println(entry);
+        System.out.println("from the Financial Planner.");
+        System.out.println("Balance: " + entry.formatBalance());
     }
 }

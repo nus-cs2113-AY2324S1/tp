@@ -1,10 +1,11 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.Expense;
-import seedu.financialplanner.list.FinancialList;
+import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.list.Income;
+import seedu.financialplanner.list.Expense;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.FileReader;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public abstract class LoadData {
-    public static void load(FinancialList financialList, Ui ui, String filePath) throws FinancialPlannerException {
+    public static void load(CashflowList cashflowList, Ui ui, String filePath) throws FinancialPlannerException {
         try {
             Scanner inputFile = new Scanner(new FileReader(filePath));
             String line;
@@ -20,9 +21,21 @@ public abstract class LoadData {
 
             while(inputFile.hasNext()) {
                 line = inputFile.nextLine();
-                final Cashflow entry = getEntry(line);
+                String[] split = line.split("\\|");
+                String type = split[0].trim();
+                switch (type) {
+                case "I":
+                case "E":
+                    final Cashflow entry = getEntry(type, split);
+                    cashflowList.load(entry);
+                    break;
+                case "B":
+                    loadBudget(split);
+                    break;
+                default:
+                    throw new FinancialPlannerException("Error loading file");
+                }
 
-                financialList.load(entry);
             }
             inputFile.close();
         } catch (IOException e) {
@@ -30,12 +43,18 @@ public abstract class LoadData {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException | FinancialPlannerException e) {
             ui.showMessage("File appears to be corrupted. Do you want to create a new file? (Y/N)");
             if (createNewFile(ui)) {
-                financialList.list.clear();
+                cashflowList.list.clear();
             } else {
                 throw new FinancialPlannerException("Please fix the corrupted file, " +
                         "which can be found in data/data.txt.");
             }
         }
+    }
+
+    private static void loadBudget(String[] split) {
+        double initial = Double.parseDouble(split[1].trim());
+        double current = Double.parseDouble(split[2].trim());
+        Budget.load(initial, current);
     }
 
     private static boolean createNewFile(Ui ui) {
@@ -48,9 +67,7 @@ public abstract class LoadData {
         return line.equalsIgnoreCase("y");
     }
 
-    private static Cashflow getEntry(String line) throws FinancialPlannerException {
-        String[] split = line.split("\\|");
-        String type = split[0].trim();
+    private static Cashflow getEntry(String type, String[] split) throws FinancialPlannerException {
         double value;
         int recur;
         Cashflow entry;
