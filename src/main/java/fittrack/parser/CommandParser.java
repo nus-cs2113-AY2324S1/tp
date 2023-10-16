@@ -1,19 +1,6 @@
 package fittrack.parser;
 
-import fittrack.command.AddMealCommand;
-import fittrack.command.AddWorkCommand;
-import fittrack.command.CheckDailyCalorieSurplusLimitCommand;
-import fittrack.command.CheckHeightCommand;
-import fittrack.command.CheckWeightCommand;
-import fittrack.command.Command;
-import fittrack.command.DeleteMealCommand;
-import fittrack.command.DeleteWorkCommand;
-import fittrack.command.EditProfileCommand;
-import fittrack.command.ExitCommand;
-import fittrack.command.HelpCommand;
-import fittrack.command.InvalidCommand;
-import fittrack.command.ListWorkoutCommand;
-import fittrack.command.SetDailyCalorieSurplusLimitCommand;
+import fittrack.command.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,12 +8,12 @@ import java.util.regex.Pattern;
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
     public static final String ALL_COMMAND_WORDS =
-            "help, exit, editprofile, addmeal, deletemeal, addwork, deletework, setlimit, listall";
+            "help, exit, editprofile, addmeal, deletemeal, addwork, deletework, setlimit, listall, listmeals";
 
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
     );
-    private static final Pattern PROFILE_PATTERN = Pattern.compile(
+    private static final Pattern me = Pattern.compile(
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)"
     );
 
@@ -73,6 +60,8 @@ public class CommandParser {
             return new ListWorkoutCommand();
         case SetDailyCalorieSurplusLimitCommand.COMMAND_WORD:
             return new SetDailyCalorieSurplusLimitCommand();
+        case ListMealsCommand.COMMAND_WORD:
+            return new ListMealsCommand();
         default:
             return new InvalidCommand(word);
         }
@@ -85,17 +74,17 @@ public class CommandParser {
      * @throws RegexMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    public static double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
-        final Matcher matcher = PROFILE_PATTERN.matcher(profile);
-        if (!matcher.matches()) {
-            throw new RegexMatchFailException();
-        }
-
-        final String height = matcher.group("height");
-        final String weight = matcher.group("weight");
-
-        return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
-    }
+//    public static double[] parseProfile(String profile) throws RegexMatchFailException, NumberFormatException {
+//        final Matcher matcher = PROFILE_PATTERN.matcher(profile);
+//        if (!matcher.matches()) {
+//            throw new RegexMatchFailException();
+//        }
+//
+//        final String height = matcher.group("height");
+//        final String weight = matcher.group("weight");
+//
+//        return new double[]{ Double.parseDouble(height), Double.parseDouble(weight) };
+//    }
 
     public String getFirstWord(String str) {
         return str.split("\\s")[0];

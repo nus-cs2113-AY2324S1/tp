@@ -11,14 +11,14 @@ import fittrack.parser.RegexMatchFailException;
  */
 public class FitTrack {
     private UserProfile userProfile;
-    private final MealList meals;
+    private final MealList mealList;
     private final WorkList works;
     private final Ui ui;
     private String name;
 
     private FitTrack() {
         ui = new Ui();
-        meals = new MealList();
+        mealList = new MealList();
         works = new WorkList();
     }
 
@@ -51,11 +51,13 @@ public class FitTrack {
             command = new CommandParser().parseCommand(userCommandLine);
             CommandResult commandResult = executeCommand(command);
             ui.printCommandResult(commandResult);
+
+
         } while (!ExitCommand.isExit(command));
     }
 
     private CommandResult executeCommand(Command command) {
-        command.setData(userProfile, meals, works);
+        command.setData(userProfile, mealList, works);
         return command.execute();
     }
 
@@ -68,9 +70,9 @@ public class FitTrack {
         System.out.println("Please enter your height (in cm) and weight (in kg):");
         String input = ui.scanNextLine();
         double[] profile;
-        profile = CommandParser.parseProfile(input);
-        userProfile = new UserProfile(name, profile[0], profile[1]);
-        ui.printProfileDetails(name, profile);
+//        profile = CommandParser.parseProfile(input);
+//        userProfile = new UserProfile(name, profile[0], profile[1]);
+//        ui.printProfileDetails(name, profile);
     }
 
     private void end() {
