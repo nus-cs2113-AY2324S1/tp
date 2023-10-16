@@ -36,9 +36,8 @@ public class ViewLogCommand extends Command {
             // set month and day to the day to view
             break;
         default:
-            print("No ViewType specified");
+            System.out.println("No ViewType specified");
         }
-
     }
 
     public CommandResult execute(Log exerciseLog) {
@@ -55,10 +54,5 @@ public class ViewLogCommand extends Command {
         default:
             return new CommandResult("Invalid exercise search type");
         }
-
-    }
-
-    public static void print(String s) {
-        System.out.println(s);
     }
 }
