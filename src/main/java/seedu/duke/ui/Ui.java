@@ -30,7 +30,7 @@ public class Ui {
      * @param menuItem String of menu item deleted
      */
     public void showDeleteMessage(String menuItem) {
-        showToUser("Okies! " + menuItem + " deleted! :)");
+        showToUser("Okay! " + menuItem + " is deleted! :)");
     }
 
     /** Shows messages(s) to the user **/
