@@ -1,28 +1,11 @@
-package cashleh;
-public class Expense {
-    private static double totalExpense = 0.0;
-    private String description;
-    private double amount;
-
+package cashleh.transaction;
+public class Expense extends Transaction {
     public Expense(String description, double amount) {
-        this.description = description;
-        this.amount = amount;
-        totalExpense += amount;
-    }
-    public String getDescription() {
-        return description;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public static double getTotalExpense() {
-        return totalExpense;
+        super(description, amount);
     }
 
     public String toString() {
-        return description + " (amount: " + amount + ")";
+        return getDescription() + " (amount: " + getAmount() + ")";
     }
 
 }

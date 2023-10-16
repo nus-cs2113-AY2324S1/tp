@@ -1,6 +1,6 @@
-package cashleh;
+package cashleh.transaction;
 
-import cashleh.transaction.Income;
+import cashleh.Ui;
 import exceptions.CashLehMissingTransactionException;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class IncomeStatement {
         return incomeStatement.stream().mapToDouble(Income::getAmount).sum();
     }
 
-    public void getIncomes() {
+    public void printIncomes() {
         int listSize = incomeStatement.size();
         String[] texts = new String[listSize + 1];
         texts[0] = "The current sum of all your incomes amounts to: ";
@@ -46,7 +46,7 @@ public class IncomeStatement {
             Income currentIncome = incomeStatement.get(i - 1);
             texts[i] = "\t" + i + "." + currentIncome.toString();
         }
-        ui.printMultipleText(texts);
+        Ui.printMultipleText(texts);
     }
     @Override
     public String toString() {

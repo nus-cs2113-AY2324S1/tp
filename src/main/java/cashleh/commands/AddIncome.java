@@ -1,19 +1,19 @@
 package cashleh.commands;
 
-import cashleh.ExpenseStatement;
-import cashleh.Income;
-import cashleh.IncomeStatement;
+import cashleh.transaction.Income;
+import cashleh.transaction.IncomeStatement;
 import cashleh.Ui;
 
 public class AddIncome extends Command {
     private final Income incomeToAdd;
-    private final Ui ui = new Ui();
-    public AddIncome(Income incomeToAdd) {
+    private final IncomeStatement incomeStatement;
+    public AddIncome(Income incomeToAdd, IncomeStatement incomeStatement) {
         this.incomeToAdd = incomeToAdd;
+        this.incomeStatement = incomeStatement;
     }
     @Override
-    public void execute(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
+    public void execute() {
         incomeStatement.addIncome(incomeToAdd);
-        ui.printMultipleText(new String[] {"The following income was added:", incomeToAdd.toString()});
+        Ui.printMultipleText(new String[] {"The following income was added:", incomeToAdd.toString()});
     }
 }
