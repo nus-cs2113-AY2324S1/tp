@@ -36,5 +36,4 @@ public class RecipeList extends ArrayList<Recipe> {
         return recipes.get(index);
     }
 
-
 }
