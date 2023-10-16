@@ -21,7 +21,8 @@ public class AddWorkoutCommand extends Command {
 
     @Override
     public void setArguments(String args, CommandParser parser) {
-
+        String[] input = args.split("/cals");
+        newWorkout = new Workout(input[0], Float.parseFloat(input[1]));
     }
 
     @Override
