@@ -64,6 +64,8 @@ public class CommandParser {
             return new ExitCommand();
         case EditProfileCommand.COMMAND_WORD:
             return new EditProfileCommand();
+        case ViewProfileCommand.COMMAND_WORD:
+            return new ViewProfileCommand();
         case ViewHeightCommand.COMMAND_WORD:
             return new ViewHeightCommand();
         case ViewWeightCommand.COMMAND_WORD:
@@ -74,8 +76,6 @@ public class CommandParser {
             return new AddMealCommand();
         case DeleteMealCommand.COMMAND_WORD:
             return new DeleteMealCommand();
-        case ViewProfileCommand.COMMAND_WORD:
-            return new ViewProfileCommand();
         case ViewMealsCommand.COMMAND_WORD:
             return new ViewMealsCommand();
         case AddWorkoutCommand.COMMAND_WORD:
