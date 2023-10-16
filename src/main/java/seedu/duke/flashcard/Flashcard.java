@@ -20,6 +20,14 @@ public class Flashcard {
         nextReviewOn = null;
     }
 
+    public String getFrontText() {
+        return frontText;
+    }
+
+    public String getBackText() {
+        return backText;
+    }
+
     public String toString() {
         return "-".repeat(80) + System.lineSeparator()
                 + "front text: " + frontText + System.lineSeparator()
