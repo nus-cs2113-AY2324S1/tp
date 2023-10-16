@@ -1,97 +1,104 @@
 package seedu.financialplanner.utils;
 
-
-import seedu.financialplanner.commands.Command;
+import seedu.financialplanner.commands.AbstractCommand;
+import seedu.financialplanner.commands.AddStockCommand;
 import seedu.financialplanner.commands.AddCashflowCommand;
 import seedu.financialplanner.commands.DeleteCashflowCommand;
-import seedu.financialplanner.commands.Exit;
+import seedu.financialplanner.commands.ExitCommand;
+import seedu.financialplanner.commands.FindCommand;
+import seedu.financialplanner.commands.InvalidCommand;
+import seedu.financialplanner.commands.RawCommand;
 import seedu.financialplanner.commands.WatchListCommand;
-import seedu.financialplanner.commands.Invalid;
-import seedu.financialplanner.commands.AddStockCommand;
-import seedu.financialplanner.commands.Find;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 
 
 public class Parser {
-    private static final String EXIT_COMMAND = "exit";
-    private static final String WATCHLIST_COMMAND = "watchlist";
-    private static final String ADD_CASHFLOW_COMMAND = "add";
-    private static final String DELETE_CASHFLOW_COMMAND = "delete";
-    private static final String ADD_STOCK_COMMAND = "addstock";
-    private static final String FIND_COMMAND = "find";
+    private static final String EXIT_COMMAND_NAME = "exit";
+    private static final String WATCHLIST_COMMAND_NAME = "watchlist";
+    private static final String ADD_CASHFLOW_COMMAND_NAME = "add";
+    private static final String DELETE_CASHFLOW_COMMAND_NAME = "delete";
+    private static final String ADD_STOCK_COMMAND_NAME = "addstock";
+    private static final String FIND_COMMAND_NAME = "find";
 
-    public static Command parse(String input) {
-        String[] split = input.split(" ", 2);
-        String command = split[0].toLowerCase();
-        String restOfInput = split.length > 1 ? split[1] : ""; // checks if rest of input is empty
+    public static AbstractCommand parseCommand(String input) throws IllegalArgumentException {
+        RawCommand rawCommand = parseRawCommand(input);
+        return parseCommand(rawCommand);
+    }
 
-        switch (command) {
-        case EXIT_COMMAND:
-            return new Exit();
-        case WATCHLIST_COMMAND:
-            return new WatchListCommand();
-        case ADD_CASHFLOW_COMMAND:
-            return parseAddCashflow(restOfInput);
-        case DELETE_CASHFLOW_COMMAND:
-            return parseDeleteCashflow(restOfInput);
-        case ADD_STOCK_COMMAND:
-            return parseAddStock(restOfInput);
-        case FIND_COMMAND:
-            return new Find(restOfInput);
+    public static AbstractCommand parseCommand(RawCommand rawCommand) throws IllegalArgumentException{
+        switch (rawCommand.getCommandName()) {
+        case EXIT_COMMAND_NAME:
+            return new ExitCommand(rawCommand);
+        case WATCHLIST_COMMAND_NAME:
+            return new WatchListCommand(rawCommand);
+        case ADD_CASHFLOW_COMMAND_NAME:
+            return new AddCashflowCommand(rawCommand);
+        case DELETE_CASHFLOW_COMMAND_NAME:
+            return new DeleteCashflowCommand(rawCommand);
+        case ADD_STOCK_COMMAND_NAME:
+            return new AddStockCommand(rawCommand);
+        case FIND_COMMAND_NAME:
+            return new FindCommand(rawCommand);
         default:
-            return new Invalid();
+            return new InvalidCommand();
         }
     }
-
-    private static Command parseAddStock(String restOfInput) {
-        String[] split = restOfInput.trim().split("s/");
-        // TODO: check error here
-        String stockCode = split[1].trim();
-        return new AddStockCommand(stockCode);
-    }
-    private static int determineRecur(String parameters) {
-        if (parameters.contains("r/")) {
-            int indexOfRecur = parameters.indexOf("r/");
-            String recur = parameters.substring(indexOfRecur + 2).trim();
-            return Integer.parseInt(recur);
+    public static RawCommand parseRawCommand(String input) throws IllegalArgumentException{
+        Iterator<String> iterator = Arrays.stream(input.split(" ")).iterator();
+        if (!iterator.hasNext()) {
+            throw new IllegalArgumentException("Command cannot be empty");
         }
-        return 0;
-    }
-    public static Command parseAddCashflow(String restOfInput) {
-        String type;
-        double amount;
-        int recur;
+        String commandName = iterator.next();
+        List<String> args = new ArrayList<>();
+        Map<String, String> extraArgs = new HashMap<>();
 
-        String[] split = restOfInput.split(" ", 2);
-        String cashflowType = split[0];
-        String parameters = split[1];
-        recur = determineRecur(parameters);
-        int indexOfAmount = parameters.indexOf("a/");
-        int indexOfType = parameters.indexOf("t/");
-        amount = Double.parseDouble(parameters.substring(indexOfAmount + 2, indexOfType).trim());
-        if (recur == 0) {
-            type = parameters.substring(indexOfType + 2).trim();
+        List<String> extraArgumentContentBuffer = new ArrayList<>();
+        String currentExtraArgumentName = null;
+
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+            if (next.startsWith("/")) {
+                // Save previous extra argument when next extra argument is found
+                if (currentExtraArgumentName != null) {
+                    savePreviousExtraArgument(extraArgs, currentExtraArgumentName, extraArgumentContentBuffer);
+                }
+                if (next.length() == 1) {
+                    throw new IllegalArgumentException("Extra argument name cannot be empty");
+                }
+
+                currentExtraArgumentName = next.substring(1);
+
+            } else {
+                if (currentExtraArgumentName == null) {
+                    args.add(next);
+                } else {
+                    extraArgumentContentBuffer.add(next);
+                }
+            }
+        }
+        // Save previous extra argument at the very end
+        if (currentExtraArgumentName != null) {
+            savePreviousExtraArgument(extraArgs, currentExtraArgumentName, extraArgumentContentBuffer);
+        }
+
+        return new RawCommand(commandName, args, extraArgs);
+    }
+
+    private static void savePreviousExtraArgument(Map<String, String> extraArgs
+            , String currentExtraArgumentName, List<String> extraArgumentContentBuffer) {
+        if (extraArgs.containsKey(currentExtraArgumentName)) {
+            throw new IllegalArgumentException(
+                    String.format("Duplicate extra argument name: %s", currentExtraArgumentName));
         } else {
-            int indexOfRecur = parameters.indexOf("r/");
-            type = parameters.substring(indexOfType + 2, indexOfRecur).trim();
+            extraArgs.put(currentExtraArgumentName, String.join(" ", extraArgumentContentBuffer));
+            extraArgumentContentBuffer.clear();
         }
-
-        return new AddCashflowCommand(cashflowType, amount, type, recur);
-    }
-
-    public static Command parseDeleteCashflow(String restOfInput) {
-        String[] split = restOfInput.split(" ", 2);
-
-        if (split.length == 1) {
-            String stringIndex = split[0].trim();
-            int index = Integer.parseInt(stringIndex);
-
-            return new DeleteCashflowCommand(index);
-        }
-
-        String cashflowType = split[0];
-        String stringIndex = split[1].trim();
-        int index = Integer.parseInt(stringIndex);
-
-        return new DeleteCashflowCommand(cashflowType, index);
     }
 }

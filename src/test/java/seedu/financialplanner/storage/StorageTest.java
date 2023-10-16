@@ -8,11 +8,11 @@ import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.list.Income;
 import seedu.financialplanner.utils.Ui;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,42 +24,47 @@ public class StorageTest {
     @Test
     public void loadValidData() throws FinancialPlannerException {
         Storage storage = Storage.INSTANCE;
-        CashflowList test = CashflowList.INSTANCE;
-        storage.load(test, Ui.INSTANCE, "src/test/testData/ValidData.txt");
-        CashflowList expected = getTestData();
-        assertEquals(expected.getList(), test.getList());
+        CashflowList cashflowList = CashflowList.INSTANCE;
+        cashflowList.list.clear();
+        storage.load(cashflowList, Ui.INSTANCE, "src/test/testData/ValidData.txt");
+        String actual = cashflowList.getList();
+        cashflowList.list.clear();
+        getTestData();
+        String expected = cashflowList.getList();
+        assertEquals(expected, actual);
     }
 
     @Test
     public void loadInvalidData_userInputNo() {
         Storage storage = Storage.INSTANCE;
         CashflowList test = CashflowList.INSTANCE;
+        test.list.clear();
         ByteArrayInputStream in = new ByteArrayInputStream("n".getBytes());
-        System.setIn(in);
+        Ui.INSTANCE.setScanner(new Scanner(in));
         assertThrows(FinancialPlannerException.class,
                 () -> storage.load(test, Ui.INSTANCE, "src/test/testData/InvalidData.txt"));
     }
 
     @Test
     public void saveValidData() throws FinancialPlannerException, IOException {
-        CashflowList expected = getTestData();
+        CashflowList.INSTANCE.list.clear();
+        getTestData();
         Storage storage = Storage.INSTANCE;
-        storage.save(expected, String.valueOf(testFolder.resolve("temp.txt")));
+        storage.save(CashflowList.INSTANCE, String.valueOf(testFolder.resolve("temp.txt")));
         assertEquals(Files.readAllLines(Path.of("src/test/testData/ValidData.txt")),
                 Files.readAllLines(testFolder.resolve("temp.txt")));
     }
 
     @Test
     public void saveNonExistentFile() {
-        CashflowList expected = getTestData();
+        getTestData();
         Storage storage = Storage.INSTANCE;
-        assertThrows(FinancialPlannerException.class, () -> storage.save(expected, ""));
+        assertThrows(FinancialPlannerException.class, () -> storage.save(CashflowList.INSTANCE, ""));
     }
 
-    private CashflowList getTestData() {
-        CashflowList list = CashflowList.INSTANCE;
-        list.load(new Income(123.12, "allowance", 0));
-        list.load(new Expense(100, "daily necessities", 30));
-        return list;
+    private void getTestData() {
+        CashflowList cashflowList = CashflowList.INSTANCE;
+        cashflowList.load(new Income(123.12, "allowance", 0));
+        cashflowList.load(new Expense(100, "daily necessities", 30));
     }
 }

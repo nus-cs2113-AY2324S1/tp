@@ -1,29 +1,72 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.investments.WatchList;
+import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
-public class DeleteCashflowCommand extends Command{
-    protected String cashflowType;
+public class DeleteCashflowCommand extends AbstractCommand{
+
+    protected CashflowCategory category = CashflowCategory.EMPTY;
     protected int index;
 
-    public DeleteCashflowCommand(String cashflowType, int index) {
-        this.cashflowType = cashflowType;
-        this.index = index;
+    public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
+        String stringIndex;
+        String stringCategory;
+
+        if (rawCommand.args.size() == 1) {
+            stringIndex = rawCommand.args.get(0);
+        } else {
+            stringCategory = rawCommand.args.get(0);
+
+            handleInvalidCategory(stringCategory);
+
+            stringIndex = rawCommand.args.get(1);
+        }
+
+        try {
+            index = Integer.parseInt(stringIndex);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Index must be an integer");
+        }
     }
 
-    public DeleteCashflowCommand(int index) {
-        this.cashflowType = "empty";
-        this.index = index;
+    private void handleInvalidCategory(String stringCategory) {
+        try {
+            category = CashflowCategory.valueOf(stringCategory.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Entry must be either income or expense");
+        }
     }
 
     @Override
-    public void execute(Ui ui, CashflowList cashflowList, WatchList watchList) {
-        if (cashflowType.contains("empty")) {
-            cashflowList.delete(index);
-        } else {
-            cashflowList.deleteCashflow(cashflowType, index);
+    public void execute() {
+        switch (category) {
+        case INCOME:
+        case EXPENSE:
+            handleDeleteCashflowWithCategory();
+            break;
+        case EMPTY:
+            handleDeleteCashflowWithoutCategory();
+            break;
+        default:
+            Ui.INSTANCE.showMessage("Unidentified entry.");
+            break;
+        }
+    }
+
+    private void handleDeleteCashflowWithoutCategory() {
+        try {
+            CashflowList.INSTANCE.delete(index);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Index must be within the list.");
+        }
+    }
+
+    private void handleDeleteCashflowWithCategory() {
+        try {
+            CashflowList.INSTANCE.deleteCashflow(category, index);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
 }

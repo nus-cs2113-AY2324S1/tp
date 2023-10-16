@@ -1,7 +1,7 @@
 package seedu.financialplanner.list;
 
+import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.utils.Ui;
-
 import java.util.ArrayList;
 
 public class CashflowList {
@@ -11,7 +11,6 @@ public class CashflowList {
 
     private CashflowList() {
     }
-
 
     public void addIncome(double value, String type, int recur) {
         Income toAdd = new Income(value, type, recur);
@@ -36,12 +35,12 @@ public class CashflowList {
     //helper method to find the index of a given cashflow in the overall list
     //given its index in its respective list. e.g. "income 3" is the third income
     //in the overall list
-    private int cashflowIndexFinder(String type, int cashflowIndex) {
+    private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) {
 
-        switch (type) {
-        case "income":
+        switch (category) {
+        case INCOME:
             return findCashflowIndexFromIncomeIndex(cashflowIndex);
-        case "expense":
+        case EXPENSE:
             return findCashflowIndexFromExpenseIndex(cashflowIndex);
         default:
             return -1;
@@ -80,8 +79,8 @@ public class CashflowList {
         return overallCashflowIndex;
     }
 
-    public void deleteCashflow(String cashflowType, int index) {
-        int listIndex = cashflowIndexFinder(cashflowType, index);
+    public void deleteCashflow(CashflowCategory category, int index) {
+        int listIndex = cashflowIndexFinder(category, index);
 
         Cashflow toRemove = get(listIndex);
         list.remove(listIndex);

@@ -1,35 +1,66 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.investments.WatchList;
+import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
-public class AddCashflowCommand extends Command{
-    private static final String INCOME = "income";
-    private static final String EXPENSE = "expense";
-    protected String cashflowType;
-    protected double amount;
-    protected String type;
-    protected int recur;
+import java.util.ArrayList;
 
-    public AddCashflowCommand(String cashflowType, double amount, String type, int recur) {
-        this.cashflowType = cashflowType;
-        this.amount = amount;
-        this.type = type;
-        this.recur = recur;
+public class AddCashflowCommand extends AbstractCommand {
+    protected double amount;
+    protected CashflowCategory category;
+    protected String type;
+    protected int recur = 0;
+
+    public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
+        String typeString = String.join(" ", rawCommand.args);
+        try {
+            category = CashflowCategory.valueOf(typeString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Entry must be either income or expense");
+        }
+
+        if (!rawCommand.extraArgs.containsKey("a")) {
+            throw new IllegalArgumentException("Entry must have an amount");
+        }
+        try {
+            amount = Double.parseDouble(rawCommand.extraArgs.get("a"));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Amount must be a number");
+        }
+        rawCommand.extraArgs.remove("a");
+
+        if (!rawCommand.extraArgs.containsKey("t")) {
+            throw new IllegalArgumentException("Entry must have a type");
+        }
+        type = rawCommand.extraArgs.get("t");
+        rawCommand.extraArgs.remove("t");
+
+        if (rawCommand.extraArgs.containsKey("r")) {
+            try {
+                recur = Integer.parseInt(rawCommand.extraArgs.get("r"));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Recurrence must be an integer");
+            }
+            rawCommand.extraArgs.remove("r");
+        }
+        if (!rawCommand.extraArgs.isEmpty()) {
+            String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
+            throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
+        }
     }
 
     @Override
-    public void execute(Ui ui, CashflowList cashflowList, WatchList watchList) {
-        switch (cashflowType) {
+    public void execute() {
+        switch (category) {
         case INCOME:
-            cashflowList.addIncome(amount, type, recur);
+            CashflowList.INSTANCE.addIncome(amount, type, recur);
             break;
         case EXPENSE:
-            cashflowList.addExpense(amount, type, recur);
+            CashflowList.INSTANCE.addExpense(amount, type, recur);
             break;
         default:
-            ui.showMessage("Unidentified entry.");
+            Ui.INSTANCE.showMessage("Unidentified entry.");
             break;
         }
     }

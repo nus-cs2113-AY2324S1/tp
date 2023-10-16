@@ -1,6 +1,8 @@
 package seedu.financialplanner.list;
 
 import org.junit.jupiter.api.Test;
+import seedu.financialplanner.enumerations.CashflowCategory;
+
 import java.text.DecimalFormat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,6 +14,8 @@ class CashflowListTest {
 
     @Test
     void testAddIncomeAndExpense() {
+        CashflowList.INSTANCE.list.clear();
+
         Cashflow.balance = 0;
         testList.addIncome(15, "work", 30);
         Cashflow testIncome = testList.list.get(0);
@@ -56,7 +60,7 @@ class CashflowListTest {
 
     @Test
     void testDeleteIncomeAndExpense() {
-        testList.deleteCashflow("income", 2);
+        testList.deleteCashflow(CashflowCategory.INCOME, 2);
         assertEquals(3, testList.size());
         double roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-15.00", decimalFormat.format(roundedBalance));
@@ -66,7 +70,7 @@ class CashflowListTest {
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-30.00", decimalFormat.format(roundedBalance));
 
-        testList.deleteCashflow("expense", 2);
+        testList.deleteCashflow(CashflowCategory.EXPENSE, 2);
         assertEquals(1, testList.size());
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-10.00", decimalFormat.format(roundedBalance));
