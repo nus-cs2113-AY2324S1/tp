@@ -6,6 +6,7 @@ import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
+import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 import static java.lang.Math.abs;
 
@@ -56,6 +57,10 @@ public class AddCashflowCommand extends AbstractCommand {
 
     @Override
     public void execute() {
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        assert recur >= 0;
+        assert amount >= 0;
+
         switch (category) {
         case INCOME:
             CashflowList.INSTANCE.addIncome(amount, type, recur);
