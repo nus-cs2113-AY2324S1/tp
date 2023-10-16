@@ -11,6 +11,7 @@ import seedu.duke.commands.IncomeLister;
 
 /**
  * This class is the main class of the program.
+ * It contains the main method that runs the program.
  */
 public class Duke {
     private Ui ui;
