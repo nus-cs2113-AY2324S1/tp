@@ -3,7 +3,7 @@ package seedu.duke.exerciselog;
 import java.util.ArrayList;
 
 public class Day {
-    private ArrayList<Exercise> exercises;
+    private final ArrayList<Exercise> exercises;
 
     public Day() {
         exercises = new ArrayList<>();
@@ -15,9 +15,8 @@ public class Day {
         return newExercise.toString();
     }
 
-    public String removeExercise(String exerciseName, int caloriesBurned) {
-        boolean removed = exercises.remove(new Exercise(exerciseName, caloriesBurned));
-        return removed ? "Exercise successfully removed" : "Exercise does not exist";
+    public boolean removeExercise(String exerciseName, int caloriesBurned) {
+        return exercises.remove(new Exercise(exerciseName, caloriesBurned));
     }
 
     public ArrayList<Exercise> getExercises() {

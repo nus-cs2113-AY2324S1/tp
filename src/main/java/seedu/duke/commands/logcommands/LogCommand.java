@@ -12,7 +12,7 @@ public class LogCommand extends Command {
 
     public LogCommand() {
         super();
-        feedbackToUser = "Successfully added exercise to log!";
+        feedbackToUser = "Successfully added exercise to log:\n\t";
     }
 
     public CommandResult execute(Log exerciseLog, List<String> exerciseDetails) {
@@ -21,8 +21,8 @@ public class LogCommand extends Command {
         String exerciseName = exerciseDetails.get(2);
         int caloriesBurned = Integer.parseInt(exerciseDetails.get(3));
 
-        exerciseLog.addExercise(month, day, exerciseName, caloriesBurned);
+        String exerciseDescription = exerciseLog.addExercise(month, day, exerciseName, caloriesBurned);
 
-        return new CommandResult(feedbackToUser);
+        return new CommandResult(feedbackToUser + exerciseDescription);
     }
 }

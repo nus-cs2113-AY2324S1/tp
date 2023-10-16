@@ -3,7 +3,7 @@ package seedu.duke.exerciselog;
 import java.util.ArrayList;
 
 public class Log {
-    private ArrayList<Month> exerciseLog;
+    private final ArrayList<Month> exerciseLog;
 
     public Log() {
         exerciseLog = new ArrayList<>();
@@ -25,7 +25,7 @@ public class Log {
         return exerciseLog.get(month - 1).addExercise(day, exerciseName, caloriesBurned);
     }
 
-    public String removeExercise(int month, int day, String exerciseName, int caloriesBurned) {
+    public boolean removeExercise(int month, int day, String exerciseName, int caloriesBurned) {
         return exerciseLog.get(month - 1).removeExercise(day, exerciseName, caloriesBurned);
     }
 
@@ -59,10 +59,6 @@ public class Log {
 
     public Day getDay(int month, int day) {
         return exerciseLog.get(month - 1).getDay(day - 1);
-    }
-
-    public int getSize() {
-        return exerciseLog.size();
     }
 
     public String toString() {
