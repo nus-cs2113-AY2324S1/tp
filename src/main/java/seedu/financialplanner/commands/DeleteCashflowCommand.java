@@ -28,6 +28,10 @@ public class DeleteCashflowCommand extends AbstractCommand{
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Index must be an integer");
         }
+
+        if (index == 0) {
+            throw new IllegalArgumentException("Index must be within the list");
+        }
     }
 
     private void handleInvalidCategory(String stringCategory) {
@@ -60,16 +64,16 @@ public class DeleteCashflowCommand extends AbstractCommand{
     private void handleDeleteCashflowWithoutCategory() {
         try {
             CashflowList.INSTANCE.delete(index);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Index must be within the list.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Index must be within the list");
         }
     }
 
     private void handleDeleteCashflowWithCategory() {
         try {
             CashflowList.INSTANCE.deleteCashflow(category, index);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Index must be within the list.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Index must be within the list");
         }
     }
 }
