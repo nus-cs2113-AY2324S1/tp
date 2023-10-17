@@ -15,8 +15,4 @@ public class Income extends Cashflow{
         return "I | " + super.formatString();
     }
 
-    @Override
-    public String toString() {
-        return "Income | " + super.toString();
-    }
 }

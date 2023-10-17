@@ -31,7 +31,4 @@ public class Cashflow {
         return value;
     }
 
-    public String toString() {
-        return "Value: "+this.value + " | " + "Type: " + this.type + " | " + "Recur: " + this.recur;
-    }
 }
