@@ -4,7 +4,7 @@ import fittrack.parser.CommandParser;
 import org.junit.jupiter.api.Test;
 
 import static fittrack.command.HelpCommand.MESSAGE_INVALID_COMMAND;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HelpCommandTest {
 
