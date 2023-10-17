@@ -13,6 +13,7 @@ public class FinancialPlannerLogger {
             FileHandler fh = new FileHandler("data/logger.log");
             logger.addHandler(fh);
             fh.setFormatter(new SimpleFormatter());
+            logger.log(Level.INFO, "Logger initialised");
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
         }
