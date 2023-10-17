@@ -14,7 +14,7 @@ public class ListIngredientCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public ListIngredientCommand(int listIndex){
+    public ListIngredientCommand(int listIndex) {
         this.index = listIndex;
     }
 
