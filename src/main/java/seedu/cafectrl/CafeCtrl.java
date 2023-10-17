@@ -1,7 +1,6 @@
 package seedu.cafectrl;
 
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.Ui;

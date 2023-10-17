@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Ui {
     public static final int OFFSET_LIST_INDEX = 1;
-    public static final String lineString = "-----------------------------------------------------";
+    public static final String LINE_STRING = "-----------------------------------------------------";
     private final Scanner scanner;
 
     /**
@@ -18,7 +18,7 @@ public class Ui {
     }
 
     public void printLine() {
-        showToUser(lineString);
+        showToUser(LINE_STRING);
     }
 
     public String receiveUserInput() {
