@@ -321,11 +321,11 @@ public class QuestionList {
      */
     public void startQuiz(Ui ui) {
         if (allQns.isEmpty()) {
-            ui.displayMessage("No questions found! Add questions before starting the quiz.");
+            ui.displayMessage("    No questions found! Add questions before starting the quiz.");
             return;
         }
 
-        System.out.println("    Starting the quiz...");
+        ui.displayMessage("    Starting the quiz...");
         int totalQuestions = allQns.size();
         int correctAnswers = 0;
 
