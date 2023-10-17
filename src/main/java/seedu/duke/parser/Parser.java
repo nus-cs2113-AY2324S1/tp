@@ -121,11 +121,11 @@ public class Parser {
                 "to be implemented by Dexter");
     }
   
-     /**
-     * Parses arguments in the context of the ListIngredient command.
-     * @param userInput arguments string to parse as index number
-     * @return the prepared command
-     */
+    /**
+    * Parses arguments in the context of the ListIngredient command.
+    * @param userInput arguments string to parse as index number
+    * @return the prepared command
+    */
     private static Command prepareListIngredient(String userInput) {
         try {
             final int listIndex = parseArgsAsDisplayedIndex(userInput, ListIngredientCommand.COMMAND_WORD);
