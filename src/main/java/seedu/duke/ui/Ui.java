@@ -88,7 +88,7 @@ public class Ui {
      * @param menuItem menuItem that has been modified
      */
     public static void showEditPriceMessage(String menuItem) {
-        System.out.println("Price modified for the following dish: ");
+        System.out.println(Messages.PRICE_MODIFIED_MESSAGE);
         showToUser(menuItem);
     }
 }

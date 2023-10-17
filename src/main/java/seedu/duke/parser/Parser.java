@@ -10,6 +10,7 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.ListIngredientCommand;
 import seedu.duke.command.ListMenuCommand;
 import seedu.duke.command.EditPriceCommand;
+import seedu.duke.ui.Messages;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -62,7 +63,7 @@ public class Parser {
             return prepareListMenu();
 
         case EditPriceCommand.COMMAND_WORD:
-            return prepareEditPriceCommand(arguments);
+            return prepareEditPriceCommand(menu, arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -84,27 +85,26 @@ public class Parser {
      * @param arguments string that matches group arguments
      * @return new EditDishCommand
      */
-    private Command prepareEditPriceCommand(String arguments) {
+    private Command prepareEditPriceCommand(Menu menu, String arguments) {
         Pattern editDishArgumentsPattern = Pattern.compile(EDIT_PRICE_ARGUMENT_STRING);
         Matcher matcher = editDishArgumentsPattern.matcher(arguments);
 
         // Checks whether the overall pattern of edit price arguments is correct
-        if (matcher.matches()) {
-            return new IncorrectCommand("Error: Missing arguments for edit price command.");
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE);
         }
 
         try {
             int dishIndex = Integer.parseInt(matcher.group(1));
             float newPrice = Float.parseFloat(matcher.group(2));
 
+            // Check whether the dish index is valid
+            if (!menu.isValidDishIndex(dishIndex)) {
+                return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
+            }
             return new EditPriceCommand(dishIndex, newPrice);
         } catch (IllegalArgumentException e) {
-            return new IncorrectCommand("Oops, seems like you gave me the wrong type for dish index " +
-                                                        "or price. Make sure dish index is of type int " +
-                                                           "and price is of type float!");
-        } catch (IndexOutOfBoundsException e) {
-            return new IncorrectCommand("hmmm, can you double the your dish index, " +
-                                                        "I can't seem to find the dish you're referring to");
+            return new IncorrectCommand(Messages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE);
         }
     }
 
