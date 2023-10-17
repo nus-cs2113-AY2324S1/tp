@@ -1,5 +1,6 @@
 package seedu.financialplanner.commands;
 import seedu.financialplanner.reminder.ReminderList;
+import seedu.financialplanner.reminder.Reminder;
 import seedu.financialplanner.utils.Ui;
 public class AddReminderCommand extends AbstractCommand{
     private final String type;
@@ -25,7 +26,7 @@ public class AddReminderCommand extends AbstractCommand{
 
     @Override
     public void execute() {
-        ReminderList.INSTANCE.addReminder(type, date);
+        ReminderList.INSTANCE.list.add(new Reminder(type, date));
         Ui.INSTANCE.showMessage("Reminder added!");
     }
 }

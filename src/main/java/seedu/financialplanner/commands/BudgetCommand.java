@@ -6,6 +6,7 @@ import seedu.financialplanner.utils.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 public class BudgetCommand extends AbstractCommand {
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
@@ -50,6 +51,11 @@ public class BudgetCommand extends AbstractCommand {
         //compare budget to balance
         assert budget > 0 : "Budget should be greater than 0";
         rawCommand.extraArgs.remove("b");
+
+        if (!rawCommand.extraArgs.isEmpty()) {
+            String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
+            throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
+        }
     }
 
     @Override
@@ -60,21 +66,14 @@ public class BudgetCommand extends AbstractCommand {
         case "set":
             logger.log(Level.INFO, "Setting budget");
             Budget.setBudget(budget);
-            Ui.INSTANCE.showMessage("A monthly budget of " + String.format("%.2f", Budget.getInitialBudget())
+            Ui.INSTANCE.showMessage("A monthly budget of " + Budget.getInitialBudgetString()
                     + " has been set.");
             break;
         case "update":
             logger.log(Level.INFO, "Updating budget");
-            Ui.INSTANCE.showMessage("Budget has been updated:\nOld initial budget: " +
-                    String.format("%.2f", Budget.getInitialBudget()) + "\nOld current budget: " +
-                    String.format("%.2f", Budget.getCurrentBudget()));
+            Ui.INSTANCE.printBudgetBeforeUpdate();
             Budget.updateBudget(budget);
-            Ui.INSTANCE.showMessage("New initial budget: " + String.format("%.2f", Budget.getInitialBudget()) +
-                    "\nNew current budget: " + String.format("%.2f", Budget.getCurrentBudget()));
-            if (Budget.getCurrentBudget() <= 0) {
-                Ui.INSTANCE.showMessage("You have exceeded your budget, please update to a larger budget or " +
-                        "reset the current budget to initial budget.");
-            }
+            Ui.INSTANCE.printBudgetAfterUpdate();
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");

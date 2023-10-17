@@ -7,7 +7,6 @@ import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
-import static java.lang.Math.abs;
 
 public class AddCashflowCommand extends AbstractCommand {
 
@@ -76,12 +75,6 @@ public class AddCashflowCommand extends AbstractCommand {
     private static void deductFromBudget(Cashflow entry) {
         double expenseAmount = entry.getAmount();
         Budget.deduct(expenseAmount);
-        if (Budget.getCurrentBudget() <= 0) {
-            Ui.INSTANCE.showMessage("You have exceeded your current budget by: " +
-                    String.format("%.2f", abs(Budget.getCurrentBudget())));
-        } else if (Budget.getCurrentBudget() > 0) {
-            Ui.INSTANCE.showMessage("Your remaining budget for the month is: " +
-                    String.format("%.2f", Budget.getCurrentBudget()));
-        }
+        Ui.INSTANCE.printBudgetAfterDeduction();
     }
 }
