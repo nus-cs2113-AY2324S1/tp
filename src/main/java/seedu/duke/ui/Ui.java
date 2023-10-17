@@ -66,10 +66,10 @@ public class Ui {
     /**
      * Shows delete message to user
      *
-     * @param menuItem String of menu item deleted
+     * @param selectedDish Dish to be deleted
      */
-    public void showDeleteMessage(String menuItem) {
-        showToUser("Okies! " + menuItem + " deleted! :)");
+    public void showDeleteMessage(Dish selectedDish) {
+        showToUser("Okay! " + selectedDish.getName() + " is deleted! :)");
     }
 
 

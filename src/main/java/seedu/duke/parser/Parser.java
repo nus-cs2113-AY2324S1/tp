@@ -30,8 +30,8 @@ public class Parser {
             return new ListMenuCommand();
         case ListIngredientCommand.COMMAND_WORD:
             return prepareListIngredient(userInput);
-        /*case DeleteDishCommand.COMMAND_WORD:
-            return prepareDelete(menu,userInput);*/
+        case DeleteDishCommand.COMMAND_WORD:
+            return prepareDelete(userInput);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case AddDishCommand.COMMAND_WORD:
@@ -59,11 +59,16 @@ public class Parser {
         }
     }
 
-    private static Command prepareDelete(Menu menu, String userInput) {
+    /**
+     * Parses arguments in the context of the Delete command.
+     *
+     * @param userInput Input from the user
+     * @return Command to be executed
+     */
+    private static Command prepareDelete(String userInput) {
         try {
             final int listIndex = parseArgsAsDisplayedIndex(userInput, DeleteDishCommand.COMMAND_WORD);
-            //return new DeleteDishCommand(listIndex);
-            return new IncorrectCommand("SHANICE DO YOUR WORK");
+            return new DeleteDishCommand(listIndex);
         } catch (ParseException e) {
             return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + DeleteDishCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
