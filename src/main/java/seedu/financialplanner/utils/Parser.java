@@ -13,6 +13,7 @@ import seedu.financialplanner.commands.WatchListCommand;
 import seedu.financialplanner.commands.VisCommand;
 import seedu.financialplanner.commands.BudgetCommand;
 import seedu.financialplanner.commands.AddReminderCommand;
+import seedu.financialplanner.commands.SetGoalCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Parser {
     private static final String BUDGET_COMMAND = "budget";
     private static final String VISUALIZATION_COMMAND = "vis";
     private static final String ADD_REMINDER_COMMAND = "addreminder";
+    private static final String SET_GOAL_COMMAND = "set";
 
     public static AbstractCommand parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
@@ -61,6 +63,8 @@ public class Parser {
             return new OverviewCommand(rawCommand);
         case ADD_REMINDER_COMMAND:
             return new AddReminderCommand(rawCommand);
+        case SET_GOAL_COMMAND:
+            return new SetGoalCommand(rawCommand);
         default:
             return new InvalidCommand();
         }

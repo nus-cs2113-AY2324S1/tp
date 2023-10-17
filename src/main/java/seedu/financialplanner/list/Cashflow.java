@@ -65,4 +65,5 @@ public class Cashflow {
     public String getType() {
         return type;
     }
+
 }
