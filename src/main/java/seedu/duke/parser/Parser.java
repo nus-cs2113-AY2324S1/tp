@@ -55,7 +55,7 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ListIngredientCommand.COMMAND_WORD:
-            return prepareListIngredient();
+            return prepareListIngredient(arguments);
 
         case ListMenuCommand.COMMAND_WORD:
             return prepareListMenu();
