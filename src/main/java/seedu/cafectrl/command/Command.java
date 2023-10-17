@@ -15,6 +15,15 @@ public class Command {
     }
 
     /**
+     * check whether this command is an exit command (user input "bye")
+     *
+     * default returns false, this method will be overridden in ExitCommand
+     */
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
      * Executes the command and returns the result.
      */
     public void execute(Menu menu, Ui ui) {

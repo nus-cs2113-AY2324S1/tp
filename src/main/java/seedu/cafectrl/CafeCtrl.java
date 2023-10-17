@@ -45,7 +45,7 @@ public class CafeCtrl {
             } finally {
                 ui.printLine();
             }
-        } while (!(command instanceof ExitCommand)); //end the program if the command obj is a ExitCommand
+        } while (!command.isExit());
     }
 
     public static void main(String[] args) {
