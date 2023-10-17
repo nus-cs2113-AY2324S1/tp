@@ -2,6 +2,7 @@ package seedu.financialplanner.utils;
 
 import seedu.financialplanner.commands.AbstractCommand;
 import seedu.financialplanner.commands.AddStockCommand;
+import seedu.financialplanner.commands.OverviewCommand;
 import seedu.financialplanner.commands.AddCashflowCommand;
 import seedu.financialplanner.commands.DeleteCashflowCommand;
 import seedu.financialplanner.commands.ExitCommand;
@@ -29,10 +30,12 @@ public class Parser {
     private static final String DELETE_CASHFLOW_COMMAND = "delete";
     private static final String ADD_STOCK_COMMAND = "addstock";
     private static final String FIND_COMMAND = "find";
+    private static final String OVERVIEW_COMMAND = "overview";
     private static final String BUDGET_COMMAND = "budget";
     private static final String VISUALIZATION_COMMAND = "vis";
     private static final String ADD_REMINDER_COMMAND = "addreminder";
     private static final String SET_GOAL_COMMAND = "set";
+
     public static AbstractCommand parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
         return parseCommand(rawCommand);
@@ -56,6 +59,8 @@ public class Parser {
             return new BudgetCommand(rawCommand);
         case VISUALIZATION_COMMAND:
             return new VisCommand(rawCommand);
+        case OVERVIEW_COMMAND:
+            return new OverviewCommand(rawCommand);
         case ADD_REMINDER_COMMAND:
             return new AddReminderCommand(rawCommand);
         case SET_GOAL_COMMAND:

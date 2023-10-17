@@ -2,6 +2,7 @@ package seedu.financialplanner.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
+import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 
 import java.util.Scanner;
@@ -75,5 +76,27 @@ public class Ui {
         System.out.println(entry);
         System.out.println("from the Financial Planner.");
         System.out.println("Balance: " + entry.formatBalance());
+    }
+
+    public void printBudgetBeforeUpdate() {
+        showMessage("Budget has been updated:\nOld initial budget: " +
+                Budget.getInitialBudgetString() + "\nOld current budget: " +
+                Budget.getCurrentBudgetString());
+    }
+
+    public void printBudgetAfterUpdate() {
+        showMessage("New initial budget: " + Budget.getInitialBudgetString() +
+                "\nNew current budget: " + Budget.getCurrentBudgetString());
+    }
+
+    public void printBudgetAfterDeduction() {
+        String message = "";
+        if (Budget.getCurrentBudget() <= 0) {
+            message += "You have exceeded your current budget by: ";
+        } else if (Budget.getCurrentBudget() > 0) {
+            message += "Your remaining budget for the month is: ";
+        }
+        message += Budget.getCurrentBudgetString();
+        showMessage(message);
     }
 }

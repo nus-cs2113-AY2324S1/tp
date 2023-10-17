@@ -1,5 +1,7 @@
 package seedu.financialplanner.list;
 
+import java.text.DecimalFormat;
+
 public abstract class Budget {
     private static final int MONTH = 30;
     private static double initialBudget = 0;
@@ -29,6 +31,16 @@ public abstract class Budget {
 
     public static double getCurrentBudget() {
         return currentBudget;
+    }
+
+    public static String getCurrentBudgetString() {
+        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+        return decimalFormat.format(Cashflow.round(currentBudget, 2));
+    }
+
+    public static String getInitialBudgetString() {
+        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+        return decimalFormat.format(Cashflow.round(initialBudget, 2));
     }
 
     public static void deduct(double amount) {
