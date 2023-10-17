@@ -27,6 +27,7 @@ public class DeleteCashflowCommand extends AbstractCommand{
         }
 
         try {
+            logger.log(Level.INFO, "Parsing index as integer");
             index = Integer.parseInt(stringIndex);
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid argument for index");
@@ -41,6 +42,7 @@ public class DeleteCashflowCommand extends AbstractCommand{
 
     private void handleInvalidCategory(String stringCategory) {
         try {
+            logger.log(Level.INFO, "Parsing CashflowCategory");
             category = CashflowCategory.valueOf(stringCategory.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
@@ -70,6 +72,7 @@ public class DeleteCashflowCommand extends AbstractCommand{
 
     private void handleDeleteCashflowWithoutCategory() {
         try {
+            logger.log(Level.INFO, "Deleting cashflow without category");
             CashflowList.INSTANCE.delete(index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
@@ -79,6 +82,7 @@ public class DeleteCashflowCommand extends AbstractCommand{
 
     private void handleDeleteCashflowWithCategory() {
         try {
+            logger.log(Level.INFO, "Deleting cashflow with category");
             CashflowList.INSTANCE.deleteCashflow(category, index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
