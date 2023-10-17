@@ -16,8 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WatchList {
-    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
+
     public static final WatchList INSTANCE = new WatchList();
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final ArrayList<Stock> stocks;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
