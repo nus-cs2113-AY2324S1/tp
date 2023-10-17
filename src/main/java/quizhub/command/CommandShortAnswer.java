@@ -9,7 +9,7 @@ import quizhub.ui.Ui;
  */
 public class CommandShortAnswer extends Command {
 
-    private String userInput;
+    private final String userInput;
     /**
      * Creates a new question command to add a SHORTANSWER question
      *
@@ -19,6 +19,15 @@ public class CommandShortAnswer extends Command {
         super(CommandType.ADD);
         this.userInput = userInput;
     }
+
+    /**
+     * Get userInput item (still in the short Question / Answer format)
+     * @return String userInput
+     */
+    public String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Adds the SHORTANSWER question and updates storage data.
      *
