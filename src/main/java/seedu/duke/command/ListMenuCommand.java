@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 public class ListMenuCommand extends Command {
     public static final String COMMAND_WORD = "list";
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
+  
     /**
      * Iterates through the menu arraylist, outputting the dish name and dish price.
      *

@@ -13,6 +13,7 @@ public class AddDishCommand extends Command {
     public AddDishCommand(Dish dish) {
         this.dish = dish;
     }
+  
     @Override
     public void execute(Menu menu, Ui ui) {
         menu.addDish(dish);
