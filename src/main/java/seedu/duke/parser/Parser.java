@@ -146,7 +146,7 @@ public class Parser {
     private static Command prepareDelete(String userInput) {
         try {
             final int listIndex = parseArgsAsDisplayedIndex(userInput, DeleteDishCommand.COMMAND_WORD);
-            return new DeleteDishCommand();
+            return new DeleteDishCommand(listIndex);
         } catch (ParseException e) {
             return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + DeleteDishCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
