@@ -106,5 +106,9 @@ public class Ui {
         System.out.println("    Please enter a valid command :0");
         System.out.println(feedback);
     }
+
+    public void displayMessage(String message) {
+        System.out.println(message);
+    }
 }
 

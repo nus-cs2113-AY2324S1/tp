@@ -299,17 +299,32 @@ public class QuestionList {
         }
     }
     /**
+     * Retrieves the question by its index in the question list.
+     *
+     * @param index The index of the question in the list.
+     * @return The question, or null if the index is invalid or the question is of a different type.
+     */
+    public String getQuestionTextByIndex(int index) {
+        if (index >= 0 && index < allQns.size()) {
+            Question question = allQns.get(index);
+            return question.toString(); // Use the toString() method to get the text of the question
+        }
+        return null; // Handle invalid index
+    }
+
+
+    /**
      * Starts a quiz session using the provided user interface (UI).
      *
      * @param ui The user interface to interact with the user.
      */
     public void startQuiz(Ui ui) {
         if (allQns.isEmpty()) {
-            System.out.println("    No questions found! Add questions before starting the quiz.");
+            ui.displayMessage("    No questions found! Add questions before starting the quiz.");
             return;
         }
 
-        System.out.println("    Starting the quiz...");
+        ui.displayMessage("    Starting the quiz...");
         int totalQuestions = allQns.size();
         int correctAnswers = 0;
 
