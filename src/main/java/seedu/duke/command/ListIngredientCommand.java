@@ -14,6 +14,10 @@ public class ListIngredientCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    public ListIngredientCommand(int listIndex) {
+        this.index = listIndex;
+    }
+
     @Override
     public void execute(Menu menu, Ui ui) {
         Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
