@@ -33,6 +33,6 @@ public class ShortAnsQn extends Question {
      */
     @Override
     public String getQuestionDescription() {
-        return super.getQuestionDescription() + "/" + this.answer;
+        return super.getQuestionDescription().strip() + " / " + this.answer.strip();
     }
 }

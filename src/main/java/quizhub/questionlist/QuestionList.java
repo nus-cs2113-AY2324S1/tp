@@ -44,7 +44,6 @@ public class QuestionList {
                 } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
                     System.out.println("    Ono! You did not input a proper question!");
                     System.out.println("    Please format your input as short [question]/[answer]!");
-                    return;
                 }
         }
     }
