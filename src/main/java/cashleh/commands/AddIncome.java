@@ -9,10 +9,12 @@ import java.util.logging.Level;
 public class AddIncome extends Command {
     private final Income incomeToAdd;
     private final IncomeStatement incomeStatement;
+
     public AddIncome(Income incomeToAdd, IncomeStatement incomeStatement) {
         this.incomeToAdd = incomeToAdd;
         this.incomeStatement = incomeStatement;
     }
+    
     @Override
     public void execute() {
         incomeStatement.addIncome(incomeToAdd);
