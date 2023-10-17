@@ -20,8 +20,6 @@ public class Storage {
      */
     public Storage(String filePath) {
         dataFile = new File(filePath);
-        assert dataFile.exists():
-                "Data file creation has failed!";
     }
     /**
      * Write in new data to storage.
