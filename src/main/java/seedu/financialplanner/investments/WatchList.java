@@ -12,20 +12,30 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WatchList {
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     public static final WatchList INSTANCE = new WatchList();
     private final ArrayList<Stock> stocks;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
     private WatchList() {
         stocks = new ArrayList<>();
+
+        logger.log(Level.INFO, "Adding Base Stocks");
         try {
             Stock apple = new Stock("AAPL");
+            assert apple.getSymbol() != null && apple.getStockName() != null;
             stocks.add(apple);
+
             Stock meta = new Stock("META");
+            assert meta.getSymbol() != null && meta.getStockName() != null;
             stocks.add(meta);
+
             Stock google = new Stock("GOOGL");
+            assert google.getSymbol() != null && google.getStockName() != null;
             stocks.add(google);
         } catch (FinancialPlannerException e) {
             System.out.println(e.getMessage());
@@ -35,6 +45,8 @@ public class WatchList {
     public JSONArray fetchFMPStockPrices() {
         HttpClient client = HttpClient.newHttpClient();
         StringBuilder queryStocks = new StringBuilder();
+
+        assert !stocks.isEmpty();
         for (Stock stock : stocks) {
             queryStocks.append(stock.toString());
         }
@@ -45,15 +57,20 @@ public class WatchList {
                 .timeout(Duration.ofSeconds(10))
                 .build();
         Object obj;
+
+        logger.log(Level.INFO, "Requesting API endpoint FMP");
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             // System.out.println(response.body());
             obj = new JSONParser().parse(response.body());
         } catch (IOException e) {
+            logger.log(Level.SEVERE, "Cant request API endpoint");
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
+            logger.log(Level.SEVERE, "Interrupted");
             throw new RuntimeException(e);
         } catch (ParseException e) {
+            logger.log(Level.SEVERE, "Could not parse to JSON");
             throw new RuntimeException(e);
         }
         return (JSONArray) obj;
@@ -62,6 +79,8 @@ public class WatchList {
     public String addStock(String stockCode) throws FinancialPlannerException {
         Stock newStock = null;
         newStock = new Stock(stockCode);
+
+        assert newStock.getSymbol() != null && newStock.getStockName() != null;
         stocks.add(newStock);
         return newStock.getStockName();
     }
