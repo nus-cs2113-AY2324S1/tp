@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class IncomeStatementTest {
     IncomeStatement testStatement = new IncomeStatement();
     Income testIncome = new Income("pocket money", 200);
+    
     @Test
     void getNumberOfEntries() {
         assertEquals(testStatement.getNumberOfEntries(), 0);
