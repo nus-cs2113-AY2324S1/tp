@@ -1,9 +1,10 @@
 package cashleh.commands;
 
-import cashleh.Income;
 import cashleh.IncomeStatement;
-import cashleh.Expense;
+import cashleh.Income;
 import cashleh.ExpenseStatement;
+import cashleh.Expense;
+import cashleh.exception.CashLehException;
 
 import java.util.logging.Logger;
 
@@ -38,7 +39,7 @@ public class Command {
         return incomeStatement.getSumOfEntries();
     }
 
-    public void execute() {}
+    public void execute() throws CashLehException {}
     public void setIncomeStatement(IncomeStatement incomeStatement) {
         this.incomeStatement = incomeStatement;
     }

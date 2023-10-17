@@ -1,6 +1,6 @@
 package cashleh.commands;
 
-import cashleh.CashLehException;
+import cashleh.exception.CashLehException;
 import cashleh.Expense;
 
 public class AddExpense extends Command {

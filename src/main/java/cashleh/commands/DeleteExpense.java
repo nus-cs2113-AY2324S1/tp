@@ -1,6 +1,6 @@
 package cashleh.commands;
 
-import cashleh.CashLehException;
+import cashleh.exception.CashLehException;
 
 public class DeleteExpense extends Command {
     public static final String COMMAND = "deleteExpense";

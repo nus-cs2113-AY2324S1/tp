@@ -1,6 +1,6 @@
 package cashleh.commands;
 
-import cashleh.CashLehException;
+import cashleh.exception.CashLehException;
 
 import java.util.logging.Level;
 
