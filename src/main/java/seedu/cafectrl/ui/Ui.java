@@ -88,4 +88,9 @@ public class Ui {
             System.out.println(m);
         }
     }
+
+    public void showEditPriceMessage(String menuItem) {
+        System.out.println("Modified the following dish: ");
+        showToUser(menuItem);
+    }
 }

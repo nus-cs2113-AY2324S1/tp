@@ -2,11 +2,13 @@ package seedu.cafectrl.parser;
 
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.DeleteDishCommand;
-import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.IncorrectCommand;
+import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
+
 import seedu.cafectrl.data.Menu;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class Parser {
 
     // Command Argument Patterns
     private static final String ADD_ARGUMENT_STRING = "add name/(\\w+) price/(\\d+(\\.\\d+)?)" +
-                                                " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
+                                                        " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
@@ -59,6 +61,9 @@ public class Parser {
         case ListMenuCommand.COMMAND_WORD:
             return prepareListMenu();
 
+        case EditPriceCommand.COMMAND_WORD:
+            return prepareEditListCommand(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -74,6 +79,10 @@ public class Parser {
         return null;
     }
 
+    private static Command prepareEditListCommand(String arguments) {
+        return null;
+    }
+    
     private static Command prepareAdd(String arguments) {
         final Pattern addArgumentPattern = Pattern.compile(ADD_ARGUMENT_STRING);
         Matcher matcher = addArgumentPattern.matcher(arguments);
