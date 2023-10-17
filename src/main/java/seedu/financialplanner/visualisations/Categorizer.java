@@ -27,7 +27,7 @@ public class Categorizer {
         for (Cashflow e: cashflowList.list) {
             if (e instanceof Expense) {
                 String key = e.getType();
-                double value = expensesByCat.getOrDefault(key, 0.0) + e.getValue();
+                double value = expensesByCat.getOrDefault(key, 0.0) + e.getAmount();
                 expensesByCat.put(key, value);
             }
         }
@@ -39,7 +39,7 @@ public class Categorizer {
         for (Cashflow e: cashflowList.list) {
             if (e instanceof Income) {
                 String key = e.getType();
-                double value = incomeByCat.getOrDefault(key, 0.0) + e.getValue();
+                double value = incomeByCat.getOrDefault(key, 0.0) + e.getAmount();
                 incomeByCat.put(key, value);
             }
         }

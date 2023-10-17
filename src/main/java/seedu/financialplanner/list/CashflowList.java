@@ -1,8 +1,7 @@
 package seedu.financialplanner.list;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
+import seedu.financialplanner.enumerations.CashflowCategory;
+import seedu.financialplanner.utils.Ui;
 import java.util.ArrayList;
 
 public class CashflowList {
@@ -13,42 +12,80 @@ public class CashflowList {
     private CashflowList() {
     }
 
-    private void printAddedCashflow(String line) {
-        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
-
-        Cashflow cashflow = list.get(list.size() - 1);
-        System.out.print("Added " + line + " of value: ");
-        System.out.println(decimalFormat.format(round(cashflow.value, 2)) + " to the list.");
-        System.out.println("type: " + cashflow.type);
-        if (cashflow.recur != 0) {
-            System.out.println("recurring every: " + cashflow.recur + " days");
-        }
-        System.out.println("balance: " + decimalFormat.format(round(Cashflow.balance, 2)));
-    }
-
-    //@author mhadidg-reused
-    //Reused from https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
-    public double round(double value, int places) {
-        if (places < 0) {
-            throw new IllegalArgumentException();
-        }
-
-        BigDecimal bd = BigDecimal.valueOf(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
-    //@author mhadidg
-
     public void addIncome(double value, String type, int recur) {
         Income toAdd = new Income(value, type, recur);
         list.add(toAdd);
-        printAddedCashflow("income");
+        Ui.INSTANCE.printAddedCashflow(toAdd);
     }
 
     public void addExpense(double value, String type, int recur) {
         Expense toAdd = new Expense(value, type, recur);
         list.add(toAdd);
-        printAddedCashflow("expense");
+        Ui.INSTANCE.printAddedCashflow(toAdd);
+    }
+
+    public void delete(int index) {
+        int listIndex = index - 1;
+
+        Cashflow toRemove = list.get(listIndex);
+        list.remove(listIndex);
+        toRemove.deleteCashflowvalue();
+        Ui.INSTANCE.printDeletedCashflow(toRemove);
+    }
+    //helper method to find the index of a given cashflow in the overall list
+    //given its index in its respective list. e.g. "income 3" is the third income
+    //in the overall list
+    private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) {
+
+        switch (category) {
+        case INCOME:
+            return findCashflowIndexFromIncomeIndex(cashflowIndex);
+        case EXPENSE:
+            return findCashflowIndexFromExpenseIndex(cashflowIndex);
+        default:
+            return -1;
+        }
+    }
+
+    private int findCashflowIndexFromIncomeIndex(int cashflowIndex) {
+        int cashflowCounter = 0;
+        int overallCashflowIndex = 0;
+
+        for (Cashflow entry : list) {
+            if (entry instanceof Income) {
+                cashflowCounter += 1;
+            }
+            if (cashflowCounter == cashflowIndex) {
+                break;
+            }
+            overallCashflowIndex += 1;
+        }
+        return overallCashflowIndex;
+    }
+
+    private int findCashflowIndexFromExpenseIndex(int cashflowIndex) {
+        int cashflowCounter = 0;
+        int overallCashflowIndex = 0;
+
+        for (Cashflow entry : list) {
+            if (entry instanceof Expense) {
+                cashflowCounter += 1;
+            }
+            if (cashflowCounter == cashflowIndex) {
+                break;
+            }
+            overallCashflowIndex += 1;
+        }
+        return overallCashflowIndex;
+    }
+
+    public void deleteCashflow(CashflowCategory category, int index) {
+        int listIndex = cashflowIndexFinder(category, index);
+
+        Cashflow toRemove = list.get(listIndex);
+        list.remove(listIndex);
+        toRemove.deleteCashflowvalue();
+        Ui.INSTANCE.printDeletedCashflow(toRemove);
     }
 
 

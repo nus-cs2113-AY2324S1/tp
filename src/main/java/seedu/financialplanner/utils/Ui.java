@@ -2,6 +2,7 @@ package seedu.financialplanner.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
+import seedu.financialplanner.list.Cashflow;
 
 import java.util.Scanner;
 
@@ -61,5 +62,18 @@ public class Ui {
         System.out.println(stockName);
         System.out.println("Use Watchlist to view it!");
 
+    }
+    public void printAddedCashflow(Cashflow entry) {
+        System.out.print("You have added an ");
+        System.out.println(entry);
+        System.out.println("to the Financial Planner.");
+        System.out.println("Balance: " + entry.formatBalance());
+    }
+
+    public void printDeletedCashflow(Cashflow entry) {
+        System.out.print("You have removed an ");
+        System.out.println(entry);
+        System.out.println("from the Financial Planner.");
+        System.out.println("Balance: " + entry.formatBalance());
     }
 }
