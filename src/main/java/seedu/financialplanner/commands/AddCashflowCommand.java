@@ -23,6 +23,7 @@ public class AddCashflowCommand extends AbstractCommand {
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
         try {
+            logger.log(Level.INFO, "Parsing CashflowCategory");
             category = CashflowCategory.valueOf(typeString.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
@@ -34,6 +35,7 @@ public class AddCashflowCommand extends AbstractCommand {
             throw new IllegalArgumentException("Entry must have an amount");
         }
         try {
+            logger.log(Level.INFO, "Parsing amount as double");
             amount = Double.parseDouble(rawCommand.extraArgs.get("a"));
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for amount");
@@ -58,6 +60,7 @@ public class AddCashflowCommand extends AbstractCommand {
 
         if (rawCommand.extraArgs.containsKey("r")) {
             try {
+                logger.log(Level.INFO, "Parsing recur as integer");
                 recur = Integer.parseInt(rawCommand.extraArgs.get("r"));
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for recur");
