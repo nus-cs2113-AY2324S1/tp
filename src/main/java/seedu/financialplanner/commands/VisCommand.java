@@ -6,11 +6,14 @@ import seedu.financialplanner.visualisations.Categorizer;
 import seedu.financialplanner.visualisations.Visualizer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VisCommand extends AbstractCommand {
 
     private String type;
     private String chart;
+    private static Logger logger = Logger.getLogger("Financial Planner Logger");
 
     public VisCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("t")) {
@@ -19,12 +22,14 @@ public class VisCommand extends AbstractCommand {
         if (!rawCommand.extraArgs.containsKey("c")) {
             throw new IllegalArgumentException("Chart type must be defined");
         }
+        logger.log(Level.INFO, "Parsing entry type and chart type");
         this.type = rawCommand.extraArgs.get("t");
         rawCommand.extraArgs.remove("t");
         this.chart = rawCommand.extraArgs.get("c");
         rawCommand.extraArgs.remove("c");
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
+            logger.log(Level.WARNING, "Invalid extra arguments found");
             throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
         }
     }

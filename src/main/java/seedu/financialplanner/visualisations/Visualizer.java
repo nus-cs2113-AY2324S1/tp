@@ -51,7 +51,7 @@ public class Visualizer {
         for (Map.Entry<String, Double> set: expensesByCat.entrySet()) {
             chart.addSeries(set.getKey(), set.getValue());
         }
-        logger.log(Level.INFO, "Showing Pie Chart");
+        logger.log(Level.INFO, "Displaying Pie Chart");
         // Show it
         JFrame swHR = new SwingWrapper<>(chart).displayChart();
         javax.swing.SwingUtilities.invokeLater(
@@ -71,7 +71,7 @@ public class Visualizer {
         List<String> keys = new ArrayList<String>(expensesByCat.keySet());
         chart.addSeries("Expense", keys, values);
 
-        logger.log(Level.INFO, "Showing Bar Chart");
+        logger.log(Level.INFO, "Displaying Bar Chart");
         JFrame swHR = new SwingWrapper<>(chart).displayChart();
         javax.swing.SwingUtilities.invokeLater(
                 ()->swHR.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
