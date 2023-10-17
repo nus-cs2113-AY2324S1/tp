@@ -1,16 +1,19 @@
 package seedu.duke;
 
-import seedu.duke.commands.*;
+
+import seedu.duke.commands.KaChinnnngException;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.IncomeManager;
+import seedu.duke.commands.ExpenseLister;
+import seedu.duke.commands.ExpenseManager;
+import seedu.duke.commands.UsageInstructions;
+import seedu.duke.commands.IncomeLister;
+import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
-import seedu.duke.financialrecords.Income;
-import seedu.duke.financialrecords.Expense;
-import seedu.duke.commands.IncomeManager;
-import seedu.duke.commands.ExpenseManager;
+
 import java.util.ArrayList;
-import seedu.duke.commands.IncomeLister;
-import seedu.duke.commands.ExpenseLister;
 
 /**
  * This class is the main class of the program.
