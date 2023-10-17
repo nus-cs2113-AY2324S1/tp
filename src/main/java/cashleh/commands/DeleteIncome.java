@@ -1,31 +1,27 @@
 package cashleh.commands;
 
 import cashleh.exceptions.CashLehMissingTransactionException;
-import cashleh.ExpenseStatement;
-import cashleh.IncomeStatement;
+import cashleh.transaction.IncomeStatement;
 import cashleh.Ui;
 
 import java.util.logging.Level;
 
 public class DeleteIncome extends Command {
     private final int incomeIndex;
-    private final Ui ui = new Ui();
-
-    public DeleteIncome(int incomeIndex) {
+    private final IncomeStatement incomeStatement;
+    public DeleteIncome(int incomeIndex, IncomeStatement incomeStatement) {
         this.incomeIndex = incomeIndex;
+        this.incomeStatement = incomeStatement;
     }
     @Override
-    public void execute(
-        ExpenseStatement expenseStatement,
-        IncomeStatement incomeStatement
-    ) throws CashLehMissingTransactionException {
+    public void execute() throws CashLehMissingTransactionException {
         try {
-            int numberOfEntriesBeforeDeletion = incomeStatement.getNumberOfEntries();
+            int numberOfEntriesBeforeDeletion = incomeStatement.getNumberOfIncomes();
             String incomeBeingDeleted = incomeStatement.getIncome(incomeIndex - 1).toString();
             incomeStatement.deleteIncome(incomeIndex - 1);
-            int numberOfEntriesAfterDeletion = incomeStatement.getNumberOfEntries();
+            int numberOfEntriesAfterDeletion = incomeStatement.getNumberOfIncomes();
             assert numberOfEntriesBeforeDeletion == numberOfEntriesAfterDeletion + 1;
-            ui.printMultipleText(new String[] {
+            Ui.printMultipleText(new String[] {
                 "Noted! CashLeh has removed the following income:",
                 incomeBeingDeleted
             });

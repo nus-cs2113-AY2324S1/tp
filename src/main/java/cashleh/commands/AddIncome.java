@@ -1,27 +1,22 @@
 package cashleh.commands;
 
-import java.time.LocalDate;
-import java.util.logging.Level;
-import cashleh.ExpenseStatement;
-import cashleh.Income;
-import cashleh.IncomeStatement;
+import cashleh.transaction.Income;
+import cashleh.transaction.IncomeStatement;
 import cashleh.Ui;
+
+import java.util.logging.Level;
 
 public class AddIncome extends Command {
     private final Income incomeToAdd;
-    public AddIncome(String description, double amount) {
-        this.incomeToAdd = new Income(description, amount);
-    }
-    private final Ui ui = new Ui();
-    public AddIncome(Income incomeToAdd) {
+    private final IncomeStatement incomeStatement;
+    public AddIncome(Income incomeToAdd, IncomeStatement incomeStatement) {
         this.incomeToAdd = incomeToAdd;
+        this.incomeStatement = incomeStatement;
     }
     @Override
-    public void execute(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
-        assert incomeToAdd != null;
+    public void execute() {
         incomeStatement.addIncome(incomeToAdd);
-        assert incomeStatement.getNumberOfEntries() > 0;
-        ui.printMultipleText(new String[] {"The following income was added:", incomeToAdd.toString()});
-        logger.log(Level.INFO, "a new income was created and added to the incomeStatement");
+        Ui.printMultipleText(new String[] {"The following income was added:", incomeToAdd.toString()});
+        logger.log(Level.INFO, "income entry was successfully added to the income statement");
     }
 }
