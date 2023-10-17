@@ -2,26 +2,31 @@ package seedu.duke.commands;
 
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.financialrecords.Income;
+import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
 public class ListCommand extends Commands {
     private ArrayList<Income> incomes;
     private ArrayList<Expense> expenses;
+    private Ui ui;
 
     private double totalIncome;
     private double totalExpenses;
 
-    public ListCommand(ArrayList<Income> incomes, ArrayList<Expense> expenses) {
+    public ListCommand(ArrayList<Income> incomes, ArrayList<Expense> expenses, Ui ui) {
         this.incomes = incomes;
         this.expenses = expenses;
+        this.ui = ui;
         totalIncome = 0;
         totalExpenses = 0;
     }
     @Override
     public void execute() {
+        ui.showLineDivider();
         if (incomes.isEmpty() && expenses.isEmpty()) {
             System.out.println("You do not have any records.");
+            ui.showLineDivider();
             return;
         }
         // Print incomes
@@ -48,5 +53,6 @@ public class ListCommand extends Commands {
             System.out.printf("Total expenses is: $%.2f.", totalExpenses);
         }
         System.out.printf("Total balance is: $%.2f.", totalIncome - totalExpenses);
+        ui.showLineDivider();
     }
 }

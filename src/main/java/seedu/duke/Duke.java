@@ -60,7 +60,7 @@ public class Duke {
                     new IncomeLister(incomes, ui).listIncomes();
                     break;
                 case "list":
-                    new ListCommand(incomes, expenses).execute();
+                    new ListCommand(incomes, expenses, ui).execute();
                     break;
                 case "help":
                     new UsageInstructions(ui).getHelp();
