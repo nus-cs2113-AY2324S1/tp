@@ -32,6 +32,7 @@ public class Categorizer {
             if (e instanceof Expense) {
                 String key = e.getType();
                 double value = expensesByCat.getOrDefault(key, 0.0) + e.getAmount();
+                assert value >= 0;
                 expensesByCat.put(key, value);
             }
         }
@@ -44,6 +45,7 @@ public class Categorizer {
             if (e instanceof Income) {
                 String key = e.getType();
                 double value = incomeByCat.getOrDefault(key, 0.0) + e.getAmount();
+                assert value >= 0;
                 incomeByCat.put(key, value);
             }
         }

@@ -65,7 +65,7 @@ public class Visualizer {
         // Customize Chart
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
         chart.getStyler().setHasAnnotations(true);
-
+        assert !expensesByCat.isEmpty();
         // Series
         List<Double> values = new ArrayList<Double>(expensesByCat.values());
         List<String> keys = new ArrayList<String>(expensesByCat.keySet());

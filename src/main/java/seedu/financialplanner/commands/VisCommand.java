@@ -35,6 +35,8 @@ public class VisCommand extends AbstractCommand {
     }
     @Override
     public void execute() throws FinancialPlannerException {
+        assert !chart.isEmpty();
+        assert !type.isEmpty();
         Visualizer.displayChart(chart, Categorizer.sortType(CashflowList.INSTANCE, type));
     }
 }
