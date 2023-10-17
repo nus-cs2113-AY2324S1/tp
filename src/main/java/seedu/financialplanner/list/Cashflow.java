@@ -54,6 +54,10 @@ public class Cashflow {
         return this.amount;
     }
 
+    public static double getBalance() {
+        return balance;
+    }
+
     public String formatString() {
         return this.amount + " | " + this.type + " | " + this.recur;
     }
@@ -61,4 +65,5 @@ public class Cashflow {
     public String getType() {
         return type;
     }
+
 }

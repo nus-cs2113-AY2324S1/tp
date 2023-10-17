@@ -23,4 +23,5 @@ public class Income extends Cashflow{
     public String formatString() {
         return "I | " + super.formatString();
     }
+
 }

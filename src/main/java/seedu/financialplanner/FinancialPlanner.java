@@ -29,8 +29,10 @@ public class FinancialPlanner {
             storage.load(cashflowList, ui, FILE_PATH);
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
+            return;
         }
 
+        FinancialPlannerLogger.initialise();
         ui.welcomeMessage();
         String input;
         AbstractCommand command = null;

@@ -24,4 +24,5 @@ public class Expense extends Cashflow {
     public String formatString() {
         return "E | " + super.formatString();
     }
+
 }
