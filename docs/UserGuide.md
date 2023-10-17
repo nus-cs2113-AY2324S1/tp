@@ -12,7 +12,7 @@ can get your inventory management tasks done faster than traditional GUI apps.
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Stocker` from [here](http://link.to/duke).
+1. Down the latest version of `Stocker` from [here](https://github.com/AY2324S1-CS2113-T17-3/tp/releases).
 
 ## Features 
 
@@ -208,13 +208,11 @@ Expected outcome:
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: Can i register with blank username and password
 
-**A**: {your answer here}
+**A**: No. Ensure your entries are not blank.
 
 ## Command Summary
-
-{Give a 'cheat sheet' of commands here}
 
 * add :   `add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY`
 * delete : `delete /n DRUG_NAME`
