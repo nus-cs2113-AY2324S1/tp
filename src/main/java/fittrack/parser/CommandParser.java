@@ -33,9 +33,7 @@ public class CommandParser {
     public Command parseCommand(String userCommandLine) {
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
-            InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
-            invalidCommand.setArguments(null, this);
-            return invalidCommand;
+            return getInvalidCommand(userCommandLine);
         }
 
         final String word = matcher.group("word").strip();
@@ -45,9 +43,7 @@ public class CommandParser {
         try {
             command.setArguments(args, this);
         } catch (ParseException e) {
-            InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
-            invalidCommand.setArguments(null, this);
-            return invalidCommand;
+            return getInvalidCommand(userCommandLine);
         }
         return command;
     }
@@ -77,7 +73,14 @@ public class CommandParser {
             return new ViewWorkoutsCommand();
         default:
             return new InvalidCommand(word);
+
         }
+    }
+
+    private InvalidCommand getInvalidCommand(String userCommandLine) {
+        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
+        invalidCommand.setArguments(null, this);
+        return invalidCommand;
     }
 
     /**
