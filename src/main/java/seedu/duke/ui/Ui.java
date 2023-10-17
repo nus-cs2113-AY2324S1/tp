@@ -33,19 +33,13 @@ public class Ui {
      * Prints out the quantity of each ingredient needed for the
      * dish that the user selects.
      *
-     * @param menu The list of menu items.
-     * @param dishIndex The index of the dish whose ingredients need to be printed.
+     * @param selectedDish Dish for ingredients to be listed out.
      */
-    public void printIngredients(Menu menu, int dishIndex) {
-        Dish selectedDish = menu.getMenuItemsList().get(dishIndex - 1);
-        if (selectedDish != null) {
-            showToUser(selectedDish.getName() + " Ingredients: \n");
+    public void printIngredients(Dish selectedDish) {
+        showToUser(selectedDish.getName() + " Ingredients: \n");
 
-            for (Ingredient ingredient : selectedDish.getIngredients()) {
-                showToUser(ingredient.getName() + " - " + ingredient.getQuantity());
-            }
-        } else {
-            showToUser("Please select a valid dish index :)");
+        for (Ingredient ingredient : selectedDish.getIngredients()) {
+            showToUser(ingredient.getName() + " - " + ingredient.getQuantity());
         }
     }
 

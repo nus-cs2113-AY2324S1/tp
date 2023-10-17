@@ -28,9 +28,9 @@ public class Parser {
         switch (command[0].toLowerCase()) {
         case ListMenuCommand.COMMAND_WORD:
             return new ListMenuCommand();
-        /*case ListIngredientCommand.COMMAND_WORD:
-            return prepareListIngredient(menu,userInput);
-        case DeleteDishCommand.COMMAND_WORD:
+        case ListIngredientCommand.COMMAND_WORD:
+            return prepareListIngredient(userInput);
+        /*case DeleteDishCommand.COMMAND_WORD:
             return prepareDelete(menu,userInput);*/
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -45,15 +45,13 @@ public class Parser {
 
     /**
      * Parses arguments in the context of the ListIngredient command.
-     * @param menu
-     * @param userInput
+     * @param userInput arguments string to parse as index number
      * @return the prepared command
      */
-    private static Command prepareListIngredient(Menu menu, String userInput) {
+    private static Command prepareListIngredient(String userInput) {
         try {
-            final int listIndex = parseArgsAsDisplayedIndex(menu ,userInput, ListIngredientCommand.COMMAND_WORD);
-            //return new ListIngredientCommand(Menu menu, listIndex);
-            return new IncorrectCommand("NAYCHI DO YOUR WORK");
+            final int listIndex = parseArgsAsDisplayedIndex(userInput, ListIngredientCommand.COMMAND_WORD);
+            return new ListIngredientCommand(listIndex);
         } catch (ParseException e) {
             return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + ListIngredientCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
@@ -63,7 +61,7 @@ public class Parser {
 
     private static Command prepareDelete(Menu menu, String userInput) {
         try {
-            final int listIndex = parseArgsAsDisplayedIndex(menu, userInput, DeleteDishCommand.COMMAND_WORD);
+            final int listIndex = parseArgsAsDisplayedIndex(userInput, DeleteDishCommand.COMMAND_WORD);
             //return new DeleteDishCommand(listIndex);
             return new IncorrectCommand("SHANICE DO YOUR WORK");
         } catch (ParseException e) {
@@ -78,15 +76,13 @@ public class Parser {
      *
      * @param userInput arguments string to parse as index number
      * @param command expected String name of the command called
-     * @param menu The arraylist object created that stores current dishes
      * @return the parsed index number
      * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
-    private static int parseArgsAsDisplayedIndex(Menu menu, String userInput, String command)
+    private static int parseArgsAsDisplayedIndex(String userInput, String command)
             throws ParseException, NumberFormatException {
         String formattedString = userInput.replace(command, "").trim();
-        int listIndex = Integer.parseInt(formattedString);
-        return listIndex;
+        return Integer.parseInt(formattedString);
     }
 }
