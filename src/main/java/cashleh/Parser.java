@@ -1,5 +1,9 @@
 package cashleh;
 
+import cashleh.transaction.Expense;
+import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.Income;
+import cashleh.transaction.IncomeStatement;
 import exceptions.CashLehException;
 import exceptions.CashLehParsingException;
 import cashleh.commands.Command;
@@ -20,23 +24,31 @@ public class Parser {
     private static final String VIEW_EXPENSES = "viewExpenses";
     private static final String EXIT = "exit";
 
+    private final ExpenseStatement expenseStatement;
+    private final IncomeStatement incomeStatement;
+
+    public Parser(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
+        this.expenseStatement = expenseStatement;
+        this.incomeStatement = incomeStatement;
+    }
+
     public Command parse(String input) throws CashLehException {
         String command = input.contains(" ") ? input.split(" ")[0] : input;
         switch (command) {
         case ADD_INCOME:
             Income income = getIncome(input);
-            return new AddIncome(income);
+            return new AddIncome(income, incomeStatement);
         case DELETE_INCOME:
             return getDeleteTransaction(input, DELETE_INCOME);
         case VIEW_INCOMES:
-            return new ViewIncomes();
+            return new ViewIncomes(incomeStatement);
         case ADD_EXPENSE:
             Expense expense = getExpense(input);
-            return new AddExpense(expense);
+            return new AddExpense(expense, expenseStatement);
         case DELETE_EXPENSE:
             return getDeleteTransaction(input, DELETE_EXPENSE);
         case VIEW_EXPENSES:
-            return new ViewExpenses();
+            return new ViewExpenses(expenseStatement);
         case EXIT:
             return new Exit();
         default:
@@ -112,6 +124,6 @@ public class Parser {
             throw new CashLehParsingException("Eh, that's not the kind of number we flaunt in CashLeh!");
         }
         return transactionType.equals(DELETE_EXPENSE) ?
-            new DeleteExpense(transactionIndex) : new DeleteIncome(transactionIndex);
+            new DeleteExpense(transactionIndex, expenseStatement) : new DeleteIncome(transactionIndex, incomeStatement);
     }
 }

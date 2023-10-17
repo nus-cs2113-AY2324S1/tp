@@ -1,5 +1,7 @@
 package cashleh;
 
+import cashleh.transaction.Income;
+import cashleh.transaction.IncomeStatement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

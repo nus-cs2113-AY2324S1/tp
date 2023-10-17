@@ -1,20 +1,15 @@
 package cashleh.commands;
 
-import cashleh.ExpenseStatement;
-import cashleh.IncomeStatement;
+import cashleh.transaction.ExpenseStatement;
 
 public class ViewExpenses extends Command {
+    private ExpenseStatement expenseStatement;
+
+    public ViewExpenses(ExpenseStatement expenseStatement) {
+        this.expenseStatement = expenseStatement;
+    }
     @Override
-    public void execute(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
-        expenseStatement.getExpenses();
+    public void execute() {
+        expenseStatement.printExpenses();
     }
 }
-
-//    public static void viewExpenses(ArrayList<Expense> expenseList) {
-//        System.out.println("Your total expense is: " + Expense.getTotalExpense());
-//        System.out.println("Here are the expenses in your list:");
-//        for (int i = 0; i < expenseList.size(); i++) {
-//            System.out.print((i + 1) + ". ");
-//            System.out.println(expenseList.get(i));
-//        }
-//    }
