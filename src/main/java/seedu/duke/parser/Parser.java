@@ -27,6 +27,8 @@ public class Parser {
             return "list_expense";
         } else if (commandLowerCase.equals("help")) {
             return "help";
+        } else if (commandLowerCase.equals("balance")) {
+            return "balance";
         }
         return "invalid";
     }
