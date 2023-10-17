@@ -1,4 +1,4 @@
-package quizhub.parser;
+package quizhub.command;
 
 import org.junit.jupiter.api.io.TempDir;
 import quizhub.questionlist.QuestionList;
@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class QuestionListTest {
+public class StartTest {
 
     private QuestionList questionList;
     private UiMock mockUi;

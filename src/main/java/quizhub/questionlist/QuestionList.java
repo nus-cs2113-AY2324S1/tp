@@ -320,10 +320,6 @@ public class QuestionList {
      * @param ui The user interface to interact with the user.
      */
     public void startQuiz(Ui ui) {
-//        if (allQns.isEmpty()) {
-//            System.out.println("    No questions found! Add questions before starting the quiz.");
-//            return;
-//        }
         if (allQns.isEmpty()) {
             ui.displayMessage("No questions found! Add questions before starting the quiz.");
             return;
