@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.data.Menu;
+import seedu.duke.data.dish.Dish;
 import seedu.duke.ui.Ui;
 
 /**
@@ -16,7 +17,15 @@ public class EditPriceCommand extends Command {
         this.newPrice = newPrice;
     }
 
+    /**
+     * Set new price of the dish and show edit price message
+     * @param menu menu of the current session
+     * @param ui ui of the current session
+     */
     public void execute(Menu menu, Ui ui) {
-        menu.getDish(this.menuID).setPrice(this.newPrice);
+        Dish dish = menu.getDish(this.menuID);
+        dish.setPrice(this.newPrice);
+
+        Ui.showEditPriceMessage(dish.toString());
     }
 }
