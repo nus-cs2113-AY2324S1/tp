@@ -16,6 +16,7 @@ public class UiTest {
     Ui testUi = new Ui();
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
