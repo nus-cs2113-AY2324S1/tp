@@ -2,6 +2,7 @@ package seedu.financialplanner.commands;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.list.Budget;
+import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.logging.Level;
@@ -45,11 +46,16 @@ public class BudgetCommand extends AbstractCommand {
 
         if (budget <= 0) {
             logger.log(Level.WARNING, "Invalid value for budget.");
-            throw new FinancialPlannerException("Budget should be greater than 0");
+            throw new FinancialPlannerException("Budget should be greater than 0.");
         }
 
-        //compare budget to balance
-        assert budget > 0 : "Budget should be greater than 0";
+        if (budget > Cashflow.getBalance()) {
+            logger.log(Level.WARNING, "Invalid value for budget");
+            throw new FinancialPlannerException("Budget should be lower than total balance.");
+        }
+
+        assert budget > 0 && budget <= Cashflow.getBalance() : "Budget should be greater than 0 and less than " +
+                "or equal to total balance";
         rawCommand.extraArgs.remove("b");
 
         if (!rawCommand.extraArgs.isEmpty()) {
@@ -60,7 +66,7 @@ public class BudgetCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        assert command.equals("set") || command.equals("update") : "command should be set or update only";
+        assert command.equals("set") || command.equals("update") : "Command should be set or update only";
 
         switch (command) {
         case "set":
