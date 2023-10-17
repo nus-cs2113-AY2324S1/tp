@@ -83,6 +83,7 @@ public class Duke {
                 case "list_expense":
                     ui.showLineDivider();
                     new ExpenseLister(expenses, ui).listExpenses();
+                    break;
                     
                 case "help":
                     new UsageInstructions(ui).getHelp();
