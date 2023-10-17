@@ -1,8 +1,16 @@
 package cashleh;
 
+import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.IncomeStatement;
+import exceptions.CashLehException;
+import cashleh.commands.Command;
+import cashleh.commands.Exit;
+
 public class CashLeh {
-    private final Ui ui = new Ui();
     private final Input input = new Input();
+    private final ExpenseStatement expenseStatement = new ExpenseStatement();
+    private final IncomeStatement incomeStatement = new IncomeStatement();
+    private final Parser parser = new Parser(expenseStatement, incomeStatement);
 
     /**
      * Main entry-point for the application.
@@ -14,24 +22,29 @@ public class CashLeh {
                     + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/ \n"
                     + " / /___/ /_/ (__  ) / / / /___/  __/ / / /_/   \n"
                     + " \\____/\\__,_/____/_/ /_/_____/\\___/_/ /_(_)    \n";
-        System.out.println("Here is the link to the user guide:"
+        String userGuideLink = ("Here is the link to the user guide:"
                 + "https://docs.google.com/document/d/"
                 + "15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
-        System.out.println(logo);
-        System.out.println("Welcome to 'CashLeh?'! Your one-stop app for managing your finances!");
-        String[] greetingLines = {"What is your name?"};
+        String[] greetingLines = {userGuideLink, logo, "Welcome to 'CashLeh?'! " +
+                "Your one-stop app for managing your finances!", "What is your name?"};
 
-        ui.printMultipleText(greetingLines);
+        Ui.printMultipleText(greetingLines);
+
         String inputString = input.getInputString();
-        ui.printText("Hello " + inputString);
-        do {
+        Ui.printText("Hello " + inputString);
+
+        Command command = null;
+        while (!(command instanceof Exit)) {
             inputString = input.getInputString();
-            if (inputString.equals("bye")) {
-                ui.printText("Bye. Hope to see you again soon!");
-            } else {
-                ui.printText("Sorry, I don't understand what you mean.");
+            try {
+                command = parser.parse(inputString);
+                command.execute();
+            } catch (CashLehException e) {
+                Ui.printMultipleText(new String[] {
+                        e.getMessage()
+                });
             }
-        } while (!inputString.equals("bye"));
+        }
     }
 
     public static void main(String[] args) {

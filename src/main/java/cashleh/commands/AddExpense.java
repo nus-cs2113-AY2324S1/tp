@@ -1,23 +1,22 @@
 package cashleh.commands;
-import cashleh.Expense;
-import cashleh.exception.CashLehException;
+import cashleh.transaction.Expense;
+import cashleh.transaction.ExpenseStatement;
+import cashleh.Ui;
+import exceptions.CashLehException;
 
 public class AddExpense extends Command {
-    public static final String COMMAND = "addExpense";
     private final Expense expenseToAdd;
+    private final ExpenseStatement expenseStatement;
 
-    public AddExpense(String description, double amount) {
-        this.expenseToAdd = new Expense(description, amount);
-    }
-
-    public AddExpense(Expense expenseToAdd) {
+    public AddExpense(Expense expenseToAdd, ExpenseStatement expenseStatement) {
         this.expenseToAdd = expenseToAdd;
+        this.expenseStatement = expenseStatement;
     }
 
     @Override
-    public void execute() throws CashLehException {
+    public void execute() {
         expenseStatement.addExpense(expenseToAdd);
-        System.out.println("The following expense was added:\n" + getExpense());
+        Ui.printMultipleText(new String[] {"The following expense was added:", expenseToAdd.toString()});
     }
 }
 

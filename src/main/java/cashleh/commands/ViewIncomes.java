@@ -1,13 +1,15 @@
 package cashleh.commands;
 
+import cashleh.transaction.IncomeStatement;
+
 public class ViewIncomes extends Command {
-    public static final String COMMAND = "viewIncomes";
-    public ViewIncomes(int incomeIndexToView) {
-        super(incomeIndexToView);
+    private IncomeStatement incomeStatement;
+
+    public ViewIncomes(IncomeStatement incomeStatement) {
+        this.incomeStatement = incomeStatement;
     }
     @Override
     public void execute() {
-        System.out.println("The current sum of all your incomes amounts to: "
-                + getIncomeSum() + System.lineSeparator() + getIncomeStatement());
+        incomeStatement.printIncomes();
     }
 }
