@@ -24,7 +24,7 @@ public class Parser {
     public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     // Command Argument Patterns
-    private static final String ADD_ARGUMENT_STRING = "add name/(\\w+) price/(\\d+(\\.\\d+)?)" +
+    private static final String ADD_ARGUMENT_STRING = " name/(\\w+) price/(\\d+(\\.\\d+)?)" +
                                                         " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
@@ -62,7 +62,7 @@ public class Parser {
             return prepareListMenu();
 
         case EditPriceCommand.COMMAND_WORD:
-            return prepareEditListCommand(arguments);
+            return prepareEditPriceCommand(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -80,11 +80,33 @@ public class Parser {
     }
 
     /**
-     * Parse argument in the context of edit list command
-     * @param arguments 
-     * @return
+     * Parse argument in the context of edit price command
+     * @param arguments string that matches group arguments
+     * @return new EditDishCommand
      */
-    private Command prepareEditListCommand(String arguments) {
+    private Command prepareEditPriceCommand(String arguments) {
+        final Pattern EDIT_DISH_ARGUMENT_PATTERN = Pattern.compile(EDIT_PRICE_ARGUMENT_STRING);
+        Matcher matcher = EDIT_DISH_ARGUMENT_PATTERN.matcher(arguments);
+
+        // Checks whether the overall pattern of edit price arguments is correct
+        if (matcher.matches()) {
+            return new IncorrectCommand("Error: Missing arguments for edit price command.");
+        }
+
+        try {
+            int dishIndex = Integer.parseInt(matcher.group(1));
+            float newPrice = Float.parseFloat(matcher.group(2));
+
+            return new EditPriceCommand(dishIndex, newPrice);
+        } catch (IllegalArgumentException e) {
+            return new IncorrectCommand("Oops, seems like you gave me the wrong type for dish index " +
+                                                        "or price. Make sure dish index is of type int " +
+                                                           "and price is of type float!");
+        } catch (IndexOutOfBoundsException e) {
+            return new IncorrectCommand("hmmm, can you double the your dish index, " +
+                                                        "I can't seem to find the dish you're referring to");
+        }
+
     }
 
     private Command prepareAdd(String arguments) {
