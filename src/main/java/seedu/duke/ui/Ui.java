@@ -81,4 +81,9 @@ public class Ui {
     public void printListExpenseMessage() {
         System.out.println("Here are your expenses:");
     }
+
+    public void printErrorMessage(KaChinnnngException e) {
+        System.out.println(e.getMessage());
+        showLineDivider();
+    }
 }
