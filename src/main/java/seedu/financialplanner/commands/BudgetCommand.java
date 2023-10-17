@@ -66,7 +66,7 @@ public class BudgetCommand extends AbstractCommand {
             }
             break;
         default:
-            logger.log(Level.WARNING, "command should never reach default");
+            logger.log(Level.WARNING, "command should never reach default case");
             Ui.INSTANCE.showMessage("Unknown command.");
         }
     }
