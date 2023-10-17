@@ -65,6 +65,9 @@ public class FitTrack {
 
     /**
      * Gets user profile details when program starts.
+     *
+     * @throws PatternMatchFailException if regex match fails
+     * @throws NumberFormatException if one of arguments is not double
      */
     private void profileSettings() throws PatternMatchFailException, NumberFormatException {
         System.out.println(
