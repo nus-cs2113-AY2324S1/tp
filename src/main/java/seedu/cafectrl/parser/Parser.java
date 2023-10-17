@@ -70,8 +70,7 @@ public class Parser {
 
     // All prepareCommand Classes
     private static Command prepareListMenu() {
-        // To be implemented by xx
-        return null;
+        return new ListMenuCommand();
     }
 
     private static Command prepareAdd(String arguments) {
