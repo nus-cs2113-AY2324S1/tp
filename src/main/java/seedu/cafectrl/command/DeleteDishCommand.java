@@ -15,15 +15,6 @@ public class DeleteDishCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    /**
-     * Constructor for DeleteDishCommand
-     *
-     * @param index index of menu item to be deleted
-     */
-    public DeleteDishCommand(int index) {
-        this.index = index;
-    }
-
     @Override
     public void execute(Menu menu, Ui ui) {
         Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
