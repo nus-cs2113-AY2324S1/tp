@@ -30,9 +30,9 @@ public class CafeCtrl {
      * until the user enters a "bye" command, terminating the application.</p>
      */
     private void run() {
+        ui.printLine();
         do {
             try {
-                ui.printLine();
                 String fullUserInput = ui.receiveUserInput();
                 command = Parser.parseCommand(menu, fullUserInput);
                 command.execute(menu, ui);

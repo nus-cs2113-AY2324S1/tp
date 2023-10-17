@@ -21,6 +21,7 @@ public class Ui {
     }
 
     public String receiveUserInput() {
+        System.out.print("> ");
         return scanner.nextLine();
     }
 
