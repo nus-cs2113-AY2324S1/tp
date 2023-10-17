@@ -11,8 +11,6 @@ import seedu.cafectrl.command.ListMenuCommand;
 
 import seedu.cafectrl.data.Menu;
 
-import seedu.cafectrl.command.EditPriceCommand;
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
