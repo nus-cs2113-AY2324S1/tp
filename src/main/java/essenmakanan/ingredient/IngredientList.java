@@ -1,4 +1,5 @@
 package essenmakanan.ingredient;
+
 import java.util.ArrayList;
 
 public class IngredientList {
@@ -6,6 +7,10 @@ public class IngredientList {
 
     public IngredientList() {
         ingredients = new ArrayList<>();
+    }
+
+    public Ingredient getIngredient(int index) {
+        return ingredients.get(index);
     }
 
     public void addIngredient(Ingredient ingredient) {
