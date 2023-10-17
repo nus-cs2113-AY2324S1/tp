@@ -28,8 +28,8 @@ public class Parser {
         switch (command[0].toLowerCase()) {
         case ListMenuCommand.COMMAND_WORD:
             return new ListMenuCommand();
-        //case ListIngredientCommand.COMMAND_WORD:
-            //return prepareListIngredient(menu,userInput);
+        case ListIngredientCommand.COMMAND_WORD:
+            return prepareListIngredient(userInput);
         case DeleteDishCommand.COMMAND_WORD:
             return prepareDelete(userInput);
         case ExitCommand.COMMAND_WORD:
@@ -45,15 +45,13 @@ public class Parser {
 
     /**
      * Parses arguments in the context of the ListIngredient command.
-     * @param menu
-     * @param userInput
+     * @param userInput arguments string to parse as index number
      * @return the prepared command
      */
-    private static Command prepareListIngredient(Menu menu, String userInput) {
+    private static Command prepareListIngredient(String userInput) {
         try {
             final int listIndex = parseArgsAsDisplayedIndex(userInput, ListIngredientCommand.COMMAND_WORD);
-            //return new ListIngredientCommand(Menu menu, listIndex);
-            return new IncorrectCommand("NAYCHI DO YOUR WORK");
+            return new ListIngredientCommand(listIndex);
         } catch (ParseException e) {
             return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + ListIngredientCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
