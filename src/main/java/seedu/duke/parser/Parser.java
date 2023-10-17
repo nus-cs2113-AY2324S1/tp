@@ -23,7 +23,7 @@ public class Parser {
     public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     // Command Argument Patterns
-    private static final String ADD_PATTERN = "add name/(\\w+) price/(\\d+(\\.\\d+)?)" +
+    private static final String ADD_ARGUMENT_STRING = "add name/(\\w+) price/(\\d+(\\.\\d+)?)" +
                                                 " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
