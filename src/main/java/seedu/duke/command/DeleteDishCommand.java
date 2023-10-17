@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import seedu.duke.data.Menu;
+import seedu.duke.data.dish.Dish;
+import seedu.duke.data.dish.Ingredient;
 import seedu.duke.ui.Ui;
 
 /**
@@ -14,20 +16,23 @@ public class DeleteDishCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private int dishIndex;
-
     /**
      * Constructor for DeleteDishCommand
      *
      * @param index index of menu item to be deleted
      */
     public DeleteDishCommand(int index) {
-        this.dishIndex = index;
+        this.index = index;
     }
 
     @Override
     public void execute(Menu menu, Ui ui) {
-        menu.removeDish(dishIndex);
-        ui.showDeleteMessage(menu.getDish(dishIndex).toString());
+        Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
+        if (selectedDish != null) {
+            ui.showDeleteMessage(selectedDish);
+        } else {
+            ui.showToUser("Please select a valid dish index :)");
+        }
+        menu.removeDish(index);
     }
 }
