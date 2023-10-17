@@ -29,12 +29,14 @@ public class FindCommand extends Command {
         }
 
         List<Drug> drugs = inventory.getAllDrugs();
+        int j = 1;
         for (int i = 0; i < drugs.size(); i++) {
             Drug drug = drugs.get(i);
             String drugDescription = drug.toString().toLowerCase();
             if (drugDescription.contains(keyword.toLowerCase())) {
-                System.out.println("|| Name: " + drug.getName() + ", Expiry Date: "
+                System.out.println("|| " + (j) + ". " + "Name: " + drug.getName() + ", Expiry Date: "
                         + drug.getExpiryDate() + ", Quantity: " + drug.getQuantity());
+                j++;
             }
         }
         return new CommandResult(MESSAGE_SUCCESS);

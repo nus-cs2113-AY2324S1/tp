@@ -5,6 +5,7 @@ import seedu.stocker.drugs.Inventory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//test for list
 class ListCommandTest {
     @Test
     public void executeTest() {
