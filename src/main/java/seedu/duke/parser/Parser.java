@@ -9,6 +9,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.ListIngredientCommand;
 import seedu.duke.command.ListMenuCommand;
+import seedu.duke.command.EditPriceCommand;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -24,7 +25,7 @@ public class Parser {
 
     // Command Argument Patterns
     private static final String ADD_ARGUMENT_STRING = "add name/(\\w+) price/(\\d+(\\.\\d+)?)" +
-                                                " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
+                                                        " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
@@ -60,6 +61,9 @@ public class Parser {
         case ListMenuCommand.COMMAND_WORD:
             return prepareListMenu();
 
+        case EditPriceCommand.COMMAND_WORD:
+            return prepareEditListCommand(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -73,6 +77,14 @@ public class Parser {
     private Command prepareListMenu() {
         // To be implemented by xx
         return null;
+    }
+
+    /**
+     * Parse argument in the context of edit list command
+     * @param arguments 
+     * @return
+     */
+    private Command prepareEditListCommand(String arguments) {
     }
 
     private Command prepareAdd(String arguments) {

@@ -29,4 +29,8 @@ public class Dish {
     public float getPrice() {
         return price;
     }
+
+    public void setPrice(float newPrice) {
+        this.price = newPrice;
+    }
 }
