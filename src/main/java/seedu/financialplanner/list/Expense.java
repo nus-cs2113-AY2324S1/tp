@@ -14,4 +14,9 @@ public class Expense extends Cashflow {
     public String formatString() {
         return "E | " + super.formatString();
     }
+
+    @Override
+    public String toString() {
+        return "Expense | " + super.toString();
+    }
 }

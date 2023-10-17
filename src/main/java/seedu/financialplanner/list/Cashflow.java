@@ -30,4 +30,8 @@ public class Cashflow {
     public double getValue() {
         return value;
     }
+
+    public String toString() {
+        return "Value: "+this.value + " | " + "Type: " + this.type + " | " + "Recur: " + this.recur;
+    }
 }

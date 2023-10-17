@@ -1,4 +1,5 @@
 package seedu.financialplanner.commands;
+import seedu.financialplanner.goal.Goal;
 import seedu.financialplanner.goal.GoalList;
 import seedu.financialplanner.utils.Ui;
 
@@ -29,7 +30,7 @@ public class SetGoalCommand extends AbstractCommand{
 
     @Override
     public void execute() {
-        GoalList.INSTANCE.addGoal(goal, amount);
+        GoalList.INSTANCE.list.add(new Goal(goal, amount));
         Ui.INSTANCE.showMessage("Set Goal Successfully!");
     }
 }
