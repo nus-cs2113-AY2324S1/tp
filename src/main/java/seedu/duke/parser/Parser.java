@@ -55,7 +55,7 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ListIngredientCommand.COMMAND_WORD:
-            return prepareListIngredient(arguments);
+            return prepareListIngredient();
 
         case ListMenuCommand.COMMAND_WORD:
             return prepareListMenu();
@@ -146,7 +146,7 @@ public class Parser {
     private static Command prepareDelete(String userInput) {
         try {
             final int listIndex = parseArgsAsDisplayedIndex(userInput, DeleteDishCommand.COMMAND_WORD);
-            return new DeleteDishCommand(listIndex);
+            return new DeleteDishCommand();
         } catch (ParseException e) {
             return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + DeleteDishCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
