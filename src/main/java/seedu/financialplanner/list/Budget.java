@@ -10,6 +10,8 @@ public abstract class Budget {
     public static void setBudget(double amount) {
         initialBudget = amount;
         currentBudget = amount;
+        assert initialBudget == currentBudget : "Initial and current budget should be the same";
+        assert initialBudget != 0 && currentBudget != 0 : "Initial and current budget should not be 0";
     }
 
     public static double getInitialBudget() {
@@ -27,6 +29,7 @@ public abstract class Budget {
             initialBudget = budget;
             currentBudget -= diff;
         }
+        assert initialBudget == budget : "Initial budget should be equal to updated budget";
     }
 
     public static double getCurrentBudget() {

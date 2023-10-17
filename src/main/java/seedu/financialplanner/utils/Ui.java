@@ -87,6 +87,10 @@ public class Ui {
     public void printBudgetAfterUpdate() {
         showMessage("New initial budget: " + Budget.getInitialBudgetString() +
                 "\nNew current budget: " + Budget.getCurrentBudgetString());
+        if (Budget.getCurrentBudget() <= 0) {
+            showMessage("You have exceeded your budget, please update to a larger budget or " +
+                    "reset the current budget to initial budget.");
+        }
     }
 
     public void printBudgetAfterDeduction() {
