@@ -11,6 +11,9 @@ public class CafeCtrl {
     private final Menu menu;
     private Command command;
 
+    /**
+     * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
+     */
     public CafeCtrl() {
         ui = new Ui();
         menu = new Menu();
@@ -19,7 +22,13 @@ public class CafeCtrl {
     private void setup() {
         ui.showWelcome();
     }
-
+    
+    /**
+     * The main loop of the CafeCtrl application.
+     *
+     * <p> This method consistently receives user input, parses commands, and executes the respective command
+     * until the user enters a "bye" command, terminating the application.</p>
+     */
     private void run() {
         do {
             try {
