@@ -6,6 +6,10 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.Ui;
 
+/**
+ * CafeCtrl application's entry point.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class CafeCtrl {
     private final Ui ui;
     private final Menu menu;
@@ -14,7 +18,7 @@ public class CafeCtrl {
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    public CafeCtrl() {
+    private CafeCtrl() {
         ui = new Ui();
         menu = new Menu();
     }
