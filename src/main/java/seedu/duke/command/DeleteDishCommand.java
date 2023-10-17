@@ -15,14 +15,18 @@ public class DeleteDishCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    public DeleteDishCommand(int listIndex) {
+        this.index = listIndex;
+    }
+
     @Override
     public void execute(Menu menu, Ui ui) {
-        Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
-        if (selectedDish != null) {
-            ui.showDeleteMessage(selectedDish);
-        } else {
+        if (index < 0 || index > menu.getSize()) {
             ui.showToUser("Please select a valid dish index :)");
+        } else {
+            Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
+            ui.showDeleteMessage(selectedDish);
+            menu.removeDish(index);
         }
-        menu.removeDish(index);
     }
 }
