@@ -29,6 +29,10 @@ public class Parser {
             return "help";
         } else if (commandLowerCase.equals("list")) {
             return "list";
+        } else if (commandLowerCase.startsWith("delete income")) {
+            return "delete_income";
+        } else if (commandLowerCase.startsWith("delete expense")) {
+            return "delete_expense";
         }
         return "invalid";
     }

@@ -5,7 +5,6 @@ import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 import seedu.duke.financialrecords.Income;
-import seedu.duke.financialrecords.Expense;
 import seedu.duke.commands.IncomeManager;
 import seedu.duke.commands.ExpenseManager;
 import java.util.ArrayList;
@@ -39,6 +38,7 @@ public class Duke {
                 String[] parts = command.split("-", 2);
                 switch (parts[0]) {
                 case "exit":
+                    ui.showLineDivider();
                     isExit = true;
                     ui.showLineDivider();
                     break;
@@ -89,6 +89,12 @@ public class Duke {
                     new ListCommand(incomes, expenses, ui).execute();
                     break;
 
+                case "delete_income":
+                    new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
+                    break;
+                case "delete_expense":
+                    new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
+                    break;
                 case "help":
                     new UsageInstructions(ui).getHelp();
                     break;
