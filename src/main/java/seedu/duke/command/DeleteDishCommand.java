@@ -21,7 +21,7 @@ public class DeleteDishCommand extends Command {
 
     @Override
     public void execute(Menu menu, Ui ui) {
-        menu.remove(dishIndex);
+        menu.removeDish(dishIndex);
         ui.showDeleteMessage(menu.getDish(dishIndex).toString());
     };
 }
