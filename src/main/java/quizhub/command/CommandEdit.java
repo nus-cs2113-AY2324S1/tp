@@ -29,20 +29,20 @@ public class CommandEdit extends Command {
                     "or edit /answer [answer]!");
             return;
         }
-        try{
+        try {
             String editCriteria = editInfo[0].strip();
             String editContent = editInfo[1].strip();
             switch (editCriteria){
-                case "description":
-                    newDescription = editContent;
-                    newAnswer = "";
-                    break;
-                case "answer":
-                    newDescription = "";
-                    newAnswer = editContent;
-                    break;
-                default:
-                    break;
+            case "description":
+                newDescription = editContent;
+                newAnswer = "";
+                break;
+            case "answer":
+                newDescription = "";
+                newAnswer = editContent;
+                break;
+            default:
+                break;
             }
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate the content you are editing to :<");

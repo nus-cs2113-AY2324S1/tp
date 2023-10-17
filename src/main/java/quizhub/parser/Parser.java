@@ -34,26 +34,26 @@ public class Parser {
 
         try {
             switch (commandTitle) {
-                case "bye":
-                    return new CommandExit();
-                case "list":
-                    return new CommandList();
-                case "short":
-                    return new CommandShortAnswer(userInput);
-                case "start":
-                    return new CommandStart();
-                case "edit":
-                    return new CommandEdit(userInput);
-                case "delete":
-                    commandDetails = commandTokens[1].strip();
-                    taskIndex = Integer.parseInt(commandDetails.strip());
-                    return new CommandDelete(taskIndex);
-                case "find":
-                    return new CommandFind(userInput);
-                case "help":
-                    return new CommandHelp();
-                default:
-                    return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
+            case "bye":
+                return new CommandExit();
+            case "list":
+                return new CommandList();
+            case "short":
+                return new CommandShortAnswer(userInput);
+            case "start":
+                return new CommandStart();
+            case "edit":
+                return new CommandEdit(userInput);
+            case "delete":
+                commandDetails = commandTokens[1].strip();
+                taskIndex = Integer.parseInt(commandDetails.strip());
+                return new CommandDelete(taskIndex);
+            case "find":
+                return new CommandFind(userInput);
+            case "help":
+                return new CommandHelp();
+            default:
+                return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
             }
         }
         catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
