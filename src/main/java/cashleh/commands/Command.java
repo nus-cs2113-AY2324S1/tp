@@ -7,8 +7,10 @@ public class Command {
     public Command(int index) {
         this.index = index;
     }
+
     public Command() {
     }
+    
     public int getIndex() {
         return this.index;
     }
