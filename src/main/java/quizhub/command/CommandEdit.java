@@ -42,7 +42,7 @@ public class CommandEdit extends Command {
                 newAnswer = editContent;
                 break;
             default:
-                break;
+                throw new ArrayIndexOutOfBoundsException();
             }
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate the content you are editing to :<");
@@ -53,6 +53,9 @@ public class CommandEdit extends Command {
 
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
+        if (newDescription == null && newAnswer == null) {
+            return;
+        }
         questions.editQuestionByIndex(qnIndex, newDescription, newAnswer);
     }
 }
