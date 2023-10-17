@@ -16,7 +16,7 @@ public class Goal {
         //TODO edit the expense to mark the goal as done
         this.isDone = true;
     }
-    //TODO delete the Reminde
+    //TODO delete the Reminder
     public String formatString() {
         String status = isDone ? "Done" : "Not Done";
         return this.label + " | " + this.amount + " | " + this.isDone;

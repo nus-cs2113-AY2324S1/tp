@@ -62,9 +62,4 @@ public class Cashflow {
         return type;
     }
 
-
-    public double getValue() {
-        return value;
-    }
-
 }
