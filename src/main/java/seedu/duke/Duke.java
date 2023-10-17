@@ -1,18 +1,21 @@
 package seedu.duke;
 
-import seedu.duke.commands.UsageInstructions;
+
 import seedu.duke.commands.KaChinnnngException;
-import seedu.duke.ui.Ui;
-import seedu.duke.parser.Parser;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.IncomeManager;
+import seedu.duke.commands.ExpenseLister;
+import seedu.duke.commands.ExpenseManager;
+import seedu.duke.commands.UsageInstructions;
+import seedu.duke.commands.IncomeLister;
+import seedu.duke.commands.DeleteExpenseCommand;
+import seedu.duke.commands.DeleteIncomeCommand;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
-import seedu.duke.commands.IncomeManager;
-import seedu.duke.commands.ExpenseManager;
+import seedu.duke.ui.Ui;
+import seedu.duke.parser.Parser;
 import java.util.ArrayList;
-import seedu.duke.commands.IncomeLister;
-import seedu.duke.commands.ExpenseLister;
 import seedu.duke.commands.Balance;
-
 
 /**
  * This class is the main class of the program.
@@ -42,7 +45,6 @@ public class Duke {
                 switch (parts[0]) {
                 case "exit":
                     isExit = true;
-                    ui.showLineDivider();
                     break;
 
                 case "add_income":
@@ -83,10 +85,20 @@ public class Duke {
                     break;
 
                 case "list_expense":
-                    ui.showLineDivider();
                     new ExpenseLister(expenses, ui).listExpenses();
                     break;
-                    
+
+                case "list":
+                    new ListCommand(incomes, expenses, ui).execute();
+                    break;
+
+                case "delete_income":
+                    new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
+                    break;
+
+                case "delete_expense":
+                    new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
+                    break;
                 case "help":
                     new UsageInstructions(ui).getHelp();
                     break;
