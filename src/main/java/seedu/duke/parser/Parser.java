@@ -24,7 +24,7 @@ public class Parser {
     public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     // Command Argument Patterns
-    private static final String ADD_ARGUMENT_STRING = " name/(\\w+) price/(\\d+(\\.\\d+)?)" +
+    private static final String ADD_ARGUMENT_STRING = "name/(\\w+) price/(\\d+(\\.\\d+)?)" +
                                                         " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
@@ -85,8 +85,8 @@ public class Parser {
      * @return new EditDishCommand
      */
     private Command prepareEditPriceCommand(String arguments) {
-        final Pattern EDIT_DISH_ARGUMENT_PATTERN = Pattern.compile(EDIT_PRICE_ARGUMENT_STRING);
-        Matcher matcher = EDIT_DISH_ARGUMENT_PATTERN.matcher(arguments);
+        Pattern editDishArgumentsPattern = Pattern.compile(EDIT_PRICE_ARGUMENT_STRING);
+        Matcher matcher = editDishArgumentsPattern.matcher(arguments);
 
         // Checks whether the overall pattern of edit price arguments is correct
         if (matcher.matches()) {
@@ -106,12 +106,11 @@ public class Parser {
             return new IncorrectCommand("hmmm, can you double the your dish index, " +
                                                         "I can't seem to find the dish you're referring to");
         }
-
     }
 
     private Command prepareAdd(String arguments) {
-        final Pattern ADD_ARGUMENT_PATTERN = Pattern.compile(ADD_ARGUMENT_STRING);
-        Matcher matcher = ADD_ARGUMENT_PATTERN.matcher(arguments);
+        final Pattern addArgumentPatter = Pattern.compile(ADD_ARGUMENT_STRING);
+        Matcher matcher = addArgumentPatter.matcher(arguments);
 
         // Checks whether the overall pattern of add arguments is correct
         if (matcher.matches()) {
