@@ -10,14 +10,13 @@ public class DeleteIncomeCommand extends Commands {
     }
 
     public void execute(ArrayList<Income> incomes, String fullcommand, Ui ui) throws KaChinnnngException {
-
+        ui.showLineDivider();
         int index = 0;
         try {
-            ui.showLineDivider();
             String[] tokens = fullcommand.split(" ", 3);
             index = Integer.parseInt(tokens[2]);
             Income removedIncome = incomes.get(index-1);
-            incomes.remove(index);
+            incomes.remove(index-1);
             System.out.println("Noted. This income record has been deleted:");
             System.out.println(removedIncome);
             ui.showLineDivider();

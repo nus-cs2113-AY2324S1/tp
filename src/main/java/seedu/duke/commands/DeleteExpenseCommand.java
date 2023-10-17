@@ -10,14 +10,13 @@ public class DeleteExpenseCommand extends Commands {
     }
 
     public void execute(ArrayList<Expense> expenses, String fullcommand, Ui ui) throws KaChinnnngException {
-
+        ui.showLineDivider();
         int index = 0;
         try {
-            ui.showLineDivider();
             String[] tokens = fullcommand.split(" ", 3);
             index = Integer.parseInt(tokens[2]);
             Expense removedExpense = expenses.get(index-1);
-            expenses.remove(index);
+            expenses.remove(index-1);
             System.out.println("Noted. This expense record has been deleted:");
             System.out.println(removedExpense);
             ui.showLineDivider();

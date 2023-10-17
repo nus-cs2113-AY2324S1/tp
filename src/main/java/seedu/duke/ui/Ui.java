@@ -54,6 +54,7 @@ public class Ui {
      * Prints the goodbye message when the program ends.
      */
     public void printGoodbyeMessage() {
+        System.out.println(lineDivider);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(lineDivider);
     }

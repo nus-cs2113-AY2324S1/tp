@@ -44,9 +44,7 @@ public class Duke {
                 String[] parts = command.split("-", 2);
                 switch (parts[0]) {
                 case "exit":
-                    ui.showLineDivider();
                     isExit = true;
-                    ui.showLineDivider();
                     break;
 
                 case "add_income":
@@ -87,7 +85,6 @@ public class Duke {
                     break;
 
                 case "list_expense":
-                    ui.showLineDivider();
                     new ExpenseLister(expenses, ui).listExpenses();
                     break;
 
@@ -98,6 +95,7 @@ public class Duke {
                 case "delete_income":
                     new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
                     break;
+
                 case "delete_expense":
                     new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
                     break;

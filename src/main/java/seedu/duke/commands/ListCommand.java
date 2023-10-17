@@ -38,7 +38,7 @@ public class ListCommand extends Commands {
                 System.out.println((i + 1) + ". " + incomes.get(i).toString());
                 totalIncome += incomes.get(i).getAmount();
             }
-            System.out.printf("Total income is: $%.2f.", totalIncome);
+            System.out.printf("Total income is: $%.2f.\n", totalIncome);
         }
         System.out.println();
         // Print expenses
@@ -50,9 +50,9 @@ public class ListCommand extends Commands {
                 System.out.println((i + 1) + ". " + expenses.get(i).toString());
                 totalExpenses += expenses.get(i).getAmount();
             }
-            System.out.printf("Total expenses is: $%.2f.", totalExpenses);
+            System.out.printf("Total expenses is: $%.2f.\n", totalExpenses);
         }
-        System.out.printf("Total balance is: $%.2f.", totalIncome - totalExpenses);
+        System.out.printf("Total balance is: $%.2f.\n", totalIncome - totalExpenses);
         ui.showLineDivider();
     }
 }
