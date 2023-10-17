@@ -1,3 +1,5 @@
+//@@author wendelinwemhoener
+
 package seedu.duke;
 
 import seedu.duke.flashcard.Flashcard;
