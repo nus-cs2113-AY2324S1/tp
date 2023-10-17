@@ -9,8 +9,8 @@ public class Messages {
                                                         "I can't seem to find the dish you're referring to";
     public static final String WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE = "Oops, seems like you gave me " +
                                                                         "the wrong type for dish index " +
-                                                                        "or price. Make sure dish index is of type int " +
-                                                                        "and price is of type float!";
+                                                                        "or price. Make sure dish index is " +
+                                                                        "of type int and price is of type float!";
 
     // Ui messages
     public static final String PRICE_MODIFIED_MESSAGE = "Price modified for the following dish: ";

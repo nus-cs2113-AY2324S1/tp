@@ -26,6 +26,6 @@ public class EditPriceCommand extends Command {
         Dish dish = menu.getDish(this.menuID);
         dish.setPrice(this.newPrice);
 
-        Ui.showEditPriceMessage(dish.toString());
+        ui.showEditPriceMessage(dish.toString());
     }
 }

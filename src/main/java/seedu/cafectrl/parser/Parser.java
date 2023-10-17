@@ -9,7 +9,7 @@ import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 
-import seedu.duke.ui.Messages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.ui.UserOutput;
 
