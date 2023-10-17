@@ -14,15 +14,15 @@ public class Balance {
         this.expenses = expenses;
     }
     public double getBalance() {
-        double total_incomes = 0;
-        double total_expenses = 0;
+        double totalIncome = 0;
+        double totalExpense = 0;
         for (Income income : incomes) {
-            total_incomes += income.getAmount();
+            totalIncome += income.getAmount();
         }
         for (Expense expense : expenses) {
-            total_expenses += expense.getAmount();
+            totalExpense += expense.getAmount();
         }
-        return total_incomes + total_expenses;
+        return totalIncome + totalExpense;
     }
 
     public void getBalanceMessage() {
