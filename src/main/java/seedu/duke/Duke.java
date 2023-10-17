@@ -15,6 +15,8 @@ import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 import java.util.ArrayList;
+import seedu.duke.commands.ExpenseLister;
+import seedu.duke.commands.Balance;
 
 /**
  * This class is the main class of the program.
@@ -102,6 +104,12 @@ public class Duke {
                     break;
                 case "help":
                     new UsageInstructions(ui).getHelp();
+                    break;
+
+                case "balance":
+                    ui.showLineDivider();
+                    new Balance(incomes, expenses).getBalanceMessage();
+                    ui.showLineDivider();
                     break;
 
                 default:

@@ -6,3 +6,5 @@ list expense
 list
 delete income 1
 delete expense 1
+help
+balance

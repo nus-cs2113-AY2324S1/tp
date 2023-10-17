@@ -33,6 +33,8 @@ public class Parser {
             return "delete_income";
         } else if (commandLowerCase.startsWith("delete expense")) {
             return "delete_expense";
+        } else if (commandLowerCase.equals("balance")) {
+            return "balance";
         }
         return "invalid";
     }
