@@ -10,6 +10,7 @@ import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.ui.UserOutput;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -68,15 +69,13 @@ public class Parser {
             return new ExitCommand();
 
         default:
-            return new IncorrectCommand("Your command has left me scratching my virtual head. " +
-                    "Let's try that again, shall we?");
+            return new IncorrectCommand(UserOutput.UNKNOWN_COMMAND_MESSAGE.message);
         }
     }
 
     // All prepareCommand Classes
     private static Command prepareListMenu() {
-        // To be implemented by xx
-        return null;
+        return new ListMenuCommand();
     }
 
     private static Command prepareEditListCommand(String arguments) {
