@@ -8,7 +8,7 @@ public class ViewMealsCommand extends Command {
             String.format("`%s` shows the list of all meals.", COMMAND_WORD);
     private static final String USAGE =
             String.format("Type `%s` to view the list of meals.", COMMAND_WORD);
-    private static final String HELP = DESCRIPTION + "\n" + USAGE;
+    public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     @Override
     public CommandResult execute() {

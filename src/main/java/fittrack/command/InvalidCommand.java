@@ -23,6 +23,7 @@ public class InvalidCommand extends Command {
 
     @Override
     protected String getHelp() {
+        assert false;
         throw new UnsupportedOperationException();
     }
 }
