@@ -1,6 +1,14 @@
 package seedu.cafectrl.parser;
 
-import seedu.cafectrl.command.*;
+import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.Command;
+import seedu.cafectrl.command.IncorrectCommand;
+import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.ExitCommand;
+import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.ListMenuCommand;
+
 import seedu.cafectrl.data.Menu;
 
 import seedu.cafectrl.command.EditPriceCommand;
