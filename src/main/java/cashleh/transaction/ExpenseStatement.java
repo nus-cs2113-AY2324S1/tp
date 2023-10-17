@@ -1,5 +1,6 @@
-package cashleh;
+package cashleh.transaction;
 
+import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 
 import java.util.ArrayList;
@@ -34,8 +35,12 @@ public class ExpenseStatement {
     public int getNumberOfExpenses() {
         return expenseStatement.size();
     }
+    public double getSumOfExpenses() {
+        return expenseStatement.stream().mapToDouble(Expense::getAmount).sum();
+    }
 
-    public void getExpenses() {
+
+    public void printExpenses() {
         int listSize = expenseStatement.size();
         String[] texts = new String[listSize + 1];
         texts[0] = "Here's a list of your current expenses: ";
@@ -43,7 +48,7 @@ public class ExpenseStatement {
             Expense currentExpense = expenseStatement.get(i - 1);
             texts[i] = "\t" + i + "." + currentExpense.toString();
         }
-        ui.printMultipleText(texts);
+        Ui.printMultipleText(texts);
     }
 
     @Override
