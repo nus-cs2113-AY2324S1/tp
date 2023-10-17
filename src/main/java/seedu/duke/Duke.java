@@ -5,8 +5,12 @@ import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 import seedu.duke.financialrecords.Income;
-
+import seedu.duke.financialrecords.Expense;
+import seedu.duke.commands.IncomeManager;
+import seedu.duke.commands.ExpenseManager;
 import java.util.ArrayList;
+import seedu.duke.commands.IncomeLister;
+import seedu.duke.commands.ExpenseLister;
 
 /**
  * This class is the main class of the program.
@@ -59,9 +63,32 @@ public class Duke {
                     ui.showLineDivider();
                     new IncomeLister(incomes, ui).listIncomes();
                     break;
+
+                case "add_expense":
+                    try{
+                        ExpenseManager expenseCommand = new ExpenseManager(fullCommand);
+                        expenseCommand.execute();
+                        Expense newExpense = expenseCommand.getNewExpense();
+                        expenses.add(newExpense);
+                        ui.showLineDivider();
+                        ui.printExpenseAddedMessage(newExpense);
+                        ui.showLineDivider();
+                    } catch (KaChinnnngException e) {
+                        ui.showLineDivider();
+                        System.out.println(e.getMessage());
+                        ui.showLineDivider();
+                    }
+                    break;
+
+                case "list_expense":
+                    ui.showLineDivider();
+                    new ExpenseLister(expenses, ui).listExpenses();
+                    break;
+
                 case "list":
                     new ListCommand(incomes, expenses, ui).execute();
                     break;
+
                 case "help":
                     new UsageInstructions(ui).getHelp();
                     break;
