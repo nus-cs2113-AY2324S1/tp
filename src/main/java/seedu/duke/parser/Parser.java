@@ -3,7 +3,12 @@ package seedu.duke.parser;
 import seedu.duke.command.Command;
 import seedu.duke.command.ListIngredientCommand;
 import seedu.duke.command.ListMenuCommand;
+import seedu.duke.command.AddDishCommand;
+import seedu.duke.command.DeleteDishCommand;
+import seedu.duke.command.IncorrectCommand;
 
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,14 +17,13 @@ import java.util.regex.Pattern;
  * into a format that can be interpreted by other core classes
  */
 public class Parser {
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-    if (!matcher.matches()) {
-        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-    }
+    public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    final String commandWord = matcher.group("commandWord");
-    final String arguments = matcher.group("arguments");
+    // Command Argument Patterns
+    private static final String ADD_ARGUMENT_STRING = "name/([A-Za-z]+) price/(\\d+(\\.\\d+)?) (ingredient/[A-Za-z]+ qty/(\\d+(\\.\\d+)?)(?:, )?)+";
+    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
+    private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
     public Command parseCommand(String userInput) {
         switch (commandWord) {
