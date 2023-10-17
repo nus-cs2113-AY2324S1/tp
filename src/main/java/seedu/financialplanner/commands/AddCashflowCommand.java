@@ -75,13 +75,6 @@ public class AddCashflowCommand extends AbstractCommand {
     private static void deductFromBudget(Cashflow entry) {
         double expenseAmount = entry.getAmount();
         Budget.deduct(expenseAmount);
-        String message = "";
-        if (Budget.getCurrentBudget() <= 0) {
-            message += "You have exceeded your current budget by: ";
-        } else if (Budget.getCurrentBudget() > 0) {
-            message += "Your remaining budget for the month is: ";
-        }
-        message += Budget.getCurrentBudgetString();
-        Ui.INSTANCE.showMessage(message);
+        Ui.INSTANCE.printBudgetAfterDeduction();
     }
 }

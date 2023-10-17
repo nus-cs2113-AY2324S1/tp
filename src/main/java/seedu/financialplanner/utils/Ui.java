@@ -88,4 +88,15 @@ public class Ui {
         showMessage("New initial budget: " + Budget.getInitialBudgetString() +
                 "\nNew current budget: " + Budget.getCurrentBudgetString());
     }
+
+    public void printBudgetAfterDeduction() {
+        String message = "";
+        if (Budget.getCurrentBudget() <= 0) {
+            message += "You have exceeded your current budget by: ";
+        } else if (Budget.getCurrentBudget() > 0) {
+            message += "Your remaining budget for the month is: ";
+        }
+        message += Budget.getCurrentBudgetString();
+        showMessage(message);
+    }
 }
