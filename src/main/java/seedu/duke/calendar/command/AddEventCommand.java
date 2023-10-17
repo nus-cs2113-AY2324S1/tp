@@ -1,4 +1,4 @@
 package seedu.duke.calendar.command;
 
-public class AddEventCommand {
+public class AddEventCommand extends EventCommand{
 }
