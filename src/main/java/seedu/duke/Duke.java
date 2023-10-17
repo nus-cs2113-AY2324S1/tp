@@ -13,6 +13,7 @@ import seedu.duke.commands.IncomeLister;
 import seedu.duke.commands.ExpenseLister;
 import seedu.duke.commands.Balance;
 
+
 /**
  * This class is the main class of the program.
  * It contains the main method that runs the program.
