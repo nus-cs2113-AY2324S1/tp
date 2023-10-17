@@ -3,16 +3,20 @@ package seedu.financialplanner.list;
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.utils.Ui;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CashflowList {
-    public static final CashflowList INSTANCE = new CashflowList();
+    public static Logger logger = Logger.getLogger("Financial Planner Logger");
 
+    public static final CashflowList INSTANCE = new CashflowList();
     public final ArrayList<Cashflow> list = new ArrayList<>();
 
     private CashflowList() {
     }
 
     public void addIncome(double value, String type, int recur) {
+        logger.log(Level.INFO, "Adding income");
         int existingListSize = list.size();
 
         Income toAdd = new Income(value, type, recur);
@@ -24,6 +28,7 @@ public class CashflowList {
     }
 
     public void addExpense(double value, String type, int recur) {
+        logger.log(Level.INFO, "Adding expense");
         int existingListSize = list.size();
 
         Expense toAdd = new Expense(value, type, recur);
