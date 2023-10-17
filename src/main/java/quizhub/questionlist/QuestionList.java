@@ -26,25 +26,25 @@ public class QuestionList {
      */
     public void addToQuestionList(String input, Question.qnType qnType, boolean showMessage){
         switch (qnType) {
-            case SHORTANSWER:
-                try {
-                    String[] inputTokens = input.split("short")[1].strip().split("/");
-                    String description = inputTokens[0];
-                    String answer = inputTokens[1];
-                    if (description.equals("") || answer.equals("")) {
-                        throw new QuizHubExceptions("Incomplete Command");
-                    }
-                    allQns.add(new ShortAnsQn(description, answer));
-                    if (showMessage) {
-                        System.out.println("    I have added the following question OwO:");
-                        System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
-                        System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
-                    }
-                    break;
-                } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
-                    System.out.println("    Ono! You did not input a proper question!");
-                    System.out.println("    Please format your input as short [question]/[answer]!");
+        case SHORTANSWER:
+            try {
+                String[] inputTokens = input.split("short")[1].strip().split("/");
+                String description = inputTokens[0];
+                String answer = inputTokens[1];
+                if (description.isEmpty() || answer.isEmpty()) {
+                    throw new QuizHubExceptions("Incomplete Command");
                 }
+                allQns.add(new ShortAnsQn(description, answer));
+                if (showMessage) {
+                    System.out.println("    I have added the following question OwO:");
+                    System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
+                    System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+                }
+                break;
+            } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
+                System.out.println("    Ono! You did not input a proper question!");
+                System.out.println("    Please format your input as short [question]/[answer]!");
+            }
         }
     }
     /**
@@ -57,22 +57,22 @@ public class QuestionList {
     public void printQuestion(Question question, boolean asList){
         int qnIndex = allQns.indexOf(question);
         switch(question.getQuestionType()) {
-            case SHORTANSWER:
-                if (question.questionIsDone()) {
-                    if(asList){
-                        System.out.printf("    %d: [S][X] %s\n", qnIndex+1, question.getQuestionDescription());
-                    } else{
-                        System.out.printf("        [S][X] %s\n", question.getQuestionDescription());
-                    }
-
+        case SHORTANSWER:
+            if (question.questionIsDone()) {
+                if (asList) {
+                    System.out.printf("    %d: [S][X] %s\n", qnIndex + 1, question.getQuestionDescription());
                 } else {
-                    if(asList){
-                        System.out.printf("    %d: [S][] %s\n", qnIndex+1, question.getQuestionDescription());
-                    } else{
-                        System.out.printf("        [S][] %s\n", question.getQuestionDescription());
-                    }
+                    System.out.printf("        [S][X] %s\n", question.getQuestionDescription());
                 }
-                break;
+
+            } else {
+                if (asList) {
+                    System.out.printf("    %d: [S][] %s\n", qnIndex + 1, question.getQuestionDescription());
+                } else {
+                    System.out.printf("        [S][] %s\n", question.getQuestionDescription());
+                }
+            }
+            break;
         }
     }
     /**
@@ -81,11 +81,10 @@ public class QuestionList {
     public void printQuestionList(){
         if(allQns.isEmpty()){
             System.out.println("    No questions found! Time to add some OWO");
+            return;
         }
-        else {
-            for (Question question : allQns) {
-                printQuestion(question, true);
-            }
+        for (Question question : allQns) {
+            printQuestion(question, true);
         }
     }
     /**
@@ -243,14 +242,14 @@ public class QuestionList {
             String searchCriteria = searchInfo[0].strip();
             String searchKeyword = searchInfo[1].strip();
             switch (searchCriteria){
-                case "description":
-                    searchListByDescription(searchKeyword);
-                    break;
-                case "time":
-                    searchListByTime(searchKeyword);
-                    break;
-                default:
-                    break;
+            case "description":
+                searchListByDescription(searchKeyword);
+                break;
+            case "time":
+                searchListByTime(searchKeyword);
+                break;
+            default:
+                break;
             }
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate the keywords you are searching by :<");

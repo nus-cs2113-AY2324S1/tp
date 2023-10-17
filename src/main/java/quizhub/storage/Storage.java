@@ -20,6 +20,8 @@ public class Storage {
      */
     public Storage(String filePath) {
         dataFile = new File(filePath);
+        assert dataFile.exists():
+                "Data file creation has failed!";
     }
     /**
      * Write in new data to storage.
@@ -50,30 +52,29 @@ public class Storage {
         int questionIndex = 0;
         try {
             Scanner fileScanner = new Scanner(dataFile);
-            if (fileScanner.hasNext()) {
-                fileScanner.nextLine();
-                while (fileScanner.hasNext()) {
-                    questionIndex++;
-                    String nextQuestion = fileScanner.nextLine();
-                    String[] questionSubStrings = nextQuestion.split("\\|");
-                    String questionType = questionSubStrings[0].strip();
-                    String questionDoneStatus = questionSubStrings[1].strip();
-                    String questionDescription = questionSubStrings[2].strip();
-
-                    // TODO : change this entire code chunk, right now they're all default
-                    switch (questionType) {
-                    case "S": questions.addToQuestionList("short " + questionDescription,
+            if (!fileScanner.hasNext()) {
+                return;
+            }
+            fileScanner.nextLine();
+            while (fileScanner.hasNext()) {
+                questionIndex++;
+                String nextQuestion = fileScanner.nextLine();
+                String[] questionSubStrings = nextQuestion.split("\\|");
+                String questionType = questionSubStrings[0].strip();
+                String questionDoneStatus = questionSubStrings[1].strip();
+                String questionDescription = questionSubStrings[2].strip();
+                // TODO : change this entire code chunk, right now they're all default
+                switch (questionType) {
+                case "S":
+                    questions.addToQuestionList("short " + questionDescription,
                             Question.qnType.SHORTANSWER, false);
-                        if (questionDoneStatus.equals("done")) {
-                            questions.markQuestionAsDone(questionIndex, false);
-                        }
-                        break;
-                    default:
-                        System.out.println(nextQuestion);
-                        break;
+                    if (questionDoneStatus.equals("done")) {
+                        questions.markQuestionAsDone(questionIndex, false);
                     }
-
-
+                    break;
+                default:
+                    System.out.println(nextQuestion);
+                    break;
                 }
             }
         }
@@ -108,7 +109,7 @@ public class Storage {
             //flush all current records
             writeToFile(dataFile.getPath(), "Latest Questions" + System.lineSeparator(), false);
             ArrayList<Question> allQuestions = questions.getAllQns();
-            for (Question question: allQuestions) {
+            for (Question question : allQuestions) {
                 switch (question.getQuestionType()) {
                 case SHORTANSWER:
                     if (question.questionIsDone()) {
