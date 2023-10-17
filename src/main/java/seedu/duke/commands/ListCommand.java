@@ -21,7 +21,7 @@ public class ListCommand extends Commands {
     @Override
     public void execute() {
         if (incomes.isEmpty() && expenses.isEmpty()) {
-            System.out.println("You do not have any records");
+            System.out.println("You do not have any records.");
             return;
         }
         // Print incomes
@@ -33,7 +33,7 @@ public class ListCommand extends Commands {
                 System.out.println((i + 1) + ". " + incomes.get(i).toString());
                 totalIncome += incomes.get(i).getAmount();
             }
-            System.out.printf("Total income is: $%.2f", totalIncome);
+            System.out.printf("Total income is: $%.2f.", totalIncome);
         }
         System.out.println();
         // Print expenses
@@ -45,8 +45,8 @@ public class ListCommand extends Commands {
                 System.out.println((i + 1) + ". " + expenses.get(i).toString());
                 totalExpenses += expenses.get(i).getAmount();
             }
-            System.out.printf("Total expenses is: $%.2f", totalExpenses);
+            System.out.printf("Total expenses is: $%.2f.", totalExpenses);
         }
-        System.out.printf("Total balance is: $%.2f", totalIncome - totalExpenses);
+        System.out.printf("Total balance is: $%.2f.", totalIncome - totalExpenses);
     }
 }

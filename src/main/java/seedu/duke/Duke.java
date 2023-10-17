@@ -20,6 +20,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         incomes = new ArrayList<>();
+        expenses = new ArrayList<>();
     }
     /**
      * This method runs the program.
