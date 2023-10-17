@@ -41,7 +41,7 @@ public class IncomeStatement {
     public void printIncomes() {
         int listSize = incomeStatement.size();
         String[] texts = new String[listSize + 1];
-        texts[0] = "Here's a list of your current incomes: ";
+        texts[0] = "Here's a list of your current incomes:";
         for (int i = 1; i <= listSize; i++) {
             Income currentIncome = incomeStatement.get(i - 1);
             texts[i] = "\t" + i + "." + currentIncome.toString();

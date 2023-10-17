@@ -43,7 +43,7 @@ public class ExpenseStatement {
     public void printExpenses() {
         int listSize = expenseStatement.size();
         String[] texts = new String[listSize + 1];
-        texts[0] = "Here's a list of your current expenses: ";
+        texts[0] = "Here's a list of your current expenses:";
         for (int i = 1; i <= listSize; i++) {
             Expense currentExpense = expenseStatement.get(i - 1);
             texts[i] = "\t" + i + "." + currentExpense.toString();
