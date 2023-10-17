@@ -26,4 +26,5 @@ public class Ingredient {
     public String toString() {
         return name + " - " + quantity;
     }
+
 }

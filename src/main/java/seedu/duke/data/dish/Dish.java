@@ -12,6 +12,11 @@ public class Dish {
         this.ingredients = ingredients;
         this.price = price;
     }
+    public Dish(String name, float price) {
+        this.name = name;
+        this.ingredients = null;
+        this.price = price;
+    }
 
     public String getName() {
         return name;
