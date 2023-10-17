@@ -3,3 +3,6 @@ bye
 add income /description Salary for October /date 01/10/2023 /amount 5000.00
 add expense /description Lunch /date 01/10/2023 /amount 10.00
 list expense
+list
+delete income 1
+delete expense 1
