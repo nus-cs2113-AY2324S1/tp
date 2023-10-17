@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
     public static final String ALL_COMMAND_WORDS =
-            "help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeal, " +
-                    "addworkout, deleteworkout, viewworkout";
+            "help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, " +
+                    "addworkout, deleteworkout, viewworkouts";
 
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
