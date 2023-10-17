@@ -1,5 +1,7 @@
 package cashleh;
 
+import cashleh.transaction.Expense;
+import cashleh.transaction.ExpenseStatement;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,11 +23,11 @@ class ExpenseStatementTest {
     void testToString() {
         testExpenseStatement.addExpense(testExpense);
         System.out.println(testExpenseStatement);
-        assertEquals(testExpenseStatement.toString(), "\t+ milk tea (amount: 2.50)");
+        assertEquals(testExpenseStatement.toString(), "milk tea (amount: 2.5)");
         testExpenseStatement.addExpense(testExpense2);
         System.out.println(testExpenseStatement);
-        assertEquals(testExpenseStatement.toString(), "\t+ milk tea (amount: 2.50)\n\t"
-                + "CS2113 textbook (amount: 10)");
+        assertEquals(testExpenseStatement.toString(), "milk tea (amount: 2.5)\n"
+                + "CS2113 textbook (amount: 10.0)");
     }
 
 }
