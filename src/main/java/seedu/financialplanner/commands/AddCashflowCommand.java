@@ -10,14 +10,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.lang.Math.abs;
 
 public class AddCashflowCommand extends AbstractCommand {
 
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     protected double amount;
     protected CashflowCategory category;
-    protected String type = null;
+    protected String type;
     protected int recur = 0;
 
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
@@ -108,12 +107,6 @@ public class AddCashflowCommand extends AbstractCommand {
     private static void deductFromBudget(Cashflow entry) {
         double expenseAmount = entry.getAmount();
         Budget.deduct(expenseAmount);
-        if (Budget.getCurrentBudget() <= 0) {
-            Ui.INSTANCE.showMessage("You have exceeded your current budget by: " +
-                    String.format("%.2f", abs(Budget.getCurrentBudget())));
-        } else if (Budget.getCurrentBudget() > 0) {
-            Ui.INSTANCE.showMessage("Your remaining budget for the month is: " +
-                    String.format("%.2f", Budget.getCurrentBudget()));
-        }
+        Ui.INSTANCE.printBudgetAfterDeduction();
     }
 }

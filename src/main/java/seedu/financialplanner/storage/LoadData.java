@@ -41,13 +41,17 @@ public abstract class LoadData {
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException | FinancialPlannerException e) {
-            ui.showMessage("File appears to be corrupted. Do you want to create a new file? (Y/N)");
-            if (createNewFile(ui)) {
-                cashflowList.list.clear();
-            } else {
-                throw new FinancialPlannerException("Please fix the corrupted file, " +
-                        "which can be found in data/data.txt.");
-            }
+            handleCorruptedFile(cashflowList, ui);
+        }
+    }
+
+    private static void handleCorruptedFile(CashflowList cashflowList, Ui ui) throws FinancialPlannerException {
+        ui.showMessage("File appears to be corrupted. Do you want to create a new file? (Y/N)");
+        if (createNewFile(ui)) {
+            cashflowList.list.clear();
+        } else {
+            throw new FinancialPlannerException("Please fix the corrupted file, " +
+                    "which can be found in data/data.txt.");
         }
     }
 

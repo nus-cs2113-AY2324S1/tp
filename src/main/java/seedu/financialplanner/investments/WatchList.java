@@ -49,11 +49,7 @@ public class WatchList {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             // System.out.println(response.body());
             obj = new JSONParser().parse(response.body());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (IOException | InterruptedException | ParseException e) {
             throw new RuntimeException(e);
         }
         return (JSONArray) obj;
