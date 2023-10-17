@@ -25,11 +25,39 @@ public class Parser {
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
+    /**
+     * Parse userInput and group it under commandWord and arguments
+     * use commandWord to find the matching command and prepare the command
+     * @param userInput full user input
+     * @return command requested by the user
+     */
     public Command parseCommand(String userInput) {
+        final Matcher matcher = COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand("Incorrect command format!");
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
 
-            case AddDishCommand.COMMAND_WORD:
-                return prepareAdd(arguments);
+        case AddDishCommand.COMMAND_WORD:
+            return prepareAdd(arguments);
+
+        case DeleteDishCommand.COMMAND_WORD:
+            return prepareDelete(arguments);
+
+        case ListIngredientCommand.COMMAND_WORD:
+            return prepareListIngredient(arguments);
+
+        case ListMenuCommand.COMMAND_WORD:
+            return prepareListMenu();
+
+        default:
+            return new IncorrectCommand("Incorrect command format!");
+        }
+    }
 
             case DeleteDishCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
