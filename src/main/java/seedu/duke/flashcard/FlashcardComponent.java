@@ -20,7 +20,11 @@ public class FlashcardComponent {
         parser = new FlashcardCommandParser();
 
         //@@author junhyeong0411
-        storage = new FlashcardStorage("./flashcard.txt");
+
+        FlashcardDirectory flashcarddirectory = new FlashcardDirectory();
+        flashcarddirectory.listFlashcardFiles();
+
+        storage = new FlashcardStorage("./data/flashcard.txt");
         try {
             flashcardList = storage.loadFlashcards();
             System.out.println("Loading existed File");

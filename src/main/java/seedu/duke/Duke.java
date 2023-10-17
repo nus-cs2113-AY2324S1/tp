@@ -4,6 +4,7 @@ package seedu.duke;
 
 import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardComponent;
+import seedu.duke.flashcard.FlashcardDirectory;
 
 import java.util.ArrayList;
 import java.util.Scanner;

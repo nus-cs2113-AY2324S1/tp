@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * storage for flashcards
- * Flashcard implementation should be finished first
+ * One storage manages one file
  */
 public class FlashcardStorage {
     // simply implemented for save & load first
