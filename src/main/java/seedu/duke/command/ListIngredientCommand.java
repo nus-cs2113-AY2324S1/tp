@@ -7,6 +7,8 @@ import seedu.duke.ui.Ui;
  * Lists all ingredients used in the selected dish to the user.
  */
 public class ListIngredientCommand extends Command{
+    public static final String COMMAND_WORD = "list ingredients";
+
     @Override
     public void execute(Menu menu, Ui ui) {
 

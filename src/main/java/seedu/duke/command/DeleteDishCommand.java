@@ -8,6 +8,8 @@ import seedu.duke.ui.Ui;
  */
 public class DeleteDishCommand extends Command {
 
+    public static final String COMMAND_WORD = "delete";
+
     @Override
     public void execute(Menu menu, Ui ui) {
 

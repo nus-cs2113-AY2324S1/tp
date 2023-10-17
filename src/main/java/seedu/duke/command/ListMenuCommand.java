@@ -8,6 +8,8 @@ import seedu.duke.ui.Ui;
  * Lists all dishes in the menu to the user.
  */
 public class ListMenuCommand extends Command {
+    public static final String COMMAND_WORD = "list menu";
+
     @Override
     public void execute(Menu menu, Ui ui) {
         /*for (String d : menu) {
