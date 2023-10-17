@@ -18,12 +18,10 @@ public class IngredientList {
 
     public void listIngredients() {
         int ingredientCount = 0;
-        String ingredientName;
 
-        for (int i = 0; i < ingredients.size(); i++){
+        for (Ingredient ingredient : ingredients) {
             ingredientCount++;
-            ingredientName = ingredients.get(i).getName();
-            System.out.println(ingredientCount + ". " + ingredientName);
+            System.out.println(ingredientCount + ". " + ingredient.getName());
         }
     }
 }
