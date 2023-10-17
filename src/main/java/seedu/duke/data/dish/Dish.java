@@ -33,4 +33,8 @@ public class Dish {
     public void setPrice(float newPrice) {
         this.price = newPrice;
     }
+
+    public String toString() {
+        return this.name + " $" + this.price;
+    }
 }
