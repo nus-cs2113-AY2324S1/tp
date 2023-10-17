@@ -10,10 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VisCommand extends AbstractCommand {
-
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String type;
     private String chart;
-    private static Logger logger = Logger.getLogger("Financial Planner Logger");
+
 
     public VisCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("t")) {
