@@ -111,7 +111,7 @@ public class Duke {
                     break;
                 }
             } catch (KaChinnnngException e) {
-                ui.printErrorMessage(e);
+                System.out.println(e.getMessage());
             }
         }
         ui.printGoodbyeMessage();
