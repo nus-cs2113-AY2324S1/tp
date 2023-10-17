@@ -29,7 +29,12 @@ public class Exercise {
         return "Exercise: " + exerciseName + ", Calories Burned: " + Integer.toString(caloriesBurned) + " Calories\n";
     }
 
-    public boolean equals(Exercise e) {
-        return this.exerciseName.equals(e.getExerciseName()) && this.caloriesBurned == e.getCaloriesBurned();
+    public boolean equals(Object other) {
+        if (!(other instanceof Exercise)) {
+            return false;
+        }
+        Exercise otherExercise = (Exercise) other;
+        return this.exerciseName.equals(otherExercise.getExerciseName()) &&
+                this.caloriesBurned == otherExercise.getCaloriesBurned();
     }
 }
