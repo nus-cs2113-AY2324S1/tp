@@ -7,6 +7,7 @@ import seedu.duke.ui.Ui;
  * Edit the price of a dish of a certain index
  */
 public class EditPriceCommand extends Command {
+    public static final String COMMAND_WORD = "edit price";
     private final int menuID;
     private final float newPrice;
 
