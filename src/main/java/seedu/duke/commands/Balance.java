@@ -22,7 +22,7 @@ public class Balance {
         for (Expense expense : expenses) {
             totalExpense += expense.getAmount();
         }
-        return totalIncome + totalExpense;
+        return totalIncome - totalExpense;
     }
 
     public void getBalanceMessage() {
