@@ -1,6 +1,5 @@
 package seedu.duke.ui;
 
-import seedu.duke.data.Menu;
 import seedu.duke.data.dish.Dish;
 import seedu.duke.data.dish.Ingredient;
 
