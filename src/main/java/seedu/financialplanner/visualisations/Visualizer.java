@@ -14,8 +14,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Visualizer {
+
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     public static void displayChart(String chartType, Map<String, Double> expensesByCat)
             throws FinancialPlannerException {
         switch (chartType) {
@@ -47,6 +51,7 @@ public class Visualizer {
         for (Map.Entry<String, Double> set: expensesByCat.entrySet()) {
             chart.addSeries(set.getKey(), set.getValue());
         }
+        logger.log(Level.INFO, "Displaying Pie Chart");
         // Show it
         JFrame swHR = new SwingWrapper<>(chart).displayChart();
         javax.swing.SwingUtilities.invokeLater(
@@ -60,11 +65,13 @@ public class Visualizer {
         // Customize Chart
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
         chart.getStyler().setHasAnnotations(true);
-
+        assert !expensesByCat.isEmpty();
         // Series
         List<Double> values = new ArrayList<Double>(expensesByCat.values());
         List<String> keys = new ArrayList<String>(expensesByCat.keySet());
         chart.addSeries("Expense", keys, values);
+
+        logger.log(Level.INFO, "Displaying Bar Chart");
         JFrame swHR = new SwingWrapper<>(chart).displayChart();
         javax.swing.SwingUtilities.invokeLater(
                 ()->swHR.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
