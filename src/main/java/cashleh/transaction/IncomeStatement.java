@@ -34,14 +34,14 @@ public class IncomeStatement {
     public int getNumberOfEntries() {
         return incomeStatement.size();
     }
-    public double getSumOfEntries() {
+    public double getTotalIncomeAmount() {
         return incomeStatement.stream().mapToDouble(Income::getAmount).sum();
     }
 
     public void printIncomes() {
         int listSize = incomeStatement.size();
         String[] texts = new String[listSize + 1];
-        texts[0] = "The current sum of all your incomes amounts to: ";
+        texts[0] = "The current sum of all your incomes amounts to: " + getTotalIncomeAmount();
         for (int i = 1; i <= listSize; i++) {
             Income currentIncome = incomeStatement.get(i - 1);
             texts[i] = "\t" + i + "." + currentIncome.toString();
