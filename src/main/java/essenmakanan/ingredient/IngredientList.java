@@ -8,8 +8,8 @@ public class IngredientList {
         ingredients = new ArrayList<>();
     }
 
-    public void addIngredient(String ingredientName) {
-        ingredients.add(new Ingredient(ingredientName));
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(ingredient);
     }
 
     public void deleteIngredient(Ingredient ingredient) {

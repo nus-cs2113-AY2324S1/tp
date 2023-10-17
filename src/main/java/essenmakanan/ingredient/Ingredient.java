@@ -2,13 +2,13 @@ package essenmakanan.ingredient;
 
 public class Ingredient {
     private String name;
-    private String qty;
+    private String quantity;
     public Ingredient(String name) {
         this.name = name;
     }
     public Ingredient(String name, String qty) {
         this.name = name;
-        this.qty = qty;
+        this.quantity = qty;
     }
 
     public String getName() {
@@ -19,10 +19,10 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getQty() {
-        return this.qty;
+    public String getQuantity() {
+        return this.quantity;
     }
-    public void setQty(String qty) {
-        this.qty = qty;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 }
