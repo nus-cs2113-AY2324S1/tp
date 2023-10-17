@@ -1,9 +1,10 @@
 package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.Menu;
-import seedu.duke.data.dish.Dish;
-import seedu.duke.ui.Ui;
+import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.ui.Ui;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
