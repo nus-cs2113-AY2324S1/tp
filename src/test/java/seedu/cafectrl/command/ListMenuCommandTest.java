@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListMenuCommandTest {
     @Test
-    public void execute_expectTwoDishes() {
+    public void execute_addTwoDishes_expectTwoDishes() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice", 2.50F));
         menuItems.add(new Dish("Chicken Curry", 4.30F));
