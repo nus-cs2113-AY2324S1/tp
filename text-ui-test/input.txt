@@ -1,1 +1,10 @@
-James Gosling
+Benedict
+addIncome job /amt 3000
+addIncome side hustle /amt 500
+viewIncomes
+addExpense dinner /amt 50
+deleteIncome 5
+deleteIncome 2
+viewIncomes
+bad input
+exit

@@ -2,7 +2,10 @@
 
 ## Introduction
 
-{Give a product intro}
+CashLeh? is a CLI application mainly supporting working adults and students who struggle with managing finances
+(ranging from one-time and recurring expenses, to rent, utilities, interest rates and more). It allows them to track
+both their earnings and spending habits in a seamless way to have a neat overview of their financial 
+situation.
 
 ## Quick Start
 
@@ -15,19 +18,40 @@
 
 {Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Adding an income: `addIncome`
+Adds an income with a description, amount and date.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `addIncome DESCRIPTION /amtAMOUNT /dDATE`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The `DESCRIPTION` cannot contain punctuation or any special characters.
+* The `AMOUNT` must be a positive number.
+* The `DATE` must be of format "yyyy-MM-dd".
 
 Example of usage: 
 
-`todo n/Write the rest of the User Guide d/next week`
+`addIncome monthly salary /amt2500 /d2023-09-30`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`addIncome amazon purchase refund /amt50 /d2023-10-10`
+
+### Deleting an income: `deleteIncome`
+Deletes an income with a specific index.
+
+Format: `deleteIncome INDEX`
+
+* The `INDEX` must be a positive integer and cannot be larger than the number of income entries.
+
+Example of usage:
+
+`deleteIncome 4`
+
+### Viewing previous incomes: `viewIncomes`
+Shows sum of incomes and lists each income record with its description and amount.  
+Format: `viewIncomes`  
+* Anything following the command will be ignored, i.e. `viewIncomes overview` will be interpreted just like `viewIncomes`.
+
+Example of usage:
+
+`viewIncomes`
 
 ## FAQ
 
@@ -39,4 +63,6 @@ Example of usage:
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Add income `addIncome monthly salary /amt2500 /d2023-09-30`
+* Delete income `deleteIncome 4`
+* View incomes `viewIncomes`
