@@ -10,7 +10,7 @@ public class Exercise {
     }
 
     public String getExerciseName() {
-        return name;
+        return exerciseName;
     }
 
     public int getCaloriesBurned() {
