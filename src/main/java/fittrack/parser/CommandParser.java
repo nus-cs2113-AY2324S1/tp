@@ -10,10 +10,7 @@ import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
-import fittrack.command.ViewDailyCalorieSurplusLimitCommand;
-import fittrack.command.ViewHeightCommand;
 import fittrack.command.ViewMealsCommand;
-import fittrack.command.ViewWeightCommand;
 import fittrack.command.ViewWorkoutsCommand;
 import fittrack.command.ViewProfileCommand;
 
@@ -66,12 +63,6 @@ public class CommandParser {
             return new EditProfileCommand();
         case ViewProfileCommand.COMMAND_WORD:
             return new ViewProfileCommand();
-        case ViewHeightCommand.COMMAND_WORD:
-            return new ViewHeightCommand();
-        case ViewWeightCommand.COMMAND_WORD:
-            return new ViewWeightCommand();
-        case ViewDailyCalorieSurplusLimitCommand.COMMAND_WORD:
-            return new ViewDailyCalorieSurplusLimitCommand();
         case AddMealCommand.COMMAND_WORD:
             return new AddMealCommand();
         case DeleteMealCommand.COMMAND_WORD:
