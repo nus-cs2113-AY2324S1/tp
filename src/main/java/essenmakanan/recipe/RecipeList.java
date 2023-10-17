@@ -27,8 +27,8 @@ public class RecipeList extends ArrayList<Recipe> {
     }
 
     public void viewAllRecipes() {
-        for (Recipe recipe : recipes) {
-            System.out.println(recipe);
+        for (int i = 0; i < recipes.size(); i++) {
+            System.out.println((i + 1) + ": " + recipes.get(i).getTitle());
         }
     }
 
