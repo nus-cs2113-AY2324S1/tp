@@ -15,7 +15,6 @@ import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 import java.util.ArrayList;
-import seedu.duke.commands.ExpenseLister;
 import seedu.duke.commands.Balance;
 
 /**
