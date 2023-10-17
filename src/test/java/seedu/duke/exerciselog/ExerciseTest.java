@@ -1,7 +1,5 @@
 package seedu.duke.exerciselog;
 
-import seedu.duke.exerciselog.Exercise;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
