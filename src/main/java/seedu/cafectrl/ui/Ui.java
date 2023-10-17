@@ -41,11 +41,13 @@ public class Ui {
      * @param selectedDish Dish for ingredients to be listed out.
      */
     public void printIngredients(Dish selectedDish) {
-        showToUser(selectedDish.getName() + " Ingredients: \n");
+        String ingredientsString = selectedDish.getName() + " Ingredients: \n";
 
         for (Ingredient ingredient : selectedDish.getIngredients()) {
-            showToUser(ingredient.getName() + " - " + ingredient.getQuantity());
+            ingredientsString += ingredient.toString() + "\n";
         }
+
+        showToUser(ingredientsString.trim());
     }
 
     public void printAddDishMessage(Dish dish) {

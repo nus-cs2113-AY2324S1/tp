@@ -20,11 +20,11 @@ public class ListIngredientCommand extends Command {
 
     @Override
     public void execute(Menu menu, Ui ui) {
-        Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
-        if (selectedDish != null) {
+        try {
+            Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
             ui.printIngredients(selectedDish);
-        } else {
-            ui.showToUser("Please select a valid dish index :)");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Invalid dish index");
         }
     }
 }
