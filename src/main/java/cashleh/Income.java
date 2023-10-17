@@ -3,7 +3,7 @@ package cashleh;
 import java.time.LocalDate;
 
 public class Income {
-    protected static double totalIncome = 0; // sum of all incomes
+    private static double totalIncome = 0; // sum of all incomes
     protected double amount;
     protected String description;
     protected String currency; // SGD by default
@@ -15,7 +15,7 @@ public class Income {
         this.date = date;
         this.currency = "S$";
         this.isOneTimeIncome = true;
-        this.totalIncome += amount;
+        totalIncome += amount;
     }
     public double getAmount() {
         assert this.amount >= 0;
@@ -25,8 +25,8 @@ public class Income {
         this.amount = amount;
     }
     public double getTotalIncome() {
-        assert this.totalIncome >= 0;
-        return this.totalIncome;
+        assert totalIncome >= 0;
+        return totalIncome;
     }
     public String getDescription() {
         return this.description;
