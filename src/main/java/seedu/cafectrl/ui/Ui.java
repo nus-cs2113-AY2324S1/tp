@@ -85,14 +85,18 @@ public class Ui {
      * Shows messages(s) to the user
      * @param message string(s) of messages to print
      */
-    public void showToUser(String... message) {
+    public static void showToUser(String... message) {
         for (String m: message) {
             System.out.println(m);
         }
     }
 
-    public void showEditPriceMessage(String menuItem) {
-        System.out.println("Modified the following dish: ");
+    /**
+     * show edit price message to user
+     * @param menuItem menuItem that has been modified
+     */
+    public static void showEditPriceMessage(String menuItem) {
+        System.out.println(Messages.PRICE_MODIFIED_MESSAGE);
         showToUser(menuItem);
     }
 }

@@ -9,6 +9,7 @@ import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 
+import seedu.duke.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.ui.UserOutput;
 
@@ -25,7 +26,7 @@ public class Parser {
     public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     // Command Argument Patterns
-    private static final String ADD_ARGUMENT_STRING = "add name/(\\w+) price/(\\d+(\\.\\d+)?)" +
+    private static final String ADD_ARGUMENT_STRING = "name/(\\w+) price/(\\d+(\\.\\d+)?)" +
                                                         " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
@@ -63,7 +64,7 @@ public class Parser {
             return prepareListMenu();
 
         case EditPriceCommand.COMMAND_WORD:
-            return prepareEditListCommand(arguments);
+            return prepareEditPriceCommand(menu, arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -81,10 +82,38 @@ public class Parser {
     private static Command prepareEditListCommand(String arguments) {
         return null;
     }
-    
+
+    /**
+     * Parse argument in the context of edit price command
+     * @param arguments string that matches group arguments
+     * @return new EditDishCommand
+     */
+    private static Command prepareEditPriceCommand(Menu menu, String arguments) {
+        Pattern editDishArgumentsPattern = Pattern.compile(EDIT_PRICE_ARGUMENT_STRING);
+        Matcher matcher = editDishArgumentsPattern.matcher(arguments);
+
+        // Checks whether the overall pattern of edit price arguments is correct
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE);
+        }
+
+        try {
+            int dishIndex = Integer.parseInt(matcher.group(1));
+            float newPrice = Float.parseFloat(matcher.group(2));
+
+            // Check whether the dish index is valid
+            if (!menu.isValidDishIndex(dishIndex)) {
+                return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
+            }
+            return new EditPriceCommand(dishIndex, newPrice);
+        } catch (IllegalArgumentException e) {
+            return new IncorrectCommand(Messages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE);
+        }
+    }
+
     private static Command prepareAdd(String arguments) {
-        final Pattern addArgumentPattern = Pattern.compile(ADD_ARGUMENT_STRING);
-        Matcher matcher = addArgumentPattern.matcher(arguments);
+        final Pattern addArgumentPatter = Pattern.compile(ADD_ARGUMENT_STRING);
+        Matcher matcher = addArgumentPatter.matcher(arguments);
 
         // Checks whether the overall pattern of add arguments is correct
         if (matcher.matches()) {
