@@ -47,6 +47,9 @@ public class Stock {
 
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray ja = (JSONArray) jsonObject.get("bestMatches");
+            if (ja == null) {
+                throw new FinancialPlannerException("API limit Reached");
+            }
             if (ja.isEmpty()) {
                 throw new FinancialPlannerException("stock not found");
             }

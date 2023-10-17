@@ -18,14 +18,14 @@ import java.util.logging.Logger;
 public class WatchList {
 
     public static final WatchList INSTANCE = new WatchList();
-    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
+    private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private final ArrayList<Stock> stocks;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
     private WatchList() {
         stocks = new ArrayList<>();
 
-        logger.log(Level.INFO, "Adding Base Stocks");
+        // logger.log(Level.INFO, "Adding Base Stocks");
         try {
             Stock apple = new Stock("AAPL");
             assert apple.getSymbol() != null && apple.getStockName() != null;
