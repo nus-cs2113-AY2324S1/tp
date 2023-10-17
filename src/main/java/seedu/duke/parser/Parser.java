@@ -28,8 +28,8 @@ public class Parser {
         switch (command[0].toLowerCase()) {
         case ListMenuCommand.COMMAND_WORD:
             return new ListMenuCommand();
-//        case ListIngredientCommand.COMMAND_WORD:
-//            return prepareListIngredient(menu,userInput);
+        //case ListIngredientCommand.COMMAND_WORD:
+            //return prepareListIngredient(menu,userInput);
         case DeleteDishCommand.COMMAND_WORD:
             return prepareDelete(userInput);
         case ExitCommand.COMMAND_WORD:

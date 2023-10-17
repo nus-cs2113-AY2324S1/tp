@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import seedu.duke.data.Menu;
 import seedu.duke.data.dish.Dish;
-import seedu.duke.data.dish.Ingredient;
 import seedu.duke.ui.Ui;
 
 /**
