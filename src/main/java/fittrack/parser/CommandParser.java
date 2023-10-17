@@ -10,10 +10,7 @@ import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
-import fittrack.command.ViewDailyCalorieSurplusLimitCommand;
-import fittrack.command.ViewHeightCommand;
 import fittrack.command.ViewMealsCommand;
-import fittrack.command.ViewWeightCommand;
 import fittrack.command.ViewWorkoutsCommand;
 import fittrack.command.ViewProfileCommand;
 
@@ -23,8 +20,8 @@ import java.util.regex.Pattern;
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
     public static final String ALL_COMMAND_WORDS =
-            "help, exit, editprofile, addmeal, deletemeal, addwork, deletework, " +
-                    "setlimit, listall, listmeals, viewprofile";
+            "help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, " +
+                    "addworkout, deleteworkout, viewworkouts";
 
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
@@ -36,9 +33,7 @@ public class CommandParser {
     public Command parseCommand(String userCommandLine) {
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
-            InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
-            invalidCommand.setArguments(null, this);
-            return invalidCommand;
+            return getInvalidCommand(userCommandLine);
         }
 
         final String word = matcher.group("word").strip();
@@ -48,9 +43,7 @@ public class CommandParser {
         try {
             command.setArguments(args, this);
         } catch (ParseException e) {
-            InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
-            invalidCommand.setArguments(null, this);
-            return invalidCommand;
+            return getInvalidCommand(userCommandLine);
         }
         return command;
     }
@@ -66,12 +59,6 @@ public class CommandParser {
             return new EditProfileCommand();
         case ViewProfileCommand.COMMAND_WORD:
             return new ViewProfileCommand();
-        case ViewHeightCommand.COMMAND_WORD:
-            return new ViewHeightCommand();
-        case ViewWeightCommand.COMMAND_WORD:
-            return new ViewWeightCommand();
-        case ViewDailyCalorieSurplusLimitCommand.COMMAND_WORD:
-            return new ViewDailyCalorieSurplusLimitCommand();
         case AddMealCommand.COMMAND_WORD:
             return new AddMealCommand();
         case DeleteMealCommand.COMMAND_WORD:
@@ -86,7 +73,14 @@ public class CommandParser {
             return new ViewWorkoutsCommand();
         default:
             return new InvalidCommand(word);
+
         }
+    }
+
+    private InvalidCommand getInvalidCommand(String userCommandLine) {
+        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
+        invalidCommand.setArguments(null, this);
+        return invalidCommand;
     }
 
     /**

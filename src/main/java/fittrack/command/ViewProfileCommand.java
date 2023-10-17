@@ -8,7 +8,7 @@ public class ViewProfileCommand extends Command {
             String.format("`%s` shows all profile details.", COMMAND_WORD);
     private static final String USAGE =
             String.format("Type `%s` to view your profile.", COMMAND_WORD);
-    private static final String HELP = DESCRIPTION + "\n" + USAGE;
+    public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     @Override
     public CommandResult execute() {

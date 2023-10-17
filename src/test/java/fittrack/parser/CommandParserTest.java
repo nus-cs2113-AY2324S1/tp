@@ -2,6 +2,7 @@ package fittrack.parser;
 
 import fittrack.UserProfile;
 import fittrack.command.Command;
+import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,37 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CommandParserTest {
 
     @Test
-    void parseCommand() {
+    void parseCommand_emptyString_invalidCommand() {
+        Command command = new CommandParser().parseCommand("");
+        assertInstanceOf(InvalidCommand.class, command);
+    }
+
+    @Test
+    void parseCommand_help_helpCommand() {
+        Command command = new CommandParser().parseCommand("help");
+        assertInstanceOf(HelpCommand.class, command);
+        HelpCommand helpCommand = (HelpCommand) command;
+        assertEquals(HelpCommand.HELP, helpCommand.getHelpMessage());
+    }
+
+    @Test
+    void parseCommand_helpExit_helpCommandExit() {
+        Command command = new CommandParser().parseCommand("help exit");
+        assertInstanceOf(HelpCommand.class, command);
+        HelpCommand helpCommand = (HelpCommand) command;
+        assertEquals(ExitCommand.HELP, helpCommand.getHelpMessage());
+    }
+
+    @Test
+    void parseCommand_exit_exitCommand() {
+        Command command = new CommandParser().parseCommand("exit");
+        assertInstanceOf(ExitCommand.class, command);
+    }
+
+    @Test
+    void parseCommand_foo_invalidCommand() {
+        Command command = new CommandParser().parseCommand("foo");
+        assertInstanceOf(InvalidCommand.class, command);
     }
 
     @Test
@@ -29,7 +60,7 @@ class CommandParserTest {
     }
 
     @Test
-    void parseProfile_h180w80_success() {
+    void parseProfile_h180w80l2000_success() {
         try {
             UserProfile profile = new CommandParser().parseProfile("h/180 w/80 l/2000");
             assertEquals(180., profile.getHeight());

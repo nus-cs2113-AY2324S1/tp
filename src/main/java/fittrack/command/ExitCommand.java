@@ -6,7 +6,7 @@ public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
     private static final String DESCRIPTION = "`" + COMMAND_WORD + "` makes you to exit this program.";
     private static final String USAGE = "Type `exit` to exit.";
-    private static final String HELP = DESCRIPTION + "\n" + USAGE;
+    public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     private static final String MESSAGE_EXIT = "Goodbye! Hope to see you soon!";
 
