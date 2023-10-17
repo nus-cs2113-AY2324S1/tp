@@ -1,11 +1,11 @@
 package seedu.duke.exerciselog;
 
 public class Exercise {
-    private String name;
+    private String exerciseName;
     private int caloriesBurned;
 
-    public Exercise(String name, int caloriesBurned) {
-        this.name = name;
+    public Exercise(String exerciseName, int caloriesBurned) {
+        this.exerciseName = exerciseName;
         this.caloriesBurned = caloriesBurned;
     }
 
@@ -18,7 +18,7 @@ public class Exercise {
     }
 
     public void setExerciseName(String newName) {
-        this.name = newName;
+        this.exerciseName = newName;
     }
 
     public void setCaloriesBurned(int newCalories) {
@@ -26,10 +26,10 @@ public class Exercise {
     }
 
     public String toString() {
-        return "Exercise: " + name + ", Calories Burned: " + Integer.toString(caloriesBurned) + " Calories\n";
+        return "Exercise: " + exerciseName + ", Calories Burned: " + Integer.toString(caloriesBurned) + " Calories\n";
     }
 
     public boolean equals(Exercise e) {
-        return this.name.equals(e.getExerciseName()) && this.caloriesBurned == e.getCaloriesBurned();
+        return this.exerciseName.equals(e.getExerciseName()) && this.caloriesBurned == e.getCaloriesBurned();
     }
 }
