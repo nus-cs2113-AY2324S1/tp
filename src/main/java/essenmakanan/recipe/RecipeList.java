@@ -2,7 +2,7 @@ package essenmakanan.recipe;
 
 import java.util.ArrayList;
 
-public class RecipeList extends ArrayList<Recipe> {
+public class RecipeList {
     private ArrayList<Recipe> recipes;
 
     public RecipeList() {
@@ -23,13 +23,14 @@ public class RecipeList extends ArrayList<Recipe> {
     }
 
     public void deleteRecipe(Recipe recipe) {
-        remove(recipe);
+        recipes.remove(recipe);
     }
 
     public void listRecipes() {
-        for (int i = 0; i < recipes.size(); i++) {
-            System.out.println((i + 1) + ": " + recipes.get(i).getTitle());
-        }
+        int count = 1;
+        for (Recipe recipe : recipes) {
+            System.out.println(count + ". " + recipe);
+            count ++;
     }
 
     public Recipe getRecipeByIndex(int index) {
