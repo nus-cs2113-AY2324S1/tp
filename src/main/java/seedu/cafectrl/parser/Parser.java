@@ -93,7 +93,7 @@ public class Parser {
         Matcher matcher = editDishArgumentsPattern.matcher(arguments);
 
         // Checks whether the overall pattern of edit price arguments is correct
-        if (!matcher.matches()) {
+        if (!matcher.find()) {
             return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE);
         }
 
