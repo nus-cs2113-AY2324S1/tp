@@ -58,7 +58,7 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ListIngredientCommand.COMMAND_WORD:
-            return prepareListIngredient(arguments);
+            return prepareListIngredient(menu, arguments);
 
         case ListMenuCommand.COMMAND_WORD:
             return prepareListMenu();
@@ -159,18 +159,25 @@ public class Parser {
   
     /**
     * Parses arguments in the context of the ListIngredient command.
-    * @param userInput arguments string to parse as index number
+    * @param menu menu of the current session
+    * @param arguments string that matches group arguments
     * @return the prepared command
     */
-    private static Command prepareListIngredient(String userInput) {
-        try {
-            final int listIndex = parseArgsAsDisplayedIndex(userInput, ListIngredientCommand.COMMAND_WORD);
-            return new ListIngredientCommand(listIndex);
-        } catch (ParseException e) {
-            return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + ListIngredientCommand.MESSAGE_USAGE);
-        } catch (NumberFormatException nfe) {
-            return new IncorrectCommand("MESSAGE_INVALID_TASK_DISPLAYED_INDEX");
+    private static Command prepareListIngredient(Menu menu, String arguments) {
+        final Pattern prepareListPattern = Pattern.compile(LIST_INGREDIENTS_ARGUMENT_STRING);
+        Matcher matcher = prepareListPattern.matcher(arguments.trim());
+
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS);
         }
+
+        int dishIndex = Integer.parseInt(matcher.group(1));
+
+        if (!menu.isValidDishIndex(dishIndex)) {
+            return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
+        }
+
+        return new ListIngredientCommand(dishIndex);
     }
 
     /**
