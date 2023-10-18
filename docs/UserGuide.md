@@ -11,7 +11,7 @@ it's your personal guide to achieving your health and fitness goals.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `FitTrack` from [here](https://github.com/AY2324S1-CS2113-W12-4/tp).
+2. Down the latest version of `FitTrack` from [here](https://github.com/AY2324S1-CS2113-W12-4/tp/releases).
 3. You should find the jar file in your default downloads folder. Please place the jar file into a separate folder that will be used as your `home folder`.
 4. Open a command terminal, and change the current working directory to the `home folder`.
 5. Type ```java -jar tp.jar``` in the terminal to open the application. You should see the welcome message "Hi!" on the next line.
@@ -22,14 +22,10 @@ it's your personal guide to achieving your health and fitness goals.
 
 * [Viewing help : `help`](#View-Help-Guide-help)
 * [Exiting the application : `exit`](#Exiting-the-application-exit)
-* [Viewing list of workout : `listWorkout`](#viewing-list-of-all-tasks-listworkout)
+* [Viewing list of workout : `viewWorkout`](#viewing-list-of-all-workouts-viewworkout)
 * [Adding a Meal : `addmeal`](#adding-a-meal-addmeal)
-* [Checking daily calorie surplus limit : `checkcsl`](#check-daily-calorie-surplus-limit-checkcsl)
-* [Checking Your Height : `checkHeight`](#checking-your-height-checkheight)
-* [Checking Your Weight : `checkWeight`](#checking-your-weight-checkheight)
 * [Delete a Meal : `deletemeal`](#delete-a-meal-deletemeal)
-* [Delete a Workout : `deletework`](#delete-a-workout-deletework)
-* [Set Daily Calorie Surplus Limit : `setcsl`](#set-daily-calorie-surplus-limit-setcsl)
+* [Delete a Workout : `deletework`](#delete-a-workout-deleteworkout)
 
 
 ### View Help Guide: `help`
@@ -43,9 +39,10 @@ help
 
 **Expected output:**
 ```
-Help List:
-    1.
-    2.
+`help` shows help message of the command.
+Existing commands:
+help, exit, editprofile, viewprofileaddmeal, deletemeal, viewmealsaddworkout, deleteworkout, viewworkouts
+Type `help` or `help <COMMAND>` to view help.
 ```
 
 ### Exiting the application: `exit`
@@ -59,115 +56,72 @@ exit
 
 **Expected output:**
 ```
-Saving...
 Goodbye! Hope to see you again soon!
 ```
 
-### Viewing List of All Workouts: `listWorkout`
+### Viewing List of All Workouts: `viewWorkout`
 Lists all the workouts.
 
-Format: `listWorkout`
+Format: `viewworkouts`
 
 **Example of usage:**
 ```
-listWorkout
+viewworkouts
 ```
 
 **Expected output:**
 ```
-Here are your workouts:
-1. Leg day
-2. Walk
-3. Run
+These are the workouts you have done:
+
 ```
 
 ### Editing Your Profile: `editProfile`
 Allows user to edit their profile details.
 
-Format: `editProfile`
+Format: `editProfile h/<height> w/<weight> l/<calories>`
 
 Example of usage: 
 ```
-editProfile
+editProfile h/170 w/70 l/100
 ```
 Expected output:
 ```
-Done! I have edited your profile!
-Name: John
-Height: 180 cm
-Weight: 70 kg
+I've edited the following:
+Height: 170.0
+Weight: 70.0
+Daily calorie limit: 100.0
 ```
 
 ### Adding a Meal: `addmeal`
 Allows user to add meals they have consumed.
 
-Format: `addmeal <description>`
+Format: `addmeal <meal> /cals <calories>`
 
 Example of usage:
 ```
-addmeal pasta
+addmeal pasta /cals 200
 ```
 Expected output:
 ```
-Done! I have added a meal:
- 1. pasta
+I've added the following meal:
+Meal name: pasta 
+Calories: 200.0
 ```
 
 ### Adding a Workout: `addworkout`
 Allows user to add workouts they have done.
 
-Format: `addworkout <description>`
+Format: `addworkout <workout> /cals <calories>`
 
 Example of usage:
 ```
-addmeal run
+addworkout running /cals 180
 ```
 Expected output:
 ```
-Done! I have added a workout:
- 1. run
-```
-
-### Check Daily Calorie Surplus Limit: `checkcsl`
-Allows user to check their daily calorie surplus limit.
-
-Format: `checkcsl`
-
-Example of usage:
-```
-checkcsl
-```
-Expected output:
-```
-Daily Calorie Surplus Limit: 200 cal
-```
-
-### Checking Your Height: `checkHeight`
-Allows user to check their current height in cm.
-
-Format: `checkHeight`
-
-Example of usage:
-```
-checkHeight
-```
-Expected output:
-```
-Your current height is 180 cm
-```
-
-### Checking Your Weight: `checkWeight`
-Allows user to check their current weight in kg.
-
-Format: `checkWeight`
-
-Example of usage:
-```
-checkWeight
-```
-Expected output:
-```
-Your current weight is 70 kg
+I've added the following workout:
+Workout name: running 
+Calories: 180.0
 ```
 
 ### Delete a Meal: `deletemeal`
@@ -181,35 +135,23 @@ deletemeal 1
 ```
 Expected output:
 ```
-Sure! I've removed pasta from the list.
+I've deleted the following meal:
+Meal name: pasta 
+Calories: 200.0
 ```
 
-### Delete a Workout: `deletework`
+### Delete a Workout: `deleteworkout`
 Allows user to delete a workout they have added.
 
-Format: `deletework <index of workout>`
+Format: `deleteworkout <index of workout>`
 
 Example of usage:
 ```
-deletemeal 1
+deleteworkout 1
 ```
 Expected output:
 ```
-Sure! I've removed run from the list.
-```
-
-### Set Daily Calorie Surplus Limit: `setcsl`
-Allows user to set their daily calorie surplus limit.
-
-Format: `setcsl`
-
-Example of usage:
-```
-setcsl
-```
-Expected output:
-```
-Daily Calorie Surplus Limit set to 200 cal
+I've deleted workout 1
 ```
 
 ## FAQ
@@ -222,13 +164,9 @@ Daily Calorie Surplus Limit set to 200 cal
 
 * Add Meal `addmeal`
 * Add Work `addwork`
-* Check Daily Calorie Surplus Limit `checkcsl`
-* Check Height `checkHeight`
-* Check Weight `checkWeight`
 * Delete Meal `deletemeal`
 * Delete Work `deletework`
 * Edit Profile `editProfile`
 * Exit Application `bye`
 * Help List `help`
-* List all workouts `listWorkout`
-* Set Daily Calorie Surplus Limit `setcsl`
+* List all workouts `viewworkout`
