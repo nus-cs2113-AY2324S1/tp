@@ -10,14 +10,22 @@ public class CommandEdit extends Command {
     private int qnIndex;
     private String newDescription;
     private String newAnswer;
+
+    private String GetContentFromUserInput(String userInput, String keyWord) throws ArrayIndexOutOfBoundsException {
+        String content;
+        content = userInput.split(keyWord)[1].strip();
+        if (content.isEmpty()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return content;
+    }
+
     public CommandEdit(String userInput) {
         super(CommandType.EDIT);
         String[] editDetails;
-        String[] editInfo;
         try {
-            editDetails = userInput.split("edit")[1].strip().split("/");
-            qnIndex = Integer.parseInt(editDetails[0].strip());
-            editInfo = editDetails[1].strip().split(" ");
+            editDetails = userInput.split(" ");
+            qnIndex = Integer.parseInt(editDetails[1].strip());
         } catch (NumberFormatException incompleteCommand) {
             System.out.println("    Ono! You did not indicate the index of the question you wish to edit :<");
             System.out.println("    Please format your input as edit [question number] /description [description] " +
@@ -30,16 +38,13 @@ public class CommandEdit extends Command {
             return;
         }
         try {
-            String editCriteria = editInfo[0].strip();
-            String editContent = editInfo[1].strip();
+            String editCriteria = editDetails[2].strip();
             switch (editCriteria){
-            case "description":
-                newDescription = editContent;
-                newAnswer = "";
+            case "/description":
+                newDescription = GetContentFromUserInput(userInput, "/description");
                 break;
-            case "answer":
-                newDescription = "";
-                newAnswer = editContent;
+            case "/answer":
+                newAnswer = GetContentFromUserInput(userInput, "/answer");
                 break;
             default:
                 throw new ArrayIndexOutOfBoundsException();

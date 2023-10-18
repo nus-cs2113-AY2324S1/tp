@@ -76,7 +76,7 @@ public class Question {
         return qnType;
     }
     public void editQuestion(String newDescription, String newAnswer){
-        if(!newDescription.isEmpty()){
+        if(null != newDescription){
             this.description = newDescription;
         }
     }

@@ -24,7 +24,7 @@ public class CommandHelp extends Command{
         System.out.println("    3. list - shows the list of questions and answers");
         System.out.println("    4. delete [question number] - deletes the question and answer at the specified number");
         System.out.println("    5. find /[description] - displays all questions that contains the the specified description");
-        System.out.println("    6. edit [question number] /question - edits the question with the specified number");
+        System.out.println("    6. edit [question number] /description - edits the question with the specified number");
         System.out.println("    7. edit [question number] /answer - edits the answer to the question with the specified number");
         System.out.println("    8. start - starts the quiz");
         System.out.println("    9. bye - exits the program");  

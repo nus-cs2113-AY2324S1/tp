@@ -334,8 +334,6 @@ public class QuestionList {
             String correctAnswer = getAnswerByIndex(i + 1).strip(); // Get the correct answer by index
             String userAnswer = ui.getUserInput().strip();
 
-            System.out.println(correctAnswer + "\n" + userAnswer);
-
             if (userAnswer.equalsIgnoreCase(correctAnswer)) {
                 System.out.println("    Correct!");
                 correctAnswers++;
