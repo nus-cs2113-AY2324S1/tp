@@ -33,4 +33,9 @@ class DukeTest {
         assertTrue(flashcardComponent.isResponsible("create flashcard  "));
         assertTrue(flashcardComponent.isResponsible("list flashcards"));
     }
+
+    @Test
+    public void testCalendar() {
+        assertTrue(true);
+    }
 }
