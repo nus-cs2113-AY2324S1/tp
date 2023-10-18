@@ -3,20 +3,22 @@ package cashleh;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Class used in runtest.sh() to replace placeholder <code>CURRENT_DATE</code>to current date in EXPECTED.TXT
+ * Class used in runtest.sh() to dynamically update <code>CURRENT_DATE</code>to current date in EXPECTED.TXT
  */
 
 public class CurrentDate {
     public static void main(String[] args) throws IOException {
-        String currentDirectory = System.getProperty("user.dir");
+        Path currentDirectory = Paths.get(System.getProperty("user.dir"));
 
         // Define the path to EXPECTED-TXT file
-        Path expectedFilePath = Path.of(currentDirectory + "/EXPECTED.TXT");
+        String fileName = "EXPECTED.TXT";
+        Path expectedFilePath = currentDirectory.resolve(fileName);
 
         // Read the content of the EXPECTED-TXT file
         List<String> lines = Files.readAllLines(expectedFilePath);
