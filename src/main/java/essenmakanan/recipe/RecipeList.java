@@ -23,7 +23,7 @@ public class RecipeList {
     }
 
     public void deleteRecipe(Recipe recipe) {
-        remove(recipe);
+        recipes.remove(recipe);
     }
 
     public void viewAllRecipes() {
