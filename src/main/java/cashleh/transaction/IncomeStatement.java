@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class IncomeStatement {
     private final ArrayList<Income> incomeStatement = new ArrayList<>();
-    private final Ui ui = new Ui();
     public IncomeStatement() {}
     public IncomeStatement(Income... incomes) {
         incomeStatement.addAll(List.of(incomes));

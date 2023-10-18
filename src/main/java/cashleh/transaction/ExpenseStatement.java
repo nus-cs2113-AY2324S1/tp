@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class ExpenseStatement {
     private final ArrayList<Expense> expenseStatement = new ArrayList<>();
-    private final Ui ui = new Ui();
     public ExpenseStatement() {
     }
     public ExpenseStatement(Expense... expenses) {

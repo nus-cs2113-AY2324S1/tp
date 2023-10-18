@@ -1,10 +1,9 @@
-package cashleh;
+package cashleh.parser;
 
 import cashleh.transaction.Expense;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.Income;
 import cashleh.transaction.IncomeStatement;
-import exceptions.CashLehException;
 import exceptions.CashLehParsingException;
 import cashleh.commands.Command;
 import cashleh.commands.AddIncome;
@@ -14,6 +13,9 @@ import cashleh.commands.ViewExpenses;
 import cashleh.commands.DeleteExpense;
 import cashleh.commands.DeleteIncome;
 import cashleh.commands.Exit;
+
+import java.time.LocalDate;
+import java.util.HashMap;
 
 public class Parser {
     private static final String ADD_INCOME = "addIncome";
@@ -32,7 +34,7 @@ public class Parser {
         this.incomeStatement = incomeStatement;
     }
 
-    public Command parse(String input) throws CashLehException {
+    public Command parse(String input) throws CashLehParsingException {
         String command = input.contains(" ") ? input.split(" ")[0] : input;
         switch (command) {
         case ADD_INCOME:
@@ -52,69 +54,64 @@ public class Parser {
         case EXIT:
             return new Exit();
         default:
-            throw new CashLehException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
+            throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
     }
 
 
     private Expense getExpense(String input) throws CashLehParsingException {
-        if (!input.contains("/amt")) {
-            throw new CashLehParsingException("Please enter a proper amount using '/amt'.");
-        }
-        if (!input.contains("/date")) {
-            throw new CashLehParsingException("Please enter a date using '/date'.");
-        }
-        String[] expenseInfo = input.substring(ADD_EXPENSE.length() + 1).split("/amt", 2);
-        String expenseName = expenseInfo[0].trim();
-        String expenseInfoSubString = expenseInfo[1].trim();
-        String[] expenseInfoSubStringSplit = expenseInfoSubString.split("/date", 2);
-        String expenseAmtString = expenseInfoSubStringSplit[0].trim();
-        String expenseDateString = expenseInfoSubStringSplit[1].trim();
+        String[] format = {ADD_EXPENSE, "/amt", "/date:optional"};
+        HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
+        String expenseName = inputDetails.get(ADD_EXPENSE);
+        String expenseAmtString = inputDetails.get("/amt");
+        String expenseDateString = inputDetails.get("/date");
+
         if (expenseName.isEmpty()) {
             throw new CashLehParsingException(
                 "Oopsie! An expense without a description is like a CashLeh transaction without its story - not as fun!"
             );
         }
-        if (expenseAmtString.isEmpty()) {
-            throw new CashLehParsingException(
-                "Oopsie! An expense without the amount is like a wallet without cash, so not 'CashLeh'!"
-            );
-        }
-
         double expenseAmt;
         try {
             expenseAmt = Double.parseDouble(expenseAmtString);
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Please enter a valid expense amount!");
         }
-        return new Expense(expenseName, expenseAmt);
+
+        // default to current date if no date is specified
+        if (expenseDateString == null || expenseDateString.isEmpty()) {
+            return new Expense(expenseName, expenseAmt);
+        }
+        LocalDate parsedDate = DateParser.parse(expenseDateString);
+        return new Expense(expenseName, expenseAmt, parsedDate);
     }
 
     private Income getIncome(String input) throws CashLehParsingException {
-        if (!input.contains("/amt")) {
-            throw new CashLehParsingException("Please enter a proper amount using '/amt'.");
-        }
-        String[] incomeInfo = input.substring(ADD_INCOME.length() + 1).split("/amt", 2);
-        String incomeName = incomeInfo[0].trim();
-        String incomeAmtString = incomeInfo[1].trim();
+        String[] format = {ADD_INCOME, "/amt", "/date:optional"};
+        HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
+        String incomeName = inputDetails.get(ADD_INCOME);
+        String incomeAmtString = inputDetails.get("/amt");
+        String incomeDateString = inputDetails.get("/date");
+
         if (incomeName.isEmpty()) {
             throw new CashLehParsingException(
-                "Oopsie! An income without a description is like a CashLeh transaction without its story - not as fun!"
+                    "Oopsie! An income without a description is like a CashLeh transaction without " +
+                            "its story - not as fun!"
             );
         }
-        if (incomeAmtString.isEmpty()) {
-            throw new CashLehParsingException(
-                "Oopsie! An income without the amount is like a wallet without cash, so not 'CashLeh'!"
-            );
-        }
-
         double incomeAmt;
         try {
             incomeAmt = Double.parseDouble(incomeAmtString);
         } catch (NumberFormatException e) {
-            throw new CashLehParsingException("Please enter a valid income amount!");
+            throw new CashLehParsingException("Please enter a valid expense amount!");
         }
-        return new Income(incomeName, incomeAmt);
+
+        // default to current date if no date is specified
+        if (incomeDateString == null || incomeDateString.isEmpty()) {
+            return new Income(incomeName, incomeAmt);
+        }
+        LocalDate parsedDate = DateParser.parse(incomeDateString);
+        return new Income(incomeName, incomeAmt, parsedDate);
     }
 
     private Command getDeleteTransaction(String input, String transactionType) throws CashLehParsingException {

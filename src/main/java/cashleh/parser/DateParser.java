@@ -1,4 +1,4 @@
-package cashleh;
+package cashleh.parser;
 
 import exceptions.CashLehDateParsingException;
 

@@ -3,7 +3,7 @@ package cashleh.commands;
 import cashleh.transaction.ExpenseStatement;
 
 public class ViewExpenses extends Command {
-    private ExpenseStatement expenseStatement;
+    private final ExpenseStatement expenseStatement;
 
     public ViewExpenses(ExpenseStatement expenseStatement) {
         this.expenseStatement = expenseStatement;
