@@ -86,7 +86,8 @@ public class Parser {
 
         // Checks whether the overall pattern of add arguments is correct
         if (!matcher.matches()) {
-            return new IncorrectCommand("Error: Incorrect format for the add command.");
+            return new IncorrectCommand("Error: Incorrect format for the add command.\n"
+                    + AddDishCommand.MESSAGE_USAGE);
         }
 
         try {
@@ -105,7 +106,8 @@ public class Parser {
 
             return new AddDishCommand(dish);
         } catch (Exception e) {
-            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT");
+            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
+                    + AddDishCommand.MESSAGE_USAGE);
         }
     }
 
@@ -123,7 +125,8 @@ public class Parser {
             Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredientText);
 
             if (!ingredientMatcher.matches()) {
-                return new IncorrectCommand("Error: Incorrect format for the ingredients");
+                return new IncorrectCommand("Error: Incorrect format for the ingredients\n"
+                        + AddDishCommand.MESSAGE_USAGE);
             }
 
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
