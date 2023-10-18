@@ -29,8 +29,8 @@ import java.util.regex.Pattern;
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
     public static final String ALL_COMMAND_WORDS = "help, exit, " +
-            "editprofile, viewprofile" +
-            "addmeal, deletemeal, viewmeals" +
+            "editprofile, viewprofile, " +
+            "addmeal, deletemeal, viewmeals, " +
             "addworkout, deleteworkout, viewworkouts";
   
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
@@ -56,6 +56,9 @@ public class CommandParser {
         final String args = matcher.group("args").strip();
 
         Command command = getBlankCommand(word);
+        if (command instanceof InvalidCommand) {
+            return getInvalidCommand(userCommandLine);
+        }
         try {
             command.setArguments(args, this);
         } catch (ParseException e) {
@@ -89,14 +92,14 @@ public class CommandParser {
         case ViewWorkoutsCommand.COMMAND_WORD:
             return new ViewWorkoutsCommand();
         default:
-            return new InvalidCommand(word);
+            return new InvalidCommand();
 
         }
     }
 
     private InvalidCommand getInvalidCommand(String userCommandLine) {
-        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
-        invalidCommand.setArguments(null, this);
+        InvalidCommand invalidCommand = new InvalidCommand();
+        invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
 
