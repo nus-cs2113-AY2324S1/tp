@@ -39,9 +39,9 @@ public class ExpenseManager extends Commands{
     /**
      * This method extracts the fields of the expense.
      *
-     * @param details
-     * @return
-     * @throws KaChinnnngException
+     * @param details String containing the details of the expense
+     * @return expenseFields HashMap containing the fields of the income
+     * @throws KaChinnnngException if there is an error in the command
      */
     private HashMap<String, String> extractExpenseFields(String details) throws KaChinnnngException{
         HashMap<String,String> expenseFields = new HashMap<>();
