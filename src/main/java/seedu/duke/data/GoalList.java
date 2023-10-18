@@ -29,7 +29,6 @@ public class GoalList {
     }
 
     /**
-     *
      * @param index points to the target gaol at the goal list
      */
     public void deleteGoal(int index) {
@@ -40,26 +39,27 @@ public class GoalList {
     }
 
     /**
-     *The userCmd should be like: set 1234 on Date
+     * The userCmd should be like: set 1234 on Date
      * @param userCmd represents the raw userInput
-     * @throws IncorrectFormatException checks if the user Input is valid
-     * by 1. check if the length of the command equals 4
-     *    2. detect keywords "set", "on", etc.
-     *    3. check if user inputs a calories number at valid range
+     * @throws IncorrectFormatException checks if the user Input is valid by:
+     * 1. check if the length of the command equals 4
+     * 2. detect keywords "set", "on", etc.
+     * 3. check if user inputs a calories number at valid range
      */
     private void checkGoalInput(String userCmd) throws IncorrectFormatException, NumberFormatException {
 
         String[] cmdSplit = userCmd.split(" ");
         if (cmdSplit.length != 4) {
-            throw new IncorrectFormatException("Goal message contain extra data. Please provides with only relevant information.");
+            throw new IncorrectFormatException("Goal message contain extra data. Please "
+                    + "provides with only relevant information.");
         }
 
         if (!cmdSplit[0].equals(GOAL_KEYWORD) ) {
-            throw new IncorrectFormatException("Sorry. I cannot detect the '" + GOAL_KEYWORD + "' keyword. Please try again." );
+            throw new IncorrectFormatException("Sorry. I cannot detect the '" + GOAL_KEYWORD + "' keyword." );
         }
 
         if (!cmdSplit[2].equals(DATE_KEYWORD)) {
-            throw new IncorrectFormatException("Sorry. I cannot detect the '" + DATE_KEYWORD + "' keyword. Please try again." );
+            throw new IncorrectFormatException("Sorry. I cannot detect the '" + DATE_KEYWORD + "' keyword." );
         }
 
 
