@@ -11,6 +11,8 @@ import seedu.cafectrl.command.ListMenuCommand;
 
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.UserOutput;
 
 import java.util.ArrayList;
@@ -23,14 +25,26 @@ import java.text.ParseException;
  * into a format that can be interpreted by other core classes
  */
 public class Parser {
-    public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
 
     // Command Argument Patterns
-    private static final String ADD_ARGUMENT_STRING = "name/(\\w+) price/(\\d+(\\.\\d+)?)"
-                                                        + " (ingredient/\\w+ qty/\\d+(\\.\\d+)?(?:, )?)+";
+    public static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<name>[A-Za-z0-9\\s]+) "
+            + "qty/(?<qty>[A-Za-z0-9\\s]+)";
+    public static final String INGREDIENT_DIVIDER_REGEX = ", ";
+    public static final String INGREDIENT_DIVIDER_STRING = ",";
+    public static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "name";
+    public static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "qty";
+    public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
+    public static final int PRICE_MATCHER_GROUP_NUM = 2;
+    public static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
+    private static final String ADD_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
+            + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
+            + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
+            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
+
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -116,47 +130,63 @@ public class Parser {
         Matcher matcher = addArgumentPatter.matcher(arguments);
 
         // Checks whether the overall pattern of add arguments is correct
-        if (matcher.matches()) {
-            return new IncorrectCommand("Error: Missing arguments for the add command.");
+        if (!matcher.matches()) {
+            return new IncorrectCommand("Error: Incorrect format for the add command.\n"
+                    + AddDishCommand.MESSAGE_USAGE);
         }
 
         try {
             // To retrieve specific arguments from arguments
-            String dishName = matcher.group(1);
-            float price = Float.parseFloat(matcher.group(2));
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
+            float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_NUM));
+            String ingredientsListString = matcher.group(INGREDIENT_LIST_MATCHER_GROUP_NUM);
 
-            // Capture the list of ingredients and quantities
-            ArrayList<String> ingredients = new ArrayList<>();
-            ArrayList<String> quantities = new ArrayList<>();
+            // Capture the list of ingredients
+            ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-            // Find all matches for ingredients and quantities
-            Pattern ingredientPattern = Pattern.compile("ingredient/([A-Za-z]+) qty/([A-Za-z]+)");
-            Matcher ingredientMatcher = ingredientPattern.matcher(arguments);
-
-            while (ingredientMatcher.find()) {
-                String ingredient = ingredientMatcher.group(1);
-                String quantity = ingredientMatcher.group(2);
-                ingredients.add(ingredient);
-                quantities.add(quantity);
+            IncorrectCommand incorrectCommand = ingredientParsing(ingredientsListString, ingredients);
+            if (incorrectCommand != null) {
+                return incorrectCommand;
             }
 
-            // Todo: Implement error handling for checking the size of ingredients quantities
-            // I am not sure if this is necessary as we have already checked
-            // the overall command pattern in line 62
+            Dish dish = new Dish(dishName, ingredients, price);
 
-            // Todo: Add the attributes in AddDishCommand
-            // Todo: Overload the constructor of Dish such that
-            // it can take in ingredients list and quantities list
-            // and create an arrayList of ingredient objects
-            // return new AddDishCommand(dishName, price, ingredients, quantities);
+            return new AddDishCommand(dish);
         } catch (Exception e) {
-            // Todo: Add error handling for invalid price type etc.
+            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
+                    + AddDishCommand.MESSAGE_USAGE);
+        }
+    }
+
+    private static IncorrectCommand ingredientParsing(String ingredientsListString, ArrayList<Ingredient> ingredients) {
+        String[] ingredientListInputText = {ingredientsListString};
+
+        //check if there is more than 1 ingredient
+        if (ingredientsListString.contains(INGREDIENT_DIVIDER_STRING)) {
+            //split the ingredients into separate individual ingredients
+            ingredientListInputText = ingredientsListString.split(INGREDIENT_DIVIDER_REGEX);
         }
 
-        return new IncorrectCommand("The specific details are " +
-                "to be implemented by Dexter");
+        for (String inputIngredientText: ingredientListInputText) {
+            final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
+            Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredientText);
+
+            if (!ingredientMatcher.matches()) {
+                return new IncorrectCommand("Error: Incorrect format for the ingredients\n"
+                        + AddDishCommand.MESSAGE_USAGE);
+            }
+
+            String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
+            String ingredientQty = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+
+            Ingredient ingredient = new Ingredient(ingredientName, ingredientQty);
+
+            ingredients.add(ingredient);
+        }
+        return null;
     }
-  
+
+
     /**
     * Parses arguments in the context of the ListIngredient command.
     * @param userInput arguments string to parse as index number
