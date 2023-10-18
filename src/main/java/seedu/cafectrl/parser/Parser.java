@@ -176,15 +176,22 @@ public class Parser {
     /**
      * Parses arguments in the context of the Delete command.
      *
-     * @param userInput Input from the user
+     * @param arguments Input from the user
      * @return Command to be executed
      */
-    private static Command prepareDelete(String userInput) {
+    private static Command prepareDelete(String arguments) {
+        Pattern deleteDishArgumentsPattern = Pattern.compile(DELETE_ARGUMENT_STRING);
+        Matcher matcher = deleteDishArgumentsPattern.matcher(arguments.trim());
+
+        // Checks whether the overall pattern of delete price arguments is correct
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_DELETE);
+        }
+
         try {
-            final int listIndex = parseArgsAsDisplayedIndex(userInput, DeleteDishCommand.COMMAND_WORD);
+            int listIndexArgGroup = 1;
+            int listIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
             return new DeleteDishCommand(listIndex);
-        } catch (ParseException e) {
-            return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + DeleteDishCommand.MESSAGE_USAGE);
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand("MESSAGE_INVALID_TASK_DISPLAYED_INDEX");
         }
