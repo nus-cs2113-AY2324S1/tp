@@ -1,5 +1,6 @@
 package fittrack.parser;
 
+import fittrack.Meal;
 import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
@@ -36,6 +37,10 @@ public class CommandParser {
     );
     private static final Pattern PROFILE_PATTERN = Pattern.compile(
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)\\s+l/(?<calLimit>\\S+)"
+    );
+
+    private static final Pattern ADDMEAL_PATTERN = Pattern.compile(
+            "(?<name>\\S+)\\s+c/(?<calories>\\S+)"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -119,7 +124,25 @@ public class CommandParser {
         }
     }
 
-    // TODO: Make a parse method for a meal.
+    public Meal parseAddMeal(String addMeal) throws PatternMatchFailException, NumberFormatException {
+        final Matcher matcher = ADDMEAL_PATTERN.matcher(addMeal);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        final String name = matcher.group("name");
+        final String calories = matcher.group("calories");
+
+        try {
+            return new Meal(
+                    name,
+                    Double.parseDouble(calories)
+            );
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+    }
+
 
     // TODO: Make a parse method for a work.
 

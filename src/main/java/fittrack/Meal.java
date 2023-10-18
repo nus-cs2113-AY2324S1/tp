@@ -4,7 +4,7 @@ public class Meal {
     private String name;
     private double calories;
 
-    public Meal(String name, float calories) {
+    public Meal(String name, double calories) {
         this.name = name;
         this.calories = calories;
     }
