@@ -17,31 +17,31 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	job (amount: 3000.0)
+	job (amount: 3000.0, date: 2020-01-01)
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	side hustle (amount: 500.0)
+	side hustle (amount: 500.0, date: <<CURRENT_DATE>>)
 	____________________________________________________________
 	____________________________________________________________
 	The current sum of all your incomes amounts to: 3500.0
-		1.job (amount: 3000.0)
-		2.side hustle (amount: 500.0)
+		1.job (amount: 3000.0, date: 2020-01-01)
+		2.side hustle (amount: 500.0, date: <<CURRENT_DATE>>)
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
-	dinner (amount: 50.0)
+	dinner (amount: 50.0, date: <<CURRENT_DATE>>)
 	____________________________________________________________
 	____________________________________________________________
 	No such transaction recorded leh!
 	____________________________________________________________
 	____________________________________________________________
 	Noted! CashLeh has removed the following income:
-	side hustle (amount: 500.0)
+	side hustle (amount: 500.0, date: <<CURRENT_DATE>>)
 	____________________________________________________________
 	____________________________________________________________
 	The current sum of all your incomes amounts to: 3000.0
-		1.job (amount: 3000.0)
+		1.job (amount: 3000.0, date: 2020-01-01)
 	____________________________________________________________
 	____________________________________________________________
 	Aiyoh! Your input blur like sotong... Clean your input for CashLeh!
