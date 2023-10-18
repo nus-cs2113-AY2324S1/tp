@@ -56,7 +56,6 @@ public class EssenMakanan {
         ui.start();
 
         Scanner in = new Scanner(System.in);
-        Scanner in2 = new Scanner(System.in);
 
         String functionInput;
         String input;
@@ -87,7 +86,7 @@ public class EssenMakanan {
                 break;
             }
 
-            input = in2.nextLine();
+            input = in.nextLine();
             String[] parsedInput = input.split(" ", 2);
             String commandType = parsedInput[0];
             String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
@@ -98,8 +97,9 @@ public class EssenMakanan {
                 validInput = handleIngredientFunctions(ingredients, commandType, inputDetail);
             }
             ui.drawDivider();
-        } while (!input.equals(EXIT) || validInput);
+        } while (!input.equals(EXIT) && validInput);
 
+        in.close();
         ui.bye();
     }
 }
