@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * storage for flashcards
- * Flashcard implementation should be finished first
+ * One storage manages one file
  */
 public class FlashcardStorage {
     // simply implemented for save & load first
@@ -24,6 +24,17 @@ public class FlashcardStorage {
     }
 
 
+    public boolean isStorageAvailable(){
+        File f = new File(this.path);
+        return f.exists();
+    }
+    
+    /**
+     * load a flash card from certain format
+     * Tokens includes attributes of Flashcard
+     * @param tokens
+     * @return Flashcard object
+     */
     private Flashcard loadFlashcard(String[] tokens){
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
@@ -56,6 +67,12 @@ public class FlashcardStorage {
         return flashcard;
     }
 
+    /**
+     * load list of flashcards
+     * from this.path
+     * @return list of Flashcards
+     * @throws FileNotFoundException
+     */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
@@ -84,4 +101,9 @@ public class FlashcardStorage {
             System.out.println("Failed to save.");
         }
     }
+
+
+
+
+
 }

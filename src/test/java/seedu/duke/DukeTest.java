@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.flashcard.FlashcardComponent;
+import seedu.duke.flashcard.FlashcardStorage;
 
 import java.util.ArrayList;
 
@@ -32,5 +33,18 @@ class DukeTest {
         assertTrue(flashcardComponent.isResponsible("create flashcard"));
         assertTrue(flashcardComponent.isResponsible("create flashcard  "));
         assertTrue(flashcardComponent.isResponsible("list flashcards"));
+    }
+
+    @Test
+    public void testFlashcardStorage_isAvailable(){
+        FlashcardComponent flashcardComponent = new FlashcardComponent(
+                new ArrayList<>());
+        FlashcardStorage storage = flashcardComponent.getStorage();
+        assertTrue(storage.isStorageAvailable());
+    }
+
+    @Test
+    public void testCalendar() {
+        assertTrue(true);
     }
 }

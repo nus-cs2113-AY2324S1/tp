@@ -20,7 +20,11 @@ public class FlashcardComponent {
         parser = new FlashcardCommandParser();
 
         //@@author junhyeong0411
-        storage = new FlashcardStorage("./flashcard.txt");
+
+        FlashcardDirectory flashcarddirectory = new FlashcardDirectory();
+        flashcarddirectory.listFlashcardFiles();
+
+        storage = new FlashcardStorage("./data/flashcard.txt");
         try {
             flashcardList = storage.loadFlashcards();
             System.out.println("Loading existed File");
@@ -33,6 +37,12 @@ public class FlashcardComponent {
         ui = new FlashcardUi(flashcardList);
     }
 
+    //@@author junhyeong0411
+    public FlashcardStorage getStorage(){
+        return this.storage;
+    }
+
+    //@@author wendelinwemhoener
     public boolean isResponsible(String input) {
         FlashcardCommand command = parser.parseInput(input);
 
