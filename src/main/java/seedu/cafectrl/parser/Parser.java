@@ -144,12 +144,17 @@ public class Parser {
             float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_NUM));
             String ingredientsListString = matcher.group(INGREDIENT_LIST_MATCHER_GROUP_NUM);
 
+            IncorrectCommand incorrectCommand1 = checkNegativePrice(price);
+            if (incorrectCommand1 != null) {
+                return incorrectCommand1;
+            }
+
             // Capture the list of ingredients
             ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-            IncorrectCommand incorrectCommand = ingredientParsing(ingredientsListString, ingredients);
-            if (incorrectCommand != null) {
-                return incorrectCommand;
+            IncorrectCommand incorrectCommand2 = ingredientParsing(ingredientsListString, ingredients);
+            if (incorrectCommand2 != null) {
+                return incorrectCommand2;
             }
 
             Dish dish = new Dish(dishName, ingredients, price);
@@ -159,6 +164,14 @@ public class Parser {
             return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
                     + AddDishCommand.MESSAGE_USAGE);
         }
+    }
+
+    private static IncorrectCommand checkNegativePrice(float price) {
+        if (price < 0) {
+            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
+                    + AddDishCommand.MESSAGE_USAGE);
+        }
+        return null;
     }
 
     private static IncorrectCommand ingredientParsing(String ingredientsListString, ArrayList<Ingredient> ingredients) {
