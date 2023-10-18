@@ -14,7 +14,7 @@ import cashleh.commands.ViewExpenses;
 import cashleh.commands.ViewIncomes;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.IncomeStatement;
-import exceptions.CashLehException;
+import cashleh.exceptions.CashLehException;
 
 public class ParserTest {
     ExpenseStatement expenseStatement = new ExpenseStatement();
