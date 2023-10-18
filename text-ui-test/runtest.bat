@@ -13,7 +13,7 @@ for /f "tokens=*" %%a in (
 )
 
 java -jar %jarloc% < ..\..\text-ui-test\input.txt > ..\..\text-ui-test\ACTUAL.TXT
-java -cp ..\build/libs\cashleh.jar cashleh.CurrentDate
+java -cp ..\build\libs\cashleh.jar cashleh.CurrentDate
 
 cd ..\..\text-ui-test
 
