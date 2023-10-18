@@ -8,12 +8,10 @@ import fittrack.parser.PatternMatchFailException;
 
 public class AddMealCommand extends Command {
     public static final String COMMAND_WORD = "addmeal";
-
     private static final String DESCRIPTION =
-            "Add in your meals and their calories!";
-
+            String.format("`%s` adds your daily meal data to the list.", COMMAND_WORD);
     private static final String USAGE =
-            String.format("Type `%s` <mealName> c/<calories> to add your meal.", COMMAND_WORD);
+            String.format("Type `%s <MEAL_NAME> c/<CALORIES>` to add a meal.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     private Meal newMeal;
@@ -26,15 +24,12 @@ public class AddMealCommand extends Command {
 
     @Override
     public void setArguments(String args, CommandParser parser)
-            throws NumberFormatException, PatternMatchFailException {
-
-        newMeal = parser.parseAddMeal(args);
-
+            throws PatternMatchFailException, NumberFormatException {
+        newMeal = parser.parseMeal(args);
     }
 
     @Override
     protected String getHelp() {
-        // TODO: Write help. Refer to HelpCommand or ViewMealsCommand.
         return HELP;
     }
 }
