@@ -38,18 +38,6 @@ public class Month {
         return dates.get(day - 1).getNumberOfExercises();
     }
 
-    public ArrayList<Exercise> getExercisesForDay(int day) {
-        return dates.get(day - 1).getExercises();
-    }
-
-    public ArrayList<ArrayList<Exercise>> getExercisesForMonth() {
-        ArrayList<ArrayList<Exercise>> allExercisesForMonth = new ArrayList<>();
-        for (int i = 0; i < dates.size(); i++) {
-            allExercisesForMonth.add(this.getExercisesForDay(i));
-        }
-        return allExercisesForMonth;
-    }
-
     public String getName() {
         return name;
     }

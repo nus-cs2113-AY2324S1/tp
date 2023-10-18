@@ -45,14 +45,6 @@ public class Log {
         return exerciseLog.get(month - 1).getTotalNumberOfExercisesForDay(day);
     }
 
-    public ArrayList<Exercise> getExercisesForDay(int month, int day) {
-        return exerciseLog.get(month - 1).getExercisesForDay(day);
-    }
-
-    public ArrayList<ArrayList<Exercise>> getExercisesForMonth(int month) {
-        return exerciseLog.get(month - 1).getExercisesForMonth();
-    }
-
     public Month getMonth(int month) {
         return exerciseLog.get(month - 1);
     }

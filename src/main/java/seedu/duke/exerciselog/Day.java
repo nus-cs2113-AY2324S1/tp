@@ -20,7 +20,7 @@ public class Day {
     }
 
     public Exercise getExercise(int index) {
-        return exercises.get(index);
+        return exercises.get(index - 1);
     }
 
     public Integer getNumberOfExercises() {
