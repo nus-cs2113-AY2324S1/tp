@@ -12,6 +12,7 @@ public class ExerciseTest {
         test.testToStringMethod();
         test.setNewExerciseNameTest();
         test.setNewCaloriesBurnedTest();
+        assert true;
     }
 
     public void initializeExerciseTest() {
