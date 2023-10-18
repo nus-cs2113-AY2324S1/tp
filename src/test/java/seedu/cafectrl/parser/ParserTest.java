@@ -2,6 +2,7 @@ package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.command.Command;
+import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
@@ -20,14 +21,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ParserTest {
 
     @Test
-    void parseCommand_missingArg_returnIncorrectCommandObject() {
+    void parseCommand_missingArgumentForDelete_emptyArgMessage() {
         Menu menu = new Menu();
 
-        String fullUserInput = "delete";
-        Command command = Parser.parseCommand(menu, fullUserInput);
+        String testUserInput = "delete";
+        ArrayList<String> actualOutput = new ArrayList<>();
+        Ui ui = new Ui() {
+            @Override
+            public void showToUser(String... message) {
+                actualOutput.addAll(Arrays.asList(message));
+            }
+        };
 
-        assertEquals(IncorrectCommand.class, command.getClass());
+        int actualOutputIndex = 0;
+        Command commandReturned = Parser.parseCommand(menu, testUserInput);
+        commandReturned.execute(menu, ui);
+        assertEquals(Messages.MISSING_ARGUMENT_FOR_DELETE, actualOutput.get(actualOutputIndex));
     }
+
 
     @Test
     void parseCommand_unrecognisedInput_unknownCommand() {
