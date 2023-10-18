@@ -54,7 +54,7 @@ public class IncomeParser {
         if (!argumentsByField.containsKey(DESCRIPTION_FIELD) ||
                 !argumentsByField.containsKey(DATE_FIELD) ||
                 !argumentsByField.containsKey(AMOUNT_FIELD)) {
-            throw new KaChinnnngException("Missing fields detectedd");
+            throw new KaChinnnngException("Missing fields detected");
         }
 
         String incomeDescriptionString = argumentsByField.get(DESCRIPTION_FIELD);
@@ -87,10 +87,15 @@ public class IncomeParser {
         if (!argumentsByFields.containsKey(INDEX_FIELD)) {
             throw new KaChinnnngException("Missing index field detected");
         }
+        int index;
         try {
-            return Integer.parseInt(argumentsByFields.get(INDEX_FIELD));
+            index = Integer.parseInt(argumentsByFields.get(INDEX_FIELD));
         } catch (NumberFormatException e) {
             throw new KaChinnnngException("Please enter a valid index");
         }
+        if (index <= 0) {
+            throw new KaChinnnngException("Please enter a valid index");
+        }
+        return index;
     }
 }
