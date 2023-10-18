@@ -1,4 +1,4 @@
-package cashleh;
+package transaction;
 
 import cashleh.transaction.Income;
 import org.junit.jupiter.api.Test;

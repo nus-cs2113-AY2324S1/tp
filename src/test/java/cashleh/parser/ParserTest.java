@@ -1,8 +1,6 @@
 package cashleh;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
+import cashleh.parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import cashleh.commands.AddExpense;
@@ -16,16 +14,18 @@ import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.IncomeStatement;
 import exceptions.CashLehException;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 public class ParserTest {
-    ExpenseStatement expenseStatement = new ExpenseStatement();
-    IncomeStatement incomeStatement = new IncomeStatement();
     Parser parser = new Parser(new ExpenseStatement(), new IncomeStatement());
 
     @Test
     public void parserUnknownCommandTest() {
         String inputString = "test";
         try {
-            assertEquals(parser.parse(inputString), null);
+            assertNull(parser.parse(inputString));
         } catch (CashLehException e) {
             assertEquals("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!", e.getMessage());
         }

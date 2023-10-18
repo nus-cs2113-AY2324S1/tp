@@ -1,4 +1,4 @@
-package cashleh;
+package transaction;
 
 import cashleh.transaction.Income;
 import cashleh.transaction.IncomeStatement;

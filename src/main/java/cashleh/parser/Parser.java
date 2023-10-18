@@ -61,9 +61,15 @@ public class Parser {
         if (!input.contains("/amt")) {
             throw new CashLehParsingException("Please enter a proper amount using '/amt'.");
         }
+        if (!input.contains("/date")) {
+            throw new CashLehParsingException("Please enter a date using '/date'.");
+        }
         String[] expenseInfo = input.substring(ADD_EXPENSE.length() + 1).split("/amt", 2);
         String expenseName = expenseInfo[0].trim();
-        String expenseAmtString = expenseInfo[1].trim();
+        String expenseInfoSubString = expenseInfo[1].trim();
+        String[] expenseInfoSubStringSplit = expenseInfoSubString.split("/date", 2);
+        String expenseAmtString = expenseInfoSubStringSplit[0].trim();
+        String expenseDateString = expenseInfoSubStringSplit[1].trim();
         if (expenseName.isEmpty()) {
             throw new CashLehParsingException(
                 "Oopsie! An expense without a description is like a CashLeh transaction without its story - not as fun!"
