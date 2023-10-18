@@ -31,6 +31,10 @@ public class Day {
         return exercises.size();
     }
 
+    public boolean containsExercises() {
+        return !exercises.isEmpty();
+    }
+
     public String toString() {
         if (exercises.isEmpty()) {
             return "\tNO EXCERCISES FOR THIS DAY!\n";
