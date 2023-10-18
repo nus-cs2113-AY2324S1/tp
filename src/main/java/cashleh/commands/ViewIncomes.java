@@ -5,7 +5,7 @@ import cashleh.transaction.IncomeStatement;
 import java.util.logging.Level;
 
 public class ViewIncomes extends Command {
-    private IncomeStatement incomeStatement;
+    private final IncomeStatement incomeStatement;
 
     public ViewIncomes(IncomeStatement incomeStatement) {
         this.incomeStatement = incomeStatement;

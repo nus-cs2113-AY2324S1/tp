@@ -5,7 +5,7 @@ import cashleh.transaction.ExpenseStatement;
 import java.util.logging.Level;
 
 public class ViewExpenses extends Command {
-    private ExpenseStatement expenseStatement;
+    private final ExpenseStatement expenseStatement;
 
     public ViewExpenses(ExpenseStatement expenseStatement) {
         this.expenseStatement = expenseStatement;

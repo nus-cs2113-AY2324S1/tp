@@ -1,5 +1,6 @@
 package cashleh;
 
+import cashleh.parser.Parser;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.IncomeStatement;
 import cashleh.exceptions.CashLehException;
