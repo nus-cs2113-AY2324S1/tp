@@ -3,6 +3,7 @@ package seedu.cafectrl.ui;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Ui {
@@ -52,7 +53,9 @@ public class Ui {
 
     public void printAddDishMessage(Dish dish) {
         String dishNameString = "Dish Name: " + dish.getName();
-        String dishPriceString = "Dish Price: $" + dish.getPrice();
+        DecimalFormat dollarValue = new DecimalFormat("0.00");
+        float dishPrice = dish.getPrice();
+        String dishPriceString = "Dish Price: $" + dollarValue.format(dishPrice);
         StringBuilder dishIngredientsString = new StringBuilder("Ingredients:\n");
 
         for (int i = 0; i < dish.getIngredients().size(); i++) {
@@ -96,7 +99,6 @@ public class Ui {
      * @param menuItem menuItem that has been modified
      */
     public void showEditPriceMessage(String menuItem) {
-        System.out.println(Messages.PRICE_MODIFIED_MESSAGE);
-        this.showToUser(menuItem);
+        this.showToUser(Messages.PRICE_MODIFIED_MESSAGE, menuItem);
     }
 }
