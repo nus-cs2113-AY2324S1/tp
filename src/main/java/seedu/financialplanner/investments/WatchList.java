@@ -24,8 +24,6 @@ public class WatchList {
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
     private WatchList() {
         stocks = new ArrayList<>();
-
-        // logger.log(Level.INFO, "Adding Base Stocks");
         try {
             Stock apple = new Stock("AAPL");
             assert apple.getSymbol() != null && apple.getStockName() != null;
