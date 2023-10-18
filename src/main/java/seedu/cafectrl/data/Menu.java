@@ -1,6 +1,7 @@
 package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -29,5 +30,10 @@ public class Menu {
     }
     public void addDish(Dish dish) {
         menuItems.add(dish);
+    }
+
+    public boolean isValidDishIndex(int dishIndex) {
+        int offSetDishIndex = dishIndex - Ui.OFFSET_LIST_INDEX;
+        return offSetDishIndex >= 0 && offSetDishIndex < this.getSize();
     }
 }

@@ -10,8 +10,10 @@ import java.text.DecimalFormat;
  * Lists all dishes in the menu to the user.
  */
 public class ListMenuCommand extends Command {
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "list_menu";
+
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
+
     /**
      * Iterates through the menu arraylist, outputting the dish name and dish price.
      *

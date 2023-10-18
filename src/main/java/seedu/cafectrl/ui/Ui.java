@@ -42,11 +42,13 @@ public class Ui {
      * @param selectedDish Dish for ingredients to be listed out.
      */
     public void printIngredients(Dish selectedDish) {
-        showToUser(selectedDish.getName() + " Ingredients: \n");
+        String ingredientsString = selectedDish.getName() + " Ingredients: \n";
 
         for (Ingredient ingredient : selectedDish.getIngredients()) {
-            showToUser(ingredient.getName() + " - " + ingredient.getQuantity());
+            ingredientsString += ingredient.toString() + "\n";
         }
+
+        showToUser(ingredientsString.trim());
     }
 
     public void printAddDishMessage(Dish dish) {
@@ -90,5 +92,14 @@ public class Ui {
         for (String m: message) {
             System.out.println(m);
         }
+    }
+
+    /**
+     * show edit price message to user
+     * @param menuItem menuItem that has been modified
+     */
+    public void showEditPriceMessage(String menuItem) {
+        System.out.println(Messages.PRICE_MODIFIED_MESSAGE);
+        this.showToUser(menuItem);
     }
 }
