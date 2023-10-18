@@ -51,7 +51,7 @@ public class Stock {
                 throw new FinancialPlannerException("API limit Reached");
             }
             if (ja.isEmpty()) {
-                throw new FinancialPlannerException("stock not found");
+                throw new FinancialPlannerException("Stock not found");
             }
             JSONObject stock = (JSONObject) ja.get(0);
             String symbolFound = (String) stock.get("1. symbol");
