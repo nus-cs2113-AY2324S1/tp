@@ -12,8 +12,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Stock {
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String symbol;
     private String market;
     private String stockName;
@@ -36,14 +39,19 @@ public class Stock {
                 .GET()
                 .timeout(Duration.ofSeconds(10))
                 .build();
+
+        logger.log(Level.INFO, "Requesting API for stock info");
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             Object obj = new JSONParser().parse(response.body());
 
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray ja = (JSONArray) jsonObject.get("bestMatches");
+            if (ja == null) {
+                throw new FinancialPlannerException("API limit Reached");
+            }
             if (ja.isEmpty()) {
-                throw new FinancialPlannerException("stock not found");
+                throw new FinancialPlannerException("Stock not found");
             }
             JSONObject stock = (JSONObject) ja.get(0);
             String symbolFound = (String) stock.get("1. symbol");
@@ -56,6 +64,8 @@ public class Stock {
             if (!symbolFound.equals(symbol)) {
                 throw new FinancialPlannerException("Stock not found");
             }
+
+            assert stock.get("2. name") != null;
             market = (String) stock.get("4. region");
             return (String) stock.get("2. name");
         } catch (IOException e) {
