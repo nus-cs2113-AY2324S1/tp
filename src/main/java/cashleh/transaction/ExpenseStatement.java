@@ -6,7 +6,11 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * Represents an Expense Statement in the CashLeh application.
+ * This class is used to manage and store a list of expenses.
+ * It provides methods for adding, deleting, retrieving, and displaying expenses within the statement.
+ */
 public class ExpenseStatement {
     private final ArrayList<Expense> expenseStatement = new ArrayList<>();
     public ExpenseStatement() {
@@ -24,6 +28,13 @@ public class ExpenseStatement {
             throw new CashLehMissingTransactionException();
         }
     }
+
+    /**
+     * Retrieve expense from the statement.
+     * @param expenseIndex The index of the expense to be retrieved.
+     * @return The expense at the specified index.
+     * @throws CashLehMissingTransactionException If the specified expense is not found.
+     */
     public Expense getExpense(int expenseIndex) throws CashLehMissingTransactionException {
         try {
             return expenseStatement.get(expenseIndex);

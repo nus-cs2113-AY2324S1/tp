@@ -6,7 +6,11 @@ import cashleh.Ui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * Represents an Income Statement in the CashLeh application.
+ * This class is used to manage and store a list of incomes.
+ * It provides methods for adding, deleting, retrieving, and displaying incomes within the statement.
+ */
 public class IncomeStatement {
     private final ArrayList<Income> incomeStatement = new ArrayList<>();
     public IncomeStatement() {}
