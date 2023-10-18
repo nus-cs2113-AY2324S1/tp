@@ -7,10 +7,10 @@ import seedu.financialplanner.utils.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DeleteCashflowCommand extends AbstractCommand{
+public class DeleteCashflowCommand extends AbstractCommand {
 
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;
-    private static Logger logger = Logger.getLogger("Financial Planner Logger");
     protected int index;
 
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
@@ -46,6 +46,7 @@ public class DeleteCashflowCommand extends AbstractCommand{
             }
         }
     }
+
     private void handleInvalidCategory(String stringCategory) {
         try {
             logger.log(Level.INFO, "Parsing CashflowCategory");
