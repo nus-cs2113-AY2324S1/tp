@@ -11,7 +11,7 @@ import java.util.ArrayList;
 class AddRecipeTest {
 
     @Test
-    public void addRecipes_validData_fullyConstructedRecipe() {
+    public void addRecipes_validData_fullyConstructedRecipes() {
         RecipeList recipes = new RecipeList();
         String[] recipe1Steps = {"step1", "step2", "step3"};
         String[] recipe2Steps = {"step1", "step2"};
