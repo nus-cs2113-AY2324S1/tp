@@ -5,5 +5,72 @@ ____________________________________________________________
 Invalid command. Please try again.
 ____________________________________________________________
 ____________________________________________________________
+Invalid command. Please try again.
+____________________________________________________________
+____________________________________________________________
+You can access our user guide by https://docs.google.com/document/d/1BOz_v4eYQ8y7Dje6Jm6nqymi9jmrsb9MAohLCL_sLvI/edit?usp=sharing
+
+Functions and their format:
+
+Adding an entry: add
+Format:
+Add expense /category /description /value
+Add income /description /value
+
+Listing all entries: list
+Format:
+list
+list income
+list expense
+
+Deleting an entry: delete
+Format:
+delete income [index_pos]
+delete expense [index_pos]
+
+Check balance of income: balance
+Format:
+balance
+
+Exiting the program: exit
+Format:
+exit
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this income:
+Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this expense:
+Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
+____________________________________________________________
+____________________________________________________________
+____________________________________________________________
+Here are your incomes:
+1. Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+____________________________________________________________
+____________________________________________________________
+Here are your expenses:
+1. Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
+____________________________________________________________
+____________________________________________________________
+Here are your incomes:
+1. Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+Total income is: $5000.00.
+
+Here are your expenses:
+1. Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
+Total expenses is: $10.00.
+Total balance is: $4990.00.
+____________________________________________________________
+____________________________________________________________
+Noted. This income record has been deleted:
+Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+____________________________________________________________
+____________________________________________________________
+Noted. This expense record has been deleted:
+Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
+____________________________________________________________
+____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________
