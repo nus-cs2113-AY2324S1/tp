@@ -6,11 +6,16 @@ public class UsageInstructions {
     // Shows a message linking the user to the user guide of our app
     private final seedu.duke.ui.Ui ui;
 
-
+    /**
+     * The `UsageInstructions` class provides usage instructions for the application, including command formats and a link to the user guide.
+     */
     public UsageInstructions(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Displays usage instructions for the application, including command formats and a link to the user guide.
+     */
     public void getHelp(){
         ui.showLineDivider();
         // Shows a message linking the user to the user guide of our app
