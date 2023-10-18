@@ -1,8 +1,7 @@
 package seedu.duke.calendar;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class EventStorage {
     ArrayList<Event> events;
@@ -11,7 +10,7 @@ public class EventStorage {
         events = new ArrayList<>();
     }
 
-    public void addEvent(String name, LocalDate from, LocalDate to) {
+    public void addEvent(String name, LocalDateTime from, LocalDateTime to) {
         events.add(new Event(name, from, to));
     }
 
@@ -26,8 +25,6 @@ public class EventStorage {
     }
     @Override
     public String toString() {
-        return "EventStorage{" +
-                "events=" + events +
-                '}';
+        return "events=" + events;
     }
 }

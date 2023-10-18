@@ -1,13 +1,14 @@
 package seedu.duke.calendar;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Event {
     String name;
-    LocalDate from;
-    LocalDate to;
+    LocalDateTime from;
+    LocalDateTime to;
 
-    public Event(String name, LocalDate from, LocalDate to) {
+    public Event(String name, LocalDateTime from, LocalDateTime to) {
         this.name = name;
         this.from = from;
         this.to = to;
@@ -21,19 +22,19 @@ public class Event {
         this.name = name;
     }
 
-    public LocalDate getFrom() {
+    public LocalDateTime getFrom() {
         return from;
     }
 
-    public void setFrom(LocalDate from) {
+    public void setFrom(LocalDateTime from) {
         this.from = from;
     }
 
-    public LocalDate getTo() {
+    public LocalDateTime getTo() {
         return to;
     }
 
-    public void setTo(LocalDate to) {
+    public void setTo(LocalDateTime to) {
         this.to = to;
     }
 
