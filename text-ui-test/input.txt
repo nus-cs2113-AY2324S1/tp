@@ -1,10 +1,11 @@
 James Gosling
-bye
-add income /description Salary for October /date 01/10/2023 /amount 5000.00
-add expense /description Lunch /date 01/10/2023 /amount 10.00
+hi
+help
+add income /description salary for October /date 01/10/2023 /amount 5000.00
+add expense /category food /description lunch /date 01/10/2023 /amount 10.00
+list income
 list expense
 list
 delete income 1
 delete expense 1
-help
-balance
+bye

@@ -65,7 +65,7 @@ public class Ui {
      * @param income Income object created from the provided fields
      */
     public void printIncomeAddedMessage(Income income) {
-        System.out.println("Got it. I've added this income: \n" + income.toString());
+        System.out.println("Got it. I've added this income:\n" + income.toString());
     }
 
     /**
@@ -76,7 +76,7 @@ public class Ui {
     }
 
     public void printExpenseAddedMessage(Expense expense) {
-        System.out.println("Got it. I've added this expense: \n" + expense.toString());
+        System.out.println("Got it. I've added this expense:\n" + expense.toString());
     }
 
     public void printListExpenseMessage() {
