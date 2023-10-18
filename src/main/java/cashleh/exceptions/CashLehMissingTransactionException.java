@@ -1,4 +1,4 @@
-package exceptions;
+package cashleh.exceptions;
 
 public class CashLehMissingTransactionException extends CashLehException {
     /**

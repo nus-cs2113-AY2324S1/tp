@@ -1,8 +1,10 @@
 package cashleh.commands;
 
-import exceptions.CashLehException;
+import cashleh.exceptions.CashLehException;
+import java.util.logging.Logger;
 
 public class Command {
+    protected Logger logger = Logger.getLogger("CommandLogger");
     private int index;
 
     public Command(int index) {
@@ -16,7 +18,5 @@ public class Command {
         return this.index;
     }
 
-    public void execute() throws CashLehException {
-    }
-
+    public void execute() throws CashLehException {}
 }

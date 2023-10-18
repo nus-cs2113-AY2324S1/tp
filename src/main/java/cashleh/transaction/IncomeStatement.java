@@ -1,7 +1,7 @@
 package cashleh.transaction;
 
+import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.Ui;
-import exceptions.CashLehMissingTransactionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class IncomeStatement {
     private final ArrayList<Income> incomeStatement = new ArrayList<>();
-    private final Ui ui = new Ui();
     public IncomeStatement() {}
     public IncomeStatement(Income... incomes) {
         incomeStatement.addAll(List.of(incomes));

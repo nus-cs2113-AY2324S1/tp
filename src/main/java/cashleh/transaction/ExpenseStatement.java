@@ -1,7 +1,7 @@
 package cashleh.transaction;
 
 import cashleh.Ui;
-import exceptions.CashLehMissingTransactionException;
+import cashleh.exceptions.CashLehMissingTransactionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class ExpenseStatement {
     private final ArrayList<Expense> expenseStatement = new ArrayList<>();
-    private final Ui ui = new Ui();
     public ExpenseStatement() {
     }
     public ExpenseStatement(Expense... expenses) {
@@ -35,6 +34,10 @@ public class ExpenseStatement {
     public int getNumberOfExpenses() {
         return expenseStatement.size();
     }
+    public double getSumOfExpenses() {
+        return expenseStatement.stream().mapToDouble(Expense::getAmount).sum();
+    }
+
 
     public double getTotalExpenseAmount() {
         return expenseStatement.stream().mapToDouble(Expense::getAmount).sum();

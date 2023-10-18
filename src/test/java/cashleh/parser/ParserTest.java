@@ -1,8 +1,6 @@
-package cashleh;
+package cashleh.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
+import cashleh.exceptions.CashLehParsingException;
 import org.junit.jupiter.api.Test;
 
 import cashleh.commands.AddExpense;
@@ -14,26 +12,23 @@ import cashleh.commands.ViewExpenses;
 import cashleh.commands.ViewIncomes;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.IncomeStatement;
-import exceptions.CashLehException;
+import cashleh.exceptions.CashLehException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class ParserTest {
-    ExpenseStatement expenseStatement = new ExpenseStatement();
-    IncomeStatement incomeStatement = new IncomeStatement();
     Parser parser = new Parser(new ExpenseStatement(), new IncomeStatement());
 
     @Test
     public void parserUnknownCommandTest() {
         String inputString = "test";
-        try {
-            assertEquals(parser.parse(inputString), null);
-        } catch (CashLehException e) {
-            assertEquals("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!", e.getMessage());
-        }
+        assertThrows(CashLehParsingException.class, () -> parser.parse(inputString));
     }
 
     @Test
     public void parserAddIncomeTest() throws CashLehException {
-        String inputString = "addIncome pocket money /amt 200";
+        String inputString = "addIncome pocket money /amt 200 /date 01/01/2020";
         assertInstanceOf(AddIncome.class, parser.parse(inputString));
     }
 
@@ -51,7 +46,7 @@ public class ParserTest {
 
     @Test
     public void parserAddExpenseTest() throws CashLehException {
-        String inputString = "addExpense food /amt 10";
+        String inputString = "addExpense food /amt 10 /date 01/01/2020";
         assertInstanceOf(AddExpense.class, parser.parse(inputString));
     }
 
