@@ -66,7 +66,12 @@ public class EssenMakanan {
             validInput = true;
 
             ui.functionSelect();
-            functionInput = in.nextLine();
+
+            if (in.hasNextLine()) {
+                functionInput = in.nextLine();
+            } else {
+                break;
+            }
 
 
             switch (functionInput) {
@@ -86,7 +91,11 @@ public class EssenMakanan {
                 break;
             }
 
-            input = in.nextLine();
+            if (in.hasNextLine()) {
+                input = in.nextLine();
+            } else {
+                break;
+            }
             String[] parsedInput = input.split(" ", 2);
             String commandType = parsedInput[0];
             String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
