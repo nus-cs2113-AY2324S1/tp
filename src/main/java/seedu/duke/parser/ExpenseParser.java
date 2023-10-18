@@ -66,8 +66,10 @@ public class ExpenseParser {
             return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.NONE);
         } else if (expenseCategoryString.equals("transport")){
             return new Transport(expenseDescriptionString, expenseDate, expenseAmount, TransportationType.NONE);
-        } else {
+        } else if (expenseCategoryString.equals("utilities")) {
             return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.NONE);
+        } else {
+            throw new KaChinnnngException("Please enter a valid category");
         }
     }
 
