@@ -2,12 +2,15 @@ package seedu.duke.financialrecords;
 import seedu.duke.commands.KaChinnnngException;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 /**
  * Implementation of the Income class
  * Basic income class inherits from FinancialRecord and does not include any additional attributes
  */
 public class Income extends FinancialRecord {
+    // Logger instance to log events and issues that occur during the execution of this class.
+    private static final Logger LOGGER = Logger.getLogger(Income.class.getName());
 
     /**
      * This method is used to create a new financial record.
@@ -20,6 +23,7 @@ public class Income extends FinancialRecord {
      */
     public Income(String description, LocalDate date, double amount) throws KaChinnnngException {
         super(description, date, amount);
+        LOGGER.info("Income created with description: " + description + " date: " + date + " amount: " + amount);
     }
 
     /**

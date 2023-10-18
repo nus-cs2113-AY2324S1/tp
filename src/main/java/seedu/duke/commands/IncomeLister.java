@@ -4,12 +4,15 @@ import seedu.duke.financialrecords.Income;
 import seedu.duke.ui.Ui;
 import java.util.ArrayList;
 
+import java.util.logging.Logger;
+
 /**
  * Represents the command that when executed, lists all incomes.
  * This class is a child class of the Command class.
  *
  */
 public class IncomeLister extends Commands {
+    private static final Logger LOGGER = Logger.getLogger(IncomeLister.class.getName());
     private final ArrayList<Income> incomes;
     private final Ui ui;
 
@@ -20,8 +23,13 @@ public class IncomeLister extends Commands {
      * @param ui      Instance of Ui
      */
     public IncomeLister(ArrayList<Income> incomes, Ui ui) {
+        assert incomes != null : "incomes should not be null";
+        assert ui != null : "ui should not be null";
+
         this.incomes = incomes;
         this.ui = ui;
+
+        LOGGER.info("IncomeLister initialised successfully");
     }
 
     /**
@@ -50,5 +58,6 @@ public class IncomeLister extends Commands {
             System.out.println((i + 1) + ". " + incomes.get(i).toString());
         }
         ui.showLineDivider();
+        LOGGER.info("Incomes listed successfully");
     }
 }
