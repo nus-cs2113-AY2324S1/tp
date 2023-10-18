@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddDishCommandTest {
     @Test
-    void execute_dishAdded_expectDishInMenu() {
+    void execute_oneDishAdded_expectDishInMenu() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         ArrayList<Dish> menuItems = new ArrayList<>();
         Menu menu = new Menu(menuItems);
