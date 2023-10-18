@@ -9,6 +9,10 @@ import fittrack.parser.PatternMatchFailException;
 
 /**
  * Represents the main part of FitTrack.
+ * <p>
+ * Referenced
+ * <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">here</a>
+ * to build main structure of this class.
  */
 public class FitTrack {
     private final UserProfile userProfile;

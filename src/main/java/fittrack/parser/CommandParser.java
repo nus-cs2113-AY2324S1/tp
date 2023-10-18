@@ -17,6 +17,13 @@ import fittrack.command.ViewProfileCommand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents the parser which parses commands.
+ * <p>
+ * Referenced
+ * <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java">here</a>
+ * to build main structure of this class.
+ */
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
     public static final String ALL_COMMAND_WORDS = "help, exit, " +
