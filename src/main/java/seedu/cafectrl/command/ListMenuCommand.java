@@ -27,7 +27,7 @@ public class ListMenuCommand extends Command {
             String indexNum = String.valueOf(i+1);
             String dishName = menu.getDish(i).getName();
             String dishPrice = dollarValue.format(menu.getDish(i).getPrice());
-            ui.showToUser(indexNum + "." + dishName + " $" + dishPrice);
+            ui.showToUser(indexNum + ". " + dishName + " $" + dishPrice);
         }
     };
 }

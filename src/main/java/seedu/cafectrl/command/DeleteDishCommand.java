@@ -24,9 +24,10 @@ public class DeleteDishCommand extends Command {
     @Override
     public void execute(Menu menu, Ui ui) {
         try {
-            Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
+            int dishToBeDeleted = index - Ui.OFFSET_LIST_INDEX;
+            Dish selectedDish = menu.getMenuItemsList().get(dishToBeDeleted);
             ui.showDeleteMessage(selectedDish);
-            menu.removeDish(index);
+            menu.removeDish(dishToBeDeleted);
         } catch (IndexOutOfBoundsException e) {
             ui.showToUser(Messages.INVALID_DISH_INDEX);
             throw new IndexOutOfBoundsException();

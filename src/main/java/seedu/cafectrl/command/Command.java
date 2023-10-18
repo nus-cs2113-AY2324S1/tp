@@ -8,7 +8,7 @@ import seedu.cafectrl.ui.Ui;
  */
 public class Command {
 
-    protected int index;
+    public int index;
 
     public void setIndex(int index) {
         this.index = index;
