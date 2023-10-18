@@ -1,6 +1,7 @@
 package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.IncorrectCommand;
@@ -16,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 /**
  * Junit test for Parser.java
@@ -201,5 +202,37 @@ class ParserTest {
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
         commandReturned.execute(menu, ui);
         assertEquals(Messages.INVALID_DISH_INDEX, actualOutput.get(0));
+    }
+
+    @Test
+    void parseCommand_validDishInputForAddDish_dishAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
+        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient);
+        //Test for correct Command type returned
+        assertTrue(outputCommand instanceof AddDishCommand);
+        //Test for 1 Dish added to Menu
+        outputCommand.execute(menu, ui);
+        assertEquals(1, menu.getSize());
+        //Test for correct parsing of dish arguments
+        Dish getOutputDish = menu.getDish(0);
+        assertEquals("Christmas Ham", getOutputDish.getName()); // Dish name test
+        assertEquals((float) 50.0, getOutputDish.getPrice()); //Dish price test
+        assertEquals("[Ham - 1kg]", getOutputDish.getIngredients().toString()); //Dish ingredients test
+    }
+
+    @Test
+    void parseCommand_invalidDishInputForAddDish_noDishAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        //input name/ argument wrongly
+        String testDishInputWithOneIngredient = "add named/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
+        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient);
+        //Test for incorrect Command type returned
+        assertFalse(outputCommand instanceof AddDishCommand);
+        //Test for no dish added in menu
+        outputCommand.execute(menu, ui);
+        assertEquals(0, menu.getSize());
     }
 }
