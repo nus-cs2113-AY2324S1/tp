@@ -58,7 +58,6 @@ public class EssenMakanan {
         String input;
         boolean validInput;
 
-
         do {
             validInput = true;
 
