@@ -33,6 +33,10 @@ public class RecipeList {
         }
     }
 
+    public Recipe getRecipe(int index) {
+        return recipes.get(index);
+    }
+
     public Recipe getRecipeByIndex(int index) {
         return recipes.get(index);
     }
