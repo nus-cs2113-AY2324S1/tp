@@ -24,6 +24,11 @@ public class FlashcardStorage {
     }
 
 
+    public boolean isStorageAvailable(){
+        File f = new File(this.path);
+        return f.exists();
+    }
+    
     /**
      * load a flash card from certain format
      * Tokens includes attributes of Flashcard
@@ -96,6 +101,8 @@ public class FlashcardStorage {
             System.out.println("Failed to save.");
         }
     }
+
+
 
 
 

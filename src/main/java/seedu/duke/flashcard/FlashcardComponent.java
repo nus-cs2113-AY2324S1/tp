@@ -37,6 +37,12 @@ public class FlashcardComponent {
         ui = new FlashcardUi(flashcardList);
     }
 
+    //@@author junhyeong0411
+    public FlashcardStorage getStorage(){
+        return this.storage;
+    }
+
+    //@@author wendelinwemhoener
     public boolean isResponsible(String input) {
         FlashcardCommand command = parser.parseInput(input);
 
