@@ -32,9 +32,9 @@ class ListMenuCommandTest {
 
         String actualOutput = String.join(", ", commandOutput);
 
-        String expectedOutput = "Ah, behold, the grand menu of delights!" +
-                " 1. Chicken Rice $2.50" +
-                " 2. Chicken Curry $4.30";
+        String expectedOutput = "Ah, behold, the grand menu of delights!"
+                + " 1. Chicken Rice $2.50"
+                + " 2. Chicken Curry $4.30";
 
         assertEquals(expectedOutput.trim().replaceAll(", ", " "),
                 actualOutput.trim().replaceAll(", ", " "));
@@ -45,6 +45,6 @@ class ListMenuCommandTest {
         for (String str : message) {
             sb.append(str.toString()).append(delimiter);
         }
-        return sb.substring(0, sb.length() -1);
+        return sb.substring(0, sb.length() - 1);
     }
 }
