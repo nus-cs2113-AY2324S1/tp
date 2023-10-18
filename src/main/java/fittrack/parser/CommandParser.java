@@ -2,6 +2,7 @@ package fittrack.parser;
 
 import fittrack.Meal;
 import fittrack.UserProfile;
+import fittrack.Workout;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
 import fittrack.command.Command;
@@ -38,8 +39,10 @@ public class CommandParser {
     private static final Pattern PROFILE_PATTERN = Pattern.compile(
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)\\s+l/(?<calLimit>\\S+)"
     );
-
-    private static final Pattern ADDMEAL_PATTERN = Pattern.compile(
+    private static final Pattern MEAL_PATTERN = Pattern.compile(
+            "(?<name>\\S+)\\s+c/(?<calories>\\S+)"
+    );
+    private static final Pattern WORKOUT_PATTERN = Pattern.compile(
             "(?<name>\\S+)\\s+c/(?<calories>\\S+)"
     );
 
@@ -58,6 +61,7 @@ public class CommandParser {
         } catch (ParseException e) {
             return getInvalidCommand(userCommandLine);
         }
+
         return command;
     }
 
@@ -86,6 +90,7 @@ public class CommandParser {
             return new ViewWorkoutsCommand();
         default:
             return new InvalidCommand(word);
+
         }
     }
 
@@ -124,8 +129,8 @@ public class CommandParser {
         }
     }
 
-    public Meal parseAddMeal(String addMeal) throws PatternMatchFailException, NumberFormatException {
-        final Matcher matcher = ADDMEAL_PATTERN.matcher(addMeal);
+    public Meal parseMeal(String meal) throws PatternMatchFailException, NumberFormatException {
+        final Matcher matcher = MEAL_PATTERN.matcher(meal);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }
@@ -134,17 +139,27 @@ public class CommandParser {
         final String calories = matcher.group("calories");
 
         try {
-            return new Meal(
-                    name,
-                    Double.parseDouble(calories)
-            );
+            return new Meal(name, Double.parseDouble(calories));
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
         }
     }
 
+    public Workout parseWorkout(String workout) throws PatternMatchFailException, NumberFormatException {
+        final Matcher matcher = WORKOUT_PATTERN.matcher(workout);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
 
-    // TODO: Make a parse method for a work.
+        final String name = matcher.group("name");
+        final String calories = matcher.group("calories");
+
+        try {
+            return new Workout(name, Double.parseDouble(calories));
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+    }
 
     public String getFirstWord(String str) {
         assert str != null && !str.isEmpty();
