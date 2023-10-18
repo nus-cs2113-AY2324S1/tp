@@ -11,14 +11,12 @@ public class RecipeList {
 
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
+        assert getRecipe(recipes.size() - 1).getTitle().equals(recipe.getTitle())
+                : "Recipe is not successfully added into the list.";
     }
 
     public void addRecipe(String title, String[] steps) {
         recipes.add(new Recipe(title, steps));
-    }
-
-    public ArrayList<Recipe> getRecipes() {
-        return recipes;
     }
 
     public void deleteRecipe(Recipe recipe) {
@@ -28,16 +26,15 @@ public class RecipeList {
     public void viewAllRecipes() {
         int count = 1;
         for (Recipe recipe : recipes) {
+            assert getRecipe(count - 1).getTitle().equals(recipe.getTitle())
+                    : "Title is not matching with the current index";
+
             System.out.println(count + ". " + recipe);
-            count ++;
+            count++;
         }
     }
 
     public Recipe getRecipe(int index) {
-        return recipes.get(index);
-    }
-
-    public Recipe getRecipeByIndex(int index) {
         return recipes.get(index);
     }
 
