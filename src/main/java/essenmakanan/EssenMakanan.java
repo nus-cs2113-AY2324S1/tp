@@ -107,5 +107,7 @@ public class EssenMakanan {
         run();
     }
 
-    public static void main(String[] args) { new EssenMakanan().start();}
+    public static void main(String[] args) {
+        new EssenMakanan().start();
+    }
 }

@@ -2,7 +2,6 @@ package essenmakanan.command;
 
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.recipe.Recipe;
 
 public class AddIngredientCommand extends IngredientCommand{
 
