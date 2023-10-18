@@ -6,7 +6,8 @@ import seedu.duke.financialrecords.Income;
 import java.util.ArrayList;
 
 /**
- * The `Balance` class represents a financial balance calculator that calculates the balance between income and expenses.
+ * The `Balance` class represents a financial balance calculator
+ * that calculates the balance between income and expenses.
  * It takes a list of income and expense records as input and provides methods to calculate and display the balance.
  */
 public class Balance {
