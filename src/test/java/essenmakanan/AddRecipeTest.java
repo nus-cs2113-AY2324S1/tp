@@ -15,21 +15,20 @@ class AddRecipeTest {
         RecipeList recipes = new RecipeList();
         String[] recipe1Steps = {"step1", "step2", "step3"};
         String[] recipe2Steps = {"step1", "step2"};
-        recipes.addRecipe("Recipe1", recipe1Steps);
-        recipes.addRecipe("Recipe2", recipe2Steps);
+        recipes.addRecipe(new Recipe("Recipe1", recipe1Steps));
+        recipes.addRecipe(new Recipe("Recipe2", recipe2Steps));
 
-        ArrayList<Recipe> recipeList = recipes.getRecipes();
+        Recipe recipe = recipes.getRecipe(0);
+        assertEquals("Recipe1", recipe.getTitle());
 
-        ArrayList<String> recipeSteps;
-        assertEquals("Recipe1", recipeList.get(0).getTitle());
+        ArrayList<String> steps = recipe.getRecipeSteps();
+        assertEquals("step1", steps.get(0));
+        assertEquals("step2", steps.get(1));
+        assertEquals("step3", steps.get(2));
 
-        recipeSteps = recipeList.get(0).getRecipeSteps();
-        assertEquals("step1", recipeSteps.get(0));
-        assertEquals("step2", recipeSteps.get(1));
-        assertEquals("step3", recipeSteps.get(2));
-
-        recipeSteps = recipeList.get(1).getRecipeSteps();
-        assertEquals("step1", recipeSteps.get(0));
-        assertEquals("step2", recipeSteps.get(1));
+        recipe = recipes.getRecipe(1);
+        steps = recipe.getRecipeSteps();
+        assertEquals("step1", steps.get(0));
+        assertEquals("step2", steps.get(1));
     }
 }
