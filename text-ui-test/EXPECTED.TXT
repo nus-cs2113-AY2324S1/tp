@@ -1,0 +1,7 @@
+Welcome to EssenMakanan!!! A one-stop placeto track the
+ ingredients in your kitchen and storeyour favourite recipes
+--------------------------------------------
+Enter the number for the function you want
+1. Recipe
+2. Ingredients
+--------------------------------------------
