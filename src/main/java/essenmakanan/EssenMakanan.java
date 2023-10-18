@@ -1,27 +1,29 @@
 package essenmakanan;
 
+import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.AddRecipeCommand;
-import essenmakanan.command.Command;
+import essenmakanan.command.IngredientCommand;
 import essenmakanan.command.RecipeCommand;
-import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 import java.util.Scanner;
 
 public class EssenMakanan {
 
-    private static final String EXIT = "bye";
-    private static final String RECIPE_FUNCTION = "1";
-    private static final String INGREDIENT_FUNCTION = "2";
+    private RecipeList recipes;
+    private IngredientList ingredients;
+    private Ui ui;
 
-    public static boolean handleRecipeFunctions(RecipeList recipes, String command, String inputDetail) {
+    private final String EXIT = "bye";
+    private final String RECIPE_FUNCTION = "1";
+    private final String INGREDIENT_FUNCTION = "2";
+
+    public boolean handleRecipeFunctions(RecipeList recipes, String command, String inputDetail) {
         switch(command) {
         case "add":
             RecipeCommand addCommand = new AddRecipeCommand();
             addCommand.executeCommand(recipes, inputDetail);
-            System.out.println("Recipe:  + recipeName +  has been successfully created!");
             return true;
         case "view":
             recipes.viewAllRecipes();
@@ -31,13 +33,11 @@ public class EssenMakanan {
         }
     }
 
-    public static boolean handleIngredientFunctions(IngredientList ingredients, String command, String inputDetail) {
+    public boolean handleIngredientFunctions(IngredientList ingredients, String command, String inputDetail) {
         switch(command) {
         case "add":
-            String ingredientName = inputDetail.substring(2);
-            Ingredient newIngredient = new Ingredient(ingredientName);
-            ingredients.addIngredient(newIngredient);
-            System.out.println("Ingredient: " + ingredientName + " has been successfully created!");
+            IngredientCommand addCommand = new AddIngredientCommand();
+            addCommand.executeCommand(ingredients, inputDetail);
             return true;
         case "view":
             ingredients.listIngredients();
@@ -47,12 +47,7 @@ public class EssenMakanan {
         }
     }
 
-    public static void main(String[] args) {
-        RecipeList recipes = new RecipeList();
-        IngredientList ingredients = new IngredientList();
-        Ui ui = new Ui();
-
-        // Prompt users that program is ready
+    public void run() {
         ui.start();
 
         Scanner in = new Scanner(System.in);
@@ -100,4 +95,17 @@ public class EssenMakanan {
 
         ui.bye();
     }
+
+    public void setup() {
+        recipes = new RecipeList();
+        ingredients = new IngredientList();
+        ui = new Ui();
+    }
+
+    public void start() {
+        setup();
+        run();
+    }
+
+    public static void main(String[] args) { new EssenMakanan().start();}
 }
