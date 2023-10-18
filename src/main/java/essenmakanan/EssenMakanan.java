@@ -1,5 +1,8 @@
 package essenmakanan;
 
+import essenmakanan.command.AddRecipeCommand;
+import essenmakanan.command.Command;
+import essenmakanan.command.RecipeCommand;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.Recipe;
@@ -16,10 +19,9 @@ public class EssenMakanan {
     public static boolean handleRecipeFunctions(RecipeList recipes, String command, String inputDetail) {
         switch(command) {
         case "add":
-            String recipeName = inputDetail.substring(2);
-            Recipe newRecipe = new Recipe(recipeName);
-            recipes.addRecipe(newRecipe);
-            System.out.println("Recipe: " + recipeName + " has been successfully created!");
+            RecipeCommand addCommand = new AddRecipeCommand();
+            addCommand.executeCommand(recipes, inputDetail);
+            System.out.println("Recipe:  + recipeName +  has been successfully created!");
             return true;
         case "view":
             recipes.viewAllRecipes();

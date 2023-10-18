@@ -39,5 +39,7 @@ public class Ui {
         System.out.println("3. View all recipes. [view i]");
     }
 
-
+    public void showRecentAddedRecipe(String recipeTitle) {
+        System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
+    }
 }
