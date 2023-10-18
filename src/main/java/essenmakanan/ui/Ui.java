@@ -42,4 +42,8 @@ public class Ui {
     public void showRecentAddedRecipe(String recipeTitle) {
         System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
     }
+
+    public void showRecentAddedIngredient(String ingredientTitle) {
+        System.out.println("Ingredient: " + ingredientTitle + " has been successfully created!");
+    }
 }
