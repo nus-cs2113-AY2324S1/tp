@@ -5,7 +5,7 @@ public class Ui {
     private final String DIVIDER = "--------------------------------------------";
     public void start() {
         System.out.println("Welcome to EssenMakanan!!! A one-stop place " +
-                "to track the\ningredients in your kitchen and store" +
+                "to track the\ningredients in your kitchen and store " +
                 "your favourite recipes");
 
         System.out.println(DIVIDER);
