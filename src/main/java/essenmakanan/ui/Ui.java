@@ -16,9 +16,9 @@ public class Ui {
     }
 
     public void functionSelect() {
-        System.out.println("Enter the number for the function you want \n" +
-                "1. Recipe \n" +
-                "2. Ingredients");
+        System.out.println("Enter the number for the function you want");
+        System.out.println("1. Recipe");
+        System.out.println("2. Ingredient");
 
         System.out.println(DIVIDER);
     }
