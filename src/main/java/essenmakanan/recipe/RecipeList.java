@@ -9,9 +9,8 @@ public class RecipeList {
         recipes = new ArrayList<>();
     }
 
-    public void addRecipe(String input) {
-        String recipeTitle = input.replace("r/", "");
-        recipes.add(new Recipe(recipeTitle));
+    public void addRecipe(Recipe recipe) {
+        recipes.add(recipe);
     }
 
     public void addRecipe(String title, String[] steps) {
