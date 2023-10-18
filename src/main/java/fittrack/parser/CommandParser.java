@@ -81,7 +81,6 @@ public class CommandParser {
             return new ViewWorkoutsCommand();
         default:
             return new InvalidCommand(word);
-
         }
     }
 
