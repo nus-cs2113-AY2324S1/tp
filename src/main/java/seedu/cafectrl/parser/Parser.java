@@ -33,6 +33,9 @@ public class Parser {
     public static final String INGREDIENT_DIVIDER_STRING = ",";
     public static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "name";
     public static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "qty";
+    public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
+    public static final int PRICE_MATCHER_GROUP_NUM = 2;
+    public static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -92,9 +95,9 @@ public class Parser {
 
         try {
             // To retrieve specific arguments from arguments
-            String dishName = matcher.group(1);
-            float price = Float.parseFloat(matcher.group(2));
-            String ingredientsListString = matcher.group(4);
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
+            float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_NUM));
+            String ingredientsListString = matcher.group(INGREDIENT_LIST_MATCHER_GROUP_NUM);
 
             // Capture the list of ingredients
             ArrayList<Ingredient> ingredients = new ArrayList<>();
