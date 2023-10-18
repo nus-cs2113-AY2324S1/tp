@@ -99,6 +99,7 @@ public class Parser {
 
     /**
      * Parse argument in the context of edit price command
+     * @param menu menu of the current session
      * @param arguments string that matches group arguments
      * @return new EditDishCommand
      */
@@ -107,13 +108,15 @@ public class Parser {
         Matcher matcher = editDishArgumentsPattern.matcher(arguments);
 
         // Checks whether the overall pattern of edit price arguments is correct
-        if (!matcher.matches()) {
+        if (!matcher.find()) {
             return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE);
         }
 
         try {
-            int dishIndex = Integer.parseInt(matcher.group(1));
-            float newPrice = Float.parseFloat(matcher.group(2));
+            int dishIndexGroup = 1;
+            int newPriceGroup = 2;
+            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup));
+            float newPrice = Float.parseFloat(matcher.group(newPriceGroup));
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
