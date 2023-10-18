@@ -2,7 +2,7 @@ package essenmakanan.recipe;
 
 import java.util.ArrayList;
 
-public class RecipeList extends ArrayList<Recipe> {
+public class RecipeList {
     private ArrayList<Recipe> recipes;
 
     public RecipeList() {
