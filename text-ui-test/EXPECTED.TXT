@@ -32,9 +32,9 @@ Check balance of income: balance
 Format:
 balance
 
-Exiting the program: bye
+Exiting the program: exit
 Format:
-bye
+exit
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this income:

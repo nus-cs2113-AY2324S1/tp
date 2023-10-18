@@ -15,7 +15,7 @@ public class Parser {
         String trimmedCommand = fullCommand.trim();
         String commandLowerCase = trimmedCommand.toLowerCase();
 
-        if (commandLowerCase.equals("bye")) {
+        if (commandLowerCase.equals("exit")) {
             return "exit";
         } else if (commandLowerCase.startsWith("add income")) {
             return "add_income";
