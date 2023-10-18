@@ -91,8 +91,12 @@ public class Ui {
         }
     }
 
+    /**
+     * show edit price message to user
+     * @param menuItem menuItem that has been modified
+     */
     public void showEditPriceMessage(String menuItem) {
-        System.out.println("Modified the following dish: ");
-        showToUser(menuItem);
+        System.out.println(Messages.PRICE_MODIFIED_MESSAGE);
+        this.showToUser(menuItem);
     }
 }
