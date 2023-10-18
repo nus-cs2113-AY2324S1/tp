@@ -1,5 +1,5 @@
 package cashleh.parser;
-import exceptions.CashLehDateParsingException;
+import cashleh.exceptions.CashLehDateParsingException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

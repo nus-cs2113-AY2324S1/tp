@@ -1,6 +1,6 @@
 package cashleh.parser;
 
-import exceptions.CashLehParsingException;
+import cashleh.exceptions.CashLehParsingException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

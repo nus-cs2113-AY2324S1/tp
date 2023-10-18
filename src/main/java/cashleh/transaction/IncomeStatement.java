@@ -30,10 +30,10 @@ public class IncomeStatement {
             throw new CashLehMissingTransactionException();
         }
     }
-    public int getNumberOfIncomes() {
+    public int getNumberOfEntries() {
         return incomeStatement.size();
     }
-    public double getSumOfIncomes() {
+    public double getSumOfEntries() {
         return incomeStatement.stream().mapToDouble(Income::getAmount).sum();
     }
 

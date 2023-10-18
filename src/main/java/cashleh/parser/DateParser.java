@@ -1,6 +1,6 @@
 package cashleh.parser;
 
-import exceptions.CashLehDateParsingException;
+import cashleh.exceptions.CashLehDateParsingException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

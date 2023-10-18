@@ -1,6 +1,6 @@
 package cashleh.parser;
 
-import exceptions.CashLehParsingException;
+import cashleh.exceptions.CashLehParsingException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
