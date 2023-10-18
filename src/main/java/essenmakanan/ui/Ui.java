@@ -4,8 +4,8 @@ public class Ui {
 
     private final String DIVIDER = "--------------------------------------------";
     public void start() {
-        System.out.println("Welcome to EssenMakanan!!! A one-stop place" +
-                "to track the\n ingredients in your kitchen and store" +
+        System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
+                "to track the\n ingredients in your kitchen and store " +
                 "your favourite recipes");
 
         System.out.println(DIVIDER);
@@ -16,9 +16,9 @@ public class Ui {
     }
 
     public void functionSelect() {
-        System.out.println("Enter the number for the function you want \n" +
-                "1. Recipe \n" +
-                "2. Ingredients");
+        System.out.println("Enter the number for the function you want");
+        System.out.println("1. Recipe");
+        System.out.println("2. Ingredients");
 
         System.out.println(DIVIDER);
     }
