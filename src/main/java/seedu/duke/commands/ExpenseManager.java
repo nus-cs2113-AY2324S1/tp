@@ -4,6 +4,10 @@ import seedu.duke.parser.ExpenseParser;
 import java.util.HashMap;
 import seedu.duke.financialrecords.Expense;
 
+/**
+ * This is the class that manages the creation of new expense
+ */
+
 public class ExpenseManager extends Commands{
     private final String details;
     private Expense newExpense;
@@ -12,16 +16,33 @@ public class ExpenseManager extends Commands{
         this.details = details;
     }
 
+    /**
+     * This method is used to execute the command
+     *
+     * @throws KaChinnnngException
+     */
     @Override
     public void execute() throws KaChinnnngException {
         HashMap<String, String> expenseFields = extractExpenseFields(details);
         newExpense = ExpenseParser.parseExpense(expenseFields);
     }
 
+    /**
+     * This method returns new expense created
+     *
+     * @return
+     */
     public Expense getNewExpense() {
         return newExpense;
     }
 
+    /**
+     * This method extracts the fields of the expense.
+     *
+     * @param details
+     * @return
+     * @throws KaChinnnngException
+     */
     private HashMap<String, String> extractExpenseFields(String details) throws KaChinnnngException{
         HashMap<String,String> expenseFields = new HashMap<>();
 

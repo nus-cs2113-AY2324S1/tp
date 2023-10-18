@@ -4,22 +4,37 @@ import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import java.util.ArrayList;
 
+/**
+ * Represents the command that when executed, lists all expenses.
+ * This class is a child class of the Command class.
+ *
+ */
 public class ExpenseLister extends Commands {
     private final ArrayList<Expense> expenses;
     private final Ui ui;
 
-    // Updated constructor
+    /**
+     * Constructor for ExpenseLister.
+     *
+     * @param expenses
+     * @param ui
+     */
     public ExpenseLister(ArrayList<Expense> expenses, Ui ui) {
         this.expenses = expenses;
         this.ui = ui;
     }
 
+    /**
+     * This method is used to execute the command.
+     */
     @Override
     public void execute() {
         listExpenses();
     }
 
-    // Updated method name to follow Java naming conventions
+    /**
+     * This method lists all incomes.
+     */
     public void listExpenses() {
         if (expenses.isEmpty()) {
             ui.showLineDivider();
