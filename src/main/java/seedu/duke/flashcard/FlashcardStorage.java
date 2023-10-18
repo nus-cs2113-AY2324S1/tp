@@ -24,6 +24,12 @@ public class FlashcardStorage {
     }
 
 
+    /**
+     * load a flash card from certain format
+     * Tokens includes attributes of Flashcard
+     * @param tokens
+     * @return Flashcard object
+     */
     private Flashcard loadFlashcard(String[] tokens){
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
@@ -56,6 +62,12 @@ public class FlashcardStorage {
         return flashcard;
     }
 
+    /**
+     * load list of flashcards
+     * from this.path
+     * @return list of Flashcards
+     * @throws FileNotFoundException
+     */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
@@ -84,4 +96,7 @@ public class FlashcardStorage {
             System.out.println("Failed to save.");
         }
     }
+
+
+
 }

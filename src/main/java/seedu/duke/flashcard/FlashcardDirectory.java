@@ -5,6 +5,8 @@ import java.io.File;
 /**
  * directory for flashcards
  * can list-up txt files in text folder
+ * In version 1, using only flashcard.txt
+ * In version 2, can select or create
  */
 
 public class FlashcardDirectory {
@@ -43,6 +45,25 @@ public class FlashcardDirectory {
                 System.out.println(flashcardFile);
             }
         }
+    }
+
+    /**
+     * return default directory
+     * for version 1
+     * @return directory for flashcard txt file
+     */
+    public String defaultDirectory() {
+        return this.path + "/flashcard.txt";
+    }
+
+    /**
+     * return directory of flashcard txt file
+     * for version 2
+     * @param path
+     * @return
+     */
+    public String flashcardDirectory(String path) {
+        return this.path + path;
     }
 
 }
