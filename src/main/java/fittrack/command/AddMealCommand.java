@@ -3,9 +3,18 @@ package fittrack.command;
 import fittrack.Meal;
 import fittrack.MealList;
 import fittrack.parser.CommandParser;
+import fittrack.parser.NumberFormatException;
+import fittrack.parser.PatternMatchFailException;
 
 public class AddMealCommand extends Command {
     public static final String COMMAND_WORD = "addmeal";
+
+    private static final String DESCRIPTION =
+            "Add in your meals and their calories!";
+
+    private static final String USAGE =
+            String.format("Type `%s` <mealName> c/<calories> to add your meal.", COMMAND_WORD);
+    public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     private Meal newMeal;
 
@@ -16,22 +25,15 @@ public class AddMealCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) {
-        // TODO: Try to make parse method in CommandParser and
-        // TODO: use the method by parser.parseXXX();
-        // TODO: Refer to CommandParser.parseProfile().
+    public void setArguments(String args, CommandParser parser) throws NumberFormatException, PatternMatchFailException {
 
-        // why is there a need for a command parser,
-        // a argument parser makes more sense here since command is already known
-        // TODO error handling
-        String[] mealArgs = args.split("/cals");
-        newMeal = new Meal(mealArgs[0], Float.parseFloat(mealArgs[1]));
+        newMeal = parser.parseAddMeal(args);
 
     }
 
     @Override
     protected String getHelp() {
         // TODO: Write help. Refer to HelpCommand or ViewMealsCommand.
-        return null;
+        return HELP;
     }
 }
