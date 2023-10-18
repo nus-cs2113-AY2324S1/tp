@@ -47,6 +47,6 @@ public class ExerciseTest {
     public void setNewCaloriesBurnedTest() {
         Exercise testExercise = new Exercise("Football", 309);
         testExercise.setCaloriesBurned(229);
-        assertEquals(testExercise.getCaloriesBurned(), 229);
+        assert testExercise.getCaloriesBurned() == 229;
     }
 }
