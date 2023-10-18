@@ -50,6 +50,6 @@ public class Quizhub {
     }
 
     public static void main(String[] args) {
-         new Quizhub("tasklist.txt").run();
+        new Quizhub("tasklist.txt").run();
     }
 }
