@@ -17,6 +17,6 @@ public class Income extends Transaction {
     }
     @Override
     public String toString() {
-        return getDescription() + " (amount: " + getAmount() + ")";
+        return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
     }
 }

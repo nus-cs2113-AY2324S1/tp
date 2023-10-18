@@ -45,15 +45,10 @@ public class ExpenseStatement {
     public int getNumberOfExpenses() {
         return expenseStatement.size();
     }
-    public double getSumOfExpenses() {
-        return expenseStatement.stream().mapToDouble(Expense::getAmount).sum();
-    }
-
 
     public double getTotalExpenseAmount() {
         return expenseStatement.stream().mapToDouble(Expense::getAmount).sum();
     }
-
 
     public void printExpenses() {
         int listSize = expenseStatement.size();
