@@ -28,14 +28,8 @@ public class Parser {
     public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+) (?<arguments>.*)");
 
     // Command Argument Patterns
-    private static final String ADD_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
-            + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
-            + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
-            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
-    private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
-    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
-    public static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<name>[A-Za-z0-9\\s]+) qty/(?<qty>[A-Za-z0-9\\s]+)";
+    public static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<name>[A-Za-z0-9\\s]+) "
+            + "qty/(?<qty>[A-Za-z0-9\\s]+)";
     public static final String INGREDIENT_DIVIDER_REGEX = ", ";
     public static final String INGREDIENT_DIVIDER_STRING = ",";
     public static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "name";
@@ -43,6 +37,14 @@ public class Parser {
     public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     public static final int PRICE_MATCHER_GROUP_NUM = 2;
     public static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
+    private static final String ADD_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
+            + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
+            + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
+            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
+    private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
+
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -143,7 +145,9 @@ public class Parser {
             ArrayList<Ingredient> ingredients = new ArrayList<>();
 
             IncorrectCommand incorrectCommand = ingredientParsing(ingredientsListString, ingredients);
-            if (incorrectCommand != null) return incorrectCommand;
+            if (incorrectCommand != null) {
+                return incorrectCommand;
+            }
 
             Dish dish = new Dish(dishName, ingredients, price);
 
