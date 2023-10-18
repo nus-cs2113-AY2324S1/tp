@@ -69,7 +69,7 @@ public class Parser {
             return prepareAdd(arguments);
 
         case DeleteDishCommand.COMMAND_WORD:
-            return prepareDelete(arguments);
+            return prepareDelete(menu, arguments);
 
         case ListIngredientCommand.COMMAND_WORD:
             return prepareListIngredient(arguments);
@@ -209,10 +209,11 @@ public class Parser {
     /**
      * Parses arguments in the context of the Delete command.
      *
-     * @param arguments Input from the user
-     * @return Command to be executed
+     * @param menu menu of the current session
+     * @param arguments string that matches group arguments
+     * @return DeleteDishCommand if command is valid, IncorrectCommand otherwise
      */
-    private static Command prepareDelete(String arguments) {
+    private static Command prepareDelete(Menu menu, String arguments) {
         Pattern deleteDishArgumentsPattern = Pattern.compile(DELETE_ARGUMENT_STRING);
         Matcher matcher = deleteDishArgumentsPattern.matcher(arguments.trim());
 
@@ -221,13 +222,14 @@ public class Parser {
             return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_DELETE);
         }
 
-        try {
-            int listIndexArgGroup = 1;
-            int listIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
-            return new DeleteDishCommand(listIndex);
-        } catch (NumberFormatException nfe) {
-            return new IncorrectCommand("MESSAGE_INVALID_TASK_DISPLAYED_INDEX");
+        int listIndexArgGroup = 1;
+        int dishIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
+
+        if (!menu.isValidDishIndex(dishIndex)) {
+            return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
         }
+
+        return new DeleteDishCommand(dishIndex);
     }
 
     /**
