@@ -6,11 +6,17 @@ public class UsageInstructions {
     // Shows a message linking the user to the user guide of our app
     private final seedu.duke.ui.Ui ui;
 
-
+    /**
+     * The `UsageInstructions` class provides usage instructions for the application,
+     * including command formats and a link to the user guide.
+     */
     public UsageInstructions(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Displays usage instructions for the application, including command formats and a link to the user guide.
+     */
     public void getHelp(){
         ui.showLineDivider();
         // Shows a message linking the user to the user guide of our app
@@ -25,7 +31,7 @@ public class UsageInstructions {
         System.out.println("Deleting an entry: delete\nFormat:\ndelete income [index_pos]\n" +
                 "delete expense [index_pos]\n");
         System.out.println("Check balance of income: balance\nFormat:\n" + "balance\n");
-        System.out.println("Exiting the program: exit\nFormat:\n" + "exit");
+        System.out.println("Exiting the program: bye\nFormat:\n" + "bye");
         ui.showLineDivider();
     }
 }
