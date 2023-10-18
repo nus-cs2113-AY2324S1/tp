@@ -85,6 +85,7 @@ public class Parser {
 
     /**
      * Parse argument in the context of edit price command
+     * @param menu menu of the current session
      * @param arguments string that matches group arguments
      * @return new EditDishCommand
      */
@@ -98,8 +99,10 @@ public class Parser {
         }
 
         try {
-            int dishIndex = Integer.parseInt(matcher.group(1));
-            float newPrice = Float.parseFloat(matcher.group(2));
+            int dishIndexGroup = 1;
+            int newPriceGroup = 2;
+            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup));
+            float newPrice = Float.parseFloat(matcher.group(newPriceGroup));
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
