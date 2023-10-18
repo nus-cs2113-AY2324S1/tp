@@ -25,7 +25,8 @@ public class AddMealCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) throws NumberFormatException, PatternMatchFailException {
+    public void setArguments(String args, CommandParser parser)
+            throws NumberFormatException, PatternMatchFailException {
 
         newMeal = parser.parseAddMeal(args);
 

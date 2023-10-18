@@ -143,7 +143,7 @@ public class CommandParser {
             throw new NumberFormatException();
         }
     }
-    
+
 
     // TODO: Make a parse method for a work.
 
