@@ -32,7 +32,6 @@ public class FitTrack {
      * Main entry-point for the FitTrack application.
      */
     public static void main(String[] args) {
-        assert false: "dummy assertion set to fail";
         new FitTrack().run();
     }
 
@@ -80,7 +79,7 @@ public class FitTrack {
         );
         String input = ui.scanNextLine();
 
-        assert (input == null) : "input cannot be null";
+        assert (input != null) : "input cannot be null";
 
         UserProfile profile = new CommandParser().parseProfile(input);
         userProfile.setHeight(profile.getHeight());
