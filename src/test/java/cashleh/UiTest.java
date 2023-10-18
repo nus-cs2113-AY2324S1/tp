@@ -14,7 +14,6 @@ public class UiTest {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
     private static final String SEPARATOR = System.lineSeparator();
     Ui testUi = new Ui();
-
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 

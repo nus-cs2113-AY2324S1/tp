@@ -12,7 +12,7 @@ import cashleh.commands.ViewExpenses;
 import cashleh.commands.ViewIncomes;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.IncomeStatement;
-import exceptions.CashLehException;
+import cashleh.exceptions.CashLehException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;

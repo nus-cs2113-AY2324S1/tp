@@ -1,4 +1,4 @@
-package exceptions;
+package cashleh.exceptions;
 
 /**
  * The <code>CashLehException</code> class represents a custom exception used in the CashLeh application.
@@ -13,5 +13,4 @@ public class CashLehException extends Exception {
     public CashLehException(String message) {
         super(message);
     }
-
 }

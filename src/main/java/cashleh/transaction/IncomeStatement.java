@@ -1,7 +1,7 @@
 package cashleh.transaction;
 
+import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.Ui;
-import exceptions.CashLehMissingTransactionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,17 +30,17 @@ public class IncomeStatement {
             throw new CashLehMissingTransactionException();
         }
     }
-    public int getNumberOfEntries() {
+    public int getNumberOfIncomes() {
         return incomeStatement.size();
     }
-    public double getSumOfEntries() {
+    public double getSumOfIncomes() {
         return incomeStatement.stream().mapToDouble(Income::getAmount).sum();
     }
 
     public void printIncomes() {
         int listSize = incomeStatement.size();
         String[] texts = new String[listSize + 1];
-        texts[0] = "The current sum of all your incomes amounts to: ";
+        texts[0] = "Here's a list of your current incomes:";
         for (int i = 1; i <= listSize; i++) {
             Income currentIncome = incomeStatement.get(i - 1);
             texts[i] = "\t" + i + "." + currentIncome.toString();

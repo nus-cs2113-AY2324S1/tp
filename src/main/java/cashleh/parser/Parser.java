@@ -4,7 +4,12 @@ import cashleh.transaction.Expense;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.Income;
 import cashleh.transaction.IncomeStatement;
+<<<<<<< HEAD:src/main/java/cashleh/parser/Parser.java
 import exceptions.CashLehParsingException;
+=======
+import cashleh.exceptions.CashLehException;
+import cashleh.exceptions.CashLehParsingException;
+>>>>>>> master:src/main/java/cashleh/Parser.java
 import cashleh.commands.Command;
 import cashleh.commands.AddIncome;
 import cashleh.commands.AddExpense;
