@@ -22,11 +22,12 @@ public class IngredientList {
     }
 
     public void listIngredients() {
-        int ingredientCount = 0;
+        int ingredientCount = 1;
 
+        System.out.println("Here's a list of your ingredients!");
         for (Ingredient ingredient : ingredients) {
-            ingredientCount++;
             System.out.println(ingredientCount + ". " + ingredient.getName());
+            ingredientCount++;
         }
     }
 }

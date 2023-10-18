@@ -4,8 +4,8 @@ public class Ui {
 
     private final String DIVIDER = "--------------------------------------------";
     public void start() {
-        System.out.println("Welcome to EssenMakanan!!! A one-stop place" +
-                "to track the\n ingredients in your kitchen and store" +
+        System.out.println("Welcome to EssenMakanan!!! A one-stop place " +
+                "to track the\ningredients in your kitchen and store" +
                 "your favourite recipes");
 
         System.out.println(DIVIDER);
@@ -28,15 +28,15 @@ public class Ui {
     }
 
     public void showRecipeFunctions() {
-        System.out.println("1. Add recipe. [add r/RECIPE_NAME]");
-        System.out.println("2. Delete recipe. [delete r/RECIPE_ID]");
-        System.out.println("3. View all recipes. [view r]");
+        System.out.println("- Add recipe. [add r/RECIPE_NAME]");
+        System.out.println("- Delete recipe. [delete r/RECIPE_ID]");
+        System.out.println("- View all recipes. [view r]");
     }
 
     public void showIngredientFunctions() {
-        System.out.println("1. Add ingredient. [add i/INGREDIENT_NAME]");
-        System.out.println("2. Delete recipe. [delete i/INGREDIENT_ID]");
-        System.out.println("3. View all recipes. [view i]");
+        System.out.println("- Add ingredient. [add i/INGREDIENT_NAME]");
+        System.out.println("- Delete ingredient. [delete i/INGREDIENT_ID]");
+        System.out.println("- View all ingredients. [view i]");
     }
 
 

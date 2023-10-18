@@ -9,9 +9,8 @@ public class RecipeList {
         recipes = new ArrayList<>();
     }
 
-    public void addRecipe(String input) {
-        String recipeTitle = input.replace("r/", "");
-        recipes.add(new Recipe(recipeTitle));
+    public void addRecipe(Recipe recipe) {
+        recipes.add(recipe);
     }
 
     public void addRecipe(String title, String[] steps) {
@@ -26,8 +25,10 @@ public class RecipeList {
         recipes.remove(recipe);
     }
 
-    public void viewAllRecipes() {
+    public void listRecipes() {
         int count = 1;
+
+        System.out.println("Here's a list of your recipes!");
         for (Recipe recipe : recipes) {
             System.out.println(count + ". " + recipe);
             count ++;

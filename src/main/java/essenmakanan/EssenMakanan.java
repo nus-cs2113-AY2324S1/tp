@@ -2,6 +2,7 @@ package essenmakanan;
 
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 import java.util.Scanner;
@@ -15,12 +16,14 @@ public class EssenMakanan {
     public static boolean handleRecipeFunctions(RecipeList recipes, String command, String inputDetail) {
         switch(command) {
         case "add":
-            String recipeName = inputDetail.substring(2);
-            recipes.addRecipe(inputDetail);
+            String recipeName = inputDetail.replace("r/", "");
+            Recipe newRecipe = new Recipe(recipeName);
+
+            recipes.addRecipe(newRecipe);
             System.out.println("Recipe: " + recipeName + " has been successfully created!");
             return true;
         case "view":
-            recipes.viewAllRecipes();
+            recipes.listRecipes();
             return true;
         default:
             return false;
@@ -30,8 +33,9 @@ public class EssenMakanan {
     public static boolean handleIngredientFunctions(IngredientList ingredients, String command, String inputDetail) {
         switch(command) {
         case "add":
-            String ingredientName = inputDetail.substring(2);
+            String ingredientName = inputDetail.replace("i/", "");
             Ingredient newIngredient = new Ingredient(ingredientName);
+
             ingredients.addIngredient(newIngredient);
             System.out.println("Ingredient: " + ingredientName + " has been successfully created!");
             return true;
