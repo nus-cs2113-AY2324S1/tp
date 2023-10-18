@@ -28,6 +28,7 @@ public class DeleteDishCommand extends Command {
             menu.removeDish(index);
         } catch (IndexOutOfBoundsException e) {
             ui.showToUser(INVALID_INDEX_MESSAGE);
+            throw new IndexOutOfBoundsException();
         }
     }
 }
