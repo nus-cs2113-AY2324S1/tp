@@ -27,8 +27,10 @@ public class RecipeList extends ArrayList<Recipe> {
     }
 
     public void viewAllRecipes() {
+        int count = 1;
         for (Recipe recipe : recipes) {
-            System.out.println(recipe);
+            System.out.println(count + ". " + recipe);
+            count ++;
         }
     }
 
