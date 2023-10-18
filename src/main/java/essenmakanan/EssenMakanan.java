@@ -16,7 +16,7 @@ public class EssenMakanan {
     public static boolean handleRecipeFunctions(RecipeList recipes, String command, String inputDetail) {
         switch(command) {
         case "add":
-            String recipeName = inputDetail.replace("r/", "");
+            String recipeName = inputDetail.substring(2);
             Recipe newRecipe = new Recipe(recipeName);
 
             recipes.addRecipe(newRecipe);
@@ -58,9 +58,8 @@ public class EssenMakanan {
         Scanner in = new Scanner(System.in);
 
         String functionInput;
-        String input;
+        String input = "";
         boolean validInput;
-
 
         do {
             validInput = true;
@@ -88,7 +87,8 @@ public class EssenMakanan {
 
             // exit while loop for invalid inputs
             if (!validInput) {
-                break;
+                ui.bye();
+                System.exit(0);
             }
 
             if (in.hasNextLine()) {
