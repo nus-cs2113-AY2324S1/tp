@@ -4,12 +4,19 @@ import seedu.duke.commands.KaChinnnngException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
+import java.util.logging.Logger;
+
 /**
  * Represents the abstract class for all financial records.
  * This class serves as a blueprint for all specific financial record classes in the application
  *
  */
 public abstract class FinancialRecord{
+
+    // Logger instance to log events and issues that occur during the execution of this class.
+    private static final Logger LOGGER = Logger.getLogger(FinancialRecord.class.getName());
+    
     protected String description;
     protected LocalDate date;
     protected double amount;
@@ -24,13 +31,19 @@ public abstract class FinancialRecord{
      * @throws KaChinnnngException if there is an error in the command
      */
     public FinancialRecord(String description, LocalDate date, double amount) throws KaChinnnngException {
-        if (description == null || description.trim().isEmpty()) {
+        assert description != null : "description should not be null";
+        assert date != null : "date should not be null";
+
+        if (description.trim().isEmpty()) {
+            LOGGER.warning("Description is empty");
             throw new KaChinnnngException("Description cannot be empty!");
         }
         if (amount < 0) {
+            LOGGER.warning("Amount is negative");
             throw new KaChinnnngException("Amount cannot be negative!");
         }
         if (date.isAfter(LocalDate.now())) {
+            LOGGER.warning("Date is in the future");
             throw new KaChinnnngException("Date cannot be in the future!");
         }
         this.description = description;
@@ -96,6 +109,7 @@ public abstract class FinancialRecord{
      * @throws KaChinnnngException if there is an error in the command
      */
     public void setDescription(String description) throws KaChinnnngException {
+        assert description != null : "description should not be null";
         if (description.trim().isEmpty()) {
             throw new KaChinnnngException("Description cannot be empty!");
         }
@@ -110,6 +124,7 @@ public abstract class FinancialRecord{
      * @throws KaChinnnngException if there is an error in the command
      */
     public void setDate(LocalDate date) throws KaChinnnngException {
+        assert date != null : "date should not be null";
         this.date = date;
     }
 
@@ -121,6 +136,7 @@ public abstract class FinancialRecord{
      * @throws KaChinnnngException if there is an error in the command
      */
     public void setAmount(double amount) throws KaChinnnngException {
+        assert amount >= 0 : "amount should not be negative";
         this.amount = amount;
     }
 

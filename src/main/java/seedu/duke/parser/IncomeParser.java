@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents the parser for the Income class.
@@ -18,6 +20,9 @@ public class IncomeParser {
     public static final String AMOUNT_FIELD = "am";
     public static final String INDEX_FIELD = "in";
 
+    public static final Logger LOGGER = Logger.getLogger(IncomeParser.class.getName());
+
+
     /**
      * This method is used to parse the date of the income.
      * This method is used by the IncomeParser class in the application
@@ -28,15 +33,19 @@ public class IncomeParser {
      * @throws KaChinnnngException if there is an error in the command
      */
     public static LocalDate parseDate(String incomeDateString) throws KaChinnnngException {
+        assert incomeDateString != null : "incomeDateString should not be null";
+
         LocalDate incomeDate;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
                 .withResolverStyle(ResolverStyle.STRICT);
         try {
             incomeDate = LocalDate.parse(incomeDateString, formatter);
         } catch (DateTimeParseException e) {
+            LOGGER.log(Level.WARNING, "Invalid date format" + incomeDateString, e);
             throw new KaChinnnngException("Please enter a valid date in the format dd/MM/yyyy");
         }
         if (incomeDate.isAfter(LocalDate.now())) {
+            LOGGER.log(Level.WARNING, "Date is in the future" + incomeDateString);
             throw new KaChinnnngException("Please enter a date that is not in the future");
         }
         return incomeDate;
@@ -84,6 +93,7 @@ public class IncomeParser {
      * @throws KaChinnnngException if there is an error in the command
      */
     public static int getIndex(HashMap<String, String> argumentsByFields) throws KaChinnnngException {
+        assert argumentsByFields != null : "argumentsByFields should not be null";
         if (!argumentsByFields.containsKey(INDEX_FIELD)) {
             throw new KaChinnnngException("Missing index field detected");
         }

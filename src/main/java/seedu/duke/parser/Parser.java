@@ -1,9 +1,13 @@
 package seedu.duke.parser;
 
+import java.util.logging.Logger;
+
 /*
  * parser class to parse user input
  */
 public class Parser {
+    //private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     /**
      * This method is used to parse the user input.
      * This method is used by the Main class in the application
@@ -12,30 +16,40 @@ public class Parser {
      * @return String containing the command to be executed
      */
     public static String parse(String fullCommand) {
+
+        assert fullCommand != null : "fullCommand should not be null";
+
         String trimmedCommand = fullCommand.trim();
         String commandLowerCase = trimmedCommand.toLowerCase();
 
+        LOGGER.info("Parsing user input:" + fullCommand);
+
+        String resultCommand;
+
         if (commandLowerCase.equals("exit")) {
-            return "exit";
+            resultCommand = "exit";
         } else if (commandLowerCase.startsWith("add income")) {
-            return "add_income";
+            resultCommand = "add_income";
         } else if (commandLowerCase.equals("list income")) {
-            return "list_income";
+            resultCommand = "list_income";
         } else if (commandLowerCase.startsWith("add expense")) {
-            return "add_expense";
+            resultCommand = "add_expense";
         } else if (commandLowerCase.equals(("list expense"))) {
-            return "list_expense";
+            resultCommand = "list_expense";
         } else if (commandLowerCase.equals("help")) {
-            return "help";
+            resultCommand = "help";
         } else if (commandLowerCase.equals("list")) {
-            return "list";
+            resultCommand = "list";
         } else if (commandLowerCase.startsWith("delete income")) {
-            return "delete_income";
+            resultCommand = "delete_income";
         } else if (commandLowerCase.startsWith("delete expense")) {
-            return "delete_expense";
+            resultCommand = "delete_expense";
         } else if (commandLowerCase.equals("balance")) {
-            return "balance";
+            resultCommand = "balance";
+        } else {
+            resultCommand = "invalid";
         }
-        return "invalid";
+        LOGGER.info("Parsed command: " + resultCommand);
+        return resultCommand;
     }
 }
