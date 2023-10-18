@@ -5,3 +5,5 @@ Enter the number for the function you want
 1. Recipe
 2. Ingredients
 --------------------------------------------
+Please enter valid input.
+Hope you had fun! See you again!

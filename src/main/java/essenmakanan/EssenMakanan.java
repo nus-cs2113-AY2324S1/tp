@@ -55,7 +55,7 @@ public class EssenMakanan {
 
         Scanner in = new Scanner(System.in);
         String functionInput;
-        String input;
+        String input = "";
         boolean validInput;
 
         do {
@@ -79,7 +79,8 @@ public class EssenMakanan {
 
             // exit while loop for invalid inputs
             if (!validInput) {
-                break;
+                ui.bye();
+                System.exit(0);
             }
 
             input = in.nextLine();
