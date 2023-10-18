@@ -95,6 +95,17 @@ public class Ui {
     }
 
     /**
+     * Shows menu to user is table format
+     * @param dishName
+     * @param dishPrice
+     */
+    public void showToUserFormat(String dishName, String dishPrice) {
+        String leftAlignFormat = "| %-24s | %-12s |%n";
+        System.out.format(leftAlignFormat, dishName, dishPrice);
+    }
+    //+-----------------+------+
+
+    /**
      * show edit price message to user
      * @param menuItem menuItem that has been modified
      */

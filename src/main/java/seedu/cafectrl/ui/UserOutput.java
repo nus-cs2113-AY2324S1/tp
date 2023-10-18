@@ -7,6 +7,10 @@ public enum UserOutput {
     WELCOME_MESSAGE("Hello! Welcome to CafeCTRL!"),
     GOODBYE_MESSAGE("Goodbye <3 Have a great day ahead!"),
     LIST_MESSAGE("Ah, behold, the grand menu of delights!"),
+    MENU_TOP("+-----------------------------------------+"),
+    MENU_CORNER("+--------------------------+--------------+"),
+    MENU_TITLE("| Dish Name                |  Price       |"),
+    LIST_MESSAGE_MENU("| Ah, behold, the grand menu of delights! |"),
     ADD_DISH_MESSAGE("You have added the following dish..."),
     UNKNOWN_COMMAND_MESSAGE("Your command has left me scratching my virtual head. Let's try that again, shall we?");
 
