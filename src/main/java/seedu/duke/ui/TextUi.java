@@ -14,6 +14,8 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import seedu.duke.commands.CommandResult;
+import seedu.duke.data.Goal;
+import seedu.duke.data.GoalList;
 import seedu.duke.data.Printable;
 
 /**
@@ -188,6 +190,27 @@ public class TextUi {
      */
     private static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
+    }
+
+    public void printNumberofGoal(int goalCount) {
+        System.out.println("You still have " + goalCount + " goals to accomplish. Add oil!" );
+    }
+
+    public void printDeleteGoal(Goal deletedGoal) {
+        System.out.println("Good. I have removed this goal: " + deletedGoal);
+        System.out.println("Remember not to give up unaccomplished goal! ");
+    }
+
+    /**
+     * This method is used to implement Goal commend execution, when adding a new goal
+     * @param goals the goals list which is under operation
+     * @return string contains information of generating a new goal successfully
+     */
+    public static String addGoalSuccessMessage(GoalList goals) {
+        int currentNoOfGoal = goals.getGoalCount();
+        Goal newlyAddedGoal = goals.getGoal(currentNoOfGoal - 1);
+
+        return "Nice! I have added the following goal to your goal lists: \n\t" + newlyAddedGoal;
     }
 
 }
