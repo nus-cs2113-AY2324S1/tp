@@ -19,10 +19,6 @@ public class Day {
         return exercises.remove(new Exercise(exerciseName, caloriesBurned));
     }
 
-    public ArrayList<Exercise> getExercises() {
-        return new ArrayList<>(exercises);
-    }
-
     public Exercise getExercise(int index) {
         return exercises.get(index);
     }
