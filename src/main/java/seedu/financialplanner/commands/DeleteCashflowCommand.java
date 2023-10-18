@@ -7,23 +7,23 @@ import seedu.financialplanner.utils.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DeleteCashflowCommand extends AbstractCommand{
-    private static Logger logger = Logger.getLogger("Financial Planner Logger");
-    protected CashflowCategory category = CashflowCategory.EMPTY;
+public class DeleteCashflowCommand extends AbstractCommand {
+
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
+    protected CashflowCategory category = null;
     protected int index;
 
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
-        String stringCategory;
+        String stringCategory = null;
 
         if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
-        } else {
+        } else if (rawCommand.args.size() == 2) {
             stringCategory = rawCommand.args.get(0);
-
-            handleInvalidCategory(stringCategory);
-
             stringIndex = rawCommand.args.get(1);
+        } else {
+            throw new IllegalArgumentException("Incorrect arguments.");
         }
 
         try {
@@ -37,6 +37,13 @@ public class DeleteCashflowCommand extends AbstractCommand{
         if (index == 0) {
             logger.log(Level.WARNING, "Invalid value for index");
             throw new IllegalArgumentException("Index must be within the list");
+        }
+        if (stringCategory != null) {
+            try {
+                category = CashflowCategory.valueOf(stringCategory.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Entry must be either income or expense");
+            }
         }
     }
 
@@ -52,6 +59,10 @@ public class DeleteCashflowCommand extends AbstractCommand{
 
     @Override
     public void execute() {
+        if (category == null) {
+            handleDeleteCashflowWithoutCategory();
+            return;
+        }
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
         assert index != 0;
 
@@ -59,9 +70,6 @@ public class DeleteCashflowCommand extends AbstractCommand{
         case INCOME:
         case EXPENSE:
             handleDeleteCashflowWithCategory();
-            break;
-        case EMPTY:
-            handleDeleteCashflowWithoutCategory();
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");
