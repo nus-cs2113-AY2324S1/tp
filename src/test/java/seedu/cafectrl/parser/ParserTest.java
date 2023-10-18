@@ -2,7 +2,7 @@ package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.command.Command;
-
+import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.data.Menu;
@@ -74,6 +74,66 @@ class ParserTest {
     public void parseCommand_indexOutOfBounds_returnsErrorMessage() {
         Menu menu = new Menu();
         String userInput = "list_ingredients 1";
+        Command result = Parser.parseCommand(menu, userInput);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(Messages.INVALID_DISH_INDEX, feedbackToUser);
+    }
+
+    @Test
+    public void parseCommand_validDeleteCommand_successfulCommandParse() {
+        ArrayList<Dish> menuItems = new ArrayList<>();
+        menuItems.add(new Dish("Chicken Rice",
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", "1 cup"),
+                        new Ingredient("Chicken", "100g"))), 8.0F));
+        menuItems.add(new Dish("Chicken Sandwich",
+                new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", "100g"),
+                        new Ingredient("Chicken", "50g"))), 5.0F));
+        Menu menu = new Menu(menuItems);
+
+        String userInput = "delete 1";
+        Command result = Parser.parseCommand(menu, userInput);
+
+        assertTrue(result instanceof DeleteDishCommand);
+
+        DeleteDishCommand deleteDishCommand = (DeleteDishCommand) result;
+        int index = deleteDishCommand.index;
+        assertEquals(1, index);
+    }
+
+    @Test
+    public void parseCommand_missingDeleteIndex_returnsErrorMessage() {
+        Menu menu = new Menu();
+        String userInput = "delete";
+        Command result = Parser.parseCommand(menu, userInput);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(Messages.MISSING_ARGUMENT_FOR_DELETE, feedbackToUser);
+    }
+
+    @Test
+    public void parseCommand_invalidDeleteIndex_returnsErrorMessage() {
+        Menu menu = new Menu();
+        String userInput = "delete a";
+        Command result = Parser.parseCommand(menu, userInput);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(Messages.MISSING_ARGUMENT_FOR_DELETE, feedbackToUser);
+    }
+
+    @Test
+    public void parseCommand_deleteIndexOutOfBounds_returnsErrorMessage() {
+        Menu menu = new Menu();
+        String userInput = "delete 1";
         Command result = Parser.parseCommand(menu, userInput);
 
         assertTrue(result instanceof IncorrectCommand);
