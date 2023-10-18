@@ -32,6 +32,7 @@ public class CommandResult {
 
     /**
      * Returns a list of objects relevant to the command result, if any.
+     * @return relevant items
      */
     public Optional<List<? extends Printable>> getRelevantItems() {
         return Optional.ofNullable(relevantItems);

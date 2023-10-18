@@ -15,6 +15,7 @@ public class Command {
 
     /**
      * Executes the command and returns the result.
+     * @return error message
      */
     public CommandResult execute() {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");

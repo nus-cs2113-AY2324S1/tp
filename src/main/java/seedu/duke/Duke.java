@@ -29,6 +29,7 @@ public class Duke {
     }
 
     /**
+     * @param launchArgs
      * Runs the program until termination.
      */
     public void run(String[] launchArgs) {

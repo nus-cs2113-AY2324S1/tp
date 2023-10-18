@@ -131,6 +131,7 @@ public class TextUi {
     }
 
     /**
+     * @param message
      * Shows message(s) to the user
      */
     public void showToUser(String... message) {
@@ -140,6 +141,7 @@ public class TextUi {
     }
 
     /**
+     * @param result
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
      */
