@@ -16,7 +16,7 @@ class ExpenseStatementTest {
     }
 
     @Test
-    void getNumberOfEntries() {
+    void getNumberOfExpenses() {
         assertEquals(testStatement.getNumberOfExpenses(), 0);
         testStatement.addExpense(testExpense);
         assertEquals(testStatement.getNumberOfExpenses(), 1);
@@ -25,7 +25,7 @@ class ExpenseStatementTest {
     }
 
     @Test
-    void getSumOfEntries() {
+    void getSumOfExpenses() {
         testStatement.addExpense(testExpense);
         assertEquals(testStatement.getSumOfExpenses(), 1200);
         testStatement.addExpense(testExpense);

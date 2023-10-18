@@ -16,7 +16,7 @@ class IncomeStatementTest {
     }
 
     @Test
-    void getNumberOfEntries() {
+    void getNumberOfIncomes() {
         assertEquals(testStatement.getNumberOfIncomes(), 0);
         testStatement.addIncome(testIncome);
         assertEquals(testStatement.getNumberOfIncomes(), 1);
@@ -25,7 +25,7 @@ class IncomeStatementTest {
     }
 
     @Test
-    void getSumOfEntries() {
+    void getSumOfIncomes() {
         testStatement.addIncome(testIncome);
         assertEquals(testStatement.getSumOfIncomes(), 200);
         testStatement.addIncome(testIncome);

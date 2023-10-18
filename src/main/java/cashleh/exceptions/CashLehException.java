@@ -13,14 +13,4 @@ public class CashLehException extends Exception {
     public CashLehException(String message) {
         super(message);
     }
-    public static CashLehException invalidAddIncomeFormat() {
-        return new CashLehException("Invalid income. Please include description, amount "
-                + " and date of income in following format:"
-                + "\"addIncome DESCRIPTION /amtAMOUNT /dDATE\"");
-    }
-    public static CashLehException invalidDeleteIncomeFormat() {
-        return new CashLehException("Invalid input format. Please provide a valid"
-                + "task index to delete");
-    }
-
 }
