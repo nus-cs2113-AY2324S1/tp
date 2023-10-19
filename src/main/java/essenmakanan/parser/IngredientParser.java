@@ -12,8 +12,8 @@ public class IngredientParser {
         case "add":
             String[] allIngredients = inputDetail.split("/i");
 
-            System.out.println("Ingredient(s) added to your inventory: ");
             for (String ingredient : allIngredients) {
+                Ui.printAddIngredientsSuccess(ingredient);
                 ingredient = ingredient.strip();
                 Ingredient newIngredient = new Ingredient(ingredient);
                 ingredients.addIngredient(newIngredient);

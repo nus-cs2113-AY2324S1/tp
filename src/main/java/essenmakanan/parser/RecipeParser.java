@@ -11,10 +11,12 @@ public class RecipeParser {
         switch(command) {
         case "add":
             String recipeName = inputDetail.substring(2);
-            Recipe newRecipe = new Recipe(recipeName);
+            assert !recipeName.contains("r/") : "Recipe name should not contain key characters";
 
+            Recipe newRecipe = new Recipe(recipeName);
             recipes.addRecipe(newRecipe);
-            System.out.println("Recipe: " + recipeName + " has been successfully created!");
+
+            Ui.printAddRecipeSuccess(recipeName);
             break;
         case "view":
             Ui.printAllRecipes(recipes);
