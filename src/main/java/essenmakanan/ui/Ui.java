@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Ui {
 
     private final String DIVIDER = "--------------------------------------------";
+
     public void start() {
-
+        drawDivider();
         System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
-                "to track the\n ingredients in your kitchen and store " +
+                "to track the\ningredients in your kitchen and store " +
                 "your favourite recipes");
-
-        System.out.println(DIVIDER);
+        drawDivider();
     }
 
     public void bye() {
@@ -34,15 +34,11 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public void showRecipeFunctions() {
+    public void showCommands() {
+        System.out.println("Here are the commands currently available:");
         System.out.println("- Add recipe. [add r/RECIPE_NAME]");
-        System.out.println("- Delete recipe. [delete r/RECIPE_ID]");
         System.out.println("- View all recipes. [view r]");
-    }
-
-    public void showIngredientFunctions() {
         System.out.println("- Add ingredient. [add i/INGREDIENT_NAME]");
-        System.out.println("- Delete ingredient. [delete i/INGREDIENT_ID]");
         System.out.println("- View all ingredients. [view i]");
     }
 

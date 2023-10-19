@@ -10,7 +10,7 @@ public class ViewIngredientsCommand extends Command {
     }
 
     @Override
-    public void executeCommand(RecipeList recipes, IngredientList ingredients, String input) {
+    public void executeCommand(RecipeList recipes, IngredientList ingredients) {
         ingredients.listIngredients(ui);
     }
 }

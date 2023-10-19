@@ -5,9 +5,11 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 
 public class AddIngredientCommand extends Command{
+    private String toAdd;
 
-    public AddIngredientCommand() {
+    public AddIngredientCommand(String toAdd) {
         super(false);
+        this.toAdd = toAdd;
     }
 
     public String parseIngredientTitle(String input) {
@@ -15,8 +17,8 @@ public class AddIngredientCommand extends Command{
     }
 
     @Override
-    public void executeCommand(RecipeList recipes,IngredientList ingredients, String input) {
-        String ingredientTitle = parseIngredientTitle(input);
+    public void executeCommand(RecipeList recipes,IngredientList ingredients) {
+        String ingredientTitle = parseIngredientTitle(toAdd);
         Ingredient newIngredient = new Ingredient(ingredientTitle);
         ingredients.addIngredient(newIngredient);
         ui.showRecentAddedIngredient(ingredientTitle);
