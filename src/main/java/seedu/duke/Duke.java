@@ -33,30 +33,34 @@ public class Duke {
                 System.out.println("Bye bye");
                 break;
             } else if (input.equals("flashcard")) {
+                System.out.println("    Switched to flashcard functions");
                 runFlashcard();
             } else if (manager.validCommand(input)) {
                 manager.startCalendar(input);
             } else {
                 System.out.println("Invalid command! Enter a valid command.");
             }
-
         }
-
     }
 
     private void runFlashcard() {
-        System.out.print("Enter your command: ");
-
         FlashcardComponent fc = new FlashcardComponent(new ArrayList<Flashcard>());
 
         Scanner scanner = new Scanner(System.in);
         String input;
         boolean shouldTerminate = false;
 
+        System.out.print("Enter your command: ");
         while (!shouldTerminate) {
             input = scanner.nextLine();
 
-            if (fc.isResponsible(input)) {
+            if (input.equals("end program")) {
+                System.out.println("Bye bye");
+                break;
+            } else if (input.equals("calendar")) {
+                System.out.println("    Switched to calendar functions");
+                runCalendar();
+            } else if (fc.isResponsible(input)) {
                 fc.processInput(input);
             } else {
                 System.out.println("    Invalid command! Sorry; please try again.");
