@@ -1,6 +1,6 @@
-package seedu.duke.calendar.command;
+//@@ kherlenbayasgalan & jingxizhu
 
-import seedu.duke.calendar.Calendar;
+package seedu.duke.calendar.command;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;

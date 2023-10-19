@@ -1,12 +1,13 @@
+//@@author @@kherlenbayasgalan & @@ Jingxizhu
+
 package seedu.duke.calendar;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Event {
-    String name;
-    LocalDateTime from;
-    LocalDateTime to;
+    private String name;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     public Event(String name, LocalDateTime from, LocalDateTime to) {
         this.name = name;
