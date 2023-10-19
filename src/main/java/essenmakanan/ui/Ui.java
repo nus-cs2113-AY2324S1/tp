@@ -1,5 +1,11 @@
 package essenmakanan.ui;
 
+import essenmakanan.ingredient.Ingredient;
+import essenmakanan.recipe.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ui {
 
     private final String DIVIDER = "--------------------------------------------";
@@ -39,5 +45,55 @@ public class Ui {
         System.out.println("3. View all recipes. [view i]");
     }
 
+    public void showRecentAddedRecipe(String recipeTitle) {
+        System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
+    }
 
+    public void showRecentAddedIngredient(String ingredientTitle) {
+        System.out.println("Ingredient: " + ingredientTitle + " has been successfully created!");
+    }
+
+    public void printAllRecipes(ArrayList<Recipe> recipes) {
+        int count = 1;
+        for (Recipe recipe : recipes) {
+            assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
+                    : "Title is not matching with the current index";
+
+            System.out.println(count + ". " + recipe);
+            count++;
+        }
+    }
+
+    public void printSpecificRecipes(int index, ArrayList<Recipe> recipes) {
+        Recipe recipe = recipes.get(index);
+        printStepsOfSpecificRecipe(recipe);
+    }
+
+    private static void printStepsOfSpecificRecipe(Recipe recipe) {
+        List<String> steps = recipe.getRecipeSteps();
+        int count = 1;
+        for (String step : steps) {
+            assert steps.get(count - 1).equals(step) : "The description of steps is not matching with the current index";
+
+            System.out.println("Step " + count + ": " + step);
+            count++;
+        }
+    }
+
+    public void printSpecificRecipes(String title, ArrayList<Recipe> recipes) {
+        Recipe wantedRecipe = recipes.stream().filter(recipe -> recipe.getTitle().equals(title)).findFirst().orElse(null);
+        assert wantedRecipe != null : "There's no recipe with the given title in current recipe list";
+        printStepsOfSpecificRecipe(wantedRecipe);
+    }
+
+
+
+    public void printAllIngredients(ArrayList<Ingredient> ingredients) {
+        int ingredientCount = 0;
+
+        for (Ingredient ingredient : ingredients) {
+            ingredientCount++;
+            System.out.println(ingredientCount + ". " + ingredient.getName());
+        }
+    }
 }
