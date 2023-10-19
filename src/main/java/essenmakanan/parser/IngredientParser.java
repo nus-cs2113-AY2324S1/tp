@@ -6,7 +6,8 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ui.Ui;
 
 public class IngredientParser {
-    public void parseIngredientCommand(IngredientList ingredients, String command, String inputDetail) throws EssenMakananException {
+    public void parseIngredientCommand(IngredientList ingredients, String command, String inputDetail)
+            throws EssenMakananException {
         switch(command) {
         case "add":
             String[] allIngredients = inputDetail.split("/i");
@@ -20,6 +21,7 @@ public class IngredientParser {
             break;
         case "view":
             Ui.printAllIngredients(ingredients);
+            break;
         default:
             throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
         }

@@ -7,7 +7,6 @@ import essenmakanan.ui.Ui;
 
 public class RecipeParser {
 
-    private Ui ui = new Ui();
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail) throws EssenMakananException{
         switch(command) {
         case "add":

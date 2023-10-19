@@ -1,11 +1,7 @@
 package essenmakanan.ui;
 
-import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
-
-import java.util.ArrayList;
 
 public class Ui {
 
