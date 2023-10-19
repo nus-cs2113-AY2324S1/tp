@@ -20,6 +20,7 @@ public class EditProfileCommand extends Command {
         userProfile.setHeight(newProfile.getHeight());
         userProfile.setWeight(newProfile.getWeight());
         userProfile.setDailyCalorieLimit(newProfile.getDailyCalorieLimit());
+        userProfile.calculateBmi();
         return new CommandResult("I've edited the following:" + "\n" + userProfile.toString());
     }
 
