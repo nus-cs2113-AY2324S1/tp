@@ -11,6 +11,6 @@ public class ViewRecipesCommand extends Command {
 
     @Override
     public void executeCommand(RecipeList recipes, IngredientList ingredients, String input) {
-        recipes.viewAllRecipes(ui);
+        recipes.listRecipes(ui);
     }
 }

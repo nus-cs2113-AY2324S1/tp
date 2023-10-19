@@ -25,7 +25,7 @@ public class RecipeList {
         recipes.remove(recipe);
     }
 
-    public void viewAllRecipes(Ui ui) {
+    public void listRecipes(Ui ui) {
         ui.printAllRecipes(recipes);
     }
 

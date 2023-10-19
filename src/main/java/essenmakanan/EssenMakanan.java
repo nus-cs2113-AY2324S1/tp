@@ -1,6 +1,10 @@
 package essenmakanan;
 
-import essenmakanan.command.*;
+import essenmakanan.command.AddIngredientCommand;
+import essenmakanan.command.AddRecipeCommand;
+import essenmakanan.command.Command;
+import essenmakanan.command.ViewIngredientsCommand;
+import essenmakanan.command.ViewRecipesCommand;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
