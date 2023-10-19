@@ -6,8 +6,6 @@ import essenmakanan.recipe.RecipeList;
 
 public class Ui {
 
-    private final String DIVIDER = "--------------------------------------------";
-
     public void start() {
         drawDivider();
         System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
@@ -24,7 +22,8 @@ public class Ui {
     }
 
     public void drawDivider() {
-        System.out.println(DIVIDER);
+        String divider = "--------------------------------------------";
+        System.out.println(divider);
     }
 
     public void showCommands() {
