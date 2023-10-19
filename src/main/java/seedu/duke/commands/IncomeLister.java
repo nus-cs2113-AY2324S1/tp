@@ -5,6 +5,7 @@ import seedu.duke.ui.Ui;
 import java.util.ArrayList;
 
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Represents the command that when executed, lists all incomes.
@@ -29,7 +30,7 @@ public class IncomeLister extends Commands {
         this.incomes = incomes;
         this.ui = ui;
 
-        LOGGER.info("IncomeLister initialised successfully");
+        LOGGER.log(Level.INFO, ("Initialised IncomeLister"));
     }
 
     /**
@@ -58,6 +59,6 @@ public class IncomeLister extends Commands {
             System.out.println((i + 1) + ". " + incomes.get(i).toString());
         }
         ui.showLineDivider();
-        LOGGER.info("Incomes listed successfully");
+        LOGGER.log(Level.INFO, ("Incomes listed successfully"));
     }
 }

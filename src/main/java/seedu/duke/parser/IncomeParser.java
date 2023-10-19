@@ -75,10 +75,12 @@ public class IncomeParser {
         try {
             incomeAmount = Double.parseDouble(incomeAmountString);
         } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "Invalid amount format" + incomeAmountString, e);
             throw new KaChinnnngException("Please enter a valid amount");
         }
 
         if (incomeAmount > 999999.99 || incomeAmount <= 0) {
+            LOGGER.log(Level.WARNING, "Invalid amount" + incomeAmountString);
             throw new KaChinnnngException("Income amount must be between $0.01 and $999999.99");
         }
         return new Income(incomeDescriptionString, incomeDate, incomeAmount);
