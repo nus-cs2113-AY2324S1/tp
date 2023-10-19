@@ -23,7 +23,7 @@ public class FlashcardComponent {
         FlashcardDirectory flashcarddirectory = new FlashcardDirectory();
         flashcarddirectory.listFlashcardFiles();
 
-        storage = new FlashcardStorage("./data/flashcard.txt");
+        storage = new FlashcardStorage("./data/flashcards/flashcard.txt");
         try {
             flashcardList = storage.loadFlashcards();
         } catch (FileNotFoundException e){
