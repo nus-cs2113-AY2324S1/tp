@@ -2,6 +2,7 @@ package essenmakanan;
 
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 import java.util.Scanner;
@@ -16,7 +17,8 @@ public class EssenMakanan {
         switch(command) {
         case "add":
             String recipeName = inputDetail.substring(2);
-            recipes.addRecipe(inputDetail);
+            Recipe newRecipe = new Recipe(recipeName);
+            recipes.addRecipe(newRecipe);
             System.out.println("Recipe: " + recipeName + " has been successfully created!");
             return true;
         case "view":
@@ -53,9 +55,8 @@ public class EssenMakanan {
 
         Scanner in = new Scanner(System.in);
         String functionInput;
-        String input;
+        String input = "";
         boolean validInput;
-
 
         do {
             validInput = true;
@@ -78,7 +79,8 @@ public class EssenMakanan {
 
             // exit while loop for invalid inputs
             if (!validInput) {
-                break;
+                ui.bye();
+                System.exit(0);
             }
 
             input = in.nextLine();
