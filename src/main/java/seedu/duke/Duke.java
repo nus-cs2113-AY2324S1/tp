@@ -28,6 +28,7 @@ public class Duke {
 
             if (fc.isResponsible(input)) {
                 fc.processInput(input);
+
             } else if (cm.isResponsible(input)) {
                 cm.processInput(input);
             } else {
