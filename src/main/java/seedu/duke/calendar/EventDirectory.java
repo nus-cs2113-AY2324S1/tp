@@ -1,21 +1,20 @@
-package seedu.duke.flashcard;
+package seedu.duke.calendar;
 
 import java.io.File;
 
 /**
- * directory for flashcards
+ * directory for directory
  * can list-up txt files in text folder
- * In version 1, using only flashcard.txt
+ * In version 1, using only event.txt
  * In version 2, can select or create
  */
 
-public class FlashcardDirectory {
-
+public class EventDirectory {
     String path;
     File file;
 
-    public FlashcardDirectory(){
-        path = "./data/flashcards";
+    public EventDirectory(){
+        path = "./data/events";
 
         file = new File(path);
         if(!file.exists()){
@@ -25,7 +24,7 @@ public class FlashcardDirectory {
                 System.out.println("    Failed to create directory");
             }
         } else{
-            System.out.println("    Using data/flashcards directory");
+            System.out.println("    Using data/events directory");
         }
     }
 
@@ -33,15 +32,15 @@ public class FlashcardDirectory {
      * list-up saved files
      * selecting file is for version 2
      */
-    public void listFlashcardFiles(){
-        String[] flashcardFiles = file.list();
-        if(flashcardFiles == null){
+    public void listEventFiles(){
+        String[] eventFiles = file.list();
+        if(eventFiles == null){
             System.out.println("Failed to find files");
-        } else if(flashcardFiles.length == 0){
+        } else if(eventFiles.length == 0){
             System.out.println("No files exist");
         } else{
-            for(String flashcardFile : flashcardFiles){
-                System.out.println("        "+flashcardFile);
+            for(String eventFile : eventFiles){
+                System.out.println("        "+eventFile);
             }
         }
     }
@@ -52,7 +51,7 @@ public class FlashcardDirectory {
      * @return directory for flashcard txt file
      */
     public String defaultDirectory() {
-        return this.path + "/flashcard.txt";
+        return this.path + "/event.txt";
     }
 
     /**
@@ -61,7 +60,7 @@ public class FlashcardDirectory {
      * @param path
      * @return
      */
-    public String flashcardDirectory(String path) {
+    public String eventDirectory(String path) {
         return this.path + path;
     }
 
