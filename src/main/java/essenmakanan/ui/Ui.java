@@ -69,6 +69,12 @@ public class Ui {
         printStepsOfSpecificRecipe(recipe);
     }
 
+    public void printSpecificRecipes(String title, ArrayList<Recipe> recipes) {
+        Recipe wantedRecipe = recipes.stream().filter(recipe -> recipe.getTitle().equals(title)).findFirst().orElse(null);
+        assert wantedRecipe != null : "There's no recipe with the given title in current recipe list";
+        printStepsOfSpecificRecipe(wantedRecipe);
+    }
+
     private static void printStepsOfSpecificRecipe(Recipe recipe) {
         List<String> steps = recipe.getRecipeSteps();
         int count = 1;
@@ -78,12 +84,6 @@ public class Ui {
             System.out.println("Step " + count + ": " + step);
             count++;
         }
-    }
-
-    public void printSpecificRecipes(String title, ArrayList<Recipe> recipes) {
-        Recipe wantedRecipe = recipes.stream().filter(recipe -> recipe.getTitle().equals(title)).findFirst().orElse(null);
-        assert wantedRecipe != null : "There's no recipe with the given title in current recipe list";
-        printStepsOfSpecificRecipe(wantedRecipe);
     }
 
 
