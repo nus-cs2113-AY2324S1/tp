@@ -4,6 +4,8 @@ package seedu.duke;
 
 import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardComponent;
+import seedu.duke.calendar.Event;
+import seedu.duke.calendar.CalendarManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +17,36 @@ public class Duke {
         new Duke().run();
     }
 
-    private void run() {
+    private void runCalendar() {
+        System.out.print("Enter your command: ");
+
+        CalendarManager manager = new CalendarManager();
+
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        boolean isDone = false;
+
+        while (!isDone) {
+            input = scanner.nextLine();
+
+            if (input.equals("end program")) {
+                System.out.println("Bye bye");
+                break;
+            } else if (input.equals("flashcard")) {
+                runFlashcard();
+            } else if (manager.validCommand(input)) {
+                manager.startCalendar(input);
+            } else {
+                System.out.println("Invalid command! Enter a valid command.");
+            }
+
+        }
+
+    }
+
+    private void runFlashcard() {
+        System.out.print("Enter your command: ");
+
         FlashcardComponent fc = new FlashcardComponent(new ArrayList<Flashcard>());
 
         Scanner scanner = new Scanner(System.in);
@@ -31,6 +62,22 @@ public class Duke {
                 System.out.println("    Invalid command! Sorry; please try again.");
             }
         }
+    }
 
+    private void run() {
+        String flashcardOrCalendar;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Do you choose flashcard or calendar? ");
+        flashcardOrCalendar = scanner.nextLine();
+
+        if (flashcardOrCalendar.equals("flashcard")) {
+            runFlashcard();
+        } else if (flashcardOrCalendar.equals("calendar")) {
+            runCalendar();
+        } else {
+            System.out.println("Invalid command! Sorry; please try again.");
+            run();
+        }
     }
 }
