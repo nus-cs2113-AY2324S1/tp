@@ -10,11 +10,15 @@ import java.util.Scanner;
 public class ListCalendarEventsCommand extends EventCommand{
     public void execute(Scanner scanner, EventList eventList) {
         System.out.println("Here is a list of all your events: ");
+        printLine();
 
-        System.out.println("-".repeat(80));
         for (Event event : eventList.getEvent()) {
             System.out.print(event);
-            System.out.println("-".repeat(80));
+            printLine();
         }
+    }
+
+    public void printLine() {
+        System.out.println("-------------------");
     }
 }
