@@ -1,7 +1,9 @@
 package essenmakanan;
 
+import essenmakanan.exception.EssenMakananException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
@@ -12,23 +14,6 @@ public class EssenMakanan {
     private static final String EXIT = "bye";
     private static final String RECIPE_FUNCTION = "1";
     private static final String INGREDIENT_FUNCTION = "2";
-
-    public static boolean handleRecipeFunctions(RecipeList recipes, String command, String inputDetail) {
-        switch(command) {
-        case "add":
-            String recipeName = inputDetail.substring(2);
-            Recipe newRecipe = new Recipe(recipeName);
-
-            recipes.addRecipe(newRecipe);
-            System.out.println("Recipe: " + recipeName + " has been successfully created!");
-            return true;
-        case "view":
-            recipes.listRecipes();
-            return true;
-        default:
-            return false;
-        }
-    }
 
     public static boolean handleIngredientFunctions(IngredientList ingredients, String command, String inputDetail) {
         switch(command) {
@@ -51,6 +36,7 @@ public class EssenMakanan {
         RecipeList recipes = new RecipeList();
         IngredientList ingredients = new IngredientList();
         Ui ui = new Ui();
+        RecipeParser recipeParser = new RecipeParser();
 
         // Prompt users that program is ready
         ui.start();
@@ -66,11 +52,7 @@ public class EssenMakanan {
 
             ui.functionSelect();
 
-            if (in.hasNextLine()) {
-                functionInput = in.nextLine();
-            } else {
-                break;
-            }
+            functionInput = in.nextLine();
 
 
             switch (functionInput) {
@@ -91,17 +73,18 @@ public class EssenMakanan {
                 System.exit(0);
             }
 
-            if (in.hasNextLine()) {
-                input = in.nextLine();
-            } else {
-                break;
-            }
+            input = in.nextLine();
+
             String[] parsedInput = input.split(" ", 2);
             String commandType = parsedInput[0];
             String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
 
             if (functionInput.equals(RECIPE_FUNCTION)) {
-                validInput = handleRecipeFunctions(recipes, commandType, inputDetail);
+                try{
+                    recipeParser.parseRecipeCommand(recipes, commandType, inputDetail);
+                } catch (EssenMakananException e) {
+                    System.out.println("Error when adding recipe!");
+                }
             } else if (functionInput.equals(INGREDIENT_FUNCTION)) {
                 validInput = handleIngredientFunctions(ingredients, commandType, inputDetail);
             }
