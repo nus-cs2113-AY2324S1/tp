@@ -1,7 +1,5 @@
 package essenmakanan.recipe;
 
-import essenmakanan.ui.Ui;
-
 import java.util.ArrayList;
 
 public class RecipeList {
