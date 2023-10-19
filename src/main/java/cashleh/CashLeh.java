@@ -7,19 +7,17 @@ import cashleh.exceptions.CashLehException;
 import cashleh.commands.Command;
 import cashleh.commands.Exit;
 
-import java.io.IOException;
 
 public class CashLeh {
     private final Input input = new Input();
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
     private final Parser parser = new Parser(expenseStatement, incomeStatement);
-    private final CurrentDateUpdater updater = new CurrentDateUpdater("EXPECTED.TXT", "<<CURRENT_DATE>>");
 
     /**
      * Main entry-point for the application.
      */
-    public void run() throws IOException {
+    public void run() {
 
         String logo = "    ______           __    __         __  ___  \n"
                     + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\ \n"
@@ -44,20 +42,14 @@ public class CashLeh {
                 command = parser.parse(inputString);
                 command.execute();
             } catch (CashLehException e) {
-                Ui.printMultipleText(new String[] {
+                Ui.printMultipleText(new String[]{
                         e.getMessage()
                 });
             }
-        } try {
-            updater.updateCurrentDate();
-        } catch (IOException e) {
-            Ui.printMultipleText(new String[] {
-                    e.getMessage()
-            });
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new CashLeh().run();
     }
 }
