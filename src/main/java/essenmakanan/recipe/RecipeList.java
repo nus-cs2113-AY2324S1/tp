@@ -25,11 +25,13 @@ public class RecipeList {
         recipes.remove(recipe);
     }
 
+
     public void listRecipes(Ui ui) {
         ui.printAllRecipes(recipes);
     }
 
     public Recipe getRecipe(int index) {
+        assert index >= 0 && index < recipes.size() : "Index is out of bounds";
         return recipes.get(index);
     }
 
