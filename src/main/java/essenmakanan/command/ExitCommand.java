@@ -3,14 +3,14 @@ package essenmakanan.command;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 
-public class ViewIngredientsCommand extends Command {
+public class ExitCommand extends Command {
 
-    public ViewIngredientsCommand() {
-        super(false);
+    public ExitCommand() {
+        super(true);
     }
 
     @Override
     public void executeCommand(RecipeList recipes, IngredientList ingredients) {
-        ui.printAllIngredients(ingredients);
+        ui.bye();
     }
 }

@@ -14,5 +14,9 @@ public abstract class Command {
         ui = new Ui();
     }
 
-    public abstract void executeCommand(RecipeList recipes, IngredientList ingredients, String input);
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public abstract void executeCommand(RecipeList recipes, IngredientList ingredients);
 }

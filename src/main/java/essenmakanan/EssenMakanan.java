@@ -1,107 +1,59 @@
 package essenmakanan;
 
-import essenmakanan.command.AddIngredientCommand;
-import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.command.Command;
-import essenmakanan.command.ViewIngredientsCommand;
-import essenmakanan.command.ViewRecipesCommand;
+import essenmakanan.exception.EssenMakananCommandException;
+import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 import java.util.Scanner;
+//import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class EssenMakanan {
 
     private RecipeList recipes;
     private IngredientList ingredients;
+    private Ui ui;
+    private Parser parser;
 
-    private final String EXIT = "bye";
-    private final String RECIPE_FUNCTION = "1";
-    private final String INGREDIENT_FUNCTION = "2";
-
-    public boolean handleRecipeFunctions(String command, String inputDetail) {
-        switch(command) {
-        case "add":
-            Command addCommand = new AddRecipeCommand();
-            addCommand.executeCommand(recipes, ingredients, inputDetail);
-            return true;
-        case "view":
-            Command viewCommand = new ViewRecipesCommand();
-            viewCommand.executeCommand(recipes, ingredients, inputDetail);
-            return true;
-        default:
-            return false;
-        }
-    }
-
-    public boolean handleIngredientFunctions(String command, String inputDetail) {
-        switch(command) {
-        case "add":
-            Command addCommand = new AddIngredientCommand();
-            addCommand.executeCommand(recipes, ingredients, inputDetail);
-            return true;
-        case "view":
-            Command viewCommand = new ViewIngredientsCommand();
-            viewCommand.executeCommand(recipes, ingredients, inputDetail);
-            return true;
-        default:
-            return false;
-        }
-    }
+    private Logger logger = Logger.getLogger("app log");
 
     public void run() {
-        Ui.start();
+        //logger.log(Level.INFO, "App starting");
+        ui.start();
 
         Scanner in = new Scanner(System.in);
-        String functionInput;
         String input = "";
-        boolean validInput;
+        boolean isExit = false;
 
         do {
-            validInput = true;
-
-            Ui.functionSelect();
-            functionInput = in.nextLine();
-
-
-            switch (functionInput) {
-            case RECIPE_FUNCTION:
-                Ui.showRecipeFunctions();
-                break;
-            case INGREDIENT_FUNCTION:
-                Ui.showIngredientFunctions();
-                break;
-            default:
-                System.out.println("Please enter valid input.");
-                validInput = false;
-            }
-
-            // exit while loop for invalid inputs
-            if (!validInput) {
-                Ui.bye();
-                System.exit(0);
-            }
-
+            //logger.log(Level.INFO, "Getting input");
             input = in.nextLine();
-            String[] parsedInput = input.split(" ", 2);
-            String commandType = parsedInput[0];
-            String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
-
-            if (functionInput.equals(RECIPE_FUNCTION)) {
-                validInput = handleRecipeFunctions(commandType, inputDetail);
-            } else if (functionInput.equals(INGREDIENT_FUNCTION)) {
-                validInput = handleIngredientFunctions(commandType, inputDetail);
+            try {
+                Command command = parser.parseCommand(input);
+                command.executeCommand(recipes, ingredients);
+                isExit = command.isExit(); //someone can assert here
+            } catch (EssenMakananCommandException exception) {
+                exception.handleException();
+                //logger.log(Level.WARNING, "Invalid command given");
+            } catch (EssenMakananFormatException exception) {
+                exception.handleException();
+                //logger.log(Level.WARNING, "Invalid format given");
             }
-            Ui.drawDivider();
-        } while (!input.equals(EXIT) || validInput);
+        } while (!isExit);
 
-        Ui.bye();
+        //logger.log(Level.INFO, "Exiting app");
     }
 
     public void setup() {
         recipes = new RecipeList();
         ingredients = new IngredientList();
+        ui = new Ui();
+        parser = new Parser();
     }
 
     public void start() {

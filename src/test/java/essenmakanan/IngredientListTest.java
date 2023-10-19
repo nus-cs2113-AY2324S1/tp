@@ -20,7 +20,8 @@ public class IngredientListTest {
         ingredients.addIngredient(cheese);
         ingredients.addIngredient(bread);
 
-        Ui.printAllIngredients(ingredients);
+        Ui ui = new Ui();
+        ui.printAllIngredients(ingredients);
 
         Ingredient ingredient;
         ingredient = ingredients.getIngredient(0);

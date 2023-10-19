@@ -9,6 +9,10 @@ public class RecipeList {
         recipes = new ArrayList<>();
     }
 
+    public ArrayList<Recipe> getRecipes() {
+        return recipes;
+    }
+
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
         assert getRecipe(recipes.size() - 1).getTitle().equals(recipe.getTitle())
@@ -21,18 +25,6 @@ public class RecipeList {
 
     public void deleteRecipe(Recipe recipe) {
         recipes.remove(recipe);
-    }
-
-
-    public void listRecipes() {
-        int count = 1;
-        for (Recipe recipe : recipes) {
-            assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
-                    : "Title is not matching with the current index";
-
-            System.out.println(count + ". " + recipe);
-            count++;
-        }
     }
 
     public Recipe getRecipe(int index) {

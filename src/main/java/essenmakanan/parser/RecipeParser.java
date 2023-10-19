@@ -7,7 +7,9 @@ import essenmakanan.ui.Ui;
 
 public class RecipeParser {
 
-    public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail) throws EssenMakananException{
+    public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
+            throws EssenMakananException {
+        Ui ui = new Ui();
         switch(command) {
         case "add":
             String recipeName = inputDetail.substring(2);
@@ -16,10 +18,10 @@ public class RecipeParser {
             Recipe newRecipe = new Recipe(recipeName);
             recipes.addRecipe(newRecipe);
 
-            Ui.printAddRecipeSuccess(recipeName);
+            ui.printAddRecipeSuccess(recipeName);
             break;
         case "view":
-            Ui.printAllRecipes(recipes);
+            ui.printAllRecipes(recipes);
             break;
         default:
             throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");

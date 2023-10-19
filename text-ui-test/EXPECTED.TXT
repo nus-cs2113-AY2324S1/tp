@@ -1,10 +1,8 @@
+--------------------------------------------
 Welcome to Essen Makanan!!! A one-stop place to track the
- ingredients in your kitchen and store your favourite recipes
+ingredients in your kitchen and store your favourite recipes
+To get started, type [help] for list of commands
 --------------------------------------------
-Enter the number for the function you want
-1. Recipe
-2. Ingredient
-type bye to exit
 --------------------------------------------
-Please enter valid input.
 Hope you had fun! See you again!
+--------------------------------------------

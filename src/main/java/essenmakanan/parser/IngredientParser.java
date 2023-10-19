@@ -8,19 +8,20 @@ import essenmakanan.ui.Ui;
 public class IngredientParser {
     public void parseIngredientCommand(IngredientList ingredients, String command, String inputDetail)
             throws EssenMakananException {
+        Ui ui = new Ui();
         switch(command) {
         case "add":
             String[] allIngredients = inputDetail.split("/i");
 
             for (String ingredient : allIngredients) {
-                Ui.printAddIngredientsSuccess(ingredient);
+                ui.printAddIngredientsSuccess(ingredient);
                 ingredient = ingredient.strip();
                 Ingredient newIngredient = new Ingredient(ingredient);
                 ingredients.addIngredient(newIngredient);
             }
             break;
         case "view":
-            Ui.printAllIngredients(ingredients);
+            ui.printAllIngredients(ingredients);
             break;
         default:
             throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
