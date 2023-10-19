@@ -1,4 +1,4 @@
-//@@author wendelinwemhoener
+//@@author wendelinwemhoener & kherlenbayasgalan
 
 package seedu.duke;
 
@@ -20,7 +20,7 @@ public class Duke {
     private void runCalendar() {
         System.out.print("Enter your command: ");
 
-        CalendarManager manager = new CalendarManager();
+        CalendarManager manager = new CalendarManager(new ArrayList<Event>());
 
         Scanner scanner = new Scanner(System.in);
         String input;
