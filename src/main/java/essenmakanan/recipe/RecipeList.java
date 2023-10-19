@@ -1,5 +1,7 @@
 package essenmakanan.recipe;
 
+import essenmakanan.ui.Ui;
+
 import java.util.ArrayList;
 
 public class RecipeList {
@@ -24,15 +26,8 @@ public class RecipeList {
     }
 
 
-    public void viewAllRecipes() {
-        int count = 1;
-        for (Recipe recipe : recipes) {
-            assert getRecipe(count - 1).getTitle().equals(recipe.getTitle())
-                    : "Title is not matching with the current index";
-
-            System.out.println(count + ". " + recipe);
-            count++;
-        }
+    public void listRecipes(Ui ui) {
+        ui.printAllRecipes(recipes);
     }
 
     public Recipe getRecipe(int index) {
