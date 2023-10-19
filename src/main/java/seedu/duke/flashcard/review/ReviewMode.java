@@ -18,8 +18,8 @@ public abstract class ReviewMode {
     public abstract String getReviewModeName();
 
     public void startReviewSession(Scanner scanner) {
-        System.out.println("    [Review session has been started]");
-        System.out.println("    [Review mode is: " + getReviewModeName() + "]");
+        System.out.println("    You have started a review session in "
+                + getReviewModeName());
         System.out.println();
 
         while (true) {
@@ -52,8 +52,7 @@ public abstract class ReviewMode {
         System.out.println("    [Think of the answer (the back text) in " +
                 "your head]");
         System.out.println("    [Press <ENTER> when you are ready to " +
-                "compare it,]");
-        System.out.println("    [or enter 'q' or 'quit' to end this " +
+                "compare it, or enter 'q'/'quit' to end this " +
                 "review session]");
     }
 }

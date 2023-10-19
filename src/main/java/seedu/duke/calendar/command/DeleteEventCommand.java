@@ -4,7 +4,6 @@ package seedu.duke.calendar.command;
 
 import seedu.duke.calendar.EventList;
 
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class DeleteEventCommand extends EventCommand{

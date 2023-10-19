@@ -1,8 +1,6 @@
 package seedu.duke.calendar;
 
-import seedu.duke.flashcard.Flashcard;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EventList {
