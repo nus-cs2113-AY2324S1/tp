@@ -18,10 +18,10 @@ public class RecipeParser {
             System.out.println("Recipe: " + recipeName + " has been successfully created!");
             break;
         case "view":
-            recipes.listRecipes(ui);
+            Ui.printAllRecipes(recipes);
             break;
         default:
-            throw new EssenMakananException();
+            throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
 }

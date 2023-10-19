@@ -26,8 +26,15 @@ public class RecipeList {
     }
 
 
-    public void listRecipes(Ui ui) {
-        ui.printAllRecipes(recipes);
+    public void listRecipes() {
+        int count = 1;
+        for (Recipe recipe : recipes) {
+            assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
+                    : "Title is not matching with the current index";
+
+            System.out.println(count + ". " + recipe);
+            count++;
+        }
     }
 
     public Recipe getRecipe(int index) {
