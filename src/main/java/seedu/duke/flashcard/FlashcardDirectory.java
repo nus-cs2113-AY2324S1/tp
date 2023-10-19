@@ -20,12 +20,12 @@ public class FlashcardDirectory {
         file = new File(path);
         if(!file.exists()){
             if(file.mkdir()){
-                System.out.println("Created data directory");
+                System.out.println("    Created data directory");
             } else{
-                System.out.println("Failed to create directory");
+                System.out.println("    Failed to create directory");
             }
         } else{
-            System.out.println("Using data directory");
+            System.out.println("    Using data directory");
         }
     }
 
@@ -41,7 +41,7 @@ public class FlashcardDirectory {
             System.out.println("No files exist");
         } else{
             for(String flashcardFile : flashcardFiles){
-                System.out.println(flashcardFile);
+                System.out.println("        "+flashcardFile);
             }
         }
     }
