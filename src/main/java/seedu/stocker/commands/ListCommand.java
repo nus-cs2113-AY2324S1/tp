@@ -1,6 +1,7 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.drugs.Drug;
+
 import java.util.List;
 
 /**
@@ -22,10 +23,11 @@ public class ListCommand extends Command {
      * Executes the list command.
      *
      * @return A CommandResult containing the success message and the list of drugs.
-     *         If the inventory is empty, the success message indicates that the inventory is empty.
      */
     @Override
     public CommandResult execute() {
+        // Assertion: Check if the inventory is properly initialised
+        assert inventory != null : "Inventory should be initialised before executing ListCommand.";
         // Retrieve the list of drugs from the inventory
         List<Drug> drugs = inventory.getAllDrugs();
 
