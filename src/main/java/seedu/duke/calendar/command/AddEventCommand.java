@@ -1,4 +1,4 @@
-//@@ kherlenbayasgalan
+//@@ kherlenbayasgalan & jingxizhu
 
 package seedu.duke.calendar.command;
 
@@ -12,9 +12,9 @@ public class AddEventCommand extends EventCommand{
     public void execute(Scanner scanner, EventList eventList) {
         System.out.println("What's the event?: ");
         String eventName = scanner.nextLine();
-        System.out.println("When does it start?: ");
+        System.out.println("When does it start? (yyyy-mm-ddThh:mm:ss) (eg. 2023-12-20T12:30:30): ");
         LocalDateTime startTime = LocalDateTime.parse(scanner.nextLine());
-        System.out.println("When does it end?: ");
+        System.out.println("When does it end? (yyyy-mm-ddThh:mm:ss) (eg. 2023-12-20T12:30:30): ");
         LocalDateTime endTime = LocalDateTime.parse(scanner.nextLine());
 
         Event event = new Event(eventName, startTime, endTime);

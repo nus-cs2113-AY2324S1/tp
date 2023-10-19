@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan
+//@@ kherlenbayasgalan & jingxizhu
 
 package seedu.duke.calendar.command;
 
