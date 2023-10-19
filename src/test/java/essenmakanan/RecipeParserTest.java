@@ -22,7 +22,9 @@ public class RecipeParserTest {
     @Test
     public void parse_invalidCommand_exceptionThrown() {
         try{
-            recipeParser.parseRecipeCommand(recipes, "invalid command", "invalid details");
+            String invalidCommand = "see";
+            String invalidDetails = "recipes in my house";
+            recipeParser.parseRecipeCommand(recipes, invalidCommand, invalidDetails);
         } catch (EssenMakananException e) {
             assertEquals(e.getMessage(), "EssenMakanan Exception!");
         }
