@@ -30,6 +30,14 @@ public class CalendarManager {
         return !(command instanceof UnknownCommand);
     }
 
+    public boolean isResponsible(String input) {
+        return validCommand(input);
+    }
+
+    public void processInput(String input) {
+        startCalendar(input);
+    }
+
     public void startCalendar(String input) {
         EventCommand command = calendarCommandParser.parseInput(input);
         assert !(command instanceof seedu.duke.calendar.command.UnknownCommand) :
