@@ -3,11 +3,11 @@ package fittrack;
 import java.text.DecimalFormat;
 
 public class UserProfile {
+    private static double bmi;
+    public final DecimalFormat df = new DecimalFormat("0.00");
     private double height;
     private double weight;
     private double dailyCalorieLimit;
-    private static double bmi;
-    public final DecimalFormat df = new DecimalFormat("0.00");
 
     public UserProfile() {
         this(0, 0, 0);
