@@ -2,11 +2,11 @@ package essenmakanan;
 
 import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.AddRecipeCommand;
-import essenmakanan.command.IngredientCommand;
-import essenmakanan.command.RecipeCommand;
+import essenmakanan.command.Command;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
+
 import java.util.Scanner;
 
 public class EssenMakanan {
@@ -19,11 +19,11 @@ public class EssenMakanan {
     private final String RECIPE_FUNCTION = "1";
     private final String INGREDIENT_FUNCTION = "2";
 
-    public boolean handleRecipeFunctions(RecipeList recipes, String command, String inputDetail) {
+    public boolean handleRecipeFunctions(String command, String inputDetail) {
         switch(command) {
         case "add":
-            RecipeCommand addCommand = new AddRecipeCommand();
-            addCommand.executeCommand(recipes, inputDetail);
+            Command addCommand = new AddRecipeCommand();
+            addCommand.executeCommand(recipes, ingredients,inputDetail);
             return true;
         case "view":
             recipes.viewAllRecipes();
@@ -33,11 +33,11 @@ public class EssenMakanan {
         }
     }
 
-    public boolean handleIngredientFunctions(IngredientList ingredients, String command, String inputDetail) {
+    public boolean handleIngredientFunctions( String command, String inputDetail) {
         switch(command) {
         case "add":
-            IngredientCommand addCommand = new AddIngredientCommand();
-            addCommand.executeCommand(ingredients, inputDetail);
+            Command addCommand = new AddIngredientCommand();
+            addCommand.executeCommand(recipes, ingredients, inputDetail);
             return true;
         case "view":
             ingredients.listIngredients();
@@ -86,9 +86,9 @@ public class EssenMakanan {
             String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
 
             if (functionInput.equals(RECIPE_FUNCTION)) {
-                validInput = handleRecipeFunctions(recipes, commandType, inputDetail);
+                validInput = handleRecipeFunctions(commandType, inputDetail);
             } else if (functionInput.equals(INGREDIENT_FUNCTION)) {
-                validInput = handleIngredientFunctions(ingredients, commandType, inputDetail);
+                validInput = handleIngredientFunctions(commandType, inputDetail);
             }
             ui.drawDivider();
         } while (!input.equals(EXIT) || validInput);
