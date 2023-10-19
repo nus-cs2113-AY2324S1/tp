@@ -10,10 +10,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.duke.commands.Command;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.IncorrectCommand;
-import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.*;
 import seedu.duke.data.exception.IllegalValueException;
 
 /**
@@ -70,6 +67,9 @@ public class Parser {
         //        case ViewAllCommand.COMMAND_WORD:
         //            return prepareViewAll(arguments);
         //
+        case GoalCommand.COMMAND_WORD:
+            return new GoalCommand(userInput);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

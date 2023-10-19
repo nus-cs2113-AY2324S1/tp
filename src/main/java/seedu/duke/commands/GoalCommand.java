@@ -6,6 +6,8 @@ import seedu.duke.data.exception.IncorrectFormatException;
 
 public class GoalCommand extends Command {
 
+    public static final String COMMAND_WORD = "set";
+
     public GoalCommand(String cmd){
         super(cmd);
     }
