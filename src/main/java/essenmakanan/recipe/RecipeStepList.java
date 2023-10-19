@@ -14,6 +14,7 @@ public class RecipeStepList extends ArrayList<Step> {
         steps = new ArrayList<>();
 
         do {
+            System.out.println("Add steps of your recipe, type \"end\" to finish");
             input = in.nextLine();
 
             if (input.equals("end")) {
@@ -22,7 +23,6 @@ public class RecipeStepList extends ArrayList<Step> {
                 addStep(input);
             }
         } while(isAddingSteps);
-        System.out.println("done steps");
     }
 
     public RecipeStepList(String[] steps) {
