@@ -1,10 +1,5 @@
 package cashleh.parser;
 
-import cashleh.transaction.Expense;
-import cashleh.transaction.ExpenseStatement;
-import cashleh.transaction.Income;
-import cashleh.transaction.IncomeStatement;
-import cashleh.exceptions.CashLehParsingException;
 import cashleh.commands.Command;
 import cashleh.commands.AddIncome;
 import cashleh.commands.AddExpense;
@@ -12,7 +7,13 @@ import cashleh.commands.ViewIncomes;
 import cashleh.commands.ViewExpenses;
 import cashleh.commands.DeleteExpense;
 import cashleh.commands.DeleteIncome;
+import cashleh.commands.ViewFinancialStatement;
 import cashleh.commands.Exit;
+import cashleh.transaction.Expense;
+import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.Income;
+import cashleh.transaction.IncomeStatement;
+import cashleh.exceptions.CashLehParsingException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class Parser {
     private static final String ADD_EXPENSE = "addExpense";
     private static final String DELETE_EXPENSE = "deleteExpense";
     private static final String VIEW_EXPENSES = "viewExpenses";
+    private static final String VIEW_FINANCIAL_STATEMENT = "viewFinancialStatement";
     private static final String EXIT = "exit";
 
     private final ExpenseStatement expenseStatement;
@@ -51,6 +53,8 @@ public class Parser {
             return getDeleteTransaction(input, DELETE_EXPENSE);
         case VIEW_EXPENSES:
             return new ViewExpenses(expenseStatement);
+        case VIEW_FINANCIAL_STATEMENT:
+            return new ViewFinancialStatement(incomeStatement, expenseStatement);
         case EXIT:
             return new Exit();
         default:
