@@ -1,10 +1,12 @@
 package cashleh;
 
+import cashleh.parser.Parser;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.IncomeStatement;
 import cashleh.exceptions.CashLehException;
 import cashleh.commands.Command;
 import cashleh.commands.Exit;
+
 
 public class CashLeh {
     private final Input input = new Input();
@@ -40,7 +42,7 @@ public class CashLeh {
                 command = parser.parse(inputString);
                 command.execute();
             } catch (CashLehException e) {
-                Ui.printMultipleText(new String[] {
+                Ui.printMultipleText(new String[]{
                         e.getMessage()
                 });
             }
