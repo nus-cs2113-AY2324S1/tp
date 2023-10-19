@@ -23,7 +23,7 @@ public class EssenMakanan {
     private Logger logger = Logger.getLogger("app log");
 
     public void run() {
-        logger.log(Level.INFO, "App starting");
+        //logger.log(Level.INFO, "App starting");
         ui.start();
 
         Scanner in = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class EssenMakanan {
         boolean isExit = false;
 
         do {
-            logger.log(Level.INFO, "Getting input");
+            //logger.log(Level.INFO, "Getting input");
             input = in.nextLine();
             try {
                 Command command = parser.parseCommand(input);
@@ -39,14 +39,14 @@ public class EssenMakanan {
                 isExit = command.isExit(); //someone can assert here
             } catch (EssenMakananCommandException exception) {
                 exception.handleException();
-                logger.log(Level.WARNING, "Invalid command given");
+                //logger.log(Level.WARNING, "Invalid command given");
             } catch (EssenMakananFormatException exception) {
                 exception.handleException();
-                logger.log(Level.WARNING, "Invalid format given");
+                //logger.log(Level.WARNING, "Invalid format given");
             }
         } while (!isExit);
 
-        logger.log(Level.INFO, "Exiting app");
+        //logger.log(Level.INFO, "Exiting app");
     }
 
     public void setup() {
