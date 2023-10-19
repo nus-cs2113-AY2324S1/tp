@@ -20,14 +20,8 @@ public class EventList {
         return eventList;
     }
 
-    public boolean deleteEvent(String name) {
-        for(Event event : eventList) {
-            if (event.getName().equals(name)) {
-                eventList.remove(event);
-                return true;
-            }
-        }
-        return false;
+    public void deleteEvent(String name) {
+        eventList.removeIf(event -> event.getName().equals(name));
     }
     @Override
     public String toString() {

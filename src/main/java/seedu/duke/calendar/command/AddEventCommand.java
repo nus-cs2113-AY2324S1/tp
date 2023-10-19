@@ -21,6 +21,6 @@ public class AddEventCommand extends EventCommand{
 
         eventList.addEvent(event);
 
-        System.out.println("The event has been added to you calendar");
+        System.out.println(event + " has been added to you calendar");
     }
 }

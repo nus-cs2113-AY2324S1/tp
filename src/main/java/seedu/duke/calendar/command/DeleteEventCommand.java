@@ -13,7 +13,6 @@ public class DeleteEventCommand extends EventCommand{
         String eventName = scanner.nextLine();
 
         eventList.deleteEvent(eventName);
-
-        System.out.println("Event has been deleted from your Calendar!");
+        System.out.println(eventName + " has been deleted from your Calendar!");
     }
 }
