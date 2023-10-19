@@ -19,6 +19,7 @@ public class FitTrack {
     private final MealList mealList;
     private final WorkoutList workoutList;
     private final Ui ui;
+    private boolean isValidInput = false;
 
     private FitTrack() {
         ui = new Ui();
@@ -43,12 +44,16 @@ public class FitTrack {
 
     private void start() {
         ui.printWelcome();
-        try {
-            profileSettings();
-        } catch (PatternMatchFailException e) {
-            System.out.println("Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>");
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter numbers for height, weight, and daily calorie limit.");
+
+        while (!isValidInput) {
+            try {
+                profileSettings();
+                isValidInput = true;
+            } catch (PatternMatchFailException e) {
+                System.out.println("Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>");
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter numbers for height, weight, and daily calorie limit.");
+            }
         }
     }
 
