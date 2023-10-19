@@ -15,6 +15,7 @@ import fittrack.command.InvalidCommand;
 import fittrack.command.ViewMealsCommand;
 import fittrack.command.ViewWorkoutsCommand;
 import fittrack.command.ViewProfileCommand;
+import fittrack.command.BmiCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +32,7 @@ public class CommandParser {
     public static final String ALL_COMMAND_WORDS = "help, exit, " +
             "editprofile, viewprofile, " +
             "addmeal, deletemeal, viewmeals, " +
-            "addworkout, deleteworkout, viewworkouts";
+            "addworkout, deleteworkout, viewworkouts, bmi";
   
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
@@ -91,6 +92,8 @@ public class CommandParser {
             return new DeleteWorkoutCommand();
         case ViewWorkoutsCommand.COMMAND_WORD:
             return new ViewWorkoutsCommand();
+        case BmiCommand.COMMAND_WORD:
+            return new BmiCommand();
         default:
             return new InvalidCommand();
 
