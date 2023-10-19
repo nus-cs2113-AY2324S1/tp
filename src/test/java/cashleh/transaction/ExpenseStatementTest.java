@@ -3,41 +3,54 @@ package cashleh.transaction;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExpenseStatementTest {
-    ExpenseStatement testStatement = new ExpenseStatement();
-    Expense testExpense = new Expense("monthly rent", 1200);
+    ExpenseStatement testExpenseStatement = new ExpenseStatement();
+    Expense testExpense = new Expense("milk tea", 2.50);
+    Expense testExpense2 = new Expense("CS2113 textbook", 10);
+    Expense testExpense3 = new Expense("bus fare", 1.80, LocalDate.of(2023, 9, 20));
 
     @Test
-    void getExpense() throws CashLehMissingTransactionException {
-        testStatement.addExpense(testExpense);
-        assertEquals(testStatement.getExpense(0), testExpense);
+    void testGetExpense() throws CashLehMissingTransactionException {
+        testExpenseStatement.addExpense(testExpense);
+        assertEquals(testExpenseStatement.getExpense(0), testExpense);
     }
-
     @Test
-    void getNumberOfExpenses() {
-        assertEquals(testStatement.getNumberOfExpenses(), 0);
-        testStatement.addExpense(testExpense);
-        assertEquals(testStatement.getNumberOfExpenses(), 1);
-        testStatement.addExpense(testExpense);
-        assertEquals(testStatement.getNumberOfExpenses(), 2);
+    void testGetNumberOfExpenses() {
+        assertEquals(testExpenseStatement.getNumberOfExpenses(), 0);
+        testExpenseStatement.addExpense(testExpense);
+        assertEquals(testExpenseStatement.getNumberOfExpenses(), 1);
+        testExpenseStatement.addExpense(testExpense2);
+        assertEquals(testExpenseStatement.getNumberOfExpenses(), 2);
     }
-
     @Test
-    void getSumOfExpenses() {
-        testStatement.addExpense(testExpense);
-        assertEquals(testStatement.getSumOfExpenses(), 1200);
-        testStatement.addExpense(testExpense);
-        assertEquals(testStatement.getSumOfExpenses(), 2400);
+    void testGetTotalExpenseAmount() {
+        testExpenseStatement.addExpense(testExpense);
+        assertEquals(testExpenseStatement.getTotalExpenseAmount(), 2.5);
+        testExpenseStatement.addExpense(testExpense2);
+        assertEquals(testExpenseStatement.getTotalExpenseAmount(), 12.5);
     }
-
     @Test
     void testToString() {
-        testStatement.addExpense(testExpense);
-        testStatement.addExpense(testExpense);
-        System.out.println(testStatement);
-        assertEquals(testStatement.toString(), "monthly rent (amount: 1200.0)"
-                + "\nmonthly rent (amount: 1200.0)");
+        testExpenseStatement.addExpense(testExpense);
+        System.out.println(testExpenseStatement);
+        String expectedString = "milk tea (amount: 2.5, date: " + LocalDate.now() + ")";
+        assertEquals(testExpenseStatement.toString(), expectedString);
+        testExpenseStatement.addExpense(testExpense2);
+        System.out.println(testExpenseStatement);
+        String expectedString2 = "milk tea (amount: 2.5, date: " + LocalDate.now() + ")\n" +
+                "CS2113 textbook (amount: 10.0, date: " + LocalDate.now() + ")";
+        assertEquals(testExpenseStatement.toString(), expectedString2);
+        testExpenseStatement.addExpense(testExpense3);
+        System.out.println(testExpenseStatement);
+        String expectedString3 = "milk tea (amount: 2.5, date: " + LocalDate.now() + ")\n" +
+                "CS2113 textbook (amount: 10.0, date: " + LocalDate.now() + ")\n" +
+                "bus fare (amount: 1.8, date: 2023-09-20)";
+        assertEquals(testExpenseStatement.toString(), expectedString3);
     }
+
 }
+

@@ -7,6 +7,7 @@ import cashleh.exceptions.CashLehException;
 import cashleh.commands.Command;
 import cashleh.commands.Exit;
 
+
 public class CashLeh {
     private final Input input = new Input();
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
@@ -41,7 +42,7 @@ public class CashLeh {
                 command = parser.parse(inputString);
                 command.execute();
             } catch (CashLehException e) {
-                Ui.printMultipleText(new String[] {
+                Ui.printMultipleText(new String[]{
                         e.getMessage()
                 });
             }

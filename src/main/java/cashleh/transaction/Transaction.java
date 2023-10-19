@@ -1,6 +1,10 @@
 package cashleh.transaction;
 
 import java.time.LocalDate;
+/**
+ * Abstract class providing common structure for financial transactions,
+ * including a description, an amount, and an optional date.
+ */
 
 public abstract class Transaction {
 

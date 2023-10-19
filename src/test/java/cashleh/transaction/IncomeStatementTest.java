@@ -4,11 +4,14 @@ package cashleh.transaction;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IncomeStatementTest {
     IncomeStatement testStatement = new IncomeStatement();
     Income testIncome = new Income("pocket money", 200);
+    Income testIncome2 = new Income("salary", 8000, LocalDate.of(2023, 10, 1));
 
     @Test
     void getNumberOfEntries() {
@@ -22,9 +25,9 @@ class IncomeStatementTest {
     @Test
     void getSumOfEntries() {
         testStatement.addIncome(testIncome);
-        assertEquals(testStatement.getSumOfEntries(), 200);
+        assertEquals(testStatement.getTotalIncomeAmount(), 200);
         testStatement.addIncome(testIncome);
-        assertEquals(testStatement.getSumOfEntries(), 400);
+        assertEquals(testStatement.getTotalIncomeAmount(), 400);
     }
 
     @Test
@@ -38,7 +41,14 @@ class IncomeStatementTest {
         testStatement.addIncome(testIncome);
         testStatement.addIncome(testIncome);
         System.out.println(testStatement);
-        assertEquals(testStatement.toString(), "pocket money (amount: 200.0)"
-                + "\npocket money (amount: 200.0)");
+        String expectedString = "pocket money (amount: 200.0, date: " + LocalDate.now() + ")\n"
+                + "pocket money (amount: 200.0, date: " + LocalDate.now() + ")";
+        assertEquals(testStatement.toString(), expectedString);
+        testStatement.addIncome(testIncome2);
+        System.out.println(testStatement);
+        String expectedString2 = "pocket money (amount: 200.0, date: " + LocalDate.now() + ")\n" +
+                "pocket money (amount: 200.0, date: " + LocalDate.now() + ")\n" +
+                "salary (amount: 8000.0, date: 2023-10-01)";
+        assertEquals(testStatement.toString(), expectedString2);
     }
 }

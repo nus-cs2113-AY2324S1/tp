@@ -3,7 +3,11 @@ package cashleh.commands;
 import cashleh.transaction.ExpenseStatement;
 
 import java.util.logging.Level;
-
+/**
+ * This class extends the Command class and is
+ * used to encapsulate the action of viewing expenses from the application's expense statement.
+ * When executed, it prints the list of expenses and logs the operation.
+ */
 public class ViewExpenses extends Command {
     private final ExpenseStatement expenseStatement;
 
