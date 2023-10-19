@@ -13,9 +13,10 @@ public class ListCalendarEventsCommand extends EventCommand{
         printLine();
 
         for (Event event : eventList.getEvent()) {
-            System.out.print(event);
+            System.out.println(event);
             printLine();
         }
+        System.out.print("Enter your command: ");
     }
 
     public void printLine() {
