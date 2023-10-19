@@ -59,4 +59,12 @@ public class Ui {
     public static void printAllIngredients(IngredientList ingredients) {
         ingredients.listIngredients();
     }
+
+    public static void printAddRecipeSuccess(String recipeName) {
+        System.out.println("Recipe: " + recipeName + " has been successfully created!");
+    }
+
+    public static void printAddIngredientsSuccess(String ingredientName) {
+        System.out.println("Ingredient: " + ingredientName + " has been successfully added!");
+    }
 }
