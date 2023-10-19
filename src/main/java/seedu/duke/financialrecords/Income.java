@@ -2,6 +2,7 @@ package seedu.duke.financialrecords;
 import seedu.duke.commands.KaChinnnngException;
 
 import java.time.LocalDate;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -23,7 +24,8 @@ public class Income extends FinancialRecord {
      */
     public Income(String description, LocalDate date, double amount) throws KaChinnnngException {
         super(description, date, amount);
-        LOGGER.info("Income created with description: " + description + " date: " + date + " amount: " + amount);
+        LOGGER.log(Level.INFO,("Income created with description: " +
+                description + " date: " + date + " amount: " + amount));
     }
 
     /**

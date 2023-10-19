@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /*
  * parser class to parse user input
@@ -22,7 +23,7 @@ public class Parser {
         String trimmedCommand = fullCommand.trim();
         String commandLowerCase = trimmedCommand.toLowerCase();
 
-        LOGGER.info("Parsing user input:" + fullCommand);
+        LOGGER.log(Level.INFO, ("Parsing user input:") + fullCommand);
 
         String resultCommand;
 
@@ -49,7 +50,7 @@ public class Parser {
         } else {
             resultCommand = "invalid";
         }
-        LOGGER.info("Parsed command: " + resultCommand);
+        LOGGER.log(Level.INFO , ("Parsed command: ") + resultCommand);
         return resultCommand;
     }
 }
