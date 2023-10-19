@@ -36,7 +36,7 @@ public class Parser {
             return prepareAddCommand(arguments);
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommand(arguments);
+            return prepareFindCommand(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommand(arguments);
@@ -73,5 +73,21 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
+
+    private Command prepareFindCommand(String args) {
+        String[] findArgs = args.split(" ", 2);
+        if (findArgs.length == 2) {
+            String criterion = findArgs[0];
+            String keyword = findArgs[1];
+            if (criterion.equals("/n") || criterion.equals("/d")) {
+                return new FindCommand(keyword, criterion);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+    }
+
 
 }

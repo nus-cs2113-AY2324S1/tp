@@ -30,9 +30,14 @@ class HelpCommandTest {
                 + "Example: list"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
-                + "find: Finds drug in inventory "
+                + "find /n: Finds drug in inventory using name"
                 + System.getProperty("line.separator")
-                + "Example: find panadol"
+                + "Example: find /n panadol"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+                + "find /d: Finds drug in inventory using date"
+                + System.getProperty("line.separator")
+                + "Example: find /d panadol"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "bye: Exits the program."
