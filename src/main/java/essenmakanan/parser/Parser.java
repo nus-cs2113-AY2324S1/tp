@@ -15,12 +15,11 @@ public class Parser {
 
         switch (commandType) {
         case "add":
-            if (inputDetail.substring(0,2).equals("r/")) {
+            if (!inputDetail.isEmpty() && inputDetail.startsWith("r/")) {
                 command = new AddRecipeCommand(inputDetail);
-            } else if (inputDetail.substring(0,2).equals("i/")) {
+            } else if (!inputDetail.isEmpty() && inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail);
             } else {
-                System.out.println("Invalid add command");
                 throw new EssenMakananFormatException();
             }
             break;
