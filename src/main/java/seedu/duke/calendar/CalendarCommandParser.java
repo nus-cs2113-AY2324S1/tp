@@ -1,3 +1,5 @@
+//@@author kherlenbayasgalan
+
 package seedu.duke.calendar;
 
 import seedu.duke.calendar.command.AddEventCommand;
