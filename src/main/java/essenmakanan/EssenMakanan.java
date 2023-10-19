@@ -22,7 +22,7 @@ public class EssenMakanan {
             System.out.println("Recipe: " + recipeName + " has been successfully created!");
             return true;
         case "view":
-            recipes.listRecipes();
+            recipes.viewAllRecipes();
             return true;
         default:
             return false;
