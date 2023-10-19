@@ -90,6 +90,7 @@ public class FitTrack {
         userProfile.setHeight(profile.getHeight());
         userProfile.setWeight(profile.getWeight());
         userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
+        userProfile.calculateBmi();
 
         assert userProfile.getHeight() > 0 : "Height should be greater than 0";
         assert userProfile.getWeight() > 0 : "Weight should be greater than 0";
