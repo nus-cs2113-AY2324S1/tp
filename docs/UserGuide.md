@@ -23,6 +23,7 @@ it's your personal guide to achieving your health and fitness goals.
 * [Viewing help : `help`](#View-Help-Guide-help)
 * [Exiting the application : `exit`](#Exiting-the-application-exit)
 * [Editing your profile : `editprofile`](#editing-your-profile-editprofile)
+* [Viewing your profile : `viewprofile`](#viewing-your-profile-viewprofile)
 * [Adding a Meal : `addmeal`](#adding-a-meal-addmeal)
 * [Viewing list of all meals : `viewmeals`](#viewing-list-of-all-meals-viewmeals)
 * [Delete a Meal : `deletemeal`](#delete-a-meal-deletemeal)
@@ -77,6 +78,25 @@ I've edited the following:
 Height: 170.0
 Weight: 70.0
 Daily calorie limit: 100.0
+```
+
+### Viewing your profile: `viewprofile`
+Lists all profile settings and details.
+
+Format: `viewprofile`
+
+**Example of usage:**
+```
+viewprofile
+```
+
+**Expected output:**
+```
+Your Profile:
+Height: 180.0
+Weight: 80.0
+Daily calorie limit: 3000.0
+
 ```
 
 ### Adding a Meal: `addmeal`
@@ -187,6 +207,7 @@ I've deleted workout 1
 * Help List `help`
 * Exit Application `exit`
 * Edit Profile `editprofile`
+* View profile `viewprofile`
 * Add Meal `addmeal`
 * View all meals consumed `viewmeals`
 * Delete Meal `deletemeal`
