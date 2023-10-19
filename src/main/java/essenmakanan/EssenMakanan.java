@@ -2,6 +2,7 @@ package essenmakanan;
 
 import essenmakanan.command.Command;
 import essenmakanan.exception.EssenMakananCommandException;
+import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
@@ -30,6 +31,8 @@ public class EssenMakanan {
                 command.executeCommand(recipes, ingredients);
                 isExit = command.isExit(); //someone can assert here
             } catch (EssenMakananCommandException exception) {
+                exception.handleException();
+            } catch (EssenMakananFormatException exception) {
                 exception.handleException();
             }
         } while (!isExit);

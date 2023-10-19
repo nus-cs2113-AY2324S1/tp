@@ -2,10 +2,11 @@ package essenmakanan.parser;
 
 import essenmakanan.command.*;
 import essenmakanan.exception.EssenMakananCommandException;
+import essenmakanan.exception.EssenMakananFormatException;
 
 public class Parser {
 
-    public Command parseCommand(String input) throws EssenMakananCommandException {
+    public Command parseCommand(String input) throws EssenMakananCommandException, EssenMakananFormatException {
         Command command;
 
         String[] parsedInput = input.split(" ", 2);
@@ -20,7 +21,7 @@ public class Parser {
                 command = new AddIngredientCommand(inputDetail);
             } else {
                 System.out.println("Invalid add command");
-                throw new EssenMakananCommandException();
+                throw new EssenMakananFormatException();
             }
             break;
         case "view":
@@ -29,7 +30,7 @@ public class Parser {
             } else if (inputDetail.equals("i")) {
                 command = new ViewIngredientsCommand();
             } else {
-                throw new EssenMakananCommandException();
+                throw new EssenMakananFormatException();
             }
             break;
         case "help":
