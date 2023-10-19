@@ -20,7 +20,7 @@ public class FlashcardDirectory {
         file = new File(path);
         if(!file.exists()){
             if(file.mkdir()){
-                System.out.println("    Created data directory");
+                System.out.println("    Created flashcards directory");
             } else{
                 System.out.println("    Failed to create directory");
             }
