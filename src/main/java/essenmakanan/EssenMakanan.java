@@ -33,7 +33,6 @@ public class EssenMakanan {
         do {
             logger.log(Level.INFO, "Getting input");
             input = in.nextLine();
-            logger.log(Level.INFO, "App starting");
             try {
                 Command command = parser.parseCommand(input);
                 command.executeCommand(recipes, ingredients);

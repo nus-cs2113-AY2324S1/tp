@@ -1,7 +1,5 @@
 package essenmakanan.recipe;
 
-import essenmakanan.ui.Ui;
-
 import java.util.ArrayList;
 
 public class RecipeList {
@@ -9,6 +7,10 @@ public class RecipeList {
 
     public RecipeList() {
         recipes = new ArrayList<>();
+    }
+
+    public ArrayList<Recipe> getRecipes() {
+        return recipes;
     }
 
     public void addRecipe(Recipe recipe) {
@@ -23,11 +25,6 @@ public class RecipeList {
 
     public void deleteRecipe(Recipe recipe) {
         recipes.remove(recipe);
-    }
-
-
-    public void listRecipes(Ui ui) {
-        ui.printAllRecipes(recipes);
     }
 
     public Recipe getRecipe(int index) {

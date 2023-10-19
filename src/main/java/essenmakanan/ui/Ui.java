@@ -1,9 +1,8 @@
 package essenmakanan.ui;
 
-import essenmakanan.ingredient.Ingredient;
+import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.Recipe;
-
-import java.util.ArrayList;
+import essenmakanan.recipe.RecipeList;
 
 public class Ui {
 
@@ -22,15 +21,6 @@ public class Ui {
         drawDivider();
         System.out.println("Hope you had fun! See you again!");
         drawDivider();
-    }
-
-    public void functionSelect() {
-        System.out.println("Enter the number for the function you want");
-        System.out.println("1. Recipe");
-        System.out.println("2. Ingredient");
-        System.out.println("type bye to exit");
-
-        System.out.println(DIVIDER);
     }
 
     public void drawDivider() {
@@ -60,11 +50,11 @@ public class Ui {
         drawDivider();
     }
 
-    public void printAllRecipes(ArrayList<Recipe> recipes) {
+    public void printAllRecipes(RecipeList recipes) {
         drawDivider();
         int count = 1;
-        for (Recipe recipe : recipes) {
-            assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
+        for (Recipe recipe : recipes.getRecipes()) {
+            assert recipes.getRecipe(count - 1).getTitle().equals(recipe.getTitle())
                     : "Title is not matching with the current index";
 
             System.out.println(count + ". " + recipe);
@@ -73,12 +63,15 @@ public class Ui {
         drawDivider();
     }
 
-    public void printAllIngredients(ArrayList<Ingredient> ingredients) {
-        int ingredientCount = 0;
+    public void printAllIngredients(IngredientList ingredients) {
+        ingredients.listIngredients();
+    }
 
-        for (Ingredient ingredient : ingredients) {
-            ingredientCount++;
-            System.out.println(ingredientCount + ". " + ingredient.getName());
-        }
+    public void printAddRecipeSuccess(String recipeName) {
+        System.out.println("Recipe: " + recipeName + " has been successfully created!");
+    }
+
+    public void printAddIngredientsSuccess(String ingredientName) {
+        System.out.println("Ingredient: " + ingredientName + " has been successfully added!");
     }
 }
