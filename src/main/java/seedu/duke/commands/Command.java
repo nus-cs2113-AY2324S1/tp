@@ -13,11 +13,7 @@ public class Command {
         this.userCommand = cmd;
     }
 
-    /**
-     * Executes the command and returns the result.
-     * @return error message
-     */
-    public CommandResult execute() {
+    public CommandResult execute() throws Exception {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     }
 
