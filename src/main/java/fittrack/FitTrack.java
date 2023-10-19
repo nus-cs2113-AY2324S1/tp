@@ -79,12 +79,16 @@ public class FitTrack {
         );
         String input = ui.scanNextLine();
 
-        assert (input != null) : "input cannot be null";
+        assert (input != null) : "Profile cannot be null";
 
         UserProfile profile = new CommandParser().parseProfile(input);
         userProfile.setHeight(profile.getHeight());
         userProfile.setWeight(profile.getWeight());
         userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
+
+        assert userProfile.getHeight() > 0 : "Height should be greater than 0";
+        assert userProfile.getWeight() > 0 : "Weight should be greater than 0";
+
         ui.printProfileDetails(userProfile);
     }
 
