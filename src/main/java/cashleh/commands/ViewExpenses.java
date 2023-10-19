@@ -1,25 +1,23 @@
 package cashleh.commands;
 
-import cashleh.Expense;
+import cashleh.transaction.ExpenseStatement;
 
+import java.util.logging.Level;
+/**
+ * This class extends the Command class and is
+ * used to encapsulate the action of viewing expenses from the application's expense statement.
+ * When executed, it prints the list of expenses and logs the operation.
+ */
 public class ViewExpenses extends Command {
+    private final ExpenseStatement expenseStatement;
 
-    public static final String COMMAND = "viewExpenses";
-    public ViewExpenses() {
+    public ViewExpenses(ExpenseStatement expenseStatement) {
+        this.expenseStatement = expenseStatement;
     }
     @Override
     public void execute() {
-        System.out.println("The current sum of all your expenses amounts to: "
-                + Expense.getTotalExpense() + System.lineSeparator() +
-                "Here are the expenses in your list:" + getExpenseStatement());
+        assert expenseStatement != null;
+        expenseStatement.printExpenses();
+        logger.log(Level.INFO, "expense statement was successfully displayed");
     }
 }
-
-//    public static void viewExpenses(ArrayList<Expense> expenseList) {
-//        System.out.println("Your total expense is: " + Expense.getTotalExpense());
-//        System.out.println("Here are the expenses in your list:");
-//        for (int i = 0; i < expenseList.size(); i++) {
-//            System.out.print((i + 1) + ". ");
-//            System.out.println(expenseList.get(i));
-//        }
-//    }

@@ -1,8 +1,18 @@
 package cashleh;
 
+import cashleh.parser.Parser;
+import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.IncomeStatement;
+import cashleh.exceptions.CashLehException;
+import cashleh.commands.Command;
+import cashleh.commands.Exit;
+
+
 public class CashLeh {
-    private final Ui ui = new Ui();
     private final Input input = new Input();
+    private final ExpenseStatement expenseStatement = new ExpenseStatement();
+    private final IncomeStatement incomeStatement = new IncomeStatement();
+    private final Parser parser = new Parser(expenseStatement, incomeStatement);
 
     /**
      * Main entry-point for the application.
@@ -20,19 +30,23 @@ public class CashLeh {
         String[] greetingLines = {userGuideLink, logo, "Welcome to 'CashLeh?'! " +
                 "Your one-stop app for managing your finances!", "What is your name?"};
 
-        ui.printMultipleText(greetingLines);
+        Ui.printMultipleText(greetingLines);
 
         String inputString = input.getInputString();
-        ui.printText("Hello " + inputString);
+        Ui.printText("Hello " + inputString);
 
-        do {
+        Command command = null;
+        while (!(command instanceof Exit)) {
             inputString = input.getInputString();
-            if (inputString.equals("bye")) {
-                ui.printText("Bye. Hope to see you again soon!");
-            } else {
-                ui.printText("Sorry, I don't understand what you mean.");
+            try {
+                command = parser.parse(inputString);
+                command.execute();
+            } catch (CashLehException e) {
+                Ui.printMultipleText(new String[]{
+                        e.getMessage()
+                });
             }
-        } while (!inputString.equals("bye"));
+        }
     }
 
     public static void main(String[] args) {
