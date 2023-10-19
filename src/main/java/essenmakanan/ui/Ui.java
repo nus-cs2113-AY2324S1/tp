@@ -1,5 +1,10 @@
 package essenmakanan.ui;
 
+import essenmakanan.ingredient.Ingredient;
+import essenmakanan.recipe.Recipe;
+
+import java.util.ArrayList;
+
 public class Ui {
 
     private final String DIVIDER = "--------------------------------------------";
@@ -41,5 +46,31 @@ public class Ui {
         System.out.println("- View all ingredients. [view i]");
     }
 
+    public void showRecentAddedRecipe(String recipeTitle) {
+        System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
+    }
 
+    public void showRecentAddedIngredient(String ingredientTitle) {
+        System.out.println("Ingredient: " + ingredientTitle + " has been successfully created!");
+    }
+
+    public void printAllRecipes(ArrayList<Recipe> recipes) {
+        int count = 1;
+        for (Recipe recipe : recipes) {
+            assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
+                    : "Title is not matching with the current index";
+
+            System.out.println(count + ". " + recipe);
+            count++;
+        }
+    }
+
+    public void printAllIngredients(ArrayList<Ingredient> ingredients) {
+        int ingredientCount = 0;
+
+        for (Ingredient ingredient : ingredients) {
+            ingredientCount++;
+            System.out.println(ingredientCount + ". " + ingredient.getName());
+        }
+    }
 }

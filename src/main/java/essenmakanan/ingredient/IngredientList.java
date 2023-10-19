@@ -1,5 +1,7 @@
 package essenmakanan.ingredient;
 
+import essenmakanan.ui.Ui;
+
 import java.util.ArrayList;
 
 public class IngredientList {
@@ -21,7 +23,7 @@ public class IngredientList {
         ingredients.remove(ingredient);
     }
 
-    public void listIngredients() {
+    public void listIngredients(Ui ui) {
         int ingredientCount = 1;
 
         System.out.println("Here's a list of your ingredients!");

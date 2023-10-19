@@ -1,48 +1,60 @@
 package essenmakanan;
 
-import essenmakanan.exception.EssenMakananException;
-import essenmakanan.ingredient.Ingredient;
+import essenmakanan.command.AddIngredientCommand;
+import essenmakanan.command.AddRecipeCommand;
+import essenmakanan.command.Command;
+import essenmakanan.command.ViewIngredientsCommand;
+import essenmakanan.command.ViewRecipesCommand;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.parser.RecipeParser;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
+
 import java.util.Scanner;
 
 public class EssenMakanan {
 
-    private static final String EXIT = "bye";
-    private static final String RECIPE_FUNCTION = "1";
-    private static final String INGREDIENT_FUNCTION = "2";
+    private RecipeList recipes;
+    private IngredientList ingredients;
+    private Ui ui;
 
-    public static boolean handleIngredientFunctions(IngredientList ingredients, String command, String inputDetail) {
+    private final String EXIT = "bye";
+    private final String RECIPE_FUNCTION = "1";
+    private final String INGREDIENT_FUNCTION = "2";
+
+    public boolean handleRecipeFunctions(String command, String inputDetail) {
         switch(command) {
         case "add":
-            String ingredientName = inputDetail.replace("i/", "");
-            Ingredient newIngredient = new Ingredient(ingredientName);
-
-            ingredients.addIngredient(newIngredient);
-            System.out.println("Ingredient: " + ingredientName + " has been successfully created!");
+            Command addCommand = new AddRecipeCommand();
+            addCommand.executeCommand(recipes, ingredients,inputDetail);
             return true;
         case "view":
-            ingredients.listIngredients();
+            Command viewCommand = new ViewRecipesCommand();
+            viewCommand.executeCommand(recipes, ingredients, inputDetail);
             return true;
         default:
             return false;
         }
     }
 
-    public static void main(String[] args) {
-        RecipeList recipes = new RecipeList();
-        IngredientList ingredients = new IngredientList();
-        Ui ui = new Ui();
-        RecipeParser recipeParser = new RecipeParser();
+    public boolean handleIngredientFunctions( String command, String inputDetail) {
+        switch(command) {
+        case "add":
+            Command addCommand = new AddIngredientCommand();
+            addCommand.executeCommand(recipes, ingredients, inputDetail);
+            return true;
+        case "view":
+            Command viewCommand = new ViewIngredientsCommand();
+            viewCommand.executeCommand(recipes, ingredients, inputDetail);
+            return true;
+        default:
+            return false;
+        }
+    }
 
-        // Prompt users that program is ready
+    public void run() {
         ui.start();
 
         Scanner in = new Scanner(System.in);
-
         String functionInput;
         String input = "";
         boolean validInput;
@@ -51,7 +63,6 @@ public class EssenMakanan {
             validInput = true;
 
             ui.functionSelect();
-
             functionInput = in.nextLine();
 
 
@@ -74,24 +85,33 @@ public class EssenMakanan {
             }
 
             input = in.nextLine();
-
             String[] parsedInput = input.split(" ", 2);
             String commandType = parsedInput[0];
             String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
 
             if (functionInput.equals(RECIPE_FUNCTION)) {
-                try{
-                    recipeParser.parseRecipeCommand(recipes, commandType, inputDetail);
-                } catch (EssenMakananException e) {
-                    System.out.println("Error when adding recipe!");
-                }
+                validInput = handleRecipeFunctions(commandType, inputDetail);
             } else if (functionInput.equals(INGREDIENT_FUNCTION)) {
-                validInput = handleIngredientFunctions(ingredients, commandType, inputDetail);
+                validInput = handleIngredientFunctions(commandType, inputDetail);
             }
             ui.drawDivider();
-        } while (!input.equals(EXIT) && validInput);
+        } while (!input.equals(EXIT) || validInput);
 
-        in.close();
         ui.bye();
+    }
+
+    public void setup() {
+        recipes = new RecipeList();
+        ingredients = new IngredientList();
+        ui = new Ui();
+    }
+
+    public void start() {
+        setup();
+        run();
+    }
+
+    public static void main(String[] args) {
+        new EssenMakanan().start();
     }
 }

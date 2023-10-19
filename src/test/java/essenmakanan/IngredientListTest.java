@@ -1,6 +1,7 @@
 package essenmakanan;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +19,9 @@ public class IngredientListTest {
         ingredients.addIngredient(tomato);
         ingredients.addIngredient(cheese);
         ingredients.addIngredient(bread);
-        ingredients.listIngredients();
+
+        ingredients.listIngredients(new Ui());
+
 
         Ingredient ingredient;
         ingredient = ingredients.getIngredient(0);
