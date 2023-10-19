@@ -9,6 +9,9 @@ import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class EssenMakanan {
 
@@ -17,7 +20,10 @@ public class EssenMakanan {
     private Ui ui;
     private Parser parser;
 
+    private Logger logger = Logger.getLogger("app log");
+
     public void run() {
+        logger.log(Level.INFO, "App starting");
         ui.start();
 
         Scanner in = new Scanner(System.in);
@@ -25,17 +31,23 @@ public class EssenMakanan {
         boolean isExit = false;
 
         do {
+            logger.log(Level.INFO, "Getting input");
             input = in.nextLine();
+            logger.log(Level.INFO, "App starting");
             try {
                 Command command = parser.parseCommand(input);
                 command.executeCommand(recipes, ingredients);
                 isExit = command.isExit(); //someone can assert here
             } catch (EssenMakananCommandException exception) {
                 exception.handleException();
+                logger.log(Level.WARNING, "Invalid command given");
             } catch (EssenMakananFormatException exception) {
                 exception.handleException();
+                logger.log(Level.WARNING, "Invalid format given");
             }
         } while (!isExit);
+
+        logger.log(Level.INFO, "Exiting app");
     }
 
     public void setup() {
