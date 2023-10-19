@@ -15,7 +15,6 @@ public class EssenMakanan {
 
     private RecipeList recipes;
     private IngredientList ingredients;
-    private Ui ui;
 
     private final String EXIT = "bye";
     private final String RECIPE_FUNCTION = "1";
@@ -36,7 +35,7 @@ public class EssenMakanan {
         }
     }
 
-    public boolean handleIngredientFunctions( String command, String inputDetail) {
+    public boolean handleIngredientFunctions(String command, String inputDetail) {
         switch(command) {
         case "add":
             Command addCommand = new AddIngredientCommand();
@@ -52,7 +51,7 @@ public class EssenMakanan {
     }
 
     public void run() {
-        ui.start();
+        Ui.start();
 
         Scanner in = new Scanner(System.in);
         String functionInput;
@@ -62,16 +61,16 @@ public class EssenMakanan {
         do {
             validInput = true;
 
-            ui.functionSelect();
+            Ui.functionSelect();
             functionInput = in.nextLine();
 
 
             switch (functionInput) {
             case RECIPE_FUNCTION:
-                ui.showRecipeFunctions();
+                Ui.showRecipeFunctions();
                 break;
             case INGREDIENT_FUNCTION:
-                ui.showIngredientFunctions();
+                Ui.showIngredientFunctions();
                 break;
             default:
                 System.out.println("Please enter valid input.");
@@ -80,7 +79,7 @@ public class EssenMakanan {
 
             // exit while loop for invalid inputs
             if (!validInput) {
-                ui.bye();
+                Ui.bye();
                 System.exit(0);
             }
 
@@ -94,16 +93,15 @@ public class EssenMakanan {
             } else if (functionInput.equals(INGREDIENT_FUNCTION)) {
                 validInput = handleIngredientFunctions(commandType, inputDetail);
             }
-            ui.drawDivider();
+            Ui.drawDivider();
         } while (!input.equals(EXIT) || validInput);
 
-        ui.bye();
+        Ui.bye();
     }
 
     public void setup() {
         recipes = new RecipeList();
         ingredients = new IngredientList();
-        ui = new Ui();
     }
 
     public void start() {

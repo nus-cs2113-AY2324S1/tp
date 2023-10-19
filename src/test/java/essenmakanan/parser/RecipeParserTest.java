@@ -1,12 +1,11 @@
-package essenmakanan;
+package essenmakanan.parser;
 
 import essenmakanan.exception.EssenMakananException;
-import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.RecipeList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RecipeParserTest {
 
@@ -21,13 +20,11 @@ public class RecipeParserTest {
 
     @Test
     public void parse_invalidCommand_exceptionThrown() {
-        try{
-            String invalidCommand = "see";
-            String invalidDetails = "recipes in my house";
+        String invalidCommand = "see";
+        String invalidDetails = "recipes in my house";
+        assertThrows(EssenMakananException.class, () -> {
             recipeParser.parseRecipeCommand(recipes, invalidCommand, invalidDetails);
-        } catch (EssenMakananException e) {
-            assertEquals(e.getMessage(), "EssenMakanan Exception!");
-        }
+        });
     }
 
 }

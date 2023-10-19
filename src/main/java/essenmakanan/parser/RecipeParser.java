@@ -7,7 +7,6 @@ import essenmakanan.ui.Ui;
 
 public class RecipeParser {
 
-    private Ui ui = new Ui();
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail) throws EssenMakananException{
         switch(command) {
         case "add":
@@ -18,10 +17,10 @@ public class RecipeParser {
             System.out.println("Recipe: " + recipeName + " has been successfully created!");
             break;
         case "view":
-            recipes.listRecipes(ui);
+            Ui.printAllRecipes(recipes);
             break;
         default:
-            throw new EssenMakananException();
+            throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
 }

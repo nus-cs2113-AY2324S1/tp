@@ -1,14 +1,12 @@
 package essenmakanan.ui;
 
-import essenmakanan.ingredient.Ingredient;
-import essenmakanan.recipe.Recipe;
-
-import java.util.ArrayList;
+import essenmakanan.ingredient.IngredientList;
+import essenmakanan.recipe.RecipeList;
 
 public class Ui {
 
-    private final String DIVIDER = "--------------------------------------------";
-    public void start() {
+    private static final String DIVIDER = "--------------------------------------------";
+    public static void start() {
 
         System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
                 "to track the\n ingredients in your kitchen and store " +
@@ -17,11 +15,11 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public void bye() {
+    public static void bye() {
         System.out.println("Hope you had fun! See you again!");
     }
 
-    public void functionSelect() {
+    public static void functionSelect() {
         System.out.println("Enter the number for the function you want");
         System.out.println("1. Recipe");
         System.out.println("2. Ingredient");
@@ -30,47 +28,35 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public void drawDivider() {
+    public static void drawDivider() {
         System.out.println(DIVIDER);
     }
 
-    public void showRecipeFunctions() {
+    public static void showRecipeFunctions() {
         System.out.println("- Add recipe. [add r/RECIPE_NAME]");
         System.out.println("- Delete recipe. [delete r/RECIPE_ID]");
         System.out.println("- View all recipes. [view r]");
     }
 
-    public void showIngredientFunctions() {
+    public static void showIngredientFunctions() {
         System.out.println("- Add ingredient. [add i/INGREDIENT_NAME]");
         System.out.println("- Delete ingredient. [delete i/INGREDIENT_ID]");
         System.out.println("- View all ingredients. [view i]");
     }
 
-    public void showRecentAddedRecipe(String recipeTitle) {
+    public static void showRecentAddedRecipe(String recipeTitle) {
         System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
     }
 
-    public void showRecentAddedIngredient(String ingredientTitle) {
+    public static void showRecentAddedIngredient(String ingredientTitle) {
         System.out.println("Ingredient: " + ingredientTitle + " has been successfully created!");
     }
 
-    public void printAllRecipes(ArrayList<Recipe> recipes) {
-        int count = 1;
-        for (Recipe recipe : recipes) {
-            assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
-                    : "Title is not matching with the current index";
-
-            System.out.println(count + ". " + recipe);
-            count++;
-        }
+    public static void printAllRecipes(RecipeList recipes) {
+        recipes.listRecipes();
     }
 
-    public void printAllIngredients(ArrayList<Ingredient> ingredients) {
-        int ingredientCount = 0;
-
-        for (Ingredient ingredient : ingredients) {
-            ingredientCount++;
-            System.out.println(ingredientCount + ". " + ingredient.getName());
-        }
+    public static void printAllIngredients(IngredientList ingredients) {
+        ingredients.listIngredients();
     }
 }
