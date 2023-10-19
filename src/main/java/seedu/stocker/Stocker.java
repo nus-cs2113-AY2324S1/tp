@@ -77,6 +77,7 @@ public class Stocker {
             command = new Parser().parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
             ui.showResultToUser(result);
+            assert !ExitCommand.isExit((command));
 
         } while (!ExitCommand.isExit(command));
     }
