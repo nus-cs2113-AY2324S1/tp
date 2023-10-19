@@ -33,6 +33,9 @@ public class FlashcardStorage {
      * @return Flashcard object
      */
     private Flashcard loadFlashcard(String[] tokens){
+
+        assert tokens.length == 5: "Token length should be 5";
+
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
         String[] tags = tokens[2].trim().split("/");
@@ -82,11 +85,14 @@ public class FlashcardStorage {
             flashcardList.add(loadFlashcard(flashTokens));
         }
 
+        System.out.println(String.format("    There are currently %d flashcards in the savefile", flashcardList.getSize()));
+
         return flashcardList;
 
     }
 
     public void saveFlashcards(ArrayList<Flashcard> flashcardList) {
+
         try {
             FileWriter fw = new FileWriter(path);
 
