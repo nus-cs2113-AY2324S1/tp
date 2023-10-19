@@ -18,7 +18,9 @@ public class Ui {
     }
 
     public void bye() {
+        drawDivider();
         System.out.println("Hope you had fun! See you again!");
+        drawDivider();
     }
 
     public void functionSelect() {
@@ -40,14 +42,19 @@ public class Ui {
         System.out.println("- View all recipes. [view r]");
         System.out.println("- Add ingredient. [add i/INGREDIENT_NAME]");
         System.out.println("- View all ingredients. [view i]");
+        System.out.println("- Exit application [exit]");
     }
 
     public void showRecentAddedRecipe(String recipeTitle) {
+        drawDivider();
         System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
+        drawDivider();
     }
 
     public void showRecentAddedIngredient(String ingredientTitle) {
+        drawDivider();
         System.out.println("Ingredient: " + ingredientTitle + " has been successfully created!");
+        drawDivider();
     }
 
     public void printAllRecipes(ArrayList<Recipe> recipes) {

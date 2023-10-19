@@ -33,8 +33,6 @@ public class EssenMakanan {
                 exception.handleException();
             }
         } while (!isExit);
-
-        ui.bye();
     }
 
     public void setup() {

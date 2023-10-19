@@ -3,10 +3,10 @@ package essenmakanan.parser;
 import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.command.Command;
+import essenmakanan.command.ExitCommand;
 import essenmakanan.command.ViewIngredientsCommand;
 import essenmakanan.command.ViewRecipesCommand;
 import essenmakanan.exception.EssenMakananCommandException;
-import essenmakanan.ui.Ui;
 
 public class Parser {
 
@@ -36,6 +36,9 @@ public class Parser {
             } else {
                 throw new EssenMakananCommandException();
             }
+            break;
+        case "exit":
+            command = new ExitCommand();
             break;
         default:
             throw new EssenMakananCommandException();
