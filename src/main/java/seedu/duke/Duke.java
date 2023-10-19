@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.data.Goal;
+import seedu.duke.data.GoalList;
 import seedu.duke.parser.Parser;
 //import seedu.addressbook.storage.StorageFile;
 //import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
@@ -22,6 +24,8 @@ public class Duke {
     public static final String VERSION = "AddressBook Level 2 - Version 1.0";
 
     private TextUi ui;
+    public static GoalList goals = new GoalList();
+
 
     //    private StorageFile storage;
     public static void main(String... launchArgs) {

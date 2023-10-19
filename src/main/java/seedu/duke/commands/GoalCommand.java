@@ -1,8 +1,9 @@
 package seedu.duke.commands;
 
-import seedu.duke.data.GoalList;
+import seedu.duke.Duke;
 import seedu.duke.ui.TextUi;
 import seedu.duke.data.exception.IncorrectFormatException;
+
 
 public class GoalCommand extends Command {
 
@@ -12,10 +13,10 @@ public class GoalCommand extends Command {
         super(cmd);
     }
 
-    public CommandResult execute(GoalList goals) {
+    public CommandResult execute() {
         try{
-            goals.addGoal(this.userCommand);
-            String addGoalResultMsg = TextUi.addGoalSuccessMessage(goals);
+            Duke.goals.addGoal(this.userCommand);
+            String addGoalResultMsg = TextUi.addGoalSuccessMessage(Duke.goals);
             return new CommandResult(addGoalResultMsg);
 
         }catch(IncorrectFormatException ife){

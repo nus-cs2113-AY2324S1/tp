@@ -15,6 +15,11 @@ public class GoalList {
     private int goalCount;
     private TextUi ui;
 
+    public GoalList() {
+        goals = new ArrayList<>();
+        this.goalCount = 0;
+    }
+
     public GoalList(ArrayList<Goal> goals) {
         this.goals = goals;
         this.goalCount = goals.size();
@@ -62,10 +67,9 @@ public class GoalList {
             throw new IncorrectFormatException("Sorry. I cannot detect the '" + DATE_KEYWORD + "' keyword." );
         }
 
-
         int calories = Integer.parseInt(cmdSplit[1]); //throws number exception if not a number string
         if (calories <= 0 ){
-            throw new IllegalValueException("Please input a positive value");
+            throw new IllegalValueException("Please input a positive value.");
         }
 
     }
