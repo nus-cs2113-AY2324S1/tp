@@ -1,7 +1,6 @@
 package fittrack.command;
 
 import fittrack.parser.CommandParser;
-import java.lang.Math;
 import java.text.DecimalFormat;
 
 public class BmiCommand extends Command {
