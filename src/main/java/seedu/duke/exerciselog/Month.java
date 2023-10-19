@@ -42,7 +42,7 @@ public class Month {
         return name;
     }
 
-    public int numberOfDays() {
+    public int getNumberOfDays() {
         return dates.size();
     }
 
