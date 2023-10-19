@@ -36,6 +36,7 @@ public class RecipeList {
     }
 
     public Recipe getRecipe(int index) {
+        assert index >= 0 && index < recipes.size() : "Index is out of bounds";
         return recipes.get(index);
     }
 
