@@ -85,7 +85,9 @@ public class FlashcardStorage {
             flashcardList.add(loadFlashcard(flashTokens));
         }
 
-        System.out.println(String.format("    There are currently %d flashcards in the savefile", flashcardList.getSize()));
+        System.out.println(String.format(
+                "    There are currently %d flashcards in the savefile",
+                flashcardList.getSize()));
 
         return flashcardList;
 
