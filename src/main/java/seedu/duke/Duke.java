@@ -4,8 +4,8 @@ package seedu.duke;
 
 import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardComponent;
-import seedu.duke.calendar.Event;
 import seedu.duke.calendar.CalendarManager;
+import seedu.duke.calendar.Event;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,7 +18,7 @@ public class Duke {
     }
 
     private void runCalendar() {
-        System.out.print("Enter your command: ");
+        System.out.println("Enter your command: ");
 
         CalendarManager manager = new CalendarManager(new ArrayList<Event>());
 
@@ -72,7 +72,7 @@ public class Duke {
         String flashcardOrCalendar;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Do you choose flashcard or calendar? ");
+        System.out.println("Do you choose flashcard or calendar? ");
         flashcardOrCalendar = scanner.nextLine();
 
         if (flashcardOrCalendar.equals("flashcard")) {

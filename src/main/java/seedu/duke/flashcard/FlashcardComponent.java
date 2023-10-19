@@ -27,7 +27,6 @@ public class FlashcardComponent {
         storage = new FlashcardStorage("./data/flashcard.txt");
         try {
             flashcardList = storage.loadFlashcards();
-            System.out.println("Loading existed File");
         } catch (FileNotFoundException e){
             System.out.println("Making New file");
             flashcardList = new FlashcardList(flashcards);
