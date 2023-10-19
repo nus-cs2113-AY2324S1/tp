@@ -8,12 +8,12 @@ import seedu.duke.calendar.EventList;
 import java.util.Scanner;
 
 public class ListCalendarEventsCommand extends EventCommand{
-    public void execute(Scanner scanner, EventList flashcardList) {
+    public void execute(Scanner scanner, EventList eventList) {
         System.out.println("Here is a list of all your events: ");
 
         System.out.println("-".repeat(80));
-        for (Flashcard flashcard : flashcardList.getFlashcards()) {
-            System.out.print(flashcard);
+        for (Event event : eventList.getEvent()) {
+            System.out.print(event);
             System.out.println("-".repeat(80));
         }
     }
