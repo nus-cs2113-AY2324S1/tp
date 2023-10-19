@@ -1,9 +1,9 @@
 Benedict
 addIncome job /amt 3000 /date 2020-01-01
 addIncome job /amt 3000 /date 01 Jan 2020
-addIncome side hustle /amt 500 /date 19/10/2023
+addIncome side hustle /amt 500
 viewIncomes
-addExpense dinner /amt 50 /date 19.10.2023
+addExpense dinner /amt 50
 deleteIncome 5
 deleteIncome 2
 viewIncomes
