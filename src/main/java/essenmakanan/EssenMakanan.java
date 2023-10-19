@@ -1,8 +1,6 @@
 package essenmakanan;
 
-import essenmakanan.command.AddIngredientCommand;
-import essenmakanan.command.AddRecipeCommand;
-import essenmakanan.command.Command;
+import essenmakanan.command.*;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
@@ -26,7 +24,8 @@ public class EssenMakanan {
             addCommand.executeCommand(recipes, ingredients,inputDetail);
             return true;
         case "view":
-            recipes.viewAllRecipes();
+            Command viewCommand = new ViewRecipesCommand();
+            viewCommand.executeCommand(recipes, ingredients, inputDetail);
             return true;
         default:
             return false;
@@ -40,7 +39,8 @@ public class EssenMakanan {
             addCommand.executeCommand(recipes, ingredients, inputDetail);
             return true;
         case "view":
-            ingredients.listIngredients();
+            Command viewCommand = new ViewIngredientsCommand();
+            viewCommand.executeCommand(recipes, ingredients, inputDetail);
             return true;
         default:
             return false;
