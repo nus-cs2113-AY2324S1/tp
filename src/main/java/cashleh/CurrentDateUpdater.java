@@ -33,7 +33,8 @@ public class CurrentDateUpdater {
                 .collect(Collectors.toList());
 
         // Write the updated content back to the file while preserving line endings
-        Files.write(filePath, updatedLines, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        Files.write(filePath, updatedLines, StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
 }
