@@ -25,7 +25,7 @@ public class EssenMakanan {
         switch(command) {
         case "add":
             Command addCommand = new AddRecipeCommand();
-            addCommand.executeCommand(recipes, ingredients,inputDetail);
+            addCommand.executeCommand(recipes, ingredients, inputDetail);
             return true;
         case "view":
             Command viewCommand = new ViewRecipesCommand();
