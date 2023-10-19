@@ -34,7 +34,7 @@ public class Month {
         return dates.get(day - 1);
     }
 
-    public int getTotalNumberOfExercisesForDay(int day) {
+    public int getNumberOfExercisesForDay(int day) {
         return dates.get(day - 1).getNumberOfExercises();
     }
 

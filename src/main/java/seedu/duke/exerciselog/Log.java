@@ -29,7 +29,7 @@ public class Log {
         return exerciseLog.get(month - 1).removeExercise(day, exerciseName, caloriesBurned);
     }
 
-    public int getTotalNumberOfExercises() {
+    public int getNumberOfExercises() {
         int totalNumber = 0;
         for (Month m: exerciseLog) {
             totalNumber += m.getTotalNumberOfExercises();
@@ -37,12 +37,12 @@ public class Log {
         return totalNumber;
     }
 
-    public int getTotalNumberOfExercisesForMonth(int month) {
+    public int getNumberOfExercisesForMonth(int month) {
         return exerciseLog.get(month - 1).getTotalNumberOfExercises();
     }
 
-    public int getTotalNumberOfExercisesForDay(int month, int day) {
-        return exerciseLog.get(month - 1).getTotalNumberOfExercisesForDay(day);
+    public int getNumberOfExercisesForDay(int month, int day) {
+        return exerciseLog.get(month - 1).getNumberOfExercisesForDay(day);
     }
 
     public Month getMonth(int month) {

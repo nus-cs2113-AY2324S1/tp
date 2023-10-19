@@ -43,13 +43,13 @@ public class ViewLogCommand extends Command {
     public CommandResult execute(Log exerciseLog) {
         switch (view) {
         case TOTALEXERCISES:
-            exerciseLog.getTotalNumberOfExercises();
+            exerciseLog.getNumberOfExercises();
             return new CommandResult("Here are the total number of exercises you have logged!\n");
         case TOTALEXERCISESMONTH:
-            exerciseLog.getTotalNumberOfExercisesForMonth(month);
+            exerciseLog.getNumberOfExercisesForMonth(month);
             return new CommandResult("Here are the total number of exercises for that month!\n");
         case TOTALEXERCISESDAY:
-            exerciseLog.getTotalNumberOfExercisesForDay(month, day);
+            exerciseLog.getNumberOfExercisesForDay(month, day);
             return new CommandResult("Here are the total number of exercises for that day!\n");
         default:
             return new CommandResult("Invalid exercise search type");
