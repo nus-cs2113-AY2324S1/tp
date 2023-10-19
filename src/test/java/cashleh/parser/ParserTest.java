@@ -1,6 +1,7 @@
 package cashleh.parser;
 
 import cashleh.exceptions.CashLehParsingException;
+import cashleh.transaction.FinancialStatement;
 import org.junit.jupiter.api.Test;
 
 import cashleh.commands.AddExpense;

@@ -2,6 +2,7 @@ package cashleh;
 
 import cashleh.parser.Parser;
 import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.FinancialStatement;
 import cashleh.transaction.IncomeStatement;
 import cashleh.exceptions.CashLehException;
 import cashleh.commands.Command;

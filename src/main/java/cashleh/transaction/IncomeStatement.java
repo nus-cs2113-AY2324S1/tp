@@ -34,11 +34,15 @@ public class IncomeStatement {
             throw new CashLehMissingTransactionException();
         }
     }
+    public ArrayList<Income> getIncomeStatement() {
+        return this.incomeStatement;
+    }
     public int getNumberOfEntries() {
         return incomeStatement.size();
     }
     public double getTotalIncomeAmount() {
-        return incomeStatement.stream().mapToDouble(Income::getAmount).sum();
+        return incomeStatement.stream().
+                mapToDouble(Income::getAmount).sum();
     }
 
     public void printIncomes() {
