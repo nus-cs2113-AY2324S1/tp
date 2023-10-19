@@ -14,6 +14,7 @@ public class Ui {
         System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
                 "to track the\ningredients in your kitchen and store " +
                 "your favourite recipes");
+        System.out.println("To get started, type [help] for list of commands");
         drawDivider();
     }
 
@@ -37,12 +38,14 @@ public class Ui {
     }
 
     public void showCommands() {
+        drawDivider();
         System.out.println("Here are the commands currently available:");
         System.out.println("- Add recipe. [add r/RECIPE_NAME]");
         System.out.println("- View all recipes. [view r]");
         System.out.println("- Add ingredient. [add i/INGREDIENT_NAME]");
         System.out.println("- View all ingredients. [view i]");
         System.out.println("- Exit application [exit]");
+        drawDivider();
     }
 
     public void showRecentAddedRecipe(String recipeTitle) {
@@ -58,6 +61,7 @@ public class Ui {
     }
 
     public void printAllRecipes(ArrayList<Recipe> recipes) {
+        drawDivider();
         int count = 1;
         for (Recipe recipe : recipes) {
             assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
@@ -66,6 +70,7 @@ public class Ui {
             System.out.println(count + ". " + recipe);
             count++;
         }
+        drawDivider();
     }
 
     public void printAllIngredients(ArrayList<Ingredient> ingredients) {
