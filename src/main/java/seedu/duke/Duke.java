@@ -1,10 +1,7 @@
-//@@author wendelinwemhoener
-
 package seedu.duke;
 
 import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardComponent;
-import seedu.duke.calendar.Event;
 import seedu.duke.calendar.CalendarManager;
 
 import java.util.ArrayList;
