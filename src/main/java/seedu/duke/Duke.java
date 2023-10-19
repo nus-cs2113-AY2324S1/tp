@@ -1,8 +1,11 @@
+//@@author wendelinwemhoener & kherlenbayasgalan
+
 package seedu.duke;
 
 import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardComponent;
 import seedu.duke.calendar.CalendarManager;
+import seedu.duke.calendar.Event;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,7 +20,7 @@ public class Duke {
     private void runCalendar() {
         System.out.println("Enter your command: ");
 
-        CalendarManager manager = new CalendarManager();
+        CalendarManager manager = new CalendarManager(new ArrayList<Event>());
 
         Scanner scanner = new Scanner(System.in);
         String input;
