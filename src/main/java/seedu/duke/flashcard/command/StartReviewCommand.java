@@ -3,7 +3,6 @@
 package seedu.duke.flashcard.command;
 
 import seedu.duke.flashcard.FlashcardList;
-import seedu.duke.flashcard.review.FlashcardReview;
 import seedu.duke.flashcard.review.RandomReviewMode;
 import seedu.duke.flashcard.review.ReviewByTagMode;
 import seedu.duke.flashcard.review.ReviewMode;
@@ -29,10 +28,11 @@ public class StartReviewCommand extends FlashcardCommand {
     public void execute(Scanner scanner, FlashcardList flashcardList) {
         String choice = getUserChoiceReviewMode(scanner);
 
-        if (!choices.contains(choice)) {
+        while (!choices.contains(choice)) {
             System.out.println("    Invalid choice! Your choice must be a, b " +
-                    "or c!");
-            return;
+                    "or c! Please try again.");
+
+            choice = getUserChoiceReviewMode(scanner);
         }
 
         ReviewMode reviewMode = createReviewMode(choice, flashcardList);
@@ -40,8 +40,8 @@ public class StartReviewCommand extends FlashcardCommand {
         if (reviewMode instanceof RandomReviewMode) {
             reviewMode.startReviewSession(scanner);
         } else {
-            System.out.println("This review mode hasn't yet been implemented." +
-                    " Sorry!");
+            System.out.println("    This review mode hasn't yet been " +
+                    "implemented. Sorry!");
         }
     }
 

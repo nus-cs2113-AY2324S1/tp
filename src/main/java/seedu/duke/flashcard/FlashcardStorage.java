@@ -1,8 +1,5 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.flashcard.Flashcard;
-import seedu.duke.flashcard.FlashcardList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -46,15 +43,17 @@ public class FlashcardStorage {
         Flashcard flashcard = new Flashcard(frontText, backText);
 
         for(String tag:tags){
-            if(tag.trim().equals("-")) break;
-            else{
+            if (tag.trim().equals("-")) {
+                break;
+            } else{
                 System.out.println("tags are not for v1");
             }
         }
 
         for(String review: reviews){
-            if(review.trim().equals("-")) break;
-            else{
+            if (review.trim().equals("-")) {
+                break;
+            } else{
                 System.out.println("reviews are not for v1");
             }
         }

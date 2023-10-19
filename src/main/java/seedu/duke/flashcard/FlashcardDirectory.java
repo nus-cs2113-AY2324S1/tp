@@ -39,8 +39,7 @@ public class FlashcardDirectory {
             System.out.println("Failed to find files");
         } else if(flashcardFiles.length == 0){
             System.out.println("No files exist");
-        }
-        else{
+        } else{
             for(String flashcardFile : flashcardFiles){
                 System.out.println(flashcardFile);
             }
