@@ -8,7 +8,7 @@ public class BmiCommand extends Command {
     private static final String DESCRIPTION =
             String.format("`%s` calculates your current BMI.", COMMAND_WORD);
     private static final String USAGE =
-            String.format("Type `%s to view your BMI.", COMMAND_WORD);
+            String.format("Type `%s` to view your BMI.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     @Override
