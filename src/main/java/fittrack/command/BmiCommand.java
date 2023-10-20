@@ -1,6 +1,5 @@
 package fittrack.command;
 
-import fittrack.UserProfile;
 import fittrack.parser.CommandParser;
 
 public class BmiCommand extends Command {
