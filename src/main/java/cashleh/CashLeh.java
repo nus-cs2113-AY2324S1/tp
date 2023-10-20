@@ -16,7 +16,7 @@ public class CashLeh {
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
     private final BudgetHandler budgetHandler = new BudgetHandler(
-            new FinancialStatement(incomeStatement, expenseStatement), new Budget(10));
+            new FinancialStatement(incomeStatement, expenseStatement), new Budget(1));
     private final Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     /**
@@ -39,6 +39,9 @@ public class CashLeh {
 
         String inputString = input.getInputString();
         Ui.printText("Hello " + inputString);
+
+        Ui.printText("Please begin by setting a budget " +
+                "by using the format \"updateBudget DOUBLE\".");
 
         Command command = null;
         while (!(command instanceof Exit)) {
