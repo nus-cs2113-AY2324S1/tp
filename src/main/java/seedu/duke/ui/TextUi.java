@@ -131,8 +131,8 @@ public class TextUi {
     }
 
     /**
-     * @param message
      * Shows message(s) to the user
+     * @param message
      */
     public void showToUser(String... message) {
         for (String m : message) {
@@ -141,9 +141,9 @@ public class TextUi {
     }
 
     /**
-     * @param result
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
+     * @param result
      */
     public void showResultToUser(CommandResult result) {
         final Optional<List<? extends Printable>> resultItems = result.getRelevantItems();

@@ -12,11 +12,6 @@ import java.util.Locale;
  * time.
  */
 public class DateTime {
-    transient LocalDateTime dateTime;
-
-    // @SerializedName("rawData")
-    public String standardString;
-
     private static DateTimeFormatter[] formatters = new DateTimeFormatter[] {
             DateTimeFormatter.ofPattern("yyyy-M-d HHmm"),
             DateTimeFormatter.ofPattern("yyyy-M-d H:m"),
@@ -24,6 +19,24 @@ public class DateTime {
             DateTimeFormatter.ofPattern("M-d-yyyy H:m"),
             DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm", Locale.ENGLISH), };
     private static DateTimeFormatter toStringFormatter = formatters[formatters.length - 1];
+    public String standardString;
+    transient LocalDateTime dateTime;
+
+    // @SerializedName("rawData")
+
+    /**
+     * Create a new date time.
+     *
+     * @param rawData A String that needs to comply with a supported format and
+     *                indicates a correct time that will be recorded by this Date
+     *                instance time.
+     * @throws TipsException Any excption will be throw in this type, which contains
+     *                       information about this exception and the possible
+     *                       solution.
+     */
+    public DateTime(String rawData) throws Exception {
+        setRawData(rawData);
+    }
 
     /**
      * Modifying an existing date time with a rawData String.
@@ -42,23 +55,10 @@ public class DateTime {
                 standardString = this.toString();
                 return;
             } catch (Exception exception) {
+                continue;
             }
         }
         throw new Exception("Unable to parse date time!");
-    }
-
-    /**
-     * Create a new date time.
-     *
-     * @param rawData A String that needs to comply with a supported format and
-     *                indicates a correct time that will be recorded by this Date
-     *                instance time.
-     * @throws TipsException Any excption will be throw in this type, which contains
-     *                       information about this exception and the possible
-     *                       solution.
-     */
-    public DateTime(String rawData) throws Exception {
-        setRawData(rawData);
     }
 
     @Override
@@ -75,7 +75,8 @@ public class DateTime {
      *         Otherwise(when they're at exactly the same date) it returns 0.
      */
     public int compareDate(DateTime dateTime) {
-        LocalDate date1 = this.dateTime.toLocalDate(), date2 = dateTime.dateTime.toLocalDate();
+        LocalDate date1 = this.dateTime.toLocalDate();
+        LocalDate date2 = dateTime.dateTime.toLocalDate();
         if (date1.isBefore(date2)) {
             return 1;
         }
@@ -94,7 +95,8 @@ public class DateTime {
      *         Otherwise(when they're at exactly the same date) it returns 0.
      */
     public int compareDate(Date date) {
-        LocalDate date1 = this.dateTime.toLocalDate(), date2 = date.date;
+        LocalDate date1 = this.dateTime.toLocalDate();
+        LocalDate date2 = date.date;
         if (date1.isBefore(date2)) {
             return -1;
         }
