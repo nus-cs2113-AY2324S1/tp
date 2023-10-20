@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * as well as a method to calculate net cash on hand.
  */
 public class FinancialStatement {
-    private final ArrayList<Transaction> financialStatement = new ArrayList<>();
+    private ArrayList<Transaction> financialStatement = new ArrayList<>();
     private IncomeStatement incomeStatement;
     private ExpenseStatement expenseStatement;
 
@@ -44,15 +44,7 @@ public class FinancialStatement {
      * @return cash on hand as double.
      */
     public double getCashOnHand() {
-        double totalIncomes = financialStatement.stream().
-                filter((t) -> t instanceof Income).
-                mapToDouble(Transaction::getAmount).sum();
-        double totalExpenses = financialStatement.stream().
-                filter((t) -> t instanceof Expense).
-                mapToDouble(Transaction::getAmount).sum();
-        assert totalIncomes == incomeStatement.getTotalIncomeAmount();
-        assert totalExpenses == expenseStatement.getTotalExpenseAmount();
-        return totalIncomes - totalExpenses;
+        return incomeStatement.getTotalIncomeAmount() - expenseStatement.getTotalExpenseAmount();
     }
 
     /**

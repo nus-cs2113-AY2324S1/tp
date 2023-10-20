@@ -1,10 +1,10 @@
 	____________________________________________________________
 	Here is the link to the user guide:https://docs.google.com/document/d/15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link
-	    ______           __    __         __  ___  
-   / ____/___ ______/ /_  / /   ___  / /_/__ \ 
-  / /   / __ `/ ___/ __ \/ /   / _ \/ __ \/ _/ 
- / /___/ /_/ (__  ) / / / /___/  __/ / / /_/   
- \____/\__,_/____/_/ /_/_____/\___/_/ /_(_)    
+	    ______           __    __         __  ___
+   / ____/___ ______/ /_  / /   ___  / /_/__ \
+  / /   / __ `/ ___/ __ \/ /   / _ \/ __ \/ _/
+ / /___/ /_/ (__  ) / / / /___/  __/ / / /_/
+ \____/\__,_/____/_/ /_/_____/\___/_/ /_(_)
 
 	Welcome to 'CashLeh?'! Your one-stop app for managing your finances!
 	What is your name?
@@ -24,13 +24,84 @@
 	side hustle (amount: 500.0, date: 2023-10-19)
 	____________________________________________________________
 	____________________________________________________________
+	The following expense was added:
+	vacation (amount: 4000.0, date: 2023-10-20)
+	____________________________________________________________
+	____________________________________________________________
 	The current sum of all your incomes amounts to: 3500.0
 		1.job (amount: 3000.0, date: 2020-01-01)
 		2.side hustle (amount: 500.0, date: 2023-10-19)
 	____________________________________________________________
 	____________________________________________________________
+	Your current cash on hand amounts to: -500.0
+		1. + job (amount: 3000.0, date: 2020-01-01)
+		2. + side hustle (amount: 500.0, date: 2023-10-19)
+		3. - vacation (amount: 4000.0, date: 2023-10-20)
+	____________________________________________________________
+	____________________________________________________________
+	Hey watch out you are currently below your budget by: 510.0
+	Need some financial advise? Stop spending so much!
+	____________________________________________________________
+	____________________________________________________________
 	The following expense was added:
 	dinner (amount: 50.0, date: 2023-10-19)
+	____________________________________________________________
+	____________________________________________________________
+	Hey watch out you are currently below your budget by: 560.0
+	Need some financial advise? Stop spending so much!
+	____________________________________________________________
+	____________________________________________________________
+	Alright, CashLeh has just deleted your previous budget!
+	Watch out though as spending without budget ain't smart...
+	____________________________________________________________
+	____________________________________________________________
+	The following income was added:
+	job (amount: 600.0, date: 2023-10-20)
+	____________________________________________________________
+	____________________________________________________________
+	Please create a new budget as you deleted your previous one.
+	____________________________________________________________
+	____________________________________________________________
+	Invalid budget parameter. Please provide a different budget.
+	____________________________________________________________
+	____________________________________________________________
+	Please create a new budget as you deleted your previous one.
+	____________________________________________________________
+	____________________________________________________________
+	The budget was updated to:
+	60.0
+	____________________________________________________________
+	____________________________________________________________
+	You have set a budget of: 60.0
+	Here's a quick view of how you're doing so far:
+	You have a net cash on hand of: 50.0
+	Your budget has been used up by the following amount:
+
+	[*****--------------------------] 16.67%
+	____________________________________________________________
+	____________________________________________________________
+	The following expense was added:
+	tax (amount: 40.0, date: 2023-10-20)
+	____________________________________________________________
+	____________________________________________________________
+	Hey watch out you do not have that much cash left over according to your budget.
+	Try earning some money before making any crazy expenses!
+	____________________________________________________________
+	____________________________________________________________
+	The following income was added:
+	black jack (amount: 800.0, date: 2023-10-20)
+	____________________________________________________________
+	____________________________________________________________
+	The budget was updated to:
+	80.0
+	____________________________________________________________
+	____________________________________________________________
+	You have set a budget of: 80.0
+	Here's a quick view of how you're doing so far:
+	You have a net cash on hand of: 810.0
+	Your budget has been used up by the following amount:
+
+	[------------------------------] 0.00%
 	____________________________________________________________
 	____________________________________________________________
 	No such transaction recorded leh!
@@ -40,8 +111,13 @@
 	side hustle (amount: 500.0, date: 2023-10-19)
 	____________________________________________________________
 	____________________________________________________________
-	The current sum of all your incomes amounts to: 3000.0
-		1.job (amount: 3000.0, date: 2020-01-01)
+	Your current cash on hand amounts to: 310.0
+		1. + job (amount: 3000.0, date: 2020-01-01)
+		2. + job (amount: 600.0, date: 2023-10-20)
+		3. + black jack (amount: 800.0, date: 2023-10-20)
+		4. - vacation (amount: 4000.0, date: 2023-10-20)
+		5. - dinner (amount: 50.0, date: 2023-10-19)
+		6. - tax (amount: 40.0, date: 2023-10-20)
 	____________________________________________________________
 	____________________________________________________________
 	Aiyoh! Your input blur like sotong... Clean your input for CashLeh!

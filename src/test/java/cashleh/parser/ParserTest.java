@@ -1,7 +1,11 @@
 package cashleh.parser;
 
+import cashleh.budget.Budget;
+import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehParsingException;
 import cashleh.transaction.FinancialStatement;
+import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.IncomeStatement;
 import org.junit.jupiter.api.Test;
 
 import cashleh.commands.AddExpense;
@@ -11,15 +15,17 @@ import cashleh.commands.DeleteIncome;
 import cashleh.commands.Exit;
 import cashleh.commands.ViewExpenses;
 import cashleh.commands.ViewIncomes;
-import cashleh.transaction.ExpenseStatement;
-import cashleh.transaction.IncomeStatement;
 import cashleh.exceptions.CashLehException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class ParserTest {
-    Parser parser = new Parser(new ExpenseStatement(), new IncomeStatement());
+    ExpenseStatement expenseStatement = new ExpenseStatement();
+    IncomeStatement incomeStatement = new IncomeStatement();
+    BudgetHandler budgetHandler = new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement)
+            , new Budget(10));
+    Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     @Test
     public void parserUnknownCommandTest() {

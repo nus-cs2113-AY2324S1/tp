@@ -1,5 +1,7 @@
 package cashleh;
 
+import cashleh.budget.Budget;
+import cashleh.budget.BudgetHandler;
 import cashleh.parser.Parser;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.FinancialStatement;
@@ -13,18 +15,20 @@ public class CashLeh {
     private final Input input = new Input();
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
-    private final Parser parser = new Parser(expenseStatement, incomeStatement);
+    private final BudgetHandler budgetHandler = new BudgetHandler(
+            new FinancialStatement(incomeStatement, expenseStatement), new Budget(10));
+    private final Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     /**
      * Main entry-point for the application.
      */
     public void run() {
 
-        String logo = "    ______           __    __         __  ___  \n"
-                    + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\ \n"
-                    + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/ \n"
-                    + " / /___/ /_/ (__  ) / / / /___/  __/ / / /_/   \n"
-                    + " \\____/\\__,_/____/_/ /_/_____/\\___/_/ /_(_)    \n";
+        String logo = "    ______           __    __         __  ___\n"
+                    + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\\n"
+                    + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/\n"
+                    + " / /___/ /_/ (__  ) / / / /___/  __/ / / /_/\n"
+                    + " \\____/\\__,_/____/_/ /_/_____/\\___/_/ /_(_)\n";
         String userGuideLink = ("Here is the link to the user guide:"
                 + "https://docs.google.com/document/d/"
                 + "15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
