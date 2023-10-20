@@ -15,7 +15,6 @@ import java.util.logging.Level;
  */
 public class ViewFinancialStatement extends Command {
     private FinancialStatement financialStatement;
-
     public ViewFinancialStatement(IncomeStatement incomeStatement, ExpenseStatement expenseStatement) {
         this.financialStatement = new FinancialStatement(incomeStatement, expenseStatement);
     }
