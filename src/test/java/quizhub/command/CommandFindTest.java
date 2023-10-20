@@ -19,8 +19,8 @@ public class CommandFindTest {
     @BeforeAll
     public static void setQuestionList() {
         questionList = new QuestionList();
-        String[] questionsToAdd = { "short Question1 / Answer1", "short Question2 / Answer2",
-                "short Question3 / Answer3", "short Question4 / Answer4" };
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
+                "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
         Question.qnType qnType = Question.qnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question : questionsToAdd) {
@@ -54,8 +54,8 @@ public class CommandFindTest {
      */
     @Test
     void testFindNoCriteria() {
-        String expectedOutput = "Ono! You did not indicate if you are searching by description or time :<" +
-                "\r\n    Please format your input as find /description [description] or find /time [time]!";
+        String expectedOutput = "Ono! You did not indicate if you are searching by description, time or module :<" +
+                "\r\n    Please format your input as find /description [description] or find /time [time] or find /module [module]!";
         questionList.searchList("find");
         testCliOutputCorrectness(expectedOutput);
     }

@@ -27,7 +27,7 @@ class QuestionListTest {
 
     @Test
     void test_addToQuestionList_valid() {
-        String input = "short Question / Answer";
+        String input = "short Question / Answer / Mod";
         Question.qnType qnType = Question.qnType.SHORTANSWER;
         boolean showMessage = true;
         QuestionList qns = new QuestionList();

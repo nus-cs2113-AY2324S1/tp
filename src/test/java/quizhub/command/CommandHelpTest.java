@@ -58,7 +58,7 @@ public class CommandHelpTest {
         "    3. list - shows the list of questions and answers\r\n" +
         "    4. delete [question number] - deletes the question and answer at the specified number\r\n" +
         "    5. find /[description] - displays all questions that contains the the specified description\r\n" +
-        "    6. edit [question number] /question - edits the question with the specified number\r\n" +
+        "    6. edit [question number] /description - edits the question with the specified number\r\n" +
         "    7. edit [question number] /answer - edits the answer to the question with the specified number\r\n" +
         "    8. start - starts the quiz\r\n" +
         "    9. bye - exits the program";

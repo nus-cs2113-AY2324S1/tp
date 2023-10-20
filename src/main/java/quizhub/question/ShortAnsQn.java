@@ -10,8 +10,8 @@ public class ShortAnsQn extends Question {
      * @param description question description.
      * @param answer question answer.
      */
-    public ShortAnsQn(String description, String answer){
-        super(description, qnType.SHORTANSWER);
+    public ShortAnsQn(String description, String answer, String module){
+        super(description, qnType.SHORTANSWER, module);
         this.answer = answer;
     }
     /**
