@@ -51,7 +51,7 @@ public class FlashcardStorage {
 
         Flashcard flashcard = new Flashcard(frontText, backText);
 
-        flashlogger.log(Level.INFO, "added flashcard");
+        //flashlogger.log(Level.INFO, "added flashcard");
 
         for(String tag:tags){
             if (tag.trim().equals("-")) {
