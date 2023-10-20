@@ -85,7 +85,7 @@ public class FlashcardStorage {
      */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
 
-        flashlogger.log(Level.INFO, "loading flashcard");
+        //flashlogger.log(Level.INFO, "loading flashcard");
 
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
