@@ -33,7 +33,7 @@ public class EventStorage {
      */
     private Event loadEvent(String[] tokens){
 
-        assert tokens.length == 3 : "Token length should be 3";
+        assert tokens.length == 3: "Token length should be 3";
 
         String name = tokens[0].trim();
         LocalDateTime from = LocalDateTime.parse(tokens[1].trim());

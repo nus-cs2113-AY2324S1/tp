@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.*;
 
 /**
  * storage for flashcards
@@ -19,10 +18,7 @@ public class FlashcardStorage {
 
     public FlashcardStorage(String path){
         this.path = path;
-        flashlogger = Logger.getLogger("flash");
     }
-
-    private static Logger flashlogger; // for logging
 
 
     public boolean isStorageAvailable(){
@@ -38,9 +34,7 @@ public class FlashcardStorage {
      */
     private Flashcard loadFlashcard(String[] tokens){
 
-        assert tokens.length == 5 : "Token length should be 5";
-
-       //flashlogger.log(Level.INFO, "token length is", tokens.length);
+        assert tokens.length == 5: "Token length should be 5";
 
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
@@ -50,8 +44,6 @@ public class FlashcardStorage {
 
 
         Flashcard flashcard = new Flashcard(frontText, backText);
-
-        //flashlogger.log(Level.INFO, "added flashcard");
 
         for(String tag:tags){
             if (tag.trim().equals("-")) {
@@ -84,9 +76,6 @@ public class FlashcardStorage {
      * @throws FileNotFoundException
      */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
-
-        //flashlogger.log(Level.INFO, "loading flashcard");
-
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
         Scanner s = new Scanner(f);
