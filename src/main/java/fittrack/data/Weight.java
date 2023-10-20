@@ -19,8 +19,12 @@ public class Weight {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Weight weight1 = (Weight) o;
         return Double.compare(weight, weight1.weight) == 0;
     }

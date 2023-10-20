@@ -19,8 +19,12 @@ public class Calories {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Calories calories1 = (Calories) o;
         return Double.compare(calories, calories1.calories) == 0;
     }

@@ -19,8 +19,12 @@ public class Height {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Height height1 = (Height) o;
         return Double.compare(height, height1.height) == 0;
     }
