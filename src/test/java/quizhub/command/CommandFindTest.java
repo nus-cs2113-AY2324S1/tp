@@ -74,16 +74,16 @@ public class CommandFindTest {
     /**
      * Test finding by description with matches
      */
-    // @Test
-    // void testFindDescriptionWithMatches() {
-    //     String expectedOutput = "Here are questions that matched your search:\r\n"
-    //             + "    1: [S][X] Question1 / Answer1\r\n" 
-    //             + "    2: [S][] Question2 / Answer2\r\n" 
-    //             + "    3: [S][X] Question3 / Answer3\r\n" 
-    //             + "    4: [S][] Question4 / Answer4";
-    //     questionList.searchList("find /description Question");
-    //     testCliOutputCorrectness(expectedOutput);
-    // }
+    @Test
+    void testFindDescriptionWithMatches() {
+        String expectedOutput = "Here are questions that matched your search:\r\n"
+                + "    1: [S][X] Question1 / Answer1\n" 
+                + "    2: [S][] Question2 / Answer2\n" 
+                + "    3: [S][X] Question3 / Answer3\n" 
+                + "    4: [S][] Question4 / Answer4";
+        questionList.searchList("find /description Question");
+        testCliOutputCorrectness(expectedOutput);
+    }
 
     /**
      * Test finding by description with no matches
