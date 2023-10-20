@@ -10,8 +10,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.duke.commands.*;
-import seedu.duke.commands.logcommands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.GoalCommand;
+import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.IncorrectCommand;
+import seedu.duke.commands.logcommands.LogCommand;
+import seedu.duke.commands.logcommands.DeleteLogCommand;
+import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.data.exception.IllegalValueException;
 
 /**

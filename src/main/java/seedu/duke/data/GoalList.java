@@ -8,8 +8,8 @@ import seedu.duke.ui.TextUi;
 import java.util.ArrayList;
 
 public class GoalList {
-    private final String GOAL_KEYWORD = "set";
-    private final String DATE_KEYWORD = "on";
+    private static final String GOALKEYWORD = "set";
+    private static final String DATEKEYWORD = "on";
 
     private ArrayList<Goal> goals;
     private int goalCount;
@@ -44,12 +44,13 @@ public class GoalList {
     }
 
     /**
-     * The userCmd should be like: set 1234 on Date
-     * @param userCmd represents the raw userInput
-     * @throws IncorrectFormatException checks if the user Input is valid by:
+     * checks if the user Input is valid by:
      * 1. check if the length of the command equals 4
      * 2. detect keywords "set", "on", etc.
      * 3. check if user inputs a calories number at valid range
+     * The userCmd should be like: set 1234 on Date
+     * @param userCmd represents the raw userInput
+     * @throws IncorrectFormatException
      */
     private void checkGoalInput(String userCmd) throws IncorrectFormatException, NumberFormatException {
 
@@ -59,12 +60,12 @@ public class GoalList {
                     + "provides with only relevant information.");
         }
 
-        if (!cmdSplit[0].equals(GOAL_KEYWORD) ) {
-            throw new IncorrectFormatException("Sorry. I cannot detect the '" + GOAL_KEYWORD + "' keyword." );
+        if (!cmdSplit[0].equals(GOALKEYWORD) ) {
+            throw new IncorrectFormatException("Sorry. I cannot detect the '" + GOALKEYWORD + "' keyword." );
         }
 
-        if (!cmdSplit[2].equals(DATE_KEYWORD)) {
-            throw new IncorrectFormatException("Sorry. I cannot detect the '" + DATE_KEYWORD + "' keyword." );
+        if (!cmdSplit[2].equals(DATEKEYWORD)) {
+            throw new IncorrectFormatException("Sorry. I cannot detect the '" + DATEKEYWORD + "' keyword." );
         }
 
         int calories = Integer.parseInt(cmdSplit[1]); //throws number exception if not a number string
