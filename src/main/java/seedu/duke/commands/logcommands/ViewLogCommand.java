@@ -44,16 +44,20 @@ public class ViewLogCommand extends Command {
     }
 
     public CommandResult execute() {
+        String numberOfExercises;
         switch (view) {
         case TOTALEXERCISES:
-            Duke.exerciseLog.getNumberOfExercises();
-            return new CommandResult("Here are the total number of exercises you have logged!\n");
+            numberOfExercises = Integer.toString(Duke.exerciseLog.getNumberOfExercises());
+            return new CommandResult("Here are the total number of exercises you have logged: " +
+                    numberOfExercises + "\n");
         case TOTALEXERCISESMONTH:
-            Duke.exerciseLog.getNumberOfExercisesForMonth(month);
-            return new CommandResult("Here are the total number of exercises for that month!\n");
+            numberOfExercises = Integer.toString(Duke.exerciseLog.getNumberOfExercisesForMonth(month));
+            return new CommandResult("Here are the total number of exercises for that month: " +
+                    numberOfExercises + "\n");
         case TOTALEXERCISESDAY:
-            Duke.exerciseLog.getNumberOfExercisesForDay(month, day);
-            return new CommandResult("Here are the total number of exercises for that day!\n");
+            numberOfExercises = Integer.toString(Duke.exerciseLog.getNumberOfExercisesForDay(month, day));
+            return new CommandResult("Here are the total number of exercises for that day: " +
+                    numberOfExercises + "\n");
         default:
             return new CommandResult("Invalid exercise search type");
         }
