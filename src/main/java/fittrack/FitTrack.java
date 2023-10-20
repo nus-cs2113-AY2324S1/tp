@@ -7,6 +7,7 @@ import fittrack.parser.CommandParser;
 import fittrack.parser.NegativeNumberException;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
+import fittrack.storage.Storage;
 
 /**
  * Represents the main part of FitTrack.
@@ -20,10 +21,12 @@ public class FitTrack {
     private final MealList mealList;
     private final WorkoutList workoutList;
     private final Ui ui;
+    private final Storage storage;
     private boolean isValidInput = false;
 
     private FitTrack() {
         ui = new Ui();
+        storage = new Storage();
 
         userProfile = new UserProfile();
         mealList = new MealList();
