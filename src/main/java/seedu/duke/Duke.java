@@ -18,7 +18,7 @@ public class Duke {
     }
 
     private void runCalendar() {
-        System.out.println("Enter your command: ");
+        System.out.print("Enter your command: ");
 
         CalendarManager manager = new CalendarManager(new ArrayList<Event>());
 
@@ -72,7 +72,7 @@ public class Duke {
         String flashcardOrCalendar;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Do you choose flashcard or calendar? ");
+        System.out.print("Do you choose flashcard or calendar? ");
         flashcardOrCalendar = scanner.nextLine();
 
         if (flashcardOrCalendar.equals("flashcard")) {
