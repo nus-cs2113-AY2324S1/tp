@@ -97,7 +97,7 @@ public class FitTrack {
         userProfile.setHeight(profile.getHeight());
         userProfile.setWeight(profile.getWeight());
         userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
-        userProfile.calculateBmi();
+        userProfile.setBmi();
 
         ui.printProfileDetails(userProfile);
     }

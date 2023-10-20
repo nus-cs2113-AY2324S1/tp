@@ -71,9 +71,7 @@ public class Ui {
      */
     public void printProfileDetails(UserProfile profile) {
         System.out.println("Here are your profile settings.");
-        System.out.println("Height: " + profile.getHeight());
-        System.out.println("Weight: " + profile.getWeight());
-        System.out.println("Daily calorie surplus limit: " + profile.getDailyCalorieLimit());
+        System.out.println("Height: " + profile.toString());
         printLine();
     }
 }

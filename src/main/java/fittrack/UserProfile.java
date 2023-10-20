@@ -1,45 +1,47 @@
 package fittrack;
 
 import java.text.DecimalFormat;
+import fittrack.data.Height;
+import fittrack.data.Weight;
+import fittrack.data.Calories;
 
 public class UserProfile {
     private final DecimalFormat df = new DecimalFormat("0.00");
-    private double height; // TODO: change to Height
-    private double weight; // TODO: change to Weight
-    private double dailyCalorieLimit; // TODO: change to Calories
+    private Height height;
+    private Weight weight;
+    private Calories dailyCalorieLimit;
     private double bmi;
 
     public UserProfile() {
-        this(0, 0, 0);
     }
 
-    public UserProfile(double height, double weight, double dailyCalorieLimit) {
+    public UserProfile(Height height, Weight weight, Calories dailyCalorieLimit) {
         setHeight(height);
         setWeight(weight);
         setDailyCalorieLimit(dailyCalorieLimit);
     }
 
-    public double getHeight() {
+    public Height getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(Height height) {
         this.height = height;
     }
 
-    public double getWeight() {
+    public Weight getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Weight weight) {
         this.weight = weight;
     }
 
-    public double getDailyCalorieLimit() {
+    public Calories getDailyCalorieLimit() {
         return dailyCalorieLimit;
     }
 
-    public void setDailyCalorieLimit(double dailyCalorieLimit) {
+    public void setDailyCalorieLimit(Calories dailyCalorieLimit) {
         this.dailyCalorieLimit = dailyCalorieLimit;
     }
 
@@ -47,16 +49,21 @@ public class UserProfile {
         return bmi;
     }
 
+    public void setBmi() {
+        this.bmi = calculateBmi();
+    }
+
     // TODO: change to private and call this method in the setter methods
-    public void calculateBmi() {
-        double heightInMetres = this.height / 100;
-        bmi = Double.parseDouble(df.format(this.weight / Math.pow(heightInMetres, 2)));
+    public double calculateBmi() {
+        double heightInMetres = height.getHeight() / 100;
+        bmi = Double.parseDouble(df.format(weight.getWeight() / Math.pow(heightInMetres, 2)));
+        return bmi;
     }
 
     public String toString() {
-        return "Height: " + this.height + "\n" +
-                "Weight: " + this.weight + "\n" +
-                "Daily calorie limit: " + this.dailyCalorieLimit + "\n" +
-                "BMI: " + bmi;
+        return "Height: " + height.toString() + "\n" +
+                "Weight: " + weight.toString() + "\n" +
+                "Daily calorie limit: " + dailyCalorieLimit.toString() + "\n" +
+                "BMI: " + this.bmi;
     }
 }

@@ -3,6 +3,8 @@ package fittrack.parser;
 import fittrack.Meal;
 import fittrack.UserProfile;
 import fittrack.Workout;
+import fittrack.data.Calories;
+import fittrack.data.Height;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
 import fittrack.command.Command;
@@ -17,6 +19,7 @@ import fittrack.command.ViewWorkoutsCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.BmiCommand;
 import fittrack.command.SaveCommand;
+import fittrack.data.Weight;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -110,7 +113,7 @@ public class CommandParser {
     }
 
     /**
-     * Parses user profile, format of `h/(HEIGHT) w/(WEIGHT)`.
+     * Parses user profile, format of `h/(HEIGHT) w/(WEIGHT) l/(CALORIES)`.
      *
      * @param profile profile as a string
      * @return height and weight as a double array
@@ -129,11 +132,16 @@ public class CommandParser {
             final double weight = Double.parseDouble(matcher.group("weight"));
             final double dailyCalorieLimit = Double.parseDouble(matcher.group("calLimit"));
 
+            // Height, weight and calories cannot be negative. Throw exception if it happens
             if (height < 0 || weight < 0 || dailyCalorieLimit < 0) {
                 throw new NegativeNumberException();
             }
 
-            return new UserProfile(height, weight, dailyCalorieLimit);
+            Height heightData = new Height(height);
+            Weight weightData = new Weight(weight);
+            Calories caloriesData = new Calories(dailyCalorieLimit);
+
+            return new UserProfile(heightData, weightData, caloriesData);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
         }
