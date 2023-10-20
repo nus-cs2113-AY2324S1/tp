@@ -22,7 +22,6 @@ public class FitTrack {
     private final WorkoutList workoutList;
     private final Ui ui;
     private final Storage storage;
-    private boolean isValidInput = false;
 
     private FitTrack() {
         ui = new Ui();
@@ -49,6 +48,7 @@ public class FitTrack {
     private void start() {
         ui.printWelcome();
 
+        boolean isValidInput = false;
         while (!isValidInput) {
             try {
                 profileSettings();

@@ -65,7 +65,7 @@ Type `editprofile h/<HEIGHT> w/<WEIGHT> l/<CALORIE_LIMIT>` to edit.
 Type `viewprofile` to view your profile.
 
 `bmi` calculates your current BMI.
-Type `bmi to view your BMI.
+Type `bmi` to view your BMI.
 
 `addmeal` adds your daily meal data to the list.
 Type `addmeal <MEAL_NAME> c/<CALORIES>` to add a meal.
