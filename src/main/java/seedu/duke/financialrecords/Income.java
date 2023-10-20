@@ -2,8 +2,10 @@ package seedu.duke.financialrecords;
 import seedu.duke.commands.KaChinnnngException;
 
 import java.time.LocalDate;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Implementation of the Income class
@@ -12,6 +14,19 @@ import java.util.logging.Logger;
 public class Income extends FinancialRecord {
     // Logger instance to log events and issues that occur during the execution of this class.
     private static final Logger LOGGER = Logger.getLogger(Income.class.getName());
+
+    static {
+        try {
+            FileHandler fh = new FileHandler("Income.log", true);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            LOGGER.addHandler(fh);
+            LOGGER.setLevel(Level.ALL);
+            LOGGER.setUseParentHandlers(false);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", e);
+        }
+    }
 
     /**
      * This method is used to create a new financial record.

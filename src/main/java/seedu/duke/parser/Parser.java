@@ -2,6 +2,8 @@ package seedu.duke.parser;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 /*
  * parser class to parse user input
@@ -9,6 +11,19 @@ import java.util.logging.Level;
 public class Parser {
     //private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+
+    static {
+        try {
+            FileHandler fh = new FileHandler("Parser.log", true);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            LOGGER.addHandler(fh);
+            LOGGER.setLevel(Level.ALL);
+            LOGGER.setUseParentHandlers(false);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", e);
+        }
+    }
     /**
      * This method is used to parse the user input.
      * This method is used by the Main class in the application

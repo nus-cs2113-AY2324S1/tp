@@ -5,6 +5,9 @@ import java.util.HashMap;
 import seedu.duke.financialrecords.Income;
 
 import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Represents the class that manages the creation of a new income.
@@ -12,11 +15,23 @@ import java.util.logging.Logger;
  *
  */
 public class IncomeManager extends Commands{
+    // Logger instance to log events and issues that occur during the execution of this class.
     private static final Logger LOGGER = Logger.getLogger(IncomeManager.class.getName());
     private final String details;
     private Income newIncome;
 
-    // Logger instance to log events and issues that occur during the execution of this class.
+    static{
+        try {
+            FileHandler fh = new FileHandler("IncomeManager.log", true);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            LOGGER.addHandler(fh);
+            LOGGER.setLevel(Level.ALL);
+            LOGGER.setUseParentHandlers(false);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", e);
+        }
+    }
     public IncomeManager(String details) {
         assert details != null : "details should not be null"; // Ensure that details is not null
         this.details = details;
@@ -31,7 +46,7 @@ public class IncomeManager extends Commands{
     public void execute() throws KaChinnnngException {
         HashMap<String, String> incomeFields = extractIncomeFields(details);
         newIncome = IncomeParser.parseIncome(incomeFields);
-        LOGGER.info("Income parsed successfully"); // logging successful parsing of income
+        LOGGER.log(Level.INFO, "successful parsing of income"); // logging successful parsing of income
     }
 
     /**
@@ -59,7 +74,7 @@ public class IncomeManager extends Commands{
 
         // If the parts (description,date, amount) are not present, throw an exception
         if(parts.length != 4) {
-            LOGGER.warning("Missing fields detected in income details" + details);
+            LOGGER.log(Level.INFO,"Missing fields detected in income details" + details);
             throw new KaChinnnngException("Missing fields detected");
         }
         incomeFields.put(IncomeParser.DESCRIPTION_FIELD, parts[1].trim());

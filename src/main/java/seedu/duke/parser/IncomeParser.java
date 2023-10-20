@@ -2,25 +2,43 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Income;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.HashMap;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Represents the parser for the Income class.
  * This class serves to parse the user input into a format that the Income class can understand
  */
 public class IncomeParser {
+
     public static final String DESCRIPTION_FIELD = "de";
     public static final String DATE_FIELD = "da";
     public static final String AMOUNT_FIELD = "am";
     public static final String INDEX_FIELD = "in";
 
-    public static final Logger LOGGER = Logger.getLogger(IncomeParser.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(IncomeParser.class.getName());
+
+    static {
+        try {
+            FileHandler fh = new FileHandler("IncomeParser.log", true);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            LOGGER.addHandler(fh);
+            LOGGER.setLevel(Level.ALL);
+            LOGGER.setUseParentHandlers(false);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", e);
+        }
+    }
 
 
     /**
