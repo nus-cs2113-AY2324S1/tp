@@ -3,12 +3,9 @@ package seedu.duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.data.Goal;
 import seedu.duke.data.GoalList;
 import seedu.duke.parser.Parser;
-//import seedu.addressbook.storage.StorageFile;
-//import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
-//import seedu.addressbook.storage.StorageFile.StorageOperationException;
+import seedu.duke.exerciselog.Log;
 import seedu.duke.ui.TextUi;
 
 /**
@@ -21,13 +18,12 @@ public class Duke {
      * Version info of the program.
      */
     public static final String VERSION = "AddressBook Level 2 - Version 1.0";
-
-    private TextUi ui;
     public static GoalList goals = new GoalList();
+    public static Log exerciseLog = new Log();
+    private TextUi ui;
 
     // private StorageFile storage;
     public static void main(String... launchArgs) {
-        assert false : "dummy assertion set to fail";
         new Duke().run(launchArgs);
     }
 

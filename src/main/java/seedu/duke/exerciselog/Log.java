@@ -3,7 +3,7 @@ package seedu.duke.exerciselog;
 import java.util.ArrayList;
 
 public class Log {
-    private final ArrayList<Month> exerciseLog;
+    public static ArrayList<Month> exerciseLog;
 
     public Log() {
         exerciseLog = new ArrayList<>();
