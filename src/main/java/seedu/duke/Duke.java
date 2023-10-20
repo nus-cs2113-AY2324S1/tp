@@ -3,13 +3,9 @@ package seedu.duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.data.Goal;
 import seedu.duke.data.GoalList;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
-//import seedu.addressbook.storage.StorageFile;
-//import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
-//import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import seedu.duke.ui.TextUi;
 
 /**
