@@ -1,6 +1,5 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.authentication.LoginSystem;
 
 /**
  * Shows help instructions.

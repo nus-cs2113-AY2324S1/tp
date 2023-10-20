@@ -8,7 +8,7 @@ public class RegisterCommand extends Command {
 
     public static final String COMMAND_WORD = "register";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Register new user into system. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Register new user into system."
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 

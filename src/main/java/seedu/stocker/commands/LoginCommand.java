@@ -10,7 +10,7 @@ public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Login new user into system. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Login new user into system."
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
