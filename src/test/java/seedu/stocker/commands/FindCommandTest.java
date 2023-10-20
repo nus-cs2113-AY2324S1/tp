@@ -9,7 +9,7 @@ class FindCommandTest {
     @Test
     public void executeTest() {
         // Create an instance of FindCommand with a keyword
-        FindCommand command = new FindCommand("Pa");
+        FindCommand command = new FindCommand("Pa", "/n");
 
         // Create a new inventory
         Inventory inventory = new Inventory();

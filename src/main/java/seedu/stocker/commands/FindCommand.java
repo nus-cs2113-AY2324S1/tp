@@ -4,8 +4,6 @@ import seedu.stocker.drugs.Drug;
 
 import java.util.ArrayList;
 import java.util.List;
-/*import java.util.logging.Level;
-import java.util.logging.Logger;*/
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -18,8 +16,14 @@ public class FindCommand extends Command {
     /**
      * Usage message for the 'find' command.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds drug in inventory " + System.lineSeparator() +
-            "Example: " + COMMAND_WORD + " panadol";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " /n" + ": Finds drug in inventory using name" +
+            System.lineSeparator() +
+            "Example: " + COMMAND_WORD + " /n panadol" +
+            System.lineSeparator() +
+            System.lineSeparator() +
+            COMMAND_WORD + " /d" + ": Finds drug in inventory using date" +
+            System.lineSeparator() +
+            "Example: " + COMMAND_WORD + " /d panadol" ;
 
     /**
      * Success message displayed after successfully finding drugs in the inventory.
@@ -27,14 +31,17 @@ public class FindCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all drugs with the keyword in the inventory.";
 
     private final String keyword;
+    private final String criterion;
 
     /**
      * Creates a FindCommand with the specified keyword.
      *
-     * @param keyword The keyword to search for in the inventory.
+     * @param keyword   The keyword to search for in the inventory.
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String keyword, String criterion) {
+
         this.keyword = keyword;
+        this.criterion = criterion;
     }
 
     /**
@@ -52,10 +59,16 @@ public class FindCommand extends Command {
         List<Drug> foundDrugs = new ArrayList<>();
 
         for (Drug drug : drugs) {
-            String drugDescription = drug.toString().toLowerCase();
-            if (drugDescription.contains(keyword.toLowerCase())) {
-                foundDrugs.add(drug);
-
+            if (criterion.equals("/n")) {
+                String drugName = drug.getName().toLowerCase();
+                if (drugName.contains(keyword.toLowerCase())) {
+                    foundDrugs.add(drug);
+                }
+            } else if (criterion.equals("/d")) {
+                String expiryDate = drug.getExpiryDate().toLowerCase();
+                if (expiryDate.contains(keyword.toLowerCase())) {
+                    foundDrugs.add(drug);
+                }
             }
         }
 
