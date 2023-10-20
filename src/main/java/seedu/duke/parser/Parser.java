@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.*;
+import seedu.duke.commands.logcommands.*;
 import seedu.duke.data.exception.IllegalValueException;
 
 /**
@@ -20,9 +21,8 @@ public class Parser {
 
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    public static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-
+    public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)");
+    // one or more keywords separated by whitespace
 
     /**
      * Used for initial separation of command word and args.
@@ -90,40 +90,42 @@ public class Parser {
         }
     }
 
-    //    /**
-    //     * Parses arguments in the context of the add person command.
-    //     *
-    //     * @param args full command args string
-    //     * @return the prepared command
-    //     */
-    //    private Command prepareAdd(String args) {
-    //        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
-    //        // Validate arg string format
-    //        if (!matcher.matches()) {
-    //            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-    //        }
-    //        try {
-    //            return new AddCommand(
-    //                    matcher.group("name"),
+    // /**
+    // * Parses arguments in the context of the add person command.
+    // *
+    // * @param args full command args string
+    // * @return the prepared command
+    // */
+    // private Command prepareAdd(String args) {
+    // final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+    // // Validate arg string format
+    // if (!matcher.matches()) {
+    // return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+    // AddCommand.MESSAGE_USAGE));
+    // }
+    // try {
+    // return new AddCommand(
+    // matcher.group("name"),
     //
-    //                    matcher.group("phone"),
-    //                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+    // matcher.group("phone"),
+    // isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
     //
-    //                    matcher.group("email"),
-    //                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+    // matcher.group("email"),
+    // isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
     //
-    //                    matcher.group("address"),
-    //                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
+    // matcher.group("address"),
+    // isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
     //
-    //                    getTagsFromArgs(matcher.group("tagArguments"))
-    //            );
-    //        } catch (IllegalValueException ive) {
-    //            return new IncorrectCommand(ive.getMessage());
-    //        }
-    //    }
+    // getTagsFromArgs(matcher.group("tagArguments"))
+    // );
+    // } catch (IllegalValueException ive) {
+    // return new IncorrectCommand(ive.getMessage());
+    // }
+    // }
 
     /**
-     * Returns true if the private prefix is present for a contact detail in the add command's arguments string.
+     * Returns true if the private prefix is present for a contact detail in the add
+     * command's arguments string.
      */
     private static boolean isPrivatePrefixPresent(String matchedPrefix) {
         return matchedPrefix.equals("p");
@@ -148,7 +150,8 @@ public class Parser {
      *
      * @param args arguments string to parse as index number
      * @return the parsed index number
-     * @throws ParseException        if no region of the args string could be found for the index
+     * @throws ParseException        if no region of the args string could be found
+     *                               for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
     private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {

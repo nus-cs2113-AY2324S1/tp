@@ -12,7 +12,6 @@ import seedu.duke.exerciselog.Log;
 //import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import seedu.duke.ui.TextUi;
 
-
 /**
  * Entry point of the Address Book application.
  * Initializes the application and starts the interaction with the user.
@@ -27,15 +26,15 @@ public class Duke {
     public static Log exerciseLog = new Log();
     private TextUi ui;
 
-
-    //    private StorageFile storage;
+    // private StorageFile storage;
     public static void main(String... launchArgs) {
+        assert false : "dummy assertion set to fail";
         new Duke().run(launchArgs);
     }
 
     /**
      * @param launchArgs
-     * Runs the program until termination.
+     *                   Runs the program until termination.
      */
     public void run(String[] launchArgs) {
         start(launchArgs);
@@ -44,7 +43,8 @@ public class Duke {
     }
 
     /**
-     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
+     * Sets up the required objects, loads up the data from the storage file, and
+     * prints the welcome message.
      *
      * @param launchArgs arguments supplied by the user at program launch
      */
@@ -69,7 +69,8 @@ public class Duke {
     }
 
     /**
-     * Reads the user command and executes it, until the user issues the exit command.
+     * Reads the user command and executes it, until the user issues the exit
+     * command.
      */
     private void runCommandLoopUntilExitCommand() {
         Command command;
@@ -99,13 +100,17 @@ public class Duke {
         }
     }
 
-    //    /**
-    //     * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
-    //     * @param launchArgs arguments supplied by the user at program launch
-    //     * @throws InvalidStorageFilePathException if the target file path is incorrect.
-    //     */
-    //    private StorageFile initializeStorage(String[] launchArgs) throws InvalidStorageFilePathException {
-    //        boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
-    //        return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
-    //    }
+    // /**
+    // * Creates the StorageFile object based on the user specified path (if any) or
+    // the default storage path.
+    // * @param launchArgs arguments supplied by the user at program launch
+    // * @throws InvalidStorageFilePathException if the target file path is
+    // incorrect.
+    // */
+    // private StorageFile initializeStorage(String[] launchArgs) throws
+    // InvalidStorageFilePathException {
+    // boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
+    // return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new
+    // StorageFile();
+    // }
 }
