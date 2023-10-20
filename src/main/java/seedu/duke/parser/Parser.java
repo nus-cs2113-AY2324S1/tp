@@ -69,13 +69,13 @@ public class Parser {
         //
 
         case LogCommand.COMMAND_WORD:
-            return new LogCommand(Arrays.asList(arguments.split(" ")));
+            return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
 
         case DeleteLogCommand.COMMAND_WORD:
-            return new DeleteLogCommand(Arrays.asList(arguments.split(" ")));
+            return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
         case ViewLogCommand.COMMAND_WORD:
-            return new ViewLogCommand(Arrays.asList(arguments.split(" ")));
+            return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
         case GoalCommand.COMMAND_WORD:
             return new GoalCommand(userInput);
