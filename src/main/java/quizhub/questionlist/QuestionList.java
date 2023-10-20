@@ -7,6 +7,7 @@ import quizhub.ui.Ui;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 /**
  * Represents the list of questions currently registered in Quizhub.
  * This list is created on program start and disposed on program termination.
@@ -149,7 +150,7 @@ public class QuestionList {
                 default:
                     return "Question Not Found";
             }
-        } catch(NullPointerException | IndexOutOfBoundsException invalidIndex){
+        } catch(InputMismatchException |NullPointerException | IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");
             return "Question Not Found";
         }
