@@ -28,7 +28,6 @@ public class Duke {
 
     // private StorageFile storage;
     public static void main(String... launchArgs) {
-        assert false : "dummy assertion set to fail";
         new Duke().run(launchArgs);
     }
 
