@@ -1,5 +1,7 @@
+//@@ kherlenbayasgalan & jingxizhu
+
 package seedu.duke.calendar;
 
 public class Calendar {
-    EventStorage eventStorage;
+    EventList eventList;
 }

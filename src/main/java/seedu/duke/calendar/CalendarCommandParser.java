@@ -1,3 +1,5 @@
+//@@ kherlenbayasgalan & jingxizhu
+
 package seedu.duke.calendar;
 
 import seedu.duke.calendar.command.AddEventCommand;

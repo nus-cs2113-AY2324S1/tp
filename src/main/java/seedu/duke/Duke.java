@@ -2,9 +2,8 @@
 
 package seedu.duke;
 
-import seedu.duke.flashcard.Flashcard;
+import seedu.duke.calendar.CalendarManager;
 import seedu.duke.flashcard.FlashcardComponent;
-import seedu.duke.flashcard.FlashcardDirectory;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,7 +16,8 @@ public class Duke {
     }
 
     private void run() {
-        FlashcardComponent fc = new FlashcardComponent(new ArrayList<Flashcard>());
+        FlashcardComponent fc = new FlashcardComponent();
+        CalendarManager cm = new CalendarManager(new ArrayList<>());
 
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -28,6 +28,11 @@ public class Duke {
 
             if (fc.isResponsible(input)) {
                 fc.processInput(input);
+
+            } else if (cm.isResponsible(input)) {
+                cm.processInput(input);
+            } else {
+                System.out.println("    Invalid command! Please try again.");
             }
         }
 

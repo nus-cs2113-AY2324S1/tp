@@ -1,8 +1,5 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.flashcard.Flashcard;
-import seedu.duke.flashcard.FlashcardList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -36,6 +33,9 @@ public class FlashcardStorage {
      * @return Flashcard object
      */
     private Flashcard loadFlashcard(String[] tokens){
+
+        assert tokens.length == 5: "Token length should be 5";
+
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
         String[] tags = tokens[2].trim().split("/");
@@ -46,15 +46,17 @@ public class FlashcardStorage {
         Flashcard flashcard = new Flashcard(frontText, backText);
 
         for(String tag:tags){
-            if(tag.trim().equals("-")) break;
-            else{
+            if (tag.trim().equals("-")) {
+                break;
+            } else{
                 System.out.println("tags are not for v1");
             }
         }
 
         for(String review: reviews){
-            if(review.trim().equals("-")) break;
-            else{
+            if (review.trim().equals("-")) {
+                break;
+            } else{
                 System.out.println("reviews are not for v1");
             }
         }
@@ -83,11 +85,16 @@ public class FlashcardStorage {
             flashcardList.add(loadFlashcard(flashTokens));
         }
 
+        System.out.println(String.format(
+                "    There are currently %d flashcards in the savefile",
+                flashcardList.getSize()));
+
         return flashcardList;
 
     }
 
     public void saveFlashcards(ArrayList<Flashcard> flashcardList) {
+
         try {
             FileWriter fw = new FileWriter(path);
 

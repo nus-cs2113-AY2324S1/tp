@@ -14,9 +14,7 @@ public class Flashcard {
     private ArrayList<FlashcardReview> reviews;
     private LocalDateTime lastReviewOn;
 
-    public void setLastReviewOn(LocalDateTime lastReviewOn) {
-        this.lastReviewOn = lastReviewOn;
-    }
+
 
     public Flashcard(String frontText, String backText) {
         this.frontText = frontText;
@@ -26,6 +24,10 @@ public class Flashcard {
         reviews = new ArrayList<>();
 
         lastReviewOn = null;
+    }
+
+    public void setLastReviewOn(LocalDateTime lastReviewOn) {
+        this.lastReviewOn = lastReviewOn;
     }
 
     public String getFrontText() {

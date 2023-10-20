@@ -15,6 +15,11 @@ public class FlashcardList {
         return flashcards;
     }
 
+    // @@author junhyeong0411
+    public int getSize(){
+        return flashcards.size();
+    }
+
 
     public void add(Flashcard flashcard) {
         flashcards.add(flashcard);
