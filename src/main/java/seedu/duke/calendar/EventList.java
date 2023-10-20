@@ -18,6 +18,8 @@ public class EventList {
         return eventList;
     }
 
+    public int getSize(){ return eventList.size();}
+
     public void deleteEvent(String name) {
         eventList.removeIf(event -> event.getName().equals(name));
     }

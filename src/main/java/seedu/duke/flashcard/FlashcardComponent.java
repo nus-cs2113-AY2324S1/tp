@@ -16,20 +16,19 @@ public class FlashcardComponent {
     private FlashcardStorage storage;
 
 
-    public FlashcardComponent(ArrayList<Flashcard> flashcards) {
+    public FlashcardComponent() {
         parser = new FlashcardCommandParser();
 
         //@@author junhyeong0411
-
         FlashcardDirectory flashcarddirectory = new FlashcardDirectory();
         flashcarddirectory.listFlashcardFiles();
 
-        storage = new FlashcardStorage("./data/flashcard.txt");
+        storage = new FlashcardStorage("./data/flashcards/flashcard.txt");
         try {
             flashcardList = storage.loadFlashcards();
         } catch (FileNotFoundException e){
-            System.out.println("Making New file");
-            flashcardList = new FlashcardList(flashcards);
+            System.out.println("Making New file for Flashcards");
+            flashcardList = new FlashcardList(new ArrayList<>());
         }
 
         //@@author wendelinwemhoener

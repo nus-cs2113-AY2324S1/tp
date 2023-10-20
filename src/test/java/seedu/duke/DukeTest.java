@@ -17,8 +17,7 @@ class DukeTest {
 
     @Test
     public void testFlashcardComponent_isResponsible_notResponsible() {
-        FlashcardComponent flashcardComponent = new FlashcardComponent(
-                new ArrayList<>());
+        FlashcardComponent flashcardComponent = new FlashcardComponent();
 
         assertFalse(flashcardComponent.isResponsible("dfdfdfdfdf"));
         assertFalse(flashcardComponent.isResponsible("help me"));
@@ -27,8 +26,7 @@ class DukeTest {
 
     @Test
     public void testFlashcardComponent_isResponsible_responsible() {
-        FlashcardComponent flashcardComponent = new FlashcardComponent(
-                new ArrayList<>());
+        FlashcardComponent flashcardComponent = new FlashcardComponent();
 
         assertTrue(flashcardComponent.isResponsible("create flashcard"));
         assertTrue(flashcardComponent.isResponsible("create flashcard  "));
@@ -37,8 +35,7 @@ class DukeTest {
 
     @Test
     public void testFlashcardStorage_isAvailable(){
-        FlashcardComponent flashcardComponent = new FlashcardComponent(
-                new ArrayList<>());
+        FlashcardComponent flashcardComponent = new FlashcardComponent();
         FlashcardStorage storage = flashcardComponent.getStorage();
         assertTrue(storage.isStorageAvailable());
     }
