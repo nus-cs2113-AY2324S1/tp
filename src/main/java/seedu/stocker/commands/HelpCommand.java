@@ -1,5 +1,7 @@
 package seedu.stocker.commands;
 
+import seedu.stocker.authentication.LoginSystem;
+
 /**
  * Shows help instructions.
  */
@@ -24,7 +26,12 @@ public class HelpCommand extends Command {
                 + System.lineSeparator()
                 + System.lineSeparator() + FindCommand.MESSAGE_USAGE
                 + System.lineSeparator()
+                + System.lineSeparator() + LoginCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + RegisterCommand.MESSAGE_USAGE
+                + System.lineSeparator()
                 + System.lineSeparator() + ExitCommand.MESSAGE_USAGE
+
         );
     }
 }

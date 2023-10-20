@@ -70,7 +70,7 @@ public class Stocker {
     /**
      * Reads the user command and executes it, until the user issues the exit command.
      */
-    private void runCommandLoopUntilExitCommand() {
+    private void runCommandLoopUntilExitCommand() throws IOException {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
@@ -89,7 +89,7 @@ public class Stocker {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command) {
+    private CommandResult executeCommand(Command command) throws IOException {
         command.setData(inventory);
         CommandResult result = command.execute();
         return result;

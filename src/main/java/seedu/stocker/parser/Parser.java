@@ -3,14 +3,7 @@ package seedu.stocker.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.stocker.commands.Command;
-import seedu.stocker.commands.AddCommand;
-import seedu.stocker.commands.ListCommand;
-import seedu.stocker.commands.HelpCommand;
-import seedu.stocker.commands.ExitCommand;
-import seedu.stocker.commands.IncorrectCommand;
-import seedu.stocker.commands.FindCommand;
-import seedu.stocker.commands.DeleteCommand;
+import seedu.stocker.commands.*;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -49,6 +42,12 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case RegisterCommand.COMMAND_WORD:
+            return new RegisterCommand();
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommand();
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
