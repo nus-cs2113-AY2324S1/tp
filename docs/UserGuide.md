@@ -96,7 +96,21 @@ Your Profile:
 Height: 180.0
 Weight: 80.0
 Daily calorie limit: 3000.0
+```
 
+### Checking your current BMI: `bmi`
+Calculates your bmi based on your current height and weight
+
+Format: `bmi`
+
+**Example of usage:**
+```
+bmi
+```
+
+**Expected output:**
+```
+Your current BMI is 24.22
 ```
 
 ### Adding a Meal: `addmeal`
@@ -208,6 +222,7 @@ I've deleted workout 1
 * Exit Application `exit`
 * Edit Profile `editprofile`
 * View profile `viewprofile`
+* Check BMI `bmi`
 * Add Meal `addmeal`
 * View all meals consumed `viewmeals`
 * Delete Meal `deletemeal`
