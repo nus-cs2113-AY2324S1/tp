@@ -1,6 +1,7 @@
 package essenmakanan;
 
 import essenmakanan.command.Command;
+import essenmakanan.command.ExitCommand;
 import essenmakanan.exception.EssenMakananCommandException;
 import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.ingredient.IngredientList;
@@ -23,30 +24,23 @@ public class EssenMakanan {
     private Logger logger = Logger.getLogger("app log");
 
     public void run() {
-        //logger.log(Level.INFO, "App starting");
         ui.start();
 
         Scanner in = new Scanner(System.in);
         String input = "";
-        boolean isExit = false;
 
+        Command command = null;
         do {
-            //logger.log(Level.INFO, "Getting input");
             input = in.nextLine();
             try {
-                Command command = parser.parseCommand(input);
+                command = parser.parseCommand(input);
                 command.executeCommand(recipes, ingredients);
-                isExit = command.isExit(); //someone can assert here
             } catch (EssenMakananCommandException exception) {
                 exception.handleException();
-                //logger.log(Level.WARNING, "Invalid command given");
             } catch (EssenMakananFormatException exception) {
                 exception.handleException();
-                //logger.log(Level.WARNING, "Invalid format given");
             }
-        } while (!isExit);
-
-        //logger.log(Level.INFO, "Exiting app");
+        } while (!ExitCommand.isExitCommand(command));
     }
 
     public void setup() {

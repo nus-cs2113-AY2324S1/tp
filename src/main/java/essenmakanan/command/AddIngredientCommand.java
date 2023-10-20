@@ -8,7 +8,7 @@ public class AddIngredientCommand extends Command{
     private String toAdd;
 
     public AddIngredientCommand(String toAdd) {
-        super(false);
+        super();
         this.toAdd = toAdd;
     }
 

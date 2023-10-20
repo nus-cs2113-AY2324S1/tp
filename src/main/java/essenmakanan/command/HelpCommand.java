@@ -6,7 +6,7 @@ import essenmakanan.recipe.RecipeList;
 public class HelpCommand extends Command {
 
     public HelpCommand() {
-        super(false);
+        super();
     }
 
     @Override

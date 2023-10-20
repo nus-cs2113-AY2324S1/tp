@@ -6,7 +6,7 @@ import essenmakanan.recipe.RecipeList;
 public class ViewIngredientsCommand extends Command {
 
     public ViewIngredientsCommand() {
-        super(false);
+        super();
     }
 
     @Override
