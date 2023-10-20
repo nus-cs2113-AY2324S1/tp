@@ -1,6 +1,10 @@
 package fittrack;
 
+import java.text.DecimalFormat;
+
 public class UserProfile {
+    private static double bmi;
+    public final DecimalFormat df = new DecimalFormat("0.00");
     private double height;
     private double weight;
     private double dailyCalorieLimit;
@@ -13,6 +17,10 @@ public class UserProfile {
         setHeight(height);
         setWeight(weight);
         setDailyCalorieLimit(dailyCalorieLimit);
+    }
+
+    public static double getBmi() {
+        return bmi;
     }
 
     public double getHeight() {
@@ -39,9 +47,15 @@ public class UserProfile {
         this.dailyCalorieLimit = dailyCalorieLimit;
     }
 
+    public void calculateBmi() {
+        double heightInMetres = this.height / 100;
+        bmi = Double.parseDouble(df.format(this.weight / Math.pow(heightInMetres, 2)));
+    }
+
     public String toString() {
         return "Height: " + this.height + "\n" +
                 "Weight: " + this.weight + "\n" +
-                "Daily calorie limit: " + this.dailyCalorieLimit;
+                "Daily calorie limit: " + this.dailyCalorieLimit + "\n" +
+                "BMI: " + bmi;
     }
 }

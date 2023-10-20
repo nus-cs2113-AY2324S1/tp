@@ -4,15 +4,86 @@ ___________.__  __ ___________                     __
  |    __)  |  \   __\|    |  \_  __ \__  \ _/ ___\|  |/ /
  |     \   |  ||  |  |    |   |  | \/ __ \  \___|    <
  \___  /   |__||__|  |____|   |__|  (____  /\___  >__|_ \
+____________________________________________________________
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Please enter numbers for height, weight, and daily calorie limit.
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Please enter a number greater than 0
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Please enter a number greater than 0
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
 Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
 Here are your profile settings.
 Height: 180.0
 Weight: 80.0
 Daily calorie surplus limit: 2000.0
-I've edited the following:
+____________________________________________________________
+Here is your updated profile:
 Height: 170.0
 Weight: 70.0
 Daily calorie limit: 1500.0
+BMI: 24.22
+
+Your Profile:
+Height: 170.0
+Weight: 70.0
+Daily calorie limit: 1500.0
+BMI: 24.22
+
+Your current BMI is 24.22
+
+I've added the following meal:
+Meal name: pasta
+Calories: 200.0
+
+I've deleted the following meal:
+Meal name: pasta
+Calories: 200.0
+
+I've added the following workout:
+Workout name: running
+Calories: 400.0
+
+I've deleted workout 1
+
+`help` shows help message of the command.
+Existing commands:
+help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, addworkout, deleteworkout, viewworkouts, bmi, save
+Type `help` or `help <COMMAND>` to view help.
+
+`editprofile` allows you to edit your profile.
+Type `editprofile h/<HEIGHT> w/<WEIGHT> l/<CALORIE_LIMIT>` to edit.
+
+`viewprofile` shows all profile details.
+Type `viewprofile` to view your profile.
+
+`bmi` calculates your current BMI.
+Type `bmi to view your BMI.
+
+`addmeal` adds your daily meal data to the list.
+Type `addmeal <MEAL_NAME> c/<CALORIES>` to add a meal.
+
+`viewmeal` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`deletemeal` deletes your daily meal data from the list.
+Type `deletemeal <INDEX>` to delete the meal by an index.
+
+`addworkout` adds your daily workout data to the list.
+Type `addworkout <WORKOUT_NAME> c/ <CALORIES>` to add a workout.
+
+`viewworkouts` shows the list of all workouts.
+Type `viewworkouts` to view the list of your workouts.
+
+`deleteworkout` deletes your daily workout data from the list.
+Type `deleteworkout <INDEX>` to delete the workout by an index.
 
 Goodbye! Hope to see you soon!
 

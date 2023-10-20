@@ -15,6 +15,8 @@ import fittrack.command.InvalidCommand;
 import fittrack.command.ViewMealsCommand;
 import fittrack.command.ViewWorkoutsCommand;
 import fittrack.command.ViewProfileCommand;
+import fittrack.command.BmiCommand;
+import fittrack.command.SaveCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +33,7 @@ public class CommandParser {
     public static final String ALL_COMMAND_WORDS = "help, exit, " +
             "editprofile, viewprofile, " +
             "addmeal, deletemeal, viewmeals, " +
-            "addworkout, deleteworkout, viewworkouts";
+            "addworkout, deleteworkout, viewworkouts, bmi, save";
   
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
@@ -56,6 +58,9 @@ public class CommandParser {
         final String args = matcher.group("args").strip();
 
         Command command = getBlankCommand(word);
+        if (command instanceof InvalidCommand) {
+            return getInvalidCommand(userCommandLine);
+        }
         try {
             command.setArguments(args, this);
         } catch (ParseException e) {
@@ -88,15 +93,19 @@ public class CommandParser {
             return new DeleteWorkoutCommand();
         case ViewWorkoutsCommand.COMMAND_WORD:
             return new ViewWorkoutsCommand();
+        case BmiCommand.COMMAND_WORD:
+            return new BmiCommand();
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommand();
         default:
-            return new InvalidCommand(word);
+            return new InvalidCommand();
 
         }
     }
 
     private InvalidCommand getInvalidCommand(String userCommandLine) {
-        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
-        invalidCommand.setArguments(null, this);
+        InvalidCommand invalidCommand = new InvalidCommand();
+        invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
 
@@ -108,22 +117,23 @@ public class CommandParser {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    public UserProfile parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
+    public UserProfile parseProfile(String profile)
+            throws PatternMatchFailException, NumberFormatException, NegativeNumberException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }
 
-        final String height = matcher.group("height");
-        final String weight = matcher.group("weight");
-        final String dailyCalorieLimit = matcher.group("calLimit");
-
         try {
-            return new UserProfile(
-                    Double.parseDouble(height),
-                    Double.parseDouble(weight),
-                    Double.parseDouble(dailyCalorieLimit)
-            );
+            final double height = Double.parseDouble(matcher.group("height"));
+            final double weight = Double.parseDouble(matcher.group("weight"));
+            final double dailyCalorieLimit = Double.parseDouble(matcher.group("calLimit"));
+
+            if (height < 0 || weight < 0 || dailyCalorieLimit < 0) {
+                throw new NegativeNumberException();
+            }
+
+            return new UserProfile(height, weight, dailyCalorieLimit);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
         }
