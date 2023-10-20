@@ -1,7 +1,5 @@
 package essenmakanan.command;
 
-import essenmakanan.ingredient.IngredientList;
-import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 public abstract class Command {
@@ -11,5 +9,5 @@ public abstract class Command {
         ui = new Ui();
     }
 
-    public abstract void executeCommand(RecipeList recipes, IngredientList ingredients);
+    public abstract void executeCommand();
 }

@@ -1,8 +1,5 @@
 package essenmakanan.command;
 
-import essenmakanan.ingredient.IngredientList;
-import essenmakanan.recipe.RecipeList;
-
 public class ExitCommand extends Command {
 
     public ExitCommand() {
@@ -10,7 +7,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void executeCommand(RecipeList recipes, IngredientList ingredients) {
+    public void executeCommand() {
         ui.bye();
     }
 

@@ -33,8 +33,8 @@ public class EssenMakanan {
         do {
             input = in.nextLine();
             try {
-                command = parser.parseCommand(input);
-                command.executeCommand(recipes, ingredients);
+                command = parser.parseCommand(input, recipes, ingredients);
+                command.executeCommand();
             } catch (EssenMakananCommandException exception) {
                 exception.handleException();
             } catch (EssenMakananFormatException exception) {
