@@ -34,7 +34,6 @@ public class FlashcardStorage {
      */
     private Flashcard loadFlashcard(String[] tokens){
 
-        assert tokens.length == 5: "Token length should be 5";
 
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
