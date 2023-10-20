@@ -83,8 +83,8 @@ public class CommandListTest {
      * */
     @Test
     void testListMixedShorts(){
-        String[] questionsToAdd = {"short Question1 / Answer1", "short Question2 / Answer2",
-                "short Question3 / Answer3", "short Question4 / Answer4"};
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
+                "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
         Question.qnType qnType = Question.qnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {

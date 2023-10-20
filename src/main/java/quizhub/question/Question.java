@@ -7,6 +7,8 @@ public class Question {
     private qnType qnType;
     private String description;
     private boolean done;
+    private String module;
+
     /**
      * Mark a question as done.
      */
@@ -27,6 +29,7 @@ public class Question {
         description = "";
         done = false;
         qnType = qnType.DEFAULT;
+        module = "";
     }
     /**
      * Creates a new question with a given description,
@@ -38,6 +41,7 @@ public class Question {
         this.description = questionBody;
         done = false;
         qnType = qnType.DEFAULT;
+        module = "";
     }
     /**
      * Creates a new question with a given description,
@@ -50,7 +54,24 @@ public class Question {
         this.description = questionBody;
         done = false;
         this.qnType = qnType;
+        module = "";
     }
+
+    /**
+     * Creates a new question with a given description,
+     * not done status and given question type.
+     *
+     * @param questionBody Description given to the question.
+     * @param qnType Type given to the question.
+     * @param module Module given to the question.
+     */
+    public Question(String questionBody, qnType qnType, String module){
+        this.description = questionBody;
+        done = false;
+        this.qnType = qnType;
+        this.module = module;
+    }
+
     /**
      * Checks if a question has been done.
      */
@@ -75,6 +96,20 @@ public class Question {
     public qnType getQuestionType(){
         return qnType;
     }
+
+    /**
+     * Returns module.
+     */
+    public String getModule(){
+        return module;
+    }
+
+    /**
+     * Returns question details in a string.
+     * @param newDescription New description of the question.
+     * @param newAnswer New answer of the question.
+     * @return String containing question details.
+     */
     public void editQuestion(String newDescription, String newAnswer){
         if(null != newDescription){
             this.description = newDescription;

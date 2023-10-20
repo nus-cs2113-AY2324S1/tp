@@ -32,10 +32,11 @@ public class QuestionList {
                 String[] inputTokens = input.split("short")[1].strip().split("/");
                 String description = inputTokens[0];
                 String answer = inputTokens[1];
-                if (description.isEmpty() || answer.isEmpty()) {
+                String module = inputTokens[2];
+                if (description.isEmpty() || answer.isEmpty() || module.isEmpty()) {
                     throw new QuizHubExceptions("Incomplete Command");
                 }
-                allQns.add(new ShortAnsQn(description, answer));
+                allQns.add(new ShortAnsQn(description, answer, module));
                 if (showMessage) {
                     System.out.println("    I have added the following question OwO:");
                     System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
@@ -44,7 +45,7 @@ public class QuestionList {
                 break;
             } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
                 System.out.println("    Ono! You did not input a proper question!");
-                System.out.println("    Please format your input as short [question]/[answer]!");
+                System.out.println("    Please format your input as short [question]/[answer]/[module]!");
             }
         }
     }
@@ -187,7 +188,7 @@ public class QuestionList {
         else {
             System.out.println("    Here are questions that matched your search:");
             for (Question question : allQns) {
-                if(question.getQuestionDescription().contains(keyword)){
+                if(question.getQuestionDescription().toLowerCase().contains(keyword.toLowerCase())){
                     matchedQuestions.add(question);
                     printQuestion(question, true);
                 }
@@ -220,6 +221,31 @@ public class QuestionList {
             }
         }
     }
+
+    /**
+     * Search for questions in the current question list using their module.
+     *
+     * @param module Module used to search for matches.
+     */
+    public void searchListByModule(String module){
+        ArrayList<Question> matchedQuestions = new ArrayList<>();
+        if(allQns.isEmpty()){
+            System.out.println("    Question list is empty! Time to add some OWO");
+        }
+        else {
+            System.out.println("    Here are questions that matched your search:");
+            for (Question question : allQns) {
+                if(question.getModule().toLowerCase().contains(module.toLowerCase())){
+                    matchedQuestions.add(question);
+                    printQuestion(question, true);
+                }
+            }
+            if(matchedQuestions.isEmpty()){
+                System.out.println("    No results found :< Check your module is correct?");
+            }
+        }
+    }
+
     /**
      * Search for a question in the current question list.
      * Depending on user command, this method will search by
@@ -234,9 +260,9 @@ public class QuestionList {
             searchDetails = input.split("find")[1].strip().split("/");
             searchInfo = searchDetails[1].strip().split(" ");
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate if you are searching by description or time :<");
+            System.out.println("    Ono! You did not indicate if you are searching by description, time or module :<");
             System.out.println("    Please format your input as find /description [description] " +
-                                    "or find /time [time]!");
+                                    "or find /time [time] or find /module [module]!");
             return;
         }
         try{
@@ -248,6 +274,9 @@ public class QuestionList {
                 break;
             case "time":
                 searchListByTime(searchKeyword);
+                break;
+            case "module":
+                searchListByModule(searchKeyword);
                 break;
             default:
                 break;

@@ -19,8 +19,8 @@ public class CommandEditTest {
     @BeforeAll
     public static void setQuestionList(){
         questionList = new QuestionList();
-        String[] questionsToAdd = {"short Question1 / Answer1", "short Question2 / Answer2",
-                "short Question3 / Answer3", "short Question4 / Answer4"};
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
+                "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
         Question.qnType qnType = Question.qnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
@@ -74,7 +74,7 @@ public class CommandEditTest {
     @Test
     void testEditBlankDescAns(){
         String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
-                "        [S][X] Question1 / Answer1\n" +
+                "        [S][X]  / \n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(1, "", "");
         testCliOutputCorrectness(expectedOutput);
@@ -85,7 +85,7 @@ public class CommandEditTest {
     @Test
     void testEditOnlyBlankDesc(){
         String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
-                "        [S][] Question2 / NewAnswer\n" +
+                "        [S][]  / NewAnswer\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(2, "", "NewAnswer");
         testCliOutputCorrectness(expectedOutput);
@@ -97,7 +97,7 @@ public class CommandEditTest {
     @Test
     void testEditOnlyBlankAns(){
         String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
-                "        [S][X] NewDescription / Answer3\n" +
+                "        [S][X] NewDescription / \n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(3, "NewDescription", "");
         testCliOutputCorrectness(expectedOutput);
