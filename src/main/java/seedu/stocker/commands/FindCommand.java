@@ -16,12 +16,12 @@ public class FindCommand extends Command {
     /**
      * Usage message for the 'find' command.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " /n" + ": Finds drug in inventory using name" +
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " /n" + ": Finds drug in inventory using name." +
             System.lineSeparator() +
             "Example: " + COMMAND_WORD + " /n panadol" +
             System.lineSeparator() +
             System.lineSeparator() +
-            COMMAND_WORD + " /d" + ": Finds drug in inventory using date" +
+            COMMAND_WORD + " /d" + ": Finds drug in inventory using date." +
             System.lineSeparator() +
             "Example: " + COMMAND_WORD + " /d panadol" ;
 

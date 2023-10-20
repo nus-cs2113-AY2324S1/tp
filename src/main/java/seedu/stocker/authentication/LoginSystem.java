@@ -47,10 +47,10 @@ public class LoginSystem {
         while (in.hasNextLine()) {
             String choice = in.nextLine();
 
-            if (choice.equals("1")) {
-                return "1";
-            } else if (choice.equals("2")) {
-                return "2";
+            if (choice.equals("register")) {
+                return "register";
+            } else if (choice.equals("login")) {
+                return "login";
             } else {
                 interactor.showInvalidChoiceMessage();
                 return authenticateUserChoice();
@@ -67,7 +67,6 @@ public class LoginSystem {
      * @throws IOException if inappropriate output is entered.
      */
     public void newUserCreator() throws IOException {
-
 
         interactor.showUsernameMessage();
         String username = in.nextLine();
@@ -93,11 +92,11 @@ public class LoginSystem {
             interactor.showEnterChoiceAgainMessage();
 
             String reselect = authenticateUserChoice();
-            if (reselect.equals("1")) {
+            if (reselect.equals("register")) {
 
                 newUserCreator();
 
-            } else if (reselect.equals("2")) {
+            } else if (reselect.equals("login")) {
                 loginExistingUser();
             }
         } else {
@@ -130,10 +129,10 @@ public class LoginSystem {
             interactor.showEnterChoiceAgainMessage();
 
             String reselect = authenticateUserChoice();
-            if (reselect.equals("1")) {
+            if (reselect.equals("register")) {
                 newUserCreator();
 
-            } else if (reselect.equals("2")) {
+            } else if (reselect.equals("login")) {
                 loginExistingUser();
             }
 
@@ -147,10 +146,10 @@ public class LoginSystem {
                 interactor.showEnterChoiceAgainMessage();
 
                 String reselect = authenticateUserChoice();
-                if (reselect.equals("1")) {
+                if (reselect.equals("register")) {
                     newUserCreator();
 
-                } else if (reselect.equals("2")) {
+                } else if (reselect.equals("login")) {
                     loginExistingUser();
                 }
             }
@@ -211,10 +210,10 @@ public class LoginSystem {
     public void run() throws IOException {
         loadExistingUsers();
         String choice = authenticateUserChoice();
-        if (choice.equals("1")) {
+        if (choice.equals("register")) {
             newUserCreator();
 
-        } else if (choice.equals("2")) {
+        } else if (choice.equals("login")) {
             loginExistingUser();
         }
 
