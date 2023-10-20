@@ -1,8 +1,10 @@
 package seedu.duke.commands.logcommands;
 
+import java.util.List;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.exerciselog.Log;
+import seedu.duke.Duke;
 
 
 enum ViewType {
@@ -21,35 +23,36 @@ public class ViewLogCommand extends Command {
         super();
     }
 
-    public ViewLogCommand(String viewType) {
+    public ViewLogCommand(List<String> viewArgs) {
         super();
-        switch (viewType) {
-        case "view all":
+        switch (viewArgs.get(0)) {
+        case "all":
             view = ViewType.TOTALEXERCISES;
             break;
-        case "view month":
+        case "month":
             view = ViewType.TOTALEXERCISESMONTH;
-            // set month to the month to view
+            month = Integer.parseInt(viewArgs.get(1));
             break;
-        case "view day":
+        case "day":
             view = ViewType.TOTALEXERCISESDAY;
-            // set month and day to the day to view
+            month = Integer.parseInt(viewArgs.get(1));
+            day = Integer.parseInt(viewArgs.get(2));
             break;
         default:
             System.out.println("No ViewType specified");
         }
     }
 
-    public CommandResult execute(Log exerciseLog) {
+    public CommandResult execute() {
         switch (view) {
         case TOTALEXERCISES:
-            exerciseLog.getNumberOfExercises();
+            Duke.exerciseLog.getNumberOfExercises();
             return new CommandResult("Here are the total number of exercises you have logged!\n");
         case TOTALEXERCISESMONTH:
-            exerciseLog.getNumberOfExercisesForMonth(month);
+            Duke.exerciseLog.getNumberOfExercisesForMonth(month);
             return new CommandResult("Here are the total number of exercises for that month!\n");
         case TOTALEXERCISESDAY:
-            exerciseLog.getNumberOfExercisesForDay(month, day);
+            Duke.exerciseLog.getNumberOfExercisesForDay(month, day);
             return new CommandResult("Here are the total number of exercises for that day!\n");
         default:
             return new CommandResult("Invalid exercise search type");
