@@ -42,6 +42,13 @@ Finds drugs using their name or expiry date.
 List all currently available commands in current version, their 
 uses and how to format them in the command line.
 
+### Feature-register
+
+Register a new user into the login system.
+
+### Feature-login
+
+Login an existing user into the system.
 
 ## Usage
 
@@ -51,7 +58,7 @@ Login system is automatically launched at the start of the programme.
 
 **Registering a user**
 
-> Step 1 : Enter 1 to select option to register a user.
+> Step 1 : Enter register to select option to register a user.
 > 
 > Step 2: Enter desired username and password.
 > 
@@ -65,7 +72,7 @@ Registration successful.
 
 **Login an existing user**
 
-> Step 1 : Enter 2 to select option to login a user.
+> Step 1 : Enter login to select option to login a user.
 >
 > Step 2: Enter registered username and password.
 >
@@ -226,6 +233,49 @@ Expected outcome:
 || Example: bye
 ```
 
+### `register` - Register a new user into the system
+
+Asks for user input for a username and password field which
+will be used to create a  new user for the system.
+
+
+Format:
+
+register
+
+
+Example of usage:
+
+`register`
+
+Expected outcome:
+
+```
+Registration Successful.
+New User Created.
+```
+
+### `login` - login an existing user into the system
+
+Asks for user input for a username and password field which
+will be used to check if such a user exists for the system
+and log the user in.
+
+
+Format:
+
+login
+
+Example of usage:
+
+`login`
+
+Expected outcome:
+
+```
+Login Sucessful
+Welcome Back!
+```
 ## FAQ
 
 **Q**: Can i register with blank username and password
@@ -239,3 +289,5 @@ Expected outcome:
 * list : `list`
 * find : `find /n KEYWORD` or `find /d KEYWORD`
 * help : `help`
+* register : `register`
+* login : `login`
