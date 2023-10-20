@@ -14,7 +14,7 @@ it's your personal guide to achieving your health and fitness goals.
 2. Down the latest version of `FitTrack` from [here](https://github.com/AY2324S1-CS2113-W12-4/tp/releases).
 3. You should find the jar file in your default downloads folder. Please place the jar file into a separate folder that will be used as your `home folder`.
 4. Open a command terminal, and change the current working directory to the `home folder`.
-5. Type ```java -jar tp.jar``` in the terminal to open the application. You should see the welcome message "Hi!" on the next line.
+5. Type ```java -jar fittrack.jar``` in the terminal to open the application. You should see the welcome message "Hi!" on the next line.
 6. The application is now ready for you to use! Type `help` to see a list of commands that you will be able to use in the application.
 
 
@@ -26,6 +26,7 @@ it's your personal guide to achieving your health and fitness goals.
 * [Viewing your profile : `viewprofile`](#viewing-your-profile-viewprofile)
 * [Adding a Meal : `addmeal`](#adding-a-meal-addmeal)
 * [Viewing list of all meals : `viewmeals`](#viewing-list-of-all-meals-viewmeals)
+* [Checking your current bmi : `bmi`](#checking-your-current-bmi-bmi)
 * [Delete a Meal : `deletemeal`](#delete-a-meal-deletemeal)
 * [Adding a workout : `addworkout`](#adding-a-workout-addworkout)
 * [Viewing list of workout : `viewWorkout`](#viewing-list-of-all-workouts-viewworkouts)
