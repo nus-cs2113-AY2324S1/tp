@@ -1,2 +1,7 @@
-Do you choose flashcard or calendar? 
-Enter your command: 
+    Failed to create directory
+Failed to find files
+Making New file for Flashcards
+    Failed to create directory
+Failed to find files
+Making new file for Events
+    Invalid command! Please try again.
