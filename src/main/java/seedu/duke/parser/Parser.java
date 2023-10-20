@@ -67,6 +67,16 @@ public class Parser {
         //        case ViewAllCommand.COMMAND_WORD:
         //            return prepareViewAll(arguments);
         //
+
+        case LogCommand.COMMAND_WORD:
+            return new LogCommand();
+
+        case DeleteLogCommand.COMMAND_WORD:
+            return new DeleteLogCommand();
+
+        case ViewLogCommand.COMMAND_WORD:
+            return new ViewLogCommand();
+
         case GoalCommand.COMMAND_WORD:
             return new GoalCommand(userInput);
 
@@ -74,7 +84,8 @@ public class Parser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD: // Fallthrough
-        default:
+        
+          default:
             return new HelpCommand();
         }
     }
