@@ -17,7 +17,8 @@ public class Storage {
     private Calories calories;
 
     /**
-     * Constructs storage.
+     * Constructs storage. Creates new file fittrack.txt
+     * in a directory called data if none exist.
      */
     public Storage() {
         this.file = new File(profileFilePath);
@@ -34,6 +35,8 @@ public class Storage {
 
     /**
      * Saves user profile data into storage
+     *
+     * @throws IOException error
      */
     public void saveProfile() throws IOException {
         //TODO write data to file
@@ -44,5 +47,6 @@ public class Storage {
         file.write(weightSaveString + "\n");
         String caloriesSaveString = calories.toString();
         file.write(caloriesSaveString + "\n");
+        file.close();
     }
 }
