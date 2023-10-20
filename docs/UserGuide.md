@@ -35,7 +35,7 @@ List all drug information that is being tracked by the system.
 
 ### Feature-find
 
-Finds drugs whose names contain any of the given keywords.
+Finds drugs using their name or expiry date.
 
 ### Feature-help
 
@@ -137,35 +137,54 @@ Expected outcome:
 
 Listed all drugs in the inventory.
 ```
-### `find` - Finds drugs whose names contain any of the given keywords
+### `find` - Finds drugs using their name or expiry date
 
-Finds drugs whose names contain any of the given keywords.
+1. Finds drugs whose **names** contain any of the given keywords.
 
 Format:
 
-list
+find /n panadol
 
 
 Example of usage:
 
-` find KEYWORD [MORE_KEYWORDS]
+` find /n KEYWORD 
 `
-The search is case-insensitive, meaning that "aspirin" will match "Aspirin."
+- The search is case-insensitive, meaning that "aspirin" will match "Aspirin."
 
-The order of the keywords does not matter. For example, "Painkiller Relief" will match "Relief Painkiller."
+- The order of the keywords does not matter. For example, "Painkiller Relief" will match "Relief Painkiller."
 
-Only the drug name is searched.
-
-Only full words will be matched. For example, "Pan" will not match "Panadol."
-
-Drugs matching at least one keyword will be returned (i.e., OR search).
+- Only the drug name is searched.
 
 
 Expected outcome:
 
 ```
-Here is a list of drugs matching your description:
-1. Panadol / 26 June 2023/  [300]
+1. Name: panadol, Expiry Date: 12 sep, Quantity: 120
+
+Listed all drugs with the keyword in the inventory.
+```
+2. Finds drugs whose **expiry dates** contain any of the given keywords.
+
+Format:
+
+find /d sep
+
+
+Example of usage:
+
+` find /d KEYWORD
+`
+
+- Only the drug's expiry date is searched.
+
+
+Expected outcome:
+
+```
+1. Name: panadol, Expiry Date: 12 sep, Quantity: 120
+
+Listed all drugs with the keyword in the inventory.
 ```
 ### `help` - List currently available commands in current version, their uses and how to format them in the command line
 
@@ -199,8 +218,9 @@ Expected outcome:
 || list: List all drug information that is being tracked by the system. 
 || Example: list
 || 
-|| find: Finds drug in inventory 
-|| Example: find panadol
+|| find: Finds drug in inventory using name or expiry date
+|| Example: find /n panadol
+|| Example: find /d sep
 || 
 || bye: Exits the program.
 || Example: bye
@@ -217,5 +237,5 @@ Expected outcome:
 * add :   `add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY`
 * delete : `delete /n DRUG_NAME`
 * list : `list`
-* find : `find KEYWORD [MORE_KEYWORDS]`
+* find : `find /n KEYWORD` or `find /d KEYWORD`
 * help : `help`
