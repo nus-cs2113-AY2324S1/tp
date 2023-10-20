@@ -4,6 +4,7 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
+import fittrack.parser.NegativeNumberException;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
 
@@ -53,6 +54,8 @@ public class FitTrack {
                 System.out.println("Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>");
             } catch (NumberFormatException e) {
                 System.out.println("Please enter numbers for height, weight, and daily calorie limit.");
+            } catch (NegativeNumberException e) {
+                System.out.println("Please enter a number greater than 0");
             }
         }
     }
@@ -78,7 +81,8 @@ public class FitTrack {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    private void profileSettings() throws PatternMatchFailException, NumberFormatException {
+    private void profileSettings()
+            throws PatternMatchFailException, NumberFormatException, NegativeNumberException {
         System.out.println(
                 "Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):"
         );
@@ -91,9 +95,6 @@ public class FitTrack {
         userProfile.setWeight(profile.getWeight());
         userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
         userProfile.calculateBmi();
-
-        assert userProfile.getHeight() > 0 : "Height should be greater than 0";
-        assert userProfile.getWeight() > 0 : "Weight should be greater than 0";
 
         ui.printProfileDetails(userProfile);
     }
