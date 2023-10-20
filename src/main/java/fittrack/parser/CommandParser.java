@@ -114,22 +114,23 @@ public class CommandParser {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    public UserProfile parseProfile(String profile) throws PatternMatchFailException, NumberFormatException {
+    public UserProfile parseProfile(String profile)
+            throws PatternMatchFailException, NumberFormatException, NegativeNumberException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }
 
-        final String height = matcher.group("height");
-        final String weight = matcher.group("weight");
-        final String dailyCalorieLimit = matcher.group("calLimit");
-
         try {
-            return new UserProfile(
-                    Double.parseDouble(height),
-                    Double.parseDouble(weight),
-                    Double.parseDouble(dailyCalorieLimit)
-            );
+            final double height = Double.parseDouble(matcher.group("height"));
+            final double weight = Double.parseDouble(matcher.group("weight"));
+            final double dailyCalorieLimit = Double.parseDouble(matcher.group("calLimit"));
+
+            if (height < 0 || weight < 0 || dailyCalorieLimit < 0) {
+                throw new NegativeNumberException();
+            }
+
+            return new UserProfile(height, weight, dailyCalorieLimit);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
         }

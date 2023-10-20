@@ -66,7 +66,7 @@ class CommandParserTest {
             assertEquals(180., profile.getHeight());
             assertEquals(80., profile.getWeight());
             assertEquals(2000., profile.getDailyCalorieLimit());
-        } catch (PatternMatchFailException | NumberFormatException e) {
+        } catch (PatternMatchFailException | NegativeNumberException | NumberFormatException e) {
             throw new RuntimeException(e);
         }
     }
@@ -81,6 +81,7 @@ class CommandParserTest {
         assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("180 w/80 l/2000"));
         assertThrows(PatternMatchFailException.class, () -> parser.parseProfile("180 80 2000"));
         assertThrows(NumberFormatException.class, () -> parser.parseProfile("h/180 w/eighty l/2000"));
+        assertThrows(NegativeNumberException.class, () -> parser.parseProfile("h/-180 w/80 l/2000"));
     }
 
     @Test
