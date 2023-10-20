@@ -23,6 +23,11 @@ public class ViewLogCommand extends Command {
         super();
     }
 
+    /**
+     * Assigns the view attribute a specific enum based on the scope at which the user wants to view the exercise log.
+     *
+     * @param viewArgs the details of the scope at which the user wants to view the exercise log.
+     */
     public ViewLogCommand(List<String> viewArgs) {
         super();
         switch (viewArgs.get(0)) {
@@ -43,6 +48,11 @@ public class ViewLogCommand extends Command {
         }
     }
 
+    /**
+     * A different message is returned depending on the scope at which a user wants to view their exercises.
+     *
+     * @return CommandResult telling the user their total number of exercises in total, for a month, or for a day.
+     */
     public CommandResult execute() {
         String numberOfExercises;
         switch (view) {

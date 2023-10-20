@@ -22,6 +22,11 @@ public class LogCommand extends Command {
         this.exerciseDetails = exerciseDetails;
     }
 
+    /**
+     * Extracts the details of the log command and logs the exercise with its specific details.
+     *
+     * @return CommandResult telling the user that the exercise was successfully added along with the exercise details.
+     */
     public CommandResult execute() {
         int month = Integer.parseInt(exerciseDetails.get(0));
         int day = Integer.parseInt(exerciseDetails.get(1));

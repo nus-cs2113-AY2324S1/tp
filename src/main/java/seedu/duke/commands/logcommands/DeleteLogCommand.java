@@ -20,6 +20,11 @@ public class DeleteLogCommand extends Command {
         this.exerciseDetails = exerciseDetails;
     }
 
+    /**
+     * Extracts the details of the delete command and deletes the specified exercise.
+     *
+     * @return CommandResult that tells the user whether an exercise was successfully removed.
+     */
     public CommandResult execute() {
         int month = Integer.parseInt(exerciseDetails.get(0));
         int day = Integer.parseInt(exerciseDetails.get(1));
