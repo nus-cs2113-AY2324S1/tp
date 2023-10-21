@@ -50,6 +50,11 @@ class HelpCommandTest {
                 + "Example: register"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
+                + "save: Saves existing druglist that is loaded into inventory when system is booted up."
+                + System.getProperty("line.separator")
+                + "Example: save"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
                 + "bye: Exits the program."
                 + System.getProperty("line.separator")
                 + "Example: bye";

@@ -1,6 +1,7 @@
 package seedu.stocker;
 
 import seedu.stocker.authentication.LoginSystem;
+import seedu.stocker.storage.Storage;
 import seedu.stocker.ui.Ui;
 import seedu.stocker.parser.Parser;
 import seedu.stocker.commands.Command;
@@ -15,6 +16,7 @@ public class Stocker {
 
     private Ui ui;
     private Inventory inventory;
+    private Storage storage;
 
     public static void main(String[] launchArgs) throws IOException {
         new Stocker().run();
@@ -52,6 +54,8 @@ public class Stocker {
     private void start() throws IOException {
         this.ui = new Ui();
         this.inventory = new Inventory();
+        this.storage = new Storage();
+        storage.loadFileContents("drugs.txt");
         boolean checker = startLogin();
         assert checker == true;
         if(checker){
