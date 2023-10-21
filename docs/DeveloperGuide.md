@@ -13,16 +13,35 @@
 
 1. For the main structure of the program, we have adapted the project structure
 from the Individual Project of Man JunCheng at [Link](https://github.com/spinoandraptos/ip/tree/master) </li>
-2. For JUnit testing, we hava adapted the testing codes from the AddressBook level-2
+2. For JUnit testing, we have adapted the testing codes from the AddressBook level-2
 codes at [Link](https://github.com/se-edu/addressbook-level2)</li>
 3. For the developer's guide, we have reverenced the developer's guide from AddressBook
 level-3 [Link](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## Design & implementation
 
-### Application Lifecycle
+### Architecture
 The main execution of the QuizHub application will concern 4 components which
 are the QuizHub, Ui, Parser and Command packages.
+
+![](./UML/architecture.jpg)
+
+`Quizhub` is the "main" class, which is responsible for starting the program, 
+initialising all other objects, executing commands, and shutting down.
+
+`UI` is the component that interacts with the user, taking inputs and displaying 
+the results of the executed commands.
+
+`Parser` acts as a multiplexer to determine which command to run, and what parameters
+it has, based on the user input.
+
+`Commands` refer to a package of individual commands with complex and specific
+logic, which is later executed in Quizhub and displayed in Utility.
+
+`Storage` is the class through which questions can be stored on the hard drive and `Utility Classes` 
+refer to any miscellaneous utility classes used by all the components.
+
+### Application Lifecycle
 
 ![](./UML/lifecycle.jpg)
 
