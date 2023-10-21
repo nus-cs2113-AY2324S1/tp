@@ -50,7 +50,7 @@ public class CommandParser {
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
-            "(?<name>\\S+)\\s+c/(?<calories>\\S+)"
+            "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -182,11 +182,20 @@ public class CommandParser {
 
         final String name = matcher.group("name");
         final String calories = matcher.group("calories");
+        final String date = matcher.group("date");
 
         try {
-            return new Workout(name, Double.parseDouble(calories));
+            double caloriesInDouble = Double.parseDouble(calories);
+
+            if (date == null) {
+                return new Workout(name, new Calories(caloriesInDouble), Date.today());
+            } else {
+                return new Workout(name, new Calories(caloriesInDouble), new Date(date));
+            }
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
+        } catch (DateTimeParseException e) {
+            throw new PatternMatchFailException();
         }
     }
 

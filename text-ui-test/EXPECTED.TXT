@@ -47,8 +47,7 @@ I've deleted the following meal:
 [M] pasta (200.0kcal, 2023-10-21)
 
 I've added the following workout:
-Workout name: running
-Calories: 400.0
+[W] running (400.0kcal, 2023-10-22)
 
 I've deleted workout 1
 

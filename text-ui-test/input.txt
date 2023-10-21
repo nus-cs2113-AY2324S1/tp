@@ -11,7 +11,7 @@ viewprofile
 bmi
 addmeal pasta c/200 d/2023-10-21
 deletemeal 1
-addworkout running c/400
+addworkout running c/400 d/2023-10-22
 deleteworkout 1
 help
 help editprofile

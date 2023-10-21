@@ -10,8 +10,12 @@ public class AddWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "addworkout";
     private static final String DESCRIPTION =
             String.format("`%s` adds your daily workout data to the list.", COMMAND_WORD);
-    private static final String USAGE =
-            String.format("Type `%s <WORKOUT_NAME> c/ <CALORIES>` to add a workout.", COMMAND_WORD);
+    private static final String USAGE = String.format(
+            "Type `%s <WORKOUT_NAME> c/<CALORIES>` to add today's workout.\n" +
+                    "Type `%s <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.\n" +
+                    "You should type <DATE> in format of `yyyy-MM-dd`.",
+            COMMAND_WORD, COMMAND_WORD
+    );
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     private Workout newWorkout;
