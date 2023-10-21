@@ -7,6 +7,7 @@ import quizhub.ui.Ui;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 /**
  * Represents the list of questions currently registered in Quizhub.
@@ -35,6 +36,7 @@ public class QuestionList {
         case SHORTANSWER:
             try {
                 String[] inputTokens = input.split("short")[1].strip().split("/");
+                assert inputTokens.length == 3;
                 String description = inputTokens[0];
                 String answer = inputTokens[1];
                 String module = inputTokens[2];
@@ -271,7 +273,7 @@ public class QuestionList {
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate if you are searching by description, time or module :<");
             System.out.println("    Please format your input as find /description [description] " +
-                                    "or find /time [time] or find /module [module]!");
+                                    "or find /module [module]!");
             return;
         }
         try{
@@ -280,9 +282,6 @@ public class QuestionList {
             switch (searchCriteria){
             case "description":
                 searchListByDescription(searchKeyword);
-                break;
-            case "time":
-                searchListByTime(searchKeyword);
                 break;
             case "module":
                 searchListByModule(searchKeyword);
@@ -310,8 +309,13 @@ public class QuestionList {
         return allQns;
     }
     /**
+     * Shuffles the order of questions in the deck
+     */
+    public void shuffleQuestions() {
+       Collections.shuffle(allQns);
+    }
+    /**
      * Retrieves the answer for a question by its index in the question list.
-     *
      * @param index The index of the question in the list.
      * @return The answer to the question, or null if the index is invalid or the question is of a different type.
      */
