@@ -1,8 +1,8 @@
 package fittrack.parser;
 
-import fittrack.Meal;
+import fittrack.data.Meal;
 import fittrack.UserProfile;
-import fittrack.Workout;
+import fittrack.data.Workout;
 import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Height;
