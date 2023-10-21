@@ -9,6 +9,7 @@ import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
 import fittrack.storage.Storage;
 
+
 /**
  * Represents the main part of FitTrack.
  * <p>

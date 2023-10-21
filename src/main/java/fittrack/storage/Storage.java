@@ -10,11 +10,12 @@ import java.io.IOException;
 
 //TODO pass the profile data to be stored in fittrack.txt
 public class Storage {
+
+    Height height;
+    Weight weight;
+    Calories calories;
     private final String profileFilePath = "./data/fittrack.txt";
     private final File file;
-    private Height height;
-    private Weight weight;
-    private Calories calories;
 
     /**
      * Constructs storage. Creates new file fittrack.txt
