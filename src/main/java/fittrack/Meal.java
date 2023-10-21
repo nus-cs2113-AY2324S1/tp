@@ -9,6 +9,8 @@ public class Meal {
     private Date date;
 
     public Meal(String name, Calories calories, Date date) {
+        assert name != null && calories != null && date != null;
+
         this.name = name;
         this.calories = calories;
         this.date = date;
@@ -18,5 +20,4 @@ public class Meal {
     public String toString() {
         return String.format("[M] %s (%s, %s)", name, calories, date);
     }
-
 }
