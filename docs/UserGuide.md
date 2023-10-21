@@ -50,6 +50,11 @@ Register a new user into the login system.
 
 Login an existing user into the system.
 
+### Feature-save
+
+Save existing drugs from inventory list onto a txt file.
+File is then used to update inventory list when stocker is ran.
+
 ## Usage
 
 ### `Login System`- Create new user or login existing user
@@ -276,6 +281,26 @@ Expected outcome:
 Login Sucessful
 Welcome Back!
 ```
+
+### `save` - save existing drugs onto hard drive of computer
+
+Saves existing drugs onto hard drive of computer. The txt file
+is then used as reference to update drug inventory when stocker 
+is booted up.
+
+Format:
+
+save
+
+Example of usage:
+
+`save`
+
+Expected outcome:
+
+```
+Drugs successfully saved.
+```
 ## FAQ
 
 **Q**: Can i register with blank username and password
@@ -291,3 +316,4 @@ Welcome Back!
 * help : `help`
 * register : `register`
 * login : `login`
+* save : `save`
