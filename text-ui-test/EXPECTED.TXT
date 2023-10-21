@@ -44,6 +44,11 @@ I've added the following meal:
 Meal name: pasta
 Calories: 200.0
 
+These are the meals you have consumed:
+1.Meal name: pasta
+Calories: 200.0
+
+
 I've deleted the following meal:
 Meal name: pasta
 Calories: 200.0
@@ -52,7 +57,14 @@ I've added the following workout:
 Workout name: running
 Calories: 400.0
 
-I've deleted workout 1
+These are the workouts you have done:
+1.Workout name: running
+Calories: 400.0
+
+
+I've deleted the following workout:
+Workout name: running
+Calories: 400.0
 
 `help` shows help message of the command.
 Existing commands:
