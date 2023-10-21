@@ -264,7 +264,7 @@ public class QuestionList {
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate if you are searching by description, time or module :<");
             System.out.println("    Please format your input as find /description [description] " +
-                                    "or find /time [time] or find /module [module]!");
+                                    "or find /module [module]!");
             return;
         }
         try{
@@ -273,9 +273,6 @@ public class QuestionList {
             switch (searchCriteria){
             case "description":
                 searchListByDescription(searchKeyword);
-                break;
-            case "time":
-                searchListByTime(searchKeyword);
                 break;
             case "module":
                 searchListByModule(searchKeyword);
