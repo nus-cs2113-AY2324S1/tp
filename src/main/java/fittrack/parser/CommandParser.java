@@ -47,7 +47,7 @@ public class CommandParser {
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)\\s+l/(?<calLimit>\\S+)"
     );
     private static final Pattern MEAL_PATTERN = Pattern.compile(
-            "(?<name>\\S+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
+            "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
             "(?<name>\\S+)\\s+c/(?<calories>\\S+)"
