@@ -1,7 +1,6 @@
 package fittrack.command;
 
 import fittrack.Meal;
-import fittrack.MealList;
 import fittrack.parser.CommandParser;
 
 public class DeleteMealCommand extends Command {

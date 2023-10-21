@@ -1,7 +1,6 @@
 package fittrack.command;
 
 import fittrack.Meal;
-import fittrack.MealList;
 import fittrack.parser.CommandParser;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;

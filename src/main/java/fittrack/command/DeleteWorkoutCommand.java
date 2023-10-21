@@ -1,9 +1,6 @@
 package fittrack.command;
 
-import fittrack.Meal;
-import fittrack.MealList;
 import fittrack.Workout;
-import fittrack.WorkoutList;
 import fittrack.parser.CommandParser;
 
 public class DeleteWorkoutCommand extends Command {
