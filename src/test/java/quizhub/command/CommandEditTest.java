@@ -1,6 +1,10 @@
 package quizhub.command;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
@@ -20,8 +24,8 @@ public class CommandEditTest {
     public static void setQuestionList(){
         questionList = new QuestionList();
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
-                "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
-        Question.qnType qnType = Question.qnType.SHORTANSWER;
+            "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
+        Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
             questionList.addToQuestionList(question, qnType, showMessage);

@@ -65,7 +65,7 @@ public class Storage {
                 switch (questionType) {
                 case "S":
                     questions.addToQuestionList("short " + questionDescription,
-                            Question.qnType.SHORTANSWER, false);
+                            Question.QnType.SHORTANSWER, false);
                     if (questionDoneStatus.equals("done")) {
                         questions.markQuestionAsDone(questionIndex, false);
                     }

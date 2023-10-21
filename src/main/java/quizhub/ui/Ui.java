@@ -14,6 +14,16 @@ public class Ui {
     private Storage dataStorage;
     private QuestionList tasks;
     /**
+     * Sets up the bridging between the UI and tasks data.
+     *
+     * @param tasks A record of all tasks documented that is built on program start and disposed on program exit.
+     * @param dataStorage The hard disk record of all tasks documented that persists even on program exit.
+     */
+    public Ui(Storage dataStorage, QuestionList tasks){
+        this.dataStorage = dataStorage;
+        this.tasks = tasks;
+    }
+    /**
      * Print out separating line in CLI to mark
      * start and end of chatbot replies.
      */
@@ -25,28 +35,33 @@ public class Ui {
      * on the launch of chatbot.
      */
     public void displayOpeningMessage(){
-            String logo =  "    _______          _________ _______                    ______  \n" +  
-                        "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
-                        "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
-                        "   | |   | || |   | |   | |       /   )| (___) || |   | || (__/ / \n" +
-                        "   | |   | || |   | |   | |      /   / |  ___  || |   | ||  __ (  \n" +
-                        "   | | /\\| || |   | |   | |     /   /  | (   ) || |   | || (  \\ \\ \n" +
-                        "   | (_\\ \\ || (___) |___) (___ /   (_/\\| )   ( || (___) || )___) )\n" +
-                        "   (____\\/_)(_______)\\_______/(_______/|/     \\|(_______)|/ \\___/";
-            System.out.println(logo);
-            showLine();
-            System.out.println("    Welcome to Quizhub!!!\n");
-            System.out.println("    Let the quizzing begin XDD");
-            System.out.println();
-            dataStorage.loadData(tasks);
-            showLine();
+        String logo =  "    _______          _________ _______                    ______  \n" +
+                    "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
+                    "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
+                    "   | |   | || |   | |   | |       /   )| (___) || |   | || (__/ / \n" +
+                    "   | |   | || |   | |   | |      /   / |  ___  || |   | ||  __ (  \n" +
+                    "   | | /\\| || |   | |   | |     /   /  | (   ) || |   | || (  \\ \\ \n" +
+                    "   | (_\\ \\ || (___) |___) (___ /   (_/\\| )   ( || (___) || )___) )\n" +
+                    "   (____\\/_)(_______)\\_______/(_______/|/     \\|(_______)|/ \\___/";
+        System.out.println(logo);
+        showLine();
+        System.out.println("    Welcome to Quizhub!!!\n");
+        System.out.println("    Let the quizzing begin XDD");
+        System.out.println();
+        dataStorage.loadData(tasks);
+        showLine();
     }
     /**
      * Retrieves the CLI input from the user
      * and documents it as a String object.
      */
-    public String readCommand() {
-        return input.nextLine();
+    public String getUserInput() {
+        if(input.hasNextLine()){
+            return input.nextLine();
+        } else {
+            return "";
+        }
+
     }
     /**
      * Displays closing message on exiting the chatbot.
@@ -57,16 +72,6 @@ public class Ui {
         System.out.println("    Well... hope you had fun quizzing :D");
         System.out.println("    See you again soon!");
         showLine();
-    }
-    /**
-     * Sets up the bridging between the UI and tasks data.
-     *
-     * @param tasks A record of all tasks documented that is built on program start and disposed on program exit.
-     * @param dataStorage The hard disk record of all tasks documented that persists even on program exit.
-     */
-    public Ui(Storage dataStorage, QuestionList tasks){
-        this.dataStorage = dataStorage;
-        this.tasks = tasks;
     }
     /**
      * Displays a question along with its index in a set of questions and the total count of questions.
@@ -80,7 +85,8 @@ public class Ui {
     public void displayQuestion(Question question, int currentQuestionIndex, int totalQuestions) {
         showLine();
         System.out.println("    Question " + currentQuestionIndex + " / " + totalQuestions + ":");
-        String questionDescription = question.getQuestionDescription(); // getQuestionDescription returns question/answer
+        // getQuestionDescription returns question/answer
+        String questionDescription = question.getQuestionDescription();
         String[] parts = questionDescription.split("/");
 
         if (parts.length >= 1) {
@@ -92,14 +98,6 @@ public class Ui {
         }
 
         System.out.print("  Your Answer: ");
-    }
-
-    /**
-     * duplication of readCommand for readability
-     * @return
-     */
-    public String getUserInput() {
-        return input.nextLine();
     }
 
     public void showInvalidCommandHelp( String feedback ) {

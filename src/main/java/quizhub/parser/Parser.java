@@ -1,6 +1,16 @@
 package quizhub.parser;
 
-import quizhub.command.*;
+import quizhub.command.Command;
+import quizhub.command.CommandList;
+import quizhub.command.CommandEdit;
+import quizhub.command.CommandShortAnswer;
+import quizhub.command.CommandExit;
+import quizhub.command.CommandDelete;
+import quizhub.command.CommandFind;
+import quizhub.command.CommandInvalid;
+import quizhub.command.CommandStart;
+import quizhub.command.CommandHelp;
+import quizhub.command.CommandShuffle;
 
 /**
  * Represents a parser that converts user inputs into command objects.

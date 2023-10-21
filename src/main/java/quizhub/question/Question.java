@@ -3,24 +3,12 @@ package quizhub.question;
  * Represents all questions in the question list in general.
  */
 public class Question {
-    public enum qnType {SHORTANSWER, DEFAULT};
-    private qnType qnType;
+    public enum QnType {SHORTANSWER, DEFAULT};
+    private QnType qnType;
     private String description;
     private boolean done;
     private String module;
 
-    /**
-     * Mark a question as done.
-     */
-    public void markAsDone(){
-        done = true;
-    }
-    /**
-     * Mark a question as not done.
-     */
-    public void markAsNotDone(){
-        done = false;
-    }
     /**
      * Creates a new question with a blank description,
      * not done status and default question type.
@@ -28,7 +16,7 @@ public class Question {
     public Question(){
         description = "";
         done = false;
-        qnType = qnType.DEFAULT;
+        qnType = QnType.DEFAULT;
         module = "";
     }
     /**
@@ -40,7 +28,7 @@ public class Question {
     public Question(String questionBody){
         this.description = questionBody;
         done = false;
-        qnType = qnType.DEFAULT;
+        qnType = QnType.DEFAULT;
         module = "";
     }
     /**
@@ -50,7 +38,7 @@ public class Question {
      * @param questionBody Description given to the question.
      * @param qnType Type given to the question.
      */
-    public Question(String questionBody, qnType qnType){
+    public Question(String questionBody, QnType qnType){
         this.description = questionBody;
         done = false;
         this.qnType = qnType;
@@ -65,11 +53,24 @@ public class Question {
      * @param qnType Type given to the question.
      * @param module Module given to the question.
      */
-    public Question(String questionBody, qnType qnType, String module){
+    public Question(String questionBody, QnType qnType, String module){
         this.description = questionBody;
         done = false;
         this.qnType = qnType;
         this.module = module;
+    }
+
+    /**
+     * Mark a question as done.
+     */
+    public void markAsDone(){
+        done = true;
+    }
+    /**
+     * Mark a question as not done.
+     */
+    public void markAsNotDone(){
+        done = false;
     }
 
     /**
@@ -93,7 +94,7 @@ public class Question {
     /**
      * Returns task type.
      */
-    public qnType getQuestionType(){
+    public QnType getQuestionType(){
         return qnType;
     }
 
@@ -108,7 +109,6 @@ public class Question {
      * Returns question details in a string.
      * @param newDescription New description of the question.
      * @param newAnswer New answer of the question.
-     * @return String containing question details.
      */
     public void editQuestion(String newDescription, String newAnswer){
         if(null != newDescription){

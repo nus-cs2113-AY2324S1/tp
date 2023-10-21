@@ -36,13 +36,14 @@ public class StartTest {
     public void testStartQuizWithNoQuestions() {
         // Ensure the quiz doesn't start if there are no questions
         questionList.startQuiz(mockUi);
-        assertEquals("    No questions found! Add questions before starting the quiz.", mockUi.getLastDisplayedMessage());
+        assertEquals("    No questions found! Add questions before starting the quiz.",
+                mockUi.getLastDisplayedMessage());
     }
 
     @Test
     public void testAddQuestionToListAndStorage() {
         // Add a question to the question list
-        questionList.addToQuestionList("short What is 2 + 2?/4", Question.qnType.SHORTANSWER, false);
+        questionList.addToQuestionList("short What is 2 + 2?/4", Question.QnType.SHORTANSWER, false);
 
         // Store the question in the mock storage
         mockStorage.saveData(questionList.toString());
@@ -52,14 +53,14 @@ public class StartTest {
 
         // Verify that the question was added to the list and retrieved from storage
         assertEquals(1, questionList.getQuestionListSize());
-//        assertEquals("short What is 2 + 2?/4", questionList.getQuestionTextByIndex(1));
+        // assertEquals("short What is 2 + 2?/4", questionList.getQuestionTextByIndex(1));
     }
 
     @Test
     public void testStartQuizWithQuestions() {
         // Add some questions to the question list
-        questionList.addToQuestionList("short What is 2 + 2?/4", Question.qnType.SHORTANSWER, false);
-        questionList.addToQuestionList("short What is 3 + 3?/6", Question.qnType.SHORTANSWER, false);
+        questionList.addToQuestionList("short What is 2 + 2?/4", Question.QnType.SHORTANSWER, false);
+        questionList.addToQuestionList("short What is 3 + 3?/6", Question.QnType.SHORTANSWER, false);
 
         // Set up user input for the quiz one by one
         mockUi.setUserInput("4");
@@ -70,9 +71,10 @@ public class StartTest {
 
         // Verify that the expected messages are displayed
         assertEquals("    Starting the quiz...", mockUi.getLastDisplayedMessage());
-//        assertEquals("Correct!", mockUi.getLastDisplayedMessage()); // Verify that "Correct!" is displayed for both questions
-//        assertEquals("Quiz completed!", mockUi.getLastDisplayedMessage());
-//        assertEquals("Your score: 2/2", mockUi.getLastDisplayedMessage()); // Verify the final score message
+        //assertEquals("Correct!", mockUi.getLastDisplayedMessage()); // Verify that "Correct!" is displayed
+        //for both questions
+        //assertEquals("Quiz completed!", mockUi.getLastDisplayedMessage());
+        //assertEquals("Your score: 2/2", mockUi.getLastDisplayedMessage()); // Verify the final score message
     }
 
     // A simple mock class for Ui
