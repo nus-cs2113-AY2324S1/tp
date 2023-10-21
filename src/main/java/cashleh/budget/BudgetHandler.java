@@ -20,6 +20,7 @@ public class BudgetHandler {
     }
     public void setBudget(Budget budget) {
         this.budget = budget;
+        setBudgetPercentage();
     }
     public Budget getBudget() {
         return this.budget;
