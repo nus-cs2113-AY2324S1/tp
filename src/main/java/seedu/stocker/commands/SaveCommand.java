@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Backups existing drug list inventory into txt file to be uploaded later.
+ */
 public class SaveCommand extends Command{
     public static final String COMMAND_WORD = "save";
 
@@ -30,10 +33,7 @@ public class SaveCommand extends Command{
 
         for(int i = 0; i < drugList.size(); i += 1){
             storageManager.appendToFile("drugs.txt",drugList.get(i).toString());
-
         }
-
-
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

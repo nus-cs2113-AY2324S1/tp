@@ -1,9 +1,13 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.authentication.LoginSystem;
+import seedu.stocker.exceptions.StockerException;
 
 import java.io.IOException;
 
+/**
+ * Login existing user into system.
+ */
 public class LoginCommand extends Command {
 
 
@@ -16,7 +20,7 @@ public class LoginCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Welcome back!" ;
 
-    public CommandResult execute() throws IOException {
+    public CommandResult execute() throws IOException, StockerException {
         LoginSystem system = new LoginSystem();
         system.loadExistingUsers();
         system.loginExistingUser();

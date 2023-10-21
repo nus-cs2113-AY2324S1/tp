@@ -44,6 +44,12 @@ public class Storage {
         bf.close();
     }
 
+    /**
+     * Loads drugs from txt file into inventory system.
+     *
+     * @param filePath Relative path to file containing list of drugs to be loaded.
+     * @throws IOException if file is not found
+     */
     public void loadFileContents(String filePath) throws IOException {
         File holder = new File("./drugs.txt");
         if (!holder.exists()) {
