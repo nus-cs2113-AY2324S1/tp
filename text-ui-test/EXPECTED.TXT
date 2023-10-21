@@ -42,24 +42,24 @@ BMI: 24.22
 Your current BMI is 24.22
 
 I've added the following meal:
-[M] pasta (200.0kcal, 2023-10-22)
+[M] pasta (200.0kcal, 2023-10-21)
 
 These are the meals you have consumed:
-1.[M] pasta (200.0kcal, 2023-10-22)
+1.[M] pasta (200.0kcal, 2023-10-21)
 
 
 I've deleted the following meal:
-[M] pasta (200.0kcal, 2023-10-22)
+[M] pasta (200.0kcal, 2023-10-21)
 
 I've added the following workout:
-[W] running (400.0kcal, 2023-10-22)
+[W] running (400.0kcal, 2023-10-21)
 
 These are the workouts you have done:
-1.[W] running (400.0kcal, 2023-10-22)
+1.[W] running (400.0kcal, 2023-10-21)
 
 
 I've deleted the following workout:
-[W] running (400.0kcal, 2023-10-22)
+[W] running (400.0kcal, 2023-10-21)
 
 `help` shows help message of the command.
 Existing commands:
