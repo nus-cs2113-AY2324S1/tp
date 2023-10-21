@@ -2,8 +2,6 @@ package seedu.stocker.ui;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.List;
 import java.util.Arrays;
 
