@@ -31,6 +31,7 @@ public class QuestionList {
         case SHORTANSWER:
             try {
                 String[] inputTokens = input.split("short")[1].strip().split("/");
+                assert inputTokens.length == 3;
                 String description = inputTokens[0];
                 String answer = inputTokens[1];
                 String module = inputTokens[2];
