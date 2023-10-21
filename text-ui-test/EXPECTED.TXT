@@ -41,18 +41,16 @@ BMI: 24.22
 Your current BMI is 24.22
 
 I've added the following meal:
-Meal name: pasta
-Calories: 200.0
+[M] pasta (200.0kcal, 2023-10-21)
 
 I've deleted the following meal:
-Meal name: pasta
-Calories: 200.0
+[M] pasta (200.0kcal, 2023-10-21)
 
 I've added the following workout:
-Workout name: running
-Calories: 400.0
+[W] running (400.0kcal, 2023-10-22)
 
-I've deleted workout 1
+I've deleted the following workout:
+[W] running (400.0kcal, 2023-10-22)
 
 `help` shows help message of the command.
 Existing commands:
@@ -69,7 +67,9 @@ Type `viewprofile` to view your profile.
 Type `bmi` to view your BMI.
 
 `addmeal` adds your daily meal data to the list.
-Type `addmeal <MEAL_NAME> c/<CALORIES>` to add a meal.
+Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
+Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
+You should type <DATE> in format of `yyyy-MM-dd`.
 
 `viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
@@ -78,7 +78,9 @@ Type `help` or `help <COMMAND>` to view help.
 Type `deletemeal <INDEX>` to delete the meal by an index.
 
 `addworkout` adds your daily workout data to the list.
-Type `addworkout <WORKOUT_NAME> c/ <CALORIES>` to add a workout.
+Type `addworkout <WORKOUT_NAME> c/<CALORIES>` to add today's workout.
+Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
+You should type <DATE> in format of `yyyy-MM-dd`.
 
 `viewworkouts` shows the list of all workouts.
 Type `viewworkouts` to view the list of your workouts.

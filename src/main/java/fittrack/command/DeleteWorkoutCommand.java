@@ -1,6 +1,6 @@
 package fittrack.command;
 
-import fittrack.WorkoutList;
+import fittrack.Workout;
 import fittrack.parser.CommandParser;
 
 public class DeleteWorkoutCommand extends Command {
@@ -11,17 +11,18 @@ public class DeleteWorkoutCommand extends Command {
             String.format("Type `%s <INDEX>` to delete the workout by an index.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
-    private int index;
+    private int workoutIndex;
 
     @Override
     public CommandResult execute() {
-        WorkoutList.deleteWorkout(index);
-        return new CommandResult("I've deleted workout " + index);
+        Workout toDelete = workoutList.getWorkout(workoutIndex);
+        workoutList.deleteWorkout(workoutIndex);
+        return new CommandResult("I've deleted the following workout:" + "\n" + toDelete.toString());
     }
 
     @Override
     public void setArguments(String args, CommandParser parser) {
-        index = Integer.parseInt(args);
+        workoutIndex = Integer.parseInt(args);
     }
 
     @Override

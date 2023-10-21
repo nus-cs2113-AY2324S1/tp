@@ -4,6 +4,7 @@ import fittrack.Meal;
 import fittrack.UserProfile;
 import fittrack.Workout;
 import fittrack.data.Calories;
+import fittrack.data.Date;
 import fittrack.data.Height;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
@@ -21,6 +22,7 @@ import fittrack.command.BmiCommand;
 import fittrack.command.SaveCommand;
 import fittrack.data.Weight;
 
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,10 +47,10 @@ public class CommandParser {
             "h/(?<height>\\S+)\\s+w/(?<weight>\\S+)\\s+l/(?<calLimit>\\S+)"
     );
     private static final Pattern MEAL_PATTERN = Pattern.compile(
-            "(?<name>\\S+)\\s+c/(?<calories>\\S+)"
+            "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
-            "(?<name>\\S+)\\s+c/(?<calories>\\S+)"
+            "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -155,11 +157,20 @@ public class CommandParser {
 
         final String name = matcher.group("name");
         final String calories = matcher.group("calories");
+        final String date = matcher.group("date");
 
         try {
-            return new Meal(name, Double.parseDouble(calories));
+            double caloriesInDouble = Double.parseDouble(calories);
+
+            if (date == null) {
+                return new Meal(name, new Calories(caloriesInDouble), Date.today());
+            } else {
+                return new Meal(name, new Calories(caloriesInDouble), new Date(date));
+            }
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
+        } catch (DateTimeParseException e) {
+            throw new PatternMatchFailException();
         }
     }
 
@@ -171,11 +182,20 @@ public class CommandParser {
 
         final String name = matcher.group("name");
         final String calories = matcher.group("calories");
+        final String date = matcher.group("date");
 
         try {
-            return new Workout(name, Double.parseDouble(calories));
+            double caloriesInDouble = Double.parseDouble(calories);
+
+            if (date == null) {
+                return new Workout(name, new Calories(caloriesInDouble), Date.today());
+            } else {
+                return new Workout(name, new Calories(caloriesInDouble), new Date(date));
+            }
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
+        } catch (DateTimeParseException e) {
+            throw new PatternMatchFailException();
         }
     }
 

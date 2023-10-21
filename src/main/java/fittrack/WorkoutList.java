@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class WorkoutList {
 
-    private static ArrayList<Workout> workoutList;
+    private ArrayList<Workout> workoutList;
 
     public WorkoutList() {
         workoutList = new ArrayList<>();
     }
 
-    public static void addToList(Workout newWorkout) {
+    public void addToList(Workout newWorkout) {
         workoutList.add(newWorkout);
     }
 
-    public static void deleteWorkout(int workoutIndex) {
+    public void deleteWorkout(int workoutIndex) {
         workoutList.remove((workoutIndex - 1));
     }
 

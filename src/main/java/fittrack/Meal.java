@@ -1,25 +1,23 @@
 package fittrack;
 
+import fittrack.data.Calories;
+import fittrack.data.Date;
+
 public class Meal {
     private String name;
-    private double calories;
+    private Calories calories;
+    private Date date;
 
-    public Meal(String name, double calories) {
+    public Meal(String name, Calories calories, Date date) {
+        assert name != null && calories != null && date != null;
+
         this.name = name;
         this.calories = calories;
-    }
-
-    public double getCalories() {
-        return calories;
-    }
-
-    public String getName() {
-        return name;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "Meal name: " + this.name + "\nCalories: " + this.calories;
+        return String.format("[M] %s (%s, %s)", name, calories, date);
     }
-
 }
