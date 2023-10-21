@@ -31,14 +31,14 @@ public class CommandEdit extends Command {
         try {
             String editCriteria = editDetails[2].strip();
             switch (editCriteria){
-                case "/description":
-                    newDescription = getContentFromUserInput(userInput, "/description");
-                    break;
-                case "/answer":
-                    newAnswer = getContentFromUserInput(userInput, "/answer");
-                    break;
-                default:
-                    throw new ArrayIndexOutOfBoundsException();
+            case "/description":
+                newDescription = getContentFromUserInput(userInput, "/description");
+                break;
+            case "/answer":
+                newAnswer = getContentFromUserInput(userInput, "/answer");
+                break;
+            default:
+                throw new ArrayIndexOutOfBoundsException();
             }
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate the content you are editing to :<");

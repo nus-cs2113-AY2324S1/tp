@@ -5,7 +5,6 @@ import quizhub.question.ShortAnsQn;
 import quizhub.exception.QuizHubExceptions;
 import quizhub.ui.Ui;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
@@ -53,6 +52,7 @@ public class QuestionList {
             } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
                 System.out.println("    Ono! You did not input a proper question!");
                 System.out.println("    Please format your input as short [question]/[answer]/[module]!");
+                break;
             }
         default:
             break;
@@ -161,7 +161,7 @@ public class QuestionList {
                 return allQns.get(index-1).getQuestionDescription();
             default:
                 return "Question Not Found";
-        }
+            }
         } catch(InputMismatchException |NullPointerException | IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");
             return "Question Not Found";
@@ -312,7 +312,7 @@ public class QuestionList {
      * Shuffles the order of questions in the deck
      */
     public void shuffleQuestions() {
-       Collections.shuffle(allQns);
+        Collections.shuffle(allQns);
     }
     /**
      * Retrieves the answer for a question by its index in the question list.
