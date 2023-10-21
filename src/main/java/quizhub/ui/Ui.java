@@ -55,8 +55,13 @@ public class Ui {
      * Retrieves the CLI input from the user
      * and documents it as a String object.
      */
-    public String readCommand() {
-        return input.nextLine();
+    public String getUserInput() {
+        if(input.hasNextLine()){
+            return input.nextLine();
+        } else {
+            return "";
+        }
+
     }
     /**
      * Displays closing message on exiting the chatbot.
@@ -93,14 +98,6 @@ public class Ui {
         }
 
         System.out.print("  Your Answer: ");
-    }
-
-    /**
-     * duplication of readCommand for readability
-     * @return
-     */
-    public String getUserInput() {
-        return input.nextLine();
     }
 
     public void showInvalidCommandHelp( String feedback ) {

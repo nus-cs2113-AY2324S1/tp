@@ -37,7 +37,7 @@ public class Quizhub {
         ui.displayOpeningMessage();
         boolean toExit = false;
         while(!toExit){
-            String fullCommand = ui.readCommand();
+            String fullCommand = ui.getUserInput();
             ui.showLine();
             Command command = parser.parseCommand(fullCommand);
             toExit = command.toExit();
