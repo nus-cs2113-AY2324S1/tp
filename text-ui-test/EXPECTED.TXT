@@ -96,5 +96,7 @@ Type `viewworkouts` to view the list of your workouts.
 `deleteworkout` deletes your daily workout data from the list.
 Type `deleteworkout <INDEX>` to delete the workout by an index.
 
+Your Profile settings and details has been saved!
+
 Goodbye! Hope to see you soon!
 
