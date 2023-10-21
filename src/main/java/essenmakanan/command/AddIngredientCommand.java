@@ -2,6 +2,7 @@ package essenmakanan.command;
 
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.parser.IngredientParser;
 
 public class AddIngredientCommand extends Command{
     private String toAdd;
@@ -13,13 +14,9 @@ public class AddIngredientCommand extends Command{
         this.ingredients = ingredients;
     }
 
-    public String parseIngredientTitle(String input) {
-        return input.replace("i/", "");
-    }
-
     @Override
     public void executeCommand() {
-        String ingredientTitle = parseIngredientTitle(toAdd);
+        String ingredientTitle = IngredientParser.parseIngredientTitle(toAdd);
         Ingredient newIngredient = new Ingredient(ingredientTitle);
         ingredients.addIngredient(newIngredient);
         ui.showRecentAddedIngredient(ingredientTitle);

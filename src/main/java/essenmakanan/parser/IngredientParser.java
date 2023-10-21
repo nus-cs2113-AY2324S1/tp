@@ -27,4 +27,8 @@ public class IngredientParser {
             throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
+
+    public static String parseIngredientTitle(String toAdd) {
+        return toAdd.replace("i/", "");
+    }
 }
