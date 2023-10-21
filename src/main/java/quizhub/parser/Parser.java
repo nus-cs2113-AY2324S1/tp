@@ -10,6 +10,7 @@ import quizhub.command.CommandFind;
 import quizhub.command.CommandInvalid;
 import quizhub.command.CommandStart;
 import quizhub.command.CommandHelp;
+import quizhub.command.CommandShuffle;
 
 /**
  * Represents a parser that converts user inputs into command objects.
