@@ -49,11 +49,14 @@ new UI object which displays the login message by invoking `showLoginMessage()` 
 will also instantiate a new login system object.
 
 The login system object will invoke its own `run()` method to begin the login process. This method begins by loading 
-existing users into the users attribute of the login system class. it then invokes `authenticateUserChoice()` to receive
-an input from the user to whether register or login a user. Based on the input of the user, either `newUserCreator()` is 
-launched or `loginExistingUser()` methods will be called to register or login a user.
+existing users into the users attribute of the login system class by `loadExistingusers()` method. it then invokes 
+`authenticateUserChoice()` to receive an input from the user to whether register or login a user. Based on the input of
+the user, either `newUserCreator()` is launched or `loginExistingUser()` methods will be called to register or login a 
+user.
 
 The following sequence diagram shows how the login system class works when the program is launched.
+
+<img src="UML Diagrams/StockerToLoginSystem.png" width="280">
 
 ## Product scope
 ### Target user profile
