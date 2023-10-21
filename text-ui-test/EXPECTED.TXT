@@ -1,3 +1,4 @@
+Directory already exists.
 Welcome to FitTrack!
 ___________.__  __ ___________                     __
 \_   _____/|__|/  |\__    ___/___________    ____ |  | __
