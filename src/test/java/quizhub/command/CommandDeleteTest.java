@@ -1,6 +1,9 @@
 package quizhub.command;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
@@ -35,8 +38,8 @@ public class CommandDeleteTest {
         mockStorage = new MockStorage(tempFile.toString());
         ui = new Ui(mockStorage, questionList);
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
-                "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
-        Question.qnType qnType = Question.qnType.SHORTANSWER;
+            "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
+        Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question : questionsToAdd) {
             questionList.addToQuestionList(question, qnType, showMessage);
@@ -76,7 +79,7 @@ public class CommandDeleteTest {
     @Test
     void testDeleteInvalidTypeIndex() {
         String expectedOutput = "Please enter a valid command :0\r\n" +
-        "    Please enter valid integer index!";
+            "    Please enter valid integer index!";
         parser.parseCommand("delete test").executeCommand(ui, mockStorage, questionList);;
         testCliOutputCorrectness(expectedOutput);
     }
@@ -87,7 +90,7 @@ public class CommandDeleteTest {
     @Test
     void testDeleteMissingIndex() {
         String expectedOutput = "Please enter a valid command :0\r\n" +
-        "    Please enter valid integer index!";
+            "    Please enter valid integer index!";
         parser.parseCommand("delete").executeCommand(ui, mockStorage, questionList);;
         testCliOutputCorrectness(expectedOutput);
     }
@@ -98,8 +101,8 @@ public class CommandDeleteTest {
     @Test
     void testDeleteValidIndex() {
         String expectedOutput = "Roger that! I have deleted the following question >w< !\r\n" +
-                "        [S][X] Question1 / Answer1\n" +
-                "    Now you have 3 questions in the list! UWU";
+            "        [S][X] Question1 / Answer1\n" +
+            "    Now you have 3 questions in the list! UWU";
         questionList.deleteQuestionByIndex(1);
         testCliOutputCorrectness(expectedOutput);
     }

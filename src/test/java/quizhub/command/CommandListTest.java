@@ -51,7 +51,7 @@ public class CommandListTest {
     @Test
     void testListOneUnmarkedShort(){
         String questionToAdd = "short Question / Answer";
-        Question.qnType qnType = Question.qnType.SHORTANSWER;
+        Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         questionList.addToQuestionList(questionToAdd, qnType, showMessage);
         String expectedOutput = "1: [S][] Question / Answer";
@@ -67,7 +67,7 @@ public class CommandListTest {
     @Test
     void testListOneMarkedShort(){
         String questionToAdd = "short Question / Answer";
-        Question.qnType qnType = Question.qnType.SHORTANSWER;
+        Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         questionList.addToQuestionList(questionToAdd, qnType, showMessage);
         questionList.markQuestionAsDone(1, showMessage);
@@ -84,8 +84,8 @@ public class CommandListTest {
     @Test
     void testListMixedShorts(){
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
-                "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
-        Question.qnType qnType = Question.qnType.SHORTANSWER;
+            "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
+        Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
             questionList.addToQuestionList(question, qnType, showMessage);

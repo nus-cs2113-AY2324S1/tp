@@ -14,6 +14,16 @@ public class Ui {
     private Storage dataStorage;
     private QuestionList tasks;
     /**
+     * Sets up the bridging between the UI and tasks data.
+     *
+     * @param tasks A record of all tasks documented that is built on program start and disposed on program exit.
+     * @param dataStorage The hard disk record of all tasks documented that persists even on program exit.
+     */
+    public Ui(Storage dataStorage, QuestionList tasks){
+        this.dataStorage = dataStorage;
+        this.tasks = tasks;
+    }
+    /**
      * Print out separating line in CLI to mark
      * start and end of chatbot replies.
      */
@@ -25,21 +35,21 @@ public class Ui {
      * on the launch of chatbot.
      */
     public void displayOpeningMessage(){
-            String logo =  "    _______          _________ _______                    ______  \n" +  
-                        "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
-                        "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
-                        "   | |   | || |   | |   | |       /   )| (___) || |   | || (__/ / \n" +
-                        "   | |   | || |   | |   | |      /   / |  ___  || |   | ||  __ (  \n" +
-                        "   | | /\\| || |   | |   | |     /   /  | (   ) || |   | || (  \\ \\ \n" +
-                        "   | (_\\ \\ || (___) |___) (___ /   (_/\\| )   ( || (___) || )___) )\n" +
-                        "   (____\\/_)(_______)\\_______/(_______/|/     \\|(_______)|/ \\___/";
-            System.out.println(logo);
-            showLine();
-            System.out.println("    Welcome to Quizhub!!!\n");
-            System.out.println("    Let the quizzing begin XDD");
-            System.out.println();
-            dataStorage.loadData(tasks);
-            showLine();
+        String logo =  "    _______          _________ _______                    ______  \n" +
+                    "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
+                    "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
+                    "   | |   | || |   | |   | |       /   )| (___) || |   | || (__/ / \n" +
+                    "   | |   | || |   | |   | |      /   / |  ___  || |   | ||  __ (  \n" +
+                    "   | | /\\| || |   | |   | |     /   /  | (   ) || |   | || (  \\ \\ \n" +
+                    "   | (_\\ \\ || (___) |___) (___ /   (_/\\| )   ( || (___) || )___) )\n" +
+                    "   (____\\/_)(_______)\\_______/(_______/|/     \\|(_______)|/ \\___/";
+        System.out.println(logo);
+        showLine();
+        System.out.println("    Welcome to Quizhub!!!\n");
+        System.out.println("    Let the quizzing begin XDD");
+        System.out.println();
+        dataStorage.loadData(tasks);
+        showLine();
     }
     /**
      * Retrieves the CLI input from the user
@@ -59,16 +69,6 @@ public class Ui {
         showLine();
     }
     /**
-     * Sets up the bridging between the UI and tasks data.
-     *
-     * @param tasks A record of all tasks documented that is built on program start and disposed on program exit.
-     * @param dataStorage The hard disk record of all tasks documented that persists even on program exit.
-     */
-    public Ui(Storage dataStorage, QuestionList tasks){
-        this.dataStorage = dataStorage;
-        this.tasks = tasks;
-    }
-    /**
      * Displays a question along with its index in a set of questions and the total count of questions.
      * Extracts and displays the question part from the question description, which is in the "question/answer" format.
      * If the format is invalid or missing, it prompts the user to edit the question via the edit function.
@@ -80,7 +80,8 @@ public class Ui {
     public void displayQuestion(Question question, int currentQuestionIndex, int totalQuestions) {
         showLine();
         System.out.println("    Question " + currentQuestionIndex + " / " + totalQuestions + ":");
-        String questionDescription = question.getQuestionDescription(); // getQuestionDescription returns question/answer
+        // getQuestionDescription returns question/answer
+        String questionDescription = question.getQuestionDescription();
         String[] parts = questionDescription.split("/");
 
         if (parts.length >= 1) {

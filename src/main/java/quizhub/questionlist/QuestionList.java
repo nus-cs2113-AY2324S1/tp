@@ -14,7 +14,12 @@ import java.util.InputMismatchException;
  */
 public class QuestionList {
     private ArrayList<Question> allQns; //array of inputs
-    DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern( "dd-MM-yyyy HH:mm" );
+    /**
+     * Creates a new empty question list.
+     */
+    public QuestionList(){
+        allQns = new ArrayList<>();
+    }
     /**
      * Adds a user-requested question to the current question list.
      * Depending on the type of question to add to the list,
@@ -25,7 +30,7 @@ public class QuestionList {
      * @param qnType The type of question to be added (SHORTANSWER).
      * @param showMessage If true, program will print response message on CLI after question is added.
      */
-    public void addToQuestionList(String input, Question.qnType qnType, boolean showMessage){
+    public void addToQuestionList(String input, Question.QnType qnType, boolean showMessage){
         switch (qnType) {
         case SHORTANSWER:
             try {
@@ -47,6 +52,8 @@ public class QuestionList {
                 System.out.println("    Ono! You did not input a proper question!");
                 System.out.println("    Please format your input as short [question]/[answer]/[module]!");
             }
+        default:
+            break;
         }
     }
     /**
@@ -74,6 +81,8 @@ public class QuestionList {
                     System.out.printf("        [S][] %s\n", question.getQuestionDescription());
                 }
             }
+            break;
+        default:
             break;
         }
     }
@@ -146,11 +155,11 @@ public class QuestionList {
     public String viewQuestionByIndex(int index){
         try{
             switch(allQns.get(index-1).getQuestionType()) {
-                case SHORTANSWER:
-                    return allQns.get(index-1).getQuestionDescription();
-                default:
-                    return "Question Not Found";
-            }
+            case SHORTANSWER:
+                return allQns.get(index-1).getQuestionDescription();
+            default:
+                return "Question Not Found";
+        }
         } catch(InputMismatchException |NullPointerException | IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");
             return "Question Not Found";
@@ -300,13 +309,6 @@ public class QuestionList {
     public ArrayList<Question> getAllQns(){
         return allQns;
     }
-    /**
-     * Creates a new empty question list.
-     */
-    public QuestionList(){
-        allQns = new ArrayList<Question>();
-    }
-
     /**
      * Retrieves the answer for a question by its index in the question list.
      *

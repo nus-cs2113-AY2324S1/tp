@@ -37,7 +37,7 @@ public class CommandShortAnswer extends Command {
      */
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
-        questions.addToQuestionList(userInput, Question.qnType.SHORTANSWER, true);
+        questions.addToQuestionList(userInput, Question.QnType.SHORTANSWER, true);
         dataStorage.updateData(questions);
     }
 

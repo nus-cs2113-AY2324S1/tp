@@ -12,13 +12,13 @@ public class CommandStart extends Command{
         super(CommandType.START);
     }
 
+    /**
+     * Loop through the array list of questions & allow the user to answer them.
+     * If the input given matches EXACTLY (v1.0), then the answer is correct
+     * returns "Correct" or "Wrong"
+     */
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
-        /**
-         * Loop through the array list of questions & allow the user to answer them.
-         * If the input given matches EXACTLY (v1.0), then the answer is correct
-         * returns "Correct" or "Wrong"
-         */
         questions.startQuiz(ui);
     }
 }

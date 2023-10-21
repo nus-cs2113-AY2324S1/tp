@@ -3,7 +3,9 @@ package quizhub.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import quizhub.command.*;
+import quizhub.command.Command;
+import quizhub.command.CommandShortAnswer;
+import quizhub.command.CommandInvalid;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,15 +31,15 @@ class ParserTest {
     @Test
     void test_parseCommand_invalidIntegerCommand() {
         final String[] emptyInputs = {
-                "delete",
-                "delete system32"
+            "delete",
+            "delete system32"
         };
         final String resultMessage = Parser.INVALID_INTEGER_INDEX;
         parseAndAssertIncorrectWithMessage(resultMessage, emptyInputs);
     }
 
     @Test
-    void test_parseCommand_commandShortAnswer_works() {
+    void test_parseCommand_commandShortAnswer() {
         final String validInput = "short What's 9 + 10 / 21";
         CommandShortAnswer result = parseAndAssertCommandType(validInput, CommandShortAnswer.class);
         assertEquals("short What's 9 + 10 / 21", result.getUserInput());
