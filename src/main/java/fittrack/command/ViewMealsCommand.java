@@ -12,7 +12,7 @@ public class ViewMealsCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        String feedback = "These are the meals you have consumed: \n" + mealList.toString();
+        String feedback = "These are the meals you have consumed:\n" + mealList.toString();
         return new CommandResult(feedback);
     }
 

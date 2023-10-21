@@ -1,5 +1,6 @@
 package fittrack.command;
 
+import fittrack.Workout;
 import fittrack.WorkoutList;
 import fittrack.parser.CommandParser;
 
@@ -15,8 +16,9 @@ public class DeleteWorkoutCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        Workout toDelete = workoutList.getWorkout(index);
         WorkoutList.deleteWorkout(index);
-        return new CommandResult("I've deleted workout " + index);
+        return new CommandResult("I've deleted the following workout:" + "\n" + toDelete.toString());
     }
 
     @Override
