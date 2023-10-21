@@ -3,19 +3,12 @@ package fittrack.data;
 import java.util.Objects;
 
 public class Weight {
-    private double weight;
+    public double value;
 
     public Weight(double weight) {
-        setWeight(weight);
+        this.value = weight;
     }
 
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -26,16 +19,16 @@ public class Weight {
             return false;
         }
         Weight weight1 = (Weight) o;
-        return Double.compare(weight, weight1.weight) == 0;
+        return Double.compare(value, weight1.value) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(weight);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return weight + "kg";
+        return value + "kg";
     }
 }

@@ -3,18 +3,10 @@ package fittrack.data;
 import java.util.Objects;
 
 public class Height {
-    private double height;
+    public double value;
 
     public Height(double height) {
-        setHeight(height);
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
+        this.value = height;
     }
 
     @Override
@@ -26,16 +18,16 @@ public class Height {
             return false;
         }
         Height height1 = (Height) o;
-        return Double.compare(height, height1.height) == 0;
+        return Double.compare(value, height1.value) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(height);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return height + "cm";
+        return value + "cm";
     }
 }

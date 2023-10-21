@@ -12,7 +12,7 @@ public class BmiCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult("Your current BMI is " + userProfile.getBmi());
+        return new CommandResult(String.format("Your current BMI is %.2f", userProfile.getBmi()));
     }
 
     @Override

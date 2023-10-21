@@ -3,18 +3,10 @@ package fittrack.data;
 import java.util.Objects;
 
 public class Calories {
-    private double calories;
+    public double value;
 
     public Calories(double calories) {
-        setCalories(calories);
-    }
-
-    public double getCalories() {
-        return calories;
-    }
-
-    public void setCalories(double calories) {
-        this.calories = calories;
+        this.value = calories;
     }
 
     @Override
@@ -26,16 +18,16 @@ public class Calories {
             return false;
         }
         Calories calories1 = (Calories) o;
-        return Double.compare(calories, calories1.calories) == 0;
+        return Double.compare(value, calories1.value) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(calories);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return calories + "kcal";
+        return value + "kcal";
     }
 }
