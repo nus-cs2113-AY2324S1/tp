@@ -315,6 +315,15 @@ public class QuestionList {
        Collections.shuffle(allQns);
     }
     /**
+<<<<<<< HEAD
+=======
+     * Creates a new empty question list.
+     */
+    public QuestionList(){
+        allQns = new ArrayList<Question>();
+    }
+    /**
+>>>>>>> 31df027fc7a15af84706e70831cd02a150409e39
      * Retrieves the answer for a question by its index in the question list.
      * @param index The index of the question in the list.
      * @return The answer to the question, or null if the index is invalid or the question is of a different type.
