@@ -25,4 +25,5 @@ help deletemeal
 help addworkout
 help viewworkouts
 help deleteworkout
+save
 exit

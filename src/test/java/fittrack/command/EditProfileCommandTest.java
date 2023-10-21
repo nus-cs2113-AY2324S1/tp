@@ -17,7 +17,7 @@ public class EditProfileCommandTest {
     public void setUp() {
         editProfileCommand = new EditProfileCommand();
         userProfile = new UserProfile();
-        editProfileCommand.setData(userProfile, null, null);
+        editProfileCommand.setData(userProfile, null, null, null);
     }
 
     @Test

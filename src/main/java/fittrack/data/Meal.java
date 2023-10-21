@@ -13,6 +13,10 @@ public class Meal {
         this.date = date;
     }
 
+    public String formatToFile() {
+        return String.format("[M] | %s (%s, %s)", name, calories, date);
+    }
+
     @Override
     public String toString() {
         return String.format("[M] %s (%s, %s)", name, calories, date);
