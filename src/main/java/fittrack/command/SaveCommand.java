@@ -16,7 +16,9 @@ public class SaveCommand extends Command {
     public CommandResult execute() {
         // TODO: get profile details and make them to lines of strings.
         try {
+            storage.saveProfile(userProfile);
             storage.saveMeals(mealList);
+            storage.saveWorkouts(workoutList);
         } catch (IOException e) {
             System.out.println(e);
         }
