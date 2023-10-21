@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Backups existing drug list inventory into txt file to be uploaded later
+ * Backups existing drug list inventory into txt file to be uploaded later.
  */
 public class SaveCommand extends Command{
     public static final String COMMAND_WORD = "save";

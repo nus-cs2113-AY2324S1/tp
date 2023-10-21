@@ -6,7 +6,7 @@ import seedu.stocker.exceptions.StockerException;
 import java.io.IOException;
 
 /**
- * Login existing user into system
+ * Login existing user into system.
  */
 public class LoginCommand extends Command {
 
