@@ -5,6 +5,9 @@ import seedu.stocker.exceptions.StockerException;
 
 import java.io.IOException;
 
+/**
+ * Registers new user into login system
+ */
 public class RegisterCommand extends Command {
 
     public static final String COMMAND_WORD = "register";
