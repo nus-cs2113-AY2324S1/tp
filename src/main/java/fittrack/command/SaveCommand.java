@@ -1,7 +1,6 @@
 package fittrack.command;
 
 import fittrack.parser.CommandParser;
-import fittrack.storage.Storage;
 
 import java.io.IOException;
 
@@ -12,13 +11,12 @@ public class SaveCommand extends Command {
     private static final String USAGE =
             String.format("Type `%s` to save your profile, meals and workout data.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
-    Storage storage;
 
     @Override
     public CommandResult execute() {
         // TODO: get profile details and make them to lines of strings.
         try {
-            storage.saveProfile();
+            storage.saveMeals(mealList);
         } catch (IOException e) {
             System.out.println(e);
         }

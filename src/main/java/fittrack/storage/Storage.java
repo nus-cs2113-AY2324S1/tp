@@ -1,12 +1,15 @@
 package fittrack.storage;
 
+import fittrack.MealList;
 import fittrack.data.Height;
 import fittrack.data.Weight;
 import fittrack.data.Calories;
+import fittrack.data.Meal;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 //TODO pass the profile data to be stored in fittrack.txt
 public class Storage {
@@ -14,7 +17,7 @@ public class Storage {
     Height height;
     Weight weight;
     Calories calories;
-    private final String profileFilePath = "./data/fittrack.txt";
+    private final String profileFilePath = "./data/mealList.txt";
     private final File file;
 
     /**
@@ -32,6 +35,21 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    /**
+     * Saves meal list into into storage
+     *
+     * @throws IOException error
+     */
+    public void saveMeals(MealList mealList) throws IOException {
+        //TODO write data to file
+        ArrayList<Meal> mealArr = mealList.getMealList();
+        FileWriter file = new FileWriter(profileFilePath);
+        for (Meal m : mealArr) {
+            file.write(m.formatToFile() + "\n");
+        }
+        file.close();
     }
 
     /**

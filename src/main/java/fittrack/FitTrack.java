@@ -75,7 +75,7 @@ public class FitTrack {
     }
 
     private CommandResult executeCommand(Command command) {
-        command.setData(userProfile, mealList, workoutList);
+        command.setData(userProfile, mealList, workoutList, storage);
         return command.execute();
     }
 

@@ -12,6 +12,14 @@ public class MealList {
         mealList = new ArrayList<>();
     }
 
+    public MealList(ArrayList<Meal> mealList) {
+        this.mealList = mealList;
+    }
+
+    public ArrayList<Meal> getMealList() {
+        return this.mealList;
+    }
+
     public void addToList(Meal newMeal) {
         mealList.add(newMeal);
     }
