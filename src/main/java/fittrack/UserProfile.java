@@ -13,12 +13,14 @@ public class UserProfile {
     private double bmi;
 
     public UserProfile() {
+        this(new Height(1), new Weight(0), new Calories(0));
     }
 
     public UserProfile(Height height, Weight weight, Calories dailyCalorieLimit) {
-        setHeight(height);
-        setWeight(weight);
-        setDailyCalorieLimit(dailyCalorieLimit);
+        this.height = height;
+        this.weight = weight;
+        this.dailyCalorieLimit = dailyCalorieLimit;
+        updateBmi();
     }
 
     public Height getHeight() {
@@ -27,6 +29,7 @@ public class UserProfile {
 
     public void setHeight(Height height) {
         this.height = height;
+        updateBmi();
     }
 
     public Weight getWeight() {
@@ -35,6 +38,7 @@ public class UserProfile {
 
     public void setWeight(Weight weight) {
         this.weight = weight;
+        updateBmi();
     }
 
     public Calories getDailyCalorieLimit() {
@@ -49,21 +53,20 @@ public class UserProfile {
         return bmi;
     }
 
-    public void setBmi() {
-        this.bmi = calculateBmi();
+    private void updateBmi() {
+        this.bmi = calculateBmi(height, weight);
     }
 
-    // TODO: change to private and call this method in the setter methods
-    public double calculateBmi() {
-        double heightInMetres = height.getHeight() / 100;
-        bmi = Double.parseDouble(df.format(weight.getWeight() / Math.pow(heightInMetres, 2)));
-        return bmi;
+    public double calculateBmi(Height height, Weight weight) {
+        assert (height != null && height.value > 0 && weight != null);
+        double heightInMetres = height.value / 100;
+        return weight.value / heightInMetres / heightInMetres;
     }
 
     public String toString() {
         return "Height: " + height.toString() + "\n" +
                 "Weight: " + weight.toString() + "\n" +
                 "Daily calorie limit: " + dailyCalorieLimit.toString() + "\n" +
-                "BMI: " + this.bmi;
+                "BMI: " + df.format(bmi);
     }
 }
