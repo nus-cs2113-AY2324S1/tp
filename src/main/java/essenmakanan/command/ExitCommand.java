@@ -1,16 +1,17 @@
 package essenmakanan.command;
 
-import essenmakanan.ingredient.IngredientList;
-import essenmakanan.recipe.RecipeList;
-
 public class ExitCommand extends Command {
 
     public ExitCommand() {
-        super(true);
+        super();
     }
 
     @Override
-    public void executeCommand(RecipeList recipes, IngredientList ingredients) {
+    public void executeCommand() {
         ui.bye();
+    }
+
+    public static boolean isExitCommand(Command command) {
+        return (command instanceof ExitCommand);
     }
 }

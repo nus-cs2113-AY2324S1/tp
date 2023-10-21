@@ -1,16 +1,18 @@
 package essenmakanan.command;
 
-import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 
 public class ViewRecipesCommand extends Command {
 
-    public ViewRecipesCommand() {
-        super(false);
+    private RecipeList recipes;
+
+    public ViewRecipesCommand(RecipeList recipes) {
+        super();
+        this.recipes = recipes;
     }
 
     @Override
-    public void executeCommand(RecipeList recipes, IngredientList ingredients) {
+    public void executeCommand() {
         ui.printAllRecipes(recipes);
     }
 
