@@ -8,11 +8,11 @@ import java.io.IOException;
 public class SaveCommand extends Command {
     public static final String COMMAND_WORD = "save";
     private static final String DESCRIPTION =
-            String.format("`%s` saves your profile settings and data.", COMMAND_WORD);
+            String.format("`%s` saves your profile, meals and workout data.", COMMAND_WORD);
     private static final String USAGE =
-            String.format("Type `%s` to save your profile settings and data.", COMMAND_WORD);
+            String.format("Type `%s` to save your profile, meals and workout data.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
-    public Storage storage;
+    Storage storage;
 
     @Override
     public CommandResult execute() {
