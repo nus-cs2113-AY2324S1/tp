@@ -22,7 +22,7 @@ public class AddMealCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        MealList.addToList(newMeal);
+        mealList.addToList(newMeal);
         return new CommandResult("I've added the following meal:" + "\n" + newMeal.toString());
     }
 

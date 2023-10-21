@@ -22,7 +22,7 @@ public class AddWorkoutCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        WorkoutList.addToList(newWorkout);
+        workoutList.addToList(newWorkout);
         return new CommandResult("I've added the following workout:" + "\n" + newWorkout.toString());
     }
 

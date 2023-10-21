@@ -49,7 +49,8 @@ I've deleted the following meal:
 I've added the following workout:
 [W] running (400.0kcal, 2023-10-22)
 
-I've deleted workout 1
+I've deleted the following workout:
+[W] running (400.0kcal, 2023-10-22)
 
 `help` shows help message of the command.
 Existing commands:
