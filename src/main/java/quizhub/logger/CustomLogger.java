@@ -20,4 +20,9 @@ public class CustomLogger {
     public static void error(String message) {
         logger.log(Level.SEVERE, message);
     }
+
+    // Log an error message in greater detail
+    public static void fineError(String message) {
+        logger.log(Level.FINE, message);
+    }
 }
