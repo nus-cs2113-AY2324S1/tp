@@ -177,7 +177,6 @@ public class LoginSystem {
 
         writer.flush();
         writer.close();
-
     }
 
     /**

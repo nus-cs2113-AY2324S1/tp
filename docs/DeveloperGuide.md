@@ -4,10 +4,56 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+1. Reference to AB-3 Developer Guide
+
+* [Source](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
+* Used as template to structure this Developer Guide
+
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Login System Component
+
+---
+The login system component seeks to authenticate and login existing users or register a new user.
+
+#### Design considerations
+
+* There must be a way to check and verify users with a master list
+* The search for existing users username and password must be fast
+* Master list must be stored separately on hard drive of machine
+
+#### Implementation and rationale
+The login system class works in the following way. Upon booting up the application, a txt file 
+containing a current list of existing users will be loaded into a users attribute within the class in the form of a hash 
+table.When a user attempts to login to their account, the entered username and password is checked against
+the current list of users in the hashtable. If the username and password matches, the user is logged in.
+
+As for registering new users, newly inputted username and password will be saved to the users attribute and this
+pair of username and password is then appended to the txt file containing current users. The updated user list will be
+loaded into the users attribute when the application is booted up again.
+
+The login system class uses the below methods to achieve its functionality
+
+*  `authenticateUserChoice()` - Decides whether the user chooses to register or login
+*  `newUserCreator()` - Creates a new user for future login
+*  `loginExistingUser()` - Login existing user
+*  `loadExistingUsers()` - Load existing users into hashtable for reference
+
+Given below is an example of how the login system class works.
+
+When the user first launches the programme, the Stocker object will be instantiated. The object will
+invoke its own `run()` method which will call its own `start()` method. The Stocker object then instantiates a 
+new UI object which displays the login message by invoking `showLoginMessage()` method. At this point, Stocker object 
+will also instantiate a new login system object.
+
+The login system object will invoke its own `run()` method to begin the login process. This method begins by loading 
+existing users into the users attribute of the login system class. it then invokes `authenticateUserChoice()` to receive
+an input from the user to whether register or login a user. Based on the input of the user, either `newUserCreator()` is 
+launched or `loginExistingUser()` methods will be called to register or login a user.
+
+The following sequence diagram shows how the login system class works when the program is launched.
 
 ## Product scope
 ### Target user profile
