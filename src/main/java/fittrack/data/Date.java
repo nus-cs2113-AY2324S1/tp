@@ -2,6 +2,7 @@ package fittrack.data;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public class Date implements Comparable<Date> {
     private static final Locale LOCALE = Locale.ENGLISH;
     private final LocalDate localDate;
 
-    public Date(String date) {
+    public Date(String date) throws DateTimeParseException {
         this.localDate = LocalDate.parse(date);
     }
 
