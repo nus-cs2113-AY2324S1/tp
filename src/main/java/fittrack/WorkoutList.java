@@ -12,6 +12,14 @@ public class WorkoutList {
         workoutList = new ArrayList<>();
     }
 
+    public WorkoutList(ArrayList<Workout> workoutList) {
+        this.workoutList = workoutList;
+    }
+
+    public ArrayList<Workout> getWorkoutList() {
+        return this.workoutList;
+    }
+
     public void addToList(Workout newWorkout) {
         workoutList.add(newWorkout);
     }
