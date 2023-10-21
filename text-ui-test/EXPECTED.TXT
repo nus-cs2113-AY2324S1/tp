@@ -77,7 +77,9 @@ Type `help` or `help <COMMAND>` to view help.
 Type `deletemeal <INDEX>` to delete the meal by an index.
 
 `addworkout` adds your daily workout data to the list.
-Type `addworkout <WORKOUT_NAME> c/ <CALORIES>` to add a workout.
+Type `addworkout <WORKOUT_NAME> c/<CALORIES>` to add today's workout.
+Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
+You should type <DATE> in format of `yyyy-MM-dd`.
 
 `viewworkouts` shows the list of all workouts.
 Type `viewworkouts` to view the list of your workouts.
