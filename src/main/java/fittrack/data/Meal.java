@@ -1,12 +1,9 @@
-package fittrack;
-
-import fittrack.data.Calories;
-import fittrack.data.Date;
+package fittrack.data;
 
 public class Meal {
-    private String name;
-    private Calories calories;
-    private Date date;
+    private final String name;
+    private final Calories calories;
+    private final Date date;
 
     public Meal(String name, Calories calories, Date date) {
         assert name != null && calories != null && date != null;

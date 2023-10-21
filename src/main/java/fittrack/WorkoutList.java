@@ -1,5 +1,7 @@
 package fittrack;
 
+import fittrack.data.Workout;
+
 import java.util.ArrayList;
 
 public class WorkoutList {

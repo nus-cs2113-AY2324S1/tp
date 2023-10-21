@@ -1,5 +1,7 @@
 package fittrack;
 
+import fittrack.data.Meal;
+
 import java.util.ArrayList;
 
 public class MealList {
