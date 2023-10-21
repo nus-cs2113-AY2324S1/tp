@@ -7,6 +7,7 @@ import quizhub.ui.Ui;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 /**
  * Represents the list of questions currently registered in Quizhub.
@@ -301,12 +302,17 @@ public class QuestionList {
         return allQns;
     }
     /**
+     * Shuffles the order of questions in the deck
+     */
+    public void shuffleQuestions() {
+       Collections.shuffle(allQns);
+    }
+    /**
      * Creates a new empty question list.
      */
     public QuestionList(){
         allQns = new ArrayList<Question>();
     }
-
     /**
      * Retrieves the answer for a question by its index in the question list.
      *

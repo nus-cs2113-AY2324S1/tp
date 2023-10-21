@@ -14,6 +14,7 @@ public class Parser {
             "                        edit [question number] /answer,\n" +
             "                        delete [question number],\n" +
             "                        find /description [question description]\n" +
+            "                        shuffle,\n" +
             "                        help,\n" +
             "                        bye";
     public static final String INVALID_INTEGER_INDEX = "    Please enter valid integer index!";
@@ -50,6 +51,8 @@ public class Parser {
                 return new CommandDelete(taskIndex);
             case "find":
                 return new CommandFind(userInput);
+            case "shuffle":
+                return new CommandShuffle();
             case "help":
                 return new CommandHelp();
             default:
