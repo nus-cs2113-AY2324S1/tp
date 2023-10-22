@@ -28,11 +28,11 @@ public class Ui {
     }
 
     public void showWelcome() {
-        showToUser(UserOutput.WELCOME_MESSAGE.message);
+        showToUser(Messages.WELCOME_MESSAGE);
     }
 
     public void showGoodbye() {
-        showToUser(UserOutput.GOODBYE_MESSAGE.message);
+        showToUser(Messages.GOODBYE_MESSAGE);
     }
 
     /**
@@ -68,7 +68,7 @@ public class Ui {
                     .append("\n");
         }
 
-        showToUser(UserOutput.ADD_DISH_MESSAGE.message,
+        showToUser(Messages.ADD_DISH_MESSAGE,
                 dishNameString,
                 dishPriceString,
                 dishIngredientsString.toString());

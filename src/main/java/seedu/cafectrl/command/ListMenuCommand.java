@@ -1,8 +1,8 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
-import seedu.cafectrl.ui.UserOutput;
 
 import java.text.DecimalFormat;
 
@@ -22,7 +22,7 @@ public class ListMenuCommand extends Command {
      */
     @Override
     public void execute(Menu menu, Ui ui) {
-        ui.showToUser(UserOutput.LIST_MESSAGE.message);
+        ui.showToUser(Messages.LIST_MESSAGE);
         for(int i =0; i < menu.getSize(); i++) {
             String indexNum = String.valueOf(i+1);
             String dishName = menu.getDish(i).getName();
