@@ -30,6 +30,8 @@ public class DeleteWorkoutCommand extends Command {
             }
         } catch (NumberFormatException e) {
             throw new ParseException("Argument is not an integer.");
+        } catch (NullPointerException e) {
+            System.out.println("The workout list is empty.");
         }
     }
 
