@@ -22,6 +22,7 @@ public class DeleteCashflowCommand extends AbstractCommand {
             stringIndex = rawCommand.args.get(0);
         } else if (rawCommand.args.size() == 2) {
             stringCategory = rawCommand.args.get(0);
+            handleInvalidCategory(stringCategory);
             stringIndex = rawCommand.args.get(1);
         } else {
             throw new IllegalArgumentException("Incorrect arguments.");
@@ -39,9 +40,6 @@ public class DeleteCashflowCommand extends AbstractCommand {
             logger.log(Level.WARNING, "Invalid value for index");
             throw new IllegalArgumentException("Index must be within the list");
         }
-        if (stringCategory != null) {
-            handleInvalidCategory(stringCategory);
-        }
     }
 
     private void handleInvalidCategory(String stringCategory) {
@@ -56,13 +54,14 @@ public class DeleteCashflowCommand extends AbstractCommand {
 
     @Override
     public void execute() {
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        assert index != 0;
+
         if (category == null) {
             handleDeleteCashflowWithoutCategory();
             return;
         }
-        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
-        assert index != 0;
-
+        Ui ui = Ui.getInstance();
         switch (category) {
         case INCOME:
         case EXPENSE:
@@ -70,7 +69,7 @@ public class DeleteCashflowCommand extends AbstractCommand {
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");
-            Ui.INSTANCE.showMessage("Unidentified entry.");
+            ui.showMessage("Unidentified entry.");
             break;
         }
     }

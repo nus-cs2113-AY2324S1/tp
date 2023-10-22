@@ -1,19 +1,20 @@
 package seedu.financialplanner.list;
 
+import seedu.financialplanner.enumerations.ExpenseType;
+import seedu.financialplanner.enumerations.IncomeType;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-public class Cashflow {
+public abstract class Cashflow {
 
     protected static double balance = 0;
     protected double amount;
-    protected String type;
     protected int recur;
 
-    public Cashflow(double amount, String type, int recur) {
+    public Cashflow(double amount, int recur) {
         this.amount = amount;
-        this.type = type;
         this.recur = recur;
     }
     public void deleteCashflowvalue() {
@@ -31,11 +32,19 @@ public class Cashflow {
         return bd.doubleValue();
     }
     //@author mhadidg
+
+    //@author Nick Bolton-reused
+    //Reused from
+    //https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
+    public String capitalize(String line) {
+        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
+    }
+    //@author Nick Bolton
+
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
-        String string = "   Type: " + type + System.lineSeparator()
-                + "   Amount: " + decimalFormat.format(round(amount, 2));
+        String string = "   Amount: " + decimalFormat.format(round(amount, 2));
 
         if (recur != 0) {
             string += System.lineSeparator() + "   Recurring every: " + recur + " days";
@@ -59,11 +68,10 @@ public class Cashflow {
     }
 
     public String formatString() {
-        return this.amount + " | " + this.type + " | " + this.recur;
+        return " | " + this.recur;
     }
 
-    public String getType() {
-        return type;
-    }
+    public abstract ExpenseType getExpenseType();
 
+    public abstract IncomeType getIncomeType();
 }

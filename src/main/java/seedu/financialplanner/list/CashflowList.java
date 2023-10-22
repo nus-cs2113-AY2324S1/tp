@@ -1,6 +1,8 @@
 package seedu.financialplanner.list;
 
 import seedu.financialplanner.enumerations.CashflowCategory;
+import seedu.financialplanner.enumerations.ExpenseType;
+import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.utils.Ui;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -11,7 +13,7 @@ public class CashflowList {
 
     private static CashflowList cashflowList = null;
     public final ArrayList<Cashflow> list = new ArrayList<>();
-
+    protected Ui ui = Ui.getInstance();
     private CashflowList() {
     }
 
@@ -22,25 +24,25 @@ public class CashflowList {
         return cashflowList;
     }
 
-    public void addIncome(double value, String type, int recur) {
+    public void addIncome(double value, IncomeType type, int recur) {
         logger.log(Level.INFO, "Adding income");
         int existingListSize = list.size();
 
         Income toAdd = new Income(value, type, recur);
         list.add(toAdd);
-        Ui.INSTANCE.printAddedCashflow(toAdd);
+        ui.printAddedCashflow(toAdd);
 
         int newListSize = list.size();
         assert newListSize == existingListSize + 1;
     }
 
-    public void addExpense(double value, String type, int recur) {
+    public void addExpense(double value, ExpenseType type, int recur) {
         logger.log(Level.INFO, "Adding expense");
         int existingListSize = list.size();
 
         Expense toAdd = new Expense(value, type, recur);
         list.add(toAdd);
-        Ui.INSTANCE.printAddedCashflow(toAdd);
+        ui.printAddedCashflow(toAdd);
 
         int newListSize = list.size();
         assert newListSize == existingListSize + 1;
@@ -53,7 +55,7 @@ public class CashflowList {
         Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
         toRemove.deleteCashflowvalue();
-        Ui.INSTANCE.printDeletedCashflow(toRemove);
+        ui.printDeletedCashflow(toRemove);
 
         int newListSize = list.size();
         assert newListSize == existingListSize - 1;
@@ -113,7 +115,7 @@ public class CashflowList {
         Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
         toRemove.deleteCashflowvalue();
-        Ui.INSTANCE.printDeletedCashflow(toRemove);
+        ui.printDeletedCashflow(toRemove);
 
         int newListSize = list.size();
         assert newListSize == existingListSize - 1;

@@ -30,7 +30,7 @@ public class Categorizer {
         Map<String, Double> expensesByCat = new HashMap<>();
         for (Cashflow e: cashflowList.list) {
             if (e instanceof Expense) {
-                String key = e.getType();
+                String key = e.getExpenseType().toString().toLowerCase();
                 double value = expensesByCat.getOrDefault(key, 0.0) + e.getAmount();
                 assert value >= 0;
                 expensesByCat.put(key, value);
@@ -43,7 +43,7 @@ public class Categorizer {
         Map<String, Double> incomeByCat = new HashMap<>();
         for (Cashflow e: cashflowList.list) {
             if (e instanceof Income) {
-                String key = e.getType();
+                String key = e.getIncomeType().toString().toLowerCase();
                 double value = incomeByCat.getOrDefault(key, 0.0) + e.getAmount();
                 assert value >= 0;
                 incomeByCat.put(key, value);
