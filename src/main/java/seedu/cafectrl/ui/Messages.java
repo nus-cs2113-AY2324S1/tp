@@ -12,6 +12,12 @@ public class Messages {
     public static final String MISSING_ARGUMENT_FOR_DELETE = "Error: Missing arguments "
                                                                  + "for delete command.";
 
+    public static final String MISSING_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Missing arguments "
+                                                                 + "for buy ingredient command.";
+
+    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
+                                                                 + "for buy ingredient command.";
+
     public static final String INVALID_DISH_INDEX = "Error: Invalid dish index.";
     public static final String WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE = "Error: Invalid dish index. \n "
                                                                     + "Make sure dish index is "
@@ -32,10 +38,10 @@ public class Messages {
                        + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
     public static final String MENU_TOP = "+-----------------------------------------+";
     public static final String MENU_CORNER = "+--------------------------+--------------+";
-    public static final  String MENU_TITLE = "| Dish Name                |  Price       |";
+    public static final String MENU_TITLE = "| Dish Name                |  Price       |";
 
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
 
-
+    public static final String VIEW_STOCK = "You have the following ingredients in pantry:";
 
 }
