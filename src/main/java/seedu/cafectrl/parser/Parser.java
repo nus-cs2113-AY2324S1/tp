@@ -14,7 +14,6 @@ import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.ui.UserOutput;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -88,7 +87,7 @@ public class Parser {
             return new ExitCommand();
 
         default:
-            return new IncorrectCommand(UserOutput.UNKNOWN_COMMAND_MESSAGE.message);
+            return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE);
         }
     }
 

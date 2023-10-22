@@ -11,7 +11,6 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
-import seedu.cafectrl.ui.UserOutput;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -161,7 +160,7 @@ class ParserTest {
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
         commandReturned.execute(menu, ui);
-        assertEquals(UserOutput.UNKNOWN_COMMAND_MESSAGE.message, actualOutput.get(0));
+        assertEquals(Messages.UNKNOWN_COMMAND_MESSAGE, actualOutput.get(0));
     }
 
     @Test
