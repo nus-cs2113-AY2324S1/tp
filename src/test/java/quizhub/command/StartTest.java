@@ -43,7 +43,7 @@ public class StartTest {
     @Test
     public void testAddQuestionToListAndStorage() {
         // Add a question to the question list
-        questionList.addToQuestionList("short What is 2 + 2?/4", Question.QnType.SHORTANSWER, false);
+        questionList.addToQuestionList("short What is 2 + 2?/4 / MA1511 / EASY", Question.QnType.SHORTANSWER, false);
 
         // Store the question in the mock storage
         mockStorage.saveData(questionList.toString());
@@ -59,8 +59,8 @@ public class StartTest {
     @Test
     public void testStartQuizWithQuestions() {
         // Add some questions to the question list
-        questionList.addToQuestionList("short What is 2 + 2?/4", Question.QnType.SHORTANSWER, false);
-        questionList.addToQuestionList("short What is 3 + 3?/6", Question.QnType.SHORTANSWER, false);
+        questionList.addToQuestionList("short What is 2 + 2?/4 / MA1511 / EASY", Question.QnType.SHORTANSWER, false);
+        questionList.addToQuestionList("short What is 3 + 3?/6 / MA1511 / EASY", Question.QnType.SHORTANSWER, false);
 
         // Set up user input for the quiz one by one
         mockUi.setUserInput("4");

@@ -23,8 +23,9 @@ public class CommandFindTest {
     @BeforeAll
     public static void setQuestionList() {
         questionList = new QuestionList();
-        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
-            "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",
+            "short Question2 / Answer2 / Mod2 / NORMAL", "short Question3 / Answer3 / Mod3 / NORMAL",
+            "short Question4 / Answer4 / Mod4 / NORMAL" };
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question : questionsToAdd) {
@@ -58,9 +59,8 @@ public class CommandFindTest {
      */
     @Test
     void testFindNoCriteria() {
-        String expectedOutput = "Ono! You did not indicate if you are searching by description, time or module :<" +
-                "\r\n    Please format your input as find /description [description] or find /time [time] " +
-                "or find /module [module]!";
+        String expectedOutput = "Ono! You did not indicate if you are searching by description or module :<" +
+                "\r\n    Please format your input as find /description [description] or find /module [module]!";
         questionList.searchList("find");
         testCliOutputCorrectness(expectedOutput);
     }
@@ -71,7 +71,7 @@ public class CommandFindTest {
     @Test
     void testFindDescriptionNoKeyword() {
         String expectedOutput = "Ono! You did not indicate the keywords you are searching by :<" +
-                "\r\n    Please format your input as find /description [description] or find /time [time]!";
+                "\r\n    Please format your input as find /description [description] or find /module [module]!";
         questionList.searchList("find /description");
         testCliOutputCorrectness(expectedOutput);
     }
@@ -82,10 +82,10 @@ public class CommandFindTest {
     @Test
     void testFindDescriptionWithMatches() {
         String expectedOutput = "Here are questions that matched your search:\r\n"
-                + "    1: [S][X] Question1 / Answer1\n" 
-                + "    2: [S][] Question2 / Answer2\n" 
-                + "    3: [S][X] Question3 / Answer3\n" 
-                + "    4: [S][] Question4 / Answer4";
+                + "    1: [S][X] Question1 / Answer1 | Mod1 | NORMAL\n"
+                + "    2: [S][] Question2 / Answer2 | Mod2 | NORMAL\n"
+                + "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL\n"
+                + "    4: [S][] Question4 / Answer4 | Mod4 | NORMAL";
         questionList.searchList("find /description Question");
         testCliOutputCorrectness(expectedOutput);
     }

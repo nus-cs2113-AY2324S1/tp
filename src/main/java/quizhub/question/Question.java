@@ -4,24 +4,27 @@ package quizhub.question;
  */
 public class Question {
     public enum QnType {SHORTANSWER, DEFAULT};
+    public enum QnDifficulty {EASY, HARD, NORMAL, DEFAULT};
     private QnType qnType;
+    private QnDifficulty qnDifficulty;
     private String description;
     private boolean done;
     private String module;
 
     /**
      * Creates a new question with a blank description,
-     * not done status and default question type.
+     * not done status, default question type and normal difficulty..
      */
     public Question(){
         description = "";
         done = false;
         qnType = QnType.DEFAULT;
         module = "";
+        qnDifficulty = QnDifficulty.NORMAL;
     }
     /**
      * Creates a new question with a given description,
-     * not done status and default task type.
+     * not done status, default task type and normal difficulty.
      *
      * @param questionBody Description given to the question.
      */
@@ -30,10 +33,11 @@ public class Question {
         done = false;
         qnType = QnType.DEFAULT;
         module = "";
+        qnDifficulty = QnDifficulty.NORMAL;
     }
     /**
      * Creates a new question with a given description,
-     * not done status and given question type.
+     * not done status, given question type and normal difficulty.
      *
      * @param questionBody Description given to the question.
      * @param qnType Type given to the question.
@@ -43,11 +47,12 @@ public class Question {
         done = false;
         this.qnType = qnType;
         module = "";
+        qnDifficulty = QnDifficulty.NORMAL;
     }
 
     /**
      * Creates a new question with a given description,
-     * not done status and given question type.
+     * not done status, given question type, and given module and normal difficulty.
      *
      * @param questionBody Description given to the question.
      * @param qnType Type given to the question.
@@ -58,6 +63,25 @@ public class Question {
         done = false;
         this.qnType = qnType;
         this.module = module;
+        qnDifficulty = QnDifficulty.NORMAL;
+    }
+
+    /**
+     * Creates a new question with a given description,
+     * not done status. given question type, given module,
+     * and given difficulty.
+     *
+     * @param questionBody Description given to the question.
+     * @param qnType Type given to the question.
+     * @param module Module given to the question.
+     * @param qnDifficulty Difficulty level assigned to the question.
+     */
+    public Question(String questionBody, QnType qnType, String module, QnDifficulty qnDifficulty){
+        this.description = questionBody;
+        done = false;
+        this.qnType = qnType;
+        this.module = module;
+        this.qnDifficulty = qnDifficulty;
     }
 
     /**
@@ -114,5 +138,18 @@ public class Question {
         if(null != newDescription){
             this.description = newDescription;
         }
+    }
+    /**
+     * Returns question details in a string.
+     * @param qnDifficulty New difficulty level of the question.
+     */
+    public void markDifficulty (QnDifficulty qnDifficulty) {
+        this.qnDifficulty = qnDifficulty;
+    }
+    /**
+     * Returns question difficulty.
+     */
+    public QnDifficulty getDifficulty(){
+        return qnDifficulty;
     }
 }

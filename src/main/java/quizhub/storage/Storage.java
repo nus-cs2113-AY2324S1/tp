@@ -1,5 +1,6 @@
 package quizhub.storage;
 import quizhub.question.Question;
+import quizhub.question.ShortAnsQn;
 import quizhub.questionlist.QuestionList;
 
 import java.io.File;
@@ -34,6 +35,34 @@ public class Storage {
         fileWriter.close();
     }
     /**
+     * Adds a question from storage into question list being built.
+     *
+     * @param questions The question list to be built.
+     * @param currentQuestion The current question loaded from storage.
+     * @param questionIndex Index of current question in question list being built
+     * @param questionType Type of current question.
+     * @param questionDescription Description of current question.
+     * @param questionDoneStatus Done status of current question.
+     * @param questionDifficulty Difficulty of current question.
+     * @param questionModule Module of current question.
+     */
+    private void addQuestionFromFile(QuestionList questions, String currentQuestion, int questionIndex,
+                                     String questionType, String questionDescription, String questionDoneStatus,
+                                     String questionDifficulty, String questionModule) {
+        switch (questionType) {
+        case "S":
+            questions.addToQuestionList("short " + questionDescription + "/" + questionModule +
+                            "/" + questionDifficulty, Question.QnType.SHORTANSWER, false);
+            if (questionDoneStatus.equals("done")) {
+                questions.markQuestionAsDone(questionIndex, false);
+            }
+            break;
+        default:
+            System.out.println(currentQuestion);
+            break;
+        }
+    }
+    /**
      * Build a new question list from data stored in hard disk.
      * Used at program start to build the current question list.
      *
@@ -56,24 +85,15 @@ public class Storage {
             fileScanner.nextLine();
             while (fileScanner.hasNext()) {
                 questionIndex++;
-                String nextQuestion = fileScanner.nextLine();
-                String[] questionSubStrings = nextQuestion.split("\\|");
+                String currentQuestion = fileScanner.nextLine();
+                String[] questionSubStrings = currentQuestion.split("\\|");
                 String questionType = questionSubStrings[0].strip();
                 String questionDoneStatus = questionSubStrings[1].strip();
                 String questionDescription = questionSubStrings[2].strip();
-                // TODO : change this entire code chunk, right now they're all default
-                switch (questionType) {
-                case "S":
-                    questions.addToQuestionList("short " + questionDescription,
-                            Question.QnType.SHORTANSWER, false);
-                    if (questionDoneStatus.equals("done")) {
-                        questions.markQuestionAsDone(questionIndex, false);
-                    }
-                    break;
-                default:
-                    System.out.println(nextQuestion);
-                    break;
-                }
+                String questionModule = questionSubStrings[3].strip();
+                String questionDifficulty = questionSubStrings[4].strip();
+                addQuestionFromFile( questions, currentQuestion, questionIndex, questionType, questionDescription,
+                    questionDoneStatus, questionDifficulty, questionModule);
             }
         }
         catch(NullPointerException | IOException  invalidFilePath){
@@ -111,10 +131,10 @@ public class Storage {
                 switch (question.getQuestionType()) {
                 case SHORTANSWER:
                     if (question.questionIsDone()) {
-                        writeToFile(dataFile.getPath(), "S | done |  " + question.getQuestionDescription()
+                        writeToFile(dataFile.getPath(), "S | done | " + question.getQuestionDescription()
                                 + System.lineSeparator(), true);
                     } else {
-                        writeToFile(dataFile.getPath(), "S | undone |  " + question.getQuestionDescription()
+                        writeToFile(dataFile.getPath(), "S | undone | " + question.getQuestionDescription()
                                 + System.lineSeparator(), true);
                     }
                     break;

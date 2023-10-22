@@ -23,8 +23,8 @@ public class CommandEditTest {
     @BeforeAll
     public static void setQuestionList(){
         questionList = new QuestionList();
-        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
-            "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL", "short Question2 / Answer2 / Mod2 / NORMAL",
+            "short Question3 / Answer3 / Mod3 / NORMAL", "short Question4 / Answer4 / Mod4 / NORMAL" };
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
@@ -78,7 +78,7 @@ public class CommandEditTest {
     @Test
     void testEditBlankDescAns(){
         String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
-                "        [S][X]  / \n" +
+                "        [S][X]  /  | Mod1 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(1, "", "");
         testCliOutputCorrectness(expectedOutput);
@@ -89,7 +89,7 @@ public class CommandEditTest {
     @Test
     void testEditOnlyBlankDesc(){
         String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
-                "        [S][]  / NewAnswer\n" +
+                "        [S][]  / NewAnswer | Mod2 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(2, "", "NewAnswer");
         testCliOutputCorrectness(expectedOutput);
@@ -101,7 +101,7 @@ public class CommandEditTest {
     @Test
     void testEditOnlyBlankAns(){
         String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
-                "        [S][X] NewDescription / \n" +
+                "        [S][X] NewDescription /  | Mod3 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(3, "NewDescription", "");
         testCliOutputCorrectness(expectedOutput);
@@ -113,7 +113,7 @@ public class CommandEditTest {
     @Test
     void testEditNonBlankDescAns(){
         String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
-                "        [S][] NewDescription / NewAnswer\n" +
+                "        [S][] NewDescription / NewAnswer | Mod4 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(4, "NewDescription", "NewAnswer");
         testCliOutputCorrectness(expectedOutput);

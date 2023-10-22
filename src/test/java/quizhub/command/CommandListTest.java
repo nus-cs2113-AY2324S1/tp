@@ -27,8 +27,8 @@ public class CommandListTest {
     }
 
     /**
-     * Compares system standard output with expected output
-     * Assertion error is thrown if the two are not the same
+     * Compares system standard output with expected output.
+     * Assertion error is thrown if the two are not the same.
      * */
     private void testCliOutputCorrectness(String expectedOutput){
         String actualOutput = outputStreamCaptor.toString().trim();
@@ -36,7 +36,7 @@ public class CommandListTest {
     }
 
     /**
-     * Test display of empty question list
+     * Test display of empty question list.
      * */
     @Test
     void testListEmptyList(){
@@ -46,15 +46,15 @@ public class CommandListTest {
     }
     /**
      * Test display of populated question list
-     * with one unmarked SHORTANSWER question
+     * with one unmarked SHORTANSWER question.
      * */
     @Test
     void testListOneUnmarkedShort(){
-        String questionToAdd = "short Question / Answer";
+        String questionToAdd = "short Question / Answer / Mod1 / EASY";
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         questionList.addToQuestionList(questionToAdd, qnType, showMessage);
-        String expectedOutput = "1: [S][] Question / Answer";
+        String expectedOutput = "1: [S][] Question / Answer | Mod1 | EASY";
         questionList.printQuestionList();
         String actualOutput = outputStreamCaptor.toString().trim();
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -62,16 +62,16 @@ public class CommandListTest {
 
     /**
      * Test display of populated question list
-     * with one marked SHORTANSWER question
+     * with one marked SHORTANSWER question.
      * */
     @Test
     void testListOneMarkedShort(){
-        String questionToAdd = "short Question / Answer";
+        String questionToAdd = "short Question / Answer / Mod1 / HARD";
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         questionList.addToQuestionList(questionToAdd, qnType, showMessage);
         questionList.markQuestionAsDone(1, showMessage);
-        String expectedOutput = "1: [S][X] Question / Answer";
+        String expectedOutput = "1: [S][X] Question / Answer | Mod1 | HARD";
         questionList.printQuestionList();
         String actualOutput = outputStreamCaptor.toString().trim();
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -79,12 +79,12 @@ public class CommandListTest {
 
     /**
      * Test display of populated question list
-     * with a mix of marked and unmarked SHORTANSWER questions
+     * with a mix of marked and unmarked SHORTANSWER questions.
      * */
     @Test
     void testListMixedShorts(){
-        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1", "short Question2 / Answer2 / Mod2",
-            "short Question3 / Answer3 / Mod3", "short Question4 / Answer4 / Mod4" };
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / HARD ", "short Question2 / Answer2 / Mod2 / HARD",
+            "short Question3 / Answer3 / Mod3 / NORMAL", "short Question4 / Answer4 / Mod4 / EASY" };
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
@@ -93,10 +93,10 @@ public class CommandListTest {
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);
         String expectedOutput =
-                "1: [S][X] Question1 / Answer1\n" +
-                "    2: [S][] Question2 / Answer2\n" +
-                "    3: [S][X] Question3 / Answer3\n" +
-                "    4: [S][] Question4 / Answer4" ;
+                "1: [S][X] Question1 / Answer1 | Mod1 | HARD\n" +
+                "    2: [S][] Question2 / Answer2 | Mod2 | HARD\n" +
+                "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL\n" +
+                "    4: [S][] Question4 / Answer4 | Mod4 | EASY" ;
         questionList.printQuestionList();
         String actualOutput = outputStreamCaptor.toString().trim();
         Assertions.assertEquals(expectedOutput, actualOutput);
