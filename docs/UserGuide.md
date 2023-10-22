@@ -31,6 +31,7 @@ it's your personal guide to achieving your health and fitness goals.
 * [Adding a workout : `addworkout`](#adding-a-workout-addworkout)
 * [Viewing list of workout : `viewWorkout`](#viewing-list-of-all-workouts-viewworkouts)
 * [Delete a Workout : `deletework`](#delete-a-workout-deleteworkout)
+* [Save to File: `save`](#save-to-file-save)
 
 
 ### View Help Guide: `help`
@@ -211,6 +212,21 @@ Expected output:
 I've deleted workout 1
 ```
 
+### Save to File: `save`
+Allows user to save profile data, meals and workouts to a text file
+
+Format: `save`
+
+Example of usage:
+```
+save
+```
+
+Expected output:
+```
+Your data has been saved!
+```
+
 ## FAQ
 
 **Q**: How do I edit my profile? 
@@ -230,4 +246,5 @@ I've deleted workout 1
 * Add Work `addworkout`
 * View all workouts `viewworkouts`
 * Delete Work `deleteworkout`
+* Save to file `save`
 
