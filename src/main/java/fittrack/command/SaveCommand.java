@@ -14,7 +14,6 @@ public class SaveCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        // TODO: get profile details and make them to lines of strings.
         try {
             storage.saveProfile(userProfile);
             storage.saveMeals(mealList);
