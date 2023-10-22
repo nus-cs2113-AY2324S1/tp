@@ -18,6 +18,7 @@ public class AddCashflowCommand extends AbstractCommand {
     protected CashflowCategory category;
     protected String type;
     protected int recur = 0;
+    protected CashflowList cashflowList = CashflowList.getInstance();
 
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
@@ -88,13 +89,12 @@ public class AddCashflowCommand extends AbstractCommand {
 
         switch (category) {
         case INCOME:
-            CashflowList.INSTANCE.addIncome(amount, type, recur);
+            cashflowList.addIncome(amount, type, recur);
             break;
         case EXPENSE:
-            CashflowList list = CashflowList.INSTANCE;
-            list.addExpense(amount, type, recur);
+            cashflowList.addExpense(amount, type, recur);
             if (Budget.hasBudget()) {
-                deductFromBudget(list.list.get(list.list.size() - 1));
+                deductFromBudget(cashflowList.list.get(cashflowList.list.size() - 1));
             }
             break;
         default:

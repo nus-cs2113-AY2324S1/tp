@@ -7,12 +7,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CashflowList {
-    public static Logger logger = Logger.getLogger("Financial Planner Logger");
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
-    public static final CashflowList INSTANCE = new CashflowList();
+    private static CashflowList cashflowList = null;
     public final ArrayList<Cashflow> list = new ArrayList<>();
 
     private CashflowList() {
+    }
+
+    public static CashflowList getInstance() {
+        if (cashflowList == null) {
+            cashflowList = new CashflowList();
+        }
+        return cashflowList;
     }
 
     public void addIncome(double value, String type, int recur) {

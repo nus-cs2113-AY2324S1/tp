@@ -12,6 +12,7 @@ public class DeleteCashflowCommand extends AbstractCommand {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;
     protected int index;
+    protected CashflowList cashflowList = CashflowList.getInstance();
 
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
@@ -39,11 +40,7 @@ public class DeleteCashflowCommand extends AbstractCommand {
             throw new IllegalArgumentException("Index must be within the list");
         }
         if (stringCategory != null) {
-            try {
-                category = CashflowCategory.valueOf(stringCategory.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Entry must be either income or expense");
-            }
+            handleInvalidCategory(stringCategory);
         }
     }
 
@@ -81,7 +78,7 @@ public class DeleteCashflowCommand extends AbstractCommand {
     private void handleDeleteCashflowWithoutCategory() {
         try {
             logger.log(Level.INFO, "Deleting cashflow without category");
-            CashflowList.INSTANCE.delete(index);
+            cashflowList.delete(index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
             throw new IllegalArgumentException("Index must be within the list");
@@ -91,7 +88,7 @@ public class DeleteCashflowCommand extends AbstractCommand {
     private void handleDeleteCashflowWithCategory() {
         try {
             logger.log(Level.INFO, "Deleting cashflow with category");
-            CashflowList.INSTANCE.deleteCashflow(category, index);
+            cashflowList.deleteCashflow(category, index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
             throw new IllegalArgumentException("Index must be within the list");
