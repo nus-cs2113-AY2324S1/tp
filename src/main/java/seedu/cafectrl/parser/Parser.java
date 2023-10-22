@@ -1,5 +1,6 @@
 package seedu.cafectrl.parser;
 
+import seedu.cafectrl.Order;
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.IncorrectCommand;
@@ -8,6 +9,7 @@ import seedu.cafectrl.command.EditPriceCommand;
 import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.AddOrderCommand;
 
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
@@ -40,6 +42,9 @@ public class Parser {
             + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
             + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
+            + "qty/([A-Za-z0-9\\s]+)";
+    public static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
@@ -81,6 +86,9 @@ public class Parser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case AddOrderCommand.COMMAND_WORD:
+            return prepareOrder(menu, arguments);
 
         default:
             return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE);
@@ -250,6 +258,108 @@ public class Parser {
 
         return new DeleteDishCommand(dishIndex);
     }
+
+    private static Command prepareOrder(Menu menu, String arguments) {
+        final Pattern addOrderArgumentPatter = Pattern.compile(ADD_ORDER_ARGUMENT_STRING);
+        Matcher matcher = addOrderArgumentPatter.matcher(arguments);
+
+        // Checks whether the overall pattern of add order arguments is correct
+        if (!matcher.matches()) {
+            return new IncorrectCommand("Error: Incorrect format for the add order command.\n"
+                    + AddOrderCommand.MESSAGE_USAGE);
+        }
+
+        try {
+            // To retrieve specific arguments from arguments
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
+            //System.out.println("Dish Name: " + dishName);
+            int dishQty = Integer.parseInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM));
+            //System.out.println("Dish QTY: " + dishQty);
+
+            Dish orderedDish = getDishInMenu(dishName, menu);
+            if (orderedDish == null) {
+                return new IncorrectCommand(Messages.DISH_NOT_FOUND);
+            }
+            //System.out.println("Ordered Dish: " + orderedDish);
+
+            ArrayList<Ingredient> usedIngredientList = getIngredientList(orderedDish, dishQty);
+            //System.out.println("IngredientList: " + usedIngredientList);
+            float totalOrderCost = getDishPrice(orderedDish, dishQty);
+            //System.out.println("Total Order Cost: $" + totalOrderCost + "0");
+            Order order = new Order(dishName, dishQty, usedIngredientList, totalOrderCost);
+            System.out.println(order);
+
+            return new AddOrderCommand(order);
+        } catch (Exception e) {
+            return new IncorrectCommand("MESSAGE_INVALID_ADD_ORDER_COMMAND_FORMAT"
+                    + AddOrderCommand.MESSAGE_USAGE + e.getMessage());
+        }
+    }
+
+    private static Dish getDishInMenu(String dishName, Menu menu) {
+        String formattedDishName = dishName.toLowerCase().trim();
+        for (int i = 0; i < menu.getSize(); i++) {
+            String menuDishName = menu.getDish(i).getName();
+            String formattedMenuDishName = menuDishName.toLowerCase().trim();
+            if (formattedMenuDishName.equals(formattedDishName)){
+                return menu.getDish(i);
+            }
+        }
+        return null;
+    }
+
+    private static ArrayList<Ingredient> getIngredientList(Dish orderedDish, int dishQty) {
+        ArrayList<Ingredient> dishIngredient = new ArrayList<>();
+        for (Ingredient ingredient : orderedDish.getIngredients()) {
+            String ingredientName = ingredient.getName();
+            int ingredientQty = Integer.parseInt(ingredient.getQuantity()) * dishQty;
+            dishIngredient.add(new Ingredient(ingredientName, String.valueOf(ingredientQty)));
+        }
+        return dishIngredient;
+    }
+
+    private static float getDishPrice(Dish orderedDish, int dishQty) {
+        float dishCost = orderedDish.getPrice();
+        float totalOrderCost = dishCost * dishQty;
+        return totalOrderCost;
+    }
+
+    /*private static ArrayList<Ingredient> checkIngredientStock(Dish orderedDish, int dishQty) {
+        ArrayList<Ingredient> ingredientList = orderedDish.getIngredients();
+        ArrayList<Ingredient> usedIngredientList = new ArrayList<>();
+        for (int i = 0; i < ingredientList.size(); i++) {
+            getIngredientInStore(ingredientList.get(i), dishQty, orderedDish, usedIngredientList);
+        }
+        return usedIngredientList;
+    }
+
+    private static void getIngredientInStore(Ingredient dishIngredient, int dishQty, Dish orderedDish, ArrayList<Ingredient> usedIngredientList) {
+        String ingredientName = dishIngredient.getName();
+        String formattedIngredientName = ingredientName.toLowerCase().trim();
+        int ingredientUsagePerDish = Integer.parseInt(dishIngredient.getQuantity());
+        int totalIngredientUsage = dishQty * ingredientUsagePerDish;
+
+        for (int i = 0; i < pantry.getSize(); i++) {
+            String storedIngredientName = pantry.getIngredient(i).getName();
+            String formattedStoredIngredientName = menuDishName.toLowerCase().trim();
+            if (!formattedStoredIngredientName.equals(formattedIngredientName) || !isIngredientEnough(totalIngredientUsage, i)){
+                System.out.println("Error not enough stuff");
+                return;
+            }
+            usedIngredientList.add(new Ingredient(ingredientName, String.valueOf(totalIngredientUsage)));
+        }
+
+    }
+
+    private static boolean isIngredientEnough(int totalIngredientUsage, int storedIndex) {
+        int storedQuantity = Integer.parseInt(storeroom.getIngredient(storedIndex).getQuantity());
+        if (storedQuantity >= totalIngredientUsage) {
+            return true;
+        } else {
+            return false;
+        }
+    }*/
+
 
     /**
      * Parses the given arguments string to identify task index number.
