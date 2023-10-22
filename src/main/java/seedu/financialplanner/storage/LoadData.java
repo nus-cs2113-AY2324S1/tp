@@ -1,5 +1,7 @@
 package seedu.financialplanner.storage;
 
+import seedu.financialplanner.enumerations.ExpenseType;
+import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
@@ -71,7 +73,8 @@ public abstract class LoadData {
         return line.equalsIgnoreCase("y");
     }
 
-    private static Cashflow getEntry(String type, String[] split) throws FinancialPlannerException {
+    private static Cashflow getEntry(String type, String[] split)
+            throws FinancialPlannerException, IllegalArgumentException {
         double value;
         int recur;
         Cashflow entry;
@@ -80,12 +83,22 @@ public abstract class LoadData {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            entry = new Income(value, split[2].trim(), recur);
+            try {
+                IncomeType incomeType = IncomeType.valueOf(split[2].trim().toUpperCase());
+                entry = new Income(value, incomeType, recur);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException();
+            }
             break;
         case "E":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            entry = new Expense(value, split[2].trim(), recur);
+            try {
+                ExpenseType expenseType = ExpenseType.valueOf(split[2].trim().toUpperCase());
+                entry = new Expense(value, expenseType, recur);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException();
+            }
             break;
         default:
             throw new FinancialPlannerException("Error loading file");

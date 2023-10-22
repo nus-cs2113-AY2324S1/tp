@@ -26,7 +26,7 @@ public class BudgetTest {
     @Test
     @Order(2)
     public void testNewExpense() {
-        AddCashflowCommand testExpense = new AddCashflowCommand(Parser.parseRawCommand("add expense /a 50 /t food"));
+        AddCashflowCommand testExpense = new AddCashflowCommand(Parser.parseRawCommand("add expense /a 50 /t dining"));
         testExpense.execute();
         assertEquals(450, Budget.getCurrentBudget());
     }

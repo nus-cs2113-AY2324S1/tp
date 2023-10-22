@@ -20,14 +20,15 @@ public class WatchListCommand extends AbstractCommand {
     }
     @Override
     public void execute() {
+        Ui ui = Ui.getInstance();
         JSONArray stocks = WatchList.INSTANCE.fetchFMPStockPrices();
         assert !(stocks == null);
-        Ui.INSTANCE.printWatchListHeader();
+        ui.printWatchListHeader();
 
         logger.log(Level.INFO, "Printing watchlist");
         for (Object o : stocks) {
             JSONObject stock = (JSONObject) o;
-            Ui.INSTANCE.printStockInfo(stock);
+            ui.printStockInfo(stock);
         }
     }
 }

@@ -27,6 +27,6 @@ public class AddReminderCommand extends AbstractCommand{
     @Override
     public void execute() {
         ReminderList.INSTANCE.list.add(new Reminder(type, date));
-        Ui.INSTANCE.showMessage("Reminder added!");
+        Ui.getInstance().showMessage("Reminder added!");
     }
 }

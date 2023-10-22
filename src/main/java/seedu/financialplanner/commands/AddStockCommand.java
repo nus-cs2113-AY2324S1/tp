@@ -30,7 +30,7 @@ public class AddStockCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        Ui ui = Ui.INSTANCE;
+        Ui ui = Ui.getInstance();
         WatchList watchList = WatchList.INSTANCE;
         String stockName;
 
