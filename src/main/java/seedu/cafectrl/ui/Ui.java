@@ -110,7 +110,6 @@ public class Ui {
      * @param menuItem menuItem that has been modified
      */
     public void showEditPriceMessage(String menuItem) {
-        System.out.println(Messages.PRICE_MODIFIED_MESSAGE);
-        this.showToUser(menuItem);
+        this.showToUser(Messages.PRICE_MODIFIED_MESSAGE, menuItem);
     }
 }

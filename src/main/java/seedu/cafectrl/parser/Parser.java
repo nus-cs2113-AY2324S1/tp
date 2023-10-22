@@ -69,10 +69,10 @@ public class Parser {
             return prepareAdd(arguments);
 
         case DeleteDishCommand.COMMAND_WORD:
-            return prepareDelete(arguments);
+            return prepareDelete(menu, arguments);
 
         case ListIngredientCommand.COMMAND_WORD:
-            return prepareListIngredient(arguments);
+            return prepareListIngredient(menu, arguments);
 
         case ListMenuCommand.COMMAND_WORD:
             return prepareListMenu();
@@ -99,6 +99,7 @@ public class Parser {
 
     /**
      * Parse argument in the context of edit price command
+     * @param menu menu of the current session
      * @param arguments string that matches group arguments
      * @return new EditDishCommand
      */
@@ -107,13 +108,15 @@ public class Parser {
         Matcher matcher = editDishArgumentsPattern.matcher(arguments);
 
         // Checks whether the overall pattern of edit price arguments is correct
-        if (!matcher.matches()) {
+        if (!matcher.find()) {
             return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE);
         }
 
         try {
-            int dishIndex = Integer.parseInt(matcher.group(1));
-            float newPrice = Float.parseFloat(matcher.group(2));
+            int dishIndexGroup = 1;
+            int newPriceGroup = 2;
+            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup));
+            float newPrice = Float.parseFloat(matcher.group(newPriceGroup));
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
@@ -141,12 +144,17 @@ public class Parser {
             float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_NUM));
             String ingredientsListString = matcher.group(INGREDIENT_LIST_MATCHER_GROUP_NUM);
 
+            IncorrectCommand incorrectCommand1 = checkNegativePrice(price);
+            if (incorrectCommand1 != null) {
+                return incorrectCommand1;
+            }
+
             // Capture the list of ingredients
             ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-            IncorrectCommand incorrectCommand = ingredientParsing(ingredientsListString, ingredients);
-            if (incorrectCommand != null) {
-                return incorrectCommand;
+            IncorrectCommand incorrectCommand2 = ingredientParsing(ingredientsListString, ingredients);
+            if (incorrectCommand2 != null) {
+                return incorrectCommand2;
             }
 
             Dish dish = new Dish(dishName, ingredients, price);
@@ -156,6 +164,14 @@ public class Parser {
             return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
                     + AddDishCommand.MESSAGE_USAGE);
         }
+    }
+
+    private static IncorrectCommand checkNegativePrice(float price) {
+        if (price < 0) {
+            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
+                    + AddDishCommand.MESSAGE_USAGE);
+        }
+        return null;
     }
 
     private static IncorrectCommand ingredientParsing(String ingredientsListString, ArrayList<Ingredient> ingredients) {
@@ -189,35 +205,51 @@ public class Parser {
 
     /**
     * Parses arguments in the context of the ListIngredient command.
-    * @param userInput arguments string to parse as index number
+    * @param menu menu of the current session
+    * @param arguments string that matches group arguments
     * @return the prepared command
     */
-    private static Command prepareListIngredient(String userInput) {
-        try {
-            final int listIndex = parseArgsAsDisplayedIndex(userInput, ListIngredientCommand.COMMAND_WORD);
-            return new ListIngredientCommand(listIndex);
-        } catch (ParseException e) {
-            return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + ListIngredientCommand.MESSAGE_USAGE);
-        } catch (NumberFormatException nfe) {
-            return new IncorrectCommand("MESSAGE_INVALID_TASK_DISPLAYED_INDEX");
+    private static Command prepareListIngredient(Menu menu, String arguments) {
+        final Pattern prepareListPattern = Pattern.compile(LIST_INGREDIENTS_ARGUMENT_STRING);
+        Matcher matcher = prepareListPattern.matcher(arguments.trim());
+
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS);
         }
+
+        int dishIndex = Integer.parseInt(matcher.group(1));
+
+        if (!menu.isValidDishIndex(dishIndex)) {
+            return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
+        }
+
+        return new ListIngredientCommand(dishIndex);
     }
 
     /**
      * Parses arguments in the context of the Delete command.
      *
-     * @param userInput Input from the user
-     * @return Command to be executed
+     * @param menu menu of the current session
+     * @param arguments string that matches group arguments
+     * @return DeleteDishCommand if command is valid, IncorrectCommand otherwise
      */
-    private static Command prepareDelete(String userInput) {
-        try {
-            final int listIndex = parseArgsAsDisplayedIndex(userInput, DeleteDishCommand.COMMAND_WORD);
-            return new DeleteDishCommand(listIndex);
-        } catch (ParseException e) {
-            return new IncorrectCommand("MESSAGE_INVALID_COMMAND_FORMAT" + DeleteDishCommand.MESSAGE_USAGE);
-        } catch (NumberFormatException nfe) {
-            return new IncorrectCommand("MESSAGE_INVALID_TASK_DISPLAYED_INDEX");
+    private static Command prepareDelete(Menu menu, String arguments) {
+        Pattern deleteDishArgumentsPattern = Pattern.compile(DELETE_ARGUMENT_STRING);
+        Matcher matcher = deleteDishArgumentsPattern.matcher(arguments.trim());
+
+        // Checks whether the overall pattern of delete price arguments is correct
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_DELETE);
         }
+
+        int listIndexArgGroup = 1;
+        int dishIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
+
+        if (!menu.isValidDishIndex(dishIndex)) {
+            return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
+        }
+
+        return new DeleteDishCommand(dishIndex);
     }
 
     /**
