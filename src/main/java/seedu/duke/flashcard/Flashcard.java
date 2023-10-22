@@ -44,4 +44,8 @@ public class Flashcard {
                 + "tags: " + tags.toString() + System.lineSeparator()
                 + "next review due on: " + lastReviewOn + System.lineSeparator();
     }
+
+    public void addReview(FlashcardReview flashcardReview) {
+        reviews.add(flashcardReview);
+    }
 }
