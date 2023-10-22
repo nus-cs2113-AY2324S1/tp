@@ -2,6 +2,7 @@ package quizhub.storage;
 import quizhub.question.Question;
 import quizhub.question.ShortAnsQn;
 import quizhub.questionlist.QuestionList;
+import quizhub.parser.Parser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -80,8 +81,12 @@ public class Storage {
                 String questionDescription = questionSubStrings[2].strip();
                 String questionModule = questionSubStrings[3].strip();
                 String questionDifficulty = questionSubStrings[4].strip();
+                Question.QnDifficulty difficulty = Parser.extractQuestionDifficulty(questionDifficulty);
+                if (difficulty == Question.QnDifficulty.DEFAULT) {
+                    difficulty = Question.QnDifficulty.NORMAL;
+                }
                 addQuestionFromFile(questions, currentQuestion, questionIndex, questionType, questionDescription,
-                        questionDoneStatus, questionDifficulty, questionModule);
+                        questionDoneStatus, String.valueOf(difficulty), questionModule);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // if parsed unsuccessfully, maintain question order
                 questionIndex -= 1;
