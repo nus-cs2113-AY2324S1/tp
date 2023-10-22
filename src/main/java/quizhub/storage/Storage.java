@@ -63,6 +63,32 @@ public class Storage {
         }
     }
     /**
+     * Parse raw questions read from the question file and store them in the questionList
+     * Used at start of program to load all questions from the file
+     *
+     * @param rawQuestions the arrayList of question strings to be parsed
+     * @param questions the questionList object for string parsed questions
+     */
+    private void parseQuestionsFromStrings(ArrayList<String> rawQuestions, QuestionList questions) {
+        int questionIndex = 1;
+        for (int i = 1; i < rawQuestions.size(); i++) {
+            try {
+                String currentQuestion = rawQuestions.get(i);
+                String[] questionSubStrings = currentQuestion.split("\\|");
+                String questionType = questionSubStrings[0].strip();
+                String questionDoneStatus = questionSubStrings[1].strip();
+                String questionDescription = questionSubStrings[2].strip();
+                String questionModule = questionSubStrings[3].strip();
+                String questionDifficulty = questionSubStrings[4].strip();
+                addQuestionFromFile(questions, currentQuestion, questionIndex, questionType, questionDescription,
+                        questionDoneStatus, questionDifficulty, questionModule);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                // if parsed unsuccessfully, maintain question order
+                questionIndex -= 1;
+            }
+        }
+    }
+    /**
      * Build a new question list from data stored in hard disk.
      * Used at program start to build the current question list.
      *
@@ -79,22 +105,16 @@ public class Storage {
         int questionIndex = 0;
         try {
             Scanner fileScanner = new Scanner(dataFile);
-            if (!fileScanner.hasNext()) {
+            // Pipe all lines into string arrayList for processing
+            ArrayList<String> rawQuestions = new ArrayList<String>();
+            while (fileScanner.hasNext()) {
+                String rawQuestion = fileScanner.nextLine();
+                rawQuestions.add(rawQuestion);
+            }
+            if (rawQuestions.size() <= 1) {
                 return;
             }
-            fileScanner.nextLine();
-            while (fileScanner.hasNext()) {
-                questionIndex++;
-                String currentQuestion = fileScanner.nextLine();
-                String[] questionSubStrings = currentQuestion.split("\\|");
-                String questionType = questionSubStrings[0].strip();
-                String questionDoneStatus = questionSubStrings[1].strip();
-                String questionDescription = questionSubStrings[2].strip();
-                String questionModule = questionSubStrings[3].strip();
-                String questionDifficulty = questionSubStrings[4].strip();
-                addQuestionFromFile( questions, currentQuestion, questionIndex, questionType, questionDescription,
-                    questionDoneStatus, questionDifficulty, questionModule);
-            }
+            parseQuestionsFromStrings(rawQuestions, questions);
         }
         catch(NullPointerException | IOException  invalidFilePath){
             System.out.println("    " + invalidFilePath.getMessage());
@@ -108,11 +128,25 @@ public class Storage {
      */
     public void loadData(QuestionList questions) {
         buildCurrentListFromFile(questions);
-        if (questions.getQuestionListSize() > 0) {
-            System.out.println("    You currently have the following questions uWu");
-            questions.printQuestionList();
-        } else {
+        if (questions.getQuestionListSize() == 0) {
             System.out.println("    You currently have no saved questions uWu");
+            return;
+        }
+        System.out.println("    You currently have the following questions uWu");
+        questions.printQuestionList();
+    }
+    private void storeQuestionToFile(Question question) throws IOException {
+        String isDoneString = "undone";
+        if (question.questionIsDone()) {
+            isDoneString = "done";
+        }
+        switch (question.getQuestionType()) {
+        case SHORTANSWER:
+            writeToFile(dataFile.getPath(), "S | " + isDoneString + " | " + question.getQuestionDescription()
+                    + System.lineSeparator(), true);
+            break;
+        default:
+            break;
         }
     }
     /**
@@ -128,22 +162,8 @@ public class Storage {
             writeToFile(dataFile.getPath(), "Latest Questions" + System.lineSeparator(), false);
             ArrayList<Question> allQuestions = questions.getAllQns();
             for (Question question : allQuestions) {
-                switch (question.getQuestionType()) {
-                case SHORTANSWER:
-                    if (question.questionIsDone()) {
-                        writeToFile(dataFile.getPath(), "S | done | " + question.getQuestionDescription()
-                                + System.lineSeparator(), true);
-                    } else {
-                        writeToFile(dataFile.getPath(), "S | undone | " + question.getQuestionDescription()
-                                + System.lineSeparator(), true);
-                    }
-                    break;
-
-                default:
-                    break;
-                }
+                storeQuestionToFile(question);
             }
-
         }
         catch(NullPointerException | IOException invalidFilePath){
             System.out.println("    " + invalidFilePath.getMessage());
