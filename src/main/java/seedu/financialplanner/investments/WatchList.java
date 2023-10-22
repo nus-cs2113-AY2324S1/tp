@@ -1,6 +1,8 @@
 package seedu.financialplanner.investments;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
@@ -41,10 +43,13 @@ public class WatchList {
         }
     }
 
-    public JSONArray fetchFMPStockPrices() {
+    public void fetchFMPStockPrices() throws FinancialPlannerException {
+        if (stocks.isEmpty()) {
+            throw new FinancialPlannerException("Empty Watchlist. Nothing to display...");
+        }
+
         HttpClient client = HttpClient.newHttpClient();
         StringBuilder queryStocks = new StringBuilder();
-
         assert !stocks.isEmpty();
         for (Stock stock : stocks) {
             queryStocks.append(stock.toString());
@@ -72,7 +77,14 @@ public class WatchList {
             logger.log(Level.SEVERE, "Could not parse to JSON");
             throw new RuntimeException(e);
         }
-        return (JSONArray) obj;
+        JSONArray ja = (JSONArray) obj;
+        int i = 0;
+        for (Object jo : ja) {
+            JSONObject stock = (JSONObject) jo;
+            String price = StringUtils.rightPad(stock.get("price").toString(), 10);
+            stocks.get(i).setPrice(price);
+            i += 1;
+        }
     }
 
     public String addStock(String stockCode) throws FinancialPlannerException {
@@ -103,4 +115,9 @@ public class WatchList {
     public Stock get(int index) {
         return stocks.get(index);
     }
+
+    public ArrayList<Stock> getStocks() {
+        return stocks;
+    }
+
 }

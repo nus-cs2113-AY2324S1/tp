@@ -2,6 +2,8 @@ package seedu.financialplanner.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
+import seedu.financialplanner.investments.Stock;
+import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 
@@ -51,11 +53,13 @@ public class Ui {
         System.out.println();
     }
 
-    public void printStockInfo(JSONObject stock) {
-        String symbol = StringUtils.rightPad((String) stock.get("symbol"), 10);
-        String price = StringUtils.rightPad(stock.get("price").toString(), 10);
-        String name = StringUtils.rightPad((String) stock.get("name"), 10);
-        System.out.println(symbol + price + name);
+    public void printStocksInfo(WatchList watchList) {
+        for (Stock stock: watchList.getStocks()) {
+            String symbol = StringUtils.rightPad(stock.getSymbol(), 10);
+            String price = StringUtils.rightPad(stock.getPrice(), 10);
+            String name = StringUtils.rightPad((String) stock.getStockName(), 10);
+            System.out.println(symbol + price + name);
+        }
     }
 
     public void printAddStock(String stockName) {
