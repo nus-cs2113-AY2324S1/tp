@@ -31,6 +31,12 @@ public class Order {
         this.totalOrderCost = totalOrderCost;
     }
 
+    public String toString() {
+        return "Order: " + dishName + " Quantity: "+ dishQty
+                + "\nIngredientList: " + usedIngredientList
+                + "\nTotal Order Cost: $" + totalOrderCost;
+    }
+
     public void setComplete() {
         this.isComplete = true;
     }
