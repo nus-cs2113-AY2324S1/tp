@@ -58,9 +58,10 @@ These are the workouts you have done:
 1.[W] running (400.0kcal, 2023-10-22)
 
 
-The workout list is empty.
-I've deleted the following workout:
-[W] running (400.0kcal, 2023-10-22)
+Workout list is empty.
+`deleteworkout 1` is an invalid command.
+`deleteworkout` deletes your daily workout data from the list.
+Type `deleteworkout <INDEX>` to delete the workout by an index.
 
 `help` shows help message of the command.
 Existing commands:
