@@ -99,7 +99,7 @@ public class Ui {
      * @param dishName
      * @param dishPrice
      */
-    public void showToUserFormat(String dishName, String dishPrice) {
+    public void formatListMenu(String dishName, String dishPrice) {
         String leftAlignFormat = "| %-24s | %-12s |%n";
         System.out.format(leftAlignFormat, dishName, dishPrice);
     }
