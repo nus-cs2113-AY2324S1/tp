@@ -62,7 +62,12 @@ public class Ui {
         System.out.println("You have successfully added:");
         System.out.println(stockName);
         System.out.println("Use Watchlist to view it!");
+    }
 
+    public void printDeleteStock(String stockName) {
+        System.out.println("You have successfully deleted: ");
+        System.out.println(stockName);
+        System.out.println("Use watchlist command to view updated Watchlist");
     }
     public void printAddedCashflow(Cashflow entry) {
         System.out.print("You have added an ");

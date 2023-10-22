@@ -84,6 +84,18 @@ public class WatchList {
         return newStock.getStockName();
     }
 
+    public String deleteStock(String stockCode) throws FinancialPlannerException {
+        if (stocks.isEmpty()) {
+            throw new FinancialPlannerException("No stock in watchlist!");
+        }
+        Stock toBeRemoved = stocks
+                .stream()
+                .filter(stock -> stockCode.equals(stock.getSymbol()))
+                .findFirst()
+                .orElseThrow(() -> new FinancialPlannerException("Does not Exist in Watchlist"));
+        stocks.remove(toBeRemoved);
+        return toBeRemoved.getStockName();
+    }
     public int size() {
         return stocks.size();
     }
