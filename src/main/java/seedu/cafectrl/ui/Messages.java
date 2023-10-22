@@ -17,8 +17,8 @@ public class Messages {
                                                                     + "Make sure dish index is "
                                                                     + "of type int and price is of type float!";
 
-    public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Your command has left me scratching my virtual head. "
-                                                        + "Let's try that again, shall we?";
+    public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
+                                                        + "Type 'help' to view the accepted list of commands";
 
     // Ui messages
     public static final String PRICE_MODIFIED_MESSAGE = "Price modified for the following dish: ";
