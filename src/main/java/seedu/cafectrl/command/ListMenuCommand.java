@@ -1,8 +1,8 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
-import seedu.cafectrl.ui.UserOutput;
 
 import java.text.DecimalFormat;
 
@@ -30,18 +30,18 @@ public class ListMenuCommand extends Command {
     };
 
     public void printEmptyMenu(Ui ui) {
-        ui.showToUser(UserOutput.MENU_EMPTY.message);
+        ui.showToUser(Messages.MENU_EMPTY_MESSAGE);
     }
 
     public void printFullMenu(Menu menu, Ui ui) {
-        ui.showToUser(UserOutput.MENU_TOP.message, UserOutput.LIST_MESSAGE_MENU.message,
-                UserOutput.MENU_CORNER.message, UserOutput.MENU_TITLE.message, UserOutput.MENU_CORNER.message);
+        ui.showToUser(Messages.MENU_TOP, Messages.LIST_MENU_MESSAGE,
+                Messages.MENU_CORNER, Messages.MENU_TITLE, Messages.MENU_CORNER);
         for(int i =0; i < menu.getSize(); i++) {
             String indexNum = String.valueOf(i+1);
             String dishName = menu.getDish(i).getName();
             String dishPrice = dollarValue.format(menu.getDish(i).getPrice());
             ui.showToUserFormat(indexNum + ". " + dishName," $" + dishPrice);
         }
-        ui.showToUser(UserOutput.MENU_TOP.message);
+        ui.showToUser(Messages.MENU_TOP);
     }
 }
