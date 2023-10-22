@@ -19,8 +19,8 @@ public class FindCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        CashflowList cashflowList = CashflowList.INSTANCE;
-        Ui ui = Ui.INSTANCE;
+        CashflowList cashflowList = CashflowList.getInstance();
+        Ui ui = Ui.getInstance();
         WatchList watchList = WatchList.INSTANCE;
         ArrayList<String> foundedFinancialList = new ArrayList<>();
         ArrayList<String> foundedWatchList = new ArrayList<>();

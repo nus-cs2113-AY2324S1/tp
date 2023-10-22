@@ -8,6 +8,6 @@ public class InvalidCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        Ui.INSTANCE.showMessage("Unknown command. Please try again.");
+        Ui.getInstance().showMessage("Unknown command. Please try again.");
     }
 }
