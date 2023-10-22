@@ -25,19 +25,29 @@ class ListMenuCommandTest {
                 String parseString = convertArrayToString(message, ",");
                 commandOutput.add(parseString);
             }
+            @Override
+            public void showToUserFormat(String dishName, String dishPrice) {
+                String leftAlignFormat = "| %-24s | %-12s |";
+                String parseString = String.format(leftAlignFormat, dishName, dishPrice);
+                commandOutput.add(parseString);
+            }
         };
 
         Command listMenuCommand = new ListMenuCommand();
         listMenuCommand.execute(menu, ui);
 
-        String actualOutput = String.join(", ", commandOutput);
+        String actualOutput = String.join(",", commandOutput);
 
-        String expectedOutput = "Ah, behold, the grand menu of delights!"
-                + " 1. Chicken Rice $2.50"
-                + " 2. Chicken Curry $4.30";
-
-        assertEquals(expectedOutput.trim().replaceAll(", ", " "),
-                actualOutput.trim().replaceAll(", ", " "));
+        String expectedOutput = "+-----------------------------------------+"
+                + "| Ah, behold, the grand menu of delights! |"
+                + "+--------------------------+--------------+"
+                + "| Dish Name                |  Price       |"
+                + "+--------------------------+--------------+"
+                + "| 1. Chicken Rice          |  $2.50       |"
+                + "| 2. Chicken Curry         |  $4.30       |"
+                + "+-----------------------------------------+";
+        
+        assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
     }
 
     private static String convertArrayToString(String[] message, String delimiter) {
