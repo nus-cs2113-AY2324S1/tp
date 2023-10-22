@@ -112,4 +112,9 @@ public class Ui {
     public void showEditPriceMessage(String menuItem) {
         this.showToUser(Messages.PRICE_MODIFIED_MESSAGE, menuItem);
     }
+
+    public void showHelp() {
+        showToUser(Messages.LIST_OF_COMMANDS, Messages.ADD_DISH_GUIDE, Messages.LIST_MENU_GUIDE,
+                Messages.LIST_INGREDIENTS_GUIDE, Messages.DELETE_GUIDE, Messages.EDIT_PRICE_GUIDE);
+    }
 }
