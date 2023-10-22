@@ -2,45 +2,45 @@ Directory doesn't exist. Creating directory...
 File not found. Creating new file...
 Welcome to your Financial Planner. Type something to get started.
 You have added an Income
-   Type: work
+   Type: Salary
    Amount: 5000.00
    Recurring every: 30 days
 to the Financial Planner.
 Balance: 5000.00
 You have added an Income
-   Type: allowance
+   Type: Allowance
    Amount: 123.12
 to the Financial Planner.
 Balance: 5123.12
 You have added an Expense
-   Type: daily necessities
+   Type: Entertainment
    Amount: 100.00
    Recurring every: 30 days
 to the Financial Planner.
 Balance: 5023.12
 You have added an Expense
-   Type: books
+   Type: Shopping
    Amount: 123.21
 to the Financial Planner.
 Balance: 4899.91
 You have removed an Income
-   Type: allowance
+   Type: Allowance
    Amount: 123.12
 from the Financial Planner.
 Balance: 4776.79
 You have removed an Income
-   Type: work
+   Type: Salary
    Amount: 5000.00
    Recurring every: 30 days
 from the Financial Planner.
 Balance: -223.21
 You have removed an Expense
-   Type: books
+   Type: Shopping
    Amount: 123.21
 from the Financial Planner.
 Balance: -100.00
 You have removed an Expense
-   Type: daily necessities
+   Type: Entertainment
    Amount: 100.00
    Recurring every: 30 days
 from the Financial Planner.
@@ -52,7 +52,7 @@ You have successfully added:
 Gamestop Corporation - Class A
 Use Watchlist to view it!
 You have added an Income
-   Type: work
+   Type: Salary
    Amount: 5000.00
    Recurring every: 30 days
 to the Financial Planner.
@@ -64,7 +64,7 @@ Old current budget: 3000.00
 New initial budget: 1000.00
 New current budget: 1000.00
 You have added an Expense
-   Type: airpods
+   Type: Shopping
    Amount: 200.00
 to the Financial Planner.
 Balance: 4800.00
