@@ -5,7 +5,7 @@ import fittrack.data.Workout;
 import java.util.ArrayList;
 
 public class WorkoutList {
-
+    private int workoutListSize = 0;
     private ArrayList<Workout> workoutList;
 
     public WorkoutList() {
@@ -22,10 +22,16 @@ public class WorkoutList {
 
     public void addToList(Workout newWorkout) {
         workoutList.add(newWorkout);
+        workoutListSize++;
     }
 
     public void deleteWorkout(int workoutIndex) {
         workoutList.remove((workoutIndex - 1));
+        workoutListSize--;
+    }
+
+    public int getWorkoutListSize() {
+        return workoutListSize;
     }
 
     @Override
