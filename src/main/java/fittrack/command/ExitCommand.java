@@ -19,13 +19,6 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        try {
-            storage.saveProfile(userProfile);
-            storage.saveMeals(mealList);
-            storage.saveWorkouts(workoutList);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
         return new CommandResult(MESSAGE_SAVEFILE + "\n" + MESSAGE_EXIT);
     }
 
