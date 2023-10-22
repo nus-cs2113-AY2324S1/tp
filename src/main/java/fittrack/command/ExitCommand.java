@@ -2,7 +2,7 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-import java.io.IOException;
+//import java.io.IOException;
 
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
