@@ -2,7 +2,7 @@ package seedu.cafectrl.data.dish;
 
 public class Ingredient {
     private final String name;
-    private final String quantity;
+    private String quantity;
 
     public Ingredient(String name) {
         this.name = name;
@@ -20,6 +20,10 @@ public class Ingredient {
 
     public String getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(String newQuantity) {
+        this.quantity = newQuantity;
     }
 
     @Override
