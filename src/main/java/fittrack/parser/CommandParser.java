@@ -1,5 +1,6 @@
 package fittrack.parser;
 
+import fittrack.MealList;
 import fittrack.data.Meal;
 import fittrack.UserProfile;
 import fittrack.data.Workout;
@@ -48,6 +49,10 @@ public class CommandParser {
     );
     private static final Pattern MEAL_PATTERN = Pattern.compile(
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
+    );
+
+    private static final Pattern DELETE_MEAL_PATTERN = Pattern.compile(
+            "(?<index>\\S+)?"
     );
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
@@ -171,6 +176,28 @@ public class CommandParser {
             throw new NumberFormatException();
         } catch (DateTimeParseException e) {
             throw new PatternMatchFailException();
+        }
+    }
+
+    public int parseDeleteMeal(String meal) throws PatternMatchFailException,
+            NumberFormatException, IndexOutOfBoundsException, NegativeNumberException {
+        final Matcher matcher = DELETE_MEAL_PATTERN.matcher(meal);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        final String index = matcher.group("index");
+
+        try {
+            int indexToDelete = Integer.parseInt(index);
+            if (indexToDelete <= 0) {
+                throw new NegativeNumberException();
+            }
+            return indexToDelete;
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
+        } catch (java.lang.IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
         }
     }
 

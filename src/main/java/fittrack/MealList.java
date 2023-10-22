@@ -1,6 +1,7 @@
 package fittrack;
 
 import fittrack.data.Meal;
+import fittrack.parser.IndexOutOfBoundsException;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,10 @@ public class MealList {
         mealList.add(newMeal);
     }
 
-    public void deleteMeal(int mealIndex) {
+    public void deleteMeal(int mealIndex) throws IndexOutOfBoundsException {
+        if(mealIndex - 1 > mealList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
         mealList.remove((mealIndex - 1));
     }
     @Override
