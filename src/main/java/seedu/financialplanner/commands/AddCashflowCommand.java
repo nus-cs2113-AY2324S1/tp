@@ -106,7 +106,8 @@ public class AddCashflowCommand extends AbstractCommand {
         if (category.equals(CashflowCategory.EXPENSE)) {
             assert expenseType.equals(ExpenseType.DINING) || expenseType.equals(ExpenseType.ENTERTAINMENT)
                     || expenseType.equals(ExpenseType.SHOPPING) || expenseType.equals(ExpenseType.TRAVEL)
-                    || expenseType.equals(ExpenseType.INSURANCE) || expenseType.equals(ExpenseType.OTHERS);
+                    || expenseType.equals(ExpenseType.INSURANCE) || expenseType.equals(ExpenseType.OTHERS)
+                    || expenseType.equals(ExpenseType.NECESSITIES);
         } else if (category.equals(CashflowCategory.INCOME)) {
             assert incomeType.equals(IncomeType.SALARY) || incomeType.equals(IncomeType.INVESTMENTS)
                     || incomeType.equals(IncomeType.ALLOWANCE) || incomeType.equals(IncomeType.OTHERS);
