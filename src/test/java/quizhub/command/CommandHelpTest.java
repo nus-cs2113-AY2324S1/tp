@@ -48,20 +48,25 @@ public class CommandHelpTest {
 
     
     /**
-     * Test if help command disaplays the correct output
+     * Test if help command displays the correct output
      * */
     @Test
     public void testHelpCommand() {
         String expectedOutput = "Here are the list of commands you can use:\r\n" +
-            "    1. help - shows the list of commands you can use\r\n" +
-            "    2. short [question]/[answer] - adds a short answer question and its answer to the list\r\n" +
-            "    3. list - shows the list of questions and answers\r\n" +
-            "    4. delete [question number] - deletes the question and answer at the specified number\r\n" +
-            "    5. find /[description] - displays all questions that contains the the specified description\r\n" +
-            "    6. edit [question number] /description - edits the question with the specified number\r\n" +
-            "    7. edit [question number] /answer - edits the answer to the question with the specified number\r\n" +
-            "    8. start - starts the quiz\r\n" +
-            "    9. bye - exits the program";
+                "    1. help - shows the list of commands you can use\r\n" +
+                "    2. short [question]/[answer] - adds a short answer question and its answer to the list,\r\n" +
+                "     3. list - shows the list of questions and answers,\r\n" +
+                "     4. delete [question number] - deletes the question and answer at the specified number,\r\n" +
+                "     5. find /[description] - displays all questions that contains the the specified description,\r\n" +
+                "     6. edit [question number] /description [description] - edits the description of the question " +
+                "with the specified number,\r\n" +
+                "     7. edit [question number] /answer [answer] - edits the answer to the question with the " +
+                "specified number,\r\n" +
+                "     8. start - starts the quiz,\r\n" +
+                "     9. shuffle - shuffle quiz questions to a random order,\r\n" +
+                "     10. markdiff [question number] [question difficulty] - sets the difficulty of question " +
+                "with the specified number,\r\n" +
+                "     11. bye - exits the program";
         CommandHelp help = new CommandHelp();
         help.executeCommand(mockUi, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);

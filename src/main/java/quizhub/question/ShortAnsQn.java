@@ -5,13 +5,26 @@ package quizhub.question;
 public class ShortAnsQn extends Question {
     private String answer;
     /**
-     * Creates a new question of type SHORTANSWER.
+     * Creates a new question of type SHORTANSWER with specified module.
      *
-     * @param description question description.
-     * @param answer question answer.
+     * @param description Question description.
+     * @param answer Question answer.
+     * @param module Question module.
      */
     public ShortAnsQn(String description, String answer, String module){
         super(description, QnType.SHORTANSWER, module);
+        this.answer = answer;
+    }
+    /**
+     * Creates a new question of type SHORTANSWER with specified module.
+     *
+     * @param description Question description.
+     * @param answer Question answer.
+     * @param module Question module.
+     * @param qnDifficulty Question difficulty.
+     */
+    public ShortAnsQn(String description, String answer, String module, QnDifficulty qnDifficulty){
+        super(description, QnType.SHORTANSWER, module, qnDifficulty);
         this.answer = answer;
     }
     /**
@@ -33,6 +46,7 @@ public class ShortAnsQn extends Question {
      */
     @Override
     public String getQuestionDescription() {
-        return super.getQuestionDescription().strip() + " / " + this.answer.strip();
+        return super.getQuestionDescription().strip() + " / " + this.answer.strip() + " | " + super.getModule()
+                + " | " + super.getDifficulty().toString();
     }
 }

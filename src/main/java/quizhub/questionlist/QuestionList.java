@@ -1,5 +1,6 @@
 package quizhub.questionlist;
 
+import quizhub.parser.Parser;
 import quizhub.question.Question;
 import quizhub.question.ShortAnsQn;
 import quizhub.exception.QuizHubExceptions;
@@ -35,14 +36,22 @@ public class QuestionList {
         case SHORTANSWER:
             try {
                 String[] inputTokens = input.split("short")[1].strip().split("/");
-                assert inputTokens.length == 3;
-                String description = inputTokens[0];
-                String answer = inputTokens[1];
-                String module = inputTokens[2];
-                if (description.isEmpty() || answer.isEmpty() || module.isEmpty()) {
+                assert inputTokens.length == 4;
+                String description = inputTokens[0].strip();
+                String answer = inputTokens[1].strip();
+                String module = inputTokens[2].strip();
+                String difficulty = inputTokens[3].strip();
+                if (description.isEmpty() || answer.isEmpty() || module.isEmpty() || difficulty.isEmpty()) {
                     throw new QuizHubExceptions("Incomplete Command");
                 }
-                allQns.add(new ShortAnsQn(description, answer, module));
+                Question.QnDifficulty qnDifficulty = Parser.extractQuestionDifficulty(difficulty);
+                if(qnDifficulty == Question.QnDifficulty.DEFAULT){
+                    System.out.println("    Question created using default normal difficulty"
+                            + System.lineSeparator());
+                    allQns.add(new ShortAnsQn(description, answer, module));
+                } else {
+                    allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
+                }
                 if (showMessage) {
                     System.out.println("    I have added the following question OwO:");
                     System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
@@ -51,7 +60,7 @@ public class QuestionList {
                 break;
             } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
                 System.out.println("    Ono! You did not input a proper question!");
-                System.out.println("    Please format your input as short [question]/[answer]/[module]!");
+                System.out.println("    Please format your input as short [question]/[answer]/[module]/[difficulty]!");
                 break;
             }
         default:
@@ -109,11 +118,15 @@ public class QuestionList {
      */
     public void markQuestionAsDone(int index, boolean showMessage){
         try{
-            allQns.get(index-1).markAsDone();
-            if(showMessage) {
-                Question question = allQns.get(index - 1);
-                System.out.println("    Roger that! I have marked the following question as done >w< !");
-                printQuestion(question, false);
+            Question question = allQns.get(index-1);
+            if(!question.questionIsDone()) {
+                question.markAsDone();
+                if (showMessage) {
+                    System.out.println("    Roger that! I have marked the following question as done >w< !");
+                    printQuestion(question, false);
+                }
+            } else {
+                System.out.println("    Question originally done! No changes made!");
             }
         } catch (IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");
@@ -124,10 +137,56 @@ public class QuestionList {
      */
     public void markQuestionAsNotDone(int index){
         try{
-            allQns.get(index-1).markAsNotDone();
             Question question = allQns.get(index-1);
-            System.out.println("    Roger that! I have unmarked the following question as done >w< !");
-            printQuestion(question, false);
+            if(question.questionIsDone()){
+                question.markAsNotDone();
+                System.out.println("    Roger that! I have unmarked the following question as done >w< !");
+                printQuestion(question, false);
+            } else {
+                System.out.println("    Question originally not done! No changes made!");
+            }
+        } catch (IndexOutOfBoundsException invalidIndex){
+            System.out.println("    Ono! Please enter valid question number *sobs*");
+        }
+    }
+    /**
+     * Mark the difficulty of a question in the current question list.
+     *
+     * @param index The list index of the question to be marked.
+     * @param qnDifficulty Difficulty to be assigned to the question.
+     * @param showMessage If true, program will print response message on CLI
+     *                    after question difficulty is marked.
+     */
+    public void markQuestionDifficulty(int index, Question.QnDifficulty qnDifficulty,  boolean showMessage){
+        String difficulty = null;
+        switch (qnDifficulty){
+        case EASY:
+            difficulty = "easy";
+            break;
+        case HARD:
+            difficulty = "hard";
+            break;
+        case NORMAL:
+            difficulty = "normal";
+            break;
+        default:
+            break;
+        }
+        try{
+            Question question = allQns.get(index-1);
+            if(question.getDifficulty() != qnDifficulty){
+                allQns.get(index-1).markDifficulty(qnDifficulty);
+                if(showMessage) {
+                    System.out.println("    Roger that! I have marked the following question as " +
+                            difficulty +
+                            " >w< !");
+                    printQuestion(question, false);
+                }
+            } else {
+                System.out.println("    Question is already set as " +
+                        difficulty +
+                        " ! No changes made!");
+            }
         } catch (IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");
         }
@@ -163,7 +222,6 @@ public class QuestionList {
                 return "Question Not Found";
             }
         } catch(InputMismatchException |NullPointerException | IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ono! Please enter valid question number *sobs*");
             return "Question Not Found";
         }
     }
@@ -260,39 +318,28 @@ public class QuestionList {
     /**
      * Search for a question in the current question list.
      * Depending on user command, this method will search by
-     * either description matches or time matches.
+     * either description matches or module matches.
      *
      * @param input Full user command input.
      */
     public void searchList(String input){
-        String[] searchDetails;
-        String[] searchInfo;
+        String searchCriteria;
+        String searchKeyword;
         try {
-            searchDetails = input.split("find")[1].strip().split("/");
-            searchInfo = searchDetails[1].strip().split(" ");
+            searchCriteria = input.split("/")[1].strip().split(" ")[0].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate if you are searching by description, time or module :<");
+            System.out.println("    Ono! You did not indicate if you are searching by description or module :<");
             System.out.println("    Please format your input as find /description [description] " +
                                     "or find /module [module]!");
             return;
         }
         try{
-            String searchCriteria = searchInfo[0].strip();
-            String searchKeyword = searchInfo[1].strip();
-            switch (searchCriteria){
-            case "description":
-                searchListByDescription(searchKeyword);
-                break;
-            case "module":
-                searchListByModule(searchKeyword);
-                break;
-            default:
-                break;
-            }
+            searchKeyword = input.split("/" + searchCriteria)[1].strip();
+            searchListByDescription(searchKeyword);
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate the keywords you are searching by :<");
             System.out.println("    Please format your input as find /description [description] " +
-                                    "or find /time [time]!");
+                                    "or find /module [module]!");
         }
 
     }
