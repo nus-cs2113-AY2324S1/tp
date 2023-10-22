@@ -9,6 +9,7 @@ import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
+import seedu.cafectrl.command.BuyIngredientCommand;
 
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
@@ -44,7 +45,6 @@ public class Parser {
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
-
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -83,6 +83,9 @@ public class Parser {
         case ViewTotalStockCommand.COMMAND_WORD:
             return prepareViewTotalStock();
 
+        case BuyIngredientCommand.COMMAND_WORD:
+            return prepareBuyIngredient(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -90,7 +93,6 @@ public class Parser {
             return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE);
         }
     }
-
 
     // All prepareCommand Classes
     private static Command prepareListMenu() {
@@ -258,6 +260,24 @@ public class Parser {
 
     private static Command prepareViewTotalStock() {
         return new ViewTotalStockCommand();
+    }
+
+    private static Command prepareBuyIngredient(String arguments) {
+        Pattern buyIngredientArgumentsPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
+        Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
+
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT);
+        }
+
+        String ingredientName = matcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
+        String ingredientQty = matcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+
+        try {
+            return new BuyIngredientCommand(ingredientName, ingredientQty);
+        } catch (Exception e) {
+            return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT);
+        }
     }
 
     /**
