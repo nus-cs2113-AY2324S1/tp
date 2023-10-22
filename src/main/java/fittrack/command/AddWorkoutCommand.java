@@ -29,4 +29,8 @@ public class AddWorkoutCommand extends Command {
     protected String getHelp() {
         return HELP;
     }
+
+    public Workout getWorkout(){
+        return newWorkout;
+    }
 }
