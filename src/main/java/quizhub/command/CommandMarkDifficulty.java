@@ -20,7 +20,7 @@ public class CommandMarkDifficulty extends Command{
      */
     public CommandMarkDifficulty(String userInput){
         super(CommandType.MARKDIFFICULTY);
-        String[] commandDetails = userInput.split(" ");;
+        String[] commandDetails = userInput.split(" ");
         try {
             qnIndex = Integer.parseInt(commandDetails[1].strip());
             if(qnIndex < 0){

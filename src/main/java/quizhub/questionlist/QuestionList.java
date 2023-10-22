@@ -314,6 +314,28 @@ public class QuestionList {
             }
         }
     }
+    /**
+     * Build a new list of questions based on specified module.
+     *
+     * @param module Module used to search for matches.
+     */
+    public ArrayList<Question> categoriseListByModule(String module){
+        ArrayList<Question> matchedQuestions = new ArrayList<>();
+        try {
+            if (allQns.isEmpty()) {
+                throw new QuizHubExceptions("    Question list is empty! Time to add some OWO");
+            } else {
+                for (Question question : allQns) {
+                    if (question.getModule().toLowerCase().matches(module.toLowerCase())) {
+                        matchedQuestions.add(question);
+                    }
+                }
+            }
+        } catch (QuizHubExceptions emptyList){
+            System.out.println(emptyList.getMessage());
+        }
+        return matchedQuestions;
+    }
 
     /**
      * Search for a question in the current question list.
@@ -366,9 +388,9 @@ public class QuestionList {
      * @param index The index of the question in the list.
      * @return The answer to the question, or null if the index is invalid or the question is of a different type.
      */
-    public String getAnswerByIndex(int index) {
+    public String getAnswerByIndex(int index, ArrayList<Question> questions) {
         try {
-            Question question = allQns.get(index - 1);
+            Question question = questions.get(index - 1);
             if (question instanceof ShortAnsQn) {
                 return ((ShortAnsQn) question).getQuestionAnswer();
             } else {
@@ -400,21 +422,21 @@ public class QuestionList {
      *
      * @param ui The user interface to interact with the user.
      */
-    public void startQuiz(Ui ui) {
-        if (allQns.isEmpty()) {
+    public void startQuiz(Ui ui, ArrayList<Question> questions) {
+        if (questions.isEmpty()) {
             ui.displayMessage("    No questions found! Add questions before starting the quiz.");
             return;
         }
 
         ui.displayMessage("    Starting the quiz...");
-        int totalQuestions = allQns.size();
+        int totalQuestions = questions.size();
         int correctAnswers = 0;
 
         for (int i = 0; i < totalQuestions; i++) {
-            Question question = allQns.get(i);
+            Question question = questions.get(i);
 
             ui.displayQuestion(question, i + 1, totalQuestions);
-            String correctAnswer = getAnswerByIndex(i + 1).strip(); // Get the correct answer by index
+            String correctAnswer = getAnswerByIndex(i + 1,  questions).strip(); // Get correct answer by index
             String userAnswer = ui.getUserInput().strip();
 
             if (userAnswer.equalsIgnoreCase(correctAnswer)) {

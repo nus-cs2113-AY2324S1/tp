@@ -35,7 +35,7 @@ public class StartTest {
     @Test
     public void testStartQuizWithNoQuestions() {
         // Ensure the quiz doesn't start if there are no questions
-        questionList.startQuiz(mockUi);
+        questionList.startQuiz(mockUi, questionList.getAllQns());
         assertEquals("    No questions found! Add questions before starting the quiz.",
                 mockUi.getLastDisplayedMessage());
     }
@@ -67,7 +67,7 @@ public class StartTest {
         mockUi.setUserInput("6");
 
         // Start the quiz
-        questionList.startQuiz(mockUi);
+        questionList.startQuiz(mockUi, questionList.getAllQns());
 
         // Verify that the expected messages are displayed
         assertEquals("    Starting the quiz...", mockUi.getLastDisplayedMessage());
