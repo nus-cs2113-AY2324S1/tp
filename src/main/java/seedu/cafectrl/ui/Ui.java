@@ -83,6 +83,13 @@ public class Ui {
         showToUser("Okay! " + selectedDish.getName() + " is deleted! :)");
     }
 
+    public void showBuyIngredientMessage(Ingredient ingredient) {
+        String header = "Added to stock: \n";
+        String ingredientString = "Ingredient: " + ingredient.getName()
+                                    + "    Qty: " + ingredient.getQuantity();
+        showToUser(header + ingredientString);
+    }
+
 
     /**
      * Shows messages(s) to the user
