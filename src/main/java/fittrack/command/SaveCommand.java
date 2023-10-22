@@ -21,7 +21,7 @@ public class SaveCommand extends Command {
         } catch (IOException e) {
             System.out.println(e);
         }
-        return new CommandResult("Your Profile settings and details has been saved!");
+        return new CommandResult("Your data has been saved!");
     }
 
     @Override
