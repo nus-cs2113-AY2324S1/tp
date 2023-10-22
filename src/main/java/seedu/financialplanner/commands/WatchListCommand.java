@@ -1,7 +1,5 @@
 package seedu.financialplanner.commands;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.utils.Ui;

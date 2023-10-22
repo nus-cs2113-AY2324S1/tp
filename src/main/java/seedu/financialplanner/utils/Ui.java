@@ -1,7 +1,6 @@
 package seedu.financialplanner.utils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.simple.JSONObject;
 import seedu.financialplanner.investments.Stock;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.list.Budget;
