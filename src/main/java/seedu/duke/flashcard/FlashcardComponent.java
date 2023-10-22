@@ -12,7 +12,6 @@ public class FlashcardComponent {
     private FlashcardCommandParser parser;
     private FlashcardList flashcardList;
     private FlashcardUi ui;
-
     private FlashcardStorage storage;
 
 

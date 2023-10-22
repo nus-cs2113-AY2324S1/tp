@@ -28,14 +28,14 @@ public class StartReviewCommand extends FlashcardCommand {
     public void execute(Scanner scanner, FlashcardList flashcardList) {
         String choice = getUserChoiceReviewMode(scanner);
 
-        while (!choices.contains(choice)) {
+        while (!choices.contains(choice.toLowerCase())) {
             System.out.println("    Invalid choice! Your choice must be a, b " +
                     "or c! Please try again.");
 
             choice = getUserChoiceReviewMode(scanner);
         }
 
-        ReviewMode reviewMode = createReviewMode(choice, flashcardList);
+        ReviewMode reviewMode = createReviewMode(choice.toLowerCase(), flashcardList);
 
         if (reviewMode instanceof RandomReviewMode) {
             reviewMode.startReviewSession(scanner);
