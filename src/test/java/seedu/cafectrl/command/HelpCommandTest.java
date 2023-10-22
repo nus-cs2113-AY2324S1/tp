@@ -2,14 +2,12 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.ui.Messages;
-import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HelpCommandTest {
 
