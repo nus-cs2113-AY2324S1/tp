@@ -119,7 +119,7 @@ public class Ui {
                 Messages.DELETE_GUIDE, Messages.EDIT_PRICE_GUIDE);
     }
 
-    private void showToUserWithSpaceBetweenLines(String... message) {
+    public void showToUserWithSpaceBetweenLines(String... message) {
         for (String m: message) {
             System.out.println(m + "\n");
         }
