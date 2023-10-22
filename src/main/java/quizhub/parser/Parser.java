@@ -58,7 +58,7 @@ public class Parser {
             case "short":
                 return new CommandShortAnswer(userInput);
             case "start":
-                return new CommandStart();
+                return new CommandStart(userInput);
             case "edit":
                 return new CommandEdit(userInput);
             case "delete":
