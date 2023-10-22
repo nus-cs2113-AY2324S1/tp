@@ -8,6 +8,7 @@ import seedu.cafectrl.command.EditPriceCommand;
 import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
 
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
@@ -80,6 +81,9 @@ public class Parser {
         case EditPriceCommand.COMMAND_WORD:
             return prepareEditPriceCommand(menu, arguments);
 
+        case ViewTotalStockCommand.COMMAND_WORD:
+            return prepareViewTotalStock();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -87,6 +91,7 @@ public class Parser {
             return new IncorrectCommand(UserOutput.UNKNOWN_COMMAND_MESSAGE.message);
         }
     }
+
 
     // All prepareCommand Classes
     private static Command prepareListMenu() {
@@ -250,6 +255,10 @@ public class Parser {
         }
 
         return new DeleteDishCommand(dishIndex);
+    }
+
+    private static Command prepareViewTotalStock() {
+        return new ViewTotalStockCommand();
     }
 
     /**
