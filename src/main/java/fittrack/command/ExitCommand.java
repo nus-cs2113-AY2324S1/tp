@@ -2,7 +2,7 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-//import java.io.IOException;
+import java.io.IOException;
 
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
@@ -19,6 +19,13 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        try {
+            storage.saveProfile(userProfile);
+            storage.saveMeals(mealList);
+            storage.saveWorkouts(workoutList);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         return new CommandResult(MESSAGE_SAVEFILE + "\n" + MESSAGE_EXIT);
     }
 
