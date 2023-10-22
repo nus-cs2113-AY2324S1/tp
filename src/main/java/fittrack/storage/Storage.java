@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//TODO pass the profile data to be stored in fittrack.txt
+
 public class Storage {
 
     private static final String FILE_DIRECTORY = "data";
@@ -64,8 +64,7 @@ public class Storage {
      *
      * @throws IOException error
      */
-    public void saveProfile(UserProfile userProfile)
-            throws IOException {
+    public void saveProfile(UserProfile userProfile) throws IOException {
         //TODO write data to file
         FileWriter file = new FileWriter(profileFilePath);
         file.write(userProfile.toString() + "\n");

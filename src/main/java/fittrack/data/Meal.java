@@ -14,7 +14,7 @@ public class Meal {
     }
 
     public String formatToFile() {
-        return String.format("[M] | %s (%s, %s)", name, calories, date);
+        return String.format("M | %s | %s | %s", name, calories, date);
     }
 
     @Override
