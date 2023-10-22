@@ -1,5 +1,6 @@
 package cashleh.budget;
 
+import cashleh.exceptions.CashLehBudgetException;
 import cashleh.exceptions.CashLehException;
 import cashleh.transaction.Expense;
 import cashleh.transaction.Income;
@@ -19,15 +20,15 @@ class BudgetHandlerTest {
     BudgetHandler budgetHandler = new BudgetHandler(fs, budget);
 
     @Test
-    void getBudget() {
+    void getBudget_budgetIsValid() throws CashLehBudgetException {
         assertEquals(budgetHandler.getBudget(), budget);
-        budget = new Budget(0);
+        budget = new Budget(2);
         budgetHandler.setBudget(budget);
         assertEquals(budgetHandler.getBudget(), budget);
     }
 
     @Test
-    void printBasicWarning_budgetIsNotOnTrack_throwsException() {
+    void printBasicWarning_budgetIsNotOnTrack_throwsException() throws CashLehBudgetException {
         incomeStatement.addIncome(new Income("salary", 27));
         budgetHandler.setBudgetPercentage();
         assertThrows(CashLehException.class,
@@ -39,7 +40,7 @@ class BudgetHandlerTest {
     }
 
     @Test
-    void printSeriousWarning_budgetHasBeenMaxedOut_throwsException() {
+    void printSeriousWarning_budgetHasBeenMaxedOut_throwsException() throws CashLehBudgetException {
         expenseStatement.addExpense(new Expense("rent", 10));
         budgetHandler.setBudgetPercentage();
         assertThrows(CashLehException.class,

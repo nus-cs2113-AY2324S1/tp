@@ -18,7 +18,7 @@ public class BudgetHandler {
         this.financialStatement = financialStatement;
         this.budget = budget;
     }
-    public void setBudget(Budget budget) {
+    public void setBudget(Budget budget) throws CashLehBudgetException {
         this.budget = budget;
         setBudgetPercentage();
     }
@@ -29,7 +29,10 @@ public class BudgetHandler {
     /**
      * Initialises and updates the budget percentage for correct view.
      */
-    public void setBudgetPercentage() {
+    public void setBudgetPercentage() throws CashLehBudgetException {
+        if (budget.getBudget() == 0) {
+            throw new CashLehBudgetException("Budget cannot be zero!");
+        }
         double budgetAmount = budget.getBudget();
         assert budgetAmount > 0;
         double cashOnHand = this.financialStatement.getCashOnHand();
