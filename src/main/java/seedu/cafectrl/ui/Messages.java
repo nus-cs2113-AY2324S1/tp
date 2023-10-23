@@ -2,12 +2,9 @@ package seedu.cafectrl.ui;
 
 public class Messages {
 
-    /**
-     * Greeting messages
-     */
+    /** Greeting messages */
     public static final String LINE_STRING = "-----------------------------------------------------";
     public static final String WELCOME_MESSAGE = "Hello! Welcome to CafeCTRL!";
-
     public static final String GOODBYE_MESSAGE = "Goodbye <3 Have a great day ahead!";
 
     /** Messages for edit price command */
@@ -23,12 +20,12 @@ public class Messages {
 
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
-    public static final String VIEW_STOCK = "You have the following ingredients in pantry:";
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
 
-    /**
-     * Messages for help command
-     */
+    /** Messages for view stock command */
+    public static final String VIEW_STOCK = "You have the following ingredients in pantry:";
+
+    /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";
     public static final String INSTRUCTION_ON_COMMAND_FORMAT = "(- Words in UPPER_CASE are "
             + "the parameters to be supplied by the user.\n"
