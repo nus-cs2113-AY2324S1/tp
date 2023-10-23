@@ -32,7 +32,8 @@ public class DeleteIncomeCommandTest {
     @Test
     public void testExecute_validInput_incomeDeleted() throws KaChinnnngException {
         // Arrange
-        Income income = new Income("Salary", LocalDate.of(2023, 10, 12), 5000.00);
+        Income income = new Income("Salary",
+                LocalDate.of(2023, 10, 12), 5000.00);
         incomes.add(income);
         String fullCommand = "delete income 1";
 
@@ -68,7 +69,8 @@ public class DeleteIncomeCommandTest {
     }
 
     /**
-     * Test the execution of the DeleteIncomeCommand with a non-existent income index. It should throw a KaChinnnngException.
+     * Test the execution of the DeleteIncomeCommand with a non-existent income index.
+     * It should throw a KaChinnnngException.
      */
     @Test
     public void testExecute_nonExistentIncomeIndex_exceptionThrown() {
