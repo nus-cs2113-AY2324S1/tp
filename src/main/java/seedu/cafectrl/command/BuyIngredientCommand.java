@@ -12,18 +12,16 @@ public class BuyIngredientCommand extends Command {
     private String name;
     private int qty;
     private String unit;
-    private Pantry pantry;
 
 
     public BuyIngredientCommand(String name, int qty, String unit) {
         this.name = name;
         this.qty = qty;
         this.unit = unit;
-        pantry = new Pantry();
     }
 
     @Override
-    public void execute(Menu menu, Ui ui) {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         Ingredient ingredient = pantry.addIngredientToStock(name, qty, unit);
         ui.showBuyIngredientMessage(ingredient);
     }

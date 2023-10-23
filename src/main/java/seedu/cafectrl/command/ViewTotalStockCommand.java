@@ -20,7 +20,7 @@ public class ViewTotalStockCommand extends Command {
     }
 
     @Override
-    public void execute(Menu menu, Ui ui) {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
 
         ui.showToUser(Messages.VIEW_STOCK);
         pantryStock = pantry.getPantryStock();
