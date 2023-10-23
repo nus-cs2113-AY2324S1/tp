@@ -32,7 +32,7 @@ public class Storage {
 
 
     /**
-     * Constructs storage. Creates new file fittrack.txt
+     * Constructs storage. Creates new file
      * in a directory called data if none exist.
      */
     public Storage() {
@@ -116,7 +116,7 @@ public class Storage {
 
     /**
      * Loads the {@code UserProfile} data from this profile storage file, and then returns it.
-     * Returns an empty {@code AddressBook} if the file does not exist, or is not a regular file.
+     * Returns an empty {@code UserProfile} if the file does not exist, or is not a regular file.
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
