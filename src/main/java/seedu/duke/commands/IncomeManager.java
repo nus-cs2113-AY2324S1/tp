@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
+import java.io.File;
 
 /**
  * Represents the class that manages the creation of a new income.
@@ -22,7 +23,13 @@ public class IncomeManager extends Commands{
 
     static{
         try {
-            FileHandler fh = new FileHandler("IncomeManager.log", true);
+            File dir = new File("logs");
+            if (!dir.exists()) {
+                if (!dir.mkdirs()) {
+                    throw new KaChinnnngException("Failed to create directory " + dir.getAbsolutePath());
+                }
+            }
+            FileHandler fh = new FileHandler("logs/IncomeManager.log", true);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
             LOGGER.addHandler(fh);

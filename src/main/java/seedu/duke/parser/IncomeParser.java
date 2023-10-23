@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Income;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -29,7 +30,13 @@ public class IncomeParser {
 
     static {
         try {
-            FileHandler fh = new FileHandler("IncomeParser.log", true);
+            File dir = new File("logs");
+            if (!dir.exists()) {
+                if (!dir.mkdirs()) {
+                    throw new KaChinnnngException("Failed to create directory " + dir.getAbsolutePath());
+                }
+            }
+            FileHandler fh = new FileHandler("logs/IncomeParser.log", true);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
             LOGGER.addHandler(fh);
