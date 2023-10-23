@@ -11,7 +11,7 @@ public class AddToCartCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD 
             + ": Adds a new drug to the current cart. "
-            + "Parameters: NAME, QUANTITY,  " + System.lineSeparator()
+            + "Parameters: NAME, QUANTITY," + System.lineSeparator()
             + "Example: " + COMMAND_WORD
             + " /n Doliprane /q 2";
 

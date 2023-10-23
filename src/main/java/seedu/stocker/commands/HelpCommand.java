@@ -25,6 +25,12 @@ public class HelpCommand extends Command {
                 + System.lineSeparator()
                 + System.lineSeparator() + FindCommand.MESSAGE_USAGE
                 + System.lineSeparator()
+                + System.lineSeparator() + AddToCartCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + CheckOutCommand.MESSAGE_USAGE
+                + System.lineSeparator()
+                + System.lineSeparator() + ViewCartCommand.MESSAGE_USAGE
+                + System.lineSeparator()
                 + System.lineSeparator() + LoginCommand.MESSAGE_USAGE
                 + System.lineSeparator()
                 + System.lineSeparator() + RegisterCommand.MESSAGE_USAGE

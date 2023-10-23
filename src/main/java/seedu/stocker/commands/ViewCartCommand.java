@@ -9,8 +9,8 @@ public class ViewCartCommand extends Command {
 
     public static final String COMMAND_WORD = "viewcart";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "View the current cart items. "
-            + System.lineSeparator()
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": View the current cart items." + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all the content of your cart. ";

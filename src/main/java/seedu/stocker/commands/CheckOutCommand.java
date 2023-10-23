@@ -8,7 +8,7 @@ public class CheckOutCommand extends Command {
     public static final String COMMAND_WORD = "checkout";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks out current cart. "
-            + "Parameters: " + System.lineSeparator()
+            + "Parameters:" + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "The current cart has been checked out. ";
