@@ -40,7 +40,6 @@ public class UpdateBudget extends Command {
         budgetHandler.setBudget(budget);
         Ui.printMultipleText(new String[] {"The budget was updated to:", String.valueOf(budget.getBudget())});
         logger.log(Level.INFO, "budget was successfully updated");
-        Ui.printHorizontalLine();
     }
 
 }

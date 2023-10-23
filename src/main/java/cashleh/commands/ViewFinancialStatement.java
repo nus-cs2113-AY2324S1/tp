@@ -24,6 +24,5 @@ public class ViewFinancialStatement extends Command {
         assert financialStatement != null;
         financialStatement.printTransactions();
         logger.log(Level.INFO, "financial statement was successfully displayed");
-        Ui.printHorizontalLine();
     }
 }

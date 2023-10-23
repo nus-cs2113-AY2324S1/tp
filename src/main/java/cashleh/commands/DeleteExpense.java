@@ -36,7 +36,6 @@ public class DeleteExpense extends Command {
                 expenseBeingDeleted
             });
             logger.log(Level.INFO, "expense entry was successfully deleted");
-            Ui.printHorizontalLine();
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();
         }

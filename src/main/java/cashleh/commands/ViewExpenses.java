@@ -20,6 +20,5 @@ public class ViewExpenses extends Command {
         assert expenseStatement != null;
         expenseStatement.printExpenses();
         logger.log(Level.INFO, "expense statement was successfully displayed");
-        Ui.printHorizontalLine();
     }
 }

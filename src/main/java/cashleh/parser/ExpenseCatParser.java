@@ -5,7 +5,8 @@ import cashleh.transaction.ExpenseCategories.ExpenseCategory;
 
 public class ExpenseCatParser {
     
-    private static String[] expenseCatList = {
+    private static String[] expenseCatList = 
+    {
         "FOOD_DRINK",
         "SHOPPING",
         "HOUSING",

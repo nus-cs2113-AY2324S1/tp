@@ -29,6 +29,5 @@ public class ViewBudget extends Command {
         assert budgetHandler.getBudget().isActive();
         budgetHandler.printBudget();
         logger.log(Level.INFO, "budget was successfully executed.");
-        Ui.printHorizontalLine();
     }
 }

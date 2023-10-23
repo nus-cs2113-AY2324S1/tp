@@ -36,7 +36,6 @@ public class DeleteIncome extends Command {
                 incomeBeingDeleted
             });
             logger.log(Level.INFO, "income entry was successfully deleted");
-            Ui.printHorizontalLine();
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();
         }

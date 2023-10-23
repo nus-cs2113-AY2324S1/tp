@@ -20,6 +20,5 @@ public class ViewIncomes extends Command {
         assert incomeStatement != null;
         incomeStatement.printIncomes();
         logger.log(Level.INFO, "income statement was successfully displayed");
-        Ui.printHorizontalLine();
     }
 }
