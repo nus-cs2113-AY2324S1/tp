@@ -131,49 +131,42 @@ public class Parser {
         final Pattern addArgumentPatter = Pattern.compile(ADD_ARGUMENT_STRING);
         Matcher matcher = addArgumentPatter.matcher(arguments);
 
-        // Checks whether the overall pattern of add arguments is correct
-        if (!matcher.matches()) {
-            return new IncorrectCommand("Error: Incorrect format for the add command.\n"
-                    + AddDishCommand.MESSAGE_USAGE);
-        }
-
         try {
+            // Checks whether the overall pattern of add arguments is correct
+            if (!matcher.matches()) {
+                return new IncorrectCommand("Error: Incorrect format for the add command.\n"
+                        + AddDishCommand.MESSAGE_USAGE);
+            }
+
             // To retrieve specific arguments from arguments
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
             float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_NUM));
             String ingredientsListString = matcher.group(INGREDIENT_LIST_MATCHER_GROUP_NUM);
 
-            IncorrectCommand incorrectCommand1 = checkNegativePrice(price);
-            if (incorrectCommand1 != null) {
-                return incorrectCommand1;
-            }
+            checkNegativePrice(price);
 
             // Capture the list of ingredients
             ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-            IncorrectCommand incorrectCommand2 = ingredientParsing(ingredientsListString, ingredients);
-            if (incorrectCommand2 != null) {
-                return incorrectCommand2;
-            }
+            ingredientParsing(ingredientsListString, ingredients);
 
             Dish dish = new Dish(dishName, ingredients, price);
 
             return new AddDishCommand(dish);
-        } catch (Exception e) {
-            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
+        } catch (IllegalArgumentException e) {
+            return new IncorrectCommand("Error: Incorrect format for the ingredients.\n"
                     + AddDishCommand.MESSAGE_USAGE);
         }
     }
-
-    private static IncorrectCommand checkNegativePrice(float price) {
+    /** to be removed once the new regex is implemented because new regex only allows positive prices*/
+    private static void checkNegativePrice(float price) throws IllegalArgumentException {
         if (price < 0) {
-            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
-                    + AddDishCommand.MESSAGE_USAGE);
+            throw new IllegalArgumentException();
         }
-        return null;
     }
 
-    private static IncorrectCommand ingredientParsing(String ingredientsListString, ArrayList<Ingredient> ingredients) {
+    private static void ingredientParsing(String ingredientsListString, ArrayList<Ingredient> ingredients)
+            throws IllegalArgumentException {
         String[] ingredientListInputText = {ingredientsListString};
 
         //check if there is more than 1 ingredient
@@ -187,8 +180,7 @@ public class Parser {
             Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredientText);
 
             if (!ingredientMatcher.matches()) {
-                return new IncorrectCommand("Error: Incorrect format for the ingredients\n"
-                        + AddDishCommand.MESSAGE_USAGE);
+                throw new IllegalArgumentException();
             }
 
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
@@ -198,7 +190,6 @@ public class Parser {
 
             ingredients.add(ingredient);
         }
-        return null;
     }
 
 
