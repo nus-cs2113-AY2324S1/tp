@@ -54,14 +54,14 @@ public class DeleteCashflowCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
-        assert index != 0;
-
         if (category == null) {
             handleDeleteCashflowWithoutCategory();
             return;
         }
-        Ui ui = Ui.getInstance();
+
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        assert index != 0;
+
         switch (category) {
         case INCOME:
         case EXPENSE:
@@ -69,7 +69,7 @@ public class DeleteCashflowCommand extends AbstractCommand {
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");
-            ui.showMessage("Unidentified entry.");
+            Ui.getInstance().showMessage("Unidentified entry.");
             break;
         }
     }
