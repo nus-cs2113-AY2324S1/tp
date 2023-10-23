@@ -1,6 +1,7 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
@@ -21,7 +22,7 @@ public class ListMenuCommand extends Command {
      * @param ui Handles the interactions with user
      */
     @Override
-    public void execute(Menu menu, Ui ui) {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         if (menu.getSize() == 0) {
             printEmptyMenu(ui);
             return;
@@ -37,10 +38,10 @@ public class ListMenuCommand extends Command {
         ui.showToUser(Messages.MENU_TOP, Messages.LIST_MENU_MESSAGE,
                 Messages.MENU_CORNER, Messages.MENU_TITLE, Messages.MENU_CORNER);
         for(int i =0; i < menu.getSize(); i++) {
-            String indexNum = String.valueOf(i+1);
+            String indexNum = String.valueOf(i + 1);
             String dishName = menu.getDish(i).getName();
             String dishPrice = dollarValue.format(menu.getDish(i).getPrice());
-            ui.showToUserFormat(indexNum + ". " + dishName," $" + dishPrice);
+            ui.formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
         }
         ui.showToUser(Messages.MENU_TOP);
     }

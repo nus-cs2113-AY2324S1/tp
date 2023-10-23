@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Ui {
     public static final int OFFSET_LIST_INDEX = 1;
-    public static final String LINE_STRING = "-----------------------------------------------------";
     private final Scanner scanner;
 
     /**
@@ -19,7 +18,7 @@ public class Ui {
     }
 
     public void printLine() {
-        showToUser(LINE_STRING);
+        showToUser(Messages.LINE_STRING);
     }
 
     public String receiveUserInput() {
@@ -83,6 +82,17 @@ public class Ui {
         showToUser("Okay! " + selectedDish.getName() + " is deleted! :)");
     }
 
+    /**
+     * Shows ingredient to buy message to user
+     *
+     * @param ingredient Ingredient to be bought
+     */
+    public void showBuyIngredientMessage(Ingredient ingredient) {
+        String header = "Added to stock: \n";
+        String ingredientString = "Ingredient: " + ingredient.getName()
+                                    + "\tQty: " + ingredient.getQty();
+        showToUser(header + ingredientString);
+    }
 
     /**
      * Shows messages(s) to the user
@@ -99,7 +109,7 @@ public class Ui {
      * @param dishName
      * @param dishPrice
      */
-    public void showToUserFormat(String dishName, String dishPrice) {
+    public void formatListMenu(String dishName, String dishPrice) {
         String leftAlignFormat = "| %-24s | %-12s |%n";
         System.out.format(leftAlignFormat, dishName, dishPrice);
     }
@@ -111,5 +121,28 @@ public class Ui {
      */
     public void showEditPriceMessage(String menuItem) {
         this.showToUser(Messages.PRICE_MODIFIED_MESSAGE, menuItem);
+    }
+
+    public void showHelp() {
+        showToUserWithSpaceBetweenLines(Messages.LIST_OF_COMMANDS, Messages.INSTRUCTION_ON_COMMAND_FORMAT,
+                Messages.ADD_DISH_GUIDE, Messages.LIST_MENU_GUIDE, Messages.LIST_INGREDIENTS_GUIDE,
+                Messages.DELETE_GUIDE, Messages.EDIT_PRICE_GUIDE);
+    }
+
+    public void showToUserWithSpaceBetweenLines(String... message) {
+        for (String m: message) {
+            System.out.println(m + "\n");
+        }
+    }
+
+    public void showDishAvailability(int numberOfDishes){
+        showToUser("Available Dishes: " + numberOfDishes);
+        printLine();
+    }
+
+    public void showNeededRestock(String ingredientName, int currentQuantity, String unit, String neededIngredient){
+        showToUser("Please Restock: " + ingredientName
+                , "Current " + ingredientName + ": " + currentQuantity + unit
+                , "Needed " + ingredientName + ": " + neededIngredient);
     }
 }

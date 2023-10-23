@@ -1,6 +1,7 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
 
@@ -14,13 +15,14 @@ public class AddDishCommand extends Command {
             + "Parameters: DISH_NAME, PRICE, INGREDIENT1_NAME, INGREDIENT1_QTY "
             + "[,INGREDIENT1_NAME, INGREDIENT1_QTY...] \n"
             + "Example: " + COMMAND_WORD
-            + " name/chicken rice price/3.00 ingredient/rice qty/1 cup, ingredient/chicken qty/100g";
-    Dish dish;
+            + " name/chicken rice price/3.00 ingredient/rice qty/200g, ingredient/chicken qty/100g";
+
+    private final Dish dish;
     public AddDishCommand(Dish dish) {
         this.dish = dish;
     }
     @Override
-    public void execute(Menu menu, Ui ui) {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         menu.addDish(dish);
         ui.printAddDishMessage(dish);
     }
