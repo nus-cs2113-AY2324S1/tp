@@ -3,6 +3,7 @@ package seedu.financialplanner;
 import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.ExitCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.storage.Storage;
 import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
@@ -11,7 +12,8 @@ public class FinancialPlanner {
     private static final String FILE_PATH = "data/data.txt";
     private final Storage storage = Storage.getInstance();
     private final Ui ui = Ui.getInstance();
-
+    private final WatchList watchList = WatchList.getInstance();
+    
     private FinancialPlanner() {
     }
 
