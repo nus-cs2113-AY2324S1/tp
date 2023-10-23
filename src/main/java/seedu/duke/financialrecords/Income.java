@@ -1,6 +1,7 @@
 package seedu.duke.financialrecords;
 import seedu.duke.commands.KaChinnnngException;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -17,7 +18,13 @@ public class Income extends FinancialRecord {
 
     static {
         try {
-            FileHandler fh = new FileHandler("Income.log", true);
+            File dir = new File("logs");
+            if (!dir.exists()) {
+                if (!dir.mkdirs()) {
+                    throw new KaChinnnngException("Failed to create directory " + dir.getAbsolutePath());
+                }
+            }
+            FileHandler fh = new FileHandler("logs/Income.log", true);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
             LOGGER.addHandler(fh);
