@@ -2,7 +2,7 @@ package seedu.financialplanner.commands;
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.reminder.Reminder;
 import seedu.financialplanner.utils.Ui;
-public class AddReminderCommand extends AbstractCommand{
+public class AddReminderCommand extends Command {
     private final String type;
     private final String date;
 

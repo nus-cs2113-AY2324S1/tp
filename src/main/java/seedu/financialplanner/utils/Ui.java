@@ -11,15 +11,16 @@ import java.util.Scanner;
 public class Ui {
     private static Ui ui = null;
     private Scanner Scanner = new Scanner(System.in);
-
     private Ui() {
     }
+
     public static Ui getInstance() {
         if (ui == null) {
             ui = new Ui();
         }
         return ui;
     }
+
     public static void printCorruptedFileError(String message) {
         System.out.println(message);
     }
@@ -77,6 +78,7 @@ public class Ui {
         System.out.println(stockName);
         System.out.println("Use watchlist command to view updated Watchlist");
     }
+
     public void printAddedCashflow(Cashflow entry) {
         System.out.print("You have added an ");
         System.out.println(entry);
@@ -107,13 +109,25 @@ public class Ui {
     }
 
     public void printBudgetAfterDeduction() {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         if (Budget.getCurrentBudget() <= 0) {
-            message += "You have exceeded your current budget by: ";
+            message.append("You have exceeded your current budget by: ");
         } else if (Budget.getCurrentBudget() > 0) {
-            message += "Your remaining budget for the month is: ";
+            message.append("Your remaining budget for the month is: ");
         }
-        message += Budget.getCurrentBudgetString();
-        showMessage(message);
+        message.append(Budget.getCurrentBudgetString());
+        showMessage(message.toString());
+    }
+
+    public void printBudget() {
+        showMessage("You have a remaining budget of " + Budget.getCurrentBudgetString() + ".");
+    }
+
+    public void printDeleteBudget() {
+        showMessage("Budget has been deleted.");
+    }
+
+    public void printResetBudget() {
+        showMessage("Budget has been reset to " + Budget.getInitialBudgetString() + ".");
     }
 }

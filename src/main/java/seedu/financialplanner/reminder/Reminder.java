@@ -4,6 +4,7 @@ public class Reminder {
     private String type;
     private String date;
     private boolean isDone = false;
+
     public Reminder(String type, String date) {
         this.type = type;
         this.date = date;
@@ -11,8 +12,9 @@ public class Reminder {
 
     public String toString() {
         String status = isDone ? "Done" : "Not Done";
-        return "Reminder: "+this.type + " | " + this.date + " | " + status;
+        return "Reminder: " + this.type + " | " + this.date + " | " + status;
     }
+
     public void markAsDone() {
         this.isDone = true;
     }

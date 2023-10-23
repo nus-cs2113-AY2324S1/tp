@@ -16,6 +16,7 @@ public class BudgetTest {
     @Test
     @Order(1)
     public void testSetBudget() {
+        Budget.deleteBudget();
         assertFalse(Budget.hasBudget());
         Budget.setBudget(500);
         assertTrue(Budget.hasBudget());
@@ -37,5 +38,36 @@ public class BudgetTest {
         Budget.updateBudget(1000);
         assertEquals(1000, Budget.getInitialBudget());
         assertEquals(950, Budget.getCurrentBudget());
+    }
+
+    @Test
+    @Order(4)
+    public void testSetInitialBudget() {
+        Budget.setInitialBudget(1500);
+        assertEquals(1500, Budget.getInitialBudget());
+    }
+
+    @Test
+    @Order(5)
+    public void testUpdateCurrentBudget() {
+        Budget.updateCurrentBudget(50);
+        assertEquals(1000, Budget.getCurrentBudget());
+    }
+
+    @Test
+    @Order(6)
+    public void testResetBudget() {
+        Budget.resetBudget();
+        assertEquals(1500, Budget.getInitialBudget());
+        assertEquals(1500, Budget.getCurrentBudget());
+    }
+
+    @Test
+    @Order(7)
+    public void testDeleteBudget() {
+        Budget.deleteBudget();
+        assertEquals(0, Budget.getInitialBudget());
+        assertEquals(0, Budget.getCurrentBudget());
+        assertFalse(Budget.hasBudget());
     }
 }

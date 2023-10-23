@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VisCommand extends AbstractCommand {
+public class VisCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String type;
     private String chart;
-
 
     public VisCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("t")) {
@@ -33,6 +32,7 @@ public class VisCommand extends AbstractCommand {
             throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
         }
     }
+
     @Override
     public void execute() throws FinancialPlannerException {
         assert !chart.isEmpty();

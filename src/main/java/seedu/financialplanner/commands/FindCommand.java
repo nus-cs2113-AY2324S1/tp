@@ -6,7 +6,7 @@ import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
 
-public class FindCommand extends AbstractCommand {
+public class FindCommand extends Command {
     private final String description;
 
     public FindCommand(RawCommand rawCommand) {
@@ -26,7 +26,7 @@ public class FindCommand extends AbstractCommand {
         ArrayList<String> foundedWatchList = new ArrayList<>();
         for (int i = 0; i < cashflowList.list.size(); i++) {
             if (cashflowList.list.get(i).toString().contains(description)) {
-                String output = cashflowList.list.get(i).toString()+" | Index: "+(i+1);
+                String output = cashflowList.list.get(i).toString() + " | Index: " + (i + 1);
                 foundedFinancialList.add(output);
             }
         }
@@ -41,7 +41,7 @@ public class FindCommand extends AbstractCommand {
 
         for (int i = 0; i < watchList.size(); i++) {
             if (watchList.get(i).toString().contains(description)) {
-                foundedWatchList.add(watchList.get(i).toString()+"| Index: "+(i+1));
+                foundedWatchList.add(watchList.get(i).toString() + " | Index: " + (i + 1));
             }
         }
         if (!foundedWatchList.isEmpty()) {

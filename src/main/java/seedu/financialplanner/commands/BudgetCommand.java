@@ -9,32 +9,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 
-public class BudgetCommand extends AbstractCommand {
+public class BudgetCommand extends Command {
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
+    private final Ui ui = Ui.getInstance();
     private double budget;
     private String command;
 
     public BudgetCommand(RawCommand rawCommand) throws FinancialPlannerException {
-        command = String.join(" ", rawCommand.args);
-        if (!command.equals("set") && !command.equals("update")) {
-            logger.log(Level.WARNING, "Invalid arguments for budget command");
-            throw new FinancialPlannerException("Please indicate whether budget is to be set or update.");
+        command = rawCommand.args.get(0);
+        if (command.equals("delete") || command.equals("reset") || command.equals("view")) {
+            return;
         }
-
-        if (command.equals("set") && Budget.hasBudget()) {
-            logger.log(Level.WARNING, "Invalid command: Trying to set existing budget");
-            throw new FinancialPlannerException("There is an existing budget, did you mean update?");
-        }
-
-        if (command.equals("update") && !Budget.hasBudget()) {
-            logger.log(Level.WARNING, "Invalid command: Trying to update non-existent budget");
-            throw new FinancialPlannerException("There is no budget set yet, did you mean set?");
-        }
-
-        if (!rawCommand.extraArgs.containsKey("b")) {
-            logger.log(Level.WARNING, "Missing argument /b in command");
-            throw new IllegalArgumentException("Missing /b argument.");
-        }
+        validateCommandFormat(rawCommand);
 
         try {
             logger.log(Level.INFO, "Parsing budget as double");
@@ -43,16 +29,7 @@ public class BudgetCommand extends AbstractCommand {
             logger.log(Level.WARNING, "Invalid value for budget");
             throw new IllegalArgumentException("Budget must be a number.");
         }
-
-        if (budget <= 0) {
-            logger.log(Level.WARNING, "Invalid value for budget.");
-            throw new FinancialPlannerException("Budget should be greater than 0.");
-        }
-
-        if (budget > Cashflow.getBalance()) {
-            logger.log(Level.WARNING, "Invalid value for budget");
-            throw new FinancialPlannerException("Budget should be lower than total balance.");
-        }
+        validateBudget();
 
         assert budget > 0 && budget <= Cashflow.getBalance() : "Budget should be greater than 0 and less than " +
                 "or equal to total balance";
@@ -64,27 +41,108 @@ public class BudgetCommand extends AbstractCommand {
         }
     }
 
+    private void validateBudget() throws FinancialPlannerException {
+        if (budget <= 0) {
+            logger.log(Level.WARNING, "Invalid value for budget.");
+            throw new FinancialPlannerException("Budget should be greater than 0.");
+        }
+
+        if (budget > Cashflow.getBalance()) {
+            logger.log(Level.WARNING, "Invalid value for budget");
+            throw new FinancialPlannerException("Budget should be lower than total balance.");
+        }
+    }
+
+    private void validateCommandFormat(RawCommand rawCommand) throws FinancialPlannerException {
+        if (!command.equals("set") && !command.equals("update")) {
+            logger.log(Level.WARNING, "Invalid arguments for budget command");
+            throw new FinancialPlannerException("Budget command must be one of the following: set, update, " +
+                    "delete, reset, view.");
+        }
+
+        if (command.equals("set") && Budget.hasBudget()) {
+            logger.log(Level.WARNING, "Invalid command: Trying to set existing budget");
+            throw new FinancialPlannerException("There is an existing budget, did you mean update?");
+        } else if (command.equals("update") && !Budget.hasBudget()) {
+            logger.log(Level.WARNING, "Invalid command: Trying to update non-existent budget");
+            throw new FinancialPlannerException("There is no budget set yet, did you mean set?");
+        }
+
+        if (!rawCommand.extraArgs.containsKey("b")) {
+            logger.log(Level.WARNING, "Missing argument /b in command");
+            throw new IllegalArgumentException("Missing /b argument.");
+        }
+    }
+
     @Override
     public void execute() {
-        assert command.equals("set") || command.equals("update") : "Command should be set or update only";
+        assert command.equals("set") || command.equals("update") || command.equals("delete") ||
+                command.equals("reset") || command.equals("view");
 
-        Ui ui = Ui.getInstance();
         switch (command) {
         case "set":
-            logger.log(Level.INFO, "Setting budget");
-            Budget.setBudget(budget);
-            ui.showMessage("A monthly budget of " + Budget.getInitialBudgetString()
-                    + " has been set.");
+            setBudget();
             break;
         case "update":
-            logger.log(Level.INFO, "Updating budget");
-            ui.printBudgetBeforeUpdate();
-            Budget.updateBudget(budget);
-            ui.printBudgetAfterUpdate();
+            updateBudget();
+            break;
+        case "delete":
+            deleteBudget();
+            break;
+        case "reset":
+            resetBudget();
+            break;
+        case "view":
+            viewBudget();
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");
             ui.showMessage("Unknown command.");
         }
+    }
+
+    private void viewBudget() {
+        if (Budget.hasBudget()) {
+            ui.printBudget();
+        } else {
+            ui.showMessage("There is no existing budget.");
+        }
+    }
+
+    private void resetBudget() {
+        if (Budget.getInitialBudget() != Budget.getCurrentBudget()) {
+            if (Budget.getInitialBudget() > Cashflow.getBalance()) {
+                Budget.setInitialBudget(Cashflow.getBalance());
+                ui.showMessage("Since initial budget exceeds current balance, " +
+                        "budget will be reset to current balance.");
+            }
+            Budget.resetBudget();
+            ui.printResetBudget();
+        } else {
+            ui.showMessage("Budget has not been spent yet.");
+        }
+    }
+
+    private void deleteBudget() {
+        if (Budget.hasBudget()) {
+            Budget.deleteBudget();
+            ui.printDeleteBudget();
+        } else {
+            ui.showMessage("Budget has not been set yet.");
+        }
+    }
+
+    private void updateBudget() {
+        logger.log(Level.INFO, "Updating budget");
+        ui.printBudgetBeforeUpdate();
+        Budget.updateBudget(budget);
+        ui.printBudgetAfterUpdate();
+    }
+
+    private void setBudget() {
+        logger.log(Level.INFO, "Setting budget");
+        Budget.setBudget(budget);
+        ui.showMessage("A monthly budget of " + Budget.getInitialBudgetString()
+                + " has been set.");
     }
 }

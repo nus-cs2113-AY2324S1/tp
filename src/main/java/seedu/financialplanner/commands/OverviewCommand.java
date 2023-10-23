@@ -10,7 +10,7 @@ import seedu.financialplanner.utils.Ui;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class OverviewCommand extends AbstractCommand {
+public class OverviewCommand extends Command {
     public OverviewCommand(RawCommand rawCommand) {
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
