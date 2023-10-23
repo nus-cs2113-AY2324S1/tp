@@ -13,7 +13,7 @@ public class Parser {
             System.lineSeparator() +
             "    1. help - shows the list of commands you can use" +
             System.lineSeparator() +
-            "    2. short [question]/[answer] - adds a short answer question and its answer to the list," +
+            "    2. short [question]/[answer]/[category]/[difficulty] - adds a short answer question and its answer to the list," +
             System.lineSeparator() +
             "     3. list - shows the list of questions and answers," +
             System.lineSeparator() +
