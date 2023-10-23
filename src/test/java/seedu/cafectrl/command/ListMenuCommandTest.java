@@ -26,7 +26,7 @@ class ListMenuCommandTest {
                 commandOutput.add(parseString);
             }
             @Override
-            public void showToUserFormat(String dishName, String dishPrice) {
+            public void formatListMenu(String dishName, String dishPrice) {
                 String leftAlignFormat = "| %-24s | %-12s |";
                 String parseString = String.format(leftAlignFormat, dishName, dishPrice);
                 commandOutput.add(parseString);
