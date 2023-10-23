@@ -5,6 +5,7 @@ import cashleh.budget.BudgetHandler;
 import cashleh.parser.Parser;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.FinancialStatement;
+import cashleh.transaction.IncomeCategories;
 import cashleh.transaction.IncomeStatement;
 import cashleh.exceptions.CashLehException;
 import cashleh.commands.Command;
@@ -23,7 +24,7 @@ public class CashLeh {
      * Main entry-point for the application.
      */
     public void run() {
-
+        
         String logo = "    ______           __    __         __  ___\n"
                     + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\\n"
                     + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/\n"

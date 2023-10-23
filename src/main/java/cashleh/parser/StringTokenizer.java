@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class StringTokenizer {
 
-    /*
+    /**
      * Tokenizes a string based on a list of prefixes.
      * @param input String to be tokenized
      * @param prefixes List of prefixes to tokenize the string with - the order of the prefixes does not matter
@@ -30,7 +30,7 @@ public class StringTokenizer {
         for (int i = 0; i < prefixes.length; i++) {
             if (prefixes[i].contains(":optional")) {
                 prefixes[i] = prefixes[i].replace(":optional", "");
-                return;
+                continue;
             }
             if (!input.contains(prefixes[i])) {
                 throw new CashLehParsingException("Aiyoh! Your input blur like sotong... " +
@@ -81,7 +81,6 @@ public class StringTokenizer {
         // Add dummy prefixes to represent start and end
         prefixes.add(0, new PrefixWithPosition("", 0));
         prefixes.add(new PrefixWithPosition("", inputString.length()));
-
 
         HashMap<String, String> tokenizedMap = new HashMap<>();
         for (int i = 0; i < prefixes.size() - 1; i++) {

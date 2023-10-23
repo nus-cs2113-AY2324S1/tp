@@ -17,6 +17,8 @@ import cashleh.commands.Command;
 import cashleh.transaction.Income;
 import cashleh.transaction.Expense;
 import cashleh.transaction.IncomeStatement;
+import cashleh.transaction.ExpenseCategories.ExpenseCategory;
+import cashleh.transaction.IncomeCategories.IncomeCategory;
 import cashleh.transaction.ExpenseStatement;
 
 import cashleh.exceptions.CashLehParsingException;
@@ -28,6 +30,7 @@ public class Parser {
     private static final String ADD_INCOME = "addIncome";
     private static final String DELETE_INCOME = "deleteIncome";
     private static final String VIEW_INCOMES = "viewIncomes";
+
     private static final String ADD_EXPENSE = "addExpense";
     private static final String DELETE_EXPENSE = "deleteExpense";
     private static final String VIEW_EXPENSES = "viewExpenses";
@@ -82,17 +85,19 @@ public class Parser {
     }
 
     private Expense getExpense(String input) throws CashLehParsingException {
-        String[] format = {ADD_EXPENSE, "/amt", "/date:optional"};
+        String[] format = {ADD_EXPENSE, "/amt", "/date:optional", "/cat:optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String expenseName = inputDetails.get(ADD_EXPENSE);
         String expenseAmtString = inputDetails.get("/amt");
         String expenseDateString = inputDetails.get("/date");
+        String expenseCategoryString = inputDetails.get("/cat");
 
         if (expenseName.isEmpty()) {
             throw new CashLehParsingException(
                 "Oopsie! An expense without a description is like a CashLeh transaction without its story - not as fun!"
             );
         }
+
         double expenseAmt;
         try {
             expenseAmt = Double.parseDouble(expenseAmtString);
@@ -100,20 +105,35 @@ public class Parser {
             throw new CashLehParsingException("Please enter a valid expense amount!");
         }
 
-        // default to current date if no date is specified
-        if (expenseDateString == null || expenseDateString.isEmpty()) {
+        LocalDate parsedDate = null;
+        if (!(expenseDateString == null || expenseDateString.isEmpty())) {
+            parsedDate = DateParser.parse(expenseDateString);
+        }
+        
+        ExpenseCategory parsedCategory = null;
+        if (!(expenseCategoryString == null || expenseCategoryString.isEmpty())) {
+            parsedCategory = ExpenseCatParser.parse(expenseCategoryString);
+        }
+
+        if (parsedDate == null && parsedCategory == null) {
             return new Expense(expenseName, expenseAmt);
         }
-        LocalDate parsedDate = DateParser.parse(expenseDateString);
-        return new Expense(expenseName, expenseAmt, parsedDate);
+        else if (parsedDate == null) {
+            return new Expense(expenseName, expenseAmt, parsedCategory);
+        }
+        else if (parsedCategory == null) {
+            return new Expense(expenseName, expenseAmt, parsedDate);
+        }
+        return new Expense(expenseName, expenseAmt, parsedDate, parsedCategory);
     }
 
     private Income getIncome(String input) throws CashLehParsingException {
-        String[] format = {ADD_INCOME, "/amt", "/date:optional"};
+        String[] format = {ADD_INCOME, "/amt", "/date:optional", "/cat:optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String incomeName = inputDetails.get(ADD_INCOME);
         String incomeAmtString = inputDetails.get("/amt");
         String incomeDateString = inputDetails.get("/date");
+        String incomeCategoryString = inputDetails.get("/cat");
 
         if (incomeName.isEmpty()) {
             throw new CashLehParsingException(
@@ -128,12 +148,26 @@ public class Parser {
             throw new CashLehParsingException("Please enter a valid expense amount!");
         }
 
-        // default to current date if no date is specified
-        if (incomeDateString == null || incomeDateString.isEmpty()) {
+        LocalDate parsedDate = null;
+        if (!(incomeDateString == null || incomeDateString.isEmpty())) {
+            parsedDate = DateParser.parse(incomeDateString);
+        }
+        
+        IncomeCategory parsedCategory = null;
+        if (!(incomeCategoryString == null || incomeCategoryString.isEmpty())) {
+            parsedCategory = IncomeCatParser.parse(incomeCategoryString);
+        }
+
+        if (parsedDate == null && parsedCategory == null) {
             return new Income(incomeName, incomeAmt);
         }
-        LocalDate parsedDate = DateParser.parse(incomeDateString);
-        return new Income(incomeName, incomeAmt, parsedDate);
+        else if (parsedDate == null) {
+            return new Income(incomeName, incomeAmt, parsedCategory);
+        }
+        else if (parsedCategory == null) {
+            return new Income(incomeName, incomeAmt, parsedDate);
+        }
+        return new Income(incomeName, incomeAmt, parsedDate, parsedCategory);
     }
 
     private Command getDeleteTransaction(String input, String transactionType) throws CashLehParsingException {
