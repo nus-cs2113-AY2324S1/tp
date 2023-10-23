@@ -1,5 +1,4 @@
-Directory already exists.
-
+Directory created: data
 Welcome to FitTrack!
 ___________.__  __ ___________                     __
 \_   _____/|__|/  |\__    ___/___________    ____ |  | __
@@ -7,35 +6,32 @@ ___________.__  __ ___________                     __
  |     \   |  ||  |  |    |   |  | \/ __ \  \___|    <
  \___  /   |__||__|  |____|   |__|  (____  /\___  >__|_ \
 ____________________________________________________________
-`h/180` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-`h/-180` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-`h/-180` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-`h/` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-`h/180` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-`180` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-`180` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-`h/180` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Please enter numbers for height, weight, and daily calorie limit.
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Please enter a number greater than 0
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Please enter a number greater than 0
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
+Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
+Here are your profile settings.
+Height: Height: 180.0cm
+Weight: 80.0kg
+Daily calorie limit: 2000.0kcal
+BMI: 24.69
+____________________________________________________________
 Your Profile:
-Height: 170.0cm
-Weight: 70.0kg
-Daily calorie limit: 1500.0kcal
-BMI: 24.22
+Height: 180.0cm
+Weight: 80.0kg
+Daily calorie limit: 2000.0kcal
+BMI: 24.69
 
 Here is your updated profile:
 Height: 170.0cm
@@ -68,10 +64,8 @@ These are the workouts you have done:
 1.[W] running (400.0kcal, 2023-10-22)
 
 
-Workout list is empty.
-`deleteworkout 1` is an invalid command.
-`deleteworkout` deletes your daily workout data from the list.
-Type `deleteworkout <INDEX>` to delete the workout by an index.
+I've deleted the following workout:
+[W] running (400.0kcal, 2023-10-22)
 
 `help` shows help message of the command.
 Existing commands:

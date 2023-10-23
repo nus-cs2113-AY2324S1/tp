@@ -10,6 +10,10 @@ public class BmiCommand extends Command {
             String.format("Type `%s` to view your BMI.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
+    public BmiCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         return new CommandResult(String.format("Your current BMI is %.2f", userProfile.getBmi()));

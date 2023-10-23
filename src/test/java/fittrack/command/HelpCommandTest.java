@@ -11,7 +11,7 @@ class HelpCommandTest {
 
     @Test
     void execute_help_pass() {
-        HelpCommand helpCommand = new HelpCommand();
+        HelpCommand helpCommand = new HelpCommand("help");
         helpCommand.setArguments("", new CommandParser());
         CommandResult result = helpCommand.execute();
         assertEquals(HelpCommand.HELP, result.getFeedback());
@@ -19,28 +19,28 @@ class HelpCommandTest {
 
     @Test
     void setArguments_emptyString_helpOfHelp() {
-        HelpCommand helpCommand = new HelpCommand();
+        HelpCommand helpCommand = new HelpCommand("help");
         helpCommand.setArguments("", new CommandParser());
         assertEquals(HelpCommand.HELP, helpCommand.getHelpMessage());
     }
 
     @Test
     void setArguments_help_helpOfHelp() {
-        HelpCommand helpCommand = new HelpCommand();
+        HelpCommand helpCommand = new HelpCommand("help help");
         helpCommand.setArguments("help", new CommandParser());
         assertEquals(HelpCommand.HELP, helpCommand.getHelpMessage());
     }
 
     @Test
     void setArguments_exit_helpOfExit() {
-        HelpCommand helpCommand = new HelpCommand();
+        HelpCommand helpCommand = new HelpCommand("help exit");
         helpCommand.setArguments("exit", new CommandParser());
         assertEquals(ExitCommand.HELP, helpCommand.getHelpMessage());
     }
 
     @Test
     void setArguments_foo_invalidCmdMsg() {
-        HelpCommand helpCommand = new HelpCommand();
+        HelpCommand helpCommand = new HelpCommand("help foo");
         helpCommand.setArguments("foo", new CommandParser());
         assertEquals(
                 String.format(MESSAGE_INVALID_COMMAND, "foo") + "\n" + USAGE, 

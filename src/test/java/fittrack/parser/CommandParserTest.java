@@ -49,13 +49,13 @@ class CommandParserTest {
 
     @Test
     void getBlankCommand_help_helpCommand() {
-        Command blankCommand = new CommandParser().getBlankCommand("help");
+        Command blankCommand = new CommandParser().getBlankCommand("help", "help");
         assertInstanceOf(HelpCommand.class, blankCommand);
     }
 
     @Test
     void getBlankCommand_foo_invalidCommand() {
-        Command blankCommand = new CommandParser().getBlankCommand("foo");
+        Command blankCommand = new CommandParser().getBlankCommand("foo", "foo");
         assertInstanceOf(InvalidCommand.class, blankCommand);
     }
 

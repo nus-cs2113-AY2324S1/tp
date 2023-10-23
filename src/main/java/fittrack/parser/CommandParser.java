@@ -49,12 +49,11 @@ public class CommandParser {
     private static final Pattern MEAL_PATTERN = Pattern.compile(
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
-
-    private static final Pattern DELETE_MEAL_PATTERN = Pattern.compile(
-            "(?<index>\\S+)?"
-    );
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
+    );
+    private static final Pattern INDEX_PATTERN = Pattern.compile(
+            "(?<index>\\S+)?"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -66,55 +65,60 @@ public class CommandParser {
         final String word = matcher.group("word").strip();
         final String args = matcher.group("args").strip();
 
-        Command command = getBlankCommand(word);
+        Command command = getBlankCommand(word, userCommandLine);
         if (command instanceof InvalidCommand) {
             return getInvalidCommand(userCommandLine);
         }
         try {
             command.setArguments(args, this);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            return getInvalidCommand(userCommandLine);
+            return getInvalidCommand(userCommandLine, e);
         }
 
         return command;
     }
 
-    public Command getBlankCommand(String word) {
+    public Command getBlankCommand(String word, String commandLine) {
         switch (word) {
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommand(commandLine);
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return new ExitCommand(commandLine);
         case EditProfileCommand.COMMAND_WORD:
-            return new EditProfileCommand();
+            return new EditProfileCommand(commandLine);
         case ViewProfileCommand.COMMAND_WORD:
-            return new ViewProfileCommand();
+            return new ViewProfileCommand(commandLine);
         case AddMealCommand.COMMAND_WORD:
-            return new AddMealCommand();
+            return new AddMealCommand(commandLine);
         case DeleteMealCommand.COMMAND_WORD:
-            return new DeleteMealCommand();
+            return new DeleteMealCommand(commandLine);
         case ViewMealsCommand.COMMAND_WORD:
-            return new ViewMealsCommand();
+            return new ViewMealsCommand(commandLine);
         case AddWorkoutCommand.COMMAND_WORD:
-            return new AddWorkoutCommand();
+            return new AddWorkoutCommand(commandLine);
         case DeleteWorkoutCommand.COMMAND_WORD:
-            return new DeleteWorkoutCommand();
+            return new DeleteWorkoutCommand(commandLine);
         case ViewWorkoutsCommand.COMMAND_WORD:
-            return new ViewWorkoutsCommand();
+            return new ViewWorkoutsCommand(commandLine);
         case BmiCommand.COMMAND_WORD:
-            return new BmiCommand();
+            return new BmiCommand(commandLine);
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommand();
+            return new SaveCommand(commandLine);
         default:
-            return new InvalidCommand();
+            return new InvalidCommand(commandLine);
 
         }
     }
 
-    private InvalidCommand getInvalidCommand(String userCommandLine) {
-        InvalidCommand invalidCommand = new InvalidCommand();
+    public InvalidCommand getInvalidCommand(String userCommandLine) {
+        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
+        invalidCommand.setArguments(userCommandLine, this);
+        return invalidCommand;
+    }
+
+    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
+        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
@@ -179,28 +183,6 @@ public class CommandParser {
         }
     }
 
-    public int parseDeleteMeal(String meal) throws PatternMatchFailException,
-            NumberFormatException, IndexOutOfBoundsException, NegativeNumberException {
-        final Matcher matcher = DELETE_MEAL_PATTERN.matcher(meal);
-        if (!matcher.matches()) {
-            throw new PatternMatchFailException();
-        }
-
-        final String index = matcher.group("index");
-
-        try {
-            int indexToDelete = Integer.parseInt(index);
-            if (indexToDelete <= 0) {
-                throw new NegativeNumberException();
-            }
-            return indexToDelete;
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException();
-        } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("");
-        }
-    }
-
     public Workout parseWorkout(String workout) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = WORKOUT_PATTERN.matcher(workout);
         if (!matcher.matches()) {
@@ -223,6 +205,22 @@ public class CommandParser {
             throw new NumberFormatException();
         } catch (DateTimeParseException e) {
             throw new PatternMatchFailException();
+        }
+    }
+
+    // @@author NgLixuanNixon
+    public int parseIndex(String meal) throws PatternMatchFailException, NumberFormatException {
+        final Matcher matcher = INDEX_PATTERN.matcher(meal);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        final String index = matcher.group("index");
+
+        try {
+            return Integer.parseInt(index);
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
         }
     }
 

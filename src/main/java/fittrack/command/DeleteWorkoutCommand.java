@@ -2,7 +2,9 @@ package fittrack.command;
 
 import fittrack.data.Workout;
 import fittrack.parser.CommandParser;
-import fittrack.parser.ParseException;
+import fittrack.parser.IndexOutOfBoundsException;
+import fittrack.parser.NumberFormatException;
+import fittrack.parser.PatternMatchFailException;
 
 public class DeleteWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "deleteworkout";
@@ -14,25 +16,29 @@ public class DeleteWorkoutCommand extends Command {
 
     private int workoutIndex;
 
+    public DeleteWorkoutCommand(String commandLine) {
+        super(commandLine);
+    }
+
+    // @@author marklin2234
     @Override
     public CommandResult execute() {
+        if (!workoutList.isIndexValid(workoutIndex)) {
+            return new CommandParser()
+                    .getInvalidCommand(commandLine, new IndexOutOfBoundsException())
+                    .execute();
+        }
+
         Workout toDelete = workoutList.getWorkout(workoutIndex);
         workoutList.deleteWorkout(workoutIndex);
         return new CommandResult("I've deleted the following workout:" + "\n" + toDelete.toString());
     }
 
+    // @@author marklin2234
     @Override
-    public void setArguments(String args, CommandParser parser) throws ParseException {
-        try {
-            workoutIndex = Integer.parseInt(args);
-            if (workoutIndex > workoutList.getWorkoutListSize()) {
-                throw new ParseException("Index given is larger than array.");
-            }
-        } catch (NumberFormatException e) {
-            throw new ParseException("Argument is not an integer.");
-        } catch (NullPointerException e) {
-            throw new ParseException("Workout list is empty.");
-        }
+    public void setArguments(String args, CommandParser parser)
+            throws PatternMatchFailException, NumberFormatException {
+        workoutIndex = parser.parseIndex(args);
     }
 
     @Override

@@ -8,10 +8,15 @@ import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
 
 public abstract class Command {
+    protected String commandLine;
     protected UserProfile userProfile;
     protected MealList mealList;
     protected WorkoutList workoutList;
     protected Storage storage;
+
+    public Command(String commandLine) {
+        this.commandLine = commandLine;
+    }
 
     /**
      * Set data of the command for execution.
