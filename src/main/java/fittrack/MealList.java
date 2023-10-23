@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class MealList {
 
+    private int mealListSize = 0;
     private ArrayList<Meal> mealList;
 
     public MealList() {
@@ -24,11 +25,18 @@ public class MealList {
 
     public void addToList(Meal newMeal) {
         mealList.add(newMeal);
+        mealListSize++;
     }
 
     public void deleteMeal(int mealIndex) {
         mealList.remove((mealIndex - 1));
+        mealListSize--;
     }
+
+    public int getMealListSize() {
+        return mealListSize;
+    }
+
     @Override
     public String toString() {
         int counter = 1;
@@ -42,6 +50,5 @@ public class MealList {
 
     public Meal getMeal(int mealIndex) {
         return mealList.get(mealIndex - 1);
-
     }
 }
