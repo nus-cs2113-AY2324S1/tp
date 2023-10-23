@@ -42,7 +42,7 @@ public abstract class LoadData {
             inputFile.close();
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException | FinancialPlannerException e) {
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | FinancialPlannerException e) {
             handleCorruptedFile(cashflowList, ui);
         }
     }
@@ -57,9 +57,14 @@ public abstract class LoadData {
         }
     }
 
-    private static void loadBudget(String[] split) {
+    private static void loadBudget(String[] split) throws IllegalArgumentException {
         double initial = Double.parseDouble(split[1].trim());
         double current = Double.parseDouble(split[2].trim());
+        if (initial < 0 || current < 0) {
+            throw new IllegalArgumentException("Negative values for budget");
+        } else if (initial > Cashflow.getBalance() || current > Cashflow.getBalance()) {
+            throw new IllegalArgumentException("Budget exceeds balance");
+        }
         Budget.load(initial, current);
     }
 
@@ -83,27 +88,27 @@ public abstract class LoadData {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            try {
-                IncomeType incomeType = IncomeType.valueOf(split[2].trim().toUpperCase());
-                entry = new Income(value, incomeType, recur);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException();
-            }
+            IncomeType incomeType = IncomeType.valueOf(split[2].trim().toUpperCase());
+            checkValidInput(value, recur);
+            entry = new Income(value, incomeType, recur);
             break;
         case "E":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            try {
-                ExpenseType expenseType = ExpenseType.valueOf(split[2].trim().toUpperCase());
-                entry = new Expense(value, expenseType, recur);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException();
-            }
+            ExpenseType expenseType = ExpenseType.valueOf(split[2].trim().toUpperCase());
+            checkValidInput(value, recur);
+            entry = new Expense(value, expenseType, recur);
             break;
         default:
             throw new FinancialPlannerException("Error loading file");
         }
 
         return entry;
+    }
+
+    private static void checkValidInput(double value, int recur) throws FinancialPlannerException {
+        if (value < 0 || recur < 0) {
+            throw new FinancialPlannerException("Amount and number of days cannot be negative");
+        }
     }
 }
