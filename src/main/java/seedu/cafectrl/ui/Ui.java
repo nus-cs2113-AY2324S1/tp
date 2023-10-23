@@ -82,6 +82,17 @@ public class Ui {
         showToUser("Okay! " + selectedDish.getName() + " is deleted! :)");
     }
 
+    /**
+     * Shows ingredient to buy message to user
+     *
+     * @param ingredient Ingredient to be bought
+     */
+    public void showBuyIngredientMessage(Ingredient ingredient) {
+        String header = "Added to stock: \n";
+        String ingredientString = "Ingredient: " + ingredient.getName()
+                                    + "\tQty: " + ingredient.getQty();
+        showToUser(header + ingredientString);
+    }
 
     /**
      * Shows messages(s) to the user
@@ -122,5 +133,16 @@ public class Ui {
         for (String m: message) {
             System.out.println(m + "\n");
         }
+    }
+
+    public void showDishAvailability(int numberOfDishes){
+        showToUser("Available Dishes: " + numberOfDishes);
+        printLine();
+    }
+
+    public void showNeededRestock(String ingredientName, int currentQuantity, String unit, String neededIngredient){
+        showToUser("Please Restock: " + ingredientName
+                , "Current " + ingredientName + ": " + currentQuantity + unit
+                , "Needed " + ingredientName + ": " + neededIngredient);
     }
 }

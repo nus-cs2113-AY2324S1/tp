@@ -1,6 +1,7 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
@@ -21,7 +22,7 @@ public class ListMenuCommand extends Command {
      * @param ui Handles the interactions with user
      */
     @Override
-    public void execute(Menu menu, Ui ui) {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         if (menu.getSize() == 0) {
             printEmptyMenu(ui);
             return;
