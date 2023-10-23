@@ -137,7 +137,7 @@ public abstract class LoadData {
         try {
             ObjectInputStream watchListStocksInputStream
                     = new ObjectInputStream(
-                    new FileInputStream(FILE_PATH)
+                        new FileInputStream(FILE_PATH)
             );
             stocksData = (ArrayList<Stock>) watchListStocksInputStream.readObject();
             watchListStocksInputStream.close();
