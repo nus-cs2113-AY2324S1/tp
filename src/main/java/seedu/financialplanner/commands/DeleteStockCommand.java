@@ -40,8 +40,8 @@ public class DeleteStockCommand extends AbstractCommand {
             assert stockName != null;
             ui.printDeleteStock(stockName);
         } catch (FinancialPlannerException e) {
-            logger.log(Level.SEVERE, "Error deleting stock from watchlist");
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Error deleting stock from watchlist");
+            ui.showMessage(e.getMessage());
         }
     }
 }

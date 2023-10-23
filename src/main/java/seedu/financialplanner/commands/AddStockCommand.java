@@ -40,7 +40,7 @@ public class AddStockCommand extends AbstractCommand {
             assert stockName != null;
             ui.printAddStock(stockName);
         } catch (FinancialPlannerException e) {
-            logger.log(Level.SEVERE, "Error adding stock to watchlist");
+            logger.log(Level.WARNING, "Error adding stock to watchlist");
             System.out.println(e.getMessage());
         }
     }

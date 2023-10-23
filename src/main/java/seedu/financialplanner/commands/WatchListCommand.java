@@ -29,7 +29,7 @@ public class WatchListCommand extends AbstractCommand {
             logger.log(Level.INFO, "Printing watchlist");
             ui.printStocksInfo(watchList);
         } catch (FinancialPlannerException e) {
-            System.out.println(e.getMessage());
+            ui.showMessage(e.getMessage());
         }
 
     }
