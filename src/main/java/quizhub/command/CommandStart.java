@@ -1,8 +1,12 @@
 package quizhub.command;
 
+import quizhub.question.Question;
 import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Command to Start the Quiz
@@ -38,9 +42,21 @@ public class CommandStart extends Command{
         try {
             // Reads in /random or /normal
             startQnMode = commandDetails[2].split(" ")[0].strip();
-        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate mode of the quiz :<");
+            if (!startQnMode.equals("random") && !startQnMode.equals("normal")) {
+                throw new IllegalArgumentException("    Question mode must be either 'random' or 'normal'");
+            }
+        }
+//        catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+//            System.out.println("    Ono! You did not indicate mode of the quiz :<");
+//            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+//        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+        }finally {
+            if (startQnMode.isEmpty()) {
+                System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+            }
         }
     }
 
@@ -60,10 +76,24 @@ public class CommandStart extends Command{
             switch (startMode.toLowerCase()) {
             case "module":
                 assert startDetails != null;
-                questions.startQuiz(ui, questions.categoriseListByModule(startDetails));
+                ArrayList<Question> matchedModuleQuestions = questions.categoriseListByModule(startDetails);
+                if(startQnMode.equals("random")){
+                    Collections.shuffle(matchedModuleQuestions); // shuffles matched Questions
+                    questions.startQuiz(ui, matchedModuleQuestions);
+                }
+                else if(startQnMode.equals("normal")){
+                    questions.startQuiz(ui, matchedModuleQuestions);
+                }
                 break;
             case "all":
-                questions.startQuiz(ui, questions.getAllQns());
+                ArrayList<Question> matchedAllQuestions = questions.getAllQns();
+                if(startQnMode.equals("random")){
+                    Collections.shuffle(matchedAllQuestions); // shuffles matched Questions
+
+                }
+                else if(startQnMode.equals("normal")){
+                    questions.startQuiz(ui, matchedAllQuestions);
+                }
                 break;
             default:
                 System.out.println("    Please enter valid quiz mode :<");
