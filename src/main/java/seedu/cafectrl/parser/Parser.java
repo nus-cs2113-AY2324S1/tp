@@ -144,10 +144,7 @@ public class Parser {
 
             checkNegativePrice(price);
 
-            // Capture the list of ingredients
-            ArrayList<Ingredient> ingredients = new ArrayList<>();
-
-            ingredientParsing(ingredientsListString, ingredients);
+            ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
 
             Dish dish = new Dish(dishName, ingredients, price);
 
@@ -164,9 +161,10 @@ public class Parser {
         }
     }
 
-    private static void ingredientParsing(String ingredientsListString, ArrayList<Ingredient> ingredients)
+    private static ArrayList<Ingredient> ingredientParsing(String ingredientsListString)
             throws IllegalArgumentException {
         String[] ingredientListInputText = {ingredientsListString};
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
 
         //check if there is more than 1 ingredient
         if (ingredientsListString.contains(INGREDIENT_DIVIDER_STRING)) {
@@ -189,6 +187,8 @@ public class Parser {
 
             ingredients.add(ingredient);
         }
+
+        return ingredients;
     }
 
 
