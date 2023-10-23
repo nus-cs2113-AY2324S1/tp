@@ -72,18 +72,21 @@ public class IncomeManager extends Commands{
      * @return incomeFields HashMap containing the fields of the income
      * @throws KaChinnnngException if there is an error in the command
      */
-    private HashMap<String, String> extractIncomeFields(String details) throws KaChinnnngException{
+    private HashMap<String, String> extractIncomeFields(String details) throws KaChinnnngException {
         assert details != null : "details should not be null";
-        // uses a HashMap to store the fields of the income
-        HashMap<String,String> incomeFields = new HashMap<>();
 
-        String[] parts = details.split("/description|/date|/amount");
+        HashMap<String, String> incomeFields = new HashMap<>();
 
-        // If the parts (description,date, amount) are not present, throw an exception
-        if(parts.length != 4) {
-            LOGGER.log(Level.INFO,"Missing fields detected in income details" + details);
-            throw new KaChinnnngException("Missing fields detected");
+        // Split the details string based on the field keywords
+        String[] parts = details.split("/de|/date|/amt");
+
+        // Check if all fields are present in the string
+        if (parts.length != 4) {
+            LOGGER.log(Level.WARNING, "Missing or out-of-order fields detected in income details: " + details);
+            throw new KaChinnnngException("Expected fields `/description`, `/date`, and `/amount` are missing or improperly formatted.");
         }
+
+        // Populate the HashMap with extracted fields
         incomeFields.put(IncomeParser.DESCRIPTION_FIELD, parts[1].trim());
         incomeFields.put(IncomeParser.DATE_FIELD, parts[2].trim());
         incomeFields.put(IncomeParser.AMOUNT_FIELD, parts[3].trim());

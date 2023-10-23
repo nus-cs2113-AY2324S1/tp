@@ -1,8 +1,8 @@
 James Gosling
 hi
 help
-add income /description salary for October /date 01/10/2023 /amount 5000.00
-add expense /category food /description lunch /date 01/10/2023 /amount 10.00
+add income /de salary for October /date 01/10/2023 /amt 5000.00
+add expense /cat food /de lunch /date 01/10/2023 /amt 10.00
 list income
 list expense
 list
