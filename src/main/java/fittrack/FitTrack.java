@@ -29,6 +29,7 @@ public class FitTrack {
     private FitTrack() {
         ui = new Ui();
         storage = new Storage();
+        userProfile = new UserProfile();
         mealList = new MealList();
         workoutList = new WorkoutList();
     }
