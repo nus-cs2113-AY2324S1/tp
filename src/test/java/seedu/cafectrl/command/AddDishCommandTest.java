@@ -18,7 +18,7 @@ class AddDishCommandTest {
         Menu menu = new Menu(menuItems);
         Ui ui = new Ui();
         //creating a dish
-        ingredients.add(new Ingredient("chicken",100, "g"));
+        ingredients.add(new Ingredient("chicken", 100, "g"));
         Dish dish = new Dish("Chicken Rice", ingredients, (float) 1.00);
 
         AddDishCommand addDishCommand = new AddDishCommand(dish);

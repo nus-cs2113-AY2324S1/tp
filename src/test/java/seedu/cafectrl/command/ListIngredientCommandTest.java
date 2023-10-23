@@ -36,9 +36,9 @@ class ListIngredientCommandTest {
         ListIngredientCommand listIngredientCommand = new ListIngredientCommand(indexToSelect);
         listIngredientCommand.execute(menu, ui);
 
-        String expectedOutput = "Chicken Rice Ingredients: \n" +
-                "Rice - 1cup\n" +
-                "Chicken - 100g\n";
+        String expectedOutput = "Chicken Rice Ingredients: \n"
+                + "Rice - 1cup\n"
+                + "Chicken - 100g\n";
 
         assertEquals(expectedOutput.trim().replaceAll("\\s+", " "),
                 actualOutput.get(0).trim().replaceAll("\\s+", " "));
