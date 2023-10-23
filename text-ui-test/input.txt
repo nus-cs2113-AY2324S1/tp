@@ -6,6 +6,7 @@ h/180 w/ l/2000
 180 w/80 l/20000
 180 80 2000
 h/180 w/80 l/2000
+viewprofile
 editprofile h/170 w/70 l/1500
 viewprofile
 bmi

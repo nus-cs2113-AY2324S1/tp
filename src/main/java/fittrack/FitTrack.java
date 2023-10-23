@@ -8,6 +8,7 @@ import fittrack.parser.NegativeNumberException;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
 import fittrack.storage.Storage;
+import fittrack.storage.Storage.StorageOperationException;
 
 
 /**
@@ -18,16 +19,16 @@ import fittrack.storage.Storage;
  * to build main structure of this class.
  */
 public class FitTrack {
-    private final UserProfile userProfile;
     private final MealList mealList;
     private final WorkoutList workoutList;
     private final Ui ui;
     private final Storage storage;
+    private UserProfile userProfile;
+
 
     private FitTrack() {
         ui = new Ui();
         storage = new Storage();
-
         userProfile = new UserProfile();
         mealList = new MealList();
         workoutList = new WorkoutList();
@@ -48,8 +49,17 @@ public class FitTrack {
 
     private void start() {
         ui.printWelcome();
-
         boolean isValidInput = false;
+
+        if (!storage.isProfileFileEmpty()) {
+            try {
+                this.userProfile = storage.load();
+                isValidInput = true;
+            }catch (StorageOperationException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         while (!isValidInput) {
             try {
                 profileSettings();
@@ -75,8 +85,14 @@ public class FitTrack {
     }
 
     private CommandResult executeCommand(Command command) {
-        command.setData(userProfile, mealList, workoutList, storage);
-        return command.execute();
+        try {
+            command.setData(userProfile, mealList, workoutList, storage);
+            storage.save(userProfile, mealList, workoutList);
+            return command.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException();
+        }
     }
 
     /**
