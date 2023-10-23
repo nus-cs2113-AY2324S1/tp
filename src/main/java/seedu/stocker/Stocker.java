@@ -52,18 +52,24 @@ public class Stocker {
     /**
      * Sets up the required objects, and prints the welcome message.
      */
-    private void start() throws IOException, StockerException {
-        this.ui = new Ui();
-        this.inventory = new Inventory();
-        this.salesList = new SalesList();
-        this.currentCart = new Cart();
-        this.storage = new Storage(inventory);
-        storage.loadFileContents("drugs.txt");
-        boolean checker = startLogin();
-        assert checker == true;
-        if(checker){
-            ui.showWelcomeMessage();
+    private void start() {
+        try {
+            this.ui = new Ui();
+            this.inventory = new Inventory();
+            this.salesList = new SalesList();
+            this.currentCart = new Cart();
+            this.storage = new Storage(inventory);
+            storage.loadFileContents("drugs.txt");
+            boolean checker = startLogin();
+            assert checker == true;
+            if(checker){
+                ui.showWelcomeMessage();
+            }
+        } catch (Exception e) {
+            ui.showInitFailedMessage();
+            System.exit(0);
         }
+        
     }
 
     /**

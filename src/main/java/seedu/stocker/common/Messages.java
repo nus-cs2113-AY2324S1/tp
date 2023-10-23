@@ -24,4 +24,6 @@ public class Messages {
             + "Enter your desired username again";
     public static final String MESSAGE_NO_BLANK_PASSWORD_ALLOWED = "No blank password allowed. "
             + "Enter your desired password again";
+
+    public static final String MESSAGE_INIT_FAILED = "Failed to initialise Stocker application. Exiting...";
 }

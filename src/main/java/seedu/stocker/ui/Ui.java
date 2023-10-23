@@ -21,6 +21,7 @@ import static seedu.stocker.common.Messages.MESSAGE_INVALID_CHOICE;
 import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_USERNAME_OR_PASSWORD;
 import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_REGISTRATION;
+import static seedu.stocker.common.Messages.MESSAGE_INIT_FAILED;
 
 
 public class Ui {
@@ -162,6 +163,10 @@ public class Ui {
             formattedElements.add(elements.get(i).toString());
         }
         showToUserAsIndexedList(formattedElements);
+    }
+
+    public void showInitFailedMessage() {
+        showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 
     /**

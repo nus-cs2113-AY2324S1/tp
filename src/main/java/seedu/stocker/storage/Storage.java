@@ -3,6 +3,7 @@ package seedu.stocker.storage;
 
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
+import seedu.stocker.exceptions.InvalidDrugFormatException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,7 +57,7 @@ public class Storage {
      * @param filePath Relative path to file containing list of drugs to be loaded.
      * @throws IOException if file is not found
      */
-    public void loadFileContents(String filePath) throws IOException {
+    public void loadFileContents(String filePath) throws IOException, InvalidDrugFormatException {
         File holder = new File("./drugs.txt");
         if (!holder.exists()) {
             holder.createNewFile();
@@ -67,13 +68,16 @@ public class Storage {
         Pattern pattern = Pattern.compile("Name: (.*), Expiry date: (.*), Quantity: (.*)");
         while(reader.hasNextLine()){
             Matcher matcher = pattern.matcher(reader.nextLine());
-            matcher.matches();
-            String name = matcher.group(1);
-            String expiryDate = matcher.group(2);
-            Long quantity = Long.parseLong(matcher.group(3));
+            if (matcher.matches() && matcher.groupCount() == 3) {
+                String name = matcher.group(1);
+                String expiryDate = matcher.group(2);
+                Long quantity = Long.parseLong(matcher.group(3));
 
-            Drug drug = new Drug(name, expiryDate);
-            inventory.addNewDrug(name, drug, quantity);
+                Drug drug = new Drug(name, expiryDate);
+                inventory.addNewDrug(name, drug, quantity);
+            } else {
+                throw new InvalidDrugFormatException("");
+            }
         }
     }
 
