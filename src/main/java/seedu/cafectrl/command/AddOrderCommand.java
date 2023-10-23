@@ -2,7 +2,6 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.Chef;
 import seedu.cafectrl.Order;
-import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
@@ -13,13 +12,20 @@ public class AddOrderCommand extends Command {
             + "Parameters: DISH_NAME, DISH_QTY\n"
             + "Example: " + COMMAND_WORD
             + " name/chicken rice qty/2";
+
+    protected Ui ui;
+    protected Pantry pantry;
+
     Order order;
-    public AddOrderCommand(Order order) {
+    public AddOrderCommand(Order order, Ui ui, Pantry pantry) {
         this.order  = order;
+        this.ui = ui;
+        this.pantry = pantry;
     }
     @Override
-    public void execute(Menu menu, Ui ui, Pantry pantry) {
-        Chef chef = new Chef(order, pantry);
+
+    public void execute() {
+        Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();
     }
 }

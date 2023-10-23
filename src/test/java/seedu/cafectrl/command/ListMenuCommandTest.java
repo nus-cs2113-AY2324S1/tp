@@ -2,7 +2,6 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
 
@@ -34,8 +33,8 @@ class ListMenuCommandTest {
             }
         };
 
-        Command listMenuCommand = new ListMenuCommand();
-        listMenuCommand.execute(menu, ui, new Pantry(ui));
+        Command listMenuCommand = new ListMenuCommand(menu, ui);
+        listMenuCommand.execute();
 
         String actualOutput = String.join(",", commandOutput);
 
