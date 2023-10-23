@@ -12,7 +12,7 @@ public class ViewProfileCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        // TODO: get profile details and make them to lines of strings.
+        //TODO: get profile details and make them to lines of strings.
         return new CommandResult("Your Profile:\n" + userProfile.toString());
     }
 

@@ -9,10 +9,10 @@ h/180 w/80 l/2000
 editprofile h/170 w/70 l/1500
 viewprofile
 bmi
-addmeal pasta c/200
+addmeal pasta c/200 d/2023-10-22
 viewmeals
 deletemeal 1
-addworkout running c/400
+addworkout running c/400 d/2023-10-22
 viewworkouts
 deleteworkout 1
 help

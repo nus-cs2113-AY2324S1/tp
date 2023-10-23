@@ -2,6 +2,7 @@ package fittrack.command;
 
 import fittrack.data.Workout;
 import fittrack.parser.CommandParser;
+import fittrack.parser.ParseException;
 
 public class DeleteWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "deleteworkout";
@@ -21,8 +22,17 @@ public class DeleteWorkoutCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) {
-        workoutIndex = Integer.parseInt(args);
+    public void setArguments(String args, CommandParser parser) throws ParseException {
+        try {
+            workoutIndex = Integer.parseInt(args);
+            if (workoutIndex > workoutList.getWorkoutListSize()) {
+                throw new ParseException("Index given is larger than array.");
+            }
+        } catch (NumberFormatException e) {
+            throw new ParseException("Argument is not an integer.");
+        } catch (NullPointerException e) {
+            throw new ParseException("Workout list is empty.");
+        }
     }
 
     @Override

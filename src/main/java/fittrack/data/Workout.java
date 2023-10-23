@@ -13,6 +13,10 @@ public class Workout {
         this.date = date;
     }
 
+    public String formatToFile() {
+        return String.format("W | %s | %s | %s", name, calories, date);
+    }
+
     @Override
     public String toString() {
         return String.format("[W] %s (%s, %s)", name, calories, date);

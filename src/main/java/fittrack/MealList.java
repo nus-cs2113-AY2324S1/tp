@@ -7,14 +7,26 @@ import java.util.ArrayList;
 
 public class MealList {
 
+    private int mealListSize = 0;
     private ArrayList<Meal> mealList;
 
     public MealList() {
         mealList = new ArrayList<>();
     }
 
+    // For loading of file contents into meal list
+    //TODO Load file content into meal list
+    public MealList(ArrayList<Meal> mealList) {
+        this.mealList = mealList;
+    }
+
+    public ArrayList<Meal> getMealList() {
+        return this.mealList;
+    }
+
     public void addToList(Meal newMeal) {
         mealList.add(newMeal);
+        mealListSize++;
     }
 
     public void deleteMeal(int mealIndex) throws IndexOutOfBoundsException {
@@ -22,7 +34,13 @@ public class MealList {
             throw new IndexOutOfBoundsException();
         }
         mealList.remove((mealIndex - 1));
+        mealListSize--;
     }
+
+    public int getMealListSize() {
+        return mealListSize;
+    }
+
     @Override
     public String toString() {
         int counter = 1;
@@ -36,6 +54,5 @@ public class MealList {
 
     public Meal getMeal(int mealIndex) {
         return mealList.get(mealIndex - 1);
-
     }
 }
