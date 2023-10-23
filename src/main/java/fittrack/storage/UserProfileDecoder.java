@@ -23,10 +23,10 @@ public class UserProfileDecoder {
     );
 
     /**
-     * Decodes {@code encodedAddressBook} into an {@code AddressBook} containing the decoded persons.
+     * Decodes {@code encodedUserProfile} into a {@code UserProile} containing the decoded data.
      *
      * @throws IllegalValueException if any of the fields in any encoded person string is invalid.
-     * @throws StorageOperationException if the {@code encodedAddressBook} is in an invalid format.
+     * @throws StorageOperationException if the {@code encodedUserProfile} is in an invalid format.
      */
     public static UserProfile decodeUserProfile(List<String> encodedUserProfile)
             throws IllegalValueException, StorageOperationException {

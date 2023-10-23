@@ -32,7 +32,7 @@ public class Storage {
 
 
     /**
-     * Constructs storage. Creates new file fittrack.txt
+     * Constructs storage. Creates new file
      * in a directory called data if none exist.
      */
     public Storage() {
@@ -107,6 +107,14 @@ public class Storage {
         file.close();
     }
 
+    /**
+     * Save all data when exiting
+     *
+     * @param userProfile profile of user containing personal data
+     * @param mealList list of meals
+     * @param workoutList list of workouts
+     * @throws IOException error
+     */
     public void save(UserProfile userProfile, MealList mealList, WorkoutList workoutList)
             throws IOException {
         saveProfile(userProfile);
@@ -116,7 +124,7 @@ public class Storage {
 
     /**
      * Loads the {@code UserProfile} data from this profile storage file, and then returns it.
-     * Returns an empty {@code AddressBook} if the file does not exist, or is not a regular file.
+     * Returns an empty {@code UserProfile} if the file does not exist, or is not a regular file.
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
