@@ -1,6 +1,5 @@
 package cashleh.commands;
 
-import cashleh.Ui;
 import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehBudgetException;
 

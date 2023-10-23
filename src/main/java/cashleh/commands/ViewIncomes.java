@@ -1,6 +1,5 @@
 package cashleh.commands;
 
-import cashleh.Ui;
 import cashleh.transaction.IncomeStatement;
 
 import java.util.logging.Level;
