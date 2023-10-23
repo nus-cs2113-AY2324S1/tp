@@ -9,6 +9,8 @@ import seedu.stocker.commands.Command;
 import seedu.stocker.commands.CommandResult;
 import seedu.stocker.commands.ExitCommand;
 import seedu.stocker.drugs.Inventory;
+import seedu.stocker.drugs.SalesList;
+import seedu.stocker.drugs.Cart;
 
 import java.io.IOException;
 
@@ -17,6 +19,8 @@ public class Stocker {
 
     private Ui ui;
     private Inventory inventory;
+    private SalesList salesList;
+    private Cart currentCart;
     private Storage storage;
 
     public static void main(String[] launchArgs) throws IOException, StockerException {
@@ -32,11 +36,7 @@ public class Stocker {
         LoginSystem system = new LoginSystem();
         system.run();
 
-        if (system.loginStatus == true) {
-            return true;
-        } else {
-            return false;
-        }
+        return system.loginStatus;
     }
 
 
@@ -55,7 +55,9 @@ public class Stocker {
     private void start() throws IOException, StockerException {
         this.ui = new Ui();
         this.inventory = new Inventory();
-        this.storage = new Storage();
+        this.salesList = new SalesList();
+        this.currentCart = new Cart();
+        this.storage = new Storage(inventory);
         storage.loadFileContents("drugs.txt");
         boolean checker = startLogin();
         assert checker == true;
@@ -95,7 +97,7 @@ public class Stocker {
      * @return result of the command
      */
     private CommandResult executeCommand(Command command) throws IOException, StockerException {
-        command.setData(inventory);
+        command.setData(inventory, salesList, currentCart);
         CommandResult result = command.execute();
         return result;
     }

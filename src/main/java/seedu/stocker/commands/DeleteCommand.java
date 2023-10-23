@@ -1,8 +1,7 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.drugs.Drug;
-
-import java.util.List;
+import seedu.stocker.drugs.StockEntry;
+import seedu.stocker.exceptions.DrugNotFoundException;
 
 public class DeleteCommand  extends Command{
 
@@ -14,18 +13,19 @@ public class DeleteCommand  extends Command{
             + " <Drug Name>";
 
     public static final String MESSAGE_SUCCESS = "Drug removed from inventory: %1$s";
+    public static final String MESSAGE_FAILURE = "Drug not find in the inventory. ";
 
 
 
-    private final String nameToDelete;
+    private final String keyToDelete;
 
     /**
      * Constructs a DeleteCommand with the specified drug name.
      *
      * @param name The name of the drug to be deleted.
      */
-    public DeleteCommand(String name) {
-        this.nameToDelete = name;
+    public DeleteCommand(String key) {
+        this.keyToDelete = key.trim().toLowerCase();
     }
 
     /**
@@ -35,22 +35,11 @@ public class DeleteCommand  extends Command{
      */
     @Override
     public CommandResult execute() {
-        List<Drug> drugList = inventory.getAllDrugs();
-
-        // Find the drug by name and remove it from the list
-        Drug drugToRemove = null;
-        for (Drug drug : drugList) {
-            if (drug.getName().equalsIgnoreCase(nameToDelete)) {
-                drugToRemove = drug;
-                break;
-            }
-        }
-
-        if (drugToRemove != null) {
-            drugList.remove(drugToRemove);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, drugToRemove));
-        } else {
-            return new CommandResult("Drug not found in inventory.");
+        try {
+            StockEntry deletedEntry = inventory.deleteDrug(this.keyToDelete);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, deletedEntry.getDrug().getName()));
+        } catch (DrugNotFoundException e) {
+            return new CommandResult(MESSAGE_FAILURE);
         }
     }
 }

@@ -2,10 +2,12 @@ package seedu.stocker.parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import seedu.stocker.commands.Command;
 import seedu.stocker.commands.AddCommand;
+import seedu.stocker.commands.AddToCartCommand;
+import seedu.stocker.commands.CheckOutCommand;
 import seedu.stocker.commands.ListCommand;
+import seedu.stocker.commands.ViewCartCommand;
 import seedu.stocker.commands.HelpCommand;
 import seedu.stocker.commands.ExitCommand;
 import seedu.stocker.commands.IncorrectCommand;
@@ -41,8 +43,14 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return prepareFindCommand(arguments);
 
+        case AddToCartCommand.COMMAND_WORD:
+            return prepareAddToCartCommand(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommand(arguments);
+
+        case CheckOutCommand.COMMAND_WORD:
+            return new CheckOutCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -52,6 +60,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case ViewCartCommand.COMMAND_WORD:
+            return new ViewCartCommand();
 
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommand();
@@ -74,13 +85,35 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAddCommand(String args) {
-        Pattern pattern = Pattern.compile("/n (.*) /d (.*) /q (.*)");
+        try {
+            Pattern pattern = Pattern.compile("/n (.*) /d (.*) /q (.*)");
+            Matcher matcher = pattern.matcher(args);
+            if (matcher.matches() && matcher.groupCount() == 3) {
+                String name = matcher.group(1);
+                String expiryDate = matcher.group(2);
+                Long quantity = Long.parseLong(matcher.group(3));
+                return new AddCommand(name, expiryDate, quantity);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the add drug to cart command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareAddToCartCommand(String args) {
+        Pattern pattern = Pattern.compile("/n (.*) /q (.*)");
         Matcher matcher = pattern.matcher(args);
-        if (matcher.matches() && matcher.groupCount() == 3) {
+        if (matcher.matches() && matcher.groupCount() == 2) {
             String name = matcher.group(1);
-            String expiryDate = matcher.group(2);
-            Long quantity = Long.parseLong(matcher.group(3));
-            return new AddCommand(name, expiryDate, quantity);
+            Long quantity = Long.parseLong(matcher.group(2));
+            return new AddToCartCommand(name, quantity);
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }

@@ -16,6 +16,12 @@ import static java.lang.Long.parseLong;
  * Represents an object to handle writing to txt files and appending to them.
  */
 public class Storage {
+
+    private Inventory inventory;
+
+    public Storage(Inventory inventory) {
+        this.inventory = inventory;
+    }
     /**
      * Writes to the first line of a txt file
      * can be used to clear a txt file as well.
@@ -69,14 +75,9 @@ public class Storage {
             String expiryDate =spliced[3].trim();
             String quantity = spliced[5].trim();
 
-            Drug drug = new Drug(drugName,expiryDate,parseLong(quantity));
+            Drug drug = new Drug(drugName,expiryDate);
 
-
-            Inventory.allDrugs.add(drug);
-
-
-
-
+            inventory.addNewDrug(drugName, drug, parseLong(quantity));
         }
     }
 
