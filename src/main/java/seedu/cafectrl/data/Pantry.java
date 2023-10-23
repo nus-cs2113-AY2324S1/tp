@@ -32,10 +32,17 @@ public class Pantry {
      *
      * @return An ArrayList of Ingredient objects representing the pantry stock.
      */
-    public ArrayList<Ingredient> retrieveStockFromStorage () {
+    public ArrayList<Ingredient> retrieveStockFromStorage() {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         //TODO: Add file reader to read from pantry.txt
         return pantryStock;
+    }
+
+    /**
+     * Writes the pantry stock to storage, e.g., by write to a file (pantry.txt).
+     */
+    public void writeToPantryStorage() {
+        //TODO: Add file writer to write update pantry.txt
     }
 
 
@@ -50,16 +57,16 @@ public class Pantry {
     public Ingredient addIngredientToStock (String name, int qty, String unit) {
         pantryStock = getPantryStock(); //get latest pantry stock from pantry.txt
         int ingredientIndex = getIndexOfIngredient(name);
+        //TODO: Add error handling for invalid index
 
         //if ingredient exists in pantry, add quantity of that ingredient
         if (ingredientIndex != -1) {
-            return addQty(qty, ingredientIndex);
+            return addIngredientQuantity(qty, ingredientIndex);
         }
 
         //else, add new ingredient to pantry
         Ingredient ingredient = new Ingredient(name, qty, unit);
         pantryStock.add(ingredient);
-        //TODO: Add file writer to write update pantry.txt
         return ingredient;
     }
 
@@ -70,7 +77,7 @@ public class Pantry {
      * @param ingredientIndex The index of the ingredient in the pantry stock (-1 if not found).
      * @return The Ingredient object that was added or updated in the pantry stock.
      */
-    private Ingredient addQty(int qty, int ingredientIndex) {
+    private Ingredient addIngredientQuantity(int qty, int ingredientIndex) {
         Ingredient ingredient = pantryStock.get(ingredientIndex);
         qty += ingredient.getQty(); //adds new qty to current qty
         ingredient.setQty(qty);
