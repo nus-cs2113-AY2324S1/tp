@@ -83,7 +83,8 @@ public class IncomeManager extends Commands{
         // Check if all fields are present in the string
         if (parts.length != 4) {
             LOGGER.log(Level.WARNING, "Missing or out-of-order fields detected in income details: " + details);
-            throw new KaChinnnngException("Expected fields `/description`, `/date`, and `/amount` are missing or improperly formatted.");
+            throw new KaChinnnngException("Expected fields `/description`, `/date`, and " +
+                    "`/amount` are missing or improperly formatted.");
         }
 
         // Populate the HashMap with extracted fields
