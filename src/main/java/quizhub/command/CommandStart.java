@@ -45,12 +45,7 @@ public class CommandStart extends Command{
             if (!startQnMode.equals("random") && !startQnMode.equals("normal")) {
                 throw new IllegalArgumentException("    Question mode must be either 'random' or 'normal'");
             }
-        }
-//        catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-//            System.out.println("    Ono! You did not indicate mode of the quiz :<");
-//            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
-//        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
         }finally {
@@ -72,33 +67,31 @@ public class CommandStart extends Command{
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert questions != null && ui != null && dataStorage != null;
-        if(startMode != null) {
-            switch (startMode.toLowerCase()) {
-            case "module":
-                assert startDetails != null;
-                ArrayList<Question> matchedModuleQuestions = questions.categoriseListByModule(startDetails);
-                if(startQnMode.equals("random")){
-                    Collections.shuffle(matchedModuleQuestions); // shuffles matched Questions
-                    questions.startQuiz(ui, matchedModuleQuestions);
-                }
-                else if(startQnMode.equals("normal")){
-                    questions.startQuiz(ui, matchedModuleQuestions);
-                }
-                break;
-            case "all":
-                ArrayList<Question> matchedAllQuestions = questions.getAllQns();
-                if(startQnMode.equals("random")){
-                    Collections.shuffle(matchedAllQuestions); // shuffles matched Questions
 
-                }
-                else if(startQnMode.equals("normal")){
-                    questions.startQuiz(ui, matchedAllQuestions);
-                }
-                break;
-            default:
-                System.out.println("    Please enter valid quiz mode :<");
-                break;
-            }
+        if (startMode == null || startQnMode == null || (!startQnMode.equals("random") && !startQnMode.equals("normal"))) {
+            System.out.println("    Invalid input. Please check the quiz mode and question mode.");
+            return;
         }
+
+        ArrayList<Question> matchedQuestions;
+
+        switch (startMode.toLowerCase()) {
+        case "module":
+            assert startDetails != null;
+            matchedQuestions = questions.categoriseListByModule(startDetails);
+            break;
+        case "all":
+            matchedQuestions = questions.getAllQns();
+            break;
+        default:
+            System.out.println("    Please enter a valid quiz mode :<");
+            return;
+        }
+
+        if (startQnMode.equals("random")) {
+            Collections.shuffle(matchedQuestions); // shuffles matched Questions
+        }
+
+        questions.startQuiz(ui, matchedQuestions);
     }
 }
