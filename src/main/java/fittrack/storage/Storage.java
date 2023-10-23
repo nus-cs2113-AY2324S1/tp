@@ -29,6 +29,7 @@ public class Storage {
     private final File workoutFile;
     private Path profilePath;
     private Path mealListPath;
+    private Path workoutListPath;
 
 
     /**
@@ -168,6 +169,36 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the {@code WorkoutList} data from this workout list storage file, and then returns it.
+     * Returns an empty {@code WorkoutList} if the file does not exist, or is not a regular file.
+     *
+     * @throws StorageOperationException if there were errors reading and/or converting data from file.
+     */
+    public WorkoutList workoutLoad() throws StorageOperationException {
+        workoutListPath = Paths.get(WORKOUT_LIST_FILE_PATH);
+        if (!Files.exists(workoutListPath) || !Files.isRegularFile(workoutListPath)) {
+            return new WorkoutList();
+        }
+
+        try {
+            return WorkoutListDecoder.decodeWorkoutList(Files.readAllLines(workoutListPath));
+        } catch (FileNotFoundException fnfe) {
+            throw new AssertionError("A non-existent file scenario is already handled earlier.");
+        } catch (IOException ioe) {
+            throw new StorageOperationException("Error writing to file: " + workoutListPath);
+        } catch (IllegalValueException ive) {
+            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
+        }
+    }
+
+    /**
+     * Checks if the profile file contains any profile settings if
+     * the file exists. If no data, program will prompt user to input
+     * profile data.
+     *
+     * @return true if file is empty and false otherwise
+     */
     public boolean isProfileFileEmpty() {
         try (FileReader reader = new FileReader(profileFile)) {
             int data = reader.read();
