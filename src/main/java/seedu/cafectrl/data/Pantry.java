@@ -61,7 +61,6 @@ public class Pantry {
         pantryStock.add(ingredient);
         //TODO: Add file writer to write update pantry.txt
         return ingredient;
-
     }
 
     /**
