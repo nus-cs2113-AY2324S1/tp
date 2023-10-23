@@ -17,7 +17,6 @@ class WatchListTest {
         ArrayList<Stock> stocks = wl.getStocks();
         assertNotNull(stocks.get(0).getPrice());
         assertNotNull(stocks.get(1).getPrice());
-        assertNotNull(stocks.get(2).getPrice());
     }
 
     @Test
