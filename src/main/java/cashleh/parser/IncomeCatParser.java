@@ -18,7 +18,6 @@ public class IncomeCatParser {
      * @return the corresponding IncomeCategory.
      */
     public static IncomeCategory parse(String catString) {
-        System.out.println(catString);
         for (String cat : incomeCatList) {
             if (cat.startsWith(catString.toUpperCase())) {
                 catString = cat;
