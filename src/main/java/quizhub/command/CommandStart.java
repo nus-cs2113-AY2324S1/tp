@@ -10,6 +10,8 @@ import quizhub.ui.Ui;
 public class CommandStart extends Command{
     private String startMode;
     private String startDetails = "";
+    private String startQnMode = "";
+
     /**
      * Creates a new start command
      *
@@ -22,7 +24,7 @@ public class CommandStart extends Command{
             startMode = commandDetails[1].split(" ")[0].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate mode of the quiz :<");
-            System.out.println("    Please format your input as start /[quiz mode] [start details]!");
+            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
             return;
         }
         try {
@@ -31,7 +33,15 @@ public class CommandStart extends Command{
             }
         }  catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate start details :<");
-            System.out.println("    Please format your input as start /[quiz mode] [start details]!");
+            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+        }
+        try {
+            // Reads in /random or /normal
+            startQnMode = commandDetails[2].split(" ")[0].strip();
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            System.out.println("    Ono! You did not indicate mode of the quiz :<");
+            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+            return;
         }
     }
 
