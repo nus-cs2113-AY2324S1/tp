@@ -10,7 +10,7 @@ import seedu.financialplanner.utils.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListCommand extends AbstractCommand{
+public class ListCommand extends Command {
     protected CashflowCategory category = null;
     public ListCommand(RawCommand rawCommand) throws IllegalArgumentException{
         String stringCategory = null;

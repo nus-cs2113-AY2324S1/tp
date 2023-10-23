@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WatchListCommand extends AbstractCommand {
+public class WatchListCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     public WatchListCommand(RawCommand rawCommand) throws IllegalArgumentException{
         if (!rawCommand.extraArgs.isEmpty()) {

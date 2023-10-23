@@ -2,7 +2,7 @@ package seedu.financialplanner.commands;
 
 import java.util.ArrayList;
 
-public class ExitCommand extends AbstractCommand {
+public class ExitCommand extends Command {
     public ExitCommand(RawCommand rawCommand) {
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);

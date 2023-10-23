@@ -7,7 +7,7 @@ import seedu.financialplanner.utils.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DeleteCashflowCommand extends AbstractCommand {
+public class DeleteCashflowCommand extends Command {
 
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;

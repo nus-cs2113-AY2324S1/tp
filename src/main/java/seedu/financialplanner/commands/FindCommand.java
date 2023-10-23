@@ -6,7 +6,7 @@ import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
 
-public class FindCommand extends AbstractCommand {
+public class FindCommand extends Command {
     private final String description;
 
     public FindCommand(RawCommand rawCommand) {

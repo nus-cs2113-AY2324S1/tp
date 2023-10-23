@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 
-public class BudgetCommand extends AbstractCommand {
+public class BudgetCommand extends Command {
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private double budget;
     private String command;
