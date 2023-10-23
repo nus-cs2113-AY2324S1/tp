@@ -23,10 +23,8 @@ public class ListCommand extends Commands {
     }
     @Override
     public void execute() {
-        ui.showLineDivider();
         if (incomes.isEmpty() && expenses.isEmpty()) {
             System.out.println("You do not have any records.");
-            ui.showLineDivider();
             return;
         }
         // Print incomes
@@ -52,7 +50,6 @@ public class ListCommand extends Commands {
             }
             System.out.printf("Total expenses is: $%.2f.\n", totalExpenses);
         }
-        System.out.printf("Total balance is: $%.2f.\n", totalIncome - totalExpenses);
-        ui.showLineDivider();
+        System.out.printf("\nTotal balance is: $%.2f.\n", totalIncome - totalExpenses);
     }
 }

@@ -10,7 +10,6 @@ public class DeleteIncomeCommand extends Commands {
     }
 
     public void execute(ArrayList<Income> incomes, String fullcommand, Ui ui) throws KaChinnnngException {
-        ui.showLineDivider();
         int index = 0;
         try {
             String[] tokens = fullcommand.split(" ", 3);
@@ -19,7 +18,6 @@ public class DeleteIncomeCommand extends Commands {
             incomes.remove(index-1);
             System.out.println("Noted. This income record has been deleted:");
             System.out.println(removedIncome);
-            ui.showLineDivider();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new KaChinnnngException("You're missing an argument");
         } catch (NullPointerException | NumberFormatException e) {

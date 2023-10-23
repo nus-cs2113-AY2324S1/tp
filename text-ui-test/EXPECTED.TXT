@@ -61,6 +61,7 @@ Total income is: $5000.00.
 Here are your expenses:
 1. Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
 Total expenses is: $10.00.
+
 Total balance is: $4990.00.
 ____________________________________________________________
 ____________________________________________________________
