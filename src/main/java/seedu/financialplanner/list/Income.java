@@ -36,6 +36,7 @@ public class Income extends Cashflow{
         return "Income" + System.lineSeparator() +
                 "   Type: " + capitalize(type.toString().toLowerCase()) + System.lineSeparator() + super.toString();
     }
+
     @Override
     public String formatString() {
         return "I | " + this.amount + " | " + this.type + super.formatString();

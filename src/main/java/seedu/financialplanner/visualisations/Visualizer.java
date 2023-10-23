@@ -18,8 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Visualizer {
-
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
+
     public static void displayChart(String chartType, Map<String, Double> expensesByCat)
             throws FinancialPlannerException {
         switch (chartType) {
@@ -32,9 +32,8 @@ public class Visualizer {
         default:
             throw new FinancialPlannerException("Chart Type Not Found");
         }
-
-
     }
+
     public static void displayPieChart (Map<String, Double> expensesByCat) {
         PieChart chart = new PieChartBuilder().width(800).height(600).title("Test").build();
 

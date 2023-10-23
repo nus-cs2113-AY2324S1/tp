@@ -24,11 +24,12 @@ public class StorageTest {
     public static Path testFolder;
     protected CashflowList cashflowList = CashflowList.getInstance();
     protected Ui ui = Ui.getInstance();
+    protected Storage storage = Storage.getInstance();
+
     @Test
     public void loadValidData() throws FinancialPlannerException {
-        Storage storage = Storage.INSTANCE;
         cashflowList.list.clear();
-        storage.load(cashflowList, ui, "src/test/testData/ValidData.txt");
+        storage.load("src/test/testData/ValidData.txt");
         String actual = cashflowList.getList();
         cashflowList.list.clear();
         getTestData();
@@ -38,20 +39,18 @@ public class StorageTest {
 
     @Test
     public void loadInvalidData_userInputNo() {
-        Storage storage = Storage.INSTANCE;
         cashflowList.list.clear();
         ByteArrayInputStream in = new ByteArrayInputStream("n".getBytes());
         ui.setScanner(new Scanner(in));
         assertThrows(FinancialPlannerException.class,
-                () -> storage.load(cashflowList, ui, "src/test/testData/InvalidData.txt"));
+                () -> storage.load("src/test/testData/InvalidData.txt"));
     }
 
     @Test
     public void saveValidData() throws FinancialPlannerException, IOException {
         cashflowList.list.clear();
         getTestData();
-        Storage storage = Storage.INSTANCE;
-        storage.save(cashflowList, String.valueOf(testFolder.resolve("temp.txt")));
+        storage.save(String.valueOf(testFolder.resolve("temp.txt")));
         assertEquals(Files.readAllLines(Path.of("src/test/testData/ValidData.txt")),
                 Files.readAllLines(testFolder.resolve("temp.txt")));
     }
@@ -59,8 +58,7 @@ public class StorageTest {
     @Test
     public void saveNonExistentFile() {
         getTestData();
-        Storage storage = Storage.INSTANCE;
-        assertThrows(FinancialPlannerException.class, () -> storage.save(cashflowList, ""));
+        assertThrows(FinancialPlannerException.class, () -> storage.save(""));
     }
 
     private void getTestData() {

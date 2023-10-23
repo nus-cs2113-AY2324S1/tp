@@ -31,6 +31,7 @@ public class Stock implements Serializable {
     public String getStockName() {
         return stockName;
     }
+
     public String getStockNameFromAPI(String symbol) throws FinancialPlannerException {
         final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
         final String API_KEY = "LNKL0548PHY2F0QU";

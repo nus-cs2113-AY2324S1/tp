@@ -1,6 +1,6 @@
 package seedu.financialplanner.utils;
 
-import seedu.financialplanner.commands.AbstractCommand;
+import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.AddStockCommand;
 import seedu.financialplanner.commands.OverviewCommand;
 import seedu.financialplanner.commands.AddCashflowCommand;
@@ -15,6 +15,7 @@ import seedu.financialplanner.commands.VisCommand;
 import seedu.financialplanner.commands.BudgetCommand;
 import seedu.financialplanner.commands.AddReminderCommand;
 import seedu.financialplanner.commands.SetGoalCommand;
+import seedu.financialplanner.commands.BalanceCommand;
 import seedu.financialplanner.commands.DeleteStockCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
@@ -39,13 +40,14 @@ public class Parser {
     private static final String ADD_REMINDER_COMMAND = "addreminder";
     private static final String LIST_COMMAND = "list";
     private static final String SET_GOAL_COMMAND = "set";
+    private static final String BALANCE_COMMAND = "balance";
 
-    public static AbstractCommand parseCommand(String input) throws FinancialPlannerException {
+    public static Command parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
         return parseCommand(rawCommand);
     }
 
-    public static AbstractCommand parseCommand(RawCommand rawCommand) throws FinancialPlannerException {
+    public static Command parseCommand(RawCommand rawCommand) throws FinancialPlannerException {
         switch (rawCommand.getCommandName()) {
         case EXIT_COMMAND:
             return new ExitCommand(rawCommand);
@@ -73,6 +75,8 @@ public class Parser {
             return new ListCommand(rawCommand);
         case SET_GOAL_COMMAND:
             return new SetGoalCommand(rawCommand);
+        case BALANCE_COMMAND:
+            return new BalanceCommand(rawCommand);
         default:
             return new InvalidCommand();
         }
