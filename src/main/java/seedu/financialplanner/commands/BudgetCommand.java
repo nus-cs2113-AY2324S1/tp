@@ -68,22 +68,23 @@ public class BudgetCommand extends AbstractCommand {
     public void execute() {
         assert command.equals("set") || command.equals("update") : "Command should be set or update only";
 
+        Ui ui = Ui.getInstance();
         switch (command) {
         case "set":
             logger.log(Level.INFO, "Setting budget");
             Budget.setBudget(budget);
-            Ui.INSTANCE.showMessage("A monthly budget of " + Budget.getInitialBudgetString()
+            ui.showMessage("A monthly budget of " + Budget.getInitialBudgetString()
                     + " has been set.");
             break;
         case "update":
             logger.log(Level.INFO, "Updating budget");
-            Ui.INSTANCE.printBudgetBeforeUpdate();
+            ui.printBudgetBeforeUpdate();
             Budget.updateBudget(budget);
-            Ui.INSTANCE.printBudgetAfterUpdate();
+            ui.printBudgetAfterUpdate();
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");
-            Ui.INSTANCE.showMessage("Unknown command.");
+            ui.showMessage("Unknown command.");
         }
     }
 }

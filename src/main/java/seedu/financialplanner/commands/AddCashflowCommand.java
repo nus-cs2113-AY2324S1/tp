@@ -1,6 +1,8 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.enumerations.CashflowCategory;
+import seedu.financialplanner.enumerations.ExpenseType;
+import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
@@ -12,18 +14,20 @@ import java.util.logging.Logger;
 
 
 public class AddCashflowCommand extends AbstractCommand {
-
+    protected static Ui ui = Ui.getInstance();
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     protected double amount;
     protected CashflowCategory category;
-    protected String type;
+    protected ExpenseType expenseType;
+    protected IncomeType incomeType;
     protected int recur = 0;
+    protected CashflowList cashflowList = CashflowList.getInstance();
 
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
-        String typeString = String.join(" ", rawCommand.args);
+        String categoryString = String.join(" ", rawCommand.args);
         try {
             logger.log(Level.INFO, "Parsing CashflowCategory");
-            category = CashflowCategory.valueOf(typeString.toUpperCase());
+            category = CashflowCategory.valueOf(categoryString.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
             throw new IllegalArgumentException("Entry must be either income or expense");
@@ -50,10 +54,25 @@ public class AddCashflowCommand extends AbstractCommand {
             logger.log(Level.WARNING, "Missing arguments for type");
             throw new IllegalArgumentException("Entry must have a type");
         }
-        type = rawCommand.extraArgs.get("t");
-        if (type.isBlank()) {
-            logger.log(Level.WARNING, "Invalid arguments for type");
-            throw new IllegalArgumentException("Type cannot be left empty");
+        String stringType = rawCommand.extraArgs.get("t");
+        if (category.equals(CashflowCategory.EXPENSE)) {
+            try {
+                logger.log(Level.INFO, "Parsing ExpenseType");
+                expenseType = ExpenseType.valueOf(stringType.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                logger.log(Level.WARNING, "Invalid arguments for ExpenseType");
+                throw new IllegalArgumentException("Entry must be one of the following: " +
+                        "dining, entertainment, shopping, travel, insurance, others");
+            }
+        } else if (category.equals(CashflowCategory.INCOME)) {
+            try {
+                logger.log(Level.INFO, "Parsing IncomeType");
+                incomeType = IncomeType.valueOf(stringType.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                logger.log(Level.WARNING, "Invalid arguments for IncomeType");
+                throw new IllegalArgumentException("Entry must be one of the following: " +
+                        "salary, investments, allowance, others");
+            }
         }
         rawCommand.extraArgs.remove("t");
 
@@ -84,22 +103,29 @@ public class AddCashflowCommand extends AbstractCommand {
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
         assert recur >= 0;
         assert amount >= 0;
-        assert type != null;
+        if (category.equals(CashflowCategory.EXPENSE)) {
+            assert expenseType.equals(ExpenseType.DINING) || expenseType.equals(ExpenseType.ENTERTAINMENT)
+                    || expenseType.equals(ExpenseType.SHOPPING) || expenseType.equals(ExpenseType.TRAVEL)
+                    || expenseType.equals(ExpenseType.INSURANCE) || expenseType.equals(ExpenseType.OTHERS)
+                    || expenseType.equals(ExpenseType.NECESSITIES);
+        } else if (category.equals(CashflowCategory.INCOME)) {
+            assert incomeType.equals(IncomeType.SALARY) || incomeType.equals(IncomeType.INVESTMENTS)
+                    || incomeType.equals(IncomeType.ALLOWANCE) || incomeType.equals(IncomeType.OTHERS);
+        }
 
         switch (category) {
         case INCOME:
-            CashflowList.INSTANCE.addIncome(amount, type, recur);
+            cashflowList.addIncome(amount, incomeType, recur);
             break;
         case EXPENSE:
-            CashflowList list = CashflowList.INSTANCE;
-            list.addExpense(amount, type, recur);
+            cashflowList.addExpense(amount, expenseType, recur);
             if (Budget.hasBudget()) {
-                deductFromBudget(list.list.get(list.list.size() - 1));
+                deductFromBudget(cashflowList.list.get(cashflowList.list.size() - 1));
             }
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");
-            Ui.INSTANCE.showMessage("Unidentified entry.");
+            ui.showMessage("Unidentified entry.");
             break;
         }
     }
@@ -107,6 +133,6 @@ public class AddCashflowCommand extends AbstractCommand {
     private static void deductFromBudget(Cashflow entry) {
         double expenseAmount = entry.getAmount();
         Budget.deduct(expenseAmount);
-        Ui.INSTANCE.printBudgetAfterDeduction();
+        ui.printBudgetAfterDeduction();
     }
 }

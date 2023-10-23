@@ -45,8 +45,9 @@ public class ListCommand extends AbstractCommand{
 
     @Override
     public void execute() throws Exception {
+        Ui ui = Ui.getInstance();
 
-        List<Cashflow> cashflowList = CashflowList.INSTANCE.list;
+        List<Cashflow> cashflowList = CashflowList.getInstance().list;
         List<Cashflow> cashflowToBePrinted = new ArrayList<>();
         for (Cashflow flow : cashflowList) {
             if (!shouldPrintCashFlow(flow)) {
@@ -56,13 +57,13 @@ public class ListCommand extends AbstractCommand{
         }
 
         if (cashflowToBePrinted.isEmpty()) {
-            Ui.INSTANCE.showMessage("No matching cash flow");
+            ui.showMessage("No matching cash flow");
             return;
         }
 
-        Ui.INSTANCE.showMessage(String.format("You have %d matching cash flow:", cashflowToBePrinted.size()));
+        ui.showMessage(String.format("You have %d matching cash flow:", cashflowToBePrinted.size()));
         for (int i = 0; i < cashflowToBePrinted.size(); i += 1) {
-            Ui.INSTANCE.showMessage((i+ 1) + ": " + cashflowToBePrinted.get(i).toString());
+            ui.showMessage((i+ 1) + ": " + cashflowToBePrinted.get(i).toString());
         }
     }
 }
