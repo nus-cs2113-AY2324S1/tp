@@ -17,9 +17,11 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New drug added in the inventory: %1$s";
 
     private final Drug toAdd;
+    private final long quantity;
 
     public AddCommand(String name, String expiryDate, Long quantity) {
-        this.toAdd = new Drug(name, expiryDate, quantity);
+        this.toAdd = new Drug(name, expiryDate);
+        this.quantity = quantity;
     }
 
     public Drug getDrug() {
@@ -28,7 +30,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        inventory.addDrug(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.name));
+        inventory.addNewDrug(toAdd.getName(), toAdd, quantity);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName()));
     }
 }

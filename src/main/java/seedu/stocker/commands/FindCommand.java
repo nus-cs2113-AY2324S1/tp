@@ -1,6 +1,6 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.drugs.Drug;
+import seedu.stocker.drugs.StockEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +40,16 @@ public class FindCommand extends Command {
      */
     public FindCommand(String keyword, String criterion) {
 
-        this.keyword = keyword;
+        this.keyword = keyword.toLowerCase();
         this.criterion = criterion;
+    }
+
+    private static boolean matches(String criterion, String keyword, StockEntry entry) {
+        if (criterion.equals("/n")) {
+            return entry.getDrug().getName().toLowerCase().contains(keyword);
+        } else {
+            return entry.getDrug().getExpiryDate().toLowerCase().contains(keyword);
+        }
     }
 
     /**
@@ -55,23 +63,15 @@ public class FindCommand extends Command {
             return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
-        List<Drug> drugs = inventory.getAllDrugs();
-        List<Drug> foundDrugs = new ArrayList<>();
+        List<StockEntry> entries = inventory.getStockEntries();
+        List<StockEntry> foundEntries = new ArrayList<>();
 
-        for (Drug drug : drugs) {
-            if (criterion.equals("/n")) {
-                String drugName = drug.getName().toLowerCase();
-                if (drugName.contains(keyword.toLowerCase())) {
-                    foundDrugs.add(drug);
-                }
-            } else if (criterion.equals("/d")) {
-                String expiryDate = drug.getExpiryDate().toLowerCase();
-                if (expiryDate.contains(keyword.toLowerCase())) {
-                    foundDrugs.add(drug);
-                }
+        for (StockEntry entry : entries) {
+            if (matches(this.criterion, this.keyword, entry)) {
+                foundEntries.add(entry);
             }
         }
 
-        return new CommandResult(MESSAGE_SUCCESS, foundDrugs);
+        return new CommandResult(MESSAGE_SUCCESS, foundEntries);
     }
 }

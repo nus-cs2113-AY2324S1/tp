@@ -4,12 +4,10 @@ public class Drug {
 
     public String name;
     String expiryDate;
-    Long quantity;
 
-    public Drug(String name, String expiryDate, Long quantity) {
+    public Drug(String name, String expiryDate) {
         this.name = name;
         this.expiryDate = expiryDate;
-        this.quantity = quantity;
     }
 
     /**
@@ -48,31 +46,14 @@ public class Drug {
         this.expiryDate = expiryDate;
     }
 
-    /**
-     * Gets the quantity of the drug.
-     *
-     * @return The quantity of the drug.
-     */
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * Sets the quantity of the drug.
-     *
-     * @param quantity The new quantity to set for the drug.
-     */
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
 
     /**
      * Returns a string representation of the drug.
      *
-     * @return A string containing the name, expiry date, and quantity of the drug.
+     * @return A string containing the name and expiry date of the drug.
      */
     @Override
     public String toString() {
-        return "Name: " + name + ", Expiry Date: " + expiryDate + ", Quantity: " + quantity;
+        return "Name: " + name + ", Expiry Date: " + expiryDate;
     }
 }

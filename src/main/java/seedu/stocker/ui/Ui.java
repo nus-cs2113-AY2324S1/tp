@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.List;
 import java.util.ArrayList;
 
-import seedu.stocker.drugs.Drug;
 import seedu.stocker.commands.CommandResult;
 
 import static seedu.stocker.common.Messages.MESSAGE_USERNAME_INPUT;
@@ -22,6 +21,7 @@ import static seedu.stocker.common.Messages.MESSAGE_INVALID_CHOICE;
 import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_USERNAME_OR_PASSWORD;
 import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_REGISTRATION;
+import static seedu.stocker.common.Messages.MESSAGE_INIT_FAILED;
 
 
 public class Ui {
@@ -139,10 +139,10 @@ public class Ui {
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
      */
-    public void showResultToUser(CommandResult result) {
-        final Optional<List<Drug>> resultDrugs = result.getRelevantDrugs();
-        if (resultDrugs.isPresent()) {
-            showDrugListView(resultDrugs.get());
+    public <T>void showResultToUser(CommandResult<T> result) {
+        final Optional<List<T>> resultElements = result.getRelevantElements();
+        if (resultElements.isPresent()) {
+            showElementsListView(resultElements.get());
         }
         showToUser(result.feedbackToUser, DIVIDER);
     }
@@ -157,12 +157,16 @@ public class Ui {
     /**
      * Shows a list of drugs to the user, formatted as an indexed list.
      */
-    private void showDrugListView(List<Drug> drugs) {
-        final List<String> formattedDrugs = new ArrayList<>();
-        for (Drug drug : drugs) {
-            formattedDrugs.add(drug.toString());
+    private <T>void showElementsListView(List<T> elements) {
+        final List<String> formattedElements = new ArrayList<>();
+        for (int i = 0; i < elements.size(); i++) {
+            formattedElements.add(elements.get(i).toString());
         }
-        showToUserAsIndexedList(formattedDrugs);
+        showToUserAsIndexedList(formattedElements);
+    }
+
+    public void showInitFailedMessage() {
+        showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 
     /**

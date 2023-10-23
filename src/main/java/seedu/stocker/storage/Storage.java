@@ -3,19 +3,26 @@ package seedu.stocker.storage;
 
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
+import seedu.stocker.exceptions.InvalidDrugFormatException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static java.lang.Long.parseLong;
-
 /**
  * Represents an object to handle writing to txt files and appending to them.
  */
 public class Storage {
+
+    private Inventory inventory;
+
+    public Storage(Inventory inventory) {
+        this.inventory = inventory;
+    }
     /**
      * Writes to the first line of a txt file
      * can be used to clear a txt file as well.
@@ -50,7 +57,7 @@ public class Storage {
      * @param filePath Relative path to file containing list of drugs to be loaded.
      * @throws IOException if file is not found
      */
-    public void loadFileContents(String filePath) throws IOException {
+    public void loadFileContents(String filePath) throws IOException, InvalidDrugFormatException {
         File holder = new File("./drugs.txt");
         if (!holder.exists()) {
             holder.createNewFile();
@@ -58,25 +65,19 @@ public class Storage {
         File f = new File(filePath);
         Scanner reader = new Scanner(f);
 
+        Pattern pattern = Pattern.compile("Name: (.*), Expiry date: (.*), Quantity: (.*)");
+        while(reader.hasNextLine()){
+            Matcher matcher = pattern.matcher(reader.nextLine());
+            if (matcher.matches() && matcher.groupCount() == 3) {
+                String name = matcher.group(1);
+                String expiryDate = matcher.group(2);
+                Long quantity = Long.parseLong(matcher.group(3));
 
-        while(reader.hasNext()){
-            String data = reader.nextLine();
-
-            String dataInArray = data;
-            String[] spliced = dataInArray.split("Name:|Expiry Date:|Quantity:|,");
-
-            String drugName = spliced[1].trim();
-            String expiryDate =spliced[3].trim();
-            String quantity = spliced[5].trim();
-
-            Drug drug = new Drug(drugName,expiryDate,parseLong(quantity));
-
-
-            Inventory.allDrugs.add(drug);
-
-
-
-
+                Drug drug = new Drug(name, expiryDate);
+                inventory.addNewDrug(name, drug, quantity);
+            } else {
+                throw new InvalidDrugFormatException("");
+            }
         }
     }
 

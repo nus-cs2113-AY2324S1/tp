@@ -1,6 +1,6 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.drugs.Drug;
+import seedu.stocker.drugs.StockEntry;
 import seedu.stocker.storage.Storage;
 
 import java.io.File;
@@ -27,12 +27,12 @@ public class SaveCommand extends Command{
             holder.createNewFile();
         }
 
-        List<Drug> drugList = inventory.getAllDrugs();
-        Storage storageManager = new Storage();
+        List<StockEntry> entries= inventory.getStockEntries();
+        Storage storageManager = new Storage(inventory);
         storageManager.writeToFile("drugs.txt", "");
 
-        for(int i = 0; i < drugList.size(); i += 1){
-            storageManager.appendToFile("drugs.txt",drugList.get(i).toString());
+        for(int i = 0; i < entries.size(); i += 1){
+            storageManager.appendToFile("drugs.txt",entries.get(i).toString());
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }

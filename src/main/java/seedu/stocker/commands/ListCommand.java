@@ -1,6 +1,6 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.drugs.Drug;
+import seedu.stocker.drugs.StockEntry;
 
 import java.util.List;
 
@@ -29,15 +29,15 @@ public class ListCommand extends Command {
         // Assertion: Check if the inventory is properly initialised
         assert inventory != null : "Inventory should be initialised before executing ListCommand.";
         // Retrieve the list of drugs from the inventory
-        List<Drug> drugs = inventory.getAllDrugs();
+        List<StockEntry> stockEntries = inventory.getStockEntries();
 
         // Check if the inventory is empty
-        if (drugs.isEmpty()) {
+        if (stockEntries.isEmpty()) {
             // Return a CommandResult indicating that the inventory is empty
             return new CommandResult("The inventory is empty.");
         } else {
             // Return a CommandResult with the success message and the list of drugs
-            return new CommandResult(MESSAGE_SUCCESS, drugs);
+            return new CommandResult(MESSAGE_SUCCESS, stockEntries);
         }
     }
 }
