@@ -1,9 +1,10 @@
 package seedu.duke.ui;
+import java.util.List;
 import java.util.Scanner;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
-//import java.util.ArrayList;
+
 
 /**
  * This class handles the user interface of the program.
@@ -37,7 +38,7 @@ public class Ui {
     /**
      * This method prints the line divider.
      */
-    public void showLineDivider() {
+    public static void showLineDivider() {
         System.out.println(lineDivider);
     }
 
@@ -83,4 +84,29 @@ public class Ui {
         System.out.println("Here are your expenses:");
     }
 
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    public void showMatchingIncomes(List<Income> matchingIncomes) {
+        if(matchingIncomes.isEmpty()) {
+            System.out.println("No matching incomes found.");
+        } else {
+            System.out.println("Here are the matching incomes in your list:");
+            for (Income income : matchingIncomes) {
+                System.out.println(income.toString());
+            }
+        }
+    }
+
+    public void showMatchingExpenses(List<Expense> matchingExpenses) {
+        if(matchingExpenses.isEmpty()) {
+            System.out.println("No matching expenses found.");
+        } else {
+            System.out.println("Here are the matching expenses in your list:");
+            for (Expense expense : matchingExpenses) {
+                System.out.println(expense.toString());
+            }
+        }
+    }
 }
