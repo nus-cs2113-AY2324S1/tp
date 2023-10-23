@@ -15,7 +15,6 @@ public class Chef {
             pantry.decreaseIngredientsStock(order.usedIngredientList);
             order.setComplete();
             System.out.println("Is order completed?: " + order.isComplete);
-            pantry.printPantryStock();
         } catch (Exception e) {
             System.out.println("Unable to cook: " + e.getMessage());
         }

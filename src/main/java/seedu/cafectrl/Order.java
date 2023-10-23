@@ -1,6 +1,5 @@
 package seedu.cafectrl;
 
-import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 
 import java.text.DecimalFormat;
