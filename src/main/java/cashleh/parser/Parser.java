@@ -1,18 +1,25 @@
 package cashleh.parser;
 
-import cashleh.transaction.Expense;
-import cashleh.transaction.ExpenseStatement;
-import cashleh.transaction.Income;
-import cashleh.transaction.IncomeStatement;
-import cashleh.exceptions.CashLehParsingException;
-import cashleh.commands.Command;
-import cashleh.commands.AddIncome;
+import cashleh.budget.Budget;
+import cashleh.budget.BudgetHandler;
 import cashleh.commands.AddExpense;
-import cashleh.commands.ViewIncomes;
-import cashleh.commands.ViewExpenses;
-import cashleh.commands.DeleteExpense;
+import cashleh.commands.AddIncome;
+import cashleh.commands.DeleteBudget;
 import cashleh.commands.DeleteIncome;
+import cashleh.commands.DeleteExpense;
 import cashleh.commands.Exit;
+import cashleh.commands.UpdateBudget;
+import cashleh.commands.ViewExpenses;
+import cashleh.commands.ViewBudget;
+import cashleh.commands.ViewIncomes;
+import cashleh.commands.ViewFinancialStatement;
+import cashleh.commands.Command;
+import cashleh.transaction.Income;
+import cashleh.transaction.Expense;
+import cashleh.transaction.IncomeStatement;
+import cashleh.transaction.ExpenseStatement;
+
+import cashleh.exceptions.CashLehParsingException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -24,14 +31,21 @@ public class Parser {
     private static final String ADD_EXPENSE = "addExpense";
     private static final String DELETE_EXPENSE = "deleteExpense";
     private static final String VIEW_EXPENSES = "viewExpenses";
+
+    private static final String UPDATE_BUDGET = "updateBudget";
+    private static final String DELETE_BUDGET = "deleteBudget";
+    private static final String VIEW_BUDGET = "viewBudget";
+    private static final String VIEW_FINANCIAL_STATEMENT = "viewFinancialStatement";
     private static final String EXIT = "exit";
 
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
+    private final BudgetHandler budgetHandler;
 
-    public Parser(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
+    public Parser(ExpenseStatement expenseStatement, IncomeStatement incomeStatement, BudgetHandler budgetHandler) {
         this.expenseStatement = expenseStatement;
         this.incomeStatement = incomeStatement;
+        this.budgetHandler = budgetHandler;
     }
 
     public Command parse(String input) throws CashLehParsingException {
@@ -51,13 +65,21 @@ public class Parser {
             return getDeleteTransaction(input, DELETE_EXPENSE);
         case VIEW_EXPENSES:
             return new ViewExpenses(expenseStatement);
+        case UPDATE_BUDGET:
+            Budget budget = getBudget(input);
+            return new UpdateBudget(budget, budgetHandler);
+        case DELETE_BUDGET:
+            return new DeleteBudget(budgetHandler);
+        case VIEW_BUDGET:
+            return new ViewBudget(budgetHandler);
+        case VIEW_FINANCIAL_STATEMENT:
+            return new ViewFinancialStatement(incomeStatement, expenseStatement);
         case EXIT:
             return new Exit();
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
     }
-
 
     private Expense getExpense(String input) throws CashLehParsingException {
         String[] format = {ADD_EXPENSE, "/amt", "/date:optional"};
@@ -128,5 +150,16 @@ public class Parser {
         }
         return transactionType.equals(DELETE_EXPENSE) ?
             new DeleteExpense(transactionIndex, expenseStatement) : new DeleteIncome(transactionIndex, incomeStatement);
+    }
+
+    private Budget getBudget(String input) throws CashLehParsingException {
+        String newBudget = input.split(" ", 2)[1];
+        int newBudgetAmount;
+        try {
+            newBudgetAmount = Integer.parseInt(newBudget);
+        } catch (NumberFormatException e) {
+            throw new CashLehParsingException("Eh, that's not the kind of number we flaunt in CashLeh!");
+        }
+        return new Budget(newBudgetAmount);
     }
 }

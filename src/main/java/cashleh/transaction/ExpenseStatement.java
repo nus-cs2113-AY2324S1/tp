@@ -42,12 +42,16 @@ public class ExpenseStatement {
             throw new CashLehMissingTransactionException();
         }
     }
+    public ArrayList<Expense> getExpenseStatement() {
+        return this.expenseStatement;
+    }
     public int getNumberOfExpenses() {
         return expenseStatement.size();
     }
 
     public double getTotalExpenseAmount() {
-        return expenseStatement.stream().mapToDouble(Expense::getAmount).sum();
+        return expenseStatement.stream().
+                mapToDouble(Expense::getAmount).sum();
     }
 
     public void printExpenses() {
