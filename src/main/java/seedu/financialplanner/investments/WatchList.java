@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.storage.LoadData;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,24 +21,25 @@ import java.util.logging.Logger;
 public class WatchList {
     private static WatchList watchlist = null;
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
-    private final ArrayList<Stock> stocks;
+    private ArrayList<Stock> stocks = null;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
 
     private WatchList() {
-        stocks = new ArrayList<>();
+        stocks = LoadData.loadWatchList();
+        if (!stocks.isEmpty()) {
+            return;
+        }
+        System.out.println("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
         try {
             Stock apple = new Stock("AAPL");
             assert apple.getSymbol() != null && apple.getStockName() != null;
             stocks.add(apple);
 
-            Stock meta = new Stock("META");
-            assert meta.getSymbol() != null && meta.getStockName() != null;
-            stocks.add(meta);
-
             Stock google = new Stock("GOOGL");
             assert google.getSymbol() != null && google.getStockName() != null;
             stocks.add(google);
+
         } catch (FinancialPlannerException e) {
             System.out.println(e.getMessage());
         }
@@ -126,5 +128,10 @@ public class WatchList {
     public ArrayList<Stock> getStocks() {
         return stocks;
     }
+
+    public void setStocks(ArrayList<Stock> stocks) {
+        this.stocks = stocks;
+    }
+
 
 }

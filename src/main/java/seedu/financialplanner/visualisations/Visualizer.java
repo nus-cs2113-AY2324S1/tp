@@ -39,11 +39,11 @@ public class Visualizer {
 
         // Customize Chart
         Color[] sliceColors = new Color[] {
-            new Color(224, 68, 14),
-            new Color(230, 105, 62),
-            new Color(236, 143, 110),
-            new Color(243, 180, 159),
-            new Color(246, 199, 182)
+            new Color(21, 224, 14),
+            new Color(62, 154, 230),
+            new Color(236, 186, 110),
+            new Color(243, 159, 242),
+            new Color(246, 182, 197)
         };
         chart.getStyler().setSeriesColors(sliceColors);
 
