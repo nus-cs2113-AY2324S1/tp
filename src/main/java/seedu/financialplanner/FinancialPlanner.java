@@ -12,7 +12,7 @@ import seedu.financialplanner.utils.Ui;
 public class FinancialPlanner {
 
     private static final String FILE_PATH = "data/data.txt";
-    private final Storage storage = Storage.INSTANCE;
+    private final Storage storage = Storage.getInstance();
     private final Ui ui = Ui.getInstance();
     private final WatchList watchList = WatchList.INSTANCE;
     private final CashflowList cashflowList = CashflowList.getInstance();
@@ -26,7 +26,7 @@ public class FinancialPlanner {
 
     public void run() {
         try {
-            storage.load(cashflowList, ui, FILE_PATH);
+            storage.load(FILE_PATH);
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
             return;
@@ -52,7 +52,7 @@ public class FinancialPlanner {
 
     public void save() {
         try {
-            storage.save(cashflowList, FILE_PATH);
+            storage.save(FILE_PATH);
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
         }

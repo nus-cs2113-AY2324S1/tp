@@ -9,7 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public abstract class SaveData {
-    public static void save(CashflowList cashflowList, String filePath) throws FinancialPlannerException {
+    private static final CashflowList cashflowList = CashflowList.getInstance();
+
+    public static void save(String filePath) throws FinancialPlannerException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Cashflow entry : cashflowList.list) {

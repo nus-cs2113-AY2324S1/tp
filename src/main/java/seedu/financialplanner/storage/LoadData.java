@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public abstract class LoadData {
-    public static void load(CashflowList cashflowList, Ui ui, String filePath) throws FinancialPlannerException {
+    private static final CashflowList cashflowList = CashflowList.getInstance();
+    private static final Ui ui = Ui.getInstance();
+
+    public static void load(String filePath) throws FinancialPlannerException {
         try {
             Scanner inputFile = new Scanner(new FileReader(filePath));
             String line;
@@ -43,17 +46,18 @@ public abstract class LoadData {
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | FinancialPlannerException e) {
-            handleCorruptedFile(cashflowList, ui);
+            String message = e.getMessage();
+            handleCorruptedFile(message);
         }
     }
 
-    private static void handleCorruptedFile(CashflowList cashflowList, Ui ui) throws FinancialPlannerException {
+    private static void handleCorruptedFile(String message) throws FinancialPlannerException {
         ui.showMessage("File appears to be corrupted. Do you want to create a new file? (Y/N)");
-        if (createNewFile(ui)) {
+        if (createNewFile()) {
             cashflowList.list.clear();
         } else {
             throw new FinancialPlannerException("Please fix the corrupted file, " +
-                    "which can be found in data/data.txt.");
+                    "which can be found in data/data.txt.\nError message: " + message);
         }
     }
 
@@ -64,11 +68,13 @@ public abstract class LoadData {
             throw new IllegalArgumentException("Negative values for budget");
         } else if (initial > Cashflow.getBalance() || current > Cashflow.getBalance()) {
             throw new IllegalArgumentException("Budget exceeds balance");
+        } else if (initial < current) {
+            throw new IllegalArgumentException("Current budget exceeds initial budget");
         }
         Budget.load(initial, current);
     }
 
-    private static boolean createNewFile(Ui ui) {
+    private static boolean createNewFile() {
         String line = ui.input();
         while (!line.equalsIgnoreCase("y") && !line.equalsIgnoreCase("n")) {
             ui.showMessage("Unknown input. Please enter Y or N only.");
@@ -88,15 +94,25 @@ public abstract class LoadData {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            IncomeType incomeType = IncomeType.valueOf(split[2].trim().toUpperCase());
             checkValidInput(value, recur);
+            IncomeType incomeType;
+            try {
+                incomeType = IncomeType.valueOf(split[2].trim().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid income type");
+            }
             entry = new Income(value, incomeType, recur);
             break;
         case "E":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            ExpenseType expenseType = ExpenseType.valueOf(split[2].trim().toUpperCase());
             checkValidInput(value, recur);
+            ExpenseType expenseType;
+            try {
+                expenseType = ExpenseType.valueOf(split[2].trim().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid expense type");
+            }
             entry = new Expense(value, expenseType, recur);
             break;
         default:
