@@ -38,13 +38,13 @@ public class Parser {
     public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     public static final int PRICE_MATCHER_GROUP_NUM = 2;
     public static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
+    public static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
             + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";
-    public static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
@@ -333,7 +333,8 @@ public class Parser {
         return usedIngredientList;
     }
 
-    private static void getIngredientInStore(Ingredient dishIngredient, int dishQty, Dish orderedDish, ArrayList<Ingredient> usedIngredientList) {
+    private static void getIngredientInStore(Ingredient dishIngredient, int dishQty,
+            Dish orderedDish, ArrayList<Ingredient> usedIngredientList) {
         String ingredientName = dishIngredient.getName();
         String formattedIngredientName = ingredientName.toLowerCase().trim();
         int ingredientUsagePerDish = Integer.parseInt(dishIngredient.getQuantity());
@@ -342,7 +343,8 @@ public class Parser {
         for (int i = 0; i < pantry.getSize(); i++) {
             String storedIngredientName = pantry.getIngredient(i).getName();
             String formattedStoredIngredientName = menuDishName.toLowerCase().trim();
-            if (!formattedStoredIngredientName.equals(formattedIngredientName) || !isIngredientEnough(totalIngredientUsage, i)){
+            if (!formattedStoredIngredientName.equals(formattedIngredientName)
+                    || !isIngredientEnough(totalIngredientUsage, i)){
                 System.out.println("Error not enough stuff");
                 return;
             }
