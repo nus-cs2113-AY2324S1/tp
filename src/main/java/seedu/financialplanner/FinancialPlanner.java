@@ -5,6 +5,7 @@ import seedu.financialplanner.commands.ExitCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.storage.SaveData;
 import seedu.financialplanner.storage.Storage;
 import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
@@ -38,6 +39,7 @@ public class FinancialPlanner {
         AbstractCommand command = null;
 
         while (!(command instanceof ExitCommand)) {
+            SaveData.saveWatchList();
             input = ui.input();
             try {
                 command = Parser.parseCommand(input);
