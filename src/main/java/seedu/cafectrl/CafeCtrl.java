@@ -22,7 +22,7 @@ public class CafeCtrl {
     private CafeCtrl() {
         ui = new Ui();
         menu = new Menu();
-        pantry = new Pantry();
+        pantry = new Pantry(ui);
     }
 
     private void setup() {

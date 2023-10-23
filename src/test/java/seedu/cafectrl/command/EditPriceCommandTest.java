@@ -31,7 +31,7 @@ class EditPriceCommandTest {
         int testDishIndex = 1;
         float testNewPrice = 3;
         Command editPriceCommand = new EditPriceCommand(testDishIndex, testNewPrice);
-        editPriceCommand.execute(menu, ui, new Pantry());
+        editPriceCommand.execute(menu, ui, new Pantry(ui));
 
         int firstLine = 0;
         int secondLine = 1;

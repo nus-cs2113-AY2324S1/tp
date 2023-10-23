@@ -32,7 +32,7 @@ class DeleteDishCommandTest {
 
         int testIndex = 2;
         DeleteDishCommand deleteDishCommand = new DeleteDishCommand(testIndex);
-        deleteDishCommand.execute(menu, ui, new Pantry());
+        deleteDishCommand.execute(menu, ui, new Pantry(ui));
 
         int actualOutputIndex = 0;
         String expectedOutput = "Okay! Chicken Curry is deleted! :)";
@@ -50,6 +50,6 @@ class DeleteDishCommandTest {
         int testIndex = 5;
         DeleteDishCommand deleteDishCommand = new DeleteDishCommand(testIndex);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteDishCommand.execute(menu, ui, new Pantry()));
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteDishCommand.execute(menu, ui, new Pantry(ui)));
     }
 }

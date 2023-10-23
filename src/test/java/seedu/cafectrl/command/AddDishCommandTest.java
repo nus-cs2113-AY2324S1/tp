@@ -23,7 +23,8 @@ class AddDishCommandTest {
 
         AddDishCommand addDishCommand = new AddDishCommand(dish);
 
-        addDishCommand.execute(menu, new Ui(), new Pantry());
+        Ui ui = new Ui();
+        addDishCommand.execute(menu, ui, new Pantry(ui));
 
         assertEquals(1, menu.getMenuItemsList().size());
     }

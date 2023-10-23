@@ -16,7 +16,7 @@ public class ViewTotalStockCommand extends Command {
     private Pantry pantry;
 
     public ViewTotalStockCommand() {
-        this.pantry = new Pantry();
+        this.pantry = new Pantry(new Ui());
     }
 
     @Override
