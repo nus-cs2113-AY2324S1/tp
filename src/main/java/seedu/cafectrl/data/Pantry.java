@@ -26,13 +26,13 @@ public class Pantry {
         String dish = "Chicken Rice";
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish);
         decreaseIngredientsStock(dishIngredients);
-        checkDishAvailability();
+        calculateDishAvailability();
     }
 
     /**
      * Decreases the stock of ingredients based on the given dish order.
      *
-     * @param dishIngredients
+     * @param dishIngredients Array of ingredients used to make the dish order.
      */
     public void decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
         pantryStock = retrieveStockFromStorage();
@@ -65,27 +65,27 @@ public class Pantry {
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
-    public void checkDishAvailability(){
+    public void calculateDishAvailability(){
         for (Dish dish : menuItems) {
             ui.showToUser("Dish: " + dish.getName());
-            int numberOfDishes = checkIngredientAvailability(dish);
+            int numberOfDishes = calculateMaxDishes(dish);
             ui.showDishAvailability(numberOfDishes);
         }
     }
 
     /**
-     * Checks the availability of ingredients in the pantry for a given dish order.
+     * Calculates the number of dishes that can be prepared with the available ingredients.
      *
      * @param dish The dish being ordered.
      */
-    public int checkIngredientAvailability(Dish dish) {
+    public int calculateMaxDishes(Dish dish) {
         int maxNumofDish = Integer.MAX_VALUE;
         //This function will be replaced by the function used
         //to retrieve dishIngredients when order class is implemented
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName());
 
         for (Ingredient dishIngredient : dishIngredients) {
-            int numOfDish = calculateNumOfDish(dishIngredient);
+            int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
             if (numOfDish == 0) {
@@ -97,12 +97,12 @@ public class Pantry {
     }
 
     /**
-     * Calculates the number of dishes that can be prepared with the available ingredients.
+     * Calculates the number of dishes that can be prepared with the provided ingredients.
      *
      * @param dishIngredient The ingredient used in the ordered dish.
      * @return The number of dishes that can be prepared.
      */
-    private int calculateNumOfDish(Ingredient dishIngredient) {
+    private int calculateMaxDishForEachIngredient(Ingredient dishIngredient) {
         Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
         if (usedIngredientFromStock == null) {
             return 0;
