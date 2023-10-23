@@ -19,7 +19,7 @@ public class Messages {
      */
     public static final String LIST_MENU_MESSAGE = "| Ah, behold, the grand menu of delights! |";
     public static final String MENU_EMPTY_MESSAGE = "It seems our menu is currently taking a break. "
-                       + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
+            + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
     public static final String MENU_TOP = "+-----------------------------------------+";
     public static final String MENU_CORNER = "+--------------------------+--------------+";
     public static final  String MENU_TITLE = "| Dish Name                |  Price       |";
