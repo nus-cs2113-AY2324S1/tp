@@ -26,4 +26,12 @@ public class MockStorage extends Storage {
         }
         return result.toString().trim();
     }
+
+    public boolean dataExists() {
+        return !questions.isEmpty();
+    }
+
+    public void clearData() {
+        questions.clear();
+    }
 }

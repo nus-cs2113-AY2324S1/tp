@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Path;
 
-
 public class CommandDeleteTest {
     private QuestionList questionList;
     private Parser parser;
@@ -105,5 +104,4 @@ public class CommandDeleteTest {
         questionList.deleteQuestionByIndex(1);
         testCliOutputCorrectness(expectedOutput);
     }
-
 }
