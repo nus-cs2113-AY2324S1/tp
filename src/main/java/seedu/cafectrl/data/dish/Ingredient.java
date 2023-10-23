@@ -25,10 +25,13 @@ public class Ingredient {
         return qty;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
     public void setQty(int qty) {
         this.qty = qty;
     }
-
 
     @Override
     public String toString() {

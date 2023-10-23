@@ -160,7 +160,7 @@ class ParserTest {
         };
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
-        commandReturned.execute(menu, ui, new Pantry());
+        commandReturned.execute(menu, ui, new Pantry(ui));
         assertEquals(Messages.UNKNOWN_COMMAND_MESSAGE, actualOutput.get(0));
     }
 
@@ -180,7 +180,7 @@ class ParserTest {
         };
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
-        commandReturned.execute(menu, ui, new Pantry());
+        commandReturned.execute(menu, ui, new Pantry(ui));
         assertEquals(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE, actualOutput.get(0));
     }
 
@@ -200,7 +200,7 @@ class ParserTest {
         };
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
-        commandReturned.execute(menu, ui, new Pantry());
+        commandReturned.execute(menu, ui, new Pantry(ui));
         assertEquals(Messages.INVALID_DISH_INDEX, actualOutput.get(0));
     }
 
@@ -213,7 +213,7 @@ class ParserTest {
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
         //Test for 1 Dish added to Menu
-        outputCommand.execute(menu, ui, new Pantry());
+        outputCommand.execute(menu, ui, new Pantry(ui));
         assertEquals(1, menu.getSize());
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDish(0);
@@ -232,7 +232,7 @@ class ParserTest {
         //Test for incorrect Command type returned
         assertFalse(outputCommand instanceof AddDishCommand);
         //Test for no dish added in menu
-        outputCommand.execute(menu, ui, new Pantry());
+        outputCommand.execute(menu, ui, new Pantry(ui));
         assertEquals(0, menu.getSize());
     }
 }

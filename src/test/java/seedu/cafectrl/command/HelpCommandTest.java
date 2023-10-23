@@ -31,7 +31,7 @@ class HelpCommandTest {
         };
 
         HelpCommand helpCommand = new HelpCommand();
-        helpCommand.execute(menu, ui, new Pantry());
+        helpCommand.execute(menu, ui, new Pantry(ui));
         int numOfLines = 8;
 
         ArrayList<String> expectedOutputs = new ArrayList<>();

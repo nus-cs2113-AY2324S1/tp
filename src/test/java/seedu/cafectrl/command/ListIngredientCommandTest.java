@@ -35,7 +35,7 @@ class ListIngredientCommandTest {
 
         int indexToSelect = 1;
         ListIngredientCommand listIngredientCommand = new ListIngredientCommand(indexToSelect);
-        listIngredientCommand.execute(menu, ui, new Pantry());
+        listIngredientCommand.execute(menu, ui, new Pantry(ui));
 
         String expectedOutput = "Chicken Rice Ingredients: \n"
                 + "Rice - 1cup\n"
@@ -59,7 +59,7 @@ class ListIngredientCommandTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             ListIngredientCommand listIngredientCommand = new ListIngredientCommand(invalidIndex);
-            listIngredientCommand.execute(menu, ui, new Pantry());
+            listIngredientCommand.execute(menu, ui, new Pantry(ui));
         });
     }
 }

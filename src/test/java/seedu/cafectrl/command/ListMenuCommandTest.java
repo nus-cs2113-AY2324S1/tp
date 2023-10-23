@@ -35,7 +35,7 @@ class ListMenuCommandTest {
         };
 
         Command listMenuCommand = new ListMenuCommand();
-        listMenuCommand.execute(menu, ui, new Pantry());
+        listMenuCommand.execute(menu, ui, new Pantry(ui));
 
         String actualOutput = String.join(",", commandOutput);
 
