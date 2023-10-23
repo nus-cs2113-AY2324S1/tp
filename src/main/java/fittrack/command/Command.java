@@ -5,7 +5,6 @@ import fittrack.UserProfile;
 import fittrack.WorkoutList;
 import fittrack.storage.Storage;
 import fittrack.parser.CommandParser;
-import fittrack.parser.IndexOutOfBoundsException;
 import fittrack.parser.ParseException;
 
 public abstract class Command {

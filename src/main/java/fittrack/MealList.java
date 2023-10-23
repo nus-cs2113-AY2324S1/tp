@@ -31,7 +31,7 @@ public class MealList {
 
     public void deleteMeal(int mealIndex) throws IndexOutOfBoundsException {
         if(mealIndex - 1 > mealList.size()) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("");
         }
         mealList.remove((mealIndex - 1));
         mealListSize--;

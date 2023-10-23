@@ -197,7 +197,7 @@ public class CommandParser {
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
         } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("");
         }
     }
 
