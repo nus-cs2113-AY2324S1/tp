@@ -128,7 +128,7 @@ public class Storage {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public UserProfile load() throws StorageOperationException {
+    public UserProfile profileLoad() throws StorageOperationException {
         profilePath = Paths.get(PROFILE_FILE_PATH);
         if (!Files.exists(profilePath) || !Files.isRegularFile(profilePath)) {
             return new UserProfile();
@@ -150,7 +150,7 @@ public class Storage {
             int data = reader.read();
             return data == -1; // Returns true if the file is empty
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
             return false; // Consider it non-empty if there's an exception
         }
     }

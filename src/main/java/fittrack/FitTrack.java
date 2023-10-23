@@ -51,13 +51,13 @@ public class FitTrack {
         ui.printWelcome();
         boolean isValidInput = false;
 
-        if (!storage.isProfileFileEmpty()) {
-            try {
-                this.userProfile = storage.load();
+        try {
+            if (!storage.isProfileFileEmpty()) {
+                this.userProfile = storage.profileLoad();
                 isValidInput = true;
-            }catch (StorageOperationException e) {
-                throw new RuntimeException(e);
             }
+        }catch (StorageOperationException e) {
+            throw new RuntimeException(e);
         }
 
         while (!isValidInput) {
