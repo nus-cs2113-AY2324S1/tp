@@ -23,15 +23,15 @@ public class DeleteMealCommand extends Command {
 
     @Override
     public CommandResult execute() {
-
-        try {
-            Meal toDelete = mealList.getMeal(mealIndex);
-            mealList.deleteMeal(mealIndex);
-            return new CommandResult("I've deleted the following meal:" + "\n" + toDelete.toString());
-        } catch (java.lang.IndexOutOfBoundsException | IndexOutOfBoundsException e) {
-            return new CommandResult("This is invalid, meal needs to be in list!");
+        if (!mealList.isIndexValid(mealIndex)) {
+            return new CommandParser()
+                    .getInvalidCommand(commandLine, new IndexOutOfBoundsException())
+                    .execute();
         }
 
+        Meal toDelete = mealList.getMeal(mealIndex);
+        mealList.deleteMeal(mealIndex);
+        return new CommandResult("I've deleted the following meal:" + "\n" + toDelete.toString());
     }
 
     @Override

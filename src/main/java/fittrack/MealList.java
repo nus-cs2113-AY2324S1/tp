@@ -29,10 +29,8 @@ public class MealList {
         mealListSize++;
     }
 
-    public void deleteMeal(int mealIndex) throws IndexOutOfBoundsException {
-        if(mealIndex - 1 > mealList.size()) {
-            throw new IndexOutOfBoundsException();
-        }
+    public void deleteMeal(int mealIndex) {
+        assert isIndexValid(mealIndex);
         mealList.remove((mealIndex - 1));
         mealListSize--;
     }
@@ -53,6 +51,11 @@ public class MealList {
     }
 
     public Meal getMeal(int mealIndex) {
+        assert isIndexValid(mealIndex);
         return mealList.get(mealIndex - 1);
+    }
+
+    public boolean isIndexValid(int index) {
+        return 1 <= index && index <= mealList.size();
     }
 }
