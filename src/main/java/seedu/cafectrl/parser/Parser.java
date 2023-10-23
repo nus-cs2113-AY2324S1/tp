@@ -9,6 +9,9 @@ import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
+import seedu.cafectrl.command.BuyIngredientCommand;
+
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
@@ -44,7 +47,6 @@ public class Parser {
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
-
     /**
      * Parse userInput and group it under commandWord and arguments
      * use commandWord to find the matching command and prepare the command
@@ -78,6 +80,12 @@ public class Parser {
 
         case EditPriceCommand.COMMAND_WORD:
             return prepareEditPriceCommand(menu, arguments);
+
+        case ViewTotalStockCommand.COMMAND_WORD:
+            return prepareViewTotalStock();
+
+        case BuyIngredientCommand.COMMAND_WORD:
+            return prepareBuyIngredient(arguments);
 
         case HelpCommand.COMMAND_WORD:
             return prepareHelpCommand();
@@ -197,7 +205,10 @@ public class Parser {
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
             String ingredientQty = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
 
-            Ingredient ingredient = new Ingredient(ingredientName, ingredientQty);
+            int qty = extractQty(ingredientQty);
+            String unit = extractUnit(ingredientQty);
+
+            Ingredient ingredient = new Ingredient(ingredientName, qty, unit);
 
             ingredients.add(ingredient);
         }
@@ -255,6 +266,31 @@ public class Parser {
         return new DeleteDishCommand(dishIndex);
     }
 
+    private static Command prepareViewTotalStock() {
+        return new ViewTotalStockCommand();
+    }
+
+    private static Command prepareBuyIngredient(String arguments) {
+        Pattern buyIngredientArgumentsPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
+        Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
+
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT);
+        }
+
+        String ingredientName = matcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
+        String ingredientQty = matcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+
+        int qty = extractQty(ingredientQty);
+        String unit = extractUnit(ingredientQty);
+
+        try {
+            return new BuyIngredientCommand(ingredientName, qty, unit);
+        } catch (Exception e) {
+            return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT);
+        }
+    }
+
     private static Command prepareHelpCommand() {
         return new HelpCommand();
     }
@@ -272,5 +308,23 @@ public class Parser {
             throws ParseException, NumberFormatException {
         String formattedString = userInput.replace(command, "").trim();
         return Integer.parseInt(formattedString);
+    }
+
+    /**
+     * Extracts the quantity (numeric part) from a given string containing both quantity and unit.
+     * @param qty A string containing both quantity and unit (e.g., "100g").
+     * @return An integer representing the extracted quantity.
+     */
+    public static int extractQty(String qty) {
+        return Integer.parseInt(qty.replaceAll("[^0-9]", ""));
+    }
+
+    /**
+     * Extracts the unit (non-numeric part) from a given string containing both quantity and unit.
+     * @param qty A string containing both quantity and unit (e.g., "100g").
+     * @return A string representing the extracted unit.
+     */
+    public static String extractUnit(String qty) {
+        return qty.replaceAll("[0-9]", "");
     }
 }

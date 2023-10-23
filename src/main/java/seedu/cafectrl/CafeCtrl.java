@@ -2,6 +2,7 @@ package seedu.cafectrl;
 
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.Ui;
 
@@ -13,6 +14,7 @@ public class CafeCtrl {
     private final Ui ui;
     private final Menu menu;
     private Command command;
+    private Pantry pantry;
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
@@ -20,6 +22,7 @@ public class CafeCtrl {
     private CafeCtrl() {
         ui = new Ui();
         menu = new Menu();
+        pantry = new Pantry();
     }
 
     private void setup() {
@@ -38,7 +41,7 @@ public class CafeCtrl {
             try {
                 String fullUserInput = ui.receiveUserInput();
                 command = Parser.parseCommand(menu, fullUserInput);
-                command.execute(menu, ui);
+                command.execute(menu, ui, pantry);
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
             } finally {

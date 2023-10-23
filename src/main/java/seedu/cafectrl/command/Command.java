@@ -1,6 +1,7 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -26,7 +27,7 @@ public class Command {
     /**
      * Executes the command and returns the result.
      */
-    public void execute(Menu menu, Ui ui) {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     };
 }
