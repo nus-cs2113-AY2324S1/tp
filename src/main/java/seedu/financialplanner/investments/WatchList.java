@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WatchList {
-
     public static final WatchList INSTANCE = new WatchList();
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private final ArrayList<Stock> stocks;

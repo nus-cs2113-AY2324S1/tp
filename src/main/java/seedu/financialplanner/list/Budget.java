@@ -75,4 +75,8 @@ public abstract class Budget {
     public static void setInitialBudget(double amount) {
         initialBudget = amount;
     }
+
+    public static void updateCurrentBudget(double amount) {
+        currentBudget += amount;
+    }
 }

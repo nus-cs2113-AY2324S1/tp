@@ -10,15 +10,16 @@ import java.util.Scanner;
 public class Ui {
     private static Ui ui = null;
     private Scanner Scanner = new Scanner(System.in);
-
     private Ui() {
     }
+
     public static Ui getInstance() {
         if (ui == null) {
             ui = new Ui();
         }
         return ui;
     }
+
     public static void printCorruptedFileError(String message) {
         System.out.println(message);
     }
@@ -69,6 +70,7 @@ public class Ui {
         System.out.println("Use Watchlist to view it!");
 
     }
+
     public void printAddedCashflow(Cashflow entry) {
         System.out.print("You have added an ");
         System.out.println(entry);

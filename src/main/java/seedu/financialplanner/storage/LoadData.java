@@ -55,6 +55,7 @@ public abstract class LoadData {
         ui.showMessage("File appears to be corrupted. Do you want to create a new file? (Y/N)");
         if (createNewFile()) {
             cashflowList.list.clear();
+            Cashflow.clearBalance();
         } else {
             throw new FinancialPlannerException("Please fix the corrupted file, " +
                     "which can be found in data/data.txt.\nError message: " + message);
@@ -66,9 +67,11 @@ public abstract class LoadData {
         double current = Double.parseDouble(split[2].trim());
         if (initial < 0 || current < 0) {
             throw new IllegalArgumentException("Negative values for budget");
-        } else if (initial > Cashflow.getBalance() || current > Cashflow.getBalance()) {
+        }
+        if (initial > Cashflow.getBalance() || current > Cashflow.getBalance()) {
             throw new IllegalArgumentException("Budget exceeds balance");
-        } else if (initial < current) {
+        }
+        if (initial < current) {
             throw new IllegalArgumentException("Current budget exceeds initial budget");
         }
         Budget.load(initial, current);

@@ -63,7 +63,7 @@ public class ListCommand extends Command {
 
         ui.showMessage(String.format("You have %d matching cash flow:", cashflowToBePrinted.size()));
         for (int i = 0; i < cashflowToBePrinted.size(); i += 1) {
-            ui.showMessage((i+ 1) + ": " + cashflowToBePrinted.get(i).toString());
+            ui.showMessage((i + 1) + ": " + cashflowToBePrinted.get(i));
         }
     }
 }

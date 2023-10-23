@@ -6,6 +6,7 @@ import seedu.financialplanner.utils.Ui;
 public class SetGoalCommand extends Command {
     private final String goal;
     private int amount;
+
     public SetGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String labelString = String.join(" ", rawCommand.args);
         if(!rawCommand.extraArgs.containsKey("g")){

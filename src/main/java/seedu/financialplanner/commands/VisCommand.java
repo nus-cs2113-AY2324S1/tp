@@ -14,7 +14,6 @@ public class VisCommand extends Command {
     private String type;
     private String chart;
 
-
     public VisCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("t")) {
             throw new IllegalArgumentException("Entry type must be defined");
@@ -33,6 +32,7 @@ public class VisCommand extends Command {
             throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
         }
     }
+
     @Override
     public void execute() throws FinancialPlannerException {
         assert !chart.isEmpty();

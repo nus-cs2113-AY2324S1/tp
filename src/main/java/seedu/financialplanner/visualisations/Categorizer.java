@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class Categorizer {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
+
     public static Map<String, Double> sortType(CashflowList cashflowList, String type)
             throws FinancialPlannerException {
         switch (type) {
@@ -26,6 +27,7 @@ public class Categorizer {
             throw new FinancialPlannerException("Type not found");
         }
     }
+
     public static Map<String, Double> sortExpenses(CashflowList cashflowList) {
         Map<String, Double> expensesByCat = new HashMap<>();
         for (Cashflow e: cashflowList.list) {
