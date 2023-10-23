@@ -373,8 +373,9 @@ public class Parser {
         ArrayList<Ingredient> dishIngredient = new ArrayList<>();
         for (Ingredient ingredient : orderedDish.getIngredients()) {
             String ingredientName = ingredient.getName();
-            int ingredientQty = Integer.parseInt(ingredient.getQuantity()) * dishQty;
-            dishIngredient.add(new Ingredient(ingredientName, String.valueOf(ingredientQty)));
+            int ingredientQty = ingredient.getQty() * dishQty;
+            String ingredientUnit = ingredient.getUnit();
+            dishIngredient.add(new Ingredient(ingredientName, ingredientQty, ingredientUnit));
         }
         return dishIngredient;
     }
