@@ -1,6 +1,7 @@
 package seedu.cafectrl.ui;
 
 public class Messages {
+    public static final String LINE_STRING = "-----------------------------------------------------";
     /**
      * Greeting messages
      */
