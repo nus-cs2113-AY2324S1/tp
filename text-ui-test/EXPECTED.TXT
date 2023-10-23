@@ -1,4 +1,5 @@
 Directory already exists.
+
 Welcome to FitTrack!
 ___________.__  __ ___________                     __
 \_   _____/|__|/  |\__    ___/___________    ____ |  | __
@@ -6,27 +7,30 @@ ___________.__  __ ___________                     __
  |     \   |  ||  |  |    |   |  | \/ __ \  \___|    <
  \___  /   |__||__|  |____|   |__|  (____  /\___  >__|_ \
 ____________________________________________________________
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Please enter numbers for height, weight, and daily calorie limit.
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Please enter a number greater than 0
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Please enter a number greater than 0
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Wrong format. Please enter h/<height> w/<weight> l/<dailyCalorieLimit>
-Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
-Here are your profile settings.
-Height: Height: 180.0cm
-Weight: 80.0kg
-Daily calorie limit: 2000.0kcal
-BMI: 24.69
-____________________________________________________________
+`h/180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`h/-180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`h/-180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`h/` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`h/180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`h/180` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
 Here is your updated profile:
 Height: 170.0cm
 Weight: 70.0kg
@@ -99,6 +103,5 @@ Type `viewworkouts` to view the list of your workouts.
 `deleteworkout` deletes your daily workout data from the list.
 Type `deleteworkout <INDEX>` to delete the workout by an index.
 
-Saving data ...
 Goodbye! Hope to see you soon!
 
