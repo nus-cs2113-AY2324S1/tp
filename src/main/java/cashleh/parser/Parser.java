@@ -153,6 +153,10 @@ public class Parser {
     }
 
     private Budget getBudget(String input) throws CashLehParsingException {
+        String trimmedInput = input.trim();
+        if (trimmedInput.equals(UPDATE_BUDGET)) {
+            throw new CashLehParsingException("Ayo, type in your budget amount hor!");
+        }
         String newBudget = input.split(" ", 2)[1];
         int newBudgetAmount;
         try {
