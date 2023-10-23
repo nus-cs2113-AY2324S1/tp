@@ -12,6 +12,11 @@ public class IncomeCatParser {
         "LOTTERY_GAMBLING",
         "OTHERS"};
 
+    /**
+     * Parses the category string into the corresponding IncomeCategory.
+     * @param catString the category string to be parsed.
+     * @return the corresponding IncomeCategory.
+     */
     public static IncomeCategory parse(String catString) {
         System.out.println(catString);
         for (String cat : incomeCatList) {

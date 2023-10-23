@@ -15,6 +15,11 @@ public class ExpenseCatParser {
         "UTILITIES",
         "OTHERS"};
     
+    /**
+     * Parses the category string into the corresponding ExpenseCategory.
+     * @param catString the category string to be parsed.
+     * @return the corresponding ExpenseCategory.
+     */
     public static ExpenseCategory parse(String catString) {
         for (String cat : expenseCatList) {
             if (cat.startsWith(catString.toUpperCase())) {
