@@ -73,8 +73,7 @@ public class CommandParser {
         try {
             command.setArguments(args, this);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            return getInvalidCommand(userCommandLine);
+            return getInvalidCommand(userCommandLine, e);
         }
 
         return command;
@@ -113,8 +112,14 @@ public class CommandParser {
         }
     }
 
-    private InvalidCommand getInvalidCommand(String userCommandLine) {
+    public InvalidCommand getInvalidCommand(String userCommandLine) {
         InvalidCommand invalidCommand = new InvalidCommand();
+        invalidCommand.setArguments(userCommandLine, this);
+        return invalidCommand;
+    }
+
+    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
+        InvalidCommand invalidCommand = new InvalidCommand(e);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
@@ -180,7 +185,7 @@ public class CommandParser {
     }
 
     public int parseDeleteMeal(String meal) throws PatternMatchFailException,
-            NumberFormatException, IndexOutOfBoundsException, NegativeNumberException {
+            NumberFormatException, NegativeNumberException {
         final Matcher matcher = DELETE_MEAL_PATTERN.matcher(meal);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
@@ -196,8 +201,6 @@ public class CommandParser {
             return indexToDelete;
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
-        } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("");
         }
     }
 

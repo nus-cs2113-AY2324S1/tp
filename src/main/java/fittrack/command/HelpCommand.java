@@ -36,7 +36,7 @@ public class HelpCommand extends Command {
         commandType = blankCommand.getClass();
 
         if (blankCommand instanceof InvalidCommand) {
-            helpMessage = String.format(MESSAGE_INVALID_COMMAND, word) + "\n" + USAGE;
+            helpMessage = InvalidCommand.getInvalidCommandMessage(word) + "\n" + USAGE;
             return;
         }
 
