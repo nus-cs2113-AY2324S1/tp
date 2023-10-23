@@ -61,6 +61,26 @@ public class ExpenseStatement {
         Ui.printMultipleText(texts);
     }
 
+    public void findExpense(String description, double amount) throws CashLehMissingTransactionException {
+        ArrayList<String> matchingExpenses = new ArrayList<>();
+        boolean isMatch = false;
+        matchingExpenses.add("Here are your corresponding expenses with description:");
+        for (Expense expense : expenseStatement) {
+            boolean descriptionMatch = (description == null) || (description.isEmpty())
+                    || expense.getDescription().equals(description);
+            boolean amountMatch = (amount == -1) || (expense.getAmount() == amount);
+            if (descriptionMatch && amountMatch) {
+                matchingExpenses.add(expense.toString());
+                isMatch = true;
+            }
+        }
+        if (isMatch) {
+            Ui.printMultipleText(matchingExpenses);
+        } else {
+            throw new CashLehMissingTransactionException();
+        }
+    }
+
     @Override
     public String toString() {
         return expenseStatement.stream().map(Expense::toString).collect(Collectors.joining("\n"));

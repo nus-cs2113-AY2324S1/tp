@@ -1,18 +1,20 @@
 package cashleh.parser;
 
+import cashleh.commands.AddExpense;
+import cashleh.commands.AddIncome;
+import cashleh.commands.Command;
+import cashleh.commands.DeleteExpense;
+import cashleh.commands.DeleteIncome;
+import cashleh.commands.Exit;
+import cashleh.commands.FilterExpense;
+import cashleh.commands.FilterIncome;
+import cashleh.commands.ViewExpenses;
+import cashleh.commands.ViewIncomes;
 import cashleh.transaction.Expense;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.Income;
 import cashleh.transaction.IncomeStatement;
 import cashleh.exceptions.CashLehParsingException;
-import cashleh.commands.Command;
-import cashleh.commands.AddIncome;
-import cashleh.commands.AddExpense;
-import cashleh.commands.ViewIncomes;
-import cashleh.commands.ViewExpenses;
-import cashleh.commands.DeleteExpense;
-import cashleh.commands.DeleteIncome;
-import cashleh.commands.Exit;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -25,6 +27,9 @@ public class Parser {
     private static final String DELETE_EXPENSE = "deleteExpense";
     private static final String VIEW_EXPENSES = "viewExpenses";
     private static final String EXIT = "exit";
+    private static final String FILTER_EXPENSE = "filterExpense";
+    private static final String FILTER_INCOME = "filterIncome";
+
 
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
@@ -53,11 +58,16 @@ public class Parser {
             return new ViewExpenses(expenseStatement);
         case EXIT:
             return new Exit();
+        case FILTER_EXPENSE:
+            FindParser expenseToFind = filterDetails(FILTER_EXPENSE, input);
+            return new FilterExpense(expenseToFind, expenseStatement);
+        case FILTER_INCOME:
+            FindParser incomeToFind = filterDetails(FILTER_INCOME, input);
+            return new FilterIncome(incomeToFind, incomeStatement);
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
     }
-
 
     private Expense getExpense(String input) throws CashLehParsingException {
         String[] format = {ADD_EXPENSE, "/amt", "/date:optional"};
@@ -128,5 +138,32 @@ public class Parser {
         }
         return transactionType.equals(DELETE_EXPENSE) ?
             new DeleteExpense(transactionIndex, expenseStatement) : new DeleteIncome(transactionIndex, incomeStatement);
+    }
+
+    private FindParser filterDetails (String transactionType, String input) throws CashLehParsingException{
+        String[] format = null;
+        switch(transactionType) {
+        case FILTER_EXPENSE:
+            format = new String[]{FILTER_EXPENSE, "/amt:optional"};
+            break;
+        case FILTER_INCOME:
+            format = new String[]{FILTER_INCOME, "/amt:optional"};
+            break;
+        default:
+            throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
+        }
+        HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
+        String descriptionString = inputDetails.get(transactionType);
+        String amountString = inputDetails.get("/amt");
+        if (amountString != null) {
+            double amount;
+            try {
+                amount = Double.parseDouble(amountString);
+                return new FindParser(descriptionString, amount);
+            } catch (NumberFormatException e) {
+                throw new CashLehParsingException("Please enter a valid expense amount!");
+            }
+        }
+        return new FindParser(descriptionString, -1.0);
     }
 }

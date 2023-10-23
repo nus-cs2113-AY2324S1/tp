@@ -51,6 +51,25 @@ public class IncomeStatement {
         }
         Ui.printMultipleText(texts);
     }
+    public void findIncome(String description, double amount) throws CashLehMissingTransactionException {
+        ArrayList<String> matchingIncomes = new ArrayList<>();
+        boolean isMatch = false;
+        matchingIncomes.add("Here are your corresponding incomes with description:");
+        for (Income income : incomeStatement) {
+            boolean descriptionMatch = (description == null) || (description.isEmpty())
+                    || income.getDescription().equals(description);
+            boolean amountMatch = (amount == -1) || (income.getAmount() == amount);
+            if (descriptionMatch && amountMatch) {
+                matchingIncomes.add(income.toString());
+                isMatch = true;
+            }
+        }
+        if (isMatch) {
+            Ui.printMultipleText(matchingIncomes);
+        } else {
+            throw new CashLehMissingTransactionException();
+        }
+    }
     @Override
     public String toString() {
         return incomeStatement.stream().map(Income::toString).collect(Collectors.joining("\n"));
