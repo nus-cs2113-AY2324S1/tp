@@ -2,13 +2,13 @@ package seedu.cafectrl.parser;
 
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.EditPriceCommand;
 import seedu.cafectrl.command.ExitCommand;
+import seedu.cafectrl.command.HelpCommand;
+import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
-
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
@@ -79,6 +79,9 @@ public class Parser {
         case EditPriceCommand.COMMAND_WORD:
             return prepareEditPriceCommand(menu, arguments);
 
+        case HelpCommand.COMMAND_WORD:
+            return prepareHelpCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -87,13 +90,9 @@ public class Parser {
         }
     }
 
-    // All prepareCommand Classes
+    /** All prepareCommand Classes */
     private static Command prepareListMenu() {
         return new ListMenuCommand();
-    }
-
-    private static Command prepareEditListCommand(String arguments) {
-        return null;
     }
 
     /**
@@ -127,68 +126,72 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
+     * @param arguments
+     * @return new AddDishCommand
+     */
     private static Command prepareAdd(String arguments) {
         final Pattern addArgumentPatter = Pattern.compile(ADD_ARGUMENT_STRING);
         Matcher matcher = addArgumentPatter.matcher(arguments);
 
-        // Checks whether the overall pattern of add arguments is correct
-        if (!matcher.matches()) {
-            return new IncorrectCommand("Error: Incorrect format for the add command.\n"
-                    + AddDishCommand.MESSAGE_USAGE);
-        }
-
         try {
+            // Checks whether the overall pattern of add arguments is correct
+            if (!matcher.matches()) {
+                return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
+                        + AddDishCommand.MESSAGE_USAGE);
+            }
+
             // To retrieve specific arguments from arguments
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
             float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_NUM));
             String ingredientsListString = matcher.group(INGREDIENT_LIST_MATCHER_GROUP_NUM);
 
-            IncorrectCommand incorrectCommand1 = checkNegativePrice(price);
-            if (incorrectCommand1 != null) {
-                return incorrectCommand1;
-            }
+            checkNegativePrice(price);
 
-            // Capture the list of ingredients
-            ArrayList<Ingredient> ingredients = new ArrayList<>();
-
-            IncorrectCommand incorrectCommand2 = ingredientParsing(ingredientsListString, ingredients);
-            if (incorrectCommand2 != null) {
-                return incorrectCommand2;
-            }
+            ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
 
             Dish dish = new Dish(dishName, ingredients, price);
 
             return new AddDishCommand(dish);
-        } catch (Exception e) {
-            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
+        } catch (IllegalArgumentException e) {
+            return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
                     + AddDishCommand.MESSAGE_USAGE);
         }
     }
 
-    private static IncorrectCommand checkNegativePrice(float price) {
+    /** to be removed once the new regex is implemented because new regex only allows positive prices*/
+    private static void checkNegativePrice(float price) throws IllegalArgumentException {
         if (price < 0) {
-            return new IncorrectCommand("MESSAGE_INVALID_ADD_COMMAND_FORMAT"
-                    + AddDishCommand.MESSAGE_USAGE);
+            throw new IllegalArgumentException();
         }
-        return null;
     }
 
-    private static IncorrectCommand ingredientParsing(String ingredientsListString, ArrayList<Ingredient> ingredients) {
+    /**
+     * Parses the user's input text ingredients into <code>Ingredient</code> objects that is added into
+     * list of ingredients for the <code>Dish</code> object that is going to be added to the <code>Menu</code>
+     * @param ingredientsListString user's input string of ingredients
+     * @return Ingredient objects that consists of the dish
+     * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
+     */
+    private static ArrayList<Ingredient> ingredientParsing(String ingredientsListString)
+            throws IllegalArgumentException {
         String[] ingredientListInputText = {ingredientsListString};
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
 
         //check if there is more than 1 ingredient
         if (ingredientsListString.contains(INGREDIENT_DIVIDER_STRING)) {
-            //split the ingredients into separate individual ingredients
+            //split the whole string of ingredients into separate individual ingredients
             ingredientListInputText = ingredientsListString.split(INGREDIENT_DIVIDER_REGEX);
         }
 
+        //Parsing each ingredient
         for (String inputIngredientText: ingredientListInputText) {
             final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
             Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredientText);
 
             if (!ingredientMatcher.matches()) {
-                return new IncorrectCommand("Error: Incorrect format for the ingredients\n"
-                        + AddDishCommand.MESSAGE_USAGE);
+                throw new IllegalArgumentException();
             }
 
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
@@ -198,7 +201,8 @@ public class Parser {
 
             ingredients.add(ingredient);
         }
-        return null;
+
+        return ingredients;
     }
 
 
@@ -249,6 +253,10 @@ public class Parser {
         }
 
         return new DeleteDishCommand(dishIndex);
+    }
+
+    private static Command prepareHelpCommand() {
+        return new HelpCommand();
     }
 
     /**
