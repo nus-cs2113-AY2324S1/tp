@@ -89,16 +89,23 @@ public class Duke {
                     break;
 
                 case "list":
+                    ui.showLineDivider();
                     new ListCommand(incomes, expenses, ui).execute();
+                    ui.showLineDivider();
                     break;
 
                 case "delete_income":
+                    ui.showLineDivider();
                     new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
+                    ui.showLineDivider();
                     break;
 
                 case "delete_expense":
+                    ui.showLineDivider();
                     new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
+                    ui.showLineDivider();
                     break;
+
                 case "help":
                     new UsageInstructions(ui).getHelp();
                     break;
