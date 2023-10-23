@@ -15,7 +15,7 @@ public class FindParser {
     public static String[] parseFindCommand(String fullCommand) throws KaChinnnngException {
         String[] tokens = fullCommand.split(" ");
         String[] parsedParameters = new String[4];  // To store TYPE, CATEGORY, DESCRIPTION, DATE
-        String[] validParameters = {"/t", "/c", "/de", "/da"};  // List of valid parameters
+        String[] validParameters = {"/t", "/cat", "/de", "/date"};  // List of valid parameters
 
         for (String token : tokens) {
             if (token.startsWith("/")) {
@@ -37,10 +37,7 @@ public class FindParser {
             throw new KaChinnnngException("Please use /t instead of /type for specifying the type.");
         }
         if (fullCommand.contains("/category")) {
-            throw new KaChinnnngException("Please use /c instead of /category for specifying the category.");
-        }
-        if (fullCommand.contains("/date")) {
-            throw new KaChinnnngException("Please use /da instead of /date for specifying the date.");
+            throw new KaChinnnngException("Please use /cat instead of /category for specifying the category.");
         }
         if (fullCommand.contains("/description")) {
             throw new KaChinnnngException("Please use /de instead of /description for specifying the description.");
@@ -56,8 +53,8 @@ public class FindParser {
 
         parsedParameters[0] = tokens[typeIndex + 1];
 
-        if (fullCommand.contains("/c")) {
-            int categoryIndex = indexOf(tokens, "/c");
+        if (fullCommand.contains("/cat")) {
+            int categoryIndex = indexOf(tokens, "/cat");
             if (categoryIndex == tokens.length - 1 || tokens[categoryIndex + 1].startsWith("/")) {
                 throw new KaChinnnngException("The value for /c CATEGORY cannot be empty.");
             }
@@ -72,8 +69,8 @@ public class FindParser {
             parsedParameters[2] = tokens[descriptionIndex + 1];
         }
 
-        if (fullCommand.contains("/da")) {
-            int dateIndex = indexOf(tokens, "/da");
+        if (fullCommand.contains("/date")) {
+            int dateIndex = indexOf(tokens, "/date");
             if (dateIndex == tokens.length - 1 || tokens[dateIndex + 1].startsWith("/")) {
                 throw new KaChinnnngException("The value for /da DATE cannot be empty.");
             }

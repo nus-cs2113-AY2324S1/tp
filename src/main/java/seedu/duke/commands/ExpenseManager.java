@@ -46,7 +46,7 @@ public class ExpenseManager extends Commands{
     private HashMap<String, String> extractExpenseFields(String details) throws KaChinnnngException{
         HashMap<String,String> expenseFields = new HashMap<>();
 
-        String[] parts = details.split("/category | /description | /date | /amount ");
+        String[] parts = details.split("/cat | /de | /date | /amt ");
 
         if(parts.length != 5) {
             throw new KaChinnnngException("Missing fields detected");
