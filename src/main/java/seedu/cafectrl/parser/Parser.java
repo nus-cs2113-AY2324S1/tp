@@ -126,6 +126,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
+     * @param arguments
+     * @return new AddDishCommand
+     */
     private static Command prepareAdd(String arguments) {
         final Pattern addArgumentPatter = Pattern.compile(ADD_ARGUMENT_STRING);
         Matcher matcher = addArgumentPatter.matcher(arguments);
@@ -154,6 +159,7 @@ public class Parser {
                     + AddDishCommand.MESSAGE_USAGE);
         }
     }
+
     /** to be removed once the new regex is implemented because new regex only allows positive prices*/
     private static void checkNegativePrice(float price) throws IllegalArgumentException {
         if (price < 0) {
@@ -161,6 +167,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user's input text ingredients into <code>Ingredient</code> objects that is added into
+     * list of ingredients for the <code>Dish</code> object that is going to be added to the <code>Menu</code>
+     * @param ingredientsListString user's input string of ingredients
+     * @return Ingredient objects that consists of the dish
+     * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
+     */
     private static ArrayList<Ingredient> ingredientParsing(String ingredientsListString)
             throws IllegalArgumentException {
         String[] ingredientListInputText = {ingredientsListString};
@@ -168,10 +181,11 @@ public class Parser {
 
         //check if there is more than 1 ingredient
         if (ingredientsListString.contains(INGREDIENT_DIVIDER_STRING)) {
-            //split the ingredients into separate individual ingredients
+            //split the whole string of ingredients into separate individual ingredients
             ingredientListInputText = ingredientsListString.split(INGREDIENT_DIVIDER_REGEX);
         }
 
+        //Parsing each ingredient
         for (String inputIngredientText: ingredientListInputText) {
             final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
             Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredientText);
