@@ -90,9 +90,7 @@ public class Parser {
         }
     }
 
-    /**
-     * All prepareCommand Classes
-     */
+    /** All prepareCommand Classes */
     private static Command prepareListMenu() {
         return new ListMenuCommand();
     }
