@@ -28,7 +28,6 @@ public class ViewWorkoutsCommand extends Command {
 
     @Override
     public void setArguments(String args, CommandParser parser) {
-        return;
     }
 
     @Override

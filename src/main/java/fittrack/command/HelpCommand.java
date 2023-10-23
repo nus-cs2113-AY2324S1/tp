@@ -2,7 +2,6 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 
-import static fittrack.command.InvalidCommand.MESSAGE_INVALID_COMMAND;
 import static fittrack.parser.CommandParser.ALL_COMMAND_WORDS;
 
 public class HelpCommand extends Command {

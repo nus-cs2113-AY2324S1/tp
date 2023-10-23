@@ -1,7 +1,6 @@
 package fittrack;
 
 import fittrack.data.Meal;
-import fittrack.parser.IndexOutOfBoundsException;
 
 import java.util.ArrayList;
 
