@@ -28,11 +28,11 @@ public class Ui {
     }
 
     public void showWelcome() {
-        showToUser(UserOutput.WELCOME_MESSAGE.message);
+        showToUser(Messages.WELCOME_MESSAGE);
     }
 
     public void showGoodbye() {
-        showToUser(UserOutput.GOODBYE_MESSAGE.message);
+        showToUser(Messages.GOODBYE_MESSAGE);
     }
 
     /**
@@ -68,7 +68,7 @@ public class Ui {
                     .append("\n");
         }
 
-        showToUser(UserOutput.ADD_DISH_MESSAGE.message,
+        showToUser(Messages.ADD_DISH_MESSAGE,
                 dishNameString,
                 dishPriceString,
                 dishIngredientsString.toString());
@@ -93,6 +93,17 @@ public class Ui {
             System.out.println(m);
         }
     }
+
+    /**
+     * Shows menu to user is table format
+     * @param dishName
+     * @param dishPrice
+     */
+    public void showToUserFormat(String dishName, String dishPrice) {
+        String leftAlignFormat = "| %-24s | %-12s |%n";
+        System.out.format(leftAlignFormat, dishName, dishPrice);
+    }
+    //+-----------------+------+
 
     /**
      * show edit price message to user
