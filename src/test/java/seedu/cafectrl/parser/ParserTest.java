@@ -7,6 +7,7 @@ import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Messages;
@@ -159,7 +160,7 @@ class ParserTest {
         };
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
-        commandReturned.execute(menu, ui);
+        commandReturned.execute(menu, ui, new Pantry());
         assertEquals(Messages.UNKNOWN_COMMAND_MESSAGE, actualOutput.get(0));
     }
 
@@ -179,7 +180,7 @@ class ParserTest {
         };
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
-        commandReturned.execute(menu, ui);
+        commandReturned.execute(menu, ui, new Pantry());
         assertEquals(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE, actualOutput.get(0));
     }
 
@@ -199,7 +200,7 @@ class ParserTest {
         };
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput);
-        commandReturned.execute(menu, ui);
+        commandReturned.execute(menu, ui, new Pantry());
         assertEquals(Messages.INVALID_DISH_INDEX, actualOutput.get(0));
     }
 
@@ -212,7 +213,7 @@ class ParserTest {
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
         //Test for 1 Dish added to Menu
-        outputCommand.execute(menu, ui);
+        outputCommand.execute(menu, ui, new Pantry());
         assertEquals(1, menu.getSize());
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDish(0);
@@ -231,7 +232,7 @@ class ParserTest {
         //Test for incorrect Command type returned
         assertFalse(outputCommand instanceof AddDishCommand);
         //Test for no dish added in menu
-        outputCommand.execute(menu, ui);
+        outputCommand.execute(menu, ui, new Pantry());
         assertEquals(0, menu.getSize());
     }
 }

@@ -2,6 +2,7 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
@@ -34,7 +35,7 @@ class ListIngredientCommandTest {
 
         int indexToSelect = 1;
         ListIngredientCommand listIngredientCommand = new ListIngredientCommand(indexToSelect);
-        listIngredientCommand.execute(menu, ui);
+        listIngredientCommand.execute(menu, ui, new Pantry());
 
         String expectedOutput = "Chicken Rice Ingredients: \n"
                 + "Rice - 1cup\n"
@@ -58,7 +59,7 @@ class ListIngredientCommandTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             ListIngredientCommand listIngredientCommand = new ListIngredientCommand(invalidIndex);
-            listIngredientCommand.execute(menu, ui);
+            listIngredientCommand.execute(menu, ui, new Pantry());
         });
     }
 }
