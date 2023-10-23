@@ -29,7 +29,7 @@ public class Parser {
             System.lineSeparator() +
             "     8. start /[quiz mode] [start details] /[qn mode] - starts the quiz," +
             System.lineSeparator() +
-            "     9. shuffle - shuffle quiz questions to a random order," +
+            "     9. shuffle - shuffle quiz questions to a random order PERMANENTLY," +
             System.lineSeparator() +
             "     10. markdiff [question number] [question difficulty] - sets the difficulty of question " +
             "with the specified number," +

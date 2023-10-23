@@ -41,7 +41,6 @@ public class CommandStart extends Command{
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate mode of the quiz :<");
             System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
-            return;
         }
     }
 
