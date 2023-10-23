@@ -21,7 +21,12 @@ public class FlashcardList {
     }
 
 
+    //@@author wendelinwemhoener
     public void add(Flashcard flashcard) {
         flashcards.add(flashcard);
+    }
+
+    public void deleteAllFlashcards() {
+        flashcards.clear();
     }
 }
