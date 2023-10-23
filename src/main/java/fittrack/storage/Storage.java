@@ -107,6 +107,14 @@ public class Storage {
         file.close();
     }
 
+    /**
+     * Save all data when exiting
+     *
+     * @param userProfile profile of user containing personal data
+     * @param mealList list of meals
+     * @param workoutList list of workouts
+     * @throws IOException error
+     */
     public void save(UserProfile userProfile, MealList mealList, WorkoutList workoutList)
             throws IOException {
         saveProfile(userProfile);
