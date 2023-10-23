@@ -3,10 +3,11 @@ package seedu.cafectrl.parser;
 import seedu.cafectrl.Order;
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.EditPriceCommand;
 import seedu.cafectrl.command.ExitCommand;
+import seedu.cafectrl.command.HelpCommand;
+import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.command.AddOrderCommand;
@@ -84,6 +85,9 @@ public class Parser {
         case EditPriceCommand.COMMAND_WORD:
             return prepareEditPriceCommand(menu, arguments);
 
+        case HelpCommand.COMMAND_WORD:
+            return prepareHelpCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -95,13 +99,9 @@ public class Parser {
         }
     }
 
-    // All prepareCommand Classes
+    /** All prepareCommand Classes */
     private static Command prepareListMenu() {
         return new ListMenuCommand();
-    }
-
-    private static Command prepareEditListCommand(String arguments) {
-        return null;
     }
 
     /**
@@ -257,6 +257,10 @@ public class Parser {
         }
 
         return new DeleteDishCommand(dishIndex);
+    }
+
+    private static Command prepareHelpCommand() {
+        return new HelpCommand();
     }
 
     /**
