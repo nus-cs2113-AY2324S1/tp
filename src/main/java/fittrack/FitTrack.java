@@ -19,11 +19,11 @@ import fittrack.storage.Storage.StorageOperationException;
  * to build main structure of this class.
  */
 public class FitTrack {
-    private final MealList mealList;
     private final WorkoutList workoutList;
     private final Ui ui;
     private final Storage storage;
     private UserProfile userProfile;
+    private MealList mealList;
 
 
     private FitTrack() {
@@ -56,6 +56,7 @@ public class FitTrack {
                 this.userProfile = storage.profileLoad();
                 isValidInput = true;
             }
+            this.mealList = storage.mealLoad();
         }catch (StorageOperationException e) {
             throw new RuntimeException(e);
         }

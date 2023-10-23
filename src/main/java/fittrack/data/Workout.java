@@ -14,7 +14,7 @@ public class Workout {
     }
 
     public String formatToFile() {
-        return String.format("W | %s | %s | %s", name, calories, date);
+        return String.format("%s | %s | %s", name, calories, date);
     }
 
     @Override
