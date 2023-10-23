@@ -28,7 +28,7 @@ public class Storage {
     private final File mealFile;
     private final File workoutFile;
     private Path profilePath;
-
+    private Path mealListPath;
 
 
     /**
@@ -140,6 +140,29 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + profilePath);
+        } catch (IllegalValueException ive) {
+            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
+        }
+    }
+
+    /**
+     * Loads the {@code MealList} data from this meal list storage file, and then returns it.
+     * Returns an empty {@code MealList} if the file does not exist, or is not a regular file.
+     *
+     * @throws StorageOperationException if there were errors reading and/or converting data from file.
+     */
+    public MealList mealLoad() throws StorageOperationException {
+        mealListPath = Paths.get(MEAL_LIST_FILE_PATH);
+        if (!Files.exists(mealListPath) || !Files.isRegularFile(mealListPath)) {
+            return new MealList();
+        }
+
+        try {
+            return MealListDecoder.decodeMealList(Files.readAllLines(mealListPath));
+        } catch (FileNotFoundException fnfe) {
+            throw new AssertionError("A non-existent file scenario is already handled earlier.");
+        } catch (IOException ioe) {
+            throw new StorageOperationException("Error writing to file: " + mealListPath);
         } catch (IllegalValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
