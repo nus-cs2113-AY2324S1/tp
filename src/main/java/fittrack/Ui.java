@@ -63,6 +63,11 @@ public class Ui {
         printBlankLine();
     }
 
+    public void printPrompt() {
+        System.out.println("How can I help you today?");
+        printLine();
+    }
+
     /**
      * Prints the profile details of the user after user has
      * entered details for the first time.
