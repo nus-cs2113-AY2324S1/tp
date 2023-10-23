@@ -19,7 +19,7 @@ public class AddOrderCommand extends Command {
     }
     @Override
     public void execute(Menu menu, Ui ui, Pantry pantry) {
-        Chef chef = new Chef(order, pantry);
+        Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();
     }
 }
