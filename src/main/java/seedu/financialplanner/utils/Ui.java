@@ -99,13 +99,25 @@ public class Ui {
     }
 
     public void printBudgetAfterDeduction() {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         if (Budget.getCurrentBudget() <= 0) {
-            message += "You have exceeded your current budget by: ";
+            message.append("You have exceeded your current budget by: ");
         } else if (Budget.getCurrentBudget() > 0) {
-            message += "Your remaining budget for the month is: ";
+            message.append("Your remaining budget for the month is: ");
         }
-        message += Budget.getCurrentBudgetString();
-        showMessage(message);
+        message.append(Budget.getCurrentBudgetString());
+        showMessage(message.toString());
+    }
+
+    public void printBudget() {
+        showMessage("You have a remaining budget of " + Budget.getCurrentBudgetString() + ".");
+    }
+
+    public void printDeleteBudget() {
+        showMessage("Budget has been deleted.");
+    }
+
+    public void printResetBudget() {
+        showMessage("Budget has been reset to " + Budget.getInitialBudgetString() + ".");
     }
 }

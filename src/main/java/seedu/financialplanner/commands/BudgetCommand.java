@@ -16,17 +16,19 @@ public class BudgetCommand extends Command {
 
     public BudgetCommand(RawCommand rawCommand) throws FinancialPlannerException {
         command = String.join(" ", rawCommand.args);
+        if (command.equals("delete") || command.equals("reset") || command.equals("view")) {
+            return;
+        }
         if (!command.equals("set") && !command.equals("update")) {
             logger.log(Level.WARNING, "Invalid arguments for budget command");
-            throw new FinancialPlannerException("Please indicate whether budget is to be set or update.");
+            throw new FinancialPlannerException("Budget command must be one of the following: set, update, " +
+                    "delete, reset, view.");
         }
 
         if (command.equals("set") && Budget.hasBudget()) {
             logger.log(Level.WARNING, "Invalid command: Trying to set existing budget");
             throw new FinancialPlannerException("There is an existing budget, did you mean update?");
-        }
-
-        if (command.equals("update") && !Budget.hasBudget()) {
+        } else if (command.equals("update") && !Budget.hasBudget()) {
             logger.log(Level.WARNING, "Invalid command: Trying to update non-existent budget");
             throw new FinancialPlannerException("There is no budget set yet, did you mean set?");
         }
@@ -66,7 +68,8 @@ public class BudgetCommand extends Command {
 
     @Override
     public void execute() {
-        assert command.equals("set") || command.equals("update") : "Command should be set or update only";
+        assert command.equals("set") || command.equals("update") || command.equals("delete") ||
+                command.equals("reset") || command.equals("view");
 
         Ui ui = Ui.getInstance();
         switch (command) {
@@ -81,6 +84,34 @@ public class BudgetCommand extends Command {
             ui.printBudgetBeforeUpdate();
             Budget.updateBudget(budget);
             ui.printBudgetAfterUpdate();
+            break;
+        case "delete":
+            if (Budget.hasBudget()) {
+                Budget.deleteBudget();
+                ui.printDeleteBudget();
+            } else {
+                ui.showMessage("Budget has not been set yet.");
+            }
+            break;
+        case "reset":
+            if (Budget.getInitialBudget() != Budget.getCurrentBudget()) {
+                if (Budget.getInitialBudget() > Cashflow.getBalance()) {
+                    Budget.setInitialBudget(Cashflow.getBalance());
+                    ui.showMessage("Since initial budget exceeds current balance, " +
+                            "budget will be reset to current balance.");
+                }
+                Budget.resetBudget();
+                ui.printResetBudget();
+            } else {
+                ui.showMessage("Budget has not been spent yet.");
+            }
+            break;
+        case "view":
+            if (Budget.hasBudget()) {
+                ui.printBudget();
+            } else {
+                ui.showMessage("There is no existing budget.");
+            }
             break;
         default:
             logger.log(Level.SEVERE, "Unreachable default case reached");

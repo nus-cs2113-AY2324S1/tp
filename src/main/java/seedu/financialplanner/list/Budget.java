@@ -62,4 +62,17 @@ public abstract class Budget {
     public static String formatString() {
         return "B | " + initialBudget + " | " + currentBudget;
     }
+
+    public static void deleteBudget() {
+        initialBudget = 0;
+        currentBudget = 0;
+    }
+
+    public static void resetBudget() {
+        currentBudget = initialBudget;
+    }
+
+    public static void setInitialBudget(double amount) {
+        initialBudget = amount;
+    }
 }

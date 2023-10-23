@@ -10,17 +10,15 @@ import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
 
 public class FinancialPlanner {
-
     private static final String FILE_PATH = "data/data.txt";
     private final Storage storage = Storage.getInstance();
     private final Ui ui = Ui.getInstance();
-    private final WatchList watchList = WatchList.INSTANCE;
-    private final CashflowList cashflowList = CashflowList.getInstance();
 
     private FinancialPlanner() {
     }
 
     public static void main(String[] args) {
+        FinancialPlannerLogger.initialise();
         new FinancialPlanner().run();
     }
 
@@ -32,7 +30,6 @@ public class FinancialPlanner {
             return;
         }
 
-        FinancialPlannerLogger.initialise();
         ui.welcomeMessage();
         String input;
         Command command = null;
