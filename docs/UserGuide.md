@@ -107,3 +107,7 @@ Example of usage:
 * Add income `addIncome monthly salary /amt2500 /d2023-09-30`
 * Delete income `deleteIncome 4`
 * View incomes `viewIncomes`
+* View financial statement `viewFinancialStatement`
+* View budget `viewBudget`
+* Update budget `updateBudget 200`
+* Delete budget `deleteBudget`
