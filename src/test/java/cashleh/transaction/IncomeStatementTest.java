@@ -15,11 +15,11 @@ class IncomeStatementTest {
 
     @Test
     void getNumberOfEntries() {
-        assertEquals(testStatement.getNumberOfEntries(), 0);
+        assertEquals(testStatement.getNumberOfIncomes(), 0);
         testStatement.addIncome(testIncome);
-        assertEquals(testStatement.getNumberOfEntries(), 1);
+        assertEquals(testStatement.getNumberOfIncomes(), 1);
         testStatement.addIncome(testIncome);
-        assertEquals(testStatement.getNumberOfEntries(), 2);
+        assertEquals(testStatement.getNumberOfIncomes(), 2);
     }
 
     @Test

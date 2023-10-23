@@ -43,7 +43,7 @@ public class FinancialStatement {
      * all incomes minus the sum of all expenses.
      * @return cash on hand as double.
      */
-    public double getCashOnHand() {
+    public double getNetCash() {
         return incomeStatement.getTotalIncomeAmount() - expenseStatement.getTotalExpenseAmount();
     }
 
@@ -56,7 +56,7 @@ public class FinancialStatement {
     public void printTransactions() {
         int listSize = financialStatement.size();
         String[] texts = new String[listSize + 1];
-        texts[0] = "Your current cash on hand amounts to: " + getCashOnHand();
+        texts[0] = "Your current cash on hand amounts to: " + getNetCash();
         for (int i = 1; i <= listSize; i++) {
             String sign = "";
             Transaction currentTransaction = financialStatement.get(i - 1);
