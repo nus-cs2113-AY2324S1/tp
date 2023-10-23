@@ -31,6 +31,6 @@ public class SetGoalCommand extends AbstractCommand{
     @Override
     public void execute() {
         GoalList.INSTANCE.list.add(new Goal(goal, amount));
-        Ui.INSTANCE.showMessage("Set Goal Successfully!");
+        Ui.getInstance().showMessage("Set Goal Successfully!");
     }
 }

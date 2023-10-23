@@ -20,8 +20,8 @@ public class OverviewCommand extends AbstractCommand {
 
     @Override
     public void execute() throws Exception {
-        CashflowList list = CashflowList.INSTANCE;
-        Ui.INSTANCE.showMessage("Here is an overview of your financials:\n" +
+        CashflowList list = CashflowList.getInstance();
+        Ui.getInstance().showMessage("Here is an overview of your financials:\n" +
                 "Total balance: " + formatDoubleToString(Cashflow.getBalance()) + "\n" +
                 "Highest income: " + getHighestIncome(list) + "\n" +
                 "Highest expense: " + getHighestExpense(list) + "\n" +
