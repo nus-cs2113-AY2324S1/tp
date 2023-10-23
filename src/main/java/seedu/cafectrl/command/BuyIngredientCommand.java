@@ -7,23 +7,24 @@ import seedu.cafectrl.ui.Ui;
 
 public class BuyIngredientCommand extends Command {
 
-    //command format: buy_ingredient ingredient/[INGREDIENT_NAME] qty/[QUANTITY]
     public static final String COMMAND_WORD = "buy_ingredient";
 
-    private String ingredientName;
-    private String ingredientQty;
+    private String name;
+    private int qty;
+    private String unit;
     private Pantry pantry;
 
 
-    public BuyIngredientCommand(String name, String qty) {
-        this.ingredientName = name;
-        this.ingredientQty = qty;
-        this.pantry = new Pantry();
+    public BuyIngredientCommand(String name, int qty, String unit) {
+        this.name = name;
+        this.qty = qty;
+        this.unit = unit;
+        pantry = new Pantry();
     }
 
     @Override
     public void execute(Menu menu, Ui ui) {
-        Ingredient ingredient = pantry.addIngredientToStock(ingredientName, ingredientQty);
+        Ingredient ingredient = pantry.addIngredientToStock(name, qty, unit);
         ui.showBuyIngredientMessage(ingredient);
     }
 }

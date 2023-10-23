@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class ViewTotalStockCommand extends Command {
 
     public static final String COMMAND_WORD = "view_stock";
+
     private ArrayList<Ingredient> pantryStock;
     private Pantry pantry;
 
@@ -25,7 +26,7 @@ public class ViewTotalStockCommand extends Command {
         pantryStock = pantry.getPantryStock();
 
         for (Ingredient ingredient : pantryStock) {
-            ui.showToUser(ingredient.getName() + " " + ingredient.getQuantity());
+            ui.showToUser(ingredient.getName() + " " + ingredient.getQty());
         }
     }
 }

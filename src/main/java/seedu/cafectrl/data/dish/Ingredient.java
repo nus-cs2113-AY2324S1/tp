@@ -2,34 +2,37 @@ package seedu.cafectrl.data.dish;
 
 public class Ingredient {
     private final String name;
-    private String quantity;
+    private int qty;
+    private String unit;
 
     public Ingredient(String name) {
         this.name = name;
-        quantity = null;
+        this.qty = 0;
+        this.unit = null;
     }
 
-    public Ingredient(String name, String quantity) {
+    public Ingredient(String name, int qty, String unit) {
         this.name = name;
-        this.quantity = quantity;
+        this.qty = qty;
+        this.unit = unit;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQuantity(String qty) {
-        this.quantity = qty;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
 
     @Override
     public String toString() {
-        return name + " - " + quantity;
+        return name + " - " + qty;
     }
 
 }

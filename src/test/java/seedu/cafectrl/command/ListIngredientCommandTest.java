@@ -17,11 +17,11 @@ class ListIngredientCommandTest {
     public void execute_validIndex_printsIngredients() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", "1 cup"),
-                        new Ingredient("Chicken", "100g"))), 8.0F));
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 1, "cup"),
+                        new Ingredient("Chicken", 100, "g"))), 8.0F));
         menuItems.add(new Dish("Chicken Sandwich",
-                new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", "100g"),
-                        new Ingredient("Chicken", "50g"))), 5.0F));
+                new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 100, "g"),
+                        new Ingredient("Chicken", 50, "g"))), 5.0F));
         Menu menu = new Menu(menuItems);
 
         ArrayList<String> actualOutput = new ArrayList<>();
@@ -47,11 +47,11 @@ class ListIngredientCommandTest {
     public void execute_invalidIndex_returnsErrorMessage() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", "1 cup"),
-                        new Ingredient("Chicken", "100g"))), 8.0F));
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 1, "cup"),
+                        new Ingredient("Chicken", 100, "g"))), 8.0F));
         menuItems.add(new Dish("Chicken Sandwich",
-                new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", "100g"),
-                        new Ingredient("Chicken", "50g"))), 5.0F));
+                new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 100, "g"),
+                        new Ingredient("Chicken", 50, "g"))), 5.0F));
         Menu menu = new Menu(menuItems);
         Ui ui = new Ui();
         int invalidIndex = 3;
