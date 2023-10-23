@@ -59,7 +59,8 @@ public class Expense extends Transaction {
         else if (getCategory() == null) {
             return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
         }
-        return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ", category: " + getCategory() + ")";
+        return getDescription() + " (amount: " + getAmount() 
+                + ", date: " + getDate() + ", category: " + getCategory() + ")";
     }
 
 }

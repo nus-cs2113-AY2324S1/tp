@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class StringTokenizer {
 
-    /**
+    /*
      * Tokenizes a string based on a list of prefixes.
      * @param input String to be tokenized
      * @param prefixes List of prefixes to tokenize the string with - the order of the prefixes does not matter
