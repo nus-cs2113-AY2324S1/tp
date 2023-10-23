@@ -208,6 +208,7 @@ public class CommandParser {
         }
     }
 
+    // @@author NgLixuanNixon
     public int parseIndex(String meal) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = INDEX_PATTERN.matcher(meal);
         if (!matcher.matches()) {

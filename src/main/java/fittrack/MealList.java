@@ -28,6 +28,7 @@ public class MealList {
         mealListSize++;
     }
 
+    // @@author NgLixuanNixon
     public void deleteMeal(int mealIndex) {
         assert isIndexValid(mealIndex);
         mealList.remove((mealIndex - 1));

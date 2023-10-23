@@ -21,6 +21,7 @@ public class DeleteMealCommand extends Command {
         super(commandLine);
     }
 
+    // @@author NgLixuanNixon
     @Override
     public CommandResult execute() {
         if (!mealList.isIndexValid(mealIndex)) {
@@ -34,6 +35,7 @@ public class DeleteMealCommand extends Command {
         return new CommandResult("I've deleted the following meal:" + "\n" + toDelete.toString());
     }
 
+    // @@author NgLixuanNixon
     @Override
     public void setArguments(String args, CommandParser parser)
             throws PatternMatchFailException, NumberFormatException {

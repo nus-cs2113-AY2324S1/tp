@@ -20,6 +20,7 @@ public class DeleteWorkoutCommand extends Command {
         super(commandLine);
     }
 
+    // @@author marklin2234
     @Override
     public CommandResult execute() {
         if (!workoutList.isIndexValid(workoutIndex)) {
@@ -33,6 +34,7 @@ public class DeleteWorkoutCommand extends Command {
         return new CommandResult("I've deleted the following workout:" + "\n" + toDelete.toString());
     }
 
+    // @@author marklin2234
     @Override
     public void setArguments(String args, CommandParser parser)
             throws PatternMatchFailException, NumberFormatException {
