@@ -134,7 +134,7 @@ public class Parser {
         try {
             // Checks whether the overall pattern of add arguments is correct
             if (!matcher.matches()) {
-                return new IncorrectCommand("Error: Incorrect format for the add command.\n"
+                return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
                         + AddDishCommand.MESSAGE_USAGE);
             }
 
@@ -154,7 +154,7 @@ public class Parser {
 
             return new AddDishCommand(dish);
         } catch (IllegalArgumentException e) {
-            return new IncorrectCommand("Error: Incorrect format for the ingredients.\n"
+            return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
                     + AddDishCommand.MESSAGE_USAGE);
         }
     }

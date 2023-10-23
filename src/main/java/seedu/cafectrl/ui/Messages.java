@@ -33,9 +33,7 @@ public class Messages {
     public static final String MENU_TOP = "+-----------------------------------------+";
     public static final String MENU_CORNER = "+--------------------------+--------------+";
     public static final  String MENU_TITLE = "| Dish Name                |  Price       |";
-
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
-
-
+    public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
 
 }
