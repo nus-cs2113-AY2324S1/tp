@@ -31,4 +31,5 @@ public class Storage {
     public void save(CashflowList list, String filePath) throws FinancialPlannerException {
         SaveData.save(list, filePath);
     }
+
 }
