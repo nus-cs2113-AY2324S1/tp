@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AddCashflowCommandTest {
     private Ui ui = Ui.getInstance();
     private CashflowList cashflowList = CashflowList.getInstance();
-    private WatchList watchList = WatchList.INSTANCE;
+    private WatchList watchList = WatchList.getInstance();
 
     @Test
     void testExecute() {
