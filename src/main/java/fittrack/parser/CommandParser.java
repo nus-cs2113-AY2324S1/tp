@@ -49,12 +49,11 @@ public class CommandParser {
     private static final Pattern MEAL_PATTERN = Pattern.compile(
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
-
-    private static final Pattern DELETE_MEAL_PATTERN = Pattern.compile(
-            "(?<index>\\S+)?"
-    );
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
+    );
+    private static final Pattern INDEX_PATTERN = Pattern.compile(
+            "(?<index>\\S+)?"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -184,26 +183,6 @@ public class CommandParser {
         }
     }
 
-    public int parseDeleteMeal(String meal) throws PatternMatchFailException,
-            NumberFormatException, NegativeNumberException {
-        final Matcher matcher = DELETE_MEAL_PATTERN.matcher(meal);
-        if (!matcher.matches()) {
-            throw new PatternMatchFailException();
-        }
-
-        final String index = matcher.group("index");
-
-        try {
-            int indexToDelete = Integer.parseInt(index);
-            if (indexToDelete <= 0) {
-                throw new NegativeNumberException();
-            }
-            return indexToDelete;
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-    }
-
     public Workout parseWorkout(String workout) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = WORKOUT_PATTERN.matcher(workout);
         if (!matcher.matches()) {
@@ -226,6 +205,21 @@ public class CommandParser {
             throw new NumberFormatException();
         } catch (DateTimeParseException e) {
             throw new PatternMatchFailException();
+        }
+    }
+
+    public int parseIndex(String meal) throws PatternMatchFailException, NumberFormatException {
+        final Matcher matcher = INDEX_PATTERN.matcher(meal);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        final String index = matcher.group("index");
+
+        try {
+            return Integer.parseInt(index);
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
         }
     }
 

@@ -36,9 +36,8 @@ public class DeleteMealCommand extends Command {
 
     @Override
     public void setArguments(String args, CommandParser parser)
-            throws PatternMatchFailException, NumberFormatException,
-            IndexOutOfBoundsException, NegativeNumberException {
-        mealIndex = parser.parseDeleteMeal(args);
+            throws PatternMatchFailException, NumberFormatException {
+        mealIndex = parser.parseIndex(args);
     }
 
     @Override

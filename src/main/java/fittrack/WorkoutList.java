@@ -50,4 +50,7 @@ public class WorkoutList {
         return workoutList.get(workoutIndex - 1);
     }
 
+    public boolean isIndexValid(int index) {
+        return 1 <= index && index <= workoutList.size();
+    }
 }
