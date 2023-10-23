@@ -27,6 +27,7 @@ public class WorkoutList {
     }
 
     public void deleteWorkout(int workoutIndex) {
+        assert isIndexValid(workoutIndex);
         workoutList.remove((workoutIndex - 1));
         workoutListSize--;
     }
@@ -47,6 +48,7 @@ public class WorkoutList {
     }
 
     public Workout getWorkout(int workoutIndex) {
+        assert isIndexValid(workoutIndex);
         return workoutList.get(workoutIndex - 1);
     }
 
