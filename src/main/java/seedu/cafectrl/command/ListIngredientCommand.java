@@ -1,6 +1,7 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
@@ -20,7 +21,7 @@ public class ListIngredientCommand extends Command {
     }
 
     @Override
-    public void execute(Menu menu, Ui ui) {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         try {
             Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
             ui.printIngredients(selectedDish);

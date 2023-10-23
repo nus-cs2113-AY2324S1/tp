@@ -2,6 +2,7 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
@@ -30,7 +31,7 @@ class HelpCommandTest {
         };
 
         HelpCommand helpCommand = new HelpCommand();
-        helpCommand.execute(menu, ui);
+        helpCommand.execute(menu, ui, new Pantry());
         int numOfLines = 8;
 
         ArrayList<String> expectedOutputs = new ArrayList<>();

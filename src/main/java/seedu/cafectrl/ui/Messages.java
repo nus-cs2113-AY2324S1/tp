@@ -1,11 +1,10 @@
 package seedu.cafectrl.ui;
 
 public class Messages {
-    public static final String LINE_STRING = "-----------------------------------------------------";
-    
-    /** Greeting messages */
-    public static final String WELCOME_MESSAGE = "Hello! Welcome to CafeCTRL!";
 
+    /** Greeting messages */
+    public static final String LINE_STRING = "-----------------------------------------------------";
+    public static final String WELCOME_MESSAGE = "Hello! Welcome to CafeCTRL!";
     public static final String GOODBYE_MESSAGE = "Goodbye <3 Have a great day ahead!";
 
     /** Messages for edit price command */
@@ -22,6 +21,9 @@ public class Messages {
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
+
+    /** Messages for view stock command */
+    public static final String VIEW_STOCK = "You have the following ingredients in pantry:";
 
     /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";
@@ -51,10 +53,14 @@ public class Messages {
             + "for list ingredients command.";
     public static final String MISSING_ARGUMENT_FOR_DELETE = "Error: Missing arguments "
             + "for delete command.";
+    public static final String MISSING_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Missing arguments "
+            + "for buy ingredient command.";
     public static final String WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE = "Error: Invalid dish index. \n "
             + "Make sure dish index is "
             + "of type int and price is of type float!";
     public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
             + "Type 'help' to view the accepted list of commands";
     public static final String INVALID_DISH_INDEX = "Error: Invalid dish index.";
+    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
+            + "for buy ingredient command.";
 }
