@@ -22,6 +22,10 @@ public abstract class Cashflow {
         balance = 0;
     }
 
+    public static void setBalance(double amount) {
+        balance = amount;
+    }
+
     public void deleteCashflowvalue() {
     }
 
