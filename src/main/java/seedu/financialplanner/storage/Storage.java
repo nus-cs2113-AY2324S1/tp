@@ -1,8 +1,6 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Storage {
-    public static final Storage INSTANCE = new Storage();
+    private static Storage storage = null;
     private final Path path = Paths.get("data");
 
     private Storage() {
@@ -24,11 +22,18 @@ public class Storage {
         }
     }
 
-    public void load(CashflowList list, Ui ui, String filePath) throws FinancialPlannerException {
-        LoadData.load(list, ui, filePath);
+    public static Storage getInstance() {
+        if (storage == null) {
+            storage = new Storage();
+        }
+        return storage;
     }
 
-    public void save(CashflowList list, String filePath) throws FinancialPlannerException {
-        SaveData.save(list, filePath);
+    public void load(String filePath) throws FinancialPlannerException {
+        LoadData.load(filePath);
+    }
+
+    public void save(String filePath) throws FinancialPlannerException {
+        SaveData.save(filePath);
     }
 }

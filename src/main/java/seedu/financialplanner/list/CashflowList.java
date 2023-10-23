@@ -48,7 +48,7 @@ public class CashflowList {
         assert newListSize == existingListSize + 1;
     }
 
-    public void delete(int index) {
+    public double delete(int index) {
         int existingListSize = list.size();
         int listIndex = index - 1;
 
@@ -59,6 +59,7 @@ public class CashflowList {
 
         int newListSize = list.size();
         assert newListSize == existingListSize - 1;
+        return toRemove.getAmount();
     }
     //helper method to find the index of a given cashflow in the overall list
     //given its index in its respective list. e.g. "income 3" is the third income
@@ -108,7 +109,7 @@ public class CashflowList {
         return overallCashflowIndex;
     }
 
-    public void deleteCashflow(CashflowCategory category, int index) {
+    public double deleteCashflow(CashflowCategory category, int index) {
         int existingListSize = list.size();
         int listIndex = cashflowIndexFinder(category, index);
 
@@ -119,8 +120,8 @@ public class CashflowList {
 
         int newListSize = list.size();
         assert newListSize == existingListSize - 1;
+        return toRemove.getAmount();
     }
-
 
     public void load(Cashflow entry) {
         list.add(entry);
@@ -128,10 +129,10 @@ public class CashflowList {
 
     //temp method
     public String getList() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (Cashflow entry : list) {
-            output += entry.formatString() + "\n";
+            output.append(entry).append("\n");
         }
-        return output;
+        return output.toString();
     }
 }

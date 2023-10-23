@@ -1,5 +1,5 @@
 package seedu.financialplanner.commands;
 
-public abstract class AbstractCommand {
+public abstract class Command {
     public abstract void execute() throws Exception;
 }

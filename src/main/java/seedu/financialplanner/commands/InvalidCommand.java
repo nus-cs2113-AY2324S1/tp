@@ -2,7 +2,7 @@ package seedu.financialplanner.commands;
 
 import seedu.financialplanner.utils.Ui;
 
-public class InvalidCommand extends AbstractCommand {
+public class InvalidCommand extends Command {
     public InvalidCommand() {
     }
 

@@ -6,6 +6,7 @@ public class GoalList {
 
     private GoalList() {
     }
+
     public void load(Goal goal) {
         list.add(goal);
     }

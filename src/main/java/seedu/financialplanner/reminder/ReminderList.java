@@ -1,4 +1,5 @@
 package seedu.financialplanner.reminder;
+
 import java.util.ArrayList;
 public class ReminderList {
     public static final ReminderList INSTANCE = new ReminderList();

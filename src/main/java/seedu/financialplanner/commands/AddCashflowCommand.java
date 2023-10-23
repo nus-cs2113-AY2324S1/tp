@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class AddCashflowCommand extends AbstractCommand {
+public class AddCashflowCommand extends Command {
     protected static Ui ui = Ui.getInstance();
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     protected double amount;

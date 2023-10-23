@@ -17,6 +17,15 @@ public abstract class Cashflow {
         this.amount = amount;
         this.recur = recur;
     }
+
+    public static void clearBalance() {
+        balance = 0;
+    }
+
+    public static void setBalance(double amount) {
+        balance = amount;
+    }
+
     public void deleteCashflowvalue() {
     }
 
