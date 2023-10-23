@@ -18,6 +18,10 @@ public class HelpCommand extends Command {
     private String helpMessage;
     private Class<? extends Command> commandType;
 
+    public HelpCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         return new CommandResult(helpMessage);
@@ -32,7 +36,7 @@ public class HelpCommand extends Command {
 
         String word = parser.getFirstWord(args);
 
-        Command blankCommand = parser.getBlankCommand(word);
+        Command blankCommand = parser.getBlankCommand(word, commandLine);
         commandType = blankCommand.getClass();
 
         if (blankCommand instanceof InvalidCommand) {

@@ -10,6 +10,10 @@ public class ViewMealsCommand extends Command {
             String.format("Type `%s` to view the list of meals.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
+    public ViewMealsCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         String feedback = "These are the meals you have consumed:\n" + mealList.toString();

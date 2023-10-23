@@ -13,6 +13,10 @@ public class ExitCommand extends Command {
 
     private static final String MESSAGE_EXIT = "Goodbye! Hope to see you soon!";
 
+    public ExitCommand(String commandLine) {
+        super(commandLine);
+    }
+
     public static boolean isExit(Command command) {
         return command instanceof ExitCommand;
     }

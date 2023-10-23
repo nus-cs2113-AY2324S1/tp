@@ -14,6 +14,10 @@ public class DeleteWorkoutCommand extends Command {
 
     private int workoutIndex;
 
+    public DeleteWorkoutCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         Workout toDelete = workoutList.getWorkout(workoutIndex);

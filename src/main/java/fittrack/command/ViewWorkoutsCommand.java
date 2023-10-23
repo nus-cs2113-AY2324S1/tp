@@ -10,6 +10,10 @@ public class ViewWorkoutsCommand extends Command {
             String.format("Type `%s` to view the list of your workouts.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
+    public ViewWorkoutsCommand(String commandLine) {
+        super(commandLine);
+    }
+
     /**
      * Execute the command
      * @return list of workouts

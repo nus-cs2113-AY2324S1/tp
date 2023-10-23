@@ -10,6 +10,10 @@ public class ViewProfileCommand extends Command {
             String.format("Type `%s` to view your profile.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
+    public ViewProfileCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         //TODO: get profile details and make them to lines of strings.

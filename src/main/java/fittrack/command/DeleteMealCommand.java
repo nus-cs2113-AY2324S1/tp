@@ -17,6 +17,10 @@ public class DeleteMealCommand extends Command {
 
     private int mealIndex;
 
+    public DeleteMealCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
 

@@ -12,6 +12,10 @@ public class SaveCommand extends Command {
             String.format("Type `%s` to save your profile, meals and workout data.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
+    public SaveCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         try {

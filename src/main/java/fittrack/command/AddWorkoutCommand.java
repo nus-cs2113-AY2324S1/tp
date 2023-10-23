@@ -19,6 +19,10 @@ public class AddWorkoutCommand extends Command {
 
     private Workout newWorkout;
 
+    public AddWorkoutCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         workoutList.addToList(newWorkout);

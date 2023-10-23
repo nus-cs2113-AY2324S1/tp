@@ -19,6 +19,10 @@ public class AddMealCommand extends Command {
 
     private Meal newMeal;
 
+    public AddMealCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         mealList.addToList(newMeal);

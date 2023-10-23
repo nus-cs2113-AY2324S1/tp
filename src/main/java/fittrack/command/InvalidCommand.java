@@ -9,10 +9,12 @@ public class InvalidCommand extends Command {
     private String helpMessage;
     private String exceptionMessage = "";
 
-    public InvalidCommand() {
+    public InvalidCommand(String commandLine) {
+        super(commandLine);
     }
 
-    public InvalidCommand(ParseException e) {
+    public InvalidCommand(String commandLine, ParseException e) {
+        this(commandLine);
         if (e.getMessage() != null) {
             this.exceptionMessage = e.getMessage();
         }
@@ -25,7 +27,7 @@ public class InvalidCommand extends Command {
 
     @Override
     public void setArguments(String inputLine, CommandParser parser) {
-        HelpCommand helpCommand = new HelpCommand();
+        HelpCommand helpCommand = new HelpCommand(inputLine);
         helpCommand.setArguments(inputLine, parser);
         String message = helpCommand.execute().getFeedback();
 

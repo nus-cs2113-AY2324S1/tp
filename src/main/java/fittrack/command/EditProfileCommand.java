@@ -16,6 +16,10 @@ public class EditProfileCommand extends Command {
 
     UserProfile newProfile;
 
+    public EditProfileCommand(String commandLine) {
+        super(commandLine);
+    }
+
     @Override
     public CommandResult execute() {
         userProfile.setHeight(newProfile.getHeight());

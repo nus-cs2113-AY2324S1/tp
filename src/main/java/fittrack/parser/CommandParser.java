@@ -66,7 +66,7 @@ public class CommandParser {
         final String word = matcher.group("word").strip();
         final String args = matcher.group("args").strip();
 
-        Command command = getBlankCommand(word);
+        Command command = getBlankCommand(word, userCommandLine);
         if (command instanceof InvalidCommand) {
             return getInvalidCommand(userCommandLine);
         }
@@ -79,47 +79,47 @@ public class CommandParser {
         return command;
     }
 
-    public Command getBlankCommand(String word) {
+    public Command getBlankCommand(String word, String commandLine) {
         switch (word) {
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommand(commandLine);
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return new ExitCommand(commandLine);
         case EditProfileCommand.COMMAND_WORD:
-            return new EditProfileCommand();
+            return new EditProfileCommand(commandLine);
         case ViewProfileCommand.COMMAND_WORD:
-            return new ViewProfileCommand();
+            return new ViewProfileCommand(commandLine);
         case AddMealCommand.COMMAND_WORD:
-            return new AddMealCommand();
+            return new AddMealCommand(commandLine);
         case DeleteMealCommand.COMMAND_WORD:
-            return new DeleteMealCommand();
+            return new DeleteMealCommand(commandLine);
         case ViewMealsCommand.COMMAND_WORD:
-            return new ViewMealsCommand();
+            return new ViewMealsCommand(commandLine);
         case AddWorkoutCommand.COMMAND_WORD:
-            return new AddWorkoutCommand();
+            return new AddWorkoutCommand(commandLine);
         case DeleteWorkoutCommand.COMMAND_WORD:
-            return new DeleteWorkoutCommand();
+            return new DeleteWorkoutCommand(commandLine);
         case ViewWorkoutsCommand.COMMAND_WORD:
-            return new ViewWorkoutsCommand();
+            return new ViewWorkoutsCommand(commandLine);
         case BmiCommand.COMMAND_WORD:
-            return new BmiCommand();
+            return new BmiCommand(commandLine);
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommand();
+            return new SaveCommand(commandLine);
         default:
-            return new InvalidCommand();
+            return new InvalidCommand(commandLine);
 
         }
     }
 
     public InvalidCommand getInvalidCommand(String userCommandLine) {
-        InvalidCommand invalidCommand = new InvalidCommand();
+        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
 
     public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
-        InvalidCommand invalidCommand = new InvalidCommand(e);
+        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
