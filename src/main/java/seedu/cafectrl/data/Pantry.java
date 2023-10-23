@@ -13,60 +13,41 @@ public class Pantry {
     private ArrayList<Dish> menuItems;
     private  Ui ui;
 
-    public Pantry() {
-        this.ui = new Ui();
+    public Pantry(Ui ui) {
+        this.ui = ui;
     }
 
     /**
      * Checks the stock of ingredients and dish availability based on a given order.
      */
     public void checkIngredientsStock(){
-        //pass in dish when order function is completed
+        //the dish variable and dishIngredients array will be removed
+        // when order class is implemented as it will pass in dishIngredients
         String dish = "Chicken Rice";
-        decreaseIngredientsStock(dish);
+        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish);
+        decreaseIngredientsStock(dishIngredients);
         checkDishAvailability();
     }
 
     /**
      * Decreases the stock of ingredients based on the given dish order.
      *
-     * @param dish The name of the dish being ordered.
+     * @param dishIngredients
      */
-    public void decreaseIngredientsStock(String dish){
-        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish);
+    public void decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
         pantryStock = retrieveStockFromStorage();
 
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
-            String unit = extractUnit(dishIngredient.getQuantity());
-            int stockQuantity = extractQuantity(usedIngredientFromStock);
-            int usedQuantity = extractQuantity(dishIngredient);
+            int stockQuantity = usedIngredientFromStock.getQty();
+            int usedQuantity = dishIngredient.getQty();
+            int finalQuantity = stockQuantity-usedQuantity;
 
-            usedIngredientFromStock.setQuantity(String.valueOf(stockQuantity-usedQuantity)+unit);
+            usedIngredientFromStock.setQuantity(String.valueOf(finalQuantity)+dishIngredient.getUnit());
         }
         //TODO: store pantryStock to storage
     }
-
-    /**
-     * Extracts the quantity from the given ingredient quantity string.
-     *
-     * @param ingredient The ingredient from which quantity is extracted.
-     * @return The extracted quantity as an integer.
-     */
-    private static int extractQuantity(Ingredient ingredient) {
-        return Integer.parseInt(ingredient.getQuantity()
-                .replaceAll("[^0-9]", ""));
-    }
-
-    /**
-     * Extracts the unit from the given quantity string.
-     *
-     * @param qty The quantity string.
-     * @return The extracted unit string.
-     */
-    public String extractUnit(String qty) {
-        return qty.replaceAll("[0-9]", "");}
 
     /**
      * Retrieves the ingredient used in the ordered dish from pantryStock.
@@ -86,11 +67,9 @@ public class Pantry {
      */
     public void checkDishAvailability(){
         for (Dish dish : menuItems) {
-            ui.printLine();
             ui.showToUser("Dish: " + dish.getName());
             int numberOfDishes = checkIngredientAvailability(dish);
-            ui.showToUser("Available Dishes: " + numberOfDishes);
-            ui.printLine();
+            ui.showDishAvailability(numberOfDishes);
         }
     }
 
@@ -101,6 +80,8 @@ public class Pantry {
      */
     public int checkIngredientAvailability(Dish dish) {
         int maxNumofDish = Integer.MAX_VALUE;
+        //This function will be replaced by the function used
+        //to retrieve dishIngredients when order class is implemented
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName());
 
         for (Ingredient dishIngredient : dishIngredients) {
@@ -127,8 +108,8 @@ public class Pantry {
             return 0;
         }
 
-        int currentQuantity = extractQuantity(usedIngredientFromStock);
-        int usedQuantity = extractQuantity(dishIngredient);
+        int currentQuantity = usedIngredientFromStock.getQty();
+        int usedQuantity = dishIngredient.getQty();
         return currentQuantity / usedQuantity;
     }
 
@@ -138,15 +119,13 @@ public class Pantry {
      * @param dishIngredient The ingredient for which restocking is needed.
      */
     private void handleRestock(Ingredient dishIngredient) {
-        String unit = extractUnit(dishIngredient.getQuantity());
         String dishIngredientName = dishIngredient.getName();
-
-        ui.showToUser("Please Restock: " + dishIngredientName);
         Ingredient stockIngredient = getIngredient(dishIngredient);
-        int currentQuantity = (stockIngredient == null) ? 0 : extractQuantity(stockIngredient);
 
-        ui.showToUser("Current " + dishIngredientName + ": " + currentQuantity + unit);
-        ui.showToUser("Needed " + dishIngredientName + ": " + extractQuantity(dishIngredient) + unit);
+        int currentQuantity = (stockIngredient == null) ? 0 : stockIngredient.getQty();
+        String unit = dishIngredient.getUnit();
+        String neededIngredient = dishIngredient.toString();
+        ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededIngredient);
     }
 
 
@@ -157,6 +136,7 @@ public class Pantry {
      * @return The list of ingredients for the ordered dish.
      */
     public ArrayList<Ingredient> retrieveIngredientsForDish(String orderedDish){
+        //function will be removed once order class is implemented
         ArrayList<Dish> menuItems = dummyData();
         ArrayList<Ingredient> dishIngredients = new ArrayList<>();
 

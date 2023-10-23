@@ -123,4 +123,15 @@ public class Ui {
             System.out.println(m + "\n");
         }
     }
+
+    public void showDishAvailability(int numberOfDishes){
+        showToUser("Available Dishes: " + numberOfDishes);
+        printLine();
+    }
+
+    public void showNeededRestock(String ingredientName, int currentQuantity, String unit, String neededIngredient){
+        showToUser("Please Restock: " + ingredientName
+                , "Current " + ingredientName + ": " + currentQuantity + unit
+                , "Needed " + ingredientName + ": " + neededIngredient);
+    }
 }
