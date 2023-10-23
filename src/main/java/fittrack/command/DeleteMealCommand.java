@@ -3,7 +3,6 @@ package fittrack.command;
 import fittrack.data.Meal;
 import fittrack.parser.CommandParser;
 import fittrack.parser.IndexOutOfBoundsException;
-import fittrack.parser.NegativeNumberException;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
 
