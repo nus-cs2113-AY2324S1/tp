@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
+
 /*
  * parser class to parse user input
  */
@@ -24,6 +25,7 @@ public class Parser {
             LOGGER.log(Level.SEVERE, "Error creating log file", e);
         }
     }
+
     /**
      * This method is used to parse the user input.
      * This method is used by the Main class in the application
@@ -62,6 +64,8 @@ public class Parser {
             resultCommand = "delete_expense";
         } else if (commandLowerCase.equals("balance")) {
             resultCommand = "balance";
+        } else if (commandLowerCase.startsWith("find")) {
+            resultCommand = "find";
         } else {
             resultCommand = "invalid";
         }

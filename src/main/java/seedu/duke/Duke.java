@@ -1,21 +1,23 @@
 package seedu.duke;
 
 
-import seedu.duke.commands.KaChinnnngException;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.IncomeManager;
-import seedu.duke.commands.ExpenseLister;
-import seedu.duke.commands.ExpenseManager;
-import seedu.duke.commands.UsageInstructions;
-import seedu.duke.commands.IncomeLister;
+import seedu.duke.commands.Balance;
 import seedu.duke.commands.DeleteExpenseCommand;
 import seedu.duke.commands.DeleteIncomeCommand;
+import seedu.duke.commands.ExpenseLister;
+import seedu.duke.commands.IncomeLister;
+import seedu.duke.commands.IncomeManager;
+import seedu.duke.commands.ExpenseManager;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.UsageInstructions;
+import seedu.duke.commands.FindCommand;
+import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
+import seedu.duke.parser.FindParser;
 import java.util.ArrayList;
-import seedu.duke.commands.Balance;
 
 /**
  * This class is the main class of the program.
@@ -53,18 +55,18 @@ public class Duke {
                         incomeCommand.execute();
                         Income newIncome = incomeCommand.getNewIncome();
                         incomes.add(newIncome);
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                         ui.printIncomeAddedMessage(newIncome);
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                     } catch (KaChinnnngException e) {
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                         System.out.println(e.getMessage());
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                     }
                     break;
 
                 case "list_income":
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     new IncomeLister(incomes, ui).listIncomes();
                     break;
 
@@ -74,13 +76,13 @@ public class Duke {
                         expenseCommand.execute();
                         Expense newExpense = expenseCommand.getNewExpense();
                         expenses.add(newExpense);
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                         ui.printExpenseAddedMessage(newExpense);
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                     } catch (KaChinnnngException e) {
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                         System.out.println(e.getMessage());
-                        ui.showLineDivider();
+                        Ui.showLineDivider();
                     }
                     break;
 
@@ -104,15 +106,30 @@ public class Duke {
                     break;
 
                 case "balance":
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     new Balance(incomes, expenses).getBalanceMessage();
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
+                    break;
+
+                case "find":
+                    try {
+                        String[] parsedParameters = FindParser.parseFindCommand(fullCommand);
+                        FindCommand findCommand = new FindCommand(
+                                incomes, expenses,
+                                parsedParameters[0], parsedParameters[1],
+                                parsedParameters[2], parsedParameters[3], ui);
+                        findCommand.execute();
+                    } catch (KaChinnnngException e) {
+                        Ui.showLineDivider();
+                        System.out.println(e.getMessage());
+                    }
+                    Ui.showLineDivider();
                     break;
 
                 default:
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     System.out.println("Invalid command. Please try again.");
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     break;
                 }
             } catch (KaChinnnngException e) {

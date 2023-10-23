@@ -22,6 +22,7 @@ public class Food extends Expense {
      */
     public Food(String description, LocalDate date, double amount, MealType mealType) throws KaChinnnngException {
         super(description, date, amount);
+        this.category = "food";
         this.mealType = mealType;
     }
 

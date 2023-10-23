@@ -10,8 +10,13 @@ import seedu.duke.commands.KaChinnnngException;
 import java.time.LocalDate;
 
 public class Expense extends FinancialRecord {
+    protected String category;
     public Expense(String description, LocalDate date, double amount) throws KaChinnnngException {
         super(description, date, amount);
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     @Override
