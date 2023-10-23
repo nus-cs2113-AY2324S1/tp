@@ -29,7 +29,7 @@ class BudgetHandlerTest {
 
     @Test
     void printBasicWarning_budgetIsNotOnTrack_throwsException() throws CashLehBudgetException {
-        incomeStatement.addIncome(new Income("salary", 27));
+        incomeStatement.addIncome(new Income("salary", 3));
         budgetHandler.setBudgetPercentage();
         assertThrows(CashLehException.class,
                 () -> budgetHandler.printBasicWarning());

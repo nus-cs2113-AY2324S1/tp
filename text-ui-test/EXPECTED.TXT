@@ -32,7 +32,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
-	vacation (amount: 4000.0, date: 2023-10-22)
+	vacation (amount: 4000.0, date: 2023-10-23)
 	____________________________________________________________
 	____________________________________________________________
 	The current sum of all your incomes amounts to: 3500.0
@@ -43,7 +43,7 @@
 	Your current cash on hand amounts to: -500.0
 		1. + job (amount: 3000.0, date: 2020-01-01)
 		2. + side hustle (amount: 500.0, date: 2023-10-19)
-		3. - vacation (amount: 4000.0, date: 2023-10-22)
+		3. - vacation (amount: 4000.0, date: 2023-10-23)
 	____________________________________________________________
 	____________________________________________________________
 	Hey watch out you are currently below your budget by: 510.0
@@ -63,7 +63,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	job (amount: 600.0, date: 2023-10-22)
+	job (amount: 600.0, date: 2023-10-23)
 	____________________________________________________________
 	____________________________________________________________
 	Please create a new budget as you deleted your previous one.
@@ -82,13 +82,13 @@
 	You have set a budget of: 60.0
 	Here's a quick view of how you're doing so far:
 	You have a net cash on hand of: 50.0
-	Your budget has been used up by the following amount:
+	You still have the following percent of your budget left:
 
-	[*****--------------------------] 16.67%
+	[*************************-----] 83.33%
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
-	tax (amount: 40.0, date: 2023-10-22)
+	tax (amount: 40.0, date: 2023-10-23)
 	____________________________________________________________
 	____________________________________________________________
 	Hey watch out you do not have that much cash left over according to your budget.
@@ -96,7 +96,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	black jack (amount: 800.0, date: 2023-10-22)
+	black jack (amount: 800.0, date: 2023-10-23)
 	____________________________________________________________
 	____________________________________________________________
 	The budget was updated to:
@@ -106,9 +106,9 @@
 	You have set a budget of: 80.0
 	Here's a quick view of how you're doing so far:
 	You have a net cash on hand of: 810.0
-	Your budget has been used up by the following amount:
+	You still have the following percent of your budget left:
 
-	[------------------------------] 0.00%
+	[******************************] 100.00%
 	____________________________________________________________
 	____________________________________________________________
 	No such transaction recorded leh!
@@ -120,11 +120,11 @@
 	____________________________________________________________
 	Your current cash on hand amounts to: 310.0
 		1. + job (amount: 3000.0, date: 2020-01-01)
-		2. + job (amount: 600.0, date: 2023-10-22)
-		3. + black jack (amount: 800.0, date: 2023-10-22)
-		4. - vacation (amount: 4000.0, date: 2023-10-22)
+		2. + job (amount: 600.0, date: 2023-10-23)
+		3. + black jack (amount: 800.0, date: 2023-10-23)
+		4. - vacation (amount: 4000.0, date: 2023-10-23)
 		5. - dinner (amount: 50.0, date: 2023-10-19)
-		6. - tax (amount: 40.0, date: 2023-10-22)
+		6. - tax (amount: 40.0, date: 2023-10-23)
 	____________________________________________________________
 	____________________________________________________________
 	Aiyoh! Your input blur like sotong... Clean your input for CashLeh!

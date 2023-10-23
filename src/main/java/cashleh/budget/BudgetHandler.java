@@ -47,7 +47,7 @@ public class BudgetHandler {
      * @throws CashLehBudgetException warning the user about his bad financial situation.
      */
     public void printBasicWarning() throws CashLehBudgetException {
-        boolean budgetIsNotOnTrack = (budgetProgress.getProgress() < 0.25 && budgetProgress.getProgress() > 0);
+        boolean budgetIsNotOnTrack = (budgetProgress.getProgress() < 0.25 && budgetProgress.getProgress() < 1);
         if (budget.isActive() && budgetIsNotOnTrack) {
             String text = "Hey watch out you do not have that much cash left over according to your budget."
                     + "\n\tTry earning some money before making any crazy expenses!";
@@ -60,7 +60,7 @@ public class BudgetHandler {
      * @throws CashLehBudgetException when the user has a budget deficit.
      */
     public void printSeriousWarning() throws CashLehBudgetException {
-        boolean budgetHasBeenMaxedOut = budgetProgress.getProgress() == 1;
+        boolean budgetHasBeenMaxedOut = budgetProgress.getProgress() == 0;
         double budgetDeficit = (budget.getBudget() - this.financialStatement.getCashOnHand());
         if (budget.isActive() && budgetHasBeenMaxedOut) {
             String text = "Hey watch out you are currently below your budget by: "
@@ -81,10 +81,9 @@ public class BudgetHandler {
     public void printBudget() throws CashLehBudgetException {
         setBudgetPercentage();
         assert budgetProgress != null;
-        String[] texts = {budget.toString() + "\n\tHere's a quick view of how you're doing so far:\n\t"
-                + "You have a net cash on hand of: " + financialStatement.getCashOnHand()
-                + "\n\tYour budget has been used up by the following amount:\n"
-                + "\n\t" + budgetProgress.displayProgressBar()};
+        String[] texts = {budget.toString(), "Here's a quick view of how you're doing so far:", "You have a net "
+                + "cash on hand of: " + financialStatement.getCashOnHand(), "You still have the following"
+                + " percent of your budget left:\n", budgetProgress.displayProgressBar()};
         if (budget.isActive()) {
             printSeriousWarning();
             printBasicWarning();
