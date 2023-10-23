@@ -1,8 +1,6 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
 import java.nio.file.Files;
