@@ -31,7 +31,7 @@ public class AddStockCommand extends AbstractCommand {
     @Override
     public void execute() {
         Ui ui = Ui.getInstance();
-        WatchList watchList = WatchList.INSTANCE;
+        WatchList watchList = WatchList.getInstance();
         String stockName;
 
         logger.log(Level.INFO, "adding stock to watchlist");

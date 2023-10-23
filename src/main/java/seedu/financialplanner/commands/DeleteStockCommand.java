@@ -31,7 +31,7 @@ public class DeleteStockCommand extends AbstractCommand {
     @Override
     public void execute() throws Exception {
         Ui ui = Ui.getInstance();
-        WatchList watchList = WatchList.INSTANCE;
+        WatchList watchList = WatchList.getInstance();
         String stockName;
 
         logger.log(Level.INFO, "deleting stock from watchlist");

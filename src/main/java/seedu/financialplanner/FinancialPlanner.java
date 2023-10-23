@@ -14,7 +14,7 @@ public class FinancialPlanner {
     private static final String FILE_PATH = "data/data.txt";
     private final Storage storage = Storage.INSTANCE;
     private final Ui ui = Ui.getInstance();
-    private final WatchList watchList = WatchList.INSTANCE;
+    private final WatchList watchList = WatchList.getInstance();
     private final CashflowList cashflowList = CashflowList.getInstance();
 
     private FinancialPlanner() {

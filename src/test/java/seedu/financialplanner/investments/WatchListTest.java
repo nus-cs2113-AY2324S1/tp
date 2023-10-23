@@ -12,7 +12,7 @@ class WatchListTest {
 
     @Test
     void fetchFMPStockPrices() throws FinancialPlannerException {
-        WatchList wl = WatchList.INSTANCE;
+        WatchList wl = WatchList.getInstance();
         wl.fetchFMPStockPrices();
         ArrayList<Stock> stocks = wl.getStocks();
         assertNotNull(stocks.get(0).getPrice());
@@ -22,14 +22,14 @@ class WatchListTest {
 
     @Test
     void addStock() throws Exception {
-        WatchList wl = WatchList.INSTANCE;
+        WatchList wl = WatchList.getInstance();
         String stockCode = "GME";
         assertEquals("Gamestop Corporation - Class A", wl.addStock(stockCode));
     }
 
     @Test
     void deleteStock() throws FinancialPlannerException {
-        WatchList wl = WatchList.INSTANCE;
+        WatchList wl = WatchList.getInstance();
         String stockCode = "AAPL";
         assertEquals("Apple Inc", wl.deleteStock(stockCode));
     }

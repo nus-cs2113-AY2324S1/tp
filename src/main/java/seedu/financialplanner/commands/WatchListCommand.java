@@ -20,13 +20,14 @@ public class WatchListCommand extends AbstractCommand {
     @Override
     public void execute() {
         Ui ui = Ui.getInstance();
+        WatchList watchList = WatchList.getInstance();
 
         ui.printWatchListHeader();
         try {
-            WatchList.INSTANCE.fetchFMPStockPrices();
+            watchList.fetchFMPStockPrices();
 
             logger.log(Level.INFO, "Printing watchlist");
-            ui.printStocksInfo(WatchList.INSTANCE);
+            ui.printStocksInfo(watchList);
         } catch (FinancialPlannerException e) {
             System.out.println(e.getMessage());
         }
