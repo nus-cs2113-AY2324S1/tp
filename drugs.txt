@@ -1,0 +1,2 @@
+Name: doliprane, Expiry date: tomorrow, Quantity: 100
+Name: ibuprofene, Expiry date: sunday, Quantity: 100
