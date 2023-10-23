@@ -12,15 +12,29 @@ import java.util.stream.Collectors;
  * It provides methods for adding, deleting, retrieving, and displaying expenses within the statement.
  */
 public class ExpenseStatement {
+
     private final ArrayList<Expense> expenseStatement = new ArrayList<>();
+
     public ExpenseStatement() {
     }
+
     public ExpenseStatement(Expense... expenses) {
         expenseStatement.addAll(List.of(expenses));
     }
+
+    /**
+     * Adds an expense to the statement.
+     * @param expenseToAdd The expense to be added.
+     */
     public void addExpense(Expense expenseToAdd) {
         expenseStatement.add(expenseToAdd);
     }
+
+    /**
+     * Deletes an expense from the statement.
+     * @param expenseIndex The index of the expense to be deleted.
+     * @throws CashLehMissingTransactionException If the specified expense is not found.
+     */
     public void deleteExpense(int expenseIndex) throws CashLehMissingTransactionException {
         try {
             expenseStatement.remove(expenseIndex);
@@ -42,9 +56,11 @@ public class ExpenseStatement {
             throw new CashLehMissingTransactionException();
         }
     }
+
     public ArrayList<Expense> getExpenseStatement() {
         return this.expenseStatement;
     }
+    
     public int getNumberOfExpenses() {
         return expenseStatement.size();
     }
