@@ -31,6 +31,12 @@ Type `help` or `help <COMMAND>` to view help.
 `h/180` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
+Your Profile:
+Height: 170.0cm
+Weight: 70.0kg
+Daily calorie limit: 1500.0kcal
+BMI: 24.22
+
 Here is your updated profile:
 Height: 170.0cm
 Weight: 70.0kg
