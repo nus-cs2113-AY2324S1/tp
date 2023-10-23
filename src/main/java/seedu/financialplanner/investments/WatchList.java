@@ -20,17 +20,11 @@ import java.util.logging.Logger;
 public class WatchList {
 
     private static WatchList watchlist = null;
-
-    public static WatchList getInstance() {
-        if (watchlist == null) {
-            watchlist = new WatchList();
-        }
-        return watchlist;
-    }
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private final ArrayList<Stock> stocks;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
+
     private WatchList() {
         stocks = new ArrayList<>();
         try {
@@ -48,6 +42,13 @@ public class WatchList {
         } catch (FinancialPlannerException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static WatchList getInstance() {
+        if (watchlist == null) {
+            watchlist = new WatchList();
+        }
+        return watchlist;
     }
 
     public void fetchFMPStockPrices() throws FinancialPlannerException {
