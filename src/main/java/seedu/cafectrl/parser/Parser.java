@@ -259,6 +259,13 @@ public class Parser {
         return new DeleteDishCommand(dishIndex);
     }
 
+    /**
+     * Parses arguments in the context of the Delete command.
+     *
+     * @param menu menu of the current session
+     * @param arguments string that matches group arguments
+     * @return AddOrderCommand if command is valid, IncorrectCommand otherwise
+     */
     private static Command prepareOrder(Menu menu, String arguments) {
         final Pattern addOrderArgumentPatter = Pattern.compile(ADD_ORDER_ARGUMENT_STRING);
         Matcher matcher = addOrderArgumentPatter.matcher(arguments);
@@ -272,20 +279,15 @@ public class Parser {
         try {
             // To retrieve specific arguments from arguments
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
-            //System.out.println("Dish Name: " + dishName);
             int dishQty = Integer.parseInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM));
-            //System.out.println("Dish QTY: " + dishQty);
 
             Dish orderedDish = getDishInMenu(dishName, menu);
             if (orderedDish == null) {
                 return new IncorrectCommand(Messages.DISH_NOT_FOUND);
             }
-            //System.out.println("Ordered Dish: " + orderedDish);
 
             ArrayList<Ingredient> usedIngredientList = getIngredientList(orderedDish, dishQty);
-            //System.out.println("IngredientList: " + usedIngredientList);
             float totalOrderCost = getDishPrice(orderedDish, dishQty);
-            //System.out.println("Total Order Cost: $" + totalOrderCost + "0");
             Order order = new Order(dishName, dishQty, usedIngredientList, totalOrderCost);
             System.out.println(order);
 
@@ -296,6 +298,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the ordered dish exist in the menu and returns the menu index if exist
+     *
+     * @param dishName Name of the ordered dish
+     * @param menu menu of the current session
+     * @return index of the dish in menu if exists, null if not found
+     */
     private static Dish getDishInMenu(String dishName, Menu menu) {
         String formattedDishName = dishName.toLowerCase().trim();
         for (int i = 0; i < menu.getSize(); i++) {
@@ -308,6 +317,14 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Gets and prepares the ingredients used in the dish.
+     * Calculates the total ingredient used and stores in an Ingredient ArrayList
+     *
+     * @param orderedDish Dish object of the ordered dish
+     * @param dishQty Number of the ordered dish requested
+     * @return Arraylist of Ingredients
+     */
     private static ArrayList<Ingredient> getIngredientList(Dish orderedDish, int dishQty) {
         ArrayList<Ingredient> dishIngredient = new ArrayList<>();
         for (Ingredient ingredient : orderedDish.getIngredients()) {
@@ -318,50 +335,18 @@ public class Parser {
         return dishIngredient;
     }
 
+    /**
+     * Calculates the total price of the order
+     *
+     * @param orderedDish Dish object of the ordered dish
+     * @param dishQty Number of the ordered dish requested
+     * @return Total calculated cost
+     */
     private static float getDishPrice(Dish orderedDish, int dishQty) {
         float dishCost = orderedDish.getPrice();
         float totalOrderCost = dishCost * dishQty;
         return totalOrderCost;
     }
-
-    /*private static ArrayList<Ingredient> checkIngredientStock(Dish orderedDish, int dishQty) {
-        ArrayList<Ingredient> ingredientList = orderedDish.getIngredients();
-        ArrayList<Ingredient> usedIngredientList = new ArrayList<>();
-        for (int i = 0; i < ingredientList.size(); i++) {
-            getIngredientInStore(ingredientList.get(i), dishQty, orderedDish, usedIngredientList);
-        }
-        return usedIngredientList;
-    }
-
-    private static void getIngredientInStore(Ingredient dishIngredient, int dishQty,
-            Dish orderedDish, ArrayList<Ingredient> usedIngredientList) {
-        String ingredientName = dishIngredient.getName();
-        String formattedIngredientName = ingredientName.toLowerCase().trim();
-        int ingredientUsagePerDish = Integer.parseInt(dishIngredient.getQuantity());
-        int totalIngredientUsage = dishQty * ingredientUsagePerDish;
-
-        for (int i = 0; i < pantry.getSize(); i++) {
-            String storedIngredientName = pantry.getIngredient(i).getName();
-            String formattedStoredIngredientName = menuDishName.toLowerCase().trim();
-            if (!formattedStoredIngredientName.equals(formattedIngredientName)
-                    || !isIngredientEnough(totalIngredientUsage, i)){
-                System.out.println("Error not enough stuff");
-                return;
-            }
-            usedIngredientList.add(new Ingredient(ingredientName, String.valueOf(totalIngredientUsage)));
-        }
-
-    }
-
-    private static boolean isIngredientEnough(int totalIngredientUsage, int storedIndex) {
-        int storedQuantity = Integer.parseInt(storeroom.getIngredient(storedIndex).getQuantity());
-        if (storedQuantity >= totalIngredientUsage) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
-
 
     /**
      * Parses the given arguments string to identify task index number.
