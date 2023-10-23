@@ -6,6 +6,8 @@
 
 ## Design & implementation
 
+![](/Users/pappalardodaniel/Desktop/CashLeh/src/main/java/cashleh/budget/budget.png)
+
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 
