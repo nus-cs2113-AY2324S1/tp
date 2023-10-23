@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AddStockCommand extends Command {
+public class DeleteStockCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;
 
-    public AddStockCommand(RawCommand rawCommand) throws IllegalArgumentException {
+    public DeleteStockCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("s")) {
             throw new IllegalArgumentException("Stock code cannot be empty");
         }
@@ -29,19 +29,19 @@ public class AddStockCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
         Ui ui = Ui.getInstance();
         WatchList watchList = WatchList.getInstance();
         String stockName;
 
-        logger.log(Level.INFO, "adding stock to watchlist");
+        logger.log(Level.INFO, "deleting stock from watchlist");
         try {
-            stockName = watchList.addStock(stockCode);
+            stockName = watchList.deleteStock(stockCode);
             assert stockName != null;
-            ui.printAddStock(stockName);
+            ui.printDeleteStock(stockName);
         } catch (FinancialPlannerException e) {
-            logger.log(Level.WARNING, "Error adding stock to watchlist");
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Error deleting stock from watchlist");
+            ui.showMessage(e.getMessage());
         }
     }
 }

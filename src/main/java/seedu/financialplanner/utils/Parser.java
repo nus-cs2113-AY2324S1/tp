@@ -16,6 +16,7 @@ import seedu.financialplanner.commands.BudgetCommand;
 import seedu.financialplanner.commands.AddReminderCommand;
 import seedu.financialplanner.commands.SetGoalCommand;
 import seedu.financialplanner.commands.BalanceCommand;
+import seedu.financialplanner.commands.DeleteStockCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Parser {
     private static final String ADD_CASHFLOW_COMMAND = "add";
     private static final String DELETE_CASHFLOW_COMMAND = "delete";
     private static final String ADD_STOCK_COMMAND = "addstock";
+    private static final String DELETE_STOCK_COMMAND = "deletestock";
     private static final String FIND_COMMAND = "find";
     private static final String OVERVIEW_COMMAND = "overview";
     private static final String BUDGET_COMMAND = "budget";
@@ -57,6 +59,8 @@ public class Parser {
             return new DeleteCashflowCommand(rawCommand);
         case ADD_STOCK_COMMAND:
             return new AddStockCommand(rawCommand);
+        case DELETE_STOCK_COMMAND:
+            return new DeleteStockCommand(rawCommand);
         case FIND_COMMAND:
             return new FindCommand(rawCommand);
         case BUDGET_COMMAND:

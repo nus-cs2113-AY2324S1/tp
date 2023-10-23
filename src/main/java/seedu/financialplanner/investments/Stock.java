@@ -20,6 +20,7 @@ public class Stock {
     private String symbol;
     private String market;
     private String stockName;
+    private String price;
 
     public Stock(String symbol) throws FinancialPlannerException {
         this.symbol = symbol;
@@ -89,5 +90,13 @@ public class Stock {
     @Override
     public String toString() {
         return symbol + ",";
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

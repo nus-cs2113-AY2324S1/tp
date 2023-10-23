@@ -1,6 +1,8 @@
 package seedu.financialplanner.investments;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
@@ -16,11 +18,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WatchList {
-    public static final WatchList INSTANCE = new WatchList();
+    private static WatchList watchlist = null;
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private final ArrayList<Stock> stocks;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
+
     private WatchList() {
         stocks = new ArrayList<>();
         try {
@@ -40,10 +43,20 @@ public class WatchList {
         }
     }
 
-    public JSONArray fetchFMPStockPrices() {
+    public static WatchList getInstance() {
+        if (watchlist == null) {
+            watchlist = new WatchList();
+        }
+        return watchlist;
+    }
+
+    public void fetchFMPStockPrices() throws FinancialPlannerException {
+        if (stocks.isEmpty()) {
+            throw new FinancialPlannerException("Empty Watchlist. Nothing to display...");
+        }
+
         HttpClient client = HttpClient.newHttpClient();
         StringBuilder queryStocks = new StringBuilder();
-
         assert !stocks.isEmpty();
         for (Stock stock : stocks) {
             queryStocks.append(stock.toString());
@@ -71,7 +84,14 @@ public class WatchList {
             logger.log(Level.SEVERE, "Could not parse to JSON");
             throw new RuntimeException(e);
         }
-        return (JSONArray) obj;
+        JSONArray ja = (JSONArray) obj;
+        int i = 0;
+        for (Object jo : ja) {
+            JSONObject stock = (JSONObject) jo;
+            String price = StringUtils.rightPad(stock.get("price").toString(), 10);
+            stocks.get(i).setPrice(price);
+            i += 1;
+        }
     }
 
     public String addStock(String stockCode) throws FinancialPlannerException {
@@ -83,6 +103,18 @@ public class WatchList {
         return newStock.getStockName();
     }
 
+    public String deleteStock(String stockCode) throws FinancialPlannerException {
+        if (stocks.isEmpty()) {
+            throw new FinancialPlannerException("No stock in watchlist!");
+        }
+        Stock toBeRemoved = stocks
+                .stream()
+                .filter(stock -> stockCode.equals(stock.getSymbol()))
+                .findFirst()
+                .orElseThrow(() -> new FinancialPlannerException("Does not Exist in Watchlist"));
+        stocks.remove(toBeRemoved);
+        return toBeRemoved.getStockName();
+    }
     public int size() {
         return stocks.size();
     }
@@ -90,4 +122,9 @@ public class WatchList {
     public Stock get(int index) {
         return stocks.get(index);
     }
+
+    public ArrayList<Stock> getStocks() {
+        return stocks;
+    }
+
 }

@@ -1,7 +1,6 @@
 package seedu.financialplanner.commands;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.utils.Ui;
 import java.util.ArrayList;
@@ -23,14 +22,17 @@ public class WatchListCommand extends Command {
     @Override
     public void execute() {
         Ui ui = Ui.getInstance();
-        JSONArray stocks = WatchList.INSTANCE.fetchFMPStockPrices();
-        assert !(stocks == null);
-        ui.printWatchListHeader();
+        WatchList watchList = WatchList.getInstance();
 
-        logger.log(Level.INFO, "Printing watchlist");
-        for (Object o : stocks) {
-            JSONObject stock = (JSONObject) o;
-            ui.printStockInfo(stock);
+        ui.printWatchListHeader();
+        try {
+            watchList.fetchFMPStockPrices();
+
+            logger.log(Level.INFO, "Printing watchlist");
+            ui.printStocksInfo(watchList);
+        } catch (FinancialPlannerException e) {
+            ui.showMessage(e.getMessage());
         }
+
     }
 }
