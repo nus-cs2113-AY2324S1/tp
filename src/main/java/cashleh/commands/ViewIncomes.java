@@ -1,5 +1,6 @@
 package cashleh.commands;
 
+import cashleh.Ui;
 import cashleh.transaction.IncomeStatement;
 
 import java.util.logging.Level;
@@ -19,5 +20,6 @@ public class ViewIncomes extends Command {
         assert incomeStatement != null;
         incomeStatement.printIncomes();
         logger.log(Level.INFO, "income statement was successfully displayed");
+        Ui.printHorizontalLine();
     }
 }

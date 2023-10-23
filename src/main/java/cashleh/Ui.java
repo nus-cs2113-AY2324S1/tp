@@ -3,7 +3,7 @@ package cashleh;
 import java.util.ArrayList;
 
 public class Ui {
-    private static void printHorizontalLine() {
+    public static void printHorizontalLine() {
         System.out.println("\t____________________________________________________________");
     }
 

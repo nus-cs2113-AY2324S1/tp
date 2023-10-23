@@ -30,5 +30,6 @@ public class AddIncome extends Command {
         incomeStatement.addIncome(incomeToAdd);
         Ui.printMultipleText(new String[] {"The following income was added:", incomeToAdd.toString()});
         logger.log(Level.INFO, "income entry was successfully added to the income statement");
+        Ui.printHorizontalLine();
     }
 }

@@ -30,6 +30,7 @@ public class DeleteBudget extends Command {
             Ui.printMultipleText(new String[] {"Alright, CashLeh has just deleted your previous budget!", "Watch out "
                     + "though as spending without budget ain't smart..."});
             logger.log(Level.INFO, "budget was successfully deleted");
+            Ui.printHorizontalLine();
         }
     }
 }

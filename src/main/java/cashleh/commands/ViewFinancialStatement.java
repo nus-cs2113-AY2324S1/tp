@@ -1,5 +1,6 @@
 package cashleh.commands;
 
+import cashleh.Ui;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.FinancialStatement;
 import cashleh.transaction.IncomeStatement;
@@ -23,5 +24,6 @@ public class ViewFinancialStatement extends Command {
         assert financialStatement != null;
         financialStatement.printTransactions();
         logger.log(Level.INFO, "financial statement was successfully displayed");
+        Ui.printHorizontalLine();
     }
 }
