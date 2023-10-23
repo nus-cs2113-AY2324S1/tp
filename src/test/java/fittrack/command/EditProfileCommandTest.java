@@ -15,7 +15,7 @@ public class EditProfileCommandTest {
 
     @BeforeEach
     public void setUp() {
-        editProfileCommand = new EditProfileCommand("");
+        editProfileCommand = new EditProfileCommand(EditProfileCommand.COMMAND_WORD);
         userProfile = new UserProfile();
         editProfileCommand.setData(userProfile, null, null, null);
     }
@@ -32,7 +32,7 @@ public class EditProfileCommandTest {
 
     @Test
     public void getHelpReturnsCorrectHelpMessage() {
-        EditProfileCommand editProfileCommand = new EditProfileCommand("");
+        EditProfileCommand editProfileCommand = new EditProfileCommand(EditProfileCommand.COMMAND_WORD);
 
         String expectedHelpMessage = "`editprofile` allows you to edit your profile." +
                 "\nType `editprofile h/<HEIGHT> w/<WEIGHT> l/<CALORIE_LIMIT>` to edit.";
