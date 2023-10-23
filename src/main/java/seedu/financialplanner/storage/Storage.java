@@ -35,6 +35,7 @@ public class Storage {
 
     public void save(String filePath) throws FinancialPlannerException {
         SaveData.save(filePath);
+        SaveData.saveWatchList();
     }
 
 }

@@ -36,7 +36,6 @@ public class FinancialPlanner {
         Command command = null;
 
         while (!(command instanceof ExitCommand)) {
-            SaveData.saveWatchList();
             input = ui.input();
             try {
                 command = Parser.parseCommand(input);
