@@ -9,7 +9,9 @@
 
 ### Storage Component
 API: `Storage.java`
+
 ![](images/Storage.png)
+
 - The storage component loads data from the saved text files when the application starts, and saves the data to the 
 text files when the application exits. 
 - The storage class uses the static methods in LoadData and SaveData to load and save data respectively. 
@@ -18,6 +20,7 @@ text files when the application exits.
 
 ### Budget Feature
 This feature has 5 functions, `set`, `update`, `delete`, `reset`, and `view`.
+
 ![](images/Budget.png)
 
 The BudgetCommand will execute the appropriate command and print through `Budget.java` and prints any message to the user through `Ui.java`.
@@ -36,7 +39,7 @@ in the diagram above
 
 **Delete budget:**
 
-![](images/DeleteBudget.png)
+![](images/deleteBudget.png)
 
 The budget will be deleted by setting the initial and current budget to 0 through the `deleteBudget()` method in `Budget.java`.
 
@@ -44,7 +47,7 @@ Example: `budget delete`
 
 **Reset budget:**
 
-![](images/ResetBudget.png)
+![](images/resetBudget.png)
 
 The budget will be reset by resetting the current budget to the initial budget through the `resetBudget()` method in `Budget.java`.
 
@@ -52,7 +55,7 @@ Example : `budget reset`
 
 **View budget:**
 
-![](images/ViewBudget.png)
+![](images/viewBudget.png)
 
 The current budget will be shown to the user through the `Ui`.
 
