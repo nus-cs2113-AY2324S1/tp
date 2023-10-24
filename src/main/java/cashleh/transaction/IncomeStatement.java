@@ -3,6 +3,7 @@ package cashleh.transaction;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.Ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,7 +81,7 @@ public class IncomeStatement {
         Ui.printMultipleText(texts);
     }
 
-    public void findIncome(String description, double amount) throws CashLehMissingTransactionException {
+    public void findIncome(String description, double amount, LocalDate date) throws CashLehMissingTransactionException {
         ArrayList<String> matchingIncomes = new ArrayList<>();
         boolean isMatch = false;
         StringBuilder message = new StringBuilder("Here are your corresponding incomes with ");
@@ -89,16 +90,23 @@ public class IncomeStatement {
         }
         if (amount != -1) {
             if (description != null && !description.isEmpty()) {
-                message.append(" and ");
+                message.append(" , ");
             }
             message.append("amount: ").append(amount);
+        }
+        if (date != null) {
+            if (description != null && !description.isEmpty() || amount != -1) {
+                message.append(" , ");
+            }
+            message.append("date: ").append(date);
         }
         matchingIncomes.add(message.toString());
         for (Income income : incomeStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || income.getDescription().equals(description);
             boolean amountMatch = (amount == -1) || (income.getAmount() == amount);
-            if (descriptionMatch && amountMatch) {
+            boolean dateMatch = (date == null) || (income.getDate().equals(date));
+            if (descriptionMatch && amountMatch && dateMatch) {
                 matchingIncomes.add(income.toString());
                 isMatch = true;
             }

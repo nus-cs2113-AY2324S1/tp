@@ -3,6 +3,7 @@ package cashleh.transaction;
 import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 /**
@@ -70,7 +71,7 @@ public class FinancialStatement {
         Ui.printMultipleText(texts);
     }
 
-    public void findTransaction(String description, double amount) throws CashLehMissingTransactionException {
+    public void findTransaction(String description, double amount, LocalDate date) throws CashLehMissingTransactionException {
         ArrayList<String> matchingTransactions = new ArrayList<>();
         boolean isMatch = false;
         StringBuilder message = new StringBuilder("Here are your corresponding transactions with ");
@@ -79,9 +80,15 @@ public class FinancialStatement {
         }
         if (amount != -1) {
             if (description != null && !description.isEmpty()) {
-                message.append(" and ");
+                message.append(" , ");
             }
             message.append("amount: ").append(amount);
+        }
+        if (date != null) {
+            if (description != null && !description.isEmpty() || amount != -1) {
+                message.append(" , ");
+            }
+            message.append("date: ").append(date);
         }
         matchingTransactions.add(message.toString());
 
@@ -89,9 +96,10 @@ public class FinancialStatement {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || transaction.getDescription().equals(description);
             boolean amountMatch = (amount == -1) || (transaction.getAmount() == amount);
+            boolean dateMatch = (date == null) || (transaction.getDate().equals(date));
             // Determine the sign based on the type of transaction
             String sign = (transaction instanceof Income) ? "[+] " : "[-] ";
-            if (descriptionMatch && amountMatch) {
+            if (descriptionMatch && amountMatch && dateMatch) {
                 matchingTransactions.add(sign + transaction.toString());
                 isMatch = true;
             }

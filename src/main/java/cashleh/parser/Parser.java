@@ -3,6 +3,7 @@ package cashleh.parser;
 import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
 import cashleh.commands.*;
+import cashleh.exceptions.CashLehDateParsingException;
 import cashleh.transaction.*;
 import cashleh.transaction.ExpenseCategories.ExpenseCategory;
 import cashleh.transaction.IncomeCategories.IncomeCategory;
@@ -189,13 +190,13 @@ public class Parser {
         String[] format = null;
         switch (transactionType) {
         case FILTER_EXPENSE:
-            format = new String[]{FILTER_EXPENSE, "/amt:optional"};
+            format = new String[]{FILTER_EXPENSE, "/amt:optional", "/date:optional"};
             break;
         case FILTER_INCOME:
-            format = new String[]{FILTER_INCOME, "/amt:optional"};
+            format = new String[]{FILTER_INCOME, "/amt:optional","/date:optional"};
             break;
         case FILTER:
-            format = new String[]{FILTER, "/amt:optional"};
+            format = new String[]{FILTER, "/amt:optional", "/date:optional"};
             break;
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
@@ -203,16 +204,33 @@ public class Parser {
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String descriptionString = inputDetails.get(transactionType);
         String amountString = inputDetails.get("/amt");
-        if (amountString != null) {
+        String incomeDateString = inputDetails.get("/date");
+
+        if ((descriptionString == null || descriptionString.isEmpty()) &&
+                (amountString == null || amountString.isEmpty()) &&
+                (incomeDateString == null || incomeDateString.isEmpty())) {
+            throw new CashLehParsingException("Please provide at least one filter criterion (description, amount, or date)!");
+        }
+
+        LocalDate parsedDate = null;
+        if ((incomeDateString != null) && !incomeDateString.isEmpty()) {
+            try {
+                parsedDate = DateParser.parse(incomeDateString);
+            } catch (CashLehDateParsingException e) {
+                throw new CashLehDateParsingException();
+            }
+        }
+
+        if ((amountString != null) && !amountString.isEmpty()) {
             double amount;
             try {
                 amount = Double.parseDouble(amountString);
-                return new FindParser(descriptionString, amount);
+                return new FindParser(descriptionString, amount, parsedDate);
             } catch (NumberFormatException e) {
                 throw new CashLehParsingException("Please enter a valid expense amount!");
             }
         }
-        return new FindParser(descriptionString, -1.0);
+        return new FindParser(descriptionString, -1.0, parsedDate);
     }
 
     private Budget getBudget(String input) throws CashLehParsingException {
