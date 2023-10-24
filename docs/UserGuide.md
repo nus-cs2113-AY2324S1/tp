@@ -101,7 +101,7 @@ Daily calorie limit: 3000.0
 ```
 
 ### Checking your current BMI: `bmi`
-Calculates your bmi based on your current height and weight
+Calculates your bmi based on your current height and weight, and tells you the category which your bmi falls under.
 
 Format: `bmi`
 
@@ -113,22 +113,22 @@ bmi
 **Expected output:**
 ```
 Your current BMI is 24.22
+BMI falls under NORMAL WEIGHT category
 ```
 
 ### Adding a Meal: `addmeal`
 Allows user to add meals they have consumed.
 
-Format: `addmeal <meal> c/ <calories>`
+Format: `addmeal <meal> c/ <calories> d/ <date>`
 
 Example of usage:
 ```
-addmeal pasta c/ 200
+addmeal pasta c/ 200 d/ 2023-10-23
 ```
 Expected output:
 ```
 I've added the following meal:
-Meal name: pasta 
-Calories: 200.0
+[M] pasta (200.0kcal, 2023-10-23)
 ```
 
 ### Viewing List of All Meals: `viewmeals`
@@ -143,10 +143,8 @@ viewwmeals
 
 **Expected output:**
 ```
-These are the meals you have consumed: 
-1.Meal name: pasta
-Calories: 200.0
-
+These are the meals you have consumed:
+1.[M] pasta (200.0kcal, 2023-10-23)
 ```
 
 ### Delete a Meal: `deletemeal`
@@ -161,8 +159,7 @@ deletemeal 1
 Expected output:
 ```
 I've deleted the following meal:
-Meal name: pasta 
-Calories: 200.0
+[M] pasta (200.0kcal, 2023-10-23)
 ```
 
 ### Adding a Workout: `addworkout`
@@ -172,13 +169,12 @@ Format: `addworkout <workout> c/ <calories>`
 
 Example of usage:
 ```
-addworkout running c/ 180
+addworkout running c/ 400 d/ 2023-10-23
 ```
 Expected output:
 ```
 I've added the following workout:
-Workout name: running 
-Calories: 180.0
+[W] running (400.0kcal, 2023-10-23)
 ```
 
 ### Viewing List of All Workouts: `viewworkouts`
@@ -193,9 +189,8 @@ viewworkouts
 
 **Expected output:**
 ```
-These are the workouts you have done: 
-1.Workout name: running
-Calories: 400.0
+These are the workouts you have done:
+1.[W] running (400.0kcal, 2023-10-23)
 ```
 
 ### Delete a Workout: `deleteworkout`
@@ -209,7 +204,8 @@ deleteworkout 1
 ```
 Expected output:
 ```
-I've deleted workout 1
+I've deleted the following workout:
+[W] running (400.0kcal, 2023-10-23)
 ```
 
 ### Save to File: `save`
@@ -232,6 +228,14 @@ Your data has been saved!
 **Q**: How do I edit my profile? 
 
 **A**: Simply type editprofile, specify your height, weight and daily calories and hit enter. The App will update your details accordingly.
+
+**Q**: How do I check if my bmi is normal?
+
+**A**: Type bmi into the console and it will show you your current bmi and category.
+
+**Q**: How do I save my data that I have added?
+
+**A**: The program automatically saves all your data upon exiting or you can type save.
 
 ## Command Summary
 

@@ -22,11 +22,16 @@ The product allows users to record their diet and activity, and help them to rea
 
 ## User Stories
 
-|Version| As a ... | I want to ...                 | So that I can ...|
-|--------|----------|-------------------------------|------------------|
-|v1.0|new user| learn how to use this tracker |refer to them when I forget how to use the application|
-|v1.0|new user| learn how to use this tracker |refer to them when I forget how to use the application|
-|v2.0|user| find a to-do item by name     |locate a to-do without having to go through the entire list|
+|Version| As a ... | I want to ...                      | So that I can ...                                             |
+|--------|----------|------------------------------------|---------------------------------------------------------------|
+|v1.0|new user| know how to use the product        | use the product                                               |
+|v1.0|new user| add my height and weight           | keep track of my height and weight                            |
+|v1.0|new user| add my calorie intake for a meal   | record my calorie intake                                      |
+|v1.0|new user| add my daily workout               | track my calories burnt                                       |
+|v1.0|new user| set my daily calorie surplus limit | know whether my calorie surplus has exceeded the limit or not |
+|v1.0|new user| delete my daily workout            | track my calorie usage                                        |
+|v1.0|new user| delete my calorie intake for a meal  | track my calorie intake                                       |
+|v2.0|user| find a to-do item by name          | locate a to-do without having to go through the entire list   |
 
 ## Non-Functional Requirements
 
