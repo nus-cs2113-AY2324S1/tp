@@ -1,0 +1,20 @@
+@startuml
+
+mainframe sd displaying chart
+
+participant ":VisCommand"
+participant "<<class>>\nVisualizer"
+
+":VisCommand"-> "<<class>>\nVisualizer": Visualizer.displayChart(chart, sortedCashFlow, type)
+
+activate "<<class>>\nVisualizer"
+
+alt chartType == "pie"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayPieChart(cashflowList)
+else chartType == "bar"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayBarChart(cashflowList)
+end
+
+hide footbox
+
+@enduml
