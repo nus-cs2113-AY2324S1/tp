@@ -10,6 +10,29 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Architecture
+{insert diagram to show architecture of code}
+
+The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. Given below is a quick overview of each component.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** The '.puml' files used to create the diagrams in this document can be found in the [diagrams](https://github.com/AY2324S1-CS2113-W12-4/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
+</div>
+
+The **`Main`** class is called [`FitTrack`](https://github.com/AY2324S1-CS2113-W12-4/tp/blob/master/src/main/java/fittrack/FitTrack.java)
+
+The App consists of eight components.
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`MealList`**](#meal-list-component): Stores all meals.
+* [**`UserProfile`**](#user-profile-component): The class which handles all profile data.
+* [**`WorkoutList`**](#workout-list-component): Stores all workouts.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Parser`**](#parser-component): Handles user input.
+* [**`Data`**](#data-component): Holds the data of the app in memory.
+* [**`Command`**](#command-component): The command executor.
+
 
 ## Product scope
 ### Target user profile
@@ -22,16 +45,20 @@ The product allows users to record their diet and activity, and help them to rea
 
 ## User Stories
 
-|Version| As a ... | I want to ...                      | So that I can ...                                             |
-|--------|----------|------------------------------------|---------------------------------------------------------------|
-|v1.0|new user| know how to use the product        | use the product                                               |
-|v1.0|new user| add my height and weight           | keep track of my height and weight                            |
-|v1.0|new user| add my calorie intake for a meal   | record my calorie intake                                      |
-|v1.0|new user| add my daily workout               | track my calories burnt                                       |
-|v1.0|new user| set my daily calorie surplus limit | know whether my calorie surplus has exceeded the limit or not |
-|v1.0|new user| delete my daily workout            | track my calorie usage                                        |
-|v1.0|new user| delete my calorie intake for a meal  | track my calorie intake                                       |
-|v2.0|user| find a to-do item by name          | locate a to-do without having to go through the entire list   |
+|Version| As a ... | I want to ...                                           | So that I can ...                                             |
+|--------|----------|---------------------------------------------------------|---------------------------------------------------------------|
+|v1.0|new user| know how to use the product                             | use the product                                               |
+|v1.0|new user| add my height and weight                                | keep track of my height and weight                            |
+|v1.0|new user| add my calorie intake for a meal                        | record my calorie intake                                      |
+|v1.0|new user| add my daily workout                                    | track my calories burnt                                       |
+|v1.0|new user| set my daily calorie surplus limit                      | know whether my calorie surplus has exceeded the limit or not |
+|v1.0|new user| delete my daily workout                                 | track my calorie usage                                        |
+|v1.0|new user| delete my calorie intake for a meal                     | track my calorie intake                                       |
+|v1.0|new user| edit my height and weight information                   | apply my changed height and weight                            |
+|v1.0|new user| view my calorie intake for a meal                       | know my calorie intake                                        |
+|v1.0|new user| view my daily workout                                   | know my previous daily workouts                               |
+|v1.0|new user| view my height, weight, and daily calorie surplus limit | know my height, weight and calorie surplus limit              |
+|v2.0|user| find a to-do item by name                               | locate a to-do without having to go through the entire list   |
 
 ## Non-Functional Requirements
 
