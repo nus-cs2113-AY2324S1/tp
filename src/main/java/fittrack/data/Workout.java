@@ -13,6 +13,11 @@ public class Workout {
         this.date = date;
     }
 
+    public double getCalories() {
+        assert calories.value != 0;
+        return calories.value;
+    }
+
     public String formatToFile() {
         return String.format("%s | %s | %s", name, calories, date);
     }
