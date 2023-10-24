@@ -2,6 +2,7 @@ package cashleh.parser;
 
 import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
+
 import cashleh.commands.AddExpense;
 import cashleh.commands.AddIncome;
 import cashleh.commands.Command;
@@ -17,14 +18,16 @@ import cashleh.commands.ViewBudget;
 import cashleh.commands.ViewExpenses;
 import cashleh.commands.ViewFinancialStatement;
 import cashleh.commands.ViewIncomes;
+
 import cashleh.exceptions.CashLehDateParsingException;
+import cashleh.exceptions.CashLehParsingException;
+
 import cashleh.transaction.Categories;
 import cashleh.transaction.Expense;
 import cashleh.transaction.ExpenseCategories.ExpenseCategory;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.Income;
 import cashleh.transaction.IncomeCategories.IncomeCategory;
-import cashleh.exceptions.CashLehParsingException;
 import cashleh.transaction.IncomeStatement;
 
 import java.time.LocalDate;
@@ -139,8 +142,9 @@ public class Parser {
             return new Expense(expenseName, expenseAmt, parsedCategory);
         } else if (parsedCategory == null) {
             return new Expense(expenseName, expenseAmt, parsedDate);
+        } else {
+            return new Expense(expenseName, expenseAmt, parsedDate, parsedCategory);
         }
-        return new Expense(expenseName, expenseAmt, parsedDate, parsedCategory);
     }
 
     private Income getIncome(String input) throws CashLehParsingException {
@@ -180,8 +184,9 @@ public class Parser {
             return new Income(incomeName, incomeAmt, parsedCategory);
         } else if (parsedCategory == null) {
             return new Income(incomeName, incomeAmt, parsedDate);
+        } else {
+            return new Income(incomeName, incomeAmt, parsedDate, parsedCategory);
         }
-        return new Income(incomeName, incomeAmt, parsedDate, parsedCategory);
     }
 
     private Command getDeleteTransaction(String input, String transactionType) throws CashLehParsingException {
@@ -275,6 +280,10 @@ public class Parser {
     }
 
     private Budget getBudget(String input) throws CashLehParsingException {
+        String trimmedInput = input.trim();
+        if (trimmedInput.equals(UPDATE_BUDGET)) {
+            throw new CashLehParsingException("Ayo, type in your budget amount hor!");
+        }
         String newBudget = input.split(" ", 2)[1];
         int newBudgetAmount;
         try {

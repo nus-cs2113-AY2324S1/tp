@@ -23,6 +23,10 @@ public class ExpenseStatement {
         expenseStatement.addAll(List.of(expenses));
     }
 
+    public int getSize () {
+        return expenseStatement.size();
+    }
+
     /**
      * Adds an expense to the statement.
      * @param expenseToAdd The expense to be added.
@@ -77,7 +81,7 @@ public class ExpenseStatement {
         texts[0] = "The current sum of all your expenses amounts to: " + getTotalExpenseAmount();
         for (int i = 1; i <= listSize; i++) {
             Expense currentExpense = expenseStatement.get(i - 1);
-            texts[i] = "\t" + i + "." + currentExpense.toString();
+            texts[i] = "\t" + i + ". " + currentExpense.toString();
         }
         Ui.printMultipleText(texts);
     }

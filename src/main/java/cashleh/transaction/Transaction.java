@@ -45,6 +45,7 @@ public abstract class Transaction {
     public Transaction(String description, double amount, Categories category) {
         this.description = description;
         this.amount = amount;
+        this.date = LocalDate.now();
         this.category = category;
     }
 

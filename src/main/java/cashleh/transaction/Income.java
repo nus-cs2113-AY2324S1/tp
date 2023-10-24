@@ -51,14 +51,18 @@ public class Income extends Transaction {
 
     @Override
     public String toString() {
-        if (getDate() == null && getCategory() == null) {
-            return getDescription() + " (amount: " + getAmount() + ")";
-        } else if (getDate() == null) {
-            return getDescription() + " (amount: " + getAmount() + ", category: " + getCategory() + ")";
-        } else if (getCategory() == null) {
-            return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
+        StringBuilder result = new StringBuilder();
+        result.append("Income: ").append(getDescription());
+        result.append(" (Amount: ").append(getAmount());
+
+        if (getDate() != null) {
+            result.append(", Date: ").append(getDate());
         }
-        return getDescription() + " (amount: " + getAmount()
-                + ", date: " + getDate() + ", category: " + getCategory() + ")";
+        if (getCategory() != null) {
+            result.append(", Category: ").append(getCategory());
+        }
+        result.append(")");
+
+        return result.toString();
     }
 }
