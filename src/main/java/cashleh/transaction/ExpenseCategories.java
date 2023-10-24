@@ -8,7 +8,7 @@ public class ExpenseCategories {
         TRANSPORTATION,
         ENTERTAINMENT,
         UTILITIES,
-        OTHERS;
+        OTHERS
     }
     public static ExpenseCategory getExpenseCategory(String input) {
         try {
