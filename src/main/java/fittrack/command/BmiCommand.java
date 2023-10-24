@@ -16,7 +16,8 @@ public class BmiCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(String.format("Your current BMI is %.2f", userProfile.getBmi()));
+        return new CommandResult(String.format("Your current BMI is %S", userProfile.getBmi()) +
+                "\n" + String.format("BMI falls under %S category", userProfile.getBmiCategory()));
     }
 
     @Override

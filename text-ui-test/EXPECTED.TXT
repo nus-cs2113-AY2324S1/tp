@@ -46,6 +46,7 @@ Daily calorie limit: 1500.0kcal
 BMI: 24.22
 
 Your current BMI is 24.22
+BMI falls under NORMAL WEIGHT category
 
 I've added the following meal:
 [M] pasta (200.0kcal, 2023-10-22)

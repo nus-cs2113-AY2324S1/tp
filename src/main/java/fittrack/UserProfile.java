@@ -4,13 +4,14 @@ import java.text.DecimalFormat;
 import fittrack.data.Height;
 import fittrack.data.Weight;
 import fittrack.data.Calories;
+import fittrack.data.Bmi;
 
 public class UserProfile {
     private final DecimalFormat df = new DecimalFormat("0.00");
     private Height height;
     private Weight weight;
     private Calories dailyCalorieLimit;
-    private double bmi;
+    private Bmi bmi;
 
     public UserProfile() {
         this(new Height(1), new Weight(0), new Calories(0));
@@ -49,24 +50,28 @@ public class UserProfile {
         this.dailyCalorieLimit = dailyCalorieLimit;
     }
 
-    public double getBmi() {
+    public Bmi getBmi() {
         return bmi;
+    }
+
+    public String getBmiCategory() {
+        return bmi.getCategory();
     }
 
     private void updateBmi() {
         this.bmi = calculateBmi(height, weight);
     }
 
-    public double calculateBmi(Height height, Weight weight) {
+    public Bmi calculateBmi(Height height, Weight weight) {
         assert (height != null && height.value > 0 && weight != null);
         double heightInMetres = height.value / 100;
-        return weight.value / heightInMetres / heightInMetres;
+        return new Bmi(weight.value / heightInMetres / heightInMetres);
     }
 
     public String toString() {
         return "Height: " + height.toString() + "\n" +
                 "Weight: " + weight.toString() + "\n" +
                 "Daily calorie limit: " + dailyCalorieLimit.toString() + "\n" +
-                "BMI: " + df.format(bmi);
+                "BMI: " + bmi.toString();
     }
 }
