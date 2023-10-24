@@ -81,16 +81,17 @@ public class CommandStart extends Command{
             return;
         }
 
-
-        if (startQnMode.equals("random")) {
+        switch(startQnMode.toLowerCase()){
+        case "random":
             Collections.shuffle(matchedQuestions); // shuffles matched Questions
             questions.startQuiz(ui, matchedQuestions);
-        }
-        else if (startQnMode.equals("normal")){
+            break;
+        case "normal":
             questions.startQuiz(ui, matchedQuestions);
-        }
-        else{
+            break;
+        default:
             System.out.println("    Please enter a valid quiz mode :<");
+            return;
         }
     }
 }
