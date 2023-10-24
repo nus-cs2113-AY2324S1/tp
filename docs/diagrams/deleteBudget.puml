@@ -12,4 +12,5 @@ else else
     BudgetCommand -> Ui: printErrorMessage()
 end
 
+hide footbox
 @enduml

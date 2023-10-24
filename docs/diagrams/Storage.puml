@@ -14,10 +14,11 @@ Class Expense
 Class Income
 Class "<<enumeration>>\nExpenseType" as ExpenseType
 Class "<<enumeration>>\nIncomeType" as IncomeType
+Class Ui
 }
 
 Class FinancialPlanner #FFFFFF
-FinancialPlanner ..> Storage
+FinancialPlanner --> Storage
 
 Storage .right.-> LoadData: uses >
 Storage .left.> SaveData: uses >
@@ -31,6 +32,7 @@ SaveData ..> Expense
 SaveData ..> Income
 LoadData ..> Expense
 LoadData ..> Income
+LoadData -right-> Ui: prints message >
 Expense -down-|> Cashflow
 Income -down-|> Cashflow
 
