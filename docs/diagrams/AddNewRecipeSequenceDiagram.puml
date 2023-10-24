@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddRecipeCommand" as AddRecipeCommand COMMAND_COLOR
+participant "<<class>>\n:RecipeParser" as RecipeParser RECIPE_PARSER_COLOR
+participant ":Recipe" as Recipe RECIPE_COLOR
+participant "recipes:RecipeList" as Recipes RECIPE_LIST_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+
+[-> AddRecipeCommand : executeCommand()
+activate AddRecipeCommand
+
+AddRecipeCommand -> RecipeParser : parseRecipeTitle(toAdd: String)
+activate RecipeParser
+
+RecipeParser --> AddRecipeCommand : recipeTitle: String
+deactivate RecipeParser
+
+AddRecipeCommand -[hidden]> RecipeParser
+destroy RecipeParser
+
+AddRecipeCommand -[hidden]> Recipe
+create Recipe
+AddRecipeCommand -> Recipe : new Recipe(RecipeTitle: String)
+activate Recipe
+
+Recipe --> AddRecipeCommand : newRecipe: Recipe
+deactivate Recipe
+
+AddRecipeCommand -[hidden]> Recipes
+AddRecipeCommand -> Recipes : recipes.addRecipe(newRecipe: Recipe)
+activate Recipes
+
+Recipes -> Recipes: recipes.add(newRecipe: Recipe)
+activate Recipes RECIPE_LIST_COLOR_T1
+deactivate Recipes
+
+Recipes --> AddRecipeCommand
+deactivate Recipes
+
+AddRecipeCommand -[hidden]> Ui
+AddRecipeCommand -> Ui : ui.showRecentAddedRecipe(recipeTitle: String)
+activate Ui
+
+Ui -> Ui: print recent added recipe
+activate Ui UI_COLOR_T1
+deactivate Ui
+
+Ui --> AddRecipeCommand
+deactivate Ui
+
+[<--AddRecipeCommand
+deactivate AddRecipeCommand
+@enduml
