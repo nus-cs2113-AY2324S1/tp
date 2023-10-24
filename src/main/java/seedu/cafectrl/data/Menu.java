@@ -22,8 +22,26 @@ public class Menu {
     public int getSize() {
         return menuItems.size();
     }
-    public Dish getDish(int menuID) {
+    public Dish getDishFromId(int menuID) {
         return menuItems.get(menuID);
+    }
+
+    /**
+     * Checks if the ordered dish exist in the menu and returns the menu index if exist
+     *
+     * @param dishName Name of the ordered dish
+     * @return index of the dish in menu if exists, null if not found
+     */
+    public Dish getDishFromName(String dishName) {
+        String formattedDishName = dishName.toLowerCase().trim();
+        for (int i = 0; i < getSize(); i++) {
+            String menuDishName = getDishFromId(i).getName();
+            String formattedMenuDishName = menuDishName.toLowerCase().trim();
+            if (formattedMenuDishName.equals(formattedDishName)){
+                return getDishFromId(i);
+            }
+        }
+        return null;
     }
     public void removeDish(int menuID) {
         menuItems.remove(menuID);

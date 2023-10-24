@@ -9,9 +9,11 @@ import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.AddOrderCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.command.BuyIngredientCommand;
 
+import seedu.cafectrl.Order;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
@@ -44,6 +46,12 @@ public class Parser {
             + "qty/(?<qtyAmount>[A-Za-z0-9\\\\s]+)\\s*(?<qtyUnit>g|ml)";
     public static final String INGREDIENT_DIVIDER_REGEX = ", ";
     public static final String INGREDIENT_DIVIDER_STRING = ",";
+    public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
+    public static final int PRICE_MATCHER_GROUP_NUM = 2;
+    public static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
+    public static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
+    private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
+            + "qty/([A-Za-z0-9\\s]+)";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
@@ -93,6 +101,9 @@ public class Parser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case AddOrderCommand.COMMAND_WORD:
+            return prepareOrder(menu, arguments);
 
         default:
             return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE);
@@ -281,7 +292,7 @@ public class Parser {
         }
 
         String ingredientName = matcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-        String ingredientQty = matcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+        String ingredientQty = matcher.group(QTY_AMOUNT_REGEX_GROUP_LABEL);
 
         int qty = extractQty(ingredientQty);
         String unit = extractUnit(ingredientQty);
@@ -295,6 +306,42 @@ public class Parser {
 
     private static Command prepareHelpCommand() {
         return new HelpCommand();
+    }
+
+    /**
+     * Parses arguments in the context of the Delete command.
+     *
+     * @param menu menu of the current session
+     * @param arguments string that matches group arguments
+     * @return AddOrderCommand if command is valid, IncorrectCommand otherwise
+     */
+    private static Command prepareOrder(Menu menu, String arguments) {
+        final Pattern addOrderArgumentPatter = Pattern.compile(ADD_ORDER_ARGUMENT_STRING);
+        Matcher matcher = addOrderArgumentPatter.matcher(arguments);
+
+        // Checks whether the overall pattern of add order arguments is correct
+        if (!matcher.matches()) {
+            return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
+                    + AddOrderCommand.MESSAGE_USAGE);
+        }
+
+        try {
+            // To retrieve specific arguments from arguments
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
+            int dishQty = Integer.parseInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM));
+
+            Dish orderedDish = menu.getDishFromName(dishName);
+            if (orderedDish == null) {
+                return new IncorrectCommand(Messages.DISH_NOT_FOUND);
+            }
+
+            Order order = new Order(orderedDish, dishQty);
+
+            return new AddOrderCommand(order);
+        } catch (Exception e) {
+            return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
+                    + AddOrderCommand.MESSAGE_USAGE + e.getMessage());
+        }
     }
 
     /**
