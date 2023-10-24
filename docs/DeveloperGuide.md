@@ -236,6 +236,9 @@ input to count as correct. It is case-insensitive. (i.e. 4, four)
 3. `[module]` is the module that the question belongs in (i.e. CS2113)
 4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard)
 
+*Condensed Class Diagram - Does not contain all attributes & methods
+![](./UML/AddShortCommand.jpg)
+
 Thereafter, the command is returned to the Quizhub component and executed, 
 to add a Question object to the corresponding QuestionList object 
 using the `addToQuestionList` method. This method will analyse the arguments above
