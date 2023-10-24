@@ -27,7 +27,7 @@ public class AddOrderCommand extends Command {
     }
     @Override
     public void execute() {
-        orderList.addOrder(order);
+        //orderList.addOrder(order); //To be implemented for finanace tracking
         Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();
     }

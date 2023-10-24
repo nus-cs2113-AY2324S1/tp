@@ -16,8 +16,11 @@ public class Chef {
 
     public void cookDish() {
         try {
-            pantry.decreaseIngredientsStock(order.usedIngredientList);
-            order.setComplete();
+            if (!order.isComplete) {
+                ui.showToUser("I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!");
+                pantry.decreaseIngredientsStock(order.usedIngredientList);
+                order.setComplete();
+            }
             ui.showToUser("Is order completed?: " + order.isComplete);
         } catch (Exception e) {
             ui.showToUser("Unable to cook: " + e.getMessage());
