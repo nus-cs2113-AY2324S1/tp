@@ -14,14 +14,14 @@ import cashleh.commands.ViewBudget;
 import cashleh.commands.ViewIncomes;
 import cashleh.commands.ViewFinancialStatement;
 import cashleh.commands.Command;
-import cashleh.transaction.Income;
 import cashleh.transaction.Expense;
-import cashleh.transaction.IncomeStatement;
 import cashleh.transaction.ExpenseCategories.ExpenseCategory;
-import cashleh.transaction.IncomeCategories.IncomeCategory;
 import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.Income;
+import cashleh.transaction.IncomeCategories.IncomeCategory;
 
 import cashleh.exceptions.CashLehParsingException;
+import cashleh.transaction.IncomeStatement;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -117,14 +117,13 @@ public class Parser {
 
         if (parsedDate == null && parsedCategory == null) {
             return new Expense(expenseName, expenseAmt);
-        }
-        else if (parsedDate == null) {
+        } else if (parsedDate == null) {
             return new Expense(expenseName, expenseAmt, parsedCategory);
-        }
-        else if (parsedCategory == null) {
+        } else if (parsedCategory == null) {
             return new Expense(expenseName, expenseAmt, parsedDate);
+        } else {
+            return new Expense(expenseName, expenseAmt, parsedDate, parsedCategory);
         }
-        return new Expense(expenseName, expenseAmt, parsedDate, parsedCategory);
     }
 
     private Income getIncome(String input) throws CashLehParsingException {
@@ -160,14 +159,13 @@ public class Parser {
 
         if (parsedDate == null && parsedCategory == null) {
             return new Income(incomeName, incomeAmt);
-        }
-        else if (parsedDate == null) {
+        } else if (parsedDate == null) {
             return new Income(incomeName, incomeAmt, parsedCategory);
-        }
-        else if (parsedCategory == null) {
+        } else if (parsedCategory == null) {
             return new Income(incomeName, incomeAmt, parsedDate);
+        } else {
+            return new Income(incomeName, incomeAmt, parsedDate, parsedCategory);
         }
-        return new Income(incomeName, incomeAmt, parsedDate, parsedCategory);
     }
 
     private Command getDeleteTransaction(String input, String transactionType) throws CashLehParsingException {
