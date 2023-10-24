@@ -27,4 +27,9 @@ public class RecipeParser {
             throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
+
+    public static String parseRecipeTitle(String toAdd) {
+        return toAdd.replace("r/", "");
+    }
+
 }
