@@ -24,7 +24,7 @@ public class EditPriceCommand extends Command {
      * @param ui ui of the current session
      */
     public void execute(Menu menu, Ui ui, Pantry pantry) {
-        Dish dish = menu.getDish(this.menuID - Ui.OFFSET_LIST_INDEX);
+        Dish dish = menu.getDishFromId(this.menuID - Ui.OFFSET_LIST_INDEX);
         dish.setPrice(this.newPrice);
 
         ui.showEditPriceMessage(dish.toString());

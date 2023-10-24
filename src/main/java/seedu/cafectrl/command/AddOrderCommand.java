@@ -14,11 +14,14 @@ public class AddOrderCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " name/chicken rice qty/2";
     Order order;
+
     public AddOrderCommand(Order order) {
         this.order  = order;
     }
+
     @Override
     public void execute(Menu menu, Ui ui, Pantry pantry) {
+        ui.showToUser("Order added: ", order.toString());
         Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();
     }

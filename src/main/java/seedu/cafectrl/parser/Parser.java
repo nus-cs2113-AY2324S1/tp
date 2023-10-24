@@ -316,7 +316,7 @@ public class Parser {
 
         // Checks whether the overall pattern of add order arguments is correct
         if (!matcher.matches()) {
-            return new IncorrectCommand("Error: Incorrect format for the add order command.\n"
+            return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE);
         }
 
@@ -325,72 +325,18 @@ public class Parser {
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
             int dishQty = Integer.parseInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM));
 
-            Dish orderedDish = getDishInMenu(dishName, menu);
+            Dish orderedDish = menu.getDishFromName(dishName);
             if (orderedDish == null) {
                 return new IncorrectCommand(Messages.DISH_NOT_FOUND);
             }
 
-            ArrayList<Ingredient> usedIngredientList = getIngredientList(orderedDish, dishQty);
-            float totalOrderCost = getDishPrice(orderedDish, dishQty);
-            Order order = new Order(dishName, dishQty, usedIngredientList, totalOrderCost);
-            System.out.println(order);
+            Order order = new Order(orderedDish, dishQty);
 
             return new AddOrderCommand(order);
         } catch (Exception e) {
-            return new IncorrectCommand("MESSAGE_INVALID_ADD_ORDER_COMMAND_FORMAT"
+            return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage());
         }
-    }
-
-    /**
-     * Checks if the ordered dish exist in the menu and returns the menu index if exist
-     *
-     * @param dishName Name of the ordered dish
-     * @param menu menu of the current session
-     * @return index of the dish in menu if exists, null if not found
-     */
-    private static Dish getDishInMenu(String dishName, Menu menu) {
-        String formattedDishName = dishName.toLowerCase().trim();
-        for (int i = 0; i < menu.getSize(); i++) {
-            String menuDishName = menu.getDish(i).getName();
-            String formattedMenuDishName = menuDishName.toLowerCase().trim();
-            if (formattedMenuDishName.equals(formattedDishName)){
-                return menu.getDish(i);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Gets and prepares the ingredients used in the dish.
-     * Calculates the total ingredient used and stores in an Ingredient ArrayList
-     *
-     * @param orderedDish Dish object of the ordered dish
-     * @param dishQty Number of the ordered dish requested
-     * @return Arraylist of Ingredients
-     */
-    private static ArrayList<Ingredient> getIngredientList(Dish orderedDish, int dishQty) {
-        ArrayList<Ingredient> dishIngredient = new ArrayList<>();
-        for (Ingredient ingredient : orderedDish.getIngredients()) {
-            String ingredientName = ingredient.getName();
-            int ingredientQty = ingredient.getQty() * dishQty;
-            String ingredientUnit = ingredient.getUnit();
-            dishIngredient.add(new Ingredient(ingredientName, ingredientQty, ingredientUnit));
-        }
-        return dishIngredient;
-    }
-
-    /**
-     * Calculates the total price of the order
-     *
-     * @param orderedDish Dish object of the ordered dish
-     * @param dishQty Number of the ordered dish requested
-     * @return Total calculated cost
-     */
-    private static float getDishPrice(Dish orderedDish, int dishQty) {
-        float dishCost = orderedDish.getPrice();
-        float totalOrderCost = dishCost * dishQty;
-        return totalOrderCost;
     }
 
     /**
