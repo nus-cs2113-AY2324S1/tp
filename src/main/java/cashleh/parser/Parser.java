@@ -145,7 +145,7 @@ public class Parser {
         try {
             incomeAmt = Double.parseDouble(incomeAmtString);
         } catch (NumberFormatException e) {
-            throw new CashLehParsingException("Please enter a valid expense amount!");
+            throw new CashLehParsingException("Please enter a valid income amount!");
         }
 
         LocalDate parsedDate = null;
