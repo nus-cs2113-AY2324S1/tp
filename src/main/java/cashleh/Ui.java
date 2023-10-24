@@ -57,7 +57,7 @@ public class Ui {
         double totalExpense = 0.0;
 
         for (int i = 0; i < texts.length; i++) {
-            String[] statementDetails = texts[i].split(" ");
+            String[] statementDetails = texts[i].split(", ");
             String type = statementDetails[0];
             String date = statementDetails[1];
             String description = statementDetails[2];
@@ -68,7 +68,8 @@ public class Ui {
             totalExpense += (type.equals("Expense")) ? amount : 0;
 
             // Format and print each row
-            printTableRow(i + 1, type, date, description, cat, amount, sign, ID_SPACE, TYPE_SPACE, DATE_SPACE, DESCRIPTION_SPACE, CATEGORY_SPACE, AMOUNT_SPACE);
+            printTableRow(i + 1, type, date, description, cat, amount, sign, ID_SPACE,
+                TYPE_SPACE, DATE_SPACE, DESCRIPTION_SPACE, CATEGORY_SPACE, AMOUNT_SPACE);
         }
 
         // Footer
@@ -76,45 +77,47 @@ public class Ui {
         printFooter(String.valueOf(totalIncome), String.valueOf(totalExpense), String.valueOf(netIncome), TOTAL_SPACE);
     }
 
-    private static void printHeader(int totalSpace, int idSpace, int typeSpace, int dateSpace, int descriptionSpace, int categorySpace, int amountSpace) {
-        System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
-        System.out.println("|" + centerText("Overall Financial Statement", totalSpace - 2) + "|");
+    private static void printHeader(int TOTAL_SPACE, int ID_SPACE, int TYPE_SPACE, int DATE_SPACE
+        , int DESCRIPTION_SPACE, int CATEGORY_SPACE, int AMOUNT_SPACE) {
+        System.out.println("+" + repeatChars('-', TOTAL_SPACE - 2) + "+");
+        System.out.println("|" + centerText("Overall Financial Statement", TOTAL_SPACE - 2) + "|");
 
-        System.out.println("+" + repeatChars('-', idSpace) + "+" + repeatChars('-', typeSpace) + "+"
-            + repeatChars('-', dateSpace) + "+" + repeatChars('-', descriptionSpace) + "+"
-            + repeatChars('-', categorySpace) + "+" + repeatChars('-', amountSpace) + "+");
-        System.out.println("|" + centerText("ID", idSpace) + "|" + centerText("Type", typeSpace) + "|"
-            + centerText("Date", dateSpace) + "|" + centerText("Description", descriptionSpace) + "|"
-            + centerText("Category", categorySpace) + "|" + centerText("Amount", amountSpace) + "|");
-        System.out.println("+" + repeatChars('-', idSpace) + "+" + repeatChars('-', typeSpace) + "+"
-            + repeatChars('-', dateSpace) + "+" + repeatChars('-', descriptionSpace) + "+"
-            + repeatChars('-', categorySpace) + "+" + repeatChars('-', amountSpace) + "+");
+        System.out.println("+" + repeatChars('-', ID_SPACE) + "+" + repeatChars('-', TYPE_SPACE) + "+"
+            + repeatChars('-', DATE_SPACE) + "+" + repeatChars('-', DESCRIPTION_SPACE) + "+"
+            + repeatChars('-', CATEGORY_SPACE) + "+" + repeatChars('-', AMOUNT_SPACE) + "+");
+        System.out.println("|" + centerText("ID", ID_SPACE) + "|" + centerText("Type", TYPE_SPACE) + "|"
+            + centerText("Date", DATE_SPACE) + "|" + centerText("Description", DESCRIPTION_SPACE) + "|"
+            + centerText("Category", CATEGORY_SPACE) + "|" + centerText("Amount", AMOUNT_SPACE) + "|");
+        System.out.println("+" + repeatChars('-', ID_SPACE) + "+" + repeatChars('-', TYPE_SPACE) + "+"
+            + repeatChars('-', DATE_SPACE) + "+" + repeatChars('-', DESCRIPTION_SPACE) + "+"
+            + repeatChars('-', CATEGORY_SPACE) + "+" + repeatChars('-', AMOUNT_SPACE) + "+");
     }
 
-    private static void printTableRow(int id, String type, String date, String description, String category, double amount,
-        String sign, int idSpace, int typeSpace, int dateSpace, int descriptionSpace, int categorySpace, int amountSpace) {
-        System.out.println("|" + centerText(String.valueOf(id), idSpace) + "|" + centerText(type, typeSpace)
-            + "|" + centerText(date, dateSpace) + "|" + centerText(description, descriptionSpace)
-            + "|" + centerText(category, categorySpace) + "|" + centerText(sign + " $" + amount, amountSpace) + "|");
+    private static void printTableRow(int id, String type, String date, String description
+        , String category, double amount, String sign, int ID_SPACE, int TYPE_SPACE, int DATE_SPACE
+        , int DESCRIPTION_SPACE, int CATEGORY_SPACE, int AMOUNT_SPACE) {
+        System.out.println("|" + centerText(String.valueOf(id), ID_SPACE) + "|" + centerText(type, TYPE_SPACE)
+            + "|" + centerText(date, DATE_SPACE) + "|" + centerText(description, DESCRIPTION_SPACE)
+            + "|" + centerText(category, CATEGORY_SPACE) + "|" + centerText(sign + " $" + amount, AMOUNT_SPACE) + "|");
     }
 
-    private static void printFooter(String totalIncome, String totalExpense, String netIncome, int totalSpace) {
+    private static void printFooter(String totalIncome, String totalExpense, String netIncome, int TOTAL_SPACE) {
         String totalIncomeLabel = "Total Income: $";
         String totalExpenseLabel = "Total Expenses: $";
         String netIncomeLabel = "Net Income: $";
 
         String totalIncomeString = "| " + totalIncomeLabel + totalIncome +
-            " ".repeat(totalSpace - totalIncomeLabel.length() - totalIncome.length() - 3) + "|";
+            " ".repeat(TOTAL_SPACE - totalIncomeLabel.length() - totalIncome.length() - 3) + "|";
         String totalExpenseString = "| " + totalExpenseLabel + totalExpense +
-            " ".repeat(totalSpace - totalExpenseLabel.length() - totalExpense.length() - 3) + "|";
+            " ".repeat(TOTAL_SPACE - totalExpenseLabel.length() - totalExpense.length() - 3) + "|";
         String netIncomeString = "| " + netIncomeLabel +  netIncome +
-            " ".repeat(totalSpace - netIncomeLabel.length() - netIncome.length() - 3) + "|";
+            " ".repeat(TOTAL_SPACE - netIncomeLabel.length() - netIncome.length() - 3) + "|";
 
-        System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
+        System.out.println("+" + repeatChars('-', TOTAL_SPACE - 2) + "+");
         System.out.println(totalIncomeString);
         System.out.println(totalExpenseString);
         System.out.println(netIncomeString);
-        System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
+        System.out.println("+" + repeatChars('-', TOTAL_SPACE - 2) + "+");
     }
 
     private static String centerText(String text, int width) {
