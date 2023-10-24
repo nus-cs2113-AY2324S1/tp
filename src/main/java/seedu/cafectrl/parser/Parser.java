@@ -1,6 +1,8 @@
 package seedu.cafectrl.parser;
 
 import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.AddOrderCommand;
+import seedu.cafectrl.command.BuyIngredientCommand;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.EditPriceCommand;
@@ -10,12 +12,11 @@ import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
-import seedu.cafectrl.command.BuyIngredientCommand;
-
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.Order;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -43,6 +44,9 @@ public class Parser {
             + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
             + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
+            + "qty/([A-Za-z0-9\\s]+)";
+    private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
