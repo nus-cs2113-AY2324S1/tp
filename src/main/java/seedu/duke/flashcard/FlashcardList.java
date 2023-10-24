@@ -30,6 +30,10 @@ public class FlashcardList {
         flashcards.clear();
     }
 
+    public boolean isEmpty() {
+        return flashcards.isEmpty();
+    }
+
     public boolean deleteFlashcardById(int flashcardId) {
         int indexToDeleteAt = -1;
 
