@@ -7,6 +7,7 @@ public class Chef {
     protected Order order;
     protected Pantry pantry;
     protected Ui ui;
+
     public Chef(Order order, Pantry pantry, Ui ui) {
         this.order = order;
         this.pantry = pantry;
@@ -17,14 +18,9 @@ public class Chef {
         try {
             pantry.decreaseIngredientsStock(order.usedIngredientList);
             order.setComplete();
+            ui.showToUser("Is order completed?: " + order.isComplete);
         } catch (Exception e) {
-            ui.showToUser(e.getMessage());
-        } finally {
-            if (order.isComplete) {
-                ui.showToUser("Order was completed");
-            } else {
-                ui.showToUser("Order not completed");
-            }
+            ui.showToUser("Unable to cook: " + e.getMessage());
         }
     }
 }

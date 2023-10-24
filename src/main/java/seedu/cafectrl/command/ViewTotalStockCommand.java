@@ -1,5 +1,6 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Messages;
@@ -10,19 +11,16 @@ import java.util.ArrayList;
 public class ViewTotalStockCommand extends Command {
 
     public static final String COMMAND_WORD = "view_stock";
-    protected Ui ui;
-    protected Pantry pantry;
-
 
     private ArrayList<Ingredient> pantryStock;
+    private Pantry pantry;
 
-    public ViewTotalStockCommand(Pantry pantry, Ui ui) {
-        this.pantry = pantry;
-        this.ui = ui;
+    public ViewTotalStockCommand() {
+        this.pantry = new Pantry(new Ui());
     }
 
     @Override
-    public void execute() {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
 
         ui.showToUser(Messages.VIEW_STOCK);
         pantryStock = pantry.getPantryStock();

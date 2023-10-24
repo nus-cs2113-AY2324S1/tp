@@ -1,5 +1,7 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -7,15 +9,13 @@ import seedu.cafectrl.ui.Ui;
  */
 public class IncorrectCommand extends Command{
     public final String feedbackToUser;
-    protected Ui ui;
 
-    public IncorrectCommand(String feedbackToUser, Ui ui) {
+    public IncorrectCommand(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
-        this.ui = ui;
     }
 
     @Override
-    public void execute() {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         ui.showToUser(feedbackToUser);
     }
 }
