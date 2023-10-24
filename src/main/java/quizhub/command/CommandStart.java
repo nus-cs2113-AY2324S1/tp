@@ -7,7 +7,6 @@ import quizhub.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 /**
  * Command to Start the Quiz
  */
@@ -15,7 +14,6 @@ public class CommandStart extends Command{
     private String startMode;
     private String startDetails = "";
     private String startQnMode = "";
-
     /**
      * Creates a new start command
      *
@@ -28,7 +26,7 @@ public class CommandStart extends Command{
             startMode = commandDetails[1].split(" ")[0].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate mode of the quiz :<");
-            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+            System.out.println("    Please format your input as start /[quiz mode] [start details]!");
             return;
         }
         try {
@@ -68,17 +66,12 @@ public class CommandStart extends Command{
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert questions != null && ui != null && dataStorage != null;
 
-        if (startMode == null || startQnMode == null || (!startQnMode.equals("random") && !startQnMode.equals("normal"))) {
-            System.out.println("    Invalid input. Please check the quiz mode and question mode.");
-            return;
-        }
-
         ArrayList<Question> matchedQuestions;
 
         switch (startMode.toLowerCase()) {
         case "module":
             assert startDetails != null;
-            matchedQuestions =(startDetails);
+            matchedQuestions = questions.categoriseListByModule(startDetails);
             break;
         case "all":
             matchedQuestions = questions.getAllQns();
@@ -88,10 +81,16 @@ public class CommandStart extends Command{
             return;
         }
 
+
         if (startQnMode.equals("random")) {
             Collections.shuffle(matchedQuestions); // shuffles matched Questions
+            questions.startQuiz(ui, matchedQuestions);
         }
-
-        questions.startQuiz(ui, matchedQuestions);
+        else if (startQnMode.equals("normal")){
+            questions.startQuiz(ui, matchedQuestions);
+        }
+        else{
+            System.out.println("    Please enter a valid quiz mode :<");
+        }
     }
 }
