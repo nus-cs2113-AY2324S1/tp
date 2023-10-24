@@ -1,12 +1,6 @@
 package fittrack.parser;
 
 import fittrack.UserProfile;
-import fittrack.data.Meal;
-import fittrack.data.Workout;
-import fittrack.data.Calories;
-import fittrack.data.Date;
-import fittrack.data.Height;
-import fittrack.data.Weight;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
 import fittrack.command.Command;
@@ -21,6 +15,13 @@ import fittrack.command.ViewWorkoutsCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.BmiCommand;
 import fittrack.command.SaveCommand;
+import fittrack.command.CalorieSumCommand;
+import fittrack.data.Meal;
+import fittrack.data.Workout;
+import fittrack.data.Calories;
+import fittrack.data.Date;
+import fittrack.data.Height;
+import fittrack.data.Weight;
 
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
@@ -105,6 +106,8 @@ public class CommandParser {
             return new BmiCommand(commandLine);
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand(commandLine);
+        case CalorieSumCommand.COMMAND_WORD:
+            return new CalorieSumCommand(commandLine);
         default:
             return new InvalidCommand(commandLine);
 
