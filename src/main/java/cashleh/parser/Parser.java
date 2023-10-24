@@ -149,12 +149,12 @@ public class Parser {
         }
 
         LocalDate parsedDate = null;
-        if (!(incomeDateString == null) && !incomeDateString.isEmpty()) {
+        if (incomeDateString != null && !incomeDateString.isEmpty()) {
             parsedDate = DateParser.parse(incomeDateString);
         }
         
         IncomeCategory parsedCategory = null;
-        if (!(incomeCategoryString == null) && !incomeCategoryString.isEmpty()) {
+        if (incomeCategoryString != null && !incomeCategoryString.isEmpty()) {
             parsedCategory = IncomeCatParser.parse(incomeCategoryString);
         }
 
