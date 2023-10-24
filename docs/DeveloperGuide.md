@@ -14,6 +14,51 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Add income/expense feature
+
+The add income/expense command has 2 compulsory arguments `/t` and `/a` and 1 optional argument `/r`.
+
+Example:
+```
+add income /a 100 /t salary /r 30
+```
+Below are the steps that shows the implementation of add income/expense.
+#### Step 1
+An instantiated AddCashflowCommand class gets the instance of CashflowList.
+
+This allows the AddCashflowCommand instance to access the methods of CashflowList.
+#### Step 2
+The AddCashflowCommand instance then calls addIncome() or addExpense(), depending on what `category` is initialised as.
+
+addIncome() or addExpense() instantiates an Income or Expense object respectively.
+
+Example:
+```
+switch (category) {
+        case INCOME:
+            cashflowList.addIncome(amount, incomeType, recur);
+            break;
+        case EXPENSE:
+            cashflowList.addExpense(amount, expenseType, recur);
+            break;
+        default:
+            ui.showMessage("Unidentified entry.");
+            break;
+        }
+```
+#### Step 3
+The instantiated income/expense then updates the overall balance through addIncomeValue() or addExpenseValue().
+
+The income/expense object is also added to the list in Cashflowlist which contains all incomes/expenses.
+#### Step 4
+The added income/expense is then displayed to the user through the Ui.
+
+#### Diagrams
+Given below is the class diagram showing the class structure of the add income/expense mechanism:
+![](CashflowClassDiagram.png)
+
+Given below is the sequence diagram showing the add income/expense mechanism:
+![](AddCashflowSequence.png)
 
 ## Product scope
 ### Target user profile
