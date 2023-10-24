@@ -49,6 +49,7 @@ public class Ui {
         System.out.println("    Let the quizzing begin XDD");
         System.out.println();
         dataStorage.loadData(tasks);
+        assert tasks != null : "Invalid null tasks";
         showLine();
     }
     /**

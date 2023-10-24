@@ -29,6 +29,9 @@
 * [Acknowledgements](#acknowledgements)
 * [Design and Implementation](#design--implementation)
   * [Application Lifecycle](#application-lifecycle)
+  * [Parser Component](#parser-component)
+  * [Command Component](#command-components)
+  * [Storage Component](#storage-component)
 * [Product Scope](#product-scope)
 * [Non Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
@@ -249,6 +252,51 @@ i.e. `find /CS2113`, `find /water buffalo`
 This command is passed to the corresponding QuestionList where the `searchList` method
 is called, which will create a new ArrayList of questions that contain the (case-insensitive)
 keyword and subsequently print them. 
+
+## Storage Component
+
+The Storage class is a critical component of the QuizHub application, responsible for managing the storage, retrieval, and updating of question data. It represents a hard disk storage system for storing, reading, and updating question data. It interacts with question data in a file specified by the user and integrates with the `QuestionList` class for effective storage and retrieval of questions. 
+
+Developers need to be aware of the two main methods for loading and updating data:
+
+- `public void loadData(QuestionList questions)`
+- `public void updateData(QuestionList questions)`
+
+The details of the data loading and updating process are explained in details below.
+
+### Constructor 
+
+#### `public Storage(String filePath)`
+
+- **Parameters:**
+  - `filePath`: The path to the file where question data is stored and read from.
+
+### Loading data 
+
+The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below. 
+
+![](./UML/Storage.jpg)
+
+:exclamation: This sequence diagram emphasizes the process of loading data into storage, and has therefore omitted details of more trivial and/or non-related methods as well as exception handling logic. To find out more about the details, please refer to the complete code and header comments.
+
+In addition to the main `loadData` method, the process involves the following 3 helper methods:
+- `private void addQuestionFromFile(QuestionList questions, String currentQuestion, int questionIndex, String questionType, String questionDescription, String questionDoneStatus, String questionDifficulty, String questionModule)`
+- `private void parseQuestionsFromStrings(ArrayList<String> rawQuestions, QuestionList questions)`
+- `public void buildCurrentListFromFile(QuestionList questions)`
+
+The general idea is that when the program is first initiated, the `loadData` method is called from within the `Ui` class, which passes in an empty `QuestionList`. Within the method itself, the helper method `buildCurrentListFromFile()` will take in this empty `QuestionList` object and populate it with `question` objects according to textual information stored within the specified file. This is done by first extracting each question stored line by line into a new `Arraylist<String> rawQuestions`, then calling another helper method `parseQuestionsFromStrings()` to add each question into the `QuestionList` via a third helper method `addQuestionFromFileaddQuestionFromFile`. 
+
+The process is refactored into these methods so as to avoid deep nesting of code to achieve clearer logical flow and more readability and easier debugging process. 
+
+### Updating data
+
+The process of updating data is done in a similar fashion compared to that of loading data, but in the reverse order logically. 
+
+Apart from the main `updateData` method, it involves the use of 2 other helper methods:
+- `private void writeToFile(String filePath, String textToAdd, boolean toAppend)`
+- `private void storeQuestionToFile(Question question)`
+
+Upon exiting the program, the `Ui` class will call the `updateData` method and passing in the current `QuestionList` of the program. Within the method, the `writeToFile` helper method is first called to determine whether texts are to replace existing content of the file or to be appended at the back. Then, each question is stored in the appropriate format into the destination file using the method `storeQuestionToFile` which parses a `Question` object into the correct string format for storage.
 
 # Product scope
 

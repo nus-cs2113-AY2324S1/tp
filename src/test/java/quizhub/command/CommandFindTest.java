@@ -50,6 +50,7 @@ public class CommandFindTest {
      * Assertion error is thrown if the two are not the same
      */
     private void testCliOutputCorrectness(String expectedOutput) {
+        assert expectedOutput != null : "Expected output should not be null";
         String actualOutput = outputStreamCaptor.toString().trim();
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
