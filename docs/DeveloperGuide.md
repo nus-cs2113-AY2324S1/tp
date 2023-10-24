@@ -18,6 +18,16 @@ API: [Parser.java](https://github.com/ziyi105/tp/src/main/java/seedu/cafectrl/pa
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
+## Feature
+
+### Edit Price
+
+![Edit Price Execution](EditPriceCommand_execute.png)
+
+*figure 2: Execution of edit_price command*
+
+API: [EditPriceCommand.java](https://github.com/ziyi105/tp/src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
+
 ## Product scope
 ### Target user profile
 
