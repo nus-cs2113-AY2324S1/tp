@@ -216,7 +216,7 @@ class ParserTest {
         outputCommand.execute(menu, ui, new Pantry(ui));
         assertEquals(1, menu.getSize());
         //Test for correct parsing of dish arguments
-        Dish getOutputDish = menu.getDish(0);
+        Dish getOutputDish = menu.getDishFromId(0);
         assertEquals("Christmas Ham", getOutputDish.getName()); // Dish name test
         assertEquals((float) 50.0, getOutputDish.getPrice()); //Dish price test
         assertEquals("[Ham - 1kg]", getOutputDish.getIngredients().toString()); //Dish ingredients test
