@@ -15,14 +15,14 @@ class BudgetTest {
     }
 
     @Test
-    void isActive_budgetIsActive_returnTrue() {
-        assertTrue(budget.isActive());
+    void isActive_budgetIsNotActive_returnTrue() {
+        assertFalse(budget.isActive());
     }
 
     @Test
-    void isActive_budgetIsNotActive_returnFalse() {
-        budget.setActive(false);
-        assertFalse(budget.isActive());
+    void isActive_budgetIsActive_returnFalse() {
+        budget.setActive(true);
+        assertTrue(budget.isActive());
     }
 
     @Test

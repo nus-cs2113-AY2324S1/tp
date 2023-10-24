@@ -31,6 +31,7 @@ class BudgetHandlerTest {
     void printBasicWarning_budgetIsNotOnTrack_throwsException() throws CashLehBudgetException {
         incomeStatement.addIncome(new Income("salary", 3));
         budgetHandler.setBudgetPercentage();
+        budget.setActive(true);
         assertThrows(CashLehException.class,
                 () -> budgetHandler.printBasicWarning());
         expenseStatement.addExpense(new Expense("rent", 1));
@@ -43,6 +44,7 @@ class BudgetHandlerTest {
     void printSeriousWarning_budgetHasBeenMaxedOut_throwsException() throws CashLehBudgetException {
         expenseStatement.addExpense(new Expense("rent", 10));
         budgetHandler.setBudgetPercentage();
+        budget.setActive(true);
         assertThrows(CashLehException.class,
                 () -> budgetHandler.printSeriousWarning());
         incomeStatement.addIncome(new Income("salary", 5));

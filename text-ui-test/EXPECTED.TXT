@@ -84,13 +84,13 @@
 	Income: job (Amount: 600.0, Date: 2023-10-24)
 	____________________________________________________________
 	____________________________________________________________
-	Please create a new budget as you deleted your previous one.
+	Please create a new budget as you haven't set one yet or deleted the previous one.
 	____________________________________________________________
 	____________________________________________________________
 	Invalid budget parameter. Please provide a different budget.
 	____________________________________________________________
 	____________________________________________________________
-	Please create a new budget as you deleted your previous one.
+	Please create a new budget as you haven't set one yet or deleted the previous one.
 	____________________________________________________________
 	____________________________________________________________
 	The budget was updated to:
