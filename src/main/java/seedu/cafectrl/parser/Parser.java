@@ -1,6 +1,5 @@
 package seedu.cafectrl.parser;
 
-import seedu.cafectrl.Order;
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.DeleteDishCommand;
@@ -10,16 +9,13 @@ import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
-import seedu.cafectrl.command.AddOrderCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.command.BuyIngredientCommand;
 
-import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -43,13 +39,10 @@ public class Parser {
     public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     public static final int PRICE_MATCHER_GROUP_NUM = 2;
     public static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
-    public static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
             + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-    private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
-            + "qty/([A-Za-z0-9\\s]+)";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
@@ -62,10 +55,10 @@ public class Parser {
      * @param menu The arraylist object created that stores current tasks
      * @return command requested by the user
      */
-    public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry) {
+    public static Command parseCommand(Menu menu, String userInput) {
         final Matcher matcher = COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand("Incorrect command format!", ui);
+            return new IncorrectCommand("Incorrect command format!");
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -74,43 +67,40 @@ public class Parser {
         switch (commandWord) {
 
         case AddDishCommand.COMMAND_WORD:
-            return prepareAdd(arguments, menu, ui);
+            return prepareAdd(arguments);
 
         case DeleteDishCommand.COMMAND_WORD:
-            return prepareDelete(menu, arguments, ui);
+            return prepareDelete(menu, arguments);
 
         case ListIngredientCommand.COMMAND_WORD:
-            return prepareListIngredient(menu, arguments, ui);
+            return prepareListIngredient(menu, arguments);
 
         case ListMenuCommand.COMMAND_WORD:
-            return prepareListMenu(menu, ui);
+            return prepareListMenu();
 
         case EditPriceCommand.COMMAND_WORD:
-            return prepareEditPriceCommand(menu, arguments, ui);
+            return prepareEditPriceCommand(menu, arguments);
 
         case ViewTotalStockCommand.COMMAND_WORD:
-            return prepareViewTotalStock(ui);
+            return prepareViewTotalStock();
 
         case BuyIngredientCommand.COMMAND_WORD:
-            return prepareBuyIngredient(arguments, ui, pantry);
+            return prepareBuyIngredient(arguments);
 
         case HelpCommand.COMMAND_WORD:
-            return prepareHelpCommand(ui);
+            return prepareHelpCommand();
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand(ui, pantry);
-
-        case AddOrderCommand.COMMAND_WORD:
-            return prepareOrder(menu, arguments, ui, pantry);
+            return new ExitCommand();
 
         default:
-            return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE, ui);
+            return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE);
         }
     }
 
     /** All prepareCommand Classes */
-    private static Command prepareListMenu(Menu menu, Ui ui) {
-        return new ListMenuCommand(menu, ui);
+    private static Command prepareListMenu() {
+        return new ListMenuCommand();
     }
 
     /**
@@ -119,13 +109,13 @@ public class Parser {
      * @param arguments string that matches group arguments
      * @return new EditDishCommand
      */
-    private static Command prepareEditPriceCommand(Menu menu, String arguments, Ui ui) {
+    private static Command prepareEditPriceCommand(Menu menu, String arguments) {
         Pattern editDishArgumentsPattern = Pattern.compile(EDIT_PRICE_ARGUMENT_STRING);
         Matcher matcher = editDishArgumentsPattern.matcher(arguments);
 
         // Checks whether the overall pattern of edit price arguments is correct
         if (!matcher.find()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE, ui);
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE);
         }
 
         try {
@@ -136,11 +126,11 @@ public class Parser {
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
-                return new IncorrectCommand(Messages.INVALID_DISH_INDEX, ui);
+                return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
             }
-            return new EditPriceCommand(dishIndex, newPrice, menu, ui);
+            return new EditPriceCommand(dishIndex, newPrice);
         } catch (IllegalArgumentException e) {
-            return new IncorrectCommand(Messages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
+            return new IncorrectCommand(Messages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE);
         }
     }
 
@@ -149,7 +139,7 @@ public class Parser {
      * @param arguments
      * @return new AddDishCommand
      */
-    private static Command prepareAdd(String arguments, Menu menu, Ui ui) {
+    private static Command prepareAdd(String arguments) {
         final Pattern addArgumentPatter = Pattern.compile(ADD_ARGUMENT_STRING);
         Matcher matcher = addArgumentPatter.matcher(arguments);
 
@@ -157,7 +147,7 @@ public class Parser {
             // Checks whether the overall pattern of add arguments is correct
             if (!matcher.matches()) {
                 return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
-                        + AddDishCommand.MESSAGE_USAGE, ui);
+                        + AddDishCommand.MESSAGE_USAGE);
             }
 
             // To retrieve specific arguments from arguments
@@ -171,10 +161,10 @@ public class Parser {
 
             Dish dish = new Dish(dishName, ingredients, price);
 
-            return new AddDishCommand(dish, menu, ui);
+            return new AddDishCommand(dish);
         } catch (IllegalArgumentException e) {
             return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
-                    + AddDishCommand.MESSAGE_USAGE, ui);
+                    + AddDishCommand.MESSAGE_USAGE);
         }
     }
 
@@ -233,21 +223,21 @@ public class Parser {
     * @param arguments string that matches group arguments
     * @return the prepared command
     */
-    private static Command prepareListIngredient(Menu menu, String arguments, Ui ui) {
+    private static Command prepareListIngredient(Menu menu, String arguments) {
         final Pattern prepareListPattern = Pattern.compile(LIST_INGREDIENTS_ARGUMENT_STRING);
         Matcher matcher = prepareListPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, ui);
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS);
         }
 
         int dishIndex = Integer.parseInt(matcher.group(1));
 
         if (!menu.isValidDishIndex(dishIndex)) {
-            return new IncorrectCommand(Messages.INVALID_DISH_INDEX, ui);
+            return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
         }
 
-        return new ListIngredientCommand(dishIndex, menu, ui);
+        return new ListIngredientCommand(dishIndex);
     }
 
     /**
@@ -257,35 +247,35 @@ public class Parser {
      * @param arguments string that matches group arguments
      * @return DeleteDishCommand if command is valid, IncorrectCommand otherwise
      */
-    private static Command prepareDelete(Menu menu, String arguments, Ui ui) {
+    private static Command prepareDelete(Menu menu, String arguments) {
         Pattern deleteDishArgumentsPattern = Pattern.compile(DELETE_ARGUMENT_STRING);
         Matcher matcher = deleteDishArgumentsPattern.matcher(arguments.trim());
 
         // Checks whether the overall pattern of delete price arguments is correct
         if (!matcher.matches()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_DELETE, ui);
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_DELETE);
         }
 
         int listIndexArgGroup = 1;
         int dishIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
 
         if (!menu.isValidDishIndex(dishIndex)) {
-            return new IncorrectCommand(Messages.INVALID_DISH_INDEX, ui);
+            return new IncorrectCommand(Messages.INVALID_DISH_INDEX);
         }
 
-        return new DeleteDishCommand(dishIndex, menu, ui);
+        return new DeleteDishCommand(dishIndex);
     }
 
-    private static Command prepareViewTotalStock(Ui ui) {
-        return new ViewTotalStockCommand(new Pantry(ui), ui);
+    private static Command prepareViewTotalStock() {
+        return new ViewTotalStockCommand();
     }
 
-    private static Command prepareBuyIngredient(String arguments, Ui ui, Pantry pantry) {
+    private static Command prepareBuyIngredient(String arguments) {
         Pattern buyIngredientArgumentsPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT);
         }
 
         String ingredientName = matcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
@@ -295,104 +285,14 @@ public class Parser {
         String unit = extractUnit(ingredientQty);
 
         try {
-            return new BuyIngredientCommand(ingredientName, qty, unit, ui, pantry);
+            return new BuyIngredientCommand(ingredientName, qty, unit);
         } catch (Exception e) {
-            return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+            return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT);
         }
     }
 
-    private static Command prepareHelpCommand(Ui ui) {
-        return new HelpCommand(ui);
-    }
-
-    /**
-     * Parses arguments in the context of the Delete command.
-     *
-     * @param menu menu of the current session
-     * @param arguments string that matches group arguments
-     * @return AddOrderCommand if command is valid, IncorrectCommand otherwise
-     */
-    private static Command prepareOrder(Menu menu, String arguments, Ui ui, Pantry pantry) {
-        final Pattern addOrderArgumentPatter = Pattern.compile(ADD_ORDER_ARGUMENT_STRING);
-        Matcher matcher = addOrderArgumentPatter.matcher(arguments);
-
-        // Checks whether the overall pattern of add order arguments is correct
-        if (!matcher.matches()) {
-            return new IncorrectCommand("Error: Incorrect format for the add order command.\n"
-                    + AddOrderCommand.MESSAGE_USAGE, ui);
-        }
-
-        try {
-            // To retrieve specific arguments from arguments
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
-            int dishQty = Integer.parseInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM));
-
-            Dish orderedDish = getDishInMenu(dishName, menu);
-            if (orderedDish == null) {
-                return new IncorrectCommand(Messages.DISH_NOT_FOUND, ui);
-            }
-
-            ArrayList<Ingredient> usedIngredientList = getIngredientList(orderedDish, dishQty);
-            float totalOrderCost = getDishPrice(orderedDish, dishQty);
-            Order order = new Order(dishName, dishQty, usedIngredientList, totalOrderCost);
-            System.out.println(order);
-
-            return new AddOrderCommand(order, ui, pantry);
-        } catch (Exception e) {
-            return new IncorrectCommand("MESSAGE_INVALID_ADD_ORDER_COMMAND_FORMAT"
-                    + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
-        }
-    }
-
-    /**
-     * Checks if the ordered dish exist in the menu and returns the menu index if exist
-     *
-     * @param dishName Name of the ordered dish
-     * @param menu menu of the current session
-     * @return index of the dish in menu if exists, null if not found
-     */
-    private static Dish getDishInMenu(String dishName, Menu menu) {
-        String formattedDishName = dishName.toLowerCase().trim();
-        for (int i = 0; i < menu.getSize(); i++) {
-            String menuDishName = menu.getDish(i).getName();
-            String formattedMenuDishName = menuDishName.toLowerCase().trim();
-            if (formattedMenuDishName.equals(formattedDishName)){
-                return menu.getDish(i);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Gets and prepares the ingredients used in the dish.
-     * Calculates the total ingredient used and stores in an Ingredient ArrayList
-     *
-     * @param orderedDish Dish object of the ordered dish
-     * @param dishQty Number of the ordered dish requested
-     * @return Arraylist of Ingredients
-     */
-    private static ArrayList<Ingredient> getIngredientList(Dish orderedDish, int dishQty) {
-        ArrayList<Ingredient> dishIngredient = new ArrayList<>();
-        for (Ingredient ingredient : orderedDish.getIngredients()) {
-            String ingredientName = ingredient.getName();
-            int ingredientQty = ingredient.getQty() * dishQty;
-            String ingredientUnit = ingredient.getUnit();
-            dishIngredient.add(new Ingredient(ingredientName, ingredientQty, ingredientUnit));
-        }
-        return dishIngredient;
-    }
-
-    /**
-     * Calculates the total price of the order
-     *
-     * @param orderedDish Dish object of the ordered dish
-     * @param dishQty Number of the ordered dish requested
-     * @return Total calculated cost
-     */
-    private static float getDishPrice(Dish orderedDish, int dishQty) {
-        float dishCost = orderedDish.getPrice();
-        float totalOrderCost = dishCost * dishQty;
-        return totalOrderCost;
+    private static Command prepareHelpCommand() {
+        return new HelpCommand();
     }
 
     /**

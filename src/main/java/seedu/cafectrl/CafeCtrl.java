@@ -40,8 +40,8 @@ public class CafeCtrl {
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
-                command = Parser.parseCommand(menu, fullUserInput, ui, pantry);
-                command.execute();
+                command = Parser.parseCommand(menu, fullUserInput);
+                command.execute(menu, ui, pantry);
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
             } finally {

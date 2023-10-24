@@ -1,18 +1,12 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
-    protected Ui ui;
-    protected Pantry pantry;
-
-    public ExitCommand(Ui ui, Pantry pantry) {
-        this.ui = ui;
-        this.pantry = pantry;
-    }
 
     /**
      * Overrides the isExit() method which returns false
@@ -25,7 +19,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         ui.printLine();
         ui.showGoodbye();
         pantry.writeToPantryStorage();

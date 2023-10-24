@@ -1,6 +1,7 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
@@ -11,22 +12,18 @@ import seedu.cafectrl.ui.Ui;
 public class DeleteDishCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the menu item identified by the index number used in the last menu listing.\n"
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    protected Menu menu;
-    protected Ui ui;
-
-    public DeleteDishCommand(int listIndex, Menu menu, Ui ui) {
+    public DeleteDishCommand(int listIndex) {
         this.index = listIndex;
-        this.menu = menu;
-        this.ui = ui;
     }
 
     @Override
-    public void execute() {
+    public void execute(Menu menu, Ui ui, Pantry pantry) {
         try {
             int dishIndexToBeDeleted = index - Ui.OFFSET_LIST_INDEX;
             Dish selectedDish = menu.getMenuItemsList().get(dishIndexToBeDeleted);

@@ -2,6 +2,7 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
 
@@ -30,8 +31,8 @@ class DeleteDishCommandTest {
         };
 
         int testIndex = 2;
-        DeleteDishCommand deleteDishCommand = new DeleteDishCommand(testIndex, menu, ui);
-        deleteDishCommand.execute();
+        DeleteDishCommand deleteDishCommand = new DeleteDishCommand(testIndex);
+        deleteDishCommand.execute(menu, ui, new Pantry(ui));
 
         int actualOutputIndex = 0;
         String expectedOutput = "Okay! Chicken Curry is deleted! :)";
@@ -47,8 +48,8 @@ class DeleteDishCommandTest {
 
         Ui ui = new Ui();
         int testIndex = 5;
-        DeleteDishCommand deleteDishCommand = new DeleteDishCommand(testIndex, menu, ui);
+        DeleteDishCommand deleteDishCommand = new DeleteDishCommand(testIndex);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteDishCommand.execute());
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteDishCommand.execute(menu, ui, new Pantry(ui)));
     }
 }
