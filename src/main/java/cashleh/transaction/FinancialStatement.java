@@ -38,6 +38,10 @@ public class FinancialStatement {
         }
     }
 
+    public int getSize() {
+        return financialStatement.size();
+    }
+
     /**
      * Calculates the net cash on hand which can be interpreted as the sum of
      * all incomes minus the sum of all expenses.
@@ -59,11 +63,11 @@ public class FinancialStatement {
         String[] texts = new String[listSize];
         for (int i = 0; i < listSize; i++) {
             Transaction currentTransaction = financialStatement.get(i);
-            String type = (currentTransaction instanceof Income) ? "Income " : "Expense ";
+            String type = (currentTransaction instanceof Income) ? "Income, " : "Expense, ";
             String date = currentTransaction.getDate().toString();
             String amt = String.valueOf(currentTransaction.getAmount());
             String cat = currentTransaction.getCategory() == null ? "-" : currentTransaction.getCategory().toString();
-            texts[i] = type + date + " " + currentTransaction.getDescription() + " " + amt + " " + cat;
+            texts[i] = type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat;
         }
         Ui.printFinancialStatement(texts);
     }
