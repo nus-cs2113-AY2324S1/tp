@@ -36,8 +36,6 @@ public class FilterTransaction extends Command{
     @Override
     public void execute() throws CashLehMissingTransactionException {
         try {
-            assert expenseStatement != null;
-            assert incomeStatement != null;
             financialStatement.findTransaction(transactionToFind.getDescription(), transactionToFind.getAmount(),
                     transactionToFind.getDate(), transactionToFind.getCategory());
             logger.log(Level.INFO, "transaction entry was successfully filtered");
