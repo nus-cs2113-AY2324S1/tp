@@ -6,17 +6,17 @@
 
 ## Design & implementation
 
-== Design
+## Design
 
-.Sequence Diagram of Parser Parsing User Input
-.component interactions for any user command
-image::ParserParseCommand.png[]
-*API*: link:{repoURL}/src/main/java/seedu/cafectrl/parser/Parser.java
+### Parser
 
-When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In parseCommand, Parser
-will find the matching keyword for different command from the user input, then it calls the respective `prepareCommand` 
-method within `Parser`. `prepareCommand` generates the corresponding command class and return it to `parseCommand`, which
-returns the `Command` back to `Main` for execution.
+![Parser Parsing User Input Sequence Diagram](ParserParseCommand.png)
+
+*figure 1: Parser Parsing User Input Sequence Diagram*
+
+API: [Parser.java](https://github.com/ziyi105/tp/src/main/java/seedu/cafectrl/parser/Parser.java)
+
+When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
 ## Product scope
 ### Target user profile
