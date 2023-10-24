@@ -6,6 +6,7 @@ participant Ui
 
 -> BudgetCommand: execute()
 BudgetCommand -> Ui: getInstance()
+return ui
 
 alt set
     BudgetCommand -> Budget: setBudget(budget)
