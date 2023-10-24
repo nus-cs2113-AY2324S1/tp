@@ -32,6 +32,7 @@ import cashleh.transaction.IncomeStatement;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class Parser {
     private static final String ADD_INCOME = "addIncome";
@@ -92,13 +93,13 @@ public class Parser {
         case EXIT:
             return new Exit();
         case FILTER_EXPENSE:
-            FindParser expenseToFind = filterDetails(FILTER_EXPENSE, input);
+            FindParser expenseToFind = filterBy(FILTER_EXPENSE, input);
             return new FilterExpense(expenseToFind, expenseStatement);
         case FILTER_INCOME:
-            FindParser incomeToFind = filterDetails(FILTER_INCOME, input);
+            FindParser incomeToFind = filterBy(FILTER_INCOME, input);
             return new FilterIncome(incomeToFind, incomeStatement);
         case FILTER:
-            FindParser transactionToFind = filterDetails(FILTER, input);
+            FindParser transactionToFind = filterBy(FILTER, input);
             return new FilterTransaction(transactionToFind, expenseStatement, incomeStatement);
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
@@ -212,7 +213,7 @@ public class Parser {
      * @return A {@link FindParser} containing the parsed and filtered transaction details.
      * @throws CashLehParsingException If the input or parsing fails.
      */
-    private FindParser filterDetails (String transactionType, String input) throws CashLehParsingException {
+    private FindParser filterBy (String transactionType, String input) throws CashLehParsingException {
         String[] format = null;
         switch (transactionType) {
         case FILTER_EXPENSE:
@@ -241,10 +242,11 @@ public class Parser {
                     "(description, amount, date, or category)!");
         }
 
-        double parsedAmount = -1.0;
+        Optional<Double> parsedAmount = Optional.empty();
         if ((amountString != null) && !amountString.isEmpty()) {
             try {
-                parsedAmount = Double.parseDouble(amountString);
+                double amount = Double.parseDouble(amountString);
+                parsedAmount = Optional.of(amount);
             } catch (NumberFormatException e) {
                 throw new CashLehParsingException("Please enter a valid expense amount!");
             }

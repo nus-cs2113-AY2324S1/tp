@@ -6,6 +6,7 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 /**
  * Represents an Expense Statement in the CashLeh application.
@@ -94,7 +95,7 @@ public class ExpenseStatement {
      * @param category The category to filter transactions by. Set to null if no category is provided by user
      * @throws CashLehMissingTransactionException if no matching transactions are found.
      */
-    public void findExpense(String description, double amount, LocalDate date, Categories category)
+    public void findExpense(String description, Optional amount, LocalDate date, Categories category)
             throws CashLehMissingTransactionException {
         ArrayList<String> matchingExpenses = new ArrayList<>();
         boolean isMatch = false;
@@ -102,32 +103,23 @@ public class ExpenseStatement {
         // Customize the message based on input
         StringBuilder message = new StringBuilder("Here are your corresponding expenses with ");
         if (description != null && !description.isEmpty()) {
-            message.append("description: ").append(description);
+            message.append("<description>: ").append(description).append(" ");
         }
-        if (amount != -1) {
-            if (description != null && !description.isEmpty()) {
-                message.append(" , ");
-            }
-            message.append("amount: ").append(amount);
+        if (amount.isPresent()) {
+            message.append("<amount>: ").append(amount.get()).append(" ");
         }
         if (date != null) {
-            if (description != null && !description.isEmpty() || amount != -1) {
-                message.append(" , ");
-            }
-            message.append("date: ").append(date);
+            message.append("<date>: ").append(date).append(" ");
         }
         if (category != null) {
-            if (description != null && !description.isEmpty() || amount != -1 || date != null) {
-                message.append(" , ");
-            }
-            message.append("category: ").append(category);
+            message.append("<category>: ").append(category).append(" ");
         }
         matchingExpenses.add(message.toString());
 
         for (Expense expense : expenseStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || expense.getDescription().equals(description);
-            boolean amountMatch = (amount == -1) || (expense.getAmount() == amount);
+            boolean amountMatch = (amount.isEmpty()) || (expense.getAmount() == (double)amount.get());
             boolean dateMatch = (date == null) || (expense.getDate().equals(date));
             boolean categoryMatch = (category == null) || (expense.getCategory().equals(category));
             if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
