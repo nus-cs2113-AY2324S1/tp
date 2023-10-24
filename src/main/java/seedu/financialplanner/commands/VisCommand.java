@@ -37,6 +37,6 @@ public class VisCommand extends Command {
     public void execute() throws FinancialPlannerException {
         assert !chart.isEmpty();
         assert !type.isEmpty();
-        Visualizer.displayChart(chart, Categorizer.sortType(CashflowList.getInstance(), type));
+        Visualizer.displayChart(chart, Categorizer.sortType(CashflowList.getInstance(), type), type);
     }
 }
