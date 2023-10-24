@@ -9,30 +9,33 @@ situation.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `CashLeh?` from [github.com](https://github.com/AY2324S1-CS2113-W12-2/tp/releases/).
+2. Download the latest version of `CashLeh?` from [GitHub](https://github.com/AY2324S1-CS2113-W12-2/tp/releases/).
 3. Copy it into an empty folder
 4. Open the terminal and run the command `java javac- FILENAME.jar`
 5. CashLeh? should launch and you can start interacting with the application
 
 ## Features
 
+> **Note**\
+> The delimiters in the commands can be input at any position in the command.
+> 
+> For example, `addExpense chicken rice /amt 100 /date 30-09-2022 /cat food` is equivalent to `addExpense chicken rice /date 30-09-2022 /cat food /amt 100`.
+
 ### Adding an income: `addIncome`
 Adds an income with a description, amount and date.
 
-Format: `addIncome DESCRIPTION /amtAMOUNT /dDATE`
+Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE`
 
 * The `DESCRIPTION` cannot contain punctuation or any special characters.
 * The `AMOUNT` must be a positive number.
-* The `DATE` must be of format "yyyy-MM-dd".
+* The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
 
 Example of usage: 
 
-`addIncome monthly salary /amt2500 /d2023-09-30`
+`addIncome monthly salary /amt 2500 /date 30/09/2023`
 
-`addIncome amazon purchase refund /amt50 /d2023-10-10`
+`addIncome amazon purchase refund /amt 50`
 
 ### Deleting an income: `deleteIncome`
 Deletes an income with a specific index.

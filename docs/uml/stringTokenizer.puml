@@ -1,0 +1,29 @@
+@startuml
+
+skinparam Style strictuml
+
+[-> StringTokenizer: tokenize(String input, String[] prefixes)
+
+StringTokenizer -> StringTokenizer: checkAllPrefixesPresent
+
+alt not all prefixes present
+    [<- StringTokenizer: throw exception
+else all prefixes present
+
+    StringTokenizer -> StringTokenizer: getPrefixIndices()
+        loop for each prefix
+            StringTokenizer -> PrefixWithPosition: PrefixWithPosition()
+            StringTokenizer <- PrefixWithPosition: add to list
+        end
+
+    StringTokenizer -> StringTokenizer: sort list by position
+
+        loop for each prefix
+            StringTokenizer -> PrefixWithPosition: getPrefix()
+            StringTokenizer <- PrefixWithPosition: add to hashmap
+        end
+
+    [<- StringTokenizer:
+end
+
+@enduml
