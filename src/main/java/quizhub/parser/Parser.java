@@ -13,7 +13,7 @@ public class Parser {
             System.lineSeparator() +
             "    1. help - shows the list of commands you can use" +
             System.lineSeparator() +
-            "    2. short [question]/[answer]/[category]/[difficulty] - adds a short answer question and its answer to the list," +
+            "    2. short [question]/[answer] - adds a short answer question and its answer to the list," +
             System.lineSeparator() +
             "     3. list - shows the list of questions and answers," +
             System.lineSeparator() +
@@ -27,9 +27,9 @@ public class Parser {
             "     7. edit [question number] /answer [answer] - edits the answer to the question with " +
             "the specified number," +
             System.lineSeparator() +
-            "     8. start /[quiz mode] [start details] /[qn mode] - starts the quiz," +
+            "     8. start - starts the quiz," +
             System.lineSeparator() +
-            "     9. shuffle - shuffle quiz questions to a random order PERMANENTLY," +
+            "     9. shuffle - shuffle quiz questions to a random order," +
             System.lineSeparator() +
             "     10. markdiff [question number] [question difficulty] - sets the difficulty of question " +
             "with the specified number," +
