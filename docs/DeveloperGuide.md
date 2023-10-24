@@ -31,6 +31,7 @@
   * [Application Lifecycle](#application-lifecycle)
   * [Parser Component](#parser-component)
   * [Command Component](#command-components)
+  * [Storage Component](#storage-component)
 * [Product Scope](#product-scope)
 * [Non Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
