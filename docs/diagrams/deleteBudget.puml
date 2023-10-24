@@ -1,6 +1,6 @@
 @startuml
 
-mainframe sd deleteBudget
+mainframe sd DeleteBudget
 participant BudgetCommand
 participant Budget
 participant Ui

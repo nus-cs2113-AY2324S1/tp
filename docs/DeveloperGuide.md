@@ -36,7 +36,7 @@ in the diagram above
 
 **Delete budget:**
 
-![](images/deleteBudget.png)
+![](images/DeleteBudget.png)
 
 The budget will be deleted by setting the initial and current budget to 0 through the `deleteBudget()` method in `Budget.java`.
 
@@ -44,7 +44,7 @@ Example: `budget delete`
 
 **Reset budget:**
 
-![](images/resetBudget.png)
+![](images/ResetBudget.png)
 
 The budget will be reset by resetting the current budget to the initial budget through the `resetBudget()` method in `Budget.java`.
 
@@ -52,7 +52,7 @@ Example : `budget reset`
 
 **View budget:**
 
-![](images/viewBudget.png)
+![](images/ViewBudget.png)
 
 The current budget will be shown to the user through the `Ui`.
 

@@ -16,11 +16,11 @@ else update
     BudgetCommand -> Budget: updateBudget(budget)
     BudgetCommand -> Ui: printBudgetAfterUpdate()
 else delete
-    ref over BudgetCommand: deleteBudget
+    ref over BudgetCommand: DeleteBudget
 else reset
-    ref over BudgetCommand: resetBudget
+    ref over BudgetCommand: ResetBudget
 else view
-    ref over BudgetCommand: viewBudget
+    ref over BudgetCommand: ViewBudget
 else invalid command
 end
 

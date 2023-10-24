@@ -1,6 +1,6 @@
 @startuml
 
-mainframe sd viewBudget
+mainframe sd ViewBudget
 participant BudgetCommand
 participant Budget
 participant Ui
