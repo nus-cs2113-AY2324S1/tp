@@ -1,0 +1,27 @@
+@startuml
+
+participant BudgetCommand
+participant Budget
+participant Ui
+
+-> BudgetCommand: execute()
+BudgetCommand -> Ui: getInstance()
+
+alt set
+    BudgetCommand -> Budget: setBudget(budget)
+    BudgetCommand -> Ui: printSetBudgetMessage()
+else update
+    BudgetCommand -> Ui: printBudgetBeforeUpdate()
+    BudgetCommand -> Budget: updateBudget(budget)
+    BudgetCommand -> Ui: printBudgetAfterUpdate()
+else delete
+    ref over BudgetCommand: deleteBudget
+else reset
+    ref over BudgetCommand: resetBudget
+else view
+    ref over BudgetCommand: viewBudget
+else invalid command
+end
+
+
+@enduml

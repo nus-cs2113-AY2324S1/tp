@@ -1,0 +1,14 @@
+@startuml
+
+mainframe sd viewBudget
+participant BudgetCommand
+participant Budget
+participant Ui
+
+alt hasBudget
+    BudgetCommand -> Ui: printBudget()
+else else
+    BudgetCommand -> Ui: printErrorMessage()
+end
+
+@enduml
