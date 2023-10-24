@@ -6,15 +6,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * The SaveToTxt class is responsible for saving financial records data to a text file.
+ * It can save both Income and Expense objects to the specified file.
+ *
+ * This class handles exceptions for IO errors that may occur during file operations.
+ */
 public class SaveToTxt {
     private final String path;
     private static final String IO_ERROR_MESSAGE = "An error occurred while saving tasks to the file.";
 
+    /**
+     * Construct a new object of the SaveToTxt class with the file path.
+     *
+     * @param path The path to the text file where data will be saved.
+     */
     public SaveToTxt(String path) {
         this.path = path;
     }
 
+    /**
+     * Saves both Income and Expense objects to the specified text file.
+     *
+     * @param incomes   The ArrayList of Income objects to save.
+     * @param expenses  The ArrayList of Expense objects to save.
+     */
     public void saveIncomeAndExpense(ArrayList<Income> incomes, ArrayList<Expense> expenses){
         try {
             saveIncomeToTextFile(incomes);
@@ -24,6 +40,12 @@ public class SaveToTxt {
         }
     }
 
+    /**
+     * Saves Income objects to the text file. Each Income object is represented as a line in the txt file.
+     *
+     * @param incomes The ArrayList of Income objects to save.
+     * @throws IOException If an IO error occurs during the file write operation.
+     */
     public void saveIncomeToTextFile(ArrayList<Income> incomes) throws IOException {
         try (FileWriter fw = new FileWriter(path)) {
             for (Income income : incomes) {
@@ -38,6 +60,13 @@ public class SaveToTxt {
         }
     }
 
+    /**
+     * Saves Expense objects to the text file. Each Expense object is represented as a line in the file,
+     * and the type of Expense (Food, Transport, or Utilities) is specified in the line.
+     *
+     * @param expenses The ArrayList of Expense objects to save.
+     * @throws IOException If an IO error occurs during the file write operation.
+     */
     public void saveExpenseToTextFile(ArrayList<Expense> expenses) throws IOException{
         try (FileWriter fw = new FileWriter(path, true)) {
             for (Expense expense : expenses) {
@@ -45,7 +74,8 @@ public class SaveToTxt {
                 String expenseDescription = expense.getDescription();
                 String expenseDate = String.valueOf(expense.getDate());;
                 String expenseAmount = String.valueOf(expense.getAmount());
-
+                
+                // Determine the type of Expense and format the line accordingly
                 if (expense.getClass() == Food.class) {
                     textToAdd = "EF" + " | " + expenseDescription + " | " + expenseAmount + " | "
                             + expenseDate + " | " + ((Food) expense).getMealType().ordinal() + "\n";
@@ -58,7 +88,6 @@ public class SaveToTxt {
                 }
                 fw.write(textToAdd);
             }
-            fw.close();
         } catch (IOException e) {
             System.out.println(IO_ERROR_MESSAGE);
         }
