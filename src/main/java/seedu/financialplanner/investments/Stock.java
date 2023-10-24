@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -15,7 +16,7 @@ import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Stock {
+public class Stock implements Serializable {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String symbol;
     private String market;

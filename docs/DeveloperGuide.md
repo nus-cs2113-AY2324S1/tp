@@ -7,12 +7,29 @@
 - **capitalize() method in Cashflow.java**
   - author: Nick Bolton
   - source: https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
-
+    
+- **DG adapted from**
+  - [Addressbook-level3](https://github.com/se-edu/addressbook-level3)
+  
+  
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+## Components
+### Storage Component
+API: `Storage.java`
+
+![](images/Storage.png)
+
+- The storage component loads data from the saved text files when the application starts, and saves the data to the
+  text files when the application exits.
+- The storage class uses the static methods in LoadData and SaveData to load and save data respectively.
+- The `load` method in LoadData reads the `data.txt` file and loads any existing Income, Expense and Budget into the application.
+- The `save` method in SaveData saves all Incomes, Expenses and existing Budget into the `data.txt` file.
 
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
 
 ### Add income/expense feature
 
@@ -55,10 +72,55 @@ The added income/expense is then displayed to the user through the Ui.
 
 #### Diagrams
 Given below is the class diagram showing the class structure of the add income/expense mechanism:
-![](CashflowClassDiagram.png)
+![](images/CashflowClassDiagram.png)
 
 Given below is the sequence diagram showing the add income/expense mechanism:
-![](AddCashflowSequence.png)
+![](images/AddCashflowSequence.png)
+
+
+### Budget Feature
+This feature has 5 functions, `set`, `update`, `delete`, `reset`, and `view`.
+
+![](images/Budget.png)
+
+The BudgetCommand will execute the appropriate command and print through `Budget.java` and prints any message to the user through `Ui.java`.
+
+**Set and update budget:**
+
+Example:
+```
+budget set /b 500
+budget update /b 1000
+```
+The '/b' is followed by the budget amount. The first line will set the budget by calling `setBudget(500)` method in `Budget.java`.
+The second line updates the budget by adding or subtracting the difference between the initial and updated amount to the 
+initial and current budget. This is done through `updateBudget(500)` method in `Budget.java`. Both functions can be seen 
+in the diagram above
+
+**Delete budget:**
+
+![](images/deleteBudget.png)
+
+The budget will be deleted by setting the initial and current budget to 0 through the `deleteBudget()` method in `Budget.java`.
+
+Example: `budget delete`
+
+**Reset budget:**
+
+![](images/resetBudget.png)
+
+The budget will be reset by resetting the current budget to the initial budget through the `resetBudget()` method in `Budget.java`.
+
+Example : `budget reset`
+
+**View budget:**
+
+![](images/viewBudget.png)
+
+The current budget will be shown to the user through the `Ui`.
+
+Example: `budget view`
+
 
 ## Product scope
 ### Target user profile

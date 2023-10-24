@@ -3,6 +3,7 @@ package seedu.financialplanner.storage;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.investments.Stock;
 import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
@@ -10,11 +11,16 @@ import seedu.financialplanner.list.Income;
 import seedu.financialplanner.list.Expense;
 import seedu.financialplanner.utils.Ui;
 
+import java.io.StreamCorruptedException;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class LoadData {
+    private static final String FILE_PATH = "data/watchlist.txt";
     private static final CashflowList cashflowList = CashflowList.getInstance();
     private static final Ui ui = Ui.getInstance();
 
@@ -65,6 +71,9 @@ public abstract class LoadData {
     private static void loadBudget(String[] split) throws IllegalArgumentException {
         double initial = Double.parseDouble(split[1].trim());
         double current = Double.parseDouble(split[2].trim());
+        if (initial == 0 && current == 0) {
+            return;
+        }
         if (initial < 0 || current < 0) {
             throw new IllegalArgumentException("Negative values for budget");
         }
@@ -123,6 +132,26 @@ public abstract class LoadData {
         }
 
         return entry;
+    }
+
+    public static ArrayList<Stock> loadWatchList() {
+        Ui ui = Ui.getInstance();
+        ArrayList<Stock> stocksData = new ArrayList<>();
+        try {
+            ObjectInputStream watchListStocksInputStream
+                    = new ObjectInputStream(
+                        new FileInputStream(FILE_PATH)
+            );
+            stocksData = (ArrayList<Stock>) watchListStocksInputStream.readObject();
+            watchListStocksInputStream.close();
+        } catch (StreamCorruptedException e) {
+            ui.showMessage("Watchlist file corrupted.. Rebuilding");
+        } catch (IOException e) {
+            ui.showMessage("Watchlist file not found... Creating");
+        } catch (ClassNotFoundException e) {
+            ui.showMessage("FIle appears to be corrupted...");
+        }
+        return stocksData;
     }
 
     private static void checkValidInput(double value, int recur) throws FinancialPlannerException {
