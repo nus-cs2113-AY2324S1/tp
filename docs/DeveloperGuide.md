@@ -51,10 +51,10 @@ are the QuizHub, Ui, Parser and Command packages.
 
 ![](./UML/architecture.jpg)
 
-`Quizhub` is the "main" class, which is responsible for starting the program, 
+`Quizhub` is the "main" class, which is responsible for starting the program,
 initialising all other objects, executing commands, and shutting down.
 
-`UI` is the component that interacts with the user, taking inputs and displaying 
+`UI` is the component that interacts with the user, taking inputs and displaying
 the results of the executed commands.
 
 `Parser` acts as a multiplexer to determine which command to run, and what parameters
@@ -63,28 +63,28 @@ it has, based on the user input.
 `Commands` refer to a package of individual commands with complex and specific
 logic, which is later executed in Quizhub and displayed by `UI`.
 
-`Storage` is the class through which questions can be stored on the hard drive and `Utility Classes` 
+`Storage` is the class through which questions can be stored on the hard drive and `Utility Classes`
 refer to any miscellaneous utility classes used by all the components.
 
 ## Application Lifecycle
 
 ![](./UML/lifecycle.jpg)
 
-The program begins with the `run()` call to `QuizHub` class. 
+The program begins with the `run()` call to `QuizHub` class.
 
 This starts a loop in which
 user input is continuously read in from CLI for the user command to be extracted and executed.
 In each iteration of the loop, `QuizHub` makes a call to `Ui.getUserInput()` and returns the
-entire user input as a String object. Following which, `QuizHub` makes a call to 
-`Parser.parseCommand()` to extract the user command from the String object and returns a 
+entire user input as a String object. Following which, `QuizHub` makes a call to
+`Parser.parseCommand()` to extract the user command from the String object and returns a
 `Command` object. Finally, `QuizHub` makes a call to `Command.executeCommand()` and performs
-the requested task. 
+the requested task.
 
 If `Command` is of Exit type, the loop will exit, and the program terminates.
 
 ## Parser Component
 
-The `Parser` component is the backbone behind the program, functioning as the API 
+The `Parser` component is the backbone behind the program, functioning as the API
 between the CLI user interface and the core functionalities of the program. It supports
 the direct communication between the program and user by converting user input into `Command`
 objects which can be interpreted by the program.
@@ -92,14 +92,14 @@ objects which can be interpreted by the program.
 ### Design Considerations
 
 As the `Parser` functions as the API between user and program, it must be designed with a clear
-consideration of both human and machine requirements. 
+consideration of both human and machine requirements.
 
 Our target users are NUS students preparing for exams who wish to use our program to facilitate
 their practice. Considering that time is of the essence for revising students, the `Parser` must
 prioritise efficiency of use to not cause time delays to users' revision. With this in mind,
 we based our design off the following points for inputs taken in by the `Parser`.
 
-1. **Ease of use**: Simple and short command structure 
+1. **Ease of use**: Simple and short command structure
 
 
 2. **Ease of familiarisation**: No excessive or complicated commands
@@ -113,19 +113,19 @@ following point for inputs taken in by the `Parser`.
 
 ### Alternative Design Considerations
 
-In designing the `Parser`, an alternative design we considered is to follow that of `Unix` 
+In designing the `Parser`, an alternative design we considered is to follow that of `Unix`
 command interface. The `Unix` parser is designed such that input commands are required to
 have the syntax of ```command -(options) argument1 argument2 ...``` where the order of arguments
 does not matter. While this is a clean and neat parser design, we have decided not to adopt this
 design as we see a strong need of having a hierarchical command structure for our program.
 
-1. A hierarchical structure introduces logical sequence and flow to the command used, 
-facilitating a quick familiarisation process for users to quickly learn the command syntax. 
-This is in line with our design consideration to minimise learning and familiarisation time 
+1. A hierarchical structure introduces logical sequence and flow to the command used,
+facilitating a quick familiarisation process for users to quickly learn the command syntax.
+This is in line with our design consideration to minimise learning and familiarisation time
 for users. This is in addition to the ease of processing and validation of commands.
-```short [question]/[answer]/[module]/[difficulty]```, for one, is a command that has a 
-logical sequence to which the details of a question is entered. It is more intuitive to 
-follow a structure instead of entering such details without a fixed order, which can easily 
+```short [question]/[answer]/[module]/[difficulty]```, for one, is a command that has a
+logical sequence to which the details of a question is entered. It is more intuitive to
+follow a structure instead of entering such details without a fixed order, which can easily
 lead to confusion.
 
 
@@ -136,59 +136,89 @@ stacking, which create structures possessing hierarchy.
 ### Parser Command Syntax
 
 Our final design  seeks to optimise both user experience and program effectiveness.
-We have hence chosen the following general syntax for commands to be input into the `Parser`. 
+We have hence chosen the following general syntax for commands to be input into the `Parser`.
 All commands require a starting payload, but some commands do not require the subsequent arguments.
 
 ```
 commandType [payload] [/argument1 [payload1] /argument2 [payload2] ... ]
 ```
 The command structure is simple, short, and intuitive. With commands rarely requiring more
-than 2 arguments, typing and inputting the command in CLI is fast and efficient, allowing 
+than 2 arguments, typing and inputting the command in CLI is fast and efficient, allowing
 revising students to quickly utilise the program. The hierarchical and logical structure to
-the arrangement of arguments and payloads allows students to quickly familiarise with the 
-syntax and minimise delays to their learning schedule. 
+the arrangement of arguments and payloads allows students to quickly familiarise with the
+syntax and minimise delays to their learning schedule.
 
-The hierarchical structure also allows for the respective payload to be easily extracted 
+The hierarchical structure also allows for the respective payload to be easily extracted
 with little ambiguity. Command validation can then be performed sequentially, facilitating
 efficient checks.
 
 ### Implementation
 
-The main function of `Parser` is to decode user input and extract relevant information to be 
+The main function of `Parser` is to decode user input and extract relevant information to be
 used by other classes. Hence, it supports 3 main methods as listed below.
 1. `parseCommand`
 2. `getContentAfterKeyword`
 3. `extractQuestionDifficulty`
 
-`parseCommand` 
+`parseCommand`
 
 This method processes raw user input from CLI to extract information to be assembled into a
-`Command` object. It determines the type of command by reading the commandType from the 
+`Command` object. It determines the type of command by reading the commandType from the
 very start of the user input.
 
 The following sequence diagram shows the implementation of `parseCommand`.
 
 ![](./UML/parser.png)
 
-`getContentAfterKeyword` 
+`getContentAfterKeyword`
 
 This method acts as a helper function to assist in extracting the payload following an argument
-in the user input. It is used in the constructing of `Command` objects when command-specific 
-information need to be extracted from arguments in the user input. 
+in the user input. It is used in the constructing of `Command` objects when command-specific
+information need to be extracted from arguments in the user input.
 
-It simply breaks up an entire ```/argument [payload]``` String into ```/argument``` and 
+It simply breaks up an entire ```/argument [payload]``` String into ```/argument``` and
 ```[payload]``` and returns the `[payload]`. Hence, any String passed into this method must
-take on the form of ```/argument [payload]``` or an exception will be thrown and handled by 
+take on the form of ```/argument [payload]``` or an exception will be thrown and handled by
 printing an error message to the CLI.
 
 `extractQuestionDifficulty`
 
-This method acts as a helper function for extracting an `QnDifficulty` enum type from a user 
-text input. This is used for setting question difficulty during the construction of a 
-`Question` , or the execution of a `CommandMarkDifficulty`. 
+This method acts as a helper function for extracting an `QnDifficulty` enum type from a user
+text input. This is used for setting question difficulty during the construction of a
+`Question` , or the execution of a `CommandMarkDifficulty`.
 
 If the string passed to this method does not describe an existing question difficulty level, an
 exception will be thrown and handled by printing an error message to the CLI.
+
+## Command Components
+
+
+### Start Command - Start Quiz
+
+The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order. 
+
+![](./UML/CommandStart_Sequence.jpg)
+
+The start quiz mechanism is facilitated by CommandStart under package quizhub.command. The class utilises methods from `quizhub.questionlist.QuestionList`.  It extends Command with 2 new prompts (`/[quiz mode]` and `/[qn mode]`) and 1 user input field (`/[start details]`). It implements the following operations:
+
+`/[quiz mode]`
+1. 2 configurations - `/module` and `/all`
+2.	`/module` must be followed by a category name to retrieve questions from that specific category
+  - The method categoriseListByModules from the package `quizhub.questionlist.QuestionList` will be called to retrieve the questions by that are listed within the specified category from the storage list
+  - `/all` will not require any input from `/[start details]`
+3.	The method `getAllQns()` from package `quizhub.questionlist.QuestionList` will be called to retrieve all questions from the storage list.
+
+`/[qn mode]`
+1.	2 configurations - `/random` and `/normal`
+2.	This prompt is activated after defining `/[quiz mode]` and `/[start details]`
+3.	/random will randomize the list of questions using `java.util.Collections.shuffle` and store it within a temporary array to prevent tempering with the original array in Storage
+4.	`/normal` will not require any further actions, using the previously generated list as specified by `/[quiz mode]` and `/[start details]`
+
+`/[start details]`
+1.	Define the category of `/module` i.e. `/module` number to call upon the “number” tagged modules when starting the quiz
+2.	This field can be left blank when `/all` is called for `/[quiz mode]` to tell the program to quiz the user on all questions stored within the local storage
+
+Thereafter the quiz is started by calling the method `startQuiz()` in package `quizhub.questionlist.QuestionList`. Within `startQuiz()`, the program iterates through the list of totalQuestions while blocking out the answers. The user can input their answer in the input field which is utilized to match with the actual answer to provide “correct” or “wrong”. Each correct answer will increment correctAnswers variable by 1. The quiz ends when all the questions are displayed and the total number of correctAnswers will be displayed.
 
 # Product scope
 
@@ -197,7 +227,7 @@ QuizHub
 
 ## Target user profile
 
-Our target users are 
+Our target users are
 * NUS Students preparing for exams
 * Like to take notes in class
 * Fear to miss out of important knowledge
@@ -208,8 +238,8 @@ Our target users are
 
 ## Value proposition
 
-Allow NUS Students to easily take notes in class and allow them to 
-generate quizzes to test their knowledge of understanding. By using the 
+Allow NUS Students to easily take notes in class and allow them to
+generate quizzes to test their knowledge of understanding. By using the
 QuizHub application, students can input notes taken in class in a question form,
 which they could use to take quizzes to ensure their understanding of the topic.
 
