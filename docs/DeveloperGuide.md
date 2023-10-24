@@ -8,6 +8,26 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Visualization Feature 
+
+This feature is implemented with the help of [XChart](https://knowm.org/open-source/xchart/), a simple charting library for Java by Knowm.
+
+By typing in the vis command with the appropriate arguments (/s and /t), users will be able to visualize their income or expense 
+using visualization tools (Piechart, Bar Chart)
+
+Demo: 
+
+`vis /t expense /c pie`
+
+output
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\Screenshot%202023-10-24%20113526.png)
+
+This feature was implemented with the help of three different classes.
+
+Class Diagram
+
+
 
 ## Product scope
 ### Target user profile
