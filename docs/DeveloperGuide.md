@@ -11,7 +11,22 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+<img src="UML Diagrams/Architecture_Diagram.png" width="280">
+
+The architecture diagram given above explains the high level design of the application. The diagram depicts the key 
+component of the application that enables it to provide its functionalities.
+
+Majority of the app's work is done by the following components
+
+- Login System : Handles user authentication before enabling app usage
+- Ui : Asks for user input by handling output messages
+- Parser : Makes sense of user input
+- Commands : List of various commands
+- CommandResult : Execution of various commands
+
+The section below will explain in more detail the design considerations, implementation and rationale of the various 
+components listed above.
+---
 
 ### Login System Component
 
