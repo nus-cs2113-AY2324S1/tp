@@ -8,15 +8,59 @@ import java.time.LocalDate;
  */
 public class Income extends Transaction {
 
+    /**
+     * Constructs an Income object with specified description and amount.
+     * @param description Description of income.
+     * @param amount      Amount of income.
+     */
     public Income(String description, double amount) {
         super(description, amount);
     }
 
+    /**
+     * Constructs an Income object with specified description, amount and date.
+     * @param description Description of income.
+     * @param amount      Amount of income.
+     * @param date        Date of income.
+     */
     public Income(String description, double amount, LocalDate date) {
         super(description, amount, date);
     }
+
+    /**
+     * Constructs an Income object with specified description, amount and date.
+     * @param description Description of income.
+     * @param amount      Amount of income.
+     * @param category    Category of income.
+     */
+    public Income(String description, double amount, Categories category) {
+        super(description, amount, category);
+    }
+
+    /**
+     * Constructs an Income object with specified description, amount and date.
+     * @param description Description of income.
+     * @param amount      Amount of income.
+     * @param date        Date of income.
+     * @param category    Category of income.
+     */
+
+    public Income(String description, double amount, LocalDate date, Categories category) {
+        super(description, amount, date, category);
+    }
+
     @Override
     public String toString() {
-        return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
+        if (getDate() == null && getCategory() == null) {
+            return getDescription() + " (amount: " + getAmount() + ")";
+        }
+        else if (getDate() == null) {
+            return getDescription() + " (amount: " + getAmount() + ", category: " + getCategory() + ")";
+        }
+        else if (getCategory() == null) {
+            return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
+        }
+        return getDescription() + " (amount: " + getAmount()
+                + ", date: " + getDate() + ", category: " + getCategory() + ")";
     }
 }

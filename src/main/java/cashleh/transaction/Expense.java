@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * Additionally, it overrides the `toString` method to provide a custom string representation of the expense.
  */
 public class Expense extends Transaction {
+
     /**
      * Constructs an Expense object with specified description and amount.
      * @param description Description of expense.
@@ -26,8 +27,40 @@ public class Expense extends Transaction {
         super(description, amount, date);
     }
 
+    /**
+     * Constructs an Expense object with specified description, amount and date.
+     * @param description Description of expense.
+     * @param amount      Amount of expense.
+     * @param category    Category of expense.
+     */
+    public Expense(String description, double amount, Categories category) {
+        super(description, amount, category);
+    }
+
+    /**
+     * Constructs an Expense object with specified description, amount and date.
+     * @param description Description of expense.
+     * @param amount      Amount of expense.
+     * @param date        Date of expense.
+     * @param category    Category of expense.
+     */
+    public Expense(String description, double amount, LocalDate date, Categories category) {
+        super(description, amount, date, category);
+    }
+
+    @Override
     public String toString() {
-        return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
+        if (getDate() == null && getCategory() == null) {
+            return getDescription() + " (amount: " + getAmount() + ")";
+        }
+        else if (getDate() == null) {
+            return getDescription() + " (amount: " + getAmount() + ", category: " + getCategory() + ")";
+        }
+        else if (getCategory() == null) {
+            return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
+        }
+        return getDescription() + " (amount: " + getAmount() 
+                + ", date: " + getDate() + ", category: " + getCategory() + ")";
     }
 
 }

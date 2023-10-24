@@ -1,10 +1,14 @@
 package cashleh.parser;
 
+import cashleh.budget.Budget;
+import cashleh.budget.BudgetHandler;
 import cashleh.commands.*;
-import cashleh.transaction.Expense;
-import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.Income;
+import cashleh.transaction.Expense;
 import cashleh.transaction.IncomeStatement;
+import cashleh.transaction.ExpenseCategories.ExpenseCategory;
+import cashleh.transaction.IncomeCategories.IncomeCategory;
+import cashleh.transaction.ExpenseStatement;
 import cashleh.exceptions.CashLehParsingException;
 
 import java.time.LocalDate;
@@ -14,9 +18,15 @@ public class Parser {
     private static final String ADD_INCOME = "addIncome";
     private static final String DELETE_INCOME = "deleteIncome";
     private static final String VIEW_INCOMES = "viewIncomes";
+
     private static final String ADD_EXPENSE = "addExpense";
     private static final String DELETE_EXPENSE = "deleteExpense";
     private static final String VIEW_EXPENSES = "viewExpenses";
+
+    private static final String UPDATE_BUDGET = "updateBudget";
+    private static final String DELETE_BUDGET = "deleteBudget";
+    private static final String VIEW_BUDGET = "viewBudget";
+    private static final String VIEW_FINANCIAL_STATEMENT = "viewFinancialStatement";
     private static final String EXIT = "exit";
     private static final String FILTER_EXPENSE = "filterExpense";
     private static final String FILTER_INCOME = "filterIncome";
@@ -26,10 +36,12 @@ public class Parser {
 
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
+    private final BudgetHandler budgetHandler;
 
-    public Parser(ExpenseStatement expenseStatement, IncomeStatement incomeStatement) {
+    public Parser(ExpenseStatement expenseStatement, IncomeStatement incomeStatement, BudgetHandler budgetHandler) {
         this.expenseStatement = expenseStatement;
         this.incomeStatement = incomeStatement;
+        this.budgetHandler = budgetHandler;
     }
 
     public Command parse(String input) throws CashLehParsingException {
@@ -49,6 +61,15 @@ public class Parser {
             return getDeleteTransaction(input, DELETE_EXPENSE);
         case VIEW_EXPENSES:
             return new ViewExpenses(expenseStatement);
+        case UPDATE_BUDGET:
+            Budget budget = getBudget(input);
+            return new UpdateBudget(budget, budgetHandler);
+        case DELETE_BUDGET:
+            return new DeleteBudget(budgetHandler);
+        case VIEW_BUDGET:
+            return new ViewBudget(budgetHandler);
+        case VIEW_FINANCIAL_STATEMENT:
+            return new ViewFinancialStatement(incomeStatement, expenseStatement);
         case EXIT:
             return new Exit();
         case FILTER_EXPENSE:
@@ -66,17 +87,19 @@ public class Parser {
     }
 
     private Expense getExpense(String input) throws CashLehParsingException {
-        String[] format = {ADD_EXPENSE, "/amt", "/date:optional"};
+        String[] format = {ADD_EXPENSE, "/amt", "/date:optional", "/cat:optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String expenseName = inputDetails.get(ADD_EXPENSE);
         String expenseAmtString = inputDetails.get("/amt");
         String expenseDateString = inputDetails.get("/date");
+        String expenseCategoryString = inputDetails.get("/cat");
 
         if (expenseName.isEmpty()) {
             throw new CashLehParsingException(
                 "Oopsie! An expense without a description is like a CashLeh transaction without its story - not as fun!"
             );
         }
+
         double expenseAmt;
         try {
             expenseAmt = Double.parseDouble(expenseAmtString);
@@ -84,20 +107,35 @@ public class Parser {
             throw new CashLehParsingException("Please enter a valid expense amount!");
         }
 
-        // default to current date if no date is specified
-        if (expenseDateString == null || expenseDateString.isEmpty()) {
+        LocalDate parsedDate = null;
+        if (!(expenseDateString == null || expenseDateString.isEmpty())) {
+            parsedDate = DateParser.parse(expenseDateString);
+        }
+        
+        ExpenseCategory parsedCategory = null;
+        if (!(expenseCategoryString == null || expenseCategoryString.isEmpty())) {
+            parsedCategory = ExpenseCatParser.parse(expenseCategoryString);
+        }
+
+        if (parsedDate == null && parsedCategory == null) {
             return new Expense(expenseName, expenseAmt);
         }
-        LocalDate parsedDate = DateParser.parse(expenseDateString);
-        return new Expense(expenseName, expenseAmt, parsedDate);
+        else if (parsedDate == null) {
+            return new Expense(expenseName, expenseAmt, parsedCategory);
+        }
+        else if (parsedCategory == null) {
+            return new Expense(expenseName, expenseAmt, parsedDate);
+        }
+        return new Expense(expenseName, expenseAmt, parsedDate, parsedCategory);
     }
 
     private Income getIncome(String input) throws CashLehParsingException {
-        String[] format = {ADD_INCOME, "/amt", "/date:optional"};
+        String[] format = {ADD_INCOME, "/amt", "/date:optional", "/cat:optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String incomeName = inputDetails.get(ADD_INCOME);
         String incomeAmtString = inputDetails.get("/amt");
         String incomeDateString = inputDetails.get("/date");
+        String incomeCategoryString = inputDetails.get("/cat");
 
         if (incomeName.isEmpty()) {
             throw new CashLehParsingException(
@@ -112,12 +150,26 @@ public class Parser {
             throw new CashLehParsingException("Please enter a valid expense amount!");
         }
 
-        // default to current date if no date is specified
-        if (incomeDateString == null || incomeDateString.isEmpty()) {
+        LocalDate parsedDate = null;
+        if (!(incomeDateString == null) && !incomeDateString.isEmpty()) {
+            parsedDate = DateParser.parse(incomeDateString);
+        }
+        
+        IncomeCategory parsedCategory = null;
+        if (!(incomeCategoryString == null) && !incomeCategoryString.isEmpty()) {
+            parsedCategory = IncomeCatParser.parse(incomeCategoryString);
+        }
+
+        if (parsedDate == null && parsedCategory == null) {
             return new Income(incomeName, incomeAmt);
         }
-        LocalDate parsedDate = DateParser.parse(incomeDateString);
-        return new Income(incomeName, incomeAmt, parsedDate);
+        else if (parsedDate == null) {
+            return new Income(incomeName, incomeAmt, parsedCategory);
+        }
+        else if (parsedCategory == null) {
+            return new Income(incomeName, incomeAmt, parsedDate);
+        }
+        return new Income(incomeName, incomeAmt, parsedDate, parsedCategory);
     }
 
     private Command getDeleteTransaction(String input, String transactionType) throws CashLehParsingException {
@@ -136,9 +188,9 @@ public class Parser {
             new DeleteExpense(transactionIndex, expenseStatement) : new DeleteIncome(transactionIndex, incomeStatement);
     }
 
-    private FindParser filterDetails (String transactionType, String input) throws CashLehParsingException{
+    private FindParser filterDetails (String transactionType, String input) throws CashLehParsingException {
         String[] format = null;
-        switch(transactionType) {
+        switch (transactionType) {
         case FILTER_EXPENSE:
             format = new String[]{FILTER_EXPENSE, "/amt:optional"};
             break;
@@ -164,5 +216,16 @@ public class Parser {
             }
         }
         return new FindParser(descriptionString, -1.0);
+    }
+
+    private Budget getBudget(String input) throws CashLehParsingException {
+        String newBudget = input.split(" ", 2)[1];
+        int newBudgetAmount;
+        try {
+            newBudgetAmount = Integer.parseInt(newBudget);
+        } catch (NumberFormatException e) {
+            throw new CashLehParsingException("Eh, that's not the kind of number we flaunt in CashLeh!");
+        }
+        return new Budget(newBudgetAmount);
     }
 }
