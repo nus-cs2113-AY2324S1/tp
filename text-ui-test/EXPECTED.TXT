@@ -25,10 +25,6 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	Income: job (Amount: 3000.0, Date: 2020-01-01)
-	____________________________________________________________
-	____________________________________________________________
-	The following income was added:
 	Income: side hustle (Amount: 500.0, Date: 2023-10-19)
 	____________________________________________________________
 	____________________________________________________________
@@ -36,10 +32,9 @@
 	Expense: vacation (Amount: 4000.0, Date: 2023-10-24)
 	____________________________________________________________
 	____________________________________________________________
-	The current sum of all your incomes amounts to: 6500.0
+	The current sum of all your incomes amounts to: 3500.0
 		1. Income: job (Amount: 3000.0, Date: 2020-01-01)
-		2. Income: job (Amount: 3000.0, Date: 2020-01-01)
-		3. Income: side hustle (Amount: 500.0, Date: 2023-10-19)
+		2. Income: side hustle (Amount: 500.0, Date: 2023-10-19)
 	____________________________________________________________
 +-----------------------------------------------------------------------------------------------------------------------+
 |                                              Overall Financial Statement                                              |
@@ -47,33 +42,24 @@
 |    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
 +----------+--------------+--------------------+------------------------------+--------------------+--------------------+
 |    1     |    Income    |     2020-01-01     |             job              |         -          |     + $3000.0      |
-|    2     |    Income    |     2020-01-01     |             job              |         -          |     + $3000.0      |
-|    3     |    Income    |     2023-10-19     |         side hustle          |         -          |      + $500.0      |
-|    4     |   Expense    |     2023-10-24     |           vacation           |         -          |     - $4000.0      |
+|    2     |    Income    |     2023-10-19     |         side hustle          |         -          |      + $500.0      |
+|    3     |   Expense    |     2023-10-24     |           vacation           |         -          |     - $4000.0      |
 +-----------------------------------------------------------------------------------------------------------------------+
-| Total Income: $6500.0                                                                                                 |
+| Total Income: $3500.0                                                                                                 |
 | Total Expenses: $4000.0                                                                                               |
-| Net Income: $2500.0                                                                                                   |
+| Net Income: $-500.0                                                                                                   |
 +-----------------------------------------------------------------------------------------------------------------------+
 	____________________________________________________________
-	You have set a budget of: 10.0
-	Here's a quick view of how you're doing so far:
-	You have a net cash on hand of: 2500.0
-	You still have the following percent of your budget left:
-
-	[******************************] 100.00%
+	Hey watch out you are currently below your budget by: 510.0
+	Need some financial advise? Stop spending so much!
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
 	Expense: dinner (Amount: 50.0, Date: 2023-10-19)
 	____________________________________________________________
 	____________________________________________________________
-	You have set a budget of: 10.0
-	Here's a quick view of how you're doing so far:
-	You have a net cash on hand of: 2450.0
-	You still have the following percent of your budget left:
-
-	[******************************] 100.00%
+	Hey watch out you are currently below your budget by: 560.0
+	Need some financial advise? Stop spending so much!
 	____________________________________________________________
 	____________________________________________________________
 	Alright, CashLeh has just deleted your previous budget!
@@ -97,24 +83,12 @@
 	60.0
 	____________________________________________________________
 	____________________________________________________________
-	You have set a budget of: 60.0
-	Here's a quick view of how you're doing so far:
-	You have a net cash on hand of: 3050.0
-	You still have the following percent of your budget left:
-
-	[******************************] 100.00%
-	____________________________________________________________
-	____________________________________________________________
 	The following expense was added:
 	Expense: tax (Amount: 40.0, Date: 2023-10-24)
 	____________________________________________________________
 	____________________________________________________________
-	You have set a budget of: 60.0
-	Here's a quick view of how you're doing so far:
-	You have a net cash on hand of: 3010.0
-	You still have the following percent of your budget left:
-
-	[******************************] 100.00%
+	Hey watch out you do not have that much cash left over according to your budget.
+	Try earning some money before making any crazy expenses!
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
@@ -127,18 +101,17 @@
 	____________________________________________________________
 	You have set a budget of: 80.0
 	Here's a quick view of how you're doing so far:
-	You have a net cash on hand of: 3810.0
+	You have a net cash on hand of: 810.0
 	You still have the following percent of your budget left:
 
 	[******************************] 100.00%
 	____________________________________________________________
 	____________________________________________________________
-	Noted! CashLeh has removed the following income:
-	Income: black jack (Amount: 800.0, Date: 2023-10-24)
+	No such transaction recorded leh!
 	____________________________________________________________
 	____________________________________________________________
 	Noted! CashLeh has removed the following income:
-	Income: job (Amount: 3000.0, Date: 2020-01-01)
+	Income: side hustle (Amount: 500.0, Date: 2023-10-19)
 	____________________________________________________________
 +-----------------------------------------------------------------------------------------------------------------------+
 |                                              Overall Financial Statement                                              |
@@ -146,16 +119,62 @@
 |    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
 +----------+--------------+--------------------+------------------------------+--------------------+--------------------+
 |    1     |    Income    |     2020-01-01     |             job              |         -          |     + $3000.0      |
-|    2     |    Income    |     2023-10-19     |         side hustle          |         -          |      + $500.0      |
-|    3     |    Income    |     2023-10-24     |             job              |         -          |      + $600.0      |
+|    2     |    Income    |     2023-10-24     |             job              |         -          |      + $600.0      |
+|    3     |    Income    |     2023-10-24     |          black jack          |         -          |      + $800.0      |
 |    4     |   Expense    |     2023-10-24     |           vacation           |         -          |     - $4000.0      |
 |    5     |   Expense    |     2023-10-19     |            dinner            |         -          |      - $50.0       |
 |    6     |   Expense    |     2023-10-24     |             tax              |         -          |      - $40.0       |
 +-----------------------------------------------------------------------------------------------------------------------+
-| Total Income: $4100.0                                                                                                 |
+| Total Income: $4400.0                                                                                                 |
 | Total Expenses: $4090.0                                                                                               |
-| Net Income: $10.0                                                                                                     |
+| Net Income: $310.0                                                                                                    |
 +-----------------------------------------------------------------------------------------------------------------------+
+	____________________________________________________________
+	The following expense was added:
+	Expense: milk tea (Amount: 2.5, Date: 2023-10-24)
+	____________________________________________________________
+	____________________________________________________________
+	The following expense was added:
+	Expense: milk tea (Amount: 4.5, Date: 2023-10-24, Category: FOOD_DRINK)
+	____________________________________________________________
+	____________________________________________________________
+	Here are your corresponding expenses with description: milk tea
+	Expense: milk tea (Amount: 2.5, Date: 2023-10-24)
+	Expense: milk tea (Amount: 4.5, Date: 2023-10-24, Category: FOOD_DRINK)
+	____________________________________________________________
+	____________________________________________________________
+	Here are your corresponding expenses with amount: 2.5
+	Expense: milk tea (Amount: 2.5, Date: 2023-10-24)
+	____________________________________________________________
+	____________________________________________________________
+	No such transaction recorded leh!
+	____________________________________________________________
+	____________________________________________________________
+	Here are your corresponding transactions with category: FOOD_DRINK
+	[-] Expense: milk tea (Amount: 4.5, Date: 2023-10-24, Category: FOOD_DRINK)
+	____________________________________________________________
+	____________________________________________________________
+	The following income was added:
+	Income: CPF (Amount: 500.0, Date: 2023-10-24, Category: OTHERS)
+	____________________________________________________________
+	____________________________________________________________
+	The following income was added:
+	Income: toto prize money (Amount: 2.5, Date: 2023-10-24, Category: LOTTERY_GAMBLING)
+	____________________________________________________________
+	____________________________________________________________
+	The following expense was added:
+	Expense: book (Amount: 10.0, Date: 2023-10-24, Category: OTHERS)
+	____________________________________________________________
+	____________________________________________________________
+	Here are your corresponding transactions with category: OTHERS
+	[+] Income: CPF (Amount: 500.0, Date: 2023-10-24, Category: OTHERS)
+	[-] Expense: book (Amount: 10.0, Date: 2023-10-24, Category: OTHERS)
+	____________________________________________________________
+	____________________________________________________________
+	Here are your corresponding transactions with amount: 2.5
+	[+] Income: toto prize money (Amount: 2.5, Date: 2023-10-24, Category: LOTTERY_GAMBLING)
+	[-] Expense: milk tea (Amount: 2.5, Date: 2023-10-24)
+	____________________________________________________________
 	____________________________________________________________
 	Aiyoh! Your input blur like sotong... Clean your input for CashLeh!
 	____________________________________________________________
