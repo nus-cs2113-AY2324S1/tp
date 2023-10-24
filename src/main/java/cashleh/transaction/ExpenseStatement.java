@@ -82,7 +82,7 @@ public class ExpenseStatement {
         Ui.printMultipleText(texts);
     }
 
-    public void findExpense(String description, double amount, LocalDate date) throws CashLehMissingTransactionException {
+    public void findExpense(String description, double amount, LocalDate date, Categories category) throws CashLehMissingTransactionException {
         ArrayList<String> matchingExpenses = new ArrayList<>();
         boolean isMatch = false;
 
@@ -103,6 +103,12 @@ public class ExpenseStatement {
             }
             message.append("date: ").append(date);
         }
+        if (category != null) {
+            if (description != null && !description.isEmpty() || amount != -1 || date != null) {
+                message.append(" , ");
+            }
+            message.append("category: ").append(category);
+        }
         matchingExpenses.add(message.toString());
 
         for (Expense expense : expenseStatement) {
@@ -110,7 +116,8 @@ public class ExpenseStatement {
                     || expense.getDescription().equals(description);
             boolean amountMatch = (amount == -1) || (expense.getAmount() == amount);
             boolean dateMatch = (date == null) || (expense.getDate().equals(date));
-            if (descriptionMatch && amountMatch && dateMatch) {
+            boolean categoryMatch = (category == null) || (expense.getCategory().equals(category));
+            if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
                 matchingExpenses.add(expense.toString());
                 isMatch = true;
             }

@@ -17,7 +17,7 @@ public class FilterIncome extends Command{
     @Override
     public void execute() throws CashLehMissingTransactionException {
         try {
-            incomeStatement.findIncome(incomeToFind.getDescription(), incomeToFind.getAmount(), incomeToFind.getDate());
+            incomeStatement.findIncome(incomeToFind.getDescription(), incomeToFind.getAmount(), incomeToFind.getDate(), incomeToFind.getCategory());
             logger.log(Level.INFO, "income entry was successfully filtered");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();

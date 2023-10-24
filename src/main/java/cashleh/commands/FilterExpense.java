@@ -18,7 +18,7 @@ public class FilterExpense extends Command {
     @Override
     public void execute() throws CashLehMissingTransactionException {
         try {
-            expenseStatement.findExpense(expenseToFind.getDescription(), expenseToFind.getAmount(), expenseToFind.getDate());
+            expenseStatement.findExpense(expenseToFind.getDescription(), expenseToFind.getAmount(), expenseToFind.getDate(), expenseToFind.getCategory());
             logger.log(Level.INFO, "expense entry was successfully filtered");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();

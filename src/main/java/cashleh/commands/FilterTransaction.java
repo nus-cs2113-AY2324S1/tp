@@ -1,5 +1,6 @@
 package cashleh.commands;
 
+import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.parser.FindParser;
 import cashleh.transaction.ExpenseStatement;
@@ -20,7 +21,7 @@ public class FilterTransaction extends Command{
     @Override
     public void execute() throws CashLehMissingTransactionException {
         try {
-            financialStatement.findTransaction(transactionToFind.getDescription(), transactionToFind.getAmount(), transactionToFind.getDate());
+            financialStatement.findTransaction(transactionToFind.getDescription(), transactionToFind.getAmount(), transactionToFind.getDate(), transactionToFind.getCategory());
             logger.log(Level.INFO, "transaction entry was successfully filtered");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();

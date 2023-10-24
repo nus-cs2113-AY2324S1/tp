@@ -71,7 +71,7 @@ public class FinancialStatement {
         Ui.printMultipleText(texts);
     }
 
-    public void findTransaction(String description, double amount, LocalDate date) throws CashLehMissingTransactionException {
+    public void findTransaction(String description, double amount, LocalDate date, Categories category) throws CashLehMissingTransactionException {
         ArrayList<String> matchingTransactions = new ArrayList<>();
         boolean isMatch = false;
         StringBuilder message = new StringBuilder("Here are your corresponding transactions with ");
@@ -90,6 +90,12 @@ public class FinancialStatement {
             }
             message.append("date: ").append(date);
         }
+        if (category != null) {
+            if (description != null && !description.isEmpty() || amount != -1 || date != null) {
+                message.append(" , ");
+            }
+            message.append("category: ").append(category);
+        }
         matchingTransactions.add(message.toString());
 
         for (Transaction transaction : financialStatement) {
@@ -97,9 +103,10 @@ public class FinancialStatement {
                     || transaction.getDescription().equals(description);
             boolean amountMatch = (amount == -1) || (transaction.getAmount() == amount);
             boolean dateMatch = (date == null) || (transaction.getDate().equals(date));
+            boolean categoryMatch = (category == null) || (String.valueOf(transaction.getCategory()).equals(String.valueOf(category)));
             // Determine the sign based on the type of transaction
             String sign = (transaction instanceof Income) ? "[+] " : "[-] ";
-            if (descriptionMatch && amountMatch && dateMatch) {
+            if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
                 matchingTransactions.add(sign + transaction.toString());
                 isMatch = true;
             }
