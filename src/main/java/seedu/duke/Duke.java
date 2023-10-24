@@ -2,16 +2,19 @@ package seedu.duke;
 
 
 import seedu.duke.commands.Balance;
+import seedu.duke.commands.ClearAll;
+import seedu.duke.commands.ClearExpenses;
+import seedu.duke.commands.ClearIncomes;
 import seedu.duke.commands.DeleteExpenseCommand;
 import seedu.duke.commands.DeleteIncomeCommand;
 import seedu.duke.commands.ExpenseLister;
+import seedu.duke.commands.ExpenseManager;
+import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.IncomeLister;
 import seedu.duke.commands.IncomeManager;
-import seedu.duke.commands.ExpenseManager;
+import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.UsageInstructions;
-import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.storage.GetFromTxt;
@@ -147,7 +150,21 @@ public class Duke {
                     }
                     Ui.showLineDivider();
                     break;
-
+                case "clear_incomes":
+                    Ui.showLineDivider();
+                    new ClearIncomes(incomes).clearAllIncomes();
+                    Ui.showLineDivider();
+                    break;
+                case "clear_expenses":
+                    Ui.showLineDivider();
+                    new ClearExpenses(expenses).clearAllIncomes();
+                    Ui.showLineDivider();
+                    break;
+                case "clear_all":
+                    Ui.showLineDivider();
+                    new ClearAll(incomes, expenses).clearAllIncomeAndExpense();
+                    Ui.showLineDivider();
+                    break;
                 default:
                     Ui.showLineDivider();
                     System.out.println("Invalid command. Please try again.");
