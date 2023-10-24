@@ -1,6 +1,7 @@
 package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.cafectrl.OrderList;
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.DeleteDishCommand;
@@ -36,9 +37,10 @@ class ParserTest {
         Menu menu = new Menu(menuItems);
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
 
         String userInput = "list_ingredients 1";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof ListIngredientCommand);
 
@@ -52,8 +54,9 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         String userInput = "list_ingredients";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof IncorrectCommand);
 
@@ -67,8 +70,9 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         String userInput = "list_ingredients a";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof IncorrectCommand);
 
@@ -82,8 +86,9 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         String userInput = "list_ingredients 1";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof IncorrectCommand);
 
@@ -104,9 +109,10 @@ class ParserTest {
         Menu menu = new Menu(menuItems);
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
 
         String userInput = "delete 1";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof DeleteDishCommand);
 
@@ -120,8 +126,9 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         String userInput = "delete";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof IncorrectCommand);
 
@@ -135,8 +142,9 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         String userInput = "delete a";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof IncorrectCommand);
 
@@ -150,8 +158,9 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         String userInput = "delete 1";
-        Command result = Parser.parseCommand(menu, userInput, ui, pantry);
+        Command result = Parser.parseCommand(menu, userInput, ui, pantry, orderList);
 
         assertTrue(result instanceof IncorrectCommand);
 
@@ -175,8 +184,9 @@ class ParserTest {
             }
         };
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
 
-        Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry);
+        Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry, orderList);
         commandReturned.execute();
         assertEquals(Messages.UNKNOWN_COMMAND_MESSAGE, actualOutput.get(0));
     }
@@ -196,8 +206,9 @@ class ParserTest {
             }
         };
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
 
-        Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry);
+        Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry, orderList);
         commandReturned.execute();
         assertEquals(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE, actualOutput.get(0));
     }
@@ -217,8 +228,9 @@ class ParserTest {
             }
         };
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
 
-        Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry);
+        Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry, orderList);
         commandReturned.execute();
         assertEquals(Messages.INVALID_DISH_INDEX, actualOutput.get(0));
     }
@@ -228,8 +240,9 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
-        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry);
+        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry, orderList);
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
         //Test for 1 Dish added to Menu
@@ -247,9 +260,10 @@ class ParserTest {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
         //input name/ argument wrongly
         String testDishInputWithOneIngredient = "add named/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
-        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry);
+        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry, orderList);
         //Test for incorrect Command type returned
         assertFalse(outputCommand instanceof AddDishCommand);
         //Test for no dish added in menu

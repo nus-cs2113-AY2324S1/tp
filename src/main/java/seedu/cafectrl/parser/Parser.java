@@ -1,6 +1,7 @@
 package seedu.cafectrl.parser;
 
 import seedu.cafectrl.Order;
+import seedu.cafectrl.OrderList;
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.DeleteDishCommand;
@@ -62,7 +63,7 @@ public class Parser {
      * @param menu The arraylist object created that stores current tasks
      * @return command requested by the user
      */
-    public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry) {
+    public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry, OrderList orderList) {
         final Matcher matcher = COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Incorrect command format!", ui);
@@ -101,7 +102,7 @@ public class Parser {
             return new ExitCommand(ui, pantry);
 
         case AddOrderCommand.COMMAND_WORD:
-            return prepareOrder(menu, arguments, ui, pantry);
+            return prepareOrder(menu, arguments, ui, pantry, orderList);
 
         default:
             return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE, ui);
@@ -312,7 +313,7 @@ public class Parser {
      * @param arguments string that matches group arguments
      * @return AddOrderCommand if command is valid, IncorrectCommand otherwise
      */
-    private static Command prepareOrder(Menu menu, String arguments, Ui ui, Pantry pantry) {
+    private static Command prepareOrder(Menu menu, String arguments, Ui ui, Pantry pantry, OrderList orderList) {
         final Pattern addOrderArgumentPatter = Pattern.compile(ADD_ORDER_ARGUMENT_STRING);
         Matcher matcher = addOrderArgumentPatter.matcher(arguments);
 
@@ -337,7 +338,7 @@ public class Parser {
             Order order = new Order(dishName, dishQty, usedIngredientList, totalOrderCost);
             System.out.println(order);
 
-            return new AddOrderCommand(order, ui, pantry);
+            return new AddOrderCommand(order, ui, pantry, orderList);
         } catch (Exception e) {
             return new IncorrectCommand("MESSAGE_INVALID_ADD_ORDER_COMMAND_FORMAT"
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
