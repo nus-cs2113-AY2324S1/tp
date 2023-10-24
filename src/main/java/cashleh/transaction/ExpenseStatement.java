@@ -103,16 +103,16 @@ public class ExpenseStatement {
         // Customize the message based on input
         StringBuilder message = new StringBuilder("Here are your corresponding expenses with ");
         if (description != null && !description.isEmpty()) {
-            message.append("<description>: ").append(description).append(" ");
+            message.append("<description>: ").append(description).append(" ||");
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.get()).append(" ");
+            message.append("<amount>: ").append(amount.get()).append(" ||");
         }
         if (date != null) {
-            message.append("<date>: ").append(date).append(" ");
+            message.append("<date>: ").append(date).append(" ||");
         }
         if (category != null) {
-            message.append("<category>: ").append(category).append(" ");
+            message.append("<category>: ").append(category).append(" ||");
         }
         matchingExpenses.add(message.toString());
 

@@ -100,16 +100,16 @@ public class IncomeStatement {
         boolean isMatch = false;
         StringBuilder message = new StringBuilder("Here are your corresponding incomes with ");
         if (description != null && !description.isEmpty()) {
-            message.append("<description>: ").append(description).append(" ");
+            message.append("<description>: ").append(description).append(" ||");
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.get()).append(" ");
+            message.append("<amount>: ").append(amount.get()).append(" ||");
         }
         if (date != null) {
-            message.append("<date>: ").append(date).append(" ");
+            message.append("<date>: ").append(date).append(" ||");
         }
         if (category != null) {
-            message.append("<category>: ").append(category).append(" ");
+            message.append("<category>: ").append(category).append(" ||");
         }
         matchingIncomes.add(message.toString());
         for (Income income : incomeStatement) {
