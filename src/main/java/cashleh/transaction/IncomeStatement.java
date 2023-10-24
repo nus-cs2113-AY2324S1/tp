@@ -81,7 +81,16 @@ public class IncomeStatement {
         Ui.printMultipleText(texts);
     }
 
-    public void findIncome(String description, double amount, LocalDate date, Categories category) throws CashLehMissingTransactionException {
+    /**
+     * Finds and displays incomes that match the specified criteria, including description, amount, date, and category.
+     * @param description The description to filter transactions by. Can be left null or empty.
+     * @param amount The amount to filter transactions by. Set to -1 if no amount is provided by user.
+     * @param date The date to filter transactions by. Set to null if no date is provided by user.
+     * @param category The category to filter transactions by. Set to null if no category is provided by user
+     * @throws CashLehMissingTransactionException if no matching transactions are found.
+     */
+    public void findIncome(String description, double amount, LocalDate date, Categories category)
+            throws CashLehMissingTransactionException {
         ArrayList<String> matchingIncomes = new ArrayList<>();
         boolean isMatch = false;
         StringBuilder message = new StringBuilder("Here are your corresponding incomes with ");

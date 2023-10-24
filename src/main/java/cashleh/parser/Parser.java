@@ -2,12 +2,30 @@ package cashleh.parser;
 
 import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
-import cashleh.commands.*;
+import cashleh.commands.AddExpense;
+import cashleh.commands.AddIncome;
+import cashleh.commands.Command;
+import cashleh.commands.DeleteBudget;
+import cashleh.commands.DeleteExpense;
+import cashleh.commands.DeleteIncome;
+import cashleh.commands.Exit;
+import cashleh.commands.FilterExpense;
+import cashleh.commands.FilterIncome;
+import cashleh.commands.FilterTransaction;
+import cashleh.commands.UpdateBudget;
+import cashleh.commands.ViewBudget;
+import cashleh.commands.ViewExpenses;
+import cashleh.commands.ViewFinancialStatement;
+import cashleh.commands.ViewIncomes;
 import cashleh.exceptions.CashLehDateParsingException;
-import cashleh.transaction.*;
+import cashleh.transaction.Categories;
+import cashleh.transaction.Expense;
 import cashleh.transaction.ExpenseCategories.ExpenseCategory;
+import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.Income;
 import cashleh.transaction.IncomeCategories.IncomeCategory;
 import cashleh.exceptions.CashLehParsingException;
+import cashleh.transaction.IncomeStatement;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -117,11 +135,9 @@ public class Parser {
 
         if (parsedDate == null && parsedCategory == null) {
             return new Expense(expenseName, expenseAmt);
-        }
-        else if (parsedDate == null) {
+        } else if (parsedDate == null) {
             return new Expense(expenseName, expenseAmt, parsedCategory);
-        }
-        else if (parsedCategory == null) {
+        } else if (parsedCategory == null) {
             return new Expense(expenseName, expenseAmt, parsedDate);
         }
         return new Expense(expenseName, expenseAmt, parsedDate, parsedCategory);
@@ -160,11 +176,9 @@ public class Parser {
 
         if (parsedDate == null && parsedCategory == null) {
             return new Income(incomeName, incomeAmt);
-        }
-        else if (parsedDate == null) {
+        } else if (parsedDate == null) {
             return new Income(incomeName, incomeAmt, parsedCategory);
-        }
-        else if (parsedCategory == null) {
+        } else if (parsedCategory == null) {
             return new Income(incomeName, incomeAmt, parsedDate);
         }
         return new Income(incomeName, incomeAmt, parsedDate, parsedCategory);
@@ -186,6 +200,13 @@ public class Parser {
             new DeleteExpense(transactionIndex, expenseStatement) : new DeleteIncome(transactionIndex, incomeStatement);
     }
 
+    /**
+     * Parses and extracts filtering criterion based on the specified transaction type and input string.
+     * @param transactionType The type of transaction to filter (FILTER_EXPENSE, FILTER_INCOME, or FILTER).
+     * @param input The input string to parse and filter.
+     * @return A {@link FindParser} containing the parsed and filtered transaction details.
+     * @throws CashLehParsingException If the input or parsing fails.
+     */
     private FindParser filterDetails (String transactionType, String input) throws CashLehParsingException {
         String[] format = null;
         switch (transactionType) {
@@ -204,14 +225,15 @@ public class Parser {
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String descriptionString = inputDetails.get(transactionType);
         String amountString = inputDetails.get("/amt");
-        String DateString = inputDetails.get("/date");
+        String dateString = inputDetails.get("/date");
         String categoryString = inputDetails.get("/cat");
 
         if ((descriptionString == null || descriptionString.isEmpty()) &&
                 (amountString == null || amountString.isEmpty()) &&
-                (DateString == null || DateString.isEmpty()) &&
+                (dateString == null || dateString.isEmpty()) &&
                 (categoryString == null || categoryString.isEmpty())){
-            throw new CashLehParsingException("Please provide at least one filter criterion (description, amount, date, or category)!");
+            throw new CashLehParsingException("Please provide at least one filter criterion " +
+                    "(description, amount, date, or category)!");
         }
 
         double parsedAmount = -1.0;
@@ -223,9 +245,9 @@ public class Parser {
             }
         }
         LocalDate parsedDate = null;
-        if ((DateString != null) && !DateString.isEmpty()) {
+        if ((dateString != null) && !dateString.isEmpty()) {
             try {
-                parsedDate = DateParser.parse(DateString);
+                parsedDate = DateParser.parse(dateString);
             } catch (CashLehDateParsingException e) {
                 throw new CashLehDateParsingException();
             }

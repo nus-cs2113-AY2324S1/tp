@@ -53,11 +53,9 @@ public class Income extends Transaction {
     public String toString() {
         if (getDate() == null && getCategory() == null) {
             return getDescription() + " (amount: " + getAmount() + ")";
-        }
-        else if (getDate() == null) {
+        } else if (getDate() == null) {
             return getDescription() + " (amount: " + getAmount() + ", category: " + getCategory() + ")";
-        }
-        else if (getCategory() == null) {
+        } else if (getCategory() == null) {
             return getDescription() + " (amount: " + getAmount() + ", date: " + getDate() + ")";
         }
         return getDescription() + " (amount: " + getAmount()
