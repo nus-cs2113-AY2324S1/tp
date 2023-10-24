@@ -12,13 +12,13 @@ class IncomeTest {
 
     @Test
     void testToStringWithoutDate() {
-        String expectedString = "pocket money (amount: 200.0, date: " + LocalDate.now() + ")";
+        String expectedString = "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")";
         assertEquals(testIncome.toString(), expectedString);
     }
 
     @Test
     void testToStringWithDate() {
-        String expectedString = "salary (amount: 8000.0, date: 2023-09-20)";
+        String expectedString = "Income: salary (Amount: 8000.0, Date: 2023-09-20)";
         assertEquals(testIncome2.toString(), expectedString);
     }
 }

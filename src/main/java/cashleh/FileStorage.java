@@ -25,18 +25,18 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class FileStorage {
-    private final String FILEPATH_PREFIX = "data/";
-    private final char INCOME = 'I';
-    private final char EXPENSE = 'E';
-    private String FILE_PATH;
+    private final String filePathPrefix = "data/";
+    private final char incomeType = 'I';
+    private final char expenseType = 'E';
+    private String filePath;
 
     public FileStorage(String userName) {
-        FILE_PATH = FILEPATH_PREFIX + userName + ".txt";
+        filePath = filePathPrefix + userName + ".txt";
     }
 
     public void readFromFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement)
             throws CashLehReadFromFileException, CashLehFileCorruptedException {
-        File file = new File(FILE_PATH);
+        File file = new File(filePath);
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
@@ -67,11 +67,11 @@ public class FileStorage {
                 }
 
                 switch (transactionType) {
-                case INCOME:
+                case incomeType:
                     Income income = getIncome(transactionInfo);
                     incomeStatement.addIncome(income);
                     break;
-                case EXPENSE:
+                case expenseType:
                     Expense expense = getExpense(transactionInfo);
                     expenseStatement.addExpense(expense);
                     break;
@@ -89,7 +89,7 @@ public class FileStorage {
     public void writeToFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement)
             throws CashLehWriteToFileException {
         try {
-            FileWriter fw = new FileWriter(FILE_PATH);
+            FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < incomeStatement.getSize(); i++) {
                 Income income = incomeStatement.getIncome(i);
                 String incomeText = income.toString().trim();

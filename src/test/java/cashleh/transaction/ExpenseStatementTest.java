@@ -37,18 +37,18 @@ class ExpenseStatementTest {
     void testToString() {
         testExpenseStatement.addExpense(testExpense);
         System.out.println(testExpenseStatement);
-        String expectedString = "milk tea (amount: 2.5, date: " + LocalDate.now() + ")";
+        String expectedString = "Expense: milk tea (Amount: 2.5, Date: " + LocalDate.now() + ")";
         assertEquals(testExpenseStatement.toString(), expectedString);
         testExpenseStatement.addExpense(testExpense2);
         System.out.println(testExpenseStatement);
-        String expectedString2 = "milk tea (amount: 2.5, date: " + LocalDate.now() + ")\n" +
-                "CS2113 textbook (amount: 10.0, date: " + LocalDate.now() + ")";
+        String expectedString2 = "Expense: milk tea (Amount: 2.5, Date: " + LocalDate.now() + ")\n" +
+                "Expense: CS2113 textbook (Amount: 10.0, Date: " + LocalDate.now() + ")";
         assertEquals(testExpenseStatement.toString(), expectedString2);
         testExpenseStatement.addExpense(testExpense3);
         System.out.println(testExpenseStatement);
-        String expectedString3 = "milk tea (amount: 2.5, date: " + LocalDate.now() + ")\n" +
-                "CS2113 textbook (amount: 10.0, date: " + LocalDate.now() + ")\n" +
-                "bus fare (amount: 1.8, date: 2023-09-20)";
+        String expectedString3 = "Expense: milk tea (Amount: 2.5, Date: " + LocalDate.now() + ")\n" +
+                "Expense: CS2113 textbook (Amount: 10.0, Date: " + LocalDate.now() + ")\n" +
+                "Expense: bus fare (Amount: 1.8, Date: 2023-09-20)";
         assertEquals(testExpenseStatement.toString(), expectedString3);
     }
 
