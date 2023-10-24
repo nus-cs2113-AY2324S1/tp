@@ -7,8 +7,8 @@ participant Income
 participant Expense
 
 -> AddCashflowCommand: execute()
-AddCashflowCommand -> CashflowList: getInstance()
 AddCashflowCommand -> Ui: getInstance()
+AddCashflowCommand -> CashflowList: getInstance()
 alt income
     create Income
     AddCashflowCommand -> Income: addIncome(amount, incomeType, recur)
