@@ -1,6 +1,7 @@
 package seedu.cafectrl;
 
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 public class Chef {
@@ -17,8 +18,7 @@ public class Chef {
     public void cookDish() {
         try {
             if (!order.isComplete) {
-                ui.showToUser("I'm busy crafting your selected dish in the virtual kitchen of your dreams."
-                        + " Bon appétit!");
+                ui.showToUser(Messages.CHEF_MESSAGE);
                 pantry.decreaseIngredientsStock(order.usedIngredientList);
                 order.setComplete();
             }
