@@ -2,6 +2,7 @@ package cashleh;
 
 import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
+import cashleh.exceptions.CashLehWriteToFileException;
 import cashleh.parser.Parser;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.FinancialStatement;
@@ -16,7 +17,7 @@ public class CashLeh {
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
     private final BudgetHandler budgetHandler = new BudgetHandler(
-            new FinancialStatement(incomeStatement, expenseStatement), new Budget(1));
+        new FinancialStatement(incomeStatement, expenseStatement), new Budget(1));
     private final Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     /**
@@ -37,15 +38,24 @@ public class CashLeh {
 
         Ui.printMultipleText(greetingLines);
 
-        String inputString = input.getInputString();
-        Ui.printText("Hello " + inputString);
+        String userName = input.getInputString();
+        Ui.printText("Hello " + userName);
+        FileStorage fileStorage = new FileStorage(userName);
 
         Ui.printText("Please begin by setting a budget " +
                 "by using the format \"updateBudget DOUBLE\".");
 
+        try {
+            fileStorage.readFromFile(incomeStatement, expenseStatement);
+        } catch (CashLehException e) {
+            Ui.printMultipleText(new String[] {
+                e.getMessage()
+            });
+        }
+
         Command command = null;
         while (!(command instanceof Exit)) {
-            inputString = input.getInputString();
+            String inputString = input.getInputString();
             try {
                 command = parser.parse(inputString);
                 command.execute();
@@ -54,6 +64,14 @@ public class CashLeh {
                         e.getMessage()
                 });
             }
+        }
+
+        try {
+            fileStorage.writeToFile(incomeStatement, expenseStatement);
+        } catch (CashLehWriteToFileException e) {
+            Ui.printMultipleText(new String[]{
+                e.getMessage()
+            });
         }
     }
 

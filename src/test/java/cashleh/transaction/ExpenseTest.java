@@ -12,13 +12,13 @@ class ExpenseTest {
 
     @Test
     void testToStringWithoutDate() {
-        String expectedString = "monthly rent (amount: 1200.0, date: " + LocalDate.now() + ")";
+        String expectedString = "Expense: monthly rent (Amount: 1200.0, Date: " + LocalDate.now() + ")";
         assertEquals(testExpense.toString(), expectedString);
     }
 
     @Test
     void testToStringWithDate() {
-        String expectedString = "utility bill (amount: 10.0, date: 2023-08-15)";
+        String expectedString = "Expense: utility bill (Amount: 10.0, Date: 2023-08-15)";
         assertEquals(testExpense2.toString(), expectedString);
     }
 }

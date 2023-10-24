@@ -41,14 +41,14 @@ class IncomeStatementTest {
         testStatement.addIncome(testIncome);
         testStatement.addIncome(testIncome);
         System.out.println(testStatement);
-        String expectedString = "pocket money (amount: 200.0, date: " + LocalDate.now() + ")\n"
-                + "pocket money (amount: 200.0, date: " + LocalDate.now() + ")";
+        String expectedString = "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")\n"
+                + "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")";
         assertEquals(testStatement.toString(), expectedString);
         testStatement.addIncome(testIncome2);
         System.out.println(testStatement);
-        String expectedString2 = "pocket money (amount: 200.0, date: " + LocalDate.now() + ")\n" +
-                "pocket money (amount: 200.0, date: " + LocalDate.now() + ")\n" +
-                "salary (amount: 8000.0, date: 2023-10-01)";
+        String expectedString2 = "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")\n" +
+                "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")\n" +
+                "Income: salary (Amount: 8000.0, Date: 2023-10-01)";
         assertEquals(testStatement.toString(), expectedString2);
     }
 }
