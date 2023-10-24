@@ -30,7 +30,7 @@ public class Visualizer {
             displayBarChart(cashFlowByCat, type);
             break;
         default:
-            throw new FinancialPlannerException("Chart Type Not Found");
+            throw new FinancialPlannerException(chartType + " Chart Type Not Found");
         }
     }
 
