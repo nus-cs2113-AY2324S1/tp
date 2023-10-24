@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Flashcard {
-    private static int current_max_id = 1;
+    private static int currentMaxId = 1;
     private String frontText;
     private String backText;
     private ArrayList<String> tags;
@@ -25,8 +25,8 @@ public class Flashcard {
 
         lastReviewOn = null;
 
-        current_max_id += 1;
-        id = current_max_id;
+        currentMaxId += 1;
+        id = currentMaxId;
     }
 
     public void setLastReviewOn(LocalDateTime lastReviewOn) {
@@ -35,6 +35,10 @@ public class Flashcard {
 
     public String getFrontText() {
         return frontText;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getBackText() {

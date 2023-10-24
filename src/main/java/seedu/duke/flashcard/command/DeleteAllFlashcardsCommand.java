@@ -1,6 +1,5 @@
 package seedu.duke.flashcard.command;
 
-import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardList;
 
 import java.util.Scanner;
