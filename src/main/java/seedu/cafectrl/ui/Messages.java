@@ -17,6 +17,8 @@ public class Messages {
     public static final String MENU_TOP = "+-----------------------------------------+";
     public static final String MENU_CORNER = "+--------------------------+--------------+";
     public static final String MENU_TITLE = "| Dish Name                |  Price       |";
+    public static final String DISH_NOT_FOUND = "I'm sorry, but it appears that dish is so exclusive "
+            + "it hasn't even made it to our menu yet!";
 
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
