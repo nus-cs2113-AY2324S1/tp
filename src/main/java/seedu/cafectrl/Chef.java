@@ -17,7 +17,8 @@ public class Chef {
     public void cookDish() {
         try {
             if (!order.isComplete) {
-                ui.showToUser("I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!");
+                ui.showToUser("I'm busy crafting your selected dish in the virtual kitchen of your dreams."
+                        + " Bon appétit!");
                 pantry.decreaseIngredientsStock(order.usedIngredientList);
                 order.setComplete();
             }
