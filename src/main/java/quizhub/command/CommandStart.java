@@ -36,7 +36,7 @@ public class CommandStart extends Command{
                 startDetails = commandDetails[1].split(" ")[1].strip();
             }
         }  catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate start details :<");
+            System.out.println("");
             System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
         }
         try {
@@ -78,7 +78,7 @@ public class CommandStart extends Command{
         switch (startMode.toLowerCase()) {
         case "module":
             assert startDetails != null;
-            matchedQuestions = questions.categoriseListByModule(startDetails);
+            matchedQuestions =(startDetails);
             break;
         case "all":
             matchedQuestions = questions.getAllQns();

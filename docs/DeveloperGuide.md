@@ -1,6 +1,5 @@
 # Developer Guide
 
-<<<<<<< .merge_file_0HpctG
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -125,7 +124,6 @@ which they could use to take quizzes to ensure their understanding of the topic.
 | v2.1    | goal-oriented user                    | I can view my overall progress and performance statistics                         | gauge my improvement.                                                     |
 | v2.1    | user aiming for improvement           | I can see how many questions I've answered incorrectly                            | focus on weak areas.                                                      |
 | v2.1    | user committed to learning            | I can review the questions I've answered incorrectly                              | reinforce my knowledge.                                                   |
->>>>>>> .merge_file_eTgh6a
 
 ## Non-Functional Requirements
 
