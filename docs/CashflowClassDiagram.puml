@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide empty members
+!include style.puml
+skinparam ClassBackgroundColor STORAGE_COLOR
+
+Class "{abstract]\nCashflow" as Cashflow
+Class Expense extends Cashflow
+Class Income extends Cashflow
+Class Ui
+Class CashflowList {
+    +addIncome(double, IncomeType, int)
+    +addExpense(double, ExpenseType, int)
+}
+Class AddCashflowCommand #FFFFFF
+
+enum "<<enumeration>>\nExpenseType" as ExpenseType
+enum "<<enumeration>>\nIncomeType" as IncomeType
+
+AddCashflowCommand -left-> "1" Ui
+AddCashflowCommand --> "1" CashflowList
+CashflowList --> "*" Cashflow
+CashflowList ..> Income
+CashflowList ..> Expense
+
+
+@enduml
