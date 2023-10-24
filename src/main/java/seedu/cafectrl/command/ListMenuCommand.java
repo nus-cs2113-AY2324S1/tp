@@ -37,7 +37,7 @@ public class ListMenuCommand extends Command {
     public void printFullMenu(Menu menu, Ui ui) {
         ui.showToUser(Messages.MENU_TOP, Messages.LIST_MENU_MESSAGE,
                 Messages.MENU_CORNER, Messages.MENU_TITLE, Messages.MENU_CORNER);
-        for (int i = 0; i < menu.getSize(); i++) {
+        for(int i =0; i < menu.getSize(); i++) {
             String indexNum = String.valueOf(i + 1);
             String dishName = menu.getDishFromId(i).getName();
             String dishPrice = dollarValue.format(menu.getDishFromId(i).getPrice());
