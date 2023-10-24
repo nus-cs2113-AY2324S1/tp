@@ -30,7 +30,7 @@ public class Parser {
             "     8. edit [question number] /answer [answer] - edits the answer to the question with " +
             "the specified number," +
             System.lineSeparator() +
-            "     9. start - starts the quiz," +
+            "     9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or /normal," +
             System.lineSeparator() +
             "     10. shuffle - shuffle quiz questions to a random order," +
             System.lineSeparator() +
