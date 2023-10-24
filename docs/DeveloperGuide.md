@@ -36,13 +36,33 @@ Demo:
 
 output
 
-![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\Screenshot%202023-10-24%20113526.png)
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visOutput.png)
 
 This feature was implemented with the help of three different classes.
+They are namely: Visualizer, Categorizer, VisCommand (Inherits from abstract Command Class)
+
+VisCommand's Role: 
+1) Read the parameters of the vis command entered by the user
+- `/t` Reads the type of cashflow that the user wants to visualize (income/expense)
+- `/c` Reads the type of visualization tools the user wants (piechart/barchart)
+
+2) Calls the Cateorgizer to sort cashflow (Income/Expense) according to type
+
+3) Calls the Visualizer to display the chart to the user
+
+Categorizer's Role: 
+
+According to the cashflow type (Income/Expense) arugment passed in, the Categorizer sorts the 
+specified cashflow entry according to type using a Hashmap which is returned and used by the Visualizer
+
+Visualizer's Role: 
+
+According to the chart type (Pie/Bar) argument and the Hashmap obtained from the categorizer passed in, 
+the visualizer displays the specified visualization chart by calling the charting library Xchart.
 
 Class Diagram
 
-
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualisationClass.png)
 
 ## Product scope
 ### Target user profile
