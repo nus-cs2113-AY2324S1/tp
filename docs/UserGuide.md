@@ -14,8 +14,6 @@ their flashcard and generell academic progress in the courses they are taking.
 
 ## General explanation of flashcards
 
-
-
 ## Features
 
 ### Listing all flashcards: `list flashcards`
