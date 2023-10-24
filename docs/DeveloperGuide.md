@@ -6,7 +6,10 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Main structure
+Main structure of code is written in [FitTrack](../src/main/java/fittrack/FitTrack.java).
+
+![Main structure](images/FitTrackMainStructure.png "Main Structure")
 
 
 ## Product scope
