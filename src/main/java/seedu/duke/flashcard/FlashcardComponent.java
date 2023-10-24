@@ -31,6 +31,7 @@ public class FlashcardComponent {
         }
 
         //@@author wendelinwemhoener
+        Flashcard.calculateAndUpdateGlobalMaxId(flashcardList);
         ui = new FlashcardUi(flashcardList);
     }
 

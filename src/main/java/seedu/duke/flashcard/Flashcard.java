@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Flashcard {
-    private static int currentMaxId = 1;
+    private static int globalMaxId = 1;
     private String frontText;
     private String backText;
     private ArrayList<String> tags;
@@ -25,8 +25,20 @@ public class Flashcard {
 
         lastReviewOn = null;
 
-        currentMaxId += 1;
-        id = currentMaxId;
+        globalMaxId += 1;
+        id = globalMaxId;
+    }
+
+    public static void calculateAndUpdateGlobalMaxId(FlashcardList flashcardList) {
+        int currentMax = 1;
+
+        for (Flashcard flashcard : flashcardList.getFlashcards()){
+            if (flashcard.getId() > currentMax) {
+                currentMax = flashcard.getId();
+            }
+        }
+
+        globalMaxId = currentMax + 1;
     }
 
     public void setLastReviewOn(LocalDateTime lastReviewOn) {
