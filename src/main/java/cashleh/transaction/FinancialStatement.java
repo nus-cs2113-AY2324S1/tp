@@ -53,21 +53,34 @@ public class FinancialStatement {
      * incomes and expenses by adding a '+' sign to the former and a '-'
      * sign to the latter.
      */
+//    public void printTransactions() {
+//        int listSize = financialStatement.size();
+//        String[] texts = new String[listSize + 1];
+//        texts[0] = "Your current cash on hand amounts to: " + getCashOnHand();
+//        for (int i = 1; i <= listSize; i++) {
+//            String sign = "";
+//            Transaction currentTransaction = financialStatement.get(i - 1);
+//            if (currentTransaction instanceof Income) {
+//                sign = "+";
+//            } else if (currentTransaction instanceof Expense) {
+//                sign = "-";
+//            }
+//            texts[i] = "\t" + i + ". " + sign + " " + currentTransaction.toString();
+//        }
+//        Ui.printMultipleText(texts);
+//    }
+
     public void printTransactions() {
         int listSize = financialStatement.size();
-        String[] texts = new String[listSize + 1];
-        texts[0] = "Your current cash on hand amounts to: " + getCashOnHand();
-        for (int i = 1; i <= listSize; i++) {
-            String sign = "";
-            Transaction currentTransaction = financialStatement.get(i - 1);
-            if (currentTransaction instanceof Income) {
-                sign = "+";
-            } else if (currentTransaction instanceof Expense) {
-                sign = "-";
-            }
-            texts[i] = "\t" + i + ". " + sign + " " + currentTransaction.toString();
+        String[] texts = new String[listSize];
+        for (int i = 0; i < listSize; i++) {
+            Transaction currentTransaction = financialStatement.get(i);
+            String type = (currentTransaction instanceof Income) ? "Income " : "Expense ";
+            String date = currentTransaction.getDate().toString() + " ";
+            String amt = String.valueOf(currentTransaction.getAmount());
+            texts[i] = type + date + currentTransaction.getDescription() + " " + amt;
         }
-        Ui.printMultipleText(texts);
+        Ui.printFinancialStatement(texts);
     }
 
     @Override
