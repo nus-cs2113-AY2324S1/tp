@@ -220,6 +220,36 @@ The start quiz mechanism is facilitated by CommandStart under package quizhub.co
 
 Thereafter the quiz is started by calling the method `startQuiz()` in package `quizhub.questionlist.QuestionList`. Within `startQuiz()`, the program iterates through the list of totalQuestions while blocking out the answers. The user can input their answer in the input field which is utilized to match with the actual answer to provide “correct” or “wrong”. Each correct answer will increment correctAnswers variable by 1. The quiz ends when all the questions are displayed and the total number of correctAnswers will be displayed.
 
+### Short Command - Add Short Answer Question to the Quiz
+
+One of the supported question formats is the Short Answer Question, in which a question
+can be answered with a phrase of a few words, which will be matched to a corresponding answer
+of sufficient similarity. 
+
+It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
+1. `[question]` is the question, phrased as asking the user (i.e. What is 2 + 2? )
+2. `[answer]` is the answer or possible answer(s) that the user must 
+input to count as correct. It is case-insensitive. (i.e. 4, four)
+3. `[module]` is the module that the question belongs in (i.e. CS2113)
+4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard)
+
+Thereafter, the command is returned to the Quizhub component and executed, 
+to add a Question object to the corresponding QuestionList object 
+using the `addToQuestionList` method. This method will analyse the arguments above
+and add the Question to the appropriate list.
+
+### Find Command  - Look for a matching question
+
+Quizhub supports searching for specific questions, by searching matching keywords
+in the format 
+
+`find /[description]` OR `find /[module]`
+i.e. `find /CS2113`, `find /water buffalo` 
+
+This command is passed to the corresponding QuestionList where the `searchList` method
+is called, which will create a new ArrayList of questions that contain the (case-insensitive)
+keyword and subsequently print them. 
+
 # Product scope
 
 ## Our Product
