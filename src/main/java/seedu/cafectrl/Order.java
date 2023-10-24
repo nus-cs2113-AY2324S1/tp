@@ -3,12 +3,13 @@ package seedu.cafectrl;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Order {
+    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     protected String dishName;
     protected int dishQty;
-    protected Dish orderedDish;
     protected ArrayList<Ingredient> usedIngredientList;
     protected boolean isComplete = false;
     protected float totalOrderCost;
@@ -23,7 +24,7 @@ public class Order {
     public String toString() {
         return "Order: " + dishName + " Quantity: "+ dishQty
                 + "\nIngredientList: " + usedIngredientList
-                + "\nTotal Order Cost: $" + totalOrderCost;
+                + "\nTotal Order Cost: $" + dollarValue.format(totalOrderCost);
     }
 
     /**
