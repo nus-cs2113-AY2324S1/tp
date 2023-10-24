@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+@startuml
+
+skinparam Style strictuml
+
+class           BudgetHandler
+class           Budget
+class           Progress
+BudgetHandler -l-> "0..1" Budget : handles >
+BudgetHandler -r-> "0..1" Progress : measures >
+
+class BudgetHandler {
+    +financialStatement: FinancialStatement
+    +deleteBudget(): void
+    +printBasicWarning(): void
+    +printSeriousWarning(): void
+    +printBudget(): void
+}
+
+class Budget {
+    -budget: double
+    -isActive: boolean
+}
+
+class Progress {
+    -progress: double
+    -buildProgressBar(): String
+    +displayProgressBar(): String
+}
+@enduml
+
+@enduml

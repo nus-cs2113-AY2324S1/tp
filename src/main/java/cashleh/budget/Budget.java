@@ -11,7 +11,7 @@ public class Budget {
     private boolean isActive;
     public Budget(double budget) {
         this.budget = budget;
-        this.isActive = true;
+        this.isActive = false;
     }
     public double getBudget() {
         return Math.abs(this.budget);
