@@ -34,7 +34,10 @@ Demo:
 
 `vis /t expense /c pie`
 
-output
+Output
+
+`Displaying piechart for expense`
+A message will be shown telling you that the chart is being displayed
 
 ![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visOutput.png)
 
@@ -60,9 +63,23 @@ Visualizer's Role:
 According to the chart type (Pie/Bar) argument and the Hashmap obtained from the categorizer passed in, 
 the visualizer displays the specified visualization chart by calling the charting library Xchart.
 
-Class Diagram
+### Class Diagram
 
 ![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualisationClass.png)
+
+### Sequence Diagram 
+
+Overall 
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualisationSequence.png)
+
+Categorizer
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\categorizerSequence.png)
+
+Visualizer
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualizerSequence.png)
 
 ## Product scope
 ### Target user profile
