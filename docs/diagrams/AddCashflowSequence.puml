@@ -1,0 +1,31 @@
+@startuml
+
+participant AddCashflowCommand
+participant CashflowList
+participant Income
+participant Expense
+participant Ui
+
+-> AddCashflowCommand: execute()
+AddCashflowCommand -> CashflowList: getInstance()
+CashflowList -> Ui: getInstance()
+alt income
+    AddCashflowCommand -> CashflowList: addIncome(amount, incomeType, recur)
+    create Income
+    CashflowList -> Income: Income(value, type, recur)
+    Income -> Income: addIncomeValue()
+    CashflowList -> CashflowList: add(toAdd)
+    CashflowList -> Ui: printAddedCashflow(toAdd)
+
+else expense
+    AddCashflowCommand -> CashflowList: addExpense(amount, incomeType, recur)
+    create Expense
+    CashflowList -> Expense: Expense(value, type, recur)
+    Expense -> Expense: addExpenseValue()
+    CashflowList -> CashflowList: add(toAdd)
+    CashflowList -> Ui: printAddedCashflow(toAdd)
+else invalid command
+end
+
+hide footbox
+@enduml
