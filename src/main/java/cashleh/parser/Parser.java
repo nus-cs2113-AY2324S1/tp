@@ -1,15 +1,6 @@
 package cashleh.parser;
 
-import cashleh.commands.AddExpense;
-import cashleh.commands.AddIncome;
-import cashleh.commands.Command;
-import cashleh.commands.DeleteExpense;
-import cashleh.commands.DeleteIncome;
-import cashleh.commands.Exit;
-import cashleh.commands.FilterExpense;
-import cashleh.commands.FilterIncome;
-import cashleh.commands.ViewExpenses;
-import cashleh.commands.ViewIncomes;
+import cashleh.commands.*;
 import cashleh.transaction.Expense;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.Income;
@@ -29,6 +20,8 @@ public class Parser {
     private static final String EXIT = "exit";
     private static final String FILTER_EXPENSE = "filterExpense";
     private static final String FILTER_INCOME = "filterIncome";
+    private static final String FILTER = "filter";
+
 
 
     private final ExpenseStatement expenseStatement;
@@ -64,6 +57,9 @@ public class Parser {
         case FILTER_INCOME:
             FindParser incomeToFind = filterDetails(FILTER_INCOME, input);
             return new FilterIncome(incomeToFind, incomeStatement);
+        case FILTER:
+            FindParser transactionToFind = filterDetails(FILTER, input);
+            return new FilterTransaction(transactionToFind, expenseStatement, incomeStatement);
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
@@ -148,6 +144,9 @@ public class Parser {
             break;
         case FILTER_INCOME:
             format = new String[]{FILTER_INCOME, "/amt:optional"};
+            break;
+        case FILTER:
+            format = new String[]{FILTER, "/amt:optional"};
             break;
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");

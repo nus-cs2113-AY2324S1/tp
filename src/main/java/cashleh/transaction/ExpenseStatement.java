@@ -80,7 +80,8 @@ public class ExpenseStatement {
             throw new CashLehMissingTransactionException();
         }
     }
-
+    public void findTransaction(String description, double amount) throws CashLehMissingTransactionException {
+    }
     @Override
     public String toString() {
         return expenseStatement.stream().map(Expense::toString).collect(Collectors.joining("\n"));
