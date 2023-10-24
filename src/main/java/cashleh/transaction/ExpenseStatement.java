@@ -84,7 +84,20 @@ public class ExpenseStatement {
     public void findExpense(String description, double amount) throws CashLehMissingTransactionException {
         ArrayList<String> matchingExpenses = new ArrayList<>();
         boolean isMatch = false;
-        matchingExpenses.add("Here are your corresponding expenses with description:");
+
+        // Customize the message based on input
+        StringBuilder message = new StringBuilder("Here are your corresponding expenses with ");
+        if (description != null && !description.isEmpty()) {
+            message.append("description: ").append(description);
+        }
+        if (amount != -1) {
+            if (description != null && !description.isEmpty()) {
+                message.append(" and ");
+            }
+            message.append("amount: ").append(amount);
+        }
+        matchingExpenses.add(message.toString());
+
         for (Expense expense : expenseStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || expense.getDescription().equals(description);
@@ -100,8 +113,7 @@ public class ExpenseStatement {
             throw new CashLehMissingTransactionException();
         }
     }
-    public void findTransaction(String description, double amount) throws CashLehMissingTransactionException {
-    }
+
     @Override
     public String toString() {
         return expenseStatement.stream().map(Expense::toString).collect(Collectors.joining("\n"));

@@ -70,6 +70,39 @@ public class FinancialStatement {
         Ui.printMultipleText(texts);
     }
 
+    public void findTransaction(String description, double amount) throws CashLehMissingTransactionException {
+        ArrayList<String> matchingTransactions = new ArrayList<>();
+        boolean isMatch = false;
+        StringBuilder message = new StringBuilder("Here are your corresponding transactions with ");
+        if (description != null && !description.isEmpty()) {
+            message.append("description: ").append(description);
+        }
+        if (amount != -1) {
+            if (description != null && !description.isEmpty()) {
+                message.append(" and ");
+            }
+            message.append("amount: ").append(amount);
+        }
+        matchingTransactions.add(message.toString());
+
+        for (Transaction transaction : financialStatement) {
+            boolean descriptionMatch = (description == null) || (description.isEmpty())
+                    || transaction.getDescription().equals(description);
+            boolean amountMatch = (amount == -1) || (transaction.getAmount() == amount);
+            // Determine the sign based on the type of transaction
+            String sign = (transaction instanceof Income) ? "[+] " : "[-] ";
+            if (descriptionMatch && amountMatch) {
+                matchingTransactions.add(sign + transaction.toString());
+                isMatch = true;
+            }
+        }
+        if (isMatch) {
+            Ui.printMultipleText(matchingTransactions);
+        } else {
+            throw new CashLehMissingTransactionException();
+        }
+    }
+
     @Override
     public String toString() {
         return financialStatement.stream().

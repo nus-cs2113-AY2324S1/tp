@@ -3,12 +3,9 @@ package cashleh.parser;
 import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
 import cashleh.commands.*;
-import cashleh.transaction.Income;
-import cashleh.transaction.Expense;
-import cashleh.transaction.IncomeStatement;
+import cashleh.transaction.*;
 import cashleh.transaction.ExpenseCategories.ExpenseCategory;
 import cashleh.transaction.IncomeCategories.IncomeCategory;
-import cashleh.transaction.ExpenseStatement;
 import cashleh.exceptions.CashLehParsingException;
 
 import java.time.LocalDate;

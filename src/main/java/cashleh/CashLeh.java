@@ -17,6 +17,8 @@ public class CashLeh {
     private final IncomeStatement incomeStatement = new IncomeStatement();
     private final BudgetHandler budgetHandler = new BudgetHandler(
             new FinancialStatement(incomeStatement, expenseStatement), new Budget(1));
+    private final FinancialStatement financialStatement = new FinancialStatement(incomeStatement, expenseStatement);
+
     private final Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     /**

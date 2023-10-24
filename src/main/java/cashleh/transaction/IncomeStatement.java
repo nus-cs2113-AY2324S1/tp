@@ -83,7 +83,17 @@ public class IncomeStatement {
     public void findIncome(String description, double amount) throws CashLehMissingTransactionException {
         ArrayList<String> matchingIncomes = new ArrayList<>();
         boolean isMatch = false;
-        matchingIncomes.add("Here are your corresponding incomes with description:");
+        StringBuilder message = new StringBuilder("Here are your corresponding incomes with ");
+        if (description != null && !description.isEmpty()) {
+            message.append("description: ").append(description);
+        }
+        if (amount != -1) {
+            if (description != null && !description.isEmpty()) {
+                message.append(" and ");
+            }
+            message.append("amount: ").append(amount);
+        }
+        matchingIncomes.add(message.toString());
         for (Income income : incomeStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || income.getDescription().equals(description);
@@ -98,8 +108,6 @@ public class IncomeStatement {
         } else {
             throw new CashLehMissingTransactionException();
         }
-    }
-    public void findTransaction(String description, double amount) throws CashLehMissingTransactionException {
     }
 
     @Override
