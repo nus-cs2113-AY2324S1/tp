@@ -18,7 +18,7 @@ Class AddCashflowCommand #FFFFFF
 enum "<<enumeration>>\nExpenseType" as ExpenseType
 enum "<<enumeration>>\nIncomeType" as IncomeType
 
-AddCashflowCommand -left-> "1" Ui
+CashflowList -right-> "1" Ui
 AddCashflowCommand --> "1" CashflowList
 CashflowList --> "*" Cashflow
 CashflowList ..> Income
