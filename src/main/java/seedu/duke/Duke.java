@@ -14,9 +14,13 @@ import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
+import seedu.duke.storage.GetFromTxt;
+import seedu.duke.storage.SaveToTxt;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 import seedu.duke.parser.FindParser;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -27,17 +31,28 @@ public class Duke {
     private Ui ui;
     private ArrayList<Income> incomes;
     private ArrayList<Expense> expenses;
+    private String storagePath;
+    private SaveToTxt save;
+    private GetFromTxt get;
 
     public Duke() {
         ui = new Ui();
         incomes = new ArrayList<>();
         expenses = new ArrayList<>();
+        storagePath = "KaChinnnngggg.txt";
+        save = new SaveToTxt(storagePath);
+        get = new GetFromTxt(storagePath);
     }
     /**
      * This method runs the program.
      */
     public void run() {
         Ui.printWelcomeMessage();
+        try {
+            get.getFromTextFile(incomes, expenses);
+        } catch (FileNotFoundException e) {
+            System.out.println("\tOOPS!!! File not found.");
+        }
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -142,6 +157,7 @@ public class Duke {
             } catch (KaChinnnngException e) {
                 System.out.println(e.getMessage());
             }
+            save.saveIncomeAndExpense(incomes,expenses);
         }
         ui.printGoodbyeMessage();
     }
