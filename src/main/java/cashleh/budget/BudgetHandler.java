@@ -35,7 +35,7 @@ public class BudgetHandler {
         }
         double budgetAmount = budget.getBudget();
         assert budgetAmount > 0;
-        double cashOnHand = this.financialStatement.getCashOnHand();
+        double cashOnHand = this.financialStatement.getNetCash();
         this.budgetProgress = new Progress(cashOnHand, budgetAmount);
     }
     public void deleteBudget() {
@@ -61,7 +61,7 @@ public class BudgetHandler {
      */
     public void printSeriousWarning() throws CashLehBudgetException {
         boolean budgetHasBeenMaxedOut = budgetProgress.getProgress() == 0;
-        double budgetDeficit = (budget.getBudget() - this.financialStatement.getCashOnHand());
+        double budgetDeficit = (budget.getBudget() - this.financialStatement.getNetCash());
         if (budget.isActive() && budgetHasBeenMaxedOut) {
             String text = "Hey watch out you are currently below your budget by: "
                     + budgetDeficit + "\n\tNeed some financial advise? Stop spending so much!";
@@ -82,7 +82,7 @@ public class BudgetHandler {
         setBudgetPercentage();
         assert budgetProgress != null;
         String[] texts = {budget.toString(), "Here's a quick view of how you're doing so far:", "You have a net "
-                + "cash on hand of: " + financialStatement.getCashOnHand(), "You still have the following"
+                + "cash on hand of: " + financialStatement.getNetCash(), "You still have the following"
                 + " percent of your budget left:\n", budgetProgress.displayProgressBar()};
         if (budget.isActive()) {
             printSeriousWarning();

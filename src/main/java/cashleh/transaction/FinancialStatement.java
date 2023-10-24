@@ -43,7 +43,7 @@ public class FinancialStatement {
      * all incomes minus the sum of all expenses.
      * @return cash on hand as double.
      */
-    public double getCashOnHand() {
+    public double getNetCash() {
         return incomeStatement.getTotalIncomeAmount() - expenseStatement.getTotalExpenseAmount();
     }
 

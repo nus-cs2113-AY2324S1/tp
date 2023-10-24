@@ -23,7 +23,7 @@ public class CashLeh {
      * Main entry-point for the application.
      */
     public void run() {
-
+        
         String logo = "    ______           __    __         __  ___\n"
                     + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\\n"
                     + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/\n"
