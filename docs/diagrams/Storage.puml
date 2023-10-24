@@ -5,8 +5,8 @@ skinparam ClassBackgroundColor STORAGE_COLOR
 
 package Storage as StoragePackage {
 Class Storage
-Class "{abstract]\nLoadData" as LoadData
-Class "{abstract]\nSaveData" as SaveData
+Class "{abstract}\nLoadData" as LoadData
+Class "{abstract}\nSaveData" as SaveData
 Class CashflowList
 Class Budget
 Class Cashflow
