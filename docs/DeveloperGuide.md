@@ -1,6 +1,12 @@
 # Developer Guide
 
 ## Acknowledgements
+- **round() method in Cashflow.java**
+  - author: mhadidg
+  - source: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+- **capitalize() method in Cashflow.java**
+  - author: Nick Bolton
+  - source: https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
