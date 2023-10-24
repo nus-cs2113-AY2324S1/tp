@@ -3,7 +3,6 @@ package seedu.cafectrl.command;
 import seedu.cafectrl.Chef;
 import seedu.cafectrl.Order;
 import seedu.cafectrl.OrderList;
-import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
@@ -27,7 +26,6 @@ public class AddOrderCommand extends Command {
         this.orderList = orderList;
     }
     @Override
-
     public void execute() {
         orderList.addOrder(order);
         Chef chef = new Chef(order, pantry, ui);

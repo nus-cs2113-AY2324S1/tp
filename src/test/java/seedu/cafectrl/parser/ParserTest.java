@@ -246,7 +246,7 @@ class ParserTest {
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
         //Test for 1 Dish added to Menu
-        outputCommand.execute(menu, ui, new Pantry(ui));
+        outputCommand.execute();
         assertEquals(1, menu.getSize());
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
@@ -267,7 +267,7 @@ class ParserTest {
         //Test for incorrect Command type returned
         assertFalse(outputCommand instanceof AddDishCommand);
         //Test for no dish added in menu
-        outputCommand.execute(menu, ui, new Pantry(ui));
+        outputCommand.execute();
         assertEquals(0, menu.getSize());
     }
 }
