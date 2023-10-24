@@ -5,7 +5,7 @@ hide empty members
 !include style.puml
 skinparam ClassBackgroundColor STORAGE_COLOR
 
-Class "{abstract]\nCashflow" as Cashflow
+Class "{abstract}\nCashflow" as Cashflow
 Class Expense extends Cashflow
 Class Income extends Cashflow
 Class Ui
