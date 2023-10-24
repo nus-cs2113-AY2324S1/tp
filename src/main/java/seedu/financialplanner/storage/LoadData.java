@@ -65,6 +65,9 @@ public abstract class LoadData {
     private static void loadBudget(String[] split) throws IllegalArgumentException {
         double initial = Double.parseDouble(split[1].trim());
         double current = Double.parseDouble(split[2].trim());
+        if (initial == 0 && current == 0) {
+            return;
+        }
         if (initial < 0 || current < 0) {
             throw new IllegalArgumentException("Negative values for budget");
         }
