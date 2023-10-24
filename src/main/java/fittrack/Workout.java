@@ -10,6 +10,7 @@ public class Workout {
     }
 
     public double getCalories() {
+
         assert calories != 0;
         return calories;
     }
