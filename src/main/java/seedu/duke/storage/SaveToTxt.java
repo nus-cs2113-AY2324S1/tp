@@ -1,7 +1,10 @@
 package seedu.duke.storage;
 
-import seedu.duke.financialrecords.*;
-
+import seedu.duke.financialrecords.Income;
+import seedu.duke.financialrecords.Expense;
+import seedu.duke.financialrecords.Food;
+import seedu.duke.financialrecords.Utilities;
+import seedu.duke.financialrecords.Transport;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,8 +16,8 @@ import java.util.ArrayList;
  * This class handles exceptions for IO errors that may occur during file operations.
  */
 public class SaveToTxt {
-    private final String path;
     private static final String IO_ERROR_MESSAGE = "An error occurred while saving tasks to the file.";
+    private final String path;
 
     /**
      * Construct a new object of the SaveToTxt class with the file path.
@@ -74,7 +77,7 @@ public class SaveToTxt {
                 String expenseDescription = expense.getDescription();
                 String expenseDate = String.valueOf(expense.getDate());;
                 String expenseAmount = String.valueOf(expense.getAmount());
-                
+
                 // Determine the type of Expense and format the line accordingly
                 if (expense.getClass() == Food.class) {
                     textToAdd = "EF" + " | " + expenseDescription + " | " + expenseAmount + " | "

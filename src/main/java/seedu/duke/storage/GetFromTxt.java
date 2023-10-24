@@ -1,11 +1,14 @@
 package seedu.duke.storage;
 
 import seedu.duke.commands.KaChinnnngException;
-import seedu.duke.financialrecords.*;
+import seedu.duke.financialrecords.Income;
+import seedu.duke.financialrecords.Expense;
+import seedu.duke.financialrecords.Food;
+import seedu.duke.financialrecords.Utilities;
+import seedu.duke.financialrecords.Transport;
 import seedu.duke.financialrecords.expensetypes.MealType;
 import seedu.duke.financialrecords.expensetypes.TransportationType;
 import seedu.duke.financialrecords.expensetypes.UtilityType;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,17 +25,22 @@ import java.util.Scanner;
  * when reading data from the file.
  */
 public class GetFromTxt {
-    private final File file;
-    private static final String FILE_CREATION_ERROR =
-            "Something went wrong while creating the file from storage file ";
-    private static final String INDEX_OUT_OF_BOUND_FROM_FILE_ERROR =
-            "Details missed on this line from storage file ";
     private static final String AMOUNT_NOT_SUPPORT_ERROR =
             "Amount field from this line is not supported from storage file ";
+
     private static final String DATE_TIME_FORMAT_ERROR =
             "Date time format incorrect on this line from storage file ";
+
+    private static final String FILE_CREATION_ERROR =
+            "Something went wrong while creating the file from storage file ";
+
+    private static final String INDEX_OUT_OF_BOUND_FROM_FILE_ERROR =
+            "Details missed on this line from storage file ";
+
     private static final String NUMBER_FROM_FILE_INCORRECT =
             "The expense type is incorrect on this line from storage file ";
+
+    private final File file;
 
     /**
      * Construct a new object of the GetFromTxt class with the provided file path.
