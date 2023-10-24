@@ -2,6 +2,7 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
 
@@ -26,7 +27,7 @@ class ListMenuCommandTest {
                 commandOutput.add(parseString);
             }
             @Override
-            public void showToUserFormat(String dishName, String dishPrice) {
+            public void formatListMenu(String dishName, String dishPrice) {
                 String leftAlignFormat = "| %-24s | %-12s |";
                 String parseString = String.format(leftAlignFormat, dishName, dishPrice);
                 commandOutput.add(parseString);
@@ -34,7 +35,7 @@ class ListMenuCommandTest {
         };
 
         Command listMenuCommand = new ListMenuCommand();
-        listMenuCommand.execute(menu, ui);
+        listMenuCommand.execute(menu, ui, new Pantry(ui));
 
         String actualOutput = String.join(",", commandOutput);
 
