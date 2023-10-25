@@ -53,6 +53,12 @@ public class FindParser {
 
         parsedParameters[0] = tokens[typeIndex + 1];
 
+        if("income".equalsIgnoreCase(parsedParameters[0])) {
+            if (fullCommand.contains("/cat")) {
+                throw new KaChinnnngException("The /cat CATEGORY field is not applicable for income.");
+            }
+        }
+
         if (fullCommand.contains("/cat")) {
             int categoryIndex = indexOf(tokens, "/cat");
             if (categoryIndex == tokens.length - 1 || tokens[categoryIndex + 1].startsWith("/")) {
