@@ -5,11 +5,11 @@ actor User
 
 User -> Main: fullUserInput
 activate Main
-Main -> Parser: parseCommand(fullUserInput)
+Main -> Parser: parseCommand(fullUserInput: String)
 activate Parser
 
 alt COMMAND_WORD
-Parser -> Parser: prepareCommand(String requiredArguments)
+Parser -> Parser: prepareCommand(requiredArguments)
 activate Parser
 Parser -> Command: Command()
 activate Command
