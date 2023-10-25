@@ -7,7 +7,8 @@ import quizhub.ui.Ui;
  * Represents a user command to execute an action.
  */
 public class Command {
-    public enum CommandType {HELP, ADD, LIST, EDIT, DELETE, START, SHUFFLE, MARKDIFFICULTY,  END, RESULT, FIND, EXIT, INVALID};
+    public enum CommandType {HELP, ADD, LIST, EDIT, DELETE, START,
+        SHUFFLE, MARKDIFFICULTY,  END, RESULT, FIND, EXIT, INVALID};
     private CommandType commandType;
     /**
      * Creates a new blank command.

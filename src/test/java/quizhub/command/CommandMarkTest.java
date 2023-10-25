@@ -35,8 +35,10 @@ public class CommandMarkTest {
         parser = new Parser();
         mockStorage = new MockStorage(tempFile.toString());
         ui = new Ui(mockStorage, questionList);
-        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL", "short Question2 / Answer2 / Mod2 / NORMAL",
-                "short Question3 / Answer3 / Mod3 / NORMAL", "short Question4 / Answer4 / Mod4/ NORMAL" };
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",
+            "short Question2 / Answer2 / Mod2 / NORMAL",
+            "short Question3 / Answer3 / Mod3 / NORMAL",
+            "short Question4 / Answer4 / Mod4/ NORMAL" };
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question : questionsToAdd) {

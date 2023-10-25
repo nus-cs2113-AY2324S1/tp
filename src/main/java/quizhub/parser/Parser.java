@@ -1,6 +1,17 @@
 package quizhub.parser;
 
-import quizhub.command.*;
+import quizhub.command.Command;
+import quizhub.command.CommandExit;
+import quizhub.command.CommandInvalid;
+import quizhub.command.CommandList;
+import quizhub.command.CommandShortAnswer;
+import quizhub.command.CommandStart;
+import quizhub.command.CommandEdit;
+import quizhub.command.CommandDelete;
+import quizhub.command.CommandFind;
+import quizhub.command.CommandShuffle;
+import quizhub.command.CommandMarkDifficulty;
+import quizhub.command.CommandHelp;
 import quizhub.exception.QuizHubExceptions;
 import quizhub.question.Question;
 
@@ -30,7 +41,8 @@ public class Parser {
             "     8. edit [question number] /answer [answer] - edits the answer to the question with " +
             "the specified number," +
             System.lineSeparator() +
-            "     9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or /normal," +
+            "     9. start /[quiz mode] [start details] /[qn mode] - " +
+            "starts the quiz with option for /module or /all and /random or /normal," +
             System.lineSeparator() +
             "     10. shuffle - shuffle quiz questions to a random order," +
             System.lineSeparator() +
@@ -77,11 +89,9 @@ public class Parser {
             default:
                 return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
             }
-        }
-        catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
             return new CommandInvalid(INVALID_INTEGER_INDEX);
-        }
-        catch (Exception error) {
+        } catch (Exception error) {
             return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
         }
     }
@@ -92,7 +102,8 @@ public class Parser {
      * @param userInput The full user CLI input.
      * @param keyWord The keyword used to partition the user input.
      */
-    public static String getContentAfterKeyword(String userInput, String keyWord) throws ArrayIndexOutOfBoundsException {
+    public static String getContentAfterKeyword(String userInput, String keyWord)
+            throws ArrayIndexOutOfBoundsException {
         String content;
         content = userInput.split(keyWord)[1].strip();
         if (content.isEmpty()) {
@@ -110,19 +121,19 @@ public class Parser {
         Question.QnDifficulty qnDifficulty = Question.QnDifficulty.DEFAULT;
         try {
             switch (difficulty.toLowerCase()) {
-                case "easy":
-                    qnDifficulty = Question.QnDifficulty.EASY;
-                    break;
-                case "hard":
-                    qnDifficulty = Question.QnDifficulty.HARD;
-                    break;
-                case "normal":
-                    qnDifficulty = Question.QnDifficulty.NORMAL;
-                    break;
-                default:
-                    throw new QuizHubExceptions("    Ono! We only support easy, normal and hard difficulty levels" +
-                            System.lineSeparator() +
-                            "    Please only use 'easy', 'normal' or 'hard' for difficulty levels!");
+            case "easy":
+                qnDifficulty = Question.QnDifficulty.EASY;
+                break;
+            case "hard":
+                qnDifficulty = Question.QnDifficulty.HARD;
+                break;
+            case "normal":
+                qnDifficulty = Question.QnDifficulty.NORMAL;
+                break;
+            default:
+                throw new QuizHubExceptions("    Ono! We only support easy, normal and hard difficulty levels" +
+                        System.lineSeparator() +
+                        "    Please only use 'easy', 'normal' or 'hard' for difficulty levels!");
             }
         } catch (QuizHubExceptions incorrectDifficulty){
             System.out.println(incorrectDifficulty.getMessage());

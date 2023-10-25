@@ -116,7 +116,7 @@ public class QuestionList {
      * @param showMessage If true, program will print response message on CLI
      *                    after question is marked as done.
      */
-    public void markQuestionAsDone(int index, boolean showMessage){
+    public void markQuestionAsDone (int index, boolean showMessage){
         try{
             Question question = allQns.get(index-1);
             if(!question.questionIsDone()) {
@@ -253,8 +253,7 @@ public class QuestionList {
         ArrayList<Question> matchedQuestions = new ArrayList<>();
         if(allQns.isEmpty()){
             System.out.println("    Question list is empty! Time to add some OWO");
-        }
-        else {
+        } else {
             System.out.println("    Here are questions that matched your search:");
             for (Question question : allQns) {
                 if(question.getQuestionDescription().toLowerCase().contains(keyword.toLowerCase())){
@@ -276,8 +275,7 @@ public class QuestionList {
         ArrayList<Question> matchedQuestions = new ArrayList<>();
         if(allQns.isEmpty()){
             System.out.println("    Question list is empty! Time to add some OWO");
-        }
-        else {
+        } else {
             System.out.println("    Here are questions that matched your search:");
             for (Question question : allQns) {
                 if(question.getQuestionTiming(true).contains(dateTime)){
@@ -300,8 +298,7 @@ public class QuestionList {
         ArrayList<Question> matchedQuestions = new ArrayList<>();
         if(allQns.isEmpty()){
             System.out.println("    Question list is empty! Time to add some OWO");
-        }
-        else {
+        } else {
             System.out.println("    Here are questions that matched your search:");
             for (Question question : allQns) {
                 if(question.getModule().toLowerCase().contains(module.toLowerCase())){
