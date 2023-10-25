@@ -33,4 +33,8 @@ public class CalorieSumCommand extends Command{
     protected String getHelp() {
         return HELP;
     }
+
+    public double getCalorieSum() {
+        return calorieSum;
+    }
 }
