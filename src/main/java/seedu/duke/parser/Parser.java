@@ -81,6 +81,10 @@ public class Parser {
             resultCommand = "clear_expenses";
         } else if (commandLowerCase.startsWith("clear all")) {
             resultCommand = "clear_all";
+        } else if (commandLowerCase.startsWith("edit income")) {
+            resultCommand = "edit_income";
+        } else if (commandLowerCase.startsWith("edit expense")) {
+            resultCommand = "edit_expense";
         } else {
             resultCommand = "invalid";
         }

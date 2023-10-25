@@ -66,7 +66,9 @@ public class Ui {
      * @param income Income object created from the provided fields
      */
     public static void printIncomeAddedMessage(Income income) {
+        showLineDivider();
         System.out.println("Got it. I've added this income:\n" + income.toString());
+        showLineDivider();
     }
 
     /**
@@ -77,13 +79,14 @@ public class Ui {
     }
 
     public void printExpenseAddedMessage(Expense expense) {
+        showLineDivider();
         System.out.println("Got it. I've added this expense:\n" + expense.toString());
+        showLineDivider();
     }
 
     public void printListExpenseMessage() {
         System.out.println("Here are your expenses:");
     }
-
     public void printMessage(String message) {
         System.out.println(message);
     }
@@ -100,7 +103,7 @@ public class Ui {
     }
 
     public void showMatchingExpenses(List<Expense> matchingExpenses) {
-        if(matchingExpenses.isEmpty()) {
+        if (matchingExpenses.isEmpty()) {
             System.out.println("No matching expenses found.");
         } else {
             System.out.println("Here are the matching expenses in your list:");

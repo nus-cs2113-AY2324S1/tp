@@ -41,13 +41,17 @@ Got it. I've added this income:
 Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
 ____________________________________________________________
 ____________________________________________________________
+Got it. I've added this income:
+Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this expense:
 Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
 ____________________________________________________________
 ____________________________________________________________
-____________________________________________________________
 Here are your incomes:
 1. Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+2. Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
 ____________________________________________________________
 ____________________________________________________________
 Here are your expenses:
@@ -56,13 +60,14 @@ ____________________________________________________________
 ____________________________________________________________
 Here are your incomes:
 1. Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
-Total income is: $5000.00.
+2. Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
+Total income is: $6000.00.
 
 Here are your expenses:
 1. Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
 Total expenses is: $10.00.
 
-Total balance is: $4990.00.
+Total balance is: $5990.00.
 ____________________________________________________________
 ____________________________________________________________
 Noted. This income record has been deleted:
@@ -73,6 +78,11 @@ Noted. This expense record has been deleted:
 Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00
 ____________________________________________________________
 ____________________________________________________________
+Noted. The income record you've specified has been changed:
+Before: Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
+After: Income: end of year bonus | Date: 02/Oct/2023 | Amount: $3000.00
+____________________________________________________________
+____________________________________________________________
 You have cleared the income list
 ____________________________________________________________
 ____________________________________________________________
@@ -80,6 +90,9 @@ You have cleared the expense list
 ____________________________________________________________
 ____________________________________________________________
 Both income and expense list cleared
+____________________________________________________________
+____________________________________________________________
+Oops! Expense 1 does not exist
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
