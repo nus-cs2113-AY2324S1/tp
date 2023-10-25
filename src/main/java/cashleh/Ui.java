@@ -59,7 +59,8 @@ public class Ui {
             descriptionSpace + amountSpace + categorySpace + 7;
 
         // Header
-        printHeader(statementType, totalSpace, idSpace, typeSpace, dateSpace, descriptionSpace, categorySpace, amountSpace);
+        printHeader(statementType, totalSpace, idSpace, typeSpace, dateSpace,
+            descriptionSpace, categorySpace, amountSpace);
 
         double totalIncome = 0.0;
         double totalExpense = 0.0;
@@ -99,6 +100,8 @@ public class Ui {
             printRowText(totalSpace);
             printFooter("Total Expense: $", String.valueOf(totalExpense), totalSpace);
             printRowText(totalSpace);
+            break;
+        default:
             break;
         }
 

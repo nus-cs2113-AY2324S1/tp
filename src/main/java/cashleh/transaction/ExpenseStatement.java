@@ -74,6 +74,12 @@ public class ExpenseStatement {
                 mapToDouble(Expense::getAmount).sum();
     }
 
+    /**
+     * Prints the expense statement, displaying details of all expense transactions.
+     * This method generates a formatted expense statement based on the transactions in the expenseStatement list.
+     * It creates a textual representation of each expense transaction, including its type (Expense), date, description,
+     * amount, and category (if available), and then uses the Ui.printStatement method to display the statement.
+     */
     public void printExpenses() {
         int listSize = expenseStatement.size();
         String[] texts = new String[listSize];
