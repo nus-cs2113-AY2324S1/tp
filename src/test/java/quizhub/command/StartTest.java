@@ -3,7 +3,6 @@ package quizhub.command;
 import org.junit.jupiter.api.io.TempDir;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
-import quizhub.question.Question;
 import quizhub.storage.Storage;
 
 import org.junit.jupiter.api.BeforeEach;

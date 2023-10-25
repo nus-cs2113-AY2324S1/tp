@@ -1,12 +1,10 @@
 package quizhub.parser;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import quizhub.command.Command;
 import quizhub.command.CommandDelete;
-import quizhub.command.CommandShortAnswer;
 import quizhub.command.CommandInvalid;
 
 import java.io.ByteArrayOutputStream;
@@ -45,8 +43,8 @@ class ParserTest {
         parseAndAssertIncorrectWithMessage(resultMessage, invalidIntegers);
     }
 
-    @Test
     /*
+    @Test
     void test_parseCommand_commandShortAnswer() {
         final String validInput = "short What's 9 + 10 / 21";
         CommandShortAnswer result = parseAndAssertCommandType(validInput, CommandShortAnswer.class);

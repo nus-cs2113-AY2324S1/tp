@@ -12,9 +12,7 @@ import quizhub.command.CommandFind;
 import quizhub.command.CommandShuffle;
 import quizhub.command.CommandMarkDifficulty;
 import quizhub.command.CommandHelp;
-import quizhub.exception.QuizHubExceptions;
 import quizhub.question.Question;
-import quizhub.question.ShortAnsQn;
 
 /**
  * Represents a parser that converts user inputs into command objects.
@@ -120,17 +118,17 @@ public class Parser {
      */
     public static Question.QnDifficulty extractQuestionDifficulty(String difficulty) {
         switch (difficulty.toLowerCase()) {
-            case "easy":
-                return Question.QnDifficulty.EASY;
-            case "hard":
-                return Question.QnDifficulty.HARD;
-            case "normal":
-                return Question.QnDifficulty.NORMAL;
-            default:
-                System.out.println("    Ono! We only support easy, normal and hard difficulty levels" +
-                        System.lineSeparator() +
-                        "    Defaulting to NORMAL difficulty level");
-                return Question.QnDifficulty.NORMAL;
+        case "easy":
+            return Question.QnDifficulty.EASY;
+        case "hard":
+            return Question.QnDifficulty.HARD;
+        case "normal":
+            return Question.QnDifficulty.NORMAL;
+        default:
+            System.out.println("    Ono! We only support easy, normal and hard difficulty levels" +
+                    System.lineSeparator() +
+                    "    Defaulting to NORMAL difficulty level");
+            return Question.QnDifficulty.NORMAL;
         }
     }
 
@@ -204,7 +202,7 @@ public class Parser {
     }
 
     /**
-     * Attempt to parse user input into a Edit Command
+     * Attempt to parse user input into an Edit Command
      *
      * @param userInput Raw command entered by the user
      * @return Edit command or an Invalid Command

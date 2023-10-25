@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
@@ -57,6 +56,7 @@ public class CommandFindTest {
     }
 
 
+    /*
     /**
      * Test finding with no criteria
      */
@@ -69,6 +69,7 @@ public class CommandFindTest {
     }
      */
 
+    /*
     /**
      * Test finding by description with no keyword
      */
@@ -82,6 +83,7 @@ public class CommandFindTest {
     }
     */
 
+    /*
     /**
      * Test finding by description with matches
      */
@@ -98,6 +100,7 @@ public class CommandFindTest {
     }
      */
 
+    /*
     /**
      * Test finding by description with no matches
      */

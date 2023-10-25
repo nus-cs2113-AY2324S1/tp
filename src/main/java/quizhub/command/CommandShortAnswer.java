@@ -8,14 +8,14 @@ import quizhub.ui.Ui;
  * Represents a command to add a quiz question.
  */
 public class CommandShortAnswer extends Command {
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as " +
+            "short [question]/[answer]/[module]/[difficulty]!";
+    public static final String MISSING_FIELDS_MSG = "    You have one or more field missing!";
 
     private final String description;
     private final String answer;
     private final String module;
     private final Question.QnDifficulty qnDifficulty;
-    public static final String INVALID_FORMAT_MSG = "    Please format your input as " +
-            "short [question]/[answer]/[module]/[difficulty]!";
-    public static final String MISSING_FIELDS_MSG = "    You have one or more field missing!";
     /**
      * Creates a new question command to add a SHORTANSWER question
      *

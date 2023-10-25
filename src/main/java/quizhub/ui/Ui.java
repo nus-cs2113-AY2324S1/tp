@@ -10,10 +10,10 @@ import java.util.Scanner;
  * Supports CLI interactions with users.
  */
 public class Ui {
+    public static final String INVALID_COMMAND_MSG =  "    Please enter a valid command :0";
     private final Scanner input = new Scanner(System.in);  // Create a Scanner object
     private Storage dataStorage;
     private QuestionList tasks;
-    public static final String INVALID_COMMAND_MSG =  "    Please enter a valid command :0";
     /**
      * Sets up the bridging between the UI and tasks data.
      *

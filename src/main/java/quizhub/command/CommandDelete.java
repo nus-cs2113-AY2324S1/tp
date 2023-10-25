@@ -1,6 +1,5 @@
 package quizhub.command;
 
-import quizhub.parser.Parser;
 import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
@@ -8,9 +7,9 @@ import quizhub.ui.Ui;
  * Represents a command to delete a question.
  */
 public class CommandDelete extends Command {
-    private int qnIndex;
     public static final String INVALID_FORMAT_MSG = "    Please format your input as delete [question number]";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
+    private int qnIndex;
 
     /**
      * Creates a new delete command for a question.
