@@ -1,21 +1,23 @@
 package seedu.duke;
 
 
-import seedu.duke.commands.KaChinnnngException;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.IncomeManager;
-import seedu.duke.commands.ExpenseLister;
-import seedu.duke.commands.ExpenseManager;
-import seedu.duke.commands.UsageInstructions;
-import seedu.duke.commands.IncomeLister;
+import seedu.duke.commands.Balance;
 import seedu.duke.commands.DeleteExpenseCommand;
 import seedu.duke.commands.DeleteIncomeCommand;
+import seedu.duke.commands.EditExpenseCommand;
+import seedu.duke.commands.EditIncomeCommand;
+import seedu.duke.commands.ExpenseLister;
+import seedu.duke.commands.ExpenseManager;
+import seedu.duke.commands.IncomeLister;
+import seedu.duke.commands.IncomeManager;
+import seedu.duke.commands.KaChinnnngException;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.UsageInstructions;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 import java.util.ArrayList;
-import seedu.duke.commands.Balance;
 
 /**
  * This class is the main class of the program.
@@ -116,6 +118,18 @@ public class Duke {
                     ui.showLineDivider();
                     break;
 
+                case "edit_income":
+                    ui.showLineDivider();
+                    new EditIncomeCommand(incomes, fullCommand).execute();
+                    ui.showLineDivider();
+                    break;
+
+                case "edit_expense":
+                    ui.showLineDivider();
+                    new EditExpenseCommand(expenses, fullCommand).execute();
+                    ui.showLineDivider();
+                    break;
+
                 default:
                     ui.showLineDivider();
                     System.out.println("Invalid command. Please try again.");
@@ -124,6 +138,7 @@ public class Duke {
                 }
             } catch (KaChinnnngException e) {
                 System.out.println(e.getMessage());
+                ui.showLineDivider();
             }
         }
         ui.printGoodbyeMessage();

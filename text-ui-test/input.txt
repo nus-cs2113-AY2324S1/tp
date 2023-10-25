@@ -2,10 +2,13 @@ James Gosling
 hi
 help
 add income /description salary for October /date 01/10/2023 /amount 5000.00
+add income /description end of year bonus /date 02/10/2023 /amount 1000.00
 add expense /category food /description lunch /date 01/10/2023 /amount 10.00
 list income
 list expense
 list
 delete income 1
 delete expense 1
+edit income 1 /description end of year bonus /date 02/10/2023 /amount 3000.00
+edit expense 1 /category food /description dinner /date 01/10/2023 /amount 10.00
 exit

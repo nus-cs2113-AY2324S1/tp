@@ -29,9 +29,9 @@ public class DeleteExpenseCommand extends Commands {
         int index = 0;
         try {
             String[] tokens = fullcommand.split(" ", 3);
-            index = Integer.parseInt(tokens[2]);
-            Expense removedExpense = expenses.get(index-1);
-            expenses.remove(index-1);
+            index = Integer.parseInt(tokens[2])-1;
+            Expense removedExpense = expenses.get(index);
+            expenses.remove(index);
             System.out.println("Noted. This expense record has been deleted:");
             System.out.println(removedExpense);
         } catch (ArrayIndexOutOfBoundsException e) {

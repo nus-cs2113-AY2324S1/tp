@@ -83,4 +83,11 @@ public class Ui {
         System.out.println("Here are your expenses:");
     }
 
+    public void printEditIncomeMessage() {
+
+    }
+
+    public void printEditExpenseMessage() {
+
+    }
 }
