@@ -6,18 +6,48 @@
 
 ## Design & implementation
 
-
-![](../docs/Images/budget.png)
-![](../docs/Images/commands.png)
-
 ### Setting, viewing and editing a budget feature
 
 The option to set, view and edit a budget is managed by the `BudgetHandler`. An object of this class is constructed
 with two attributes, of type `FinancialStatement` and `Budget` respectively. It features both a setter and a getter
 which will be needed for the functioning of the overall budget feature.
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Budget Handler
 
+![](./images/budget.png)
+
+### Command
+![](./Images/commands.png)
+
+### String Tokenizer
+
+The String Tokenizer assists in the parsing of user input. It is used to split the user input into a hashmap according to the delimiter/prefix of each command. This allows the developer to more easily customize the commands and add new commands without having to worry about the parsing of the user input.
+
+> **Example**:\
+> `addIncome money /amt 1000 /date 2021-10-10` with prefixes array `{"addIncome", "/amt", "/date"}` will be tokenized into a hash map with the following key-value pairs:\
+> `addIncome: money`\
+> `amt: 1000`\
+> `date: 2021-10-10`
+
+Delimiters can also be specified as optional by adding ":optional" to the end. This allows the user to omit the prefix when entering the command.
+
+#### Implementation
+
+The tokenize function is implemented by the StringTokenizer class. It takes in the user input and the prefixes array and returns a hashmap of the user input.
+
+![](./images/stringTokenizer.png)
+
+**Step 1**\
+Check if all necessary prefixes are present in the user input. If not, throw an exception.
+
+**Step 2**\
+Generate list of PrefixWithPosition (containing the prefix/delimiter and the position in the string) for the delimiters in the user input
+
+**Step 3**\
+Sort the list of PrefixWithPosition by position in order to get the prefixes in the correct order
+
+**Step 4**\
+Create a hashmap of the user input by splitting the string using the prefixes' positions and adding the key-value pairs to the hashmap
 
 ## Product scope
 ### Target user profile
