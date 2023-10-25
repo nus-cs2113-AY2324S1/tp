@@ -69,7 +69,7 @@ public class FinancialStatement {
             String cat = currentTransaction.getCategory() == null ? "-" : currentTransaction.getCategory().toString();
             texts[i] = type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat;
         }
-        Ui.printFinancialStatement(texts);
+        Ui.printStatement("Financial Statement", texts);
     }
 
     @Override

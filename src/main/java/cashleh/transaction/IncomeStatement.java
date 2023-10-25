@@ -75,13 +75,16 @@ public class IncomeStatement {
 
     public void printIncomes() {
         int listSize = incomeStatement.size();
-        String[] texts = new String[listSize + 1];
-        texts[0] = "The current sum of all your incomes amounts to: " + getTotalIncomeAmount();
-        for (int i = 1; i <= listSize; i++) {
-            Income currentIncome = incomeStatement.get(i - 1);
-            texts[i] = "\t" + i + ". " + currentIncome.toString();
+        String[] texts = new String[listSize];
+        for (int i = 0; i < listSize; i++) {
+            Income currentIncome = incomeStatement.get(i);
+            String type = "Income, ";
+            String date = currentIncome.getDate().toString();
+            String amt = String.valueOf(currentIncome.getAmount());
+            String cat = currentIncome.getCategory() == null ? "-" : currentIncome.getCategory().toString();
+            texts[i] = type + date + ", " + currentIncome.getDescription() + ", " + amt + ", " + cat;
         }
-        Ui.printMultipleText(texts);
+        Ui.printStatement("Income Statement", texts);
     }
 
     @Override

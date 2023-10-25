@@ -76,13 +76,16 @@ public class ExpenseStatement {
 
     public void printExpenses() {
         int listSize = expenseStatement.size();
-        String[] texts = new String[listSize + 1];
-        texts[0] = "The current sum of all your expenses amounts to: " + getTotalExpenseAmount();
-        for (int i = 1; i <= listSize; i++) {
-            Expense currentExpense = expenseStatement.get(i - 1);
-            texts[i] = "\t" + i + ". " + currentExpense.toString();
+        String[] texts = new String[listSize];
+        for (int i = 0; i < listSize; i++) {
+            Expense currentExpense = expenseStatement.get(i);
+            String type = "Expense, ";
+            String date = currentExpense.getDate().toString();
+            String amt = String.valueOf(currentExpense.getAmount());
+            String cat = currentExpense.getCategory() == null ? "-" : currentExpense.getCategory().toString();
+            texts[i] = type + date + ", " + currentExpense.getDescription() + ", " + amt + ", " + cat;
         }
-        Ui.printMultipleText(texts);
+        Ui.printStatement("Expense Statement", texts);
     }
 
     @Override

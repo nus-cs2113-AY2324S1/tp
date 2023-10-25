@@ -45,21 +45,21 @@ public class Ui {
      * Responsible for formatting and printing a financial statement based on the provided text data.
      * It computes the total income, total expenditure, and net income and formats the data
      * into a tabular format with headers and footers.
-     *
+     * 
      * @param texts An array of text data containing the financial statement details in a structured format.
      */
-    public static void printFinancialStatement(String[] texts) {
-        final int idSpace = 10;
-        final int typeSpace = 14;
-        final int dateSpace = 20;
-        final int descriptionSpace = 30;
-        final int amountSpace = 20;
-        final int categorySpace = 20;
-        final int totalSpace = idSpace + typeSpace + dateSpace +
+    public static void printStatement(String statementType, String[] texts) {
+        int idSpace = 10;
+        int typeSpace = 14;
+        int dateSpace = 20;
+        int descriptionSpace = 30;
+        int amountSpace = 20;
+        int categorySpace = 20;
+        int totalSpace = idSpace + typeSpace + dateSpace +
             descriptionSpace + amountSpace + categorySpace + 7;
 
         // Header
-        printHeader(totalSpace, idSpace, typeSpace, dateSpace, descriptionSpace, categorySpace, amountSpace);
+        printHeader(statementType, totalSpace, idSpace, typeSpace, dateSpace, descriptionSpace, categorySpace, amountSpace);
 
         double totalIncome = 0.0;
         double totalExpense = 0.0;
@@ -81,14 +81,33 @@ public class Ui {
         }
 
         // Footer
-        double netIncome = totalIncome - totalExpense;
-        printFooter(String.valueOf(totalIncome), String.valueOf(totalExpense), String.valueOf(netIncome), totalSpace);
+        switch (statementType) {
+        case "Financial Statement":
+            double netIncome = totalIncome - totalExpense;
+            printRowText(totalSpace);
+            printFooter("Total Income: $", String.valueOf(totalIncome), totalSpace);
+            printFooter("Total Expense: $", String.valueOf(totalExpense), totalSpace);
+            printFooter("Net Income: $", String.valueOf(netIncome), totalSpace);
+            printRowText(totalSpace);
+            break;
+        case "Income Statement":
+            printRowText(totalSpace);
+            printFooter("Total Income: $", String.valueOf(totalIncome), totalSpace);
+            printRowText(totalSpace);
+            break;
+        case "Expense Statement":
+            printRowText(totalSpace);
+            printFooter("Total Expense: $", String.valueOf(totalExpense), totalSpace);
+            printRowText(totalSpace);
+            break;
+        }
+
     }
 
-    private static void printHeader(int totalSpace, int idSpace, int typeSpace, int dateSpace
+    private static void printHeader(String statementType, int totalSpace, int idSpace, int typeSpace, int dateSpace
         , int descriptionSpace, int categorySpace, int amountSpace) {
         System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
-        System.out.println("|" + centerText("Overall Financial Statement", totalSpace - 2) + "|");
+        System.out.println("|" + centerText(statementType, totalSpace - 2) + "|");
 
         System.out.println("+" + repeatChars('-', idSpace) + "+" + repeatChars('-', typeSpace) + "+"
             + repeatChars('-', dateSpace) + "+" + repeatChars('-', descriptionSpace) + "+"
@@ -109,22 +128,14 @@ public class Ui {
             + "|" + centerText(category, categorySpace) + "|" + centerText(sign + " $" + amount, amountSpace) + "|");
     }
 
-    private static void printFooter(String totalIncome, String totalExpense, String netIncome, int totalSpace) {
-        String totalIncomeLabel = "Total Income: $";
-        String totalExpenseLabel = "Total Expenses: $";
-        String netIncomeLabel = "Net Income: $";
+    private static void printFooter(String label, String total, int totalSpace) {
+        String totalString = "| " + label + total +
+            " ".repeat(totalSpace - label.length() - total.length() - 3) + "|";
 
-        String totalIncomeString = "| " + totalIncomeLabel + totalIncome +
-            " ".repeat(totalSpace - totalIncomeLabel.length() - totalIncome.length() - 3) + "|";
-        String totalExpenseString = "| " + totalExpenseLabel + totalExpense +
-            " ".repeat(totalSpace - totalExpenseLabel.length() - totalExpense.length() - 3) + "|";
-        String netIncomeString = "| " + netIncomeLabel +  netIncome +
-            " ".repeat(totalSpace - netIncomeLabel.length() - netIncome.length() - 3) + "|";
+        System.out.println(totalString);
+    }
 
-        System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
-        System.out.println(totalIncomeString);
-        System.out.println(totalExpenseString);
-        System.out.println(netIncomeString);
+    private static void printRowText(int totalSpace) {
         System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
     }
 
@@ -138,4 +149,5 @@ public class Ui {
     private static String repeatChars(char character, int count) {
         return new String(new char[count]).replace('\0', character);
     }
+
 }
