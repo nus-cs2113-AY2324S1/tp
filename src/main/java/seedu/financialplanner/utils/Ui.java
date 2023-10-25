@@ -34,6 +34,7 @@ public class Ui {
     }
 
     public void showMessage(String message) {
+        assert !message.isEmpty();
         System.out.println(message);
     }
 
