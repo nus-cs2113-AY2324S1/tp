@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import quizhub.command.Command;
+import quizhub.command.CommandDelete;
 import quizhub.command.CommandShortAnswer;
 import quizhub.command.CommandInvalid;
 
@@ -35,12 +36,13 @@ class ParserTest {
 
     @Test
     void test_parseCommand_invalidIntegerCommand() {
-        final String[] emptyInputs = {
-            "delete",
-            "delete system32"
+        final String[] invalidIntegers = {
+            "delete system32",
+            "delete 1111111111111111111111111111111111111111111111111"
         };
-        final String resultMessage = Parser.INVALID_INTEGER_INDEX_MSG;
-        parseAndAssertIncorrectWithMessage(resultMessage, emptyInputs);
+        final String resultMessage = Parser.INVALID_INTEGER_INDEX_MSG +
+                System.lineSeparator() + CommandDelete.INVALID_FORMAT_MSG;
+        parseAndAssertIncorrectWithMessage(resultMessage, invalidIntegers);
     }
 
     @Test

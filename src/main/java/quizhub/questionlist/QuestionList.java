@@ -333,35 +333,6 @@ public class QuestionList {
         }
         return matchedQuestions;
     }
-
-    /**
-     * Search for a question in the current question list.
-     * Depending on user command, this method will search by
-     * either description matches or module matches.
-     *
-     * @param input Full user command input.
-     */
-    public void searchList(String input){
-        String searchCriteria;
-        String searchKeyword;
-        try {
-            searchCriteria = input.split("/")[1].strip().split(" ")[0].strip();
-        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate if you are searching by description or module :<");
-            System.out.println("    Please format your input as find /description [description] " +
-                                    "or find /module [module]!");
-            return;
-        }
-        try{
-            searchKeyword = input.split("/" + searchCriteria)[1].strip();
-            searchListByDescription(searchKeyword);
-        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate the keywords you are searching by :<");
-            System.out.println("    Please format your input as find /description [description] " +
-                                    "or find /module [module]!");
-        }
-
-    }
     /**
      * Returns the size of current question list.
      */

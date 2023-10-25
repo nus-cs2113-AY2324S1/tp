@@ -7,14 +7,24 @@ import quizhub.ui.Ui;
  * Represents a command to search for a task.
  */
 public class CommandFind extends Command{
+
+    private String searchCriteria;
     private String searchDetails;
+
+    public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate " +
+            "if you are searching by description or module :<";
+    public static final String MISSING_KEYWORD_MSG = "    Ono! You did not indicate " +
+            "the keywords you are searching by :<";
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as find " +
+            "/description [description] or find /module [module]!";
     /**
      * Creates a new find command to search for a task.
      *
      * @param searchDetails User input containing details of what to search.
      */
-    public CommandFind(String searchDetails){
+    public CommandFind(String searchCriteria, String searchDetails){
         super((CommandType.FIND));
+        this.searchCriteria = searchCriteria;
         this.searchDetails = searchDetails;
     }
 
@@ -29,6 +39,15 @@ public class CommandFind extends Command{
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert questions != null && dataStorage != null && ui != null : "Invalid null parameter";
-        questions.searchList(searchDetails);
+        switch (searchCriteria) {
+        case "description":
+            questions.searchListByDescription(searchDetails);
+            break;
+        case "module":
+            questions.searchListByModule(searchDetails);
+            break;
+        default:
+            ui.displayMessage(INVALID_FORMAT_MSG);
+        }
     }
 }
