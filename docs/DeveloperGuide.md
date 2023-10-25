@@ -10,7 +10,7 @@
 
 ### Parser
 
-![Parser Parsing User Input Sequence Diagram](ParserParseCommand.png)
+![Parser Parsing User Input Sequence Diagram](Parser.png)
 
 *figure 1: Parser Parsing User Input Sequence Diagram*
 
