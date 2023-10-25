@@ -11,7 +11,7 @@ public class Pantry {
 
     private ArrayList<Ingredient> pantryStock;
     private ArrayList<Dish> menuItems;
-    private  Ui ui;
+    private Ui ui;
 
     public Pantry(Ui ui) {
         this.ui = ui;
@@ -39,7 +39,7 @@ public class Pantry {
     }
 
     /**
-     * Writes the pantry stock to storage, e.g., by write to a file (pantry.txt).
+     * Writes the pantry stock to storage, e.g., by writing to a file (pantry.txt).
      */
     public void writeToPantryStorage() {
         //TODO: Add file writer to write update pantry.txt
