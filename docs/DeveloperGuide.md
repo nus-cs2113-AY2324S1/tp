@@ -36,6 +36,15 @@ The App consists of eight components.
 * [**`Data`**](#data-component): Holds the data of the app in memory.
 * [**`Command`**](#command-component): The command executor.
 
+### Storage Component
+![Structure of Storage Load](images/StorageLoad.png)
+
+**API** : [`Storage.java`](../src/main/java/fittrack/storage/Storage.java)
+
+The `Storage` component,
+* can save user profile data in text format and load it back
+* can save meals in text format and load it back
+* can save workouts in text format and load it back
 
 ## Product scope
 ### Target user profile
