@@ -25,7 +25,7 @@ main -> ui ++: ui.printWelcome()
 note right: prints welcome message to user
 return
 
-group if [!storage.isProfileFileEmpty]
+group opt [!storage.isProfileFileEmpty]
     main -> storage ++: isProfileFileEmpty()
     note right: checks for profile data from previous run
     return :boolean
@@ -34,7 +34,7 @@ group if [!storage.isProfileFileEmpty]
     note left: load file data in profile file into UserProfile
     storage -> pDecoder ++: decodeUserProfile(encodedUserProfile: List<String>)
     note right: decode the file contents and store in UserProfile
-    return __:UserProfile__
+    return :UserProfile
     return :UserProfile
 
     main -> ui ++: printPrompt()
@@ -46,8 +46,8 @@ note left: load meals in file to mealList
 storage -> mDecoder ++: decodeMealList(encodedMealList: List<String>)
 note right: decode the file contents and store in MealList
 mDecoder -> mDecoder ++: decodeMealsFromString(encodedMeal: String)
-return __:Meal__
-return __:MealList__
+return :Meal
+return :MealList
 return :MealList
 
 main -> storage ++: workoutLoad()
@@ -55,8 +55,8 @@ note left: load workouts in file to workoutList
 storage -> wDecoder ++: decodeWorkoutList(encodedWorkoutList: List<String>)
 note right: decode the file contents and store in WorkoutList
 wDecoder -> wDecoder ++: decodeMealsFromString(encodedWorkout: String)
-return __:Workout__
-return __:WorkoutList__
+return :Workout
+return :WorkoutList
 return :WorkoutList
 
 @enduml
