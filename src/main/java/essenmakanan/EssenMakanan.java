@@ -31,6 +31,7 @@ public class EssenMakanan {
 
         Command command = null;
         do {
+            Ui.showCommands();
             input = in.nextLine();
             try {
                 command = parser.parseCommand(input, recipes, ingredients);

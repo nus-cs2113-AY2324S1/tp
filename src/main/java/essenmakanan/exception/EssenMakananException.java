@@ -13,4 +13,8 @@ public class EssenMakananException extends Exception {
     public String getMessage() {
         return ("EssenMakanan Exception!");
     }
+
+    public void handleException() {
+        System.out.println("EssenMakanan Exception!");
+    }
 }

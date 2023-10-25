@@ -19,6 +19,6 @@ public class AddRecipeCommand extends Command {
         String recipeTitle = RecipeParser.parseRecipeTitle(toAdd);
         Recipe newRecipe = new Recipe(recipeTitle);
         recipes.addRecipe(newRecipe);
-        ui.showRecentAddedRecipe(recipeTitle);
+        ui.printAddRecipeSuccess(recipeTitle);
     }
 }
