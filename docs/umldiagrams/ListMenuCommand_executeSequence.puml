@@ -1,0 +1,56 @@
+@startuml
+!define COMMAND class ListMenuCommand
+!define UI class Ui
+!define MENU class Menu
+!define DISH class Dish
+!define PARSER class Parser
+autonumber
+
+
+
+--> "ListMenuCommand" : execute()
+    activate "ListMenuCommand"
+    alt menu.getSize() == 0
+        "ListMenuCommand" --> "ListMenuCommand" : printEmptyMenu(ui)
+        "ListMenuCommand" --> "Ui" : showToUser(MENU_EMPTY_MESSAGE : String)
+        activate "Ui"
+        Ui -> Ui : showToUser(message: String)
+        activate Ui
+        return
+        return
+    else
+        "ListMenuCommand" --> "ListMenuCommand" : printFullMenu(menu, ui)
+        "ListMenuCommand" --> "Ui" : showToUser(MENU_FULL_MESSAGE : String)
+        activate "Ui"
+        Ui -> Ui : showToUser(message: String)
+        activate Ui
+        return
+        return
+        loop Dish : Menu
+            "ListMenuCommand" --> "Menu" : getDishFromId(id)
+            activate Menu
+            "Menu" --> "ListMenuCommand" : (selectedDish : Dish)
+            deactivate Menu
+            "ListMenuCommand" --> "Dish" : selectedDish.getName()
+            activate "Dish"
+            "Dish" --> "ListMenuCommand" : (dishName : String)
+            "ListMenuCommand" --> "Dish" : selectedDish.getPrice()
+            "Dish" --> "ListMenuCommand" : (dishPrice : String)
+            deactivate "Dish"
+            "ListMenuCommand" --> "Ui" : formatListMenu(indexNum + ". " + dishName," $" + dishPrice)
+            activate Ui
+            return
+        end
+        "ListMenuCommand" --> "Ui" : showToUser(MENU_FULL_END_MESSAGE : String)
+        activate "Ui"
+        Ui -> Ui : showToUser(message: String)
+        activate Ui
+        return
+        return
+
+
+end
+return
+
+
+@enduml

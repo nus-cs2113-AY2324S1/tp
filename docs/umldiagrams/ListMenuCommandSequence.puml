@@ -1,0 +1,72 @@
+@startuml
+
+hide footbox
+autonumber
+activate ": CafeCtrl"
+
+": CafeCtrl" -> "Ui" : receiveUserInput()
+activate "Ui"
+"Ui" --> ": CafeCtrl" : userInput : String
+deactivate "Ui"
+
+": CafeCtrl" -> "Parser" : Parser.parseCommand(userInput)
+activate "Parser"
+
+alt commandWord
+
+    "Parser" -> "Parser" : prepareListMenu(menu, ui)
+    activate "Parser"
+    "Parser" --> ": CafeCtrl" : new ListMenuCommand(menu, ui)
+    deactivate "Parser"
+
+else other command
+
+end
+": CafeCtrl" --> "ListMenuCommand" : execute()
+    activate "ListMenuCommand"
+    alt menu.getSize() == 0
+        "ListMenuCommand" --> "ListMenuCommand" : printEmptyMenu(ui)
+        "ListMenuCommand" --> "Ui" : showToUser(MENU_EMPTY_MESSAGE : String)
+        activate "Ui"
+        Ui -> Ui : showToUser(message: String)
+        activate Ui
+        return
+        return
+    else
+        "ListMenuCommand" --> "ListMenuCommand" : printFullMenu(menu, ui)
+        "ListMenuCommand" --> "Ui" : showToUser(MENU_FULL_MESSAGE : String)
+        activate "Ui"
+        Ui -> Ui : showToUser(message: String)
+        activate Ui
+        return
+        return
+        loop Dish : Menu
+            "ListMenuCommand" --> "Menu" : getDishFromId(id)
+            activate Menu
+            "Menu" --> "ListMenuCommand" : (selectedDish : Dish)
+            deactivate Menu
+            "ListMenuCommand" --> "Dish" : selectedDish.getName()
+            activate "Dish"
+            "Dish" --> "ListMenuCommand" : (dishName : String)
+            "ListMenuCommand" --> "Dish" : selectedDish.getPrice()
+            "Dish" --> "ListMenuCommand" : (dishPrice : String)
+            deactivate "Dish"
+            "ListMenuCommand" --> "Ui" : formatListMenu(indexNum + ". " + dishName," $" + dishPrice)
+            activate Ui
+            return
+        end
+        "ListMenuCommand" --> "Ui" : showToUser(MENU_FULL_END_MESSAGE : String)
+        activate "Ui"
+        Ui -> Ui : showToUser(message: String)
+        activate Ui
+        return
+        return
+
+"Parser" --> ": CafeCtrl" : command : Command
+deactivate "Parser"
+
+else other command
+end
+deactivate ": CafeCtrl"
+
+@enduml
