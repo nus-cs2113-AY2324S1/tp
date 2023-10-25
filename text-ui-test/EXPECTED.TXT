@@ -1,10 +1,17 @@
+--------------------------------------------
 Welcome to Essen Makanan!!! A one-stop place to track the
- ingredients in your kitchen and store your favourite recipes
+ingredients in your kitchen and store your favourite recipes
+To get started, type [help] for list of commands
 --------------------------------------------
-Enter the number for the function you want
-1. Recipe
-2. Ingredient
-type bye to exit
+Here are the commands currently available:
+- Add recipe. [add r/RECIPE_NAME]
+- View all recipes. [view r]
+- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [...] ]
+	Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
+- View all ingredients. [view i]
+- Edit an ingredient. [edit i/INGREDIENT_NAME]
+- Exit application [exit]
 --------------------------------------------
-Please enter valid input.
+--------------------------------------------
 Hope you had fun! See you again!
+--------------------------------------------
