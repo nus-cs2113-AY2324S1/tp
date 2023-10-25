@@ -18,7 +18,21 @@ the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList
 
 ![incomeManager_sequence_diagram.png](..%2Fimages%2FincomeManager_sequence_diagram.png)
 
+### Find Command
+The FindCommand is facilitated by `FindCommand`, `FindParser`, `Ui`,`ExpenseList` and `IncomeList`.
 
+1. The user will first input the command to find the expense or income.
+```
+find /t <type> /cat [category] /de [description] /date [date]
+```
+2. The inputs will then be passed to `FindParser` to get the necessary fields such as type, category, description and date.
+3. The FindCommand is then instantiated with the necessary fields.
+4. Users can choose to search through the expense list or income list.
+5. If users searches through the income list, either the description or date will be used to search through the income list.
+6. If users searches through the expense list, either the category or date will be used to search through the expense list.
+7. The execute method will then be called to search through the list and return the list of expenses or incomes that matches the search criteria.
+
+![FindCommand_SequenceDiagram.png](..%2Fimages%2FFindCommand_SequenceDiagram.png)
 ## Product scope
 ### Target user profile
 
@@ -30,10 +44,16 @@ the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                      | So that I can ...                                      |
+|---------|----------|------------------------------------|--------------------------------------------------------|
+| v1.0    |new user| see usage instructions             | refer to them when I forget how to use the application |
+| v1.0    |user| add new income entry               | track all my incomes                                   |
+| v1.0    |user| add new expense entry              | track all of my expenses                               |
+| v1.0    |user| delete income entry                | remove incomes that I no longer want to track          |
+| v1.0    |user| delete expense entry               | remove expenses that I no longer want to track         |
+| v1.0    |user| list both income and expense entry | view all my expenses and incomes                       |
+| v1.0    |user| check my balace                    | better bugdet my expenditures                          |
+
 
 ## Non-Functional Requirements
 
