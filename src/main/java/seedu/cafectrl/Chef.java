@@ -1,6 +1,7 @@
 package seedu.cafectrl;
 
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 public class Chef {
@@ -16,8 +17,11 @@ public class Chef {
 
     public void cookDish() {
         try {
-            pantry.decreaseIngredientsStock(order.usedIngredientList);
-            order.setComplete();
+            if (!order.isComplete) {
+                ui.showToUser(Messages.CHEF_MESSAGE);
+                pantry.decreaseIngredientsStock(order.usedIngredientList);
+                order.setComplete();
+            }
             ui.showToUser("Is order completed?: " + order.isComplete);
         } catch (Exception e) {
             ui.showToUser("Unable to cook: " + e.getMessage());

@@ -2,7 +2,6 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
@@ -20,11 +19,10 @@ class AddDishCommandTest {
         //creating a dish
         ingredients.add(new Ingredient("chicken", 100, "g"));
         Dish dish = new Dish("Chicken Rice", ingredients, (float) 1.00);
-
-        AddDishCommand addDishCommand = new AddDishCommand(dish);
-
         Ui ui = new Ui();
-        addDishCommand.execute(menu, ui, new Pantry(ui));
+
+        AddDishCommand addDishCommand = new AddDishCommand(dish, menu, ui);
+        addDishCommand.execute();
 
         assertEquals(1, menu.getMenuItemsList().size());
     }

@@ -66,4 +66,6 @@ public class Messages {
     public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
             + "for buy ingredient command.";
     public static final String INVALID_ADD_ORDER_FORMAT_MESSAGE = "Error: Incorrect format for the add order command.";
+    public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
+            + "in the virtual kitchen of your dreams. Bon appétit!";
 }
