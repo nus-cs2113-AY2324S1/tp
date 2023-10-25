@@ -5,7 +5,7 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 /**
  * Represents a Financial Statement in the CashLeh application.
@@ -83,7 +83,7 @@ public class FinancialStatement {
      * @param category The category to filter transactions by. Set to null if no category is provided by user
      * @throws CashLehMissingTransactionException if no matching transactions are found.
      */
-    public void findTransaction(String description, Optional amount, LocalDate date, Categories category)
+    public void findTransaction(String description, OptionalDouble amount, LocalDate date, Categories category)
             throws CashLehMissingTransactionException {
         ArrayList<String> matchingTransactions = new ArrayList<>();
         boolean isMatch = false;
@@ -92,7 +92,7 @@ public class FinancialStatement {
             message.append("<description>: ").append(description).append(" ||");
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.get()).append(" ||");
+            message.append("<amount>: ").append(amount.getAsDouble()).append(" ||");
         }
         if (date != null) {
             message.append("<date>: ").append(date).append(" ||");
@@ -105,7 +105,7 @@ public class FinancialStatement {
         for (Transaction transaction : financialStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || transaction.getDescription().equals(description);
-            boolean amountMatch = (amount.isEmpty()) || (transaction.getAmount() == (double)amount.get());
+            boolean amountMatch = (amount.isEmpty()) || (transaction.getAmount() == amount.getAsDouble());
             boolean dateMatch = (date == null) || (transaction.getDate().equals(date));
             boolean categoryMatch = (category == null) ||
                     (String.valueOf(transaction.getCategory()).equals(String.valueOf(category)));

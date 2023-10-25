@@ -6,7 +6,7 @@ import cashleh.Ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 /**
  * Represents an Income Statement in the CashLeh application.
@@ -94,7 +94,7 @@ public class IncomeStatement {
      * @param category The category to filter transactions by. Set to null if no category is provided by user
      * @throws CashLehMissingTransactionException if no matching transactions are found.
      */
-    public void findIncome(String description, Optional amount, LocalDate date, Categories category)
+    public void findIncome(String description, OptionalDouble amount, LocalDate date, Categories category)
             throws CashLehMissingTransactionException {
         ArrayList<String> matchingIncomes = new ArrayList<>();
         boolean isMatch = false;
@@ -103,7 +103,7 @@ public class IncomeStatement {
             message.append("<description>: ").append(description).append(" ||");
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.get()).append(" ||");
+            message.append("<amount>: ").append(amount.getAsDouble()).append(" ||");
         }
         if (date != null) {
             message.append("<date>: ").append(date).append(" ||");
@@ -115,7 +115,7 @@ public class IncomeStatement {
         for (Income income : incomeStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || income.getDescription().equals(description);
-            boolean amountMatch = (amount.isEmpty()) || (income.getAmount() == (double)amount.get());
+            boolean amountMatch = (amount.isEmpty()) || (income.getAmount() == amount.getAsDouble());
             boolean dateMatch = (date == null) || (income.getDate().equals(date));
             boolean categoryMatch = (category == null) || (income.getCategory().equals(category));
             if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {

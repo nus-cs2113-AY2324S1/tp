@@ -6,7 +6,7 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 /**
  * Represents an Expense Statement in the CashLeh application.
@@ -95,7 +95,7 @@ public class ExpenseStatement {
      * @param category The category to filter transactions by. Set to null if no category is provided by user
      * @throws CashLehMissingTransactionException if no matching transactions are found.
      */
-    public void findExpense(String description, Optional amount, LocalDate date, Categories category)
+    public void findExpense(String description, OptionalDouble amount, LocalDate date, Categories category)
             throws CashLehMissingTransactionException {
         ArrayList<String> matchingExpenses = new ArrayList<>();
         boolean isMatch = false;
@@ -106,7 +106,7 @@ public class ExpenseStatement {
             message.append("<description>: ").append(description).append(" ||");
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.get()).append(" ||");
+            message.append("<amount>: ").append(amount.getAsDouble()).append(" ||");
         }
         if (date != null) {
             message.append("<date>: ").append(date).append(" ||");
@@ -119,7 +119,7 @@ public class ExpenseStatement {
         for (Expense expense : expenseStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || expense.getDescription().equals(description);
-            boolean amountMatch = (amount.isEmpty()) || (expense.getAmount() == (double)amount.get());
+            boolean amountMatch = (amount.isEmpty()) || (expense.getAmount() == amount.getAsDouble());
             boolean dateMatch = (date == null) || (expense.getDate().equals(date));
             boolean categoryMatch = (category == null) || (expense.getCategory().equals(category));
             if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
