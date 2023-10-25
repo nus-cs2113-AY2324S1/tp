@@ -10,21 +10,42 @@
 
 ### Parser
 
-![Parser Parsing User Input Sequence Diagram](Parser.png)
+![Parser Parsing User Input Sequence Diagram](umlimages/Parser.png)
 
-*figure 1: Parser Parsing User Input Sequence Diagram*
+*Figure 1: Parser Parsing User Input Sequence Diagram*
 
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
 ## Feature
+### Adding a Dish
+
+### List Menu
+
+### List Ingredients
+![List Ingredient Execution](umlimages/ListIngredientCommand_execute.png)
+
+*Figure 2: Execution of list_ingredient command*
+
+API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
+
+| No | Step                          | Description                                                                                                                                                                                                                                                                                                                                                                              |
+|----|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | Initialization                | The sequence begins with the `Main` class invoking the `execute` method of the `ListIngredientCommand` after parsing a user command.                                                                                                                                                                                                                                                     |
+| 2-3  | Interaction with 'Menu'       | The `ListIngredientCommand` communicates with the `Menu` class, invoking the `getMenuItemsList()` method to retrieve a list of menu items. The function returns an ArrayList of objects of 'Dish' type.                                                                                                                                                                                  |
+| 4  | Interaction with 'Ui'         | The `ListIngredientCommand` communicates with the `Ui` class, invoking the `printIngredients()` method to print out the list of ingredients used for the selected dish. <br/> * The function returns an ArrayList of objects of 'Dish' type. The `get()` method is then invoked to get the dish of the specified index. However, this is ommitted to prevent unnecessary sophistication. |
+| 5-6  | Interaction with 'Dish'       | The `Ui` class communicates with the `Dish` class, invoking the `getIngredients()` method to obtain the list of ingredients for the selected dish. The `Dish` class responds with an ArrayList of objects of 'Ingredient' type to the `Ui` class.                                                                                                                                        |
+| 7-8  | Iteration through Ingredients | There is a loop that iterates through each ingredient in the list. The `Ui` class interacts with the `Ingredients` class, converting each ingredient to a string containing the ingredient and quantity needed.                                                                                                                                                                          |
+| 9-10  | Display to User               | The `Ui` class showcases the information to the user through the `showToUser()` method.                                                                                                                                                                                                                                                                                                  |
+
+### Delete Dish
 
 ### Edit Price
 
-![Edit Price Execution](EditPriceCommand_execute.png)
+![Edit Price Execution](umlimages/EditPriceCommand_execute.png)
 
-*figure 2: Execution of edit_price command*
+*Figure 3: Execution of edit_price command*
 
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
