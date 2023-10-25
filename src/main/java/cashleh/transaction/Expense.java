@@ -53,7 +53,6 @@ public class Expense extends Transaction {
         StringBuilder result = new StringBuilder();
         result.append("Expense: ").append(getDescription());
         result.append(" (Amount: ").append(getAmount());
-
         if (getDate() != null) {
             result.append(", Date: ").append(getDate());
         }

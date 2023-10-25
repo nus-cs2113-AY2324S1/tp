@@ -3,7 +3,9 @@ package cashleh.transaction;
 import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 /**
  * Represents a Financial Statement in the CashLeh application.
@@ -70,6 +72,55 @@ public class FinancialStatement {
             texts[i] = type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat;
         }
         Ui.printFinancialStatement(texts);
+    }
+
+    /**
+     * Finds and displays transactions that match the specified criteria,
+     * including description, amount, date, and category.
+     * @param description The description to filter transactions by. Can be left null or empty.
+     * @param amount The amount to filter transactions by. Set to -1 if no amount is provided by user.
+     * @param date The date to filter transactions by. Set to null if no date is provided by user.
+     * @param category The category to filter transactions by. Set to null if no category is provided by user
+     * @throws CashLehMissingTransactionException if no matching transactions are found.
+     */
+    public void findTransaction(String description, Optional amount, LocalDate date, Categories category)
+            throws CashLehMissingTransactionException {
+        ArrayList<String> matchingTransactions = new ArrayList<>();
+        boolean isMatch = false;
+        StringBuilder message = new StringBuilder("Here are your corresponding transactions with ");
+        if (description != null && !description.isEmpty()) {
+            message.append("<description>: ").append(description).append(" ||");
+        }
+        if (amount.isPresent()) {
+            message.append("<amount>: ").append(amount.get()).append(" ||");
+        }
+        if (date != null) {
+            message.append("<date>: ").append(date).append(" ||");
+        }
+        if (category != null) {
+            message.append("<category>: ").append(category).append(" ||");
+        }
+        matchingTransactions.add(message.toString());
+
+        for (Transaction transaction : financialStatement) {
+            boolean descriptionMatch = (description == null) || (description.isEmpty())
+                    || transaction.getDescription().equals(description);
+            boolean amountMatch = (amount.isEmpty()) || (transaction.getAmount() == (double)amount.get());
+            boolean dateMatch = (date == null) || (transaction.getDate().equals(date));
+            boolean categoryMatch = (category == null) ||
+                    (String.valueOf(transaction.getCategory()).equals(String.valueOf(category)));
+            // Determine the sign based on the type of transaction
+            String sign = (transaction instanceof Income) ? "[+] " : "[-] ";
+            if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
+                matchingTransactions.add(sign + transaction.toString());
+                isMatch = true;
+            }
+        }
+        if (isMatch) {
+            Ui.printMultipleText(matchingTransactions);
+        } else {
+            throw new CashLehMissingTransactionException();
+        }
     }
 
     @Override
