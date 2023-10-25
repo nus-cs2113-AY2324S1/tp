@@ -1,10 +1,8 @@
 package essenmakanan.command;
 
-import essenmakanan.exception.EssenMakananException;
 import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.parser.IngredientParser;
 
 public class EditIngredientCommand extends Command {
