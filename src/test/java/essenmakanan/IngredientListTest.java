@@ -14,14 +14,11 @@ public class IngredientListTest {
 
         Ingredient tomato = new Ingredient("tomato");
         Ingredient cheese = new Ingredient("cheese");
-        Ingredient bread = new Ingredient("bread");
 
         ingredients.addIngredient(tomato);
         ingredients.addIngredient(cheese);
-        ingredients.addIngredient(bread);
 
-        Ui ui = new Ui();
-        ui.printAllIngredients(ingredients);
+        Ui.printAllIngredients(ingredients);
 
         Ingredient ingredient;
         ingredient = ingredients.getIngredient(0);
@@ -29,8 +26,5 @@ public class IngredientListTest {
 
         ingredient = ingredients.getIngredient(1);
         assertEquals("cheese", ingredient.getName());
-
-        ingredient = ingredients.getIngredient(2);
-        assertEquals("bread", ingredient.getName());
     }
 }

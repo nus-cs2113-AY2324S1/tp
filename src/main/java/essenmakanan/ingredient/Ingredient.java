@@ -7,6 +7,8 @@ public class Ingredient {
     private IngredientUnit unit;
     public Ingredient(String name) {
         this.name = name;
+        this.quantity = "1";
+        this.unit = IngredientUnit.PIECE;
     }
     public Ingredient(String name, String qty, IngredientUnit unit) {
         this.name = name;

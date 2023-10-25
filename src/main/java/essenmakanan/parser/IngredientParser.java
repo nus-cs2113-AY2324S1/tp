@@ -12,6 +12,11 @@ public class IngredientParser {
         IngredientUnit ingredientUnit;
 
         String[] ingredientDetails = inputDetail.split(",");
+
+        if (ingredientDetails.length != 3) {
+            throw new EssenMakananFormatException();
+        }
+
         String ingredientName = ingredientDetails[0].strip();
 
         String ingredientQuantity = ingredientDetails[1].strip();
