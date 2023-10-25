@@ -4,14 +4,12 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-Main structure of the code is adapted from [here](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java).
+Main structure of the code and the parse feature is adapted from [here](https://github.com/se-edu/addressbook-level2).
 
 ## Design & implementation
 
 ### Main structure
-Main structure of code is written in [`FitTrack`](../src/main/java/fittrack/FitTrack.java) class.
 
-![Main structure](images/FitTrackMain.svg "Main Structure")
 
 ### Architecture
 {insert diagram to show architecture of code}
@@ -38,6 +36,13 @@ The App consists of eight components.
 * [**`Parser`**](#parser-component): Handles user input.
 * [**`Data`**](#data-component): Holds the data of the app in memory.
 * [**`Command`**](#command-component): The command executor.
+
+### Core sequence
+Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTrack.java) class.
+
+![Core structure](images/FitTrackOuter.svg "Outer Structure")
+
+![Inner structure](images/FitTrackCore.svg "Core Structure")
 
 ### Storage Component
 ![Structure of Storage Load](images/StorageLoad.svg)
