@@ -1,6 +1,8 @@
 package fittrack.command;
 
 import fittrack.parser.CommandParser;
+import fittrack.parser.PatternMatchFailException;
+
 
 public class ViewMealsCommand extends Command {
     public static final String COMMAND_WORD = "viewmeals";
@@ -21,7 +23,10 @@ public class ViewMealsCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) {
+    public void setArguments(String args, CommandParser parser) throws PatternMatchFailException {
+        if (!args.isEmpty()) {
+            throw new PatternMatchFailException();
+        }
     }
 
     @Override
