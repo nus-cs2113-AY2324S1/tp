@@ -29,27 +29,27 @@ import java.text.ParseException;
  * into a format that can be interpreted by other core classes
  */
 public class Parser {
-    public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
+    private static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
 
     // Command Argument Patterns
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
             + "price/(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+) "
             + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-    public static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
-    public static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
-    public static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    public static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
+    private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
+    private static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
+    private static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
+    private static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
             + "qty/(?<ingredientQty>[A-Za-z0-9\\s]+)\\s*(?<ingredientUnit>g|ml)";
-    public static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
-    public static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    public static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
-    public static final String INGREDIENT_DIVIDER_REGEX = ", ";
-    public static final String INGREDIENT_DIVIDER_STRING = ",";
-    public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
-    public static final int PRICE_MATCHER_GROUP_NUM = 2;
-    public static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
-    public static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
+    private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
+    private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
+    private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
+    private static final String INGREDIENT_DIVIDER_REGEX = ", ";
+    private static final String INGREDIENT_DIVIDER_STRING = ",";
+    private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
+    private static final int PRICE_MATCHER_GROUP_NUM = 2;
+    private static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
+    private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
@@ -166,8 +166,6 @@ public class Parser {
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL);
             float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
-
-            checkNegativePrice(price);
 
             ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
 
