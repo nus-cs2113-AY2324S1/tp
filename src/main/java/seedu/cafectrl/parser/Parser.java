@@ -39,7 +39,6 @@ public class Parser {
             + "price/(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+) "
             + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
