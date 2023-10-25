@@ -11,6 +11,8 @@ public class IngredientParser {
 
         IngredientUnit ingredientUnit;
 
+        inputDetail = inputDetail.replace("i/", "");
+
         String[] ingredientDetails = inputDetail.split(",");
 
         if (ingredientDetails.length != 3) {
