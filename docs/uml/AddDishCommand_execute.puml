@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+
+-> AddDishCommand: execute()
+activate AddDishCommand
+AddDishCommand -> Menu: addDish(dish: Dish)
+activate Menu
+deactivate Menu
+AddDishCommand -> Ui: printAddDishMessage(dish: Dish)
+
+activate Ui
+Ui -> Dish: getName()
+Dish --> Ui: dishNameString: String
+Ui -> Dish: getPrice()
+Dish --> Ui: dishPrice: float
+
+
+loop ingredients
+Ui -> Ingredients: toString()
+Ingredients --> Ui
+end loop
+
+Ui -> Ui: showToUser()
+
+
+
+@enduml
