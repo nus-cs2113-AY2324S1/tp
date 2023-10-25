@@ -26,6 +26,7 @@ Majority of the app's work is done by the following components
 
 The section below will explain in more detail the design considerations, implementation and rationale of the various 
 components listed above.
+
 ---
 
 ### Login System Component
