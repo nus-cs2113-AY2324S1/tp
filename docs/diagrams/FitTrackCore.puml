@@ -1,10 +1,12 @@
 @startuml
-title Main Structure of FitTrack.loopCommandExecution()\n
 
-participant ":FitTrack" as main
+title Core Structure of FitTrack\n
+
+participant ": FitTrack" as main
 participant "ui: Ui" as ui
-participant ":CommandParser" as parser
+participant ": CommandParser" as parser
 participant "command: XXXCommand" as cmd
+
 
 main -> main ++: loopCommandExecution()
 
@@ -53,5 +55,6 @@ group do-while [!ExitCommand.isExit(command)]
     return
 end
 
+return
 
 @enduml

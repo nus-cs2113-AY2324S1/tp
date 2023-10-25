@@ -1,0 +1,29 @@
+@startuml
+
+title Outer Structure of FitTrack\n
+
+participant "<<class>>\nFitTrack" as main
+participant ": FitTrack" as core
+
+
+create core
+main -> core ++: new
+
+return : FitTrack
+
+main -> core ++: .run()
+
+core -> core ++: start()
+note left: Initialize
+return
+core -> core ++: loopCommandExecution()
+note left: Loop
+return
+core -> core ++: end()
+note left: Finalize
+return
+
+return
+destroy core
+
+@enduml
