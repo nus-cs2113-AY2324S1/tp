@@ -22,7 +22,8 @@ Majority of the app's work is done by the following components
 - Commands : List of various commands
 - CommandResult : Execution of various commands
 
-The section below will explain in more detail the design considerations, implementation and rationale of the various 
+
+The section below will explain in more detail the design considerations, implementations and rationale of the various
 components listed above.
 
 ---
@@ -73,7 +74,88 @@ The following sequence diagram shows how the login system class works when the p
 
 <img src="UML Diagrams/StockerToLoginSystem.png" width="280">
 
+---
+
+## Commands
+
+---
+
+## 1. Find Function
+
+The "Find" function is designed to enable users to search for specific drugs in the inventory using either the drug's
+name or the drugs expiry date. This component assists in locating and retrieving relevant drugs efficiently.
+
+**Design Considerations**
+The design of the "Find" function takes into account the following considerations:
+
+1. **Search Criteria:** The function must provide users with the ability to specify each criteria, such as keywords or
+   attributes, to filter the items they are looking for.
+2. **Search Speed:** To enhance user experience, the search process should be fast and responsive, ensuring that users
+   receive search results quickly.
+
+**Implementation and Rationale**
+
+The "Find" function is implemented as follows:
+
+- **User-Defined Search Criteria:** Users provide search criteria, such as keywords, to define what they
+  are looking for. The "Find" function processes these criteria to locate relevant items.
+
+- **Search Algorithm:** A robust search algorithm is employed to efficiently scan through the list of items and identify
+  those
+  that match the specified criteria.
+
+- **Result Presentation:** The function displays the search results, presenting users with a list of items that meet the
+  search criteria, allowing them to quickly identify the items they are interested in.
+
+- **User-Friendly Interface:** The "Find" function is integrated into the user interface, making it easily accessible
+  and intuitive for users to perform searches.
+
+- **Alternative Consideration:** During the design process, alternative approaches to searching are evaluated to ensure
+  the
+  most effective and user-friendly method is implemented.
+
+The "Find" function offers a valuable way for users to narrow down their searches, find specific items of interest, and
+enhance the usability of the application.
+
+**Function Methods**
+
+The "Find" function includes the following method to achieve its functionality:
+
+- `execute()` - This method is responsible for executing the "Find" command, searching for drugs that match the
+  user-specified keyword within the inventory.
+- It returns a `CommandResult` containing the outcome of the command execution,
+  which includes a success message and a list of found StockEntry objects.
+
+**Example Usage**
+
+To illustrate how the "Find" function works, consider the following example usage:
+
+1. **User Input:** The user initiates the "Find" command by typing something like the following:
+
+`find /n panadol` - This command instructs the program to search for drugs in the inventory based on the name criteria
+and the keyword "panadol."
+`find /d 12/03/2026` - This command instructs the program to search for drugs in the inventory based on the expiry date
+criteria and the keyword "12/03/2026."
+
+2. **Method Execution:** The `execute()` method within the "FindCommand" class is called. It takes the provided keyword
+   and criterion as input.
+
+3. **Search Process:** The method processes the search by iterating through the list of `StockEntry` objects in the
+   inventory.
+   For each entry, it checks if the `matches` method returns `true`, which means that the drug name or expiry date
+   contains the given keyword.
+4. **Building Results:** As matching entries are found, they are added to a list called `foundEntries`.
+5. **Result Display:** The `CommandResult` is prepared, containing a success message (e.g., "Listed all drugs with the
+   keyword
+   in the inventory.") and the list of found `StockEntry` objects.
+6. `User Feedback:` The result is then displayed to the user, showing a list of drugs in the inventory that match the
+   specified keyword.
+
+---
+
 ## Product scope
+
+---
 
 ### Target user profile
 
