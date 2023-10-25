@@ -15,6 +15,7 @@ public class CafeCtrl {
     private final Menu menu;
     private Command command;
     private Pantry pantry;
+    private OrderList orderList;
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
@@ -40,8 +41,8 @@ public class CafeCtrl {
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
-                command = Parser.parseCommand(menu, fullUserInput);
-                command.execute(menu, ui, pantry);
+                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, orderList);
+                command.execute();
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
             } finally {

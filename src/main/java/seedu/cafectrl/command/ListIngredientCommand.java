@@ -1,7 +1,6 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
@@ -16,12 +15,17 @@ public class ListIngredientCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public ListIngredientCommand(int listIndex) {
+    protected Ui ui;
+    protected Menu menu;
+
+    public ListIngredientCommand(int listIndex, Menu menu, Ui ui) {
         this.index = listIndex;
+        this.menu = menu;
+        this.ui = ui;
     }
 
     @Override
-    public void execute(Menu menu, Ui ui, Pantry pantry) {
+    public void execute() {
         try {
             Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
             ui.printIngredients(selectedDish);

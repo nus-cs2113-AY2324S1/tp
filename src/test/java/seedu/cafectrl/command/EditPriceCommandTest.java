@@ -2,7 +2,6 @@ package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
@@ -30,8 +29,8 @@ class EditPriceCommandTest {
 
         int testDishIndex = 1;
         float testNewPrice = 3;
-        Command editPriceCommand = new EditPriceCommand(testDishIndex, testNewPrice);
-        editPriceCommand.execute(menu, ui, new Pantry(ui));
+        Command editPriceCommand = new EditPriceCommand(testDishIndex, testNewPrice, menu, ui);
+        editPriceCommand.execute();
 
         int firstLine = 0;
         int secondLine = 1;
