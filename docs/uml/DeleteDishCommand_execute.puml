@@ -20,6 +20,9 @@ return (selectedDish: Dish)
 
 DeleteDishCommand -> Ui: showDeleteMessage()
 activate Ui
+Ui -> Ui: showToUser()
+activate Ui
+return
 return
 DeleteDishCommand -> Menu: removeDish()
 activate Menu
