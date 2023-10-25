@@ -40,7 +40,7 @@ The App consists of eight components.
 * [**`Command`**](#command-component): The command executor.
 
 ### Storage Component
-![Structure of Storage Load](images/StorageLoad.png)
+![Structure of Storage Load](images/StorageLoad.svg)
 
 **API** : [`Storage.java`](../src/main/java/fittrack/storage/Storage.java)
 
