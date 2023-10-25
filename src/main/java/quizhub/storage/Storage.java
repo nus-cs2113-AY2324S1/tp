@@ -81,9 +81,6 @@ public class Storage {
                 String questionModule = questionSubStrings[3].strip();
                 String questionDifficulty = questionSubStrings[4].strip();
                 Question.QnDifficulty difficulty = Parser.extractQuestionDifficulty(questionDifficulty);
-                if (difficulty == Question.QnDifficulty.DEFAULT) {
-                    difficulty = Question.QnDifficulty.NORMAL;
-                }
                 addQuestionFromFile(questions, currentQuestion, questionIndex, questionType, questionDescription,
                         questionDoneStatus, String.valueOf(difficulty), questionModule);
             } catch (ArrayIndexOutOfBoundsException e) {

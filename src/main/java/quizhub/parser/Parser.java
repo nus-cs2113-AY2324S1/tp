@@ -117,28 +117,19 @@ public class Parser {
      *
      * @param difficulty The difficulty level defined by user in CLI.
      */
-    public static Question.QnDifficulty extractQuestionDifficulty(String difficulty){
-        Question.QnDifficulty qnDifficulty = Question.QnDifficulty.DEFAULT;
-        try {
-            switch (difficulty.toLowerCase()) {
+    public static Question.QnDifficulty extractQuestionDifficulty(String difficulty) {
+        switch (difficulty.toLowerCase()) {
             case "easy":
-                qnDifficulty = Question.QnDifficulty.EASY;
-                break;
+                return Question.QnDifficulty.EASY;
             case "hard":
-                qnDifficulty = Question.QnDifficulty.HARD;
-                break;
+                return Question.QnDifficulty.HARD;
             case "normal":
-                qnDifficulty = Question.QnDifficulty.NORMAL;
-                break;
+                return Question.QnDifficulty.NORMAL;
             default:
-                throw new QuizHubExceptions("    Ono! We only support easy, normal and hard difficulty levels" +
+                System.out.println("    Ono! We only support easy, normal and hard difficulty levels" +
                         System.lineSeparator() +
                         "    Please only use 'easy', 'normal' or 'hard' for difficulty levels!");
-            }
-        } catch (QuizHubExceptions incorrectDifficulty){
-            System.out.println(incorrectDifficulty.getMessage());
+                return Question.QnDifficulty.NORMAL;
         }
-        return qnDifficulty;
     }
-
 }
