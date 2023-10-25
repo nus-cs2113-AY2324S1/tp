@@ -73,15 +73,24 @@ public class IncomeStatement {
                 mapToDouble(Income::getAmount).sum();
     }
 
+    /**
+     * Prints the income statement, displaying details of all income transactions.
+     * This method generates a formatted income statement based on the transactions in the incomeStatement list.
+     * It creates a textual representation of each income transaction, including its type (Income), date, description,
+     * amount, and category (if available), and then uses the Ui.printStatement method to display the statement.
+     */
     public void printIncomes() {
         int listSize = incomeStatement.size();
-        String[] texts = new String[listSize + 1];
-        texts[0] = "The current sum of all your incomes amounts to: " + getTotalIncomeAmount();
-        for (int i = 1; i <= listSize; i++) {
-            Income currentIncome = incomeStatement.get(i - 1);
-            texts[i] = "\t" + i + ". " + currentIncome.toString();
+        String[] texts = new String[listSize];
+        for (int i = 0; i < listSize; i++) {
+            Income currentIncome = incomeStatement.get(i);
+            String type = "Income, ";
+            String date = currentIncome.getDate().toString();
+            String amt = String.valueOf(currentIncome.getAmount());
+            String cat = currentIncome.getCategory() == null ? "-" : currentIncome.getCategory().toString();
+            texts[i] = type + date + ", " + currentIncome.getDescription() + ", " + amt + ", " + cat;
         }
-        Ui.printMultipleText(texts);
+        Ui.printStatement("Income Statement", texts);
     }
 
     @Override
