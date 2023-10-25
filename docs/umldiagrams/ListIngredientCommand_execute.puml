@@ -1,0 +1,41 @@
+@startuml
+!define COMMAND class ListIngredientCommand
+!define UI class Ui
+!define MENU class Menu
+!define DISH class Dish
+!define PARSER class Parser
+
+autonumber
+ -> ListIngredientCommand: execute()
+
+activate ListIngredientCommand
+ListIngredientCommand -> Menu : getMenuItemsList()
+activate Menu
+Menu --> ListIngredientCommand: selectedDish : Dish
+deactivate Menu
+
+ListIngredientCommand -> Ui : printIngredients(selectedDish: Dish)
+activate Ui
+Ui -> Dish : selectedDish.getIngredients()
+activate Dish
+Dish --> Ui : ingredients: Ingredient
+deactivate Dish
+
+
+loop ingredients
+Ui -> Ingredients: ingredient.toString()
+activate Ingredients
+Ingredients --> Ui
+deactivate Ingredients
+end loop
+
+Ui -> Ui: showToUser(message: String)
+activate Ui
+Ui --> Ui
+deactivate Ui
+Ui --> ListIngredientCommand
+deactivate Ui
+deactivate ListIngredientCommand
+<-- ListIngredientCommand
+
+@enduml

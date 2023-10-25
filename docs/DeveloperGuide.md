@@ -10,9 +10,9 @@
 
 ### Parser
 
-![Parser Parsing User Input Sequence Diagram](Parser.png)
+![Parser Parsing User Input Sequence Diagram](umlimages/Parser.png)
 
-*figure 1: Parser Parsing User Input Sequence Diagram*
+*Figure 1: Parser Parsing User Input Sequence Diagram*
 
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
@@ -33,12 +33,51 @@ when the `execute()` method from `AddDishCommand` is called in the main class `C
 
 Separation of Concerns was applied to ensure the `Ui` is only responsible with only displaying messages while the `Menu` deals with the logic of adding dish to the menu. This implementation also encapsulates the details of adding a dish and displaying messages. For example, The `AddDishCommand` class doesn't need to know how the internal details of the dish adding and message printing are performed.
 
+### Adding a Dish
+
+### List Menu
+
+### List Ingredients
+![List Ingredient Execution](umlimages/ListIngredientCommand_execute.png)
+
+*Figure 2: Execution of list_ingredient command*
+
+API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
+
+| No | Step                          | Description                                                                                                                                                                                                                                                                                                                                                                              |
+|----|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | Initialization                | The sequence begins with the `Main` class invoking the `execute` method of the `ListIngredientCommand` after parsing a user command.                                                                                                                                                                                                                                                     |
+| 2-3  | Interaction with 'Menu'       | The `ListIngredientCommand` communicates with the `Menu` class, invoking the `getMenuItemsList()` method to retrieve a list of menu items. The function returns an ArrayList of objects of 'Dish' type.                                                                                                                                                                                  |
+| 4  | Interaction with 'Ui'         | The `ListIngredientCommand` communicates with the `Ui` class, invoking the `printIngredients()` method to print out the list of ingredients used for the selected dish. <br/> * The function returns an ArrayList of objects of 'Dish' type. The `get()` method is then invoked to get the dish of the specified index. However, this is ommitted to prevent unnecessary sophistication. |
+| 5-6  | Interaction with 'Dish'       | The `Ui` class communicates with the `Dish` class, invoking the `getIngredients()` method to obtain the list of ingredients for the selected dish. The `Dish` class responds with an ArrayList of objects of 'Ingredient' type to the `Ui` class.                                                                                                                                        |
+| 7-8  | Iteration through Ingredients | There is a loop that iterates through each ingredient in the list. The `Ui` class interacts with the `Ingredients` class, converting each ingredient to a string containing the ingredient and quantity needed.                                                                                                                                                                          |
+| 9-10  | Display to User               | The `Ui` class showcases the information to the user through the `showToUser()` method.                                                                                                                                                                                                                                                                                                  |
+
+### Delete Dish
+
+### Delete Dish
+
+![Delete Dish Execution](uml/DeleteDishCommand_execute.png)
+<br>*Figure X: Execution of delete dish command
+
+API: [DeleteDishCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
+
+When the `execute()` method of `DeleteDishCommand` is invoked in `Main`, it subsequently calls `getMenuItemsList().get(dishIndexToBeDeleted)` method on the `Menu` object to retrieve the `Dish` object to be deleted.
+Following this, the `showDeleteMesage()` method in the Ui component is triggered to display a message to show the user which dish is about to be deleted.
+Afterward, `DeleteDishCommand` calls `removeDish(dishIndexToBeDeleted)` of the `Menu` object to remove the selected dish at the index indicated by the user.
+This sequence of actions orchestrates the flow of information and operations between `Main`, `DeleteDishCommand`, `Menu`, and `Ui` components, ensuring the seamless handling of the dish deleting functionality within the application.
+
+
+`DeleteDishCommand` is implemented in such a way because:
+1. It promotes loose coupling between components. For instance, `Main` doesn't need to know the details of how the `execute()` of `DeleteDishCommand` is executed or how the message is displayed in `Ui`.
+2. Each component has a specific role and responsibility. `Main` is responsible for receiving user input and invoking `execute()`, `DeleteDishCommand` is responsible for encapsulating the delete operation, `Menu` is responsible for managing the menu items, and `Ui` is responsible for displaying messages to the user. This separation of concerns makes the code more maintainable and easier to understand.
+
 
 ### Edit Price
 
-![Edit Price Execution](EditPriceCommand_execute.png)
+![Edit Price Execution](umlimages/EditPriceCommand_execute.png)
 
-*figure 2: Execution of edit_price command*
+*Figure 3: Execution of edit_price command*
 
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 

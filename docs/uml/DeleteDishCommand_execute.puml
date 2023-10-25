@@ -1,0 +1,26 @@
+@startuml
+!define COMMAND class ListIngredientCommand
+!define UI class Ui
+!define MENU class Menu
+
+autonumber
+
+-> DeleteDishCommand : execute()
+activate DeleteDishCommand
+
+DeleteDishCommand -> Menu : getMenuItemsList().get(dishIndexToBeDeleted: int)
+activate Menu
+return (selectedDish: Dish)
+DeleteDishCommand -> Ui : showDeleteMessage(selectedDish: Dish)
+activate Ui
+Ui -> Ui : showToUser(message: String)
+activate Ui
+return
+return
+DeleteDishCommand -> Menu : removeDish(dishIndexToBeDeleted: int)
+activate Menu
+return
+return
+
+
+@enduml
