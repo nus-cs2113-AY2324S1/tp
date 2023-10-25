@@ -241,7 +241,7 @@ class ParserTest {
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
         OrderList orderList = new OrderList();
-        String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
+        String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1000g";
         Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry, orderList);
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
@@ -252,7 +252,7 @@ class ParserTest {
         Dish getOutputDish = menu.getDishFromId(0);
         assertEquals("Christmas Ham", getOutputDish.getName()); // Dish name test
         assertEquals((float) 50.0, getOutputDish.getPrice()); //Dish price test
-        assertEquals("[Ham - 1kg]", getOutputDish.getIngredients().toString()); //Dish ingredients test
+        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString()); //Dish ingredients test
     }
 
     @Test
@@ -262,7 +262,7 @@ class ParserTest {
         Pantry pantry = new Pantry(ui);
         OrderList orderList = new OrderList();
         //input name/ argument wrongly
-        String testDishInputWithOneIngredient = "add named/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
+        String testDishInputWithOneIngredient = "add named/Christmas Ham price/50.00 ingredient/Ham qty/1000g";
         Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry, orderList);
         //Test for incorrect Command type returned
         assertFalse(outputCommand instanceof AddDishCommand);
