@@ -43,7 +43,31 @@ Given below is a quick overview of main components and how they interact with ea
 
 ## Implementation
 
-### Add feature
+### Add Recipe feature
+
+The add recipe feature is used by a `AddRecipeCommand` class. By calling `executeCommand` on the class, the steps will
+be executed as follows:
+- **Step1**
+  
+  `AddRecipeCommand` will parse the recipe title using `RecipeParser`. Then, it will return the recipe title.
+
+
+- **Step2**
+
+  `AddRecipeCommand` will create a new `Recipe` with the obtained title.
+
+
+- **Step3**
+
+  `AddRecipeCommand` will add newly created `Recipe` into `RecipeList`. Then, the recipe will be added into an
+  `ArrayList` inside `RecipeList`.
+
+
+- **Step4**
+
+  `AddRecipeCommand` will call `Ui` class to print out the title of the recently added recipe.
+
+<img src="images/AddNewRecipeSequenceDiagram.png" width="963" />
 
 ### Delete feature
 
