@@ -50,7 +50,7 @@ public class Parser {
             "with the specified number," +
             System.lineSeparator() +
             "     12. bye - exits the program";
-    public static final String INVALID_INTEGER_INDEX = "    Please enter valid integer index!";
+    public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer index!";
     /**
      * Analyses and extracts relevant information from user input
      * to create a new Command object of the right type.
@@ -73,24 +73,24 @@ public class Parser {
             case "short":
                 return new CommandShortAnswer(userInput);
             case "start":
-                return new CommandStart(userInput);
+                return parseStartCommand(userInput);
             case "edit":
-                return new CommandEdit(userInput);
+                return parseEditCommand(userInput);
             case "delete":
-                return new CommandDelete(userInput);
+                return parseDeleteCommand(userInput);
             case "find":
-                return new CommandFind(userInput);
+                return parseFindCommand(userInput);
             case "shuffle":
                 return new CommandShuffle();
             case "markdiff":
-                return new CommandMarkDifficulty(userInput);
+                return parseMarkDiffCommand(userInput);
             case "help":
                 return new CommandHelp();
             default:
                 return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
             }
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
-            return new CommandInvalid(INVALID_INTEGER_INDEX);
+            return new CommandInvalid(INVALID_INTEGER_INDEX_MSG);
         } catch (Exception error) {
             return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
         }
@@ -131,5 +131,67 @@ public class Parser {
                         "    Please only use 'easy', 'normal' or 'hard' for difficulty levels!");
                 return Question.QnDifficulty.NORMAL;
         }
+    }
+
+    /**
+     * Attempt to parse user input into a Delete Command
+     *
+     * @param userInput Raw command entered by the user
+     * @return Delete command or an Invalid Command
+     */
+    private Command parseDeleteCommand(String userInput) {
+        int qnIndex;
+        String[] editDetails;
+        try {
+            editDetails = userInput.split(" ");
+            qnIndex = Integer.parseInt(editDetails[1].strip());
+            return new CommandDelete(qnIndex);
+        } catch (NumberFormatException incompleteCommand) {
+            return new CommandInvalid(INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
+                    CommandDelete.INVALID_FORMAT_MSG);
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandDelete.MISSING_INDEX_MSG + System.lineSeparator() +
+                    CommandDelete.INVALID_FORMAT_MSG);
+        }
+    }
+
+    /**
+     * Attempt to parse user input into a Find Command
+     *
+     * @param userInput Raw command entered by the user
+     * @return Find command or an Invalid Command
+     */
+    private Command parseFindCommand(String userInput) {
+        return new CommandFind(userInput);
+    }
+
+    /**
+     * Attempt to parse user input into a Edit Command
+     *
+     * @param userInput Raw command entered by the user
+     * @return Edit command or an Invalid Command
+     */
+    private Command parseEditCommand(String userInput) {
+        return new CommandEdit(userInput);
+    }
+
+    /**
+     * Attempt to parse user input into a Start Quiz Command
+     *
+     * @param userInput Raw command entered by the user
+     * @return Start Quiz command or an Invalid Command
+     */
+    private Command parseStartCommand(String userInput) {
+        return new CommandStart(userInput);
+    }
+
+    /**
+     * Attempt to parse user input into a Mark Difficulty Command
+     *
+     * @param userInput Raw command entered by the user
+     * @return Mark Difficulty command or an Invalid Command
+     */
+    private Command parseMarkDiffCommand(String userInput) {
+        return new CommandMarkDifficulty(userInput);
     }
 }

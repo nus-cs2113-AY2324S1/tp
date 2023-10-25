@@ -11,6 +11,12 @@ public class CommandEdit extends Command {
     private int qnIndex;
     private String newDescription;
     private String newAnswer;
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as edit [question number] " +
+            "/description [description] or edit /answer [answer]!";
+    public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
+    public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate if " +
+            "you are editing question description or answer :<";
+
     /**
      * Creates a new edit command
      *
@@ -24,22 +30,19 @@ public class CommandEdit extends Command {
             editDetails = userInput.split(" ");
             qnIndex = Integer.parseInt(editDetails[1].strip());
         } catch (NumberFormatException incompleteCommand) {
-            System.out.println(Parser.INVALID_INTEGER_INDEX);
-            System.out.println("    Please format your input as edit [question number] /description [description] " +
-                    "or edit /answer [answer]!");
+            System.out.println(Parser.INVALID_INTEGER_INDEX_MSG);
+            System.out.println(INVALID_FORMAT_MSG);
             return;
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate question index :<");
-            System.out.println("    Please format your input as edit [question number] /description [description] " +
-                    "or edit /answer [answer]!");
+            System.out.println(MISSING_INDEX_MSG);
+            System.out.println(INVALID_FORMAT_MSG);
             return;
         }
         try {
             editCriteria = editDetails[2].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate if you are editing question description or answer :<");
-            System.out.println("    Please format your input as edit [question number] /description [description] " +
-                    "or edit /answer [answer]!");
+            System.out.println(MISSING_CRITERIA_MSG);
+            System.out.println(INVALID_FORMAT_MSG);
             return;
         }
         try{
@@ -54,9 +57,8 @@ public class CommandEdit extends Command {
                 throw new ArrayIndexOutOfBoundsException();
             }
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate the content you are editing to :<");
-            System.out.println("    Please format your input as edit [question number] /description [description] " +
-                    "or edit /answer [answer]!");
+            System.out.println(MISSING_CRITERIA_MSG);
+            System.out.println(INVALID_FORMAT_MSG);
         }
     }
 
