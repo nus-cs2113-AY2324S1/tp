@@ -9,23 +9,28 @@ import quizhub.ui.Ui;
  */
 public class CommandShortAnswer extends Command {
 
-    private final String userInput;
+    private final String description;
+    private final String answer;
+    private final String module;
+    private final Question.QnDifficulty qnDifficulty;
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as " +
+            "short [question]/[answer]/[module]/[difficulty]!";
+    public static final String MISSING_FIELDS_MSG = "    You have one or more field missing!";
     /**
      * Creates a new question command to add a SHORTANSWER question
      *
-     * @param userInput User input containing details of the SHORTANSWER question
+     * @param description Question description
+     * @param answer answer to question
+     * @param module module of question
+     * @param qnDifficulty difficulty of question
      */
-    public CommandShortAnswer(String userInput){
+    public CommandShortAnswer(String description, String answer, String module,
+                              Question.QnDifficulty qnDifficulty){
         super(CommandType.ADD);
-        this.userInput = userInput;
-    }
-
-    /**
-     * Get userInput item (still in the short Question / Answer format)
-     * @return String userInput
-     */
-    public String getUserInput() {
-        return userInput;
+        this.description = description;
+        this.answer = answer;
+        this.module = module;
+        this.qnDifficulty = qnDifficulty;
     }
 
     /**
@@ -37,7 +42,7 @@ public class CommandShortAnswer extends Command {
      */
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
-        questions.addToQuestionList(userInput, Question.QnType.SHORTANSWER, true);
+        questions.addShortAnswerQn(description, answer, module, qnDifficulty, true);
         dataStorage.updateData(questions);
     }
 
