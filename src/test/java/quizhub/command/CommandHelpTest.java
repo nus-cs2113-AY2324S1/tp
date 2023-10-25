@@ -57,7 +57,8 @@ public class CommandHelpTest {
                 "    2. short [question]/[answer] - adds a short answer question and its answer to the list,\r\n" +
                 "     3. list - shows the list of questions and answers,\r\n" +
                 "     4. delete [question number] - deletes the question and answer at the specified number,\r\n" +
-                "     5. find /[description] - displays all questions that contains the the specified description,\r\n" +
+                "     5. find /[description] - displays all questions that " +
+                "contains the the specified description,\r\n" +
                 "     6. edit [question number] /description [description] - edits the description of the question " +
                 "with the specified number,\r\n" +
                 "     7. edit [question number] /answer [answer] - edits the answer to the question with the " +

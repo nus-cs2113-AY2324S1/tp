@@ -83,8 +83,10 @@ public class CommandListTest {
      * */
     @Test
     void testListMixedShorts(){
-        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / HARD ", "short Question2 / Answer2 / Mod2 / HARD",
-            "short Question3 / Answer3 / Mod3 / NORMAL", "short Question4 / Answer4 / Mod4 / EASY" };
+        String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / HARD ",
+            "short Question2 / Answer2 / Mod2 / HARD",
+            "short Question3 / Answer3 / Mod3 / NORMAL",
+            "short Question4 / Answer4 / Mod4 / EASY" };
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
@@ -93,10 +95,10 @@ public class CommandListTest {
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);
         String expectedOutput =
-                "1: [S][X] Question1 / Answer1 | Mod1 | HARD\n" +
-                "    2: [S][] Question2 / Answer2 | Mod2 | HARD\n" +
-                "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL\n" +
-                "    4: [S][] Question4 / Answer4 | Mod4 | EASY" ;
+            "1: [S][X] Question1 / Answer1 | Mod1 | HARD\n" +
+            "    2: [S][] Question2 / Answer2 | Mod2 | HARD\n" +
+            "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL\n" +
+            "    4: [S][] Question4 / Answer4 | Mod4 | EASY" ;
         questionList.printQuestionList();
         String actualOutput = outputStreamCaptor.toString().trim();
         Assertions.assertEquals(expectedOutput, actualOutput);
