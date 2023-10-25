@@ -30,6 +30,10 @@ public class RecipeStepList extends ArrayList<Step> {
 
     }
 
+    public RecipeStepList(String[] steps) {
+        this.steps = new ArrayList<>(Arrays.asList(steps));
+    }
+
     private void createStepList(String input) throws EssenMakananNullInputException {
         if (input.length() == 0) {
             throw new EssenMakananNullInputException();
@@ -43,9 +47,6 @@ public class RecipeStepList extends ArrayList<Step> {
 
     }
 
-    public RecipeStepList(String[] steps) {
-        this.steps = new ArrayList<>(Arrays.asList(steps));
-    }
 
     public void addStep(String input) {
         steps.add(input);
