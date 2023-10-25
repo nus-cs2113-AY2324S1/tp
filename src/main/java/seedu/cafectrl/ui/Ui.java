@@ -93,8 +93,8 @@ public class Ui {
      */
     public void showBuyIngredientMessage(Ingredient ingredient) {
         String ingredientString = "Ingredient: " + ingredient.getName()
-                                    + "\t\tQty: " + ingredient.getQty()
-                                    + ingredient.getUnit();
+                + "\t\tQty: " + ingredient.getQty()
+                + ingredient.getUnit();
         showToUser(ingredientString);
     }
 

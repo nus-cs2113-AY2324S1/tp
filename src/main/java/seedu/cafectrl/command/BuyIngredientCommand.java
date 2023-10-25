@@ -25,8 +25,8 @@ public class BuyIngredientCommand extends Command {
         ui.showBuyIngredientHeader();
         for (Ingredient ingredient : ingredients) {
             ingredient = pantry.addIngredientToStock(ingredient.getName(),
-                                                        ingredient.getQty(),
-                                                        ingredient.getUnit());
+                    ingredient.getQty(),
+                    ingredient.getUnit());
             ui.showBuyIngredientMessage(ingredient);
         }
     }
