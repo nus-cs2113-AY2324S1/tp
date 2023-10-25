@@ -24,7 +24,7 @@ public class CommandEdit extends Command {
             editDetails = userInput.split(" ");
             qnIndex = Integer.parseInt(editDetails[1].strip());
         } catch (NumberFormatException incompleteCommand) {
-            System.out.println(Parser.INVALID_INTEGER_INDEX);
+            System.out.println(Parser.INVALID_INTEGER_INDEX_MSG);
             System.out.println("    Please format your input as edit [question number] /description [description] " +
                     "or edit /answer [answer]!");
             return;

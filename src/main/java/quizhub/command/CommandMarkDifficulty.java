@@ -27,7 +27,7 @@ public class CommandMarkDifficulty extends Command{
                 throw new QuizHubExceptions("    Ono! Please enter valid question number *sobs*");
             }
         } catch (NumberFormatException incompleteCommand) {
-            System.out.println(Parser.INVALID_INTEGER_INDEX);
+            System.out.println(Parser.INVALID_INTEGER_INDEX_MSG);
             return;
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             System.out.println("    Ono! You did not indicate index of question to be marked :<");

@@ -9,24 +9,17 @@ import quizhub.ui.Ui;
  */
 public class CommandDelete extends Command {
     private int qnIndex;
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as delete [question number]";
+    public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
+
     /**
      * Creates a new delete command for a question.
      *
-     * @param userInput User input from CLI.
+     * @param qnIndex 0-based index of question to be deleted.
      */
-    public CommandDelete(String userInput){
+    public CommandDelete(int qnIndex){
         super(CommandType.DELETE);
-        String[] editDetails;
-        try {
-            editDetails = userInput.split(" ");
-            qnIndex = Integer.parseInt(editDetails[1].strip());
-        } catch (NumberFormatException incompleteCommand) {
-            System.out.println(Parser.INVALID_INTEGER_INDEX);
-            System.out.println("    Please format your input as delete [question number]");
-        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate question index :<");
-            System.out.println("    Please format your input as delete [question number]!");
-        }
+        this.qnIndex = qnIndex;
     }
     /**
      * Checks if specified task exists.
@@ -39,9 +32,11 @@ public class CommandDelete extends Command {
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
         String taskName = questions.viewQuestionByIndex(qnIndex);
-        if(!taskName.equals("Question Not Found")) {
-            questions.deleteQuestionByIndex(qnIndex);
-            dataStorage.updateData(questions);
+        if (taskName.equals("Question Not Found")) {
+            ui.displayMessage("    Ono! The question you are deleting is not found!");
+            return;
         }
+        questions.deleteQuestionByIndex(qnIndex);
+        dataStorage.updateData(questions);
     }
 }

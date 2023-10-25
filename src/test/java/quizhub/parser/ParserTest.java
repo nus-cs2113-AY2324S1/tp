@@ -39,7 +39,7 @@ class ParserTest {
             "delete",
             "delete system32"
         };
-        final String resultMessage = Parser.INVALID_INTEGER_INDEX;
+        final String resultMessage = Parser.INVALID_INTEGER_INDEX_MSG;
         parseAndAssertIncorrectWithMessage(resultMessage, emptyInputs);
     }
 
