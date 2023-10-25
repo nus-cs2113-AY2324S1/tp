@@ -134,6 +134,7 @@ To illustrate how the "Find" function works, consider the following example usag
 
 `find /n panadol` - This command instructs the program to search for drugs in the inventory based on the name criteria
 and the keyword "panadol."
+
 `find /d 12/03/2026` - This command instructs the program to search for drugs in the inventory based on the expiry date
 criteria and the keyword "12/03/2026."
 
@@ -150,6 +151,14 @@ criteria and the keyword "12/03/2026."
    in the inventory.") and the list of found `StockEntry` objects.
 6. `User Feedback:` The result is then displayed to the user, showing a list of drugs in the inventory that match the
    specified keyword.
+
+The following sequence diagram shows how the Find Command function works. 
+
+<img src="UML Diagrams/FindCommandDiagram.png" width="350">
+
+Architecture Diagram of find command function:
+
+<img src="UML Diagrams/FindCommandArchitectureDiagram.png" width="500">
 
 ---
 
