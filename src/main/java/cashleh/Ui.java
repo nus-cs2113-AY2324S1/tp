@@ -41,6 +41,13 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Responsible for formatting and printing a financial statement based on the provided text data.
+     * It computes the total income, total expenditure, and net income and formats the data
+     * into a tabular format with headers and footers.
+     *
+     * @param texts An array of text data containing the financial statement details in a structured format.
+     */
     public static void printFinancialStatement(String[] texts) {
         final int idSpace = 10;
         final int typeSpace = 14;
