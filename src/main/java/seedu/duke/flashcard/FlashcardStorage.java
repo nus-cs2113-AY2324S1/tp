@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 public class FlashcardStorage {
     // simply implemented for save & load first
 
+    private static Logger flashlogger; // for logging
     protected String path;
-    static private Logger flashlogger; // for logging
 
     public FlashcardStorage(String path){
         this.path = path;
