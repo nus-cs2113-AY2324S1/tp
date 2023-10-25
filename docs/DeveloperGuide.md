@@ -22,7 +22,7 @@ Majority of the app's work is done by the following components
 - Commands : List of various commands
 - CommandResult : Execution of various commands
 
-The section below will explain in more detail the design considerations, implementation and rationale of the various
+The section below will explain in more detail the design considerations, implementation and rationale of the various 
 components listed above.
 
 ---
@@ -51,10 +51,10 @@ loaded into the users attribute when the application is booted up again.
 
 The login system class uses the below methods to achieve its functionality
 
-* `authenticateUserChoice()` - Decides whether the user chooses to register or login
-* `newUserCreator()` - Creates a new user for future login
-* `loginExistingUser()` - Login existing user
-* `loadExistingUsers()` - Load existing users into hashtable for reference
+* `authenticateUserChoice()` -Decides whether the user chooses to register or login
+* `newUserCreator()` -Creates a new user for future login
+* `loginExistingUser()` -Login existing user
+* `loadExistingUsers()` -Load existing users into hashtable for reference
 
 Given below is an example of how the login system class works.
 
