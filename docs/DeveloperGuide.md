@@ -4,8 +4,8 @@
 
 1. Reference to AB-3 Developer Guide
 
-* [Source](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
-* Used as template to structure this Developer Guide
+- [Source](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
+- Used as template to structure this Developer Guide
 
 ## Design & implementation
 
@@ -22,7 +22,6 @@ Majority of the app's work is done by the following components
 - Commands : List of various commands
 - CommandResult : Execution of various commands
 
-
 The section below will explain in more detail the design considerations, implementations and rationale of the various
 components listed above.
 
@@ -31,13 +30,14 @@ components listed above.
 ### Login System Component
 
 ---
+
 The login system component seeks to authenticate and login existing users or register a new user.
 
 #### Design considerations
 
-* There must be a way to check and verify users with a master list
-* The search for existing users username and password must be fast
-* Master list must be stored separately on hard drive of machine
+- There must be a way to check and verify users with a master list
+- The search for existing users username and password must be fast
+- Master list must be stored separately on hard drive of machine
 
 #### Implementation and rationale
 
@@ -52,10 +52,10 @@ loaded into the users attribute when the application is booted up again.
 
 The login system class uses the below methods to achieve its functionality
 
-* `authenticateUserChoice()` -Decides whether the user chooses to register or login
-* `newUserCreator()` -Creates a new user for future login
-* `loginExistingUser()` -Login existing user
-* `loadExistingUsers()` -Load existing users into hashtable for reference
+- `authenticateUserChoice()` -Decides whether the user chooses to register or login
+- `newUserCreator()` -Creates a new user for future login
+- `loginExistingUser()` -Login existing user
+- `loadExistingUsers()` -Load existing users into hashtable for reference
 
 Given below is an example of how the login system class works.
 
@@ -73,6 +73,31 @@ user.
 The following sequence diagram shows how the login system class works when the program is launched.
 
 <img src="UML Diagrams/StockerToLoginSystem.png" width="280">
+
+---
+
+### Main data structures
+
+---
+
+#### Implementation
+
+##### Drug
+
+The Drug class is very basic class for now. It only contains the product name as well as it's expiry date, but we will soon add some new properties such as product description, etc...
+
+##### Inventory
+
+The Inventory class is used to keep track of the quantity of product in stock. The hash map seemed to be the most appropriate data structure to match a product id to a quantity and a product entity which are encapsulated in a "StockEntry" class.
+
+##### Cart
+
+The Cart class is used to represent an ongoing transaction : to perform a sale, the vendor can add different products with their respective quantities in a cart which will be deducted from the inventory at the checkout.
+To represent this, we chose to use an arraylist of "CartEntry" classes which reprensent a product/quantity tuple.
+
+##### SalesList
+
+The SalesList is used to represent every past sales in order to create some statistics and reports. This class is only a list of subclasses representing validated carts.
 
 ---
 
@@ -183,18 +208,18 @@ criteria and the keyword "12/03/2026."
 
 ## User Stories
 
-Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely to have) - *
+Priorities: High (must have) - \* \* _, Medium (nice to have) - _ _, Low (unlikely to have) - _
 
 | Priority | Version | As a ...          | I want to ...                                        | So that I can ...                                           |
-|----------|---------|-------------------|------------------------------------------------------|-------------------------------------------------------------|
-| * * *    | v1.0    | Pharmacist        | Add drugs to track what drugs are available in stock | Reduce manual errors                                        |
-| * * *    | v1.0    | Pharmacist        | Remove drugs to track what are no longer in used     | Ensure compliance                                           |
-| * * *    | v1.0    | Receptionist      | View a list of products of that category             | Easily obtain an overview of the products                   |
-| * * *    | v1.0    | First-time user   | See a list of all available actions                  | Better understand how to use the application                |
-| * * *    | v1.0    | Inventory Manager | Find a specific drug currently in the system         | Check up its details and quantities specifically            |
-| * * *    | v2.0    | user              | find a to-do item by name                            | locate a to-do without having to go through the entire list |
+| -------- | ------- | ----------------- | ---------------------------------------------------- | ----------------------------------------------------------- |
+| \* \* \* | v1.0    | Pharmacist        | Add drugs to track what drugs are available in stock | Reduce manual errors                                        |
+| \* \* \* | v1.0    | Pharmacist        | Remove drugs to track what are no longer in used     | Ensure compliance                                           |
+| \* \* \* | v1.0    | Receptionist      | View a list of products of that category             | Easily obtain an overview of the products                   |
+| \* \* \* | v1.0    | First-time user   | See a list of all available actions                  | Better understand how to use the application                |
+| \* \* \* | v1.0    | Inventory Manager | Find a specific drug currently in the system         | Check up its details and quantities specifically            |
+| \* \* \* | v2.0    | user              | find a to-do item by name                            | locate a to-do without having to go through the entire list |
 
-*(More to be added)*
+_(More to be added)_
 
 ## Non-Functional Requirements
 
@@ -205,11 +230,11 @@ Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 
-*(More to be added)*
+_(More to be added)_
 
 ## Glossary
 
-* *glossary item* - Definition
+- _glossary item_ - Definition
 
 ## Instructions for manual testing
 
