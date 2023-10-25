@@ -32,18 +32,18 @@ public class Parser {
     public static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
 
     // Command Argument Patterns
-    public static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
-    public static final String QTY_AMOUNT_REGEX_GROUP_LABEL = "qtyAmount";
-    public static final String QTY_UNIT_REGEX_GROUP_LABEL = "qtyUnit";
-    public static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
-    public static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
-    public static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
             + "price/(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+) "
             + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    public static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
+    public static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
+    public static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
     public static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<ingredientName>[A-Za-z0-9\\\\s]+) "
-            + "qty/(?<qtyAmount>[A-Za-z0-9\\\\s]+)\\s*(?<qtyUnit>g|ml)";
+            + "qty/(?<ingredientQty>[A-Za-z0-9\\\\s]+)\\s*(?<ingredientUnit>g|ml)";
+    public static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
+    public static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
+    public static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
     public static final String INGREDIENT_DIVIDER_REGEX = ", ";
     public static final String INGREDIENT_DIVIDER_STRING = ",";
     public static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
@@ -215,8 +215,8 @@ public class Parser {
             }
 
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-            String ingredientQty = ingredientMatcher.group(QTY_AMOUNT_REGEX_GROUP_LABEL);
-            String ingredientUnit = ingredientMatcher.group(QTY_UNIT_REGEX_GROUP_LABEL);
+            String ingredientQty = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+            String ingredientUnit = ingredientMatcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
 
             int qty = Integer.parseInt(ingredientQty);
 
@@ -291,7 +291,7 @@ public class Parser {
         }
 
         String ingredientName = matcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-        String ingredientQty = matcher.group(QTY_AMOUNT_REGEX_GROUP_LABEL);
+        String ingredientQty = matcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
 
         int qty = extractQty(ingredientQty);
         String unit = extractUnit(ingredientQty);
