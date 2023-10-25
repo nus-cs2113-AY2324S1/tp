@@ -134,4 +134,16 @@ public class Ui {
     public void printDisplayChart(String type, String chart) {
         showMessage("Displaying " + chart + "chart for " + type);
     }
+
+    public void printOverview(String... args) {
+        String balance = args[0];
+        String income = args[1];
+        String expense = args[2];
+        String budget = args[3];
+        String reminders = args[4];
+
+        showMessage("Here is an overview of your financials:\n" +  "Total balance: " + balance + "\n" +
+                "Highest income: " + income + "\n" + "Highest expense: " + expense + "\n" +
+                "Remaining budget for the month: " + budget + "\n\n" + "Reminders:\n" + reminders);
+    }
 }

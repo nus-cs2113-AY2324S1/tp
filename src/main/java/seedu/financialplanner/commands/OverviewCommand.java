@@ -5,12 +5,16 @@ import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.list.CashflowList;
 import seedu.financialplanner.list.Income;
 import seedu.financialplanner.list.Expense;
+import seedu.financialplanner.reminder.Reminder;
+import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OverviewCommand extends Command {
+    private static final CashflowList cashflowList = CashflowList.getInstance();
+
     public OverviewCommand(RawCommand rawCommand) {
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
@@ -20,44 +24,74 @@ public class OverviewCommand extends Command {
 
     @Override
     public void execute() throws Exception {
-        CashflowList list = CashflowList.getInstance();
-        Ui.getInstance().showMessage("Here is an overview of your financials:\n" +
-                "Total balance: " + formatDoubleToString(Cashflow.getBalance()) + "\n" +
-                "Highest income: " + getHighestIncome(list) + "\n" +
-                "Highest expense: " + getHighestExpense(list) + "\n" +
-                "Remaining budget for the month: " + getBudgetDesc());
-        //todo: indicate description of income/expense
+        Ui.getInstance().printOverview(getBalance(), getHighestIncome(), getHighestExpense(),
+                getBudgetDesc(), getReminders());
+
         //todo: goal disparity
-        //todo: add educational tip
     }
 
     private static String getBudgetDesc() {
         return Budget.getCurrentBudgetString();
     }
 
-    private static String getHighestIncome(CashflowList list) {
+    private static String getHighestIncome() {
         double maxIncome = 0;
-        for (Cashflow entry : list.list) {
+        String incomeType = "";
+        for (Cashflow entry : cashflowList.list) {
             if (entry instanceof Income && entry.getAmount() > maxIncome) {
                 maxIncome = entry.getAmount();
+                incomeType = entry.capitalize(entry.getIncomeType().
+                        toString().toLowerCase()); // Capitalise the first letter
             }
         }
-        return formatDoubleToString(maxIncome);
+
+        if (incomeType.isEmpty()) {
+            return "No income added yet.";
+        }
+
+        return formatDoubleToString(maxIncome) + "    Category: " + incomeType;
     }
 
-    private static String getHighestExpense(CashflowList list) {
+    private static String getHighestExpense() {
         double maxExpense = 0;
-        for (Cashflow entry : list.list) {
+        String expenseType = "";
+        for (Cashflow entry : cashflowList.list) {
             if (entry instanceof Expense && entry.getAmount() > maxExpense) {
                 maxExpense = entry.getAmount();
+                expenseType = entry.capitalize(entry.getExpenseType().
+                        toString().toLowerCase()); // Capitalise the first letter
             }
         }
-        return formatDoubleToString(maxExpense);
+
+        if (expenseType.isEmpty()) {
+            return "No expense added yet.";
+        }
+
+        return formatDoubleToString(maxExpense) + "    Category: " + expenseType;
     }
 
     private static String formatDoubleToString(double amount) {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
         return decimalFormat.format(Cashflow.round(amount, 2));
+    }
+
+    private static String getReminders() {
+        ReminderList reminderList = ReminderList.INSTANCE;
+        if (reminderList.list.isEmpty()) {
+            return "No reminders added yet.";
+        }
+        StringBuilder reminders = new StringBuilder();
+        int count = 1;
+        for (Reminder reminder : reminderList.list) {
+            reminders.append(count).append(". ").append(reminder.toString()).append("\n");
+            count++;
+        }
+
+        return reminders.toString();
+    }
+
+    private static String getBalance() {
+        return formatDoubleToString(Cashflow.getBalance());
     }
 }
