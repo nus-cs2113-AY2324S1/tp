@@ -4,27 +4,30 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-[Reference](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java)
+Main structure of the code is adapted from [here](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java).
 
 ## Design & implementation
 
 ### Main structure
-Main structure of code is written in [FitTrack](../src/main/java/fittrack/FitTrack.java).
+Main structure of code is written in [`FitTrack`](../src/main/java/fittrack/FitTrack.java) class.
 
-![Main structure](images/FitTrackMainStructure.png "Main Structure")
+![Main structure](images/FitTrackMain.svg "Main Structure")
 
 ### Architecture
 {insert diagram to show architecture of code}
 
-The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. Given below is a quick overview of each component.
+The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. 
+Given below is a quick overview of each component.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The '.puml' files used to create the diagrams in this document can be found in the [diagrams](https://github.com/AY2324S1-CS2113-W12-4/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The '.puml' files used to create the diagrams in this document can be found in [diagrams](./diagrams) 
+folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) 
+to learn how to create and edit diagrams.
 
 </div>
 
-The **`Main`** class is called [`FitTrack`](https://github.com/AY2324S1-CS2113-W12-4/tp/blob/master/src/main/java/fittrack/FitTrack.java)
+The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.java)
 
 The App consists of eight components.
 * [**`UI`**](#ui-component): The UI of the App.

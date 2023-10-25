@@ -23,14 +23,14 @@ group do-while [!ExitCommand.isExit(command)]
     note right: All exceptions during parsing are omitted
 
     parser -> parser ++: getBlankCommand(word: String, ...)
-    note left: Create Command instance\n with no data
+    note left: Create Command instance with no data \n using command word
     create cmd
     parser -> cmd ++: new
     return command: XXXCommand
     return command: Command
 
-    parser -> cmd ++: setArguments(args: String, ...)
-    note left: Fill Command Instance \n with arguments
+    parser -> cmd ++: command.setArguments(args: String, ...)
+    note left: Fill the Command instance \n using command arguments
     return
 
     return command: Command
@@ -42,16 +42,15 @@ group do-while [!ExitCommand.isExit(command)]
     return
 
     main -> cmd ++: command.execute()
-    note left: Execute command
+    note left: Execute the command
     note right: Manipulate the data provided\n and create result
     return: commandResult: CommandResult
+    destroy cmd
 
     main -> ui ++: ui.printCR(commandResult: CR)
     note left: Print the result of execution
     note right: CR for CommandResult
     return
-
-    destroy cmd
 end
 
 
