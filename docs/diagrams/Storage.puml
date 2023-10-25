@@ -8,18 +8,6 @@ participant ":UserProfileDecoder" as pDecoder
 participant ":MealListDecoder" as mDecoder
 participant ":WorkoutListDecoder" as wDecoder
 
-main -> main ++: FitTrack()
-
-create ui
-main-> ui ++: new
-note left: Create ui object
-return :ui
-
-create storage
-main -> storage ++: new
-note left: Create storage object
-return :storage
-
 main -> main ++: start()
 main -> ui ++: ui.printWelcome()
 note right: prints welcome message to user
