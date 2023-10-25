@@ -17,8 +17,12 @@ public class Meal {
         return String.format("%s | %s| %s", name, calories, date);
     }
 
-    public Calories getCalories(){
+    public Calories getCalories() {
         return calories;
+    }
+
+    public Date getMealDate() {
+        return this.date;
     }
 
     @Override
