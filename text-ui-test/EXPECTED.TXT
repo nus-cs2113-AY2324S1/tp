@@ -6,10 +6,10 @@ To get started, type [help] for list of commands
 Here are the commands currently available:
 - Add recipe. [add r/RECIPE_NAME]
 - View all recipes. [view r]
-- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [...] ]
+- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]
 	Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
 - View all ingredients. [view i]
-- Edit an ingredient. [edit i/INGREDIENT_NAME]
+- Edit an ingredient. [edit i/INGREDIENT_NAMEQUANTITY,UNIT [i/...] ]
 - Exit application [exit]
 --------------------------------------------
 --------------------------------------------
