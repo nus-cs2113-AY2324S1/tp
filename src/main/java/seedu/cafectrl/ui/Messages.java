@@ -25,7 +25,8 @@ public class Messages {
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
 
     /** Messages for view stock command */
-    public static final String VIEW_STOCK = "You have the following ingredients in pantry:";
+    public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
+            + "\nIngredients\t\tQty";
 
     /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";

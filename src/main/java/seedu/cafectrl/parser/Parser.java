@@ -49,6 +49,9 @@ public class Parser {
             + "price/([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[Ee]([+-]?\\d+))? "
             + "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+
+    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
+            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
@@ -90,7 +93,7 @@ public class Parser {
             return prepareEditPriceCommand(menu, arguments, ui);
 
         case ViewTotalStockCommand.COMMAND_WORD:
-            return prepareViewTotalStock(ui);
+            return prepareViewTotalStock(ui, pantry);
 
         case BuyIngredientCommand.COMMAND_WORD:
             return prepareBuyIngredient(arguments, ui, pantry);
@@ -278,26 +281,23 @@ public class Parser {
         return new DeleteDishCommand(dishIndex, menu, ui);
     }
 
-    private static Command prepareViewTotalStock(Ui ui) {
-        return new ViewTotalStockCommand(new Pantry(ui), ui);
+    private static Command prepareViewTotalStock(Ui ui, Pantry pantry) {
+        return new ViewTotalStockCommand(pantry, ui);
     }
 
     private static Command prepareBuyIngredient(String arguments, Ui ui, Pantry pantry) {
-        Pattern buyIngredientArgumentsPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
+        Pattern buyIngredientArgumentsPattern = Pattern.compile(BUY_INGREDIENT_ARGUMENT_STRING);
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
             return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT, ui);
         }
 
-        String ingredientName = matcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-        String ingredientQty = matcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
-
-        int qty = extractQty(ingredientQty);
-        String unit = extractUnit(ingredientQty);
+        String ingredientsListString = matcher.group(0);
+        ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
 
         try {
-            return new BuyIngredientCommand(ingredientName, qty, unit, ui, pantry);
+            return new BuyIngredientCommand(ingredients, ui, pantry);
         } catch (Exception e) {
             return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
         }

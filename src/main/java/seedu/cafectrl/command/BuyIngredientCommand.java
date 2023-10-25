@@ -4,28 +4,30 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 
+import java.util.ArrayList;
+
 public class BuyIngredientCommand extends Command {
 
     public static final String COMMAND_WORD = "buy_ingredient";
     protected Ui ui;
     protected Pantry pantry;
-
-    private String name;
-    private int qty;
-    private String unit;
+    private ArrayList<Ingredient> ingredients;
 
 
-    public BuyIngredientCommand(String name, int qty, String unit, Ui ui, Pantry pantry) {
-        this.name = name;
-        this.qty = qty;
-        this.unit = unit;
+    public BuyIngredientCommand(ArrayList<Ingredient> ingredients, Ui ui, Pantry pantry) {
+        this.ingredients = ingredients;
         this.ui = ui;
         this.pantry = pantry;
     }
 
     @Override
     public void execute() {
-        Ingredient ingredient = pantry.addIngredientToStock(name, qty, unit);
-        ui.showBuyIngredientMessage(ingredient);
+        ui.showBuyIngredientHeader();
+        for (Ingredient ingredient : ingredients) {
+            ingredient = pantry.addIngredientToStock(ingredient.getName(),
+                                                        ingredient.getQty(),
+                                                        ingredient.getUnit());
+            ui.showBuyIngredientMessage(ingredient);
+        }
     }
 }
