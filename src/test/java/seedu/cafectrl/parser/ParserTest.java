@@ -28,7 +28,7 @@ class ParserTest {
     public void parseCommand_validCommand_successfulCommandParse() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 1, "cup"),
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 50, "g"),
                         new Ingredient("Chicken", 100, "g"))), 8.0F));
         menuItems.add(new Dish("Chicken Sandwich",
                 new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 100, "g"),
@@ -88,7 +88,7 @@ class ParserTest {
     public void parseCommand_validDeleteCommand_successfulCommandParse() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 1, "cup"),
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 50, "g"),
                         new Ingredient("Chicken", 100, "g"))), 8.0F));
         menuItems.add(new Dish("Chicken Sandwich",
                 new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 100, "g"),
@@ -208,7 +208,7 @@ class ParserTest {
     void parseCommand_validDishInputForAddDish_dishAddedToMenu() {
         Menu menu = new Menu();
         Ui ui = new Ui();
-        String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
+        String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1000g";
         Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient);
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
@@ -219,7 +219,7 @@ class ParserTest {
         Dish getOutputDish = menu.getDishFromId(0);
         assertEquals("Christmas Ham", getOutputDish.getName()); // Dish name test
         assertEquals((float) 50.0, getOutputDish.getPrice()); //Dish price test
-        assertEquals("[Ham - 1kg]", getOutputDish.getIngredients().toString()); //Dish ingredients test
+        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString()); //Dish ingredients test
     }
 
     @Test
