@@ -24,6 +24,7 @@ else all prefixes present
             StringTokenizer <- PrefixWithPosition: add to hashmap
         end
 
+    destroy PrefixWithPosition
     [<-- StringTokenizer: hashmap
 end
 
