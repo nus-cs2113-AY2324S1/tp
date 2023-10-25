@@ -1,17 +1,34 @@
 # Developer Guide
 
 ## Acknowledgements
-- **round() method in Cashflow.java**
+
+**Xchart (A Simple Charting Library for Java)**
+- author: KNOWN
+- source: https://knowm.org/open-source/xchart/
+
+**JSON Simple (simple Java toolkit for encoding and decoding JSON)**
+- author: Yidong Fang (Google Code)
+- source: https://code.google.com/archive/p/json-simple/
+
+**Apache Common Langs 3**
+- author: Apache Commons
+- source: https://commons.apache.org/proper/commons-lang/
+
+**Alpha Vantage Stock Market API**
+- author: Alpha Vantage
+- source: https://www.alphavantage.co/
+
+**round() method in Cashflow.java**
   - author: mhadidg
   - source: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
-- **capitalize() method in Cashflow.java**
+
+**capitalize() method in Cashflow.java**
   - author: Nick Bolton
   - source: https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
     
-- **DG adapted from**
+**DG adapted from**
   - [Addressbook-level3](https://github.com/se-edu/addressbook-level3)
-  
-  
+
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Components
@@ -30,6 +47,63 @@ API: `Storage.java`
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Visualization Feature 
+
+This feature is implemented with the help of [XChart](https://knowm.org/open-source/xchart/), a simple charting library for Java by Knowm.
+
+By typing in the vis command with the appropriate arguments (/s and /t), users will be able to visualize their income or expense 
+using visualization tools (Piechart, Bar Chart)
+
+Demo: 
+
+`vis /t expense /c pie`
+
+Output
+
+`Displaying piechart for expense`
+A message will be shown telling you that the chart is being displayed
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visOutput.png)
+
+This feature was implemented with the help of three different classes.
+They are namely: Visualizer, Categorizer, VisCommand (Inherits from abstract Command Class)
+
+VisCommand's Role: 
+1) Read the parameters of the vis command entered by the user
+- `/t` Reads the type of cashflow that the user wants to visualize (income/expense)
+- `/c` Reads the type of visualization tools the user wants (piechart/barchart)
+
+2) Calls the Cateorgizer to sort cashflow (Income/Expense) according to type
+
+3) Calls the Visualizer to display the chart to the user
+
+Categorizer's Role: 
+
+According to the cashflow type (Income/Expense) arugment passed in, the Categorizer sorts the 
+specified cashflow entry according to type using a Hashmap which is returned and used by the Visualizer
+
+Visualizer's Role: 
+
+According to the chart type (Pie/Bar) argument and the Hashmap obtained from the categorizer passed in, 
+the visualizer displays the specified visualization chart by calling the charting library Xchart.
+
+### Class Diagram
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualisationClass.png)
+
+### Sequence Diagram 
+
+Overall 
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualisationSequence.png)
+
+Categorizer
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\categorizerSequence.png)
+
+Visualizer
+
+![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualizerSequence.png)
 
 ### Add income/expense feature
 

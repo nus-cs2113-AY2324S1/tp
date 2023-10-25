@@ -20,22 +20,22 @@ import java.util.logging.Logger;
 public class Visualizer {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
-    public static void displayChart(String chartType, Map<String, Double> expensesByCat)
+    public static void displayChart(String chartType, Map<String, Double> cashFlowByCat, String type)
             throws FinancialPlannerException {
         switch (chartType) {
         case "pie":
-            displayPieChart(expensesByCat);
+            displayPieChart(cashFlowByCat, type);
             break;
         case "bar":
-            displayBarChart(expensesByCat);
+            displayBarChart(cashFlowByCat, type);
             break;
         default:
-            throw new FinancialPlannerException("Chart Type Not Found");
+            throw new FinancialPlannerException(chartType + " Chart Type Not Found");
         }
     }
 
-    public static void displayPieChart (Map<String, Double> expensesByCat) {
-        PieChart chart = new PieChartBuilder().width(800).height(600).title("Test").build();
+    public static void displayPieChart (Map<String, Double> expensesByCat, String type) {
+        PieChart chart = new PieChartBuilder().width(800).height(600).title(type).build();
 
         // Customize Chart
         Color[] sliceColors = new Color[] {
@@ -43,7 +43,9 @@ public class Visualizer {
             new Color(62, 154, 230),
             new Color(236, 186, 110),
             new Color(243, 159, 242),
-            new Color(246, 182, 197)
+            new Color(246, 182, 197),
+            new Color(210, 24, 24),
+            new Color(211, 164, 8),
         };
         chart.getStyler().setSeriesColors(sliceColors);
 
@@ -58,9 +60,9 @@ public class Visualizer {
         );
     }
 
-    public static void displayBarChart (Map<String, Double> expensesByCat) {
+    public static void displayBarChart (Map<String, Double> expensesByCat, String type) {
         CategoryChart chart = new CategoryChartBuilder().width(800).height(600)
-                .title("Expenses").xAxisTitle("Type").yAxisTitle("Value").build();
+                .title(type).xAxisTitle("Type").yAxisTitle("Value").build();
         // Customize Chart
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
         chart.getStyler().setHasAnnotations(true);

@@ -130,4 +130,8 @@ public class Ui {
     public void printResetBudget() {
         showMessage("Budget has been reset to " + Budget.getInitialBudgetString() + ".");
     }
+
+    public void printDisplayChart(String type, String chart) {
+        showMessage("Displaying " + chart + "chart for " + type);
+    }
 }
