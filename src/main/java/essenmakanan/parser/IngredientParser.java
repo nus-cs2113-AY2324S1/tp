@@ -1,34 +1,61 @@
 package essenmakanan.parser;
 
-import essenmakanan.exception.EssenMakananException;
+import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.ui.Ui;
+import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
-    public void parseIngredientCommand(IngredientList ingredients, String command, String inputDetail)
-            throws EssenMakananException {
-        Ui ui = new Ui();
-        switch(command) {
-        case "add":
-            String[] allIngredients = inputDetail.split("/i");
+    public static Ingredient parseIngredient(IngredientList ingredients, String inputDetail)
+            throws EssenMakananFormatException {
 
-            for (String ingredient : allIngredients) {
-                ui.printAddIngredientsSuccess(ingredient);
-                ingredient = ingredient.strip();
-                Ingredient newIngredient = new Ingredient(ingredient);
-                ingredients.addIngredient(newIngredient);
-            }
-            break;
-        case "view":
-            ui.printAllIngredients(ingredients);
-            break;
-        default:
-            throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
-        }
+        IngredientUnit ingredientUnit;
+
+        String[] ingredientDetails = inputDetail.split(",");
+        String ingredientName = ingredientDetails[0].strip();
+
+        String ingredientQuantity = ingredientDetails[1].strip();
+
+        String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
+        ingredientUnit = mapIngredientUnit(ingredientUnitString);
+
+        Ingredient newIngredient = new Ingredient(ingredientName, ingredientQuantity, ingredientUnit);
+
+        return newIngredient;
     }
 
-    public static String parseIngredientTitle(String toAdd) {
-        return toAdd.replace("i/", "");
+    public static IngredientUnit mapIngredientUnit(String ingredientUnitString) throws EssenMakananFormatException {
+        IngredientUnit ingredientUnit;
+        // return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
+        switch(ingredientUnitString) {
+        case "g":
+            ingredientUnit = IngredientUnit.GRAM;
+            break;
+        case "kg":
+            ingredientUnit = IngredientUnit.KILOGRAM;
+            break;
+        case "ml":
+            ingredientUnit = IngredientUnit.MILLILITER;
+            break;
+        case "l":
+            ingredientUnit = IngredientUnit.LITER;
+            break;
+        case "tsp":
+            ingredientUnit = IngredientUnit.TEASPOON;
+            break;
+        case "tbsp":
+            ingredientUnit = IngredientUnit.TABLESPOON;
+            break;
+        case "cup":
+            ingredientUnit = IngredientUnit.CUP;
+            break;
+        case "pc":
+            ingredientUnit = IngredientUnit.PIECE;
+            break;
+        default:
+            throw new EssenMakananFormatException();
+        }
+
+        return ingredientUnit;
     }
 }

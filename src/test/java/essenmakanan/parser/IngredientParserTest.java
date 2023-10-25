@@ -19,10 +19,9 @@ public class IngredientParserTest {
 
     @Test
     public void parseIngredientInput_invalidInput_throwsEssenMakananException() {
-        String invalidCommand = "plus";
         String invalidDetails = "plus tomato";
         assertThrows(EssenMakananException.class, () -> {
-            parser.parseIngredientCommand(ingredients, invalidCommand, invalidDetails);
+            parser.parseIngredient(ingredients, invalidDetails);
         });
     }
 }
