@@ -14,6 +14,7 @@ import quizhub.command.CommandMarkDifficulty;
 import quizhub.command.CommandHelp;
 import quizhub.exception.QuizHubExceptions;
 import quizhub.question.Question;
+import quizhub.question.ShortAnsQn;
 
 /**
  * Represents a parser that converts user inputs into command objects.
@@ -71,7 +72,7 @@ public class Parser {
             case "list":
                 return new CommandList();
             case "short":
-                return new CommandShortAnswer(userInput);
+                return parseShortAnswerCommand(userInput);
             case "start":
                 return parseStartCommand(userInput);
             case "edit":
@@ -133,6 +134,29 @@ public class Parser {
         }
     }
 
+    /**
+     * Attempt to parse user input into a Short Answer Command
+     *
+     * @param userInput Raw command entered by the user
+     * @return Short Answer command or an Invalid Command
+     */
+    private static Command parseShortAnswerCommand(String userInput) {
+        try {
+            String[] inputTokens = userInput.split("short")[1].strip().split("/");
+            String description = inputTokens[0].strip();
+            String answer = inputTokens[1].strip();
+            String module = inputTokens[2].strip();
+            String difficulty = inputTokens[3].strip();
+            if (description.isEmpty() || answer.isEmpty() || module.isEmpty() || difficulty.isEmpty()) {
+                return new CommandInvalid(CommandShortAnswer.MISSING_FIELDS_MSG +
+                        System.lineSeparator() + CommandShortAnswer.INVALID_FORMAT_MSG);
+            }
+            Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
+            return new CommandShortAnswer(description, answer, module, qnDifficulty);
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            return new CommandInvalid(CommandShortAnswer.INVALID_FORMAT_MSG);
+        }
+    }
     /**
      * Attempt to parse user input into a Delete Command
      *

@@ -38,28 +38,33 @@ public class Storage {
      * Adds a question from storage into question list being built.
      *
      * @param questions The question list to be built.
-     * @param currentQuestion The current question loaded from storage.
-     * @param questionIndex Index of current question in question list being built
-     * @param questionType Type of current question.
-     * @param questionDescription Description of current question.
-     * @param questionDoneStatus Done status of current question.
-     * @param questionDifficulty Difficulty of current question.
-     * @param questionModule Module of current question.
+     * @param qnType Type of current question.
+     * @param qnDescription Description of current question.
+     * @param qnDoneStatus Done status of current question.
+     * @param difficulty Difficulty of current question.
+     * @param qnModule Module of current question.
      */
-    private void addQuestionFromFile(QuestionList questions, String currentQuestion, int questionIndex,
-                                     String questionType, String questionDescription, String questionDoneStatus,
-                                     String questionDifficulty, String questionModule) {
-        switch (questionType) {
+    private int addQuestionFromFile(QuestionList questions, String qnType, String qnDescription,
+                                    String qnDoneStatus, Question.QnDifficulty difficulty,
+                                    String qnModule) {
+        switch (qnType) {
         case "S":
-            questions.addToQuestionList("short " + questionDescription + "/" + questionModule +
-                            "/" + questionDifficulty, Question.QnType.SHORTANSWER, false);
-            if (questionDoneStatus.equals("done")) {
-                questions.markQuestionAsDone(questionIndex, false);
+            try {
+                // Split the description by "/" and check for empty fields
+                String[] qnTokens = qnDescription.split("/");
+                if (qnTokens[0].isEmpty() || qnTokens[1].isEmpty() || qnModule.isEmpty()) {
+                    return 1;
+                }
+                questions.addShortAnswerQn(qnTokens[0], qnTokens[1], qnModule, difficulty, false);
+                if (qnDoneStatus.equals("done")) {
+                    questions.markQuestionAsDone(questions.getQuestionListSize(), false);
+                }
+                return 0;
+            } catch (ArrayIndexOutOfBoundsException exception) {
+                return 1;
             }
-            break;
         default:
-            System.out.println(currentQuestion);
-            break;
+            return 1;
         }
     }
     /**
@@ -70,7 +75,7 @@ public class Storage {
      * @param questions the questionList object for string parsed questions
      */
     private void parseQuestionsFromStrings(ArrayList<String> rawQuestions, QuestionList questions) {
-        int questionIndex = 1;
+        int failedQuestions = 0;
         for (int i = 1; i < rawQuestions.size(); i++) {
             try {
                 String currentQuestion = rawQuestions.get(i);
@@ -81,13 +86,13 @@ public class Storage {
                 String questionModule = questionSubStrings[3].strip();
                 String questionDifficulty = questionSubStrings[4].strip();
                 Question.QnDifficulty difficulty = Parser.extractQuestionDifficulty(questionDifficulty);
-                addQuestionFromFile(questions, currentQuestion, questionIndex, questionType, questionDescription,
-                        questionDoneStatus, String.valueOf(difficulty), questionModule);
+                failedQuestions += addQuestionFromFile(questions, questionType, questionDescription,
+                        questionDoneStatus, difficulty, questionModule);
             } catch (ArrayIndexOutOfBoundsException e) {
-                // if parsed unsuccessfully, maintain question order
-                questionIndex -= 1;
+                failedQuestions++;
             }
         }
+        System.out.println("    " + failedQuestions + " questions parsed unsuccessfully from storage file\n");
     }
     /**
      * Build a new question list from data stored in hard disk.

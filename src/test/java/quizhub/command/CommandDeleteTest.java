@@ -42,7 +42,7 @@ public class CommandDeleteTest {
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question : questionsToAdd) {
-            questionList.addToQuestionList(question, qnType, showMessage);
+            Parser.parseCommand(question).executeCommand(ui, mockStorage, questionList);
         }
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);
@@ -61,6 +61,7 @@ public class CommandDeleteTest {
     private void testCliOutputCorrectness(String expectedOutput) {
         assert expectedOutput != null : "Expected output should not be null";
         String actualOutput = outputStreamCaptor.toString().trim();
+        System.out.println(expectedOutput + "\n" +actualOutput);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -79,10 +80,11 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteInvalidTypeIndex() {
-        String expectedOutput = "Please enter valid integer index!\r\n" +
-                "    Please format your input as delete [question number]";
-        parser.parseCommand("delete test").executeCommand(ui, mockStorage, questionList);;
-        testCliOutputCorrectness(expectedOutput);
+        String expectedOutput = Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
+                        Parser.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
+                        CommandDelete.INVALID_FORMAT_MSG;
+        parser.parseCommand("delete test").executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput.strip());
     }
 
     /**
@@ -90,10 +92,11 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteMissingIndex() {
-        String expectedOutput = "Ono! You did not indicate question index :<\r\n" +
-                "    Please format your input as delete [question number]!";
+        String expectedOutput = Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
+                CommandDelete.MISSING_INDEX_MSG + System.lineSeparator() +
+                CommandDelete.INVALID_FORMAT_MSG;
         parser.parseCommand("delete").executeCommand(ui, mockStorage, questionList);;
-        testCliOutputCorrectness(expectedOutput);
+        testCliOutputCorrectness(expectedOutput.strip());
     }
 
     // /**

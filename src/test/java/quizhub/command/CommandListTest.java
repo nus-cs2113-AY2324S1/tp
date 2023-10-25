@@ -53,7 +53,7 @@ public class CommandListTest {
         String questionToAdd = "short Question / Answer / Mod1 / EASY";
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
-        questionList.addToQuestionList(questionToAdd, qnType, showMessage);
+        //questionList.addToQuestionList(questionToAdd, qnType, showMessage);
         String expectedOutput = "1: [S][] Question / Answer | Mod1 | EASY";
         questionList.printQuestionList();
         String actualOutput = outputStreamCaptor.toString().trim();
@@ -69,7 +69,7 @@ public class CommandListTest {
         String questionToAdd = "short Question / Answer / Mod1 / HARD";
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
-        questionList.addToQuestionList(questionToAdd, qnType, showMessage);
+        //questionList.addToQuestionList(questionToAdd, qnType, showMessage);
         questionList.markQuestionAsDone(1, showMessage);
         String expectedOutput = "1: [S][X] Question / Answer | Mod1 | HARD";
         questionList.printQuestionList();
@@ -90,7 +90,7 @@ public class CommandListTest {
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
-            questionList.addToQuestionList(question, qnType, showMessage);
+            //questionList.addToQuestionList(question, qnType, showMessage);
         }
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);

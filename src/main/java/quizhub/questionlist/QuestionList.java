@@ -21,50 +21,23 @@ public class QuestionList {
     public QuestionList(){
         allQns = new ArrayList<>();
     }
+
     /**
-     * Adds a user-requested question to the current question list.
-     * Depending on the type of question to add to the list,
-     * the program extracts the relevant information from
-     * the user input and builds a Question object to be added.
+     * Adds a short answer question to the current question list.
      *
-     * @param input The full user input from CLI.
-     * @param qnType The type of question to be added (SHORTANSWER).
+     * @param description The Question Description
+     * @param answer The answer of the Question
+     * @param module The module of the Question
+     * @param qnDifficulty The difficulty level of the questions
      * @param showMessage If true, program will print response message on CLI after question is added.
      */
-    public void addToQuestionList(String input, Question.QnType qnType, boolean showMessage){
-        switch (qnType) {
-        case SHORTANSWER:
-            try {
-                String[] inputTokens = input.split("short")[1].strip().split("/");
-                assert inputTokens.length == 4;
-                String description = inputTokens[0].strip();
-                String answer = inputTokens[1].strip();
-                String module = inputTokens[2].strip();
-                String difficulty = inputTokens[3].strip();
-                if (description.isEmpty() || answer.isEmpty() || module.isEmpty() || difficulty.isEmpty()) {
-                    throw new QuizHubExceptions("Incomplete Command");
-                }
-                Question.QnDifficulty qnDifficulty = Parser.extractQuestionDifficulty(difficulty);
-                if(qnDifficulty == Question.QnDifficulty.DEFAULT){
-                    System.out.println("    Question created using default normal difficulty"
-                            + System.lineSeparator());
-                    allQns.add(new ShortAnsQn(description, answer, module));
-                } else {
-                    allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
-                }
-                if (showMessage) {
-                    System.out.println("    I have added the following question OwO:");
-                    System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
-                    System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
-                }
-                break;
-            } catch (ArrayIndexOutOfBoundsException | QuizHubExceptions incompleteCommand) {
-                System.out.println("    Ono! You did not input a proper question!");
-                System.out.println("    Please format your input as short [question]/[answer]/[module]/[difficulty]!");
-                break;
-            }
-        default:
-            break;
+    public void addShortAnswerQn(String description, String answer, String module,
+                                 Question.QnDifficulty qnDifficulty, boolean showMessage){
+        allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
+        if (showMessage) {
+            System.out.println("    I have added the following question OwO:");
+            System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
+            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
         }
     }
     /**
