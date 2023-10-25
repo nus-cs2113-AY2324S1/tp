@@ -39,8 +39,8 @@ public class Parser {
     public static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
     public static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
     public static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    public static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<ingredientName>[A-Za-z0-9\\\\s]+) "
-            + "qty/(?<ingredientQty>[A-Za-z0-9\\\\s]+)\\s*(?<ingredientUnit>g|ml)";
+    public static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
+            + "qty/(?<ingredientQty>[A-Za-z0-9\\s]+)\\s*(?<ingredientUnit>g|ml)";
     public static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     public static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
     public static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
@@ -291,13 +291,13 @@ public class Parser {
         }
 
         String ingredientName = matcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-        String ingredientQty = matcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+        String ingredientQtyText = matcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+        String ingredientUnit = matcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
 
-        int qty = extractQty(ingredientQty);
-        String unit = extractUnit(ingredientQty);
+        int ingredientQty = extractQty(ingredientQtyText);
 
         try {
-            return new BuyIngredientCommand(ingredientName, qty, unit);
+            return new BuyIngredientCommand(ingredientName, ingredientQty, ingredientUnit);
         } catch (Exception e) {
             return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT);
         }
