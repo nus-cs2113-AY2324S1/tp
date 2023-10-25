@@ -76,7 +76,6 @@ public class Storage {
      */
     private void parseQuestionsFromStrings(ArrayList<String> rawQuestions, QuestionList questions) {
         int failedQuestions = 0;
-        int questionIndex = 1;
         for (int i = 1; i < rawQuestions.size(); i++) {
             try {
                 String currentQuestion = rawQuestions.get(i);

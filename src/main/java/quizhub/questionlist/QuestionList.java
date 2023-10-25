@@ -21,6 +21,7 @@ public class QuestionList {
     public QuestionList(){
         allQns = new ArrayList<>();
     }
+
     /**
      * Adds a short answer question to the current question list.
      *

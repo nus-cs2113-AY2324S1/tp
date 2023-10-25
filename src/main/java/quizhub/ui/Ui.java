@@ -13,6 +13,7 @@ public class Ui {
     private final Scanner input = new Scanner(System.in);  // Create a Scanner object
     private Storage dataStorage;
     private QuestionList tasks;
+    public static final String INVALID_COMMAND_MSG =  "    Please enter a valid command :0";
     /**
      * Sets up the bridging between the UI and tasks data.
      *
@@ -102,7 +103,7 @@ public class Ui {
     }
 
     public void showInvalidCommandHelp( String feedback ) {
-        System.out.println("    Please enter a valid command :0");
+        System.out.println(INVALID_COMMAND_MSG);
         System.out.println(feedback);
     }
 
