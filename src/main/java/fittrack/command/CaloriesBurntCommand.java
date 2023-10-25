@@ -1,7 +1,5 @@
 package fittrack.command;
 
-import fittrack.Ui;
-import fittrack.WorkoutList;
 import fittrack.data.Date;
 import fittrack.data.Workout;
 import fittrack.parser.CommandParser;

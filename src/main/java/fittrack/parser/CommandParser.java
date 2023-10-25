@@ -1,7 +1,22 @@
 package fittrack.parser;
 
 import fittrack.UserProfile;
-import fittrack.command.*;
+import fittrack.command.AddMealCommand;
+import fittrack.command.AddWorkoutCommand;
+import fittrack.command.BmiCommand;
+import fittrack.command.CalorieSumCommand;
+import fittrack.command.CaloriesBurntCommand;
+import fittrack.command.Command;
+import fittrack.command.DeleteMealCommand;
+import fittrack.command.DeleteWorkoutCommand;
+import fittrack.command.EditProfileCommand;
+import fittrack.command.ExitCommand;
+import fittrack.command.HelpCommand;
+import fittrack.command.InvalidCommand;
+import fittrack.command.SaveCommand;
+import fittrack.command.ViewMealsCommand;
+import fittrack.command.ViewProfileCommand;
+import fittrack.command.ViewWorkoutsCommand;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
 import fittrack.data.Calories;
@@ -101,7 +116,7 @@ public class CommandParser {
             return new SaveCommand(commandLine);
         case CalorieSumCommand.COMMAND_WORD:
             return new CalorieSumCommand(commandLine);
-            case CaloriesBurntCommand.COMMAND_WORD:
+        case CaloriesBurntCommand.COMMAND_WORD:
             return new CaloriesBurntCommand(commandLine);
         default:
             return new InvalidCommand(commandLine);
