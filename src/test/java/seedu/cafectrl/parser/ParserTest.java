@@ -29,7 +29,7 @@ class ParserTest {
     public void parseCommand_validCommand_successfulCommandParse() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 1, "cup"),
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 50, "g"),
                         new Ingredient("Chicken", 100, "g"))), 8.0F));
         menuItems.add(new Dish("Chicken Sandwich",
                 new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 100, "g"),
@@ -101,7 +101,7 @@ class ParserTest {
     public void parseCommand_validDeleteCommand_successfulCommandParse() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 1, "cup"),
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 50, "g"),
                         new Ingredient("Chicken", 100, "g"))), 8.0F));
         menuItems.add(new Dish("Chicken Sandwich",
                 new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 100, "g"),
@@ -243,6 +243,7 @@ class ParserTest {
         OrderList orderList = new OrderList();
         String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1kg";
         Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry, orderList);
+      
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
         //Test for 1 Dish added to Menu
@@ -252,7 +253,7 @@ class ParserTest {
         Dish getOutputDish = menu.getDishFromId(0);
         assertEquals("Christmas Ham", getOutputDish.getName()); // Dish name test
         assertEquals((float) 50.0, getOutputDish.getPrice()); //Dish price test
-        assertEquals("[Ham - 1kg]", getOutputDish.getIngredients().toString()); //Dish ingredients test
+        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString()); //Dish ingredients test
     }
 
     @Test
