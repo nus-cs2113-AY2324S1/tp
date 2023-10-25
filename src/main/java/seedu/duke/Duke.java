@@ -73,9 +73,6 @@ public class Duke {
                         incomeCommand.execute();
                         Income newIncome = incomeCommand.getNewIncome();
                         incomes.add(newIncome);
-                        Ui.showLineDivider();
-                        ui.printIncomeAddedMessage(newIncome);
-                        Ui.showLineDivider();
                     } catch (KaChinnnngException e) {
                         Ui.showLineDivider();
                         System.out.println(e.getMessage());
@@ -109,9 +106,9 @@ public class Duke {
                     break;
 
                 case "list":
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     new ListCommand(incomes, expenses, ui).execute();
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     break;
 
                 case "delete_income":
