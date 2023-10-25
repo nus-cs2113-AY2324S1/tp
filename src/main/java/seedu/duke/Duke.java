@@ -10,6 +10,8 @@ import seedu.duke.commands.DeleteIncomeCommand;
 import seedu.duke.commands.ExpenseLister;
 import seedu.duke.commands.ExpenseManager;
 import seedu.duke.commands.FindCommand;
+import seedu.duke.commands.EditExpenseCommand;
+import seedu.duke.commands.EditIncomeCommand;
 import seedu.duke.commands.IncomeLister;
 import seedu.duke.commands.IncomeManager;
 import seedu.duke.commands.KaChinnnngException;
@@ -73,6 +75,7 @@ public class Duke {
                         incomeCommand.execute();
                         Income newIncome = incomeCommand.getNewIncome();
                         incomes.add(newIncome);
+                        ui.printIncomeAddedMessage(newIncome);
                     } catch (KaChinnnngException e) {
                         Ui.showLineDivider();
                         System.out.println(e.getMessage());
@@ -81,7 +84,6 @@ public class Duke {
                     break;
 
                 case "list_income":
-                    Ui.showLineDivider();
                     new IncomeLister(incomes, ui).listIncomes();
                     break;
 
@@ -91,9 +93,7 @@ public class Duke {
                         expenseCommand.execute();
                         Expense newExpense = expenseCommand.getNewExpense();
                         expenses.add(newExpense);
-                        Ui.showLineDivider();
                         ui.printExpenseAddedMessage(newExpense);
-                        Ui.showLineDivider();
                     } catch (KaChinnnngException e) {
                         Ui.showLineDivider();
                         System.out.println(e.getMessage());
@@ -132,7 +132,6 @@ public class Duke {
                     new Balance(incomes, expenses).getBalanceMessage();
                     Ui.showLineDivider();
                     break;
-
                 case "find":
                     try {
                         String[] parsedParameters = FindParser.parseFindCommand(fullCommand);
@@ -162,6 +161,17 @@ public class Duke {
                     new ClearAll(incomes, expenses).clearAllIncomeAndExpense();
                     Ui.showLineDivider();
                     break;
+                case "edit_income":
+                    ui.showLineDivider();
+                    new EditIncomeCommand(incomes, fullCommand).execute();
+                    ui.showLineDivider();
+                    break;
+
+                case "edit_expense":
+                    ui.showLineDivider();
+                    new EditExpenseCommand(expenses, fullCommand).execute();
+                    ui.showLineDivider();
+                    break;
                 default:
                     Ui.showLineDivider();
                     System.out.println("Invalid command. Please try again.");
@@ -170,6 +180,7 @@ public class Duke {
                 }
             } catch (KaChinnnngException e) {
                 System.out.println(e.getMessage());
+                ui.showLineDivider();
             }
             save.saveIncomeAndExpense(incomes,expenses);
         }

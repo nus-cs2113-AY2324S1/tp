@@ -6,6 +6,11 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * The `ListCommand` class is responsible for displaying a list of income and expense records,
+ * along with the total income, total expenses, and the total balance.
+ * It extends the `Commands` class and is used to provide a summary of financial records to the user.
+ */
 public class ListCommand extends Commands {
     private ArrayList<Income> incomes;
     private ArrayList<Expense> expenses;
@@ -14,6 +19,14 @@ public class ListCommand extends Commands {
     private double totalIncome;
     private double totalExpenses;
 
+    /**
+     * Constructs a `ListCommand` object with the specified income and expense lists and a user interface.
+     *
+     * @param incomes   The list of income records to be displayed.
+     * @param expenses  The list of expense records to be displayed.
+     * @param ui        The user interface for displaying messages and financial records.
+     */
+
     public ListCommand(ArrayList<Income> incomes, ArrayList<Expense> expenses, Ui ui) {
         this.incomes = incomes;
         this.expenses = expenses;
@@ -21,6 +34,11 @@ public class ListCommand extends Commands {
         totalIncome = 0;
         totalExpenses = 0;
     }
+
+    /**
+     * Executes the `ListCommand` to display a summary of income and expense records,
+     * along with the total balance.
+     */
     @Override
     public void execute() {
         if (incomes.isEmpty() && expenses.isEmpty()) {

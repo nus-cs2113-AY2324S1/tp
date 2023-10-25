@@ -28,9 +28,9 @@ public class DeleteIncomeCommand extends Commands {
         int index = 0;
         try {
             String[] tokens = fullcommand.split(" ", 3);
-            index = Integer.parseInt(tokens[2]);
-            Income removedIncome = incomes.get(index-1);
-            incomes.remove(index-1);
+            index = Integer.parseInt(tokens[2])-1;
+            Income removedIncome = incomes.get(index);
+            incomes.remove(index);
             System.out.println("Noted. This income record has been deleted:");
             System.out.println(removedIncome);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -38,7 +38,7 @@ public class DeleteIncomeCommand extends Commands {
         } catch (NullPointerException | NumberFormatException e) {
             throw new KaChinnnngException("Oops! An integer index is expected");
         } catch (IndexOutOfBoundsException e) {
-            throw new KaChinnnngException("Oops! Income " + index + " does not exist");
+            throw new KaChinnnngException("Oops! Income " + (index+1) + " does not exist");
         }
 
     }
