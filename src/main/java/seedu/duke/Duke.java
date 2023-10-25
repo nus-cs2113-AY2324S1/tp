@@ -48,10 +48,10 @@ public class Duke {
                 "commands: ");
 
         String[] commandFormats = new String[] {
-                "list flashcards",
-                "create flashcard",
-                "review flashcards",
-                "help",
+            "list flashcards",
+            "create flashcard",
+            "review flashcards",
+            "help",
         };
 
         for (String commandFormat : commandFormats) {

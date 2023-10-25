@@ -6,7 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * storage for flashcards
@@ -16,7 +17,7 @@ public class FlashcardStorage {
     // simply implemented for save & load first
 
     protected String path;
-    private static Logger flashlogger; // for logging
+    static private Logger flashlogger; // for logging
 
     public FlashcardStorage(String path){
         this.path = path;
@@ -39,7 +40,7 @@ public class FlashcardStorage {
 
         assert tokens.length == 5 : "Token length should be 5";
 
-       //flashlogger.log(Level.INFO, "token length is", tokens.length);
+        //flashlogger.log(Level.INFO, "token length is", tokens.length);
 
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
@@ -115,7 +116,8 @@ public class FlashcardStorage {
             }
             fw.close();
         } catch (IOException e){
-            System.out.println("Failed to save.");
+            //System.out.println("Failed to save.");
+            flashlogger.log(Level.WARNING, "problem: failed to save");
         }
     }
 
