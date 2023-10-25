@@ -6,23 +6,31 @@ autonumber
 activate AddDishCommand
 AddDishCommand -> Menu: addDish(dish: Dish)
 activate Menu
-deactivate Menu
+return
 AddDishCommand -> Ui: printAddDishMessage(dish: Dish)
+
 
 activate Ui
 Ui -> Dish: getName()
+activate Dish
 Dish --> Ui: dishNameString: String
+deactivate Dish
 Ui -> Dish: getPrice()
+activate Dish
 Dish --> Ui: dishPrice: float
-
+deactivate Dish
 
 loop ingredients
 Ui -> Ingredients: toString()
+activate Ingredients
 Ingredients --> Ui
+deactivate Ingredients
 end loop
 
-Ui -> Ui: showToUser()
-
-
+Ui -> Ui: showToUser(message: String)
+activate Ui
+return
+return
+return
 
 @enduml
