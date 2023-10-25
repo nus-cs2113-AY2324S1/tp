@@ -7,6 +7,8 @@ import quizhub.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
+
 /**
  * Command to Start the Quiz
  */
@@ -14,6 +16,10 @@ public class CommandStart extends Command{
     private String startMode;
     private String startDetails = "";
     private String startQnMode = "";
+    public static final String MISSING_MODE_MSG = "    Ono! You did not indicate mode of the quiz :<";
+    public static final String INVALID_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
+            "/[quiz mode] [start details] /[qn mode]!";
     /**
      * Creates a new start command
      *
@@ -25,8 +31,8 @@ public class CommandStart extends Command{
         try {
             startMode = commandDetails[1].split(" ")[0].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("    Ono! You did not indicate mode of the quiz :<");
-            System.out.println("    Please format your input as start /[quiz mode] [start details]!");
+            System.out.println(MISSING_MODE_MSG);
+            System.out.println(INVALID_FORMAT_MSG);
             return;
         }
         try {
@@ -34,21 +40,20 @@ public class CommandStart extends Command{
                 startDetails = commandDetails[1].split(" ")[1].strip();
             }
         }  catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println("");
-            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+            System.out.println(INVALID_FORMAT_MSG);
         }
         try {
             // Reads in /random or /normal
             startQnMode = commandDetails[2].split(" ")[0].strip();
             if (!startQnMode.equals("random") && !startQnMode.equals("normal")) {
-                throw new IllegalArgumentException("    Question mode must be either 'random' or 'normal'");
+                throw new IllegalArgumentException(INVALID_MODE_MSG);
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
-        }finally {
+            System.out.println(INVALID_FORMAT_MSG);
+        } finally {
             if (startQnMode.isEmpty()) {
-                System.out.println("    Please format your input as start /[quiz mode] [start details] /[qn mode]!");
+                System.out.println(INVALID_FORMAT_MSG);
             }
         }
     }
