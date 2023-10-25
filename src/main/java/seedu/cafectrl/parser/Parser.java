@@ -180,17 +180,9 @@ public class Parser {
         }
     }
 
-    /** to be removed once the new regex is implemented because new regex only allows positive prices*/
-    private static void checkNegativePrice(float price) throws IllegalArgumentException {
-        if (price < 0) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     /**
-     * Parses the user's input text ingredients into <code>Ingredient</code> objects that is added into
-     * list of ingredients for the <code>Dish</code> object that is going to be added to the <code>Menu</code>
-     * @param ingredientsListString user's input string of ingredients
+     * Parses the user's input text ingredients.
+     * @param ingredientsListString user's input string of ingredients, multiple ingredients seperated by ',' is allowed
      * @return Ingredient objects that consists of the dish
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
      */
