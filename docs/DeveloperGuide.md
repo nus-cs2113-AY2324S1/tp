@@ -6,7 +6,15 @@
 
 ## Design & implementation
 
-![](/Users/pappalardodaniel/Desktop/CashLeh/src/main/java/cashleh/budget/budget.png)
+
+![](../docs/Images/budget.png)
+![](../docs/Images/commands.png)
+
+### Setting, viewing and editing a budget feature
+
+The option to set, view and edit a budget is managed by the `BudgetHandler`. An object of this class is constructed
+with two attributes, of type `FinancialStatement` and `Budget` respectively. It features both a setter and a getter
+which will be needed for the functioning of the overall budget feature.
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
