@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.flashcard.FlashcardComponent;
 import seedu.duke.flashcard.FlashcardStorage;
 
-import java.util.ArrayList;
-
 class DukeTest {
     @Test
     public void sampleTest() {

@@ -4,8 +4,6 @@ package seedu.duke.calendar;
 
 import seedu.duke.calendar.command.EventCommand;
 import seedu.duke.calendar.command.UnknownCommand;
-import seedu.duke.calendar.Event;
-import seedu.duke.flashcard.FlashcardStorage;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
