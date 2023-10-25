@@ -1,8 +1,5 @@
 package essenmakanan.recipe;
 
-import essenmakanan.exception.EssenMakananNullInputException;
-import essenmakanan.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,42 +8,27 @@ public class RecipeStepList extends ArrayList<Step> {
     private ArrayList<String> steps;
 
     public RecipeStepList() {
+        Scanner in = new Scanner(System.in);
+        String input;
+        boolean isAddingSteps = true;
         steps = new ArrayList<>();
 
-        boolean isAddingSteps;
-
         do {
-            Ui.drawDivider();
-            System.out.println("Add steps of your recipe, type \"|\" to separate each step, press \"Enter\" to finish");
-            Scanner in = new Scanner(System.in);
-            String input = in.nextLine();
-            try {
-                createStepList(input);
-                isAddingSteps = false;
-            } catch (EssenMakananNullInputException e) {
-                isAddingSteps = true;
-            }
-        } while (isAddingSteps);
+            System.out.println("Add steps of your recipe, type \"end\" to finish");
+            input = in.nextLine();
 
+            if (input.equals("end")) {
+                isAddingSteps = false;
+            } else {
+                addStep(input);
+            }
+        } while(isAddingSteps);
+        System.out.println("done steps");
     }
 
     public RecipeStepList(String[] steps) {
         this.steps = new ArrayList<>(Arrays.asList(steps));
     }
-
-    private void createStepList(String input) throws EssenMakananNullInputException {
-        if (input.length() == 0) {
-            throw new EssenMakananNullInputException();
-        }
-
-        String[] totalSteps = input.split("\\|");
-
-        for (String element : totalSteps) {
-            steps.add(element.trim());
-        }
-
-    }
-
 
     public void addStep(String input) {
         steps.add(input);
@@ -59,4 +41,5 @@ public class RecipeStepList extends ArrayList<Step> {
     public void deleteStep(Step step) {
         remove(step);
     }
+
 }
