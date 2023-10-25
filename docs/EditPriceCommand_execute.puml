@@ -5,7 +5,7 @@ autonumber
 
 Main -> EditPriceCommand: execute()
 activate EditPriceCommand
-EditPriceCommand -> Dish: setPrice()
+EditPriceCommand -> Dish: setPrice(price: float)
 activate Dish
 EditPriceCommand -> Ui: showEditPriceMessages()
 deactivate EditPriceCommand
