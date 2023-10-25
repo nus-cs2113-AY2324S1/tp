@@ -5,27 +5,22 @@
 
 autonumber
 
-Main -> Parser: parseCommand()
-activate Parser
-Parser -> Parser: prepareDelete()
-activate Parser
-return DeleteDishCommand()
-return DeleteDishCommand()
-
-Main -> DeleteDishCommand: execute()
+-> DeleteDishCommand : execute()
 activate DeleteDishCommand
-DeleteDishCommand -> Menu: getMenuItemsList()
+
+DeleteDishCommand -> Menu : getMenuItemsList().get(dishIndexToBeDeleted: int)
 activate Menu
 return (selectedDish: Dish)
-
-DeleteDishCommand -> Ui: showDeleteMessage()
+DeleteDishCommand -> Ui : showDeleteMessage(selectedDish: Dish)
 activate Ui
-Ui -> Ui: showToUser()
+Ui -> Ui : showToUser(message: String)
 activate Ui
 return
 return
-DeleteDishCommand -> Menu: removeDish()
+DeleteDishCommand -> Menu : removeDish(dishIndexToBeDeleted: int)
 activate Menu
 return
+return
+
 
 @enduml
