@@ -18,7 +18,6 @@ RecipeParser --> AddRecipeCommand : recipeTitle: String
 deactivate RecipeParser
 
 AddRecipeCommand -[hidden]> RecipeParser
-destroy RecipeParser
 
 AddRecipeCommand -[hidden]> Recipe
 create Recipe
