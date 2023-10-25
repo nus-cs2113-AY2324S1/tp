@@ -1,17 +1,22 @@
 package quizhub.parser;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import quizhub.command.Command;
 import quizhub.command.CommandShortAnswer;
 import quizhub.command.CommandInvalid;
+
+import java.io.ByteArrayOutputStream;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
 
     private Parser parser;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {

@@ -1,6 +1,5 @@
 package quizhub.storage;
 import quizhub.question.Question;
-import quizhub.question.ShortAnsQn;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
 
@@ -101,7 +100,7 @@ public class Storage {
             if (dataFile.createNewFile()) {
                 System.out.println("    Question-list created: " + dataFile.getName());
             }
-        } catch(NullPointerException | IOException invalidFilePath){
+        } catch(NullPointerException | IOException invalidFilePath) {
             System.out.println("    " + invalidFilePath.getMessage());
         }
         int questionIndex = 0;
@@ -117,8 +116,7 @@ public class Storage {
                 return;
             }
             parseQuestionsFromStrings(rawQuestions, questions);
-        }
-        catch(NullPointerException | IOException  invalidFilePath){
+        } catch(NullPointerException | IOException  invalidFilePath) {
             System.out.println("    " + invalidFilePath.getMessage());
         }
     }
@@ -166,8 +164,7 @@ public class Storage {
             for (Question question : allQuestions) {
                 storeQuestionToFile(question);
             }
-        }
-        catch(NullPointerException | IOException invalidFilePath){
+        } catch(NullPointerException | IOException invalidFilePath) {
             System.out.println("    " + invalidFilePath.getMessage());
             System.out.println("    ____________________________________________________________");
         }
