@@ -1,5 +1,8 @@
 package essenmakanan.recipe;
 
+import essenmakanan.exception.EssenMakananNullInputException;
+import essenmakanan.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -8,21 +11,36 @@ public class RecipeStepList extends ArrayList<Step> {
     private ArrayList<String> steps;
 
     public RecipeStepList() {
-        Scanner in = new Scanner(System.in);
-        String input;
-        boolean isAddingSteps = true;
         steps = new ArrayList<>();
 
-        do {
-            System.out.println("Add steps of your recipe, type \"end\" to finish");
-            input = in.nextLine();
+        boolean isAddingSteps;
 
-            if (input.equals("end")) {
+        do {
+            Ui.drawDivider();
+            System.out.println("Add steps of your recipe, type \"|\" to separate each step, press \"Enter\" to finish");
+            Scanner in = new Scanner(System.in);
+            String input = in.nextLine();
+            try {
+                createStepList(input);
                 isAddingSteps = false;
-            } else {
-                addStep(input);
+            } catch (EssenMakananNullInputException e) {
+                isAddingSteps = true;
             }
-        } while(isAddingSteps);
+        } while (isAddingSteps);
+
+    }
+
+    private void createStepList(String input) throws EssenMakananNullInputException {
+        if (input.length() == 0) {
+            throw new EssenMakananNullInputException();
+        }
+
+        String[] totalSteps = input.split("\\|");
+
+        for (String element : totalSteps) {
+            steps.add(element.trim());
+        }
+
     }
 
     public RecipeStepList(String[] steps) {
@@ -40,5 +58,4 @@ public class RecipeStepList extends ArrayList<Step> {
     public void deleteStep(Step step) {
         remove(step);
     }
-
 }
