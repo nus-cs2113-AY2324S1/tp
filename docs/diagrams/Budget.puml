@@ -10,7 +10,7 @@ return ui
 
 alt set
     BudgetCommand -> Budget: setBudget(budget)
-    BudgetCommand -> Ui: printSetBudgetMessage()
+    BudgetCommand -> Ui: printSetBudget()
 else update
     BudgetCommand -> Ui: printBudgetBeforeUpdate()
     BudgetCommand -> Budget: updateBudget(budget)

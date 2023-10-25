@@ -146,4 +146,28 @@ public class Ui {
                 "Highest income: " + income + "\n" + "Highest expense: " + expense + "\n" +
                 "Remaining budget for the month: " + budget + "\n\n" + "Reminders:\n" + reminders);
     }
+
+    public void printSetBudget() {
+        showMessage("A monthly budget of " + Budget.getInitialBudgetString() + " has been set.");
+    }
+
+    public void printBudgetExceedBalance() {
+        showMessage("Since initial budget exceeds current balance, budget will be reset to current balance.");
+    }
+
+    public void printBudgetError(String errorType) {
+        switch (errorType) {
+        case "delete":
+            showMessage("Budget has not been set yet.");
+            break;
+        case "reset":
+            showMessage("Budget has not been spent yet.");
+            break;
+        case "view":
+            showMessage("There is no existing budget.");
+            break;
+        default:
+            showMessage("Unknown command");
+        }
+    }
 }

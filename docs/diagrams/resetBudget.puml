@@ -8,12 +8,12 @@ participant Ui
 alt spentBudget
     opt initialBudgetExceedBalance
         BudgetCommand -> Budget: setInitialBudget(balance);
-        BudgetCommand -> Ui: printUpdateMessage()
+        BudgetCommand -> Ui: printBudgetExceedBalance()
     end
     BudgetCommand -> Budget: resetBudget()
     BudgetCommand -> Ui: printResetBudget()
 else else
-    BudgetCommand -> Ui: printErrorMessage()
+    BudgetCommand -> Ui: printBudgetError("reset")
 end
 
 hide footbox

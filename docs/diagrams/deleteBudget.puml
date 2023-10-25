@@ -9,7 +9,7 @@ alt hasBudget
     BudgetCommand -> Budget: deleteBudget()
     BudgetCommand -> Ui: printDeleteBudget()
 else else
-    BudgetCommand -> Ui: printErrorMessage()
+    BudgetCommand -> Ui: printBudgetError("delete")
 end
 
 hide footbox
