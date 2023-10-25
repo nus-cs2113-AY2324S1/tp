@@ -52,9 +52,9 @@ return :MealList
 
 main -> storage ++: workoutLoad()
 note left: load workouts in file to workoutList
-storage -> mDecoder ++: decodeWorkoutList(encodedWorkoutList: List<String>)
+storage -> wDecoder ++: decodeWorkoutList(encodedWorkoutList: List<String>)
 note right: decode the file contents and store in WorkoutList
-mDecoder -> wDecoder ++: decodeMealsFromString(encodedWorkout: String)
+wDecoder -> wDecoder ++: decodeMealsFromString(encodedWorkout: String)
 return __:Workout__
 return __:WorkoutList__
 return :WorkoutList
