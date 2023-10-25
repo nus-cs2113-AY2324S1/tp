@@ -1,9 +1,4 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
-autonumber
-
-@startuml
 
 skinparam Style strictuml
 
@@ -31,6 +26,4 @@ class Progress {
     -buildProgressBar(): String
     +displayProgressBar(): String
 }
-@enduml
-
 @enduml
