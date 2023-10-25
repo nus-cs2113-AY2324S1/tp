@@ -57,7 +57,7 @@ public class Parser {
      *
      * @param userInput The full user CLI input.
      */
-    public Command parseCommand(String userInput) {
+    public static Command parseCommand(String userInput) {
         String[] commandTokens = userInput.split(" ");
         if (commandTokens.length == 0) {
             return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
@@ -128,7 +128,7 @@ public class Parser {
             default:
                 System.out.println("    Ono! We only support easy, normal and hard difficulty levels" +
                         System.lineSeparator() +
-                        "    Please only use 'easy', 'normal' or 'hard' for difficulty levels!");
+                        "    Defaulting to NORMAL difficulty level");
                 return Question.QnDifficulty.NORMAL;
         }
     }
@@ -139,7 +139,7 @@ public class Parser {
      * @param userInput Raw command entered by the user
      * @return Delete command or an Invalid Command
      */
-    private Command parseDeleteCommand(String userInput) {
+    private static Command parseDeleteCommand(String userInput) {
         int qnIndex;
         String[] editDetails;
         try {
@@ -161,8 +161,22 @@ public class Parser {
      * @param userInput Raw command entered by the user
      * @return Find command or an Invalid Command
      */
-    private Command parseFindCommand(String userInput) {
-        return new CommandFind(userInput);
+    private static Command parseFindCommand(String userInput) {
+        String searchCriteria;
+        String searchKeyword;
+        try {
+            searchCriteria = userInput.split("/")[1].strip().split(" ")[0].strip();
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandFind.MISSING_CRITERIA_MSG + System.lineSeparator() +
+                    CommandFind.INVALID_FORMAT_MSG);
+        }
+        try{
+            searchKeyword = userInput.split("/" + searchCriteria)[1].strip();
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandFind.MISSING_KEYWORD_MSG + System.lineSeparator() +
+                    CommandFind.INVALID_FORMAT_MSG);
+        }
+        return new CommandFind(searchCriteria, searchKeyword);
     }
 
     /**
@@ -171,7 +185,7 @@ public class Parser {
      * @param userInput Raw command entered by the user
      * @return Edit command or an Invalid Command
      */
-    private Command parseEditCommand(String userInput) {
+    private static Command parseEditCommand(String userInput) {
         return new CommandEdit(userInput);
     }
 
@@ -181,7 +195,7 @@ public class Parser {
      * @param userInput Raw command entered by the user
      * @return Start Quiz command or an Invalid Command
      */
-    private Command parseStartCommand(String userInput) {
+    private static Command parseStartCommand(String userInput) {
         return new CommandStart(userInput);
     }
 
@@ -191,7 +205,7 @@ public class Parser {
      * @param userInput Raw command entered by the user
      * @return Mark Difficulty command or an Invalid Command
      */
-    private Command parseMarkDiffCommand(String userInput) {
+    private static Command parseMarkDiffCommand(String userInput) {
         return new CommandMarkDifficulty(userInput);
     }
 }
