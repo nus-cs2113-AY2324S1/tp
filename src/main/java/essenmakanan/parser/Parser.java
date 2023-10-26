@@ -29,8 +29,7 @@ public class Parser {
             break;
         case "delete":
             if (inputDetail.startsWith("r/")) {
-                int recipeToDelete = RecipeParser.getRecipeId(inputDetail);
-                command = new DeleteRecipeCommand(recipeToDelete);
+                command = new DeleteRecipeCommand(recipes, inputDetail);
             } else if (inputDetail.startsWith("i/")) {
                 command = new DeleteIngredientCommand(ingredients, inputDetail);
             } else {

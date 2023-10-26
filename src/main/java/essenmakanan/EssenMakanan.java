@@ -4,6 +4,7 @@ import essenmakanan.command.Command;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.exception.EssenMakananCommandException;
 import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenMakananOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
@@ -39,6 +40,8 @@ public class EssenMakanan {
             } catch (EssenMakananCommandException exception) {
                 exception.handleException();
             } catch (EssenMakananFormatException exception) {
+                exception.handleException();
+            } catch (EssenMakananOutOfRangeException exception) {
                 exception.handleException();
             }
         } while (!ExitCommand.isExitCommand(command));

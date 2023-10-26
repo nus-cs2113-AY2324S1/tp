@@ -1,24 +1,27 @@
 package essenmakanan.parser;
 
 import essenmakanan.exception.EssenMakananException;
+import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.exception.EssenMakananOutOfRangeException;
-import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 public class RecipeParser {
 
-    public static int getRecipeId(RecipeList recipes, String input) throws EssenMakananOutOfRangeException {
+    public static int getRecipeId(RecipeList recipes, String input) throws EssenMakananOutOfRangeException, EssenMakananFormatException {
         int index;
 
         if (input.matches("\\d+")) { //if input only contains numbers
+            if (input.length() != 1) {
+                throw new EssenMakananFormatException();
+            }
             index = Integer.parseInt(input);
         } else {
             index = recipes.indexOfRecipeByName(input);
         }
 
-        if (index == -1) {
+        if (!recipes.recipeIdInList(index)) {
             throw new EssenMakananOutOfRangeException();
         }
 

@@ -7,16 +7,19 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
-    public static int getIngredientId(IngredientList ingredients, String input) throws EssenMakananOutOfRangeException {
+    public static int getIngredientId(IngredientList ingredients, String input) throws EssenMakananOutOfRangeException, EssenMakananFormatException {
         int index;
 
         if (input.matches("\\d+")) { //if input only contains numbers
+            if (input.length() != 1) {
+                throw new EssenMakananFormatException();
+            }
             index = Integer.parseInt(input);
         } else {
             index = ingredients.indexOfIngredientByName(input);
         }
 
-        if (index == -1) {
+        if (!ingredients.ingredientIdInList(index)) {
             throw new EssenMakananOutOfRangeException();
         }
 

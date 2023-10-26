@@ -1,6 +1,6 @@
 package essenmakanan.recipe;
 
-import essenmakanan.ingredient.Ingredient;
+import essenmakanan.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -25,8 +25,9 @@ public class RecipeList {
         recipes.add(new Recipe(title, steps));
     }
 
-    public void deleteRecipe(Recipe recipe) {
-        recipes.remove(recipe);
+    public void deleteRecipe(int index) {
+        Ui.printDeleteRecipeSuccess(recipes.get(index).getTitle());
+        recipes.remove(index);
     }
 
     public Recipe getRecipeByIndex(int index) {
@@ -36,11 +37,28 @@ public class RecipeList {
 
     public Recipe getRecipeByName(String name) {
         for (Recipe recipe : recipes) {
-            if (recipe.getName().equals(name)) {
+            if (recipe.getTitle().equals(name)) {
                 return recipe;
             }
         }
         return null;
     }
 
+    public boolean recipeIdInList(int id) {
+        if (id > 0 && id < recipes.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    public int indexOfRecipeByName(String recipeTitle) {
+        int i = 0;
+        for (Recipe recipe : recipes) {
+            if (recipe.getTitle().equals(recipeTitle)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
 }

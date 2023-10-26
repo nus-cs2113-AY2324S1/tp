@@ -71,6 +71,11 @@ public class Ui {
         drawDivider();
     }
 
+    public static void printDeleteRecipeSuccess(String recipeTitle) {
+        System.out.println("You have deleted the following recipe: " + recipeTitle);
+        drawDivider();
+    }
+
     public static String validIngredientUnits() {
         return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
     }

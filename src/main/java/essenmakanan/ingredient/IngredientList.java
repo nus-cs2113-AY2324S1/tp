@@ -45,6 +45,13 @@ public class IngredientList {
         return -1;
     }
 
+    public boolean ingredientIdInList(int id) {
+        if (id > 0 && id < ingredients.size()) {
+            return true;
+        }
+        return false;
+    }
+
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
     }
