@@ -1,0 +1,6 @@
+[I] Income: job (Amount: 3000.0, Date: 2020-01-01)
+[I] Income: side hustle (Amount: 500.0, Date: 2023-10-19)
+[I] Income: job (Amount: 600.0, Date: 2023-10-25)
+[E] Expense: vacation (Amount: 4000.0, Date: 2023-10-25)
+[E] Expense: dinner (Amount: 50.0, Date: 2023-10-19)
+[E] Expense: tax (Amount: 40.0, Date: 2023-10-25)

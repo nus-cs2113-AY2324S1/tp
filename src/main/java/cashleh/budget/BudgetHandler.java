@@ -89,8 +89,9 @@ public class BudgetHandler {
             printBasicWarning();
             Ui.printMultipleText(texts);
         } else {
-            Ui.printText("Please create a new budget as you haven't"
-                    + " set one yet or deleted the previous one.");
+            String text = "Please create a new budget as you haven't"
+                    + " set one yet or deleted the previous one.";
+            throw new CashLehBudgetException(text);
         }
     }
 }
