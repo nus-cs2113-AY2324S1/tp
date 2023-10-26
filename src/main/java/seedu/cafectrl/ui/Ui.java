@@ -182,4 +182,13 @@ public class Ui {
     public void showMenuDish(String indexNum, String dishName, String dishPrice) {
         formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
     }
+
+    /**
+     * Shows the total cost in the order list, formatted in the proper format
+     *
+     * @param dollarCost The price of the orders
+     */
+    public void showTotalCost(String dollarCost) {
+        showToUser("Total orderList cost: $" + dollarCost);
+    }
 }

@@ -18,6 +18,11 @@ public class Pantry {
         pantryStock = retrieveStockFromStorage();
     }
 
+    public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
+        this.ui = ui;
+        this.pantryStock = pantryStock;
+    }
+
     /**
      * Retrieves the current pantry stock from storage, which may include reading from a file (pantry.txt).
      *

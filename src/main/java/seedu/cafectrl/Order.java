@@ -60,4 +60,8 @@ public class Order {
         this.isComplete = true;
     }
 
+    public boolean isComplete() {
+        return isComplete;
+    }
+
 }
