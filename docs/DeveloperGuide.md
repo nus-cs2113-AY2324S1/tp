@@ -21,22 +21,37 @@ The `Storage` component,
   
 
 ## Product scope
+
 ### Target user profile
 
-{Describe the target user profile}
+TaskLinker is tailored towards university students who use flashcards to 
+study for their courses and need an easy way to schedule and plan the 
+studying of their flashcards.
+
+TaskLinker is a CLI tool and as such, it is tailored towards students who 
+type fast and prefer a functional, but barebones app that runs in the 
+terminal over a GUI that looks more impressive but is slower to use. 
+
+As such, computer science students represent good target users of TaskLinker.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+TaskLinker is a CLI-tool for helping university students memorize flashcards
+and track their flashcard and general academic progress in the courses they are
+taking.
 
 
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ... | So that I can ...|
+|---------|----------|---------------|------------------|
+| v1.0    |user|create new flashcards|add new knowledge I want to study|
+| v1.0    |user|list all my flashcards|get a quick overview of my flashcard collection|
+| v1.0    |user|review my flashcards|so that I can memorize their contents|
+| v2.0    |new user|be able to invoke a help command|get advice/tips for how to use TaskLinker if I don' know how|
+| v2.0 |user reviewing flashcards|rate how hard it was to remeber their content|see harder flashcards more often and easy flashcards less frequently during reviews|
+|v2.0 |experienced user|use the delete and review feature by typing a one-line command|be faster than having to go through the prompt-anser workflow these features usually require|
 
 ## Non-Functional Requirements
 
