@@ -2,13 +2,14 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+actor User
 
 participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
 participant ":Parser" as Parser PARSER_COLOR
 participant "command:HelpCommand" as HelpCommand COMMAND_COLOR
-participant ":Ui" as Ui UI_COLOR
+participant "<<class>>\nUi" as Ui INTERFACE_COLOR
 
-[-> EssenMakanan : execute("help")
+User-> EssenMakanan : input: help
 activate EssenMakanan
 
 EssenMakanan -> Parser : parseCommand("help", recipes, ingredients)
@@ -18,9 +19,13 @@ create HelpCommand
 Parser -> HelpCommand
 activate HelpCommand
 
+
 HelpCommand --> Parser : command
 
-Parser -> HelpCommand : executeCommand()
+Parser --> EssenMakanan: command
+deactivate Parser
+
+EssenMakanan -> HelpCommand : executeCommand()
 
 HelpCommand -> Ui : showCommands()
 activate Ui
@@ -28,10 +33,9 @@ activate Ui
 Ui --> HelpCommand
 deactivate Ui
 
-HelpCommand --> Parser
+HelpCommand --> EssenMakanan
 deactivate HelpCommand
 
-Parser --> EssenMakanan
-deactivate Parser
+deactivate EssenMakanan
 
 @enduml
