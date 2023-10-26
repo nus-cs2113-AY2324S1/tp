@@ -116,13 +116,13 @@ public class CommandParser {
         }
     }
 
-    public InvalidCommand getInvalidCommand(String userCommandLine) {
+    public InvalidCommand getInvalidCommand(String userCommandLine) throws Storage.StorageOperationException {
         InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
 
-    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
+    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) throws Storage.StorageOperationException {
         InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
