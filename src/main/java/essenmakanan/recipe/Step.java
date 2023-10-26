@@ -8,9 +8,9 @@ public class Step {
 
     private Time time;
 
-    private TAG tag;
+    private Tag tag;
 
-    public Step(String description, Time time, TAG tag) {
+    public Step(String description, Time time, Tag tag) {
         this.description = description;
         this.time = time;
         this.tag = tag;

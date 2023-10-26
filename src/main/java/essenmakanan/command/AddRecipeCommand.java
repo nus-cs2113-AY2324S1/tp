@@ -1,5 +1,6 @@
 package essenmakanan.command;
 
+import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 
@@ -13,16 +14,11 @@ public class AddRecipeCommand extends Command {
         this.recipes = recipes;
     }
 
-    // not sure if this is necessary or not. If yes, move to parser later
-    public String parseRecipeTitle(String input) {
-        return input.replace("r/", "");
-    }
-
     @Override
     public void executeCommand() {
-        String recipeTitle = parseRecipeTitle(toAdd);
+        String recipeTitle = RecipeParser.parseRecipeTitle(toAdd);
         Recipe newRecipe = new Recipe(recipeTitle);
         recipes.addRecipe(newRecipe);
-        ui.showRecentAddedRecipe(recipeTitle);
+        ui.printAddRecipeSuccess(recipeTitle);
     }
 }

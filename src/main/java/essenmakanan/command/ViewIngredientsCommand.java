@@ -1,6 +1,7 @@
 package essenmakanan.command;
 
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ui.Ui;
 
 public class ViewIngredientsCommand extends Command {
 
@@ -13,6 +14,6 @@ public class ViewIngredientsCommand extends Command {
 
     @Override
     public void executeCommand() {
-        ui.printAllIngredients(ingredients);
+        Ui.printAllIngredients(ingredients);
     }
 }

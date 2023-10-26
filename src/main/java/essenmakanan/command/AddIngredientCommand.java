@@ -1,7 +1,10 @@
 package essenmakanan.command;
 
+import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.parser.IngredientParser;
+import essenmakanan.ui.Ui;
 
 public class AddIngredientCommand extends Command{
     private String toAdd;
@@ -13,16 +16,26 @@ public class AddIngredientCommand extends Command{
         this.ingredients = ingredients;
     }
 
-    public String parseIngredientTitle(String input) {
-        return input.replace("i/", "");
-    }
-
     @Override
     public void executeCommand() {
-        String ingredientTitle = parseIngredientTitle(toAdd);
-        Ingredient newIngredient = new Ingredient(ingredientTitle);
-        ingredients.addIngredient(newIngredient);
-        ui.showRecentAddedIngredient(ingredientTitle);
+        String[] allIngredients = toAdd.split("i/");
+
+        for (String ingredient : allIngredients) {
+            if (ingredient.isEmpty()) {
+                continue;
+            }
+
+            ingredient = ingredient.replace("i/", "");
+            Ingredient newIngredient = null;
+            try {
+                newIngredient = IngredientParser.parseIngredient(ingredients, ingredient);
+                ingredients.addIngredient(newIngredient);
+                Ui.printAddIngredientsSuccess(newIngredient.getName());
+            } catch (EssenMakananFormatException e) {
+                e.handleException();
+            }
+        }
+
     }
 }
 

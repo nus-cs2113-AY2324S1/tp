@@ -1,12 +1,17 @@
 package essenmakanan.ingredient;
 
 import java.util.ArrayList;
+import essenmakanan.ui.Ui;
 
 public class IngredientList {
     private ArrayList<Ingredient> ingredients;
 
     public IngredientList() {
         ingredients = new ArrayList<>();
+    }
+
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     public Ingredient getIngredient(int index) {
@@ -18,20 +23,20 @@ public class IngredientList {
     }
 
     public void deleteIngredient(Ingredient ingredient) {
-        System.out.println("You have deleted the following ingredient: " + ingredient.getName());
+        Ui.printDeleteIngredientsSuccess(ingredient.getName());
         ingredients.remove(ingredient);
     }
 
     public void listIngredients() {
+        Ui.drawDivider();
         System.out.println("Here's a list of your ingredients!");
-
         int count = 1;
 
         for (Ingredient ingredient : ingredients) {
             assert ingredients.get(count - 1).getName().equals(ingredient.getName())
                     : "Title is not matching with the current index";
 
-            System.out.println(count + ". " + ingredient.getName());
+            System.out.println(count + ". " + ingredient);
             count++;
         }
     }
