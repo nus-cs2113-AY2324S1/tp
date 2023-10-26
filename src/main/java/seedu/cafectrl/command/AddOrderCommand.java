@@ -9,8 +9,8 @@ import seedu.cafectrl.ui.Ui;
 import java.text.DecimalFormat;
 
 public class AddOrderCommand extends Command {
-    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     public static final String COMMAND_WORD = "add_order";
+    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add order to orders\n"
             + "Parameters: DISH_NAME, DISH_QTY\n"
