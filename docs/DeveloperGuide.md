@@ -32,6 +32,7 @@
   * [Parser Component](#parser-component)
   * [Command Component](#command-components)
   * [Storage Component](#storage-component)
+  * [UI Component](#ui-component)
 * [Product Scope](#product-scope)
 * [Non Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
@@ -300,6 +301,37 @@ Apart from the main `updateData` method, it involves the use of 2 other helper m
 - `private void storeQuestionToFile(Question question)`
 
 Upon exiting the program, the `Ui` class will call the `updateData` method and passing in the current `QuestionList` of the program. Within the method, the `writeToFile` helper method is first called to determine whether texts are to replace existing content of the file or to be appended at the back. Then, each question is stored in the appropriate format into the destination file using the method `storeQuestionToFile` which parses a `Question` object into the correct string format for storage.
+
+## UI Component
+
+The UI class in the Quizhub application is responsible for handling the user interface interactions in a command-line interface (CLI). It provides methods for displaying messages or questions as well as getting user
+input.
+
+### Constructor
+
+#### `public Ui(Storage dataStorage, QuestionList tasks)`
+
+- **Parameters:**
+  - `dataStorage`: An instance of the `Storage` class, which handles the storage of quiz data on the hard disk.
+  - `tasks`: An instance of the `QuestionList` class, which represents a record of all questions documented in the application.
+
+### Implementation Details
+
+#### Overall Flow
+
+![](./UML/ui_flow.jpg)
+
+When the program is first initiated, the `displayOpeningMessage()` method is called to display a welcome message while also calling the `loadData()` method of the `dataStorage` to display all the questions stored in the storage file if any.
+
+Afterwards, in the main loop of the program execution, the `getUserInput()` method is called at the start of the loop to capture user input as a `String` object, which is then used by the `Parser` and various `Command` classes to parse and execute the appropriate commands. This process is terminated only upon execution of a `CommandExit`.
+
+Finally, the `displayClosingMessage()` method is called to display a farewell message while also calling the `updateData()` method of the `dataStorage` to update the data stored in the storage file with the latest ones.
+
+#### Displaying Quizzes
+
+![](./UML/ui_quiz.jpg)
+
+The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions.
 
 # Product scope
 
