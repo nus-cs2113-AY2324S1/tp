@@ -81,7 +81,7 @@ public class CommandParser {
         return command;
     }
 
-    public Command getBlankCommand(String word, String commandLine) {
+    public Command getBlankCommand(String word, String commandLine) throws Storage.StorageOperationException {
         switch (word) {
 
         case HelpCommand.COMMAND_WORD:
