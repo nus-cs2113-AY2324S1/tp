@@ -2,6 +2,7 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
+import fittrack.storage.Storage;
 
 public class InvalidCommand extends Command {
     public static final String MESSAGE_INVALID_COMMAND = "`%s` is an invalid command.";
