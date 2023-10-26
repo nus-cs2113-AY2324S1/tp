@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
 import quizhub.storage.MockStorage;
@@ -39,7 +38,6 @@ public class CommandDeleteTest {
             "short Question2 / Answer2 / Mod2 / NORMAL",
             "short Question3 / Answer3 / Mod3 / NORMAL",
             "short Question4 / Answer4 / Mod4/ NORMAL" };
-        Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question : questionsToAdd) {
             Parser.parseCommand(question).executeCommand(ui, mockStorage, questionList);
@@ -104,7 +102,7 @@ public class CommandDeleteTest {
     // * */
     @Test
     void testDeleteValidIndex() {
-        String expectedOutput = "Roger that! I have deleted the following question >w< !\r\n" +
+        String expectedOutput = "Roger that! I have deleted the following question >w< !\n" +
             "        [S][X] Question1 / Answer1 | Mod1 | NORMAL\n" +
             "    Now you have 3 questions in the list! UWU";
         questionList.deleteQuestionByIndex(1);

@@ -26,11 +26,11 @@ class QuestionListTest {
 
     @Test
     void test_addToQuestionList_valid() {
-        String input = "short Question / Answer / Mod1 / NORMAL";
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = true;
         QuestionList qns = new QuestionList();
-        //qns.addToQuestionList(input, qnType, showMessage);
+        qns.addShortAnswerQn("Question", "Answer",
+                "Mod1", Question.QnDifficulty.NORMAL, true);
         assertEquals("I have added the following question OwO:" +
                 "      [S] Question / Answer | Mod1 | NORMAL    Now you have 1 questions in the list! UWU",
                 outputStreamCaptor.toString().strip().replaceAll("\\R", ""));

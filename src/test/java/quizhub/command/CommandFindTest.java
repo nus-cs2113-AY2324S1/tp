@@ -4,15 +4,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.io.TempDir;
+import quizhub.parser.Parser;
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
+import quizhub.storage.MockStorage;
+import quizhub.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.nio.file.Path;
 
 public class CommandFindTest {
     private static QuestionList questionList;
+    private static Ui ui;
+    private static MockStorage mockStorage;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -20,16 +28,20 @@ public class CommandFindTest {
      * Create a new question list and populate with dummy SHORTANSWER questions
      */
     @BeforeAll
-    public static void setQuestionList() {
+    public static void setQuestionList(@TempDir Path tempDir) {
+        Path tempFile = tempDir.resolve("testStorage.txt");
         questionList = new QuestionList();
+        mockStorage = new MockStorage(tempFile.toString());
+        ui = new Ui(mockStorage, questionList);
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",
             "short Question2 / Answer2 / Mod2 / NORMAL",
             "short Question3 / Answer3 / Mod3 / NORMAL",
-            "short Question4 / Answer4 / Mod4 / NORMAL" };
+            "short Question4 / Answer4 / Mod4 / NORMAL"
+        };
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
-        for (String question : questionsToAdd) {
-            //questionList.addToQuestionList(question, qnType, showMessage);
+        for (String question:questionsToAdd) {
+            Parser.parseCommand(question).executeCommand(ui, mockStorage, questionList);
         }
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);
@@ -55,62 +67,53 @@ public class CommandFindTest {
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
-
-    /*
     /**
      * Test finding with no criteria
      */
-    /*
     @Test
     void testFindNoCriteria() {
-        String expectedOutput = "Ono! You did not indicate if you are searching by description or module :<" +
-                "\r\n    Please format your input as find /description [description] or find /module [module]!";
-        testCliOutputCorrectness(expectedOutput);
+        String expectedOutput = Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
+                CommandFind.MISSING_CRITERIA_MSG + System.lineSeparator() +
+                CommandFind.INVALID_FORMAT_MSG;
+        Parser.parseCommand("find").executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput.strip());
     }
-     */
 
-    /*
     /**
      * Test finding by description with no keyword
      */
-    /*
     @Test
     void testFindDescriptionNoKeyword() {
-        String expectedOutput = "Ono! You did not indicate the keywords you are searching by :<" +
-                "\r\n    Please format your input as find /description [description] or find /module [module]!";
-        questionList.searchList("find /description");
-        testCliOutputCorrectness(expectedOutput);
+        String expectedOutput = Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
+                CommandFind.MISSING_KEYWORD_MSG + System.lineSeparator() +
+                CommandFind.INVALID_FORMAT_MSG;
+        Parser.parseCommand("find /description").executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput.strip());
     }
-    */
 
-    /*
     /**
      * Test finding by description with matches
      */
-    /*
     @Test
     void testFindDescriptionWithMatches() {
-        String expectedOutput = "Here are questions that matched your search:\r\n"
+        String expectedOutput = "Here are questions that matched your search:\n"
                 + "    1: [S][X] Question1 / Answer1 | Mod1 | NORMAL\n"
                 + "    2: [S][] Question2 / Answer2 | Mod2 | NORMAL\n"
                 + "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL\n"
                 + "    4: [S][] Question4 / Answer4 | Mod4 | NORMAL";
-        questionList.searchList("find /description Question");
+        Parser.parseCommand("find /description Question").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
-     */
 
-    /*
     /**
      * Test finding by description with no matches
      */
-    /*
+
     @Test
     void testFindDescriptionNoMatches() {
-        String expectedOutput = "Here are questions that matched your search:\r\n"
+        String expectedOutput = "Here are questions that matched your search:\n"
                 + "    No results found :< Check your keyword is correct?";
-        questionList.searchList("find /description no matches");
+        Parser.parseCommand("find /description no matches").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
-    */
 }
