@@ -30,8 +30,8 @@ public class EssenMakanan {
         String input = "";
 
         Command command = null;
+        Ui.showCommands();
         do {
-            Ui.showCommands();
             input = in.nextLine();
             try {
                 command = parser.parseCommand(input, recipes, ingredients);

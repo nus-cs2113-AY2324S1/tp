@@ -3,6 +3,7 @@ package essenmakanan.parser;
 import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.command.Command;
+import essenmakanan.command.EditIngredientCommand;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.command.HelpCommand;
 import essenmakanan.command.ViewIngredientsCommand;
@@ -24,9 +25,9 @@ public class Parser {
 
         switch (commandType) {
         case "add":
-            if (!inputDetail.isEmpty() && inputDetail.startsWith("r/")) {
+            if (inputDetail.startsWith("r/")) {
                 command = new AddRecipeCommand(inputDetail, recipes);
-            } else if (!inputDetail.isEmpty() && inputDetail.startsWith("i/")) {
+            } else if (inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
             } else {
                 throw new EssenMakananFormatException();
@@ -37,6 +38,13 @@ public class Parser {
                 command = new ViewRecipesCommand(recipes);
             } else if (inputDetail.equals("i")) {
                 command = new ViewIngredientsCommand(ingredients);
+            } else {
+                throw new EssenMakananFormatException();
+            }
+            break;
+        case "edit":
+            if (inputDetail.startsWith("i/")) {
+                command = new EditIngredientCommand(inputDetail, ingredients);
             } else {
                 throw new EssenMakananFormatException();
             }
