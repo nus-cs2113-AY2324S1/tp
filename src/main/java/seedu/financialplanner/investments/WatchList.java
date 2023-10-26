@@ -87,6 +87,9 @@ public class WatchList {
             throw new RuntimeException(e);
         }
         JSONArray ja = (JSONArray) obj;
+        if (ja.size() != stocks.size()) {
+            throw new FinancialPlannerException("Error getting API info!");
+        }
         int i = 0;
         for (Object jo : ja) {
             JSONObject stock = (JSONObject) jo;
