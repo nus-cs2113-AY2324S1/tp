@@ -110,6 +110,8 @@ public class CommandParser {
             return new SaveCommand(commandLine);
         case CalorieSumCommand.COMMAND_WORD:
             return new CalorieSumCommand(commandLine);
+        case CheckWeightRange.COMMAND_WORD:
+            return new CheckWeightRange(commandLine);
         default:
             return new InvalidCommand(commandLine);
 
