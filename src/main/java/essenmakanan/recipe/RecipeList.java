@@ -3,6 +3,7 @@ package essenmakanan.recipe;
 import essenmakanan.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeList {
     private ArrayList<Recipe> recipes;
@@ -44,13 +45,6 @@ public class RecipeList {
         return null;
     }
 
-    public boolean recipeExist(int index) {
-        if (index >= 0 && index < recipes.size()) {
-            return true;
-        }
-        return false;
-    }
-
     public int getIndexOfRecipeByName(String recipeTitle) {
         int i = 0;
         for (Recipe recipe : recipes) {
@@ -61,6 +55,13 @@ public class RecipeList {
         }
         return -1;
     }
+    public boolean recipeExist(int index) {
+        if (index >= 0 && index < recipes.size()) {
+            return true;
+        }
+        return false;
+    }
+
 
     public void listRecipeTitles() {
         Ui.drawDivider();
@@ -74,5 +75,39 @@ public class RecipeList {
             System.out.println(count + ". " + recipe);
             count++;
         }
+    }
+
+    private static void listRecipeSteps(Recipe recipe) {
+        List<String> steps = recipe.getRecipeSteps();
+        int count = 1;
+        for (String s : steps) {
+            assert steps.get(count - 1).equals(s)
+                    : "Step is not matching with the current index";
+
+            System.out.println("Step " + count + ": " + s);
+            count++;
+        }
+    }
+
+    public void viewRecipeByIndex(int index) {
+        Ui.drawDivider();
+        if (index < 0 || index >= recipes.size()) {
+            System.out.println("We have " + recipes.size() + "recipes right now and the given input is invalid.");
+            return;
+        }
+        Recipe recipe = recipes.get(index-1);
+        listRecipeSteps(recipe);
+    }
+
+    public void viewRecipeByTitle(String title) {
+        Ui.drawDivider();
+        Recipe recipe = recipes.stream()
+            .filter(recipe1 -> recipe1.getTitle().equals(title))
+            .findFirst()
+            .orElse(null);
+        if (recipe == null) {
+            System.out.println("You haven't added this recipe with given title");
+        }
+        listRecipeSteps(recipe);
     }
 }
