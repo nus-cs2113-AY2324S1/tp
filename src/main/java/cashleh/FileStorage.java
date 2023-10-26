@@ -47,6 +47,10 @@ public class FileStorage {
         filePath = FILEPATH_PREFIX + userName + ".txt";
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
     /**
      * Reads income and expense data from a file and populates the provided IncomeStatement and ExpenseStatement
      * objects with the data. If the file does not exist, it creates an empty file with the filePath.
