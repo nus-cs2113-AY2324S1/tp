@@ -93,14 +93,29 @@ public class WatchList {
         int i = 0;
         for (Object jo : ja) {
             JSONObject stock = (JSONObject) jo;
-            String price = StringUtils.rightPad(stock.get("price").toString(), 10);
 
             if (!stocks.get(i).getSymbol().equals(stock.get("symbol"))) {
                 i += 1;
                 logger.log(Level.WARNING, "Stocks matching error!");
                 continue;
             }
+
+            String price = stock.get("price").toString();
+            assert price != null;
             stocks.get(i).setPrice(price);
+
+            String exchange = stock.get("exchange").toString();
+            assert exchange != null;
+            stocks.get(i).setExchange(exchange);
+
+            String dayHigh = stock.get("dayHigh").toString();
+            assert dayHigh != null;
+            stocks.get(i).setDayHigh(dayHigh);
+
+            String dayLow = stock.get("dayLow").toString();
+            assert dayLow != null;
+            stocks.get(i).setDayLow(dayLow);
+
             i += 1;
         }
     }

@@ -9,6 +9,11 @@ import seedu.financialplanner.list.Cashflow;
 import java.util.Scanner;
 
 public class Ui {
+    private final String RED = "\u001B[31m";
+    private final String GREEN = "\u001B[32m";
+    private final String RESET = "\u001B[0m";
+
+    private final String YELLOW = "\u001B[33m";
     private static Ui ui = null;
     private Scanner Scanner = new Scanner(System.in);
     private Ui() {
@@ -52,7 +57,13 @@ public class Ui {
     public void printWatchListHeader() {
         System.out.print("Symbol");
         System.out.print("    ");
-        System.out.print("Price");
+        System.out.print("Market");
+        System.out.print("    ");
+        System.out.print(YELLOW + "Price" + RESET);
+        System.out.print("     ");
+        System.out.print(GREEN + "Daily High" + RESET);
+        System.out.print("     ");
+        System.out.print(RED + "Daily Low" + RESET);
         System.out.print("     ");
         System.out.print("Company Name");
         System.out.println();
@@ -61,9 +72,12 @@ public class Ui {
     public void printStocksInfo(WatchList watchList) {
         for (Stock stock: watchList.getStocks()) {
             String symbol = StringUtils.rightPad(stock.getSymbol(), 10);
-            String price = StringUtils.rightPad(stock.getPrice(), 10);
-            String name = StringUtils.rightPad((String) stock.getStockName(), 10);
-            System.out.println(symbol + price + name);
+            String market = StringUtils.rightPad(stock.getExchange(), 10);
+            String price = YELLOW + StringUtils.rightPad(stock.getPrice(), 10) + RESET;
+            String dayHigh = GREEN + StringUtils.rightPad(stock.getDayHigh(), 15) + RESET;
+            String dayLow = RED + StringUtils.rightPad(stock.getDayLow(), 14) + RESET;
+            String name = StringUtils.rightPad(stock.getStockName(), 10);
+            System.out.println(symbol + market + price + dayHigh + dayLow + name);
         }
     }
 
