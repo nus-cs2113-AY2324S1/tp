@@ -54,12 +54,12 @@ public class FinancialStatement {
     }
 
     /**
-     * Displays the net cash on hand and prints each entry of
-     * the financial statement on a new line, differentiating between
-     * incomes and expenses by adding a '+' sign to the former and a '-'
-     * sign to the latter.
+     * Prints the financial statement, including both income and expense transactions.
+     * This method generates a formatted financial statement based on the transactions
+     * in the financialStatement list. It creates a textual representation of each
+     * transaction, including its type (Income or Expense), date, description, amount,
+     * and category (if available), and then uses the Ui.printStatement method to display the statement.
      */
-
     public void printTransactions() {
         int listSize = financialStatement.size();
         String[] texts = new String[listSize];
@@ -71,7 +71,7 @@ public class FinancialStatement {
             String cat = currentTransaction.getCategory() == null ? "-" : currentTransaction.getCategory().toString();
             texts[i] = type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat;
         }
-        Ui.printFinancialStatement(texts);
+        Ui.printStatement("Financial Statement", texts);
     }
 
     /**

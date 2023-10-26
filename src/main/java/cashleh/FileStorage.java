@@ -24,16 +24,42 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * The `FileStorage` class is responsible for reading and writing financial transaction data to and from a file.
+ * It provides methods for reading and writing income and expense data from and to a text file. The file format
+ * is expected to be in a specific format, where each transaction is identified by a type (Income or Expense)
+ * and contains details such as description, amount, date, and category (if applicable).
+ *
+ */
 public class FileStorage {
-    private final String filePathPrefix = "data/";
-    private final char incomeType = 'I';
-    private final char expenseType = 'E';
+    private static final String FILEPATH_PREFIX = "data/";
+    private static final char INCOME_TYPE = 'I';
+    private static final char EXPENSE_TYPE = 'E';
     private String filePath;
 
+    /**
+     * Constructor for a new 'FileStorage' object with the provided username, which is used to
+     * generate the file path for reading and writing transaction data.
+     *
+     * @param userName The username of the user for whom the transaction data is stored.
+     */
     public FileStorage(String userName) {
-        filePath = filePathPrefix + userName + ".txt";
+        filePath = FILEPATH_PREFIX + userName + ".txt";
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    /**
+     * Reads income and expense data from a file and populates the provided IncomeStatement and ExpenseStatement
+     * objects with the data. If the file does not exist, it creates an empty file with the filePath.
+     *
+     * @param incomeStatement The IncomeStatement object to populate with income data.
+     * @param expenseStatement The ExpenseStatement object to populate with expense data.
+     * @throws CashLehReadFromFileException If there is an error while reading from the file.
+     * @throws CashLehFileCorruptedException If the file format is corrupted or invalid.
+     */
     public void readFromFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement)
             throws CashLehReadFromFileException, CashLehFileCorruptedException {
         File file = new File(filePath);
@@ -67,11 +93,11 @@ public class FileStorage {
                 }
 
                 switch (transactionType) {
-                case incomeType:
+                case INCOME_TYPE:
                     Income income = getIncome(transactionInfo);
                     incomeStatement.addIncome(income);
                     break;
-                case expenseType:
+                case EXPENSE_TYPE:
                     Expense expense = getExpense(transactionInfo);
                     expenseStatement.addExpense(expense);
                     break;
@@ -86,6 +112,14 @@ public class FileStorage {
         }
     }
 
+    /**
+     * Writes income and expense data to a file based on the provided IncomeStatement and ExpenseStatement
+     * objects. The data is written in a specific format to the file.
+     *
+     * @param incomeStatement The IncomeStatement object containing income data to be written.
+     * @param expenseStatement The ExpenseStatement object containing expense data to be written.
+     * @throws CashLehWriteToFileException If there is an error while writing to the file.
+     */
     public void writeToFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement)
             throws CashLehWriteToFileException {
         try {
@@ -107,7 +141,7 @@ public class FileStorage {
         }
     }
 
-    public Income getIncome(String input) throws CashLehFileCorruptedException {
+    private Income getIncome(String input) throws CashLehFileCorruptedException {
         // Define the prefixes to extract income information
         String[] incomePrefixes = {"Income: ", "(Amount: ", ", Date: ", ", Category: :optional"};
 
@@ -168,7 +202,7 @@ public class FileStorage {
         }
     }
 
-    public Expense getExpense(String input) throws CashLehFileCorruptedException {
+    private Expense getExpense(String input) throws CashLehFileCorruptedException {
         // Define the prefixes to extract expense information
         String[] expensePrefixes = {"Expense: ", "(Amount: ", ", Date: ", ", Category: :optional"};
 
