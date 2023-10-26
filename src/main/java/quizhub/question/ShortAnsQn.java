@@ -37,7 +37,7 @@ public class ShortAnsQn extends Question {
     @Override
     public void editQuestion(String newDescription, String newAnswer) {
         super.editQuestion(newDescription, newAnswer);
-        if(null != newAnswer){
+        if(!newAnswer.equals("")){
             this.answer = newAnswer;
         }
     }

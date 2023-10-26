@@ -135,7 +135,7 @@ public class Question {
      * @param newAnswer New answer of the question.
      */
     public void editQuestion(String newDescription, String newAnswer){
-        if(null != newDescription){
+        if(!newDescription.equals("")){
             this.description = newDescription;
         }
     }

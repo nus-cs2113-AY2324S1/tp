@@ -208,7 +208,43 @@ public class Parser {
      * @return Edit command or an Invalid Command
      */
     private static Command parseEditCommand(String userInput) {
-        return new CommandEdit(userInput);
+        String[] editDetails;
+        String editCriteria;
+        int qnIndex;
+        String newDescription = "";
+        String newAnswer = "";
+        try {
+            editDetails = userInput.split(" ");
+            qnIndex = Integer.parseInt(editDetails[1].strip());
+        } catch (NumberFormatException incompleteCommand) {
+            return new CommandInvalid(INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
+                    CommandEdit.INVALID_FORMAT_MSG);
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandEdit.MISSING_INDEX_MSG + System.lineSeparator() +
+                    CommandEdit.INVALID_FORMAT_MSG);
+        }
+        try {
+            editCriteria = editDetails[2].strip();
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandEdit.MISSING_CRITERIA_MSG + System.lineSeparator() +
+                    CommandEdit.INVALID_FORMAT_MSG);
+        }
+        try{
+            switch (editCriteria){
+            case "/description":
+                newDescription = Parser.getContentAfterKeyword(userInput, "/description");
+                break;
+            case "/answer":
+                newAnswer = Parser.getContentAfterKeyword(userInput, "/answer");
+                break;
+            default:
+                throw new ArrayIndexOutOfBoundsException();
+            }
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG + System.lineSeparator() +
+                    CommandEdit.INVALID_FORMAT_MSG);
+        }
+        return new CommandEdit(qnIndex, newDescription, newAnswer);
     }
 
     /**
