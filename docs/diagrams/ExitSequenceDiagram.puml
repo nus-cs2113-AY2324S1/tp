@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+
+participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant "command:ExitCommand" as ExitCommand COMMAND_COLOR
+participant "<<class>>\nUi" as Ui INTERFACE_COLOR
+
+User-> EssenMakanan : input: exit
+activate EssenMakanan
+
+EssenMakanan -> Parser : parseCommand("exit")
+activate Parser
+
+create ExitCommand
+Parser -> ExitCommand
+activate ExitCommand
+
+
+ExitCommand --> Parser : command
+
+Parser --> EssenMakanan: command
+deactivate Parser
+
+EssenMakanan -> ExitCommand : executeCommand()
+
+ExitCommand -> Ui : bye()
+activate Ui
+
+Ui --> ExitCommand : exit message
+deactivate Ui
+
+ExitCommand --> EssenMakanan : exit message
+deactivate ExitCommand
+
+deactivate EssenMakanan
+
+@enduml
