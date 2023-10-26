@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.io.TempDir;
-import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
 import quizhub.storage.MockStorage;
@@ -32,11 +31,11 @@ public class CommandEditTest {
         Path tempFile = tempDir.resolve("testStorage.txt");
         questionList = new QuestionList();
         mockStorage = new MockStorage(tempFile.toString());
+        ui = new Ui(mockStorage, questionList);
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",
             "short Question2 / Answer2 / Mod2 / NORMAL",
             "short Question3 / Answer3 / Mod3 / NORMAL",
             "short Question4 / Answer4 / Mod4 / NORMAL" };
-        Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
             Parser.parseCommand(question).executeCommand(ui, mockStorage, questionList);
@@ -72,7 +71,8 @@ public class CommandEditTest {
     @Test
     void testEditOutOfBoundIndex(){
         String expectedOutput = "Ono! Please enter valid question number *sobs*";
-        questionList.editQuestionByIndex(-1, "", "");
+        String userInput = "edit -1 /description NewDescription";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
 
@@ -81,8 +81,11 @@ public class CommandEditTest {
      * */
     @Test
     void testEditNonIntIndex(){
-        String expectedOutput = "Ono! Please enter valid question number *sobs*";
-        questionList.editQuestionByIndex('a', "", "");
+        String expectedOutput = "Please enter a valid command :0    Please enter valid integer index!" +  
+            "    Please format your input as edit [question number] /description " +
+            "[description] or edit /answer [answer]!";
+        String userInput = "edit abc /description NewDescription";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
 
@@ -90,22 +93,26 @@ public class CommandEditTest {
      * Test editing with blank description and answer
      * */
     @Test
-    void testEditBlankDescAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][X]  /  | Mod1 | NORMAL" +
-                "    Now you have 4 questions in the list! UWU";
-        questionList.editQuestionByIndex(1, "", "");
+    void testEditBlankDes(){
+        String expectedOutput = "Please enter a valid command :0" + 
+            "    Ono! You did not enter a new description / answer :<" +
+            "    Please format your input as edit [question number] /description " +
+            "[description] or edit /answer [answer]!";
+        String userInput = "edit 1 /description ";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
     /**
      * Test editing with filled answer and blank description
      * */
     @Test
-    void testEditOnlyBlankDesc(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][]  / NewAnswer | Mod2 | NORMAL" +
-                "    Now you have 4 questions in the list! UWU";
-        questionList.editQuestionByIndex(2, "", "NewAnswer");
+    void testEditBlankAns(){
+        String expectedOutput = "Please enter a valid command :0" + 
+            "    Ono! You did not enter a new description / answer :<" +
+            "    Please format your input as edit [question number] /description " +
+            "[description] or edit /answer [answer]!";
+        String userInput = "edit 1 /answer ";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
 
@@ -113,11 +120,12 @@ public class CommandEditTest {
      * Test editing with filled description and blank answer
      * */
     @Test
-    void testEditOnlyBlankAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][X] NewDescription /  | Mod3 | NORMAL" +
-                "    Now you have 4 questions in the list! UWU";
-        questionList.editQuestionByIndex(3, "NewDescription", "");
+    void testEditNoIndex(){
+        String expectedOutput = "Please enter a valid command :0    Ono! You did not indicate question index :<" + 
+            "    Please format your input as edit [question number] /description " +
+            "[description] or edit /answer [answer]!";
+        String userInput = "edit ";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
 
@@ -125,12 +133,25 @@ public class CommandEditTest {
      * Test editing with filled description and answer
      * */
     @Test
-    void testEditNonBlankDescAns(){
+    void testEditValidDescription(){
         String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][] NewDescription / NewAnswer | Mod4 | NORMAL" +
+                "        [S][X] NewDescription / Answer3 | Mod3 | NORMAL" +
                 "    Now you have 4 questions in the list! UWU";
-        questionList.editQuestionByIndex(4, "NewDescription", "NewAnswer");
+        String userInput = "edit 3 /description NewDescription";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
 
+    /**
+     * Test editing with filled description and answer
+     * */
+    @Test
+    void testEditValidAnswer(){
+        String expectedOutput = "Roger that! I have edited the following question >w< !" +
+                "        [S][] Question4 / NewAnswer | Mod4 | NORMAL" +
+                "    Now you have 4 questions in the list! UWU";
+        String userInput = "edit 4 /answer NewAnswer";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
 }
