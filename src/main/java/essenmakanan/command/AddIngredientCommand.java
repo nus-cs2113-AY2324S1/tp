@@ -25,7 +25,6 @@ public class AddIngredientCommand extends Command{
                 continue;
             }
 
-            ingredient = ingredient.replace("i/", "");
             Ingredient newIngredient = null;
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredients, ingredient);

@@ -1,6 +1,7 @@
 package essenmakanan.ui;
 
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 
@@ -30,10 +31,10 @@ public class Ui {
         System.out.println("Here are the commands currently available:");
         System.out.println("- Add recipe. [add r/RECIPE_NAME]");
         System.out.println("- View all recipes. [view r]");
-        System.out.println("- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [...] ]");
+        System.out.println("- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]");
         System.out.println("\t" + validIngredientUnits());
         System.out.println("- View all ingredients. [view i]");
-        System.out.println("- Edit an ingredient. [edit i/INGREDIENT_NAME]");
+        System.out.println("- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
         System.out.println("- Exit application [exit]");
         drawDivider();
     }
@@ -72,5 +73,23 @@ public class Ui {
 
     public static String validIngredientUnits() {
         return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
+    }
+
+    public static void printEditIngredientNameSuccess(String oldName, String newName) {
+        System.out.println("You have successfully edited the ingredient name from: " + oldName +
+                " to: " + newName);
+        drawDivider();
+    }
+
+    public static void printEditIngredientQuantitySuccess(String oldQuantity, String newQuantity) {
+        System.out.println("You have successfully edited the ingredient quantity from: " + oldQuantity +
+                " to: " + newQuantity);
+        drawDivider();
+    }
+
+    public static void printEditIngredientUnitSuccess(IngredientUnit oldUnit, IngredientUnit newUnit) {
+        System.out.println("You have successfully edited the ingredient unit from: " + oldUnit +
+                " to: " + newUnit);
+        drawDivider();
     }
 }
