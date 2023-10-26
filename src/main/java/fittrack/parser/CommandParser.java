@@ -16,6 +16,7 @@ import fittrack.command.ViewProfileCommand;
 import fittrack.command.BmiCommand;
 import fittrack.command.SaveCommand;
 import fittrack.command.CalorieSumCommand;
+import fittrack.command.CheckWeightRange;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
 import fittrack.data.Calories;
