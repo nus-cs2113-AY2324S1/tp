@@ -13,7 +13,7 @@ public class AddRecipeCommandTest {
 
     private RecipeList recipeList;
 
-    private final String INPUT = "r/bread s/step 1 instructions s/step 2 instructions ";
+    private final String userInput = "r/bread s/step 1 instructions s/step 2 instructions ";
 
 
 
@@ -21,15 +21,15 @@ public class AddRecipeCommandTest {
     @BeforeEach
     public void setUp() {
         recipeList = new RecipeList();
-        addRecipeCommand = new AddRecipeCommand(INPUT, recipeList);
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
     }
 
     @Test
     public void parse_invalidCommand_exceptionThrown() {
         addRecipeCommand.executeCommand();
-        assertEquals("bread", recipeList.getRecipe(0).getTitle());
-        assertEquals("step 1 instructions", recipeList.getRecipe(0).getRecipeSteps().get(0));
-        assertEquals("step 2 instructions", recipeList.getRecipe(0).getRecipeSteps().get(1));
+        assertEquals("bread", recipeList.getRecipeByIndex(0).getTitle());
+        assertEquals("step 1 instructions", recipeList.getRecipeByIndex(0).getRecipeSteps().get(0));
+        assertEquals("step 2 instructions", recipeList.getRecipeByIndex(0).getRecipeSteps().get(1));
     }
 
 }

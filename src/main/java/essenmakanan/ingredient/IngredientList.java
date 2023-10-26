@@ -30,8 +30,26 @@ public class IngredientList {
         return null;
     }
 
-    public int indexOf(Ingredient ingredient) {
+    public int indexOfIngredientByIngredient(Ingredient ingredient) {
         return ingredients.indexOf(ingredient);
+    }
+
+    public int getIndexByName(String ingredientName) {
+        int i = 0;
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getName().equals(ingredientName)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    public boolean ingredientExist(int id) {
+        if (id >= 0 && id < ingredients.size()) {
+            return true;
+        }
+        return false;
     }
 
     public void addIngredient(Ingredient ingredient) {
@@ -71,9 +89,9 @@ public class IngredientList {
 
     }
 
-    public void deleteIngredient(Ingredient ingredient) {
-        Ui.printDeleteIngredientsSuccess(ingredient.getName());
-        ingredients.remove(ingredient);
+    public void deleteIngredient(int index) {
+        Ui.printDeleteIngredientsSuccess(ingredients.get(index).getName());
+        ingredients.remove(index);
     }
 
     public void listIngredients() {
@@ -83,7 +101,7 @@ public class IngredientList {
 
         for (Ingredient ingredient : ingredients) {
             assert ingredients.get(count - 1).getName().equals(ingredient.getName())
-                    : "Title is not matching with the current index";
+                    : "Name is not matching with the current index";
 
             System.out.println(count + ". " + ingredient);
             count++;
