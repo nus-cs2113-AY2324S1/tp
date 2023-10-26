@@ -74,4 +74,6 @@ public class FindCommand extends Command {
 
         return new CommandResult(MESSAGE_SUCCESS, foundEntries);
     }
+
+
 }
