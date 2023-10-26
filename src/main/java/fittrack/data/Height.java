@@ -30,4 +30,8 @@ public class Height {
     public String toString() {
         return value + "cm";
     }
+
+    public double calculateIdealWeight(){
+        return 50 + (0.91 * (value - 152.4));
+    }
 }

@@ -70,7 +70,7 @@ I've deleted the following workout:
 
 `help` shows help message of the command.
 Existing commands:
-help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, addworkout, deleteworkout, viewworkouts, bmi, save
+help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, addworkout, deleteworkout, viewworkouts, bmi, save, checkweightrange
 Type `help` or `help <COMMAND>` to view help.
 
 `editprofile` allows you to edit your profile.

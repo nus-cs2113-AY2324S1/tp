@@ -5,6 +5,7 @@ import fittrack.parser.CommandParser;
 import fittrack.parser.IndexOutOfBoundsException;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
+import fittrack.storage.Storage;
 
 public class DeleteMealCommand extends Command {
     public static final String COMMAND_WORD = "deletemeal";
@@ -22,7 +23,7 @@ public class DeleteMealCommand extends Command {
 
     // @@author NgLixuanNixon
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws Storage.StorageOperationException {
         if (!mealList.isIndexValid(mealIndex)) {
             return new CommandParser()
                     .getInvalidCommand(commandLine, new IndexOutOfBoundsException())
