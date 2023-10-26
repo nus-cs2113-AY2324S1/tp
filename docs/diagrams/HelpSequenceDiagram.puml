@@ -23,7 +23,7 @@ HelpCommand --> Parser : command
 
 Parser -> HelpCommand : executeCommand()
 
-HelpCommand -> Ui
+HelpCommand -> Ui : showCommands()
 activate Ui
 
 Ui --> HelpCommand
