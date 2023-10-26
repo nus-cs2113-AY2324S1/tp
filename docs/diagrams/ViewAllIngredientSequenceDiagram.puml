@@ -35,10 +35,6 @@ activate Ingredients
 Ingredients --> Ui
 deactivate Ingredients
 
-Ui --> Ui: drawDivider()
-activate Ui
-deactivate Ui
-
 Ui --> ViewIngredientCommand
 
 deactivate Ui
