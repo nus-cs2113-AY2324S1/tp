@@ -36,8 +36,9 @@ public class Ui {
         System.out.println("\t- View all ingredients. [view i]");
         System.out.println("\t- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]");
         System.out.println("\t\t" + validIngredientUnits());
-        System.out.println("\t- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
-        System.out.println("\t- Delete an ingredient. [delete r/INGREDIENT_ID] OR [delete r/INGREDIENT_NAME]");
+        System.out.println("\t- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] "
+                + "[q/NEW_QUANTITY] [u/NEW_UNIT]");
+        System.out.println("\t- Delete an ingredient. [delete i/INGREDIENT_ID] OR [delete i/INGREDIENT_NAME]");
         System.out.println("OTHERS");
         System.out.println("\t- View all commands [help]");
         System.out.println("\t- Exit application [exit]");

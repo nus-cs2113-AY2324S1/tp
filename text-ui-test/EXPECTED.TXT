@@ -13,7 +13,7 @@ INGREDIENTS
 	- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]
 		Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
 	- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]
-	- Delete an ingredient. [delete r/INGREDIENT_ID] OR [delete r/INGREDIENT_NAME]
+	- Delete an ingredient. [delete i/INGREDIENT_ID] OR [delete i/INGREDIENT_NAME]
 OTHERS
 	- View all commands [help]
 	- Exit application [exit]
