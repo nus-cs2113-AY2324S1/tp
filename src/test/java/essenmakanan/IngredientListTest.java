@@ -2,15 +2,21 @@ package essenmakanan;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ui.Ui;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IngredientListTest {
 
+    private IngredientList ingredients;
+    @BeforeEach
+    public void setUp() {
+        ingredients = new IngredientList();
+    }
+
     @Test
     public void addIngredient_validIngredient_addsNormally() {
-        IngredientList ingredients = new IngredientList();
 
         Ingredient tomato = new Ingredient("tomato");
         Ingredient cheese = new Ingredient("cheese");
