@@ -56,7 +56,7 @@ public class IngredientList {
         ingredients.add(ingredient);
     }
 
-    public void editIngredient(Ingredient existingIngredient, String[] editDetails) {
+    public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenMakananFormatException {
         for (int i = 1; i < editDetails.length; i++) {
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
@@ -83,7 +83,7 @@ public class IngredientList {
                 }
                 break;
             default:
-                break;
+                throw new EssenMakananFormatException();
             }
         }
 
