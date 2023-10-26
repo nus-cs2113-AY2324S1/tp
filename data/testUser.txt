@@ -1,0 +1,4 @@
+[I] Income: Salary (Amount: 2000.0, Date: 2023-10-26)
+[I] Income: Bonus (Amount: 500.0, Date: 2023-10-26)
+[E] Expense: Groceries (Amount: 100.0, Date: 2023-10-26)
+[E] Expense: Utilities (Amount: 150.0, Date: 2023-10-26)
