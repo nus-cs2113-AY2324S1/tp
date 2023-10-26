@@ -2,7 +2,6 @@ package essenmakanan.ui;
 
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 
 public class Ui {
