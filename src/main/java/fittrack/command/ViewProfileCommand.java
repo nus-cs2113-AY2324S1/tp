@@ -1,6 +1,7 @@
 package fittrack.command;
 
 import fittrack.parser.CommandParser;
+import fittrack.parser.PatternMatchFailException;
 
 public class ViewProfileCommand extends Command {
     public static final String COMMAND_WORD = "viewprofile";
@@ -16,12 +17,15 @@ public class ViewProfileCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        //TODO: get profile details and make them to lines of strings.
-        return new CommandResult("Your Profile:\n" + userProfile.toString());
+        String feedback = "Your Profile:\n" + userProfile.toString();
+        return new CommandResult(feedback);
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) {
+    public void setArguments(String args, CommandParser parser) throws PatternMatchFailException {
+        if (!args.isEmpty()) {
+            throw new PatternMatchFailException();
+        }
     }
 
     @Override

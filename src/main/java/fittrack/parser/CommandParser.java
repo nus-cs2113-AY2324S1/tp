@@ -3,6 +3,9 @@ package fittrack.parser;
 import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
+import fittrack.command.BmiCommand;
+import fittrack.command.CalorieSumCommand;
+import fittrack.command.CaloriesBurntCommand;
 import fittrack.command.Command;
 import fittrack.command.DeleteMealCommand;
 import fittrack.command.DeleteWorkoutCommand;
@@ -10,13 +13,14 @@ import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
+import fittrack.command.SaveCommand;
 import fittrack.command.ViewMealsCommand;
-import fittrack.command.ViewWorkoutsCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.BmiCommand;
 import fittrack.command.SaveCommand;
 import fittrack.command.CalorieSumCommand;
 import fittrack.command.CheckWeightRange;
+import fittrack.command.ViewWorkoutsCommand;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
 import fittrack.data.Calories;
@@ -58,8 +62,13 @@ public class CommandParser {
     private static final Pattern INDEX_PATTERN = Pattern.compile(
             "(?<index>\\S+)?"
     );
+  
+    private static final Pattern DATE_PATTERN = Pattern.compile(
+            "(?<date>\\S+)?"
+    );
 
     public Command parseCommand(String userCommandLine) throws Storage.StorageOperationException {
+
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
             return getInvalidCommand(userCommandLine);
@@ -83,7 +92,6 @@ public class CommandParser {
 
     public Command getBlankCommand(String word, String commandLine) throws Storage.StorageOperationException {
         switch (word) {
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand(commandLine);
         case ExitCommand.COMMAND_WORD:
@@ -112,6 +120,8 @@ public class CommandParser {
             return new CalorieSumCommand(commandLine);
         case CheckWeightRange.COMMAND_WORD:
             return new CheckWeightRange(commandLine);
+        case CaloriesBurntCommand.COMMAND_WORD:
+            return new CaloriesBurntCommand(commandLine);
         default:
             return new InvalidCommand(commandLine);
 
@@ -226,6 +236,21 @@ public class CommandParser {
 
         try {
             return Integer.parseInt(index);
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+    }
+
+    public Date parseDate(String date) throws PatternMatchFailException, NumberFormatException {
+        final Matcher matcher = DATE_PATTERN.matcher(date);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        final String dateString = matcher.group("date");
+
+        try {
+            return new Date(dateString);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
         }
