@@ -25,9 +25,10 @@ public class RecipeList {
         recipes.add(new Recipe(title, steps));
     }
 
-    public void deleteRecipe(int index) {
-        Ui.printDeleteRecipeSuccess(recipes.get(index).getTitle());
-        recipes.remove(index);
+    public void deleteRecipe(int id) {
+        int pos = id - 1;
+        Ui.printDeleteRecipeSuccess(recipes.get(pos).getTitle());
+        recipes.remove(pos);
     }
 
     public Recipe getRecipeByIndex(int index) {
@@ -45,20 +46,34 @@ public class RecipeList {
     }
 
     public boolean recipeIdInList(int id) {
-        if (id > 0 && id < recipes.size()) {
+        if (id > 0 && id <= recipes.size()) {
             return true;
         }
         return false;
     }
 
-    public int indexOfRecipeByName(String recipeTitle) {
+    public int idOfRecipeByName(String recipeTitle) {
         int i = 0;
         for (Recipe recipe : recipes) {
+            i++;
             if (recipe.getTitle().equals(recipeTitle)) {
                 return i;
             }
-            i++;
         }
         return -1;
+    }
+
+    public void listRecipeTitles() {
+        Ui.drawDivider();
+        System.out.println("Here's a list of your recipes!");
+        int count = 1;
+
+        for (Recipe recipe : recipes) {
+            assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
+                    : "Title is not matching with the current index";
+
+            System.out.println(count + ". " + recipe);
+            count++;
+        }
     }
 }

@@ -8,17 +8,17 @@ import essenmakanan.recipe.RecipeList;
 
 public class DeleteIngredientCommand extends Command {
     private IngredientList ingredients;
-    private String ingredient;
+    private String ingredientInput;
 
-    public DeleteIngredientCommand(IngredientList ingredients, String ingredient) {
+    public DeleteIngredientCommand(IngredientList ingredients, String ingredientInput) {
         this.ingredients = ingredients;
-        this.ingredient = ingredient;
+        this.ingredientInput = ingredientInput;
     }
 
     @Override
     public void executeCommand() {
         try {
-            int ingredientId = IngredientParser.getIngredientId(ingredients, ingredient);
+            int ingredientId = IngredientParser.getIngredientId(ingredients, ingredientInput);
             ingredients.deleteIngredient(ingredientId);
         } catch (EssenMakananOutOfRangeException e) {
             e.handleException();

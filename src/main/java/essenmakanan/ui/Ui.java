@@ -49,20 +49,13 @@ public class Ui {
         drawDivider();
     }
 
-    public void printAllRecipes(RecipeList recipes) {
-        int count = 1;
-        for (Recipe recipe : recipes.getRecipes()) {
-            assert recipes.getRecipeByIndex(count - 1).getTitle().equals(recipe.getTitle())
-                    : "Title is not matching with the current index";
-
-            System.out.println(count + ". " + recipe);
-            count++;
-        }
+    public static void printAllIngredients(IngredientList ingredients) {
+        ingredients.listIngredients();
         drawDivider();
     }
 
-    public static void printAllIngredients(IngredientList ingredients) {
-        ingredients.listIngredients();
+    public static void printAllRecipes(RecipeList recipes) {
+        recipes.listRecipeTitles();
         drawDivider();
     }
 

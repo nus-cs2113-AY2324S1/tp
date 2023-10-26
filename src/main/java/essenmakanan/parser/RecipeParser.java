@@ -10,22 +10,23 @@ import essenmakanan.ui.Ui;
 public class RecipeParser {
 
     public static int getRecipeId(RecipeList recipes, String input) throws EssenMakananOutOfRangeException, EssenMakananFormatException {
-        int index;
+        int id;
+        input = input.replace("r/", "");
 
         if (input.matches("\\d+")) { //if input only contains numbers
             if (input.length() != 1) {
                 throw new EssenMakananFormatException();
             }
-            index = Integer.parseInt(input);
+            id = Integer.parseInt(input);
         } else {
-            index = recipes.indexOfRecipeByName(input);
+            id = recipes.idOfRecipeByName(input);
         }
 
-        if (!recipes.recipeIdInList(index)) {
+        if (!recipes.recipeIdInList(id)) {
             throw new EssenMakananOutOfRangeException();
         }
 
-        return index;
+        return id;
     }
 
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)

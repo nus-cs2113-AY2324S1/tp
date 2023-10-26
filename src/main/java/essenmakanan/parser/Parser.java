@@ -35,6 +35,7 @@ public class Parser {
             } else {
                 throw new EssenMakananFormatException();
             }
+            break;
         case "view":
             if (inputDetail.equals("r")) {
                 command = new ViewRecipesCommand(recipes);
