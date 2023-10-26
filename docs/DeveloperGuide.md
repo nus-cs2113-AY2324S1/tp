@@ -43,15 +43,14 @@ Given below is a quick overview of main components and how they interact with ea
 
 ## Implementation
 ### Help Feature
-The help feature is facilitated by the `HelpCommand` class. By calling `executeCommand` on the class, 
-it will invoke the `Ui` class to print the user help commands.
+The help feature is facilitated by the `HelpCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the user help commands.
 
 <img src="images/HelpFunctionSequenceDiagram.png" width="963" />
 
 ### Add Recipe feature
 
-The add recipe feature is facilitated by the `AddRecipeCommand` class. By calling `executeCommand` on the class, 
-the steps will be executed as follows:
+The add recipe feature is facilitated by the `AddRecipeCommand` class. By calling `executeCommand` on the class, the steps will
+be executed as follows:
 - **Step1**
   
   `AddRecipeCommand` will parse the recipe title using `RecipeParser`. Then, it will return the recipe title.
@@ -74,43 +73,7 @@ the steps will be executed as follows:
 
 <img src="images/AddNewRecipeSequenceDiagram.png" width="963" />
 
-### Add Ingredient feature
-The add ingredient feature is facilitated by the `AddIngredientCommand` class. 
-Multiple ingredients can be added at the same time using the syntax
-`add i/NAME,QUANTITY,UNIT i/INGREDIENT2,.. i/INGREDIENT3...` 
-
-By calling `executeCommand` on the class, the steps will be executed as follows:
-- **Step 1**
-  
-  A for loop will interate through all the ingredients that are to be added. They are detected with the 
-  `i/` flags in the user input.
-
-- **Step 2** 
-
-  The details of an ingredient (after the `i/` flag) will be parsed `IngredientParser` 
-  using the `parseIngredient` method. 
-
-- **Step 3**
-  
-  To standardise units of ingredients, the `IngredientUnit` enum will be used. `mapIngredientUnit`
-  will be used to convert "layman" user inputs to the standardised units.
-
-- **Step 4**
-  
-  The `Ingredient` object will be created using the `Ingredient` constructor, after the `ingredientName`, 
-  `ingredientQuanity` and `ingredientUnit` of an ingredient is obtained.
-
-- **Step 5**
-  
-  The `Ingredient` object will be added to the `IngredientList` using the `addIngredient` method.
-
-- **Step 6**
-
-  The `Ui` class will be called to print out the newly added ingredient.
-
-<img src="images/AddNewIngredientSequenceDiagram.png" width="963" />
-
-
+### Delete feature
 
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -133,13 +96,13 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 
 ## User Stories
 
-| Version | As a ...      | I want to ...                     | So that I can ...                        |
-|---------|---------------|-----------------------------------|------------------------------------------|
-| v1.0    | beginner user | see all recipes                   | learn and try all recipes                |
-| v1.0    | beginner user | add new recipes into the list     | learn and try out new recipes            |
-| v1.0    | beginner user | see all ingredient I have         |                                          |
-| v1.0    | beginner user | add ingredients to the empty list | add an item to my kitchen inventory      |
-| v2.0a   | amateur       | delete some ingredients           | remove a ingredient that I no longer own |
+| Version | As a ...      | I want to ...                     | So that I can ...                            |
+|---------|---------------|-----------------------------------|----------------------------------------------|
+| v1.0    | beginner user | see all recipes                   | learn and try all recipes                    |
+| v1.0    | beginner user | add new recipes into the list     | learn and try out new recipes                |
+| v1.0    | beginner user | see all ingredient I have         |                                              |
+| v1.0    | beginner user | add ingredients to the empty list | add an item to my kitchen inventory          |
+| v2.0a   | amateur       | delete some recipes               | remove a recipe that I no longer want to use |
 
 ## Non-Functional Requirements
 
