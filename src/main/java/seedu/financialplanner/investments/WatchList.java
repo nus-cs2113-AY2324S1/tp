@@ -97,6 +97,9 @@ public class WatchList {
     }
 
     public String addStock(String stockCode) throws FinancialPlannerException {
+        if (stocks.size() >= 5) {
+            throw new FinancialPlannerException("Watchlist is full (max 5). Delete a stock to add a new one");
+        }
         Stock newStock = null;
         newStock = new Stock(stockCode);
 
