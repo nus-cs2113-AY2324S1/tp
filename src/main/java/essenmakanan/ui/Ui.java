@@ -52,7 +52,7 @@ public class Ui {
     public void printAllRecipes(RecipeList recipes) {
         int count = 1;
         for (Recipe recipe : recipes.getRecipes()) {
-            assert recipes.getRecipe(count - 1).getTitle().equals(recipe.getTitle())
+            assert recipes.getRecipeByIndex(count - 1).getTitle().equals(recipe.getTitle())
                     : "Title is not matching with the current index";
 
             System.out.println(count + ". " + recipe);

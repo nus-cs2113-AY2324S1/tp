@@ -1,5 +1,7 @@
 package essenmakanan.recipe;
 
+import essenmakanan.ingredient.Ingredient;
+
 import java.util.ArrayList;
 
 public class RecipeList {
@@ -15,7 +17,7 @@ public class RecipeList {
 
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
-        assert getRecipe(recipes.size() - 1).getTitle().equals(recipe.getTitle())
+        assert getRecipeByIndex(recipes.size() - 1).getTitle().equals(recipe.getTitle())
                 : "Recipe is not successfully added into the list.";
     }
 
@@ -27,9 +29,18 @@ public class RecipeList {
         recipes.remove(recipe);
     }
 
-    public Recipe getRecipe(int index) {
+    public Recipe getRecipeByIndex(int index) {
         assert index >= 0 && index < recipes.size() : "Index is out of bounds";
         return recipes.get(index);
+    }
+
+    public Recipe getRecipeByName(String name) {
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().equals(name)) {
+                return recipe;
+            }
+        }
+        return null;
     }
 
 }

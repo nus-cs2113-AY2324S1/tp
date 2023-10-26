@@ -1,18 +1,28 @@
 package essenmakanan.parser;
 
 import essenmakanan.exception.EssenMakananException;
+import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 public class RecipeParser {
 
-    public static int getRecipeId(String input) {
-        if (input.matches("\\d+")) { //if input only contains numbers
-            return Integer.parseInt(input);
-        } else {
+    public static int getRecipeId(RecipeList recipes, String input) throws EssenMakananOutOfRangeException {
+        int index;
 
+        if (input.matches("\\d+")) { //if input only contains numbers
+            index = Integer.parseInt(input);
+        } else {
+            index = recipes.indexOfRecipeByName(input);
         }
+
+        if (index == -1) {
+            throw new EssenMakananOutOfRangeException();
+        }
+
+        return index;
     }
 
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)

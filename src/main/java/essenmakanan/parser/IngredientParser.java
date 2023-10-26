@@ -1,18 +1,28 @@
 package essenmakanan.parser;
 
 import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenMakananOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
-    public static int getIngredientId(String input) {
-        if (input.matches("\\d+")) { //if input only contains numbers
-            return Integer.parseInt(input);
-        } else {
+    public static int getIngredientId(IngredientList ingredients, String input) throws EssenMakananOutOfRangeException {
+        int index;
 
+        if (input.matches("\\d+")) { //if input only contains numbers
+            index = Integer.parseInt(input);
+        } else {
+            index = ingredients.indexOfIngredientByName(input);
         }
+
+        if (index == -1) {
+            throw new EssenMakananOutOfRangeException();
+        }
+
+        return index;
     }
+
     public static Ingredient parseIngredient(IngredientList ingredients, String inputDetail)
             throws EssenMakananFormatException {
 

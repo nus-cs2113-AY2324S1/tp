@@ -1,21 +1,15 @@
 package essenmakanan.parser;
 
-import essenmakanan.command.AddIngredientCommand;
-import essenmakanan.command.AddRecipeCommand;
-import essenmakanan.command.Command;
-import essenmakanan.command.EditIngredientCommand;
-import essenmakanan.command.ExitCommand;
-import essenmakanan.command.HelpCommand;
-import essenmakanan.command.ViewIngredientsCommand;
-import essenmakanan.command.ViewRecipesCommand;
+import essenmakanan.command.*;
 import essenmakanan.exception.EssenMakananCommandException;
 import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenMakananOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 
 public class Parser {
     public Command parseCommand(String input, RecipeList recipes, IngredientList ingredients)
-            throws EssenMakananCommandException, EssenMakananFormatException {
+            throws EssenMakananCommandException, EssenMakananFormatException, EssenMakananOutOfRangeException {
         Command command;
 
         String[] parsedInput = input.split(" ", 2);
@@ -38,8 +32,7 @@ public class Parser {
                 int recipeToDelete = RecipeParser.getRecipeId(inputDetail);
                 command = new DeleteRecipeCommand(recipeToDelete);
             } else if (inputDetail.startsWith("i/")) {
-                int ingredientToDelete = IngredientParser.getIngredientId(inputDetail);
-                command = new DeleteIngredientCommand(ingredientToDelete);
+                command = new DeleteIngredientCommand(ingredients, inputDetail);
             } else {
                 throw new EssenMakananFormatException();
             }
