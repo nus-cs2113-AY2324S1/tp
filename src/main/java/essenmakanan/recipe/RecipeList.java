@@ -37,7 +37,7 @@ public class RecipeList {
 
     public void viewSpecificRecipe(int index) {
         Ui.drawDivider();
-        if (index < 0 | index >= recipes.size()) {
+        if (index < 0 || index >= recipes.size()) {
             System.out.println("We have " + recipes.size() + "recipes right now and the given input is invalid.");
             return;
         }
@@ -47,7 +47,10 @@ public class RecipeList {
 
     public void viewSpecificRecipe(String title) {
         Ui.drawDivider();
-        Recipe recipe = recipes.stream().filter(recipe1 -> recipe1.getTitle().equals(title)).findFirst().orElse(null);
+        Recipe recipe = recipes.stream()
+            .filter(recipe1 -> recipe1.getTitle().equals(title))
+            .findFirst()
+            .orElse(null);
         if (recipe == null) {
             System.out.println("You haven't added this recipe with given title");
         }
