@@ -27,7 +27,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void setArguments(String inputLine, CommandParser parser) {
+    public void setArguments(String inputLine, CommandParser parser) throws Storage.StorageOperationException {
         HelpCommand helpCommand = new HelpCommand(inputLine);
         helpCommand.setArguments(inputLine, parser);
         String message = helpCommand.execute().getFeedback();
