@@ -25,13 +25,13 @@ public class Storage {
     private static final String PROFILE_FILE_PATH = "./data/Profile.txt";
     private static final String MEAL_LIST_FILE_PATH = "./data/mealList.txt";
     private static final String WORKOUT_LIST_FILE_PATH = "./data/workoutList.txt";
+    private final Ui ui = new Ui();
     private File profileFile;
     private File mealFile;
     private File workoutFile;
     private Path profilePath;
     private Path mealListPath;
     private Path workoutListPath;
-    private Ui ui = new Ui();
 
 
     /**
@@ -233,11 +233,6 @@ public class Storage {
             System.out.println(e.getMessage());;
             return false; // Consider it non-empty if there's an exception
         }
-    }
-
-    public String getPath() {
-        return String.format("%s, %s, %s", profilePath.toString(),
-                mealListPath.toString(), workoutListPath.toString());
     }
 
     /**

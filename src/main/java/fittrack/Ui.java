@@ -9,7 +9,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static final String MESSAGE_USING_STORAGE_FILE = "Using storage file : %1$s";
     private static final String LOGO = "___________.__  __ ___________                     __\n"
                                      + "\\_   _____/|__|/  |\\__    ___/___________    ____ |  | __\n"
                                      + " |    __)  |  \\   __\\|    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n"
