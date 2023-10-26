@@ -1,0 +1,50 @@
+@startuml
+title Main Structure of Storage Load\n
+
+participant ":FitTrack" as main
+participant ":Storage" as storage
+participant "ui: Ui" as ui
+participant ":UserProfileDecoder" as pDecoder
+participant ":MealListDecoder" as mDecoder
+participant ":WorkoutListDecoder" as wDecoder
+
+main -> main ++: start()
+main -> ui ++: ui.printWelcome()
+note right: prints welcome message to user
+return
+
+group opt [!storage.isProfileFileEmpty]
+    main -> storage ++: isProfileFileEmpty()
+    note right: checks for profile data from previous run
+    return :boolean
+
+    main -> storage ++: profileLoad()
+    note left: load file data in profile file into UserProfile
+    storage -> pDecoder ++: decodeUserProfile(encodedUserProfile: List<String>)
+    note right: decode the file contents and store in UserProfile
+    return :UserProfile
+    return :UserProfile
+
+    main -> ui ++: printPrompt()
+    return
+end
+
+main -> storage ++: mealLoad()
+note left: load meals in file to mealList
+storage -> mDecoder ++: decodeMealList(encodedMealList: List<String>)
+note right: decode the file contents and store in MealList
+mDecoder -> mDecoder ++: decodeMealsFromString(encodedMeal: String)
+return :Meal
+return :MealList
+return :MealList
+
+main -> storage ++: workoutLoad()
+note left: load workouts in file to workoutList
+storage -> wDecoder ++: decodeWorkoutList(encodedWorkoutList: List<String>)
+note right: decode the file contents and store in WorkoutList
+wDecoder -> wDecoder ++: decodeMealsFromString(encodedWorkout: String)
+return :Workout
+return :WorkoutList
+return :WorkoutList
+
+@enduml

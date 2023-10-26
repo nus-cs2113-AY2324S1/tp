@@ -5,6 +5,7 @@ import fittrack.command.Command;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
+import fittrack.storage.Storage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CommandParserTest {
 
     @Test
-    void parseCommand_emptyString_invalidCommand() {
+    void parseCommand_emptyString_invalidCommand() throws Storage.StorageOperationException {
         Command command = new CommandParser().parseCommand("");
         assertInstanceOf(InvalidCommand.class, command);
     }
 
     @Test
-    void parseCommand_help_helpCommand() {
+    void parseCommand_help_helpCommand() throws Storage.StorageOperationException {
         Command command = new CommandParser().parseCommand("help");
         assertInstanceOf(HelpCommand.class, command);
         HelpCommand helpCommand = (HelpCommand) command;
@@ -28,7 +29,7 @@ class CommandParserTest {
     }
 
     @Test
-    void parseCommand_helpExit_helpCommandExit() {
+    void parseCommand_helpExit_helpCommandExit() throws Storage.StorageOperationException {
         Command command = new CommandParser().parseCommand("help exit");
         assertInstanceOf(HelpCommand.class, command);
         HelpCommand helpCommand = (HelpCommand) command;
@@ -36,25 +37,25 @@ class CommandParserTest {
     }
 
     @Test
-    void parseCommand_exit_exitCommand() {
+    void parseCommand_exit_exitCommand() throws Storage.StorageOperationException {
         Command command = new CommandParser().parseCommand("exit");
         assertInstanceOf(ExitCommand.class, command);
     }
 
     @Test
-    void parseCommand_foo_invalidCommand() {
+    void parseCommand_foo_invalidCommand() throws Storage.StorageOperationException {
         Command command = new CommandParser().parseCommand("foo");
         assertInstanceOf(InvalidCommand.class, command);
     }
 
     @Test
-    void getBlankCommand_help_helpCommand() {
+    void getBlankCommand_help_helpCommand() throws Storage.StorageOperationException {
         Command blankCommand = new CommandParser().getBlankCommand("help", "help");
         assertInstanceOf(HelpCommand.class, blankCommand);
     }
 
     @Test
-    void getBlankCommand_foo_invalidCommand() {
+    void getBlankCommand_foo_invalidCommand() throws Storage.StorageOperationException {
         Command blankCommand = new CommandParser().getBlankCommand("foo", "foo");
         assertInstanceOf(InvalidCommand.class, blankCommand);
     }

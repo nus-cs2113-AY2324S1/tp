@@ -4,24 +4,28 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-[Reference](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java)
+Main structure of the code and the parse feature is adapted from [here](https://github.com/se-edu/addressbook-level2).
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Main structure
+
 
 ### Architecture
 {insert diagram to show architecture of code}
 
-The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. Given below is a quick overview of each component.
+The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. 
+Given below is a quick overview of each component.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The '.puml' files used to create the diagrams in this document can be found in the [diagrams](https://github.com/AY2324S1-CS2113-W12-4/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The '.puml' files used to create the diagrams in this document can be found in [diagrams](./diagrams) 
+folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) 
+to learn how to create and edit diagrams.
 
 </div>
 
-The **`Main`** class is called [`FitTrack`](https://github.com/AY2324S1-CS2113-W12-4/tp/blob/master/src/main/java/fittrack/FitTrack.java)
+The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.java)
 
 The App consists of eight components.
 * [**`UI`**](#ui-component): The UI of the App.
@@ -33,6 +37,22 @@ The App consists of eight components.
 * [**`Data`**](#data-component): Holds the data of the app in memory.
 * [**`Command`**](#command-component): The command executor.
 
+### Core sequence
+Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTrack.java) class.
+
+![Core structure](images/FitTrackOuter.svg "Outer Structure")
+
+![Inner structure](images/FitTrackCore.svg "Core Structure")
+
+### Storage Component
+![Structure of Storage Load](images/StorageLoad.svg)
+
+**API** : [`Storage.java`](../src/main/java/fittrack/storage/Storage.java)
+
+The `Storage` component,
+* can save user profile data in text format and load it back
+* can save meals in text format and load it back
+* can save workouts in text format and load it back
 
 ## Product scope
 ### Target user profile
