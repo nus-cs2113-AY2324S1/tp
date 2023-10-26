@@ -18,4 +18,5 @@ Inventory --> FindCmd: List of Stock Entries
 FindCmd -> FindCmd: Process Entries
 FindCmd --> User: Display Search Results
 
+
 @enduml
