@@ -100,6 +100,12 @@ public class WatchList {
         if (stocks.size() >= 5) {
             throw new FinancialPlannerException("Watchlist is full (max 5). Delete a stock to add a new one");
         }
+        for (Stock stock: stocks) {
+            if (stockCode.equals(stock.getSymbol().toUpperCase())) {
+                throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
+            }
+        }
+
         Stock newStock = null;
         newStock = new Stock(stockCode);
 
