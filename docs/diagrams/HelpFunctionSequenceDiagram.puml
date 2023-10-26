@@ -2,12 +2,11 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box LOGIC_COLOR_T1
-participant ":EssenMakanan" as EssenMakanan LOGIC_COLOR
-participant ":Parser" as Parser LOGIC_COLOR
-participant "command:HelpCommand" as HelpCommand LOGIC_COLOR
-participant ":Ui" as Ui LOGIC_COLOR
-end box
+
+participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant "command:HelpCommand" as HelpCommand COMMAND_COLOR
+participant ":Ui" as Ui UI_COLOR
 
 [-> EssenMakanan : execute("help")
 activate EssenMakanan

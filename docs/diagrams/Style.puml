@@ -7,6 +7,8 @@
 
 'T1 through T4 are shades of the original color from lightest to darkest
 
+!define MAIN_COLOR #DBA800
+
 !define COMMAND_COLOR #728FCE
 
 !define PARSER_COLOR #00A36C
