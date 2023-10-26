@@ -8,6 +8,8 @@ import java.util.Scanner;
  * Represents the user interface of FitTrack.
  */
 public class Ui {
+
+    public static final String MESSAGE_USING_STORAGE_FILE = "Using storage file : %1$s";
     private static final String LOGO = "___________.__  __ ___________                     __\n"
                                      + "\\_   _____/|__|/  |\\__    ___/___________    ____ |  | __\n"
                                      + " |    __)  |  \\   __\\|    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n"
@@ -56,6 +58,10 @@ public class Ui {
         System.out.println("Welcome to FitTrack!");
         System.out.println(LOGO);
         printLine();
+    }
+
+    public void printVersion(String version) {
+        System.out.println(version);
     }
 
     public void printCommandResult(CommandResult commandResult) {
