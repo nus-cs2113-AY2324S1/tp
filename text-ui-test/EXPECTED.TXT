@@ -1,4 +1,4 @@
-Directory created: data
+FitTrack - Version 2.0
 Welcome to FitTrack!
 ___________.__  __ ___________                     __
 \_   _____/|__|/  |\__    ___/___________    ____ |  | __
@@ -6,6 +6,7 @@ ___________.__  __ ___________                     __
  |     \   |  ||  |  |    |   |  | \/ __ \  \___|    <
  \___  /   |__||__|  |____|   |__|  (____  /\___  >__|_ \
 ____________________________________________________________
+Directory created: data
 Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):
 Please enter numbers for height, weight, and daily calorie limit.
 Please enter your height (in cm), weight (in kg), and daily calorie limit (in kcal):

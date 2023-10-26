@@ -9,6 +9,7 @@ import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
 import fittrack.storage.Storage;
 import fittrack.storage.Storage.StorageOperationException;
+import fittrack.storage.Storage.InvalidStorageFilePathException;
 
 
 /**
@@ -20,16 +21,15 @@ import fittrack.storage.Storage.StorageOperationException;
  */
 public class FitTrack {
 
+    public static final String VERSION = "FitTrack - Version 2.0";
     private final Ui ui;
-    private final Storage storage;
+    private Storage storage;
     private UserProfile userProfile;
     private MealList mealList;
     private WorkoutList workoutList;
 
-
     private FitTrack() {
         ui = new Ui();
-        storage = new Storage();
         userProfile = new UserProfile();
         mealList = new MealList();
         workoutList = new WorkoutList();
@@ -39,20 +39,22 @@ public class FitTrack {
      * Main entry-point for the FitTrack application.
      */
     public static void main(String[] args) throws StorageOperationException {
-        new FitTrack().run();
+        new FitTrack().run(args);
     }
 
-    private void run() throws StorageOperationException {
-        start();
+    private void run(String[] args) throws StorageOperationException {
+        start(args);
         loopCommandExecution();
         end();
     }
 
-    private void start() {
-        ui.printWelcome();
+    private void start(String[] args) {
         boolean isValidInput = false;
+        ui.printVersion(VERSION);
+        ui.printWelcome();
 
         try {
+            this.storage = initializeStorage(args);
             if (!storage.isProfileFileEmpty()) {
                 this.userProfile = storage.profileLoad();
                 ui.printPrompt();
@@ -60,9 +62,10 @@ public class FitTrack {
             }
             this.mealList = storage.mealLoad();
             this.workoutList = storage.workoutLoad();
-        }catch (StorageOperationException e) {
+        }catch (StorageOperationException | InvalidStorageFilePathException e) {
             throw new RuntimeException(e);
         }
+
 
         while (!isValidInput) {
             try {
@@ -120,6 +123,17 @@ public class FitTrack {
         userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
 
         ui.printProfileDetails(userProfile);
+    }
+
+    /**
+     * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
+     *
+     * @param args arguments supplied by the user at program launch
+     * @throws InvalidStorageFilePathException if the target file path is incorrect.
+     */
+    private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
+        boolean isStorageFileSpecifiedByUser = args.length > 0;
+        return isStorageFileSpecifiedByUser ? new Storage(args[0], args[1], args[2]) : new Storage();
     }
 
     private void end() {
