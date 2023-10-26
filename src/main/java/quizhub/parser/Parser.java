@@ -214,7 +214,7 @@ public class Parser {
     /**
      * Attempt to parse user input into a Start Quiz Command
      *
-     * @param userInput Raw command entered by the userstart /[quiz mode] [start details] /[qn mode
+     * @param userInput Raw command entered by the user
      * @return Start Quiz command or an Invalid Command
      */
     private static Command parseStartCommand(String userInput) {
