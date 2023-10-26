@@ -2,7 +2,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box Logic LOGIC_COLOR_T1
+box LOGIC_COLOR_T1
 participant ":EssenMakanan" as EssenMakanan LOGIC_COLOR
 participant ":Parser" as Parser LOGIC_COLOR
 participant "command:HelpCommand" as HelpCommand LOGIC_COLOR
@@ -34,10 +34,5 @@ deactivate HelpCommand
 
 Parser --> EssenMakanan
 deactivate Parser
-
-
-
-
-
 
 @enduml
