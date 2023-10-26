@@ -97,7 +97,7 @@ public class CommandEditTest {
         String expectedOutput = "Please enter a valid command :0" + 
             "    Ono! You did not enter a new description / answer :<" +
             "    Please format your input as edit [question number] /description " +
-            " [description] or edit /answer [answer]!";
+            "[description] or edit /answer [answer]!";
         String userInput = "edit 1 /description ";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
