@@ -42,7 +42,7 @@ public class CommandParser {
     public static final String ALL_COMMAND_WORDS = "help, exit, " +
             "editprofile, viewprofile, " +
             "addmeal, deletemeal, viewmeals, " +
-            "addworkout, deleteworkout, viewworkouts, bmi, save";
+            "addworkout, deleteworkout, viewworkouts, bmi, save, checkweightrange";
   
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
