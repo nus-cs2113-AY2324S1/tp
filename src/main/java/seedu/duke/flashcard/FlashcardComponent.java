@@ -12,7 +12,6 @@ public class FlashcardComponent {
     private FlashcardCommandParser parser;
     private FlashcardList flashcardList;
     private FlashcardUi ui;
-
     private FlashcardStorage storage;
 
 
@@ -32,6 +31,7 @@ public class FlashcardComponent {
         }
 
         //@@author wendelinwemhoener
+        Flashcard.calculateAndUpdateGlobalMaxId(flashcardList);
         ui = new FlashcardUi(flashcardList);
     }
 

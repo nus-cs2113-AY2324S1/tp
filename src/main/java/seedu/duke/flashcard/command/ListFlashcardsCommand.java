@@ -9,6 +9,11 @@ import java.util.Scanner;
 
 public class ListFlashcardsCommand extends FlashcardCommand {
     public void execute(Scanner scanner, FlashcardList flashcardList) {
+        if (flashcardList.isEmpty()) {
+            System.out.println("    You dont't have any flashcards yet! ");
+            return;
+        }
+
         System.out.println("    Here is a list of all your flashcards: ");
         System.out.println();
 
