@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+actor User
+
+participant ":AddIngredientCommand" as AddIngredientCommand COMMAND_COLOR
+participant "<<class>>\n:IngredientParser" as IngredientParser INGREDIENT_PARSER_COLOR
+participant ":Ingredient" as Ingredient INGREDIENT_COLOR
+participant "ingredients:IngredientList" as ingredients INGREDIENT_LIST_COLOR
+participant "<<class>>\n:Ui" as Ui UI_COLOR
+
+User -> AddIngredientCommand: executeCommand()
+
+activate AddIngredientCommand
+
+loop for each ingredient: String in allIngredients
+  AddIngredientCommand -> IngredientParser: parseIngredient(ingredients: IngredientList, ingredient: String)
+  activate IngredientParser
+
+  IngredientParser -[hidden]> Ingredient
+  create Ingredient
+  IngredientParser -> Ingredient : new Ingredient(ingredientName: String, ingredientQuantity: String, ingredientUnit: String)
+  activate Ingredient
+
+  Ingredient --> IngredientParser : newIngredient: Ingredient
+  deactivate Ingredient
+
+  IngredientParser --> AddIngredientCommand
+  deactivate IngredientParser
+
+  AddIngredientCommand -> ingredients: addIngredient(newIngredient: Ingredient)
+
+  activate ingredients
+
+  ingredients --> AddIngredientCommand
+
+  AddIngredientCommand -> Ui: printAddIngredientsSuccess(newIngredient.getname(): String)
+
+  activate Ui
+
+  Ui --> User
+  deactivate Ui
+
+end
+
+
+
+User <-- AddIngredientCommand
+
+deactivate AddIngredientCommand
+
+
+@enduml

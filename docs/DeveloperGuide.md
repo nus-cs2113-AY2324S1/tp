@@ -73,6 +73,32 @@ be executed as follows:
 
 <img src="images/AddNewRecipeSequenceDiagram.png" width="963" />
 
+### Add Ingredient feature
+
+The add Ingredient feature is used by a `AddIngredientCommand` class. By calling `executeCommand` on the class, the steps will
+be executed as follows:
+- **Step1**
+
+  `AddIngredientCommand` will use the "split" method of `String` to get an array of the descriptions of ingredients and iterate all the elements in this array
+
+
+- **Step2**
+
+  `AddIngredientCommand` will get a new `Ingredient` by invoking the method "parseIngredient" of `IngredientParser` for each element of the obtained array
+
+
+- **Step3**
+
+  `AddIngredientCommand` will add this `Ingredient` into `IngredientList`. Then, the ingredient will be added into an
+  `ArrayList` inside `IngredientList`.
+
+
+- **Step4**
+
+  `AddIngredientCommand` will call `Ui` class to print out the name of the recently added ingredient.
+
+<img src="images/AddNewIngredientSequenceDiagram.png" width="963" />
+
 ### Delete feature
 
 

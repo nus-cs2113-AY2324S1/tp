@@ -16,7 +16,8 @@ public class AddRecipeCommand extends Command {
 
     @Override
     public void executeCommand() {
-        if (toAdd.contains("r/") & toAdd.contains("s/")) {
+        if (toAdd.contains("r/") && toAdd.contains("s/")) {
+
             String[] allToAdd = toAdd.split("s/");
             String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
             String[] steps = new String[allToAdd.length-1];
