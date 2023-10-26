@@ -70,7 +70,8 @@ class ListMenuCommandTest {
 
         String actualOutput = String.join(",", commandOutput);
 
-        String expectedOutput = "It seems our menu is currently taking a break. Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
+        String expectedOutput = "It seems our menu is currently taking a break. "
+                + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
 
         assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
     }
