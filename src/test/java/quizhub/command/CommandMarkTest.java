@@ -42,7 +42,7 @@ public class CommandMarkTest {
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question : questionsToAdd) {
-            //questionList.addToQuestionList(question, qnType, showMessage);
+            Parser.parseCommand(question).executeCommand(ui, mockStorage, questionList);
         }
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);

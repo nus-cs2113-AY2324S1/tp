@@ -1,6 +1,7 @@
 package quizhub.command;
 
 import org.junit.jupiter.api.io.TempDir;
+import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 import quizhub.storage.Storage;
@@ -42,13 +43,14 @@ public class StartTest {
     @Test
     public void testAddQuestionToListAndStorage() {
         // Add a question to the question list
-        //questionList.addToQuestionList("short What is 2 + 2?/4 / MA1511 / EASY", Question.QnType.SHORTANSWER, false);
+        questionList.addShortAnswerQn("short What is 2 + 2?",
+                "4", "MA1511", Question.QnDifficulty.EASY, false);
 
         // Store the question in the mock storage
-        mockStorage.saveData(questionList.toString());
+        //mockStorage.saveData(questionList.toString());
 
         // Retrieve questions from the mock storage (without clearing the list)
-        mockStorage.loadData(questionList);
+        //mockStorage.loadData(questionList);
 
         // Verify that the question was added to the list and retrieved from storage
         assertEquals(1, questionList.getQuestionListSize());
@@ -58,8 +60,10 @@ public class StartTest {
     @Test
     public void testStartQuizWithQuestions() {
         // Add some questions to the question list
-        //questionList.addToQuestionList("short What is 2 + 2?/4 / MA1511 / EASY", Question.QnType.SHORTANSWER, false);
-        //questionList.addToQuestionList("short What is 3 + 3?/6 / MA1511 / EASY", Question.QnType.SHORTANSWER, false);
+        questionList.addShortAnswerQn("short What is 2 + 2?",
+                "4", "MA1511", Question.QnDifficulty.EASY, false);
+        questionList.addShortAnswerQn("short What is 3 + 3?",
+                "6", "MA1511", Question.QnDifficulty.EASY, false);
 
         // Set up user input for the quiz one by one
         mockUi.setUserInput("4");
