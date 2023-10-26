@@ -34,7 +34,7 @@ public class Ui {
         System.out.println("- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]");
         System.out.println("\t" + validIngredientUnits());
         System.out.println("- View all ingredients. [view i]");
-        System.out.println("- Edit an ingredient. [edit i/INGREDIENT_NAMEQUANTITY,UNIT [i/...] ]");
+        System.out.println("- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
         System.out.println("- Exit application [exit]");
         drawDivider();
     }

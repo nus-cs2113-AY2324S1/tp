@@ -9,7 +9,7 @@ Here are the commands currently available:
 - Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]
 	Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
 - View all ingredients. [view i]
-- Edit an ingredient. [edit i/INGREDIENT_NAMEQUANTITY,UNIT [i/...] ]
+- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]
 - Exit application [exit]
 --------------------------------------------
 --------------------------------------------

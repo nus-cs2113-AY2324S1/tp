@@ -1,6 +1,9 @@
 package essenmakanan.ingredient;
 
 import java.util.ArrayList;
+
+import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
 public class IngredientList {
@@ -35,30 +38,37 @@ public class IngredientList {
         ingredients.add(ingredient);
     }
 
-    public void editIngredient(Ingredient existingIngredient, Ingredient ingredientToEdit) {
-        String oldName = existingIngredient.getName();
-        String newName = ingredientToEdit.getName();
+    public void editIngredient(Ingredient existingIngredient, String[] editDetails) {
+        for (int i = 1; i < editDetails.length; i++) {
+            // get flag of input to know which field to edit
+            String flag = editDetails[i].substring(0, 2);
 
-        String oldQuantity = existingIngredient.getQuantity();
-        String newQuantity = ingredientToEdit.getQuantity();
-
-        IngredientUnit oldUnit = existingIngredient.getUnit();
-        IngredientUnit newUnit = ingredientToEdit.getUnit();
-
-        if (!oldName.equals(newName)) {
-            existingIngredient.setName(newName);
-            Ui.printEditIngredientNameSuccess(oldName, newName);
+            switch (flag) {
+            case "n/":
+                String newName = editDetails[i].substring(2);
+                Ui.printEditIngredientNameSuccess(existingIngredient.getName(), newName);
+                existingIngredient.setName(newName);
+                break;
+            case "q/":
+                String newQuantity = editDetails[i].substring(2);
+                Ui.printEditIngredientQuantitySuccess(existingIngredient.getQuantity(), newQuantity);
+                existingIngredient.setQuantity(newQuantity);
+                break;
+            case "u/":
+                try {
+                    String newUnitString = editDetails[i].substring(2);
+                    IngredientUnit newUnit = IngredientParser.mapIngredientUnit(newUnitString);
+                    Ui.printEditIngredientUnitSuccess(existingIngredient.getUnit(), newUnit);
+                    existingIngredient.setUnit(newUnit);
+                } catch (EssenMakananFormatException e) {
+                    e.handleException();
+                }
+                break;
+            default:
+                break;
+            }
         }
 
-        if (!oldQuantity.equals(newQuantity)) {
-            existingIngredient.setQuantity(newQuantity);
-            Ui.printEditIngredientQuantitySuccess(oldQuantity, newQuantity);
-        }
-
-        if (!oldUnit.equals(newUnit)) {
-            existingIngredient.setUnit(newUnit);
-            Ui.printEditIngredientUnitSuccess(oldUnit, newUnit);
-        }
     }
 
     public void deleteIngredient(Ingredient ingredient) {
