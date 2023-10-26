@@ -6,7 +6,7 @@ import essenmakanan.recipe.RecipeList;
 
 public class Ui {
 
-    public void start() {
+    public static void start() {
         drawDivider();
         System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
                 "to track the\ningredients in your kitchen and store " +
@@ -15,7 +15,7 @@ public class Ui {
         drawDivider();
     }
 
-    public void bye() {
+    public static void bye() {
         drawDivider();
         System.out.println("Hope you had fun! See you again!");
         drawDivider();
@@ -28,13 +28,19 @@ public class Ui {
 
     public static void showCommands() {
         System.out.println("Here are the commands currently available:");
-        System.out.println("- Add recipe. [add r/RECIPE_NAME]");
-        System.out.println("- View all recipes. [view r]");
-        System.out.println("- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]");
-        System.out.println("\t" + validIngredientUnits());
-        System.out.println("- View all ingredients. [view i]");
-        System.out.println("- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
-        System.out.println("- Exit application [exit]");
+        System.out.println("RECIPE");
+        System.out.println("\t- View all recipes. [view r]");
+        System.out.println("\t- Add recipe. [add r/RECIPE_TITLE]");
+        System.out.println("\t- Delete a recipe. [delete r/RECIPE_ID] OR [delete r/RECIPE_TITLE]");
+        System.out.println("INGREDIENTS");
+        System.out.println("\t- View all ingredients. [view i]");
+        System.out.println("\t- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]");
+        System.out.println("\t\t" + validIngredientUnits());
+        System.out.println("\t- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
+        System.out.println("\t- Delete an ingredient. [delete r/INGREDIENT_ID] OR [delete r/INGREDIENT_NAME]");
+        System.out.println("OTHERS");
+        System.out.println("\t- View all commands [help]");
+        System.out.println("\t- Exit application [exit]");
         drawDivider();
     }
 
