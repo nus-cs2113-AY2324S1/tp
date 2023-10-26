@@ -13,7 +13,7 @@ import java.util.Collections;
  */
 public class CommandStart extends Command{
     public static final String MISSING_MODE_MSG = "    Ono! You did not indicate mode of the quiz :< " +
-            System.lineSeparator() + "Quiz mode must be either 'all' or 'random'";
+            System.lineSeparator() + "    Quiz mode must be either 'all' or 'random'";
     public static final String MISSING_START_DETAILS = "    Ono! You did not indicate start details for the quiz " +
             "mode that you have chosen :<";
     public static final String INVALID_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
@@ -60,7 +60,7 @@ public class CommandStart extends Command{
             matchedQuestions = questions.getAllQns();
             break;
         default:
-            System.out.println("    Please enter a valid quiz mode :<");
+            Ui.displayMessage("    Please enter a valid quiz mode :<");
             return;
         }
 
@@ -73,7 +73,7 @@ public class CommandStart extends Command{
             questions.startQuiz(ui, matchedQuestions);
             break;
         default:
-            System.out.println("    Please enter a valid quiz mode :<");
+            Ui.displayMessage("    Please enter a valid quiz mode :<");
             return;
         }
     }
