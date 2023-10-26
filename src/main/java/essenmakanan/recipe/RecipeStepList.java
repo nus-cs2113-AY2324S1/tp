@@ -23,6 +23,7 @@ public class RecipeStepList extends ArrayList<Step> {
                 addStep(input);
             }
         } while(isAddingSteps);
+        System.out.println("done steps");
     }
 
     public RecipeStepList(String[] steps) {
