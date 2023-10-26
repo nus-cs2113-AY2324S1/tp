@@ -42,10 +42,14 @@ Given below is a quick overview of main components and how they interact with ea
 
 
 ## Implementation
+### Help Feature
+The help feature is facilitated by the `HelpCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the user help commands.
+
+<img src="images/HelpFunctionSequenceDiagram.png" width="963" />
 
 ### Add Recipe feature
 
-The add recipe feature is used by a `AddRecipeCommand` class. By calling `executeCommand` on the class, the steps will
+The add recipe feature is facilitated by the `AddRecipeCommand` class. By calling `executeCommand` on the class, the steps will
 be executed as follows:
 - **Step1**
   
