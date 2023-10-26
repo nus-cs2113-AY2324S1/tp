@@ -12,49 +12,28 @@ import java.util.Collections;
  * Command to Start the Quiz
  */
 public class CommandStart extends Command{
-    public static final String MISSING_MODE_MSG = "    Ono! You did not indicate mode of the quiz :<";
+    public static final String MISSING_MODE_MSG = "    Ono! You did not indicate mode of the quiz :< " +
+            System.lineSeparator() + "Quiz mode must be either 'all' or 'random'";
+    public static final String MISSING_START_DETAILS = "    Ono! You did not indicate start details for the quiz " +
+            "mode that you have chosen :<";
     public static final String INVALID_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
             "/[quiz mode] [start details] /[qn mode]!";
-    private String startMode;
-    private String startDetails = "";
-    private String startQnMode = "";
+    private final String startMode;
+    private final String startDetails;
+    private final String startQnMode;
     /**
      * Creates a new start command
      *
-     * @param userInput User input from CLI.
+     * @param startMode Mode to start the quiz with, indicates how questions for the quiz are selected.
+     * @param startDetails Details to complement quiz mode for choosing questions for the quiz.
+     * @param startQnMode Mode for arranging the questions within the quiz.
      */
-    public CommandStart(String userInput) {
+    public CommandStart(String startMode, String startDetails, String startQnMode) {
         super(CommandType.START);
-        String[] commandDetails = userInput.split("/");
-        try {
-            startMode = commandDetails[1].split(" ")[0].strip();
-        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println(MISSING_MODE_MSG);
-            System.out.println(INVALID_FORMAT_MSG);
-            return;
-        }
-        try {
-            if(!startMode.equalsIgnoreCase("all")){
-                startDetails = commandDetails[1].split(" ")[1].strip();
-            }
-        }  catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            System.out.println(INVALID_FORMAT_MSG);
-        }
-        try {
-            // Reads in /random or /normal
-            startQnMode = commandDetails[2].split(" ")[0].strip();
-            if (!startQnMode.equals("random") && !startQnMode.equals("normal")) {
-                throw new IllegalArgumentException(INVALID_MODE_MSG);
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            System.out.println(INVALID_FORMAT_MSG);
-        } finally {
-            if (startQnMode.isEmpty()) {
-                System.out.println(INVALID_FORMAT_MSG);
-            }
-        }
+        this.startMode = startMode;
+        this.startDetails = startDetails;
+        this.startQnMode = startQnMode;
     }
 
     /**

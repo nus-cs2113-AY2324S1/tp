@@ -214,11 +214,46 @@ public class Parser {
     /**
      * Attempt to parse user input into a Start Quiz Command
      *
-     * @param userInput Raw command entered by the user
+     * @param userInput Raw command entered by the userstart /[quiz mode] [start details] /[qn mode
      * @return Start Quiz command or an Invalid Command
      */
     private static Command parseStartCommand(String userInput) {
-        return new CommandStart(userInput);
+        String startMode;
+        String startDetails = "";
+        String startQnMode;
+        String[] commandDetails = userInput.split("/");
+        String startInfo;
+        try {
+            startInfo = commandDetails[1];
+            startMode = startInfo.split(" ")[0].strip();
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandStart.MISSING_MODE_MSG + System.lineSeparator() +
+                    CommandStart.INVALID_FORMAT_MSG);
+        }
+        try {
+            if(!startMode.equalsIgnoreCase("all")){
+                startDetails = startInfo.split(startMode)[1].strip();
+                if(startDetails.equals("")){
+                    return new CommandInvalid(CommandStart.MISSING_START_DETAILS);
+                }
+            }
+        }  catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandStart.INVALID_FORMAT_MSG);
+        }
+        try {
+            // Reads in /random or /normal
+            startQnMode = commandDetails[2].split(" ")[0].strip();
+            if (startQnMode.isEmpty()) {
+                return new CommandInvalid(CommandStart.INVALID_FORMAT_MSG);
+            }
+            if (!startQnMode.equals("random") && !startQnMode.equals("normal")) {
+                throw new IllegalArgumentException(CommandStart.INVALID_MODE_MSG);
+            }
+        } catch (IllegalArgumentException e) {
+            return new CommandInvalid(e.getMessage() + System.lineSeparator() +
+                    CommandStart.INVALID_FORMAT_MSG);
+        }
+        return new CommandStart(startMode, startDetails, startQnMode);
     }
 
     /**
@@ -228,6 +263,31 @@ public class Parser {
      * @return Mark Difficulty command or an Invalid Command
      */
     private static Command parseMarkDiffCommand(String userInput) {
-        return new CommandMarkDifficulty(userInput);
+        String[] commandDetails = userInput.split(" ");
+        int qnIndex;
+        Question.QnDifficulty qnDifficulty;
+        String qnIndexString;
+        String qnDifficultyString;
+        try {
+            qnIndexString  = commandDetails[1].strip();
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandMarkDifficulty.MISSING_INDEX_MSG + System.lineSeparator() +
+                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
+        }
+        try {
+            qnIndex = Integer.parseInt(qnIndexString);
+            if(qnIndex < 0){
+                return new CommandInvalid(Parser.INVALID_INTEGER_INDEX_MSG);
+            }
+        }  catch (NumberFormatException incompleteCommand) {
+            return new CommandInvalid(Parser.INVALID_INTEGER_INDEX_MSG);
+        }
+        try {
+            qnDifficultyString = commandDetails[2].strip();
+        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            return new CommandInvalid(CommandMarkDifficulty.MISSING_DIFFICULTY_MSG);
+        }
+        qnDifficulty = Parser.extractQuestionDifficulty(qnDifficultyString);
+        return new CommandMarkDifficulty(qnIndex, qnDifficulty);
     }
 }
