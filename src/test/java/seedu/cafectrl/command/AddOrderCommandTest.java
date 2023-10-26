@@ -110,9 +110,21 @@ class AddOrderCommandTest {
             }
         };
 
+        Ui ui2 = new Ui() {
+            @Override
+            public void showToUser(String... message) {
+
+            }
+
+            @Override
+            public void showTotalCost(String dollarCost) {
+
+            }
+        };
+
         OrderList orderList = new OrderList();
 
-        Command addOrderCommand = new AddOrderCommand(orderChickenRice, new Ui(), pantry, orderList);
+        Command addOrderCommand = new AddOrderCommand(orderChickenRice, ui2, pantry, orderList);
         addOrderCommand.execute();
 
         Command addOrderCommand2 = new AddOrderCommand(orderChickenCurry, ui, pantry, orderList);
