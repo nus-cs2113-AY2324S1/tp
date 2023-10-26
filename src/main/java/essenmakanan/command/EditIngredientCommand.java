@@ -1,5 +1,6 @@
 package essenmakanan.command;
 
+import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 
@@ -27,7 +28,11 @@ public class EditIngredientCommand extends Command {
         if (existingIngredient == null) {
             System.out.println("Ingredient not found!");
         } else {
-            ingredients.editIngredient(existingIngredient, splitDetails);
+            try {
+                ingredients.editIngredient(existingIngredient, splitDetails);
+            } catch (EssenMakananFormatException e) {
+                e.handleException();
+            }
         }
 
     }
