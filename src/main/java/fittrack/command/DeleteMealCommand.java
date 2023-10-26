@@ -23,7 +23,7 @@ public class DeleteMealCommand extends Command {
 
     // @@author NgLixuanNixon
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws Storage.StorageOperationException {
         if (!mealList.isIndexValid(mealIndex)) {
             return new CommandParser()
                     .getInvalidCommand(commandLine, new IndexOutOfBoundsException())
