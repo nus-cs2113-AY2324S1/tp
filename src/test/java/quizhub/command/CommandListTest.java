@@ -7,10 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.nio.file.Path;
-
-import org.junit.jupiter.api.io.TempDir;
-import quizhub.parser.Parser;
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.storage.MockStorage;
