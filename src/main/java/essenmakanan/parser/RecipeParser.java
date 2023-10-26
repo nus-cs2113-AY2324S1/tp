@@ -9,7 +9,8 @@ import essenmakanan.ui.Ui;
 
 public class RecipeParser {
 
-    public static int getRecipeId(RecipeList recipes, String input) throws EssenMakananOutOfRangeException, EssenMakananFormatException {
+    public static int getRecipeId(RecipeList recipes, String input)
+            throws EssenMakananOutOfRangeException, EssenMakananFormatException {
         int id;
         input = input.replace("r/", "");
 

@@ -7,7 +7,8 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
-    public static int getIngredientId(IngredientList ingredients, String input) throws EssenMakananOutOfRangeException, EssenMakananFormatException {
+    public static int getIngredientId(IngredientList ingredients, String input)
+            throws EssenMakananOutOfRangeException, EssenMakananFormatException {
         int index;
         input = input.replace("i/", "");
 

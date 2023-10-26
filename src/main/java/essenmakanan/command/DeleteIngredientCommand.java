@@ -4,7 +4,6 @@ import essenmakanan.exception.EssenMakananFormatException;
 import essenmakanan.exception.EssenMakananOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
-import essenmakanan.recipe.RecipeList;
 
 public class DeleteIngredientCommand extends Command {
     private IngredientList ingredients;
