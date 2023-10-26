@@ -28,7 +28,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) {
+    public void setArguments(String args, CommandParser parser) throws Storage.StorageOperationException {
         if (args.isEmpty()) {
             helpMessage = HELP;
             return;
