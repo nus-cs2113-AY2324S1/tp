@@ -2,7 +2,6 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.text.DecimalFormat;
