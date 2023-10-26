@@ -4,8 +4,18 @@ import seedu.duke.flashcard.FlashcardList;
 
 import java.util.Scanner;
 
-public class DeleteFlashcardCommand extends FlashcardCommand {
-    public void execute(Scanner scanner, FlashcardList flashcardList) {
+public class DeleteFlashcardCommand extends DualFlashcardCommand {
+    private String input = null;
+
+    public DeleteFlashcardCommand(String input) {
+        this.input = input;
+        beginnerCommandLength = 2;
+        expertCommandLength = 3;
+        syntaxString = "delete flashcard FLASHCARD_ID";
+    }
+
+    protected void executeBeginnerMode(Scanner scanner,
+                                    FlashcardList flashcardList) {
         System.out.println("    Enter id of the flashcard you want to delete:" +
                 " ");
 
@@ -19,6 +29,22 @@ public class DeleteFlashcardCommand extends FlashcardCommand {
             return;
         }
 
+        deleteFlashcardById(flashcardId, flashcardList);
+    }
+
+    protected void executeExpertMode(Scanner scanner,
+                                  FlashcardList flashcardList) {
+        String[] commandParts = input.split(" ");
+
+        try {
+            int flashcardId = Integer.parseInt(commandParts[2]);
+            deleteFlashcardById(flashcardId, flashcardList);
+        } catch (NumberFormatException e) {
+            System.out.println("    Invalid id! Id must be an integer");
+        }
+    }
+
+    private void deleteFlashcardById(int flashcardId, FlashcardList flashcardList) {
         boolean deletionWasSuccessful =
                 flashcardList.deleteFlashcardById(flashcardId);
 

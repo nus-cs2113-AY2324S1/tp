@@ -11,7 +11,6 @@ public class Flashcard {
     private static int globalMaxId = 1;
     private String frontText;
     private String backText;
-    private ArrayList<String> tags;
     private ArrayList<FlashcardReview> reviews;
     private LocalDateTime lastReviewOn;
     private int id;
@@ -20,7 +19,6 @@ public class Flashcard {
         this.frontText = frontText;
         this.backText = backText;
 
-        tags = new ArrayList<>();
         reviews = new ArrayList<>();
 
         lastReviewOn = null;
@@ -60,7 +58,6 @@ public class Flashcard {
     public String toString() {
         return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()
-                + "tags: " + tags.toString() + System.lineSeparator()
                 + "next review due on: " + lastReviewOn + System.lineSeparator()
                 + "id: " + id + System.lineSeparator();
     }
