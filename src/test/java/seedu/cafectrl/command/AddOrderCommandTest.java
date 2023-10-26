@@ -1,6 +1,5 @@
 package seedu.cafectrl.command;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.Order;
 import seedu.cafectrl.OrderList;
@@ -11,6 +10,8 @@ import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddOrderCommandTest {
     @Test
@@ -29,7 +30,7 @@ class AddOrderCommandTest {
         menuItems.add(dishChickenRice);
         menuItems.add(dishChickenCurry);
         Menu menu = new Menu(menuItems);
-        Assertions.assertEquals(2, menu.getSize());
+        assertEquals(2, menu.getSize());
 
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         pantryStock.add(new Ingredient("chicken", 1000, "g"));
@@ -84,7 +85,7 @@ class AddOrderCommandTest {
         menuItems.add(dishChickenRice);
         menuItems.add(dishChickenCurry);
         Menu menu = new Menu(menuItems);
-        Assertions.assertEquals(2, menu.getSize());
+        assertEquals(2, menu.getSize());
 
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         pantryStock.add(new Ingredient("chicken", 1000, "g"));
