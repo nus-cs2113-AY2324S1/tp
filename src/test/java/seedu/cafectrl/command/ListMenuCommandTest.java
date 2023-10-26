@@ -50,6 +50,31 @@ class ListMenuCommandTest {
         assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
     }
 
+    @Test
+    public void execute_emptyMenu_expectEmptyMenuMessage() {
+        ArrayList<Dish> menuItems = new ArrayList<>();
+        Menu menu = new Menu(menuItems);
+        assertEquals(0, menu.getSize());
+        ArrayList<String> commandOutput = new ArrayList<>();
+
+        Ui ui = new Ui() {
+            @Override
+            public void showToUser(String... message) {
+                String parseString = convertArrayToString(message, ",");
+                commandOutput.add(parseString);
+            }
+        };
+
+        Command listMenuCommand = new ListMenuCommand(menu, ui);
+        listMenuCommand.execute();
+
+        String actualOutput = String.join(",", commandOutput);
+
+        String expectedOutput = "It seems our menu is currently taking a break. Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
+
+        assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
+    }
+
     private static String convertArrayToString(String[] message, String delimiter) {
         StringBuilder sb = new StringBuilder();
         for (String str : message) {
