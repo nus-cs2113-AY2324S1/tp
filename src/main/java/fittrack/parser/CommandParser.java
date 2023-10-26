@@ -59,7 +59,7 @@ public class CommandParser {
             "(?<index>\\S+)?"
     );
 
-    public Command parseCommand(String userCommandLine) {
+    public Command parseCommand(String userCommandLine) throws Storage.StorageOperationException {
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
             return getInvalidCommand(userCommandLine);
