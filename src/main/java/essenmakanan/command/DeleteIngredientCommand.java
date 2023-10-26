@@ -17,8 +17,8 @@ public class DeleteIngredientCommand extends Command {
     @Override
     public void executeCommand() {
         try {
-            int ingredientId = IngredientParser.getIngredientId(ingredients, ingredientInput);
-            ingredients.deleteIngredient(ingredientId);
+            int ingredientIndex = IngredientParser.getIngredientIndex(ingredients, ingredientInput);
+            ingredients.deleteIngredient(ingredientIndex);
         } catch (EssenMakananOutOfRangeException e) {
             e.handleException();
         } catch (EssenMakananFormatException e) {

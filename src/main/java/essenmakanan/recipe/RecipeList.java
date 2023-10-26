@@ -25,10 +25,9 @@ public class RecipeList {
         recipes.add(new Recipe(title, steps));
     }
 
-    public void deleteRecipe(int id) {
-        int pos = id - 1;
-        Ui.printDeleteRecipeSuccess(recipes.get(pos).getTitle());
-        recipes.remove(pos);
+    public void deleteRecipe(int index) {
+        Ui.printDeleteRecipeSuccess(recipes.get(index).getTitle());
+        recipes.remove(index);
     }
 
     public Recipe getRecipeByIndex(int index) {
@@ -45,20 +44,20 @@ public class RecipeList {
         return null;
     }
 
-    public boolean recipeIdInList(int id) {
-        if (id > 0 && id <= recipes.size()) {
+    public boolean recipeExist(int index) {
+        if (index >= 0 && index < recipes.size()) {
             return true;
         }
         return false;
     }
 
-    public int idOfRecipeByName(String recipeTitle) {
+    public int getIndexOfRecipeByName(String recipeTitle) {
         int i = 0;
         for (Recipe recipe : recipes) {
-            i++;
             if (recipe.getTitle().equals(recipeTitle)) {
                 return i;
             }
+            i++;
         }
         return -1;
     }

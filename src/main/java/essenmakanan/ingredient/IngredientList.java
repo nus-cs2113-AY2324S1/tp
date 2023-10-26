@@ -34,19 +34,19 @@ public class IngredientList {
         return ingredients.indexOf(ingredient);
     }
 
-    public int idOfIngredientByName(String ingredientName) {
+    public int getIndexByName(String ingredientName) {
         int i = 0;
         for (Ingredient ingredient : ingredients) {
-            i++;
             if (ingredient.getName().equals(ingredientName)) {
                 return i;
             }
+            i++;
         }
         return -1;
     }
 
-    public boolean ingredientIdInList(int id) {
-        if (id > 0 && id <= ingredients.size()) {
+    public boolean ingredientExist(int id) {
+        if (id >= 0 && id < ingredients.size()) {
             return true;
         }
         return false;
@@ -89,10 +89,9 @@ public class IngredientList {
 
     }
 
-    public void deleteIngredient(int id) {
-        int pos = id - 1;
-        Ui.printDeleteIngredientsSuccess(ingredients.get(pos).getName());
-        ingredients.remove(pos);
+    public void deleteIngredient(int index) {
+        Ui.printDeleteIngredientsSuccess(ingredients.get(index).getName());
+        ingredients.remove(index);
     }
 
     public void listIngredients() {

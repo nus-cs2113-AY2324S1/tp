@@ -7,7 +7,7 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
-    public static int getIngredientId(IngredientList ingredients, String input)
+    public static int getIngredientIndex(IngredientList ingredients, String input)
             throws EssenMakananOutOfRangeException, EssenMakananFormatException {
         int index;
         input = input.replace("i/", "");
@@ -16,12 +16,12 @@ public class IngredientParser {
             if (input.length() != 1) {
                 throw new EssenMakananFormatException();
             }
-            index = Integer.parseInt(input);
+            index = Integer.parseInt(input) - 1;
         } else {
-            index = ingredients.idOfIngredientByName(input);
+            index = ingredients.getIndexByName(input);
         }
 
-        if (!ingredients.ingredientIdInList(index)) {
+        if (!ingredients.ingredientExist(index)) {
             throw new EssenMakananOutOfRangeException();
         }
 

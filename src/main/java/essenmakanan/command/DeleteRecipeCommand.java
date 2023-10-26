@@ -17,8 +17,8 @@ public class DeleteRecipeCommand extends Command {
     @Override
     public void executeCommand() {
         try {
-            int recipeId = RecipeParser.getRecipeId(recipes, recipeInput);
-            recipes.deleteRecipe(recipeId);
+            int recipeIndex = RecipeParser.getRecipeIndex(recipes, recipeInput);
+            recipes.deleteRecipe(recipeIndex);
         } catch (EssenMakananOutOfRangeException e) {
             e.handleException();
         } catch (EssenMakananFormatException e) {
