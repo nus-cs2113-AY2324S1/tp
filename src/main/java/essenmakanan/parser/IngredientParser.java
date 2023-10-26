@@ -6,6 +6,13 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
+    public static int getIngredientId(String input) {
+        if (input.matches("\\d+")) { //if input only contains numbers
+            return Integer.parseInt(input);
+        } else {
+
+        }
+    }
     public static Ingredient parseIngredient(IngredientList ingredients, String inputDetail)
             throws EssenMakananFormatException {
 

@@ -13,6 +13,13 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 
 public class Parser {
+    public boolean isIngredientCommand(String inputDetail) {
+        return inputDetail.startsWith("r/");
+    }
+
+    public boolean isRecipeCommand(String inputDetail) {
+        return inputDetail.startsWith("i/");
+    }
 
     public Command parseCommand(String input, RecipeList recipes, IngredientList ingredients)
             throws EssenMakananCommandException, EssenMakananFormatException {
@@ -24,14 +31,24 @@ public class Parser {
 
         switch (commandType) {
         case "add":
-            if (!inputDetail.isEmpty() && inputDetail.startsWith("r/")) {
+            if (isRecipeCommand(inputDetail)) {
                 command = new AddRecipeCommand(inputDetail, recipes);
-            } else if (!inputDetail.isEmpty() && inputDetail.startsWith("i/")) {
+            } else if (isIngredientCommand(inputDetail)) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
             } else {
                 throw new EssenMakananFormatException();
             }
             break;
+        case "delete":
+            if (isRecipeCommand(inputDetail)) {
+                int recipeToDelete = RecipeParser.getRecipeId(inputDetail);
+                command = new DeleteRecipeCommand(recipeToDelete);
+            } else if (isIngredientCommand(inputDetail)) {
+                int ingredientToDelete = IngredientParser.getIngredientId(inputDetail);
+                command = new DeleteIngredientCommand(ingredientToDelete);
+            } else {
+                throw new EssenMakananFormatException();
+            }
         case "view":
             if (inputDetail.equals("r")) {
                 command = new ViewRecipesCommand(recipes);

@@ -7,6 +7,14 @@ import essenmakanan.ui.Ui;
 
 public class RecipeParser {
 
+    public static int getRecipeId(String input) {
+        if (input.matches("\\d+")) { //if input only contains numbers
+            return Integer.parseInt(input);
+        } else {
+
+        }
+    }
+
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
             throws EssenMakananException {
         Ui ui = new Ui();
