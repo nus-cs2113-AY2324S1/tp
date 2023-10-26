@@ -96,7 +96,7 @@ public class CommandFindTest {
      */
     @Test
     void testFindDescriptionWithMatches() {
-        String expectedOutput = "Here are questions that matched your search:\r\n"
+        String expectedOutput = "Here are questions that matched your search:\n"
                 + "    1: [S][X] Question1 / Answer1 | Mod1 | NORMAL\n"
                 + "    2: [S][] Question2 / Answer2 | Mod2 | NORMAL\n"
                 + "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL\n"
@@ -111,7 +111,7 @@ public class CommandFindTest {
 
     @Test
     void testFindDescriptionNoMatches() {
-        String expectedOutput = "Here are questions that matched your search:\r\n"
+        String expectedOutput = "Here are questions that matched your search:\n"
                 + "    No results found :< Check your keyword is correct?";
         Parser.parseCommand("find /description no matches").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);

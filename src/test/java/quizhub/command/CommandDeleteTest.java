@@ -102,7 +102,7 @@ public class CommandDeleteTest {
     // * */
     @Test
     void testDeleteValidIndex() {
-        String expectedOutput = "Roger that! I have deleted the following question >w< !\r\n" +
+        String expectedOutput = "Roger that! I have deleted the following question >w< !\n" +
             "        [S][X] Question1 / Answer1 | Mod1 | NORMAL\n" +
             "    Now you have 3 questions in the list! UWU";
         questionList.deleteQuestionByIndex(1);
