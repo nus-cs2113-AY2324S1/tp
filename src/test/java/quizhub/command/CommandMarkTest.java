@@ -152,7 +152,7 @@ public class CommandMarkTest {
     @Test
     void testMarkDiffCorrectDifficulty(){
         String input  = "markdiff 2 HARD";
-        String expectedOutput = "Roger that! I have marked the following question as hard >w< !\r\n" +
+        String expectedOutput = "Roger that! I have marked the following question as hard >w< !\n" +
                 "        [S][] Question2 / Answer2 | Mod2 | HARD";
         Command command = parser.parseCommand(input);
         command.executeCommand(ui, mockStorage, questionList);

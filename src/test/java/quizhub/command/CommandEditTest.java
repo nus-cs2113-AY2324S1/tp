@@ -88,7 +88,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditBlankDescAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
                 "        [S][X]  /  | Mod1 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(1, "", "");
@@ -99,7 +99,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditOnlyBlankDesc(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
                 "        [S][]  / NewAnswer | Mod2 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(2, "", "NewAnswer");
@@ -111,7 +111,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditOnlyBlankAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
                 "        [S][X] NewDescription /  | Mod3 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(3, "NewDescription", "");
@@ -123,7 +123,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditNonBlankDescAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\r\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
                 "        [S][] NewDescription / NewAnswer | Mod4 | NORMAL\n" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(4, "NewDescription", "NewAnswer");
