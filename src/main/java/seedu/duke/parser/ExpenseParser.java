@@ -77,15 +77,20 @@ public class ExpenseParser {
             }
         } else if (expenseCategoryString.equals("transport")){
             if (expenseTypeString.equals("train")) {
-                return new Transport(expenseDescriptionString, expenseDate, expenseAmount, TransportationType.TRAIN);
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.TRAIN);
             } else if (expenseTypeString.equals("bus")) {
-                return new Transport(expenseDescriptionString, expenseDate, expenseAmount, TransportationType.BUS);
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.BUS);
             } else if (expenseTypeString.equals("taxi")) {
-                return new Transport(expenseDescriptionString, expenseDate, expenseAmount, TransportationType.TAXI);
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.TAXI);
             } else if (expenseTypeString.equals("fuel")) {
-                return new Transport(expenseDescriptionString, expenseDate, expenseAmount, TransportationType.FUEL);
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.FUEL);
             } else {
-                return new Transport(expenseDescriptionString, expenseDate, expenseAmount, TransportationType.UNDEFINED);
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.UNDEFINED);
             }
         } else if (expenseCategoryString.equals("utilities")) {
             if (expenseTypeString.equals("water")) {
