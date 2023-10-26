@@ -60,6 +60,9 @@ public class CommandEditTest {
      * */
     private void testCliOutputCorrectness(String expectedOutput){
         String actualOutput = outputStreamCaptor.toString().trim();
+        actualOutput = actualOutput.replace("\r", "");
+        actualOutput = actualOutput.replace("\n", "");
+        actualOutput = actualOutput.replace(System.lineSeparator(), "");
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -88,8 +91,8 @@ public class CommandEditTest {
      * */
     @Test
     void testEditBlankDescAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
-                "        [S][X]  /  | Mod1 | NORMAL\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !" +
+                "        [S][X]  /  | Mod1 | NORMAL" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(1, "", "");
         testCliOutputCorrectness(expectedOutput);
@@ -99,8 +102,8 @@ public class CommandEditTest {
      * */
     @Test
     void testEditOnlyBlankDesc(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
-                "        [S][]  / NewAnswer | Mod2 | NORMAL\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !" +
+                "        [S][]  / NewAnswer | Mod2 | NORMAL" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(2, "", "NewAnswer");
         testCliOutputCorrectness(expectedOutput);
@@ -111,8 +114,8 @@ public class CommandEditTest {
      * */
     @Test
     void testEditOnlyBlankAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
-                "        [S][X] NewDescription /  | Mod3 | NORMAL\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !" +
+                "        [S][X] NewDescription /  | Mod3 | NORMAL" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(3, "NewDescription", "");
         testCliOutputCorrectness(expectedOutput);
@@ -123,8 +126,8 @@ public class CommandEditTest {
      * */
     @Test
     void testEditNonBlankDescAns(){
-        String expectedOutput = "Roger that! I have edited the following question >w< !\n" +
-                "        [S][] NewDescription / NewAnswer | Mod4 | NORMAL\n" +
+        String expectedOutput = "Roger that! I have edited the following question >w< !" +
+                "        [S][] NewDescription / NewAnswer | Mod4 | NORMAL" +
                 "    Now you have 4 questions in the list! UWU";
         questionList.editQuestionByIndex(4, "NewDescription", "NewAnswer");
         testCliOutputCorrectness(expectedOutput);

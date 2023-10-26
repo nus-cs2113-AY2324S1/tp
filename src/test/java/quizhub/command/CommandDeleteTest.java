@@ -59,6 +59,9 @@ public class CommandDeleteTest {
     private void testCliOutputCorrectness(String expectedOutput) {
         assert expectedOutput != null : "Expected output should not be null";
         String actualOutput = outputStreamCaptor.toString().trim();
+        actualOutput = actualOutput.replace("\r", "");
+        actualOutput = actualOutput.replace("\n", "");
+        actualOutput = actualOutput.replace(System.lineSeparator(), "");
         System.out.println(expectedOutput + "\n" +actualOutput);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
@@ -78,8 +81,8 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteInvalidTypeIndex() {
-        String expectedOutput = Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
-                        Parser.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
+        String expectedOutput = Ui.INVALID_COMMAND_MSG +
+                        Parser.INVALID_INTEGER_INDEX_MSG +
                         CommandDelete.INVALID_FORMAT_MSG;
         parser.parseCommand("delete test").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput.strip());
@@ -90,8 +93,8 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteMissingIndex() {
-        String expectedOutput = Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
-                CommandDelete.MISSING_INDEX_MSG + System.lineSeparator() +
+        String expectedOutput = Ui.INVALID_COMMAND_MSG +
+                CommandDelete.MISSING_INDEX_MSG +
                 CommandDelete.INVALID_FORMAT_MSG;
         parser.parseCommand("delete").executeCommand(ui, mockStorage, questionList);;
         testCliOutputCorrectness(expectedOutput.strip());
@@ -102,8 +105,8 @@ public class CommandDeleteTest {
     // * */
     @Test
     void testDeleteValidIndex() {
-        String expectedOutput = "Roger that! I have deleted the following question >w< !\n" +
-            "        [S][X] Question1 / Answer1 | Mod1 | NORMAL\n" +
+        String expectedOutput = "Roger that! I have deleted the following question >w< !" +
+            "        [S][X] Question1 / Answer1 | Mod1 | NORMAL" +
             "    Now you have 3 questions in the list! UWU";
         questionList.deleteQuestionByIndex(1);
         testCliOutputCorrectness(expectedOutput);
