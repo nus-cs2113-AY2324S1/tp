@@ -3,6 +3,7 @@ package essenmakanan.parser;
 import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.command.Command;
+import essenmakanan.command.EditIngredientCommand;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.command.HelpCommand;
 import essenmakanan.command.ViewIngredientsCommand;
@@ -13,14 +14,6 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 
 public class Parser {
-    public boolean isIngredientCommand(String inputDetail) {
-        return inputDetail.startsWith("r/");
-    }
-
-    public boolean isRecipeCommand(String inputDetail) {
-        return inputDetail.startsWith("i/");
-    }
-
     public Command parseCommand(String input, RecipeList recipes, IngredientList ingredients)
             throws EssenMakananCommandException, EssenMakananFormatException {
         Command command;
@@ -31,19 +24,20 @@ public class Parser {
 
         switch (commandType) {
         case "add":
-            if (isRecipeCommand(inputDetail)) {
+
+            if (inputDetail.startsWith("r/")) {
                 command = new AddRecipeCommand(inputDetail, recipes);
-            } else if (isIngredientCommand(inputDetail)) {
+            } else if (inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
             } else {
                 throw new EssenMakananFormatException();
             }
             break;
         case "delete":
-            if (isRecipeCommand(inputDetail)) {
+            if (inputDetail.startsWith("r/")) {
                 int recipeToDelete = RecipeParser.getRecipeId(inputDetail);
                 command = new DeleteRecipeCommand(recipeToDelete);
-            } else if (isIngredientCommand(inputDetail)) {
+            } else if (inputDetail.startsWith("i/")) {
                 int ingredientToDelete = IngredientParser.getIngredientId(inputDetail);
                 command = new DeleteIngredientCommand(ingredientToDelete);
             } else {
@@ -54,6 +48,13 @@ public class Parser {
                 command = new ViewRecipesCommand(recipes);
             } else if (inputDetail.equals("i")) {
                 command = new ViewIngredientsCommand(ingredients);
+            } else {
+                throw new EssenMakananFormatException();
+            }
+            break;
+        case "edit":
+            if (inputDetail.startsWith("i/")) {
+                command = new EditIngredientCommand(inputDetail, ingredients);
             } else {
                 throw new EssenMakananFormatException();
             }
