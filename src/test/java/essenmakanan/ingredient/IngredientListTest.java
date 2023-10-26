@@ -1,6 +1,4 @@
-package essenmakanan;
-import essenmakanan.ingredient.Ingredient;
-import essenmakanan.ingredient.IngredientList;
+package essenmakanan.ingredient;
 import essenmakanan.ui.Ui;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
