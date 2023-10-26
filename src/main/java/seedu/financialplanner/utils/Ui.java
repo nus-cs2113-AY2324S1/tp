@@ -9,12 +9,11 @@ import seedu.financialplanner.list.Cashflow;
 import java.util.Scanner;
 
 public class Ui {
+    private static Ui ui = null;
     private final String RED = "\u001B[31m";
     private final String GREEN = "\u001B[32m";
     private final String RESET = "\u001B[0m";
-
     private final String YELLOW = "\u001B[33m";
-    private static Ui ui = null;
     private Scanner Scanner = new Scanner(System.in);
     private Ui() {
     }
