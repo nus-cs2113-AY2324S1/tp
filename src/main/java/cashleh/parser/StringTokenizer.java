@@ -30,6 +30,7 @@ public class StringTokenizer {
         for (int i = 0; i < prefixes.length; i++) {
             if (prefixes[i].contains(":optional")) {
                 prefixes[i] = prefixes[i].replace(":optional", "");
+                assert(!prefixes[i].contains(":optional"));
                 continue;
             }
             if (!input.contains(prefixes[i])) {
@@ -80,7 +81,9 @@ public class StringTokenizer {
 
         // Add dummy prefixes to represent start and end
         prefixes.add(0, new PrefixWithPosition("", 0));
+        assert(prefixes.get(0).getPosition() == 0);
         prefixes.add(new PrefixWithPosition("", inputString.length()));
+        assert(prefixes.get(prefixes.size() - 1).getPosition() == inputString.length());
 
         HashMap<String, String> tokenizedMap = new HashMap<>();
         for (int i = 0; i < prefixes.size() - 1; i++) {
