@@ -131,7 +131,8 @@ public class CommandParser {
         return invalidCommand;
     }
 
-    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) throws Storage.StorageOperationException {
+    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) 
+            throws Storage.StorageOperationException {
         InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
