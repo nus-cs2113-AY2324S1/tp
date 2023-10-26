@@ -3,14 +3,18 @@
 !define LOGIC_COLOR #3333C4
 !define LOGIC_COLOR_T1 #7777DB
 
+hide footbox
 actor User
 participant "FindCommand" as FindCmd LOGIC_COLOR_T1
 participant "Inventory" as Inventory LOGIC_COLOR
 
 User -> FindCmd: Execute 'Find' Command
+activate FindCmd
 User <-- FindCmd: CommandResult
 FindCmd -> Inventory: Retrieve Stock Entries
+activate Inventory
 Inventory --> FindCmd: List of Stock Entries
+
 FindCmd -> FindCmd: Process Entries
 FindCmd --> User: Display Search Results
 
