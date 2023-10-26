@@ -12,7 +12,7 @@ participant "<<class>>\nUi" as Ui INTERFACE_COLOR
 User-> EssenMakanan : input: exit
 activate EssenMakanan
 
-EssenMakanan -> Parser : parseCommand("exit")
+EssenMakanan -> Parser : parseCommand()
 activate Parser
 
 create ExitCommand

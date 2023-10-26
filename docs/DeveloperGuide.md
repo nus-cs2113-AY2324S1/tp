@@ -45,7 +45,30 @@ Given below is a quick overview of main components and how they interact with ea
 ### Help Feature
 The help feature is facilitated by the `HelpCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the user help commands.
 
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type
+
+- **Step 2**
+
+  A new `HelpCommand` object will be created and will be sent back to main
+
+- **Step 3**
+
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#showCommands()`
+
+- **Step 4**
+
+  Finally `Ui#showCommands()` will call `Ui#showRecipeCommands()`, `Ui#showIngredientCommands()`, `Ui#showOtherCommands()` to print all commands for recipe, ingredient and others respectively
+
 <img src="images/HelpFunctionSequenceDiagram.png" width="963" />
+
+### Exit feature
+The help feature is facilitated by the `ExitCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the exit command.
+
+<img src="images/ExitSequenceDiagram.png" width="963" />
+
 
 ### Add Recipe feature
 
@@ -75,7 +98,7 @@ be executed as follows:
 
 ### View Ingredients feature
 The add recipe feature is facilitated by the `ViewIngredientCommand` class. Users can input
-"view i" to trigger this command
+`view i` to trigger this command
 
 - **Step 1**
 
