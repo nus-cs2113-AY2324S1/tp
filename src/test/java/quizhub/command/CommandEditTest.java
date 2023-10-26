@@ -6,16 +6,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.io.TempDir;
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
+import quizhub.storage.MockStorage;
+import quizhub.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.nio.file.Path;
 
 public class CommandEditTest {
-    private static final Parser parser = new Parser();
     private static QuestionList questionList;
+    private static Ui ui;
+    private static MockStorage mockStorage;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -23,8 +28,10 @@ public class CommandEditTest {
      * Create a new question list and populate with dummy SHORTANSWER questions
      * */
     @BeforeAll
-    public static void setQuestionList(){
+    public static void setQuestionList(@TempDir Path tempDir) {
+        Path tempFile = tempDir.resolve("testStorage.txt");
         questionList = new QuestionList();
+        mockStorage = new MockStorage(tempFile.toString());
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",
             "short Question2 / Answer2 / Mod2 / NORMAL",
             "short Question3 / Answer3 / Mod3 / NORMAL",
@@ -32,8 +39,7 @@ public class CommandEditTest {
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
-            // questionList.addShortAnswerQn(question, qnType, showMessage);
-            parser.parseCommand(question);
+            Parser.parseCommand(question).executeCommand(ui, mockStorage, questionList);
         }
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);
