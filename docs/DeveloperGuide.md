@@ -22,6 +22,26 @@ When user input a string to `Main`,  it passes the full user input to `Parser` v
 ### Adding a Dish
 
 ### List Menu
+A list command can be used to display all the `Dish` objects stored in `Menu`.
+
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a list command.
+![List Menu Execution](umlimages/ListMenuCommandClass.png)
+
+![List Menu Execution](umlimages/ListMenuCommand_execute.png)
+
+Figure 1: Execution of list_menu command
+
+API: [ListMenuCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+
+When the `execute()` method of ListMenuCommand is invoked in Main, it checks if the size of the menu by running `menu.getSize()`. 
+
+1) If the menu is empty, it will call its `printEmptyMenu()` method to display to the user a `MENU_EMPTY_MESSAGE` in the Ui object and returns afterward.
+2) If the menu is not empty, it will call its `printFullMenu()` method.
+`printFullMenu()` will first print the top portion of the menu using the Ui object. 
+It then iterates through the `Dish` objects in `Menu` in a "for" loop, using `menu.getDishFromId()` to retrieve the Dish object.
+The `dishName` and `dishPrice` are both access from `Dish` Class using `getName()` and `getPrice()` respectively.
+The data are then packaged nicely in a `leftAlignFormat`, with (indexNum + ". " + dishName," $" + dishPrice) such that
+   e.g. (1. Chicken Rice $2.50) is shown.
 
 ### List Ingredients
 ![List Ingredient Execution](umlimages/ListIngredientCommand_execute.png)

@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+title Class Diagram of CafeCtrl `list_menu` Command
+
+CafeCtrl "1" --> "1" UI
+CafeCtrl "1" --> "1" Parser
+CafeCtrl "1" --> "1" Menu
+
+CafeCtrl "1" o-- "*" Command
+Command <|- ListMenuCommand
+Parser "1" --> "*" ListMenuCommand
+ListMenuCommand --> Menu
+Menu --> "*" Dish
+
+class CafeCtrl {
+- setup()
+- run()
++ main(args : String[])
+}
+
+class Command {
+
+}
+
+class UI {
+{static} - scanner : Scanner
++ receiveUserInput() : String
++ showToUser() : void
+}
+
+class ListMenuCommand {
+# menu : Menu
+# ui : Ui
++ execute() : void
++ printEmptyMenu(ui : Ui) : void
++ printFullMenu(menu : Menu, ui : Ui)
+}
+
+
+
+class Parser {
+{static} + parseCommand(menu : Menu, userInput : String, ui : Ui, pantry : Pantry, orderList : OrderList) : Command
+{static} - prepareListMenu(menu : Menu, ui : Ui) : Command
+}
+
+class Menu {
+- menuItems : ArrayList<Dish>
++ getDishFromId(menuID : int) : Dish
+}
+
+class Dish {
+- name : String
+- price : float
++ getName() : String
++ getPrice() : float
+}
+@enduml
