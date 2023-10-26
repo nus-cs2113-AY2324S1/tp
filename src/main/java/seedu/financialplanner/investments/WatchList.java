@@ -94,6 +94,12 @@ public class WatchList {
         for (Object jo : ja) {
             JSONObject stock = (JSONObject) jo;
             String price = StringUtils.rightPad(stock.get("price").toString(), 10);
+
+            if (!stocks.get(i).getSymbol().equals(stock.get("symbol"))) {
+                i += 1;
+                logger.log(Level.WARNING, "Stocks matching error!");
+                continue;
+            }
             stocks.get(i).setPrice(price);
             i += 1;
         }
