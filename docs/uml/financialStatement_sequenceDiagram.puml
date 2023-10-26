@@ -1,0 +1,19 @@
+@startuml
+
+skinparam Style strictuml
+
+-> FinancialStatement: printTransactions()
+activate FinancialStatement
+loop i
+FinancialStatement -> ArrayList
+activate ArrayList
+FinancialStatement -> FinancialStatement: get(i)
+FinancialStatement -> ArrayList: texts[i]
+ArrayList --> FinancialStatement
+deactivate ArrayList
+destroy ArrayList
+end
+FinancialStatement -> Ui: printFinancialStatement(texts)
+
+
+@enduml

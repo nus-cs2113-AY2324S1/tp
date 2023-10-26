@@ -1,0 +1,20 @@
+@startuml
+
+skinparam Style strictuml
+
+-> BudgetHandler: printBudget()
+activate BudgetHandler
+BudgetHandler -> BudgetHandler: setBudgetPercentage()
+alt budget.isActive()
+BudgetHandler -> BudgetHandler: printBasicWarning()
+BudgetHandler -> BudgetHandler: printSeriousWarning()
+BudgetHandler -> Ui: printMultipleText(texts)
+activate Ui
+Ui --> BudgetHandler
+deactivate Ui
+else
+<- BudgetHandler: throw CashLehBudgetException
+end
+deactivate BudgetHandler
+
+@enduml
