@@ -23,7 +23,7 @@ public class DeleteWorkoutCommand extends Command {
 
     // @@author marklin2234
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws Storage.StorageOperationException {
         if (!workoutList.isIndexValid(workoutIndex)) {
             return new CommandParser()
                     .getInvalidCommand(commandLine, new IndexOutOfBoundsException())
