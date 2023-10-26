@@ -50,22 +50,46 @@ The help feature is facilitated by the `HelpCommand` class. By calling `executeC
 
   Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type
 
+
 - **Step 2**
 
   A new `HelpCommand` object will be created and will be sent back to main
+
 
 - **Step 3**
 
   `commandObject#executeCommand()` will be called which in turn calls `Ui#showCommands()`
 
+
 - **Step 4**
 
   Finally `Ui#showCommands()` will call `Ui#showRecipeCommands()`, `Ui#showIngredientCommands()`, `Ui#showOtherCommands()` to print all commands for recipe, ingredient and others respectively
+
 
 <img src="images/HelpFunctionSequenceDiagram.png" width="963" />
 
 ### Exit feature
 The help feature is facilitated by the `ExitCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the exit command.
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type
+
+
+- **Step 2**
+
+  A new `ExitCommand` object will be created and will be sent back to main
+
+
+- **Step 3**
+
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#showCommands()`
+
+
+- **Step 4**
+
+  Finally `Ui#showCommands()` will print the exit message
+
 
 <img src="images/ExitSequenceDiagram.png" width="963" />
 
@@ -104,18 +128,22 @@ The add recipe feature is facilitated by the `ViewIngredientCommand` class. User
 
   Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
 
+
 - **Step 2**
   
   A new `ViewIngredientCommand` object will be created and will be sent back to main 
+
 
 - **Step 3**
   
   `commandObject#executeCommand()` will be called which in turn calls `Ui#printAllIngredients()`
 
+
 - **Step 4**
   
   Finally `Ui#printAllIngredients()` will call `IngredientList#listIngredients()` to print all the ingredients
   to standard output
+
 
 <img src="images/ViewAllIngredientSequenceDiagram.png" width="963" />
 
