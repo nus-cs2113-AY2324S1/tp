@@ -38,11 +38,11 @@ public class FitTrack {
     /**
      * Main entry-point for the FitTrack application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws StorageOperationException {
         new FitTrack().run(args);
     }
 
-    private void run(String[] args) {
+    private void run(String[] args) throws StorageOperationException {
         start(args);
         loopCommandExecution();
         end();
@@ -81,7 +81,7 @@ public class FitTrack {
         }
     }
 
-    private void loopCommandExecution() {
+    private void loopCommandExecution() throws StorageOperationException {
         Command command;
         do {
             String userCommandLine = ui.scanCommandLine();

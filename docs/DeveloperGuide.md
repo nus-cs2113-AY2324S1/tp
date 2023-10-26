@@ -61,24 +61,31 @@ People who want to be healthy by managing their diet and workout.
 
 ### Value proposition
 
-The product allows users to record their diet and activity, and help them to reach the goal they have set
+Fittrack is a health management application which allows users to record their diet and activity, and help them to reach the goal they have set.
+
+Fittrack also allows it's users to calculate their total calories spent in a day and receive suggestions
+on possible changes to their exercise, diet and lifestyle.
+
+Users will also be able to calculate key parameters of their profile like 
+BMI, ideal weight for their height and so on.
 
 ## User Stories
 
-|Version| As a ... | I want to ...                                           | So that I can ...                                             |
-|--------|----------|---------------------------------------------------------|---------------------------------------------------------------|
-|v1.0|new user| know how to use the product                             | use the product                                               |
-|v1.0|new user| add my height and weight                                | keep track of my height and weight                            |
-|v1.0|new user| add my calorie intake for a meal                        | record my calorie intake                                      |
-|v1.0|new user| add my daily workout                                    | track my calories burnt                                       |
-|v1.0|new user| set my daily calorie surplus limit                      | know whether my calorie surplus has exceeded the limit or not |
-|v1.0|new user| delete my daily workout                                 | track my calorie usage                                        |
-|v1.0|new user| delete my calorie intake for a meal                     | track my calorie intake                                       |
-|v1.0|new user| edit my height and weight information                   | apply my changed height and weight                            |
-|v1.0|new user| view my calorie intake for a meal                       | know my calorie intake                                        |
-|v1.0|new user| view my daily workout                                   | know my previous daily workouts                               |
+|Version| As a ... | I want to ...                                          | So that I can ...                                             |
+|--------|----------|--------------------------------------------------------|---------------------------------------------------------------|
+|v1.0|new user| know how to use the product                            | use the product                                               |
+|v1.0|new user| add my height and weight                               | keep track of my height and weight                            |
+|v1.0|new user| add my calorie intake for a meal                       | record my calorie intake                                      |
+|v1.0|new user| add my daily workout                                   | track my calories burnt                                       |
+|v1.0|new user| set my daily calorie surplus limit                     | know whether my calorie surplus has exceeded the limit or not |
+|v1.0|new user| delete my daily workout                                | track my calorie usage                                        |
+|v1.0|new user| delete my calorie intake for a meal                    | track my calorie intake                                       |
+|v1.0|new user| edit my height and weight information                  | apply my changed height and weight                            |
+|v1.0|new user| view my calorie intake for a meal                      | know my calorie intake                                        |
+|v1.0|new user| view my daily workout                                  | know my previous daily workouts                               |
 |v1.0|new user| view my height, weight, and daily calorie surplus limit | know my height, weight and calorie surplus limit              |
-|v2.0|user| find a to-do item by name                               | locate a to-do without having to go through the entire list   |
+|v2.0|user| find a to-do item by name                              | locate a to-do without having to go through the entire list   |
+|v2.0|user| Calculate my ideal weight for my height                | maintain my weight in the healthy range                       |
 
 ## Non-Functional Requirements
 
@@ -86,7 +93,9 @@ The product allows users to record their diet and activity, and help them to rea
 
 ## Glossary
 
-* *glossary item* - Definition
+* *BMI* - Body Mass Index (BMI) is a person’s weight in kilograms (or pounds) 
+divided by the square of height in meters (or feet).
+
 
 ## Instructions for manual testing
 
