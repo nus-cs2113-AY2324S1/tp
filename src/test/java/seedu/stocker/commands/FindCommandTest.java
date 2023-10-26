@@ -1,14 +1,23 @@
 package seedu.stocker.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
 import seedu.stocker.drugs.Drug;
+
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+/**
+ * JUnit test class for the FindCommand.
+ */
 class FindCommandTest {
 
+    /**
+     * Tests the execution of the FindCommand with a keyword for drug names.
+     */
     @Test
     public void executeTestByName() {
         // Create an instance of FindCommand with a keyword
@@ -30,9 +39,12 @@ class FindCommandTest {
         CommandResult actualResult = command.execute();
 
         // Test the command's execute method with the modified inventory
-         assertEquals(expectedOutput, actualResult.getFeedbackToUserFindTest());
+        assertEquals(expectedOutput, actualResult.getFeedbackToUserFindTest());
     }
 
+    /**
+     * Tests the execution of the FindCommand with a keyword for drug expiry dates.
+     */
     @Test
     public void executeTestByExpiryDate() {
         // Create an instance of FindCommand with a keyword for expiry date
@@ -57,6 +69,9 @@ class FindCommandTest {
         assertEquals(expectedOutput, actualResult.getFeedbackToUserFindTest());
     }
 
+    /**
+     * Tests the execution of the FindCommand with a null keyword, expecting an invalid format message.
+     */
     @Test
     public void executeTestWithNullKeyword() {
         // Create an instance of FindCommand with a null keyword
@@ -76,6 +91,4 @@ class FindCommandTest {
         // Test the command's execute method with a null keyword
         assertEquals(expectedOutput, actualResult.getFeedbackToUserFindTest());
     }
-
-
 }
