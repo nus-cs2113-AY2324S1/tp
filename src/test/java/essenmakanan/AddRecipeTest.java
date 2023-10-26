@@ -18,7 +18,7 @@ class AddRecipeTest {
         recipes.addRecipe(new Recipe("Recipe1", recipe1Steps));
         recipes.addRecipe(new Recipe("Recipe2", recipe2Steps));
 
-        Recipe recipe = recipes.getRecipe(0);
+        Recipe recipe = recipes.getRecipeByIndex(0);
         assertEquals("Recipe1", recipe.getTitle());
 
         ArrayList<String> steps = recipe.getRecipeSteps();
@@ -26,7 +26,7 @@ class AddRecipeTest {
         assertEquals("step2", steps.get(1));
         assertEquals("step3", steps.get(2));
 
-        recipe = recipes.getRecipe(1);
+        recipe = recipes.getRecipeByIndex(1);
         steps = recipe.getRecipeSteps();
         assertEquals("step1", steps.get(0));
         assertEquals("step2", steps.get(1));
