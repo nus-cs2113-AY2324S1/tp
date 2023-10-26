@@ -37,7 +37,7 @@ public abstract class Command {
      *
      * @return result of the execution
      */
-    public abstract CommandResult execute();
+    public abstract CommandResult execute() throws Storage.StorageOperationException;
 
     /**
      * Apply arguments to its field using parser.
@@ -46,7 +46,7 @@ public abstract class Command {
      * @param parser parser
      * @throws ParseException if parse fails
      */
-    public abstract void setArguments(String args, CommandParser parser) throws ParseException;
+    public abstract void setArguments(String args, CommandParser parser) throws ParseException, Storage.StorageOperationException;
 
     /**
      * Returns help of the command.
