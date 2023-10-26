@@ -8,6 +8,17 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Storage Components
+
+API: `Storage.java`
+
+The `Storage` component,
+* can save flashcards in `flashcard.txt` in specific text format
+* can save events in `event.txt` in specific text format
+* saves automatically when changes occur.
+* component loads automatically when the program starts.  
+* component can check if the saved txt file has been damaged.
+  
 
 ## Product scope
 ### Target user profile
@@ -17,6 +28,8 @@
 ### Value proposition
 
 {Describe the value proposition: what problem does it solve?}
+
+
 
 ## User Stories
 
