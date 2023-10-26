@@ -22,6 +22,7 @@ import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Height;
 import fittrack.data.Weight;
+import fittrack.storage.Storage;
 
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
