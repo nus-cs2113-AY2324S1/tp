@@ -5,6 +5,7 @@ import fittrack.UserProfile;
 import fittrack.WorkoutList;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
+import fittrack.Ui;
 import fittrack.parser.IllegalValueException;
 import java.io.FileNotFoundException;
 
@@ -24,12 +25,13 @@ public class Storage {
     private static final String PROFILE_FILE_PATH = "./data/Profile.txt";
     private static final String MEAL_LIST_FILE_PATH = "./data/mealList.txt";
     private static final String WORKOUT_LIST_FILE_PATH = "./data/workoutList.txt";
-    private final File profileFile;
-    private final File mealFile;
-    private final File workoutFile;
+    private File profileFile;
+    private File mealFile;
+    private File workoutFile;
     private Path profilePath;
     private Path mealListPath;
     private Path workoutListPath;
+    private Ui ui = new Ui();
 
 
     /**
@@ -51,7 +53,8 @@ public class Storage {
             if (f.mkdir()) {
                 System.out.println("Directory created: " + f.getName());
             } else {
-                System.out.println("Directory already exists.\n");
+                System.out.println("Directory already exists.");
+                ui.printLine();
             }
 
             if (!this.profileFile.exists()) {
@@ -66,6 +69,27 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Failed to create directory and file.");
         }
+    }
+
+    /**
+     * @throws InvalidStorageFilePathException if the given file path is invalid
+     */
+    public Storage(String profileFilePath, String mealFilePath, String workoutFilePath)
+            throws InvalidStorageFilePathException {
+        profilePath = Paths.get(profileFilePath);
+        mealListPath = Paths.get(mealFilePath);
+        workoutListPath = Paths.get(workoutFilePath);
+        if (!isValidPath(profilePath) || !isValidPath(mealListPath) || !isValidPath(workoutListPath)) {
+            throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
+        }
+    }
+
+    /**
+     * Returns true if the given path is acceptable as a storage file.
+     * The file path is considered acceptable if it ends with '.txt'
+     */
+    private static boolean isValidPath(Path filePath) {
+        return filePath.toString().endsWith(".txt");
     }
 
     /**
@@ -143,6 +167,8 @@ public class Storage {
             throw new StorageOperationException("Error writing to file: " + profilePath);
         } catch (IllegalValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
+        } catch (NullPointerException npe) {
+            throw new StorageOperationException("Empty Contents");
         }
     }
 
@@ -206,6 +232,20 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());;
             return false; // Consider it non-empty if there's an exception
+        }
+    }
+
+    public String getPath() {
+        return String.format("%s, %s, %s", profilePath.toString(),
+                mealListPath.toString(), workoutListPath.toString());
+    }
+
+    /**
+     * Signals that the given file path does not fulfill the storage filepath constraints.
+     */
+    public static class InvalidStorageFilePathException extends IllegalValueException {
+        public InvalidStorageFilePathException(String message) {
+            super(message);
         }
     }
 
