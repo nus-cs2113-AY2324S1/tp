@@ -33,19 +33,19 @@ public class CommandResult<T> {
         return Optional.ofNullable(relevantElements);
     }
 
-    // public String getFeedbackToUserFindTest() {
-    //     if (relevantDrugs != null) {
-    //         StringBuilder feedback = new StringBuilder();
-    //         for (int i = 0; i < relevantDrugs.size(); i++) {
-    //             feedback.append(i+1).append(". ").append(relevantDrugs.get(i));
-    //             feedback.append(System.lineSeparator());
-    //         }
-    //         feedback.append(System.lineSeparator());
-    //         feedback.append(feedbackToUser);
-    //         return feedback.toString();
-    //     } else {
-    //         return feedbackToUser;
-    //     }
-    // }
+     public String getFeedbackToUserFindTest() {
+         if (relevantElements != null) {
+             StringBuilder feedback = new StringBuilder();
+             for (int i = 0; i < relevantElements.size(); i++) {
+                 feedback.append(i+1).append(". ").append(relevantElements.get(i));
+                 feedback.append(System.lineSeparator());
+             }
+             feedback.append(System.lineSeparator());
+             feedback.append(feedbackToUser);
+             return feedback.toString();
+         } else {
+             return feedbackToUser;
+         }
+     }
 
 }
