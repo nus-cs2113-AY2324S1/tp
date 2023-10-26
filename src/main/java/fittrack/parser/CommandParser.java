@@ -3,7 +3,6 @@ package fittrack.parser;
 import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
-import fittrack.command.BmiCommand;
 import fittrack.command.CalorieSumCommand;
 import fittrack.command.CaloriesBurntCommand;
 import fittrack.command.Command;
