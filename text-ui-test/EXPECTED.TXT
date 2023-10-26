@@ -4,13 +4,22 @@ ingredients in your kitchen and store your favourite recipes
 To get started, type [help] for list of commands
 --------------------------------------------
 Here are the commands currently available:
-- Add recipe. [add r/RECIPE_NAME]
-- View all recipes. [view r]
-- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]
-	Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
-- View all ingredients. [view i]
-- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]
-- Exit application [exit]
+
+RECIPE
+	- View all recipes. [view r]
+	- Add recipe. [add r/RECIPE_TITLE]
+	- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]
+
+INGREDIENT
+	- View all ingredients. [view i]
+	- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]
+		Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
+	- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]
+	- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]
+
+OTHERS
+	- View all commands [help]
+	- Exit application [exit]
 --------------------------------------------
 --------------------------------------------
 Hope you had fun! See you again!

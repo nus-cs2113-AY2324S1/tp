@@ -2,12 +2,11 @@ package essenmakanan.ui;
 
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 
 public class Ui {
 
-    public void start() {
+    public static void start() {
         drawDivider();
         System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
                 "to track the\ningredients in your kitchen and store " +
@@ -16,7 +15,7 @@ public class Ui {
         drawDivider();
     }
 
-    public void bye() {
+    public static void bye() {
         drawDivider();
         System.out.println("Hope you had fun! See you again!");
         drawDivider();
@@ -27,15 +26,34 @@ public class Ui {
         System.out.println(divider);
     }
 
+    public static void showRecipeCommands() {
+        System.out.println("RECIPE");
+        System.out.println("\t- View all recipes. [view r]\n"
+                + "\t- Add recipe. [add r/RECIPE_TITLE]\n"
+                + "\t- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]\n");
+    }
+
+    public static void showIngredientCommands() {
+        System.out.println("INGREDIENT");
+        System.out.println("\t- View all ingredients. [view i]\n"
+                + "\t- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]\n"
+                + "\t\t" + validIngredientUnits() + "\n"
+                + "\t- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME]"
+                + " [q/NEW_QUANTITY] [u/NEW_UNIT]\n"
+                + "\t- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]\n");
+    }
+
+    public static void showOtherCommands() {
+        System.out.println("OTHERS");
+        System.out.println("\t- View all commands [help]\n"
+                + "\t- Exit application [exit]");
+    }
+
     public static void showCommands() {
-        System.out.println("Here are the commands currently available:");
-        System.out.println("- Add recipe. [add r/RECIPE_NAME]");
-        System.out.println("- View all recipes. [view r]");
-        System.out.println("- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]");
-        System.out.println("\t" + validIngredientUnits());
-        System.out.println("- View all ingredients. [view i]");
-        System.out.println("- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
-        System.out.println("- Exit application [exit]");
+        System.out.println("Here are the commands currently available:\n");
+        showRecipeCommands();
+        showIngredientCommands();
+        showOtherCommands();
         drawDivider();
     }
 
@@ -49,25 +67,23 @@ public class Ui {
         drawDivider();
     }
 
-    public void printAllRecipes(RecipeList recipes) {
-        int count = 1;
-        for (Recipe recipe : recipes.getRecipes()) {
-            assert recipes.getRecipe(count - 1).getTitle().equals(recipe.getTitle())
-                    : "Title is not matching with the current index";
-
-            System.out.println(count + ". " + recipe);
-            count++;
-        }
-        drawDivider();
-    }
-
     public static void printAllIngredients(IngredientList ingredients) {
         ingredients.listIngredients();
         drawDivider();
     }
 
+    public static void printAllRecipes(RecipeList recipes) {
+        recipes.listRecipeTitles();
+        drawDivider();
+    }
+
     public static void printDeleteIngredientsSuccess(String ingredientName) {
         System.out.println("You have deleted the following ingredient: " + ingredientName);
+        drawDivider();
+    }
+
+    public static void printDeleteRecipeSuccess(String recipeTitle) {
+        System.out.println("You have deleted the following recipe: " + recipeTitle);
         drawDivider();
     }
 
