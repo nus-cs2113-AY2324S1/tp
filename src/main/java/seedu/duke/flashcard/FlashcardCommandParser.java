@@ -19,11 +19,11 @@ public class FlashcardCommandParser {
         } else if (input.startsWith("list flashcards")) {
             return new ListFlashcardsCommand();
         } else if (input.startsWith("review flashcards")) {
-            return new StartReviewCommand();
+            return new StartReviewCommand(input);
         } else if (input.startsWith("delete all flashcards")) {
             return new DeleteAllFlashcardsCommand();
         } else if (input.startsWith("delete flashcard")) {
-            return new DeleteFlashcardCommand();
+            return new DeleteFlashcardCommand(input);
         }
 
         return new UnknownCommand();
