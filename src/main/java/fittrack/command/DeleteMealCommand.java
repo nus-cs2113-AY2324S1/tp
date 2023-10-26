@@ -5,6 +5,7 @@ import fittrack.parser.CommandParser;
 import fittrack.parser.IndexOutOfBoundsException;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.PatternMatchFailException;
+import fittrack.storage.Storage;
 
 public class DeleteMealCommand extends Command {
     public static final String COMMAND_WORD = "deletemeal";
