@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":EssenMakanan" as EssenMakanan LOGIC_COLOR
+participant ":Parser" as Parser LOGIC_COLOR
+participant "command:HelpCommand" as HelpCommand LOGIC_COLOR
+participant ":Ui" as Ui LOGIC_COLOR
+end box
+
+[-> EssenMakanan : execute("help")
+activate EssenMakanan
+
+EssenMakanan -> Parser : parseCommand("help", recipes, ingredients)
+activate Parser
+
+create HelpCommand
+Parser -> HelpCommand
+activate HelpCommand
+
+HelpCommand --> Parser : command
+
+Parser -> HelpCommand : executeCommand()
+
+HelpCommand -> Ui
+activate Ui
+
+Ui --> HelpCommand
+deactivate Ui
+
+HelpCommand --> Parser
+deactivate HelpCommand
+
+Parser --> EssenMakanan
+deactivate Parser
+
+
+
+
+
+
+@enduml
