@@ -73,6 +73,29 @@ be executed as follows:
 
 <img src="images/AddNewRecipeSequenceDiagram.png" width="963" />
 
+### View Ingredients feature
+The add recipe feature is facilitated by the `ViewIngredientCommand` class. Users can input
+"view i" to trigger this command
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
+
+- **Step 2**
+  
+  A new `ViewIngredientCommand` object will be created and will be sent back to main 
+
+- **Step 3**
+  
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#printAllIngredients()`
+
+- **Step 4**
+  
+  Finally `Ui#printAllIngredients()` will call `IngredientList#listIngredients()` to print all the ingredients
+  to standard output
+
+<img src="images/ViewAllIngredientSequenceDiagram.png" width="963" />
+
 ### Delete feature
 
 
