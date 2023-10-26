@@ -1,6 +1,5 @@
 package quizhub.questionlist;
 
-import quizhub.parser.Parser;
 import quizhub.question.Question;
 import quizhub.question.ShortAnsQn;
 import quizhub.exception.QuizHubExceptions;

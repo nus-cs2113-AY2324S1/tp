@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
+import quizhub.parser.Parser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class CommandEditTest {
+    private static final Parser parser = new Parser();
     private static QuestionList questionList;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -30,7 +32,8 @@ public class CommandEditTest {
         Question.QnType qnType = Question.QnType.SHORTANSWER;
         boolean showMessage = false;
         for (String question:questionsToAdd) {
-            //questionList.addToQuestionList(question, qnType, showMessage);
+            // questionList.addShortAnswerQn(question, qnType, showMessage);
+            parser.parseCommand(question);
         }
         questionList.markQuestionAsDone(1, showMessage);
         questionList.markQuestionAsDone(3, showMessage);

@@ -7,16 +7,15 @@ import quizhub.ui.Ui;
  * Represents a command to search for a task.
  */
 public class CommandFind extends Command{
-
-    private String searchCriteria;
-    private String searchDetails;
-
     public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate " +
             "if you are searching by description or module :<";
     public static final String MISSING_KEYWORD_MSG = "    Ono! You did not indicate " +
             "the keywords you are searching by :<";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as find " +
             "/description [description] or find /module [module]!";
+    private String searchCriteria;
+    private String searchDetails;
+
     /**
      * Creates a new find command to search for a task.
      *

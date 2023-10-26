@@ -7,19 +7,18 @@ import quizhub.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Enumeration;
 
 /**
  * Command to Start the Quiz
  */
 public class CommandStart extends Command{
-    private String startMode;
-    private String startDetails = "";
-    private String startQnMode = "";
     public static final String MISSING_MODE_MSG = "    Ono! You did not indicate mode of the quiz :<";
     public static final String INVALID_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
             "/[quiz mode] [start details] /[qn mode]!";
+    private String startMode;
+    private String startDetails = "";
+    private String startQnMode = "";
     /**
      * Creates a new start command
      *

@@ -8,14 +8,14 @@ import quizhub.ui.Ui;
  * Represents a command to edit a task.
  */
 public class CommandEdit extends Command {
-    private int qnIndex;
-    private String newDescription;
-    private String newAnswer;
     public static final String INVALID_FORMAT_MSG = "    Please format your input as edit [question number] " +
             "/description [description] or edit /answer [answer]!";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
     public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate if " +
             "you are editing question description or answer :<";
+    private int qnIndex;
+    private String newDescription;
+    private String newAnswer;
 
     /**
      * Creates a new edit command

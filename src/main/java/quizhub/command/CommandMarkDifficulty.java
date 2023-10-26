@@ -1,6 +1,5 @@
 package quizhub.command;
 
-import quizhub.exception.QuizHubExceptions;
 import quizhub.parser.Parser;
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
@@ -10,14 +9,13 @@ import quizhub.ui.Ui;
  * Represents a command to mark the difficulty of a question.
  */
 public class CommandMarkDifficulty extends Command{
-
-    private int qnIndex;
-    private Question.QnDifficulty qnDifficulty;
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate index of question to be marked :<";
     public static final String MISSING_DIFFICULTY_MSG = "    Ono! You did not indicate difficulty " +
             "to be assigned the question :<";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as markdiff " +
             "[question number] [question difficulty]!";
+    private int qnIndex;
+    private Question.QnDifficulty qnDifficulty;
     /**
      * Creates a new command to mark the difficulty of a question of specified index
      *
