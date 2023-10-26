@@ -1,6 +1,5 @@
 package quizhub.command;
 
-import quizhub.parser.Parser;
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.storage.Storage;

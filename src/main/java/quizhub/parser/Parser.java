@@ -127,7 +127,7 @@ public class Parser {
         default:
             System.out.println("    Ono! We only support easy, normal and hard difficulty levels" +
                     System.lineSeparator() +
-                    "    Defaulting to NORMAL difficulty level");
+                    "    No changes will be made to your difficulty level");
             return Question.QnDifficulty.NORMAL;
         }
     }
