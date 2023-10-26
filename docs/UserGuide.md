@@ -2,8 +2,9 @@
 
 ## Introduction
 
-TaskLinker is a CLI-tool for helping students memorize flashcards and track 
-their flashcard and generell academic progress in the courses they are taking.
+TaskLinker is a CLI-tool for helping university students memorize flashcards 
+and track their flashcard and general academic progress in the courses they are
+taking.
 
 ## Quick Start
 
