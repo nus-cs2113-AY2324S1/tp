@@ -187,6 +187,38 @@ Architecture Diagram of find command function:
 
 ---
 
+## 2. ListCommand
+
+The `ListCommand` is responsible for listing all drugs in the inventory. This command retrieves the list of drugs from the inventory and provides it as part of the command result. If the inventory is empty, it informs the user that the inventory has no drugs.
+
+### Design Considerations
+
+- **User-Friendly Listing:** The primary goal of the `ListCommand` is to provide a user-friendly way to list all drugs in the inventory, enhancing the user's experience in accessing inventory information.
+
+### Implementation
+
+The `ListCommand` is implemented as follows:
+
+- **Retrieving Drug List:** The command retrieves the list of drugs from the inventory using the `getAllDrugs` method.
+
+- **Handling Empty Inventory:** It checks if the list of drugs is empty. If the inventory is empty, it returns a user-friendly message indicating that the inventory is empty.
+
+- **Listing Drugs:** If the inventory contains drugs, the command constructs a success message and includes the list of drugs in the command result.
+
+### Function Methods
+
+The `ListCommand` includes the following method to achieve its functionality:
+
+- `execute()`: This method is responsible for executing the `ListCommand`, listing all drugs in the inventory. It checks the inventory, prepares a user-friendly result message, and returns a `CommandResult` containing the outcome of the command execution, which includes a success message and the list of found `Drug` objects.
+
+### Example Usage
+
+To illustrate how the `ListCommand` works, consider the following example usage:
+
+1. **User Input:** The user initiates the `ListCommand` by entering the following command:
+
+---
+
 ## Product scope
 
 ---

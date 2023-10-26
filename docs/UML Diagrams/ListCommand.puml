@@ -1,0 +1,8 @@
+@startuml
+class ListCommand {
+  - COMMAND_WORD: String
+  - MESSAGE_USAGE: String
+  - MESSAGE_SUCCESS: String
+  + execute(): CommandResult
+}
+@enduml
