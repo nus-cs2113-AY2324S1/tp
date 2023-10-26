@@ -1,16 +1,23 @@
 package essenmakanan.ingredient;
 
 import essenmakanan.exception.EssenMakananFormatException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EditIngredientTest {
+
+    IngredientList ingredients;
+    Ingredient ingredientToEdit;
+    @BeforeEach
+    public void setUp() {
+        ingredients = new IngredientList();
+        ingredientToEdit = new Ingredient("bread","2",IngredientUnit.PIECE);
+    }
     @Test
     public void editIngredientName_validInput_editSuccess() {
-        IngredientList ingredients = new IngredientList();
-        Ingredient ingredientToEdit = new Ingredient("bread","2",IngredientUnit.PIECE);
 
         ingredients.addIngredient(ingredientToEdit);
         String[] editDetails = {"edit", "n/breads"};
@@ -26,8 +33,6 @@ public class EditIngredientTest {
 
     @Test
     public void editIngredientQuantity_validInput_editSuccess() {
-        IngredientList ingredients = new IngredientList();
-        Ingredient ingredientToEdit = new Ingredient("bread","2",IngredientUnit.PIECE);
 
         ingredients.addIngredient(ingredientToEdit);
         String[] editDetails = {"edit", "q/3"};
@@ -43,8 +48,6 @@ public class EditIngredientTest {
 
     @Test
     public void editIngredientUnit_validInput_editSuccess() {
-        IngredientList ingredients = new IngredientList();
-        Ingredient ingredientToEdit = new Ingredient("bread","2",IngredientUnit.PIECE);
 
         ingredients.addIngredient(ingredientToEdit);
         String[] editDetails = {"edit", "u/g"};
@@ -59,9 +62,24 @@ public class EditIngredientTest {
     }
 
     @Test
-    public void editIngredientName_invalidInput_editSuccess() {
-        IngredientList ingredients = new IngredientList();
-        Ingredient ingredientToEdit = new Ingredient("bread","2",IngredientUnit.PIECE);
+    public void editIngredientAll_validInput_editSuccess() {
+
+        ingredients.addIngredient(ingredientToEdit);
+        String[] editDetails = {"edit", "n/breads", "q/3", "u/g"};
+
+        try {
+            ingredients.editIngredient(ingredientToEdit, editDetails);
+        } catch (EssenMakananFormatException e) {
+            e.handleException();
+        }
+
+        assertEquals("breads", ingredientToEdit.getName());
+        assertEquals("3", ingredientToEdit.getQuantity());
+        assertEquals(IngredientUnit.GRAM, ingredientToEdit.getUnit());
+    }
+
+    @Test
+    public void editIngredientName_invalidInput_editError() {
 
         ingredients.addIngredient(ingredientToEdit);
         String[] editDetails = {"edit", "/nbreads"};
