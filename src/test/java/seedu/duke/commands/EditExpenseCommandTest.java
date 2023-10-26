@@ -25,7 +25,7 @@ public class EditExpenseCommandTest {
 
     @Test
     public void testExecute_invalidIndex_exceptionThrown() throws KaChinnnngException {
-        fullCommand = "edit expense 3 expense /cat food /de lunch /date 01/10/2023 /amt 10.00";
+        fullCommand = "edit expense 3 expense /cat food /type lunch /de chicken sandwich /date 01/10/2023 /amt 10.00";
         EditExpenseCommand editExpenseCommand = new EditExpenseCommand(expenses, fullCommand);
 
         assertThrows(KaChinnnngException.class, () -> {
@@ -36,7 +36,7 @@ public class EditExpenseCommandTest {
 
     @Test
     public void testExecute_validInput_expenseEdited() throws KaChinnnngException {
-        fullCommand = "edit expense 1 expense /cat food /de lunch /date 01/10/2023 /amt 10.00";
+        fullCommand = "edit expense 1 expense /cat food /type lunch /de chicken rice /date 01/10/2023 /amt 10.00";
         EditExpenseCommand editExpenseCommand = new EditExpenseCommand(expenses, fullCommand);
 
         // Test if the execute method changes the expense and prints the changes
@@ -44,7 +44,8 @@ public class EditExpenseCommandTest {
 
         // Verify if the expense was updated correctly
         Expense updatedExpense = expenses.get(0);
-        assertEquals("Food Expense: lunch | Date: 01/Oct/2023 | Amount: $10.00", updatedExpense.toString());
+        assertEquals("Food Expense (LUNCH): chicken rice | Date: 01/Oct/2023 | Amount: $10.00",
+                updatedExpense.toString());
     }
 
     @Test

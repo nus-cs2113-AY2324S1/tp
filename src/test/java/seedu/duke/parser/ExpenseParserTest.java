@@ -64,6 +64,7 @@ public class ExpenseParserTest {
     void testParseExpense_foodCategory_success() throws KaChinnnngException {
         HashMap<String, String> expenseFields = new HashMap<>();
         expenseFields.put(ExpenseParser.CATEGORY_FIELD, "food");
+        expenseFields.put(ExpenseParser.TYPE_FIELD, "lunch");
         expenseFields.put(ExpenseParser.DESCRIPTION_FIELD, "Chicken Rice");
         expenseFields.put(ExpenseParser.DATE_FIELD, "12/10/2020");
         expenseFields.put(ExpenseParser.AMOUNT_FIELD, "3.50");
@@ -81,7 +82,8 @@ public class ExpenseParserTest {
     void testParseExpense_transportCategory_success() throws KaChinnnngException {
         HashMap<String, String> expenseFields = new HashMap<>();
         expenseFields.put(ExpenseParser.CATEGORY_FIELD, "transport");
-        expenseFields.put(ExpenseParser.DESCRIPTION_FIELD, "Bus");
+        expenseFields.put(ExpenseParser.TYPE_FIELD, "bus");
+        expenseFields.put(ExpenseParser.DESCRIPTION_FIELD, "from nus to changi");
         expenseFields.put(ExpenseParser.DATE_FIELD, "12/10/2020");
         expenseFields.put(ExpenseParser.AMOUNT_FIELD, "1.50");
 
@@ -98,7 +100,8 @@ public class ExpenseParserTest {
     void testParseExpense_utilitiesCategory_success() throws KaChinnnngException {
         HashMap<String, String> expenseFields = new HashMap<>();
         expenseFields.put(ExpenseParser.CATEGORY_FIELD, "utilities");
-        expenseFields.put(ExpenseParser.DESCRIPTION_FIELD, "Electricity");
+        expenseFields.put(ExpenseParser.TYPE_FIELD, "electricity");
+        expenseFields.put(ExpenseParser.DESCRIPTION_FIELD, "air con bill");
         expenseFields.put(ExpenseParser.DATE_FIELD, "12/10/2020");
         expenseFields.put(ExpenseParser.AMOUNT_FIELD, "50.00");
 
