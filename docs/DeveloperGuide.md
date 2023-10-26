@@ -75,7 +75,14 @@ be executed as follows:
 
 ### View Ingredients feature
 The view ingredient feature is facilitated by the `ViewIngredientCommand` class. Users can input
-"view i" to trigger this command
+"view i" to trigger this command. Users will then be able to see all ingredients stored.
+Example: 
+
+`1. bread: 2pcs`
+
+`2. apple: 500g`
+
+`...`
 
 - **Step 1**
 
@@ -121,7 +128,11 @@ The view recipes feature is facilitated by the `ViewRecipeCommand` class. Users 
 
 ### Add Ingredient feature
 
-The add Ingredient feature is used by a `AddIngredientCommand` class. By calling `executeCommand` on the class, the steps will
+The add Ingredient feature is used by a `AddIngredientCommand` class.
+Multiple ingredients can be added at the same time using the syntax
+`add i/NAME,QUANTITY,UNIT i/INGREDIENT2,.. i/INGREDIENT3...`
+
+By calling `executeCommand` on the class, the steps will
 be executed as follows:
 - **Step1**
 
