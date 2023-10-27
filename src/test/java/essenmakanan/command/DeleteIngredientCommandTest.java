@@ -1,14 +1,10 @@
 package essenmakanan.command;
 
-import essenmakanan.EssenMakanan;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static essenmakanan.parser.IngredientParser.getIngredientIndex;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeleteIngredientCommandTest {
     private IngredientList ingredients;
