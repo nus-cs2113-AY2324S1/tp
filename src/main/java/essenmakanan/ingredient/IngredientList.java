@@ -30,7 +30,7 @@ public class IngredientList {
         return null;
     }
 
-    public int indexOfIngredientByIngredient(Ingredient ingredient) {
+    public int getIndexByIngredient(Ingredient ingredient) {
         return ingredients.indexOf(ingredient);
     }
 
