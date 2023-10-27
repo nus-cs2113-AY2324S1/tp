@@ -1,5 +1,17 @@
+...Downloading data...
+Uh oh, I am having trouble loading your menu text file.
+	Creating a new empty menu...
+
 Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > -----------------------------------------------------
 Goodbye <3 Have a great day ahead!
 -----------------------------------------------------
+Data Folder was not found!
+It's ok... a new data folder has been created in:
+C:\Users\Dexma\OneDrive - National University of Singapore\NUS Files\Y3S1\tp\build\libs
+
+
+text file was not found!
+It's ok... a new tasks.txt has been created in:
+C:\Users\Dexma\OneDrive - National University of Singapore\NUS Files\Y3S1\tp\build\libs\data
