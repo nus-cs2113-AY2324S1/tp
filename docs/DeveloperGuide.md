@@ -45,9 +45,13 @@ Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTr
 ![Inner structure](images/FitTrackCore.svg "Core Structure")
 
 ### Storage Component
-![Structure of Storage Load](images/StorageLoad.svg)
+Storage load and save functions are written in [`Storage`](../src/main/java/fittrack/storage/Storage.java) class.
 
-**API** : [`Storage.java`](../src/main/java/fittrack/storage/Storage.java)
+![Structure of Storage Load](images/StorageLoad.svg)
+The sequence diagram of the code for loading the file contents into each class.
+
+![Structure of Storage Save](images/StorageSave.svg)
+The sequence diagram of the code for saving data into file
 
 The `Storage` component,
 * can save user profile data in text format and load it back
