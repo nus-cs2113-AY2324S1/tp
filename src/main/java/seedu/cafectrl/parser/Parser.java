@@ -51,8 +51,6 @@ public class Parser {
 
     /** Add Order Command Handler Patterns*/
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
-    private static final int PRICE_MATCHER_GROUP_NUM = 2;
-    private static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
     private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";

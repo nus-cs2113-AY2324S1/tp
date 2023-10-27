@@ -264,7 +264,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_DishWithThreeIngredientsForAddDish_DishContainsThreeIngredientAddedToMenu() {
+    void parseCommand_dishWithThreeIngredientsForAddDish_dishContainsThreeIngredientAddedToMenu() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
