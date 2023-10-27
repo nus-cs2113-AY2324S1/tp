@@ -15,3 +15,11 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/Income.log
+/text-ui-test/IncomeParser.log
+/text-ui-test/IncomeManager.log
+/text-ui-test/Parser.log
+IncomeManager.log
+Income.log
+IncomeParser.log
+logs
