@@ -34,11 +34,34 @@ public class Duke {
             } else if (input.equals("exit program")) {
                 System.out.println("    You are exiting TaskLinker! Bye!");
                 break;
+            } else if (input.startsWith("help")) {
+                printHelp();
             } else {
                 System.out.println("    Invalid command! Please try again.");
             }
         }
 
+    }
+}
+
+    private void printHelp() {
+        System.out.println("    If you need help, please consult our " +
+                "user guide at https://ay2324s1-cs2113-f11-3.github" +
+                ".io/tp/UserGuide.html");
+        System.out.println();
+        System.out.println("    Here is a quick overview over all available " +
+                "commands: ");
+
+        String[] commandFormats = new String[] {
+            "list flashcards",
+            "create flashcard",
+            "review flashcards",
+            "help",
+        };
+
+        for (String commandFormat : commandFormats) {
+            System.out.println("    - " + commandFormat);
+        }
     }
 }
 
