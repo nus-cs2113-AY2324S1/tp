@@ -3,9 +3,7 @@ package essenmakanan.ingredient;
 public class Ingredient {
 
     private String name;
-
     private String quantity;
-    
     private IngredientUnit unit;
 
     public Ingredient(String name) {
