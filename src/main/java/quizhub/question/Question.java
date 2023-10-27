@@ -4,7 +4,7 @@ package quizhub.question;
  */
 public class Question {
     public enum QnType {SHORTANSWER, DEFAULT};
-    public enum QnDifficulty {EASY, HARD, NORMAL, DEFAULT};
+    public enum QnDifficulty {EASY, HARD, NORMAL, INVALID};
     private QnType qnType;
     private QnDifficulty qnDifficulty;
     private String description;

@@ -28,7 +28,8 @@ public class Parser {
     public static Command parseCommand(String userInput) {
         String[] commandTokens = userInput.split(" ");
         if (commandTokens.length == 0) {
-            return new CommandInvalid(Ui.INVALID_COMMAND_FEEDBACK);
+            return new CommandInvalid(Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
+                    Ui.INVALID_COMMAND_FEEDBACK);
         }
         String commandTitle = commandTokens[0];
 
@@ -96,7 +97,7 @@ public class Parser {
             return Question.QnDifficulty.NORMAL;
         default:
             System.out.println(Ui.INVALID_QUESTION_DIFFICULTY_MSG);
-            return Question.QnDifficulty.NORMAL;
+            return Question.QnDifficulty.INVALID;
         }
     }
 
@@ -282,10 +283,6 @@ public class Parser {
         Question.QnDifficulty qnDifficulty;
         String qnIndexString;
         String qnDifficultyString;
-        if(commandDetails.length != 3){
-            return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_ARGUMENTS_MSG + System.lineSeparator() +
-                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
-        }
         try {
             qnIndexString  = commandDetails[1].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
@@ -304,6 +301,10 @@ public class Parser {
             qnDifficultyString = commandDetails[2].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             return new CommandInvalid(CommandMarkDifficulty.MISSING_DIFFICULTY_MSG);
+        }
+        if(commandDetails.length != 3){
+            return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_ARGUMENTS_MSG + System.lineSeparator() +
+                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
         }
         qnDifficulty = Parser.extractQuestionDifficulty(qnDifficultyString);
         return new CommandMarkDifficulty(qnIndex, qnDifficulty);
