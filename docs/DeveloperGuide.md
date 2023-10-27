@@ -46,6 +46,19 @@ find /t <type> /cat [category] /de [description] /date [date]
 7. The execute method will then be called to search through the list and return the list of expenses or incomes that matches the search criteria.
 
 ![FindCommand_SequenceDiagram.png](..%2Fimages%2FFindCommand_SequenceDiagram.png)
+
+### GetFromTxt Command
+The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngException`, `IncomeList` and `ExpenseList`
+1. The user start the program and the command will start automatically with a default path
+2. Once the command executed, it will try to create an txt file on the default path
+3. If file failed to create, throw an `IOException`
+4. Catch the `IOExceotion` and print error messages
+5. Create a `Scanner` Object s to get content from txt file
+6. If amount in txt file exceed limit or incorrect, throw `KaChinnnningException`
+7. Read the content on the file and add corresponding object to incomes or expenses list
+
+![FindCommand_SequenceDiagram.png](..%2Fimages%2FGetFromTxt.png)
+
 ## Product scope
 ### Target user profile
 
