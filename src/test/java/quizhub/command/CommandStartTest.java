@@ -18,7 +18,7 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StartTest {
+public class CommandStartTest {
 
     private QuestionList questionList;
     private MockStorage mockStorage;
@@ -268,5 +268,4 @@ public class StartTest {
         }
 
     }
-
 }
