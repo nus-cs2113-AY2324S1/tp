@@ -3,6 +3,7 @@ package seedu.cafectrl.command;
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -38,14 +39,14 @@ class ListMenuCommandTest {
 
         String actualOutput = String.join(",", commandOutput);
 
-        String expectedOutput = "+-----------------------------------------+"
-                + "| Ah, behold, the grand menu of delights! |"
-                + "+--------------------------+--------------+"
-                + "| Dish Name                |  Price       |"
-                + "+--------------------------+--------------+"
+        String expectedOutput = Messages.MENU_END_CAP
+                + Messages.LIST_MENU_MESSAGE
+                + Messages.MENU_CORNER
+                + Messages.MENU_TITLE
+                + Messages.MENU_CORNER
                 + "| 1. Chicken Rice          |  $2.50       |"
                 + "| 2. Chicken Curry         |  $4.30       |"
-                + "+-----------------------------------------+";
+                + Messages.MENU_END_CAP;
 
         assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
     }
@@ -70,8 +71,7 @@ class ListMenuCommandTest {
 
         String actualOutput = String.join(",", commandOutput);
 
-        String expectedOutput = "It seems our menu is currently taking a break. "
-                + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
+        String expectedOutput = Messages.MENU_EMPTY_MESSAGE;
 
         assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
     }
