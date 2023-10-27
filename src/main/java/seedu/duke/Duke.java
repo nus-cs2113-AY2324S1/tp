@@ -3,10 +3,13 @@ package seedu.duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.meal.MealCommand;
 import seedu.duke.data.GoalList;
+import seedu.duke.data.meal.Meal;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
 import seedu.duke.ui.TextUi;
+import java.util.ArrayList;
 
 /**
  * Entry point of the Address Book application.
@@ -21,6 +24,7 @@ public class Duke {
     public static GoalList goals = new GoalList();
     public static Log exerciseLog = new Log();
     private TextUi ui;
+    static ArrayList<Meal> meals = new ArrayList<Meal>();
 
     // private StorageFile storage;
     public static void main(String... launchArgs) {
@@ -48,7 +52,7 @@ public class Duke {
             this.ui = new TextUi();
             // this.storage = initializeStorage(launchArgs);
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
-
+            MealCommand.setMeals(meals);
         } catch (Exception e) { // TODO: change to specific storage exceptions later
             ui.showInitFailedMessage();
             throw new RuntimeException(e);
