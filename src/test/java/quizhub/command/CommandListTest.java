@@ -36,6 +36,9 @@ public class CommandListTest {
      * */
     private void testCliOutputCorrectness(String expectedOutput){
         String actualOutput = outputStreamCaptor.toString().trim();
+        actualOutput = actualOutput.replace("\r", "");
+        actualOutput = actualOutput.replace("\n", "");
+        actualOutput = actualOutput.replace(System.lineSeparator(), "");
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 

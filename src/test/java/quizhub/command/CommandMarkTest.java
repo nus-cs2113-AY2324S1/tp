@@ -64,6 +64,9 @@ public class CommandMarkTest {
      * */
     private void testCliOutputCorrectness(String expectedOutput){
         String actualOutput = outputStreamCaptor.toString().trim();
+        actualOutput = actualOutput.replace("\r", "");
+        actualOutput = actualOutput.replace("\n", "");
+        actualOutput = actualOutput.replace(System.lineSeparator(), "");
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -152,7 +155,7 @@ public class CommandMarkTest {
     @Test
     void testMarkDiffCorrectDifficulty(){
         String input  = "markdiff 2 HARD";
-        String expectedOutput = "Roger that! I have marked the following question as hard >w< !\n" +
+        String expectedOutput = "Roger that! I have marked the following question as hard >w< !" +
                 "        [S][] Question2 / Answer2 | Mod2 | HARD";
         Command command = parser.parseCommand(input);
         command.executeCommand(ui, mockStorage, questionList);
