@@ -1,6 +1,5 @@
 package essenmakanan.command;
 
-import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.RecipeList;
