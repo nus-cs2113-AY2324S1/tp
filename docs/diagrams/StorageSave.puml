@@ -1,0 +1,41 @@
+@startuml
+title Main Structure of Storage Save\n
+
+participant ":FitTrack" as main
+participant ":Storage" as storage
+participant ":FileWriter" as fileWriter
+
+main -> main ++: executeCommand()
+note left: Save data to all three files \n upon each command execution
+main -> storage ++: save(userProfile:UserProfile, mealList:MealList, workoutList:WorkoutList)
+storage -> storage ++: saveProfile(userProfile:UserProfile)
+create fileWriter
+storage -> fileWriter ++: FileWriter(PROFILE_FILE_PATH:String)
+return file:FileWriter
+storage -> fileWriter ++: write(profile.String():String)
+return
+destroy fileWriter
+return
+storage -> storage ++: saveMeal(mealList:MealList)
+create fileWriter
+storage -> fileWriter ++: FileWriter(MEAL_LIST_FILE_PATH:String)
+return file:FileWriter
+group loop [for all elements in mealArr]
+    storage -> fileWriter ++: write(m.String():String)
+    return
+destroy fileWriter
+end
+return
+storage -> storage ++: saveWorkout(workoutList:WorkoutList)
+create fileWriter
+storage -> fileWriter ++: FileWriter(WORKOUT_LIST_FILE_PATH:String)
+return file:FileWriter
+group loop [for all elements in workoutArr]
+    storage -> fileWriter ++: write(w.String():String)
+    return
+destroy fileWriter
+end
+return
+return
+
+@enduml
