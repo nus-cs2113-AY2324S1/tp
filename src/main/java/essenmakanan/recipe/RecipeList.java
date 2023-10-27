@@ -18,6 +18,7 @@ public class RecipeList {
 
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
+
         assert getRecipeByIndex(recipes.size() - 1).getTitle().equals(recipe.getTitle())
                 : "Recipe is not successfully added into the list.";
     }
