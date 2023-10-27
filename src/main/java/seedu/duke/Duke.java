@@ -40,9 +40,8 @@ public class Duke {
                 System.out.println("    Invalid command! Please try again.");
             }
         }
-
     }
-}
+
 
     private void printHelp() {
         System.out.println("    If you need help, please consult our " +
