@@ -12,13 +12,16 @@ import java.util.Collections;
  * Command to Start the Quiz
  */
 public class CommandStart extends Command{
-    public static final String MISSING_MODE_MSG = "    Ono! You did not indicate mode of the quiz :< " +
-            System.lineSeparator() + "    Quiz mode must be either 'all' or 'random'";
+    public static final String MISSING_QUIZ_MODE_MSG = "    Ono! You did not indicate mode of the quiz :< " +
+            System.lineSeparator() + "    Quiz mode must be either 'all' or 'module'";
     public static final String MISSING_START_DETAILS = "    Ono! You did not indicate start details for the quiz " +
             "mode that you have chosen :<";
+    public static final String MISSING_QN_MODE_MSG = "    Ono! You did not indicate mode of arranging " +
+            "quiz questions :<";
     public static final String INVALID_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
             "/[quiz mode] [start details] /[qn mode]!";
+    public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! There should not be arguments after /[qn mode]";
     private final String startMode;
     private final String startDetails;
     private final String startQnMode;
@@ -54,13 +57,14 @@ public class CommandStart extends Command{
         switch (startMode.toLowerCase()) {
         case "module":
             assert startDetails != null;
-            matchedQuestions = questions.categoriseListByModule(startDetails);
+            String[] modules  = startDetails.split(" ");
+            matchedQuestions = questions.categoriseListByModule(modules);
             break;
         case "all":
             matchedQuestions = questions.getAllQns();
             break;
         default:
-            Ui.displayMessage("    Please enter a valid quiz mode :<");
+            ui.displayMessage("    Please enter a valid quiz mode :<");
             return;
         }
 
@@ -73,7 +77,7 @@ public class CommandStart extends Command{
             questions.startQuiz(ui, matchedQuestions);
             break;
         default:
-            Ui.displayMessage("    Please enter a valid quiz mode :<");
+            ui.displayMessage("    Please enter a valid quiz mode :<");
             return;
         }
     }

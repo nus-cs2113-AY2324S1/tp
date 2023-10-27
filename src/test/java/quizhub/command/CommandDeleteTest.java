@@ -81,10 +81,9 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteInvalidTypeIndex() {
-        String expectedOutput = Ui.INVALID_COMMAND_MSG +
-                        Parser.INVALID_INTEGER_INDEX_MSG +
+        String expectedOutput = Ui.INVALID_INTEGER_INDEX_MSG +
                         CommandDelete.INVALID_FORMAT_MSG;
-        parser.parseCommand("delete test").executeCommand(ui, mockStorage, questionList);
+        Parser.parseCommand("delete test").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput.strip());
     }
 
@@ -93,10 +92,9 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteMissingIndex() {
-        String expectedOutput = Ui.INVALID_COMMAND_MSG +
-                CommandDelete.MISSING_INDEX_MSG +
+        String expectedOutput = CommandDelete.MISSING_INDEX_MSG +
                 CommandDelete.INVALID_FORMAT_MSG;
-        parser.parseCommand("delete").executeCommand(ui, mockStorage, questionList);;
+        Parser.parseCommand("delete").executeCommand(ui, mockStorage, questionList);;
         testCliOutputCorrectness(expectedOutput.strip());
     }
 

@@ -286,17 +286,19 @@ public class QuestionList {
     /**
      * Build a new list of questions based on specified module.
      *
-     * @param module Module used to search for matches.
+     * @param modules Modules used to search for matches.
      */
-    public ArrayList<Question> categoriseListByModule(String module){
+    public ArrayList<Question> categoriseListByModule(String[] modules){
         ArrayList<Question> matchedQuestions = new ArrayList<>();
         try {
             if (allQns.isEmpty()) {
                 throw new QuizHubExceptions("    Question list is empty! Time to add some OWO");
             } else {
-                for (Question question : allQns) {
-                    if (question.getModule().toLowerCase().matches(module.toLowerCase())) {
-                        matchedQuestions.add(question);
+                for (String module : modules) {
+                    for (Question question : allQns) {
+                        if (question.getModule().toLowerCase().matches(module.toLowerCase())) {
+                            matchedQuestions.add(question);
+                        }
                     }
                 }
             }
@@ -380,19 +382,19 @@ public class QuestionList {
             String userAnswer = ui.getUserInput().strip();
 
             if (userAnswer.equalsIgnoreCase(correctAnswer)) {
-                System.out.println("    Correct!");
+                ui.displayMessage("    Correct!");
                 correctAnswers++;
             } else {
-                System.out.println("    Wrong!");
+                ui.displayMessage("    Wrong!");
             }
 
             int questionsLeft = totalQuestions - (i + 1);
             if (questionsLeft > 0) {
-                System.out.println("    Questions left: " + questionsLeft);
+                ui.displayMessage("    Questions left: " + questionsLeft);
             } else {
-                System.out.println("    Quiz completed!");
+                ui.displayMessage("    Quiz completed!");
             }
         }
-        System.out.println("    Your score: " + correctAnswers + "/" + totalQuestions);
+        ui.displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
     }
 }

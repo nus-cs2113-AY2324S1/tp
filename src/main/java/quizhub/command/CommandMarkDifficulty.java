@@ -12,7 +12,8 @@ public class CommandMarkDifficulty extends Command{
     public static final String MISSING_DIFFICULTY_MSG = "    Ono! You did not indicate difficulty " +
             "to be assigned the question :<";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as markdiff " +
-            "[question number] [question difficulty]!";
+            "[qn number] [qn difficulty]!";
+    public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! Markdiff command only takes in 2 arguments";
     private final int qnIndex;
     private final Question.QnDifficulty qnDifficulty;
     /**
@@ -30,9 +31,7 @@ public class CommandMarkDifficulty extends Command{
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert qnDifficulty != null;
-        if(qnDifficulty != Question.QnDifficulty.NORMAL) {
-            questions.markQuestionDifficulty(qnIndex, qnDifficulty, true);
-            dataStorage.updateData(questions);
-        }
+        questions.markQuestionDifficulty(qnIndex, qnDifficulty, true);
+        dataStorage.updateData(questions);
     }
 }

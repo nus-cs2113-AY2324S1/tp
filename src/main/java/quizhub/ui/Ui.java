@@ -11,6 +11,42 @@ import java.util.Scanner;
  */
 public class Ui {
     public static final String INVALID_COMMAND_MSG =  "    Please enter a valid command :0";
+    public static final String INVALID_COMMAND_FEEDBACK = "    Here are the list of commands you can use:" +
+            System.lineSeparator() +
+            "    1. help - shows the list of commands you can use" +
+            System.lineSeparator() +
+            "    2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and " +
+            "its answer to the list," +
+            System.lineSeparator() +
+            "    3. list - shows the list of questions and answers," +
+            System.lineSeparator() +
+            "    4. delete [question number] - deletes the question and answer at the specified number," +
+            System.lineSeparator() +
+            "    5. find /[description] - displays all questions that contains the the specified description," +
+            System.lineSeparator() +
+            "    6. find /[module] - displays all questions that belong to the specified module," +
+            System.lineSeparator() +
+            "    7. edit [question number] /description [description] - edits the description of the question " +
+            "with the specified number," +
+            System.lineSeparator() +
+            "    8. edit [question number] /answer [answer] - edits the answer to the question with " +
+            "the specified number," +
+            System.lineSeparator() +
+            "    9. start /[quiz mode] [start details] /[qn mode] - " +
+            "starts the quiz with option for /module or /all and /random or /normal," +
+            System.lineSeparator() +
+            "    10. shuffle - shuffle quiz questions to a random order," +
+            System.lineSeparator() +
+            "    11. markdiff [question number] [question difficulty] - sets the difficulty of question " +
+            "with the specified number," +
+            System.lineSeparator() +
+            "    12. bye - exits the program";
+    public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer index!";
+
+    public static final String MISSING_QUESTION_NUMBER_MSG = "    Ono! Please enter valid question number *sobs*";
+
+    public static final String INVALID_QUESTION_DIFFICULTY_MSG = "    Ono! We only support easy, normal and hard " +
+            "difficulty levels" + System.lineSeparator() + "    No changes will be made to your difficulty level";
     private final Scanner input = new Scanner(System.in);  // Create a Scanner object
     private Storage dataStorage;
     private QuestionList tasks;
@@ -53,6 +89,7 @@ public class Ui {
         assert tasks != null : "Invalid null tasks";
         showLine();
     }
+
     /**
      * Retrieves the CLI input from the user
      * and documents it as a String object.
@@ -102,8 +139,7 @@ public class Ui {
         System.out.print("  Your Answer: ");
     }
 
-    public void showInvalidCommandHelp( String feedback ) {
-        System.out.println(INVALID_COMMAND_MSG);
+    public void showInvalidCommandHelp(String feedback) {
         System.out.println(feedback);
     }
 
