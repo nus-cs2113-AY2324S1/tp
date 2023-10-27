@@ -75,8 +75,7 @@ public class CommandFindTest {
      */
     @Test
     void testFindNoCriteria() {
-        String expectedOutput = Ui.INVALID_COMMAND_MSG + 
-                CommandFind.MISSING_CRITERIA_MSG + 
+        String expectedOutput = CommandFind.MISSING_CRITERIA_MSG +
                 CommandFind.INVALID_FORMAT_MSG;
         Parser.parseCommand("find").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput.strip());
@@ -87,8 +86,7 @@ public class CommandFindTest {
      */
     @Test
     void testFindDescriptionNoKeyword() {
-        String expectedOutput = Ui.INVALID_COMMAND_MSG + 
-                CommandFind.MISSING_KEYWORD_MSG + 
+        String expectedOutput = CommandFind.MISSING_KEYWORD_MSG +
                 CommandFind.INVALID_FORMAT_MSG;
         Parser.parseCommand("find /description").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput.strip());
@@ -125,8 +123,7 @@ public class CommandFindTest {
      */
     @Test
     void testFindModuleNoKeyword() {
-        String expectedOutput = Ui.INVALID_COMMAND_MSG + 
-                CommandFind.MISSING_KEYWORD_MSG + 
+        String expectedOutput = CommandFind.MISSING_KEYWORD_MSG +
                 CommandFind.INVALID_FORMAT_MSG;
         Parser.parseCommand("find /module").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput.strip());

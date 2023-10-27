@@ -20,7 +20,6 @@ import java.nio.file.Path;
 
 public class CommandMarkTest {
     private QuestionList questionList;
-    private Parser parser;
     private Ui ui;
     private MockStorage mockStorage;
     private final PrintStream standardOut = System.out;
@@ -32,7 +31,6 @@ public class CommandMarkTest {
     public void setQuestionList(@TempDir Path tempDir) throws IOException {
         Path tempFile = tempDir.resolve("testStorage.txt");
         questionList = new QuestionList();
-        parser = new Parser();
         mockStorage = new MockStorage(tempFile.toString());
         ui = new Ui(mockStorage, questionList);
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",
@@ -71,17 +69,16 @@ public class CommandMarkTest {
     }
 
     /**
-     * Test editing without question index
+     * Test marking without question index and difficulty level
      * */
     @Test
     void testMarkDiffNoIndexNoDifficulty(){
-        //String input  = "markdiff";
-        //String expectedOutput = "Ono! You did not indicate index of question to be marked :<\r\n" +
-        //        "    Please format your input as markdiff [question number] [question difficulty]!";
-        //Command command = parser.parseCommand(input);
-        //command.executeCommand(ui, mockStorage, questionList);
-        //testCliOutputCorrectness(expectedOutput);
-        System.out.println("test");
+        String input  = "markdiff";
+        String expectedOutput = CommandMarkDifficulty.MISSING_INDEX_MSG.strip()
+                + CommandMarkDifficulty.INVALID_FORMAT_MSG;
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     /**
@@ -89,24 +86,22 @@ public class CommandMarkTest {
      * */
     @Test
     void testMarkDiffNoDifficulty(){
-        //String input  = "markdiff 1";
-        //String expectedOutput = "Ono! You did not indicate difficulty to be assigned the question :<";
-        //Command command = parser.parseCommand(input);
-        //command.executeCommand(ui, mockStorage, questionList);
-        //testCliOutputCorrectness(expectedOutput);
-        System.out.println("test2");
+        String input  = "markdiff 1";
+        String expectedOutput = CommandMarkDifficulty.MISSING_DIFFICULTY_MSG.strip();
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
     /**
      * Test marking with out-of-bound index
      * */
     @Test
     void testMarkDiffOutOfBoundIndex(){
-        //String input  = "markdiff -1 NORMAL";
-        //String expectedOutput = "Ono! Please enter valid question number *sobs*";
-        //Command command = parser.parseCommand(input);
-        //command.executeCommand(ui, mockStorage, questionList);
-        //testCliOutputCorrectness(expectedOutput);
-        System.out.println("test3");
+        String input  = "markdiff -1 NORMAL";
+        String expectedOutput = Ui.INVALID_INTEGER_INDEX_MSG.strip();
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     /**
@@ -114,12 +109,11 @@ public class CommandMarkTest {
      * */
     @Test
     void testMarkDiffNonIntIndex(){
-        //String input  = "markdiff ?@!# NORMAL";
-        //String expectedOutput = "Please enter valid integer index!";
-        //Command command = parser.parseCommand(input);
-        //command.executeCommand(ui, mockStorage, questionList);
-        //testCliOutputCorrectness(expectedOutput);
-        System.out.println("test4");
+        String input  = "markdiff ?@!# NORMAL";
+        String expectedOutput = Ui.INVALID_INTEGER_INDEX_MSG.strip();
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     /**
@@ -127,26 +121,35 @@ public class CommandMarkTest {
      * */
     @Test
     void testMarkDiffWrongDifficulty(){
-        //String input  = "markdiff 1 ???";
-        //String expectedOutput = "Ono! We only support easy, normal and hard difficulty levels\r\n" +
-        //        "    Please only use 'easy', 'normal' or 'hard' for difficulty levels!\r\n" +
-        //        "    No changes made to original question difficulty!";
-        //Command command = parser.parseCommand(input);
-        //command.executeCommand(ui, mockStorage, questionList);
-        //testCliOutputCorrectness(expectedOutput);
-        System.out.println("test5");
+        String input  = "markdiff 1 ???";
+        String expectedOutput = Ui.INVALID_QUESTION_DIFFICULTY_MSG.strip()
+                .replace(System.lineSeparator(), "");
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
+    /**
+     * Test marking with assigning question multiple difficulty levels
+     * */
+    @Test
+    void testMarkDiffMultipleDifficulty(){
+        String input  = "markdiff 1 NORMAL hard EASY";
+        String expectedOutput = CommandMarkDifficulty.TOO_MANY_ARGUMENTS_MSG.strip()
+                + CommandMarkDifficulty.INVALID_FORMAT_MSG;
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
     /**
      * Test marking with assigning question same difficulty as its current one
      * */
     @Test
     void testMarkDiffRepeatedDifficulty(){
-        //String input  = "markdiff 1 NORMAL";
-        //String expectedOutput = "Question is already set as normal ! No changes made!";
-        //Command command = parser.parseCommand(input);
-        //command.executeCommand(ui, mockStorage, questionList);
-        //testCliOutputCorrectness(expectedOutput);
-        System.out.println("test6");
+        String input  = "markdiff 1 NORMAL";
+        String expectedOutput = "Question is already set as normal ! No changes made!";
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     /**
@@ -157,7 +160,7 @@ public class CommandMarkTest {
         String input  = "markdiff 2 HARD";
         String expectedOutput = "Roger that! I have marked the following question as hard >w< !" +
                 "        [S][] Question2 / Answer2 | Mod2 | HARD";
-        Command command = parser.parseCommand(input);
+        Command command = Parser.parseCommand(input);
         command.executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }

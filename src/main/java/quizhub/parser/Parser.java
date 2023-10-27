@@ -13,43 +13,12 @@ import quizhub.command.CommandShuffle;
 import quizhub.command.CommandMarkDifficulty;
 import quizhub.command.CommandHelp;
 import quizhub.question.Question;
+import quizhub.ui.Ui;
 
 /**
  * Represents a parser that converts user inputs into command objects.
  */
 public class Parser {
-
-    public static final String INVALID_COMMAND_FEEDBACK = "Here are the list of commands you can use:" +
-            System.lineSeparator() +
-            "    1. help - shows the list of commands you can use" +
-            System.lineSeparator() +
-            "    2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and " +
-            "its answer to the list," +
-            System.lineSeparator() +
-            "     3. list - shows the list of questions and answers," +
-            System.lineSeparator() +
-            "     4. delete [question number] - deletes the question and answer at the specified number," +
-            System.lineSeparator() +
-            "     5. find /[description] - displays all questions that contains the the specified description," +
-            System.lineSeparator() +
-            "     6. find /[module] - displays all questions that belong to the specified module," +
-            System.lineSeparator() +
-            "     7. edit [question number] /description [description] - edits the description of the question " +
-            "with the specified number," +
-            System.lineSeparator() +
-            "     8. edit [question number] /answer [answer] - edits the answer to the question with " +
-            "the specified number," +
-            System.lineSeparator() +
-            "     9. start /[quiz mode] [start details] /[qn mode] - " +
-            "starts the quiz with option for /module or /all and /random or /normal," +
-            System.lineSeparator() +
-            "     10. shuffle - shuffle quiz questions to a random order," +
-            System.lineSeparator() +
-            "     11. markdiff [question number] [question difficulty] - sets the difficulty of question " +
-            "with the specified number," +
-            System.lineSeparator() +
-            "     12. bye - exits the program";
-    public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer index!";
     /**
      * Analyses and extracts relevant information from user input
      * to create a new Command object of the right type.
@@ -59,7 +28,8 @@ public class Parser {
     public static Command parseCommand(String userInput) {
         String[] commandTokens = userInput.split(" ");
         if (commandTokens.length == 0) {
-            return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
+            return new CommandInvalid(Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
+                    Ui.INVALID_COMMAND_FEEDBACK);
         }
         String commandTitle = commandTokens[0];
 
@@ -86,12 +56,13 @@ public class Parser {
             case "help":
                 return new CommandHelp();
             default:
-                return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
+                return new CommandInvalid(Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
+                        Ui.INVALID_COMMAND_FEEDBACK);
             }
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
-            return new CommandInvalid(INVALID_INTEGER_INDEX_MSG);
+            return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
         } catch (Exception error) {
-            return new CommandInvalid(INVALID_COMMAND_FEEDBACK);
+            return new CommandInvalid(Ui.INVALID_COMMAND_FEEDBACK);
         }
     }
     /**
@@ -125,10 +96,8 @@ public class Parser {
         case "normal":
             return Question.QnDifficulty.NORMAL;
         default:
-            System.out.println("    Ono! We only support easy, normal and hard difficulty levels" +
-                    System.lineSeparator() +
-                    "    No changes will be made to your difficulty level");
-            return Question.QnDifficulty.NORMAL;
+            System.out.println(Ui.INVALID_QUESTION_DIFFICULTY_MSG);
+            return Question.QnDifficulty.INVALID;
         }
     }
 
@@ -169,7 +138,7 @@ public class Parser {
             qnIndex = Integer.parseInt(editDetails[1].strip());
             return new CommandDelete(qnIndex);
         } catch (NumberFormatException incompleteCommand) {
-            return new CommandInvalid(INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
+            return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
                     CommandDelete.INVALID_FORMAT_MSG);
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             return new CommandInvalid(CommandDelete.MISSING_INDEX_MSG + System.lineSeparator() +
@@ -217,7 +186,7 @@ public class Parser {
             editDetails = userInput.split(" ");
             qnIndex = Integer.parseInt(editDetails[1].strip());
         } catch (NumberFormatException incompleteCommand) {
-            return new CommandInvalid(INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
+            return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             return new CommandInvalid(CommandEdit.MISSING_INDEX_MSG + System.lineSeparator() +
@@ -263,30 +232,40 @@ public class Parser {
             startInfo = commandDetails[1];
             startMode = startInfo.split(" ")[0].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            return new CommandInvalid(CommandStart.MISSING_MODE_MSG + System.lineSeparator() +
+            return new CommandInvalid(CommandStart.MISSING_QUIZ_MODE_MSG + System.lineSeparator() +
                     CommandStart.INVALID_FORMAT_MSG);
         }
         try {
             if(!startMode.equalsIgnoreCase("all")){
                 startDetails = startInfo.split(startMode)[1].strip();
                 if(startDetails.equals("")){
-                    return new CommandInvalid(CommandStart.MISSING_START_DETAILS);
+                    return new CommandInvalid(CommandStart.MISSING_START_DETAILS + System.lineSeparator() +
+                            CommandStart.INVALID_FORMAT_MSG);
                 }
             }
         }  catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            return new CommandInvalid(CommandStart.INVALID_FORMAT_MSG);
+            return new CommandInvalid(CommandStart.MISSING_START_DETAILS + System.lineSeparator() +
+                    CommandStart.INVALID_FORMAT_MSG);
         }
         try {
             // Reads in /random or /normal
             startQnMode = commandDetails[2].split(" ")[0].strip();
             if (startQnMode.isEmpty()) {
-                return new CommandInvalid(CommandStart.INVALID_FORMAT_MSG);
+                return new CommandInvalid(CommandStart.MISSING_QN_MODE_MSG + System.lineSeparator() +
+                        CommandStart.INVALID_FORMAT_MSG);
             }
             if (!startQnMode.equals("random") && !startQnMode.equals("normal")) {
                 throw new IllegalArgumentException(CommandStart.INVALID_MODE_MSG);
             }
+            if(commandDetails[2].split(" ").length != 1){
+                return new CommandInvalid(CommandStart.TOO_MANY_ARGUMENTS_MSG + System.lineSeparator() +
+                        CommandStart.INVALID_FORMAT_MSG);
+            }
         } catch (IllegalArgumentException e) {
             return new CommandInvalid(e.getMessage() + System.lineSeparator() +
+                    CommandStart.INVALID_FORMAT_MSG);
+        } catch (ArrayIndexOutOfBoundsException invalidIndex) {
+            return new CommandInvalid(CommandStart.MISSING_QN_MODE_MSG + System.lineSeparator() +
                     CommandStart.INVALID_FORMAT_MSG);
         }
         return new CommandStart(startMode, startDetails, startQnMode);
@@ -313,15 +292,19 @@ public class Parser {
         try {
             qnIndex = Integer.parseInt(qnIndexString);
             if(qnIndex < 0){
-                return new CommandInvalid(Parser.INVALID_INTEGER_INDEX_MSG);
+                return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
             }
         }  catch (NumberFormatException incompleteCommand) {
-            return new CommandInvalid(Parser.INVALID_INTEGER_INDEX_MSG);
+            return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
         }
         try {
             qnDifficultyString = commandDetails[2].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             return new CommandInvalid(CommandMarkDifficulty.MISSING_DIFFICULTY_MSG);
+        }
+        if(commandDetails.length != 3){
+            return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_ARGUMENTS_MSG + System.lineSeparator() +
+                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
         }
         qnDifficulty = Parser.extractQuestionDifficulty(qnDifficultyString);
         return new CommandMarkDifficulty(qnIndex, qnDifficulty);

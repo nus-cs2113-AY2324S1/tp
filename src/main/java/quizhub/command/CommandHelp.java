@@ -1,6 +1,5 @@
 package quizhub.command;
 
-import quizhub.parser.Parser;
 import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
@@ -20,6 +19,6 @@ public class CommandHelp extends Command{
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert questions != null && dataStorage != null && ui != null : "Invalid null parameter";
-        System.out.println(Parser.INVALID_COMMAND_FEEDBACK);
+        System.out.println(Ui.INVALID_COMMAND_FEEDBACK);
     }
 }

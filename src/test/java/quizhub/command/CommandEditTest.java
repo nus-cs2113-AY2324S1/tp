@@ -81,9 +81,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditNonIntIndex(){
-        String expectedOutput = "Please enter a valid command :0    Please enter valid integer index!" +  
-            "    Please format your input as edit [question number] /description " +
-            "[description] or edit /answer [answer]!";
+        String expectedOutput = Ui.INVALID_INTEGER_INDEX_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
         String userInput = "edit abc /description NewDescription";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
@@ -94,10 +92,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditBlankDes(){
-        String expectedOutput = "Please enter a valid command :0" + 
-            "    Ono! You did not enter a new description / answer :<" +
-            "    Please format your input as edit [question number] /description " +
-            "[description] or edit /answer [answer]!";
+        String expectedOutput = CommandEdit.MISSING_KEYWORD_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
         String userInput = "edit 1 /description ";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
@@ -107,10 +102,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditBlankAns(){
-        String expectedOutput = "Please enter a valid command :0" + 
-            "    Ono! You did not enter a new description / answer :<" +
-            "    Please format your input as edit [question number] /description " +
-            "[description] or edit /answer [answer]!";
+        String expectedOutput = CommandEdit.MISSING_KEYWORD_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
         String userInput = "edit 1 /answer ";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
@@ -121,9 +113,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditNoIndex(){
-        String expectedOutput = "Please enter a valid command :0    Ono! You did not indicate question index :<" + 
-            "    Please format your input as edit [question number] /description " +
-            "[description] or edit /answer [answer]!";
+        String expectedOutput = CommandEdit.MISSING_INDEX_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
         String userInput = "edit ";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);

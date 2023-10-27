@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import quizhub.command.Command;
 import quizhub.command.CommandDelete;
 import quizhub.command.CommandInvalid;
+import quizhub.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 
@@ -28,7 +29,7 @@ class ParserTest {
     @Test
     void test_parseCommand_emptyCommand() {
         final String[] emptyInputs = { "", "  ", "\n  \n" };
-        final String resultMessage = Parser.INVALID_COMMAND_FEEDBACK;
+        final String resultMessage = Ui.INVALID_COMMAND_MSG + System.lineSeparator() + Ui.INVALID_COMMAND_FEEDBACK;
         parseAndAssertIncorrectWithMessage(resultMessage, emptyInputs);
     }
 
@@ -38,7 +39,7 @@ class ParserTest {
             "delete system32",
             "delete 1111111111111111111111111111111111111111111111111"
         };
-        final String resultMessage = Parser.INVALID_INTEGER_INDEX_MSG +
+        final String resultMessage = Ui.INVALID_INTEGER_INDEX_MSG +
                 System.lineSeparator() + CommandDelete.INVALID_FORMAT_MSG;
         parseAndAssertIncorrectWithMessage(resultMessage, invalidIntegers);
     }
@@ -61,7 +62,7 @@ class ParserTest {
     private void parseAndAssertIncorrectWithMessage(String feedback, String[] inputs) {
         for (String input : inputs) {
             final CommandInvalid result = parseAndAssertCommandType(input, CommandInvalid.class);
-            assertEquals(result.feedback, feedback);
+            assertEquals(feedback, result.feedback);
         }
     }
 
@@ -72,7 +73,7 @@ class ParserTest {
      * @param expectedClass The expected command class
      * */
     private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedClass) {
-        final Command result = parser.parseCommand(input);
+        final Command result = Parser.parseCommand(input);
         assertTrue(result.getClass().isAssignableFrom(expectedClass));
         return (T) result;
     }
