@@ -41,7 +41,8 @@ public class WorkoutListDecoder {
             throws StorageOperationException {
         final Matcher matcher = WORKOUT_PATTERN.matcher(encodedWorkout);
         if (!matcher.matches()) {
-            throw new Storage.StorageOperationException("Encoded person in invalid format. Unable to decode.");
+            throw new Storage.StorageOperationException("File containing workouts has invalid format. " +
+                    "Please delete the file and run the program again");
         }
 
         final String name = matcher.group("name");

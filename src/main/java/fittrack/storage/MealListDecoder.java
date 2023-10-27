@@ -41,7 +41,8 @@ public class MealListDecoder {
             throws StorageOperationException {
         final Matcher matcher = MEAL_PATTERN.matcher(encodedMeal);
         if (!matcher.matches()) {
-            throw new StorageOperationException("Encoded person in invalid format. Unable to decode.");
+            throw new StorageOperationException("File containing meals has invalid format. " +
+                    "Please delete the file and run the program again");
         }
 
         final String name = matcher.group("name");

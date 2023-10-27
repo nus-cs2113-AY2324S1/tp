@@ -63,7 +63,8 @@ public class FitTrack {
             this.mealList = storage.mealLoad();
             this.workoutList = storage.workoutLoad();
         }catch (StorageOperationException | InvalidStorageFilePathException e) {
-            throw new RuntimeException(e);
+            System.out.println("There was a problem with the loading of storage contents.");
+            ui.printLine();
         }
 
 
