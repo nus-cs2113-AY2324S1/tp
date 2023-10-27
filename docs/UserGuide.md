@@ -14,19 +14,14 @@ from all fields of study.
 
 ## Features 
 
-1. help - shows the list of commands you can use
-2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and its answer to the list,
-3. list - shows the list of questions and answers,
-4. delete [question number] - deletes the question and answer at the specified number,
-5. find /[description] - displays all questions that contains the the specified description,
-6. find /[module] - displays all questions that belong to the specified module,
-7. edit [question number] /description [description] - edits the description of the question with the specified number,
-8. edit [question number] /answer [answer] - edits the answer to the question with the specified number,
-9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or 
-/normal,
-10. shuffle - shuffle quiz questions to a random order,
-11. markdiff [question number] [question difficulty] - sets the difficulty of question with the specified number,
-12. bye - exits the program
+1. Helper command
+2. Add question/answer and group them in modules/difficulty
+3. Stores the question/answer in local storage
+4. Delete question/answer
+5. Find question/answer via question's description or via module name
+5. Edit question/answer and difficulty
+6. Start a quiz session, specifying category of questions and in random/normal mode 
+7. Permanently shuffle questions order for added challenge!
 
 ### Getting help on using the app `help`
 Assist new users in getting to speed with the application. Provide a list of commands for the user to get started 
@@ -35,13 +30,9 @@ provide greater details on how to utilize that command.
 
 Format: `help`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
-
-Example of usage: 
-
-* Command:`help` <br>
-Output: /add - … /start - …
+Example of usage:
+* **Command**:`help` <br>
+**Output**: /add - … /start - …
 
 Notes:
 * If the command does not exist after /help, the app will prompt you that the command does not exist and thereafter 
@@ -55,10 +46,10 @@ difficulty level.
 
 Format: `short [question]/[answer]/[module]/[difficulty]`
 
-Examples:
-* Command: add What is the value of Pi to 2 decimal places?/3.14/math/easy <br>
-Output: Question-Answer set added to bank!
-* Command: add What fish is Nemo based off?/a Clownfish/trivia/easy <br>
+Example of usage:
+* **Command**: add What is the value of Pi to 2 decimal places?/3.14/math/easy <br>
+**Output**: Question-Answer set added to bank!
+* **Command**: add What fish is Nemo based off?/a Clownfish/trivia/easy <br>
 Output: Question-Answer set added to bank!
 
 Notes:
@@ -70,9 +61,9 @@ List all the questions from the question bank from the storage
 
 Format: `list`
 
-Examples:
-* Command: list <br>
-Output:<br>
+Examples of usage:
+* **Command**: list <br>
+**Output**:<br>
 1: [S][] 2 / 4 | num | EASY <br>
 2: [S][] hi / hihi | word | EASY <br>
 3: [S][] 6 / 12 | num | EASY <br>
@@ -80,7 +71,6 @@ Output:<br>
 ### Delete Questions `delete`
 
 ### Find question/answer `find`
-
 
 ### Edit question/answer `edit`
 
@@ -92,15 +82,15 @@ the quiz terminates automatically and the user quiz score is displayed.
 
 Format:  `start /[quiz mode] [start details] /[qn mode]`
 
-Examples:
-* Command: start /module num /normal <br>
-Output: start the quiz - displays questions that pertains to module “num” in order defined in the list
-* Command: start /module num /random <br>
-Output: start the quiz - displays questions that pertains to module “num” but in a randomised order
-* Command: start /all /random <br>
-Output: start the quiz - displays questions directly from the list of questions in random order
-* Command: start /all /normal <br>
-Output: start the quiz - displays questions directly from the list of questions in the order of the list
+Examples of usage:
+* **Command**: start /module num /normal <br>
+**Output**: start the quiz - displays questions that pertains to module “num” in order defined in the list
+* **Command**: start /module num /random <br>
+**Output**: start the quiz - displays questions that pertains to module “num” but in a randomised order
+* **Command**: start /all /random <br>
+**Output**: start the quiz - displays questions directly from the list of questions in random order
+* **Command**: start /all /normal <br>
+**Output**: start the quiz - displays questions directly from the list of questions in the order of the list
 
 
 Notes:
@@ -115,15 +105,31 @@ Format: `shuffle`
 Notes
 * Shuffle will not work if there is not questions within the question bank
 
+### Mark difficulty of questions `markdiff`
+
+### Exit Program `bye`
+Exits the program
+Format: `bye`
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Transfer the tasklist.txt generated to the same local directory as the jar file of the program in another 
+computer.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+1. `help` - shows the list of commands you can use
+2. `short [question]/[answer]/[module]/[difficulty]` - adds a short answer question and its answer to the list,
+3. `list` - shows the list of questions and answers,
+4. `delete [question number]` - deletes the question and answer at the specified number,
+5. `find /[description]` - displays all questions that contains the the specified description,
+6. `find /[module]` - displays all questions that belong to the specified module,
+7. `edit [question number] /description [description]` - edits the description of the question with the specified number,
+8. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number,
+9. `start /[quiz mode] [start details] /[qn mode]` - starts the quiz with option for /module or /all and /random or
+   /normal,
+10. `shuffle` - shuffle quiz questions to a random order,
+11. `markdiff [question number] [question difficulty]` - sets the difficulty of question with the specified number,
+12. `bye` - exits the program
