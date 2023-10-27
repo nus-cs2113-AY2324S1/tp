@@ -77,6 +77,44 @@ Output:<br>
 2: [S][] hi / hihi | word | EASY <br>
 3: [S][] 6 / 12 | num | EASY <br>
 
+### Delete Questions `delete`
+
+### Find question/answer `find`
+
+
+### Edit question/answer `edit`
+
+### Start quiz `start`
+Starts a quiz which fetches the specified category from the question bank in normal / random order to be tested. 
+The app will display the fetched questions one at a time on CLI and hte user is required to enter answer through CLI. 
+Upon every user answer entry, the app loads the next question and updates the score. When all questions are answered, 
+the quiz terminates automatically and the user quiz score is displayed.
+
+Format:  `start /[quiz mode] [start details] /[qn mode]`
+
+Examples:
+* Command: start /module num /normal <br>
+Output: start the quiz - displays questions that pertains to module “num” in order defined in the list
+* Command: start /module num /random <br>
+Output: start the quiz - displays questions that pertains to module “num” but in a randomised order
+* Command: start /all /random <br>
+Output: start the quiz - displays questions directly from the list of questions in random order
+* Command: start /all /normal <br>
+Output: start the quiz - displays questions directly from the list of questions in the order of the list
+
+
+Notes:
+* If the specified module is not part of the list, an exception will be thrown and the user will be notified 
+with a prompt to write the command in the specified format.
+
+### Shuffling Questions `shuffle`
+Shuffle questions within question list to a random order,
+
+Format: `shuffle`
+
+Notes
+* Shuffle will not work if there is not questions within the question bank
+
 
 ## FAQ
 
