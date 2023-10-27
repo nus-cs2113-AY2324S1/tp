@@ -18,6 +18,11 @@ public class Pantry {
         pantryStock = retrieveStockFromStorage();
     }
 
+    public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
+        this.ui = ui;
+        this.pantryStock = pantryStock;
+    }
+
     /**
      * Retrieves the current pantry stock from storage, which may include reading from a file (pantry.txt).
      *
@@ -117,7 +122,7 @@ public class Pantry {
      * @param dishIngredients Array of ingredients used to make the dish order.
      */
     public void decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
-        pantryStock = retrieveStockFromStorage();
+        //pantryStock = retrieveStockFromStorage();
 
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {

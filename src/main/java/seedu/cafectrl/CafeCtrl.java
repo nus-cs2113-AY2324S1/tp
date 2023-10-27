@@ -32,7 +32,7 @@ public class CafeCtrl {
         ui = new Ui();
         menuStorage = new MenuStorage(menuFilePath, ui);
         pantry = new Pantry(ui);
-
+        orderList = new OrderList();
         ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
         try {
             ArrayList<Dish> dishes = menuStorage.loadData();

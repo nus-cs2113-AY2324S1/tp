@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class OrderList {
     protected ArrayList<Order> orderList;
+    protected float totalOrderListCost;
     public OrderList() {
         this.orderList = new ArrayList<Order>();
+        this.totalOrderListCost = 0;
     }
     public OrderList(ArrayList<Order> orderList) {
         this.orderList = orderList;
@@ -25,5 +27,14 @@ public class OrderList {
 
     public void addOrder(Order order) {
         orderList.add(order);
+    }
+
+    public void addCost(Order order) {
+        float orderCost = order.totalOrderCost;
+        totalOrderListCost += orderCost;
+    }
+
+    public float getTotalOrderListCost() {
+        return totalOrderListCost;
     }
 }

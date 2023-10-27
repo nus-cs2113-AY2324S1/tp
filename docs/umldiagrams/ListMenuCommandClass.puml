@@ -27,7 +27,10 @@ class Command {
 class UI {
 {static} - scanner : Scanner
 + receiveUserInput() : String
-+ showToUser() : void
++ showMenuTop() : void
++ showMenuBottom() : void
++ showEmptyMenu() : void
++ showMenuDish(indexNum : String, dishName : String, dishPrice : String) : void
 }
 
 class ListMenuCommand {
@@ -37,8 +40,6 @@ class ListMenuCommand {
 + printEmptyMenu(ui : Ui) : void
 + printFullMenu(menu : Menu, ui : Ui)
 }
-
-
 
 class Parser {
 {static} + parseCommand(menu : Menu, userInput : String, ui : Ui, pantry : Pantry, orderList : OrderList) : Command
