@@ -1,6 +1,7 @@
 package cashleh.transaction;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Abstract class providing common structure for financial transactions,
@@ -12,6 +13,8 @@ public abstract class Transaction {
     private double amount;
     private LocalDate date = null;
     private Categories category = null;
+
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /*
      * Constructor for Transaction - set date to current date if not specified
@@ -63,37 +66,81 @@ public abstract class Transaction {
         this.category = category;
     }
 
+    /*
+     * Returns the amount of the transaction
+     * @return Amount of the transaction
+     */
     public double getAmount() {
         return amount;
     }
 
+    /*
+     * Returns the description of the transaction
+     * @return Description of the transaction
+     */
     public String getDescription() {
         return description;
     }
 
+    /*
+     * Returns the date of the transaction
+     * @return Date of the transaction
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /*
+     * Returns the string representation of the date of the transaction in the format dd/MM/yyyy
+     * @return String representation of the date of the transaction in the format dd/MM/yyyy
+     */
+    public String getDateString() {
+        return date.format(FORMATTER);
+    }
+
+    /*
+     * Returns the category of the transaction
+     * @return Category of the transaction
+     */
     public Categories getCategory() {
         return category;
     }
 
+    /*
+     * Sets the amount of the transaction
+     * @param amount Amount of the transaction
+     */
     public void setAmount(double amount) {
         this.amount = amount;
     }
 
+    /*
+     * Sets the description of the transaction
+     * @param description Description of the transaction
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /*
+     * Sets the date of the transaction
+     * @param date Date of the transaction
+     */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    /*
+     * Sets the category of the transaction
+     * @param category Category of the transaction
+     */
     public void setCategory(Categories category) {
         this.category = category;
     }
-    
+
+    /*
+     * Returns the string representation of the transaction
+     * @return String representation of the transaction
+     */
     public abstract String toString();
 }
