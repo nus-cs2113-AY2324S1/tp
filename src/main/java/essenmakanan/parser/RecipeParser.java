@@ -10,14 +10,11 @@ import essenmakanan.ui.Ui;
 public class RecipeParser {
 
     public static int getRecipeIndex(RecipeList recipes, String input)
-            throws EssenOutOfRangeException, EssenFormatException {
+            throws EssenOutOfRangeException {
         int index;
         input = input.replace("r/", "");
 
         if (input.matches("\\d+")) { //if input only contains numbers
-            if (input.length() != 1) {
-                throw new EssenFormatException();
-            }
             index = Integer.parseInt(input) - 1;
         } else {
             index = recipes.getIndexOfRecipeByName(input);

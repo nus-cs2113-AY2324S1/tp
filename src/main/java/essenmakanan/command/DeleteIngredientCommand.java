@@ -21,8 +21,6 @@ public class DeleteIngredientCommand extends Command {
             ingredients.deleteIngredient(ingredientIndex);
         } catch (EssenOutOfRangeException e) {
             e.handleException();
-        } catch (EssenFormatException e) {
-            e.handleException();
         }
     }
 }

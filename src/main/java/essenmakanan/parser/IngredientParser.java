@@ -8,14 +8,11 @@ import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
-            throws EssenOutOfRangeException, EssenFormatException {
+            throws EssenOutOfRangeException {
         int index;
         input = input.replace("i/", "");
 
         if (input.matches("\\d+")) { //if input only contains numbers
-            if (input.length() != 1) {
-                throw new EssenFormatException();
-            }
             index = Integer.parseInt(input) - 1;
         } else {
             index = ingredients.getIndexByName(input);

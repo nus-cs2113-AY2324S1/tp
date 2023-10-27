@@ -21,8 +21,6 @@ public class DeleteRecipeCommand extends Command {
             recipes.deleteRecipe(recipeIndex);
         } catch (EssenOutOfRangeException e) {
             e.handleException();
-        } catch (EssenFormatException e) {
-            e.handleException();
         }
     }
 }
