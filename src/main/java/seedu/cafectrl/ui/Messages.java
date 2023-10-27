@@ -73,7 +73,7 @@ public class Messages {
     public static final String LOAD_MENU_FILE_ERROR_MESSAGE = "Uh oh, I am having trouble loading your menu text file."
             + "\n\tCreating a new empty menu...\n";
     public static final String DATA_FOLDER_NOT_FOUND_MESSAGE = "Data Folder was not found!\nIt's ok... "
-            + "a new data folder has been created in:";
+            + "a new data folder has been created.";
     public static final String DATA_FILE_NOT_FOUND_MESSAGE = "text file was not found!\nIt's ok... "
-            + "a new tasks.txt has been created in:";
+            + "a new data file has been created.";
 }

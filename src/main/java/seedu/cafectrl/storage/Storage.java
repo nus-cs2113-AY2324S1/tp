@@ -79,12 +79,12 @@ public abstract class Storage {
 
         if (!Files.exists(dataFolderPath)) {
             folder.mkdir();
-            ui.showToUser(Messages.DATA_FOLDER_NOT_FOUND_MESSAGE, userWorkingDirectory, System.lineSeparator());
+            ui.showToUser(Messages.DATA_FOLDER_NOT_FOUND_MESSAGE, System.lineSeparator());
         }
 
         if (!Files.exists(dataFilePath)) {
             textFile.createNewFile();
-            ui.showToUser(Messages.DATA_FILE_NOT_FOUND_MESSAGE, dataFolderPath.toString());
+            ui.showToUser(Messages.DATA_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
         }
 
         return dataFilePath.toString();

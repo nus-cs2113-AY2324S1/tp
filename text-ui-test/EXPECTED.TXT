@@ -8,10 +8,10 @@ Hello! Welcome to CafeCTRL!
 Goodbye <3 Have a great day ahead!
 -----------------------------------------------------
 Data Folder was not found!
-It's ok... a new data folder has been created in:
-C:\Users\Dexma\OneDrive - National University of Singapore\NUS Files\Y3S1\tp\build\libs
+It's ok... a new data folder has been created.
 
 
 text file was not found!
-It's ok... a new tasks.txt has been created in:
-C:\Users\Dexma\OneDrive - National University of Singapore\NUS Files\Y3S1\tp\build\libs\data
+It's ok... a new data file has been created.
+
+
