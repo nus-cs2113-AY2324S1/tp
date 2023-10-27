@@ -2,32 +2,53 @@
 
 ## Introduction
 
-{Give a product intro}
+QuizHUB is a local desktop app designed to help NUS students easily record examinable questions and generate quizzes 
+from their very own question bank to test their understanding via a Command Line Interface (CLI). Easily launchable 
+on the go, QuizHUB is a versatile tool that aims to streamline and optimize the revision experience for NUS students 
+from all fields of study.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Down the latest version of `QuizHub` from [here](http://link.to/duke).
 
 ## Features 
 
-{Give detailed description of each feature}
+1. help - shows the list of commands you can use
+2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and its answer to the list,
+3. list - shows the list of questions and answers,
+4. delete [question number] - deletes the question and answer at the specified number,
+5. find /[description] - displays all questions that contains the the specified description,
+6. find /[module] - displays all questions that belong to the specified module,
+7. edit [question number] /description [description] - edits the description of the question with the specified number,
+8. edit [question number] /answer [answer] - edits the answer to the question with the specified number,
+9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or 
+/normal,
+10. shuffle - shuffle quiz questions to a random order,
+11. markdiff [question number] [question difficulty] - sets the difficulty of question with the specified number,
+12. bye - exits the program
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Getting help on using the app `help`
+Assist new users in getting to speed with the application. Provide a list of commands for the user to get started 
+with the essentials. An instance of /help will be activated at the start. /help with a specific command thereafter will 
+provide greater details on how to utilize that command.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `help`
 
 * The `DEADLINE` can be in a natural language format.
 * The `TODO_NAME` cannot contain punctuation.  
 
 Example of usage: 
 
-`todo n/Write the rest of the User Guide d/next week`
+* Command:`help` <br>
+Output: /add - … /start - …
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Notes:
+* If the command does not exist after /help, the app will prompt you that the command does not exist and thereafter 
+activate /help to list all the commands
+* Ver 1.0 will only list commands. Future versions will include auto-filling and scrolling 
+(multiple pages of the help menu)
+
 
 ## FAQ
 
