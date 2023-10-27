@@ -64,7 +64,7 @@ public class Ui {
         System.out.print("     ");
         System.out.print(RED + "Daily Low" + RESET);
         System.out.print("     ");
-        System.out.print("Company Name");
+        System.out.print("EquityName");
         System.out.println();
     }
 
