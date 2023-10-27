@@ -2,7 +2,7 @@ package essenmakanan.ingredient;
 
 import java.util.ArrayList;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
@@ -56,7 +56,7 @@ public class IngredientList {
         ingredients.add(ingredient);
     }
 
-    public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenMakananFormatException {
+    public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
         for (int i = 1; i < editDetails.length; i++) {
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
@@ -78,12 +78,12 @@ public class IngredientList {
                     IngredientUnit newUnit = IngredientParser.mapIngredientUnit(newUnitString);
                     Ui.printEditIngredientUnitSuccess(existingIngredient.getUnit(), newUnit);
                     existingIngredient.setUnit(newUnit);
-                } catch (EssenMakananFormatException e) {
+                } catch (EssenFormatException e) {
                     e.handleException();
                 }
                 break;
             default:
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
         }
 

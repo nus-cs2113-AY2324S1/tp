@@ -1,6 +1,6 @@
 package essenmakanan.parser;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.IngredientList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class IngredientParserTest {
     @Test
     public void parseIngredientInput_invalidInput_throwsEssenMakananFormatException() {
         String invalidDetails = "plus tomato";
-        assertThrows(EssenMakananFormatException.class, () -> {
+        assertThrows(EssenFormatException.class, () -> {
             parser.parseIngredient(ingredients, invalidDetails);
         });
     }

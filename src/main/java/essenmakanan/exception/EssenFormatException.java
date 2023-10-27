@@ -1,6 +1,6 @@
 package essenmakanan.exception;
 
-public class EssenMakananFormatException extends EssenMakananException {
+public class EssenFormatException extends EssenException {
 
     public void handleException() {
         System.out.println("Format is incorrect.");

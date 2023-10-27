@@ -1,7 +1,7 @@
 package essenmakanan.command;
 
-import essenmakanan.exception.EssenMakananFormatException;
-import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
 
@@ -19,9 +19,9 @@ public class DeleteIngredientCommand extends Command {
         try {
             int ingredientIndex = IngredientParser.getIngredientIndex(ingredients, ingredientInput);
             ingredients.deleteIngredient(ingredientIndex);
-        } catch (EssenMakananOutOfRangeException e) {
+        } catch (EssenOutOfRangeException e) {
             e.handleException();
-        } catch (EssenMakananFormatException e) {
+        } catch (EssenFormatException e) {
             e.handleException();
         }
     }

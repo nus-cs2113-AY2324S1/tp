@@ -1,20 +1,20 @@
 package essenmakanan.parser;
 
-import essenmakanan.exception.EssenMakananFormatException;
-import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
-            throws EssenMakananOutOfRangeException, EssenMakananFormatException {
+            throws EssenOutOfRangeException, EssenFormatException {
         int index;
         input = input.replace("i/", "");
 
         if (input.matches("\\d+")) { //if input only contains numbers
             if (input.length() != 1) {
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
             index = Integer.parseInt(input) - 1;
         } else {
@@ -22,14 +22,14 @@ public class IngredientParser {
         }
 
         if (!ingredients.ingredientExist(index)) {
-            throw new EssenMakananOutOfRangeException();
+            throw new EssenOutOfRangeException();
         }
 
         return index;
     }
 
     public static Ingredient parseIngredient(IngredientList ingredients, String inputDetail)
-            throws EssenMakananFormatException {
+            throws EssenFormatException {
 
         IngredientUnit ingredientUnit;
 
@@ -38,7 +38,7 @@ public class IngredientParser {
         String[] ingredientDetails = inputDetail.split(",");
 
         if (ingredientDetails.length != 3) {
-            throw new EssenMakananFormatException();
+            throw new EssenFormatException();
         }
 
         String ingredientName = ingredientDetails[0].strip();
@@ -53,7 +53,7 @@ public class IngredientParser {
         return newIngredient;
     }
 
-    public static IngredientUnit mapIngredientUnit(String ingredientUnitString) throws EssenMakananFormatException {
+    public static IngredientUnit mapIngredientUnit(String ingredientUnitString) throws EssenFormatException {
         IngredientUnit ingredientUnit;
         // return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
         switch(ingredientUnitString) {
@@ -82,7 +82,7 @@ public class IngredientParser {
             ingredientUnit = IngredientUnit.PIECE;
             break;
         default:
-            throw new EssenMakananFormatException();
+            throw new EssenFormatException();
         }
 
         return ingredientUnit;

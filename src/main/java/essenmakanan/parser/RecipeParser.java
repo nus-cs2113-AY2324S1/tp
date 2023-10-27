@@ -1,8 +1,8 @@
 package essenmakanan.parser;
 
-import essenmakanan.exception.EssenMakananException;
-import essenmakanan.exception.EssenMakananFormatException;
-import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.exception.EssenException;
+import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
@@ -10,13 +10,13 @@ import essenmakanan.ui.Ui;
 public class RecipeParser {
 
     public static int getRecipeIndex(RecipeList recipes, String input)
-            throws EssenMakananOutOfRangeException, EssenMakananFormatException {
+            throws EssenOutOfRangeException, EssenFormatException {
         int index;
         input = input.replace("r/", "");
 
         if (input.matches("\\d+")) { //if input only contains numbers
             if (input.length() != 1) {
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
             index = Integer.parseInt(input) - 1;
         } else {
@@ -24,14 +24,14 @@ public class RecipeParser {
         }
 
         if (!recipes.recipeExist(index)) {
-            throw new EssenMakananOutOfRangeException();
+            throw new EssenOutOfRangeException();
         }
 
         return index;
     }
 
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
-            throws EssenMakananException {
+            throws EssenException {
         Ui ui = new Ui();
         switch(command) {
         case "add":
@@ -47,7 +47,7 @@ public class RecipeParser {
             ui.printAllRecipes(recipes);
             break;
         default:
-            throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
+            throw new EssenException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
 
