@@ -34,26 +34,34 @@ import java.text.ParseException;
 public class Parser {
     private static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
 
-    // Command Argument Patterns
-    private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
-            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    /** Add Dish Command Handler Patterns*/
+    private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
+            + "price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+"
+            + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
+            + "(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
     private static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
     private static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    private static final String INGREDIENT_ARGUMENT_STRING = "\\s*ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) qty/\\s*(?<ingredientQty>[0-9]+)\\s*(?<ingredientUnit>g|ml)\\s*";
+    private static final String INGREDIENT_ARGUMENT_STRING = "\\s*ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
+            + "qty/\\s*(?<ingredientQty>[0-9]+)\\s*(?<ingredientUnit>g|ml)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
     private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
     private static final String INGREDIENT_DIVIDER_REGEX = ",";
+
+    /** Add Order Command Handler Patterns*/
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     private static final int PRICE_MATCHER_GROUP_NUM = 2;
     private static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
     private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";
+
+    /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
+    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
+            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
     /**

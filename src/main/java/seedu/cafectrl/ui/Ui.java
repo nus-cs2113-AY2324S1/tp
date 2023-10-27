@@ -57,7 +57,8 @@ public class Ui {
         String dishPriceString = "Dish Price: $" + dollarValue.format(dishPrice);
         StringBuilder dishIngredientsString = new StringBuilder("Ingredients:\n");
 
-        for (int i = 0; i < dish.getIngredients().size(); i++) {
+        int ingredientListSize = dish.getIngredients().size();
+        for (int i = 0; i < ingredientListSize; i++) {
             Ingredient ingredient = dish.getIngredients().get(i);
 
             dishIngredientsString.append("\t")
