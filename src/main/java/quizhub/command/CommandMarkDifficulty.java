@@ -31,7 +31,9 @@ public class CommandMarkDifficulty extends Command{
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert qnDifficulty != null;
-        questions.markQuestionDifficulty(qnIndex, qnDifficulty, true);
-        dataStorage.updateData(questions);
+        if(qnDifficulty != Question.QnDifficulty.INVALID) {
+            questions.markQuestionDifficulty(qnIndex, qnDifficulty, true);
+            dataStorage.updateData(questions);
+        }
     }
 }
