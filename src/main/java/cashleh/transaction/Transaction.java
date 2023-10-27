@@ -1,5 +1,7 @@
 package cashleh.transaction;
 
+import cashleh.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -95,7 +97,7 @@ public abstract class Transaction {
      * @return String representation of the date of the transaction in the format dd/MM/yyyy
      */
     public String getDateString() {
-        return date.format(FORMATTER);
+        return Ui.getDateString(date);
     }
 
     /*

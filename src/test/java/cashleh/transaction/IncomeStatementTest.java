@@ -1,11 +1,11 @@
 package cashleh.transaction;
 
 
+import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,10 +14,8 @@ class IncomeStatementTest {
     Income testIncome = new Income("pocket money", 200);
     Income testIncome2 = new Income("salary", 8000, LocalDate.of(2023, 10, 1));
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     String getCurrentDateString() {
-        return LocalDate.now().format(formatter);
+        return Ui.getDateString(LocalDate.now());
     }
 
     @Test
