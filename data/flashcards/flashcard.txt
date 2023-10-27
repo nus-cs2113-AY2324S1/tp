@@ -1,2 +1,13 @@
+<<<<<<< HEAD
+d | a | - | - | -
+dfdf | dfdf | - | - | -
+dfdf | asdfdf | - | - | -
+ddf | dfdf | - | - | -
+hello | bye | - | - | -
+hello | bye | - | - | -
+end program | hello | - | - | -
+hello | world | - | - | -
+=======
 ddd | dfdf | - | - | -
 ddff | a | - | - | -
+>>>>>>> 261fd825cf1feb1bc2f840634aa32b90d2497208
