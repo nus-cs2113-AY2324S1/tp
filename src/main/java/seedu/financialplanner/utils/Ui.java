@@ -7,8 +7,11 @@ import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Ui {
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static Ui ui = null;
     private Scanner Scanner = new Scanner(System.in);
     private Ui() {
@@ -34,6 +37,7 @@ public class Ui {
     }
 
     public void showMessage(String message) {
+        assert !message.isEmpty();
         System.out.println(message);
     }
 
@@ -133,5 +137,42 @@ public class Ui {
 
     public void printDisplayChart(String type, String chart) {
         showMessage("Displaying " + chart + "chart for " + type);
+    }
+
+    public void printOverview(String... args) {
+        String balance = args[0];
+        String income = args[1];
+        String expense = args[2];
+        String budget = args[3];
+        String reminders = args[4];
+
+        showMessage("Here is an overview of your financials:\n" +  "Total balance: " + balance + "\n" +
+                "Highest income: " + income + "\n" + "Highest expense: " + expense + "\n" +
+                "Remaining budget for the month: " + budget + "\n\n" + "Reminders:\n" + reminders);
+    }
+
+    public void printSetBudget() {
+        showMessage("A monthly budget of " + Budget.getInitialBudgetString() + " has been set.");
+    }
+
+    public void printBudgetExceedBalance() {
+        showMessage("Since initial budget exceeds current balance, budget will be reset to current balance.");
+    }
+
+    public void printBudgetError(String errorType) {
+        switch (errorType) {
+        case "delete":
+            showMessage("Budget has not been set yet.");
+            break;
+        case "reset":
+            showMessage("Budget has not been spent yet.");
+            break;
+        case "view":
+            showMessage("There is no existing budget.");
+            break;
+        default:
+            logger.log(Level.SEVERE, "Unreachable default case reached");
+            showMessage("Unknown command");
+        }
     }
 }

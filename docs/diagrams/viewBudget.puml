@@ -1,14 +1,14 @@
 @startuml
 
 mainframe sd ViewBudget
-participant BudgetCommand
-participant Budget
-participant Ui
+participant ":BudgetCommand" as BudgetCommand
+participant "<<class>>\nBudget" as Budget
+participant "<<class>>\nUi" as Ui
 
 alt hasBudget
     BudgetCommand -> Ui: printBudget()
 else else
-    BudgetCommand -> Ui: printErrorMessage()
+    BudgetCommand -> Ui: printBudgetError("view")
 end
 
 hide footbox

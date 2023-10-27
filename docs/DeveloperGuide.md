@@ -27,25 +27,26 @@
   - source: https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
     
 **DG adapted from**
-  - [Addressbook-level3](https://github.com/se-edu/addressbook-level3)
+
+* [Addressbook-level3](https://github.com/se-edu/addressbook-level3)
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
-## Components
-### Storage Component
-API: `Storage.java`
-
-![](images/Storage.png)
-
-- The storage component loads data from the saved text files when the application starts, and saves the data to the
-  text files when the application exits.
-- The storage class uses the static methods in LoadData and SaveData to load and save data respectively.
-- The `load` method in LoadData reads the `data.txt` file and loads any existing Income, Expense and Budget into the application.
-- The `save` method in SaveData saves all Incomes, Expenses and existing Budget into the `data.txt` file.
 
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+### Storage Component
+
+API: `Storage.java`
+
+![](images/Storage.png)
+
+* The storage component loads data from the saved text files when the application starts, and saves the data to the
+  text files when the application exits.
+* The storage class uses the static methods in LoadData and SaveData to load and save data respectively.
+* The `load` method in LoadData reads the `data.txt` file and loads any existing Income, Expense and Budget into the application.
+* The `save` method in SaveData saves all Incomes, Expenses and existing Budget into the `data.txt` file.
 
 ### Visualization Feature 
 
@@ -63,7 +64,7 @@ Output
 `Displaying piechart for expense`
 A message will be shown telling you that the chart is being displayed
 
-![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visOutput.png)
+![](images/vis/visOutput.png)
 
 This feature was implemented with the help of three different classes.
 They are namely: Visualizer, Categorizer, VisCommand (Inherits from abstract Command Class)
@@ -89,21 +90,21 @@ the visualizer displays the specified visualization chart by calling the chartin
 
 ### Class Diagram
 
-![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualisationClass.png)
+![](images/vis/visualisationClass.png)
 
 ### Sequence Diagram 
 
 Overall 
 
-![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualisationSequence.png)
+![](images/vis/visualisationSequence.png)
 
 Categorizer
 
-![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\categorizerSequence.png)
+![](images/vis/categorizerSequence.png)
 
 Visualizer
 
-![](C:\Users\puach\Documents\Y2S1\CS2113\tp\docs\images\vis\visualizerSequence.png)
+![](images/vis/visualizerSequence.png)
 
 ### Add income/expense feature
 
@@ -153,13 +154,14 @@ Given below is the sequence diagram showing the add income/expense mechanism:
 
 
 ### Budget Feature
+
 This feature has 5 functions, `set`, `update`, `delete`, `reset`, and `view`.
 
 ![](images/Budget.png)
 
 The BudgetCommand will execute the appropriate command and print through `Budget.java` and prints any message to the user through `Ui.java`.
 
-**Set and update budget:**
+#### Set and update budget:
 
 Example:
 ```
@@ -171,7 +173,7 @@ The second line updates the budget by adding or subtracting the difference betwe
 initial and current budget. This is done through `updateBudget(500)` method in `Budget.java`. Both functions can be seen 
 in the diagram above
 
-**Delete budget:**
+#### Delete budget:
 
 ![](images/deleteBudget.png)
 
@@ -179,7 +181,7 @@ The budget will be deleted by setting the initial and current budget to 0 throug
 
 Example: `budget delete`
 
-**Reset budget:**
+#### Reset budget:
 
 ![](images/resetBudget.png)
 
@@ -187,7 +189,7 @@ The budget will be reset by resetting the current budget to the initial budget t
 
 Example : `budget reset`
 
-**View budget:**
+#### View budget:
 
 ![](images/viewBudget.png)
 
