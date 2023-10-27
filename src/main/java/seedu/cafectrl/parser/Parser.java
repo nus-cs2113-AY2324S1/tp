@@ -211,7 +211,7 @@ public class Parser {
             }
 
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-            String ingredientQty = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+            String ingredientQty = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
             String ingredientUnit = ingredientMatcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
 
             int qty = Integer.parseInt(ingredientQty);
