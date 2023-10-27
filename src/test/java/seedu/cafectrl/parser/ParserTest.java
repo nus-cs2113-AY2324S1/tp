@@ -241,19 +241,54 @@ class ParserTest {
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
         OrderList orderList = new OrderList();
-        String testDishInputWithOneIngredient = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1000g";
-        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry, orderList);
+        String addDishTestInput = "add name/Christmas Ham price/50.00 ingredient/Ham qty/1000g";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
       
         //Test for correct Command type returned
         assertTrue(outputCommand instanceof AddDishCommand);
+
         //Test for 1 Dish added to Menu
         outputCommand.execute();
-        assertEquals(1, menu.getSize());
+        int expectedMenuSize = 1;
+        assertEquals(expectedMenuSize, menu.getSize());
+
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
-        assertEquals("Christmas Ham", getOutputDish.getName()); // Dish name test
-        assertEquals((float) 50.0, getOutputDish.getPrice()); //Dish price test
-        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString()); //Dish ingredients test
+        String expectedDishName = "Christmas Ham";
+        float expectedDishPrice = (float) 50.0;
+        String expectedIngredientList = "[Ham - 1000g]";
+
+        assertEquals(expectedDishName, getOutputDish.getName());
+        assertEquals(expectedDishPrice, getOutputDish.getPrice());
+        assertEquals(expectedIngredientList, getOutputDish.getIngredients().toString());
+    }
+
+    @Test
+    void parseCommand_DishWithThreeIngredientsForAddDish_DishContainsThreeIngredientAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
+        String addDishTestInput = "add name/Chicken Rice price/2.00 "
+                + "ingredient/rice qty/100g, ingredient/chicken qty/200g, ingredient/water qty/100ml";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
+
+        //Test for 3 Ingredients in the Dish added to Menu
+        outputCommand.execute();
+        Dish actualDish = menu.getDishFromId(0);
+        int actualNumberOfIngredients = actualDish.getIngredients().size();
+        int expectedNumberOfIngredients = 3;
+        assertEquals(expectedNumberOfIngredients, actualNumberOfIngredients);
+
+        //Test for correct parsing of dish arguments
+        Dish getOutputDish = menu.getDishFromId(0);
+        String expectedDishName = "Chicken Rice";
+        float expectedDishPrice = (float) 2.0;
+        String expectedIngredientList = "[rice - 100g, chicken - 200g, water - 100ml]";
+
+        assertEquals(expectedDishName, getOutputDish.getName());
+        assertEquals(expectedDishPrice, getOutputDish.getPrice());
+        assertEquals(expectedIngredientList, getOutputDish.getIngredients().toString());
     }
 
     @Test
@@ -262,13 +297,122 @@ class ParserTest {
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
         OrderList orderList = new OrderList();
+
         //input name/ argument wrongly
-        String testDishInputWithOneIngredient = "add named/Christmas Ham price/50.00 ingredient/Ham qty/1000g";
-        Command outputCommand = Parser.parseCommand(menu, testDishInputWithOneIngredient, ui, pantry, orderList);
+        String addDishTestInput = "add named/Christmas Ham price/50.00 ingredient/Ham qty/1000g";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
+
         //Test for incorrect Command type returned
         assertFalse(outputCommand instanceof AddDishCommand);
+
         //Test for no dish added in menu
         outputCommand.execute();
-        assertEquals(0, menu.getSize());
+        int expectedMenuSize = 0;
+        assertEquals(expectedMenuSize, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_missingArgumentDishInputForAddDish_noDishAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
+
+        //input name/ argument wrongly
+        String addDishTestInput = "add name/Christmas Ham price/50.00 ingredient/Ham";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
+
+        //Test for incorrect Command type returned
+        assertFalse(outputCommand instanceof AddDishCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        int expectedMenuSize = 0;
+        assertEquals(expectedMenuSize, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_invalidQuantityUnitForAddDish_noDishAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
+
+        String addDishTestInput = "add name/Chicken Rice price/2.50 ingredient/rice qty/1 cup";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
+
+        //Test for incorrect Command type returned
+        assertFalse(outputCommand instanceof AddDishCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        int expectedMenuSize = 0;
+        assertEquals(expectedMenuSize, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_negativeDishPriceForAddDish_noDishAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
+
+        String addDishTestInput = "add name/Chicken Rice price/-2.50 ingredient/rice qty/100g";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
+
+        //Test for incorrect Command type returned
+        assertFalse(outputCommand instanceof AddDishCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        int expectedMenuSize = 0;
+        assertEquals(expectedMenuSize, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_negativeIngredientQtyForAddDish_noDishAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
+
+        String addDishTestInput = "add name/Chicken Rice price/2.50 ingredient/rice qty/-100g";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
+
+        //Test for incorrect Command type returned
+        assertFalse(outputCommand instanceof AddDishCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        int expectedMenuSize = 0;
+        assertEquals(expectedMenuSize, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_whitespaceBetweenArgumentsForAddDish_dishAddedToMenu() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        OrderList orderList = new OrderList();
+        String addDishTestInput = "add name/ Christmas Ham price/ 50.00 ingredient/ Ham qty/ 1000g";
+        Command outputCommand = Parser.parseCommand(menu, addDishTestInput, ui, pantry, orderList);
+
+        //Test for correct Command type returned
+        assertTrue(outputCommand instanceof AddDishCommand);
+
+        //Test for 1 Dish added to Menu
+        outputCommand.execute();
+        int expectedMenuSize = 1;
+        assertEquals(expectedMenuSize, menu.getSize());
+
+        //Test for correct parsing of dish arguments
+        Dish getOutputDish = menu.getDishFromId(0);
+        String expectedDishName = "Christmas Ham";
+        float expectedDishPrice = (float) 50.0;
+        String expectedIngredientList = "[Ham - 1000g]";
+
+        assertEquals(expectedDishName, getOutputDish.getName());
+        assertEquals(expectedDishPrice, getOutputDish.getPrice());
+        assertEquals(expectedIngredientList, getOutputDish.getIngredients().toString());
     }
 }
