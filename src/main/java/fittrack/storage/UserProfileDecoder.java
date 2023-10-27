@@ -40,7 +40,8 @@ public class UserProfileDecoder {
 
         if (!heightMatcher.matches() || !weightMatcher.matches()
                 || !caloriesMatcher.matches()) {
-            throw new StorageOperationException("Unable to decode. Wrong format.");
+            throw new StorageOperationException("File containing profile has invalid format. " +
+                    "Please delete the file and run the program again");
         }
 
         final double height = Double.parseDouble(heightMatcher.group("height"));
