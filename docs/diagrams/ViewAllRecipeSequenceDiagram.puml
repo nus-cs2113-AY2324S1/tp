@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+participant ":EssenMakanan" as EssenMakanan LOGIC_COLOR
+participant ":Parser" as Parser LOGIC_COLOR
+participant ":ViewRecipeCommand" as ViewRecipeCommand LOGIC_COLOR
+participant "<<class>>\nUi" as Ui INTERFACE_COLOR
+participant "recipes:RecipeList" as Recipes LOGIC_COLOR
+
+User -> EssenMakanan: input: view r
+activate EssenMakanan
+
+EssenMakanan -> Parser : parseCommand()
+activate Parser
+
+create ViewRecipeCommand
+Parser -> ViewRecipeCommand: ViewRecipeCommand()
+activate ViewRecipeCommand
+
+ViewRecipeCommand --> Parser : command object
+
+Parser -> EssenMakanan: command object
+deactivate Parser
+
+EssenMakanan -> ViewRecipeCommand: executeCommand()
+
+ViewRecipeCommand -> Ui: printAllRecipes(recipes)
+activate Ui
+
+Ui -> Recipes: listRecipeTitles()
+activate Recipes
+
+Recipes --> Ui
+deactivate Recipes
+
+Ui --> ViewRecipeCommand
+
+deactivate Ui
+
+ViewRecipeCommand --> EssenMakanan
+deactivate ViewRecipeCommand
+
+deactivate EssenMakanan
+
+@enduml

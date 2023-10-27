@@ -45,7 +45,54 @@ Given below is a quick overview of main components and how they interact with ea
 ### Help Feature
 The help feature is facilitated by the `HelpCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the user help commands.
 
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type
+
+
+- **Step 2**
+
+  A new `HelpCommand` object will be created and will be sent back to main
+
+
+- **Step 3**
+
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#showCommands()`
+
+
+- **Step 4**
+
+  Finally `Ui#showCommands()` will call `Ui#showRecipeCommands()`, `Ui#showIngredientCommands()`, `Ui#showOtherCommands()` to print all commands for recipe, ingredient and others respectively
+
+
 <img src="images/HelpFunctionSequenceDiagram.png" width="963" />
+
+### Exit feature
+The help feature is facilitated by the `ExitCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the exit command.
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type
+
+
+- **Step 2**
+
+  A new `ExitCommand` object will be created and will be sent back to main
+
+
+- **Step 3**
+
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#showCommands()`
+
+
+- **Step 4**
+
+  Finally `Ui#showCommands()` will print the exit message
+
+
+<img src="images/ExitSequenceDiagram.png" width="963" />
+
 
 ### Add Recipe feature
 
@@ -73,9 +120,70 @@ be executed as follows:
 
 <img src="images/AddNewRecipeSequenceDiagram.png" width="963" />
 
+### View Ingredients feature
+The view ingredient feature is facilitated by the `ViewIngredientCommand` class. Users can input
+"view i" to trigger this command. Users will then be able to see all ingredients stored.
+Example: 
+
+`1. bread: 2pcs`
+
+`2. apple: 500g`
+
+`...`
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
+
+
+- **Step 2**
+  
+  A new `ViewIngredientCommand` object will be created and will be sent back to main 
+
+
+- **Step 3**
+  
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#printAllIngredients()`
+
+
+- **Step 4**
+  
+  Finally `Ui#printAllIngredients()` will call `IngredientList#listIngredients()` to print all the ingredients
+  to standard output
+
+
+<img src="images/ViewAllIngredientSequenceDiagram.png" width="963" />
+
+### View Recipes feature
+The view recipes feature is facilitated by the `ViewRecipeCommand` class. Users can input
+"view r" to trigger this command
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
+
+- **Step 2**
+
+  A new `ViewRecipeCommand` object will be created and will be sent back to main
+
+- **Step 3**
+
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#printAllRecipes()`
+
+- **Step 4**
+
+  Finally, `RecipeList#listRecipeTitles()` will be called to print all the ingredients
+  to standard output
+
+<img src="images/ViewAllRecipeSequenceDiagram.png" width="963" />
+
 ### Add Ingredient feature
 
-The add Ingredient feature is used by a `AddIngredientCommand` class. By calling `executeCommand` on the class, the steps will
+The add Ingredient feature is used by a `AddIngredientCommand` class.
+Multiple ingredients can be added at the same time using the syntax
+`add i/NAME,QUANTITY,UNIT i/INGREDIENT2,.. i/INGREDIENT3...`
+
+By calling `executeCommand` on the class, the steps will
 be executed as follows:
 - **Step1**
 
@@ -98,6 +206,7 @@ be executed as follows:
   `AddIngredientCommand` will call `Ui` class to print out the name of the recently added ingredient.
 
 <img src="images/AddNewIngredientSequenceDiagram.png" width="963" />
+
 
 ### Delete feature
 
