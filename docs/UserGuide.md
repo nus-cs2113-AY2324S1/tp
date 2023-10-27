@@ -21,10 +21,10 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 {Give steps to get started quickly}
 
 1. The app requires Java 11 to be installed into your computer or laptop.
-2. Download the latest `CulinaryCanvas.jar` fom [here](http://link.to/EssenMakanan)
+2. Download the latest `Essenmakanan.jar` from [here](http://link.to/EssenMakanan)
 3. Copy and move the file into the selected folder you want to put the app in.
 4. Open your command line and input the command below to run the app:
-`java -jar CulinaryCanvas.jar`
+`java -jar Essenmakanan.jar`
 
 ## Features 
 
@@ -90,31 +90,62 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 5. Delete a specific recipe - `delete r/RECIPE_ID`
 
-    Delete the recipe from the recipe list.
+   Delete the recipe from the recipe list.
 
    <br>  Example :
    
    * `delete r/1` to delete a recipe at index ‘1’
 
 
-
-### Adding an ingredient: `add`
-Adds a new item to the list of todo items.
-
-Format: `add i/INGREDIENT_NAME|QUANTITY`
-
-* The `INGREDIENT_NAME` can be in a natural language format.
-* (Optional) The `QUANTITY` can be in natural language format.  
-
-Example of usage: 
-
-`add i/appple`
-
-`add i/Apple i/banana`
-
-`add i/apple|5 i/banana`
+---
+### Ingredients
+6. View all ingredients - `view i`
+    
+   List all ingredients available inside the app.
 
 
+7. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
+
+   Adds a new item to the list of todo items. Here are our registered unit in the app:
+    * g (Gram)
+    * kg (Kilogram)
+    * ml (Milliliter)
+    * l (Liter)
+    * tsp (Teaspoon)
+    * tbsp (Tablespoon)
+    * cup (Cup)
+    * pc (Piece)
+   
+    When entering your unit, a user is required to use any one of the units above.
+    
+    <br>  Example :
+
+    * `add i/bread,2,pc` to add `2 pieces of bread` into the list
+    * `add i/cooking oil,5,l` to add `5 liters of cooking oil` into the list
+   
+
+8. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
+
+   Edit an ingredient to change the name, quantity or unit. A user is able to edit more than one property of an 
+   ingredient.
+
+   <br>  Example :
+
+    * `edit i/bread n/toast` to change `bread` to `toast`
+    * `edit i/egg q/10 u/kg` to change the quantity to `10` and the unit to `kg`
+
+
+9. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
+
+   Delete an ingredient based on the selected index in the list or the ingredient's name.
+
+   <br>  Example :
+
+    * `delete i/2` to delete the `second` ingredient on the list
+    * `delete i/egg` to delete `egg` ingredient
+
+
+---
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
