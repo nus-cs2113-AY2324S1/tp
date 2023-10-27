@@ -24,6 +24,7 @@ public class CafeCtrl {
         ui = new Ui();
         menu = new Menu();
         pantry = new Pantry(ui);
+        orderList = new OrderList();
     }
 
     private void setup() {

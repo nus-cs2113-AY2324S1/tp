@@ -139,4 +139,46 @@ public class Ui {
                 , "Current " + ingredientName + ": " + currentQuantity + unit
                 , "Needed " + ingredientName + ": " + neededIngredient);
     }
+
+    /**
+     * Shows the top portion of the menu
+     */
+    public void showMenuTop() {
+        showToUser(Messages.MENU_END_CAP, Messages.LIST_MENU_MESSAGE,
+                Messages.MENU_CORNER, Messages.MENU_TITLE, Messages.MENU_CORNER);
+    }
+
+    /**
+     * Shows the bottom portion of the menu
+     */
+    public void showMenuBottom() {
+        showToUser(Messages.MENU_END_CAP);
+    }
+
+    /**
+     * Shows the message for empty menu
+     */
+    public void showEmptyMenu() {
+        showToUser(Messages.MENU_EMPTY_MESSAGE);
+    }
+
+    /**
+     * Shows the dishes in the menu, formatted in the proper format
+     *
+     * @param indexNum The index number of the dish in the menu print
+     * @param dishName The name of the dish in the menu
+     * @param dishPrice The price of the dish in the menu
+     */
+    public void showMenuDish(String indexNum, String dishName, String dishPrice) {
+        formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
+    }
+
+    /**
+     * Shows the total cost in the order list, formatted in the proper format
+     *
+     * @param dollarCost The price of the orders
+     */
+    public void showTotalCost(String dollarCost) {
+        showToUser("Total orderList cost: $" + dollarCost);
+    }
 }
