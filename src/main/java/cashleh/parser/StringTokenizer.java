@@ -30,9 +30,9 @@ public class StringTokenizer {
         for (int i = 0; i < prefixes.length; i++) {
             if (prefixes[i].contains(":optional")) {
                 prefixes[i] = prefixes[i].replace(":optional", "");
-                assert(!prefixes[i].contains(":optional"));
                 continue;
             }
+            assert(!prefixes[i].contains(":optional"));
             if (!input.contains(prefixes[i])) {
                 throw new CashLehParsingException("Aiyoh! Your input blur like sotong... " +
                         "You never enter " + prefixes[i] + " leh!");
