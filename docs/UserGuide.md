@@ -49,6 +49,34 @@ activate /help to list all the commands
 * Ver 1.0 will only list commands. Future versions will include auto-filling and scrolling 
 (multiple pages of the help menu)
 
+### Adding questions and their answers to bank `short`
+Adds a new short question and its answer to the question and answer bank along with the assigned module and
+difficulty level.
+
+Format: `short [question]/[answer]/[module]/[difficulty]`
+
+Examples:
+* Command: add What is the value of Pi to 2 decimal places?/3.14/math/easy <br>
+Output: Question-Answer set added to bank!
+* Command: add What fish is Nemo based off?/a Clownfish/trivia/easy <br>
+Output: Question-Answer set added to bank!
+
+Notes:
+* If either the question or answer is left blank, the app will prompt you to re-enter the question-answer set, 
+the app does not support blank questions/answers
+
+### List Questions `list`
+List all the questions from the question bank from the storage
+
+Format: `list`
+
+Examples:
+* Command: list <br>
+Output:<br>
+1: [S][] 2 / 4 | num | EASY <br>
+2: [S][] hi / hihi | word | EASY <br>
+3: [S][] 6 / 12 | num | EASY <br>
+
 
 ## FAQ
 
