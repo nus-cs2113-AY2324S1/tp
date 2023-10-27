@@ -154,7 +154,7 @@ public class Parser {
             return new IncorrectCommand(Messages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
         }
     }
-
+    //@@author DextheChik3n
     /**
      * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
      * @param arguments
@@ -226,7 +226,7 @@ public class Parser {
 
         return ingredients;
     }
-
+    //@@author NaychiMin
     /**
     * Parses arguments in the context of the ListIngredient command.
     * @param menu menu of the current session
@@ -250,6 +250,7 @@ public class Parser {
         return new ListIngredientCommand(dishIndex, menu, ui);
     }
 
+    //@@author
     /**
      * Parses arguments in the context of the Delete command.
      *
