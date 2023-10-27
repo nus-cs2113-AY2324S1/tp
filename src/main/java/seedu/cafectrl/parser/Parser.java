@@ -35,22 +35,17 @@ public class Parser {
     private static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
 
     // Command Argument Patterns
-    private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
-            + "price/(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+) "
-            + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
-            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
     private static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
     private static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    private static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
-            + "qty/(?<ingredientQty>[A-Za-z0-9\\s]+)\\s*(?<ingredientUnit>g|ml)";
+    private static final String INGREDIENT_ARGUMENT_STRING = "\\s*ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) qty/\\s*(?<ingredientQty>[0-9]+)\\s*(?<ingredientUnit>g|ml)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
     private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
-    private static final String INGREDIENT_DIVIDER_REGEX = ", ";
-    private static final String INGREDIENT_DIVIDER_STRING = ",";
+    private static final String INGREDIENT_DIVIDER_REGEX = ",";
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     private static final int PRICE_MATCHER_GROUP_NUM = 2;
     private static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
@@ -169,7 +164,7 @@ public class Parser {
             }
 
             // To retrieve specific arguments from arguments
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL);
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
             float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
@@ -192,38 +187,37 @@ public class Parser {
      */
     private static ArrayList<Ingredient> ingredientParsing(String ingredientsListString)
             throws IllegalArgumentException {
-        String[] ingredientListInputText = {ingredientsListString};
+        String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
 
         //check if there is more than 1 ingredient
-        if (ingredientsListString.contains(INGREDIENT_DIVIDER_STRING)) {
+        if (ingredientsListString.contains(INGREDIENT_DIVIDER_REGEX)) {
             //split the whole string of ingredients into separate individual ingredients
-            ingredientListInputText = ingredientsListString.split(INGREDIENT_DIVIDER_REGEX);
+            inputIngredientList = ingredientsListString.split(INGREDIENT_DIVIDER_REGEX);
         }
 
         //Parsing each ingredient
-        for (String inputIngredientText: ingredientListInputText) {
+        for (String inputIngredient: inputIngredientList) {
             final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
-            Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredientText);
+            Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredient);
 
             if (!ingredientMatcher.matches()) {
                 throw new IllegalArgumentException();
             }
 
-            String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-            String ingredientQty = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
+            String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+            String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
             String ingredientUnit = ingredientMatcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
 
-            int qty = Integer.parseInt(ingredientQty);
+            int ingredientQty = Integer.parseInt(ingredientQtyString);
 
-            Ingredient ingredient = new Ingredient(ingredientName, qty, ingredientUnit);
+            Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
 
             ingredients.add(ingredient);
         }
 
         return ingredients;
     }
-
 
     /**
     * Parses arguments in the context of the ListIngredient command.
