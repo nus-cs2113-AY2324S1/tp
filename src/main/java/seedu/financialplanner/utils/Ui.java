@@ -7,8 +7,11 @@ import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Ui {
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static Ui ui = null;
     private Scanner Scanner = new Scanner(System.in);
     private Ui() {
@@ -168,6 +171,7 @@ public class Ui {
             showMessage("There is no existing budget.");
             break;
         default:
+            logger.log(Level.SEVERE, "Unreachable default case reached");
             showMessage("Unknown command");
         }
     }

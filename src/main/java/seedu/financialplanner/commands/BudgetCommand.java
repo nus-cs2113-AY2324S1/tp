@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import java.util.ArrayList;
 
 public class BudgetCommand extends Command {
-    private static Logger logger = Logger.getLogger("Financial Planner Logger");
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final Ui ui = Ui.getInstance();
     private double budget;
     private String command;
