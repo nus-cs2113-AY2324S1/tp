@@ -113,6 +113,7 @@ public class Parser {
         String expenseAmtString = inputDetails.get("/amt");
         String expenseDateString = inputDetails.get("/date");
         String expenseCategoryString = inputDetails.get("/cat");
+        assert expenseName != null;
 
         if (expenseName.isEmpty()) {
             throw new CashLehParsingException(
@@ -155,6 +156,7 @@ public class Parser {
         String incomeAmtString = inputDetails.get("/amt");
         String incomeDateString = inputDetails.get("/date");
         String incomeCategoryString = inputDetails.get("/cat");
+        assert incomeName != null;
 
         if (incomeName.isEmpty()) {
             throw new CashLehParsingException(

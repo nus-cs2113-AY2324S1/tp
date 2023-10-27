@@ -32,6 +32,7 @@ public class StringTokenizer {
                 prefixes[i] = prefixes[i].replace(":optional", "");
                 continue;
             }
+            assert(!prefixes[i].contains(":optional"));
             if (!input.contains(prefixes[i])) {
                 throw new CashLehParsingException("Aiyoh! Your input blur like sotong... " +
                         "You never enter " + prefixes[i] + " leh!");
@@ -80,7 +81,9 @@ public class StringTokenizer {
 
         // Add dummy prefixes to represent start and end
         prefixes.add(0, new PrefixWithPosition("", 0));
+        assert(prefixes.get(0).getPosition() == 0);
         prefixes.add(new PrefixWithPosition("", inputString.length()));
+        assert(prefixes.get(prefixes.size() - 1).getPosition() == inputString.length());
 
         HashMap<String, String> tokenizedMap = new HashMap<>();
         for (int i = 0; i < prefixes.size() - 1; i++) {

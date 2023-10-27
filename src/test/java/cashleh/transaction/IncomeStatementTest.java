@@ -1,6 +1,7 @@
 package cashleh.transaction;
 
 
+import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,10 @@ class IncomeStatementTest {
     IncomeStatement testStatement = new IncomeStatement();
     Income testIncome = new Income("pocket money", 200);
     Income testIncome2 = new Income("salary", 8000, LocalDate.of(2023, 10, 1));
+
+    String getCurrentDateString() {
+        return Ui.getDateString(LocalDate.now());
+    }
 
     @Test
     void getNumberOfEntries() {
@@ -41,14 +46,14 @@ class IncomeStatementTest {
         testStatement.addIncome(testIncome);
         testStatement.addIncome(testIncome);
         System.out.println(testStatement);
-        String expectedString = "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")\n"
-                + "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")";
+        String expectedString = "Income: pocket money (Amount: 200.0, Date: " + getCurrentDateString() + ")\n"
+                + "Income: pocket money (Amount: 200.0, Date: " + getCurrentDateString() + ")";
         assertEquals(testStatement.toString(), expectedString);
         testStatement.addIncome(testIncome2);
         System.out.println(testStatement);
-        String expectedString2 = "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")\n" +
-                "Income: pocket money (Amount: 200.0, Date: " + LocalDate.now() + ")\n" +
-                "Income: salary (Amount: 8000.0, Date: 2023-10-01)";
+        String expectedString2 = "Income: pocket money (Amount: 200.0, Date: " + getCurrentDateString() + ")\n" +
+                "Income: pocket money (Amount: 200.0, Date: " + getCurrentDateString() + ")\n" +
+                "Income: salary (Amount: 8000.0, Date: 01/10/2023)";
         assertEquals(testStatement.toString(), expectedString2);
     }
 }
