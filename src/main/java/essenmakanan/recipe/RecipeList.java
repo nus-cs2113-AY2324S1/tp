@@ -16,15 +16,15 @@ public class RecipeList {
         return recipes;
     }
 
+    public void addRecipe(String title, String[] steps) {
+        recipes.add(new Recipe(title, steps));
+    }
+
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
 
         assert getRecipeByIndex(recipes.size() - 1).getTitle().equals(recipe.getTitle())
                 : "Recipe is not successfully added into the list.";
-    }
-
-    public void addRecipe(String title, String[] steps) {
-        recipes.add(new Recipe(title, steps));
     }
 
     public void deleteRecipe(int index) {
