@@ -29,7 +29,7 @@ public class OverviewCommand extends Command {
         String highestExpense = getHighestExpense();
         String budget = getBudgetDesc();
         String reminders = getReminders();
-        
+
         Ui.getInstance().printOverview(balance, highestIncome, highestExpense, budget, reminders);
 
         //todo: goal disparity

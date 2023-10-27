@@ -1,9 +1,9 @@
 @startuml
 
 mainframe sd ResetBudget
-participant BudgetCommand
-participant Budget
-participant Ui
+participant ":BudgetCommand" as BudgetCommand
+participant "<<class>>\nBudget" as Budget
+participant "<<class>>\nUi" as Ui
 
 alt spentBudget
     opt initialBudgetExceedBalance

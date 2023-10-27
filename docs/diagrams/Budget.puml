@@ -1,12 +1,11 @@
 @startuml
 
-participant BudgetCommand
-participant Budget
-participant Ui
+participant ":BudgetCommand" as BudgetCommand
+participant "<<class>>\nBudget" as Budget
+participant "<<class>>\nUi" as Ui
 
 -> BudgetCommand: execute()
 BudgetCommand -> Ui: getInstance()
-return ui
 
 alt set
     BudgetCommand -> Budget: setBudget(budget)
