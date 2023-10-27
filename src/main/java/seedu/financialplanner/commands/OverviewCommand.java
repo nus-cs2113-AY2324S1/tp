@@ -24,8 +24,13 @@ public class OverviewCommand extends Command {
 
     @Override
     public void execute() throws Exception {
-        Ui.getInstance().printOverview(getBalance(), getHighestIncome(), getHighestExpense(),
-                getBudgetDesc(), getReminders());
+        String balance = getBalance();
+        String highestIncome = getHighestIncome();
+        String highestExpense = getHighestExpense();
+        String budget = getBudgetDesc();
+        String reminders = getReminders();
+        
+        Ui.getInstance().printOverview(balance, highestIncome, highestExpense, budget, reminders);
 
         //todo: goal disparity
     }
