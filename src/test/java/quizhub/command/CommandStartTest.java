@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class StartTest {
+public class CommandStartTest {
 
     private QuestionList questionList;
     private UiMock mockUi;
@@ -143,5 +143,4 @@ public class StartTest {
             questions.clear();
         }
     }
-
 }
