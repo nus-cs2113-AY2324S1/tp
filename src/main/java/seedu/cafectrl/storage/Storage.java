@@ -1,5 +1,8 @@
 package seedu.cafectrl.storage;
 
+import seedu.cafectrl.ui.Messages;
+import seedu.cafectrl.ui.Ui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +15,14 @@ import java.util.Scanner;
  * Handles reading from and storing data to the text file.
  */
 public abstract class Storage {
+    String filePath;
+    Ui ui;
+
+    public Storage (String filePath, Ui ui) {
+        this.filePath = filePath;
+        this.ui  = new Ui();
+    }
+
     /**
      * Reads the text file from the specified file path and stores each line in an ArrayList.
      *
@@ -44,7 +55,7 @@ public abstract class Storage {
      * @return ArrayList of respective type based on the storage functionality
      * @throws FileNotFoundException if the file is not found in the specified file path in main
      */
-    public abstract ArrayList load() throws FileNotFoundException;
+    public abstract ArrayList loadData() throws FileNotFoundException;
 
     /**
      * Handles the parsing of text lines into intended objects to be added to the list
@@ -68,12 +79,12 @@ public abstract class Storage {
 
         if (!Files.exists(dataFolderPath)) {
             folder.mkdir();
-            //todo: display the show no folder found message, and pass the user working directory
+            ui.showToUser(Messages.DATA_FOLDER_NOT_FOUND_MESSAGE, userWorkingDirectory, System.lineSeparator());
         }
 
         if (!Files.exists(dataFilePath)) {
             textFile.createNewFile();
-            //todo: display the show no file found message, and pass the dataFolderPath
+            ui.showToUser(Messages.DATA_FILE_NOT_FOUND_MESSAGE, dataFolderPath.toString());
         }
 
         return dataFilePath.toString();
