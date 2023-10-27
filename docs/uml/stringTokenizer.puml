@@ -12,6 +12,7 @@ else all prefixes present
 
     StringTokenizer -> StringTokenizer: getPrefixIndices()
         loop for each prefix
+            create PrefixWithPosition
             StringTokenizer -> PrefixWithPosition: PrefixWithPosition()
             StringTokenizer <- PrefixWithPosition: add to list
         end
@@ -23,7 +24,8 @@ else all prefixes present
             StringTokenizer <- PrefixWithPosition: add to hashmap
         end
 
-    [<- StringTokenizer:
+    destroy PrefixWithPosition
+    [<-- StringTokenizer: hashmap
 end
 
 @enduml

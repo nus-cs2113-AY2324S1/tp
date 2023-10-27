@@ -32,7 +32,7 @@ import cashleh.transaction.IncomeStatement;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Optional;
+import java.util.OptionalDouble;
 
 public class Parser {
     private static final String ADD_INCOME = "addIncome";
@@ -242,11 +242,11 @@ public class Parser {
                     "(description, amount, date, or category)!");
         }
 
-        Optional<Double> parsedAmount = Optional.empty();
+        OptionalDouble parsedAmount = OptionalDouble.empty();
         if ((amountString != null) && !amountString.isEmpty()) {
             try {
                 double amount = Double.parseDouble(amountString);
-                parsedAmount = Optional.of(amount);
+                parsedAmount = OptionalDouble.of(amount);
             } catch (NumberFormatException e) {
                 throw new CashLehParsingException("Please enter a valid expense amount!");
             }

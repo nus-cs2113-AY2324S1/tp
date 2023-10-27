@@ -6,7 +6,7 @@ import cashleh.Ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 /**
  * Represents an Income Statement in the CashLeh application.
@@ -75,15 +75,24 @@ public class IncomeStatement {
                 mapToDouble(Income::getAmount).sum();
     }
 
+    /**
+     * Prints the income statement, displaying details of all income transactions.
+     * This method generates a formatted income statement based on the transactions in the incomeStatement list.
+     * It creates a textual representation of each income transaction, including its type (Income), date, description,
+     * amount, and category (if available), and then uses the Ui.printStatement method to display the statement.
+     */
     public void printIncomes() {
         int listSize = incomeStatement.size();
-        String[] texts = new String[listSize + 1];
-        texts[0] = "The current sum of all your incomes amounts to: " + getTotalIncomeAmount();
-        for (int i = 1; i <= listSize; i++) {
-            Income currentIncome = incomeStatement.get(i - 1);
-            texts[i] = "\t" + i + ". " + currentIncome.toString();
+        String[] texts = new String[listSize];
+        for (int i = 0; i < listSize; i++) {
+            Income currentIncome = incomeStatement.get(i);
+            String type = "Income, ";
+            String date = currentIncome.getDate().toString();
+            String amt = String.valueOf(currentIncome.getAmount());
+            String cat = currentIncome.getCategory() == null ? "-" : currentIncome.getCategory().toString();
+            texts[i] = type + date + ", " + currentIncome.getDescription() + ", " + amt + ", " + cat;
         }
-        Ui.printMultipleText(texts);
+        Ui.printStatement("Income Statement", texts);
     }
 
     /**
@@ -94,7 +103,7 @@ public class IncomeStatement {
      * @param category The category to filter transactions by. Set to null if no category is provided by user
      * @throws CashLehMissingTransactionException if no matching transactions are found.
      */
-    public void findIncome(String description, Optional amount, LocalDate date, Categories category)
+    public void findIncome(String description, OptionalDouble amount, LocalDate date, Categories category)
             throws CashLehMissingTransactionException {
         ArrayList<String> matchingIncomes = new ArrayList<>();
         boolean isMatch = false;
@@ -103,7 +112,7 @@ public class IncomeStatement {
             message.append("<description>: ").append(description).append(" ||");
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.get()).append(" ||");
+            message.append("<amount>: ").append(amount.getAsDouble()).append(" ||");
         }
         if (date != null) {
             message.append("<date>: ").append(date).append(" ||");
@@ -115,7 +124,7 @@ public class IncomeStatement {
         for (Income income : incomeStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || income.getDescription().equals(description);
-            boolean amountMatch = (amount.isEmpty()) || (income.getAmount() == (double)amount.get());
+            boolean amountMatch = (amount.isEmpty()) || (income.getAmount() == amount.getAsDouble());
             boolean dateMatch = (date == null) || (income.getDate().equals(date));
             boolean categoryMatch = (category == null) || (income.getCategory().equals(category));
             if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
