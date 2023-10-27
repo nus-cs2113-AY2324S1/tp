@@ -19,9 +19,11 @@ import java.util.logging.Logger;
 public class Stock implements Serializable {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String symbol;
-    private String market;
+    private String exchange;
     private String stockName;
     private String price;
+    private String dayHigh;
+    private String dayLow;
 
     public Stock(String symbol) throws FinancialPlannerException {
         this.symbol = symbol;
@@ -69,7 +71,6 @@ public class Stock implements Serializable {
             }
 
             assert stock.get("2. name") != null;
-            market = (String) stock.get("4. region");
             return (String) stock.get("2. name");
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -99,5 +100,29 @@ public class Stock implements Serializable {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
+
+    public String getDayHigh() {
+        return dayHigh;
+    }
+
+    public void setDayHigh(String dayHigh) {
+        this.dayHigh = dayHigh;
+    }
+
+    public String getDayLow() {
+        return dayLow;
+    }
+
+    public void setDayLow(String dayLow) {
+        this.dayLow = dayLow;
     }
 }
