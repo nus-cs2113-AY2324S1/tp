@@ -24,7 +24,7 @@ public class Categorizer {
             logger.log(Level.INFO, "categorizing income");
             return sortIncome(cashflowList);
         default:
-            throw new FinancialPlannerException("Type not found");
+            throw new FinancialPlannerException(type + " Type not found");
         }
     }
 

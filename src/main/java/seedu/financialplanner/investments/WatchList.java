@@ -1,6 +1,5 @@
 package seedu.financialplanner.investments;
 
-import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -87,16 +86,37 @@ public class WatchList {
             throw new RuntimeException(e);
         }
         JSONArray ja = (JSONArray) obj;
+        if (ja.size() != stocks.size()) {
+            throw new FinancialPlannerException("Error getting API info!");
+        }
         int i = 0;
         for (Object jo : ja) {
             JSONObject stock = (JSONObject) jo;
-            String price = StringUtils.rightPad(stock.get("price").toString(), 10);
-            stocks.get(i).setPrice(price);
+
+            Stock stockLocal = stocks.get(i);
+
+            // Check if the JSONObject from response matches the stock in the stocks list using symbol
+            if (!stockLocal.getSymbol().equals(stock.get("symbol"))) {
+                i += 1;
+                logger.log(Level.WARNING, "Stocks matching error!");
+                continue;
+            }
+
+            extractStockInfoFromJSON(stock, stockLocal);
             i += 1;
         }
     }
 
     public String addStock(String stockCode) throws FinancialPlannerException {
+        if (stocks.size() >= 5) {
+            throw new FinancialPlannerException("Watchlist is full (max 5). Delete a stock to add a new one");
+        }
+        for (Stock stock: stocks) {
+            if (stockCode.equals(stock.getSymbol().toUpperCase())) {
+                throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
+            }
+        }
+
         Stock newStock = null;
         newStock = new Stock(stockCode);
 
@@ -117,6 +137,25 @@ public class WatchList {
         stocks.remove(toBeRemoved);
         return toBeRemoved.getStockName();
     }
+
+    public void extractStockInfoFromJSON(JSONObject stock, Stock stockLocal) {
+        String price = stock.get("price").toString();
+        assert price != null;
+        stockLocal.setPrice(price);
+
+        String exchange = stock.get("exchange").toString();
+        assert exchange != null;
+        stockLocal.setExchange(exchange);
+
+        String dayHigh = stock.get("dayHigh").toString();
+        assert dayHigh != null;
+        stockLocal.setDayHigh(dayHigh);
+
+        String dayLow = stock.get("dayLow").toString();
+        assert dayLow != null;
+        stockLocal.setDayLow(dayLow);
+    }
+
     public int size() {
         return stocks.size();
     }
@@ -132,6 +171,4 @@ public class WatchList {
     public void setStocks(ArrayList<Stock> stocks) {
         this.stocks = stocks;
     }
-
-
 }

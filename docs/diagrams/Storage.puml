@@ -10,8 +10,6 @@ Class "{abstract}\nSaveData" as SaveData
 Class CashflowList
 Class Budget
 Class Cashflow
-Class Expense
-Class Income
 Class "<<enumeration>>\nExpenseType" as ExpenseType
 Class "<<enumeration>>\nIncomeType" as IncomeType
 Class Ui
@@ -22,18 +20,15 @@ FinancialPlanner --> Storage
 
 Storage .right.-> LoadData: uses >
 Storage .left.> SaveData: uses >
-SaveData ..> CashflowList
+SaveData --> CashflowList
 SaveData ..> Budget
-LoadData ..> CashflowList
+SaveData ..> Cashflow
+
+LoadData --> CashflowList
 LoadData ..> Budget
-LoadData ..> ExpenseType
-LoadData ..> IncomeType
-SaveData ..> Expense
-SaveData ..> Income
-LoadData ..> Expense
-LoadData ..> Income
+LoadData --> ExpenseType
+LoadData --> IncomeType
+LoadData --> Cashflow
 LoadData -right-> Ui: prints message >
-Expense -down-|> Cashflow
-Income -down-|> Cashflow
 
 @enduml

@@ -7,9 +7,16 @@ import seedu.financialplanner.list.Budget;
 import seedu.financialplanner.list.Cashflow;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Ui {
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static Ui ui = null;
+    private final String RED = "\u001B[31m";
+    private final String GREEN = "\u001B[32m";
+    private final String RESET = "\u001B[0m";
+    private final String YELLOW = "\u001B[33m";
     private Scanner Scanner = new Scanner(System.in);
     private Ui() {
     }
@@ -34,6 +41,7 @@ public class Ui {
     }
 
     public void showMessage(String message) {
+        assert !message.isEmpty();
         System.out.println(message);
     }
 
@@ -52,18 +60,27 @@ public class Ui {
     public void printWatchListHeader() {
         System.out.print("Symbol");
         System.out.print("    ");
-        System.out.print("Price");
+        System.out.print("Market");
+        System.out.print("    ");
+        System.out.print(YELLOW + "Price" + RESET);
         System.out.print("     ");
-        System.out.print("Company Name");
+        System.out.print(GREEN + "Daily High" + RESET);
+        System.out.print("     ");
+        System.out.print(RED + "Daily Low" + RESET);
+        System.out.print("     ");
+        System.out.print("EquityName");
         System.out.println();
     }
 
     public void printStocksInfo(WatchList watchList) {
         for (Stock stock: watchList.getStocks()) {
             String symbol = StringUtils.rightPad(stock.getSymbol(), 10);
-            String price = StringUtils.rightPad(stock.getPrice(), 10);
-            String name = StringUtils.rightPad((String) stock.getStockName(), 10);
-            System.out.println(symbol + price + name);
+            String market = StringUtils.rightPad(stock.getExchange(), 10);
+            String price = YELLOW + StringUtils.rightPad(stock.getPrice(), 10) + RESET;
+            String dayHigh = GREEN + StringUtils.rightPad(stock.getDayHigh(), 15) + RESET;
+            String dayLow = RED + StringUtils.rightPad(stock.getDayLow(), 14) + RESET;
+            String name = StringUtils.rightPad(stock.getStockName(), 10);
+            System.out.println(symbol + market + price + dayHigh + dayLow + name);
         }
     }
 
@@ -129,5 +146,46 @@ public class Ui {
 
     public void printResetBudget() {
         showMessage("Budget has been reset to " + Budget.getInitialBudgetString() + ".");
+    }
+
+    public void printDisplayChart(String type, String chart) {
+        showMessage("Displaying " + chart + "chart for " + type);
+    }
+
+    public void printOverview(String... args) {
+        String balance = args[0];
+        String income = args[1];
+        String expense = args[2];
+        String budget = args[3];
+        String reminders = args[4];
+
+        showMessage("Here is an overview of your financials:\n" +  "Total balance: " + balance + "\n" +
+                "Highest income: " + income + "\n" + "Highest expense: " + expense + "\n" +
+                "Remaining budget for the month: " + budget + "\n\n" + "Reminders:\n" + reminders);
+    }
+
+    public void printSetBudget() {
+        showMessage("A monthly budget of " + Budget.getInitialBudgetString() + " has been set.");
+    }
+
+    public void printBudgetExceedBalance() {
+        showMessage("Since initial budget exceeds current balance, budget will be reset to current balance.");
+    }
+
+    public void printBudgetError(String errorType) {
+        switch (errorType) {
+        case "delete":
+            showMessage("Budget has not been set yet.");
+            break;
+        case "reset":
+            showMessage("Budget has not been spent yet.");
+            break;
+        case "view":
+            showMessage("There is no existing budget.");
+            break;
+        default:
+            logger.log(Level.SEVERE, "Unreachable default case reached");
+            showMessage("Unknown command");
+        }
     }
 }

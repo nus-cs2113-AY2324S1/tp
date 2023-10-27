@@ -1,15 +1,15 @@
 @startuml
 
 mainframe sd DeleteBudget
-participant BudgetCommand
-participant Budget
-participant Ui
+participant ":BudgetCommand" as BudgetCommand
+participant "<<class>>\nBudget" as Budget
+participant "<<class>>\nUi" as Ui
 
 alt hasBudget
     BudgetCommand -> Budget: deleteBudget()
     BudgetCommand -> Ui: printDeleteBudget()
 else else
-    BudgetCommand -> Ui: printErrorMessage()
+    BudgetCommand -> Ui: printBudgetError("delete")
 end
 
 hide footbox

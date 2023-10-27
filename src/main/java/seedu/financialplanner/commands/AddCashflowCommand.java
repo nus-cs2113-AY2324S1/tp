@@ -62,7 +62,7 @@ public class AddCashflowCommand extends Command {
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for ExpenseType");
                 throw new IllegalArgumentException("Entry must be one of the following: " +
-                        "dining, entertainment, shopping, travel, insurance, others");
+                        "dining, entertainment, shopping, travel, insurance, necessities, others");
             }
         } else if (category.equals(CashflowCategory.INCOME)) {
             try {

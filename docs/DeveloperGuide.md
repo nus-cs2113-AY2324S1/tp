@@ -1,35 +1,110 @@
 # Developer Guide
 
 ## Acknowledgements
-- **round() method in Cashflow.java**
+
+**Xchart (A Simple Charting Library for Java)**
+- author: KNOWN
+- source: https://knowm.org/open-source/xchart/
+
+**JSON Simple (simple Java toolkit for encoding and decoding JSON)**
+- author: Yidong Fang (Google Code)
+- source: https://code.google.com/archive/p/json-simple/
+
+**Apache Common Langs 3**
+- author: Apache Commons
+- source: https://commons.apache.org/proper/commons-lang/
+
+**Alpha Vantage Stock Market API**
+- author: Alpha Vantage
+- source: https://www.alphavantage.co/
+
+**round() method in Cashflow.java**
   - author: mhadidg
   - source: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
-- **capitalize() method in Cashflow.java**
+
+**capitalize() method in Cashflow.java**
   - author: Nick Bolton
   - source: https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
     
-- **DG adapted from**
-  - [Addressbook-level3](https://github.com/se-edu/addressbook-level3)
-  
-  
+**DG adapted from**
+
+* [Addressbook-level3](https://github.com/se-edu/addressbook-level3)
+
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
-## Components
-### Storage Component
-API: `Storage.java`
-
-![](images/Storage.png)
-
-- The storage component loads data from the saved text files when the application starts, and saves the data to the
-  text files when the application exits.
-- The storage class uses the static methods in LoadData and SaveData to load and save data respectively.
-- The `load` method in LoadData reads the `data.txt` file and loads any existing Income, Expense and Budget into the application.
-- The `save` method in SaveData saves all Incomes, Expenses and existing Budget into the `data.txt` file.
 
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Storage Component
+
+API: `Storage.java`
+
+![](images/Storage.png)
+
+* The storage component loads data from the saved text files when the application starts, and saves the data to the
+  text files when the application exits.
+* The storage class uses the static methods in LoadData and SaveData to load and save data respectively.
+* The `load` method in LoadData reads the `data.txt` file and loads any existing Income, Expense and Budget into the application.
+* The `save` method in SaveData saves all Incomes, Expenses and existing Budget into the `data.txt` file.
+
+### Visualization Feature 
+
+This feature is implemented with the help of [XChart](https://knowm.org/open-source/xchart/), a simple charting library for Java by Knowm.
+
+By typing in the vis command with the appropriate arguments (/s and /t), users will be able to visualize their income or expense 
+using visualization tools (Piechart, Bar Chart)
+
+Demo: 
+
+`vis /t expense /c pie`
+
+Output
+
+`Displaying piechart for expense`
+A message will be shown telling you that the chart is being displayed
+
+![](images/vis/visOutput.png)
+
+This feature was implemented with the help of three different classes.
+They are namely: Visualizer, Categorizer, VisCommand (Inherits from abstract Command Class)
+
+VisCommand's Role: 
+1) Read the parameters of the vis command entered by the user
+- `/t` Reads the type of cashflow that the user wants to visualize (income/expense)
+- `/c` Reads the type of visualization tools the user wants (piechart/barchart)
+
+2) Calls the Cateorgizer to sort cashflow (Income/Expense) according to type
+
+3) Calls the Visualizer to display the chart to the user
+
+Categorizer's Role: 
+
+According to the cashflow type (Income/Expense) arugment passed in, the Categorizer sorts the 
+specified cashflow entry according to type using a Hashmap which is returned and used by the Visualizer
+
+Visualizer's Role: 
+
+According to the chart type (Pie/Bar) argument and the Hashmap obtained from the categorizer passed in, 
+the visualizer displays the specified visualization chart by calling the charting library Xchart.
+
+### Class Diagram
+
+![](images/vis/visualisationClass.png)
+
+### Sequence Diagram 
+
+Overall 
+
+![](images/vis/visualisationSequence.png)
+
+Categorizer
+
+![](images/vis/categorizerSequence.png)
+
+Visualizer
+
+![](images/vis/visualizerSequence.png)
 
 ### Add income/expense feature
 
@@ -79,13 +154,14 @@ Given below is the sequence diagram showing the add income/expense mechanism:
 
 
 ### Budget Feature
+
 This feature has 5 functions, `set`, `update`, `delete`, `reset`, and `view`.
 
 ![](images/Budget.png)
 
 The BudgetCommand will execute the appropriate command and print through `Budget.java` and prints any message to the user through `Ui.java`.
 
-**Set and update budget:**
+#### Set and update budget:
 
 Example:
 ```
@@ -97,7 +173,7 @@ The second line updates the budget by adding or subtracting the difference betwe
 initial and current budget. This is done through `updateBudget(500)` method in `Budget.java`. Both functions can be seen 
 in the diagram above
 
-**Delete budget:**
+#### Delete budget:
 
 ![](images/deleteBudget.png)
 
@@ -105,7 +181,7 @@ The budget will be deleted by setting the initial and current budget to 0 throug
 
 Example: `budget delete`
 
-**Reset budget:**
+#### Reset budget:
 
 ![](images/resetBudget.png)
 
@@ -113,7 +189,7 @@ The budget will be reset by resetting the current budget to the initial budget t
 
 Example : `budget reset`
 
-**View budget:**
+#### View budget:
 
 ![](images/viewBudget.png)
 

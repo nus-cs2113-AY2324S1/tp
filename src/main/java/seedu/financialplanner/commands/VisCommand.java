@@ -2,6 +2,7 @@ package seedu.financialplanner.commands;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.utils.Ui;
 import seedu.financialplanner.visualisations.Categorizer;
 import seedu.financialplanner.visualisations.Visualizer;
 
@@ -35,8 +36,13 @@ public class VisCommand extends Command {
 
     @Override
     public void execute() throws FinancialPlannerException {
+        Ui ui = Ui.getInstance();
+
         assert !chart.isEmpty();
         assert !type.isEmpty();
-        Visualizer.displayChart(chart, Categorizer.sortType(CashflowList.getInstance(), type));
+
+        ui.printDisplayChart(type, chart);
+
+        Visualizer.displayChart(chart, Categorizer.sortType(CashflowList.getInstance(), type), type);
     }
 }

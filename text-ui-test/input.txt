@@ -12,5 +12,8 @@ add income /a 5000 /t salary /r 30
 budget set /b 3000
 budget update /b 1000
 add expense /a 200 /t shopping
+budget view
+budget reset
+budget delete
 sdf
 exit

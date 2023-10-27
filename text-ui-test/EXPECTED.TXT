@@ -71,5 +71,8 @@ You have added an Expense
 to the Financial Planner.
 Balance: 4800.00
 Your remaining budget for the month is: 800.00
+You have a remaining budget of 800.00.
+Budget has been reset to 1000.00.
+Budget has been deleted.
 Unknown command. Please try again.
 Exiting Financial Planner. Goodbye.
