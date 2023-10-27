@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * The DeleteIncomeCommand class is responsible for deleting an income record from the list of incomes.
  */
-public class DeleteIncomeCommand extends Commands {
+public class DeleteIncomeCommand extends Command {
     /**
      * Constructs a DeleteIncomeCommand object.
      */

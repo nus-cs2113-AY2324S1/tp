@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * This class is a child class of the Command class.
  *
  */
-public class ExpenseLister extends Commands {
+public class ExpenseLister extends Command {
     private final ArrayList<Expense> expenses;
     private final Ui ui;
 

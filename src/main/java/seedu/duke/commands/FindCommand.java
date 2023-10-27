@@ -19,7 +19,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 import java.io.File;
 
-public class FindCommand extends Commands {
+public class FindCommand extends Command {
 
 
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());

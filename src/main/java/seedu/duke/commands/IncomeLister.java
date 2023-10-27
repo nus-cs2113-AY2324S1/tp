@@ -12,7 +12,7 @@ import java.util.logging.Level;
  * This class is a child class of the Command class.
  *
  */
-public class IncomeLister extends Commands {
+public class IncomeLister extends Command {
     private static final Logger LOGGER = Logger.getLogger(IncomeLister.class.getName());
     private final ArrayList<Income> incomes;
     private final Ui ui;

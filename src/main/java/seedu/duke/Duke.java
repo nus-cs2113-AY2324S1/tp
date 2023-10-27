@@ -1,22 +1,8 @@
 package seedu.duke;
 
 
-import seedu.duke.commands.Balance;
-import seedu.duke.commands.ClearAll;
-import seedu.duke.commands.ClearExpenses;
-import seedu.duke.commands.ClearIncomes;
-import seedu.duke.commands.DeleteExpenseCommand;
-import seedu.duke.commands.DeleteIncomeCommand;
-import seedu.duke.commands.ExpenseLister;
-import seedu.duke.commands.ExpenseManager;
-import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.EditExpenseCommand;
-import seedu.duke.commands.EditIncomeCommand;
-import seedu.duke.commands.IncomeLister;
-import seedu.duke.commands.IncomeManager;
-import seedu.duke.commands.KaChinnnngException;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.UsageInstructions;
+import seedu.duke.commands.*;
+import seedu.duke.financialrecords.ExchangeRateManager;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.storage.GetFromTxt;
@@ -39,6 +25,8 @@ public class Duke {
     private String storagePath;
     private SaveToTxt save;
     private GetFromTxt get;
+    private ExchangeRateManager exchangeRateManager;
+    private String exchangeRateFilePath;
 
     public Duke() {
         ui = new Ui();
@@ -47,6 +35,7 @@ public class Duke {
         storagePath = "KaChinnnngggg.txt";
         save = new SaveToTxt(storagePath);
         get = new GetFromTxt(storagePath);
+        exchangeRateManager = ExchangeRateManager.getInstance();
     }
     /**
      * This method runs the program.
@@ -55,8 +44,13 @@ public class Duke {
         Ui.printWelcomeMessage();
         try {
             get.getFromTextFile(incomes, expenses);
+            exchangeRateManager.getExchangeRatesFromFile();
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
+        } catch (KaChinnnngException e) {
+            ui.showLineDivider();
+            System.out.println(e.getMessage());
+            ui.showLineDivider();
         }
         boolean isExit = false;
         while (!isExit) {
@@ -171,6 +165,20 @@ public class Duke {
                     ui.showLineDivider();
                     new EditExpenseCommand(expenses, fullCommand).execute();
                     ui.showLineDivider();
+                    break;
+
+                case "list_currencies":
+                    exchangeRateManager.showSupportedCurrencies();
+                    break;
+
+                case "list_exchange_rates":
+                    exchangeRateManager.showExchangeRates();
+                    break;
+                case "update_exchange_rate":
+                    Ui.showLineDivider();
+                    Command c = new UpdateExchangeRateCommand(fullCommand);
+                    c.execute();
+                    Ui.showLineDivider();
                     break;
                 default:
                     Ui.showLineDivider();

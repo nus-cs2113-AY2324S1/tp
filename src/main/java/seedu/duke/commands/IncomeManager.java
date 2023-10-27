@@ -15,7 +15,7 @@ import java.io.File;
  * This class serves as a blueprint for all specific income creation classes in the application
  *
  */
-public class IncomeManager extends Commands{
+public class IncomeManager extends Command {
     // Logger instance to log events and issues that occur during the execution of this class.
     private static final Logger LOGGER = Logger.getLogger(IncomeManager.class.getName());
     private final String details;
