@@ -68,8 +68,11 @@ public class Parser {
      * Parse userInput and group it under commandWord and arguments
      * use commandWord to find the matching command and prepare the command
      *
-     * @param userInput full user input
      * @param menu The arraylist object created that stores current tasks
+     * @param userInput The full user input String
+     * @param ui The ui object created that handles I/O with the user
+     * @param pantry The arraylist object created that stores current ingredients in stock
+     * @param orderList The arraylist object created that stores current orders
      * @return command requested by the user
      */
     public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry, OrderList orderList) {

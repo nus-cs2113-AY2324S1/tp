@@ -14,7 +14,7 @@ public class Messages {
     public static final String LIST_MENU_MESSAGE = "| Ah, behold, the grand menu of delights! |";
     public static final String MENU_EMPTY_MESSAGE = "It seems our menu is currently taking a break. "
             + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
-    public static final String MENU_TOP = "+-----------------------------------------+";
+    public static final String MENU_END_CAP = "+-----------------------------------------+";
     public static final String MENU_CORNER = "+--------------------------+--------------+";
     public static final String MENU_TITLE = "| Dish Name                |  Price       |";
     public static final String DISH_NOT_FOUND = "I'm sorry, but it appears that dish is so exclusive "
@@ -69,4 +69,11 @@ public class Messages {
     public static final String INVALID_ADD_ORDER_FORMAT_MESSAGE = "Error: Incorrect format for the add order command.";
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
             + "in the virtual kitchen of your dreams. Bon appétit!";
+    public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
+    public static final String LOAD_MENU_FILE_ERROR_MESSAGE = "Uh oh, I am having trouble loading your menu text file."
+            + "\n\tCreating a new empty menu...\n";
+    public static final String DATA_FOLDER_NOT_FOUND_MESSAGE = "Data Folder was not found!\nIt's ok... "
+            + "a new data folder has been created.";
+    public static final String DATA_FILE_NOT_FOUND_MESSAGE = "text file was not found!\nIt's ok... "
+            + "a new data file has been created.";
 }

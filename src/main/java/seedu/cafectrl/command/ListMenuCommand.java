@@ -1,7 +1,7 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.ui.Messages;
+import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
 
 import java.text.DecimalFormat;
@@ -16,6 +16,12 @@ public class ListMenuCommand extends Command {
     protected Menu menu;
     protected Ui ui;
 
+    /**
+     * Constructor for the ListMenuCommand
+     *
+     * @param menu The menu object of the current session
+     * @param ui The ui object created that handles I/O with the user
+     */
     public ListMenuCommand(Menu menu, Ui ui) {
         this.menu = menu;
         this.ui = ui;
@@ -23,29 +29,43 @@ public class ListMenuCommand extends Command {
 
     /**
      * Iterates through the menu arraylist, outputting the dish name and dish price.
+     * Calls printEmptyMenu() when (menu.getSize() == 0), printFullMenu() otherwise.
      */
     @Override
     public void execute() {
         if (menu.getSize() == 0) {
             printEmptyMenu(ui);
-            return;
+        } else {
+            printFullMenu(menu, ui);
         }
-        printFullMenu(menu, ui);
     };
 
+    /**
+     * Shows empty menu message to user
+     * Called only when the menu is empty
+     *
+     * @param ui The ui object created that handles I/O with the user
+     */
     public void printEmptyMenu(Ui ui) {
-        ui.showToUser(Messages.MENU_EMPTY_MESSAGE);
+        ui.showEmptyMenu();
     }
 
+    /**
+     * Prints the dishes in the menu
+     * Called only when the menu is not empty
+     *
+     * @param menu The menu object of the current session
+     * @param ui The ui object created that handles I/O with the user
+     */
     public void printFullMenu(Menu menu, Ui ui) {
-        ui.showToUser(Messages.MENU_TOP, Messages.LIST_MENU_MESSAGE,
-                Messages.MENU_CORNER, Messages.MENU_TITLE, Messages.MENU_CORNER);
+        ui.showMenuTop();
         for (int i = 0; i < menu.getSize(); i++) {
             String indexNum = String.valueOf(i + 1);
-            String dishName = menu.getDishFromId(i).getName();
-            String dishPrice = dollarValue.format(menu.getDishFromId(i).getPrice());
-            ui.formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
+            Dish selectedDish = menu.getDishFromId(i);
+            String dishName = selectedDish.getName();
+            String dishPrice = dollarValue.format(selectedDish.getPrice());
+            ui.showMenuDish(indexNum, dishName, dishPrice);
         }
-        ui.showToUser(Messages.MENU_TOP);
+        ui.showMenuBottom();
     }
 }

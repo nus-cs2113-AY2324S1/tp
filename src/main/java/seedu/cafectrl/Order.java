@@ -8,21 +8,22 @@ import java.util.ArrayList;
 
 public class Order {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    protected String dishName;
+    protected Dish orderedDish;
     protected int dishQty;
     protected ArrayList<Ingredient> usedIngredientList;
     protected boolean isComplete = false;
     protected float totalOrderCost;
 
     public Order(Dish orderedDish, int dishQty) {
-        this.dishName = orderedDish.getName();
         this.dishQty = dishQty;
-        this.usedIngredientList = getIngredientList(orderedDish);
-        this.totalOrderCost = getDishPrice(orderedDish);
+        this.orderedDish = orderedDish;
+        this.usedIngredientList = getIngredientList();
+        this.totalOrderCost = getDishPrice();
     }
 
+    @Override
     public String toString() {
-        return "Order: " + dishName + " Quantity: "+ dishQty
+        return "Order: " + orderedDish.getName() + " Quantity: "+ dishQty
                 + "\nIngredientList: " + usedIngredientList
                 + "\nTotal Order Cost: $" + dollarValue.format(totalOrderCost);
     }
@@ -33,7 +34,7 @@ public class Order {
      *
      * @return Total calculated cost
      */
-    public float getDishPrice(Dish orderedDish) {
+    public float getDishPrice() {
         float dishCost = orderedDish.getPrice();
         float totalOrderCost = dishCost * dishQty;
         return totalOrderCost;
@@ -45,7 +46,7 @@ public class Order {
      *
      * @return Arraylist of Ingredients
      */
-    private ArrayList<Ingredient> getIngredientList(Dish orderedDish) {
+    private ArrayList<Ingredient> getIngredientList() {
         ArrayList<Ingredient> dishIngredient = new ArrayList<>();
         for (Ingredient ingredient : orderedDish.getIngredients()) {
             String ingredientName = ingredient.getName();
@@ -58,6 +59,10 @@ public class Order {
 
     public void setComplete() {
         this.isComplete = true;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
     }
 
 }
