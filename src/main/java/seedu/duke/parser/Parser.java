@@ -18,6 +18,7 @@ import seedu.duke.commands.IncorrectCommand;
 import seedu.duke.commands.logcommands.LogCommand;
 import seedu.duke.commands.logcommands.DeleteLogCommand;
 import seedu.duke.commands.logcommands.ViewLogCommand;
+import seedu.duke.commands.logcommands.UpdateLogCommand;
 import seedu.duke.commands.meal.MealCommand;
 import seedu.duke.data.exception.IllegalValueException;
 
@@ -83,6 +84,9 @@ public class Parser {
 
         case ViewLogCommand.COMMAND_WORD:
             return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
+
+        case UpdateLogCommand.COMMAND_WORD:
+            return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
         case MealCommand.COMMAND_WORD:
             return new MealCommand(Arrays.asList(arguments.trim().split(" ")));
