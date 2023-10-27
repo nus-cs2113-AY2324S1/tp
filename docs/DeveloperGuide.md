@@ -6,6 +6,18 @@
 
 ## Design & implementation
 
+### Handling User Inputs & Displaying Output
+
+A lot of the initial project setup that deals with things like parsing, displaying outputs back to the user, exceptions, etc. are strongly inspired by the address book example project demoed in class. Specifically, we have classes that are responsible for various aspects of our project in order to follow the single-responsibility principle and limit the amount of coupling. 
+
+One specific design implementation we chose was having a Command superclass that all commands in our application will inherit from. This allows every command we write in the future to be guaranteed to possess all methods specified in the superclass. Therefore we can call these methods in our main function without needing to worry about the differences between various commands because they all inherit from the same parent. Another alternative we considered was simply making each separate command its own function and calling them from our parser class. However, we want to keep the commands as high level as possible and avoid calling more lower-level functions if possible so we can provide more encapsulation to each command. Therefore, we decided to go with this class-based command hierarchy that was also found in the example address book repo.
+
+Below is a class diagram that describes how our various components interact with one another:
+
+![image](https://github.com/AY2324S1-CS2113-F11-1/tp/assets/54857388/21bd2aa9-8e50-49d2-b888-50446115f922)
+
+The parser class is responsible for reading the user input and creating specific command objects. All of these subcommands inherit from a general Command parent class which has an `execute` method that can be called regardless of child class and will return a CommandResult object. The CommandResult object dictates what info (string or list of items) needs to be returned to the user for viewing. Both CommandResult and TextUi (responsible for actually displaying data from CommandResult to user) will only print objects from classes that inherit from the Printable interface. This ensures that objects in the `relevantItems` list are all serializable as a human-readable string to be displayed to the end user.
+
 ### Update Exercises from Log feature
 
 The proposed feature is to allow users to update exercises from the ExerciseLog class to allow for full CRUD functionality of the class. Currently, users are able to create exercises and log them as well as view all the exercises that they have created, but in the case of a typo, they are unable to update the log to accomodate for the user error. To improve the user experience, this update feature has been proposed to allow users to have a better experience using the app.
