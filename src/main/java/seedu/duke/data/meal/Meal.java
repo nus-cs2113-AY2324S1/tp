@@ -1,9 +1,5 @@
 package seedu.duke.data.meal;
 
-import java.time.LocalDateTime;
-
-import seedu.duke.data.DateTime;
-
 public class Meal {
     public String name;
     public int calories;

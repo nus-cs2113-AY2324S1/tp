@@ -53,50 +53,50 @@ public class Parser {
 
         switch (commandWord) {
 
-            // case AddCommand.COMMAND_WORD:
-            // return prepareAdd(arguments);
-            //
-            // case DeleteCommand.COMMAND_WORD:
-            // return prepareDelete(arguments);
-            //
-            // case ClearCommand.COMMAND_WORD:
-            // return new ClearCommand();
-            //
-            // case FindCommand.COMMAND_WORD:
-            // return prepareFind(arguments);
-            //
-            // case ListCommand.COMMAND_WORD:
-            // return new ListCommand();
-            //
-            // case ViewCommand.COMMAND_WORD:
-            // return prepareView(arguments);
-            //
-            // case ViewAllCommand.COMMAND_WORD:
-            // return prepareViewAll(arguments);
-            //
+        // case AddCommand.COMMAND_WORD:
+        // return prepareAdd(arguments);
+        //
+        // case DeleteCommand.COMMAND_WORD:
+        // return prepareDelete(arguments);
+        //
+        // case ClearCommand.COMMAND_WORD:
+        // return new ClearCommand();
+        //
+        // case FindCommand.COMMAND_WORD:
+        // return prepareFind(arguments);
+        //
+        // case ListCommand.COMMAND_WORD:
+        // return new ListCommand();
+        //
+        // case ViewCommand.COMMAND_WORD:
+        // return prepareView(arguments);
+        //
+        // case ViewAllCommand.COMMAND_WORD:
+        // return prepareViewAll(arguments);
+        //
 
-            case LogCommand.COMMAND_WORD:
-                return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
+        case LogCommand.COMMAND_WORD:
+            return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case DeleteLogCommand.COMMAND_WORD:
-                return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
+        case DeleteLogCommand.COMMAND_WORD:
+            return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case ViewLogCommand.COMMAND_WORD:
-                return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
+        case ViewLogCommand.COMMAND_WORD:
+            return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case MealCommand.COMMAND_WORD:
-                return new MealCommand(Arrays.asList(arguments.trim().split(" ")));
+        case MealCommand.COMMAND_WORD:
+            return new MealCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case GoalCommand.COMMAND_WORD:
-                return new GoalCommand(userInput);
+        case GoalCommand.COMMAND_WORD:
+            return new GoalCommand(userInput);
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD: // Fallthrough
+        case HelpCommand.COMMAND_WORD: // Fallthrough
 
-            default:
-                return new HelpCommand();
+        default:
+            return new HelpCommand();
         }
     }
 

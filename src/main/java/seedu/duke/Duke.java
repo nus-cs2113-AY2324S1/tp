@@ -23,8 +23,8 @@ public class Duke {
     public static final String VERSION = "AddressBook Level 2 - Version 1.0";
     public static GoalList goals = new GoalList();
     public static Log exerciseLog = new Log();
-    private TextUi ui;
     static ArrayList<Meal> meals = new ArrayList<Meal>();
+    private TextUi ui;
 
     // private StorageFile storage;
     public static void main(String... launchArgs) {
