@@ -32,8 +32,7 @@ import java.text.ParseException;
  * into a format that can be interpreted by other core classes
  */
 public class Parser {
-    private static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
-
+    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
     /** Add Dish Command Handler Patterns*/
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
             + "price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+"
@@ -71,7 +70,8 @@ public class Parser {
      * @return command requested by the user
      */
     public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry, OrderList orderList) {
-        final Matcher matcher = COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
+        Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
+        final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Incorrect command format!", ui);
         }
