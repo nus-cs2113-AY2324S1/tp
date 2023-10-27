@@ -18,6 +18,19 @@ the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList
 
 ![incomeManager_sequence_diagram.png](..%2Fimages%2FincomeManager_sequence_diagram.png)
 
+### ExpenseManager
+
+The ExpenseManager is facilitated by `ExpenseParser`,  `ExpenseManager`, `ExpenseList` and `Ui`
+
+1. The user inputs the command to add expense.
+2. This command is used to instantiate a ExpenseManager object which is executed.
+3. During execution, the command is passed to ExpenseParser which extracts and parses the input fields.
+4. Input field information is passed to the relevant Expense constructor which returns a Expense object.
+5. Expense object is returned to ExpenseManager from ExpenseParser.
+6. Expense obejct is returned to Duke from ExpenseManager.
+
+![expenseManager_sequence_diagram.png](/Users/apple/Desktop/expenseManager_sequence_diagram.png)
+
 ### Find Command
 The FindCommand is facilitated by `FindCommand`, `FindParser`, `Ui`,`ExpenseList` and `IncomeList`.
 

@@ -1,0 +1,23 @@
+@startuml
+actor Duke
+participant ExpenseManager
+participant ExpenseParser
+participant Expense
+
+Duke -> ExpenseManager: provides expense details
+activate ExpenseManager
+ExpenseManager -> ExpenseParser: extractExpenseFields(details)
+activate ExpenseParser
+ExpenseParser -> ExpenseParser: parseDate(expenseDateString)
+activate ExpenseParser
+ExpenseParser --> ExpenseParser: validates date format
+ExpenseParser -> ExpenseParser: parseExpense(argumentsByField)
+ExpenseParser --> ExpenseParser: validates fields
+ExpenseParser --> Expense: calls Expense constructor
+Expense --> ExpenseParser: new Expense object
+ExpenseParser --> ExpenseManager: returns Expense object
+deactivate ExpenseParser
+ExpenseManager --> Duke: returns new Expense object
+deactivate ExpenseParser
+deactivate ExpenseManager
+@enduml
