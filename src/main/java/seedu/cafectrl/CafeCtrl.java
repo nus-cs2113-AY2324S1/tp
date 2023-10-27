@@ -3,8 +3,15 @@ package seedu.cafectrl;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.parser.Parser;
+import seedu.cafectrl.storage.MenuStorage;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * CafeCtrl application's entry point.
@@ -12,7 +19,8 @@ import seedu.cafectrl.ui.Ui;
  */
 public class CafeCtrl {
     private final Ui ui;
-    private final Menu menu;
+    private final MenuStorage menuStorage;
+    private Menu menu;
     private Command command;
     private Pantry pantry;
     private OrderList orderList;
@@ -20,11 +28,19 @@ public class CafeCtrl {
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    private CafeCtrl() {
+    private CafeCtrl(String menuFilePath) {
         ui = new Ui();
-        menu = new Menu();
+        menuStorage = new MenuStorage(menuFilePath, ui);
         pantry = new Pantry(ui);
         orderList = new OrderList();
+        ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
+        try {
+            ArrayList<Dish> dishes = menuStorage.loadData();
+            menu = new Menu(dishes);
+        } catch (FileNotFoundException e) {
+            ui.showToUser(Messages.LOAD_MENU_FILE_ERROR_MESSAGE);
+            menu = new Menu();
+        }
     }
 
     private void setup() {
@@ -50,10 +66,16 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
+
+        try {
+            menuStorage.storeData();
+        } catch (IOException e) {
+            ui.showToUser(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
-        CafeCtrl cafeCtrl = new CafeCtrl();
+        CafeCtrl cafeCtrl = new CafeCtrl("data/menu.txt");
         cafeCtrl.setup();
         cafeCtrl.run();
     }
