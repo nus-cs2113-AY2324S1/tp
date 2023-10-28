@@ -102,7 +102,7 @@ public class RecipeList {
     public void viewRecipeByTitle(String title) {
         Ui.drawDivider();
         Recipe recipe = recipes.stream()
-            .filter(recipe1 -> recipe1.getTitle().equals(title))
+            .filter(recipe1 -> recipe1.getTitle().equalsIgnoreCase(title))
             .findFirst()
             .orElse(null);
         if (recipe == null) {

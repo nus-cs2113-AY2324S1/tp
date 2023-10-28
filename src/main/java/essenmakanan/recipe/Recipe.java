@@ -14,6 +14,8 @@ public class Recipe {
     public Recipe(String title, String[] steps) {
         this.title = title;
         recipeSteps = new RecipeStepList(steps);
+        recipeSteps = new RecipeStepList(steps);
+
     }
 
     public ArrayList<String> getRecipeSteps() {
