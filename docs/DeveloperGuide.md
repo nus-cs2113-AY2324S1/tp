@@ -1,30 +1,5 @@
 # Developer Guide
 
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
-## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
-
-## Product scope
-### Target user profile
-
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
-## User Stories
-
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-=======
 ## Table of Contents
 * [Acknowledgements](#acknowledgements)
 * [Design and Implementation](#design--implementation)
@@ -41,10 +16,10 @@
 ## Acknowledgements
 
 1. For the main structure of the program, we have adapted the project structure
-from the Individual Project of Man JunCheng at [Link](https://github.com/spinoandraptos/ip/tree/master) </li>
+from the Individual Project of Man Juncheng at [Link](https://github.com/spinoandraptos/ip/tree/master) </li>
 2. For JUnit testing, we have adapted the testing codes from the AddressBook level-2
 codes at [Link](https://github.com/se-edu/addressbook-level2)</li>
-3. For the developer's guide, we have reverenced the developer's guide from AddressBook
+3. For the developer's guide, we have referenced the developer's guide from AddressBook
 level-3 [Link](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 # Design & implementation
@@ -176,7 +151,7 @@ The following sequence diagram shows the implementation of `parseCommand`.
 
 `getContentAfterKeyword`
 
-This method acts as a helper function to assist in extracting the payload following an argument
+This method acts as a helper method to assist in extracting the payload following an argument
 in the user input. It is used in the constructing of `Command` objects when command-specific
 information need to be extracted from arguments in the user input.
 
@@ -187,7 +162,7 @@ printing an error message to the CLI.
 
 `extractQuestionDifficulty`
 
-This method acts as a helper function for extracting an `QnDifficulty` enum type from a user
+This method acts as a helper method for extracting an `QnDifficulty` enum type from a user
 text input. This is used for setting question difficulty during the construction of a
 `Question` , or the execution of a `CommandMarkDifficulty`.
 
@@ -290,7 +265,7 @@ In addition to the main `loadData` method, the process involves the following 3 
 
 The general idea is that when the program is first initiated, the `loadData` method is called from within the `Ui` class, which passes in an empty `QuestionList`. Within the method itself, the helper method `buildCurrentListFromFile()` will take in this empty `QuestionList` object and populate it with `question` objects according to textual information stored within the specified file. This is done by first extracting each question stored line by line into a new `Arraylist<String> rawQuestions`, then calling another helper method `parseQuestionsFromStrings()` to add each question into the `QuestionList` via a third helper method `addQuestionFromFileaddQuestionFromFile`. 
 
-The process is refactored into these methods so as to avoid deep nesting of code to achieve clearer logical flow and more readability and easier debugging process. 
+The process is refactored into these methods to avoid deep nesting of code to achieve clearer logical flow and more readability and easier debugging process. 
 
 ### Updating data
 
@@ -323,7 +298,7 @@ input.
 
 When the program is first initiated, the `displayOpeningMessage()` method is called to display a welcome message while also calling the `loadData()` method of the `dataStorage` to display all the questions stored in the storage file if any.
 
-Afterwards, in the main loop of the program execution, the `getUserInput()` method is called at the start of the loop to capture user input as a `String` object, which is then used by the `Parser` and various `Command` classes to parse and execute the appropriate commands. This process is terminated only upon execution of a `CommandExit`.
+Afterward, in the main loop of the program execution, the `getUserInput()` method is called at the start of the loop to capture user input as a `String` object, which is then used by the `Parser` and various `Command` classes to parse and execute the appropriate commands. This process is terminated only upon execution of a `CommandExit`.
 
 Finally, the `displayClosingMessage()` method is called to display a farewell message while also calling the `updateData()` method of the `dataStorage` to update the data stored in the storage file with the latest ones.
 
@@ -382,12 +357,27 @@ which they could use to take quizzes to ensure their understanding of the topic.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Program should work on any typical OS as long as it has Java 11 installed and configured.
+2. A user with average or above typing speed for regular English text (not program code) in the CLI should not 
+experience any significant delays to their revision as compared to using a GUI program.
 
 ## Glossary
 
-* *glossary item* - Definition
+1. **Typical OS**: Windows, Linux, Unix, macOS.
+2. **CommandType**: The first word input in the CLI, indicates the type of instruction the program should execute.
+`e.g. start, delete, short`
+3. **Argument**: A parameter word identified by a leading `/`, arguments indicate the start of information
+to be extracted from a command in addition to the command type.
+4. **Payload**: A sequence of additional information immediately following the command type or arguments, they
+provide information for executing complex instructions.
+5. **Hierarchical**: Possesses logical sequencing or order, such as in order of decreasing subsets or importance.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch
+
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest `tp_version_1.0.jar` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases/download/Version_1_0/tp_version_1.0.jar).
+3. Copy the file to the folder you want to use as the home folder for your QuizHub.
+4. Open a command terminal, cd into the folder you put the `tp_version_1.0.jar` file in, and use the java -jar 
+`tp_version_1.0.jar` command to run the application and launch the CLI.
