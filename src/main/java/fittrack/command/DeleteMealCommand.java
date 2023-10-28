@@ -25,8 +25,7 @@ public class DeleteMealCommand extends Command {
     public CommandResult execute() {
         if (!mealList.isIndexValid(mealIndex)) {
             return new CommandParser()
-                    .getInvalidCommand(commandLine, new IndexOutOfBoundsException())
-                    .execute();
+                    .getInvalidCommandResult(commandLine, new IndexOutOfBoundsException());
         }
 
         Meal toDelete = mealList.getMeal(mealIndex);

@@ -25,8 +25,7 @@ public class DeleteWorkoutCommand extends Command {
     public CommandResult execute() {
         if (!workoutList.isIndexValid(workoutIndex)) {
             return new CommandParser()
-                    .getInvalidCommand(commandLine, new IndexOutOfBoundsException())
-                    .execute();
+                    .getInvalidCommandResult(commandLine, new IndexOutOfBoundsException());
         }
 
         Workout toDelete = workoutList.getWorkout(workoutIndex);

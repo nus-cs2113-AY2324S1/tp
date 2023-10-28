@@ -3,20 +3,21 @@ package fittrack.parser;
 import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
+import fittrack.command.BmiCommand;
 import fittrack.command.CalorieSumCommand;
 import fittrack.command.CaloriesBurntCommand;
+import fittrack.command.CheckWeightRangeCommand;
 import fittrack.command.Command;
+import fittrack.command.CommandResult;
 import fittrack.command.DeleteMealCommand;
 import fittrack.command.DeleteWorkoutCommand;
 import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
+import fittrack.command.SaveCommand;
 import fittrack.command.ViewMealsCommand;
 import fittrack.command.ViewProfileCommand;
-import fittrack.command.BmiCommand;
-import fittrack.command.SaveCommand;
-import fittrack.command.CheckWeightRangeCommand;
 import fittrack.command.ViewWorkoutsCommand;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
@@ -125,15 +126,17 @@ public class CommandParser {
     }
 
     public InvalidCommand getInvalidCommand(String userCommandLine) {
-        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
-        invalidCommand.setArguments(userCommandLine, this);
-        return invalidCommand;
+        return getInvalidCommand(userCommandLine, null);
     }
 
     public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
         InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
+    }
+
+    public CommandResult getInvalidCommandResult(String userCommandLine, ParseException e) {
+        return getInvalidCommand(userCommandLine, e).execute();
     }
 
     /**

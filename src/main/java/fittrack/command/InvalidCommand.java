@@ -10,12 +10,12 @@ public class InvalidCommand extends Command {
     private String exceptionMessage = "";
 
     public InvalidCommand(String commandLine) {
-        super(commandLine);
+        this(commandLine, null);
     }
 
     public InvalidCommand(String commandLine, ParseException e) {
-        this(commandLine);
-        if (e.getMessage() != null) {
+        super(commandLine);
+        if (e != null && e.getMessage() != null) {
             this.exceptionMessage = e.getMessage();
         }
     }
