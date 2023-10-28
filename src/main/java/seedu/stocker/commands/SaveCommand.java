@@ -20,7 +20,7 @@ public class SaveCommand extends Command{
 
     public static final String MESSAGE_SUCCESS = "Drugs successfully saved.";
 
-    public CommandResult<StockEntry> execute() throws IOException {
+    public CommandResult execute() throws IOException {
 
         File holder = new File("./drugs.txt");
         if (!holder.exists()) {

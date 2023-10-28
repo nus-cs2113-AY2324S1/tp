@@ -1,8 +1,5 @@
 package seedu.stocker.commands;
 
-
-import seedu.stocker.drugs.StockEntry;
-
 /**
  * Shows help instructions.
  */
@@ -15,7 +12,7 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         return new CommandResult<>(
                 System.lineSeparator() + AddCommand.MESSAGE_USAGE
                 + System.lineSeparator()

@@ -1,6 +1,5 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.drugs.StockEntry;
 
 /**
  * Terminates the program.
@@ -14,7 +13,7 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting Stocker as requested ...";
 
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         return new CommandResult<>(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 

@@ -33,7 +33,7 @@ public class DeleteCommand  extends Command{
      * @return A CommandResult indicating the result of the deletion operation.
      */
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         try {
             StockEntry deletedEntry = inventory.deleteDrug(this.keyToDelete);
             return new CommandResult<>(String.format(MESSAGE_SUCCESS, deletedEntry.getDrug().getName()));

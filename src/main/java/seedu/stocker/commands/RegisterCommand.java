@@ -1,7 +1,6 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.authentication.LoginSystem;
-import seedu.stocker.drugs.StockEntry;
 import seedu.stocker.exceptions.StockerException;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class RegisterCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New User Created.";
 
-    public CommandResult<StockEntry> execute() throws IOException, StockerException {
+    public CommandResult execute() throws IOException, StockerException {
         LoginSystem system = new LoginSystem();
         system.loadExistingUsers();
         system.newUserCreator();
