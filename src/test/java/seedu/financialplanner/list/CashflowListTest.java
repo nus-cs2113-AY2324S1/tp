@@ -19,7 +19,7 @@ class CashflowListTest {
         testList.list.clear();
 
         Cashflow.balance = 0;
-        testList.addIncome(15, IncomeType.SALARY, 30);
+        testList.addIncome(15, IncomeType.SALARY, 30, "part time job");
         Cashflow testIncome = testList.list.get(0);
         double roundedValue = Cashflow.round(testIncome.amount, 2);
         double roundedBalance = Cashflow.round(Cashflow.balance, 2);
@@ -28,8 +28,9 @@ class CashflowListTest {
         assertEquals(IncomeType.SALARY, testIncome.getIncomeType());
         assertEquals(30, testIncome.recur);
         assertEquals("15.00", decimalFormat.format(roundedBalance));
+        assertEquals("part time job", testIncome.description);
 
-        testList.addIncome(15.999, IncomeType.INVESTMENTS, 0);
+        testList.addIncome(15.999, IncomeType.INVESTMENTS, 0, "AAPL");
         testIncome = testList.list.get(1);
         roundedValue = Cashflow.round(testIncome.amount, 2);
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
@@ -38,8 +39,9 @@ class CashflowListTest {
         assertEquals(IncomeType.INVESTMENTS, testIncome.getIncomeType());
         assertEquals(0, testIncome.recur);
         assertEquals("31.00", decimalFormat.format(roundedBalance));
+        assertEquals("AAPL", testIncome.description);
 
-        testList.addExpense(10, ExpenseType.DINING, 0);
+        testList.addExpense(10, ExpenseType.DINING, 0, "double mcspicy");
         Cashflow testExpense = testList.list.get(2);
         roundedValue = Cashflow.round(testExpense.amount, 2);
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
@@ -48,8 +50,9 @@ class CashflowListTest {
         assertEquals(ExpenseType.DINING, testExpense.getExpenseType());
         assertEquals(0, testExpense.recur);
         assertEquals("21.00", decimalFormat.format(roundedBalance));
+        assertEquals("double mcspicy", testExpense.description);
 
-        testList.addExpense(19.999, ExpenseType.ENTERTAINMENT, 30);
+        testList.addExpense(19.999, ExpenseType.ENTERTAINMENT, 30, "netflix");
         testExpense = testList.list.get(3);
         roundedValue = Cashflow.round(testExpense.amount, 2);
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
@@ -58,6 +61,7 @@ class CashflowListTest {
         assertEquals(ExpenseType.ENTERTAINMENT, testExpense.getExpenseType());
         assertEquals(30, testExpense.recur);
         assertEquals("1.00", decimalFormat.format(roundedBalance));
+        assertEquals("netflix", testExpense.description);
     }
 
     @Test

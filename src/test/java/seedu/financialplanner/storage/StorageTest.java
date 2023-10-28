@@ -62,7 +62,7 @@ public class StorageTest {
     }
 
     private void getTestData() {
-        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0));
-        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, null));
+        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee"));
     }
 }
