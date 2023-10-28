@@ -32,33 +32,36 @@ import java.text.ParseException;
  * into a format that can be interpreted by other core classes
  */
 public class Parser {
-    private static final Pattern COMMAND_ARGUMENT_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s?(?<arguments>.*)");
-
-    // Command Argument Patterns
+    //@@author ziyi105
+    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
+    //@@author @DextheChik3n
+    /** Add Dish Command Handler Patterns*/
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
-            + "price/(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+) "
+            + "price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+"
             + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
-            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
-            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+            + "(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
     private static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
     private static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    private static final String INGREDIENT_ARGUMENT_STRING = "ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
-            + "qty/(?<ingredientQty>[A-Za-z0-9\\s]+)\\s*(?<ingredientUnit>g|ml)";
+    private static final String INGREDIENT_ARGUMENT_STRING = "\\s*ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
+            + "qty/\\s*(?<ingredientQty>[0-9]+)\\s*(?<ingredientUnit>g|ml)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
     private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
-    private static final String INGREDIENT_DIVIDER_REGEX = ", ";
-    private static final String INGREDIENT_DIVIDER_STRING = ",";
+    private static final String INGREDIENT_DIVIDER_REGEX = ",";
+    //@@author
+    /** Add Order Command Handler Patterns*/
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
-    private static final int PRICE_MATCHER_GROUP_NUM = 2;
-    private static final int INGREDIENT_LIST_MATCHER_GROUP_NUM = 4;
     private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";
+    //@@author
+    /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
+    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
+            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    //@@author ziyi105
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
     /**
@@ -73,7 +76,8 @@ public class Parser {
      * @return command requested by the user
      */
     public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry, OrderList orderList) {
-        final Matcher matcher = COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
+        Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
+        final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Incorrect command format!", ui);
         }
@@ -119,11 +123,12 @@ public class Parser {
     }
 
     /** All prepareCommand Classes */
+    //@@author Cazh1
     private static Command prepareListMenu(Menu menu, Ui ui) {
         return new ListMenuCommand(menu, ui);
     }
 
-
+    //@@author ziyi105
     /**
      * Parse argument in the context of edit price command
      * @param menu menu of the current session
@@ -154,7 +159,7 @@ public class Parser {
             return new IncorrectCommand(Messages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
         }
     }
-
+    //@@author DextheChik3n
     /**
      * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
      * @param arguments
@@ -172,7 +177,7 @@ public class Parser {
             }
 
             // To retrieve specific arguments from arguments
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL);
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
             float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
@@ -195,39 +200,38 @@ public class Parser {
      */
     private static ArrayList<Ingredient> ingredientParsing(String ingredientsListString)
             throws IllegalArgumentException {
-        String[] ingredientListInputText = {ingredientsListString};
+        String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
 
         //check if there is more than 1 ingredient
-        if (ingredientsListString.contains(INGREDIENT_DIVIDER_STRING)) {
+        if (ingredientsListString.contains(INGREDIENT_DIVIDER_REGEX)) {
             //split the whole string of ingredients into separate individual ingredients
-            ingredientListInputText = ingredientsListString.split(INGREDIENT_DIVIDER_REGEX);
+            inputIngredientList = ingredientsListString.split(INGREDIENT_DIVIDER_REGEX);
         }
 
         //Parsing each ingredient
-        for (String inputIngredientText: ingredientListInputText) {
+        for (String inputIngredient: inputIngredientList) {
             final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
-            Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredientText);
+            Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredient);
 
             if (!ingredientMatcher.matches()) {
                 throw new IllegalArgumentException();
             }
 
-            String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL);
-            String ingredientQty = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
+            String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+            String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
             String ingredientUnit = ingredientMatcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
 
-            int qty = Integer.parseInt(ingredientQty);
+            int ingredientQty = Integer.parseInt(ingredientQtyString);
 
-            Ingredient ingredient = new Ingredient(ingredientName, qty, ingredientUnit);
+            Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
 
             ingredients.add(ingredient);
         }
 
         return ingredients;
     }
-
-
+    //@@author NaychiMin
     /**
     * Parses arguments in the context of the ListIngredient command.
     * @param menu menu of the current session
@@ -251,6 +255,7 @@ public class Parser {
         return new ListIngredientCommand(dishIndex, menu, ui);
     }
 
+    //@@author ShaniceTang
     /**
      * Parses arguments in the context of the Delete command.
      *
@@ -298,11 +303,11 @@ public class Parser {
             return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
         }
     }
-
+    //@@author ziyi105
     private static Command prepareHelpCommand(Ui ui) {
         return new HelpCommand(ui);
     }
-
+    //@@author 
     /**
      * Parses arguments in the context of the Delete command.
      *
