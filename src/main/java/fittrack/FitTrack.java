@@ -38,11 +38,11 @@ public class FitTrack {
     /**
      * Main entry-point for the FitTrack application.
      */
-    public static void main(String[] args) throws StorageOperationException {
+    public static void main(String[] args) {
         new FitTrack().run(args);
     }
 
-    private void run(String[] args) throws StorageOperationException {
+    private void run(String[] args) {
         start(args);
         loopCommandExecution();
         end();
@@ -62,7 +62,7 @@ public class FitTrack {
             }
             this.mealList = storage.mealLoad();
             this.workoutList = storage.workoutLoad();
-        }catch (StorageOperationException | InvalidStorageFilePathException e) {
+        } catch (StorageOperationException | InvalidStorageFilePathException e) {
             System.out.println("There was a problem with the loading of storage contents.");
             ui.printLine();
         }
@@ -82,7 +82,7 @@ public class FitTrack {
         }
     }
 
-    private void loopCommandExecution() throws StorageOperationException {
+    private void loopCommandExecution() {
         Command command;
         do {
             String userCommandLine = ui.scanCommandLine();
