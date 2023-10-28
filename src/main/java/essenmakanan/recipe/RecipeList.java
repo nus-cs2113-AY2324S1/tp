@@ -114,6 +114,7 @@ public class RecipeList {
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
 
+            assert (flag != null) : "Invalid flag";
             switch (flag) {
             case "n/":
                 String newName = editDetails[i].substring(2);
@@ -125,7 +126,6 @@ public class RecipeList {
                 int stepIndex = Integer.parseInt(stepDetails[0])-1;
                 Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
                 String newStep = stepDetails[1];
-
 
                 Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
                 existingStep.setDescription(newStep);

@@ -22,8 +22,10 @@ public class EditRecipeCommand extends Command {
         this.editDetails = this.editDetails.replace("r/", "");
 
         String[] splitDetails = this.editDetails.split(" ");
-        String recipeName = splitDetails[0];
 
+        assert splitDetails.length > 0 : "Details not provided"; // error not thrown by exceptions
+
+        String recipeName = splitDetails[0];
         existingRecipe = recipes.getRecipeByName(recipeName);
 
         if (existingRecipe == null) {

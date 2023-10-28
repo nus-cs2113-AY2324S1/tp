@@ -18,9 +18,10 @@ public class RecipeStepList {
             if (input.equals("end")) {
                 isAddingSteps = false;
             } else {
+                assert (input != null) : "Input is null";
                 this.addStep(input);
             }
-        } while(isAddingSteps);
+        } while (isAddingSteps);
         System.out.println("done steps");
     }
 

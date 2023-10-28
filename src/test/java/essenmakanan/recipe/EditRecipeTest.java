@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EditRecipeTest {
 
@@ -15,11 +16,11 @@ public class EditRecipeTest {
     public void setUp() {
         recipes = new RecipeList();
         recipeToEdit = new Recipe("Bread", new String[]{"Prepare", "Bake"});
+        recipes.addRecipe(recipeToEdit);
     }
 
     @Test
     public void editRecipeName_validInput_editSuccess() {
-        recipes.addRecipe(recipeToEdit);
         String[] editDetails = {"edit", "n/Breads"};
         try {
             recipes.editRecipe(recipeToEdit, editDetails);
@@ -32,7 +33,6 @@ public class EditRecipeTest {
 
     @Test
     public void editRecipeStep_validInput_editSuccess() {
-        recipes.addRecipe(recipeToEdit);
         String[] editDetails = {"edit", "s/1,Prepare the dough"};
         try {
             recipes.editRecipe(recipeToEdit, editDetails);
@@ -46,7 +46,6 @@ public class EditRecipeTest {
 
     @Test
     public void editRecipeNameAndStep_validInput_editSuccess() {
-        recipes.addRecipe(recipeToEdit);
         String[] editDetails = {"edit", "n/Breads", "s/1,Prepare the dough"};
         try {
             recipes.editRecipe(recipeToEdit, editDetails);
@@ -57,5 +56,14 @@ public class EditRecipeTest {
         String newStep = recipeToEdit.getRecipeSteps().getStepByIndex(0).getDescription();
         assertEquals("Prepare the dough", newStep);
         assertEquals("Breads", recipeToEdit.getTitle());
+    }
+
+    @Test
+    public void editRecipe_invalidInput_exceptionThrown() {
+        String[] editDetails = {"edit", "/nbreads"};
+
+        assertThrows(EssenFormatException.class, () -> {
+            recipes.editRecipe(recipeToEdit, editDetails);
+        });
     }
 }
