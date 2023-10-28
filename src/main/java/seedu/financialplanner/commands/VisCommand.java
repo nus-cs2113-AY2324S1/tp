@@ -1,7 +1,7 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 import seedu.financialplanner.visualisations.Categorizer;
 import seedu.financialplanner.visualisations.Visualizer;

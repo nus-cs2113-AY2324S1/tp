@@ -4,11 +4,11 @@ import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.Stock;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.list.Income;
-import seedu.financialplanner.list.Expense;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.cashflow.Income;
+import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.StreamCorruptedException;
@@ -101,11 +101,13 @@ public abstract class LoadData {
         double value;
         int recur;
         Cashflow entry;
+        String description;
 
         switch (type) {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
+            description = getDescription(split);
             checkValidInput(value, recur);
             IncomeType incomeType;
             try {
@@ -113,11 +115,12 @@ public abstract class LoadData {
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid income type");
             }
-            entry = new Income(value, incomeType, recur);
+            entry = new Income(value, incomeType, recur, description);
             break;
         case "E":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
+            description = getDescription(split);
             checkValidInput(value, recur);
             ExpenseType expenseType;
             try {
@@ -125,13 +128,23 @@ public abstract class LoadData {
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid expense type");
             }
-            entry = new Expense(value, expenseType, recur);
+            entry = new Expense(value, expenseType, recur, description);
             break;
         default:
             throw new FinancialPlannerException("Error loading file");
         }
 
         return entry;
+    }
+
+    private static String getDescription(String[] split) {
+        String description;
+        if (split.length > 4) {
+            description = split[4].trim();
+        } else {
+            description = null;
+        }
+        return description;
     }
 
     public static ArrayList<Stock> loadWatchList() {

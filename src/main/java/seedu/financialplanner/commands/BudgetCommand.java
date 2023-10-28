@@ -1,8 +1,8 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.Cashflow;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.logging.Level;

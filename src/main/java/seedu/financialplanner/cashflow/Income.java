@@ -1,4 +1,4 @@
-package seedu.financialplanner.list;
+package seedu.financialplanner.cashflow;
 
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
@@ -6,8 +6,8 @@ import seedu.financialplanner.enumerations.IncomeType;
 public class Income extends Cashflow{
     protected IncomeType type;
 
-    public Income(double amount, IncomeType type, int recur) {
-        super(amount, recur);
+    public Income(double amount, IncomeType type, int recur, String description) {
+        super(amount, recur, description);
         this.type = type;
         addIncomeValue();
     }

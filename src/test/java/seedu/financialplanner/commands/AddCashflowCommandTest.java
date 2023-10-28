@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Parser;
 import seedu.financialplanner.utils.Ui;
 

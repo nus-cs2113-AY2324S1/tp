@@ -1,10 +1,10 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.enumerations.CashflowCategory;
-import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.list.Expense;
-import seedu.financialplanner.list.Income;
+import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.cashflow.Expense;
+import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
