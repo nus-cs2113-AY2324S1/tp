@@ -95,17 +95,25 @@ public abstract class LoadData {
 
         return line.equalsIgnoreCase("y");
     }
-
+    private static boolean hasDescription(String[] split) {
+        return (split.length > 4);
+    }
     private static Cashflow getEntry(String type, String[] split)
             throws FinancialPlannerException, IllegalArgumentException {
         double value;
         int recur;
         Cashflow entry;
+        String description;
 
         switch (type) {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
+            if (hasDescription(split)) {
+                description = split[4].trim();
+            } else {
+                description = null;
+            }
             checkValidInput(value, recur);
             IncomeType incomeType;
             try {
@@ -113,11 +121,16 @@ public abstract class LoadData {
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid income type");
             }
-            entry = new Income(value, incomeType, recur);
+            entry = new Income(value, incomeType, recur, description);
             break;
         case "E":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
+            if (hasDescription(split)) {
+                description = split[4].trim();
+            } else {
+                description = null;
+            }
             checkValidInput(value, recur);
             ExpenseType expenseType;
             try {
@@ -125,7 +138,7 @@ public abstract class LoadData {
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid expense type");
             }
-            entry = new Expense(value, expenseType, recur);
+            entry = new Expense(value, expenseType, recur, description);
             break;
         default:
             throw new FinancialPlannerException("Error loading file");

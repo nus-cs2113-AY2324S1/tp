@@ -81,7 +81,13 @@ public abstract class Cashflow {
     }
 
     public String formatString() {
-        return " | " + this.recur + " | " + this.description;
+        String string = " | " + this.recur;
+
+        if (description != null) {
+            string += " | " + this.description;
+        }
+
+        return string;
     }
 
     public abstract ExpenseType getExpenseType();
