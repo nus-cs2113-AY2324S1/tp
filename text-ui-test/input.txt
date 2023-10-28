@@ -1,6 +1,6 @@
-add income /a 5000 /t salary /r 30
+add income /a 5000 /t salary /r 30 /d part time job
 add income /a 123.12 /t allowance
-add expense /a 100 /t entertainment /r 30
+add expense /a 100 /t entertainment /r 30 /d netflix
 add expense /a 123.21 /t shopping
 delete income 2
 delete 1
