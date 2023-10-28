@@ -4,10 +4,10 @@ import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
 
 public class InvalidCommand extends Command {
-    public static final String MESSAGE_INVALID_COMMAND = "`%s` is an invalid command.";
+    public static final String MESSAGE_INVALID_COMMAND = "`%s` is an invalid command";
 
     private String helpMessage;
-    private String exceptionMessage = "";
+    private String exceptionMessage = ".";
 
     public InvalidCommand(String commandLine) {
         this(commandLine, null);

@@ -6,16 +6,27 @@ h/180 w/ l/2000
 180 w/80 l/20000
 180 80 2000
 h/180 w/80 l/2000
+viewprofile 123
 viewprofile
 editprofile h/170 w/70 l/1500
+editprofileh/120w/80l/100
+editprofile h/-180 w/70 l/1000
 viewprofile
 bmi
+bmi 30f
 addmeal pasta c/200 d/2023-10-22
-viewmeals
+addmeal pizza 200
+viewmeal qw
+viewmeal
+deletemeal1
 deletemeal 1
+addworkout run 400 d/2023-10-22
 addworkout running c/400 d/2023-10-22
 viewworkouts
+deleteworkout1
 deleteworkout 1
+checkweightrange
+checkweightrange 1
 help
 help editprofile
 help viewprofile
@@ -26,4 +37,8 @@ help deletemeal
 help addworkout
 help viewworkouts
 help deleteworkout
+help checkweightrange
+help caloriesburnt
+help caloriesum
+help save
 exit
