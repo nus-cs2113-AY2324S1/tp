@@ -2,7 +2,6 @@ package essenmakanan.recipe;
 
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ui.Ui;
-import essenmakanan.recipe.Recipe;
 
 import java.util.ArrayList;
 
