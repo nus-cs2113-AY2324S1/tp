@@ -20,6 +20,7 @@ import seedu.stocker.commands.ShowStockLevelCommand;
 import seedu.stocker.commands.ViewCartCommand;
 import seedu.stocker.commands.AddToCartCommand;
 import seedu.stocker.commands.CheckOutCommand;
+import seedu.stocker.commands.ListVendorCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -85,6 +86,9 @@ public class Parser {
 
         case ShowStockLevelCommand.COMMAND_WORD:
             return new ShowStockLevelCommand();
+
+        case ListVendorCommand.COMMAND_WORD:
+            return  new ListVendorCommand();
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

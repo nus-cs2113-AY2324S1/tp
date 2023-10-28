@@ -11,7 +11,7 @@ public class AddVendorCommand extends Command {
     public static final String COMMAND_WORD = "addVendor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new vendor to the vendors list. "
-            + "Parameter: NAME " + System.lineSeparator()
+            + "Parameter: NAME" + System.lineSeparator()
             + "Example: " + COMMAND_WORD
             + " Moderna";
 
