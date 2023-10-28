@@ -1,4 +1,4 @@
-package seedu.cafectrl;
+package seedu.cafectrl.data;
 
 public class CurrentDate {
     protected int currentDay;

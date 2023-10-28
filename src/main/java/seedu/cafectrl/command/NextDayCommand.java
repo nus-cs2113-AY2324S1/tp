@@ -1,7 +1,7 @@
 package seedu.cafectrl.command;
 
-import seedu.cafectrl.CurrentDate;
-import seedu.cafectrl.Sales;
+import seedu.cafectrl.data.CurrentDate;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.ui.Ui;
 

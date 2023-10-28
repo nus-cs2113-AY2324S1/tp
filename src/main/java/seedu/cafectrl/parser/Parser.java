@@ -15,8 +15,8 @@ import seedu.cafectrl.command.NextDayCommand;
 import seedu.cafectrl.command.PreviousDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 
-import seedu.cafectrl.CurrentDate;
-import seedu.cafectrl.Sales;
+import seedu.cafectrl.data.CurrentDate;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;

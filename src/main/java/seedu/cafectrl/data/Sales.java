@@ -1,4 +1,4 @@
-package seedu.cafectrl;
+package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.OrderList;
 
