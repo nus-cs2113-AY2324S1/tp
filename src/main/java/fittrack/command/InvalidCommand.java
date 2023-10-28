@@ -7,7 +7,7 @@ public class InvalidCommand extends Command {
     public static final String MESSAGE_INVALID_COMMAND = "`%s` is an invalid command.";
 
     private String helpMessage;
-    private String exceptionMessage = "";
+    private final String exceptionMessage;
 
     public InvalidCommand(String commandLine) {
         this(commandLine, null);
@@ -17,6 +17,8 @@ public class InvalidCommand extends Command {
         super(commandLine);
         if (e != null && e.getMessage() != null) {
             this.exceptionMessage = e.getMessage();
+        } else {
+            this.exceptionMessage = null;
         }
     }
 
@@ -34,7 +36,10 @@ public class InvalidCommand extends Command {
         if (helpCommand.getCommandType() == InvalidCommand.class) {
             helpMessage = message;
         } else {
-            String invalidCommandMessage = getInvalidCommandMessage(inputLine) + " " + this.exceptionMessage;
+            String invalidCommandMessage = getInvalidCommandMessage(inputLine);
+            if (exceptionMessage != null) {
+                invalidCommandMessage += " " + this.exceptionMessage;
+            }
             helpMessage = invalidCommandMessage + "\n" + message;
         }
     }
