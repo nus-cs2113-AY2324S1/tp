@@ -35,6 +35,9 @@ public class BudgetTest {
     @Test
     @Order(3)
     public void testUpdateBudget() {
+        Budget.updateBudget(300);
+        assertEquals(300, Budget.getInitialBudget());
+        assertEquals(250, Budget.getCurrentBudget());
         Budget.updateBudget(1000);
         assertEquals(1000, Budget.getInitialBudget());
         assertEquals(950, Budget.getCurrentBudget());
@@ -69,5 +72,14 @@ public class BudgetTest {
         assertEquals(0, Budget.getInitialBudget());
         assertEquals(0, Budget.getCurrentBudget());
         assertFalse(Budget.hasBudget());
+    }
+
+    @Test
+    @Order(8)
+    public void testLoadBudget() {
+        Budget.load(100, 100);
+        assertEquals(100, Budget.getInitialBudget());
+        assertEquals(100, Budget.getCurrentBudget());
+        Budget.deleteBudget();
     }
 }
