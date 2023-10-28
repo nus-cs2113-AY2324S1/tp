@@ -11,6 +11,7 @@ import seedu.stocker.commands.ExitCommand;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
+import seedu.stocker.vendors.VendorsList;
 
 import java.io.IOException;
 
@@ -21,6 +22,7 @@ public class Stocker {
     private Inventory inventory;
     private SalesList salesList;
     private Cart currentCart;
+    private VendorsList vendorsList;
     private Storage storage;
 
     public static void main(String[] launchArgs) throws IOException, StockerException {
@@ -58,6 +60,7 @@ public class Stocker {
             this.inventory = new Inventory();
             this.salesList = new SalesList();
             this.currentCart = new Cart();
+            this.vendorsList = new VendorsList();
             this.storage = new Storage(inventory);
             storage.loadFileContents("drugs.txt");
             boolean checker = startLogin();

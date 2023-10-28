@@ -1,32 +1,25 @@
 package seedu.stocker.parser;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import seedu.stocker.commands.Command;
-import seedu.stocker.commands.AddCommand;
-import seedu.stocker.commands.AddToCartCommand;
-import seedu.stocker.commands.CheckOutCommand;
-import seedu.stocker.commands.ListCommand;
-import seedu.stocker.commands.ViewCartCommand;
-import seedu.stocker.commands.HelpCommand;
-import seedu.stocker.commands.ExitCommand;
-import seedu.stocker.commands.IncorrectCommand;
-import seedu.stocker.commands.FindCommand;
-import seedu.stocker.commands.DeleteCommand;
-import seedu.stocker.commands.RegisterCommand;
-import seedu.stocker.commands.LoginCommand;
-import seedu.stocker.commands.SaveCommand;
+
+import seedu.stocker.commands.*;
+import seedu.stocker.vendors.Vendor;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class Parser {
+    public Parser() {
+    }
+
     /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(String userInput) throws IOException {
         String[] words = userInput.trim().split(" ", 2);  // split the input into command and arguments
         if (words.length == 0) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -72,6 +65,9 @@ public class Parser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand();
+
+        case AddVendorCommand.COMMAND_WORD:
+            return prepareAddVendorCommand(arguments);
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -133,6 +129,22 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
+    private Command prepareAddVendorCommand (String args) throws IOException {
+        String[] vendorArgs = args.split(" ");
+        String vendorName = vendorArgs[0];
+        try {
+            if (vendorName.equals(null) || vendorName.equals("") || vendorName.equals(" ")) {
+                throw new IOException();
+            }
+        }
+        catch(Exception invalidInput){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,AddVendorCommand.MESSAGE_USAGE));
+        }
+        return new AddVendorCommand(vendorName);
+    }
 
 
-}
+
+
+
+    }
