@@ -147,7 +147,7 @@ public class Parser {
         }
     }
     private Command prepareAddVendorCommand (String args) throws IOException {
-        String[] vendorArgs = args.split(" ");
+        String[] vendorArgs = args.split(" ",1);
         String vendorName = vendorArgs[0];
         try {
             if (vendorName.equals(null) || vendorName.equals("") || vendorName.equals(" ")) {
