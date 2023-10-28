@@ -94,7 +94,12 @@ public class AddCashflowCommand extends Command {
 
         if (rawCommand.extraArgs.containsKey("d")) {
             logger.log(Level.INFO, "Getting description of cashflow");
-            description = rawCommand.extraArgs.get("d");
+            String line = rawCommand.extraArgs.get("d");
+            if (line.isBlank()) {
+                logger.log(Level.WARNING, "Empty description");
+                throw new IllegalArgumentException("Description cannot be left empty");
+            }
+            description = line.trim();
         }
         rawCommand.extraArgs.remove("d");
 
