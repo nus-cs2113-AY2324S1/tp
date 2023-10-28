@@ -1,8 +1,8 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.enumerations.CashflowCategory;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.logging.Level;
@@ -77,7 +77,7 @@ public class DeleteCashflowCommand extends Command {
     private void handleDeleteCashflowWithoutCategory() {
         try {
             logger.log(Level.INFO, "Deleting cashflow without category");
-            double amount = cashflowList.delete(index);
+            double amount = cashflowList.deleteCashflowWithoutCategory(index);
             if (Budget.hasBudget()) {
                 Budget.updateCurrentBudget(amount);
             }
@@ -90,7 +90,7 @@ public class DeleteCashflowCommand extends Command {
     private void handleDeleteCashflowWithCategory() {
         try {
             logger.log(Level.INFO, "Deleting cashflow with category");
-            double amount = cashflowList.deleteCashflow(category, index);
+            double amount = cashflowList.deleteCashflowWithCategory(category, index);
             if (Budget.hasBudget()) {
                 Budget.updateCurrentBudget(amount);
             }

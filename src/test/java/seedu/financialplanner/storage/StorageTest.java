@@ -5,9 +5,9 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.Expense;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.list.Income;
+import seedu.financialplanner.cashflow.Expense;
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.ByteArrayInputStream;
@@ -62,7 +62,7 @@ public class StorageTest {
     }
 
     private void getTestData() {
-        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0));
-        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, null));
+        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee"));
     }
 }

@@ -2,9 +2,9 @@ package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.FileOutputStream;

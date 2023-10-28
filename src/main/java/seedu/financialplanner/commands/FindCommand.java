@@ -1,7 +1,7 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;

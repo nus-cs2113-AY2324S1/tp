@@ -7,6 +7,7 @@ You have added an Income
    Type: Salary
    Amount: 5000.00
    Recurring every: 30 days
+   Description: part time job
 to the Financial Planner.
 Balance: 5000.00
 You have added an Income
@@ -18,6 +19,7 @@ You have added an Expense
    Type: Entertainment
    Amount: 100.00
    Recurring every: 30 days
+   Description: netflix
 to the Financial Planner.
 Balance: 5023.12
 You have added an Expense
@@ -34,6 +36,7 @@ You have removed an Income
    Type: Salary
    Amount: 5000.00
    Recurring every: 30 days
+   Description: part time job
 from the Financial Planner.
 Balance: -223.21
 You have removed an Expense
@@ -45,6 +48,7 @@ You have removed an Expense
    Type: Entertainment
    Amount: 100.00
    Recurring every: 30 days
+   Description: netflix
 from the Financial Planner.
 Balance: 0.00
 You have successfully added:

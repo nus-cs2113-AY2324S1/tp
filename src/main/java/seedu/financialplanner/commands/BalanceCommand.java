@@ -1,6 +1,6 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.list.Cashflow;
+import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
