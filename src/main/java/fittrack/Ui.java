@@ -8,12 +8,15 @@ import java.util.Scanner;
  * Represents the user interface of FitTrack.
  */
 public class Ui {
+
     private static final String LOGO = "___________.__  __ ___________                     __\n"
                                      + "\\_   _____/|__|/  |\\__    ___/___________    ____ |  | __\n"
                                      + " |    __)  |  \\   __\\|    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n"
                                      + " |     \\   |  ||  |  |    |   |  | \\/ __ \\  \\___|    <\n"
                                      + " \\___  /   |__||__|  |____|   |__|  (____  /\\___  >__|_ \\";
 
+
+    private static final String LINE = "____________________________________________________________";
 
     private final Scanner in;
 
@@ -46,9 +49,18 @@ public class Ui {
         System.out.println();
     }
 
+    public void printLine() {
+        System.out.println(LINE);
+    }
+
     public void printWelcome() {
         System.out.println("Welcome to FitTrack!");
         System.out.println(LOGO);
+        printLine();
+    }
+
+    public void printVersion(String version) {
+        System.out.println(version);
     }
 
     public void printCommandResult(CommandResult commandResult) {
@@ -56,15 +68,20 @@ public class Ui {
         printBlankLine();
     }
 
+    public void printPrompt() {
+        System.out.println("How can I help you today?");
+        printLine();
+    }
+
     /**
-     * Prints greetings to user and the profile of the user.
+     * Prints the profile details of the user after user has
+     * entered details for the first time.
      *
      * @param profile user profile
      */
     public void printProfileDetails(UserProfile profile) {
         System.out.println("Here are your profile settings.");
-        System.out.println("Height: " + profile.getHeight());
-        System.out.println("Weight: " + profile.getWeight());
-        System.out.println("Daily calorie surplus limit: " + profile.getDailyCalorieLimit());
+        System.out.println("Height: " + profile.toString());
+        printLine();
     }
 }

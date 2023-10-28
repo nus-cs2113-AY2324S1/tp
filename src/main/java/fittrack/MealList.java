@@ -1,22 +1,44 @@
 package fittrack;
 
+import fittrack.data.Meal;
+
 import java.util.ArrayList;
 
 public class MealList {
 
-    private static ArrayList<Meal> mealList;
+    private int mealListSize = 0;
+    private ArrayList<Meal> mealList;
 
     public MealList() {
         mealList = new ArrayList<>();
     }
 
-    public static void addToList(Meal newMeal) {
-        mealList.add(newMeal);
+    // For loading of file contents into meal list
+    //TODO Load file content into meal list
+    public MealList(ArrayList<Meal> mealList) {
+        this.mealList = mealList;
     }
 
-    public static void deleteMeal(int mealIndex) {
-        mealList.remove((mealIndex - 1));
+    public ArrayList<Meal> getMealList() {
+        return this.mealList;
     }
+
+    public void addToList(Meal newMeal) {
+        mealList.add(newMeal);
+        mealListSize++;
+    }
+
+    // @@author NgLixuanNixon
+    public void deleteMeal(int mealIndex) {
+        assert isIndexValid(mealIndex);
+        mealList.remove((mealIndex - 1));
+        mealListSize--;
+    }
+
+    public int getMealListSize() {
+        return mealListSize;
+    }
+
     @Override
     public String toString() {
         int counter = 1;
@@ -29,7 +51,11 @@ public class MealList {
     }
 
     public Meal getMeal(int mealIndex) {
+        assert isIndexValid(mealIndex);
         return mealList.get(mealIndex - 1);
+    }
 
+    public boolean isIndexValid(int index) {
+        return 1 <= index && index <= mealList.size();
     }
 }

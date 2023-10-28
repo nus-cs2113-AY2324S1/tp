@@ -1,0 +1,32 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AddMealCommand {
+  + AddMealCommand(String): 
+  + COMMAND_WORD: String
+  - DESCRIPTION: String
+  - USAGE: String
+  + HELP: String
+  - newMeal: Meal
+  + setArguments(String, CommandParser): void
+  + execute(): CommandResult
+  # getHelp(): String
+}
+class Command {
+  + Command(String): 
+  # workoutList: WorkoutList
+  # commandLine: String
+  # mealList: MealList
+  # storage: Storage
+  # userProfile: UserProfile
+  + setData(UserProfile, MealList, WorkoutList, Storage): void
+  + setArguments(String, CommandParser): void
+  # getHelp(): String
+  + execute(): CommandResult
+}
+
+AddMealCommand  -[#000082,plain]-^  Command        
+@enduml

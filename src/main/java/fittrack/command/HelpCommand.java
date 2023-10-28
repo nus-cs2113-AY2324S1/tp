@@ -10,13 +10,16 @@ public class HelpCommand extends Command {
     private static final String DESCRIPTION =
             String.format("`%s` shows help message of the command.", COMMAND_WORD);
     private static final String KNOWN_COMMANDS = "Existing commands:\n" + ALL_COMMAND_WORDS;
-    private static final String USAGE =
+    static final String USAGE =
             String.format("Type `%s` or `%s <COMMAND>` to view help.", COMMAND_WORD, COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + KNOWN_COMMANDS + "\n" + USAGE;
 
-    public static final String MESSAGE_INVALID_COMMAND = "`%s` is an invalid command.\n" + USAGE;
-
     private String helpMessage;
+    private Class<? extends Command> commandType;
+
+    public HelpCommand(String commandLine) {
+        super(commandLine);
+    }
 
     @Override
     public CommandResult execute() {
@@ -26,15 +29,17 @@ public class HelpCommand extends Command {
     @Override
     public void setArguments(String args, CommandParser parser) {
         if (args.isEmpty()) {
-            helpMessage = getHelp();
+            helpMessage = HELP;
             return;
         }
 
         String word = parser.getFirstWord(args);
 
-        Command blankCommand = parser.getBlankCommand(word);
+        Command blankCommand = parser.getBlankCommand(word, commandLine);
+        commandType = blankCommand.getClass();
+
         if (blankCommand instanceof InvalidCommand) {
-            helpMessage = String.format(MESSAGE_INVALID_COMMAND, word);
+            helpMessage = InvalidCommand.getInvalidCommandMessage(word) + "\n" + USAGE;
             return;
         }
 
@@ -48,5 +53,9 @@ public class HelpCommand extends Command {
 
     public String getHelpMessage() {
         return helpMessage;
+    }
+
+    public Class<? extends Command> getCommandType() {
+        return commandType;
     }
 }
