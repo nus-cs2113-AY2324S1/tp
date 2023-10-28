@@ -57,11 +57,11 @@ public class ListCommand extends Command {
         }
 
         if (cashflowToBePrinted.isEmpty()) {
-            ui.showMessage("No matching cash flow");
+            ui.showMessage("No matching cashflow");
             return;
         }
 
-        ui.showMessage(String.format("You have %d matching cash flow:", cashflowToBePrinted.size()));
+        ui.showMessage(String.format("You have %d matching cashflow:", cashflowToBePrinted.size()));
         for (int i = 0; i < cashflowToBePrinted.size(); i += 1) {
             ui.showMessage((i + 1) + ": " + cashflowToBePrinted.get(i));
         }
