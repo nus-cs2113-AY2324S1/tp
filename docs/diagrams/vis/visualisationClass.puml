@@ -21,15 +21,15 @@ class RawCommand #DodgerBlue {
 }
 
 class Categorizer #AquaMarine {
-+<u>sortType(cashflowList: CashflowList, type: String)<u>
-+<u>sortExpenses(cashflowList: CashflowList)<u>
-+<u>sortIncome(cashflowList: CashflowList)<u>
++<u>sortType(cashflowList: CashflowList, type: String)
++<u>sortExpenses(cashflowList: CashflowList)
++<u>sortIncome(cashflowList: CashflowList)
 }
 
 class Visualizer #Beige {
-+<u>displayChart(chartType: String, cashFlowByCat: Map, type: String)<u>
-+ <u>displayPieChart(cashFlowByCat: Map, type: String)<u>
-+ <u>displayBarChart(cashFlowByCat: Map, type: String)<u>
++<u>displayChart(chartType: String, cashFlowByCat: Map, type: String)
++ <u>displayPieChart(cashFlowByCat: Map, type: String)
++ <u>displayBarChart(cashFlowByCat: Map, type: String)
 }
 
 "{abstract}\nCommand" <|-- VisCommand
