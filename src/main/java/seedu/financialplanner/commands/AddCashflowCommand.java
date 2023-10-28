@@ -93,6 +93,7 @@ public class AddCashflowCommand extends Command {
         }
 
         if (rawCommand.extraArgs.containsKey("d")) {
+            logger.log(Level.INFO, "Getting description of cashflow");
             description = rawCommand.extraArgs.get("d");
         }
         rawCommand.extraArgs.remove("d");
@@ -118,7 +119,7 @@ public class AddCashflowCommand extends Command {
             assert incomeType.equals(IncomeType.SALARY) || incomeType.equals(IncomeType.INVESTMENTS)
                     || incomeType.equals(IncomeType.ALLOWANCE) || incomeType.equals(IncomeType.OTHERS);
         }
-
+        
         switch (category) {
         case INCOME:
             cashflowList.addIncome(amount, incomeType, recur, description);
