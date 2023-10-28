@@ -33,25 +33,6 @@ public class Pantry {
     }
 
     /**
-     * Retrieves the pantry stock from storage, e.g., by reading from a file (pantry.txt).
-     *
-     * @return An ArrayList of Ingredient objects representing the pantry stock.
-     */
-    public ArrayList<Ingredient> retrieveStockFromStorage() {
-        ArrayList<Ingredient> pantryStock = new ArrayList<>();
-        //TODO: Add file reader to read from pantry.txt
-        return pantryStock;
-    }
-
-    /**
-     * Writes the pantry stock to storage, e.g., by writing to a file (pantry.txt).
-     */
-    public void writeToPantryStorage() {
-        //TODO: Add file writer to write update pantry.txt
-    }
-
-
-    /**
      * Adds or updates an ingredient in the pantry stock based on its name and quantity.
      *
      * @param name The name of the ingredient to add or update.
