@@ -7,7 +7,6 @@ import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Handles reading from and storing data to the text file.
