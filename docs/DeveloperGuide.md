@@ -44,6 +44,14 @@ Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTr
 
 ![Inner structure](images/FitTrackCore.svg "Core Structure")
 
+### Creating a feedback for an invalid input
+Refer to [`CommandParser`](../src/main/java/fittrack/parser/CommandParser.java),
+[`InvalidCommand`](../src/main/java/fittrack/command/InvalidCommand.java),
+[`HelpCommand`](../src/main/java/fittrack/command/HelpCommand.java)
+classes.
+
+![Sequence of invalid command](images/InvalidCommand.svg "Sequence of invalid command")
+
 ### Storage Component
 Storage load and save functions are written in [`Storage`](../src/main/java/fittrack/storage/Storage.java) class.
 
