@@ -1,4 +1,4 @@
-package seedu.financialplanner.list;
+package seedu.financialplanner.cashflow;
 
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;

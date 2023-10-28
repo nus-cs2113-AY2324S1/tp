@@ -3,9 +3,9 @@ package seedu.financialplanner.commands;
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.CashflowList;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
@@ -119,7 +119,7 @@ public class AddCashflowCommand extends Command {
             assert incomeType.equals(IncomeType.SALARY) || incomeType.equals(IncomeType.INVESTMENTS)
                     || incomeType.equals(IncomeType.ALLOWANCE) || incomeType.equals(IncomeType.OTHERS);
         }
-        
+
         switch (category) {
         case INCOME:
             cashflowList.addIncome(amount, incomeType, recur, description);

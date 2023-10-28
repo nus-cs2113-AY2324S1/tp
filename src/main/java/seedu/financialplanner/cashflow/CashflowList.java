@@ -1,4 +1,4 @@
-package seedu.financialplanner.list;
+package seedu.financialplanner.cashflow;
 
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.enumerations.ExpenseType;
@@ -48,7 +48,7 @@ public class CashflowList {
         assert newListSize == existingListSize + 1;
     }
 
-    public double delete(int index) {
+    public double deleteCashflowWithoutCategory(int index) {
         int existingListSize = list.size();
         int listIndex = index - 1;
 
@@ -109,7 +109,7 @@ public class CashflowList {
         return overallCashflowIndex;
     }
 
-    public double deleteCashflow(CashflowCategory category, int index) {
+    public double deleteCashflowWithCategory(CashflowCategory category, int index) {
         int existingListSize = list.size();
         int listIndex = cashflowIndexFinder(category, index);
 

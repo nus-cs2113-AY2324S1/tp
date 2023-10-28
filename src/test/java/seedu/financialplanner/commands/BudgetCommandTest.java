@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.Cashflow;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.utils.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

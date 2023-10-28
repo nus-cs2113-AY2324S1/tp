@@ -4,11 +4,11 @@ import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.Stock;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.list.Income;
-import seedu.financialplanner.list.Expense;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.cashflow.Income;
+import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.StreamCorruptedException;
@@ -95,9 +95,11 @@ public abstract class LoadData {
 
         return line.equalsIgnoreCase("y");
     }
+
     private static boolean hasDescription(String[] split) {
         return (split.length > 4);
     }
+
     private static Cashflow getEntry(String type, String[] split)
             throws FinancialPlannerException, IllegalArgumentException {
         double value;

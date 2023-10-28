@@ -3,8 +3,8 @@ package seedu.financialplanner.utils;
 import org.apache.commons.lang3.StringUtils;
 import seedu.financialplanner.investments.Stock;
 import seedu.financialplanner.investments.WatchList;
-import seedu.financialplanner.list.Budget;
-import seedu.financialplanner.list.Cashflow;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
 
 import java.util.Scanner;
 import java.util.logging.Level;
