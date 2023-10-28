@@ -3,15 +3,13 @@ package seedu.cafectrl;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
-import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.parser.Parser;
-import seedu.cafectrl.storage.MenuStorage;
+import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * CafeCtrl application's entry point.
@@ -19,28 +17,23 @@ import java.util.ArrayList;
  */
 public class CafeCtrl {
     private final Ui ui;
-    private final MenuStorage menuStorage;
     private Menu menu;
     private Command command;
     private Pantry pantry;
     private OrderList orderList;
+    private Storage storage;
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    private CafeCtrl(String menuFilePath) {
-        ui = new Ui();
-        menuStorage = new MenuStorage(menuFilePath, ui);
-        pantry = new Pantry(ui);
-        orderList = new OrderList();
-        ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
-        try {
-            ArrayList<Dish> dishes = menuStorage.loadData();
-            menu = new Menu(dishes);
-        } catch (FileNotFoundException e) {
-            ui.showToUser(Messages.LOAD_MENU_FILE_ERROR_MESSAGE);
-            menu = new Menu();
-        }
+    private CafeCtrl() throws FileNotFoundException {
+        this.ui = new Ui();
+        this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
+        this.storage = new Storage(this.ui);
+        this.menu = this.storage.loadMenu();
+        this.pantry = this.storage.loadPantryStock();
+        this.orderList = this.storage.loadOrderList();
+
     }
 
     private void setup() {
@@ -53,7 +46,7 @@ public class CafeCtrl {
      * <p> This method consistently receives user input, parses commands, and executes the respective command
      * until the user enters a "bye" command, terminating the application.</p>
      */
-    private void run() {
+    private void run() throws IOException {
         ui.printLine();
         do {
             try {
@@ -66,16 +59,12 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
-
-        try {
-            menuStorage.storeData();
-        } catch (IOException e) {
-            ui.showToUser(e.getMessage());
-        }
+        this.storage.saveAll(this.menu, this.orderList, this.pantry);
+        ui.showGoodbye();
     }
 
-    public static void main(String[] args) {
-        CafeCtrl cafeCtrl = new CafeCtrl("data/menu.txt");
+    public static void main(String[] args) throws IOException {
+        CafeCtrl cafeCtrl = new CafeCtrl();
         cafeCtrl.setup();
         cafeCtrl.run();
     }
