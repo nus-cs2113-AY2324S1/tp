@@ -1,7 +1,7 @@
 package fittrack.command;
 
 import fittrack.UserProfile;
-import fittrack.storage.Storage;
+import fittrack.data.Height;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,19 +10,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CheckWeightRangeTest {
 
-    private final Storage storage = new Storage();
     private UserProfile userProfile;
+    Height height = new Height(180);
 
     @BeforeEach
-    public void setUp() throws Storage.StorageOperationException {
-        userProfile  = storage.profileLoad();
+    public void setUp() {
+        userProfile  = new UserProfile();
+        userProfile.setHeight(height);
     }
     @Test
     public void testHeight(){
-        double height = userProfile.getHeight().value;
         double weightUserProfile = userProfile.getHeight().calculateIdealWeight();
-
-        double weightCalculated = 50 + (0.91 * (height - 152.4));
+        double weightCalculated = 50 + (0.91 * (height.value - 152.4));
         assertEquals(weightUserProfile, weightCalculated);
     }
 }
