@@ -3,35 +3,35 @@
 skinparam ArrowFontStyle plain
 
 participant ":AddRecipeCommand" as AddRecipeCommand COMMAND_COLOR
-participant "<<class>>\n:RecipeParser" as RecipeParser RECIPE_PARSER_COLOR
+participant "<<class>>\nRecipeParser" as RecipeParser RECIPE_PARSER_COLOR
 participant ":Recipe" as Recipe RECIPE_COLOR
 participant "recipes:RecipeList" as Recipes RECIPE_LIST_COLOR
-participant "ui:Ui" as Ui UI_COLOR
+participant "<<class>>\nUi" as Ui UI_COLOR
 
 [-> AddRecipeCommand : executeCommand()
 activate AddRecipeCommand
 
-AddRecipeCommand -> RecipeParser : parseRecipeTitle(toAdd: String)
+AddRecipeCommand -> RecipeParser : parseRecipeTitle(input)
 activate RecipeParser
 
-RecipeParser --> AddRecipeCommand : recipeTitle: String
+RecipeParser --> AddRecipeCommand : recipeTitle
 deactivate RecipeParser
 
 AddRecipeCommand -[hidden]> RecipeParser
 
 AddRecipeCommand -[hidden]> Recipe
 create Recipe
-AddRecipeCommand -> Recipe : new Recipe(RecipeTitle: String)
+AddRecipeCommand -> Recipe : new Recipe(RecipeTitle)
 activate Recipe
 
-Recipe --> AddRecipeCommand : newRecipe: Recipe
+Recipe --> AddRecipeCommand : newRecipe
 deactivate Recipe
 
 AddRecipeCommand -[hidden]> Recipes
-AddRecipeCommand -> Recipes : recipes.addRecipe(newRecipe: Recipe)
+AddRecipeCommand -> Recipes : addRecipe(newRecipe)
 activate Recipes
 
-Recipes -> Recipes: recipes.add(newRecipe: Recipe)
+Recipes -> Recipes: recipes.add(newRecipe)
 activate Recipes RECIPE_LIST_COLOR_T1
 deactivate Recipes
 
@@ -39,7 +39,7 @@ Recipes --> AddRecipeCommand
 deactivate Recipes
 
 AddRecipeCommand -[hidden]> Ui
-AddRecipeCommand -> Ui : ui.showRecentAddedRecipe(recipeTitle: String)
+AddRecipeCommand -> Ui : showRecentAddedRecipe(recipeTitle)
 activate Ui
 
 Ui -> Ui: print recent added recipe

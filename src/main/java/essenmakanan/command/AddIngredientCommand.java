@@ -1,6 +1,6 @@
 package essenmakanan.command;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
@@ -30,7 +30,7 @@ public class AddIngredientCommand extends Command{
                 newIngredient = IngredientParser.parseIngredient(ingredients, ingredient);
                 ingredients.addIngredient(newIngredient);
                 Ui.printAddIngredientsSuccess(newIngredient.getName());
-            } catch (EssenMakananFormatException e) {
+            } catch (EssenFormatException e) {
                 e.handleException();
             }
         }

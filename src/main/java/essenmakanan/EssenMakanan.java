@@ -2,9 +2,9 @@ package essenmakanan;
 
 import essenmakanan.command.Command;
 import essenmakanan.command.ExitCommand;
-import essenmakanan.exception.EssenMakananCommandException;
-import essenmakanan.exception.EssenMakananFormatException;
-import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.exception.EssenCommandException;
+import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
@@ -36,11 +36,11 @@ public class EssenMakanan {
             try {
                 command = parser.parseCommand(input, recipes, ingredients);
                 command.executeCommand();
-            } catch (EssenMakananCommandException exception) {
+            } catch (EssenCommandException exception) {
                 exception.handleException();
-            } catch (EssenMakananFormatException exception) {
+            } catch (EssenFormatException exception) {
                 exception.handleException();
-            } catch (EssenMakananOutOfRangeException exception) {
+            } catch (EssenOutOfRangeException exception) {
                 exception.handleException();
             }
         } while (!ExitCommand.isExitCommand(command));
