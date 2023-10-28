@@ -25,6 +25,9 @@ public class EditIngredientCommand extends Command {
 
         existingIngredient = ingredients.getIngredientByName(ingredientName);
 
+        assert existingIngredient.getName().equals(ingredientName)
+                : "Selected ingredient does not have matching name.";
+
         if (existingIngredient == null) {
             System.out.println("Ingredient not found!");
         } else {
