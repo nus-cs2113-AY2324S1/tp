@@ -54,7 +54,7 @@ public class Parser {
             } else if (inputDetail.equals("i")) {
                 command = new ViewIngredientsCommand(ingredients);
             } else if (inputDetail.startsWith("r/")) {
-                assert inputDetail.length() > 2 : "To view a recipe, make sure title is not empty";
+                assert (!inputDetail.equals("")) : "To view a recipe, make sure title is not empty";
                 command = new ViewSpecificRecipeCommand(recipes, inputDetail);
             } else {
                 throw new EssenFormatException();

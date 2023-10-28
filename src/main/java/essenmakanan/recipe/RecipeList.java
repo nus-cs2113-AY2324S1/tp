@@ -94,7 +94,7 @@ public class RecipeList {
         Ui.drawDivider();
 
         assert recipeExist(index) : "Index is out of bounds";
-        Recipe recipe = recipes.get(index-1);
+        Recipe recipe = recipes.get(index);
 
         listRecipeSteps(recipe);
     }

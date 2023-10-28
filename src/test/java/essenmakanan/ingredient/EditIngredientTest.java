@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EditIngredientTest {
 
-    IngredientList ingredients;
-    Ingredient ingredientToEdit;
+    private IngredientList ingredients;
+    private Ingredient ingredientToEdit;
     @BeforeEach
     public void setUp() {
         ingredients = new IngredientList();
