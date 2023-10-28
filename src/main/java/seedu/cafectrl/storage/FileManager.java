@@ -18,7 +18,7 @@ public class FileManager {
         this.ui = ui;
     }
 
-    //@@author Dexter
+    //@@author DextheChik3n
     /**
      * Reads the text file from the specified file path and stores each line in an ArrayList.
      *
@@ -46,7 +46,7 @@ public class FileManager {
         return textLines;
     }
 
-    //@@author Dexter
+    //@@author DextheChik3n
     /**
      * Handles opening and creating (if needed) the text file and folder
      * @param filePath the file path that is passed in main
@@ -73,13 +73,12 @@ public class FileManager {
         return dataFilePath.toString();
     }
 
-    //@@author Dexter
     /**
-     * Writes text to the text file at the specified file path.
+     * Writes a list of texts to the text file at the specified file path.
      * Will overwrite all text in text file.
      *
      * @param filePath file path of the text file.
-     * @param textToAdd text to be written to the text file.
+     * @param listOfTextToAdd text to be written to the text file.
      * @throws IOException If I/O operations are interrupted.
      */
     public void overwriteFile(String filePath, ArrayList<String> listOfTextToAdd) throws IOException {
@@ -90,13 +89,22 @@ public class FileManager {
         fw.close();
     }
 
+    //@@author DextheChik3n
+    /**
+     * Writes text to the text file at the specified file path.
+     * Will overwrite all text in text file.
+     *
+     * @param filePath file path of the text file.
+     * @param textToAdd text to be written to the text file.
+     * @throws IOException If I/O operations are interrupted.
+     */
     public void overwriteFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
-    //@@author Dexter
+    //@@author DextheChik3n
     /**
      * Appends text to the text file at the specified file path.
      * Will add text to text file.

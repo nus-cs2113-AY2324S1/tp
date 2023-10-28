@@ -9,7 +9,7 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 
 public class Decoder {
-    private static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         for (String encodedData : encodedPantryStock) {
@@ -18,7 +18,7 @@ public class Decoder {
                 ui.showToUser("Error in pantry stock data file! Skipping this particular ingredient!");
             } else if (isValidQuantityFormat(decodedData[1])) {
                 Ingredient ingredient = new Ingredient(decodedData[0],
-                        Integer.parseInt(decodedData[1]), decodedData[1]);
+                        Integer.parseInt(decodedData[1]), decodedData[2]);
                 pantryStock.add(ingredient);
             }
         }

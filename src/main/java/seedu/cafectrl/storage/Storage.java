@@ -21,6 +21,7 @@ public class Storage {
         this.ui  = ui;
     }
 
+    //@@author DextheChik3n
     /**
      * Initializes reading data from text file process
      * @return ArrayList of respective type based on the storage functionality
