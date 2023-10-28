@@ -1,6 +1,7 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.drugs.Drug;
+import seedu.stocker.drugs.StockEntry;
 
 /**
  * Adds a drug into the inventory
@@ -29,8 +30,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult<StockEntry> execute() {
         inventory.addNewDrug(toAdd.getName(), toAdd, quantity);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName()));
+        return new CommandResult<>(String.format(MESSAGE_SUCCESS, toAdd.getName()));
     }
 }

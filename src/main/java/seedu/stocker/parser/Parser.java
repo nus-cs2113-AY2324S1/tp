@@ -2,20 +2,23 @@ package seedu.stocker.parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import seedu.stocker.commands.Command;
+
 import seedu.stocker.commands.AddCommand;
+import seedu.stocker.commands.Command;
+import seedu.stocker.commands.DeleteCommand;
+import seedu.stocker.commands.ExitCommand;
+import seedu.stocker.commands.FindCommand;
+import seedu.stocker.commands.HelpCommand;
+import seedu.stocker.commands.IncorrectCommand;
+import seedu.stocker.commands.ListCommand;
+import seedu.stocker.commands.LoginCommand;
+import seedu.stocker.commands.RegisterCommand;
+import seedu.stocker.commands.SaveCommand;
+import seedu.stocker.commands.ShowStockLevelCommand;
+import seedu.stocker.commands.ViewCartCommand;
 import seedu.stocker.commands.AddToCartCommand;
 import seedu.stocker.commands.CheckOutCommand;
-import seedu.stocker.commands.ListCommand;
-import seedu.stocker.commands.ViewCartCommand;
-import seedu.stocker.commands.HelpCommand;
-import seedu.stocker.commands.ExitCommand;
-import seedu.stocker.commands.IncorrectCommand;
-import seedu.stocker.commands.FindCommand;
-import seedu.stocker.commands.DeleteCommand;
-import seedu.stocker.commands.RegisterCommand;
-import seedu.stocker.commands.LoginCommand;
-import seedu.stocker.commands.SaveCommand;
+
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -73,6 +76,9 @@ public class Parser {
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand();
 
+        case ShowStockLevelCommand.COMMAND_WORD:
+            return new ShowStockLevelCommand();
+
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -112,7 +118,7 @@ public class Parser {
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 2) {
             String name = matcher.group(1);
-            Long quantity = Long.parseLong(matcher.group(2));
+            long quantity = Long.parseLong(matcher.group(2));
             return new AddToCartCommand(name, quantity);
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

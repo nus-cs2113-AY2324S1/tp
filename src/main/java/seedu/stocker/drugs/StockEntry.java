@@ -2,7 +2,7 @@ package seedu.stocker.drugs;
 
 public class StockEntry {
 
-    private Drug drug;
+    private final Drug drug;
 
     private long quantity;
 

@@ -20,7 +20,7 @@ public class SaveCommand extends Command{
 
     public static final String MESSAGE_SUCCESS = "Drugs successfully saved.";
 
-    public CommandResult execute() throws IOException {
+    public CommandResult<StockEntry> execute() throws IOException {
 
         File holder = new File("./drugs.txt");
         if (!holder.exists()) {
@@ -34,6 +34,6 @@ public class SaveCommand extends Command{
         for(int i = 0; i < entries.size(); i += 1){
             storageManager.appendToFile("drugs.txt",entries.get(i).toString());
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult<>(MESSAGE_SUCCESS);
     }
 }
