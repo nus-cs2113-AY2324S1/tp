@@ -25,7 +25,7 @@ public class ShowStockLevelCommand extends Command {
      * @return A CommandResult containing the success message and a list of stock entries sorted by quantity.
      */
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         // Assertion: Check if the inventory is properly initialized
         assert inventory != null : "Inventory should be initialized before executing ShowStockLevelCommand.";
         // Retrieve the list of drugs from the inventory

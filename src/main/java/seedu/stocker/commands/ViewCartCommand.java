@@ -1,6 +1,5 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.drugs.StockEntry;
 
 /**
  * Represents a command to list all drugs in the current cart.
@@ -22,7 +21,7 @@ public class ViewCartCommand extends Command {
      * Execute the ViewCartCommand
      */
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         if (currentCart.isEmpty()) {
             return new CommandResult<>(MESSAGE_FAILURE);
         } else {

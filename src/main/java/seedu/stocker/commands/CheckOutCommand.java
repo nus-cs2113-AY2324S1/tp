@@ -1,6 +1,5 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.drugs.StockEntry;
 
 /**
  * Remove a drug from inventory and add it into the sales list
@@ -19,7 +18,7 @@ public class CheckOutCommand extends Command {
     }
 
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         currentCart.checkOut(salesList, inventory);
         return new CommandResult<>(String.format(MESSAGE_SUCCESS));
     }

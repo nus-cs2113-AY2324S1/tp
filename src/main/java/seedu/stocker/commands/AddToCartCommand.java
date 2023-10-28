@@ -26,7 +26,7 @@ public class AddToCartCommand extends Command {
     }
 
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         StockEntry matchingEntry = inventory.getStockEntries().stream()
             .filter(entry -> entry
                 .getDrug().getName()

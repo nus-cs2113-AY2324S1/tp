@@ -25,7 +25,7 @@ public class ListCommand extends Command {
      * @return A CommandResult containing the success message and the list of drugs.
      */
     @Override
-    public CommandResult<StockEntry> execute() {
+    public CommandResult execute() {
         // Assertion: Check if the inventory is properly initialised
         assert inventory != null : "Inventory should be initialised before executing ListCommand.";
         // Retrieve the list of drugs from the inventory
