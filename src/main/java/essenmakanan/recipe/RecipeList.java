@@ -33,7 +33,7 @@ public class RecipeList {
     }
 
     public Recipe getRecipeByIndex(int index) {
-        assert index >= 0 && index < recipes.size() : "Index is out of bounds";
+        assert recipeExist(index) : "Index is out of bounds";
         return recipes.get(index);
     }
 
@@ -92,10 +92,7 @@ public class RecipeList {
 
     public void viewRecipeByIndex(int index) {
         Ui.drawDivider();
-        if (index < 0 || index >= recipes.size()) {
-            System.out.println("We have " + recipes.size() + "recipes right now and the given input is invalid.");
-            return;
-        }
+        assert recipeExist(index) : "Index is out of bounds";
         Recipe recipe = recipes.get(index-1);
         listRecipeSteps(recipe);
     }
@@ -106,9 +103,7 @@ public class RecipeList {
             .filter(recipe1 -> recipe1.getTitle().equals(title))
             .findFirst()
             .orElse(null);
-        if (recipe == null) {
-            System.out.println("You haven't added this recipe with given title");
-        }
+        assert getRecipeByName(title) == recipe : "Recipe does not exist";
         listRecipeSteps(recipe);
     }
 }
