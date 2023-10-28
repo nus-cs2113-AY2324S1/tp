@@ -28,7 +28,7 @@ Weight: 80.0kg
 Daily calorie limit: 2000.0kcal
 BMI: 24.69
 ____________________________________________________________
-`viewprofile 123` is an invalid command .
+`viewprofile 123` is an invalid command.
 `viewprofile` shows all profile details.
 Type `viewprofile` to view your profile.
 
@@ -44,10 +44,10 @@ Weight: 70.0kg
 Daily calorie limit: 1500.0kcal
 BMI: 24.22
 
-`editprofileh/120w/80l/100` is an invalid command
+`editprofileh/120w/80l/100` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
-`editprofile h/-180 w/70 l/1000` is an invalid command .
+`editprofile h/-180 w/70 l/1000` is an invalid command.
 `editprofile` allows you to edit your profile.
 Type `editprofile h/<HEIGHT> w/<WEIGHT> l/<CALORIE_LIMIT>` to edit.
 
@@ -60,32 +60,32 @@ BMI: 24.22
 Your current BMI is 24.22
 BMI falls under NORMAL WEIGHT category
 
-`bmi 30f` is an invalid command .
+`bmi 30f` is an invalid command.
 `bmi` calculates your current BMI.
 Type `bmi` to view your BMI.
 
 I've added the following meal:
 [M] pasta (200.0kcal, 2023-10-22)
 
-`addmeal pizza 200` is an invalid command .
+`addmeal pizza 200` is an invalid command.
 `addmeal` adds your daily meal data to the list.
 Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
 Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
 You should type <DATE> in format of `yyyy-MM-dd`.
 
-`viewmeal` is an invalid command
+`viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
-`viewmeal` is an invalid command
+`viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
-`deletemeal1` is an invalid command
+`deletemeal1` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 I've deleted the following meal:
 [M] pasta (200.0kcal, 2023-10-22)
 
-`addworkout run 400 d/2023-10-22` is an invalid command .
+`addworkout run 400 d/2023-10-22` is an invalid command.
 `addworkout` adds your daily workout data to the list.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES>` to add today's workout.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
@@ -98,7 +98,7 @@ These are the workouts you have done:
 1.[W] running (400.0kcal, 2023-10-22)
 
 
-`deleteworkout1` is an invalid command
+`deleteworkout1` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 I've deleted the following workout:

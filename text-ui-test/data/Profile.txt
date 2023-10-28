@@ -1,4 +1,0 @@
-Height: 170.0cm
-Weight: 70.0kg
-Daily calorie limit: 1500.0kcal
-BMI: 24.22
