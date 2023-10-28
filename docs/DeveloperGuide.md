@@ -172,7 +172,7 @@ very start of the user input.
 
 The following sequence diagram shows the implementation of `parseCommand`.
 
-![](./UML/parser.png)
+![](./UML/Parser.jpg)
 
 `getContentAfterKeyword`
 
