@@ -69,4 +69,7 @@ public class Messages {
     public static final String INVALID_ADD_ORDER_FORMAT_MESSAGE = "Error: Incorrect format for the add order command.";
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
             + "in the virtual kitchen of your dreams. Bon appétit!";
+    public static final String PREVIOUS_DAY_TIME_TRAVEL = "Whoa there, time traveler! " +
+            "Unfortunately, the DeLorean can't take us back to the previous day because it's already Day 0, " +
+            "and there's no rewind button in this space-time continuum!";
 }

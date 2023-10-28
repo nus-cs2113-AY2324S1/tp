@@ -1,6 +1,8 @@
 package seedu.cafectrl.parser;
 
 import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.AddOrderCommand;
+import seedu.cafectrl.command.BuyIngredientCommand;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.EditPriceCommand;
@@ -9,12 +11,14 @@ import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
-import seedu.cafectrl.command.AddOrderCommand;
+import seedu.cafectrl.command.NextDayCommand;
+import seedu.cafectrl.command.PreviousDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
-import seedu.cafectrl.command.BuyIngredientCommand;
 
-import seedu.cafectrl.Order;
-import seedu.cafectrl.OrderList;
+import seedu.cafectrl.CurrentDate;
+import seedu.cafectrl.Sales;
+import seedu.cafectrl.data.Order;
+import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
@@ -72,7 +76,7 @@ public class Parser {
      * @param orderList The arraylist object created that stores current orders
      * @return command requested by the user
      */
-    public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry, OrderList orderList) {
+    public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry, OrderList orderList, Sales sales, CurrentDate currentDate) {
         final Matcher matcher = COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Incorrect command format!", ui);
@@ -112,6 +116,12 @@ public class Parser {
 
         case AddOrderCommand.COMMAND_WORD:
             return prepareOrder(menu, arguments, ui, pantry, orderList);
+
+        case NextDayCommand.COMMAND_WORD:
+            return new NextDayCommand(ui, sales, orderList, currentDate);
+
+        case PreviousDayCommand.COMMAND_WORD:
+            return preparePreviousDay(ui, sales, orderList, currentDate);
 
         default:
             return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE, ui);
@@ -337,6 +347,14 @@ public class Parser {
             return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
         }
+    }
+
+    private static Command preparePreviousDay(Ui ui, Sales sales, OrderList orderList, CurrentDate currentDate) {
+        int currentDay = currentDate.getCurrentDay();
+        if (currentDay == 0) {
+            return new IncorrectCommand(Messages.PREVIOUS_DAY_TIME_TRAVEL, ui);
+        }
+        return new PreviousDayCommand(ui, sales, orderList, currentDate);
     }
 
     /**

@@ -2,6 +2,7 @@ package seedu.cafectrl;
 
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.Ui;
@@ -16,6 +17,8 @@ public class CafeCtrl {
     private Command command;
     private Pantry pantry;
     private OrderList orderList;
+    private Sales sales;
+    private CurrentDate currentDate;
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
@@ -24,7 +27,8 @@ public class CafeCtrl {
         ui = new Ui();
         menu = new Menu();
         pantry = new Pantry(ui);
-        orderList = new OrderList();
+        currentDate = new CurrentDate();
+        sales = new Sales();
     }
 
     private void setup() {
@@ -42,8 +46,10 @@ public class CafeCtrl {
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
-                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, orderList);
+                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, orderList, sales, currentDate);
                 command.execute();
+                orderList = setOrderList();
+                orderList.printOrderList();
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
             } finally {
@@ -56,6 +62,19 @@ public class CafeCtrl {
         CafeCtrl cafeCtrl = new CafeCtrl();
         cafeCtrl.setup();
         cafeCtrl.run();
+    }
+
+    public OrderList setOrderList() {
+        int currentDay = currentDate.getCurrentDay();
+        System.out.println("Set current orderList to day: " + currentDay);
+        //orderList.printOrderList();
+        if (sales.isNewOrderList()) {
+            sales.resetNewOrderList();
+            OrderList newOrderList = new OrderList();
+            sales.addOrderList(newOrderList);
+            return newOrderList;
+        }
+        return sales.getOrderList(currentDay);
     }
 }
 

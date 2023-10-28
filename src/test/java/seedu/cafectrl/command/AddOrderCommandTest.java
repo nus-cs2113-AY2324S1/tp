@@ -1,12 +1,13 @@
 package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.cafectrl.Order;
-import seedu.cafectrl.OrderList;
+import seedu.cafectrl.data.Order;
+import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -61,8 +62,7 @@ class AddOrderCommandTest {
 
         String actualOutput = String.join(",", commandOutput);
 
-        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. "
-                + "Bon appétit!"
+        String expectedOutput = Messages.CHEF_MESSAGE
                 + "Is order completed?: true"
                 + "Total orderList cost: $5.00";
 
@@ -132,8 +132,7 @@ class AddOrderCommandTest {
 
         String actualOutput = String.join(",", commandOutput);
 
-        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. "
-                + "Bon appétit!"
+        String expectedOutput = Messages.CHEF_MESSAGE
                 + "Is order completed?: true"
                 + "Total orderList cost: $17.90";
 

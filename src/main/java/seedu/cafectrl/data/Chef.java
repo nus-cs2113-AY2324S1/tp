@@ -1,5 +1,6 @@
-package seedu.cafectrl;
+package seedu.cafectrl.data;
 
+import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
