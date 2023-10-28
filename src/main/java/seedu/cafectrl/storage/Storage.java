@@ -28,18 +28,19 @@ public class Storage {
      * @throws FileNotFoundException if the file is not found in the specified file path in main
      */
     public Menu loadMenu() throws FileNotFoundException {
-        ArrayList<String> encodedMenu = this.fileManager.readTextFile(FilePath.MENU_FILE_PATH);
+        // ArrayList<String> encodedMenu = this.fileManager.readTextFile(FilePath.MENU_FILE_PATH);
         // return Decoder.decodeMenuData(encodedMenu);
         return new Menu();
     }
 
     public Pantry loadPantryStock() throws FileNotFoundException {
-        ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
-        return Decoder.decodePantryStockData(encodedPantryStock);
+        // ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
+        // return Decoder.decodePantryStockData(encodedPantryStock);
+        return new Pantry(ui);
     }
 
     public OrderList loadOrderList() throws FileNotFoundException {
-        ArrayList<String> encodedOrderList = this.fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
+        // ArrayList<String> encodedOrderList = this.fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
         // return Decoder.decodeOrderListData(encodedOrderList);
         return new OrderList();
     }
