@@ -2,7 +2,6 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
-import fittrack.storage.Storage;
 
 public class InvalidCommand extends Command {
     public static final String MESSAGE_INVALID_COMMAND = "`%s` is an invalid command.";
@@ -11,12 +10,12 @@ public class InvalidCommand extends Command {
     private String exceptionMessage = "";
 
     public InvalidCommand(String commandLine) {
-        super(commandLine);
+        this(commandLine, null);
     }
 
     public InvalidCommand(String commandLine, ParseException e) {
-        this(commandLine);
-        if (e.getMessage() != null) {
+        super(commandLine);
+        if (e != null && e.getMessage() != null) {
             this.exceptionMessage = e.getMessage();
         }
     }
@@ -27,7 +26,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void setArguments(String inputLine, CommandParser parser) throws Storage.StorageOperationException {
+    public void setArguments(String inputLine, CommandParser parser) {
         HelpCommand helpCommand = new HelpCommand(inputLine);
         helpCommand.setArguments(inputLine, parser);
         String message = helpCommand.execute().getFeedback();

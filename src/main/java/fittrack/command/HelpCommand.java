@@ -1,7 +1,6 @@
 package fittrack.command;
 
 import fittrack.parser.CommandParser;
-import fittrack.storage.Storage;
 
 import static fittrack.parser.CommandParser.ALL_COMMAND_WORDS;
 
@@ -28,7 +27,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) throws Storage.StorageOperationException {
+    public void setArguments(String args, CommandParser parser) {
         if (args.isEmpty()) {
             helpMessage = HELP;
             return;

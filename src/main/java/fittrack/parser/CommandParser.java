@@ -3,20 +3,21 @@ package fittrack.parser;
 import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
+import fittrack.command.BmiCommand;
 import fittrack.command.CalorieSumCommand;
 import fittrack.command.CaloriesBurntCommand;
+import fittrack.command.CheckWeightRangeCommand;
 import fittrack.command.Command;
+import fittrack.command.CommandResult;
 import fittrack.command.DeleteMealCommand;
 import fittrack.command.DeleteWorkoutCommand;
 import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
+import fittrack.command.SaveCommand;
 import fittrack.command.ViewMealsCommand;
 import fittrack.command.ViewProfileCommand;
-import fittrack.command.BmiCommand;
-import fittrack.command.SaveCommand;
-import fittrack.command.CheckWeightRange;
 import fittrack.command.ViewWorkoutsCommand;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
@@ -24,7 +25,6 @@ import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Height;
 import fittrack.data.Weight;
-import fittrack.storage.Storage;
 
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
@@ -64,7 +64,7 @@ public class CommandParser {
             "(?<date>\\S+)?"
     );
 
-    public Command parseCommand(String userCommandLine) throws Storage.StorageOperationException {
+    public Command parseCommand(String userCommandLine) {
 
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
@@ -87,7 +87,7 @@ public class CommandParser {
         return command;
     }
 
-    public Command getBlankCommand(String word, String commandLine) throws Storage.StorageOperationException {
+    public Command getBlankCommand(String word, String commandLine) {
         switch (word) {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand(commandLine);
@@ -115,8 +115,8 @@ public class CommandParser {
             return new SaveCommand(commandLine);
         case CalorieSumCommand.COMMAND_WORD:
             return new CalorieSumCommand(commandLine);
-        case CheckWeightRange.COMMAND_WORD:
-            return new CheckWeightRange(commandLine);
+        case CheckWeightRangeCommand.COMMAND_WORD:
+            return new CheckWeightRangeCommand(commandLine);
         case CaloriesBurntCommand.COMMAND_WORD:
             return new CaloriesBurntCommand(commandLine);
         default:
@@ -125,18 +125,18 @@ public class CommandParser {
         }
     }
 
-    public InvalidCommand getInvalidCommand(String userCommandLine) 
-            throws Storage.StorageOperationException {
-        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine);
+    public InvalidCommand getInvalidCommand(String userCommandLine) {
+        return getInvalidCommand(userCommandLine, null);
+    }
+
+    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
+        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
         invalidCommand.setArguments(userCommandLine, this);
         return invalidCommand;
     }
 
-    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) 
-            throws Storage.StorageOperationException {
-        InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
-        invalidCommand.setArguments(userCommandLine, this);
-        return invalidCommand;
+    public CommandResult getInvalidCommandResult(String userCommandLine, ParseException e) {
+        return getInvalidCommand(userCommandLine, e).execute();
     }
 
     /**
