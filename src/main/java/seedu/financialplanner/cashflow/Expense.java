@@ -3,11 +3,19 @@ package seedu.financialplanner.cashflow;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 
+import java.time.LocalDate;
+
 public class Expense extends Cashflow {
     protected ExpenseType type;
 
     public Expense(double amount, ExpenseType type, int recur, String description) {
         super(amount, recur, description);
+        this.type = type;
+        addExpenseValue();
+    }
+
+    public Expense(double amount, ExpenseType type, int recur, String description, LocalDate date) {
+        super(amount, recur, description, date);
         this.type = type;
         addExpenseValue();
     }

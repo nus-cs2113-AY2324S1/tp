@@ -16,6 +16,8 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -100,6 +102,8 @@ public abstract class LoadData {
             throws FinancialPlannerException, IllegalArgumentException {
         double value;
         int recur;
+        int index;
+        LocalDate date;
         Cashflow entry;
         String description;
 
@@ -107,7 +111,9 @@ public abstract class LoadData {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            description = getDescription(split);
+            date = getDate(split, recur);
+            index = getIndex(recur);
+            description = getDescription(split, index);
             checkValidInput(value, recur);
             IncomeType incomeType;
             try {
@@ -115,12 +121,14 @@ public abstract class LoadData {
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid income type");
             }
-            entry = new Income(value, incomeType, recur, description);
+            entry = new Income(value, incomeType, recur, description, date);
             break;
         case "E":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            description = getDescription(split);
+            date = getDate(split, recur);
+            index = getIndex(recur);
+            description = getDescription(split, index);
             checkValidInput(value, recur);
             ExpenseType expenseType;
             try {
@@ -128,7 +136,7 @@ public abstract class LoadData {
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid expense type");
             }
-            entry = new Expense(value, expenseType, recur, description);
+            entry = new Expense(value, expenseType, recur, description, date);
             break;
         default:
             throw new FinancialPlannerException("Error loading file");
@@ -137,10 +145,30 @@ public abstract class LoadData {
         return entry;
     }
 
-    private static String getDescription(String[] split) {
+    private static LocalDate getDate(String[] split, int recur) {
+        LocalDate date;
+        if (recur != 0) {
+            date = LocalDate.parse(split[4].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } else {
+            date = null;
+        }
+        return date;
+    }
+
+    private static int getIndex(int recur) {
+        int index;
+        if (recur == 0) {
+            index = 4;
+        } else {
+            index = 5;
+        }
+        return index;
+    }
+
+    private static String getDescription(String[] split, int index) {
         String description;
-        if (split.length > 4) {
-            description = split[4].trim();
+        if (split.length > index) {
+            description = split[index].trim();
         } else {
             description = null;
         }

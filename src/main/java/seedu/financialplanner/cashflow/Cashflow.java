@@ -6,6 +6,8 @@ import seedu.financialplanner.enumerations.IncomeType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Cashflow {
 
@@ -13,11 +15,21 @@ public abstract class Cashflow {
     protected double amount;
     protected int recur;
     protected String description;
+    protected LocalDate date;
 
     public Cashflow(double amount, int recur, String description) {
         this.amount = amount;
         this.recur = recur;
         this.description = description;
+        if (recur != 0) {
+            this.date = LocalDate.now();
+        }
+    }
+    public Cashflow(double amount, int recur, String description, LocalDate date) {
+        this.amount = amount;
+        this.recur = recur;
+        this.description = description;
+        this.date = date;
     }
 
     public static void clearBalance() {
@@ -59,6 +71,7 @@ public abstract class Cashflow {
 
         if (recur != 0) {
             string += System.lineSeparator() + "   Recurring every: " + recur + " days";
+            string += ", starting from: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         if (description != null) {
             string += System.lineSeparator() + "   Description: " + description;
@@ -81,8 +94,12 @@ public abstract class Cashflow {
     }
 
     public String formatString() {
-        String string = " | " + this.recur;
-
+        String string;
+        if (recur == 0) {
+            string = " | 0";
+        } else {
+            string = " | " + this.recur + " | " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
         if (description != null) {
             string += " | " + this.description;
         }
