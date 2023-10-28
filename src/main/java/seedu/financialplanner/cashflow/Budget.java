@@ -1,4 +1,4 @@
-package seedu.financialplanner.list;
+package seedu.financialplanner.cashflow;
 
 import java.text.DecimalFormat;
 

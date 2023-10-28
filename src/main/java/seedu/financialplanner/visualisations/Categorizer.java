@@ -1,10 +1,10 @@
 package seedu.financialplanner.visualisations;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
-import seedu.financialplanner.list.Cashflow;
-import seedu.financialplanner.list.CashflowList;
-import seedu.financialplanner.list.Expense;
-import seedu.financialplanner.list.Income;
+import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.cashflow.Expense;
+import seedu.financialplanner.cashflow.Income;
 
 import java.util.HashMap;
 import java.util.Map;

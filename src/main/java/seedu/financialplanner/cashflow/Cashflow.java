@@ -1,4 +1,4 @@
-package seedu.financialplanner.list;
+package seedu.financialplanner.cashflow;
 
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
@@ -12,10 +12,12 @@ public abstract class Cashflow {
     protected static double balance = 0;
     protected double amount;
     protected int recur;
+    protected String description;
 
-    public Cashflow(double amount, int recur) {
+    public Cashflow(double amount, int recur, String description) {
         this.amount = amount;
         this.recur = recur;
+        this.description = description;
     }
 
     public static void clearBalance() {
@@ -58,7 +60,9 @@ public abstract class Cashflow {
         if (recur != 0) {
             string += System.lineSeparator() + "   Recurring every: " + recur + " days";
         }
-
+        if (description != null) {
+            string += System.lineSeparator() + "   Description: " + description;
+        }
         return string;
     }
 
@@ -77,7 +81,13 @@ public abstract class Cashflow {
     }
 
     public String formatString() {
-        return " | " + this.recur;
+        String string = " | " + this.recur;
+
+        if (description != null) {
+            string += " | " + this.description;
+        }
+
+        return string;
     }
 
     public abstract ExpenseType getExpenseType();
