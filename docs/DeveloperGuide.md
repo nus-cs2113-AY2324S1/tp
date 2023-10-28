@@ -54,7 +54,7 @@ API: `Storage.java`
 the data one upon exiting the program with the `exit` command.
 * Saving the data once upon exit (Currently implemented):
   * Advantage: Better efficiency and performance of the program.
-  * Disadvantage: If the program crashes or is exit incorrectly, data will not be saved.
+  * Disadvantage: If the program crashes or exits incorrectly, data will not be saved.
 * Saving the data after every command:
   * Advantage: Changes are saved after every command.
   * Disadvantage: Executing command might slow down the program when there is a large amount of data to be saved.
