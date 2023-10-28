@@ -3,9 +3,21 @@ package seedu.stocker.parser;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import seedu.stocker.commands.*;
-import seedu.stocker.vendors.Vendor;
+import seedu.stocker.commands.Command;
+import seedu.stocker.commands.AddCommand;
+import seedu.stocker.commands.AddToCartCommand;
+import seedu.stocker.commands.CheckOutCommand;
+import seedu.stocker.commands.ListCommand;
+import seedu.stocker.commands.ViewCartCommand;
+import seedu.stocker.commands.HelpCommand;
+import seedu.stocker.commands.ExitCommand;
+import seedu.stocker.commands.IncorrectCommand;
+import seedu.stocker.commands.FindCommand;
+import seedu.stocker.commands.DeleteCommand;
+import seedu.stocker.commands.RegisterCommand;
+import seedu.stocker.commands.LoginCommand;
+import seedu.stocker.commands.SaveCommand;
+import seedu.stocker.commands.AddVendorCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -136,15 +148,9 @@ public class Parser {
             if (vendorName.equals(null) || vendorName.equals("") || vendorName.equals(" ")) {
                 throw new IOException();
             }
-        }
-        catch(Exception invalidInput){
+        } catch(Exception invalidInput){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,AddVendorCommand.MESSAGE_USAGE));
         }
         return new AddVendorCommand(vendorName);
     }
-
-
-
-
-
-    }
+}
