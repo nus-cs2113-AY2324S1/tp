@@ -1,36 +1,43 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class Command {
-execute() {abstract}
+skinparam classFontColor automatic
+
+
+class "{abstract}\nCommand"  #lime {
++execute() {abstract}
 }
 
-class VisCommand {
-String type
-String chart
-execute()
+class VisCommand #Cyan {
+-String type
+-String chart
++execute()
 }
 
-class RawCommand {
-List<String> args
-Map<String, String> extraArgs
+class RawCommand #DodgerBlue {
+-args: List<String>
+-extraArgs: Map<String, String>
+#commandName: String
 }
 
-class Categorizer {
-sortType()
-sortExpenses()
-sortIncome()
+class Categorizer #AquaMarine {
++<u>sortType(cashflowList: CashflowList, type: String)<u>
++<u>sortExpenses(cashflowList: CashflowList)<u>
++<u>sortIncome(cashflowList: CashflowList)<u>
 }
 
-class Visualizer {
-displayChart()
-displayPieChart()
-displayBarChart()
+class Visualizer #Beige {
++<u>displayChart(chartType: String, cashFlowByCat: Map, type: String)<u>
++ <u>displayPieChart(cashFlowByCat: Map, type: String)<u>
++ <u>displayBarChart(cashFlowByCat: Map, type: String)<u>
 }
 
-Command <|-- VisCommand
+"{abstract}\nCommand" <|-- VisCommand
 RawCommand <.. VisCommand
 Categorizer <.. Visualizer
 Visualizer <.. VisCommand
+
+hide Circle
+skinparam classAttributeIconSize 0
 
 @enduml
