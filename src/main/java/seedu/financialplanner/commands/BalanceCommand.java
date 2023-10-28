@@ -3,6 +3,7 @@ package seedu.financialplanner.commands;
 import seedu.financialplanner.list.Cashflow;
 import seedu.financialplanner.utils.Ui;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class BalanceCommand extends Command {
@@ -17,6 +18,11 @@ public class BalanceCommand extends Command {
 
     @Override
     public void execute() throws Exception {
-        ui.showMessage("Balance: " + Cashflow.getBalance());
+        ui.showMessage("Balance: " + getBalanceString());
+    }
+
+    private String getBalanceString() {
+        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+        return decimalFormat.format(Cashflow.round(Cashflow.getBalance(), 2));
     }
 }

@@ -116,6 +116,8 @@ public class BudgetCommand extends Command {
             }
             Budget.resetBudget();
             ui.printResetBudget();
+        } else if (!Budget.hasBudget()) {
+            ui.printBudgetError("delete");
         } else {
             ui.printBudgetError("reset");
         }

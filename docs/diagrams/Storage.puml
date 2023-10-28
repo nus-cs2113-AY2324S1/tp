@@ -8,8 +8,8 @@ Class Storage
 Class "{abstract}\nLoadData" as LoadData
 Class "{abstract}\nSaveData" as SaveData
 Class CashflowList
-Class Budget
-Class Cashflow
+Class "{abstract}\nBudget" as Budget
+Class "{abstract}\nCashflow" as Cashflow
 Class "<<enumeration>>\nExpenseType" as ExpenseType
 Class "<<enumeration>>\nIncomeType" as IncomeType
 Class Ui
@@ -26,9 +26,10 @@ SaveData ..> Cashflow
 
 LoadData --> CashflowList
 LoadData ..> Budget
-LoadData --> ExpenseType
-LoadData --> IncomeType
-LoadData --> Cashflow
+LoadData ..> ExpenseType
+LoadData ..> IncomeType
+LoadData ..> Cashflow
 LoadData -right-> Ui: prints message >
+
 
 @enduml

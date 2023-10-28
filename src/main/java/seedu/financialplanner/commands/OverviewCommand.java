@@ -35,11 +35,11 @@ public class OverviewCommand extends Command {
         //todo: goal disparity
     }
 
-    private static String getBudgetDesc() {
+    private String getBudgetDesc() {
         return Budget.getCurrentBudgetString();
     }
 
-    private static String getHighestIncome() {
+    private String getHighestIncome() {
         double maxIncome = 0;
         String incomeType = "";
         for (Cashflow entry : cashflowList.list) {
@@ -57,7 +57,7 @@ public class OverviewCommand extends Command {
         return formatDoubleToString(maxIncome) + "    Category: " + incomeType;
     }
 
-    private static String getHighestExpense() {
+    private String getHighestExpense() {
         double maxExpense = 0;
         String expenseType = "";
         for (Cashflow entry : cashflowList.list) {
@@ -75,13 +75,13 @@ public class OverviewCommand extends Command {
         return formatDoubleToString(maxExpense) + "    Category: " + expenseType;
     }
 
-    private static String formatDoubleToString(double amount) {
+    private String formatDoubleToString(double amount) {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
         return decimalFormat.format(Cashflow.round(amount, 2));
     }
 
-    private static String getReminders() {
+    private String getReminders() {
         ReminderList reminderList = ReminderList.INSTANCE;
         if (reminderList.list.isEmpty()) {
             return "No reminders added yet.";
@@ -96,7 +96,7 @@ public class OverviewCommand extends Command {
         return reminders.toString();
     }
 
-    private static String getBalance() {
+    private String getBalance() {
         return formatDoubleToString(Cashflow.getBalance());
     }
 }
