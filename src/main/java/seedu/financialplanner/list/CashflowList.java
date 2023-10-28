@@ -24,11 +24,11 @@ public class CashflowList {
         return cashflowList;
     }
 
-    public void addIncome(double value, IncomeType type, int recur) {
+    public void addIncome(double value, IncomeType type, int recur, String description) {
         logger.log(Level.INFO, "Adding income");
         int existingListSize = list.size();
 
-        Income toAdd = new Income(value, type, recur);
+        Income toAdd = new Income(value, type, recur, description);
         list.add(toAdd);
         ui.printAddedCashflow(toAdd);
 
@@ -36,11 +36,11 @@ public class CashflowList {
         assert newListSize == existingListSize + 1;
     }
 
-    public void addExpense(double value, ExpenseType type, int recur) {
+    public void addExpense(double value, ExpenseType type, int recur, String description) {
         logger.log(Level.INFO, "Adding expense");
         int existingListSize = list.size();
 
-        Expense toAdd = new Expense(value, type, recur);
+        Expense toAdd = new Expense(value, type, recur, description);
         list.add(toAdd);
         ui.printAddedCashflow(toAdd);
 

@@ -21,6 +21,7 @@ public class AddCashflowCommand extends Command {
     protected ExpenseType expenseType;
     protected IncomeType incomeType;
     protected int recur = 0;
+    protected String description = null;
     protected CashflowList cashflowList = CashflowList.getInstance();
 
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
@@ -91,6 +92,11 @@ public class AddCashflowCommand extends Command {
             throw new IllegalArgumentException("Recurring value cannot be negative");
         }
 
+        if (rawCommand.extraArgs.containsKey("d")) {
+            description = rawCommand.extraArgs.get("d");
+        }
+        rawCommand.extraArgs.remove("d");
+
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
             logger.log(Level.WARNING, "Invalid extra arguments found");
@@ -115,10 +121,10 @@ public class AddCashflowCommand extends Command {
 
         switch (category) {
         case INCOME:
-            cashflowList.addIncome(amount, incomeType, recur);
+            cashflowList.addIncome(amount, incomeType, recur, description);
             break;
         case EXPENSE:
-            cashflowList.addExpense(amount, expenseType, recur);
+            cashflowList.addExpense(amount, expenseType, recur, description);
             if (Budget.hasBudget()) {
                 deductFromBudget(cashflowList.list.get(cashflowList.list.size() - 1));
             }
