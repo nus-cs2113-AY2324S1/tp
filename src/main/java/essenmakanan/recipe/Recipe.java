@@ -1,7 +1,5 @@
 package essenmakanan.recipe;
 
-import java.util.ArrayList;
-
 public class Recipe {
     private String title;
     private RecipeStepList recipeSteps;
@@ -16,12 +14,20 @@ public class Recipe {
         recipeSteps = new RecipeStepList(steps);
     }
 
-    public ArrayList<String> getRecipeSteps() {
-        return recipeSteps.getSteps();
+    public RecipeStepList getRecipeSteps() {
+        return recipeSteps;
+    }
+
+    public Step getRecipeStepByIndex(int index) {
+        return recipeSteps.getStepByIndex(index);
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

@@ -1,17 +1,15 @@
 package essenmakanan.recipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class RecipeStepList extends ArrayList<Step> {
-    private ArrayList<String> steps;
+public class RecipeStepList {
+    private ArrayList<Step> steps = new ArrayList<>();
 
     public RecipeStepList() {
         Scanner in = new Scanner(System.in);
         String input;
         boolean isAddingSteps = true;
-        steps = new ArrayList<>();
 
         do {
             System.out.println("Add steps of your recipe, type \"end\" to finish");
@@ -20,26 +18,39 @@ public class RecipeStepList extends ArrayList<Step> {
             if (input.equals("end")) {
                 isAddingSteps = false;
             } else {
-                addStep(input);
+                this.addStep(input);
             }
         } while(isAddingSteps);
         System.out.println("done steps");
     }
 
-    public RecipeStepList(String[] steps) {
-        this.steps = new ArrayList<>(Arrays.asList(steps));
+    public RecipeStepList(String[] inputSteps) {
+
+        for (String stepString : inputSteps) {
+            Step step = new Step(stepString);
+            this.addStep(step);
+        }
     }
 
-    public void addStep(String input) {
-        steps.add(input);
+    public void addStep(String stepString) {
+        Step step = new Step(stepString);
+        this.steps.add(step);
     }
 
-    public ArrayList<String> getSteps() {
+    public void addStep(Step step) {
+        this.steps.add(step);
+    }
+
+    public ArrayList<Step> getSteps() {
         return steps;
     }
 
+    public Step getStepByIndex(int index) {
+        return steps.get(index);
+    }
+
     public void deleteStep(Step step) {
-        remove(step);
+        steps.remove(step);
     }
 
 }

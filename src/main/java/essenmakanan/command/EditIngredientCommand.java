@@ -19,7 +19,7 @@ public class EditIngredientCommand extends Command {
         Ingredient existingIngredient;
 
         this.editDetails = this.editDetails.replace("i/", "");
-        // INGREDIENT_NAME [n/NEW_NAME]
+
         String[] splitDetails = this.editDetails.split(" ");
         String ingredientName = splitDetails[0];
 

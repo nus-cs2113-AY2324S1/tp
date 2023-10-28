@@ -1,15 +1,6 @@
 package essenmakanan.parser;
 
-import essenmakanan.command.Command;
-import essenmakanan.command.AddIngredientCommand;
-import essenmakanan.command.AddRecipeCommand;
-import essenmakanan.command.DeleteIngredientCommand;
-import essenmakanan.command.DeleteRecipeCommand;
-import essenmakanan.command.ViewIngredientsCommand;
-import essenmakanan.command.ViewRecipesCommand;
-import essenmakanan.command.EditIngredientCommand;
-import essenmakanan.command.ExitCommand;
-import essenmakanan.command.HelpCommand;
+import essenmakanan.command.*;
 
 import essenmakanan.exception.EssenMakananCommandException;
 import essenmakanan.exception.EssenMakananFormatException;
@@ -51,14 +42,19 @@ public class Parser {
                 command = new ViewRecipesCommand(recipes);
             } else if (inputDetail.equals("i")) {
                 command = new ViewIngredientsCommand(ingredients);
-            } else {
+            } else if (inputDetail.startsWith("r/")) {
+                assert inputDetail.length() > 2 : "To view a recipe, make sure title is not empty";
+                command = new ViewSpecificRecipeCommand(recipes, inputDetail);
+            }else {
                 throw new EssenMakananFormatException();
             }
             break;
         case "edit":
             if (inputDetail.startsWith("i/")) {
                 command = new EditIngredientCommand(inputDetail, ingredients);
-            } else {
+            } else if (inputDetail.startsWith("r/")) {
+                command = new EditRecipeCommand(inputDetail, recipes);
+            }else {
                 throw new EssenMakananFormatException();
             }
             break;

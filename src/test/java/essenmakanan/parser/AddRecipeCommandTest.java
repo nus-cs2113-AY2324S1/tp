@@ -28,8 +28,10 @@ public class AddRecipeCommandTest {
     public void parse_invalidCommand_exceptionThrown() {
         addRecipeCommand.executeCommand();
         assertEquals("bread", recipeList.getRecipeByIndex(0).getTitle());
-        assertEquals("step 1 instructions", recipeList.getRecipeByIndex(0).getRecipeSteps().get(0));
-        assertEquals("step 2 instructions", recipeList.getRecipeByIndex(0).getRecipeSteps().get(1));
+        String step1 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(0).getDescription();
+        String step2 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(1).getDescription();
+        assertEquals("step 1 instructions", step1);
+        assertEquals("step 2 instructions", step2);
     }
 
 }
