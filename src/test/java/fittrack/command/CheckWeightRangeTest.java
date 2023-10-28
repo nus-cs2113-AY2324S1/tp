@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CheckWeightRangeTest {
 
     private UserProfile userProfile;
-    Height height = new Height(180);
+    private final Height height = new Height(180);
 
     @BeforeEach
     public void setUp() {
