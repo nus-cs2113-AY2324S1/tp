@@ -25,7 +25,7 @@ public class ListCommand extends Command {
      * @return A CommandResult containing the success message and the list of drugs.
      */
     @Override
-    public CommandResult execute() {
+    public CommandResult<StockEntry> execute() {
         // Assertion: Check if the inventory is properly initialised
         assert inventory != null : "Inventory should be initialised before executing ListCommand.";
         // Retrieve the list of drugs from the inventory
@@ -34,10 +34,10 @@ public class ListCommand extends Command {
         // Check if the inventory is empty
         if (stockEntries.isEmpty()) {
             // Return a CommandResult indicating that the inventory is empty
-            return new CommandResult("The inventory is empty.");
+            return new CommandResult<>("The inventory is empty.");
         } else {
             // Return a CommandResult with the success message and the list of drugs
-            return new CommandResult(MESSAGE_SUCCESS, stockEntries);
+            return new CommandResult<>(MESSAGE_SUCCESS, stockEntries);
         }
     }
 }

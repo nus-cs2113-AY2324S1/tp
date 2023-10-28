@@ -1,6 +1,8 @@
 package seedu.stocker.commands;
 
 
+import seedu.stocker.drugs.StockEntry;
+
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
  */
@@ -13,8 +15,8 @@ public class IncorrectCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
-        return new CommandResult(feedbackToUser);
+    public CommandResult<StockEntry> execute() {
+        return new CommandResult<>(feedbackToUser);
     }
 
 }
