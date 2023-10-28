@@ -22,7 +22,6 @@ public class DeleteCommand  extends Command{
     /**
      * Constructs a DeleteCommand with the specified drug name.
      *
-     * @param name The name of the drug to be deleted.
      */
     public DeleteCommand(String key) {
         this.keyToDelete = key.trim().toLowerCase();
@@ -34,12 +33,12 @@ public class DeleteCommand  extends Command{
      * @return A CommandResult indicating the result of the deletion operation.
      */
     @Override
-    public CommandResult execute() {
+    public CommandResult<StockEntry> execute() {
         try {
             StockEntry deletedEntry = inventory.deleteDrug(this.keyToDelete);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, deletedEntry.getDrug().getName()));
+            return new CommandResult<>(String.format(MESSAGE_SUCCESS, deletedEntry.getDrug().getName()));
         } catch (DrugNotFoundException e) {
-            return new CommandResult(MESSAGE_FAILURE);
+            return new CommandResult<>(MESSAGE_FAILURE);
         }
     }
 }

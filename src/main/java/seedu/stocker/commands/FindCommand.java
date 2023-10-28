@@ -58,9 +58,9 @@ public class FindCommand extends Command {
      * @return A CommandResult containing the outcome of the command execution.
      */
     @Override
-    public CommandResult execute() {
+    public CommandResult<StockEntry> execute() {
         if (keyword == null || keyword.trim().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            return new CommandResult<>(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         List<StockEntry> entries = inventory.getStockEntries();
@@ -72,7 +72,7 @@ public class FindCommand extends Command {
             }
         }
 
-        return new CommandResult(MESSAGE_SUCCESS, foundEntries);
+        return new CommandResult<>(MESSAGE_SUCCESS, foundEntries);
     }
 
 

@@ -17,8 +17,8 @@ public class AddToCartCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New drug added in the current cart: %1$s";
 
-    private String drugName;
-    private long quantity;
+    private final String drugName;
+    private final long quantity;
 
     public AddToCartCommand(String name, long quantity) {
         this.drugName = name;
@@ -26,7 +26,7 @@ public class AddToCartCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult<StockEntry> execute() {
         StockEntry matchingEntry = inventory.getStockEntries().stream()
             .filter(entry -> entry
                 .getDrug().getName()
@@ -36,9 +36,9 @@ public class AddToCartCommand extends Command {
             .orElse(null);
         if (matchingEntry != null) {
             currentCart.addEntry(this.drugName, this.quantity);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, matchingEntry.getDrug().getName()));
+            return new CommandResult<>(String.format(MESSAGE_SUCCESS, matchingEntry.getDrug().getName()));
         } else {
-            return new CommandResult("This drug is not in stock. ");
+            return new CommandResult<>("This drug is not in stock. ");
         }
     }
 

@@ -30,6 +30,11 @@ class HelpCommandTest {
             + "Example: list"
             + System.getProperty("line.separator")
             + System.getProperty("line.separator")
+            + "stocklevel: List all drugs by quantity level tracked by the system in ascending order. "
+            + System.getProperty("line.separator")
+            + "Example: stocklevel"
+            + System.getProperty("line.separator")
+            + System.getProperty("line.separator")
             + "find /n: Finds drug in inventory using name."
             + System.getProperty("line.separator")
             + "Example: find /n panadol"
