@@ -96,10 +96,6 @@ public abstract class LoadData {
         return line.equalsIgnoreCase("y");
     }
 
-    private static boolean hasDescription(String[] split) {
-        return (split.length > 4);
-    }
-
     private static Cashflow getEntry(String type, String[] split)
             throws FinancialPlannerException, IllegalArgumentException {
         double value;
@@ -111,11 +107,7 @@ public abstract class LoadData {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            if (hasDescription(split)) {
-                description = split[4].trim();
-            } else {
-                description = null;
-            }
+            description = getDescription(split);
             checkValidInput(value, recur);
             IncomeType incomeType;
             try {
@@ -128,11 +120,7 @@ public abstract class LoadData {
         case "E":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            if (hasDescription(split)) {
-                description = split[4].trim();
-            } else {
-                description = null;
-            }
+            description = getDescription(split);
             checkValidInput(value, recur);
             ExpenseType expenseType;
             try {
@@ -147,6 +135,16 @@ public abstract class LoadData {
         }
 
         return entry;
+    }
+
+    private static String getDescription(String[] split) {
+        String description;
+        if (split.length > 4) {
+            description = split[4].trim();
+        } else {
+            description = null;
+        }
+        return description;
     }
 
     public static ArrayList<Stock> loadWatchList() {
