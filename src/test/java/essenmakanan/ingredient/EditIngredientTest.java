@@ -1,6 +1,6 @@
 package essenmakanan.ingredient;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class EditIngredientTest {
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
-        } catch (EssenMakananFormatException e) {
+        } catch (EssenFormatException e) {
             e.handleException();
         }
 
@@ -39,7 +39,7 @@ public class EditIngredientTest {
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
-        } catch (EssenMakananFormatException e) {
+        } catch (EssenFormatException e) {
             e.handleException();
         }
 
@@ -54,7 +54,7 @@ public class EditIngredientTest {
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
-        } catch (EssenMakananFormatException e) {
+        } catch (EssenFormatException e) {
             e.handleException();
         }
 
@@ -69,7 +69,7 @@ public class EditIngredientTest {
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
-        } catch (EssenMakananFormatException e) {
+        } catch (EssenFormatException e) {
             e.handleException();
         }
 
@@ -84,7 +84,7 @@ public class EditIngredientTest {
         ingredients.addIngredient(ingredientToEdit);
         String[] editDetails = {"edit", "/nbreads"};
 
-        assertThrows(EssenMakananFormatException.class, () -> {
+        assertThrows(EssenFormatException.class, () -> {
             ingredients.editIngredient(ingredientToEdit, editDetails);
         });
     }

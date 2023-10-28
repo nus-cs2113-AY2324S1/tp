@@ -2,15 +2,15 @@ package essenmakanan.parser;
 
 import essenmakanan.command.*;
 
-import essenmakanan.exception.EssenMakananCommandException;
-import essenmakanan.exception.EssenMakananFormatException;
-import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.exception.EssenCommandException;
+import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.RecipeList;
 
 public class Parser {
     public Command parseCommand(String input, RecipeList recipes, IngredientList ingredients)
-            throws EssenMakananCommandException, EssenMakananFormatException, EssenMakananOutOfRangeException {
+            throws EssenCommandException, EssenFormatException, EssenOutOfRangeException {
         Command command;
 
         String[] parsedInput = input.split(" ", 2);
@@ -25,7 +25,7 @@ public class Parser {
             } else if (inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
             } else {
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
             break;
         case "delete":
@@ -34,7 +34,7 @@ public class Parser {
             } else if (inputDetail.startsWith("i/")) {
                 command = new DeleteIngredientCommand(ingredients, inputDetail);
             } else {
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
             break;
         case "view":
@@ -45,8 +45,8 @@ public class Parser {
             } else if (inputDetail.startsWith("r/")) {
                 assert inputDetail.length() > 2 : "To view a recipe, make sure title is not empty";
                 command = new ViewSpecificRecipeCommand(recipes, inputDetail);
-            }else {
-                throw new EssenMakananFormatException();
+            } else {
+                throw new EssenFormatException();
             }
             break;
         case "edit":
@@ -55,7 +55,7 @@ public class Parser {
             } else if (inputDetail.startsWith("r/")) {
                 command = new EditRecipeCommand(inputDetail, recipes);
             }else {
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
             break;
         case "help":
@@ -65,7 +65,7 @@ public class Parser {
             command = new ExitCommand();
             break;
         default:
-            throw new EssenMakananCommandException();
+            throw new EssenCommandException();
         }
 
         return command;

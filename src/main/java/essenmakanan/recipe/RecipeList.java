@@ -1,10 +1,10 @@
 package essenmakanan.recipe;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ui.Ui;
+import essenmakanan.recipe.Recipe;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecipeList {
     private ArrayList<essenmakanan.recipe.Recipe> recipes;
@@ -13,11 +13,11 @@ public class RecipeList {
         recipes = new ArrayList<>();
     }
 
-    public ArrayList<essenmakanan.recipe.Recipe> getRecipes() {
+    public ArrayList<Recipe> getRecipes() {
         return recipes;
     }
 
-    public void addRecipe(essenmakanan.recipe.Recipe recipe) {
+    public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
         assert getRecipeByIndex(recipes.size() - 1).getTitle().equals(recipe.getTitle())
                 : "Recipe is not successfully added into the list.";
@@ -33,7 +33,7 @@ public class RecipeList {
     }
 
     public Recipe getRecipeByIndex(int index) {
-        assert index >= 0 && index < recipes.size() : "Index is out of bounds";
+        assert recipeExist(index) : "Index is out of bounds";
         return recipes.get(index);
     }
 
@@ -93,11 +93,10 @@ public class RecipeList {
 
     public void viewRecipeByIndex(int index) {
         Ui.drawDivider();
-        if (index < 0 || index >= recipes.size()) {
-            System.out.println("We have " + recipes.size() + "recipes right now and the given input is invalid.");
-            return;
-        }
-        essenmakanan.recipe.Recipe recipe = recipes.get(index);
+
+        assert recipeExist(index) : "Index is out of bounds";
+        Recipe recipe = recipes.get(index-1);
+
         listRecipeSteps(recipe);
     }
 
@@ -107,13 +106,11 @@ public class RecipeList {
             .filter(recipe1 -> recipe1.getTitle().equals(title))
             .findFirst()
             .orElse(null);
-        if (recipe == null) {
-            System.out.println("You haven't added this recipe with given title");
-        }
+        assert getRecipeByName(title) == recipe : "Recipe does not exist";
         listRecipeSteps(recipe);
     }
 
-    public void editRecipe(Recipe existingRecipe, String[] editDetails) throws EssenMakananFormatException {
+    public void editRecipe(Recipe existingRecipe, String[] editDetails) throws EssenFormatException {
         for (int i = 1; i < editDetails.length; i++) {
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
@@ -136,7 +133,7 @@ public class RecipeList {
                 break;
 
             default:
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
         }
 

@@ -1,6 +1,6 @@
 package essenmakanan.command;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 
@@ -31,7 +31,7 @@ public class EditRecipeCommand extends Command {
         } else {
             try {
                 recipes.editRecipe(existingRecipe, splitDetails);
-            } catch (EssenMakananFormatException e) {
+            } catch (EssenFormatException e) {
                 e.handleException();
             }
         }
