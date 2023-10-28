@@ -1,0 +1,42 @@
+@startuml
+
+title Sequence of InvalidCommand\n
+
+participant ": CommandParser" as parser
+participant ": InvalidCommand" as invalidCmd
+participant ": HelpCommand" as helpCmd
+
+[-> parser ++: getInvalidCommand(inputLine: String[, ...])
+note left
+getInvalidCommand method is called when
+  1. input command fails matching, or
+  2. command word is invalid, or
+  3. any of command arguments is invalid.
+end note
+
+create invalidCmd
+parser -> invalidCmd ++: new
+note left: Construct InvalidCommand using\nuser input and exception (optional).
+return : InvalidCommand
+
+parser -> invalidCmd ++: .setArguments(inputLine: String, ...)
+note right: Create HelpCommand instance to get help message.
+
+create helpCmd
+invalidCmd -> helpCmd ++: new
+return : HelpCommand
+invalidCmd -> helpCmd ++: .setArguments(inputLine: String, ...)
+return
+invalidCmd -> helpCmd ++: .execute()
+return : CommandResult
+note left
+Use HelpCommand's result
+and exception message
+to make a feedback to user.
+end note
+
+return
+
+return : InvalidCommand
+
+@enduml
