@@ -7,18 +7,13 @@ Participant ":Stocker" as Stocker
 Participant ":Ui" as Ui
 Participant ":LoginSystem" as LoginSystem
 
-
-User -> Stocker : new Stocker()
+User -> Stocker :  Stocker()
 activate Stocker
 Stocker -> Stocker : run()
 activate Stocker
 Stocker -> Stocker :start()
-Stocker -> Ui : new Ui()
+Stocker -> Ui :  Ui()
 deactivate Stocker
-
-
-
-
 
 activate Ui
 Ui -> Ui : showLoginMessage()
@@ -27,7 +22,7 @@ Ui -> Ui : ShowToUser()
 deactivate Ui
 Ui --> User : LoginMessage
 
-Stocker -> LoginSystem
+Stocker -> LoginSystem :LoginSystem()
 activate LoginSystem
 LoginSystem -> LoginSystem : run()
 activate LoginSystem
@@ -35,16 +30,10 @@ LoginSystem -> LoginSystem : loadExistingUsers()
 LoginSystem -> LoginSystem: authenticateUserChoice()
 User -> LoginSystem : register or login input
 
-
-
-
 alt  Register
 
-
 LoginSystem -> LoginSystem : newUserCreator()
-LoginSystem -> User : showSuccessfulRegistrationMessage()
-
-
+LoginSystem --> User : showSuccessfulRegistrationMessage()
 
 else Login
 LoginSystem ->LoginSystem : loginExistingUser()
@@ -54,10 +43,5 @@ end
 deactivate LoginSystem
 
 deactivate LoginSystem
-
-
-
-
-
 
 @enduml
