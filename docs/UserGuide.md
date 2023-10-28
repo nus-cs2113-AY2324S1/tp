@@ -31,6 +31,9 @@ it's your personal guide to achieving your health and fitness goals.
 * [Adding a workout : `addworkout`](#adding-a-workout-addworkout)
 * [Viewing list of workout : `viewWorkout`](#viewing-list-of-all-workouts-viewworkouts)
 * [Delete a Workout : `deletework`](#delete-a-workout-deleteworkout)
+* [Check weight range : `checkweightrange`](#check-weight-range-checkweightrange)
+* [Check total calories burnt on a specific date : `caloriesburnt`](#check-total-calories-burnt-on-specific-date-caloriesburnt)
+* [Check total calories burnt : `caloriesum`](#check-total-calories-burnt-caloriesum)
 * [Save to File: `save`](#save-to-file-save)
 
 
@@ -208,6 +211,51 @@ I've deleted the following workout:
 [W] running (400.0kcal, 2023-10-23)
 ```
 
+### Check Weight Range: `checkweightrange`
+Allows user to check their weight range
+
+Format: `checkweightrange`
+
+Example of usage:
+```
+checkweightrange
+```
+
+Expected output:
+```
+Recommended Weight: 75.116 kg
+```
+
+### Check Total Calories Burnt On Specific Date: `caloriesburnt`
+Allows user to check their weight range
+
+Format: `caloriesburnt`
+
+Example of usage:
+```
+caloriesburnt
+```
+
+Expected output:
+```
+Total calories burnt on 2023-10-25: 200cals
+```
+
+### Check Total Calories Burnt: `caloriesum`
+Allows user to check the total calories burnt
+
+Format: `caloriesum`
+
+Example of usage:
+```
+caloriesum
+```
+
+Expected output:
+```
+Total Calories: 300kcals
+```
+
 ### Save to File: `save`
 Allows user to save profile data, meals and workouts to a text file
 
@@ -250,5 +298,8 @@ Your data has been saved!
 * Add Work `addworkout`
 * View all workouts `viewworkouts`
 * Delete Work `deleteworkout`
+* Check your weight range `checkweightrange`
+* Check total calories burnt on a specific date `caloriesburnt`
+* Check total calories burnt `caloriesum`
 * Save to file `save`
 
