@@ -60,7 +60,6 @@ public class CafeCtrl {
             }
         } while (!command.isExit());
         this.storage.saveAll(this.menu, this.orderList, this.pantry);
-        ui.showGoodbye();
     }
 
     public static void main(String[] args) throws IOException {

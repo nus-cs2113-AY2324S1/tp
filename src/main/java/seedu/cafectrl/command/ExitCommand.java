@@ -28,6 +28,5 @@ public class ExitCommand extends Command {
     public void execute() {
         ui.printLine();
         ui.showGoodbye();
-        pantry.writeToPantryStorage();
     }
 }
