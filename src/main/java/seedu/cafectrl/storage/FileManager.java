@@ -11,6 +11,9 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manage everything related to file such as writing, reading, opening and creating file
+ */
 public class FileManager {
     private final Ui ui;
 
