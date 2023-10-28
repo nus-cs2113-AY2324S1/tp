@@ -33,7 +33,7 @@ public class PreviousDayCommand extends Command{
             sales.addOrderList(orderList);
         } else {*/
             System.out.println("Prev: Setting orderList for day " + currentDay);
-            sales.setOrderLists(currentDay, orderList);
+            //sales.setOrderLists(currentDay, orderList);
         //}
     }
 }

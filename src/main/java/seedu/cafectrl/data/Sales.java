@@ -63,7 +63,14 @@ public class Sales {
     }
 
     public void setOrderLists(int orderListId, OrderList orderList) {
+        OrderList oldOrderList = orderLists.get(orderListId);
+        if (oldOrderList.getTotalOrderListCost() != 0) {
+            removeCost(oldOrderList);
+        }
+        System.out.println("Changing cost -" + oldOrderList.getTotalOrderListCost());
         orderLists.set(orderListId, orderList);
+        addCost(orderList);
+        System.out.println("Added cost +" + orderList.getTotalOrderListCost());
     }
 
     public void addCost(OrderList orderList) {
@@ -71,7 +78,16 @@ public class Sales {
         totalSales += totalOrderListCost;
     }
 
+    public void removeCost(OrderList orderList) {
+        float totalOrderListCost = orderList.getTotalOrderListCost();
+        totalSales -= totalOrderListCost;
+    }
+
     public float getTotalSales() {
+        totalSales = 0;
+        for (int i = 0; i < orderLists.size(); i++) {
+            totalSales += orderLists.get(i).getTotalOrderListCost();
+        }
         return totalSales;
     }
 

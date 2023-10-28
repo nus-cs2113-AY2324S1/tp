@@ -32,7 +32,7 @@ public class NextDayCommand extends Command {
             sales.setNewOrderList();
         }
         System.out.println("Setting orderList for " + currentDay);
-        sales.setOrderLists(currentDay, orderList);
+        //sales.setOrderLists(currentDay, orderList);
 
     }
 }

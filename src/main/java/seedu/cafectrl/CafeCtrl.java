@@ -48,6 +48,7 @@ public class CafeCtrl {
                 command.execute();
                 orderList = setOrderList();
                 orderList.printOrderList();
+                System.out.println("Overall Earnings: $" + sales.getTotalSales());
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
             } finally {
