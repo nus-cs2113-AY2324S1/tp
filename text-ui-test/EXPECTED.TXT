@@ -127,7 +127,7 @@ Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
 Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
 You should type <DATE> in format of `yyyy-MM-dd`.
 
-`viewmeal` is an invalid command
+`viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 `deletemeal` deletes your daily meal data from the list.
