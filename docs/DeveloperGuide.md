@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Developer Guide
 ---
 * Table of Contents
