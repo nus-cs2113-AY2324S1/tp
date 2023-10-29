@@ -27,6 +27,7 @@ public class ShortAnsQn extends Question {
         super(description, QnType.SHORTANSWER, module, qnDifficulty);
         this.answer = answer;
     }
+
     /**
      * Returns question answer.
      */

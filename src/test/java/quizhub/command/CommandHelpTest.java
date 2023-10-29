@@ -55,7 +55,7 @@ public class CommandHelpTest {
      * */
     @Test
     public void testHelpCommand() {
-        String expectedOutput= "Here are the list of commands you can use:" +
+        String expectedOutput= "    Here are the list of commands you can use:" +
                 "    1. help - shows the list of commands you can use" +
                 "    2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and " +
                 "its answer to the list," +
@@ -73,7 +73,7 @@ public class CommandHelpTest {
                 "    11. markdiff [question number] [question difficulty] - sets the difficulty of question " +
                 "with the specified number," +
                 "    12. bye - exits the program";
-
+        
         CommandHelp help = new CommandHelp();
         help.executeCommand(mockUi, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
