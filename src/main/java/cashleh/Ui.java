@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Ui {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final String HORIZONTAL_LINE = "-";
+    private static final String VERTICAL_LINE = "|";
+    private static final String CORNER_SYMBOL = "+";
     private static final int MIN_SPACE_PER_SIDE = 2;
     private static final int MAX_DESCRIPTION = 60;
 
@@ -117,21 +120,23 @@ public class Ui {
         switch (statementType) {
         case "Financial Statement":
             double netIncome = totalIncome - totalExpense;
-            printRowText(totalSpace);
+            boolean isIncomeNegative = netIncome < 0;
+            printStatementHorizontalLine(totalSpace);
             printFooter("Total Income: $", String.valueOf(totalIncome), totalSpace);
             printFooter("Total Expense: $", String.valueOf(totalExpense), totalSpace);
-            printFooter("Net Income: $", String.valueOf(netIncome), totalSpace);
-            printRowText(totalSpace);
+            String netIncomeLabel = isIncomeNegative ? "Net Income: -$" : "Net Income: $";
+            printFooter(netIncomeLabel, String.valueOf(Math.abs(netIncome)), totalSpace);
+            printStatementHorizontalLine(totalSpace);
             break;
         case "Income Statement":
-            printRowText(totalSpace);
+            printStatementHorizontalLine(totalSpace);
             printFooter("Total Income: $", String.valueOf(totalIncome), totalSpace);
-            printRowText(totalSpace);
+            printStatementHorizontalLine(totalSpace);
             break;
         case "Expense Statement":
-            printRowText(totalSpace);
+            printStatementHorizontalLine(totalSpace);
             printFooter("Total Expense: $", String.valueOf(totalExpense), totalSpace);
-            printRowText(totalSpace);
+            printStatementHorizontalLine(totalSpace);
             break;
         default:
             break;
@@ -139,39 +144,75 @@ public class Ui {
 
     }
 
-    private static void printHeader(String statementType, int totalSpace, int idSpace, int typeSpace, int dateSpace
-        , int descriptionSpace, int categorySpace, int amountSpace) {
-        System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
-        System.out.println("|" + centerText(statementType, totalSpace - 2) + "|");
+    private static void printHeader(String statementType, int totalSpace, int idSpace, int typeSpace, int dateSpace,
+                                    int descriptionSpace, int categorySpace, int amountSpace) {
+        printStatementHorizontalLine(totalSpace);
+        printVerticalCentered(statementType, totalSpace);
 
-        System.out.println("+" + repeatChars('-', idSpace) + "+" + repeatChars('-', typeSpace) + "+"
-            + repeatChars('-', dateSpace) + "+" + repeatChars('-', descriptionSpace) + "+"
-            + repeatChars('-', categorySpace) + "+" + repeatChars('-', amountSpace) + "+");
-        System.out.println("|" + centerText("ID", idSpace) + "|" + centerText("Type", typeSpace) + "|"
-            + centerText("Date", dateSpace) + "|" + centerText("Description", descriptionSpace) + "|"
-            + centerText("Category", categorySpace) + "|" + centerText("Amount", amountSpace) + "|");
-        System.out.println("+" + repeatChars('-', idSpace) + "+" + repeatChars('-', typeSpace) + "+"
-            + repeatChars('-', dateSpace) + "+" + repeatChars('-', descriptionSpace) + "+"
-            + repeatChars('-', categorySpace) + "+" + repeatChars('-', amountSpace) + "+");
+        printStatementRowLine(idSpace, typeSpace, dateSpace, descriptionSpace, categorySpace, amountSpace);
+        printVerticalHeader(idSpace, typeSpace, dateSpace, descriptionSpace, categorySpace, amountSpace);
+        printStatementRowLine(idSpace, typeSpace, dateSpace, descriptionSpace, categorySpace, amountSpace);
     }
 
     private static void printTableRow(int id, String type, String date, String description
         , String category, double amount, String sign, int idSpace, int typeSpace, int dateSpace
         , int descriptionSpace, int categorySpace, int amountSpace) {
-        System.out.println("|" + centerText(String.valueOf(id), idSpace) + "|" + centerText(type, typeSpace)
-            + "|" + centerText(date, dateSpace) + "|" + centerText(description, descriptionSpace)
-            + "|" + centerText(category, categorySpace) + "|" + centerText(sign + " $" + amount, amountSpace) + "|");
+        printStatementMultipleTexts(new String[] {
+            VERTICAL_LINE,
+            centerText(String.valueOf(id), idSpace) + VERTICAL_LINE,
+            centerText(type, typeSpace) + VERTICAL_LINE,
+            centerText(date, dateSpace) + VERTICAL_LINE,
+            centerText(description, descriptionSpace) + VERTICAL_LINE,
+            centerText(category, categorySpace) + VERTICAL_LINE,
+            centerText(sign + " $" + amount, amountSpace) + VERTICAL_LINE
+        });
+        System.out.println();
     }
 
     private static void printFooter(String label, String total, int totalSpace) {
-        String totalString = "| " + label + total +
-            " ".repeat(totalSpace - label.length() - total.length() - 3) + "|";
-
-        System.out.println(totalString);
+        printStatementMultipleTexts(new String[] {
+            VERTICAL_LINE, " ",
+            label,
+            total,
+            " ".repeat(totalSpace - label.length() - total.length() - 3),
+            VERTICAL_LINE
+        });
+        System.out.println();
     }
 
-    private static void printRowText(int totalSpace) {
-        System.out.println("+" + repeatChars('-', totalSpace - 2) + "+");
+    private static void printStatementRowLine(int... spaces) {
+        String[] statementRow = new String[spaces.length + 1];
+        statementRow[0] = CORNER_SYMBOL;
+        for (int i = 0; i < spaces.length; i++) {
+            statementRow[i + 1] = repeatChars(HORIZONTAL_LINE, spaces[i]) + CORNER_SYMBOL;
+        }
+        printStatementMultipleTexts(statementRow);
+        System.out.println();
+    }
+
+    private static void printStatementHorizontalLine(int totalSpace) {
+        // Need to deduct the spaces taken up by CORNER_SYMBOL
+        printStatementRowLine(totalSpace - 2);
+    }
+
+    private static void printVerticalCentered(String statementType, int totalSpace) {
+        printStatementMultipleTexts(new String[] {
+            VERTICAL_LINE,
+            centerText(statementType, totalSpace - 2),
+            VERTICAL_LINE
+        });
+        System.out.println();
+    }
+
+    private static void printVerticalHeader(int... spaces) {
+        String[] headerTypeStrings = {"ID", "Type", "Date", "Description", "Category", "Amount"};
+        String[] headerRow = new String[headerTypeStrings.length + 1];
+        headerRow[0] = VERTICAL_LINE;
+        for (int i = 0; i < headerTypeStrings.length; i++) {
+            headerRow[i + 1] = centerText(headerTypeStrings[i], spaces[i]) + VERTICAL_LINE;
+        }
+        printStatementMultipleTexts(headerRow);
+        System.out.println();
     }
 
     private static String centerText(String text, int width) {
@@ -181,8 +222,14 @@ public class Ui {
         return " ".repeat(leftPadding) + text + " ".repeat(rightPadding);
     }
 
-    private static String repeatChars(char character, int count) {
-        return new String(new char[count]).replace('\0', character);
+    private static String repeatChars(String character, int count) {
+        return new String(new char[count]).replace("\0", character);
+    }
+
+    private static void printStatementMultipleTexts(String[] texts) {
+        for (String text : texts) {
+            System.out.print(text);
+        }
     }
 
 }
