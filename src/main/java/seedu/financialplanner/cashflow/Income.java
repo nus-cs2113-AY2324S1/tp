@@ -20,6 +20,15 @@ public class Income extends Cashflow{
         addIncomeValue();
     }
 
+    public Income(Income income) {
+        this.amount = income.getAmount();
+        this.recur = income.getRecur();
+        this.description = income.getDescription();
+        this.date = income.getDate();
+        this.type = income.getIncomeType();
+        addIncomeValue();
+    }
+
     @Override
     public IncomeType getIncomeType() {
         return type;

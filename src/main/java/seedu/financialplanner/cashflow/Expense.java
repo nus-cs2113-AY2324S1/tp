@@ -20,6 +20,15 @@ public class Expense extends Cashflow {
         addExpenseValue();
     }
 
+    public Expense(Expense expense) {
+        this.amount = expense.getAmount();
+        this.recur = expense.getRecur();
+        this.description = expense.getDescription();
+        this.date = expense.getDate();
+        this.type = expense.getExpenseType();
+        addExpenseValue();
+    }
+
     @Override
     public ExpenseType getExpenseType() {
         return type;

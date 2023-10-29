@@ -32,6 +32,9 @@ public abstract class Cashflow {
         this.date = date;
     }
 
+    protected Cashflow() {
+    }
+
     public static void clearBalance() {
         balance = 0;
     }
@@ -91,6 +94,22 @@ public abstract class Cashflow {
 
     public static double getBalance() {
         return balance;
+    }
+
+    public int getRecur() {
+        return recur;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String formatString() {
