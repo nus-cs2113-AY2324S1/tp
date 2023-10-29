@@ -5,6 +5,7 @@ import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,9 +44,20 @@ public class DeleteCashflowCommand extends Command {
         }
 
         if (rawCommand.extraArgs.containsKey("r")) {
+            String recurArgs = rawCommand.extraArgs.get("r");
+            if (!recurArgs.isBlank()) {
+                throw new IllegalArgumentException("Arguments after /r should be left empty.");
+            }
             hasRecur = true;
         } else {
             hasRecur = false;
+        }
+        rawCommand.extraArgs.remove("r");
+
+        if (!rawCommand.extraArgs.isEmpty()) {
+            String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
+            logger.log(Level.WARNING, "Invalid extra arguments found");
+            throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
         }
     }
 
