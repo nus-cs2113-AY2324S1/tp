@@ -1,5 +1,6 @@
 package quizhub.questionlist;
 
+import quizhub.command.CommandShortAnswer;
 import quizhub.question.Question;
 import quizhub.question.ShortAnsQn;
 import quizhub.exception.QuizHubExceptions;
@@ -32,13 +33,43 @@ public class QuestionList {
      */
     public void addShortAnswerQn(String description, String answer, String module,
                                  Question.QnDifficulty qnDifficulty, boolean showMessage){
-        allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
-        if (showMessage) {
-            System.out.println("    I have added the following question OwO:");
-            System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
-            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+
+        if(containsDuplicateShortAnswer(description, answer, module, qnDifficulty)){
+            System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
+        } else{
+            allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
+            if (showMessage) {
+                System.out.println("    I have added the following question OwO:");
+                System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
+                System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+            }
         }
     }
+
+    /**
+     * Checks if a duplicate short answer question with the same description, answer, module, and difficulty
+     * already exists in the list.
+     *
+     * @param description The description of the short answer question.
+     * @param answer The answer of the short answer question.
+     * @param module The module of the short answer question.
+     * @param difficulty The difficulty level of the short answer question.
+     * @return true if a duplicate exists, false otherwise.
+     */
+
+    public boolean containsDuplicateShortAnswer(String description, String answer, String module,
+                                                Question.QnDifficulty difficulty) {
+        // Create a formatted string to match the format produced by getQuestionDescription
+        String formattedParameters = description.strip() + " / " + answer.strip() + " | " + module + " | "
+                + difficulty.toString();
+        for (Question question : allQns) {
+            if (formattedParameters.equalsIgnoreCase(question.getQuestionDescription())) {
+                return true; // Found a duplicate
+            }
+        }
+        return false; // No duplicate found
+    }
+
     /**
      * Prints the details of a question in CLI.
      *
@@ -344,6 +375,7 @@ public class QuestionList {
             return null;
         }
     }
+
     /**
      * Retrieves the question by its index in the question list.
      *

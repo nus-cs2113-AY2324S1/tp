@@ -108,22 +108,42 @@ public class Parser {
      * @return Short Answer command or an Invalid Command
      */
     private static Command parseShortAnswerCommand(String userInput) {
+        String description;
+        String answer;
+        String module;
+        String difficulty;
+
         try {
+            // Split the input by 'short' and then by '/' to separate the parts
             String[] inputTokens = userInput.split("short")[1].strip().split("/");
-            String description = inputTokens[0].strip();
-            String answer = inputTokens[1].strip();
-            String module = inputTokens[2].strip();
-            String difficulty = inputTokens[3].strip();
+
+            // Check if there are exactly 4 parts (description, answer, module, difficulty)
+            if (inputTokens.length > 4) {
+                return new CommandInvalid(CommandShortAnswer.TOO_MANY_ARGUMENTS_MSG);
+            }
+
+            // Extract the values for description, answer, module, and difficulty
+            description = inputTokens[0].strip();
+            answer = inputTokens[1].strip();
+            module = inputTokens[2].strip();
+            difficulty = inputTokens[3].strip();
+
             if (description.isEmpty() || answer.isEmpty() || module.isEmpty() || difficulty.isEmpty()) {
                 return new CommandInvalid(CommandShortAnswer.MISSING_FIELDS_MSG +
                         System.lineSeparator() + CommandShortAnswer.INVALID_FORMAT_MSG);
             }
+
             Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
+            if(qnDifficulty.equals(Question.QnDifficulty.INVALID)) {
+                return new CommandInvalid(CommandShortAnswer.INVALID_DIFFICULTY_MSG);
+            }
             return new CommandShortAnswer(description, answer, module, qnDifficulty);
+
         } catch (ArrayIndexOutOfBoundsException exception) {
             return new CommandInvalid(CommandShortAnswer.INVALID_FORMAT_MSG);
         }
     }
+
     /**
      * Attempt to parse user input into a Delete Command by extracting question index
      * of question to be deleted.
