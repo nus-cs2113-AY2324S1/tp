@@ -250,13 +250,37 @@ Existing data will be automatically loaded when the program starts up.
 
 {Give a 'cheat sheet' of commands here}
 
-| Action               | Format                    |
-|----------------------|---------------------------|
-| **Set budget**       | `budget set /b BUDGET`    |
-| **Update budget**    | `budget update /b BUDGET` |
-| **Reset budget**     | `budget reset`            |
-| **Delete budget**    | `budget delete`           |
-| **View budget**      | `budget view`             |
-| **Display Overview** | `overview`                |
-| **View balance**     | `balance`                 |
-| **Exit program**     | `exit`                    |
+| Action                           | Format                                                     |
+|----------------------------------|------------------------------------------------------------|
+| **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`  |
+| **Add expense**                  | `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]` |
+| **Delete cashflow**              | `delete INDEX [/r]`                                        |
+| **Delete income**                | `delete income INDEX [/r]`                                 |
+| **Delete expense**               | `delete expense INDEX [/r]`                                |
+| **Delete recurrence**            | `delete recurrence INDEX [/r]`                             |
+| **list all cashflows**           | `list`                                                     |
+| **list all incomes**             | `list income`                                              |
+| **list all expenses**            | `list expense`                                             |
+| **list all recurring cashflows** | `list recurrence*                                          |
+| **Set budget**                   | `budget set /b BUDGET`                                     |
+| **Update budget**                | `budget update /b BUDGET`                                  |
+| **Reset budget**                 | `budget reset`                                             |
+| **Delete budget**                | `budget delete`                                            |
+| **View budget**                  | `budget view`                                              |
+| **Display Overview**             | `overview`                                                 |
+| **View balance**                 | `balance`                                                  |
+| **Exit program**                 | `exit`                                                     |
+
+- Note: Cashflow is referring to an income or expense
+
+**Income and Expense types**
+
+| Income        | Expense         |
+|---------------|-----------------|
+| `salary`      | `dining`        |
+| `investments` | `entertainment` |
+| `allowance`   | `shopping`      |
+| `others`      | `travel`        |
+|               | `insurance`     |
+|               | `necessities`   |
+|               | `others`        |
