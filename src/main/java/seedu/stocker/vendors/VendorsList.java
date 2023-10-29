@@ -12,10 +12,19 @@ public class VendorsList {
         vendorArrayList = new ArrayList<>();
     }
 
+    /**
+     * Adds new vendor to vendor list
+     *
+     * @param vendor
+     */
     public static void addNewVendor(Vendor vendor){
         vendorArrayList.add(vendor);
     }
 
+    /**
+     * Gets details of all vendors
+     * @return
+     */
     public static List<Vendor> getVendorEntries() {
         return vendorArrayList.stream()
                 .collect(Collectors.toCollection(ArrayList::new));

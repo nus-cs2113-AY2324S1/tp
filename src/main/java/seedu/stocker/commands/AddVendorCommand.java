@@ -4,7 +4,7 @@ import seedu.stocker.vendors.Vendor;
 import seedu.stocker.vendors.VendorsList;
 
 /**
- * Adds a drug into the inventory
+ * Adds a vendor into the inventory
  */
 public class AddVendorCommand extends Command {
 

@@ -5,6 +5,9 @@ import seedu.stocker.vendors.VendorsList;
 
 import java.util.List;
 
+/**
+ * Generates a list of vendors tracked by system
+ */
 public class ListVendorCommand extends Command {
 
     public static final String COMMAND_WORD = "listVendors";
