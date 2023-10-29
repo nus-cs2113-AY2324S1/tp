@@ -33,7 +33,20 @@ Format: `help`
 
 Example of usage:
 * **Command**:`help` <br>
-  **Output**: `/add - … /start - …`
+  **Output**: <br>
+`Here are the list of commands you can use:` <br>
+`1. help - shows the list of commands you can use,` <br>
+`2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and its answer to the list,` <br>
+`3. list - shows the list of questions and answers,` <br>
+`4. delete [question number] - deletes the question and answer at the specified number,` <br>
+`5. find /[description] - displays all questions that contains the specified description,` <br>
+`6. find /[module] - displays all questions that belong to the specified module,` <br>
+`7. edit [question number] /description [description] - edits the description of the question with the specified number,` <br>
+`8. edit [question number] /answer [answer] - edits the answer to the question with the specified number,` <br>
+`9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or /normal,` <br>
+`10. shuffle - shuffle quiz questions to a random order,` <br>
+`11. markdiff [question number] [question difficulty] - sets the difficulty of question with the specified number,` <br>
+`12. bye - exits the program` <br>
 
 Notes:
 * If the command does not exist after `/help`, the app will prompt you that the command does not exist and thereafter
@@ -50,14 +63,14 @@ Format: `short [question]/[answer]/[module]/[difficulty]`
 Example of usage:
 * **Command**: `add What is the value of Pi to 2 decimal places?/3.14/math/math` <br>
   **Output**: <br>
-  `     I have added the following question OwO:` <br>
-  `    [S] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY` <br>
-  `    Now you have [no. of questions] questions in the list! UWU` <br> <br>
+  `I have added the following question OwO:` <br>
+  `[S] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY` <br>
+  `Now you have [no. of questions] questions in the list! UWU` <br> <br>
 * **Command**: `add What fish is Nemo based off?/a Clownfish/trivia/easy` <br>
   **Output**: <br>
-  `     I have added the following question OwO:` <br>
-  `    [S][] What fish is Nemo based off? / a Clownfish | trivia | EASY` <br>
-  `    Now you have [no. of questions] questions in the list! UWU` <br> 
+  `I have added the following question OwO:` <br>
+  `[S][] What fish is Nemo based off? / a Clownfish | trivia | EASY` <br>
+  `Now you have [no. of questions] questions in the list! UWU` <br> 
 
 Notes:
 * If either the question or answer is left blank, the app will prompt you to re-enter the question-answer set,
@@ -84,9 +97,9 @@ Format:
 Example of usage:
 * **Command**: `delete 2` <br>
   **Output**: <br>
-  `    Roger that! I have deleted the following question >w< !` <br>
-  `        [s][] [question description] / [ansewer] | [module] | [quesiton difficulty]` <br>
-  `    Now you have [no. of questions] questions in the list! UWU` <br>
+  `Roger that! I have deleted the following question >w< !` <br>
+  `[s][] [question description] / [ansewer] | [module] | [quesiton difficulty]` <br>
+  `Now you have [no. of questions] questions in the list! UWU` <br>
 
 Notes:
 * The program only supports deleting one question at a time, so entering multiple question numbers will result in the program prompting you to enter only 1 question number.
@@ -102,16 +115,16 @@ Format:
 Examples of usage:
 * **Command**: `find /description example description` <br>
   **Output**: <br>
-  `    Here are questions that matched your search:` <br>
-  `    1: [S][] EXAMPLE Description / [answer] | [module] | [question difficulty]` <br>
-  `    2: [S][] example description1 / [answer] | [module] | [question difficulty]` <br>
-  `    3: [S][] example description 2/ [answer] | [module] | [question difficulty]` <br> <br>
+  `Here are questions that matched your search:` <br>
+  `1: [S][] EXAMPLE Description / [answer] | [module] | [question difficulty]` <br>
+  `2: [S][] example description1 / [answer] | [module] | [question difficulty]` <br>
+  `3: [S][] example description 2/ [answer] | [module] | [question difficulty]` <br> <br>
 * **Command**: `find /answer example answer` <br>
   **Output**: <br>
-  `    Here are questions that matched your search:` <br>
-  `    1: [S][] [question description] / EXAMPLE Answer | [module] | [question difficulty]` <br>
-  `    2: [S][] [question description] / example answer1 | [module] | [question difficulty]` <br>
-  `    3: [S][] [question description] / example answer 2 | [module] | [question difficulty]` <br> <br>
+  `Here are questions that matched your search:` <br>
+  `1: [S][] [question description] / EXAMPLE Answer | [module] | [question difficulty]` <br>
+  `2: [S][] [question description] / example answer1 | [module] | [question difficulty]` <br>
+  `3: [S][] [question description] / example answer 2 | [module] | [question difficulty]` <br> <br>
 
 Notes:
 * As long as the search keyword string is a substring of the question description / answer of a question stored in the question and answer bank, it will be included in the search result. Please refer to the above examples as an illustration of this property.
@@ -129,14 +142,14 @@ Format:
 Examples of usage:
 * **Command**: `edit 1 /description change description!!!` <br>
   **Output**:  <br>
-  `    Roger that! I have edited the following question >w< !` <br>
-  `    [S][] change description!!! / [original answer] | [module] | [question difficulty]` <br>
-  `    Now you have [no. of questions] questions in the list! UWU` <br> <br>
+  `Roger that! I have edited the following question >w< !` <br>
+  `[S][] change description!!! / [original answer] | [module] | [question difficulty]` <br>
+  `Now you have [no. of questions] questions in the list! UWU` <br> <br>
 * **Command**: `edit 2 /answer different answer???` <br>
   **Output**: <br>
-  `    Roger that! I have edited the following question >w< !` <br>
-  `    [S][] [original description] / different answer??? | [module] | [question difficulty]` <br>
-  `    Now you have [no. of questions] questions in the list! UWU` <br> <br>
+  `Roger that! I have edited the following question >w< !` <br>
+  `[S][] [original description] / different answer??? | [module] | [question difficulty]` <br>
+  `Now you have [no. of questions] questions in the list! UWU` <br> <br>
 
 Notes:
 * If either the question number is invalid, or no new description or answer is provided,
@@ -184,12 +197,12 @@ Format: `markdiff [question number] [question difficulty]`
 Examples of usage:
 * **Command**: `markdiff 1 easy` <br>
   **Output**:  <br>
-  `    Roger that! I have marked the following question as easy >w< !` <br>
-  `    [S][] [original description] / [original answer] | [module] | EASY` <br> <br>
+  `Roger that! I have marked the following question as easy >w< !` <br>
+  `[S][] [original description] / [original answer] | [module] | EASY` <br> <br>
 * **Command**: `markdiff 2 Hard` <br>
   **Output**: <br>
-  `    Roger that! I have marked the following question as hard >w< !` <br>
-  `    [S][] [original description] / [original answer] | [module] | HARD` <br> <br>
+  `Roger that! I have marked the following question as hard >w< !` <br>
+  `[S][] [original description] / [original answer] | [module] | HARD` <br> <br>
 
 Notes:
 * If either the question number is invalid, or no difficulty level is provided,
