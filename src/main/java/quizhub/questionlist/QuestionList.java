@@ -215,6 +215,7 @@ public class QuestionList {
      * Used to display question details in CLI.
      *
      * @param index The list index of the question to be viewed.
+     * @return String value of the question
      */
     public String viewQuestionByIndex(int index){
         try{
@@ -316,6 +317,7 @@ public class QuestionList {
      * Build a new list of questions based on specified module.
      *
      * @param modules Modules used to search for matches.
+     * @return array list of questions by module
      */
     public ArrayList<Question> categoriseListByModule(String[] modules){
         ArrayList<Question> matchedQuestions = new ArrayList<>();

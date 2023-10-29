@@ -24,6 +24,7 @@ public class Parser {
      * to create a new Command object of the right type.
      *
      * @param userInput The full user CLI input.
+     * @return Command of the successfully parsed command or an InvalidCommand if unsuccessful
      */
     public static Command parseCommand(String userInput) {
         String[] commandTokens = userInput.split(" ");
@@ -71,6 +72,8 @@ public class Parser {
      *
      * @param userInput The full user CLI input.
      * @param keyWord The keyword used to partition the user input.
+     *
+     * @return String after the specified keyword
      */
     public static String getContentAfterKeyword(String userInput, String keyWord)
             throws ArrayIndexOutOfBoundsException {
@@ -86,6 +89,7 @@ public class Parser {
      * Default invalid difficulty is assigned if invalid difficulty given.
      *
      * @param difficulty The difficulty level defined by user in CLI.
+     * @return QnDifficulty enumeration based on string, default as Normal
      */
     public static Question.QnDifficulty extractQuestionDifficulty(String difficulty) {
         switch (difficulty.toLowerCase()) {
@@ -104,12 +108,13 @@ public class Parser {
      * Extracts the question index from raw user input for commands with arguments.
      *
      * @param userInput Raw command entered by the user
+     * @return Integer index of the question
      */
     private static int extractQnIndex(String userInput, String commandType) throws IllegalArgumentException,
             ArrayIndexOutOfBoundsException {
         String editDetails = userInput.split(commandType)[1];
         String qnIndexString  = editDetails.split("/")[0].strip();
-        if(qnIndexString.equals("")){
+        if(qnIndexString.isEmpty()){
             throw new ArrayIndexOutOfBoundsException();
         }
         if(qnIndexString.split(" ").length != 1) {
@@ -257,7 +262,7 @@ public class Parser {
         String[] inputSplitByCriteria = userInput.split("/");
         String editDetails = inputSplitByCriteria[1].strip();
         String editCriteria = editDetails.split(" ")[0].strip();
-        if(editCriteria.equals("")){
+        if(editCriteria.isEmpty()){
             throw new ArrayIndexOutOfBoundsException();
         } else if (inputSplitByCriteria.length != 2) {
             throw new IllegalArgumentException("Too Many Criteria");
@@ -294,6 +299,7 @@ public class Parser {
      * Handles exceptions raised by incorrect edit criteria for edit commands.
      *
      * @param editCriteriaException Exception raised by the program
+     * @return Invalid command object with different error messages
      */
     private static Command handleEditCriteriaExceptions(Exception editCriteriaException){
         if(editCriteriaException instanceof ArrayIndexOutOfBoundsException) {
@@ -315,6 +321,7 @@ public class Parser {
      * Handles exceptions raised by incorrect question index for edit commands.
      *
      * @param editIndexException Exception raised by the program
+     * @return Invalid command with different error messages
      */
     private static Command handleEditIndexExceptions(Exception editIndexException){
         if(editIndexException instanceof NumberFormatException) {
@@ -334,6 +341,7 @@ public class Parser {
      * Handles exceptions raised by incorrect edit values for edit commands.
      *
      * @param editValuesException Exception raised by the program
+     * @return InvalidCommand with error messages
      */
     private static Command handleEditNewValuesExceptions(Exception editValuesException){
         if(editValuesException instanceof IllegalArgumentException ||
@@ -368,7 +376,7 @@ public class Parser {
         try {
             if(!startMode.equalsIgnoreCase("all")){
                 startDetails = startInfo.split(startMode)[1].strip();
-                if(startDetails.equals("")){
+                if(startDetails.isEmpty()){
                     return new CommandInvalid(CommandStart.MISSING_START_DETAILS + System.lineSeparator() +
                             CommandStart.INVALID_FORMAT_MSG);
                 }
@@ -427,12 +435,13 @@ public class Parser {
      * Extracts the question difficulty to be assigned from raw user input for markdiff commands.
      *
      * @param userInput Raw command entered by the user
+     * @return QnDifficulty of Question Difficulty of Question
      */
     private static Question.QnDifficulty extractNewDifficulty(String userInput)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException{
         String[] inputSplitByQnDifficulty = userInput.split("/");
         String qnDifficultyString = inputSplitByQnDifficulty[1].strip();
-        if(qnDifficultyString.equals("")){
+        if(qnDifficultyString.isEmpty()){
             throw new ArrayIndexOutOfBoundsException();
         } else if (qnDifficultyString.split(" ").length != 1 ||inputSplitByQnDifficulty.length != 2) {
             throw new IllegalArgumentException();
@@ -444,6 +453,7 @@ public class Parser {
      * Handles exceptions raised by incorrect question difficulty for markdiff commands.
      *
      * @param qnDifficultyException Exception raised by the program
+     * @return InvalidCommand with error messages
      */
     private static Command handleQnDifficultyExceptions(Exception qnDifficultyException){
         if(qnDifficultyException instanceof ArrayIndexOutOfBoundsException) {
@@ -460,6 +470,7 @@ public class Parser {
      * Handles exceptions raised by incorrect question index for markdiff commands.
      *
      * @param markDiffIndexException Exception raised by the program
+     * @return InvalidCommand with error messages
      */
     private static Command handleMarkDiffIndexExceptions(Exception markDiffIndexException){
         if(markDiffIndexException instanceof NumberFormatException) {
