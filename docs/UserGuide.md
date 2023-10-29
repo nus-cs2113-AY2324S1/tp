@@ -10,7 +10,7 @@ from all fields of study.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `QuizHub` from [here](http://link.to/duke).
+2. Down the latest version of `QuizHub` from [here](http://link.to/duke).
 
 ## Features
 
@@ -48,10 +48,16 @@ difficulty level.
 Format: `short [question]/[answer]/[module]/[difficulty]`
 
 Example of usage:
-* **Command**: `add What is the value of Pi to 2 decimal places?/3.14/math/easy` <br>
-  **Output**: shows Question-Answer set added to question and answer bank
+* **Command**: `add What is the value of Pi to 2 decimal places?/3.14/math/math` <br>
+  **Output**: <br>
+  `     I have added the following question OwO:` <br>
+  `    [S] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY` <br>
+  `    Now you have [no. of questions] questions in the list! UWU` <br> <br>
 * **Command**: `add What fish is Nemo based off?/a Clownfish/trivia/easy` <br>
-  **Output**: shows Question-Answer set added to question and answer bank
+  **Output**: <br>
+  `     I have added the following question OwO:` <br>
+  `    [S][] What fish is Nemo based off? / a Clownfish | trivia | EASY` <br>
+  `    Now you have [no. of questions] questions in the list! UWU` <br> 
 
 Notes:
 * If either the question or answer is left blank, the app will prompt you to re-enter the question-answer set,
@@ -125,12 +131,12 @@ Examples of usage:
   **Output**:  <br>
   `    Roger that! I have edited the following question >w< !` <br>
   `    [S][] change description!!! / [original answer] | [module] | [question difficulty]` <br>
-  `    Now you have [no. of questions] questions in the list! UWU"` <br> <br>
+  `    Now you have [no. of questions] questions in the list! UWU` <br> <br>
 * **Command**: `edit 2 /answer different answer???` <br>
   **Output**: <br>
   `    Roger that! I have edited the following question >w< !` <br>
   `    [S][] [original description] / different answer??? | [module] | [question difficulty]` <br>
-  `    Now you have [no. of questions] questions in the list! UWU"` <br> <br>
+  `    Now you have [no. of questions] questions in the list! UWU` <br> <br>
 
 Notes:
 * If either the question number is invalid, or no new description or answer is provided,

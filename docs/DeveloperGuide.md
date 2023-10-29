@@ -16,11 +16,11 @@
 ## Acknowledgements
 
 1. For the main structure of the program, we have adapted the project structure
-   from the Individual Project of Man Juncheng at [Link](https://github.com/spinoandraptos/ip/tree/master) </li>
+from the Individual Project of Man Juncheng at [Link](https://github.com/spinoandraptos/ip/tree/master) </li>
 2. For JUnit testing, we have adapted the testing codes from the AddressBook level-2
-   codes at [Link](https://github.com/se-edu/addressbook-level2)</li>
+codes at [Link](https://github.com/se-edu/addressbook-level2)</li>
 3. For the developer's guide, we have referenced the developer's guide from AddressBook
-   level-3 [Link](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+level-3 [Link](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 # Design & implementation
 
@@ -78,9 +78,7 @@ their practice. Considering that time is of the essence for revising students, t
 prioritise efficiency of use to not cause time delays to users' revision. With this in mind,
 we based our design off the following points for inputs taken in by the `Parser`.
 
-1. **Ease of use**: Simple and short command structure
-
-
+1. **Ease of use**: Simple and short command structure <br>
 2. **Ease of familiarisation**: No excessive or complicated commands
 
 Consideration must also be given to the developers and machine executing the code. The exact
@@ -105,9 +103,7 @@ design as we see a strong need of having a hierarchical command structure for ou
    ```short [question]/[answer]/[module]/[difficulty]```, for one, is a command that has a
    logical sequence to which the details of a question is entered. It is more intuitive to
    follow a structure instead of entering such details without a fixed order, which can easily
-   lead to confusion.
-
-
+   lead to confusion. <br><br>
 2. The use of the delimiter `/` also better helps to introduce the concept of hierarchy than the
    delimiter `--` used in `Unix` commands as `/` can be more easily associated with layering and
    stacking, which create structures possessing hierarchy.
@@ -358,18 +354,18 @@ which they could use to take quizzes to ensure their understanding of the topic.
 ## Non-Functional Requirements
 
 1. Program should work on any typical OS as long as it has Java 11 installed and configured.
-2. A user with average or above typing speed for regular English text (not program code) in the CLI should not
-   experience any significant delays to their revision as compared to using a GUI program.
+2. A user with average or above typing speed for regular English text (not program code) in the CLI should not 
+experience any significant delays to their revision as compared to using a GUI program.
 
 ## Glossary
 
 1. **Typical OS**: Windows, Linux, Unix, macOS.
 2. **CommandType**: The first word input in the CLI, indicates the type of instruction the program should execute.
-   `e.g. start, delete, short`
+`e.g. start, delete, short`
 3. **Argument**: A parameter word identified by a leading `/`, arguments indicate the start of information
-   to be extracted from a command in addition to the command type.
+to be extracted from a command in addition to the command type.
 4. **Payload**: A sequence of additional information immediately following the command type or arguments, they
-   provide information for executing complex instructions.
+provide information for executing complex instructions.
 5. **Hierarchical**: Possesses logical sequencing or order, such as in order of decreasing subsets or importance.
 
 ## Instructions for manual testing
@@ -379,5 +375,5 @@ which they could use to take quizzes to ensure their understanding of the topic.
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest `tp_version_1.0.jar` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases/download/Version_1_0/tp_version_1.0.jar).
 3. Copy the file to the folder you want to use as the home folder for your QuizHub.
-4. Open a command terminal, cd into the folder you put the `tp_version_1.0.jar` file in, and use the java -jar
-   `tp_version_1.0.jar` command to run the application and launch the CLI.
+4. Open a command terminal, cd into the folder you put the `tp_version_1.0.jar` file in, and use the java -jar 
+`tp_version_1.0.jar` command to run the application and launch the CLI.
