@@ -2,7 +2,7 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
-import seedu.cafectrl.ui.Messages;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -33,7 +33,7 @@ public class DeleteDishCommand extends Command {
             ui.showDeleteMessage(selectedDish);
             menu.removeDish(dishIndexToBeDeleted);
         } catch (IndexOutOfBoundsException e) {
-            ui.showToUser(Messages.INVALID_DISH_INDEX);
+            ui.showToUser(ErrorMessages.INVALID_DISH_INDEX);
             throw new IndexOutOfBoundsException();
         }
     }

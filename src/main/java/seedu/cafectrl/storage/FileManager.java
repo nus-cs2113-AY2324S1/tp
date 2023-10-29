@@ -1,6 +1,6 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.ui.Messages;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.File;
@@ -65,12 +65,12 @@ public class FileManager {
 
         if (!Files.exists(dataFolderPath)) {
             folder.mkdir();
-            ui.showToUser(Messages.DATA_FOLDER_NOT_FOUND_MESSAGE, System.lineSeparator());
+            ui.showToUser(ErrorMessages.DATA_FOLDER_NOT_FOUND_MESSAGE, System.lineSeparator());
         }
 
         if (!Files.exists(dataFilePath)) {
             textFile.createNewFile();
-            ui.showToUser(Messages.DATA_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
         }
 
         return dataFilePath.toString();

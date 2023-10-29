@@ -11,7 +11,7 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.ui.Messages;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(Messages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
+        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
     }
 
     @Test
@@ -78,7 +78,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(Messages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
+        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
     }
 
     @Test
@@ -94,7 +94,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(Messages.INVALID_DISH_INDEX, feedbackToUser);
+        assertEquals(ErrorMessages.INVALID_DISH_INDEX, feedbackToUser);
     }
 
     @Test
@@ -134,7 +134,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(Messages.MISSING_ARGUMENT_FOR_DELETE, feedbackToUser);
+        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_DELETE, feedbackToUser);
     }
 
     @Test
@@ -150,7 +150,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(Messages.MISSING_ARGUMENT_FOR_DELETE, feedbackToUser);
+        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_DELETE, feedbackToUser);
     }
 
     @Test
@@ -166,7 +166,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(Messages.INVALID_DISH_INDEX, feedbackToUser);
+        assertEquals(ErrorMessages.INVALID_DISH_INDEX, feedbackToUser);
     }
 
     @Test
@@ -188,7 +188,7 @@ class ParserTest {
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry, orderList);
         commandReturned.execute();
-        assertEquals(Messages.UNKNOWN_COMMAND_MESSAGE, actualOutput.get(0));
+        assertEquals(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, actualOutput.get(0));
     }
 
     @Test
@@ -210,7 +210,7 @@ class ParserTest {
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry, orderList);
         commandReturned.execute();
-        assertEquals(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE, actualOutput.get(0));
+        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_EDIT_PRICE, actualOutput.get(0));
     }
 
     @Test
@@ -232,7 +232,7 @@ class ParserTest {
 
         Command commandReturned = Parser.parseCommand(menu, testUserInput, ui, pantry, orderList);
         commandReturned.execute();
-        assertEquals(Messages.INVALID_DISH_INDEX, actualOutput.get(0));
+        assertEquals(ErrorMessages.INVALID_DISH_INDEX, actualOutput.get(0));
     }
     //@@author DextheChik3n
     @Test
