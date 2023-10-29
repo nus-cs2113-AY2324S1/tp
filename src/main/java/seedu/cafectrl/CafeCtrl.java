@@ -3,7 +3,12 @@ package seedu.cafectrl;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.data.*;
 import seedu.cafectrl.parser.Parser;
+import seedu.cafectrl.storage.Storage;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * CafeCtrl application's entry point.
@@ -11,20 +16,24 @@ import seedu.cafectrl.ui.Ui;
  */
 public class CafeCtrl {
     private final Ui ui;
-    private final Menu menu;
+    private Menu menu;
     private Command command;
     private Pantry pantry;
     private OrderList orderList;
     private Sales sales;
     private CurrentDate currentDate;
+    private Storage storage;
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    private CafeCtrl() {
-        ui = new Ui();
-        menu = new Menu();
-        pantry = new Pantry(ui);
+    private CafeCtrl() throws FileNotFoundException {
+        this.ui = new Ui();
+        this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
+        this.storage = new Storage(this.ui);
+        this.menu = this.storage.loadMenu();
+        this.pantry = this.storage.loadPantryStock();
+        this.orderList = this.storage.loadOrderList();
         currentDate = new CurrentDate();
         sales = new Sales();
     }
@@ -39,7 +48,7 @@ public class CafeCtrl {
      * <p> This method consistently receives user input, parses commands, and executes the respective command
      * until the user enters a "bye" command, terminating the application.</p>
      */
-    private void run() {
+    private void run() throws IOException {
         ui.printLine();
         do {
             try {
@@ -55,9 +64,10 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
+        //this.storage.saveAll(this.menu, this.orderList, this.pantry);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         CafeCtrl cafeCtrl = new CafeCtrl();
         cafeCtrl.setup();
         cafeCtrl.run();

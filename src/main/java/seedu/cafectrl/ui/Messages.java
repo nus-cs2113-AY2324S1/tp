@@ -72,4 +72,11 @@ public class Messages {
     public static final String PREVIOUS_DAY_TIME_TRAVEL = "Whoa there, time traveler! " +
             "Unfortunately, the DeLorean can't take us back to the previous day because it's already Day 0, " +
             "and there's no rewind button in this space-time continuum!";
+    public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
+    public static final String LOAD_MENU_FILE_ERROR_MESSAGE = "Uh oh, I am having trouble loading your menu text file."
+            + "\n\tCreating a new empty menu...\n";
+    public static final String DATA_FOLDER_NOT_FOUND_MESSAGE = "Data Folder was not found!\nIt's ok... "
+            + "a new data folder has been created.";
+    public static final String DATA_FILE_NOT_FOUND_MESSAGE = "text file was not found!\nIt's ok... "
+            + "a new data file has been created.";
 }

@@ -55,6 +55,18 @@ public class Ui {
         DecimalFormat dollarValue = new DecimalFormat("0.00");
         float dishPrice = dish.getPrice();
         String dishPriceString = "Dish Price: $" + dollarValue.format(dishPrice);
+        StringBuilder dishIngredientsString = new StringBuilder("Ingredients:\n");
+
+        int ingredientListSize = dish.getIngredients().size();
+        for (int i = 0; i < ingredientListSize; i++) {
+            Ingredient ingredient = dish.getIngredients().get(i);
+
+            dishIngredientsString.append("\t")
+                    .append(i + OFFSET_LIST_INDEX)
+                    .append(". ")
+                    .append(ingredient.toString())
+                    .append("\n");
+        }
 
         showToUser(Messages.ADD_DISH_MESSAGE,
                 dishNameString,
