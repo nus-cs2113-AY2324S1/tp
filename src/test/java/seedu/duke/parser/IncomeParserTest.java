@@ -164,4 +164,57 @@ public class IncomeParserTest {
 
         assertThrows(KaChinnnngException.class, () -> IncomeParser.getIndex(inputMap));
     }
+
+    @Test
+    void testParseIncome_nullArguments_exceptionThrown() {
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(null));
+    }
+
+    @Test
+    void testParseIncome_missingDescription_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DATE_FIELD, "12/10/2023");
+        incomeFields.put(IncomeParser.AMOUNT_FIELD, "5000.00");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    @Test
+    void testParseIncome_missingDate_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DESCRIPTION_FIELD, "Salary");
+        incomeFields.put(IncomeParser.AMOUNT_FIELD, "5000.00");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    @Test
+    void testParseIncome_missingAmount_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DESCRIPTION_FIELD, "Salary");
+        incomeFields.put(IncomeParser.DATE_FIELD, "12/10/2023");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    @Test
+    void testParseAmount_invalidFormat_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DESCRIPTION_FIELD, "Salary");
+        incomeFields.put(IncomeParser.DATE_FIELD, "12/10/2023");
+        incomeFields.put(IncomeParser.AMOUNT_FIELD, "5,000.00");  // Comma is not expected
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    @Test
+    void testGetIndex_invalidFormat_exceptionThrown() {
+        HashMap<String, String> inputMap = new HashMap<>();
+        inputMap.put(IncomeParser.INDEX_FIELD, "abc");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.getIndex(inputMap));
+    }
+
+    @Test
+    void testParseIncome_nonExistingField_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put("nonExistingField", "Value");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
 }
