@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,7 +57,7 @@ public abstract class LoadData {
             addRecurringCashflows(date);
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | FinancialPlannerException e) {
+        } catch (IndexOutOfBoundsException | IllegalArgumentException | FinancialPlannerException e) {
             String message = e.getMessage();
             handleCorruptedFile(message);
         }
@@ -178,7 +179,11 @@ public abstract class LoadData {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            date = getDate(split, recur);
+            try {
+                date = getDate(split, recur);
+            } catch (DateTimeParseException e) {
+                throw new FinancialPlannerException("Error in parsing date");
+            }
             index = getIndex(recur);
             description = getDescription(split, index);
             checkValidInput(value, recur);
@@ -208,7 +213,6 @@ public abstract class LoadData {
         default:
             throw new FinancialPlannerException("Error loading file");
         }
-
         return entry;
     }
 
