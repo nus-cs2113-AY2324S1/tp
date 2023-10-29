@@ -160,6 +160,11 @@ public abstract class LoadData {
             ui.showMessage("File not found!");
         } catch (JsonSyntaxException e) {
             ui.showMessage("Watchlist JSON is corrupted!");
+            ui.showMessage("Would you like to create new file? (Y/N)");
+            if (!createNewFile()) {
+                ui.showMessage("Exiting... Plese fix the file");
+                System.exit(1);
+            }
         }
         return stocksData;
     }
