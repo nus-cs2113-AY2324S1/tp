@@ -6,6 +6,7 @@ import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,6 +70,9 @@ public class Ui {
         System.out.print(RED + "Daily Low" + RESET);
         System.out.print("     ");
         System.out.print("EquityName");
+        System.out.print("                    ");
+        System.out.print("Last Updated");
+        System.out.print("     ");
         System.out.println();
     }
 
@@ -79,8 +83,11 @@ public class Ui {
             String price = YELLOW + StringUtils.rightPad(stock.getPrice(), 10) + RESET;
             String dayHigh = GREEN + StringUtils.rightPad(stock.getDayHigh(), 15) + RESET;
             String dayLow = RED + StringUtils.rightPad(stock.getDayLow(), 14) + RESET;
-            String name = StringUtils.rightPad(stock.getStockName(), 10);
-            System.out.println(symbol + market + price + dayHigh + dayLow + name);
+            String name = StringUtils.rightPad(stock.getStockName(), 30);
+            String date = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss")
+                    .format(stock.getLastUpdated());
+            String lastUpdate = StringUtils.rightPad(date, 10);
+            System.out.println(symbol + market + price + dayHigh + dayLow + name + lastUpdate);
         }
     }
 

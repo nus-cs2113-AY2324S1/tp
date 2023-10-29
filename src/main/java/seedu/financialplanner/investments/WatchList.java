@@ -14,6 +14,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,7 +52,12 @@ public class WatchList {
         return watchlist;
     }
 
-    public void fetchFMPStockPrices() throws FinancialPlannerException {
+    public void getLatestWatchlistInfo() throws FinancialPlannerException {
+        JSONArray JSONstocks = fetchFMPStockPrices();
+        extractWatchlistInfoFromJSONArray(JSONstocks);
+    }
+
+    public JSONArray fetchFMPStockPrices() throws FinancialPlannerException {
         if (stocks.isEmpty()) {
             throw new FinancialPlannerException("Empty Watchlist. Nothing to display...");
         }
@@ -86,11 +92,16 @@ public class WatchList {
             throw new RuntimeException(e);
         }
         JSONArray ja = (JSONArray) obj;
-        if (ja.size() != stocks.size()) {
+        return ja;
+    }
+
+    public void extractWatchlistInfoFromJSONArray(JSONArray JSONstocks) throws FinancialPlannerException {
+        if (JSONstocks.size() != stocks.size()) {
             throw new FinancialPlannerException("Error getting API info!");
         }
+        long fetchTime = System.currentTimeMillis();
         int i = 0;
-        for (Object jo : ja) {
+        for (Object jo : JSONstocks) {
             JSONObject stock = (JSONObject) jo;
 
             Stock stockLocal = stocks.get(i);
@@ -102,9 +113,33 @@ public class WatchList {
                 continue;
             }
 
-            extractStockInfoFromJSON(stock, stockLocal);
+            extractStockInfoFromJSONObject(stock, stockLocal, fetchTime);
             i += 1;
         }
+    }
+
+    public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal, long fetchTime) {
+        stockLocal.setLastFetched(fetchTime);
+
+        String price = stock.get("price").toString();
+        assert price != null;
+        stockLocal.setPrice(price);
+
+        String exchange = stock.get("exchange").toString();
+        assert exchange != null;
+        stockLocal.setExchange(exchange);
+
+        String dayHigh = stock.get("dayHigh").toString();
+        assert dayHigh != null;
+        stockLocal.setDayHigh(dayHigh);
+
+        String dayLow = stock.get("dayLow").toString();
+        assert dayLow != null;
+        stockLocal.setDayLow(dayLow);
+
+        String timestamp = stock.get("timestamp").toString();
+        long lastUpdated = Long.parseLong(timestamp) * 1000;
+        stockLocal.setLastUpdated(new Date(lastUpdated));
     }
 
     public String addStock(String stockCode) throws FinancialPlannerException {
@@ -136,24 +171,6 @@ public class WatchList {
                 .orElseThrow(() -> new FinancialPlannerException("Does not Exist in Watchlist"));
         stocks.remove(toBeRemoved);
         return toBeRemoved.getStockName();
-    }
-
-    public void extractStockInfoFromJSON(JSONObject stock, Stock stockLocal) {
-        String price = stock.get("price").toString();
-        assert price != null;
-        stockLocal.setPrice(price);
-
-        String exchange = stock.get("exchange").toString();
-        assert exchange != null;
-        stockLocal.setExchange(exchange);
-
-        String dayHigh = stock.get("dayHigh").toString();
-        assert dayHigh != null;
-        stockLocal.setDayHigh(dayHigh);
-
-        String dayLow = stock.get("dayLow").toString();
-        assert dayLow != null;
-        stockLocal.setDayLow(dayLow);
     }
 
     public int size() {

@@ -12,7 +12,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.Timestamp;
 import java.time.Duration;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +26,8 @@ public class Stock implements Serializable {
     private String price;
     private String dayHigh;
     private String dayLow;
+    private Date lastUpdated = null;
+    private long lastFetched = 0;
 
     public Stock(String symbol) throws FinancialPlannerException {
         this.symbol = symbol;
@@ -124,5 +128,21 @@ public class Stock implements Serializable {
 
     public void setDayLow(String dayLow) {
         this.dayLow = dayLow;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public long getLastFetched() {
+        return lastFetched;
+    }
+
+    public void setLastFetched(long lastFetched) {
+        this.lastFetched = lastFetched;
     }
 }
