@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class Visualizer {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
-    public static void displayChart(String chartType, Map<String, Double> cashFlowByCat, String type)
+    public static void displayChart(String chart, Map<String, Double> cashFlowByCat, String type)
             throws FinancialPlannerException {
-        switch (chartType) {
+        switch (chart) {
         case "pie":
             displayPieChart(cashFlowByCat, type);
             break;
@@ -30,7 +30,7 @@ public class Visualizer {
             displayBarChart(cashFlowByCat, type);
             break;
         default:
-            throw new FinancialPlannerException(chartType + " Chart Type Not Found");
+            throw new FinancialPlannerException(chart + " Chart Type Not Found");
         }
     }
 

@@ -26,7 +26,7 @@ public class WatchListCommand extends Command {
 
         ui.printWatchListHeader();
         try {
-            watchList.fetchFMPStockPrices();
+            watchList.getLatestWatchlistInfo();
 
             logger.log(Level.INFO, "Printing watchlist");
             ui.printStocksInfo(watchList);

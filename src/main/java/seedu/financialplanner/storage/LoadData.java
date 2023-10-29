@@ -16,7 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public abstract class LoadData {
@@ -147,15 +147,15 @@ public abstract class LoadData {
         return description;
     }
 
-    public static ArrayList<Stock> loadWatchList() {
+    public static HashMap<String, Stock> loadWatchList() {
         Ui ui = Ui.getInstance();
-        ArrayList<Stock> stocksData = new ArrayList<>();
+        HashMap<String, Stock> stocksData = new HashMap<>();
         try {
             ObjectInputStream watchListStocksInputStream
                     = new ObjectInputStream(
                         new FileInputStream(FILE_PATH)
             );
-            stocksData = (ArrayList<Stock>) watchListStocksInputStream.readObject();
+            stocksData = (HashMap<String, Stock>) watchListStocksInputStream.readObject();
             watchListStocksInputStream.close();
         } catch (StreamCorruptedException e) {
             ui.showMessage("Watchlist file corrupted.. Rebuilding");

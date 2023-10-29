@@ -4,27 +4,27 @@
 
 **Xchart (A Simple Charting Library for Java)**
 - author: KNOWN
-- source: https://knowm.org/open-source/xchart/
+- source: [https://knowm.org/open-source/xchart/]()
 
 **JSON Simple (simple Java toolkit for encoding and decoding JSON)**
 - author: Yidong Fang (Google Code)
-- source: https://code.google.com/archive/p/json-simple/
+- source: [https://code.google.com/archive/p/json-simple/]()
 
 **Apache Common Langs 3**
 - author: Apache Commons
-- source: https://commons.apache.org/proper/commons-lang/
+- source: [https://commons.apache.org/proper/commons-lang/]()
 
 **Alpha Vantage Stock Market API**
 - author: Alpha Vantage
-- source: https://www.alphavantage.co/
+- source: [https://www.alphavantage.co/]()
 
 **round() method in Cashflow.java**
   - author: mhadidg
-  - source: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+  - source: [https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places]()
 
 **capitalize() method in Cashflow.java**
   - author: Nick Bolton
-  - source: https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
+  - source: [https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string]()
     
 **DG adapted from**
 
@@ -47,6 +47,17 @@ API: `Storage.java`
 * The storage class uses the static methods in LoadData and SaveData to load and save data respectively.
 * The `load` method in LoadData reads the `data.txt` file and loads any existing Income, Expense and Budget into the application.
 * The `save` method in SaveData saves all Incomes, Expenses and existing Budget into the `data.txt` file.
+
+#### Design considerations:
+
+* There are 2 main ways to implement the storage, one is to save the data after every command, and the other is to save 
+the data one upon exiting the program with the `exit` command.
+* Saving the data once upon exit (Currently implemented):
+  * Advantage: Better efficiency and performance of the program.
+  * Disadvantage: If the program crashes or exits incorrectly, data will not be saved.
+* Saving the data after every command:
+  * Advantage: Changes are saved after every command.
+  * Disadvantage: Executing command might slow down the program when there is a large amount of data to be saved.
 
 ### Visualization Feature 
 
@@ -187,7 +198,7 @@ Example: `budget delete`
 
 The budget will be reset by resetting the current budget to the initial budget through the `resetBudget()` method in `Budget.java`.
 
-Example : `budget reset`
+Example: `budget reset`
 
 #### View budget:
 

@@ -13,17 +13,22 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Stock implements Serializable {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
+    private static final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
+    private static final String API_KEY = "LNKL0548PHY2F0QU";
     private String symbol;
     private String exchange;
     private String stockName;
     private String price;
     private String dayHigh;
     private String dayLow;
+    private Date lastUpdated = null;
+    private long lastFetched = 0;
 
     public Stock(String symbol) throws FinancialPlannerException {
         this.symbol = symbol;
@@ -35,8 +40,6 @@ public class Stock implements Serializable {
     }
 
     public String getStockNameFromAPI(String symbol) throws FinancialPlannerException {
-        final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
-        final String API_KEY = "LNKL0548PHY2F0QU";
         String requestURI = String.format("%s%s&apikey=%s", API_ENDPOINT,symbol,API_KEY);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder(URI.create(requestURI))
@@ -60,11 +63,7 @@ public class Stock implements Serializable {
             }
             JSONObject stock = (JSONObject) ja.get(0);
             String symbolFound = (String) stock.get("1. symbol");
-            // TODO: Might need to use AMEX when NYSE is used
-            // TODO: Need to check if it is added already
-            // TODO: add a cap to adding
             // TODO: Separate based on market
-            // TODO: add other info
             // TODO: testing
             if (!symbolFound.equals(symbol)) {
                 throw new FinancialPlannerException("Stock not found");
@@ -124,5 +123,21 @@ public class Stock implements Serializable {
 
     public void setDayLow(String dayLow) {
         this.dayLow = dayLow;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public long getLastFetched() {
+        return lastFetched;
+    }
+
+    public void setLastFetched(long lastFetched) {
+        this.lastFetched = lastFetched;
     }
 }
