@@ -29,14 +29,14 @@ public class SetThresholdCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws DrugNotFoundException {
+    public CommandResult execute(){
         StockEntry stockEntry = inventory.getStockEntry(drugName);
 
         if (stockEntry != null) {
             stockEntry.setThresholdQuantity(threshold);
             return new CommandResult(String.format(MESSAGE_SUCCESS, drugName, threshold));
         } else {
-            throw new DrugNotFoundException("Drug not found in inventory.");
+            return new CommandResult("Drug not found.");
         }
     }
 }

@@ -136,7 +136,7 @@ public class Parser {
             long quantity = Long.parseLong(matcher.group(2));
             return new AddToCartCommand(name, quantity);
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
         }
     }
 

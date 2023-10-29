@@ -24,7 +24,7 @@ public abstract class Command {
         this.currentCart = currentCart;
     }
 
-    public abstract CommandResult execute() throws IOException, StockerException, DrugNotFoundException;
+    public abstract CommandResult execute() throws IOException, StockerException;
 
 
 }
