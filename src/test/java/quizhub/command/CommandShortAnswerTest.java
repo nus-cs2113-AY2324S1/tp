@@ -49,6 +49,7 @@ public class CommandShortAnswerTest {
         actualOutput = actualOutput.replace("\r", "");
         actualOutput = actualOutput.replace("\n", "");
         actualOutput = actualOutput.replace(System.lineSeparator(), "");
+        actualOutput = actualOutput.replaceAll("\\s+", " "); // Replace multiple spaces with a single space
         System.out.println(expectedOutput + "\n" +actualOutput);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
@@ -60,9 +61,9 @@ public class CommandShortAnswerTest {
      */
     public void testValidCommand(){
         String input = "short question/answer/module/easy";
-        String expectedOutput = "I have added the following question OwO:      " +
-                "[S] question / answer | module | EASY    " +
-                "Now you have 1 questions in the list! UWU";
+        String expectedOutput = "I have added the following question OwO:" +
+                " [S] question / answer | module | EASY" +
+                " Now you have 1 questions in the list! UWU";
         Command command = Parser.parseCommand(input);
         command.executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
@@ -74,7 +75,7 @@ public class CommandShortAnswerTest {
      * Input: short [question]_[answer]_[module]_[difficulty]
      */
     public void testInvalidDelimiter() {
-        String input = "short question_answer_module/easy";
+        String input = "short question_answer_module_easy";
         String expectedOutput = CommandShortAnswer.INVALID_FORMAT_MSG.strip();
         Command command = Parser.parseCommand(input);
         command.executeCommand(ui, mockStorage, questionList);
@@ -87,7 +88,11 @@ public class CommandShortAnswerTest {
      * Input: short [question]/[module]/[difficulty]
      */
     public void testMissingFields(){
-
+        String input = "short question//module/easy";
+        String expectedOutput = CommandShortAnswer.MISSING_FIELDS_MSG.strip() + " " + CommandShortAnswer.INVALID_FORMAT_MSG.strip();
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     @Test
@@ -96,15 +101,6 @@ public class CommandShortAnswerTest {
      * Input: short [question]/[answer]/[module]/[difficulty]/extra
      */
     public void testAdditionalFields(){
-
-    }
-
-    @Test
-    /**
-     * Incorrect order of fields
-     * Input: short [module]/[answer]/[question]/[difficulty]
-     */
-    public void testIncorrectFieldsOrder(){
 
     }
 

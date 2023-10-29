@@ -130,7 +130,7 @@ public class Parser {
 
             if (description.isEmpty() || answer.isEmpty() || module.isEmpty() || difficulty.isEmpty()) {
                 return new CommandInvalid(CommandShortAnswer.MISSING_FIELDS_MSG +
-                        System.lineSeparator() + CommandShortAnswer.INVALID_FORMAT_MSG);
+                        "\n" + CommandShortAnswer.INVALID_FORMAT_MSG);
             }
 
             Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
