@@ -128,8 +128,8 @@ public abstract class Cashflow {
         if (recur == 0) {
             string = " | 0 | false";
         } else {
-            string = " | " + this.recur + " | " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            string += " | " + this.hasRecurred;
+            string = " | " + this.recur + " | " + " | " + this.hasRecurred;
+            string += date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
         if (description != null) {
             string += " | " + this.description;
