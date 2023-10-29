@@ -22,13 +22,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class LoadData {
-    protected static LocalDate currentDate = LocalDate.now();
     private static final String FILE_PATH = "data/watchlist.txt";
     private static final CashflowList cashflowList = CashflowList.getInstance();
     private static final Ui ui = Ui.getInstance();
 
 
-    public static void load(String filePath) throws FinancialPlannerException {
+    public static void load(String filePath, LocalDate date) throws FinancialPlannerException {
         try {
             Scanner inputFile = new Scanner(new FileReader(filePath));
             String line;
@@ -54,7 +53,7 @@ public abstract class LoadData {
             }
             inputFile.close();
 
-            addRecurringCashflows();
+            addRecurringCashflows(date);
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | FinancialPlannerException e) {
@@ -63,28 +62,44 @@ public abstract class LoadData {
         }
     }
 
-    private static void addRecurringCashflows() throws FinancialPlannerException {
+    private static void addRecurringCashflows(LocalDate currentDate) throws FinancialPlannerException {
         ui.showMessage("Adding any recurring cashflows...");
+        ArrayList<Cashflow> tempCashflow = new ArrayList<>();
         for (Cashflow cashflow : cashflowList.list) {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
+            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflow);
+        }
+        for (Cashflow cashflow : tempCashflow) {
+            cashflowList.load(cashflow);
+            ui.printAddedCashflow(cashflow);
+        }
+    }
 
-            if (recur > 0) {
-                dateOfAddition = dateOfAddition.plusDays(recur);
-                if (currentDate.isAfter(dateOfAddition)) {
-                    Cashflow toAdd = null;
-                    if (cashflow instanceof Income) {
-                        toAdd = new Income((Income) cashflow);
-                    } else if (cashflow instanceof Expense) {
-                        toAdd = new Expense((Expense) cashflow);
-                    } else {
-                        throw new FinancialPlannerException("Error adding recurring cashflows");
-                    }
-                    toAdd.setDate(dateOfAddition);
-                    cashflowList.load(toAdd);
-                    ui.printAddedCashflow(toAdd);
-                }
+    private static void addRecurringCashflowToTempList(LocalDate currentDate
+            , Cashflow cashflow, int recur, LocalDate dateOfAddition
+            , ArrayList<Cashflow> tempCashflow) throws FinancialPlannerException {
+        if (recur > 0) {
+            dateOfAddition = dateOfAddition.plusDays(recur);
+            identifyRecurredCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflow);
+        }
+    }
+
+    private static void identifyRecurredCashflows(LocalDate currentDate
+            , Cashflow cashflow, int recur, LocalDate dateOfAddition
+            , ArrayList<Cashflow> tempCashflow) throws FinancialPlannerException {
+        while (currentDate.isAfter(dateOfAddition) || currentDate.isEqual(dateOfAddition)) {
+            Cashflow toAdd = null;
+            if (cashflow instanceof Income) {
+                toAdd = new Income((Income) cashflow);
+            } else if (cashflow instanceof Expense) {
+                toAdd = new Expense((Expense) cashflow);
+            } else {
+                throw new FinancialPlannerException("Error adding recurring cashflows");
             }
+            toAdd.setDate(dateOfAddition);
+            tempCashflow.add(toAdd);
+            dateOfAddition = dateOfAddition.plusDays(recur);
         }
     }
 
