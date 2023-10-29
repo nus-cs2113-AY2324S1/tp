@@ -6,6 +6,7 @@ import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 import quizhub.ui.MockUi;
 import quizhub.storage.Storage;
+import quizhub.storage.MockStorage;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -130,8 +131,36 @@ public class CommandShortAnswerTest {
      * Expected Output: Ensure that the application detects and handles duplicate entries, preventing them from being
      added to the file again.
      */
-    public void testDuplicateHandling(){
+    public void testDuplicateHandling() {
+        // Define the input short answer question
+        String input = "short duplicate_question/duplicate_answer/module/easy";
 
+        // Add the question once
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+
+        // Attempt to add the same question again
+        command.executeCommand(ui, mockStorage, questionList);
+
+        // Expected output after adding the question once
+        String expectedOutputOnce = "I have added the following question OwO:" +
+                " [S] duplicate_question / duplicate_answer | module | EASY" +
+                " Now you have 1 questions in the list! UWU";
+
+        // Expected output after attempting to add the same question again
+        String expectedOutputDuplicate = CommandShortAnswer.DUPLICATED_INPUT.strip();
+
+        // Capture and trim actual output
+        String actualOutput = outputStreamCaptor.toString().trim();
+
+        // Remove multiple spaces and newlines for consistent comparison
+        actualOutput = actualOutput.replaceAll("\\s+", " ");
+
+        // Check if the first addition was successful
+        Assertions.assertTrue(actualOutput.contains(expectedOutputOnce));
+
+        // Check if the second addition was handled as a duplicate
+        Assertions.assertTrue(actualOutput.contains(expectedOutputDuplicate));
     }
 
     @Test
@@ -147,66 +176,18 @@ public class CommandShortAnswerTest {
 
     @Test
     /**
-     * Listing questions by category
-     */
-    public void testListQnByModule(){
-
-    }
-
-    @Test
-    /**
-     * Listing questions by difficulty
-     */
-    public void testListQnByDifficulty(){
-
-    }
-
-    @Test
-    /**
      * Test storage is updated after adding a new short answer
      */
     public void testStorageAddShortAns(){
 
     }
 
-//    @Test
-//    /**
-//     * Test storage is updated after deleting a short answer
-//     */
-//    public void testStorageDeleteShortAns(){
-//
-//    }
+    @Test
+    /**
+     * Test storage is updated after deleting a short answer
+     */
+    public void testStorageDeleteShortAns(){
 
-    public class MockStorage extends Storage {
-        private List<String> questions = new ArrayList<>();
-
-        public MockStorage(String filepath) {
-            super(filepath);
-        }
-
-        public void saveData(String dataToAdd) {
-            questions.add(dataToAdd);
-        }
-
-        public String loadData() {
-            // In-memory storage, retrieve data from the list
-            if (questions.isEmpty()) {
-                return "";
-            }
-            // Concatenate the data with line breaks
-            StringBuilder result = new StringBuilder();
-            for (String line : questions) {
-                result.append(line).append(System.lineSeparator());
-            }
-            return result.toString().trim();
-        }
-
-        public boolean dataExists() {
-            return !questions.isEmpty();
-        }
-
-        public void clearData() {
-            questions.clear();
-        }
     }
+
 }
