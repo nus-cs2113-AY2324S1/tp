@@ -14,13 +14,12 @@ public class Recipe {
     public Recipe(String title, String[] steps) {
         this.title = title;
         recipeSteps = new RecipeStepList(steps);
-        // recipeIngredients = new RecipeIngredientList();
     }
 
     public Recipe(String title, String[] steps, String[] ingredients) {
         this.title = title;
-        recipeSteps = new RecipeStepList(steps);
-        recipeIngredients = new RecipeIngredientList(ingredients);
+        this.recipeSteps = new RecipeStepList(steps);
+        this.recipeIngredients = new RecipeIngredientList(ingredients);
     }
 
     public RecipeStepList getRecipeSteps() {

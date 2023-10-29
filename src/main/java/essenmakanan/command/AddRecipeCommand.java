@@ -1,5 +1,6 @@
 package essenmakanan.command;
 
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
@@ -20,7 +21,11 @@ public class AddRecipeCommand extends Command {
     public void executeCommand() {
         if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
             // all attributes are available
-            this.addWithTitleAndStepsAndIngredients();
+            try {
+                this.addWithTitleAndStepsAndIngredients();
+            } catch (EssenFormatException e) {
+                e.handleException();
+            }
         } else if (toAdd.contains("r/") && toAdd.contains("s/")) {
             // only title and steps are available
             this.addWithTitleAndSteps();
@@ -49,7 +54,7 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
-    public void addWithTitleAndStepsAndIngredients() {
+    public void addWithTitleAndStepsAndIngredients() throws EssenFormatException {
         String recipeTitle = "";
 
         String[] allToAdd = toAdd.split(" ");
@@ -78,7 +83,7 @@ public class AddRecipeCommand extends Command {
                 recipeTitle = RecipeParser.parseRecipeTitle(inputRecipeTitle.trim());
                 if (recipeTitle.isEmpty()) {
                     System.out.println("Recipe title is empty! Please enter valid title after \"r/\"");
-                    return;
+                    throw new EssenFormatException();
                 }
 
                 break;
@@ -89,7 +94,7 @@ public class AddRecipeCommand extends Command {
             case "i/":
                 if (!IngredientParser.isValidIngredient(detail)) {
                     System.out.println("Ingredient is not valid! Please enter valid ingredient after \"i/\"");
-                    return;
+                    throw new EssenFormatException();
                 }
                 ingredientsInString[ingredientsCounter] = detail;
                 ingredientsCounter++;

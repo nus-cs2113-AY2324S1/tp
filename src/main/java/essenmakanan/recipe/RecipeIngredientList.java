@@ -30,8 +30,8 @@ public class RecipeIngredientList {
         System.out.println("Finished adding ingredients!");
     }
 
-    public RecipeIngredientList(String[] ingredients) {
-        for (String ingredientString : ingredients) {
+    public RecipeIngredientList(String[] inputIngredients) {
+        for (String ingredientString : inputIngredients) {
             try {
                 Ingredient ingredient = IngredientParser.parseIngredient(ingredientString);
                 this.addIngredient(ingredient);
