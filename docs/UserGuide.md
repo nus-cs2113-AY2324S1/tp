@@ -100,7 +100,86 @@ Example output:
 
 ```
 
+### Delete cashflow
+Deletes an income/expense from the Financial Planner.
 
+Format: `delete INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when `list` command is used.
+- `/r` is used to delete all **future** incomes/expenses **only**.
+
+Example of usage: `delete 2 /r`
+
+Example output:
+```
+
+```
+Example of usage: `delete 2`
+
+Example output:
+```
+
+```
+### Delete income
+Deletes an income from the Financial Planner.
+
+Format: `delete income INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when `list income` command is used.
+- `/r` is used to delete all **future** incomes **only**.
+
+Example of usage: `delete income 2 /r`
+
+Example output:
+```
+
+```
+Example of usage: `delete income 2`
+
+Example output:
+```
+
+```
+### Delete expense
+Deletes an expense from the Financial Planner.
+
+Format: `delete expense INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when `list expense` command is used.
+- `/r` is used to delete all **future** expenses **only**.
+
+Example of usage: `delete expense 2 /r`
+
+Example output:
+```
+
+```
+Example of usage: `delete expense 2`
+
+Example output:
+```
+
+```
+### Delete recurring
+Deletes a recurring income/expense from the Financial Planner.
+
+Format: `delete recurring INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when `list recurring` command is used.
+- `/r` is used to delete all **future** recurring incomes/expenses **only**.
+
+Example of usage: `delete recurring 2`
+
+Example output:
+```
+
+```
+Example of usage: `delete recurring 2 /r`
+
+Example output:
+```
+
+```
 ### Budget
 
 #### Setting a budget: `budget set`
