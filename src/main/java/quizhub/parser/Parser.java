@@ -13,6 +13,7 @@ import quizhub.command.CommandShuffle;
 import quizhub.command.CommandMarkDifficulty;
 import quizhub.command.CommandHelp;
 import quizhub.question.Question;
+import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 
 /**
@@ -107,32 +108,6 @@ public class Parser {
      * @param userInput Raw command entered by the user
      * @return Short Answer command or an Invalid Command
      */
-//    private static Command parseShortAnswerCommand(String userInput) {
-//        String description;
-//        String answer;
-//        String module;
-//        String difficulty;
-//
-//        try {
-//            String[] inputTokens = userInput.split("short")[1].strip().split("/");
-//            description = inputTokens[0].strip();
-//            answer = inputTokens[1].strip();
-//            module = inputTokens[2].strip();
-//            difficulty = inputTokens[3].strip();
-//            if (description.isEmpty() || answer.isEmpty() || module.isEmpty() || difficulty.isEmpty()) {
-//                return new CommandInvalid(CommandShortAnswer.MISSING_FIELDS_MSG +
-//                        System.lineSeparator() + CommandShortAnswer.INVALID_FORMAT_MSG);
-//            }
-//            if(inputTokens[3].split( " ").length != 1){
-//
-//            }
-//            Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
-//            return new CommandShortAnswer(description, answer, module, qnDifficulty);
-//        } catch (ArrayIndexOutOfBoundsException exception) {
-//            return new CommandInvalid(CommandShortAnswer.INVALID_FORMAT_MSG);
-//        }
-//    }
-
     private static Command parseShortAnswerCommand(String userInput) {
         String description;
         String answer;
@@ -143,7 +118,7 @@ public class Parser {
             // Split the input by 'short' and then by '/' to separate the parts
             String[] inputTokens = userInput.split("short")[1].strip().split("/");
 
-            // Check if there are more than 4 parts (description, answer, module, difficulty)
+            // Check if there are exactly 4 parts (description, answer, module, difficulty)
             if (inputTokens.length > 4) {
                 return new CommandInvalid(CommandShortAnswer.TOO_MANY_ARGUMENTS_MSG);
             }
