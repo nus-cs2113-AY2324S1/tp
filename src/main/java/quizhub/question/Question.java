@@ -3,6 +3,7 @@ package quizhub.question;
  * Represents all questions in the question list in general.
  */
 public class Question {
+    public static final String QN_UNCHANGED_MSG = "    No changes made to question";
     public enum QnType {SHORTANSWER, DEFAULT};
     public enum QnDifficulty {EASY, HARD, NORMAL, INVALID};
     private QnType qnType;
@@ -135,7 +136,10 @@ public class Question {
      * @param newAnswer New answer of the question.
      */
     public void editQuestion(String newDescription, String newAnswer){
-        if(!newDescription.equals("")){
+        if(newDescription != null && newDescription.equals(this.description)){
+            System.out.println("    Description is already set as " + this.description + "!" + System.lineSeparator() +
+                    QN_UNCHANGED_MSG);
+        } else if(newDescription != null && !newDescription.equals("")){
             this.description = newDescription;
         }
     }

@@ -37,7 +37,10 @@ public class ShortAnsQn extends Question {
     @Override
     public void editQuestion(String newDescription, String newAnswer) {
         super.editQuestion(newDescription, newAnswer);
-        if(!newAnswer.equals("")){
+        if(newAnswer != null && newAnswer.equals(this.answer)){
+            System.out.println("    Answer is already set as " + this.answer + "!" + System.lineSeparator() +
+                    QN_UNCHANGED_MSG);
+        } else if(newAnswer != null && !newAnswer.equals("")){
             this.answer = newAnswer;
         }
     }
