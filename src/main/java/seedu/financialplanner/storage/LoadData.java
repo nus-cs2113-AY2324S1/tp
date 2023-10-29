@@ -113,7 +113,7 @@ public abstract class LoadData {
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
             , ArrayList<Cashflow> tempCashflow) throws FinancialPlannerException {
         while (currentDate.isAfter(dateOfAddition) || currentDate.isEqual(dateOfAddition)) {
-            Cashflow toAdd = null;
+            Cashflow toAdd;
             if (cashflow instanceof Income) {
                 toAdd = new Income((Income) cashflow);
             } else if (cashflow instanceof Expense) {
