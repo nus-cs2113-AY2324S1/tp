@@ -12,6 +12,8 @@ alt spentBudget
     end
     BudgetCommand -> Budget: resetBudget()
     BudgetCommand -> Ui: printResetBudget()
+else !hasBudget
+    BudgetCommand -> Ui: printBudgetError("delete")
 else else
     BudgetCommand -> Ui: printBudgetError("reset")
 end
