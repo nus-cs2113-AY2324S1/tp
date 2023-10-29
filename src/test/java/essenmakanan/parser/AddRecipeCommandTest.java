@@ -2,7 +2,6 @@ package essenmakanan.parser;
 
 import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.exception.EssenFormatException;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,8 @@
 package essenmakanan.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.parser.IngredientParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
