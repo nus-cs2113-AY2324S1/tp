@@ -135,9 +135,9 @@ public class Parser {
         }
     }
 
-    /** All prepareCommand Classes */
-    //@@author Cazh1
+    //All prepareCommand Classes
 
+    //@@author Cazh1
     /**
      * Prepares the ListMenuCommand
      *
