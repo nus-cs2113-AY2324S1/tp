@@ -31,7 +31,7 @@ public class IngredientParserTest {
     public void parseIngredient_invalidInput_throwsEssenMakananFormatException() {
         String invalidDetails = "plus tomato";
         assertThrows(EssenFormatException.class, () -> {
-            IngredientParser.parseIngredient(ingredients, invalidDetails);
+            IngredientParser.parseIngredient(invalidDetails);
         });
     }
 
