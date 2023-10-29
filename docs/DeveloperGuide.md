@@ -219,7 +219,7 @@ To illustrate how the `ListCommand` works, consider the following example usage:
 
 ---
 
-## 2. Delete Command
+## 3. Delete Command
 
 The "Delete" function is designed to enable users to remove specific drugs from the inventory based on the drug's name. This component facilitates the management of the inventory by allowing users to remove drugs they no longer need, fully depleted or discontinued.
 
@@ -271,6 +271,20 @@ To illustrate how the "Delete" function works, consider the following example us
 The "Delete" function provides a straightforward way for users to manage the inventory by removing specific drugs as needed.
 
 ---
+## 4. Help Command
+
+The command is responsible for showing users a list of all possible commands.
+
+**Design Considerations**
+
+The command was designed to print out and show how to use a list of all possible commands in a neat and concise way.
+
+**Implementation and Rationale**
+
+Command will use java's system out to print out all required information with a blank line in between for clarity.
+
+---
+
 
 ## Product scope
 
