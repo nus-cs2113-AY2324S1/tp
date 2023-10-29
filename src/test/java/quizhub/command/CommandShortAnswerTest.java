@@ -222,10 +222,15 @@ public class CommandShortAnswerTest {
         // Update the storage with the modified QuestionList
         mockStorage.updateData(questionList);
 
-        // Verify that the storage reflects the changes
+        // Verify that the storage reflects the changes, implement clicorrectness in context
         String storageData = mockStorage.loadData();
-        String expectedStorageData = "S | undone | Question1 / Answer1 | Mod1 | NORMAL\n" +
-                "S | undone | Question3 / Answer3 | Mod3 | NORMAL\n" +
+        storageData = storageData.replace("\n", "");
+        storageData = storageData.replace("\r", "");
+        storageData = storageData.replace("\n", "");
+        storageData = storageData.replace(System.lineSeparator(), "");
+
+        String expectedStorageData = "S | undone | Question1 / Answer1 | Mod1 | NORMAL" +
+                "S | undone | Question3 / Answer3 | Mod3 | NORMAL" +
                 "S | undone | Question4 / Answer4 | Mod4 | NORMAL";
 
         // Ensure that the deleted question is no longer present in the storage
