@@ -6,11 +6,11 @@ participant "<<class>>\nCashFlowList"
 participant "<<class>>\nCategorizer"
 participant "<<class>>\nVisualizer"
 
-":VisCommand"-> "<<class>>\nUi": Ui.getInstance()
+":VisCommand"-> "<<class>>\nUi": getInstance()
 
-":VisCommand"-> "<<class>>\nCashFlowList": CashFlowList.getInstance()
+":VisCommand"-> "<<class>>\nCashFlowList": getInstance()
 
-":VisCommand"-> "<<class>>\nUi": ui.printDisplayChart(type)
+":VisCommand"-> "<<class>>\nUi": printDisplayChart(type)
 
 ref over "<<class>>\nCategorizer", ":VisCommand" : sort cashflow entries
 
