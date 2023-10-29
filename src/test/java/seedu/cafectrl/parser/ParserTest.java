@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -414,6 +415,20 @@ class ParserTest {
         assertEquals(expectedDishName, getOutputDish.getName());
         assertEquals(expectedDishPrice, getOutputDish.getPrice());
         assertEquals(expectedIngredientList, getOutputDish.getIngredients().toString());
+    }
+
+    @Test
+    void parsePriceToFloat_validPriceString_exactFloatPrice() {
+        String inputPriceString = "3.14";
+
+        assertEquals((float) 3.14, Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
+    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ArithmeticException {
+        String inputPriceString = "99999999999.99";
+
+        assertThrows(ArithmeticException.class, () -> Parser.parsePriceToFloat(inputPriceString));
     }
     //@@author
 }
