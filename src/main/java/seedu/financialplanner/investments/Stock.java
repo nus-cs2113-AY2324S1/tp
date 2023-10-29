@@ -64,11 +64,7 @@ public class Stock implements Serializable {
             }
             JSONObject stock = (JSONObject) ja.get(0);
             String symbolFound = (String) stock.get("1. symbol");
-            // TODO: Might need to use AMEX when NYSE is used
-            // TODO: Need to check if it is added already
-            // TODO: add a cap to adding
             // TODO: Separate based on market
-            // TODO: add other info
             // TODO: testing
             if (!symbolFound.equals(symbol)) {
                 throw new FinancialPlannerException("Stock not found");
