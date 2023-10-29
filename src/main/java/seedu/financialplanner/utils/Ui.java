@@ -15,10 +15,10 @@ import java.util.logging.Logger;
 public class Ui {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static Ui ui = null;
-    private final String RED = "\u001B[31m";
-    private final String GREEN = "\u001B[32m";
-    private final String RESET = "\u001B[0m";
-    private final String YELLOW = "\u001B[33m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String RESET = "\u001B[0m";
+    private static final String YELLOW = "\u001B[33m";
     private Scanner Scanner = new Scanner(System.in);
     private Ui() {
     }

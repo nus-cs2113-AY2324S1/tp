@@ -12,7 +12,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.Date;
 import java.util.logging.Level;
@@ -20,6 +19,8 @@ import java.util.logging.Logger;
 
 public class Stock implements Serializable {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
+    private static final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
+    private static final String API_KEY = "LNKL0548PHY2F0QU";
     private String symbol;
     private String exchange;
     private String stockName;
@@ -39,8 +40,6 @@ public class Stock implements Serializable {
     }
 
     public String getStockNameFromAPI(String symbol) throws FinancialPlannerException {
-        final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
-        final String API_KEY = "LNKL0548PHY2F0QU";
         String requestURI = String.format("%s%s&apikey=%s", API_ENDPOINT,symbol,API_KEY);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder(URI.create(requestURI))

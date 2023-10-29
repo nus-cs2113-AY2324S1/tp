@@ -13,7 +13,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,9 +22,9 @@ import java.util.logging.Logger;
 public class WatchList {
     private static WatchList watchlist = null;
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
+    private static final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
+    private static final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
     private HashMap<String, Stock> stocks = null;
-    private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
-    private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
 
     private WatchList() {
         stocks = LoadData.loadWatchList();
@@ -66,6 +65,7 @@ public class WatchList {
         for (Map.Entry<String, Stock> set: stocks.entrySet()) {
             if (set.getValue().getLastFetched() + fivemin < currentTime) {
                 queryStocks.append(set.getKey());
+                queryStocks.append(",");
             }
         }
         return queryStocks;
@@ -107,12 +107,12 @@ public class WatchList {
         extractWatchlistInfoFromJSONArray((JSONArray) obj);
     }
 
-    public void extractWatchlistInfoFromJSONArray(JSONArray JSONstocks) throws FinancialPlannerException {
-        if (JSONstocks.isEmpty()) {
+    public void extractWatchlistInfoFromJSONArray(JSONArray jsonstocks) throws FinancialPlannerException {
+        if (jsonstocks.isEmpty()) {
             return;
         }
         long fetchTime = System.currentTimeMillis();
-        for (Object jo : JSONstocks) {
+        for (Object jo : jsonstocks) {
             JSONObject stock = (JSONObject) jo;
             if (stocks.containsKey(stock.get("symbol").toString().toUpperCase())) {
                 Stock stockLocal = stocks.get(stock.get("symbol").toString().toUpperCase());
@@ -150,7 +150,7 @@ public class WatchList {
             throw new FinancialPlannerException("Watchlist is full (max 5). Delete a stock to add a new one");
         }
         if (stocks.containsKey(stockCode.toUpperCase())) { // should already be uppercase
-                throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
+            throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
         }
 
         Stock newStock;
