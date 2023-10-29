@@ -38,18 +38,26 @@ class LoadDataTest {
     }
     private void getTestData() {
         LocalDate date = stringToDate("01/01/2023");
-        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date));
-        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, "parents", date));
-        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee", date));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date, false));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, "parents", date, false));
+        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee", date, false));
+        cashflowList.load(new Expense(100, ExpenseType.INSURANCE, 10, "ntuc", date, true));
 
         date = date.plusDays(10);
-        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date));
+        cashflowList.load(new Expense(100, ExpenseType.INSURANCE, 10, "ntuc", date, false));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date, false));
 
         date = date.plusDays(10);
-        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date, false));
 
         date = date.plusDays(10);
-        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date));
-        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee", date));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date, false));
+        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee", date, false));
+
+        date = stringToDate("21/01/2023");
+        cashflowList.load(new Expense(100, ExpenseType.INSURANCE, 10, "ntuc", date, false));
+
+        date = date.plusDays(10);
+        cashflowList.load(new Expense(100, ExpenseType.INSURANCE, 10, "ntuc", date, false));
     }
 }
