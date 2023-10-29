@@ -70,7 +70,7 @@ public class CommandEditTest {
      * */
     @Test
     void testEditOutOfBoundIndex(){
-        String expectedOutput = "Ono! Please enter valid question number *sobs*";
+        String expectedOutput = Ui.INVALID_INTEGER_INDEX_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
         String userInput = "edit -1 /description NewDescription";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);

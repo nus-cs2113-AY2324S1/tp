@@ -41,7 +41,7 @@ public class Ui {
             "with the specified number," +
             System.lineSeparator() +
             "    12. bye - exits the program";
-    public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer index!";
+    public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer question index!";
 
     public static final String MISSING_QUESTION_NUMBER_MSG = "    Ono! Please enter valid question number *sobs*";
 
