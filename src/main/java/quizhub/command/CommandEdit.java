@@ -7,6 +7,7 @@ import quizhub.ui.Ui;
  * Represents a command to edit a task.
  */
 public class CommandEdit extends Command {
+    public static final String COMMAND_WORD = "edit";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as edit [question number] " +
             "/description [description] or /answer [answer]!";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";

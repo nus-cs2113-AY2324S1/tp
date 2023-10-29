@@ -5,6 +5,7 @@ import quizhub.storage.Storage;
 import quizhub.ui.Ui;
 
 public class CommandShuffle extends Command {
+    public static final String COMMAND_WORD = "shuffle";
     public CommandShuffle() {
         super(CommandType.SHUFFLE);
     }

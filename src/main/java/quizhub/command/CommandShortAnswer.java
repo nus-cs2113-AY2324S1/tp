@@ -8,12 +8,14 @@ import quizhub.ui.Ui;
  * Represents a command to add a quiz question.
  */
 public class CommandShortAnswer extends Command {
+    public static final String COMMAND_WORD = "short";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as " +
             "short [question]/[answer]/[module]/[difficulty]!";
     public static final String MISSING_FIELDS_MSG = "    You have one or more field missing!";
     public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! There should not be arguments after /difficulty";
     public static final String DUPLICATED_INPUT = "    You have a duplicated input, please fill add a different input!";
     public static final String INVALID_DIFFICULTY_MSG = "    Entry will not be added to list";
+    public static final int ARGUMENT_SIZE = 4;
     private final String description;
     private final String answer;
     private final String module;
