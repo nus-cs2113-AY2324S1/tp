@@ -2,10 +2,14 @@ package seedu.duke.commands;
 
 import seedu.duke.financialrecords.Income;
 import seedu.duke.ui.Ui;
+
+import java.io.File;
 import java.util.ArrayList;
 
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Represents the command that when executed, lists all incomes.
@@ -16,6 +20,25 @@ public class IncomeLister extends Commands {
     private static final Logger LOGGER = Logger.getLogger(IncomeLister.class.getName());
     private final ArrayList<Income> incomes;
     private final Ui ui;
+
+    static {
+        try {
+            File dir = new File("logs");
+            if (!dir.exists()) {
+                if (!dir.mkdirs()) {
+                    throw new KaChinnnngException("Failed to create directory " + dir.getAbsolutePath());
+                }
+            }
+            FileHandler fh = new FileHandler("logs/IncomeLister.log", true);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            LOGGER.addHandler(fh);
+            LOGGER.setLevel(Level.ALL);
+            LOGGER.setUseParentHandlers(false);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", e);
+        }
+    }
 
     /**
      * Constructor for IncomeLister.
@@ -47,18 +70,18 @@ public class IncomeLister extends Commands {
     // Updated method name to follow Java naming conventions
     public void listIncomes() {
         if (incomes.isEmpty()) {
-            ui.showLineDivider();
-            System.out.println("You have no recorded incomes.");
-            ui.showLineDivider();
+            Ui.showLineDivider();
+            ui.printMessage("You have no recorded incomes.");
+            Ui.showLineDivider();
             return;
         }
 
-        ui.showLineDivider();
-        System.out.println("Here are your incomes:");
+        Ui.showLineDivider();
+        ui.printMessage("Here are your incomes:");
         for (int i = 0; i < incomes.size(); i++) {
-            System.out.println((i + 1) + ". " + incomes.get(i).toString());
+            ui.printMessage((i + 1) + ". " + incomes.get(i).toString());
         }
-        ui.showLineDivider();
+        Ui.showLineDivider();
         LOGGER.log(Level.INFO, ("Incomes listed successfully"));
     }
 }

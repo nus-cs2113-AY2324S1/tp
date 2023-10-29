@@ -33,12 +33,12 @@ import java.util.ArrayList;
  * It contains the main method that runs the program.
  */
 public class Duke {
-    private Ui ui;
-    private ArrayList<Income> incomes;
-    private ArrayList<Expense> expenses;
-    private String storagePath;
-    private SaveToTxt save;
-    private GetFromTxt get;
+    private final Ui ui;
+    private final ArrayList<Income> incomes;
+    private final ArrayList<Expense> expenses;
+    private final String storagePath;
+    private final SaveToTxt save;
+    private final GetFromTxt get;
 
     public Duke() {
         ui = new Ui();
@@ -75,7 +75,7 @@ public class Duke {
                         incomeCommand.execute();
                         Income newIncome = incomeCommand.getNewIncome();
                         incomes.add(newIncome);
-                        ui.printIncomeAddedMessage(newIncome);
+                        Ui.printIncomeAddedMessage(newIncome);
                     } catch (KaChinnnngException e) {
                         Ui.showLineDivider();
                         System.out.println(e.getMessage());
@@ -112,15 +112,15 @@ public class Duke {
                     break;
 
                 case "delete_income":
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     break;
 
                 case "delete_expense":
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     break;
 
                 case "help":
@@ -162,15 +162,15 @@ public class Duke {
                     Ui.showLineDivider();
                     break;
                 case "edit_income":
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     new EditIncomeCommand(incomes, fullCommand).execute();
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     break;
 
                 case "edit_expense":
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     new EditExpenseCommand(expenses, fullCommand).execute();
-                    ui.showLineDivider();
+                    Ui.showLineDivider();
                     break;
                 default:
                     Ui.showLineDivider();
@@ -180,7 +180,7 @@ public class Duke {
                 }
             } catch (KaChinnnngException e) {
                 System.out.println(e.getMessage());
-                ui.showLineDivider();
+                Ui.showLineDivider();
             }
             save.saveIncomeAndExpense(incomes,expenses);
         }
