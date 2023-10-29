@@ -70,8 +70,46 @@ Examples of usage:
   3: `[S][] 6 / 12 | num | EASY` <br>
 
 ### Delete Questions `delete`
+Deletes the question with the specified question number from the question and answer bank.
+
+Format:
+`delete [qustion number]`
+
+Example of usage:
+* **Command**: `delete 2` <br>
+  **Output**: <br>
+  `    Roger that! I have deleted the following question >w< !` <br>
+  `        [s][] [question description] / [ansewer] | [module] | [quesiton difficulty]` <br>
+  `    Now you have [no. of questions] questions in the list! UWU` <br>
+
+Notes:
+* The program only supports deleting one question at a time, so entering multiple question numbers will result in the program prompting you to enter only 1 question number.
+* The program accepts only a valid integer question number within the range of the number of available questions, any other form of inputs will result in the program prompting you to re-enter a valid command.
 
 ### Find question/answer `find`
+Finds and displays all questions in the question and answer bank that match the criteria (question description / answer) and keywords of the search.
+
+Format:
+1. `find /description [question description]`
+2. `find /answer [answer]`
+
+Examples of usage:
+* **Command**: `find /description example description` <br>
+  **Output**: <br>
+  `    Here are questions that matched your search:` <br>
+  `    1: [S][] EXAMPLE Description / [answer] | [module] | [question difficulty]` <br>
+  `    2: [S][] example description1 / [answer] | [module] | [question difficulty]` <br>
+  `    3: [S][] example description 2/ [answer] | [module] | [question difficulty]` <br> <br>
+* **Command**: `find /answer example answer` <br>
+  **Output**: <br>
+  `    Here are questions that matched your search:` <br>
+  `    1: [S][] [question description] / EXAMPLE Answer | [module] | [question difficulty]` <br>
+  `    2: [S][] [question description] / example answer1 | [module] | [question difficulty]` <br>
+  `    3: [S][] [question description] / example answer 2 | [module] | [question difficulty]` <br> <br>
+
+Notes:
+* As long as the search keyword string is a substring of the question description / answer of a question stored in the question and answer bank, it will be included in the search result. Please refer to the above examples as an illustration of this property.
+* The search is non case-sensitive. Please refer to the above examples as an illustration of this property.
 
 ### Edit question/answer `edit`
 Edits the description or answer of an existing question in the question and answer bank
