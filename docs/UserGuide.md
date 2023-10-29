@@ -99,6 +99,12 @@ Example of usage:
 
 `deleteBudget`
 
+### Exiting the CashLeh? application: `exit`
+This command closes the CashLeh? application and saves the user's transaction details
+thus far into a file.
+
+Example of usage: `exit`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -114,3 +120,4 @@ Example of usage:
 * View budget `viewBudget`
 * Update budget `updateBudget 200`
 * Delete budget `deleteBudget`
+* Exit the application `exit`
