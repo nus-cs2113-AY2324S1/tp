@@ -134,7 +134,11 @@ public class Parser {
             }
 
             Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
+            if(qnDifficulty.equals(Question.QnDifficulty.INVALID)) {
+                return new CommandInvalid(CommandShortAnswer.INVALID_DIFFICULTY_MSG);
+            }
             return new CommandShortAnswer(description, answer, module, qnDifficulty);
+
         } catch (ArrayIndexOutOfBoundsException exception) {
             return new CommandInvalid(CommandShortAnswer.INVALID_FORMAT_MSG);
         }
