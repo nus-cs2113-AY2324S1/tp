@@ -48,6 +48,17 @@ API: `Storage.java`
 * The `load` method in LoadData reads the `data.txt` file and loads any existing Income, Expense and Budget into the application.
 * The `save` method in SaveData saves all Incomes, Expenses and existing Budget into the `data.txt` file.
 
+#### Design considerations:
+
+* There are 2 main ways to implement the storage, one is to save the data after every command, and the other is to save 
+the data one upon exiting the program with the `exit` command.
+* Saving the data once upon exit (Currently implemented):
+  * Advantage: Better efficiency and performance of the program.
+  * Disadvantage: If the program crashes or exits incorrectly, data will not be saved.
+* Saving the data after every command:
+  * Advantage: Changes are saved after every command.
+  * Disadvantage: Executing command might slow down the program when there is a large amount of data to be saved.
+
 ### Visualization Feature 
 
 This feature is implemented with the help of [XChart](https://knowm.org/open-source/xchart/), a simple charting library for Java by Knowm.
@@ -187,7 +198,7 @@ Example: `budget delete`
 
 The budget will be reset by resetting the current budget to the initial budget through the `resetBudget()` method in `Budget.java`.
 
-Example : `budget reset`
+Example: `budget reset`
 
 #### View budget:
 
