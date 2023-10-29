@@ -115,7 +115,7 @@ public abstract class Cashflow {
         this.date = date;
     }
 
-    public boolean isHasRecurred() {
+    public boolean getHasRecurred() {
         return hasRecurred;
     }
 

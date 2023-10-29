@@ -79,13 +79,16 @@ public class CashflowList {
     //given its index in its respective list. e.g. "income 3" is the third income
     //in the overall list
     private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) {
-        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
+                || category.equals(CashflowCategory.RECURRING);
 
         switch (category) {
         case INCOME:
             return findCashflowIndexFromIncomeIndex(cashflowIndex);
         case EXPENSE:
             return findCashflowIndexFromExpenseIndex(cashflowIndex);
+        case RECURRING:
+            return findCashflowIndexFromRecurIndex(cashflowIndex);
         default:
             return -1;
         }
@@ -113,6 +116,21 @@ public class CashflowList {
 
         for (Cashflow entry : list) {
             if (entry instanceof Expense) {
+                cashflowCounter += 1;
+            }
+            if (cashflowCounter == cashflowIndex) {
+                break;
+            }
+            overallCashflowIndex += 1;
+        }
+        return overallCashflowIndex;
+    }
+    private int findCashflowIndexFromRecurIndex(int cashflowIndex) {
+        int cashflowCounter = 0;
+        int overallCashflowIndex = 0;
+
+        for (Cashflow entry : list) {
+            if (entry.getRecur() > 0 && !entry.getHasRecurred()) {
                 cashflowCounter += 1;
             }
             if (cashflowCounter == cashflowIndex) {

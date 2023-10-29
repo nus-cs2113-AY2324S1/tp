@@ -25,7 +25,7 @@ public class ListCommand extends Command {
             try {
                 category = CashflowCategory.valueOf(stringCategory.toUpperCase());
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Entry must be either income or expense");
+                throw new IllegalArgumentException("Entry must be either income, expense or recurring");
             }
         }
     }
@@ -39,6 +39,9 @@ public class ListCommand extends Command {
         }
         if (cashflow instanceof Expense) {
             return category.equals(CashflowCategory.EXPENSE);
+        }
+        if (cashflow.getRecur() > 0 && !cashflow.getHasRecurred()) {
+            return category.equals(CashflowCategory.RECURRING);
         }
         return false;
     }

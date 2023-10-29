@@ -84,13 +84,16 @@ public class DeleteCashflowCommand extends Command {
             return;
         }
 
-        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
+                || category.equals(CashflowCategory.RECURRING);
         assert index != 0;
 
         switch (category) {
         case INCOME:
             //Fallthrough
         case EXPENSE:
+            //Fallthrough
+        case RECURRING:
             if (hasRecur) {
                 handleDeleteRecurWithCategory();
             } else {

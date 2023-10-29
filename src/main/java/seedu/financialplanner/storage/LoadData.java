@@ -95,7 +95,7 @@ public abstract class LoadData {
         for (Cashflow cashflow : cashflowList.list) {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
-            boolean hasRecurred = cashflow.isHasRecurred();
+            boolean hasRecurred = cashflow.getHasRecurred();
             addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflow, hasRecurred);
         }
         for (Cashflow cashflow : tempCashflow) {
