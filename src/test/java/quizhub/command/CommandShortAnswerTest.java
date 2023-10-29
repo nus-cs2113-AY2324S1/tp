@@ -168,11 +168,31 @@ public class CommandShortAnswerTest {
      * File Existence
      * Input: Run the application without the local text file existing.
      * Expected Output: Verify that the application creates the file if it doesn't exist or uses an existing one
-     when updating data.
+     * when updating data.
      */
-    public void testFileExistence(){
+    public void testFileExistence() {
+        // Ensure the storage is initially empty
+        mockStorage.clearData();
 
+        // Define the input command
+        String input = "short new_question/new_answer/module/easy";
+
+        // Execute the command (this should trigger file creation)
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+
+        // Expected output after adding the question and creating the file
+        String expectedOutput = "I have added the following question OwO:" +
+                " [S] new_question / new_answer | module | EASY" +
+                " Now you have 1 questions in the list! UWU";
+
+        // Verify that the data was saved to the storage (file created)
+        Assertions.assertTrue(mockStorage.dataExists());
+
+        // Verify the output
+        testCliOutputCorrectness(expectedOutput);
     }
+
 
     @Test
     /**
