@@ -2,17 +2,17 @@
 
 ## Introduction
 
-QuizHUB is a local desktop app designed to help NUS students easily record examinable questions and generate quizzes 
-from their very own question bank to test their understanding via a Command Line Interface (CLI). Easily launchable 
-on the go, QuizHUB is a versatile tool that aims to streamline and optimize the revision experience for NUS students 
+QuizHUB is a local desktop app designed to help NUS students easily record examinable questions and generate quizzes
+from their very own question bank to test their understanding via a Command Line Interface (CLI). Easily launchable
+on the go, QuizHUB is a versatile tool that aims to streamline and optimize the revision experience for NUS students
 from all fields of study.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `QuizHub` from [here](http://link.to/duke).
+1. Down the latest version of `QuizHub` from [here](http://link.to/duke).
 
-## Features 
+## Features
 
 1. Helper command
 2. Add question/answer and group them in modules/difficulty
@@ -21,25 +21,25 @@ from all fields of study.
 5. Find question/answer via question's description or via module name
 6. Edit question/answer
 7. Mark question difficulty
-8. Start a quiz session, specifying category of questions and in random/normal mode 
+8. Start a quiz session, specifying category of questions and in random/normal mode
 9. Permanently shuffle questions order for added challenge!
 
 ### Getting help on using the app: `help`
-Assists new users in familiarising with the application. Provides a list of commands for the user to get started 
-with the essentials. An instance of `/help` will be activated at the start. `/help` with a specific command thereafter will 
+Assists new users in familiarising with the application. Provides a list of commands for the user to get started
+with the essentials. An instance of `/help` will be activated at the start. `/help` with a specific command thereafter will
 provide greater details on how to utilize that command.
 
 Format: `help`
 
 Example of usage:
 * **Command**:`help` <br>
-**Output**: `/add - … /start - …`
+  **Output**: `/add - … /start - …`
 
 Notes:
-* If the command does not exist after `/help`, the app will prompt you that the command does not exist and thereafter 
-activate /help to list all the commands
-* Ver 1.0 will only list commands. Future versions will include auto-filling and scrolling 
-(multiple pages of the help menu)
+* If the command does not exist after `/help`, the app will prompt you that the command does not exist and thereafter
+  activate /help to list all the commands
+* Ver 1.0 will only list commands. Future versions will include auto-filling and scrolling
+  (multiple pages of the help menu)
 
 ### Adding short-answer questions and their answers: `short`
 Adds a new short question and its answer to the question and answer bank along with the assigned module and
@@ -49,13 +49,13 @@ Format: `short [question]/[answer]/[module]/[difficulty]`
 
 Example of usage:
 * **Command**: `add What is the value of Pi to 2 decimal places?/3.14/math/easy` <br>
-**Output**: shows Question-Answer set added to question and answer bank
+  **Output**: shows Question-Answer set added to question and answer bank
 * **Command**: `add What fish is Nemo based off?/a Clownfish/trivia/easy` <br>
-**Output**: shows Question-Answer set added to question and answer bank
+  **Output**: shows Question-Answer set added to question and answer bank
 
 Notes:
-* If either the question or answer is left blank, the app will prompt you to re-enter the question-answer set, 
-the app does not support blank questions/answers
+* If either the question or answer is left blank, the app will prompt you to re-enter the question-answer set,
+  the app does not support blank questions/answers
 
 ### List Questions `list`
 List all the questions from the question and answer bank in the storage.
@@ -64,63 +64,63 @@ Format: `list`
 
 Examples of usage:
 * **Command**: `list` <br>
-**Output**:<br>
-1: `[S][] 2 / 4 | num | EASY` <br>
-2: `[S][] hi / hihi | word | EASY` <br>
-3: `[S][] 6 / 12 | num | EASY` <br>
+  **Output**:<br>
+  1: `[S][] 2 / 4 | num | EASY` <br>
+  2: `[S][] hi / hihi | word | EASY` <br>
+  3: `[S][] 6 / 12 | num | EASY` <br>
 
 ### Delete Questions `delete`
 
 ### Find question/answer `find`
 
 ### Edit question/answer `edit`
-Edits the description or answer of an existing question in the question and answer bank 
-by referencing the number of the question in the existing question list in the question 
+Edits the description or answer of an existing question in the question and answer bank
+by referencing the number of the question in the existing question list in the question
 and answer bank.
 
-Format: 
-1. `edit [question number] /description [newDescription]` 
+Format:
+1. `edit [question number] /description [newDescription]`
 2. `edit [question number] /answer [newAnswer]`
 
 Examples of usage:
 * **Command**: `edit 1 /description change description!!!` <br>
-**Output**:  <br>
-`    Roger that! I have edited the following question >w< !` <br>
-`    [S][] change description!!! / [original answer] | [module] | [question difficulty]` <br>
-`    Now you have [no. of questions] questions in the list! UWU"` <br> <br>
+  **Output**:  <br>
+  `    Roger that! I have edited the following question >w< !` <br>
+  `    [S][] change description!!! / [original answer] | [module] | [question difficulty]` <br>
+  `    Now you have [no. of questions] questions in the list! UWU"` <br> <br>
 * **Command**: `edit 2 /answer different answer???` <br>
-**Output**: <br>
-`    Roger that! I have edited the following question >w< !` <br>
-`    [S][] [original description] / different answer??? | [module] | [question difficulty]` <br>
-`    Now you have [no. of questions] questions in the list! UWU"` <br> <br>
+  **Output**: <br>
+  `    Roger that! I have edited the following question >w< !` <br>
+  `    [S][] [original description] / different answer??? | [module] | [question difficulty]` <br>
+  `    Now you have [no. of questions] questions in the list! UWU"` <br> <br>
 
 Notes:
 * If either the question number is invalid, or no new description or answer is provided,
-the app will prompt you to re-enter the edit command
+  the app will prompt you to re-enter the edit command
 * The app only supports changing either description or answer at a time, not both together
 
 ### Start quiz `start`
-Starts a quiz which fetches the specified category from the question bank in normal / random order to be tested. 
-The app will display the fetched questions one at a time on CLI and the user is required to enter answer through CLI. 
-Upon every user answer entry, the app feedbacks if the user answered correctly, loads the next question and updates 
+Starts a quiz which fetches the specified category from the question bank in normal / random order to be tested.
+The app will display the fetched questions one at a time on CLI and the user is required to enter answer through CLI.
+Upon every user answer entry, the app feedbacks if the user answered correctly, loads the next question and updates
 the score. When all questions are answered, the quiz terminates automatically and the final user quiz score is displayed.
 
 Format:  `start /[quiz mode] [start details] /[qn mode]`
 
 Examples of usage:
 * **Command**: `start /module num /normal` <br>
-**Output**: starts the quiz - displays questions that pertains to module “num” in order defined in the list
+  **Output**: starts the quiz - displays questions that pertains to module “num” in order defined in the list
 * **Command**: `start /module num /random` <br>
-**Output**: starts the quiz - displays questions that pertains to module “num” but in a randomised order
+  **Output**: starts the quiz - displays questions that pertains to module “num” but in a randomised order
 * **Command**: `start /all /random` <br>
-**Output**: starts the quiz - displays questions directly from the list of questions in random order
+  **Output**: starts the quiz - displays questions directly from the list of questions in random order
 * **Command**: `start /all /normal` <br>
-**Output**: starts the quiz - displays questions directly from the list of questions in the order of the list
+  **Output**: starts the quiz - displays questions directly from the list of questions in the order of the list
 
 
 Notes:
-* If the specified module is not part of the list, an exception will be thrown and the user will be notified 
-with a prompt to write the command in the specified format.
+* If the specified module is not part of the list, an exception will be thrown and the user will be notified
+  with a prompt to write the command in the specified format.
 
 ### Shuffling Questions `shuffle`
 Shuffle questions within question list to a random order,
@@ -139,19 +139,19 @@ Format: `markdiff [question number] [question difficulty]`
 
 Examples of usage:
 * **Command**: `markdiff 1 easy` <br>
-**Output**:  <br>
-`    Roger that! I have marked the following question as easy >w< !` <br>
-`    [S][] [original description] / [original answer] | [module] | EASY` <br> <br>
+  **Output**:  <br>
+  `    Roger that! I have marked the following question as easy >w< !` <br>
+  `    [S][] [original description] / [original answer] | [module] | EASY` <br> <br>
 * **Command**: `markdiff 2 Hard` <br>
-**Output**: <br>
-`    Roger that! I have marked the following question as hard >w< !` <br>
-`    [S][] [original description] / [original answer] | [module] | HARD` <br> <br>
+  **Output**: <br>
+  `    Roger that! I have marked the following question as hard >w< !` <br>
+  `    [S][] [original description] / [original answer] | [module] | HARD` <br> <br>
 
 Notes:
 * If either the question number is invalid, or no difficulty level is provided,
-the app will prompt you to re-enter the markdiff command
+  the app will prompt you to re-enter the markdiff command
 * The app only supports fixed difficulty levels, assigning any difficulty level that
-is not `easy`, `normal`, or `hard` will trigger a warning message
+  is not `easy`, `normal`, or `hard` will trigger a warning message
 * Input difficulty level is CAPS-friendly
 
 ### Exit Program `bye`
@@ -160,9 +160,9 @@ Format: `bye`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another computer?
 
-**A**: Transfer the tasklist.txt generated to the same local directory as the jar file of the program in another 
+**A**: Transfer the tasklist.txt generated to the same local directory as the jar file of the program in another
 computer.
 
 ## Command Summary
