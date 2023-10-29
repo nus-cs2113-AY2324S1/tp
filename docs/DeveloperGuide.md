@@ -4,27 +4,27 @@
 
 **Xchart (A Simple Charting Library for Java)**
 - author: KNOWN
-- source: https://knowm.org/open-source/xchart/
+- source: [https://knowm.org/open-source/xchart/]()
 
 **JSON Simple (simple Java toolkit for encoding and decoding JSON)**
 - author: Yidong Fang (Google Code)
-- source: https://code.google.com/archive/p/json-simple/
+- source: [https://code.google.com/archive/p/json-simple/]()
 
 **Apache Common Langs 3**
 - author: Apache Commons
-- source: https://commons.apache.org/proper/commons-lang/
+- source: [https://commons.apache.org/proper/commons-lang/]()
 
 **Alpha Vantage Stock Market API**
 - author: Alpha Vantage
-- source: https://www.alphavantage.co/
+- source: [https://www.alphavantage.co/]()
 
 **round() method in Cashflow.java**
   - author: mhadidg
-  - source: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+  - source: [https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places]()
 
 **capitalize() method in Cashflow.java**
   - author: Nick Bolton
-  - source: https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
+  - source: [https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string]()
     
 **DG adapted from**
 
