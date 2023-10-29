@@ -13,7 +13,7 @@ public class Ui {
     public static final String INVALID_COMMAND_MSG =  "    Please enter a valid command :0";
     public static final String INVALID_COMMAND_FEEDBACK = "    Here are the list of commands you can use:" +
             System.lineSeparator() +
-            "    1. help - shows the list of commands you can use" +
+            "    1. help - shows the list of commands you can use," +
             System.lineSeparator() +
             "    2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and " +
             "its answer to the list," +
