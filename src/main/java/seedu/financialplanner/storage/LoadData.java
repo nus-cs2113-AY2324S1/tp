@@ -52,13 +52,36 @@ public abstract class LoadData {
                 }
             }
             inputFile.close();
-
+            deleteFutureCashflows(date);
             addRecurringCashflows(date);
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | FinancialPlannerException e) {
             String message = e.getMessage();
             handleCorruptedFile(message);
+        }
+    }
+
+    private static void deleteFutureCashflows(LocalDate currentDate) {
+        ArrayList<Integer> tempCashflow = new ArrayList<>();
+        int indexToDelete = 0;
+        for (Cashflow cashflow : cashflowList.list) {
+            int recur = cashflow.getRecur();
+            LocalDate dateOfAddition = cashflow.getDate();
+            if (recur > 0 && currentDate.isBefore(dateOfAddition)) {
+                Integer integer = indexToDelete;
+                tempCashflow.add(integer);
+            }
+            indexToDelete++;
+        }
+        if (!tempCashflow.isEmpty()) {
+            ui.showMessage("Cashflows added after system time detected. Removing future cashflows...");
+            for (int i = 0; i < tempCashflow.size(); i++) {
+                indexToDelete = tempCashflow.get(i) - i;
+                // deleteCashflowWithoutCategory takes in list index starting from 1, indexToDelete starts from 0
+                int indexStartingFromOne = indexToDelete + 1;
+                cashflowList.deleteCashflowWithoutCategory(indexStartingFromOne);
+            }
         }
     }
 

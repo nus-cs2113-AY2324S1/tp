@@ -39,6 +39,7 @@ class LoadDataTest {
     private void getTestData() {
         LocalDate date = stringToDate("01/01/2023");
         cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date));
+        cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, "parents", date));
         cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee", date));
 
         date = date.plusDays(10);
