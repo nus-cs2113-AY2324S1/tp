@@ -23,7 +23,6 @@ public class CafeCtrl {
     private Menu menu;
     private Command command;
     private Pantry pantry;
-    private OrderList orderList;
     private Sales sales;
     private CurrentDate currentDate;
     private Storage storage;
