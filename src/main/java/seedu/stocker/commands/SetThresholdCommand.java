@@ -1,7 +1,6 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.drugs.StockEntry;
-import seedu.stocker.exceptions.DrugNotFoundException;
 
 
 public class SetThresholdCommand extends Command {
