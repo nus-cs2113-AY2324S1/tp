@@ -148,7 +148,7 @@ public class Parser {
             int dishIndexGroup = 1;
             int newPriceGroup = 2;
             int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup));
-            float newPrice = Float.parseFloat(matcher.group(newPriceGroup));
+            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup));
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
@@ -178,7 +178,8 @@ public class Parser {
 
             // To retrieve specific arguments from arguments
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
-            float price = Float.parseFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
+            float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
+            System.out.println(Float.MAX_VALUE);
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
             ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
@@ -189,6 +190,8 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
                     + AddDishCommand.MESSAGE_USAGE, ui);
+        } catch (ArithmeticException e) {
+            return new IncorrectCommand(Messages.INVALID_PRICE_MESSAGE, ui);
         }
     }
 
@@ -231,6 +234,24 @@ public class Parser {
 
         return ingredients;
     }
+
+    /**
+     * Converts text of price to float while also checking if the price input is within reasonable range
+     * @param priceText text input for price argument
+     * @return price in float format
+     * @throws ArithmeticException if price > 10000000000.00
+     */
+    public static float parsePriceToFloat(String priceText) throws ArithmeticException {
+        float price = Float.parseFloat(priceText);
+        float maxPriceValue = (float) 10000000000.00;
+
+        if (price > maxPriceValue) {
+            throw new ArithmeticException();
+        }
+
+        return price;
+    }
+
     //@@author NaychiMin
     /**
     * Parses arguments in the context of the ListIngredient command.
