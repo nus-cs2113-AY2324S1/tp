@@ -6,8 +6,11 @@ import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
+import java.text.DecimalFormat;
+
 public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
+    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add order to orders\n"
             + "Parameters: DISH_NAME, DISH_QTY\n"
@@ -27,13 +30,14 @@ public class AddOrderCommand extends Command {
     }
     @Override
     public void execute() {
-        orderList.addOrder(order); //To be implemented for finance tracking
+        orderList.addOrder(order);
         Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();
         //pantry.printPantryStock();
         if (order.isComplete()) {
             orderList.addCost(order);
         }
-        orderList.printOrderList();
+        ui.showTotalCost(dollarValue.format(orderList.getTotalOrderListCost()));
+        //orderList.printOrderList();
     }
 }
