@@ -114,7 +114,7 @@ Example of usage:
 Expected outcome:
 
 ```
-New drug added in the inventory: Panadol
+|| New drug added in the inventory: Panadol
 ```
 ### `delete` - Deletes a drug being tracked by the system
 
@@ -133,8 +133,8 @@ Example of usage:
 Expected outcome:
 
 ```
-removed : Panadol
-There are now 0 drugs in the system
+|| removed : Panadol
+|| There are now 0 drugs in the system
 ```
 ### `list` - List all drug information that is being tracked by the system
 
@@ -154,9 +154,33 @@ Expected outcome:
 
 ```
 || 1. Name: Panadol, Expiry Date: 12 June 2026/  Quantity: 300
-
-Listed all drugs in the inventory.
+||
+|| Listed all drugs in the inventory.
 ```
+### `stocklevel` - List all drugs by quantity level in ascending order
+
+List all drugs by quantity level in ascending order.
+
+Format:
+
+stocklevel
+
+
+Example of usage:
+
+`stocklevel
+`
+
+Expected outcome:
+
+```
+|| 	1. Name: histamine, Expiry date: 101010, Quantity: 10
+|| 	2. Name: paracetamol, Expiry date: 101010, Quantity: 50
+|| 	3. Name: panadol, Expiry date: 101010, Quantity: 120
+|| 
+|| Stock Level Report (Sorted by Quantity)
+```
+
 ### `find` - Finds drugs using their name or expiry date
 
 1. Finds drugs whose **names** contain any of the given keywords.
@@ -180,9 +204,9 @@ Example of usage:
 Expected outcome:
 
 ```
-1. Name: panadol, Expiry Date: 12 sep, Quantity: 120
-
-Listed all drugs with the keyword in the inventory.
+|| 1. Name: panadol, Expiry Date: 12 sep, Quantity: 120
+||
+|| Listed all drugs with the keyword in the inventory.
 ```
 2. Finds drugs whose **expiry dates** contain any of the given keywords.
 
@@ -234,7 +258,7 @@ Expected outcome:
 || 
 || help: Shows program usage instructions. 
 || Example: help
-|| 
+||     
 || list: List all drug information that is being tracked by the system. 
 || Example: list
 || 
