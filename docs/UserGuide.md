@@ -13,6 +13,10 @@
     * [Viewing budget](#viewing-budget-budget-view)
   * [Displaying Overview](#displaying-overview-overview)
   * [View Balance](#viewing-balance-balance)
+  * [WatchList](#viewing-watchlist-watchlist)
+    * [Adding Stock](#adding-stock-to-watchlist-addstock)
+    * [Deleting Stock](#deleting-budget-budget-delete)
+  * [Visualization](#Visualization)
   * [Exiting the program](#exiting-the-program-exit)
   * [Saving data](#saving-the-data)
   * [Loading data](#loading-the-data)
@@ -153,6 +157,73 @@ Example output:
 ```
 Balance: 3790.00
 ```
+
+### Viewing Watchlist: `watchlist`
+
+View your current watchlist with stocks that you are interested in with the exchanges shown as well
+
+Default watchlist: AAPL, GOOGL
+
+Format: `watchlist`
+
+Example of usage: `watchlist`
+
+Example of output:
+
+```
+Symbol    Market    Price     Daily High     Daily Low     EquityName
+AAPL      NASDAQ    168.22    168.96         166.84        Apple Inc 
+GOOGL     NASDAQ    122.17    123.31         120.2057      Alphabet Inc - Class A
+GME       NYSE      13.12     13.615         13.02         Gamestop Corporation - Class A
+```
+
+### Adding Stock to Watchlist: `addstock`
+
+Add a stock that you are interested in monitoring into your personal WatchList
+
+Format: `addstock /s STOCKCODE`
+
+Example of usage: `addstock /s META`
+
+Example of output:
+
+```
+You have successfully added:
+Meta Platforms Inc - Class A
+Use Watchlist to view it!
+```
+
+### Deleting Stock from Watchlist: `deletestock`
+
+Delete a stock that you are no longer interested in monitoring from your personal WatchList
+
+Format: `deletestock /s STOCKCODE`
+
+Example of usage: `deletestock /s META`
+
+Example of output:
+
+```
+You have successfully deleted: 
+Meta Platforms Inc - Class A
+Use watchlist command to view updated Watchlist
+```
+
+### Visualizing your cashflow: `vis`
+
+Using this command to visualize your income or expenses in a pie chart or bar chart
+
+Format: `vis /t TYPE /c TOOL`
+
+Example of usage: `vis /t income /c pie`
+
+Example of output:
+
+```
+Displaying piechart for expense
+```
+
+![](images/vis/visOutput.png)
 
 ### Exiting the program: `exit`
 
