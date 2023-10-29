@@ -42,10 +42,12 @@ public class CommandShortAnswerTest {
     }
 
     private void testCliOutputCorrectness(String expectedOutput) {
+        assert expectedOutput != null : "Expected output should not be null";
         String actualOutput = outputStreamCaptor.toString().trim();
         actualOutput = actualOutput.replace("\r", "");
         actualOutput = actualOutput.replace("\n", "");
         actualOutput = actualOutput.replace(System.lineSeparator(), "");
+        System.out.println(expectedOutput + "\n" +actualOutput);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
     @Test
