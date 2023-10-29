@@ -114,7 +114,13 @@ public class CommandShortAnswerTest {
      * Input: short [question]/[answer]/[module]/invalid_difficulty
      */
     public void testInvalidDifficulty(){
-
+        String input = "short question/answer/module/invalid";
+        String expectedOutput = "Ono! We only support easy, normal and hard " +
+                "difficulty levels" + " No changes will be made to your difficulty level" + " "
+                + CommandShortAnswer.INVALID_DIFFICULTY_MSG.strip();
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     @Test
