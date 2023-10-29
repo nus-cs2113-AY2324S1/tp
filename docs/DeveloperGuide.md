@@ -317,6 +317,19 @@ In order to attain the adjustable storage based on numebr of objects, an ArrayLi
 appended to the ArrayList whenever a new entry is required.
 
 ---
+## 7. listVendors Command
+
+The command was made to list all vendors being tracked by the system in a neat way to the user
+
+### Design Considerations
+
+The possibility of an empty list had to be considered
+
+### Implementation
+
+The list of vendors could be printed by using streams to efficiently collect and print out the information of vendors
+
+---
 
 ## Product scope
 
