@@ -35,4 +35,14 @@ public class Inventory {
             throw new DrugNotFoundException("");
         }
     }
+
+    public StockEntry getStockEntry(String drugName) {
+        for (StockEntry stockEntry : stock.values()) {
+            if (stockEntry.getDrug().getName().equalsIgnoreCase(drugName)) {
+                return stockEntry;
+            }
+        }
+        return null; // Drug not found in inventory
+    }
+
 }
