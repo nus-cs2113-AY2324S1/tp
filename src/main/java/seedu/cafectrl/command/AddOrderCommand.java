@@ -6,11 +6,8 @@ import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
-import java.text.DecimalFormat;
-
 public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
-    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add order to orders\n"
             + "Parameters: DISH_NAME, DISH_QTY\n"
@@ -37,6 +34,6 @@ public class AddOrderCommand extends Command {
         if (order.isComplete()) {
             orderList.addCost(order);
         }
-        ui.showTotalCost(dollarValue.format(orderList.getTotalOrderListCost()));
+        orderList.printOrderList();
     }
 }

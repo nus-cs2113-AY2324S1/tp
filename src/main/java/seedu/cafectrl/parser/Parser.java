@@ -76,10 +76,10 @@ public class Parser {
      * @param userInput The full user input String
      * @param ui The ui object created that handles I/O with the user
      * @param pantry The arraylist object created that stores current ingredients in stock
-     * @param orderList The arraylist object created that stores current orders
      * @return command requested by the user
      */
-    public static Command parseCommand(Menu menu, String userInput, Ui ui, Pantry pantry, OrderList orderList, Sales sales, CurrentDate currentDate) {
+    public static Command parseCommand(Menu menu, String userInput, Ui ui,
+            Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -119,13 +119,16 @@ public class Parser {
             return new ExitCommand(ui, pantry);
 
         case AddOrderCommand.COMMAND_WORD:
-            return prepareOrder(menu, arguments, ui, pantry, orderList);
+            return prepareOrder(menu, arguments, ui, pantry, sales, currentDate);
 
         case NextDayCommand.COMMAND_WORD:
-            return new NextDayCommand(ui, sales, orderList, currentDate);
+            return new NextDayCommand(ui, sales, currentDate);
 
         case PreviousDayCommand.COMMAND_WORD:
-            return preparePreviousDay(ui, sales, orderList, currentDate);
+            return preparePreviousDay(ui, currentDate);
+
+        case "show_sales": //PLACEHOLDER, TO BE IMPLEMENTED BY NAYCHI
+            return new IncorrectCommand("Overall Earnings: $" + sales.getTotalSales(), ui);
 
         default:
             return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE, ui);
@@ -319,13 +322,15 @@ public class Parser {
     }
     //@@author 
     /**
-     * Parses arguments in the context of the Delete command.
+     * Parses arguments in the context of the AddOrder command.
      *
      * @param menu menu of the current session
      * @param arguments string that matches group arguments
+     * @param ui
      * @return AddOrderCommand if command is valid, IncorrectCommand otherwise
      */
-    private static Command prepareOrder(Menu menu, String arguments, Ui ui, Pantry pantry, OrderList orderList) {
+    private static Command prepareOrder(Menu menu, String arguments, Ui ui,
+            Pantry pantry, Sales sales, CurrentDate currentDate) {
         final Pattern addOrderArgumentPatter = Pattern.compile(ADD_ORDER_ARGUMENT_STRING);
         Matcher matcher = addOrderArgumentPatter.matcher(arguments);
 
@@ -334,6 +339,8 @@ public class Parser {
             return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE, ui);
         }
+
+        OrderList orderList = setOrderList(currentDate, sales);
 
         try {
             // To retrieve specific arguments from arguments
@@ -354,12 +361,21 @@ public class Parser {
         }
     }
 
-    private static Command preparePreviousDay(Ui ui, Sales sales, OrderList orderList, CurrentDate currentDate) {
+    private static Command preparePreviousDay(Ui ui, CurrentDate currentDate) {
         int currentDay = currentDate.getCurrentDay();
         if (currentDay == 0) {
             return new IncorrectCommand(Messages.PREVIOUS_DAY_TIME_TRAVEL, ui);
         }
-        return new PreviousDayCommand(ui, sales, orderList, currentDate);
+        return new PreviousDayCommand(ui, currentDate);
+    }
+
+    private static Command prepareNextDay(Ui ui, Sales sales, CurrentDate currentDate) {
+        return new NextDayCommand(ui, sales, currentDate);
+    }
+
+    private static OrderList setOrderList(CurrentDate currentDate, Sales sales) {
+        int currentDay = currentDate.getCurrentDay();
+        return sales.getOrderList(currentDay);
     }
 
     /**

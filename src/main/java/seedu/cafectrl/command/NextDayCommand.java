@@ -11,28 +11,25 @@ public class NextDayCommand extends Command {
 
     protected Ui ui;
     protected Sales sales;
-    protected OrderList orderList;
     protected CurrentDate currentDate;
 
-    public NextDayCommand(Ui ui, Sales sales, OrderList orderList, CurrentDate currentDate) {
+    public NextDayCommand(Ui ui, Sales sales, CurrentDate currentDate) {
         this.ui = ui;
         this.sales = sales;
-        this.orderList = orderList;
         this.currentDate = currentDate;
     }
 
     @Override
     public void execute() {
         ui.printLine();
-        int currentDay = currentDate.getCurrentDay();
         currentDate.nextDay();
         int nextDay = currentDate.getCurrentDay();
-        if (nextDay >= sales.getOrderListSize()) {
-            System.out.println("Set new orderlist");
-            sales.setNewOrderList();
+        if (nextDay > sales.getDaysAccounted()) {
+            OrderList newOrderList = new OrderList();
+            sales.addOrderList(newOrderList);
+            sales.nextDay();
         }
-        System.out.println("Setting orderList for " + currentDay);
-        //sales.setOrderLists(currentDay, orderList);
-
+        ui.showNextDay();
+        ui.showToUser("Today is Day " + (currentDate.getCurrentDay() + 1));
     }
 }

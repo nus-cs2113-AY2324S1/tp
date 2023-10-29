@@ -7,28 +7,13 @@ public class OrderList {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     protected ArrayList<Order> orderList;
     protected float totalOrderListCost;
-    protected int orderDate;
     public OrderList() {
-        this.orderList = new ArrayList<Order>();
+        this.orderList = new ArrayList<>();
         this.totalOrderListCost = 0;
-        this.orderDate = 0;
     }
     public OrderList(ArrayList<Order> orderList) {
         this.orderList = orderList;
         this.totalOrderListCost = 0;
-        this.orderDate = 0;
-    }
-
-    public OrderList(int orderDate) {
-        this.orderList = new ArrayList<Order>();
-        this.totalOrderListCost = 0;
-        this.orderDate = orderDate;
-    }
-
-    public OrderList(ArrayList<Order> orderList, int orderDate) {
-        this.orderList = orderList;
-        this.totalOrderListCost = 0;
-        this.orderDate = orderDate;
     }
 
     public ArrayList<Order> getOrderList() {
@@ -57,19 +42,12 @@ public class OrderList {
         return totalOrderListCost;
     }
 
-    public void setOrderDate(int orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public int getOrderDate() {
-        return orderDate;
-    }
 
     public void printOrderList() {
         if (orderList.isEmpty()) {
             return;
         }
-        System.out.println("Printing Orders");
+        System.out.println("\nPrinting Orders");
         for (int i = 0; i < getSize(); i++) {
             Order order = getOrder(i);
             String orderString = order.toString();

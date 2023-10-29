@@ -193,4 +193,11 @@ public class Ui {
     public void showTotalCost(String dollarCost) {
         showToUser("Total orderList cost: $" + dollarCost);
     }
+
+    public void showPreviousDay() {
+        showToUser(Messages.PREVIOUS_DAY_COMMAND_MESSAGE);
+    }
+    public void showNextDay() {
+        showToUser(Messages.NEXT_DAY_COMMAND_MESSAGE);
+    }
 }

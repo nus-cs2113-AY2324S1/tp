@@ -72,6 +72,12 @@ public class Messages {
     public static final String PREVIOUS_DAY_TIME_TRAVEL = "Whoa there, time traveler! " +
             "Unfortunately, the DeLorean can't take us back to the previous day because it's already Day 0, " +
             "and there's no rewind button in this space-time continuum!";
+    public static final String PREVIOUS_DAY_COMMAND_MESSAGE = "Sure thing! "
+            + "Let's rev up the virtual DeLorean and take a spin to the previous day. "
+            + "Buckle up, it's time to hit that rewind button!";
+    public static final String NEXT_DAY_COMMAND_MESSAGE = "Prepare for liftoff! "
+            + "We're about to fast-forward to the next day. "
+            + "Hold onto your hats; here we go!";
     public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
     public static final String LOAD_MENU_FILE_ERROR_MESSAGE = "Uh oh, I am having trouble loading your menu text file."
             + "\n\tCreating a new empty menu...\n";

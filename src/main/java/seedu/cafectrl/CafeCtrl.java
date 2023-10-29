@@ -1,7 +1,11 @@
 package seedu.cafectrl;
 
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.data.*;
+import seedu.cafectrl.data.CurrentDate;
+import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.OrderList;
+import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.Messages;
@@ -33,7 +37,7 @@ public class CafeCtrl {
         this.storage = new Storage(this.ui);
         this.menu = this.storage.loadMenu();
         this.pantry = this.storage.loadPantryStock();
-        //this.orderList = this.storage.loadOrderList();
+        //this.orderList = this.storage.loadOrderList(); //to be implemented inside Sales class
         currentDate = new CurrentDate();
         sales = new Sales();
     }
@@ -53,11 +57,8 @@ public class CafeCtrl {
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
-                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, orderList, sales, currentDate);
+                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
                 command.execute();
-                orderList = setOrderList();
-                orderList.printOrderList();
-                System.out.println("Overall Earnings: $" + sales.getTotalSales());
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
             } finally {
@@ -73,17 +74,5 @@ public class CafeCtrl {
         cafeCtrl.run();
     }
 
-    public OrderList setOrderList() {
-        int currentDay = currentDate.getCurrentDay();
-        System.out.println("Set current orderList to day: " + currentDay);
-        //orderList.printOrderList();
-        if (sales.isNewOrderList()) {
-            sales.resetNewOrderList();
-            OrderList newOrderList = new OrderList();
-            sales.addOrderList(newOrderList);
-            return newOrderList;
-        }
-        return sales.getOrderList(currentDay);
-    }
 }
 
