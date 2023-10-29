@@ -69,7 +69,7 @@ public class DeleteCashflowCommand extends Command {
             category = CashflowCategory.valueOf(stringCategory.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
-            throw new IllegalArgumentException("Entry must be either income or expense");
+            throw new IllegalArgumentException("Entry must be either income, expense or recurring");
         }
     }
 
