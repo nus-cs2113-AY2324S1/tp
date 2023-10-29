@@ -74,7 +74,11 @@ public class CommandShortAnswerTest {
      * Input: short [question]_[answer]_[module]_[difficulty]
      */
     public void testInvalidDelimiter() {
-
+        String input = "short question_answer_module/easy";
+        String expectedOutput = CommandShortAnswer.INVALID_FORMAT_MSG.strip();
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     @Test
