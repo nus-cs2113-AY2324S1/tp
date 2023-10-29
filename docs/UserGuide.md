@@ -71,10 +71,16 @@ Example of usage: `add income /a 5000 /t salary /r 30 /d work`
 Example output:
 
 ```
-
+You have added an Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: work
+to the Financial Planner.
+Balance: 5000.00
 ```
-
-### Add expense
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+### Add expense: `add expense`
 Adds an expense to the Financial Planner
 
 Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
@@ -93,34 +99,52 @@ Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 | `necessities`   |
 | `others`        |
 
-Example of usage: `add income /a 5000 /t salary /r 30 /d work`
+Example of usage: `add expense /a 300 /t necessities /r 30 /d groceries`
 
 Example output:
 ```
-
+You have added an Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+to the Financial Planner.
+Balance: 4700.00
 ```
-
-### Delete cashflow
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+### Delete cashflow: `delete`
 Deletes a cashflow from the Financial Planner.
 
 Format: `delete INDEX [/r]`
 
 - `INDEX` refers to the index number shown in the displayed list when [`list`](#list-all) command is used.
-- `/r` is used to delete all **future** incomes/expenses **only**.
+- `/r` is used to delete all **future** cashflows **only**.
 
-Example of usage: `delete 2 /r`
-
-Example output:
-```
-
-```
-Example of usage: `delete 2`
+Example of usage: `delete 1 /r`
 
 Example output:
 ```
-
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
 ```
-### Delete income
+Example of usage: `delete 1`
+
+Example output:
+```
+You have removed an Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
+from the Financial Planner.
+Balance: -1130.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+
+### Delete income: `delete income`
 Deletes an income from the Financial Planner.
 
 Format: `delete income INDEX [/r]`
@@ -132,15 +156,27 @@ Example of usage: `delete income 2 /r`
 
 Example output:
 ```
-
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Income
+   Type: Allowance
+   Amount: 500.00
+   Description: parents
 ```
 Example of usage: `delete income 2`
 
 Example output:
 ```
-
+You have removed an Income
+   Type: Allowance
+   Amount: 500.00
+   Description: parents
+from the Financial Planner.
+Balance: 5170.00
 ```
-### Delete expense
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+
+### Delete expense: `delete expense`
 Deletes an expense from the Financial Planner.
 
 Format: `delete expense INDEX [/r]`
@@ -152,41 +188,128 @@ Example of usage: `delete expense 2 /r`
 
 Example output:
 ```
-
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Expense
+   Type: Insurance
+   Amount: 800.00
+   Description: ntuc income
 ```
 Example of usage: `delete expense 2`
 
 Example output:
 ```
-
+You have removed an Expense
+   Type: Insurance
+   Amount: 800.00
+   Description: ntuc income
+from the Financial Planner.
+Balance: -330.00
 ```
-### Delete recurring
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+
+### Delete recurring: `delete recurring`
 Deletes a recurring cashflow from the Financial Planner.
 
 Format: `delete recurring INDEX [/r]`
 
 - `INDEX` refers to the index number shown in the displayed list when [`list recurring`](#list-recurring) command is used.
-- `/r` is used to delete all **future** recurring incomes/expenses **only**.
+- `/r` is used to delete all **future** recurring cashflows **only**.
 
-Example of usage: `delete recurring 2`
-
-Example output:
-```
-
-```
 Example of usage: `delete recurring 2 /r`
 
 Example output:
 ```
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Expense
+   Type: Insurance
+   Amount: 800.00
+   Description: ntuc income
+```
+Example of usage: `delete recurring 1`
+
+Example output:
+```
+You have removed an Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+from the Financial Planner.
+Balance: -830.00
+- Note: Balance displayed above is just an example. Your actual balance may differ.
 
 ```
-### List all
+### List all 
+// TODO
 
+Example output:
+
+```
+You have 4 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: work
+2: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+3: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, starting from: Oct 30 2023
+   Description: ntuc income
+4: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+```
 ### List income
+//TODO
 
+Example output:
+```
+You have 3 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: work
+2: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: parents
+3: Income
+   Type: Investments
+   Amount: 1000.00
+```
 ### List expense
+//TODO
 
-### List recurring
+Example output:
+```
+You have 3 matching cashflows:
+1: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+2: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, starting from: Oct 30 2023
+   Description: ntuc income
+3: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+```
+### List recurring: `list recurring`
 Lists all recurring cashflows.
 
 Format: `list recurring`
@@ -197,7 +320,17 @@ Example of usage: `list recurring`
 
 Example output:
 ```
-
+You have 2 matching cashflows:
+1: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, starting from: Oct 30 2023
+   Description: ntuc income
+2: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
 ```
 
 ### Budget
