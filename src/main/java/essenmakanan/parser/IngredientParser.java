@@ -25,7 +25,7 @@ public class IngredientParser {
         return index;
     }
 
-    public static Ingredient parseIngredient(IngredientList ingredients, String inputDetail)
+    public static Ingredient parseIngredient(String inputDetail)
             throws EssenFormatException {
 
         IngredientUnit ingredientUnit;

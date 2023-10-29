@@ -3,15 +3,24 @@ package essenmakanan.recipe;
 public class Recipe {
     private String title;
     private RecipeStepList recipeSteps;
+    private RecipeIngredientList recipeIngredients;
 
     public Recipe(String title) {
         this.title = title;
         recipeSteps = new RecipeStepList();
+        recipeIngredients = new RecipeIngredientList();
     }
 
     public Recipe(String title, String[] steps) {
         this.title = title;
         recipeSteps = new RecipeStepList(steps);
+        // recipeIngredients = new RecipeIngredientList();
+    }
+
+    public Recipe(String title, String[] steps, String[] ingredients) {
+        this.title = title;
+        recipeSteps = new RecipeStepList(steps);
+        recipeIngredients = new RecipeIngredientList(ingredients);
     }
 
     public RecipeStepList getRecipeSteps() {
