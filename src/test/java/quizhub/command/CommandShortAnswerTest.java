@@ -101,7 +101,11 @@ public class CommandShortAnswerTest {
      * Input: short [question]/[answer]/[module]/[difficulty]/extra
      */
     public void testAdditionalFields(){
-
+        String input = "short question/answer/module/easy/ADDITIONAL";
+        String expectedOutput = CommandShortAnswer.TOO_MANY_ARGUMENTS_MSG.strip();
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     @Test
