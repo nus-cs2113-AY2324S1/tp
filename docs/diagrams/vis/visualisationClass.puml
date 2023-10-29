@@ -27,7 +27,7 @@ class Categorizer #HoneyDew {
 }
 
 class Visualizer #Beige {
-+<u>displayChart(chartType: String, cashFlowByCat: Map, type: String)
++<u>displayChart(chart: String, cashFlowByCat: Map, type: String)
 + <u>displayPieChart(cashFlowByCat: Map, type: String)
 + <u>displayBarChart(cashFlowByCat: Map, type: String)
 }
