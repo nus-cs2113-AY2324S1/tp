@@ -44,8 +44,10 @@ public class DeleteCashflowCommand extends Command {
         }
 
         if (rawCommand.extraArgs.containsKey("r")) {
+            logger.log(Level.INFO, "Getting any arguments after /r");
             String recurArgs = rawCommand.extraArgs.get("r");
             if (!recurArgs.isBlank()) {
+                logger.log(Level.WARNING, "Arguments after /r found");
                 throw new IllegalArgumentException("Arguments after /r should be left empty.");
             }
             hasRecur = true;
@@ -104,8 +106,10 @@ public class DeleteCashflowCommand extends Command {
 
     private void handleDeleteRecurWithoutCategory() {
         try {
+            logger.log(Level.INFO, "Deleting recurrence without category");
             cashflowList.deleteRecurWithoutCategory(index);
         } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Index out of list");
             throw new IllegalArgumentException("Index must be within the list");
         }
     }
@@ -124,8 +128,10 @@ public class DeleteCashflowCommand extends Command {
     }
     private void handleDeleteRecurWithCategory() {
         try {
+            logger.log(Level.INFO, "Deleting recurrence with category");
             cashflowList.deleteRecurWithCategory(category, index);
         } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Index out of list");
             throw new IllegalArgumentException("Index must be within the list");
         }
     }
