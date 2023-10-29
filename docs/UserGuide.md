@@ -34,11 +34,72 @@ you a one-stop interface to access a plethora of features to manage your finance
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Down the latest version of `Financial Planner` from [here](http://link.to/duke).
+1. Copy the file to the folder you want to use as the *home folder* for Neo Chatbot.
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ip.jar` command to run the application.
+1. Refer to the **Features** section below for details of each command.
 
 ## Features
 
 {Give detailed description of each feature}
+### Notes about the command format
+- Words in `UPPER_CASE` are parameters to be supplied by the user.
+
+  e.g. in `add income /a AMOUNT`, `AMOUNT` is a parameter which can be used as `add income /a 100`.
+- Items in square brackets are optional.
+
+  e.g. `[/r DAYS]` can be used as `/r 30` or left empty.
+
+### Add income: `add income`
+Adds an income source to the Financial Planner.
+
+Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
+
+- `/r` is used to denote a recurring income, with the period to the next addition is specified by `DAYS`.
+- `/d` is used to give a description to the income.
+- `/t` is used to specify the income type, where the list of acceptable types is given below
+
+| Income Types  |
+|---------------|
+| `salary`      | 
+| `investments` |
+| `allowance`   | 
+| `others`      |
+
+Example of usage: `add income /a 5000 /t salary /r 30 /d work`
+
+Example output:
+
+```
+
+```
+
+### Add expense
+Adds an expense to the Financial Planner
+
+Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
+
+- `/r` is used to denote a recurring expense, with the period to the next addition is specified by `DAYS`.
+- `/d` is used to give a description to the expense.
+- `/t` is used to specify the expense type, where the list of acceptable types is given below
+
+| Expense         |
+|-----------------|
+| `dining`        |
+| `entertainment` |
+| `shopping`      |
+| `travel`        |
+| `insurance`     |
+| `necessities`   |
+| `others`        |
+
+Example of usage: `add income /a 5000 /t salary /r 30 /d work`
+
+Example output:
+```
+
+```
+
 
 ### Budget
 
