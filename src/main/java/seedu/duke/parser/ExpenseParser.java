@@ -30,7 +30,7 @@ public class ExpenseParser {
         try {
             expenseDate = LocalDate.parse(expenseDateString, formatter);
         } catch (DateTimeParseException e) {
-            throw new KaChinnnngException("Please enter a valid date in the format dd/MM/yyyy");
+            throw new KaChinnnngException("Please enter a valid date in the format dd/MM/yyyydon");
         }
         if (expenseDate.isAfter(LocalDate.now())) {
             throw new KaChinnnngException("Please enter a date that is not in the future");

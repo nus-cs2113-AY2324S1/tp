@@ -24,6 +24,7 @@ public class Transport extends Expense {
                      TransportationType transportationType) throws KaChinnnngException {
         super(description, date, amount);
         this.transportationType = transportationType;
+        this.category = "Transport";
     }
 
     /**
