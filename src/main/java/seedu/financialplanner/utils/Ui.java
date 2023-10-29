@@ -6,6 +6,8 @@ import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 
+import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,10 +15,10 @@ import java.util.logging.Logger;
 public class Ui {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static Ui ui = null;
-    private final String RED = "\u001B[31m";
-    private final String GREEN = "\u001B[32m";
-    private final String RESET = "\u001B[0m";
-    private final String YELLOW = "\u001B[33m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String RESET = "\u001B[0m";
+    private static final String YELLOW = "\u001B[33m";
     private Scanner Scanner = new Scanner(System.in);
     private Ui() {
     }
@@ -69,18 +71,26 @@ public class Ui {
         System.out.print(RED + "Daily Low" + RESET);
         System.out.print("     ");
         System.out.print("EquityName");
+        System.out.print("                    ");
+        System.out.print("Last Updated");
+        System.out.print("     ");
         System.out.println();
     }
 
     public void printStocksInfo(WatchList watchList) {
-        for (Stock stock: watchList.getStocks()) {
+        for (Map.Entry<String, Stock> set : watchList.getStocks().entrySet()) {
+            Stock stock = set.getValue();
+
             String symbol = StringUtils.rightPad(stock.getSymbol(), 10);
             String market = StringUtils.rightPad(stock.getExchange(), 10);
             String price = YELLOW + StringUtils.rightPad(stock.getPrice(), 10) + RESET;
             String dayHigh = GREEN + StringUtils.rightPad(stock.getDayHigh(), 15) + RESET;
             String dayLow = RED + StringUtils.rightPad(stock.getDayLow(), 14) + RESET;
-            String name = StringUtils.rightPad(stock.getStockName(), 10);
-            System.out.println(symbol + market + price + dayHigh + dayLow + name);
+            String name = StringUtils.rightPad(stock.getStockName(), 30);
+            String date = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss")
+                    .format(stock.getLastUpdated());
+            String lastUpdate = StringUtils.rightPad(date, 10);
+            System.out.println(symbol + market + price + dayHigh + dayLow + name + lastUpdate);
         }
     }
 
