@@ -157,7 +157,7 @@ public abstract class LoadData {
             JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
             stocksData = gson.fromJson(reader, new TypeToken<HashMap<String,Stock>>(){}.getType());
         } catch (FileNotFoundException e) {
-            ui.showMessage("File not found!");
+            ui.showMessage("Watchlist file not found... Creating");
         } catch (JsonSyntaxException e) {
             ui.showMessage("Watchlist JSON is corrupted!");
             ui.showMessage("Would you like to create new file? (Y/N)");
