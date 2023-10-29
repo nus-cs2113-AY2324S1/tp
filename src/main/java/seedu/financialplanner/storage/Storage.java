@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 
 public class Storage {
     private static Storage storage = null;
@@ -29,8 +30,8 @@ public class Storage {
         return storage;
     }
 
-    public void load(String filePath) throws FinancialPlannerException {
-        LoadData.load(filePath);
+    public void load(String filePath, LocalDate date) throws FinancialPlannerException {
+        LoadData.load(filePath, date);
     }
 
     public void save(String filePath) throws FinancialPlannerException {

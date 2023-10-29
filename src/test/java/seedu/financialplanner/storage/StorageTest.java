@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +30,7 @@ public class StorageTest {
     @Test
     public void loadValidData() throws FinancialPlannerException {
         cashflowList.list.clear();
-        storage.load("src/test/testData/ValidData.txt");
+        storage.load("src/test/testData/ValidData.txt", LocalDate.now());
         String actual = cashflowList.getList();
         cashflowList.list.clear();
         getTestData();
@@ -43,7 +44,7 @@ public class StorageTest {
         ByteArrayInputStream in = new ByteArrayInputStream("n".getBytes());
         ui.setScanner(new Scanner(in));
         assertThrows(FinancialPlannerException.class,
-                () -> storage.load("src/test/testData/InvalidData.txt"));
+                () -> storage.load("src/test/testData/InvalidData.txt", LocalDate.now()));
     }
 
     @Test
@@ -63,6 +64,6 @@ public class StorageTest {
 
     private void getTestData() {
         cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, null));
-        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 30, "shopee"));
+        cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 0, "shopee"));
     }
 }

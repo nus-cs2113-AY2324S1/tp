@@ -61,17 +61,34 @@ public class CashflowList {
         assert newListSize == existingListSize - 1;
         return toRemove.getAmount();
     }
+
+    public void deleteRecurWithoutCategory(int index) {
+        int listIndex = index - 1;
+
+        Cashflow toRemoveRecur = list.get(listIndex);
+        if (toRemoveRecur.getRecur() == 0 || toRemoveRecur.hasRecurred) {
+            ui.showMessage("Cashflow is already not recurring or has already recurred");
+        } else {
+            toRemoveRecur.setDate(null);
+            toRemoveRecur.setRecur(0);
+            list.set(listIndex, toRemoveRecur);
+            ui.printDeletedRecur(toRemoveRecur);
+        }
+    }
     //helper method to find the index of a given cashflow in the overall list
     //given its index in its respective list. e.g. "income 3" is the third income
     //in the overall list
     private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) {
-        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
+                || category.equals(CashflowCategory.RECURRING);
 
         switch (category) {
         case INCOME:
             return findCashflowIndexFromIncomeIndex(cashflowIndex);
         case EXPENSE:
             return findCashflowIndexFromExpenseIndex(cashflowIndex);
+        case RECURRING:
+            return findCashflowIndexFromRecurIndex(cashflowIndex);
         default:
             return -1;
         }
@@ -108,7 +125,34 @@ public class CashflowList {
         }
         return overallCashflowIndex;
     }
+    private int findCashflowIndexFromRecurIndex(int cashflowIndex) {
+        int cashflowCounter = 0;
+        int overallCashflowIndex = 0;
 
+        for (Cashflow entry : list) {
+            if (entry.getRecur() > 0 && !entry.getHasRecurred()) {
+                cashflowCounter += 1;
+            }
+            if (cashflowCounter == cashflowIndex) {
+                break;
+            }
+            overallCashflowIndex += 1;
+        }
+        return overallCashflowIndex;
+    }
+    public void deleteRecurWithCategory(CashflowCategory category, int index) {
+        int listIndex = cashflowIndexFinder(category, index);
+
+        Cashflow toRemoveRecur = list.get(listIndex);
+        if (toRemoveRecur.getRecur() == 0 || toRemoveRecur.hasRecurred) {
+            ui.showMessage("Cashflow is already not recurring or has already recurred");
+        } else {
+            toRemoveRecur.setDate(null);
+            toRemoveRecur.setRecur(0);
+            list.set(listIndex, toRemoveRecur);
+            ui.printDeletedRecur(toRemoveRecur);
+        }
+    }
     public double deleteCashflowWithCategory(CashflowCategory category, int index) {
         int existingListSize = list.size();
         int listIndex = cashflowIndexFinder(category, index);
