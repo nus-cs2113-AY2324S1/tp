@@ -55,6 +55,14 @@ Login an existing user into the system.
 Save existing drugs from inventory list onto a txt file.
 File is then used to update inventory list when stocker is ran.
 
+### Feature-add vendor
+
+Adds a vendor into a list to be tracked by the system.
+
+### Feature- list vendors
+
+Displays the name of all vendors being tracked by the system.
+
 ## Usage
 
 ### `Login System`- Create new user or login existing user
@@ -145,7 +153,7 @@ Example of usage:
 Expected outcome:
 
 ```
-1. Name: Panadol, Expiry Date: 12 June 2026/  Quantity: 300
+|| 1. Name: Panadol, Expiry Date: 12 June 2026/  Quantity: 300
 
 Listed all drugs in the inventory.
 ```
@@ -301,6 +309,45 @@ Expected outcome:
 ```
 Drugs successfully saved.
 ```
+
+### `addVendor` - adds a vendor into list of vendors being tracked by system
+
+Adds a vendor to be tracked by the system. The enteries are used to form a list of summarised vendors.
+is booted up.
+
+Format:
+
+addVendor DRUGNAME
+
+Example of usage:
+
+`addVendor Moderna`
+
+Expected outcome:
+
+```
+New vendor added into the vendors list: Moderna
+```
+
+### `listVendors` - list all vendors currently being tracked by the system
+
+Displays a list of all vendors currently being tracked by the system.
+
+Format:
+
+listVendors
+
+Example of usage:
+
+`listVendors`
+
+Expected outcome:
+
+```
+|| 1. Name : Moderna
+||
+||Listed all vendors in the list.
+```
 ## FAQ
 
 **Q**: Can i register with blank username and password
@@ -317,3 +364,5 @@ Drugs successfully saved.
 * register : `register`
 * login : `login`
 * save : `save`
+* add Vendor : `addVendor`
+* list Vendor : `listVendors`
