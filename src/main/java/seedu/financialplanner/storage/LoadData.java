@@ -57,10 +57,12 @@ public abstract class LoadData {
             addRecurringCashflows(date);
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
-        } catch (IndexOutOfBoundsException | IllegalArgumentException
-                 | FinancialPlannerException | DateTimeParseException e) {
-            String message = e.getMessage();
-            handleCorruptedFile(message);
+        } catch (IndexOutOfBoundsException e) {
+            handleCorruptedFile("Empty/Missing arguments detected");
+        } catch (IllegalArgumentException | FinancialPlannerException e) {
+            handleCorruptedFile(e.getMessage());
+        } catch (DateTimeParseException e) {
+            handleCorruptedFile("Erroneous date format or Wrong position of date detected");
         }
     }
 
@@ -171,45 +173,47 @@ public abstract class LoadData {
     }
 
     private static Cashflow getEntry(String type, String[] split)
-            throws FinancialPlannerException, IllegalArgumentException, DateTimeParseException {
-        Cashflow entry;
-        double value = Double.parseDouble(split[1].trim());
-        int recur = Integer.parseInt(split[3].trim());
-        boolean hasRecurred = getHasRecurred(split, recur);
-        LocalDate date = getDate(split, recur);
-        int index = getIndex(recur);
-        String description = getDescription(split, index);
-        checkValidInput(value, recur);
+            throws FinancialPlannerException, IllegalArgumentException, DateTimeParseException
+            , IndexOutOfBoundsException {
+        try {
+            Cashflow entry;
+            double value = Double.parseDouble(split[1].trim());
+            int recur = Integer.parseInt(split[3].trim());
+            boolean hasRecurred = getHasRecurred(split, recur);
+            LocalDate date = getDate(split, recur);
+            int index = getIndex(recur);
+            String description = getDescription(split, index);
+            checkValidInput(value, recur);
 
-        switch (type) {
-        case "I":
-            IncomeType incomeType;
-            try {
+            switch (type) {
+            case "I":
+                IncomeType incomeType;
                 incomeType = IncomeType.valueOf(split[2].trim().toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid income type");
-            }
-            entry = new Income(value, incomeType, recur, description, date, hasRecurred);
-            break;
-        case "E":
-            ExpenseType expenseType;
-            try {
+                entry = new Income(value, incomeType, recur, description, date, hasRecurred);
+                break;
+            case "E":
+                ExpenseType expenseType;
                 expenseType = ExpenseType.valueOf(split[2].trim().toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid expense type");
+                entry = new Expense(value, expenseType, recur, description, date, hasRecurred);
+                break;
+            default:
+                throw new FinancialPlannerException("Error loading file");
             }
-            entry = new Expense(value, expenseType, recur, description, date, hasRecurred);
-            break;
-        default:
-            throw new FinancialPlannerException("Error loading file");
+            return entry;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Erroneous arguments detected");
         }
-        return entry;
     }
 
-    private static boolean getHasRecurred(String[] split, int recur) {
+    private static boolean getHasRecurred(String[] split, int recur) throws IllegalArgumentException {
         boolean hasRecurred;
         if (recur != 0) {
-            hasRecurred = Boolean.parseBoolean(split[4].trim());
+            String stringHasRecurred = split[4].trim();
+            if (stringHasRecurred.equals("true") || stringHasRecurred.equals("false")) {
+                hasRecurred = Boolean.parseBoolean(stringHasRecurred);
+            } else {
+                throw new IllegalArgumentException();
+            }
         } else {
             hasRecurred = false;
         }
