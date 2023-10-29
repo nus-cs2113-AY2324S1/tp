@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Ui {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final int MIN_SPACE_PER_SIDE = 2;
+    private static final int MAX_DESCRIPTION = 60;
 
     public static String getDateString(LocalDate date) {
         return date.format(DATE_FORMATTER);
@@ -63,6 +65,20 @@ public class Ui {
         int descriptionSpace = 30;
         int amountSpace = 20;
         int categorySpace = 20;
+
+        // Dynamically change the width of each column based on longest string
+        for (String text :  texts) {
+            String[] statementDetails = text.split(", ");
+            idSpace = Math.max(idSpace, texts.length + 2 * MIN_SPACE_PER_SIDE);
+            typeSpace = Math.max(typeSpace, statementDetails[0].length() + 2 * MIN_SPACE_PER_SIDE);
+            dateSpace = Math.max(dateSpace, statementDetails[1].length() + 2 * MIN_SPACE_PER_SIDE);
+            // Set a limit to the desccription text space
+            descriptionSpace = Math.min(MAX_DESCRIPTION,
+                Math.max(descriptionSpace, statementDetails[2].length() + 2 * MIN_SPACE_PER_SIDE));
+            amountSpace = Math.max(amountSpace, statementDetails[3].length() + 2 * MIN_SPACE_PER_SIDE);
+            categorySpace = Math.max(categorySpace, statementDetails[4].length() + 2 * MIN_SPACE_PER_SIDE);
+        }
+
         int totalSpace = idSpace + typeSpace + dateSpace +
             descriptionSpace + amountSpace + categorySpace + 7;
 
@@ -83,6 +99,14 @@ public class Ui {
             String sign = (type.equals("Income")) ? "+" : "-";
             totalIncome += (type.equals("Income")) ? amount : 0;
             totalExpense += (type.equals("Expense")) ? amount : 0;
+
+            // Format description text so that anything more than MAX_DESCRIPTION
+            // is replaced with "..."
+            String textReplacement = " ...";
+            if (description.length() > MAX_DESCRIPTION) {
+                description = description.substring(0, MAX_DESCRIPTION - textReplacement.length()
+                    - 2 * MIN_SPACE_PER_SIDE) + textReplacement;
+            }
 
             // Format and print each row
             printTableRow(i + 1, type, date, description, cat, amount, sign, idSpace,
