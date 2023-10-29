@@ -76,7 +76,7 @@ class CashflowListTest {
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-30.00", decimalFormat.format(roundedBalance));
 
-        testList.deleteCashflowWithCategory(CashflowCategory.EXPENSE, 2);
+        testList.deleteCashflowWithCategory(CashflowCategory.RECURRING, 1);
         assertEquals(1, testList.list.size());
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("-10.00", decimalFormat.format(roundedBalance));
