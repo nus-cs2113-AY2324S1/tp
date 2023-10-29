@@ -5,6 +5,7 @@ import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 
 public class CommandHelp extends Command{
+    public static final String COMMAND_WORD = "help";
     public CommandHelp() {
         super(CommandType.HELP);
     }

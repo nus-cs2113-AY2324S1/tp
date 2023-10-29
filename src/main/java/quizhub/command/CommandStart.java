@@ -12,6 +12,7 @@ import java.util.Collections;
  * Command to Start the Quiz
  */
 public class CommandStart extends Command{
+    public static final String COMMAND_WORD = "start";
     public static final String MISSING_QUIZ_MODE_MSG = "    Ono! You did not indicate mode of the quiz :< " +
             System.lineSeparator() + "    Quiz mode must be either 'all' or 'module'";
     public static final String MISSING_START_DETAILS = "    Ono! You did not indicate start details for the quiz " +

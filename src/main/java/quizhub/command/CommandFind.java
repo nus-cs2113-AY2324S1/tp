@@ -7,6 +7,7 @@ import quizhub.ui.Ui;
  * Represents a command to search for a task.
  */
 public class CommandFind extends Command{
+    public static final String COMMAND_WORD = "find";
     public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate " +
             "if you are searching by description or module :<";
     public static final String MISSING_KEYWORD_MSG = "    Ono! You did not indicate " +

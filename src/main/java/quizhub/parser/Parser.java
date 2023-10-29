@@ -23,38 +23,38 @@ public class Parser {
      * Analyses and extracts relevant information from user input
      * to create a new Command object of the right type.
      *
-     * @param userInput The full user CLI input.
+     * @param rawUserInput The full user CLI input.
      * @return Command of the successfully parsed command or an InvalidCommand if unsuccessful
      */
-    public static Command parseCommand(String userInput) {
-        String[] commandTokens = userInput.split(" ");
-        if (commandTokens.length == 0) {
+    public static Command parseCommand(String rawUserInput) {
+        String userInput = rawUserInput.strip();
+        if (userInput.isEmpty()) {
             return new CommandInvalid(Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
                     Ui.INVALID_COMMAND_FEEDBACK);
         }
+        String[] commandTokens = userInput.split(" ");
         String commandTitle = commandTokens[0];
-
         try {
             switch (commandTitle) {
-            case "bye":
+            case CommandExit.COMMAND_WORD:
                 return new CommandExit();
-            case "list":
+            case CommandList.COMMAND_WORD:
                 return new CommandList();
-            case "short":
+            case CommandShortAnswer.COMMAND_WORD:
                 return parseShortAnswerCommand(userInput);
-            case "start":
+            case CommandStart.COMMAND_WORD:
                 return parseStartCommand(userInput);
-            case "edit":
+            case CommandEdit.COMMAND_WORD:
                 return parseEditCommand(userInput);
-            case "delete":
+            case CommandDelete.COMMAND_WORD:
                 return parseDeleteCommand(userInput);
-            case "find":
+            case CommandFind.COMMAND_WORD:
                 return parseFindCommand(userInput);
-            case "shuffle":
+            case CommandShuffle.COMMAND_WORD:
                 return new CommandShuffle();
-            case "markdiff":
+            case CommandMarkDifficulty.COMMAND_WORD:
                 return parseMarkDiffCommand(userInput);
-            case "help":
+            case CommandHelp.COMMAND_WORD:
                 return new CommandHelp();
             default:
                 return new CommandInvalid(Ui.INVALID_COMMAND_MSG + System.lineSeparator() +
@@ -135,37 +135,32 @@ public class Parser {
      * @return Short Answer command or an Invalid Command
      */
     private static Command parseShortAnswerCommand(String userInput) {
-        String description;
-        String answer;
-        String module;
-        String difficulty;
-
         try {
-            // Split the input by 'short' and then by '/' to separate the parts
-            String[] inputTokens = userInput.split("short")[1].strip().split("/");
-
+            // Split the input by '/' to separate the parts
+            String[] inputTokens = userInput.replace(
+                    CommandShortAnswer.COMMAND_WORD, "").strip().split("/");
             // Check if there are exactly 4 parts (description, answer, module, difficulty)
-            if (inputTokens.length > 4) {
+            if (inputTokens.length > CommandShortAnswer.ARGUMENT_SIZE) {
                 return new CommandInvalid(CommandShortAnswer.TOO_MANY_ARGUMENTS_MSG);
             }
-
             // Extract the values for description, answer, module, and difficulty
-            description = inputTokens[0].strip();
-            answer = inputTokens[1].strip();
-            module = inputTokens[2].strip();
-            difficulty = inputTokens[3].strip();
-
-            if (description.isEmpty() || answer.isEmpty() || module.isEmpty() || difficulty.isEmpty()) {
+            String description = inputTokens[0].strip();
+            boolean isFieldEmpty = description.isEmpty();
+            String answer = inputTokens[1].strip();
+            isFieldEmpty = isFieldEmpty || answer.isEmpty();
+            String module = inputTokens[2].strip();
+            isFieldEmpty = isFieldEmpty || module.isEmpty();
+            String difficulty = inputTokens[3].strip();
+            isFieldEmpty = isFieldEmpty || difficulty.isEmpty();
+            if (isFieldEmpty) {
                 return new CommandInvalid(CommandShortAnswer.MISSING_FIELDS_MSG +
                         "\n" + CommandShortAnswer.INVALID_FORMAT_MSG);
             }
-
             Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
             if(qnDifficulty.equals(Question.QnDifficulty.INVALID)) {
                 return new CommandInvalid(CommandShortAnswer.INVALID_DIFFICULTY_MSG);
             }
             return new CommandShortAnswer(description, answer, module, qnDifficulty);
-
         } catch (ArrayIndexOutOfBoundsException exception) {
             return new CommandInvalid(CommandShortAnswer.INVALID_FORMAT_MSG);
         }
