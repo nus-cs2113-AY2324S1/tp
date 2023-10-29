@@ -1,5 +1,24 @@
 # User Guide
 
+## Table of contents
+
+* [Introduction](#introduction)
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Budget](#budget)
+    * [Setting budget](#setting-a-budget-budget-set)
+    * [Updating budget](#updating-budget-budget-update)
+    * [Resetting budget](#resetting-budget-budget-reset)
+    * [Deleting budget](#deleting-budget-budget-delete)
+    * [Viewing budget](#viewing-budget-budget-view)
+  * [Displaying Overview](#displaying-overview-overview)
+  * [View Balance](#viewing-balance-balance)
+  * [Exiting the program](#exiting-the-program-exit)
+  * [Saving data](#saving-the-data)
+  * [Loading data](#loading-the-data)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 ## Introduction
 
 Financial Planner is a Command Line Interface (CLI) application for managing your finances conveniently. 
@@ -13,7 +32,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
-## Features 
+## Features
 
 {Give detailed description of each feature}
 
