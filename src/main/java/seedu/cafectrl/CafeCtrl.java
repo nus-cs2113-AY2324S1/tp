@@ -33,7 +33,7 @@ public class CafeCtrl {
         this.storage = new Storage(this.ui);
         this.menu = this.storage.loadMenu();
         this.pantry = this.storage.loadPantryStock();
-        this.orderList = this.storage.loadOrderList();
+        //this.orderList = this.storage.loadOrderList();
         currentDate = new CurrentDate();
         sales = new Sales();
     }

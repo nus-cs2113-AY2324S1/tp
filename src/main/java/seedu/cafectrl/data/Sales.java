@@ -2,9 +2,11 @@ package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.OrderList;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Sales {
+    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     protected ArrayList<OrderList> orderLists;
     protected float totalSales;
     protected int daysAccounted;
@@ -83,12 +85,12 @@ public class Sales {
         totalSales -= totalOrderListCost;
     }
 
-    public float getTotalSales() {
+    public String getTotalSales() {
         totalSales = 0;
         for (int i = 0; i < orderLists.size(); i++) {
             totalSales += orderLists.get(i).getTotalOrderListCost();
         }
-        return totalSales;
+        return dollarValue.format(totalSales);
     }
 
     public void nextDay() {
