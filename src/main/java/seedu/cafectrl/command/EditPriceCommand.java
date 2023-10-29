@@ -9,6 +9,7 @@ import seedu.cafectrl.ui.Ui;
  */
 public class EditPriceCommand extends Command {
     public static final String COMMAND_WORD = "edit_price";
+
     protected Menu menu;
     protected Ui ui;
     private final int menuID;
