@@ -57,7 +57,8 @@ public abstract class LoadData {
             addRecurringCashflows(date);
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
-        } catch (IndexOutOfBoundsException | IllegalArgumentException | FinancialPlannerException e) {
+        } catch (IndexOutOfBoundsException | IllegalArgumentException
+                 | FinancialPlannerException | DateTimeParseException e) {
             String message = e.getMessage();
             handleCorruptedFile(message);
         }
@@ -76,7 +77,7 @@ public abstract class LoadData {
             indexToDelete++;
         }
         if (!tempCashflow.isEmpty()) {
-            ui.showMessage("Cashflows added after system time detected. Removing future cashflows...");
+            ui.showMessage("Detected erroneous cashflow entries. Removing future cashflows...");
             for (int i = 0; i < tempCashflow.size(); i++) {
                 indexToDelete = tempCashflow.get(i) - i;
                 // deleteCashflowWithoutCategory takes in list index starting from 1, indexToDelete starts from 0
@@ -167,7 +168,7 @@ public abstract class LoadData {
     }
 
     private static Cashflow getEntry(String type, String[] split)
-            throws FinancialPlannerException, IllegalArgumentException {
+            throws FinancialPlannerException, IllegalArgumentException, DateTimeParseException {
         double value;
         int recur;
         int index;
@@ -179,11 +180,7 @@ public abstract class LoadData {
         case "I":
             value = Double.parseDouble(split[1].trim());
             recur = Integer.parseInt(split[3].trim());
-            try {
-                date = getDate(split, recur);
-            } catch (DateTimeParseException e) {
-                throw new FinancialPlannerException("Error in parsing date");
-            }
+            date = getDate(split, recur);
             index = getIndex(recur);
             description = getDescription(split, index);
             checkValidInput(value, recur);
