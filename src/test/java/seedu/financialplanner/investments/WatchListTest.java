@@ -19,7 +19,7 @@ class WatchListTest {
     @Order(1)
     void fetchFMPStockPrices() throws FinancialPlannerException {
         WatchList wl = WatchList.getInstance();
-        wl.fetchFMPStockPrices();
+        wl.getLatestWatchlistInfo();
         HashMap<String, Stock> stocks = wl.getStocks();
         assertNotNull(stocks.get("AAPL").getPrice());
         assertNotNull(stocks.get("GOOGL").getPrice());

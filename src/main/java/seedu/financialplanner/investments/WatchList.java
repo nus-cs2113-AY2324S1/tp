@@ -55,21 +55,32 @@ public class WatchList {
     }
 
     public void getLatestWatchlistInfo() throws FinancialPlannerException {
-        JSONArray JSONstocks = fetchFMPStockPrices();
-        extractWatchlistInfoFromJSONArray(JSONstocks);
+        StringBuilder queryStocks = getExpiredStocks();
+        fetchFMPStockPrices(queryStocks);
     }
 
-    public JSONArray fetchFMPStockPrices() throws FinancialPlannerException {
+    public StringBuilder getExpiredStocks() {
+        StringBuilder queryStocks = new StringBuilder();
+        long currentTime = System.currentTimeMillis();
+        long fivemin = 300000;
+        for (Map.Entry<String, Stock> set: stocks.entrySet()) {
+            if (set.getValue().getLastFetched() + fivemin < currentTime) {
+                queryStocks.append(set.getKey());
+            }
+        }
+        return queryStocks;
+    }
+
+    public void fetchFMPStockPrices(StringBuilder queryStocks) throws FinancialPlannerException {
         if (stocks.isEmpty()) {
             throw new FinancialPlannerException("Empty Watchlist. Nothing to display...");
         }
+        if (queryStocks.toString().isEmpty()) {
+            // all stocks prices are up-to-date, just display
+            return;
+        }
 
         HttpClient client = HttpClient.newHttpClient();
-        StringBuilder queryStocks = new StringBuilder();
-        assert !stocks.isEmpty();
-        for (Map.Entry<String, Stock> set : stocks.entrySet()) {
-            queryStocks.append(set.getKey());
-        }
         String requestURI = String.format("%s%s?apikey=%s", API_ENDPOINT, queryStocks, API_KEY);
         HttpRequest request = HttpRequest.newBuilder(URI.create(requestURI))
                 .header("accept", "application/json")
@@ -93,12 +104,12 @@ public class WatchList {
             logger.log(Level.SEVERE, "Could not parse to JSON");
             throw new RuntimeException(e);
         }
-        return (JSONArray) obj;
+        extractWatchlistInfoFromJSONArray((JSONArray) obj);
     }
 
     public void extractWatchlistInfoFromJSONArray(JSONArray JSONstocks) throws FinancialPlannerException {
-        if (JSONstocks.size() != stocks.size()) {
-            throw new FinancialPlannerException("Error getting API info!");
+        if (JSONstocks.isEmpty()) {
+            return;
         }
         long fetchTime = System.currentTimeMillis();
         for (Object jo : JSONstocks) {
