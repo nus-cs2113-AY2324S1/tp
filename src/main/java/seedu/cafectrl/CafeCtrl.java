@@ -3,7 +3,6 @@ package seedu.cafectrl;
 import seedu.cafectrl.command.Command;
 import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
