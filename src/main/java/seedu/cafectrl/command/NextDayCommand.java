@@ -19,6 +19,14 @@ public class NextDayCommand extends Command {
         this.currentDate = currentDate;
     }
 
+    /**
+     * Changes the current day to the next day.
+     * Checks if an orderList exist in Sales by comparing
+     * the intended Day vs the number of days accounted for in Sales
+     *
+     * If orderList does not exist, new OrderList is added to Sales
+     * The days accounted for in Sales is incremented
+     */
     @Override
     public void execute() {
         ui.printLine();

@@ -137,6 +137,14 @@ public class Parser {
 
     /** All prepareCommand Classes */
     //@@author Cazh1
+
+    /**
+     * Prepares the ListMenuCommand
+     *
+     * @param menu menu of the current session
+     * @param ui ui of the current session
+     * @return new ListMenuCommand
+     */
     private static Command prepareListMenu(Menu menu, Ui ui) {
         return new ListMenuCommand(menu, ui);
     }
@@ -361,6 +369,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares PreviousDayCommand
+     *
+     * @param ui ui object of the current session
+     * @param currentDate currentDate object of the current session
+     * @return PreviousDayCommand if after day 1, IncorrectCommand if before
+     */
     private static Command preparePreviousDay(Ui ui, CurrentDate currentDate) {
         int currentDay = currentDate.getCurrentDay();
         if (currentDay == 0) {
@@ -369,10 +384,25 @@ public class Parser {
         return new PreviousDayCommand(ui, currentDate);
     }
 
+    /**
+     * Prepares NextDayCommand
+     *
+     * @param ui ui object of the current session
+     * @param sales sales object of the current session
+     * @param currentDate currentDate object of the current session
+     * @return NextDayCommand
+     */
     private static Command prepareNextDay(Ui ui, Sales sales, CurrentDate currentDate) {
         return new NextDayCommand(ui, sales, currentDate);
     }
 
+    /**
+     * Sets the orderList according to the Day
+     *
+     * @param currentDate currentDate object of the current session
+     * @param sales sales object of the current session, contains the orderLists
+     * @return The respective orderList
+     */
     private static OrderList setOrderList(CurrentDate currentDate, Sales sales) {
         int currentDay = currentDate.getCurrentDay();
         return sales.getOrderList(currentDay);
