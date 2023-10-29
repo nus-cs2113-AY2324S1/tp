@@ -80,24 +80,25 @@ public class CommandShortAnswerTest {
         testCliOutputCorrectness(expectedOutput);
     }
 
-    @Test
     /**
      * Missing one or more required fields
      * Input: short [question]/[module]/[difficulty]
      */
+    @Test
     public void testMissingFields(){
         String input = "short question//module/easy";
-        String expectedOutput = CommandShortAnswer.MISSING_FIELDS_MSG.strip() + " " + CommandShortAnswer.INVALID_FORMAT_MSG.strip();
+        String expectedOutput = CommandShortAnswer.MISSING_FIELDS_MSG.strip() + " " +
+                CommandShortAnswer.INVALID_FORMAT_MSG.strip();
         Command command = Parser.parseCommand(input);
         command.executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
 
-    @Test
     /**
-     * Additional fields or characters:
+     * Additional fields or characters
      * Input: short [question]/[answer]/[module]/[difficulty]/extra
      */
+    @Test
     public void testAdditionalFields(){
         String input = "short question/answer/module/easy/ADDITIONAL";
         String expectedOutput = CommandShortAnswer.TOO_MANY_ARGUMENTS_MSG.strip();
@@ -106,11 +107,11 @@ public class CommandShortAnswerTest {
         testCliOutputCorrectness(expectedOutput);
     }
 
-    @Test
     /**
-     * Invalid values for difficulty (assuming it has predefined values):
+     * Invalid values for difficulty
      * Input: short [question]/[answer]/[module]/invalid_difficulty
      */
+    @Test
     public void testInvalidDifficulty(){
         String input = "short question/answer/module/invalid";
         String expectedOutput = "Ono! We only support easy, normal and hard " +
@@ -121,13 +122,13 @@ public class CommandShortAnswerTest {
         testCliOutputCorrectness(expectedOutput);
     }
 
-    @Test
+
     /**
      * Duplicate Entry Handling
      * Input: Add the same question/answer combination twice.
-     * Expected Output: Ensure that the application detects and handles duplicate entries, preventing them from being
-     added to the file again.
+     * Expected Output: Ensure that the application detects and handles duplicate entries
      */
+    @Test
     public void testDuplicateHandling() {
         // Define the input short answer question
         String input = "short duplicate_question/duplicate_answer/module/easy";
@@ -160,13 +161,13 @@ public class CommandShortAnswerTest {
         Assertions.assertTrue(actualOutput.contains(expectedOutputDuplicate));
     }
 
-    @Test
     /**
      * File Existence
      * Input: Run the application without the local text file existing.
      * Expected Output: Verify that the application creates the file if it doesn't exist or uses an existing one
      * when updating data.
      */
+    @Test
     public void testFileExistence() {
         // Ensure the storage is initially empty
         mockStorage.clearData();
@@ -190,20 +191,20 @@ public class CommandShortAnswerTest {
         testCliOutputCorrectness(expectedOutput);
     }
 
-    @Test
     /**
-    * Test storage is updated after deleting a short answer
-    */
+     * Test storage is updated after deleting a short answer
+     */
+    @Test
     public void testStorageDeleteShortAns() {
         // Create a QuestionList and add some short answer questions
         QuestionList questionList = new QuestionList();
 
         // Format questions to add
         String[] questionsToAdd = {
-                "short Question1 / Answer1 / Mod1 / NORMAL",
-                "short Question2 / Answer2 / Mod2 / NORMAL",
-                "short Question3 / Answer3 / Mod3 / NORMAL",
-                "short Question4 / Answer4 / Mod4 / NORMAL"
+            "short Question1 / Answer1 / Mod1 / NORMAL",
+            "short Question2 / Answer2 / Mod2 / NORMAL",
+            "short Question3 / Answer3 / Mod3 / NORMAL",
+            "short Question4 / Answer4 / Mod4 / NORMAL"
         };
 
         // Initialize MockStorage with the QuestionList
