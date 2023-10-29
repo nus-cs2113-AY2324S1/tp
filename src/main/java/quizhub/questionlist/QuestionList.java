@@ -238,9 +238,7 @@ public class QuestionList {
         try{
             Question question = allQns.get(index-1);
             question.editQuestion(newDescription, newAnswer);
-            System.out.println("    Roger that! I have edited the following question >w< !");
             printQuestion(question, false);
-            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
         } catch (IndexOutOfBoundsException invalidIndex){
             if(index != 0){
                 System.out.println("    Ono! Please enter valid question number *sobs*");

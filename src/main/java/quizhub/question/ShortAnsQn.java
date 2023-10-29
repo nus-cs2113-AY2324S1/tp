@@ -43,6 +43,7 @@ public class ShortAnsQn extends Question {
                     QN_UNCHANGED_MSG);
         } else if(newAnswer != null && !newAnswer.equals("")){
             this.answer = newAnswer;
+            System.out.println("    Roger that! I have edited the following question >w< !");
         }
     }
     /**
