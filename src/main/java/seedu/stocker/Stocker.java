@@ -1,7 +1,6 @@
 package seedu.stocker;
 
 import seedu.stocker.authentication.LoginSystem;
-import seedu.stocker.exceptions.DrugNotFoundException;
 import seedu.stocker.exceptions.StockerException;
 import seedu.stocker.storage.Storage;
 import seedu.stocker.ui.Ui;
@@ -26,7 +25,7 @@ public class Stocker {
     private VendorsList vendorsList;
     private Storage storage;
 
-    public static void main(String[] launchArgs) throws IOException, StockerException, DrugNotFoundException {
+    public static void main(String[] launchArgs) throws IOException, StockerException {
         new Stocker().run();
     }
 
@@ -46,7 +45,7 @@ public class Stocker {
     /**
      * Runs the program until termination.
      */
-    public void run() throws IOException, StockerException, DrugNotFoundException {
+    public void run() throws IOException, StockerException{
         start();
         runCommandLoopUntilExitCommand();
         exit();
@@ -87,7 +86,7 @@ public class Stocker {
     /**
      * Reads the user command and executes it, until the user issues the exit command.
      */
-    private void runCommandLoopUntilExitCommand() throws IOException, StockerException, DrugNotFoundException {
+    private void runCommandLoopUntilExitCommand() throws IOException, StockerException {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
@@ -106,7 +105,7 @@ public class Stocker {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command) throws IOException, StockerException, DrugNotFoundException {
+    private CommandResult executeCommand(Command command) throws IOException, StockerException {
         command.setData(inventory, salesList, currentCart);
         CommandResult result = command.execute();
         return result;
