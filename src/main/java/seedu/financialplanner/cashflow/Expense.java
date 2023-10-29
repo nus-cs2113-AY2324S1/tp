@@ -14,8 +14,9 @@ public class Expense extends Cashflow {
         addExpenseValue();
     }
 
-    public Expense(double amount, ExpenseType type, int recur, String description, LocalDate date) {
-        super(amount, recur, description, date);
+    public Expense(double amount, ExpenseType type, int recur,
+                   String description, LocalDate date, boolean hasRecurred) {
+        super(amount, recur, description, date, hasRecurred);
         this.type = type;
         addExpenseValue();
     }

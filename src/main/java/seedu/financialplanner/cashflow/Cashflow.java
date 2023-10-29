@@ -16,6 +16,7 @@ public abstract class Cashflow {
     protected int recur;
     protected String description;
     protected LocalDate date;
+    protected boolean hasRecurred;
 
     public Cashflow(double amount, int recur, String description) {
         this.amount = amount;
@@ -24,12 +25,14 @@ public abstract class Cashflow {
         if (recur != 0) {
             this.date = LocalDate.now();
         }
+        this.hasRecurred = false;
     }
-    public Cashflow(double amount, int recur, String description, LocalDate date) {
+    public Cashflow(double amount, int recur, String description, LocalDate date, boolean hasRecurred) {
         this.amount = amount;
         this.recur = recur;
         this.description = description;
         this.date = date;
+        this.hasRecurred = hasRecurred;
     }
 
     protected Cashflow() {
@@ -108,6 +111,14 @@ public abstract class Cashflow {
         this.date = date;
     }
 
+    public boolean isHasRecurred() {
+        return hasRecurred;
+    }
+
+    public void setHasRecurred(boolean hasRecurred) {
+        this.hasRecurred = hasRecurred;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -115,9 +126,10 @@ public abstract class Cashflow {
     public String formatString() {
         String string;
         if (recur == 0) {
-            string = " | 0";
+            string = " | 0 | false";
         } else {
             string = " | " + this.recur + " | " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            string += " | " + this.hasRecurred;
         }
         if (description != null) {
             string += " | " + this.description;

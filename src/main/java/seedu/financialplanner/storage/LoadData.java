@@ -93,7 +93,8 @@ public abstract class LoadData {
         for (Cashflow cashflow : cashflowList.list) {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
-            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflow);
+            boolean hasRecurred = cashflow.isHasRecurred();
+            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflow, hasRecurred);
         }
         for (Cashflow cashflow : tempCashflow) {
             cashflowList.load(cashflow);
@@ -103,8 +104,8 @@ public abstract class LoadData {
 
     private static void addRecurringCashflowToTempList(LocalDate currentDate
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
-            , ArrayList<Cashflow> tempCashflow) throws FinancialPlannerException {
-        if (recur > 0) {
+            , ArrayList<Cashflow> tempCashflow, boolean hasRecurred) throws FinancialPlannerException {
+        if (recur > 0 && !hasRecurred) {
             dateOfAddition = dateOfAddition.plusDays(recur);
             identifyRecurredCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflow);
         }
@@ -114,6 +115,7 @@ public abstract class LoadData {
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
             , ArrayList<Cashflow> tempCashflow) throws FinancialPlannerException {
         while (currentDate.isAfter(dateOfAddition) || currentDate.isEqual(dateOfAddition)) {
+            cashflow.setHasRecurred(true);
             Cashflow toAdd;
             if (cashflow instanceof Income) {
                 toAdd = new Income((Income) cashflow);
@@ -124,6 +126,7 @@ public abstract class LoadData {
             }
             toAdd.setDate(dateOfAddition);
             tempCashflow.add(toAdd);
+            cashflow = toAdd;
             dateOfAddition = dateOfAddition.plusDays(recur);
         }
     }
@@ -169,43 +172,33 @@ public abstract class LoadData {
 
     private static Cashflow getEntry(String type, String[] split)
             throws FinancialPlannerException, IllegalArgumentException, DateTimeParseException {
-        double value;
-        int recur;
-        int index;
-        LocalDate date;
         Cashflow entry;
-        String description;
+        double value = Double.parseDouble(split[1].trim());
+        int recur = Integer.parseInt(split[3].trim());
+        boolean hasRecurred = getHasRecurred(split, recur);
+        LocalDate date = getDate(split, recur);
+        int index = getIndex(recur);
+        String description = getDescription(split, index);
+        checkValidInput(value, recur);
 
         switch (type) {
         case "I":
-            value = Double.parseDouble(split[1].trim());
-            recur = Integer.parseInt(split[3].trim());
-            date = getDate(split, recur);
-            index = getIndex(recur);
-            description = getDescription(split, index);
-            checkValidInput(value, recur);
             IncomeType incomeType;
             try {
                 incomeType = IncomeType.valueOf(split[2].trim().toUpperCase());
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid income type");
             }
-            entry = new Income(value, incomeType, recur, description, date);
+            entry = new Income(value, incomeType, recur, description, date, hasRecurred);
             break;
         case "E":
-            value = Double.parseDouble(split[1].trim());
-            recur = Integer.parseInt(split[3].trim());
-            date = getDate(split, recur);
-            index = getIndex(recur);
-            description = getDescription(split, index);
-            checkValidInput(value, recur);
             ExpenseType expenseType;
             try {
                 expenseType = ExpenseType.valueOf(split[2].trim().toUpperCase());
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid expense type");
             }
-            entry = new Expense(value, expenseType, recur, description, date);
+            entry = new Expense(value, expenseType, recur, description, date, hasRecurred);
             break;
         default:
             throw new FinancialPlannerException("Error loading file");
@@ -213,10 +206,20 @@ public abstract class LoadData {
         return entry;
     }
 
+    private static boolean getHasRecurred(String[] split, int recur) {
+        boolean hasRecurred;
+        if (recur != 0) {
+            hasRecurred = Boolean.parseBoolean(split[4].trim());
+        } else {
+            hasRecurred = false;
+        }
+        return hasRecurred;
+    }
+
     private static LocalDate getDate(String[] split, int recur) {
         LocalDate date;
         if (recur != 0) {
-            date = LocalDate.parse(split[4].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            date = LocalDate.parse(split[5].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } else {
             date = null;
         }
@@ -225,8 +228,8 @@ public abstract class LoadData {
 
     private static int getIndex(int recur) {
         int index;
-        if (recur == 0) {
-            index = 4;
+        if (recur != 0) {
+            index = 6;
         } else {
             index = 5;
         }

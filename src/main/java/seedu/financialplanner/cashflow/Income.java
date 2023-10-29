@@ -14,8 +14,8 @@ public class Income extends Cashflow{
         addIncomeValue();
     }
 
-    public Income(double amount, IncomeType type, int recur, String description, LocalDate date) {
-        super(amount, recur, description, date);
+    public Income(double amount, IncomeType type, int recur, String description, LocalDate date, boolean hasRecurred) {
+        super(amount, recur, description, date, hasRecurred);
         this.type = type;
         addIncomeValue();
     }
