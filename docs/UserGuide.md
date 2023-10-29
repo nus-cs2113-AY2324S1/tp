@@ -10,7 +10,7 @@ from all fields of study.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `QuizHub` from [here](http://link.to/duke).
+2. Down the latest version of `QuizHub` from [here](http://link.to/duke).
 
 ## Features
 
