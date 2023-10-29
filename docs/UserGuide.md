@@ -3,7 +3,7 @@
 ## Introduction
 
 QuizHUB is a local desktop app designed to help NUS students easily record examinable questions and generate quizzes
-from their very own question bank to test their understanding via a Command Line Interface (CLI). Easily launchable
+from their very own question bank to test their understanding via a Command Line Interface (CLI). Easily launch-able
 on the go, QuizHUB is a versatile tool that aims to streamline and optimize the revision experience for NUS students
 from all fields of study.
 
@@ -26,8 +26,7 @@ from all fields of study.
 
 ### Getting help on using the app: `help`
 Assists new users in familiarising with the application. Provides a list of commands for the user to get started
-with the essentials. An instance of `/help` will be activated at the start. `/help` with a specific command thereafter will
-provide greater details on how to utilize that command.
+with the essentials.
 
 Format: `help`
 
@@ -49,9 +48,7 @@ Example of usage:
 `12. bye - exits the program` <br>
 
 Notes:
-* If the command does not exist after `/help`, the app will prompt you that the command does not exist and thereafter
-  activate /help to list all the commands
-* Ver 1.0 will only list commands. Future versions will include auto-filling and scrolling
+* Ver 2.0 will only list commands. Future versions will include auto-filling and scrolling
   (multiple pages of the help menu)
 
 ### Adding short-answer questions and their answers: `short`
