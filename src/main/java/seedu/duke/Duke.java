@@ -1,4 +1,4 @@
-//@@author wendelinwemhoener
+//@@author wendelinwemhoener & bayasgalankherlen
 
 package seedu.duke;
 
@@ -24,20 +24,24 @@ public class Duke {
         boolean shouldTerminate = false;
 
         while (!shouldTerminate) {
+            System.out.print("Enter your command: ");
             input = scanner.nextLine();
 
             if (fc.isResponsible(input)) {
                 fc.processInput(input);
             } else if (cm.isResponsible(input)) {
                 cm.processInput(input);
+            } else if (input.equals("exit program")) {
+                System.out.println("    You are exiting TaskLinker! Bye!");
+                break;
             } else if (input.startsWith("help")) {
                 printHelp();
             } else {
                 System.out.println("    Invalid command! Please try again.");
             }
         }
-
     }
+
 
     private void printHelp() {
         System.out.println("    If you need help, please consult our " +
@@ -59,3 +63,4 @@ public class Duke {
         }
     }
 }
+
