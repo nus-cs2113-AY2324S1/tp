@@ -61,6 +61,20 @@ public class CashflowList {
         assert newListSize == existingListSize - 1;
         return toRemove.getAmount();
     }
+
+    public void deleteRecurWithoutCategory(int index) {
+        int listIndex = index - 1;
+
+        Cashflow toRemoveRecur = list.get(listIndex);
+        if (toRemoveRecur.getRecur() == 0 || toRemoveRecur.hasRecurred) {
+            ui.showMessage("Cashflow is already not recurring or has already recurred");
+        } else {
+            toRemoveRecur.setDate(null);
+            toRemoveRecur.setRecur(0);
+            list.set(listIndex, toRemoveRecur);
+            ui.printDeletedRecur(toRemoveRecur);
+        }
+    }
     //helper method to find the index of a given cashflow in the overall list
     //given its index in its respective list. e.g. "income 3" is the third income
     //in the overall list
@@ -108,7 +122,19 @@ public class CashflowList {
         }
         return overallCashflowIndex;
     }
+    public void deleteRecurWithCategory(CashflowCategory category, int index) {
+        int listIndex = cashflowIndexFinder(category, index);
 
+        Cashflow toRemoveRecur = list.get(listIndex);
+        if (toRemoveRecur.getRecur() == 0 || toRemoveRecur.hasRecurred) {
+            ui.showMessage("Cashflow is already not recurring or has already recurred");
+        } else {
+            toRemoveRecur.setDate(null);
+            toRemoveRecur.setRecur(0);
+            list.set(listIndex, toRemoveRecur);
+            ui.printDeletedRecur(toRemoveRecur);
+        }
+    }
     public double deleteCashflowWithCategory(CashflowCategory category, int index) {
         int existingListSize = list.size();
         int listIndex = cashflowIndexFinder(category, index);

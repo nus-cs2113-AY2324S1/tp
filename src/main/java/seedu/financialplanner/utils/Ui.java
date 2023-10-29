@@ -113,6 +113,12 @@ public class Ui {
         System.out.println("Balance: " + entry.formatBalance());
     }
 
+    public void printDeletedRecur(Cashflow entry) {
+        System.out.println("You have removed future recurrences of this cashflow.");
+        System.out.println("Updated cashflow:");
+        System.out.println(entry);
+    }
+
     public void printBudgetBeforeUpdate() {
         showMessage("Budget has been updated:\nOld initial budget: " +
                 Budget.getInitialBudgetString() + "\nOld current budget: " +

@@ -103,6 +103,10 @@ public abstract class Cashflow {
         return recur;
     }
 
+    public void setRecur(int recur) {
+        this.recur = recur;
+    }
+
     public LocalDate getDate() {
         return date;
     }
