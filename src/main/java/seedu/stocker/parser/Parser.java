@@ -21,6 +21,7 @@ import seedu.stocker.commands.ViewCartCommand;
 import seedu.stocker.commands.AddToCartCommand;
 import seedu.stocker.commands.CheckOutCommand;
 import seedu.stocker.commands.ListVendorCommand;
+import seedu.stocker.commands.SetThresholdCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -88,7 +89,10 @@ public class Parser {
             return new ShowStockLevelCommand();
 
         case ListVendorCommand.COMMAND_WORD:
-            return  new ListVendorCommand();
+            return new ListVendorCommand();
+
+        case SetThresholdCommand.COMMAND_WORD:
+            return prepareSetThresholdCommand(arguments);
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -132,7 +136,7 @@ public class Parser {
             long quantity = Long.parseLong(matcher.group(2));
             return new AddToCartCommand(name, quantity);
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
         }
     }
 
@@ -162,4 +166,23 @@ public class Parser {
         }
         return new AddVendorCommand(vendorName);
     }
+
+    private Command prepareSetThresholdCommand(String args) {
+        try {
+            Pattern pattern = Pattern.compile("/n (.*) /tq (.*)");
+            Matcher matcher = pattern.matcher(args);
+            if (matcher.matches() && matcher.groupCount() == 2) {
+                String name = matcher.group(1);
+                Long threshold = Long.parseLong(matcher.group(2));
+                return new SetThresholdCommand(name, threshold);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SetThresholdCommand.MESSAGE_USAGE));
+            }
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SetThresholdCommand.MESSAGE_USAGE));
+        }
+    }
+
 }

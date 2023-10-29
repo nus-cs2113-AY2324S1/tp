@@ -5,6 +5,7 @@ public class StockEntry {
     private final Drug drug;
 
     private long quantity;
+    private long thresholdQuantity;
 
     public StockEntry(Drug drug, long quantity) {
         this.drug = drug;
@@ -21,6 +22,14 @@ public class StockEntry {
 
     public void setQuantity(long quantity) {
         this.quantity = quantity;
+    }
+
+    public void setThresholdQuantity(long thresholdQuantity) {
+        this.thresholdQuantity = thresholdQuantity;
+    }
+
+    public long getThresholdQuantity() {
+        return this.thresholdQuantity;
     }
 
     public void incrQuantity(long delta) {
