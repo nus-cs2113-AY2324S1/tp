@@ -15,13 +15,15 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WatchList {
     private static WatchList watchlist = null;
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
-    private ArrayList<Stock> stocks = null;
+    private HashMap<String, Stock> stocks = null;
     private final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
 
@@ -34,11 +36,11 @@ public class WatchList {
         try {
             Stock apple = new Stock("AAPL");
             assert apple.getSymbol() != null && apple.getStockName() != null;
-            stocks.add(apple);
+            stocks.put(apple.getSymbol(), apple);
 
             Stock google = new Stock("GOOGL");
             assert google.getSymbol() != null && google.getStockName() != null;
-            stocks.add(google);
+            stocks.put(google.getSymbol(), google);
 
         } catch (FinancialPlannerException e) {
             System.out.println(e.getMessage());
@@ -65,8 +67,8 @@ public class WatchList {
         HttpClient client = HttpClient.newHttpClient();
         StringBuilder queryStocks = new StringBuilder();
         assert !stocks.isEmpty();
-        for (Stock stock : stocks) {
-            queryStocks.append(stock.toString());
+        for (Map.Entry<String, Stock> set : stocks.entrySet()) {
+            queryStocks.append(set.getKey());
         }
         String requestURI = String.format("%s%s?apikey=%s", API_ENDPOINT, queryStocks, API_KEY);
         HttpRequest request = HttpRequest.newBuilder(URI.create(requestURI))
@@ -91,8 +93,7 @@ public class WatchList {
             logger.log(Level.SEVERE, "Could not parse to JSON");
             throw new RuntimeException(e);
         }
-        JSONArray ja = (JSONArray) obj;
-        return ja;
+        return (JSONArray) obj;
     }
 
     public void extractWatchlistInfoFromJSONArray(JSONArray JSONstocks) throws FinancialPlannerException {
@@ -100,21 +101,12 @@ public class WatchList {
             throw new FinancialPlannerException("Error getting API info!");
         }
         long fetchTime = System.currentTimeMillis();
-        int i = 0;
         for (Object jo : JSONstocks) {
             JSONObject stock = (JSONObject) jo;
-
-            Stock stockLocal = stocks.get(i);
-
-            // Check if the JSONObject from response matches the stock in the stocks list using symbol
-            if (!stockLocal.getSymbol().equals(stock.get("symbol"))) {
-                i += 1;
-                logger.log(Level.WARNING, "Stocks matching error!");
-                continue;
+            if (stocks.containsKey(stock.get("symbol").toString().toUpperCase())) {
+                Stock stockLocal = stocks.get(stock.get("symbol").toString().toUpperCase());
+                extractStockInfoFromJSONObject(stock, stockLocal, fetchTime);
             }
-
-            extractStockInfoFromJSONObject(stock, stockLocal, fetchTime);
-            i += 1;
         }
     }
 
@@ -146,17 +138,15 @@ public class WatchList {
         if (stocks.size() >= 5) {
             throw new FinancialPlannerException("Watchlist is full (max 5). Delete a stock to add a new one");
         }
-        for (Stock stock: stocks) {
-            if (stockCode.equals(stock.getSymbol().toUpperCase())) {
+        if (stocks.containsKey(stockCode.toUpperCase())) { // should already be uppercase
                 throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
-            }
         }
 
-        Stock newStock = null;
+        Stock newStock;
         newStock = new Stock(stockCode);
 
         assert newStock.getSymbol() != null && newStock.getStockName() != null;
-        stocks.add(newStock);
+        stocks.put(newStock.getSymbol(), newStock);
         return newStock.getStockName();
     }
 
@@ -164,13 +154,11 @@ public class WatchList {
         if (stocks.isEmpty()) {
             throw new FinancialPlannerException("No stock in watchlist!");
         }
-        Stock toBeRemoved = stocks
-                .stream()
-                .filter(stock -> stockCode.equals(stock.getSymbol()))
-                .findFirst()
-                .orElseThrow(() -> new FinancialPlannerException("Does not Exist in Watchlist"));
-        stocks.remove(toBeRemoved);
-        return toBeRemoved.getStockName();
+        Stock removedStock = stocks.remove(stockCode.toUpperCase()); // should be uppercase already
+        if (removedStock == null) {
+            throw new FinancialPlannerException("Does not Exist in Watchlist");
+        }
+        return removedStock.getStockName();
     }
 
     public int size() {
@@ -181,11 +169,11 @@ public class WatchList {
         return stocks.get(index);
     }
 
-    public ArrayList<Stock> getStocks() {
+    public HashMap<String, Stock> getStocks() {
         return stocks;
     }
 
-    public void setStocks(ArrayList<Stock> stocks) {
+    public void setStocks(HashMap<String, Stock> stocks) {
         this.stocks = stocks;
     }
 }

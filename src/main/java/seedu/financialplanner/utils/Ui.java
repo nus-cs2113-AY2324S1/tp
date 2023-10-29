@@ -7,6 +7,7 @@ import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,7 +78,9 @@ public class Ui {
     }
 
     public void printStocksInfo(WatchList watchList) {
-        for (Stock stock: watchList.getStocks()) {
+        for (Map.Entry<String, Stock> set : watchList.getStocks().entrySet()) {
+            Stock stock = set.getValue();
+
             String symbol = StringUtils.rightPad(stock.getSymbol(), 10);
             String market = StringUtils.rightPad(stock.getExchange(), 10);
             String price = YELLOW + StringUtils.rightPad(stock.getPrice(), 10) + RESET;

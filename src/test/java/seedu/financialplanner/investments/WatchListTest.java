@@ -7,6 +7,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,9 +20,10 @@ class WatchListTest {
     void fetchFMPStockPrices() throws FinancialPlannerException {
         WatchList wl = WatchList.getInstance();
         wl.fetchFMPStockPrices();
-        ArrayList<Stock> stocks = wl.getStocks();
-        assertNotNull(stocks.get(0).getPrice());
-        assertNotNull(stocks.get(1).getPrice());
+        HashMap<String, Stock> stocks = wl.getStocks();
+        assertNotNull(stocks.get("AAPL").getPrice());
+        assertNotNull(stocks.get("GOOGL").getPrice());
+        // Might need to update this test
     }
 
     @Test
