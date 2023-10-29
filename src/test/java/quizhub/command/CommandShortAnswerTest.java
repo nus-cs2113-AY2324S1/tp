@@ -4,8 +4,7 @@ import org.junit.jupiter.api.io.TempDir;
 import quizhub.parser.Parser;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
-import quizhub.ui.MockUi;
-import quizhub.storage.Storage;
+
 import quizhub.storage.MockStorage;
 
 import org.junit.jupiter.api.AfterEach;
@@ -15,8 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -54,12 +51,12 @@ public class CommandShortAnswerTest {
         System.out.println(expectedOutput + "\n" +actualOutput);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
-    @Test
     /**
      * Valid command
      * Input: Provide valid input in the format "question/answer/category/difficulty."
      * Expected Output: Verify that the application accepts the input and stores it in the local text file correctly.
      */
+    @Test
     public void testValidCommand(){
         String input = "short question/answer/module/easy";
         String expectedOutput = "I have added the following question OwO:" +
@@ -70,11 +67,11 @@ public class CommandShortAnswerTest {
         testCliOutputCorrectness(expectedOutput);
     }
 
-    @Test
     /**
      * Incorrect delimiter (not using "/")
      * Input: short [question]_[answer]_[module]_[difficulty]
      */
+    @Test
     public void testInvalidDelimiter() {
         String input = "short question_answer_module_easy";
         String expectedOutput = CommandShortAnswer.INVALID_FORMAT_MSG.strip();
@@ -193,21 +190,48 @@ public class CommandShortAnswerTest {
         testCliOutputCorrectness(expectedOutput);
     }
 
-
     @Test
     /**
-     * Test storage is updated after adding a new short answer
-     */
-    public void testStorageAddShortAns(){
+    * Test storage is updated after deleting a short answer
+    */
+    public void testStorageDeleteShortAns() {
+        // Create a QuestionList and add some short answer questions
+        QuestionList questionList = new QuestionList();
 
+        // Format questions to add
+        String[] questionsToAdd = {
+                "short Question1 / Answer1 / Mod1 / NORMAL",
+                "short Question2 / Answer2 / Mod2 / NORMAL",
+                "short Question3 / Answer3 / Mod3 / NORMAL",
+                "short Question4 / Answer4 / Mod4 / NORMAL"
+        };
+
+        // Initialize MockStorage with the QuestionList
+        MockStorage mockStorage = new MockStorage("testStorage.txt");
+
+        // Add questions to MockStorage and QuestionList
+        for (String question : questionsToAdd) {
+            Command command = Parser.parseCommand(question);
+            command.executeCommand(ui, mockStorage, questionList);
+        }
+
+        // Delete a short answer question from the QuestionList
+        questionList.deleteQuestionByIndex(2);
+
+        // Update the storage with the modified QuestionList
+        mockStorage.updateData(questionList);
+
+        // Verify that the storage reflects the changes
+        String storageData = mockStorage.loadData();
+        String expectedStorageData = "S | undone | Question1 / Answer1 | Mod1 | NORMAL\n" +
+                "S | undone | Question3 / Answer3 | Mod3 | NORMAL\n" +
+                "S | undone | Question4 / Answer4 | Mod4 | NORMAL";
+
+        // Ensure that the deleted question is no longer present in the storage
+        Assertions.assertTrue(storageData.contains("Question1"));
+        Assertions.assertFalse(storageData.contains("Question2"));
+        Assertions.assertTrue(storageData.contains("Question3"));
+        Assertions.assertTrue(storageData.contains("Question4"));
+        Assertions.assertEquals(expectedStorageData, storageData);
     }
-
-    @Test
-    /**
-     * Test storage is updated after deleting a short answer
-     */
-    public void testStorageDeleteShortAns(){
-
-    }
-
 }
