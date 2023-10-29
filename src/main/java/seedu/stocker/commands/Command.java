@@ -3,7 +3,6 @@ package seedu.stocker.commands;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
-import seedu.stocker.exceptions.DrugNotFoundException;
 import seedu.stocker.exceptions.StockerException;
 
 import java.io.IOException;

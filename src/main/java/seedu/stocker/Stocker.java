@@ -45,7 +45,7 @@ public class Stocker {
     /**
      * Runs the program until termination.
      */
-    public void run() throws IOException, StockerException{
+    public void run() throws IOException, StockerException {
         start();
         runCommandLoopUntilExitCommand();
         exit();
