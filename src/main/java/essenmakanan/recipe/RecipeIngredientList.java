@@ -49,4 +49,12 @@ public class RecipeIngredientList {
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
+
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public Ingredient getIngredientByIndex(int index) {
+        return ingredients.get(index);
+    }
 }

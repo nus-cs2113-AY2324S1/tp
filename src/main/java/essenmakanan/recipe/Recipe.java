@@ -27,6 +27,10 @@ public class Recipe {
         return recipeSteps;
     }
 
+    public RecipeIngredientList getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
     public Step getRecipeStepByIndex(int index) {
         return recipeSteps.getStepByIndex(index);
     }
