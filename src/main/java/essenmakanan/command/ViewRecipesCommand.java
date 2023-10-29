@@ -1,6 +1,7 @@
 package essenmakanan.command;
 
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.ui.Ui;
 
 public class ViewRecipesCommand extends Command {
 
@@ -13,7 +14,7 @@ public class ViewRecipesCommand extends Command {
 
     @Override
     public void executeCommand() {
-        ui.printAllRecipes(recipes);
+        Ui.printAllRecipes(recipes);
     }
 
 }

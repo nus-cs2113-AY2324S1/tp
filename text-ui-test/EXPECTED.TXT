@@ -7,7 +7,9 @@ Here are the commands currently available:
 
 RECIPE
 	- View all recipes. [view r]
-	- Add recipe. [add r/RECIPE_TITLE]
+	- Add recipe. [add r/RECIPE_TITLE s/STEP1 s/STEP2]
+	- View a recipe. [view r/RECIPE_TITLE]
+	- Edit a recipe. [edit r/RECIPE_TITLE n/NEW_TITLE s/STEP_TO_EDIT,NEW_STEP]
 	- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]
 
 INGREDIENT
