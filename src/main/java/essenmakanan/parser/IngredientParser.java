@@ -30,13 +30,15 @@ public class IngredientParser {
 
         IngredientUnit ingredientUnit;
 
+        if (!isValidIngredient(inputDetail)) {
+            throw new EssenFormatException();
+        }
+
         inputDetail = inputDetail.replace("i/", "");
 
         String[] ingredientDetails = inputDetail.split(",");
 
-        if (ingredientDetails.length != 3) {
-            throw new EssenFormatException();
-        }
+        assert (ingredientDetails.length == 3) : "Ingredient details should have 3 parts";
 
         String ingredientName = ingredientDetails[0].strip();
 
@@ -48,6 +50,25 @@ public class IngredientParser {
         Ingredient newIngredient = new Ingredient(ingredientName, ingredientQuantity, ingredientUnit);
 
         return newIngredient;
+    }
+
+    public static boolean isValidIngredient(String inputDetail) {
+        inputDetail = inputDetail.replace("i/", "");
+
+        String[] ingredientDetails = inputDetail.split(",");
+
+        if (ingredientDetails.length != 3) {
+            return false;
+        }
+
+        String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
+        try {
+            mapIngredientUnit(ingredientUnitString);
+        } catch (EssenFormatException e) {
+            return false;
+        }
+
+        return true;
     }
 
     public static IngredientUnit mapIngredientUnit(String ingredientUnitString) throws EssenFormatException {

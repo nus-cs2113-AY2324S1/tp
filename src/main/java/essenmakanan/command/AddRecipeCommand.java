@@ -1,5 +1,6 @@
 package essenmakanan.command;
 
+import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
@@ -63,7 +64,6 @@ public class AddRecipeCommand extends Command {
 
 
         for (String recipeDetail : allToAdd) {
-
             // indicate the attributes of recipe
             String flag = recipeDetail.substring(0, 2);
             String detail = recipeDetail.substring(2);
@@ -87,6 +87,10 @@ public class AddRecipeCommand extends Command {
                 stepsCounter++;
                 break;
             case "i/":
+                if (!IngredientParser.isValidIngredient(detail)) {
+                    System.out.println("Ingredient is not valid! Please enter valid ingredient after \"i/\"");
+                    return;
+                }
                 ingredientsInString[ingredientsCounter] = detail;
                 ingredientsCounter++;
                 break;

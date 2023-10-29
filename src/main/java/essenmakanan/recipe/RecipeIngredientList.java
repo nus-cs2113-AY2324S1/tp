@@ -32,8 +32,12 @@ public class RecipeIngredientList {
 
     public RecipeIngredientList(String[] ingredients) {
         for (String ingredientString : ingredients) {
-            Ingredient ingredient = new Ingredient(ingredientString);
-            this.addIngredient(ingredient);
+            try {
+                Ingredient ingredient = IngredientParser.parseIngredient(ingredientString);
+                this.addIngredient(ingredient);
+            } catch (EssenFormatException e) {
+                e.handleException();
+            }
         }
     }
 

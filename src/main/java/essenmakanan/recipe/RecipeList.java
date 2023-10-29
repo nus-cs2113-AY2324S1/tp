@@ -86,7 +86,7 @@ public class RecipeList {
             assert steps.getStepByIndex(count - 1).equals(step)
                     : "Step is not matching with the current index";
 
-            System.out.println("\tStep " + count + ": " + step.getDescription());
+            System.out.println("\t" + count + ") " + step.getDescription());
             count++;
         }
     }
@@ -98,7 +98,7 @@ public class RecipeList {
             assert ingredients.getIngredientByIndex(count - 1).equals(ingredient)
                     : "Ingredient is not matching with the current index";
 
-            System.out.println("\t" + count + ". " + ingredient);
+            System.out.println("\t" + count + ") " + ingredient);
             count++;
         }
     }
