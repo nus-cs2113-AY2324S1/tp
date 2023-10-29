@@ -159,6 +159,26 @@ public class CommandEditTest {
         testCliOutputCorrectness(expectedOutput);
     }
     /**
+     * Test editing with invalid edit criteria
+     * */
+    @Test
+    void testEditInvalidCriteria(){
+        String expectedOutput = CommandEdit.INVALID_CRITERIA_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
+        String userInput = "edit 1 /random ";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
+    /**
+     * Test editing with multiple invalid edit criteria
+     * */
+    @Test
+    void testEditMultipleInvalidCriteria(){
+        String expectedOutput = CommandEdit.TOO_MANY_CRITERIA_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
+        String userInput = "edit 1 /random /wrong ";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
+    /**
      * Test editing with new description same as existing one
      * */
     @Test

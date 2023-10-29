@@ -13,7 +13,7 @@ public class CommandMarkDifficulty extends Command{
     public static final String MISSING_DIFFICULTY_MSG = "    Ono! You did not indicate difficulty " +
             "to be assigned the question :<";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as markdiff " +
-            "[qn number] [qn difficulty]!";
+            "[qn number] /[qn difficulty]!";
     public static final String TOO_MANY_DIFFICULTY_MSG = "    Ono! You tried to assign more than 1 difficulty level :<";
     private final int qnIndex;
     private final Question.QnDifficulty qnDifficulty;

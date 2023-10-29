@@ -13,6 +13,8 @@ public class CommandEdit extends Command {
     public static final String TOO_MANY_INDEX_MSG = "    Ono! You tried to edit more than 1 question :<";
     public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate if " +
             "you are editing question description or answer :<";
+    public static final String INVALID_CRITERIA_MSG = "    Ono! You tried to edit by a criteria other than " +
+            "description or answer :<";
     public static final String TOO_MANY_CRITERIA_MSG = "    Ono! You tried to edit using more than 1 question " +
             "component :<";
     public static final String MISSING_KEYWORD_MSG = "    Ono! You did not enter a new description / answer :<";

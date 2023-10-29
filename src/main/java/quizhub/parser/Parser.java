@@ -260,7 +260,9 @@ public class Parser {
         if(editCriteria.equals("")){
             throw new ArrayIndexOutOfBoundsException();
         } else if (inputSplitByCriteria.length != 2) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Too Many Criteria");
+        } else if (!editCriteria.equals("description") && !editCriteria.equals("answer")) {
+            throw new IllegalArgumentException("Invalid Criteria");
         } else {
             commandEditTokens[0] = editCriteria;
         }
@@ -298,8 +300,13 @@ public class Parser {
             return new CommandInvalid(CommandEdit.MISSING_CRITERIA_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
         } else if(editCriteriaException instanceof IllegalArgumentException) {
-            return new CommandInvalid(CommandEdit.TOO_MANY_CRITERIA_MSG + System.lineSeparator() +
-                    CommandEdit.INVALID_FORMAT_MSG);
+            if(editCriteriaException.getMessage().equals("Invalid Criteria")){
+                return new CommandInvalid(CommandEdit.INVALID_CRITERIA_MSG + System.lineSeparator() +
+                        CommandEdit.INVALID_FORMAT_MSG);
+            } else {
+                return new CommandInvalid(CommandEdit.TOO_MANY_CRITERIA_MSG + System.lineSeparator() +
+                        CommandEdit.INVALID_FORMAT_MSG);
+            }
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
