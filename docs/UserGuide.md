@@ -160,7 +160,7 @@ Balance: 3790.00
 
 ### Viewing Watchlist: `watchlist`
 
-View your current watchlist with stocks that you are interested in
+View your current watchlist with stocks that you are interested in with the exchanges shown as well
 
 Default watchlist: AAPL, GOOGL
 
@@ -211,7 +211,7 @@ Use watchlist command to view updated Watchlist
 
 ### Visualizing your cashflow: `vis`
 
-Using this command to visualize your income or expenses in a pie chart or bar char
+Using this command to visualize your income or expenses in a pie chart or bar chart
 
 Format: `vis /t TYPE /c TOOL`
 
