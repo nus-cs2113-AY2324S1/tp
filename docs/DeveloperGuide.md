@@ -285,7 +285,7 @@ Command will use java's system out to print out all required information with a 
 
 ---
 
-## 2. Save Command
+## 5. Save Command
 
 The save command was made as a means to backup user entered drug data into the hard drive of the computer to ensure 
 previously entered data is saved and accessable whenever the app is launched.
@@ -303,8 +303,20 @@ Upon booting up the system, a method from the inventory class goes through the c
 the inventory drug list.
 
 ---
+## 6. addVendor Command
 
+The command was made to add vendors to a list of vendors so as to have access to it when needed.
 
+### Design Considerations
+
+The storage must be size adjustable based on the number of objects, in this case vendors placed into it.
+
+### Implementation
+
+In order to attain the adjustable storage based on numebr of objects, an ArrayList was used as additional vendors can be
+appended to the ArrayList whenever a new entry is required.
+
+---
 
 ## Product scope
 
