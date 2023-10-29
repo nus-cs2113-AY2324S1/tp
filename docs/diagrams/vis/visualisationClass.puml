@@ -4,23 +4,23 @@
 skinparam classFontColor automatic
 
 
-class "{abstract}\nCommand"  #lime {
+class "{abstract}\nCommand"  #MintCream {
 +execute() {abstract}
 }
 
-class VisCommand #Cyan {
+class VisCommand #MistyRose {
 -String type
 -String chart
 +execute()
 }
 
-class RawCommand #DodgerBlue {
+class RawCommand #Cornsilk {
 -args: List<String>
 -extraArgs: Map<String, String>
 #commandName: String
 }
 
-class Categorizer #AquaMarine {
+class Categorizer #HoneyDew {
 +<u>sortType(cashflowList: CashflowList, type: String)
 +<u>sortExpenses(cashflowList: CashflowList)
 +<u>sortIncome(cashflowList: CashflowList)
