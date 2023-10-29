@@ -285,6 +285,26 @@ Command will use java's system out to print out all required information with a 
 
 ---
 
+## 2. Save Command
+
+The save command was made as a means to backup user entered drug data into the hard drive of the computer to ensure 
+previously entered data is saved and accessable whenever the app is launched.
+
+### Design Considerations
+The save command had to be implemented in a way to enable direct writing of files onto the hard drive and a function had 
+to be made to load said file back into the drug inventory upon starting the application.
+
+### Implementation
+
+There is a method to access the drugs within the inventory class. a separate method from the inventory class would then 
+write the contents of these drugs back to the txt file for saving.
+
+Upon booting up the system, a method from the inventory class goes through the contents of the txt file and copies it to
+the inventory drug list.
+
+---
+
+
 
 ## Product scope
 
