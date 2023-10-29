@@ -5,6 +5,18 @@
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
 * [Features](#features)
+  * [Add cashflow](#add-cashflow)
+    * [Add income](#add-income-add-income)
+    * [Add expense](#add-expense-add-expense)
+  * [Delete cashflow](#delete-cashflow-delete)
+    * [Delete income](#delete-income-delete-income)
+    * [Delete expense](#delete-expense-delete-expense)
+    * [Delete recurring cashflow](#delete-recurring-delete-recurring)
+  * [List](#list)
+    * [List all](#list-all-list)
+    * [List income](#list-income-list-income)
+    * [List expense](#list-expense-list-expense)
+    * [List recurring](#list-recurring-list-recurring)
   * [Budget](#budget)
     * [Setting budget](#setting-a-budget-budget-set)
     * [Updating budget](#updating-budget-budget-update)
@@ -34,10 +46,10 @@ you a one-stop interface to access a plethora of features to manage your finance
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Financial Planner` from [here](http://link.to/duke).
-1. Copy the file to the folder you want to use as the *home folder* for Neo Chatbot.
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ip.jar` command to run the application.
-1. Refer to the **Features** section below for details of each command.
+2. Down the latest version of `Financial Planner` from [here](http://link.to/duke).
+3. Copy the file to the folder you want to use as the *home folder* for Neo Chatbot.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ip.jar` command to run the application.
+5. Refer to the **Features** section below for details of each command.
 
 ## Features
 
@@ -50,7 +62,9 @@ you a one-stop interface to access a plethora of features to manage your finance
 
   e.g. `[/r DAYS]` can be used as `/r 30` or left empty.
 
-### Add income: `add income`
+### Add cashflow
+
+#### Add income: `add income`
 Adds an income source to the Financial Planner.
 
 Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
@@ -80,7 +94,7 @@ to the Financial Planner.
 Balance: 5000.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
-### Add expense: `add expense`
+#### Add expense: `add expense`
 Adds an expense to the Financial Planner
 
 Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
@@ -117,7 +131,7 @@ Deletes a cashflow from the Financial Planner.
 
 Format: `delete INDEX [/r]`
 
-- `INDEX` refers to the index number shown in the displayed list when [`list`](#list-all) command is used.
+- `INDEX` refers to the index number shown in the displayed list when [`list`](#list-all-list) command is used.
 - `/r` is used to delete all **future** cashflows **only**.
 
 Example of usage: `delete 1 /r`
@@ -144,12 +158,12 @@ Balance: -1130.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
 
-### Delete income: `delete income`
+#### Delete income: `delete income`
 Deletes an income from the Financial Planner.
 
 Format: `delete income INDEX [/r]`
 
-- `INDEX` refers to the index number shown in the displayed list when [`list income`](#list-income) command is used.
+- `INDEX` refers to the index number shown in the displayed list when [`list income`](#list-income-list-income) command is used.
 - `/r` is used to delete all **future** incomes **only**.
 
 Example of usage: `delete income 2 /r`
@@ -176,12 +190,12 @@ Balance: 5170.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
 
-### Delete expense: `delete expense`
+#### Delete expense: `delete expense`
 Deletes an expense from the Financial Planner.
 
 Format: `delete expense INDEX [/r]`
 
-- `INDEX` refers to the index number shown in the displayed list when [`list expense`](#list-expense) command is used.
+- `INDEX` refers to the index number shown in the displayed list when [`list expense`](#list-expense-list-expense) command is used.
 - `/r` is used to delete all **future** expenses **only**.
 
 Example of usage: `delete expense 2 /r`
@@ -208,12 +222,12 @@ Balance: -330.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
 
-### Delete recurring: `delete recurring`
+#### Delete recurring: `delete recurring`
 Deletes a recurring cashflow from the Financial Planner.
 
 Format: `delete recurring INDEX [/r]`
 
-- `INDEX` refers to the index number shown in the displayed list when [`list recurring`](#list-recurring) command is used.
+- `INDEX` refers to the index number shown in the displayed list when [`list recurring`](#list-recurring-list-recurring) command is used.
 - `/r` is used to delete all **future** recurring cashflows **only**.
 
 Example of usage: `delete recurring 2 /r`
@@ -241,7 +255,9 @@ Balance: -830.00
 - Note: Balance displayed above is just an example. Your actual balance may differ.
 
 ```
-### List all 
+### List
+
+#### List all: `list`
 // TODO
 
 Example output:
@@ -268,7 +284,7 @@ You have 4 matching cashflows:
    Recurring every: 30 days, starting from: Oct 30 2023
    Description: groceries
 ```
-### List income
+#### List income: `list income`
 //TODO
 
 Example output:
@@ -288,7 +304,7 @@ You have 3 matching cashflows:
    Type: Investments
    Amount: 1000.00
 ```
-### List expense
+#### List expense: `list expense`
 //TODO
 
 Example output:
@@ -309,7 +325,7 @@ You have 3 matching cashflows:
    Recurring every: 30 days, starting from: Oct 30 2023
    Description: groceries
 ```
-### List recurring: `list recurring`
+#### List recurring: `list recurring`
 Lists all recurring cashflows.
 
 Format: `list recurring`
