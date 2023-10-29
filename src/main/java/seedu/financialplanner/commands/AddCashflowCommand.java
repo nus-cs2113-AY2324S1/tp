@@ -112,7 +112,8 @@ public class AddCashflowCommand extends Command {
 
     @Override
     public void execute() {
-        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE);
+        assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
+                || category.equals(CashflowCategory.RECURRING);
         assert recur >= 0;
         assert amount >= 0;
         if (category.equals(CashflowCategory.EXPENSE)) {

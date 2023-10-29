@@ -6,6 +6,8 @@ import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Scanner;
@@ -47,7 +49,8 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void welcomeMessage() {
+    public void welcomeMessage(LocalDate date) {
+        System.out.println("Current date: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
         showMessage("Welcome to your Financial Planner. Type something to get started.");
     }
 
@@ -118,6 +121,12 @@ public class Ui {
         System.out.println(entry);
         System.out.println("from the Financial Planner.");
         System.out.println("Balance: " + entry.formatBalance());
+    }
+
+    public void printDeletedRecur(Cashflow entry) {
+        System.out.println("You have removed future recurrences of this cashflow.");
+        System.out.println("Updated cashflow:");
+        System.out.println(entry);
     }
 
     public void printBudgetBeforeUpdate() {

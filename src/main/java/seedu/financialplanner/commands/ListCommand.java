@@ -25,7 +25,7 @@ public class ListCommand extends Command {
             try {
                 category = CashflowCategory.valueOf(stringCategory.toUpperCase());
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Entry must be either income or expense");
+                throw new IllegalArgumentException("Entry must be either income, expense or recurring.");
             }
         }
     }
@@ -34,11 +34,14 @@ public class ListCommand extends Command {
         if (category == null) {
             return true;
         }
-        if (cashflow instanceof Income) {
-            return category.equals(CashflowCategory.INCOME);
+        if (cashflow instanceof Income && category.equals(CashflowCategory.INCOME)) {
+            return true;
         }
-        if (cashflow instanceof Expense) {
-            return category.equals(CashflowCategory.EXPENSE);
+        if (cashflow instanceof Expense && category.equals(CashflowCategory.EXPENSE)) {
+            return true;
+        }
+        if (cashflow.getRecur() > 0 && !cashflow.getHasRecurred()) {
+            return category.equals(CashflowCategory.RECURRING);
         }
         return false;
     }
@@ -57,11 +60,11 @@ public class ListCommand extends Command {
         }
 
         if (cashflowToBePrinted.isEmpty()) {
-            ui.showMessage("No matching cash flow");
+            ui.showMessage("No matching cashflow");
             return;
         }
 
-        ui.showMessage(String.format("You have %d matching cash flow:", cashflowToBePrinted.size()));
+        ui.showMessage(String.format("You have %d matching cashflow:", cashflowToBePrinted.size()));
         for (int i = 0; i < cashflowToBePrinted.size(); i += 1) {
             ui.showMessage((i + 1) + ": " + cashflowToBePrinted.get(i));
         }
