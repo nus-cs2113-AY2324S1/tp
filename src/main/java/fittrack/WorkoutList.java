@@ -12,11 +12,6 @@ public class WorkoutList {
         workoutList = new ArrayList<>();
     }
 
-    //TODO load contents into workoutlist
-    public WorkoutList(ArrayList<Workout> workoutList) {
-        this.workoutList = workoutList;
-    }
-
     public ArrayList<Workout> getWorkoutList() {
         return this.workoutList;
     }

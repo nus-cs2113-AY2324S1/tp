@@ -25,6 +25,10 @@ public class Meal {
         return this.date;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return String.format("[M] %s (%s, %s)", name, calories, date);

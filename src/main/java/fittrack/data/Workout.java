@@ -22,6 +22,10 @@ public class Workout {
         return this.date;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String formatToFile() {
         return String.format("%s | %s | %s", name, calories, date);
     }

@@ -34,6 +34,8 @@ it's your personal guide to achieving your health and fitness goals.
 * [Check weight range : `checkweightrange`](#check-weight-range-checkweightrange)
 * [Check total calories burnt on a specific date : `caloriesburnt`](#check-total-calories-burnt-on-specific-date-caloriesburnt)
 * [Check total calories burnt : `caloriesum`](#check-total-calories-burnt-caloriesum)
+* [Find a meal : `findmeal`](#find-a-meal-findmeal)
+* [Find a workout: `findworkout`](#find-a-workout-findworkout)
 * [Save to File: `save`](#save-to-file-save)
 
 
@@ -256,6 +258,41 @@ Expected output:
 Total Calories: 300kcals
 ```
 
+### Find a Meal: `findmeal`
+Allows user to search for a meal in their meal list
+
+Format: `findmeal`
+
+Example of usage:
+```
+findmeal pasta
+```
+
+Expected output:
+```
+These meals contain the keyword pasta:
+1. [M] pasta         (200.0kcal, 2023-10-28)
+2. [M] aglio alio pasta       (100.0kcal, 2023-10-29)
+3. [M] cabonara pasta       (100.0kcal, 2023-10-29)
+```
+
+### Find a Workout: `findworkout`
+Allows user to search for a workout in their workout list
+
+Format: `findworkout`
+
+Example of usage:
+```
+findworkout run
+```
+
+Expected output:
+```
+These workouts contain the keyword run:
+1. [W] fast run   (100.0kcal, 2023-10-29)
+2. [W] slow run   (20.0kcal, 2023-10-29)
+```
+
 ### Save to File: `save`
 Allows user to save profile data, meals and workouts to a text file
 
@@ -301,5 +338,7 @@ Your data has been saved!
 * Check your weight range `checkweightrange`
 * Check total calories burnt on a specific date `caloriesburnt`
 * Check total calories burnt `caloriesum`
+* Find a meal in meal list `findmeal`
+* Find a workout in workout list `findworkout`
 * Save to file `save`
 
