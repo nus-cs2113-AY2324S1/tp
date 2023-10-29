@@ -3,13 +3,20 @@ package seedu.cafectrl.storage;
 import seedu.cafectrl.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.dish.Ingredient;
 
 import java.util.ArrayList;
 
 public class Encoder {
 
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
-        return null;
+        // Convert pantry stock to a list of String
+        ArrayList<String> pantryStockInString = new ArrayList<>();
+        ArrayList<Ingredient> pantryStock = pantry.getPantryStock();
+        for (Ingredient ingredient : pantryStock) {
+            pantryStockInString.add(ingredient.toString());
+        }
+        return pantryStockInString;
     }
 
     public static ArrayList<String> encodeOrderList(OrderList orderList) {
