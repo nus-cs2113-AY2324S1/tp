@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.io.TempDir;
+import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
 import quizhub.storage.MockStorage;
@@ -77,16 +78,35 @@ public class CommandEditTest {
     }
 
     /**
-     * Test editing with non-integer index
+     * Test editing with non-number index
      * */
     @Test
-    void testEditNonIntIndex(){
+    void testEditNonNumIndex(){
         String expectedOutput = Ui.INVALID_INTEGER_INDEX_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
         String userInput = "edit abc /description NewDescription";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
-
+    /**
+     * Test editing with non-integer index
+     * */
+    @Test
+    void testEditNonIntIndex(){
+        String expectedOutput = Ui.INVALID_INTEGER_INDEX_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
+        String userInput = "edit 3.14 /description NewDescription";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
+    /**
+     * Test editing with multiple indexes
+     * */
+    @Test
+    void testEditMultipleIndex(){
+        String expectedOutput = CommandEdit.TOO_MANY_INDEX_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
+        String userInput = "edit 1 123 13 /description NewDescription";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
     /**
      * Test editing with blank description and answer
      * */
@@ -118,15 +138,55 @@ public class CommandEditTest {
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
-
+    /**
+     * Test editing with multiple edit criteria
+     * */
+    @Test
+    void testEditMultipleCompleteCriteria(){
+        String expectedOutput = CommandEdit.TOO_MANY_CRITERIA_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
+        String userInput = "edit 1 /description description /answer answer";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
+    /**
+     * Test editing with multiple blank edit criteria
+     * */
+    @Test
+    void testEditMultipleBlankCriteria(){
+        String expectedOutput = CommandEdit.TOO_MANY_CRITERIA_MSG.strip() + CommandEdit.INVALID_FORMAT_MSG;
+        String userInput = "edit 1 /description /answer ";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
+    /**
+     * Test editing with new description same as existing one
+     * */
+    @Test
+    void testEditRepeatedDescription(){
+        String expectedOutput = "Description is already set as Question2!" + Question.QN_UNCHANGED_MSG
+                + "        [S][] Question2 / Answer2 | Mod2 | NORMAL";
+        String userInput = "edit 2 /description Question2";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
+    /**
+     * Test editing with new answer same as existing one
+     * */
+    @Test
+    void testEditRepeatedAnswer(){
+        String expectedOutput = "Answer is already set as Answer3!" + Question.QN_UNCHANGED_MSG
+                + "        [S][X] Question3 / Answer3 | Mod3 | NORMAL";
+        String userInput = "edit 3 /answer Answer3";
+        Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
+    }
     /**
      * Test editing with filled description and answer
      * */
     @Test
     void testEditValidDescription(){
         String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][X] NewDescription / Answer3 | Mod3 | NORMAL" +
-                "    Now you have 4 questions in the list! UWU";
+                "        [S][X] NewDescription / Answer3 | Mod3 | NORMAL";
         String userInput = "edit 3 /description NewDescription";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
@@ -138,8 +198,7 @@ public class CommandEditTest {
     @Test
     void testEditValidAnswer(){
         String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][] Question4 / NewAnswer | Mod4 | NORMAL" +
-                "    Now you have 4 questions in the list! UWU";
+                "        [S][] Question4 / NewAnswer | Mod4 | NORMAL";
         String userInput = "edit 4 /answer NewAnswer";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);

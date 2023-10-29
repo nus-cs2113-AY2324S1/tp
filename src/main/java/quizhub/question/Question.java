@@ -141,6 +141,7 @@ public class Question {
                     QN_UNCHANGED_MSG);
         } else if(newDescription != null && !newDescription.equals("")){
             this.description = newDescription;
+            System.out.println("    Roger that! I have edited the following question >w< !");
         }
     }
     /**

@@ -37,7 +37,7 @@ public class Ui {
             System.lineSeparator() +
             "    10. shuffle - shuffle quiz questions to a random order," +
             System.lineSeparator() +
-            "    11. markdiff [question number] [question difficulty] - sets the difficulty of question " +
+            "    11. markdiff [question number] /[question difficulty] - sets the difficulty of question " +
             "with the specified number," +
             System.lineSeparator() +
             "    12. bye - exits the program";

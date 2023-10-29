@@ -101,6 +101,28 @@ public class Parser {
         }
     }
     /**
+     * Extracts the question index from raw user input for commands with arguments.
+     *
+     * @param userInput Raw command entered by the user
+     */
+    private static int extractQnIndex(String userInput, String commandType) throws IllegalArgumentException,
+            ArrayIndexOutOfBoundsException {
+        String editDetails = userInput.split(commandType)[1];
+        String qnIndexString  = editDetails.split("/")[0].strip();
+        if(qnIndexString.equals("")){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if(qnIndexString.split(" ").length != 1) {
+            throw new IllegalArgumentException();
+        }
+        int qnIndex  = Integer.parseInt(qnIndexString);
+        if(qnIndex <= 0){
+            throw new NumberFormatException();
+        } else {
+            return qnIndex;
+        }
+    }
+    /**
      * Attempt to parse user input into a Short Answer Command by extracting question description, answer,
      * module the question falls under, and level of difficulty from the user input.
      *
@@ -202,7 +224,7 @@ public class Parser {
         String[] commandEditTokens = new String[3];
         int qnIndex;
         try {
-            qnIndex = extractEditQnIndex(userInput);
+            qnIndex = extractQnIndex(userInput, "edit");
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnIndex) {
             return handleEditIndexExceptions(incorrectQnIndex);
         }
@@ -267,27 +289,6 @@ public class Parser {
         }
     }
     /**
-     * Extracts the question index from raw user input for edit commands.
-     *
-     * @param userInput Raw command entered by the user
-     */
-    private static int extractEditQnIndex(String userInput) throws IllegalArgumentException {
-        String editDetails = userInput.split("edit")[1];
-        String qnIndexString  = editDetails.split("/")[0].strip();
-        if(qnIndexString.equals("")){
-            throw new ArrayIndexOutOfBoundsException();
-        }
-        if(qnIndexString.split(" ").length != 1) {
-            throw new IllegalArgumentException();
-        }
-        int qnIndex  = Integer.parseInt(qnIndexString);
-        if(qnIndex <= 0){
-            throw new NumberFormatException();
-        } else {
-            return qnIndex;
-        }
-    }
-    /**
      * Handles exceptions raised by incorrect edit criteria for edit commands.
      *
      * @param editCriteriaException Exception raised by the program
@@ -303,25 +304,33 @@ public class Parser {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
-
-    private static Command handleEditIndexExceptions(Exception editCriteriaException){
-        if(editCriteriaException instanceof NumberFormatException) {
+    /**
+     * Handles exceptions raised by incorrect question index for edit commands.
+     *
+     * @param editIndexException Exception raised by the program
+     */
+    private static Command handleEditIndexExceptions(Exception editIndexException){
+        if(editIndexException instanceof NumberFormatException) {
             return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
-        } else if(editCriteriaException instanceof ArrayIndexOutOfBoundsException) {
+        } else if(editIndexException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandEdit.MISSING_INDEX_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
-        } else if(editCriteriaException instanceof IllegalArgumentException) {
+        } else if(editIndexException instanceof IllegalArgumentException) {
             return new CommandInvalid(CommandEdit.TOO_MANY_INDEX_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
-
-    private static Command handleEditNewValuesExceptions(Exception editCriteriaException){
-        if(editCriteriaException instanceof IllegalArgumentException ||
-                editCriteriaException instanceof ArrayIndexOutOfBoundsException) {
+    /**
+     * Handles exceptions raised by incorrect edit values for edit commands.
+     *
+     * @param editValuesException Exception raised by the program
+     */
+    private static Command handleEditNewValuesExceptions(Exception editValuesException){
+        if(editValuesException instanceof IllegalArgumentException ||
+                editValuesException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
         } else {
@@ -393,35 +402,70 @@ public class Parser {
      * @return Mark Difficulty command or an Invalid Command
      */
     private static Command parseMarkDiffCommand(String userInput) {
-        String[] commandDetails = userInput.split(" ");
         int qnIndex;
         Question.QnDifficulty qnDifficulty;
-        String qnIndexString;
-        String qnDifficultyString;
         try {
-            qnIndexString  = commandDetails[1].strip();
-        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
+            qnIndex = extractQnIndex(userInput, "markdiff");
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnIndex) {
+            return handleMarkDiffIndexExceptions(incorrectQnIndex);
+        }
+        try {
+            qnDifficulty = extractNewDifficulty(userInput);
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnDifficulty) {
+            return handleQnDifficultyExceptions(incorrectQnDifficulty);
+        }
+        return new CommandMarkDifficulty(qnIndex, qnDifficulty);
+    }
+    /**
+     * Extracts the question difficulty to be assigned from raw user input for markdiff commands.
+     *
+     * @param userInput Raw command entered by the user
+     */
+    private static Question.QnDifficulty extractNewDifficulty(String userInput)
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException{
+        String[] inputSplitByQnDifficulty = userInput.split("/");
+        String qnDifficultyString = inputSplitByQnDifficulty[1].strip();
+        if(qnDifficultyString.equals("")){
+            throw new ArrayIndexOutOfBoundsException();
+        } else if (qnDifficultyString.split(" ").length != 1 ||inputSplitByQnDifficulty.length != 2) {
+            throw new IllegalArgumentException();
+        } else {
+            return extractQuestionDifficulty(qnDifficultyString);
+        }
+    }
+    /**
+     * Handles exceptions raised by incorrect question difficulty for markdiff commands.
+     *
+     * @param qnDifficultyException Exception raised by the program
+     */
+    private static Command handleQnDifficultyExceptions(Exception qnDifficultyException){
+        if(qnDifficultyException instanceof ArrayIndexOutOfBoundsException) {
+            return new CommandInvalid(CommandMarkDifficulty.MISSING_DIFFICULTY_MSG + System.lineSeparator() +
+                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
+        } else if(qnDifficultyException instanceof IllegalArgumentException) {
+            return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_DIFFICULTY_MSG + System.lineSeparator() +
+                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
+        } else {
+            return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
+        }
+    }
+    /**
+     * Handles exceptions raised by incorrect question index for markdiff commands.
+     *
+     * @param markDiffIndexException Exception raised by the program
+     */
+    private static Command handleMarkDiffIndexExceptions(Exception markDiffIndexException){
+        if(markDiffIndexException instanceof NumberFormatException) {
+            return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
+                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
+        } else if(markDiffIndexException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandMarkDifficulty.MISSING_INDEX_MSG + System.lineSeparator() +
                     CommandMarkDifficulty.INVALID_FORMAT_MSG);
-        }
-        try {
-            qnIndex = Integer.parseInt(qnIndexString);
-            if(qnIndex < 0){
-                return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
-            }
-        }  catch (NumberFormatException incompleteCommand) {
-            return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
-        }
-        try {
-            qnDifficultyString = commandDetails[2].strip();
-        } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
-            return new CommandInvalid(CommandMarkDifficulty.MISSING_DIFFICULTY_MSG);
-        }
-        if(commandDetails.length != 3){
-            return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_ARGUMENTS_MSG + System.lineSeparator() +
+        } else if(markDiffIndexException instanceof IllegalArgumentException) {
+            return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_INDEX_MSG + System.lineSeparator() +
                     CommandMarkDifficulty.INVALID_FORMAT_MSG);
+        } else {
+            return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
-        qnDifficulty = Parser.extractQuestionDifficulty(qnDifficultyString);
-        return new CommandMarkDifficulty(qnIndex, qnDifficulty);
     }
 }
