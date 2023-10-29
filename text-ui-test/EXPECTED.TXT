@@ -73,17 +73,14 @@ Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
 Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
 You should type <DATE> in format of `yyyy-MM-dd`.
 
-`viewmeal` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
+I've added the following meal:
+[M] cabonara pasta (180.0kcal, 2023-10-29)
 
 `viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
-`deletemeal1` is an invalid command.
+`viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
-
-I've deleted the following meal:
-[M] pasta (200.0kcal, 2023-10-22)
 
 `addworkout run 400 d/2023-10-22` is an invalid command.
 `addworkout` adds your daily workout data to the list.
@@ -92,17 +89,37 @@ Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
 You should type <DATE> in format of `yyyy-MM-dd`.
 
 I've added the following workout:
-[W] running (400.0kcal, 2023-10-22)
+[W] run (100.0kcal, 2023-10-22)
+
+I've added the following workout:
+[W] long run (200.0kcal, 2023-10-29)
 
 These are the workouts you have done:
-1.[W] running (400.0kcal, 2023-10-22)
+1.[W] run (100.0kcal, 2023-10-22)
+2.[W] long run (200.0kcal, 2023-10-29)
 
+
+These meals contain the keyword pasta:
+1. [M] pasta (200.0kcal, 2023-10-22)
+2. [M] cabonara pasta (180.0kcal, 2023-10-29)
+
+
+These workouts contain the keyword run:
+1. [W] run (100.0kcal, 2023-10-22)
+2. [W] long run (200.0kcal, 2023-10-29)
+
+
+`deletemeal1` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+I've deleted the following meal:
+[M] pasta (200.0kcal, 2023-10-22)
 
 `deleteworkout1` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 I've deleted the following workout:
-[W] running (400.0kcal, 2023-10-22)
+[W] run (100.0kcal, 2023-10-22)
 
 Recommended Weight: 66.01599999999999 kg
 
@@ -110,7 +127,7 @@ Recommended Weight: 66.01599999999999 kg
 
 `help` shows help message of the command.
 Existing commands:
-help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, addworkout, deleteworkout, viewworkouts, bmi, save, checkweightrange
+help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, addworkout, deleteworkout, viewworkouts, bmi, save, checkweightrange, findmeal, findworkout
 Type `help` or `help <COMMAND>` to view help.
 
 `editprofile` allows you to edit your profile.
@@ -154,6 +171,14 @@ You should type <DATE> in format of `yyyy-MM-dd`.
 
 `caloriesum` calculates your total calories burned.
 Type `caloriesum` to calculate your total calories burned.
+
+`findmeal` finds the meal you are looking for in your meal list.
+Type `findmeal <keyword>` to find a meal.
+
+
+`findworkout` finds the workout you are looking for in your workout list.
+Type `findworkout <keyword>` to find a workout.
+
 
 `save` saves your profile, meals and workout data.
 Type `save` to save your profile, meals and workout data.

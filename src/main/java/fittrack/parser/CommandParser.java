@@ -19,6 +19,8 @@ import fittrack.command.SaveCommand;
 import fittrack.command.ViewMealsCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewWorkoutsCommand;
+import fittrack.command.FindMealCommand;
+import fittrack.command.FindWorkoutCommand;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
 import fittrack.data.Calories;
@@ -42,7 +44,8 @@ public class CommandParser {
     public static final String ALL_COMMAND_WORDS = "help, exit, " +
             "editprofile, viewprofile, " +
             "addmeal, deletemeal, viewmeals, " +
-            "addworkout, deleteworkout, viewworkouts, bmi, save, checkweightrange";
+            "addworkout, deleteworkout, viewworkouts, bmi, save, " +
+            "checkweightrange, findmeal, findworkout";
   
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<word>\\S+)(?<args>.*)"
@@ -62,6 +65,10 @@ public class CommandParser {
   
     private static final Pattern DATE_PATTERN = Pattern.compile(
             "(?<date>\\S+)?"
+    );
+
+    private static final Pattern FIND_PATTERN = Pattern.compile(
+            "(?<keyword>\\S+)?"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -119,6 +126,10 @@ public class CommandParser {
             return new CheckWeightRangeCommand(commandLine);
         case CaloriesBurntCommand.COMMAND_WORD:
             return new CaloriesBurntCommand(commandLine);
+        case FindMealCommand.COMMAND_WORD:
+            return new FindMealCommand(commandLine);
+        case FindWorkoutCommand.COMMAND_WORD:
+            return new FindWorkoutCommand(commandLine);
         default:
             return new InvalidCommand(commandLine);
 
@@ -253,6 +264,15 @@ public class CommandParser {
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
         }
+    }
+
+    public String parseFind(String keyword) throws PatternMatchFailException {
+        final Matcher matcher = FIND_PATTERN.matcher(keyword);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        return matcher.group("keyword");
     }
 
     public String getFirstWord(String str) {

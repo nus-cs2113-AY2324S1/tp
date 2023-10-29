@@ -13,12 +13,6 @@ public class MealList {
         mealList = new ArrayList<>();
     }
 
-    // For loading of file contents into meal list
-    //TODO Load file content into meal list
-    public MealList(ArrayList<Meal> mealList) {
-        this.mealList = mealList;
-    }
-
     public ArrayList<Meal> getMealList() {
         return this.mealList;
     }
