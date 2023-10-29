@@ -1,8 +1,10 @@
 package quizhub.command;
 
 import org.junit.jupiter.api.io.TempDir;
+import quizhub.parser.Parser;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
+import quizhub.ui.MockUi;
 import quizhub.storage.Storage;
 
 import org.junit.jupiter.api.AfterEach;
@@ -21,7 +23,7 @@ import java.io.PrintStream;
 public class CommandShortAnswerTest {
 
     private QuestionList questionList;
-    private Ui mockUi;
+    private Ui ui;
     private MockStorage mockStorage;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -32,7 +34,7 @@ public class CommandShortAnswerTest {
         Path tempFile = tempDir.resolve("testStorage.txt");
         mockStorage = new MockStorage(tempFile.toString());
         questionList = new QuestionList();
-        mockUi = new Ui(mockStorage, questionList);
+        ui = new Ui(mockStorage, questionList);
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
@@ -52,12 +54,18 @@ public class CommandShortAnswerTest {
     }
     @Test
     /**
-     * Test valid command
+     * Valid command
      * Input: Provide valid input in the format "question/answer/category/difficulty."
      * Expected Output: Verify that the application accepts the input and stores it in the local text file correctly.
      */
     public void testValidCommand(){
-
+        String input = "short question/answer/module/easy";
+        String expectedOutput = "I have added the following question OwO:      " +
+                "[S] question / answer | module | EASY    " +
+                "Now you have 1 questions in the list! UWU";
+        Command command = Parser.parseCommand(input);
+        command.executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput);
     }
 
     @Test
