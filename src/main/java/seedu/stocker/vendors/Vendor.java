@@ -9,7 +9,7 @@ public class Vendor {
     }
 
     /**
-     * Gets the name of the dendor.
+     * Gets the name of the vendor.
      *
      * @return The name of the vendor.
      */
