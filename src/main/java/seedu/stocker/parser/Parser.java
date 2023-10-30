@@ -22,6 +22,7 @@ import seedu.stocker.commands.AddToCartCommand;
 import seedu.stocker.commands.CheckOutCommand;
 import seedu.stocker.commands.ListVendorCommand;
 import seedu.stocker.commands.SetThresholdCommand;
+import seedu.stocker.commands.ListThresholdCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -93,6 +94,9 @@ public class Parser {
 
         case SetThresholdCommand.COMMAND_WORD:
             return prepareSetThresholdCommand(arguments);
+
+        case ListThresholdCommand.COMMAND_WORD:
+            return new ListThresholdCommand();
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
