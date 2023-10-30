@@ -7,6 +7,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Handles loading and saving data for menu, orderList, pantryStock
@@ -24,9 +25,8 @@ public class Storage {
     /**
      * Read and decode menu data from text file and pass it to the menu
      * @return menu with data from the file
-     * @throws FileNotFoundException if the file is not found in the specified file path
      */
-    public Menu loadMenu() throws FileNotFoundException {
+    public Menu loadMenu() {
         // ArrayList<String> encodedMenu = this.fileManager.readTextFile(FilePath.MENU_FILE_PATH);
         // return Decoder.decodeMenuData(encodedMenu);
         return new Menu();
@@ -35,12 +35,11 @@ public class Storage {
     /**
      * Read and decode pantryStock data from text file and pass it to the menu
      * @return pantryStock with data from the file
-     * @throws FileNotFoundException if the file is not found in the specified file path
      */
-    public Pantry loadPantryStock() throws FileNotFoundException {
-        // ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
-        // return Decoder.decodePantryStockData(encodedPantryStock);
-        return new Pantry(ui);
+    public Pantry loadPantryStock() {
+        ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
+        return Decoder.decodePantryStockData(encodedPantryStock);
+        //return new Pantry(ui);
     }
 
     /**
@@ -62,8 +61,9 @@ public class Storage {
      * @throws IOException if the file is not found in the specified file path
      */
     public void saveAll(Menu menu, OrderList orderList, Pantry pantry) throws IOException {
-        saveMenu(menu);
-        saveOrderList(orderList);
+        // to be uncommented when the following features are implemented
+        //saveMenu(menu);
+        //saveOrderList(orderList);
         savePantryStock(pantry);
     }
 
