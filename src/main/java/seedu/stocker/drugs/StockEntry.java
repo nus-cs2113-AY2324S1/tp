@@ -10,6 +10,7 @@ public class StockEntry {
     public StockEntry(Drug drug, long quantity) {
         this.drug = drug;
         this.quantity = quantity;
+        this.thresholdQuantity = 100;
     }
 
     public Drug getDrug() {
