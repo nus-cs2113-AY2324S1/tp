@@ -77,7 +77,8 @@ public abstract class Cashflow {
 
         if (recur != 0) {
             string += System.lineSeparator() + "   Recurring every: " + recur + " days";
-            string += ", starting from: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            string += ", date added: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            string += ", recurring on: " + date.plusDays(recur).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         if (description != null) {
             string += System.lineSeparator() + "   Description: " + description;
