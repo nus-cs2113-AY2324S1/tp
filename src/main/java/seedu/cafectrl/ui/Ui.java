@@ -3,7 +3,6 @@ package seedu.cafectrl.ui;
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.EditPriceCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
-import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
@@ -139,7 +138,6 @@ public class Ui {
                 AddDishCommand.MESSAGE_USAGE,
                 ListIngredientCommand.MESSAGE_USAGE,
                 Messages.LIST_MENU_GUIDE,
-                Messages.LIST_INGREDIENTS_GUIDE,
                 Messages.DELETE_GUIDE,
                 EditPriceCommand.MESSAGE_USAGE);
     }
