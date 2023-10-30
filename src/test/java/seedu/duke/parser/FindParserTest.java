@@ -10,18 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * JUnit test class for FindParser.
  * This class tests if the find command is parsed correctly.
  * It also tests if the correct exceptions are thrown when the command is invalid.
- * The following are the parameters that can be parsed:
- *
- * /t <type> /cat <category> /de <description> /date <date>
- *  - type is mandatory
- *  - category, description and date are optional
- *  - type can be either "expense" or "income"
- *  - category food, transport, utilities
- *  - description can be any string
- *  - date must be in the format "dd/MM/yyyy"
- *  - date must be a valid date
- *  - date cannot be in the future
- *
  */
 public class FindParserTest {
     /**
