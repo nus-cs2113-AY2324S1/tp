@@ -18,12 +18,19 @@ public class Order {
         this.dishQty = dishQty;
         this.orderedDish = orderedDish;
         this.usedIngredientList = getIngredientList();
-        this.totalOrderCost = getDishPrice();
+        this.totalOrderCost = totalOrderCost();
+    }
+
+    public Order(Dish orderedDish, int dishQty, float orderCost) {
+        this.dishQty = dishQty;
+        this.orderedDish = orderedDish;
+        this.usedIngredientList = getIngredientList();
+        this.totalOrderCost = orderCost;
     }
 
     @Override
     public String toString() {
-        return "Order: " + orderedDish.getName() + " Quantity: "+ dishQty
+        return "Order: " + getDishName() + " Quantity: "+ dishQty
                 + "\nIngredientList: " + usedIngredientList
                 + "\nTotal Order Cost: $" + dollarValue.format(totalOrderCost);
     }
@@ -34,10 +41,9 @@ public class Order {
      *
      * @return Total calculated cost
      */
-    public float getDishPrice() {
+    public float totalOrderCost() {
         float dishCost = orderedDish.getPrice();
-        float totalOrderCost = dishCost * dishQty;
-        return totalOrderCost;
+        return dishCost * dishQty;
     }
 
     /**
@@ -64,5 +70,9 @@ public class Order {
     public boolean isComplete() {
         return isComplete;
     }
+
+    public String getDishName(){return orderedDish.getName();}
+
+    public int getQuantity(){return dishQty;}
 
 }
