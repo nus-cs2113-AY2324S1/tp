@@ -2,11 +2,12 @@ Directory doesn't exist. Creating directory...
 Watchlist file not found... Creating
 Initializing New watchlist.. adding AAPL and GOOGL for your reference
 File not found. Creating new file...
+Current date: Oct 29 2023
 Welcome to your Financial Planner. Type something to get started.
 You have added an Income
    Type: Salary
    Amount: 5000.00
-   Recurring every: 30 days
+   Recurring every: 30 days, starting from: Oct 29 2023
    Description: part time job
 to the Financial Planner.
 Balance: 5000.00
@@ -18,7 +19,7 @@ Balance: 5123.12
 You have added an Expense
    Type: Entertainment
    Amount: 100.00
-   Recurring every: 30 days
+   Recurring every: 30 days, starting from: Oct 29 2023
    Description: netflix
 to the Financial Planner.
 Balance: 5023.12
@@ -35,7 +36,7 @@ Balance: 4776.79
 You have removed an Income
    Type: Salary
    Amount: 5000.00
-   Recurring every: 30 days
+   Recurring every: 30 days, starting from: Oct 29 2023
    Description: part time job
 from the Financial Planner.
 Balance: -223.21
@@ -47,7 +48,7 @@ Balance: -100.00
 You have removed an Expense
    Type: Entertainment
    Amount: 100.00
-   Recurring every: 30 days
+   Recurring every: 30 days, starting from: Oct 29 2023
    Description: netflix
 from the Financial Planner.
 Balance: 0.00
@@ -60,7 +61,7 @@ Use Watchlist to view it!
 You have added an Income
    Type: Salary
    Amount: 5000.00
-   Recurring every: 30 days
+   Recurring every: 30 days, starting from: Oct 29 2023
 to the Financial Planner.
 Balance: 5000.00
 A monthly budget of 3000.00 has been set.

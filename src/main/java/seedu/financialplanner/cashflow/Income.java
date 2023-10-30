@@ -3,12 +3,29 @@ package seedu.financialplanner.cashflow;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 
+import java.time.LocalDate;
+
 public class Income extends Cashflow{
     protected IncomeType type;
 
     public Income(double amount, IncomeType type, int recur, String description) {
         super(amount, recur, description);
         this.type = type;
+        addIncomeValue();
+    }
+
+    public Income(double amount, IncomeType type, int recur, String description, LocalDate date, boolean hasRecurred) {
+        super(amount, recur, description, date, hasRecurred);
+        this.type = type;
+        addIncomeValue();
+    }
+
+    public Income(Income income) {
+        this.amount = income.getAmount();
+        this.recur = income.getRecur();
+        this.description = income.getDescription();
+        this.date = income.getDate();
+        this.type = income.getIncomeType();
         addIncomeValue();
     }
 
