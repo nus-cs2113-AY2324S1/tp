@@ -1,4 +1,4 @@
-Benedict
+Daniel
 updateBudget 10
 addIncome job /amt 3000 /date 01 Jan 2020
 addIncome side hustle /amt 500 /date 19/10/2023
