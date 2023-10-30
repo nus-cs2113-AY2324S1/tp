@@ -5,9 +5,22 @@ autonumber
 
 Main -> EditPriceCommand: execute()
 activate EditPriceCommand
-EditPriceCommand -> Dish: setPrice(price: float)
+EditPriceCommand -> Menu:getDishFromId(menuID: int)
+activate Menu
+Menu --> EditPriceCommand: (dish: Dish)
+deactivate Menu
+EditPriceCommand -> Dish: setPrice(newPrice: float)
 activate Dish
-EditPriceCommand -> Ui: showEditPriceMessages()
+EditPriceCommand -> Ui: showEditPriceMessages(dishString: String)
+deactivate Dish
+activate Ui
+activate Messages
+activate Ui
+Ui -> Messages: + PRICE_MODIFIED_MESSAGE: String
+Messages --> Ui: "Price modified for the following dish: "
+deactivate Messages
+Ui -> Ui: showToUser("Price modified for the following dish: ", dishString: String)
+deactivate Ui
 deactivate EditPriceCommand
 deactivate Dish
 @enduml
