@@ -25,6 +25,29 @@ public class IngredientParser {
         return index;
     }
 
+    public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
+        return ingredient1.getUnit().equals(ingredient2.getUnit());
+    }
+
+    public static String getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
+        final String zeroQuantity = "0";
+        String quantityNeededString = ingredientNeeded.getQuantity();
+        String quantityAvailableString = ingredientAvailable.getQuantity();
+
+        if (quantityNeededString.matches("[a-zA-Z ]+") || quantityAvailableString.matches("[a-zA-Z ]+")) {
+            return zeroQuantity; //there is no way of comparison if quantity is a String
+        }
+        
+        Double quantityNeeded = Double.parseDouble(ingredientNeeded.getQuantity());
+        Double quantityAvailable = Double.parseDouble(ingredientAvailable.getQuantity());
+
+        if (quantityNeeded < quantityAvailable) {
+            return Double.toString(quantityAvailable - quantityNeeded);
+        }
+
+        return zeroQuantity;
+    }
+
     public static Ingredient parseIngredient(String inputDetail)
             throws EssenFormatException {
 

@@ -75,12 +75,32 @@ public class Ui {
         drawDivider();
     }
 
-    public static void printStartRecipeMessage(IngredientList ingredients) {
-        if (ingredients.isEmpty()) {
+    public static void printStartRecipeMessage(IngredientList missingIngredients,
+                                               IngredientList insufficientIngredients,
+                                               IngredientList diffUnitIngredients,
+                                               String recipeTitle) {
+        System.out.println("Starting Recipe: " + recipeTitle + "\n");
+        boolean allEmpty = missingIngredients.isEmpty() && insufficientIngredients.isEmpty() && diffUnitIngredients.isEmpty();
+        if (allEmpty) {
             System.out.println("You have all the ingredients you need! You are ready to go!");
         } else {
-            System.out.println("Here's a list of ingredients you are missing for this recipe!");
-            ingredients.listIngredients();
+            if (!missingIngredients.isEmpty()) {
+                System.out.println("You are missing these ingredient(s): ");
+                missingIngredients.listIngredients();
+                drawDivider();
+            }
+            if (!insufficientIngredients.isEmpty()) {
+                System.out.println("You need to get more of these ingredient(s)\n" +
+                        "(the stated quantity is the additional amount you need)");
+                insufficientIngredients.listIngredients();
+                drawDivider();
+            }
+            if (!diffUnitIngredients.isEmpty()) {
+                System.out.println("You may or may not need these ingredients!!!\n" +
+                        "They are of different units so we couldn't tell :(");
+                diffUnitIngredients.listIngredients();
+                drawDivider();
+            }
         }
         drawDivider();
     }
