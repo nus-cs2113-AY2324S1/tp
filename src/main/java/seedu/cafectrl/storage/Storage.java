@@ -6,10 +6,10 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//@@author ziyi105
 /**
  * Handles loading and saving data for menu, orderList, pantryStock
  */
@@ -33,6 +33,7 @@ public class Storage {
         return new Menu();
     }
 
+    //@@author ziyi105
     /**
      * Read and decode pantryStock data from text file and pass it to the menu
      * @return pantryStock with data from the file
@@ -46,14 +47,14 @@ public class Storage {
     /**
      * Read and decode order list data from text file and pass it to the menu
      * @return orderList with data from the file
-     * @throws FileNotFoundException if the file is not found in the specified file path
      */
-    public OrderList loadOrderList() throws FileNotFoundException {
+    public Sales loadSales() {
         // ArrayList<String> encodedOrderList = this.fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
         // return Decoder.decodeOrderListData(encodedOrderList);
-        return new OrderList();
+        return new Sales();
     }
 
+    //@@author ziyi105
     /**
      * Encode and write the data from menu, orderList and pantry to the respective text files
      * @param menu menu from current session
@@ -68,6 +69,7 @@ public class Storage {
         savePantryStock(pantry);
     }
 
+    //@@author ziyi105
     /**
      * Encode and write the data from PantryStock to the text file
      * @param pantry pantry from current session
@@ -79,11 +81,11 @@ public class Storage {
 
     /**
      * Encode and write the data from orderList to the text file
-     * @param orderList orderList from current session
+     * @param sales
      * @throws IOException if the file is not found in the specified file path
      */
-    private void saveSales(OrderList orderList) throws IOException {
-        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeOrderList(orderList));
+    private void saveSales(Sales sales) throws IOException {
+        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
 
     /**

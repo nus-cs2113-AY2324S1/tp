@@ -1,13 +1,15 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Ingredient;
 
 import java.util.ArrayList;
 
 public class Encoder {
+
+    //@@author ziyi105
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
         // Convert pantry stock to a list of String
         ArrayList<String> pantryStockInString = new ArrayList<>();
@@ -20,7 +22,7 @@ public class Encoder {
         return pantryStockInString;
     }
 
-    public static ArrayList<String> encodeOrderList(OrderList orderList) {
+    public static ArrayList<String> encodeSales(Sales sales) {
         return null;
     }
 

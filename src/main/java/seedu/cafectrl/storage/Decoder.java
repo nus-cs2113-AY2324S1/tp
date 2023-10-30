@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class Decoder {
     private static final Ui ui = new Ui();
+
+    //@@author ziyi105
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
 
