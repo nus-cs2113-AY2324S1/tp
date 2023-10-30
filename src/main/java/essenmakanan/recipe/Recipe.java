@@ -30,4 +30,26 @@ public class Recipe {
     public String toString() {
         return getTitle();
     }
+
+    public String getTotalDuration() {
+        int totalDuration = 0;
+        for (Step step : recipeSteps) {
+            totalDuration += step.getEstimatedTimeInMinutes();
+        }
+        int hour = totalDuration / 60;
+        int minutes = totalDuration - hour * 60;
+        return "This Recipe will take you " + hour + " hours and " + minutes + " minutes.";
+    }
+
+    public void sort() {
+        recipeSteps.sort((step1, step2) -> step1.getStartTime().compareTo(step2.getStartTime()));
+    }
+    public void viewTimeLine() {
+
+    }
+
+    public static void main(String[] args) {
+    }
+
+
 }
