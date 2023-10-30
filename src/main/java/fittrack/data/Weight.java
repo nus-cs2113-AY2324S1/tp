@@ -3,7 +3,7 @@ package fittrack.data;
 import java.util.Objects;
 
 public class Weight {
-    public double value;
+    public final double value;
 
     public Weight(double weight) {
         this.value = weight;

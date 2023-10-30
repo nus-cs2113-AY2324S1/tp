@@ -3,7 +3,7 @@ package fittrack.data;
 import java.util.Objects;
 
 public class Calories {
-    public double value;
+    public final double value;
 
     public Calories(double calories) {
         this.value = calories;

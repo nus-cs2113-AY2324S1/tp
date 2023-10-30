@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Bmi {
 
-    public double value;
+    public final double value;
     private final DecimalFormat df = new DecimalFormat("0.00");
 
     public Bmi(double bmi) {
