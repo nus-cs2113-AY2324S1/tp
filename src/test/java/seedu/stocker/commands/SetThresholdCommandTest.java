@@ -15,7 +15,7 @@ public class SetThresholdCommandTest {
         // Create a new inventory
         Inventory inventory = new Inventory();
         Drug drug1 = new Drug("Panadol", "04/07/2030");
-        inventory.addNewDrug("Panadol", drug1, 120);
+        inventory.addNewDrug("Panadol", drug1, "PAN345", 120);
 
 
         // Create the SetThresholdCommand
@@ -35,7 +35,7 @@ public class SetThresholdCommandTest {
     public void executeTestWithNoDrug() {
         Inventory inventory = new Inventory();
         Drug drug1 = new Drug("Panadol", "04/07/2030");
-        inventory.addNewDrug("Panadol", drug1, 120);
+        inventory.addNewDrug("Panadol", drug1, "PAN341", 120);
         // Create the SetThresholdCommand for a drug that doesn't exist
         SetThresholdCommand command = new SetThresholdCommand("Paracetamol", 75);
 

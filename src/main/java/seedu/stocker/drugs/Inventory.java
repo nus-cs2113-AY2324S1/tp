@@ -15,8 +15,8 @@ public class Inventory {
         this.stock = new HashMap<String, StockEntry>();
     }
 
-    public void addNewDrug(String key, Drug drug, long quantity) {
-        this.stock.put(key, new StockEntry(drug, quantity));
+    public void addNewDrug(String key, Drug drug, String serialNumber, long quantity) {
+        this.stock.put(key, new StockEntry(drug, quantity, serialNumber));
     }
 
     public void removeFromStock(String key, long quantity) {

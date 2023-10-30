@@ -10,9 +10,9 @@ class HelpCommandTest {
         HelpCommand command = new HelpCommand();
 
         String expectedOutput = System.getProperty("line.separator")
-                + "add: Adds a new drug to the drug list. Parameters: NAME, EXPIRY DATE, QUANTITY,  "
+                + "add: Adds a new drug to the drug list. Parameters: NAME, EXPIRY DATE, SERIAL NUMBER, QUANTITY,  "
                 + System.getProperty("line.separator")
-                + "Example: add /n Doliprane /d 12/06/2035 /q 52"
+                + "Example: add /n Doliprane /d 12/06/2035 /s ABC123 /q 52"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "delete: Removes a drug from drug list. Parameters: Name  "
@@ -42,7 +42,10 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + "find /d: Finds drug in inventory using date."
                 + System.getProperty("line.separator")
-                + "Example: find /d panadol"
+                + "Example: find /d panadolfind /s: Finds drug in inventory using serial number."
+                + System.getProperty("line.separator")
+                + "Example: find /s ABC123"
+                + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "addtocart: Adds a new drug to the current cart. Parameters: NAME, QUANTITY,"

@@ -26,13 +26,14 @@ class FindCommandTest {
         // Create a new inventory
         Inventory inventory = new Inventory();
         Drug drug2 = new Drug("Panadol", "04/07/2030");
-        inventory.addNewDrug("Panadol", drug2, 20L);
+        inventory.addNewDrug("Panadol", drug2, "PAN123", 20L);
 
         // Set the modified inventory for the command
         command.setData(inventory, new SalesList(), new Cart());
 
         // Define expected output
-        String expectedOutput = "1. Name: Panadol, Expiry date: 04/07/2030, Quantity: 20" + System.lineSeparator() +
+        String expectedOutput = "1. Name: Panadol, Expiry date: 04/07/2030, Serial number: PAN123, Quantity: 20"
+                + System.lineSeparator() +
                 System.lineSeparator() +
                 "Listed all drugs with the keyword in the inventory.";
 
@@ -53,13 +54,14 @@ class FindCommandTest {
         // Create a new inventory
         Inventory inventory = new Inventory();
         Drug drug1 = new Drug("Paracetamol", "01/03/2027");
-        inventory.addNewDrug("Paracetamol", drug1, 12L);
+        inventory.addNewDrug("Paracetamol", drug1, "PARC124", 12L);
 
         // Set the modified inventory for the command
         command.setData(inventory, new SalesList(), new Cart());
 
         // Define expected output for drugs with matching expiry date
-        String expectedOutput = "1. Name: Paracetamol, Expiry date: 01/03/2027, Quantity: 12" + System.lineSeparator() +
+        String expectedOutput = "1. Name: Paracetamol, Expiry date: 01/03/2027, Serial number: PARC124, Quantity: 12"
+                + System.lineSeparator() +
                 System.lineSeparator() +
                 "Listed all drugs with the keyword in the inventory.";
 

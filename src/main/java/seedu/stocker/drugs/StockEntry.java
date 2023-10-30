@@ -3,14 +3,20 @@ package seedu.stocker.drugs;
 public class StockEntry {
 
     private final Drug drug;
+    private final String serialNumber;  // Add serial number field
 
     private long quantity;
     private long thresholdQuantity;
 
-    public StockEntry(Drug drug, long quantity) {
+    public StockEntry(Drug drug, long quantity, String serialNumber) {
         this.drug = drug;
         this.quantity = quantity;
+        this.serialNumber = serialNumber; // Initialise serial number
         this.thresholdQuantity = 100;
+    }
+
+    public String getSerialNumber() {
+        return this.serialNumber; // Getter for serial number
     }
 
     public Drug getDrug() {

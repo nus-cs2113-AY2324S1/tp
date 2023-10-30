@@ -23,7 +23,11 @@ public class FindCommand extends Command {
             System.lineSeparator() +
             COMMAND_WORD + " /d" + ": Finds drug in inventory using date." +
             System.lineSeparator() +
-            "Example: " + COMMAND_WORD + " /d panadol" ;
+            "Example: " + COMMAND_WORD + " /d panadol" +
+            COMMAND_WORD + " /s" + ": Finds drug in inventory using serial number." +
+            System.lineSeparator() +
+            "Example: " + COMMAND_WORD + " /s ABC123" +
+            System.lineSeparator();
 
     /**
      * Success message displayed after successfully finding drugs in the inventory.
@@ -44,11 +48,23 @@ public class FindCommand extends Command {
         this.criterion = criterion;
     }
 
+    private String getResultString(StockEntry entry) {
+        String result = "Name: " + entry.getDrug().getName()
+                + ", Expiry date: " + entry.getDrug().getExpiryDate()
+                + ", Serial number: " + entry.getSerialNumber()
+                + ", Quantity: " + entry.getQuantity();
+        return result;
+    }
+
     private static boolean matches(String criterion, String keyword, StockEntry entry) {
         if (criterion.equals("/n")) {
             return entry.getDrug().getName().toLowerCase().contains(keyword);
-        } else {
+        } else if (criterion.equals("/d")) {
             return entry.getDrug().getExpiryDate().toLowerCase().contains(keyword);
+        } else if (criterion.equals("/s")) {
+            return entry.getSerialNumber().toLowerCase().contains(keyword);
+        } else {
+            return false;
         }
     }
 
@@ -64,15 +80,19 @@ public class FindCommand extends Command {
         }
 
         List<StockEntry> entries = inventory.getStockEntries();
-        List<StockEntry> foundEntries = new ArrayList<>();
+        List<String> foundResults = new ArrayList<>();
 
         for (StockEntry entry : entries) {
             if (matches(this.criterion, this.keyword, entry)) {
-                foundEntries.add(entry);
+                foundResults.add(getResultString(entry));
             }
         }
 
-        return new CommandResult<>(MESSAGE_SUCCESS, foundEntries);
+        if (foundResults.isEmpty()) {
+            return new CommandResult<>("No drugs found with the specified criteria.");
+        } else {
+            return new CommandResult<>(MESSAGE_SUCCESS, foundResults);
+        }
     }
 
 
