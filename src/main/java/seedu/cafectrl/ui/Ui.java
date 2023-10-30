@@ -1,5 +1,8 @@
 package seedu.cafectrl.ui;
 
+import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
@@ -130,9 +133,13 @@ public class Ui {
     }
 
     public void showHelp() {
-        showToUserWithSpaceBetweenLines(Messages.LIST_OF_COMMANDS, Messages.INSTRUCTION_ON_COMMAND_FORMAT,
-                Messages.ADD_DISH_GUIDE, Messages.LIST_MENU_GUIDE, Messages.LIST_INGREDIENTS_GUIDE,
-                Messages.DELETE_GUIDE, Messages.EDIT_PRICE_GUIDE);
+        showToUserWithSpaceBetweenLines(Messages.LIST_OF_COMMANDS,
+                Messages.INSTRUCTION_ON_COMMAND_FORMAT,
+                AddDishCommand.MESSAGE_USAGE,
+                ListIngredientCommand.MESSAGE_USAGE,
+                Messages.LIST_MENU_GUIDE,
+                Messages.DELETE_GUIDE,
+                EditPriceCommand.MESSAGE_USAGE);
     }
 
     public void showToUserWithSpaceBetweenLines(String... message) {

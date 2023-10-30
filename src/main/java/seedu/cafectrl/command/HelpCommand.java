@@ -2,6 +2,7 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.ui.Ui;
 
+//@@author ziyi105
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 
