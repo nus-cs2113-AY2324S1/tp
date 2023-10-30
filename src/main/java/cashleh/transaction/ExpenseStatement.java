@@ -5,6 +5,7 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
@@ -84,15 +85,26 @@ public class ExpenseStatement {
      */
     public void printExpenses() {
         int listSize = expenseStatement.size();
-        String[] texts = new String[listSize];
-        for (int i = 0; i < listSize; i++) {
-            Expense currentExpense = expenseStatement.get(i);
+        List<String> expensesDetails = new ArrayList<>();
+        for (Expense currentExpense : expenseStatement) {
             String type = "Expense, ";
             String date = currentExpense.getDate().toString();
             String amt = String.valueOf(currentExpense.getAmount());
             String cat = currentExpense.getCategory() == null ? "-" : currentExpense.getCategory().toString();
-            texts[i] = type + date + ", " + currentExpense.getDescription() + ", " + amt + ", " + cat;
+            expensesDetails.add(type + date + ", " + currentExpense.getDescription() + ", " + amt + ", " + cat);
         }
+
+        // Sort expenses based on the date of expense
+        Collections.sort(expensesDetails, (expense1, expense2) -> {
+            String[] expenseParts1 = expense1.split(", ");
+            String [] expenseParts2 = expense2.split(", ");
+            String date1 = expenseParts1[1];
+            String date2 = expenseParts2[1];
+            return date1.compareTo(date2);
+        });
+
+        String[] texts = expensesDetails.toArray(new String[expensesDetails.size()]);
+
         Ui.printStatement("Expense Statement", texts);
     }
 

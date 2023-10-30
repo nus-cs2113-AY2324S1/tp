@@ -33,6 +33,7 @@ addIncome toto prize money /amt 2.50 /cat lottery
 addExpense book /amt 10 /cat other
 filter /cat other
 filter /amt 2.50
+addIncome a very long income description longer than MAX_DESCRIPTION set /amt 500
+viewFinancialStatement
 bad input
 exit
-
