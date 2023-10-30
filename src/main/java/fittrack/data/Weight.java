@@ -6,9 +6,9 @@ public class Weight {
     public final double value;
 
     public Weight(double weight) {
+        assert weight > 0;
         this.value = weight;
     }
-
 
     @Override
     public boolean equals(Object o) {

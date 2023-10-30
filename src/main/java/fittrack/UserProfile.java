@@ -12,7 +12,7 @@ public class UserProfile {
     private Bmi bmi;
 
     public UserProfile() {
-        this(new Height(1), new Weight(0), new Calories(0));
+        this(new Height(1), new Weight(1), new Calories(0));
     }
 
     public UserProfile(Height height, Weight weight, Calories dailyCalorieLimit) {

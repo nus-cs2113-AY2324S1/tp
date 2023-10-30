@@ -6,6 +6,7 @@ public class Calories {
     public final double value;
 
     public Calories(double calories) {
+        assert calories >= 0;
         this.value = calories;
     }
 

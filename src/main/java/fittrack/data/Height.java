@@ -6,6 +6,7 @@ public class Height {
     public final double value;
 
     public Height(double height) {
+        assert height > 0;
         this.value = height;
     }
 
