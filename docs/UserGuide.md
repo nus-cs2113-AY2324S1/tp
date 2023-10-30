@@ -39,6 +39,21 @@ Format: `help`
 Example of usage:
 * **Command**:`help` <br>
   **Output**: <br>
+<<<<<<< HEAD
+`Here are the list of commands you can use:` <br>
+`1. help - shows the list of commands you can use,` <br>
+`2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and its answer to the list,` <br>
+`3. list - shows the list of questions and answers,` <br>
+`4. delete [question number] - deletes the question and answer at the specified number,` <br>
+`5. find /[description] - displays all questions that contains the specified description,` <br>
+`6. find /[module] - displays all questions that belong to the specified module,` <br>
+`7. edit [question number] /description [description] - edits the description of the question with the specified number,` <br>
+`8. edit [question number] /answer [answer] - edits the answer to the question with the specified number,` <br>
+`9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or /normal,` <br>
+`10. shuffle - shuffle quiz questions to a random order,` <br>
+`11. markdiff [question number] /[question difficulty] - sets the difficulty of question with the specified number,` <br>
+`12. bye - exits the program` <br>
+=======
 ```
 Here are the list of commands you can use:
 1. help - shows the list of commands you can use,
@@ -54,6 +69,7 @@ Here are the list of commands you can use:
 11. markdiff [question number] [question difficulty] - sets the difficulty of question with the specified number,
 12. bye - exits the program
 ```
+>>>>>>> 1a946beb5761c5a526d2be7ce62e465961e96c22
 
 Notes:
 * Ver 2.0 will only list commands. Future versions will include auto-filling and scrolling
@@ -200,11 +216,11 @@ and answer bank.
 Format: `markdiff [question number] [question difficulty]`
 
 Examples of usage:
-* **Command**: `markdiff 1 easy` <br>
+* **Command**: `markdiff 1 /easy` <br>
   **Output**:  <br>
   `Roger that! I have marked the following question as easy >w< !` <br>
   `[S][] [original description] / [original answer] | [module] | EASY` <br> <br>
-* **Command**: `markdiff 2 Hard` <br>
+* **Command**: `markdiff 2 /Hard` <br>
   **Output**: <br>
   `Roger that! I have marked the following question as hard >w< !` <br>
   `[S][] [original description] / [original answer] | [module] | HARD` <br> <br>
