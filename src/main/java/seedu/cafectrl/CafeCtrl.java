@@ -1,8 +1,10 @@
 package seedu.cafectrl;
 
 import seedu.cafectrl.command.Command;
+import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.Messages;
@@ -20,7 +22,8 @@ public class CafeCtrl {
     private Menu menu;
     private Command command;
     private Pantry pantry;
-    private OrderList orderList;
+    private Sales sales;
+    private CurrentDate currentDate;
     private Storage storage;
 
     /**
@@ -32,8 +35,9 @@ public class CafeCtrl {
         this.storage = new Storage(this.ui);
         this.menu = this.storage.loadMenu();
         this.pantry = this.storage.loadPantryStock();
-        this.orderList = this.storage.loadOrderList();
-
+        //this.orderList = this.storage.loadOrderList(); //to be implemented inside Sales class
+        currentDate = new CurrentDate();
+        sales = new Sales();
     }
 
     private void setup() {
@@ -51,7 +55,7 @@ public class CafeCtrl {
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
-                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, orderList);
+                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
                 command.execute();
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
@@ -67,5 +71,6 @@ public class CafeCtrl {
         cafeCtrl.setup();
         cafeCtrl.run();
     }
+
 }
 
