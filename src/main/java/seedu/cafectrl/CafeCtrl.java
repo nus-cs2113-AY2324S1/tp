@@ -35,9 +35,8 @@ public class CafeCtrl {
         this.storage = new Storage(this.ui);
         this.menu = this.storage.loadMenu();
         this.pantry = this.storage.loadPantryStock();
-        //this.orderList = this.storage.loadOrderList(); //to be implemented inside Sales class
         currentDate = new CurrentDate();
-        sales = new Sales();
+        this.sales = new Sales();
     }
 
     private void setup() {
@@ -63,7 +62,7 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
-        this.storage.saveAll(this.menu, this.orderList, this.pantry);
+        this.storage.saveAll(this.menu, this.sales, this.pantry);
     }
 
     public static void main(String[] args) throws IOException {

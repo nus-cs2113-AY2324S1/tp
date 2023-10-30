@@ -3,6 +3,7 @@ package seedu.cafectrl.storage;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -56,14 +57,14 @@ public class Storage {
     /**
      * Encode and write the data from menu, orderList and pantry to the respective text files
      * @param menu menu from current session
-     * @param orderList orderList from current session
+     * @param sales sales from current session
      * @param pantry pantry from current session
      * @throws IOException if the file is not found in the specified file path
      */
-    public void saveAll(Menu menu, OrderList orderList, Pantry pantry) throws IOException {
+    public void saveAll(Menu menu, Sales sales, Pantry pantry) throws IOException {
         // to be uncommented when the following features are implemented
         //saveMenu(menu);
-        //saveOrderList(orderList);
+        //saveSales(sales);
         savePantryStock(pantry);
     }
 
@@ -81,7 +82,7 @@ public class Storage {
      * @param orderList orderList from current session
      * @throws IOException if the file is not found in the specified file path
      */
-    private void saveOrderList(OrderList orderList) throws IOException {
+    private void saveSales(OrderList orderList) throws IOException {
         this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeOrderList(orderList));
     }
 
