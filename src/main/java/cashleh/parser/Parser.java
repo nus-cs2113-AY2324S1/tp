@@ -267,7 +267,13 @@ public class Parser {
         return new FindParser(descriptionString, parsedAmount, parsedDate, parsedCategory);
     }
 
-    private Categories parseCategory(String transactionType, String categoryString) throws CashLehParsingException {
+    /**
+     * Parses the category string based on the transaction type.
+     * @param transactionType The type of transaction (FILTER_EXPENSE, FILTER_INCOME, FILTER).
+     * @param categoryString  The category string to be parsed.
+     * @return The parsed category, or null if the category string is empty or not provided.
+     */
+    private Categories parseCategory(String transactionType, String categoryString) {
         if (categoryString != null && !categoryString.isEmpty()) {
             if (transactionType.equals(FILTER_EXPENSE)) {
                 return ExpenseCatParser.parse(categoryString);
