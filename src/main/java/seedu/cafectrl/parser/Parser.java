@@ -204,8 +204,11 @@ public class Parser {
             // To retrieve specific arguments from arguments
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
             float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
-            System.out.println(Float.MAX_VALUE);
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
+
+            if (isRepeatedDishName(dishName, menu)) {
+                return new IncorrectCommand(ErrorMessages.DISH_NOT_FOUND, ui);
+            }
 
             ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
 
@@ -275,6 +278,25 @@ public class Parser {
         }
 
         return price;
+    }
+
+    /**
+     * Checks in the menu if the dish name already exists in the menu.
+     * @param inputDishName dish name entered by the user
+     * @param menu contains all the existing Dishes
+     * @return boolean of whether a repeated dish name is detected
+     */
+    public static boolean isRepeatedDishName(String inputDishName, Menu menu) {
+        for (Dish dish: menu.getMenuItemsList()) {
+            String menuDishNameLowerCase = dish.getName().toLowerCase();
+            String inputDishNameLowerCase = inputDishName.toLowerCase();
+
+            if (menuDishNameLowerCase.equals(inputDishNameLowerCase)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //@@author NaychiMin
