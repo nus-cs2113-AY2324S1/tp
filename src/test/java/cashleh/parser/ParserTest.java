@@ -77,10 +77,10 @@ public class ParserTest {
         String inputString3 = "addIncome pocket money /amt 200";
         assertInstanceOf(AddIncome.class, parser.parse(inputString3));
         parser.parse(inputString3).execute();
-        assertEquals("\t____________________________________________________________\r\n"
+        assertEquals("____________________________________________________________\r\n"
             + "\tThe following income was added:\r\n"
             + "\tIncome: pocket money (Amount: 200.0, Date: " + Ui.getDateString(LocalDate.now()) + ")\r\n"
-            + "\t____________________________________________________________\r\n", outputStreamCaptor.toString());
+            + "\t____________________________________________________________", outputStreamCaptor.toString().trim());
 
         String inputString4 = "addIncome pocket money /amt notnumber";
         Exception exception4 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString4));
@@ -127,10 +127,10 @@ public class ParserTest {
         String inputString3 = "addExpense food /amt 10";
         assertInstanceOf(AddExpense.class, parser.parse(inputString3));
         parser.parse(inputString3).execute();
-        assertEquals("\t____________________________________________________________\r\n"
+        assertEquals("____________________________________________________________\r\n"
             + "\tThe following expense was added:\r\n"
             + "\tExpense: food (Amount: 10.0, Date: " + Ui.getDateString(LocalDate.now()) + ")\r\n"
-            + "\t____________________________________________________________\r\n", outputStreamCaptor.toString());
+            + "\t____________________________________________________________", outputStreamCaptor.toString().trim());
 
         String inputString4 = "addExpense food /amt notnumber";
         Exception exception4 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString4));
