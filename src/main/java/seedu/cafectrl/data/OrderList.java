@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class OrderList {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    protected ArrayList<Order> orderList;
-    protected float totalOrderListCost;
+    private ArrayList<Order> orderList;
+    private float totalOrderListCost;
     public OrderList() {
         this.orderList = new ArrayList<>();
         this.totalOrderListCost = 0;
@@ -34,7 +34,7 @@ public class OrderList {
     }
 
     public void addCost(Order order) {
-        float orderCost = order.totalOrderCost;
+        float orderCost = order.getTotalOrderCost();
         totalOrderListCost += orderCost;
     }
 
