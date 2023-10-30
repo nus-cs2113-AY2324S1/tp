@@ -7,6 +7,12 @@ from their very own question bank to test their understanding via a Command Line
 on the go, QuizHUB is a versatile tool that aims to streamline and optimize the revision experience for NUS students
 from all fields of study.
 
+## Table of Contents
+
+1. [List of All Features](#features)
+2. [Frequently Asked Questions](#faq)
+3. [Summary of CLI Command Format](#command-summary)
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -14,15 +20,15 @@ from all fields of study.
 
 ## Features
 
-1. Helper command
-2. Add question/answer and group them in modules/difficulty
-3. Stores the question/answer in local storage
-4. Delete question/answer
-5. Find question/answer via question's description or via module name
-6. Edit question/answer
-7. Mark question difficulty
-8. Start a quiz session, specifying category of questions and in random/normal mode
-9. Permanently shuffle questions order for added challenge!
+1. [Helper command](#getting-help-on-using-the-app-help)
+2. [Add question/answer and group them in modules/difficulty](#adding-short-answer-questions-and-their-answers-short)
+3. [Store or Edit the question/answer in local storage]()
+4. [Delete question/answer](#delete-questions-delete)
+5. [Find question/answer via question's description or via module name](#find-questionanswer-find)
+6. [Edit question/answer](#edit-questionanswer-edit)
+7. [Mark question difficulty](#mark-difficulty-of-questions-markdiff)
+8. [Start a quiz session, specifying category of questions and in random/normal mode](#start-quiz-start)
+9. [Permanently shuffle questions order for added challenge!](#shuffling-questions-shuffle)
 
 ### Getting help on using the app: `help`
 Assists new users in familiarising with the application. Provides a list of commands for the user to get started
@@ -33,6 +39,7 @@ Format: `help`
 Example of usage:
 * **Command**:`help` <br>
   **Output**: <br>
+<<<<<<< HEAD
 `Here are the list of commands you can use:` <br>
 `1. help - shows the list of commands you can use,` <br>
 `2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and its answer to the list,` <br>
@@ -46,6 +53,23 @@ Example of usage:
 `10. shuffle - shuffle quiz questions to a random order,` <br>
 `11. markdiff [question number] /[question difficulty] - sets the difficulty of question with the specified number,` <br>
 `12. bye - exits the program` <br>
+=======
+```
+Here are the list of commands you can use:
+1. help - shows the list of commands you can use,
+2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and its answer to the list,
+3. list - shows the list of questions and answers,
+4. delete [question number] - deletes the question and answer at the specified number,
+5. find /[description] - displays all questions that contains the specified description,
+6. find /[module] - displays all questions that belong to the specified module,
+7. edit [question number] /description [description] - edits the description of the question with the specified number,
+8. edit [question number] /answer [answer] - edits the answer to the question with the specified number,
+9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or /normal,
+10. shuffle - shuffle quiz questions to a random order,
+11. markdiff [question number] [question difficulty] - sets the difficulty of question with the specified number,
+12. bye - exits the program
+```
+>>>>>>> 1a946beb5761c5a526d2be7ce62e465961e96c22
 
 Notes:
 * Ver 2.0 will only list commands. Future versions will include auto-filling and scrolling
@@ -212,6 +236,36 @@ Notes:
 Exits the program
 Format: `bye`
 
+### Store and Edit Question Pool Using The Question File
+
+Storage:
+* The storage operation is done automatically without the need for user input
+* Any operation that updates the question pool will invoke the storage operation
+
+Editing:
+* You may directly update the storage file instead of adding questions with commands
+* You should edit the `tasklist.txt` file in the working directory of the `QuizHub.jar` file
+* If the `tasklist.txt` is not already present, you should run the program once for initialization
+* You can edit the file in the format as described below.
+
+Format:
+* File header: The first line of the file should not be changed, questions will
+begin from the second line onwards, with each question taking one line
+* Short Answer Question: `S | <done/undone> | <question> / <answer> | <module> | <difficulty> `
+  * S - Format identifier for short answer
+  * done/undone - Use done or undone as indication
+  * question/answer - Question and answer
+  * module - Module for the question
+  * difficulty - EASY, NORMAL or HARD
+  * Using arbitrary values may prevent the question from being loaded normally
+
+Example:
+```
+Latest Questions
+S | undone | Full name of Java? / JavaScript. | CS2113 | NORMAL
+S | undone | How many different STs are there in a complete graph with 9 vertices? / 4782969 | CS2040C | HARD
+S | undone | Does one-time-pad satisfy perfect secrecy / Yes | CS3235 | EASY
+```
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?

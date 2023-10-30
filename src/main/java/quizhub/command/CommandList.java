@@ -7,6 +7,7 @@ import quizhub.ui.Ui;
  * Represents a command to list all tasks.
  */
 public class CommandList extends Command {
+    public static final String COMMAND_WORD = "list";
     /**
      * Creates a new list command to list all tasks.
      */

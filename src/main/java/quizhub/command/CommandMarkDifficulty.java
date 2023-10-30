@@ -8,6 +8,7 @@ import quizhub.ui.Ui;
  * Represents a command to mark the difficulty of a question.
  */
 public class CommandMarkDifficulty extends Command{
+    public static final String COMMAND_WORD = "markdiff";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate index of question to be marked :<";
     public static final String TOO_MANY_INDEX_MSG = "    Ono! You tried to mark more than 1 question :<";
     public static final String MISSING_DIFFICULTY_MSG = "    Ono! You did not indicate difficulty " +
