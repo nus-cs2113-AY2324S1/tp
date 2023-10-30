@@ -33,7 +33,7 @@ public class FinancialPlanner {
             return;
         }
 
-        ui.welcomeMessage(date);
+        ui.welcomeMessage();
         String input;
         Command command = null;
 
