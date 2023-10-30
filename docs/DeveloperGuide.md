@@ -57,7 +57,7 @@ In each iteration of the loop, `QuizHub` makes a call to `Ui.getUserInput()` and
 entire user input as a String object. Following which, `QuizHub` makes a call to
 `Parser.parseCommand()` to extract the user command from the String object and returns a
 `Command` object. Finally, `QuizHub` makes a call to `Command.executeCommand()` and performs
-the requested task.
+the requested question.
 
 If `Command` is of Exit type, the loop will exit, and the program terminates.
 
@@ -240,7 +240,7 @@ print each question with a given index, and indicate the question's type and com
 
 ### Delete Command - Delete a Question
 
-Deletes a task by its index.
+Deletes a question by its index.
 
 The Command first invokes the QuestionList.viewQuestionByIndex method to determine if 
 the index refers to a valid question, failing which it will return an error message.
@@ -320,11 +320,11 @@ input.
 
 ### Constructor
 
-#### `public Ui(Storage dataStorage, QuestionList tasks)`
+#### `public Ui(Storage dataStorage, QuestionList questions)`
 
 - **Parameters:**
   - `dataStorage`: An instance of the `Storage` class, which handles the storage of quiz data on the hard disk.
-  - `tasks`: An instance of the `QuestionList` class, which represents a record of all questions documented in the application.
+  - `questions`: An instance of the `QuestionList` class, which represents a record of all questions documented in the application.
 
 ### Implementation Details
 
