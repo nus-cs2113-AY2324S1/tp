@@ -1,4 +1,4 @@
-package seedu.cafectrl;
+package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
@@ -24,8 +24,7 @@ public class Order {
     @Override
     public String toString() {
         return "Order: " + orderedDish.getName() + " Quantity: "+ dishQty
-                + "\nIngredientList: " + usedIngredientList
-                + "\nTotal Order Cost: $" + dollarValue.format(totalOrderCost);
+                + "\nOrder Cost: $" + dollarValue.format(totalOrderCost);
     }
 
     /**
