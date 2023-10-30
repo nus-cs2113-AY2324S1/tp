@@ -54,7 +54,7 @@ public class Expense extends Transaction {
         result.append("Expense: ").append(getDescription());
         result.append(" (Amount: ").append(getAmount());
         if (getDate() != null) {
-            result.append(", Date: ").append(getDate());
+            result.append(", Date: ").append(getDateString());
         }
         if (getCategory() != null) {
             result.append(", Category: ").append(getCategory());

@@ -1,8 +1,16 @@
 package cashleh;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Ui {
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    public static String getDateString(LocalDate date) {
+        return date.format(DATE_FORMATTER);
+    }
+
     private static void printHorizontalLine() {
         System.out.println("\t____________________________________________________________");
     }
