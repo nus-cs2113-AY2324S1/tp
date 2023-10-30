@@ -4,6 +4,7 @@ import seedu.cafectrl.ui.Ui;
 
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+
     protected Ui ui;
 
     public HelpCommand(Ui ui) {

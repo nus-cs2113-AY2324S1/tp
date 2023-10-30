@@ -7,7 +7,6 @@ import seedu.cafectrl.data.Pantry;
 import java.util.ArrayList;
 
 public class Encoder {
-
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
         return null;
     }

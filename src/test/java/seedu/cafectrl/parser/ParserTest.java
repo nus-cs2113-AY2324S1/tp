@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -262,18 +263,14 @@ class ParserTest {
 
         //Test for 1 Dish added to Menu
         outputCommand.execute();
-        int expectedMenuSize = 1;
-        assertEquals(expectedMenuSize, menu.getSize());
+        assertEquals(1, menu.getSize());
 
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
-        String expectedDishName = "Christmas Ham";
-        float expectedDishPrice = (float) 50.0;
-        String expectedIngredientList = "[Ham - 1000g]";
 
-        assertEquals(expectedDishName, getOutputDish.getName());
-        assertEquals(expectedDishPrice, getOutputDish.getPrice());
-        assertEquals(expectedIngredientList, getOutputDish.getIngredients().toString());
+        assertEquals("Christmas Ham", getOutputDish.getName());
+        assertEquals((float) 50.0, getOutputDish.getPrice());
+        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString());
     }
 
     @Test
@@ -290,19 +287,14 @@ class ParserTest {
         //Test for 3 Ingredients in the Dish added to Menu
         outputCommand.execute();
         Dish actualDish = menu.getDishFromId(0);
-        int actualNumberOfIngredients = actualDish.getIngredients().size();
-        int expectedNumberOfIngredients = 3;
-        assertEquals(expectedNumberOfIngredients, actualNumberOfIngredients);
+        assertEquals(3, actualDish.getIngredients().size());
 
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
-        String expectedDishName = "Chicken Rice";
-        float expectedDishPrice = (float) 2.0;
-        String expectedIngredientList = "[rice - 100g, chicken - 200g, water - 100ml]";
 
-        assertEquals(expectedDishName, getOutputDish.getName());
-        assertEquals(expectedDishPrice, getOutputDish.getPrice());
-        assertEquals(expectedIngredientList, getOutputDish.getIngredients().toString());
+        assertEquals("Chicken Rice", getOutputDish.getName());
+        assertEquals((float) 2.0, getOutputDish.getPrice());
+        assertEquals("[rice - 100g, chicken - 200g, water - 100ml]", getOutputDish.getIngredients().toString());
     }
 
     @Test
@@ -322,8 +314,7 @@ class ParserTest {
 
         //Test for no dish added in menu
         outputCommand.execute();
-        int expectedMenuSize = 0;
-        assertEquals(expectedMenuSize, menu.getSize());
+        assertEquals(0, menu.getSize());
     }
 
     @Test
@@ -343,8 +334,7 @@ class ParserTest {
 
         //Test for no dish added in menu
         outputCommand.execute();
-        int expectedMenuSize = 0;
-        assertEquals(expectedMenuSize, menu.getSize());
+        assertEquals(0, menu.getSize());
     }
 
     @Test
@@ -363,8 +353,7 @@ class ParserTest {
 
         //Test for no dish added in menu
         outputCommand.execute();
-        int expectedMenuSize = 0;
-        assertEquals(expectedMenuSize, menu.getSize());
+        assertEquals(0, menu.getSize());
     }
 
     @Test
@@ -383,8 +372,7 @@ class ParserTest {
 
         //Test for no dish added in menu
         outputCommand.execute();
-        int expectedMenuSize = 0;
-        assertEquals(expectedMenuSize, menu.getSize());
+        assertEquals(0, menu.getSize());
     }
 
     @Test
@@ -403,8 +391,7 @@ class ParserTest {
 
         //Test for no dish added in menu
         outputCommand.execute();
-        int expectedMenuSize = 0;
-        assertEquals(expectedMenuSize, menu.getSize());
+        assertEquals(0, menu.getSize());
     }
 
     @Test
@@ -422,18 +409,28 @@ class ParserTest {
 
         //Test for 1 Dish added to Menu
         outputCommand.execute();
-        int expectedMenuSize = 1;
-        assertEquals(expectedMenuSize, menu.getSize());
+        assertEquals(1, menu.getSize());
 
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
-        String expectedDishName = "Christmas Ham";
-        float expectedDishPrice = (float) 50.0;
-        String expectedIngredientList = "[Ham - 1000g]";
 
-        assertEquals(expectedDishName, getOutputDish.getName());
-        assertEquals(expectedDishPrice, getOutputDish.getPrice());
-        assertEquals(expectedIngredientList, getOutputDish.getIngredients().toString());
+        assertEquals("Christmas Ham", getOutputDish.getName());
+        assertEquals((float) 50.0, getOutputDish.getPrice());
+        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString());
+    }
+
+    @Test
+    void parsePriceToFloat_validPriceString_exactFloatPrice() {
+        String inputPriceString = "3.14";
+
+        assertEquals((float) 3.14, Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
+    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ArithmeticException {
+        String inputPriceString = "99999999999.99";
+
+        assertThrows(ArithmeticException.class, () -> Parser.parsePriceToFloat(inputPriceString));
     }
     //@@author
 }

@@ -12,8 +12,6 @@ public class ViewTotalStockCommand extends Command {
     public static final String COMMAND_WORD = "view_stock";
     protected Ui ui;
     protected Pantry pantry;
-
-
     private ArrayList<Ingredient> pantryStock;
 
     public ViewTotalStockCommand(Pantry pantry, Ui ui) {
