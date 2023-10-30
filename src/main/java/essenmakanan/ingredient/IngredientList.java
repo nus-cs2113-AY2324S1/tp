@@ -17,11 +17,11 @@ public class IngredientList {
         return ingredients;
     }
 
-    public Ingredient getIngredientByIndex(int index) {
+    public Ingredient getIngredient(int index) {
         return ingredients.get(index);
     }
 
-    public Ingredient getIngredientByName(String name) {
+    public Ingredient getIngredient(String name) {
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(name)) {
                 return ingredient;
@@ -30,11 +30,11 @@ public class IngredientList {
         return null;
     }
 
-    public int getIndexByIngredient(Ingredient ingredient) {
+    public int getIndex(Ingredient ingredient) {
         return ingredients.indexOf(ingredient);
     }
 
-    public int getIndexByName(String ingredientName) {
+    public int getIndex(String ingredientName) {
         int i = 0;
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(ingredientName)) {

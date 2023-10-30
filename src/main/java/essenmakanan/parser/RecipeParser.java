@@ -16,7 +16,7 @@ public class RecipeParser {
         if (input.matches("\\d+")) { //if input only contains numbers
             index = Integer.parseInt(input) - 1;
         } else {
-            index = recipes.getIndexOfRecipeByName(input);
+            index = recipes.getIndexOfRecipe(input);
         }
 
         if (!recipes.recipeExist(index)) {

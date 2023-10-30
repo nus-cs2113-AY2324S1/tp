@@ -28,7 +28,7 @@ public class DeleteRecipeCommandTest {
     public void deleteRecipe_validRecipeId_deleteCorrectly() {
         Command deleteCommand = new DeleteRecipeCommand(recipes, "r/2");
         deleteCommand.executeCommand();
-        assert recipes.getRecipeByIndex(0) == recipe0 : "Wrong recipe was removed";
+        assert recipes.getRecipe(0) == recipe0 : "Wrong recipe was removed";
         assert !recipes.recipeExist(1) : "Recipe was not removed";
     }
 
@@ -36,7 +36,7 @@ public class DeleteRecipeCommandTest {
     public void deleteRecipe_validRecipeTitle_deleteCorrectly() {
         Command deleteCommand = new DeleteRecipeCommand(recipes, "r/Fry an egg");
         deleteCommand.executeCommand();
-        assert recipes.getRecipeByIndex(0) == recipe0 : "Wrong recipe was removed";
+        assert recipes.getRecipe(0) == recipe0 : "Wrong recipe was removed";
         assert !recipes.recipeExist(1) : "Recipe was not removed";
     }
 
@@ -45,31 +45,31 @@ public class DeleteRecipeCommandTest {
     public void deleteRecipe_extraRecipe_noDeletion() {
         Command deleteCommand = new DeleteRecipeCommand(recipes, "r/1 2");
         deleteCommand.executeCommand();
-        assert recipes.getRecipeByIndex(0) == recipe0 : "Recipe was not supposed to be removed";
-        assert recipes.getRecipeByIndex(1) == recipe1 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(0) == recipe0 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(1) == recipe1 : "Recipe was not supposed to be removed";
     }
 
     @Test
     public void deleteRecipe_invalidRecipeName_noDeletion() {
         Command deleteCommand = new DeleteRecipeCommand(recipes, "r/Make strawberry fondue");
         deleteCommand.executeCommand();
-        assert recipes.getRecipeByIndex(0) == recipe0 : "Recipe was not supposed to be removed";
-        assert recipes.getRecipeByIndex(1) == recipe1 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(0) == recipe0 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(1) == recipe1 : "Recipe was not supposed to be removed";
     }
 
     @Test
     public void deleteRecipe_recipeIdIsZero_noDeletion() {
         Command deleteCommand = new DeleteRecipeCommand(recipes, "r/0");
         deleteCommand.executeCommand();
-        assert recipes.getRecipeByIndex(0) == recipe0 : "Recipe was not supposed to be removed";
-        assert recipes.getRecipeByIndex(1) == recipe1 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(0) == recipe0 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(1) == recipe1 : "Recipe was not supposed to be removed";
     }
 
     @Test
     public void deleteRecipe_invalidRecipeId_noDeletion() {
         Command deleteCommand = new DeleteRecipeCommand(recipes, "r/4");
         deleteCommand.executeCommand();
-        assert recipes.getRecipeByIndex(0) == recipe0 : "Recipe was not supposed to be removed";
-        assert recipes.getRecipeByIndex(1) == recipe1 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(0) == recipe0 : "Recipe was not supposed to be removed";
+        assert recipes.getRecipe(1) == recipe1 : "Recipe was not supposed to be removed";
     }
 }

@@ -20,7 +20,7 @@ class AddRecipeTest {
         recipes.addRecipe(new Recipe("Recipe1", recipe1Steps));
         recipes.addRecipe(new Recipe("Recipe2", recipe2Steps));
 
-        Recipe recipe = recipes.getRecipeByIndex(0);
+        Recipe recipe = recipes.getRecipe(0);
         assertEquals("Recipe1", recipe.getTitle());
 
         RecipeStepList steps = recipe.getRecipeSteps();
@@ -28,7 +28,7 @@ class AddRecipeTest {
         assertEquals("step2", steps.getStepByIndex(1).getDescription());
         assertEquals("step3", steps.getStepByIndex(2).getDescription());
 
-        recipe = recipes.getRecipeByIndex(1);
+        recipe = recipes.getRecipe(1);
         steps = recipe.getRecipeSteps();
         assertEquals("step1", steps.getStepByIndex(0).getDescription());
         assertEquals("step2", steps.getStepByIndex(1).getDescription());
@@ -43,7 +43,7 @@ class AddRecipeTest {
         Recipe newRecipe = new Recipe(recipeTitle, recipeSteps, recipeIngredients);
         recipes.addRecipe(newRecipe);
 
-        Recipe addedRecipe = recipes.getRecipeByIndex(0);
+        Recipe addedRecipe = recipes.getRecipe(0);
 
         // check title is added correctly
         assertEquals("bread", addedRecipe.getTitle());

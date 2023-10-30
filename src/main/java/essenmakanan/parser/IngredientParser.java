@@ -15,7 +15,7 @@ public class IngredientParser {
         if (input.matches("\\d+")) { //if input only contains numbers
             index = Integer.parseInt(input) - 1;
         } else {
-            index = ingredients.getIndexByName(input);
+            index = ingredients.getIndex(input);
         }
 
         if (!ingredients.ingredientExist(index)) {

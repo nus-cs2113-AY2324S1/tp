@@ -26,7 +26,7 @@ public class DeleteIngredientCommandTest {
     public void deleteIngredient_validIngredientId_deleteCorrectly() {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "2");
         deleteCommand.executeCommand();
-        assert ingredients.getIngredientByIndex(0) == ingredient0 : "Wrong ingredient was removed";
+        assert ingredients.getIngredient(0) == ingredient0 : "Wrong ingredient was removed";
         assert !ingredients.ingredientExist(1) : "Ingredient was not removed";
     }
 
@@ -34,7 +34,7 @@ public class DeleteIngredientCommandTest {
     public void deleteIngredient_validIngredientName_deleteCorrectly() {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "apple");
         deleteCommand.executeCommand();
-        assert ingredients.getIngredientByIndex(0) == ingredient0 : "Wrong ingredient was removed";
+        assert ingredients.getIngredient(0) == ingredient0 : "Wrong ingredient was removed";
         assert !ingredients.ingredientExist(1) : "Ingredient was not removed";
     }
 
@@ -42,31 +42,31 @@ public class DeleteIngredientCommandTest {
     public void deleteIngredient_extraIngredient_noDeletion() {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "1 3");
         deleteCommand.executeCommand();
-        assert ingredients.getIngredientByIndex(0) == ingredient0 : "Ingredient was not supposed to be removed";
-        assert ingredients.getIngredientByIndex(1) == ingredient1 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(0) == ingredient0 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(1) == ingredient1 : "Ingredient was not supposed to be removed";
     }
 
     @Test
     public void deleteIngredient_invalidIngredientName_noDeletion() {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "strawberry");
         deleteCommand.executeCommand();
-        assert ingredients.getIngredientByIndex(0) == ingredient0 : "Ingredient was not supposed to be removed";
-        assert ingredients.getIngredientByIndex(1) == ingredient1 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(0) == ingredient0 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(1) == ingredient1 : "Ingredient was not supposed to be removed";
     }
 
     @Test
     public void deleteIngredient_ingredientIdIsZero_noDeletion() {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "0");
         deleteCommand.executeCommand();
-        assert ingredients.getIngredientByIndex(0) == ingredient0 : "Ingredient was not supposed to be removed";
-        assert ingredients.getIngredientByIndex(1) == ingredient1 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(0) == ingredient0 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(1) == ingredient1 : "Ingredient was not supposed to be removed";
     }
 
     @Test
     public void deleteIngredient_invalidIngredientId_noDeletion() {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "4");
         deleteCommand.executeCommand();
-        assert ingredients.getIngredientByIndex(0) == ingredient0 : "Ingredient was not supposed to be removed";
-        assert ingredients.getIngredientByIndex(1) == ingredient1 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(0) == ingredient0 : "Ingredient was not supposed to be removed";
+        assert ingredients.getIngredient(1) == ingredient1 : "Ingredient was not supposed to be removed";
     }
 }

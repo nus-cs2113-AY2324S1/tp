@@ -112,7 +112,7 @@ public class Ui {
     }
 
     public static void printSpecificRecipe(RecipeList recipes, int recipeIndex) {
-        recipes.viewRecipeByIndex(recipeIndex);
+        recipes.viewRecipe(recipeIndex);
         drawDivider();
     }
 
