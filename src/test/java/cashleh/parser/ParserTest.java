@@ -1,6 +1,5 @@
 package cashleh.parser;
 
-import cashleh.Ui;
 import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehParsingException;
@@ -12,8 +11,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import cashleh.commands.AddExpense;
-import cashleh.commands.AddIncome;
 import cashleh.commands.DeleteExpense;
 import cashleh.commands.DeleteIncome;
 import cashleh.commands.Exit;
