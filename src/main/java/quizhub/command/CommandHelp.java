@@ -15,7 +15,7 @@ public class CommandHelp extends Command{
      * 
      * @param ui User interface for interactions with user through CLI.
      * @param questions Current question list in the program.
-     * @param dataStorage Hard disk storage for storing task data.
+     * @param dataStorage Hard disk storage for storing question data.
      */
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {

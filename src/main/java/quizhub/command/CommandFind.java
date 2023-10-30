@@ -4,7 +4,7 @@ import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 /**
- * Represents a command to search for a task.
+ * Represents a command to search for a question.
  */
 public class CommandFind extends Command{
     public static final String COMMAND_WORD = "find";
@@ -18,7 +18,7 @@ public class CommandFind extends Command{
     private String searchDetails;
 
     /**
-     * Creates a new find command to search for a task.
+     * Creates a new find command to search for a question.
      *
      * @param searchDetails User input containing details of what to search.
      */
@@ -29,12 +29,12 @@ public class CommandFind extends Command{
     }
 
     /**
-     * Checks if specified task exists.
-     * Marks the specified task as not done and updates storage data.
+     * Checks if specified question exists.
+     * Marks the specified question as not done and updates storage data.
      *
      * @param ui User interface for interactions with user through CLI.
      * @param questions Current question list in the program.
-     * @param dataStorage Hard disk storage for storing task data.
+     * @param dataStorage Hard disk storage for storing question data.
      */
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {

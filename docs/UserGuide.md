@@ -16,7 +16,7 @@ from all fields of study.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `QuizHub` from [here](http://link.to/duke).
+2. Down the latest version of `QuizHub` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases).
 
 ## Features
 
@@ -248,8 +248,8 @@ Storage:
 
 Editing:
 * You may directly update the storage file instead of adding questions with commands
-* You should edit the `tasklist.txt` file in the working directory of the `QuizHub.jar` file
-* If the `tasklist.txt` is not already present, you should run the program once for initialization
+* You should edit the `questionlist.txt` file in the working directory of the `QuizHub.jar` file
+* If the `questionlist.txt` is not already present, you should run the program once for initialization
 * You can edit the file in the format as described below.
 
 Format:
@@ -274,7 +274,7 @@ S | undone | Does one-time-pad satisfy perfect secrecy / Yes | CS3235 | EASY
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Transfer the tasklist.txt generated to the same local directory as the jar file of the program in another
+**A**: Transfer the `questionlist.txt` generated to the same local directory as the jar file of the program in another
 computer.
 
 ## Command Summary

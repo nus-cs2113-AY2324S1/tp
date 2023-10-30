@@ -5,12 +5,13 @@ import quizhub.ui.Ui;
 import quizhub.storage.Storage;
 
 /**
- * The main program running for the Duke chatbot.
+ * The main program running for the QuizHub Application.
  * The program bridges the user interface (Ui),
  * hard disk data (dataStorage) and supports
  * dynamic data manipulation.
  */
 public class Quizhub {
+    private static final String FILE_PATH = "questionlist.txt";
     private Ui ui;
     private Storage dataStorage;
     private QuestionList questions;
@@ -28,10 +29,10 @@ public class Quizhub {
         parser = new Parser();
     }
     /**
-     * Starts the chatbot by showing opening message.
-     * Chatbot repeatedly handles user commands
+     * Starts the QuizHub application by showing opening message.
+     * QuizHub application repeatedly handles user commands
      * until it is requested to terminate.
-     * Chatbot closes by showing closing message.
+     * QuizHub application closes by showing closing message.
      */
     public void run(){
         ui.displayOpeningMessage();
@@ -50,6 +51,6 @@ public class Quizhub {
     }
 
     public static void main(String[] args) {
-        new Quizhub("tasklist.txt").run();
+        new Quizhub(FILE_PATH).run();
     }
 }

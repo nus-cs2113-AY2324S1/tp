@@ -49,27 +49,27 @@ public class Ui {
             "difficulty levels" + System.lineSeparator() + "    No changes will be made to your difficulty level";
     private final Scanner input = new Scanner(System.in);  // Create a Scanner object
     private Storage dataStorage;
-    private QuestionList tasks;
+    private QuestionList questions;
     /**
-     * Sets up the bridging between the UI and tasks data.
+     * Sets up the bridging between the UI and question data.
      *
-     * @param tasks A record of all tasks documented that is built on program start and disposed on program exit.
-     * @param dataStorage The hard disk record of all tasks documented that persists even on program exit.
+     * @param questions A record of all questions documented that is built on program start and disposed on exit.
+     * @param dataStorage The hard disk record of all questions documented that persists even on program exit.
      */
-    public Ui(Storage dataStorage, QuestionList tasks){
+    public Ui(Storage dataStorage, QuestionList questions){
         this.dataStorage = dataStorage;
-        this.tasks = tasks;
+        this.questions = questions;
     }
     /**
      * Print out separating line in CLI to mark
-     * start and end of chatbot replies.
+     * start and end of QuizHub output.
      */
     public void showLine(){
         System.out.println("    ____________________________________________________________\n");
     }
     /**
      * Displays app logo and opening message to welcome users
-     * on the launch of chatbot.
+     * on the launch of QuizHub application.
      */
     public void displayOpeningMessage(){
         String logo =  "    _______          _________ _______                    ______  \n" +
@@ -85,8 +85,8 @@ public class Ui {
         System.out.println("    Welcome to Quizhub!!!\n");
         System.out.println("    Let the quizzing begin XDD");
         System.out.println();
-        dataStorage.loadData(tasks);
-        assert tasks != null : "Invalid null tasks";
+        dataStorage.loadData(questions);
+        assert questions != null : "Invalid null questions";
         showLine();
     }
 
@@ -103,10 +103,10 @@ public class Ui {
 
     }
     /**
-     * Displays closing message on exiting the chatbot.
+     * Displays closing message on exiting the QuizHub application.
      */
     public void displayClosingMessage(){
-        dataStorage.updateData(tasks);
+        dataStorage.updateData(questions);
         System.out.println("    Are you sure you want to stop quizzing?");
         System.out.println("    Well... hope you had fun quizzing :D");
         System.out.println("    See you again soon!");
