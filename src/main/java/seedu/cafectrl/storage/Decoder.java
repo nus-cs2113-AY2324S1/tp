@@ -15,9 +15,9 @@ public class Decoder {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         for (String encodedData : encodedPantryStock) {
             String[] decodedData = encodedData.split(" ");
-            if (decodedData.length != 3) {
+            if (!isValidPantryStockFormat(decodedData)) {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
-            } else if (isValidQuantityFormat(decodedData[1])) {
+            } else {
                 Ingredient ingredient = new Ingredient(decodedData[0],
                         Integer.parseInt(decodedData[1]), decodedData[2]);
                 pantryStock.add(ingredient);
@@ -26,12 +26,17 @@ public class Decoder {
         return new Pantry(ui, pantryStock);
     }
 
-    private static boolean isValidQuantityFormat(String quantityInString) {
-        try {
-            Integer.parseInt(quantityInString);
-        } catch (NumberFormatException e) {
+    private static boolean isValidPantryStockFormat(String[] decodedPantryStock) {
+        if (decodedPantryStock.length != 3) {
             ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
             return false;
+        } else {
+            try {
+                Integer.parseInt(decodedPantryStock[2]);
+            } catch (NumberFormatException e) {
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
+                return false;
+            }
         }
         return true;
     }
