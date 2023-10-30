@@ -4,7 +4,6 @@ package seedu.cafectrl.command;
  * Represents an executable command.
  */
 public class Command {
-
     public int index;
 
     public void setIndex(int index) {

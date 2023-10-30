@@ -8,7 +8,6 @@ import seedu.cafectrl.data.dish.Ingredient;
 import java.util.ArrayList;
 
 public class Encoder {
-
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
         // Convert pantry stock to a list of String
         ArrayList<String> pantryStockInString = new ArrayList<>();

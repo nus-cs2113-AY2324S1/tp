@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Pantry {
-
     private ArrayList<Ingredient> pantryStock;
     private ArrayList<Dish> menuItems;
     private Ui ui;

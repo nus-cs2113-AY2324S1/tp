@@ -7,12 +7,11 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 
 public class BuyIngredientCommand extends Command {
-
     public static final String COMMAND_WORD = "buy_ingredient";
+
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> ingredients;
-
 
     public BuyIngredientCommand(ArrayList<Ingredient> ingredients, Ui ui, Pantry pantry) {
         this.ingredients = ingredients;
