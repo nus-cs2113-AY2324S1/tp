@@ -2,7 +2,10 @@ package fittrack.data;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("AssertBetweenInconvertibleTypes")
 class WeightTest {
@@ -31,7 +34,7 @@ class WeightTest {
     }
 
     @Test
-    void toString_184o32_184o3cm() {
+    void toString_w84o32_str84o3kg() {
         assertEquals("84.3kg", new Weight(84.32).toString());
     }
 }

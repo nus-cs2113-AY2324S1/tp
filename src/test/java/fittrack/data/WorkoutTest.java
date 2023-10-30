@@ -31,12 +31,12 @@ class WorkoutTest {
     }
 
     @Test
-    void getCalories_tw_100() {
+    void getCalories_tw_double100() {
         assertEquals(100, tw.getCalories());
     }
 
     @Test
-    void getDate_tw_20231030() {
+    void getDate_tw_date20231030() {
         assertEquals(new Date("2023-10-30"), tw.getDate());
     }
 

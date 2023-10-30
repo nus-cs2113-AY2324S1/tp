@@ -3,7 +3,8 @@ package fittrack.data;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MealTest {
     private static Meal tm;
@@ -35,12 +36,12 @@ class MealTest {
     }
 
     @Test
-    void getCalories_tm_100() {
+    void getCalories_tm_cal100() {
         assertEquals(new Calories(100), tm.getCalories());
     }
 
     @Test
-    void getMealDate_tm_20231030() {
+    void getMealDate_tm_date20231030() {
         assertEquals(new Date("2023-10-30"), tm.getMealDate());
     }
 

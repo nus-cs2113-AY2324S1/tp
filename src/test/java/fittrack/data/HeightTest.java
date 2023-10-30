@@ -2,7 +2,10 @@ package fittrack.data;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("AssertBetweenInconvertibleTypes")
 class HeightTest {
@@ -31,12 +34,12 @@ class HeightTest {
     }
 
     @Test
-    void toString_184o32_184o3cm() {
+    void toString_h184o32_str184o3cm() {
         assertEquals("184.3cm", new Height(184.32).toString());
     }
 
     @Test
-    void calculateIdealWeight_180_success() {
+    void calculateIdealWeight_h180_success() {
         double idealWeight180 = 50 + (0.91 * (180. - 152.4));
         assertEquals(idealWeight180, new Height(180.).calculateIdealWeight());
     }
