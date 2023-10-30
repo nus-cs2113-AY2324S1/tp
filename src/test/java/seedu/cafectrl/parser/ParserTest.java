@@ -432,5 +432,47 @@ class ParserTest {
 
         assertThrows(ArithmeticException.class, () -> Parser.parsePriceToFloat(inputPriceString));
     }
+
+    @Test
+    void isRepeatedDishName_existingDishName_true() {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        String inputDishName = "chicken rice";
+
+        assertTrue(Parser.isRepeatedDishName(inputDishName, menu));
+    }
+
+    @Test
+    void isRepeatedDishName_nonExistingDishName_false() {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        String inputDishName = "chicken chop";
+
+        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+    }
+
+    @Test
+    void isRepeatedDishName_nullString_nullPointerExceptionThrown() throws NullPointerException {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        assertThrows(NullPointerException.class, () -> Parser.isRepeatedDishName(null, menu));
+    }
+
+    @Test
+    void isRepeatedDishName_emptyDishName_false() {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        String inputDishName = "";
+
+        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+    }
     //@@author
 }
