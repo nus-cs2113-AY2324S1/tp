@@ -25,7 +25,7 @@ Please enter your height (in cm), weight (in kg), and daily calorie limit (in kc
 Here are your profile settings.
 Height: Height: 180.0cm
 Weight: 80.0kg
-Daily calorie limit: 2000.0kcal
+Daily calorie limit: 2000kcal
 BMI: 24.69
 ____________________________________________________________
 `viewprofile 123` is an invalid command.
@@ -35,13 +35,13 @@ Type `viewprofile` to view your profile.
 Your Profile:
 Height: 180.0cm
 Weight: 80.0kg
-Daily calorie limit: 2000.0kcal
+Daily calorie limit: 2000kcal
 BMI: 24.69
 
 Here is your updated profile:
 Height: 170.0cm
 Weight: 70.0kg
-Daily calorie limit: 1500.0kcal
+Daily calorie limit: 1500kcal
 BMI: 24.22
 
 `editprofileh/120w/80l/100` is an invalid command.
@@ -54,7 +54,7 @@ Type `editprofile h/<HEIGHT> w/<WEIGHT> l/<CALORIE_LIMIT>` to edit.
 Your Profile:
 Height: 170.0cm
 Weight: 70.0kg
-Daily calorie limit: 1500.0kcal
+Daily calorie limit: 1500kcal
 BMI: 24.22
 
 Your current BMI is 24.22
@@ -65,7 +65,7 @@ BMI falls under NORMAL WEIGHT category
 Type `bmi` to view your BMI.
 
 I've added the following meal:
-[M] pasta (200.0kcal, 2023-10-22)
+[M] pasta (200kcal, 2023-10-22)
 
 `addmeal pizza 200` is an invalid command.
 `addmeal` adds your daily meal data to the list.
@@ -74,7 +74,7 @@ Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
 You should type <DATE> in format of `yyyy-MM-dd`.
 
 I've added the following meal:
-[M] cabonara pasta (180.0kcal, 2023-10-29)
+[M] cabonara pasta (180kcal, 2023-10-29)
 
 `viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
@@ -89,37 +89,37 @@ Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
 You should type <DATE> in format of `yyyy-MM-dd`.
 
 I've added the following workout:
-[W] run (100.0kcal, 2023-10-22)
+[W] run (100kcal, 2023-10-22)
 
 I've added the following workout:
-[W] long run (200.0kcal, 2023-10-29)
+[W] long run (200kcal, 2023-10-29)
 
 These are the workouts you have done:
-1.[W] run (100.0kcal, 2023-10-22)
-2.[W] long run (200.0kcal, 2023-10-29)
+1.[W] run (100kcal, 2023-10-22)
+2.[W] long run (200kcal, 2023-10-29)
 
 
 These meals contain the keyword pasta:
-1. [M] pasta (200.0kcal, 2023-10-22)
-2. [M] cabonara pasta (180.0kcal, 2023-10-29)
+1. [M] pasta (200kcal, 2023-10-22)
+2. [M] cabonara pasta (180kcal, 2023-10-29)
 
 
 These workouts contain the keyword run:
-1. [W] run (100.0kcal, 2023-10-22)
-2. [W] long run (200.0kcal, 2023-10-29)
+1. [W] run (100kcal, 2023-10-22)
+2. [W] long run (200kcal, 2023-10-29)
 
 
 `deletemeal1` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 I've deleted the following meal:
-[M] pasta (200.0kcal, 2023-10-22)
+[M] pasta (200kcal, 2023-10-22)
 
 `deleteworkout1` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 I've deleted the following workout:
-[W] run (100.0kcal, 2023-10-22)
+[W] run (100kcal, 2023-10-22)
 
 Recommended Weight: 66.01599999999999 kg
 
