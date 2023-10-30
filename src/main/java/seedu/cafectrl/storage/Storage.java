@@ -7,6 +7,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Handles loading and saving data for menu, orderList, pantryStock
@@ -20,16 +21,14 @@ public class Storage {
         this.ui  = ui;
     }
 
-    //@@author DextheChik3n
+
+    public Menu loadMenu() throws IOException {
+        fileManager.openTextFile(FilePath.MENU_FILE_PATH);    ArrayList<String> menuFromTextFile = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
+        return Decoder.decodeMenuData(menuFromTextFile);}
     /**
-     * Read and decode menu data from text file and pass it to the menu
-     * @return menu with data from the file
-     * @throws FileNotFoundException if the file is not found in the specified file path
-     */
-    public Menu loadMenu() throws FileNotFoundException {
-        // ArrayList<String> encodedMenu = this.fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-        // return Decoder.decodeMenuData(encodedMenu);
-        return new Menu();
+     * Encode and write the data from menu to the text file * @param menu menu from current session
+     * @throws IOException if the file is not found in the specified file path */
+    public void saveMenu(Menu menu) throws IOException {    fileManager.overwriteFile(FilePath.MENU_FILE_PATH, Encoder.encodeMenu(menu));
     }
 
     /**
@@ -44,15 +43,17 @@ public class Storage {
     }
 
     /**
-     * Read and decode order list data from text file and pass it to the menu
-     * @return orderList with data from the file
-     * @throws FileNotFoundException if the file is not found in the specified file path
+     * Loads order data from a text file, decodes it, and returns it as an OrderList object.
+     *
+     * @return An OrderList object containing data from the file.
+     * @throws FileNotFoundException if the file is not found in the specified file path.
      */
-    public OrderList loadOrderList() throws FileNotFoundException {
-        // ArrayList<String> encodedOrderList = this.fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
-        // return Decoder.decodeOrderListData(encodedOrderList);
-        return new OrderList();
+    public OrderList loadOrderList(Menu menu) throws IOException {
+        fileManager.openTextFile(FilePath.ORDERS_FILE_PATH);
+        ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
+        return Decoder.decodeOrderList(encodedOrderList, menu);
     }
+
 
     /**
      * Encode and write the data from menu, orderList and pantry to the respective text files
@@ -63,7 +64,7 @@ public class Storage {
      */
     public void saveAll(Menu menu, OrderList orderList, Pantry pantry) throws IOException {
         saveMenu(menu);
-        saveOrderList(orderList);
+        //saveOrderList(orderList);
         savePantryStock(pantry);
     }
 
@@ -76,22 +77,6 @@ public class Storage {
         this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
     }
 
-    /**
-     * Encode and write the data from orderList to the text file
-     * @param orderList orderList from current session
-     * @throws IOException if the file is not found in the specified file path
-     */
-    private void saveOrderList(OrderList orderList) throws IOException {
-        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeOrderList(orderList));
-    }
 
-    /**
-     * Encode and write the data from menu to the text file
-     * @param menu menu from current session
-     * @throws IOException if the file is not found in the specified file path
-     */
-    private void saveMenu(Menu menu) throws IOException {
-        this.fileManager.overwriteFile(FilePath.MENU_FILE_PATH, Encoder.encodeMenu(menu));
-    }
 
 }
