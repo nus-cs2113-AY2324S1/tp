@@ -8,19 +8,19 @@ activate Main
 Main -> Parser: parseCommand(fullUserInput: String)
 activate Parser
 
-alt COMMAND_WORD
-Parser -> Parser: prepareCommand(requiredArguments)
+alt XYZCOMMAND_WORD
+Parser -> Parser: prepareXYZCommand(requiredArguments)
 activate Parser
-Parser -> Command: Command()
-activate Command
-Command --> Parser: command
-deactivate Command
+Parser -> XYZCommand: XYZCommand(requiredArguments)
+activate XYZCommand
+XYZCommand --> Parser: XYZCommand
+deactivate XYZCommand
 deactivate Parser
 end alt
 
 deactivate Parser
 
-Parser --> Main: command
-Main -> Command: execute()
-activate Command
+Parser --> Main: XYZCommand
+Main -> XYZCommand: execute()
+activate XYZCommand
 @enduml
