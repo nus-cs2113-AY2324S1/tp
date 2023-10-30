@@ -13,6 +13,12 @@ public class Bmi {
         this.value = bmi;
     }
 
+    public Bmi(Height height, Weight weight) {
+        assert (height != null && height.value > 0 && weight != null);
+        double heightInMetres = height.value / 100;
+        this.value = weight.value / heightInMetres / heightInMetres;
+    }
+
     private Map<String, String> createBMICategories() {
         return Map.of(
                 "Underweight", "0.0 18.5",

@@ -1,13 +1,11 @@
 package fittrack;
 
-import java.text.DecimalFormat;
 import fittrack.data.Height;
 import fittrack.data.Weight;
 import fittrack.data.Calories;
 import fittrack.data.Bmi;
 
 public class UserProfile {
-    private final DecimalFormat df = new DecimalFormat("0.00");
     private Height height;
     private Weight weight;
     private Calories dailyCalorieLimit;
@@ -59,13 +57,7 @@ public class UserProfile {
     }
 
     private void updateBmi() {
-        this.bmi = calculateBmi(height, weight);
-    }
-
-    public Bmi calculateBmi(Height height, Weight weight) {
-        assert (height != null && height.value > 0 && weight != null);
-        double heightInMetres = height.value / 100;
-        return new Bmi(weight.value / heightInMetres / heightInMetres);
+        this.bmi = new Bmi(height, weight);
     }
 
     public String toString() {
