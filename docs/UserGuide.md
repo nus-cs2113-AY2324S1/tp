@@ -5,6 +5,18 @@
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
 * [Features](#features)
+  * [Add cashflow](#add-cashflow)
+    * [Add income](#add-income-add-income)
+    * [Add expense](#add-expense-add-expense)
+  * [Delete cashflow](#delete-cashflow-delete)
+    * [Delete income](#delete-income-delete-income)
+    * [Delete expense](#delete-expense-delete-expense)
+    * [Delete recurring cashflow](#delete-recurring-delete-recurring)
+  * [List](#list)
+    * [List all](#list-all-list)
+    * [List income](#list-income-list-income)
+    * [List expense](#list-expense-list-expense)
+    * [List recurring](#list-recurring-list-recurring)
   * [Budget](#budget)
     * [Setting budget](#setting-a-budget-budget-set)
     * [Updating budget](#updating-budget-budget-update)
@@ -34,11 +46,308 @@ you a one-stop interface to access a plethora of features to manage your finance
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Financial Planner` from [here](http://link.to/duke).
+3. Copy the file to the folder you want to use as the *home folder* for Financial Planner.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ip.jar` command to run the application.
+5. Refer to the **Features** section below for details of each command.
 
 ## Features
 
 {Give detailed description of each feature}
+### Notes about the command format
+- Words in `UPPER_CASE` are parameters to be supplied by the user.
+
+  e.g. in `add income /a AMOUNT`, `AMOUNT` is a parameter which can be used as `add income /a 100`.
+- Items in square brackets are optional.
+
+  e.g. `[/r DAYS]` can be used as `/r 30` or left empty.
+
+### Add cashflow
+
+#### Add income: `add income`
+Adds an income source to the Financial Planner.
+
+Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
+
+- `/r` is used to denote a recurring income, with the period to the next addition is specified by `DAYS`.
+- `/d` is used to give a description to the income.
+- `/t` is used to specify the income type, where the list of acceptable types is given below
+
+| Income Types  |
+|---------------|
+| `salary`      | 
+| `investments` |
+| `allowance`   | 
+| `others`      |
+
+Example of usage: `add income /a 5000 /t salary /r 30 /d work`
+
+Example output:
+
+```
+You have added an Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: work
+to the Financial Planner.
+Balance: 5000.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+#### Add expense: `add expense`
+Adds an expense to the Financial Planner
+
+Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
+
+- `/r` is used to denote a recurring expense, with the period to the next addition is specified by `DAYS`.
+- `/d` is used to give a description to the expense.
+- `/t` is used to specify the expense type, where the list of acceptable types is given below
+
+| Expense         |
+|-----------------|
+| `dining`        |
+| `entertainment` |
+| `shopping`      |
+| `travel`        |
+| `insurance`     |
+| `necessities`   |
+| `others`        |
+
+Example of usage: `add expense /a 300 /t necessities /r 30 /d groceries`
+
+Example output:
+```
+You have added an Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+to the Financial Planner.
+Balance: 4700.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+### Delete cashflow: `delete`
+Deletes a cashflow from the Financial Planner.
+
+Format: `delete INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when [`list`](#list-all-list) command is used.
+- `/r` is used to delete all **future** cashflows **only**.
+
+Example of usage: `delete 1 /r`
+
+Example output:
+```
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
+```
+Example of usage: `delete 1`
+
+Example output:
+```
+You have removed an Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
+from the Financial Planner.
+Balance: -1130.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+
+#### Delete income: `delete income`
+Deletes an income from the Financial Planner.
+
+Format: `delete income INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when [`list income`](#list-income-list-income) command is used.
+- `/r` is used to delete all **future** incomes **only**.
+
+Example of usage: `delete income 2 /r`
+
+Example output:
+```
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Income
+   Type: Allowance
+   Amount: 500.00
+   Description: parents
+```
+Example of usage: `delete income 2`
+
+Example output:
+```
+You have removed an Income
+   Type: Allowance
+   Amount: 500.00
+   Description: parents
+from the Financial Planner.
+Balance: 5170.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+
+#### Delete expense: `delete expense`
+Deletes an expense from the Financial Planner.
+
+Format: `delete expense INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when [`list expense`](#list-expense-list-expense) command is used.
+- `/r` is used to delete all **future** expenses **only**.
+
+Example of usage: `delete expense 2 /r`
+
+Example output:
+```
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Expense
+   Type: Insurance
+   Amount: 800.00
+   Description: ntuc income
+```
+Example of usage: `delete expense 2`
+
+Example output:
+```
+You have removed an Expense
+   Type: Insurance
+   Amount: 800.00
+   Description: ntuc income
+from the Financial Planner.
+Balance: -330.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+
+#### Delete recurring: `delete recurring`
+Deletes a recurring cashflow from the Financial Planner.
+
+Format: `delete recurring INDEX [/r]`
+
+- `INDEX` refers to the index number shown in the displayed list when [`list recurring`](#list-recurring-list-recurring) command is used.
+- `/r` is used to delete all **future** recurring cashflows **only**.
+
+Example of usage: `delete recurring 2 /r`
+
+Example output:
+```
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Expense
+   Type: Insurance
+   Amount: 800.00
+   Description: ntuc income
+```
+Example of usage: `delete recurring 1`
+
+Example output:
+```
+You have removed an Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+from the Financial Planner.
+Balance: -830.00
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+
+```
+### List
+
+#### List all: `list`
+// TODO
+
+Example output:
+
+```
+You have 4 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: work
+2: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+3: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, starting from: Oct 30 2023
+   Description: ntuc income
+4: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+```
+#### List income: `list income`
+//TODO
+
+Example output:
+```
+You have 3 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: work
+2: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: parents
+3: Income
+   Type: Investments
+   Amount: 1000.00
+```
+#### List expense: `list expense`
+//TODO
+
+Example output:
+```
+You have 3 matching cashflows:
+1: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+2: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, starting from: Oct 30 2023
+   Description: ntuc income
+3: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+```
+#### List recurring: `list recurring`
+Lists all recurring cashflows.
+
+Format: `list recurring`
+
+- This list will not include any cashflow that has already recurred.
+
+Example of usage: `list recurring`
+
+Example output:
+```
+You have 2 matching cashflows:
+1: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, starting from: Oct 30 2023
+   Description: ntuc income
+2: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, starting from: Oct 30 2023
+   Description: groceries
+```
 
 ### Budget
 
@@ -250,13 +559,37 @@ Existing data will be automatically loaded when the program starts up.
 
 {Give a 'cheat sheet' of commands here}
 
-| Action               | Format                    |
-|----------------------|---------------------------|
-| **Set budget**       | `budget set /b BUDGET`    |
-| **Update budget**    | `budget update /b BUDGET` |
-| **Reset budget**     | `budget reset`            |
-| **Delete budget**    | `budget delete`           |
-| **View budget**      | `budget view`             |
-| **Display Overview** | `overview`                |
-| **View balance**     | `balance`                 |
-| **Exit program**     | `exit`                    |
+| Action                           | Format                                                    |
+|----------------------------------|-----------------------------------------------------------|
+| **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]` |
+| **Add expense**                  | `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]` |
+| **Delete cashflow**              | `delete INDEX [/r]`                                       |
+| **Delete income**                | `delete income INDEX [/r]`                                |
+| **Delete expense**               | `delete expense INDEX [/r]`                               |
+| **Delete recurrence**            | `delete recurrence INDEX [/r]`                            |
+| **list all cashflows**           | `list`                                                    |
+| **list all incomes**             | `list income`                                             |
+| **list all expenses**            | `list expense`                                            |
+| **list all recurring cashflows** | `list recurrence`                                          |
+| **Set budget**                   | `budget set /b BUDGET`                                    |
+| **Update budget**                | `budget update /b BUDGET`                                 |
+| **Reset budget**                 | `budget reset`                                            |
+| **Delete budget**                | `budget delete`                                           |
+| **View budget**                  | `budget view`                                             |
+| **Display Overview**             | `overview`                                                |
+| **View balance**                 | `balance`                                                 |
+| **Exit program**                 | `exit`                                                    |
+
+- Note: Cashflow is referring to an income or expense
+
+**Income and Expense types**
+
+| Income        | Expense         |
+|---------------|-----------------|
+| `salary`      | `dining`        |
+| `investments` | `entertainment` |
+| `allowance`   | `shopping`      |
+| `others`      | `travel`        |
+|               | `insurance`     |
+|               | `necessities`   |
+|               | `others`        |
