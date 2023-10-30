@@ -53,7 +53,7 @@ public class Ui {
     /**
      * Sets up the bridging between the UI and question data.
      *
-     * @param questions A record of all questions documented that is built on program start and disposed on program exit.
+     * @param questions A record of all questions documented that is built on program start and disposed on exit.
      * @param dataStorage The hard disk record of all questions documented that persists even on program exit.
      */
     public Ui(Storage dataStorage, QuestionList questions){
