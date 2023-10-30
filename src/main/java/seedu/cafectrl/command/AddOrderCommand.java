@@ -1,8 +1,8 @@
 package seedu.cafectrl.command;
 
-import seedu.cafectrl.Chef;
-import seedu.cafectrl.Order;
-import seedu.cafectrl.OrderList;
+import seedu.cafectrl.data.Chef;
+import seedu.cafectrl.data.Order;
+import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
@@ -38,5 +38,6 @@ public class AddOrderCommand extends Command {
             orderList.addCost(order);
         }
         ui.showTotalCost(dollarValue.format(orderList.getTotalOrderListCost()));
+        //orderList.printOrderList();
     }
 }

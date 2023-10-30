@@ -1,6 +1,6 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.OrderList;
+import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
@@ -80,4 +80,7 @@ public class Storage {
     public void saveMenu(Menu menu) throws IOException {
     }
 
+    public Menu loadMenu() {
+        return null;
+    }
 }

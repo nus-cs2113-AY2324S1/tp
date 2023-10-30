@@ -1,4 +1,4 @@
-package seedu.cafectrl;
+package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;

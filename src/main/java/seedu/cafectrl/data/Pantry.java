@@ -110,10 +110,10 @@ public class Pantry {
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
             int finalQuantity = stockQuantity-usedQuantity;
-
             usedIngredientFromStock.setQty(finalQuantity);
         }
         //TODO: store pantryStock to storage
+
     }
 
     /**

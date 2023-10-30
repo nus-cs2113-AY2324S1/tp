@@ -1,19 +1,21 @@
-package seedu.cafectrl;
+package seedu.cafectrl.data;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OrderList {
+    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     protected ArrayList<Order> orderList;
     protected float totalOrderListCost;
     public OrderList() {
-        this.orderList = new ArrayList<Order>();
+        this.orderList = new ArrayList<>();
+        this.totalOrderListCost = 0;
+    }
+    public OrderList(ArrayList<Order> decodedOrderList){
+        this.orderList = decodedOrderList;
         this.totalOrderListCost = 0;
     }
 
-    public OrderList(ArrayList<Order> decodedOrderList){
-        this.orderList = decodedOrderList;
-
-    }
     public ArrayList<Order> getOrderList() {
         return orderList;
     }
@@ -41,5 +43,18 @@ public class OrderList {
 
     public float getTotalOrderListCost() {
         return totalOrderListCost;
+    }
+
+    public void printOrderList() {
+        if (orderList.isEmpty()) {
+            return;
+        }
+        System.out.println("\nPrinting Orders");
+        for (int i = 0; i < getSize(); i++) {
+            Order order = getOrder(i);
+            String orderString = order.toString();
+            System.out.println(orderString);
+        }
+        System.out.println("\nTotal Order cost: $" + dollarValue.format(getTotalOrderListCost()));
     }
 }
