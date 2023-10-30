@@ -2,6 +2,7 @@ package essenmakanan.recipe;
 
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ui.Ui;
+import essenmakanan.ingredient.Ingredient;
 
 import java.util.ArrayList;
 
@@ -78,14 +79,26 @@ public class RecipeList {
     }
 
     private static void listRecipeSteps(essenmakanan.recipe.Recipe recipe) {
-        System.out.println("To make: " + recipe.getTitle().toUpperCase());
+
         RecipeStepList steps = recipe.getRecipeSteps();
         int count = 1;
         for (Step step : steps.getSteps()) {
             assert steps.getStepByIndex(count - 1).equals(step)
                     : "Step is not matching with the current index";
 
-            System.out.println("\tStep " + count + ": " + step.getDescription());
+            System.out.println("\t" + count + ") " + step.getDescription());
+            count++;
+        }
+    }
+
+    private static void listRecipeIngredients(essenmakanan.recipe.Recipe recipe) {
+        RecipeIngredientList ingredients = recipe.getRecipeIngredients();
+        int count = 1;
+        for (Ingredient ingredient : ingredients.getIngredients()) {
+            assert ingredients.getIngredientByIndex(count - 1).equals(ingredient)
+                    : "Ingredient is not matching with the current index";
+
+            System.out.println("\t" + count + ") " + ingredient);
             count++;
         }
     }
@@ -95,7 +108,11 @@ public class RecipeList {
 
         assert recipeExist(index) : "Index is out of bounds";
         Recipe recipe = recipes.get(index);
+        System.out.println("To make: [" + recipe.getTitle().toUpperCase() + "]");
 
+        System.out.println("Ingredients needed: ");
+        listRecipeIngredients(recipe);
+        System.out.println("Steps to follow: ");
         listRecipeSteps(recipe);
     }
 

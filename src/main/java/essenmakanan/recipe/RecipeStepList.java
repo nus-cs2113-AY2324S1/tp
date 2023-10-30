@@ -22,7 +22,7 @@ public class RecipeStepList {
                 this.addStep(input);
             }
         } while (isAddingSteps);
-        System.out.println("done steps");
+        System.out.println("Finished adding steps!");
     }
 
     public RecipeStepList(String[] inputSteps) {

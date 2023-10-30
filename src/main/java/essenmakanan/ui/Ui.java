@@ -59,7 +59,7 @@ public class Ui {
         drawDivider();
     }
 
-    public void printAddRecipeSuccess(String recipeTitle) {
+    public static void printAddRecipeSuccess(String recipeTitle) {
         System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
         drawDivider();
     }
