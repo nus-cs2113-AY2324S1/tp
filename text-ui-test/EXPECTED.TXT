@@ -2,7 +2,6 @@ Directory doesn't exist. Creating directory...
 Watchlist file not found... Creating
 Initializing New watchlist.. adding AAPL and GOOGL for your reference
 File not found. Creating new file...
-Current date: Oct 30 2023
 Welcome to your Financial Planner. Type something to get started.
 You have added an Income
    Type: Salary
