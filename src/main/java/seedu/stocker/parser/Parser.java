@@ -210,10 +210,12 @@ public class Parser {
             if (name != null && !name.isEmpty() && description != null && !description.isEmpty()) {
                 return new AddDescriptionCommand(name, description);
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDescriptionCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddDescriptionCommand.MESSAGE_USAGE));
             }
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDescriptionCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddDescriptionCommand.MESSAGE_USAGE));
         }
     }
 
@@ -222,10 +224,17 @@ public class Parser {
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 1) {
             String name = matcher.group(1);
-             return new GetDescriptionCommand(name);
+            if (name != null && !name.isEmpty()) {
+                return new GetDescriptionCommand(name);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        GetDescriptionCommand.MESSAGE_USAGE));
+            }
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetDescriptionCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    GetDescriptionCommand.MESSAGE_USAGE));
         }
     }
+
 
 }

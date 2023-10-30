@@ -24,6 +24,6 @@ public class ListDescriptionsCommand extends Command {
             result.append(entry.getKey()).append(": ").append(entry.getValue());
         }
 
-        return new CommandResult(result.toString());
+        return new CommandResult<>(result.toString());
     }
 }

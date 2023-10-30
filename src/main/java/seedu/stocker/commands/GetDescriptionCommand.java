@@ -7,7 +7,8 @@ public class GetDescriptionCommand extends Command {
 
     public static final String COMMAND_WORD = "getDescription";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets the description of a specific drug." + System.lineSeparator()
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets the description of a specific drug."
+            + System.lineSeparator()
             + "Parameters: NAME" + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " /n Panadol";
 

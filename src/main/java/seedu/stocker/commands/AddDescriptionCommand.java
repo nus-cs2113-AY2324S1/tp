@@ -24,6 +24,6 @@ public class AddDescriptionCommand extends Command {
     @Override
     public CommandResult execute() {
         seedu.stocker.drugs.Description.addDescription(drugName, drugDescription);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, drugName, drugDescription));
+        return new CommandResult<>(String.format(MESSAGE_SUCCESS, drugName, drugDescription));
     }
 }
