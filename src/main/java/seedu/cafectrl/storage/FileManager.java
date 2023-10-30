@@ -28,10 +28,10 @@ public class FileManager {
      * @return ArrayList that consists of every text line in each element
      */
     public ArrayList<String> readTextFile(String filePath) {
+        openTextFile(filePath);
         String userWorkingDirectory = System.getProperty("user.dir");
         java.nio.file.Path tasksFilePath = java.nio.file.Paths.get(userWorkingDirectory, filePath);
         File textFile = new File(String.valueOf(tasksFilePath));
-
 
         ArrayList<String> textLines = new ArrayList<>();
         // todo Dexter: implement proper error handling here
@@ -56,7 +56,7 @@ public class FileManager {
      * @return the file path of where the data is stored
      * @throws IOException if an I/O error occurred while creating the text file
      */
-    public String openTextFile(String filePath) throws IOException {
+    public String openTextFile(String filePath) {
         String userWorkingDirectory = System.getProperty("user.dir");
         java.nio.file.Path dataFilePath = java.nio.file.Paths.get(userWorkingDirectory, filePath);
         java.nio.file.Path dataFolderPath = dataFilePath.getParent();
@@ -65,12 +65,15 @@ public class FileManager {
 
         if (!Files.exists(dataFolderPath)) {
             folder.mkdir();
-            ui.showToUser(ErrorMessages.DATA_FOLDER_NOT_FOUND_MESSAGE, System.lineSeparator());
+            ui.showToUser(ErrorMessages.DATA_FOLDER_NOT_FOUND_MESSAGE);
         }
 
         if (!Files.exists(dataFilePath)) {
-            textFile.createNewFile();
-            ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            try {
+                textFile.createNewFile();
+            } catch (Exception e) {
+                ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE);
+            }
         }
 
         return dataFilePath.toString();
