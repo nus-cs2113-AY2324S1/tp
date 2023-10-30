@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
  * as well as a method to calculate net cash on hand.
  */
 public class FinancialStatement {
+    private static final int MESSAGE_START_INDEX = 0;
+    private static final int MESSAGE_END_INDEX = 45;
+    private static final String SEPARATOR = " ||";
     private ArrayList<Transaction> financialStatement = new ArrayList<>();
     private IncomeStatement incomeStatement;
     private ExpenseStatement expenseStatement;
@@ -87,22 +90,22 @@ public class FinancialStatement {
             throws CashLehMissingTransactionException {
         ArrayList<String> matchingTransactions = new ArrayList<>();
         boolean isMatch = false;
-        StringBuilder message = new StringBuilder("Here are your corresponding transactions with ");
-        final String SEPARATOR = " ||";
+
+        StringBuilder filterMessage = new StringBuilder("Here are your corresponding transactions with ");
         if (description != null && !description.isEmpty()) {
-            message.append("<description>: ").append(description).append(SEPARATOR);
+            filterMessage.append("<description>: ").append(description).append(SEPARATOR);
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.getAsDouble()).append(SEPARATOR);
+            filterMessage.append("<amount>: ").append(amount.getAsDouble()).append(SEPARATOR);
         }
         if (date != null) {
-            message.append("<date>: ").append(date).append(SEPARATOR);
+            filterMessage.append("<date>: ").append(date).append(SEPARATOR);
         }
         if (category != null) {
-            message.append("<category>: ").append(category).append(SEPARATOR);
+            filterMessage.append("<category>: ").append(category).append(SEPARATOR);
         }
-        matchingTransactions.add(message.toString());
 
+        StringBuilder matchingTransactionsMessage = new StringBuilder();
         for (Transaction transaction : financialStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || transaction.getDescription().equals(description);
@@ -113,13 +116,20 @@ public class FinancialStatement {
             // Determine the sign based on the type of transaction
             String sign = (transaction instanceof Income) ? "[+] " : "[-] ";
             if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
-                matchingTransactions.add(sign + transaction.toString());
+                matchingTransactionsMessage.append(sign).append(transaction.toString()).append("\n").append("\t");
                 isMatch = true;
             }
         }
         if (isMatch) {
+            //Add initial filter message
+            matchingTransactions.add(filterMessage.toString());
+            //Add matching expenses
+            matchingTransactions.add(matchingTransactionsMessage.toString().trim());
             Ui.printMultipleText(matchingTransactions);
         } else {
+            filterMessage.replace(MESSAGE_START_INDEX, MESSAGE_END_INDEX, "Your input is");
+            matchingTransactions.add(filterMessage.toString());
+            Ui.printMultipleText(matchingTransactions);
             throw new CashLehMissingTransactionException();
         }
     }

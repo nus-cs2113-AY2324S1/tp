@@ -51,6 +51,9 @@ public class Parser {
     private static final String FILTER_EXPENSE = "filterExpense";
     private static final String FILTER_INCOME = "filterIncome";
     private static final String FILTER = "filter";
+    private static final String AMOUNT_SUFFIX = "/amt";
+    private static final String DATE_SUFFIX = "/date";
+    private static final String CATEGORY_SUFFIX = "/cat";
 
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
@@ -220,7 +223,7 @@ public class Parser {
             format = new String[]{FILTER_EXPENSE, "/amt:optional", "/date:optional", "/cat:optional"};
             break;
         case FILTER_INCOME:
-            format = new String[]{FILTER_INCOME, "/amt:optional","/date:optional", "/cat:optional"};
+            format = new String[]{FILTER_INCOME, "/amt:optional", "/date:optional", "/cat:optional"};
             break;
         case FILTER:
             format = new String[]{FILTER, "/amt:optional", "/date:optional", "/cat:optional"};
@@ -229,10 +232,12 @@ public class Parser {
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
-        final String AMOUNT_SUFFIX = "/amt";
-        final String DATE_SUFFIX = "/date";
-        final String CATEGORY_SUFFIX = "/cat";
         String descriptionString = inputDetails.get(transactionType);
+        //remove scenarios where there is typo in input which might lead to it being recognised as a description,
+        // for instance /cat is written as cat/
+        descriptionString = descriptionString.replaceAll("(?i)\\b(amt|date|cat)\\b", "");
+        descriptionString = descriptionString.replaceAll("[^a-zA-Z0-9\\s]", "");
+        descriptionString = descriptionString.trim();
         String amountString = inputDetails.get(AMOUNT_SUFFIX);
         String dateString = inputDetails.get(DATE_SUFFIX);
         String categoryString = inputDetails.get(CATEGORY_SUFFIX);
@@ -292,8 +297,9 @@ public class Parser {
                 }
                 return parsedCategory;
             }
+        } else {
+            return null;
         }
-        return null;
     }
 
     private Budget getBudget(String input) throws CashLehParsingException {

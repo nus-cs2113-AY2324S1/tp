@@ -14,7 +14,9 @@ import java.util.stream.Collectors;
  * It provides methods for adding, deleting, retrieving, and displaying expenses within the statement.
  */
 public class ExpenseStatement {
-
+    private static final int MESSAGE_START_INDEX = 0;
+    private static final int MESSAGE_END_INDEX = 41;
+    private static final String SEPARATOR = " ||";
     private final ArrayList<Expense> expenseStatement = new ArrayList<>();
 
     public ExpenseStatement() {
@@ -110,36 +112,43 @@ public class ExpenseStatement {
         boolean isMatch = false;
 
         // Customize the message based on input
-        StringBuilder message = new StringBuilder("Here are your corresponding expenses with ");
-        final String SEPARATOR = " ||";
+        StringBuilder filterMessage = new StringBuilder("Here are your corresponding expenses with ");
         if (description != null && !description.isEmpty()) {
-            message.append("<description>: ").append(description).append(SEPARATOR);
+            filterMessage.append("<description>: ").append(description).append(SEPARATOR);
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.getAsDouble()).append(SEPARATOR);
+            filterMessage.append("<amount>: ").append(amount.getAsDouble()).append(SEPARATOR);
         }
         if (date != null) {
-            message.append("<date>: ").append(date).append(SEPARATOR);
+            filterMessage.append("<date>: ").append(date).append(SEPARATOR);
         }
         if (category != null) {
-            message.append("<category>: ").append(category).append(SEPARATOR);
+            filterMessage.append("<category>: ").append(category).append(SEPARATOR);
         }
-        matchingExpenses.add(message.toString());
 
+        StringBuilder matchingExpensesMessage = new StringBuilder();
         for (Expense expense : expenseStatement) {
             boolean descriptionMatch = (description == null) || (description.isEmpty())
                     || expense.getDescription().equals(description);
             boolean amountMatch = (amount.isEmpty()) || (expense.getAmount() == amount.getAsDouble());
             boolean dateMatch = (date == null) || (expense.getDate().equals(date));
-            boolean categoryMatch = (category == null) || (expense.getCategory().equals(category));
+            boolean categoryMatch = (category == null) || (expense.getCategory() != null &&
+                    expense.getCategory().equals(category));
             if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
-                matchingExpenses.add(expense.toString());
+                matchingExpensesMessage.append(expense.toString()).append("\n").append("\t");
                 isMatch = true;
             }
         }
         if (isMatch) {
+            //Add initial filter message
+            matchingExpenses.add(filterMessage.toString());
+            //Add matching expenses
+            matchingExpenses.add(matchingExpensesMessage.toString().trim());
             Ui.printMultipleText(matchingExpenses);
         } else {
+            filterMessage.replace(MESSAGE_START_INDEX, MESSAGE_END_INDEX, "Your input is");
+            matchingExpenses.add(filterMessage.toString());
+            Ui.printMultipleText(matchingExpenses);
             throw new CashLehMissingTransactionException();
         }
     }
