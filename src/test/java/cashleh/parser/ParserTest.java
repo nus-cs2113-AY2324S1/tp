@@ -78,7 +78,7 @@ public class ParserTest {
         parser.parse(inputString3).execute();
         assertEquals("\t____________________________________________________________\r\n"
             + "\tThe following income was added:\r\n"
-            + "\tpocket money (amount: 200.0, date: " + LocalDate.now() + ")\r\n"
+            + "\tIncome: pocket money (Amount: 200.0, " + LocalDate.now() + ")\r\n"
             + "\t____________________________________________________________\r\n", outputStreamCaptor.toString());
 
         String inputString4 = "addIncome pocket money /amt notnumber";
@@ -128,7 +128,7 @@ public class ParserTest {
         parser.parse(inputString3).execute();
         assertEquals("\t____________________________________________________________\r\n"
             + "\tThe following expense was added:\r\n"
-            + "\tfood (amount: 10.0, date: " + LocalDate.now() + ")\r\n"
+            + "\tExpense: food (Amount: 10.0, " + LocalDate.now() + ")\r\n"
             + "\t____________________________________________________________\r\n", outputStreamCaptor.toString());
 
         String inputString4 = "addExpense food /amt notnumber";
