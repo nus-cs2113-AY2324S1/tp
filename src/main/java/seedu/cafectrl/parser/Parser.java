@@ -207,7 +207,7 @@ public class Parser {
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
             if (isRepeatedDishName(dishName, menu)) {
-                return new IncorrectCommand(ErrorMessages.DISH_NOT_FOUND, ui);
+                return new IncorrectCommand(Messages.REPEATED_DISH_MESSAGE, ui);
             }
 
             ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
