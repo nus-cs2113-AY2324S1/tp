@@ -1,5 +1,6 @@
 package cashleh.parser;
 
+import cashleh.Ui;
 import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehParsingException;
@@ -78,7 +79,7 @@ public class ParserTest {
         parser.parse(inputString3).execute();
         assertEquals("\t____________________________________________________________\r\n"
             + "\tThe following income was added:\r\n"
-            + "\tIncome: pocket money (Amount: 200.0, " + LocalDate.now() + ")\r\n"
+            + "\tIncome: pocket money (Amount: 200.0, Date: " + Ui.getDateString(LocalDate.now()) + ")\r\n"
             + "\t____________________________________________________________\r\n", outputStreamCaptor.toString());
 
         String inputString4 = "addIncome pocket money /amt notnumber";
@@ -128,7 +129,7 @@ public class ParserTest {
         parser.parse(inputString3).execute();
         assertEquals("\t____________________________________________________________\r\n"
             + "\tThe following expense was added:\r\n"
-            + "\tExpense: food (Amount: 10.0, " + LocalDate.now() + ")\r\n"
+            + "\tExpense: food (Amount: 10.0, Date: " + Ui.getDateString(LocalDate.now()) + ")\r\n"
             + "\t____________________________________________________________\r\n", outputStreamCaptor.toString());
 
         String inputString4 = "addExpense food /amt notnumber";
