@@ -23,6 +23,9 @@ import seedu.stocker.commands.CheckOutCommand;
 import seedu.stocker.commands.ListVendorCommand;
 import seedu.stocker.commands.SetThresholdCommand;
 import seedu.stocker.commands.ListThresholdCommand;
+import seedu.stocker.commands.AddDescriptionCommand;
+import seedu.stocker.commands.GetDescriptionCommand;
+import seedu.stocker.commands.ListDescriptionsCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -55,6 +58,12 @@ public class Parser {
 
         case AddToCartCommand.COMMAND_WORD:
             return prepareAddToCartCommand(arguments);
+
+        case AddDescriptionCommand.COMMAND_WORD:
+            return prepareAddDescriptionCommand(arguments);
+
+        case GetDescriptionCommand.COMMAND_WORD:
+            return prepareGetDescriptionCommand(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommand(arguments);
@@ -97,6 +106,9 @@ public class Parser {
 
         case ListThresholdCommand.COMMAND_WORD:
             return new ListThresholdCommand();
+
+        case ListDescriptionsCommand.COMMAND_WORD:
+            return new ListDescriptionsCommand();
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -186,6 +198,33 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SetThresholdCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareAddDescriptionCommand(String args) {
+        Pattern pattern = Pattern.compile("/n (.*) /desc (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 2) {
+            String name = matcher.group(1);
+            String description = matcher.group(2);
+            if (name != null && !name.isEmpty() && description != null && !description.isEmpty()) {
+                return new AddDescriptionCommand(name, description);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDescriptionCommand.MESSAGE_USAGE));
+            }
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDescriptionCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareGetDescriptionCommand(String args) {
+        Pattern pattern = Pattern.compile("/n (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String name = matcher.group(1);
+             return new GetDescriptionCommand(name);
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetDescriptionCommand.MESSAGE_USAGE));
         }
     }
 
