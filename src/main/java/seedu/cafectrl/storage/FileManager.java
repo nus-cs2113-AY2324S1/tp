@@ -26,26 +26,25 @@ public class FileManager {
      * Reads the text file from the specified file path and stores each line in an ArrayList.
      *
      * @return ArrayList that consists of every text line in each element
-     * @throws FileNotFoundException If file is not found at the specified file path.
      */
-    public ArrayList<String> readTextFile(String filePath) throws FileNotFoundException {
+    public ArrayList<String> readTextFile(String filePath) {
         String userWorkingDirectory = System.getProperty("user.dir");
         java.nio.file.Path tasksFilePath = java.nio.file.Paths.get(userWorkingDirectory, filePath);
         File textFile = new File(String.valueOf(tasksFilePath));
 
-        if (textFile.length() == 0) {
-            throw new FileNotFoundException();
-        }
-
-        Scanner s = new Scanner(textFile);
         ArrayList<String> textLines = new ArrayList<>();
+        // todo Dexter: implement proper error handling here
+        try {
+            Scanner s = new Scanner(textFile);
 
-        while (s.hasNext()){
-            textLines.add(s.nextLine());
+            while (s.hasNext()){
+                textLines.add(s.nextLine());
+            }
+
+            s.close();
+        } catch (FileNotFoundException e) {
+            ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE);
         }
-
-        s.close();
-
         return textLines;
     }
 
