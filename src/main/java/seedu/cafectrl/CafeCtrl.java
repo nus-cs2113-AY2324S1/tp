@@ -7,6 +7,7 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.storage.Storage;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
@@ -29,7 +30,7 @@ public class CafeCtrl {
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    private CafeCtrl() throws FileNotFoundException {
+    private CafeCtrl() {
         this.ui = new Ui();
         this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
         this.storage = new Storage(this.ui);
@@ -49,7 +50,7 @@ public class CafeCtrl {
      * <p> This method consistently receives user input, parses commands, and executes the respective command
      * until the user enters a "bye" command, terminating the application.</p>
      */
-    private void run() throws IOException {
+    private void run() {
         ui.printLine();
         do {
             try {
@@ -62,10 +63,11 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
+
         this.storage.saveAll(this.menu, this.sales, this.pantry);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         CafeCtrl cafeCtrl = new CafeCtrl();
         cafeCtrl.setup();
         cafeCtrl.run();

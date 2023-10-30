@@ -49,7 +49,6 @@ public class FileManager {
         return textLines;
     }
 
-    //@@author DextheChik3n
     /**
      * Handles opening and creating (if needed) the text file and folder
      * @param filePath the file path that is passed in main
@@ -96,7 +95,6 @@ public class FileManager {
         fw.close();
     }
 
-    //@@author DextheChik3n
     /**
      * Writes text to the text file at the specified file path.
      * Will overwrite all text in text file.
@@ -111,7 +109,6 @@ public class FileManager {
         fw.close();
     }
 
-    //@@author DextheChik3n
     /**
      * Appends text to the text file at the specified file path.
      * Will add text to text file.

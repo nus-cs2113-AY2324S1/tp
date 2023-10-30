@@ -59,13 +59,16 @@ public class Storage {
      * @param menu menu from current session
      * @param sales sales from current session
      * @param pantry pantry from current session
-     * @throws IOException if the file is not found in the specified file path
      */
-    public void saveAll(Menu menu, Sales sales, Pantry pantry) throws IOException {
-        // to be uncommented when the following features are implemented
-        //saveMenu(menu);
-        //saveSales(sales);
-        savePantryStock(pantry);
+    public void saveAll(Menu menu, Sales sales, Pantry pantry) {
+        try {
+            // to be uncommented when the following features are implemented
+            //saveMenu(menu);
+            //saveSales(sales);
+            savePantryStock(pantry);
+        } catch (IOException e) {
+            ui.showToUser("Insert error message here: if the file is not found in the specified file path");
+        }
     }
 
     //@@author ziyi105
