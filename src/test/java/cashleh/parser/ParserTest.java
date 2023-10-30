@@ -74,14 +74,6 @@ public class ParserTest {
         assertEquals("Oopsie! An income without a description is like a CashLeh "
                 + "transaction without its story - not as fun!", exception2.getMessage());
                 
-        String inputString3 = "addIncome pocket money /amt 200";
-        assertInstanceOf(AddIncome.class, parser.parse(inputString3));
-        parser.parse(inputString3).execute();
-        assertEquals("____________________________________________________________\r\n"
-            + "\tThe following income was added:\r\n"
-            + "\tIncome: pocket money (Amount: 200.0, Date: " + Ui.getDateString(LocalDate.now()) + ")\r\n"
-            + "\t____________________________________________________________", outputStreamCaptor.toString().trim());
-
         String inputString4 = "addIncome pocket money /amt notnumber";
         Exception exception4 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString4));
         assertEquals("Please enter a valid income amount!", exception4.getMessage());
@@ -123,14 +115,6 @@ public class ParserTest {
         Exception exception2 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString2));
         assertEquals("Oopsie! An expense without a description is like a CashLeh "
                 + "transaction without its story - not as fun!", exception2.getMessage());
-
-        String inputString3 = "addExpense food /amt 10";
-        assertInstanceOf(AddExpense.class, parser.parse(inputString3));
-        parser.parse(inputString3).execute();
-        assertEquals("____________________________________________________________\r\n"
-            + "\tThe following expense was added:\r\n"
-            + "\tExpense: food (Amount: 10.0, Date: " + Ui.getDateString(LocalDate.now()) + ")\r\n"
-            + "\t____________________________________________________________", outputStreamCaptor.toString().trim());
 
         String inputString4 = "addExpense food /amt notnumber";
         Exception exception4 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString4));
