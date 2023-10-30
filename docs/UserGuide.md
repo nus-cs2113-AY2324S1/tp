@@ -207,17 +207,6 @@ Example of usage:
 
 `exit`
 
-### Updating a budget/setting a new budget: `updateBudget`
-Updates the budget to a new amount or creates a new budget if no previous budget was set.
-
-Format: `updateBudget AMOUNT`
-* The `AMOUNT` cannot be zero, CashLeh? will display an error message
-* If the `AMOUNT` is negative, CashLeh? will take its absolute value
-
-Example of usage:
-
-`updateBudget 45`
-
 ### Edit Income parameters: `editIncome` [coming soon]
 Change a parameter of a specific income.
 
