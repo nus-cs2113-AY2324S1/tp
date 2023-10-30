@@ -10,6 +10,8 @@ import java.util.HashMap;
  */
 public class StringTokenizer {
 
+    private static final String OPTIONAL_SUFFIX = ":optional";
+
     /*
      * Tokenizes a string based on a list of prefixes.
      * @param input String to be tokenized
@@ -28,11 +30,11 @@ public class StringTokenizer {
 
     private static void checkAllPrefixesPresent(String input, String[] prefixes) throws CashLehParsingException {
         for (int i = 0; i < prefixes.length; i++) {
-            if (prefixes[i].contains(":optional")) {
-                prefixes[i] = prefixes[i].replace(":optional", "");
+            if (prefixes[i].contains(OPTIONAL_SUFFIX)) {
+                prefixes[i] = prefixes[i].replace(OPTIONAL_SUFFIX, "");
                 continue;
             }
-            assert(!prefixes[i].contains(":optional"));
+            assert(!prefixes[i].contains(OPTIONAL_SUFFIX));
             if (!input.contains(prefixes[i])) {
                 throw new CashLehParsingException("Aiyoh! Your input blur like sotong... " +
                         "You never enter " + prefixes[i] + " leh!");

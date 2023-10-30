@@ -23,19 +23,39 @@ situation.
 > For example, `addExpense chicken rice /amt 100 /date 30-09-2022 /cat food` is equivalent to `addExpense chicken rice /date 30-09-2022 /cat food /amt 100`.
 
 ### Adding an income: `addIncome`
-Adds an income with a description, amount and date.
+Adds an income with a description, amount, date and category.
 
-Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE`
+Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
 * The `DESCRIPTION` cannot contain punctuation or any special characters.
 * The `AMOUNT` must be a positive number.
-* The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
+* The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended. 
+* THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
+(SALARY, ALLOWANCE, INVESTMENT, LOTTERY_GAMBLING)</code>, it will default to <code>OTHERS</code>
+
 
 Example of usage: 
 
 `addIncome monthly salary /amt 2500 /date 30/09/2023`
 
 `addIncome amazon purchase refund /amt 50`
+
+### Adding an expense: `addExpense`
+Adds an expense with a description, amount, date and category.
+
+Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+
+* The `DESCRIPTION` cannot contain punctuation or any special characters.
+* The `AMOUNT` must be a positive number.
+* The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
+* THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
+(FOOD_DRINK, SHOPPING, HOUSING, TRANSPORTATION, ENTERTAINMENT, UTILITIES)</code>, it will default to <code>OTHERS</code>
+
+Example of usage:
+
+`addExpense milk tea /amt 2.50 /date 30/09/2023 /cat FOOD_DRINK`
+
+`addExpense textbook /amt 10`
 
 ### Deleting an income: `deleteIncome`
 Deletes an income with a specific index.
@@ -48,8 +68,19 @@ Example of usage:
 
 `deleteIncome 4`
 
+### Deleting an expense: `deleteExpense`
+Deletes an expense with a specific index.
+
+Format: `deleteExpense INDEX`
+
+* The `INDEX` must be a positive integer and cannot be larger than the number of expense entries.
+
+Example of usage:
+
+`deleteExpense 4`
+
 ### Viewing previous incomes: `viewIncomes`
-Shows sum of incomes and lists each income record with its description and amount.  
+Shows sum of incomes and lists each income record with its description, amount, date and (optional) category (if input by user).  
 Format: `viewIncomes`  
 * Anything following the command will be ignored, i.e. `viewIncomes overview` will be interpreted just 
 like `viewIncomes`.
@@ -58,8 +89,18 @@ Example of usage:
 
 `viewIncomes`
 
+### Viewing previous expenses: `viewExpenses`
+Shows sum of expenses and lists each expense record with its description, amount, date and (optional) category (if input by user).  
+Format: `viewExpenses`
+* Anything following the command will be ignored, i.e. `viewExpenses overview` will be interpreted just
+  like `viewExpenses`.
+
+Example of usage:
+
+`viewExpenses`
+
 ### Viewing the entire financial statement: `viewFinancialStatement`
-Shows the net cash on hand and lists each income and expense record along with its description and amount.  
+Shows the net cash on hand and lists each income and expense record along with its description, amount, date and (optional) category.  
 Format: `viewFinancialStatement`
 * Anything following the command will be ignored, i.e. `viewFinancialStatement overview` will be interpreted just like 
 `viewFinancialStatement`.
@@ -98,6 +139,62 @@ Format: `deleteBudget`
 Example of usage:
 
 `deleteBudget`
+
+### Filtering an expense: `filterExpense`
+Displays expenses that match specific criteria provided by the user. 
+Expenses can be filtered based on the following criteria: description, amount, date, or category.
+
+Format: `filterExpense description /amt AMOUNT /date DATE /cat CATEGORY`
+* All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
+* If no criteria is provided, CashLeh? will display an error message
+
+Examples of usage:
+
+`filterExpense milk tea`
+
+`filterExpense /amt 3.50`
+
+`filterExpense milk tea /amt 3.50`
+
+`filterExpense /cat FOOD_DRINK`
+
+`filterExpense milk tea /date 25/10/2023`
+
+### Filtering an income: `filterIncome`
+Displays incomes that match specific criteria provided by the user.
+Incomes can be filtered based on the following criteria: description, amount, date, or category.
+
+Format: `filterIncome description /amt AMOUNT /date DATE /cat CATEGORY`
+* All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
+* If no criteria is provided, CashLeh? will display an error message
+
+Examples of usage:
+
+`filterIncome salary`
+
+`filterIncome /amt 1000 /date 25/10/2023`
+
+`filterIncome /cat SALARY`
+
+`filterIncome /date 25/10/2023`
+
+### Filtering a transaction: `filter`
+Displays expenses and incomes that match specific criteria provided by the user.
+Transactions can be filtered based on the following criteria: description, amount, date, or category.
+
+Format: `filter description /amt AMOUNT /date DATE /cat CATEGORY`
+* All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
+* If no criteria is provided, CashLeh? will display an error message
+
+Examples of usage:
+
+`filter milk tea`
+
+`filter milk tea /amt 3.50`
+
+`filter /cat OTHERS`
+
+`filter /date 25/10/2023`
 
 ## FAQ
 

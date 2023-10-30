@@ -49,6 +49,25 @@ Sort the list of PrefixWithPosition by position in order to get the prefixes in 
 **Step 4**\
 Create a hashmap of the user input by splitting the string using the prefixes' positions and adding the key-value pairs to the hashmap
 
+### Transaction Filter
+The filter function assists in filtering both expenses and incomes according to the specified criterion from user's input.
+
+#### Implementation
+![](./images/FilterTransaction.png)
+
+**Step 1**\
+The filterBy() method is called, returning a FindParser object
+
+**Step 2**\
+A FilterTransaction object is constructed, with the FindParser object as one of its parameters
+
+**Step 3**\
+From the expenseStatement and incomeStatement, the financialStatement is constructed. 
+
+**Step 4**\
+Execution of the FilterTransaction class calls method findTransaction(), which prints expenses and incomes that match the provided criterion
+
+
 ## Product scope
 ### Target user profile
 
@@ -67,16 +86,18 @@ unnecessary expenses.
 
 ## User Stories
 
-|Version| As a ...          | I want to ...                                      | So that I can ...                                            |
-|--------|-------------------|----------------------------------------------------|--------------------------------------------------------------|
-|v1.0| new user          | see usage instructions                             | refer to them when I forget how to use the application       |
-|v1.0| user              | be able to add my incomes and earnings             | easily manage them and obtain access to an overview          |
-|v1.0| user              | be able to delete my incomes and earnings          | correct any mistakes and errors                              |
-|v1.0| user              | be able to view the sum of my incomes              | be fully aware of my income situation and manage my money    |
-|v2.0| user              | be able to view both incomes and expenses together | have an overview of my net financial situation               |
-|v2.0| parsimonious user | be able to set an overall budget                   | have an upper limit for my relative expenses                 |
-|v2.0| user              | be able to view my budget                          | view my financial situation and organise myself              |
-|v2.0| user              | be able to delete my previously set budget         | not care about an upper limit or eventually set a new budget |
+| Version | As a ...          | I want to ...                                      | So that I can ...                                                    |
+|---------|-------------------|----------------------------------------------------|----------------------------------------------------------------------|
+| v1.0    | new user          | see usage instructions                             | refer to them when I forget how to use the application               |
+| v1.0    | user              | be able to add my incomes and earnings             | easily manage them and obtain access to an overview                  |
+| v1.0    | user              | be able to add my expenses                         | easily keep track of my spending                                     |
+| v1.0    | user              | be able to delete my incomes/ expenses             | correct any mistakes and errors                                      |
+| v1.0    | user              | be able to view the sum of my incomes/ expenses    | be fully aware of my income/ expense situation and manage my money   |
+| v2.0    | user              | be able to view both incomes and expenses together | have an overview of my net financial situation                       |
+| v2.0    | parsimonious user | be able to set an overall budget                   | have an upper limit for my relative expenses                         |
+| v2.0    | user              | be able to view my budget                          | view my financial situation and organise myself                      |
+| v2.0    | user              | be able to delete my previously set budget         | not care about an upper limit or eventually set a new budget         |
+| v2.0    | user              | be able to filter my transactions                  | better understand my financial history and easily access information |
 
 ## Non-Functional Requirements
 
