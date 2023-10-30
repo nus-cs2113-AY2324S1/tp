@@ -1,0 +1,16 @@
+!include Style.puml
+@startuml
+title Initial State
+
+object ":QuestionList" as QuestionList
+
+object ":Question1" as Question1
+
+object ":Question2" as Question2
+
+object ":Question3" as Question3
+
+QuestionList -->  Question1
+QuestionList --> Question2
+QuestionList --> Question3
+@enduml

@@ -195,6 +195,14 @@ The start quiz mechanism is facilitated by CommandStart under package quizhub.co
 
 Thereafter the quiz is started by calling the method `startQuiz()` in package `quizhub.questionlist.QuestionList`. Within `startQuiz()`, the program iterates through the list of totalQuestions while blocking out the answers. The user can input their answer in the input field which is utilized to match with the actual answer to provide “correct” or “wrong”. Each correct answer will increment correctAnswers variable by 1. The quiz ends when all the questions are displayed and the total number of correctAnswers will be displayed.
 
+### Help Command - Display Commands
+
+When executed, this command will execute a standard Final String containing all 
+the commands available for the user to use, as well as the format they are meant
+to be written in. 
+
+This same String is also displayed when an invalid command is used.
+
 ### Short Command - Add Short Answer Question to the Quiz
 
 One of the supported question formats is the Short Answer Question, in which a question
@@ -216,17 +224,49 @@ to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
-### Find Command  - Look for a matching question
+![](./UML/Commands/Initial State.png)
+![](./UML/Commands/commandAddState.png)
+
+### List Command - Show all Questions with Index
+
+Lists all the questions in the current QuestionList. 
+
+When executed, the command will invoke the QuestionList.printQuestionList method. 
+This method first checks whether the list is empty and prints and error message if empty, 
+else it will invoke the QuestionList.printQuestion method on each Question object, 
+with the asList parameter set as true. The QuestionList.printQuestion method will then
+print each question with a given index, and indicate the question's type and completion status
+(obtained through Question.getQuestionType() and Question.questionIsDone() methods)
+
+### Delete Command - Delete a Question
+
+Deletes a task by its index.
+
+The Command first invokes the QuestionList.viewQuestionByIndex method to determine if 
+the index refers to a valid question, failing which it will return an error message.
+
+Otherwise, it will then invoke the QuestionList.deleteQuestionByIndex method to remove
+the question from the QuestionList. 
+
+![](./UML/Commands/commandDeleteQuestion.png)
+
+Afterward, the storage is updated to reflect the newest QuestionList.
+
+### Find Command - Look for a matching question
 
 Quizhub supports searching for specific questions, by searching matching keywords
 in the format
 
 `find /[description]` OR `find /[module]`
-i.e. `find /CS2113`, `find /water buffalo`
+i.e. `find /water buffalo`, `find /CS2113`
 
 This command is passed to the corresponding QuestionList where the `searchList` method
-is called, which will create a new ArrayList of questions that contain the (case-insensitive)
-keyword and subsequently print them.
+is called. 
+This method go down the existing QuestionList of questions and use the Java contains method
+(along with the toLower method to ensure the search is case-insensitive)
+to determine if the search term is located that question. If the contains method returns true
+for a given question, that question's contents and index will be copied to a 
+new ArrayList of questions, and subsequently print them.
 
 ## Storage Component
 

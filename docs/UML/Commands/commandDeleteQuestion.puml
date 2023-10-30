@@ -1,0 +1,16 @@
+!include Style.puml
+@startuml
+title After Command "delete 2"
+
+object ":QuestionList" as QuestionList
+
+object ":Question1" as Question1
+
+object ":Question3" as Question3
+
+object ":Question4" as Question4
+
+QuestionList -->  Question1
+QuestionList --> Question3
+QuestionList --> Question4
+@enduml
