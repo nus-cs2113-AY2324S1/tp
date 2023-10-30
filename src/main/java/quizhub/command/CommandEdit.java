@@ -4,7 +4,7 @@ import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 /**
- * Represents a command to edit a task.
+ * Represents a command to edit a question.
  */
 public class CommandEdit extends Command {
     public static final String COMMAND_WORD = "edit";

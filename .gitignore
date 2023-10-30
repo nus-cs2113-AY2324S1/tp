@@ -2,6 +2,7 @@
 /.idea/
 /out/
 /*.iml
+META-INF/MANIFEST.MF
 
 # Gradle build files
 /.gradle/
@@ -18,4 +19,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 *.class
 
+questionlist.txt
 tasklist.txt

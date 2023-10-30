@@ -22,17 +22,17 @@ public class CommandDelete extends Command {
         this.qnIndex = qnIndex;
     }
     /**
-     * Checks if specified task exists.
-     * Deletes the specified task and updates storage data.
+     * Checks if specified question exists.
+     * Deletes the specified question and updates storage data.
      *
      * @param ui User interface for interactions with user through CLI.
      * @param questions Current question list in the program.
-     * @param dataStorage Hard disk storage for storing task data.
+     * @param dataStorage Hard disk storage for storing question data.
      */
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
-        String taskName = questions.viewQuestionByIndex(qnIndex);
-        if (taskName.equals("Question Not Found")) {
+        String questionName = questions.viewQuestionByIndex(qnIndex);
+        if (questionName.equals("Question Not Found")) {
             ui.displayMessage("    Ono! The question you are deleting is not found!");
             return;
         }

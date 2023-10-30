@@ -25,7 +25,7 @@ public class Question {
     }
     /**
      * Creates a new question with a given description,
-     * not done status, default task type and normal difficulty.
+     * not done status, default question type and normal difficulty.
      *
      * @param questionBody Description given to the question.
      */
@@ -117,7 +117,7 @@ public class Question {
         return "";
     }
     /**
-     * Returns task type.
+     * Returns question type.
      */
     public QnType getQuestionType(){
         return qnType;
