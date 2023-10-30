@@ -29,7 +29,6 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.text.ParseException;
 
 /**
  * Parse everything received from the users on terminal
