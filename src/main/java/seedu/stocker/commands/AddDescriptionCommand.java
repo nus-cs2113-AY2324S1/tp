@@ -16,11 +16,22 @@ public class AddDescriptionCommand extends Command {
     private final String drugName;
     private final String drugDescription;
 
+    /**
+     * Creates an AddDescriptionCommand to add a drug description to the description list.
+     *
+     * @param drugName       The name of the drug for which the description is added.
+     * @param drugDescription The description to be added for the drug.
+     */
     public AddDescriptionCommand(String drugName, String drugDescription ) {
         this.drugName = drugName;
         this.drugDescription = drugDescription;
     }
 
+    /**
+     * Executes the command to add the drug description.
+     *
+     * @return CommandResult indicating the success of adding the description.
+     */
     @Override
     public CommandResult execute() {
         seedu.stocker.drugs.Description.addDescription(drugName, drugDescription);

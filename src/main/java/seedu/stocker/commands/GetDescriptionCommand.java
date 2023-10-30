@@ -16,10 +16,20 @@ public class GetDescriptionCommand extends Command {
 
     private final String drugName;
 
+    /**
+     * Creates a GetDescriptionCommand to retrieve the description of a specific drug.
+     *
+     * @param drugName The name of the drug for which the description should be retrieved.
+     */
     public GetDescriptionCommand(String drugName) {
         this.drugName = drugName;
     }
 
+    /**
+     * Executes the command to retrieve the description of the specified drug.
+     *
+     * @return CommandResult containing the drug description if found, or an error message if not found.
+     */
     @Override
     public CommandResult execute() {
         String description = seedu.stocker.drugs.Description.getDescription(drugName);
