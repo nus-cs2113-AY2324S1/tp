@@ -150,11 +150,12 @@ public class FileStorage {
         String description = incomeDetails[0];
         double amount = Double.parseDouble(incomeDetails[1]);
         String categoryString = incomeDetails[2];
+        boolean dateNotProvided = incomeDetails.length == 3;
 
         try {
-            if (categoryString == null && incomeDetails.length == 3) {
+            if (categoryString == null && dateNotProvided) {
                 return new Income(description, amount);
-            } else if (incomeDetails.length == 3) {
+            } else if (dateNotProvided) {
                 IncomeCategory category = IncomeCatParser.parse(categoryString);
                 return new Income(description, amount, category);
             } else if (categoryString == null) {
