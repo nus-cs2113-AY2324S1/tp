@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Main -> HelpCommand: execute()
+activate HelpCommand
+HelpCommand -> Ui: showHelp()
+activate Ui
+Ui -> Ui: showToUserWithSpaceBetweenLines(messages: String...)
+activate Ui
+deactivate Ui
+
+@enduml
