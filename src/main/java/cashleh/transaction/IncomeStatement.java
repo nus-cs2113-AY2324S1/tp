@@ -21,6 +21,10 @@ public class IncomeStatement {
         incomeStatement.addAll(List.of(incomes));
     }
 
+    public int getSize() {
+        return incomeStatement.size();
+    }
+
     /**
      * Adds an income to the statement.
      * @param incomeToAdd The income to be added.
@@ -75,7 +79,7 @@ public class IncomeStatement {
         texts[0] = "The current sum of all your incomes amounts to: " + getTotalIncomeAmount();
         for (int i = 1; i <= listSize; i++) {
             Income currentIncome = incomeStatement.get(i - 1);
-            texts[i] = "\t" + i + "." + currentIncome.toString();
+            texts[i] = "\t" + i + ". " + currentIncome.toString();
         }
         Ui.printMultipleText(texts);
     }

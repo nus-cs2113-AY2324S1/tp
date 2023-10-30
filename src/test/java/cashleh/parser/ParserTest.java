@@ -32,8 +32,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 public class ParserTest {
     ExpenseStatement expenseStatement = new ExpenseStatement();
     IncomeStatement incomeStatement = new IncomeStatement();
-    BudgetHandler budgetHandler = new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement)
-            , new Budget(10));
+    BudgetHandler budgetHandler = new BudgetHandler(
+        new FinancialStatement(incomeStatement, expenseStatement), new Budget(10));
     Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     private final PrintStream standardOut = System.out;
