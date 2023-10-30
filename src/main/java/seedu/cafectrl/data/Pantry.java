@@ -12,15 +12,19 @@ public class Pantry {
     private ArrayList<Dish> menuItems;
     private Ui ui;
 
+    //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
         this.ui = ui;
         this.pantryStock = pantryStock;
     }
+    //@@author NaychiMin
 
+    //@@author ShaniceTang
     public Pantry(Ui ui) {
         this.ui = ui;
         this.pantryStock = new ArrayList<Ingredient>();
     }
+    //@@author ShaniceTang
 
     /**
      * Retrieves the current pantry stock from storage, which may include reading from a file (pantry.txt).
