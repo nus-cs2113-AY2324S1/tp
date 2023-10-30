@@ -1,12 +1,11 @@
 package seedu.cafectrl.data;
 
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 public class Chef {
-    protected Order order;
-    protected Pantry pantry;
-    protected Ui ui;
+    private final Order order;
+    private final Pantry pantry;
+    private final Ui ui;
 
     public Chef(Order order, Pantry pantry, Ui ui) {
         this.order = order;
@@ -16,12 +15,12 @@ public class Chef {
 
     public void cookDish() {
         try {
-            if (!order.isComplete) {
-                ui.showToUser(Messages.CHEF_MESSAGE);
-                pantry.decreaseIngredientsStock(order.usedIngredientList);
+            if (!order.getIsComplete()) {
+                ui.showChefMessage();
+                pantry.decreaseIngredientsStock(order.getIngredientList());
                 order.setComplete();
             }
-            ui.showToUser("Is order completed?: " + order.isComplete);
+            ui.showToUser("Is order completed?: " + order.getIsComplete());
         } catch (Exception e) {
             ui.showToUser("Unable to cook: " + e.getMessage());
         }

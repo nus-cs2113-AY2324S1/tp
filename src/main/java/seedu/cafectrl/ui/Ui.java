@@ -192,6 +192,10 @@ public class Ui {
         formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
     }
 
+    public void showChefMessage() {
+        showToUser(Messages.CHEF_MESSAGE);
+    }
+
     /**
      * Shows the total cost in the order list, formatted in the proper format
      *
