@@ -21,16 +21,6 @@ public class Storage {
         this.ui  = ui;
     }
 
-
-    public Menu loadMenu() throws IOException {
-        fileManager.openTextFile(FilePath.MENU_FILE_PATH);    ArrayList<String> menuFromTextFile = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-        return Decoder.decodeMenuData(menuFromTextFile);}
-    /**
-     * Encode and write the data from menu to the text file * @param menu menu from current session
-     * @throws IOException if the file is not found in the specified file path */
-    public void saveMenu(Menu menu) throws IOException {    fileManager.overwriteFile(FilePath.MENU_FILE_PATH, Encoder.encodeMenu(menu));
-    }
-
     /**
      * Read and decode pantryStock data from text file and pass it to the menu
      * @return pantryStock with data from the file
@@ -54,6 +44,16 @@ public class Storage {
         return Decoder.decodeOrderList(encodedOrderList, menu);
     }
 
+    /**
+     * Encodes the provided OrderList data and writes it to a text file
+     *
+     * @param orderList The OrderList object to be saved to the file.
+     * @throws IOException if the file is not found in the specified file path.
+     */
+    private void saveOrderList(OrderList orderList) throws IOException {
+        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeOrderList(orderList));
+    }
+
 
     /**
      * Encode and write the data from menu, orderList and pantry to the respective text files
@@ -64,7 +64,7 @@ public class Storage {
      */
     public void saveAll(Menu menu, OrderList orderList, Pantry pantry) throws IOException {
         saveMenu(menu);
-        //saveOrderList(orderList);
+        saveOrderList(orderList);
         savePantryStock(pantry);
     }
 
@@ -77,6 +77,7 @@ public class Storage {
         this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
     }
 
-
+    public void saveMenu(Menu menu) throws IOException {
+    }
 
 }

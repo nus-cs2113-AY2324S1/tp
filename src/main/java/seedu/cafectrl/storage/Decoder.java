@@ -1,5 +1,7 @@
 package seedu.cafectrl.storage;
 
+import seedu.cafectrl.Order;
+import seedu.cafectrl.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
@@ -7,6 +9,7 @@ import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Decoder {
     private static final Ui ui = new Ui();
@@ -35,24 +38,29 @@ public class Decoder {
         return true;
     }
 
-    //@@author Dexter
-    public Menu decodeMenuData(ArrayList<String> textLines) {
-        ArrayList<Dish> dishArrayList = new ArrayList<>();
-        for (String task : textLines) {
-            String[] splitTaskString = task.split(" \\| ");
-            String dishName = splitTaskString[0];
-            float dishPrice = Float.parseFloat(splitTaskString[1]);
-            String dishIngredient = splitTaskString[2];
 
-            try {
-                //todo: remove testing code
-                Dish dish = new Dish(dishName, dishPrice);
-                dishArrayList.add(dish);
-            } catch (Exception e) {
-                ui.showToUser(e.getMessage());
-            }
+    /**
+     * Decodes a list of order data and constructs an OrderList object.
+     *
+     * @param textLines List of order strings in the format "dishName|quantity|totalOrderCost".
+     * @param menu Menu instance to retrieve Dish objects based on dishName.
+     * @return OrderList containing Order objects decoded from the provided strings.
+     */
+    public static OrderList decodeOrderList(ArrayList<String> textLines, Menu menu) {
+        ArrayList<Order> orderListArray = new ArrayList<>();
+        for (String order : textLines) {
+            String[] orderData = order.split("\\|");
+            String dishName = orderData[0].trim();
+            String quantity = orderData[1].trim();
+            String totalOrderCost = orderData[2].trim();
+            System.out.println(dishName);
+            Order orderedDish = new Order(menu.getDishFromName(dishName),
+                    Integer.parseInt(quantity),Float.parseFloat(totalOrderCost));
+            orderListArray.add(orderedDish);
         }
 
-        return new Menu(dishArrayList);
+        return new OrderList(orderListArray);
     }
+
+
 }
