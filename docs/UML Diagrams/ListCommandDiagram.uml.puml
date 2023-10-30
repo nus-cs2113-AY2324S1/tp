@@ -1,0 +1,21 @@
+@startuml ListCommandDiagram
+
+!define LOGIC_COLOR #3333C4
+!define LOGIC_COLOR_T1 #7777DB
+
+hide footbox
+actor User
+participant "ListCommand" as ListCmd LOGIC_COLOR_T1
+participant "Inventory" as Inventory LOGIC_COLOR
+
+User -> ListCmd: Execute 'List' Command
+activate ListCmd
+User <-- ListCmd: CommandResult
+ListCmd -> Inventory: Retrieve Stock Entries
+activate Inventory
+Inventory --> ListCmd: List of Stock Entries
+
+ListCmd -> ListCmd: Process Entries
+ListCmd --> User: Display List Results
+
+@enduml
