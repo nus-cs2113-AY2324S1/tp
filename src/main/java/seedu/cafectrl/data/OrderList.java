@@ -42,7 +42,6 @@ public class OrderList {
         return totalOrderListCost;
     }
 
-
     public void printOrderList() {
         if (orderList.isEmpty()) {
             return;
