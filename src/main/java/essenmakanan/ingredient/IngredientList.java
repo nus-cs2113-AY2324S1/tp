@@ -30,6 +30,26 @@ public class IngredientList {
         return null;
     }
 
+    public boolean isEmpty() {
+        return ingredients.isEmpty();
+    }
+
+    public boolean ingredientExist(String ingredientName) {
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getName().equals(ingredientName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean ingredientExist(int id) {
+        if (id >= 0 && id < ingredients.size()) {
+            return true;
+        }
+        return false;
+    }
+
     public int getIndex(Ingredient ingredient) {
         return ingredients.indexOf(ingredient);
     }
@@ -43,13 +63,6 @@ public class IngredientList {
             i++;
         }
         return -1;
-    }
-
-    public boolean ingredientExist(int id) {
-        if (id >= 0 && id < ingredients.size()) {
-            return true;
-        }
-        return false;
     }
 
     public void addIngredient(Ingredient ingredient) {
@@ -96,7 +109,6 @@ public class IngredientList {
 
     public void listIngredients() {
         Ui.drawDivider();
-        System.out.println("Here's a list of your ingredients!");
         int count = 1;
 
         for (Ingredient ingredient : ingredients) {

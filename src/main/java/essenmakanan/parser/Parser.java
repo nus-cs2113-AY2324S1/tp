@@ -1,7 +1,6 @@
 package essenmakanan.parser;
 
 import essenmakanan.command.*;
-
 import essenmakanan.exception.EssenCommandException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
@@ -18,8 +17,10 @@ public class Parser {
         String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
 
         switch (commandType) {
+        case "start":
+            command = new StartRecipeCommand(inputDetail, recipes, ingredients);
+            break;
         case "add":
-
             if (inputDetail.startsWith("r/")) {
                 command = new AddRecipeCommand(inputDetail, recipes);
             } else if (inputDetail.startsWith("i/")) {
@@ -47,8 +48,7 @@ public class Parser {
                 command = new ViewSpecificRecipeCommand(recipes, inputDetail);
             } else if (inputDetail.startsWith("i/")) {
                 command = new ViewSpecificIngredientCommand(ingredients, inputDetail);
-            }
-            else {
+            } else {
                 throw new EssenFormatException();
             }
             break;

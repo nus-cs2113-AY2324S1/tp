@@ -70,7 +70,18 @@ public class Ui {
     }
 
     public static void printAllIngredients(IngredientList ingredients) {
+        System.out.println("Here's a list of your ingredients!");
         ingredients.listIngredients();
+        drawDivider();
+    }
+
+    public static void printStartRecipeMessage(IngredientList ingredients) {
+        if (ingredients.isEmpty()) {
+            System.out.println("You have all the ingredients you need! You are ready to go!");
+        } else {
+            System.out.println("Here's a list of ingredients you are missing for this recipe!");
+            ingredients.listIngredients();
+        }
         drawDivider();
     }
 
