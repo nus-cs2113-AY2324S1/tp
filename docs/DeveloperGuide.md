@@ -195,6 +195,10 @@ The `ListCommand` is responsible for listing all drugs in the inventory. This co
 
 - **User-Friendly Listing:** The primary goal of the `ListCommand` is to provide a user-friendly way to list all drugs in the inventory, enhancing the user's experience in accessing inventory information.
 
+- **Data Presentation:** The design considers how to present the list of drugs in a clear and organized manner to provide valuable information to the user.
+
+- **Performance:** The implementation should be optimized to list the inventory efficiently, even if it contains a large number of drugs.
+
 ### Implementation
 
 The `ListCommand` is implemented as follows:
@@ -204,6 +208,10 @@ The `ListCommand` is implemented as follows:
 - **Handling Empty Inventory:** It checks if the list of drugs is empty. If the inventory is empty, it returns a user-friendly message indicating that the inventory is empty.
 
 - **Listing Drugs:** If the inventory contains drugs, the command constructs a success message and includes the list of drugs in the command result.
+
+- **User-Friendly Presentation:** The implementation ensures that the list of drugs is presented in a clear and organized format, including relevant details such as drug names, quantities, and other attributes.
+
+- **Optimized Performance:** To enhance user experience, the command is designed to list the inventory efficiently, ensuring that users receive search results quickly.
 
 ### Function Methods
 
@@ -216,6 +224,20 @@ The `ListCommand` includes the following method to achieve its functionality:
 To illustrate how the `ListCommand` works, consider the following example usage:
 
 1. **User Input:** The user initiates the `ListCommand` by entering the following command:
+
+2. **Method Execution:** The `execute()` method within the "ListCommand" class is called.
+
+3. **Inventory Check:** The method checks the inventory to retrieve the list of drugs.
+
+4. **Result Building:** If the inventory contains drugs, the method constructs a success message (e.g., "Listed all drugs in the inventory.") and includes the list of drugs with relevant details.
+
+5. **User Feedback:** The result is displayed to the user, showing a clear and organized list of drugs in the inventory.
+
+The "ListCommand" enhances the user's ability to access inventory information efficiently and is designed to handle various inventory sizes while providing a user-friendly experience.
+
+The following sequence diagram shows how the Find Command function works.
+
+<img src="UML Diagrams/ListCommandDiagram.png" width="350">
 
 ---
 
