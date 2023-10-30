@@ -52,8 +52,6 @@ public class Parser {
     private static final String FILTER_INCOME = "filterIncome";
     private static final String FILTER = "filter";
 
-
-
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
     private final BudgetHandler budgetHandler;
@@ -231,10 +229,13 @@ public class Parser {
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
+        final String AMOUNT_SUFFIX = "/amt";
+        final String DATE_SUFFIX = "/date";
+        final String CATEGORY_SUFFIX = "/cat";
         String descriptionString = inputDetails.get(transactionType);
-        String amountString = inputDetails.get("/amt");
-        String dateString = inputDetails.get("/date");
-        String categoryString = inputDetails.get("/cat");
+        String amountString = inputDetails.get(AMOUNT_SUFFIX);
+        String dateString = inputDetails.get(DATE_SUFFIX);
+        String categoryString = inputDetails.get(CATEGORY_SUFFIX);
 
         if ((descriptionString == null || descriptionString.isEmpty()) &&
                 (amountString == null || amountString.isEmpty()) &&
@@ -261,26 +262,32 @@ public class Parser {
                 throw new CashLehDateParsingException();
             }
         }
-        Categories parsedCategory = null;
+        Categories parsedCategory = parseCategory(transactionType, categoryString);
+
+        return new FindParser(descriptionString, parsedAmount, parsedDate, parsedCategory);
+    }
+
+    private Categories parseCategory(String transactionType, String categoryString) throws CashLehParsingException {
         if (categoryString != null && !categoryString.isEmpty()) {
             if (transactionType.equals(FILTER_EXPENSE)) {
-                parsedCategory = ExpenseCatParser.parse(categoryString);
+                return ExpenseCatParser.parse(categoryString);
             } else if (transactionType.equals(FILTER_INCOME)) {
-                parsedCategory = IncomeCatParser.parse(categoryString);
+                return IncomeCatParser.parse(categoryString);
             } else {
                 // Try to parse as ExpenseCategory first.
-                parsedCategory = ExpenseCatParser.parse(categoryString);
+                Categories parsedCategory = ExpenseCatParser.parse(categoryString);
                 // Even if category was meant to be passed in as an incomeCategory,
                 // it will have a result of OTHERS after being parsed via ExpenseCatParser,
                 // thus parse once more using IncomeCatParser
                 boolean checkCategory = parsedCategory.equals(ExpenseCategory.valueOf("OTHERS"));
                 if (checkCategory) {
                     // Try to parse as IncomeCategory.
-                    parsedCategory = IncomeCatParser.parse(categoryString);
+                    return IncomeCatParser.parse(categoryString);
                 }
+                return parsedCategory;
             }
         }
-        return new FindParser(descriptionString, parsedAmount, parsedDate, parsedCategory);
+        return null;
     }
 
     private Budget getBudget(String input) throws CashLehParsingException {

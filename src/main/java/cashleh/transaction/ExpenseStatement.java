@@ -111,17 +111,18 @@ public class ExpenseStatement {
 
         // Customize the message based on input
         StringBuilder message = new StringBuilder("Here are your corresponding expenses with ");
+        final String SEPARATOR = " ||";
         if (description != null && !description.isEmpty()) {
-            message.append("<description>: ").append(description).append(" ||");
+            message.append("<description>: ").append(description).append(SEPARATOR);
         }
         if (amount.isPresent()) {
-            message.append("<amount>: ").append(amount.getAsDouble()).append(" ||");
+            message.append("<amount>: ").append(amount.getAsDouble()).append(SEPARATOR);
         }
         if (date != null) {
-            message.append("<date>: ").append(date).append(" ||");
+            message.append("<date>: ").append(date).append(SEPARATOR);
         }
         if (category != null) {
-            message.append("<category>: ").append(category).append(" ||");
+            message.append("<category>: ").append(category).append(SEPARATOR);
         }
         matchingExpenses.add(message.toString());
 
