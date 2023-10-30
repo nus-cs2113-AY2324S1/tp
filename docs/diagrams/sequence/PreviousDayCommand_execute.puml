@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> ":PreviousDayCommand" : execute()
+    activate ":PreviousDayCommand"
+    ":PreviousDayCommand" -> ":Ui" : printLine()
+        activate ":Ui"
+        ":Ui" -> ":Ui" : showToUser(args : String)
+            activate ":Ui"
+        return
+    return
+    ":PreviousDayCommand" -> ":CurrentDate" : previousDay()
+        activate ":CurrentDate"
+    return
+    ":PreviousDayCommand" -> ":Ui" : showPreviousDay()
+        activate ":Ui"
+        ":Ui" -> ":Ui" : showToUser(args : String)
+            activate ":Ui"
+        return
+    return
+    ":PreviousDayCommand" -> ":Ui" : showToUser(args : String)
+        activate ":Ui"
+    return
+return
+@enduml
