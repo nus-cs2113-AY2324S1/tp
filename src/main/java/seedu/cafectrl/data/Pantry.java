@@ -22,7 +22,7 @@ public class Pantry {
     //@@author ShaniceTang
     public Pantry(Ui ui) {
         this.ui = ui;
-        this.pantryStock = new ArrayList<Ingredient>();
+        this.pantryStock = new ArrayList<>();
     }
     //@@author ShaniceTang
 
