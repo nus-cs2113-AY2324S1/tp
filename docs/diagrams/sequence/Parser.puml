@@ -18,9 +18,8 @@ deactivate XYZCommand
 deactivate Parser
 end alt
 
-deactivate Parser
-
 Parser --> Main: XYZCommand
+deactivate Parser
 Main -> XYZCommand: execute()
 activate XYZCommand
 @enduml
