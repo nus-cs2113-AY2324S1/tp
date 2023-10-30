@@ -32,6 +32,7 @@ public class FileManager {
         java.nio.file.Path tasksFilePath = java.nio.file.Paths.get(userWorkingDirectory, filePath);
         File textFile = new File(String.valueOf(tasksFilePath));
 
+
         ArrayList<String> textLines = new ArrayList<>();
         // todo Dexter: implement proper error handling here
         try {
@@ -84,7 +85,8 @@ public class FileManager {
      * @throws IOException If I/O operations are interrupted.
      */
     public void overwriteFile(String filePath, ArrayList<String> listOfTextToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        String openFilePath = openTextFile(filePath);
+        FileWriter fw = new FileWriter(openFilePath);
         for (String line : listOfTextToAdd) {
             fw.write(line);
         }
