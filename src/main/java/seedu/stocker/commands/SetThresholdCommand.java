@@ -29,14 +29,6 @@ public class SetThresholdCommand extends Command {
         this.threshold = threshold;
     }
 
-    /**
-     * Constructs a SetThresholdCommand with a specified drug name and a default threshold quantity of 100.
-     * @param name The name of the drug.
-     */
-    public SetThresholdCommand(String name) {
-        this.drugName = name;
-        this.threshold = 100; // Default threshold value
-    }
 
     /**
      * Executes the SetThresholdCommand by setting the threshold quantity for the specified drug.
@@ -44,6 +36,11 @@ public class SetThresholdCommand extends Command {
      */
     @Override
     public CommandResult execute() {
+
+        if (inventory.getStockEntries().isEmpty()) {
+            return new CommandResult("Inventory is empty.");
+        }
+
         StockEntry stockEntry = inventory.getStockEntry(drugName);
 
         if (stockEntry != null) {
