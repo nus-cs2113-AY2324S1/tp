@@ -46,8 +46,8 @@ you a one-stop interface to access a plethora of features to manage your finance
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Financial Planner` from [here](http://link.to/duke).
-3. Copy the file to the folder you want to use as the *home folder* for Neo Chatbot.
+2. Download the latest version of `Financial Planner` from [here](http://link.to/duke).
+3. Copy the file to the folder you want to use as the *home folder* for Financial Planner.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ip.jar` command to run the application.
 5. Refer to the **Features** section below for details of each command.
 
@@ -559,26 +559,26 @@ Existing data will be automatically loaded when the program starts up.
 
 {Give a 'cheat sheet' of commands here}
 
-| Action                           | Format                                                     |
-|----------------------------------|------------------------------------------------------------|
-| **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`  |
+| Action                           | Format                                                    |
+|----------------------------------|-----------------------------------------------------------|
+| **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]` |
 | **Add expense**                  | `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]` |
-| **Delete cashflow**              | `delete INDEX [/r]`                                        |
-| **Delete income**                | `delete income INDEX [/r]`                                 |
-| **Delete expense**               | `delete expense INDEX [/r]`                                |
-| **Delete recurrence**            | `delete recurrence INDEX [/r]`                             |
-| **list all cashflows**           | `list`                                                     |
-| **list all incomes**             | `list income`                                              |
-| **list all expenses**            | `list expense`                                             |
-| **list all recurring cashflows** | `list recurrence*                                          |
-| **Set budget**                   | `budget set /b BUDGET`                                     |
-| **Update budget**                | `budget update /b BUDGET`                                  |
-| **Reset budget**                 | `budget reset`                                             |
-| **Delete budget**                | `budget delete`                                            |
-| **View budget**                  | `budget view`                                              |
-| **Display Overview**             | `overview`                                                 |
-| **View balance**                 | `balance`                                                  |
-| **Exit program**                 | `exit`                                                     |
+| **Delete cashflow**              | `delete INDEX [/r]`                                       |
+| **Delete income**                | `delete income INDEX [/r]`                                |
+| **Delete expense**               | `delete expense INDEX [/r]`                               |
+| **Delete recurrence**            | `delete recurrence INDEX [/r]`                            |
+| **list all cashflows**           | `list`                                                    |
+| **list all incomes**             | `list income`                                             |
+| **list all expenses**            | `list expense`                                            |
+| **list all recurring cashflows** | `list recurrence`                                          |
+| **Set budget**                   | `budget set /b BUDGET`                                    |
+| **Update budget**                | `budget update /b BUDGET`                                 |
+| **Reset budget**                 | `budget reset`                                            |
+| **Delete budget**                | `budget delete`                                           |
+| **View budget**                  | `budget view`                                             |
+| **Display Overview**             | `overview`                                                |
+| **View balance**                 | `balance`                                                 |
+| **Exit program**                 | `exit`                                                    |
 
 - Note: Cashflow is referring to an income or expense
 
