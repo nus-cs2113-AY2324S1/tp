@@ -10,6 +10,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //test for list
 class StockLevelCommandTest {
+
+    @Test
+    public void executeTestEmpty(){
+        Inventory inventory = new Inventory();
+        ShowStockLevelCommand command = new ShowStockLevelCommand();
+        command.setData(inventory, new SalesList(), new Cart());
+        // Execute the command
+        CommandResult result = command.execute();
+        String expectedOutput = "The inventory is empty.";
+        assertEquals(expectedOutput, result.getFeedbackToUserFindTest());
+    }
+
     @Test
     public void executeTest() {
         // Create a new inventory
