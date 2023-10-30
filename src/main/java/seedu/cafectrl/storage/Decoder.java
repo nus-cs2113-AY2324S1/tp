@@ -13,6 +13,10 @@ public class Decoder {
     private static final Ui ui = new Ui();
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
+
+        if (encodedPantryStock.isEmpty()) {
+            return new Pantry(ui);
+        }
         for (String encodedData : encodedPantryStock) {
             String[] decodedData = encodedData.split(" ");
             if (!isValidPantryStockFormat(decodedData)) {
