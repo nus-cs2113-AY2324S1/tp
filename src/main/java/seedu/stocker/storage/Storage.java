@@ -65,16 +65,19 @@ public class Storage {
         File f = new File(filePath);
         Scanner reader = new Scanner(f);
 
-        Pattern pattern = Pattern.compile("Name: (.*), Expiry date: (.*), Quantity: (.*)");
-        while(reader.hasNextLine()){
+        Pattern pattern = Pattern.compile(
+                "Name: (.*), Expiry date: (.*), Serial Number: (.*), Quantity: (.*)"
+        );
+        while (reader.hasNextLine()) {
             Matcher matcher = pattern.matcher(reader.nextLine());
-            if (matcher.matches() && matcher.groupCount() == 3) {
+            if (matcher.matches() && matcher.groupCount() == 4) {
                 String name = matcher.group(1);
                 String expiryDate = matcher.group(2);
-                Long quantity = Long.parseLong(matcher.group(3));
+                String serialNumber = matcher.group(3); // Extract serial number
+                Long quantity = Long.parseLong(matcher.group(4));
 
                 Drug drug = new Drug(name, expiryDate);
-                inventory.addNewDrug(name, drug, quantity);
+                inventory.addNewDrug(name, drug, serialNumber, quantity);
             } else {
                 throw new InvalidDrugFormatException("");
             }

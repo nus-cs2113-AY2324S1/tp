@@ -123,13 +123,14 @@ public class Parser {
      */
     private Command prepareAddCommand(String args) {
         try {
-            Pattern pattern = Pattern.compile("/n (.*) /d (.*) /q (.*)");
+            Pattern pattern = Pattern.compile("/n (.*) /d (.*) /s (.*) /q (.*)");
             Matcher matcher = pattern.matcher(args);
-            if (matcher.matches() && matcher.groupCount() == 3) {
+            if (matcher.matches() && matcher.groupCount() == 4) {
                 String name = matcher.group(1);
                 String expiryDate = matcher.group(2);
-                Long quantity = Long.parseLong(matcher.group(3));
-                return new AddCommand(name, expiryDate, quantity);
+                String serialNumber = matcher.group(3);
+                Long quantity = Long.parseLong(matcher.group(4));
+                return new AddCommand(name, expiryDate, serialNumber, quantity);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
@@ -161,7 +162,7 @@ public class Parser {
         if (findArgs.length == 2) {
             String criterion = findArgs[0];
             String keyword = findArgs[1];
-            if (criterion.equals("/n") || criterion.equals("/d")) {
+            if (criterion.equals("/n") || criterion.equals("/d") || criterion.equals("/s")) {
                 return new FindCommand(keyword, criterion);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

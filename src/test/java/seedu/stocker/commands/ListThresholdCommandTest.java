@@ -15,9 +15,9 @@ public class ListThresholdCommandTest {
         // Create a new inventory
         Inventory inventory = new Inventory();
         Drug drug1 = new Drug("Panadol", "04/07/2030");
-        inventory.addNewDrug("Panadol", drug1, 120);
+        inventory.addNewDrug("Panadol", drug1, "PAN437", 120);
         Drug drug2 = new Drug("paracetamol", "01/07/2020");
-        inventory.addNewDrug("paracetamol", drug2, 50);
+        inventory.addNewDrug("paracetamol", drug2, "PARC578", 50);
 
         // Create the SetThresholdCommand
         ListThresholdCommand command = new ListThresholdCommand();

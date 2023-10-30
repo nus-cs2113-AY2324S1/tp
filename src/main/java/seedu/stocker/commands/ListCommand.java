@@ -26,8 +26,8 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        // Assertion: Check if the inventory is properly initialised
-        assert inventory != null : "Inventory should be initialised before executing ListCommand.";
+        // Assertion: Check if the inventory is properly initialized
+        assert inventory != null : "Inventory should be initialized before executing ListCommand.";
         // Retrieve the list of drugs from the inventory
         List<StockEntry> stockEntries = inventory.getStockEntries();
 
@@ -36,8 +36,20 @@ public class ListCommand extends Command {
             // Return a CommandResult indicating that the inventory is empty
             return new CommandResult<>("The inventory is empty.");
         } else {
+            // Prepare a StringBuilder to construct the output message
+            StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
+            int index = 1;
+            for (StockEntry entry : stockEntries) {
+                resultMessage.append("\t").append(index).append(". ")
+                        .append("Name: ").append(entry.getDrug().getName())
+                        .append(", Expiry date: ").append(entry.getDrug().getExpiryDate())
+                        .append(", Serial number: ").append(entry.getSerialNumber()) // Add this line
+                        .append(", Quantity: ").append(entry.getQuantity())
+                        .append(System.lineSeparator());
+                index++;
+            }
             // Return a CommandResult with the success message and the list of drugs
-            return new CommandResult<>(MESSAGE_SUCCESS, stockEntries);
+            return new CommandResult<>(resultMessage.toString().trim());
         }
     }
 }

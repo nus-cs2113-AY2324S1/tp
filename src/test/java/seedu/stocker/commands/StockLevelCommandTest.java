@@ -27,11 +27,11 @@ class StockLevelCommandTest {
         // Create a new inventory
         Inventory inventory = new Inventory();
         Drug drug1 = new Drug("Panadol", "04/07/2030");
-        inventory.addNewDrug("Panadol", drug1, 120);
+        inventory.addNewDrug("Panadol", drug1, "PAN947",120);
         Drug drug2 = new Drug("paracetamol", "01/07/2020");
-        inventory.addNewDrug("paracetamol", drug2, 50);
+        inventory.addNewDrug("paracetamol", drug2, "PARC347",50);
         Drug drug3 = new Drug("histamine", "09/05/2070");
-        inventory.addNewDrug("histamine", drug3, 10);
+        inventory.addNewDrug("histamine", drug3, "HIS9447",10);
 
 
         ShowStockLevelCommand command = new ShowStockLevelCommand();

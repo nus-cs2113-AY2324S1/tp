@@ -12,7 +12,7 @@ class AddCommandTest {
 
     @Test
     public void executeTest() {
-        AddCommand command = new AddCommand("Paracetamol", "12/05/2024", 12L); 
+        AddCommand command = new AddCommand("Paracetamol", "12/05/2024", "12345",12L);
         command.setData(new Inventory(), new SalesList(), new Cart());
         String expectedOutput = "New drug added in the inventory: Paracetamol";
         assertEquals(command.execute().feedbackToUser, new CommandResult(expectedOutput).feedbackToUser);
