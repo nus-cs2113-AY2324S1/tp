@@ -26,7 +26,7 @@ public class CafeCtrl {
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    private CafeCtrl() throws FileNotFoundException {
+    private CafeCtrl() throws IOException {
         this.ui = new Ui();
         this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
         this.storage = new Storage(this.ui);
