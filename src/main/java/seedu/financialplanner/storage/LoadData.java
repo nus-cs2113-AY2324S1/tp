@@ -1,5 +1,9 @@
 package seedu.financialplanner.storage;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
@@ -11,11 +15,9 @@ import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.utils.Ui;
 
-import java.io.StreamCorruptedException;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -24,7 +26,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public abstract class LoadData {
-    private static final String FILE_PATH = "data/watchlist.txt";
+    private static final String FILE_PATH = "data/watchlist.json";
     private static final CashflowList cashflowList = CashflowList.getInstance();
     private static final Ui ui = Ui.getInstance();
 
@@ -253,20 +255,20 @@ public abstract class LoadData {
 
     public static HashMap<String, Stock> loadWatchList() {
         Ui ui = Ui.getInstance();
+        Gson gson = new Gson();
         HashMap<String, Stock> stocksData = new HashMap<>();
         try {
-            ObjectInputStream watchListStocksInputStream
-                    = new ObjectInputStream(
-                        new FileInputStream(FILE_PATH)
-            );
-            stocksData = (HashMap<String, Stock>) watchListStocksInputStream.readObject();
-            watchListStocksInputStream.close();
-        } catch (StreamCorruptedException e) {
-            ui.showMessage("Watchlist file corrupted.. Rebuilding");
-        } catch (IOException e) {
+            JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
+            stocksData = gson.fromJson(reader, new TypeToken<HashMap<String,Stock>>(){}.getType());
+        } catch (FileNotFoundException e) {
             ui.showMessage("Watchlist file not found... Creating");
-        } catch (ClassNotFoundException e) {
-            ui.showMessage("FIle appears to be corrupted...");
+        } catch (JsonSyntaxException e) {
+            ui.showMessage("Watchlist JSON is corrupted!");
+            ui.showMessage("Would you like to create new file? (Y/N)");
+            if (!createNewFile()) {
+                ui.showMessage("Exiting... Please fix the file");
+                System.exit(1);
+            }
         }
         return stocksData;
     }
