@@ -7,6 +7,12 @@ public class Bmi {
 
     public final double value;
 
+    // @@author J0shuaLeong
+    // Method for test
+    Bmi(double bmi) {
+        this.value = bmi;
+    }
+
     public Bmi(Height height, Weight weight) {
         assert (height != null && height.value > 0 && weight != null);
         double heightInMetres = height.value / 100;
@@ -16,8 +22,8 @@ public class Bmi {
     private Map<String, String> createBMICategories() {
         return Map.of(
                 "Underweight", "0.0 18.5",
-                "Normal weight", "18.5 24.9",
-                "Overweight", "25.0 29.9",
+                "Normal weight", "18.5 25.0",
+                "Overweight", "25.0 30.0",
                 "Obese", "30.0 100.0"
         );
     }
@@ -37,7 +43,7 @@ public class Bmi {
             String[] rangeBounds = range.split(" ");
             double lowerBound = Double.parseDouble(rangeBounds[0]);
             double upperBound = Double.parseDouble(rangeBounds[rangeBounds.length - 1]);
-            if (value >= lowerBound && value <= upperBound) {
+            if (value >= lowerBound && value < upperBound) {
                 return entry.getKey();
             }
         }
