@@ -231,6 +231,7 @@ public class Parser {
 
         return ingredients;
     }
+
     //@@author NaychiMin
     /**
     * Parses arguments in the context of the ListIngredient command.
@@ -303,10 +304,12 @@ public class Parser {
             return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
         }
     }
+
     //@@author ziyi105
     private static Command prepareHelpCommand(Ui ui) {
         return new HelpCommand(ui);
     }
+
     //@@author 
     /**
      * Parses arguments in the context of the Delete command.
