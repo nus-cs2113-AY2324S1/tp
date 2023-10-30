@@ -220,6 +220,8 @@ public class Parser {
                     + AddDishCommand.MESSAGE_USAGE, ui);
         } catch (ArithmeticException e) {
             return new IncorrectCommand(ErrorMessages.INVALID_PRICE_MESSAGE, ui);
+        } catch (NullPointerException e) {
+            return new IncorrectCommand(ErrorMessages.NULL_DISH_NAME_MESSAGE, ui);
         }
     }
 
@@ -286,7 +288,11 @@ public class Parser {
      * @param menu contains all the existing Dishes
      * @return boolean of whether a repeated dish name is detected
      */
-    public static boolean isRepeatedDishName(String inputDishName, Menu menu) {
+    public static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
+        if (inputDishName == null) {
+            throw new NullPointerException();
+        }
+
         for (Dish dish: menu.getMenuItemsList()) {
             String menuDishNameLowerCase = dish.getName().toLowerCase();
             String inputDishNameLowerCase = inputDishName.toLowerCase();
