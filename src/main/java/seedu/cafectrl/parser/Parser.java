@@ -210,7 +210,7 @@ public class Parser {
                 return new IncorrectCommand(Messages.REPEATED_DISH_MESSAGE, ui);
             }
 
-            ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
 
             Dish dish = new Dish(dishName, ingredients, price);
 
@@ -231,7 +231,7 @@ public class Parser {
      * @return Ingredient objects that consists of the dish
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
      */
-    private static ArrayList<Ingredient> ingredientParsing(String ingredientsListString)
+    private static ArrayList<Ingredient> parseIngredients(String ingredientsListString)
             throws IllegalArgumentException {
         String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -369,7 +369,7 @@ public class Parser {
         }
 
         String ingredientsListString = matcher.group(0);
-        ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
+        ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
 
         try {
             return new BuyIngredientCommand(ingredients, ui, pantry);
