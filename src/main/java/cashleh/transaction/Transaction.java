@@ -3,7 +3,6 @@ package cashleh.transaction;
 import cashleh.Ui;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Abstract class providing common structure for financial transactions,
