@@ -3,12 +3,12 @@ package fittrack.data;
 import java.util.Objects;
 
 public class Weight {
-    public double value;
+    public final double value;
 
     public Weight(double weight) {
+        assert weight > 0;
         this.value = weight;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -29,6 +29,6 @@ public class Weight {
 
     @Override
     public String toString() {
-        return value + "kg";
+        return String.format("%.1fkg", value);
     }
 }

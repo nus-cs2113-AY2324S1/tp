@@ -3,9 +3,10 @@ package fittrack.data;
 import java.util.Objects;
 
 public class Height {
-    public double value;
+    public final double value;
 
     public Height(double height) {
+        assert height > 0;
         this.value = height;
     }
 
@@ -28,7 +29,7 @@ public class Height {
 
     @Override
     public String toString() {
-        return value + "cm";
+        return String.format("%.1fcm", value);
     }
 
     public double calculateIdealWeight(){
