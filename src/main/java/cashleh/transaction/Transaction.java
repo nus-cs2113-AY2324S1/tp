@@ -3,7 +3,6 @@ package cashleh.transaction;
 import cashleh.Ui;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Abstract class providing common structure for financial transactions,
@@ -15,8 +14,6 @@ public abstract class Transaction {
     private double amount;
     private LocalDate date = null;
     private Categories category = null;
-
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /*
      * Constructor for Transaction - set date to current date if not specified
