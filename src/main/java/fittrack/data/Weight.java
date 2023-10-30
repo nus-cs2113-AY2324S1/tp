@@ -29,6 +29,6 @@ public class Weight {
 
     @Override
     public String toString() {
-        return value + "kg";
+        return String.format("%.1fkg", value);
     }
 }

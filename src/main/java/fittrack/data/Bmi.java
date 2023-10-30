@@ -7,7 +7,6 @@ import java.util.Map;
 public class Bmi {
 
     public final double value;
-    private final DecimalFormat df = new DecimalFormat("0.00");
 
     public Bmi(double bmi) {
         this.value = bmi;
@@ -69,6 +68,6 @@ public class Bmi {
 
     @Override
     public String toString() {
-        return df.format(value);
+        return String.format("%.2f", value);
     }
 }

@@ -28,7 +28,7 @@ public class Height {
 
     @Override
     public String toString() {
-        return value + "cm";
+        return String.format("%.1fcm", value);
     }
 
     public double calculateIdealWeight(){

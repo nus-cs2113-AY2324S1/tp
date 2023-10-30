@@ -28,6 +28,6 @@ public class Calories {
 
     @Override
     public String toString() {
-        return value + "kcal";
+        return String.format("%.0fkcal", value);
     }
 }
