@@ -11,6 +11,11 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The Decoder class offers methods to interpret string representations from text files,
+ * decoding them into appropriate data structures. It includes methods to decode a Menu,
+ * Pantry stock, and OrderList, allowing retrieval of data stored in a file.
+ */
 public class Decoder {
     private static final Ui ui = new Ui();
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
@@ -38,7 +43,6 @@ public class Decoder {
         return true;
     }
 
-
     /**
      * Decodes a list of order data and constructs an OrderList object.
      *
@@ -55,12 +59,9 @@ public class Decoder {
             String totalOrderCost = orderData[2].trim();
             System.out.println(dishName);
             Order orderedDish = new Order(menu.getDishFromName(dishName),
-                    Integer.parseInt(quantity),Float.parseFloat(totalOrderCost));
+                    Integer.parseInt(quantity), Float.parseFloat(totalOrderCost));
             orderListArray.add(orderedDish);
         }
-
         return new OrderList(orderListArray);
     }
-
-
 }
