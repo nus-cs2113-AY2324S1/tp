@@ -1,9 +1,6 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.data.Order;
-import seedu.cafectrl.data.OrderList;
-import seedu.cafectrl.data.Menu;
-import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.*;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
@@ -17,29 +14,24 @@ public class Encoder {
         return null;
     }
 
-    /**
-     * Encodes a list of orders into a storage-friendly format.
-     * Each order is represented as a string in the format "dishName|quantity|totalOrderCost".
-     * If the provided OrderList is empty, an empty ArrayList is returned.
-     *
-     * @param ordersList The OrderList to be encoded.
-     * @return ArrayList of strings representing encoded orders.
-     */
-    public static ArrayList<String> encodeOrderList(OrderList ordersList) {
+    public static ArrayList<String> encodeSales(Sales sales) {
         ArrayList<String> encodedList = new ArrayList<>();
-        ArrayList<Order> orderList = ordersList.getOrderList();
-        if(orderList.isEmpty()){
-            return encodedList;
-        }
+        ArrayList<OrderList> orderLists = sales.getOrderLists();
 
-        for (Order order : orderList) {
-            StringBuilder orderString = new StringBuilder();
-            orderString.append(order.getDishName() + DIVIDER);
-            orderString.append(order.getQuantity() + DIVIDER);
-            orderString.append(order.totalOrderCost());
-            encodedList.add(String.valueOf(orderString));
+        for (int day = 0; day < orderLists.size(); day++) {
+            //get orderList for each day from list of sales
+            OrderList orderList = sales.getOrderList(day);
+            //get order from each orderList obtained
+            for (Order order : orderList.getOrderList()) {
+                StringBuilder orderString = new StringBuilder();
+                //day of each orderList is index + 1
+                orderString.append((day + 1) + DIVIDER);
+                orderString.append(order.getDishName() + DIVIDER);
+                orderString.append(order.getQuantity() + DIVIDER);
+                orderString.append(order.totalOrderCost());
+                encodedList.add(String.valueOf(orderString));
+            }
         }
-
         return encodedList;
     }
 
