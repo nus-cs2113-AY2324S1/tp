@@ -224,6 +224,9 @@ to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
+![](./UML/Commands/Initial State.png)
+![](./UML/Commands/commandAddState.png)
+
 ### List Command - Show all Questions with Index
 
 Lists all the questions in the current QuestionList. 
@@ -235,7 +238,7 @@ with the asList parameter set as true. The QuestionList.printQuestion method wil
 print each question with a given index, and indicate the question's type and completion status
 (obtained through Question.getQuestionType() and Question.questionIsDone() methods)
 
-## Delete Command - Delete a Question
+### Delete Command - Delete a Question
 
 Deletes a task by its index.
 
@@ -244,6 +247,8 @@ the index refers to a valid question, failing which it will return an error mess
 
 Otherwise, it will then invoke the QuestionList.deleteQuestionByIndex method to remove
 the question from the QuestionList. 
+
+![](./UML/Commands/commandDeleteQuestion.png)
 
 Afterward, the storage is updated to reflect the newest QuestionList.
 
