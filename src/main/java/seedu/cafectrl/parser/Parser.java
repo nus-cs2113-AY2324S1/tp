@@ -17,6 +17,7 @@ import seedu.cafectrl.Order;
 import seedu.cafectrl.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
