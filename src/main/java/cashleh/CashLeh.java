@@ -13,11 +13,12 @@ import cashleh.commands.Exit;
 
 
 public class CashLeh {
+    private final static int DEFAULT_BUDGET = 1;
     private final Input input = new Input();
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
     private final BudgetHandler budgetHandler =
-            new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement), new Budget(1));
+            new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement), new Budget(DEFAULT_BUDGET));
     private final Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     /**
