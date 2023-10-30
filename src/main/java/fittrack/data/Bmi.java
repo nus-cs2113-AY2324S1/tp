@@ -1,16 +1,11 @@
 package fittrack.data;
 
-import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Map;
 
 public class Bmi {
 
     public final double value;
-
-    public Bmi(double bmi) {
-        this.value = bmi;
-    }
 
     public Bmi(Height height, Weight weight) {
         assert (height != null && height.value > 0 && weight != null);
