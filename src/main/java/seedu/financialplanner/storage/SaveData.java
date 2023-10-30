@@ -1,5 +1,7 @@
 package seedu.financialplanner.storage;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
@@ -7,13 +9,11 @@ import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public abstract class SaveData {
-    private static final String FILE_PATH = "data/watchlist.txt";
+    private static final String FILE_PATH = "data/watchlist.json";
 
     private static final CashflowList cashflowList = CashflowList.getInstance();
 
@@ -32,14 +32,13 @@ public abstract class SaveData {
 
     public static void saveWatchList() {
         Ui ui = Ui.getInstance();
+        WatchList wl = WatchList.getInstance();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
         try {
-            ObjectOutputStream watchListStocksOutput
-                    = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
-
-            WatchList wl = WatchList.getInstance();
-            watchListStocksOutput.writeObject(wl.getStocks());
-
-            watchListStocksOutput.close();
+            FileWriter fileWriter = new FileWriter(FILE_PATH);
+            gson.toJson(wl.getStocks(), fileWriter);
+            fileWriter.close();
         } catch (IOException e) {
             ui.showMessage("Unable to save watchlist to file");
         }

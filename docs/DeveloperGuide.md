@@ -4,19 +4,23 @@
 
 **Xchart (A Simple Charting Library for Java)**
 - author: KNOWN
-- source: [https://knowm.org/open-source/xchart/]()
+- source: [https://knowm.org/open-source/xchart/](https://knowm.org/open-source/xchart/)
 
 **JSON Simple (simple Java toolkit for encoding and decoding JSON)**
 - author: Yidong Fang (Google Code)
-- source: [https://code.google.com/archive/p/json-simple/]()
+- source: [https://code.google.com/archive/p/json-simple/](https://code.google.com/archive/p/json-simple/)
 
 **Apache Common Langs 3**
 - author: Apache Commons
-- source: [https://commons.apache.org/proper/commons-lang/]()
+- source: [https://commons.apache.org/proper/commons-lang/](https://commons.apache.org/proper/commons-lang/)
 
 **Alpha Vantage Stock Market API**
 - author: Alpha Vantage
-- source: [https://www.alphavantage.co/]()
+- source: [https://www.alphavantage.co/](https://www.alphavantage.co/)
+
+**Gson Java library**
+- author: Google
+- source: [https://github.com/google/gson](https://github.com/google/gson)
 
 **round() method in Cashflow.java**
   - author: mhadidg

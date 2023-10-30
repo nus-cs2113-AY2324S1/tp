@@ -7,7 +7,6 @@ import org.json.simple.parser.ParseException;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -17,10 +16,11 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Stock implements Serializable {
+public class Stock {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
-    private static final String API_KEY = "LNKL0548PHY2F0QU";
+    ///private static final String API_KEY = "LNKL0548PHY2F0QU";
+    private static final String API_KEY = "1AKJMAX4CNWFKSE6";
     private String symbol;
     private String exchange;
     private String stockName;
