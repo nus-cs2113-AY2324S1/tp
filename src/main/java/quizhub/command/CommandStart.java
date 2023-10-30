@@ -1,5 +1,6 @@
 package quizhub.command;
 
+import quizhub.exception.QuizHubExceptions;
 import quizhub.question.Question;
 import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
@@ -14,14 +15,15 @@ import java.util.Collections;
 public class CommandStart extends Command{
     public static final String MISSING_QUIZ_MODE_MSG = "    Ono! You did not indicate mode of the quiz :< " +
             System.lineSeparator() + "    Quiz mode must be either 'all' or 'module'";
+    public static final String INVALID_QUIZ_MODE_MSG = "    Quiz mode must be either 'all' or 'module'";
     public static final String MISSING_START_DETAILS = "    Ono! You did not indicate start details for the quiz " +
             "mode that you have chosen :<";
     public static final String MISSING_QN_MODE_MSG = "    Ono! You did not indicate mode of arranging " +
             "quiz questions :<";
-    public static final String INVALID_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
+    public static final String INVALID_QN_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
             "/[quiz mode] [start details] /[qn mode]!";
-    public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! There should not be arguments after /[qn mode]";
+    public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! You gave too many arguments :<";
     private final String startMode;
     private final String startDetails;
     private final String startQnMode;
@@ -58,7 +60,12 @@ public class CommandStart extends Command{
         case "module":
             assert startDetails != null;
             String[] modules  = startDetails.split(" ");
-            matchedQuestions = questions.categoriseListByModule(modules);
+            try {
+                matchedQuestions = questions.assembleListByModules(modules);
+            } catch (QuizHubExceptions emptyList){
+                System.out.println(emptyList.getMessage());
+                return;
+            }
             break;
         case "all":
             matchedQuestions = questions.getAllQns();

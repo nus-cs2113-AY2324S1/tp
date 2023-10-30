@@ -171,10 +171,10 @@ public class CommandStartTest {
             testCliOutputCorrectness(expectedOutput);
         }
         /**
-         * Test starting quiz in all mode with excessive arguments at the back
+         * Test starting quiz in all mode with excessive question modes at the back
          */
         @Test
-        public void testStartQuizAllModeWithDetailsWithQnModeTooManyArguments() {
+        public void testStartQuizAllModeWithDetailsWithQnModeTooManyQnModes() {
             String input = "start /all Mod2 /normal random";
             String expectedOutput = CommandStart.TOO_MANY_ARGUMENTS_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
             Command command = Parser.parseCommand(input);
@@ -182,12 +182,67 @@ public class CommandStartTest {
             testCliOutputCorrectness(expectedOutput);
         }
         /**
-         * Test starting quiz in module mode with excessive arguments at the back
+         * Test starting quiz in module mode with excessive question modes at the back
+         */
+        @Test
+        public void testStartQuizModuleModeWithDetailsWithQnModeTooManyQnModes() {
+            String input = "start /module Mod2 /random normal";
+            String expectedOutput = CommandStart.TOO_MANY_ARGUMENTS_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
+            Command command = Parser.parseCommand(input);
+            command.executeCommand(ui, mockStorage, questionList);
+            testCliOutputCorrectness(expectedOutput);
+        }
+        /**
+         * Test starting quiz in all mode with excessive arguments
+         */
+        @Test
+        public void testStartQuizAllModeWithDetailsWithQnModeTooManyArguments() {
+            String input = "start /all Mod2 /normal /random";
+            String expectedOutput = CommandStart.TOO_MANY_ARGUMENTS_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
+            Command command = Parser.parseCommand(input);
+            command.executeCommand(ui, mockStorage, questionList);
+            testCliOutputCorrectness(expectedOutput);
+        }
+        /**
+         * Test starting quiz in module mode with excessive arguments
          */
         @Test
         public void testStartQuizModuleModeWithDetailsWithQnModeTooManyArguments() {
-            String input = "start /module Mod2 /random normal";
+            String input = "start /module Mod2 /random /normal";
             String expectedOutput = CommandStart.TOO_MANY_ARGUMENTS_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
+            Command command = Parser.parseCommand(input);
+            command.executeCommand(ui, mockStorage, questionList);
+            testCliOutputCorrectness(expectedOutput);
+        }
+        /**
+         * Test starting quiz in module mode with invalid question mode
+         */
+        @Test
+        public void testStartQuizModuleModeInvalidQnMode() {
+            String input = "start /module cs2113 cg2028 /invalid ";
+            String expectedOutput = CommandStart.INVALID_QN_MODE_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
+            Command command = Parser.parseCommand(input);
+            command.executeCommand(ui, mockStorage, questionList);
+            testCliOutputCorrectness(expectedOutput);
+        }
+        /**
+         * Test starting quiz in all mode with invalid question mode
+         */
+        @Test
+        public void testStartQuizAllModeInvalidQnMode() {
+            String input = "start /all /invalid";
+            String expectedOutput = CommandStart.INVALID_QN_MODE_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
+            Command command = Parser.parseCommand(input);
+            command.executeCommand(ui, mockStorage, questionList);
+            testCliOutputCorrectness(expectedOutput);
+        }
+        /**
+         * Test starting quiz in with jumbled arguments
+         */
+        @Test
+        public void testStartQuizJumbledArguments() {
+            String input = "start /random /module cs2113";
+            String expectedOutput = CommandStart.INVALID_QUIZ_MODE_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
             Command command = Parser.parseCommand(input);
             command.executeCommand(ui, mockStorage, questionList);
             testCliOutputCorrectness(expectedOutput);

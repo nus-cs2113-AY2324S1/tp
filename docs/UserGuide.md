@@ -44,7 +44,7 @@ Example of usage:
 `8. edit [question number] /answer [answer] - edits the answer to the question with the specified number,` <br>
 `9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or /normal,` <br>
 `10. shuffle - shuffle quiz questions to a random order,` <br>
-`11. markdiff [question number] [question difficulty] - sets the difficulty of question with the specified number,` <br>
+`11. markdiff [question number] /[question difficulty] - sets the difficulty of question with the specified number,` <br>
 `12. bye - exits the program` <br>
 
 Notes:
@@ -192,11 +192,11 @@ and answer bank.
 Format: `markdiff [question number] [question difficulty]`
 
 Examples of usage:
-* **Command**: `markdiff 1 easy` <br>
+* **Command**: `markdiff 1 /easy` <br>
   **Output**:  <br>
   `Roger that! I have marked the following question as easy >w< !` <br>
   `[S][] [original description] / [original answer] | [module] | EASY` <br> <br>
-* **Command**: `markdiff 2 Hard` <br>
+* **Command**: `markdiff 2 /Hard` <br>
   **Output**: <br>
   `Roger that! I have marked the following question as hard >w< !` <br>
   `[S][] [original description] / [original answer] | [module] | HARD` <br> <br>

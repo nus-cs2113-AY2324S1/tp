@@ -313,28 +313,32 @@ public class QuestionList {
         }
     }
     /**
-     * Build a new list of questions based on specified module.
+     * Build a new list of questions based on a list of specified modules.
      *
      * @param modules Modules used to search for matches.
      */
-    public ArrayList<Question> categoriseListByModule(String[] modules){
+    public ArrayList<Question> assembleListByModules(String[] modules) throws QuizHubExceptions{
         ArrayList<Question> matchedQuestions = new ArrayList<>();
-        try {
-            if (allQns.isEmpty()) {
-                throw new QuizHubExceptions("    Question list is empty! Time to add some OWO");
-            } else {
-                for (String module : modules) {
-                    for (Question question : allQns) {
-                        if (question.getModule().toLowerCase().matches(module.toLowerCase())) {
-                            matchedQuestions.add(question);
-                        }
-                    }
-                }
-            }
-        } catch (QuizHubExceptions emptyList){
-            System.out.println(emptyList.getMessage());
+        if (allQns.isEmpty()) {
+            throw new QuizHubExceptions("    Question list is empty! Time to add some OWO");
+        }
+        for (String module : modules) {
+            assembleListByModule(module, matchedQuestions);
         }
         return matchedQuestions;
+    }
+    /**
+     * Build a new list of questions based on a specified module.
+     *
+     * @param module The module used to search for matches.
+     * @param matchedQuestions Question list to append matching questions to.
+     */
+    public void assembleListByModule(String module, ArrayList<Question> matchedQuestions){
+        for (Question question : allQns) {
+            if (question.getModule().toLowerCase().matches(module.toLowerCase())) {
+                matchedQuestions.add(question);
+            }
+        }
     }
     /**
      * Returns the size of current question list.
