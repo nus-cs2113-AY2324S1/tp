@@ -191,7 +191,7 @@ public class Parser {
             return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
                     + AddDishCommand.MESSAGE_USAGE, ui);
         } catch (ArithmeticException e) {
-            return new IncorrectCommand(Messages.INVALID_PRICE_MESSAGE, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_PRICE_MESSAGE, ui);
         }
     }
 

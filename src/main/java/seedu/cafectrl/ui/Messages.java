@@ -20,8 +20,6 @@ public class Messages {
 
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
-    public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
-    public static final String INVALID_PRICE_MESSAGE = "Error: Price value entered is too big!";
 
     /** Messages for view stock command */
     public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
