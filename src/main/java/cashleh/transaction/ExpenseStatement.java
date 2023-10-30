@@ -3,8 +3,11 @@ package cashleh.transaction;
 import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 /**
  * Represents an Expense Statement in the CashLeh application.
@@ -74,15 +77,82 @@ public class ExpenseStatement {
                 mapToDouble(Expense::getAmount).sum();
     }
 
+    /**
+     * Prints the expense statement, displaying details of all expense transactions.
+     * This method generates a formatted expense statement based on the transactions in the expenseStatement list.
+     * It creates a textual representation of each expense transaction, including its type (Expense), date, description,
+     * amount, and category (if available), and then uses the Ui.printStatement method to display the statement.
+     */
     public void printExpenses() {
         int listSize = expenseStatement.size();
-        String[] texts = new String[listSize + 1];
-        texts[0] = "The current sum of all your expenses amounts to: " + getTotalExpenseAmount();
-        for (int i = 1; i <= listSize; i++) {
-            Expense currentExpense = expenseStatement.get(i - 1);
-            texts[i] = "\t" + i + ". " + currentExpense.toString();
+        List<String> expensesDetails = new ArrayList<>();
+        for (Expense currentExpense : expenseStatement) {
+            String type = "Expense, ";
+            String date = currentExpense.getDate().toString();
+            String amt = String.valueOf(currentExpense.getAmount());
+            String cat = currentExpense.getCategory() == null ? "-" : currentExpense.getCategory().toString();
+            expensesDetails.add(type + date + ", " + currentExpense.getDescription() + ", " + amt + ", " + cat);
         }
-        Ui.printMultipleText(texts);
+
+        // Sort expenses based on the date of expense
+        Collections.sort(expensesDetails, (expense1, expense2) -> {
+            String[] expenseParts1 = expense1.split(", ");
+            String [] expenseParts2 = expense2.split(", ");
+            String date1 = expenseParts1[1];
+            String date2 = expenseParts2[1];
+            return date1.compareTo(date2);
+        });
+
+        String[] texts = expensesDetails.toArray(new String[expensesDetails.size()]);
+
+        Ui.printStatement("Expense Statement", texts);
+    }
+
+    /**
+     * Finds and displays expenses that match the specified criteria, including description, amount, date, and category.
+     * @param description The description to filter transactions by. Can be left null or empty.
+     * @param amount The amount to filter transactions by. Set to -1 if no amount is provided by user.
+     * @param date The date to filter transactions by. Set to null if no date is provided by user.
+     * @param category The category to filter transactions by. Set to null if no category is provided by user
+     * @throws CashLehMissingTransactionException if no matching transactions are found.
+     */
+    public void findExpense(String description, OptionalDouble amount, LocalDate date, Categories category)
+            throws CashLehMissingTransactionException {
+        ArrayList<String> matchingExpenses = new ArrayList<>();
+        boolean isMatch = false;
+
+        // Customize the message based on input
+        StringBuilder message = new StringBuilder("Here are your corresponding expenses with ");
+        if (description != null && !description.isEmpty()) {
+            message.append("<description>: ").append(description).append(" ||");
+        }
+        if (amount.isPresent()) {
+            message.append("<amount>: ").append(amount.getAsDouble()).append(" ||");
+        }
+        if (date != null) {
+            message.append("<date>: ").append(date).append(" ||");
+        }
+        if (category != null) {
+            message.append("<category>: ").append(category).append(" ||");
+        }
+        matchingExpenses.add(message.toString());
+
+        for (Expense expense : expenseStatement) {
+            boolean descriptionMatch = (description == null) || (description.isEmpty())
+                    || expense.getDescription().equals(description);
+            boolean amountMatch = (amount.isEmpty()) || (expense.getAmount() == amount.getAsDouble());
+            boolean dateMatch = (date == null) || (expense.getDate().equals(date));
+            boolean categoryMatch = (category == null) || (expense.getCategory().equals(category));
+            if (descriptionMatch && amountMatch && dateMatch && categoryMatch) {
+                matchingExpenses.add(expense.toString());
+                isMatch = true;
+            }
+        }
+        if (isMatch) {
+            Ui.printMultipleText(matchingExpenses);
+        } else {
+            throw new CashLehMissingTransactionException();
+        }
     }
 
     @Override

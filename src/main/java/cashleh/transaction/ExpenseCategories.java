@@ -10,7 +10,6 @@ public class ExpenseCategories {
         UTILITIES,
         OTHERS
     }
-
     public static ExpenseCategory getExpenseCategory(String input) {
         try {
             return ExpenseCategory.valueOf(input.toUpperCase());

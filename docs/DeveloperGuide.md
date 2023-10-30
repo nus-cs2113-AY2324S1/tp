@@ -64,6 +64,25 @@ Sort the list of PrefixWithPosition by position in order to get the prefixes in 
 **Step 4**\
 Create a hashmap of the user input by splitting the string using the prefixes' positions and adding the key-value pairs to the hashmap
 
+### Transaction Filter
+The filter function assists in filtering both expenses and incomes according to the specified criterion from user's input.
+
+#### Implementation
+![](./images/FilterTransaction.png)
+
+**Step 1**\
+The filterBy() method is called, returning a FindParser object
+
+**Step 2**\
+A FilterTransaction object is constructed, with the FindParser object as one of its parameters
+
+**Step 3**\
+From the expenseStatement and incomeStatement, the financialStatement is constructed. 
+
+**Step 4**\
+Execution of the FilterTransaction class calls method findTransaction(), which prints expenses and incomes that match the provided criterion
+
+
 ## Product scope
 ### Target user profile
 
@@ -99,6 +118,7 @@ unnecessary expenses.
 |v2.0| user              | be able to delete my previously set budget         | not care about an upper limit or eventually set a new budget                          |
 |v2.0| user              | be able to label categories of each income         | can know which category the income belongs to                                  |
 |v2.0| user              | be able to label categories of each expense        | can know which category the expense belongs to                                  |
+|v2.0| user              | be able to filter my transactions                  | better understand my financial history and easily access information |
 
 ## Non-Functional Requirements
 
