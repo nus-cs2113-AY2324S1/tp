@@ -4,8 +4,8 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.ui.Ui;
 
 public class ExitCommand extends Command {
-
     public static final String COMMAND_WORD = "bye";
+
     protected Ui ui;
     protected Pantry pantry;
 
