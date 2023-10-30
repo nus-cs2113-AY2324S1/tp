@@ -59,7 +59,7 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
-        //this.storage.saveAll(this.menu, this.orderList, this.pantry);
+        this.storage.saveAll(this.menu, this.orderList, this.pantry);
     }
 
     public static void main(String[] args) throws IOException {

@@ -36,7 +36,7 @@ public class Decoder {
             return false;
         } else {
             try {
-                Integer.parseInt(decodedPantryStock[2]);
+                Integer.parseInt(decodedPantryStock[1]);
             } catch (NumberFormatException e) {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
                 return false;
