@@ -162,7 +162,7 @@ public abstract class LoadData {
             ui.showMessage("Watchlist JSON is corrupted!");
             ui.showMessage("Would you like to create new file? (Y/N)");
             if (!createNewFile()) {
-                ui.showMessage("Exiting... Plese fix the file");
+                ui.showMessage("Exiting... Please fix the file");
                 System.exit(1);
             }
         }
