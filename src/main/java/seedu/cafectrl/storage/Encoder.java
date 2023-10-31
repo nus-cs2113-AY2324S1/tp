@@ -1,10 +1,12 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Order;
+import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.data.Menu;
 
 import java.util.ArrayList;
 
@@ -15,7 +17,6 @@ import java.util.ArrayList;
  * making the data suitable for saving to a file.
  */
 public class Encoder {
-
     private static final String DIVIDER = " | ";
 
     /**
@@ -67,8 +68,33 @@ public class Encoder {
         return pantryStockInString;
     }
 
+    //@@NaychiMin
+    /**
+     * Encodes a Sales object into a list of strings for storage.
+     * Each string represents an order, including day, dish name, quantity, and total cost.
+     *
+     * @param sales The Sales object to be encoded.
+     * @return An ArrayList of strings representing the encoded sales data.
+     */
     public static ArrayList<String> encodeSales(Sales sales) {
-        return null;
-    }
+        ArrayList<String> encodedList = new ArrayList<>();
+        ArrayList<OrderList> orderLists = sales.getOrderLists();
 
+        for (int day = 0; day < orderLists.size(); day++) {
+            //get orderList for each day from list of sales
+            OrderList orderList = sales.getOrderList(day);
+            //get order from each orderList obtained
+            for (Order order : orderList.getOrderList()) {
+                StringBuilder orderString = new StringBuilder();
+                //day of each orderList is index + 1
+                orderString.append((day + 1) + DIVIDER);
+                orderString.append(order.getDishName() + DIVIDER);
+                orderString.append(order.getQuantity() + DIVIDER);
+                orderString.append(order.totalOrderCost());
+                encodedList.add(String.valueOf(orderString));
+            }
+        }
+        return encodedList;
+    }
+    //@@author
 }
