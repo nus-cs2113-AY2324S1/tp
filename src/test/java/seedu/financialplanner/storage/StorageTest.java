@@ -11,10 +11,14 @@ import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,7 +56,12 @@ public class StorageTest {
         cashflowList.list.clear();
         getTestData();
         storage.save(String.valueOf(testFolder.resolve("temp.txt")));
-        assertEquals(Files.readAllLines(Path.of("src/test/testData/ValidData.txt")),
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        String filePath = String.valueOf(testFolder.resolve("ValidDataCopy.txt"));
+        getTestValidData(filePath, date);
+
+        assertEquals(Files.readAllLines(Path.of(filePath)),
                 Files.readAllLines(testFolder.resolve("temp.txt")));
     }
 
@@ -65,5 +74,16 @@ public class StorageTest {
     private void getTestData() {
         cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, null));
         cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 0, "shopee"));
+    }
+
+    private static void getTestValidData(String filePath, String date) throws IOException {
+        try {
+            Files.copy(Paths.get("src/test/testData/ValidData.txt"), Path.of(filePath));
+            FileWriter fw = new FileWriter(filePath, true);
+            fw.append(" ").append(date);
+            fw.close();
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
     }
 }
