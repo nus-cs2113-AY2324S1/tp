@@ -47,7 +47,7 @@ public abstract class LoadData {
             String line;
             ui.showMessage("Loading existing file...");
 
-            while(inputFile.hasNext()) {
+            while (inputFile.hasNext()) {
                 line = inputFile.nextLine();
                 String[] split = line.split("\\|");
                 String type = split[0].trim();
