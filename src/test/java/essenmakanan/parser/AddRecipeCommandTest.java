@@ -1,11 +1,13 @@
 package essenmakanan.parser;
 
 import essenmakanan.command.AddRecipeCommand;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.recipe.RecipeList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddRecipeCommandTest {
 
@@ -13,23 +15,41 @@ public class AddRecipeCommandTest {
 
     private RecipeList recipeList;
 
-    private final String userInput = "r/bread s/step 1 instructions s/step 2 instructions ";
-
-
-
-
     @BeforeEach
     public void setUp() {
         recipeList = new RecipeList();
-        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
     }
 
     @Test
-    public void parse_invalidCommand_exceptionThrown() {
+    public void addRecipeCommand_validCommand_recipeCreated() {
+        String userInput = "r/bread s/step 1 instructions s/step 2 instructions ";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
         addRecipeCommand.executeCommand();
         assertEquals("bread", recipeList.getRecipeByIndex(0).getTitle());
-        assertEquals("step 1 instructions", recipeList.getRecipeByIndex(0).getRecipeSteps().get(0));
-        assertEquals("step 2 instructions", recipeList.getRecipeByIndex(0).getRecipeSteps().get(1));
+        String step1 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(0).getDescription();
+        String step2 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(1).getDescription();
+        assertEquals("step 1 instructions", step1);
+        assertEquals("step 2 instructions", step2);
+    }
+
+    @Test
+    public void addRecipeWithInvalidInput_invalidIngredient_errorThrown() {
+        String userInput = "r/bread s/step1 i/invalidIngredient";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addWithTitleAndStepsAndIngredients();
+        });
+    }
+
+    @Test
+    public void addRecipeWithInvalidInput_missingTitle_errorThrown() {
+        String userInput = "r/ s/step1 i/invalidIngredient";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addWithTitleAndStepsAndIngredients();
+        });
     }
 
 }
