@@ -26,8 +26,6 @@ import fittrack.data.Meal;
 import fittrack.data.Workout;
 import org.junit.jupiter.api.Test;
 
-import java.time.format.DateTimeParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -230,7 +228,7 @@ class CommandParserTest {
     }
 
     @Test
-    void parseIndex_1_success() {
+    void parseIndex_one_success() {
         try {
             int idx = new CommandParser().parseIndex("123");
             assertEquals(123, idx);
@@ -250,7 +248,7 @@ class CommandParserTest {
     }
 
     @Test
-    void parseDate_20231031_success() {
+    void parseDate_date20231031_success() {
         try {
             Date date = new CommandParser().parseDate("2023-10-31");
             assertEquals(new Date(2023, 10, 31), date);
