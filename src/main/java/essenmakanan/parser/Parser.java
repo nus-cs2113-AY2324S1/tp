@@ -1,19 +1,6 @@
 package essenmakanan.parser;
 
-import essenmakanan.command.AddIngredientCommand;
-import essenmakanan.command.AddRecipeCommand;
-import essenmakanan.command.Command;
-import essenmakanan.command.DeleteIngredientCommand;
-import essenmakanan.command.DeleteRecipeCommand;
-import essenmakanan.command.EditIngredientCommand;
-import essenmakanan.command.EditRecipeCommand;
-import essenmakanan.command.ExitCommand;
-import essenmakanan.command.HelpCommand;
-import essenmakanan.command.StartRecipeCommand;
-import essenmakanan.command.ViewIngredientsCommand;
-import essenmakanan.command.ViewRecipesCommand;
-import essenmakanan.command.ViewSpecificIngredientCommand;
-import essenmakanan.command.ViewSpecificRecipeCommand;
+import essenmakanan.command.*;
 import essenmakanan.exception.EssenCommandException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
@@ -65,12 +52,20 @@ public class Parser {
                 throw new EssenFormatException();
             }
             break;
+        case "filter":
+            if (inputDetail.startsWith("recipe")) {
+                inputDetail = RecipeParser.parseFilterRecipeInput(inputDetail);
+                command = new FilterRecipesCommand(inputDetail, recipes);
+            } else {
+                throw new EssenFormatException();
+            }
+            break;
         case "edit":
             if (inputDetail.startsWith("i/")) {
                 command = new EditIngredientCommand(inputDetail, ingredients);
             } else if (inputDetail.startsWith("r/")) {
                 command = new EditRecipeCommand(inputDetail, recipes);
-            }else {
+            } else {
                 throw new EssenFormatException();
             }
             break;

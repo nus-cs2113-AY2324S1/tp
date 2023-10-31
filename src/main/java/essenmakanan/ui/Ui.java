@@ -113,6 +113,7 @@ public class Ui {
     }
 
     public static void printAllRecipes(RecipeList recipes) {
+        System.out.println("Here's a list of your recipes!");
         recipes.listRecipeTitles();
         drawDivider();
     }
@@ -151,6 +152,16 @@ public class Ui {
 
     public static void printSpecificRecipe(RecipeList recipes, int recipeIndex) {
         recipes.viewRecipe(recipeIndex);
+        drawDivider();
+    }
+
+    public static void printFilteredRecipes(RecipeList filteredRecipes, String ingredientName) {
+        System.out.println("Here are the recipes containing ingredient " + ingredientName + ":");
+        if (filteredRecipes.isEmpty()) {
+            System.out.println("---NO RECIPES contain the ingredient---");
+        } else {
+            filteredRecipes.listRecipeTitles();
+        }
         drawDivider();
     }
 

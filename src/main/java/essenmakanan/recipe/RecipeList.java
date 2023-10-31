@@ -65,8 +65,6 @@ public class RecipeList {
 
 
     public void listRecipeTitles() {
-        Ui.drawDivider();
-        System.out.println("Here's a list of your recipes!");
         int count = 1;
 
         for (essenmakanan.recipe.Recipe recipe : recipes) {
@@ -153,5 +151,9 @@ public class RecipeList {
             }
         }
 
+    }
+
+    public boolean isEmpty() {
+        return recipes.isEmpty();
     }
 }
