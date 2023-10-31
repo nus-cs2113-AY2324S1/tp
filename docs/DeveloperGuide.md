@@ -357,17 +357,17 @@ quizhub application. Here are the key steps for implementing this class:
 - **Parsing User Input**: Parse the user input to extract the question number and the specified difficulty level.
 
 - **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
-- information.
+information.
 
 - **Marking Difficulty**: Implement the logic to execute the operation of marking the question with the specified 
-- difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
-- uestion's difficulty.
+difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
+uestion's difficulty.
 
 - **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
 `dataStorage.updateData(questions)` method is used to save changes to the question list.
 
 - **Error Handling**: Handle any exceptions or errors that may occur during the marking operation and provide 
-- appropriate feedback to the user.
+appropriate feedback to the user.
 
 ### Command Exit - Exit Program
 
