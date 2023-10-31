@@ -7,6 +7,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 import seedu.financialplanner.commands.AddCashflowCommand;
 import seedu.financialplanner.utils.Parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -77,7 +80,19 @@ public class BudgetTest {
     @Test
     @Order(8)
     public void testLoadBudget() {
-        Budget.load(100, 100);
+        Budget.load(100, 100, LocalDate.now());
+        assertEquals(100, Budget.getInitialBudget());
+        assertEquals(100, Budget.getCurrentBudget());
+        Budget.deleteBudget();
+
+        LocalDate date = LocalDate.parse("11/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Budget.load(100, 95, date);
+        assertEquals(100, Budget.getInitialBudget());
+        assertEquals(100, Budget.getCurrentBudget());
+        Budget.deleteBudget();
+
+        date = LocalDate.parse("11/10/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Budget.load(100, 95, date);
         assertEquals(100, Budget.getInitialBudget());
         assertEquals(100, Budget.getCurrentBudget());
         Budget.deleteBudget();

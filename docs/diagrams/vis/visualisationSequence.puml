@@ -1,20 +1,24 @@
 @startuml
 
 participant ":VisCommand"
-participant "<<class>>\nUi"
-participant "<<class>>\nCashFlowList"
+participant ":Ui"
 participant "<<class>>\nCategorizer"
 participant "<<class>>\nVisualizer"
 
-":VisCommand"-> "<<class>>\nUi": getInstance()
-
-":VisCommand"-> "<<class>>\nCashFlowList": getInstance()
-
-":VisCommand"-> "<<class>>\nUi": printDisplayChart(type)
+":VisCommand"-> ":Ui": printDisplayChart(type)
 
 ref over "<<class>>\nCategorizer", ":VisCommand" : sort cashflow entries
 
-ref over "<<class>>\nVisualizer", ":VisCommand": displaying chart
+alt #Pink cashflowbyType.empty()
+
+    ":VisCommand" -> ":Ui" : ui.printEmptyCashflow(type)
+
+else #LightBlue !cashflowbyType.empty()
+
+    ref over "<<class>>\nVisualizer", ":VisCommand": displaying chart
+
+end
+
 
 hide footbox
 
