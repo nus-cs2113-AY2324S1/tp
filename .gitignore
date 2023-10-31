@@ -23,3 +23,4 @@ IncomeManager.log
 Income.log
 IncomeParser.log
 logs
+/text-ui-test/runtest.sh
