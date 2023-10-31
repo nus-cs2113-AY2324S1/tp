@@ -37,7 +37,7 @@ public class CafeCtrl {
         this.pantry = this.storage.loadPantryStock();
         this.sales = this.storage.loadOrderList(menu);
         currentDate = new CurrentDate();
-        sales = new Sales();
+        this.sales = new Sales();
     }
 
     private void setup() {

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Sales {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    protected ArrayList<OrderList> orderLists;
-    protected int daysAccounted;
+    private ArrayList<OrderList> orderLists;
+    private int daysAccounted;
 
     public Sales() {
         this.orderLists = new ArrayList<>();

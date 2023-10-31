@@ -1,0 +1,89 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+CafeCtrl "1" --> "1" UI
+CafeCtrl "1" --> "1" Parser
+CafeCtrl "1" --> "1" Sales
+CafeCtrl "1" --> "1" Pantry
+CafeCtrl "1" o-- "*" Command
+
+Command <|- AddOrderCommand
+Parser "1" --> "*" AddOrderCommand
+AddOrderCommand --> OrderList
+AddOrderCommand "1" --> "1" Chef
+AddOrderCommand --> Pantry
+OrderList "1" --> "*" Order
+Sales --> "1...*" OrderList
+
+class CafeCtrl {
+- setup()
+- run()
++ main(args : String[])
+}
+
+class Command {
+
+}
+
+class UI {
+{static} - scanner : Scanner
++ receiveUserInput() : String
++ showMenuTop() : void
++ showChefMessage() : void
++ showTotalCost(dollarCost : String) : void
+}
+
+class AddOrderCommand {
+# orderList : OrderList
+# ui : Ui
+# pantry : Pantry
++ execute() : void
+}
+
+class Parser {
+{static} + parseCommand(menu : Menu, userInput : String, ui : Ui, pantry : Pantry, sales : Sales, currentDate : CurrentDate) : Command
+{static} - prepareOrder(menu : Menu, arguments : String, ui : Ui, pantry : Pantry, sales : Sales, currentDate : CurrentDate) : Command
+}
+
+class OrderList {
+- orderList : ArrayList<Order>
+- totalOrderListCost : float
++ addOrder() : void
++ addCost() : void
++ getTotalCost() : float
+}
+
+class Order {
+- orderedDish : Dish
+- dishQty : int
+- ingredientList : ArrayList<Ingredient>
+- isComplete : boolean
+- totalOrderCost : float
+- getDishPrice() : float
+- setIngredientList() : ArrayList<Ingredient>
++ getIngredientList() : ArrayList<Ingredient>
++ getTotalOrderCost() : float
++ setComplete() : void
++ getIsComplete() : boolean
+}
+
+class Chef {
+- order : Order
+- pantry : Pantry
+- ui : Ui
++ cookDish() : void
+}
+
+class Pantry {
+- pantryStock : ArrayList<Ingredient>
+- menuItems : ArrayList<Dish>
+- ui : Ui
++ decreaseIngredientsStock(dishIngredient : ArrayList<Ingredient>) : void
+}
+
+class Sales {
+- orderLists : ArrayList<OrderList>
+- daysAccounted : int
+}
+
+@enduml

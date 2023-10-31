@@ -8,23 +8,23 @@ import java.util.ArrayList;
 
 public class Order {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    protected Dish orderedDish;
-    protected int dishQty;
-    protected ArrayList<Ingredient> usedIngredientList;
-    protected boolean isComplete = false;
-    protected float totalOrderCost;
+    private final Dish orderedDish;
+    private final int dishQty;
+    private final ArrayList<Ingredient> ingredientList;
+    private boolean isComplete = false;
+    private final float totalOrderCost;
 
     public Order(Dish orderedDish, int dishQty) {
         this.dishQty = dishQty;
         this.orderedDish = orderedDish;
-        this.usedIngredientList = getIngredientList();
+        this.ingredientList = setIngredientList();
         this.totalOrderCost = totalOrderCost();
     }
 
     public Order(Dish orderedDish, int dishQty, float orderCost) {
         this.dishQty = dishQty;
         this.orderedDish = orderedDish;
-        this.usedIngredientList = getIngredientList();
+        this.ingredientList = setIngredientList();
         this.totalOrderCost = orderCost;
     }
 
@@ -41,6 +41,7 @@ public class Order {
      *
      * @return Total calculated cost
      */
+
     public float totalOrderCost() {
         float dishCost = orderedDish.getPrice();
         return dishCost * dishQty;
@@ -52,7 +53,7 @@ public class Order {
      *
      * @return Arraylist of Ingredients
      */
-    private ArrayList<Ingredient> getIngredientList() {
+    private ArrayList<Ingredient> setIngredientList() {
         ArrayList<Ingredient> dishIngredient = new ArrayList<>();
         for (Ingredient ingredient : orderedDish.getIngredients()) {
             String ingredientName = ingredient.getName();
@@ -63,11 +64,19 @@ public class Order {
         return dishIngredient;
     }
 
+    public ArrayList<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+
+    public float getTotalOrderCost() {
+        return totalOrderCost;
+    }
+
     public void setComplete() {
         this.isComplete = true;
     }
 
-    public boolean isComplete() {
+    public boolean getIsComplete() {
         return isComplete;
     }
 
