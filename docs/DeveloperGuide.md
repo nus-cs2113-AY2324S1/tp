@@ -9,12 +9,12 @@
   * [Visualization Feature](#visualization-feature-)
     * [Class diagram](#class-diagram)
     * [Sequence diagram](#sequence-diagram-)
-  * [Add income/expense feature](#add-incomeexpense-feature)
-    * [Step 1](#step-1)
-    * [Step 2](#step-2)
-    * [Step 3](#step-3)
-    * [Step 4](#step-4)
-    * [Diagrams](#diagrams)
+  * [Add Income/Expense Feature](#add-incomeexpense-feature)
+    * [Class Diagram](#add-incomeexpense-class-diagram)
+    * [Sequence Diagram](#add-incomeexpense-sequence-diagram)
+  * [Recurring Cashflow Feature](#recurring-cashflow-feature)
+    * [Class Diagram](#recurring-cashflow-class-diagram)
+    * [Sequence Diagrams](#recurring-cashflow-sequence-diagrams)
   * [Budget Feature](#budget-feature)
     * [Set and update budget](#set-and-update-budget)
     * [Delete budget](#delete-budget)
@@ -153,7 +153,7 @@ Visualizer
 
 ![](images/vis/visualizerSequence.png)
 
-### Add income/expense feature
+### Add Income/Expense Feature
 
 The add income/expense command has 2 compulsory arguments `/t` and `/a` and 1 optional argument `/r`.
 
@@ -189,13 +189,15 @@ The income/expense object is also added to the list in Cashflowlist which contai
 #### Step 3
 The added income/expense is then displayed to the user through the Ui.
 
-#### Diagrams
+#### Add Income/Expense Class Diagram
 Given below is the class diagram showing the class structure of the add income/expense mechanism:
 ![](images/cashflow/CashflowClassDiagram.png)
-
+#### Add Income/Expense Sequence Diagram
 Given below is the sequence diagram showing the add income/expense mechanism:
 ![](images/cashflow/AddCashflowSequence.png)
 ### Recurring Cashflow Feature
+Cashflow refers to an income or expense.
+
 This feature is called from the user through the `/r` argument in add income/expense command.
 
 If a cashflow is set to be recurring, the program would add another entry of the same cashflow to the Financial Planner after a set period of time.
@@ -245,10 +247,10 @@ Once the process is done, all cashflows in `tempCashflowList` are then added to 
 
 The added cashflows are then displayed to the user.
 
-#### Diagrams
+#### Recurring Cashflow Class Diagram
 Given below is the class diagram showing the class structure of the recurring cashflow mechanism:
 ![](images/cashflow/RecurClassDiagram.png)
-
+#### Recurring Cashflow Sequence Diagrams
 Given below is the sequence diagram showing the recurring cashflow mechanism:
 ![](images/cashflow/RecurSequence.png)
 ![](images/cashflow/AddRecurringSequence.png)
