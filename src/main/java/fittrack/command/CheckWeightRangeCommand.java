@@ -3,6 +3,7 @@ package fittrack.command;
 import fittrack.data.Height;
 import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
+import fittrack.parser.PatternMatchFailException;
 
 public class CheckWeightRangeCommand extends Command{
 
@@ -26,6 +27,9 @@ public class CheckWeightRangeCommand extends Command{
 
     @Override
     public void setArguments(String args, CommandParser parser) throws ParseException {
+        if (!args.isEmpty()) {
+            throw new PatternMatchFailException();
+        }
     }
 
     @Override
