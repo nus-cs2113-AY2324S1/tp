@@ -138,6 +138,7 @@ The Parser is a crucial component that forms the bridge between user intentions 
 management system.
 
 The following sequence diagram shows how the parser class works when the program is running.
+<img src="UML Diagrams/ParserDiagram.png" width="500">
 
 ---
 

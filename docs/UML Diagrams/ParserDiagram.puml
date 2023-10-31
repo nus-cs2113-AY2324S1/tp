@@ -1,0 +1,21 @@
+@startuml
+hide footbox
+actor User
+participant "User Input" as UserInput
+participant "Parser" as Parser
+participant "IncorrectCommand" as IncorrectCommand
+User -> UserInput: Enter command
+UserInput -> Parser: parseCommand(userInput)
+activate Parser
+Parser -> Parser: Split the input into command and arguments
+alt Command found
+Parser -> Parser: commandWord = Extract command word
+Parser -> Parser: arguments = Extract arguments
+else Command not found
+Parser -> IncorrectCommand: Create IncorrectCommand
+Parser --> Parser: return IncorrectCommand
+end
+Parser -> IncorrectCommand: Create IncorrectCommand
+Parser --> Parser: return IncorrectCommand
+deactivate Parser
+@enduml
