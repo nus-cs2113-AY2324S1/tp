@@ -153,7 +153,7 @@ public class Duke {
                     break;
                 case "clear_expenses":
                     Ui.showLineDivider();
-                    new ClearExpenses(expenses).clearAllExpenses();
+                    new ClearExpenses(expenses).clearAllIncomes();
                     Ui.showLineDivider();
                     break;
                 case "clear_all":
