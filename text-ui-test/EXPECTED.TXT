@@ -102,12 +102,12 @@ These are the workouts you have done:
 These meals contain the keyword pasta:
 1. [M] pasta (200kcal, 2023-10-22)
 2. [M] cabonara pasta (180kcal, 2023-10-29)
-
+There are 2 meals that contains pasta
 
 These workouts contain the keyword run:
 1. [W] run (100kcal, 2023-10-22)
 2. [W] long run (200kcal, 2023-10-29)
-
+There are 2 workouts that contains run
 
 `deletemeal1` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
