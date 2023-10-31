@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class HelpCommandTest {
 
     @Test
-    void execute_help_pass() throws Storage.StorageOperationException {
+    void execute_help_pass() {
         HelpCommand helpCommand = new HelpCommand("help");
         helpCommand.setArguments("", new CommandParser());
         CommandResult result = helpCommand.execute();
@@ -19,7 +19,7 @@ class HelpCommandTest {
     }
 
     @Test
-    void setArguments_emptyString_helpOfHelp() throws Storage.StorageOperationException {
+    void setArguments_emptyString_helpOfHelp() {
         HelpCommand helpCommand = new HelpCommand("help");
         helpCommand.setArguments("", new CommandParser());
         assertEquals(HelpCommand.HELP, helpCommand.getHelpMessage());
@@ -33,14 +33,14 @@ class HelpCommandTest {
     }
 
     @Test
-    void setArguments_exit_helpOfExit() throws Storage.StorageOperationException {
+    void setArguments_exit_helpOfExit() {
         HelpCommand helpCommand = new HelpCommand("help exit");
         helpCommand.setArguments("exit", new CommandParser());
         assertEquals(ExitCommand.HELP, helpCommand.getHelpMessage());
     }
 
     @Test
-    void setArguments_foo_invalidCmdMsg() throws Storage.StorageOperationException {
+    void setArguments_foo_invalidCmdMsg() {
         HelpCommand helpCommand = new HelpCommand("help foo");
         helpCommand.setArguments("foo", new CommandParser());
         assertEquals(
