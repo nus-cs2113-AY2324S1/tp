@@ -146,7 +146,7 @@ public abstract class Budget {
 
     /**
      * Updates current budget by adding amount to current budget.
-     * 
+     *
      * @param amount The amount to be updated.
      */
     public static void updateCurrentBudget(double amount) {
