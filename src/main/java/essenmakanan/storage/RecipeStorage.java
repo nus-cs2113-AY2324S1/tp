@@ -1,5 +1,6 @@
 package essenmakanan.storage;
 
+import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.parser.IngredientParser;
@@ -7,7 +8,6 @@ import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeStepList;
 import essenmakanan.recipe.Step;
-import essenmakanan.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +23,6 @@ public class RecipeStorage {
     private final String DATA_DIRECTORY = "data";
 
     private ArrayList<Recipe> recipeListPlaceholder;
-    private ArrayList<Ingredient> ingredientListPlaceholder;
 
     public RecipeStorage() {
         recipeListPlaceholder = new ArrayList<>();
@@ -107,40 +106,9 @@ public class RecipeStorage {
                 createNewData(scan);
             }
         } catch (FileNotFoundException exception) {
-            handleFileNotFoundException();
+            EssenFileNotFoundException.handleFileNotFoundException(DATA_DIRECTORY, DATA_PATH);;
         }
 
         return recipeListPlaceholder;
-    }
-
-    private void createDukeDirectory(File newDirectory) {
-        if (!newDirectory.isDirectory() && newDirectory.mkdir()) {
-            System.out.println("Directory successfully created");
-        } else {
-            System.out.println("Directory located");
-        }
-    }
-
-    private void createDukeFile(File newDatabase) throws IOException {
-        if (!newDatabase.isFile() && newDatabase.createNewFile()) {
-            System.out.println("Data text file successfully created");
-        } else {
-            System.out.println("Text file located");
-        }
-    }
-
-    public void handleFileNotFoundException() {
-        System.out.println("Creating database");
-
-        File newDirectory = new File(DATA_DIRECTORY);
-        File newDatabase = new File(DATA_PATH);
-
-        try {
-            createDukeDirectory(newDirectory);
-            createDukeFile(newDatabase);
-        } catch (IOException exception){
-            Ui.handleIOException(exception);
-        }
-
     }
 }
