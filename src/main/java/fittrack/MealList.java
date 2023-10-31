@@ -29,10 +29,6 @@ public class MealList {
         mealListSize--;
     }
 
-    public int getMealListSize() {
-        return mealListSize;
-    }
-
     @Override
     public String toString() {
         int counter = 1;
