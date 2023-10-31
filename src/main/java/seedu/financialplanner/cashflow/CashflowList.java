@@ -171,7 +171,6 @@ public class CashflowList {
         list.add(entry);
     }
 
-    //temp method
     public String getList() {
         StringBuilder output = new StringBuilder();
         for (Cashflow entry : list) {

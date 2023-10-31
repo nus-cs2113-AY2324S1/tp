@@ -47,7 +47,7 @@ public abstract class LoadData {
             String line;
             ui.showMessage("Loading existing file...");
 
-            while(inputFile.hasNext()) {
+            while (inputFile.hasNext()) {
                 line = inputFile.nextLine();
                 String[] split = line.split("\\|");
                 String type = split[0].trim();
@@ -178,7 +178,11 @@ public abstract class LoadData {
         if (initial < current) {
             throw new IllegalArgumentException("Current budget exceeds initial budget");
         }
-        Budget.load(initial, current);
+        LocalDate date = LocalDate.parse(split[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (LocalDate.now().isBefore(date)) {
+            throw new IllegalArgumentException("Current date is before saved date");
+        }
+        Budget.load(initial, current, date);
     }
 
     private static boolean createNewFile() {

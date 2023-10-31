@@ -1,12 +1,13 @@
 package seedu.financialplanner.cashflow;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the monthly budget.
  */
 public abstract class Budget {
-    private static final int MONTH = 30;
     private static double initialBudget = 0;
     private static double currentBudget = 0;
 
@@ -96,10 +97,16 @@ public abstract class Budget {
      *
      * @param initial The saved initial budget.
      * @param current The saved current budget.
+     * @param savedDate The date that was saved to storage.
      */
-    public static void load(double initial, double current) {
+    public static void load(double initial, double current, LocalDate savedDate) {
         initialBudget = initial;
         currentBudget = current;
+        LocalDate currentDate = LocalDate.now();
+        // Resets budget if it is a new month or new year.
+        if (!currentDate.getMonth().equals(savedDate.getMonth()) || currentDate.getYear() != savedDate.getYear()) {
+            resetBudget();
+        }
     }
 
     /**
@@ -117,7 +124,8 @@ public abstract class Budget {
      * @return A string representation of the budget.
      */
     public static String formatString() {
-        return "B | " + initialBudget + " | " + currentBudget;
+        return "B | " + initialBudget + " | " + currentBudget + " | " +
+                LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     /**
