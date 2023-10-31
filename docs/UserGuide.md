@@ -30,16 +30,19 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 {Give detailed description of each feature}
 
-| Action               | Format                   | Example                                            | Notes |
-|----------------------|--------------------------|----------------------------------------------------|-------|
-| Add recipe           | add r/RECIPE_NAME        | add r/scramble egg                                 |       |
-| Add ingredient       | add i/INGREDIENT_NAME    | add i/bread                                        |       |
-| Delete Recipe        | delete r/RECIPE_NAME     |
-| Delete Ingredient    | delete r/INGREDIENT_NAME | 
-| View all ingredients | view i                   |
-| View all recipes     | view r                   |
-| View specific recipe | view r/RECIPE_ID         | View r/1 to show a recipe at index ‘1’ of the list |
-| Help                 | help                     |
+| Action                                                    | Format                                              | Example                                 |
+|-----------------------------------------------------------|-----------------------------------------------------|-----------------------------------------|
+| Add recipe                                                | add r/RECIPE_TITLE                                  | add r/scramble egg                      |
+| Add ingredient                                            | add i/INGREDIENT_NAME                               | add i/bread                             |
+| Delete Recipe                                             | delete r/RECIPE_TITLE                               |
+| Delete Ingredient                                         | delete r/INGREDIENT_NAME                            | 
+| View all ingredients                                      | view i                                              |
+| View all recipes                                          | view r                                              |
+| View specific ingredient                                  | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID | view i/bread <br><br>view i/1           |
+| View specific recipe                                      | view r/RECIPE_ID                                    | view r/1                                |
+| Filter recipe by ingredients                              | filter recipe i/INGREDIENT_NAME [i/...]             | filter recipe i/chicken i/noodles       |
+| Start recipe <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID          | start dumpling noodles <br><br> start 1 |
+| Help <br>(list all commands available)                    | help                                                | help                                    |
 
 
 ----
@@ -97,6 +100,44 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    * `delete r/1` to delete a recipe at index ‘1’
 
 
+6. Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
+
+   Use the start command to check if you are all set to start on the recipe.This command will list all missing ingredients from the recipe you want to start on.
+
+   <br> Example:
+
+   * `start bread`
+      
+      To check if you have all ingredients needed for the recipe named "bread".
+   
+     ![img.png](images/StartRecipeCommand1.png)
+   
+
+   * `start 1`
+
+     To check if you have all ingredients needed for the recipe with id 1.
+
+     ![img_1.png](images/StartRecipeCommand2.png)
+
+7. Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
+   
+   Filter your recipes by ingredients you are craving for that meal.
+   
+   <br> Example:
+
+   * `filter recipe i/egg`
+   
+      All recipes containing the ingredient egg will be printed
+   
+   * `filter recipe i/egg i/vegetable`
+   
+      ![img_1.png](images/FilterRecipseByIngredientCommand.png)
+
+   * `filter recipe i/1 i/vegetable`
+      
+      if egg is the first item in our ingredient inventory list, the same output will be produced.
+
+
 ---
 ### Ingredients
 6. View all ingredients - `view i`
@@ -104,7 +145,19 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    List all ingredients available inside the app.
 
 
-7. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
+7. View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
+
+    Check the quantity of an ingredient you have available in your kitchen/inventory.
+
+    <br> Example:
+    
+    * `view i/flour`
+   
+      ![img.png](images/ViewSpecificIngredientCommand.png)
+   * `view i/1` to view the quantity of your ingredient with id 1
+
+
+8. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
 
    Adds a new item to the list of todo items. Here are our registered unit in the app:
     * g (Gram)
@@ -124,7 +177,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     * `add i/cooking oil,5,l` to add `5 liters of cooking oil` into the list
    
 
-8. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
+9. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
 
    Edit an ingredient to change the name, quantity or unit. A user is able to edit more than one property of an 
    ingredient.
@@ -135,7 +188,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     * `edit i/egg q/10 u/kg` to change the quantity to `10` and the unit to `kg`
 
 
-9. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
+10. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
 
    Delete an ingredient based on the selected index in the list or the ingredient's name.
 
@@ -158,13 +211,13 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 * Add todo `todo n/TODO_NAME d/DEADLINE`
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                      |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                               |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**   | `list`                                                                                                                                                                |
+| **Help**   | `help`                                                                                                                                                                |
 
