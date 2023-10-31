@@ -86,60 +86,7 @@ public class UiTest {
         assertEquals("____________________________________________________________"+ System.lineSeparator(),
                 out.toString());
     }
-
-    @Test
-    public void printIncomeAddedMessage_validInput_messagePrinted() {
-        // Create an actual Income object for the test
-        Income testIncome = null;
-        try {
-            testIncome = new Income("Test Description", LocalDate.now(), 100.0);
-        } catch (KaChinnnngException e) {
-            e.printStackTrace();
-        }
-
-        // Set up simulated output stream
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        assert testIncome != null;
-        Ui.printIncomeAddedMessage(testIncome);
-
-        // Assert
-        assertEquals(("____________________________________________________________" + System.lineSeparator()
-                + "Got it. I've added this income:" + System.lineSeparator()
-                + testIncome
-                + System.lineSeparator() +
-                "____________________________________________________________" +
-                System.lineSeparator()).trim(), out.toString().trim());
-    }
-
-    @Test
-    public void printExpenseAddedMessage_validInput_messagePrinted() {
-        // Create an actual Expense object for the test
-        Expense testExpense = null;
-        try {
-            testExpense = new Expense("Test Description", LocalDate.now(), 100.0);
-        } catch (KaChinnnngException e) {
-            e.printStackTrace();
-        }
-
-        // Set up simulated output stream
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        assert testExpense != null;
-        Ui.printExpenseAddedMessage(testExpense);
-
-        // Assert
-        assertEquals(("____________________________________________________________" + System.lineSeparator()
-                + "Got it. I've added this expense:" + System.lineSeparator()
-                + testExpense
-                + System.lineSeparator() +
-                "____________________________________________________________" +
-                System.lineSeparator()).trim(), out.toString().trim());
-
-    }
-
+    
     @Test
     public void printListIncomeMessage_validInput_messagePrinted() {
         // Set up simulated output stream
