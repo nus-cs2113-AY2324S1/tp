@@ -24,13 +24,6 @@ public class ReminderList {
         list.remove(listIndex);
 
     }
-    public void markReminderAsDone(int index) {
-        int existingListSize = list.size();
-        int listIndex = index - 1;
-        assert listIndex >= 0  && listIndex < existingListSize;
-        list.get(listIndex).markAsDone();
-    }
-
 
     public String toString() {
         String result = "";

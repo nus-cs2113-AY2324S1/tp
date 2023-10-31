@@ -1,11 +1,9 @@
 package seedu.financialplanner.commands;
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
-
-public class DeleteReminderCommand extends Command{
+public class MarkReminderCommand extends Command{
     private final int index;
-
-    public DeleteReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
+    public MarkReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if(rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
@@ -18,11 +16,9 @@ public class DeleteReminderCommand extends Command{
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Index must be an integer");
         }
-
         if (index == 0) {
             throw new IllegalArgumentException("Index must be within the list");
         }
-
         if( index > ReminderList.getInstance().list.size()+1){
             throw new IllegalArgumentException("Index exceed the list size");
         }
@@ -35,7 +31,9 @@ public class DeleteReminderCommand extends Command{
 
     @Override
     public void execute() {
-        ReminderList.getInstance().deleteReminder(index);
-        Ui.getInstance().showMessage("You have deleted "+ReminderList.getInstance().list.get(index-1));
+        ReminderList.getInstance().list.get(index-1).markAsDone();
+        Ui.getInstance().showMessage("You have marked "+ReminderList.getInstance().list.get(index-1));
     }
+
+
 }

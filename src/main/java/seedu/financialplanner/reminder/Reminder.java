@@ -19,7 +19,9 @@ public class Reminder {
     public void markAsDone() {
         this.isDone = true;
     }
-
+    public void unmark() {
+        this.isDone = false;
+    }
     /*
         * Returns a string that can be saved to a file.
         * Format: type | date | isDone
