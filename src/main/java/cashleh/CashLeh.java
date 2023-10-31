@@ -13,7 +13,7 @@ import cashleh.commands.Exit;
 
 
 public class CashLeh {
-    private final static int DEFAULT_BUDGET = 1;
+    private static final int DEFAULT_BUDGET = 1;
     private final Input input = new Input();
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
