@@ -473,7 +473,7 @@ View your current watchlist with stocks that you are interested in with the exch
 
 Default watchlist: AAPL, GOOGL 
 
-This stocks will be added to the watchlist automatically if:
+These stocks will be added to the watchlist automatically if:
 - your watchlist file is corrupted, and you chose to override it
 - your watchlist is empty on startup
 
