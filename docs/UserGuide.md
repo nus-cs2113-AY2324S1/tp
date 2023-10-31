@@ -246,11 +246,17 @@ Change Password.
 
 ## Command Summary
 
-* Add income `addIncome monthly salary /amt2500 /d2023-09-30`
+* Add income `addIncome monthly salary /amt 2500 /date 30/09/2023 /cat SALARY`
+* Add expense `addExpense milk tea /amt 2.50 /date 30/09/2023 /cat FOOD_DRINK`
 * Delete income `deleteIncome 4`
+* Delete expense `deleteExpense 4`
 * View incomes `viewIncomes`
+* View expenses `viewExpenses`
 * View financial statement `viewFinancialStatement`
 * View budget `viewBudget`
 * Update budget `updateBudget 200`
 * Delete budget `deleteBudget`
-* Exit the application `exit`
+* Filter expense `filterExpense /amt 2.50`
+* Filter income `filterIncome /cat SALARY`
+* Filter transaction `filter /date 30/09/2023`
+* Exit `exit`
