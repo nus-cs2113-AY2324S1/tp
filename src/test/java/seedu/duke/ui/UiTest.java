@@ -157,7 +157,7 @@ public class UiTest {
         // Assert
         assertEquals("Here are your expenses:\n", out.toString());
     }
-    
+
     @Test
     public void showMatchingIncomes_nullTest() {
         // Set up simulated output stream
@@ -168,7 +168,7 @@ public class UiTest {
         ui.showMatchingIncomes(null);
 
         // Assert
-        assertEquals("No matching incomes found.\n", out.toString());
+        assertEquals("No matching incomes found.", out.toString());
     }
 
     @Test
@@ -202,7 +202,7 @@ public class UiTest {
         ui.showMatchingExpenses(null);
 
         // Assert
-        assertEquals("No matching expenses found.\n", out.toString());
+        assertEquals("No matching expenses found.", out.toString());
     }
 
     @Test

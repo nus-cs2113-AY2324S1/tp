@@ -93,7 +93,7 @@ public class Ui {
 
     public void showMatchingIncomes(List<Income> matchingIncomes) {
         if(matchingIncomes == null || matchingIncomes.isEmpty()) {
-            System.out.println("No matching incomes found.");
+            System.out.print("No matching incomes found.");
         } else {
             System.out.println("Here are the matching incomes in your list:");
             for (Income income : matchingIncomes) {
@@ -104,7 +104,7 @@ public class Ui {
 
     public void showMatchingExpenses(List<Expense> matchingExpenses) {
         if (matchingExpenses == null || matchingExpenses.isEmpty()) {
-            System.out.println("No matching expenses found.");
+            System.out.print("No matching expenses found.");
         } else {
             System.out.println("Here are the matching expenses in your list:");
             for (Expense expense : matchingExpenses) {
