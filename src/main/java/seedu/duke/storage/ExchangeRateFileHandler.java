@@ -23,8 +23,8 @@ public class ExchangeRateFileHandler {
         if (createFile(filePath)) {
             return; // File not found, created new file and return empty HashMap
         }
-
-        Scanner s = new Scanner(filePath); // Create a Scanner using the File as the source
+        File file = new File(filePath);
+        Scanner s = new Scanner(file); // Create a Scanner using the File as the source
         while (s.hasNext()) {
             String textLine = s.nextLine();
             try {
@@ -32,7 +32,7 @@ public class ExchangeRateFileHandler {
                 String currency = tokens[0].toUpperCase().trim();
                 double rate = Double.parseDouble(tokens[1].trim());
                 exchangeRateManager.updateExchangeRate(currency, rate);
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException | NullPointerException e) {
+            } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException e) {
                 // Skip line if rate is not a double
                 System.out.println(WRONG_FORMAT_ERROR + " : " + textLine);
             }

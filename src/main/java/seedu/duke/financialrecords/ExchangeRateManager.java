@@ -48,6 +48,18 @@ public class ExchangeRateManager {
         return exchangeRateManager;
     }
 
+    public double getExchangeRate(String currency) throws KaChinnnngException {
+        currency = currency.toUpperCase();
+        if (!SUPPORTED_CURRENCIES.contains(currency)) {
+            throw new KaChinnnngException("This currency is not supported");
+        }
+        return exchangeRates.get(currency);
+    }
+
+    public void clear() {
+        exchangeRates = new HashMap<>();
+    }
+
     /**
      * Displays the list of supported currencies.
      */
