@@ -1,5 +1,6 @@
 package seedu.cafectrl.ui;
 
+import seedu.cafectrl.command.*;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
@@ -183,6 +184,10 @@ public class Ui {
      */
     public void showMenuDish(String indexNum, String dishName, String dishPrice) {
         formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
+    }
+
+    public void showChefMessage() {
+        showToUser(Messages.CHEF_MESSAGE);
     }
 
     /**

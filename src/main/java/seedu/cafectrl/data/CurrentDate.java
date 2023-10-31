@@ -1,7 +1,7 @@
 package seedu.cafectrl.data;
 
 public class CurrentDate {
-    protected int currentDay;
+    private int currentDay;
 
     public CurrentDate() {
         currentDay = 0;
@@ -17,9 +17,5 @@ public class CurrentDate {
 
     public int getCurrentDay() {
         return currentDay;
-    }
-
-    public void setCurrentDay(int currentDay) {
-        this.currentDay = currentDay;
     }
 }

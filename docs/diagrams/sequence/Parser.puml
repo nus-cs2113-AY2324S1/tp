@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+
+User -> Main: fullUserInput
+activate Main
+Main -> Parser: parseCommand(fullUserInput: String)
+activate Parser
+
+alt XYZCOMMAND_WORD
+Parser -> Parser: prepareXYZCommand(requiredArguments)
+activate Parser
+Parser -> XYZCommand: XYZCommand(requiredArguments)
+activate XYZCommand
+XYZCommand --> Parser: XYZCommand
+deactivate XYZCommand
+deactivate Parser
+end alt
+
+Parser --> Main: XYZCommand
+deactivate Parser
+Main -> XYZCommand: execute()
+activate XYZCommand
+@enduml

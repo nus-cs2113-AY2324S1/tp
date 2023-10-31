@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> ":AddOrderCommand" : execute()
+    activate ":AddOrderCommand"
+    ":AddOrderCommand" -> ":OrderList" : addOrder(order : Order)
+        activate ":OrderList"
+        return
+    ":AddOrderCommand" -> ":Chef" : new Chef(order : Order, pantry : Pantry, ui : Ui)
+        activate ":Chef"
+        return chef : Chef
+    ":AddOrderCommand" -> ":Chef" : cookDish()
+        activate ":Chef"
+        opt !order.isComplete()
+            ":Chef" -> ":Ui" : showChefMessage()
+                activate ":Ui"
+                ":Ui" -> ":Ui" : showToUser(args : String)
+                    activate ":Ui"
+                return
+            return
+            ":Chef" -> ":Order" : getIngredientList()
+                activate ":Order"
+            return ingredientList : ArrayList<Ingredient>
+            ":Chef" -> ":Pantry" : decreaseIngredientsStock(ingredientList : ArrayList<Ingredient>)
+                activate ":Pantry"
+            return
+            ":Chef" -> ":Order" : setComplete()
+                activate ":Order"
+            return
+        end
+        ":Chef" -> ":Ui" : showToUser(args : String)
+            activate ":Ui"
+            return
+        return
+    opt order.isComplete()
+        ":AddOrderCommand" -> ":OrderList" : addCost(order : Order)
+        activate ":OrderList"
+        return
+    end
+    ":AddOrderCommand" -> ":OrderList" : getTotalCost()
+        activate ":OrderList"
+        return totalOrderListCost : float
+    ":AddOrderCommand" -> ":Ui" : showTotalCost(totalOrderListCost)
+        activate ":Ui"
+        ":Ui" -> ":Ui" : showToUser(args : String)
+            activate ":Ui"
+        return
+    return
+return
+@enduml

@@ -17,13 +17,9 @@ public class Messages {
     public static final String MENU_END_CAP = "+-----------------------------------------+";
     public static final String MENU_CORNER = "+--------------------------+--------------+";
     public static final String MENU_TITLE = "| Dish Name                |  Price       |";
-    public static final String DISH_NOT_FOUND = "I'm sorry, but it appears that dish is so exclusive "
-            + "it hasn't even made it to our menu yet!";
 
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
-    public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
-    public static final String INVALID_PRICE_MESSAGE = "Error: Price value entered is too big!";
 
     /** Messages for view stock command */
     public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
@@ -43,31 +39,10 @@ public class Messages {
     public static final String LIST_INGREDIENTS_GUIDE = "To list out the ingredients needed "
             + "for a specific dish: list_ingredients DISH_INDEX\n"
             + "Example: list_ingredients 1";
-    public static final String DELETE_GUIDE = "To delete a menu item "
-            + "delete DISH_INDEX\n"
-            + "Example: delete 1";
     public static final String EDIT_PRICE_GUIDE = "To edit price of a menu item: "
             + "edit_price index/DISH_INDEX price/NEW_PRICE\n"
             + "Example: edit_price index/1 price/4.50";
 
-    /** Error messages */
-    public static final String MISSING_ARGUMENT_FOR_EDIT_PRICE = "Error: Missing arguments "
-            + "for edit price command.";
-    public static final String MISSING_ARGUMENT_FOR_LIST_INGREDIENTS = "Error: Missing arguments "
-            + "for list ingredients command.";
-    public static final String MISSING_ARGUMENT_FOR_DELETE = "Error: Missing arguments "
-            + "for delete command.";
-    public static final String MISSING_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Missing arguments "
-            + "for buy ingredient command.";
-    public static final String WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE = "Error: Invalid dish index. \n "
-            + "Make sure dish index is "
-            + "of type int and price is of type float!";
-    public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
-            + "Type 'help' to view the accepted list of commands";
-    public static final String INVALID_DISH_INDEX = "Error: Invalid dish index.";
-    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
-            + "for buy ingredient command.";
-    public static final String INVALID_ADD_ORDER_FORMAT_MESSAGE = "Error: Incorrect format for the add order command.";
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
             + "in the virtual kitchen of your dreams. Bon appétit!";
     public static final String PREVIOUS_DAY_TIME_TRAVEL = "Whoa there, time traveler! " +
