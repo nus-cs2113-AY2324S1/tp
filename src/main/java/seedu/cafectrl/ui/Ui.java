@@ -133,11 +133,11 @@ public class Ui {
     public void showHelp() {
         showToUserWithSpaceBetweenLines(Messages.LIST_OF_COMMANDS,
                 Messages.INSTRUCTION_ON_COMMAND_FORMAT,
-                AddDishCommand.MESSAGE_USAGE,
-                ListIngredientCommand.MESSAGE_USAGE,
-                ListMenuCommand.MESSAGE_USAGE,
-                DeleteDishCommand.MESSAGE_USAGE,
-                EditPriceCommand.MESSAGE_USAGE);
+                Messages.ADD_DISH_GUIDE,
+                Messages.LIST_MENU_GUIDE,
+                Messages.LIST_INGREDIENTS_GUIDE,
+                Messages.DELETE_GUIDE,
+                Messages.EDIT_PRICE_GUIDE);
     }
 
     public void showToUserWithSpaceBetweenLines(String... message) {

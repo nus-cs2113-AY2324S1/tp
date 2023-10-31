@@ -31,7 +31,22 @@ public class Messages {
             + "the parameters to be supplied by the user.\n"
             + "e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.\n"
             + "- Parameters in [] are optional.)";
+    public static final String ADD_DISH_GUIDE = "To add a new dish to the menu: "
+            + "add name/NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
+            + "[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY\n"
+            + "Example: add name/chicken rice price/3 ingredient/rice qty/100, ingredient/chicken qty/100";
+    public static final String LIST_MENU_GUIDE = "To list out all dishes on the menu: list_menu";
+    public static final String LIST_INGREDIENTS_GUIDE = "To list out the ingredients needed "
+            + "for a specific dish: list_ingredients DISH_INDEX\n"
+            + "Example: list_ingredients 1";
+    public static final String EDIT_PRICE_GUIDE = "To edit price of a menu item: "
+            + "edit_price index/DISH_INDEX price/NEW_PRICE\n"
+            + "Example: edit_price index/1 price/4.50";
+    public static final String DELETE_GUIDE = "To delete a menu item "
+            + "delete DISH_INDEX\n"
+            + "Example: delete 1";
 
+    /** Messages for order command */
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
             + "in the virtual kitchen of your dreams. Bon appétit!";
     public static final String PREVIOUS_DAY_TIME_TRAVEL = "Whoa there, time traveler! " +
@@ -44,11 +59,5 @@ public class Messages {
             + "We're about to fast-forward to the next day. "
             + "Hold onto your hats; here we go!";
     public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
-    public static final String LOAD_MENU_FILE_ERROR_MESSAGE = "Uh oh, I am having trouble loading your menu text file."
-            + "\n\tCreating a new empty menu...\n";
-    public static final String DATA_FOLDER_NOT_FOUND_MESSAGE = "Data Folder was not found!\nIt's ok... "
-            + "a new data folder has been created.";
-    public static final String DATA_FILE_NOT_FOUND_MESSAGE = "text file was not found!\nIt's ok... "
-            + "a new data file has been created.";
-    public static final String UNIT_NOT_MATCHING = "Sorry, you have used a different unit for this ingredient!";
+
 }
