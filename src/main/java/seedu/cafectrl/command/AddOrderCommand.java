@@ -17,11 +17,11 @@ public class AddOrderCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " name/chicken rice qty/2";
 
-    protected Ui ui;
     protected Pantry pantry;
     protected OrderList orderList;
+    private final Ui ui;
+    private final Order order;
 
-    Order order;
     public AddOrderCommand(Order order, Ui ui, Pantry pantry, OrderList orderList) {
         this.order  = order;
         this.ui = ui;

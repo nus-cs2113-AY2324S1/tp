@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+title Class Diagram of CafeCtrl `add_order` Command
+
 CafeCtrl "1" --> "1" UI
 CafeCtrl "1" --> "1" Parser
 CafeCtrl "1" --> "1" Sales
@@ -10,11 +12,13 @@ CafeCtrl "1" o-- "*" Command
 
 Command <|- AddOrderCommand
 Parser "1" --> "*" AddOrderCommand
-Parser --> CurrentDate
+Parser ..> CurrentDate
+Parser ..> Sales
 AddOrderCommand --> OrderList
 AddOrderCommand "1" --> "1" Chef
 AddOrderCommand --> Pantry
-OrderList "1" --> "*" Order
+AddOrderCommand ..> Order
+OrderList --> "*" Order
 Sales --> "1...*" OrderList
 
 class CafeCtrl {
@@ -28,7 +32,7 @@ class Command {
 }
 
 class UI {
-{static} - scanner : Scanner
+- scanner : Scanner
 + receiveUserInput() : String
 + showToUser() : void
 + showChefMessage() : void
@@ -36,15 +40,17 @@ class UI {
 }
 
 class AddOrderCommand {
-# orderList : OrderList
-# ui : Ui
 # pantry : Pantry
+# orderList : OrderList
+- ui : Ui
+- order : Order
 + execute() : void
 }
 
 class Parser {
 {static} + parseCommand(menu : Menu, userInput : String, ui : Ui, pantry : Pantry, sales : Sales, currentDate : CurrentDate) : Command
 {static} - prepareOrder(menu : Menu, arguments : String, ui : Ui, pantry : Pantry, sales : Sales, currentDate : CurrentDate) : Command
+{static} - setOrderList(currentDate : CurrentDate, sales : Sales)
 }
 
 class OrderList {
@@ -85,7 +91,7 @@ class Pantry {
 
 class Sales {
 - orderLists : ArrayList<OrderList>
-- daysAccounted : int
++ getOrderList(index : int) : OrderList
 }
 
 class CurrentDate {
