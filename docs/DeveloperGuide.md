@@ -15,7 +15,7 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 *Figure 1: Parser Class Diagram*
 
-Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintainance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
+Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
 
 ![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
 
@@ -26,7 +26,14 @@ When user input a string to `Main`,  it passes the full user input to `Parser` v
 ### Storage
 API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
+![Storage Class Diagram](images/class/Storage.png)
 
+*Figure 3: Storage Class Diagram*
+
+The `Storage` class,
+- loads and saves the list of dishes on the `Menu`, available ingredient stock in `Pantry` and orders for the day in `OrderList` in a text file.
+- depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
+- is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
 ## Features
 
