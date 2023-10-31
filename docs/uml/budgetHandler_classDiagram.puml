@@ -5,11 +5,12 @@ skinparam Style strictuml
 class           BudgetHandler
 class           Budget
 class           Progress
-BudgetHandler -l-> "0..1" Budget : handles >
+class           FinancialStatement
+BudgetHandler -l-> "1" Budget : handles >
 BudgetHandler -r-> "0..1" Progress : measures >
+BudgetHandler --> "1" FinancialStatement : refers to >
 
 class BudgetHandler {
-    +financialStatement: FinancialStatement
     +deleteBudget(): void
     +printBasicWarning(): void
     +printSeriousWarning(): void
@@ -25,5 +26,14 @@ class Progress {
     -progress: double
     -buildProgressBar(): String
     +displayProgressBar(): String
+}
+
+class FinancialStatement {
+    -financialStatement: ArrayList<Transaction>
+    -incomeStatement: IncomeStatement
+    -expenseStatement: ExpenseStatement
+    +getNetCash(): double
+    +printTransactions(): void
+    +findTransaction(): void
 }
 @enduml
