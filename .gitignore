@@ -17,3 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 META-INF/MANIFEST.MF
 data/menu.txt
+data/pantry_stock.txt

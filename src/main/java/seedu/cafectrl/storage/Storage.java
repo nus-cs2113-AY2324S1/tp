@@ -5,6 +5,7 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,15 +22,27 @@ public class Storage {
         this.ui  = ui;
     }
 
-    //@@author DextheChik3n
+    //@@author ShaniceTang
     /**
-     * Read and decode menu data from text file and pass it to the menu
-     * @return menu with data from the file
+     * Loads menu data from a text file, decodes it, and returns it as a Menu object.
+     *
+     * @return A Menu object containing data from the file.
+     * @throws IOException if the file is not found in the specified file path.
      */
-    public Menu loadMenu() {
-        // ArrayList<String> encodedMenu = this.fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-        // return Decoder.decodeMenuData(encodedMenu);
-        return new Menu();
+    public Menu loadMenu() throws IOException {
+        fileManager.openTextFile(FilePath.MENU_FILE_PATH);
+        ArrayList<String> menuFromTextFile = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
+        return Decoder.decodeMenuData(menuFromTextFile);
+    }
+
+    /**
+     * Encodes the provided menu data and writes it to a text file.
+     *
+     * @param menu The Menu object to be saved to the file.
+     * @throws IOException if the file is not found in the specified file path.
+     */
+    private void saveMenu(Menu menu) throws IOException {
+        fileManager.overwriteFile(FilePath.MENU_FILE_PATH, Encoder.encodeMenu(menu));
     }
 
     //@@author ziyi105
@@ -37,7 +50,7 @@ public class Storage {
      * Read and decode pantryStock data from text file and pass it to the menu
      * @return pantryStock with data from the file
      */
-    public Pantry loadPantryStock() {
+    public Pantry loadPantryStock() throws FileNotFoundException {
         ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
         return Decoder.decodePantryStockData(encodedPantryStock);
         //return new Pantry(ui);
@@ -91,7 +104,4 @@ public class Storage {
     private void savePantryStock(Pantry pantry) throws IOException {
         this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
     }
-
-    public void saveMenu(Menu menu) throws IOException {}
-
 }

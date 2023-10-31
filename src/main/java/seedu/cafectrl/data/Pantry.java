@@ -15,11 +15,13 @@ public class Pantry {
     private Ui ui;
     private Storage storage;
 
+    //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
         this.ui = ui;
         this.pantryStock = pantryStock;
     }
 
+    //@@author ShaniceTang
     public Pantry(Ui ui) {
         this.ui = ui;
         this.pantryStock = new ArrayList<>();
@@ -90,6 +92,8 @@ public class Pantry {
         return -1;
     }
 
+
+    //@@author NaychiMin
     /**
      * Checks the stock of ingredients and dish availability based on a given order.
      */
