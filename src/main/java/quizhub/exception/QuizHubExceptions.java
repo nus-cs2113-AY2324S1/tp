@@ -6,5 +6,9 @@ public class QuizHubExceptions extends Exception{
     public QuizHubExceptions(String message) {
         super(message);
     }
+
+    public QuizHubExceptions() {
+        super();
+    }
 }
 
