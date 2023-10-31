@@ -1,6 +1,5 @@
 package seedu.financialplanner.commands;
 
-import org.apache.commons.lang3.StringUtils;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
@@ -45,7 +44,7 @@ public class VisCommand extends Command {
 
         HashMap<String, Double> cashflowbyType = Categorizer.sortType(CashflowList.getInstance(), type);
         if (cashflowbyType.isEmpty()) {
-            ui.showMessage(StringUtils.capitalize(type) + " is empty... Nothing to visualize");
+            ui.printEmptyCashFlow(type);
             return;
         }
         ui.printDisplayChart(type, chart);
