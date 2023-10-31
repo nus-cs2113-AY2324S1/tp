@@ -132,7 +132,7 @@ add income /a 100 /t salary /r 30
 Below are the steps that shows the implementation of add income/expense.
 
 #### Step 1
-The AddCashflowCommand instance then calls addIncome() or addExpense(), depending on what `category` is initialised as.
+The AddCashflowCommand instance calls addIncome() or addExpense(), depending on what `category` is initialised as.
 
 addIncome() or addExpense() instantiates an Income or Expense object respectively.
 
@@ -159,11 +159,67 @@ The added income/expense is then displayed to the user through the Ui.
 
 #### Diagrams
 Given below is the class diagram showing the class structure of the add income/expense mechanism:
-![](images/CashflowClassDiagram.png)
+![](images/cashflow/CashflowClassDiagram.png)
 
 Given below is the sequence diagram showing the add income/expense mechanism:
-![](images/AddCashflowSequence.png)
+![](images/cashflow/AddCashflowSequence.png)
+### Recurring Cashflow Feature
+This feature is called from the user through the `/r` argument in add income/expense command.
 
+If a cashflow is set to be recurring, the program would add another entry of the same cashflow to the Financial Planner after a set period of time.
+
+Below are the steps that shows the implementation of the recurring cashflow feature.
+
+#### Step 1
+Once the cashflow is set to be recurring, its corresponding `Cashflow` object would store the date at which the cashflow was added to the Financial Planner.
+
+The `recur` variable in the object would also be instantiated according to the user's input.
+
+An additional `boolean` variable, `hasRecurred` is stored in the object and is set to `false` by default.
+
+Example:
+```
+public abstract class Cashflow {
+    protected int recur;
+    protected LocalDate date;
+    protected boolean hasRecurred;
+}
+```
+#### Step 2
+When the Financial Planner is started again in the future, the date of startup would be collected.
+
+After loading existing saved cashflows from data.txt, the program will check for cashflows that are set to be recurring and has not recurred.
+
+Example:
+```
+if (recur > 0 && !hasRecurred) {
+    ...            
+}
+```
+
+#### Step 3
+Once a cashflow matches the above criteria, the date of its next addition to the Financial Planner, `dateOfAddition`, would be determined.
+
+`dateOfAddition` would be compared to the current date, and if the current date is after or equal to `dateOfAddition`, an identical cashflow would be instantiated.
+
+This identical cashflow would then have its `date` variable set to `dateOfAddition`, then this cashflow would be added to a temporary list, `tempCashflowList`.
+
+The original cashflow would then have its `hasRecurred` variable be set to `true`.
+
+#### Step 4
+Each cashflow in `tempCashflowList` goes through **Step 3** again, so that multiple cashflows can be added if it has recurred more than once.
+
+Once the process is done, all cashflows in `tempCashflowList` are then added to the Financial Planner.
+
+The added cashflows are then displayed to the user.
+
+#### Diagrams
+Given below is the class diagram showing the class structure of the recurring cashflow mechanism:
+![](images/cashflow/RecurClassDiagram.png)
+
+Given below is the sequence diagram showing the recurring cashflow mechanism:
+![](images/cashflow/RecurSequence.png)
+![](images/cashflow/AddRecurringSequence.png)
 
 ### Budget Feature
 
