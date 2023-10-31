@@ -3,32 +3,34 @@
 skinparam classFontColor automatic
 
 Class "{abstract}\nCashflow" as Cashflow #MistyRose {
-#<u>balance: double = 0
-#amount: double
-#recur: int
-#description: String = null
-
+    #<u>balance: double = 0
+    #amount: double
+    #recur: int
+    #description: String = null
 }
+
 Class Expense #MistyRose extends Cashflow {
     #type: ExpenseType
     +Expense(amount: double, type: ExpenseType, recur: int,  description: String)
     -addExpenseValue()
 }
+
 Class Income #MistyRose extends Cashflow {
     +Income(amount: double, type: IncomeType, recur: int,  description: String)
     #type: IncomeType
     -addIncomeValue()
 }
+
 Class Ui  #Cornsilk {
-    +<u>getInstance()
     +printAddedCashflow(entry: Cashflow)
 }
+
 Class CashflowList #Cornsilk {
-    +<u>getInstance()
     +addIncome(amount: double, incometype: IncomeType, recur: int, description: String)
     +addExpense(amount: double, expensetype: ExpenseType, recur: int, description: String)
     -addToList(toAdd: Cashflow)
 }
+
 Class AddCashflowCommand #HoneyDew {
     #amount: double
     #incomeType: IncomeType
@@ -39,19 +41,21 @@ Class AddCashflowCommand #HoneyDew {
 }
 
 enum "<<enumeration>>\nExpenseType" as ExpenseType #MintCream {
-DINING, ENTERTAINMENT, SHOPPING, TRAVEL, INSURANCE, NECESSITIES, OTHERS
+    DINING, ENTERTAINMENT, SHOPPING, TRAVEL, INSURANCE, NECESSITIES, OTHERS
 }
+
 enum "<<enumeration>>\nIncomeType" as IncomeType #MintCream{
-SALARY, INVESTMENTS, ALLOWANCE, OTHERS
+    SALARY, INVESTMENTS, ALLOWANCE, OTHERS
 }
-hide ExpenseType methods
-hide IncomeType methods
+
 CashflowList -right-> "1" Ui
 AddCashflowCommand --> "1" CashflowList
 CashflowList --> "*" Cashflow
 CashflowList ..> Income
 CashflowList ..> Expense
 
+hide ExpenseType methods
+hide IncomeType methods
 hide Circle
 skinparam classAttributeIconSize 0
 

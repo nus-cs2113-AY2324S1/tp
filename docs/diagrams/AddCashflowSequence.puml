@@ -1,14 +1,12 @@
 @startuml
 
 participant ":AddCashflowCommand" as AddCashflowCommand
-participant "<<class>>\nCashflowList" as CashflowList
+participant "CashflowList" as CashflowList
 participant ":Income" as Income
 participant ":Expense" as Expense
-participant "<<class>>\nUi" as Ui
+participant "Ui" as Ui
 
 -> AddCashflowCommand: execute()
-AddCashflowCommand -> CashflowList: getInstance()
-CashflowList -> Ui: getInstance()
 alt income
     AddCashflowCommand -> CashflowList: addIncome(amount, incomeType, recur, description)
     create Income

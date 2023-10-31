@@ -130,11 +130,8 @@ Example:
 add income /a 100 /t salary /r 30
 ```
 Below are the steps that shows the implementation of add income/expense.
-#### Step 1
-An instantiated AddCashflowCommand class gets the instance of CashflowList.
 
-This allows the AddCashflowCommand instance to access the methods of CashflowList.
-#### Step 2
+#### Step 1
 The AddCashflowCommand instance then calls addIncome() or addExpense(), depending on what `category` is initialised as.
 
 addIncome() or addExpense() instantiates an Income or Expense object respectively.
@@ -153,11 +150,11 @@ switch (category) {
             break;
         }
 ```
-#### Step 3
+#### Step 2
 The instantiated income/expense then updates the overall balance through addIncomeValue() or addExpenseValue().
 
 The income/expense object is also added to the list in Cashflowlist which contains all incomes/expenses.
-#### Step 4
+#### Step 3
 The added income/expense is then displayed to the user through the Ui.
 
 #### Diagrams
