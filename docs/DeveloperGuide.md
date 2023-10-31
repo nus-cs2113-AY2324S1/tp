@@ -371,7 +371,7 @@ quizhub application. Here are the key steps for implementing this class:
 
 ### Command Exit - Exit Program
 
-#### Brief Description
+#### Brief Description of Command Exit
 
 Command Exit is responsible for exiting the program
 - `bye` - to exit program
