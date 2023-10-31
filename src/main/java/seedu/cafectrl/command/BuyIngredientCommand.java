@@ -78,7 +78,7 @@ public class BuyIngredientCommand extends Command {
                 + ingredient.getUnit();
 
         //append new line if current ingredient is not last
-        if(index < ingredients.size() - 1) {
+        if(index < ingredients.size() - ui.OFFSET_LIST_INDEX) {
             ingredientString += "\n";
         }
     }
