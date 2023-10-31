@@ -4,8 +4,6 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
-
 ## Design
 
 ### Parser
@@ -15,13 +13,25 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 *Figure 1: Parser Class Diagram*
 
-Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintainance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
+Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
 
 ![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
 
 *Figure 2: Parser Parsing User Input Sequence Diagram*
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
+
+### Storage
+API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
+
+![Storage Class Diagram](images/class/Storage.png)
+
+*Figure 3: Storage Class Diagram*
+
+The `Storage` class,
+- loads and saves the list of dishes on the `Menu`, available ingredient stock in `Pantry` and orders for the day in `OrderList` in a text file.
+- depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
+- is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
 ## Features
 
@@ -108,8 +118,6 @@ API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/
 
 ### Delete Dish
 
-### Delete Dish
-
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
 <br>*Figure X: Execution of delete dish command
 
@@ -124,7 +132,6 @@ This sequence of actions orchestrates the flow of information and operations bet
 `DeleteDishCommand` is implemented in such a way because:
 1. It promotes loose coupling between components. For instance, `Main` doesn't need to know the details of how the `execute()` of `DeleteDishCommand` is executed or how the message is displayed in `Ui`.
 2. Each component has a specific role and responsibility. `Main` is responsible for receiving user input and invoking `execute()`, `DeleteDishCommand` is responsible for encapsulating the delete operation, `Menu` is responsible for managing the menu items, and `Ui` is responsible for displaying messages to the user. This separation of concerns makes the code more maintainable and easier to understand.
-
 
 ### Edit Price
 
