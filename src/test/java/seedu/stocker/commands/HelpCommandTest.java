@@ -42,10 +42,12 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + "find /d: Finds drug in inventory using date."
                 + System.getProperty("line.separator")
-                + "Example: find /d panadolfind /s: Finds drug in inventory using serial number."
+                + "Example: find /d panadol"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+                + "find /s: Finds drug in inventory using serial number."
                 + System.getProperty("line.separator")
                 + "Example: find /s ABC123"
-                + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "addtocart: Adds a new drug to the current cart. Parameters: NAME, QUANTITY,"
