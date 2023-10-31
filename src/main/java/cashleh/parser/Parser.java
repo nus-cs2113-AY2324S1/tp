@@ -51,10 +51,6 @@ public class Parser {
     private static final String FILTER_EXPENSE = "filterExpense";
     private static final String FILTER_INCOME = "filterIncome";
     private static final String FILTER = "filter";
-    private static final String AMOUNT_SUFFIX = "/amt";
-    private static final String DATE_SUFFIX = "/date";
-    private static final String CATEGORY_SUFFIX = "/cat";
-
     private static final String AMT_KEYWORD = "/amt";
     private static final String DATE_KEYWORD = "/date";
     private static final String CAT_KEYWORD = "/cat";
@@ -245,9 +241,9 @@ public class Parser {
         descriptionString = descriptionString.replaceAll("(?i)\\b(amt|date|cat)\\b", "");
         descriptionString = descriptionString.replaceAll("[^a-zA-Z0-9\\s]", "");
         descriptionString = descriptionString.trim();
-        String amountString = inputDetails.get(AMOUNT_SUFFIX);
-        String dateString = inputDetails.get(DATE_SUFFIX);
-        String categoryString = inputDetails.get(CATEGORY_SUFFIX);
+        String amountString = inputDetails.get(AMT_KEYWORD);
+        String dateString = inputDetails.get(DATE_KEYWORD);
+        String categoryString = inputDetails.get(CAT_KEYWORD);
 
         if ((descriptionString == null || descriptionString.isEmpty()) &&
                 (amountString == null || amountString.isEmpty()) &&

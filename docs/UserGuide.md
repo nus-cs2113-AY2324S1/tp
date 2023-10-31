@@ -41,7 +41,7 @@ Example of usage:
     ____________________________________________________________
 	The following income was added:
 	Income: monthly salary (Amount: 2500.0, Date: 30/09/2023)
-	____________________________________________________________
+    ____________________________________________________________
 
 ```
 
@@ -163,6 +163,7 @@ Example of usage:
 
 ### Viewing the entire financial statement: `viewFinancialStatement`
 Shows the net cash on hand and lists each income and expense record along with its description, amount, date and (optional) category.  
+Transactions in the Financial Statement will be sorted and displayed according to date.
 Format: `viewFinancialStatement`
 * Anything following the command will be ignored, i.e. `viewFinancialStatement overview` will be interpreted just like 
 `viewFinancialStatement`.
