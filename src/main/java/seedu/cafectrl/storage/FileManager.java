@@ -1,6 +1,6 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.ui.Messages;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.File;
@@ -28,9 +28,9 @@ public class FileManager {
      * Reads the text file from the specified file path and stores each line in an ArrayList.
      *
      * @return ArrayList that consists of every text line in each element
-     * @throws FileNotFoundException If file is not found at the specified file path.
      */
     public ArrayList<String> readTextFile(String filePath) throws FileNotFoundException {
+        openTextFile(filePath);
         String userWorkingDirectory = System.getProperty("user.dir");
         Path tasksFilePath = Paths.get(userWorkingDirectory, filePath);
         File textFile = new File(String.valueOf(tasksFilePath));
@@ -39,15 +39,19 @@ public class FileManager {
             throw new FileNotFoundException();
         }
 
-        Scanner s = new Scanner(textFile);
         ArrayList<String> textLines = new ArrayList<>();
+        // todo Dexter: implement proper error handling here
+        try {
+            Scanner s = new Scanner(textFile);
 
-        while (s.hasNext()){
-            textLines.add(s.nextLine());
+            while (s.hasNext()){
+                textLines.add(s.nextLine());
+            }
+
+            s.close();
+        } catch (FileNotFoundException e) {
+            ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE);
         }
-
-        s.close();
-
         return textLines;
     }
 
@@ -58,7 +62,7 @@ public class FileManager {
      * @return the file path of where the data is stored
      * @throws IOException if an I/O error occurred while creating the text file
      */
-    public String openTextFile(String filePath) throws IOException {
+    public String openTextFile(String filePath) {
         String userWorkingDirectory = System.getProperty("user.dir");
         Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
         Path dataFolderPath = dataFilePath.getParent();
@@ -67,12 +71,15 @@ public class FileManager {
 
         if (!Files.exists(dataFolderPath)) {
             folder.mkdir();
-            ui.showToUser(Messages.DATA_FOLDER_NOT_FOUND_MESSAGE, System.lineSeparator());
+            ui.showToUser(ErrorMessages.DATA_FOLDER_NOT_FOUND_MESSAGE);
         }
 
         if (!Files.exists(dataFilePath)) {
-            textFile.createNewFile();
-            ui.showToUser(Messages.DATA_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            try {
+                textFile.createNewFile();
+            } catch (Exception e) {
+                ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE);
+            }
         }
 
         return dataFilePath.toString();
@@ -87,7 +94,8 @@ public class FileManager {
      * @throws IOException If I/O operations are interrupted.
      */
     public void overwriteFile(String filePath, ArrayList<String> listOfTextToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        String openFilePath = openTextFile(filePath);
+        FileWriter fw = new FileWriter(openFilePath);
         for (String line : listOfTextToAdd) {
             fw.write(line);
         }

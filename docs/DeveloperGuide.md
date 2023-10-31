@@ -9,12 +9,17 @@
 ## Design
 
 ### Parser
-
-![Parser Parsing User Input Sequence Diagram](umlimages/Parser.png)
-
-*Figure 1: Parser Parsing User Input Sequence Diagram*
-
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
+
+![Parser Class Diagram](images/class/Parser.png)
+
+*Figure 1: Parser Class Diagram*
+
+Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintainance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
+
+![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
+
+*Figure 2: Parser Parsing User Input Sequence Diagram*
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
@@ -22,7 +27,7 @@ When user input a string to `Main`,  it passes the full user input to `Parser` v
 
 ### Add Dish
 
-![Add Dish Execution](uml/AddDishCommand_execute.png)
+![Add Dish Execution](images/sequence/AddDishCommand_execute.png)
 *Figure X: Execution of add_dish command*
 
 API: [AddDishCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/AddDishCommand.java)
@@ -39,9 +44,9 @@ Separation of Concerns was applied to ensure the `Ui` is only responsible with o
 A list command can be used to display all the `Dish` objects stored in `Menu`.
 
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a list command.
-![List Menu Execution](umlimages/ListMenuCommandClass.png)
+![List Menu Execution](images/class/ListMenuCommandClass.png)
 
-![List Menu Execution](umlimages/ListMenuCommand_execute.png)
+![List Menu Execution](images/sequence/ListMenuCommand_execute.png)
 
 Figure 1: Execution of list_menu command
 
@@ -58,7 +63,7 @@ The data are then packaged nicely in a `leftAlignFormat`, with (indexNum + ". " 
    e.g. (1. Chicken Rice $2.50) is shown.
 
 ### List Ingredients
-![List Ingredient Execution](umlimages/ListIngredientCommand_execute.png)
+![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)
 
 *Figure 2: Execution of list_ingredient command*
 
@@ -77,7 +82,7 @@ API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/
 
 ### Delete Dish
 
-![Delete Dish Execution](uml/DeleteDishCommand_execute.png)
+![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
 <br>*Figure X: Execution of delete dish command
 
 API: [DeleteDishCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
@@ -95,13 +100,23 @@ This sequence of actions orchestrates the flow of information and operations bet
 
 ### Edit Price
 
-![Edit Price Execution](umlimages/EditPriceCommand_execute.png)
+![Edit Price Execution](images/sequence/EditPriceCommand_execute.png)
 
 *Figure 3: Execution of edit_price command*
 
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
-When the `execute()` method of `EditPriceCommand` is invoked in `Main`, it subsequently calls the `setPrice()` method on the `Dish` object to modify the price of the specific dish. Following this, the `showEditPriceMessages()` method in the Ui component is triggered to display a message related to the successful execution of the price modification process. This sequence of actions orchestrates the flow of information and operations between the `Main`, `EditPriceCommand`, `Dish`, and `Ui` components, ensuring the seamless handling of the price editing functionality within the application.
+When the `execute()` method of `EditPriceCommand` is invoked in `Main`, it subsequently calls the `setPrice()` method on the `Dish` object to modify the price of the specific dish. Following this, the `showEditPriceMessages()` method in the `Ui` component is triggered to retrieve and display a message from `Messages` related to the successful execution of the price modification process. This sequence of actions orchestrates the flow of information and operations between the `Main`, `EditPriceCommand`, `Dish`, and `Ui` components, ensuring the seamless handling of the price editing functionality within the application.
+
+### Help
+
+![Help Execution](images/sequence/HelpCommand_execute.png)
+
+*figure 4: Execution of help command*
+
+API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpCommand.java)
+
+When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequently calls the `showHelp()` method in `Ui`. In `showHelp()`, messages related to command usage will be retrieved and be printed out using by self-invoking `showToUserWithSpaceInBetweenLines(messages: String...)`.
 
 ## Product scope
 ### Target user profile

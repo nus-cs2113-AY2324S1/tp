@@ -20,6 +20,7 @@ import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
@@ -37,6 +38,7 @@ import java.util.regex.Pattern;
 public class Parser {
     //@@author ziyi105
     private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
+
     //@@author @DextheChik3n
     /** Add Dish Command Handler Patterns*/
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
@@ -64,6 +66,7 @@ public class Parser {
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+
     //@@author ziyi105
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
@@ -130,7 +133,7 @@ public class Parser {
             return new IncorrectCommand("Overall Earnings: $" + sales.getTotalSales(), ui);
 
         default:
-            return new IncorrectCommand(Messages.UNKNOWN_COMMAND_MESSAGE, ui);
+            return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
     }
 
@@ -161,7 +164,7 @@ public class Parser {
 
         // Checks whether the overall pattern of edit price arguments is correct
         if (!matcher.find()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_EDIT_PRICE, ui);
+            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_EDIT_PRICE, ui);
         }
 
         try {
@@ -172,13 +175,14 @@ public class Parser {
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
-                return new IncorrectCommand(Messages.INVALID_DISH_INDEX, ui);
+                return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
             }
             return new EditPriceCommand(dishIndex, newPrice, menu, ui);
         } catch (IllegalArgumentException e) {
-            return new IncorrectCommand(Messages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
+            return new IncorrectCommand(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
         }
     }
+
     //@@author DextheChik3n
     /**
      * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
@@ -192,7 +196,7 @@ public class Parser {
         try {
             // Checks whether the overall pattern of add arguments is correct
             if (!matcher.matches()) {
-                return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
+                return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
                         + AddDishCommand.MESSAGE_USAGE, ui);
             }
 
@@ -208,10 +212,10 @@ public class Parser {
 
             return new AddDishCommand(dish, menu, ui);
         } catch (IllegalArgumentException e) {
-            return new IncorrectCommand(Messages.INVALID_ADD_DISH_FORMAT_MESSAGE
+            return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
                     + AddDishCommand.MESSAGE_USAGE, ui);
         } catch (ArithmeticException e) {
-            return new IncorrectCommand(Messages.INVALID_PRICE_MESSAGE, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_PRICE_MESSAGE, ui);
         }
     }
 
@@ -284,13 +288,13 @@ public class Parser {
         Matcher matcher = prepareListPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, ui);
+            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, ui);
         }
 
         int dishIndex = Integer.parseInt(matcher.group(1));
 
         if (!menu.isValidDishIndex(dishIndex)) {
-            return new IncorrectCommand(Messages.INVALID_DISH_INDEX, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
         }
 
         return new ListIngredientCommand(dishIndex, menu, ui);
@@ -310,14 +314,14 @@ public class Parser {
 
         // Checks whether the overall pattern of delete price arguments is correct
         if (!matcher.matches()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_DELETE, ui);
+            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_DELETE, ui);
         }
 
         int listIndexArgGroup = 1;
         int dishIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
 
         if (!menu.isValidDishIndex(dishIndex)) {
-            return new IncorrectCommand(Messages.INVALID_DISH_INDEX, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
         }
 
         return new DeleteDishCommand(dishIndex, menu, ui);
@@ -332,7 +336,7 @@ public class Parser {
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(Messages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT, ui);
         }
 
         String ingredientsListString = matcher.group(0);
@@ -341,15 +345,15 @@ public class Parser {
         try {
             return new BuyIngredientCommand(ingredients, ui, pantry);
         } catch (Exception e) {
-            return new IncorrectCommand(Messages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
         }
     }
-    //@@author ShaniceTang
 
     //@@author ziyi105
     private static Command prepareHelpCommand(Ui ui) {
         return new HelpCommand(ui);
     }
+
     //@@author 
     /**
      * Parses arguments in the context of the AddOrder command.
@@ -366,7 +370,7 @@ public class Parser {
 
         // Checks whether the overall pattern of add order arguments is correct
         if (!matcher.matches()) {
-            return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
+            return new IncorrectCommand(ErrorMessages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE, ui);
         }
 
@@ -379,14 +383,14 @@ public class Parser {
 
             Dish orderedDish = menu.getDishFromName(dishName);
             if (orderedDish == null) {
-                return new IncorrectCommand(Messages.DISH_NOT_FOUND, ui);
+                return new IncorrectCommand(ErrorMessages.DISH_NOT_FOUND, ui);
             }
 
             Order order = new Order(orderedDish, dishQty);
 
             return new AddOrderCommand(order, ui, pantry, orderList);
         } catch (Exception e) {
-            return new IncorrectCommand(Messages.INVALID_ADD_ORDER_FORMAT_MESSAGE
+            return new IncorrectCommand(ErrorMessages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
         }
     }

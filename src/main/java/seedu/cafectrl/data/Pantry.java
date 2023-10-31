@@ -17,14 +17,12 @@ public class Pantry {
         this.ui = ui;
         this.pantryStock = pantryStock;
     }
-    //@@author NaychiMin
 
     //@@author ShaniceTang
     public Pantry(Ui ui) {
         this.ui = ui;
         this.pantryStock = new ArrayList<>();
     }
-    //@@author ShaniceTang
 
     /**
      * Retrieves the current pantry stock from storage, which may include reading from a file (pantry.txt).
@@ -88,6 +86,8 @@ public class Pantry {
         return -1;
     }
 
+
+    //@@author NaychiMin
     /**
      * Checks the stock of ingredients and dish availability based on a given order.
      */

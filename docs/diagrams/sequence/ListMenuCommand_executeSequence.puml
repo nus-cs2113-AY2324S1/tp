@@ -4,45 +4,45 @@ autonumber
 
 
 
---> ":ListMenuCommand" : execute()
+-> ":ListMenuCommand" : execute()
     activate ":ListMenuCommand"
     alt menu.getSize() == 0
-        ":ListMenuCommand" --> ":ListMenuCommand" : printEmptyMenu(ui)
-        ":ListMenuCommand" --> ":Ui" : showEmptyMenu()
+        ":ListMenuCommand" -> ":ListMenuCommand" : printEmptyMenu(ui)
+        ":ListMenuCommand" -> ":Ui" : showEmptyMenu()
         activate ":Ui"
         ":Ui" -> ":Ui" : showToUser(message: String)
         activate ":Ui"
         return
         return
     else
-        ":ListMenuCommand" --> ":ListMenuCommand" : printFullMenu(menu, ui)
-        ":ListMenuCommand" --> ":Ui" : showMenuTop()
+        ":ListMenuCommand" -> ":ListMenuCommand" : printFullMenu(menu, ui)
+        ":ListMenuCommand" -> ":Ui" : showMenuTop()
         activate ":Ui"
         ":Ui" -> ":Ui" : showToUser(message: String)
         activate ":Ui"
         return
         return
         loop Dish : Menu
-            ":ListMenuCommand" --> ":Menu" : getDishFromId(id)
+            ":ListMenuCommand" -> ":Menu" : getDishFromId(id)
             activate ":Menu"
             ":Menu" --> ":ListMenuCommand" : (selectedDish : Dish)
             deactivate ":Menu"
-            ":ListMenuCommand" --> ":Dish" : selectedDish.getName()
+            ":ListMenuCommand" -> ":Dish" : selectedDish.getName()
             activate ":Dish"
             ":Dish" --> ":ListMenuCommand" : (dishName : String)
             deactivate ":Dish"
-            ":ListMenuCommand" --> ":Dish" : selectedDish.getPrice()
+            ":ListMenuCommand" -> ":Dish" : selectedDish.getPrice()
             activate ":Dish"
             ":Dish" --> ":ListMenuCommand" : (dishPrice : String)
             deactivate ":Dish"
-            ":ListMenuCommand" --> ":Ui" : showMenuDish()
+            ":ListMenuCommand" -> ":Ui" : showMenuDish()
             activate ":Ui"
             ":Ui" -> ":Ui" : showToUser(message: String)
                 activate ":Ui"
                 return
             return
     end
-    ":ListMenuCommand" --> ":Ui" : showMenuBottom() : String)
+    ":ListMenuCommand" -> ":Ui" : showMenuBottom() : String)
     activate ":Ui"
     ":Ui" -> ":Ui" : showToUser(message: String)
     activate ":Ui"

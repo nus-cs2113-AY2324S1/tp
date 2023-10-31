@@ -1,9 +1,9 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Ingredient;
 
 import java.util.ArrayList;
@@ -27,7 +27,6 @@ public class Encoder {
     public static ArrayList<String> encodeMenu(Menu menu) {
         ArrayList<String> menuStringList = new ArrayList<>();
         ArrayList<Dish> menuDishList = menu.getMenuItemsList();
-
         for(Dish dish : menuDishList) {
             StringBuilder dishString = new StringBuilder();
             dishString.append(dish.getName() + DIVIDER);
@@ -36,7 +35,6 @@ public class Encoder {
             dishString.append(System.lineSeparator());
             menuStringList.add(String.valueOf(dishString));
         }
-
         return menuStringList;
     }
 
@@ -56,11 +54,20 @@ public class Encoder {
         return ingredientListString;
     }
 
+    //@@author ziyi105
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
-        return null;
+        // Convert pantry stock to a list of String
+        ArrayList<String> pantryStockInString = new ArrayList<>();
+        ArrayList<Ingredient> pantryStock = pantry.getPantryStock();
+        for (Ingredient ingredient : pantryStock) {
+            String encodedIngredient = ingredient.getName() + " "
+                    + ingredient.getQty() + " " + ingredient.getUnit();
+            pantryStockInString.add(encodedIngredient);
+        }
+        return pantryStockInString;
     }
 
-    public static ArrayList<String> encodeOrderList(OrderList orderList) {
+    public static ArrayList<String> encodeSales(Sales sales) {
         return null;
     }
 
