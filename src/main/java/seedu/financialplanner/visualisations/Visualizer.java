@@ -10,7 +10,6 @@ import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.RadarChart;
 import org.knowm.xchart.RadarChartBuilder;
-import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
@@ -108,7 +107,7 @@ public class Visualizer {
 
         // Customize Chart
         Color[] sliceColors = new Color[] {
-                new Color(62, 154, 230),
+            new Color(62, 154, 230),
         };
 
         radarChart.getStyler().setSeriesColors(sliceColors);
@@ -121,6 +120,8 @@ public class Visualizer {
         case "expense":
             keys = ExpenseType.getNames(ExpenseType.class);
             break;
+        default:
+            throw new FinancialPlannerException("Error displaying RadarChart");
         }
         if (keys.length == 0) {
             throw new FinancialPlannerException("Error displaying RadarChart");
