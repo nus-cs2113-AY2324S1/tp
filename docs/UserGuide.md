@@ -37,8 +37,22 @@ Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 Example of usage: 
 
 `addIncome monthly salary /amt 2500 /date 30/09/2023`
+```
+    ____________________________________________________________
+	The following income was added:
+	Income: monthly salary (Amount: 2500.0, Date: 30/09/2023)
+	____________________________________________________________
 
-`addIncome amazon purchase refund /amt 50`
+```
+
+`addIncome amazon purchase refund /amt 50 /cat OTHERS`
+```
+	____________________________________________________________
+	The following income was added:
+	Income: amazon purchase refund (Amount: 50.0, Date: 31/10/2023, Category: OTHERS)
+	____________________________________________________________
+
+```
 
 ### Adding an expense: `addExpense`
 Adds an expense with a description, amount, date and category.
@@ -54,9 +68,20 @@ Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 Example of usage:
 
 `addExpense milk tea /amt 2.50 /date 30/09/2023 /cat FOOD_DRINK`
-
+```
+    ____________________________________________________________
+	The following expense was added:
+	Expense: milk tea (Amount: 2.5, Date: 30/09/2023, Category: FOOD_DRINK)
+	____________________________________________________________
+```
 `addExpense textbook /amt 10`
+```
+	____________________________________________________________
+	The following expense was added:
+	Expense: textbook (Amount: 10.0, Date: 31/10/2023)
+	____________________________________________________________
 
+```
 ### Deleting an income: `deleteIncome`
 Deletes an income with a specific index.
 
@@ -66,8 +91,13 @@ Format: `deleteIncome INDEX`
 
 Example of usage:
 
-`deleteIncome 4`
-
+`deleteIncome 2`
+```
+	____________________________________________________________
+	Noted! CashLeh has removed the following income:
+	Income: amazon purchase refund (Amount: 50.0, Date: 31/10/2023, Category: OTHERS)
+	____________________________________________________________
+```
 ### Deleting an expense: `deleteExpense`
 Deletes an expense with a specific index.
 
@@ -77,7 +107,13 @@ Format: `deleteExpense INDEX`
 
 Example of usage:
 
-`deleteExpense 4`
+`deleteExpense 2`
+```
+	____________________________________________________________
+	Noted! CashLeh has removed the following expense:
+	Expense: textbook (Amount: 10.0, Date: 31/10/2023)
+	____________________________________________________________
+```
 
 ### Viewing previous incomes: `viewIncomes`
 Shows sum of incomes and lists each income record with its description, amount, date and (optional) category (if input by user).  
@@ -88,6 +124,17 @@ like `viewIncomes`.
 Example of usage:
 
 `viewIncomes`
+```
++-----------------------------------------------------------------------------------------------------------------------+
+|                                                   Income Statement                                                    |
++----------+--------------+--------------------+------------------------------+--------------------+--------------------+
+|    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
++----------+--------------+--------------------+------------------------------+--------------------+--------------------+
+|    1     |    Income    |     2023-09-30     |        monthly salary        |         -          |     + $2500.0      |
++-----------------------------------------------------------------------------------------------------------------------+
+| Total Income: $2500.0                                                                                                 |
++-----------------------------------------------------------------------------------------------------------------------+
+```
 
 ### Viewing previous expenses: `viewExpenses`
 Shows sum of expenses and lists each expense record with its description, amount, date and (optional) category (if input by user).  
@@ -98,6 +145,17 @@ Format: `viewExpenses`
 Example of usage:
 
 `viewExpenses`
+```
++-----------------------------------------------------------------------------------------------------------------------+
+|                                                   Expense Statement                                                   |
++----------+--------------+--------------------+------------------------------+--------------------+--------------------+
+|    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
++----------+--------------+--------------------+------------------------------+--------------------+--------------------+
+|    1     |   Expense    |     2023-09-30     |           milk tea           |     FOOD_DRINK     |       - $2.5       |
++-----------------------------------------------------------------------------------------------------------------------+
+| Total Expense: $2.5                                                                                                   |
++-----------------------------------------------------------------------------------------------------------------------+
+```
 
 ### Viewing the entire financial statement: `viewFinancialStatement`
 Shows the net cash on hand and lists each income and expense record along with its description, amount, date and (optional) category.  
@@ -108,6 +166,20 @@ Format: `viewFinancialStatement`
 Example of usage:
 
 `viewFinancialStatement`
+```
++-----------------------------------------------------------------------------------------------------------------------+
+|                                                  Financial Statement                                                  |
++----------+--------------+--------------------+------------------------------+--------------------+--------------------+
+|    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
++----------+--------------+--------------------+------------------------------+--------------------+--------------------+
+|    1     |    Income    |     2023-09-30     |        monthly salary        |         -          |     + $2500.0      |
+|    2     |   Expense    |     2023-09-30     |           milk tea           |     FOOD_DRINK     |       - $2.5       |
++-----------------------------------------------------------------------------------------------------------------------+
+| Total Income: $2500.0                                                                                                 |
+| Total Expense: $2.5                                                                                                   |
+| Net Income: $2497.5                                                                                                   |
++-----------------------------------------------------------------------------------------------------------------------+
+```
 
 ### Viewing the current budget: `viewBudget`
 Displays the current budget, the net cash on hand and a bar chart showing the leftover available budget.
@@ -119,6 +191,16 @@ Format: `viewBudget`
 Example of usage:
 
 `viewBudget`
+```
+	____________________________________________________________
+	You have set a budget of: 45.0
+	Here's a quick view of how you're doing so far:
+	You have a net cash on hand of: 2497.5
+	You still have the following percent of your budget left:
+
+	[******************************] 100.00%
+	____________________________________________________________
+```
 
 ### Updating a budget/setting a new budget: `updateBudget`
 Updates the budget to a new amount or creates a new budget if no previous budget was set.
@@ -129,7 +211,13 @@ Format: `updateBudget AMOUNT`
 
 Example of usage:
 
-`updateBudget 45`
+`updateBudget 100`
+```
+    ____________________________________________________________
+	The budget was updated to:
+	100.0
+	____________________________________________________________
+```
 
 ### Deleting the budget: `deleteBudget`
 Deletes the currently set budget.
@@ -139,21 +227,38 @@ Format: `deleteBudget`
 Example of usage:
 
 `deleteBudget`
-
+```
+	____________________________________________________________
+	Alright, CashLeh has just deleted your previous budget!
+	Watch out though as spending without budget ain't smart...
+	____________________________________________________________
+```
 ### Filtering an expense: `filterExpense`
 Displays expenses that match specific criteria provided by the user. 
 Expenses can be filtered based on the following criteria: description, amount, date, or category.
 
 Format: `filterExpense description /amt AMOUNT /date DATE /cat CATEGORY`
 * All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
-* If no criteria is provided, CashLeh? will display an error message
+* If no criteria is provided, CashLeh? will display the user's input, along with an error message
 
 Examples of usage:
 
 `filterExpense milk tea`
-
+```
+	____________________________________________________________
+	Here are your corresponding expenses with <description>: milk tea ||
+	Expense: milk tea (Amount: 2.5, Date: 30/09/2023, Category: FOOD_DRINK)
+	____________________________________________________________
+```
 `filterExpense /amt 3.50`
-
+```
+	____________________________________________________________
+	Your input is <amount>: 3.5 ||
+	____________________________________________________________
+	____________________________________________________________
+	No such transaction recorded leh!
+	____________________________________________________________
+```
 `filterExpense milk tea /amt 3.50`
 
 `filterExpense /cat FOOD_DRINK`
@@ -166,17 +271,31 @@ Incomes can be filtered based on the following criteria: description, amount, da
 
 Format: `filterIncome description /amt AMOUNT /date DATE /cat CATEGORY`
 * All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
-* If no criteria is provided, CashLeh? will display an error message
+* If no criteria is provided, CashLeh? will display the user's input, along with an error message
 
 Examples of usage:
 
-`filterIncome salary`
+`filterIncome monthly salary`
+```
+	____________________________________________________________
+	Here are your corresponding incomes with <description>: monthly salary ||
+	Income: monthly salary (Amount: 2500.0, Date: 30/09/2023)
+	____________________________________________________________
+```
 
 `filterIncome /amt 1000 /date 25/10/2023`
 
 `filterIncome /cat SALARY`
 
 `filterIncome /date 25/10/2023`
+```
+	____________________________________________________________
+	Your input is <date>: 2023-10-25 ||
+	____________________________________________________________
+	____________________________________________________________
+	No such transaction recorded leh!
+	____________________________________________________________
+```
 
 ### Filtering a transaction: `filter`
 Displays expenses and incomes that match specific criteria provided by the user.
@@ -184,11 +303,17 @@ Transactions can be filtered based on the following criteria: description, amoun
 
 Format: `filter description /amt AMOUNT /date DATE /cat CATEGORY`
 * All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
-* If no criteria is provided, CashLeh? will display an error message
+* If no criteria is provided, CashLeh? will display the user's input, along with an error message
 
 Examples of usage:
 
 `filter milk tea`
+```
+	____________________________________________________________
+	Here are your corresponding transactions with <description>: milk tea ||
+	[-] Expense: milk tea (Amount: 2.5, Date: 30/09/2023, Category: FOOD_DRINK)
+	____________________________________________________________
+```
 
 `filter milk tea /amt 3.50`
 
@@ -205,9 +330,16 @@ Examples of usage:
 ## Command Summary
 
 * Add income `addIncome monthly salary /amt2500 /d2023-09-30`
+* Add expense `addExpense milk tea /amt 2.50 /date 31/19/2023 /cat food`
 * Delete income `deleteIncome 4`
+* Delete expense `deleteExpense 1`
 * View incomes `viewIncomes`
+* View expenses `viewExpenses`
 * View financial statement `viewFinancialStatement`
 * View budget `viewBudget`
 * Update budget `updateBudget 200`
 * Delete budget `deleteBudget`
+* Filter expenses `filterExpense`
+* Filter incomes `filterIncome`
+* Filter all transactions `filter`
+* Exit `exit`
