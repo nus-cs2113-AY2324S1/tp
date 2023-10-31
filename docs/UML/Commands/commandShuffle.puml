@@ -1,0 +1,15 @@
+@startuml
+title Shuffle Questions Sequence Diagram
+
+participant User
+participant CommandShuffle
+participant QuestionList
+participant Collections
+
+User -> CommandShuffle: Executes "shuffle" command
+CommandShuffle -> QuestionList: executeCommand(ui, dataStorage, questions)
+QuestionList -> Collections: shuffleQuestions()
+Collections --> QuestionList: Shuffled
+QuestionList --> User: Shuffled questions
+
+@enduml
