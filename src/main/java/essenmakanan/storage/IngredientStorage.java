@@ -3,6 +3,7 @@ package essenmakanan.storage;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.ui.Ui;
+import essenmakanan.parser.IngredientParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,16 +23,12 @@ public class IngredientStorage {
         ingredientListPlaceholder = new ArrayList<>();
     }
 
-    public String convertToString(Ingredient ingredient) {
-        return ingredient.getName() + " | " + ingredient.getQuantity() + " | " + ingredient.getUnit();
-    }
-
     public void saveData(ArrayList<Ingredient> ingredients) throws IOException  {
         FileWriter writer = new FileWriter(DATA_PATH, false);
         String dataString;
 
         for (Ingredient ingredient : ingredients) {
-            dataString = convertToString(ingredient);
+            dataString = IngredientParser.convertToString(ingredient);
             writer.write(dataString);
             writer.write(System.lineSeparator());
         }

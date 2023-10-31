@@ -105,4 +105,8 @@ public class IngredientParser {
 
         return ingredientUnit;
     }
+
+    public static String convertToString(Ingredient ingredient) {
+        return ingredient.getName() + " | " + ingredient.getQuantity() + " | " + ingredient.getUnit();
+    }
 }
