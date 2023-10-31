@@ -21,11 +21,11 @@ public class IngredientList {
         return ingredients;
     }
 
-    public Ingredient getIngredientByIndex(int index) {
+    public Ingredient getIngredient(int index) {
         return ingredients.get(index);
     }
 
-    public Ingredient getIngredientByName(String name) {
+    public Ingredient getIngredient(String name) {
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(name)) {
                 return ingredient;
@@ -34,11 +34,31 @@ public class IngredientList {
         return null;
     }
 
-    public int getIndexByIngredient(Ingredient ingredient) {
+    public boolean isEmpty() {
+        return ingredients.isEmpty();
+    }
+
+    public boolean exist(String ingredientName) {
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getName().equals(ingredientName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean exist(int id) {
+        if (id >= 0 && id < ingredients.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getIndex(Ingredient ingredient) {
         return ingredients.indexOf(ingredient);
     }
 
-    public int getIndexByName(String ingredientName) {
+    public int getIndex(String ingredientName) {
         int i = 0;
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(ingredientName)) {
@@ -47,13 +67,6 @@ public class IngredientList {
             i++;
         }
         return -1;
-    }
-
-    public boolean ingredientExist(int id) {
-        if (id >= 0 && id < ingredients.size()) {
-            return true;
-        }
-        return false;
     }
 
     public void addIngredient(Ingredient ingredient) {
@@ -100,7 +113,6 @@ public class IngredientList {
 
     public void listIngredients() {
         Ui.drawDivider();
-        System.out.println("Here's a list of your ingredients!");
         int count = 1;
 
         for (Ingredient ingredient : ingredients) {

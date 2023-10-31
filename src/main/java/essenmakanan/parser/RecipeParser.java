@@ -1,6 +1,7 @@
 package essenmakanan.parser;
 
 import essenmakanan.exception.EssenException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
@@ -16,7 +17,7 @@ public class RecipeParser {
         if (input.matches("\\d+")) { //if input only contains numbers
             index = Integer.parseInt(input) - 1;
         } else {
-            index = recipes.getIndexOfRecipeByName(input);
+            index = recipes.getIndexOfRecipe(input);
         }
 
         if (!recipes.recipeExist(index)) {
@@ -51,4 +52,11 @@ public class RecipeParser {
         return toAdd.replace("r/", "");
     }
 
+    public static String parseFilterRecipeInput(String input) throws EssenFormatException {
+        input = input.replace("recipe ", "");
+        if (!input.contains("i/")) {
+            throw new EssenFormatException();
+        }
+        return input.strip();
+    }
 }

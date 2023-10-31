@@ -26,7 +26,7 @@ public class EditRecipeCommand extends Command {
         assert splitDetails.length > 0 : "Details not provided"; // error not thrown by exceptions
 
         String recipeName = splitDetails[0];
-        existingRecipe = recipes.getRecipeByName(recipeName);
+        existingRecipe = recipes.getRecipe(recipeName);
 
         if (existingRecipe == null) {
             System.out.println("Recipe not found!");
