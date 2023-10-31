@@ -5,6 +5,7 @@ import cashleh.Ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
@@ -85,15 +86,26 @@ public class IncomeStatement {
      */
     public void printIncomes() {
         int listSize = incomeStatement.size();
-        String[] texts = new String[listSize];
-        for (int i = 0; i < listSize; i++) {
-            Income currentIncome = incomeStatement.get(i);
+        List<String> incomesDetails = new ArrayList<>();
+        for (Income currentIncome : incomeStatement) {
             String type = "Income, ";
             String date = currentIncome.getDate().toString();
             String amt = String.valueOf(currentIncome.getAmount());
             String cat = currentIncome.getCategory() == null ? "-" : currentIncome.getCategory().toString();
-            texts[i] = type + date + ", " + currentIncome.getDescription() + ", " + amt + ", " + cat;
+            incomesDetails.add(type + date + ", " + currentIncome.getDescription() + ", " + amt + ", " + cat);
         }
+
+        // Sort incomes based on the date of income
+        Collections.sort(incomesDetails, (income1, income2) -> {
+            String[] incomeParts1 = income1.split(", ");
+            String [] incomeParts2 = income2.split(", ");
+            String date1 = incomeParts1[1];
+            String date2 = incomeParts2[1];
+            return date1.compareTo(date2);
+        });
+
+        String[] texts = incomesDetails.toArray(new String[incomesDetails.size()]);
+
         Ui.printStatement("Income Statement", texts);
     }
 

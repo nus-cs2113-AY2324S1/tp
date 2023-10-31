@@ -10,12 +10,11 @@ import java.time.format.DateTimeFormatter;
  * including a description, an amount, and an optional date.
  */
 public abstract class Transaction {
-
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String description;
     private double amount;
     private LocalDate date = null;
     private Categories category = null;
-
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /*

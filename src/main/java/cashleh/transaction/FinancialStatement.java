@@ -5,6 +5,8 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 /**
@@ -65,15 +67,27 @@ public class FinancialStatement {
      */
     public void printTransactions() {
         int listSize = financialStatement.size();
-        String[] texts = new String[listSize];
-        for (int i = 0; i < listSize; i++) {
-            Transaction currentTransaction = financialStatement.get(i);
+        List<String> transactionDetails = new ArrayList<>();
+
+        for (Transaction currentTransaction : financialStatement) {
             String type = (currentTransaction instanceof Income) ? "Income, " : "Expense, ";
             String date = currentTransaction.getDate().toString();
             String amt = String.valueOf(currentTransaction.getAmount());
             String cat = currentTransaction.getCategory() == null ? "-" : currentTransaction.getCategory().toString();
-            texts[i] = type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat;
+            transactionDetails.add(type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat);
         }
+
+        // Sort transactions based on the date of transaction
+        Collections.sort(transactionDetails, (transaction1, transaction2) -> {
+            String[] transactionParts1 = transaction1.split(", ");
+            String [] transactionParts2 = transaction2.split(", ");
+            String date1 = transactionParts1[1];
+            String date2 = transactionParts2[1];
+            return date1.compareTo(date2);
+        });
+
+        String[] texts = transactionDetails.toArray(new String[transactionDetails.size()]);
+
         Ui.printStatement("Financial Statement", texts);
     }
 

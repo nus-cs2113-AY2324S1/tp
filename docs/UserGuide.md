@@ -12,7 +12,7 @@ situation.
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `CashLeh?` from [GitHub](https://github.com/AY2324S1-CS2113-W12-2/tp/releases/).
 3. Copy it into an empty folder
-4. Open the terminal and run the command `java javac- FILENAME.jar`
+4. Open the terminal and run the command `java javac- Cashleh.jar`
 5. CashLeh? should launch and you can start interacting with the application
 
 ## Features
@@ -53,6 +53,10 @@ Example of usage:
 	____________________________________________________________
 
 ```
+
+`addIncome APPL /amt 500 /cat Investment`
+
+`addIncome amazon purchase refund /amt 50 /date 2023-10-10`
 
 ### Adding an expense: `addExpense`
 Adds an expense with a description, amount, date and category.
@@ -321,25 +325,64 @@ Examples of usage:
 
 `filter /date 25/10/2023`
 
+### Exiting the CashLeh? application: `exit`
+This command exits the CashLeh? application and saves the user's transaction data thus far into 
+a text file with their name as part of the file path. 
+
+Example of usage: `exit`
+
+### Edit Income parameters: `editIncome` [coming soon]
+Change a parameter of a specific income.
+
+Format: `editIncome INDEX PARAMETER NEW_PARAM`
+* The `INDEX` must be a positive integer and cannot be larger than the number of expense entries.
+* The `PARAMETER` denotes the specific parameter to change, list of possible parameters: DESC, AMT, DATE, CAT
+* The `NEW_PARAM` is the new parameter to replace the odd parameter
+
+Example of usage:
+
+`editIncome 2 AMT 2000`
+
+`editIncome 1 DESC dinner`
+
+### Edit Expense parameters: `editExpense` [coming soon]
+Change a parameter of a specific expense.
+
+Format: `editExpense INDEX PARAMETER NEW_PARAM`
+* The `INDEX` must be a positive integer and cannot be larger than the number of expense entries.
+* The `PARAMETER` denotes the specific parameter to change, list of possible parameters: DESC, AMT, DATE, CAT
+* The `NEW_PARAM` is the new parameter to replace the odd parameter
+
+Example of usage:
+
+`editExpense 2 AMT 2000`
+
+`editExpense 1 DESC weekly allowance`
+
+### Set Password: `setPassword` [coming soon]
+Set new password.
+
+### Change Password: `changePassword` [coming soon]
+Change Password.
+
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another Computer?
 
-**A**: {your answer here}
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data.
 
 ## Command Summary
-
-* Add income `addIncome monthly salary /amt2500 /d2023-09-30`
-* Add expense `addExpense milk tea /amt 2.50 /date 31/19/2023 /cat food`
+* Add income `addIncome monthly salary /amt 2500 /date 30/09/2023 /cat SALARY`
+* Add expense `addExpense milk tea /amt 2.50 /date 30/09/2023 /cat FOOD_DRINK`
 * Delete income `deleteIncome 4`
-* Delete expense `deleteExpense 1`
+* Delete expense `deleteExpense 4`
 * View incomes `viewIncomes`
 * View expenses `viewExpenses`
 * View financial statement `viewFinancialStatement`
 * View budget `viewBudget`
 * Update budget `updateBudget 200`
 * Delete budget `deleteBudget`
-* Filter expenses `filterExpense`
-* Filter incomes `filterIncome`
-* Filter all transactions `filter`
+* Filter expense `filterExpense /amt 2.50`
+* Filter income `filterIncome /cat SALARY`
+* Filter transaction `filter /date 30/09/2023`
 * Exit `exit`

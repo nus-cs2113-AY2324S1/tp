@@ -55,6 +55,10 @@ public class Parser {
     private static final String DATE_SUFFIX = "/date";
     private static final String CATEGORY_SUFFIX = "/cat";
 
+    private static final String AMT_KEYWORD = "/amt";
+    private static final String DATE_KEYWORD = "/date";
+    private static final String CAT_KEYWORD = "/cat";
+
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
     private final BudgetHandler budgetHandler;
@@ -111,10 +115,12 @@ public class Parser {
         String[] format = {ADD_EXPENSE, "/amt", "/date:optional", "/cat:optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String expenseName = inputDetails.get(ADD_EXPENSE);
-        String expenseAmtString = inputDetails.get("/amt");
-        String expenseDateString = inputDetails.get("/date");
-        String expenseCategoryString = inputDetails.get("/cat");
         assert expenseName != null;
+
+        String expenseAmtString = inputDetails.get(AMT_KEYWORD);
+        String expenseDateString = inputDetails.get(DATE_KEYWORD);
+        String expenseCategoryString = inputDetails.get(CAT_KEYWORD);
+        
 
         if (expenseName.isEmpty()) {
             throw new CashLehParsingException(
@@ -154,10 +160,11 @@ public class Parser {
         String[] format = {ADD_INCOME, "/amt", "/date:optional", "/cat:optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String incomeName = inputDetails.get(ADD_INCOME);
-        String incomeAmtString = inputDetails.get("/amt");
-        String incomeDateString = inputDetails.get("/date");
-        String incomeCategoryString = inputDetails.get("/cat");
         assert incomeName != null;
+        
+        String incomeAmtString = inputDetails.get(AMT_KEYWORD);
+        String incomeDateString = inputDetails.get(DATE_KEYWORD);
+        String incomeCategoryString = inputDetails.get(CAT_KEYWORD);
 
         if (incomeName.isEmpty()) {
             throw new CashLehParsingException(
@@ -169,16 +176,16 @@ public class Parser {
         try {
             incomeAmt = Double.parseDouble(incomeAmtString);
         } catch (NumberFormatException e) {
-            throw new CashLehParsingException("Please enter a valid expense amount!");
+            throw new CashLehParsingException("Please enter a valid income amount!");
         }
 
         LocalDate parsedDate = null;
-        if (!(incomeDateString == null) && !incomeDateString.isEmpty()) {
+        if (incomeDateString != null && !incomeDateString.isEmpty()) {
             parsedDate = DateParser.parse(incomeDateString);
         }
         
         IncomeCategory parsedCategory = null;
-        if (!(incomeCategoryString == null) && !incomeCategoryString.isEmpty()) {
+        if (incomeCategoryString != null && !incomeCategoryString.isEmpty()) {
             parsedCategory = IncomeCatParser.parse(incomeCategoryString);
         }
 
