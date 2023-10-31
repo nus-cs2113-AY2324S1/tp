@@ -1,15 +1,12 @@
 ...Downloading data...
 Data Folder was not found!
 It's ok... a new data folder has been created.
-<<<<<<< HEAD
 
 
 text file was not found!
 It's ok... a new data file has been created.
 
 
-=======
->>>>>>> fe1a5cb8ff37cb1980a6eecbe9eaf990a2055e6c
 Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > -----------------------------------------------------
