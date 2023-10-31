@@ -40,8 +40,8 @@ class HelpCommandTest {
         expectedOutputs.add(Messages.INSTRUCTION_ON_COMMAND_FORMAT);
         expectedOutputs.add(AddDishCommand.MESSAGE_USAGE);
         expectedOutputs.add(ListIngredientCommand.MESSAGE_USAGE);
-        expectedOutputs.add(Messages.LIST_MENU_GUIDE);
-        expectedOutputs.add(Messages.DELETE_GUIDE);
+        expectedOutputs.add(ListMenuCommand.MESSAGE_USAGE);
+        expectedOutputs.add(DeleteDishCommand.MESSAGE_USAGE);
         expectedOutputs.add(EditPriceCommand.MESSAGE_USAGE);
 
         for (int i = 0; i < numOfLines; i++) {
