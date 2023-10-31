@@ -163,6 +163,9 @@ public abstract class LoadData {
             throw new IllegalArgumentException("Current budget exceeds initial budget");
         }
         LocalDate date = LocalDate.parse(split[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (LocalDate.now().isBefore(date)) {
+            throw new IllegalArgumentException("Current date is before saved date");
+        }
         Budget.load(initial, current, date);
     }
 

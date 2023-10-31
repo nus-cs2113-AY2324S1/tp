@@ -11,7 +11,7 @@ import seedu.financialplanner.utils.Ui;
 import java.time.LocalDate;
 
 public class FinancialPlanner {
-    public static final LocalDate currentDate = LocalDate.now();
+    private static final LocalDate date = LocalDate.now();
     private static final String FILE_PATH = "data/data.txt";
     private final Storage storage = Storage.getInstance();
     private final Ui ui = Ui.getInstance();
@@ -27,7 +27,7 @@ public class FinancialPlanner {
 
     public void run() {
         try {
-            storage.load(FILE_PATH, currentDate);
+            storage.load(FILE_PATH, date);
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
             return;
