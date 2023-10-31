@@ -105,7 +105,7 @@ class FinancialStatementTest {
     @Test
     void testToString() {
         assertEquals(financialStatement.toString(),
-                "Income: salary (Amount: 1000.0, Date: 31/10/2023)\n"
-                        + "Expense: lunch (Amount: 20.0, Date: 31/10/2023)");
+                "Income: salary (Amount: 1000.0, Date: 31/10/2023, Category: SALARY)\n"
+                        + "Expense: lunch (Amount: 20.0, Date: 31/10/2023, Category: FOOD_DRINK)");
     }
 }
