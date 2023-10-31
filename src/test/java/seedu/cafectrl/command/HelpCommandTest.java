@@ -38,11 +38,11 @@ class HelpCommandTest {
         expectedOutputs.add(Messages.LINE_STRING);
         expectedOutputs.add(Messages.LIST_OF_COMMANDS);
         expectedOutputs.add(Messages.INSTRUCTION_ON_COMMAND_FORMAT);
-        expectedOutputs.add(AddDishCommand.MESSAGE_USAGE);
-        expectedOutputs.add(ListIngredientCommand.MESSAGE_USAGE);
+        expectedOutputs.add(Messages.ADD_DISH_GUIDE);
         expectedOutputs.add(Messages.LIST_MENU_GUIDE);
+        expectedOutputs.add(Messages.LIST_INGREDIENTS_GUIDE);
         expectedOutputs.add(Messages.DELETE_GUIDE);
-        expectedOutputs.add(EditPriceCommand.MESSAGE_USAGE);
+        expectedOutputs.add(Messages.EDIT_PRICE_GUIDE);
 
         for (int i = 0; i < numOfLines; i++) {
             assertEquals(expectedOutputs.get(i), actualOutputs.get(i));
