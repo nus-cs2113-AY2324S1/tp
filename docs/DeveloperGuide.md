@@ -76,6 +76,71 @@ The following sequence diagram shows how the login system class works when the p
 
 ---
 
+### Parser Component
+
+---
+
+The Parser component is responsible for interpreting user input and converting it into executable commands. It plays a
+critical role in bridging the user interface (UI) and the command execution components of the application.
+
+#### Design considerations
+
+- **User Input Parsing:** The Parser must effectively break down user input into its constituent parts, such as the command
+keyword and any associated arguments.
+
+- **Command Recognition:** The Parser must recognize the specific command the user intends to execute. This involves matching
+the command keyword to a predefined set of commands.
+
+- **Arguments Extraction:** For commands that require additional information, the Parser should correctly extract and format
+arguments, ensuring they are ready for command execution.
+
+- **Error Handling:** In cases where the input does not match any recognized command or has formatting errors, the Parser
+should generate appropriate error messages.
+
+
+#### Implementation and rationale
+
+The Parser class is designed to handle these considerations through a well-structured parsing process. Here's how it
+works:
+
+1. Splitting User Input: The Parser takes the full user input and splits it into two parts: the command word and the
+remaining arguments.
+
+2. Command Recognition: It matches the command word to a predefined set of commands. If a valid command is recognized, it
+proceeds to the next step.
+
+3. Arguments Extraction: Depending on the specific command, the Parser may further parse and extract arguments. For
+instance, for the "AddCommand," it extracts drug-related details like name, expiry date, serial number, and quantity.
+
+4. Command Creation: The Parser creates an instance of the appropriate Command class, passing along any required arguments.
+This encapsulates the user's request in an executable command object.
+
+5. Error Handling: If the user input does not match any recognized command or has formatting errors, the Parser generates
+an "IncorrectCommand" with an error message, providing feedback to the user.
+
+By structuring the parsing process this way, the application ensures that user input is correctly interpreted and
+translated into executable commands for the subsequent phases of the application.
+
+The parser class uses the below method to achieve its functionality
+
+- `parseCommand(String userInput)` - This method takes the user's input as a parameter and processes it to identify the
+  command keyword and any associated arguments. It then recognizes the specific command and prepares it for execution.
+
+Given below is an example of how the login system class works.
+
+Suppose a user enters the command `add /n Paracetamol /d 2023-12-31 /s ABC123 /q 100`. The Parser first splits this input
+into the command word "add" and the arguments. It then recognizes the "add" command, extracts the drug details (name,
+expiry date, serial number, and quantity), and creates an instance of the "`AddCommand`" with these details. If the user
+enters an invalid command or incorrect formatting, the Parser provides feedback to guide the user, ensuring a seamless
+interaction between the user and the application.
+
+The Parser is a crucial component that forms the bridge between user intentions and the core functionality of the stock
+management system.
+
+The following sequence diagram shows how the parser class works when the program is running.
+
+---
+
 ### Main data structures
 
 ---
@@ -84,20 +149,25 @@ The following sequence diagram shows how the login system class works when the p
 
 ##### Drug
 
-The Drug class is very basic class for now. It only contains the product name as well as it's expiry date, but we will soon add some new properties such as product description, etc...
+The Drug class is very basic class for now. It only contains the product name as well as it's expiry date, but we will
+soon add some new properties such as product description, etc...
 
 ##### Inventory
 
-The Inventory class is used to keep track of the quantity of product in stock. The hash map seemed to be the most appropriate data structure to match a product id to a quantity and a product entity which are encapsulated in a "StockEntry" class.
+The Inventory class is used to keep track of the quantity of product in stock. The hash map seemed to be the most
+appropriate data structure to match a product id to a quantity and a product entity which are encapsulated in a "
+StockEntry" class.
 
 ##### Cart
 
-The Cart class is used to represent an ongoing transaction : to perform a sale, the vendor can add different products with their respective quantities in a cart which will be deducted from the inventory at the checkout.
+The Cart class is used to represent an ongoing transaction : to perform a sale, the vendor can add different products
+with their respective quantities in a cart which will be deducted from the inventory at the checkout.
 To represent this, we chose to use an arraylist of "CartEntry" classes which reprensent a product/quantity tuple.
 
 ##### SalesList
 
-The SalesList is used to represent every past sales in order to create some statistics and reports. This class is only a list of subclasses representing validated carts.
+The SalesList is used to represent every past sales in order to create some statistics and reports. This class is only a
+list of subclasses representing validated carts.
 
 ---
 
@@ -180,7 +250,7 @@ criteria and the keyword "PARC3189."
 6. `User Feedback:` The result is then displayed to the user, showing a list of drugs in the inventory that match the
    specified keyword.
 
-The following sequence diagram shows how the Find Command function works. 
+The following sequence diagram shows how the Find Command function works.
 
 <img src="UML Diagrams/FindCommandDiagram.png" width="350">
 
@@ -192,15 +262,20 @@ Architecture Diagram of find command function:
 
 ## 2. ListCommand
 
-The `ListCommand` is responsible for listing all drugs in the inventory. This command retrieves the list of drugs from the inventory and provides it as part of the command result. If the inventory is empty, it informs the user that the inventory has no drugs.
+The `ListCommand` is responsible for listing all drugs in the inventory. This command retrieves the list of drugs from
+the inventory and provides it as part of the command result. If the inventory is empty, it informs the user that the
+inventory has no drugs.
 
 ### Design Considerations
 
-- **User-Friendly Listing:** The primary goal of the `ListCommand` is to provide a user-friendly way to list all drugs in the inventory, enhancing the user's experience in accessing inventory information.
+- **User-Friendly Listing:** The primary goal of the `ListCommand` is to provide a user-friendly way to list all drugs
+  in the inventory, enhancing the user's experience in accessing inventory information.
 
-- **Data Presentation:** The design considers how to present the list of drugs in a clear and organized manner to provide valuable information to the user.
+- **Data Presentation:** The design considers how to present the list of drugs in a clear and organized manner to
+  provide valuable information to the user.
 
-- **Performance:** The implementation should be optimized to list the inventory efficiently, even if it contains a large number of drugs.
+- **Performance:** The implementation should be optimized to list the inventory efficiently, even if it contains a large
+  number of drugs.
 
 ### Implementation
 
@@ -208,19 +283,25 @@ The `ListCommand` is implemented as follows:
 
 - **Retrieving Drug List:** The command retrieves the list of drugs from the inventory using the `getAllDrugs` method.
 
-- **Handling Empty Inventory:** It checks if the list of drugs is empty. If the inventory is empty, it returns a user-friendly message indicating that the inventory is empty.
+- **Handling Empty Inventory:** It checks if the list of drugs is empty. If the inventory is empty, it returns a
+  user-friendly message indicating that the inventory is empty.
 
-- **Listing Drugs:** If the inventory contains drugs, the command constructs a success message and includes the list of drugs in the command result.
+- **Listing Drugs:** If the inventory contains drugs, the command constructs a success message and includes the list of
+  drugs in the command result.
 
-- **User-Friendly Presentation:** The implementation ensures that the list of drugs is presented in a clear and organized format, including relevant details such as drug names, quantities, and other attributes.
+- **User-Friendly Presentation:** The implementation ensures that the list of drugs is presented in a clear and
+  organized format, including relevant details such as drug names, quantities, and other attributes.
 
-- **Optimized Performance:** To enhance user experience, the command is designed to list the inventory efficiently, ensuring that users receive search results quickly.
+- **Optimized Performance:** To enhance user experience, the command is designed to list the inventory efficiently,
+  ensuring that users receive search results quickly.
 
 ### Function Methods
 
 The `ListCommand` includes the following method to achieve its functionality:
 
-- `execute()`: This method is responsible for executing the `ListCommand`, listing all drugs in the inventory. It checks the inventory, prepares a user-friendly result message, and returns a `CommandResult` containing the outcome of the command execution, which includes a success message and the list of found `Drug` objects.
+- `execute()`: This method is responsible for executing the `ListCommand`, listing all drugs in the inventory. It checks
+  the inventory, prepares a user-friendly result message, and returns a `CommandResult` containing the outcome of the
+  command execution, which includes a success message and the list of found `Drug` objects.
 
 ### Example Usage
 
@@ -232,11 +313,13 @@ To illustrate how the `ListCommand` works, consider the following example usage:
 
 3. **Inventory Check:** The method checks the inventory to retrieve the list of drugs.
 
-4. **Result Building:** If the inventory contains drugs, the method constructs a success message (e.g., "Listed all drugs in the inventory.") and includes the list of drugs with relevant details.
+4. **Result Building:** If the inventory contains drugs, the method constructs a success message (e.g., "Listed all
+   drugs in the inventory.") and includes the list of drugs with relevant details.
 
 5. **User Feedback:** The result is displayed to the user, showing a clear and organized list of drugs in the inventory.
 
-The "ListCommand" enhances the user's ability to access inventory information efficiently and is designed to handle various inventory sizes while providing a user-friendly experience.
+The "ListCommand" enhances the user's ability to access inventory information efficiently and is designed to handle
+various inventory sizes while providing a user-friendly experience.
 
 The following sequence diagram shows how the Find Command function works.
 
@@ -246,15 +329,19 @@ The following sequence diagram shows how the Find Command function works.
 
 ## 3. Delete Command
 
-The "Delete" function is designed to enable users to remove specific drugs from the inventory based on the drug's name. This component facilitates the management of the inventory by allowing users to remove drugs they no longer need, fully depleted or discontinued.
+The "Delete" function is designed to enable users to remove specific drugs from the inventory based on the drug's name.
+This component facilitates the management of the inventory by allowing users to remove drugs they no longer need, fully
+depleted or discontinued.
 
 **Design Considerations**
 
 The design of the "Delete" function takes into account the following considerations:
 
-1. **User-Specified Drug Name:** The function allows users to specify the drug name they want to delete from the inventory.
+1. **User-Specified Drug Name:** The function allows users to specify the drug name they want to delete from the
+   inventory.
 
-2. **Data Integrity:** It ensures that the deletion operation maintains the integrity of the inventory data structure, updating it correctly.
+2. **Data Integrity:** It ensures that the deletion operation maintains the integrity of the inventory data structure,
+   updating it correctly.
 
 **Implementation and Rationale**
 
@@ -262,19 +349,25 @@ The "Delete" function is implemented as follows:
 
 - **User-Defined Drug Name:** Users provide the name of the drug they wish to delete.
 
-- **Data Deletion Algorithm:** The function employs data deletion logic to remove the specified drug from the inventory. This involves identifying the drug based on the provided name and removing it from the list.
+- **Data Deletion Algorithm:** The function employs data deletion logic to remove the specified drug from the inventory.
+  This involves identifying the drug based on the provided name and removing it from the list.
 
-- **Error Handling:** The function includes error handling to address scenarios where the specified drug is not found in the inventory. In such cases, an appropriate error message is generated.
+- **Error Handling:** The function includes error handling to address scenarios where the specified drug is not found in
+  the inventory. In such cases, an appropriate error message is generated.
 
-- **User Feedback:** Upon successful deletion, the function generates a success message confirming the removal of the drug.
+- **User Feedback:** Upon successful deletion, the function generates a success message confirming the removal of the
+  drug.
 
-The "Delete" function is an essential feature for managing the inventory, allowing users to keep it up to date and remove unwanted or outdated drugs.
+The "Delete" function is an essential feature for managing the inventory, allowing users to keep it up to date and
+remove unwanted or outdated drugs.
 
 **Function Methods**
 
 The "Delete" function includes the following method to achieve its functionality:
 
-- `execute()` - This method is responsible for executing the "Delete" command, removing the drug with the specified name from the inventory. It returns a `CommandResult` containing the outcome of the command execution, which includes a success message upon successful deletion or an error message if the drug is not found in the inventory.
+- `execute()` - This method is responsible for executing the "Delete" command, removing the drug with the specified name
+  from the inventory. It returns a `CommandResult` containing the outcome of the command execution, which includes a
+  success message upon successful deletion or an error message if the drug is not found in the inventory.
 
 **Example Usage**
 
@@ -283,19 +376,25 @@ To illustrate how the "Delete" function works, consider the following example us
 1. **User Input:** The user initiates the "Delete" command by typing something like the following:
    `delete /n panadol`- This command instructs the program to remove the drug named "paracetamol" from the inventory.
 
-2. **Method Execution:** The `execute()` method within the "DeleteCommand" class is called. It takes the provided drug name as input.
+2. **Method Execution:** The `execute()` method within the "DeleteCommand" class is called. It takes the provided drug
+   name as input.
 
-3. **Search Process:** The method processes the deletion by searching for the drug with the specified name in the inventory.
+3. **Search Process:** The method processes the deletion by searching for the drug with the specified name in the
+   inventory.
 
 4. **Deletion Operation:** If the drug is found, it is removed from the inventory.
 
-5. **Success Message:** The `CommandResult` is prepared, containing a success message (e.g., "Drug removed from inventory: paracetamol").
+5. **Success Message:** The `CommandResult` is prepared, containing a success message (e.g., "Drug removed from
+   inventory: paracetamol").
 
-6. **User Feedback:** The result is displayed to the user, confirming the successful removal of the drug from the inventory.
+6. **User Feedback:** The result is displayed to the user, confirming the successful removal of the drug from the
+   inventory.
 
-The "Delete" function provides a straightforward way for users to manage the inventory by removing specific drugs as needed.
+The "Delete" function provides a straightforward way for users to manage the inventory by removing specific drugs as
+needed.
 
 ---
+
 ## 4. Help Command
 
 The command is responsible for showing users a list of all possible commands.
@@ -312,22 +411,24 @@ Command will use java's system out to print out all required information with a 
 
 ## 5. Save Command
 
-The save command was made as a means to backup user entered drug data into the hard drive of the computer to ensure 
+The save command was made as a means to backup user entered drug data into the hard drive of the computer to ensure
 previously entered data is saved and accessable whenever the app is launched.
 
 ### Design Considerations
-The save command had to be implemented in a way to enable direct writing of files onto the hard drive and a function had 
+
+The save command had to be implemented in a way to enable direct writing of files onto the hard drive and a function had
 to be made to load said file back into the drug inventory upon starting the application.
 
 ### Implementation
 
-There is a method to access the drugs within the inventory class. a separate method from the inventory class would then 
+There is a method to access the drugs within the inventory class. a separate method from the inventory class would then
 write the contents of these drugs back to the txt file for saving.
 
 Upon booting up the system, a method from the inventory class goes through the contents of the txt file and copies it to
 the inventory drug list.
 
 ---
+
 ## 6. addVendor Command
 
 The command was made to add vendors to a list of vendors so as to have access to it when needed.
@@ -342,6 +443,7 @@ In order to attain the adjustable storage based on numebr of objects, an ArrayLi
 appended to the ArrayList whenever a new entry is required.
 
 ---
+
 ## 7. listVendors Command
 
 The command was made to list all vendors being tracked by the system in a neat way to the user
@@ -389,7 +491,7 @@ The list of vendors could be printed by using streams to efficiently collect and
 Priorities: High (must have) - \* \* _, Medium (nice to have) - _ _, Low (unlikely to have) - _
 
 | Priority | Version | As a ...             | I want to ...                                        | So that I can ...                                           |
-|----------| ------- |----------------------|------------------------------------------------------|-------------------------------------------------------------|
+|----------|---------|----------------------|------------------------------------------------------|-------------------------------------------------------------|
 | \* \* \* | v1.0    | Pharmacist           | Add drugs to track what drugs are available in stock | Reduce manual errors                                        |
 | \* \* \* | v1.0    | Pharmacist           | Remove drugs to track what are no longer in used     | Ensure compliance                                           |
 | \* \* \* | v1.0    | Receptionist         | View a list of products of that category             | Easily obtain an overview of the products                   |
@@ -400,6 +502,7 @@ Priorities: High (must have) - \* \* _, Medium (nice to have) - _ _, Low (unlike
 | \* \*    | v2.0    | System Administrator | Perfrom regular backup of inventory database         | Safeguard against data loss and system failure              |
 | \* \* \* | v2.0    | Receptionist         | Add vendors supplying drugs into the system          | Keep track of what vendors i am working with                |
 | \* \* \* | v2.0    | Receptionist         | View a list of vendors                               | Easily know who to contact if drugs need to be restocked    |
+
 _(More to be added)_
 
 ## Non-Functional Requirements
