@@ -60,15 +60,13 @@ public class CommandParser {
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
     private static final Pattern INDEX_PATTERN = Pattern.compile(
-            "(?<index>\\S+)?"
+            "(?<index>\\S+)"
     );
-  
     private static final Pattern DATE_PATTERN = Pattern.compile(
-            "(?<date>\\S+)?"
+            "(?<date>\\S+)"
     );
-
     private static final Pattern FIND_PATTERN = Pattern.compile(
-            "(?<keyword>\\S+)?"
+            "(?<keyword>\\S+)"
     );
 
     public Command parseCommand(String userCommandLine) {
