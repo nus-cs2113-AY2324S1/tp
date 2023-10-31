@@ -1,28 +1,58 @@
 @startuml
 'https://plantuml.com/class-diagram
-skinparam classAttributeIconSize 0
-hide empty members
-!include style.puml
-skinparam ClassBackgroundColor STORAGE_COLOR
+skinparam classFontColor automatic
 
-Class "{abstract}\nCashflow" as Cashflow
-Class Expense extends Cashflow
-Class Income extends Cashflow
-Class Ui
-Class CashflowList {
-    +addIncome(double, IncomeType, int)
-    +addExpense(double, ExpenseType, int)
+Class "{abstract}\nCashflow" as Cashflow #MistyRose {
+#<u>balance: double = 0
+#amount: double
+#recur: int
+#description: String = null
+
 }
-Class AddCashflowCommand #FFFFFF
+Class Expense #MistyRose extends Cashflow {
+    #type: ExpenseType
+    +Expense(amount: double, type: ExpenseType, recur: int,  description: String)
+    -addExpenseValue()
+}
+Class Income #MistyRose extends Cashflow {
+    +Income(amount: double, type: IncomeType, recur: int,  description: String)
+    #type: IncomeType
+    -addIncomeValue()
+}
+Class Ui  #Cornsilk {
+    +<u>getInstance()
+    +printAddedCashflow(entry: Cashflow)
+}
+Class CashflowList #Cornsilk {
+    +<u>getInstance()
+    +addIncome(amount: double, incometype: IncomeType, recur: int, description: String)
+    +addExpense(amount: double, expensetype: ExpenseType, recur: int, description: String)
+    -addToList(toAdd: Cashflow)
+}
+Class AddCashflowCommand #HoneyDew {
+    #amount: double
+    #incomeType: IncomeType
+    #expenseType: ExpenseType
+    #recur: int
+    #description: String = null
+    +execute()
+}
 
-enum "<<enumeration>>\nExpenseType" as ExpenseType
-enum "<<enumeration>>\nIncomeType" as IncomeType
-
+enum "<<enumeration>>\nExpenseType" as ExpenseType #MintCream {
+DINING, ENTERTAINMENT, SHOPPING, TRAVEL, INSURANCE, NECESSITIES, OTHERS
+}
+enum "<<enumeration>>\nIncomeType" as IncomeType #MintCream{
+SALARY, INVESTMENTS, ALLOWANCE, OTHERS
+}
+hide ExpenseType methods
+hide IncomeType methods
 CashflowList -right-> "1" Ui
 AddCashflowCommand --> "1" CashflowList
 CashflowList --> "*" Cashflow
 CashflowList ..> Income
 CashflowList ..> Expense
 
+hide Circle
+skinparam classAttributeIconSize 0
 
 @enduml
