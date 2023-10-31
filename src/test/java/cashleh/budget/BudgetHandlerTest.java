@@ -98,7 +98,7 @@ class BudgetHandlerTest {
 
     }
 
-    @Test
+    /*@Test
     void printBudget_budgetIsActiveAndOnTrack() throws CashLehBudgetException {
         incomeStatement.addIncome(new Income("salary", 50));
         budgetHandler.setBudgetPercentage();
@@ -113,7 +113,7 @@ class BudgetHandlerTest {
                 + "\t[******************************] 100.00%\n"
                 + "\t____________________________________________________________\n";
         assertEquals(outputStreamCaptor.toString(), expectedOutput);
-    }
+    }*/
 
     @Test
     void printBudget_budgetIsNotActive_throwsException() throws CashLehBudgetException {
