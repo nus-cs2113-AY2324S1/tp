@@ -55,21 +55,19 @@ public class Parser {
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
     private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
     private static final String INGREDIENT_DIVIDER_REGEX = ",";
-    //@@author
+
     /** Add Order Command Handler Patterns*/
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";
-    //@@author
+
     /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-
-    //@@author ziyi105
-    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -365,7 +363,9 @@ public class Parser {
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+
+            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT
+                    + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
 
         String ingredientsListString = matcher.group(0);
@@ -374,7 +374,8 @@ public class Parser {
         try {
             return new BuyIngredientCommand(ingredients, ui, pantry);
         } catch (Exception e) {
-            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
+                    + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
     }
 
