@@ -3,7 +3,7 @@
 mainframe sd ResetBudget
 participant ":BudgetCommand" as BudgetCommand
 participant "<<class>>\nBudget" as Budget
-participant "<<class>>\nUi" as Ui
+participant ":Ui" as Ui
 
 alt spentBudget
     opt initialBudgetExceedBalance

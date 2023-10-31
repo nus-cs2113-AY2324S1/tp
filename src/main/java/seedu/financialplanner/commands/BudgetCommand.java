@@ -9,12 +9,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 
+/**
+ * Represents a command to manage the budget.
+ */
 public class BudgetCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final Ui ui = Ui.getInstance();
     private double budget;
     private String command;
 
+    /**
+     * Constructs a new BudgetCommand and checks if the user input is a valid command.
+     *
+     * @param rawCommand The raw command containing the arguments and parameters given by the user.
+     * @throws FinancialPlannerException If there is an issue with the command provided.
+     */
     public BudgetCommand(RawCommand rawCommand) throws FinancialPlannerException {
         command = rawCommand.args.get(0);
         if (command.equals("delete") || command.equals("reset") || command.equals("view")) {
@@ -33,6 +42,12 @@ public class BudgetCommand extends Command {
         }
     }
 
+    /**
+     * Checks if budget is a positive number and is lower than or equal to total balance.
+     *
+     * @param rawCommand The raw command containing arguments and parameters given by the user.
+     * @throws FinancialPlannerException If there is an issue with budget format.
+     */
     private void validateBudget(RawCommand rawCommand) throws FinancialPlannerException {
         try {
             logger.log(Level.INFO, "Parsing budget as double");
@@ -48,10 +63,16 @@ public class BudgetCommand extends Command {
 
         if (budget > Cashflow.getBalance()) {
             logger.log(Level.WARNING, "Invalid value for budget");
-            throw new FinancialPlannerException("Budget should be lower than total balance.");
+            throw new FinancialPlannerException("Budget should be lower than or equal to total balance.");
         }
     }
 
+    /**
+     * Checks that the command is valid and in the right format.
+     *
+     * @param rawCommand The raw command containing arguments and parameters given by the user.
+     * @throws FinancialPlannerException If there is an issue with the command or format.
+     */
     private void validateCommandFormat(RawCommand rawCommand) throws FinancialPlannerException {
         if (!command.equals("set") && !command.equals("update")) {
             logger.log(Level.WARNING, "Invalid arguments for budget command");
@@ -73,6 +94,9 @@ public class BudgetCommand extends Command {
         }
     }
 
+    /**
+     * Executes the budget command based on the specified operation.
+     */
     @Override
     public void execute() {
         assert command.equals("set") || command.equals("update") || command.equals("delete") ||
