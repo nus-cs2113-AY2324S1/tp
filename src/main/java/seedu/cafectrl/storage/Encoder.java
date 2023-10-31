@@ -24,6 +24,14 @@ public class Encoder {
         return pantryStockInString;
     }
 
+    //@@NaychiMin
+    /**
+     * Encodes a Sales object into a list of strings for storage.
+     * Each string represents an order, including day, dish name, quantity, and total cost.
+     *
+     * @param sales The Sales object to be encoded.
+     * @return An ArrayList of strings representing the encoded sales data.
+     */
     public static ArrayList<String> encodeSales(Sales sales) {
         ArrayList<String> encodedList = new ArrayList<>();
         ArrayList<OrderList> orderLists = sales.getOrderLists();
@@ -44,5 +52,5 @@ public class Encoder {
         }
         return encodedList;
     }
-
+    //@@author
 }

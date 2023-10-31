@@ -43,6 +43,7 @@ public class Storage {
         //return new Pantry(ui);
     }
 
+    //@@NaychiMin
     /**
      * Loads order lists from a text file, decodes it, and returns it as a Sales object.
      *
@@ -64,6 +65,7 @@ public class Storage {
     private void saveOrderList(Sales sales) throws IOException {
         this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
+    //@@author
 
     //@@author ziyi105
     /**
@@ -76,8 +78,7 @@ public class Storage {
     public void saveAll(Menu menu, Sales sales, Pantry pantry) throws IOException {
         saveMenu(menu);
         saveOrderList(sales);
-        // to be uncommented when the following features are implemented
-        //saveMenu(menu);
+        saveMenu(menu);
         savePantryStock(pantry);
     }
 
