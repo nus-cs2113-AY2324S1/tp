@@ -26,7 +26,8 @@ public class AddReminderCommand extends Command {
 
     @Override
     public void execute() {
-        ReminderList.INSTANCE.list.add(new Reminder(type, date));
-        Ui.getInstance().showMessage("Reminder added!");
+        Reminder reminder = new Reminder(type, date);
+        ReminderList.getInstance().list.add(reminder);
+        Ui.getInstance().showMessage("You have added "+reminder);
     }
 }

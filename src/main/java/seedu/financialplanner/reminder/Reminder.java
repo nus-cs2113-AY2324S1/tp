@@ -12,7 +12,8 @@ public class Reminder {
 
     public String toString() {
         String status = isDone ? "Done" : "Not Done";
-        return "Reminder: " + this.type + " | " + this.date + " | " + status;
+        return "Reminder " + System.lineSeparator() + "   Type: " + type + System.lineSeparator()
+                + "   Date: " + date + System.lineSeparator() + "   Status: " + status;
     }
 
     public void markAsDone() {
