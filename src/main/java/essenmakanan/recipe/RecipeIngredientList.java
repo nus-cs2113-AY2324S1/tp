@@ -65,4 +65,15 @@ public class RecipeIngredientList {
     public Ingredient getIngredientByIndex(int index) {
         return ingredients.get(index);
     }
+
+    public boolean ingredientExist(String ingredientName) {
+        String recipeIngredientName;
+        for (Ingredient recipeIngredient : ingredients) {
+            recipeIngredientName = recipeIngredient.getName();
+            if (recipeIngredientName.equals(ingredientName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

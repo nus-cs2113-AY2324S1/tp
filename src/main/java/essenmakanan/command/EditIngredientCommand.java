@@ -23,7 +23,7 @@ public class EditIngredientCommand extends Command {
         String[] splitDetails = this.editDetails.split(" ");
         String ingredientName = splitDetails[0];
 
-        existingIngredient = ingredients.getIngredientByName(ingredientName);
+        existingIngredient = ingredients.getIngredient(ingredientName);
 
         assert existingIngredient.getName().equals(ingredientName)
                 : "Selected ingredient does not have matching name.";

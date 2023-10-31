@@ -25,9 +25,9 @@ public class AddRecipeCommandTest {
         String userInput = "r/bread s/step 1 instructions s/step 2 instructions ";
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
         addRecipeCommand.executeCommand();
-        assertEquals("bread", recipeList.getRecipeByIndex(0).getTitle());
-        String step1 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(0).getDescription();
-        String step2 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(1).getDescription();
+        assertEquals("bread", recipeList.getRecipe(0).getTitle());
+        String step1 = recipeList.getRecipe(0).getRecipeSteps().getStepByIndex(0).getDescription();
+        String step2 = recipeList.getRecipe(0).getRecipeSteps().getStepByIndex(1).getDescription();
         assertEquals("step 1 instructions", step1);
         assertEquals("step 2 instructions", step2);
     }

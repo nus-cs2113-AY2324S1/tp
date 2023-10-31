@@ -23,7 +23,7 @@ public class RecipeList {
 
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
-        assert getRecipeByIndex(recipes.size() - 1).getTitle().equals(recipe.getTitle())
+        assert getRecipe(recipes.size() - 1).getTitle().equals(recipe.getTitle())
                 : "Recipe is not successfully added into the list.";
     }
 
@@ -36,12 +36,12 @@ public class RecipeList {
         recipes.remove(index);
     }
 
-    public Recipe getRecipeByIndex(int index) {
+    public Recipe getRecipe(int index) {
         assert recipeExist(index) : "Index is out of bounds";
         return recipes.get(index);
     }
 
-    public Recipe getRecipeByName(String name) {
+    public Recipe getRecipe(String name) {
         for (Recipe recipe : recipes) {
             if (recipe.getTitle().equals(name)) {
                 return recipe;
@@ -50,7 +50,7 @@ public class RecipeList {
         return null;
     }
 
-    public int getIndexOfRecipeByName(String recipeTitle) {
+    public int getIndexOfRecipe(String recipeTitle) {
         int i = 0;
         for (essenmakanan.recipe.Recipe recipe : recipes) {
             if (recipe.getTitle().equals(recipeTitle)) {
@@ -69,8 +69,6 @@ public class RecipeList {
 
 
     public void listRecipeTitles() {
-        Ui.drawDivider();
-        System.out.println("Here's a list of your recipes!");
         int count = 1;
 
         for (essenmakanan.recipe.Recipe recipe : recipes) {
@@ -107,7 +105,7 @@ public class RecipeList {
         }
     }
 
-    public void viewRecipeByIndex(int index) {
+    public void viewRecipe(int index) {
         Ui.drawDivider();
 
         assert recipeExist(index) : "Index is out of bounds";
@@ -120,13 +118,13 @@ public class RecipeList {
         listRecipeSteps(recipe);
     }
 
-    public void viewRecipeByTitle(String title) {
+    public void viewRecipe(String title) {
         Ui.drawDivider();
         essenmakanan.recipe.Recipe recipe = recipes.stream()
             .filter(recipe1 -> recipe1.getTitle().equals(title))
             .findFirst()
             .orElse(null);
-        assert getRecipeByName(title) == recipe : "Recipe does not exist";
+        assert getRecipe(title) == recipe : "Recipe does not exist";
         listRecipeSteps(recipe);
     }
 
@@ -157,5 +155,9 @@ public class RecipeList {
             }
         }
 
+    }
+
+    public boolean isEmpty() {
+        return recipes.isEmpty();
     }
 }
