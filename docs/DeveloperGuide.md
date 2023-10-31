@@ -41,9 +41,9 @@ Separation of Concerns was applied to ensure the `Ui` is only responsible with o
 ### Adding a Dish
 
 ### List Menu
-A list command can be used to display all the `Dish` objects stored in `Menu`.
+A `list_menu` command can be used to display all the `Dish` objects stored in `Menu`.
 
-The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a list command.
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a list_menu command.
 ![List Menu Execution](images/class/ListMenuCommandClass.png)
 
 ![List Menu Execution](images/sequence/ListMenuCommand_execute.png)
@@ -61,6 +61,34 @@ It then iterates through the `Dish` objects in `Menu` in a "for" loop, using `me
 The `dishName` and `dishPrice` are both access from `Dish` Class using `getName()` and `getPrice()` respectively.
 The data are then packaged nicely in a `leftAlignFormat`, with (indexNum + ". " + dishName," $" + dishPrice) such that
    e.g. (1. Chicken Rice $2.50) is shown.
+
+### Add Order
+A add_order command can be used to add `order` to an `orderList` in `Sales`.
+
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of an add_order command.
+![Add_Order Execution](images/class/AddOrderCommandClass.png)
+
+![Add_order Execution](images/sequence/AddOrderCommand_execute.png)
+
+Figure 1: Execution of add_order command
+
+API: [AddOrderCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+
+When the `execute()` method of AddOrderCommand is invoked in Main, the parsed `order` object is added to the `orderList`.
+
+A `Chef` object is then created to process the order by running `cookDish()`. 
+This method first checks if the order has already been completed by running `order.getIsCompleted()`.
+If the order has not been completed, the `showDeleteMesage()` in the Ui component is triggered to display a message to show the user that the dish is being 'prepared'.
+An ArrayList of Ingredients, ingredientList, is retrieved from the `order` object by `order.getIngredientList()`. 
+This ingredientList is passed into the `pantry` object in `pantry.decreaseIngredientsStock()` to process the ingredients used from the pantry stock.
+The order is then marked as completed by `order.setComplete()`
+
+Returning to the AddOrderCommand, the `order` object is checked to be completed again by running `order.getIsCompleted()`.
+This verifies that the ingredientList has been successfully retrieved and passed into `pantry.decreaseIngredientsStock()` to run without errors.
+After verifying that the order has been completed, the cost of the order is added to the total order by `orderList.addCost()`. 
+
+The total sum of orders in the `orderList` object is retrieved using `orderList.getTotalCost()`.
+This is then passed into Ui using `ui.showTotalCost()` to display a message to the user with the total order cost.
 
 ### List Ingredients
 ![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)

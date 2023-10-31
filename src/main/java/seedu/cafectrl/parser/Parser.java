@@ -122,7 +122,7 @@ public class Parser implements ParserUtil {
             return prepareOrder(menu, arguments, ui, pantry, sales, currentDate);
 
         case NextDayCommand.COMMAND_WORD:
-            return new NextDayCommand(ui, sales, currentDate);
+            return prepareNextDay(ui, sales, currentDate);
 
         case PreviousDayCommand.COMMAND_WORD:
             return preparePreviousDay(ui, currentDate);
