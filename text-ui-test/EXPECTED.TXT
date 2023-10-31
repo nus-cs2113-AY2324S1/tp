@@ -123,8 +123,6 @@ I've deleted the following workout:
 
 Recommended Weight: 66.01599999999999 kg
 
-Recommended Weight: 66.01599999999999 kg
-
 `help` shows help message of the command.
 Existing commands:
 help, exit, editprofile, viewprofile, addmeal, deletemeal, viewmeals, addworkout, deleteworkout, viewworkouts, bmi, save, checkweightrange, findmeal, findworkout

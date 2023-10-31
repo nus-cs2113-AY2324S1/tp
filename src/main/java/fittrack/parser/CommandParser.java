@@ -60,15 +60,13 @@ public class CommandParser {
             "(?<name>.+)\\s+c/(?<calories>\\S+)(\\s+d/(?<date>\\S+))?"
     );
     private static final Pattern INDEX_PATTERN = Pattern.compile(
-            "(?<index>\\S+)?"
+            "(?<index>\\S+)"
     );
-  
     private static final Pattern DATE_PATTERN = Pattern.compile(
-            "(?<date>\\S+)?"
+            "(?<date>\\S+)"
     );
-
     private static final Pattern FIND_PATTERN = Pattern.compile(
-            "(?<keyword>\\S+)?"
+            "(?<keyword>\\S+)"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -251,7 +249,7 @@ public class CommandParser {
         }
     }
 
-    public Date parseDate(String date) throws PatternMatchFailException, NumberFormatException {
+    public Date parseDate(String date) throws PatternMatchFailException {
         final Matcher matcher = DATE_PATTERN.matcher(date);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
@@ -261,8 +259,8 @@ public class CommandParser {
 
         try {
             return new Date(dateString);
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException();
+        } catch (DateTimeParseException e) {
+            throw new PatternMatchFailException();
         }
     }
 

@@ -30,7 +30,6 @@ deletemeal 1
 deleteworkout1
 deleteworkout 1
 checkweightrange
-checkweightrange 1
 help
 help editprofile
 help viewprofile
