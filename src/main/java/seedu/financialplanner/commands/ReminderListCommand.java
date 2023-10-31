@@ -11,6 +11,6 @@ public class ReminderListCommand extends Command{
         Ui ui = Ui.getInstance();
         ReminderList reminderList = ReminderList.getInstance();
         ui.showMessage("Here is your reminder list:");
-        ui.showMessage(ReminderList.getInstance().list.toString());
+        ui.showMessage(reminderList.list.toString());
     }
 }

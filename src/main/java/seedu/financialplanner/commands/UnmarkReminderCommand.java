@@ -5,7 +5,7 @@ public class UnmarkReminderCommand extends Command{
     private final int index;
     public UnmarkReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
-        if(rawCommand.args.size() == 1) {
+        if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
         } else {
             throw new IllegalArgumentException("Incorrect arguments.");
@@ -19,7 +19,7 @@ public class UnmarkReminderCommand extends Command{
         if (index == 0) {
             throw new IllegalArgumentException("Index must be within the list");
         }
-        if( index > ReminderList.getInstance().list.size()+1){
+        if (index > ReminderList.getInstance().list.size()+1){
             throw new IllegalArgumentException("Index exceed the list size");
         }
         rawCommand.extraArgs.remove("i");
