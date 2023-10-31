@@ -5,7 +5,7 @@ import seedu.duke.financialrecords.Expense;
 
 import java.util.ArrayList;
 
-public class EditExpenseCommand extends Commands {
+public class EditExpenseCommand extends Command {
     ArrayList<Expense> expenses;
     String fullCommand;
     int index;

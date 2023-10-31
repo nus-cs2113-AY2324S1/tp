@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * The `DeleteExpenseCommand` class represents a command to delete an expense record from a list of expenses.
  * It extends the `Commands` class and is used to manage expense records in the application.
  */
-public class DeleteExpenseCommand extends Commands {
+public class DeleteExpenseCommand extends Command {
     /**
      * Constructs a `DeleteExpenseCommand` object. This class does not have any specific constructor logic.
      */

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * along with the total income, total expenses, and the total balance.
  * It extends the `Commands` class and is used to provide a summary of financial records to the user.
  */
-public class ListCommand extends Commands {
+public class ListCommand extends Command {
     private ArrayList<Income> incomes;
     private ArrayList<Expense> expenses;
     private Ui ui;

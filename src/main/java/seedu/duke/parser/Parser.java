@@ -85,6 +85,12 @@ public class Parser {
             resultCommand = "edit_income";
         } else if (commandLowerCase.startsWith("edit expense")) {
             resultCommand = "edit_expense";
+        } else if (commandLowerCase.equals("list currencies")) {
+            resultCommand = "list_currencies";
+        } else if (commandLowerCase.equals("list exchange rates")) {
+            resultCommand = "list_exchange_rates";
+        } else if (commandLowerCase.startsWith("update exchange rate")) {
+            resultCommand = "update_exchange_rate";
         } else {
             resultCommand = "invalid";
         }

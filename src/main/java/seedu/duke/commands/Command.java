@@ -5,7 +5,7 @@ package seedu.duke.commands;
  * This class serves as a blueprint for all specific command classes in the application
  *
  */
-public abstract class Commands {
+public abstract class Command {
 
     /**
      * This method is used to execute the command.

@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.KaChinnnngException;
+import seedu.duke.financialrecords.ExchangeRateManager;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.financialrecords.Food;
 import seedu.duke.financialrecords.Transport;
@@ -56,7 +57,17 @@ public class ExpenseParser {
         double expenseAmount;
 
         try {
-            expenseAmount = Double.parseDouble(expenseAmountString);
+            if (!isOtherCurrency(expenseAmountString)) {
+                expenseAmount = Double.parseDouble(expenseAmountString);
+            } else {
+                // Convert Currency to SGD
+                ExchangeRateManager exchangeRateManager = ExchangeRateManager.getInstance();
+                String[] tokens = expenseAmountString.split(" ");
+                String currency = tokens[0].trim();
+                expenseAmount = Double.parseDouble(tokens[1].trim());
+                expenseAmount = exchangeRateManager.convertCurrency(currency, expenseAmount);
+                exchangeRateManager.showCurrencyConversionMessage(currency);
+            }
         } catch (NumberFormatException e) {
             throw new KaChinnnngException("Please enter a valid amount");
         }
@@ -116,5 +127,9 @@ public class ExpenseParser {
         } catch (NumberFormatException e) {
             throw new KaChinnnngException("Please enter a valid index");
         }
+    }
+
+    private static boolean isOtherCurrency(String amount) {
+        return (amount.split(" ").length > 1);
     }
 }

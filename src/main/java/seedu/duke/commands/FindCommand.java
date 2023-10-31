@@ -25,7 +25,7 @@ import java.io.File;
  * This command supports searching by a specific date or by a month. If a date isn't provided, it will not be used
  * as a filter. Similarly, if the category or description isn't provided, they won't be used as filters.
  */
-public class FindCommand extends Commands {
+public class FindCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
     private static final List<String> VALID_EXPENSE_CAT = Arrays.asList("food", "transport", "utilities");

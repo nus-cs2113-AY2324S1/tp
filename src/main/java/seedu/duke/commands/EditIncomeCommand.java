@@ -5,7 +5,7 @@ import seedu.duke.financialrecords.Income;
 import java.util.ArrayList;
 
 
-public class EditIncomeCommand extends Commands {
+public class EditIncomeCommand extends Command {
 
     ArrayList<Income> incomes;
     String fullCommand;

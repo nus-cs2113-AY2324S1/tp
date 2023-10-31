@@ -8,10 +8,9 @@ import seedu.duke.financialrecords.Expense;
  * This is the class that manages the creation of new expense
  */
 
-public class ExpenseManager extends Commands{
+public class ExpenseManager extends Command {
     private final String details;
     private Expense newExpense;
-
     public ExpenseManager(String details) {
         this.details = details;
     }
@@ -21,6 +20,7 @@ public class ExpenseManager extends Commands{
      *
      * @throws KaChinnnngException
      */
+
     @Override
     public void execute() throws KaChinnnngException {
         HashMap<String, String> expenseFields = extractExpenseFields(details);

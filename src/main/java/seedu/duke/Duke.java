@@ -5,20 +5,24 @@ import seedu.duke.commands.Balance;
 import seedu.duke.commands.ClearAll;
 import seedu.duke.commands.ClearExpenses;
 import seedu.duke.commands.ClearIncomes;
+import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteExpenseCommand;
 import seedu.duke.commands.DeleteIncomeCommand;
+import seedu.duke.commands.EditExpenseCommand;
+import seedu.duke.commands.EditIncomeCommand;
 import seedu.duke.commands.ExpenseLister;
 import seedu.duke.commands.ExpenseManager;
 import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.EditExpenseCommand;
-import seedu.duke.commands.EditIncomeCommand;
 import seedu.duke.commands.IncomeLister;
 import seedu.duke.commands.IncomeManager;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.UpdateExchangeRateCommand;
 import seedu.duke.commands.UsageInstructions;
+import seedu.duke.financialrecords.ExchangeRateManager;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
+import seedu.duke.storage.ExchangeRateFileHandler;
 import seedu.duke.storage.GetFromTxt;
 import seedu.duke.storage.SaveToTxt;
 import seedu.duke.ui.Ui;
@@ -33,12 +37,14 @@ import java.util.ArrayList;
  * It contains the main method that runs the program.
  */
 public class Duke {
-    private final Ui ui;
-    private final ArrayList<Income> incomes;
-    private final ArrayList<Expense> expenses;
-    private final String storagePath;
-    private final SaveToTxt save;
-    private final GetFromTxt get;
+    private Ui ui;
+    private ArrayList<Income> incomes;
+    private ArrayList<Expense> expenses;
+    private String storagePath;
+    private SaveToTxt save;
+    private GetFromTxt get;
+    private ExchangeRateManager exchangeRateManager;
+    private ExchangeRateFileHandler exchangeRateFileHandler;
 
     public Duke() {
         ui = new Ui();
@@ -47,6 +53,8 @@ public class Duke {
         storagePath = "KaChinnnngggg.txt";
         save = new SaveToTxt(storagePath);
         get = new GetFromTxt(storagePath);
+        exchangeRateManager = ExchangeRateManager.getInstance();
+        exchangeRateFileHandler = new ExchangeRateFileHandler("./data/ExchangeRates.txt");
     }
 
     /**
@@ -78,8 +86,13 @@ public class Duke {
     protected void loadData() {
         try {
             get.getFromTextFile(incomes, expenses);
+            exchangeRateFileHandler.load();
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
+        } catch (KaChinnnngException e) {
+            ui.showLineDivider();
+            System.out.println(e.getMessage());
+            ui.showLineDivider();
         }
     }
 
@@ -161,8 +174,7 @@ public class Duke {
         case "find":
             try {
                 String[] parsedParameters = FindParser.parseFindCommand(fullCommand);
-                FindCommand findCommand = new FindCommand(
-                            incomes, expenses,
+                FindCommand findCommand = new FindCommand(incomes, expenses,
                             parsedParameters[0], parsedParameters[1],
                             parsedParameters[2], parsedParameters[3], ui);
                 findCommand.execute();
@@ -202,7 +214,19 @@ public class Duke {
             new EditExpenseCommand(expenses, fullCommand).execute();
             Ui.showLineDivider();
             break;
+        case "list_currencies":
+            exchangeRateManager.showSupportedCurrencies();
+            break;
 
+        case "list_exchange_rates":
+            exchangeRateManager.showExchangeRates();
+            break;
+        case "update_exchange_rate":
+            Ui.showLineDivider();
+            Command c = new UpdateExchangeRateCommand(fullCommand, exchangeRateFileHandler);
+            c.execute();
+            Ui.showLineDivider();
+            break;
         default:
             throw new KaChinnnngException("Invalid command. Please try again."
                     + "\nType 'help' to see the list of commands available.");
