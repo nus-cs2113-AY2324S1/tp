@@ -15,6 +15,7 @@ public abstract class Transaction {
     private double amount;
     private LocalDate date = null;
     private Categories category = null;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /*
      * Constructor for Transaction - set date to current date if not specified

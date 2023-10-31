@@ -51,9 +51,6 @@ public class Parser {
     private static final String FILTER_EXPENSE = "filterExpense";
     private static final String FILTER_INCOME = "filterIncome";
     private static final String FILTER = "filter";
-
-
-
     private static final String AMT_KEYWORD = "/amt";
     private static final String DATE_KEYWORD = "/date";
     private static final String CAT_KEYWORD = "/cat";
@@ -229,7 +226,7 @@ public class Parser {
             format = new String[]{FILTER_EXPENSE, "/amt:optional", "/date:optional", "/cat:optional"};
             break;
         case FILTER_INCOME:
-            format = new String[]{FILTER_INCOME, "/amt:optional","/date:optional", "/cat:optional"};
+            format = new String[]{FILTER_INCOME, "/amt:optional", "/date:optional", "/cat:optional"};
             break;
         case FILTER:
             format = new String[]{FILTER, "/amt:optional", "/date:optional", "/cat:optional"};
@@ -239,9 +236,14 @@ public class Parser {
         }
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String descriptionString = inputDetails.get(transactionType);
-        String amountString = inputDetails.get("/amt");
-        String dateString = inputDetails.get("/date");
-        String categoryString = inputDetails.get("/cat");
+        //remove scenarios where there is typo in input which might lead to it being recognised as a description,
+        // for instance /cat is written as cat/
+        descriptionString = descriptionString.replaceAll("(?i)\\b(amt|date|cat)\\b", "");
+        descriptionString = descriptionString.replaceAll("[^a-zA-Z0-9\\s]", "");
+        descriptionString = descriptionString.trim();
+        String amountString = inputDetails.get(AMT_KEYWORD);
+        String dateString = inputDetails.get(DATE_KEYWORD);
+        String categoryString = inputDetails.get(CAT_KEYWORD);
 
         if ((descriptionString == null || descriptionString.isEmpty()) &&
                 (amountString == null || amountString.isEmpty()) &&
@@ -268,26 +270,39 @@ public class Parser {
                 throw new CashLehDateParsingException();
             }
         }
-        Categories parsedCategory = null;
+        Categories parsedCategory = parseCategory(transactionType, categoryString);
+
+        return new FindParser(descriptionString, parsedAmount, parsedDate, parsedCategory);
+    }
+
+    /**
+     * Parses the category string based on the transaction type.
+     * @param transactionType The type of transaction (FILTER_EXPENSE, FILTER_INCOME, FILTER).
+     * @param categoryString  The category string to be parsed.
+     * @return The parsed category, or null if the category string is empty or not provided.
+     */
+    private Categories parseCategory(String transactionType, String categoryString) {
         if (categoryString != null && !categoryString.isEmpty()) {
             if (transactionType.equals(FILTER_EXPENSE)) {
-                parsedCategory = ExpenseCatParser.parse(categoryString);
+                return ExpenseCatParser.parse(categoryString);
             } else if (transactionType.equals(FILTER_INCOME)) {
-                parsedCategory = IncomeCatParser.parse(categoryString);
+                return IncomeCatParser.parse(categoryString);
             } else {
                 // Try to parse as ExpenseCategory first.
-                parsedCategory = ExpenseCatParser.parse(categoryString);
+                Categories parsedCategory = ExpenseCatParser.parse(categoryString);
                 // Even if category was meant to be passed in as an incomeCategory,
                 // it will have a result of OTHERS after being parsed via ExpenseCatParser,
                 // thus parse once more using IncomeCatParser
                 boolean checkCategory = parsedCategory.equals(ExpenseCategory.valueOf("OTHERS"));
                 if (checkCategory) {
                     // Try to parse as IncomeCategory.
-                    parsedCategory = IncomeCatParser.parse(categoryString);
+                    return IncomeCatParser.parse(categoryString);
                 }
+                return parsedCategory;
             }
+        } else {
+            return null;
         }
-        return new FindParser(descriptionString, parsedAmount, parsedDate, parsedCategory);
     }
 
     private Budget getBudget(String input) throws CashLehParsingException {
