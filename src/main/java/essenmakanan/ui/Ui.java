@@ -33,10 +33,14 @@ public class Ui {
     public static void showRecipeCommands() {
         System.out.println("RECIPE");
         System.out.println("\t- View all recipes. [view r]\n"
+                + "\t- Start a recipe to see if you are missing any ingredients.\n"
+                + "\t\t [start RECIPE_TITLE] or [start RECIPE_ID]\n"
                 + "\t- Add recipe. [add r/RECIPE_TITLE s/STEP1 s/STEP2]\n"
                 + "\t- View a recipe. [view r/RECIPE_TITLE]\n"
                 + "\t- Edit a recipe. [edit r/RECIPE_TITLE n/NEW_TITLE s/STEP_TO_EDIT,NEW_STEP]\n"
-                + "\t- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]\n");
+                + "\t- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]\n"
+                + "\t- Filter recipes based on ingredients. [filter recipe i/INGREDIENTNAME [i/...] ]\n"
+        );
     }
 
     public static void showIngredientCommands() {
@@ -44,6 +48,7 @@ public class Ui {
         System.out.println("\t- View all ingredients. [view i]\n"
                 + "\t- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]\n"
                 + "\t\t" + validIngredientUnits() + "\n"
+                + "\t- View an Ingredient. [view i/INGREDIENT_NAME] or [view i/INGREDIENT_ID]\n"
                 + "\t- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME]"
                 + " [q/NEW_QUANTITY] [u/NEW_UNIT]\n"
                 + "\t- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]\n");
