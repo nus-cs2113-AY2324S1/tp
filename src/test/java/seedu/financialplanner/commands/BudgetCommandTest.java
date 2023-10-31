@@ -116,7 +116,7 @@ public class BudgetCommandTest {
         try {
             BudgetCommand testBudgetExceedBalance = new BudgetCommand(Parser.parseRawCommand("budget set /b 500"));
         } catch (FinancialPlannerException e) {
-            assertEquals("Budget should be lower than total balance.", e.getMessage());
+            assertEquals("Budget should be lower than or equal to total balance.", e.getMessage());
         }
     }
 }

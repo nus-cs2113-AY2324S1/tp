@@ -9,10 +9,12 @@ participant "<<class>>\nVisualizer"
 
 activate "<<class>>\nVisualizer"
 
-alt chartType == "pie"
-    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayPieChart(cashflowList)
-else chartType == "bar"
-    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayBarChart(cashflowList)
+alt chart == "pie"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayPieChart(cashflowList, type)
+else chart == "bar"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayBarChart(cashflowList, type)
+else chart == "radar"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayRadarChart(cashflowList, type)
 end
 
 hide footbox

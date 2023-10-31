@@ -7,14 +7,13 @@ import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.cashflow.Income;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Categorizer {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
-    public static Map<String, Double> sortType(CashflowList cashflowList, String type)
+    public static HashMap<String, Double> sortType(CashflowList cashflowList, String type)
             throws FinancialPlannerException {
         switch (type) {
         case "expense":
@@ -28,8 +27,8 @@ public class Categorizer {
         }
     }
 
-    public static Map<String, Double> sortExpenses(CashflowList cashflowList) {
-        Map<String, Double> expensesByCat = new HashMap<>();
+    public static HashMap<String, Double> sortExpenses(CashflowList cashflowList) {
+        HashMap<String, Double> expensesByCat = new HashMap<>();
         for (Cashflow e: cashflowList.list) {
             if (e instanceof Expense) {
                 String key = e.getExpenseType().toString().toLowerCase();
@@ -41,8 +40,8 @@ public class Categorizer {
         return expensesByCat;
     }
 
-    public static Map<String, Double> sortIncome(CashflowList cashflowList) {
-        Map<String, Double> incomeByCat = new HashMap<>();
+    public static HashMap<String, Double> sortIncome(CashflowList cashflowList) {
+        HashMap<String, Double> incomeByCat = new HashMap<>();
         for (Cashflow e: cashflowList.list) {
             if (e instanceof Income) {
                 String key = e.getIncomeType().toString().toLowerCase();

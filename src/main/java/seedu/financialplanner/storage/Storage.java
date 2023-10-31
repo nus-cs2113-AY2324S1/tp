@@ -8,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 
+/**
+ * Represents the saving and loading of data.
+ */
 public class Storage {
     private static Storage storage = null;
     private final Path path = Paths.get("data");

@@ -25,19 +25,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Represents the loading of data from storage.
+ */
 public abstract class LoadData {
     private static final String FILE_PATH = "data/watchlist.json";
     private static final CashflowList cashflowList = CashflowList.getInstance();
     private static final Ui ui = Ui.getInstance();
 
 
+    /**
+     * Loads existing data from the storage file.
+     *
+     * @param filePath The file where the data is stored.
+     * @param date The current date.
+     * @throws FinancialPlannerException If there is an issue loading data from storage.
+     */
     public static void load(String filePath, LocalDate date) throws FinancialPlannerException {
         try {
             Scanner inputFile = new Scanner(new FileReader(filePath));
             String line;
             ui.showMessage("Loading existing file...");
 
-            while(inputFile.hasNext()) {
+            while (inputFile.hasNext()) {
                 line = inputFile.nextLine();
                 String[] split = line.split("\\|");
                 String type = split[0].trim();
@@ -148,8 +158,14 @@ public abstract class LoadData {
     }
 
     private static void loadBudget(String[] split) throws IllegalArgumentException {
-        double initial = Double.parseDouble(split[1].trim());
-        double current = Double.parseDouble(split[2].trim());
+        double initial;
+        double current;
+        try {
+            initial = Double.parseDouble(split[1].trim());
+            current = Double.parseDouble(split[2].trim());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Error parsing budget values.");
+        }
         if (initial == 0 && current == 0) {
             return;
         }
@@ -162,7 +178,11 @@ public abstract class LoadData {
         if (initial < current) {
             throw new IllegalArgumentException("Current budget exceeds initial budget");
         }
-        Budget.load(initial, current);
+        LocalDate date = LocalDate.parse(split[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (LocalDate.now().isBefore(date)) {
+            throw new IllegalArgumentException("Current date is before saved date");
+        }
+        Budget.load(initial, current, date);
     }
 
     private static boolean createNewFile() {
@@ -257,6 +277,7 @@ public abstract class LoadData {
         Ui ui = Ui.getInstance();
         Gson gson = new Gson();
         HashMap<String, Stock> stocksData = new HashMap<>();
+        ui.showMessage("Loading existing watchlist..");
         try {
             JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
             stocksData = gson.fromJson(reader, new TypeToken<HashMap<String,Stock>>(){}.getType());

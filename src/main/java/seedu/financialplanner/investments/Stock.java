@@ -51,6 +51,10 @@ public class Stock {
         logger.log(Level.INFO, "Requesting API for stock info");
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                throw new FinancialPlannerException("API might be down at the moment...");
+            }
+
             Object obj = new JSONParser().parse(response.body());
 
             JSONObject jsonObject = (JSONObject) obj;
@@ -67,6 +71,11 @@ public class Stock {
             // TODO: testing
             if (!symbolFound.equals(symbol)) {
                 throw new FinancialPlannerException("Stock not found");
+            }
+
+            String region = (String) stock.get("4. region");
+            if (!region.equals("United States")) {
+                throw new FinancialPlannerException("Only US stocks are available due to free nature of API :(");
             }
 
             assert stock.get("2. name") != null;
