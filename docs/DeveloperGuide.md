@@ -163,6 +163,9 @@ and the keyword "panadol."
 `find /d 12/03/2026` - This command instructs the program to search for drugs in the inventory based on the expiry date
 criteria and the keyword "12/03/2026."
 
+`find /s PARC3189` - This command instructs the program to search for drugs in the inventory based on the serial number
+criteria and the keyword "PARC3189."
+
 2. **Method Execution:** The `execute()` method within the "FindCommand" class is called. It takes the provided keyword
    and criterion as input.
 

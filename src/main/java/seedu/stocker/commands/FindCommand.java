@@ -24,10 +24,11 @@ public class FindCommand extends Command {
             COMMAND_WORD + " /d" + ": Finds drug in inventory using date." +
             System.lineSeparator() +
             "Example: " + COMMAND_WORD + " /d panadol" +
+            System.lineSeparator() +
+            System.lineSeparator() +
             COMMAND_WORD + " /s" + ": Finds drug in inventory using serial number." +
             System.lineSeparator() +
-            "Example: " + COMMAND_WORD + " /s ABC123" +
-            System.lineSeparator();
+            "Example: " + COMMAND_WORD + " /s ABC123";
 
     /**
      * Success message displayed after successfully finding drugs in the inventory.
