@@ -8,8 +8,10 @@ import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.storage.IngredientStorage;
 import essenmakanan.ui.Ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 //import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ public class EssenMakanan {
     private RecipeList recipes;
     private IngredientList ingredients;
     private Parser parser;
+    private IngredientStorage ingredientStorage;
 
     private Logger logger = Logger.getLogger("app log");
 
@@ -44,12 +47,19 @@ public class EssenMakanan {
                 exception.handleException();
             }
         } while (!ExitCommand.isExitCommand(command));
+
+        try {
+            ingredientStorage.saveData(ingredients.getIngredients());
+        } catch (IOException exception) {
+            Ui.handleIOException(exception);
+        }
     }
 
     public void setup() {
         recipes = new RecipeList();
-        ingredients = new IngredientList();
         parser = new Parser();
+        ingredientStorage = new IngredientStorage();
+        ingredients = new IngredientList(ingredientStorage.restoreSavedData());
     }
 
     public void start() {

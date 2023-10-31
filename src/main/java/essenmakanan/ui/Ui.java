@@ -4,6 +4,8 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.RecipeList;
 
+import java.io.IOException;
+
 public class Ui {
 
     public static void start() {
@@ -126,5 +128,10 @@ public class Ui {
         System.out.println("You have successfully edited the recipe steps\nfrom: " + oldSteps +
                 "\nto: " + newSteps);
         drawDivider();
+    }
+
+    public static void handleIOException(IOException exception) {
+        System.out.println("Unable to save data");
+        System.out.println(exception.getMessage());
     }
 }

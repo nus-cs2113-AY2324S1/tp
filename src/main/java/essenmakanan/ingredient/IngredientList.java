@@ -13,6 +13,10 @@ public class IngredientList {
         ingredients = new ArrayList<>();
     }
 
+    public IngredientList(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }

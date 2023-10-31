@@ -6,7 +6,7 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
-public class AddIngredientCommand extends Command{
+public class AddIngredientCommand extends Command {
     private String toAdd;
     private IngredientList ingredients;
 
@@ -36,5 +36,6 @@ public class AddIngredientCommand extends Command{
         }
 
     }
+
 }
 
