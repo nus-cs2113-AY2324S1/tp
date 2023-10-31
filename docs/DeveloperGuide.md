@@ -115,6 +115,39 @@ From the expenseStatement and incomeStatement, the financialStatement is constru
 **Step 4**\
 Execution of the FilterTransaction class calls method findTransaction(), which prints expenses and incomes that match the provided criterion
 
+### File Storage
+
+The FileStorage class in the CashLeh? application facilitates the reading and writing of financial transaction data to and from a file. It simplifies the process of managing user data, making it easily accessible and modifiable through the following methods:
+
+#### Reading Data
+![](./images/readFromFile.png)
+
+**Step 1**\
+The `readFromFile` method checks if the specified file exists. If not, it creates an empty file with the user's name as the file path
+
+**Step 2**\
+After ensuring the file exists, the method parses the data by reading each line from the file. It distinguishes between income and expense transactions based on a type identifier
+
+**Step 3**\
+For each transaction line, the method validates the format. It checks if essential details like transaction type, description, amount, and date are present. If any information is missing or the format is corrupted, a `CashLehFileCorruptedException` is thrown
+
+**Step 4**\
+Valid transactions are used to create `Income` or `Expense` objects, depending on their type. These objects are added to the provided `IncomeStatement` and `ExpenseStatement` to populate the financial data.
+
+#### Writing Data
+![](./images/writeToFile.png)
+
+**Step 1**\
+The `writeToFile` method opens the file corresponding to the user's name  and prepares to write the financial data into the file
+
+**Step 2**\
+The method iterates over the transactions stored in the `IncomeStatement` and `ExpenseStatement` objects to collect the data
+
+**Step 3**\
+For each transaction, the method writes data in a specific format. This includes the type identifier ('I' for income and 'E' for expenses) and transaction details, ensuring structured and organized data for future retrieval
+
+**Step 4**\
+If errors occur during the write process, such as file writing issues or issues with regards to obtaining the transaction information, the method throws a `CashLehWriteToFileException`
 
 ## Product scope
 ### Target user profile
