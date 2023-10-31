@@ -23,7 +23,7 @@ public class ClearExpenses {
     /**
      * Clears all expenses from the list and prints a message to confirm the action.
      */
-    public void clearAllIncomes(){
+    public void clearAllExpenses(){
         expenses.clear();
         System.out.println("You have cleared the expense list");
     }
