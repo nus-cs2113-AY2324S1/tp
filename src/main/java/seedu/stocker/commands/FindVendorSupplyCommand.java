@@ -48,7 +48,8 @@ public class FindVendorSupplyCommand extends Command {
         if (supplyingVendors.isEmpty()) {
             return new CommandResult<>("No vendors supply the drug: " + drugName);
         } else {
-            return new CommandResult<>("Vendors supplying the drug " + drugName + ": " + String.join(", ", supplyingVendors));
+            return new CommandResult<>("Vendors supplying the drug " + drugName + ": "
+                    + String.join(", ", supplyingVendors));
         }
     }
 

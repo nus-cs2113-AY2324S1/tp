@@ -4,7 +4,32 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.stocker.commands.*;
+import seedu.stocker.commands.AddCommand;
+import seedu.stocker.commands.Command;
+import seedu.stocker.commands.DeleteCommand;
+import seedu.stocker.commands.ExitCommand;
+import seedu.stocker.commands.FindCommand;
+import seedu.stocker.commands.HelpCommand;
+import seedu.stocker.commands.IncorrectCommand;
+import seedu.stocker.commands.ListCommand;
+import seedu.stocker.commands.LoginCommand;
+import seedu.stocker.commands.RegisterCommand;
+import seedu.stocker.commands.SaveCommand;
+import seedu.stocker.commands.AddVendorCommand;
+import seedu.stocker.commands.ShowStockLevelCommand;
+import seedu.stocker.commands.ViewCartCommand;
+import seedu.stocker.commands.AddToCartCommand;
+import seedu.stocker.commands.CheckOutCommand;
+import seedu.stocker.commands.ListVendorCommand;
+import seedu.stocker.commands.SetThresholdCommand;
+import seedu.stocker.commands.ListThresholdCommand;
+import seedu.stocker.commands.AddDescriptionCommand;
+import seedu.stocker.commands.GetDescriptionCommand;
+import seedu.stocker.commands.ListDescriptionsCommand;
+import seedu.stocker.commands.AddVendorSupplyCommand;
+import seedu.stocker.commands.FindVendorSupplyCommand;
+import seedu.stocker.commands.ListVendorSupplyCommand;
+
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -47,7 +72,7 @@ public class Parser {
         case AddVendorSupplyCommand.COMMAND_WORD:
             return prepareAddVendorSupplyCommand(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD:
             return new DeleteCommand(arguments);
 
         case CheckOutCommand.COMMAND_WORD:
@@ -96,7 +121,7 @@ public class Parser {
             return new ListVendorSupplyCommand(arguments);
 
         case FindVendorSupplyCommand.COMMAND_WORD:
-             return new FindVendorSupplyCommand(arguments);
+            return new FindVendorSupplyCommand(arguments);
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
