@@ -10,19 +10,19 @@ participant "<<class>>\nUi" as Ui
 AddCashflowCommand -> CashflowList: getInstance()
 CashflowList -> Ui: getInstance()
 alt income
-    AddCashflowCommand -> CashflowList: addIncome(amount, incomeType, recur)
+    AddCashflowCommand -> CashflowList: addIncome(amount, incomeType, recur, description)
     create Income
-    CashflowList -> Income: Income(value, type, recur)
+    CashflowList -> Income: Income(value, type, recur, description)
     Income -> Income: addIncomeValue()
-    CashflowList -> CashflowList: add(toAdd)
+    CashflowList -> CashflowList: addToList(toAdd)
     CashflowList -> Ui: printAddedCashflow(toAdd)
 
 else expense
-    AddCashflowCommand -> CashflowList: addExpense(amount, incomeType, recur)
+    AddCashflowCommand -> CashflowList: addExpense(amount, incomeType, recur, description)
     create Expense
-    CashflowList -> Expense: Expense(value, type, recur)
+    CashflowList -> Expense: Expense(value, type, recur, description)
     Expense -> Expense: addExpenseValue()
-    CashflowList -> CashflowList: add(toAdd)
+    CashflowList -> CashflowList: addToList(toAdd)
     CashflowList -> Ui: printAddedCashflow(toAdd)
 else invalid command
 end
