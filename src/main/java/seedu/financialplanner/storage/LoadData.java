@@ -257,6 +257,7 @@ public abstract class LoadData {
         Ui ui = Ui.getInstance();
         Gson gson = new Gson();
         HashMap<String, Stock> stocksData = new HashMap<>();
+        ui.showMessage("Loading existing watchlist..");
         try {
             JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
             stocksData = gson.fromJson(reader, new TypeToken<HashMap<String,Stock>>(){}.getType());

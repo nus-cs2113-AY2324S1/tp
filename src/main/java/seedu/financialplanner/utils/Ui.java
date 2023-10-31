@@ -204,4 +204,8 @@ public class Ui {
             showMessage("Unknown command");
         }
     }
+
+    public void printEmptyCashFlow(String type) {
+        showMessage(StringUtils.capitalize(type) + " is empty... Nothing to visualize");
+    }
 }

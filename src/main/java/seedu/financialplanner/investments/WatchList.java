@@ -92,22 +92,30 @@ public class WatchList {
         logger.log(Level.INFO, "Requesting API endpoint FMP");
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            // System.out.println(response.body());
+            if(response.statusCode() != 200) {
+                throw new FinancialPlannerException("API might be down at the moment...");
+            }
             obj = new JSONParser().parse(response.body());
+            extractWatchlistInfoFromJSONArray((JSONArray) obj);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Cant request API endpoint");
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, "IO exception when sending request or receiving response");
+            throw new FinancialPlannerException("Is your internet down?");
         } catch (InterruptedException e) {
             logger.log(Level.SEVERE, "Interrupted");
-            throw new RuntimeException(e);
+            throw new FinancialPlannerException("Request to API was interrupted");
         } catch (ParseException e) {
             logger.log(Level.SEVERE, "Could not parse to JSON");
-            throw new RuntimeException(e);
+            throw new FinancialPlannerException("Could not parse to JSON format");
+        } catch (ClassCastException e) {
+            logger.log(Level.SEVERE, "Did not receive object of class JSON Object");
+            throw new FinancialPlannerException("Something went wrong when fetching API. Please try again");
         }
-        extractWatchlistInfoFromJSONArray((JSONArray) obj);
     }
 
     public void extractWatchlistInfoFromJSONArray(JSONArray jsonstocks) throws FinancialPlannerException {
+        if (jsonstocks == null) {
+            throw new FinancialPlannerException("Incorrect API Response Received. Please try again");
+        }
         if (jsonstocks.isEmpty()) {
             return;
         }
