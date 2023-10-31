@@ -190,7 +190,7 @@ public class Duke {
             new ClearAll(incomes, expenses).clearAllIncomeAndExpense();
             Ui.showLineDivider();
             break;
-            
+
         case "edit_income":
             Ui.showLineDivider();
             new EditIncomeCommand(incomes, fullCommand).execute();

@@ -8,7 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DukeTest {
 
@@ -43,12 +45,14 @@ class DukeTest {
 
     @Test
     void executeCommand_validCommand_noExceptionThrown() {
-        assertThrows(KaChinnnngException.class, () -> duke.executeCommand("income /de Salary /date 12/10/2023 /amt 5000.00"));
+        assertThrows(KaChinnnngException.class, () ->
+                duke.executeCommand("income /de Salary /date 12/10/2023 /amt 5000.00"));
     }
 
     @Test
     void executeCommand_invalidCommand_exceptionThrown() {
-        assertThrows(KaChinnnngException.class, () -> duke.executeCommand("income /de Salary /date 12/10/2023 /amt 5000.00"));
+        assertThrows(KaChinnnngException.class, () ->
+                duke.executeCommand("income /de Salary /date 12/10/2023 /amt 5000.00"));
     }
 
     @Test
@@ -59,7 +63,7 @@ class DukeTest {
     }
 
     @Test
-    void executeCommand_addIncome_invalidIncome_exceptionThrown() {
+    void addIncome_invalidIncome_exception() {
         assertThrows(KaChinnnngException.class, () ->
                 duke.executeCommand("add income /de Bonus /date 01/10/2024 /amt 1000.00"));
     }
@@ -73,7 +77,7 @@ class DukeTest {
     }
 
     @Test
-    void executeCommand_addExpense_invalidExpense_exceptionThrown() {
+    void addExpense_invalidExpense_exception() {
         assertThrows(KaChinnnngException.class, () -> duke.executeCommand("add expense /cat food /type lunch" +
                 " /de chicken sandwich /date 01/10/2024 /amt 10.00"));
     }
