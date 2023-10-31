@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Supports CLI interactions with users.
  */
 public class Ui {
-    private static final String LOGO = 
+    public static final String LOGO =
                     "    _______          _________ _______                    ______  \n" +
                     "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
                     "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
