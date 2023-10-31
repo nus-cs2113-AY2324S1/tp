@@ -27,7 +27,7 @@ public class IngredientStorage {
     }
 
     public void saveData(ArrayList<Ingredient> ingredients) throws IOException  {
-        FileWriter writer = new FileWriter(DATA_PATH, true);
+        FileWriter writer = new FileWriter(DATA_PATH, false);
         String dataString;
 
         for (Ingredient ingredient : ingredients) {
