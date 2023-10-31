@@ -24,6 +24,7 @@ public class Transport extends Expense {
                      TransportationType transportationType) throws KaChinnnngException {
         super(description, date, amount);
         this.transportationType = transportationType;
+        this.category = "Transport";
     }
 
     /**
@@ -40,7 +41,7 @@ public class Transport extends Expense {
      */
     @Override
     public String toString() {
-        return "Transportation Expense: " + getDescription() +
+        return "Transportation Expense (" + getTransportationType() + "): " + getDescription() +
                 " | Date: " + getDateString() + " | Amount: $" + String.format("%.2f", getAmount());
     }
 }

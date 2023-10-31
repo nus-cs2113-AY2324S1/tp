@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 public class ExpenseParser {
     public static final String CATEGORY_FIELD = "ca";
+    public static final String TYPE_FIELD = "ty";
     public static final String DESCRIPTION_FIELD = "de";
     public static final String DATE_FIELD = "da";
     public static final String AMOUNT_FIELD = "am";
@@ -30,7 +31,7 @@ public class ExpenseParser {
         try {
             expenseDate = LocalDate.parse(expenseDateString, formatter);
         } catch (DateTimeParseException e) {
-            throw new KaChinnnngException("Please enter a valid date in the format dd/MM/yyyy");
+            throw new KaChinnnngException("Please enter a valid date in the format dd/MM/yyyydon");
         }
         if (expenseDate.isAfter(LocalDate.now())) {
             throw new KaChinnnngException("Please enter a date that is not in the future");
@@ -40,6 +41,7 @@ public class ExpenseParser {
 
     public static Expense parseExpense(HashMap<String, String> argumentsByField) throws KaChinnnngException {
         if (!argumentsByField.containsKey(CATEGORY_FIELD) ||
+                !argumentsByField.containsKey(TYPE_FIELD) ||
                 !argumentsByField.containsKey(DESCRIPTION_FIELD) ||
                 !argumentsByField.containsKey(DATE_FIELD) ||
                 !argumentsByField.containsKey(AMOUNT_FIELD)) {
@@ -47,6 +49,7 @@ public class ExpenseParser {
         }
 
         String expenseCategoryString = argumentsByField.get(CATEGORY_FIELD).toLowerCase();
+        String expenseTypeString = argumentsByField.get(TYPE_FIELD).toLowerCase();
         String expenseDescriptionString = argumentsByField.get(DESCRIPTION_FIELD);
         String expenseDateString = argumentsByField.get(DATE_FIELD);
         String expenseAmountString = argumentsByField.get(AMOUNT_FIELD);
@@ -74,11 +77,42 @@ public class ExpenseParser {
         }
 
         if (expenseCategoryString.equals("food")) {
-            return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.NONE);
+            if (expenseTypeString.equals("breakfast")) {
+                return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.BREAKFAST);
+            } else if (expenseTypeString.equals("lunch")) {
+                return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.LUNCH);
+            } else if (expenseTypeString.equals("dinner")) {
+                return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.DINNER);
+            } else {
+                return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.UNDEFINED);
+            }
         } else if (expenseCategoryString.equals("transport")){
-            return new Transport(expenseDescriptionString, expenseDate, expenseAmount, TransportationType.NONE);
+            if (expenseTypeString.equals("train")) {
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.TRAIN);
+            } else if (expenseTypeString.equals("bus")) {
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.BUS);
+            } else if (expenseTypeString.equals("taxi")) {
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.TAXI);
+            } else if (expenseTypeString.equals("fuel")) {
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.FUEL);
+            } else {
+                return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
+                        TransportationType.UNDEFINED);
+            }
         } else if (expenseCategoryString.equals("utilities")) {
-            return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.NONE);
+            if (expenseTypeString.equals("water")) {
+                return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.WATER);
+            } else if (expenseTypeString.equals("electricity")) {
+                return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.ELECTRICITY);
+            } else if (expenseTypeString.equals("gas")) {
+                return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.GAS);
+            } else{
+                return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.UNDEFINED);
+            }
         } else {
             throw new KaChinnnngException("Please enter a valid category");
         }

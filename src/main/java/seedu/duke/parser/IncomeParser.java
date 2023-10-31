@@ -85,6 +85,9 @@ public class IncomeParser {
      * @throws KaChinnnngException if there is an error in the command
      */
     public static Income parseIncome(HashMap<String, String> argumentsByField) throws KaChinnnngException {
+        if (argumentsByField == null) {
+            throw new KaChinnnngException("Income fields cannot be null");
+        }
         if (!argumentsByField.containsKey(DESCRIPTION_FIELD) ||
                 !argumentsByField.containsKey(DATE_FIELD) ||
                 !argumentsByField.containsKey(AMOUNT_FIELD)) {

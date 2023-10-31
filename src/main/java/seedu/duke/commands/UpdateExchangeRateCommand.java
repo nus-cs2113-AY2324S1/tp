@@ -9,7 +9,8 @@ public class UpdateExchangeRateCommand extends Command {
     ExchangeRateFileHandler exchangeRateFileHandler;
     String currency;
     double rate;
-    public UpdateExchangeRateCommand(String fullCommand, ExchangeRateFileHandler exchangeRateFileHandler) throws KaChinnnngException {
+    public UpdateExchangeRateCommand(String fullCommand, ExchangeRateFileHandler exchangeRateFileHandler)
+            throws KaChinnnngException {
         try {
             this.exchangeRateFileHandler = exchangeRateFileHandler;
             String[] args = parse(fullCommand);

@@ -1,18 +1,12 @@
 package seedu.duke.financialrecords;
 
 import seedu.duke.commands.KaChinnnngException;
-import seedu.duke.storage.ExchangeRateFileHandler;
 import seedu.duke.ui.Ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * The `ExchangeRateManager` class is responsible for managing exchange rates between the Singapore Dollar (SGD) and
@@ -23,7 +17,6 @@ import java.util.Scanner;
  */
 public class ExchangeRateManager {
     private static ExchangeRateManager exchangeRateManager = null;
-    private static final File file = new File("./data/ExchangeRate.txt");
     private static final List<String> SUPPORTED_CURRENCIES =
             Arrays.asList(
                     "MYR", "USD", "JPY", "KRW", "EUR", "THB", "HKD", "INR", "IDR",

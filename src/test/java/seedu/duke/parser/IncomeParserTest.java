@@ -11,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * JUnit test class for IncomeParser
+ * Contains JUnit tests for the {@code IncomeParser} class. This class ensures that the parsing methods
+ * related to incomes function as expected and handle invalid inputs gracefully.
  */
 public class IncomeParserTest {
 
@@ -164,4 +165,78 @@ public class IncomeParserTest {
 
         assertThrows(KaChinnnngException.class, () -> IncomeParser.getIndex(inputMap));
     }
+
+    /**
+     * Tests for an exception when a zero index is provided in the input data.
+     */
+    @Test
+    void testParseIncome_nullArguments_exceptionThrown() {
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(null));
+    }
+
+    /**
+     * Checks if an exception is thrown when null arguments are passed to the {@code parseIncome} method.
+     */
+    @Test
+    void testParseIncome_missingDescription_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DATE_FIELD, "12/10/2023");
+        incomeFields.put(IncomeParser.AMOUNT_FIELD, "5000.00");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    /**
+     * Tests if an exception is thrown when the date is missing in incomeFields.
+     */
+    @Test
+    void testParseIncome_missingDate_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DESCRIPTION_FIELD, "Salary");
+        incomeFields.put(IncomeParser.AMOUNT_FIELD, "5000.00");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    /**
+     * Checks if an exception is thrown when the amount is missing in incomeFields.
+     */
+    @Test
+    void testParseIncome_missingAmount_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DESCRIPTION_FIELD, "Salary");
+        incomeFields.put(IncomeParser.DATE_FIELD, "12/10/2023");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    /**
+     * Validates that an exception is thrown when the amount in incomeFields has an invalid format.
+     */
+    @Test
+    void testParseAmount_invalidFormat_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put(IncomeParser.DESCRIPTION_FIELD, "Salary");
+        incomeFields.put(IncomeParser.DATE_FIELD, "12/10/2023");
+        incomeFields.put(IncomeParser.AMOUNT_FIELD, "5,000.00");  // Comma is not expected
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
+    /**
+     * Tests for an exception when a non-numeric value is provided for the index in the input data.
+     */
+    @Test
+    void testGetIndex_invalidFormat_exceptionThrown() {
+        HashMap<String, String> inputMap = new HashMap<>();
+        inputMap.put(IncomeParser.INDEX_FIELD, "abc");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.getIndex(inputMap));
+    }
+
+    /**
+     * Checks if an exception is thrown when an unrecognized field is provided in incomeFields.
+     */
+    @Test
+    void testParseIncome_nonExistingField_exceptionThrown() {
+        HashMap<String, String> incomeFields = new HashMap<>();
+        incomeFields.put("nonExistingField", "Value");
+        assertThrows(KaChinnnngException.class, () -> IncomeParser.parseIncome(incomeFields));
+    }
+
 }

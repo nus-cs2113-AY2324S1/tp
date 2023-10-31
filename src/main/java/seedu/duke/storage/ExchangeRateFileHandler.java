@@ -8,14 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ExchangeRateFileHandler {
     private static final String WRONG_FORMAT_ERROR = "The format of this line is wrong";
-    private static final String CURRENCY_NOT_SUPPORTED_ERROR = "This currency is not supported";
-    private static final List<String> SUPPORTED_CURRENCIES = ExchangeRateManager.getSupportedCurrencies();
     private String filePath;
 
     public  ExchangeRateFileHandler(String filePath) {

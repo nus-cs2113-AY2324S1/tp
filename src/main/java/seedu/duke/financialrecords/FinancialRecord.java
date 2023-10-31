@@ -22,13 +22,12 @@ public abstract class FinancialRecord{
     protected double amount;
 
     /**
-     * This method is used to create a new financial record.
-     * This method is used by all specific financial record creation classes in the application
+     * Constructs a new financial record.
      *
-     * @param description String containing the description of the financial record
-     * @param date LocalDate containing the date of the financial record
-     * @param amount double containing the amount of the financial record
-     * @throws KaChinnnngException if there is an error in the command
+     * @param description Description of the financial record.
+     * @param date Date of the financial record.
+     * @param amount Amount of the financial record.
+     * @throws KaChinnnngException if there are validation errors.
      */
     public FinancialRecord(String description, LocalDate date, double amount) throws KaChinnnngException {
         assert description != null : "description should not be null";
@@ -52,10 +51,9 @@ public abstract class FinancialRecord{
     }
 
     /**
-     * This method is used to get the category of the financial record.
-     * This method is used by all specific financial record classes in the application
+     * Returns the category of the financial record.
      *
-     * @return String containing the category of the financial record
+     * @return Category of the financial record.
      */
     public String getCategory() {
         return "";
@@ -102,11 +100,10 @@ public abstract class FinancialRecord{
     }
 
     /**
-     * This method is used to set the description of the financial record.
-     * This method is used by all specific financial record classes in the application
+     * Sets the description of the financial record.
      *
-     * @param description String containing the description of the financial record
-     * @throws KaChinnnngException if there is an error in the command
+     * @param description Description of the financial record.
+     * @throws KaChinnnngException if description is empty or null.
      */
     public void setDescription(String description) throws KaChinnnngException {
         assert description != null : "description should not be null";
@@ -141,10 +138,9 @@ public abstract class FinancialRecord{
     }
 
     /**
-     * This method is used to get the category of the financial record.
-     * This method is used by all specific financial record classes in the application
+     * Provides a string representation of the financial record.
      *
-     * @return String containing the category of the financial record
+     * @return String representation of the financial record.
      */
     public String toString() {
         return "";
