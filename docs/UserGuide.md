@@ -471,7 +471,11 @@ Balance: 3790.00
 
 View your current watchlist with stocks that you are interested in with the exchanges shown as well
 
-Default watchlist: AAPL, GOOGL
+Default watchlist: AAPL, GOOGL 
+
+These stocks will be added to the watchlist automatically if:
+- your watchlist file is corrupted, and you chose to override it
+- your watchlist is empty on startup
 
 Format: `watchlist`
 
@@ -480,11 +484,19 @@ Example of usage: `watchlist`
 Example of output:
 
 ```
-Symbol    Market    Price     Daily High     Daily Low     EquityName
-AAPL      NASDAQ    168.22    168.96         166.84        Apple Inc 
-GOOGL     NASDAQ    122.17    123.31         120.2057      Alphabet Inc - Class A
-GME       NYSE      13.12     13.615         13.02         Gamestop Corporation - Class A
+Symbol    Market    Price     Daily High     Daily Low     EquityName                    Last Updated     
+GOOGL     NASDAQ    124.46    125.4          122.75        Alphabet Inc - Class A        Tue, Oct 31 2023 04:00:03
+AAPL      NASDAQ    170.29    171.17         168.87        Apple Inc                     Tue, Oct 31 2023 04:00:02
 ```
+
+Format of watchlist output:
+
+| Symbol                                                 | Market                                | Price                                          | Daily High                     | Daily Low                     | Equity Name            | Last Updated                                                            |
+|--------------------------------------------------------|---------------------------------------|------------------------------------------------|--------------------------------|-------------------------------|------------------------|-------------------------------------------------------------------------|
+| Ticker Symbol<br/>(Abbreviation for Company 's Stocks) | Exchange at which the stock is traded | Current latest price of stock (before closing) | Intraday Highest trading price | Intraday Lowest trading price | Name of equity product | Last time at which the information of the stocks was updated by the API |
+
+- Note: To prevent overloading of the stock API, we will only be allowing watchlist updates every 5 minutes. 
+Any request within the 5-minute window will only show the last updated watchlist
 
 ### Adding Stock to Watchlist: `addstock`
 
@@ -502,6 +514,10 @@ Meta Platforms Inc - Class A
 Use Watchlist to view it!
 ```
 
+- Note: Due to the free nature of the API (Alphpa Vantage and FMP), only US stock prices quote will be provided by
+this application. Sorry for the inconvenience caused.
+- Note: Due to the free nature of the API, there will be a cap of **five** stocks in the watchlist
+
 ### Deleting Stock from Watchlist: `deletestock`
 
 Delete a stock that you are no longer interested in monitoring from your personal WatchList
@@ -518,13 +534,25 @@ Meta Platforms Inc - Class A
 Use watchlist command to view updated Watchlist
 ```
 
+- Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
+
 ### Visualizing your cashflow: `vis`
 
 Using this command to visualize your income or expenses in a pie chart or bar chart
 
 Format: `vis /t TYPE /c TOOL`
 
-Example of usage: `vis /t income /c pie`
+| Type `/t`                   |
+|-----------------------------|
+| Income Cashflows `Income`   |
+| Expense Cashflows `Expense` |
+
+| Tool `/c`      |
+|----------------|
+| PieChart `pie` |
+| BarChart `bar` |
+
+Example of usage: `vis /t expense /c pie`
 
 Example of output:
 
@@ -533,6 +561,14 @@ Displaying piechart for expense
 ```
 
 ![](images/vis/visOutput.png)
+
+Example of usage: `vis /t expense /c bar`
+
+```
+Displaying barchart for income
+```
+
+![](images/vis/barOuput.png)
 
 ### Exiting the program: `exit`
 
@@ -559,26 +595,30 @@ Existing data will be automatically loaded when the program starts up.
 
 {Give a 'cheat sheet' of commands here}
 
-| Action                           | Format                                                    |
-|----------------------------------|-----------------------------------------------------------|
-| **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]` |
+| Action                           | Format                                                     |
+|----------------------------------|------------------------------------------------------------|
+| **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`  |
 | **Add expense**                  | `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]` |
-| **Delete cashflow**              | `delete INDEX [/r]`                                       |
-| **Delete income**                | `delete income INDEX [/r]`                                |
-| **Delete expense**               | `delete expense INDEX [/r]`                               |
-| **Delete recurrence**            | `delete recurrence INDEX [/r]`                            |
-| **list all cashflows**           | `list`                                                    |
-| **list all incomes**             | `list income`                                             |
-| **list all expenses**            | `list expense`                                            |
+| **Delete cashflow**              | `delete INDEX [/r]`                                        |
+| **Delete income**                | `delete income INDEX [/r]`                                 |
+| **Delete expense**               | `delete expense INDEX [/r]`                                |
+| **Delete recurrence**            | `delete recurrence INDEX [/r]`                             |
+| **list all cashflows**           | `list`                                                     |
+| **list all incomes**             | `list income`                                              |
+| **list all expenses**            | `list expense`                                             |
 | **list all recurring cashflows** | `list recurrence`                                          |
-| **Set budget**                   | `budget set /b BUDGET`                                    |
-| **Update budget**                | `budget update /b BUDGET`                                 |
-| **Reset budget**                 | `budget reset`                                            |
-| **Delete budget**                | `budget delete`                                           |
-| **View budget**                  | `budget view`                                             |
-| **Display Overview**             | `overview`                                                |
-| **View balance**                 | `balance`                                                 |
-| **Exit program**                 | `exit`                                                    |
+| **Set budget**                   | `budget set /b BUDGET`                                     |
+| **Update budget**                | `budget update /b BUDGET`                                  |
+| **Reset budget**                 | `budget reset`                                             |
+| **Delete budget**                | `budget delete`                                            |
+| **View budget**                  | `budget view`                                              |
+| **Display Overview**             | `overview`                                                 |
+| **View balance**                 | `balance`                                                  |
+| **View Watchlist**               | `watchlist`                                                |
+| **Add to watchlist**             | `addstock /s STOCKCODE`                                    |
+| **Delete from watchlist**        | `deletestock /s STOCKCODE`                                 |
+| **Visualization**                | `vis /t TYPE /c CHART`                                     |
+| **Exit program**                 | `exit`                                                     |
 
 - Note: Cashflow is referring to an income or expense
 

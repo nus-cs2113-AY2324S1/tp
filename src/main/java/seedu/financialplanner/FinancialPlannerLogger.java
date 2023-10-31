@@ -6,9 +6,15 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.LogManager;
 
+/**
+ * Represents the logger for the Financial Planner.
+ */
 public class FinancialPlannerLogger {
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
 
+    /**
+     * Initialises the logger and saves logging info to a file.
+     */
     public static void initialise() {
         try {
             FileHandler fh = new FileHandler("data/logger.log");

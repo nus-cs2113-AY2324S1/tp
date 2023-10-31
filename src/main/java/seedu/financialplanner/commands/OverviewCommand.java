@@ -12,6 +12,9 @@ import seedu.financialplanner.utils.Ui;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Represents a command to display overview of user's financials.
+ */
 public class OverviewCommand extends Command {
     private static final CashflowList cashflowList = CashflowList.getInstance();
 
@@ -22,8 +25,11 @@ public class OverviewCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command and displays an overview of the user's financials.
+     */
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         String balance = getBalance();
         String highestIncome = getHighestIncome();
         String highestExpense = getHighestExpense();
