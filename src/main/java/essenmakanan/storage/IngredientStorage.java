@@ -95,7 +95,7 @@ public class IngredientStorage {
             Ui.handleIOException(exception);
         }
 
-        System.out.println("\tPlease try to run the app again.");
+        System.out.println("Please try to run the app again.");
         System.exit(-1);
     }
 }

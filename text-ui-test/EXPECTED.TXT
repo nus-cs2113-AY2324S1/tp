@@ -1,28 +1,4 @@
---------------------------------------------
-Welcome to Essen Makanan!!! A one-stop place to track the
-ingredients in your kitchen and store your favourite recipes
-To get started, type [help] for list of commands
---------------------------------------------
-Here are the commands currently available:
-
-RECIPE
-	- View all recipes. [view r]
-	- Add recipe. [add r/RECIPE_TITLE s/STEP1 s/STEP2]
-	- View a recipe. [view r/RECIPE_TITLE]
-	- Edit a recipe. [edit r/RECIPE_TITLE n/NEW_TITLE s/STEP_TO_EDIT,NEW_STEP]
-	- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]
-
-INGREDIENT
-	- View all ingredients. [view i]
-	- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]
-		Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
-	- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]
-	- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]
-
-OTHERS
-	- View all commands [help]
-	- Exit application [exit]
---------------------------------------------
---------------------------------------------
-Hope you had fun! See you again!
---------------------------------------------
+Creating database
+Directory successfully created
+Data text file successfully created
+Please try to run the app again.
