@@ -84,25 +84,4 @@ public class Visualizer {
                 ()->swHR.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
         );
     }
-
-    public static void displayRadarChart (HashMap<String, Double> cashflowByCat, String type) {
-        RadarChart radarChart = new RadarChartBuilder().width(800).height(600)
-                .title(StringUtils.capitalize(type) + " Chart")
-                .build();
-
-        // Customize Chart
-        Color[] sliceColors = new Color[] {
-                new Color(62, 154, 230),
-        };
-
-        radarChart.getStyler().setSeriesColors(sliceColors);
-        List<String> keys = new ArrayList<String>();
-        List<Double> values = new ArrayList<>();
-        for (Map.Entry<String, Double> set: cashflowByCat.entrySet()) {
-            keys.add(set.getKey());
-            double datapoint = set.getValue()/3000;
-            values.add(datapoint);
-        }
-
-    }
 }
