@@ -10,6 +10,8 @@ import cashleh.transaction.FinancialStatement;
  * budget as well as to handle some cases in which the budget may turn into a deficit.
  */
 public class BudgetHandler {
+    private static final double MINIMUM_BUDGET_PERCENTAGE_TRESHOLD = 0.25;
+    private static final double MAXIMUM_BUDGET_PERCENTAGE = 1;
     private Progress budgetProgress; // net cash on hand divided by the budget
     private Budget budget;
     private final FinancialStatement financialStatement;
@@ -47,7 +49,8 @@ public class BudgetHandler {
      * @throws CashLehBudgetException warning the user about his bad financial situation.
      */
     public void printBasicWarning() throws CashLehBudgetException {
-        boolean budgetIsNotOnTrack = (budgetProgress.getProgress() < 0.25 && budgetProgress.getProgress() < 1);
+        boolean budgetIsNotOnTrack = (budgetProgress.getProgress() < MINIMUM_BUDGET_PERCENTAGE_TRESHOLD
+                && budgetProgress.getProgress() < MAXIMUM_BUDGET_PERCENTAGE);
         if (budget.isActive() && budgetIsNotOnTrack) {
             String text = "Hey watch out you do not have that much cash left over according to your budget."
                     + "\n\tTry earning some money before making any crazy expenses!";
