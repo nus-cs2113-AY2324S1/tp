@@ -3,6 +3,7 @@ package seedu.cafectrl.data;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.storage.Storage;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
@@ -67,7 +68,7 @@ public class Pantry {
     private Ingredient addIngredientQuantity(int qty, int ingredientIndex, String unit) {
         Ingredient ingredient = pantryStock.get(ingredientIndex);
         if (!unit.equalsIgnoreCase(ingredient.getUnit())) {
-            throw new RuntimeException(Messages.UNIT_NOT_MATCHING
+            throw new RuntimeException(ErrorMessages.UNIT_NOT_MATCHING
             + "\nUnit used previously: " + ingredient.getUnit());
         }
         qty += ingredient.getQty(); //adds new qty to current qty
