@@ -100,7 +100,26 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    * `delete r/1` to delete a recipe at index ‘1’
 
 
-6. Filter recipe based by ingredients `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
+6. Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
+
+   Use the start command to check if you are all set to start on the recipe.This command will list all missing ingredients from the recipe you want to start on.
+
+   <br> Example:
+
+   * `start bread`
+      
+      To check if you have all ingredients needed for the recipe named "bread".
+   
+     ![img.png](images/StartRecipeCommand1.png)
+   
+
+   * `start 1`
+
+     To check if you have all ingredients needed for the recipe with id 1.
+
+     ![img_1.png](images/StartRecipeCommand2.png)
+
+7. Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
    
    Filter your recipes by ingredients you are craving for that meal.
    
@@ -112,7 +131,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    
    * `filter recipe i/egg i/vegetable`
    
-      ![img_1.png](images/filterRecipseByIngredient.png)
+      ![img_1.png](images/FilterRecipseByIngredientCommand.png)
 
    * `filter recipe i/1 i/vegetable`
       
