@@ -1,6 +1,5 @@
 package seedu.cafectrl.ui;
 
-import seedu.cafectrl.command.*;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
