@@ -68,9 +68,10 @@ public class UiTest {
         ui.printGoodbyeMessage();
 
         // Assert
-        assertEquals("____________________________________________________________\n"
+        assertEquals("____________________________________________________________" + System.lineSeparator()
                 + "Bye. Hope to see you again soon!" + System.lineSeparator()
-                + "____________________________________________________________\n", out.toString());
+                + "____________________________________________________________" + System.lineSeparator()
+                , out.toString());
     }
 
     @Test
@@ -130,10 +131,11 @@ public class UiTest {
         Ui.printExpenseAddedMessage(testExpense);
 
         // Assert
-        assertEquals("____________________________________________________________\n"
-                + "Got it. I've added this expense:\n"
+        assertEquals("____________________________________________________________" + System.lineSeparator()
+                + "Got it. I've added this expense:" + System.lineSeparator()
                 + testExpense
-                + "\n____________________________________________________________\n", out.toString());
+                + System.lineSeparator() + "____________________________________________________________" +
+                System.lineSeparator(), out.toString());
     }
 
     @Test
@@ -229,6 +231,6 @@ public class UiTest {
 
         // Assert
         assertEquals("Here are the matching expenses in your list:"
-                + System.lineSeparator() + expense.toString() + "\n", out.toString());
+                + System.lineSeparator() + expense.toString() + System.lineSeparator(), out.toString());
     }
 }

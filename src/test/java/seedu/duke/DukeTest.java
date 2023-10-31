@@ -111,9 +111,9 @@ class DukeTest {
         duke.executeCommand("add income /de Bonus /date 03/10/2023 /amt 1000.00");
         String addIncomeOutput = outputStream.toString().trim();
         String expectedAddIncomeOutput =
-                "____________________________________________________________\n" +
-                        "Got it. I've added this income:\n" +
-                        "Income: Bonus | Date: 03/Oct/2023 | Amount: $1000.00\n" +
+                "____________________________________________________________" + System.lineSeparator()
+                        + "Got it. I've added this income:" + System.lineSeparator() +
+                        "Income: Bonus | Date: 03/Oct/2023 | Amount: $1000.00" + System.lineSeparator() +
                         "____________________________________________________________";
         assertEquals(expectedAddIncomeOutput, addIncomeOutput);
 
@@ -124,9 +124,9 @@ class DukeTest {
         duke.executeCommand("list income");
         String listIncomeOutput = outputStream.toString().trim();
         String expectedListIncomeOutput =
-                "____________________________________________________________\n" +
-                        "Here are your incomes:\n" +
-                        "1. Income: Bonus | Date: 03/Oct/2023 | Amount: $1000.00\n" +
+                "____________________________________________________________" + System.lineSeparator() +
+                        "Here are your incomes:" + System.lineSeparator() +
+                        "1. Income: Bonus | Date: 03/Oct/2023 | Amount: $1000.00" + System.lineSeparator() +
                         "____________________________________________________________";
         assertEquals(expectedListIncomeOutput, listIncomeOutput);
 
@@ -146,9 +146,10 @@ class DukeTest {
         duke.executeCommand("add expense /cat food /type lunch /de chicken sandwich /date 01/10/2023 /amt 10.00");
         String addExpenseOutput = outputStream.toString().trim();
         String expectedAddExpenseOutput =
-                "____________________________________________________________\n" +
-                        "Got it. I've added this expense:\n" +
-                        "Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00\n" +
+                "____________________________________________________________" + System.lineSeparator() +
+                        "Got it. I've added this expense:" + System.lineSeparator() +
+                        "Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00" +
+                         System.lineSeparator() +
                         "____________________________________________________________";
         assertEquals(expectedAddExpenseOutput, addExpenseOutput);
 
@@ -159,9 +160,10 @@ class DukeTest {
         duke.executeCommand("list expense");
         String listExpenseOutput = outputStream.toString().trim();
         String expectedListExpenseOutput =
-                "____________________________________________________________\n" +
-                        "Here are your expenses:\n" +
-                        "1. Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00\n" +
+                "____________________________________________________________" + System.lineSeparator() +
+                        "Here are your expenses:" + System.lineSeparator() +
+                        "1. Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00"
+                        + System.lineSeparator() +
                         "____________________________________________________________";
         assertEquals(expectedListExpenseOutput, listExpenseOutput);
 
@@ -188,14 +190,14 @@ class DukeTest {
         duke.executeCommand("list");
         String listAllOutput = outputStream.toString().trim();
         String expectedListAllOutput =
-                "____________________________________________________________\n" +
-                        "Here are your incomes:\n" +
-                        "1. Income: Bonus | Date: 03/Oct/2023 | Amount: $1000.00\n" +
-                        "Total income is: $1000.00.\n" +
-                        "\nHere are your expenses:\n" +
+                "____________________________________________________________" + System.lineSeparator() +
+                        "Here are your incomes:" + System.lineSeparator() +
+                        "1. Income: Bonus | Date: 03/Oct/2023 | Amount: $1000.00" + System.lineSeparator() +
+                        "Total income is: $1000.00." + System.lineSeparator() + System.lineSeparator() +
+                        "Here are your expenses:" + System.lineSeparator() +
                         "1. Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00\n" +
-                        "Total expenses is: $10.00.\n" +
-                        "\nTotal balance is: $990.00.\n" +
+                        "Total expenses is: $10.00." + System.lineSeparator() + System.lineSeparator() +
+                        "Total balance is: $990.00." + System.lineSeparator() +
                         "____________________________________________________________";
         assertEquals(expectedListAllOutput, listAllOutput);
 
@@ -214,35 +216,37 @@ class DukeTest {
         String helpOutput = outputStream.toString().trim();
 
         // The expected output should represent whatever the help command outputs in your program
-        String expectedHelpOutput = "____________________________________________________________\n" +
+        String expectedHelpOutput = "____________________________________________________________"
+                + System.lineSeparator() +
                 "You can access our user guide by " +
-                "https://docs.google.com/document/d/1BOz_v4eYQ8y7Dje6Jm6nqymi9jmrsb9MAohLCL_sLvI/edit?usp=sharing\n" +
-                "\n" +
-                "Functions and their format:\n" +
-                "\n" +
-                "Adding an entry: add\n" +
-                "Format:\n" +
-                "Add expense /category /description /value\n" +
-                "Add income /description /value\n" +
-                "\n" +
-                "Listing all entries: list\n" +
-                "Format:\n" +
-                "list\n" +
-                "list income\n" +
-                "list expense\n" +
-                "\n" +
-                "Deleting an entry: delete\n" +
-                "Format:\n" +
-                "delete income [index_pos]\n" +
-                "delete expense [index_pos]\n" +
-                "\n" +
-                "Check balance of income: balance\n" +
-                "Format:\n" +
-                "balance\n" +
-                "\n" +
-                "Exiting the program: exit\n" +
-                "Format:\n" +
-                "exit\n" +
+                "https://docs.google.com/document/d/1BOz_v4eYQ8y7Dje6Jm6nqymi9jmrsb9MAohLCL_sLvI/edit?usp=sharing" +
+                System.lineSeparator() +
+                System.lineSeparator() +
+                "Functions and their format:" + System.lineSeparator() +
+                System.lineSeparator() +
+                "Adding an entry: add" + System.lineSeparator() +
+                "Format:" + System.lineSeparator() +
+                "Add expense /category /description /value" + System.lineSeparator() +
+                "Add income /description /value" + System.lineSeparator() +
+                System.lineSeparator() +
+                "Listing all entries: list" + System.lineSeparator() +
+                "Format:" + System.lineSeparator() +
+                "list" + System.lineSeparator() +
+                "list income" + System.lineSeparator() +
+                "list expense" + System.lineSeparator() +
+                System.lineSeparator() +
+                "Deleting an entry: delete" + System.lineSeparator() +
+                "Format:" + System.lineSeparator() +
+                "delete income [index_pos]" + System.lineSeparator() +
+                "delete expense [index_pos]" + System.lineSeparator()
+                + System.lineSeparator() +
+                "Check balance of income: balance" + System.lineSeparator() +
+                "Format:" + System.lineSeparator() +
+                "balance" + System.lineSeparator()
+                + System.lineSeparator() +
+                "Exiting the program: exit" + System.lineSeparator() +
+                "Format:" + System.lineSeparator() +
+                "exit" + System.lineSeparator() +
                 "____________________________________________________________";
         assertEquals(expectedHelpOutput, helpOutput);
         // Restore the original System.out
@@ -271,8 +275,8 @@ class DukeTest {
 
         // The expected output based on the given additions
         String expectedBalanceOutput =
-                "____________________________________________________________\n" +
-                        "Balance: 990.0\n" +
+                "____________________________________________________________" + System.lineSeparator() +
+                        "Balance: 990.0" + System.lineSeparator() +
                         "____________________________________________________________";
 
         assertEquals(expectedBalanceOutput, balanceOutput);
