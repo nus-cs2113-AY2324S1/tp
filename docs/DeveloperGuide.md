@@ -4,8 +4,6 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
-
 ## Design
 
 ### Parser
@@ -92,8 +90,6 @@ API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/
 
 ### Delete Dish
 
-### Delete Dish
-
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
 <br>*Figure X: Execution of delete dish command
 
@@ -108,7 +104,6 @@ This sequence of actions orchestrates the flow of information and operations bet
 `DeleteDishCommand` is implemented in such a way because:
 1. It promotes loose coupling between components. For instance, `Main` doesn't need to know the details of how the `execute()` of `DeleteDishCommand` is executed or how the message is displayed in `Ui`.
 2. Each component has a specific role and responsibility. `Main` is responsible for receiving user input and invoking `execute()`, `DeleteDishCommand` is responsible for encapsulating the delete operation, `Menu` is responsible for managing the menu items, and `Ui` is responsible for displaying messages to the user. This separation of concerns makes the code more maintainable and easier to understand.
-
 
 ### Edit Price
 
