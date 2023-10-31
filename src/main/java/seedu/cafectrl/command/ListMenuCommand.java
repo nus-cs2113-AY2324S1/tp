@@ -11,6 +11,8 @@ import java.text.DecimalFormat;
  */
 public class ListMenuCommand extends Command {
     public static final String COMMAND_WORD = "list_menu";
+    public static final String MESSAGE_USAGE = "Command Format:\n"
+            + COMMAND_WORD;
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
     protected Menu menu;

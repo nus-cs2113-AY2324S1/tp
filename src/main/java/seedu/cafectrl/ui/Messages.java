@@ -20,6 +20,7 @@ public class Messages {
 
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
+    public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
 
     /** Messages for view stock command */
     public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
@@ -39,13 +40,14 @@ public class Messages {
     public static final String LIST_INGREDIENTS_GUIDE = "To list out the ingredients needed "
             + "for a specific dish: list_ingredients DISH_INDEX\n"
             + "Example: list_ingredients 1";
-    public static final String DELETE_GUIDE = "To delete a menu item "
-            + "delete DISH_INDEX\n"
-            + "Example: delete 1";
     public static final String EDIT_PRICE_GUIDE = "To edit price of a menu item: "
             + "edit_price index/DISH_INDEX price/NEW_PRICE\n"
             + "Example: edit_price index/1 price/4.50";
+    public static final String DELETE_GUIDE = "To delete a menu item "
+            + "delete DISH_INDEX\n"
+            + "Example: delete 1";
 
+    /** Messages for order command */
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
             + "in the virtual kitchen of your dreams. Bon appétit!";
     public static final String PREVIOUS_DAY_TIME_TRAVEL = "Whoa there, time traveler! " +
@@ -58,4 +60,5 @@ public class Messages {
             + "We're about to fast-forward to the next day. "
             + "Hold onto your hats; here we go!";
     public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
+
 }

@@ -1,6 +1,7 @@
 package seedu.cafectrl.storage;
 
-import seedu.cafectrl.data.Menu;
+import seedu.cafectrl.data.Order;
+import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Ingredient;
@@ -8,6 +9,7 @@ import seedu.cafectrl.data.dish.Ingredient;
 import java.util.ArrayList;
 
 public class Encoder {
+    private static final String DIVIDER = " | ";
 
     //@@author ziyi105
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
@@ -22,34 +24,33 @@ public class Encoder {
         return pantryStockInString;
     }
 
+    //@@NaychiMin
+    /**
+     * Encodes a Sales object into a list of strings for storage.
+     * Each string represents an order, including day, dish name, quantity, and total cost.
+     *
+     * @param sales The Sales object to be encoded.
+     * @return An ArrayList of strings representing the encoded sales data.
+     */
     public static ArrayList<String> encodeSales(Sales sales) {
-        return null;
-    }
+        ArrayList<String> encodedList = new ArrayList<>();
+        ArrayList<OrderList> orderLists = sales.getOrderLists();
 
-    //@@author DextheChik3n
-    public static ArrayList<String> encodeMenu(Menu menu) {
-        /*
-        ArrayList<Dish> dishArrayList = menu.getMenuItemsList();
-        String tasksFilePathString = this.fileManager.openTextFile();
-
-        if (dishArrayList.isEmpty()) {
-            this.fileManager.overwriteFile(tasksFilePathString, ""); //overwrite text file to store empty text
-        }
-        //todo: remove testing code
-        dishArrayList.add(new Dish("test", (float) 1.2));
-        dishArrayList.add(new Dish("test", (float) 1.2));
-
-        //input arraylist data into text file
-        for (int i = 0; i < dishArrayList.size(); i++) {
-            String taskDataRow = "chicken rice | 5.00 | rice 50g";
-
-            if (i == 0) {
-                this.fileManager.overwriteFile(tasksFilePathString, taskDataRow);
-            } else {
-                this.fileManager.appendToFile(tasksFilePathString, taskDataRow);
+        for (int day = 0; day < orderLists.size(); day++) {
+            //get orderList for each day from list of sales
+            OrderList orderList = sales.getOrderList(day);
+            //get order from each orderList obtained
+            for (Order order : orderList.getOrderList()) {
+                StringBuilder orderString = new StringBuilder();
+                //day of each orderList is index + 1
+                orderString.append((day + 1) + DIVIDER);
+                orderString.append(order.getDishName() + DIVIDER);
+                orderString.append(order.getQuantity() + DIVIDER);
+                orderString.append(order.totalOrderCost());
+                encodedList.add(String.valueOf(orderString));
             }
         }
-         */
-        return null;
+        return encodedList;
     }
+    //@@author
 }
