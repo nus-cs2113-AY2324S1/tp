@@ -1,5 +1,7 @@
 package seedu.financialplanner.commands;
 
+import org.apache.commons.lang3.StringUtils;
+import org.knowm.xchart.CategorySeries;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
@@ -7,6 +9,7 @@ import seedu.financialplanner.visualisations.Categorizer;
 import seedu.financialplanner.visualisations.Visualizer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,9 +26,9 @@ public class VisCommand extends Command {
             throw new IllegalArgumentException("Chart type must be defined");
         }
         logger.log(Level.INFO, "Parsing entry type and chart type");
-        this.type = rawCommand.extraArgs.get("t");
+        this.type = rawCommand.extraArgs.get("t").toLowerCase();
         rawCommand.extraArgs.remove("t");
-        this.chart = rawCommand.extraArgs.get("c");
+        this.chart = rawCommand.extraArgs.get("c").toLowerCase();
         rawCommand.extraArgs.remove("c");
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
@@ -41,8 +44,12 @@ public class VisCommand extends Command {
         assert !chart.isEmpty();
         assert !type.isEmpty();
 
+        HashMap<String, Double> cashflowbyType = Categorizer.sortType(CashflowList.getInstance(), type);
+        if (cashflowbyType.isEmpty()) {
+            ui.showMessage(StringUtils.capitalize(type) + " is empty... Nothing to visualize");
+            return;
+        }
         ui.printDisplayChart(type, chart);
-
-        Visualizer.displayChart(chart, Categorizer.sortType(CashflowList.getInstance(), type), type);
+        Visualizer.displayChart(chart, cashflowbyType, type);
     }
 }

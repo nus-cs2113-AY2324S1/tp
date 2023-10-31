@@ -1,26 +1,23 @@
 package seedu.financialplanner.visualisations;
 
 
-import org.knowm.xchart.CategoryChart;
-import org.knowm.xchart.CategoryChartBuilder;
-import org.knowm.xchart.PieChart;
-import org.knowm.xchart.PieChartBuilder;
-import org.knowm.xchart.SwingWrapper;
+import org.apache.commons.lang3.StringUtils;
+import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
+import seedu.financialplanner.cashflow.Income;
+import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Visualizer {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
-    public static void displayChart(String chart, Map<String, Double> cashFlowByCat, String type)
+    public static void displayChart(String chart, HashMap<String, Double> cashFlowByCat, String type)
             throws FinancialPlannerException {
         switch (chart) {
         case "pie":
@@ -34,8 +31,10 @@ public class Visualizer {
         }
     }
 
-    public static void displayPieChart (Map<String, Double> expensesByCat, String type) {
-        PieChart chart = new PieChartBuilder().width(800).height(600).title(type).build();
+    public static void displayPieChart (HashMap<String, Double> cashflowByCat, String type) {
+        PieChart chart = new PieChartBuilder().width(800).height(600)
+                .title(StringUtils.capitalize(type) + " Chart")
+                .build();
 
         // Customize Chart
         Color[] sliceColors = new Color[] {
@@ -49,7 +48,7 @@ public class Visualizer {
         };
         chart.getStyler().setSeriesColors(sliceColors);
 
-        for (Map.Entry<String, Double> set: expensesByCat.entrySet()) {
+        for (Map.Entry<String, Double> set: cashflowByCat.entrySet()) {
             chart.addSeries(set.getKey(), set.getValue());
         }
         logger.log(Level.INFO, "Displaying Pie Chart");
@@ -60,21 +59,28 @@ public class Visualizer {
         );
     }
 
-    public static void displayBarChart (Map<String, Double> expensesByCat, String type) {
+    public static void displayBarChart (HashMap<String, Double> cashflowByCat, String type) {
         CategoryChart chart = new CategoryChartBuilder().width(800).height(600)
-                .title(type).xAxisTitle("Type").yAxisTitle("Value").build();
+                .title(StringUtils.capitalize(type) + " Chart")
+                .xAxisTitle(StringUtils.capitalize(type) + " Type")
+                .yAxisTitle("Value")
+                .build();
+
         // Customize Chart
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
-        chart.getStyler().setHasAnnotations(true);
-        assert !expensesByCat.isEmpty();
+        assert !cashflowByCat.isEmpty();
         // Series
-        List<Double> values = new ArrayList<Double>(expensesByCat.values());
-        List<String> keys = new ArrayList<String>(expensesByCat.keySet());
+        List<Double> values = new ArrayList<Double>();
+        List<String> keys = new ArrayList<String>();
+        for (Map.Entry<String, Double> set : cashflowByCat.entrySet()) {
+            keys.add(set.getKey());
+            values.add(set.getValue());
+        }
         chart.addSeries("Expense", keys, values);
 
         logger.log(Level.INFO, "Displaying Bar Chart");
         JFrame swHR = new SwingWrapper<>(chart).displayChart();
-        javax.swing.SwingUtilities.invokeLater(
+        SwingUtilities.invokeLater(
                 ()->swHR.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
         );
     }
