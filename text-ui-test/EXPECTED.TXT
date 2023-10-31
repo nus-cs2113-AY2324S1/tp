@@ -29,7 +29,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
-	Expense: vacation (Amount: 4000.0, Date: 27/10/2023)
+	Expense: vacation (Amount: 4000.0, Date: 31/10/2023)
 	____________________________________________________________
 +-----------------------------------------------------------------------------------------------------------------------+
 |                                                   Income Statement                                                    |
@@ -48,11 +48,11 @@
 +----------+--------------+--------------------+------------------------------+--------------------+--------------------+
 |    1     |    Income    |     2020-01-01     |             job              |         -          |     + $3000.0      |
 |    2     |    Income    |     2023-10-19     |         side hustle          |         -          |      + $500.0      |
-|    3     |   Expense    |     2023-10-27     |           vacation           |         -          |     - $4000.0      |
+|    3     |   Expense    |     2023-10-31     |           vacation           |         -          |     - $4000.0      |
 +-----------------------------------------------------------------------------------------------------------------------+
 | Total Income: $3500.0                                                                                                 |
 | Total Expense: $4000.0                                                                                                |
-| Net Income: $-500.0                                                                                                   |
+| Net Income: -$500.0                                                                                                   |
 +-----------------------------------------------------------------------------------------------------------------------+
 	____________________________________________________________
 	Hey watch out you are currently below your budget by: 510.0
@@ -72,7 +72,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	Income: job (Amount: 600.0, Date: 27/10/2023)
+	Income: job (Amount: 600.0, Date: 31/10/2023)
 	____________________________________________________________
 	____________________________________________________________
 	Please create a new budget as you haven't set one yet or deleted the previous one.
@@ -89,7 +89,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
-	Expense: tax (Amount: 40.0, Date: 27/10/2023)
+	Expense: tax (Amount: 40.0, Date: 31/10/2023)
 	____________________________________________________________
 	____________________________________________________________
 	Hey watch out you do not have that much cash left over according to your budget.
@@ -97,7 +97,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	Income: black jack (Amount: 800.0, Date: 27/10/2023)
+	Income: black jack (Amount: 800.0, Date: 31/10/2023)
 	____________________________________________________________
 	____________________________________________________________
 	The budget was updated to:
@@ -124,11 +124,11 @@
 |    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
 +----------+--------------+--------------------+------------------------------+--------------------+--------------------+
 |    1     |    Income    |     2020-01-01     |             job              |         -          |     + $3000.0      |
-|    2     |    Income    |     2023-10-27     |             job              |         -          |      + $600.0      |
-|    3     |    Income    |     2023-10-27     |          black jack          |         -          |      + $800.0      |
-|    4     |   Expense    |     2023-10-27     |           vacation           |         -          |     - $4000.0      |
-|    5     |   Expense    |     2023-10-19     |            dinner            |         -          |      - $50.0       |
-|    6     |   Expense    |     2023-10-27     |             tax              |         -          |      - $40.0       |
+|    2     |   Expense    |     2023-10-19     |            dinner            |         -          |      - $50.0       |
+|    3     |    Income    |     2023-10-31     |             job              |         -          |      + $600.0      |
+|    4     |    Income    |     2023-10-31     |          black jack          |         -          |      + $800.0      |
+|    5     |   Expense    |     2023-10-31     |           vacation           |         -          |     - $4000.0      |
+|    6     |   Expense    |     2023-10-31     |             tax              |         -          |      - $40.0       |
 +-----------------------------------------------------------------------------------------------------------------------+
 | Total Income: $4400.0                                                                                                 |
 | Total Expense: $4090.0                                                                                                |
@@ -136,50 +136,76 @@
 +-----------------------------------------------------------------------------------------------------------------------+
 	____________________________________________________________
 	The following expense was added:
-	Expense: milk tea (Amount: 2.5, Date: 27/10/2023)
+	Expense: milk tea (Amount: 2.5, Date: 31/10/2023)
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
-	Expense: milk tea (Amount: 4.5, Date: 27/10/2023, Category: FOOD_DRINK)
+	Expense: milk tea (Amount: 4.5, Date: 31/10/2023, Category: FOOD_DRINK)
 	____________________________________________________________
 	____________________________________________________________
 	Here are your corresponding expenses with <description>: milk tea ||
-	Expense: milk tea (Amount: 2.5, Date: 27/10/2023)
-	Expense: milk tea (Amount: 4.5, Date: 27/10/2023, Category: FOOD_DRINK)
+	Expense: milk tea (Amount: 2.5, Date: 31/10/2023)
+	Expense: milk tea (Amount: 4.5, Date: 31/10/2023, Category: FOOD_DRINK)
 	____________________________________________________________
 	____________________________________________________________
 	Here are your corresponding expenses with <amount>: 2.5 ||
-	Expense: milk tea (Amount: 2.5, Date: 27/10/2023)
+	Expense: milk tea (Amount: 2.5, Date: 31/10/2023)
 	____________________________________________________________
 	____________________________________________________________
 	No such transaction recorded leh!
 	____________________________________________________________
 	____________________________________________________________
 	Here are your corresponding transactions with <category>: FOOD_DRINK ||
-	[-] Expense: milk tea (Amount: 4.5, Date: 27/10/2023, Category: FOOD_DRINK)
+	[-] Expense: milk tea (Amount: 4.5, Date: 31/10/2023, Category: FOOD_DRINK)
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	Income: CPF (Amount: 500.0, Date: 27/10/2023, Category: OTHERS)
+	Income: CPF (Amount: 500.0, Date: 31/10/2023, Category: OTHERS)
 	____________________________________________________________
 	____________________________________________________________
 	The following income was added:
-	Income: toto prize money (Amount: 2.5, Date: 27/10/2023, Category: LOTTERY_GAMBLING)
+	Income: toto prize money (Amount: 2.5, Date: 31/10/2023, Category: LOTTERY_GAMBLING)
 	____________________________________________________________
 	____________________________________________________________
 	The following expense was added:
-	Expense: book (Amount: 10.0, Date: 27/10/2023, Category: OTHERS)
+	Expense: book (Amount: 10.0, Date: 31/10/2023, Category: OTHERS)
 	____________________________________________________________
 	____________________________________________________________
 	Here are your corresponding transactions with <category>: OTHERS ||
-	[+] Income: CPF (Amount: 500.0, Date: 27/10/2023, Category: OTHERS)
-	[-] Expense: book (Amount: 10.0, Date: 27/10/2023, Category: OTHERS)
+	[+] Income: CPF (Amount: 500.0, Date: 31/10/2023, Category: OTHERS)
+	[-] Expense: book (Amount: 10.0, Date: 31/10/2023, Category: OTHERS)
 	____________________________________________________________
 	____________________________________________________________
 	Here are your corresponding transactions with <amount>: 2.5 ||
-	[+] Income: toto prize money (Amount: 2.5, Date: 27/10/2023, Category: LOTTERY_GAMBLING)
-	[-] Expense: milk tea (Amount: 2.5, Date: 27/10/2023)
+	[+] Income: toto prize money (Amount: 2.5, Date: 31/10/2023, Category: LOTTERY_GAMBLING)
+	[-] Expense: milk tea (Amount: 2.5, Date: 31/10/2023)
 	____________________________________________________________
+	____________________________________________________________
+	The following income was added:
+	Income: a very long income description longer than MAX_DESCRIPTION set (Amount: 500.0, Date: 31/10/2023)
+	____________________________________________________________
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                                    Financial Statement                                                                    |
++----------------+--------------+--------------------+------------------------------------------------------------+--------------------+--------------------+
+|       ID       |     Type     |        Date        |                        Description                         |      Category      |       Amount       |
++----------------+--------------+--------------------+------------------------------------------------------------+--------------------+--------------------+
+|       1        |    Income    |     2020-01-01     |                            job                             |         -          |     + $3000.0      |
+|       2        |   Expense    |     2023-10-19     |                           dinner                           |         -          |      - $50.0       |
+|       3        |    Income    |     2023-10-31     |                            job                             |         -          |      + $600.0      |
+|       4        |    Income    |     2023-10-31     |                         black jack                         |         -          |      + $800.0      |
+|       5        |    Income    |     2023-10-31     |                            CPF                             |       OTHERS       |      + $500.0      |
+|       6        |    Income    |     2023-10-31     |                      toto prize money                      |  LOTTERY_GAMBLING  |       + $2.5       |
+|       7        |    Income    |     2023-10-31     |  a very long income description longer than MAX_DESCR ...  |         -          |      + $500.0      |
+|       8        |   Expense    |     2023-10-31     |                          vacation                          |         -          |     - $4000.0      |
+|       9        |   Expense    |     2023-10-31     |                            tax                             |         -          |      - $40.0       |
+|       10       |   Expense    |     2023-10-31     |                          milk tea                          |         -          |       - $2.5       |
+|       11       |   Expense    |     2023-10-31     |                          milk tea                          |     FOOD_DRINK     |       - $4.5       |
+|       12       |   Expense    |     2023-10-31     |                            book                            |       OTHERS       |      - $10.0       |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Total Income: $5402.5                                                                                                                                     |
+| Total Expense: $4107.0                                                                                                                                    |
+| Net Income: $1295.5                                                                                                                                       |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 	____________________________________________________________
 	Aiyoh! Your input blur like sotong... Clean your input for CashLeh!
 	____________________________________________________________
