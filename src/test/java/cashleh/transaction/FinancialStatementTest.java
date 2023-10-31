@@ -1,7 +1,5 @@
 package cashleh.transaction;
 
-import cashleh.budget.Budget;
-import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +13,8 @@ import java.util.OptionalDouble;
 import static cashleh.transaction.ExpenseCategories.ExpenseCategory.FOOD_DRINK;
 import static cashleh.transaction.IncomeCategories.IncomeCategory.LOTTERY_GAMBLING;
 import static cashleh.transaction.IncomeCategories.IncomeCategory.SALARY;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FinancialStatementTest {
     IncomeStatement incomeStatement;
