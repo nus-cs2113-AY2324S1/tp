@@ -3,7 +3,8 @@
 mainframe sd ViewBudget
 participant ":BudgetCommand" as BudgetCommand
 participant "<<class>>\nBudget" as Budget
-participant "<<class>>\nUi" as Ui
+participant "<<class>>\nUi" as UiClass
+participant ":Ui" as Ui
 
 alt hasBudget
     BudgetCommand -> Ui: printBudget()
