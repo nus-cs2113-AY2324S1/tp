@@ -1,9 +1,7 @@
 package essenmakanan.storage;
 
-import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
 import java.io.File;
@@ -48,13 +46,7 @@ public class IngredientStorage {
         String ingredientQuantity = parsedIngredient[1];
         IngredientUnit ingredientUnit = null;
 
-        try {
-            ingredientUnit = IngredientParser.mapIngredientUnit(parsedIngredient[2]);
-        } catch (EssenFormatException exception) {
-            exception.handleException();
-        }
-
-        assert ingredientUnit != null : "Invalid ingredient unit";
+        ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
 
         ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
     }
