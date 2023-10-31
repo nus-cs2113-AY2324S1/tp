@@ -20,6 +20,7 @@ public class Messages {
 
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
+    public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
 
     /** Messages for view stock command */
     public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
