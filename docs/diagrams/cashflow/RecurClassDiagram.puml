@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classFontColor automatic
+
+Class "{abstract}\nLoadData" as LoadData #HoneyDew {
+    -<u>addRecurringCashflows(currentDate: LocalDate)
+    -<u>identifyRecurringCashflows(currentDate: LocalDate, cashflow: Cashflow, recur: int, dateOfAddition: LocalDate, tempCashflowList: ArrayList<Cashflow>, hasRecurred: boolean)
+    -<u>addRecurringCashflowToTempList(currentDate: LocalDate, cashflow: Cashflow, recur: int, dateOfAddition: LocalDate, tempCashflowList: ArrayList<Cashflow>)
+    -<u>addToTempList(tempCashflowList: ArrayList<Cashflow>, toAdd: Cashflow)
+
+}
+
+Class "{abstract}\nCashflow" as Cashflow #MistyRose {
+    #recur: int
+    #date: LocalDate;
+    #hasRecurred: boolean;
+    +setHasRecurred(hasRecurred: boolean)
+    +setDate(date: LocalDate)
+}
+
+Class Expense #MistyRose extends Cashflow{
+    +Expense(expense: Expense)
+}
+
+Class Income #MistyRose extends Cashflow{
+    +Income(income: Income)
+}
+
+Class Ui  #Cornsilk {
+    +printAddedCashflow(entry: Cashflow)
+}
+
+Class CashflowList #Cornsilk {
+    +load(entry: Cashflow)
+}
+
+LoadData -up-> "1" CashflowList
+LoadData -up-> "1" Ui
+LoadData .up.> Income
+LoadData .up.> Expense
+LoadData .up.> Cashflow
+CashflowList -up-> "*" Cashflow
+
+hide Circle
+skinparam classAttributeIconSize 0
+@enduml
