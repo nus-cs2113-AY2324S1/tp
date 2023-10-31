@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+title Class Diagram of CafeCtrl `next_day` Command
+
 CafeCtrl "1" --> "1" UI
 CafeCtrl "1" --> "1" Parser
 CafeCtrl "1" --> "1" Sales
@@ -25,7 +27,7 @@ class Command {
 }
 
 class UI {
-{static} - scanner : Scanner
+- scanner : Scanner
 + receiveUserInput() : String
 + showToUser() : void
 + printLine() : void
