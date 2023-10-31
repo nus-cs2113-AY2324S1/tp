@@ -13,10 +13,9 @@ import java.util.ArrayList;
  */
 public class BuyIngredientCommand extends Command {
     public static final String COMMAND_WORD = "buy_ingredient";
-    public static final String MESSAGE_USAGE = "Command Format:\n"
+    public static final String MESSAGE_USAGE = "To buy ingredient:\n"
             + COMMAND_WORD + " ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
-            + "(Items in square brackets [] are optional)\n"
             + "Example:\n"
             + COMMAND_WORD + " ingredient/rice qty/200g, ingredient/chicken qty/100g";
 

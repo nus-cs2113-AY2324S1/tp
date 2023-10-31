@@ -8,6 +8,8 @@ import seedu.cafectrl.ui.Ui;
 public class NextDayCommand extends Command {
 
     public static final String COMMAND_WORD = "next_day";
+    public static final String MESSAGE_USAGE = "To travel to next day:\n"
+            + COMMAND_WORD;
 
     private final Ui ui;
     private final Sales sales;
