@@ -171,6 +171,7 @@ class DukeTest {
         System.setOut(originalOut);
     }
 
+
     @Test
     void executeCommand_listAll_correctOutput() throws KaChinnnngException {
         // Backup the original system out
@@ -179,7 +180,7 @@ class DukeTest {
         PrintStream captureStream = new PrintStream(outputStream);
         System.setOut(captureStream);
 
-        // Assuming the list starts empty and we add an income and an expense
+        // Assuming the list starts empty, and we add an income and an expense
         duke.executeCommand("add income /de Bonus /date 03/10/2023 /amt 1000.00");
         duke.executeCommand("add expense /cat food /type lunch /de chicken sandwich /date 01/10/2023 /amt 10.00");
 
@@ -189,18 +190,23 @@ class DukeTest {
         // Capture list-all output
         duke.executeCommand("list");
         String listAllOutput = outputStream.toString().trim();
+
         String expectedListAllOutput =
                 "____________________________________________________________" + System.lineSeparator() +
                         "Here are your incomes:" + System.lineSeparator() +
                         "1. Income: Bonus | Date: 03/Oct/2023 | Amount: $1000.00" + System.lineSeparator() +
                         "Total income is: $1000.00." + System.lineSeparator() + System.lineSeparator() +
                         "Here are your expenses:" + System.lineSeparator() +
-                        "1. Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00\n" +
+                        "1. Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00" +
+                        System.lineSeparator() +
                         "Total expenses is: $10.00." + System.lineSeparator() + System.lineSeparator() +
                         "Total balance is: $990.00." + System.lineSeparator() +
                         "____________________________________________________________";
+        expectedListAllOutput = expectedListAllOutput.trim();
         assertEquals(expectedListAllOutput, listAllOutput);
 
+        // Restore the original system out
+        System.setOut(originalOut);
     }
 
     @Test
@@ -261,7 +267,7 @@ class DukeTest {
         PrintStream captureStream = new PrintStream(outputStream);
         System.setOut(captureStream);
 
-        // Assuming the list starts empty and you add an income and an expense
+        // Assuming the list starts empty, and you add an income and an expense
         duke.executeCommand("add income /de Bonus /date 03/10/2023 /amt 1000.00");
         duke.executeCommand("add expense /cat food /type lunch " +
                 "/de chicken sandwich /date 01/10/2023 /amt 10.00");

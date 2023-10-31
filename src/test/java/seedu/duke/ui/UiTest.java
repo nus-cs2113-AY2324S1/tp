@@ -105,12 +105,12 @@ public class UiTest {
         Ui.printIncomeAddedMessage(testIncome);
 
         // Assert
-        assertEquals("____________________________________________________________" + System.lineSeparator()
+        assertEquals(("____________________________________________________________" + System.lineSeparator()
                 + "Got it. I've added this income:" + System.lineSeparator()
                 + testIncome
                 + System.lineSeparator() +
                 "____________________________________________________________" +
-                System.lineSeparator(), out.toString());
+                System.lineSeparator()).trim(), out.toString().trim());
     }
 
     @Test
@@ -131,11 +131,13 @@ public class UiTest {
         Ui.printExpenseAddedMessage(testExpense);
 
         // Assert
-        assertEquals("____________________________________________________________" + System.lineSeparator()
+        assertEquals(("____________________________________________________________" + System.lineSeparator()
                 + "Got it. I've added this expense:" + System.lineSeparator()
                 + testExpense
-                + System.lineSeparator() + "____________________________________________________________" +
-                System.lineSeparator(), out.toString());
+                + System.lineSeparator() +
+                "____________________________________________________________" +
+                System.lineSeparator()).trim(), out.toString().trim());
+
     }
 
     @Test
