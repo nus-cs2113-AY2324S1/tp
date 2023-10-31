@@ -1,7 +1,8 @@
 @startuml
+!theme plain
 title Shuffle Questions Sequence Diagram
 
-participant User
+actor User
 participant CommandShuffle
 participant QuestionList
 participant Collections

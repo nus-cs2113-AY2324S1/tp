@@ -1,0 +1,31 @@
+@startuml
+!theme plain
+title Shuffle to Storage Flow
+
+class QuestionList {
+  - allQns: List<Question>
+  + addQuestion(question: Question)
+  + removeQuestion(question: Question)
+  + shuffleQuestions()
+  + saveToFile()
+  + loadFromFile()
+}
+
+class Question {
+  - text: String
+  - answer: String
+  + getText()
+  + getAnswer()
+}
+
+QuestionList --|> Question
+
+class Database {
+  - data: ArrayList<Question>  // Represents your data storage mechanism
+  + saveData(question: Question, answer: getAnswer)
+  + loadData(key: Question): getAnswer
+}
+
+QuestionList --|> Database : Data Storage
+
+@enduml

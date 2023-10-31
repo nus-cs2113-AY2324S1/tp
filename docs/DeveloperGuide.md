@@ -241,10 +241,44 @@ for a given question, that question's contents and index will be copied to a
 new ArrayList of questions, and subsequently print them.
 
 ### Edit Command
-`edit [question number] /description [description]` - edits the description of the question with the specified number
+#### Brief Description of Edit Command
+The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or 
+answer of a question. The CommandEdit class supports two edit commands: 
 
-`edit [question number] /answer [answer]` - edits the answer to the question with the specified number
+- `edit [question number] /description [description]` - edits the description of the question with the specified number
 
+- `edit [question number] /answer [answer]` - edits the answer to the question with the specified number
+
+#### Class Structure of Edit Command
+The CommandEdit class includes the following key components:
+
+- `qnIndex`: An integer representing the question number to be edited.
+- `newDescription`: A string representing the new description for the question (or null if not edited).
+- `newAnswer`: A string representing the new answer for the question (or null if not edited).
+
+#### Implementation of Edit Command
+
+![commandEditSequence.png](UML%2FCommands%2FcommandEditSequence.png)
+
+![commandEditStages.png](UML%2FCommands%2FcommandEditStages.png)
+
+Developers can use the CommandEdit class as a template for handling edit commands in the quizhub application. 
+Here are the key steps for implementing this class:
+
+- **Parsing User Input**: Parse the user input to extract the question number, edit criteria (/description or /answer), 
+and new values (description or answer).
+
+- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
+information.
+
+- **Edit Operation**: Implement the logic to execute the edit operation based on the provided criteria. This typically 
+involves invoking methods in the QuestionList and Question classes to update the question's description or answer.
+
+- **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
+`dataStorage.updateData(questions)` method is used to save changes to the question list.
+
+- **Error Handling**: Handle any exceptions or errors that may occur during the edit operation and provide appropriate 
+feedback to the user.
 
 ### Start Command - Start Quiz
 `start /[quiz mode] [start details] /[qn mode]`
@@ -266,7 +300,7 @@ The start quiz mechanism is facilitated by CommandStart under package quizhub.co
 1.	2 configurations - `/random` and `/normal`
 2.	This prompt is activated after defining `/[quiz mode]` and `/[start details]`
 3.	/random will randomize the list of questions using `java.util.Collections.shuffle` and store it within a temporary array to prevent tempering with the original array in Storage
-4.	`/normal` will not require any further actions, using the previously generated list as specified by `/[quiz mode]` and `/[start details]`
+4.	`/normal` will not requirwritee any further actions, using the previously generated list as specified by `/[quiz mode]` and `/[start details]`
 
 `/[start details]`
 1.	Define the category of `/module` i.e. `/module` number to call upon the “number” tagged modules when starting the quiz
@@ -276,7 +310,18 @@ Thereafter the quiz is started by calling the method `startQuiz()` in package `q
 
 ### Shuffle Command
 `shuffle` - shuffle quiz questions to a random order
+
 ![commandShuffleSequence.png](UML%2FCommands%2FcommandShuffleSequence.png)
+
+The "shuffle" command in QuizHub is used to shuffle the order of questions within a question list. 
+This command provides users with the ability to randomize the sequence of questions, which can be useful for 
+creating randomized quizzes or study sessions. 
+
+![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML%2FCommands%2FShuffleToStorage-Shuffle_to_Storage_Flow.png)
+
+**NOTE:** The randomised sequence will be stored PERMANENTLY in storage. This is unlike /random for command start which 
+creates a temporary array to store the randomised sequence of questions
+
 
 ### Markdiff Command
 `markdiff [question number] /[question difficulty]` - sets the difficulty of question
