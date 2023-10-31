@@ -30,7 +30,6 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.text.ParseException;
 
 /**
  * Parse everything received from the users on terminal
@@ -464,36 +463,4 @@ public class Parser {
         return sales.getOrderList(currentDay);
     }
 
-    /**
-     * Parses the given arguments string to identify task index number.
-     *
-     * @param userInput arguments string to parse as index number
-     * @param command expected String name of the command called
-     * @return the parsed index number
-     * @throws ParseException if no region of the args string could be found for the index
-     * @throws NumberFormatException the args string region is not a valid number
-     */
-    private static int parseArgsAsDisplayedIndex(String userInput, String command)
-            throws ParseException, NumberFormatException {
-        String formattedString = userInput.replace(command, "").trim();
-        return Integer.parseInt(formattedString);
-    }
-
-    /**
-     * Extracts the quantity (numeric part) from a given string containing both quantity and unit.
-     * @param qty A string containing both quantity and unit (e.g., "100g").
-     * @return An integer representing the extracted quantity.
-     */
-    public static int extractQty(String qty) {
-        return Integer.parseInt(qty.replaceAll("[^0-9]", ""));
-    }
-
-    /**
-     * Extracts the unit (non-numeric part) from a given string containing both quantity and unit.
-     * @param qty A string containing both quantity and unit (e.g., "100g").
-     * @return A string representing the extracted unit.
-     */
-    public static String extractUnit(String qty) {
-        return qty.replaceAll("[0-9]", "");
-    }
 }
