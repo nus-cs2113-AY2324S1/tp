@@ -357,17 +357,18 @@ quizhub application. Here are the key steps for implementing this class:
 - **Parsing User Input**: Parse the user input to extract the question number and the specified difficulty level.
 
 - **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
-- information.
+information.
 
 - **Marking Difficulty**: Implement the logic to execute the operation of marking the question with the specified 
-- difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
-- uestion's difficulty.
+difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
+uestion's difficulty.
 
 - **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
 `dataStorage.updateData(questions)` method is used to save changes to the question list.
 
 - **Error Handling**: Handle any exceptions or errors that may occur during the marking operation and provide 
-- appropriate feedback to the user.
+appropriate feedback to the user.
+
 
 ### Command Exit - Exit Program
 
@@ -529,7 +530,7 @@ provide information for executing complex instructions.
 ### Launch
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest `tp_version_1.0.jar` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases/download/Version_1_0/tp_version_1.0.jar).
+2. Download the latest `tp_version_2.0.jar` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases/download/Version_2_0/tp_version_2.0.jar).
 3. Copy the file to the folder you want to use as the home folder for your QuizHub.
-4. Open a command terminal, cd into the folder you put the `tp_version_1.0.jar` file in, and use the java -jar 
-`tp_version_1.0.jar` command to run the application and launch the CLI.
+4. Open a command terminal, cd into the folder you put the `tp_version_2.0.jar` file in, and use the java -jar 
+`tp_version_2.0.jar` command to run the application and launch the CLI.
