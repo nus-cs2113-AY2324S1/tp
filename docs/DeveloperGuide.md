@@ -22,6 +22,10 @@
 - author: Google
 - source: [https://github.com/google/gson](https://github.com/google/gson)
 
+**Financial Modeling Prep Stock API**
+- author: Financial Modeling Prep
+- source: https://site.financialmodelingprep.com/
+
 **round() method in Cashflow.java**
   - author: mhadidg
   - source: [https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places]()
