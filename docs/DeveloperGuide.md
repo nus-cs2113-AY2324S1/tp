@@ -146,7 +146,7 @@ unnecessary expenses.
 * Create periodic income and expenses (subscription fees, salaty etc.)
 * View sum of income and expenses base on specified time range
 * Password protection when starting app
-* Able to rest password
+* Able to reset password
 * More personal information in addition to name (location, age, etc.)
 * Tutorial/guide to use the app
 * Able to set preferred currency, all transaction to be converted accordingly
