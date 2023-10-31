@@ -8,12 +8,14 @@ deactivate Input
 
 CashLeh -> Parser: parse(inputString)
 activate Parser
-Parser --> CashLeh: command
-deactivate Parser
 
-CashLeh -> Parser: execute()
-activate Parser
-Parser --> CashLeh:
+create Command
+Parser -> Command: command
+activate Command
+deactivate Parser
+Command -> Command: execute()
+
+Command --> CashLeh:
 deactivate Parser
 
 @enduml
