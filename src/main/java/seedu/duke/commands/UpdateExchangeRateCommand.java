@@ -1,14 +1,17 @@
 package seedu.duke.commands;
 
 import seedu.duke.financialrecords.ExchangeRateManager;
+import seedu.duke.storage.ExchangeRateFileHandler;
 
 import java.util.Arrays;
 
 public class UpdateExchangeRateCommand extends Command {
+    ExchangeRateFileHandler exchangeRateFileHandler;
     String currency;
     double rate;
-    public UpdateExchangeRateCommand(String fullCommand) throws KaChinnnngException {
+    public UpdateExchangeRateCommand(String fullCommand, ExchangeRateFileHandler exchangeRateFileHandler) throws KaChinnnngException {
         try {
+            this.exchangeRateFileHandler = exchangeRateFileHandler;
             String[] args = parse(fullCommand);
             currency = args[0];
             rate = Double.parseDouble(args[1]);
@@ -22,6 +25,7 @@ public class UpdateExchangeRateCommand extends Command {
         ExchangeRateManager exchangeRateManager = ExchangeRateManager.getInstance();
         exchangeRateManager.updateExchangeRate(currency, rate);
         System.out.printf("The SGD/%s rate has been updated to %s.\n", currency.toUpperCase(), rate);
+        exchangeRateFileHandler.save(exchangeRateManager.getExchangeRates());
     }
 
     private static String[] parse(String fullCommand) throws KaChinnnngException {

@@ -5,6 +5,7 @@ import seedu.duke.commands.*;
 import seedu.duke.financialrecords.ExchangeRateManager;
 import seedu.duke.financialrecords.Income;
 import seedu.duke.financialrecords.Expense;
+import seedu.duke.storage.ExchangeRateFileHandler;
 import seedu.duke.storage.GetFromTxt;
 import seedu.duke.storage.SaveToTxt;
 import seedu.duke.ui.Ui;
@@ -26,7 +27,7 @@ public class Duke {
     private SaveToTxt save;
     private GetFromTxt get;
     private ExchangeRateManager exchangeRateManager;
-    private String exchangeRateFilePath;
+    private ExchangeRateFileHandler exchangeRateFileHandler;
 
     public Duke() {
         ui = new Ui();
@@ -36,6 +37,7 @@ public class Duke {
         save = new SaveToTxt(storagePath);
         get = new GetFromTxt(storagePath);
         exchangeRateManager = ExchangeRateManager.getInstance();
+        exchangeRateFileHandler = new ExchangeRateFileHandler("./data/ExchangeRates.txt");
     }
     /**
      * This method runs the program.
@@ -44,7 +46,7 @@ public class Duke {
         Ui.printWelcomeMessage();
         try {
             get.getFromTextFile(incomes, expenses);
-            exchangeRateManager.getExchangeRatesFromFile();
+            exchangeRateFileHandler.load();
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
         } catch (KaChinnnngException e) {
@@ -176,7 +178,7 @@ public class Duke {
                     break;
                 case "update_exchange_rate":
                     Ui.showLineDivider();
-                    Command c = new UpdateExchangeRateCommand(fullCommand);
+                    Command c = new UpdateExchangeRateCommand(fullCommand, exchangeRateFileHandler);
                     c.execute();
                     Ui.showLineDivider();
                     break;
