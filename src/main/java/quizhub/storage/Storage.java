@@ -108,7 +108,6 @@ public class Storage {
         } catch(NullPointerException | IOException invalidFilePath) {
             System.out.println("    " + invalidFilePath.getMessage());
         }
-        int questionIndex = 0;
         try {
             Scanner fileScanner = new Scanner(dataFile);
             // Pipe all lines into string arrayList for processing
@@ -118,9 +117,11 @@ public class Storage {
                 rawQuestions.add(rawQuestion);
             }
             if (rawQuestions.size() <= 1) {
+                fileScanner.close();
                 return;
             }
             parseQuestionsFromStrings(rawQuestions, questions);
+            fileScanner.close();
         } catch(NullPointerException | IOException  invalidFilePath) {
             System.out.println("    " + invalidFilePath.getMessage());
         }

@@ -14,6 +14,7 @@ import quizhub.command.CommandMarkDifficulty;
 import quizhub.command.CommandHelp;
 import quizhub.question.Question;
 import quizhub.ui.Ui;
+import quizhub.exception.QuizHubExceptions;
 
 /**
  * Represents a parser that converts user inputs into command objects.
@@ -178,6 +179,9 @@ public class Parser {
         String[] editDetails;
         try {
             editDetails = userInput.split(" ");
+            if (editDetails.length > 2) {
+                throw new QuizHubExceptions();
+            }
             qnIndex = Integer.parseInt(editDetails[1].strip());
             return new CommandDelete(qnIndex);
         } catch (NumberFormatException incompleteCommand) {
@@ -185,6 +189,9 @@ public class Parser {
                     CommandDelete.INVALID_FORMAT_MSG);
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             return new CommandInvalid(CommandDelete.MISSING_INDEX_MSG + System.lineSeparator() +
+                    CommandDelete.INVALID_FORMAT_MSG);
+        } catch (QuizHubExceptions invalidCommand) {
+            return new CommandInvalid(CommandDelete.EXCESSIVE_INDEX_MSG + System.lineSeparator() +
                     CommandDelete.INVALID_FORMAT_MSG);
         }
     }
