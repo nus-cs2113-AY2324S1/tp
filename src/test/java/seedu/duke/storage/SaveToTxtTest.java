@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for the {@link SaveToTxt} class.
- * This test class provides test cases to check the calculation and reporting
- * of financial balance between income and expenses.
+ * This test class provides test cases to check whether incomes and expenses records
+ * are saved correctly to the txt file
  */
 public class SaveToTxtTest {
     private ArrayList<Income> incomes;
@@ -41,8 +41,8 @@ public class SaveToTxtTest {
     }
 
     /**
-     * Test the {@link Balance#getBalance()} method with both income and expenses.
-     * This test case checks if the balance calculation correctly subtracts expenses from income.
+     * Test the {@link SaveToTxt#saveIncomeToTextFile(ArrayList)} method with income only.
+     * This test case checks whether the one incomes record can save correctly.
      */
     @Test
     public void testSaveToTxtWithOneIncome() throws KaChinnnngException, IOException {
@@ -57,8 +57,8 @@ public class SaveToTxtTest {
         test.saveIncomeAndExpense(incomes, expenses);
     }
     /**
-     * Test the {@link Balance#getBalance()} method with both income and expenses.
-     * This test case checks if the balance calculation correctly subtracts expenses from income.
+     * Test the {@link SaveToTxt#saveIncomeToTextFile(ArrayList)} method with incomes only.
+     * This test case checks whether the multiple incomes record can save correctly.
      */
     @Test
     public void testSaveToTxtWithMoreThanOneIncomes() throws KaChinnnngException, IOException {
@@ -79,8 +79,8 @@ public class SaveToTxtTest {
         assertEquals("I | Bonus | 1000.0 | 2023-10-15" ,lines[1]);
     }
     /**
-     * Test the {@link Balance#getBalance()} method with both income and expenses.
-     * This test case checks if the balance calculation correctly subtracts expenses from income.
+     * Test the {@link SaveToTxt#saveExpenseToTextFile(ArrayList)} method with expense of Food type only.
+     * This test case checks whether the Food expenses record can save correctly.
      */
     @Test
     public void testSaveToTxtWithFoodType() throws KaChinnnngException, IOException {
@@ -99,8 +99,8 @@ public class SaveToTxtTest {
         assertEquals("EF | chicken sandwich | 10.0 | 2023-10-01 | 2", lines[0]);
     }
     /**
-     * Test the {@link Balance#getBalance()} method with both income and expenses.
-     * This test case checks if the balance calculation correctly subtracts expenses from income.
+     * Test the {@link SaveToTxt#saveExpenseToTextFile(ArrayList)} method with expense of Transportation type only.
+     * This test case checks whether the Transportation type expenses record can save correctly.
      */
     @Test
     public void testSaveToTxtWithTransportationType() throws KaChinnnngException, IOException {
@@ -119,8 +119,8 @@ public class SaveToTxtTest {
         assertEquals("ET | Taxi | 50.0 | 2023-10-01 | 4", lines[0]);
     }
     /**
-     * Test the {@link Balance#getBalance()} method with both income and expenses.
-     * This test case checks if the balance calculation correctly subtracts expenses from income.
+     * Test the {@link SaveToTxt#saveExpenseToTextFile(ArrayList)} method with expense of Utility type only.
+     * This test case checks whether the Utility expenses record can save correctly.
      */
     @Test
     public void testSaveToTxtWithUtilityType() throws KaChinnnngException, IOException {
@@ -140,8 +140,8 @@ public class SaveToTxtTest {
     }
 
     /**
-     * Test the {@link Balance#getBalance()} method with both income and expenses.
-     * This test case checks if the balance calculation correctly subtracts expenses from income.
+     * Test the {@link SaveToTxt#saveExpenseToTextFile(ArrayList)} method with different expense type but no incomes.
+     * This test case checks whether the different type of expenses record can save correctly.
      */
     @Test
     public void testSaveToTxtWithDifferentExpenseType() throws KaChinnnngException, IOException {
@@ -165,8 +165,8 @@ public class SaveToTxtTest {
     }
 
     /**
-     * Test the {@link Balance#getBalance()} method with both income and expenses.
-     * This test case checks if the balance calculation correctly subtracts expenses from income.
+     * Test the {@link SaveToTxt#saveIncomeAndExpense(ArrayList, ArrayList)} method with both incomes and expenses.
+     * This test case checks whether both incomes and expenses can save correctly
      */
     @Test
     public void testSaveToTxtWithDifferentExpensesAndIncomes() throws KaChinnnngException, IOException {
