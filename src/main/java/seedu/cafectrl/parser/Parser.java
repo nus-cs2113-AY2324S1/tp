@@ -81,7 +81,7 @@ public class Parser implements ParserUtil {
      * @param pantry The arraylist object created that stores current ingredients in stock
      * @return command requested by the user
      */
-    public Command parseCommand(Menu menu, String userInput, Ui UI,
+    public Command parseCommand(Menu menu, String userInput, Ui ui,
             Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
