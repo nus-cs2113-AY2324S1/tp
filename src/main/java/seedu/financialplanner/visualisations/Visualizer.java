@@ -8,6 +8,11 @@ import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler;
+import org.knowm.xchart.RadarChart;
+import org.knowm.xchart.RadarChartBuilder;
+import seedu.financialplanner.cashflow.Expense;
+import seedu.financialplanner.enumerations.ExpenseType;
+import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import javax.swing.JFrame;
@@ -31,6 +36,9 @@ public class Visualizer {
             break;
         case "bar":
             displayBarChart(cashFlowByCat, type);
+            break;
+        case "radar":
+            displayRadarChart(cashFlowByCat, type);
             break;
         default:
             throw new FinancialPlannerException(chart + " Chart Type Not Found");
@@ -90,4 +98,57 @@ public class Visualizer {
                 ()->swHR.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
         );
     }
+
+
+    public static void displayRadarChart (HashMap<String, Double> cashflowByCat, String type)
+            throws FinancialPlannerException {
+        RadarChart radarChart = new RadarChartBuilder().width(800).height(600)
+                .title(StringUtils.capitalize(type) + " Chart")
+                .build();
+
+        // Customize Chart
+        Color[] sliceColors = new Color[] {
+                new Color(62, 154, 230),
+        };
+
+        radarChart.getStyler().setSeriesColors(sliceColors);
+
+        String[] keys = new String[0];
+        switch (type) {
+        case "income":
+            keys = IncomeType.getNames(IncomeType.class);
+            break;
+        case "expense":
+            keys = ExpenseType.getNames(ExpenseType.class);
+            break;
+        }
+        if (keys.length == 0) {
+            throw new FinancialPlannerException("Error displaying RadarChart");
+        }
+        double[] values = new double[keys.length];
+        double max = 1;
+        for (int i = 0; i < keys.length; i += 1) {
+            if (cashflowByCat.containsKey(keys[i].toLowerCase())) {
+                values[i] = cashflowByCat.get(keys[i].toLowerCase());
+                max = Math.max(values[i], max);
+            } else {
+                values[i] = 0;
+            }
+        }
+
+        for (int i = 0; i < keys.length; i += 1) {
+            values[i] /= max;
+        }
+
+        radarChart.setRadiiLabels(keys);
+        radarChart.addSeries(type, values);
+
+        logger.log(Level.INFO, "Displaying Radar Chart");
+        JFrame swHR = new SwingWrapper<>(radarChart).displayChart();
+        SwingUtilities.invokeLater(
+                ()->swHR.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
+        );
+    }
+
+
 }
