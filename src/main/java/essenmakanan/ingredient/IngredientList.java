@@ -34,7 +34,7 @@ public class IngredientList {
         return ingredients.isEmpty();
     }
 
-    public boolean ingredientExist(String ingredientName) {
+    public boolean exist(String ingredientName) {
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(ingredientName)) {
                 return true;
@@ -43,7 +43,7 @@ public class IngredientList {
         return false;
     }
 
-    public boolean ingredientExist(int id) {
+    public boolean exist(int id) {
         if (id >= 0 && id < ingredients.size()) {
             return true;
         }

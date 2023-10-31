@@ -27,7 +27,7 @@ public class DeleteIngredientCommandTest {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "2");
         deleteCommand.executeCommand();
         assert ingredients.getIngredient(0) == ingredient0 : "Wrong ingredient was removed";
-        assert !ingredients.ingredientExist(1) : "Ingredient was not removed";
+        assert !ingredients.exist(1) : "Ingredient was not removed";
     }
 
     @Test
@@ -35,7 +35,7 @@ public class DeleteIngredientCommandTest {
         Command deleteCommand = new DeleteIngredientCommand(ingredients, "apple");
         deleteCommand.executeCommand();
         assert ingredients.getIngredient(0) == ingredient0 : "Wrong ingredient was removed";
-        assert !ingredients.ingredientExist(1) : "Ingredient was not removed";
+        assert !ingredients.exist(1) : "Ingredient was not removed";
     }
 
     @Test

@@ -80,7 +80,9 @@ public class Ui {
                                                IngredientList diffUnitIngredients,
                                                String recipeTitle) {
         System.out.println("Starting Recipe: " + recipeTitle + "\n");
-        boolean allEmpty = missingIngredients.isEmpty() && insufficientIngredients.isEmpty() && diffUnitIngredients.isEmpty();
+        boolean allEmpty = missingIngredients.isEmpty()
+                && insufficientIngredients.isEmpty()
+                && diffUnitIngredients.isEmpty();
         if (allEmpty) {
             System.out.println("You have all the ingredients you need! You are ready to go!");
         } else {

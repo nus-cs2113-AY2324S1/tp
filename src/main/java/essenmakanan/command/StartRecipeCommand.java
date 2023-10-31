@@ -16,9 +16,9 @@ public class StartRecipeCommand extends Command {
     private IngredientList ingredients;
     private RecipeList recipes;
     private RecipeIngredientList recipeIngredients;
-    public IngredientList missingIngredients;
-    public IngredientList insufficientIngredients;
-    public IngredientList diffUnitIngredients;
+    private IngredientList missingIngredients;
+    private IngredientList insufficientIngredients;
+    private IngredientList diffUnitIngredients;
 
     public StartRecipeCommand(String input, RecipeList recipes, IngredientList ingredients) {
         this.input = input;
@@ -37,7 +37,7 @@ public class StartRecipeCommand extends Command {
         for (Ingredient recipeIngredient : recipeIngredients.getIngredients()) {
             recipeIngredientName = recipeIngredient.getName();
             recipeIngredientUnit = recipeIngredient.getUnit();
-            if (!ingredients.ingredientExist(recipeIngredientName)) {
+            if (!ingredients.exist(recipeIngredientName)) {
                 missingIngredients.addIngredient(recipeIngredient);
             } else {
                 Ingredient inventoryIngredient = ingredients.getIngredient(recipeIngredientName);
@@ -52,7 +52,8 @@ public class StartRecipeCommand extends Command {
                     missingQuantity = IngredientParser.getInsufficientQuantity(recipeIngredient, inventoryIngredient);
                 }
                 if (isSameUnit && !missingQuantity.equals("0")) {
-                    Ingredient lackingIngredient = new Ingredient(recipeIngredientName, missingQuantity, recipeIngredientUnit);
+                    Ingredient lackingIngredient = new Ingredient(
+                            recipeIngredientName, missingQuantity, recipeIngredientUnit);
                     insufficientIngredients.addIngredient(lackingIngredient);
                 }
             }

@@ -18,7 +18,7 @@ public class IngredientParser {
             index = ingredients.getIndex(input);
         }
 
-        if (!ingredients.ingredientExist(index)) {
+        if (!ingredients.exist(index)) {
             throw new EssenOutOfRangeException();
         }
 
@@ -41,8 +41,8 @@ public class IngredientParser {
         Double quantityNeeded = Double.parseDouble(ingredientNeeded.getQuantity());
         Double quantityAvailable = Double.parseDouble(ingredientAvailable.getQuantity());
 
-        if (quantityNeeded < quantityAvailable) {
-            return Double.toString(quantityAvailable - quantityNeeded);
+        if (quantityNeeded > quantityAvailable) {
+            return Double.toString(quantityNeeded - quantityAvailable);
         }
 
         return zeroQuantity;
