@@ -46,7 +46,7 @@ diagram summarizing these relationships.
 
 ![](./images/budgetHandler_classDiagram.png)
 
-When the user enters the command to view a budget, the following happens:
+When the user enters the command to view a budget `viewBudget`, the following happens:
 
 ![](./images/budgetHandler_sequenceDiagram.png)
 
