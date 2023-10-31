@@ -1,44 +1,53 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-
-class ArrayList {
-Object[] elementData
-size()
-}
-
 class Storage {
+    # fileManager: FileManager
     + loadMenu(): Menu
+    - saveMenu(menu: Menu): void
     + loadPantryStock(): Pantry
-    + loadSales(): Sales
+    - savePantryStock(pantry: Pantry): void
+    + loadOrderList(menu: menu): Sales
+    - saveOrderList(sales: Sales): void
     + saveAll(menu: Menu, sales: Sales, pantry: Pantry): void
-    + savePantryStock(pantry: Pantry): void
-    + saveSales(sales: Sales): void
-    + saveMenu(menu: Menu): void
 }
 
-class Ui {
+class Data
+note bottom of Data: Classes in data package: \nMenu, Pantry and Sales
 
+class Ui
+
+class FilePath {
+    + MENU_FILE_PATH: String
+    + PANTRY_STOCK_FILE_PATH: String
+    + ORDERS_FILE_PATH: String
 }
 
 class FileManager {
-
+    + openTextFile(:FilePath): String
+    + readTextFile(:FilePath): ArrayList<String>): void
+    + overwriteFile(:FilePath, :ArrayList<String>): void
 }
 
 class Decoder {
+    + {static} decodeData(encodedData: ArrayList<String>): Data
+    + {static} decodeSales(encodedOrderList: ArrayList<String>, menu: Menu): Data
+}
+note top of Decoder: decodeData function for\nMenu and PantryStock data
 
+class Encoder {
+    + {static} encodeData(data: Data): ArrayList<String>
 }
 
-class Sales {
+CafeCtrl *-- "1" Storage: initializes
 
-}
+FileManager "1" --* Storage
+Storage ..> Data: stores >
+Ui "1" --* FileManager : uses <
 
-class Pantry {
+FileManager ..> FilePath: reads from >
 
-}
+Encoder ..> Data: encodes >
 
-class FilePath {
-
-}
-
+Decoder ..> Data: decodes >
 @enduml
