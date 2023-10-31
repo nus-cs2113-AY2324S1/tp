@@ -79,7 +79,7 @@ public class Parser implements ParserUtil {
      * @return command requested by the user
      */
     public Command parseCommand(Menu menu, String userInput, Ui ui,
-                                Pantry pantry, Sales sales, CurrentDate currentDate) {
+            Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
