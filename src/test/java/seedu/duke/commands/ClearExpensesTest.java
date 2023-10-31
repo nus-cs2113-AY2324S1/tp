@@ -11,7 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
- * This class contains JUnit tests for the DeleteExpenseCommand class.
+ * Tests for the {@link ClearExpenses} class.
+ * This test class provides test cases to check the deletion of records in
+ * expenses record list
  */
 public class ClearExpensesTest {
     private ArrayList<Expense> expenses;

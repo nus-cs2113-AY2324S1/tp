@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Tests for the {@link Balance} class.
- * This test class provides test cases to check the calculation and reporting
- * of financial balance between income and expenses.
+ * Tests for the {@link ClearAll} class.
+ * This test class provides test cases to check the deletion of records in
+ * both incomes and expenses record list
  */
 public class ClearAllTest {
     private ArrayList<Income> incomes;

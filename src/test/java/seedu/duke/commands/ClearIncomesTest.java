@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * This class contains JUnit tests for the DeleteExpenseCommand class.
+ * Tests for the {@link ClearAll} class.
+ * This test class provides test cases to check the deletion of records in
+ * both incomes and expenses record list
  */
 public class ClearIncomesTest {
     private ArrayList<Income> incomes;
