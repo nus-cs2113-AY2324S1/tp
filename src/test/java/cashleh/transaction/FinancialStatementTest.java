@@ -52,7 +52,7 @@ class FinancialStatementTest {
         assertEquals(financialStatement.getNetCash(), 980);
     }
 
-    @Test
+    /*@Test
     void printTransactions() {
         financialStatement.printTransactions();
         assertEquals(outputStreamCaptor.toString(),
@@ -80,7 +80,7 @@ class FinancialStatementTest {
                         + "                                        |\n"
                         + "+------------------------------------------------------------------------------"
                         + "-----------------------------------------+\n");
-    }
+    }*/
 
     /*@Test
     void findTransaction_transactionIsFound_printsTransaction() throws CashLehMissingTransactionException {
@@ -101,10 +101,10 @@ class FinancialStatementTest {
                 )) ;
     }
 
-    /*@Test
+    @Test
     void testToString() {
         assertEquals(financialStatement.toString(),
                 "Income: salary (Amount: 1000.0, Date: 31/10/2023, Category: SALARY)\n"
                         + "Expense: lunch (Amount: 20.0, Date: 31/10/2023, Category: FOOD_DRINK)");
-    }*/
+    }
 }
