@@ -92,17 +92,20 @@ public class WatchList {
         logger.log(Level.INFO, "Requesting API endpoint FMP");
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if(response.statusCode() != 200) {
+                throw new FinancialPlannerException("API might be down at the moment...");
+            }
             // System.out.println(response.body());
             obj = new JSONParser().parse(response.body());
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Cant request API endpoint");
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, "IO exception when sending request or receiving response");
+            throw new FinancialPlannerException("Is your internet down?");
         } catch (InterruptedException e) {
             logger.log(Level.SEVERE, "Interrupted");
-            throw new RuntimeException(e);
+            throw new FinancialPlannerException("Request to API was interrupted");
         } catch (ParseException e) {
             logger.log(Level.SEVERE, "Could not parse to JSON");
-            throw new RuntimeException(e);
+            throw new FinancialPlannerException("Could not parse to JSON format");
         }
         extractWatchlistInfoFromJSONArray((JSONArray) obj);
     }
