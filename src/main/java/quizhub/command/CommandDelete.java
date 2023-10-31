@@ -10,6 +10,7 @@ public class CommandDelete extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as delete [question number]";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
+    public static final String EXCESSIVE_INDEX_MSG = "    Please enter only 1 question index!";
     private int qnIndex;
 
     /**
@@ -33,7 +34,8 @@ public class CommandDelete extends Command {
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions){
         String questionName = questions.viewQuestionByIndex(qnIndex);
         if (questionName.equals("Question Not Found")) {
-            ui.displayMessage("    Ono! The question you are deleting is not found!");
+            ui.showInvalidCommandHelp(Ui.INVALID_INTEGER_INDEX_MSG);
+            ui.displayNumberOfQuestions();
             return;
         }
         questions.deleteQuestionByIndex(qnIndex);

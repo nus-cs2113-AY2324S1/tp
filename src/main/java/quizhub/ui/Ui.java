@@ -10,6 +10,15 @@ import java.util.Scanner;
  * Supports CLI interactions with users.
  */
 public class Ui {
+    public static final String LOGO =
+                    "    _______          _________ _______                    ______  \n" +
+                    "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
+                    "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
+                    "   | |   | || |   | |   | |       /   )| (___) || |   | || (__/ / \n" +
+                    "   | |   | || |   | |   | |      /   / |  ___  || |   | ||  __ (  \n" +
+                    "   | | /\\| || |   | |   | |     /   /  | (   ) || |   | || (  \\ \\ \n" +
+                    "   | (_\\ \\ || (___) |___) (___ /   (_/\\| )   ( || (___) || )___) )\n" +
+                    "   (____\\/_)(_______)\\_______/(_______/|/     \\|(_______)|/ \\___/";
     public static final String INVALID_COMMAND_MSG =  "    Please enter a valid command :0";
     public static final String INVALID_COMMAND_FEEDBACK = "    Here are the list of commands you can use:" +
             System.lineSeparator() +
@@ -72,15 +81,7 @@ public class Ui {
      * on the launch of QuizHub application.
      */
     public void displayOpeningMessage(){
-        String logo =  "    _______          _________ _______                    ______  \n" +
-                    "   (  ___  )|\\     /|\\__   __// ___   )|\\     /||\\     /|(  ___ \\ \n" +
-                    "   | (   ) || )   ( |   ) (   \\/   )  || )   ( || )   ( || (   ) )\n" +
-                    "   | |   | || |   | |   | |       /   )| (___) || |   | || (__/ / \n" +
-                    "   | |   | || |   | |   | |      /   / |  ___  || |   | ||  __ (  \n" +
-                    "   | | /\\| || |   | |   | |     /   /  | (   ) || |   | || (  \\ \\ \n" +
-                    "   | (_\\ \\ || (___) |___) (___ /   (_/\\| )   ( || (___) || )___) )\n" +
-                    "   (____\\/_)(_______)\\_______/(_______/|/     \\|(_______)|/ \\___/";
-        System.out.println(logo);
+        System.out.println(LOGO);
         showLine();
         System.out.println("    Welcome to Quizhub!!!\n");
         System.out.println("    Let the quizzing begin XDD");
@@ -145,6 +146,10 @@ public class Ui {
 
     public void displayMessage(String message) {
         System.out.println(message);
+    }
+
+    public void displayNumberOfQuestions() {
+        System.out.println("    Now you have " + questions.getQuestionListSize() + " questions in the list.");
     }
 }
 

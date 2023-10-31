@@ -71,8 +71,9 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteOutOfBoundIndex() {
-        String expectedOutput = "Ono! Please enter valid question number *sobs*";
-        questionList.deleteQuestionByIndex(-1);
+        String expectedOutput = "Please enter valid integer question index!    " + 
+            "Now you have 4 questions in the list.";
+        Parser.parseCommand("delete -1").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
 
@@ -98,9 +99,20 @@ public class CommandDeleteTest {
         testCliOutputCorrectness(expectedOutput.strip());
     }
 
-    // /**
-    // * Test deleting with valid index
-    // * */
+    /** 
+     * Test deleting with excessive index
+     */
+    @Test
+    void testDeleteExcessiveIndex() {
+        String expectedOutput = CommandDelete.EXCESSIVE_INDEX_MSG +
+                CommandDelete.INVALID_FORMAT_MSG;
+        Parser.parseCommand("delete 1 2").executeCommand(ui, mockStorage, questionList);
+        testCliOutputCorrectness(expectedOutput.strip());
+    }
+
+    /**
+    * Test deleting with valid index
+    */
     @Test
     void testDeleteValidIndex() {
         String expectedOutput = "Roger that! I have deleted the following question >w< !" +
