@@ -41,11 +41,20 @@ Class AddCashflowCommand #HoneyDew {
 }
 
 enum "<<enumeration>>\nExpenseType" as ExpenseType #MintCream {
-    DINING, ENTERTAINMENT, SHOPPING, TRAVEL, INSURANCE, NECESSITIES, OTHERS
+    DINING
+    ENTERTAINMENT
+    SHOPPING
+    TRAVEL
+    INSURANCE
+    NECESSITIES
+    OTHERS
 }
 
 enum "<<enumeration>>\nIncomeType" as IncomeType #MintCream{
-    SALARY, INVESTMENTS, ALLOWANCE, OTHERS
+    SALARY
+    INVESTMENTS
+    ALLOWANCE
+    OTHERS
 }
 
 CashflowList -right-> "1" Ui

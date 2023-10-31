@@ -1,29 +1,38 @@
 @startuml
 
 participant ":AddCashflowCommand" as AddCashflowCommand
-participant "CashflowList" as CashflowList
+participant ":CashflowList" as CashflowList
 participant ":Income" as Income
 participant ":Expense" as Expense
-participant "Ui" as Ui
+participant ":Ui" as Ui
 
 -> AddCashflowCommand: execute()
+activate AddCashflowCommand
 alt income
     AddCashflowCommand -> CashflowList: addIncome(amount, incomeType, recur, description)
+    activate CashflowList
     create Income
     CashflowList -> Income: Income(value, type, recur, description)
+    activate Income
     Income -> Income: addIncomeValue()
+    return
     CashflowList -> CashflowList: addToList(toAdd)
     CashflowList -> Ui: printAddedCashflow(toAdd)
+    return
 
 else expense
     AddCashflowCommand -> CashflowList: addExpense(amount, incomeType, recur, description)
+    activate CashflowList
     create Expense
     CashflowList -> Expense: Expense(value, type, recur, description)
+    activate Expense
     Expense -> Expense: addExpenseValue()
+    return
     CashflowList -> CashflowList: addToList(toAdd)
     CashflowList -> Ui: printAddedCashflow(toAdd)
-else invalid command
+    return
 end
+return
 
 hide footbox
 @enduml
