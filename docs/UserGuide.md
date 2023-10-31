@@ -37,6 +37,32 @@ Hello! Welcome to CafeCTRL!
 Shows a message explaining how to use all the commands
 
 Format: `help`
+Output:
+```
+These are all the commands I recognise: 
+
+(- Words in UPPER_CASE are the parameters to be supplied by the user.
+e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.
+- Parameters in [] are optional.)
+
+Command Format:
+add name/DISH_NAME price/DISH_PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]
+(Items in square brackets [] are optional)
+Example:
+add name/chicken rice price/3.00 ingredient/rice qty/200g, ingredient/chicken qty/100g
+
+list_ingredients: Lists out the ingredients needed along with the quantity for a specific dish.
+Parameters: INDEX
+Example: list_ingredients 1
+
+To list out all dishes on the menu: list_menu
+
+To delete a menu item: delete DISH_INDEX
+Example: delete 1
+
+edit_priceTo edit price of a menu item: edit_price index/DISH_INDEX price/NEW_PRICE
+Example: edit_price index/1 price/4.50
+```
 
 ### Adding a dish : `add`
 Adds a dish consisting of its ingredients to the menu
@@ -87,8 +113,13 @@ Edits the price of an existing dish on the menu
 
 Format: `edit_price index/DISH_INDEX price/NEW_PRICE`
 
-Example:
+Example: `edit_price index/1 price/4.50`
 
+Output: 
+```
+Price modified for the following dish: 
+Chicken rice - $4.50
+```
 
 ### Viewing the total stock of ingredients : `view_stock`
 Displays the available stock of all the ingredients found in the pantry.
@@ -116,7 +147,7 @@ Format: `bye`
 | **List Menu**             | `list_menu`                                                                                                                                                                                                                                            |
 | **List Ingredients**      | `list_ingredients DISH_INDEX`<br/><br/>Example:<br/>`list_ingredients 1`                                                                                                                                                                               |
 | **Delete**                | `delete DISH_INDEX`<br/><br/>Example:<br/>`delete 1`                                                                                                                                                                                                   |
-| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br/><br/>Example:<br/>`edit_price index/4 price/4.50`                                                                                                                                                    |
+| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br/><br/>Example:<br/>`edit_price index/1 price/4.50`                                                                                                                                                    |
 | **View Ingredient Stock** |                                                                                                                                                                                                                                                        |
 | **Buy Ingredients**       |                                                                                                                                                                                                                                                        |
 | **Add Order**             |                                                                                                                                                                                                                                                        |
