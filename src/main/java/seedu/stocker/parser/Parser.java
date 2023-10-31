@@ -26,6 +26,10 @@ import seedu.stocker.commands.ListThresholdCommand;
 import seedu.stocker.commands.AddDescriptionCommand;
 import seedu.stocker.commands.GetDescriptionCommand;
 import seedu.stocker.commands.ListDescriptionsCommand;
+import seedu.stocker.commands.AddVendorSupplyCommand;
+import seedu.stocker.commands.FindVendorSupplyCommand;
+import seedu.stocker.commands.ListVendorSupplyCommand;
+
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -64,6 +68,9 @@ public class Parser {
 
         case GetDescriptionCommand.COMMAND_WORD:
             return prepareGetDescriptionCommand(arguments);
+
+        case AddVendorSupplyCommand.COMMAND_WORD:
+            return prepareAddVendorSupplyCommand(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommand(arguments);
@@ -109,6 +116,12 @@ public class Parser {
 
         case ListDescriptionsCommand.COMMAND_WORD:
             return new ListDescriptionsCommand();
+
+        case ListVendorSupplyCommand.COMMAND_WORD:
+            return new ListVendorSupplyCommand(arguments);
+
+        case FindVendorSupplyCommand.COMMAND_WORD:
+            return new FindVendorSupplyCommand(arguments);
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -236,6 +249,21 @@ public class Parser {
                     GetDescriptionCommand.MESSAGE_USAGE));
         }
     }
+
+    private Command prepareAddVendorSupplyCommand(String args) {
+        String[] parts = args.trim().split(" ", 2);
+
+        if (parts.length == 2) {
+            String vendorName = parts[0];
+            String drugName = parts[1];
+
+            return new AddVendorSupplyCommand(vendorName, drugName);
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddVendorSupplyCommand.MESSAGE_USAGE));
+        }
+    }
+
 
 
 }
