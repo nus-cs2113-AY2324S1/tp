@@ -2,9 +2,17 @@ package essenmakanan.parser;
 
 import essenmakanan.exception.EssenException;
 import essenmakanan.exception.EssenOutOfRangeException;
+import essenmakanan.ingredient.Ingredient;
+import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.Recipe;
+import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.RecipeStepList;
+import essenmakanan.recipe.Step;
 import essenmakanan.ui.Ui;
+
+import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class RecipeParser {
 
@@ -51,4 +59,43 @@ public class RecipeParser {
         return toAdd.replace("r/", "");
     }
 
+    public static String convertSteps(ArrayList<Step> steps) {
+        StringJoiner joiner = new StringJoiner(" | ");
+
+        for (Step step: steps) {
+            joiner.add(step.getDescription());
+        }
+
+        return joiner.toString();
+    }
+
+    public static String convertIngredient(ArrayList<Ingredient> ingredients) {
+        StringJoiner joiner = new StringJoiner(" , ");
+
+        for (Ingredient ingredient: ingredients) {
+            joiner.add(IngredientParser.convertToString(ingredient));
+        }
+
+        return joiner.toString();
+    }
+
+    public static RecipeStepList parseDataSteps(String stepsString) {
+        String[] parsedSteps = stepsString.split(" \\| ");
+        return new RecipeStepList(parsedSteps);
+    }
+
+    public static RecipeIngredientList parseDataRecipeIngredients(String ingredientsString) {
+        String[] parsedIngredients = ingredientsString.split(" , ");
+        ArrayList<Ingredient> ingredientList =  new ArrayList<>();
+
+        for (String ingredient: parsedIngredients) {
+            String[] parsedIngredient = ingredient.split(" \\| ");
+            String ingredientName = parsedIngredient[0];
+            String ingredientQuantity = parsedIngredient[1];
+            IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
+            ingredientList.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+        }
+
+        return new RecipeIngredientList(ingredientList);
+    }
 }
