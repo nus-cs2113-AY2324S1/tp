@@ -249,7 +249,7 @@ public class CommandParser {
         }
     }
 
-    public Date parseDate(String date) throws PatternMatchFailException, NumberFormatException {
+    public Date parseDate(String date) throws PatternMatchFailException {
         final Matcher matcher = DATE_PATTERN.matcher(date);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
@@ -259,8 +259,8 @@ public class CommandParser {
 
         try {
             return new Date(dateString);
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException();
+        } catch (DateTimeParseException e) {
+            throw new PatternMatchFailException();
         }
     }
 
