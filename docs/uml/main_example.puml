@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+CashLeh -> Input: getInputString()
+activate Input
+Input --> CashLeh: inputString
+deactivate Input
+
+CashLeh -> Parser: parse(inputString)
+activate Parser
+Parser --> CashLeh: command
+deactivate Parser
+
+CashLeh -> Parser: execute()
+activate Parser
+Parser --> CashLeh:
+deactivate Parser
+
+@enduml

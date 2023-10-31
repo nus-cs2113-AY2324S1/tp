@@ -1,0 +1,22 @@
+@startuml
+
+card User
+card Files
+
+card {
+    card CashLeh
+    card Parser
+    card UI
+    card Input
+    card FileStorage
+}
+
+User ---> Input
+Input --> CashLeh
+CashLeh --> UI
+CashLeh --> FileStorage
+FileStorage --> CashLeh
+CashLeh --> Parser
+Parser --> CashLeh
+FileStorage ---> Files
+@enduml
