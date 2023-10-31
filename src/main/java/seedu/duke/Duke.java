@@ -48,148 +48,182 @@ public class Duke {
         save = new SaveToTxt(storagePath);
         get = new GetFromTxt(storagePath);
     }
+
     /**
      * This method runs the program.
      */
     public void run() {
         Ui.printWelcomeMessage();
+        loadData();
+
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                if ("exit".equals(fullCommand)) {
+                    isExit = true;
+                    continue;
+                }
+                executeCommand(fullCommand);
+                saveData();
+            } catch (KaChinnnngException e) {
+                Ui.showLineDivider();
+                System.out.println(e.getMessage());
+                Ui.showLineDivider();
+            }
+        }
+        ui.printGoodbyeMessage();
+    }
+
+    protected void loadData() {
         try {
             get.getFromTextFile(incomes, expenses);
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
         }
-        boolean isExit = false;
-        while (!isExit) {
+    }
+
+    protected void executeCommand(String fullCommand) throws KaChinnnngException {
+        String command = Parser.parse(fullCommand);
+        String[] parts = command.split("-", 2);
+
+        // ... (switch-case structure extracted from the original `run()` method)
+        switch (parts[0]) {
+        case "exit":
+            break;
+
+        case "add_income":
             try {
-                String fullCommand = ui.readCommand();
-                String command = Parser.parse(fullCommand);
-                String[] parts = command.split("-", 2);
-                switch (parts[0]) {
-                case "exit":
-                    isExit = true;
-                    break;
-
-                case "add_income":
-                    try{
-                        IncomeManager incomeCommand = new IncomeManager(fullCommand);
-                        incomeCommand.execute();
-                        Income newIncome = incomeCommand.getNewIncome();
-                        incomes.add(newIncome);
-                        Ui.printIncomeAddedMessage(newIncome);
-                    } catch (KaChinnnngException e) {
-                        Ui.showLineDivider();
-                        System.out.println(e.getMessage());
-                        Ui.showLineDivider();
-                    }
-                    break;
-
-                case "list_income":
-                    new IncomeLister(incomes, ui).listIncomes();
-                    break;
-
-                case "add_expense":
-                    try{
-                        ExpenseManager expenseCommand = new ExpenseManager(fullCommand);
-                        expenseCommand.execute();
-                        Expense newExpense = expenseCommand.getNewExpense();
-                        expenses.add(newExpense);
-                        ui.printExpenseAddedMessage(newExpense);
-                    } catch (KaChinnnngException e) {
-                        Ui.showLineDivider();
-                        System.out.println(e.getMessage());
-                        Ui.showLineDivider();
-                    }
-                    break;
-
-                case "list_expense":
-                    new ExpenseLister(expenses, ui).listExpenses();
-                    break;
-
-                case "list":
-                    Ui.showLineDivider();
-                    new ListCommand(incomes, expenses, ui).execute();
-                    Ui.showLineDivider();
-                    break;
-
-                case "delete_income":
-                    Ui.showLineDivider();
-                    new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
-                    Ui.showLineDivider();
-                    break;
-
-                case "delete_expense":
-                    Ui.showLineDivider();
-                    new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
-                    Ui.showLineDivider();
-                    break;
-
-                case "help":
-                    new UsageInstructions(ui).getHelp();
-                    break;
-
-                case "balance":
-                    Ui.showLineDivider();
-                    new Balance(incomes, expenses).getBalanceMessage();
-                    Ui.showLineDivider();
-                    break;
-                case "find":
-                    try {
-                        String[] parsedParameters = FindParser.parseFindCommand(fullCommand);
-                        FindCommand findCommand = new FindCommand(
-                                incomes, expenses,
-                                parsedParameters[0], parsedParameters[1],
-                                parsedParameters[2], parsedParameters[3], ui);
-                        findCommand.execute();
-                    } catch (KaChinnnngException e) {
-                        Ui.showLineDivider();
-                        System.out.println(e.getMessage());
-                    }
-                    Ui.showLineDivider();
-                    break;
-                case "clear_incomes":
-                    Ui.showLineDivider();
-                    new ClearIncomes(incomes).clearAllIncomes();
-                    Ui.showLineDivider();
-                    break;
-                case "clear_expenses":
-                    Ui.showLineDivider();
-                    new ClearExpenses(expenses).clearAllIncomes();
-                    Ui.showLineDivider();
-                    break;
-                case "clear_all":
-                    Ui.showLineDivider();
-                    new ClearAll(incomes, expenses).clearAllIncomeAndExpense();
-                    Ui.showLineDivider();
-                    break;
-                case "edit_income":
-                    Ui.showLineDivider();
-                    new EditIncomeCommand(incomes, fullCommand).execute();
-                    Ui.showLineDivider();
-                    break;
-
-                case "edit_expense":
-                    Ui.showLineDivider();
-                    new EditExpenseCommand(expenses, fullCommand).execute();
-                    Ui.showLineDivider();
-                    break;
-                default:
-                    Ui.showLineDivider();
-                    System.out.println("Invalid command. Please try again.");
-                    Ui.showLineDivider();
-                    break;
-                }
+                IncomeManager incomeCommand = new IncomeManager(fullCommand);
+                incomeCommand.execute();
+                Income newIncome = incomeCommand.getNewIncome();
+                incomes.add(newIncome);
+                Ui.printIncomeAddedMessage(newIncome);
             } catch (KaChinnnngException e) {
+                Ui.showLineDivider();
                 System.out.println(e.getMessage());
                 Ui.showLineDivider();
+                throw e;
             }
-            save.saveIncomeAndExpense(incomes,expenses);
+            break;
+
+        case "list_income":
+            new IncomeLister(incomes, ui).listIncomes();
+            break;
+
+        case "add_expense":
+            try {
+                ExpenseManager expenseCommand = new ExpenseManager(fullCommand);
+                expenseCommand.execute();
+                Expense newExpense = expenseCommand.getNewExpense();
+                expenses.add(newExpense);
+                Ui.printExpenseAddedMessage(newExpense);
+            } catch (KaChinnnngException e) {
+                Ui.showLineDivider();
+                System.out.println(e.getMessage());
+                Ui.showLineDivider();
+                throw e;
+            }
+            break;
+
+        case "list_expense":
+            new ExpenseLister(expenses, ui).listExpenses();
+            break;
+
+        case "list":
+            Ui.showLineDivider();
+            new ListCommand(incomes, expenses, ui).execute();
+            Ui.showLineDivider();
+            break;
+
+        case "delete_income":
+            Ui.showLineDivider();
+            new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
+            Ui.showLineDivider();
+            break;
+
+        case "delete_expense":
+            Ui.showLineDivider();
+            new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
+            Ui.showLineDivider();
+            break;
+
+        case "help":
+            new UsageInstructions(ui).getHelp();
+            break;
+
+        case "balance":
+            Ui.showLineDivider();
+            new Balance(incomes, expenses).getBalanceMessage();
+            Ui.showLineDivider();
+            break;
+
+        case "find":
+            try {
+                String[] parsedParameters = FindParser.parseFindCommand(fullCommand);
+                FindCommand findCommand = new FindCommand(
+                            incomes, expenses,
+                            parsedParameters[0], parsedParameters[1],
+                            parsedParameters[2], parsedParameters[3], ui);
+                findCommand.execute();
+            } catch (KaChinnnngException e) {
+                Ui.showLineDivider();
+                System.out.println(e.getMessage());
+            }
+            Ui.showLineDivider();
+            break;
+
+        case "clear_incomes":
+            Ui.showLineDivider();
+            new ClearIncomes(incomes).clearAllIncomes();
+            Ui.showLineDivider();
+            break;
+
+        case "clear_expenses":
+            Ui.showLineDivider();
+            new ClearExpenses(expenses).clearAllIncomes();
+            Ui.showLineDivider();
+            break;
+
+        case "clear_all":
+            Ui.showLineDivider();
+            new ClearAll(incomes, expenses).clearAllIncomeAndExpense();
+            Ui.showLineDivider();
+            break;
+            
+        case "edit_income":
+            Ui.showLineDivider();
+            new EditIncomeCommand(incomes, fullCommand).execute();
+            Ui.showLineDivider();
+            break;
+
+        case "edit_expense":
+            Ui.showLineDivider();
+            new EditExpenseCommand(expenses, fullCommand).execute();
+            Ui.showLineDivider();
+            break;
+
+        default:
+            throw new KaChinnnngException("Invalid command. Please try again."
+                    + "\nType 'help' to see the list of commands available.");
         }
-        ui.printGoodbyeMessage();
+    }
+
+    private void saveData() {
+        save.saveIncomeAndExpense(incomes, expenses);
     }
 
 
     public static void main(String[] args) {
         new Duke().run();
+    }
+
+    public int getIncomesSize() {
+        return this.incomes.size();
+    }
+
+    public int getExpensesSize() {
+        return this.expenses.size();
     }
 
 }
