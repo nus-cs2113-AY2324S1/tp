@@ -99,7 +99,7 @@ public abstract class LoadData {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
             boolean hasRecurred = cashflow.getHasRecurred();
-            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflowList, hasRecurred);
+            identifyRecurringCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflowList, hasRecurred);
         }
         for (Cashflow cashflow : tempCashflowList) {
             cashflowList.load(cashflow);
@@ -107,16 +107,16 @@ public abstract class LoadData {
         }
     }
 
-    private static void addRecurringCashflowToTempList(LocalDate currentDate
+    private static void identifyRecurringCashflows(LocalDate currentDate
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
             , ArrayList<Cashflow> tempCashflowList, boolean hasRecurred) throws FinancialPlannerException {
         if (recur > 0 && !hasRecurred) {
             dateOfAddition = dateOfAddition.plusDays(recur);
-            identifyRecurredCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflowList);
+            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflowList);
         }
     }
 
-    private static void identifyRecurredCashflows(LocalDate currentDate
+    private static void addRecurringCashflowToTempList(LocalDate currentDate
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
             , ArrayList<Cashflow> tempCashflowList) throws FinancialPlannerException {
         while (currentDate.isAfter(dateOfAddition) || currentDate.isEqual(dateOfAddition)) {
@@ -130,10 +130,14 @@ public abstract class LoadData {
                 throw new FinancialPlannerException("Error adding recurring cashflows");
             }
             toAdd.setDate(dateOfAddition);
-            tempCashflowList.add(toAdd);
+            addToTempList(tempCashflowList, toAdd);
             cashflow = toAdd;
             dateOfAddition = dateOfAddition.plusDays(recur);
         }
+    }
+
+    private static void addToTempList(ArrayList<Cashflow> tempCashflowList, Cashflow toAdd) {
+        tempCashflowList.add(toAdd);
     }
 
     private static void handleCorruptedFile(String message) throws FinancialPlannerException {
