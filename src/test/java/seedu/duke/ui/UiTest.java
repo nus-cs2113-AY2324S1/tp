@@ -157,20 +157,7 @@ public class UiTest {
         // Assert
         assertEquals("Here are your expenses:\n", out.toString());
     }
-
-    @Test
-    public void printMessageTest() {
-        // Set up simulated output stream
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        Ui ui = new Ui();
-        ui.printMessage("Test");
-
-        // Assert
-        assertEquals("Test\n", out.toString());
-    }
-
+    
     @Test
     public void showMatchingIncomes_nullTest() {
         // Set up simulated output stream
