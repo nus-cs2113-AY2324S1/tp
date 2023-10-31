@@ -86,4 +86,5 @@ public class Messages {
             + "a new data folder has been created.";
     public static final String DATA_FILE_NOT_FOUND_MESSAGE = "text file was not found!\nIt's ok... "
             + "a new data file has been created.";
+    public static final String UNIT_NOT_MATCHING = "Sorry, you have used a different unit for this ingredient!";
 }

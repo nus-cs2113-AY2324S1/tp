@@ -2,6 +2,8 @@ package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.storage.Storage;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ public class Pantry {
     private ArrayList<Ingredient> pantryStock;
     private ArrayList<Dish> menuItems;
     private Ui ui;
+    private Storage storage;
 
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
         this.ui = ui;
@@ -42,11 +45,10 @@ public class Pantry {
     public Ingredient addIngredientToStock (String name, int qty, String unit) {
         pantryStock = getPantryStock(); //get latest pantry stock from pantry.txt
         int ingredientIndex = getIndexOfIngredient(name);
-        //TODO: Add error handling for invalid index
 
         //if ingredient exists in pantry, add quantity of that ingredient
         if (ingredientIndex != -1) {
-            return addIngredientQuantity(qty, ingredientIndex);
+            return addIngredientQuantity(qty, ingredientIndex, unit);
         }
 
         //else, add new ingredient to pantry
@@ -62,8 +64,12 @@ public class Pantry {
      * @param ingredientIndex The index of the ingredient in the pantry stock (-1 if not found).
      * @return The Ingredient object that was added or updated in the pantry stock.
      */
-    private Ingredient addIngredientQuantity(int qty, int ingredientIndex) {
+    private Ingredient addIngredientQuantity(int qty, int ingredientIndex, String unit) {
         Ingredient ingredient = pantryStock.get(ingredientIndex);
+        if (!unit.equalsIgnoreCase(ingredient.getUnit())) {
+            throw new RuntimeException(Messages.UNIT_NOT_MATCHING
+            + "\nUnit used previously: " + ingredient.getUnit());
+        }
         qty += ingredient.getQty(); //adds new qty to current qty
         ingredient.setQty(qty);
         return ingredient;
