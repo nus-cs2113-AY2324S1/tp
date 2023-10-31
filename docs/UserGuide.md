@@ -330,6 +330,12 @@ This command exits the CashLeh? application and saves the user's transaction dat
 a text file with their name as part of the file path. 
 
 Example of usage: `exit`
+```
+	____________________________________________________________
+	Bye. Hope to see you again soon!
+	____________________________________________________________
+
+```
 
 ### Edit Income parameters: `editIncome` [coming soon]
 Change a parameter of a specific income.
