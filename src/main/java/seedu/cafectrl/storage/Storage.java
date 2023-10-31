@@ -104,13 +104,4 @@ public class Storage {
     private void savePantryStock(Pantry pantry) throws IOException {
         this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
     }
-
-    /**
-     * Encode and write the data from orderList to the text file
-     * @param sales
-     * @throws IOException if the file is not found in the specified file path
-     */
-    private void saveSales(Sales sales) throws IOException {
-        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
-    }
 }
