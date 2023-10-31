@@ -1,0 +1,18 @@
+@startuml
+!theme plain
+title Command Exit Sequence Diagram
+
+actor User
+participant Ui
+participant CommandExit
+participant Storage
+
+User -> Ui: Decides to exit the application
+Ui -> CommandExit: Executes "bye" command
+CommandExit -> Ui: Signals the program to exit
+Ui -> Storage: Saves any unsaved data
+Storage --> Ui: Data saved successfully
+Ui -> Ui: Displays exit message
+Ui --> User: Displays exit message
+
+@enduml

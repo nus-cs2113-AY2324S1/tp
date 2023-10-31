@@ -1,0 +1,30 @@
+@startuml
+!theme plain
+Title: Command Start Sequence Diagram
+
+actor User
+participant Ui
+participant CommandStart
+participant QuestionList
+participant Storage
+
+User -> Ui: Enters "start" command
+Ui -> CommandStart: Parses "start" command
+CommandStart -> Storage: Loads data from storage
+Storage --> CommandStart: Returns data
+CommandStart -> QuestionList: Initializes or loads questions
+QuestionList --> CommandStart: Returns questions
+CommandStart -> Ui: Displays welcome message
+Ui --> User: Displays welcome message
+User -> Ui: Interacts with the application (e.g., selects options)
+
+Note right of User: User interacts with the\napplication by answering questions,\nviewing questions, etc.
+
+User -> Ui: Exits the application
+Ui -> CommandStart: Exits the application
+CommandStart -> Storage: Saves data to storage
+Storage --> CommandStart: Data saved successfully
+CommandStart -> Ui: Displays exit message
+Ui --> User: Displays exit message
+
+@enduml

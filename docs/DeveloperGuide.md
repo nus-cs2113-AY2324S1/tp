@@ -280,11 +280,18 @@ involves invoking methods in the QuestionList and Question classes to update the
 feedback to the user.
 
 ### Start Command - Start Quiz
-`start /[quiz mode] [start details] /[qn mode]`
 
-The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
+#### Brief Description of Start Command
 
-![](./UML/CommandStart_Sequence.jpg)
+The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules
+to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
+- `start /[quiz mode] [start details] /[qn mode]`
+
+#### Class Structure of Start Command
+
+![commandStartSequence.png](UML%2FCommands%2FcommandStartSequence.png)
+
+#### Implementation of Start Command
 
 The start quiz mechanism is facilitated by CommandStart under package quizhub.command. The class utilises methods from `quizhub.questionlist.QuestionList`.  It extends Command with 2 new prompts (`/[quiz mode]` and `/[qn mode]`) and 1 user input field (`/[start details]`). It implements the following operations:
 
@@ -308,8 +315,12 @@ The start quiz mechanism is facilitated by CommandStart under package quizhub.co
 Thereafter the quiz is started by calling the method `startQuiz()` in package `quizhub.questionlist.QuestionList`. Within `startQuiz()`, the program iterates through the list of totalQuestions while blocking out the answers. The user can input their answer in the input field which is utilized to match with the actual answer to provide “correct” or “wrong”. Each correct answer will increment correctAnswers variable by 1. The quiz ends when all the questions are displayed and the total number of correctAnswers will be displayed.
 
 ### Shuffle Command
-`shuffle` - shuffle quiz questions to a random order
 
+#### Brief Description of Shuffle Command
+The Shuffle command allows the user to shuffle quiz questions to a random order PERMANENTLY
+- `shuffle` 
+
+#### Class Structure of Shuffle Command
 ![commandShuffleSequence.png](UML%2FCommands%2FcommandShuffleSequence.png)
 
 The "shuffle" command in QuizHub is used to shuffle the order of questions within a question list. 
@@ -346,20 +357,33 @@ quizhub application. Here are the key steps for implementing this class:
 - **Parsing User Input**: Parse the user input to extract the question number and the specified difficulty level.
 
 - **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
-- information.
+information.
 
 - **Marking Difficulty**: Implement the logic to execute the operation of marking the question with the specified 
-- difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
-- uestion's difficulty.
+difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
+uestion's difficulty.
 
 - **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
 `dataStorage.updateData(questions)` method is used to save changes to the question list.
 
 - **Error Handling**: Handle any exceptions or errors that may occur during the marking operation and provide 
-- appropriate feedback to the user.
+appropriate feedback to the user.
 
-### Bye Command
 
+### Command Exit - Exit Program
+
+#### Brief Description of Command Exit
+
+Command Exit is responsible for exiting the program
+- `bye` - to exit program
+
+
+#### Class structure of Command Exit
+
+![commandExitSequence.png](UML%2FCommands%2FcommandExitSequence.png)
+
+When the user initiate Command Exit, any unsaved data will be saved into storage and thereafter, the exit message will
+be displayed.
 
 ## Storage Component
 
