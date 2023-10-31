@@ -30,18 +30,42 @@ The **User** sends command which is processed by Input
 
 The Sequence Diagram above shows how the components interact with each other when the user enters a command
 
-### Budget Handler
-
 ### Setting, viewing and editing a budget feature
+
+When CashLeh? is launched, after asking for the user's name, the app will ask whether the user would like to set a
+budget to manage his/her transactions. CashLeh? will still work seamlessly, even if no budget is set, but some functions
+(such as viewing your budget) will obviously not be available for use.
 
 The option to set, view and edit a budget is managed by the `BudgetHandler`. An object of this class is constructed
 with two attributes, of type `FinancialStatement` and `Budget` respectively. It features both a setter and a getter
-which will be needed for the functioning of the overall budget feature.
+which will be needed for the functioning of the overall budget feature. The BudgetHandler handles a budget which is
+initially set to not active (activated only when the budget is actually set by the user through the command
+`updateBudget`). On the other hand, the BudgetHandler is simultaneously responsible for measuring the Progress: It
+sets the Progress' percentage and calls the method to display the progress bar chart. Below you can see a simple class
+diagram summarizing these relationships.
 
-![](./images/budget.png)
+![](./images/budgetHandler_classDiagram.png)
 
-### Command
-![](./Images/commands.png)
+When the user enters the command to view a budget, the following happens:
+
+![](./images/budgetHandler_sequenceDiagram.png)
+
+**Step 1**\
+The printBudget method of BudgetHandler is called.
+
+**Step 2**\
+The BudgetHandler calls its own method setBudgetPercentage() (self-invocation) to retrieve the data from the
+financial statement.
+
+**Step 3**\
+If the budget is not active (has not been initialised or deleted by the user), a CashLehBudgetException is thrown.
+If the budge is active (has been initialised or updated by the user), the BudgetHandler self-invokes two methods:
+* printBasicWarning(): which checks if the user's budget still provides a good cushion and prints a warning if not
+* printSeriousWarning(): which checks if the user ran out of budget and prints a warning if so
+
+**Step 4**\
+A string containing information about the budget, the net cash from the financial statement and the progress bar
+is built and passed to the method printMultipleText by the Ui.
 
 ### String Tokenizer
 
@@ -120,7 +144,7 @@ unnecessary expenses.
 |v1.0| user              | be able to add my expenses and spendings             | easily manage them and obtain access to an overview                            |
 |v1.0| user              | be able to delete my expenses and spendings          | correct any mistakes and errors                              |
 |v1.0| user              | be able to view the sum of my expenses              | be fully aware of my expense situation and manage my money                               |
-|v1.0| user              | be able to view the list  of all expenses           | be able to view the entire history of expenses         
+|v1.0| user              | be able to view the list  of all expenses           | be able to view the entire history of expenses         |
 |v2.0| user              | be able to view both incomes and expenses together | have an overview of my net financial situation                           |
 |v2.0| parsimonious user | be able to set an overall budget                   | have an upper limit for my relative expenses                            |
 |v2.0| user              | be able to view my budget                          | view my financial situation and organise myself                              |
