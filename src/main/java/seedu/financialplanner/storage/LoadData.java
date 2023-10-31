@@ -70,21 +70,21 @@ public abstract class LoadData {
     }
 
     private static void deleteFutureCashflows(LocalDate currentDate) {
-        ArrayList<Integer> tempCashflow = new ArrayList<>();
+        ArrayList<Integer> tempCashflowList = new ArrayList<>();
         int indexToDelete = 0;
         for (Cashflow cashflow : cashflowList.list) {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
             if (recur > 0 && currentDate.isBefore(dateOfAddition)) {
                 Integer integer = indexToDelete;
-                tempCashflow.add(integer);
+                tempCashflowList.add(integer);
             }
             indexToDelete++;
         }
-        if (!tempCashflow.isEmpty()) {
+        if (!tempCashflowList.isEmpty()) {
             ui.showMessage("Detected erroneous cashflow entries. Removing future cashflows...");
-            for (int i = 0; i < tempCashflow.size(); i++) {
-                indexToDelete = tempCashflow.get(i) - i;
+            for (int i = 0; i < tempCashflowList.size(); i++) {
+                indexToDelete = tempCashflowList.get(i) - i;
                 // deleteCashflowWithoutCategory takes in list index starting from 1, indexToDelete starts from 0
                 int indexStartingFromOne = indexToDelete + 1;
                 cashflowList.deleteCashflowWithoutCategory(indexStartingFromOne);
@@ -94,14 +94,14 @@ public abstract class LoadData {
 
     private static void addRecurringCashflows(LocalDate currentDate) throws FinancialPlannerException {
         ui.showMessage("Adding any recurring cashflows...");
-        ArrayList<Cashflow> tempCashflow = new ArrayList<>();
+        ArrayList<Cashflow> tempCashflowList = new ArrayList<>();
         for (Cashflow cashflow : cashflowList.list) {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
             boolean hasRecurred = cashflow.getHasRecurred();
-            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflow, hasRecurred);
+            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflowList, hasRecurred);
         }
-        for (Cashflow cashflow : tempCashflow) {
+        for (Cashflow cashflow : tempCashflowList) {
             cashflowList.load(cashflow);
             ui.printAddedCashflow(cashflow);
         }
@@ -109,16 +109,16 @@ public abstract class LoadData {
 
     private static void addRecurringCashflowToTempList(LocalDate currentDate
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
-            , ArrayList<Cashflow> tempCashflow, boolean hasRecurred) throws FinancialPlannerException {
+            , ArrayList<Cashflow> tempCashflowList, boolean hasRecurred) throws FinancialPlannerException {
         if (recur > 0 && !hasRecurred) {
             dateOfAddition = dateOfAddition.plusDays(recur);
-            identifyRecurredCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflow);
+            identifyRecurredCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflowList);
         }
     }
 
     private static void identifyRecurredCashflows(LocalDate currentDate
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
-            , ArrayList<Cashflow> tempCashflow) throws FinancialPlannerException {
+            , ArrayList<Cashflow> tempCashflowList) throws FinancialPlannerException {
         while (currentDate.isAfter(dateOfAddition) || currentDate.isEqual(dateOfAddition)) {
             cashflow.setHasRecurred(true);
             Cashflow toAdd;
@@ -130,7 +130,7 @@ public abstract class LoadData {
                 throw new FinancialPlannerException("Error adding recurring cashflows");
             }
             toAdd.setDate(dateOfAddition);
-            tempCashflow.add(toAdd);
+            tempCashflowList.add(toAdd);
             cashflow = toAdd;
             dateOfAddition = dateOfAddition.plusDays(recur);
         }
