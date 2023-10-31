@@ -78,7 +78,7 @@ public class Ui {
         System.out.println("Here are your incomes:");
     }
 
-    public void printExpenseAddedMessage(Expense expense) {
+    public static void printExpenseAddedMessage(Expense expense) {
         showLineDivider();
         System.out.println("Got it. I've added this expense:\n" + expense.toString());
         showLineDivider();
@@ -92,8 +92,8 @@ public class Ui {
     }
 
     public void showMatchingIncomes(List<Income> matchingIncomes) {
-        if(matchingIncomes.isEmpty()) {
-            System.out.println("No matching incomes found.");
+        if(matchingIncomes == null || matchingIncomes.isEmpty()) {
+            System.out.print("No matching incomes found.");
         } else {
             System.out.println("Here are the matching incomes in your list:");
             for (Income income : matchingIncomes) {
@@ -103,8 +103,8 @@ public class Ui {
     }
 
     public void showMatchingExpenses(List<Expense> matchingExpenses) {
-        if (matchingExpenses.isEmpty()) {
-            System.out.println("No matching expenses found.");
+        if (matchingExpenses == null || matchingExpenses.isEmpty()) {
+            System.out.print("No matching expenses found.");
         } else {
             System.out.println("Here are the matching expenses in your list:");
             for (Expense expense : matchingExpenses) {

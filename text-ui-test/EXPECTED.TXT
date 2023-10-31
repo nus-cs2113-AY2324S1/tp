@@ -3,9 +3,11 @@ Welcome to KaChinnnngggg! How may i assist you today?
 ____________________________________________________________
 ____________________________________________________________
 Invalid command. Please try again.
+Type 'help' to see the list of commands available.
 ____________________________________________________________
 ____________________________________________________________
 Invalid command. Please try again.
+Type 'help' to see the list of commands available.
 ____________________________________________________________
 ____________________________________________________________
 You can access our user guide by https://docs.google.com/document/d/1BOz_v4eYQ8y7Dje6Jm6nqymi9jmrsb9MAohLCL_sLvI/edit?usp=sharing
@@ -90,6 +92,7 @@ You have cleared the expense list
 ____________________________________________________________
 ____________________________________________________________
 Both income and expense lists cleared
+____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
 Missing fields detected
