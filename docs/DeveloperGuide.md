@@ -240,7 +240,7 @@ to determine if the search term is located that question. If the contains method
 for a given question, that question's contents and index will be copied to a 
 new ArrayList of questions, and subsequently print them.
 
-### Edit Command
+### Edit Command - Edit Question / Answer
 #### Brief Description of Edit Command
 The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or 
 answer of a question. The CommandEdit class supports two edit commands: 
@@ -262,7 +262,6 @@ The CommandEdit class includes the following key components:
 
 ![commandEditStages.png](UML%2FCommands%2FcommandEditStages.png)
 
-Developers can use the CommandEdit class as a template for handling edit commands in the quizhub application. 
 Here are the key steps for implementing this class:
 
 - **Parsing User Input**: Parse the user input to extract the question number, edit criteria (/description or /answer), 
@@ -323,8 +322,41 @@ creating randomized quizzes or study sessions.
 creates a temporary array to store the randomised sequence of questions
 
 
-### Markdiff Command
-`markdiff [question number] /[question difficulty]` - sets the difficulty of question
+### Markdiff Command - mark difficulty of entry
+
+#### Brief Description of Markdiff Command
+The CommandMarkDifficulty class in the quizhub application is responsible for handling user commands to mark the 
+difficulty of a question. 
+
+The CommandMarkDifficulty class supports the following command syntax:
+- `markdiff [question number] /[question difficulty]` - sets the difficulty of question
+
+#### Class Structure of Markdiff Command
+![commandMarkDiffSequence.png](UML%2FCommands%2FcommandMarkDiffSequence.png)
+
+![commandMarkDiffClass.png](UML%2FCommands%2FcommandMarkDiffClass.png)
+The CommandMarkDifficulty class includes the following key components:
+- `qnIndex`: An integer representing the question number to be marked for difficulty.
+- `nDifficulty`: An enumeration representing the difficulty level to be assigned to the question.
+
+#### Implementation of Markdiff Command
+Developers can use the `CommandMarkDifficulty` class as a template for handling difficulty marking commands in the 
+quizhub application. Here are the key steps for implementing this class:
+
+- **Parsing User Input**: Parse the user input to extract the question number and the specified difficulty level.
+
+- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
+- information.
+
+- **Marking Difficulty**: Implement the logic to execute the operation of marking the question with the specified 
+- difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
+- uestion's difficulty.
+
+- **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
+`dataStorage.updateData(questions)` method is used to save changes to the question list.
+
+- **Error Handling**: Handle any exceptions or errors that may occur during the marking operation and provide 
+- appropriate feedback to the user.
 
 ### Bye Command
 

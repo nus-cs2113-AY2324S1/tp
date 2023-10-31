@@ -1,0 +1,22 @@
+@startuml
+!theme plain
+
+title Mark Difficulty Sequence Diagram
+actor User
+participant Parser
+participant CommandMarkDifficulty
+participant QuestionList
+participant Question
+
+User -> Parser: Enters "markdiff [question number] /[question difficulty]"
+Parser -> CommandMarkDifficulty: Calls parseMarkDiffCommand(userInput)
+CommandMarkDifficulty -> Parser: Returns CommandMarkDifficulty instance
+Parser -> CommandMarkDifficulty: Executes executeCommand(ui, dataStorage, questions)
+CommandMarkDifficulty -> QuestionList: Calls markQuestionDifficulty(index, qnDifficulty, showMessage)
+QuestionList -> Question: Calls markDifficulty(qnDifficulty)
+Question --> QuestionList: Notifies difficulty marked
+QuestionList --> CommandMarkDifficulty: Notifies difficulty marked
+CommandMarkDifficulty --> Parser: Notifies difficulty marked
+Parser --> User: Displays confirmation message
+
+@enduml
