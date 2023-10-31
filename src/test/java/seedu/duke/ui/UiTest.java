@@ -52,9 +52,10 @@ public class UiTest {
         Ui.printWelcomeMessage();
 
         // Assert
-        assertEquals("____________________________________________________________\n"
-                + "Welcome to KaChinnnngggg! How may i assist you today?\n"
-                + "____________________________________________________________\n", out.toString());
+        assertEquals("____________________________________________________________"+ System.lineSeparator()
+                + "Welcome to KaChinnnngggg! How may i assist you today?"+ System.lineSeparator()
+                + "____________________________________________________________"+ System.lineSeparator(),
+                out.toString());
     }
 
     @Test
@@ -68,7 +69,7 @@ public class UiTest {
 
         // Assert
         assertEquals("____________________________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
+                + "Bye. Hope to see you again soon!" + System.lineSeparator()
                 + "____________________________________________________________\n", out.toString());
     }
 
@@ -81,7 +82,8 @@ public class UiTest {
         Ui.showLineDivider();
 
         // Assert
-        assertEquals("____________________________________________________________\n", out.toString());
+        assertEquals("____________________________________________________________"+ System.lineSeparator(),
+                out.toString());
     }
 
     @Test
@@ -102,10 +104,12 @@ public class UiTest {
         Ui.printIncomeAddedMessage(testIncome);
 
         // Assert
-        assertEquals("____________________________________________________________\n"
-                + "Got it. I've added this income:\n"
+        assertEquals("____________________________________________________________" + System.lineSeparator()
+                + "Got it. I've added this income:" + System.lineSeparator()
                 + testIncome
-                + "\n____________________________________________________________\n", out.toString());
+                + System.lineSeparator() +
+                "____________________________________________________________" +
+                System.lineSeparator(), out.toString());
     }
 
     @Test
@@ -142,7 +146,7 @@ public class UiTest {
         ui.printListIncomeMessage();
 
         // Assert
-        assertEquals("Here are your incomes:\n", out.toString());
+        assertEquals("Here are your incomes:" + System.lineSeparator(), out.toString());
     }
 
     @Test
@@ -155,7 +159,7 @@ public class UiTest {
         ui.printListExpenseMessage();
 
         // Assert
-        assertEquals("Here are your expenses:\n", out.toString());
+        assertEquals("Here are your expenses:" + System.lineSeparator(), out.toString());
     }
 
     @Test
@@ -189,7 +193,8 @@ public class UiTest {
         ui.showMatchingIncomes(incomes);
 
         // Assert
-        assertEquals("Here are the matching incomes in your list:\n" + income.toString() + "\n", out.toString());
+        assertEquals("Here are the matching incomes in your list:" + System.lineSeparator()
+                + income.toString() + System.lineSeparator(), out.toString());
     }
 
     @Test
@@ -223,6 +228,7 @@ public class UiTest {
         ui.showMatchingExpenses(expenses);
 
         // Assert
-        assertEquals("Here are the matching expenses in your list:\n" + expense.toString() + "\n", out.toString());
+        assertEquals("Here are the matching expenses in your list:"
+                + System.lineSeparator() + expense.toString() + "\n", out.toString());
     }
 }
