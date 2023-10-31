@@ -88,7 +88,7 @@ public class OverviewCommand extends Command {
     }
 
     private String getReminders() {
-        ReminderList reminderList = ReminderList.INSTANCE;
+        ReminderList reminderList = ReminderList.getInstance();
         if (reminderList.list.isEmpty()) {
             return "No reminders added yet.";
         }
