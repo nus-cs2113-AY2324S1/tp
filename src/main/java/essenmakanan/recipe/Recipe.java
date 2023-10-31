@@ -16,6 +16,12 @@ public class Recipe {
         recipeSteps = new RecipeStepList(steps);
     }
 
+    public Recipe(String title, RecipeStepList recipeSteps, RecipeIngredientList recipeIngredients) {
+        this.title = title;
+        this.recipeSteps = recipeSteps;
+        this.recipeIngredients = recipeIngredients;
+    }
+
     public Recipe(String title, String[] steps, String[] ingredients) {
         this.title = title;
         this.recipeSteps = new RecipeStepList(steps);

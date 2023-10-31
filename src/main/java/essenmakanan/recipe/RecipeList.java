@@ -13,6 +13,10 @@ public class RecipeList {
         recipes = new ArrayList<>();
     }
 
+    public RecipeList(ArrayList<essenmakanan.recipe.Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
     public ArrayList<Recipe> getRecipes() {
         return recipes;
     }

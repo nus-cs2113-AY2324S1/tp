@@ -9,6 +9,7 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.storage.IngredientStorage;
+import essenmakanan.storage.RecipeStorage;
 import essenmakanan.ui.Ui;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class EssenMakanan {
     private IngredientList ingredients;
     private Parser parser;
     private IngredientStorage ingredientStorage;
+    private RecipeStorage recipeStorage;
 
     private Logger logger = Logger.getLogger("app log");
 
@@ -50,6 +52,7 @@ public class EssenMakanan {
 
         try {
             ingredientStorage.saveData(ingredients.getIngredients());
+            recipeStorage.saveData(recipes.getRecipes());
         } catch (IOException exception) {
             Ui.handleIOException(exception);
         }
@@ -59,7 +62,9 @@ public class EssenMakanan {
         recipes = new RecipeList();
         parser = new Parser();
         ingredientStorage = new IngredientStorage();
+        recipeStorage = new RecipeStorage();
         ingredients = new IngredientList(ingredientStorage.restoreSavedData());
+        recipes = new RecipeList(recipeStorage.restoreSavedData());
     }
 
     public void start() {

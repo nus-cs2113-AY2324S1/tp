@@ -41,9 +41,7 @@ public class IngredientStorage {
 
         String ingredientName = parsedIngredient[0];
         String ingredientQuantity = parsedIngredient[1];
-        IngredientUnit ingredientUnit = null;
-
-        ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
+        IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
 
         ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
     }
@@ -92,7 +90,5 @@ public class IngredientStorage {
             Ui.handleIOException(exception);
         }
 
-        System.out.println("Please try to run the app again.");
-        System.exit(-1);
     }
 }
