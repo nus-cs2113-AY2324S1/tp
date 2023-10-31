@@ -198,14 +198,11 @@ Examples of usage:
 
 `filter /date 25/10/2023`
 
-### Exit: `exit`
-Exit the app.
+### Exiting the CashLeh? application: `exit`
+This command exits the CashLeh? application and saves the user's transaction data thus far into 
+a text file with their name as part of the file path. 
 
-Format: `exit`
-
-Example of usage:
-
-`exit`
+Example of usage: `exit`
 
 ### Edit Income parameters: `editIncome` [coming soon]
 Change a parameter of a specific income.
