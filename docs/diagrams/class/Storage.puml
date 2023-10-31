@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+class Storage {
+    + loadMenu(): Menu
+    + loadPantryStock(): Pantry
+    + loadSales(): Sales
+    + saveAll(menu: Menu, sales: Sales, pantry: Pantry): void
+    + savePantryStock(pantry: Pantry): void
+    + saveSales(sales: Sales): void
+    + saveMenu(menu: Menu): void
+}
+
+class Ui {
+
+}
+
+class FileManager {
+
+}
+
+class Decoder {
+
+}
+
+class Sales {
+
+}
+
+class Pantry {
+
+}
+
+class FilePath {
+
+}
+
+@enduml

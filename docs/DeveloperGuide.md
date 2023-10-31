@@ -23,6 +23,11 @@ Note that `CafeCtrl` only have access to the interface `ParserUtil` although the
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
+### Storage
+API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
+
+
+
 ## Features
 
 ### Add Dish
