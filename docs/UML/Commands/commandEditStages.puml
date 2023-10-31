@@ -1,0 +1,20 @@
+@startuml
+!theme plain
+title Command Edit Flow
+start
+
+:User initiates question edit;
+:Retrieve the question to edit;
+if (Choose "Edit Description" or "Edit Answer") then (Description)
+  :User selects "Edit Description";
+  :Enter new description;
+elseif (Answer)
+  :User selects "Edit Answer";
+  :Enter new answer;
+endif
+
+:Update the question with new information;
+:Display confirmation message;
+stop
+
+@enduml

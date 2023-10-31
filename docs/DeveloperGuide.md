@@ -167,34 +167,6 @@ exception will be thrown and handled by printing an error message to the CLI.
 
 ## Command Components
 
-
-### Start Command - Start Quiz
-
-The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
-
-![](./UML/CommandStart_Sequence.jpg)
-
-The start quiz mechanism is facilitated by CommandStart under package quizhub.command. The class utilises methods from `quizhub.questionlist.QuestionList`.  It extends Command with 2 new prompts (`/[quiz mode]` and `/[qn mode]`) and 1 user input field (`/[start details]`). It implements the following operations:
-
-`/[quiz mode]`
-1. 2 configurations - `/module` and `/all`
-2.	`/module` must be followed by a category name to retrieve questions from that specific category
-- The method categoriseListByModules from the package `quizhub.questionlist.QuestionList` will be called to retrieve the questions by that are listed within the specified category from the storage list
-- `/all` will not require any input from `/[start details]`
-3.	The method `getAllQns()` from package `quizhub.questionlist.QuestionList` will be called to retrieve all questions from the storage list.
-
-`/[qn mode]`
-1.	2 configurations - `/random` and `/normal`
-2.	This prompt is activated after defining `/[quiz mode]` and `/[start details]`
-3.	/random will randomize the list of questions using `java.util.Collections.shuffle` and store it within a temporary array to prevent tempering with the original array in Storage
-4.	`/normal` will not require any further actions, using the previously generated list as specified by `/[quiz mode]` and `/[start details]`
-
-`/[start details]`
-1.	Define the category of `/module` i.e. `/module` number to call upon the “number” tagged modules when starting the quiz
-2.	This field can be left blank when `/all` is called for `/[quiz mode]` to tell the program to quiz the user on all questions stored within the local storage
-
-Thereafter the quiz is started by calling the method `startQuiz()` in package `quizhub.questionlist.QuestionList`. Within `startQuiz()`, the program iterates through the list of totalQuestions while blocking out the answers. The user can input their answer in the input field which is utilized to match with the actual answer to provide “correct” or “wrong”. Each correct answer will increment correctAnswers variable by 1. The quiz ends when all the questions are displayed and the total number of correctAnswers will be displayed.
-
 ### Help Command - Display Commands
 
 When executed, this command will execute a standard Final String containing all 
@@ -267,6 +239,127 @@ This method go down the existing QuestionList of questions and use the Java cont
 to determine if the search term is located that question. If the contains method returns true
 for a given question, that question's contents and index will be copied to a 
 new ArrayList of questions, and subsequently print them.
+
+### Edit Command - Edit Question / Answer
+#### Brief Description of Edit Command
+The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or 
+answer of a question. The CommandEdit class supports two edit commands: 
+
+- `edit [question number] /description [description]` - edits the description of the question with the specified number
+
+- `edit [question number] /answer [answer]` - edits the answer to the question with the specified number
+
+#### Class Structure of Edit Command
+The CommandEdit class includes the following key components:
+
+- `qnIndex`: An integer representing the question number to be edited.
+- `newDescription`: A string representing the new description for the question (or null if not edited).
+- `newAnswer`: A string representing the new answer for the question (or null if not edited).
+
+#### Implementation of Edit Command
+
+![commandEditSequence.png](UML%2FCommands%2FcommandEditSequence.png)
+
+![commandEditStages.png](UML%2FCommands%2FcommandEditStages.png)
+
+Here are the key steps for implementing this class:
+
+- **Parsing User Input**: Parse the user input to extract the question number, edit criteria (/description or /answer), 
+and new values (description or answer).
+
+- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
+information.
+
+- **Edit Operation**: Implement the logic to execute the edit operation based on the provided criteria. This typically 
+involves invoking methods in the QuestionList and Question classes to update the question's description or answer.
+
+- **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
+`dataStorage.updateData(questions)` method is used to save changes to the question list.
+
+- **Error Handling**: Handle any exceptions or errors that may occur during the edit operation and provide appropriate 
+feedback to the user.
+
+### Start Command - Start Quiz
+`start /[quiz mode] [start details] /[qn mode]`
+
+The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
+
+![](./UML/CommandStart_Sequence.jpg)
+
+The start quiz mechanism is facilitated by CommandStart under package quizhub.command. The class utilises methods from `quizhub.questionlist.QuestionList`.  It extends Command with 2 new prompts (`/[quiz mode]` and `/[qn mode]`) and 1 user input field (`/[start details]`). It implements the following operations:
+
+`/[quiz mode]`
+1. 2 configurations - `/module` and `/all`
+2.	`/module` must be followed by a category name to retrieve questions from that specific category
+- The method categoriseListByModules from the package `quizhub.questionlist.QuestionList` will be called to retrieve the questions by that are listed within the specified category from the storage list
+- `/all` will not require any input from `/[start details]`
+3.	The method `getAllQns()` from package `quizhub.questionlist.QuestionList` will be called to retrieve all questions from the storage list.
+
+`/[qn mode]`
+1.	2 configurations - `/random` and `/normal`
+2.	This prompt is activated after defining `/[quiz mode]` and `/[start details]`
+3.	/random will randomize the list of questions using `java.util.Collections.shuffle` and store it within a temporary array to prevent tempering with the original array in Storage
+4.	`/normal` will not requirwritee any further actions, using the previously generated list as specified by `/[quiz mode]` and `/[start details]`
+
+`/[start details]`
+1.	Define the category of `/module` i.e. `/module` number to call upon the “number” tagged modules when starting the quiz
+2.	This field can be left blank when `/all` is called for `/[quiz mode]` to tell the program to quiz the user on all questions stored within the local storage
+
+Thereafter the quiz is started by calling the method `startQuiz()` in package `quizhub.questionlist.QuestionList`. Within `startQuiz()`, the program iterates through the list of totalQuestions while blocking out the answers. The user can input their answer in the input field which is utilized to match with the actual answer to provide “correct” or “wrong”. Each correct answer will increment correctAnswers variable by 1. The quiz ends when all the questions are displayed and the total number of correctAnswers will be displayed.
+
+### Shuffle Command
+`shuffle` - shuffle quiz questions to a random order
+
+![commandShuffleSequence.png](UML%2FCommands%2FcommandShuffleSequence.png)
+
+The "shuffle" command in QuizHub is used to shuffle the order of questions within a question list. 
+This command provides users with the ability to randomize the sequence of questions, which can be useful for 
+creating randomized quizzes or study sessions. 
+
+![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML%2FCommands%2FShuffleToStorage-Shuffle_to_Storage_Flow.png)
+
+**NOTE:** The randomised sequence will be stored PERMANENTLY in storage. This is unlike /random for command start which 
+creates a temporary array to store the randomised sequence of questions
+
+
+### Markdiff Command - mark difficulty of entry
+
+#### Brief Description of Markdiff Command
+The CommandMarkDifficulty class in the quizhub application is responsible for handling user commands to mark the 
+difficulty of a question. 
+
+The CommandMarkDifficulty class supports the following command syntax:
+- `markdiff [question number] /[question difficulty]` - sets the difficulty of question
+
+#### Class Structure of Markdiff Command
+![commandMarkDiffSequence.png](UML%2FCommands%2FcommandMarkDiffSequence.png)
+
+![commandMarkDiffClass.png](UML%2FCommands%2FcommandMarkDiffClass.png)
+The CommandMarkDifficulty class includes the following key components:
+- `qnIndex`: An integer representing the question number to be marked for difficulty.
+- `nDifficulty`: An enumeration representing the difficulty level to be assigned to the question.
+
+#### Implementation of Markdiff Command
+Developers can use the `CommandMarkDifficulty` class as a template for handling difficulty marking commands in the 
+quizhub application. Here are the key steps for implementing this class:
+
+- **Parsing User Input**: Parse the user input to extract the question number and the specified difficulty level.
+
+- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
+- information.
+
+- **Marking Difficulty**: Implement the logic to execute the operation of marking the question with the specified 
+- difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
+- uestion's difficulty.
+
+- **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
+`dataStorage.updateData(questions)` method is used to save changes to the question list.
+
+- **Error Handling**: Handle any exceptions or errors that may occur during the marking operation and provide 
+- appropriate feedback to the user.
+
+### Bye Command
+
 
 ## Storage Component
 

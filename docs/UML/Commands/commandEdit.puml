@@ -1,0 +1,23 @@
+@startuml
+!theme plain
+title Command Edit Sequence Diagram
+
+actor User
+participant Parser
+participant CommandEdit
+participant QuestionList
+participant Question
+
+User -> Parser: Enters "edit [question number] /description [description] or /answer [answer]"
+Parser -> CommandEdit: Calls parseEditCommand(userInput)
+CommandEdit -> Parser: Returns CommandEdit instance
+Parser -> CommandEdit: Executes executeCommand(ui, dataStorage, questions)
+CommandEdit -> QuestionList: Calls editQuestionByIndex(index, newDescription, newAnswer)
+QuestionList -> Question: Calls editQuestion(newDescription, newAnswer)
+Question -> Question: Edits question description and/or answer
+Question --> QuestionList: Notifies edit completion
+QuestionList --> CommandEdit: Notifies edit completion
+CommandEdit --> Parser: Notifies edit completion
+Parser --> User: Displays edit completion message
+
+@enduml

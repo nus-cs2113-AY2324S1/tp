@@ -1,0 +1,42 @@
+@startuml
+!theme plain
+class CommandMarkDifficulty {
+  - qnIndex: int
+  - qnDifficulty: Question.QnDifficulty
+
+  + CommandMarkDifficulty(qnIndex: int, qnDifficulty: Question.QnDifficulty)
+  + executeCommand(ui: Ui, dataStorage: Storage, questions: QuestionList)
+}
+
+class Ui {
+  + displayMessage(message: String)
+}
+
+class Storage {
+  + updateData(questions: QuestionList)
+}
+
+class QuestionList {
+  - allQns: List<Question>
+
+  + markQuestionDifficulty(index: int, qnDifficulty: Question.QnDifficulty, showMessage: boolean)
+}
+
+class Question {
+  - difficulty: <<enumeration>> Question.QnDifficulty
+
+  + markDifficulty(qnDifficulty: <<enumeration>> Question.QnDifficulty)
+}
+
+enum QuestionQnDifficulty {
+  EASY,
+  NORMAL,
+  HARD,
+  INVALID
+}
+
+CommandMarkDifficulty --|> Ui : Uses
+CommandMarkDifficulty --|> Storage : Uses
+CommandMarkDifficulty --|> QuestionList : Uses
+QuestionList --|> Question : Contains
+@enduml
