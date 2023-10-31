@@ -55,28 +55,42 @@ public class Storage {
         //return new Pantry(ui);
     }
 
+    //@@NaychiMin
     /**
-     * Read and decode order list data from text file and pass it to the menu
-     * @return orderList with data from the file
+     * Loads order lists from a text file, decodes it, and returns it as a Sales object.
+     *
+     * @return An OrderList object containing data from the file.
+     * @throws IOException if the file is not found in the specified file path.
      */
-    public Sales loadSales() {
-        // ArrayList<String> encodedOrderList = this.fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
-        // return Decoder.decodeOrderListData(encodedOrderList);
-        return new Sales();
+    public Sales loadOrderList(Menu menu) throws IOException {
+        fileManager.openTextFile(FilePath.ORDERS_FILE_PATH);
+        ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
+        return Decoder.decodeSales(encodedOrderList, menu);
     }
+
+    /**
+     * Encodes the provided OrderList data from Sales object and writes it to a text file
+     *
+     * @param sales The Sales object containing the order to be saved to the file.
+     * @throws IOException if the file is not found in the specified file path.
+     */
+    private void saveOrderList(Sales sales) throws IOException {
+        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
+    }
+    //@@author
 
     //@@author ziyi105
     /**
      * Encode and write the data from menu, orderList and pantry to the respective text files
      * @param menu menu from current session
-     * @param sales sales from current session
+     * @param sales sale object from current session
      * @param pantry pantry from current session
      * @throws IOException if the file is not found in the specified file path
      */
     public void saveAll(Menu menu, Sales sales, Pantry pantry) throws IOException {
-        // to be uncommented when the following features are implemented
-        //saveMenu(menu);
-        //saveSales(sales);
+        saveMenu(menu);
+        saveOrderList(sales);
+        saveMenu(menu);
         savePantryStock(pantry);
     }
 
@@ -88,14 +102,5 @@ public class Storage {
      */
     private void savePantryStock(Pantry pantry) throws IOException {
         this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
-    }
-
-    /**
-     * Encode and write the data from orderList to the text file
-     * @param sales
-     * @throws IOException if the file is not found in the specified file path
-     */
-    private void saveSales(Sales sales) throws IOException {
-        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
 }
