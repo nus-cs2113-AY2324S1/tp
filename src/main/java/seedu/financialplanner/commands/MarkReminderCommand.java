@@ -1,4 +1,5 @@
 package seedu.financialplanner.commands;
+
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
 public class MarkReminderCommand extends Command{
@@ -19,7 +20,7 @@ public class MarkReminderCommand extends Command{
         if (index == 0) {
             throw new IllegalArgumentException("Index must be within the list");
         }
-        if( index > ReminderList.getInstance().list.size()+1){
+        if (index > ReminderList.getInstance().list.size()+1){
             throw new IllegalArgumentException("Index exceed the list size");
         }
         rawCommand.extraArgs.remove("i");
