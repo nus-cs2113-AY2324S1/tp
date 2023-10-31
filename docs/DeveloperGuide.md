@@ -54,7 +54,7 @@ When the user enters the command to view a budget, the following happens:
 The printBudget method of BudgetHandler is called.
 
 **Step 2**\
-The BudgetHandler calls its own method setBudgetPercentage() (self-invocation) to retrieve the data from the
+The BudgetHandler self invokes its own method setBudgetPercentage() to retrieve the data from the
 financial statement.
 
 **Step 3**\
