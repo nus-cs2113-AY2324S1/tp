@@ -1,7 +1,6 @@
 package seedu.financialplanner.commands;
 
 import org.apache.commons.lang3.StringUtils;
-import org.knowm.xchart.CategorySeries;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;

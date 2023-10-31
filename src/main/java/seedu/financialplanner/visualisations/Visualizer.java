@@ -2,15 +2,21 @@ package seedu.financialplanner.visualisations;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.knowm.xchart.*;
+import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieChartBuilder;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.CategoryChart;
+import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler;
-import seedu.financialplanner.cashflow.Income;
-import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import java.awt.Color;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

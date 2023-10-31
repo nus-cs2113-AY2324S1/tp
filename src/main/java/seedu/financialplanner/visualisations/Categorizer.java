@@ -7,7 +7,6 @@ import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.cashflow.Income;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
