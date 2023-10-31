@@ -13,8 +13,8 @@ public class ListMenuCommand extends Command {
     public static final String COMMAND_WORD = "list_menu";
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
-    protected Menu menu;
-    protected Ui ui;
+    private final Menu menu;
+    private final Ui ui;
 
     /**
      * Constructor for the ListMenuCommand
