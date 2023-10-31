@@ -162,7 +162,8 @@ public abstract class LoadData {
         if (initial < current) {
             throw new IllegalArgumentException("Current budget exceeds initial budget");
         }
-        Budget.load(initial, current);
+        LocalDate date = LocalDate.parse(split[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Budget.load(initial, current, date);
     }
 
     private static boolean createNewFile() {
