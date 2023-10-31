@@ -29,11 +29,11 @@ public class ClearExpensesTest {
     }
 
     /**
-     * Test the {@link ClearIncomes#clearAllIncomes()} method with incomes.
+     * Test the {@link ClearExpenses#clearAllExpenses()} method with expenses.
      * This test case checks if the clear incomes function correctly delete all the record in the income list.
      */
     @Test
-    public void testClearIncome_withIncomes() {
+    public void testClearExpenses_withExpenses() {
         ArrayList<Expense> testExpenses = new ArrayList<>(expenses);
         ClearExpenses clearExpenses = new ClearExpenses(testExpenses);
         clearExpenses.clearAllExpenses();
@@ -42,11 +42,11 @@ public class ClearExpensesTest {
 
 
     /**
-     * Test the {@link ClearIncomes#clearAllIncomes()} method with no records.
+     * Test the {@link ClearExpenses#clearAllExpenses()} method with no records.
      * This test case checks if there is an empty list, whether clear income function will still process correctly
      */
     @Test
-    public void testNoIncomes() throws KaChinnnngException{
+    public void testNoExpenses() throws KaChinnnngException{
         ArrayList<Expense> testExpenses = new ArrayList<>();
         ClearExpenses clearExpenses = new ClearExpenses(testExpenses);
         clearExpenses.clearAllExpenses();

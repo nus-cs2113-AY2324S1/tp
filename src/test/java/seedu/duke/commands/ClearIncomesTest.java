@@ -4,12 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.financialrecords.Income;
-import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
  * This class contains JUnit tests for the DeleteExpenseCommand class.
