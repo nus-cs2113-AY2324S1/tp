@@ -30,16 +30,19 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 {Give detailed description of each feature}
 
-| Action               | Format                   | Example                                            | Notes |
-|----------------------|--------------------------|----------------------------------------------------|-------|
-| Add recipe           | add r/RECIPE_NAME        | add r/scramble egg                                 |       |
-| Add ingredient       | add i/INGREDIENT_NAME    | add i/bread                                        |       |
-| Delete Recipe        | delete r/RECIPE_NAME     |
-| Delete Ingredient    | delete r/INGREDIENT_NAME | 
-| View all ingredients | view i                   |
-| View all recipes     | view r                   |
-| View specific recipe | view r/RECIPE_ID         | View r/1 to show a recipe at index ‘1’ of the list |
-| Help                 | help                     |
+| Action                                                    | Format                                              | Example                                 |
+|-----------------------------------------------------------|-----------------------------------------------------|-----------------------------------------|
+| Add recipe                                                | add r/RECIPE_TITLE                                  | add r/scramble egg                      |
+| Add ingredient                                            | add i/INGREDIENT_NAME                               | add i/bread                             |
+| Delete Recipe                                             | delete r/RECIPE_TITLE                               |
+| Delete Ingredient                                         | delete r/INGREDIENT_NAME                            | 
+| View all ingredients                                      | view i                                              |
+| View all recipes                                          | view r                                              |
+| View specific ingredient                                  | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID | view i/bread <br><br>view i/1           |
+| View specific recipe                                      | view r/RECIPE_ID                                    | view r/1                                |
+| Filter recipe by ingredients                              | filter recipe i/INGREDIENT_NAME [i/...]             | filter recipe i/chicken i/noodles       |
+| Start recipe <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID          | start dumpling noodles <br><br> start 1 |
+| Help <br>(list all commands available)                    | help                                                | help                                    |
 
 
 ----
@@ -95,6 +98,25 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    <br>  Example :
    
    * `delete r/1` to delete a recipe at index ‘1’
+
+
+6. Filter recipe based by ingredients `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
+   
+   Filter your recipes by ingredients you are craving for that meal.
+   
+   <br> Example:
+
+   * `filter recipe i/egg`
+   
+      All recipes containing the ingredient egg will be printed
+   
+   * `filter recipe i/egg i/vegetable`
+   
+      ![img_1.png](images/filterRecipseByIngredient.png)
+
+   * `filter recipe i/1 i/vegetable`
+      
+      if egg is the first item in our ingredient inventory list, the same output will be produced.
 
 
 ---
