@@ -25,7 +25,7 @@ public class ListVendorCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        // Retrieve the list of drugs from the inventory
+        // Retrieve the list of vendors from the inventory
         List<Vendor> vendorEntries = VendorsList.getVendorEntries();
 
         // Check if the inventory is empty
@@ -33,7 +33,7 @@ public class ListVendorCommand extends Command {
             // Return a CommandResult indicating that the inventory is empty
             return new CommandResult<>("The inventory is empty.");
         } else {
-            // Return a CommandResult with the success message and the list of drugs
+            // Return a CommandResult with the success message and the list of vendors
             return new CommandResult<>(MESSAGE_SUCCESS, vendorEntries);
         }
     }
