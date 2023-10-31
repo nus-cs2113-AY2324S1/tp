@@ -11,7 +11,6 @@ import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
