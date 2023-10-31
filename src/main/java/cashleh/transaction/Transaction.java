@@ -11,12 +11,11 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Transaction {
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String description;
     private double amount;
     private LocalDate date = null;
     private Categories category = null;
-
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /*
      * Constructor for Transaction - set date to current date if not specified

@@ -100,8 +100,8 @@ Example of usage:
 `deleteBudget`
 
 ### Exiting the CashLeh? application: `exit`
-This command closes the CashLeh? application and saves the user's transaction details
-thus far into a file.
+This command exits the CashLeh? application and saves the user's transaction data thus far into 
+a text file with their name as part of the file path. 
 
 Example of usage: `exit`
 
