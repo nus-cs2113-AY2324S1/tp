@@ -31,7 +31,7 @@ public class Order {
     @Override
     public String toString() {
         return "Order: " + getDishName() + " Quantity: "+ dishQty
-                + "\nIngredientList: " + usedIngredientList
+                + "\nIngredientList: " + ingredientList
                 + "\nTotal Order Cost: $" + dollarValue.format(totalOrderCost);
     }
 
@@ -80,8 +80,12 @@ public class Order {
         return isComplete;
     }
 
-    public String getDishName(){return orderedDish.getName();}
+    public String getDishName() {
+        return orderedDish.getName();
+    }
 
-    public int getQuantity(){return dishQty;}
+    public int getQuantity() {
+        return dishQty;
+    }
 
 }

@@ -47,7 +47,7 @@ public class Storage {
      * Loads order lists from a text file, decodes it, and returns it as a Sales object.
      *
      * @return An OrderList object containing data from the file.
-     * @throws FileNotFoundException if the file is not found in the specified file path.
+     * @throws IOException if the file is not found in the specified file path.
      */
     public Sales loadOrderList(Menu menu) throws IOException {
         fileManager.openTextFile(FilePath.ORDERS_FILE_PATH);
@@ -93,7 +93,4 @@ public class Storage {
 
     public void saveMenu(Menu menu) throws IOException {}
 
-    public Menu loadMenu() {
-        return null;
-    }
 }
