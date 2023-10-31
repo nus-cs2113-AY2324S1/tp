@@ -145,7 +145,19 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    List all ingredients available inside the app.
 
 
-7. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
+7. View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
+
+    Check the quantity of an ingredient you have available in your kitchen/inventory.
+
+    <br> Example:
+    
+    * `view i/flour`
+   
+      ![img.png](images/ViewSpecificIngredientCommand.png)
+   * `view i/1` to view the quantity of your ingredient with id 1
+
+
+8. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
 
    Adds a new item to the list of todo items. Here are our registered unit in the app:
     * g (Gram)
@@ -165,7 +177,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     * `add i/cooking oil,5,l` to add `5 liters of cooking oil` into the list
    
 
-8. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
+9. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
 
    Edit an ingredient to change the name, quantity or unit. A user is able to edit more than one property of an 
    ingredient.
@@ -176,7 +188,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     * `edit i/egg q/10 u/kg` to change the quantity to `10` and the unit to `kg`
 
 
-9. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
+10. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
 
    Delete an ingredient based on the selected index in the list or the ingredient's name.
 
@@ -199,13 +211,13 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 * Add todo `todo n/TODO_NAME d/DEADLINE`
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+Action | Format, Examples|
+--------|------------------|
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`|
+**Clear** | `clear`|
+**Delete** | `delete INDEX`<br> e.g., `delete 3`|
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**List** | `list`|
 **Help** | `help`
 
