@@ -7,8 +7,6 @@ import seedu.duke.financialrecords.Expense;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
  * Tests for the {@link ClearExpenses} class.
@@ -27,7 +25,8 @@ public class ClearExpensesTest {
         expenses = new ArrayList<>();
 
         expenses.add(new Expense("Rent", LocalDate.of(2023, 10, 5), 2000.0));
-        expenses.add(new Expense("Groceries", LocalDate.of(2023, 10, 7), 100.0));
+        expenses.add(new Expense("Groceries", LocalDate.of(2023, 10, 7),
+                100.0));
     }
 
     /**
@@ -54,5 +53,4 @@ public class ClearExpensesTest {
         clearExpenses.clearAllExpenses();
         assertEquals(0, testExpenses.size());
     }
-
 }

@@ -28,11 +28,15 @@ public class ClearAllTest {
         incomes = new ArrayList<>();
         expenses = new ArrayList<>();
 
-        incomes.add(new Income("Salary", LocalDate.of(2023, 10, 10), 5000.0));
-        incomes.add(new Income("Bonus", LocalDate.of(2023, 10, 15), 1000.0));
+        incomes.add(new Income("Salary", LocalDate.of(2023, 10, 10),
+                5000.0));
+        incomes.add(new Income("Bonus", LocalDate.of(2023, 10, 15),
+                1000.0));
 
-        expenses.add(new Expense("Rent", LocalDate.of(2023, 10, 5), 2000.0));
-        expenses.add(new Expense("Groceries", LocalDate.of(2023, 10, 7), 100.0));
+        expenses.add(new Expense("Rent", LocalDate.of(2023, 10, 5),
+                2000.0));
+        expenses.add(new Expense("Groceries", LocalDate.of(2023, 10, 7),
+                100.0));
     }
 
     /**
