@@ -47,6 +47,8 @@ public class SaveToTxtTest {
     @Test
     public void testSaveToTxtWithOneIncome() throws KaChinnnngException, IOException {
         SaveToTxt test = new SaveToTxt(path);
+        new ClearAll(incomes,expenses).clearAllIncomeAndExpense();
+        test.saveIncomeAndExpense(incomes, expenses);
         incomes.add(new Income("Salary", LocalDate.of(2023, 10, 10), 5000.0));
         test.saveIncomeToTextFile(incomes);
         File file = new File(path);
