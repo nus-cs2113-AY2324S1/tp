@@ -1,17 +1,17 @@
 package seedu.cafectrl.ui;
 
-import seedu.cafectrl.AddDishCommand;
-import seedu.cafectrl.AddOrderCommand;
-import seedu.cafectrl.BuyIngredientCommand;
-import seedu.cafectrl.DeleteDishCommand;
-import seedu.cafectrl.EditPriceCommand;
-import seedu.cafectrl.ExitCommand;
-import seedu.cafectrl.HelpCommand;
-import seedu.cafectrl.ListIngredientCommand;
-import seedu.cafectrl.ListMenuCommand;
-import seedu.cafectrl.NextDayCommand;
-import seedu.cafectrl.PreviousDayCommand;
-import seedu.cafectrl.ViewTotalStockCommand;
+import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.AddOrderCommand;
+import seedu.cafectrl.command.BuyIngredientCommand;
+import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.ExitCommand;
+import seedu.cafectrl.command.HelpCommand;
+import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.NextDayCommand;
+import seedu.cafectrl.command.PreviousDayCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
 
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
