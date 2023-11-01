@@ -122,5 +122,19 @@ public class Sales {
             System.out.println();
         }
     }
-    
+
+    public void printSaleByDay(Ui ui, Menu menu, int day){
+        int orderListIndex = day - 1;
+        try {
+            OrderList orderList = orderLists.get(orderListIndex);
+            System.out.println("Day " + (day) + ":");
+            System.out.printf("%-20s %-10s %-20s\n", "Dish Name", "Dish Qty", "Total Cost Price");
+
+            orderList.printOrderList(menu);
+
+            System.out.println();
+        } catch (Exception e) {
+            ui.showToUser("An error occurred while printing sales for the specified day.");
+        }
+    }
 }
