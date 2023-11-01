@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.KaChinnnngException;
 import seedu.duke.financialrecords.ExchangeRateManager;
@@ -16,6 +17,10 @@ public class ExchangeRateFileHandlerTest {
     private ExchangeRateFileHandler fileHandler;
     private ExchangeRateManager exchangeRateManager = ExchangeRateManager.getInstance();
 
+    @BeforeEach
+    public void setup() throws KaChinnnngException {
+        exchangeRateManager.clear();
+    }
     @Test
     public void testLoad_validFileFormat_exchangeRateMatches() throws FileNotFoundException, KaChinnnngException {
         fileHandler = new ExchangeRateFileHandler("./src/test/testData/ExchangeRatesTestLoad.txt");
@@ -30,7 +35,7 @@ public class ExchangeRateFileHandlerTest {
         // load or create filepath
         String filePath = "./src/test/testData/ExchangeRatesTestSave.txt";
         createFile(filePath);
-        new PrintWriter(filePath).close();
+        new PrintWriter(filePath).close(); // clears the file
         fileHandler = new ExchangeRateFileHandler(filePath);
         fileHandler.load();
         // Define test data
