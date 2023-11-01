@@ -50,7 +50,7 @@ The ExpenseManager is facilitated by `ExpenseParser`,  `ExpenseManager`, `Expens
 5. Expense object is returned to ExpenseManager from ExpenseParser.
 6. Expense obejct is returned to Duke from ExpenseManager.
 
-![expenseManager_sequence_diagram.png](/Users/apple/Desktop/expenseManager_sequence_diagram.png)
+![expenseManager_sequence_diagram.png](images/expenseManager_sequence_diagram.png)
 
 ### Find Command
 The FindCommand is facilitated by `FindCommand`, `FindParser`, `Ui`,`ExpenseList` and `IncomeList`.
