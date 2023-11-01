@@ -34,7 +34,6 @@ public class AddOrderCommand extends Command {
         orderList.addOrder(order);
         Chef chef = new Chef(order, pantry, ui, menu);
         chef.cookDish();
-        //pantry.printPantryStock();
         if (order.getIsComplete()) {
             orderList.addCost(order);
         }

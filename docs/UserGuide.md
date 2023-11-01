@@ -83,7 +83,7 @@ Shows a list of all dishes on the menu
 Format: `list_menu`
 
 Example:
-```agsl
+```
 +-----------------------------------------+
 | Ah, behold, the grand menu of delights! |
 +--------------------------+--------------+
@@ -171,7 +171,7 @@ Adds an order consisting of dishes off the menu to an order list
 Format: `add_order name/DISH_NAME qty/DISH_QTY`
 
 Example:
-```agsl
+```
 > add_order name/chicken rice qty/2
 I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!
 -----------------------------------------------------
