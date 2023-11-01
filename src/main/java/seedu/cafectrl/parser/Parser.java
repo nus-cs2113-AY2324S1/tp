@@ -122,14 +122,12 @@ public class Parser implements ParserUtil {
         case ShowSalesByDayCommand.COMMAND_WORD:
             return prepareShowSalesByDay(arguments, ui, sales, menu);
 
-
         default:
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
     }
 
     //All prepareCommand Classes
-
     //@@author Cazh1
     /**
      * Prepares the ListMenuCommand
@@ -444,12 +442,33 @@ public class Parser implements ParserUtil {
         return new NextDayCommand(ui, sales, currentDate);
     }
 
+    //@@author NaychiMin
+    /**
+     * Prepares a command to display all sales items.
+     *
+     * @param sale The Sales object containing sales data.
+     * @param menu The Menu object representing the cafe's menu.
+     * @param ui   The Ui object for user interface interactions.
+     * @return A ShowSalesCommand instance for viewing all sales items.
+     */
+    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui) {
+        return new ShowSalesCommand(sale, ui, menu);
+    }
+
+    /**
+     * Prepares a command to display sales items for a specific day.
+     *
+     * @param arguments The arguments containing the day for which sales are to be displayed.
+     * @param ui        The Ui object for user interface interactions.
+     * @param sales     The Sales object containing sales data.
+     * @param menu      The Menu object representing the cafe's menu.
+     * @return A ShowSalesByDayCommand instance for viewing sales items on a specific day.
+     */
     private static Command prepareShowSalesByDay(String arguments, Ui ui, Sales sales, Menu menu) {
         final Pattern showSaleByDayPattern = Pattern.compile(SHOW_SALE_BY_DAY_ARGUMENT_STRING);
         Matcher matcher = showSaleByDayPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            //TODO: CREATE MESSAGE
             return new IncorrectCommand(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE, ui);
         }
 
@@ -460,7 +479,7 @@ public class Parser implements ParserUtil {
             return new IncorrectCommand(ErrorMessages.INVALID_DAY_FORMAT, ui);
         }
     }
-
+    //@@author
 
     /**
      * Sets the orderList according to the Day
@@ -472,10 +491,6 @@ public class Parser implements ParserUtil {
     private static OrderList setOrderList(CurrentDate currentDate, Sales sales) {
         int currentDay = currentDate.getCurrentDay();
         return sales.getOrderList(currentDay);
-    }
-
-    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui) {
-        return new ShowSalesCommand(sale, ui, menu);
     }
 
     /**

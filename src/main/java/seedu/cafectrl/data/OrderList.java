@@ -48,14 +48,12 @@ public class OrderList {
         return totalOrderListCost;
     }
 
-    private float calculateTotalCost(ArrayList<Order> orders) {
-        float totalCost = 0;
-        for (Order order : orders) {
-            totalCost += order.getTotalOrderCost();
-        }
-        return totalCost;
-    }
-
+    //@@author NaychiMin
+    /**
+     * Prints the order list for a specific day, including dish names, quantities, and total cost prices.
+     *
+     * @param menu The Menu object representing the cafe's menu.
+     */
     public void printOrderList(Menu menu) {
         ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
         if (!orderList.isEmpty()) {
@@ -73,6 +71,12 @@ public class OrderList {
         }
     }
 
+    /**
+     * Aggregates orders by updating quantities and total order costs for the same dish.
+     *
+     * @param order           The Order object to be aggregated.
+     * @param aggregatedOrders The ArrayList of aggregated orders.
+     */
     private void aggregateOrder(Order order, ArrayList<Order> aggregatedOrders) {
         if (order.getIsComplete()) {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
@@ -82,6 +86,13 @@ public class OrderList {
     }
 
 
+    /**
+     * Finds the index of an order in the aggregated orders list based on the dish name.
+     *
+     * @param aggregatedOrders The ArrayList of aggregated orders.
+     * @param dishName         The dish name to search for.
+     * @return The index of the order with the specified dish name, or -1 if not found.
+     */
     private int getIndexByDishName(ArrayList<Order> aggregatedOrders, String dishName) {
         for (int i = 0; i < aggregatedOrders.size(); i++) {
             Order order = aggregatedOrders.get(i);
@@ -90,6 +101,20 @@ public class OrderList {
             }
         }
         return -1;
+    }
+
+    /**
+     * Calculates the total cost of all orders for a specific day.
+     *
+     * @param orders The ArrayList of orders.
+     * @return The total cost of all orders for the day.
+     */
+    private float calculateTotalCost(ArrayList<Order> orders) {
+        float totalCost = 0;
+        for (Order order : orders) {
+            totalCost += order.getTotalOrderCost();
+        }
+        return totalCost;
     }
 
 }

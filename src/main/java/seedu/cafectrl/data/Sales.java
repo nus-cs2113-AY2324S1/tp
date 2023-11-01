@@ -102,8 +102,12 @@ public class Sales {
         return orderLists.get(index);
     }
 
+    //@@author NaychiMin
     /**
-     * Prints the sales data for all days, including dish names, quantities, and total cost prices.
+     * Prints all sales data, organized by day, including dish names, quantities, and total cost prices.
+     *
+     * @param ui   The Ui object for user interface interactions.
+     * @param menu The Menu object representing the cafe's menu.
      */
     public void printSales(Ui ui, Menu menu) {
         if (orderLists.isEmpty()) {
@@ -123,6 +127,13 @@ public class Sales {
         }
     }
 
+    /**
+     * Prints sales data for a specific day, including dish names, quantities, and total cost prices.
+     *
+     * @param ui  The Ui object for user interface interactions.
+     * @param menu The Menu object representing the cafe's menu.
+     * @param day The day for which sales data is to be printed.
+     */
     public void printSaleByDay(Ui ui, Menu menu, int day){
         int orderListIndex = day - 1;
         try {
@@ -137,4 +148,5 @@ public class Sales {
             ui.showToUser("An error occurred while printing sales for the specified day.");
         }
     }
+    //@@author
 }

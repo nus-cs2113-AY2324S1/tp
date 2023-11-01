@@ -99,7 +99,7 @@ public class Decoder {
         return true;
     }
 
-    //@@NaychiMin
+    //@@author NaychiMin
     /**
      * Decodes a list of order data and constructs a Sales object using an array of OrderList objects.
      *
@@ -131,5 +131,4 @@ public class Decoder {
         }
         return new Sales(orderLists);
     }
-    //@@author
 }

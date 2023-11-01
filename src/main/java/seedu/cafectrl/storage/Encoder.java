@@ -68,7 +68,7 @@ public class Encoder {
         return pantryStockInString;
     }
 
-    //@@NaychiMin
+    //@@author NaychiMin
     /**
      * Encodes a Sales object into a list of strings for storage.
      * Each string represents an order, including day, dish name, quantity, and total cost.
@@ -98,5 +98,4 @@ public class Encoder {
         }
         return encodedList;
     }
-    //@@author
 }

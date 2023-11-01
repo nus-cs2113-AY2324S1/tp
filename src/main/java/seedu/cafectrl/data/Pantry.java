@@ -98,23 +98,17 @@ public class Pantry {
      * Checks the stock of ingredients and dish availability based on a given order.
      */
     public boolean checkIngredientsStock(ArrayList<Ingredient> dishIngredients){
-        //the dish variable and dishIngredients array will be removed
-        // when order class is implemented as it will pass in dishIngredients
-//        String dish = "Chicken Rice";
-//        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish);
         boolean cooked = decreaseIngredientsStock(dishIngredients);
         calculateDishAvailability();
         return cooked;
     }
 
-    //TODO: edit java doc
     /**
      * Decreases the stock of ingredients based on the given dish order.
      *
      * @param dishIngredients Array of ingredients used to make the dish order.
      */
     public boolean decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
-
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
@@ -209,7 +203,6 @@ public class Pantry {
         ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededIngredient);
     }
 
-
     /**
      * Retrieves the ingredients for a specific ordered dish.
      *
@@ -227,23 +220,6 @@ public class Pantry {
             }
         }
         return dishIngredients;
-    }
-
-    /**
-     * Provides dummy data for menu items. This function will be removed when storage is implemented.
-     *
-     * @return The list of dummy menu items.
-     */
-    private ArrayList<Dish> dummyData() {
-        //dummy data for pantry stock which will be replaced with storage data
-        menuItems = new ArrayList<>();
-        menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 300, "g"),
-                        new Ingredient("Chicken", 100, "g"))), 8.0F));
-        menuItems.add(new Dish("Chicken Sandwich",
-                new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 50, "g"),
-                        new Ingredient("Chicken", 50, "g"))), 5.0F));
-        return menuItems;
     }
 }
 
