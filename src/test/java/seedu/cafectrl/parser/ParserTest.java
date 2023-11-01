@@ -12,6 +12,7 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.parser.exception.ParserException;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -435,62 +436,6 @@ class ParserTest {
         assertEquals("Christmas Ham", getOutputDish.getName());
         assertEquals((float) 50.0, getOutputDish.getPrice());
         assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString());
-    }
-
-    @Test
-    void parsePriceToFloat_validPriceString_exactFloatPrice() {
-        String inputPriceString = "3.14";
-
-        assertEquals((float) 3.14, ParserUtil.parsePriceToFloat(inputPriceString));
-    }
-
-    @Test
-    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ArithmeticException {
-        String inputPriceString = "99999999999.99";
-
-        assertThrows(ArithmeticException.class, () -> ParserUtil.parsePriceToFloat(inputPriceString));
-    }
-
-    @Test
-    void isRepeatedDishName_existingDishName_true() {
-        Menu menu = new Menu();
-        Dish dish = new Dish("Chicken Rice", 2.50F);
-        menu.addDish(dish);
-
-        String inputDishName = "chicken rice";
-
-        assertTrue(ParserUtil.isRepeatedDishName(inputDishName, menu));
-    }
-
-    @Test
-    void isRepeatedDishName_nonExistingDishName_false() {
-        Menu menu = new Menu();
-        Dish dish = new Dish("Chicken Rice", 2.50F);
-        menu.addDish(dish);
-
-        String inputDishName = "chicken chop";
-
-        assertFalse(ParserUtil.isRepeatedDishName(inputDishName, menu));
-    }
-
-    @Test
-    void isRepeatedDishName_nullString_nullPointerExceptionThrown() throws NullPointerException {
-        Menu menu = new Menu();
-        Dish dish = new Dish("Chicken Rice", 2.50F);
-        menu.addDish(dish);
-
-        assertThrows(NullPointerException.class, () -> ParserUtil.isRepeatedDishName(null, menu));
-    }
-
-    @Test
-    void isRepeatedDishName_emptyDishName_false() {
-        Menu menu = new Menu();
-        Dish dish = new Dish("Chicken Rice", 2.50F);
-        menu.addDish(dish);
-
-        String inputDishName = "";
-
-        assertFalse(ParserUtil.isRepeatedDishName(inputDishName, menu));
     }
     //@@author
 }

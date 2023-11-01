@@ -6,6 +6,8 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.parser.exception.ParserException;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -22,12 +24,12 @@ public interface ParserUtil {
      * @return price in float format
      * @throws ArithmeticException if price > 10000000000.00
      */
-    static float parsePriceToFloat(String priceText) throws ArithmeticException {
+    static float parsePriceToFloat(String priceText) throws ParserException {
         float price = Float.parseFloat(priceText);
         float maxPriceValue = (float) 10000000000.00;
 
         if (price > maxPriceValue) {
-            throw new ArithmeticException();
+            throw new ParserException(ErrorMessages.INVALID_PRICE_MESSAGE);
         }
 
         return price;
@@ -63,7 +65,7 @@ public interface ParserUtil {
      * @return boolean of whether the name is more than max character limit set
      * @throws NullPointerException if the input string is null
      */
-    static boolean isNameLengthValid(String inputName) throws NullPointerException {
+    static boolean isNameLengthInvalid(String inputName) throws NullPointerException {
         int maxNameLength = 35;
 
         if (inputName == null) {
@@ -71,9 +73,9 @@ public interface ParserUtil {
         }
 
         if (inputName.length() > maxNameLength) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

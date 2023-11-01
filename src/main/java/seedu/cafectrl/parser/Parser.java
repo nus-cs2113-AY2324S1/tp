@@ -178,7 +178,7 @@ public class Parser implements ParserUtil {
                 return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
             }
             return new EditPriceCommand(dishIndex, newPrice, menu, ui);
-        } catch (IllegalArgumentException e) {
+        } catch (ParserException e) {
             return new IncorrectCommand(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
         }
     }
@@ -205,12 +205,12 @@ public class Parser implements ParserUtil {
             float price = ParserUtil.parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
-            if (ParserUtil.isNameLengthValid(dishName)) {
+            if (ParserUtil.isNameLengthInvalid(dishName)) {
                 throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
             }
 
             if (ParserUtil.isRepeatedDishName(dishName, menu)) {
-                return new IncorrectCommand(Messages.REPEATED_DISH_MESSAGE, ui);
+                throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
             }
 
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
@@ -218,14 +218,9 @@ public class Parser implements ParserUtil {
             Dish dish = new Dish(dishName, ingredients, price);
 
             return new AddDishCommand(dish, menu, ui);
-        } catch (IllegalArgumentException e) {
-            return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
-                    + AddDishCommand.MESSAGE_USAGE, ui);
-        } catch (ArithmeticException e) {
-            return new IncorrectCommand(ErrorMessages.INVALID_PRICE_MESSAGE, ui);
         } catch (NullPointerException e) {
             return new IncorrectCommand(ErrorMessages.NULL_NAME_DETECTED_MESSAGE, ui);
-        } catch (ParserException e) {
+        } catch (Exception e) {
             return new IncorrectCommand(e.getMessage(), ui);
         }
     }
@@ -235,6 +230,7 @@ public class Parser implements ParserUtil {
      * @param ingredientsListString user's input string of ingredients, multiple ingredients seperated by ',' is allowed
      * @return Ingredient objects that consists of the dish
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
+     * @throws ParserException if the input string does not match the constraints
      */
     private static ArrayList<Ingredient> parseIngredients(String ingredientsListString)
             throws IllegalArgumentException, ParserException {
@@ -253,7 +249,8 @@ public class Parser implements ParserUtil {
             Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredient);
 
             if (!ingredientMatcher.matches()) {
-                throw new IllegalArgumentException();
+                throw new ParserException(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
+                        + AddDishCommand.MESSAGE_USAGE);
             }
 
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
@@ -262,7 +259,7 @@ public class Parser implements ParserUtil {
 
             int ingredientQty = Integer.parseInt(ingredientQtyString);
 
-            if (!ParserUtil.isNameLengthValid(ingredientName)) {
+            if (ParserUtil.isNameLengthInvalid(ingredientName)) {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
             }
 
