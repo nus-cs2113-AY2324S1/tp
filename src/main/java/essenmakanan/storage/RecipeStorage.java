@@ -55,16 +55,12 @@ public class RecipeStorage {
         recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
     }
 
-    public ArrayList<Recipe> restoreSavedData() {
-        try {
-            File file = new File(dataPath);
-            Scanner scan = new Scanner(file);
+    public ArrayList<Recipe> restoreSavedData() throws FileNotFoundException {
+        File file = new File(dataPath);
+        Scanner scan = new Scanner(file);
 
-            while (scan.hasNext()) {
-                createNewData(scan);
-            }
-        } catch (FileNotFoundException exception) {
-            EssenFileNotFoundException.handleFileNotFoundException(dataDirectory, dataPath);;
+        while (scan.hasNext()) {
+            createNewData(scan);
         }
 
         return recipeListPlaceholder;

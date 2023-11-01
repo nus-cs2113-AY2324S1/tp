@@ -48,16 +48,12 @@ public class IngredientStorage {
         ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
     }
 
-    public ArrayList<Ingredient> restoreSavedData() {
-        try {
-            File file = new File(dataPath);
-            Scanner scan = new Scanner(file);
+    public ArrayList<Ingredient> restoreSavedData() throws FileNotFoundException {
+        File file = new File(dataPath);
+        Scanner scan = new Scanner(file);
 
-            while (scan.hasNext()) {
-                createNewData(scan);
-            }
-        } catch (FileNotFoundException exception) {
-            EssenFileNotFoundException.handleFileNotFoundException(dataDirectory, dataPath);
+        while (scan.hasNext()) {
+            createNewData(scan);
         }
 
         return ingredientListPlaceholder;
