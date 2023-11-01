@@ -92,8 +92,7 @@ public class ModulePlannerController {
 
         // Display gathered information
         System.out.println("Welcome " + student.getName() + ". Here's what I've gathered so far:");
-        System.out.println("Name: " + student.getName() + ", Major: " + student.printMajor() + ", Year: " + student.getYear() + "\n");
-
+        student.printStudentInformation();
         // Handle commands
         System.out.println("Now enter a command from this list to continue using this program: " );
 
