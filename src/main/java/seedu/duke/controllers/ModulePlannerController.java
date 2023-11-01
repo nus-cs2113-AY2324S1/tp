@@ -3,6 +3,7 @@ import org.json.simple.JSONObject;
 import seedu.duke.models.logic.CompletePreqs;
 import seedu.duke.models.logic.DataRepository;
 import seedu.duke.models.logic.ModuleList;
+import seedu.duke.models.schema.Commands;
 import seedu.duke.models.schema.Major;
 import seedu.duke.models.schema.Student;
 import seedu.duke.models.logic.Api;
@@ -32,7 +33,10 @@ public class ModulePlannerController {
     private HashMap<String, List<String>> modsWithPreqs;
     private CompletePreqs addModulePreqs;
 
+    private Commands commands;
     public ModulePlannerController() {
+
+        this.commands = new Commands();
         this.view = new CommandLineView();
         this.parser = new Parser();
         this.student = new Student();
@@ -62,10 +66,43 @@ public class ModulePlannerController {
     public void start() {
         view.displayWelcome();
         Scanner in = new Scanner(System.in);
-        String userInput = in.nextLine();
 
+        // Get and set student's name
+        String userInput;
+        do {
+            System.out.println("Please enter your name: ");
+            userInput = in.nextLine().trim();
+        } while (!parser.checkNameInput(userInput, commands.getListOfCommands()));
+        student.setName(userInput.toUpperCase());
+
+        // Get and set student's major
+        view.displayGetMajor(student.getName());
+        do {
+            userInput = in.nextLine().trim();
+        } while (!checkMajorInput(userInput));
+        student.setFirstMajor(userInput);
+
+
+        // Get and set student's year
+        view.displayGetYear();
+        do {
+            userInput = in.nextLine().trim();
+        } while (!parser.isValidAcademicYear(userInput.toUpperCase()));
+        student.setYear(userInput.toUpperCase());
+
+        // Display gathered information
+        System.out.println("Welcome " + student.getName() + ". Here's what I've gathered so far:");
+        System.out.println("Name: " + student.getName() + ", Major: " + student.printMajor() + ", Year: " + student.getYear() + "\n");
+
+        // Handle commands
+        System.out.println("Now enter a command from this list to continue using this program: " );
+
+
+        printListOfCommands();
+
+        userInput = in.nextLine();
         while (!userInput.equals("bye")) {
-
+            //Doesn't handle empty input
             String[] words = userInput.split(" ");
 
             String initialWord = words[0].toLowerCase();
@@ -73,6 +110,8 @@ public class ModulePlannerController {
             boolean validInput;
 
             validInput = Parser.isValidInput(initialWord, words);
+
+
             if (validInput) {
                 switch (initialWord) {
                 case "hi": {
@@ -158,8 +197,13 @@ public class ModulePlannerController {
                     }
                     break;
                 }
+                case "help": {
+                    printListOfCommands();
+                    break;
+                }
                 default: {
-                    view.displayMessage("Hello " + userInput);
+                    view.displayMessage("Please enter a valid command");
+                    printListOfCommands();
                     break;
                 }
 
@@ -169,6 +213,12 @@ public class ModulePlannerController {
 
             }
             userInput = in.nextLine();
+        }
+    }
+
+    private void printListOfCommands() {
+        for (String command : commands.printListOfCommands()) {
+            System.out.println(command);
         }
     }
 
@@ -233,10 +283,12 @@ public class ModulePlannerController {
 
 
     /**
-     * Add all mods that require prerequisites to a map storing the mod and a set of preqs
+     * Populates a HashMap with modules that have prerequisites. Each module is associated with a list
+     * of its prerequisites.
      *
-     * @param list
-     * @return HashMap of Mods with their corresponding preqs
+     * @author Isaiah Cerven
+     * @param list The HashMap to populate with module-prerequisite pairs.
+     * @return The populated HashMap.
      */
 
     private HashMap<String, List<String>> addModsWithPreqs(HashMap<String, List<String>> list) {
@@ -258,11 +310,14 @@ public class ModulePlannerController {
 
 
     /**
-     * Helper function to addModsWithPreqs to add Strings and sets together
+     * Adds a key-value pair to a HashMap, where the key is a module code and the value is a list of its
+     * prerequisites. If the module already exists in the HashMap, the new prerequisite is added to the
+     * existing list.
      *
-     * @param map
-     * @param key
-     * @param value
+     *
+     * @param map   The HashMap to add the key-value pair to.
+     * @param key    The module code (key).
+     * @param value  The prerequisite module code (value).
      */
     public static void addValue(HashMap<String, List<String>> map, String key, String value) {
         // If the map does not contain the key, put an empty list for that key
@@ -271,6 +326,23 @@ public class ModulePlannerController {
         }
         // Add the value to the list associated with the key
         map.get(key).add(value);
+    }
+
+    /**
+     * Checks if the user's major input is valid. A major input is valid if it exists in the enumeration
+     * of valid majors.
+     *
+     * @param userInput The user's major input.
+     * @return True if the input is a valid major, false otherwise.
+     */
+    public boolean checkMajorInput(String userInput) {
+        try {
+            Major.valueOf(userInput.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Please choose from the list: CS, or CEG");
+            return false;
+        }
     }
 
 }

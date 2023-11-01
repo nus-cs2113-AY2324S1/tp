@@ -2,9 +2,12 @@ package seedu.duke.utils;
 
 import seedu.duke.views.ErrorHandler;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Parser {
+
+
 
     /**
      * Checks if the given academic year input is valid.
@@ -82,6 +85,45 @@ public class Parser {
         }
         return true;
     }
+
+    public boolean checkNameInput(String userInput, ArrayList<String> forbiddenCommands) {
+        // Check for non-empty string
+        if (userInput.trim().isEmpty()) {
+            System.out.println("Name cannot be empty. Please enter a valid name.");
+            return false;
+        }
+
+        // Check for length constraints
+        int minLength = 2;  // Minimum length for a valid name
+        int maxLength = 50; // Maximum length for a valid name
+        if (userInput.length() < minLength || userInput.length() > maxLength) {
+            System.out.println("Name must be between " + minLength + " and " + maxLength + " characters.");
+            return false;
+        }
+
+        // Check for valid characters
+        if (!userInput.matches("[a-zA-Z- ']+")) {
+            System.out.println("Name can only contain letters, spaces, hyphens, and apostrophes.");
+            return false;
+        }
+
+        // Check for no leading or trailing spaces
+        if (!userInput.equals(userInput.trim())) {
+            System.out.println("Name cannot start or end with a space.");
+            return false;
+        }
+
+
+        if (forbiddenCommands.contains(userInput.trim().toLowerCase())) {
+            System.out.println("Invalid name. This name is reserved for commands. Please enter a different name.");
+            return false;
+        }
+
+        return true;
+    }
+
+
+
 
 
 

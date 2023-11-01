@@ -9,13 +9,24 @@ public class CommandLineView {
     private final int accountForTabs = 15;
 
     public void displayWelcome(){
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        String logo = "  _____       _                 __  __        _____      _              _       _      \n"
+                + " |  __ \\     | |               |  \\/  |      / ____|    | |            | |     | |     \n"
+                + " | |  | | ___| |__  _   _  __ _| \\  / |_   _| (___   ___| |__   ___  __| |_   _| | ___ \n"
+                + " | |  | |/ _ \\ '_ \\| | | |/ _` | |\\/| | | | |\\___ \\ / __| '_ \\ / _ \\/ _` | | | | |/ _ \\\n"
+                + " | |__| |  __/ |_) | |_| | (_| | |  | | |_| |____) | (__| | | |  __/ (_| | |_| | |  __/\n"
+                + " |_____/ \\___|_.__/ \\__,_|\\__, |_|  |_|\\__, |_____/ \\___|_| |_|\\___|\\__,_|\\__,_|_|\\___|\n"
+                + "                           __/ |        __/ |                                          \n"
+                + "                          |___/        |___/                                           ";
+        System.out.println("Hey there CS and CEG Students! Welcome to \n" + logo);
+
+    }
+
+    public void displayGetMajor(String name){
+        System.out.println("Welcome " + name + "! What major are you? (Only two available: CEG or CS)");
+    }
+
+    public void displayGetYear(){
+        System.out.println("What Year and Semester are you? Ex: Y1/S2 for year 1 semester 2");
     }
 
     /**
@@ -26,6 +37,7 @@ public class CommandLineView {
     public void displayMessage(Object o) {
         System.out.println(o);
     }
+
 
     /**
      * Display an empty line to the command line view.
