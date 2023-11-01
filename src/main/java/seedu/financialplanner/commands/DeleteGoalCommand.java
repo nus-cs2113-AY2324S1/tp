@@ -1,16 +1,16 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.reminder.ReminderList;
+import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.utils.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import seedu.financialplanner.reminder.Reminder;
-public class DeleteReminderCommand extends Command{
+import seedu.financialplanner.goal.Goal;
+public class DeleteGoalCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
-    public DeleteReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
+    public DeleteGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
-        if(rawCommand.args.size() == 1) {
+        if (rawCommand.args.size() == 1){
             stringIndex = rawCommand.args.get(0);
         } else {
             throw new IllegalArgumentException("Incorrect arguments.");
@@ -29,10 +29,11 @@ public class DeleteReminderCommand extends Command{
             throw new IllegalArgumentException("Index must be within the list");
         }
 
-        if (index > ReminderList.getInstance().list.size() + 1) {
+        if (index > WishList.getInstance().list.size() + 1) {
             logger.log(Level.WARNING, "Invalid value for index");
             throw new IllegalArgumentException("Index exceed the list size");
         }
+        rawCommand.extraArgs.remove("i");
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new java.util.ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
             logger.log(Level.WARNING, "Invalid extra arguments found");
@@ -42,8 +43,8 @@ public class DeleteReminderCommand extends Command{
 
     @Override
     public void execute() {
-        Reminder reminderToDelete = ReminderList.getInstance().list.get(index-1);
-        ReminderList.getInstance().deleteReminder(index-1);
-        Ui.getInstance().showMessage("You have deleted " + reminderToDelete);
+        Goal goalToDelete = WishList.getInstance().list.get(index-1);
+        WishList.getInstance().deleteGoal(index-1);
+        Ui.getInstance().showMessage("You have deleted " + goalToDelete);
     }
 }

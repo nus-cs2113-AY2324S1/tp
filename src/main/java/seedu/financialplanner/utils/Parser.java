@@ -17,6 +17,12 @@ import seedu.financialplanner.commands.AddReminderCommand;
 import seedu.financialplanner.commands.SetGoalCommand;
 import seedu.financialplanner.commands.BalanceCommand;
 import seedu.financialplanner.commands.DeleteStockCommand;
+import seedu.financialplanner.commands.MarkGoalCommand;
+import seedu.financialplanner.commands.MarkReminderCommand;
+import seedu.financialplanner.commands.DeleteGoalCommand;
+import seedu.financialplanner.commands.DeleteReminderCommand;
+import seedu.financialplanner.commands.ReminderListCommand;
+import seedu.financialplanner.commands.WishListCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.util.ArrayList;
@@ -41,6 +47,12 @@ public class Parser {
     private static final String LIST_COMMAND = "list";
     private static final String SET_GOAL_COMMAND = "set";
     private static final String BALANCE_COMMAND = "balance";
+    private static final String MARK_GOAL_COMMAND = "markgoal";
+    private static final String MARK_REMINDER_COMMAND = "markreminder";
+    private static final String DELETE_GOAL_COMMAND = "deletegoal";
+    private static final String DELETE_REMINDER_COMMAND = "deletereminder";
+    private static final String REMINDER_LIST_COMMAND = "reminderlist";
+    private static final String WISH_LIST_COMMAND = "wishlist";
 
     public static Command parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
@@ -77,6 +89,18 @@ public class Parser {
             return new SetGoalCommand(rawCommand);
         case BALANCE_COMMAND:
             return new BalanceCommand(rawCommand);
+        case MARK_GOAL_COMMAND:
+            return new MarkGoalCommand(rawCommand);
+        case MARK_REMINDER_COMMAND:
+            return new MarkReminderCommand(rawCommand);
+        case DELETE_GOAL_COMMAND:
+            return new DeleteGoalCommand(rawCommand);
+        case DELETE_REMINDER_COMMAND:
+            return new DeleteReminderCommand(rawCommand);
+        case REMINDER_LIST_COMMAND:
+            return new ReminderListCommand(rawCommand);
+        case WISH_LIST_COMMAND:
+            return new WishListCommand(rawCommand);
         default:
             return new InvalidCommand();
         }
