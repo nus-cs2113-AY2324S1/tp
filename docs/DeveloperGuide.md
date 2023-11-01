@@ -29,10 +29,10 @@ The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.j
 
 The App consists of eight components.
 * [**`UI`**](#ui-component): The UI of the App.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 * [**`MealList`**](#meal-list-component): Stores all meals.
 * [**`UserProfile`**](#user-profile-component): The class which handles all profile data.
 * [**`WorkoutList`**](#workout-list-component): Stores all workouts.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 * [**`Parser`**](#parser-component): Handles user input.
 * [**`Data`**](#data-component): Holds the data of the app in memory.
 * [**`Command`**](#command-component): The command executor.
