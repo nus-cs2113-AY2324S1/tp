@@ -103,6 +103,8 @@ BMI, ideal weight for their height and so on.
 |v2.0|user| Calculate my ideal weight for my height                     | maintain my weight in the healthy range                       |
 |v2.0|user| see the total calories I have consumed on a particular date | track my daily calories intake                                |
 |v2.0|user| see the total calories I have burnt on a particular date    | track my daily calories burnt                                 |
+|v2.0|user| find a meal or workout                                      | quickly search my past meals or workouts                      |
+
 
 
 ## Non-Functional Requirements
