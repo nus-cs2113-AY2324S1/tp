@@ -16,6 +16,7 @@ Below are the design and implementation details of KaChinnnng.
 ### Design
 
 The architectural diagram of KaChinnnng is as follows:
+
 ![ArchitectureDiagram.png](..%2Fimages%2FArchitectureDiagram.png)
 
 The kaChinnnng program will first enter the `run` state where the `storage` class will be accessed and data will be retrieved if the application has been used before.
@@ -202,18 +203,35 @@ Given below are the instructions for manual testing of KaChinnnng.
    - expense: `add expense /cat food /type lunch /de lunch  /amt 5000.00` where there is missing fields
 
 ### Deleting an income/expense
-
-
+Deleting income/expense
+1. Test case: If there the index specified invalid
+    - For income/expense: `delete income <invalid_index>`
+    - Expected outcome: `Oops! Income <invaldi_index> does not exist`
+2. Test case: If the index is missing
+    - For income/expense: `delete income`
+    - Expected outcome: `You're missing an argument`
+3. Test case: If there index is not an integer
+    - For income/expense: `delete income abc`
+    - Expected outcome: `Oops! An integer index is expected`
 
 
 ### Editing an income/expense
-
-
-
-### Listing all incomes/expenses
-
-
-
+Editing income/expense
+1. Test case: If there the index specified invalid
+   - For income/expense: `edit income <invalid_index> income /de <description> /date <DD/MM/YYYY> /amt <amount>`
+   - Expected outcome: `Oops! Income <invaldi_index> does not exist`
+2. Test case: Missing arguments
+    Assuming Income 1 and Expense 1 exist:
+    - income: `edit income 1 /de salary`
+    - expense: `edit expense 1 /cat food /type lunnch`
+    - Expected outcome: the income/expense will not be edited and the user will be notified with an error message.
+   
+4. Test case: Other invalid test cases includes:
+    Assuming index Income 1 exist:
+    - income: `edit income 1 /de salary /date 31/11/2023 /amt 5000.00` where the date is in the future.
+    - income: `edit income 1 /de salary /date 31-10-2023 /amt 5000.00` where the date is in the wrong format.
+    - income: `edit income 1 /de salary /date 31/10/2023 /amt -5000.00` where the amount is negative.
+    - expense: `edit expense 1 /cat food /type lunch /de lunch /amt 5000.00` where there is missing fields
 
 ### Finding an income/expense
 1. Finding income/expense:
@@ -227,6 +245,3 @@ Given below are the instructions for manual testing of KaChinnnng.
    - Income: `find /t income /de bonus`
    - Expense: `find /t expense /cat food /de burger /date 31/10/2023`
    - expected: no income/expense should be listed.
-
-
-### Currency
