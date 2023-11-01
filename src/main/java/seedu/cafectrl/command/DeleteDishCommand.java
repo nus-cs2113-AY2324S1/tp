@@ -29,7 +29,7 @@ public class DeleteDishCommand extends Command {
         try {
             int dishIndexToBeDeleted = index - Ui.OFFSET_LIST_INDEX;
             Dish selectedDish = menu.getMenuItemsList().get(dishIndexToBeDeleted);
-            ui.showDeleteMessage(selectedDish);
+            ui.printDeleteMessage(selectedDish);
             menu.removeDish(dishIndexToBeDeleted);
         } catch (IndexOutOfBoundsException e) {
             ui.showToUser(ErrorMessages.INVALID_DISH_INDEX);
