@@ -34,7 +34,7 @@ public class Decoder {
     public static Menu decodeMenuData(ArrayList<String> textLines) {
         ArrayList<Dish> menuDishList = new ArrayList<>();
         for(String dishString : textLines) {
-            String[] dishStringArray = dishString.split(" \\| ");
+            String[] dishStringArray = dishString.split(DIVIDER);
             String dishName = dishStringArray[0];
             float dishPrice = Float.parseFloat(dishStringArray[1]);
             String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
@@ -70,7 +70,7 @@ public class Decoder {
             return new Pantry(ui);
         }
         for (String encodedData : encodedPantryStock) {
-            String[] decodedData = encodedData.split(" ");
+            String[] decodedData = encodedData.split(DIVIDER);
             if (!isValidPantryStockFormat(decodedData)) {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
             } else {
