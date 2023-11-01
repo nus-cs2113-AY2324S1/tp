@@ -17,10 +17,10 @@ public class ParserUtilTest {
     }
 
     @Test
-    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ArithmeticException {
+    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ParserException {
         String inputPriceString = "99999999999.99";
 
-        assertThrows(ArithmeticException.class, () -> ParserUtil.parsePriceToFloat(inputPriceString));
+        assertThrows(ParserException.class, () -> ParserUtil.parsePriceToFloat(inputPriceString));
     }
 
     @Test
