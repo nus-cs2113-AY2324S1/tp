@@ -68,7 +68,7 @@ public class Encoder {
         return pantryStockInString;
     }
 
-    //@@NaychiMin
+    //@@author NaychiMin
     /**
      * Encodes a Sales object into a list of strings for storage.
      * Each string represents an order, including day, dish name, quantity, and total cost.
@@ -90,11 +90,12 @@ public class Encoder {
                 orderString.append((day + 1) + DIVIDER);
                 orderString.append(order.getDishName() + DIVIDER);
                 orderString.append(order.getQuantity() + DIVIDER);
-                orderString.append(order.totalOrderCost());
+                orderString.append(order.totalOrderCost() + DIVIDER);
+                orderString.append(order.getIsComplete());
+                orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));
             }
         }
         return encodedList;
     }
-    //@@author
 }

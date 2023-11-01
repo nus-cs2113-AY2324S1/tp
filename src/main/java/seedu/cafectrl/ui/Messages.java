@@ -47,4 +47,7 @@ public class Messages {
             + "Hold onto your hats; here we go!";
     public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
 
+    public static final String AVAILABLE_DISHES = "Listed below are the availability of the dishes for the next order!";
+    public static final String COMPLETE_ORDER = "Order is ready!";
+    public static final String INCOMPLETE_ORDER = "Please restock ingredients before preparing the order :) ";
 }

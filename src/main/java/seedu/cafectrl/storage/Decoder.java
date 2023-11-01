@@ -6,10 +6,10 @@ import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
+import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
-import seedu.cafectrl.data.dish.Dish;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +22,7 @@ import java.util.Arrays;
  */
 public class Decoder {
 
-    private static final String DIVIDER = " | ";
+    private static final String DIVIDER = "\\| ";
     private static final Ui ui = new Ui();
 
     /**
@@ -63,7 +63,7 @@ public class Decoder {
     }
 
     //@@author ziyi105
-    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
+    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock, Menu menu) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
 
         if (encodedPantryStock.isEmpty()) {
@@ -97,7 +97,7 @@ public class Decoder {
         return true;
     }
 
-    //@@NaychiMin
+    //@@author NaychiMin
     /**
      * Decodes a list of order data and constructs a Sales object using an array of OrderList objects.
      *
@@ -115,8 +115,9 @@ public class Decoder {
             String dishName = orderData[1].trim();
             int quantity = Integer.parseInt(orderData[2].trim());
             float totalOrderCost = Float.parseFloat(orderData[3].trim());
+            boolean isComplete = "true".equals(orderData[4].trim());
 
-            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost);
+            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
 
             //increase size of orderLists if needed
             //this can be used in the event that the text file's first order is not day 0
@@ -128,5 +129,4 @@ public class Decoder {
         }
         return new Sales(orderLists);
     }
-    //@@author
 }
