@@ -82,9 +82,15 @@ Format: `create flashcard`
 
 ## FAQ
 
+**Q**: Where can I find my flashcard and caldendar data?
+
+**A**: You can find it in `data/flashcards` and `data/events` folder.
+
+Every event and flashcard are automatically save after each command.
+
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: You can transfer your data by copying & pasting the data folder.
 
 ## Command Summary
 
