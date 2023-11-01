@@ -5,8 +5,26 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design
+### Architecture Diagram
 
-### Parser
+The Architecture Diagram given above explains the high-level design of the App.
+Listed below is a brief summary outlining the primary components and their interrelationships.
+
+In summary, the user interacts with the UI components, initiating a sequence that involves:
+- Parser component for command interpretation
+- Command component for execution 
+- Data component for managing application data
+
+The Storage component mainly handles interaction with external text files and main coordinates the interactions between the various Components.
+
+The bulk of the app’s work is done by the following components:
+- `UI` : The UI of the App.
+- `Storage` : Reads data from, and writes data to, the text files.
+- `Data` : Consists of all the classes that are involved in execution of commands.
+- `Parser` : XYZ
+- `Command` : XYZ
+
+### Parser Component
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 ![Parser Class Diagram](images/class/Parser.png)
@@ -21,7 +39,7 @@ Note that `CafeCtrl` only have access to the interface `ParserUtil` although the
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
-### Storage
+### Storage Component
 API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
 ![Storage Class Diagram](images/class/Storage.png)
@@ -32,6 +50,22 @@ The `Storage` class,
 - loads and saves the list of dishes on the `Menu`, available ingredient stock in `Pantry` and orders for the day in `OrderList` in a text file.
 - depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
+
+### Data Component
+API: []
+
+*Figure x: Data Package Class Diagram*
+
+The 'Data' package consists of all the classes that the commands interact with to perform various functions.
+A summary of the class diagram is as listed below:
+- Each `Dish` within the `Menu` is constructed with a set of `Ingredient` instances, forming a one-to-many relationship with `Ingredient`.
+- `Pantry` is instantiated with an ArrayList of `Ingredients` (`pantryStock`), forming a one-to-many relationship with `Ingredient`.
+- The `Chef` class has a one-to-one relationship with `Pantry`, ensuring access to necessary ingredients for dish preparation.
+- When an order is placed, the `Order` class is instantiated with an ArrayList of `Ingredient` (`ingredientList`), forming a one-to-many relationship with `Ingredient`.
+- `OrderList` is instantiated with an ArrayList of `Order`, forming a one-to-many relationship with `Order`.
+- `Sales` is instantiated with an ArrayList of `OrderList`, forming a one-to-many relationship with `OrderList`.
+- Lastly, the `CurrentDate` class keeps track of the current operating day of the cafe.
+
 
 ## Features
 
