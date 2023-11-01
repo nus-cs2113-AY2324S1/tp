@@ -29,12 +29,6 @@ public class OrderList {
     public int getSize() {
         return orderList.size();
     }
-    public Order getOrder(int orderID) {
-        return orderList.get(orderID);
-    }
-    public void removeOrder(int orderID) {
-        orderList.remove(orderID);
-    }
 
     public void addOrder(Order order) {
         orderList.add(order);
@@ -43,10 +37,6 @@ public class OrderList {
     public void addCost(Order order) {
         float orderCost = order.getTotalOrderCost();
         totalOrderListCost += orderCost;
-    }
-
-    public float getTotalOrderListCost() {
-        return totalOrderListCost;
     }
 
     //@@author NaychiMin
