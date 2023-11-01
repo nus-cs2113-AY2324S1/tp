@@ -37,7 +37,8 @@ public class UsageInstructions {
                 "edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> " +
                 "/amt [currency] <amount>\n");
         System.out.println("Check balance of income: balance\nFormat: " + "balance\n");
-        System.out.println("Update exchange rate: update exchange rate\nFormat: " + "update exchange rate <supported_currency> <rate>\n");
+        System.out.println("Update exchange rate: update exchange rate\nFormat: " + "update exchange rate " +
+                "<supported_currency> <rate>\n");
         System.out.println("Exiting the program: exit\nFormat: " + "exit");
 
         ui.showLineDivider();
