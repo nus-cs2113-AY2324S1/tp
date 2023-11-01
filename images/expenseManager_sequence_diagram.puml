@@ -6,18 +6,17 @@ participant Expense
 
 Duke -> ExpenseManager: provides expense details
 activate ExpenseManager
-ExpenseManager -> ExpenseParser: extractExpenseFields(details)
+ExpenseManager -> ExpenseManager: execute()
+activate ExpenseManager
+ExpenseManager -> ExpenseManager: extractExpenseFields(details)
+ExpenseManager -> ExpenseParser: parseExpense(expenseFields)
 activate ExpenseParser
-ExpenseParser -> ExpenseParser: parseDate(expenseDateString)
-activate ExpenseParser
-ExpenseParser --> ExpenseParser: validates date format
-ExpenseParser -> ExpenseParser: parseExpense(argumentsByField)
-ExpenseParser --> ExpenseParser: validates fields
-ExpenseParser --> Expense: calls Expense constructor
-Expense --> ExpenseParser: new Expense object
-ExpenseParser --> ExpenseManager: returns Expense object
+ExpenseParser -> ExpenseParser: parseDate(dateField)
+ExpenseParser -> Expense: Expense(description, date, amount, type)
+Expense --> ExpenseParser
+ExpenseParser --> ExpenseManager
 deactivate ExpenseParser
+deactivate ExpenseManager
 ExpenseManager --> Duke: returns new Expense object
-deactivate ExpenseParser
 deactivate ExpenseManager
 @enduml
