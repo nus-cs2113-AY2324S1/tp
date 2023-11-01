@@ -1,6 +1,15 @@
-...Downloading data...
-Data Folder was not found!
-It's ok... a new data folder has been created.
+Menu data was not found!
+No worries, new menu has been created
+
+
+Pantry stock data was not found!
+No worries, new pantry has been created
+
+
+Order list data was not found!
+No worries, new order list has been created
+
+
 Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > -----------------------------------------------------
