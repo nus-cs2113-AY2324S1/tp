@@ -191,11 +191,6 @@ public class Parser implements ParserUtil {
         }
     }
 
-    private static boolean isPriceValid(float newPrice) {
-        String newPriceInString = String.valueOf(newPrice);
-        return newPriceInString.matches(".*\\.\\d{3,}");
-    }
-
     //@@author DextheChik3n
     /**
      * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
