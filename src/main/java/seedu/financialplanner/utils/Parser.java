@@ -2,6 +2,7 @@ package seedu.financialplanner.utils;
 
 import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.AddStockCommand;
+import seedu.financialplanner.commands.HelpCommand;
 import seedu.financialplanner.commands.OverviewCommand;
 import seedu.financialplanner.commands.AddCashflowCommand;
 import seedu.financialplanner.commands.DeleteCashflowCommand;
