@@ -3,6 +3,9 @@ package essenmakanan.parser;
 import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.RecipeStepList;
+import essenmakanan.recipe.Step;
+import essenmakanan.recipe.Tag;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +18,37 @@ public class AddRecipeCommandTest {
 
     private RecipeList recipeList;
 
+    private RecipeStepList recipeStepList;
     @BeforeEach
     public void setUp() {
         recipeList = new RecipeList();
+    }
+
+    @Test
+    public void addWithTitleStepsTags_validInput() {
+        String userInput = "r/bread t/1 s/buy ingredients s/store ingredients " +
+            "t/2 s/wash the ingredients s/cut the ingredients t/4 s/cook ";
+
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+        addRecipeCommand.executeCommand();
+
+        recipeStepList = recipeList.getRecipes().get(0).getRecipeSteps();
+        Step step1 = recipeStepList.getStepByIndex(0);
+        Step step2 = recipeStepList.getStepByIndex(1);
+        Step step3 = recipeStepList.getStepByIndex(2);
+        Step step4 = recipeStepList.getStepByIndex(3);
+        Step step5 = recipeStepList.getStepByIndex(4);
+        assertEquals("buy ingredients", step1.getDescription());
+        assertEquals("store ingredients", step2.getDescription());
+        assertEquals("wash the ingredients", step3.getDescription());
+        assertEquals("cut the ingredients", step4.getDescription());
+        assertEquals("cook", step5.getDescription());
+
+        assertEquals(Tag.NIGHT_BEFORE, step1.getTag());
+        assertEquals(Tag.NIGHT_BEFORE, step2.getTag());
+        assertEquals(Tag.MORNING_OF_COOKING, step3.getTag());
+        assertEquals(Tag.MORNING_OF_COOKING, step4.getTag());
+        assertEquals(Tag.ACTUAL_COOKING, step5.getTag());
     }
 
     @Test

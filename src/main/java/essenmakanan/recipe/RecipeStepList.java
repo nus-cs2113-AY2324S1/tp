@@ -54,4 +54,9 @@ public class RecipeStepList {
         steps.remove(step);
     }
 
+    public void sortByTime() {
+        steps.sort((step1, step2) -> step1.getTime().compareTo(step2.getTime()));
+    }
+
+
 }
