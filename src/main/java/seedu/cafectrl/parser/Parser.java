@@ -1,19 +1,6 @@
 package seedu.cafectrl.parser;
 
-import seedu.cafectrl.command.AddDishCommand;
-import seedu.cafectrl.command.AddOrderCommand;
-import seedu.cafectrl.command.BuyIngredientCommand;
-import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.DeleteDishCommand;
-import seedu.cafectrl.command.EditPriceCommand;
-import seedu.cafectrl.command.ExitCommand;
-import seedu.cafectrl.command.HelpCommand;
-import seedu.cafectrl.command.IncorrectCommand;
-import seedu.cafectrl.command.ListIngredientCommand;
-import seedu.cafectrl.command.ListMenuCommand;
-import seedu.cafectrl.command.NextDayCommand;
-import seedu.cafectrl.command.PreviousDayCommand;
-import seedu.cafectrl.command.ViewTotalStockCommand;
+import seedu.cafectrl.command.*;
 
 import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.data.Sales;
@@ -68,6 +55,7 @@ public class Parser {
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -128,8 +116,12 @@ public class Parser {
         case PreviousDayCommand.COMMAND_WORD:
             return preparePreviousDay(ui, currentDate);
 
-        case "show_sales": //PLACEHOLDER, TO BE IMPLEMENTED BY NAYCHI
-            return new IncorrectCommand("Overall Earnings: $" + sales.getTotalSales(), ui);
+        case ShowSalesCommand.COMMAND_WORD:
+            return prepareShowSales(sales, menu, ui);
+
+        case ShowSalesByDayCommand.COMMAND_WORD:
+            return prepareShowSalesByDay(arguments, ui, sales, menu);
+
 
         default:
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
@@ -452,6 +444,24 @@ public class Parser {
         return new NextDayCommand(ui, sales, currentDate);
     }
 
+    private static Command prepareShowSalesByDay(String arguments, Ui ui, Sales sales, Menu menu) {
+        final Pattern showSaleByDayPattern = Pattern.compile(SHOW_SALE_BY_DAY_ARGUMENT_STRING);
+        Matcher matcher = showSaleByDayPattern.matcher(arguments.trim());
+
+        if (!matcher.matches()) {
+            //TODO: CREATE MESSAGE
+            return new IncorrectCommand(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE, ui);
+        }
+
+        try {
+            int day = Integer.parseInt(matcher.group(1));
+            return new ShowSalesByDayCommand(day, ui, sales, menu);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.INVALID_DAY_FORMAT, ui);
+        }
+    }
+
+
     /**
      * Sets the orderList according to the Day
      *
@@ -462,6 +472,10 @@ public class Parser {
     private static OrderList setOrderList(CurrentDate currentDate, Sales sales) {
         int currentDay = currentDate.getCurrentDay();
         return sales.getOrderList(currentDay);
+    }
+
+    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui) {
+        return new ShowSalesCommand(sale, ui, menu);
     }
 
     /**
