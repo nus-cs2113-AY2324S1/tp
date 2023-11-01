@@ -5,7 +5,10 @@ import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.RecipeStepList;
 import essenmakanan.ui.Ui;
+import essenmakanan.recipe.Tag;
+import essenmakanan.recipe.Step;
 
 public class AddRecipeCommand extends Command {
     private String toAdd;
@@ -26,8 +29,10 @@ public class AddRecipeCommand extends Command {
             } catch (EssenFormatException e) {
                 e.handleException();
             }
-        } else if (toAdd.contains("r/") && toAdd.contains("s/")) {
+        } else if (toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("t/")) {
             // only title and steps are available
+            this.addWithTitleStepsTags();
+        } else if (toAdd.contains("r/") && toAdd.contains("s/")) {
             this.addWithTitleAndSteps();
         } else {
             // only title is available
@@ -52,6 +57,52 @@ public class AddRecipeCommand extends Command {
         Recipe newRecipe = new Recipe(recipeTitle, steps);
         recipes.addRecipe(newRecipe);
         Ui.printAddRecipeSuccess(recipeTitle);
+    }
+
+
+
+    public void addWithTitleStepsTags() {
+        // add r/bread t/b s/buy ingredients s/store ingredients t/a s/cook
+        String[] allToAdd = toAdd.split("t/");
+        String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
+        String[] steps = new String[allToAdd.length - 1];
+        for (int i = 1; i < allToAdd.length; i++) {
+            steps[i - 1] = allToAdd[i].trim();
+        }
+        RecipeStepList recipeStepList = new RecipeStepList(new String[]{});
+        for (String step : steps) {
+            if (step.startsWith("1")) {
+                step = step.replace("1", "").trim();
+                addSteps(step, recipeStepList, Tag.NIGHT_BEFORE);
+            } else if (step.startsWith("2")) {
+                step = step.replace("2", "");
+                addSteps(step, recipeStepList, Tag.MORNING_OF_COOKING);
+            } else if (step.startsWith("3")) {
+                step = step.replace("3", "");
+                addSteps(step, recipeStepList, Tag.MORE_THAN_ONE_DAY);
+            } else if (step.startsWith("4")) {
+                step = step.replace("4", "");
+                addSteps(step, recipeStepList, Tag.ACTUAL_COOKING);
+            } else {
+                System.out.println("No such Tag");
+            }
+        }
+        Recipe newRecipe = new Recipe(recipeTitle, recipeStepList);
+        recipes.addRecipe(newRecipe);
+        Ui.printAddRecipeSuccess(recipeTitle);
+    }
+
+    private static void addSteps(String step, RecipeStepList recipeStepList, Tag tag) {
+        String[] allSteps = step.trim().split("s/");
+        for (String eachStep : allSteps) {
+            if (eachStep.length()>0) {
+                recipeStepList.addStep(new Step(eachStep.trim(), tag));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
     }
 
     public void addWithTitleAndStepsAndIngredients() throws EssenFormatException {
