@@ -2,6 +2,7 @@ package seedu.financialplanner.utils;
 
 import seedu.financialplanner.commands.Command;
 import seedu.financialplanner.commands.AddStockCommand;
+import seedu.financialplanner.commands.HelpCommand;
 import seedu.financialplanner.commands.OverviewCommand;
 import seedu.financialplanner.commands.AddCashflowCommand;
 import seedu.financialplanner.commands.DeleteCashflowCommand;
@@ -33,26 +34,27 @@ import java.util.List;
 import java.util.Map;
 
 public class Parser {
-    private static final String EXIT_COMMAND = "exit";
-    private static final String WATCHLIST_COMMAND = "watchlist";
-    private static final String ADD_CASHFLOW_COMMAND = "add";
-    private static final String DELETE_CASHFLOW_COMMAND = "delete";
-    private static final String ADD_STOCK_COMMAND = "addstock";
-    private static final String DELETE_STOCK_COMMAND = "deletestock";
-    private static final String FIND_COMMAND = "find";
-    private static final String OVERVIEW_COMMAND = "overview";
-    private static final String BUDGET_COMMAND = "budget";
-    private static final String VISUALIZATION_COMMAND = "vis";
-    private static final String ADD_REMINDER_COMMAND = "addreminder";
-    private static final String LIST_COMMAND = "list";
-    private static final String SET_GOAL_COMMAND = "set";
-    private static final String BALANCE_COMMAND = "balance";
-    private static final String MARK_GOAL_COMMAND = "markgoal";
-    private static final String MARK_REMINDER_COMMAND = "markreminder";
-    private static final String DELETE_GOAL_COMMAND = "deletegoal";
-    private static final String DELETE_REMINDER_COMMAND = "deletereminder";
-    private static final String REMINDER_LIST_COMMAND = "reminderlist";
-    private static final String WISH_LIST_COMMAND = "wishlist";
+    public static final String EXIT_COMMAND = "exit";
+    public static final String WATCHLIST_COMMAND = "watchlist";
+    public static final String ADD_CASHFLOW_COMMAND = "add";
+    public static final String DELETE_CASHFLOW_COMMAND = "delete";
+    public static final String ADD_STOCK_COMMAND = "addstock";
+    public static final String DELETE_STOCK_COMMAND = "deletestock";
+    public static final String FIND_COMMAND = "find";
+    public static final String OVERVIEW_COMMAND = "overview";
+    public static final String BUDGET_COMMAND = "budget";
+    public static final String VISUALIZATION_COMMAND = "vis";
+    public static final String ADD_REMINDER_COMMAND = "addreminder";
+    public static final String LIST_COMMAND = "list";
+    public static final String SET_GOAL_COMMAND = "set";
+    public static final String BALANCE_COMMAND = "balance";
+    public static final String MARK_GOAL_COMMAND = "markgoal";
+    public static final String MARK_REMINDER_COMMAND = "markreminder";
+    public static final String DELETE_GOAL_COMMAND = "deletegoal";
+    public static final String DELETE_REMINDER_COMMAND = "deletereminder";
+    public static final String REMINDER_LIST_COMMAND = "reminderlist";
+    public static final String WISH_LIST_COMMAND = "wishlist";
+    public static final String HELP_COMMAND = "help";
 
     public static Command parseCommand(String input) throws FinancialPlannerException {
         RawCommand rawCommand = parseRawCommand(input);
@@ -101,6 +103,8 @@ public class Parser {
             return new ReminderListCommand(rawCommand);
         case WISH_LIST_COMMAND:
             return new WishListCommand(rawCommand);
+        case HELP_COMMAND:
+            return new HelpCommand(rawCommand);
         default:
             return new InvalidCommand();
         }
