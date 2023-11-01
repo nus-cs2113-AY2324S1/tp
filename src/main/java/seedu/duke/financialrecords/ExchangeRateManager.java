@@ -83,6 +83,9 @@ public class ExchangeRateManager {
             String currency = entry.getKey();
             Double rate = entry.getValue();
             if (rate != null) {
+                if (count == 0) {
+                    System.out.println("Here are the exchange rate(s):");
+                }
                 System.out.printf("%s, %s\n", currency, rate);
                 count += 1;
             }
