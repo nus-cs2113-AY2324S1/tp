@@ -12,15 +12,17 @@ public class Goal {
 
     public String toString() {
         String status = isDone ? "Done" : "Not Done";
-        return "Goal: " + this.label + " | " + this.amount + " | " + status;
+        return "Goal " + System.lineSeparator()+ "   Label: " + label + System.lineSeparator() + "   Amount: " +
+                amount + System.lineSeparator() + "   Status: "+status;
     }
 
     public void markAsDone() {
-        //TODO edit the expense to mark the goal as done
         this.isDone = true;
     }
 
-    //TODO delete the Reminder
+    public void unmark() {
+        this.isDone = false;
+    }
     public String formatString() {
         String status = isDone ? "Done" : "Not Done";
         return this.label + " | " + this.amount + " | " + this.isDone;
