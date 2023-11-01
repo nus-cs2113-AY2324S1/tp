@@ -102,7 +102,7 @@ public class Pantry {
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
-            if(usedIngredientFromStock == null) {
+            if (usedIngredientFromStock == null) {
                 return false;
             }
             int stockQuantity = usedIngredientFromStock.getQty();
