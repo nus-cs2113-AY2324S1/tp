@@ -10,9 +10,7 @@ import java.util.ArrayList;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
-    private ArrayList<Dish> menuItems;
     private Ui ui;
-    private Storage storage;
 
     //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {

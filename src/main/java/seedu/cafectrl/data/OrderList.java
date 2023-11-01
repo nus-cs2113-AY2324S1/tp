@@ -70,7 +70,7 @@ public class OrderList {
             ui.showToUser(String.format(HEADER_FORMAT,
                     aggregatedOrder.getDishName(),
                     aggregatedOrder.getQuantity(),
-                    aggregatedOrder.totalOrderCost()));
+                    aggregatedOrder.calculateTotalOrderCost()));
         }
 
         ui.showToUser("Total for day: $" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
@@ -124,5 +124,4 @@ public class OrderList {
         }
         return totalCost;
     }
-
 }
