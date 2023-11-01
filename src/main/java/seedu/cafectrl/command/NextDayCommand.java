@@ -8,10 +8,12 @@ import seedu.cafectrl.ui.Ui;
 public class NextDayCommand extends Command {
 
     public static final String COMMAND_WORD = "next_day";
+    public static final String MESSAGE_USAGE = "To travel to next day:\n"
+            + COMMAND_WORD;
 
-    protected Ui ui;
-    protected Sales sales;
-    protected CurrentDate currentDate;
+    private final Ui ui;
+    private final Sales sales;
+    private final CurrentDate currentDate;
 
     public NextDayCommand(Ui ui, Sales sales, CurrentDate currentDate) {
         this.ui = ui;

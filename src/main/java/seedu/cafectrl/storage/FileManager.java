@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,11 +29,15 @@ public class FileManager {
      *
      * @return ArrayList that consists of every text line in each element
      */
-    public ArrayList<String> readTextFile(String filePath) {
+    public ArrayList<String> readTextFile(String filePath) throws FileNotFoundException {
         openTextFile(filePath);
         String userWorkingDirectory = System.getProperty("user.dir");
-        java.nio.file.Path tasksFilePath = java.nio.file.Paths.get(userWorkingDirectory, filePath);
+        Path tasksFilePath = Paths.get(userWorkingDirectory, filePath);
         File textFile = new File(String.valueOf(tasksFilePath));
+
+        if (textFile.length() < 0) {
+            throw new FileNotFoundException();
+        }
 
         ArrayList<String> textLines = new ArrayList<>();
         // todo Dexter: implement proper error handling here
@@ -58,8 +64,8 @@ public class FileManager {
      */
     public String openTextFile(String filePath) {
         String userWorkingDirectory = System.getProperty("user.dir");
-        java.nio.file.Path dataFilePath = java.nio.file.Paths.get(userWorkingDirectory, filePath);
-        java.nio.file.Path dataFolderPath = dataFilePath.getParent();
+        Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
+        Path dataFolderPath = dataFilePath.getParent();
         File textFile = new File(String.valueOf(dataFilePath));
         File folder = new File(String.valueOf(dataFolderPath));
 

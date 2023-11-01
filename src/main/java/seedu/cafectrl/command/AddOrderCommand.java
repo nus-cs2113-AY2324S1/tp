@@ -12,11 +12,11 @@ import java.text.DecimalFormat;
 public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add order to orders\n"
-            + "Parameters: DISH_NAME, DISH_QTY\n"
+    public static final String MESSAGE_USAGE = "To add a new order: \n"
+            + COMMAND_WORD
+            + "name/DISH_NAME qty/QUANTITY\n"
             + "Example: " + COMMAND_WORD
-            + " name/chicken rice qty/2";
+            + "name/chicken rice qty/2";
 
     protected Ui ui;
     protected Pantry pantry;

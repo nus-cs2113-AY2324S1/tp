@@ -10,9 +10,11 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
+import seedu.cafectrl.data.dish.Dish;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 
 /**
  * The Decoder class offers methods to interpret string representations from text files,
@@ -24,6 +26,12 @@ public class Decoder {
     private static final String DIVIDER = "\\| ";
     private static final Ui ui = new Ui();
 
+    /**
+     * Decodes an ArrayList of string lines into a Menu object, reconstructing its content.
+     *
+     * @param textLines An ArrayList of strings representing the encoded Menu data.
+     * @return A Menu object containing the decoded Menu data.
+     */
     public static Menu decodeMenuData(ArrayList<String> textLines) {
         ArrayList<Dish> menuDishList = new ArrayList<>();
         for(String dishString : textLines) {
@@ -37,6 +45,12 @@ public class Decoder {
         return new Menu(menuDishList);
     }
 
+    /**
+     * Decodes an array of strings representing ingredient data into a list of Ingredient objects.
+     *
+     * @param ingredientsStringArray An array of strings containing encoded ingredient data.
+     * @return An ArrayList of Ingredient objects containing the decoded ingredient information.
+     */
     private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
         for(String ingredientString : ingredientsStringArray) {
@@ -85,7 +99,6 @@ public class Decoder {
         return true;
     }
 
-
     //@@NaychiMin
     /**
      * Decodes a list of order data and constructs a Sales object using an array of OrderList objects.
@@ -119,5 +132,4 @@ public class Decoder {
         return new Sales(orderLists);
     }
     //@@author
-
 }

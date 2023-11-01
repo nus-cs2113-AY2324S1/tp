@@ -28,24 +28,10 @@ public class Messages {
 
     /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";
-    public static final String INSTRUCTION_ON_COMMAND_FORMAT = "(- Words in UPPER_CASE are "
+    public static final String INSTRUCTION_ON_COMMAND_FORMAT = "- Words in UPPER_CASE are "
             + "the parameters to be supplied by the user.\n"
-            + "e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.\n"
-            + "- Parameters in [] are optional.)";
-    public static final String ADD_DISH_GUIDE = "To add a new dish to the menu: "
-            + "add name/NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
-            + "[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY\n"
-            + "Example: add name/chicken rice price/3 ingredient/rice qty/100, ingredient/chicken qty/100";
-    public static final String LIST_MENU_GUIDE = "To list out all dishes on the menu: list_menu";
-    public static final String LIST_INGREDIENTS_GUIDE = "To list out the ingredients needed "
-            + "for a specific dish: list_ingredients DISH_INDEX\n"
-            + "Example: list_ingredients 1";
-    public static final String EDIT_PRICE_GUIDE = "To edit price of a menu item: "
-            + "edit_price index/DISH_INDEX price/NEW_PRICE\n"
-            + "Example: edit_price index/1 price/4.50";
-    public static final String DELETE_GUIDE = "To delete a menu item "
-            + "delete DISH_INDEX\n"
-            + "Example: delete 1";
+            + " e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.\n"
+            + "- Parameters in [] are optional.";
 
     /** Messages for order command */
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "

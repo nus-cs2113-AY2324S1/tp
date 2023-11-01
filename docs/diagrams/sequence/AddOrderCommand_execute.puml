@@ -13,7 +13,7 @@ autonumber
         return chef : Chef
     ":AddOrderCommand" -> ":Chef" : cookDish()
         activate ":Chef"
-        opt !order.isComplete()
+        opt !order.getIsComplete()
             ":Chef" -> ":Ui" : showChefMessage()
                 activate ":Ui"
                 ":Ui" -> ":Ui" : showToUser(args : String)
@@ -34,7 +34,7 @@ autonumber
             activate ":Ui"
             return
         return
-    opt order.isComplete()
+    opt order.getIsComplete()
         ":AddOrderCommand" -> ":OrderList" : addCost(order : Order)
         activate ":OrderList"
         return
