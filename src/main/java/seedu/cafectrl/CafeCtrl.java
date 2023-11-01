@@ -34,7 +34,7 @@ public class CafeCtrl {
         this.currentDate = new CurrentDate();
         this.sales = new Sales();
         this.menu = this.storage.loadMenu();
-        this.pantry = this.storage.loadPantryStock(menu);
+        this.pantry = this.storage.loadPantryStock();
         this.sales = this.storage.loadOrderList(menu);
     }
     

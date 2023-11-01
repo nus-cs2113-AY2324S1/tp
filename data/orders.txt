@@ -1,6 +1,0 @@
-1 | chicken rice | 2 | 4.0 | true
-1 | chicken roast | 2 | 4.0 | true
-1 | chicken roast | 2 | 4.0 | true
-2 | chicken rice | 2 | 4.0 | true
-2 | chicken roast | 2 | 4.0 | true
-2 | chicken roast | 8 | 16.0 | false
