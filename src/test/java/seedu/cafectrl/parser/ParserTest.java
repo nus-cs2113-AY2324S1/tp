@@ -463,7 +463,7 @@ class ParserTest {
 
         String inputDishName = "chicken rice";
 
-        assertTrue(Parser.isRepeatedDishName(inputDishName, menu));
+        assertTrue(Parser.isRepeatedName(inputDishName, menu));
     }
 
     @Test
@@ -474,7 +474,7 @@ class ParserTest {
 
         String inputDishName = "chicken chop";
 
-        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+        assertFalse(Parser.isRepeatedName(inputDishName, menu));
     }
 
     @Test
@@ -483,7 +483,7 @@ class ParserTest {
         Dish dish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(dish);
 
-        assertThrows(NullPointerException.class, () -> Parser.isRepeatedDishName(null, menu));
+        assertThrows(NullPointerException.class, () -> Parser.isRepeatedName(null, menu));
     }
 
     @Test
@@ -494,7 +494,7 @@ class ParserTest {
 
         String inputDishName = "";
 
-        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+        assertFalse(Parser.isRepeatedName(inputDishName, menu));
     }
 
     @Test
