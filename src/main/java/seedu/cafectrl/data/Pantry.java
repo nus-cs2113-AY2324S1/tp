@@ -84,7 +84,7 @@ public class Pantry {
      */
     private int getIndexOfIngredient(String name) {
         for (int i = 0; i < pantryStock.size(); i++) {
-            String ingredientName = pantryStock.get(i).getName().trim()
+            String ingredientName = pantryStock.get(i).getName().trim();
             if (name.equalsIgnoreCase(ingredientName)) {
                 return i;
             }

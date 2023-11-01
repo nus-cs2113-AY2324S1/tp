@@ -103,7 +103,7 @@ public class OrderList {
         for (int i = 0; i < aggregatedOrders.size(); i++) {
             Order order = aggregatedOrders.get(i);
             String orderDishName = order.getDishName();
-            String dishName = dishName.trim();
+            dishName = dishName.trim();
             if (orderDishName.equalsIgnoreCase(dishName)) {
                 return i;
             }
