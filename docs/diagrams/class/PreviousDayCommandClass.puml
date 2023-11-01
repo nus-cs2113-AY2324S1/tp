@@ -1,7 +1,9 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-CafeCtrl "1" --> "1" UI
+title Class Diagram of CafeCtrl `previous_day` Command
+
+CafeCtrl "1" --> "1" Ui
 CafeCtrl "1" --> "1" Parser
 CafeCtrl "1" --> "1" CurrentDate
 CafeCtrl "1" o-- "*" Command
@@ -21,8 +23,8 @@ class Command {
 
 }
 
-class UI {
-{static} - scanner : Scanner
+class Ui {
+- scanner : Scanner
 + receiveUserInput() : String
 + showToUser() : void
 + printLine() : void

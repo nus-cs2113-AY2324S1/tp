@@ -15,8 +15,8 @@ public class ListMenuCommand extends Command {
             + COMMAND_WORD;
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
-    protected Menu menu;
-    protected Ui ui;
+    private final Menu menu;
+    private final Ui ui;
 
     /**
      * Constructor for the ListMenuCommand
