@@ -62,6 +62,9 @@ you a one-stop interface to access a plethora of features to manage your finance
 
   e.g. `[/r DAYS]` can be used as `/r 30` or left empty.
 
+### Notes about naming convention
+- Cashflow refers to an income or expense.
+
 ### Add cashflow
 
 #### Add income: `add income`
@@ -252,9 +255,9 @@ You have removed an Expense
    Description: groceries
 from the Financial Planner.
 Balance: -830.00
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-
 ```
+
+- Note: Balance displayed above is just an example. Your actual balance may differ.
 ### List
 
 #### List all: `list`
@@ -538,7 +541,7 @@ Use watchlist command to view updated Watchlist
 
 ### Visualizing your cashflow: `vis`
 
-Using this command to visualize your income or expenses in a pie chart or bar chart
+Using this command to visualize your income or expenses in a pie chart, bar chart or radar chart
 
 Format: `vis /t TYPE /c TOOL`
 
@@ -547,10 +550,11 @@ Format: `vis /t TYPE /c TOOL`
 | Income Cashflows `Income`   |
 | Expense Cashflows `Expense` |
 
-| Tool `/c`      |
-|----------------|
-| PieChart `pie` |
-| BarChart `bar` |
+| Tool `/c`          |
+|--------------------|
+| PieChart `pie`     |
+| BarChart `bar`     |
+| RadarChart `radar` |
 
 Example of usage: `vis /t expense /c pie`
 
@@ -562,13 +566,21 @@ Displaying piechart for expense
 
 ![](images/vis/visOutput.png)
 
-Example of usage: `vis /t expense /c bar`
+Example of usage: `vis /t income /c bar`
 
 ```
 Displaying barchart for income
 ```
 
 ![](images/vis/barOuput.png)
+
+Example of usage: `vis /t income /c radar`
+
+```
+Displaying radarchart for income
+```
+
+![](images/vis/radarOutput.png)
 
 ### Exiting the program: `exit`
 

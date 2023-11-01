@@ -1,9 +1,13 @@
 package seedu.financialplanner.commands;
-import seedu.financialplanner.reminder.ReminderList;
+
+import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.utils.Ui;
-public class UnmarkReminderCommand extends Command{
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.goal.Goal;
+import seedu.financialplanner.enumerations.ExpenseType;
+public class MarkGoalCommand extends Command {
     private final int index;
-    public UnmarkReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
+    public MarkGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
@@ -19,7 +23,7 @@ public class UnmarkReminderCommand extends Command{
         if (index == 0) {
             throw new IllegalArgumentException("Index must be within the list");
         }
-        if (index > ReminderList.getInstance().list.size()+1){
+        if (index > WishList.getInstance().list.size()+1){
             throw new IllegalArgumentException("Index exceed the list size");
         }
         rawCommand.extraArgs.remove("i");
@@ -31,7 +35,9 @@ public class UnmarkReminderCommand extends Command{
 
     @Override
     public void execute() {
-        ReminderList.getInstance().list.get(index-1).unmark();
-        Ui.getInstance().showMessage("You have unmarked "+ReminderList.getInstance().list.get(index-1));
+        Goal goal = WishList.getInstance().list.get(index-1);
+        goal.markAsDone();
+        Ui.getInstance().showMessage("You have achieved " + goal + System.lineSeparator() + "Congratulations!");
+        CashflowList.getInstance().addExpense(goal.getAmount(), ExpenseType.OTHERS, 0, goal.getLabel());
     }
 }
