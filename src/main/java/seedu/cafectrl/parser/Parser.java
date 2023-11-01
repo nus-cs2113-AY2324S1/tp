@@ -20,6 +20,7 @@ import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.parser.exception.ParserException;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.data.Menu;
@@ -30,6 +31,7 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * Parse everything received from the users on terminal
@@ -203,6 +205,10 @@ public class Parser {
             float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
+            if (isNameLengthTooLong(dishName)) {
+                throw new ParserException("name too long");
+            }
+
             if (isRepeatedDishName(dishName, menu)) {
                 return new IncorrectCommand(Messages.REPEATED_DISH_MESSAGE, ui);
             }
@@ -218,7 +224,9 @@ public class Parser {
         } catch (ArithmeticException e) {
             return new IncorrectCommand(ErrorMessages.INVALID_PRICE_MESSAGE, ui);
         } catch (NullPointerException e) {
-            return new IncorrectCommand(ErrorMessages.NULL_DISH_NAME_MESSAGE, ui);
+            return new IncorrectCommand(ErrorMessages.NULL_NAME_DETECTED_MESSAGE, ui);
+        } catch (ParserException e) {
+            return new IncorrectCommand(e.getMessage(), ui);
         }
     }
 
@@ -229,7 +237,7 @@ public class Parser {
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
      */
     private static ArrayList<Ingredient> parseIngredients(String ingredientsListString)
-            throws IllegalArgumentException {
+            throws IllegalArgumentException, ParserException {
         String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
 
@@ -253,6 +261,10 @@ public class Parser {
             String ingredientUnit = ingredientMatcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
 
             int ingredientQty = Integer.parseInt(ingredientQtyString);
+
+            if (isNameLengthTooLong(ingredientName)) {
+                throw new ParserException("ingredient name too long");
+            }
 
             Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
 
@@ -284,6 +296,7 @@ public class Parser {
      * @param inputDishName dish name entered by the user
      * @param menu contains all the existing Dishes
      * @return boolean of whether a repeated dish name is detected
+     * @throws NullPointerException if the input string is null
      */
     public static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
         if (inputDishName == null) {
@@ -297,6 +310,26 @@ public class Parser {
             if (menuDishNameLowerCase.equals(inputDishNameLowerCase)) {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks the length of the name is too long
+     * @param inputName name
+     * @return boolean of whether the name is more than max character limit set
+     * @throws NullPointerException if the input string is null
+     */
+    public static boolean isNameLengthTooLong(String inputName) throws NullPointerException {
+        int maxNameLength = 35;
+
+        if (inputName == null) {
+            throw new NullPointerException();
+        }
+
+        if (inputName.length() > maxNameLength) {
+            return true;
         }
 
         return false;
@@ -368,10 +401,13 @@ public class Parser {
         }
 
         String ingredientsListString = matcher.group(0);
-        ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
+
 
         try {
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
             return new BuyIngredientCommand(ingredients, ui, pantry);
+        } catch (ParserException e) {
+            return new IncorrectCommand(e.getMessage(), ui);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                     + BuyIngredientCommand.MESSAGE_USAGE, ui);
