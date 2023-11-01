@@ -98,23 +98,6 @@ class BudgetHandlerTest {
 
     }
 
-    /*@Test
-    void printBudget_budgetIsActiveAndOnTrack() throws CashLehBudgetException {
-        incomeStatement.addIncome(new Income("salary", 50));
-        budgetHandler.setBudgetPercentage();
-        budget.setActive(true);
-        budgetHandler.printBudget();
-        String expectedOutput = "\t____________________________________________________________\n"
-                + "\tYou have set a budget of: 30.0\n"
-                + "\tHere's a quick view of how you're doing so far:\n"
-                + "\tYou have a net cash on hand of: 50.0\n"
-                + "\tYou still have the following percent of your budget left:\n"
-                + "\n"
-                + "\t[******************************] 100.00%\n"
-                + "\t____________________________________________________________\n";
-        assertEquals(outputStreamCaptor.toString(), expectedOutput);
-    }*/
-
     @Test
     void printBudget_budgetIsNotActive_throwsException() throws CashLehBudgetException {
         incomeStatement.addIncome(new Income("salary", 50));
