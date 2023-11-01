@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class Encoder {
     private static final String DIVIDER = " | ";
-
+    //@@author ShaniceTang
     /**
      * Encodes a Menu object into a list of strings representing its contents, suitable for saving to a file.
      *
