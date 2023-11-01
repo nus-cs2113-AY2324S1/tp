@@ -1,0 +1,40 @@
+@startuml
+!define COMMAND class ListIngredientCommand
+!define UI class Ui
+!define MAIN class Main
+!define STORAGE class Storage
+!define DATA class Data
+!define PARSER class Parser
+!define COMMAND class Command
+
+autonumber
+Actor user
+
+loop userInput != "bye"
+user->Ui : 'delete 1'
+activate Ui
+Ui-> Main : userInput : String
+activate Main
+Main -> Parser : parseCommand()
+Activate Parser
+Parser -> Main : command: Command
+Deactivate Parser
+Main -> Command : delete.execute()
+Activate Command
+Command -> Data : menu.remove()
+Activate Data
+return
+return
+user -> Ui: 'bye'
+Ui-> Main : userInput : String
+end loop
+Main->Storage : saveMenu()
+Activate Storage
+Storage -> Storage: encodeMenu()
+Activate Storage
+return
+return
+return
+return
+
+@enduml
