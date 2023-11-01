@@ -55,6 +55,12 @@ public class Flashcard {
         return backText;
     }
 
+    //@@author junhyeong0411
+
+    public ArrayList<FlashcardReview> getReviews(){
+        return reviews;
+    }
+
     public String toString() {
         return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()

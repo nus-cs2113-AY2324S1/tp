@@ -1,9 +1,13 @@
 package seedu.duke.flashcard;
 
+import seedu.duke.flashcard.review.FlashcardReview;
+import seedu.duke.flashcard.review.ReviewDifficulty;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -40,7 +44,8 @@ public class FlashcardStorage {
 
         assert tokens.length == 5 : "Token length should be 5";
 
-        //flashlogger.log(Level.INFO, "token length is", tokens.length);
+        // flashlogger.log(Level.INFO, "token length is", tokens.length);
+        // System.out.println(tokens[0]);
 
         String frontText = tokens[0].trim();
         String backText = tokens[1].trim();
@@ -65,7 +70,15 @@ public class FlashcardStorage {
             if (review.trim().equals("-")) {
                 break;
             } else{
-                System.out.println("reviews are not for v1");
+                String[] reviewTokens = review.split("#");
+                LocalDateTime reviewDate = LocalDateTime.parse(reviewTokens[0].trim());
+                ReviewDifficulty reviewDifficulty = ReviewDifficulty.valueOf(reviewTokens[1].trim());
+
+                FlashcardReview flashcardReview = new FlashcardReview(reviewDate, reviewDifficulty);
+                flashcard.addReview(flashcardReview);
+
+                flashcard.setLastReviewOn(reviewDate);
+
             }
         }
 
@@ -75,6 +88,35 @@ public class FlashcardStorage {
         }
 
         return flashcard;
+    }
+
+    /**
+     * reviews to String methods
+     * make String from reviews list
+     * @param reviewList
+     * @return String of review
+     */
+    private String reviewtoString(ArrayList<FlashcardReview> reviewList){
+        StringBuilder reviews;
+
+        if(reviewList.isEmpty()){
+            reviews = new StringBuilder("-");
+        }
+        else{
+            reviews = new StringBuilder();
+            for(FlashcardReview review: reviewList){
+                if(reviews.length() > 0){
+                    reviews.append("/");
+                }
+                reviews.append(review.getReviewDate().toString());
+                // identifier between date and difficulty is #
+                reviews.append(" # ");
+                reviews.append(review.getReviewDifficulty());
+
+            }
+        }
+
+        return reviews.toString();
     }
 
     /**
@@ -110,9 +152,18 @@ public class FlashcardStorage {
             FileWriter fw = new FileWriter(path);
 
             for (int i = 0; i < flashcardList.size(); i++) {
+
+                // get info from a flashcard
                 Flashcard flashcard = flashcardList.get(i);
-                fw.write(String.format("%s | %s | - | - | -\r\n",
-                        flashcard.getFrontText(), flashcard.getBackText()));
+
+                String frontText = flashcard.getFrontText();
+                String backText = flashcard.getBackText();
+                ArrayList<FlashcardReview> reviewList = flashcard.getReviews();
+
+                String reviews = reviewtoString(reviewList);
+
+                fw.write(String.format("%s | %s | - | %s | -\r\n",
+                        frontText, backText, reviews));
             }
             fw.close();
         } catch (IOException e){
