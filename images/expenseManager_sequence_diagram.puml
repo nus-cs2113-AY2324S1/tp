@@ -3,6 +3,7 @@ actor Duke
 participant ExpenseManager
 participant ExpenseParser
 participant Expense
+participant ExchangeRateManager
 
 Duke -> ExpenseManager: provides expense details
 activate ExpenseManager
@@ -11,6 +12,10 @@ activate ExpenseManager
 ExpenseManager -> ExpenseManager: extractExpenseFields(details)
 ExpenseManager -> ExpenseParser: parseExpense(expenseFields)
 activate ExpenseParser
+opt isOtherCurrency()
+ExpenseParser -> ExchangeRateManager : convertCurrency()
+ExchangeRateManager -> ExpenseParser : amount
+end
 ExpenseParser -> ExpenseParser: parseDate(dateField)
 ExpenseParser -> Expense: Expense(description, date, amount, type)
 Expense --> ExpenseParser
