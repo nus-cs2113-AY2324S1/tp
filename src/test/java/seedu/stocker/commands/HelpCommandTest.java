@@ -93,6 +93,16 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
+                + "setthreshold: Set the threshold quantity for a drug. (default 100)"
+                + System.getProperty("line.separator")
+                + "Example: setthreshold /n Doliprane /tq 50"
+
+                + "listthreshold: List all drugs and their threshold levels."
+                + System.getProperty("line.separator")
+                + "Example: listthreshold"
+
+
+
                 + "bye: Exits the program."
                 + System.getProperty("line.separator")
                 + "Example: bye";
