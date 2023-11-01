@@ -213,13 +213,27 @@ public class Ui {
         showToUser(Messages.CHEF_MESSAGE);
     }
 
+
+
     /**
      * Shows the total cost in the order list, formatted in the proper format
      *
      * @param dollarCost The price of the orders
      */
     public void showTotalCost(String dollarCost) {
-        showToUser("Total orderList cost: $" + dollarCost);
+        showToUser("Total order cost: $" + dollarCost);
+    }
+
+    public void showOrderStatus(String orderStatus, String totalCost) {
+        printLine();
+        showToUser(orderStatus);
+        showTotalCost(totalCost);
+        printLine();
+        showDishAvailabilityMessage();
+    }
+
+    public void showDishAvailabilityMessage() {
+        showToUser(Messages.AVAILABLE_DISHES);
     }
 
     public void showPreviousDay() {
