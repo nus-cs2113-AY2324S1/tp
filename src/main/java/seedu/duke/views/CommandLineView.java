@@ -18,6 +18,7 @@ public class CommandLineView {
                 + "                           __/ |        __/ |                                          \n"
                 + "                          |___/        |___/                                           ";
         System.out.println("Hey there CS and CEG Students! Welcome to \n" + logo);
+        System.out.println("Nice to meet you");
 
     }
 
