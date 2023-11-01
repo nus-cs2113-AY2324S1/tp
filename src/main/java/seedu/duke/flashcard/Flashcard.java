@@ -61,6 +61,12 @@ public class Flashcard {
         return reviews;
     }
 
+    public void setId (int id) {
+        this.id = id;
+    }
+
+
+    //@@author WenderlinWemhoener
     public String toString() {
         return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()

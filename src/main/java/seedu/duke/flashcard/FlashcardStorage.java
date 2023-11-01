@@ -23,6 +23,8 @@ public class FlashcardStorage {
     private static Logger flashlogger; // for logging
     protected String path;
 
+    FlashcardStorageParser parser;
+
     public FlashcardStorage(String path){
         this.path = path;
         flashlogger = Logger.getLogger("flash");
@@ -32,91 +34,6 @@ public class FlashcardStorage {
     public boolean isStorageAvailable(){
         File f = new File(this.path);
         return f.exists();
-    }
-    
-    /**
-     * load a flash card from certain format
-     * Tokens includes attributes of Flashcard
-     * @param tokens
-     * @return Flashcard object
-     */
-    private Flashcard loadFlashcard(String[] tokens){
-
-        assert tokens.length == 5 : "Token length should be 5";
-
-        // flashlogger.log(Level.INFO, "token length is", tokens.length);
-        // System.out.println(tokens[0]);
-
-        String frontText = tokens[0].trim();
-        String backText = tokens[1].trim();
-        String[] tags = tokens[2].trim().split("/");
-        String[] reviews = tokens[3].trim().split("/");
-        String nextReviewOn = tokens[4].trim();
-
-
-        Flashcard flashcard = new Flashcard(frontText, backText);
-
-        //flashlogger.log(Level.INFO, "added flashcard");
-
-        for(String tag:tags){
-            if (tag.trim().equals("-")) {
-                break;
-            } else{
-                System.out.println("tags are not for v1");
-            }
-        }
-
-        for(String review: reviews){
-            if (review.trim().equals("-")) {
-                break;
-            } else{
-                String[] reviewTokens = review.split("#");
-                LocalDateTime reviewDate = LocalDateTime.parse(reviewTokens[0].trim());
-                ReviewDifficulty reviewDifficulty = ReviewDifficulty.valueOf(reviewTokens[1].trim());
-
-                FlashcardReview flashcardReview = new FlashcardReview(reviewDate, reviewDifficulty);
-                flashcard.addReview(flashcardReview);
-
-                flashcard.setLastReviewOn(reviewDate);
-
-            }
-        }
-
-        if(!nextReviewOn.equals("-")){
-            //LocalDateTime.parse(nextReviewOn);
-            System.out.println("reviews are not for v1");
-        }
-
-        return flashcard;
-    }
-
-    /**
-     * reviews to String methods
-     * make String from reviews list
-     * @param reviewList
-     * @return String of review
-     */
-    private String reviewtoString(ArrayList<FlashcardReview> reviewList){
-        StringBuilder reviews;
-
-        if(reviewList.isEmpty()){
-            reviews = new StringBuilder("-");
-        }
-        else{
-            reviews = new StringBuilder();
-            for(FlashcardReview review: reviewList){
-                if(reviews.length() > 0){
-                    reviews.append("/");
-                }
-                reviews.append(review.getReviewDate().toString());
-                // identifier between date and difficulty is #
-                reviews.append(" # ");
-                reviews.append(review.getReviewDifficulty());
-
-            }
-        }
-
-        return reviews.toString();
     }
 
     /**
@@ -135,7 +52,7 @@ public class FlashcardStorage {
 
         while(s.hasNext()){
             String[] flashTokens = s.nextLine().split(" \\| ");
-            flashcardList.add(loadFlashcard(flashTokens));
+            flashcardList.add(FlashcardStorageParser.loadFlashcard(flashTokens));
         }
 
         System.out.println(String.format(
@@ -156,14 +73,15 @@ public class FlashcardStorage {
                 // get info from a flashcard
                 Flashcard flashcard = flashcardList.get(i);
 
+                int id = flashcard.getId();
                 String frontText = flashcard.getFrontText();
                 String backText = flashcard.getBackText();
                 ArrayList<FlashcardReview> reviewList = flashcard.getReviews();
 
-                String reviews = reviewtoString(reviewList);
+                String reviews = FlashcardStorageParser.reviewtoString(reviewList);
 
-                fw.write(String.format("%s | %s | - | %s | -\r\n",
-                        frontText, backText, reviews));
+                fw.write(String.format("%d | %s | %s | - | %s | -\r\n",
+                        id, frontText, backText, reviews));
             }
             fw.close();
         } catch (IOException e){
