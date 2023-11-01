@@ -44,7 +44,7 @@ public class BuyIngredientCommand extends Command {
     public void execute() {
         try {
             addIngredient();
-            ui.showBuyIngredientHeader();
+            ui.printBuyIngredientHeader();
             ui.showToUser(ingredientString);
         } catch (RuntimeException e) {
             ui.showToUser(e.getMessage());
