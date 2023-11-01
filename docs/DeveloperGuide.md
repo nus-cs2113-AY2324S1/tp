@@ -59,8 +59,9 @@ financial statement.
 
 **Step 3**\
 If the budget is not active (has not been initialised or deleted by the user), a CashLehBudgetException is thrown.
-If the budge is active (has been initialised or updated by the user), the BudgetHandler self-invokes two methods:
-* printBasicWarning(): checks if the user's budget still provides a good cushion and prints a warning if not
+If the budget is active (has been initialised or updated by the user), the BudgetHandler self-invokes two methods:
+* printBasicWarning(): checks if the user's budget still provides a good cushion (meaning that he/she still has
+more than 25% of his budget left) and prints a warning if not
 * printSeriousWarning(): checks if the user ran out of budget and prints a warning if so
 
 **Step 4**\
