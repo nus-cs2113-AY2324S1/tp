@@ -12,7 +12,7 @@ public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
     public static final String MESSAGE_USAGE = "To add a new order: \n"
             + COMMAND_WORD
-            + "name/DISH_NAME qty/QUANTITY\n"
+            + " name/DISH_NAME qty/QUANTITY\n"
             + "Example: " + COMMAND_WORD
             + "name/chicken rice qty/2";
 
