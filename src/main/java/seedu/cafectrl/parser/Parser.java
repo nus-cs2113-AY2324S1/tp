@@ -368,9 +368,10 @@ public class Parser implements ParserUtil {
         }
 
         String ingredientsListString = matcher.group(0);
-        ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
+
 
         try {
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
             return new BuyIngredientCommand(ingredients, ui, pantry);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
