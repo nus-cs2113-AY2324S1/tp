@@ -1,6 +1,8 @@
 package seedu.duke.calendar;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * directory for directory
@@ -10,21 +12,27 @@ import java.io.File;
  */
 
 public class EventDirectory {
+    private static Logger logger; // for logging
     String path;
     File file;
 
     public EventDirectory(){
+        logger = Logger.getLogger("flashDir");
+
         path = "./data/events";
 
         file = new File(path);
         if(!file.exists()){
             if(file.mkdir()){
-                System.out.println("    Created events directory");
+                logger.log(Level.INFO, "Created events directory");
+                //System.out.println("    Created events directory");
             } else{
-                System.out.println("    Failed to create directory");
+                logger.log(Level.INFO, "Failed to create directory");
+                //System.out.println("    Failed to create directory");
             }
         } else{
-            System.out.println("    Using data/events directory");
+            logger.log(Level.INFO, "Using data/events directory");
+            //System.out.println("    Using data/events directory");
         }
     }
 
@@ -35,12 +43,15 @@ public class EventDirectory {
     public void listEventFiles(){
         String[] eventFiles = file.list();
         if(eventFiles == null){
-            System.out.println("Failed to find files");
+            logger.log(Level.INFO, "Failed to find files");
+            //System.out.println("Failed to find files");
         } else if(eventFiles.length == 0){
-            System.out.println("No files exist");
+            logger.log(Level.INFO, "No files exist");
+            //System.out.println("No files exist");
         } else{
             for(String eventFile : eventFiles){
-                System.out.println("        "+eventFile);
+                logger.log(Level.INFO, eventFile);
+                //System.out.println("        "+eventFile);
             }
         }
     }

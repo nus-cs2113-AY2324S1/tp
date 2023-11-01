@@ -18,6 +18,7 @@ public class EventList {
         return eventList;
     }
 
+    // for logging
     public int getSize(){ return eventList.size();}
 
     public void deleteEvent(String name) {

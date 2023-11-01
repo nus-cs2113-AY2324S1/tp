@@ -1,13 +1,11 @@
 package seedu.duke.flashcard;
 
 import seedu.duke.flashcard.review.FlashcardReview;
-import seedu.duke.flashcard.review.ReviewDifficulty;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -44,7 +42,7 @@ public class FlashcardStorage {
      */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
 
-        flashlogger.log(Level.INFO, "loading flashcard");
+        //flashlogger.log(Level.INFO, "loading flashcard");
 
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
@@ -55,9 +53,12 @@ public class FlashcardStorage {
             flashcardList.add(FlashcardStorageParser.loadFlashcard(flashTokens));
         }
 
-        System.out.println(String.format(
-                "    There are currently %d flashcards in the savefile",
+        flashlogger.log(Level.INFO, String.format(
+                "There are currently %d flashcards in the savefile",
                 flashcardList.getSize()));
+        //System.out.println(String.format(
+        //        "    There are currently %d flashcards in the savefile",
+        //        flashcardList.getSize()));
 
         return flashcardList;
 

@@ -7,16 +7,21 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * storage for Events
  * One storage manages one file
  */
 public class EventStorage {
+    private static Logger flashlogger; // for logging
     protected String path;
 
     public EventStorage(String path){
         this.path = path;
+        flashlogger = Logger.getLogger("flash");
     }
 
 
@@ -58,9 +63,12 @@ public class EventStorage {
             eventList.addEvent(loadEvent(eventTokens));
         }
 
-        System.out.println(String.format(
+        flashlogger.log(Level.INFO, String.format(
                 "    There are currently %d events in the savefile",
                 eventList.getSize()));
+        //System.out.println(String.format(
+        //        "    There are currently %d events in the savefile",
+        //        eventList.getSize()));
 
         return eventList;
 

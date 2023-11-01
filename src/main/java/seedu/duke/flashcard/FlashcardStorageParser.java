@@ -82,8 +82,7 @@ public final class FlashcardStorageParser {
 
         if(reviewList.isEmpty()){
             reviews = new StringBuilder("-");
-        }
-        else{
+        } else{
             reviews = new StringBuilder();
             for(FlashcardReview review: reviewList){
                 if(reviews.length() > 0){

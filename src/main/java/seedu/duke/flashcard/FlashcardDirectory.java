@@ -1,6 +1,8 @@
 package seedu.duke.flashcard;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * directory for flashcards
@@ -10,22 +12,28 @@ import java.io.File;
  */
 
 public class FlashcardDirectory {
-
+    private static Logger logger; // for logging
     String path;
     File file;
 
     public FlashcardDirectory(){
+
+        logger = Logger.getLogger("flashDir");
+
         path = "./data/flashcards";
 
         file = new File(path);
         if(!file.exists()){
             if(file.mkdir()){
-                System.out.println("    Created flashcards directory");
+                logger.log(Level.INFO, "Created flashcards directory");
+                //System.out.println("    Created flashcards directory");
             } else{
-                System.out.println("    Failed to create directory");
+                logger.log(Level.INFO, "Failed to create directory");
+                //System.out.println("    Failed to create directory");
             }
         } else{
-            System.out.println("    Using data/flashcards directory");
+            logger.log(Level.INFO, "Using data/flashcards directory");
+            //System.out.println("    Using data/flashcards directory");
         }
     }
 
@@ -36,12 +44,15 @@ public class FlashcardDirectory {
     public void listFlashcardFiles(){
         String[] flashcardFiles = file.list();
         if(flashcardFiles == null){
-            System.out.println("Failed to find files");
+            logger.log(Level.INFO, "Failed to find files");
+            //System.out.println("Failed to find files");
         } else if(flashcardFiles.length == 0){
-            System.out.println("No files exist");
+            logger.log(Level.INFO, "No files exist");
+            //System.out.println("No files exist");
         } else{
             for(String flashcardFile : flashcardFiles){
-                System.out.println("        "+flashcardFile);
+                logger.log(Level.INFO, flashcardFile);
+                //System.out.println("        "+flashcardFile);
             }
         }
     }

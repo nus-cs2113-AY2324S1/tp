@@ -28,7 +28,7 @@ public class CalendarManager {
         try{
             eventList = storage.loadEvents();
         } catch (FileNotFoundException e){
-            System.out.println("Making new file for Events");
+            //System.out.println("Making new file for Events");
             eventList = new EventList(events);
         }
 
