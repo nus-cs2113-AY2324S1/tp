@@ -15,3 +15,7 @@ Hello! Welcome to CafeCTRL!
 > -----------------------------------------------------
 Goodbye <3 Have a great day ahead!
 -----------------------------------------------------
+Data Folder was not found!
+It's ok... a new data folder has been created.
+
+
