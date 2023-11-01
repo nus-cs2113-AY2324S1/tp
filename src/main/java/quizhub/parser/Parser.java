@@ -136,6 +136,7 @@ public class Parser {
      * @return Short Answer command or an Invalid Command
      */
     private static Command parseShortAnswerCommand(String userInput) {
+        assert userInput != null: "Invalid Null Command!";
         try {
             // Split the input by '/' to separate the parts
             String[] inputTokens = userInput.replace(
@@ -175,6 +176,7 @@ public class Parser {
      * @return Delete command or an Invalid Command
      */
     private static Command parseDeleteCommand(String userInput) {
+        assert userInput != null: "Invalid Null Command!";
         int qnIndex;
         String[] editDetails;
         try {
@@ -203,6 +205,7 @@ public class Parser {
      * @return Find command or an Invalid Command
      */
     private static Command parseFindCommand(String userInput) {
+        assert userInput != null: "Invalid Null Command!";
         String searchCriteria;
         String searchKeyword;
         try {
@@ -228,6 +231,7 @@ public class Parser {
      * @return Edit command or an Invalid Command
      */
     private static Command parseEditCommand(String userInput) {
+        assert userInput != null: "Invalid Null Command!";
         String[] commandEditTokens = new String[3];
         int qnIndex;
         try {
