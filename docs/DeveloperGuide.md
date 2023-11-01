@@ -52,6 +52,9 @@ classes.
 
 ![Sequence of invalid command](images/InvalidCommand.svg "Sequence of invalid command")
 
+Given below is the Sequence Diagram for interactions within the Logic component for the execute("deletemeal 1") call.
+![Deletemeal command sequence](images/DeleteSequence.svg)
+
 ### Storage Component
 Storage load and save functions are written in [`Storage`](../src/main/java/fittrack/storage/Storage.java) class.
 
