@@ -161,7 +161,6 @@ Ingredient: chicken		Qty: 500g
 Ingredient: milk		Qty: 1000ml
 ```
 
-
 ### Adding an order : `add_order`
 
 Adds an order to the current business day
@@ -177,6 +176,7 @@ Is order completed?: true
 Total orderList cost: $4.00
 ```
 
+
 ### Returning to the previous day: `previous_day`
 
 Goes back to the previous business day
@@ -191,7 +191,7 @@ Today is Day 1
 
 ### Advancing to the next day: `next_day`
 
-To go to the next business day
+Proceeds to the next business day
 
 Format: `next_day`
 
