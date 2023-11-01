@@ -23,7 +23,8 @@ public class AddRecipeCommandTest {
 
     @Test
     public void addWithTitle_Steps_Tags_Test() {
-        String userInput = "r/bread t/1 s/buy ingredients s/store ingredients t/2 s/wash the ingredients s/cut the ingredients t/4 s/cook ";
+        String userInput = "r/bread t/1 s/buy ingredients s/store ingredients " +
+            "t/2 s/wash the ingredients s/cut the ingredients t/4 s/cook ";
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
         addRecipeCommand.executeCommand();
         assertEquals("bread", recipeList.getRecipeByIndex(0).getTitle());

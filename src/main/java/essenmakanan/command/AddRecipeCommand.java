@@ -3,8 +3,12 @@ package essenmakanan.command;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.RecipeParser;
-import essenmakanan.recipe.*;
+import essenmakanan.recipe.Recipe;
+import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.RecipeStepList;
 import essenmakanan.ui.Ui;
+import essenmakanan.recipe.Tag;
+import essenmakanan.recipe.Step;
 
 public class AddRecipeCommand extends Command {
     private String toAdd;
@@ -27,7 +31,7 @@ public class AddRecipeCommand extends Command {
             }
         } else if (toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("t/")) {
             // only title and steps are available
-            this.addWithTitle_Steps_Tags();
+            this.addWithTitleStepsTags();
         } else if (toAdd.contains("r/") && toAdd.contains("s/")) {
             this.addWithTitleAndSteps();
         } else {
@@ -57,7 +61,7 @@ public class AddRecipeCommand extends Command {
 
 
 
-    public void addWithTitle_Steps_Tags() {
+    public void addWithTitleStepsTags() {
         // add r/bread t/b s/buy ingredients s/store ingredients t/a s/cook
         String[] allToAdd = toAdd.split("t/");
         String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
