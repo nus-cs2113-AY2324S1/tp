@@ -11,8 +11,8 @@ public class OrderList {
         this.orderList = new ArrayList<>();
         this.totalOrderListCost = 0;
     }
-    public OrderList(ArrayList<Order> orderList) {
-        this.orderList = orderList;
+    public OrderList(ArrayList<Order> decodedOrderList){
+        this.orderList = decodedOrderList;
         this.totalOrderListCost = 0;
     }
 
@@ -27,6 +27,9 @@ public class OrderList {
     }
     public void removeOrder(int orderID) {
         orderList.remove(orderID);
+    }
+    public boolean isEmpty() {
+        return orderList.isEmpty();
     }
 
     public void addOrder(Order order) {

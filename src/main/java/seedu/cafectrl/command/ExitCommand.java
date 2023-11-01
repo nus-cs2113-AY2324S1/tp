@@ -5,6 +5,8 @@ import seedu.cafectrl.ui.Ui;
 
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
+    public static final String MESSAGE_USAGE = "To exit:\n"
+            + COMMAND_WORD;
 
     protected Ui ui;
     protected Pantry pantry;

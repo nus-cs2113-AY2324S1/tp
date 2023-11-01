@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> ":NextDayCommand" : execute()
+    activate ":NextDayCommand"
+    ":NextDayCommand" -> ":Ui" : printLine()
+        activate ":Ui"
+        ":Ui" -> ":Ui" : showToUser(args : String)
+            activate ":Ui"
+        return
+    return
+    ":NextDayCommand" -> ":CurrentDate" : nextDay()
+        activate ":CurrentDate"
+    return
+    ":NextDayCommand" -> ":CurrentDate" : getCurrentDay()
+        activate ":CurrentDate"
+    return nextDay : int
+    ":NextDayCommand" -> ":Sales" : getDaysAccounted()
+        activate ":Sales"
+    return daysAccounted : int
+    opt nextDay > daysAccounted
+        ":NextDayCommand" -> ":OrderList" : new OrderList()
+            activate ":OrderList"
+        return newOrderList : OrderList
+        ":NextDayCommand" -> ":Sales" : addOrderList(newOrderList)
+            activate ":Sales"
+        return
+        ":NextDayCommand" -> ":Sales" : nextDay()
+            activate ":Sales"
+        return
+    end
+    ":NextDayCommand" -> ":Ui" : showNextDay()
+        activate ":Ui"
+        ":Ui" -> ":Ui" : showToUser(args : String)
+            activate ":Ui"
+        return
+    return
+    ":NextDayCommand" -> ":Ui" : showToUser(args : String)
+        activate ":Ui"
+    return
+return
+@enduml

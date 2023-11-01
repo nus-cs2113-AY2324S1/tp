@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+CafeCtrl "1" --> "1" UI
+CafeCtrl "1" --> "1" Parser
+CafeCtrl "1" --> "1" Sales
+CafeCtrl "1" --> "1" CurrentDate
+CafeCtrl "1" o-- "*" Command
+
+Command <|- NextDayCommand
+Parser "1" --> "*" NextDayCommand
+NextDayCommand --> OrderList
+NextDayCommand --> CurrentDate
+NextDayCommand --> Sales
+Sales --> "1...*" OrderList
+
+class CafeCtrl {
+- setup()
+- run()
++ main(args : String[])
+}
+
+class Command {
+
+}
+
+class UI {
+{static} - scanner : Scanner
++ receiveUserInput() : String
++ showToUser() : void
++ printLine() : void
++ showNextDay() : void
+}
+
+class NextDayCommand {
+- ui : Ui
+- sales : Sales
+- currentDate : CurrentDate
++ execute() : void
+}
+
+class Parser {
+{static} + parseCommand(menu : Menu, userInput : String, ui : Ui, pantry : Pantry, sales : Sales, currentDate : CurrentDate) : Command
+{static} - prepareNextDay(ui : Ui, sales : Sales, currentDate : CurrentDate) : Command
+}
+
+class OrderList {
+- orderList : ArrayList<Order>
+}
+
+class Sales {
+- orderLists : ArrayList<OrderList>
+- daysAccounted : int
++ getDaysAccounted() : int
++ addOrderList(orderList : OrderList)
++ nextDay() : void
+}
+
+class CurrentDate {
+- currentDay : int
++ getCurrentDay() : int
++ nextDay() : void
+}
+
+@enduml

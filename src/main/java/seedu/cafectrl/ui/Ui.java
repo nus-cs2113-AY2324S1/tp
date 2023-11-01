@@ -1,8 +1,18 @@
 package seedu.cafectrl.ui;
 
 import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.AddOrderCommand;
+import seedu.cafectrl.command.BuyIngredientCommand;
+import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.ExitCommand;
+import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.NextDayCommand;
+import seedu.cafectrl.command.PreviousDayCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
+
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
@@ -136,10 +146,17 @@ public class Ui {
         showToUserWithSpaceBetweenLines(Messages.LIST_OF_COMMANDS,
                 Messages.INSTRUCTION_ON_COMMAND_FORMAT,
                 AddDishCommand.MESSAGE_USAGE,
+                AddOrderCommand.MESSAGE_USAGE,
+                BuyIngredientCommand.MESSAGE_USAGE,
+                DeleteDishCommand.MESSAGE_USAGE,
+                EditPriceCommand.MESSAGE_USAGE,
+                ExitCommand.MESSAGE_USAGE,
+                HelpCommand.MESSAGE_USAGE,
                 ListIngredientCommand.MESSAGE_USAGE,
-                Messages.LIST_MENU_GUIDE,
-                Messages.DELETE_GUIDE,
-                EditPriceCommand.MESSAGE_USAGE);
+                ListMenuCommand.MESSAGE_USAGE,
+                NextDayCommand.MESSAGE_USAGE,
+                PreviousDayCommand.MESSAGE_USAGE,
+                ViewTotalStockCommand.MESSAGE_USAGE);
     }
 
     public void showToUserWithSpaceBetweenLines(String... message) {
