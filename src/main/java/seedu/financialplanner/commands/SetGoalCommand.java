@@ -1,11 +1,11 @@
 package seedu.financialplanner.commands;
 import seedu.financialplanner.goal.Goal;
-import seedu.financialplanner.goal.GoalList;
+import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.utils.Ui;
 
 public class SetGoalCommand extends Command {
-    private final String goal;
-    private int amount;
+    private final String label;
+    private final int amount;
 
     public SetGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String labelString = String.join(" ", rawCommand.args);
@@ -21,7 +21,7 @@ public class SetGoalCommand extends Command {
         if(!rawCommand.extraArgs.containsKey("l")){
             throw new IllegalArgumentException("Please specify the content of the goal");
         }
-        goal = rawCommand.extraArgs.get("l");
+        label = rawCommand.extraArgs.get("l");
         rawCommand.extraArgs.remove("l");
         if(!rawCommand.extraArgs.isEmpty()){
             String unknownExtraArgument = new java.util.ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
@@ -31,7 +31,8 @@ public class SetGoalCommand extends Command {
 
     @Override
     public void execute() {
-        GoalList.INSTANCE.list.add(new Goal(goal, amount));
-        Ui.getInstance().showMessage("Set Goal Successfully!");
+        Goal goal = new Goal(label, amount);
+        WishList.getInstance().list.add(goal);
+        Ui.getInstance().showMessage("You have added " + goal);
     }
 }
