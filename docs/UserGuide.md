@@ -1,7 +1,7 @@
 # KaChinnnng User Guide
 
 ## Introduction
-welcome to KaChinnnng a personal finance tracker that helps you keep track of your expenses and income.
+Welcome to KaChinnnng a personal finance tracker that helps you keep track of your expenses and income.
 
 ## Quick Start
 
@@ -125,7 +125,7 @@ edit income 1 /de end of year bonus /date 02/10/2023 /amt HKD 3000.00
 edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 ```
 
-### View the supported currencies: list currencies
+### List the supported currencies: list currencies
 This function allows user to see the foreign currencies supported by KaChinnnng.
 
 Note: The default currency is SGD.
@@ -136,10 +136,11 @@ list currencies
 ```
 Example output:
 ```
-
+These are the supported currencies:
+MYR USD JPY KRW EUR THB HKD INR IDR AUD GBP CNY CAD TWD VND PHP
 ```
 
-### list exchange rates
+### List exisitng exchange rates: list exchange rates
 List all updated exchange rates. All exchange rates that are updated
 either via ExchangeRateFile or the command line will be shown. User can call the update exchange rates function to 
 register the exchange rates into their KaChinnnng.
@@ -149,9 +150,6 @@ Note: Exchange rates are shown in SGD/{other currency}.
 Format:
 ```
 list exchange rates
-```
-Example output:
-```
 ```
 
 ### update exchange rate
@@ -190,8 +188,9 @@ and change the line in txt file to the correct format.
 | Help | `help`                                                                                                                                                                                   |
 | Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                       |
 | Add Expense | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50` |
-| List | `list` <br> `list income` <br> `list expense`                                                                                                                                             |
+| List | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`|
 | Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                     |
 | Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` |
-|clear|`clear`|
-|exit|`exit`|
+| Update Exchange Rate | `update exchange rate <supported_currency> <rate>` |
+| Clear |`clear`|
+| Exit |`exit`|
