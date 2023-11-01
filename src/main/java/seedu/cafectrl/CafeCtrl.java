@@ -6,6 +6,7 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
+import seedu.cafectrl.parser.ParserUtil;
 import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
@@ -54,7 +55,8 @@ public class CafeCtrl {
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
-                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
+                ParserUtil parserUtil = new Parser();
+                command = parserUtil.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
                 command.execute();
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());

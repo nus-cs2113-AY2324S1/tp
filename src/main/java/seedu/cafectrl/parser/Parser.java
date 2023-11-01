@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
  * Parse everything received from the users on terminal
  * into a format that can be interpreted by other core classes
  */
-public class Parser {
+public class Parser implements ParserUtil {
     //@@author ziyi105
     private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
 
@@ -80,7 +80,7 @@ public class Parser {
      * @param pantry The arraylist object created that stores current ingredients in stock
      * @return command requested by the user
      */
-    public static Command parseCommand(Menu menu, String userInput, Ui ui,
+    public Command parseCommand(Menu menu, String userInput, Ui ui,
             Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
@@ -124,7 +124,7 @@ public class Parser {
             return prepareOrder(menu, arguments, ui, pantry, sales, currentDate);
 
         case NextDayCommand.COMMAND_WORD:
-            return new NextDayCommand(ui, sales, currentDate);
+            return prepareNextDay(ui, sales, currentDate);
 
         case PreviousDayCommand.COMMAND_WORD:
             return preparePreviousDay(ui, currentDate);

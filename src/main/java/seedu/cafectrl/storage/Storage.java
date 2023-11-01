@@ -14,12 +14,10 @@ import java.util.ArrayList;
  * Handles loading and saving data for menu, orderList, pantryStock
  */
 public class Storage {
-    FileManager fileManager;
-    Ui ui;
+    protected FileManager fileManager;
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
-        this.ui  = ui;
     }
 
     //@@author ShaniceTang
@@ -31,8 +29,8 @@ public class Storage {
      */
     public Menu loadMenu() throws IOException {
         fileManager.openTextFile(FilePath.MENU_FILE_PATH);
-        ArrayList<String> menuFromTextFile = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-        return Decoder.decodeMenuData(menuFromTextFile);
+        ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
+        return Decoder.decodeMenuData(encodedMenu);
     }
 
     /**
@@ -53,10 +51,18 @@ public class Storage {
     public Pantry loadPantryStock() throws FileNotFoundException {
         ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
         return Decoder.decodePantryStockData(encodedPantryStock);
-        //return new Pantry(ui);
     }
 
-    //@@NaychiMin
+    /**
+     * Encode and write the data from PantryStock to the text file
+     * @param pantry pantry from current session
+     * @throws IOException if the file is not found in the specified file path
+     */
+    private void savePantryStock(Pantry pantry) throws IOException {
+        this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
+    }
+
+    //@@author NaychiMin
     /**
      * Loads order lists from a text file, decodes it, and returns it as a Sales object.
      *
@@ -78,7 +84,6 @@ public class Storage {
     private void saveOrderList(Sales sales) throws IOException {
         this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
-    //@@author
 
     //@@author ziyi105
     /**
@@ -95,13 +100,4 @@ public class Storage {
         savePantryStock(pantry);
     }
 
-    //@@author ziyi105
-    /**
-     * Encode and write the data from PantryStock to the text file
-     * @param pantry pantry from current session
-     * @throws IOException if the file is not found in the specified file path
-     */
-    private void savePantryStock(Pantry pantry) throws IOException {
-        this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
-    }
 }

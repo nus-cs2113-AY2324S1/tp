@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class ViewTotalStockCommand extends Command {
 
     public static final String COMMAND_WORD = "view_stock";
+    public static final String MESSAGE_USAGE = "To view pantry stock:\n " + COMMAND_WORD;
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> pantryStock;

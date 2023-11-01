@@ -31,20 +31,26 @@ class HelpCommandTest {
 
         HelpCommand helpCommand = new HelpCommand(ui);
         helpCommand.execute();
-        int numOfLines = 8;
 
         ArrayList<String> expectedOutputs = new ArrayList<>();
 
         expectedOutputs.add(Messages.LINE_STRING);
         expectedOutputs.add(Messages.LIST_OF_COMMANDS);
         expectedOutputs.add(Messages.INSTRUCTION_ON_COMMAND_FORMAT);
-        expectedOutputs.add(Messages.ADD_DISH_GUIDE);
-        expectedOutputs.add(Messages.LIST_MENU_GUIDE);
-        expectedOutputs.add(Messages.LIST_INGREDIENTS_GUIDE);
-        expectedOutputs.add(Messages.DELETE_GUIDE);
-        expectedOutputs.add(Messages.EDIT_PRICE_GUIDE);
+        expectedOutputs.add(AddDishCommand.MESSAGE_USAGE);
+        expectedOutputs.add(AddOrderCommand.MESSAGE_USAGE);
+        expectedOutputs.add(BuyIngredientCommand.MESSAGE_USAGE);
+        expectedOutputs.add(DeleteDishCommand.MESSAGE_USAGE);
+        expectedOutputs.add(EditPriceCommand.MESSAGE_USAGE);
+        expectedOutputs.add(ExitCommand.MESSAGE_USAGE);
+        expectedOutputs.add(HelpCommand.MESSAGE_USAGE);
+        expectedOutputs.add(ListIngredientCommand.MESSAGE_USAGE);
+        expectedOutputs.add(ListMenuCommand.MESSAGE_USAGE);
+        expectedOutputs.add(NextDayCommand.MESSAGE_USAGE);
+        expectedOutputs.add(PreviousDayCommand.MESSAGE_USAGE);
+        expectedOutputs.add(ViewTotalStockCommand.MESSAGE_USAGE);
 
-        for (int i = 0; i < numOfLines; i++) {
+        for (int i = 0; i < expectedOutputs.size(); i++) {
             assertEquals(expectedOutputs.get(i), actualOutputs.get(i));
         }
     }

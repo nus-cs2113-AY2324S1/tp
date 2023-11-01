@@ -5,10 +5,12 @@ CafeCtrl "1" --> "1" UI
 CafeCtrl "1" --> "1" Parser
 CafeCtrl "1" --> "1" Sales
 CafeCtrl "1" --> "1" Pantry
+CafeCtrl "1" --> "1" CurrentDate
 CafeCtrl "1" o-- "*" Command
 
 Command <|- AddOrderCommand
 Parser "1" --> "*" AddOrderCommand
+Parser --> CurrentDate
 AddOrderCommand --> OrderList
 AddOrderCommand "1" --> "1" Chef
 AddOrderCommand --> Pantry
@@ -28,7 +30,7 @@ class Command {
 class UI {
 {static} - scanner : Scanner
 + receiveUserInput() : String
-+ showMenuTop() : void
++ showToUser() : void
 + showChefMessage() : void
 + showTotalCost(dollarCost : String) : void
 }
@@ -84,6 +86,11 @@ class Pantry {
 class Sales {
 - orderLists : ArrayList<OrderList>
 - daysAccounted : int
+}
+
+class CurrentDate {
+- currentDay : int
++ getCurrentDay() : int
 }
 
 @enduml

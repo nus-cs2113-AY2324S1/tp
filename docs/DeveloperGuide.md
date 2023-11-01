@@ -4,8 +4,6 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
-
 ## Design
 
 ### Parser
@@ -15,13 +13,25 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 *Figure 1: Parser Class Diagram*
 
-Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintainance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
+Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
 
 ![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
 
 *Figure 2: Parser Parsing User Input Sequence Diagram*
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
+
+### Storage
+API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
+
+![Storage Class Diagram](images/class/Storage.png)
+
+*Figure 3: Storage Class Diagram*
+
+The `Storage` class,
+- loads and saves the list of dishes on the `Menu`, available ingredient stock in `Pantry` and orders for the day in `OrderList` in a text file.
+- depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
+- is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
 ## Features
 
@@ -41,9 +51,9 @@ Separation of Concerns was applied to ensure the `Ui` is only responsible with o
 ### Adding a Dish
 
 ### List Menu
-A list command can be used to display all the `Dish` objects stored in `Menu`.
+A `list_menu` command can be used to display all the `Dish` objects stored in `Menu`.
 
-The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a list command.
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a list_menu command.
 ![List Menu Execution](images/class/ListMenuCommandClass.png)
 
 ![List Menu Execution](images/sequence/ListMenuCommand_execute.png)
@@ -61,6 +71,34 @@ It then iterates through the `Dish` objects in `Menu` in a "for" loop, using `me
 The `dishName` and `dishPrice` are both access from `Dish` Class using `getName()` and `getPrice()` respectively.
 The data are then packaged nicely in a `leftAlignFormat`, with (indexNum + ". " + dishName," $" + dishPrice) such that
    e.g. (1. Chicken Rice $2.50) is shown.
+
+### Add Order
+A add_order command can be used to add `order` to an `orderList` in `Sales`.
+
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of an add_order command.
+![Add_Order Execution](images/class/AddOrderCommandClass.png)
+
+![Add_order Execution](images/sequence/AddOrderCommand_execute.png)
+
+Figure 1: Execution of add_order command
+
+API: [AddOrderCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+
+When the `execute()` method of AddOrderCommand is invoked in Main, the parsed `order` object is added to the `orderList`.
+
+A `Chef` object is then created to process the order by running `cookDish()`. 
+This method first checks if the order has already been completed by running `order.getIsCompleted()`.
+If the order has not been completed, the `showDeleteMesage()` in the Ui component is triggered to display a message to show the user that the dish is being 'prepared'.
+An ArrayList of Ingredients, ingredientList, is retrieved from the `order` object by `order.getIngredientList()`. 
+This ingredientList is passed into the `pantry` object in `pantry.decreaseIngredientsStock()` to process the ingredients used from the pantry stock.
+The order is then marked as completed by `order.setComplete()`
+
+Returning to the AddOrderCommand, the `order` object is checked to be completed again by running `order.getIsCompleted()`.
+This verifies that the ingredientList has been successfully retrieved and passed into `pantry.decreaseIngredientsStock()` to run without errors.
+After verifying that the order has been completed, the cost of the order is added to the total order by `orderList.addCost()`. 
+
+The total sum of orders in the `orderList` object is retrieved using `orderList.getTotalCost()`.
+This is then passed into Ui using `ui.showTotalCost()` to display a message to the user with the total order cost.
 
 ### List Ingredients
 ![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)
@@ -80,8 +118,6 @@ API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/
 
 ### Delete Dish
 
-### Delete Dish
-
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
 <br>*Figure X: Execution of delete dish command
 
@@ -96,7 +132,6 @@ This sequence of actions orchestrates the flow of information and operations bet
 `DeleteDishCommand` is implemented in such a way because:
 1. It promotes loose coupling between components. For instance, `Main` doesn't need to know the details of how the `execute()` of `DeleteDishCommand` is executed or how the message is displayed in `Ui`.
 2. Each component has a specific role and responsibility. `Main` is responsible for receiving user input and invoking `execute()`, `DeleteDishCommand` is responsible for encapsulating the delete operation, `Menu` is responsible for managing the menu items, and `Ui` is responsible for displaying messages to the user. This separation of concerns makes the code more maintainable and easier to understand.
-
 
 ### Edit Price
 
