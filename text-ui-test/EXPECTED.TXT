@@ -28,6 +28,9 @@ Weight: 80.0kg
 Daily calorie limit: 2000kcal
 BMI: 24.69
 ____________________________________________________________
+`view` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
 `viewprofile 123` is an invalid command.
 `viewprofile` shows all profile details.
 Type `viewprofile` to view your profile.
@@ -99,6 +102,16 @@ These are the workouts you have done:
 2.[W] long run (200kcal, 2023-10-29)
 
 
+`findmeal` is an invalid command.
+`findmeal` finds the meal you are looking for in your meal list.
+Type `findmeal <keyword>` to find a meal.
+
+
+`findworkout` is an invalid command.
+`findworkout` finds the workout you are looking for in your workout list.
+Type `findworkout <keyword>` to find a workout.
+
+
 These meals contain the keyword pasta:
 1. [M] pasta (200kcal, 2023-10-22)
 2. [M] cabonara pasta (180kcal, 2023-10-29)
@@ -108,6 +121,19 @@ These workouts contain the keyword run:
 1. [W] run (100kcal, 2023-10-22)
 2. [W] long run (200kcal, 2023-10-29)
 There are 2 workouts that contains run
+
+`calorieburnt` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`calorieburnt` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`caloriesum 1` is an invalid command.
+`caloriesum` calculates your total calories burned.
+Type `caloriesum` to calculate your total calories burned.
+
+`calorisum` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
 
 `deletemeal1` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
@@ -121,7 +147,7 @@ Type `help` or `help <COMMAND>` to view help.
 I've deleted the following workout:
 [W] run (100kcal, 2023-10-22)
 
-Recommended Weight: 66.01599999999999 kg
+Recommended Weight: 66.02 kg
 
 `help` shows help message of the command.
 Existing commands:

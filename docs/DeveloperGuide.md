@@ -52,6 +52,9 @@ classes.
 
 ![Sequence of invalid command](images/InvalidCommand.svg "Sequence of invalid command")
 
+Given below is the Sequence Diagram for interactions within the Logic component for the execute("deletemeal 1") call.
+![Deletemeal command sequence](images/DeleteSequence.svg)
+
 ### Storage Component
 Storage load and save functions are written in [`Storage`](../src/main/java/fittrack/storage/Storage.java) class.
 
@@ -100,6 +103,8 @@ BMI, ideal weight for their height and so on.
 |v2.0|user| Calculate my ideal weight for my height                     | maintain my weight in the healthy range                       |
 |v2.0|user| see the total calories I have consumed on a particular date | track my daily calories intake                                |
 |v2.0|user| see the total calories I have burnt on a particular date    | track my daily calories burnt                                 |
+|v2.0|user| find a meal or workout                                      | quickly search my past meals or workouts                      |
+
 
 
 ## Non-Functional Requirements
