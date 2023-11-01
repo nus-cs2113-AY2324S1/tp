@@ -64,6 +64,9 @@ Example of usage:
 add income /de salary /date 01/01/2020 /amt 1000
 ```
 ```
+add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 /amt 10.00
+```
+```
 add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
 ```
@@ -125,6 +128,7 @@ edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 
 ## FAQ
 
+
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Move the txt file from the folder where the jar file located, 
@@ -138,6 +142,13 @@ and change the line in txt file to the correct format.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action | Format, Examples                                                                                                                                                                         |
+| ------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help | `help`                                                                                                                                                                                   |
+| Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                       |
+| Add Expense | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50` |
+| List | `list` <br> `list income` <br> `list expense`                                                                                                                                             |
+| Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                     |
+| Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` |
+|clear|`clear`|
+|exit|`exit`|
