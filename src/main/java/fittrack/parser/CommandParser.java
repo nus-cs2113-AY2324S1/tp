@@ -248,6 +248,7 @@ public class CommandParser {
             throw new NumberFormatException();
         }
     }
+    // @@author
 
     public Date parseDate(String date) throws PatternMatchFailException {
         final Matcher matcher = DATE_PATTERN.matcher(date);
