@@ -10,7 +10,9 @@ public class ListDescriptionsCommand extends Command {
     public static final String COMMAND_WORD = "listDescriptions";
 
     public static final String MESSAGE_SUCCESS = "List of Drug Descriptions:";
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all the descriptions for all drugs "
+            + System.lineSeparator()
+            + "Example: " + COMMAND_WORD;
     /**
      * Creates a ListDescriptionsCommand to list all drug descriptions for all corresponding drugs.
      */
