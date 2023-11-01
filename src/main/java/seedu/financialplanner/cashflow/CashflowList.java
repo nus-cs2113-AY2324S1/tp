@@ -29,11 +29,15 @@ public class CashflowList {
         int existingListSize = list.size();
 
         Income toAdd = new Income(value, type, recur, description);
-        list.add(toAdd);
+        addToList(toAdd);
         ui.printAddedCashflow(toAdd);
 
         int newListSize = list.size();
         assert newListSize == existingListSize + 1;
+    }
+
+    private void addToList(Cashflow toAdd) {
+        list.add(toAdd);
     }
 
     public void addExpense(double value, ExpenseType type, int recur, String description) {
@@ -41,7 +45,7 @@ public class CashflowList {
         int existingListSize = list.size();
 
         Expense toAdd = new Expense(value, type, recur, description);
-        list.add(toAdd);
+        addToList(toAdd);
         ui.printAddedCashflow(toAdd);
 
         int newListSize = list.size();

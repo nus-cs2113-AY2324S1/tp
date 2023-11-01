@@ -62,6 +62,9 @@ you a one-stop interface to access a plethora of features to manage your finance
 
   e.g. `[/r DAYS]` can be used as `/r 30` or left empty.
 
+### Notes about naming convention
+- Cashflow refers to an income or expense.
+
 ### Add cashflow
 
 #### Add income: `add income`
