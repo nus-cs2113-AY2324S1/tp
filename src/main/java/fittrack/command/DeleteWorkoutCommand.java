@@ -32,6 +32,7 @@ public class DeleteWorkoutCommand extends Command {
         workoutList.deleteWorkout(workoutIndex);
         return new CommandResult("I've deleted the following workout:" + "\n" + toDelete.toString());
     }
+    // @@author
 
     // @@author marklin2234
     @Override
@@ -39,6 +40,7 @@ public class DeleteWorkoutCommand extends Command {
             throws PatternMatchFailException, NumberFormatException {
         workoutIndex = parser.parseIndex(args);
     }
+    // @@author
 
     @Override
     protected String getHelp() {
