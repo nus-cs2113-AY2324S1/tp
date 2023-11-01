@@ -29,7 +29,7 @@ public class UsageInstructions {
                 "add expense /cat <category> /type <type> " +
                 "/de <description> /date <date> /amt <amount>\n");
         System.out.println("Listing all entries: list\nFormat:\n" + "list\n" + "list income\n" +
-                "list expense\n");
+                "list expense\nlist currencies\nlist exchange rates\n");
         System.out.println("Deleting an entry: delete\nFormat:\ndelete income <index_pos>\n" +
                 "delete expense <index_pos>\n");
         System.out.println("Edit an entry: edit\nFormat:\n" +
@@ -37,7 +37,10 @@ public class UsageInstructions {
                 "edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> " +
                 "/amt [currency] <amount>\n");
         System.out.println("Check balance of income: balance\nFormat: " + "balance\n");
+        System.out.println("Update exchange rate: update exchange rate\nFormat: " + "update exchange rate " +
+                "<supported_currency> <rate>\n");
         System.out.println("Exiting the program: exit\nFormat: " + "exit");
+
         ui.showLineDivider();
     }
 }
