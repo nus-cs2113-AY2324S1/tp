@@ -216,7 +216,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
             }
 
-            if (isRepeatedDishName(dishName, menu)) {
+            if (isRepeatedName(dishName, menu)) {
                 throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
             }
 
@@ -270,6 +270,10 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
             }
 
+            if (isRepeatedName(ingredientName, ingredients)) {
+                continue;
+            }
+
             Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
 
             ingredients.add(ingredient);
@@ -302,7 +306,7 @@ public class Parser implements ParserUtil {
      * @return boolean of whether a repeated dish name is detected
      * @throws NullPointerException if the input string is null
      */
-    static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
+    static boolean isRepeatedName(String inputDishName, Menu menu) throws NullPointerException {
         if (inputDishName == null) {
             throw new NullPointerException();
         }
@@ -312,6 +316,29 @@ public class Parser implements ParserUtil {
             String inputDishNameLowerCase = inputDishName.toLowerCase();
 
             if (menuDishNameLowerCase.equals(inputDishNameLowerCase)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks in the menu if the dish name already exists in the menu.
+     * @param inputName dish name entered by the user
+     * @param ingredients contains all the existing Ingredients
+     * @return boolean of whether a repeated dish name is detected
+     * @throws NullPointerException if the input string is null
+     */
+    static boolean isRepeatedName(String inputName, ArrayList<Ingredient> ingredients) throws NullPointerException {
+        if (inputName == null) {
+            throw new NullPointerException();
+        }
+        for (Ingredient ingredient: ingredients) {
+            String ingredientNameLowerCase = ingredient.getName().toLowerCase();
+            String inputIngredientNameLowerCase = inputName.toLowerCase();
+
+            if (ingredientNameLowerCase.equals(inputIngredientNameLowerCase)) {
                 return true;
             }
         }
