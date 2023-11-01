@@ -2,7 +2,6 @@ package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -10,9 +9,7 @@ import java.util.ArrayList;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
-    private ArrayList<Dish> menuItems;
     private Ui ui;
-    private Storage storage;
 
     //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
