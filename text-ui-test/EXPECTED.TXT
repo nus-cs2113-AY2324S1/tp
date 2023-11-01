@@ -20,6 +20,8 @@ Format:
 list
 list income
 list expense
+list currencies
+list exchange rates
 
 Deleting an entry: delete
 Format:
@@ -33,6 +35,9 @@ edit expense <index> /cat <catergory> /type <type> /de <description> /date <date
 
 Check balance of income: balance
 Format: balance
+
+Update exchange rate: update exchange rate
+Format: update exchange rate <supported_currency> <rate>
 
 Exiting the program: exit
 Format: exit
