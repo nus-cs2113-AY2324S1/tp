@@ -34,6 +34,7 @@ public class Dish {
         this.price = newPrice;
     }
 
+    @Override
     public String toString() {
         return this.name + " $" + this.price;
     }

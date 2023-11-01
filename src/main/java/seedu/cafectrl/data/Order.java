@@ -18,7 +18,7 @@ public class Order {
         this.dishQty = dishQty;
         this.orderedDish = orderedDish;
         this.ingredientList = setIngredientList();
-        this.totalOrderCost = totalOrderCost();
+        this.totalOrderCost = calculateTotalOrderCost();
     }
 
     public Order(Dish orderedDish, int dishQty, float orderCost, boolean isComplete) {
@@ -43,7 +43,7 @@ public class Order {
      * @return Total calculated cost
      */
 
-    public float totalOrderCost() {
+    public float calculateTotalOrderCost() {
         float dishCost = orderedDish.getPrice();
         return dishCost * dishQty;
     }

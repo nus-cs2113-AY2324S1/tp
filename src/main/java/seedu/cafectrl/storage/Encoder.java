@@ -95,7 +95,7 @@ public class Encoder {
                 orderString.append((day + 1) + DIVIDER);
                 orderString.append(order.getDishName() + DIVIDER);
                 orderString.append(order.getQuantity() + DIVIDER);
-                orderString.append(order.totalOrderCost() + DIVIDER);
+                orderString.append(order.calculateTotalOrderCost() + DIVIDER);
                 orderString.append(order.getIsComplete());
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));
