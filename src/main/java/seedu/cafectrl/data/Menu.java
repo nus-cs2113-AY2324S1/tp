@@ -54,4 +54,21 @@ public class Menu {
         int offSetDishIndex = dishIndex - Ui.OFFSET_LIST_INDEX;
         return offSetDishIndex >= 0 && offSetDishIndex < this.getSize();
     }
+
+    //@@author NaychiMin
+    /**
+     * Retrieves an ArrayList of Order objects representing aggregated orders for each menu item.
+     * Each Order object is initialized with a dish from the menu and a quantity of 0.
+     * Used in the print_sales function under Sales class.
+     *
+     * @return An ArrayList of Order objects representing aggregated orders for each menu item.
+     */
+    public ArrayList<Order> getAggregatedOrders() {
+        ArrayList<Order> aggregatedOrders = new ArrayList<>();
+        for (int i = 0; i < menuItems.size(); i++) {
+            Order order = new Order(menuItems.get(i), 0);
+            aggregatedOrders.add(order);
+        }
+        return aggregatedOrders;
+    }
 }

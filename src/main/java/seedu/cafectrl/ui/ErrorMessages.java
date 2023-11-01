@@ -26,14 +26,16 @@ public class ErrorMessages {
             + "a new data folder has been created.";
     public static final String DISH_NOT_FOUND = "I'm sorry, but it appears that dish is so exclusive "
             + "it hasn't even made it to our menu yet!";
-    public static final String ERROR_IN_PANTRY_STOCK_DATA = "Error in pantry stock data file! Skipping this " +
-            "particular ingredient!";
+    public static final String ERROR_IN_PANTRY_STOCK_DATA = "Error in pantry stock data file! Skipping this "
+            + "particular ingredient!";
     public static final String UNIT_NOT_MATCHING = "Sorry, you have used a different unit for this ingredient!";
-
     public static final String MENU_FILE_NOT_FOUND_MESSAGE = "Menu data was not found!\n"
             + "No worries, new menu has been created";
     public static final String PANTRY_FILE_NOT_FOUND_MESSAGE = "Pantry stock data was not found!\n"
             + "No worries, new pantry has been created";
     public static final String ORDER_LIST_FILE_NOT_FOUND_MESSAGE = "Order list data was not found!\n"
             + "No worries, new order list has been created";
+    public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: Incorrect format for the show_sale "
+            + "command.\n";
+    public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer for the 'day' field!";
 }
