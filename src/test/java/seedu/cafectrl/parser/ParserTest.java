@@ -441,14 +441,14 @@ class ParserTest {
     void parsePriceToFloat_validPriceString_exactFloatPrice() {
         String inputPriceString = "3.14";
 
-        assertEquals((float) 3.14, Parser.parsePriceToFloat(inputPriceString));
+        assertEquals((float) 3.14, ParserUtil.parsePriceToFloat(inputPriceString));
     }
 
     @Test
     void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ArithmeticException {
         String inputPriceString = "99999999999.99";
 
-        assertThrows(ArithmeticException.class, () -> Parser.parsePriceToFloat(inputPriceString));
+        assertThrows(ArithmeticException.class, () -> ParserUtil.parsePriceToFloat(inputPriceString));
     }
 
     @Test
@@ -459,7 +459,7 @@ class ParserTest {
 
         String inputDishName = "chicken rice";
 
-        assertTrue(Parser.isRepeatedDishName(inputDishName, menu));
+        assertTrue(ParserUtil.isRepeatedDishName(inputDishName, menu));
     }
 
     @Test
@@ -470,7 +470,7 @@ class ParserTest {
 
         String inputDishName = "chicken chop";
 
-        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+        assertFalse(ParserUtil.isRepeatedDishName(inputDishName, menu));
     }
 
     @Test
@@ -479,7 +479,7 @@ class ParserTest {
         Dish dish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(dish);
 
-        assertThrows(NullPointerException.class, () -> Parser.isRepeatedDishName(null, menu));
+        assertThrows(NullPointerException.class, () -> ParserUtil.isRepeatedDishName(null, menu));
     }
 
     @Test
@@ -490,7 +490,7 @@ class ParserTest {
 
         String inputDishName = "";
 
-        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+        assertFalse(ParserUtil.isRepeatedDishName(inputDishName, menu));
     }
     //@@author
 }

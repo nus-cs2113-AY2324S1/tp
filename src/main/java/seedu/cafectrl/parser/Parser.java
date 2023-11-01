@@ -171,7 +171,7 @@ public class Parser implements ParserUtil {
             int dishIndexGroup = 1;
             int newPriceGroup = 2;
             int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup));
-            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup));
+            float newPrice = ParserUtil.parsePriceToFloat(matcher.group(newPriceGroup));
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
@@ -202,14 +202,14 @@ public class Parser implements ParserUtil {
 
             // To retrieve specific arguments from arguments
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
-            float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
+            float price = ParserUtil.parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
-            if (isNameLengthTooLong(dishName)) {
-                throw new ParserException("name too long");
+            if (ParserUtil.isNameLengthValid(dishName)) {
+                throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
             }
 
-            if (isRepeatedDishName(dishName, menu)) {
+            if (ParserUtil.isRepeatedDishName(dishName, menu)) {
                 return new IncorrectCommand(Messages.REPEATED_DISH_MESSAGE, ui);
             }
 
@@ -262,8 +262,8 @@ public class Parser implements ParserUtil {
 
             int ingredientQty = Integer.parseInt(ingredientQtyString);
 
-            if (isNameLengthTooLong(ingredientName)) {
-                throw new ParserException("ingredient name too long");
+            if (!ParserUtil.isNameLengthValid(ingredientName)) {
+                throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
             }
 
             Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
@@ -272,67 +272,6 @@ public class Parser implements ParserUtil {
         }
 
         return ingredients;
-    }
-
-    /**
-     * Converts text of price to float while also checking if the price input is within reasonable range
-     * @param priceText text input for price argument
-     * @return price in float format
-     * @throws ArithmeticException if price > 10000000000.00
-     */
-    public static float parsePriceToFloat(String priceText) throws ArithmeticException {
-        float price = Float.parseFloat(priceText);
-        float maxPriceValue = (float) 10000000000.00;
-
-        if (price > maxPriceValue) {
-            throw new ArithmeticException();
-        }
-
-        return price;
-    }
-
-    /**
-     * Checks in the menu if the dish name already exists in the menu.
-     * @param inputDishName dish name entered by the user
-     * @param menu contains all the existing Dishes
-     * @return boolean of whether a repeated dish name is detected
-     * @throws NullPointerException if the input string is null
-     */
-    public static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
-        if (inputDishName == null) {
-            throw new NullPointerException();
-        }
-
-        for (Dish dish: menu.getMenuItemsList()) {
-            String menuDishNameLowerCase = dish.getName().toLowerCase();
-            String inputDishNameLowerCase = inputDishName.toLowerCase();
-
-            if (menuDishNameLowerCase.equals(inputDishNameLowerCase)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Checks the length of the name is too long
-     * @param inputName name
-     * @return boolean of whether the name is more than max character limit set
-     * @throws NullPointerException if the input string is null
-     */
-    public static boolean isNameLengthTooLong(String inputName) throws NullPointerException {
-        int maxNameLength = 35;
-
-        if (inputName == null) {
-            throw new NullPointerException();
-        }
-
-        if (inputName.length() > maxNameLength) {
-            return true;
-        }
-
-        return false;
     }
 
     //@@author NaychiMin
@@ -402,12 +341,9 @@ public class Parser implements ParserUtil {
 
         String ingredientsListString = matcher.group(0);
 
-
         try {
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
             return new BuyIngredientCommand(ingredients, ui, pantry);
-        } catch (ParserException e) {
-            return new IncorrectCommand(e.getMessage(), ui);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                     + BuyIngredientCommand.MESSAGE_USAGE, ui);
