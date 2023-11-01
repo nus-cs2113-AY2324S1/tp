@@ -90,10 +90,16 @@ Lists out the ingredients needed along with the quantity for a specific dish
 Format: `list_ingredients DISH_INDEX`
 
 Example:
-
-list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
-
-
+- list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
+```
+chicken salad Ingredients: 
+pasta - 100g
+chicken - 200g
+lettuce - 200g
+tomatoes - 100g
+feta cheese - 20g
+-----------------------------------------------------
+```
 
 ### Deleting a menu item : `delete`
 Deletes a specific dish from the menu
@@ -134,11 +140,61 @@ Example:
 
 ### Adding an order : `add_order`
 
+### Showing all sales : `show_sales`
+Displays the dishes sold and total sales for each from Day 1 to the current day that 
+the cafe is operating on.
+
+Format: `show_sales`
+
+Example: `show_sales`
+
+Output:
+- show_sales lists the dishes sold along with the total sales for every operating day of the cafe.
+```
+Day 1:
+Dish Name            Dish Qty   Total Cost Price    
+
+chicken rice         4          12.0                 
+
+Total for day: $12.00
+
+Day 2:
+Dish Name            Dish Qty   Total Cost Price    
+
+chicken chop         5          21.0    
+
+chicken rice         3          9.0                
+
+Total for day: $30.00
+
+```
+
+
+### Showing sales for a chosen day : `show_sale`
+Displays the dishes sold along with the total sales for any chosen day.
+
+Format: `show_sale day/DAY_TO_DISPLAY`
+
+Example: `show_sale day/1`
+
+Output:
+- show_sale day/1 lists the dishes sold along with the total sales for day 1.
+```
+Day 1:
+Dish Name            Dish Qty   Total Cost Price    
+
+chicken rice         4          12.0                 
+
+Total for day: $12.00
+```
+
 
 ### Exiting the program : `bye`
 Exits the program.
 
 Format: `bye`
+
+## Known Issues
 
 ## Command Summary
 | Action                    | Format, Examples                                                                                                                                                                                                                                       |
@@ -151,6 +207,8 @@ Format: `bye`
 | **View Ingredient Stock** |                                                                                                                                                                                                                                                        |
 | **Buy Ingredients**       |                                                                                                                                                                                                                                                        |
 | **Add Order**             |                                                                                                                                                                                                                                                        |
+| **Show Sale**             | `show_sales`                                                                                                                                                                                                                                           |
+| **Show Sale by Day**      | `show_sale day/DAY_TO_DISPLAY` <br/><br/>Example:<br/>`show_sale day/ 1`                                                                                                                                                                               |
 | **Help**                  | `help`                                                                                                                                                                                                                                                 |
 | **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
 
