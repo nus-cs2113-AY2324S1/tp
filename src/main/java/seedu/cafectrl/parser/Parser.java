@@ -30,17 +30,16 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.text.ParseException;
 
 /**
  * Parse everything received from the users on terminal
  * into a format that can be interpreted by other core classes
  */
-public class Parser {
+public class Parser implements ParserUtil {
     //@@author ziyi105
     private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
 
-    //@@author @DextheChik3n
+    //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
             + "price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+"
@@ -55,21 +54,19 @@ public class Parser {
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
     private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
     private static final String INGREDIENT_DIVIDER_REGEX = ",";
-    //@@author
+
     /** Add Order Command Handler Patterns*/
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
     private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
             + "qty/([A-Za-z0-9\\s]+)";
-    //@@author
+
     /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-
-    //@@author ziyi105
-    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -81,7 +78,7 @@ public class Parser {
      * @param pantry The arraylist object created that stores current ingredients in stock
      * @return command requested by the user
      */
-    public static Command parseCommand(Menu menu, String userInput, Ui ui,
+    public Command parseCommand(Menu menu, String userInput, Ui ui,
             Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
@@ -187,7 +184,7 @@ public class Parser {
     //@@author DextheChik3n
     /**
      * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
-     * @param arguments
+     * @param arguments string that matches group arguments
      * @return new AddDishCommand
      */
     private static Command prepareAdd(String arguments, Menu menu, Ui ui) {
@@ -204,10 +201,13 @@ public class Parser {
             // To retrieve specific arguments from arguments
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
             float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
-            System.out.println(Float.MAX_VALUE);
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
-            ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
+            if (isRepeatedDishName(dishName, menu)) {
+                return new IncorrectCommand(Messages.REPEATED_DISH_MESSAGE, ui);
+            }
+
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
 
             Dish dish = new Dish(dishName, ingredients, price);
 
@@ -217,6 +217,8 @@ public class Parser {
                     + AddDishCommand.MESSAGE_USAGE, ui);
         } catch (ArithmeticException e) {
             return new IncorrectCommand(ErrorMessages.INVALID_PRICE_MESSAGE, ui);
+        } catch (NullPointerException e) {
+            return new IncorrectCommand(ErrorMessages.NULL_DISH_NAME_MESSAGE, ui);
         }
     }
 
@@ -226,7 +228,7 @@ public class Parser {
      * @return Ingredient objects that consists of the dish
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
      */
-    private static ArrayList<Ingredient> ingredientParsing(String ingredientsListString)
+    private static ArrayList<Ingredient> parseIngredients(String ingredientsListString)
             throws IllegalArgumentException {
         String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -275,6 +277,29 @@ public class Parser {
         }
 
         return price;
+    }
+
+    /**
+     * Checks in the menu if the dish name already exists in the menu.
+     * @param inputDishName dish name entered by the user
+     * @param menu contains all the existing Dishes
+     * @return boolean of whether a repeated dish name is detected
+     */
+    public static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
+        if (inputDishName == null) {
+            throw new NullPointerException();
+        }
+
+        for (Dish dish: menu.getMenuItemsList()) {
+            String menuDishNameLowerCase = dish.getName().toLowerCase();
+            String inputDishNameLowerCase = inputDishName.toLowerCase();
+
+            if (menuDishNameLowerCase.equals(inputDishNameLowerCase)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //@@author NaychiMin
@@ -337,16 +362,20 @@ public class Parser {
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+
+            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT
+                    + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
 
         String ingredientsListString = matcher.group(0);
-        ArrayList<Ingredient> ingredients =  ingredientParsing(ingredientsListString);
+
 
         try {
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
             return new BuyIngredientCommand(ingredients, ui, pantry);
         } catch (Exception e) {
-            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
+                    + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
     }
 
@@ -435,36 +464,4 @@ public class Parser {
         return sales.getOrderList(currentDay);
     }
 
-    /**
-     * Parses the given arguments string to identify task index number.
-     *
-     * @param userInput arguments string to parse as index number
-     * @param command expected String name of the command called
-     * @return the parsed index number
-     * @throws ParseException if no region of the args string could be found for the index
-     * @throws NumberFormatException the args string region is not a valid number
-     */
-    private static int parseArgsAsDisplayedIndex(String userInput, String command)
-            throws ParseException, NumberFormatException {
-        String formattedString = userInput.replace(command, "").trim();
-        return Integer.parseInt(formattedString);
-    }
-
-    /**
-     * Extracts the quantity (numeric part) from a given string containing both quantity and unit.
-     * @param qty A string containing both quantity and unit (e.g., "100g").
-     * @return An integer representing the extracted quantity.
-     */
-    public static int extractQty(String qty) {
-        return Integer.parseInt(qty.replaceAll("[^0-9]", ""));
-    }
-
-    /**
-     * Extracts the unit (non-numeric part) from a given string containing both quantity and unit.
-     * @param qty A string containing both quantity and unit (e.g., "100g").
-     * @return A string representing the extracted unit.
-     */
-    public static String extractUnit(String qty) {
-        return qty.replaceAll("[0-9]", "");
-    }
 }

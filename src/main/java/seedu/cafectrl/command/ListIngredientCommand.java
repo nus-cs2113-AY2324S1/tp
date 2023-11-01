@@ -10,9 +10,9 @@ import seedu.cafectrl.ui.Ui;
  */
 public class ListIngredientCommand extends Command {
     public static final String COMMAND_WORD = "list_ingredients";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists out the ingredients needed along with the quantity for a specific dish.\n"
-            + "Parameters: INDEX\n"
+    public static final String MESSAGE_USAGE = "To list out the ingredients needed "
+            + "along with the quantity for a specific dish:\n"
+            + "Parameters: DISH_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     protected Ui ui;

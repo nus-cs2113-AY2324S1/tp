@@ -1,0 +1,34 @@
+@startuml
+interface ParserUtil {
+    +parseCommand(): Command
+}
+
+class Parser {
+    -{static}INPUT_REGEX: String
+    +parseCommand(): Command
+    -prepareXYZCommand(): Command
+    -parsePriceToFloat(priceText: String): float
+    -parseIngredient(ingredientsListString: String): ArrayList<Ingredient>
+}
+
+abstract class Command {
+    +execute(): void
+}
+
+class XYZCommand {
+    +execute(): void
+}
+
+class Ui {
+    +showToUser(textToShow: String): void
+}
+
+CafeCtrl ..> ParserUtil: use
+XYZCommand --|> Command
+CafeCtrl ..> Command: execute
+ParserUtil <|.. Parser
+Parser ..> XYZCommand: create
+XYZCommand *-- data: use
+note left: Classes in data package: Dish, Ingredient, \nCurrentData, Menu, Order, Pantry and Sales
+Command *-- Ui: use
+@enduml

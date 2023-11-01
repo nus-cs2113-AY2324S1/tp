@@ -6,11 +6,11 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
+import seedu.cafectrl.parser.ParserUtil;
 import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -29,12 +29,13 @@ public class CafeCtrl {
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    private CafeCtrl() throws FileNotFoundException {
+    private CafeCtrl() throws IOException {
         this.ui = new Ui();
         this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
         this.storage = new Storage(this.ui);
         this.menu = this.storage.loadMenu();
         this.pantry = this.storage.loadPantryStock();
+        this.sales = this.storage.loadOrderList(menu);
         currentDate = new CurrentDate();
         this.sales = new Sales();
     }
@@ -54,7 +55,8 @@ public class CafeCtrl {
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
-                command = Parser.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
+                ParserUtil parserUtil = new Parser();
+                command = parserUtil.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
                 command.execute();
             } catch (Exception e) {
                 ui.showToUser(e.getMessage());
@@ -62,7 +64,7 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
-        this.storage.saveAll(this.menu, this.sales, this.pantry);
+        //this.storage.saveAll(this.menu, this.sales, this.pantry);
     }
 
     public static void main(String[] args) throws IOException {
