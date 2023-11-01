@@ -12,8 +12,8 @@ Functions and their format:
 
 Adding an entry: add
 Format:
-Add expense /category /description /value
-Add income /description /value
+add income /de <description> /date <date> /amt [currency] <amount>
+add expense /cat <category> /type <type> /de <description> /date <date> /amt <amount>
 
 Listing all entries: list
 Format:
@@ -23,16 +23,19 @@ list expense
 
 Deleting an entry: delete
 Format:
-delete income [index_pos]
-delete expense [index_pos]
+delete income <index_pos>
+delete expense <index_pos>
+
+Edit an entry: edit
+Format:
+edit income <index> /de <description> /date <date> /amt [currency] <amount>
+edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>
 
 Check balance of income: balance
-Format:
-balance
+Format: balance
 
 Exiting the program: exit
-Format:
-exit
+Format: exit
 ____________________________________________________________
 ____________________________________________________________
 Both income and expense lists cleared

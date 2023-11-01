@@ -64,6 +64,9 @@ Example of usage:
 add income /de salary /date 01/01/2020 /amt 1000
 ```
 ```
+add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 /amt 10.00
+```
+```
 add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
 ```
@@ -95,6 +98,15 @@ delete expense <index>
 ```
 delete income <index>
 ```
+
+### Check balance: balance
+Check the balance for current financial records
+
+Format:
+```
+balance
+```
+
 ### Edit an entry: edit 
 Edit an entry from the list of income/expenses.
 
@@ -159,12 +171,27 @@ update exchange rate USD 0.8
 
 ## FAQ
 
+
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Move the txt file from the folder where the jar file located, 
+to the folder where the jar file located in the new computer 
+
+**Q**: What do i need to do when I see the `format incorrect from storage file` at the beginning of running the program
+
+**A**: The system will automatically remove that line from the txt after you give the first command to the bot, 
+if you don't want to remove that line, just terminate the program using control/command c right after you see the error,
+and change the line in txt file to the correct format.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action | Format, Examples                                                                                                                                                                         |
+| ------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help | `help`                                                                                                                                                                                   |
+| Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                       |
+| Add Expense | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50` |
+| List | `list` <br> `list income` <br> `list expense`                                                                                                                                             |
+| Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                     |
+| Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` |
+|clear|`clear`|
+|exit|`exit`|
