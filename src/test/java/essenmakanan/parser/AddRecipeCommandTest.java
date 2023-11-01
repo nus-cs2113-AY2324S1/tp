@@ -28,8 +28,8 @@ public class AddRecipeCommandTest {
             "t/2 s/wash the ingredients s/cut the ingredients t/4 s/cook ";
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
         addRecipeCommand.executeCommand();
-
-        assertEquals("bread", recipeList.getRecipeByIndex(0).getTitle());
+        String title = recipeList.getRecipeByIndex(0).getTitle();
+        assertEquals("bread", title);
         RecipeStepList recipeStepList = recipeList.getRecipeByIndex(0).getRecipeSteps();
         String step1 = recipeStepList.getStepByIndex(0).getDescription();
         String step2 = recipeStepList.getStepByIndex(1).getDescription();
@@ -53,8 +53,6 @@ public class AddRecipeCommandTest {
         assertEquals(Tag.MORNING_OF_COOKING, tag3);
         assertEquals(Tag.MORNING_OF_COOKING, tag4);
         assertEquals(Tag.ACTUAL_COOKING, tag5);
-        recipeList.getRecipeByIndex(0).viewTimeLine();
-
     }
 
     @Test
