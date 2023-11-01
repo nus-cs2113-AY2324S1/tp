@@ -63,7 +63,7 @@ public class Decoder {
     }
 
     //@@author ziyi105
-    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock, Menu menu) {
+    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
 
         if (encodedPantryStock.isEmpty()) {
