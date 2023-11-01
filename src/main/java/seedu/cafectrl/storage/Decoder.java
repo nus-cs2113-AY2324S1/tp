@@ -24,7 +24,7 @@ public class Decoder {
 
     private static final String DIVIDER = "\\| ";
     private static final Ui ui = new Ui();
-
+    //@@author ShaniceTang
     /**
      * Decodes an ArrayList of string lines into a Menu object, reconstructing its content.
      *
