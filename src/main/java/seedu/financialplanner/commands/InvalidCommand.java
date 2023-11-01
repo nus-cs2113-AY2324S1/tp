@@ -15,6 +15,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public void execute() {
-        Ui.getInstance().showMessage("Unknown command. Type help for help");
+        Ui.getInstance().showMessage("Unknown command. Type help for help.");
     }
 }
