@@ -6,6 +6,9 @@
 
 ## Design
 ### Architecture Diagram
+![Architecture Diagram](images/ArchitectureDiagram.png)
+
+*Figure 1: Architecture Diagram*
 
 The Architecture Diagram given above explains the high-level design of the App.
 Listed below is a brief summary outlining the primary components and their interrelationships.
@@ -21,14 +24,21 @@ The bulk of the app’s work is done by the following components:
 - `UI` : The UI of the App.
 - `Storage` : Reads data from, and writes data to, the text files.
 - `Data` : Consists of all the classes that are involved in execution of commands.
-- `Parser` : XYZ
-- `Command` : XYZ
+- `Parser` : Makes sense of user input to return the appropriate command
+- `Command` : Executes the comman requested by the user.
+
+How the architecture components interact with each other
+
+The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+
+![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
+*Figure 2: Architecture Encode Sequence Diagram*
 
 ### Ui Component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
 
 ![Ui Class Diagram](images/class/Ui.png)
-<br>*Figure 1: Ui Class Diagram*
+<br>*Figure 3: Ui Class Diagram*
 
 The `Ui` component is responsible for interacting with the user. Within CafeCtrl, `Ui` is instantiated by `Parser`, `Command`, `Main`, `Data`, and `Storage` components to access the print methods in `Ui.java`.
 
@@ -42,13 +52,13 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 ![Parser Class Diagram](images/class/Parser.png)
 
-*Figure 1: Parser Class Diagram*
+*Figure 4: Parser Class Diagram*
 
 Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
 
 ![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
 
-*Figure 2: Parser Parsing User Input Sequence Diagram*
+*Figure 5: Parser Parsing User Input Sequence Diagram*
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
@@ -57,7 +67,7 @@ API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
 ![Storage Class Diagram](images/class/Storage.png)
 
-*Figure 3: Storage Class Diagram*
+*Figure 6: Storage Class Diagram*
 
 The `Storage` class,
 - loads and saves the list of dishes on the `Menu`, available ingredient stock in `Pantry` and orders for the day in `OrderList` in a text file.
@@ -66,8 +76,8 @@ The `Storage` class,
 
 ### Data Component
 API: []
-
-*Figure x: Data Package Class Diagram*
+![Data Class Diagram](images/class/Data.png)
+*Figure 7: Data Package Class Diagram*
 
 The 'Data' package consists of all the classes that the commands interact with to perform various functions.
 A summary of the class diagram is as listed below:
@@ -85,7 +95,7 @@ A summary of the class diagram is as listed below:
 ### Add Dish
 
 ![Add Dish Execution](images/sequence/AddDishCommand_execute.png)
-*Figure X: Execution of add_dish command*
+*Figure 8: Execution of add_dish command*
 
 API: [AddDishCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/AddDishCommand.java)
 
@@ -105,7 +115,7 @@ The following class diagram illustrates the relationship between the respective 
 
 ![List Menu Execution](images/sequence/ListMenuCommand_execute.png)
 
-Figure 1: Execution of list_menu command
+Figure 9: Execution of list_menu command
 
 API: [ListMenuCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -127,7 +137,7 @@ The following class diagram illustrates the relationship between the respective 
 
 ![Add_order Execution](images/sequence/AddOrderCommand_execute.png)
 
-Figure 2: Execution of add_order command
+*Figure 10: Execution of add_order command*
 
 API: [AddOrderCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -155,7 +165,7 @@ The following class diagram illustrates the relationship between the respective 
 
 ![Next_Day Execution](images/sequence/NextDayCommand_execute.png)
 
-Figure 3: Execution of next_day command
+*Figure 11: Execution of next_day command*
 
 API: [NextDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -179,7 +189,7 @@ The following class diagram illustrates the relationship between the respective 
 
 ![Previous_Day Execution](images/sequence/PreviousDayCommand_execute.png)
 
-Figure 4: Execution of previous_day command
+*Figure 12: Execution of previous_day command*
 
 API: [PreviousDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -191,7 +201,7 @@ The user is also shown the receded day number.
 ### List Ingredients
 ![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)
 
-*Figure 2: Execution of list_ingredient command*
+*Figure 13: Execution of list_ingredient command*
 
 API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
 
@@ -207,7 +217,8 @@ API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/
 ### Delete Dish
 
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
-<br>*Figure X: Execution of delete dish command
+
+*Figure 14: Execution of delete dish command*
 
 API: [DeleteDishCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
 
@@ -225,7 +236,7 @@ This sequence of actions orchestrates the flow of information and operations bet
 
 ![Edit Price Execution](images/sequence/EditPriceCommand_execute.png)
 
-*Figure 3: Execution of edit_price command*
+*Figure 15: Execution of edit_price command*
 
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
@@ -235,7 +246,7 @@ When the `execute()` method of `EditPriceCommand` is invoked in `Main`, it subse
 
 ![Help Execution](images/sequence/HelpCommand_execute.png)
 
-*figure 4: Execution of help command*
+*Figure 16: Execution of help command*
 
 API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpCommand.java)
 
