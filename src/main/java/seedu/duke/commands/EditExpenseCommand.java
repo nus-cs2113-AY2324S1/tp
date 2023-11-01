@@ -6,6 +6,9 @@ import seedu.duke.financialrecords.Expense;
 import java.util.ArrayList;
 
 public class EditExpenseCommand extends Command {
+    private static final String EXPECTED_FORMAT =
+            "edit expense <index> /cat <category> /type <type> /de <description> " +
+            "/date <DD/MM/YYYY> /amt [currency] <amount>";
     ArrayList<Expense> expenses;
     String fullCommand;
     int index;
@@ -63,7 +66,7 @@ public class EditExpenseCommand extends Command {
             assert tokens.length >= 4 : "Command must have at least 4 tokens";
             return Integer.parseInt(tokens[2])-1;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new KaChinnnngException("You're missing an argument");
+            throw new KaChinnnngException("You're missing an argument.\nExpected: "+EXPECTED_FORMAT);
         } catch (NullPointerException | NumberFormatException e) {
             throw new KaChinnnngException("Oops! An integer index is expected");
         }

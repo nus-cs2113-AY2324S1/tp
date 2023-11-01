@@ -138,7 +138,7 @@ public class ExchangeRateManager {
         if (!SUPPORTED_CURRENCIES.contains(currency)) {
             throw new KaChinnnngException("This currency is not supported");
         }
-        if (rate > 3000000.00 || rate <= 0.001) {
+        if (rate > 3000000.00 || rate < 0.001) {
             throw new KaChinnnngException("Fail to update exchange rate, " +
                     "the exchange rate is not between 0.001 and 3000000");
         }

@@ -86,7 +86,9 @@ public class Duke {
     protected void loadData() {
         try {
             get.getFromTextFile(incomes, expenses);
-            exchangeRateFileHandler.load();
+            if(!exchangeRateFileHandler.load()) {
+                Ui.showLineDivider();
+            }
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
         } catch (KaChinnnngException e) {

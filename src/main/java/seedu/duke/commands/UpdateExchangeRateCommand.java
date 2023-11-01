@@ -6,6 +6,9 @@ import seedu.duke.storage.ExchangeRateFileHandler;
 import java.util.Arrays;
 
 public class UpdateExchangeRateCommand extends Command {
+
+    private static final String EXPECTED_FORMAT =
+            "update exchange rate <supported_currency> <rate>";
     ExchangeRateFileHandler exchangeRateFileHandler;
     String currency;
     double rate;
@@ -17,7 +20,7 @@ public class UpdateExchangeRateCommand extends Command {
             currency = args[0];
             rate = Double.parseDouble(args[1]);
         } catch (NumberFormatException | NullPointerException e) {
-            throw new KaChinnnngException("Invalid command");
+            throw new KaChinnnngException("Invalid command.\nExpected: "+EXPECTED_FORMAT);
         }
     }
 
@@ -32,7 +35,7 @@ public class UpdateExchangeRateCommand extends Command {
     private static String[] parse(String fullCommand) throws KaChinnnngException {
         String[] args = fullCommand.split(" ");
         if (args.length != 5) {
-            throw new KaChinnnngException("Invalid command");
+            throw new KaChinnnngException("Invalid command.\nExpected: "+EXPECTED_FORMAT);
         }
         return Arrays.copyOfRange(args,3, 5);
     }
