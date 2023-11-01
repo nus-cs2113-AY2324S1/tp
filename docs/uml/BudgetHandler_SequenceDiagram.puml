@@ -1,0 +1,35 @@
+@startuml
+
+skinparam Style strictuml
+
+activate ViewBudget
+ViewBudget -> BudgetHandler: printBudget()
+activate BudgetHandler
+BudgetHandler -> BudgetHandler: setBudgetPercentage()
+alt budget.isActive()
+BudgetHandler -> BudgetHandler: printBasicWarning()
+BudgetHandler -> BudgetHandler: printSeriousWarning()
+BudgetHandler -> Ui: printMultipleText(texts)
+activate Ui
+activate Budget
+Ui -> Budget: toString()
+Budget --> Ui
+deactivate Budget
+activate FinancialStatement
+Ui -> FinancialStatement: getNetCash()
+FinancialStatement --> Ui
+deactivate FinancialStatement
+activate Progress
+Ui -> Progress: displayProgressBar()
+Progress --> Ui
+deactivate Progress
+Ui --> BudgetHandler
+deactivate Ui
+else
+<- BudgetHandler: throw CashLehBudgetException
+end
+BudgetHandler --> ViewBudget
+deactivate ViewBudget
+deactivate BudgetHandler
+
+@enduml

@@ -6,6 +6,7 @@ package cashleh.budget;
  * It provides a method for displaying the progress as a bar chart.
  */
 public class Progress {
+    private static final double MAX_BAR_LENGTH = 30;
     private double progress;
 
     public Progress(double cashOnHand, double budgetAmount) {
@@ -44,10 +45,9 @@ public class Progress {
      * Builds the Progress Bar.
      * @return a String containing the progress bar to be displayed.
      */
-    private String buildProgressBar() {
-        double maxBarLength = 30; // length of the progress bar chart to be displayed
-        double reachedPercent =  this.progress * maxBarLength; // percent of bar to be filled
-        assert reachedPercent <= maxBarLength;
+    private String buildProgressBar() { // length of the progress bar chart to be displayed
+        double reachedPercent =  this.progress * MAX_BAR_LENGTH; // percent of bar to be filled
+        assert reachedPercent <= MAX_BAR_LENGTH;
 
         String emptyBar = "-";
         String fullBar = "*";
@@ -56,7 +56,7 @@ public class Progress {
         for (int i = 0; i < reachedPercent; i++) {
             barBuilder.append(fullBar);
         }
-        for (int i = (int) reachedPercent; i < maxBarLength; i++) {
+        for (int i = (int) reachedPercent; i < MAX_BAR_LENGTH; i++) {
             barBuilder.append(emptyBar);
         }
         barBuilder.append("] ").append(String.format("%.2f", (this.progress) * 100)).append("%");
