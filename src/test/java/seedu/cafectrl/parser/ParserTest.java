@@ -2,10 +2,11 @@ package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.IncorrectCommand;
-import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.command.BuyIngredientCommand;
 
 import seedu.cafectrl.data.CurrentDate;
@@ -494,7 +495,26 @@ class ParserTest {
 
         assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
     }
-    //@@author
+
+
+    //@@author ShaniceTang
+    @Test
+    void parseCommand_returnViewTotalStockCommandClass() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String userInput = "view_stock";
+
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        ViewTotalStockCommand viewTotalStockCommand = new ViewTotalStockCommand(pantry, ui);
+
+        assertEquals(viewTotalStockCommand.getClass(), outputCommand.getClass());
+    }
 
     @Test
     void parseCommand_missingArgsForBuyIngredient_returnErrorMessage() {
@@ -503,6 +523,7 @@ class ParserTest {
         Pantry pantry = new Pantry(ui);
         Sales sales = new Sales();
         CurrentDate currentDate = new CurrentDate();
+
         String userInput = "buy_ingredient";
         ParserUtil parserUtil = new Parser();
         Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
@@ -533,4 +554,5 @@ class ParserTest {
         assertEquals(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                 + BuyIngredientCommand.MESSAGE_USAGE, feedbackToUser);
     }
+    //@@author
 }
