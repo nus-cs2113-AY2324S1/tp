@@ -12,7 +12,6 @@ CafeCTRL aims to optimize managing of inventory and cash flow in a restaurant. O
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.
 5. If the setup is correct, you should see something like the below as the output:
 ```
-..Downloading data...
 Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > 
@@ -75,6 +74,16 @@ Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIE
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example:
+```
+> add name/chicken rice price/2.00 ingredient/rice qty/100g, ingredient/chicken qty/200g, ingredient/soup qty/50ml
+You have added the following dish...
+Dish Name: chicken rice
+Dish Price: $2.00
+chicken rice Ingredients: 
+rice - 100g
+chicken - 200g
+soup - 50ml
+```
 
 <!---@@author Cazh1--->
 ### Listing all menu items : `list_menu`
@@ -101,7 +110,6 @@ Lists out the ingredients needed along with the quantity for a specific dish
 Format: `list_ingredients DISH_INDEX`
 
 Example:
-<<<<<<< HEAD
 - list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
 ```
 chicken salad Ingredients: 
@@ -294,6 +302,8 @@ Exits the program.
 Format: `bye`
 
 ## Known Issues
+- The application is unable to read the data text files if they have been edited directly in the wrong decoding format
+- For edit price command, special characters can be entered in the price argument
 
 ## Command Summary
 | Action                    | Format, Examples                                                                                                                                                                                                                                       |
@@ -310,7 +320,6 @@ Format: `bye`
 | **Add Order**             | `add_order name/DISH_NAME qty/QUANTITY`<br/><br/>Example:<br/>`add_order name/chicken rice qty/2`                                                                                                                                                      |
 | **Previous Day**          | `previous_day`                                                                                                                                                                                                                                         |
 | **Next Day**              | `next_day`                                                                                                                                                                                                                                             |
->>>>>>> master
 | **Help**                  | `help`                                                                                                                                                                                                                                                 |
 | **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
 
