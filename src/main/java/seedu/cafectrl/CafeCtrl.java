@@ -12,6 +12,7 @@ import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -35,13 +36,15 @@ public class CafeCtrl {
         this.ui = new Ui();
         this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
         this.storage = new Storage(this.ui);
-        currentDate = new CurrentDate();
+        this.currentDate = new CurrentDate();
         this.sales = new Sales();
 
         try {
             this.menu = this.storage.loadMenu();
             this.pantry = this.storage.loadPantryStock();
             this.sales = this.storage.loadOrderList(menu);
+        } catch (FileNotFoundException e) {
+            System.out.println("print error for FileNotFoundException");
         } catch (IOException e) {
             System.out.println("print error for IOException");
         }
