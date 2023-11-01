@@ -28,6 +28,14 @@ When the `User` exits the program, the `storage` class will be called to save th
 
 `Storage` will read from the local storage when the program is run again.
 
+### Expense Class Overview
+
+The Expenses are divided into three categories. Transport, Utilities and Food.
+Each of the categories inherit from a base Expense class which in turn
+inherits from the FinancialRecord class.
+
+![expense_class_diagram.png](/Users/apple/Desktop/CS2113/tp/images/expense_class_diagram.png)
+
 ### IncomeManager
 
 the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList` and `Ui`.
@@ -50,7 +58,7 @@ The ExpenseManager is facilitated by `ExpenseParser`,  `ExpenseManager`, `Expens
 5. Expense object is returned to ExpenseManager from ExpenseParser.
 6. Expense obejct is returned to Duke from ExpenseManager.
 
-![expenseManager_sequence_diagram.png](images/expenseManager_sequence_diagram.png)
+![expenseManager_sequence_diagram.png](/Users/apple/Desktop/CS2113/tp/images/expenseManager_sequence_diagram.png)
 
 ### Find Command
 The FindCommand is facilitated by `FindCommand`, `FindParser`, `Ui`,`ExpenseList` and `IncomeList`.
