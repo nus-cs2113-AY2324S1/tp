@@ -8,7 +8,6 @@ import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.parser.ParserUtil;
 import seedu.cafectrl.storage.Storage;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 /**
