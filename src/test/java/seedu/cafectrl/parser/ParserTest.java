@@ -2,10 +2,11 @@ package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.IncorrectCommand;
-import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.IncorrectCommand;
 import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.command.BuyIngredientCommand;
 
 import seedu.cafectrl.data.CurrentDate;
@@ -437,7 +438,83 @@ class ParserTest {
         assertEquals((float) 50.0, getOutputDish.getPrice());
         assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString());
     }
-    //@@author
+
+    @Test
+    void parsePriceToFloat_validPriceString_exactFloatPrice() {
+        String inputPriceString = "3.14";
+
+        assertEquals((float) 3.14, Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
+    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ArithmeticException {
+        String inputPriceString = "99999999999.99";
+
+        assertThrows(ArithmeticException.class, () -> Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
+    void isRepeatedDishName_existingDishName_true() {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        String inputDishName = "chicken rice";
+
+        assertTrue(Parser.isRepeatedDishName(inputDishName, menu));
+    }
+
+    @Test
+    void isRepeatedDishName_nonExistingDishName_false() {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        String inputDishName = "chicken chop";
+
+        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+    }
+
+    @Test
+    void isRepeatedDishName_nullString_nullPointerExceptionThrown() throws NullPointerException {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        assertThrows(NullPointerException.class, () -> Parser.isRepeatedDishName(null, menu));
+    }
+
+    @Test
+    void isRepeatedDishName_emptyDishName_false() {
+        Menu menu = new Menu();
+        Dish dish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(dish);
+
+        String inputDishName = "";
+
+        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+    }
+
+
+    //@@author ShaniceTang
+    @Test
+    void parseCommand_returnViewTotalStockCommandClass() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String userInput = "view_stock";
+
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        ViewTotalStockCommand viewTotalStockCommand = new ViewTotalStockCommand(pantry, ui);
+
+        assertEquals(viewTotalStockCommand.getClass(), outputCommand.getClass());
+    }
+
 
     @Test
     void parseCommand_missingArgsForBuyIngredient_returnErrorMessage() {
@@ -446,6 +523,7 @@ class ParserTest {
         Pantry pantry = new Pantry(ui);
         Sales sales = new Sales();
         CurrentDate currentDate = new CurrentDate();
+
         String userInput = "buy_ingredient";
         ParserUtil parserUtil = new Parser();
         Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
@@ -476,4 +554,5 @@ class ParserTest {
         assertEquals(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                 + BuyIngredientCommand.MESSAGE_USAGE, feedbackToUser);
     }
+    //@@author
 }

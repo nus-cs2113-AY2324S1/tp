@@ -1,5 +1,6 @@
 package seedu.cafectrl.parser;
 
+
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.AddOrderCommand;
 import seedu.cafectrl.command.BuyIngredientCommand;
@@ -13,6 +14,8 @@ import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.command.NextDayCommand;
 import seedu.cafectrl.command.PreviousDayCommand;
+import seedu.cafectrl.command.ShowSalesCommand;
+import seedu.cafectrl.command.ShowSalesByDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 
 import seedu.cafectrl.data.CurrentDate;
@@ -28,6 +31,7 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -69,6 +73,7 @@ public class Parser implements ParserUtil {
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
 
     /**
      * Parse userInput and group it under commandWord and arguments
@@ -129,8 +134,11 @@ public class Parser implements ParserUtil {
         case PreviousDayCommand.COMMAND_WORD:
             return preparePreviousDay(ui, currentDate);
 
-        case "show_sales": //PLACEHOLDER, TO BE IMPLEMENTED BY NAYCHI
-            return new IncorrectCommand("Overall Earnings: $" + sales.getTotalSales(), ui);
+        case ShowSalesCommand.COMMAND_WORD:
+            return prepareShowSales(sales, menu, ui);
+
+        case ShowSalesByDayCommand.COMMAND_WORD:
+            return prepareShowSalesByDay(arguments, ui, sales, menu);
 
         default:
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
@@ -138,7 +146,6 @@ public class Parser implements ParserUtil {
     }
 
     //All prepareCommand Classes
-
     //@@author Cazh1
     /**
      * Prepares the ListMenuCommand
@@ -386,7 +393,7 @@ public class Parser implements ParserUtil {
 
             Order order = new Order(orderedDish, dishQty);
 
-            return new AddOrderCommand(order, ui, pantry, orderList);
+            return new AddOrderCommand(order, ui, pantry, orderList, menu);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
@@ -420,6 +427,46 @@ public class Parser implements ParserUtil {
         return new NextDayCommand(ui, sales, currentDate);
     }
 
+    //@@author NaychiMin
+    /**
+     * Prepares a command to display all sales items.
+     *
+     * @param sale The Sales object containing sales data.
+     * @param menu The Menu object representing the cafe's menu.
+     * @param ui   The Ui object for user interface interactions.
+     * @return A ShowSalesCommand instance for viewing all sales items.
+     */
+    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui) {
+        return new ShowSalesCommand(sale, ui, menu);
+    }
+
+    /**
+     * Prepares a command to display sales items for a specific day.
+     *
+     * @param arguments The arguments containing the day for which sales are to be displayed.
+     * @param ui        The Ui object for user interface interactions.
+     * @param sales     The Sales object containing sales data.
+     * @param menu      The Menu object representing the cafe's menu.
+     * @return A ShowSalesByDayCommand instance for viewing sales items on a specific day.
+     */
+    private static Command prepareShowSalesByDay(String arguments, Ui ui, Sales sales, Menu menu) {
+        final Pattern showSaleByDayPattern = Pattern.compile(SHOW_SALE_BY_DAY_ARGUMENT_STRING);
+        Matcher matcher = showSaleByDayPattern.matcher(arguments.trim());
+
+        if (!matcher.matches()) {
+            return new IncorrectCommand(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE, ui);
+        }
+
+        try {
+            int day = Integer.parseInt(matcher.group(1));
+            return new ShowSalesByDayCommand(day, ui, sales, menu);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.INVALID_DAY_FORMAT, ui);
+        }
+    }
+    //@@author
+
+    //@@author Cazh1
     /**
      * Sets the orderList according to the Day
      *
@@ -432,4 +479,39 @@ public class Parser implements ParserUtil {
         return sales.getOrderList(currentDay);
     }
 
+    //@@author Cazh1
+    /**
+     * Parses the given arguments string to identify task index number.
+     *
+     * @param userInput arguments string to parse as index number
+     * @param command expected String name of the command called
+     * @return the parsed index number
+     * @throws ParseException if no region of the args string could be found for the index
+     * @throws NumberFormatException the args string region is not a valid number
+     */
+    private static int parseArgsAsDisplayedIndex(String userInput, String command)
+            throws ParseException, NumberFormatException {
+        String formattedString = userInput.replace(command, "").trim();
+        return Integer.parseInt(formattedString);
+    }
+
+    //@@author ShaniceTang
+    /**
+     * Extracts the quantity (numeric part) from a given string containing both quantity and unit.
+     * @param qty A string containing both quantity and unit (e.g., "100g").
+     * @return An integer representing the extracted quantity.
+     */
+    public static int extractQty(String qty) {
+        return Integer.parseInt(qty.replaceAll("[^0-9]", ""));
+    }
+
+    //@@author ShaniceTang
+    /**
+     * Extracts the unit (non-numeric part) from a given string containing both quantity and unit.
+     * @param qty A string containing both quantity and unit (e.g., "100g").
+     * @return A string representing the extracted unit.
+     */
+    public static String extractUnit(String qty) {
+        return qty.replaceAll("[0-9]", "");
+    }
 }

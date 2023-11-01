@@ -5,7 +5,6 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -48,9 +47,10 @@ public class Storage {
      * Read and decode pantryStock data from text file and pass it to the menu
      * @return pantryStock with data from the file
      */
-    public Pantry loadPantryStock() throws FileNotFoundException {
+    public Pantry loadPantryStock(Menu menu) throws IOException {
         ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
-        return Decoder.decodePantryStockData(encodedPantryStock);
+        return Decoder.decodePantryStockData(encodedPantryStock, menu);
+        //return new Pantry(ui);
     }
 
     /**
@@ -84,6 +84,7 @@ public class Storage {
     private void saveOrderList(Sales sales) throws IOException {
         this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
+    //@@author
 
     //@@author ziyi105
     /**

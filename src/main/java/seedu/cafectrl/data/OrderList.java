@@ -1,18 +1,25 @@
 package seedu.cafectrl.data;
 
+import seedu.cafectrl.ui.Ui;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * The OrderList class represents a list of orders for a specific day.
+ * It manages the collection of orders and calculates the total cost for the day.
+ */
 public class OrderList {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
+    private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
     private ArrayList<Order> orderList;
     private float totalOrderListCost;
+
+    /**
+     * Constructs an empty OrderList with no orders and zero total order cost.
+     */
     public OrderList() {
         this.orderList = new ArrayList<>();
-        this.totalOrderListCost = 0;
-    }
-    public OrderList(ArrayList<Order> decodedOrderList){
-        this.orderList = decodedOrderList;
         this.totalOrderListCost = 0;
     }
 
@@ -28,9 +35,6 @@ public class OrderList {
     public void removeOrder(int orderID) {
         orderList.remove(orderID);
     }
-    public boolean isEmpty() {
-        return orderList.isEmpty();
-    }
 
     public void addOrder(Order order) {
         orderList.add(order);
@@ -45,16 +49,80 @@ public class OrderList {
         return totalOrderListCost;
     }
 
-    public void printOrderList() {
+    //@@author NaychiMin
+    /**
+     * Prints the order list for a specific day, including dish names, quantities, and total cost prices.
+     *
+     * @param menu The Menu object representing the cafe's menu.
+     */
+    public void printOrderList(Menu menu, Ui ui) {
+        ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
         if (orderList.isEmpty()) {
+            ui.showToUser("No orders for this day.");
             return;
         }
-        System.out.println("\nPrinting Orders");
-        for (int i = 0; i < getSize(); i++) {
-            Order order = getOrder(i);
-            String orderString = order.toString();
-            System.out.println(orderString);
+
+        for (Order order : getOrderList()) {
+            aggregateOrder(order, aggregatedOrders);
         }
-        System.out.println("\nTotal Order cost: $" + dollarValue.format(getTotalOrderListCost()));
+
+        for (Order aggregatedOrder : aggregatedOrders) {
+            ui.showToUser(String.format(HEADER_FORMAT,
+                    aggregatedOrder.getDishName(),
+                    aggregatedOrder.getQuantity(),
+                    aggregatedOrder.totalOrderCost()));
+        }
+
+        ui.showToUser("Total for day: $" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
     }
+
+    /**
+     * Aggregates orders by updating quantities and total order costs for the same dish.
+     *
+     * @param order           The Order object to be aggregated.
+     * @param aggregatedOrders The ArrayList of aggregated orders.
+     */
+    private void aggregateOrder(Order order, ArrayList<Order> aggregatedOrders) {
+        if (order.getIsComplete()) {
+            int index = getIndexByDishName(aggregatedOrders, order.getDishName());
+            aggregatedOrders.get(index).setQuantity(aggregatedOrders.get(index).getQuantity()
+                    + order.getQuantity());
+            aggregatedOrders.get(index).setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost()
+                    + order.getTotalOrderCost());
+        }
+    }
+
+    /**
+     * Finds the index of an order in the aggregated orders list based on the dish name.
+     *
+     * @param aggregatedOrders The ArrayList of aggregated orders.
+     * @param dishName         The dish name to search for.
+     * @return The index of the order with the specified dish name, or -1 if not found.
+     */
+    private int getIndexByDishName(ArrayList<Order> aggregatedOrders, String dishName) {
+        for (int i = 0; i < aggregatedOrders.size(); i++) {
+            Order order = aggregatedOrders.get(i);
+            String orderDishName = order.getDishName();
+            dishName = dishName.trim();
+            if (orderDishName.equalsIgnoreCase(dishName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Calculates the total cost of all orders for a specific day.
+     *
+     * @param orders The ArrayList of orders.
+     * @return The total cost of all orders for the day.
+     */
+    private float calculateTotalCost(ArrayList<Order> orders) {
+        float totalCost = 0;
+        for (Order order : orders) {
+            totalCost += order.getTotalOrderCost();
+        }
+        return totalCost;
+    }
+
 }

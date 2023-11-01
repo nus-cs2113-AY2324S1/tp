@@ -7,7 +7,6 @@ import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
@@ -85,45 +84,33 @@ public class Pantry {
      */
     private int getIndexOfIngredient(String name) {
         for (int i = 0; i < pantryStock.size(); i++) {
-            if (name.equalsIgnoreCase(pantryStock.get(i).getName().trim())) {
+            String ingredientName = pantryStock.get(i).getName().trim();
+            if (name.equalsIgnoreCase(ingredientName)) {
                 return i;
             }
         }
         return -1;
     }
 
-
     //@@author NaychiMin
-    /**
-     * Checks the stock of ingredients and dish availability based on a given order.
-     */
-    public void checkIngredientsStock(){
-        //the dish variable and dishIngredients array will be removed
-        // when order class is implemented as it will pass in dishIngredients
-        String dish = "Chicken Rice";
-        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish);
-        decreaseIngredientsStock(dishIngredients);
-        calculateDishAvailability();
-    }
-
     /**
      * Decreases the stock of ingredients based on the given dish order.
      *
      * @param dishIngredients Array of ingredients used to make the dish order.
      */
-    public void decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
-        //pantryStock = retrieveStockFromStorage();
-
+    public boolean isDishCooked(ArrayList<Ingredient> dishIngredients) {
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
             int finalQuantity = stockQuantity-usedQuantity;
+            if(finalQuantity < 0) {
+                return false;
+            }
             usedIngredientFromStock.setQty(finalQuantity);
         }
-        //TODO: store pantryStock to storage
-
+        return true;
     }
 
     /**
@@ -142,10 +129,10 @@ public class Pantry {
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
-    public void calculateDishAvailability(){
-        for (Dish dish : menuItems) {
+    public void calculateDishAvailability(Menu menu) {
+        for (Dish dish : menu.getMenuItemsList()) {
             ui.showToUser("Dish: " + dish.getName());
-            int numberOfDishes = calculateMaxDishes(dish);
+            int numberOfDishes = calculateMaxDishes(dish, menu);
             ui.showDishAvailability(numberOfDishes);
         }
     }
@@ -155,13 +142,12 @@ public class Pantry {
      *
      * @param dish The dish being ordered.
      */
-    public int calculateMaxDishes(Dish dish) {
+    public int calculateMaxDishes(Dish dish, Menu menu) {
         int maxNumofDish = Integer.MAX_VALUE;
-        //This function will be replaced by the function used
-        //to retrieve dishIngredients when order class is implemented
-        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName());
+        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
 
         for (Ingredient dishIngredient : dishIngredients) {
+            System.out.println(dishIngredient);
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
@@ -205,43 +191,23 @@ public class Pantry {
         ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededIngredient);
     }
 
-
     /**
      * Retrieves the ingredients for a specific ordered dish.
      *
      * @param orderedDish The name of the ordered dish.
      * @return The list of ingredients for the ordered dish.
      */
-    public ArrayList<Ingredient> retrieveIngredientsForDish(String orderedDish){
-        //function will be removed once order class is implemented
-        ArrayList<Dish> menuItems = dummyData();
+    public ArrayList<Ingredient> retrieveIngredientsForDish(String orderedDish, Menu menu) {
         ArrayList<Ingredient> dishIngredients = new ArrayList<>();
 
         //retrieving the ingredients for orderedDish
-        for (Dish dish : menuItems) {
+        for (Dish dish : menu.getMenuItemsList()) {
             if (dish.getName().equals(orderedDish)) {
                 dishIngredients.addAll(dish.getIngredients());
                 break;
             }
         }
         return dishIngredients;
-    }
-
-    /**
-     * Provides dummy data for menu items. This function will be removed when storage is implemented.
-     *
-     * @return The list of dummy menu items.
-     */
-    private ArrayList<Dish> dummyData() {
-        //dummy data for pantry stock which will be replaced with storage data
-        menuItems = new ArrayList<>();
-        menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 300, "g"),
-                        new Ingredient("Chicken", 100, "g"))), 8.0F));
-        menuItems.add(new Dish("Chicken Sandwich",
-                new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 50, "g"),
-                        new Ingredient("Chicken", 50, "g"))), 5.0F));
-        return menuItems;
     }
 }
 
