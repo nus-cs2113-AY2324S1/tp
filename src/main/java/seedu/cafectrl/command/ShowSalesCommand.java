@@ -6,6 +6,7 @@ import seedu.cafectrl.ui.Ui;
 
 public class ShowSalesCommand extends Command {
     public static final String COMMAND_WORD = "show_sales";
+    public static final String MESSAGE_USAGE = "To show sales for all days:\n" + COMMAND_WORD;
     private Sales sales;
     private Ui ui;
     private Menu menu;

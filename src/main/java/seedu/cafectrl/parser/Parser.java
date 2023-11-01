@@ -515,7 +515,8 @@ public class Parser implements ParserUtil {
         Matcher matcher = showSaleByDayPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE
+                    + ShowSalesByDayCommand.MESSAGE_USAGE, ui);
         }
 
         try {
