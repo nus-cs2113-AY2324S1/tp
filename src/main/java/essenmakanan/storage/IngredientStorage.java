@@ -14,14 +14,12 @@ import java.util.Scanner;
 public class IngredientStorage {
 
     private String dataPath;
-    private String dataDirectory;
 
     private ArrayList<Ingredient> ingredientListPlaceholder;
 
-    public IngredientStorage(String path, String directory) {
+    public IngredientStorage(String path) {
         ingredientListPlaceholder = new ArrayList<>();
         dataPath = path;
-        dataDirectory = directory;
     }
 
     public void saveData(ArrayList<Ingredient> ingredients) throws IOException  {

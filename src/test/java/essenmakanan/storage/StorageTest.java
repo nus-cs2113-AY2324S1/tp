@@ -14,29 +14,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StorageTest {
 
-    private static String DATA_TEST_DIRECTORY = "src/test/data";
     private static String DATA_INVALID_PATH = "src/test/data/invalid.txt";
     private static String DATA_RECIPE_TEST_PATH = "src/test/data/recipes.txt";
     private static String DATA_INGREDIENT_TEST_PATH = "src/test/data/ingredients.txt";
 
     @Test
     public void accessIngredientDatabase_invalidPath_throwsEssenFileNotFoundException() {
-        IngredientStorage ingredientStorage = new IngredientStorage(DATA_INVALID_PATH
-                , DATA_TEST_DIRECTORY);
+        IngredientStorage ingredientStorage = new IngredientStorage(DATA_INVALID_PATH);
         assertThrows(FileNotFoundException.class, ingredientStorage::restoreSavedData);
     }
 
     @Test
     public void accessRecipeDatabase_invalidPath_throwsEssenFileNotFoundException() {
-        RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_PATH
-                , DATA_TEST_DIRECTORY);
+        RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_PATH);
         assertThrows(FileNotFoundException.class, recipeStorage::restoreSavedData);
     }
 
     @Test
     public void restoreSavedIngredients_storedIngredients_returnsFilledIngredientList() throws Exception {
-        IngredientStorage ingredientStorage = new IngredientStorage(DATA_INGREDIENT_TEST_PATH
-                , DATA_TEST_DIRECTORY);
+        IngredientStorage ingredientStorage = new IngredientStorage(DATA_INGREDIENT_TEST_PATH);
         IngredientList ingredients = new IngredientList(ingredientStorage.restoreSavedData());
 
         assertEquals("bread", ingredients.getIngredients().get(0).getName());
@@ -54,7 +50,7 @@ public class StorageTest {
 
     @Test
     public void restoreSavedRecipes_storedRecipes_returnFilledRecipeList() throws Exception {
-        RecipeStorage recipeStorage = new RecipeStorage(DATA_RECIPE_TEST_PATH, DATA_TEST_DIRECTORY);
+        RecipeStorage recipeStorage = new RecipeStorage(DATA_RECIPE_TEST_PATH);
         RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
 
         Recipe recipe = recipes.getRecipe(0);

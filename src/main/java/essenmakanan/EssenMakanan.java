@@ -62,8 +62,8 @@ public class EssenMakanan {
     public void setup() {
         recipes = new RecipeList();
         parser = new Parser();
-        ingredientStorage = new IngredientStorage(DATA_INGREDIENT_PATH, DATA_DIRECTORY);
-        recipeStorage = new RecipeStorage(DATA_RECIPE_PATH, DATA_DIRECTORY);
+        ingredientStorage = new IngredientStorage(DATA_INGREDIENT_PATH);
+        recipeStorage = new RecipeStorage(DATA_RECIPE_PATH);
 
         try {
             ingredients = new IngredientList(ingredientStorage.restoreSavedData());

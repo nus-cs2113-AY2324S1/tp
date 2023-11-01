@@ -15,14 +15,12 @@ import java.util.Scanner;
 public class RecipeStorage {
 
     private String dataPath;
-    private String dataDirectory;
 
     private ArrayList<Recipe> recipeListPlaceholder;
 
-    public RecipeStorage(String path, String directory) {
+    public RecipeStorage(String path) {
         recipeListPlaceholder = new ArrayList<>();
         dataPath = path;
-        dataDirectory = directory;
     }
 
     public String convertToString(Recipe recipe) {
