@@ -22,7 +22,7 @@ public class AddRecipeCommandTest {
     }
 
     @Test
-    public void addWithTitle_Steps_Tags_Test() {
+    public void addWithTitleStepsTags_validInput() {
         String userInput = "r/bread t/1 s/buy ingredients s/store ingredients " +
             "t/2 s/wash the ingredients s/cut the ingredients t/4 s/cook ";
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
@@ -39,11 +39,17 @@ public class AddRecipeCommandTest {
         assertEquals("cut the ingredients", step4);
         assertEquals("cook", step5);
 
-        assertEquals(Tag.NIGHT_BEFORE, recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(0).getTag());
-        assertEquals(Tag.NIGHT_BEFORE, recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(1).getTag());
-        assertEquals(Tag.MORNING_OF_COOKING, recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(2).getTag());
-        assertEquals(Tag.MORNING_OF_COOKING, recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(3).getTag());
-        assertEquals(Tag.ACTUAL_COOKING, recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(4).getTag());
+        Tag tag1 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(0).getTag();
+        Tag tag2 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(1).getTag();
+        Tag tag3 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(2).getTag();
+        Tag tag4 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(3).getTag();
+        Tag tag5 = recipeList.getRecipeByIndex(0).getRecipeSteps().getStepByIndex(4).getTag();
+
+        assertEquals(Tag.NIGHT_BEFORE, tag1);
+        assertEquals(Tag.NIGHT_BEFORE, tag2);
+        assertEquals(Tag.MORNING_OF_COOKING, tag3);
+        assertEquals(Tag.MORNING_OF_COOKING, tag4);
+        assertEquals(Tag.ACTUAL_COOKING, tag5);
         recipeList.getRecipeByIndex(0).viewTimeLine();
 
     }
