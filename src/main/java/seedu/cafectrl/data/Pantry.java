@@ -100,10 +100,13 @@ public class Pantry {
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
+            if (usedIngredientFromStock == null) {
+                return false;
+            }
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
-            int finalQuantity = stockQuantity-usedQuantity;
-            if(finalQuantity < 0) {
+            int finalQuantity = stockQuantity - usedQuantity;
+            if (finalQuantity < 0) {
                 return false;
             }
             usedIngredientFromStock.setQty(finalQuantity);
@@ -123,18 +126,23 @@ public class Pantry {
                 .findFirst()
                 .orElse(null);
     }
-
+    //@@author NaychiMin
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
     public void calculateDishAvailability(Menu menu) {
-        for (Dish dish : menu.getMenuItemsList()) {
+        int menuSize = menu.getSize();
+        for (int i = 0; i < menuSize; i++) {
+            Dish dish = menu.getDishFromId(i);
             ui.showToUser("Dish: " + dish.getName());
             int numberOfDishes = calculateMaxDishes(dish, menu);
             ui.showDishAvailability(numberOfDishes);
+            if (i != menuSize - 1) {
+                ui.printLine();
+            }
         }
     }
-
+    //@@author
     /**
      * Calculates the number of dishes that can be prepared with the available ingredients.
      *
@@ -145,7 +153,6 @@ public class Pantry {
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
 
         for (Ingredient dishIngredient : dishIngredients) {
-            System.out.println(dishIngredient);
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 

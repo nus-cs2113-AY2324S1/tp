@@ -8,10 +8,7 @@ import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.parser.ParserUtil;
 import seedu.cafectrl.storage.Storage;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * CafeCtrl application's entry point.
@@ -29,18 +26,15 @@ public class CafeCtrl {
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-    private CafeCtrl() throws IOException {
-        this.ui = new Ui();
-        this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
-        this.storage = new Storage(this.ui);
-        this.menu = this.storage.loadMenu();
-        this.pantry = this.storage.loadPantryStock(menu);
-        this.sales = this.storage.loadOrderList(menu);
-        currentDate = new CurrentDate();
-    }
 
-    private void setup() {
-        ui.showWelcome();
+    private CafeCtrl() {
+        this.ui = new Ui();
+        this.storage = new Storage(this.ui);
+        this.currentDate = new CurrentDate();
+        this.sales = new Sales();
+        this.menu = this.storage.loadMenu();
+        this.pantry = this.storage.loadPantryStock();
+        this.sales = this.storage.loadOrderList(menu);
     }
     
     /**
@@ -49,7 +43,8 @@ public class CafeCtrl {
      * <p> This method consistently receives user input, parses commands, and executes the respective command
      * until the user enters a "bye" command, terminating the application.</p>
      */
-    private void run() throws IOException {
+    private void run() {
+        ui.showWelcome();
         ui.printLine();
         do {
             try {
@@ -63,12 +58,12 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
+
         this.storage.saveAll(this.menu, this.sales, this.pantry);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         CafeCtrl cafeCtrl = new CafeCtrl();
-        cafeCtrl.setup();
         cafeCtrl.run();
     }
 
