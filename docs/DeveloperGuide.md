@@ -220,7 +220,7 @@ public abstract class Cashflow {
 }
 ```
 #### Step 2
-When the Financial Planner is started again in the future, the date of startup would be collected.
+When the Financial Planner is started again in the future, the date of startup would be obtained from the system.
 
 After loading existing saved cashflows from data.txt, the program will check for cashflows that are set to be recurring and has not recurred.
 
