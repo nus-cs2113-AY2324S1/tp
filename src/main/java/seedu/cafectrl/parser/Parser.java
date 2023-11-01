@@ -31,6 +31,7 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -177,8 +178,8 @@ public class Parser implements ParserUtil {
         try {
             int dishIndexGroup = 1;
             int newPriceGroup = 2;
-            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup));
-            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup));
+            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup).trim());
+            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
@@ -188,6 +189,11 @@ public class Parser implements ParserUtil {
         } catch (ParserException e) {
             return new IncorrectCommand(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
         }
+    }
+
+    private static boolean isPriceValid(float newPrice) {
+        String newPriceInString = String.valueOf(newPrice);
+        return newPriceInString.matches(".*\\.\\d{3,}");
     }
 
     //@@author DextheChik3n
