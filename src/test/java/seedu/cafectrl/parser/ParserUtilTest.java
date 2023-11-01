@@ -64,4 +64,19 @@ public class ParserUtilTest {
 
         assertFalse(ParserUtil.isRepeatedDishName(inputDishName, menu));
     }
+
+    @Test
+    void isNameLengthInvalid_moreThanMaxLengthString_true() {
+        assertTrue(ParserUtil.isNameLengthInvalid("this string is more than 35 characters"));
+    }
+
+    @Test
+    void isNameLengthInvalid_lessThanMaxLengthString_false() {
+        assertFalse(ParserUtil.isNameLengthInvalid("this str is less than 35 chars"));
+    }
+
+    @Test
+    void isNameLengthInvalid_nullString_nullPointerExceptionThrown() throws NullPointerException {
+        assertThrows(NullPointerException.class, () ->ParserUtil.isNameLengthInvalid(null));
+    }
 }
