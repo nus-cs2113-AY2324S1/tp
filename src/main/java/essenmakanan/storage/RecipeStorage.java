@@ -15,13 +15,15 @@ import java.util.Scanner;
 
 public class RecipeStorage {
 
-    private final String DATA_PATH = "data/recipes.txt";
-    private final String DATA_DIRECTORY = "data";
+    private String dataPath = "data/recipes.txt";
+    private String dataDirectory = "data";
 
     private ArrayList<Recipe> recipeListPlaceholder;
 
-    public RecipeStorage() {
+    public RecipeStorage(String path, String directory) {
         recipeListPlaceholder = new ArrayList<>();
+        dataPath = path;
+        dataDirectory = directory;
     }
 
     public String convertToString(Recipe recipe) {
@@ -31,7 +33,7 @@ public class RecipeStorage {
     }
 
     public void saveData(ArrayList<Recipe> recipes) throws IOException {
-        FileWriter writer = new FileWriter(DATA_PATH, false);
+        FileWriter writer = new FileWriter(dataPath, false);
         String dataString;
 
         for (Recipe recipe : recipes) {
@@ -55,14 +57,14 @@ public class RecipeStorage {
 
     public ArrayList<Recipe> restoreSavedData() {
         try {
-            File file = new File(DATA_PATH);
+            File file = new File(dataPath);
             Scanner scan = new Scanner(file);
 
             while (scan.hasNext()) {
                 createNewData(scan);
             }
         } catch (FileNotFoundException exception) {
-            EssenFileNotFoundException.handleFileNotFoundException(DATA_DIRECTORY, DATA_PATH);;
+            EssenFileNotFoundException.handleFileNotFoundException(dataDirectory, dataPath);;
         }
 
         return recipeListPlaceholder;

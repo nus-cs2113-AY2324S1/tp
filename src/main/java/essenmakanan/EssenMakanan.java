@@ -14,19 +14,18 @@ import essenmakanan.ui.Ui;
 
 import java.io.IOException;
 import java.util.Scanner;
-//import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 public class EssenMakanan {
+
+    private final String DATA_INGREDIENT_PATH = "data/ingredients.txt";
+    private final String DATA_RECIPE_PATH = "data/recipes.txt";
+    private final String DATA_DIRECTORY = "data";
 
     private RecipeList recipes;
     private IngredientList ingredients;
     private Parser parser;
     private IngredientStorage ingredientStorage;
     private RecipeStorage recipeStorage;
-
-    private Logger logger = Logger.getLogger("app log");
 
     public void run() {
         Ui.start();
@@ -61,8 +60,8 @@ public class EssenMakanan {
     public void setup() {
         recipes = new RecipeList();
         parser = new Parser();
-        ingredientStorage = new IngredientStorage();
-        recipeStorage = new RecipeStorage();
+        ingredientStorage = new IngredientStorage(DATA_INGREDIENT_PATH, DATA_DIRECTORY);
+        recipeStorage = new RecipeStorage(DATA_RECIPE_PATH, DATA_DIRECTORY);
         ingredients = new IngredientList(ingredientStorage.restoreSavedData());
         recipes = new RecipeList(recipeStorage.restoreSavedData());
     }
