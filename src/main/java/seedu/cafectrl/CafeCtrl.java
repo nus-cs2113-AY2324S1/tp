@@ -34,24 +34,13 @@ public class CafeCtrl {
 
     private CafeCtrl() {
         this.ui = new Ui();
-        this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
+        this.ui.showToUser(System.lineSeparator(), Messages.INITIALISE_STORAGE_MESSAGE, System.lineSeparator());
         this.storage = new Storage(this.ui);
         this.currentDate = new CurrentDate();
         this.sales = new Sales();
-
-        try {
-            this.menu = this.storage.loadMenu();
-            this.pantry = this.storage.loadPantryStock();
-            this.sales = this.storage.loadOrderList(menu);
-        } catch (FileNotFoundException e) {
-            System.out.println("print error for FileNotFoundException");
-        } catch (IOException e) {
-            System.out.println("print error for IOException");
-        }
-    }
-
-    private void setup() {
-        ui.showWelcome();
+        this.menu = this.storage.loadMenu();
+        this.pantry = this.storage.loadPantryStock();
+        this.sales = this.storage.loadOrderList(menu);
     }
     
     /**
@@ -61,6 +50,7 @@ public class CafeCtrl {
      * until the user enters a "bye" command, terminating the application.</p>
      */
     private void run() {
+        ui.showWelcome();
         ui.printLine();
         do {
             try {
@@ -75,16 +65,11 @@ public class CafeCtrl {
             }
         } while (!command.isExit());
 
-        try {
-            this.storage.saveAll(this.menu, this.sales, this.pantry);
-        } catch (IOException e) {
-            System.out.println("print error for IOException");
-        }
+        this.storage.saveAll(this.menu, this.sales, this.pantry);
     }
 
     public static void main(String[] args) {
         CafeCtrl cafeCtrl = new CafeCtrl();
-        cafeCtrl.setup();
         cafeCtrl.run();
     }
 

@@ -3,6 +3,7 @@ package seedu.cafectrl.storage;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
  */
 public class Storage {
     protected FileManager fileManager;
+    protected Ui ui;
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
+        this.ui = ui;
     }
 
     //@@author ShaniceTang
@@ -25,12 +28,15 @@ public class Storage {
      * Loads menu data from a text file, decodes it, and returns it as a Menu object.
      *
      * @return A Menu object containing data from the file.
-     * @throws IOException if the file is not found in the specified file path.
      */
-    public Menu loadMenu() throws IOException {
-        fileManager.openTextFile(FilePath.MENU_FILE_PATH);
-        ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-        return Decoder.decodeMenuData(encodedMenu);
+    public Menu loadMenu() {
+        try {
+            ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
+            return Decoder.decodeMenuData(encodedMenu);
+        } catch (FileNotFoundException e) {
+            ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            return new Menu();
+        }
     }
 
     /**
@@ -48,9 +54,14 @@ public class Storage {
      * Read and decode pantryStock data from text file and pass it to the menu
      * @return pantryStock with data from the file
      */
-    public Pantry loadPantryStock() throws FileNotFoundException {
-        ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
-        return Decoder.decodePantryStockData(encodedPantryStock);
+    public Pantry loadPantryStock() {
+        try {
+            ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
+            return Decoder.decodePantryStockData(encodedPantryStock);
+        } catch (FileNotFoundException e) {
+            ui.showToUser(ErrorMessages.PANTRY_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            return new Pantry(ui);
+        }
     }
 
     /**
@@ -67,12 +78,15 @@ public class Storage {
      * Loads order lists from a text file, decodes it, and returns it as a Sales object.
      *
      * @return An OrderList object containing data from the file.
-     * @throws IOException if the file is not found in the specified file path.
      */
-    public Sales loadOrderList(Menu menu) throws IOException {
-        fileManager.openTextFile(FilePath.ORDERS_FILE_PATH);
-        ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
-        return Decoder.decodeSales(encodedOrderList, menu);
+    public Sales loadOrderList(Menu menu) {
+        try {
+            ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
+            return Decoder.decodeSales(encodedOrderList, menu);
+        } catch (FileNotFoundException e) {
+            ui.showToUser(ErrorMessages.ORDER_LIST_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            return new Sales();
+        }
     }
 
     /**
@@ -91,13 +105,16 @@ public class Storage {
      * @param menu menu from current session
      * @param sales sale object from current session
      * @param pantry pantry from current session
-     * @throws IOException if the file is not found in the specified file path
      */
-    public void saveAll(Menu menu, Sales sales, Pantry pantry) throws IOException {
-        saveMenu(menu);
-        saveOrderList(sales);
-        saveMenu(menu);
-        savePantryStock(pantry);
+    public void saveAll(Menu menu, Sales sales, Pantry pantry) {
+        try {
+            saveMenu(menu);
+            saveOrderList(sales);
+            saveMenu(menu);
+            savePantryStock(pantry);
+        } catch (IOException e) {
+            ui.showToUser(e.getMessage());
+        }
     }
 
 }
