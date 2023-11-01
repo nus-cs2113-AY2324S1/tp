@@ -2,11 +2,32 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+We first give acknowledgement to Module Coordinator, Dr Akshay Narayan, and Teaching Assistant, Aditi Chadha for guidance and supervision over the KaChinnnng project.
+
+We utilised the following resources to aid us in the development of KaChinnnng:
+-  [tp project](https://github.com/nus-cs2113-AY2324S1/tp) of the nus-cs2113-AY2324S1 organisation
+-  [addressbook-level2](https://github.com/se-edu/addressbook-level2) & [addressbook-level3](https://github.com/se-edu/addressbook-level3) project by SE-EDU largely inspired the format and coding style of KaChinnnng.
+
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+Below are the design and implementation details of KaChinnnng.
+
+### Design
+
+The architectural diagram of KaChinnnng is as follows:
+![ArchitectureDiagram.png](..%2Fimages%2FArchitectureDiagram.png)
+
+The kaChinnnng program will first enter the `run` state where the `storage` class will be accessed and data will be retrieved if the application has been used before.
+
+Next, the `User` will input various `commands` via the `Ui` class. The `commands` will then be parsed by the `Parser` class and the relevant `managers` will be called to execute the `commands`.
+
+Once the `User` inputs has been successfully executed, `commands` will make use of the `Ui` class to output the relevant information to the user.
+
+When the `User` exits the program, the `storage` class will be called to save the data to the local storage.
+
+`Storage` will read from the local storage when the program is run again.
+
 ### IncomeManager
 
 the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList` and `Ui`.
@@ -16,7 +37,7 @@ the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList
 3. `IncomeManager` then adds the `Income` object to the `IncomeList`.
 4. `IncomeManager` then returns a `String` to `Ui` to be printed out to the user.
 
-![incomeManager_sequence_diagram.png](..%2Fimages%2FincomeManager_sequence_diagram.png)
+![IncomeManager_seqdiagram.drawio.png](..%2Fimages%2FIncomeManager_seqdiagram.drawio.png)
 
 ### ExpenseManager
 
@@ -70,25 +91,114 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 
 ## User Stories
 
-| Version | As a ... | I want to ...                      | So that I can ...                                      |
-|---------|----------|------------------------------------|--------------------------------------------------------|
-| v1.0    |new user| see usage instructions             | refer to them when I forget how to use the application |
-| v1.0    |user| add new income entry               | track all my incomes                                   |
-| v1.0    |user| add new expense entry              | track all of my expenses                               |
-| v1.0    |user| delete income entry                | remove incomes that I no longer want to track          |
-| v1.0    |user| delete expense entry               | remove expenses that I no longer want to track         |
-| v1.0    |user| list both income and expense entry | view all my expenses and incomes                       |
-| v1.0    |user| check my balace                    | better bugdet my expenditures                          |
-
+| Version | As a ... | I want to ...                      | So that I can ...                                                     |
+|---------|----------|------------------------------------|-----------------------------------------------------------------------|
+| v1.0    |new user| see usage instructions             | refer to them when I forget how to use the application                |
+| v1.0    |user| add new income entry               | track all my incomes                                                  |
+| v1.0    |user| add new expense entry              | track all of my expenses                                              |
+| v1.0    |user| delete income entry                | remove incomes that I no longer want to track                         |
+| v1.0    |user| delete expense entry               | remove expenses that I no longer want to track                        |
+| v1.0    |user| list both income and expense entry | view all my expenses and incomes                                      |
+| v1.0    |user| check my balace                    | better bugdet my expenditures                                         |
+| v2.0    |user| search for past inputs             | better find and track my past expenses                                |
+| v2.0    |user| be able to change the currency     | better track my expenses in different currencies when i am travelling |
+| v2.0    |user| be able to edit my inputs          | make necessary changes to my inputs when a mistake is made            |
+| v2.0    |user| be able to save and load my inputs | save my inputs so that I can access them the next time I use the app  |
+| v2.0    |user| reset my inputs                    | start afresh                            |
 
 ## Non-Functional Requirements
+- Domain rules:
+    - The application should not crash under normal circumstances.
+    - Dates can be entered in the format of dd/mmm/yyyy or dd/mm/yyyy and should not be in the future.
+    - Amount added should be in the format of 0.00 and should not be negative.
+    - The application only accepts commands in English.
+    - Users should refrain from using special characters in the description/category/type/date field.
+    - Users should refrain from tampering with the storage and log files as it may result in unexpected issues.
+ 
+- Constraints:
+  - the total number of entries for Expense and Income should not exceed 10 000 each.
+  - the amount input should be less than 1 billion.
 
-{Give non-functional requirements}
+- Technical Requirements:
+  - The application must be able to run on Windows, MacOS and Linux.
+- Technical Requirements:
+  - KaChinnnng should be able to be used by users of all skill levels.
+- Others:
+  - Arguments should follow the format specified in the user guide.
+  - Should the arguments not be in  the provided format, the application will not execute the command.
+
+
 
 ## Glossary
 
-* *glossary item* - Definition
+| Term    | Definition |
+|---------|------------|
+| Income  | debit entry of user|
+| Expense | credit entry of user|
+| Balance | Net Amount|
+| Ui      | User Interface, where user inputs commands and sees output|
+| Parser  | Parses user input into commands|
+
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are the instructions for manual testing of KaChinnnng.
+
+### Launching and exiting the application
+1. lauching the application
+   1. download the jar file from the release page.
+   2. open a terminal and navigate to the directory where the jar file is located.
+   3. run the command `java -jar KaChinnnng.jar`
+2. exiting the application
+   1. type `exit` in the command box and press enter.
+   2. the application will exit.
+
+### Adding an income/expense
+1. adding an income/expense
+   1. Test case:
+   - To add an income: `add income /de <description> /date <DD/MM/YYYY> /amt <amount>`
+   - To add an expense: `add expense /cat food /type lunch /de sushi /date 31/10/2023 /amt 20.00`
+   - /type for expense includes (`UNDEFINED`, `BREAKFAST`, `LUNCH`, `DINNER`) for the `food` category, (`TRAIN`, `BUS`, `TAXI`, `FUEL`, `UNDEFINED`) for the `TRANSPORT` category and (`UNDEFINED`,  `WATER`, `ELECTRICITY`, `GAS`) for the `UTILITIES` category.
+   - Expected outcome: the income/expense will be added to the list and the balance will be updated accordingly and the user will be notified.
+   
+   2. Test case:
+    - income: `add income /de salary`
+    - expense: `add expense /cat food /type lunnch`
+    - Expected outcome: the income/expense will not be added to the list and the user will be notified with an error message.
+   
+    3. Test case:
+   - Other invalid test cases includes:
+   - income: `add income /de salary /date 31/11/2023 /amt 5000.00` where the date is in the future.
+   - income: `add income /de salary /date 31-10-2023 /amt 5000.00` where the date is in the wrong format.
+   - income: `add income /de salary /date 31/10/2023 /amt -5000.00` where the amount is negative.
+   - expense: `add expense /cat food /type lunch /de lunch  /amt 5000.00` where there is missing fields
+
+### Deleting an income/expense
+
+
+
+
+### Editing an income/expense
+
+
+
+### Listing all incomes/expenses
+
+
+
+
+### Finding an income/expense
+1. Finding income/expense:
+   1. Pre-requisite: list should already contain income/expense. this can be checked via `list income`, `list expense` or `list`
+   2. Test case:
+   - For income: `find /t income /de salary`
+   - For expense: `find /t expense /cat food /de sushi /date 31/10/2023`
+   - Expected outcome: all income with description containing "salary" should be listed. all expense containing "food" in the category, "sushi" in the description and "31/10/2023" in the date should be listed.
+   
+    3. Test case: If there is no matching income/expenses
+   - Income: `find /t income /de bonus`
+   - Expense: `find /t expense /cat food /de burger /date 31/10/2023`
+   - expected: no income/expense should be listed.
+
+
+### Currency

@@ -114,8 +114,6 @@ public class Duke {
                 Ui.printIncomeAddedMessage(newIncome);
             } catch (KaChinnnngException e) {
                 Ui.showLineDivider();
-                System.out.println(e.getMessage());
-                Ui.showLineDivider();
                 throw e;
             }
             break;
