@@ -37,7 +37,7 @@ public class MarkGoalCommand extends Command {
     public void execute() {
         Goal goal = WishList.getInstance().list.get(index-1);
         goal.markAsDone();
-        Ui.getInstance().showMessage("You have achieved " + goal + System.lineSeparator() +"Congratulations!");
+        Ui.getInstance().showMessage("You have achieved " + goal + System.lineSeparator() + "Congratulations!");
         CashflowList.getInstance().addExpense(goal.getAmount(), ExpenseType.GOAL, 0, goal.getLabel());
     }
 }
