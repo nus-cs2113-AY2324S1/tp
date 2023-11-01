@@ -50,6 +50,6 @@ class FindWorkoutCommandTest {
 
     @Test
     public void testHelp(){
-        assertEquals(FindMealCommand.HELP, new FindWorkoutCommand("").getHelp());
+        assertEquals(FindWorkoutCommand.HELP, new FindWorkoutCommand("").getHelp());
     }
 }
