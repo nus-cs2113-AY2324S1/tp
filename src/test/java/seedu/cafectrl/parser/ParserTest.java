@@ -514,4 +514,23 @@ class ParserTest {
         assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT
                 + BuyIngredientCommand.MESSAGE_USAGE, feedbackToUser);
     }
+
+    @Test
+    void parseCommand_invalidArgsForBuyIngredient_returnErrorMessage() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        String userInput = "buy_ingredient ingredient/rice qty/5 cups";
+        ParserUtil parserUtil = new Parser();
+        Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
+                + BuyIngredientCommand.MESSAGE_USAGE, feedbackToUser);
+    }
 }
