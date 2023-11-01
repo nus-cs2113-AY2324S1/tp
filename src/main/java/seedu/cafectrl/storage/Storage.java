@@ -26,20 +26,19 @@ public class Storage {
      * Read and decode menu data from text file and pass it to the menu
      * @return menu with data from the file
      */
-    public Menu loadMenu() {
-        // ArrayList<String> encodedMenu = this.fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-        // return Decoder.decodeMenuData(encodedMenu);
-        return new Menu();
-    }
+    public Menu loadMenu() throws IOException {
+        fileManager.openTextFile(FilePath.MENU_FILE_PATH);    ArrayList<String> menuFromTextFile = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
+        return Decoder.decodeMenuData(menuFromTextFile);}
+
 
     //@@author ziyi105
     /**
      * Read and decode pantryStock data from text file and pass it to the menu
      * @return pantryStock with data from the file
      */
-    public Pantry loadPantryStock() {
+    public Pantry loadPantryStock(Menu menu) {
         ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
-        return Decoder.decodePantryStockData(encodedPantryStock);
+        return Decoder.decodePantryStockData(encodedPantryStock, menu);
         //return new Pantry(ui);
     }
 

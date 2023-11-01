@@ -6,11 +6,13 @@ import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
+import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The Decoder class offers methods to interpret string representations from text files,
@@ -19,15 +21,41 @@ import java.util.ArrayList;
  */
 public class Decoder {
 
-    private static final String DIVIDER = " | ";
+    private static final String DIVIDER = "\\| ";
     private static final Ui ui = new Ui();
 
+    public static Menu decodeMenuData(ArrayList<String> textLines) {
+        ArrayList<Dish> menuDishList = new ArrayList<>();
+        for(String dishString : textLines) {
+            String[] dishStringArray = dishString.split(" \\| ");
+            String dishName = dishStringArray[0];
+            float dishPrice = Float.parseFloat(dishStringArray[1]);
+            String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
+            ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
+            menuDishList.add(new Dish(dishName, ingredientsList, dishPrice));
+        }
+        return new Menu(menuDishList);
+    }
+
+    private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) {
+        ArrayList<Ingredient> ingredientList = new ArrayList<>();
+        for(String ingredientString : ingredientsStringArray) {
+            String[] array = ingredientString.split(" ");
+            String name = array[0];
+            int qty = Integer.parseInt(array[1]);
+            String unit = array[2];
+            ingredientList.add(new Ingredient(name, qty, unit));
+        }
+        return ingredientList;
+    }
+
     //@@author ziyi105
-    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
+    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock, Menu menu) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
+        ArrayList<Dish> menuItems = menu.getMenuItemsList();
 
         if (encodedPantryStock.isEmpty()) {
-            return new Pantry(ui);
+            return new Pantry(ui, menuItems);
         }
         for (String encodedData : encodedPantryStock) {
             String[] decodedData = encodedData.split(" ");
@@ -39,7 +67,7 @@ public class Decoder {
                 pantryStock.add(ingredient);
             }
         }
-        return new Pantry(ui, pantryStock);
+        return new Pantry(ui, pantryStock, menuItems);
     }
 
     private static boolean isValidPantryStockFormat(String[] decodedPantryStock) {
@@ -76,8 +104,9 @@ public class Decoder {
             String dishName = orderData[1].trim();
             int quantity = Integer.parseInt(orderData[2].trim());
             float totalOrderCost = Float.parseFloat(orderData[3].trim());
+            boolean isComplete = "true".equals(orderData[4].trim());
 
-            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost);
+            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
 
             //increase size of orderLists if needed
             //this can be used in the event that the text file's first order is not day 0
