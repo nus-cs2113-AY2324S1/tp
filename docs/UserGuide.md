@@ -435,6 +435,49 @@ Expected outcome:
 || The current cart has been checked out.
 ```
 
+### `setthreshold` - Set the threshold quantity for a drug
+
+Set the threshold quantity for a specific drug in your inventory. The threshold quantity is the minimum quantity of the
+drug that you want to keep in stock.
+
+Format:
+
+setthreshold /n [Drug Name] /tq [Threshold Quantity]
+
+Example of usage:
+
+`setthreshold /n Doliprane /tq 50
+`
+
+Expected outcome:
+
+```
+|| Threshold quantity set for Doliprane: 50
+```
+
+### `listthreshold` - List all drugs and their threshold levels
+
+Retrieve a list of all drugs in your inventory and their corresponding threshold levels. The threshold level is the
+minimum quantity of each drug that you want to keep in stock.
+
+Format:
+
+listthreshold
+
+Example of usage:
+
+`listthreshold
+`
+
+Expected outcome:
+
+```
+|| 1. Doliprane: 50
+|| 
+|| Listed all drugs by threshold level in the inventory.
+
+```
+
 ## FAQ
 
 **Q**: Can i register with blank username and password
