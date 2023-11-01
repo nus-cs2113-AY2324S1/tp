@@ -495,8 +495,9 @@ class ParserTest {
 
         assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
     }
-    //@@author
 
+
+    //@@author ShaniceTang
     @Test
     void parseCommand_returnViewTotalStockCommandClass() {
         Menu menu = new Menu();
@@ -553,4 +554,5 @@ class ParserTest {
         assertEquals(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                 + BuyIngredientCommand.MESSAGE_USAGE, feedbackToUser);
     }
+    //@@author
 }
