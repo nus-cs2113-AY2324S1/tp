@@ -11,7 +11,7 @@ CafeCtrl "1" o-- "*" Command
 
 Command <|- NextDayCommand
 Parser "1" --> "*" NextDayCommand
-NextDayCommand --> OrderList
+NextDayCommand ..> OrderList : Creates >
 NextDayCommand --> CurrentDate
 NextDayCommand --> Sales
 Sales --> "1...*" OrderList
