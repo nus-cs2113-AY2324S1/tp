@@ -16,7 +16,4 @@ import seedu.cafectrl.ui.Ui;
 public interface ParserUtil {
     Command parseCommand(Menu menu, String userInput, Ui ui,
             Pantry pantry, Sales sales, CurrentDate currentDate);
-
-    //@@author DextheChik3n
-
 }
