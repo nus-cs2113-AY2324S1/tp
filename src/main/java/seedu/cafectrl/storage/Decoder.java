@@ -35,7 +35,7 @@ public class Decoder {
         ArrayList<Dish> menuDishList = new ArrayList<>();
         for(String dishString : textLines) {
             String[] dishStringArray = dishString.split(DIVIDER);
-            String dishName = dishStringArray[0];
+            String dishName = dishStringArray[0].trim();
             float dishPrice = Float.parseFloat(dishStringArray[1]);
             String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
             ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
@@ -54,9 +54,9 @@ public class Decoder {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
         for(String ingredientString : ingredientsStringArray) {
             String[] array = ingredientString.split(" ");
-            String name = array[0];
+            String name = array[0].trim();
             int qty = Integer.parseInt(array[1]);
-            String unit = array[2];
+            String unit = array[2].trim();
             ingredientList.add(new Ingredient(name, qty, unit));
         }
         return ingredientList;
