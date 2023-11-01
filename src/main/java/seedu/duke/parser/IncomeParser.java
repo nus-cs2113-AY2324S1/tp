@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.KaChinnnngException;
+import seedu.duke.financialrecords.ExchangeRateManager;
 import seedu.duke.financialrecords.Income;
 
 import java.io.File;
@@ -101,7 +102,17 @@ public class IncomeParser {
         double incomeAmount;
 
         try {
-            incomeAmount = Double.parseDouble(incomeAmountString);
+            if (!isOtherCurrency(incomeAmountString)) {
+                incomeAmount = Double.parseDouble(incomeAmountString);
+            } else {
+                // Convert Currency to SGD
+                ExchangeRateManager exchangeRateManager = ExchangeRateManager.getInstance();
+                String[] tokens = incomeAmountString.split(" ");
+                String currency = tokens[0].trim();
+                incomeAmount = Double.parseDouble(tokens[1].trim());
+                incomeAmount = exchangeRateManager.convertCurrency(currency, incomeAmount);
+                exchangeRateManager.showCurrencyConversionMessage(currency);
+            }
         } catch (NumberFormatException e) {
             LOGGER.log(Level.WARNING, "Invalid amount format" + incomeAmountString, e);
             throw new KaChinnnngException("Please enter a valid amount");
@@ -137,5 +148,9 @@ public class IncomeParser {
             throw new KaChinnnngException("Please enter a valid index");
         }
         return index;
+    }
+
+    private static boolean isOtherCurrency(String amount) {
+        return (amount.split(" ").length > 1);
     }
 }
