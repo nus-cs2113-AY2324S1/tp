@@ -64,7 +64,7 @@ Example of usage:
 add income /de salary /date 01/01/2020 /amt 1000
 ```
 ```
-add expense /cat Food /de lunch /date 01/01/2020 /amt 10.50
+add expense /cat Food /type lunch /de salad /date 01/01/2020 /amt 10.50
 ```
 ```
 add expense /cat Food /type lunch /de chicken sandwich /date 01/01/2020 /amt USD 10.50
@@ -95,6 +95,15 @@ delete expense <index>
 ```
 delete income <index>
 ```
+
+### Check balance: balance
+Check the balance for current financial records
+
+Format:
+```
+balance
+```
+
 ### Edit an entry: edit 
 Edit an entry from the list of income/expenses.
 
@@ -114,12 +123,18 @@ edit expense 2 /cat food /de dinner /date 01/10/2023 /amt 10.00
 ```
 
 
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Move the txt file from the folder where the jar file located, 
+to the folder where the jar file located in the new computer 
+
+**Q**: What do i need to do when I see the `format incorrect from storage file` at the beginning of running the program
+
+**A**: The system will automatically remove that line from the txt after you give the first command to the bot, 
+if you don't want to remove that line, just terminate the program using control/command c right after you see the error,
+and change the line in txt file to the correct format.
 
 ## Command Summary
 
