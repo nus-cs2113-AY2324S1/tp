@@ -107,7 +107,7 @@ public class Decoder {
      */
     public static Sales decodeSales(ArrayList<String> textLines, Menu menu) {
         ArrayList<OrderList> orderLists = new ArrayList<>();
-        if(textLines.isEmpty()){
+        if(textLines.isEmpty()) {
             return new Sales();
         }
         //for each 'order' in text file
