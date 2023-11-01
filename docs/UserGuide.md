@@ -538,7 +538,7 @@ Use watchlist command to view updated Watchlist
 
 ### Visualizing your cashflow: `vis`
 
-Using this command to visualize your income or expenses in a pie chart or bar chart
+Using this command to visualize your income or expenses in a pie chart, bar chart or radar chart
 
 Format: `vis /t TYPE /c TOOL`
 
@@ -547,10 +547,11 @@ Format: `vis /t TYPE /c TOOL`
 | Income Cashflows `Income`   |
 | Expense Cashflows `Expense` |
 
-| Tool `/c`      |
-|----------------|
-| PieChart `pie` |
-| BarChart `bar` |
+| Tool `/c`          |
+|--------------------|
+| PieChart `pie`     |
+| BarChart `bar`     |
+| RadarChart `radar` |
 
 Example of usage: `vis /t expense /c pie`
 
@@ -562,13 +563,21 @@ Displaying piechart for expense
 
 ![](images/vis/visOutput.png)
 
-Example of usage: `vis /t expense /c bar`
+Example of usage: `vis /t income /c bar`
 
 ```
 Displaying barchart for income
 ```
 
 ![](images/vis/barOuput.png)
+
+Example of usage: `vis /t income /c radar`
+
+```
+Displaying radarchart for income
+```
+
+![](images/vis/radarOutput.png)
 
 ### Exiting the program: `exit`
 

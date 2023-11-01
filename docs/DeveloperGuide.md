@@ -71,8 +71,8 @@ the data one upon exiting the program with the `exit` command.
 
 This feature is implemented with the help of [XChart](https://knowm.org/open-source/xchart/), a simple charting library for Java by Knowm.
 
-By typing in the vis command with the appropriate arguments (/s and /t), users will be able to visualize their income or expense 
-using visualization tools (Piechart, Bar Chart)
+By typing in the vis command with the appropriate arguments (`/s` and `/t`), users will be able to visualize their 
+income or expense using visualization tools (Piechart, Bar Chart or Radar Chart)
 
 Demo: 
 
@@ -104,7 +104,7 @@ specified cashflow entry according to type using a Hashmap which is returned and
 
 Visualizer's Role: 
 
-According to the chart type (Pie/Bar) argument and the Hashmap obtained from the categorizer passed in, 
+According to the chart type (Pie/Bar/Radar) argument and the Hashmap obtained from the categorizer passed in, 
 the visualizer displays the specified visualization chart by calling the charting library Xchart.
 
 ### Class Diagram
