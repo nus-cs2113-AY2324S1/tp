@@ -1,11 +1,12 @@
 package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.Command;
-import seedu.cafectrl.command.DeleteDishCommand;
-import seedu.cafectrl.command.IncorrectCommand;
+import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.IncorrectCommand;
+import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
@@ -493,4 +494,22 @@ class ParserTest {
         assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
     }
     //@@author
+
+    @Test
+    void parseCommand_returnViewTotalStockCommandClass() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String userInput = "view_stock";
+
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        ViewTotalStockCommand viewTotalStockCommand = new ViewTotalStockCommand(pantry, ui);
+
+        assertEquals(viewTotalStockCommand.getClass(), outputCommand.getClass());
+    }
 }
