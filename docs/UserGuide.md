@@ -82,19 +82,17 @@ Shows a list of all dishes on the menu
 
 Format: `list_menu`
 
-Output:
-```
+Example:
+```agsl
 +-----------------------------------------+
 | Ah, behold, the grand menu of delights! |
 +--------------------------+--------------+
 | Dish Name                |  Price       |
 +--------------------------+--------------+
-| 1. chicken rice          |  $2.00       |
-| 2. duck rice             |  $2.00       |
+| 1. chicken rice          |  $2.50       |
+| 2. chicken curry         |  $4.30       |
 +-----------------------------------------+
 ```
-
-Example:
 
 <!---@@author NaychiMin--->
 ### Listing ingredients needed for the selected dish : `list_ingredients`
@@ -168,6 +166,26 @@ Ingredient: milk		Qty: 1000ml
 
 <!---@@author Cazh1--->
 ### Adding an order : `add_order`
+Adds an order consisting of dishes off the menu to an order list
+
+Format: `add_order name/DISH_NAME qty/DISH_QTY`
+
+Example:
+```agsl
+> add_order name/chicken rice qty/2
+I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!
+-----------------------------------------------------
+Order is ready!
+Total order cost: $5.00
+-----------------------------------------------------
+Listed below are the availability of the dishes for the next order!
+Dish: chicken rice
+Available Dishes: 8
+-----------------------------------------------------
+Dish: chicken curry
+Available Dishes: 4
+```
+* The `DISH_QTY` must be a positive integer number.
 
 Adds an order to the current business day
 
