@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.OptionalDouble;
 
 import static cashleh.transaction.ExpenseCategories.ExpenseCategory.FOOD_DRINK;
