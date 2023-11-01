@@ -1,7 +1,7 @@
 package seedu.cafectrl.data.dish;
 
 public class Ingredient {
-    private final String name;
+    private String name;
     private int qty;
     private String unit;
 

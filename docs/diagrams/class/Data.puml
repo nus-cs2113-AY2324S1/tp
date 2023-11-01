@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Menu {
++ getMenuItemsList(): ArrayList<Dish>
++ getSize(): int
++ getDishFromId(menuID: int): Dish
++ getDishFromName(dishName: String): Dish
++ removeDish(menuID: int): void
++ addDish(dish: Dish): void
++ isValidDishIndex(dishIndex: int): boolean
+}
+
+class Dish {
+- name: String
+- price: float
++ getName(): String
++ getIngredients(): ArrayList<Ingredient>
++ getPrice(): float
++ setPrice(newPrice: float): void
+}
+
+class Ingredient {
+- name: String
+- qty: int
+- unit: String
++ getName(): String
++ getQty(): int
++ getUnit(): String
++ setQty(qty: int) : void
+}
+
+class Pantry {
+
+}
+
+class Chef
+class Order
+class OrderList
+class Sales
+class CurrentDate
+
+Ingredient "*" <--* "1" Dish : ingredients
+Dish "*" <--* "1" Menu : menuItems
+
+Ingredient "*" <--* "1" Pantry : pantryStock
+Dish <.. Pantry
+Chef "1" <-- Pantry : pantry
+
+Ingredient "*" <--* "1" Order : ingredientList
+Order "*" <--* "1" OrderList : orderList
+Order "1" <-- Chef : order
+OrderList "*" <--* "1" Sales : orderLists
+
+
+@enduml
