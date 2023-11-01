@@ -7,5 +7,4 @@ Hey there CS and CEG Students! Welcome to
  |_____/ \___|_.__/ \__,_|\__, |_|  |_|\__, |_____/ \___|_| |_|\___|\__,_|\__,_|_|\___|
                            __/ |        __/ |
                           |___/        |___/
-Nice to meet you
 Please enter your name:
