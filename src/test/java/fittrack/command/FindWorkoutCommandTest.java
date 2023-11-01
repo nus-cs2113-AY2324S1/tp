@@ -37,7 +37,7 @@ class FindWorkoutCommandTest {
 
     /**
      * Executes the find command for the given keywords and verifies
-     * the result matches the meals in the expectedMealList exactly.
+     * the result matches the workout in the expectedWorkoutList exactly.
      */
     void assertFindCommandBehavior(String commandLine, String keyword, String expectedResult)
             throws PatternMatchFailException {
@@ -50,6 +50,6 @@ class FindWorkoutCommandTest {
 
     @Test
     public void testHelp(){
-        assertEquals(FindMealCommand.HELP, new FindMealCommand("").getHelp());
+        assertEquals(FindWorkoutCommand.HELP, new FindWorkoutCommand("").getHelp());
     }
 }
