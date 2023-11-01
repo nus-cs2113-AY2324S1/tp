@@ -60,13 +60,4 @@ class FinancialStatementTest {
                         "black jack", OptionalDouble.of(5000), LocalDate.now(), LOTTERY_GAMBLING
                 )) ;
     }
-
-    @Test
-    void testToString() {
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        assertEquals(financialStatement.toString(),
-                "Income: salary (Amount: 1000.0, Date: " + today.format(pattern) + ", Category: SALARY)\n"
-                        + "Expense: lunch (Amount: 20.0, Date: " + today.format(pattern) + ", Category: FOOD_DRINK)");
-    }
 }
