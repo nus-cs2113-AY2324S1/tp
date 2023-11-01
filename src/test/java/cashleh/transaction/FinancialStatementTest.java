@@ -52,47 +52,6 @@ class FinancialStatementTest {
         assertEquals(financialStatement.getNetCash(), 980);
     }
 
-    /*@Test
-    void printTransactions() {
-        financialStatement.printTransactions();
-        assertEquals(outputStreamCaptor.toString(),
-                "+-------------------------------------------------------------------------------"
-                        + "----------------------------------------+\n"
-                        + "|                                                  Financial Statement"
-                        + "                                                  |\n"
-                        + "+----------+--------------+--------------------+------------------------------+"
-                        + "--------------------+--------------------+\n"
-                        + "|    ID    |     Type     |        Date        |         Description          |"
-                        + "      Category      |       Amount       |\n"
-                        + "+----------+--------------+--------------------+------------------------------+"
-                        + "--------------------+--------------------+\n"
-                        + "|    1     |    Income    |     2023-10-31     |            salary            |"
-                        + "       SALARY       |     + $1000.0      |\n"
-                        + "|    2     |   Expense    |     2023-10-31     |            lunch             |"
-                        + "     FOOD_DRINK     |      - $20.0       |\n"
-                        + "+------------------------------------------------------------------------------"
-                        + "-----------------------------------------+\n"
-                        + "| Total Income: $1000.0                                                         "
-                        + "                                        |\n"
-                        + "| Total Expense: $20.0                                                          "
-                        + "                                        |\n"
-                        + "| Net Income: $980.0                                                            "
-                        + "                                        |\n"
-                        + "+------------------------------------------------------------------------------"
-                        + "-----------------------------------------+\n");
-    }*/
-
-    /*@Test
-    void findTransaction_transactionIsFound_printsTransaction() throws CashLehMissingTransactionException {
-        financialStatement.findTransaction("salary", OptionalDouble.of(1000), LocalDate.now(), SALARY);
-        assertEquals(outputStreamCaptor.toString(),
-                "\t____________________________________________________________\n"
-                        + "\tHere are your corresponding transactions with <description>: "
-                        + "salary ||<amount>: 1000.0 ||<date>: 2023-10-31 ||<category>: SALARY ||\n"
-                        + "\t[+] Income: salary (Amount: 1000.0, Date: 31/10/2023, Category: SALARY)\n"
-                        + "\t____________________________________________________________\n");
-    }*/
-
     @Test
     void findTransaction_transactionIsNotFound_throwsException() throws CashLehMissingTransactionException {
         assertThrows(CashLehMissingTransactionException.class,
