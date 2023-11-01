@@ -6,6 +6,21 @@
 
 ## Design
 
+### Ui
+API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
+
+![Ui Class Diagram](images/class/Ui.png)
+<br>*Figure 1: Ui Class Diagram*
+
+The `Ui` component is responsible for interacting with the user. Within CafeCtrl, `Ui` is instantiated by `Parser`, `Command`, `Main`, `Data`, and `Storage` components to access the print methods in `Ui.java`.
+
+In the Ui component,
+- `Ui.java` consists of multiple methods that received the user input and prints messages to the system console for users to see
+- `Messages.java` consists of multiple strings that contains greeting, command, and goodbye messages to be shown to user
+- `ErrorMessages.java` consists of multiple strings that contain error messages to be shown to user when an incorrect command or exception has been returned
+
+
+
 ### Parser
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
