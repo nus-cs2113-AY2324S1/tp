@@ -13,7 +13,6 @@ import essenmakanan.storage.IngredientStorage;
 import essenmakanan.storage.RecipeStorage;
 import essenmakanan.ui.Ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -67,14 +66,14 @@ public class EssenMakanan {
 
         try {
             ingredients = new IngredientList(ingredientStorage.restoreSavedData());
-        } catch (FileNotFoundException exception) {
-            EssenFileNotFoundException.handleFileNotFoundException(DATA_DIRECTORY, DATA_INGREDIENT_PATH);
+        } catch (EssenFileNotFoundException exception) {
+            exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_INGREDIENT_PATH);
         }
 
         try {
             recipes = new RecipeList(recipeStorage.restoreSavedData());
-        } catch (FileNotFoundException exception) {
-            EssenFileNotFoundException.handleFileNotFoundException(DATA_DIRECTORY, DATA_RECIPE_PATH);
+        } catch (EssenFileNotFoundException exception) {
+            exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_RECIPE_PATH);
         }
     }
 

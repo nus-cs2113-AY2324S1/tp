@@ -1,5 +1,6 @@
 package essenmakanan.storage;
 
+import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
@@ -52,12 +53,15 @@ public class RecipeStorage {
         recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
     }
 
-    public ArrayList<Recipe> restoreSavedData() throws FileNotFoundException {
-        File file = new File(dataPath);
-        Scanner scan = new Scanner(file);
-
-        while (scan.hasNext()) {
-            createNewData(scan);
+    public ArrayList<Recipe> restoreSavedData() throws EssenFileNotFoundException {
+        try {
+            File file = new File(dataPath);
+            Scanner scan = new Scanner(file);
+            while (scan.hasNext()) {
+                createNewData(scan);
+            }
+        } catch (FileNotFoundException exception) {
+            throw new EssenFileNotFoundException();
         }
 
         return recipeListPlaceholder;

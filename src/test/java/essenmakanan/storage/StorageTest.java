@@ -1,12 +1,11 @@
 package essenmakanan.storage;
 
+import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,13 +20,13 @@ public class StorageTest {
     @Test
     public void accessIngredientDatabase_invalidPath_throwsEssenFileNotFoundException() {
         IngredientStorage ingredientStorage = new IngredientStorage(DATA_INVALID_PATH);
-        assertThrows(FileNotFoundException.class, ingredientStorage::restoreSavedData);
+        assertThrows(EssenFileNotFoundException.class, ingredientStorage::restoreSavedData);
     }
 
     @Test
     public void accessRecipeDatabase_invalidPath_throwsEssenFileNotFoundException() {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_PATH);
-        assertThrows(FileNotFoundException.class, recipeStorage::restoreSavedData);
+        assertThrows(EssenFileNotFoundException.class, recipeStorage::restoreSavedData);
     }
 
     @Test

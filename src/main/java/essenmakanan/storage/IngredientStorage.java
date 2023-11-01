@@ -1,5 +1,6 @@
 package essenmakanan.storage;
 
+import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.parser.IngredientParser;
@@ -45,12 +46,15 @@ public class IngredientStorage {
         ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
     }
 
-    public ArrayList<Ingredient> restoreSavedData() throws FileNotFoundException {
-        File file = new File(dataPath);
-        Scanner scan = new Scanner(file);
-
-        while (scan.hasNext()) {
-            createNewData(scan);
+    public ArrayList<Ingredient> restoreSavedData() throws EssenFileNotFoundException {
+        try {
+            File file = new File(dataPath);
+            Scanner scan = new Scanner(file);
+            while (scan.hasNext()) {
+                createNewData(scan);
+            }
+        } catch (FileNotFoundException exception) {
+            throw new EssenFileNotFoundException();
         }
 
         return ingredientListPlaceholder;
