@@ -80,6 +80,18 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 
 ![FindCommand_SequenceDiagram.png](..%2Fimages%2FGetFromTxt.png)
 
+### SaveToTxt Command
+The SaveToTxt Command is facilitated by `FileWriter` ,`IncomeList` and `ExpenseList`
+1. The user start the program and the function will run everytime after user input a command
+2. Once the command executed, the function saveIncomeAndExpense will run automatically
+3. It will run the function saveIncomeToTextFile first, the saveIncomeToTextFile will create a FileWriter and loop through the incomes list
+4. It will get description, date, and amount from the income list for every single income record in the list and save the information into the text file
+5. After that, the saveIncomeToTextFile will then call the saveExpenseToTextFile function 
+6. The saveExpenseToTextFile will create a new FileWriter and loop through the expenses list 
+7. It will get description, date, amount and type from the expenses list for every single expense record in the list and save the information into the text file
+
+![FindCommand_SequenceDiagram.png](..%2Fimages%2FSaveToTxt.png)
+
 ## Product scope
 ### Target user profile
 
