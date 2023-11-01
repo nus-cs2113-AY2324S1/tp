@@ -83,8 +83,10 @@ public class OrderList {
     private void aggregateOrder(Order order, ArrayList<Order> aggregatedOrders) {
         if (order.getIsComplete()) {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
-            aggregatedOrders.get(index).setQuantity(aggregatedOrders.get(index).getQuantity() + order.getQuantity());
-            aggregatedOrders.get(index).setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost() + order.getTotalOrderCost());
+            aggregatedOrders.get(index).setQuantity(aggregatedOrders.get(index).getQuantity()
+                    + order.getQuantity());
+            aggregatedOrders.get(index).setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost()
+                    + order.getTotalOrderCost());
         }
     }
 

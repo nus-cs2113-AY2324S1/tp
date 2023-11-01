@@ -1,6 +1,22 @@
 package seedu.cafectrl.parser;
 
-import seedu.cafectrl.command.*;
+
+import seedu.cafectrl.command.AddDishCommand;
+import seedu.cafectrl.command.AddOrderCommand;
+import seedu.cafectrl.command.BuyIngredientCommand;
+import seedu.cafectrl.command.Command;
+import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.ExitCommand;
+import seedu.cafectrl.command.HelpCommand;
+import seedu.cafectrl.command.IncorrectCommand;
+import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.NextDayCommand;
+import seedu.cafectrl.command.PreviousDayCommand;
+import seedu.cafectrl.command.ShowSalesCommand;
+import seedu.cafectrl.command.ShowSalesByDayCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
 
 import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.data.Sales;
@@ -68,7 +84,7 @@ public class Parser implements ParserUtil {
      * @return command requested by the user
      */
     public Command parseCommand(Menu menu, String userInput, Ui ui,
-            Pantry pantry, Sales sales, CurrentDate currentDate) {
+                                Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {

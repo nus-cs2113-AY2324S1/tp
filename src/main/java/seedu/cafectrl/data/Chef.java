@@ -9,7 +9,7 @@ public class Chef {
     private final Order order;
     private final Pantry pantry;
     private final Ui ui;
-    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
+    private final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
     public Chef(Order order, Pantry pantry, Ui ui) {
         this.order = order;

@@ -10,7 +10,6 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
-import seedu.cafectrl.data.dish.Dish;
 
 import java.util.ArrayList;
 import java.util.Arrays;

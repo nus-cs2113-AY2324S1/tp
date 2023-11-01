@@ -213,9 +213,7 @@ public class Ui {
         showToUser(Messages.CHEF_MESSAGE);
     }
 
-    public void showDishAvailability() {
-        showToUser(Messages.AVAILABLE_DISHES);
-    }
+
 
     /**
      * Shows the total cost in the order list, formatted in the proper format
@@ -231,7 +229,11 @@ public class Ui {
         showToUser(orderStatus);
         showTotalCost(totalCost);
         printLine();
-        showDishAvailability();
+        showDishAvailabilityMessage();
+    }
+
+    public void showDishAvailabilityMessage() {
+        showToUser(Messages.AVAILABLE_DISHES);
     }
 
     public void showPreviousDay() {

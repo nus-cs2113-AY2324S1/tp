@@ -1,7 +1,5 @@
 package seedu.cafectrl.data;
 
-import seedu.cafectrl.data.dish.Dish;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import seedu.cafectrl.ui.Ui;
@@ -14,7 +12,7 @@ public class Sales {
     private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
-    
+
     public Sales() {
         this.orderLists = new ArrayList<>();
         orderLists.add(new OrderList());

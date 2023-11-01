@@ -4,10 +4,7 @@ import seedu.cafectrl.data.Chef;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
-import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
-
-import java.text.DecimalFormat;
 
 public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
