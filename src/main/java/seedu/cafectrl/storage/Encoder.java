@@ -66,9 +66,14 @@ public class Encoder {
         ArrayList<String> pantryStockInString = new ArrayList<>();
         ArrayList<Ingredient> pantryStock = pantry.getPantryStock();
         for (Ingredient ingredient : pantryStock) {
-            String encodedIngredient = ingredient.getName() + DIVIDER
-                    + ingredient.getQty() + DIVIDER + ingredient.getUnit();
-            pantryStockInString.add(encodedIngredient);
+            StringBuilder encodedIngredient = new StringBuilder();
+            encodedIngredient.append(ingredient.getName());
+            encodedIngredient.append(DIVIDER);
+            encodedIngredient.append(ingredient.getQty());
+            encodedIngredient.append(DIVIDER);
+            encodedIngredient.append(ingredient.getUnit());
+            encodedIngredient.append(System.lineSeparator());
+            pantryStockInString.add(encodedIngredient.toString());
         }
         return pantryStockInString;
     }
