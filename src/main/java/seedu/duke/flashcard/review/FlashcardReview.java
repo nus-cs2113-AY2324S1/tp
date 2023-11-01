@@ -12,4 +12,13 @@ public class FlashcardReview {
         this.reviewDate = reviewDate;
         this.reviewDifficulty = reviewDifficulty;
     }
+
+    //@@author junhyeong0411
+    public LocalDateTime getReviewDate(){
+        return reviewDate;
+    }
+
+    public ReviewDifficulty getReviewDifficulty(){
+        return reviewDifficulty;
+    }
 }
