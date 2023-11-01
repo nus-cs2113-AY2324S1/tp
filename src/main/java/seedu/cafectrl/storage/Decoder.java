@@ -63,6 +63,12 @@ public class Decoder {
     }
 
     //@@author ziyi105
+
+    /**
+     * Decodes raw string from pantry stock data file and create ingredient object from the data
+     * @param encodedPantryStock raw string from pantry stock data file
+     * @return a new pantry object with data from the pantry stock data file
+     */
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
 
@@ -82,6 +88,12 @@ public class Decoder {
         return new Pantry(ui, pantryStock);
     }
 
+    /**
+     * Checks whether the pantry stock is in the format of ingredient name | quantity (int) | unit
+     * @param decodedPantryStock string array of the raw data string from pantry stock data file
+     *                           split with "|"
+     * @return true if the format is correct, false otherwise
+     */
     private static boolean isValidPantryStockFormat(String[] decodedPantryStock) {
         if (decodedPantryStock.length != 3) {
             ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
