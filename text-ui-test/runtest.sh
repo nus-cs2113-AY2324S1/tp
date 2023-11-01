@@ -16,8 +16,8 @@ diff EXPECTED-UNIX.TXT ACTUAL.TXT
 if [ $? -eq 0 ]
 then
     echo "Test passed!"
-    read
+    exit 0
 else
     echo "Test failed!"
-    read
+    exit 1
 fi
