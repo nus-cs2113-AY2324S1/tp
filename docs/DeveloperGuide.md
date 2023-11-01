@@ -459,6 +459,41 @@ The list of vendors could be printed by using streams to efficiently collect and
 
 ---
 
+## 5. CommandResult Class
+
+The `CommandResult` class is a crucial part of the Stocker application, responsible for providing feedback and results to the user after executing various commands. It contains a feedback message to describe the outcome of the command execution, as well as an optional list of relevant elements produced by the command.
+
+**Design Considerations**
+The design of the `CommandResult` class considers the following aspects:
+
+1. **Feedback Message:** The class stores a feedback message to inform the user about the outcome of the executed command.
+
+2. **Relevant Elements:** For commands that produce a list of relevant elements, the `CommandResult` can store this list for display.
+
+**Implementation and Rationale**
+
+The `CommandResult` class is implemented with two constructors and methods to access relevant elements and construct feedback messages.
+
+- `CommandResult(String feedbackToUser)`: This constructor is used when there are no relevant elements to be included in the result. It sets the feedback message.
+
+- `CommandResult(String feedbackToUser, List<T> relevantElements)`: This constructor is used when the command produces a list of relevant elements (e.g., a list of drugs). It sets both the feedback message and the list of relevant elements.
+
+- `getRelevantElements()`: This method returns an optional list of relevant elements. It can be used to check if relevant elements are present.
+
+- `getFeedbackToUser()`: This method returns the feedback message as a string.
+
+- `getFeedbackToUserWithElements()`: This method constructs a feedback message that includes the relevant elements. It formats the list of elements with serial numbers (if applicable) and includes the feedback message.
+
+**Example Usage**
+
+The `CommandResult` class is used throughout the Stocker application to provide feedback to the user after executing commands. For example, when a user issues a `list` command, the `CommandResult` includes a list of drugs produced by the command along with the success message. The feedback message is then displayed to the user.
+
+The following sequence diagram shows how the Command Result function works.
+
+<img src="UML Diagrams/CommandResultDiagram.png" width="350">
+
+---
+
 ## Product scope
 
 ---

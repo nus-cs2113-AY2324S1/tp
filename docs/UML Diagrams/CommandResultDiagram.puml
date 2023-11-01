@@ -1,0 +1,20 @@
+@startuml
+title CommandResult Sequence Diagram
+
+actor User
+participant Command
+participant CommandResult
+
+User -> Command: Execute Command
+activate Command
+
+Command -> CommandResult: Create CommandResult
+activate CommandResult
+
+CommandResult --> Command: Return CommandResult
+deactivate CommandResult
+
+Command -> User: Return CommandResult
+deactivate Command
+
+@enduml
