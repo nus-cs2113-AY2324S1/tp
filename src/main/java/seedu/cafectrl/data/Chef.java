@@ -26,7 +26,7 @@ public class Chef {
                 boolean isComplete = pantry.isDishCooked(order.getIngredientList());
                 order.setComplete(isComplete);
             }
-            String orderStatus = order.getIsComplete()? Messages.COMPLETE_ORDER : Messages.INCOMPLETE_ORDER;
+            String orderStatus = order.getIsComplete() ? Messages.COMPLETE_ORDER : Messages.INCOMPLETE_ORDER;
             String totalCost = dollarValue.format(order.getTotalOrderCost());
             ui.showOrderStatus(orderStatus, totalCost);
             pantry.calculateDishAvailability(menu);

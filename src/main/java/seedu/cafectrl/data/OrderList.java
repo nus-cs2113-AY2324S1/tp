@@ -29,12 +29,6 @@ public class OrderList {
     public int getSize() {
         return orderList.size();
     }
-    public Order getOrder(int orderID) {
-        return orderList.get(orderID);
-    }
-    public void removeOrder(int orderID) {
-        orderList.remove(orderID);
-    }
 
     public void addOrder(Order order) {
         orderList.add(order);
@@ -43,10 +37,6 @@ public class OrderList {
     public void addCost(Order order) {
         float orderCost = order.getTotalOrderCost();
         totalOrderListCost += orderCost;
-    }
-
-    public float getTotalOrderListCost() {
-        return totalOrderListCost;
     }
 
     //@@author NaychiMin
@@ -58,7 +48,7 @@ public class OrderList {
     public void printOrderList(Menu menu, Ui ui) {
         ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
         if (orderList.isEmpty()) {
-            ui.showToUser("No orders for this day.");
+            ui.showToUser("No sales for this day.");
             return;
         }
 
@@ -70,7 +60,7 @@ public class OrderList {
             ui.showToUser(String.format(HEADER_FORMAT,
                     aggregatedOrder.getDishName(),
                     aggregatedOrder.getQuantity(),
-                    aggregatedOrder.totalOrderCost()));
+                    aggregatedOrder.calculateTotalOrderCost()));
         }
 
         ui.showToUser("Total for day: $" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
@@ -102,7 +92,7 @@ public class OrderList {
     private int getIndexByDishName(ArrayList<Order> aggregatedOrders, String dishName) {
         for (int i = 0; i < aggregatedOrders.size(); i++) {
             Order order = aggregatedOrders.get(i);
-            String orderDishName = order.getDishName();
+            String orderDishName = order.getDishName().trim();
             dishName = dishName.trim();
             if (orderDishName.equalsIgnoreCase(dishName)) {
                 return i;
@@ -124,5 +114,4 @@ public class OrderList {
         }
         return totalCost;
     }
-
 }

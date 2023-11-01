@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+//@@author DextheChik3n
 /**
  * Manage everything related to file such as writing, reading, opening and creating file
  */
@@ -23,66 +23,50 @@ public class FileManager {
         this.ui = ui;
     }
 
-    //@@author DextheChik3n
     /**
      * Reads the text file from the specified file path and stores each line in an ArrayList.
      *
      * @return ArrayList that consists of every text line in each element
+     * @throws FileNotFoundException if text file at the specified file path does not exist
      */
     public ArrayList<String> readTextFile(String filePath) throws FileNotFoundException {
-        openTextFile(filePath);
         String userWorkingDirectory = System.getProperty("user.dir");
-        Path tasksFilePath = Paths.get(userWorkingDirectory, filePath);
-        File textFile = new File(String.valueOf(tasksFilePath));
-
-        if (textFile.length() < 0) {
-            throw new FileNotFoundException();
-        }
-
+        Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
+        File textFile = new File(String.valueOf(dataFilePath));
         ArrayList<String> textLines = new ArrayList<>();
-        // todo Dexter: implement proper error handling here
-        try {
-            Scanner s = new Scanner(textFile);
 
-            while (s.hasNext()){
-                textLines.add(s.nextLine());
-            }
+        Scanner s = new Scanner(textFile);
 
-            s.close();
-        } catch (FileNotFoundException e) {
-            ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE);
+        while (s.hasNext()) {
+            textLines.add(s.nextLine());
         }
+
+        s.close();
+
         return textLines;
     }
 
-    //@@author DextheChik3n
     /**
-     * Handles opening and creating (if needed) the text file and folder
-     * @param filePath the file path that is passed in main
-     * @return the file path of where the data is stored
-     * @throws IOException if an I/O error occurred while creating the text file
+     * Checks if the text file and folder exists in the user's system and creates them (if needed)
+     * @param filePath the specified path location of the file
      */
-    public String openTextFile(String filePath) {
+    public void checkFileExists(String filePath) throws IOException {
         String userWorkingDirectory = System.getProperty("user.dir");
         Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
         Path dataFolderPath = dataFilePath.getParent();
         File textFile = new File(String.valueOf(dataFilePath));
         File folder = new File(String.valueOf(dataFolderPath));
 
+        //Check if data folder exists
         if (!Files.exists(dataFolderPath)) {
             folder.mkdir();
-            ui.showToUser(ErrorMessages.DATA_FOLDER_NOT_FOUND_MESSAGE);
+            ui.showToUser(ErrorMessages.DATA_FOLDER_NOT_FOUND_MESSAGE, System.lineSeparator());
         }
 
+        //Check if the file at the specified file path exists
         if (!Files.exists(dataFilePath)) {
-            try {
-                textFile.createNewFile();
-            } catch (Exception e) {
-                ui.showToUser(ErrorMessages.DATA_FILE_NOT_FOUND_MESSAGE);
-            }
+            textFile.createNewFile();
         }
-
-        return dataFilePath.toString();
     }
 
     /**
@@ -94,15 +78,14 @@ public class FileManager {
      * @throws IOException If I/O operations are interrupted.
      */
     public void overwriteFile(String filePath, ArrayList<String> listOfTextToAdd) throws IOException {
-        String openFilePath = openTextFile(filePath);
-        FileWriter fw = new FileWriter(openFilePath);
+        checkFileExists(filePath);
+        FileWriter fw = new FileWriter(filePath);
         for (String line : listOfTextToAdd) {
             fw.write(line);
         }
         fw.close();
     }
 
-    //@@author DextheChik3n
     /**
      * Writes text to the text file at the specified file path.
      * Will overwrite all text in text file.
@@ -112,12 +95,12 @@ public class FileManager {
      * @throws IOException If I/O operations are interrupted.
      */
     public void overwriteFile(String filePath, String textToAdd) throws IOException {
+        checkFileExists(filePath);
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
-    //@@author DextheChik3n
     /**
      * Appends text to the text file at the specified file path.
      * Will add text to text file.
@@ -127,6 +110,7 @@ public class FileManager {
      * @throws IOException If I/O operations are interrupted.
      */
     public void appendToFile(String filePath, String textToAdd) throws IOException {
+        checkFileExists(filePath);
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAdd);
         fw.close();

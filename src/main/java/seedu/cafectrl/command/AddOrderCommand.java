@@ -12,16 +12,16 @@ public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
     public static final String MESSAGE_USAGE = "To add a new order: \n"
             + COMMAND_WORD
-            + "name/DISH_NAME qty/QUANTITY\n"
+            + " name/DISH_NAME qty/QUANTITY\n"
             + "Example: " + COMMAND_WORD
             + "name/chicken rice qty/2";
 
-    protected Ui ui;
     protected Pantry pantry;
     protected OrderList orderList;
     protected Menu menu;
+    private final Ui ui;
+    private final Order order;
 
-    Order order;
     public AddOrderCommand(Order order, Ui ui, Pantry pantry, OrderList orderList, Menu menu) {
         this.order  = order;
         this.ui = ui;

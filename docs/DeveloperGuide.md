@@ -24,6 +24,19 @@ The bulk of the app’s work is done by the following components:
 - `Parser` : XYZ
 - `Command` : XYZ
 
+### Ui Component
+API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
+
+![Ui Class Diagram](images/class/Ui.png)
+<br>*Figure 1: Ui Class Diagram*
+
+The `Ui` component is responsible for interacting with the user. Within CafeCtrl, `Ui` is instantiated by `Parser`, `Command`, `Main`, `Data`, and `Storage` components to access the print methods in `Ui.java`.
+
+In the Ui component,
+- `Ui.java` consists of multiple methods that received the user input and prints messages to the system console for users to see
+- `Messages.java` consists of multiple strings that contains greeting, command, and goodbye messages to be shown to user
+- `ErrorMessages.java` consists of multiple strings that contain error messages to be shown to user when an incorrect command or exception has been returned
+
 ### Parser Component
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
@@ -114,7 +127,7 @@ The following class diagram illustrates the relationship between the respective 
 
 ![Add_order Execution](images/sequence/AddOrderCommand_execute.png)
 
-Figure 1: Execution of add_order command
+Figure 2: Execution of add_order command
 
 API: [AddOrderCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -133,6 +146,47 @@ After verifying that the order has been completed, the cost of the order is adde
 
 The total sum of orders in the `orderList` object is retrieved using `orderList.getTotalCost()`.
 This is then passed into Ui using `ui.showTotalCost()` to display a message to the user with the total order cost.
+
+### Next Day
+A `next_day` command can be used advance the current day.
+
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a next_day command.
+![Next_Day Execution](images/class/NextDayCommandClass.png)
+
+![Next_Day Execution](images/sequence/NextDayCommand_execute.png)
+
+Figure 3: Execution of next_day command
+
+API: [NextDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+
+When the `execute()` method of NextDayCommand is invoked in Main, the day in the program is advanced by 1 day, by running `currentDate.nextDay()`.
+
+The next day data is retrieved from the `CurrentDate` object using `currentDate.getCurrentDay()`.
+This next day data is compared with the days accounted for in the `Sales` object, retrieved using `sales.getDaysAccounted()`.
+
+If the next day is more than the number of days accounted in sales, this means that there is no `orderList` prepared for the coming day.
+A new `OrderList` object is created using `new OrderList()`, and added into the `Sales` object by running `sales.addOrderList()`.
+Following this, the day has been accounted and this is updated through `sales.nextDay()`.
+
+To end off the command, `ui.showNextDay()` is run to display a message to the user a prepared message for advancing the day.
+The user is also shown the advanced day number.
+
+### Previous Day
+A `previous_day` command can be used to recede the current day.
+
+The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a next_day command.
+![Previous_Day Execution](images/class/PreviousDayCommandClass.png)
+
+![Previous_Day Execution](images/sequence/PreviousDayCommand_execute.png)
+
+Figure 4: Execution of previous_day command
+
+API: [PreviousDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+
+When the `execute()` method of PreviousDayCommand is invoked in Main, the day in the program is receded by 1 day, by running `currentDate.previousDay()`.
+
+To end off the command, `ui.showPreviousDay()` is run to display a message to the user a prepared message for receding the day.
+The user is also shown the receded day number.
 
 ### List Ingredients
 ![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)

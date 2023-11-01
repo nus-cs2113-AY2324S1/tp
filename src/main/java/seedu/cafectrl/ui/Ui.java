@@ -93,24 +93,12 @@ public class Ui {
      *
      * @param selectedDish Dish to be deleted
      */
-    public void showDeleteMessage(Dish selectedDish) {
+    public void printDeleteMessage(Dish selectedDish) {
         showToUser("Okay! " + selectedDish.getName() + " is deleted! :)");
     }
 
-    public void showBuyIngredientHeader() {
+    public void printBuyIngredientHeader() {
         showToUser("Added to stock:");
-    }
-
-    /**
-     * Shows ingredient to buy message to user
-     *
-     * @param ingredient Ingredient to be bought
-     */
-    public void showBuyIngredientMessage(Ingredient ingredient) {
-        String ingredientString = "Ingredient: " + ingredient.getName()
-                + "\t\tQty: " + ingredient.getQty()
-                + ingredient.getUnit();
-        showToUser(ingredientString);
     }
 
     /**
@@ -167,7 +155,6 @@ public class Ui {
 
     public void showDishAvailability(int numberOfDishes){
         showToUser("Available Dishes: " + numberOfDishes);
-        printLine();
     }
 
     public void showNeededRestock(String ingredientName, int currentQuantity, String unit, String neededIngredient){

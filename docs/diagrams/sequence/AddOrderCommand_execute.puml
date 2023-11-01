@@ -22,16 +22,22 @@ autonumber
             return
             ":Chef" -> ":Order" : getIngredientList()
                 activate ":Order"
-            return ingredientList : ArrayList<Ingredient>
-            ":Chef" -> ":Pantry" : decreaseIngredientsStock(ingredientList : ArrayList<Ingredient>)
+            return :ArrayList<Ingredient>
+            ":Chef" -> ":Pantry" : isDishCooked(:ArrayList<Ingredient>)
                 activate ":Pantry"
-            return
-            ":Chef" -> ":Order" : setComplete()
+            return isComplete : boolean
+            ":Chef" -> ":Order" : setComplete(isComplete : boolean)
                 activate ":Order"
             return
         end
-        ":Chef" -> ":Ui" : showToUser(args : String)
+        ":Chef" -> ":Ui" : showOrderStatus(args : String)
             activate ":Ui"
+            ":Ui" -> ":Ui" : showToUser(args : String)
+                activate ":Ui"
+            return
+        return
+        ":Chef" -> ":Pantry" : calculateDishAvailability(menu : Menu)
+            activate ":Pantry"
             return
         return
     opt order.getIsComplete()
@@ -39,14 +45,5 @@ autonumber
         activate ":OrderList"
         return
     end
-    ":AddOrderCommand" -> ":OrderList" : getTotalCost()
-        activate ":OrderList"
-        return totalOrderListCost : float
-    ":AddOrderCommand" -> ":Ui" : showTotalCost(totalOrderListCost)
-        activate ":Ui"
-        ":Ui" -> ":Ui" : showToUser(args : String)
-            activate ":Ui"
-        return
-    return
 return
 @enduml

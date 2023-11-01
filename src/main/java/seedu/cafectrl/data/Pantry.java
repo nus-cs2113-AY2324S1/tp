@@ -2,7 +2,6 @@ package seedu.cafectrl.data;
 
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -10,9 +9,7 @@ import java.util.ArrayList;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
-    private ArrayList<Dish> menuItems;
     private Ui ui;
-    private Storage storage;
 
     //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
@@ -128,18 +125,23 @@ public class Pantry {
                 .findFirst()
                 .orElse(null);
     }
-
+    //@@author NaychiMin
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
     public void calculateDishAvailability(Menu menu) {
-        for (Dish dish : menu.getMenuItemsList()) {
+        int menuSize = menu.getSize();
+        for (int i = 0; i < menuSize; i++) {
+            Dish dish = menu.getDishFromId(i);
             ui.showToUser("Dish: " + dish.getName());
             int numberOfDishes = calculateMaxDishes(dish, menu);
             ui.showDishAvailability(numberOfDishes);
+            if (i != menuSize - 1) {
+                ui.printLine();
+            }
         }
     }
-
+    //@@author
     /**
      * Calculates the number of dishes that can be prepared with the available ingredients.
      *
@@ -150,7 +152,6 @@ public class Pantry {
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
 
         for (Ingredient dishIngredient : dishIngredients) {
-            System.out.println(dishIngredient);
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 

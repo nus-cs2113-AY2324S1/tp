@@ -56,14 +56,24 @@ public class Encoder {
     }
 
     //@@author ziyi105
+    /**
+     * Encodes the pantry stock into format ingredient name | quantity | unit
+     * @param pantry the pantry from current session
+     * @return an arrayList of string of ecoded pantry stock
+     */
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
         // Convert pantry stock to a list of String
         ArrayList<String> pantryStockInString = new ArrayList<>();
         ArrayList<Ingredient> pantryStock = pantry.getPantryStock();
         for (Ingredient ingredient : pantryStock) {
-            String encodedIngredient = ingredient.getName() + " "
-                    + ingredient.getQty() + " " + ingredient.getUnit();
-            pantryStockInString.add(encodedIngredient);
+            StringBuilder encodedIngredient = new StringBuilder();
+            encodedIngredient.append(ingredient.getName());
+            encodedIngredient.append(DIVIDER);
+            encodedIngredient.append(ingredient.getQty());
+            encodedIngredient.append(DIVIDER);
+            encodedIngredient.append(ingredient.getUnit());
+            encodedIngredient.append(System.lineSeparator());
+            pantryStockInString.add(encodedIngredient.toString());
         }
         return pantryStockInString;
     }
@@ -90,7 +100,7 @@ public class Encoder {
                 orderString.append((day + 1) + DIVIDER);
                 orderString.append(order.getDishName() + DIVIDER);
                 orderString.append(order.getQuantity() + DIVIDER);
-                orderString.append(order.totalOrderCost() + DIVIDER);
+                orderString.append(order.calculateTotalOrderCost() + DIVIDER);
                 orderString.append(order.getIsComplete());
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));
