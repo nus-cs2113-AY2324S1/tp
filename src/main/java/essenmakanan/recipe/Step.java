@@ -1,51 +1,65 @@
 package essenmakanan.recipe;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Step {
 
     private String description;
-    private LocalDateTime startTime;
-    private int estimatedTimeInMinutes;
+
+    private LocalTime time;
+
     private Tag tag;
 
-    private final static int currentYear = LocalDateTime.now().getYear();
-    private final static int currentMonth = LocalDateTime.now().getMonthValue();
-    private final static int currentDay = LocalDateTime.now().getDayOfMonth();
+    private int estimatedDuration;
 
-    public Step(String description, String startTime, int estimatedTimeInMinutes, Tag tag) {
-        // startTime has to be in the format "hours:Minutes"
+    public Step(String description) {
         this.description = description;
-        String[] timeDetails = startTime.split(":");
-        this.startTime = LocalDateTime.of(currentYear, currentMonth, currentDay,Integer.parseInt(timeDetails[0]), Integer.parseInt(timeDetails[0]));
-        this.estimatedTimeInMinutes = estimatedTimeInMinutes;
-        this.tag = tag;
     }
 
-    public String chDescription() {
+    public Step(String description, LocalTime time, Tag tag) {
+        this.description = description;
+        this.time = time;
+        this.tag = tag;
+        this.estimatedDuration = 30;
+    }
+
+    public Step(String description, String time) {
+        // the parameter time has to follow the format "hours:minutes"
+        this.description = description;
+        this.estimatedDuration = 30;
+        this.tag = Tag.ACTUAL_COOKING;
+        this.time = LocalTime.of(Integer.parseInt(time.split(":")[0]), Integer.parseInt(time.split(":")[1]));
+    }
+
+    public Step(String description, Tag tag) {
+        this.description = description;
+        this.tag = tag;
+        time = LocalTime.now();
+        estimatedDuration = 30;
+    }
+
+    public Step(String description, String time, Tag tag) {
+        // the parameter time has to follow the format "12:20"
+        this.description = description;
+        this.estimatedDuration = 30;
+        this.tag = tag;
+        this.time = LocalTime.of(Integer.parseInt(time.split(":")[0]), Integer.parseInt(time.split(":")[1]));
+    }
+
+    public String getDescription() {
         return description;
     }
-
-
-
-
-
-
-
-
-
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getEstimatedTimeInMinutes() {
-        return estimatedTimeInMinutes;
+    public LocalTime getTime() {
+        return time;
     }
 
-    public void setEstimatedTimeInMinutes(int estimatedTimeInMinutes) {
-        this.estimatedTimeInMinutes = estimatedTimeInMinutes;
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public Tag getTag() {
@@ -56,20 +70,23 @@ public class Step {
         this.tag = tag;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public int getEstimatedDuration() {
+        return estimatedDuration;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public void setEstimatedDuration(int estimatedDuration) {
+        this.estimatedDuration = estimatedDuration;
     }
 
-    public static void main(String[] args) {
-        Time time1 = new Time(0);
-
-        System.out.println(time1);
-
+    @Override
+    public String toString() {
+        if (tag.equals(Tag.NIGHT_BEFORE)) {
+            return "You need to " + getDescription() + " at "
+                + time.toString() + " the night before for "
+                + estimatedDuration + " minutes.";
+        } else {
+            return "You need to " + getDescription() + " at "
+                + time.toString() + " for " + estimatedDuration + " minutes.";
+        }
     }
-
-
 }
