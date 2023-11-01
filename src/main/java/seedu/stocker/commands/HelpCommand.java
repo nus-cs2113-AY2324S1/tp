@@ -15,38 +15,38 @@ public class HelpCommand extends Command {
     public CommandResult execute() {
         return new CommandResult<>(
                 System.lineSeparator() + AddCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + DeleteCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + HelpCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + ListCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + ShowStockLevelCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + FindCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + AddToCartCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + CheckOutCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + ViewCartCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + LoginCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + RegisterCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + SaveCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + AddVendorCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + ListVendorCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + SetThresholdCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + ListThresholdCommand.MESSAGE_USAGE
-                + System.lineSeparator()
-                + System.lineSeparator() + ExitCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + DeleteCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + HelpCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ListCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ShowStockLevelCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + FindCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + AddToCartCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + CheckOutCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ViewCartCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + LoginCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + RegisterCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + SaveCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + AddVendorCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ListVendorCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + SetThresholdCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ListThresholdCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ExitCommand.MESSAGE_USAGE
 
         );
     }

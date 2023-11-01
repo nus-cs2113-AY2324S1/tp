@@ -59,9 +59,21 @@ File is then used to update inventory list when stocker is ran.
 
 Adds a vendor into a list to be tracked by the system.
 
-### Feature- list vendors
+### Feature-list vendors
 
 Displays the name of all vendors being tracked by the system.
+
+### Feature-add vendor supply
+
+Adds a drug into a vendor's supply list to be tracked by the system. 
+
+### Feature-list vendor supply
+
+Displays the list of all drugs being supplied by a particular vendor. 
+
+### Feature-find vendor supply
+
+Displays the list of all vendors that supply a particular drug. 
 
 ### Feature-add to cart
 
@@ -69,11 +81,22 @@ Adds a drug to the current cart if the requested quantity is available in the in
 
 ### Feature-view cart
 
-List all added drugs in the current cart
+List all added drugs in the current cart.
 
 ### Feature-checkout
 
 Empty the current cart and retrieve the specified items and quantity from the inventory.
+
+### Feature-add description
+
+Adds a drug's description into a list to be tracked by the system.
+
+### Feature-get description
+
+Retrieves the description of a particular drug. 
+
+### Feature-list description
+Displays a list of all the descriptions for all corresponding drugs
 
 ## Usage
 
@@ -376,6 +399,61 @@ Expected outcome:
 ||Listed all vendors in the list.
 ```
 
+### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
+
+Adds a drug into a vendor's supply list to be tracked by the system, and vendor must already be added into the system. 
+
+Format:
+
+addVendorSupply VENDOR_NAME DRUG_NAME
+
+Example of usage:
+
+`addVendorSupply Moderna Paracetamol`
+
+Expected outcome:
+
+```
+|| New drug added to moderna's supply list: paracetamol
+```
+
+
+### `listVendorSupply` - Displays the list of all drugs being supplied by a particular vendor.
+
+Displays the list of all drugs being supplied by a particular vendor.
+
+Format:
+
+listVendorSupply VENDOR_NAME
+
+Example of usage:
+
+`listVendorSupply Moderna`
+
+Expected outcome:
+
+```
+|| Drugs supplied by Moderna: paracetamol, panadol
+```
+
+### `findVendorSupply` -Displays the list of all vendors that supply a particular drug.
+
+Displays the list of all vendors that supply a particular drug.
+
+Format:
+
+findVendorSupply DRUG_NAME
+
+Example of usage:
+
+`findVendorSupply paracetamol`
+
+Expected outcome:
+
+```
+|| Vendors supplying the drug paracetamol: moderna, apotheca
+```
+
 ### `addtocart` - Adds drug into current cart
 
 Adds a drug in a specified quantity in the current cart.
@@ -478,6 +556,68 @@ Expected outcome:
 
 ```
 
+
+### `addDescription` - Adds a drug's description into a list to be tracked by the system.
+
+Adds a drug's description into a list to be tracked by the system.
+
+Format:
+
+addDescription /n DRUG_NAME /desc DESCRIPTION 
+
+Example of usage:
+
+`addDescription /n Panadol /desc Pain Relief
+`
+
+Expected outcome:
+
+```
+|| New drug description added for Panadol: Pain Relief 
+```
+
+
+### `getDescription` - Retrieves the description of a particular drug.
+
+Retrieves the description of a particular drug.
+
+Format:
+
+getDescription /n DRUG_NAME
+
+Example of usage:
+
+`getDescription /n Panadol
+`
+
+Expected outcome:
+
+```
+|| Pain Relief
+```
+
+
+### `listDescriptions` - Displays a list of all the descriptions for all corresponding drugs
+
+Displays a list of all the descriptions for all corresponding drugs
+
+Format:
+
+listDescriptions 
+
+Example of usage:
+
+`listDescriptions
+`
+
+Expected outcome:
+
+```
+|| List of Drug Descriptions:
+|| Panadol: Pain Relief
+|| Dolo: Stomache Discomfort
+```
+
 ## FAQ
 
 **Q**: Can i register with blank username and password
@@ -496,3 +636,9 @@ Expected outcome:
 - save : `save`
 - add Vendor : `addVendor`
 - list Vendor : `listVendors`
+- add Vendor Supply : `addVendorSupply VENDOR_NAME DRUG_NAME`
+- list Vendor Supply : `listVendorSupply VENDOR_NAME`
+- find Vendor Supply : `findVendorSupply DRUG_NAME`
+- add description : `addDescription /n DRUG_NAME /desc DESCRIPTION`
+- get description : `getDescription /n DRUG_NAME`
+- list descriptions : `listDescriptions`
