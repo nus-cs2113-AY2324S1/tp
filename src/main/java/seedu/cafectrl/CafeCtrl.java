@@ -8,12 +8,8 @@ import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.parser.ParserUtil;
 import seedu.cafectrl.storage.Storage;
-import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * CafeCtrl application's entry point.
@@ -34,7 +30,6 @@ public class CafeCtrl {
 
     private CafeCtrl() {
         this.ui = new Ui();
-        this.ui.showToUser(System.lineSeparator(), Messages.INITIALISE_STORAGE_MESSAGE, System.lineSeparator());
         this.storage = new Storage(this.ui);
         this.currentDate = new CurrentDate();
         this.sales = new Sales();

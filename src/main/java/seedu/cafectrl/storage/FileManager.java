@@ -48,7 +48,6 @@ public class FileManager {
 
     /**
      * Checks if the text file and folder exists in the user's system and creates them (if needed)
-     * @return true if and only if file exists, false otherwise
      * @param filePath the specified path location of the file
      */
     public void checkFileExists(String filePath) throws IOException {
