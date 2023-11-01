@@ -4,7 +4,7 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
-public class ShowSalesCommand extends Command{
+public class ShowSalesCommand extends Command {
     public static final String COMMAND_WORD = "show_sales";
     private Sales sales;
     private Ui ui;

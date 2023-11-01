@@ -1,9 +1,11 @@
 package seedu.cafectrl.command;
 
-import seedu.cafectrl.data.Chef;
+import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.Chef;
+
 import seedu.cafectrl.ui.Ui;
 
 public class AddOrderCommand extends Command {
@@ -17,18 +19,20 @@ public class AddOrderCommand extends Command {
     protected Ui ui;
     protected Pantry pantry;
     protected OrderList orderList;
+    protected Menu menu;
 
     Order order;
-    public AddOrderCommand(Order order, Ui ui, Pantry pantry, OrderList orderList) {
+    public AddOrderCommand(Order order, Ui ui, Pantry pantry, OrderList orderList, Menu menu) {
         this.order  = order;
         this.ui = ui;
         this.pantry = pantry;
         this.orderList = orderList;
+        this.menu = menu;
     }
     @Override
     public void execute() {
         orderList.addOrder(order);
-        Chef chef = new Chef(order, pantry, ui);
+        Chef chef = new Chef(order, pantry, ui, menu);
         chef.cookDish();
         //pantry.printPantryStock();
         if (order.getIsComplete()) {

@@ -9,12 +9,14 @@ public class Chef {
     private final Order order;
     private final Pantry pantry;
     private final Ui ui;
+    private Menu menu;
     private final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
-    public Chef(Order order, Pantry pantry, Ui ui) {
+    public Chef(Order order, Pantry pantry, Ui ui, Menu menu) {
         this.order = order;
         this.pantry = pantry;
         this.ui = ui;
+        this.menu = menu;
     }
 
     public void cookDish() {
@@ -27,9 +29,9 @@ public class Chef {
             String orderStatus = order.getIsComplete()? Messages.COMPLETE_ORDER : Messages.INCOMPLETE_ORDER;
             String totalCost = dollarValue.format(order.getTotalOrderCost());
             ui.showOrderStatus(orderStatus, totalCost);
-            pantry.calculateDishAvailability();
+            pantry.calculateDishAvailability(menu);
         } catch (Exception e) {
-            ui.showToUser(Messages.INCOMPLETE_ORDER);
+            ui.showToUser(e.getMessage());
         }
     }
 

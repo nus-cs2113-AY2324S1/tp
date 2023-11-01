@@ -97,14 +97,14 @@ public class Pantry {
      *
      * @param dishIngredients Array of ingredients used to make the dish order.
      */
-    public boolean isDishCooked(ArrayList<Ingredient> dishIngredients){
+    public boolean isDishCooked(ArrayList<Ingredient> dishIngredients) {
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
             int finalQuantity = stockQuantity-usedQuantity;
-            if(finalQuantity<0) {
+            if(finalQuantity < 0) {
                 return false;
             }
             usedIngredientFromStock.setQty(finalQuantity);
@@ -128,10 +128,10 @@ public class Pantry {
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
-    public void calculateDishAvailability(){
-        for (Dish dish : menuItems) {
+    public void calculateDishAvailability(Menu menu){
+        for (Dish dish : menu.getMenuItemsList()) {
             ui.showToUser("Dish: " + dish.getName());
-            int numberOfDishes = calculateMaxDishes(dish);
+            int numberOfDishes = calculateMaxDishes(dish, menu);
             ui.showDishAvailability(numberOfDishes);
         }
     }
@@ -141,13 +141,12 @@ public class Pantry {
      *
      * @param dish The dish being ordered.
      */
-    public int calculateMaxDishes(Dish dish) {
+    public int calculateMaxDishes(Dish dish, Menu menu) {
         int maxNumofDish = Integer.MAX_VALUE;
-        //This function will be replaced by the function used
-        //to retrieve dishIngredients when order class is implemented
-        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName());
+        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
 
         for (Ingredient dishIngredient : dishIngredients) {
+            System.out.println(dishIngredient);
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
@@ -197,11 +196,11 @@ public class Pantry {
      * @param orderedDish The name of the ordered dish.
      * @return The list of ingredients for the ordered dish.
      */
-    public ArrayList<Ingredient> retrieveIngredientsForDish(String orderedDish){
+    public ArrayList<Ingredient> retrieveIngredientsForDish(String orderedDish, Menu menu) {
         ArrayList<Ingredient> dishIngredients = new ArrayList<>();
 
         //retrieving the ingredients for orderedDish
-        for (Dish dish : menuItems) {
+        for (Dish dish : menu.getMenuItemsList()) {
             if (dish.getName().equals(orderedDish)) {
                 dishIngredients.addAll(dish.getIngredients());
                 break;

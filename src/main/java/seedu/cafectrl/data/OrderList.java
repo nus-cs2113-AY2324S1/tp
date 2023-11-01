@@ -57,21 +57,23 @@ public class OrderList {
      */
     public void printOrderList(Menu menu, Ui ui) {
         ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
-        if (!orderList.isEmpty()) {
-            for (Order order : getOrderList()) {
-                aggregateOrder(order, aggregatedOrders);
-            }
-            for (Order aggregatedOrder : aggregatedOrders) {
-                ui.showToUser(String.format(HEADER_FORMAT,
-                        aggregatedOrder.getDishName(),
-                        aggregatedOrder.getQuantity(),
-                        aggregatedOrder.totalOrderCost()));
-
-            }
-            ui.showToUser("Total for day: $" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
-        } else {
+        if (orderList.isEmpty()) {
             ui.showToUser("No orders for this day.");
+            return;
         }
+
+        for (Order order : getOrderList()) {
+            aggregateOrder(order, aggregatedOrders);
+        }
+
+        for (Order aggregatedOrder : aggregatedOrders) {
+            ui.showToUser(String.format(HEADER_FORMAT,
+                    aggregatedOrder.getDishName(),
+                    aggregatedOrder.getQuantity(),
+                    aggregatedOrder.totalOrderCost()));
+        }
+
+        ui.showToUser("Total for day: $" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
     }
 
     /**

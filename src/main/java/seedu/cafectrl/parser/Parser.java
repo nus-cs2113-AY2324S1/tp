@@ -84,7 +84,7 @@ public class Parser implements ParserUtil {
      * @return command requested by the user
      */
     public Command parseCommand(Menu menu, String userInput, Ui ui,
-                                Pantry pantry, Sales sales, CurrentDate currentDate) {
+                   Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -424,7 +424,7 @@ public class Parser implements ParserUtil {
 
             Order order = new Order(orderedDish, dishQty);
 
-            return new AddOrderCommand(order, ui, pantry, orderList);
+            return new AddOrderCommand(order, ui, pantry, orderList, menu);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
