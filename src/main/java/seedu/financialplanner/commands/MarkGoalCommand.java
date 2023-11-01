@@ -9,7 +9,7 @@ public class MarkGoalCommand extends Command {
     private final int index;
     public MarkGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
-        if(rawCommand.args.size() == 1) {
+        if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
         } else {
             throw new IllegalArgumentException("Incorrect arguments.");
