@@ -1,6 +1,5 @@
 package essenmakanan.storage;
 
-import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.parser.IngredientParser;
