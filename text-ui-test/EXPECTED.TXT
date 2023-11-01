@@ -6,18 +6,14 @@ Invalid command. Please try again.
 Type 'help' to see the list of commands available.
 ____________________________________________________________
 ____________________________________________________________
-Invalid command. Please try again.
-Type 'help' to see the list of commands available.
-____________________________________________________________
-____________________________________________________________
 You can access our user guide by https://docs.google.com/document/d/1BOz_v4eYQ8y7Dje6Jm6nqymi9jmrsb9MAohLCL_sLvI/edit?usp=sharing
 
 Functions and their format:
 
 Adding an entry: add
 Format:
-Add expense /category /description /value
-Add income /description /value
+add income /de <description> /date <date> /amt [currency] <amount>
+add expense /cat <category> /type <type> /de <description> /date <date> /amt <amount>
 
 Listing all entries: list
 Format:
@@ -27,20 +23,29 @@ list expense
 
 Deleting an entry: delete
 Format:
-delete income [index_pos]
-delete expense [index_pos]
+delete income <index_pos>
+delete expense <index_pos>
+
+Edit an entry: edit
+Format:
+edit income <index> /de <description> /date <date> /amt [currency] <amount>
+edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>
 
 Check balance of income: balance
-Format:
-balance
+Format: balance
 
 Exiting the program: exit
-Format:
-exit
+Format: exit
+____________________________________________________________
+____________________________________________________________
+Both income and expense lists cleared
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this income:
 Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+____________________________________________________________
+____________________________________________________________
+Expected fields `/de`, `/date`, and `/amt` are missing or improperly formatted.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this income:
@@ -96,6 +101,19 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
 Missing fields detected
+____________________________________________________________
+____________________________________________________________
+The SGD/USD rate has been updated to 0.8.
+____________________________________________________________
+____________________________________________________________
+We have converted USD to SGD at the SGD/USD rate of 0.8
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this income:
+Income: remittance from Dad | Date: 01/Oct/2023 | Amount: $1250.00
+____________________________________________________________
+____________________________________________________________
+Please update the exchange rate for HKD
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

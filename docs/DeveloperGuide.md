@@ -28,6 +28,14 @@ When the `User` exits the program, the `storage` class will be called to save th
 
 `Storage` will read from the local storage when the program is run again.
 
+### Expense Class Overview
+
+The Expenses are divided into three categories. Transport, Utilities and Food.
+Each of the categories inherit from a base Expense class which in turn
+inherits from the FinancialRecord class.
+
+![expense_class_diagram.png](/Users/apple/Desktop/CS2113/tp/images/expense_class_diagram.png)
+
 ### IncomeManager
 
 the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList` and `Ui`.
@@ -50,7 +58,7 @@ The ExpenseManager is facilitated by `ExpenseParser`,  `ExpenseManager`, `Expens
 5. Expense object is returned to ExpenseManager from ExpenseParser.
 6. Expense obejct is returned to Duke from ExpenseManager.
 
-![expenseManager_sequence_diagram.png](/Users/apple/Desktop/expenseManager_sequence_diagram.png)
+![expenseManager_sequence_diagram.png](/Users/apple/Desktop/CS2113/tp/images/expenseManager_sequence_diagram.png)
 
 ### Find Command
 The FindCommand is facilitated by `FindCommand`, `FindParser`, `Ui`,`ExpenseList` and `IncomeList`.
@@ -79,6 +87,18 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 7. Read the content on the file and add corresponding object to incomes or expenses list
 
 ![FindCommand_SequenceDiagram.png](..%2Fimages%2FGetFromTxt.png)
+
+### SaveToTxt Command
+The SaveToTxt Command is facilitated by `FileWriter` ,`IncomeList` and `ExpenseList`
+1. The user start the program and the function will run everytime after user input a command
+2. Once the command executed, the function saveIncomeAndExpense will run automatically
+3. It will run the function saveIncomeToTextFile first, the saveIncomeToTextFile will create a FileWriter and loop through the incomes list
+4. It will get description, date, and amount from the income list for every single income record in the list and save the information into the text file
+5. After that, the saveIncomeToTextFile will then call the saveExpenseToTextFile function 
+6. The saveExpenseToTextFile will create a new FileWriter and loop through the expenses list 
+7. It will get description, date, amount and type from the expenses list for every single expense record in the list and save the information into the text file
+
+![FindCommand_SequenceDiagram.png](..%2Fimages%2FSaveToTxt.png)
 
 ## Product scope
 ### Target user profile

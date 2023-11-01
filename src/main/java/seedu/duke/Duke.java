@@ -106,16 +106,11 @@ public class Duke {
             break;
 
         case "add_income":
-            try {
-                IncomeManager incomeCommand = new IncomeManager(fullCommand);
-                incomeCommand.execute();
-                Income newIncome = incomeCommand.getNewIncome();
-                incomes.add(newIncome);
-                Ui.printIncomeAddedMessage(newIncome);
-            } catch (KaChinnnngException e) {
-                Ui.showLineDivider();
-                throw e;
-            }
+            IncomeManager incomeCommand = new IncomeManager(fullCommand);
+            incomeCommand.execute();
+            Income newIncome = incomeCommand.getNewIncome();
+            incomes.add(newIncome);
+            Ui.printIncomeAddedMessage(newIncome);
             break;
 
         case "list_income":
@@ -123,18 +118,11 @@ public class Duke {
             break;
 
         case "add_expense":
-            try {
-                ExpenseManager expenseCommand = new ExpenseManager(fullCommand);
-                expenseCommand.execute();
-                Expense newExpense = expenseCommand.getNewExpense();
-                expenses.add(newExpense);
-                Ui.printExpenseAddedMessage(newExpense);
-            } catch (KaChinnnngException e) {
-                Ui.showLineDivider();
-                System.out.println(e.getMessage());
-                Ui.showLineDivider();
-                throw e;
-            }
+            ExpenseManager expenseCommand = new ExpenseManager(fullCommand);
+            expenseCommand.execute();
+            Expense newExpense = expenseCommand.getNewExpense();
+            expenses.add(newExpense);
+            Ui.printExpenseAddedMessage(newExpense);
             break;
 
         case "list_expense":
@@ -170,17 +158,11 @@ public class Duke {
             break;
 
         case "find":
-            try {
-                String[] parsedParameters = FindParser.parseFindCommand(fullCommand);
-                FindCommand findCommand = new FindCommand(incomes, expenses,
-                            parsedParameters[0], parsedParameters[1],
-                            parsedParameters[2], parsedParameters[3], ui);
-                findCommand.execute();
-            } catch (KaChinnnngException e) {
-                Ui.showLineDivider();
-                System.out.println(e.getMessage());
-            }
-            Ui.showLineDivider();
+            String[] parsedParameters = FindParser.parseFindCommand(fullCommand);
+            FindCommand findCommand = new FindCommand(incomes, expenses,
+                        parsedParameters[0], parsedParameters[1],
+                        parsedParameters[2], parsedParameters[3], ui);
+            findCommand.execute();
             break;
 
         case "clear_incomes":
@@ -219,6 +201,7 @@ public class Duke {
         case "list_exchange_rates":
             exchangeRateManager.showExchangeRates();
             break;
+
         case "update_exchange_rate":
             Ui.showLineDivider();
             Command c = new UpdateExchangeRateCommand(fullCommand, exchangeRateFileHandler);
