@@ -72,7 +72,7 @@ public class Sales {
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
 
-            ui.showToUser("Day " + (day+1) + ":");
+            ui.showToUser("Day " + (day + 1) + ":");
             ui.showToUser(String.format(HEADER_FORMAT, "Dish Name", "Dish Qty", "Total Cost Price"));
             orderList.printOrderList(menu, ui);
         }
@@ -85,7 +85,7 @@ public class Sales {
      * @param menu The Menu object representing the cafe's menu.
      * @param day The day for which sales data is to be printed.
      */
-    public void printSaleByDay(Ui ui, Menu menu, int day){
+    public void printSaleByDay(Ui ui, Menu menu, int day) {
         int orderListIndex = day - 1;
         try {
             OrderList orderList = orderLists.get(orderListIndex);

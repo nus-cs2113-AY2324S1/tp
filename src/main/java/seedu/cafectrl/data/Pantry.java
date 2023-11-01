@@ -84,7 +84,8 @@ public class Pantry {
      */
     private int getIndexOfIngredient(String name) {
         for (int i = 0; i < pantryStock.size(); i++) {
-            if (name.equalsIgnoreCase(pantryStock.get(i).getName().trim())) {
+            String ingredientName = pantryStock.get(i).getName().trim()
+            if (name.equalsIgnoreCase(ingredientName)) {
                 return i;
             }
         }
@@ -128,7 +129,7 @@ public class Pantry {
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
-    public void calculateDishAvailability(Menu menu){
+    public void calculateDishAvailability(Menu menu) {
         for (Dish dish : menu.getMenuItemsList()) {
             ui.showToUser("Dish: " + dish.getName());
             int numberOfDishes = calculateMaxDishes(dish, menu);

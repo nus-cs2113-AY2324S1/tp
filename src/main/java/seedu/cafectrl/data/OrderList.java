@@ -102,7 +102,9 @@ public class OrderList {
     private int getIndexByDishName(ArrayList<Order> aggregatedOrders, String dishName) {
         for (int i = 0; i < aggregatedOrders.size(); i++) {
             Order order = aggregatedOrders.get(i);
-            if (order.getDishName().equalsIgnoreCase(dishName.trim())) {
+            String orderDishName = order.getDishName();
+            String dishName = dishName.trim();
+            if (orderDishName.equalsIgnoreCase(dishName)) {
                 return i;
             }
         }
