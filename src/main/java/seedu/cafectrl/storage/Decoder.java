@@ -63,7 +63,6 @@ public class Decoder {
     }
 
     //@@author ziyi105
-
     /**
      * Decodes raw string from pantry stock data file and create ingredient object from the data
      * @param encodedPantryStock raw string from pantry stock data file

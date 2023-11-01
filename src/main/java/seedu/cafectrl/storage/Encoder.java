@@ -55,12 +55,12 @@ public class Encoder {
         return ingredientListString;
     }
 
+    //@@author ziyi105
     /**
      * Encodes the pantry stock into format ingredient name | quantity | unit
      * @param pantry the pantry from current session
      * @return an arrayList of string of ecoded pantry stock
      */
-    //@@author ziyi105
     public static ArrayList<String> encodePantryStock(Pantry pantry) {
         // Convert pantry stock to a list of String
         ArrayList<String> pantryStockInString = new ArrayList<>();
