@@ -31,4 +31,6 @@ public class ErrorMessages {
     public static final String ERROR_IN_PANTRY_STOCK_DATA = "Error in pantry stock data file! Skipping this " +
             "particular ingredient!";
     public static final String UNIT_NOT_MATCHING = "Sorry, you have used a different unit for this ingredient!";
+    public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: Incorrect format for the show_sale command.\n";
+    public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer for the 'day' field!";
 }

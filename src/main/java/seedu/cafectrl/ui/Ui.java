@@ -199,7 +199,7 @@ public class Ui {
      * @param dollarCost The price of the orders
      */
     public void showTotalCost(String dollarCost) {
-        showToUser("Total orderList cost: $" + dollarCost);
+        showToUser("Total order cost: $" + dollarCost);
     }
 
     public void showPreviousDay() {
