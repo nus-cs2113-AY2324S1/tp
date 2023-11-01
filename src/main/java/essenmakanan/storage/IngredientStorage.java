@@ -14,8 +14,8 @@ import java.util.Scanner;
 
 public class IngredientStorage {
 
-    private String dataPath = "data/ingredients.txt";
-    private String dataDirectory = "data";
+    private String dataPath;
+    private String dataDirectory;
 
     private ArrayList<Ingredient> ingredientListPlaceholder;
 

@@ -15,8 +15,8 @@ import java.util.Scanner;
 
 public class RecipeStorage {
 
-    private String dataPath = "data/recipes.txt";
-    private String dataDirectory = "data";
+    private String dataPath;
+    private String dataDirectory;
 
     private ArrayList<Recipe> recipeListPlaceholder;
 
