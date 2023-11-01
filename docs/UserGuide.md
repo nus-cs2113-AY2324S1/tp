@@ -255,9 +255,9 @@ You have removed an Expense
    Description: groceries
 from the Financial Planner.
 Balance: -830.00
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-
 ```
+
+- Note: Balance displayed above is just an example. Your actual balance may differ.
 ### List
 
 #### List all: `list`
