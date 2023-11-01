@@ -16,7 +16,7 @@ public class BuyIngredientCommand extends Command {
     public static final String MESSAGE_USAGE = "\nTo buy ingredient:\n"
             + COMMAND_WORD + " ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
-            + "Example:\n"
+            + "Example:"
             + COMMAND_WORD + " ingredient/rice qty/200g, ingredient/chicken qty/100g";
 
     protected Ui ui;

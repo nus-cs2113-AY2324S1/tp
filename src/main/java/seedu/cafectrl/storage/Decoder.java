@@ -80,7 +80,7 @@ public class Decoder {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
             } else {
                 Ingredient ingredient = new Ingredient(decodedData[0],
-                        Integer.parseInt(decodedData[1]), decodedData[2]);
+                        Integer.parseInt(decodedData[1].trim()), decodedData[2]);
                 pantryStock.add(ingredient);
             }
         }
@@ -99,7 +99,7 @@ public class Decoder {
             return false;
         } else {
             try {
-                Integer.parseInt(decodedPantryStock[1]);
+                Integer.parseInt(decodedPantryStock[1].trim());
             } catch (NumberFormatException e) {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
                 return false;
