@@ -1,6 +1,7 @@
 package quizhub.questionlist;
 
 import quizhub.command.CommandShortAnswer;
+import quizhub.question.MultipleChoiceQn;
 import quizhub.question.Question;
 import quizhub.question.ShortAnsQn;
 import quizhub.exception.QuizHubExceptions;
@@ -34,7 +35,7 @@ public class QuestionList {
     public void addShortAnswerQn(String description, String answer, String module,
                                  Question.QnDifficulty qnDifficulty, boolean showMessage){
 
-        if(containsDuplicateShortAnswer(description, answer, module, qnDifficulty)){
+        if(containsDuplicateQuestion(description, Question.QnType.SHORTANSWER, module, qnDifficulty)){
             System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
         } else{
             allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
@@ -47,27 +48,61 @@ public class QuestionList {
     }
 
     /**
-     * Checks if a duplicate short answer question with the same description, answer, module, and difficulty
-     * already exists in the list.
+     * Adds a multiple choice question to the current question list.
      *
-     * @param description The description of the short answer question.
-     * @param answer The answer of the short answer question.
-     * @param module The module of the short answer question.
-     * @param difficulty The difficulty level of the short answer question.
-     * @return true if a duplicate exists, false otherwise.
+     * @param description The Question Description
+     * @param option1 First option
+     * @param option2 Second option
+     * @param option3 Third option
+     * @param option4 Fourth option
+     * @param answer The answer to the question (1, 2, 3 or 4)
+     * @param module The module of the Question
+     * @param qnDifficulty The difficulty level of the questions
+     * @param showMessage If true, program will print response message on CLI after question is added.
      */
+    public void addMultipleChoiceQn(String description, String option1, String option2,
+                                    String option3, String option4, int answer, String module,
+                                    Question.QnDifficulty qnDifficulty, boolean showMessage) {
 
-    public boolean containsDuplicateShortAnswer(String description, String answer, String module,
-                                                Question.QnDifficulty difficulty) {
-        // Create a formatted string to match the format produced by getQuestionDescription
-        String formattedParameters = description.strip() + " / " + answer.strip() + " | " + module + " | "
-                + difficulty.toString();
-        for (Question question : allQns) {
-            if (formattedParameters.equalsIgnoreCase(question.getQuestionDescription())) {
-                return true; // Found a duplicate
+        if(containsDuplicateQuestion(description, Question.QnType.MULTIPLECHOICE, module, qnDifficulty)){
+            // TODO: Decide to just use CommandShortAnswer's String, abstract further, or copy DUPLICATED_INPUT to CommandMultipleChoice
+            System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
+        } else {
+            allQns.add(new MultipleChoiceQn(description, option1, option2, option3,
+                    option4, answer, module, qnDifficulty));
+            if (showMessage) {
+                System.out.println("    I have added the following question OwO:");
+                System.out.printf("      [M] %s\n", viewQuestionByIndex(getQuestionListSize()));
+                System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
             }
         }
-        return false; // No duplicate found
+
+    }
+
+    /**
+     * Checks if there is a duplicate question.
+     * "Duplicate" (similar description) questions are allowed to exist
+     * in different question types (i.e. in MCQ, then as short ans),
+     * in different modules (i.e. different contexts),
+     * in different difficulties (i.e. different levels),
+     *
+     * @param description The description of the short answer question.
+     * @param qnType The type of question (SHORTANS or MULTIPLECHOICE)
+     * @param module The module of the short answer question.
+     * @param qnDifficulty The difficulty level of the short answer question.
+     * @return true if all of the above are true
+     */
+    public boolean containsDuplicateQuestion (String description, Question.QnType qnType,
+                                              String module, Question.QnDifficulty qnDifficulty) {
+        for (Question question : allQns) {
+            if(description.strip().equalsIgnoreCase(question.getQuestionDescription()) &&
+                qnType.equals(question.getQuestionType()) &&
+                module.equalsIgnoreCase(question.getModule()) &&
+                qnDifficulty.equals(question.getDifficulty()) ) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -79,23 +114,17 @@ public class QuestionList {
      */
     public void printQuestion(Question question, boolean asList){
         int qnIndex = allQns.indexOf(question);
+        int oneIndexed = qnIndex++;
+        String isDone = question.questionIsDone() ? "X" : " ";
         switch(question.getQuestionType()) {
         case SHORTANSWER:
-            if (question.questionIsDone()) {
-                if (asList) {
-                    System.out.printf("    %d: [S][X] %s\n", qnIndex + 1, question.getQuestionDescription());
-                } else {
-                    System.out.printf("        [S][X] %s\n", question.getQuestionDescription());
-                }
-
+            if(asList) {
+                System.out.printf("    %d: [S][%s] %s\n", oneIndexed, isDone, question.getQuestionDescription());
             } else {
-                if (asList) {
-                    System.out.printf("    %d: [S][] %s\n", qnIndex + 1, question.getQuestionDescription());
-                } else {
-                    System.out.printf("        [S][] %s\n", question.getQuestionDescription());
-                }
+                System.out.printf("        [S][%s] %s\n", isDone, question.getQuestionDescription());
             }
             break;
+            // TODO Add MULTIPLECHOICE (or maybe have a general format that doesn't need a case?)
         default:
             break;
         }
@@ -120,19 +149,23 @@ public class QuestionList {
      *                    after question is marked as done.
      */
     public void markQuestionAsDone (int index, boolean showMessage){
+        Question question = null;
         try{
-            Question question = allQns.get(index-1);
-            if(!question.questionIsDone()) {
-                question.markAsDone();
-                if (showMessage) {
-                    System.out.println("    Roger that! I have marked the following question as done >w< !");
-                    printQuestion(question, false);
-                }
-            } else {
-                System.out.println("    Question originally done! No changes made!");
-            }
+            int oneIndexed = index--;
+            question = allQns.get(oneIndexed);
         } catch (IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");
+            return;
+        }
+        assert(question != null);
+        if(!question.questionIsDone()) {
+            question.markAsDone();
+            if (showMessage) {
+                System.out.println("    Roger that! I have marked the following question as done >w< !");
+                printQuestion(question, false);
+            }
+        } else {
+            System.out.println("    Question originally done! No changes made!");
         }
     }
     /**

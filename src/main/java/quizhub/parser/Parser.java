@@ -1,17 +1,6 @@
 package quizhub.parser;
 
-import quizhub.command.Command;
-import quizhub.command.CommandExit;
-import quizhub.command.CommandInvalid;
-import quizhub.command.CommandList;
-import quizhub.command.CommandShortAnswer;
-import quizhub.command.CommandStart;
-import quizhub.command.CommandEdit;
-import quizhub.command.CommandDelete;
-import quizhub.command.CommandFind;
-import quizhub.command.CommandShuffle;
-import quizhub.command.CommandMarkDifficulty;
-import quizhub.command.CommandHelp;
+import quizhub.command.*;
 import quizhub.question.Question;
 import quizhub.ui.Ui;
 import quizhub.exception.QuizHubExceptions;
@@ -43,6 +32,7 @@ public class Parser {
                 return new CommandList();
             case CommandShortAnswer.COMMAND_WORD:
                 return parseShortAnswerCommand(userInput);
+                // TODO: Add Parsing case for MCQ
             case CommandStart.COMMAND_WORD:
                 return parseStartCommand(userInput);
             case CommandEdit.COMMAND_WORD:
@@ -128,6 +118,9 @@ public class Parser {
             return qnIndex;
         }
     }
+
+    // TODO: parseMultipleChoiceCommand
+
     /**
      * Attempt to parse user input into a Short Answer Command by extracting question description, answer,
      * module the question falls under, and level of difficulty from the user input.
