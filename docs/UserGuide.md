@@ -125,6 +125,49 @@ edit income 1 /de end of year bonus /date 02/10/2023 /amt HKD 3000.00
 edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 ```
 
+### View the supported currencies: list currencies
+This function allows user to see the foreign currencies supported by KaChinnnng.
+
+Note: The default currency is SGD.
+
+Format:
+```
+list currencies
+```
+Example output:
+```
+
+```
+
+### list exchange rates
+List all updated exchange rates. All exchange rates that are updated
+either via ExchangeRateFile or the command line will be shown. User can call the update exchange rates function to 
+register the exchange rates into their KaChinnnng.
+
+Note: Exchange rates are shown in SGD/{other currency}.
+
+Format:
+```
+list exchange rates
+```
+Example output:
+```
+```
+
+### update exchange rate
+Update exchange rate of a specific foreign currency. Exchange rates will be saved upon
+successful update.
+
+Note: rate specified should be in SGD/{foreign currency}.
+
+Format:
+```
+update exchange rate <supported_currency> <rate>
+```
+Example
+```
+update exchange rate USD 0.8
+```
 
 ## FAQ
 
