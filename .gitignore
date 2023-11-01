@@ -16,6 +16,5 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 META-INF/MANIFEST.MF
-data/menu.txt
-data/pantry_stock.txt
-data/orders.txt
+data/
+

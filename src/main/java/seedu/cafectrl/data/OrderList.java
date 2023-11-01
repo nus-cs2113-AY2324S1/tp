@@ -58,7 +58,7 @@ public class OrderList {
     public void printOrderList(Menu menu, Ui ui) {
         ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
         if (orderList.isEmpty()) {
-            ui.showToUser("No orders for this day.");
+            ui.showToUser("No sales for this day.");
             return;
         }
 

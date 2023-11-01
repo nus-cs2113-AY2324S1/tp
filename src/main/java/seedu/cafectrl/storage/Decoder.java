@@ -63,7 +63,7 @@ public class Decoder {
     }
 
     //@@author ziyi105
-    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock, Menu menu) {
+    public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
 
         if (encodedPantryStock.isEmpty()) {
@@ -107,7 +107,9 @@ public class Decoder {
      */
     public static Sales decodeSales(ArrayList<String> textLines, Menu menu) {
         ArrayList<OrderList> orderLists = new ArrayList<>();
-
+        if(textLines.isEmpty()) {
+            return new Sales();
+        }
         //for each 'order' in text file
         for (String line : textLines) {
             String[] orderData = line.split(DIVIDER);

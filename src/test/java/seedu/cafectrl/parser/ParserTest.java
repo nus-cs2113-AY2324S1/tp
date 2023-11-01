@@ -15,6 +15,7 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.parser.exception.ParserException;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -441,17 +442,17 @@ class ParserTest {
     }
 
     @Test
-    void parsePriceToFloat_validPriceString_exactFloatPrice() {
+    void parsePriceToFloat_validPriceString_exactFloatPrice() throws ParserException {
         String inputPriceString = "3.14";
 
         assertEquals((float) 3.14, Parser.parsePriceToFloat(inputPriceString));
     }
 
     @Test
-    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ArithmeticException {
+    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ParserException {
         String inputPriceString = "99999999999.99";
 
-        assertThrows(ArithmeticException.class, () -> Parser.parsePriceToFloat(inputPriceString));
+        assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
     }
 
     @Test
@@ -496,6 +497,20 @@ class ParserTest {
         assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
     }
 
+    @Test
+    void isNameLengthInvalid_moreThanMaxLengthString_true() {
+        assertTrue(Parser.isNameLengthInvalid("this string is more than 35 characters"));
+    }
+
+    @Test
+    void isNameLengthInvalid_lessThanMaxLengthString_false() {
+        assertFalse(Parser.isNameLengthInvalid("this str is less than 35 chars"));
+    }
+
+    @Test
+    void isNameLengthInvalid_nullString_nullPointerExceptionThrown() throws NullPointerException {
+        assertThrows(NullPointerException.class, () ->Parser.isNameLengthInvalid(null));
+    }
 
     //@@author ShaniceTang
     @Test
