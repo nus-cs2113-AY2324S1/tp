@@ -80,9 +80,19 @@ Example:
 ### Listing all menu items : `list_menu`
 Shows a list of all dishes on the menu
 
-Format: list_menu
+Format: `list_menu`
 
 Example:
+```agsl
++-----------------------------------------+
+| Ah, behold, the grand menu of delights! |
++--------------------------+--------------+
+| Dish Name                |  Price       |
++--------------------------+--------------+
+| 1. chicken rice          |  $2.50       |
+| 2. chicken curry         |  $4.30       |
++-----------------------------------------+
+```
 
 ### Listing ingredients needed for the selected dish : `list_ingredients`
 Lists out the ingredients needed along with the quantity for a specific dish
@@ -133,6 +143,26 @@ Example:
 
 
 ### Adding an order : `add_order`
+Adds an order consisting of dishes off the menu to an order list
+
+Format: `add_order name/DISH_NAME qty/DISH_QTY`
+
+Example:
+```agsl
+> add_order name/chicken rice qty/2
+I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!
+-----------------------------------------------------
+Order is ready!
+Total order cost: $5.00
+-----------------------------------------------------
+Listed below are the availability of the dishes for the next order!
+Dish: chicken rice
+Available Dishes: 8
+-----------------------------------------------------
+Dish: chicken curry
+Available Dishes: 4
+```
+* The `DISH_QTY` must be a positive integer number.
 
 
 ### Exiting the program : `bye`
