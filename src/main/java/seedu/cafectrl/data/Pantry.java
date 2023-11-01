@@ -14,16 +14,16 @@ public class Pantry {
     private Ui ui;
     private Storage storage;
 
-    public Pantry(Ui ui, ArrayList<Ingredient> pantryStock, ArrayList<Dish> menuItem) {
+    //@@author NaychiMin
+    public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
         this.ui = ui;
         this.pantryStock = pantryStock;
-        this.menuItems = menuItem;
     }
 
-    public Pantry(Ui ui, ArrayList<Dish> menuItem) {
+    //@@author ShaniceTang
+    public Pantry(Ui ui) {
         this.ui = ui;
         this.pantryStock = new ArrayList<>();
-        this.menuItems = menuItem;
     }
 
     /**

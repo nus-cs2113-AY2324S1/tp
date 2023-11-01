@@ -65,10 +65,9 @@ public class Decoder {
     //@@author ziyi105
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock, Menu menu) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
-        ArrayList<Dish> menuItems = menu.getMenuItemsList();
 
         if (encodedPantryStock.isEmpty()) {
-            return new Pantry(ui, menuItems);
+            return new Pantry(ui);
         }
         for (String encodedData : encodedPantryStock) {
             String[] decodedData = encodedData.split(" ");
@@ -80,7 +79,7 @@ public class Decoder {
                 pantryStock.add(ingredient);
             }
         }
-        return new Pantry(ui, pantryStock, menuItems);
+        return new Pantry(ui, pantryStock);
     }
 
     private static boolean isValidPantryStockFormat(String[] decodedPantryStock) {
