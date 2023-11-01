@@ -63,7 +63,7 @@ Example: delete 1
 edit_priceTo edit price of a menu item: edit_price index/DISH_INDEX price/NEW_PRICE
 Example: edit_price index/1 price/4.50
 ```
-
+<!---@@author DextheChik3n--->
 ### Adding a dish : `add`
 Adds a dish consisting of its ingredients to the menu
 
@@ -76,7 +76,7 @@ Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIE
 
 Example:
 
-
+<!---@@author Cazh1--->
 ### Listing all menu items : `list_menu`
 Shows a list of all dishes on the menu
 
@@ -96,6 +96,7 @@ Output:
 
 Example:
 
+<!---@@author NaychiMin--->
 ### Listing ingredients needed for the selected dish : `list_ingredients`
 Lists out the ingredients needed along with the quantity for a specific dish
 
@@ -105,8 +106,7 @@ Example:
 
 list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
 
-
-
+<!---@@author ShaniceTang--->
 ### Deleting a menu item : `delete`
 Deletes a specific dish from the menu
 
@@ -116,10 +116,14 @@ Format: `delete DISH_INDEX`
 * The index refers to the index number shown in the menu list 
 * The index must be a positive integer
 
-Example:
-* list followed by delete 4 deletes the 4th dish in the menu
+Example: `delete 1`
 
+Output:
+```
+Okay! chicken rice is deleted! :)
+```
 
+<!---@@author ziyi105--->
 ### Editing price of menu item : `edit_price`
 Edits the price of an existing dish on the menu
 
@@ -133,6 +137,7 @@ Price modified for the following dish:
 Chicken rice - $4.50
 ```
 
+<!---@@author ShaniceTang--->
 ### Viewing the total stock of ingredients : `view_stock`
 Displays the available stock of all the ingredients found in the pantry
 
@@ -161,6 +166,7 @@ Ingredient: chicken		Qty: 500g
 Ingredient: milk		Qty: 1000ml
 ```
 
+<!---@@author Cazh1--->
 ### Adding an order : `add_order`
 
 Adds an order to the current business day
@@ -200,6 +206,7 @@ Output:
 Prepare for liftoff! We're about to fast-forward to the next day. Hold onto your hats; here we go!
 Today is Day 2
 ```
+<!---@@author--->
 
 ### Exiting the program : `bye`
 Exits the program.
