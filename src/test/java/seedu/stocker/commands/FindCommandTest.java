@@ -93,4 +93,32 @@ class FindCommandTest {
         // Test the command's execute method with a null keyword
         assertEquals(expectedOutput, actualResult.getFeedbackToUserFindTest());
     }
+
+    /**
+     * Tests the execution of the FindCommand with a keyword for drug serial numbers.
+     */
+    @Test
+    public void executeTestBySerialNumber() {
+        // Create an instance of FindCommand with a keyword for serial number
+        FindCommand command = new FindCommand("SER123", "/s");
+
+        // Create a new inventory
+        Inventory inventory = new Inventory();
+        Drug drug3 = new Drug("Aspirin", "02/05/2028");
+        inventory.addNewDrug("Aspirin", drug3, "SER123", 15L);
+
+        // Set the modified inventory for the command
+        command.setData(inventory, new SalesList(), new Cart());
+
+        // Define expected output for drugs with matching serial number
+        String expectedOutput = "1. Name: Aspirin, Expiry date: 02/05/2028, Serial number: SER123, Quantity: 15"
+                + System.lineSeparator() +
+                System.lineSeparator() +
+                "Listed all drugs with the keyword in the inventory.";
+
+        CommandResult actualResult = command.execute();
+
+        // Test the command's execute method with the modified inventory
+        assertEquals(expectedOutput, actualResult.getFeedbackToUserFindTest());
+    }
 }
