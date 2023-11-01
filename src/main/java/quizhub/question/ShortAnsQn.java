@@ -5,7 +5,7 @@ package quizhub.question;
 public class ShortAnsQn extends Question {
     private String answer;
     /**
-     * Creates a new question of type SHORTANSWER with specified module.
+     * Creates a new question of type SHORTANSWER
      *
      * @param description Question description.
      * @param answer Question answer.
@@ -16,7 +16,7 @@ public class ShortAnsQn extends Question {
         this.answer = answer;
     }
     /**
-     * Creates a new question of type SHORTANSWER with specified module.
+     * Creates a new question of type SHORTANSWER
      *
      * @param description Question description.
      * @param answer Question answer.
@@ -29,7 +29,8 @@ public class ShortAnsQn extends Question {
     }
 
     /**
-     * Returns question answer.
+     * Gets question answer.
+     * @return The answer
      */
     public String getQuestionAnswer() {
         return this.answer;

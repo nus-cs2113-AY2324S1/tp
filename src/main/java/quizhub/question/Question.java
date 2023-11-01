@@ -4,7 +4,7 @@ package quizhub.question;
  */
 public class Question {
     public static final String QN_UNCHANGED_MSG = "    No changes made to question";
-    public enum QnType {SHORTANSWER, DEFAULT};
+    public enum QnType {SHORTANSWER, MULTIPLECHOICE, DEFAULT};
     public enum QnDifficulty {EASY, HARD, NORMAL, INVALID};
     private QnType qnType;
     private QnDifficulty qnDifficulty;
