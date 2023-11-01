@@ -80,6 +80,15 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 
 ![FindCommand_SequenceDiagram.png](..%2Fimages%2FGetFromTxt.png)
 
+### ExchangeRateManager
+The Sequence Diagram below shows how the components interact with each other for the scenario 
+where the user issues the command `update exchange rate USD 0.8`.
+
+![UpdateExchangeRate_SequenceDiagram.png](..%2Fimages%2FUpdateExchangeRate_SequenceDiagram.png)
+
+This is facilitated by `Duke`, `UpdateExchangeRateCommand`, `ExchangeRateManager`'and `ExchangeRateFileHandler`.
+
+
 ## Product scope
 ### Target user profile
 
