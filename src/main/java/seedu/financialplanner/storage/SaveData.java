@@ -12,9 +12,11 @@ import seedu.financialplanner.utils.Ui;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents the saving of data to storage.
+ */
 public abstract class SaveData {
     private static final String FILE_PATH = "data/watchlist.json";
-
     private static final CashflowList cashflowList = CashflowList.getInstance();
 
     public static void save(String filePath) throws FinancialPlannerException {

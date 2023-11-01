@@ -12,6 +12,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents the handling of user interactions.
+ */
 public class Ui {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static Ui ui = null;

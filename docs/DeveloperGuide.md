@@ -1,5 +1,33 @@
 # Developer Guide
 
+## Table of contents
+
+* [Acknowledgements](#acknowledgements)
+* [Design & implementation](#design--implementation)
+  * [Storage Component](#storage-component)
+    * [Design considerations](#design-considerations)
+  * [Visualization Feature](#visualization-feature-)
+    * [Class diagram](#class-diagram)
+    * [Sequence diagram](#sequence-diagram-)
+  * [Add income/expense feature](#add-incomeexpense-feature)
+    * [Step 1](#step-1)
+    * [Step 2](#step-2)
+    * [Step 3](#step-3)
+    * [Step 4](#step-4)
+    * [Diagrams](#diagrams)
+  * [Budget Feature](#budget-feature)
+    * [Set and update budget](#set-and-update-budget)
+    * [Delete budget](#delete-budget)
+    * [Reset budget](#reset-budget)
+    * [View budget](#view-budget)
+  * [Product Scope](#product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+  * [Instructions for manual testing](#instructions-for-manual-testing)
+
 ## Acknowledgements
 
 **Xchart (A Simple Charting Library for Java)**

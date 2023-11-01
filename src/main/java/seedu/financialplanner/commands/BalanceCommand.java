@@ -6,9 +6,12 @@ import seedu.financialplanner.utils.Ui;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Represents a command for displaying balance.
+ */
 public class BalanceCommand extends Command {
     private final Ui ui = Ui.getInstance();
-
+    
     public BalanceCommand(RawCommand rawCommand) {
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
@@ -16,8 +19,11 @@ public class BalanceCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to display balance.
+     */
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         ui.showMessage("Balance: " + getBalanceString());
     }
 

@@ -3,7 +3,7 @@
 mainframe sd DeleteBudget
 participant ":BudgetCommand" as BudgetCommand
 participant "<<class>>\nBudget" as Budget
-participant "<<class>>\nUi" as Ui
+participant ":Ui" as Ui
 
 alt hasBudget
     BudgetCommand -> Budget: deleteBudget()
