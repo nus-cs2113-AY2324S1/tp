@@ -1,11 +1,15 @@
 package seedu.cafectrl.data;
 
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
+
+import java.text.DecimalFormat;
 
 public class Chef {
     private final Order order;
     private final Pantry pantry;
     private final Ui ui;
+    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
     public Chef(Order order, Pantry pantry, Ui ui) {
         this.order = order;
@@ -17,12 +21,17 @@ public class Chef {
         try {
             if (!order.getIsComplete()) {
                 ui.showChefMessage();
-                boolean isComplete = pantry.checkIngredientsStock(order.getIngredientList());
+                boolean isComplete = pantry.isDishCooked(order.getIngredientList());
                 order.setComplete(isComplete);
             }
-            ui.showToUser("Is order completed?: " + order.getIsComplete());
+            String orderStatus = order.getIsComplete()? Messages.COMPLETE_ORDER : Messages.INCOMPLETE_ORDER;
+            String totalCost = dollarValue.format(order.getTotalOrderCost());
+            ui.showOrderStatus(orderStatus, totalCost);
+            pantry.calculateDishAvailability();
         } catch (Exception e) {
-            ui.showToUser("Unable to cook: " + e.getMessage());
+            ui.showToUser(Messages.INCOMPLETE_ORDER);
         }
     }
+
+
 }

@@ -7,7 +7,6 @@ import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
@@ -92,23 +91,13 @@ public class Pantry {
         return -1;
     }
 
-
     //@@author NaychiMin
-    /**
-     * Checks the stock of ingredients and dish availability based on a given order.
-     */
-    public boolean checkIngredientsStock(ArrayList<Ingredient> dishIngredients){
-        boolean cooked = decreaseIngredientsStock(dishIngredients);
-        calculateDishAvailability();
-        return cooked;
-    }
-
     /**
      * Decreases the stock of ingredients based on the given dish order.
      *
      * @param dishIngredients Array of ingredients used to make the dish order.
      */
-    public boolean decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
+    public boolean isDishCooked(ArrayList<Ingredient> dishIngredients){
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
@@ -120,7 +109,6 @@ public class Pantry {
             }
             usedIngredientFromStock.setQty(finalQuantity);
         }
-        //TODO: store pantryStock to storage
         return true;
     }
 

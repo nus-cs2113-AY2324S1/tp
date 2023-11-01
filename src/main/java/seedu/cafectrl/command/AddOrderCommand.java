@@ -11,7 +11,6 @@ import java.text.DecimalFormat;
 
 public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
-    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     public static final String MESSAGE_USAGE = "To add a new order: \n"
             + COMMAND_WORD
             + "name/DISH_NAME qty/QUANTITY\n"
@@ -37,8 +36,7 @@ public class AddOrderCommand extends Command {
         //pantry.printPantryStock();
         if (order.getIsComplete()) {
             orderList.addCost(order);
-            //TODO: order unable to cook pls buy ingredients
         }
-        ui.showTotalCost(dollarValue.format(order.getTotalOrderCost()));
+
     }
 }

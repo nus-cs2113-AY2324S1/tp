@@ -213,6 +213,10 @@ public class Ui {
         showToUser(Messages.CHEF_MESSAGE);
     }
 
+    public void showDishAvailability() {
+        showToUser(Messages.AVAILABLE_DISHES);
+    }
+
     /**
      * Shows the total cost in the order list, formatted in the proper format
      *
@@ -220,6 +224,14 @@ public class Ui {
      */
     public void showTotalCost(String dollarCost) {
         showToUser("Total order cost: $" + dollarCost);
+    }
+
+    public void showOrderStatus(String orderStatus, String totalCost) {
+        printLine();
+        showToUser(orderStatus);
+        showTotalCost(totalCost);
+        printLine();
+        showDishAvailability();
     }
 
     public void showPreviousDay() {
