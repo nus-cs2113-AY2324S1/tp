@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class Order {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     private final Dish orderedDish;
-    private final int dishQty;
+    private int dishQty;
     private final ArrayList<Ingredient> ingredientList;
     private boolean isComplete = false;
-    private final float totalOrderCost;
+    private float totalOrderCost;
 
     public Order(Dish orderedDish, int dishQty) {
         this.dishQty = dishQty;
@@ -21,11 +21,12 @@ public class Order {
         this.totalOrderCost = totalOrderCost();
     }
 
-    public Order(Dish orderedDish, int dishQty, float orderCost) {
+    public Order(Dish orderedDish, int dishQty, float orderCost, boolean isComplete) {
         this.dishQty = dishQty;
         this.orderedDish = orderedDish;
         this.ingredientList = setIngredientList();
         this.totalOrderCost = orderCost;
+        this.isComplete = isComplete;
     }
 
     @Override
@@ -72,8 +73,8 @@ public class Order {
         return totalOrderCost;
     }
 
-    public void setComplete() {
-        this.isComplete = true;
+    public void setComplete(boolean isComplete) {
+        this.isComplete = isComplete;
     }
 
     public boolean getIsComplete() {
@@ -88,4 +89,11 @@ public class Order {
         return dishQty;
     }
 
+    public void setQuantity(int quantity) {
+        this.dishQty = quantity;
+    }
+
+    public void setTotalOrderCost(float cost) {
+        this.totalOrderCost = cost;
+    }
 }

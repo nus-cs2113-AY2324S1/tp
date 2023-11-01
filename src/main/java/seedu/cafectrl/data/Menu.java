@@ -54,4 +54,13 @@ public class Menu {
         int offSetDishIndex = dishIndex - Ui.OFFSET_LIST_INDEX;
         return offSetDishIndex >= 0 && offSetDishIndex < this.getSize();
     }
+
+    public ArrayList<Order> getAggregatedOrders() {
+        ArrayList<Order> aggregatedOrders = new ArrayList<>();
+        for (int i = 0; i < menuItems.size(); i++) {
+            Order order = new Order(menuItems.get(i), 0);
+            aggregatedOrders.add(order);
+        }
+        return aggregatedOrders;
+    }
 }

@@ -4,6 +4,7 @@ import seedu.cafectrl.data.Chef;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
+import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
 import java.text.DecimalFormat;
@@ -36,8 +37,8 @@ public class AddOrderCommand extends Command {
         //pantry.printPantryStock();
         if (order.getIsComplete()) {
             orderList.addCost(order);
+            //TODO: order unable to cook pls buy ingredients
         }
-        ui.showTotalCost(dollarValue.format(orderList.getTotalOrderListCost()));
-        //orderList.printOrderList();
+        ui.showTotalCost(dollarValue.format(order.getTotalOrderCost()));
     }
 }

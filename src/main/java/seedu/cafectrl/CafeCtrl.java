@@ -33,10 +33,10 @@ public class CafeCtrl {
         this.ui.showToUser(Messages.INITIALISE_STORAGE_MESSAGE);
         this.storage = new Storage(this.ui);
         this.menu = this.storage.loadMenu();
-        this.pantry = this.storage.loadPantryStock();
+        this.pantry = this.storage.loadPantryStock(menu);
         this.sales = this.storage.loadOrderList(menu);
         currentDate = new CurrentDate();
-        this.sales = new Sales();
+        //this.sales = new Sales();
     }
 
     private void setup() {
@@ -62,7 +62,7 @@ public class CafeCtrl {
                 ui.printLine();
             }
         } while (!command.isExit());
-        //this.storage.saveAll(this.menu, this.sales, this.pantry);
+        this.storage.saveAll(this.menu, this.sales, this.pantry);
     }
 
     public static void main(String[] args) throws IOException {

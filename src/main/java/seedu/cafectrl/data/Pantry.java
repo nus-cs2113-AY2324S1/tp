@@ -15,14 +15,16 @@ public class Pantry {
     private Ui ui;
     private Storage storage;
 
-    public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
+    public Pantry(Ui ui, ArrayList<Ingredient> pantryStock, ArrayList<Dish> menuItem) {
         this.ui = ui;
         this.pantryStock = pantryStock;
+        this.menuItems = menuItem;
     }
 
-    public Pantry(Ui ui) {
+    public Pantry(Ui ui, ArrayList<Dish> menuItem) {
         this.ui = ui;
         this.pantryStock = new ArrayList<>();
+        this.menuItems = menuItem;
     }
 
     /**
@@ -93,22 +95,23 @@ public class Pantry {
     /**
      * Checks the stock of ingredients and dish availability based on a given order.
      */
-    public void checkIngredientsStock(){
+    public boolean checkIngredientsStock(ArrayList<Ingredient> dishIngredients){
         //the dish variable and dishIngredients array will be removed
         // when order class is implemented as it will pass in dishIngredients
-        String dish = "Chicken Rice";
-        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish);
-        decreaseIngredientsStock(dishIngredients);
+//        String dish = "Chicken Rice";
+//        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish);
+        boolean cooked = decreaseIngredientsStock(dishIngredients);
         calculateDishAvailability();
+        return cooked;
     }
 
+    //TODO: edit java doc
     /**
      * Decreases the stock of ingredients based on the given dish order.
      *
      * @param dishIngredients Array of ingredients used to make the dish order.
      */
-    public void decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
-        //pantryStock = retrieveStockFromStorage();
+    public boolean decreaseIngredientsStock(ArrayList<Ingredient> dishIngredients){
 
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
@@ -116,10 +119,13 @@ public class Pantry {
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
             int finalQuantity = stockQuantity-usedQuantity;
+            if(finalQuantity<0) {
+                return false;
+            }
             usedIngredientFromStock.setQty(finalQuantity);
         }
         //TODO: store pantryStock to storage
-
+        return true;
     }
 
     /**
@@ -209,8 +215,6 @@ public class Pantry {
      * @return The list of ingredients for the ordered dish.
      */
     public ArrayList<Ingredient> retrieveIngredientsForDish(String orderedDish){
-        //function will be removed once order class is implemented
-        ArrayList<Dish> menuItems = dummyData();
         ArrayList<Ingredient> dishIngredients = new ArrayList<>();
 
         //retrieving the ingredients for orderedDish

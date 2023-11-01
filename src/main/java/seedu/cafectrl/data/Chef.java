@@ -17,8 +17,8 @@ public class Chef {
         try {
             if (!order.getIsComplete()) {
                 ui.showChefMessage();
-                pantry.decreaseIngredientsStock(order.getIngredientList());
-                order.setComplete();
+                boolean isComplete = pantry.checkIngredientsStock(order.getIngredientList());
+                order.setComplete(isComplete);
             }
             ui.showToUser("Is order completed?: " + order.getIsComplete());
         } catch (Exception e) {
