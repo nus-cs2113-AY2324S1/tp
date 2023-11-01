@@ -21,6 +21,7 @@ Welcome to KaChinnnngggg! How may i assist you today?
 ____________________________________________________________
 ```
 7. type in desired commands and press enter to execute them. (note: commands are not case sensitive)
+8. "[ ]" denotes optional parameters
 
 ## Features 
 
@@ -39,14 +40,14 @@ Creates a new entry for income or expenses in the program.
 Values of income and expense added has to be lower than 1000000.
 Income and Expense values takes up to 2 decimal places.
 
-To add an income:
+To add an income (with foregin currency):
 ```
-add income /description <description> /date <date> /amount <amount>
+add income /de <description> /date <date> /amt [currency] <amount>
 ```
 
-To add an expense:
+To add an expense (with foregin currency):
 ```
-add expense /catergory <catergory> /description <description> /date <date> /amount <amount>
+add expense /cat <catergory> [/type <type>] /de <description> /date <date> /amt [currency] <amount>
 ```
 
 Use case:
@@ -54,15 +55,19 @@ Use case:
 - There are only 3 categories for expenses: `Food`, `Transport`, `Utilities`.
 - Amount is takes up to 2 decimal places.
 - by default, amount is set to SGD.
+- User can specify the currency. Refer to the supported currencies for valid currency.
 - format of date is `dd/mm/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 
 Example of usage:
 ```
-add income /description salary /date 01/01/2020 /amount 1000
+add income /de salary /date 01/01/2020 /amt 1000
 ```
 ```
-add expense /category Food /description lunch /date 01/01/2020 /amount 10.50
+add expense /cat Food /de lunch /date 01/01/2020 /amt 10.50
+```
+```
+add expense /cat Food /type lunch /de chicken sandwich /date 01/01/2020 /amt USD 10.50
 ```
 
 ### List all entries: list
@@ -90,6 +95,25 @@ delete expense <index>
 ```
 delete income <index>
 ```
+### Edit an entry: edit 
+Edit an entry from the list of income/expenses.
+
+Format:
+```
+edit income <index> /de <description> /date <date> /amt [currency] <amount>
+```
+```
+edit expense <index> /cat <catergory> [/type <type>] /de <description> /date <date> /amt [currency] <amount>
+```
+Example of usage:
+```
+edit income 1 /de end of year bonus /date 02/10/2023 /amt HKD 3000.00
+```
+```
+edit expense 2 /cat food /de dinner /date 01/10/2023 /amt 10.00
+```
+
+
 
 ## FAQ
 
