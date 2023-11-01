@@ -26,7 +26,7 @@ public class FlashcardComponent {
         try {
             flashcardList = storage.loadFlashcards();
         } catch (FileNotFoundException e){
-            System.out.println("Making New file for Flashcards");
+            //System.out.println("Making New file for Flashcards");
             flashcardList = new FlashcardList(new ArrayList<>());
         }
 
