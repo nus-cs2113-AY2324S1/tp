@@ -1,6 +1,6 @@
 package seedu.cafectrl.data;
 
-import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.ui.Ui;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class OrderList {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
+    private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
     private ArrayList<Order> orderList;
     private float totalOrderListCost;
 
@@ -54,20 +55,22 @@ public class OrderList {
      *
      * @param menu The Menu object representing the cafe's menu.
      */
-    public void printOrderList(Menu menu) {
+    public void printOrderList(Menu menu, Ui ui) {
         ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
         if (!orderList.isEmpty()) {
             for (Order order : getOrderList()) {
                 aggregateOrder(order, aggregatedOrders);
             }
             for (Order aggregatedOrder : aggregatedOrders) {
-                    System.out.printf("%-20s %-10d $%-20.2f\n",
-                            aggregatedOrder.getDishName(), aggregatedOrder.getQuantity(), aggregatedOrder.totalOrderCost());
+                ui.showToUser(String.format(HEADER_FORMAT,
+                        aggregatedOrder.getDishName(),
+                        aggregatedOrder.getQuantity(),
+                        aggregatedOrder.totalOrderCost()));
 
             }
-            System.out.printf("Total for day: $%-20.2f\n", calculateTotalCost(aggregatedOrders));
+            ui.showToUser("Total for day: $" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
         } else {
-            System.out.println("No orders for this day.");
+            ui.showToUser("No orders for this day.");
         }
     }
 
@@ -84,7 +87,6 @@ public class OrderList {
             aggregatedOrders.get(index).setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost() + order.getTotalOrderCost());
         }
     }
-
 
     /**
      * Finds the index of an order in the aggregated orders list based on the dish name.

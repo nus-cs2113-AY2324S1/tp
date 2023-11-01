@@ -11,6 +11,7 @@ import seedu.cafectrl.ui.Ui;
  */
 public class Sales {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
+    private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
 
@@ -111,19 +112,16 @@ public class Sales {
      */
     public void printSales(Ui ui, Menu menu) {
         if (orderLists.isEmpty()) {
-            System.out.println("No orders available.");
+            ui.showToUser("No orders for the day!");
             return;
         }
 
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
 
-            System.out.println("Day " + (day+1) + ":");
-            System.out.printf("%-20s %-10s %-20s\n", "Dish Name", "Dish Qty", "Total Cost Price");
-            System.out.println("entered loop list");
-            orderList.printOrderList(menu);
-
-            System.out.println();
+            ui.showToUser("Day " + (day+1) + ":");
+            ui.showToUser(String.format(HEADER_FORMAT, "Dish Name", "Dish Qty", "Total Cost Price"));
+            orderList.printOrderList(menu, ui);
         }
     }
 
@@ -138,12 +136,10 @@ public class Sales {
         int orderListIndex = day - 1;
         try {
             OrderList orderList = orderLists.get(orderListIndex);
-            System.out.println("Day " + (day) + ":");
-            System.out.printf("%-20s %-10s %-20s\n", "Dish Name", "Dish Qty", "Total Cost Price");
+            ui.showToUser("Day " + (day) + ":");
+            ui.showToUser(String.format(HEADER_FORMAT, "Dish Name", "Dish Qty", "Total Cost Price"));
 
-            orderList.printOrderList(menu);
-
-            System.out.println();
+            orderList.printOrderList(menu, ui);
         } catch (Exception e) {
             ui.showToUser("An error occurred while printing sales for the specified day.");
         }
