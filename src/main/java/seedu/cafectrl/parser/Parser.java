@@ -494,6 +494,7 @@ public class Parser implements ParserUtil {
         return sales.getOrderList(currentDay);
     }
 
+    //@@author Cazh1
     /**
      * Parses the given arguments string to identify task index number.
      *
@@ -509,6 +510,7 @@ public class Parser implements ParserUtil {
         return Integer.parseInt(formattedString);
     }
 
+    //@@author ShaniceTang
     /**
      * Extracts the quantity (numeric part) from a given string containing both quantity and unit.
      * @param qty A string containing both quantity and unit (e.g., "100g").
@@ -518,6 +520,7 @@ public class Parser implements ParserUtil {
         return Integer.parseInt(qty.replaceAll("[^0-9]", ""));
     }
 
+    //@@author ShaniceTang
     /**
      * Extracts the unit (non-numeric part) from a given string containing both quantity and unit.
      * @param qty A string containing both quantity and unit (e.g., "100g").
