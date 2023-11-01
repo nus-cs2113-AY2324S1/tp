@@ -47,7 +47,7 @@ add income /de <description> /date <date> /amt [currency] <amount>
 
 To add an expense (with foregin currency):
 ```
-add expense /cat <catergory> [/type <type>] /de <description> /date <date> /amt [currency] <amount>
+add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
 
 Use case:
@@ -64,10 +64,10 @@ Example of usage:
 add income /de salary /date 01/01/2020 /amt 1000
 ```
 ```
-add expense /cat Food /type lunch /de salad /date 01/01/2020 /amt 10.50
+add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
 ```
-add expense /cat Food /type lunch /de chicken sandwich /date 01/01/2020 /amt USD 10.50
+add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt USD 10.50
 ```
 
 ### List all entries: list
@@ -112,14 +112,14 @@ Format:
 edit income <index> /de <description> /date <date> /amt [currency] <amount>
 ```
 ```
-edit expense <index> /cat <catergory> [/type <type>] /de <description> /date <date> /amt [currency] <amount>
+edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
 Example of usage:
 ```
 edit income 1 /de end of year bonus /date 02/10/2023 /amt HKD 3000.00
 ```
 ```
-edit expense 2 /cat food /de dinner /date 01/10/2023 /amt 10.00
+edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 ```
 
 
