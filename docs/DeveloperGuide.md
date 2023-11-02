@@ -171,6 +171,34 @@ Example:
 
 ### View an ingredient feature
 
+The view ingredient feature is facilitated by the `ViewSpecificIngredientCommand` class. Users can input
+`view i/INGREDIENT_NAME` to trigger this command. Users will then be able to see the quantity and unit of specific ingredient stored.
+
+
+Note that `INGREDIENT_NAME` can be replaced with `INGREDIENT_ID`.
+
+
+- **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
+
+
+- **Step 2**
+
+  A new `ViewSpecificIngredientCommand` object will be created and will be sent back to main
+
+
+- **Step 3**
+
+  `commandObject#executeCommand()` will be called which in turn calls `IngredientParser#getIngredientIndex()` to get the index of the ingredient.
+  If the ingredient does not exist, an error will be thrown to inform the user that the ingredient does not exist.
+
+
+- **Step 4**
+
+  Finally `ViewSpecificCommand` will print `ingredient` object as there is a `toString` method within `Ingredient` class, allowing for `system.out.println(ingredient)`
+
+
 ![img_1.png](images/ViewSpecificIngredientSD.png)
 
 ### View Recipes feature
@@ -232,15 +260,68 @@ be executed as follows:
 ### Delete feature
 
 ### Start recipe feature
-![img_3.png](images/StartRecipeSD.png)
+
+The start recipe feature is used by the `StartRecipeCommand` class.
+
+To view if you have all ingredients needed to start on a recipe, use the following command
+`start recipe RECIPE_TITLE` or `start recipe RECIPE_ID`
+
+By calling `executeCommand` on the class, the steps will
+be executed as follows:
+* **Step1**
+
+  `StartRecipeCommand` will get the index of recipe by calling method `getRecipeIndex()` in the `Parser` class. 
+  This method will throw an error if the recipe entered is invalid or does not exist in the recipe database.
+
+
+* **Step2**
+
+  `StartRecipeCommand` will then call its own `getMissingIngredients()` method which will create 3 different array lists - `missingIngredeints`, `insufficientIngredients` and `diffUnitIngredients`. 
+  They account for ingredients that are missing, ingredients that you currently don't have enough of in your inventory, and ingredients that cannot be compared because of the difference in unit respectively.
+
+
+* **Step3**
+
+  `StartRecipeCommand` then call the static method `printRecipeMessage()` in `UI` class to print missing ingredients, ingredients that are insufficient, and ingredients of different units. 
+
+
+* **Step4**
+
+  `Ui` will call `listIngredients()` method in `IngredientList` class to print the 3 different array lists.
+
+![img_1.png](images/StartRecipeSD.png)
 
 ### Filter recipe feature
-The filter recipe feature is used by the `FilterRecipesCommand`
+
+The filter recipe feature is used by the `FilterRecipesCommand`.
+
+To filter recipes based on ingredients that are in it,
+use the command `filter recipe i/INGREDIENT_NAME [i/...]`, where `INGREDIENT_ID` can be used in place of `INGREDIENT_NAME` too.
+
+* **Step1**
+
+  `FilterRecipeCommand` will start a loop that filters all ingredients that the user has input
+
+
+* **Step2**
+
+  In the loop, the recipes will be filtered and be stored in `filteredRecipes` variable which is a `RecipeList` object.
+  `filteredRecipes` will contain all recipes that has the specified ingredient.
+
+
+* **Step3**
+  
+  The filteredRecipes will then be passed to the static `Ui` method `printFilteredRecipes()` to display all the recipes with the specified ingredient.
+
+
+* **Step4**
+
+  Steps 2 to 3 will repeat again until all ingredients in the input has been handled and executed. The loop will then stop and process exits the loop.
+
+
 
 ![img.png](images/FilterRecipesSD.png)
 
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 
 ## Product scope
