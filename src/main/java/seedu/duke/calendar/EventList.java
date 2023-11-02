@@ -24,6 +24,7 @@ public class EventList {
     public void deleteEvent(String name) {
         eventList.removeIf(event -> event.getName().equals(name));
     }
+
     @Override
     public String toString() {
         return "EventStorage{" +

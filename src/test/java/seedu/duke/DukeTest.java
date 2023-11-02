@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 import seedu.duke.calendar.CalendarManager;
 import seedu.duke.calendar.EventStorage;
-import seedu.duke.flashcard.*;
+import seedu.duke.flashcard.FlashcardComponent;
+import seedu.duke.flashcard.FlashcardList;
+import seedu.duke.flashcard.FlashcardStorage;
+import seedu.duke.flashcard.FlashcardUi;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
