@@ -10,14 +10,18 @@
 
 ### Storage Components
 
-API: `Storage.java`
+API: `FlashcardStorage.java`
 
-The `Storage` component,
+![Flashcard Storage Sequance Diagram](photo/FlashcardStorage-0.png)
+
+The `FlashcardStorage` component,
 * can save flashcards in `flashcard.txt` in specific text format
-* can save events in `event.txt` in specific text format
 * saves automatically when changes occur.
 * component loads automatically when the program starts.  
 * component can check if the saved txt file has been damaged.
+
+`EventStorage` has same structure.
+
 
 ### Calendar Components
 
