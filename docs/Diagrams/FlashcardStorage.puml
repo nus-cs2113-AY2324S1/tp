@@ -1,5 +1,11 @@
 @startuml
-activate FlashcardStorage
+
+autoactivate on
+participant FlashcardComponent as fc
+participant FlashcardStorage as fs
+participant FlashcardDirectory as fd
+
+fc -> fs :
 
 
 @enduml

@@ -51,6 +51,10 @@ public class Flashcard {
         this.id = id;
     }
 
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
 
     //@@author wendelinwemhoener
     public String toString() {
