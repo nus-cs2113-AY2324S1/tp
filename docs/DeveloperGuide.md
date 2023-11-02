@@ -2,6 +2,35 @@ remote_theme: minima
 # Developer Guide
 
 ## Acknowledgements
+* Table of Contents
+<!-- TOC -->
+* [Developer Guide](#developer-guide)
+  * [**Acknowledgements**](#acknowledgements)
+  * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**Design**](#design)
+    * [Architecture](#architecture)
+    * [Ui Component](#ui-component)
+    * [Parser Component](#parser-component)
+    * [Storage Component](#storage-component)
+    * [Data Component](#data-component)
+  * [**Feature**](#feature)
+    * [Add Dish](#add-dish)
+    * [Adding a Dish](#adding-a-dish)
+    * [List Menu](#list-menu)
+    * [Add Order](#add-order)
+    * [Next Day](#next-day)
+    * [Previous Day](#previous-day)
+    * [List Ingredients](#list-ingredients)
+    * [Delete Dish](#delete-dish)
+    * [Edit Price](#edit-price)
+    * [Help](#help)
+  * [**Product scope**](#product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+    * [User stories](#user-stories)
+<!-- TOC -->
+--------------------------------------------------------------------------------------------------------------------
+## **Acknowledgements**
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
