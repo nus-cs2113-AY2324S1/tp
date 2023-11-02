@@ -107,4 +107,26 @@ public class RecipeParser {
         }
         return input.strip();
     }
+
+    public static int parseStepsDuration(String input) throws EssenFormatException{
+        if (!input.contains("d/")) {
+            throw new EssenFormatException();
+        }
+        String time = input.split("d/")[1];
+        if (time.contains("minutes") || time.contains("mins")) {
+            time = time.replace("minutes", "")
+                .replace("mins", "")
+                .trim();
+            return Integer.parseInt(time);
+        } else if (time.contains("hours") || time.contains("h") || time.contains("hour")) {
+            time = time.replace("hours", "")
+                .replace("h", "")
+                .replace("hour", "")
+                .trim();
+            return (int) (Double.parseDouble(time)*60);
+        } else {
+            throw new EssenFormatException();
+        }
+
+    }
 }
