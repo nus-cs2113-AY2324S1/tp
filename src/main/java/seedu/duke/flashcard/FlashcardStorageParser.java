@@ -23,7 +23,7 @@ public final class FlashcardStorageParser {
         flashlogger = Logger.getLogger("flash");
         flashlogger.setLevel(Level.WARNING);
 
-        assert tokens.length == 6 : "Token length should be 5";
+        assert tokens.length == 4 : "Token length should be 4";
 
         flashlogger.log(Level.INFO, "token length is", tokens.length);
 
