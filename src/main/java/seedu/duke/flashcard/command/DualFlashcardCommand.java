@@ -19,6 +19,7 @@ public abstract class DualFlashcardCommand extends FlashcardCommand {
 
     public void execute(Scanner scanner, FlashcardList flashcardList) {
         String[] commandParts = input.split(" ");
+
         if (commandParts.length == beginnerCommandLength) {
             executeBeginnerMode(scanner, flashcardList);
         } else if (commandParts.length == expertCommandLength) {
