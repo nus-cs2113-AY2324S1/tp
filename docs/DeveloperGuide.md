@@ -81,7 +81,7 @@ The help feature is facilitated by the `HelpCommand` class. By calling `executeC
   Finally `Ui#showCommands()` will call `Ui#showRecipeCommands()`, `Ui#showIngredientCommands()`, `Ui#showOtherCommands()` to print all commands for recipe, ingredient and others respectively
 
 
-<img src="images/HelpFunctionSequenceDiagram.png" width="732" />
+<img src="images/HelpFunctionSD.png" width="732" />
 
 ### Exit feature
 The help feature is facilitated by the `ExitCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the exit command.
@@ -106,7 +106,7 @@ The help feature is facilitated by the `ExitCommand` class. By calling `executeC
   Finally `Ui#showCommands()` will print the exit message
 
 
-<img src="images/ExitSequenceDiagram.png" width="571" />
+<img src="images/ExitSD.png" width="571" />
 
 
 ### Add Recipe feature
@@ -169,6 +169,10 @@ Example:
 
 <img src="images/ViewAllIngredientSequenceDiagram.png" width="967" />
 
+### View an ingredient feature
+
+![img_1.png](images/ViewSpecificIngredientSD.png)
+
 ### View Recipes feature
 The view recipes feature is facilitated by the `ViewRecipeCommand` class. Users can input
 "view r" to trigger this command
@@ -227,10 +231,13 @@ be executed as follows:
 
 ### Delete feature
 
+### Start recipe feature
+![img_3.png](images/StartRecipeSD.png)
+
 ### Filter recipe feature
 The filter recipe feature is used by the `FilterRecipesCommand`
 
-
+![img.png](images/FilterRecipesSD.png)
 
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}

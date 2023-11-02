@@ -5,7 +5,7 @@ skinparam ArrowFontStyle plain
 actor User
 participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
 participant ":Parser" as Parser PARSER_COLOR
-participant "command:ViewIngredientCommand" as ViewIngredientCommand COMMAND_COLOR
+participant ":ViewIngredientCommand" as ViewIngredientCommand COMMAND_COLOR
 participant "<<class>>\nUi" as Ui INTERFACE_COLOR
 participant "ingredients:IngredientList" as Ingredients INGREDIENT_COLOR
 
