@@ -105,7 +105,7 @@ The `Storage` class,
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
 ### Data Component
-API: []
+Folder: [Data]({repoURL}src/main/java/seedu/cafectrl/data)
 ![Data Class Diagram](images/class/Data.png)
 *Figure 7: Data Package Class Diagram*
 
