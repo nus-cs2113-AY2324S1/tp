@@ -1,7 +1,5 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.flashcard.review.FlashcardReview;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

@@ -4,7 +4,6 @@ package seedu.duke.flashcard.command;
 
 import seedu.duke.flashcard.FlashcardList;
 import seedu.duke.flashcard.review.RandomReviewMode;
-import seedu.duke.flashcard.review.ReviewByTagMode;
 import seedu.duke.flashcard.review.ReviewMode;
 import seedu.duke.flashcard.review.SpacedRepetitionReviewMode;
 
@@ -14,7 +13,7 @@ import java.util.Scanner;
 
 public class StartReviewCommand extends DualFlashcardCommand {
     private final ArrayList<String> choices = new ArrayList<>(Arrays.asList(
-            "a", "b", "c"));
+            "a", "b"));
 
     public StartReviewCommand(String input) {
         this.input = input;
@@ -27,7 +26,6 @@ public class StartReviewCommand extends DualFlashcardCommand {
         System.out.println("    How do you want to review your flashcards?");
         System.out.println("        a) random mode");
         System.out.println("        b) spaced repetition mode");
-        System.out.println("        c) review by tag mode");
 
         return scanner.nextLine();
     }
@@ -37,8 +35,8 @@ public class StartReviewCommand extends DualFlashcardCommand {
         String choice = getUserChoiceReviewMode(scanner);
 
         while (!choices.contains(choice.toLowerCase())) {
-            System.out.println("    Invalid choice! Your choice must be a, b " +
-                    "or c! Please try again.");
+            System.out.println("    Invalid choice! Your choice must be a or " +
+                    "b! Please try again.");
 
             choice = getUserChoiceReviewMode(scanner);
         }
@@ -54,8 +52,8 @@ public class StartReviewCommand extends DualFlashcardCommand {
             String choice = commandParts[2].toLowerCase();
 
             if (!choices.contains(choice)) {
-                System.out.println("    Invalid choice! Your choice must be a, b " +
-                        "or c! Please try again.");
+                System.out.println("    Invalid choice! Your choice must be a" +
+                        " or b! Please try again.");
                 return;
             }
 
@@ -65,8 +63,6 @@ public class StartReviewCommand extends DualFlashcardCommand {
                     "flashcards REVIEW_MODE'");
             System.out.println("    Please try again.");
         }
-
-
     }
 
     private void startReview(Scanner scanner,
@@ -74,12 +70,8 @@ public class StartReviewCommand extends DualFlashcardCommand {
                              String choice) {
         ReviewMode reviewMode = createReviewMode(choice.toLowerCase(), flashcardList);
 
-        if (reviewMode instanceof RandomReviewMode) {
-            reviewMode.startReviewSession(scanner);
-        } else {
-            System.out.println("    This review mode hasn't yet been " +
-                    "implemented. Sorry!");
-        }
+        reviewMode.startReviewSession(scanner);
+
     }
 
     private ReviewMode createReviewMode(String choice, FlashcardList flashcardList) {
@@ -89,8 +81,6 @@ public class StartReviewCommand extends DualFlashcardCommand {
             reviewMode = new RandomReviewMode(flashcardList);
         } else if (choice.equals("b")) {
             reviewMode = new SpacedRepetitionReviewMode(flashcardList);
-        } else if (choice.equals("c")) {
-            reviewMode = new ReviewByTagMode(flashcardList);
         }
 
         assert reviewMode != null;

@@ -1,8 +1,5 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.flashcard.review.FlashcardReview;
-import seedu.duke.flashcard.review.ReviewDifficulty;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
