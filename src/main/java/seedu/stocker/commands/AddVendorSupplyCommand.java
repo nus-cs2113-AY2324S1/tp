@@ -1,7 +1,6 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.vendors.VendorSupplyList;
-import seedu.stocker.vendors.VendorsList;
 
 /**
  * Adds a drug to a vendor's supply list.
@@ -37,7 +36,7 @@ public class AddVendorSupplyCommand extends Command {
      * @return CommandResult indicating the success of adding the drug or a message indicating the vendor was not found.
      */
     @Override
-    public CommandResult execute() {
+    public <T> CommandResult<T> execute() {
         String lowercaseVendorName = vendorName.toLowerCase();
         String lowercaseDrugName = drugName.toLowerCase();
 

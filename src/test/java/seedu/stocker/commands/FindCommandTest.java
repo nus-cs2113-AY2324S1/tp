@@ -84,7 +84,7 @@ class FindCommandTest {
         Inventory inventory = new Inventory();
 
         // Set the modified inventory for the command
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         // Define expected output for invalid format
         String expectedOutput = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
@@ -109,7 +109,7 @@ class FindCommandTest {
         inventory.addNewDrug("Aspirin", drug3, "SER123", 15L);
 
         // Set the modified inventory for the command
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         // Define expected output for drugs with matching serial number
         String expectedOutput = "1. Name: Aspirin, Expiry date: 02/05/2028, Serial number: SER123, Quantity: 15"

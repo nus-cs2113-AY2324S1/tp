@@ -2,7 +2,6 @@ package seedu.stocker.vendors;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VendorsList {
 
@@ -15,7 +14,7 @@ public class VendorsList {
     /**
      * Adds new vendor to vendor list
      *
-     * @param vendor Vendor
+     * @param vendor
      */
     public void addNewVendor(Vendor vendor){
         vendorArrayList.add(vendor);
@@ -23,7 +22,7 @@ public class VendorsList {
 
     /**
      * Gets details of all vendors
-     * @return List<Vendor>
+     * @return List vendor
      */
     public List<Vendor> getVendorEntries() {
         return new ArrayList<>(this.vendorArrayList);
