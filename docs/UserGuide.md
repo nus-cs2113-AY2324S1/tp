@@ -80,27 +80,87 @@ of pressing <ENTER> to reveal the back page.
 
 Format: `create flashcard`
 
-## General explanation of calendar features
+## General Explanation of Calendar Features
 
 ## Features
-- `add event` , `delete event`
-- `list events` , `find event`
-- `delete all events`
 
-### Add an Event to the Calendar: `add event`
+Here is your features list:
 
-- **Adds an event to the calendar with start and end time** 
++ `add event` , `delete event`
++ `list events` , `find event`
++ `delete all events`
 
-Format: `add event`
+Users can use the above features to handle their events
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+### Add an Event to the Calendar
 
-Example of usage:
+**Adds an event to the calendar with start and end time** 
 
-`todo n/Write the rest of the User Guide d/next week`
+#### Usage
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
++ Format: `add event` [Command]
++ What's the event?: `Event name` [Event name]
++ When does it start?: `yyyy-mm-ddThh:mm:ss` [Start time]
++ When does it end?: `yyyy-mm-ddThh:mm:ss` [End time]
+
+**Example of usage**:
+
++ `Enter your command: add event`
++ `What's the event?: Do HW`
++ `When does it start?: 2023-12-20T12:30:30`
++ `When does it end?: 2023-12-20T12:40:30`
+
+### Delete an Event From the Calendar
+
+**deletes an event from the calendar with event name**
+
+#### Usage
+
++ Format: `delete event` 
++ Enter the event name: `Event name` [Event name]
+
+**Example of usage**:
+
++ `Enter your command: delete event`
++ `Enter the event name: Do HW`
+
+### Delete All Events From the Calendar
+
+**deletes all events from the calendar**
+
+#### Usage
+
++ Format: `delete all events`
+
+**Example of usage**:
+
++ `Enter your command: delete all events`
+
+### Find an Event From the Calendar
+
+**finds an event from the calendar**
+
+#### Usage
+
++ Format: `find event`
++ What event are you looking for?: `event name`
+
+**Example of usage**:
+
++ `Enter your command: find event`
++ `What event are you looking for?: Do HW`
+
+### List All Events From the Calendar
+
+**Lists all events from the calendar**
+
+#### Usage
+
++ Format: `list events`
+
+**Example of usage**:
+
++ `Enter your command: find event`
 
 ## FAQ
 
@@ -119,3 +179,8 @@ Every event and flashcard are automatically save after each command.
 * List all flashcards: `list flashcards`
 * Create a new flashcard: `create flashcard`
 * Review your flashcards: `review flashcards`
+* Create an event: `add event`
+* Delete an event: `delete event`
+* Delete all events: `delete all events`
+* Find an event: `find event`
+* List events: `list events` 
