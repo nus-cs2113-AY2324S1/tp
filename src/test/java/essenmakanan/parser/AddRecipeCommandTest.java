@@ -55,7 +55,6 @@ public class AddRecipeCommandTest {
     public void addWithTitleStepsTags_validInput_duration() {
         String userInput = "r/bread t/1 s/buy ingredients d/30minutes s/store ingredients " +
             "t/2 s/wash the ingredients s/cut the ingredients d/20mins t/4 s/cook d/1.6h ";
-
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
         addRecipeCommand.executeCommand();
 
@@ -77,7 +76,6 @@ public class AddRecipeCommandTest {
         assertEquals(5, step3.getEstimatedDuration());
         assertEquals(20, step4.getEstimatedDuration());
         assertEquals(96, step5.getEstimatedDuration());
-
 
     }
 

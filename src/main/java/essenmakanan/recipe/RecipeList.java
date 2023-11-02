@@ -81,16 +81,7 @@ public class RecipeList {
     }
 
     private static void listRecipeSteps(essenmakanan.recipe.Recipe recipe) {
-
-        RecipeStepList steps = recipe.getRecipeSteps();
-        int count = 1;
-        for (Step step : steps.getSteps()) {
-            assert steps.getStepByIndex(count - 1).equals(step)
-                    : "Step is not matching with the current index";
-
-            System.out.println("\t" + count + ") " + step.getDescription());
-            count++;
-        }
+        recipe.viewTimeLine();
     }
 
     private static void listRecipeIngredients(essenmakanan.recipe.Recipe recipe) {
