@@ -2,8 +2,6 @@
 
 package seedu.duke.flashcard;
 
-import seedu.duke.flashcard.review.FlashcardReview;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -11,17 +9,14 @@ public class Flashcard {
     private static int globalMaxId = 1;
     private String frontText;
     private String backText;
-    private ArrayList<FlashcardReview> reviews;
-    private LocalDateTime lastReviewOn;
     private int id;
+    private int difficulty;
 
     public Flashcard(String frontText, String backText) {
         this.frontText = frontText;
         this.backText = backText;
 
-        reviews = new ArrayList<>();
-
-        lastReviewOn = null;
+        difficulty = 5;  // initial difficulty of a flashcard
 
         globalMaxId += 1;
         id = globalMaxId;
@@ -39,10 +34,6 @@ public class Flashcard {
         globalMaxId = currentMax + 1;
     }
 
-    public void setLastReviewOn(LocalDateTime lastReviewOn) {
-        this.lastReviewOn = lastReviewOn;
-    }
-
     public String getFrontText() {
         return frontText;
     }
@@ -56,25 +47,23 @@ public class Flashcard {
     }
 
     //@@author junhyeong0411
-
-    public ArrayList<FlashcardReview> getReviews(){
-        return reviews;
-    }
-
     public void setId (int id) {
         this.id = id;
     }
 
 
-    //@@author WenderlinWemhoener
+    //@@author wendelinwemhoener
     public String toString() {
         return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()
-                + "next review due on: " + lastReviewOn + System.lineSeparator()
                 + "id: " + id + System.lineSeparator();
     }
 
-    public void addReview(FlashcardReview flashcardReview) {
-        reviews.add(flashcardReview);
+    public void applyDifficultyChange(int difficultyChange) {
+        difficulty += difficultyChange;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
     }
 }

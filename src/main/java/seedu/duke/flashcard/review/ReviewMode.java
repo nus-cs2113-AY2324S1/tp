@@ -5,7 +5,6 @@ package seedu.duke.flashcard.review;
 import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardList;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -21,8 +20,13 @@ public abstract class ReviewMode {
 
     public void startReviewSession(Scanner scanner) {
         System.out.println("    You have started a review session in "
-                + getReviewModeName());
-        System.out.println();
+                + getReviewModeName() + System.lineSeparator());
+
+        if (flashcardList.isEmpty()) {
+            System.out.println("    You have no flashcards to review!");
+            System.out.println("    Add some flashcards and try again.");
+            return;
+        }
 
         while (true) {
             Flashcard flashcardToReview = pickFlashcard();
@@ -38,9 +42,9 @@ public abstract class ReviewMode {
             System.out.println("    The actual back text is: " + flashcardToReview.getBackText());
             System.out.println();
 
-            letUserRateReviewDifficulty(scanner, flashcardToReview);
-
-            flashcardToReview.setLastReviewOn(LocalDateTime.now());
+            if (getReviewModeName().equals("spaced repetition mode")) {
+                letUserRateReviewDifficulty(scanner, flashcardToReview);
+            }
         }
 
         System.out.println("    Success! You have ended this review session.");
@@ -78,21 +82,19 @@ public abstract class ReviewMode {
             choice = scanner.nextLine();
         }
 
-        ReviewDifficulty reviewDifficulty;
+        int difficultyChange;
         switch (choice.toLowerCase()) {
         case "e":
-            reviewDifficulty = ReviewDifficulty.EASY;
+            difficultyChange = -1;
             break;
         case "m":
-            reviewDifficulty = ReviewDifficulty.MODERATE;
+            difficultyChange = 0;
             break;
         default:
-            reviewDifficulty = ReviewDifficulty.HARD;
+            difficultyChange = +1;
             break;
         }
 
-        FlashcardReview flashcardReview =
-                new FlashcardReview(LocalDateTime.now(), reviewDifficulty);
-        flashcard.addReview(flashcardReview);
+        flashcard.applyDifficultyChange(difficultyChange);
     }
 }
