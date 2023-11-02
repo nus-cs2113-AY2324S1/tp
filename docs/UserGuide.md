@@ -9,9 +9,9 @@ taking.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest jar from [the latest release on GitHub]
+2. Down the latest jar from [the latest release on GitHub]
    (https://github.com/AY2324S1-CS2113-F11-3/tp/releases).
-1. Run the jar via `java -jar duke.jar`
+3. Run the jar via `java -jar duke.jar`
 
 ## General explanation of flashcards
 
@@ -80,11 +80,39 @@ of pressing <ENTER> to reveal the back page.
 
 Format: `create flashcard`
 
+## General explanation of calendar features
+
+## Features
+- `add event` , `delete event`
+- `list events` , `find event`
+- `delete all events`
+
+### Add an Event to the Calendar: `add event`
+
+- **Adds an event to the calendar with start and end time** 
+
+Format: `add event`
+
+* The `DEADLINE` can be in a natural language format.
+* The `TODO_NAME` cannot contain punctuation.
+
+Example of usage:
+
+`todo n/Write the rest of the User Guide d/next week`
+
+`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+
 ## FAQ
+
+**Q**: Where can I find my flashcard and caldendar data?
+
+**A**: You can find it in `data/flashcards` and `data/events` folder.
+
+Every event and flashcard are automatically save after each command.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: You can transfer your data by copying & pasting the data folder.
 
 ## Command Summary
 

@@ -1,5 +1,6 @@
-package seedu.duke.calendar;
+//@@ kherlenbayasgalan
 
+package seedu.duke.calendar;
 
 import java.util.ArrayList;
 
@@ -18,11 +19,28 @@ public class EventList {
         return eventList;
     }
 
-    public int getSize(){ return eventList.size();}
+    // for logging
+    public int getSize() {
+        return eventList.size();
+    }
+
+    public void findEvent(String keyword) {
+        int count = 0;
+        for (Event event: eventList) {
+            if (event.getName().contains(keyword)) {
+                System.out.println((++count) + ". " + event);
+            }
+        }
+    }
 
     public void deleteEvent(String name) {
         eventList.removeIf(event -> event.getName().equals(name));
     }
+
+    public void deleteAllEvents() {
+        eventList.clear();
+    }
+
     @Override
     public String toString() {
         return "EventStorage{" +

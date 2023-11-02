@@ -7,16 +7,21 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * storage for Events
  * One storage manages one file
  */
 public class EventStorage {
+    private static Logger logger; // for logging
     protected String path;
 
     public EventStorage(String path){
         this.path = path;
+        logger = Logger.getLogger("flash");
     }
 
 
@@ -58,14 +63,22 @@ public class EventStorage {
             eventList.addEvent(loadEvent(eventTokens));
         }
 
-        System.out.println(String.format(
+        logger.log(Level.INFO, String.format(
                 "    There are currently %d events in the savefile",
                 eventList.getSize()));
+        //System.out.println(String.format(
+        //        "    There are currently %d events in the savefile",
+        //        eventList.getSize()));
 
         return eventList;
 
     }
 
+    /**
+     * saveEvents method
+     * save all events to file
+     * @param eventList
+     */
     public void saveEvents(ArrayList<Event> eventList) {
 
         try {
@@ -78,7 +91,8 @@ public class EventStorage {
             }
             fw.close();
         } catch (IOException e){
-            System.out.println("Failed to save.");
+            //System.out.println("Failed to save.");
+            logger.log(Level.WARNING, "problem: failed to save");
         }
     }
 

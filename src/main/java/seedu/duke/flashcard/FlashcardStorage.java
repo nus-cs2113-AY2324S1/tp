@@ -1,5 +1,7 @@
 package seedu.duke.flashcard;
 
+import seedu.duke.flashcard.review.FlashcardReview;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -19,6 +21,8 @@ public class FlashcardStorage {
     private static Logger flashlogger; // for logging
     protected String path;
 
+    FlashcardStorageParser parser;
+
     public FlashcardStorage(String path){
         this.path = path;
         flashlogger = Logger.getLogger("flash");
@@ -29,53 +33,6 @@ public class FlashcardStorage {
         File f = new File(this.path);
         return f.exists();
     }
-    
-    /**
-     * load a flash card from certain format
-     * Tokens includes attributes of Flashcard
-     * @param tokens
-     * @return Flashcard object
-     */
-    private Flashcard loadFlashcard(String[] tokens){
-
-        assert tokens.length == 5 : "Token length should be 5";
-
-        //flashlogger.log(Level.INFO, "token length is", tokens.length);
-
-        String frontText = tokens[0].trim();
-        String backText = tokens[1].trim();
-        String[] tags = tokens[2].trim().split("/");
-        String[] reviews = tokens[3].trim().split("/");
-        String nextReviewOn = tokens[4].trim();
-
-
-        Flashcard flashcard = new Flashcard(frontText, backText);
-
-        //flashlogger.log(Level.INFO, "added flashcard");
-
-        for(String tag:tags){
-            if (tag.trim().equals("-")) {
-                break;
-            } else{
-                System.out.println("tags are not for v1");
-            }
-        }
-
-        for(String review: reviews){
-            if (review.trim().equals("-")) {
-                break;
-            } else{
-                System.out.println("reviews are not for v1");
-            }
-        }
-
-        if(!nextReviewOn.equals("-")){
-            //LocalDateTime.parse(nextReviewOn);
-            System.out.println("reviews are not for v1");
-        }
-
-        return flashcard;
-    }
 
     /**
      * load list of flashcards
@@ -85,7 +42,7 @@ public class FlashcardStorage {
      */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
 
-        flashlogger.log(Level.INFO, "loading flashcard");
+        //flashlogger.log(Level.INFO, "loading flashcard");
 
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
@@ -93,31 +50,51 @@ public class FlashcardStorage {
 
         while(s.hasNext()){
             String[] flashTokens = s.nextLine().split(" \\| ");
-            flashcardList.add(loadFlashcard(flashTokens));
+            flashcardList.add(FlashcardStorageParser.loadFlashcard(flashTokens));
         }
 
-        System.out.println(String.format(
-                "    There are currently %d flashcards in the savefile",
+        flashlogger.log(Level.INFO, String.format(
+                "There are currently %d flashcards in the savefile",
                 flashcardList.getSize()));
+        //System.out.println(String.format(
+        //        "    There are currently %d flashcards in the savefile",
+        //        flashcardList.getSize()));
 
         return flashcardList;
 
     }
 
-    public void saveFlashcards(ArrayList<Flashcard> flashcardList) {
+    /**
+     * saveFlashcards method
+     * save all flashcard data to file
+     * @param flashcardList
+     */
+    public boolean saveFlashcards(ArrayList<Flashcard> flashcardList) {
 
         try {
             FileWriter fw = new FileWriter(path);
 
             for (int i = 0; i < flashcardList.size(); i++) {
+
+                // get info from a flashcard
                 Flashcard flashcard = flashcardList.get(i);
-                fw.write(String.format("%s | %s | - | - | -\r\n",
-                        flashcard.getFrontText(), flashcard.getBackText()));
+
+                int id = flashcard.getId();
+                String frontText = flashcard.getFrontText();
+                String backText = flashcard.getBackText();
+                ArrayList<FlashcardReview> reviewList = flashcard.getReviews();
+
+                String reviews = FlashcardStorageParser.reviewtoString(reviewList);
+
+                fw.write(String.format("%d | %s | %s | - | %s | -\r\n",
+                        id, frontText, backText, reviews));
             }
             fw.close();
+            return true;
         } catch (IOException e){
             //System.out.println("Failed to save.");
             flashlogger.log(Level.WARNING, "problem: failed to save");
+            return false;
         }
     }
 
