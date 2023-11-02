@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class EssenFileNotFoundException extends Exception {
 
-    private static void createDirectory(File newDirectory) {
+    private void createDirectory(File newDirectory) {
         if (!newDirectory.isDirectory() && newDirectory.mkdir()) {
             System.out.println("Directory successfully created");
         } else {
@@ -15,7 +15,7 @@ public class EssenFileNotFoundException extends Exception {
         }
     }
 
-    private static void createFile(File newDatabase) throws IOException {
+    private void createFile(File newDatabase) throws IOException {
         if (!newDatabase.isFile() && newDatabase.createNewFile()) {
             System.out.println("Data text file successfully created");
         } else {
@@ -23,7 +23,7 @@ public class EssenFileNotFoundException extends Exception {
         }
     }
 
-    public static void handleFileNotFoundException(String dataDirectory, String dataPath) {
+    public void handleFileNotFoundException(String dataDirectory, String dataPath) {
         System.out.println("Creating database");
 
         File newDirectory = new File(dataDirectory);
