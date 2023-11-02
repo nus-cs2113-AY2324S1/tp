@@ -2,7 +2,6 @@
 
 package seedu.duke.flashcard;
 
-import seedu.duke.calendar.command.FindEvent;
 import seedu.duke.flashcard.command.FlashcardCommand;
 import seedu.duke.flashcard.command.CreateFlashcardCommand;
 import seedu.duke.flashcard.command.ListFlashcardsCommand;

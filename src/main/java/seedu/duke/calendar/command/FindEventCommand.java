@@ -7,7 +7,7 @@ import seedu.duke.calendar.EventList;
 
 import java.util.Scanner;
 
-public class FindEvent extends EventCommand {
+public class FindEventCommand extends EventCommand {
     public void execute(Scanner scanner, EventList eventList) {
         System.out.print("What event are you looking for?: ");
         String eventName = scanner.nextLine();

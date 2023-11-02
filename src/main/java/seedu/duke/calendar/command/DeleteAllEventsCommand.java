@@ -6,7 +6,7 @@ import seedu.duke.calendar.EventList;
 
 import java.util.Scanner;
 
-public class DeleteAllEvents extends EventCommand {
+public class DeleteAllEventsCommand extends EventCommand {
     public void execute(Scanner scanner, EventList eventList) {
         eventList.deleteAllEvents();
 
