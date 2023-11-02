@@ -330,13 +330,10 @@ The following sequence diagram shows how the Find Command function works.
 
 ## 3. Delete Command
 
-The "Delete" function is designed to enable users to remove specific drugs from the inventory based on the drug's name.
-This component facilitates the management of the inventory by allowing users to remove drugs they no longer need, fully
-depleted or discontinued.
+The "Delete" function is designed to enable users to remove specific drugs from the inventory based on the drug's name, 
+to remove drugs they no longer need, fully depleted or discontinued.
 
 **Design Considerations**
-
-The design of the "Delete" function takes into account the following considerations:
 
 1. **User-Specified Drug Name:** The function allows users to specify the drug name they want to delete from the
    inventory.
@@ -346,53 +343,10 @@ The design of the "Delete" function takes into account the following considerati
 
 **Implementation and Rationale**
 
-The "Delete" function is implemented as follows:
-
-- **User-Defined Drug Name:** Users provide the name of the drug they wish to delete.
-
-- **Data Deletion Algorithm:** The function employs data deletion logic to remove the specified drug from the inventory.
-  This involves identifying the drug based on the provided name and removing it from the list.
-
-- **Error Handling:** The function includes error handling to address scenarios where the specified drug is not found in
-  the inventory. In such cases, an appropriate error message is generated.
-
-- **User Feedback:** Upon successful deletion, the function generates a success message confirming the removal of the
-  drug.
-
-The "Delete" function is an essential feature for managing the inventory, allowing users to keep it up to date and
-remove unwanted or outdated drugs.
-
-**Function Methods**
-
-The "Delete" function includes the following method to achieve its functionality:
-
-- `execute()` - This method is responsible for executing the "Delete" command, removing the drug with the specified name
-  from the inventory. It returns a `CommandResult` containing the outcome of the command execution, which includes a
-  success message upon successful deletion or an error message if the drug is not found in the inventory.
-
-**Example Usage**
-
-To illustrate how the "Delete" function works, consider the following example usage:
-
-1. **User Input:** The user initiates the "Delete" command by typing something like the following:
-   `delete /n panadol`- This command instructs the program to remove the drug named "paracetamol" from the inventory.
-
-2. **Method Execution:** The `execute()` method within the "DeleteCommand" class is called. It takes the provided drug
-   name as input.
-
-3. **Search Process:** The method processes the deletion by searching for the drug with the specified name in the
-   inventory.
-
-4. **Deletion Operation:** If the drug is found, it is removed from the inventory.
-
-5. **Success Message:** The `CommandResult` is prepared, containing a success message (e.g., "Drug removed from
-   inventory: paracetamol").
-
-6. **User Feedback:** The result is displayed to the user, confirming the successful removal of the drug from the
-   inventory.
-
-The "Delete" function provides a straightforward way for users to manage the inventory by removing specific drugs as
-needed.
+This method is executed when the delete command is invoked. First, it attempts to delete a drug from the inventory 
+using the inventory.deleteDrug(this.keyToDelete) method. If successful, it retrieves the deleted entry.
+If the drug is successfully deleted, it returns a success message. 
+If the drug is not found (i.e., a DrugNotFoundException is thrown), it returns a failure message.
 
 ---
 
@@ -456,6 +410,23 @@ The possibility of an empty list had to be considered
 ### Implementation
 
 The list of vendors could be printed by using streams to efficiently collect and print out the information of vendors
+
+---
+
+## 7. addVendorSupply Command
+
+This method adds a drug to a vendor's supply list in the inventory management system, to track 
+what vendors supply what products. 
+
+### Design Considerations
+
+This method checks if the specified vendor exists and, if so, adds the drug to their supply list.
+
+### Implementation
+
+The execute method in the AddVendorSupplyCommand class checks if a specified vendor exists, adds a drug to their supply 
+list, and returns a success message. If the vendor is not found, it returns a message indicating that the vendor was 
+not found.
 
 ---
 
