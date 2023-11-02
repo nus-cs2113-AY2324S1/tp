@@ -1,10 +1,12 @@
 package essenmakanan.storage;
 
 import essenmakanan.exception.EssenFileNotFoundException;
+import essenmakanan.ingredient.Ingredient;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeStepList;
+import essenmakanan.recipe.Step;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,8 +27,20 @@ public class RecipeStorage {
     }
 
     public String convertToString(Recipe recipe) {
-        String recipeStepString = RecipeParser.convertSteps(recipe.getRecipeSteps().getSteps());
-        String ingredientString = RecipeParser.convertIngredient(recipe.getRecipeIngredients().getIngredients());
+        String recipeStepString;
+        if (recipe.getRecipeSteps().getSteps().isEmpty()) {
+            recipeStepString = "EMPTY";
+        } else {
+            recipeStepString = RecipeParser.convertSteps(recipe.getRecipeSteps().getSteps());
+        }
+
+        String ingredientString;
+        if (recipe.getRecipeIngredients().getIngredients().isEmpty()) {
+            ingredientString = "EMPTY";
+        } else {
+            ingredientString = RecipeParser.convertIngredient(recipe.getRecipeIngredients().getIngredients());
+        }
+
         return recipe.getTitle() + " || " + recipeStepString + " || " + ingredientString;
     }
 
@@ -47,8 +61,22 @@ public class RecipeStorage {
         String[] parsedRecipe = scan.nextLine().split(" \\|\\| ");
 
         String recipeDescription = parsedRecipe[0];
-        RecipeStepList steps = RecipeParser.parseDataSteps(parsedRecipe[1]);
-        RecipeIngredientList ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2]);
+
+        RecipeStepList steps;
+        if (parsedRecipe[1].equals("EMPTY")) {
+            ArrayList<Step> emptyStepList = new ArrayList<>();
+            steps = new RecipeStepList(emptyStepList);
+        } else {
+            steps = RecipeParser.parseDataSteps(parsedRecipe[1]);
+        }
+
+        RecipeIngredientList ingredientList;
+        if (parsedRecipe[2].equals("EMPTY")) {
+            ArrayList<Ingredient> emptyIngredientList = new ArrayList<>();
+            ingredientList = new RecipeIngredientList(emptyIngredientList);
+        } else {
+            ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2]);
+        }
 
         recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
     }
