@@ -26,6 +26,7 @@ public class FlashcardStorage {
     public FlashcardStorage(String path){
         this.path = path;
         flashlogger = Logger.getLogger("flash");
+        flashlogger.setLevel(Level.WARNING);
     }
 
 
@@ -42,7 +43,7 @@ public class FlashcardStorage {
      */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
 
-        //flashlogger.log(Level.INFO, "loading flashcard");
+        flashlogger.log(Level.INFO, "loading flashcard");
 
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
@@ -56,9 +57,6 @@ public class FlashcardStorage {
         flashlogger.log(Level.INFO, String.format(
                 "There are currently %d flashcards in the savefile",
                 flashcardList.getSize()));
-        //System.out.println(String.format(
-        //        "    There are currently %d flashcards in the savefile",
-        //        flashcardList.getSize()));
 
         return flashcardList;
 
@@ -92,7 +90,6 @@ public class FlashcardStorage {
             fw.close();
             return true;
         } catch (IOException e){
-            //System.out.println("Failed to save.");
             flashlogger.log(Level.WARNING, "problem: failed to save");
             return false;
         }

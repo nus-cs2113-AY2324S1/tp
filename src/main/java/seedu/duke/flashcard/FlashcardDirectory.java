@@ -19,6 +19,7 @@ public class FlashcardDirectory {
     public FlashcardDirectory(){
 
         logger = Logger.getLogger("flashDir");
+        logger.setLevel(Level.WARNING);
 
         path = "./data/flashcards";
 

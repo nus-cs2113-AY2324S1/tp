@@ -18,6 +18,7 @@ public class EventDirectory {
 
     public EventDirectory(){
         logger = Logger.getLogger("flashDir");
+        logger.setLevel(Level.WARNING);
 
         String dataPath = "./data";
 
