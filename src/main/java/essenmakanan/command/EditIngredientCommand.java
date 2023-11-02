@@ -1,6 +1,6 @@
 package essenmakanan.command;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 
@@ -19,18 +19,21 @@ public class EditIngredientCommand extends Command {
         Ingredient existingIngredient;
 
         this.editDetails = this.editDetails.replace("i/", "");
-        // INGREDIENT_NAME [n/NEW_NAME]
+
         String[] splitDetails = this.editDetails.split(" ");
         String ingredientName = splitDetails[0];
 
-        existingIngredient = ingredients.getIngredientByName(ingredientName);
+        existingIngredient = ingredients.getIngredient(ingredientName);
+
+        assert existingIngredient.getName().equals(ingredientName)
+                : "Selected ingredient does not have matching name.";
 
         if (existingIngredient == null) {
             System.out.println("Ingredient not found!");
         } else {
             try {
                 ingredients.editIngredient(existingIngredient, splitDetails);
-            } catch (EssenMakananFormatException e) {
+            } catch (EssenFormatException e) {
                 e.handleException();
             }
         }

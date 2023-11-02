@@ -1,11 +1,11 @@
 package essenmakanan.exception;
 
-public class EssenMakananException extends Exception {
+public class EssenException extends Exception {
 
-    public EssenMakananException() {
+    public EssenException() {
         getMessage();
     }
-    public EssenMakananException(String message) {
+    public EssenException(String message) {
         System.out.println("EssenMakanan Exception! " + message);
     }
 

@@ -1,12 +1,12 @@
 package essenmakanan.command;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
-public class AddIngredientCommand extends Command{
+public class AddIngredientCommand extends Command {
     private String toAdd;
     private IngredientList ingredients;
 
@@ -27,14 +27,15 @@ public class AddIngredientCommand extends Command{
 
             Ingredient newIngredient = null;
             try {
-                newIngredient = IngredientParser.parseIngredient(ingredients, ingredient);
+                newIngredient = IngredientParser.parseIngredient(ingredient);
                 ingredients.addIngredient(newIngredient);
                 Ui.printAddIngredientsSuccess(newIngredient.getName());
-            } catch (EssenMakananFormatException e) {
+            } catch (EssenFormatException e) {
                 e.handleException();
             }
         }
 
     }
+
 }
 

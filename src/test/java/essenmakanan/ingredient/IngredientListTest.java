@@ -25,10 +25,10 @@ public class IngredientListTest {
         Ui.printAllIngredients(ingredients);
 
         Ingredient ingredient;
-        ingredient = ingredients.getIngredientByIndex(0);
+        ingredient = ingredients.getIngredient(0);
         assertEquals("tomato", ingredient.getName());
 
-        ingredient = ingredients.getIngredientByIndex(1);
+        ingredient = ingredients.getIngredient(1);
         assertEquals("cheese", ingredient.getName());
     }
 }

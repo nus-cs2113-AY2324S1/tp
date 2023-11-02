@@ -1,45 +1,67 @@
 package essenmakanan.parser;
 
-import essenmakanan.exception.EssenMakananFormatException;
-import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
-            throws EssenMakananOutOfRangeException, EssenMakananFormatException {
+            throws EssenOutOfRangeException {
         int index;
         input = input.replace("i/", "");
 
         if (input.matches("\\d+")) { //if input only contains numbers
-            if (input.length() != 1) {
-                throw new EssenMakananFormatException();
-            }
             index = Integer.parseInt(input) - 1;
         } else {
-            index = ingredients.getIndexByName(input);
+            index = ingredients.getIndex(input);
         }
 
-        if (!ingredients.ingredientExist(index)) {
-            throw new EssenMakananOutOfRangeException();
+        if (!ingredients.exist(index)) {
+            throw new EssenOutOfRangeException();
         }
 
         return index;
     }
 
-    public static Ingredient parseIngredient(IngredientList ingredients, String inputDetail)
-            throws EssenMakananFormatException {
+    public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
+        return ingredient1.getUnit().equals(ingredient2.getUnit());
+    }
+
+    public static String getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
+        final String zeroQuantity = "0";
+        String quantityNeededString = ingredientNeeded.getQuantity();
+        String quantityAvailableString = ingredientAvailable.getQuantity();
+
+        if (quantityNeededString.matches("[a-zA-Z ]+") || quantityAvailableString.matches("[a-zA-Z ]+")) {
+            return zeroQuantity; //there is no way of comparison if quantity is a String
+        }
+        
+        Double quantityNeeded = Double.parseDouble(ingredientNeeded.getQuantity());
+        Double quantityAvailable = Double.parseDouble(ingredientAvailable.getQuantity());
+
+        if (quantityNeeded > quantityAvailable) {
+            return Double.toString(quantityNeeded - quantityAvailable);
+        }
+
+        return zeroQuantity;
+    }
+
+    public static Ingredient parseIngredient(String inputDetail)
+            throws EssenFormatException {
 
         IngredientUnit ingredientUnit;
+
+        if (!isValidIngredient(inputDetail)) {
+            throw new EssenFormatException();
+        }
 
         inputDetail = inputDetail.replace("i/", "");
 
         String[] ingredientDetails = inputDetail.split(",");
 
-        if (ingredientDetails.length != 3) {
-            throw new EssenMakananFormatException();
-        }
+        assert (ingredientDetails.length == 3) : "Ingredient details should have 3 parts";
 
         String ingredientName = ingredientDetails[0].strip();
 
@@ -53,7 +75,26 @@ public class IngredientParser {
         return newIngredient;
     }
 
-    public static IngredientUnit mapIngredientUnit(String ingredientUnitString) throws EssenMakananFormatException {
+    public static boolean isValidIngredient(String inputDetail) {
+        inputDetail = inputDetail.replace("i/", "");
+
+        String[] ingredientDetails = inputDetail.split(",");
+
+        if (ingredientDetails.length != 3) {
+            return false;
+        }
+
+        String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
+        try {
+            mapIngredientUnit(ingredientUnitString);
+        } catch (EssenFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static IngredientUnit mapIngredientUnit(String ingredientUnitString) throws EssenFormatException {
         IngredientUnit ingredientUnit;
         // return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
         switch(ingredientUnitString) {
@@ -82,9 +123,13 @@ public class IngredientParser {
             ingredientUnit = IngredientUnit.PIECE;
             break;
         default:
-            throw new EssenMakananFormatException();
+            throw new EssenFormatException();
         }
 
         return ingredientUnit;
+    }
+
+    public static String convertToString(Ingredient ingredient) {
+        return ingredient.getName() + " | " + ingredient.getQuantity() + " | " + ingredient.getUnit();
     }
 }

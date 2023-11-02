@@ -1,6 +1,6 @@
 package essenmakanan.exception;
 
-public class EssenMakananCommandException extends EssenMakananException {
+public class EssenCommandException extends EssenException {
     public void handleException() {
         System.out.println("Invalid command type");
     }

@@ -37,17 +37,17 @@ public class IngredientTest {
 
         addIngredientCommand.executeCommand();
 
-        assertEquals(ingredients.getIngredientByIndex(0).getName(), "bread");
-        assertEquals(ingredients.getIngredientByIndex(0).getQuantity(), "2");
-        assertEquals(ingredients.getIngredientByIndex(0).getUnit(), IngredientUnit.PIECE);
+        assertEquals(ingredients.getIngredient(0).getName(), "bread");
+        assertEquals(ingredients.getIngredient(0).getQuantity(), "2");
+        assertEquals(ingredients.getIngredient(0).getUnit(), IngredientUnit.PIECE);
 
-        assertEquals(ingredients.getIngredientByIndex(1).getName(), "apple");
-        assertEquals(ingredients.getIngredientByIndex(1).getQuantity(), "3");
-        assertEquals(ingredients.getIngredientByIndex(1).getUnit(), IngredientUnit.KILOGRAM);
+        assertEquals(ingredients.getIngredient(1).getName(), "apple");
+        assertEquals(ingredients.getIngredient(1).getQuantity(), "3");
+        assertEquals(ingredients.getIngredient(1).getUnit(), IngredientUnit.KILOGRAM);
 
-        assertEquals(ingredients.getIngredientByIndex(2).getName(), "milk");
-        assertEquals(ingredients.getIngredientByIndex(2).getQuantity(), "1");
-        assertEquals(ingredients.getIngredientByIndex(2).getUnit(), IngredientUnit.LITER);
+        assertEquals(ingredients.getIngredient(2).getName(), "milk");
+        assertEquals(ingredients.getIngredient(2).getQuantity(), "1");
+        assertEquals(ingredients.getIngredient(2).getUnit(), IngredientUnit.LITER);
     }
 
 }

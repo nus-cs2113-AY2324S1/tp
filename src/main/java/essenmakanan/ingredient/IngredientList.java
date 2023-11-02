@@ -2,7 +2,7 @@ package essenmakanan.ingredient;
 
 import java.util.ArrayList;
 
-import essenmakanan.exception.EssenMakananFormatException;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
@@ -13,15 +13,19 @@ public class IngredientList {
         ingredients = new ArrayList<>();
     }
 
+    public IngredientList(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public Ingredient getIngredientByIndex(int index) {
+    public Ingredient getIngredient(int index) {
         return ingredients.get(index);
     }
 
-    public Ingredient getIngredientByName(String name) {
+    public Ingredient getIngredient(String name) {
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(name)) {
                 return ingredient;
@@ -30,11 +34,31 @@ public class IngredientList {
         return null;
     }
 
-    public int indexOfIngredientByIngredient(Ingredient ingredient) {
+    public boolean isEmpty() {
+        return ingredients.isEmpty();
+    }
+
+    public boolean exist(String ingredientName) {
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getName().equals(ingredientName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean exist(int id) {
+        if (id >= 0 && id < ingredients.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getIndex(Ingredient ingredient) {
         return ingredients.indexOf(ingredient);
     }
 
-    public int getIndexByName(String ingredientName) {
+    public int getIndex(String ingredientName) {
         int i = 0;
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(ingredientName)) {
@@ -45,18 +69,11 @@ public class IngredientList {
         return -1;
     }
 
-    public boolean ingredientExist(int id) {
-        if (id >= 0 && id < ingredients.size()) {
-            return true;
-        }
-        return false;
-    }
-
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
     }
 
-    public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenMakananFormatException {
+    public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
         for (int i = 1; i < editDetails.length; i++) {
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
@@ -78,12 +95,12 @@ public class IngredientList {
                     IngredientUnit newUnit = IngredientParser.mapIngredientUnit(newUnitString);
                     Ui.printEditIngredientUnitSuccess(existingIngredient.getUnit(), newUnit);
                     existingIngredient.setUnit(newUnit);
-                } catch (EssenMakananFormatException e) {
+                } catch (EssenFormatException e) {
                     e.handleException();
                 }
                 break;
             default:
-                throw new EssenMakananFormatException();
+                throw new EssenFormatException();
             }
         }
 
@@ -96,7 +113,6 @@ public class IngredientList {
 
     public void listIngredients() {
         Ui.drawDivider();
-        System.out.println("Here's a list of your ingredients!");
         int count = 1;
 
         for (Ingredient ingredient : ingredients) {

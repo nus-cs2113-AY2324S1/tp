@@ -1,37 +1,42 @@
 package essenmakanan.parser;
 
-import essenmakanan.exception.EssenMakananException;
-import essenmakanan.exception.EssenMakananFormatException;
-import essenmakanan.exception.EssenMakananOutOfRangeException;
+import essenmakanan.exception.EssenException;
+import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenOutOfRangeException;
+import essenmakanan.ingredient.Ingredient;
+import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.Recipe;
+import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.RecipeStepList;
+import essenmakanan.recipe.Step;
 import essenmakanan.ui.Ui;
+
+import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class RecipeParser {
 
     public static int getRecipeIndex(RecipeList recipes, String input)
-            throws EssenMakananOutOfRangeException, EssenMakananFormatException {
+            throws EssenOutOfRangeException {
         int index;
         input = input.replace("r/", "");
 
         if (input.matches("\\d+")) { //if input only contains numbers
-            if (input.length() != 1) {
-                throw new EssenMakananFormatException();
-            }
             index = Integer.parseInt(input) - 1;
         } else {
-            index = recipes.getIndexOfRecipeByName(input);
+            index = recipes.getIndexOfRecipe(input);
         }
 
         if (!recipes.recipeExist(index)) {
-            throw new EssenMakananOutOfRangeException();
+            throw new EssenOutOfRangeException();
         }
 
         return index;
     }
 
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
-            throws EssenMakananException {
+            throws EssenException {
         Ui ui = new Ui();
         switch(command) {
         case "add":
@@ -47,7 +52,7 @@ public class RecipeParser {
             ui.printAllRecipes(recipes);
             break;
         default:
-            throw new EssenMakananException("Invalid command! Valid commands are: 'add', 'view'");
+            throw new EssenException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
 
@@ -55,4 +60,73 @@ public class RecipeParser {
         return toAdd.replace("r/", "");
     }
 
+    public static String convertSteps(ArrayList<Step> steps) {
+        StringJoiner joiner = new StringJoiner(" | ");
+
+        for (Step step: steps) {
+            joiner.add(step.getDescription());
+        }
+
+        return joiner.toString();
+    }
+
+    public static String convertIngredient(ArrayList<Ingredient> ingredients) {
+        StringJoiner joiner = new StringJoiner(" , ");
+
+        for (Ingredient ingredient: ingredients) {
+            joiner.add(IngredientParser.convertToString(ingredient));
+        }
+
+        return joiner.toString();
+    }
+
+    public static RecipeStepList parseDataSteps(String stepsString) {
+        String[] parsedSteps = stepsString.split(" \\| ");
+        return new RecipeStepList(parsedSteps);
+    }
+
+    public static RecipeIngredientList parseDataRecipeIngredients(String ingredientsString) {
+        String[] parsedIngredients = ingredientsString.split(" , ");
+        ArrayList<Ingredient> ingredientList = new ArrayList<>();
+
+        for (String ingredient : parsedIngredients) {
+            String[] parsedIngredient = ingredient.split(" \\| ");
+            String ingredientName = parsedIngredient[0];
+            String ingredientQuantity = parsedIngredient[1];
+            IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
+            ingredientList.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+        }
+
+        return new RecipeIngredientList(ingredientList);
+    }
+
+    public static String parseFilterRecipeInput(String input) throws EssenFormatException {
+        input = input.replace("recipe ", "");
+        if (!input.contains("i/")) {
+            throw new EssenFormatException();
+        }
+        return input.strip();
+    }
+
+    public static int parseStepsDuration(String input) throws EssenFormatException{
+        if (!input.contains("d/")) {
+            throw new EssenFormatException();
+        }
+        String time = input.split("d/")[1];
+        if (time.contains("minutes") || time.contains("mins")) {
+            time = time.replace("minutes", "")
+                .replace("mins", "")
+                .trim();
+            return Integer.parseInt(time);
+        } else if (time.contains("hours") || time.contains("h") || time.contains("hour")) {
+            time = time.replace("hours", "")
+                .replace("h", "")
+                .replace("hour", "")
+                .trim();
+            return (int) (Double.parseDouble(time)*60);
+        } else {
+            throw new EssenFormatException();
+        }
+
+    }
 }
