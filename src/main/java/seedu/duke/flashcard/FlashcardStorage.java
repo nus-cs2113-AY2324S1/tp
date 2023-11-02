@@ -50,6 +50,8 @@ public class FlashcardStorage {
         while(s.hasNext()){
             String[] flashTokens = s.nextLine().split(" \\| ");
             flashcardList.add(FlashcardStorageParser.loadFlashcard(flashTokens));
+            flashlogger.log(Level.INFO, "added flashcard");
+
         }
 
         flashlogger.log(Level.INFO, String.format(
@@ -78,12 +80,10 @@ public class FlashcardStorage {
                 int id = flashcard.getId();
                 String frontText = flashcard.getFrontText();
                 String backText = flashcard.getBackText();
-                ArrayList<FlashcardReview> reviewList = flashcard.getReviews();
+                int difficulty = flashcard.getDifficulty();
 
-                String reviews = FlashcardStorageParser.reviewtoString(reviewList);
-
-                fw.write(String.format("%d | %s | %s | - | %s | -\r\n",
-                        id, frontText, backText, reviews));
+                fw.write(String.format("%d | %s | %s | %d \r\n",
+                        id, frontText, backText, difficulty));
             }
             fw.close();
             return true;
