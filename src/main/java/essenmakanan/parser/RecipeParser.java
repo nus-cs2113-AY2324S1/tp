@@ -3,6 +3,7 @@ package essenmakanan.parser;
 import essenmakanan.exception.EssenException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
+import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.Recipe;
@@ -86,12 +87,18 @@ public class RecipeParser {
         return joiner.toString();
     }
 
-    public static RecipeStepList parseDataSteps(String stepsString) {
+    public static RecipeStepList parseDataSteps(String stepsString) throws EssenStorageFormatException
+            ,IllegalArgumentException {
         String[] parsedSteps = stepsString.split(" , ");
         ArrayList<Step> stepList = new ArrayList<>();
 
         for (String step : parsedSteps) {
             String[] parsedStep = step.split(" \\| ");
+
+            if (parsedStep.length != 3) {
+                throw new EssenStorageFormatException();
+            }
+
             String stepDescription = parsedStep[0];
             Tag stepTag = Tag.valueOf(parsedStep[1]);
             int stepDuration = Integer.parseInt(parsedStep[2]);
@@ -101,12 +108,18 @@ public class RecipeParser {
         return new RecipeStepList(stepList);
     }
 
-    public static RecipeIngredientList parseDataRecipeIngredients(String ingredientsString) {
+    public static RecipeIngredientList parseDataRecipeIngredients(String ingredientsString)
+            throws EssenStorageFormatException {
         String[] parsedIngredients = ingredientsString.split(" , ");
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
         for (String ingredient : parsedIngredients) {
             String[] parsedIngredient = ingredient.split(" \\| ");
+
+            if (parsedIngredient.length != 3 || parsedIngredient[1].isBlank()) {
+                throw new EssenStorageFormatException();
+            }
+
             String ingredientName = parsedIngredient[0];
             String ingredientQuantity = parsedIngredient[1];
             IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
