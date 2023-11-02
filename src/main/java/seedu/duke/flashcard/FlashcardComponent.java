@@ -22,7 +22,7 @@ public class FlashcardComponent {
         FlashcardDirectory flashcarddirectory = new FlashcardDirectory();
         flashcarddirectory.listFlashcardFiles();
 
-        storage = new FlashcardStorage("./data/flashcards/flashcard.txt");
+        storage = new FlashcardStorage(flashcarddirectory.defaultDirectory());
         try {
             flashcardList = storage.loadFlashcards();
         } catch (FileNotFoundException e){
@@ -38,6 +38,19 @@ public class FlashcardComponent {
     //@@author junhyeong0411
     public FlashcardStorage getStorage(){
         return this.storage;
+    }
+
+    public FlashcardList getFlashcardList(){
+        return this.flashcardList;
+    }
+
+    /**
+     * get FlashcardUi method
+     * for test
+     * @return
+     */
+    public FlashcardUi getUi(){
+        return ui;
     }
 
     //@@author wendelinwemhoener

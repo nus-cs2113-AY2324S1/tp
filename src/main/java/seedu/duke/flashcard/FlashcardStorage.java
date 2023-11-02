@@ -64,7 +64,12 @@ public class FlashcardStorage {
 
     }
 
-    public void saveFlashcards(ArrayList<Flashcard> flashcardList) {
+    /**
+     * saveFlashcards method
+     * save all flashcard data to file
+     * @param flashcardList
+     */
+    public boolean saveFlashcards(ArrayList<Flashcard> flashcardList) {
 
         try {
             FileWriter fw = new FileWriter(path);
@@ -85,9 +90,11 @@ public class FlashcardStorage {
                         id, frontText, backText, reviews));
             }
             fw.close();
+            return true;
         } catch (IOException e){
             //System.out.println("Failed to save.");
             flashlogger.log(Level.WARNING, "problem: failed to save");
+            return false;
         }
     }
 

@@ -4,8 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.flashcard.FlashcardComponent;
-import seedu.duke.flashcard.FlashcardStorage;
+import seedu.duke.calendar.CalendarManager;
+import seedu.duke.calendar.EventStorage;
+import seedu.duke.flashcard.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 class DukeTest {
     @Test
@@ -37,6 +43,37 @@ class DukeTest {
         FlashcardStorage storage = flashcardComponent.getStorage();
         assertTrue(storage.isStorageAvailable());
     }
+
+    @Test
+    public void testEventStorage_isAvailable(){
+        CalendarManager calendarManager = new CalendarManager(new ArrayList<>());
+        EventStorage storage = calendarManager.getStorage();
+        assertTrue(storage.isStorageAvailable());
+    }
+
+    @Test
+    public void testFlashcardStorage_isSavingCorrectly(){
+        String input = "create flashcard\n";
+        input += "Hello\n";
+        input += "Duke\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Scanner scanner = new Scanner(System.in);
+
+        FlashcardComponent flashcardComponent = new FlashcardComponent();
+        FlashcardStorage storage = flashcardComponent.getStorage();
+
+        FlashcardUi ui = flashcardComponent.getUi();
+        ui.setScanner(scanner);
+
+        flashcardComponent.processInput(scanner.nextLine());
+
+        FlashcardList flashcardList = flashcardComponent.getFlashcardList();
+
+        assertTrue(storage.saveFlashcards(flashcardList.getFlashcards()));
+    }
+
 
     @Test
     public void testCalendar() {
