@@ -199,6 +199,9 @@ be executed as follows:
 
 ### Delete feature
 
+### Filter recipe feature
+The filter recipe feature is used by the FilterRecipe
+
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
