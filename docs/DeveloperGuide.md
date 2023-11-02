@@ -109,7 +109,11 @@ BMI, ideal weight for their height and so on.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+- Should be OS agnostic as long as it runs Java 11
+- Should be able to handle 1000+ workouts and meals
+- Does not require internet connection to run
+- Should be usable for an average typist.
+- Should be able to handle incorrect user input and provide feedback to the user.
 
 ## Glossary
 
