@@ -56,6 +56,11 @@ public class Duke {
             "create flashcard",
             "review flashcards",
             "help",
+            "add event",
+            "delete event",
+            "delete all events",
+            "find event",
+            "list events",
         };
 
         for (String commandFormat : commandFormats) {
