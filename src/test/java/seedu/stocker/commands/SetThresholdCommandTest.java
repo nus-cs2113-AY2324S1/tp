@@ -5,6 +5,7 @@ import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
 import seedu.stocker.drugs.Drug;
+import seedu.stocker.vendors.VendorsList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,7 +22,7 @@ public class SetThresholdCommandTest {
         // Create the SetThresholdCommand
         SetThresholdCommand command = new SetThresholdCommand("Panadol", 75);
         // Set the modified inventory for the command
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         command.execute();
 
@@ -39,7 +40,7 @@ public class SetThresholdCommandTest {
         // Create the SetThresholdCommand for a drug that doesn't exist
         SetThresholdCommand command = new SetThresholdCommand("Paracetamol", 75);
 
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
         command.execute();
 
         String expectedOutput = "Drug not found.";

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
+import seedu.stocker.vendors.VendorsList;
 
 class AddToCartCommandTest {
     
@@ -17,10 +18,10 @@ class AddToCartCommandTest {
         assertEquals(0, cart.getCurrentCart().size());
         SalesList salesList = new SalesList();
 
-        command.setData(inventory, salesList, cart);
+        command.setData(inventory, salesList, cart, new VendorsList());
         command.execute();
         AddToCartCommand command2 = new AddToCartCommand("paracetamol", 2L);
-        command2.setData(inventory, salesList, cart);
+        command2.setData(inventory, salesList, cart, new VendorsList());
         command2.execute();
         assertEquals(command2.execute().feedbackToUser, "New drug added in the current cart: Paracetamol");
     }

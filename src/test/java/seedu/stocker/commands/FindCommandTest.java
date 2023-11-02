@@ -7,6 +7,7 @@ import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
 import seedu.stocker.drugs.Drug;
+import seedu.stocker.vendors.VendorsList;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -29,7 +30,7 @@ class FindCommandTest {
         inventory.addNewDrug("Panadol", drug2, "PAN123", 20L);
 
         // Set the modified inventory for the command
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         // Define expected output
         String expectedOutput = "1. Name: Panadol, Expiry date: 04/07/2030, Serial number: PAN123, Quantity: 20"
@@ -57,7 +58,7 @@ class FindCommandTest {
         inventory.addNewDrug("Paracetamol", drug1, "PARC124", 12L);
 
         // Set the modified inventory for the command
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         // Define expected output for drugs with matching expiry date
         String expectedOutput = "1. Name: Paracetamol, Expiry date: 01/03/2027, Serial number: PARC124, Quantity: 12"

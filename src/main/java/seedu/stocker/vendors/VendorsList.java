@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class VendorsList {
 
-    public static ArrayList<Vendor> vendorArrayList;
+    protected ArrayList<Vendor> vendorArrayList;
 
     public VendorsList(){
         vendorArrayList = new ArrayList<>();
@@ -15,18 +15,17 @@ public class VendorsList {
     /**
      * Adds new vendor to vendor list
      *
-     * @param vendor
+     * @param vendor Vendor
      */
-    public static void addNewVendor(Vendor vendor){
+    public void addNewVendor(Vendor vendor){
         vendorArrayList.add(vendor);
     }
 
     /**
      * Gets details of all vendors
-     * @return
+     * @return List<Vendor>
      */
-    public static List<Vendor> getVendorEntries() {
-        return vendorArrayList.stream()
-                .collect(Collectors.toCollection(ArrayList::new));
+    public List<Vendor> getVendorEntries() {
+        return new ArrayList<>(this.vendorArrayList);
     }
 }

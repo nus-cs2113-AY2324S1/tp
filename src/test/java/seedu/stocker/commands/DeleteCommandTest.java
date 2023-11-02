@@ -8,6 +8,7 @@ import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
+import seedu.stocker.vendors.VendorsList;
 
 class DeleteCommandTest {
 
@@ -20,7 +21,7 @@ class DeleteCommandTest {
 
         // Create a DeleteCommand for the drug
         DeleteCommand deleteCommand = new DeleteCommand("Doliprane");
-        deleteCommand.setData(inventory, new SalesList(), new Cart());
+        deleteCommand.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         // Test the execution of the DeleteCommand
         String expectedOutput = "Drug removed from inventory: Doliprane";

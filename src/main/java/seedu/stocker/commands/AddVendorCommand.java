@@ -1,7 +1,6 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.vendors.Vendor;
-import seedu.stocker.vendors.VendorsList;
 
 /**
  * Adds a vendor into the inventory
@@ -24,8 +23,8 @@ public class AddVendorCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
-        VendorsList.addNewVendor(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName()));
+    public <T> CommandResult<T> execute() {
+        this.vendorsList.addNewVendor(toAdd);
+        return new CommandResult<>(String.format(MESSAGE_SUCCESS, toAdd.getName()));
     }
 }

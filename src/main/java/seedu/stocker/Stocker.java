@@ -1,7 +1,6 @@
 package seedu.stocker;
 
 import seedu.stocker.authentication.LoginSystem;
-import seedu.stocker.exceptions.StockerException;
 import seedu.stocker.storage.Storage;
 import seedu.stocker.ui.Ui;
 import seedu.stocker.parser.Parser;
@@ -24,7 +23,6 @@ public class Stocker {
     private SalesList salesList;
     private Cart currentCart;
     private VendorsList vendorsList;
-    private Storage storage;
 
     public static void main(String[] launchArgs) {
         new Stocker().run();
@@ -33,7 +31,7 @@ public class Stocker {
     /**
      * Runs Login System.
      */
-    public boolean startLogin() throws IOException, StockerException {
+    public boolean startLogin() throws IOException {
         this.ui = new Ui();
         ui.showLoginMessage();
         LoginSystem system = new LoginSystem();
@@ -62,18 +60,16 @@ public class Stocker {
             this.salesList = new SalesList();
             this.currentCart = new Cart();
             this.vendorsList = new VendorsList();
-            this.storage = new Storage(inventory);
+            Storage storage = new Storage(inventory);
             storage.loadFileContents("drugs.txt");
             boolean checker = startLogin();
-            assert checker == true;
-            if(checker){
-                ui.showWelcomeMessage();
-            }
+            assert checker;
+            ui.showWelcomeMessage();
         } catch (Exception e) {
             ui.showInitFailedMessage();
             System.exit(0);
         }
-        
+
     }
 
     /**
@@ -92,8 +88,7 @@ public class Stocker {
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
-            ui.showResultToUser(result);
+            ui.showResultToUser(executeCommand(command));
         } while (!ExitCommand.isExit(command));
     }
 
@@ -104,13 +99,12 @@ public class Stocker {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command) {
+    private CommandResult<Object> executeCommand(Command command) {
         try {
-            command.setData(inventory, salesList, currentCart);
-            CommandResult result = command.execute();
-            return result;
+            command.setData(inventory, salesList, currentCart, vendorsList);
+            return command.execute();
         } catch (IOException ioe) {
-            return new CommandResult(MESSAGE_EXECUTION_FAILED);
+            return new CommandResult<>(MESSAGE_EXECUTION_FAILED);
         }
     }
 }

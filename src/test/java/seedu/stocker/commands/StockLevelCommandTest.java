@@ -5,6 +5,7 @@ import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
+import seedu.stocker.vendors.VendorsList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,7 +16,7 @@ class StockLevelCommandTest {
     public void executeTestEmpty(){
         Inventory inventory = new Inventory();
         ShowStockLevelCommand command = new ShowStockLevelCommand();
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
         // Execute the command
         CommandResult result = command.execute();
         String expectedOutput = "The inventory is empty.";
@@ -35,7 +36,7 @@ class StockLevelCommandTest {
 
 
         ShowStockLevelCommand command = new ShowStockLevelCommand();
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         // Execute the command
         CommandResult result = command.execute();

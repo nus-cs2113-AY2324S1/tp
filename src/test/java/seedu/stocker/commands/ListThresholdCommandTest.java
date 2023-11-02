@@ -5,6 +5,7 @@ import seedu.stocker.drugs.Cart;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
+import seedu.stocker.vendors.VendorsList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +24,7 @@ public class ListThresholdCommandTest {
         ListThresholdCommand command = new ListThresholdCommand();
 
         // Set the modified inventory for the command
-        command.setData(inventory, new SalesList(), new Cart());
+        command.setData(inventory, new SalesList(), new Cart(), new VendorsList());
 
         CommandResult initialResult = command.execute();
 

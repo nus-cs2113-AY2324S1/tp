@@ -1,7 +1,6 @@
 package seedu.stocker.commands;
 
 import seedu.stocker.vendors.Vendor;
-import seedu.stocker.vendors.VendorsList;
 
 import java.util.List;
 
@@ -24,9 +23,9 @@ public class ListVendorCommand extends Command {
      * @return A CommandResult containing the success message and the list of drugs.
      */
     @Override
-    public CommandResult execute() {
+    public CommandResult<Vendor> execute() {
         // Retrieve the list of vendors from the inventory
-        List<Vendor> vendorEntries = VendorsList.getVendorEntries();
+        List<Vendor> vendorEntries = this.vendorsList.getVendorEntries();
 
         // Check if the inventory is empty
         if (vendorEntries.isEmpty()) {
@@ -34,7 +33,7 @@ public class ListVendorCommand extends Command {
             return new CommandResult<>("The inventory is empty.");
         } else {
             // Return a CommandResult with the success message and the list of vendors
-            return new CommandResult<>(MESSAGE_SUCCESS, vendorEntries);
+            return new CommandResult<Vendor>(MESSAGE_SUCCESS, vendorEntries);
         }
     }
 }

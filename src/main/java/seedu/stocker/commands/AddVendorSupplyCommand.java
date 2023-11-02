@@ -41,7 +41,7 @@ public class AddVendorSupplyCommand extends Command {
         String lowercaseVendorName = vendorName.toLowerCase();
         String lowercaseDrugName = drugName.toLowerCase();
 
-        if (VendorsList.getVendorEntries().stream().anyMatch(vendor ->
+        if (this.vendorsList.getVendorEntries().stream().anyMatch(vendor ->
                 vendor.getName().equalsIgnoreCase(lowercaseVendorName))) {
             VendorSupplyList.addDrugToVendor(lowercaseVendorName, lowercaseDrugName);
             return new CommandResult<>(String.format(MESSAGE_SUCCESS, lowercaseVendorName, lowercaseDrugName));
