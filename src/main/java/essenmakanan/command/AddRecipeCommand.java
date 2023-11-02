@@ -59,8 +59,6 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
-
-
     public void addWithTitleStepsTags() {
         // add r/bread t/b s/buy ingredients s/store ingredients t/a s/cook
         String[] allToAdd = toAdd.split("t/");

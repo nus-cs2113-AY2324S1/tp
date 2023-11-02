@@ -10,6 +10,7 @@ import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.recipe.RecipeStepList;
 import essenmakanan.recipe.Step;
+import essenmakanan.recipe.Tag;
 import essenmakanan.ui.Ui;
 
 import java.util.ArrayList;
@@ -60,11 +61,15 @@ public class RecipeParser {
         return toAdd.replace("r/", "");
     }
 
+    private static String convertStep(Step step)  {
+        return step.getDescription() + " | " + step.getTag() + " | " + step.getEstimatedDuration();
+    }
+
     public static String convertSteps(ArrayList<Step> steps) {
-        StringJoiner joiner = new StringJoiner(" | ");
+        StringJoiner joiner = new StringJoiner(" , ");
 
         for (Step step: steps) {
-            joiner.add(step.getDescription());
+            joiner.add(convertStep(step));
         }
 
         return joiner.toString();
@@ -81,8 +86,18 @@ public class RecipeParser {
     }
 
     public static RecipeStepList parseDataSteps(String stepsString) {
-        String[] parsedSteps = stepsString.split(" \\| ");
-        return new RecipeStepList(parsedSteps);
+        String[] parsedSteps = stepsString.split(" , ");
+        ArrayList<Step> stepList = new ArrayList<>();
+
+        for (String step : parsedSteps) {
+            String[] parsedStep = step.split(" \\| ");
+            String stepDescription = parsedStep[0];
+            Tag stepTag = Tag.valueOf(parsedStep[1]);
+            int stepDuration = Integer.parseInt(parsedStep[2]);
+            stepList.add(new Step(stepDescription, stepTag, stepDuration));
+        }
+
+        return new RecipeStepList(stepList);
     }
 
     public static RecipeIngredientList parseDataRecipeIngredients(String ingredientsString) {

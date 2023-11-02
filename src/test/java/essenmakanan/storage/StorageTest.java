@@ -5,10 +5,12 @@ import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.Step;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class StorageTest {
@@ -16,6 +18,7 @@ public class StorageTest {
     private static String DATA_INVALID_PATH = "src/test/data/invalid.txt";
     private static String DATA_RECIPE_TEST_PATH = "src/test/data/recipes.txt";
     private static String DATA_INGREDIENT_TEST_PATH = "src/test/data/ingredients.txt";
+    private static String DATA_EMPTY_RECIPE_TEXT_PATH = "src/test/data/emptyRecipe.txt";
 
     @Test
     public void accessIngredientDatabase_invalidPath_throwsEssenFileNotFoundException() {
@@ -54,32 +57,29 @@ public class StorageTest {
 
         Recipe recipe = recipes.getRecipe(0);
 
-        assertEquals("soup", recipe.getTitle());
-        assertEquals("step1", recipe.getRecipeSteps().getStepByIndex(0).getDescription());
-        assertEquals("step2", recipe.getRecipeSteps().getStepByIndex(1).getDescription());
+        assertEquals("bread", recipe.getTitle());
+
+        Step step = recipe.getRecipeSteps().getStepByIndex(0);
+        assertEquals("step1", step.getDescription());
+        assertEquals(1, step.getTag().getPriority());
 
         Ingredient ingredient = recipe.getRecipeIngredients().getIngredientByIndex(0);
 
         assertEquals("bread", ingredient.getName());
-        assertEquals("2", ingredient.getQuantity());
+        assertEquals("5", ingredient.getQuantity());
         assertEquals("kg", ingredient.getUnit().getValue());
+    }
 
-        ingredient = recipe.getRecipeIngredients().getIngredientByIndex(1);
+    @Test
+    public void restoreEmptyRecipes_storedRecipes_returnRecipeWithEmptyAttributes() throws Exception {
+        RecipeStorage recipeStorage = new RecipeStorage(DATA_EMPTY_RECIPE_TEXT_PATH);
+        RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
 
-        assertEquals("apple", ingredient.getName());
-        assertEquals("2", ingredient.getQuantity());
-        assertEquals("kg", ingredient.getUnit().getValue());
+        Recipe recipe = recipes.getRecipe(0);
 
-        recipe = recipes.getRecipe(1);
+        assertEquals("soup", recipe.getTitle());
 
-        assertEquals("steak", recipe.getTitle());
-        assertEquals("step1", recipe.getRecipeSteps().getStepByIndex(0).getDescription());
-        assertEquals("step2", recipe.getRecipeSteps().getStepByIndex(1).getDescription());
-
-        ingredient = recipe.getRecipeIngredients().getIngredientByIndex(0);
-
-        assertEquals("beef", ingredient.getName());
-        assertEquals("1", ingredient.getQuantity());
-        assertEquals("g", ingredient.getUnit().getValue());
+        assertTrue(recipe.getRecipeSteps().getSteps().isEmpty());
+        assertTrue(recipe.getRecipeIngredients().getIngredients().isEmpty());
     }
 }

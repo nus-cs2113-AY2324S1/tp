@@ -25,6 +25,10 @@ public class RecipeStepList {
         System.out.println("Finished adding steps!");
     }
 
+    public RecipeStepList(ArrayList<Step> steps) {
+        this.steps = steps;
+    }
+
     public RecipeStepList(String[] inputSteps) {
 
         for (String stepString : inputSteps) {
