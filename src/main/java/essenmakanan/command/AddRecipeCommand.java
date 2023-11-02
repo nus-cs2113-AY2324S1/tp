@@ -22,16 +22,20 @@ public class AddRecipeCommand extends Command {
 
     @Override
     public void executeCommand() {
-        if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
+        if (toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("t/")) {
             // all attributes are available
+            try {
+                this.addWithTitleStepsTags();
+            } catch (EssenFormatException e) {
+                e.handleException();
+            }
+        } else if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
+            // only title and steps are available
             try {
                 this.addWithTitleAndStepsAndIngredients();
             } catch (EssenFormatException e) {
                 e.handleException();
             }
-        } else if (toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("t/")) {
-            // only title and steps are available
-            this.addWithTitleStepsTags();
         } else if (toAdd.contains("r/") && toAdd.contains("s/")) {
             try {
                 this.addWithTitleAndSteps();
@@ -72,7 +76,7 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
-    public void addWithTitleStepsTags() {
+    public void addWithTitleStepsTags() throws EssenFormatException {
         // add r/bread t/b s/buy ingredients s/store ingredients t/a s/cook
         String[] allToAdd = toAdd.split("t/");
         String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
@@ -96,6 +100,7 @@ public class AddRecipeCommand extends Command {
                 addSteps(step, recipeStepList, Tag.ACTUAL_COOKING);
             } else {
                 System.out.println("No such Tag");
+                throw new EssenFormatException();
             }
         }
         Recipe newRecipe = new Recipe(recipeTitle, recipeStepList);
