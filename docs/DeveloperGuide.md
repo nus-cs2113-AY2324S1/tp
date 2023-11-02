@@ -413,6 +413,23 @@ The list of vendors could be printed by using streams to efficiently collect and
 
 ---
 
+## 7. addVendorSupply Command
+
+This method adds a drug to a vendor's supply list in the inventory management system, to track 
+what vendors supply what products. 
+
+### Design Considerations
+
+This method checks if the specified vendor exists and, if so, adds the drug to their supply list.
+
+### Implementation
+
+The execute method in the AddVendorSupplyCommand class checks if a specified vendor exists, adds a drug to their supply 
+list, and returns a success message. If the vendor is not found, it returns a message indicating that the vendor was 
+not found.
+
+---
+
 ## 5. CommandResult Class
 
 The `CommandResult` class is a crucial part of the Stocker application, responsible for providing feedback and results to the user after executing various commands. It contains a feedback message to describe the outcome of the command execution, as well as an optional list of relevant elements produced by the command.
