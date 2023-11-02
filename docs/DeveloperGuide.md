@@ -292,3 +292,20 @@ Café proprietors seeking for a software solution to optimize the management of 
 Our product aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
 
+### User stories
+
+| Priority | As a …​                                                   | I want to …​                                            | So that I can…​                                                                         |
+|----------|-----------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`  | cafe owner who is responsible for coming up with new dish | add dish to the menu                                    | add new dish to the menu                                                                |
+| `* * *`  | cafe manager is responsible for managing pantry stock     | track the inventory levels for ingredients and supplies | know what ingredients I need to restock                                                 |
+| `* * *`  | cafe manager is responsible for managing pantry stock     | buy ingredients                                         | restock low stock ingredients                                                           |
+| `* * *`  | cafe owner who is also the chef                           | view the ingredients needed for a dish                  | know what ingredients to use when cooking a dish                                        |
+| `* * *`  | cafe owner who wants to maximise profit                   | edit the price of the dish                              | increase the price of the dish when there is inflation                                  |
+| `* * *`  | cafe owner who cares about the sales of the cafe          | view the sales of the cafe                              | know whether my cafe is profiting                                                       |
+| `* * *`  | cafe owner who works 7 days a week                        | save the menu, pantry stock and order                   | have access to the same menu, pantry stock and orders when I go back to work            |
+| `* * *`  | cafe owner who is responsible for placing order           | add order                                               | ask the chef to cook the order                                                          |
+| `* *`    | cafe manager who is responsible for drafting the menu     | view the menu                                           | keep track of what dish we have                                                         |
+| `* *`    | cafe owner who working 7 days a week                      | fast forward to the next day                            | close the cafe and call it a day when I am tired                                        |
+| `* *`    | clumsy cafe owner who works 7 days a week                 | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
+
+*{More to be added}*
