@@ -89,7 +89,7 @@ public class Visualizer {
             keys.add(set.getKey());
             values.add(set.getValue());
         }
-        chart.addSeries("Expense", keys, values);
+        chart.addSeries(StringUtils.capitalize(type), keys, values);
 
         logger.log(Level.INFO, "Displaying Bar Chart");
         JFrame swHR = new SwingWrapper<>(chart).displayChart();
@@ -112,7 +112,7 @@ public class Visualizer {
 
         radarChart.getStyler().setSeriesColors(sliceColors);
 
-        String[] keys = new String[0];
+        String[] keys;
         switch (type) {
         case "income":
             keys = IncomeType.getNames(IncomeType.class);

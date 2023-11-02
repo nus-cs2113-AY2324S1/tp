@@ -18,11 +18,10 @@ public class ReminderList {
     }
     public void deleteReminder(int index) {
         int existingListSize = list.size();
-        int listIndex = index - 1;
+        int listIndex = index;
         assert listIndex >= 0  && listIndex < existingListSize;
         Reminder toRemove = list.get(listIndex);
         list.remove(listIndex);
-
     }
 
     public String toString() {
