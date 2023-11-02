@@ -25,7 +25,7 @@ public class AddIngredientCommand extends Command {
                 continue;
             }
 
-            Ingredient newIngredient = null;
+            Ingredient newIngredient;
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredient);
                 ingredients.addIngredient(newIngredient);
