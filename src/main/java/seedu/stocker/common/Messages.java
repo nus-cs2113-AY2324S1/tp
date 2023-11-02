@@ -26,4 +26,6 @@ public class Messages {
             + "Enter your desired password again";
 
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise Stocker application. Exiting...";
+    public static final String MESSAGE_EXECUTION_FAILED = "Exection of the command failed because of I/O error, "
+        + "please try later.";
 }

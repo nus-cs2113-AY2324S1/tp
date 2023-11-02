@@ -22,6 +22,7 @@ import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_USERNAME_OR_PASSWORD;
 import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_REGISTRATION;
 import static seedu.stocker.common.Messages.MESSAGE_INIT_FAILED;
+import static seedu.stocker.common.Messages.MESSAGE_EXECUTION_FAILED;
 
 
 public class Ui {
@@ -89,6 +90,10 @@ public class Ui {
 
     public void showUsernameMessage() {
         showToUser(MESSAGE_USERNAME_INPUT);
+    }
+
+    public void showExecutionFailedMessage() {
+        showToUser(MESSAGE_EXECUTION_FAILED);
     }
 
     public void showPasswordMessage() {

@@ -15,6 +15,7 @@ import seedu.stocker.vendors.VendorsList;
 
 import java.io.IOException;
 
+import static seedu.stocker.common.Messages.MESSAGE_EXECUTION_FAILED;
 
 public class Stocker {
 
@@ -25,7 +26,7 @@ public class Stocker {
     private VendorsList vendorsList;
     private Storage storage;
 
-    public static void main(String[] launchArgs) throws IOException, StockerException {
+    public static void main(String[] launchArgs) {
         new Stocker().run();
     }
 
@@ -45,7 +46,7 @@ public class Stocker {
     /**
      * Runs the program until termination.
      */
-    public void run() throws IOException, StockerException {
+    public void run() {
         start();
         runCommandLoopUntilExitCommand();
         exit();
@@ -86,15 +87,13 @@ public class Stocker {
     /**
      * Reads the user command and executes it, until the user issues the exit command.
      */
-    private void runCommandLoopUntilExitCommand() throws IOException, StockerException {
+    private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
             ui.showResultToUser(result);
-            assert !ExitCommand.isExit((command));
-
         } while (!ExitCommand.isExit(command));
     }
 
@@ -105,9 +104,13 @@ public class Stocker {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command) throws IOException, StockerException {
-        command.setData(inventory, salesList, currentCart);
-        CommandResult result = command.execute();
-        return result;
+    private CommandResult executeCommand(Command command) {
+        try {
+            command.setData(inventory, salesList, currentCart);
+            CommandResult result = command.execute();
+            return result;
+        } catch (IOException ioe) {
+            return new CommandResult(MESSAGE_EXECUTION_FAILED);
+        }
     }
 }

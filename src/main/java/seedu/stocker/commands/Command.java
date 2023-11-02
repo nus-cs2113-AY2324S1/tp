@@ -3,7 +3,6 @@ package seedu.stocker.commands;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.Cart;
-import seedu.stocker.exceptions.StockerException;
 
 import java.io.IOException;
 
@@ -23,7 +22,7 @@ public abstract class Command {
         this.currentCart = currentCart;
     }
 
-    public abstract CommandResult execute() throws IOException, StockerException;
+    public abstract CommandResult execute() throws IOException;
 
 
 }

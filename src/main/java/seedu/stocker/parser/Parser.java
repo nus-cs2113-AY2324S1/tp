@@ -1,6 +1,5 @@
 package seedu.stocker.parser;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +42,7 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) throws IOException {
+    public Command parseCommand(String userInput) {
         String[] words = userInput.trim().split(" ", 2);  // split the input into command and arguments
         if (words.length == 0) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -53,7 +52,6 @@ public class Parser {
         final String arguments = userInput.replaceFirst(commandWord, "").trim();
 
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
             return prepareAddCommand(arguments);
 
@@ -86,7 +84,7 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ViewCartCommand.COMMAND_WORD:
             return new ViewCartCommand();
 
@@ -98,7 +96,7 @@ public class Parser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand();
-            
+
         case AddVendorCommand.COMMAND_WORD:
             return prepareAddVendorCommand(arguments);
 
@@ -184,15 +182,12 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
-    private Command prepareAddVendorCommand (String args) throws IOException {
-        String[] vendorArgs = args.split(" ",1);
+
+    private Command prepareAddVendorCommand(String args) {
+        String[] vendorArgs = args.split(" ", 1);
         String vendorName = vendorArgs[0];
-        try {
-            if (vendorName.equals(null) || vendorName.equals("") || vendorName.equals(" ")) {
-                throw new IOException();
-            }
-        } catch(Exception invalidInput){
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,AddVendorCommand.MESSAGE_USAGE));
+        if (vendorName.equals(null) || vendorName.equals("") || vendorName.equals(" ")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
         }
         return new AddVendorCommand(vendorName);
     }
@@ -263,7 +258,6 @@ public class Parser {
                     AddVendorSupplyCommand.MESSAGE_USAGE));
         }
     }
-
 
 
 }

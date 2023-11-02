@@ -1,6 +1,5 @@
 package seedu.stocker.authentication;
 
-import seedu.stocker.exceptions.StockerException;
 import seedu.stocker.ui.Ui;
 
 import java.io.FileWriter;
@@ -38,28 +37,22 @@ public class LoginSystem {
     }
 
     /**
-     *  Returns user choice of whether they wish to register a new user
-     *  or if they would want to login using an existing user.
+     * Returns user choice of whether they wish to register a new user
+     * or if they would want to login using an existing user.
      *
      * @return choice of user to login or register
-     * @throws StockerException if register or login is not inputted
      */
-    public String authenticateUserChoice() throws StockerException{
-        try {
-            while (in.hasNextLine()) {
-                String choice = in.nextLine();
-
-                if (choice.equals("register")) {
-                    return "register";
-                } else if (choice.equals("login")) {
-                    return "login";
-                } else {
-                    throw new StockerException();
-                }
+    public String authenticateUserChoice() {
+        while (in.hasNextLine()) {
+            String choice = in.nextLine();
+            if (choice.equals("register")) {
+                return "register";
+            } else if (choice.equals("login")) {
+                return "login";
+            } else {
+                interactor.showInvalidChoiceMessage();
+                return authenticateUserChoice();
             }
-        } catch (StockerException e) {
-            interactor.showInvalidChoiceMessage();
-            return authenticateUserChoice();
         }
         return "error";
     }
@@ -71,7 +64,7 @@ public class LoginSystem {
      *
      * @throws IOException if inappropriate output is entered.
      */
-    public void newUserCreator() throws IOException, StockerException {
+    public void newUserCreator() throws IOException {
 
         interactor.showUsernameMessage();
         String username = in.nextLine();
@@ -88,7 +81,7 @@ public class LoginSystem {
             interactor.showBlankPasswordMessage();
             password = in.nextLine();
         }
-        assert(username.equals("") == false);
+        assert (username.equals("") == false);
         assert (password.equals("") == false);
 
         if (users.containsKey(username)) {
@@ -119,7 +112,7 @@ public class LoginSystem {
      *
      * @throws IOException if inappropriate input is entered.
      */
-    public void loginExistingUser() throws IOException, StockerException {
+    public void loginExistingUser() throws IOException {
 
 
         interactor.showUsernameMessage();
@@ -211,7 +204,7 @@ public class LoginSystem {
      * @throws IOException if unable to read from txt file to
      *                     load users
      */
-    public void run() throws IOException, StockerException {
+    public void run() throws IOException {
         loadExistingUsers();
         String choice = authenticateUserChoice();
         if (choice.equals("register")) {
