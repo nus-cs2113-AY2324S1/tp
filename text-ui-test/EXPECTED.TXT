@@ -79,6 +79,12 @@ You should type <DATE> in format of `yyyy-MM-dd`.
 I've added the following meal:
 [M] cabonara pasta (180kcal, 2023-10-29)
 
+`addmeal pizza c/230 d/2023-11-1` is an invalid command.
+`addmeal` adds your daily meal data to the list.
+Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
+Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
+You should type <DATE> in format of `yyyy-MM-dd`.
+
 `viewmeal` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
@@ -96,6 +102,12 @@ I've added the following workout:
 
 I've added the following workout:
 [W] long run (200kcal, 2023-10-29)
+
+`addworkout sprint run c/100 d/2023-11-1` is an invalid command.
+`addworkout` adds your daily workout data to the list.
+Type `addworkout <WORKOUT_NAME> c/<CALORIES>` to add today's workout.
+Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
+You should type <DATE> in format of `yyyy-MM-dd`.
 
 These are the workouts you have done:
 1.[W] run (100kcal, 2023-10-22)
@@ -147,7 +159,18 @@ Type `help` or `help <COMMAND>` to view help.
 I've deleted the following workout:
 [W] run (100kcal, 2023-10-22)
 
+`checkweightrange 1` is an invalid command.
+`checkweightrange` calculates the recommended weight for your height.
+Type `checkweightrange` calculate the recommended weight for your height.
+
+
 Recommended Weight: 66.02 kg
+
+`save file 1` is an invalid command.
+`save` saves your profile, meals and workout data.
+Type `save` to save your profile, meals and workout data.
+
+Your data has been saved!
 
 `help` shows help message of the command.
 Existing commands:
