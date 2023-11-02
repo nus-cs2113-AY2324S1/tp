@@ -31,7 +31,7 @@
 ## Acknowledgements
 
 **Xchart (A Simple Charting Library for Java)**
-- author: KNOWN
+- author: KNOWM
 - source: [https://knowm.org/open-source/xchart/](https://knowm.org/open-source/xchart/)
 
 **JSON Simple (simple Java toolkit for encoding and decoding JSON)**
@@ -125,6 +125,13 @@ VisCommand's Role:
 
 3) Calls the Visualizer to display the chart to the user
 
+As with other Commands in our Financial Planner application, the constructor of VisCommand
+takes RawCommand as parameter. The RawCommand would provide the arguments (chart type and cashflow type) 
+for the VisCommand provided. 
+
+The VisCommand also inherits from the abstract Command class which would provide the execute() abstract method
+that would be called in main()
+
 Categorizer's Role: 
 
 According to the cashflow type (Income/Expense) arugment passed in, the Categorizer sorts the 
@@ -145,11 +152,11 @@ Overall
 
 ![](images/vis/visualisationSequence.png)
 
-Categorizer
+Categorizer (`sort cashflow entries` ref from overall sequence diagram above)
 
 ![](images/vis/categorizerSequence.png)
 
-Visualizer
+Visualizer (`displaying chart` ref from overall sequence diagram above)
 
 ![](images/vis/visualizerSequence.png)
 

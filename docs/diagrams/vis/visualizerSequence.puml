@@ -17,6 +17,8 @@ else "radar"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayRadarChart(cashflowList, type)
 end
 
+return
+
 hide footbox
 
 @enduml
