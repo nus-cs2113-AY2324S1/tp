@@ -30,19 +30,19 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 {Give detailed description of each feature}
 
-| Action                                                    | Format                                              | Example                                 |
-|-----------------------------------------------------------|-----------------------------------------------------|-----------------------------------------|
-| Add recipe                                                | add r/RECIPE_TITLE                                  | add r/scramble egg                      |
-| Add ingredient                                            | add i/INGREDIENT_NAME                               | add i/bread                             |
-| Delete Recipe                                             | delete r/RECIPE_TITLE                               |
-| Delete Ingredient                                         | delete r/INGREDIENT_NAME                            | 
-| View all ingredients                                      | view i                                              |
-| View all recipes                                          | view r                                              |
-| View specific ingredient                                  | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID | view i/bread <br><br>view i/1           |
-| View specific recipe                                      | view r/RECIPE_ID                                    | view r/1                                |
-| Filter recipe by ingredients                              | filter recipe i/INGREDIENT_NAME [i/...]             | filter recipe i/chicken i/noodles       |
-| Start recipe <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID          | start dumpling noodles <br><br> start 1 |
-| Help <br>(list all commands available)                    | help                                                | help                                    |
+| Action                                                    | Format                                                      | Example                                                                                                                     |
+|-----------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Add recipe                                                | add r/RECIPE_TITLE t/TAG_NAME s/STEP_DESCRIPTION d/DURATION | add r/scramble egg t/BEFORE_COOKING s/buy ingredients t/DURING COOKING s/wash ingredients s/bake ingredients t/30mins i/egg |
+| Add ingredient                                            | add i/INGREDIENT_NAME                                       | add i/bread                                                                                                                 |
+| Delete Recipe                                             | delete r/RECIPE_TITLE                                       |
+| Delete Ingredient                                         | delete r/INGREDIENT_NAME                                    | 
+| View all ingredients                                      | view i                                                      |
+| View all recipes                                          | view r                                                      |
+| View specific ingredient                                  | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID         | view i/bread <br><br>view i/1                                                                                               |
+| View specific recipe                                      | view r/RECIPE_ID                                            | view r/1                                                                                                                    |
+| Filter recipe by ingredients                              | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                                                           |
+| Start recipe <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID                  | start dumpling noodles <br><br> start 1                                                                                     |
+| Help <br>(list all commands available)                    | help                                                        | help                                                                                                                        |
 
 
 ----
@@ -70,6 +70,8 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 4. Add new recipe - `add r/RECIPE_NAME`
 
+
+
    1. Message will appear to prompt user input for steps 
    2. To confirm step input, ENTER key 
    3. To end steps input: `end`
@@ -78,8 +80,8 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    6. To end input: `end`
 
    <br>  Example :
-   
-   * `add r/toast` to add a ‘toast’ recipe 
+
+   * `add r/scramble egg t/BEFORE_COOKING s/buy ingredients t/DURING COOKING s/wash ingredients s/bake ingredients t/30mins i/egg` to add a ‘toast’ recipe 
    * `add r/toast s/Put bread in toaster s/Wait until the toaster is done s/Take out the toast and enjoy i/bread`
    
      <br>Ingredients:

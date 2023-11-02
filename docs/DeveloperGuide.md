@@ -209,13 +209,16 @@ The view recipes feature is facilitated by the `ViewRecipeCommand` class. Users 
 
   Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
 
+
 * **Step 2**
 
   A new `ViewRecipeCommand` object will be created and will be sent back to main
 
+
 * **Step 3**
 
   `commandObject#executeCommand()` will be called which in turn calls `Ui#printAllRecipes()`
+
 
 * **Step 4**
 
