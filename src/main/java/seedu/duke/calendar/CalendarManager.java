@@ -23,7 +23,7 @@ public class CalendarManager {
         EventDirectory eventdirectory = new EventDirectory();
         eventdirectory.listEventFiles();
 
-        storage = new EventStorage("./data/events/event.txt");
+        storage = new EventStorage(eventdirectory.defaultDirectory());
 
         try{
             eventList = storage.loadEvents();
