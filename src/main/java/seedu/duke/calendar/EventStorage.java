@@ -21,7 +21,8 @@ public class EventStorage {
 
     public EventStorage(String path){
         this.path = path;
-        logger = Logger.getLogger("flash");
+        logger = Logger.getLogger("event");
+        logger.setLevel(Level.WARNING);
     }
 
 
