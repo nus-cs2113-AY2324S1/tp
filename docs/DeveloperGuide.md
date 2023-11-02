@@ -20,12 +20,25 @@ The `Storage` component,
 * component can check if the saved txt file has been damaged.
 
 ### Calendar Components
-  
-The `Calendar` component,
-* Add events
-* Delete events
-* List events
-* Find events
+
+#### Command Package
+
++ The package has 7 files in it for users to command their calendar. Those files are 
+  AddEventCommand, DeleteAllEventsCommand, DeleteEventCommand, EventCommand, FindEventCommand
+  ListEventCommand, and UnknownCommand. The other 6 commands extend EventCommand, which is
+  an abstract class that forces other 6 commands to have an execute method.
+
+
++ Each command files execute its own commands. The UnknownCommand file handles the exceptions,
+  such as if the user commands something that doesn't exist
+
+#### Calendar Package
+
++ The calendar package excluding the command package has another 8 files.
+  The empty calendar class is reserved for adding future implementations.
+  The CalendarManager, EventStorage, & CalendarCommandParser manages user input, saves, and loads them.
+  The classes are associated with one another through instant accesses and other means. The 
+  CalendarManager directs the events and event list, which then are run on Duke.
 
 ## Product scope
 

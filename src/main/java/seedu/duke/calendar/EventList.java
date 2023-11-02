@@ -24,14 +24,14 @@ public class EventList {
         return eventList.size();
     }
 
-    public int findEvent(String keyword) {
+    public void findEvent(String keyword) {
         int count = 0;
         for (Event event: eventList) {
             if (event.getName().contains(keyword)) {
-                System.out.println((++count) + ". " + event);
+                System.out.println((++count) + ". " + event.getName() + " Event from: " +event.getFrom() +
+                        " to: " + event.getTo());
             }
         }
-        return count;
     }
 
     public void deleteEvent(String name) {
