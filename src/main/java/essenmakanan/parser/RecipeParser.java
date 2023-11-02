@@ -30,6 +30,7 @@ public class RecipeParser {
         }
 
         if (!recipes.recipeExist(index)) {
+            System.out.println("Your recipe name or id does not exist or it is invalid.");
             throw new EssenOutOfRangeException();
         }
 
