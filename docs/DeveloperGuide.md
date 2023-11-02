@@ -294,7 +294,7 @@ When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequent
 ## **Product scope**
 ### Target user profile
 
-Café proprietors who ***loves*** typing on CLI and are seeking for a software solution to optimize the management of their café's operations.
+Café proprietors who ***love*** typing on CLI and are seeking for a software solution to optimize the management of their café's operations.
 
 ### Value proposition
 
