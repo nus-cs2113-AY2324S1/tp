@@ -1,4 +1,4 @@
-theme: Dinky
+theme: minima
 # Developer Guide
 
 ## Acknowledgements
