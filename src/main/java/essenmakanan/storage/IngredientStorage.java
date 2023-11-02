@@ -1,7 +1,7 @@
 package essenmakanan.storage;
 
 import essenmakanan.exception.EssenFileNotFoundException;
-import essenmakanan.exception.EssenInvalidUnitException;
+import essenmakanan.exception.EssenInvalidEnumException;
 import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
@@ -55,7 +55,7 @@ public class IngredientStorage {
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
         } catch (IllegalArgumentException exception) {
-            EssenInvalidUnitException.handleException(parsedIngredient[2], dataString);
+            EssenInvalidEnumException.handleException(dataString);
         }
     }
 
