@@ -29,6 +29,7 @@ loop#FFAEAE #FFE6E6 ingredient:ingredients
 
 Command -> Command : filterRecipes()
 activate Command
+Command --> Command : filtered recipes
 deactivate Command
 
 Command -> Ui : printFilteredRecipes()

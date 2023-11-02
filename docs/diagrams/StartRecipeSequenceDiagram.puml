@@ -5,28 +5,35 @@ skinparam ArrowFontStyle plain
 actor User
 participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
 participant ":Parser" as Parser PARSER_COLOR
-participant "command:ViewIngredientCommand" as ViewIngredientCommand COMMAND_COLOR
+participant "command:StartRecipe" as Command COMMAND_COLOR
 participant "<<class>>\nUi" as Ui INTERFACE_COLOR
 participant "ingredients:IngredientList" as Ingredients INGREDIENT_COLOR
 
-User -> EssenMakanan: input: view i
+User -> EssenMakanan: input: start curry chicken
 activate EssenMakanan
 
 EssenMakanan -> Parser : parseCommand()
 activate Parser
 
-create ViewIngredientCommand
-Parser -> ViewIngredientCommand: ViewIngredientCommand()
-activate ViewIngredientCommand
+create Command
+Parser -> Command: Command()
+activate Command
 
-ViewIngredientCommand --> Parser : command object
+Command --> Parser : command
 
-Parser -> EssenMakanan: command object
+Parser -> EssenMakanan: command
 deactivate Parser
 
-EssenMakanan -> ViewIngredientCommand: executeCommand()
+EssenMakanan -> Command: executeCommand()
 
-ViewIngredientCommand -> Ui: printAllIngredients(ingredients)
+Command -> Command : getmissingIngredients()
+activate Command
+
+Command --> Command : missing ingredients
+deactivate Command
+
+
+Command -> Ui: printStartRecipeMessage()
 activate Ui
 
 Ui -> Ingredients: listIngredients()
@@ -35,12 +42,12 @@ activate Ingredients
 Ingredients --> Ui
 deactivate Ingredients
 
-Ui --> ViewIngredientCommand
+Ui --> Command
 
 deactivate Ui
 
-ViewIngredientCommand --> EssenMakanan
-deactivate ViewIngredientCommand
+Command --> EssenMakanan
+deactivate Command
 
 deactivate EssenMakanan
 
