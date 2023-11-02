@@ -36,7 +36,6 @@ Each of the categories inherit from a base Expense class which in turn
 inherits from the FinancialRecord class.
 
 ![expense_class_diagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_class_diagram.png?raw=true)
-
 ### IncomeManager
 
 the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList` and `Ui`.

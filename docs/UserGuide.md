@@ -54,10 +54,11 @@ Use case:
 - Prompts users if any of the fields are empty.
 - There are only 3 categories for expenses: `Food`, `Transport`, `Utilities`.
 - Amount is takes up to 2 decimal places.
-- by default, amount is set to SGD.
-- User can specify the currency. Refer to the supported currencies for valid currency.
 - format of date is `dd/mm/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
+- By default, amount is set to SGD.
+- User can specify the currency. Refer to the supported currencies for valid currency.
+- Currency specified must have been updated. Refer to list exchange rates for more details
 
 Example of usage:
 ```
@@ -141,9 +142,9 @@ MYR USD JPY KRW EUR THB HKD INR IDR AUD GBP CNY CAD TWD VND PHP
 ```
 
 ### List exisitng exchange rates: list exchange rates
-List all updated exchange rates. All exchange rates that are updated
-either via ExchangeRateFile or the command line will be shown. User can call the update exchange rates function to 
-register the exchange rates into their KaChinnnng.
+List all updated exchange rates. All exchange rates that are updated or loaded
+from ExchangeRate.txt will be shown. User can call the update exchange rates function to 
+register new exchange rates into their KaChinnnng.
 
 Note: Exchange rates are shown in SGD/{other currency}.
 
