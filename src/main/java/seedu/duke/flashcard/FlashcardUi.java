@@ -18,4 +18,13 @@ public class FlashcardUi {
     public void executeCommand(FlashcardCommand command) {
         command.execute(scanner, flashcardList);
     }
+
+    /**
+     * Set scanner method
+     * for using bytearrayinputstream in test
+     * @param scanner
+     */
+    public void setScanner(Scanner scanner){
+        this.scanner = scanner;
+    }
 }

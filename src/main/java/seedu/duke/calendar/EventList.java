@@ -40,6 +40,7 @@ public class EventList {
     public void deleteAllEvents() {
         eventList.clear();
     }
+
     @Override
     public String toString() {
         return "EventStorage{" +

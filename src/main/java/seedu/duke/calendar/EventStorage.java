@@ -16,12 +16,12 @@ import java.util.logging.Logger;
  * One storage manages one file
  */
 public class EventStorage {
-    private static Logger flashlogger; // for logging
+    private static Logger logger; // for logging
     protected String path;
 
     public EventStorage(String path){
         this.path = path;
-        flashlogger = Logger.getLogger("flash");
+        logger = Logger.getLogger("flash");
     }
 
 
@@ -63,7 +63,7 @@ public class EventStorage {
             eventList.addEvent(loadEvent(eventTokens));
         }
 
-        flashlogger.log(Level.INFO, String.format(
+        logger.log(Level.INFO, String.format(
                 "    There are currently %d events in the savefile",
                 eventList.getSize()));
         //System.out.println(String.format(
@@ -74,6 +74,11 @@ public class EventStorage {
 
     }
 
+    /**
+     * saveEvents method
+     * save all events to file
+     * @param eventList
+     */
     public void saveEvents(ArrayList<Event> eventList) {
 
         try {
@@ -86,7 +91,8 @@ public class EventStorage {
             }
             fw.close();
         } catch (IOException e){
-            System.out.println("Failed to save.");
+            //System.out.println("Failed to save.");
+            logger.log(Level.WARNING, "problem: failed to save");
         }
     }
 
