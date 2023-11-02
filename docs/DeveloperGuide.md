@@ -1,7 +1,4 @@
-remote_theme: minima
 # Developer Guide
-
-## Acknowledgements
 * Table of Contents
 <!-- TOC -->
 * [Developer Guide](#developer-guide)
@@ -34,30 +31,37 @@ remote_theme: minima
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design
-### Architecture Diagram
+--------------------------------------------------------------------------------------------------------------------
+## **Setting up, getting started**
+
+Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------    
+## **Design**
+
+### Architecture
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
 *Figure 1: Architecture Diagram*
 
-The Architecture Diagram given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the App.
 Listed below is a brief summary outlining the primary components and their interrelationships.
 
-In summary, the user interacts with the UI components, initiating a sequence that involves:
-- Parser component for command interpretation
-- Command component for execution 
-- Data component for managing application data
+In summary, the user interacts with the Ui components, initiating a sequence that involves:
+- `Parser` component for command interpretation
+- `Command` component for execution 
+- `Data` component for managing application data
 
-The Storage component mainly handles interaction with external text files and main coordinates the interactions between the various Components.
+The `Storage` component mainly handles interaction with external text files and main coordinates the interactions between the various Components.
 
 The bulk of the app’s work is done by the following components:
-- `UI` : The UI of the App.
+- `Ui` : The UI of the App.
 - `Storage` : Reads data from, and writes data to, the text files.
 - `Data` : Consists of all the classes that are involved in execution of commands.
 - `Parser` : Makes sense of user input to return the appropriate command
-- `Command` : Executes the comman requested by the user.
+- `Command` : Executes the command requested by the user.
 
-How the architecture components interact with each other
+**How the architecture components interact with each other:**
 
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
@@ -84,13 +88,17 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 *Figure 4: Parser Class Diagram*
 
-Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
+The `Parser` component is respnsible for making sense of the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
+
+<div markdown="span" class="alert alert-info">**Note:** `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies.</div>
+
+Below is the sequence diagram of a parser which shows how `Parser` parses user input:
 
 ![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
 
 *Figure 5: Parser Parsing User Input Sequence Diagram*
 
-When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
+When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
 ### Storage Component
 API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
@@ -119,8 +127,8 @@ A summary of the class diagram is as listed below:
 - `Sales` is instantiated with an ArrayList of `OrderList`, forming a one-to-many relationship with `OrderList`.
 - Lastly, the `CurrentDate` class keeps track of the current operating day of the cafe.
 
-
-## Features
+--------------------------------------------------------------------------------------------------------------------
+## **Feature**
 
 ### Add Dish
 
@@ -282,15 +290,15 @@ API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpComman
 
 When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequently calls the `showHelp()` method in `Ui`. In `showHelp()`, messages related to command usage will be retrieved and be printed out using by self-invoking `showToUserWithSpaceInBetweenLines(messages: String...)`.
 
-## Product scope
+--------------------------------------------------------------------------------------------------------------------
+## **Product scope**
 ### Target user profile
 
-Café proprietors seeking for a software solution to optimize the management of their café's operations
+Café proprietors who ***loves*** typing on CLI and are seeking for a software solution to optimize the management of their café's operations.
 
 ### Value proposition
 
 Our product aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
-
 
 ### User stories
 
