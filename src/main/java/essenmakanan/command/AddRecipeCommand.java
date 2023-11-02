@@ -22,18 +22,26 @@ public class AddRecipeCommand extends Command {
 
     @Override
     public void executeCommand() {
-        if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
+        if (toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("t/")) {
             // all attributes are available
+            try {
+                this.addWithTitleStepsTags();
+            } catch (EssenFormatException e) {
+                e.handleException();
+            }
+        } else if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
+            // only title and steps are available
             try {
                 this.addWithTitleAndStepsAndIngredients();
             } catch (EssenFormatException e) {
                 e.handleException();
             }
-        } else if (toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("t/")) {
-            // only title and steps are available
-            this.addWithTitleStepsTags();
         } else if (toAdd.contains("r/") && toAdd.contains("s/")) {
-            this.addWithTitleAndSteps();
+            try {
+                this.addWithTitleAndSteps();
+            } catch (EssenFormatException e) {
+                e.handleException();
+            }
         } else {
             // only title is available
             this.addWithTitle();
@@ -47,11 +55,20 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
-    public void addWithTitleAndSteps() {
+    public void addWithTitleAndSteps() throws EssenFormatException {
         String[] allToAdd = toAdd.split("s/");
         String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
         String[] steps = new String[allToAdd.length - 1];
+        if (allToAdd.length==(1)){
+            System.out.println("Step is empty! Please enter valid step after \"s/\"");
+            throw new EssenFormatException();
+        }
         for (int i = 1; i < allToAdd.length; i++) {
+            if (allToAdd[i].trim().isEmpty()) {
+                System.out.println("Step is empty! Please enter valid step after \"s/\"");
+                throw new EssenFormatException();
+            }
+
             steps[i - 1] = allToAdd[i].trim();
         }
         Recipe newRecipe = new Recipe(recipeTitle, steps);
@@ -59,7 +76,7 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
-    public void addWithTitleStepsTags() {
+    public void addWithTitleStepsTags() throws EssenFormatException {
         // add r/bread t/b s/buy ingredients s/store ingredients t/a s/cook
         String[] allToAdd = toAdd.split("t/");
         String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
@@ -83,6 +100,7 @@ public class AddRecipeCommand extends Command {
                 addSteps(step, recipeStepList, Tag.ACTUAL_COOKING);
             } else {
                 System.out.println("No such Tag");
+                throw new EssenFormatException();
             }
         }
         Recipe newRecipe = new Recipe(recipeTitle, recipeStepList);
@@ -143,17 +161,27 @@ public class AddRecipeCommand extends Command {
             case "r":
                 recipeTitle = RecipeParser.parseRecipeTitle(content);
 
-                if (recipeTitle.isEmpty()) {
+                if (content.isEmpty()) {
                     System.out.println("Recipe title is empty! Please enter valid title after \"r/\"");
                     throw new EssenFormatException();
                 }
 
                 break;
             case "s":
+                if (content.isEmpty()) {
+                    System.out.println("Step is empty! Please enter valid step after \"s/\"");
+                    throw new EssenFormatException();
+                }
+
                 stepsInString[stepsCounter] = content;
                 stepsCounter++;
                 break;
             case "i":
+                if (content.isEmpty()) {
+                    System.out.println("Ingredient is empty! Please enter valid ingredient after \"i/\"");
+                    throw new EssenFormatException();
+                }
+
                 if (!IngredientParser.isValidIngredient(content)) {
                     System.out.println("Ingredient is not valid! Please enter valid ingredient after \"i/\"");
                     throw new EssenFormatException();
