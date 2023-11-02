@@ -40,6 +40,21 @@ Given below is a quick overview of main components and how they interact with ea
 
 ### Storage component
 
+In this application, it uses text files to store all data, i.e, recipes and ingredients. 
+
+
+When booting up the application, `restoreSavedData` will be called to get both recipes and ingredients 
+from the previous session.
+
+<img src="images/RestoreIngredientStorageSequenceDiagram.png" width="347" />
+<img src="images/RestoreRecipeStorageSequenceDiagram.png" width="347" />
+
+When a user exits the application, `saveData` will be called and it will convert all data from recipes and
+ingredients into a string which will be put in their own respective text files.
+
+<img src="images/StoreIngredientStorageSequenceDiagram.png" width="525" />
+<img src="images/StoreRecipeStorageSequenceDiagram.png" width="706" />
+
 
 ## Implementation
 ### Help Feature
@@ -66,7 +81,7 @@ The help feature is facilitated by the `HelpCommand` class. By calling `executeC
   Finally `Ui#showCommands()` will call `Ui#showRecipeCommands()`, `Ui#showIngredientCommands()`, `Ui#showOtherCommands()` to print all commands for recipe, ingredient and others respectively
 
 
-<img src="images/HelpFunctionSequenceDiagram.png" width="963" />
+<img src="images/HelpFunctionSequenceDiagram.png" width="732" />
 
 ### Exit feature
 The help feature is facilitated by the `ExitCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the exit command.
@@ -91,7 +106,7 @@ The help feature is facilitated by the `ExitCommand` class. By calling `executeC
   Finally `Ui#showCommands()` will print the exit message
 
 
-<img src="images/ExitSequenceDiagram.png" width="963" />
+<img src="images/ExitSequenceDiagram.png" width="571" />
 
 
 ### Add Recipe feature
@@ -152,30 +167,30 @@ Example:
   to standard output
 
 
-<img src="images/ViewAllIngredientSequenceDiagram.png" width="963" />
+<img src="images/ViewAllIngredientSequenceDiagram.png" width="967" />
 
 ### View Recipes feature
 The view recipes feature is facilitated by the `ViewRecipeCommand` class. Users can input
 "view r" to trigger this command
 
-- **Step 1**
+* **Step 1**
 
   Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
 
-- **Step 2**
+* **Step 2**
 
   A new `ViewRecipeCommand` object will be created and will be sent back to main
 
-- **Step 3**
+* **Step 3**
 
   `commandObject#executeCommand()` will be called which in turn calls `Ui#printAllRecipes()`
 
-- **Step 4**
+* **Step 4**
 
   Finally, `RecipeList#listRecipeTitles()` will be called to print all the ingredients
   to standard output
 
-<img src="images/ViewAllRecipeSequenceDiagram.png" width="963" />
+<img src="images/ViewAllRecipeSequenceDiagram.png" width="862" />
 
 ### Add Ingredient feature
 
@@ -185,27 +200,29 @@ Multiple ingredients can be added at the same time using the syntax
 
 By calling `executeCommand` on the class, the steps will
 be executed as follows:
-- **Step1**
+* **Step1**
 
-  `AddIngredientCommand` will use the "split" method of `String` to get an array of the descriptions of ingredients and iterate all the elements in this array
-
-
-- **Step2**
-
-  `AddIngredientCommand` will get a new `Ingredient` by invoking the method "parseIngredient" of `IngredientParser` for each element of the obtained array
+  `AddIngredientCommand` will use the "split" method of `String` to get an array of the descriptions of ingredients 
+   and iterate all the elements in this array
 
 
-- **Step3**
+* **Step2**
+
+  `AddIngredientCommand` will get a new `Ingredient` by invoking the method "parseIngredient" of `IngredientParser` 
+  for each element of the obtained array
+
+
+* **Step3**
 
   `AddIngredientCommand` will add this `Ingredient` into `IngredientList`. Then, the ingredient will be added into an
   `ArrayList` inside `IngredientList`.
 
 
-- **Step4**
+* **Step4**
 
   `AddIngredientCommand` will call `Ui` class to print out the name of the recently added ingredient.
 
-<img src="images/AddNewIngredientSequenceDiagram.png" width="963" />
+<img src="images/AddNewIngredientSequenceDiagram.png" width="1676" />
 
 
 ### Delete feature

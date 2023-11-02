@@ -1,0 +1,2 @@
+soup || step1 | step2 || bread | 2 | KILOGRAM , apple | 2 | KILOGRAM
+steak || step1 | step2 || beef | 1 | GRAM
