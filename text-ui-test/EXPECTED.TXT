@@ -15,7 +15,12 @@ RECIPE
 	- View all recipes. [view r]
 	- Start a recipe to see if you are missing any ingredients.
 		 [start RECIPE_TITLE] or [start RECIPE_ID]
-	- Add recipe. [add r/RECIPE_TITLE s/STEP1 s/STEP2 i/INGREDIENT_NAME,QUANTITY,UNIT]
+	- Add recipe. [add r/RECIPE_TITLE t/TAG_ID s/STEP1 s/STEP2 t/TAG_ID s/STEP3 [s/...] i/INGREDIENT_NAME [i/...]]
+		 Tags:
+			1 - NIGHT_BEFORE
+			2 - MORNING_OF_COOKING
+			3 - MORE_THAN_ONE_DAY
+			4 - ACTUAL_COOKING
 	- View a recipe. [view r/RECIPE_TITLE]
 	- Edit a recipe. [edit r/RECIPE_TITLE n/NEW_TITLE s/STEP_TO_EDIT,NEW_STEP]
 	- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]
