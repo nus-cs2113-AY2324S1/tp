@@ -9,11 +9,11 @@ participant "<<class>>\nVisualizer"
 
 activate "<<class>>\nVisualizer"
 
-alt chart == "pie"
+alt "pie"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayPieChart(cashflowList, type)
-else chart == "bar"
+else "bar"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayBarChart(cashflowList, type)
-else chart == "radar"
+else "radar"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayRadarChart(cashflowList, type)
 end
 
