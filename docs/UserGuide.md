@@ -81,7 +81,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
    <br>  Example :
 
-   * `add r/scramble egg t/BEFORE_COOKING s/buy ingredients t/DURING COOKING s/wash ingredients s/bake ingredients t/30mins i/egg` to add a ‘toast’ recipe 
+   * `add r/scramble egg s/buy ingredients s/wash ingredients s/bake ingredients t/30mins i/egg` to add a ‘toast’ recipe 
    * `add r/toast s/Put bread in toaster s/Wait until the toaster is done s/Take out the toast and enjoy i/bread`
    
      <br>Ingredients:
