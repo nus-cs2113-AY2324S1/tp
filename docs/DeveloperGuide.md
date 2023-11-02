@@ -45,7 +45,7 @@ As such, computer science students represent good target users of TaskLinker.
 
 TaskLinker is a CLI-tool for helping university students memorize flashcards
 and track their flashcard and general academic progress in the courses they are
-taking.
+taking. 
 
 
 ## User Stories

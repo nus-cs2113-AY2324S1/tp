@@ -8,7 +8,7 @@ import seedu.duke.calendar.EventList;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 
-public class AddEventCommand extends EventCommand{
+public class AddEventCommand extends EventCommand {
     public void execute(Scanner scanner, EventList eventList) {
         System.out.print("What's the event?: ");
         String eventName = scanner.nextLine();
