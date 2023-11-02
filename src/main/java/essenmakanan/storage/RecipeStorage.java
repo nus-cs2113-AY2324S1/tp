@@ -1,6 +1,8 @@
 package essenmakanan.storage;
 
 import essenmakanan.exception.EssenFileNotFoundException;
+import essenmakanan.exception.EssenInvalidEnumException;
+import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
@@ -58,27 +60,38 @@ public class RecipeStorage {
     }
 
     private void createNewData(Scanner scan) {
-        String[] parsedRecipe = scan.nextLine().split(" \\|\\| ");
+        String dataString = scan.nextLine();
+        String[] parsedRecipe = dataString.trim().split(" \\|\\| ");
 
-        String recipeDescription = parsedRecipe[0];
+        try {
+            if (parsedRecipe.length != 3 || parsedRecipe[1].isEmpty()) {
+                throw new EssenStorageFormatException();
+            }
 
-        RecipeStepList steps;
-        if (parsedRecipe[1].equals("EMPTY")) {
-            ArrayList<Step> emptyStepList = new ArrayList<>();
-            steps = new RecipeStepList(emptyStepList);
-        } else {
-            steps = RecipeParser.parseDataSteps(parsedRecipe[1]);
+            String recipeDescription = parsedRecipe[0];
+
+            RecipeStepList steps;
+            if (parsedRecipe[1].equals("EMPTY")) {
+                ArrayList<Step> emptyStepList = new ArrayList<>();
+                steps = new RecipeStepList(emptyStepList);
+            } else {
+                steps = RecipeParser.parseDataSteps(parsedRecipe[1]);
+            }
+
+            RecipeIngredientList ingredientList;
+            if (parsedRecipe[2].equals("EMPTY")) {
+                ArrayList<Ingredient> emptyIngredientList = new ArrayList<>();
+                ingredientList = new RecipeIngredientList(emptyIngredientList);
+            } else {
+                ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2]);
+            }
+
+            recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
+        } catch (EssenStorageFormatException exception) {
+            exception.handleException(dataString); // this is here due to unavailable feature of creating custom tags
+        } catch (IllegalArgumentException exception) {
+            EssenInvalidEnumException.handleException(dataString);
         }
-
-        RecipeIngredientList ingredientList;
-        if (parsedRecipe[2].equals("EMPTY")) {
-            ArrayList<Ingredient> emptyIngredientList = new ArrayList<>();
-            ingredientList = new RecipeIngredientList(emptyIngredientList);
-        } else {
-            ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2]);
-        }
-
-        recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
     }
 
     public ArrayList<Recipe> restoreSavedData() throws EssenFileNotFoundException {

@@ -1,6 +1,8 @@
 package essenmakanan.storage;
 
 import essenmakanan.exception.EssenFileNotFoundException;
+import essenmakanan.exception.EssenInvalidEnumException;
+import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.parser.IngredientParser;
@@ -27,7 +29,7 @@ public class IngredientStorage {
         FileWriter writer = new FileWriter(dataPath, false);
         String dataString;
 
-        for (Ingredient ingredient : ingredients) {
+        for (Ingredient ingredient: ingredients) {
             dataString = IngredientParser.convertToString(ingredient);
             writer.write(dataString);
             writer.write(System.lineSeparator());
@@ -37,13 +39,24 @@ public class IngredientStorage {
     }
 
     private void createNewData(Scanner scan) {
-        String[] parsedIngredient = scan.nextLine().split(" \\| ");
+        String dataString = scan.nextLine();
+        String[] parsedIngredient = dataString.trim().split(" \\| ");
 
-        String ingredientName = parsedIngredient[0];
-        String ingredientQuantity = parsedIngredient[1];
-        IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
+        try {
+            if (parsedIngredient.length != 3 || parsedIngredient[1].isBlank()) {
+                throw new EssenStorageFormatException();
+            }
 
-        ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+            String ingredientName = parsedIngredient[0];
+            String ingredientQuantity = parsedIngredient[1];
+            IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
+
+            ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+        } catch (EssenStorageFormatException exception) {
+            exception.handleException(dataString);
+        } catch (IllegalArgumentException exception) {
+            EssenInvalidEnumException.handleException(dataString);
+        }
     }
 
     public ArrayList<Ingredient> restoreSavedData() throws EssenFileNotFoundException {
