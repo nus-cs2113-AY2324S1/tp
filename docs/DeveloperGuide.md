@@ -1,4 +1,4 @@
-theme: Time machine
+theme: Dinky
 # Developer Guide
 
 ## Acknowledgements
