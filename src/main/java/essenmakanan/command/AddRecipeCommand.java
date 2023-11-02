@@ -72,16 +72,16 @@ public class AddRecipeCommand extends Command {
         RecipeStepList recipeStepList = new RecipeStepList(new String[]{});
         for (String step : steps) {
             if (step.startsWith("1")) {
-                step = step.replace("1", "").trim();
+                step = step.replaceFirst("1", "").trim();
                 addSteps(step, recipeStepList, Tag.NIGHT_BEFORE);
             } else if (step.startsWith("2")) {
-                step = step.replace("2", "");
+                step = step.replaceFirst("2", "");
                 addSteps(step, recipeStepList, Tag.MORNING_OF_COOKING);
             } else if (step.startsWith("3")) {
-                step = step.replace("3", "");
+                step = step.replaceFirst("3", "");
                 addSteps(step, recipeStepList, Tag.MORE_THAN_ONE_DAY);
             } else if (step.startsWith("4")) {
-                step = step.replace("4", "");
+                step = step.replaceFirst("4", "");
                 addSteps(step, recipeStepList, Tag.ACTUAL_COOKING);
             } else {
                 System.out.println("No such Tag");
@@ -95,14 +95,19 @@ public class AddRecipeCommand extends Command {
     private static void addSteps(String step, RecipeStepList recipeStepList, Tag tag) {
         String[] allSteps = step.trim().split("s/");
         for (String eachStep : allSteps) {
-            if (eachStep.length()>0) {
+            if (eachStep.length()>0 && eachStep.contains("d/")) {
+                try {
+                    String description = eachStep.split("d/")[0].trim();
+                    int duration = RecipeParser.parseStepsDuration(eachStep);
+                    Step specificStep = new Step(description, tag, duration);
+                    recipeStepList.addStep(specificStep);
+                } catch (EssenFormatException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (eachStep.length()>0) {
                 recipeStepList.addStep(new Step(eachStep.trim(), tag));
             }
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 
     public void addWithTitleAndStepsAndIngredients() throws EssenFormatException {

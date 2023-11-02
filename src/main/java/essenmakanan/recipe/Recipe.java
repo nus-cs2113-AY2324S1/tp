@@ -83,8 +83,7 @@ public class Recipe {
 
 
     public void viewTimeLine() {
-        recipeSteps.sortByTime();
-        
+
         Map<Tag, List<Step>> categorizedSteps = recipeSteps.getSteps()
             .stream()
             .sorted((s1,s2) -> s1.getTag().hasHigherPriorityThan(s2.getTag()))
