@@ -9,27 +9,27 @@ participant ":Parser" as Parser PARSER_COLOR
 participant "command:FilterRecipeCommand" as Command COMMAND_COLOR
 participant "<<class>>\nUi" as Ui INTERFACE_COLOR
 
-User-> EssenMakanan : input: view recipe i/rice
+User-> EssenMakanan : input: view recipe i/rice i/...
 activate EssenMakanan
 
-EssenMakanan -> Parser : parseCommand
+EssenMakanan -> Parser : parseCommand()
 activate Parser
 
 create Command
 Parser -> Command
 activate Command
 
-Command --> Parser
+Command --> Parser : command
 
-Parser -> Command : executeCommand
+Parser -> Command : executeCommand()
 
 loop#FFAEAE #FFE6E6 ingredient:ingredients
 
-Command -> Command : filterRecipes
+Command -> Command : filterRecipes()
 activate Command
 deactivate Command
 
-Command -> Ui : printFilteredRecipes
+Command -> Ui : printFilteredRecipes()
 activate Ui
 
 Ui --> Command
