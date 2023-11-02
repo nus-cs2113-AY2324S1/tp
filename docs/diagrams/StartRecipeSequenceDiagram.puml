@@ -6,6 +6,7 @@ actor User
 participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
 participant ":Parser" as Parser PARSER_COLOR
 participant "command:StartRecipe" as Command COMMAND_COLOR
+participant "<<class>>\n:RecipeParser" as RecipeParser RECIPE_PARSER_COLOR
 participant "<<class>>\nUi" as Ui INTERFACE_COLOR
 participant "ingredients:IngredientList" as Ingredients INGREDIENT_COLOR
 
@@ -25,6 +26,13 @@ Parser -> EssenMakanan: command
 deactivate Parser
 
 EssenMakanan -> Command: executeCommand()
+
+Command -> RecipeParser : getRecipeIndex()
+activate RecipeParser
+
+RecipeParser --> Command
+deactivate RecipeParser
+
 
 Command -> Command : getmissingIngredients()
 activate Command
