@@ -11,6 +11,6 @@ public class DeleteAllEvents extends EventCommand {
         eventList.deleteAllEvents();
 
         System.out.println("    All your events have been successfully " +
-                "deleted from the calendar.");
+                "deleted from the Calendar.");
     }
 }

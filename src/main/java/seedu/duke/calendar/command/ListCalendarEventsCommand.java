@@ -9,17 +9,22 @@ import java.util.Scanner;
 
 public class ListCalendarEventsCommand extends EventCommand{
     public void execute(Scanner scanner, EventList eventList) {
-        System.out.println("Here is a list of all your events: ");
-        printLine();
-
-        for (Event event : eventList.getEvent()) {
-            System.out.println(event);
+        if (eventList.getSize() > 0) {
+            System.out.println("Here is a list of all your events: ");
             printLine();
+
+            int count = 0;
+            for (Event event : eventList.getEvent()) {
+                System.out.println((++count) + ". " + event.getName() + " Event from: " +event.getFrom() +
+                        " to: " + event.getTo());
+                printLine();
+            }
+        } else {
+            System.out.println("    There is no event in your Calendar");
         }
-        System.out.print("Enter your command: ");
     }
 
     public void printLine() {
-        System.out.println("-------------------");
+        System.out.println("-".repeat(80));
     }
 }
