@@ -214,7 +214,7 @@ Changes the difficulty level of an existing question in the question and answer 
 by referencing the number of the question in the existing question list in the question
 and answer bank.
 
-Format: `markdiff [question number] [question difficulty]`
+Format: `markdiff [question number] /[question difficulty]`
 
 Examples of usage:
 * **Command**: `markdiff 1 /easy` <br>
@@ -290,5 +290,5 @@ computer.
 9. `start /[quiz mode] [start details] /[qn mode]` - starts the quiz with option for /module or /all and /random or
    /normal,
 10. `shuffle` - shuffle quiz questions to a random order,
-11. `markdiff [question number] [question difficulty]` - sets the difficulty of question with the specified number,
+11. `markdiff [question number] /[question difficulty]` - sets the difficulty of question with the specified number,
 12. `bye` - exits the program
