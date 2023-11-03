@@ -136,13 +136,8 @@ public class Question {
      * @param newAnswer New answer of the question.
      */
     public void editQuestion(String newDescription, String newAnswer){
-        if(newDescription != null && newDescription.equals(this.description)){
-            System.out.println("    Description is already set as " + this.description + "!" + System.lineSeparator() +
-                    QN_UNCHANGED_MSG);
-        } else if(newDescription != null && !newDescription.equals("")){
-            this.description = newDescription;
-            System.out.println("    Roger that! I have edited the following question >w< !");
-        }
+        this.description = newDescription;
+        System.out.println("    Roger that! I have edited the following question >w< !");
     }
     /**
      * Returns question details in a string.
@@ -156,5 +151,11 @@ public class Question {
      */
     public QnDifficulty getDifficulty(){
         return qnDifficulty;
+    }
+    /**
+     * Display a edit error message
+     */
+    public void displayEditErrorMessage(String editField){
+        System.out.println("    The current question " + editField + " is the same as your input!");
     }
 }

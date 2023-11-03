@@ -65,7 +65,6 @@ public class QuestionList {
                                     Question.QnDifficulty qnDifficulty, boolean showMessage) {
 
         if(containsDuplicateQuestion(description, Question.QnType.MULTIPLECHOICE, module, qnDifficulty)){
-            // TODO: Decide to just use CommandShortAnswer's String, abstract further, or copy DUPLICATED_INPUT to CommandMultipleChoice
             System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
         } else {
             allQns.add(new MultipleChoiceQn(description, option1, option2, option3,
@@ -114,21 +113,15 @@ public class QuestionList {
      */
     public void printQuestion(Question question, boolean asList){
         int qnIndex = allQns.indexOf(question);
-        int oneIndexed = qnIndex++;
+        int oneIndexed = ++qnIndex;
         String isDone = question.questionIsDone() ? "X" : " ";
-        switch(question.getQuestionType()) {
-        case SHORTANSWER:
-            if(asList) {
-                System.out.printf("    %d: [S][%s] %s\n", oneIndexed, isDone, question.getQuestionDescription());
-            } else {
-                System.out.printf("        [S][%s] %s\n", isDone, question.getQuestionDescription());
-            }
-            break;
-            // TODO Add MULTIPLECHOICE (or maybe have a general format that doesn't need a case?)
-        default:
-            break;
+        if(asList) {
+            System.out.printf("    %d: [S][%s] %s\n", oneIndexed, isDone, question.getQuestionDescription());
+        } else {
+            System.out.printf("        [S][%s] %s\n", isDone, question.getQuestionDescription());
         }
     }
+    
     /**
      * Prints all the questions in the current question list as an indexed list.
      */
@@ -255,6 +248,8 @@ public class QuestionList {
             switch(allQns.get(index-1).getQuestionType()) {
             case SHORTANSWER:
                 return allQns.get(index-1).getQuestionDescription();
+            case MULTIPLECHOICE:
+                return allQns.get(index-1).getQuestionDescription();
             default:
                 return "Question Not Found";
             }
@@ -268,10 +263,10 @@ public class QuestionList {
      *
      * @param index The list index of the question to be deleted.
      */
-    public void editQuestionByIndex(int index, String newDescription, String newAnswer){
+    public void editQuestionByIndex(int index, String editField, String newValue){
         try{
             Question question = allQns.get(index-1);
-            question.editQuestion(newDescription, newAnswer);
+            question.editQuestion(editField, newValue);
             printQuestion(question, false);
         } catch (IndexOutOfBoundsException invalidIndex){
             if(index != 0){
@@ -423,6 +418,21 @@ public class QuestionList {
         if (index >= 0 && index < allQns.size()) {
             Question question = allQns.get(index);
             return question.toString(); // Use the toString() method to get the text of the question
+        }
+        return null; // Handle invalid index
+    }
+
+
+    /**
+     * Retrieves the question by its index in the question list.
+     *
+     * @param index The index of the question in the list.
+     * @return The question, or null if the index is invalid or the question is of a different type.
+     */
+    public Question getQuestionByIndex(int index) {
+        if (index > 0 && index <= allQns.size()) {
+            Question question = allQns.get(index - 1);
+            return question; // Use the toString() method to get the text of the question
         }
         return null; // Handle invalid index
     }

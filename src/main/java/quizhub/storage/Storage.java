@@ -63,6 +63,29 @@ public class Storage {
             } catch (ArrayIndexOutOfBoundsException exception) {
                 return 1;
             }
+        case "MC":
+            try {
+                // Split the description by "/" and check for empty fields
+                String[] qnTokens = qnDescription.split("/");
+                String questionString = qnTokens[0];
+                String option1 = qnTokens[1];
+                String option2 = qnTokens[2];
+                String option3 = qnTokens[3];
+                String option4 = qnTokens[4];
+                int answer = Integer.parseInt(qnTokens[5].strip());
+                if (questionString.isEmpty() || option1.isEmpty() || option2.isEmpty() || option3.isEmpty()
+                        || option4.isEmpty() || qnModule.isEmpty()) {
+                    return 1;
+                }
+                questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4, answer, qnModule,
+                        difficulty, false);
+                if (qnDoneStatus.equals("done")) {
+                    questions.markQuestionAsDone(questions.getQuestionListSize(), false);
+                }
+                return 0;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException exception) {
+                return 1;
+            }
         default:
             return 1;
         }
@@ -149,6 +172,10 @@ public class Storage {
         switch (question.getQuestionType()) {
         case SHORTANSWER:
             writeToFile(dataFile.getPath(), "S | " + isDoneString + " | " + question.getQuestionDescription()
+                    + System.lineSeparator(), true);
+            break;
+        case MULTIPLECHOICE:
+            writeToFile(dataFile.getPath(), "MC | " + isDoneString + " | " + question.getQuestionDescription()
                     + System.lineSeparator(), true);
             break;
         default:

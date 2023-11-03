@@ -6,7 +6,14 @@ import quizhub.storage.Storage;
 import quizhub.ui.Ui;
 
 public class CommandMultipleChoice extends Command {
-    // TODO: Add everything else that is in CommandShortAnswer (or abstract?? idk)
+    public static final String COMMAND_WORD = "mcq";
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as " +
+            "mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!";
+    public static final String MISSING_FIELDS_MSG = "    You have one or more field missing!";
+    public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! There should not be arguments after /difficulty";
+    public static final String DUPLICATED_INPUT = "    You have a duplicated input, please fill add a different input!";
+    public static final String INVALID_DIFFICULTY_MSG = "    Entry will not be added to list";
+    public static final int ARGUMENT_SIZE = 8;
     private final String description;
     private final String module;
     private final Question.QnDifficulty qnDifficulty;
