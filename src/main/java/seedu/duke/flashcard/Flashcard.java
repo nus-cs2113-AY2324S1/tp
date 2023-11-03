@@ -2,9 +2,10 @@
 
 package seedu.duke.flashcard;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
+/**
+ * Represents a flashcard with its associated front and back text as well as
+ * its id and current difficulty.
+ */
 public class Flashcard {
     private static int globalMaxId = 1;
     private String frontText;
@@ -12,6 +13,13 @@ public class Flashcard {
     private int id;
     private int difficulty;
 
+    /**
+     * Instantiates and returns a flashcard with the given front and back text.
+     * Its id and difficulty (which is 5) are automatically set.
+     *
+     * @param frontText The text on the front of the flashcard.
+     * @param backText The text on the back of the flashcard.
+     */
     public Flashcard(String frontText, String backText) {
         this.frontText = frontText;
         this.backText = backText;
@@ -22,7 +30,13 @@ public class Flashcard {
         id = globalMaxId;
     }
 
-    public static void calculateAndUpdateGlobalMaxId(FlashcardList flashcardList) {
+    /**
+     * Updates globalMaxId to be greater than the id of all passed flashcards.
+     *
+     * @param flashcardList List of flashcard to calculate the max id over.
+     */
+    public static void calculateAndUpdateGlobalMaxId(
+            FlashcardList flashcardList) {
         int currentMax = 1;
 
         for (Flashcard flashcard : flashcardList.getFlashcards()){
@@ -34,16 +48,8 @@ public class Flashcard {
         globalMaxId = currentMax + 1;
     }
 
-    public String getFrontText() {
-        return frontText;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public String getBackText() {
-        return backText;
     }
 
     //@@author junhyeong0411
@@ -51,18 +57,37 @@ public class Flashcard {
         this.id = id;
     }
 
+    public String getFrontText() {
+        return frontText;
+    }
+
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
 
+    public String getBackText() {
+        return backText;
+    }
+
 
     //@@author wendelinwemhoener
+    /**
+     * Returns a string representation of this flashcard.
+     *
+     * @return Front and back text as well as id and difficulty.
+     */
     public String toString() {
         return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()
-                + "id: " + id + System.lineSeparator();
+                + "id: " + id
+                + "difficulty: " + difficulty + System.lineSeparator();
     }
 
+    /**
+     * Adjusts (increases) the difficulty of this flashcard.
+     *
+     * @param difficultyChange The amount to increase the difficulty by.
+     */
     public void applyDifficultyChange(int difficultyChange) {
         difficulty += difficultyChange;
     }

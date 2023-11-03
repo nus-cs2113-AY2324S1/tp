@@ -10,7 +10,17 @@ import seedu.duke.flashcard.command.DeleteAllFlashcardsCommand;
 import seedu.duke.flashcard.command.DeleteFlashcardCommand;
 import seedu.duke.flashcard.command.UnknownCommand;
 
+/**
+ * Parses input entered by the user into a FlashcardCommand for further
+ * processing.
+ */
 public class FlashcardCommandParser {
+    /**
+     * Returns the FlashcardCommand corresponding to the passed input.
+     *
+     * @param input The text inputted by the user.
+     * @return The FlashcardCommand corresponding to input
+     */
     public FlashcardCommand parseInput(String input) {
         assert input != null : "input is null";
 
