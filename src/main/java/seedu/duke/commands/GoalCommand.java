@@ -13,6 +13,12 @@ public class GoalCommand extends Command {
         super(cmd);
     }
 
+    /**
+     * The execution of goalCommand new a goal record into the goal list.
+     * If error occurs in creating goal record, possibly includes
+     * incorrect format of command or invalid number is input.
+     * @return result of adding goal successfully message
+     */
     public CommandResult execute() {
         try{
             Duke.goals.addGoal(this.userCommand);
