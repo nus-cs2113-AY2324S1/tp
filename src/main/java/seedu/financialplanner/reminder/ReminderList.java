@@ -29,7 +29,6 @@ public class ReminderList {
         for (int i = 0; i < list.size(); i++) {
             if (i == list.size() - 1) {
                 result += String.format("%d. %s", i + 1, list.get(i));
-                break;
             } else {
                 result += String.format("%d. %s\n", i + 1, list.get(i));
             }
