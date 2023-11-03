@@ -1,6 +1,6 @@
 # Developer Guide
 
-Content
+## Content
 - Handing User Inputs & Displaying Output
 - Updates Exercise from Log feature
 - Adding a New Exercise Goal
