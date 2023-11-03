@@ -42,12 +42,12 @@ public class VisCommand extends Command {
         assert !chart.isEmpty();
         assert !type.isEmpty();
 
-        HashMap<String, Double> cashflowbyType = Categorizer.sortType(CashflowList.getInstance(), type);
-        if (cashflowbyType.isEmpty()) {
+        HashMap<String, Double> cashflowByType = Categorizer.sortType(CashflowList.getInstance(), type);
+        if (cashflowByType.isEmpty()) {
             ui.printEmptyCashFlow(type);
             return;
         }
         ui.printDisplayChartMessage(type, chart);
-        Visualizer.displayChart(chart, cashflowbyType, type);
+        Visualizer.displayChart(chart, cashflowByType, type);
     }
 }

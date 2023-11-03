@@ -22,7 +22,7 @@ public class Ui {
     private static final String GREEN = "\u001B[32m";
     private static final String RESET = "\u001B[0m";
     private static final String YELLOW = "\u001B[33m";
-    private Scanner Scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private Ui() {
     }
 
@@ -38,11 +38,11 @@ public class Ui {
     }
 
     public Scanner getScanner() {
-        return Scanner;
+        return scanner;
     }
 
     public void setScanner(Scanner scanner) {
-        this.Scanner = scanner;
+        this.scanner = scanner;
     }
 
     public void showMessage(String message) {
@@ -59,7 +59,7 @@ public class Ui {
     }
 
     public String input() {
-        return Scanner.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
     public void printWatchListHeader() {

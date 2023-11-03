@@ -1,29 +1,30 @@
-package seedu.financialplanner.reminder;
+package seedu.financialplanner.goal;
 
 import java.util.ArrayList;
-public class ReminderList {
-    private static ReminderList reminderList = null;
-    public final ArrayList<Reminder> list = new ArrayList<>();
-    private ReminderList() {
-    }
-    public static ReminderList getInstance() {
-        if (reminderList == null) {
-            reminderList = new ReminderList();
-        }
-        return reminderList;
+public class WishList {
+    private static WishList wishList = null;
+    public final ArrayList<Goal> list = new ArrayList<>();
+    private WishList() {
     }
 
-    public void load(Reminder reminder) {
-        list.add(reminder);
+    public static WishList getInstance() {
+        if (wishList == null) {
+            wishList = new WishList();
+        }
+        return wishList;
     }
-    public void deleteReminder(int index) {
+
+    public void load(Goal goal) {
+        list.add(goal);
+    }
+
+    public void deleteGoal(int index) {
         int existingListSize = list.size();
         int listIndex = index;
         assert listIndex >= 0  && listIndex < existingListSize;
-        Reminder toRemove = list.get(listIndex);
+        Goal toRemove = list.get(listIndex);
         list.remove(listIndex);
     }
-
     public String toString() {
         String result = "";
         for (int i = 0; i < list.size(); i++) {

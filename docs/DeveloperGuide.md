@@ -9,12 +9,12 @@
   * [Visualization Feature](#visualization-feature-)
     * [Class diagram](#class-diagram)
     * [Sequence diagram](#sequence-diagram-)
-  * [Add income/expense feature](#add-incomeexpense-feature)
-    * [Step 1](#step-1)
-    * [Step 2](#step-2)
-    * [Step 3](#step-3)
-    * [Step 4](#step-4)
-    * [Diagrams](#diagrams)
+  * [Add Income/Expense Feature](#add-incomeexpense-feature)
+    * [Class Diagram](#add-incomeexpense-class-diagram)
+    * [Sequence Diagram](#add-incomeexpense-sequence-diagram)
+  * [Recurring Cashflow Feature](#recurring-cashflow-feature)
+    * [Class Diagram](#recurring-cashflow-class-diagram)
+    * [Sequence Diagrams](#recurring-cashflow-sequence-diagrams)
   * [Budget Feature](#budget-feature)
     * [Set and update budget](#set-and-update-budget)
     * [Delete budget](#delete-budget)
@@ -160,7 +160,7 @@ Visualizer (`displaying chart` ref from overall sequence diagram above)
 
 ![](images/vis/visualizerSequence.png)
 
-### Add income/expense feature
+### Add Income/Expense Feature
 
 The add income/expense command has 2 compulsory arguments `/t` and `/a` and 1 optional argument `/r`.
 
@@ -169,12 +169,9 @@ Example:
 add income /a 100 /t salary /r 30
 ```
 Below are the steps that shows the implementation of add income/expense.
-#### Step 1
-An instantiated AddCashflowCommand class gets the instance of CashflowList.
 
-This allows the AddCashflowCommand instance to access the methods of CashflowList.
-#### Step 2
-The AddCashflowCommand instance then calls addIncome() or addExpense(), depending on what `category` is initialised as.
+#### Step 1
+The AddCashflowCommand instance calls addIncome() or addExpense(), depending on what `category` is initialised as.
 
 addIncome() or addExpense() instantiates an Income or Expense object respectively.
 
@@ -192,20 +189,78 @@ switch (category) {
             break;
         }
 ```
-#### Step 3
+#### Step 2
 The instantiated income/expense then updates the overall balance through addIncomeValue() or addExpenseValue().
 
 The income/expense object is also added to the list in Cashflowlist which contains all incomes/expenses.
-#### Step 4
+#### Step 3
 The added income/expense is then displayed to the user through the Ui.
 
-#### Diagrams
+#### Add Income/Expense Class Diagram
 Given below is the class diagram showing the class structure of the add income/expense mechanism:
-![](images/CashflowClassDiagram.png)
-
+![](images/cashflow/CashflowClassDiagram.png)
+#### Add Income/Expense Sequence Diagram
 Given below is the sequence diagram showing the add income/expense mechanism:
-![](images/AddCashflowSequence.png)
+![](images/cashflow/AddCashflowSequence.png)
+### Recurring Cashflow Feature
+Cashflow refers to an income or expense.
 
+This feature is called from the user through the `/r` argument in add income/expense command.
+
+If a cashflow is set to be recurring, the program would add another entry of the same cashflow to the Financial Planner after a set period of time.
+
+Below are the steps that shows the implementation of the recurring cashflow feature.
+
+#### Step 1
+Once the cashflow is set to be recurring, its corresponding `Cashflow` object would store the date at which the cashflow was added to the Financial Planner.
+
+The `recur` variable in the object would also be instantiated according to the user's input.
+
+An additional `boolean` variable, `hasRecurred` is stored in the object and is set to `false` by default.
+
+Example:
+```
+public abstract class Cashflow {
+    protected int recur;
+    protected LocalDate date;
+    protected boolean hasRecurred;
+}
+```
+#### Step 2
+When the Financial Planner is started again in the future, the date of startup would be obtained from the system.
+
+After loading existing saved cashflows from data.txt, the program will check for cashflows that are set to be recurring and has not recurred.
+
+Example:
+```
+if (recur > 0 && !hasRecurred) {
+    ...            
+}
+```
+
+#### Step 3
+Once a cashflow matches the above criteria, the date of its next addition to the Financial Planner, `dateOfAddition`, would be determined.
+
+`dateOfAddition` would be compared to the current date, and if the current date is after or equal to `dateOfAddition`, an identical cashflow would be instantiated.
+
+This identical cashflow would then have its `date` variable set to `dateOfAddition`, then this cashflow would be added to a temporary list, `tempCashflowList`.
+
+The original cashflow would then have its `hasRecurred` variable be set to `true`.
+
+#### Step 4
+Each cashflow in `tempCashflowList` goes through **Step 3** again, so that multiple cashflows can be added if it has recurred more than once.
+
+Once the process is done, all cashflows in `tempCashflowList` are then added to the Financial Planner.
+
+The added cashflows are then displayed to the user.
+
+#### Recurring Cashflow Class Diagram
+Given below is the class diagram showing the class structure of the recurring cashflow mechanism:
+![](images/cashflow/RecurClassDiagram.png)
+#### Recurring Cashflow Sequence Diagrams
+Given below is the sequence diagram showing the recurring cashflow mechanism:
+![](images/cashflow/RecurSequence.png)
+![](images/cashflow/AddRecurringSequence.png)
 
 ### Budget Feature
 

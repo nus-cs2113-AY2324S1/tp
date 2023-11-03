@@ -1,4 +1,5 @@
 package seedu.financialplanner.commands;
+
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
 public class ReminderListCommand extends Command{
@@ -11,6 +12,6 @@ public class ReminderListCommand extends Command{
         Ui ui = Ui.getInstance();
         ReminderList reminderList = ReminderList.getInstance();
         ui.showMessage("Here is your reminder list:");
-        ui.showMessage(reminderList.list.toString());
+        ui.showMessage(reminderList.toString());
     }
 }

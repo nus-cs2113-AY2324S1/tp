@@ -1,0 +1,26 @@
+@startuml
+mainframe sd add recurring cashflows to templist
+
+participant "<<class>>\nLoadData" as LoadData
+participant ":Income" as Income
+participant ":Expense" as Expense
+
+loop current date is after or equals next recurring date
+    LoadData -> Cashflow: setHasRecurred(true)
+
+alt income
+    create Income
+    LoadData -> Income: Income((Income) cashflow)
+    LoadData -> Income: setDate(dateOfAddition)
+    LoadData -> LoadData: addToTempList(tempCashflowList, toAdd)
+
+else expense
+    create Expense
+    LoadData -> Expense: Expense((Expense) cashflow)
+    LoadData -> Expense: setDate(dateOfAddition)
+    LoadData -> LoadData: addToTempList(tempCashflowList, toAdd)
+end
+
+end
+hide footbox
+@enduml

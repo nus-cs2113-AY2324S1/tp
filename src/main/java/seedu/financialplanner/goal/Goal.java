@@ -1,8 +1,8 @@
 package seedu.financialplanner.goal;
 
 public class Goal {
-    private String label;
-    private int amount;
+    private final String label;
+    private final int amount;
     private boolean isDone = false;
 
     public Goal(String label, int amount) {
@@ -10,8 +10,18 @@ public class Goal {
         this.amount = amount;
     }
 
+    public Goal(String label, int amount, String status) {
+        this.label = label;
+        this.amount = amount;
+        if (status.equals("Achieved")) {
+            this.isDone = true;
+        } else {
+            this.isDone = false;
+        }
+    }
+
     public String toString() {
-        String status = isDone ? "Done" : "Not Done";
+        String status = isDone ? "Achieved" : "Not Achieved";
         return "Goal " + System.lineSeparator()+ "   Label: " + label + System.lineSeparator() + "   Amount: " +
                 amount + System.lineSeparator() + "   Status: "+status;
     }
@@ -20,11 +30,14 @@ public class Goal {
         this.isDone = true;
     }
 
-    public void unmark() {
-        this.isDone = false;
+    public String getLabel() {
+        return this.label;
+    }
+    public int getAmount() {
+        return this.amount;
     }
     public String formatString() {
-        String status = isDone ? "Done" : "Not Done";
-        return this.label + " | " + this.amount + " | " + this.isDone;
+        String status = isDone ? "Achieved" : "Not Achieved";
+        return "G" + " | " + this.label + " | " + this.amount + " | " + status;
     }
 }

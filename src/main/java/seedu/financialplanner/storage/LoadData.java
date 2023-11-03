@@ -14,6 +14,10 @@ import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.utils.Ui;
+import seedu.financialplanner.goal.Goal;
+import seedu.financialplanner.goal.WishList;
+import seedu.financialplanner.reminder.Reminder;
+import seedu.financialplanner.reminder.ReminderList;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -32,6 +36,8 @@ public abstract class LoadData {
     private static final String FILE_PATH = "data/watchlist.json";
     private static final CashflowList cashflowList = CashflowList.getInstance();
     private static final Ui ui = Ui.getInstance();
+    private static final ReminderList reminderList = ReminderList.getInstance();
+    private static final WishList wishList = WishList.getInstance();
 
 
     /**
@@ -61,6 +67,14 @@ public abstract class LoadData {
                 case "B":
                     loadBudget(split);
                     break;
+                case "R":
+                    final Reminder reminder = getReminder(split);
+                    reminderList.load(reminder);
+                    break;
+                case "G":
+                    final Goal goal = getGoal(split);
+                    wishList.load(goal);
+                    break;
                 default:
                     throw new FinancialPlannerException("Error loading file");
                 }
@@ -80,21 +94,21 @@ public abstract class LoadData {
     }
 
     private static void deleteFutureCashflows(LocalDate currentDate) {
-        ArrayList<Integer> tempCashflow = new ArrayList<>();
+        ArrayList<Integer> tempCashflowList = new ArrayList<>();
         int indexToDelete = 0;
         for (Cashflow cashflow : cashflowList.list) {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
             if (recur > 0 && currentDate.isBefore(dateOfAddition)) {
                 Integer integer = indexToDelete;
-                tempCashflow.add(integer);
+                tempCashflowList.add(integer);
             }
             indexToDelete++;
         }
-        if (!tempCashflow.isEmpty()) {
+        if (!tempCashflowList.isEmpty()) {
             ui.showMessage("Detected erroneous cashflow entries. Removing future cashflows...");
-            for (int i = 0; i < tempCashflow.size(); i++) {
-                indexToDelete = tempCashflow.get(i) - i;
+            for (int i = 0; i < tempCashflowList.size(); i++) {
+                indexToDelete = tempCashflowList.get(i) - i;
                 // deleteCashflowWithoutCategory takes in list index starting from 1, indexToDelete starts from 0
                 int indexStartingFromOne = indexToDelete + 1;
                 cashflowList.deleteCashflowWithoutCategory(indexStartingFromOne);
@@ -104,31 +118,31 @@ public abstract class LoadData {
 
     private static void addRecurringCashflows(LocalDate currentDate) throws FinancialPlannerException {
         ui.showMessage("Adding any recurring cashflows...");
-        ArrayList<Cashflow> tempCashflow = new ArrayList<>();
+        ArrayList<Cashflow> tempCashflowList = new ArrayList<>();
         for (Cashflow cashflow : cashflowList.list) {
             int recur = cashflow.getRecur();
             LocalDate dateOfAddition = cashflow.getDate();
             boolean hasRecurred = cashflow.getHasRecurred();
-            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflow, hasRecurred);
+            identifyRecurringCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflowList, hasRecurred);
         }
-        for (Cashflow cashflow : tempCashflow) {
+        for (Cashflow cashflow : tempCashflowList) {
             cashflowList.load(cashflow);
             ui.printAddedCashflow(cashflow);
         }
     }
 
-    private static void addRecurringCashflowToTempList(LocalDate currentDate
+    private static void identifyRecurringCashflows(LocalDate currentDate
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
-            , ArrayList<Cashflow> tempCashflow, boolean hasRecurred) throws FinancialPlannerException {
+            , ArrayList<Cashflow> tempCashflowList, boolean hasRecurred) throws FinancialPlannerException {
         if (recur > 0 && !hasRecurred) {
             dateOfAddition = dateOfAddition.plusDays(recur);
-            identifyRecurredCashflows(currentDate, cashflow, recur, dateOfAddition, tempCashflow);
+            addRecurringCashflowToTempList(currentDate, cashflow, recur, dateOfAddition, tempCashflowList);
         }
     }
 
-    private static void identifyRecurredCashflows(LocalDate currentDate
+    private static void addRecurringCashflowToTempList(LocalDate currentDate
             , Cashflow cashflow, int recur, LocalDate dateOfAddition
-            , ArrayList<Cashflow> tempCashflow) throws FinancialPlannerException {
+            , ArrayList<Cashflow> tempCashflowList) throws FinancialPlannerException {
         while (currentDate.isAfter(dateOfAddition) || currentDate.isEqual(dateOfAddition)) {
             cashflow.setHasRecurred(true);
             Cashflow toAdd;
@@ -140,10 +154,14 @@ public abstract class LoadData {
                 throw new FinancialPlannerException("Error adding recurring cashflows");
             }
             toAdd.setDate(dateOfAddition);
-            tempCashflow.add(toAdd);
+            addToTempList(tempCashflowList, toAdd);
             cashflow = toAdd;
             dateOfAddition = dateOfAddition.plusDays(recur);
         }
+    }
+
+    private static void addToTempList(ArrayList<Cashflow> tempCashflowList, Cashflow toAdd) {
+        tempCashflowList.add(toAdd);
     }
 
     private static void handleCorruptedFile(String message) throws FinancialPlannerException {
@@ -222,6 +240,35 @@ public abstract class LoadData {
             default:
                 throw new FinancialPlannerException("Error loading file");
             }
+            return entry;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Erroneous arguments detected");
+        }
+    }
+
+    private static Reminder getReminder(String[] split) throws IllegalArgumentException, IndexOutOfBoundsException,
+            FinancialPlannerException {
+        try {
+            Reminder entry;
+            String type = split[1].trim();
+            String date = split[2].trim();
+            String status = split[3].trim();
+            entry = new Reminder(type, date, status);
+            return entry;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Erroneous arguments detected");
+        } catch (IndexOutOfBoundsException e) {
+            throw new FinancialPlannerException("There should be three data members for reminder");
+        }
+    }
+
+    private static Goal getGoal(String[] split) throws IllegalArgumentException {
+        try {
+            Goal entry;
+            String type = split[1].trim();
+            int amount = Integer.parseInt(split[2].trim());
+            String status = split[3].trim();
+            entry = new Goal(type, amount, status);
             return entry;
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Erroneous arguments detected");
