@@ -31,9 +31,9 @@ public class Ui {
             System.lineSeparator() +
             "    4. delete [question number] - deletes the question and answer at the specified number," +
             System.lineSeparator() +
-            "    5. find /[description] - displays all questions that contains the the specified description," +
+            "    5. find /description [description] - displays all questions containing the specified description," +
             System.lineSeparator() +
-            "    6. find /[module] - displays all questions that belong to the specified module," +
+            "    6. find /description [module] - displays all questions that belong to the specified module," +
             System.lineSeparator() +
             "    7. edit [question number] /description [description] - edits the description of the question " +
             "with the specified number," +

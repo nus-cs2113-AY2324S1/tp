@@ -17,14 +17,28 @@ from all fields of study.
 
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `QuizHub` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases).
+3. Familiarize yourself with the command structure used [here](#command-usage)
+
+## Command Usage
+1. All the commands are listed in the [Features](#features) section, 
+   alternatively, the summary is available at [Command Summary](#command-summary) section
+2. Some commands are single-word commands that do not accept parameters, such as
+   the [Help](#getting-help-on-using-the-app-help) command. In this case, any arguments
+   you may have entered would be ignored
+   * Entering `help abc` would perform the same function as `help`
+3. The `[]` in the commands denote a placeholder in the command which you should replace 
+   with corresponding values.
+   * `[question]` would indicate that you should replace the placeholder with a question
+   * Specific requirements of the values would be found in the details in [Features](#features) section
+
 
 ## Features
 
-1. [Helper command](#getting-help-on-using-the-app-help)
+2. [Helper command](#getting-help-on-using-the-app-help)
 2. [Add question/answer and group them in modules/difficulty](#adding-short-answer-questions-and-their-answers-short)
-3. [Store or Edit the question/answer in local storage]()
+3. [Store or Edit the question/answer in local storage](#store-and-edit-question-pool-using-the-question-file)
 4. [Delete question/answer](#delete-questions-delete)
-5. [Find question/answer via question's description or via module name](#find-questionanswer-find)
+5. [Find question/answer via question's description or via module name](#find-questionanswermodule-find)
 6. [Edit question/answer](#edit-questionanswer-edit)
 7. [Mark question difficulty](#mark-difficulty-of-questions-markdiff)
 8. [Start a quiz session, specifying category of questions and in random/normal mode](#start-quiz-start)
@@ -38,26 +52,10 @@ Format: `help`
 
 Example of usage:
 * **Command**:`help` <br>
-  **Output**: <br>
-
-```
-Here are the list of commands you can use:
-1. help - shows the list of commands you can use,
-2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and its answer to the list,
-3. list - shows the list of questions and answers,
-4. delete [question number] - deletes the question and answer at the specified number,
-5. find /[description] - displays all questions that contains the specified description,
-6. find /[module] - displays all questions that belong to the specified module,
-7. edit [question number] /description [description] - edits the description of the question with the specified number,
-8. edit [question number] /answer [answer] - edits the answer to the question with the specified number,
-9. start /[quiz mode] [start details] /[qn mode] - starts the quiz with option for /module or /all and /random or /normal,
-10. shuffle - shuffle quiz questions to a random order,
-11. markdiff [question number] /[question difficulty] - sets the difficulty of question with the specified number,
-12. bye - exits the program
-```
+  **Output**: The list of commands, similar to the [Command Summary](#command-summary) <br>
 
 Notes:
-* Ver 2.0 will only list commands. Future versions will include auto-filling and scrolling
+* Ver 2.0 will only list commands. Future versions will include autofilling and scrolling
   (multiple pages of the help menu)
 
 ### Adding short-answer questions and their answers: `short`
@@ -65,16 +63,17 @@ Adds a new short question and its answer to the question and answer bank along w
 difficulty level.
 
 Format: `short [question]/[answer]/[module]/[difficulty]`
+* The difficulty level should only be of `easy`, `normal`, and `hard`
 
 Example of usage:
-* **Command**: `add What is the value of Pi to 2 decimal places?/3.14/math/math` <br>
+* **Command**: `short What is the value of Pi to 2 decimal places?/3.14/math/easy` <br>
   **Output**: <br>
   ```
   I have added the following question OwO:
   [S] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY
   Now you have [no. of questions] questions in the list! UWU
   ```
-* **Command**: `add What fish is Nemo based off?/a Clownfish/trivia/easy` <br>
+* **Command**: `short What fish is Nemo based off?/a Clownfish/trivia/easy` <br>
   **Output**: <br>
   ```
   I have added the following question OwO:
@@ -104,7 +103,7 @@ Examples of usage:
 Deletes the question with the specified question number from the question and answer bank.
 
 Format:
-`delete [qustion number]`
+`delete [question number]`
 
 Example of usage:
 * **Command**: `delete 2` <br>
@@ -119,12 +118,14 @@ Notes:
 * The program only supports deleting one question at a time, so entering multiple question numbers will result in the program prompting you to enter only 1 question number.
 * The program accepts only a valid integer question number within the range of the number of available questions, any other form of inputs will result in the program prompting you to re-enter a valid command.
 
-### Find question/answer `find`
-Finds and displays all questions in the question and answer bank that match the criteria (question description / answer) and keywords of the search.
+### Find question/answer/module `find`
+Finds and displays all questions in the poll that match the criteria, 
+either in the question/answer field (with the `/description` keyword), 
+or the module field (with the `/module` keyword). You may use partial matches.
 
-Format:
-1. `find /description [question description]`
-2. `find /answer [answer]`
+Format: 
+1. `find /description [question description]` Find a question by its question or answer
+2. `find /module [question module]` Find a question by its module
 
 Examples of usage:
 * **Command**: `find /description example description` <br>
@@ -135,7 +136,7 @@ Examples of usage:
   2: [S][] example description1 / [answer] | [module] | [question difficulty]
   3: [S][] example description 2/ [answer] | [module] | [question difficulty]
   ```
-* **Command**: `find /answer example answer` <br>
+* **Command**: `find /desciption example answer` <br>
   **Output**: <br>
 * ```
   Here are questions that matched your search:
@@ -146,7 +147,7 @@ Examples of usage:
 
 Notes:
 * As long as the search keyword string is a substring of the question description / answer of a question stored in the question and answer bank, it will be included in the search result. Please refer to the above examples as an illustration of this property.
-* The search is non case-sensitive. Please refer to the above examples as an illustration of this property.
+* The search is non-case-sensitive. Please refer to the above examples as an illustration of this property.
 
 ### Edit question/answer `edit`
 Edits the description or answer of an existing question in the question and answer bank
@@ -237,7 +238,7 @@ Notes:
 * Input difficulty level is **not case-sensitive**
 
 ### Exit Program `bye`
-Exits the program
+Exits the program <br>
 Format: `bye`
 
 ### Store and Edit Question Pool Using The Question File
@@ -279,16 +280,15 @@ computer.
 
 ## Command Summary
 
-1. `help` - shows the list of commands you can use
+1. `help` - shows the list of commands you can use,
 2. `short [question]/[answer]/[module]/[difficulty]` - adds a short answer question and its answer to the list,
 3. `list` - shows the list of questions and answers,
 4. `delete [question number]` - deletes the question and answer at the specified number,
-5. `find /[description]` - displays all questions that contains the specified description,
-6. `find /[module]` - displays all questions that belong to the specified module,
+5. `find /description [question description]` - displays all questions containing the description,
+6. `find /module [question module]` - displays all questions that belong to the specified module,
 7. `edit [question number] /description [description]` - edits the description of the question with the specified number,
 8. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number,
-9. `start /[quiz mode] [start details] /[qn mode]` - starts the quiz with option for /module or /all and /random or
-   /normal,
+9. `start /[quiz mode] [start details] /[qn mode]` - starts the quiz with option for /module or /all and /random or /normal,
 10. `shuffle` - shuffle quiz questions to a random order,
 11. `markdiff [question number] /[question difficulty]` - sets the difficulty of question with the specified number,
 12. `bye` - exits the program
