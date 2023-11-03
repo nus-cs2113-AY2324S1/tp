@@ -128,6 +128,7 @@ public class AddRecipeCommand extends Command {
 
     public void addWithTitleAndStepsAndIngredients() throws EssenFormatException {
 
+        // initialisation
         int numberOfSteps = countOccurrences(toAdd, "s/");
         int numberOfIngredients = countOccurrences(toAdd, "i/");
 
@@ -144,6 +145,8 @@ public class AddRecipeCommand extends Command {
         String content;
         int nextSlashIndex;
         int slashIndex = toAdd.indexOf("/");
+
+        // getting contents from input
         while (slashIndex != -1) {
             flagIndex = slashIndex - 1;
             typeFlag = toAdd.substring(flagIndex, flagIndex+1);
