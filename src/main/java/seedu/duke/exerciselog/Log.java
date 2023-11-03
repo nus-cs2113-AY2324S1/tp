@@ -99,6 +99,10 @@ public class Log {
                 newCaloriesBurned);
     }
 
+    public int getNumberOfDays(int month) {
+        return exerciseLog.get(month - 1).getNumberOfDays();
+    }
+
     /**
      * Returns the Month object of the specified month.
      *

@@ -5,6 +5,7 @@ import java.util.List;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.Duke;
+import seedu.duke.data.exception.IncorrectFormatException;
 
 
 enum ViewType {
@@ -28,23 +29,38 @@ public class ViewLogCommand extends Command {
      *
      * @param viewArgs the details of the scope at which the user wants to view the exercise log.
      */
-    public ViewLogCommand(List<String> viewArgs) {
+    public ViewLogCommand(List<String> viewArgs) throws IncorrectFormatException {
         super();
         switch (viewArgs.get(0)) {
         case "all":
             view = ViewType.TOTALEXERCISES;
             break;
         case "month":
+            if (viewArgs.size() < 2) {
+                throw new IncorrectFormatException("Please specify a month.");
+            }
             view = ViewType.TOTALEXERCISESMONTH;
             month = Integer.parseInt(viewArgs.get(1));
+            if (month <= 0 || month > 12) {
+                throw new IncorrectFormatException("The month you specified does not exist.");
+            }
             break;
         case "day":
-            view = ViewType.TOTALEXERCISESDAY;
+            if (viewArgs.size() < 3) {
+                throw new IncorrectFormatException("Please specify a month and a day.");
+            }
             month = Integer.parseInt(viewArgs.get(1));
+            if (month <= 0 || month > 12) {
+                throw new IncorrectFormatException("The month you specified does not exist.");
+            }
+            view = ViewType.TOTALEXERCISESDAY;
             day = Integer.parseInt(viewArgs.get(2));
+            if (day <= 0 || day > Duke.exerciseLog.getNumberOfDays(month)) {
+                throw new IncorrectFormatException("The day you specified does not exist for the month.");
+            }
             break;
         default:
-            System.out.println("No ViewType specified");
+            throw new IncorrectFormatException("Incorrect or no VewType specified.");
         }
     }
 
@@ -59,15 +75,15 @@ public class ViewLogCommand extends Command {
         case TOTALEXERCISES:
             numberOfExercises = Integer.toString(Duke.exerciseLog.getNumberOfExercises());
             return new CommandResult("Here are the total number of exercises you have logged: " +
-                    numberOfExercises + "\n");
+                    numberOfExercises);
         case TOTALEXERCISESMONTH:
             numberOfExercises = Integer.toString(Duke.exerciseLog.getNumberOfExercisesForMonth(month));
             return new CommandResult("Here are the total number of exercises for that month: " +
-                    numberOfExercises + "\n");
+                    numberOfExercises);
         case TOTALEXERCISESDAY:
             numberOfExercises = Integer.toString(Duke.exerciseLog.getNumberOfExercisesForDay(month, day));
             return new CommandResult("Here are the total number of exercises for that day: " +
-                    numberOfExercises + "\n");
+                    numberOfExercises);
         default:
             return new CommandResult("Invalid exercise search type");
         }
