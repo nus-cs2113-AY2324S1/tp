@@ -34,6 +34,20 @@ Example of usage:
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
+### Adding a meal: `meal_add`
+Adds a new item to the list of todo items.
+
+Format: `meal_add MEAL_NAME CALORIES`
+
+* The `CALORIES` should be a standard number.
+* The `MEAL_NAME` cannot contain space, use "_" as replacement.
+
+Example of usage: 
+
+`meal_add potatoes 100`
+
+`meal_add baked_bread 66`
+
 ### Adding an exercise: `log`
 Adds a new exercise to the Exercise Log.
 

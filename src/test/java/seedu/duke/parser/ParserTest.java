@@ -21,42 +21,48 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_emptyInput_returnsIncorrect() {
+    public void parse_emptyInput_returnsIncorrect() throws Exception {
         final String[] emptyInputs = { "", "  ", "\n  \n" };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, emptyInputs);
     }
 
     @Test
-    public void parse_unknownCommandWord_returnsHelp() {
+    public void parse_unknownCommandWord_returnsHelp() throws Exception {
         final String input = "unknowncommandword arguments arguments";
         parseAndAssertCommandType(input, HelpCommand.class);
     }
 
     /*
-     * Tests for 0-argument commands =======================================================================
+     * Tests for 0-argument commands
+     * =======================================================================
      */
 
     @Test
-    public void parse_helpCommand_parsedCorrectly() {
+    public void parse_helpCommand_parsedCorrectly() throws Exception {
         final String input = "help";
         parseAndAssertCommandType(input, HelpCommand.class);
     }
 
     @Test
-    public void parse_exitCommand_parsedCorrectly() {
+    public void parse_exitCommand_parsedCorrectly() throws Exception {
         final String input = "exit";
         parseAndAssertCommandType(input, ExitCommand.class);
     }
 
     /*
-     * Utility methods ====================================================================================
+     * Utility methods
+     * =============================================================================
+     * =======
      */
 
     /**
-     * Asserts that parsing the given inputs will return IncorrectCommand with the given feedback message.
+     * Asserts that parsing the given inputs will return IncorrectCommand with the
+     * given feedback message.
+     * 
+     * @throws Exception
      */
-    private void parseAndAssertIncorrectWithMessage(String feedbackMessage, String... inputs) {
+    private void parseAndAssertIncorrectWithMessage(String feedbackMessage, String... inputs) throws Exception {
         for (String input : inputs) {
             final IncorrectCommand result = parseAndAssertCommandType(input, IncorrectCommand.class);
             assertEquals(result.feedbackToUser, feedbackMessage);
@@ -66,11 +72,13 @@ public class ParserTest {
     /**
      * Parses input and asserts the class/type of the returned command object.
      *
-     * @param input to be parsed
+     * @param input                to be parsed
      * @param expectedCommandClass expected class of returned command
      * @return the parsed command object
+     * @throws Exception
      */
-    private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass) {
+    private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
+            throws Exception {
         final Command result = parser.parseCommand(input);
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
         return (T) result;

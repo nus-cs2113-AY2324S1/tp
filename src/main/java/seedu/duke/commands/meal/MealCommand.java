@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import seedu.duke.commands.Command;
+import seedu.duke.commands.CommandResult;
 import seedu.duke.data.meal.Meal;
 
 public class MealCommand extends Command {
@@ -26,5 +27,10 @@ public class MealCommand extends Command {
         if (arguments == null || arguments.length != 2) {
             throw new Exception("Incorrect amount of the arguments.");
         }
+    }
+
+    @Override
+    public CommandResult execute() throws Exception {
+        throw new UnsupportedOperationException("meal command");
     }
 }
