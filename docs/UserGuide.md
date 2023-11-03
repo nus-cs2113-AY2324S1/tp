@@ -68,6 +68,15 @@ Example of usage:
 
 `update 12 24 Volleyball 5 Hockey 98`
 
+### Setting up an calories goal: `set on`
+Set up a calories goal to achieve.
+
+Format: `set AMOUNT on Date`
+
+The AMOUNT is in terms of kcal. Please use DD/MM/YYYY format for the date.
+
+Note that this function is still under development. The future features includes: delete a goal, view your goal, save your achievement, etc.
+
 ### Exiting the program: `exit`
 Exits the program.
 
