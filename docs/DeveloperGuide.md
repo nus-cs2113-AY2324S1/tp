@@ -1,7 +1,7 @@
 # Developer Guide
 
 ## **Content**
-- [Handing User Inputs & Displaying Output] (#item-one)
+- [Handing User Inputs & Displaying Output](#item-one)
 - Updates Exercise from Log feature
 - Adding a New Exercise Goal
 
@@ -11,7 +11,8 @@
 
 ## Design & implementation
 
-### Handling User Inputs & Displaying Output <a id="item-one"></a>
+<a id="item-one"></a>
+### Handling User Inputs & Displaying Output
 
 A lot of the initial project setup that deals with things like parsing, displaying outputs back to the user, exceptions, etc. are strongly inspired by the address book example project demoed in class. Specifically, we have classes that are responsible for various aspects of our project in order to follow the single-responsibility principle and limit the amount of coupling. 
 
