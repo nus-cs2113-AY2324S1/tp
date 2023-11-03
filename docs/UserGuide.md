@@ -18,50 +18,85 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. The app requires Java 11 to be installed into your computer or laptop.
 2. Download the latest `Essenmakanan.jar` from [here](http://link.to/EssenMakanan)
 3. Copy and move the file into the selected folder you want to put the app in.
 4. Open your command line and input the command below to run the app:
 `java -jar Essenmakanan.jar`
 
-## Features 
+## Features
+#### Notes about the command format:<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add r/RECIPE_TITLE`, `RECIPE_TITLE` is a parameter which can be used as `add r/bread`.
 
-{Give detailed description of each feature}
+* Items in square brackets are optional.<br>
+  e.g `edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] `. 
+        The commands`edit i/bread n/toast q/10`, `edit i/bread n/toast` or `edit i/bread q/10` are all valid.
 
-| Action                                                    | Format                                                      | Example                                                                            |
-|-----------------------------------------------------------|-------------------------------------------------------------|------------------------------------------------------------------------------------|
-| Add recipe                                                | add r/RECIPE_TITLE t/TAG_NAME s/STEP_DESCRIPTION d/DURATION | add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients |
-| Edit recipe                                               | edit r/RECIPE_TITLE n/NEW_NAME s/STEP_NUM, NEW_STEP         | edit r/scramble egg n/toast s/1,buy ingredients                                    |
-| Add ingredient                                            | add i/INGREDIENT_NAME                                       | add i/bread                                                                        |
-| Edit ingredient                                           | edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT | edit i/bread n/toast q/3 u/pc                                                      |
-| Delete Recipe                                             | delete r/RECIPE_TITLE                                       |                                                                                    |
-| Delete Ingredient                                         | delete r/INGREDIENT_NAME                                    |                                                                                    |
-| Duplicate Recipe                                          | duplicate RECIPE_NAME or duplicate RECIPE_INDEX             | duplicate sandwich or duplicate 1                                                  |
-| View all ingredients                                      | view i                                                      |                                                                                    |
-| View all recipes                                          | view r                                                      |                                                                                    |
-| View specific ingredient                                  | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID         | view i/bread <br><br>view i/1                                                      |
-| View specific recipe                                      | view r/RECIPE_ID                                            | view r/1                                                                           |
-| Filter recipe by ingredients                              | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                  |
-| Start recipe <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID                  | start dumpling noodles <br><br> start 1                                            |
-| Help <br>(list all commands available)                    | help                                                        | help                                                                               |
+* tags with `...` after them can be used multiple times including zero times.<br>
+  e.g. `add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...]` can be used as `i/egg,2,pc`, `i/egg,2,pc i/flour,1,kg i/oil,2,l`. 
+    Any number of ingredients after `i/` is valid as long as the format is correct.
+<!-- 
+// To be implemented
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+-->
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`)
+  will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+
+### [System Summary of Commands](#feature-system)
+| Action                                         | Format                                                      | Example                                                                            |
+|------------------------------------------------|-------------------------------------------------------------|------------------------------------------------------------------------------------|
+| [Help](#help)<br>(list all commands available) | help                                                        | help                                                                               |
+---
+
+### [Recipes Summary of Commands](#feature-recipe)
+
+| Action                                                                     | Format                                                      | Example                                                                              |
+|----------------------------------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| [View all recipes](#view-recipes)                                          | view r                                                      |                                                                                      |
+| [View specific recipe](#view-recipe)                                       | view r/RECIPE_ID                                            | view r/1                                                                             |
+| [Add recipe](#add-recipe)                                                  | add r/RECIPE_TITLE t/TAG_NAME s/STEP_DESCRIPTION d/DURATION | add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients   |
+| [Edit recipe](#edit-recipe)                                                | edit r/RECIPE_TITLE n/NEW_NAME s/STEP_NUM, NEW_STEP         | edit r/scramble egg n/toast s/1,buy ingredients                                      |
+| [Delete Recipe](#delete-recipe)                                            | delete r/RECIPE_TITLE                                       |                                                                                      |
+| [Duplicate Recipe](#duplicate-recipe)                                      | duplicate RECIPE_NAME or duplicate RECIPE_INDEX             | duplicate sandwich or duplicate 1                                                    |                                                              |                                                                                    |
+| [Start recipe](#start-recipe) <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID                  | start dumpling noodles <br><br> start 1                                              |
+| [Filter recipe by ingredients](#filter-recipe)                             | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                    |
+---
+
+### [Ingredient Summary of Commands](#feature-ingredient)
+
+| Action                                             | Format                                                      | Example                                                                            |
+|----------------------------------------------------|-------------------------------------------------------------|------------------------------------------------------------------------------------|
+| [View all ingredients](#view-ingredients)          | view i                                                      |                                                                                    |
+| [View specific ingredient](#view-ingredient)       | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID         | view i/bread <br><br>view i/1                                                      |
+| [Add ingredient](#add-ingredient)                  | add i/INGREDIENT_NAME                                       | add i/bread                                                                        |
+| [Edit ingredient](#edit-ingredient)                | edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT | edit i/bread n/toast q/3 u/pc                                                      |
+| [Delete Ingredient](#delete-ingredient)            | delete r/INGREDIENT_NAME                                    |                                                                                    |
 
 
 ----
-### System
+<a id="feature-system"></a>
+### System Commands
 
+<a id="help"></a>
 #### Viewing help – `help`
 
     List all commands and the format and brief description of each command.
 
 ---
-### Recipes
+<a id="feature-recipe"></a>
+### Recipe Commands
+
+<a id="view-recipes"></a>
 #### View all recipes -  `view r`
 
-   List all recipes available inside the app.
----
+List all recipes available inside the app.
 
+---
+<a id="view-recipe"></a>
 #### View specific recipe - `view r/RECIPE_ID`
 
    View the steps of a specified recipe with RECIPE_ID
@@ -71,6 +106,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     * `view r/1` to show a recipe at index ‘1’ of the list.
 ---
 
+<a id="add-recipe"></a>
 #### Add new recipe - `add r/RECIPE_TITLE s/STEP_DESCRIPTION i/INGREDIENT_NAME,QUANTITY,UNIT`
 
 - `add r/RECIPE_TITLE t/TAG_NAME s/STEP_DESCRIPTION d/DURATION`
@@ -87,7 +123,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    * `add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients`
 
 [Output of "View r/scramble egg" after the add command]
-   ![img_1.png](add_recipe_eg_1.png.png)
+   ![img_1.png](images/add_recipe_eg_1.png.png)
 
    <br>  Example 2:
 
@@ -95,7 +131,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     
 
 [Output of "View r/scramble egg" after the add command]
-![img.png](add_recipe_eg_2.png)
+![img.png](images/add_recipe_eg_2.png)
 
 
 ##### Message will appear to prompt user input for steps if only title, "r/" is provided
@@ -105,6 +141,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 4. Each ingredient input followed by an “enter” is one ingredient 
 5. To end input: `end`
 ---
+<a id="edit-recipe"></a>
 #### Edit a recipe - `edit r/RECIPE_NAME n/NEW_NAME s/STEP_ID,NEW_STEP`
 
 Edit a recipe to change the name or steps. A user is able to edit name or step of a recipe.
@@ -114,17 +151,17 @@ Example 1:
    * `edit r/bread n/toast` to change `bread` to `toast`
 
 [Output of "View r/bread" after the edit command]
-![img_3.png](edit_recipe_eg_1.png)
+![img_3.png](images/edit_recipe_eg_1.png)
 
 Example 2:
 
    * `edit r/bread s/1,buy ingredients` to change the first step to `buy ingredients`
 
    * [Output of "View r/bread" after the edit command]
-![img_4.png](edit_recipe_eg_2.png.png)
+![img_4.png](images/edit_recipe_eg_2.png.png)
 
 ---
-
+<a id="delete-recipe"></a>
 #### Delete a specific recipe - `delete r/RECIPE_ID`
 
    Delete the recipe from the recipe list.
@@ -133,10 +170,8 @@ Example 2:
    
    * `delete r/1` to delete a recipe at index ‘1’
 ---
-
-<<<<<<< HEAD
-
-6. Duplicate a recipe - `duplicate RECIPE_NAME` or `duplicate RECIPE_INDEX`
+<a id="delete-recipe"></a> 
+### Duplicate a recipe - `duplicate RECIPE_NAME` or `duplicate RECIPE_INDEX`
 
    Duplicate a recipe from the recipe list. The duplicated recipe with have `(copy)` within its name.
 
@@ -145,11 +180,10 @@ Example 2:
    * `duplicate sandwich` to duplicate a recipe with the title `sandwich`
    * `duplicate 1` to duplicate the first recipe on the list.
 
-
-7. Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
-=======
+![img_3.png](images/DuplicateRecipe.png)
+---    
+<a id="start-recipe"></a>
 #### Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
->>>>>>> master
 
    Use the start command to check if you are all set to start on the recipe.This command will list all missing ingredients from the recipe you want to start on.
 
@@ -167,14 +201,10 @@ Example 2:
      To check if you have all ingredients needed for the recipe with id 1.
 
      ![img_1.png](images/StartRecipeCommand2.png)
-<<<<<<< HEAD
 
-
-8. Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
-=======
 ---
+<a id="filter-recipe"></a>
 #### Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
->>>>>>> master
    
    Filter your recipes by ingredients you are craving for that meal.
    
@@ -194,20 +224,15 @@ Example 2:
 
 
 ---
-### Ingredients
-<<<<<<< HEAD
-9. View all ingredients - `view i`
-    
-   List all ingredients available inside the app.
-
-
-10. View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
-=======
+<a id="feature-ingredient"></a>
+### Ingredient Commands
+<a id="view-ingredients"></a>
 #### View all ingredients - `view i`
     
    List all ingredients available inside the app.
 
 ---
+<a id="view-ingredient"></a>
 #### View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
 >>>>>>> master
 
@@ -220,13 +245,8 @@ Example 2:
       ![img.png](images/ViewSpecificIngredientCommand.png)
    * `view i/1` to view the quantity of your ingredient with id 1
 ---
-
-<<<<<<< HEAD
-
-11. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
-=======
+<a id="add-ingredient"></a>
 #### Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
->>>>>>> master
 
    Adds a new item to the list of todo items. Here are our registered unit in the app:
     * g (Gram)
@@ -245,12 +265,8 @@ Example 2:
     * `add i/bread,2,pc` to add `2 pieces of bread` into the list
     * `add i/cooking oil,5,l` to add `5 liters of cooking oil` into the list
 ---
-
-<<<<<<< HEAD
-12. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
-=======
+<a id="edit-ingredient"></a>
 #### Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
->>>>>>> master
 
    Edit an ingredient to change the name, quantity or unit. A user is able to edit more than one property of an 
    ingredient.
@@ -260,13 +276,8 @@ Example 2:
     * `edit i/bread n/toast` to change `bread` to `toast`
     * `edit i/egg q/10 u/kg` to change the quantity to `10` and the unit to `kg`
 ---
-
-<<<<<<< HEAD
-
-13. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
-=======
+<a id="delete-ingredient"></a>
 #### Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
->>>>>>> master
 
    Delete an ingredient based on the selected index in the list or the ingredient's name.
 

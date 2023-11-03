@@ -64,5 +64,4 @@ class AddRecipeTest {
         assertEquals(IngredientUnit.PIECE, ingredients.getIngredientByIndex(1).getUnit());
     }
 
-
 }
