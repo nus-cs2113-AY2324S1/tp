@@ -1,7 +1,7 @@
 # Developer Guide
 
 ## **Content**
-- Handing User Inputs & Displaying Output (#item-one)
+- [Handing User Inputs & Displaying Output] (#item-one)
 - Updates Exercise from Log feature
 - Adding a New Exercise Goal
 
