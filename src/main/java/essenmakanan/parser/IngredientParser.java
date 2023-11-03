@@ -19,6 +19,7 @@ public class IngredientParser {
         }
 
         if (!ingredients.exist(index)) {
+            System.out.println("Your ingredient name or id does not exist or it is invalid.");
             throw new EssenOutOfRangeException();
         }
 
