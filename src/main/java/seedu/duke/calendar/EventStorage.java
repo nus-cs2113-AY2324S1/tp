@@ -21,7 +21,8 @@ public class EventStorage {
 
     public EventStorage(String path){
         this.path = path;
-        logger = Logger.getLogger("flash");
+        logger = Logger.getLogger("event");
+        logger.setLevel(Level.WARNING);
     }
 
 
@@ -66,9 +67,6 @@ public class EventStorage {
         logger.log(Level.INFO, String.format(
                 "    There are currently %d events in the savefile",
                 eventList.getSize()));
-        //System.out.println(String.format(
-        //        "    There are currently %d events in the savefile",
-        //        eventList.getSize()));
 
         return eventList;
 

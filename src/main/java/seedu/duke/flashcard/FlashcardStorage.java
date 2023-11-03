@@ -1,7 +1,5 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.flashcard.review.FlashcardReview;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -26,6 +24,7 @@ public class FlashcardStorage {
     public FlashcardStorage(String path){
         this.path = path;
         flashlogger = Logger.getLogger("flash");
+        flashlogger.setLevel(Level.WARNING);
     }
 
 
@@ -42,7 +41,7 @@ public class FlashcardStorage {
      */
     public FlashcardList loadFlashcards() throws FileNotFoundException{
 
-        //flashlogger.log(Level.INFO, "loading flashcard");
+        flashlogger.log(Level.INFO, "loading flashcard");
 
         FlashcardList flashcardList = new FlashcardList(new ArrayList<>());
         File f = new File (this.path);
@@ -51,14 +50,13 @@ public class FlashcardStorage {
         while(s.hasNext()){
             String[] flashTokens = s.nextLine().split(" \\| ");
             flashcardList.add(FlashcardStorageParser.loadFlashcard(flashTokens));
+            flashlogger.log(Level.INFO, "added flashcard");
+
         }
 
         flashlogger.log(Level.INFO, String.format(
                 "There are currently %d flashcards in the savefile",
                 flashcardList.getSize()));
-        //System.out.println(String.format(
-        //        "    There are currently %d flashcards in the savefile",
-        //        flashcardList.getSize()));
 
         return flashcardList;
 
@@ -82,17 +80,14 @@ public class FlashcardStorage {
                 int id = flashcard.getId();
                 String frontText = flashcard.getFrontText();
                 String backText = flashcard.getBackText();
-                ArrayList<FlashcardReview> reviewList = flashcard.getReviews();
+                int difficulty = flashcard.getDifficulty();
 
-                String reviews = FlashcardStorageParser.reviewtoString(reviewList);
-
-                fw.write(String.format("%d | %s | %s | - | %s | -\r\n",
-                        id, frontText, backText, reviews));
+                fw.write(String.format("%d | %s | %s | %d \r\n",
+                        id, frontText, backText, difficulty));
             }
             fw.close();
             return true;
         } catch (IOException e){
-            //System.out.println("Failed to save.");
             flashlogger.log(Level.WARNING, "problem: failed to save");
             return false;
         }

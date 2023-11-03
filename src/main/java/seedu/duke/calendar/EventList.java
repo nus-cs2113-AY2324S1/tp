@@ -28,7 +28,8 @@ public class EventList {
         int count = 0;
         for (Event event: eventList) {
             if (event.getName().contains(keyword)) {
-                System.out.println((++count) + ". " + event);
+                System.out.println((++count) + ". " + event.getName() + " Event from: " +event.getFrom() +
+                        " to: " + event.getTo());
             }
         }
     }

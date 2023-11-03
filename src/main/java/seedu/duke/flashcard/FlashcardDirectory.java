@@ -19,8 +19,25 @@ public class FlashcardDirectory {
     public FlashcardDirectory(){
 
         logger = Logger.getLogger("flashDir");
+        logger.setLevel(Level.WARNING);
 
         path = "./data/flashcards";
+
+        String dataPath = "./data";
+
+        File dataFolder = new File(dataPath);
+        if(!dataFolder.exists()){
+            if(dataFolder.mkdir()){
+                logger.log(Level.INFO, "Created data directory");
+                //System.out.println("    Created events directory");
+            } else{
+                logger.log(Level.INFO, "Failed to create data directory");
+                //System.out.println("    Failed to create directory");
+            }
+        } else{
+            logger.log(Level.INFO, "Using data directory");
+            //System.out.println("    Using data/events directory");
+        }
 
         file = new File(path);
         if(!file.exists()){

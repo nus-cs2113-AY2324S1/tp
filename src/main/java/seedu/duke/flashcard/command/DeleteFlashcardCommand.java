@@ -7,7 +7,6 @@ import seedu.duke.flashcard.FlashcardList;
 import java.util.Scanner;
 
 public class DeleteFlashcardCommand extends DualFlashcardCommand {
-    private String input = null;
 
     public DeleteFlashcardCommand(String input) {
         this.input = input;
