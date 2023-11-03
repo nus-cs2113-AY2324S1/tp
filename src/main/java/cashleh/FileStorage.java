@@ -1,10 +1,13 @@
 package cashleh;
 
-import cashleh.exceptions.CashLehReadFromFileException;
-import cashleh.exceptions.CashLehWriteToFileException;
+import cashleh.budget.Budget;
+import cashleh.budget.BudgetHandler;
+import cashleh.exceptions.CashLehBudgetException;
+import cashleh.exceptions.CashLehDateParsingException;
 import cashleh.exceptions.CashLehFileCorruptedException;
 import cashleh.exceptions.CashLehParsingException;
-import cashleh.exceptions.CashLehDateParsingException;
+import cashleh.exceptions.CashLehReadFromFileException;
+import cashleh.exceptions.CashLehWriteToFileException;
 import cashleh.parser.DateParser;
 import cashleh.parser.ExpenseCatParser;
 import cashleh.parser.IncomeCatParser;
@@ -38,6 +41,7 @@ public class FileStorage {
     private static final String PARSE_TRANSACTION_DELIMITER = ")";
     private static final char INCOME_TYPE = 'I';
     private static final char EXPENSE_TYPE = 'E';
+    private static final char BUDGET_TYPE = 'B';
     private String filePath;
 
     /**
@@ -63,7 +67,8 @@ public class FileStorage {
      * @throws CashLehReadFromFileException  If there is an error while reading from the file.
      * @throws CashLehFileCorruptedException If the file format is corrupted or invalid.
      */
-    public void readFromFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement)
+    public void readFromFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement,
+                             BudgetHandler budgetHandler)
             throws CashLehReadFromFileException, CashLehFileCorruptedException {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -74,11 +79,12 @@ public class FileStorage {
                 throw new CashLehReadFromFileException();
             }
         } else {
-            getDataFromFile(file, incomeStatement, expenseStatement);
+            getDataFromFile(file, incomeStatement, expenseStatement, budgetHandler);
         }
     }
 
-    private void getDataFromFile(File file, IncomeStatement incomeStatement, ExpenseStatement expenseStatement)
+    private void getDataFromFile(File file, IncomeStatement incomeStatement, ExpenseStatement expenseStatement,
+                                 BudgetHandler budgetHandler)
             throws CashLehReadFromFileException, CashLehFileCorruptedException {
         try {
             Scanner in = new Scanner(file);
@@ -96,6 +102,16 @@ public class FileStorage {
                 }
 
                 switch (transactionType) {
+                case BUDGET_TYPE:
+                    double budget = getBudget(transactionInfo);
+                    try {
+                        budgetHandler.setBudget(new Budget(budget));
+                        budgetHandler.getBudget().setActive(true);
+                    } catch (CashLehBudgetException e) {
+                        throw new CashLehFileCorruptedException(
+                            "Wah, jialat! Cannot load your budget. Check if the file format spoilt!");
+                    }
+                    break;
                 case INCOME_TYPE:
                     Income income = getIncome(transactionInfo);
                     incomeStatement.addIncome(income);
@@ -123,10 +139,14 @@ public class FileStorage {
      * @param expenseStatement The ExpenseStatement object containing expense data to be written.
      * @throws CashLehWriteToFileException If there is an error while writing to the file.
      */
-    public void writeToFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement)
-            throws CashLehWriteToFileException {
+    public void writeToFile(IncomeStatement incomeStatement, ExpenseStatement expenseStatement,
+                            BudgetHandler budgetHandler) throws CashLehWriteToFileException {
         try {
             FileWriter fw = new FileWriter(filePath);
+            if (budgetHandler.getBudget().isActive()) {
+                String budgetString = getBudgetToWrite(budgetHandler.getBudget().getBudget());
+                fw.write(budgetString);
+            }
             for (int i = 0; i < incomeStatement.getSize(); i++) {
                 Income income = incomeStatement.getIncome(i);
                 String incomeText = income.toString().trim();
@@ -141,6 +161,22 @@ public class FileStorage {
             fw.close();
         } catch (Exception e) {
             throw new CashLehWriteToFileException();
+        }
+    }
+
+    private String getBudgetToWrite(Double budget) throws CashLehWriteToFileException {
+        try {
+            return("[B] " + budget + System.lineSeparator());
+        } catch (Exception e) {
+            throw new CashLehWriteToFileException();
+        }
+    }
+
+    private double getBudget(String input) throws CashLehFileCorruptedException {
+        try {
+            return Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            throw new CashLehFileCorruptedException("Wah, jialat! The budget is all messed up!");
         }
     }
 
