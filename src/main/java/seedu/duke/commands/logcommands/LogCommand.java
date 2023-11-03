@@ -27,21 +27,37 @@ public class LogCommand extends Command {
      * Extracts the details of the log command and logs the exercise with its specific details.
      *
      * @return CommandResult telling the user that the exercise was successfully added along with the exercise details.
+     * @throws IncorrectFormatException when the command is not entered with the right type of parameters.
      */
     public CommandResult execute() throws Exception {
         if (exerciseDetails.size() < 4) {
             throw new IncorrectFormatException("The log command needs to take at least 4 parameters!");
         }
-        int month = Integer.parseInt(exerciseDetails.get(0));
-        int day = Integer.parseInt(exerciseDetails.get(1));
-        String exerciseName = "";
-        for (int i = 2; i < exerciseDetails.size() - 1; i++) {
-            exerciseName += exerciseDetails.get(i) + " ";
+
+        try {
+            int month = Integer.parseInt(exerciseDetails.get(0));
+            if (month <= 0 || month > 12) {
+                throw new IncorrectFormatException("The month you specified does not exist.");
+            }
+            int day = Integer.parseInt(exerciseDetails.get(1));
+            if (day <= 0 || day > Duke.exerciseLog.getNumberOfDays(month)) {
+                throw new IncorrectFormatException("The day you specified does not exist for the month.");
+            }
+            String exerciseName = "";
+            for (int i = 2; i < exerciseDetails.size() - 1; i++) {
+                exerciseName += exerciseDetails.get(i) + " ";
+            }
+            int caloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
+            if (caloriesBurned < 0) {
+                throw new IncorrectFormatException("You cannot burn a negative number of calories.");
+            }
+
+            String exerciseDescription = Duke.exerciseLog.addExercise(month, day, exerciseName.trim(), caloriesBurned);
+
+            return new CommandResult((feedbackToUser + exerciseDescription).trim());
+        } catch (NumberFormatException e) {
+            throw new IncorrectFormatException("Please specify reasonable positive numbers in the month, day, and " +
+                    "calories burned fields");
         }
-        int caloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
-
-        String exerciseDescription = Duke.exerciseLog.addExercise(month, day, exerciseName.trim(), caloriesBurned);
-
-        return new CommandResult((feedbackToUser + exerciseDescription).trim());
     }
 }

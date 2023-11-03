@@ -34,6 +34,7 @@ public class ViewLogCommand extends Command {
      * Assigns the view attribute a specific enum based on the scope at which the user wants to view the exercise log.
      *
      * @param viewArgs the details of the scope at which the user wants to view the exercise log.
+     * @throws IncorrectFormatException when the command is not entered with the right type of parameters.
      */
     public ViewLogCommand(List<String> viewArgs) throws IncorrectFormatException {
         super();
@@ -53,23 +54,33 @@ public class ViewLogCommand extends Command {
             if (viewArgs.size() % 2 == 1) {
                 switch (viewArgs.size()) {
                 case 3:
-                    viewScope = ViewScope.MONTH;
-                    month = Integer.parseInt(viewArgs.get(2));
-                    if (month <= 0 || month > 12) {
-                        throw new IncorrectFormatException("The month you specified does not exist.");
+                    try {
+                        viewScope = ViewScope.MONTH;
+                        month = Integer.parseInt(viewArgs.get(2));
+                        if (month <= 0 || month > 12) {
+                            throw new IncorrectFormatException("The month you specified does not exist.");
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        throw new IncorrectFormatException("Please specify reasonable positive numbers in the " +
+                                "month, day, and calories burned fields");
                     }
-                    break;
                 case 5:
-                    viewScope = ViewScope.DAY;
-                    month = Integer.parseInt(viewArgs.get(2));
-                    if (month <= 0 || month > 12) {
-                        throw new IncorrectFormatException("The month you specified does not exist.");
+                    try {
+                        viewScope = ViewScope.DAY;
+                        month = Integer.parseInt(viewArgs.get(2));
+                        if (month <= 0 || month > 12) {
+                            throw new IncorrectFormatException("The month you specified does not exist.");
+                        }
+                        day = Integer.parseInt(viewArgs.get(4));
+                        if (day <= 0 || day > Duke.exerciseLog.getNumberOfDays(month)) {
+                            throw new IncorrectFormatException("The day you specified does not exist for the month.");
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        throw new IncorrectFormatException("Please specify reasonable positive numbers in the " +
+                                "month, day, and calories burned fields");
                     }
-                    day = Integer.parseInt(viewArgs.get(4));
-                    if (day <= 0 || day > Duke.exerciseLog.getNumberOfDays(month)) {
-                        throw new IncorrectFormatException("The day you specified does not exist for the month.");
-                    }
-                    break;
                 default:
                     throw new IncorrectFormatException("Incorrect view command format.");
                 }

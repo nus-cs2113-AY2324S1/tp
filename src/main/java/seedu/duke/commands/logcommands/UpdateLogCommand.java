@@ -26,36 +26,55 @@ public class UpdateLogCommand extends Command {
      * Extracts the details of the update command and updates the specified exercise.
      *
      * @return CommandResult that tells the user whether an exercise was successfully updated.
+     * @throws IncorrectFormatException when the command is not entered with the right type of parameters.
      */
     public CommandResult execute() throws IncorrectFormatException {
         if (exerciseDetails.size() < 4) {
             throw new IncorrectFormatException("The update log command needs to take at least 4 parameters!");
         }
-        int month = Integer.parseInt(exerciseDetails.get(0));
-        int day = Integer.parseInt(exerciseDetails.get(1));
-        String oldExerciseName = "";
-        for (int i = 2; i < exerciseDetails.size() - 1; i++) {
-            oldExerciseName += exerciseDetails.get(i) + " ";
-        }
-        int oldCaloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please specify the new exercise details:");
-        String newExerciseString = scanner.nextLine();
-        String[] newExerciseDetails = newExerciseString.split(" ");
-        if (newExerciseDetails.length < 2) {
-            throw new IncorrectFormatException("The new exercise needs to have a name and calories burned!");
-        }
-        String newExerciseName = "";
-        for (int i = 0; i < newExerciseDetails.length - 1; i++) {
-            newExerciseName += newExerciseDetails[i] + " ";
-        }
-        int newCaloriesBurned = Integer.parseInt(newExerciseDetails[newExerciseDetails.length - 1]);
+        try {
+            int month = Integer.parseInt(exerciseDetails.get(0));
+            if (month <= 0 || month > 12) {
+                throw new IncorrectFormatException("The month you specified does not exist.");
+            }
+            int day = Integer.parseInt(exerciseDetails.get(1));
+            if (day <= 0 || day > Duke.exerciseLog.getNumberOfDays(month)) {
+                throw new IncorrectFormatException("The day you specified does not exist for the month.");
+            }
+            String oldExerciseName = "";
+            for (int i = 2; i < exerciseDetails.size() - 1; i++) {
+                oldExerciseName += exerciseDetails.get(i) + " ";
+            }
+            int oldCaloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
+            if (oldCaloriesBurned < 0) {
+                throw new IncorrectFormatException("You cannot burn a negative number of calories.");
+            }
 
-        feedbackToUser = Duke.exerciseLog.updateExercise(month, day, oldExerciseName.trim(), oldCaloriesBurned,
-                newExerciseName.trim(), newCaloriesBurned) ? "Exercise successfully updated!" :
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please specify the new exercise details:");
+            String newExerciseString = scanner.nextLine();
+            String[] newExerciseDetails = newExerciseString.split(" ");
+            if (newExerciseDetails.length < 2) {
+                throw new IncorrectFormatException("The new exercise needs to have a name and calories burned!");
+            }
+            String newExerciseName = "";
+            for (int i = 0; i < newExerciseDetails.length - 1; i++) {
+                newExerciseName += newExerciseDetails[i] + " ";
+            }
+            int newCaloriesBurned = Integer.parseInt(newExerciseDetails[newExerciseDetails.length - 1]);
+            if (newCaloriesBurned < 0) {
+                throw new IncorrectFormatException("You cannot burn a negative number of calories.");
+            }
+
+            feedbackToUser = Duke.exerciseLog.updateExercise(month, day, oldExerciseName.trim(), oldCaloriesBurned,
+                    newExerciseName.trim(), newCaloriesBurned) ? "Exercise successfully updated!" :
                     "Could not find exercise to update.";
 
-        return new CommandResult(feedbackToUser);
+            return new CommandResult(feedbackToUser);
+        } catch (NumberFormatException e) {
+            throw new IncorrectFormatException("Please specify reasonable positive numbers in the month, day, and " +
+                    "calories burned fields");
+        }
     }
 }

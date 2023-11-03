@@ -25,23 +25,39 @@ public class DeleteLogCommand extends Command {
      * Extracts the details of the delete command and deletes the specified exercise.
      *
      * @return CommandResult that tells the user whether an exercise was successfully removed.
+     * @throws IncorrectFormatException when the command is not entered with the right type of parameters.
      */
     public CommandResult execute() throws IncorrectFormatException {
         if (exerciseDetails.size() < 4) {
             throw new IncorrectFormatException("The delete log command needs to take at least 4 parameters!");
         }
-        int month = Integer.parseInt(exerciseDetails.get(0));
-        int day = Integer.parseInt(exerciseDetails.get(1));
-        String exerciseName = "";
-        for (int i = 2; i < exerciseDetails.size() - 1; i++) {
-            exerciseName += exerciseDetails.get(i) + " ";
+
+        try {
+            int month = Integer.parseInt(exerciseDetails.get(0));
+            if (month <= 0 || month > 12) {
+                throw new IncorrectFormatException("The month you specified does not exist.");
+            }
+            int day = Integer.parseInt(exerciseDetails.get(1));
+            if (day <= 0 || day > Duke.exerciseLog.getNumberOfDays(month)) {
+                throw new IncorrectFormatException("The day you specified does not exist for the month.");
+            }
+            String exerciseName = "";
+            for (int i = 2; i < exerciseDetails.size() - 1; i++) {
+                exerciseName += exerciseDetails.get(i) + " ";
+            }
+            int caloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
+            if (caloriesBurned < 0) {
+                throw new IncorrectFormatException("You cannot burn a negative number of calories.");
+            }
+
+            feedbackToUser = Duke.exerciseLog.removeExercise(month, day, exerciseName.trim(), caloriesBurned) ?
+                    "Successfully removed exercise!" :
+                    "Could not find the specified exercise!";
+
+            return new CommandResult(feedbackToUser);
+        } catch (NumberFormatException e) {
+            throw new IncorrectFormatException("Please specify reasonable positive numbers in the month, day, and " +
+                    "calories burned fields");
         }
-        int caloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
-
-        feedbackToUser = Duke.exerciseLog.removeExercise(month, day, exerciseName.trim(), caloriesBurned) ?
-                "Successfully removed exercise!" :
-                "Could not find the specified exercise!";
-
-        return new CommandResult(feedbackToUser);
     }
 }
