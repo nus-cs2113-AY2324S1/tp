@@ -15,6 +15,11 @@
 
 {Give detailed description of each feature}
 
+### Viewing help: `help`
+Shows a message explaning how to access the help page.
+
+Format: `help`
+
 ### Adding a todo: `todo`
 Adds a new item to the list of todo items.
 
@@ -62,6 +67,11 @@ Example of usage:
 `update 1 26 Basketball 179 Rugby 55`
 
 `update 12 24 Volleyball 5 Hockey 98`
+
+### Exiting the program: `exit`
+Exits the program.
+
+Format: `exit`
 
 ## FAQ
 
