@@ -19,13 +19,10 @@ import seedu.duke.commands.logcommands.LogCommand;
 import seedu.duke.commands.logcommands.DeleteLogCommand;
 import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.commands.logcommands.UpdateLogCommand;
-import seedu.duke.commands.meal.MealCommand;
 import seedu.duke.data.exception.IllegalValueException;
-import seedu.duke.commands.meal.*;
+import seedu.duke.commands.meal.AddCommand;
 
-/**
- * Parses user input.
- */
+
 public class Parser {
 
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
@@ -56,56 +53,55 @@ public class Parser {
 
         switch (commandWord) {
 
-            // case AddCommand.COMMAND_WORD:
-            // return prepareAdd(arguments);
-            //
-            // case DeleteCommand.COMMAND_WORD:
-            // return prepareDelete(arguments);
-            //
-            // case ClearCommand.COMMAND_WORD:
-            // return new ClearCommand();
-            //
-            // case FindCommand.COMMAND_WORD:
-            // return prepareFind(arguments);
-            //
-            // case ListCommand.COMMAND_WORD:
-            // return new ListCommand();
-            //
-            // case ViewCommand.COMMAND_WORD:
-            // return prepareView(arguments);
-            //
-            // case ViewAllCommand.COMMAND_WORD:
-            // return prepareViewAll(arguments);
-            //
+        // case AddCommand.COMMAND_WORD:
+        // return prepareAdd(arguments);
+        //
+        // case DeleteCommand.COMMAND_WORD:
+        // return prepareDelete(arguments);
+        //
+        // case ClearCommand.COMMAND_WORD:
+        // return new ClearCommand();
+        //
+        // case FindCommand.COMMAND_WORD:
+        // return prepareFind(arguments);
+        //
+        // case ListCommand.COMMAND_WORD:
+        // return new ListCommand();
+        //
+        // case ViewCommand.COMMAND_WORD:
+        // return prepareView(arguments);
+        //
+        // case ViewAllCommand.COMMAND_WORD:
+        // return prepareViewAll(arguments);
+        //
 
-            case LogCommand.COMMAND_WORD:
-                return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
+        case LogCommand.COMMAND_WORD:
+            return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case DeleteLogCommand.COMMAND_WORD:
-                return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
+        case DeleteLogCommand.COMMAND_WORD:
+            return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case ViewLogCommand.COMMAND_WORD:
-                return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
+        case ViewLogCommand.COMMAND_WORD:
+            return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case UpdateLogCommand.COMMAND_WORD:
-                return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
+        case UpdateLogCommand.COMMAND_WORD:
+            return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case seedu.duke.commands.meal.AddCommand.COMMAND_WORD:
-                return new AddCommand(Arrays.asList(arguments.trim().split(" ")));
+        case seedu.duke.commands.meal.AddCommand.COMMAND_WORD:
+            return new AddCommand(Arrays.asList(arguments.trim().split(" ")));
 
-            case GoalCommand.COMMAND_WORD:
-                return new GoalCommand(userInput);
+        case GoalCommand.COMMAND_WORD:
+            return new GoalCommand(userInput);
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD: // Fallthrough
+        case HelpCommand.COMMAND_WORD: // Fallthrough
 
-            default:
-                return new HelpCommand();
+        default:
+            return new HelpCommand();
         }
     }
-
     // /**
     // * Parses arguments in the context of the add person command.
     // *
