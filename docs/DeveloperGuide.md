@@ -1,33 +1,69 @@
 # Developer Guide
+* Table of Contents
+<!-- TOC -->
+* [Developer Guide](#developer-guide)
+  * [**Acknowledgements**](#acknowledgements)
+  * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**Design**](#design)
+    * [Architecture](#architecture)
+    * [Ui Component](#ui-component)
+    * [Parser Component](#parser-component)
+    * [Storage Component](#storage-component)
+    * [Data Component](#data-component)
+  * [**Feature**](#feature)
+    * [Add Dish](#add-dish)
+    * [Adding a Dish](#adding-a-dish)
+    * [List Menu](#list-menu)
+    * [Add Order](#add-order)
+    * [Next Day](#next-day)
+    * [Previous Day](#previous-day)
+    * [List Ingredients](#list-ingredients)
+    * [Delete Dish](#delete-dish)
+    * [Edit Price](#edit-price)
+    * [Help](#help)
+  * [**Product scope**](#product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+    * [User stories](#user-stories)
+<!-- TOC -->
 
-## Acknowledgements
+--------------------------------------------------------------------------------------------------------------------
+## **Acknowledgements**
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+[addressbook-level2](https://github.com/se-edu/addressbook-level2) <br>
+[addressbook-level3](https://github.com/se-edu/addressbook-level3)
 
-## Design
-### Architecture Diagram
+--------------------------------------------------------------------------------------------------------------------
+## **Setting up, getting started**
+
+Refer to the guide [_UserGuide_](UserGuide.md).
+
+--------------------------------------------------------------------------------------------------------------------    
+## **Design**
+
+### Architecture
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
 *Figure 1: Architecture Diagram*
 
-The Architecture Diagram given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the App.
 Listed below is a brief summary outlining the primary components and their interrelationships.
 
-In summary, the user interacts with the UI components, initiating a sequence that involves:
-- Parser component for command interpretation
-- Command component for execution 
-- Data component for managing application data
+In summary, the user interacts with the Ui components, initiating a sequence that involves:
+- `Parser` component for command interpretation
+- `Command` component for execution 
+- `Data` component for managing application data
 
-The Storage component mainly handles interaction with external text files and main coordinates the interactions between the various Components.
+The `Storage` component mainly handles interaction with external text files and main coordinates the interactions between the various Components.
 
 The bulk of the app’s work is done by the following components:
-- `UI` : The UI of the App.
+- `Ui` : The UI of the App.
 - `Storage` : Reads data from, and writes data to, the text files.
 - `Data` : Consists of all the classes that are involved in execution of commands.
 - `Parser` : Makes sense of user input to return the appropriate command
-- `Command` : Executes the comman requested by the user.
+- `Command` : Executes the command requested by the user.
 
-How the architecture components interact with each other
+**How the architecture components interact with each other:**
 
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
@@ -54,13 +90,17 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 *Figure 4: Parser Class Diagram*
 
-Note that `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies. 
+The `Parser` component is respnsible for making sense of the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
+
+<div markdown="span" class="alert alert-info">**Note:** `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies.</div>
+
+Below is the sequence diagram of a parser which shows how `Parser` parses user input:
 
 ![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
 
 *Figure 5: Parser Parsing User Input Sequence Diagram*
 
-When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, then it calls the respective `prepareCommand` method within `Parser`. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
+When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
 ### Storage Component
 API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
@@ -75,7 +115,7 @@ The `Storage` class,
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
 ### Data Component
-API: []
+Folder: [Data]({repoURL}src/main/java/seedu/cafectrl/data)
 ![Data Class Diagram](images/class/Data.png)
 *Figure 7: Data Package Class Diagram*
 
@@ -89,8 +129,8 @@ A summary of the class diagram is as listed below:
 - `Sales` is instantiated with an ArrayList of `OrderList`, forming a one-to-many relationship with `OrderList`.
 - Lastly, the `CurrentDate` class keeps track of the current operating day of the cafe.
 
-
-## Features
+--------------------------------------------------------------------------------------------------------------------
+## **Feature**
 
 ### Add Dish
 
@@ -252,13 +292,30 @@ API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpComman
 
 When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequently calls the `showHelp()` method in `Ui`. In `showHelp()`, messages related to command usage will be retrieved and be printed out using by self-invoking `showToUserWithSpaceInBetweenLines(messages: String...)`.
 
-## Product scope
+--------------------------------------------------------------------------------------------------------------------
+## **Product scope**
 ### Target user profile
 
-Café proprietors seeking for a software solution to optimize the management of their café's operations
+Café proprietors who ***love*** typing on CLI and are seeking for a software solution to optimize the management of their café's operations.
 
 ### Value proposition
 
 Our product aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
+### User stories
 
+| Priority | As a …​                                                   | I want to …​                                            | So that I can…​                                                                         |
+|----------|-----------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`  | cafe owner who is responsible for coming up with new dish | add dish to the menu                                    | add new dish to the menu                                                                |
+| `* * *`  | cafe manager is responsible for managing pantry stock     | track the inventory levels for ingredients and supplies | know what ingredients I need to restock                                                 |
+| `* * *`  | cafe manager is responsible for managing pantry stock     | buy ingredients                                         | restock low stock ingredients                                                           |
+| `* * *`  | cafe owner who is also the chef                           | view the ingredients needed for a dish                  | know what ingredients to use when cooking a dish                                        |
+| `* * *`  | cafe owner who wants to maximise profit                   | edit the price of the dish                              | increase the price of the dish when there is inflation                                  |
+| `* * *`  | cafe owner who cares about the sales of the cafe          | view the sales of the cafe                              | know whether my cafe is profiting                                                       |
+| `* * *`  | cafe owner who works 7 days a week                        | save the menu, pantry stock and order                   | have access to the same menu, pantry stock and orders when I go back to work            |
+| `* * *`  | cafe owner who is responsible for placing order           | add order                                               | ask the chef to cook the order                                                          |
+| `* *`    | cafe manager who is responsible for drafting the menu     | view the menu                                           | keep track of what dish we have                                                         |
+| `* *`    | cafe owner who working 7 days a week                      | fast forward to the next day                            | close the cafe and call it a day when I am tired                                        |
+| `* *`    | clumsy cafe owner who works 7 days a week                 | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
+
+*{More to be added}*

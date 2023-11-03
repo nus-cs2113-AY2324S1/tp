@@ -2,6 +2,12 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
+participant ":Main" as Main
+participant ":EditPriceCommand" as EditPriceCommand
+participant ":Menu" as Menu
+participant ":Dish" as Dish
+participant ":Ui" as Ui
+participant ":Messages" as Messages
 
 Main -> EditPriceCommand: execute()
 activate EditPriceCommand

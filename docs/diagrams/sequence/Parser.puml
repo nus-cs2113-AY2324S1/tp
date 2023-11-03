@@ -2,8 +2,11 @@
 'https://plantuml.com/sequence-diagram
 
 actor User
+Participant ":Main" as Main
+Participant ":Parser" as Parser
+Participant ":XYZCommand" as XYZCommand
 
-User -> Main: fullUserInput
+User -> Main: fullUserInput: String
 activate Main
 Main -> Parser: parseCommand(fullUserInput: String)
 activate Parser

@@ -1,10 +1,34 @@
 # User Guide
+* Table of Contents
+<!-- TOC -->
+* [User Guide](#user-guide)
+  * [Introduction](#introduction)
+  * [Quick Start](#quick-start)
+  * [Features](#features-)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a dish : `add`](#adding-a-dish--add)
+    * [Listing all menu items : `list_menu`](#listing-all-menu-items--listmenu)
+    * [Listing ingredients needed for the selected dish : `list_ingredients`](#listing-ingredients-needed-for-the-selected-dish--listingredients)
+    * [Deleting a menu item : `delete`](#deleting-a-menu-item--delete)
+    * [Editing price of menu item : `edit_price`](#editing-price-of-menu-item--editprice)
+    * [Viewing the total stock of ingredients : `view_stock`](#viewing-the-total-stock-of-ingredients--viewstock)
+    * [Buying an ingredient : `buy_ingredient`](#buying-an-ingredient--buyingredient)
+    * [Showing all sales : `show_sales`](#showing-all-sales--showsales)
+    * [Showing sales for a chosen day : `show_sale`](#showing-sales-for-a-chosen-day--showsale)
+    * [Adding an order : `add_order`](#adding-an-order--addorder)
+    * [Returning to the previous day: `previous_day`](#returning-to-the-previous-day-previousday)
+    * [Advancing to the next day: `next_day`](#advancing-to-the-next-day-nextday)
+    * [Exiting the program : `bye`](#exiting-the-program--bye)
+  * [Known Issues](#known-issues)
+  * [Command Summary](#command-summary)
+<!-- TOC -->
 
+---------------------------------------------------
 ## Introduction
 
 CafeCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
 
-
+---------------------------------------------------
 ## Quick Start
 1. Ensure that you have Java `11` or above installed. 
 2. Down the latest version of `CafeCtrl` from [here](https://github.com/AY2324S1-CS2113-T17-2/tp/releases).
@@ -16,7 +40,7 @@ Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > 
 ```
-
+---------------------------------------------------
 ## Features 
 > **Notes about command format:**
 > - Words in `UPPER_CASE` are the arguments to be supplied by user. <br>
@@ -301,10 +325,12 @@ Exits the program.
 
 Format: `bye`
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Known Issues
 - The application is unable to read the data text files if they have been edited directly in the wrong decoding format
 - For edit price command, special characters can be entered in the price argument
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 | Action                    | Format, Examples                                                                                                                                                                                                                                       |
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -312,7 +338,7 @@ Format: `bye`
 | **List Menu**             | `list_menu`                                                                                                                                                                                                                                            |
 | **List Ingredients**      | `list_ingredients DISH_INDEX`<br/><br/>Example:<br/>`list_ingredients 1`                                                                                                                                                                               |
 | **Delete**                | `delete DISH_INDEX`<br/><br/>Example:<br/>`delete 1`                                                                                                                                                                                                   |
-| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br/><br/>Example:<br/>`edit_price index/1 price/4.50`                                                                                                                                                    | |
+| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br/><br/>Example:<br/>`edit_price index/1 price/4.50`                                                                                                                                                    |
 | **Show Sale**             | `show_sales`                                                                                                                                                                                                                                           |
 | **Show Sale by Day**      | `show_sale day/DAY_TO_DISPLAY` <br/><br/>Example:<br/>`show_sale day/ 1`                                                                                                                                                                               |
 | **View Ingredient Stock** | `view_stock`                                                                                                                                                                                                                                           |
