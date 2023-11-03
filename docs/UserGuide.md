@@ -34,7 +34,7 @@ from all fields of study.
 
 ## Features
 
-2. [Helper command](#getting-help-on-using-the-app-help)
+1. [Helper command](#getting-help-on-using-the-app-help)
 2. [Add question/answer and group them in modules/difficulty](#adding-short-answer-questions-and-their-answers-short)
 3. [Store or Edit the question/answer in local storage](#store-and-edit-question-pool-using-the-question-file)
 4. [Delete question/answer](#delete-questions-delete)

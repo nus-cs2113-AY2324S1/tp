@@ -116,7 +116,6 @@ public class Parser {
         case "normal":
             return Question.QnDifficulty.NORMAL;
         default:
-            System.out.println(Ui.INVALID_QUESTION_DIFFICULTY_MSG);
             return Question.QnDifficulty.INVALID;
         }
     }
