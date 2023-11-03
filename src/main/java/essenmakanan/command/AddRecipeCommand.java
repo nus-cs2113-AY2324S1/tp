@@ -77,7 +77,7 @@ public class AddRecipeCommand extends Command {
     }
 
     public void addWithTitleStepsTags() throws EssenFormatException {
-        // add r/bread t/b s/buy ingredients s/store ingredients t/a s/cook
+        // add r/bread t/1 s/buy ingredients s/store ingredients t/2 s/cook
         String[] allToAdd = toAdd.split("t/");
         String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
         String[] steps = new String[allToAdd.length - 1];
