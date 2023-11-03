@@ -1,7 +1,5 @@
 package seedu.duke.exerciselog;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class MonthTest {
     public static void main(String[] args) {
         MonthTest test = new MonthTest();
@@ -19,7 +17,7 @@ public class MonthTest {
     public void addExerciseTest() {
         Month month = new Month(28, "FEB");
         month.addExercise(3, "Volleyball", 79);
-        assertEquals(month.getNumberOfExercisesForDay(3), 1);
+        assert month.getNumberOfExercisesForDay(3) == 1;
         month.addExercise(14, "Running", 121);
         assert month.getNumberOfExercisesForDay(14) == 1;
         assert month.getTotalNumberOfExercises() == 2;
