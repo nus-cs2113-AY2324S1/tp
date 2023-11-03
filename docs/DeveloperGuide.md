@@ -2,8 +2,8 @@
 
 ## **Content**
 - [Handing User Inputs & Displaying Output](#item-one)
-- Updates Exercise from Log feature
-- Adding a New Exercise Goal
+- [Updates Exercise from Log feature](#item-two)
+- [Adding a New Exercise Goal](#item-three)
 
 ## Acknowledgements
 
@@ -24,6 +24,7 @@ Below is a class diagram that describes how our various components interact with
 
 The parser class is responsible for reading the user input and creating specific command objects. All of these subcommands inherit from a general Command parent class which has an `execute` method that can be called regardless of child class and will return a CommandResult object. The CommandResult object dictates what info (string or list of items) needs to be returned to the user for viewing. Both CommandResult and TextUi (responsible for actually displaying data from CommandResult to user) will only print objects from classes that inherit from the Printable interface. This ensures that objects in the `relevantItems` list are all serializable as a human-readable string to be displayed to the end user.
 
+<a id="item-two"></a>
 ### Update Exercises from Log feature
 
 The proposed feature is to allow users to update exercises from the ExerciseLog class to allow for full CRUD functionality of the class. Currently, users are able to create exercises and log them as well as view all the exercises that they have created, but in the case of a typo, they are unable to update the log to accomodate for the user error. To improve the user experience, this update feature has been proposed to allow users to have a better experience using the app.
@@ -44,6 +45,7 @@ Step 3: The user calls the update command with the information of the old exerci
 
 <img width="652" alt="Screenshot 2023-10-22 at 22 25 09" src="https://github.com/Remy9926/tp/assets/95456114/d07d5570-11fc-426c-877d-feb31a338f0a">
 
+<a id="item-three"></a>
 ### Adding a New Exercise Goal
 Setting up exercise goals is one of the major components in our FitNus app. It could guide users to do exercise in a more systematic way, while ensuring the possibility of keeping track of the record.
 
