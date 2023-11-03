@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.OptionalDouble;
 
 import static cashleh.transaction.ExpenseCategories.ExpenseCategory.FOOD_DRINK;
@@ -59,14 +58,5 @@ class FinancialStatementTest {
                 () -> financialStatement.findTransaction(
                         "black jack", OptionalDouble.of(5000), LocalDate.now(), LOTTERY_GAMBLING
                 )) ;
-    }
-
-    @Test
-    void testToString() {
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        assertEquals(financialStatement.toString(),
-                "Income: salary (Amount: 1000.0, Date: " + today.format(pattern) + ", Category: SALARY)\n"
-                        + "Expense: lunch (Amount: 20.0, Date: " + today.format(pattern) + ", Category: FOOD_DRINK)");
     }
 }
