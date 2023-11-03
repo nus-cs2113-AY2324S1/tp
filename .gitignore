@@ -15,4 +15,5 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 
-/data
+/data/
+!/data/testUser.txt
