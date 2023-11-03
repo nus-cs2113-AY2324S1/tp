@@ -56,7 +56,7 @@ public class Storage {
                     return 1;
                 }
                 questions.addShortAnswerQn(qnTokens[0], qnTokens[1], qnModule, difficulty, false);
-                if (qnDoneStatus.equals("done")) {
+                if (qnDoneStatus.equalsIgnoreCase("done")) {
                     questions.markQuestionAsDone(questions.getQuestionListSize(), false);
                 }
                 return 0;
