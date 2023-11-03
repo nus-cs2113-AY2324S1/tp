@@ -62,6 +62,29 @@ public class Day {
     }
 
     /**
+     * Given the specific details of an Exercise, finds the exercise in the log and updates it to the new specified
+     * details.
+     *
+     * @param oldExerciseName original name of the exercise to be updated
+     * @param oldCaloriesBurned original number of calories burned by the exercise to be updated
+     * @param newExerciseName the new name to update the exercise to
+     * @param newCaloriesBurned the new number of calories burned to update the exercise to
+     * @return true when an exercise is found and updated, false otherwise
+     */
+    public boolean updateExercise(String oldExerciseName, int oldCaloriesBurned, String newExerciseName,
+                                  int newCaloriesBurned) {
+        int index = exercises.indexOf(new Exercise(oldExerciseName, oldCaloriesBurned));
+        if (index == -1) {
+            return false;
+        }
+
+        Exercise targetExercise = exercises.get(index);
+        targetExercise.setExerciseName(newExerciseName);
+        targetExercise.setCaloriesBurned(newCaloriesBurned);
+        return true;
+    }
+
+    /**
      * Returns a string representing all the exercises contained for the Day.
      *
      * @return a string representing all the exercises for the day

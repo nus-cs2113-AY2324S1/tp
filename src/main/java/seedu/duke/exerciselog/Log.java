@@ -82,6 +82,24 @@ public class Log {
     }
 
     /**
+     * Given the specific details of an Exercise, finds the exercise in the log on the given month and day, and updates
+     * it to the new specified details.
+     *
+     * @param month the month of the exercise to be updated
+     * @param day the day of the month of the exercise to be updated
+     * @param oldExerciseName original name of the exercise to be updated
+     * @param oldCaloriesBurned original number of calories burned by the exercise to be updated
+     * @param newExerciseName the new name to update the exercise to
+     * @param newCaloriesBurned the new number of calories burned to update the exercise to
+     * @return true if an exercise is successfully updated, false otherwise
+     */
+    public boolean updateExercise(int month, int day, String oldExerciseName, int oldCaloriesBurned,
+                                  String newExerciseName, int newCaloriesBurned) {
+        return exerciseLog.get(month - 1).updateExercise(day, oldExerciseName, oldCaloriesBurned, newExerciseName,
+                newCaloriesBurned);
+    }
+
+    /**
      * Returns the Month object of the specified month.
      *
      * @param month the month to be checked
