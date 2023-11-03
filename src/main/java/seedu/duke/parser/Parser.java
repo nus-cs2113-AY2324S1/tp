@@ -87,7 +87,7 @@ public class Parser {
         case UpdateLogCommand.COMMAND_WORD:
             return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case seedu.duke.commands.meal.AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
             return new AddCommand(Arrays.asList(arguments.trim().split(" ")));
 
         case GoalCommand.COMMAND_WORD:
