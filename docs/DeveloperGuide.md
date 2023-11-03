@@ -1,5 +1,10 @@
 # Developer Guide
 
+Content
+- Handing User Inputs & Displaying Output
+- Updates Exercise from Log feature
+- Adding a New Exercise Goal
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -38,7 +43,7 @@ Step 3: The user calls the update command with the information of the old exerci
 
 <img width="652" alt="Screenshot 2023-10-22 at 22 25 09" src="https://github.com/Remy9926/tp/assets/95456114/d07d5570-11fc-426c-877d-feb31a338f0a">
 
-### Adding a new exercise goal
+### Adding a New Exercise Goal
 Setting up exercise goals is one of the major components in our FitNus app. It could guide users to do exercise in a more systematic way, while ensuring the possibility of keeping track of the record.
 
 Inheritance Level:
