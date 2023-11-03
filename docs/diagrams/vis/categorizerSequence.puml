@@ -9,10 +9,10 @@ participant "<<class>>\nCategorizer"
 
 ":VisCommand"-> "<<class>>\nCategorizer": Categorizer.sortType(cashflowList, type)
 
-alt type == "expense"
+alt "expense"
     "<<class>>\nCategorizer" -> "<<class>>\nCategorizer": sortExpenses(cashflowList)
     return
-else type == "income"
+else "income"
     "<<class>>\nCategorizer" -> "<<class>>\nCategorizer": sortIncome(cashflowList)
     return
 end
