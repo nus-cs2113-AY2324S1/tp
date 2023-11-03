@@ -1,4 +1,4 @@
-//@@author wendelinwemhoener & bayasgalankherlen
+//@@author wendelinwemhoener
 
 package seedu.duke;
 

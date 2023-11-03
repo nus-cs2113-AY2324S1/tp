@@ -8,17 +8,20 @@ import seedu.duke.flashcard.command.UnknownCommand;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates all classes needed for the flashcard functionality and
+ * allows access to them via one unified API.
+ */
 public class FlashcardComponent {
     private FlashcardCommandParser parser;
     private FlashcardList flashcardList;
     private FlashcardUi ui;
     private FlashcardStorage storage;
 
-
+    //@@author junhyeong0411
     public FlashcardComponent() {
         parser = new FlashcardCommandParser();
 
-        //@@author junhyeong0411
         FlashcardDirectory flashcarddirectory = new FlashcardDirectory();
         flashcarddirectory.listFlashcardFiles();
 
@@ -30,12 +33,10 @@ public class FlashcardComponent {
             flashcardList = new FlashcardList(new ArrayList<>());
         }
 
-        //@@author wendelinwemhoener
         Flashcard.calculateAndUpdateGlobalMaxId(flashcardList);
         ui = new FlashcardUi(flashcardList);
     }
 
-    //@@author junhyeong0411
     public FlashcardStorage getStorage(){
         return this.storage;
     }
@@ -54,6 +55,12 @@ public class FlashcardComponent {
     }
 
     //@@author wendelinwemhoener
+    /**
+     * Returns if FlashcardComponent is responsible for handling this input.
+     *
+     * @param input The text inputted by the user.
+     * @return Whether FlashcardComponent is responsible for handling the input.
+     */
     public boolean isResponsible(String input) {
         FlashcardCommand command = parser.parseInput(input);
 
@@ -64,6 +71,11 @@ public class FlashcardComponent {
         }
     }
 
+    /**
+     * Processes user input by parsing it and executing the resulting command.
+     *
+     * @param input The text inputted by the user.
+     */
     public void processInput(String input) {
         FlashcardCommand command = parser.parseInput(input);
         assert !(command instanceof UnknownCommand) : "Command cannot be " +
@@ -74,7 +86,5 @@ public class FlashcardComponent {
         //@@author junhyeong0411
         // save after every commands
         storage.saveFlashcards(flashcardList.getFlashcards());
-
-        //@@author wendelinwemhoener
     }
 }
