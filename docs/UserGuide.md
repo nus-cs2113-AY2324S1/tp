@@ -34,10 +34,11 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 |-----------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Add recipe                                                | add r/RECIPE_TITLE t/TAG_NAME s/STEP_DESCRIPTION d/DURATION | add r/scramble egg t/BEFORE_COOKING s/buy ingredients t/DURING COOKING s/wash ingredients s/bake ingredients t/30mins i/egg |
 | Add ingredient                                            | add i/INGREDIENT_NAME                                       | add i/bread                                                                                                                 |
-| Delete Recipe                                             | delete r/RECIPE_TITLE                                       |
-| Delete Ingredient                                         | delete r/INGREDIENT_NAME                                    | 
-| View all ingredients                                      | view i                                                      |
-| View all recipes                                          | view r                                                      |
+| Delete Recipe                                             | delete r/RECIPE_TITLE                                       |                                                                                                                             |
+| Delete Ingredient                                         | delete r/INGREDIENT_NAME                                    |                                                                                                                             |         
+| Duplicate Recipe                                          | duplicate RECIPE_NAME or duplicate RECIPE_INDEX             | duplicate sandwich or duplicate 1                                                                                           |
+| View all ingredients                                      | view i                                                      |                                                                                                                             |                                
+| View all recipes                                          | view r                                                      |                                                                                                                             |            
 | View specific ingredient                                  | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID         | view i/bread <br><br>view i/1                                                                                               |
 | View specific recipe                                      | view r/RECIPE_ID                                            | view r/1                                                                                                                    |
 | Filter recipe by ingredients                              | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                                                           |
@@ -102,7 +103,17 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    * `delete r/1` to delete a recipe at index ‘1’
 
 
-6. Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
+6. Duplicate a recipe - `duplicate RECIPE_NAME` or `duplicate RECIPE_INDEX`
+
+   Duplicate a recipe from the recipe list. The duplicated recipe with have `(copy)` within its name.
+
+   <br>  Example :
+
+   * `duplicate sandwich` to duplicate a recipe with the title `sandwich`
+   * `duplicate 1` to duplicate the first recipe on the list.
+
+
+7. Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
 
    Use the start command to check if you are all set to start on the recipe.This command will list all missing ingredients from the recipe you want to start on.
 
@@ -121,7 +132,8 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
      ![img_1.png](images/StartRecipeCommand2.png)
 
-7. Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
+
+8. Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
    
    Filter your recipes by ingredients you are craving for that meal.
    
@@ -142,12 +154,12 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 ---
 ### Ingredients
-6. View all ingredients - `view i`
+9. View all ingredients - `view i`
     
    List all ingredients available inside the app.
 
 
-7. View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
+10. View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
 
     Check the quantity of an ingredient you have available in your kitchen/inventory.
 
@@ -159,7 +171,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
    * `view i/1` to view the quantity of your ingredient with id 1
 
 
-8. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
+11. Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
 
    Adds a new item to the list of todo items. Here are our registered unit in the app:
     * g (Gram)
@@ -179,7 +191,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     * `add i/cooking oil,5,l` to add `5 liters of cooking oil` into the list
    
 
-9. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
+12. Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
 
    Edit an ingredient to change the name, quantity or unit. A user is able to edit more than one property of an 
    ingredient.
@@ -190,7 +202,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
     * `edit i/egg q/10 u/kg` to change the quantity to `10` and the unit to `kg`
 
 
-10. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
+13. Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
 
    Delete an ingredient based on the selected index in the list or the ingredient's name.
 
