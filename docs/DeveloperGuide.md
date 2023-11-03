@@ -38,6 +38,30 @@ Step 3: The user calls the update command with the information of the old exerci
 
 <img width="652" alt="Screenshot 2023-10-22 at 22 25 09" src="https://github.com/Remy9926/tp/assets/95456114/d07d5570-11fc-426c-877d-feb31a338f0a">
 
+### Adding a new exercise goal
+Setting up exercise goals is one of the major components in our FitNus app. It could guide users to do exercise in a more systematic way, while ensuring the possibility of keeping track of the record.
+
+Inheritance Level:
+
+As one of the commands input by user, the goal class should be inherited from the command class, with the general abstract method such as constructor, execution of command, etc.
+
+Implementation:
+The goalist class has some helper functions, including checkGoalInput to ensure the validity of user input, addGoal to add a new goal record into the goal list. The execution of goal command simply create a new goal record by first validating the user input, and create a goal record and finally return the result of creating the goal.
+
+Future Enhancement:
+
+1. List function and delete function
+
+The list function is vital in visualization of the goal list while delete function helps to remove some redundant, incorrect, or achieved goals. Note that since other command classes may also need a list function or delete function, these two functions can be created for a general use and applicable for all commands. Alternative method is to create an interface class including both methods. Those commands which inherited the interface class should override all methods.
+
+2. Achievement List function
+
+This aims to keep the record of achieved goals. Once the user marks a goal as finished, the record will be automatically backed 
+up into the history list. All records in the history list should be sorted according to their finish time and in alphabetical order. A simple copy function with proper file input output maintenance should be good enough to achieve this function.
+
+3. Achieve goal function: allow users to mark a goal as achieved and saved the record into backup history.
+
+
 ## Product scope
 ### Target user profile
 
