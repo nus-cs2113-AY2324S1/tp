@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 
+import seedu.duke.Duke;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.ui.TextUi;
@@ -13,7 +14,6 @@ public class GoalList {
 
     private ArrayList<Goal> goals;
     private int goalCount;
-    private TextUi ui;
 
     public GoalList() {
         goals = new ArrayList<>();
@@ -36,11 +36,10 @@ public class GoalList {
     /**
      * @param index points to the target gaol at the goal list
      */
-    public void deleteGoal(int index) {
-        Goal targetGoal = goals.remove(index);
-        goalCount--;
-        ui.printDeleteGoal(targetGoal);
-        ui.printNumberofGoal(goalCount);
+    public static String deleteGoal(int index) {
+        Goal targetGoal = Duke.goals.remove(index);
+        Duke.goals.goalCount--;
+        return TextUi.DeleteGoalMsg(targetGoal) + TextUi.NumberofGoalMsg(Duke.goals.goalCount);
     }
 
     /**

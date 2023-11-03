@@ -194,13 +194,15 @@ public class TextUi {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
     }
 
-    public void printNumberofGoal(int goalCount) {
-        System.out.println("You still have " + goalCount + " goals to accomplish. Add oil!" );
+    public static String NumberofGoalMsg(int goalCount) {
+        return "You still have " + goalCount + " goals to accomplish. Add oil!";
     }
 
-    public void printDeleteGoal(Goal deletedGoal) {
-        System.out.println("Good. I have removed this goal: " + deletedGoal);
-        System.out.println("Remember not to give up unaccomplished goal! ");
+    public static String DeleteGoalMsg(Goal deletedGoal) {
+
+        return "Good. I have removed this goal: " + deletedGoal + "\n"
+                + "Remember not to give up unaccomplished goal! ";
+
     }
 
     /**

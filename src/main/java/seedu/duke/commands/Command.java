@@ -4,7 +4,7 @@ package seedu.duke.commands;
  * Represents an executable command.
  */
 public class Command {
-    String userCommand;
+    protected String userCommand;
 
     public Command() {
     }

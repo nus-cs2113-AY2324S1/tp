@@ -1,6 +1,8 @@
-package seedu.duke.commands;
+package seedu.duke.commands.goal;
 
 import seedu.duke.Duke;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.CommandResult;
 import seedu.duke.ui.TextUi;
 import seedu.duke.data.exception.IncorrectFormatException;
 
