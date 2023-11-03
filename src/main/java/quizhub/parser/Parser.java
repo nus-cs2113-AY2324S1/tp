@@ -1,7 +1,21 @@
 package quizhub.parser;
 
-import quizhub.command.*;
+import quizhub.command.Command;
+import quizhub.command.CommandDelete;
+import quizhub.command.CommandEdit;
+import quizhub.command.CommandExit;
+import quizhub.command.CommandFind;
+import quizhub.command.CommandHelp;
+import quizhub.command.CommandInvalid;
+import quizhub.command.CommandList;
+import quizhub.command.CommandMarkDifficulty;
+import quizhub.command.CommandMultipleChoice;
+import quizhub.command.CommandShortAnswer;
+import quizhub.command.CommandShuffle;
+import quizhub.command.CommandStart;
 import quizhub.question.Question;
+import quizhub.question.Question.QnType;
+import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 import quizhub.exception.QuizHubExceptions;
 
@@ -9,12 +23,19 @@ import quizhub.exception.QuizHubExceptions;
  * Represents a parser that converts user inputs into command objects.
  */
 public class Parser {
+    private static QuestionList questions;
+
+    public Parser(QuestionList questions) {
+        this.questions = questions;
+    }
+
     /**
      * Analyses and extracts relevant information from user input
      * to create a new Command object of the right type.
      *
      * @param rawUserInput The full user CLI input.
-     * @return Command of the successfully parsed command or an InvalidCommand if unsuccessful
+     * @return Command of the successfully parsed command or an InvalidCommand if
+     *         unsuccessful
      */
     public static Command parseCommand(String rawUserInput) {
         String userInput = rawUserInput.strip();
@@ -32,7 +53,8 @@ public class Parser {
                 return new CommandList();
             case CommandShortAnswer.COMMAND_WORD:
                 return parseShortAnswerCommand(userInput);
-                // TODO: Add Parsing case for MCQ
+            case CommandMultipleChoice.COMMAND_WORD:
+                return parseMCQCommand(userInput);
             case CommandStart.COMMAND_WORD:
                 return parseStartCommand(userInput);
             case CommandEdit.COMMAND_WORD:
@@ -54,15 +76,17 @@ public class Parser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
             return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
         } catch (Exception error) {
+            System.out.println(error.getMessage());
             return new CommandInvalid(Ui.INVALID_COMMAND_FEEDBACK);
         }
     }
+
     /**
      * Extracts relevant information after a specified keyword
      * from CLI user input.
      *
      * @param userInput The full user CLI input.
-     * @param keyWord The keyword used to partition the user input.
+     * @param keyWord   The keyword used to partition the user input.
      *
      * @return String after the specified keyword
      */
@@ -75,6 +99,7 @@ public class Parser {
         }
         return content;
     }
+
     /**
      * Extracts difficulty from user command to assign to a question.
      * Default invalid difficulty is assigned if invalid difficulty given.
@@ -95,6 +120,7 @@ public class Parser {
             return Question.QnDifficulty.INVALID;
         }
     }
+
     /**
      * Extracts the question index from raw user input for commands with arguments.
      *
@@ -102,34 +128,79 @@ public class Parser {
      * @return Integer index of the question
      */
     private static int extractQnIndex(String userInput, String commandType) throws IllegalArgumentException,
-            ArrayIndexOutOfBoundsException {
+            ArrayIndexOutOfBoundsException, NumberFormatException, QuizHubExceptions {
         String editDetails = userInput.split(commandType)[1];
-        String qnIndexString  = editDetails.split("/")[0].strip();
-        if(qnIndexString.isEmpty()){
+        String qnIndexString = editDetails.split("/")[0].strip();
+        if (qnIndexString.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        if(qnIndexString.split(" ").length != 1) {
+        if (qnIndexString.split(" ").length != 1) {
             throw new IllegalArgumentException();
         }
-        int qnIndex  = Integer.parseInt(qnIndexString);
-        if(qnIndex <= 0){
+        int qnIndex = Integer.parseInt(qnIndexString);
+        if (qnIndex <= 0) {
             throw new NumberFormatException();
+        }
+        if (questions.getQuestionByIndex(qnIndex) == null) {
+            throw new QuizHubExceptions();
         } else {
             return qnIndex;
         }
     }
 
-    // TODO: parseMultipleChoiceCommand
+    /**
+     * Attempt to parse user input into a MCQ Command by extracting question
+     * description, 4 options,
+     * answer index, module the question falls under, and level of difficulty from
+     * the user input.
+     *
+     * @param userInput Raw command entered by the user
+     * @return MCQ command or an Invalid Command
+     */
+    private static Command parseMCQCommand(String userInput) {
+        assert userInput != null : "Invalid Null Command!";
+        try {
+            // Split the input by '/' to separate the parts
+            String[] inputTokens = userInput.replace(
+                    CommandMultipleChoice.COMMAND_WORD, "").strip().split("/");
+            // Check if there are exactly 8 parts (description, 4 options, answer, module,
+            // difficulty)
+            if (inputTokens.length > CommandMultipleChoice.ARGUMENT_SIZE) {
+                return new CommandInvalid(CommandMultipleChoice.TOO_MANY_ARGUMENTS_MSG);
+            }
+            // Extract the values for description, options, answer, module, and difficulty
+            String description = inputTokens[0].strip();
+            String option1 = inputTokens[1].strip();
+            String option2 = inputTokens[2].strip();
+            String option3 = inputTokens[3].strip();
+            String option4 = inputTokens[4].strip();
+            String answer = inputTokens[5].strip();
+            String module = inputTokens[6].strip();
+            String difficulty = inputTokens[7].strip();
+            boolean isFieldEmpty = description.isEmpty() || option1.isEmpty() || option2.isEmpty() ||
+                    option3.isEmpty() || option4.isEmpty() || answer.isEmpty() || module.isEmpty() ||
+                    difficulty.isEmpty();
+            if (isFieldEmpty) {
+                return new CommandInvalid(CommandMultipleChoice.MISSING_FIELDS_MSG +
+                        "\n" + CommandMultipleChoice.INVALID_FORMAT_MSG);
+            }
+            return new CommandMultipleChoice(description, option1, option2, option3, option4,
+                    Integer.parseInt(answer), module, extractQuestionDifficulty(difficulty));
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            return new CommandInvalid(CommandMultipleChoice.INVALID_FORMAT_MSG);
+        }
+    }
 
     /**
-     * Attempt to parse user input into a Short Answer Command by extracting question description, answer,
+     * Attempt to parse user input into a Short Answer Command by extracting
+     * question description, answer,
      * module the question falls under, and level of difficulty from the user input.
      *
      * @param userInput Raw command entered by the user
      * @return Short Answer command or an Invalid Command
      */
     private static Command parseShortAnswerCommand(String userInput) {
-        assert userInput != null: "Invalid Null Command!";
+        assert userInput != null : "Invalid Null Command!";
         try {
             // Split the input by '/' to separate the parts
             String[] inputTokens = userInput.replace(
@@ -152,7 +223,7 @@ public class Parser {
                         "\n" + CommandShortAnswer.INVALID_FORMAT_MSG);
             }
             Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
-            if(qnDifficulty.equals(Question.QnDifficulty.INVALID)) {
+            if (qnDifficulty.equals(Question.QnDifficulty.INVALID)) {
                 return new CommandInvalid(CommandShortAnswer.INVALID_DIFFICULTY_MSG);
             }
             return new CommandShortAnswer(description, answer, module, qnDifficulty);
@@ -162,14 +233,15 @@ public class Parser {
     }
 
     /**
-     * Attempt to parse user input into a Delete Command by extracting question index
+     * Attempt to parse user input into a Delete Command by extracting question
+     * index
      * of question to be deleted.
      *
      * @param userInput Raw command entered by the user
      * @return Delete command or an Invalid Command
      */
     private static Command parseDeleteCommand(String userInput) {
-        assert userInput != null: "Invalid Null Command!";
+        assert userInput != null : "Invalid Null Command!";
         int qnIndex;
         String[] editDetails;
         try {
@@ -192,13 +264,14 @@ public class Parser {
     }
 
     /**
-     * Attempt to parse user input into a Find Command by extracting search condition/keyword from user input.
+     * Attempt to parse user input into a Find Command by extracting search
+     * condition/keyword from user input.
      *
      * @param userInput Raw command entered by the user
      * @return Find command or an Invalid Command
      */
     private static Command parseFindCommand(String userInput) {
-        assert userInput != null: "Invalid Null Command!";
+        assert userInput != null : "Invalid Null Command!";
         String searchCriteria;
         String searchKeyword;
         try {
@@ -207,7 +280,7 @@ public class Parser {
             return new CommandInvalid(CommandFind.MISSING_CRITERIA_MSG + System.lineSeparator() +
                     CommandFind.INVALID_FORMAT_MSG);
         }
-        try{
+        try {
             searchKeyword = userInput.split("/" + searchCriteria)[1].strip();
         } catch (ArrayIndexOutOfBoundsException incompleteCommand) {
             return new CommandInvalid(CommandFind.MISSING_KEYWORD_MSG + System.lineSeparator() +
@@ -224,126 +297,165 @@ public class Parser {
      * @return Edit command or an Invalid Command
      */
     private static Command parseEditCommand(String userInput) {
-        assert userInput != null: "Invalid Null Command!";
-        String[] commandEditTokens = new String[3];
+        assert userInput != null : "Invalid Null Command!";
+        String[] commandEditTokens = new String[2];
         int qnIndex;
         try {
             qnIndex = extractQnIndex(userInput, "edit");
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnIndex) {
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | QuizHubExceptions incorrectQnIndex) {
             return handleEditIndexExceptions(incorrectQnIndex);
         }
-        try{
-            extractEditCriteria(userInput, commandEditTokens);
+        try {
+            extractEditCriteria(userInput, qnIndex, commandEditTokens);
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectEditCriteria) {
             return handleEditCriteriaExceptions(incorrectEditCriteria);
         }
-        try{
+        try {
             extractEditNewValues(userInput, commandEditTokens);
         } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException invalidEditCriteria) {
             return handleEditNewValuesExceptions(invalidEditCriteria);
         }
-        String newDescription = commandEditTokens[1];
-        String newAnswer = commandEditTokens[2];
-        return new CommandEdit(qnIndex, newDescription, newAnswer);
+        String editField = commandEditTokens[0];
+        String newValue = commandEditTokens[1];
+        return new CommandEdit(qnIndex, editField, newValue);
     }
+
     /**
      * Extracts the edit criteria from raw user input for edit commands.
      * Respective information is extracted into commandEditTokens.
      *
-     * @param userInput Raw command entered by the user
+     * @param userInput         Raw command entered by the user
      * @param commandEditTokens Critical information chunks of edit command
      *                          commandEditTokens[0] contains edit criteria
-     *                          commandEditTokens[1] contains new question description to change to (if any)
-     *                          commandEditTokens[2] contains new question answer to change to (if any)
+     *                          commandEditTokens[1] contains new question
+     *                          description to change to (if any)
+     *                          commandEditTokens[2] contains new question answer to
+     *                          change to (if any)
      */
-    private static void extractEditCriteria(String userInput, String[] commandEditTokens)
-            throws ArrayIndexOutOfBoundsException, IllegalArgumentException{
+    private static void extractEditCriteria(String userInput, int qnIdex, String[] commandEditTokens)
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         String[] inputSplitByCriteria = userInput.split("/");
+        QnType qnType = questions.getQuestionByIndex(qnIdex).getQuestionType();
         String editDetails = inputSplitByCriteria[1].strip();
-        String editCriteria = editDetails.split(" ")[0].strip();
-        if(editCriteria.isEmpty()){
+        String editField = editDetails.split(" ")[0].strip();
+        if (editField.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
         } else if (inputSplitByCriteria.length != 2) {
             throw new IllegalArgumentException("Too Many Criteria");
-        } else if (!editCriteria.equals("description") && !editCriteria.equals("answer")) {
+        } else if (!editField.equals("description") && !editField.equals("answer")
+                && !editField.equals("option1")
+                && !editField.equals("option2") && !editField.equals("option3")
+                && !editField.equals("option4")) {
             throw new IllegalArgumentException("Invalid Criteria");
+        } else if (qnType.equals(QnType.SHORTANSWER) && (editField.equals("option1")
+                || editField.equals("option2") || editField.equals("option3")
+                || editField.equals("option4"))) {
+            throw new IllegalArgumentException("Invalid Edit Short Answer Question Criteria");
         } else {
-            commandEditTokens[0] = editCriteria;
+            commandEditTokens[0] = editField;
         }
     }
+
     /**
-     * Extracts the information to edit the indicated question with from raw user input for edit commands.
+     * Extracts the information to edit the indicated question with from raw user
+     * input for edit commands.
      * Respective information is extracted into commandEditTokens.
      *
-     * @param userInput Raw command entered by the user
+     * @param userInput         Raw command entered by the user
      * @param commandEditTokens Critical information chunks of edit command
      *                          commandEditTokens[0] contains edit criteria
-     *                          commandEditTokens[1] contains new question description to change to (if any)
-     *                          commandEditTokens[2] contains new question answer to change to (if any)
+     *                          commandEditTokens[1] contains new question
+     *                          description to change to (if any)
+     *                          commandEditTokens[2] contains new question answer to
+     *                          change to (if any)
      */
     private static void extractEditNewValues(String userInput, String[] commandEditTokens)
-            throws IllegalArgumentException{
-        switch (commandEditTokens[0]){
+            throws IllegalArgumentException {
+        switch (commandEditTokens[0]) {
         case "description":
             commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/description");
             break;
         case "answer":
-            commandEditTokens[2] = Parser.getContentAfterKeyword(userInput, "/answer");
+            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/answer");
+            break;
+        case "option1":
+            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option1");
+            break;
+        case "option2":
+            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option2");
+            break;
+        case "option3":
+            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option3");
+            break;
+        case "option4":
+            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option4");
             break;
         default:
             throw new IllegalArgumentException();
         }
     }
+
     /**
      * Handles exceptions raised by incorrect edit criteria for edit commands.
      *
      * @param editCriteriaException Exception raised by the program
      * @return Invalid command object with different error messages
      */
-    private static Command handleEditCriteriaExceptions(Exception editCriteriaException){
-        if(editCriteriaException instanceof ArrayIndexOutOfBoundsException) {
+    private static Command handleEditCriteriaExceptions(Exception editCriteriaException) {
+        if (editCriteriaException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandEdit.MISSING_CRITERIA_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
-        } else if(editCriteriaException instanceof IllegalArgumentException) {
-            if(editCriteriaException.getMessage().equals("Invalid Criteria")){
+        } else if (editCriteriaException instanceof IllegalArgumentException) {
+            switch (editCriteriaException.getMessage()) {
+            case "Invalid Criteria":
                 return new CommandInvalid(CommandEdit.INVALID_CRITERIA_MSG + System.lineSeparator() +
                         CommandEdit.INVALID_FORMAT_MSG);
-            } else {
+            case "Too Many Criteria":
                 return new CommandInvalid(CommandEdit.TOO_MANY_CRITERIA_MSG + System.lineSeparator() +
                         CommandEdit.INVALID_FORMAT_MSG);
+            case "Invalid Edit Short Answer Question Criteria":
+                return new CommandInvalid(CommandEdit.INVALID_SHORT_ANSWER_CRITERIA_MSG + System.lineSeparator() +
+                        CommandEdit.INVALID_FORMAT_MSG);
+            default:
+                return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
             }
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
+
     /**
      * Handles exceptions raised by incorrect question index for edit commands.
      *
      * @param editIndexException Exception raised by the program
      * @return Invalid command with different error messages
      */
-    private static Command handleEditIndexExceptions(Exception editIndexException){
-        if(editIndexException instanceof NumberFormatException) {
+    private static Command handleEditIndexExceptions(Exception editIndexException) {
+        if (editIndexException instanceof NumberFormatException) {
             return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
-        } else if(editIndexException instanceof ArrayIndexOutOfBoundsException) {
+        } else if (editIndexException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandEdit.MISSING_INDEX_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
-        } else if(editIndexException instanceof IllegalArgumentException) {
+        } else if (editIndexException instanceof IllegalArgumentException) {
             return new CommandInvalid(CommandEdit.TOO_MANY_INDEX_MSG + System.lineSeparator() +
+                    CommandEdit.INVALID_FORMAT_MSG);
+        } else if (editIndexException instanceof QuizHubExceptions) {
+            return new CommandInvalid(CommandEdit.INDEX_NOT_IN_RANGE_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
+
     /**
      * Handles exceptions raised by incorrect edit values for edit commands.
      *
      * @param editValuesException Exception raised by the program
      * @return InvalidCommand with error messages
      */
-    private static Command handleEditNewValuesExceptions(Exception editValuesException){
-        if(editValuesException instanceof IllegalArgumentException ||
+    private static Command handleEditNewValuesExceptions(Exception editValuesException) {
+        if (editValuesException instanceof IllegalArgumentException ||
                 editValuesException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
@@ -353,7 +465,8 @@ public class Parser {
     }
 
     /**
-     * Attempt to parse user input into a Start Quiz Command by extracting quiz mode and question mode
+     * Attempt to parse user input into a Start Quiz Command by extracting quiz mode
+     * and question mode
      * from the user input to initialise question set for the quiz.
      *
      * @param userInput Raw command entered by the user
@@ -368,12 +481,12 @@ public class Parser {
         }
         try {
             extractQuizStartDetails(userInput, commandStartTokens);
-        }  catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQuizDetails) {
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQuizDetails) {
             return handleQuizStartDetailsExceptions(incorrectQuizDetails);
         }
         try {
             extractQuizQnMode(userInput, commandStartTokens);
-        }  catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnMode) {
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnMode) {
             return handleQuizQnModeExceptions(incorrectQnMode);
         }
         String startMode = commandStartTokens[0];
@@ -381,22 +494,24 @@ public class Parser {
         String startQnMode = commandStartTokens[2];
         return new CommandStart(startMode, startDetails, startQnMode);
     }
+
     /**
      * Extracts the quiz mode from raw user input for start commands.
      * Respective information is extracted into commandStartTokens.
      *
-     * @param userInput Raw command entered by the user
+     * @param userInput          Raw command entered by the user
      * @param commandStartTokens Critical information chunks of start command
-     *                          commandEditTokens[0] contains quiz mode
-     *                          commandEditTokens[1] contains question selection details
-     *                          commandEditTokens[2] contains question mode
+     *                           commandEditTokens[0] contains quiz mode
+     *                           commandEditTokens[1] contains question selection
+     *                           details
+     *                           commandEditTokens[2] contains question mode
      */
     private static void extractQuizMode(String userInput, String[] commandStartTokens)
-            throws ArrayIndexOutOfBoundsException, IllegalArgumentException{
-        String[] inputSplitByArguments= userInput.split("/");
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
+        String[] inputSplitByArguments = userInput.split("/");
         String quizStartInfo = inputSplitByArguments[1].strip();
         String quizMode = quizStartInfo.split(" ")[0].strip();
-        if(quizMode.equals("")){
+        if (quizMode.equals("")) {
             throw new ArrayIndexOutOfBoundsException();
         } else if (!quizMode.equals("all") && !quizMode.equals("module")) {
             throw new IllegalArgumentException();
@@ -404,39 +519,43 @@ public class Parser {
             commandStartTokens[0] = quizMode;
         }
     }
+
     /**
      * Handles exceptions raised by incorrect quiz mode for start commands.
      *
      * @param quizModeException Exception raised by the program
      */
-    private static Command handleQuizModeExceptions(Exception quizModeException){
-        if(quizModeException instanceof ArrayIndexOutOfBoundsException) {
+    private static Command handleQuizModeExceptions(Exception quizModeException) {
+        if (quizModeException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandStart.MISSING_QUIZ_MODE_MSG + System.lineSeparator() +
                     CommandStart.INVALID_FORMAT_MSG);
-        } else if(quizModeException instanceof IllegalArgumentException) {
+        } else if (quizModeException instanceof IllegalArgumentException) {
             return new CommandInvalid(CommandStart.INVALID_QUIZ_MODE_MSG + System.lineSeparator() +
                     CommandStart.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
+
     /**
-     * Extracts the quiz start details from raw user input to select quiz questions for start commands.
+     * Extracts the quiz start details from raw user input to select quiz questions
+     * for start commands.
      * Respective information is extracted into commandStartTokens.
      *
-     * @param userInput Raw command entered by the user
+     * @param userInput          Raw command entered by the user
      * @param commandStartTokens Critical information chunks of start command
-     *                          commandEditTokens[0] contains quiz mode
-     *                          commandEditTokens[1] contains question selection details
-     *                          commandEditTokens[2] contains question mode
+     *                           commandEditTokens[0] contains quiz mode
+     *                           commandEditTokens[1] contains question selection
+     *                           details
+     *                           commandEditTokens[2] contains question mode
      */
     private static void extractQuizStartDetails(String userInput, String[] commandStartTokens)
-            throws ArrayIndexOutOfBoundsException, IllegalArgumentException{
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         String quizStartDetails;
-        if(commandStartTokens[0] == null || commandStartTokens[0].equals("")){
+        if (commandStartTokens[0] == null || commandStartTokens[0].equals("")) {
             throw new IllegalArgumentException();
         }
-        if(!commandStartTokens[0].equals("all")){
+        if (!commandStartTokens[0].equals("all")) {
             String[] inputSplitByQuizMode = userInput.split("/");
             String quizStartInfo = inputSplitByQuizMode[1].strip();
             quizStartDetails = quizStartInfo.split(commandStartTokens[0])[1].strip();
@@ -448,59 +567,63 @@ public class Parser {
         }
         commandStartTokens[1] = quizStartDetails;
     }
+
     /**
      * Handles exceptions raised by incorrect quiz start details for start commands.
      *
      * @param quizStartDetailsException Exception raised by the program
      */
-    private static Command handleQuizStartDetailsExceptions(Exception quizStartDetailsException){
-        if(quizStartDetailsException instanceof ArrayIndexOutOfBoundsException) {
+    private static Command handleQuizStartDetailsExceptions(Exception quizStartDetailsException) {
+        if (quizStartDetailsException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandStart.MISSING_START_DETAILS + System.lineSeparator() +
                     CommandStart.INVALID_FORMAT_MSG);
-        } else if(quizStartDetailsException instanceof IllegalArgumentException) {
+        } else if (quizStartDetailsException instanceof IllegalArgumentException) {
             return new CommandInvalid(CommandStart.INVALID_QUIZ_MODE_MSG + System.lineSeparator() +
                     CommandStart.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
+
     /**
      * Extracts the quiz question mode from raw user input for start commands.
      * Respective information is extracted into commandStartTokens.
      *
-     * @param userInput Raw command entered by the user
+     * @param userInput          Raw command entered by the user
      * @param commandStartTokens Critical information chunks of start command
-     *                          commandEditTokens[0] contains quiz mode
-     *                          commandEditTokens[1] contains question selection details
-     *                          commandEditTokens[2] contains question mode
+     *                           commandEditTokens[0] contains quiz mode
+     *                           commandEditTokens[1] contains question selection
+     *                           details
+     *                           commandEditTokens[2] contains question mode
      */
     private static void extractQuizQnMode(String userInput, String[] commandStartTokens)
-            throws ArrayIndexOutOfBoundsException, IllegalArgumentException{
-        String[] inputSplitByArguments= userInput.split("/");
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
+        String[] inputSplitByArguments = userInput.split("/");
         String qnMode = inputSplitByArguments[2].strip();
-        if(qnMode.isEmpty()){
+        if (qnMode.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
         } else if (inputSplitByArguments[2].split(" ").length != 1) {
             throw new IllegalArgumentException("Too Many Modes");
         } else if (!qnMode.equals("random") && !qnMode.equals("normal")) {
             throw new IllegalArgumentException("Invalid Mode");
-        } else if (inputSplitByArguments.length > 3){
+        } else if (inputSplitByArguments.length > 3) {
             throw new IllegalArgumentException("Too Many Arguments");
         } else {
             commandStartTokens[2] = qnMode;
         }
     }
+
     /**
      * Handles exceptions raised by incorrect edit criteria for edit commands.
      *
      * @param editCriteriaException Exception raised by the program
      */
-    private static Command handleQuizQnModeExceptions(Exception editCriteriaException){
-        if(editCriteriaException instanceof ArrayIndexOutOfBoundsException) {
+    private static Command handleQuizQnModeExceptions(Exception editCriteriaException) {
+        if (editCriteriaException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandStart.MISSING_QN_MODE_MSG + System.lineSeparator() +
                     CommandStart.INVALID_FORMAT_MSG);
-        } else if(editCriteriaException instanceof IllegalArgumentException) {
-            if(editCriteriaException.getMessage().equals("Invalid Mode")){
+        } else if (editCriteriaException instanceof IllegalArgumentException) {
+            if (editCriteriaException.getMessage().equals("Invalid Mode")) {
                 return new CommandInvalid(CommandStart.INVALID_QN_MODE_MSG + System.lineSeparator() +
                         CommandStart.INVALID_FORMAT_MSG);
             } else {
@@ -511,8 +634,10 @@ public class Parser {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
+
     /**
-     * Attempt to parse user input into a Mark Difficulty Command by extracting question index
+     * Attempt to parse user input into a Mark Difficulty Command by extracting
+     * question index
      * and question difficulty to be assigned to the question from the user input.
      *
      * @param userInput Raw command entered by the user
@@ -523,7 +648,7 @@ public class Parser {
         Question.QnDifficulty qnDifficulty;
         try {
             qnIndex = extractQnIndex(userInput, "markdiff");
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnIndex) {
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | QuizHubExceptions incorrectQnIndex) {
             return handleMarkDiffIndexExceptions(incorrectQnIndex);
         }
         try {
@@ -533,56 +658,64 @@ public class Parser {
         }
         return new CommandMarkDifficulty(qnIndex, qnDifficulty);
     }
+
     /**
-     * Extracts the question difficulty to be assigned from raw user input for markdiff commands.
+     * Extracts the question difficulty to be assigned from raw user input for
+     * markdiff commands.
      *
      * @param userInput Raw command entered by the user
      * @return QnDifficulty of Question Difficulty of Question
      */
     private static Question.QnDifficulty extractNewDifficulty(String userInput)
-            throws ArrayIndexOutOfBoundsException, IllegalArgumentException{
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         String[] inputSplitByQnDifficulty = userInput.split("/");
         String qnDifficultyString = inputSplitByQnDifficulty[1].strip();
-        if(qnDifficultyString.isEmpty()){
+        if (qnDifficultyString.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
-        } else if (qnDifficultyString.split(" ").length != 1 ||inputSplitByQnDifficulty.length != 2) {
+        } else if (qnDifficultyString.split(" ").length != 1 || inputSplitByQnDifficulty.length != 2) {
             throw new IllegalArgumentException();
         } else {
             return extractQuestionDifficulty(qnDifficultyString);
         }
     }
+
     /**
-     * Handles exceptions raised by incorrect question difficulty for markdiff commands.
+     * Handles exceptions raised by incorrect question difficulty for markdiff
+     * commands.
      *
      * @param qnDifficultyException Exception raised by the program
      * @return InvalidCommand with error messages
      */
-    private static Command handleQnDifficultyExceptions(Exception qnDifficultyException){
-        if(qnDifficultyException instanceof ArrayIndexOutOfBoundsException) {
+    private static Command handleQnDifficultyExceptions(Exception qnDifficultyException) {
+        if (qnDifficultyException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandMarkDifficulty.MISSING_DIFFICULTY_MSG + System.lineSeparator() +
                     CommandMarkDifficulty.INVALID_FORMAT_MSG);
-        } else if(qnDifficultyException instanceof IllegalArgumentException) {
+        } else if (qnDifficultyException instanceof IllegalArgumentException) {
             return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_DIFFICULTY_MSG + System.lineSeparator() +
                     CommandMarkDifficulty.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
+
     /**
      * Handles exceptions raised by incorrect question index for markdiff commands.
      *
      * @param markDiffIndexException Exception raised by the program
      * @return InvalidCommand with error messages
      */
-    private static Command handleMarkDiffIndexExceptions(Exception markDiffIndexException){
-        if(markDiffIndexException instanceof NumberFormatException) {
+    private static Command handleMarkDiffIndexExceptions(Exception markDiffIndexException) {
+        if (markDiffIndexException instanceof NumberFormatException) {
             return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG + System.lineSeparator() +
                     CommandMarkDifficulty.INVALID_FORMAT_MSG);
-        } else if(markDiffIndexException instanceof ArrayIndexOutOfBoundsException) {
+        } else if (markDiffIndexException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandMarkDifficulty.MISSING_INDEX_MSG + System.lineSeparator() +
                     CommandMarkDifficulty.INVALID_FORMAT_MSG);
-        } else if(markDiffIndexException instanceof IllegalArgumentException) {
+        } else if (markDiffIndexException instanceof IllegalArgumentException) {
             return new CommandInvalid(CommandMarkDifficulty.TOO_MANY_INDEX_MSG + System.lineSeparator() +
+                    CommandMarkDifficulty.INVALID_FORMAT_MSG);
+        } else if (markDiffIndexException instanceof QuizHubExceptions) {
+            return new CommandInvalid(CommandMarkDifficulty.INDEX_NOT_IN_RANGE_MSG + System.lineSeparator() +
                     CommandMarkDifficulty.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);

@@ -26,7 +26,7 @@ public class Quizhub {
         dataStorage = new Storage(filePath);
         questions = new QuestionList();
         ui = new Ui(dataStorage, questions);
-        parser = new Parser();
+        parser = new Parser(questions);
     }
     /**
      * Starts the QuizHub application by showing opening message.

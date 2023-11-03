@@ -48,7 +48,60 @@ public class MultipleChoiceQn extends Question {
         }
     }
 
-    // TODO: Make functionality to edit the question
+    public void editQuestion(String editField, String newValue) {
+        switch (editField) {
+        case "description":
+            if (super.getQuestionDescription().equals(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            super.editQuestion(editField, newValue);
+            break;
+        case "option1":
+            if (this.option1.equals(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            this.option1 = newValue;
+            break;
+        case "option2":
+            if (this.option2.equals(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            this.option2 = newValue;
+            break;
+        case "option3":
+            if (this.option3.equals(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            this.option3 = newValue;
+            break;
+        case "option4":
+            if (this.option4.equals(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            this.option4 = newValue;
+            break;
+        case "answer":
+            if (this.answer == Integer.parseInt(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            this.answer = Integer.parseInt(newValue);
+            break;
+        default:
+            break;
+        }
+        System.out.println("Question edited!");
+    }
 
-    // TODO: Add getQuestionDescription to present in
+    @Override
+    public String getQuestionDescription() {
+        return super.getQuestionDescription().strip() + " / " + this.option1.strip() + " / " + this.option2.strip() +
+                " / " + this.option3.strip() + " / " + this.option4.strip() + " / " + this.answer + " | " +
+                super.getModule() + " | " + super.getDifficulty().toString();
+    }
 }

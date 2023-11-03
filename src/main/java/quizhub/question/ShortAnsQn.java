@@ -37,14 +37,24 @@ public class ShortAnsQn extends Question {
     }
 
     @Override
-    public void editQuestion(String newDescription, String newAnswer) {
-        super.editQuestion(newDescription, newAnswer);
-        if(newAnswer != null && newAnswer.equals(this.answer)){
-            System.out.println("    Answer is already set as " + this.answer + "!" + System.lineSeparator() +
-                    QN_UNCHANGED_MSG);
-        } else if(newAnswer != null && !newAnswer.equals("")){
-            this.answer = newAnswer;
-            System.out.println("    Roger that! I have edited the following question >w< !");
+    public void editQuestion(String editField, String newValue) {
+        switch (editField) {
+        case "description":
+            if (super.getQuestionDescription().equals(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            super.editQuestion(editField, newValue);
+            break;
+        case "answer":
+            if (this.answer.equals(newValue)) {
+                displayEditErrorMessage(editField);
+                break;
+            }
+            this.answer = newValue;
+            break;
+        default:
+            break;
         }
     }
     /**

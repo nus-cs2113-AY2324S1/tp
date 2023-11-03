@@ -8,17 +8,24 @@ import quizhub.ui.Ui;
  */
 public class CommandEdit extends Command {
     public static final String COMMAND_WORD = "edit";
-    public static final String INVALID_FORMAT_MSG = "    Please format your input as edit [question number] " +
-            "/description [description] or /answer [answer]!";
+    public static final String INVALID_FORMAT_MSG = "    Please format your input as:" + System.lineSeparator() +
+            "    edit [question number] " +
+            "/description [new description] or /answer [new answer]! for short answer questions and" +
+            System.lineSeparator() +
+            "    edit [question number] /description [new description] or /answer [new answer] or " + 
+            "/option[number] [new value] for multiple choice questions";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
-    public static final String TOO_MANY_INDEX_MSG = "    Ono! You tried to edit more than 1 question :<";
+    public static final String TOO_MANY_INDEX_MSG = "    Ono! You cannot enter more than 1 valid integer index :<";
     public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate if " +
             "you are editing question description or answer :<";
-    public static final String INVALID_CRITERIA_MSG = "    Ono! You tried to edit by a criteria other than " +
-            "description or answer :<";
+    public static final String INVALID_CRITERIA_MSG = "    Ono! You tried to edit by an unknown criteria :<";
     public static final String TOO_MANY_CRITERIA_MSG = "    Ono! You tried to edit using more than 1 question " +
-            "component :<";
-    public static final String MISSING_KEYWORD_MSG = "    Ono! You did not enter a new description / answer :<";
+            "fields :<";
+    public static final String MISSING_KEYWORD_MSG = "    Ono! You did not enter a field of the question to edit :<";
+    public static final String INVALID_SHORT_ANSWER_CRITERIA_MSG = "    Ono! Short answer questions can only be " +
+            "edited by description or answer :<";
+    public static final String INDEX_NOT_IN_RANGE_MSG = "    Ono! The question index you entered is not in the " +
+            "range of the question list :<";
     private int qnIndex;
     private String newDescription;
     private String newAnswer;
@@ -26,9 +33,10 @@ public class CommandEdit extends Command {
     /**
      * Creates a new edit command
      *
-     * @param qnIndex Question index in current question list.
-     * @param newDescription New description to replace the current question description with.
-     * @param newAnswer New answer to replace the current question answer with.
+     * @param qnIndex        Question index in current question list.
+     * @param newDescription New description to replace the current question
+     *                       description with.
+     * @param newAnswer      New answer to replace the current question answer with.
      */
     public CommandEdit(int qnIndex, String newDescription, String newAnswer) {
         super(CommandType.EDIT);

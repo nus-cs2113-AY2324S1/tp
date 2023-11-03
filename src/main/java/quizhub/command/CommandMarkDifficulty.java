@@ -16,6 +16,8 @@ public class CommandMarkDifficulty extends Command{
     public static final String INVALID_FORMAT_MSG = "    Please format your input as markdiff " +
             "[qn number] /[qn difficulty]!";
     public static final String TOO_MANY_DIFFICULTY_MSG = "    Ono! You tried to assign more than 1 difficulty level :<";
+    public static final String INDEX_NOT_IN_RANGE_MSG = "    Ono! The question index you entered is not in the " +
+            "range of the question list :<";
     private final int qnIndex;
     private final Question.QnDifficulty qnDifficulty;
     /**
