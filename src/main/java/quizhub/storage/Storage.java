@@ -79,7 +79,7 @@ public class Storage {
                 }
                 questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4, answer, qnModule,
                         difficulty, false);
-                if (qnDoneStatus.equals("done")) {
+                if (qnDoneStatus.equalsIgnoreCase("done")) {
                     questions.markQuestionAsDone(questions.getQuestionListSize(), false);
                 }
                 return 0;
@@ -109,6 +109,10 @@ public class Storage {
                 String questionModule = questionSubStrings[3].strip();
                 String questionDifficulty = questionSubStrings[4].strip();
                 Question.QnDifficulty difficulty = Parser.extractQuestionDifficulty(questionDifficulty);
+                if (difficulty == Question.QnDifficulty.INVALID) {
+                    failedQuestions++;
+                    continue;
+                }
                 failedQuestions += addQuestionFromFile(questions, questionType, questionDescription,
                         questionDoneStatus, difficulty, questionModule);
             } catch (ArrayIndexOutOfBoundsException e) {
