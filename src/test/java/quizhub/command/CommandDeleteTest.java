@@ -31,7 +31,7 @@ public class CommandDeleteTest {
     public void setQuestionList(@TempDir Path tempDir) throws IOException {
         Path tempFile = tempDir.resolve("testStorage.txt");
         questionList = new QuestionList();
-        parser = new Parser();
+        parser = new Parser(questionList);
         mockStorage = new MockStorage(tempFile.toString());
         ui = new Ui(mockStorage, questionList);
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",

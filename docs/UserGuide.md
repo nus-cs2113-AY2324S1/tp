@@ -64,6 +64,8 @@ difficulty level.
 
 Format: `short [question]/[answer]/[module]/[difficulty]`
 * The difficulty level should only be of `easy`, `normal`, and `hard`
+* The ` / ` character should be replaced ` \slash ` keyword instead.
+* The ` | ` character is not allowed and will be removed if present in any fields.
 
 Example of usage:
 * **Command**: `short What is the value of Pi to 2 decimal places?/3.14/math/easy` <br>
@@ -155,8 +157,10 @@ by referencing the number of the question in the existing question list in the q
 and answer bank.
 
 Format:
-1. `edit [question number] /description [newDescription]`
-2. `edit [question number] /answer [newAnswer]`
+1. Use `edit [question number] /description [newDescription]` to edit description
+2. Use `edit [question number] /answer [newAnswer]` to edit answer
+3. The ` / ` character should be replaced ` \slash ` keyword instead
+4. The ` | ` character is not allowed and will be removed if present in any fields
 
 Examples of usage:
 * **Command**: `edit 1 /description change description!!!` <br>

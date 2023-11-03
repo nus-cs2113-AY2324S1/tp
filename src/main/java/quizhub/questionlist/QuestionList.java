@@ -144,7 +144,7 @@ public class QuestionList {
     public void markQuestionAsDone (int index, boolean showMessage){
         Question question = null;
         try{
-            int oneIndexed = index--;
+            int oneIndexed = index-1;
             question = allQns.get(oneIndexed);
         } catch (IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");

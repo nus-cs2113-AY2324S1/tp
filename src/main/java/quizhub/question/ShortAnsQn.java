@@ -44,7 +44,7 @@ public class ShortAnsQn extends Question {
                 displayEditErrorMessage(editField);
                 break;
             }
-            super.editQuestion(editField, newValue);
+            super.editQuestion(newValue, "");
             break;
         case "answer":
             if (this.answer.equals(newValue)) {
