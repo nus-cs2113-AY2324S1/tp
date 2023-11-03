@@ -202,21 +202,19 @@ public class Parser {
     private static Command parseShortAnswerCommand(String userInput) {
         assert userInput != null : "Invalid Null Command!";
         try {
-            // Split the input by '/' to separate the parts
-            String[] inputTokens = userInput.replace(
+            String[] tokens = userInput.replace(
                     CommandShortAnswer.COMMAND_WORD, "").strip().split("/");
-            // Check if there are exactly 4 parts (description, answer, module, difficulty)
-            if (inputTokens.length > CommandShortAnswer.ARGUMENT_SIZE) {
+            if (tokens.length > CommandShortAnswer.ARGUMENT_SIZE) {
                 return new CommandInvalid(CommandShortAnswer.TOO_MANY_ARGUMENTS_MSG);
             }
             // Extract the values for description, answer, module, and difficulty
-            String description = inputTokens[0].strip();
+            String description = tokens[0].strip().replace("\\slash", "/").replace("|", "");
             boolean isFieldEmpty = description.isEmpty();
-            String answer = inputTokens[1].strip();
+            String answer = tokens[1].strip().replace("\\slash", "/").replace("|", "");
             isFieldEmpty = isFieldEmpty || answer.isEmpty();
-            String module = inputTokens[2].strip();
+            String module = tokens[2].strip().replace("\\slash", "/").replace("|", "");
             isFieldEmpty = isFieldEmpty || module.isEmpty();
-            String difficulty = inputTokens[3].strip();
+            String difficulty = tokens[3].strip();
             isFieldEmpty = isFieldEmpty || difficulty.isEmpty();
             if (isFieldEmpty) {
                 return new CommandInvalid(CommandShortAnswer.MISSING_FIELDS_MSG +
@@ -316,7 +314,7 @@ public class Parser {
             return handleEditNewValuesExceptions(invalidEditCriteria);
         }
         String editField = commandEditTokens[0];
-        String newValue = commandEditTokens[1];
+        String newValue = commandEditTokens[1].replace("\\slash", "/").replace("|", "");
         return new CommandEdit(qnIndex, editField, newValue);
     }
 

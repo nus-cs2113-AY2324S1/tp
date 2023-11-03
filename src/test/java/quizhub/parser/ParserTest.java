@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import quizhub.command.Command;
 import quizhub.command.CommandDelete;
 import quizhub.command.CommandInvalid;
+import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
@@ -15,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
 
+    private QuestionList questionList;
     private Parser parser;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
-        parser = new Parser();
+        parser = new Parser(questionList);
     }
 
     /**
