@@ -74,12 +74,18 @@ public class Duke {
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
-            String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
-            ui.showResultToUser(result);
-
-        } while (!ExitCommand.isExit(command));
+            try {
+                String userCommandText = ui.getUserCommand();
+                command = new Parser().parseCommand(userCommandText);
+                CommandResult result = executeCommand(command);
+                ui.showResultToUser(result);
+                if (ExitCommand.isExit(command)) {
+                    break;
+                }
+            } catch (Exception e) {
+                ui.showToUser(e.getMessage());
+            }
+        } while (true);
     }
 
     /**
