@@ -86,7 +86,7 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: It is not suggested to transfer data between machines. The purpose of the app is develped solely for personal use. Nonetheless, you can copy the back_up file named [] under the folder [] into your new computer to restore you data. Please put the file the same [name] folder.
 
 ## Command Summary
 
