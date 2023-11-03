@@ -40,8 +40,8 @@ public class LogCommand extends Command {
         }
         int caloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
 
-        String exerciseDescription = Duke.exerciseLog.addExercise(month, day, exerciseName.strip(), caloriesBurned);
+        String exerciseDescription = Duke.exerciseLog.addExercise(month, day, exerciseName.trim(), caloriesBurned);
 
-        return new CommandResult((feedbackToUser + exerciseDescription).strip());
+        return new CommandResult((feedbackToUser + exerciseDescription).trim());
     }
 }

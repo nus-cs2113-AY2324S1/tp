@@ -38,8 +38,7 @@ public class DeleteLogCommand extends Command {
         }
         int caloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
 
-
-        feedbackToUser = Duke.exerciseLog.removeExercise(month, day, exerciseName.strip(), caloriesBurned) ?
+        feedbackToUser = Duke.exerciseLog.removeExercise(month, day, exerciseName.trim(), caloriesBurned) ?
                 "Successfully removed exercise!" :
                 "Could not find the specified exercise!";
 
