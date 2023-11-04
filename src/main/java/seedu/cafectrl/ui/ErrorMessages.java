@@ -40,4 +40,5 @@ public class ErrorMessages {
     public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: Incorrect format for the show_sale "
             + "command.\n";
     public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer for the 'day' field!";
+    public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, is that what you want?";
 }
