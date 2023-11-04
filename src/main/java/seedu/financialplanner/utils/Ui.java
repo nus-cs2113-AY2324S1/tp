@@ -1,5 +1,6 @@
 package seedu.financialplanner.utils;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import seedu.financialplanner.investments.Stock;
 import seedu.financialplanner.investments.WatchList;
@@ -83,6 +84,17 @@ public class Ui {
     public void printStocksInfo(WatchList watchList) {
         for (Map.Entry<String, Stock> set : watchList.getStocks().entrySet()) {
             Stock stock = set.getValue();
+
+            if (!ObjectUtils.allNotNull(
+                    stock.getPrice(),
+                    stock.getDayHigh(),
+                    stock.getDayLow(),
+                    stock.getLastUpdated(),
+                    stock.getExchange()
+            )) {
+                System.out.println(stock.getStockName() + " (" + stock.getSymbol() + ") is not found on FMP");
+                continue;
+            }
 
             String symbol = StringUtils.rightPad(stock.getSymbol(), 10);
             String market = StringUtils.rightPad(stock.getExchange(), 10);
