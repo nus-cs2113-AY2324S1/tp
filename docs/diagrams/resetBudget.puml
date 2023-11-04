@@ -20,7 +20,7 @@ alt spentBudget
     return
     BudgetCommand -> Ui: printResetBudget()
     return
-else !hasBudget
+else Does not have Budget
     BudgetCommand -> Ui: printBudgetError("delete")
     return
 else else
