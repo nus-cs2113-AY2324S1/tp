@@ -215,7 +215,7 @@ viewmeal
 These are the meals you have consumed:
 1.[M] aglio alio pasta (100kcal, 2023-10-29)
 2.[M] chips (50kcal, 2023-10-29)
-3.[M] cabonara pasta (100kcal, 2023-10-29)
+3.[M] carbonara pasta (100kcal, 2023-10-29)
 ```
 
 
@@ -234,7 +234,7 @@ findmeal pasta
 ```
 These meals contain the keyword pasta:
 1.[M] aglio alio pasta (100kcal, 2023-10-29)
-2.[M] cabonara pasta (100kcal, 2023-10-29)
+2.[M] carbonara pasta (100kcal, 2023-10-29)
 There are 2 meals that contains pasta.
 ```
 
