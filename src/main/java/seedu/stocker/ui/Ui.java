@@ -23,6 +23,7 @@ import static seedu.stocker.common.Messages.MESSAGE_INVALID_USERNAME_OR_PASSWORD
 import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_REGISTRATION;
 import static seedu.stocker.common.Messages.MESSAGE_INIT_FAILED;
 import static seedu.stocker.common.Messages.MESSAGE_EXECUTION_FAILED;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_LOGIN_CHARACTER;
 
 
 public class Ui {
@@ -135,6 +136,8 @@ public class Ui {
     public void showWelcomeMessage() {
         showToUser(MESSAGE_WELCOME, DIVIDER, DIVIDER);
     }
+
+    public void showInvalidLoginCharacterMessage(){showToUser(MESSAGE_INVALID_LOGIN_CHARACTER);}
 
     public void showGoodbyeMessage() {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);

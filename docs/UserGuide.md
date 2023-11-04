@@ -144,6 +144,7 @@ Expected outcome:
 ```
 Login Successful.
 ```
+Note
 
 ### `add` - Adds drug into inventory list
 

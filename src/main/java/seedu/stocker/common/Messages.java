@@ -29,4 +29,7 @@ public class Messages {
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise Stocker application. Exiting...";
     public static final String MESSAGE_EXECUTION_FAILED = "Exection of the command failed because of I/O error, "
         + "please try later.";
+
+    public static final String MESSAGE_INVALID_LOGIN_CHARACTER = " Do not include : in the username or password, enter"
+            + " another username or password";
 }
