@@ -788,6 +788,28 @@ Existing data will be automatically loaded when the program starts up.
 
 **A**: {your answer here}
 
+**Q**: Should I edit the watchlist.json file?
+
+**A**: You should not edit the watchlist.json file unless you are very familiar with the format used.
+If you would like to edit the watchlist.json file directly to manipulate your watchlist, please follow the instructions
+above in the watchlist feature section. However, do note that there is risk of file corruption.
+
+**Q**: How is the radar chart derived? 
+
+**A**: To obtain the radar chart in our application, the income/expense category with the highest amount is noted.
+After which, amounts of all other categories are taken as a ratio of the maximum category. The ratios are then displayed
+in the radar chart
+
+**Q**: Why can't I add Singapore exchange stocks or other exchange stocks using the add stock command? 
+
+**A**: Due to the restrictions of the free API provided, only US-exchange stocks are provided. Sorry for the
+inconvenience caused
+
+**Q**: Why is saying that the API is done or something?
+
+**A**: Due to the free nature of the API, there is a restriction in the number of requests allowed in a specific time
+window. Sorry for the inconvenience caused.
+
 ## Command Summary
 
 {Give a 'cheat sheet' of commands here}
