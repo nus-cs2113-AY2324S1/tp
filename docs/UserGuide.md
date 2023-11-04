@@ -500,6 +500,8 @@ GOOGL     NASDAQ    124.46    125.4          122.75        Alphabet Inc - Class 
 AAPL      NASDAQ    170.29    171.17         168.87        Apple Inc                     Tue, Oct 31 2023 04:00:02
 ```
 
+- Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
+
 Format of watchlist output:
 
 | Symbol                                                 | Market                                | Price                                          | Daily High                     | Daily Low                     | Equity Name            | Last Updated                                                            |
@@ -525,7 +527,7 @@ Meta Platforms Inc - Class A
 Use Watchlist to view it!
 ```
 
-- Note: Due to the free nature of the API (Alphpa Vantage and FMP), only US stock prices quote will be provided by
+- Note: Due to the free nature of the API (Alpha Vantage and FMP), only US stock prices quote will be provided by
 this application. Sorry for the inconvenience caused.
 - Note: Due to the free nature of the API, there will be a cap of **five** stocks in the watchlist
 
@@ -545,7 +547,7 @@ Meta Platforms Inc - Class A
 Use watchlist command to view updated Watchlist
 ```
 
-- Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
+- Note: Delete stock command is case-sensitive. Please enter the exact stock code of the stock that you have added.
 
 ### watchlist.json 
 
