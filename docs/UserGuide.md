@@ -66,8 +66,9 @@ you a one-stop interface to access a plethora of features to manage your finance
 - Cashflow refers to an income or expense.
 
 ### Notes about program limitations
-- Maximum amount and balance the program can hold is 999,999,999,999.99
-- Minimum amount and balance the program can hold is -999,999,999,999.99
+- Maximum amount for each cashflow and total balance that the program can hold is 999,999,999,999.99
+- Minimum amount for each cashflow and total balance that the program can hold is -999,999,999,999.99
+- Total balance is separate from Income Balance and Expense Balance, where the latter do not have the same limitations.
 
 ### Add cashflow
 

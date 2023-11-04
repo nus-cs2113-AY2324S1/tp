@@ -49,6 +49,7 @@ public class Income extends Cashflow{
         }
 
         balance = tempBalance;
+        incomeBalance += this.amount;
     }
 
     @Override

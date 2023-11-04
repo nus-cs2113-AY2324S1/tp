@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 public abstract class Cashflow {
 
     protected static double balance = 0;
+    protected static double incomeBalance = 0;
+    protected static double expenseBalance = 0;
     protected double amount;
     protected int recur;
     protected String description;
@@ -99,6 +101,14 @@ public abstract class Cashflow {
 
     public static double getBalance() {
         return balance;
+    }
+
+    public static double getIncomeBalance() {
+        return incomeBalance;
+    }
+
+    public static double getExpenseBalance() {
+        return expenseBalance;
     }
 
     public int getRecur() {
