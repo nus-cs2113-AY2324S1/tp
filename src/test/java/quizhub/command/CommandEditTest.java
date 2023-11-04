@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.io.TempDir;
-import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
 import quizhub.storage.MockStorage;

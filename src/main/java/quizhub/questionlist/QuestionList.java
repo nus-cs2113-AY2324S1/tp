@@ -122,8 +122,7 @@ public class QuestionList {
         String questionTypeIdentifier = "";
         if(question.getQuestionType() == SHORTANSWER){
             questionTypeIdentifier = "S";
-        } 
-        else if(question.getQuestionType() == MULTIPLECHOICE){
+        } else if(question.getQuestionType() == MULTIPLECHOICE){
             questionTypeIdentifier = "M";
         }
         if(asList) {
