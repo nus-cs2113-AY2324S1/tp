@@ -143,7 +143,7 @@ Adds a drug to be tracked by the system.
 
 Format:
 
-add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY
+add /n DRUG_NAME /d EXPIRY_DATE  /s SERIAL_NUMBER /q QUANTITY
 
 Example of usage:
 
