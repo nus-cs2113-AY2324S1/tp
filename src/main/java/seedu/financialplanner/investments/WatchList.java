@@ -26,6 +26,11 @@ public class WatchList {
     private static final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
     private HashMap<String, Stock> stocks;
 
+    private WatchList() {
+        stocks = LoadData.loadWatchList();
+        cleanUpLoadedWatchList();
+    }
+
     private void cleanUpLoadedWatchList() {
         if (stocks == null) {
             stocks = initalizeNewWatchlist();
@@ -57,11 +62,6 @@ public class WatchList {
         baseStocks.put(google.getSymbol(), google);
 
         return baseStocks;
-    }
-
-    private WatchList() {
-        stocks = LoadData.loadWatchList();
-        cleanUpLoadedWatchList();
     }
 
     public static WatchList getInstance() {
