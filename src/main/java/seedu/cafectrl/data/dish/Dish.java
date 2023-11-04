@@ -1,11 +1,13 @@
 package seedu.cafectrl.data.dish;
 
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class Dish {
     private String name;
     private ArrayList<Ingredient> ingredients;
     private float price;
+    private final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
     public Dish(String name, ArrayList<Ingredient> ingredients, float price) {
         this.name = name;
@@ -36,6 +38,10 @@ public class Dish {
 
     @Override
     public String toString() {
-        return this.name + " $" + this.price;
+        return this.name + " $" + this.dollarValue.format(this.price);
+    }
+
+    public int comparePrice(float newPrice) {
+        return this.dollarValue.format(price).compareTo(this.dollarValue.format(newPrice));
     }
 }

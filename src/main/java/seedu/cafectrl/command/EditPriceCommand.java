@@ -2,6 +2,7 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 //@@author ziyi105
@@ -26,13 +27,19 @@ public class EditPriceCommand extends Command {
         this.ui = ui;
     }
 
+    //@@author ziyi105
     /**
      * Set new price of the dish and show edit price message
      */
     public void execute() {
         Dish dish = menu.getDishFromId(this.menuID - Ui.OFFSET_LIST_INDEX);
-        dish.setPrice(this.newPrice);
 
-        ui.showEditPriceMessage(dish.toString());
+        // Checks for original price
+        if (dish.comparePrice(this.newPrice) == 0) {
+            this.ui.showToUser(ErrorMessages.EDIT_SAME_PRICE);
+        } else {
+            dish.setPrice(this.newPrice);
+            ui.showEditPriceMessage(dish.toString());
+        }
     }
 }
