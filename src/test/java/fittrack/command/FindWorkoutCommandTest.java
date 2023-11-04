@@ -21,7 +21,7 @@ class FindWorkoutCommandTest {
     private final String result1 = "These workouts contain the keyword run:\n" +
             "1.[W] short run (120kcal, 2023-10-31)\n" +
             "3.[W] long run (80kcal, 2023-10-28)\n" +
-            "There are 0 workouts that contains run.";
+            "There are 2 workouts that contains run.";
     private final String result2 = "Sorry, there are no such workouts found.";
 
 
