@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CalorieSumCommandTest {
+public class CaloriesConsumedCommandTest {
     private final MealList mealList = new MealList();
 
     @BeforeEach
@@ -24,10 +24,10 @@ public class CalorieSumCommandTest {
 
     @Test
     public void testExecute(){
-        CalorieSumCommand calorieSumCommand = new CalorieSumCommand(CalorieSumCommand.COMMAND_WORD);
-        calorieSumCommand.mealList = mealList;
-        calorieSumCommand.execute();
-        assertEquals(calorieSumCommand.getCalorieSum(), 600);
+        CaloriesConsumedCommand caloriesConsumedCommand = new CaloriesConsumedCommand(CaloriesConsumedCommand.COMMAND_WORD);
+        caloriesConsumedCommand.mealList = mealList;
+        caloriesConsumedCommand.execute();
+        assertEquals(caloriesConsumedCommand.getCaloriesConsumed().value, 600);
 
     }
 
