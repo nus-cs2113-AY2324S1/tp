@@ -1,11 +1,14 @@
 package cashleh;
 
+import cashleh.budget.Budget;
+import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehFileCorruptedException;
 import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.exceptions.CashLehReadFromFileException;
 import cashleh.exceptions.CashLehWriteToFileException;
 import cashleh.transaction.Expense;
 import cashleh.transaction.ExpenseStatement;
+import cashleh.transaction.FinancialStatement;
 import cashleh.transaction.Income;
 import cashleh.transaction.IncomeStatement;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +28,8 @@ public class FileStorageTest {
     private IncomeStatement incomeStatement;
     private ExpenseStatement expenseStatement;
 
+    private BudgetHandler budgetHandler;
+
     @BeforeEach
     void setUp() {
         // Prepare a test instance of FileStorage
@@ -33,14 +38,16 @@ public class FileStorageTest {
         // Initialize IncomeStatement and ExpenseStatement
         incomeStatement = new IncomeStatement();
         expenseStatement = new ExpenseStatement();
+
+        budgetHandler = new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement), new Budget());
     }
 
     @Test
     void testReadAndWriteToFile() throws CashLehMissingTransactionException, CashLehWriteToFileException,
             CashLehFileCorruptedException, CashLehReadFromFileException {
         // Read data from clean file
-        fileStorage.writeToFile(incomeStatement, expenseStatement); // Clean the file
-        fileStorage.readFromFile(incomeStatement, expenseStatement);
+        fileStorage.writeToFile(incomeStatement, expenseStatement, budgetHandler); // Clean the file
+        fileStorage.readFromFile(incomeStatement, expenseStatement, budgetHandler);
 
         assertEquals(0, incomeStatement.getSize());
         assertEquals(0, expenseStatement.getSize());
@@ -58,7 +65,7 @@ public class FileStorageTest {
         expenseStatement.addExpense(expense2);
 
         // Write data to the file
-        fileStorage.writeToFile(incomeStatement, expenseStatement);
+        fileStorage.writeToFile(incomeStatement, expenseStatement, budgetHandler);
 
         // Verify that the data matches what was written
         assertEquals(2, incomeStatement.getSize());
@@ -89,6 +96,6 @@ public class FileStorageTest {
 
         // Attempt to read from the corrupted file
         assertThrows(CashLehFileCorruptedException.class,
-            () -> fileStorage.readFromFile(incomeStatement, expenseStatement));
+            () -> fileStorage.readFromFile(incomeStatement, expenseStatement, budgetHandler));
     }
 }

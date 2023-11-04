@@ -9,6 +9,10 @@ package cashleh.budget;
 public class Budget {
     private final double budget;
     private boolean isActive;
+    public Budget() {
+        this.budget = 1; // dummy value
+        this.isActive = false;
+    }
     public Budget(double budget) {
         this.budget = budget;
         this.isActive = false;
