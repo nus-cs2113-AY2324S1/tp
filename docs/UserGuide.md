@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Stocker v1.o is a desktop app that will provide quick access to currently available stock,
+Stocker is a desktop app that will provide quick access to currently available stock,
 track incoming stock and expiration dates, and categorize drugs based on different labels.
 It is optimized for use via a Command Line Interface (CLI). If you can type fast, Stocker
 can get your inventory management tasks done faster than traditional GUI apps.
@@ -604,6 +604,10 @@ Expected outcome:
 **Q**: Can i register with blank username and password
 
 **A**: No. Ensure your entries are not blank.
+
+**Q**: Why can i register and login again even after being logged in
+
+**A**: A user is able to login another user or can help to register a new user without rebooting the application
 
 ## Command Summary
 
