@@ -192,7 +192,10 @@ public class WatchList {
         if (stocks.isEmpty()) {
             throw new FinancialPlannerException("No stock in watchlist!");
         }
-        Stock removedStock = stocks.remove(stockCode.toUpperCase()); // should be uppercase already
+        Stock removedStock = stocks.remove(stockCode);
+        if (removedStock == null) {
+            removedStock = stocks.remove(stockCode.toUpperCase());
+        }
         if (removedStock == null) {
             throw new FinancialPlannerException("Does not Exist in Watchlist");
         }
