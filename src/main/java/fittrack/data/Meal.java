@@ -21,7 +21,7 @@ public class Meal {
         return calories;
     }
 
-    public Date getMealDate() {
+    public Date getDate() {
         return this.date;
     }
 

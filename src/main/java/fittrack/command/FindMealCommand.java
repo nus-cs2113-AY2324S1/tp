@@ -12,7 +12,7 @@ public class FindMealCommand extends Command {
     public static final String COMMAND_WORD = "findmeal";
     private static final String DESCRIPTION =
             String.format("`%s` finds the meal you are looking for in your meal list.", COMMAND_WORD);
-    private static final String USAGE = String.format("Type `%s <keyword>` to find a meal.\n", COMMAND_WORD);
+    private static final String USAGE = String.format("Type `%s <KEYWORD>` to find a meal.\n", COMMAND_WORD);
 
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
     private Ui ui = new Ui();
@@ -42,7 +42,7 @@ public class FindMealCommand extends Command {
         if (!mealFound) {
             return new CommandResult("Sorry, there are no such meals found.");
         }
-        return new CommandResult("There are " + numFound + " meals that contains " + keyword);
+        return new CommandResult("There are " + numFound + " meals that contains " + keyword + ".");
     }
 
     @Override

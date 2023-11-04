@@ -12,7 +12,7 @@ public class FindWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "findworkout";
     private static final String DESCRIPTION =
             String.format("`%s` finds the workout you are looking for in your workout list.", COMMAND_WORD);
-    private static final String USAGE = String.format("Type `%s <keyword>` to find a workout.\n", COMMAND_WORD);
+    private static final String USAGE = String.format("Type `%s <KEYWORD>` to find a workout.\n", COMMAND_WORD);
 
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
     private Ui ui = new Ui();
@@ -42,7 +42,7 @@ public class FindWorkoutCommand extends Command {
         if (!workoutFound) {
             return new CommandResult("Sorry, there are no such workouts found.");
         }
-        return new CommandResult("There are " + numFound + " workouts that contains " + keyword);
+        return new CommandResult("There are " + numFound + " workouts that contains " + keyword + ".");
     }
 
     @Override
