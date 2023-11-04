@@ -99,6 +99,11 @@ public class MultipleChoiceQn extends Question {
     }
 
     @Override
+    public QnType getQuestionType(){
+        return QnType.MULTIPLECHOICE;
+    }
+
+    @Override
     public String getQuestionDescription() {
         return super.getQuestionDescription().strip() + " / " + this.option1.strip() + " / " + this.option2.strip() +
                 " / " + this.option3.strip() + " / " + this.option4.strip() + " / " + this.answer + " | " +
