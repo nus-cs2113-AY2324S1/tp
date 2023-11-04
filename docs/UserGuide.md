@@ -1,5 +1,13 @@
 # User Guide
 
+## Table of contents
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Usage](#usage)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+
 ## Introduction
 
 Stocker is a desktop app that will provide quick access to currently available stock,
