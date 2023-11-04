@@ -9,20 +9,7 @@ import java.util.ArrayList;
 
 import seedu.stocker.commands.CommandResult;
 
-import static seedu.stocker.common.Messages.MESSAGE_USERNAME_INPUT;
-import static seedu.stocker.common.Messages.MESSAGE_USER_ALREADY_EXIST;
-import static seedu.stocker.common.Messages.MESSAGE_LOGIN_WELCOME;
-import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_LOGIN;
-import static seedu.stocker.common.Messages.MESSAGE_NO_BLANK_NAME_ALLOWED;
-import static seedu.stocker.common.Messages.MESSAGE_NO_BLANK_PASSWORD_ALLOWED;
-import static seedu.stocker.common.Messages.MESSAGE_PASSWORD_INPUT;
-import static seedu.stocker.common.Messages.MESSAGE_WELCOME;
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_CHOICE;
-import static seedu.stocker.common.Messages.MESSAGE_GOODBYE;
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_USERNAME_OR_PASSWORD;
-import static seedu.stocker.common.Messages.MESSAGE_SUCCESSFUL_REGISTRATION;
-import static seedu.stocker.common.Messages.MESSAGE_INIT_FAILED;
-import static seedu.stocker.common.Messages.MESSAGE_EXECUTION_FAILED;
+import static seedu.stocker.common.Messages.*;
 
 
 public class Ui {
@@ -135,6 +122,8 @@ public class Ui {
     public void showWelcomeMessage() {
         showToUser(MESSAGE_WELCOME, DIVIDER, DIVIDER);
     }
+
+    public void showInvalidLoginCharacterMessage(){showToUser(MESSAGE_INVALID_LOGIN_CHARACTER);}
 
     public void showGoodbyeMessage() {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);

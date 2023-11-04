@@ -74,6 +74,11 @@ public class LoginSystem {
             username = in.nextLine();
         }
 
+        while (username.trim().contains(":")){
+            interactor.showInvalidLoginCharacterMessage();
+            username = in.nextLine();
+        }
+
         interactor.showPasswordMessage();
         String password = in.nextLine();
 
@@ -81,6 +86,12 @@ public class LoginSystem {
             interactor.showBlankPasswordMessage();
             password = in.nextLine();
         }
+
+        while(password.trim().contains(":")){
+            interactor.showInvalidLoginCharacterMessage();
+            password = in.nextLine();
+        }
+
         assert (username.equals("") == false);
         assert (password.equals("") == false);
 
