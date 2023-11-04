@@ -1,17 +1,6 @@
 package seedu.cafectrl.ui;
 
-import seedu.cafectrl.command.AddDishCommand;
-import seedu.cafectrl.command.AddOrderCommand;
-import seedu.cafectrl.command.BuyIngredientCommand;
-import seedu.cafectrl.command.DeleteDishCommand;
-import seedu.cafectrl.command.EditPriceCommand;
-import seedu.cafectrl.command.ExitCommand;
-import seedu.cafectrl.command.HelpCommand;
-import seedu.cafectrl.command.ListIngredientCommand;
-import seedu.cafectrl.command.ListMenuCommand;
-import seedu.cafectrl.command.NextDayCommand;
-import seedu.cafectrl.command.PreviousDayCommand;
-import seedu.cafectrl.command.ViewTotalStockCommand;
+import seedu.cafectrl.command.*;
 
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
@@ -132,7 +121,8 @@ public class Ui {
                 ListMenuCommand.MESSAGE_USAGE,
                 NextDayCommand.MESSAGE_USAGE,
                 PreviousDayCommand.MESSAGE_USAGE,
-                ViewTotalStockCommand.MESSAGE_USAGE);
+                ViewTotalStockCommand.MESSAGE_USAGE,
+                ShowSalesByDayCommand.MESSAGE_USAGE);
     }
 
     public void showToUserWithSpaceBetweenLines(String... message) {

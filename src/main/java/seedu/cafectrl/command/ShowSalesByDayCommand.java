@@ -4,10 +4,11 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
+//@@author NaychiMin
 public class ShowSalesByDayCommand extends Command {
     public static final String COMMAND_WORD = "show_sale";
-    public static final String MESSAGE_USAGE = "To show sales for a chosen day:\n "
-            + "Command Format:" + COMMAND_WORD + " day/DAY_TO_DISPLAY\n"
+    public static final String MESSAGE_USAGE = "To show sales for a chosen day:\n"
+            + COMMAND_WORD + " day/DAY_TO_DISPLAY\n"
             + "Example: " + COMMAND_WORD + " day/1";
 
     private final int day;
