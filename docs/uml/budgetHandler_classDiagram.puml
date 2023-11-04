@@ -1,6 +1,7 @@
 @startuml
 
 skinparam Style strictuml
+skinparam classAttributeIconSize 0
 
 class           BudgetHandler
 class           Budget
