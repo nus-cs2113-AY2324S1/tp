@@ -27,11 +27,12 @@ public class MultipleChoiceQn extends Question {
     }
 
     /**
-     * Get the Question's answer in integer format
+     * Get the Question's answerindex in String format
      * @return Integer from 1 to 4 inclusive
      */
-    public int getAnswerNumber() {
-        return this.answer;
+    @Override
+    public String getQuestionAnswer() {
+        return Integer.toString(this.answer);
     }
 
     /**
@@ -48,59 +49,46 @@ public class MultipleChoiceQn extends Question {
         }
     }
 
+    /**
+     * Gets a specific option in String format
+     * @param optionNumber Integer from 1 to 4 inclusive
+     * @return String corresponding to the correct option's String contents
+     */
+    @Override
+    public String getOption(int optionNumber) {
+        switch(optionNumber) {
+        case 1: return option1;
+        case 2: return option2;
+        case 3: return option3;
+        case 4: return option4;
+        default: return null;
+        }
+    }
+
     public void editQuestion(String editField, String newValue) {
         switch (editField) {
         case "description":
-            if (super.getQuestionDescription().equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             super.editQuestion(editField, newValue);
             break;
         case "option1":
-            if (this.option1.equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             this.option1 = newValue;
             break;
         case "option2":
-            if (this.option2.equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             this.option2 = newValue;
             break;
         case "option3":
-            if (this.option3.equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             this.option3 = newValue;
             break;
         case "option4":
-            if (this.option4.equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             this.option4 = newValue;
             break;
         case "answer":
-            if (this.answer == Integer.parseInt(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             this.answer = Integer.parseInt(newValue);
             break;
         default:
             break;
         }
-        System.out.println("Question edited!");
-    }
-
-    @Override
-    public QnType getQuestionType(){
-        return QnType.MULTIPLECHOICE;
+        System.out.println("    Roger that! I have edited the following question >w< !");
     }
 
     @Override

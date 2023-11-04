@@ -16,16 +16,18 @@ public class CommandEdit extends Command {
             "/option[number] [new value] for multiple choice questions";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
     public static final String TOO_MANY_INDEX_MSG = "    Ono! You cannot enter more than 1 valid integer index :<";
-    public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate if " +
-            "you are editing question description or answer :<";
+    public static final String MISSING_CRITERIA_MSG = "    Ono! You did not indicate which " +
+            "question field to edit :<";
     public static final String INVALID_CRITERIA_MSG = "    Ono! You tried to edit by an unknown criteria :<";
     public static final String TOO_MANY_CRITERIA_MSG = "    Ono! You tried to edit using more than 1 question " +
             "fields :<";
-    public static final String MISSING_KEYWORD_MSG = "    Ono! You did not enter a field of the question to edit :<";
+    public static final String MISSING_KEYWORD_MSG = "    Ono! You did not enter the new value :<";
     public static final String INVALID_SHORT_ANSWER_CRITERIA_MSG = "    Ono! Short answer questions can only be " +
             "edited by description or answer :<";
     public static final String INDEX_NOT_IN_RANGE_MSG = "    Ono! The question index you entered is not in the " +
             "range of the question list :<";
+    public static final String NO_CHANGES_MADE_MSG = "   The value you entered is the same as the current value! " +
+            "No changes made to question :>";
     private int qnIndex;
     private String newDescription;
     private String newAnswer;

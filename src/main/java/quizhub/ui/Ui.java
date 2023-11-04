@@ -42,15 +42,18 @@ public class Ui {
             "    8. edit [question number] /answer [answer] - edits the answer to the question with " +
             "the specified number," +
             System.lineSeparator() +
-            "    9. start /[quiz mode] [start details] /[qn mode] - " +
+            "    9. edit [question number] /option[number] [new value] - edits the option of the question with " +
+            "the specified number (MCQ only)," +
+            System.lineSeparator() +
+            "    10. start /[quiz mode] [start details] /[qn mode] - " +
             "starts the quiz with option for /module or /all and /random or /normal," +
             System.lineSeparator() +
-            "    10. shuffle - shuffle quiz questions to a random order," +
+            "    11. shuffle - shuffle quiz questions to a random order," +
             System.lineSeparator() +
-            "    11. markdiff [question number] /[question difficulty] - sets the difficulty of question " +
+            "    12. markdiff [question number] /[question difficulty] - sets the difficulty of question " +
             "with the specified number," +
             System.lineSeparator() +
-            "    12. bye - exits the program";
+            "    13. bye - exits the program";
     public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer question index!";
 
     public static final String MISSING_QUESTION_NUMBER_MSG = "    Ono! Please enter valid question number *sobs*";

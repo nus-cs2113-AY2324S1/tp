@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 
-import static quizhub.question.Question.QnType.MULTIPLECHOICE;
+import static quizhub.question.Question.QnType.MULTIPLECHOICE;  
 import static quizhub.question.Question.QnType.SHORTANSWER;
 
 /**
@@ -120,16 +120,17 @@ public class QuestionList {
         int oneIndexed = ++qnIndex;
         String isDone = question.questionIsDone() ? "X" : " ";
         String questionTypeIdentifier = "";
-        if(question.getQuestionType().equals(SHORTANSWER)){
+        if(question.getQuestionType() == SHORTANSWER){
             questionTypeIdentifier = "S";
-        }
-        else if (question.getQuestionType().equals(MULTIPLECHOICE)){
+        } else if(question.getQuestionType() == MULTIPLECHOICE){
             questionTypeIdentifier = "M";
         }
         if(asList) {
-            System.out.printf("    %d: [%s][%s] %s\n", oneIndexed, isDone, questionTypeIdentifier, question.getQuestionDescription());
+            System.out.printf("    %d: [%s][%s] %s\n", oneIndexed, isDone,
+                questionTypeIdentifier, question.getQuestionDescription());
         } else {
-            System.out.printf("        [%s][%s] %s\n", isDone, questionTypeIdentifier, question.getQuestionDescription());
+            System.out.printf("        [%s][%s] %s\n", isDone, questionTypeIdentifier, 
+                question.getQuestionDescription());
         }
     }
     
@@ -297,7 +298,7 @@ public class QuestionList {
         } else {
             System.out.println("    Here are questions that matched your search:");
             for (Question question : allQns) {
-                if(question.getQuestionDescription().toLowerCase().contains(keyword.toLowerCase())){
+                if(question.getQuestionBody().toLowerCase().contains(keyword.toLowerCase())){
                     matchedQuestions.add(question);
                     printQuestion(question, true);
                 }
