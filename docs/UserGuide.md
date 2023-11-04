@@ -61,7 +61,7 @@ Example of usage:
 ### Adding an expense: `addExpense`
 Adds an expense with a description, amount, date and category.
 
-Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+Format: `addExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
 * The `DESCRIPTION` cannot contain punctuation or any special characters.
 * The `AMOUNT` must be a positive number.
