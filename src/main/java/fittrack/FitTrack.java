@@ -21,7 +21,7 @@ import fittrack.storage.Storage.InvalidStorageFilePathException;
  */
 public class FitTrack {
 
-    public static final String VERSION = "FitTrack - Version 2.0";
+    public static final String VERSION = "FitTrack - Version 2.1";
     private final Ui ui;
     private Storage storage;
     private UserProfile userProfile;
