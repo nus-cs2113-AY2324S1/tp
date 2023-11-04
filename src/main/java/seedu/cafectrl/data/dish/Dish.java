@@ -41,6 +41,7 @@ public class Dish {
         return this.name + " $" + this.dollarValue.format(this.price);
     }
 
+    //@@author ziyi105
     public int comparePrice(float newPrice) {
         return this.dollarValue.format(price).compareTo(this.dollarValue.format(newPrice));
     }
