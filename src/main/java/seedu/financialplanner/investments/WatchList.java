@@ -33,18 +33,14 @@ public class WatchList {
         }
         stocks = new HashMap<>();
         System.out.println("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
-        try {
-            Stock apple = new Stock("AAPL");
-            assert apple.getSymbol() != null && apple.getStockName() != null;
-            stocks.put(apple.getSymbol(), apple);
 
-            Stock google = new Stock("GOOGL");
-            assert google.getSymbol() != null && google.getStockName() != null;
-            stocks.put(google.getSymbol(), google);
+        Stock apple = new Stock("AAPL", "Apple Inc");
+        assert apple.getSymbol() != null && apple.getStockName() != null;
+        stocks.put(apple.getSymbol(), apple);
 
-        } catch (FinancialPlannerException e) {
-            System.out.println(e.getMessage());
-        }
+        Stock google = new Stock("GOOGL", "Alphabet Inc - Class A");
+        assert google.getSymbol() != null && google.getStockName() != null;
+        stocks.put(google.getSymbol(), google);
     }
 
     public static WatchList getInstance() {

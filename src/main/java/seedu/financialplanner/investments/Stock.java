@@ -35,6 +35,11 @@ public class Stock {
         this.stockName = getStockNameFromAPI(symbol);
     }
 
+    public Stock(String symbol, String stockName) {
+        this.symbol = symbol;
+        this.stockName = stockName;
+    }
+
     public String getStockName() {
         return stockName;
     }
