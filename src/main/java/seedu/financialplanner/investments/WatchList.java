@@ -176,7 +176,10 @@ public class WatchList {
         if (stocks.size() >= 5) {
             throw new FinancialPlannerException("Watchlist is full (max 5). Delete a stock to add a new one");
         }
-        if (stocks.containsKey(stockCode.toUpperCase())) { // should already be uppercase
+        if (stocks.containsKey(stockCode.toUpperCase())) {
+            throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
+        }
+        if (stocks.containsKey(stockCode)) {
             throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
         }
 

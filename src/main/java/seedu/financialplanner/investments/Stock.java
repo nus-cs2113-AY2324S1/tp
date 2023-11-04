@@ -86,11 +86,11 @@ public class Stock {
             assert stock.get("2. name") != null;
             return (String) stock.get("2. name");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FinancialPlannerException("Error sending request to API..  Are you connected to the internet?");
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new FinancialPlannerException("Command was interrupted... Try again");
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new FinancialPlannerException("Error parsing JSON response from API... Try again");
         }
     }
 
