@@ -147,7 +147,7 @@ add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY
 
 Example of usage:
 
-`add /n Panadol /d 12 June 2026 /q 300
+`add /n Panadol /d 12 June 2026 /s ABC123 /q 52
 `
 
 Expected outcome:
@@ -609,6 +609,10 @@ Expected outcome:
 
 **A**: A user is able to login another user or can help to register a new user without rebooting the application
 
+**Q**: Why is my registration and login details not masked
+
+**A**: Masking of input is a security concern that will be developed on in future iterations
+
 ## Command Summary
 
 - add : `add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY`
@@ -627,3 +631,4 @@ Expected outcome:
 - add description : `addDescription /n DRUG_NAME /desc DESCRIPTION`
 - get description : `getDescription /n DRUG_NAME`
 - list descriptions : `listDescriptions`
+- bye : `bye`
