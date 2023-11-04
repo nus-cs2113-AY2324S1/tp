@@ -12,7 +12,12 @@ can get your inventory management tasks done faster than traditional GUI apps.
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Stocker` from [here](https://github.com/AY2324S1-CS2113-T17-3/tp/releases).
+2. Down the latest version of `Stocker` from [here](https://github.com/AY2324S1-CS2113-T17-3/tp/releases).
+3. Copy the absolute filepath to where the jar file is
+4. Run the following JAR file with the following command
+```
+java -jar "<File path of jar file>"
+```
 
 ## Features
 
