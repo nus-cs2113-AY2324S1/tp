@@ -72,9 +72,10 @@ Adds an income source to the Financial Planner.
 
 Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 
-- `/r` is used to denote a recurring income, with the period to the next addition is specified by `DAYS`.
-- `/d` is used to give a description to the income.
-- `/t` is used to specify the income type, where the list of acceptable types is given below
+- `/a` is used to specify the amount of the income, where an **integer** or **double** is expected.
+- `/r` is used to denote a recurring income, with the period to the next addition is specified by an **integer** representing the number of `DAYS`.
+- `/d` is used to give a description to the income, where any **String** is expected.
+- `/t` is used to specify the income type, where the list of acceptable types is given below.
 
 | Income Types  |
 |---------------|
@@ -91,20 +92,22 @@ Example output:
 You have added an Income
    Type: Salary
    Amount: 5000.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: work
 to the Financial Planner.
 Balance: 5000.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
 
 #### Add expense: `add expense`
 Adds an expense to the Financial Planner
 
 Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 
-- `/r` is used to denote a recurring expense, with the period to the next addition is specified by `DAYS`.
-- `/d` is used to give a description to the expense.
+- `/a` is used to specify the amount of the expense, where an **integer** or **double** is expected.
+- `/r` is used to denote a recurring expense, with the period to the next addition is specified by an **integer** representing the number of `DAYS`.
+- `/d` is used to give a description to the expense, where any **String** is expected.
 - `/t` is used to specify the expense type, where the list of acceptable types is given below
 
 | Expense         |
@@ -124,12 +127,13 @@ Example output:
 You have added an Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
 to the Financial Planner.
 Balance: 4700.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
 
 ### Delete cashflow: `delete`
 Deletes a cashflow from the Financial Planner.
@@ -260,6 +264,8 @@ Balance: -830.00
 ```
 
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 ### List
 
 #### List all: `list`
@@ -269,26 +275,28 @@ Example output:
 
 ```
 You have 4 matching cashflows:
-1: Income
+1: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+2: Income
    Type: Salary
    Amount: 5000.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: work
-2: Expense
+3: Expense
    Type: Dining
    Amount: 30.00
    Description: Genki Sushi
-3: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, starting from: Oct 30 2023
-   Description: ntuc income
 4: Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
 ```
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 #### List income: `list income`
 //TODO
 
@@ -298,17 +306,18 @@ You have 3 matching cashflows:
 1: Income
    Type: Salary
    Amount: 5000.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: work
 2: Income
    Type: Allowance
    Amount: 500.00
-   Recurring every: 30 days, starting from: Oct 30 2023
-   Description: parents
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
 3: Income
    Type: Investments
    Amount: 1000.00
 ```
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 #### List expense: `list expense`
 //TODO
 
@@ -316,20 +325,22 @@ Example output:
 ```
 You have 3 matching cashflows:
 1: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+2: Expense
    Type: Dining
    Amount: 30.00
    Description: Genki Sushi
-2: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, starting from: Oct 30 2023
-   Description: ntuc income
 3: Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
 ```
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 #### List recurring: `list recurring`
 Lists all recurring cashflows.
 
@@ -341,18 +352,28 @@ Example of usage: `list recurring`
 
 Example output:
 ```
-You have 2 matching cashflows:
+You have 4 matching cashflows:
 1: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, starting from: Oct 30 2023
-   Description: ntuc income
-2: Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
+2: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: work
+3: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+4: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
 ```
+- Note: Date displayed above is just an example. Your actual date may differ.
 
 ### Budget
 
