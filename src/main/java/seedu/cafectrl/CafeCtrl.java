@@ -30,11 +30,11 @@ public class CafeCtrl {
     private CafeCtrl() {
         this.ui = new Ui();
         this.storage = new Storage(this.ui);
-        this.currentDate = new CurrentDate();
         this.sales = new Sales();
         this.menu = this.storage.loadMenu();
         this.pantry = this.storage.loadPantryStock();
         this.sales = this.storage.loadOrderList(menu);
+        this.currentDate = new CurrentDate(sales);
     }
     
     /**
