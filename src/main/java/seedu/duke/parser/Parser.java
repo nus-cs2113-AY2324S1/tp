@@ -30,6 +30,10 @@ public class Parser {
             LOGGER.addHandler(fh);
             LOGGER.setLevel(Level.ALL);
             LOGGER.setUseParentHandlers(false);
+        } catch (SecurityException se) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", se);
+            System.err.println("Insufficient permissions to create logs directory. Please check your permissions or " +
+                    "run the program in a different directory.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error creating log file", e);
         }

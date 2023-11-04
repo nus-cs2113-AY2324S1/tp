@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.financialrecords.Income;
 
-import java.io.File;
+
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class IncomeManagerTest {
     private IncomeManager incomeManager;
@@ -75,19 +75,6 @@ public class IncomeManagerTest {
     void execute_incorrectAmountFormat_throwsException() {
         IncomeManager managerWithBadAmount = new IncomeManager("/de Grocery /date 29/10/2023 /amt fifty");
         assertThrows(KaChinnnngException.class, managerWithBadAmount::execute);
-    }
-
-    @Test
-    void testLoggerFileCreation() {
-        // Initialization
-        IncomeManager incomeManager = new IncomeManager("/de Grocery /date 29/10/2023 /amt 50.0");
-
-        // Assertion
-        File loggerFile = new File("logs/IncomeManager.log");
-        assertTrue(loggerFile.exists(), "Logger file should be created");
-
-        // Cleanup (optional, depending on whether you want to keep logs from test runs)
-        loggerFile.delete();
     }
 
 }

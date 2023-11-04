@@ -43,6 +43,10 @@ public class IncomeParser {
             LOGGER.addHandler(fh);
             LOGGER.setLevel(Level.ALL);
             LOGGER.setUseParentHandlers(false);
+        } catch (SecurityException se) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", se);
+            System.err.println("Insufficient permissions to create logs directory. Please check your permissions or " +
+                    "run the program in a different directory.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error creating log file", e);
         }
@@ -73,6 +77,10 @@ public class IncomeParser {
         if (incomeDate.isAfter(LocalDate.now())) {
             LOGGER.log(Level.WARNING, "Date is in the future" + incomeDateString);
             throw new KaChinnnngException("Please enter a date that is not in the future");
+        }
+        if (incomeDate.getYear() < 0) {
+            LOGGER.log(Level.WARNING, "Invalid year" + incomeDateString);
+            throw new KaChinnnngException("Year should not be negative, Please enter a valid year");
         }
         return incomeDate;
     }

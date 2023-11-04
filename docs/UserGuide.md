@@ -44,15 +44,28 @@ To add an income (with foregin currency):
 ```
 add income /de <description> /date <date> /amt [currency] <amount>
 ```
+note:
+- fields `/de`, `/date`, and `/amt` are case-sensitive and should be in the specified order.
+- should users add additional characters behind income eg. add incomeABCDE, the system will still recognise it as add income but not addABCDE income.
+- users should not use "|" in the description as it is used as a delimiter in the storage file.
 
 To add an expense (with foregin currency):
 ```
 add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
+note:
+- fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
+- should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
+- should users add additional characters behind expense eg. add expenseABCDE, the system will still recognise it as add expense.
+- users should not use "|" in the description as it is used as a delimiter in the storage file.
+- There are only 3 categories for expenses: `Food`, `Transport`, `Utilities`.
+- There are 3 types associated with `Food` category: `Breakfast`, `Lunch`, `Dinner`, else it will default to `UNDEFINED`.
+- There are 4 types associated with `Transport` category: `Bus`, `Train`, `Taxi`, `Fuel`, else it will default to `UNDEFINED`.
+- There are 3 types associated with `Utilities` category: `Water`, `Electricity`, `Gas`, else it will default to `UNDEFINED`.
+
 
 Use case:
 - Prompts users if any of the fields are empty.
-- There are only 3 categories for expenses: `Food`, `Transport`, `Utilities`.
 - Amount is takes up to 2 decimal places.
 - format of date is `dd/mm/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
@@ -72,6 +85,9 @@ add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
 ```
 add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt USD 10.50
+```
+```
+add expense /cat transport /type train /de train to school /date 10/10/2023 /amt 10.00
 ```
 
 ### List all entries: list
