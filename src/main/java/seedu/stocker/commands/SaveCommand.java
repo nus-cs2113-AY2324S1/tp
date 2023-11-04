@@ -32,7 +32,13 @@ public class SaveCommand extends Command{
         storageManager.writeToFile("drugs.txt", "");
 
         for(int i = 0; i < entries.size(); i += 1){
-            storageManager.appendToFile("drugs.txt",entries.get(i).toString());
+            String name =entries.get(i).getDrug().getName();
+            String date = entries.get(i).getDrug().getExpiryDate();
+            String serialNumber = entries.get(i).getSerialNumber();
+            String quantity = String.valueOf(entries.get(i).getQuantity());
+            String toBeAppended = "Name: " + name + ", " + "Expiry Date: " + date + ", "
+                    + "Serial Number: " + serialNumber + ", " + "Quantity: " + quantity;
+            storageManager.appendToFile("drugs.txt",toBeAppended);
         }
         return new CommandResult<>(MESSAGE_SUCCESS);
     }
