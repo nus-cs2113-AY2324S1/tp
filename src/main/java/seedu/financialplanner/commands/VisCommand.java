@@ -47,7 +47,7 @@ public class VisCommand extends Command {
             ui.printEmptyCashFlow(type);
             return;
         }
-        ui.printDisplayChart(type, chart);
+        ui.printDisplayChartMessage(type, chart);
         Visualizer.displayChart(chart, cashflowByType, type);
     }
 }

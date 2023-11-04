@@ -5,15 +5,15 @@ participant ":Ui"
 participant "<<class>>\nCategorizer"
 participant "<<class>>\nVisualizer"
 
-":VisCommand"-> ":Ui": printDisplayChart(type)
+":VisCommand"-> ":Ui": printDisplayChartMessages(type)
 
 ref over "<<class>>\nCategorizer", ":VisCommand" : sort cashflow entries
 
-alt #Pink cashflowbyType.empty()
+alt #Pink cashflowbyType is empty
 
     ":VisCommand" -> ":Ui" : ui.printEmptyCashflow(type)
 
-else #LightBlue !cashflowbyType.empty()
+else #LightBlue cashflowbyType is not empty
 
     ref over "<<class>>\nVisualizer", ":VisCommand": displaying chart
 
