@@ -24,23 +24,44 @@ public class WatchList {
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private static final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private static final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
-    private HashMap<String, Stock> stocks = null;
+    private HashMap<String, Stock> stocks;
 
-    private WatchList() {
-        stocks = LoadData.loadWatchList();
-        if (stocks != null) {
+    private void cleanUpLoadedWatchList() {
+        if (stocks == null) {
+            stocks = initalizeNewWatchlist();
             return;
         }
-        stocks = new HashMap<>();
+        stocks.entrySet().removeIf(stockPair -> !checkValidStock(stockPair.getKey(), stockPair.getValue()));
+        if (stocks.isEmpty()) {
+            stocks = initalizeNewWatchlist();
+        }
+    }
+
+    private boolean checkValidStock(String key, Stock stockToCheck) {
+        if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
+            return false;
+        }
+        return key.equals(stockToCheck.getSymbol());
+    }
+
+    public HashMap<String, Stock> initalizeNewWatchlist() {
+        HashMap<String, Stock> baseStocks = new HashMap<>();
         System.out.println("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
 
         Stock apple = new Stock("AAPL", "Apple Inc");
         assert apple.getSymbol() != null && apple.getStockName() != null;
-        stocks.put(apple.getSymbol(), apple);
+        baseStocks.put(apple.getSymbol(), apple);
 
         Stock google = new Stock("GOOGL", "Alphabet Inc - Class A");
         assert google.getSymbol() != null && google.getStockName() != null;
-        stocks.put(google.getSymbol(), google);
+        baseStocks.put(google.getSymbol(), google);
+
+        return baseStocks;
+    }
+
+    private WatchList() {
+        stocks = LoadData.loadWatchList();
+        cleanUpLoadedWatchList();
     }
 
     public static WatchList getInstance() {
@@ -60,7 +81,8 @@ public class WatchList {
         long currentTime = System.currentTimeMillis();
         long fivemin = 300000;
         for (Map.Entry<String, Stock> set: stocks.entrySet()) {
-            if (set.getValue().getLastFetched() + fivemin < currentTime) {
+            Stock currentStock = set.getValue();
+            if (currentStock.getLastFetched() + fivemin < currentTime) {
                 queryStocks.append(set.getKey());
                 queryStocks.append(",");
             }

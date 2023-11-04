@@ -342,7 +342,7 @@ public abstract class LoadData {
             }
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
-            ui.showMessage("Would you like to create new file? (Y/N)");
+            ui.showMessage("Would you like to create new watchlist? (Y/N)");
             if (!createNewFile()) {
                 ui.showMessage("Exiting... Please fix the file");
                 System.exit(1);
