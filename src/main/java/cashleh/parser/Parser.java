@@ -66,7 +66,7 @@ public class Parser {
     }
 
     public Command parse(String input) throws CashLehParsingException {
-        String command = input.contains(" ") ? input.split(" ")[0] : input;
+        String command = input.contains(" ") ? input.trim().split(" ")[0] : input.trim();
         switch (command) {
         case ADD_INCOME:
             Income income = getIncome(input);
