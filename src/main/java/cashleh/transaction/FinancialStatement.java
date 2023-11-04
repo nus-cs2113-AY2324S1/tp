@@ -33,17 +33,9 @@ public class FinancialStatement {
 
     /**
      * Retrieves the transaction from the statement.
-     * @param transactionIndex The index of the transaction to be retrieved.
      * @return The transaction at the specified index.
      * @throws CashLehMissingTransactionException If the specified transaction is not found.
      */
-    public Transaction getTransaction(int transactionIndex) throws CashLehMissingTransactionException {
-        try {
-            return financialStatement.get(transactionIndex);
-        } catch (IndexOutOfBoundsException e) {
-            throw new CashLehMissingTransactionException();
-        }
-    }
 
     public int getSize() {
         return financialStatement.size();
