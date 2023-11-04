@@ -13,7 +13,7 @@ public class DeleteCommand  extends Command{
             + " <Drug Name>";
 
     public static final String MESSAGE_SUCCESS = "Drug removed from inventory: %1$s";
-    public static final String MESSAGE_FAILURE = "Drug not find in the inventory. ";
+    public static final String MESSAGE_FAILURE = "Drug not found in the inventory. ";
 
 
 
