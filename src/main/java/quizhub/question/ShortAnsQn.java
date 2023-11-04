@@ -57,6 +57,12 @@ public class ShortAnsQn extends Question {
             break;
         }
     }
+
+    @Override
+    public QnType getQuestionType(){
+        return QnType.SHORTANSWER;
+    }
+
     /**
      * Returns question-answer pair, separated by a vertical bar.
      */

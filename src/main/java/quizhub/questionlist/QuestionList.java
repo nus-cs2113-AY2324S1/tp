@@ -10,6 +10,10 @@ import quizhub.ui.Ui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
+
+import static quizhub.question.Question.QnType.MULTIPLECHOICE;
+import static quizhub.question.Question.QnType.SHORTANSWER;
+
 /**
  * Represents the list of questions currently registered in Quizhub.
  * This list is created on program start and disposed on program termination.
@@ -35,7 +39,7 @@ public class QuestionList {
     public void addShortAnswerQn(String description, String answer, String module,
                                  Question.QnDifficulty qnDifficulty, boolean showMessage){
 
-        if(containsDuplicateQuestion(description, Question.QnType.SHORTANSWER, module, qnDifficulty)){
+        if(containsDuplicateQuestion(description, SHORTANSWER, module, qnDifficulty)){
             System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
         } else{
             allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
@@ -115,10 +119,17 @@ public class QuestionList {
         int qnIndex = allQns.indexOf(question);
         int oneIndexed = ++qnIndex;
         String isDone = question.questionIsDone() ? "X" : " ";
+        String questionTypeIdentifier = "";
+        if(question.getQuestionType().equals(SHORTANSWER)){
+            questionTypeIdentifier = "S";
+        }
+        else if (question.getQuestionType().equals(MULTIPLECHOICE)){
+            questionTypeIdentifier = "M";
+        }
         if(asList) {
-            System.out.printf("    %d: [S][%s] %s\n", oneIndexed, isDone, question.getQuestionDescription());
+            System.out.printf("    %d: [%s][%s] %s\n", oneIndexed, isDone, questionTypeIdentifier, question.getQuestionDescription());
         } else {
-            System.out.printf("        [S][%s] %s\n", isDone, question.getQuestionDescription());
+            System.out.printf("        [%s][%s] %s\n", isDone, questionTypeIdentifier, question.getQuestionDescription());
         }
     }
     
