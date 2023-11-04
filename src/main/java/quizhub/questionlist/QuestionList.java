@@ -396,8 +396,10 @@ public class QuestionList {
     /**
      * Shuffles the order of questions in the deck
      */
-    public void shuffleQuestions() {
+    public void shuffleQuestions(Ui ui) {
         Collections.shuffle(allQns);
+        ui.displayMessage("    Questions are now shuffled!");
+        printQuestionList();
     }
     /**
      * Retrieves the answer for a question by its index in the question list.
