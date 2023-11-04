@@ -11,7 +11,7 @@ public class CheckRecommendedWeightCommand extends Command{
     private static final String DESCRIPTION =
             String.format("`%s` calculates the recommended weight for your height.", COMMAND_WORD);
     private static final String USAGE = String.format(
-            "Type `%s` calculate the recommended weight for your height.\n", COMMAND_WORD);
+            "Type `%s` calculate the recommended weight for your height.", COMMAND_WORD);
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
     public CheckRecommendedWeightCommand(String commandLine) {

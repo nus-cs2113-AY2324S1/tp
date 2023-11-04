@@ -11,7 +11,7 @@ public class FindWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "findworkout";
     private static final String DESCRIPTION =
             String.format("`%s` finds the workout you are looking for in your workout list.", COMMAND_WORD);
-    private static final String USAGE = String.format("Type `%s <KEYWORD>` to find a workout.\n", COMMAND_WORD);
+    private static final String USAGE = String.format("Type `%s <KEYWORD>` to find a workout.", COMMAND_WORD);
 
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
 
@@ -38,6 +38,7 @@ public class FindWorkoutCommand extends Command {
                 }
                 String workoutWithNumber = (workoutNum + 1) + "." + workout;
                 feedbackBuilder.append(workoutWithNumber).append("\n");
+                numFound++;
             }
             workoutNum++;
         }

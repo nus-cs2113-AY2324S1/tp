@@ -1,8 +1,6 @@
 package fittrack;
 
 import fittrack.command.CommandResult;
-import fittrack.data.Meal;
-import fittrack.data.Workout;
 
 import java.util.Scanner;
 

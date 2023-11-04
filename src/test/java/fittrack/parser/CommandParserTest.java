@@ -92,14 +92,14 @@ class CommandParserTest {
         getBlankCommandTest(ViewProfileCommand.class, "viewprofile", null);
         getBlankCommandTest(AddMealCommand.class, "addmeal", null);
         getBlankCommandTest(DeleteMealCommand.class, "deletemeal", null);
-        getBlankCommandTest(ViewMealCommand.class, "viewmeals", null);
+        getBlankCommandTest(ViewMealCommand.class, "viewmeal", null);
         getBlankCommandTest(AddWorkoutCommand.class, "addworkout", null);
         getBlankCommandTest(DeleteWorkoutCommand.class, "deleteworkout", null);
-        getBlankCommandTest(ViewWorkoutCommand.class, "viewworkouts", null);
+        getBlankCommandTest(ViewWorkoutCommand.class, "viewworkout", null);
         getBlankCommandTest(BmiCommand.class, "bmi", null);
         getBlankCommandTest(SaveCommand.class, "save", null);
-        getBlankCommandTest(CaloriesConsumedCommand.class, "caloriesum", null);
-        getBlankCommandTest(CheckRecommendedWeightCommand.class, "checkweightrange", null);
+        getBlankCommandTest(CaloriesConsumedCommand.class, "caloriesconsumed", null);
+        getBlankCommandTest(CheckRecommendedWeightCommand.class, "checkrecommendedweight", null);
         getBlankCommandTest(CaloriesBurntCommand.class, "caloriesburnt", null);
         getBlankCommandTest(FindMealCommand.class, "findmeal", null);
         getBlankCommandTest(FindWorkoutCommand.class, "findworkout", null);

@@ -1,7 +1,6 @@
 package fittrack.command;
 
 import fittrack.parser.CommandParser;
-import fittrack.storage.Storage;
 import org.junit.jupiter.api.Test;
 
 import static fittrack.command.HelpCommand.USAGE;

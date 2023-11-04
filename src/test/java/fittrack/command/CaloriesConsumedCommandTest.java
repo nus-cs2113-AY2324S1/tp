@@ -5,6 +5,8 @@ import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Meal;
 
+import fittrack.parser.CommandParser;
+import fittrack.parser.PatternMatchFailException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,8 +26,14 @@ public class CaloriesConsumedCommandTest {
 
     @Test
     public void testExecute(){
-        CaloriesConsumedCommand caloriesConsumedCommand = new CaloriesConsumedCommand(CaloriesConsumedCommand.COMMAND_WORD);
+        CaloriesConsumedCommand caloriesConsumedCommand =
+                new CaloriesConsumedCommand(CaloriesConsumedCommand.COMMAND_WORD);
         caloriesConsumedCommand.mealList = mealList;
+        try {
+            caloriesConsumedCommand.setArguments("2023-10-23", new CommandParser());
+        } catch (PatternMatchFailException e) {
+            throw new RuntimeException(e);
+        }
         caloriesConsumedCommand.execute();
         assertEquals(caloriesConsumedCommand.getCaloriesConsumed().value, 600);
 
