@@ -123,23 +123,7 @@ public class Ui {
      * @param currentQuestionIndex The index of the current question in the set of questions.
      * @param totalQuestions     The total count of questions in the set.
      */
-//    public void displayQuestion(Question question, int currentQuestionIndex, int totalQuestions) {
-//        showLine();
-//        System.out.println("    Question " + currentQuestionIndex + " / " + totalQuestions + ":");
-//        // getQuestionDescription returns question/answer
-//        String questionDescription = question.getQuestionDescription();
-//        String[] parts = questionDescription.split("/");
-//
-//        if (parts.length >= 1) {
-//            // Extract and display the question part
-//            System.out.println("    " + parts[0]); // part[0] returns the question part
-//        } else {
-//            // Handle the case where the format is invalid
-//            System.out.println("    Invalid question format, please edit this question via the edit function");
-//        }
-//
-//        System.out.print("  Your Answer: ");
-//    }
+    
     public void displayQuestion(Question question, int currentQuestionIndex, int totalQuestions) {
         showLine();
         System.out.println("    Question " + currentQuestionIndex + " / " + totalQuestions + ":");
