@@ -480,6 +480,8 @@ Balance: 3790.00
 
 ### Viewing Watchlist: `watchlist`
 
+- Note: Stockcode and symbol will be used interchangeably and have the same meaning
+
 View your current watchlist with stocks that you are interested in with the exchanges shown as well
 
 Default watchlist: AAPL, GOOGL 
@@ -566,6 +568,12 @@ Incorrect format of JSON file may lead to:
 - Deletion of stock entries that are erroneous (Financial Planner has a built-in method to remove
 stock entries that does not match the format specified above)
 - Incorrect information printed by Financial Planner application (eg. changing stock prices directly in JSON file)
+
+**Adding stock**
+
+If you would like to add stock, do provide information for the symbol and stockName as shown below
+
+![](images/investments/Exampleaddingstockjson.png)
 
 ### View Reminder List: `reminderlist`
 View your current reminder list with reminders that you have added.
