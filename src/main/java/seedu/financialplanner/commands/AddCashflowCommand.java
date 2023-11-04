@@ -23,6 +23,7 @@ public class AddCashflowCommand extends Command {
     protected int recur = 0;
     protected String description = null;
     protected CashflowList cashflowList = CashflowList.getInstance();
+    protected final double MAX_AMOUNT = 999999999999.99;
 
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String categoryString = String.join(" ", rawCommand.args);
@@ -48,6 +49,10 @@ public class AddCashflowCommand extends Command {
         if (amount < 0) {
             logger.log(Level.WARNING, "Invalid value for amount");
             throw new IllegalArgumentException("Amount cannot be negative");
+        }
+        if (amount > MAX_AMOUNT) {
+            logger.log(Level.WARNING, "Maximum value for amount exceeded.");
+            throw new IllegalArgumentException("Amount exceeded maximum value this program can hold.");
         }
         rawCommand.extraArgs.remove("a");
 

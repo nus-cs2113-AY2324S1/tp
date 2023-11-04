@@ -36,7 +36,7 @@ class LoadDataTest {
     private LocalDate stringToDate(String string) {
         return LocalDate.parse(string, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
-    private void getTestData() {
+    private void getTestData() throws  FinancialPlannerException{
         LocalDate date = stringToDate("01/01/2023");
         cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 10, null, date, false));
         cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, "parents", date, false));

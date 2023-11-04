@@ -17,6 +17,7 @@ public abstract class Cashflow {
     protected String description;
     protected LocalDate date;
     protected boolean hasRecurred;
+    protected final double MAX_AMOUNT = 999999999999.99;
 
     public Cashflow(double amount, int recur, String description) {
         this.amount = amount;

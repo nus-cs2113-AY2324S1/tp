@@ -65,12 +65,12 @@ public class StorageTest {
     }
 
     @Test
-    public void saveNonExistentFile() {
+    public void saveNonExistentFile() throws FinancialPlannerException {
         getTestData();
         assertThrows(FinancialPlannerException.class, () -> storage.save(""));
     }
 
-    private void getTestData() {
+    private void getTestData() throws FinancialPlannerException {
         cashflowList.load(new Income(123.12, IncomeType.ALLOWANCE, 0, null));
         cashflowList.load(new Expense(100, ExpenseType.SHOPPING, 0, "shopee"));
     }

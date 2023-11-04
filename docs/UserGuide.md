@@ -65,6 +65,10 @@ you a one-stop interface to access a plethora of features to manage your finance
 ### Notes about naming convention
 - Cashflow refers to an income or expense.
 
+### Notes about program limitations
+- Maximum amount and balance the program can hold is 999,999,999,999.99
+- Minimum amount and balance the program can hold is -999,999,999,999.99
+
 ### Add cashflow
 
 #### Add income: `add income`
