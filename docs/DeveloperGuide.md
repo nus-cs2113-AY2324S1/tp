@@ -108,7 +108,7 @@ Demo:
 
 `vis /t expense /c pie`
 
-Output
+Output:
 
 `Displaying piechart for expense`
 A message will be shown telling you that the chart is being displayed
