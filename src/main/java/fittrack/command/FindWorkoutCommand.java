@@ -1,6 +1,5 @@
 package fittrack.command;
 
-import fittrack.Ui;
 import fittrack.data.Workout;
 import fittrack.parser.CommandParser;
 import fittrack.parser.PatternMatchFailException;
@@ -15,7 +14,7 @@ public class FindWorkoutCommand extends Command {
     private static final String USAGE = String.format("Type `%s <KEYWORD>` to find a workout.\n", COMMAND_WORD);
 
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
-    private Ui ui = new Ui();
+
     private String keyword;
 
     public FindWorkoutCommand(String commandLine) {
@@ -24,6 +23,8 @@ public class FindWorkoutCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        StringBuilder feedbackBuilder = new StringBuilder();
+
         ArrayList<Workout> workouts = workoutList.getWorkoutList();
         int workoutNum = 0;
         int numFound = 0;
@@ -32,17 +33,21 @@ public class FindWorkoutCommand extends Command {
             if (workout.getName().contains(keyword)) {
                 if (!workoutFound) {
                     workoutFound = true;
-                    ui.printFoundMessage("workouts", keyword);
+                    String foundMessage = "These workouts contain the keyword " + keyword + ":";
+                    feedbackBuilder.append(foundMessage).append("\n");
                 }
-                ui.printWorkoutWithNumber(workoutNum, workout);
-                numFound++;
+                String workoutWithNumber = (workoutNum + 1) + "." + workout;
+                feedbackBuilder.append(workoutWithNumber).append("\n");
             }
             workoutNum++;
         }
         if (!workoutFound) {
             return new CommandResult("Sorry, there are no such workouts found.");
         }
-        return new CommandResult("There are " + numFound + " workouts that contains " + keyword + ".");
+
+        String summary = "There are " + numFound + " workouts that contains " + keyword + ".";
+        feedbackBuilder.append(summary);
+        return new CommandResult(feedbackBuilder.toString());
     }
 
     @Override
