@@ -17,7 +17,9 @@ This step is not necessary, but recommended because the app will automatically c
 4. Open a command terminal, and change the current working directory to the "home folder".
 5. Type `java -jar fittrack.jar` in the terminal to open the application.
 You should see the welcome message.
-6. The application is now ready for you to use! 
+6. First time using the product, you have to enter your height, weight, gender, and daily calorie limit.
+Please type in format of `h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>`.
+7. The application is now ready for you to use! 
 Type `help` to see a list of commands that you will be able to use in the application.
 
 
