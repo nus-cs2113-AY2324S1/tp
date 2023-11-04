@@ -99,11 +99,11 @@ Your data has been saved!
 Allows user to edit their profile details.
 
 **Format**
-- `editprofile h/<HEIGHT> w/<WEIGHT> l/<CALORIE_LIMIT>`
+- `editprofile h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CALORIE_LIMIT>`
 
 **Example of usage**
 ```
-editprofile h/170 w/70 l/100
+editprofile h/170 w/70 g/M l/100
 ```
 
 **Expected output**
@@ -113,6 +113,7 @@ Height: 170.0cm
 Weight: 70.0kg
 Daily calorie limit: 1500kcal
 BMI: 24.22
+Gender: Male
 ```
 
 
@@ -131,6 +132,7 @@ Height: 170.0cm
 Weight: 70.0kg
 Daily calorie limit: 1500kcal
 BMI: 24.22
+Gender: Male
 ```
 
 

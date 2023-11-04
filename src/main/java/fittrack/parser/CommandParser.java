@@ -21,12 +21,14 @@ import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewWorkoutCommand;
 import fittrack.command.FindMealCommand;
 import fittrack.command.FindWorkoutCommand;
+import fittrack.data.Gender;
 import fittrack.data.Meal;
-import fittrack.data.Workout;
-import fittrack.data.Calories;
-import fittrack.data.Date;
-import fittrack.data.Height;
 import fittrack.data.Weight;
+import fittrack.data.Height;
+import fittrack.data.Calories;
+import fittrack.data.Workout;
+import fittrack.data.Date;
+
 
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
@@ -50,6 +52,7 @@ public class CommandParser {
     private static final String ARGS_CG = "args";
     private static final String HEIGHT_CG = "height";
     private static final String WEIGHT_CG = "weight";
+    private static final String GENDER_CG = "gender";
     private static final String CAL_LIMIT_CG = "calLimit";
     private static final String NAME_CG = "name";
     private static final String CALORIES_CG = "calories";
@@ -60,7 +63,8 @@ public class CommandParser {
             "(?<" + WORD_CG + ">\\S+)(?<" + ARGS_CG + ">.*)"
     );
     private static final Pattern PROFILE_PATTERN = Pattern.compile(
-            "h/(?<" + HEIGHT_CG + ">\\S+)\\s+w/(?<" + WEIGHT_CG + ">\\S+)\\s+l/(?<" + CAL_LIMIT_CG + ">\\S+)"
+            "h/(?<" + HEIGHT_CG + ">\\S+)\\s+w/(?<" + WEIGHT_CG +
+                    ">\\S+)\\s+g/(?<" + GENDER_CG + ">\\S+)\\s+l/(?<" + CAL_LIMIT_CG + ">\\S+)"
     );
     private static final Pattern MEAL_PATTERN = Pattern.compile(
             "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
@@ -166,29 +170,37 @@ public class CommandParser {
      * @throws NumberFormatException if one of arguments is not double
      */
     public UserProfile parseProfile(String profile)
-            throws PatternMatchFailException, NumberFormatException, NegativeNumberException {
+            throws PatternMatchFailException, NumberFormatException, NegativeNumberException, WrongGenderException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }
 
         try {
-            final double height = Double.parseDouble(matcher.group(HEIGHT_CG));
-            final double weight = Double.parseDouble(matcher.group(WEIGHT_CG));
-            final double dailyCalorieLimit = Double.parseDouble(matcher.group(CAL_LIMIT_CG));
+            final double height = Double.parseDouble(matcher.group("height"));
+            final double weight = Double.parseDouble(matcher.group("weight"));
+            final double dailyCalorieLimit = Double.parseDouble(matcher.group("calLimit"));
+            final char gender = matcher.group("gender").charAt(0);
 
             // Height, weight and calories cannot be negative. Throw exception if it happens
             if (height < 0 || weight < 0 || dailyCalorieLimit < 0) {
                 throw new NegativeNumberException();
             }
 
+            if (gender != 'M' && gender != 'F') {
+                throw new WrongGenderException();
+            }
+
             Height heightData = new Height(height);
             Weight weightData = new Weight(weight);
             Calories caloriesData = new Calories(dailyCalorieLimit);
+            Gender genderData = new Gender(gender);
 
-            return new UserProfile(heightData, weightData, caloriesData);
+            return new UserProfile(heightData, weightData, caloriesData, genderData);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
+        } catch (WrongGenderException e) {
+            throw new RuntimeException(e);
         }
     }
 
