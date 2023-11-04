@@ -120,6 +120,8 @@ Login system is automatically launched at the start of the programme.
 **Registering a user**
 
 > Step 1 : Enter register to select option to register a user.
+> 
+> `register`
 >
 > Step 2: Enter desired username and password.
 >
@@ -135,6 +137,8 @@ Registration successful.
 
 > Step 1 : Enter login to select option to login a user.
 >
+> `login`
+> 
 > Step 2: Enter registered username and password.
 >
 > Upon successful creation, successful login message is observed.
