@@ -2,21 +2,21 @@
 
 ## Introduction
 
-{Give a product intro}
+Welcome to the FITNUS UserGuide! We're glad you're here and if you have any questions about how to operate the application, all the information will be here for you.
 
 ## Quick Start
 
-{Give steps to get started quickly}
+In the terminal, make sure you are in the same directory (location) as the jar file is, and run `java -jar JAR_FILE_NAME` where `JAR_FILE_NAME` is the name of the jar file as stored on your local computer.
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](https://github.com/AY2324S1-CS2113-F11-1/tp/releases).
 
 ## Features 
 
 {Give detailed description of each feature}
 
 ### Viewing help: `help`
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -82,7 +82,7 @@ or each exercise and its details
 whose exercises you want to view, or `month MONTH day DAY` where MONTH is the same as above, but `DAY` is the specific
 day of the month whose exercises you want to view.
 
-### Setting up an calories goal: `set on`
+### Setting up a calorie goal: `set on`
 Set up a calories goal to achieve.
 
 Format: `set AMOUNT on Date`
@@ -100,7 +100,7 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: It is not suggested to transfer data between machines. The purpose of the app is develped solely for personal use. Nonetheless, you can copy the back_up file named [] under the folder [] into your new computer to restore you data. Please put the file the same [name] folder.
+**A**: It is not suggested to transfer data between machines. The purpose of the app is developed solely for personal use. Nonetheless, you can copy the folder named `data` that is created in the same directory (location) as where you are running the application into your new computer to restore your data.
 
 ## Command Summary
 
