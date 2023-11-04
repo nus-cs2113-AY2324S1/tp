@@ -23,7 +23,7 @@ public class Month {
      * @return the string representation of the new exercise created
      */
     public String addExercise(int day, String exerciseName, int caloriesBurned) {
-        return dates.get(day - 1).addExercise(exerciseName, caloriesBurned);
+        return dates.get(day).addExercise(exerciseName, caloriesBurned);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Month {
      * @return true if the exercise was removed, false otherwise
      */
     public boolean removeExercise(int day, String exerciseName, int caloriesBurned) {
-        return dates.get(day - 1).removeExercise(exerciseName, caloriesBurned);
+        return dates.get(day).removeExercise(exerciseName, caloriesBurned);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Month {
      * @return a Day object of the specified day
      */
     public Day getDay(int day) {
-        return dates.get(day - 1);
+        return dates.get(day);
     }
 
     /**
@@ -68,7 +68,7 @@ public class Month {
      * @return the total number of exercises for the specified day
      */
     public int getNumberOfExercisesForDay(int day) {
-        return dates.get(day - 1).getNumberOfExercises();
+        return dates.get(day).getNumberOfExercises();
     }
 
     /**
@@ -84,8 +84,12 @@ public class Month {
      */
     public boolean updateExercise(int day, String oldExerciseName, int oldCaloriesBurned, String newExerciseName,
                                   int newCaloriesBurned) {
-        return dates.get(day - 1).updateExercise(oldExerciseName, oldCaloriesBurned, newExerciseName,
+        return dates.get(day).updateExercise(oldExerciseName, oldCaloriesBurned, newExerciseName,
                 newCaloriesBurned);
+    }
+
+    public boolean hasExercise(int day, String exerciseName, int caloriesBurned) {
+        return dates.get(day).hasExercise(exerciseName, caloriesBurned);
     }
 
     /**

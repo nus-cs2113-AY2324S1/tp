@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.ArrayList;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
@@ -9,7 +11,7 @@ import seedu.duke.data.meal.Meal;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
 import seedu.duke.ui.TextUi;
-import java.util.ArrayList;
+import seedu.duke.storagefile.StorageFile;
 
 /**
  * Entry point of the Address Book application.
@@ -23,10 +25,11 @@ public class Duke {
     public static final String VERSION = "AddressBook Level 2 - Version 1.0";
     public static GoalList goals = new GoalList();
     public static Log exerciseLog = new Log();
+    public static StorageFile storage;
     static ArrayList<Meal> meals = new ArrayList<Meal>();
     private TextUi ui;
-
-    // private StorageFile storage;
+    private String dirPath = "data";
+    private String textFilePath = "./data/ExerciseLog.txt";
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
     }
@@ -50,7 +53,8 @@ public class Duke {
     private void start(String[] launchArgs) {
         try {
             this.ui = new TextUi();
-            // this.storage = initializeStorage(launchArgs);
+            this.storage = StorageFile.initializeStorage(dirPath, textFilePath);
+            storage.checkForTextFile(exerciseLog);
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
             MealCommand.setMeals(meals);
         } catch (Exception e) { // TODO: change to specific storage exceptions later

@@ -1,5 +1,6 @@
 package seedu.duke.commands.logcommands;
 
+import java.io.IOException;
 import java.util.List;
 
 import seedu.duke.commands.Command;
@@ -29,7 +30,7 @@ public class LogCommand extends Command {
      * @return CommandResult telling the user that the exercise was successfully added along with the exercise details.
      * @throws IncorrectFormatException when the command is not entered with the right type of parameters.
      */
-    public CommandResult execute() throws Exception {
+    public CommandResult execute() throws IncorrectFormatException, IOException {
         if (exerciseDetails.size() < 4) {
             throw new IncorrectFormatException("The log command needs to take at least 4 parameters!");
         }
@@ -39,25 +40,31 @@ public class LogCommand extends Command {
             if (month <= 0 || month > 12) {
                 throw new IncorrectFormatException("The month you specified does not exist.");
             }
+
             int day = Integer.parseInt(exerciseDetails.get(1));
             if (day <= 0 || day > Duke.exerciseLog.getNumberOfDays(month)) {
                 throw new IncorrectFormatException("The day you specified does not exist for the month.");
             }
+
             String exerciseName = "";
             for (int i = 2; i < exerciseDetails.size() - 1; i++) {
                 exerciseName += exerciseDetails.get(i) + " ";
             }
+
             int caloriesBurned = Integer.parseInt(exerciseDetails.get(exerciseDetails.size() - 1));
             if (caloriesBurned < 0) {
                 throw new IncorrectFormatException("You cannot burn a negative number of calories.");
             }
 
             String exerciseDescription = Duke.exerciseLog.addExercise(month, day, exerciseName.trim(), caloriesBurned);
+            Duke.storage.writeExerciseToFile(month, day, exerciseName.trim().split(" "), caloriesBurned);
 
             return new CommandResult((feedbackToUser + exerciseDescription).trim());
         } catch (NumberFormatException e) {
             throw new IncorrectFormatException("Please specify reasonable positive numbers in the month, day, and " +
                     "calories burned fields");
+        } catch (IOException e) {
+            throw new IOException("The ExerciseLog.txt file could not be found.");
         }
     }
 }

@@ -84,6 +84,10 @@ public class Day {
         return true;
     }
 
+    public boolean hasExercise(String exerciseName, int caloriesBurned) {
+        return exercises.contains(new Exercise(exerciseName, caloriesBurned));
+    }
+
     /**
      * Returns a string representing all the exercises contained for the Day.
      *

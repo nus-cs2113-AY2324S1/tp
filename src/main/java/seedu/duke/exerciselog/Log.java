@@ -31,7 +31,7 @@ public class Log {
      * @return the string representation of the exercise that is added to the log
      */
     public String addExercise(int month, int day, String exerciseName, int caloriesBurned) {
-        return exerciseLog.get(month - 1).addExercise(day, exerciseName, caloriesBurned);
+        return exerciseLog.get(month - 1).addExercise(day - 1, exerciseName, caloriesBurned);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Log {
      * @return true if the exercise was removed, false otherwise
      */
     public boolean removeExercise(int month, int day, String exerciseName, int caloriesBurned) {
-        return exerciseLog.get(month - 1).removeExercise(day, exerciseName, caloriesBurned);
+        return exerciseLog.get(month - 1).removeExercise(day - 1, exerciseName, caloriesBurned);
     }
 
     /**
@@ -78,7 +78,7 @@ public class Log {
      * @return the total number of exercises logged for a specific day of the month
      */
     public int getNumberOfExercisesForDay(int month, int day) {
-        return exerciseLog.get(month - 1).getNumberOfExercisesForDay(day);
+        return exerciseLog.get(month - 1).getNumberOfExercisesForDay(day - 1);
     }
 
     /**
@@ -95,8 +95,12 @@ public class Log {
      */
     public boolean updateExercise(int month, int day, String oldExerciseName, int oldCaloriesBurned,
                                   String newExerciseName, int newCaloriesBurned) {
-        return exerciseLog.get(month - 1).updateExercise(day, oldExerciseName, oldCaloriesBurned, newExerciseName,
+        return exerciseLog.get(month - 1).updateExercise(day - 1, oldExerciseName, oldCaloriesBurned, newExerciseName,
                 newCaloriesBurned);
+    }
+
+    public boolean hasExercise(int month, int day, String exerciseName, int caloriesBurned) {
+        return exerciseLog.get(month - 1).hasExercise(day - 1, exerciseName, caloriesBurned);
     }
 
     public int getNumberOfDays(int month) {
