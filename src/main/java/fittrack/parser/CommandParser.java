@@ -41,9 +41,9 @@ import java.util.regex.Pattern;
  */
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
-    public static final String ALL_COMMAND_WORDS = "help, exit, save, \n" +
-            "editprofile, viewprofile, bmi, checkrecommendedweight, \n" +
-            "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed, \n" +
+    public static final String ALL_COMMAND_WORDS = "help, exit, save,\n" +
+            "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
+            "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
             "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt";
 
     private static final String WORD_CG = "word";
