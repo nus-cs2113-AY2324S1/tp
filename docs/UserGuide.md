@@ -547,6 +547,24 @@ Use watchlist command to view updated Watchlist
 
 - Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
 
+### watchlist.json 
+
+You are able to read the watchlist.json populated by the Financial Planner to see the stock prices even when
+the application is not running 
+
+Example file content of watchlist.json:
+
+![](/images/investments/watchlistjsonexample.png)
+
+**Editing of watchlist.json**
+
+WARNING: Do not edit the json file unless you are familiar with the format of the JSON file
+Incorrect format of JSON file may lead to:
+- Corrupted file (user will be prompted to repair the file if he wants to)
+- Deletion of stock entries that are erroneous (Financial Planner has a built-in method to remove
+stock entries that does not match the format specified above)
+- Incorrect information printed by Financial Planner application (eg. changing stock prices directly in JSON file)
+
 ### View Reminder List: `reminderlist`
 View your current reminder list with reminders that you have added.
 
