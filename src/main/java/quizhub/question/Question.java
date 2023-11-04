@@ -111,6 +111,18 @@ public class Question {
         return description;
     }
     /**
+     * Returns question body.
+     */
+    public String getQuestionBody(){
+        return description;
+    }
+    /**
+     * Returns question answer.
+     */
+    public String getQuestionAnswer(){
+        return "";
+    }
+    /**
      * Returns question timing details.
      */
     public String getQuestionTiming(boolean useDefaultTiming){
@@ -137,7 +149,6 @@ public class Question {
      */
     public void editQuestion(String newDescription, String newAnswer){
         this.description = newDescription;
-        System.out.println("    Roger that! I have edited the following question >w< !");
     }
     /**
      * Returns question details in a string.
@@ -152,10 +163,7 @@ public class Question {
     public QnDifficulty getDifficulty(){
         return qnDifficulty;
     }
-    /**
-     * Display a edit error message
-     */
-    public void displayEditErrorMessage(String editField){
-        System.out.println("    The current question " + editField + " is the same as your input!");
+    public String getOption(int i) {
+        return "";
     }
 }

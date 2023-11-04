@@ -308,8 +308,8 @@ public class Parser {
             return handleEditCriteriaExceptions(incorrectEditCriteria);
         }
         try {
-            extractEditNewValues(userInput, commandEditTokens);
-        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException invalidEditCriteria) {
+            extractEditNewValues(userInput, commandEditTokens, qnIndex);
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | QuizHubExceptions invalidEditCriteria) {
             return handleEditNewValuesExceptions(invalidEditCriteria);
         }
         String editField = commandEditTokens[0];
@@ -323,11 +323,9 @@ public class Parser {
      *
      * @param userInput         Raw command entered by the user
      * @param commandEditTokens Critical information chunks of edit command
-     *                          commandEditTokens[0] contains edit criteria
-     *                          commandEditTokens[1] contains new question
-     *                          description to change to (if any)
-     *                          commandEditTokens[2] contains new question answer to
-     *                          change to (if any)
+     *                          commandEditTokens[0] contains edit field
+     *                          commandEditTokens[1] contains new value to change to
+     * @param qnIndex           Index of question to be edited
      */
     private static void extractEditCriteria(String userInput, int qnIdex, String[] commandEditTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
@@ -360,38 +358,66 @@ public class Parser {
      *
      * @param userInput         Raw command entered by the user
      * @param commandEditTokens Critical information chunks of edit command
-     *                          commandEditTokens[0] contains edit criteria
-     *                          commandEditTokens[1] contains new question
-     *                          description to change to (if any)
-     *                          commandEditTokens[2] contains new question answer to
-     *                          change to (if any)
+     *                          commandEditTokens[0] contains edit field
+     *                          commandEditTokens[1] contains new value to change to
+     * @param qnIndex           Index of question to be edited
      */
-    private static void extractEditNewValues(String userInput, String[] commandEditTokens)
-            throws IllegalArgumentException {
+    private static void extractEditNewValues(String userInput, String[] commandEditTokens, int qnIndex)
+            throws IllegalArgumentException, QuizHubExceptions, ArrayIndexOutOfBoundsException {
+        Question qn = questions.getQuestionByIndex(qnIndex);
+        String newVal;
         switch (commandEditTokens[0]) {
         case "description":
-            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/description");
+            newVal = Parser.getContentAfterKeyword(userInput, "/description");
+            if (newVal.equals(qn.getQuestionBody())) {
+                throw new QuizHubExceptions();
+            }
             break;
         case "answer":
-            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/answer");
+            newVal = Parser.getContentAfterKeyword(userInput, "/answer");
+            if (newVal.equals(qn.getQuestionAnswer())) {
+                throw new QuizHubExceptions();
+            }
+            if (qn.getQuestionType().equals(QnType.MULTIPLECHOICE)) {
+                try {
+                    int newAnswer = Integer.parseInt(newVal);
+                    if (newAnswer < 1 || newAnswer > 4) {
+                        throw new IllegalArgumentException("Invalid Integer Answer");
+                    }
+                } catch (Exception e) {
+                    throw new IllegalArgumentException("Invalid Integer Answer");
+                }
+            }
             break;
         case "option1":
-            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option1");
+            newVal = Parser.getContentAfterKeyword(userInput, "/option1");
+            if (newVal.equals(qn.getOption(1))) {
+                throw new QuizHubExceptions();
+            }
             break;
         case "option2":
-            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option2");
+            newVal = Parser.getContentAfterKeyword(userInput, "/option2");
+            if (newVal.equals(qn.getOption(2))) {
+                throw new QuizHubExceptions();
+            }
             break;
         case "option3":
-            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option3");
+            newVal = Parser.getContentAfterKeyword(userInput, "/option3");
+            if (newVal.equals(qn.getOption(3))) {
+                throw new QuizHubExceptions();
+            }
             break;
         case "option4":
-            commandEditTokens[1] = Parser.getContentAfterKeyword(userInput, "/option4");
+            newVal = Parser.getContentAfterKeyword(userInput, "/option4");
+            if (newVal.equals(qn.getOption(4))) {
+                throw new QuizHubExceptions();
+            }
             break;
         default:
             throw new IllegalArgumentException();
         }
+        commandEditTokens[1] = newVal;
     }
-
     /**
      * Handles exceptions raised by incorrect edit criteria for edit commands.
      *
@@ -452,9 +478,20 @@ public class Parser {
      * @return InvalidCommand with error messages
      */
     private static Command handleEditNewValuesExceptions(Exception editValuesException) {
-        if (editValuesException instanceof IllegalArgumentException ||
-                editValuesException instanceof ArrayIndexOutOfBoundsException) {
-            return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG + System.lineSeparator() +
+        if (editValuesException instanceof IllegalArgumentException || 
+            editValuesException instanceof ArrayIndexOutOfBoundsException) {
+            if (editValuesException.getMessage().equals("Invalid Integer Answer")) {
+                return new CommandInvalid(CommandMultipleChoice.INVALID_ANSWER_MSG + System.lineSeparator() +
+                        CommandEdit.INVALID_FORMAT_MSG);
+            } else {
+                return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG + System.lineSeparator() +
+                    CommandEdit.INVALID_FORMAT_MSG);
+            }     
+        } else if (editValuesException instanceof QuizHubExceptions) {
+            return new CommandInvalid(CommandEdit.NO_CHANGES_MADE_MSG + System.lineSeparator() +
+                    CommandEdit.INVALID_FORMAT_MSG);
+        } else if (editValuesException instanceof NumberFormatException) {
+            return new CommandInvalid(CommandMultipleChoice.INVALID_ANSWER_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);

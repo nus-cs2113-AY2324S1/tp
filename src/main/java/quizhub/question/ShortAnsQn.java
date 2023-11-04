@@ -32,6 +32,7 @@ public class ShortAnsQn extends Question {
      * Gets question answer.
      * @return The answer
      */
+    @Override
     public String getQuestionAnswer() {
         return this.answer;
     }
@@ -40,27 +41,15 @@ public class ShortAnsQn extends Question {
     public void editQuestion(String editField, String newValue) {
         switch (editField) {
         case "description":
-            if (super.getQuestionDescription().equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             super.editQuestion(newValue, "");
             break;
         case "answer":
-            if (this.answer.equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             this.answer = newValue;
             break;
         default:
             break;
         }
-    }
-
-    @Override
-    public QnType getQuestionType(){
-        return QnType.SHORTANSWER;
+        System.out.println("    Roger that! I have edited the following question >w< !");
     }
 
     /**
