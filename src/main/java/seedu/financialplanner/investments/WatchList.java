@@ -79,10 +79,10 @@ public class WatchList {
     public StringBuilder getExpiredStocks() {
         StringBuilder queryStocks = new StringBuilder();
         long currentTime = System.currentTimeMillis();
-        long fivemin = 300000;
+        long fiveMin = 300000;
         for (Map.Entry<String, Stock> set: stocks.entrySet()) {
             Stock currentStock = set.getValue();
-            if (currentStock.getLastFetched() + fivemin < currentTime) {
+            if (currentStock.getLastFetched() + fiveMin < currentTime) {
                 queryStocks.append(set.getKey());
                 queryStocks.append(",");
             }

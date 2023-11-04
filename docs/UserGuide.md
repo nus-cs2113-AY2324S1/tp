@@ -805,10 +805,11 @@ in the radar chart
 **A**: Due to the restrictions of the free API provided, only US-exchange stocks are provided. Sorry for the
 inconvenience caused
 
-**Q**: Why is saying that the API is done or something?
+**Q**: Why is it saying that API limit is reached, not working or something like that when I use watchlist 
+features? 🤬
 
 **A**: Due to the free nature of the API, there is a restriction in the number of requests allowed in a specific time
-window. Sorry for the inconvenience caused.
+window. Sorry for the inconvenience caused. 🥲
 
 ## Command Summary
 

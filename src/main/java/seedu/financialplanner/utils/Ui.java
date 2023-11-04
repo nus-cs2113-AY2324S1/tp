@@ -82,7 +82,7 @@ public class Ui {
     }
 
     public void printWatchListAcknowledgement() {
-        System.out.println("Data provided by Financial Modeling Prep and Alpha Vantage 😊");
+        showMessage("Data provided by Financial Modeling Prep and Alpha Vantage 😊");
     }
 
 
@@ -110,7 +110,7 @@ public class Ui {
             String date = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss")
                     .format(stock.getLastUpdated());
             String lastUpdate = StringUtils.rightPad(date, 10);
-            System.out.println(symbol + market + price + dayHigh + dayLow + name + lastUpdate);
+            showMessage(symbol + market + price + dayHigh + dayLow + name + lastUpdate);
         }
         printWatchListAcknowledgement();
     }
