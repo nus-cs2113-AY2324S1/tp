@@ -2,6 +2,7 @@ package cashleh.commands;
 
 import cashleh.Ui;
 import cashleh.budget.BudgetHandler;
+import cashleh.exceptions.CashLehBudgetException;
 
 import java.util.logging.Level;
 
@@ -22,7 +23,7 @@ public class DeleteBudget extends Command {
      * logs the operation, and prints a confirmation message.
      */
     @Override
-    public void execute() {
+    public void execute() throws CashLehBudgetException {
         assert budgetHandler.getBudget().isActive();
         if (budgetHandler.getBudget().isActive()) {
             budgetHandler.deleteBudget();
@@ -30,6 +31,10 @@ public class DeleteBudget extends Command {
             Ui.printMultipleText(new String[] {"Alright, CashLeh has just deleted your previous budget!", "Watch out "
                     + "though as spending without budget ain't smart..."});
             logger.log(Level.INFO, "budget was successfully deleted");
+        } else {
+            String text = "Please create a new budget as you haven't"
+                    + " set one yet or deleted the previous one.";
+            throw new CashLehBudgetException(text);
         }
     }
 }
