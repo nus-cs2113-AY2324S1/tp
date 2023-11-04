@@ -105,7 +105,7 @@ public class Ui {
      * @param dishPrice
      */
     public void formatListMenu(String dishName, String dishPrice) {
-        String leftAlignFormat = "| %-24s | %-12s |%n";
+        String leftAlignFormat = "| %-38s | %-12s |%n";
         System.out.format(leftAlignFormat, dishName, dishPrice);
     }
     //+-----------------+------+
