@@ -26,7 +26,7 @@ class HelpCommandTest {
     }
 
     @Test
-    void setArguments_help_helpOfHelp() throws Storage.StorageOperationException {
+    void setArguments_help_helpOfHelp() {
         HelpCommand helpCommand = new HelpCommand("help help");
         helpCommand.setArguments("help", new CommandParser());
         assertEquals(HelpCommand.HELP, helpCommand.getHelpMessage());

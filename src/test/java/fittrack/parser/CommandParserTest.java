@@ -195,7 +195,7 @@ class CommandParserTest {
         try {
             Workout workout = new CommandParser().parseWorkout("name c/123.45");
             assertEquals("name", workout.getName());
-            assertEquals(123.45, workout.getCalories());
+            assertEquals(123.45, workout.getCalories().value);
             assertEquals(Date.today(), workout.getDate());
         } catch (PatternMatchFailException | NumberFormatException e) {
             throw new RuntimeException(e);
@@ -207,7 +207,7 @@ class CommandParserTest {
         try {
             Workout workout = new CommandParser().parseWorkout("name c/123.45 d/2023-10-31");
             assertEquals("name", workout.getName());
-            assertEquals(123.45, workout.getCalories());
+            assertEquals(123.45, workout.getCalories().value);
             assertEquals(new Date(2023, 10, 31), workout.getDate());
         } catch (PatternMatchFailException | NumberFormatException e) {
             throw new RuntimeException(e);

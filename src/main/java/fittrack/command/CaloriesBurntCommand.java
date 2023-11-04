@@ -4,7 +4,6 @@ import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Workout;
 import fittrack.parser.CommandParser;
-import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 
 // @@author NgLixuanNixon
