@@ -147,7 +147,7 @@ add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY
 
 Example of usage:
 
-`add /n Panadol /d 12 June 2026 /q 300
+`add /n Panadol /d 12 June 2026 /s ABC123 /q 52
 `
 
 Expected outcome:
