@@ -28,9 +28,10 @@ public class WatchList {
 
     private WatchList() {
         stocks = LoadData.loadWatchList();
-        if (!stocks.isEmpty()) {
+        if (stocks != null) {
             return;
         }
+        stocks = new HashMap<>();
         System.out.println("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
         try {
             Stock apple = new Stock("AAPL");
