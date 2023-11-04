@@ -48,7 +48,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Financial Planner` from [here](http://link.to/duke).
 3. Copy the file to the folder you want to use as the *home folder* for Financial Planner.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ip.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.
 5. Refer to the **Features** section below for details of each command.
 
 ## Features
@@ -97,6 +97,7 @@ to the Financial Planner.
 Balance: 5000.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+
 #### Add expense: `add expense`
 Adds an expense to the Financial Planner
 
@@ -129,6 +130,7 @@ to the Financial Planner.
 Balance: 4700.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+
 ### Delete cashflow: `delete`
 Deletes a cashflow from the Financial Planner.
 
