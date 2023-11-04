@@ -1,5 +1,8 @@
 Benedict
-updateBudget 10
+
+deleteBudget
+ viewBudget
+updateBudget 10.50
 addIncome job /amt 3000 /date 01 Jan 2020
 addIncome side hustle /amt 500 /date 19/10/2023
 addExpense vacation /amt 4000
@@ -16,8 +19,8 @@ viewBudget
 updateBudget 60
 addExpense tax /amt 40
 viewBudget
-addIncome black jack /amt 800
-updateBudget 80
+addIncome black jack /amt 80
+updateBudget 150.0
 viewBudget
 deleteIncome 5
 deleteIncome 2
