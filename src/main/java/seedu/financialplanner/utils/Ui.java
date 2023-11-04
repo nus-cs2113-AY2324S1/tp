@@ -81,6 +81,11 @@ public class Ui {
         System.out.println();
     }
 
+    public void printWatchListAcknowledgement() {
+        System.out.println("Data provided by Financial Modeling Prep and Alpha Vantage 😊");
+    }
+
+
     public void printStocksInfo(WatchList watchList) {
         for (Map.Entry<String, Stock> set : watchList.getStocks().entrySet()) {
             Stock stock = set.getValue();
@@ -107,6 +112,7 @@ public class Ui {
             String lastUpdate = StringUtils.rightPad(date, 10);
             System.out.println(symbol + market + price + dayHigh + dayLow + name + lastUpdate);
         }
+        printWatchListAcknowledgement();
     }
 
     public void printAddStock(String stockName) {
