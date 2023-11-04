@@ -468,14 +468,22 @@ public class QuestionList {
             Question question = questions.get(i);
 
             ui.displayQuestion(question, i + 1, totalQuestions);
-            String correctAnswer = getAnswerByIndex(i + 1,  questions).strip(); // Get correct answer by index
             String userAnswer = ui.getUserInput().strip();
+            String correctAnswer = "";
+            if (question instanceof MultipleChoiceQn) {
+                correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
+            } else {
+                correctAnswer = ((ShortAnsQn) question).getQuestionAnswer();
+            }
+
+            correctAnswer = correctAnswer.strip();
 
             if (userAnswer.equalsIgnoreCase(correctAnswer)) {
                 ui.displayMessage("    Correct!");
                 correctAnswers++;
             } else {
                 ui.displayMessage("    Wrong!");
+                ui.displayMessage("    The answer is: " + correctAnswer);
             }
 
             int questionsLeft = totalQuestions - (i + 1);
