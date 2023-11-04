@@ -1,5 +1,7 @@
 @startuml
 
+autoactivate on
+
 participant ":BudgetCommand" as BudgetCommand
 participant "<<class>>\nBudget" as Budget
 participant ":Ui" as Ui
@@ -8,11 +10,16 @@ participant ":Ui" as Ui
 
 alt set
     BudgetCommand -> Budget: setBudget(budget)
+    return
     BudgetCommand -> Ui: printSetBudget()
+    return
 else update
     BudgetCommand -> Ui: printBudgetBeforeUpdate()
+    return
     BudgetCommand -> Budget: updateBudget(budget)
+    return
     BudgetCommand -> Ui: printBudgetAfterUpdate()
+    return
 else delete
     ref over BudgetCommand: DeleteBudget
 else reset

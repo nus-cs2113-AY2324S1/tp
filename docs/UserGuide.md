@@ -51,7 +51,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 
 ## Quick Start
 
-{Give steps to get started quickly}
+{TO BE UPDATED WHEN V2.1 IS COMPLETED!!!}
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Financial Planner` from [here](http://link.to/duke).
