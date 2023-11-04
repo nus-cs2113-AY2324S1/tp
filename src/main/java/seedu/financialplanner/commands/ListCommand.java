@@ -84,11 +84,11 @@ public class ListCommand extends Command {
             ui.showMessage((i + 1) + ": " + cashflowToBePrinted.get(i));
         }
         if (category == null) {
-            ui.showMessage("Balance: " + Cashflow.getBalance());
+            ui.showMessage("Balance: " + ui.formatBalance(Cashflow.getBalance()));
         } else if (category.equals(CashflowCategory.INCOME)) {
-            ui.showMessage("Income Balance: " + Cashflow.getIncomeBalance());
+            ui.showMessage("Income Balance: " + ui.formatBalance(Cashflow.getIncomeBalance()));
         } else if (category.equals(CashflowCategory.EXPENSE)) {
-            ui.showMessage("Expense Balance: " + Cashflow.getExpenseBalance());
+            ui.showMessage("Expense Balance: " + ui.formatBalance(Cashflow.getExpenseBalance()));
         }
     }
 }

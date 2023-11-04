@@ -6,6 +6,7 @@ import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Scanner;
@@ -109,18 +110,24 @@ public class Ui {
         System.out.println("Use watchlist command to view updated Watchlist");
     }
 
+    public String formatBalance(double balance) {
+        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+
+        return decimalFormat.format(Cashflow.round(balance, 2));
+    }
+
     public void printAddedCashflow(Cashflow entry) {
         System.out.print("You have added an ");
         System.out.println(entry);
         System.out.println("to the Financial Planner.");
-        System.out.println("Balance: " + entry.formatBalance());
+        System.out.println("Balance: " + formatBalance(Cashflow.getBalance()));
     }
 
     public void printDeletedCashflow(Cashflow entry) {
         System.out.print("You have removed an ");
         System.out.println(entry);
         System.out.println("from the Financial Planner.");
-        System.out.println("Balance: " + entry.formatBalance());
+        System.out.println("Balance: " + formatBalance(Cashflow.getBalance()));
     }
 
     public void printDeletedRecur(Cashflow entry) {

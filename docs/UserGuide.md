@@ -279,27 +279,32 @@ Balance: -830.00
 Example output:
 
 ```
-You have 4 matching cashflows:
+You have 6 matching cashflows:
 1: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-2: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: work
-3: Expense
    Type: Dining
    Amount: 30.00
    Description: Genki Sushi
-4: Expense
+2: Expense
    Type: Necessities
    Amount: 300.00
    Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
+3: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+4: Income
+   Type: Investments
+   Amount: 1000.00
+5: Income
+   Type: Salary
+   Amount: 100.00
+6: Expense
+   Type: Others
+   Amount: 0.23
+Balance: 1269.77
 ```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List income: `list income`
@@ -309,18 +314,18 @@ Example output:
 ```
 You have 3 matching cashflows:
 1: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: work
-2: Income
    Type: Allowance
    Amount: 500.00
    Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-3: Income
+2: Income
    Type: Investments
    Amount: 1000.00
+3: Income
+   Type: Salary
+   Amount: 100.00
+Income Balance: 1600.00
 ```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List expense: `list expense`
@@ -330,20 +335,20 @@ Example output:
 ```
 You have 3 matching cashflows:
 1: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-2: Expense
    Type: Dining
    Amount: 30.00
    Description: Genki Sushi
-3: Expense
+2: Expense
    Type: Necessities
    Amount: 300.00
    Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
+3: Expense
+   Type: Others
+   Amount: 0.23
+Expense Balance: 330.23
 ```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List recurring: `list recurring`

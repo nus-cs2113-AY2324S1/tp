@@ -89,11 +89,6 @@ public abstract class Cashflow {
         return string;
     }
 
-    public String formatBalance() {
-        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
-
-        return decimalFormat.format(round(Cashflow.balance, 2));
-    }
 
     public double getAmount() {
         return this.amount;
