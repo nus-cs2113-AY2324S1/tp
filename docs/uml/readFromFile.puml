@@ -1,0 +1,30 @@
+@startuml
+
+actor User
+participant FileStorage
+database File as "User's File"
+participant IncomeStatement
+participant ExpenseStatement
+User -> FileStorage: Run CashLeh? application
+FileStorage -> FileStorage: Check if file with user's name exists
+alt File exists
+    FileStorage -> File: Open file
+    loop for each transaction in file
+        FileStorage -> FileStorage: Read next transaction line
+        FileStorage -> FileStorage: Check transaction type
+        alt Transaction format is valid
+            FileStorage -> FileStorage: Extract transaction details
+            FileStorage -> FileStorage: Create Income/Expense object
+            FileStorage -> IncomeStatement: Add object to IncomeStatement
+            FileStorage -> ExpenseStatement: Add object to ExpenseStatement
+        else Transaction format is invalid
+            FileStorage --> User: Throw CashLehFileCorruptedException
+        end
+    end
+    FileStorage --> User: Data read successfully
+else File does not exist
+    FileStorage -> File: Create new file
+    FileStorage --> User: New file created
+end
+
+@enduml

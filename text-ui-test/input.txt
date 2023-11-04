@@ -1,6 +1,5 @@
 Benedict
 updateBudget 10
-addIncome job /amt 3000 /date 2020-01-01
 addIncome job /amt 3000 /date 01 Jan 2020
 addIncome side hustle /amt 500 /date 19/10/2023
 addExpense vacation /amt 4000
@@ -15,7 +14,6 @@ viewBudget
 updateBudget 0
 viewBudget
 updateBudget 60
-viewBudget
 addExpense tax /amt 40
 viewBudget
 addIncome black jack /amt 800
@@ -23,6 +21,19 @@ updateBudget 80
 viewBudget
 deleteIncome 5
 deleteIncome 2
+viewFinancialStatement
+addExpense milk tea /amt 2.50
+addExpense milk tea /amt 4.50 /cat food_drink
+filterExpense milk tea
+filterExpense /amt 2.50
+filterExpense milk
+filter /cat food_drink
+addIncome CPF /amt 500 /cat other
+addIncome toto prize money /amt 2.50 /cat lottery
+addExpense book /amt 10 /cat other
+filter /cat other
+filter /amt 2.50
+addIncome a very long income description longer than MAX_DESCRIPTION set /amt 500
 viewFinancialStatement
 bad input
 exit
