@@ -1,5 +1,6 @@
 package seedu.financialplanner;
 
+import java.io.File;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,10 @@ public class FinancialPlannerLogger {
      */
     public static void initialise() {
         try {
+            File dir = new File("data");
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
             FileHandler fh = new FileHandler("data/logger.log");
             LogManager.getLogManager().reset();
             logger.addHandler(fh);

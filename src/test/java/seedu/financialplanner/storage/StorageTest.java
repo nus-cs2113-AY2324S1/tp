@@ -2,6 +2,7 @@ package seedu.financialplanner.storage;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
@@ -54,6 +55,7 @@ public class StorageTest {
     public void saveValidData() throws FinancialPlannerException, IOException {
         cashflowList.list.clear();
         getTestData();
+        Budget.setBudget(10);
         storage.save(String.valueOf(testFolder.resolve("temp.txt")));
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
@@ -62,6 +64,7 @@ public class StorageTest {
 
         assertEquals(Files.readAllLines(Path.of(filePath)),
                 Files.readAllLines(testFolder.resolve("temp.txt")));
+        Budget.deleteBudget();
     }
 
     @Test
@@ -77,7 +80,7 @@ public class StorageTest {
 
     private static void getTestValidData(String filePath, String date) throws IOException {
         try {
-            Files.copy(Paths.get("src/test/testData/ValidData.txt"), Path.of(filePath));
+            Files.copy(Paths.get("src/test/testData/ValidDataWithBudget.txt"), Path.of(filePath));
             FileWriter fw = new FileWriter(filePath, true);
             fw.append(" ").append(date);
             fw.close();

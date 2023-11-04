@@ -1,6 +1,7 @@
 package seedu.financialplanner.storage;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,10 +19,10 @@ public class Storage {
     private Storage() {
         if (!Files.exists(path)) {
             try {
-                System.out.println("Directory doesn't exist. Creating directory...");
+                Ui.getInstance().showMessage("Directory doesn't exist. Creating directory...");
                 Files.createDirectory(path);
             } catch (IOException e) {
-                System.out.println("Error creating directory: " + e.getMessage());
+                Ui.getInstance().showMessage("Error creating directory: " + e.getMessage());
             }
         }
     }

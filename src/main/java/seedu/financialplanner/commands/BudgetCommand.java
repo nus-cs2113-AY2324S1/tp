@@ -25,6 +25,9 @@ public class BudgetCommand extends Command {
      * @throws FinancialPlannerException If there is an issue with the command provided.
      */
     public BudgetCommand(RawCommand rawCommand) throws FinancialPlannerException {
+        if (rawCommand.args.isEmpty()) {
+            throw new FinancialPlannerException("Budget operation cannot be empty.");
+        }
         command = rawCommand.args.get(0);
         if (command.equals("delete") || command.equals("reset") || command.equals("view")) {
             return;
@@ -76,7 +79,7 @@ public class BudgetCommand extends Command {
     private void validateCommandFormat(RawCommand rawCommand) throws FinancialPlannerException {
         if (!command.equals("set") && !command.equals("update")) {
             logger.log(Level.WARNING, "Invalid arguments for budget command");
-            throw new FinancialPlannerException("Budget command must be one of the following: set, update, " +
+            throw new FinancialPlannerException("Budget operation must be one of the following: set, update, " +
                     "delete, reset, view.");
         }
 
