@@ -45,9 +45,9 @@ public class LoginSystem {
     public String authenticateUserChoice() {
         while (in.hasNextLine()) {
             String choice = in.nextLine();
-            if (choice.equals("register")) {
+            if (choice.trim().equals("register")) {
                 return "register";
-            } else if (choice.equals("login")) {
+            } else if (choice.trim().equals("login")) {
                 return "login";
             } else {
                 interactor.showInvalidChoiceMessage();
@@ -69,7 +69,7 @@ public class LoginSystem {
         interactor.showUsernameMessage();
         String username = in.nextLine();
 
-        while (username.equals("")) {
+        while (username.trim().equals("")) {
             interactor.showBlankNameMessage();
             username = in.nextLine();
         }
@@ -77,7 +77,7 @@ public class LoginSystem {
         interactor.showPasswordMessage();
         String password = in.nextLine();
 
-        while (password.equals("")) {
+        while (password.trim().equals("")) {
             interactor.showBlankPasswordMessage();
             password = in.nextLine();
         }
