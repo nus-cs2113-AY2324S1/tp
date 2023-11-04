@@ -61,8 +61,8 @@ public class Ui {
         printLine();
     }
 
-    public void printVersion(String version) {
-        System.out.println(version);
+    public void printVersion() {
+        System.out.println(FitTrack.VERSION);
     }
 
     public void printCommandResult(CommandResult commandResult) {
@@ -92,10 +92,10 @@ public class Ui {
     }
 
     public void printMealWithNumber(int mealNum, Meal meal) {
-        System.out.println((mealNum + 1) + ". " + meal.toString());
+        System.out.println((mealNum + 1) + "." + meal.toString());
     }
 
     public void printWorkoutWithNumber(int workoutNum, Workout workout) {
-        System.out.println((workoutNum + 1) + ". " + workout.toString());
+        System.out.println((workoutNum + 1) + "." + workout.toString());
     }
 }
