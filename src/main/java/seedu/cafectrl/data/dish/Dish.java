@@ -42,7 +42,15 @@ public class Dish {
     }
 
     //@@author ziyi105
+
+    /**
+     * Compare the original price and new price
+     * @param newPrice
+     * @return
+     */
     public int comparePrice(float newPrice) {
-        return this.dollarValue.format(price).compareTo(this.dollarValue.format(newPrice));
+        String formattedPrice = this.dollarValue.format(price);
+        String formattedNewPrice = this.dollarValue.format(newPrice);
+        return formattedPrice.compareTo(formattedNewPrice);
     }
 }
