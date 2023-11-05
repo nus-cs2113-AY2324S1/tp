@@ -6,7 +6,7 @@ Invalid command. Please try again.
 Type 'help' to see the list of commands available.
 ____________________________________________________________
 ____________________________________________________________
-You can access our user guide by https://docs.google.com/document/d/1BOz_v4eYQ8y7Dje6Jm6nqymi9jmrsb9MAohLCL_sLvI/edit?usp=sharing
+You can access our user guide by https://ay2324s1-cs2113-t18-3.github.io/tp/UserGuide.html
 
 Functions and their format:
 
