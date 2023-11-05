@@ -28,20 +28,20 @@ GUI apps.
 -**Contributions to the UG**
  * Hao Zhi came up with the  inital template for the user guide and added documentation for the following sections of 
    the user guide:
-   * [Login System](/docs/UserGuide.md#login-system--create-new-user-or-login-existing-user)
-   * [Help Command](/docs/UserGuide.md#help---list-currently-available-commands-in-current-version-their-uses-and-how-to-format-them-in-the-command-line)
-   * [Save Command](/docs/UserGuide.md#save---save-existing-drugs-onto-hard-drive-of-computer)
-   * [addVendor Command](/docs/UserGuide.md#addvendor---adds-a-vendor-into-list-of-vendors-being-tracked-by-system)
-   * [listVendor Command](/docs/UserGuide.md#listvendors---list-all-vendors-currently-being-tracked-by-the-system)
+   * [Login System](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#login-system--create-new-user-or-login-existing-user)
+   * [Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#help---list-currently-available-commands-in-current-version-their-uses-and-how-to-format-them-in-the-command-line)
+   * [Save Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#save---save-existing-drugs-onto-hard-drive-of-computer)
+   * [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#addvendor---adds-a-vendor-into-list-of-vendors-being-tracked-by-system)
+   * [listVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#listvendors---list-all-vendors-currently-being-tracked-by-the-system)
 
 
 -**Contributions to the DG**
  * Hao Zhi came up with the inital template of the developer guide and added documentation for the following section of 
    the developer guide:
-   * [Design & implementation](/docs/DeveloperGuide.md#design--implementation),[Login System Component](/docs/DeveloperGuide.md#login-system-component),[Help Command](/docs/DeveloperGuide.md#4-help-command), [Save Command](/docs/DeveloperGuide.md#5-save-command), [addVendor Command](/docs/DeveloperGuide.md#6-addvendor-command),
-     [listVendors Command](/docs/DeveloperGuide.md#7-listvendors-command)
+   * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](/docs/DeveloperGuide.md#login-system-component),[Help Command](/docs/DeveloperGuide.md#4-help-command), [Save Command](/docs/DeveloperGuide.md#5-save-command), [addVendor Command](/docs/DeveloperGuide.md#6-addvendor-command),
+     [listVendors Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#7-listvendors-command)
  * UML Diagrams
-   * [Architecture Diagram under Design & Implementation](/docs/UML%20Diagrams/Architecture_Diagram.png),[Login System Sequence Diagram](/docs/UML%20Diagrams/StockerToLoginSystem.png),
+   * [Architecture Diagram under Design & Implementation](),[Login System Sequence Diagram](/docs/UML%20Diagrams/StockerToLoginSystem.png),
      [Save Command Sequence Diagram]()  
 
 -**Contributions to team-based tasks**
