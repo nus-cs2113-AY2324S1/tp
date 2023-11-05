@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * It takes a list of income and expense records as input and provides methods to calculate and display the balance.
  */
 public class Balance {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     private final ArrayList<Income> incomes;
     private final ArrayList<Expense> expenses;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Balance(ArrayList<Income> incomes, ArrayList<Expense> expenses) {
         this.incomes = incomes;
