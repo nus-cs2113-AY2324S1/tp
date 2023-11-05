@@ -30,8 +30,7 @@ public class CashLeh {
                     + " / /___/ /_/ (__  ) / / / /___/  __/ / / /_/\n"
                     + " \\____/\\__,_/____/_/ /_/_____/\\___/_/ /_(_)\n";
         String userGuideLink = ("Here is the link to the user guide:"
-                + "https://docs.google.com/document/d/"
-                + "15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
+                + "https://ay2324s1-cs2113-w12-2.github.io/tp/UserGuide.html");
         String[] greetingLines = {userGuideLink, logo, "Welcome to 'CashLeh?'! " +
                 "Your one-stop app for managing your finances!", "What is your name?"};
 
