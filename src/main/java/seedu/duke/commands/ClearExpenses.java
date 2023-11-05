@@ -17,6 +17,7 @@ public class ClearExpenses {
      * @param expenses The list of expenses to be cleared.
      */
     public ClearExpenses(ArrayList<Expense> expenses) {
+        assert expenses != null : "expenses should not be null";
         this.expenses = expenses;
     }
 
