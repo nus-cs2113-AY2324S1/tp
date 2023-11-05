@@ -41,7 +41,7 @@ GUI apps.
    * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#login-system-component),[Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#4-help-command), [Save Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#5-save-command), [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-addvendor-command),
      [listVendors Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#7-listvendors-command)
  * UML Diagrams
-   * [Architecture Diagram under Design & Implementation](),[Login System Sequence Diagram](/docs/UML%20Diagrams/StockerToLoginSystem.png),
+   * [Architecture Diagram under Design & Implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/Architecture_Diagram.png),[Login System Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/StockerToLoginSystem.png),
      [Save Command Sequence Diagram]()  
 
 -**Contributions to team-based tasks**

@@ -27,19 +27,31 @@ activate LoginSystem
 LoginSystem -> LoginSystem : run()
 activate LoginSystem
 LoginSystem -> LoginSystem : loadExistingUsers()
+activate LoginSystem
 LoginSystem -> LoginSystem: authenticateUserChoice()
+activate LoginSystem
 User -> LoginSystem : register or login input
 
 alt  Register
 
 LoginSystem -> LoginSystem : newUserCreator()
+activate LoginSystem
 LoginSystem --> User : showSuccessfulRegistrationMessage()
 
 else Login
 LoginSystem ->LoginSystem : loginExistingUser()
+activate LoginSystem
 LoginSystem --> User: showSuccessfulLoginMessage()
 
 end
+deactivate LoginSystem
+
+deactivate LoginSystem
+
+deactivate LoginSystem
+
+deactivate LoginSystem
+
 deactivate LoginSystem
 
 deactivate LoginSystem
