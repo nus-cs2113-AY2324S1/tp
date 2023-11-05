@@ -38,10 +38,10 @@ GUI apps.
 -**Contributions to the DG**
  * Hao Zhi came up with the inital template of the developer guide and added documentation for the following section of 
    the developer guide:
-   * [Design & implementation](),[Login System Component](),[Help Command](), [Save Command](), [addVendor Command](),
-     [listVendors Command]()
+   * [Design & implementation](/docs/DeveloperGuide.md#design--implementation),[Login System Component](/docs/DeveloperGuide.md#login-system-component),[Help Command](/docs/DeveloperGuide.md#4-help-command), [Save Command](/docs/DeveloperGuide.md#5-save-command), [addVendor Command](/docs/DeveloperGuide.md#6-addvendor-command),
+     [listVendors Command](/docs/DeveloperGuide.md#7-listvendors-command)
  * UML Diagrams
-   * [Architecture Diagram under Design & Implementation](),[Login System Sequence Diagram](),
+   * [Architecture Diagram under Design & Implementation](/docs/UML%20Diagrams/Architecture_Diagram.png),[Login System Sequence Diagram](/docs/UML%20Diagrams/StockerToLoginSystem.png),
      [Save Command Sequence Diagram]()  
 
 -**Contributions to team-based tasks**
