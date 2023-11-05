@@ -141,8 +141,8 @@ public class Parser {
             Matcher matcher = pattern.matcher(args);
             if (matcher.matches() && matcher.groupCount() == 4) {
                 String name = matcher.group(1).trim();
-                String expiryDate = matcher.group(2);
-                String serialNumber = matcher.group(3);
+                String expiryDate = matcher.group(2).trim();
+                String serialNumber = matcher.group(3).trim();
                 Long quantity = Long.parseLong(matcher.group(4));
                 if (quantity < 1) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
