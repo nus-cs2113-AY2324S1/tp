@@ -37,8 +37,7 @@ public class Progress {
      * @return a String containing the bar chart and some data.
      */
     public String displayProgressBar() {
-        String progressBar = buildProgressBar();
-        return progressBar;
+        return buildProgressBar();
     }
 
     /**

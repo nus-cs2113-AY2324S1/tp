@@ -14,3 +14,6 @@ src/main/resources/docs/
 bin/
 
 /text-ui-test/ACTUAL.TXT
+
+/data/*
+!/data/testUser.txt

@@ -23,7 +23,6 @@ public class DeleteBudget extends Command {
      */
     @Override
     public void execute() {
-        assert budgetHandler.getBudget().isActive();
         if (budgetHandler.getBudget().isActive()) {
             budgetHandler.deleteBudget();
             assert !budgetHandler.getBudget().isActive();

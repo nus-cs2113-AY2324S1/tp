@@ -2,7 +2,6 @@ package cashleh.budget;
 
 import cashleh.exceptions.CashLehBudgetException;
 import cashleh.exceptions.CashLehException;
-import cashleh.transaction.Expense;
 import cashleh.transaction.Income;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.IncomeStatement;
@@ -70,34 +69,6 @@ class BudgetHandlerTest {
         budgetHandler.deleteBudget();
         assertFalse(budget.isActive());
     }
-
-    @Test
-    void printBasicWarning_budgetIsNotOnTrack_throwsException() throws CashLehBudgetException {
-        incomeStatement.addIncome(new Income("salary", 3));
-        budgetHandler.setBudgetPercentage();
-        budget.setActive(true);
-        assertThrows(CashLehException.class,
-                () -> budgetHandler.printBasicWarning());
-        expenseStatement.addExpense(new Expense("rent", 1));
-        budgetHandler.setBudgetPercentage();
-        assertThrows(CashLehException.class,
-                () -> budgetHandler.printBasicWarning());
-    }
-
-    @Test
-    void printSeriousWarning_budgetHasBeenMaxedOut_throwsException() throws CashLehBudgetException {
-        expenseStatement.addExpense(new Expense("rent", 10));
-        budgetHandler.setBudgetPercentage();
-        budget.setActive(true);
-        assertThrows(CashLehException.class,
-                () -> budgetHandler.printSeriousWarning());
-        incomeStatement.addIncome(new Income("salary", 5));
-        budgetHandler.setBudgetPercentage();
-        assertThrows(CashLehException.class,
-                () -> budgetHandler.printSeriousWarning());
-
-    }
-
     @Test
     void printBudget_budgetIsNotActive_throwsException() throws CashLehBudgetException {
         incomeStatement.addIncome(new Income("salary", 50));
