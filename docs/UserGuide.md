@@ -12,7 +12,7 @@ situation.
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `CashLeh?` from [GitHub](https://github.com/AY2324S1-CS2113-W12-2/tp/releases/).
 3. Copy it into an empty folder
-4. Open the terminal and run the command `java javac- CashLeh.jar`
+4. Open the terminal and run the command `java -jar CashLeh.jar`
 5. CashLeh? should launch and you can start interacting with the application
 
 ## Features
