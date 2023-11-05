@@ -4,7 +4,7 @@
 * [User Guide](#user-guide)
   * [Introduction](#introduction)
   * [Quick Start](#quick-start)
-  * [Features](#features-)
+  * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a dish : `add`](#adding-a-dish--add)
     * [Listing all menu items : `list_menu`](#listing-all-menu-items--listmenu)
@@ -41,7 +41,7 @@ Hello! Welcome to CafeCTRL!
 > 
 ```
 ---------------------------------------------------
-## Features 
+## Features
 > **Notes about command format:**
 > - Words in `UPPER_CASE` are the arguments to be supplied by user. <br>
     e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.
