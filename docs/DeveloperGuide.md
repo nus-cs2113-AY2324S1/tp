@@ -88,12 +88,14 @@ API: `Storage.java`
 
 * There are 2 main ways to implement the storage, one is to save the data after every command, and the other is to save 
 the data one upon exiting the program with the `exit` command.
-* Saving the data once upon exit (Currently implemented):
+* Option 1 (Currently implemented): Saving the data once upon exit
   * Advantage: Better efficiency and performance of the program.
   * Disadvantage: If the program crashes or exits incorrectly, data will not be saved.
-* Saving the data after every command:
+* Option 2: Saving the data after every command:
   * Advantage: Changes are saved after every command.
   * Disadvantage: Executing command might slow down the program when there is a large amount of data to be saved.
+
+Option 1 is chosen to prioritise the performance of the program.
 
 ### Visualization Feature 
 
@@ -106,7 +108,7 @@ Demo:
 
 `vis /t expense /c pie`
 
-Output
+Output:
 
 `Displaying piechart for expense`
 A message will be shown telling you that the chart is being displayed
@@ -277,16 +279,25 @@ Example:
 budget set /b 500
 budget update /b 1000
 ```
-The '/b' is followed by the budget amount. The first line will set the budget by calling `setBudget(500)` method in `Budget.java`.
-The second line updates the budget by adding or subtracting the difference between the initial and updated amount to the 
-initial and current budget. This is done through `updateBudget(500)` method in `Budget.java`. Both functions can be seen 
-in the diagram above
+The `/b` is followed by the budget amount. 
+
+##### Set budget:
+
+The first line will set the budget by calling `setBudget(500)` method in `Budget.java`. The `setBudget(500)` method then sets the 
+`initialBudget` and `currentBudget` variable to the input amount, in this case 500.
+
+##### Update budget:
+
+The second line updates the budget by adding or subtracting the difference between the initial and updated amount to `initialBudget` 
+and `currentBudget`. This is done through `updateBudget(1000)` method in `Budget.java`. In the example above, since the budget is 
+being updated from `500` to `1000`, `500` will be added to the variables `initialBudget` and `currentBudget`. Both functions can be seen 
+in the diagram above.
 
 #### Delete budget:
 
 ![](images/deleteBudget.png)
 
-The budget will be deleted by setting the initial and current budget to 0 through the `deleteBudget()` method in `Budget.java`.
+The budget will be deleted by setting the `initialBudget` and `currentBudget` variables to `0` through the `deleteBudget()` method in `Budget.java`.
 
 Example: `budget delete`
 
@@ -294,7 +305,7 @@ Example: `budget delete`
 
 ![](images/resetBudget.png)
 
-The budget will be reset by resetting the current budget to the initial budget through the `resetBudget()` method in `Budget.java`.
+The budget will be reset by resetting the `currentBudget` variable to the `initialBudget` variable through the `resetBudget()` method in `Budget.java`.
 
 Example: `budget reset`
 
@@ -302,7 +313,7 @@ Example: `budget reset`
 
 ![](images/viewBudget.png)
 
-The current budget will be shown to the user through the `Ui`.
+The `currentBudget` will be shown to the user through the `Ui`.
 
 Example: `budget view`
 
@@ -329,7 +340,8 @@ Example: `budget view`
 
 ## Glossary
 
-* *glossary item* - Definition
+* *Cashflow* - Refers to an income or expense.
+* *WishList* - A list containing goals/targets.
 
 ## Instructions for manual testing
 

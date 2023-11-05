@@ -1,78 +1,77 @@
-Directory doesn't exist. Creating directory...
-Loading existing watchlist..
-Watchlist file not found... Creating
-Initializing New watchlist.. adding AAPL and GOOGL for your reference
-File not found. Creating new file...
-Welcome to your Financial Planner. Type something to get started.
-You have added an Income
+[36mLoading existing watchlist..[0m
+[36mWatchlist file not found... Creating[0m
+[36mInitializing New watchlist.. adding AAPL and GOOGL for your reference[0m
+[36mFile not found. Creating new file...[0m
+[36mWelcome to your Financial Planner. Type something to get started.[0m
+[36mYou have added an Income
    Type: Salary
    Amount: 5000.00
-   Description: part time job
-to the Financial Planner.
-Balance: 5000.00
-You have added an Income
+   Description: part time job[0m
+[36mto the Financial Planner.[0m
+[36mBalance: 5000.00[0m
+[36mYou have added an Income
    Type: Allowance
-   Amount: 123.12
-to the Financial Planner.
-Balance: 5123.12
-You have added an Expense
+   Amount: 123.12[0m
+[36mto the Financial Planner.[0m
+[36mBalance: 5123.12[0m
+[36mYou have added an Expense
    Type: Entertainment
    Amount: 100.00
-   Description: netflix
-to the Financial Planner.
-Balance: 5023.12
-You have added an Expense
+   Description: netflix[0m
+[36mto the Financial Planner.[0m
+[36mBalance: 5023.12[0m
+[36mYou have added an Expense
    Type: Shopping
-   Amount: 123.21
-to the Financial Planner.
-Balance: 4899.91
-You have removed an Income
+   Amount: 123.21[0m
+[36mto the Financial Planner.[0m
+[36mBalance: 4899.91[0m
+[36mYou have removed an Income
    Type: Allowance
-   Amount: 123.12
-from the Financial Planner.
-Balance: 4776.79
-You have removed an Income
+   Amount: 123.12[0m
+[36mfrom the Financial Planner.[0m
+[36mBalance: 4776.79[0m
+[36mYou have removed an Income
    Type: Salary
    Amount: 5000.00
-   Description: part time job
-from the Financial Planner.
-Balance: -223.21
-You have removed an Expense
+   Description: part time job[0m
+[36mfrom the Financial Planner.[0m
+[36mBalance: -223.21[0m
+[36mYou have removed an Expense
    Type: Shopping
-   Amount: 123.21
-from the Financial Planner.
-Balance: -100.00
-You have removed an Expense
+   Amount: 123.21[0m
+[36mfrom the Financial Planner.[0m
+[36mBalance: -100.00[0m
+[36mYou have removed an Expense
    Type: Entertainment
    Amount: 100.00
-   Description: netflix
-from the Financial Planner.
-Balance: 0.00
-You have successfully added:
-Microsoft Corporation
-Use Watchlist to view it!
-You have successfully added:
-Gamestop Corporation - Class A
-Use Watchlist to view it!
-You have added an Income
+   Description: netflix[0m
+[36mfrom the Financial Planner.[0m
+[36mBalance: 0.00[0m
+[36mYou have successfully added:[0m
+[36mMicrosoft Corporation[0m
+[36mUse Watchlist to view it![0m
+[36mYou have successfully added:[0m
+[36mGamestop Corporation - Class A[0m
+[36mUse Watchlist to view it![0m
+[36mYou have added an Income
    Type: Salary
-   Amount: 5000.00
-to the Financial Planner.
-Balance: 5000.00
-A monthly budget of 3000.00 has been set.
-Budget has been updated:
+   Amount: 5000.00[0m
+[36mto the Financial Planner.[0m
+[36mBalance: 5000.00[0m
+[36mA monthly budget of 3000.00 has been set.[0m
+[36mBudget has been updated:
 Old initial budget: 3000.00
-Old current budget: 3000.00
-New initial budget: 1000.00
-New current budget: 1000.00
-You have added an Expense
+Old current budget: 3000.00[0m
+[36mNew initial budget: 1000.00
+New current budget: 1000.00[0m
+[36mYou have added an Expense
    Type: Shopping
-   Amount: 200.00
-to the Financial Planner.
-Balance: 4800.00
-Your remaining budget for the month is: 800.00
-You have a remaining budget of 800.00.
-Budget has been reset to 1000.00.
-Budget has been deleted.
-Unknown command. Type help for help.
-Exiting Financial Planner. Goodbye.
+   Amount: 200.00[0m
+[36mto the Financial Planner.[0m
+[36mBalance: 4800.00[0m
+[36mYour remaining budget for the month is: 800.00[0m
+[36mYou have a remaining budget of 800.00.[0m
+[36mBudget has been reset to 1000.00.[0m
+[36mBudget has been deleted.[0m
+[36mUnknown command. Type help for help.[0m
+[36mExiting Financial Planner. Goodbye.[0m

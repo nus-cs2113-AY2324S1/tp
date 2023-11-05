@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.storage.LoadData;
+import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
 import java.net.URI;
@@ -51,7 +52,7 @@ public class WatchList {
 
     public HashMap<String, Stock> initalizeNewWatchlist() {
         HashMap<String, Stock> baseStocks = new HashMap<>();
-        System.out.println("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
+        Ui.getInstance().showMessage("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
 
         Stock apple = new Stock("AAPL", "Apple Inc");
         assert apple.getSymbol() != null && apple.getStockName() != null;

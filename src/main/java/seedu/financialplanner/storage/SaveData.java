@@ -29,7 +29,9 @@ public abstract class SaveData {
             for (Cashflow entry : cashflowList.list) {
                 fw.write(entry.formatString() + "\n");
             }
-            fw.write(Budget.formatString() + "\n");
+            if (Budget.hasBudget()) {
+                fw.write(Budget.formatString() + "\n");
+            }
             for (int i = 0; i < reminderList.list.size(); i++) {
                 fw.write(reminderList.list.get(i).formatString() + "\n");
             }
