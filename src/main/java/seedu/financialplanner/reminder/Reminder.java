@@ -10,6 +10,15 @@ public class Reminder {
         this.date = date;
     }
 
+    public Reminder(String type, String date, String status) {
+        this.type = type;
+        this.date = date;
+        if (status.equals("Done")) {
+            this.isDone = true;
+        } else {
+            this.isDone = false;
+        }
+    }
     public String toString() {
         String status = isDone ? "Done" : "Not Done";
         return "Reminder " + System.lineSeparator() + "   Type: " + type + System.lineSeparator()
@@ -29,6 +38,6 @@ public class Reminder {
      */
     public String formatString() {
         String status = isDone ? "Done" : "Not Done";
-        return this.type + " | " + this.date + " | " + this.isDone;
+        return "R" + " | " + this.type + " | " + this.date + " | " + status;
     }
 }
