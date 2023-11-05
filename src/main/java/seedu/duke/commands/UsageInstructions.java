@@ -21,7 +21,7 @@ public class UsageInstructions {
         ui.showLineDivider();
         // Shows a message linking the user to the user guide of our app
         System.out.println("You can access our user guide by " +
-                "https://docs.google.com/document/d/1BOz_v4eYQ8y7Dje6Jm6nqymi9jmrsb9MAohLCL_sLvI/edit?usp=sharing\n");
+                "https://ay2324s1-cs2113-t18-3.github.io/tp/UserGuide.html\n");
         // Displays the various commands that user can use including the respective formats of the commands
         System.out.println("Functions and their format:\n");
         System.out.println("Adding an entry: add\nFormat:\n" +

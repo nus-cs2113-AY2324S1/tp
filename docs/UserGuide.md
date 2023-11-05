@@ -7,12 +7,12 @@ Welcome to KaChinnnng a personal finance tracker that helps you keep track of yo
 
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `KaChinnnng` from [here](http://link.to/duke).
-3. Copy the downloaded file to the folder you want to use as the home folder for your KaChinnnng.
+2. Download the latest version of `KaChinnnng` from [here](https://github.com/AY2324S1-CS2113-T18-3/tp/releases).
+3. Copy the downloaded file to the folder you want to use as the home folder that allow write access for your KaChinnnng.
 4. open a command terminal and navigate to the folder where you have copied the file to.
 5. type in the following to run the program
 ```
-java -jar KaChinnnng.jar
+java -jar tp.jar
 ```
 6. if successful you should see the following output
 ```
@@ -40,7 +40,7 @@ Creates a new entry for income or expenses in the program.
 Values of income and expense added has to be lower than 1000000.
 Income and Expense values takes up to 2 decimal places.
 
-To add an income (with foregin currency):
+To add an income (with foreign currency):
 ```
 add income /de <description> /date <date> /amt [currency] <amount>
 ```
@@ -49,9 +49,9 @@ note:
 - should users add additional characters behind income eg. add incomeABCDE, the system will still recognise it as add income but not addABCDE income.
 - users should not use "|" in the description as it is used as a delimiter in the storage file.
 
-To add an expense (with foregin currency):
+To add an expense (with foreign currency):
 ```
-add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>
+add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
 note:
 - fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
@@ -146,7 +146,7 @@ Format:
 edit income <index> /de <description> /date <date> /amt [currency] <amount>
 ```
 ```
-edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>
+edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
 Example of usage:
 ```
@@ -214,14 +214,14 @@ and change the line in txt file to the correct format.
 
 ## Command Summary
 
-| Action | Format, Examples                                                                                                                                                                                |
-| ------ |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help | `help`                                                                                                                                                                                          |
-| Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                              |
-| Add Expense | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`        |
-| List | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`                                                                                                 |
-| Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                           |
-| Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` |
-| Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                              |
-| Clear | `clear all` <br> `clear incomes` <br> `clear expenses`                                                                                                                                          |
-| Exit | `exit`                                                                                                                                                                                          |
+| Action | Format, Examples                                                                                                                                                                               |
+| ------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help | `help`                                                                                                                                                                                         |
+| Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                             |
+| Add Expense | `add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`        |
+| List | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`                                                                                                |
+| Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                          |
+| Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>` |
+| Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                             |
+| Clear | `clear all` <br> `clear incomes` <br> `clear expenses`                                                                                                                                         |
+| Exit | `exit`                                                                                                                                                                                         |
