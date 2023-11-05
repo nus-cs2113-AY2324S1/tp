@@ -24,9 +24,9 @@ public class VisCommand extends Command {
             throw new IllegalArgumentException("Chart type must be defined");
         }
         logger.log(Level.INFO, "Parsing entry type and chart type");
-        this.type = rawCommand.extraArgs.get("t").toLowerCase();
+        this.type = rawCommand.extraArgs.get("t").toLowerCase().trim();
         rawCommand.extraArgs.remove("t");
-        this.chart = rawCommand.extraArgs.get("c").toLowerCase();
+        this.chart = rawCommand.extraArgs.get("c").toLowerCase().trim();
         rawCommand.extraArgs.remove("c");
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);

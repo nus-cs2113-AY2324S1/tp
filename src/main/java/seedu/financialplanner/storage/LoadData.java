@@ -323,11 +323,14 @@ public abstract class LoadData {
     public static HashMap<String, Stock> loadWatchList() {
         Ui ui = Ui.getInstance();
         Gson gson = new Gson();
-        HashMap<String, Stock> stocksData = new HashMap<>();
+        HashMap<String, Stock> stocksData = null;
         ui.showMessage("Loading existing watchlist..");
         try {
             JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
             stocksData = gson.fromJson(reader, new TypeToken<HashMap<String,Stock>>(){}.getType());
+            if (stocksData.size() > 5) {
+                throw new FinancialPlannerException("You have more than 5 entries in watchlist.json");
+            }
         } catch (FileNotFoundException e) {
             ui.showMessage("Watchlist file not found... Creating");
         } catch (JsonSyntaxException e) {
@@ -337,6 +340,14 @@ public abstract class LoadData {
                 ui.showMessage("Exiting... Please fix the file");
                 System.exit(1);
             }
+        } catch (FinancialPlannerException e) {
+            ui.showMessage(e.getMessage());
+            ui.showMessage("Would you like to create new watchlist? (Y/N)");
+            if (!createNewFile()) {
+                ui.showMessage("Exiting... Please fix the file");
+                System.exit(1);
+            }
+            stocksData = null;
         }
         return stocksData;
     }
