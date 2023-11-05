@@ -39,6 +39,12 @@ public class UsageInstructions {
         System.out.println("Check balance of income: balance\nFormat: " + "balance\n");
         System.out.println("Update exchange rate: update exchange rate\nFormat: " + "update exchange rate " +
                 "<supported_currency> <rate>\n");
+        System.out.println("Finding an entry: find\nFormat:\n" +
+                "find /t income /de [description] /date [date]\n" +
+                "find /t expense /cat [category] /type [type] /de [description] /date [date]\n");
+        System.out.println("Clearing all entries: clear\nFormat:\n" +
+                "clear income/expense\n" +
+                "clear all\n");
         System.out.println("Exiting the program: exit\nFormat: " + "exit");
 
         ui.showLineDivider();
