@@ -2,6 +2,7 @@ package seedu.cafectrl.data.dish;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class Dish {
     private String name;
@@ -38,6 +39,19 @@ public class Dish {
 
     @Override
     public String toString() {
-        return this.name + " $" + this.dollarValue.format(price);
+        return this.name + " $" + this.dollarValue.format(this.price);
+    }
+
+    //@@author ziyi105
+
+    /**
+     * Compare the original price and new price
+     * @param newPrice
+     * @return
+     */
+    public int comparePrice(float newPrice) {
+        String formattedPrice = this.dollarValue.format(price);
+        String formattedNewPrice = this.dollarValue.format(newPrice);
+        return formattedPrice.compareTo(formattedNewPrice);
     }
 }
