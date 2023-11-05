@@ -32,6 +32,7 @@ import seedu.stocker.commands.ListVendorSupplyCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_NAME;
 
 
 public class Parser {
@@ -139,12 +140,14 @@ public class Parser {
             Pattern pattern = Pattern.compile("/n (.*) /d (.*) /s (.*) /q (.*)");
             Matcher matcher = pattern.matcher(args);
             if (matcher.matches() && matcher.groupCount() == 4) {
-                String name = matcher.group(1);
+                String name = matcher.group(1).trim();
                 String expiryDate = matcher.group(2);
                 String serialNumber = matcher.group(3);
                 Long quantity = Long.parseLong(matcher.group(4));
                 if (quantity < 1) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
+                } else if (name == "") {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_NAME, AddCommand.MESSAGE_USAGE));
                 }
                 return new AddCommand(name, expiryDate, serialNumber, quantity);
             } else {
