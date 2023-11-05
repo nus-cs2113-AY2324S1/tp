@@ -10,7 +10,7 @@ import cashleh.transaction.FinancialStatement;
  * budget as well as to handle some cases in which the budget may turn into a deficit.
  */
 public class BudgetHandler {
-    private static final double MINIMUM_BUDGET_PERCENTAGE_TRESHOLD = 0.25;
+    private static final double MINIMUM_BUDGET_PERCENTAGE_THRESHOLD = 0.25;
     private static final double MAXIMUM_BUDGET_PERCENTAGE = 1;
     private Progress budgetProgress; // net cash on hand divided by the budget
     private Budget budget;
@@ -44,31 +44,34 @@ public class BudgetHandler {
         budget.setActive(false);
     }
 
+    public Progress getBudgetProgress() {
+        return this.budgetProgress;
+    }
+
+    public double getMinimumBudgetPercentageThreshold() {
+        return MINIMUM_BUDGET_PERCENTAGE_THRESHOLD;
+    }
+
     /**
      * Manages the situation in which the user spent more than 75% of its budget.
-     * @throws CashLehBudgetException warning the user about his bad financial situation.
      */
-    public void printBasicWarning() throws CashLehBudgetException {
-        boolean budgetIsNotOnTrack = (budgetProgress.getProgress() < MINIMUM_BUDGET_PERCENTAGE_TRESHOLD
-                && budgetProgress.getProgress() < MAXIMUM_BUDGET_PERCENTAGE);
-        if (budget.isActive() && budgetIsNotOnTrack) {
-            String text = "Hey watch out you do not have that much cash left over according to your budget."
-                    + "\n\tTry earning some money before making any crazy expenses!";
-            throw new CashLehBudgetException(text);
+    public void printBasicWarning() {
+        if (budget.isActive()) {
+            String[] texts = {"Hey watch out you do not have that much cash left over according to your budget."
+                    , "Try earning some money before making any crazy expenses!"};
+            Ui.printMultipleText(texts);
         }
     }
 
     /**
      * Manages the situation in which the user spent all of his budget.
-     * @throws CashLehBudgetException when the user has a budget deficit.
      */
-    public void printSeriousWarning() throws CashLehBudgetException {
-        boolean budgetHasBeenMaxedOut = budgetProgress.getProgress() == 0;
+    public void printSeriousWarning() {
         double budgetDeficit = (budget.getBudget() - this.financialStatement.getNetCash());
-        if (budget.isActive() && budgetHasBeenMaxedOut) {
-            String text = "Hey watch out you are currently below your budget by: "
-                    + budgetDeficit + "\n\tNeed some financial advise? Stop spending so much!";
-            throw new CashLehBudgetException(text);
+        if (budget.isActive()) {
+            String[] texts = new String[]{"Hey watch out you are currently below your budget by: "
+                    + budgetDeficit, "Need some financial advise? Stop spending so much!"};
+            Ui.printMultipleText(texts);
         }
     }
 
@@ -79,7 +82,7 @@ public class BudgetHandler {
      * An empty bar chart means that the user is doing well and has not used up his budget yet
      * as he/she has more cash on hand than the set budget (meaning that income is larger than the expenses)
      * A full bar chart implies that the user has used up all his budget and may now find himself in a deficit.
-     * @throws CashLehBudgetException when the user's finances reach a certain threshold.
+     * @throws CashLehBudgetException when user has not set a budget yet.
      */
     public void printBudget() throws CashLehBudgetException {
         setBudgetPercentage();
@@ -88,8 +91,14 @@ public class BudgetHandler {
                 + "cash on hand of: " + financialStatement.getNetCash(), "You still have the following"
                 + " percent of your budget left:\n", budgetProgress.displayProgressBar()};
         if (budget.isActive()) {
-            printSeriousWarning();
-            printBasicWarning();
+            boolean budgetHasBeenMaxedOut = budgetProgress.getProgress() == 0;
+            boolean budgetIsNotOnTrack = (budgetProgress.getProgress() < MINIMUM_BUDGET_PERCENTAGE_THRESHOLD
+                    && budgetProgress.getProgress() < MAXIMUM_BUDGET_PERCENTAGE);
+            if (budgetHasBeenMaxedOut) {
+                printSeriousWarning();
+            } else if (budgetIsNotOnTrack) {
+                printBasicWarning();
+            }
             Ui.printMultipleText(texts);
         } else {
             String text = "Please create a new budget as you haven't"

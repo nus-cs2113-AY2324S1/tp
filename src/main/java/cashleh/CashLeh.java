@@ -11,14 +11,12 @@ import cashleh.exceptions.CashLehException;
 import cashleh.commands.Command;
 import cashleh.commands.Exit;
 
-
 public class CashLeh {
-    private static final int DEFAULT_BUDGET = 1;
     private final Input input = new Input();
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
     private final BudgetHandler budgetHandler =
-            new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement), new Budget(DEFAULT_BUDGET));
+            new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement), new Budget());
     private final Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     /**
@@ -43,15 +41,17 @@ public class CashLeh {
         Ui.printText("Hello " + userName);
         FileStorage fileStorage = new FileStorage(userName);
 
-        Ui.printText("Please begin by setting a budget " +
-                "by using the format \"updateBudget DOUBLE\".");
-
         try {
-            fileStorage.readFromFile(incomeStatement, expenseStatement);
+            fileStorage.readFromFile(incomeStatement, expenseStatement, budgetHandler);
         } catch (CashLehException e) {
             Ui.printMultipleText(new String[] {
                 e.getMessage()
             });
+        }
+
+        if (!budgetHandler.getBudget().isActive()) {
+            Ui.printText("Please begin by setting a budget " +
+                    "by using the format \"updateBudget DOUBLE\".");
         }
 
         Command command = null;
@@ -68,7 +68,7 @@ public class CashLeh {
         }
 
         try {
-            fileStorage.writeToFile(incomeStatement, expenseStatement);
+            fileStorage.writeToFile(incomeStatement, expenseStatement, budgetHandler);
         } catch (CashLehWriteToFileException e) {
             Ui.printMultipleText(new String[]{
                 e.getMessage()

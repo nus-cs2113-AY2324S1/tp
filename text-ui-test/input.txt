@@ -10,7 +10,6 @@ viewIncomes
 viewFinancialStatement
 viewBudget
 addExpense dinner /amt 50 /date 19.10.2023
-viewBudget
 deleteBudget
 addIncome job /amt 600
 viewBudget
