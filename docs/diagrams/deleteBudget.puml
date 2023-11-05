@@ -1,15 +1,22 @@
 @startuml
 
+autoactivate on
+
 mainframe sd DeleteBudget
 participant ":BudgetCommand" as BudgetCommand
 participant "<<class>>\nBudget" as Budget
 participant ":Ui" as Ui
 
+activate BudgetCommand
+
 alt hasBudget
     BudgetCommand -> Budget: deleteBudget()
+    return
     BudgetCommand -> Ui: printDeleteBudget()
+    return
 else else
     BudgetCommand -> Ui: printBudgetError("delete")
+    return
 end
 
 hide footbox

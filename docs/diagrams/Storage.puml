@@ -7,24 +7,29 @@ package Storage as StoragePackage {
 Class Storage
 Class "{abstract}\nLoadData" as LoadData
 Class "{abstract}\nSaveData" as SaveData
-Class CashflowList
 Class "{abstract}\nBudget" as Budget
 Class "{abstract}\nCashflow" as Cashflow
 Class "<<enumeration>>\nExpenseType" as ExpenseType
 Class "<<enumeration>>\nIncomeType" as IncomeType
 Class Ui
+Class Lists
 }
 
-Class FinancialPlanner #FFFFFF
+note "Cashflow refers to income and expense" as N1
+N1 -up-> Cashflow
+
+note "Lists refer to CashflowList, ReminderList, WishList" as N2
+N2 -up-> Lists
+
 FinancialPlanner --> Storage
 
 Storage .right.-> LoadData: uses >
 Storage .left.> SaveData: uses >
-SaveData --> CashflowList
 SaveData ..> Budget
 SaveData ..> Cashflow
+SaveData --> Lists
 
-LoadData --> CashflowList
+LoadData --> Lists
 LoadData ..> Budget
 LoadData ..> ExpenseType
 LoadData ..> IncomeType

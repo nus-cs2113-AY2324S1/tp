@@ -65,6 +65,11 @@ public class BudgetCommandTest {
     @Order(5)
     public void testInvalidCommandFormat_throwsException() throws FinancialPlannerException {
         try {
+            BudgetCommand testEmptyArgument = new BudgetCommand(Parser.parseRawCommand("budget"));
+        } catch (FinancialPlannerException e) {
+            assertEquals("Budget operation cannot be empty.", e.getMessage());
+        }
+        try {
             BudgetCommand testExtraArgument = new BudgetCommand(Parser.parseRawCommand("budget" +
                     " set /b 500 /t sdf"));
         } catch (IllegalArgumentException e) {
@@ -73,7 +78,7 @@ public class BudgetCommandTest {
         try {
             BudgetCommand testInvalidCommand = new BudgetCommand(Parser.parseRawCommand("budget random /b 5"));
         } catch (FinancialPlannerException e) {
-            assertEquals("Budget command must be one of the following: set, update, " +
+            assertEquals("Budget operation must be one of the following: set, update, " +
                     "delete, reset, view.", e.getMessage());
         }
 
