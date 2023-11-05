@@ -28,11 +28,11 @@ GUI apps.
 -**Contributions to the UG**
  * Hao Zhi came up with the  inital template for the user guide and added documentation for the following sections of 
    the user guide:
-   * [Login System]()
-   * [Help Command]()
-   * [Save Command]()
-   * [addVendorSupply Command]()
-   * [listVendor Command]()
+   * [Login System](/docs/UserGuide.md#login-system--create-new-user-or-login-existing-user)
+   * [Help Command](/docs/UserGuide.md#help---list-currently-available-commands-in-current-version-their-uses-and-how-to-format-them-in-the-command-line)
+   * [Save Command](/docs/UserGuide.md#save---save-existing-drugs-onto-hard-drive-of-computer)
+   * [addVendor Command](/docs/UserGuide.md#addvendor---adds-a-vendor-into-list-of-vendors-being-tracked-by-system)
+   * [listVendor Command](/docs/UserGuide.md#listvendors---list-all-vendors-currently-being-tracked-by-the-system)
 
 
 -**Contributions to the DG**
