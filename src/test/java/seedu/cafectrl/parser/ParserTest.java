@@ -239,7 +239,31 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_invalidDishIndexForEditPrice_invalidIndexForEditPrice() {
+    void parseCommand_wrongArgumentsTypeForEditPrice_wrongArgMsg() {
+        Menu menu = new Menu();
+        Dish testDish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(testDish);
+        String testUserInput = "edit_price index/ price/4";
+
+        ArrayList<String> actualOutput = new ArrayList<>();
+        Ui ui = new Ui() {
+            @Override
+            public void showToUser(String... message) {
+                actualOutput.addAll(Arrays.asList(message));
+            }
+        };
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        ParserUtil parserUtil = new Parser();
+        Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
+        commandReturned.execute();
+        assertEquals(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+    }
+
+    @Test
+    void parseCommand_outOfBoundDishIndexForEditPrice_invalidIndexForEditPrice() {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
@@ -261,6 +285,31 @@ class ParserTest {
         commandReturned.execute();
         assertEquals(ErrorMessages.INVALID_DISH_INDEX, actualOutput.get(0));
     }
+
+    @Test
+    void parseCommand_nonDigitDishIndexForEditPrice_invalidIndexForEditPrice() {
+        Menu menu = new Menu();
+        Dish testDish = new Dish("Chicken Rice", 2.50F);
+        menu.addDish(testDish);
+        String testUserInput = "edit_price index/d price/3";
+
+        ArrayList<String> actualOutput = new ArrayList<>();
+        Ui ui = new Ui() {
+            @Override
+            public void showToUser(String... message) {
+                actualOutput.addAll(Arrays.asList(message));
+            }
+        };
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        ParserUtil parserUtil = new Parser();
+        Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
+        commandReturned.execute();
+        assertEquals(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+    }
+
     //@@author DextheChik3n
     @Test
     void parseCommand_validDishInputForAddDish_dishAddedToMenu() {
