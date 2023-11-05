@@ -95,13 +95,11 @@ public class Decoder {
      */
     private static boolean isValidPantryStockFormat(String[] decodedPantryStock) {
         if (decodedPantryStock.length != 3) {
-            ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
             return false;
         } else {
             try {
                 Integer.parseInt(decodedPantryStock[1].trim());
             } catch (NumberFormatException e) {
-                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
                 return false;
             }
         }

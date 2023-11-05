@@ -1,5 +1,7 @@
 package seedu.cafectrl.ui;
 
+import seedu.cafectrl.command.EditPriceCommand;
+
 public class ErrorMessages {
     /** Error messages */
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
@@ -8,19 +10,21 @@ public class ErrorMessages {
     public static final String INVALID_DISH_NAME_LENGTH_MESSAGE = "Error: Your dish name length is too long!";
     public static final String INVALID_INGREDIENT_NAME_LENGTH_MESSAGE = "Error: Your dish name length is too long!";
     public static final String MISSING_ARGUMENT_FOR_EDIT_PRICE = "Error: Missing arguments "
-            + "for edit price command.";
+            + "for edit price command.\n"
+            + EditPriceCommand.MESSAGE_USAGE;
     public static final String MISSING_ARGUMENT_FOR_LIST_INGREDIENTS = "Error: Missing arguments "
             + "for list ingredients command.";
     public static final String MISSING_ARGUMENT_FOR_DELETE = "Error: Missing arguments "
             + "for delete command.";
     public static final String MISSING_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Missing arguments "
             + "for buy ingredient command.";
-    public static final String WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE = "Error: Invalid dish index. \n "
+    public static final String WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE = "Error: Invalid argument type. \n "
             + "Make sure dish index is "
             + "of type int and price is of type float!";
     public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
             + "Type 'help' to view the accepted list of commands";
-    public static final String INVALID_DISH_INDEX = "Error: Invalid dish index.";
+    public static final String INVALID_DISH_INDEX = "Do we even have this dish? "
+            + "Double check the index of the dish you wanna modify!";
     public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
             + "for buy ingredient command.";
     public static final String INVALID_ADD_ORDER_FORMAT_MESSAGE = "Error: Incorrect format for the add order command.";

@@ -70,7 +70,7 @@ public class Parser implements ParserUtil {
     /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
-    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(\\d+) price/(\\d+(\\.\\d+)?)";
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(.*) price/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
@@ -178,15 +178,15 @@ public class Parser implements ParserUtil {
         try {
             int dishIndexGroup = 1;
             int newPriceGroup = 2;
-            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup));
-            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup));
+            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup).trim());
+            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
                 return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
             }
             return new EditPriceCommand(dishIndex, newPrice, menu, ui);
-        } catch (ParserException e) {
+        } catch (NumberFormatException | ParserException e) {
             return new IncorrectCommand(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
         }
     }
