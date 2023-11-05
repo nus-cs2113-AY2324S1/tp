@@ -7,7 +7,19 @@ import seedu.duke.flashcard.FlashcardList;
 
 import java.util.Scanner;
 
+/**
+ * This command allows creating a new flashcard by inputting its front and
+ * back text.
+ */
 public class CreateFlashcardCommand extends FlashcardCommand {
+    /**
+     * Creates a new flashcard.
+     * The user is asked to input the front and back text of the new
+     * flashcard, and then it is added to the flashcardList.
+     *
+     * @param scanner Scanner that allows handling user input.
+     * @param flashcardList Which flashcards to perform actions on.
+     */
     public void execute(Scanner scanner, FlashcardList flashcardList) {
         System.out.print("    Enter the front page text: ");
         String frontPageText = scanner.nextLine();
