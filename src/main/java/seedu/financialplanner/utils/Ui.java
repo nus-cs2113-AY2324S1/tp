@@ -106,7 +106,7 @@ public class Ui {
             String price = YELLOW + StringUtils.rightPad(stock.getPrice(), 10) + RESET;
             String dayHigh = GREEN + StringUtils.rightPad(stock.getDayHigh(), 15) + RESET;
             String dayLow = RED + StringUtils.rightPad(stock.getDayLow(), 14) + RESET;
-            String name = StringUtils.rightPad(stock.getStockName(), 30);
+            String name = StringUtils.rightPad(stock.getStockName(), 33);
             String date = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss")
                     .format(stock.getLastUpdated());
             String lastUpdate = StringUtils.rightPad(date, 10);
