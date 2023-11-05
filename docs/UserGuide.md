@@ -481,7 +481,7 @@ Balance: 3790.00
 ### Viewing Watchlist: `watchlist`
 
 - Note: Stockcode and symbol will be used interchangeably and have the same meaning
-- Note: watchlist feature requires a stable internet connection
+- Note: Watchlist feature requires a stable internet connection
 
 View your current watchlist with stocks that you are interested in with the exchanges shown as well
 
