@@ -25,26 +25,44 @@ public class WatchList {
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private static final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private static final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
-    private HashMap<String, Stock> stocks = null;
+    private HashMap<String, Stock> stocks;
 
     private WatchList() {
         stocks = LoadData.loadWatchList();
-        if (!stocks.isEmpty()) {
+        cleanUpLoadedWatchList();
+    }
+
+    private void cleanUpLoadedWatchList() {
+        if (stocks == null) {
+            stocks = initalizeNewWatchlist();
             return;
         }
-        Ui.getInstance().showMessage("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
-        try {
-            Stock apple = new Stock("AAPL");
-            assert apple.getSymbol() != null && apple.getStockName() != null;
-            stocks.put(apple.getSymbol(), apple);
-
-            Stock google = new Stock("GOOGL");
-            assert google.getSymbol() != null && google.getStockName() != null;
-            stocks.put(google.getSymbol(), google);
-
-        } catch (FinancialPlannerException e) {
-            Ui.getInstance().showMessage(e.getMessage());
+        stocks.entrySet().removeIf(stockPair -> !checkValidStock(stockPair.getKey(), stockPair.getValue()));
+        if (stocks.isEmpty()) {
+            stocks = initalizeNewWatchlist();
         }
+    }
+
+    private boolean checkValidStock(String key, Stock stockToCheck) {
+        if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
+            return false;
+        }
+        return key.equals(stockToCheck.getSymbol());
+    }
+
+    public HashMap<String, Stock> initalizeNewWatchlist() {
+        HashMap<String, Stock> baseStocks = new HashMap<>();
+        Ui.getInstance().showMessage("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
+
+        Stock apple = new Stock("AAPL", "Apple Inc");
+        assert apple.getSymbol() != null && apple.getStockName() != null;
+        baseStocks.put(apple.getSymbol(), apple);
+
+        Stock google = new Stock("GOOGL", "Alphabet Inc - Class A");
+        assert google.getSymbol() != null && google.getStockName() != null;
+        baseStocks.put(google.getSymbol(), google);
+
+        return baseStocks;
     }
 
     public static WatchList getInstance() {
@@ -62,9 +80,10 @@ public class WatchList {
     public StringBuilder getExpiredStocks() {
         StringBuilder queryStocks = new StringBuilder();
         long currentTime = System.currentTimeMillis();
-        long fivemin = 300000;
+        long fiveMin = 300000;
         for (Map.Entry<String, Stock> set: stocks.entrySet()) {
-            if (set.getValue().getLastFetched() + fivemin < currentTime) {
+            Stock currentStock = set.getValue();
+            if (currentStock.getLastFetched() + fiveMin < currentTime) {
                 queryStocks.append(set.getKey());
                 queryStocks.append(",");
             }
@@ -158,7 +177,10 @@ public class WatchList {
         if (stocks.size() >= 5) {
             throw new FinancialPlannerException("Watchlist is full (max 5). Delete a stock to add a new one");
         }
-        if (stocks.containsKey(stockCode.toUpperCase())) { // should already be uppercase
+        if (stocks.containsKey(stockCode.toUpperCase())) {
+            throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
+        }
+        if (stocks.containsKey(stockCode)) {
             throw new FinancialPlannerException("Stock is already present in Watchlist. Use watchlist to view it!");
         }
 
@@ -174,7 +196,10 @@ public class WatchList {
         if (stocks.isEmpty()) {
             throw new FinancialPlannerException("No stock in watchlist!");
         }
-        Stock removedStock = stocks.remove(stockCode.toUpperCase()); // should be uppercase already
+        Stock removedStock = stocks.remove(stockCode);
+        if (removedStock == null) {
+            removedStock = stocks.remove(stockCode.toUpperCase());
+        }
         if (removedStock == null) {
             throw new FinancialPlannerException("Does not Exist in Watchlist");
         }

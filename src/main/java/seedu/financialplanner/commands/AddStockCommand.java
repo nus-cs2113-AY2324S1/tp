@@ -18,7 +18,7 @@ public class AddStockCommand extends Command {
         }
 
         logger.log(Level.INFO, "Parsing stockcode from input");
-        stockCode = rawCommand.extraArgs.get("s").toUpperCase();
+        stockCode = rawCommand.extraArgs.get("s").trim();
 
         rawCommand.extraArgs.remove("s");
         if (!rawCommand.extraArgs.isEmpty()) {
@@ -41,7 +41,7 @@ public class AddStockCommand extends Command {
             ui.printAddStock(stockName);
         } catch (FinancialPlannerException e) {
             logger.log(Level.WARNING, "Error adding stock to watchlist");
-            System.out.println(e.getMessage());
+            Ui.getInstance().showMessage(e.getMessage());
         }
     }
 }
