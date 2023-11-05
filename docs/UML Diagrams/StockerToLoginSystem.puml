@@ -7,11 +7,13 @@ Participant ":Stocker" as Stocker
 Participant ":Ui" as Ui
 Participant ":LoginSystem" as LoginSystem
 
-User -> Stocker :  Stocker()
+Create Stocker
+User -> Stocker
 activate Stocker
 Stocker -> Stocker : run()
 activate Stocker
 Stocker -> Stocker :start()
+Create Ui
 Stocker -> Ui :  Ui()
 deactivate Stocker
 
@@ -22,6 +24,7 @@ Ui -> Ui : ShowToUser()
 deactivate Ui
 Ui --> User : LoginMessage
 
+Create LoginSystem
 Stocker -> LoginSystem :LoginSystem()
 activate LoginSystem
 LoginSystem -> LoginSystem : run()
