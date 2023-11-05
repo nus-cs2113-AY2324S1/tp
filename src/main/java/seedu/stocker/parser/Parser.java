@@ -73,7 +73,7 @@ public class Parser {
             return prepareAddVendorSupplyCommand(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommand(arguments);
+            return prepareDeleteCommand(arguments);
 
         case CheckOutCommand.COMMAND_WORD:
             return new CheckOutCommand();
@@ -151,6 +151,23 @@ public class Parser {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
         } catch (NumberFormatException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the delete command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDeleteCommand(String args) {
+        Pattern pattern = Pattern.compile("/n (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String name = matcher.group(1);
+            return new DeleteCommand(name);
+        } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
