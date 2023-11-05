@@ -38,7 +38,7 @@ GUI apps.
 -**Contributions to the DG**
  * Hao Zhi came up with the inital template of the developer guide and added documentation for the following section of 
    the developer guide:
-   * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](/docs/DeveloperGuide.md#login-system-component),[Help Command](/docs/DeveloperGuide.md#4-help-command), [Save Command](/docs/DeveloperGuide.md#5-save-command), [addVendor Command](/docs/DeveloperGuide.md#6-addvendor-command),
+   * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#login-system-component),[Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#4-help-command), [Save Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#5-save-command), [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-addvendor-command),
      [listVendors Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#7-listvendors-command)
  * UML Diagrams
    * [Architecture Diagram under Design & Implementation](),[Login System Sequence Diagram](/docs/UML%20Diagrams/StockerToLoginSystem.png),
