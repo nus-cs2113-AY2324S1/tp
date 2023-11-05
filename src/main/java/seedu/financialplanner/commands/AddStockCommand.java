@@ -18,7 +18,7 @@ public class AddStockCommand extends Command {
         }
 
         logger.log(Level.INFO, "Parsing stockcode from input");
-        stockCode = rawCommand.extraArgs.get("s");
+        stockCode = rawCommand.extraArgs.get("s").trim();
 
         rawCommand.extraArgs.remove("s");
         if (!rawCommand.extraArgs.isEmpty()) {
