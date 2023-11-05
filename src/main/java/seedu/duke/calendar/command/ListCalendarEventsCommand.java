@@ -15,8 +15,7 @@ public class ListCalendarEventsCommand extends EventCommand{
 
             int count = 0;
             for (Event event : eventList.getEvent()) {
-                System.out.println((++count) + ". " + event.getName() + " Event from: " +event.getFrom() +
-                        " to: " + event.getTo());
+                System.out.println((++count) + ". " + event);
                 printLine();
             }
         } else {
