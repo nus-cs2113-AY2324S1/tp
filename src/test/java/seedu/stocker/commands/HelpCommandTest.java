@@ -17,7 +17,7 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + "delete: Removes a drug from drug list. Parameters: Name  "
                 + System.getProperty("line.separator")
-                + "Example: delete <Drug Name>"
+                + "Example: delete /n <Drug Name>"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "help: Shows program usage instructions. "

@@ -137,7 +137,9 @@ public class Ui {
         showToUser(MESSAGE_WELCOME, DIVIDER, DIVIDER);
     }
 
-    public void showInvalidLoginCharacterMessage(){showToUser(MESSAGE_INVALID_LOGIN_CHARACTER);}
+    public void showInvalidLoginCharacterMessage(){
+        showToUser(MESSAGE_INVALID_LOGIN_CHARACTER);
+    }
 
     public void showGoodbyeMessage() {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);

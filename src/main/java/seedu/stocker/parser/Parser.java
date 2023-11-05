@@ -179,17 +179,22 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAddToCartCommand(String args) {
-        Pattern pattern = Pattern.compile("/n (.*) /q (.*)");
-        Matcher matcher = pattern.matcher(args);
-        if (matcher.matches() && matcher.groupCount() == 2) {
-            String name = matcher.group(1);
-            long quantity = Long.parseLong(matcher.group(2));
-            if (quantity < 1) {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
+        try {
+            Pattern pattern = Pattern.compile("/n (.*) /q (.*)");
+            Matcher matcher = pattern.matcher(args);
+            if (matcher.matches() && matcher.groupCount() == 2) {
+                String name = matcher.group(1);
+                long quantity = Long.parseLong(matcher.group(2));
+                if (quantity < 1) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
+                }
+                return new AddToCartCommand(name, quantity);
+            } else {
+                return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
             }
-            return new AddToCartCommand(name, quantity);
-        } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
 
