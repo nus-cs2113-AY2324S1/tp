@@ -45,7 +45,8 @@ public class Expense extends Cashflow {
         double tempBalance = balance - this.amount;
 
         if (tempBalance < -MAX_AMOUNT) {
-            throw new FinancialPlannerException("Balance exceeded minimum value this program can hold.");
+            throw new FinancialPlannerException("Balance exceeded minimum value this program can hold." +
+                    " Please add a different expense.");
         }
 
         balance = tempBalance;

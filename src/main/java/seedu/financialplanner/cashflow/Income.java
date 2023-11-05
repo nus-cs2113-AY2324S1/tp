@@ -45,7 +45,8 @@ public class Income extends Cashflow{
         double tempBalance = balance + this.amount;
 
         if (tempBalance > MAX_AMOUNT) {
-            throw new FinancialPlannerException("Balance exceeded maximum value this program can hold.");
+            throw new FinancialPlannerException("Balance exceeded maximum value this program can hold." +
+                    " Please add a different income.");
         }
 
         balance = tempBalance;

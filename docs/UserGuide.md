@@ -76,7 +76,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 ### Notes about program limitations
 - Maximum amount for each cashflow and total balance that the program can hold is 999,999,999,999.99
 - Minimum amount for each cashflow and total balance that the program can hold is -999,999,999,999.99
-- Total balance is separate from Income Balance and Expense Balance, where the latter do not have the same limitations.
+- Total Balance, Income balance, and Expense balance are different entities where the latter two do not have the same limitations.
 
 ### Add cashflow
 
@@ -287,7 +287,7 @@ Balance: -830.00
 Example output:
 
 ```
-You have 6 matching cashflows:
+You have 4 matching cashflows:
 1: Expense
    Type: Dining
    Amount: 30.00
@@ -304,14 +304,9 @@ You have 6 matching cashflows:
 4: Income
    Type: Investments
    Amount: 1000.00
-5: Income
-   Type: Salary
-   Amount: 100.00
-6: Expense
-   Type: Others
-   Amount: 0.23
-Balance: 1269.77
+Balance: 1170.00
 ```
+
 - Note: Balance displayed above is just an example. Your actual balance may differ.
 - Note: Date displayed above is just an example. Your actual date may differ.
 

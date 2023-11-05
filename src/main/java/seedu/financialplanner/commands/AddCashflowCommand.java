@@ -52,7 +52,8 @@ public class AddCashflowCommand extends Command {
         }
         if (amount > MAX_AMOUNT) {
             logger.log(Level.WARNING, "Maximum value for amount exceeded.");
-            throw new IllegalArgumentException("Amount exceeded maximum value this program can hold.");
+            throw new IllegalArgumentException("Amount exceeded maximum value this program can hold. " +
+                    "Please add a different cashflow.");
         }
         rawCommand.extraArgs.remove("a");
 
