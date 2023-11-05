@@ -39,6 +39,16 @@ Format: balance
 Update exchange rate: update exchange rate
 Format: update exchange rate <supported_currency> <rate>
 
+Finding an entry: find
+Format:
+find /t income /de [description] /date [date]
+find /t expense /cat [category] /type [type] /de [description] /date [date]
+
+Clearing all entries: clear
+Format:
+clear income/expense
+clear all
+
 Exiting the program: exit
 Format: exit
 ____________________________________________________________
