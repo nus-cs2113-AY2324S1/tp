@@ -3,14 +3,9 @@
 
 skinparam classFontColor automatic
 
-
-class "{abstract}\nCommand"  #MintCream {
-+execute() {abstract}
-}
-
 class VisCommand #MistyRose {
--String type
--String chart
+-type: String
+-chart: String
 +execute()
 }
 
@@ -33,9 +28,13 @@ class Visualizer #Beige {
 + <u>displayRadarChart (cashflowByCat: HashMap, type: String)
 }
 
+class "{abstract}\nCommand"  #MintCream {
++execute() {abstract}
+}
+
 "{abstract}\nCommand" <|-- VisCommand
 RawCommand <.. VisCommand
-Categorizer <.. Visualizer
+Categorizer <.. VisCommand
 Visualizer <.. VisCommand
 
 hide Circle

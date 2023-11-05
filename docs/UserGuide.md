@@ -28,7 +28,15 @@
   * [WatchList](#viewing-watchlist-watchlist)
     * [Adding Stock](#adding-stock-to-watchlist-addstock)
     * [Deleting Stock](#deleting-budget-budget-delete)
-  * [Visualization](#Visualization)
+  * [ReminderList](#view-reminder-list-reminderlist)
+    * [Adding Reminder](#add-reminder-addreminder)
+    * [Deleting Reminder](#delete-reminder-deletereminder)
+    * [Marking Reminder as Done](#mark-reminder-as-done-markreminder)
+  * [WishList](#view-goal-list-wishlist)
+    * [Adding Goal](#set-goal-set-goal)
+    * [Deleting Goal](#delete-goal-deletegoal)
+    * [Marking Goal as Achieved](#mark-goal-as-achieved-markgoal)
+  * [Visualization](#visualizing-your-cashflow-vis)
   * [Exiting the program](#exiting-the-program-exit)
   * [Saving data](#saving-the-data)
   * [Loading data](#loading-the-data)
@@ -43,10 +51,10 @@ you a one-stop interface to access a plethora of features to manage your finance
 
 ## Quick Start
 
-{Give steps to get started quickly}
+{TO BE UPDATED WHEN V2.1 IS COMPLETED!!!}
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Financial Planner` from [here](http://link.to/duke).
+2. Download the latest version of `Financial Planner` from [here](https://github.com/AY2324S1-CS2113-T18-2/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for Financial Planner.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.
 5. Refer to the **Features** section below for details of each command.
@@ -571,6 +579,154 @@ Use watchlist command to view updated Watchlist
 ```
 
 - Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
+
+### View Reminder List: `reminderlist`
+View your current reminder list with reminders that you have added.
+
+Format: `reminderlist`
+
+Example of usage: `reminderlist`
+
+Example of output:
+
+```
+Here is your reminder list:
+1. Reminder 
+   Type: debt
+   Date: 2023.12.11
+   Status: Not Done
+2. Reminder 
+   Type: loan
+   Date: 2023.12.18
+   Status: Not Done
+```
+
+### Add reminder: `addreminder`
+Adds a reminder to the Financial Planner.
+
+Format: `addreminder /t TYPE /d DATE`
+- `/t` is used to specify the reminder type, which describes what is the reminder used for.
+- `/d` is used to give a deadline date to the reminder.
+
+Example of usage: `addreminder /t debt /d 2023.12.11`
+
+Example output:
+```
+You have added Reminder 
+   Type: debt
+   Date: 2023.12.11
+   Status: Not Done
+```
+
+### Delete reminder: `deletereminder`
+Deletes a reminder from the Financial Planner.
+
+Format: `deletereminder INDEX`
+
+- `INDEX` refers to the index number shown in the displayed list when [`reminderlist`](#view-reminder-list-reminderlist) command is used.
+
+Example of usage: `deletereminder 1`
+
+Example output:
+```
+You have deleted Reminder 
+   Type: debt
+   Date: 2023.12.11
+   Status: Not Done
+```
+
+### Mark reminder as done: `markreminder`
+Marks a reminder as done in the Financial Planner.
+
+Format: `markreminder INDEX`
+
+- `INDEX` refers to the index number shown in the displayed list when [`reminderlist`](#view-reminder-list-reminderlist) command is used.
+
+Example of usage: `markreminder 1`
+
+Example output:
+```
+You have marked Reminder 
+   Type: debt
+   Date: 2023.12.11
+   Status: Done
+```
+
+### View Goal List: `wishlist`
+View your current goal list with goals that you have added.
+
+Format: `wishlist`
+
+Example of usage: `wishlist`
+
+Example of output:
+```
+Here is your wish list:
+1. Goal 
+   Label: car
+   Amount: 5000
+   Status: Not Achieved
+2. Goal 
+   Label: ipad
+   Amount: 2000
+   Status: Not Achieved
+```
+
+### Set goal: `set goal`
+Adds a goal to the Financial Planner.
+
+Format: `set goal /g GOAL /l LABEL`
+- `/g` is used to specify the goal amount.
+- `/l` is used to give a label to the goal.
+
+Example of usage: `set goal /g 5000 /l car`
+
+Example output:
+```
+You have added Goal 
+   Label: car
+   Amount: 5000
+   Status: Not Achieved
+```
+
+### Delete goal: `deletegoal`
+Deletes a goal from the Financial Planner.
+
+Format: `deletegoal INDEX`
+- `INDEX` refers to the index number shown in the displayed list when [`wishlist`](#view-goal-list-wishlist) command is used.
+
+Example of usage: `deletegoal 1`
+
+Example output:
+```
+You have deleted Goal 
+   Label: car
+   Amount: 5000
+   Status: Not Achieved
+```
+
+### Mark goal as achieved: `markgoal`
+Marks a goal as achieved in the Financial Planner. This operation will automatically create a corresponding expense.
+
+Format: `markgoal INDEX`
+- `INDEX` refers to the index number shown in the displayed list when [`wishlist`](#view-goal-list-wishlist) command is used.
+
+Example of usage: `markgoal 1`
+
+Example output:
+```
+You have achieved Goal 
+   Label: ipad
+   Amount: 2000
+   Status: Achieved
+Congratulations!
+You have added an Expense
+   Type: Others
+   Amount: 2000.00
+   Description: ipad
+to the Financial Planner.
+Balance: -2000.00
+```
 
 ### Visualizing your cashflow: `vis`
 

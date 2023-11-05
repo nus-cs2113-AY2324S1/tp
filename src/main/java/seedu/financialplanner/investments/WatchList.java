@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.storage.LoadData;
+import seedu.financialplanner.utils.Ui;
 
 import java.io.IOException;
 import java.net.URI;
@@ -31,7 +32,7 @@ public class WatchList {
         if (!stocks.isEmpty()) {
             return;
         }
-        System.out.println("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
+        Ui.getInstance().showMessage("Initializing New watchlist.. adding AAPL and GOOGL for your reference");
         try {
             Stock apple = new Stock("AAPL");
             assert apple.getSymbol() != null && apple.getStockName() != null;
@@ -42,7 +43,7 @@ public class WatchList {
             stocks.put(google.getSymbol(), google);
 
         } catch (FinancialPlannerException e) {
-            System.out.println(e.getMessage());
+            Ui.getInstance().showMessage(e.getMessage());
         }
     }
 

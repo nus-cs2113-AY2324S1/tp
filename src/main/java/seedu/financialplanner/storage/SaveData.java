@@ -3,10 +3,12 @@ package seedu.financialplanner.storage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
 
 import java.io.FileWriter;
@@ -18,6 +20,8 @@ import java.io.IOException;
 public abstract class SaveData {
     private static final String FILE_PATH = "data/watchlist.json";
     private static final CashflowList cashflowList = CashflowList.getInstance();
+    private static final ReminderList reminderList = ReminderList.getInstance();
+    private static final WishList wishList = WishList.getInstance();
 
     public static void save(String filePath) throws FinancialPlannerException {
         try {
@@ -25,7 +29,15 @@ public abstract class SaveData {
             for (Cashflow entry : cashflowList.list) {
                 fw.write(entry.formatString() + "\n");
             }
-            fw.write(Budget.formatString() + "\n");
+            if (Budget.hasBudget()) {
+                fw.write(Budget.formatString() + "\n");
+            }
+            for (int i = 0; i < reminderList.list.size(); i++) {
+                fw.write(reminderList.list.get(i).formatString() + "\n");
+            }
+            for (int i = 0; i < wishList.list.size(); i++) {
+                fw.write(wishList.list.get(i).formatString() + "\n");
+            }
             fw.close();
         } catch (IOException e) {
             throw new FinancialPlannerException("Error saving file.");

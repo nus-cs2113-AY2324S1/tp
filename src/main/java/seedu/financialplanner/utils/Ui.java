@@ -23,6 +23,7 @@ public class Ui {
     private static final String GREEN = "\u001B[32m";
     private static final String RESET = "\u001B[0m";
     private static final String YELLOW = "\u001B[33m";
+    private static final String CYAN = "\u001B[36m";
     private Scanner scanner = new Scanner(System.in);
     private Ui() {
     }
@@ -48,7 +49,7 @@ public class Ui {
 
     public void showMessage(String message) {
         assert !message.isEmpty();
-        System.out.println(message);
+        System.out.println(CYAN + message + RESET);
     }
 
     public void welcomeMessage() {
@@ -99,15 +100,15 @@ public class Ui {
     }
 
     public void printAddStock(String stockName) {
-        System.out.println("You have successfully added:");
-        System.out.println(stockName);
-        System.out.println("Use Watchlist to view it!");
+        showMessage("You have successfully added:");
+        showMessage(stockName);
+        showMessage("Use Watchlist to view it!");
     }
 
     public void printDeleteStock(String stockName) {
-        System.out.println("You have successfully deleted: ");
-        System.out.println(stockName);
-        System.out.println("Use watchlist command to view updated Watchlist");
+        showMessage("You have successfully deleted: ");
+        showMessage(stockName);
+        showMessage("Use watchlist command to view updated Watchlist");
     }
 
     public String formatBalance(double balance) {
@@ -117,23 +118,21 @@ public class Ui {
     }
 
     public void printAddedCashflow(Cashflow entry) {
-        System.out.print("You have added an ");
-        System.out.println(entry);
-        System.out.println("to the Financial Planner.");
-        System.out.println("Balance: " + formatBalance(Cashflow.getBalance()));
+        showMessage("You have added an " + entry);
+        showMessage("to the Financial Planner.");
+        showMessage("Balance: " + formatBalance(Cashflow.getBalance()));
     }
 
     public void printDeletedCashflow(Cashflow entry) {
-        System.out.print("You have removed an ");
-        System.out.println(entry);
-        System.out.println("from the Financial Planner.");
-        System.out.println("Balance: " + formatBalance(Cashflow.getBalance()));
+        showMessage("You have removed an " + entry);
+        showMessage("from the Financial Planner.");
+        showMessage("Balance: " + formatBalance(Cashflow.getBalance()));
     }
 
     public void printDeletedRecur(Cashflow entry) {
-        System.out.println("You have removed future recurrences of this cashflow.");
-        System.out.println("Updated cashflow:");
-        System.out.println(entry);
+        showMessage("You have removed future recurrences of this cashflow.");
+        showMessage("Updated cashflow:");
+        showMessage(entry.toString());
     }
 
     public void printBudgetBeforeUpdate() {
@@ -153,12 +152,12 @@ public class Ui {
 
     public void printBudgetAfterDeduction() {
         StringBuilder message = new StringBuilder();
+        message.append("Your remaining budget for the month is: ").append(Budget.getCurrentBudgetString());
         if (Budget.getCurrentBudget() <= 0) {
-            message.append("You have exceeded your current budget by: ");
-        } else if (Budget.getCurrentBudget() > 0) {
-            message.append("Your remaining budget for the month is: ");
+            message.append("Oops, you ran out of budget, please update to a larger budget or " +
+                    "reset the current budget to initial budget.");
         }
-        message.append(Budget.getCurrentBudgetString());
+
         showMessage(message.toString());
     }
 
@@ -174,7 +173,7 @@ public class Ui {
         showMessage("Budget has been reset to " + Budget.getInitialBudgetString() + ".");
     }
 
-    public void printDisplayChart(String type, String chart) {
+    public void printDisplayChartMessage(String type, String chart) {
         showMessage("Displaying " + chart + "chart for " + type);
     }
 
