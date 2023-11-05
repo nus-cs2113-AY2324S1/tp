@@ -72,7 +72,7 @@ user.
 
 The following sequence diagram shows how the login system class works when the program is launched.
 
-<img src="UML Diagrams/StockerToLoginSystem.png" width="280">
+<img src="UML Diagrams/StockerToLoginSystem.png" width="350">
 
 ---
 
@@ -377,7 +377,9 @@ to be made to load said file back into the drug inventory upon starting the appl
 ### Implementation
 
 There is a method to access the drugs within the inventory class. a separate method from the inventory class would then
-write the contents of these drugs back to the txt file for saving.
+write the contents of these drugs back to the txt file for saving. This is depicted by the sequence diagram shown below.
+
+<img src="UML Diagrams/SaveCommandDiagram.png" width="350">
 
 Upon booting up the system, a method from the inventory class goes through the contents of the txt file and copies it to
 the inventory drug list.
@@ -413,7 +415,7 @@ The list of vendors could be printed by using streams to efficiently collect and
 
 ---
 
-## 7. addVendorSupply Command
+## 8. addVendorSupply Command
 
 This method adds a drug to a vendor's supply list in the inventory management system, to track 
 what vendors supply what products. 
@@ -430,7 +432,7 @@ not found.
 
 ---
 
-## 5. CommandResult Class
+## 9. CommandResult Class
 
 The `CommandResult` class is a crucial part of the Stocker application, responsible for providing feedback and results to the user after executing various commands. It contains a feedback message to describe the outcome of the command execution, as well as an optional list of relevant elements produced by the command.
 
@@ -523,10 +525,3 @@ _(More to be added)_
 
 _(More to be added)_
 
-## Glossary
-
-- _glossary item_ - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
