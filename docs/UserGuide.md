@@ -7,6 +7,7 @@
 - [Usage](#usage)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
+- [Login System](#login-system--create-new-user-or-login-existing-user)
 
 ## Introduction
 
