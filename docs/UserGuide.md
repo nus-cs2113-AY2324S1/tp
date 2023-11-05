@@ -1,6 +1,7 @@
 # User Guide
 
 ## Table of contents
+
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -23,6 +24,7 @@ can get your inventory management tasks done faster than traditional GUI apps.
 2. Down the latest version of `Stocker` from [here](https://github.com/AY2324S1-CS2113-T17-3/tp/releases).
 3. Copy the absolute filepath to where the jar file is
 4. Run the following JAR file with the following command
+
 ```
 java -jar "<File path of jar file>"
 ```
@@ -78,15 +80,15 @@ Displays the name of all vendors being tracked by the system.
 
 ### Feature-add vendor supply
 
-Adds a drug into a vendor's supply list to be tracked by the system. 
+Adds a drug into a vendor's supply list to be tracked by the system.
 
 ### Feature-list vendor supply
 
-Displays the list of all drugs being supplied by a particular vendor. 
+Displays the list of all drugs being supplied by a particular vendor.
 
 ### Feature-find vendor supply
 
-Displays the list of all vendors that supply a particular drug. 
+Displays the list of all vendors that supply a particular drug.
 
 ### Feature-add to cart
 
@@ -106,9 +108,10 @@ Adds a drug's description into a list to be tracked by the system.
 
 ### Feature-get description
 
-Retrieves the description of a particular drug. 
+Retrieves the description of a particular drug.
 
 ### Feature-list description
+
 Displays a list of all the descriptions for all corresponding drugs
 
 ## Usage
@@ -120,7 +123,7 @@ Login system is automatically launched at the start of the programme.
 **Registering a user**
 
 > Step 1 : Enter register to select option to register a user.
-> 
+>
 > `register`
 >
 > Step 2: Enter desired username and password.
@@ -138,7 +141,7 @@ Registration successful.
 > Step 1 : Enter login to select option to login a user.
 >
 > `login`
-> 
+>
 > Step 2: Enter registered username and password.
 >
 > Upon successful creation, successful login message is observed.
@@ -148,6 +151,7 @@ Expected outcome:
 ```
 Login Successful.
 ```
+
 Note
 
 ### `add` - Adds drug into inventory list
@@ -156,7 +160,7 @@ Adds a drug to be tracked by the system.
 
 Format:
 
-add /n DRUG_NAME /d EXPIRY_DATE  /s SERIAL_NUMBER /q QUANTITY
+add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY
 
 Example of usage:
 
@@ -175,7 +179,7 @@ Deletes a drug being tracked by the system.
 
 Format:
 
-delete /n DRUG_NAM
+delete /n DRUG_NAME
 
 Example of usage:
 
@@ -395,7 +399,7 @@ Expected outcome:
 
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
 
-Adds a drug into a vendor's supply list to be tracked by the system, and vendor must already be added into the system. 
+Adds a drug into a vendor's supply list to be tracked by the system, and vendor must already be added into the system.
 
 Format:
 
@@ -410,7 +414,6 @@ Expected outcome:
 ```
 || New drug added to moderna's supply list: paracetamol
 ```
-
 
 ### `listVendorSupply` - Displays the list of all drugs being supplied by a particular vendor.
 
@@ -545,11 +548,10 @@ Expected outcome:
 
 ```
 || 1. Doliprane: 50
-|| 
+||
 || Listed all drugs by threshold level in the inventory.
 
 ```
-
 
 ### `addDescription` - Adds a drug's description into a list to be tracked by the system.
 
@@ -557,7 +559,7 @@ Adds a drug's description into a list to be tracked by the system.
 
 Format:
 
-addDescription /n DRUG_NAME /desc DESCRIPTION 
+addDescription /n DRUG_NAME /desc DESCRIPTION
 
 Example of usage:
 
@@ -567,9 +569,8 @@ Example of usage:
 Expected outcome:
 
 ```
-|| New drug description added for Panadol: Pain Relief 
+|| New drug description added for Panadol: Pain Relief
 ```
-
 
 ### `getDescription` - Retrieves the description of a particular drug.
 
@@ -590,14 +591,13 @@ Expected outcome:
 || Pain Relief
 ```
 
-
 ### `listDescriptions` - Displays a list of all the descriptions for all corresponding drugs
 
 Displays a list of all the descriptions for all corresponding drugs
 
 Format:
 
-listDescriptions 
+listDescriptions
 
 Example of usage:
 
