@@ -21,6 +21,7 @@ activate Ui
 Ui -> Ui : showLoginMessage()
 activate Ui
 Ui -> Ui : ShowToUser()
+activate Ui
 deactivate Ui
 Ui --> User : LoginMessage
 
@@ -39,14 +40,16 @@ alt  Register
 
 LoginSystem -> LoginSystem : newUserCreator()
 activate LoginSystem
-LoginSystem --> User : showSuccessfulRegistrationMessage()
+LoginSystem --> Ui : showSuccessfulRegistrationMessage()
 
 else Login
 LoginSystem ->LoginSystem : loginExistingUser()
 activate LoginSystem
-LoginSystem --> User: showSuccessfulLoginMessage()
+LoginSystem --> Ui: showSuccessfulLoginMessage()
 
 end
+deactivate Ui
+deactivate Ui
 deactivate LoginSystem
 
 deactivate LoginSystem
