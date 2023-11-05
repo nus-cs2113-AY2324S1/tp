@@ -10,7 +10,7 @@ public class DeleteCommand  extends Command{
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a drug from drug list. "
             + "Parameters: Name  " + System.lineSeparator()
             + "Example: " + COMMAND_WORD
-            + " <Drug Name>";
+            + " /n <Drug Name>";
 
     public static final String MESSAGE_SUCCESS = "Drug removed from inventory: %1$s";
     public static final String MESSAGE_FAILURE = "Drug not found in the inventory. ";
