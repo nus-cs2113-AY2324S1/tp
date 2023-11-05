@@ -76,7 +76,7 @@ public class ParserTest {
 
         String inputString5 = "addIncome pocket money /amt 200 /date notdate";
         Exception exception5 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString5));
-        assertEquals("Date format is invalid leh! Use DD/MM/YYYY can or not?", exception5.getMessage());
+        assertEquals("Date format is invalid leh! Use a valid date in DD/MM/YYYY can or not?", exception5.getMessage());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class ParserTest {
 
         String inputString5 = "addExpense food /amt 10 /date notdate";
         Exception exception5 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString5));
-        assertEquals("Date format is invalid leh! Use DD/MM/YYYY can or not?", exception5.getMessage());
+        assertEquals("Date format is invalid leh! Use a valid date in DD/MM/YYYY can or not?", exception5.getMessage());
     }
 
     @Test
