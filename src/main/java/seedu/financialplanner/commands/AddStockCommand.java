@@ -41,7 +41,7 @@ public class AddStockCommand extends Command {
             ui.printAddStock(stockName);
         } catch (FinancialPlannerException e) {
             logger.log(Level.WARNING, "Error adding stock to watchlist");
-            System.out.println(e.getMessage());
+            Ui.getInstance().showMessage(e.getMessage());
         }
     }
 }

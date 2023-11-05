@@ -65,9 +65,9 @@ public class Ui {
     }
 
     public void printWatchListHeader() {
-        System.out.print("Symbol");
+        showMessage("Symbol");
         System.out.print("    ");
-        System.out.print("Market");
+        showMessage("Market");
         System.out.print("    ");
         System.out.print(YELLOW + "Price" + RESET);
         System.out.print("     ");
@@ -98,7 +98,7 @@ public class Ui {
                     stock.getLastUpdated(),
                     stock.getExchange()
             )) {
-                System.out.println(stock.getStockName() + " (" + stock.getSymbol() + ") is not found on FMP");
+                showMessage(stock.getStockName() + " (" + stock.getSymbol() + ") is not found on FMP");
                 continue;
             }
 
