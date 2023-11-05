@@ -533,6 +533,7 @@ Use Watchlist to view it!
 - Note: Due to the free nature of the API (Alpha Vantage and FMP), only US stock prices quote will be provided by
 this application. Sorry for the inconvenience caused.
 - Note: Due to the free nature of the API, there will be a cap of **five** stocks in the watchlist
+- Note: StockCode should not have any spaces
 
 ### Deleting Stock from Watchlist: `deletestock`
 
@@ -551,6 +552,7 @@ Use watchlist command to view updated Watchlist
 ```
 
 - Note: Delete stock command is case-sensitive. Please enter the exact stock code of the stock that you have added.
+- Note: StockCode should not have any spaces
 
 ### watchlist.json 
 
@@ -572,7 +574,8 @@ stock entries that does not match the format specified above)
 
 **Adding stock**
 
-If you would like to add stock, do provide information for the symbol and stockName as shown below
+If you would like to add stock directly, do provide accurate information for the symbol and stockName as shown below. If 
+the format is not followed, the stock might not be loaded to watchlist upon start up.
 
 ![](images/investments/Exampleaddingstockjson.png)
 
