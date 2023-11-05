@@ -3,9 +3,8 @@
 ## Introduction
 
 CashLeh? is a CLI application mainly supporting working adults and students who struggle with managing finances
-(ranging from one-time and recurring expenses, to rent, utilities, interest rates and more). It allows them to track
-both their earnings and spending habits in a seamless way to have a neat overview of their financial 
-situation.
+. It allows them to set a budget and track both their earnings and spending habits in a seamless way to have a 
+neat overview of their financial situation.
 
 ## Quick Start
 
@@ -27,7 +26,6 @@ Adds an income with a description, amount, date and category.
 
 Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `DESCRIPTION` cannot contain punctuation or any special characters.
 * The `AMOUNT` must be a positive number.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended. 
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
@@ -63,7 +61,6 @@ Adds an expense with a description, amount, date and category.
 
 Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `DESCRIPTION` cannot contain punctuation or any special characters.
 * The `AMOUNT` must be a positive number.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>

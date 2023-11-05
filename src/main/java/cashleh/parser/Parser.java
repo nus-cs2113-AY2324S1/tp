@@ -242,7 +242,7 @@ public class Parser {
         }
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String descriptionString = inputDetails.get(transactionType);
-        //remove scenarios where there is typo in input which might lead to it being recognised as a description,
+        // remove scenarios where there is typo in input which might lead to it being recognised as a description,
         // for instance /cat is written as cat/
         descriptionString = descriptionString.replaceAll("(?i)\\b(amt|date|cat)\\b", "");
         descriptionString = descriptionString.replaceAll("[^a-zA-Z0-9\\s]", "");
