@@ -123,7 +123,7 @@ class DukeTest {
         // The expected output based on the given additions
         String expectedBalanceOutput =
                 "____________________________________________________________" + System.lineSeparator() +
-                        "Balance: 990.0" + System.lineSeparator() +
+                        "Balance: 990.00" + System.lineSeparator() +
                         "____________________________________________________________";
 
         assertEquals(expectedBalanceOutput, balanceOutput);
