@@ -7,6 +7,6 @@ public class CashLehDateParsingException extends CashLehParsingException {
      *
      */
     public CashLehDateParsingException() {
-        super("Date format is invalid leh! Use a real date in DD/MM/YYYY can or not?");
+        super("Date format is invalid leh! Use a valid date in DD/MM/YYYY can or not?");
     }
 }
