@@ -15,7 +15,7 @@ public class CalendarCommandParser {
         assert input != null : "input is null";
 
         if (input.startsWith("add event")) {
-            return new AddEventCommand();
+            return new AddEventCommand(input);
         } else if (input.startsWith("delete event")) {
             return new DeleteEventCommand();
         } else if (input.startsWith("list events")) {

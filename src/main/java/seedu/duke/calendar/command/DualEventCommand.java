@@ -1,7 +1,7 @@
+//@@wendelinwemhoener-reused
 package seedu.duke.calendar.command;
 
 import seedu.duke.calendar.EventList;
-import seedu.duke.calendar.command.EventCommand;
 
 import java.util.Scanner;
 
