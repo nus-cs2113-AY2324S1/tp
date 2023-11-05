@@ -21,7 +21,7 @@ public class AddToCartCommand extends Command {
     private final long quantity;
 
     public AddToCartCommand(String name, long quantity) {
-        this.drugName = name;
+        this.drugName = name.trim().toLowerCase();
         this.quantity = quantity;
     }
 
@@ -31,7 +31,7 @@ public class AddToCartCommand extends Command {
             .filter(entry -> entry
                 .getDrug().getName()
                 .equalsIgnoreCase(this.drugName) && 
-                entry.getQuantity() > this.quantity)
+                entry.getQuantity() >= this.quantity)
             .findAny()
             .orElse(null);
         if (matchingEntry != null) {

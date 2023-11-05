@@ -36,7 +36,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        inventory.addNewDrug(toAdd.getName(), toAdd, serialNumber, quantity);
+        inventory.addNewDrug(toAdd.getName().trim().toLowerCase(), toAdd, serialNumber, quantity);
         return new CommandResult<>(String.format(MESSAGE_SUCCESS, toAdd.getName()));
     }
 }
