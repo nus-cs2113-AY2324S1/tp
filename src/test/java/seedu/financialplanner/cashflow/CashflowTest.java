@@ -23,6 +23,7 @@ class CashflowTest {
     @Test
     void getIncomeBalance() {
         cashflowList.list.clear();
+        Cashflow.incomeBalance = 0.00;
         cashflowList.addIncome(123.12, IncomeType.SALARY, 0 , null);
         cashflowList.addIncome(321.21, IncomeType.SALARY, 0, null);
         assertEquals(444.33, Cashflow.round(Cashflow.getIncomeBalance(), 2));
@@ -31,6 +32,7 @@ class CashflowTest {
     @Test
     void getExpenseBalance() {
         cashflowList.list.clear();
+        Cashflow.expenseBalance = 0.00;
         cashflowList.addExpense(123.12, ExpenseType.OTHERS, 0 ,null);
         cashflowList.addExpense(321.21, ExpenseType.OTHERS, 0, null);
         assertEquals(444.33, Cashflow.round(Cashflow.getExpenseBalance(), 2));
