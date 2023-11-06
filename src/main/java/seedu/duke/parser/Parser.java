@@ -67,29 +67,29 @@ public class Parser {
             resultCommand = "help";
         } else if (commandLowerCase.equals("list")) {
             resultCommand = "list";
-        } else if (commandLowerCase.startsWith("delete income")) {
+        } else if (commandLowerCase.startsWith("delete income ")) {
             resultCommand = "delete_income";
-        } else if (commandLowerCase.startsWith("delete expense")) {
+        } else if (commandLowerCase.startsWith("delete expense ")) {
             resultCommand = "delete_expense";
         } else if (commandLowerCase.equals("balance")) {
             resultCommand = "balance";
-        } else if (commandLowerCase.startsWith("find")) {
+        } else if (commandLowerCase.startsWith("find ")) {
             resultCommand = "find";
-        } else if (commandLowerCase.startsWith("clear incomes")) {
+        } else if (commandLowerCase.equals("clear incomes")) {
             resultCommand = "clear_incomes";
-        } else if (commandLowerCase.startsWith("clear expenses")) {
+        } else if (commandLowerCase.equals("clear expenses")) {
             resultCommand = "clear_expenses";
-        } else if (commandLowerCase.startsWith("clear all")) {
+        } else if (commandLowerCase.equals("clear all")) {
             resultCommand = "clear_all";
-        } else if (commandLowerCase.startsWith("edit income")) {
+        } else if (commandLowerCase.startsWith("edit income ")) {
             resultCommand = "edit_income";
-        } else if (commandLowerCase.startsWith("edit expense")) {
+        } else if (commandLowerCase.startsWith("edit expense ")) {
             resultCommand = "edit_expense";
         } else if (commandLowerCase.equals("list currencies")) {
             resultCommand = "list_currencies";
         } else if (commandLowerCase.equals("list exchange rates")) {
             resultCommand = "list_exchange_rates";
-        } else if (commandLowerCase.startsWith("update exchange rate")) {
+        } else if (commandLowerCase.startsWith("update exchange rate ")) {
             resultCommand = "update_exchange_rate";
         } else {
             resultCommand = "invalid";
