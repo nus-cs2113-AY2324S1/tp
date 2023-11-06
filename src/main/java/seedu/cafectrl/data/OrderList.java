@@ -57,13 +57,13 @@ public class OrderList {
         }
 
         for (Order aggregatedOrder : aggregatedOrders) {
-            ui.showToUser(String.format(HEADER_FORMAT,
-                    aggregatedOrder.getDishName(),
+            ui.showSalesAll(aggregatedOrder.getDishName(),
                     aggregatedOrder.getQuantity(),
-                    aggregatedOrder.calculateTotalOrderCost()));
+                    dollarValue.format(aggregatedOrder.calculateTotalOrderCost()));
         }
 
-        ui.showToUser("Total for day: $" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
+        ui.showSalesBottom();
+        ui.showSalesCost("Total for day: ", "$" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
     }
 
     /**

@@ -8,8 +8,6 @@ import seedu.cafectrl.ui.Ui;
  * The Sales class represents sales data over a period of time, maintaining a collection of order lists.
  */
 public class Sales {
-    private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
 
@@ -72,8 +70,7 @@ public class Sales {
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
 
-            ui.showToUser("Day " + (day + 1) + ":");
-            ui.showToUser(String.format(HEADER_FORMAT, "Dish Name", "Dish Qty", "Total Cost Price"));
+            ui.showSalesTop(day + 1);
             orderList.printOrderList(menu, ui);
         }
     }
@@ -89,8 +86,7 @@ public class Sales {
         int orderListIndex = day - 1;
         try {
             OrderList orderList = orderLists.get(orderListIndex);
-            ui.showToUser("Day " + (day) + ":");
-            ui.showToUser(String.format(HEADER_FORMAT, "Dish Name", "Dish Qty", "Total Cost Price"));
+            ui.showSalesTop(day);
 
             orderList.printOrderList(menu, ui);
         } catch (Exception e) {
