@@ -35,6 +35,10 @@ public class IncomeManager extends Command {
             LOGGER.addHandler(fh);
             LOGGER.setLevel(Level.ALL);
             LOGGER.setUseParentHandlers(false);
+        }catch (SecurityException se) {
+            LOGGER.log(Level.SEVERE, "Error creating log file", se);
+            System.err.println("Insufficient permissions to create logs directory. Please check your permissions or " +
+                    "run the program in a different directory.");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error creating log file", e);
         }
@@ -78,7 +82,9 @@ public class IncomeManager extends Command {
         HashMap<String, String> incomeFields = new HashMap<>();
 
         // Split the details string based on the field keywords
-        String[] parts = details.split("/de|/date|/amt");
+        String[] parts = details.split("/de |/date |/amt ");
+
+
 
         // Check if all fields are present in the string
         if (parts.length != 4) {

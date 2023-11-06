@@ -37,20 +37,19 @@ import java.util.ArrayList;
  * It contains the main method that runs the program.
  */
 public class Duke {
-    private Ui ui;
-    private ArrayList<Income> incomes;
-    private ArrayList<Expense> expenses;
-    private String storagePath;
-    private SaveToTxt save;
-    private GetFromTxt get;
-    private ExchangeRateManager exchangeRateManager;
-    private ExchangeRateFileHandler exchangeRateFileHandler;
+    private final Ui ui;
+    private final ArrayList<Income> incomes;
+    private final ArrayList<Expense> expenses;
+    private final SaveToTxt save;
+    private final GetFromTxt get;
+    private final ExchangeRateManager exchangeRateManager;
+    private final ExchangeRateFileHandler exchangeRateFileHandler;
 
     public Duke() {
         ui = new Ui();
         incomes = new ArrayList<>();
         expenses = new ArrayList<>();
-        storagePath = "KaChinnnngggg.txt";
+        String storagePath = "KaChinnnngggg.txt";
         save = new SaveToTxt(storagePath);
         get = new GetFromTxt(storagePath);
         exchangeRateManager = ExchangeRateManager.getInstance();
@@ -92,9 +91,9 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
         } catch (KaChinnnngException e) {
-            ui.showLineDivider();
+            Ui.showLineDivider();
             System.out.println(e.getMessage());
-            ui.showLineDivider();
+            Ui.showLineDivider();
         }
     }
 

@@ -17,7 +17,7 @@ Below are the design and implementation details of KaChinnnng.
 
 The architectural diagram of KaChinnnng is as follows:
 
-![ArchitectureDiagram.png](..%2Fimages%2FArchitectureDiagram.png)
+![ArchitectureDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/ArchitectureDiagram.png?raw=true)
 
 The kaChinnnng program will first enter the `run` state where the `storage` class will be accessed and data will be retrieved if the application has been used before.
 
@@ -35,8 +35,7 @@ The Expenses are divided into three categories. Transport, Utilities and Food.
 Each of the categories inherit from a base Expense class which in turn
 inherits from the FinancialRecord class.
 
-![expense_class_diagram.png](/Users/apple/Desktop/CS2113/tp/images/expense_class_diagram.png)
-
+![expense_class_diagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_class_diagram.png?raw=true)
 ### IncomeManager
 
 the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList` and `Ui`.
@@ -46,7 +45,7 @@ the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList
 3. `IncomeManager` then adds the `Income` object to the `IncomeList`.
 4. `IncomeManager` then returns a `String` to `Ui` to be printed out to the user.
 
-![IncomeManager_seqdiagram.drawio.png](..%2Fimages%2FIncomeManager_seqdiagram.drawio.png)
+![IncomeManager_seqdiagram.drawio.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/IncomeManager_seqdiagram.drawio.png?raw=true)
 
 ### ExpenseManager
 
@@ -59,7 +58,7 @@ The ExpenseManager is facilitated by `ExpenseParser`,  `ExpenseManager`, `Expens
 5. Expense object is returned to ExpenseManager from ExpenseParser.
 6. Expense obejct is returned to Duke from ExpenseManager.
 
-![expenseManager_sequence_diagram.png](/Users/apple/Desktop/CS2113/tp/images/expenseManager_sequence_diagram.png)
+![expenseManager_sequence_diagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expenseManager_sequence_diagram.png?raw=true)
 
 ### Find Command
 The FindCommand is facilitated by `FindCommand`, `FindParser`, `Ui`,`ExpenseList` and `IncomeList`.
@@ -75,7 +74,7 @@ find /t <type> /cat [category] /de [description] /date [date]
 6. If users searches through the expense list, either the category or date will be used to search through the expense list.
 7. The execute method will then be called to search through the list and return the list of expenses or incomes that matches the search criteria.
 
-![FindCommand_SequenceDiagram.png](..%2Fimages%2FFindCommand_SequenceDiagram.png)
+![FindCommand_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/FindCommand_SequenceDiagram.png?raw=true)
 
 ### GetFromTxt Command
 The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngException`, `IncomeList` and `ExpenseList`
@@ -87,13 +86,13 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 6. If amount in txt file exceed limit or incorrect, throw `KaChinnnningException`
 7. Read the content on the file and add corresponding object to incomes or expenses list
 
-![FindCommand_SequenceDiagram.png](..%2Fimages%2FGetFromTxt.png)
+![GetFromTxtCommands_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/GetFromTxt.png?raw=true)
 
 ### ExchangeRateManager
 The Sequence Diagram below shows how the components interact with each other for the scenario 
 where the user issues the command `update exchange rate USD 0.8`.
 
-![UpdateExchangeRate_SequenceDiagram.png](..%2Fimages%2FUpdateExchangeRate_SequenceDiagram.png)
+![UpdateExchangeRate_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/UpdateExchangeRate_SequenceDiagram.png?raw=true)
 
 This is facilitated by `Duke`, `UpdateExchangeRateCommand`, `ExchangeRateManager`'and `ExchangeRateFileHandler`.
 
@@ -107,7 +106,7 @@ The SaveToTxt Command is facilitated by `FileWriter` ,`IncomeList` and `ExpenseL
 6. The saveExpenseToTextFile will create a new FileWriter and loop through the expenses list 
 7. It will get description, date, amount and type from the expenses list for every single expense record in the list and save the information into the text file
 
-![FindCommand_SequenceDiagram.png](..%2Fimages%2FSaveToTxt.png)
+![SaveToTxt_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/SaveToTxt.png?raw=true)
 
 ## Product scope
 ### Target user profile

@@ -17,6 +17,7 @@ public class ClearIncomes {
      * @param incomes The list of incomes to be cleared.
      */
     public ClearIncomes(ArrayList<Income> incomes) {
+        assert incomes != null : "incomes should not be null";
         this.incomes = incomes;
     }
 

@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.financialrecords.Expense;
 import seedu.duke.financialrecords.Income;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -11,6 +12,7 @@ import java.util.ArrayList;
  * It takes a list of income and expense records as input and provides methods to calculate and display the balance.
  */
 public class Balance {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     private final ArrayList<Income> incomes;
     private final ArrayList<Expense> expenses;
 
@@ -40,6 +42,7 @@ public class Balance {
      * Prints a message to the console displaying the calculated financial balance.
      */
     public void getBalanceMessage() {
-        System.out.println("Balance: " + getBalance());
+        System.out.printf("Balance: " + df.format(getBalance()));
+        System.out.println();
     }
 }
