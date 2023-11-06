@@ -17,10 +17,13 @@ public class AddEventCommand extends EventCommand {
         System.out.print("When does it end? (yyyy-mm-ddThh:mm:ss) (eg. 2023-12-20T12:30:30): ");
         LocalDateTime endTime = LocalDateTime.parse(scanner.nextLine());
 
-        Event event = new Event(eventName, startTime, endTime);
+        if (endTime.isAfter(startTime)) {
+            Event event = new Event(eventName, startTime, endTime);
+            eventList.addEvent(event);
+            System.out.println(event + " has been added to your Calendar");
+        } else {
+            System.out.println("    End time is wrong. Enter the correct end time");
+        }
 
-        eventList.addEvent(event);
-
-        System.out.println(event + " has been added to your Calendar");
     }
 }
