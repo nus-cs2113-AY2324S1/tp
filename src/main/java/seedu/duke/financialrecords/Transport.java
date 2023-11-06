@@ -10,7 +10,6 @@ import java.time.LocalDate;
  */
 public class Transport extends Expense {
     private TransportationType transportationType;
-
     /**
      * Transport class constructor
      *
