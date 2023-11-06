@@ -18,4 +18,5 @@ edit expense 1 /cat food /de dinner /date 01/10/2023 /amt 10.00
 update exchange rate USD 0.8
 add income /de remittance from Dad /date 01/10/2023 /amt USD 1000.00
 add expense /cat food /type lunch /de chicken sandwich /date 01/10/2023 /amt HKD 10.00
+add expense /cat transport /type airplane /de Changi to KLIA /date 01/10/2023 /amt 100.00
 exit

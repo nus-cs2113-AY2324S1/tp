@@ -10,7 +10,6 @@ import java.time.LocalDate;
  */
 public class Food extends Expense {
     private MealType mealType;
-
     /**
      * Food class constructor
      *
@@ -44,3 +43,4 @@ public class Food extends Expense {
                 " | Date: " + getDateString() + " | Amount: $" + String.format("%.2f", getAmount());
     }
 }
+

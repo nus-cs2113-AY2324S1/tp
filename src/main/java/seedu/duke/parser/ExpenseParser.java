@@ -84,7 +84,7 @@ public class ExpenseParser {
             } else if (expenseTypeString.equals("dinner")) {
                 return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.DINNER);
             } else {
-                return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.UNDEFINED);
+                return new Food(expenseDescriptionString, expenseDate, expenseAmount, MealType.OTHER);
             }
         } else if (expenseCategoryString.equals("transport")){
             if (expenseTypeString.equals("train")) {
@@ -101,7 +101,7 @@ public class ExpenseParser {
                         TransportationType.FUEL);
             } else {
                 return new Transport(expenseDescriptionString, expenseDate, expenseAmount,
-                        TransportationType.UNDEFINED);
+                        TransportationType.OTHER);
             }
         } else if (expenseCategoryString.equals("utilities")) {
             if (expenseTypeString.equals("water")) {
@@ -111,7 +111,7 @@ public class ExpenseParser {
             } else if (expenseTypeString.equals("gas")) {
                 return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.GAS);
             } else{
-                return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.UNDEFINED);
+                return new Utilities(expenseDescriptionString, expenseDate, expenseAmount, UtilityType.OTHER);
             }
         } else {
             throw new KaChinnnngException("Please enter a valid category");
