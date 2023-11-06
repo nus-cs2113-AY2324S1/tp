@@ -1,6 +1,5 @@
 package seedu.cafectrl.data;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import seedu.cafectrl.ui.Ui;
 
