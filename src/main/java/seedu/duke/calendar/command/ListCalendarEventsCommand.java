@@ -19,7 +19,7 @@ public class ListCalendarEventsCommand extends EventCommand{
                 printLine();
             }
         } else {
-            System.out.println("    There is no event in your Calendar");
+            System.out.println("    The Calendar is empty");
         }
     }
 
