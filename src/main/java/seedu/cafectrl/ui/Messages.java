@@ -25,6 +25,7 @@ public class Messages {
     /** Messages for view stock command */
     public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
             + "\nIngredients\t\tQty";
+    public static final String EMPTY_STOCK = "Sorry! Pantry is currently empty!";
 
     /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";

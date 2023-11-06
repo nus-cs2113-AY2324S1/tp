@@ -7,6 +7,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
 
+//@@author ShaniceTang
 public class ViewTotalStockCommand extends Command {
 
     public static final String COMMAND_WORD = "view_stock";
@@ -22,9 +23,13 @@ public class ViewTotalStockCommand extends Command {
 
     @Override
     public void execute() {
-        ui.showToUser(Messages.VIEW_STOCK);
         pantryStock = pantry.getPantryStock();
+        if (pantryStock.isEmpty()) {
+            ui.showToUser(Messages.EMPTY_STOCK);
+            return;
+        }
 
+        ui.showToUser(Messages.VIEW_STOCK);
         for (Ingredient ingredient : pantryStock) {
             ui.showToUser(ingredient.getName() + "\t\t\t" + ingredient.getQty() + ingredient.getUnit());
         }
