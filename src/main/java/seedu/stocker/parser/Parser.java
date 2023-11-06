@@ -86,7 +86,7 @@ public class Parser {
             return new HelpCommand();
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return prepareListCommand(arguments);
 
         case ViewCartCommand.COMMAND_WORD:
             return new ViewCartCommand();
@@ -292,5 +292,13 @@ public class Parser {
         }
     }
 
-
+    private Command prepareListCommand(String args) {
+        // Check if there are no arguments for the "list" command
+        if (args.isEmpty()) {
+            return new ListCommand();
+        } else {
+            // Handle the case where extra arguments are provided for "list"
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
+    }
 }
