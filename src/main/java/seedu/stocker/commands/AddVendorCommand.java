@@ -22,8 +22,23 @@ public class AddVendorCommand extends Command {
         this.toAdd = new Vendor(name);
     }
 
+    public boolean VendorAlreadyExist(String name) {
+        for (int i = 0; i < this.vendorsList.vendorArrayList.size(); i += 1) {
+            String vendorName = vendorsList.vendorArrayList.get(i).getName();
+
+            if (vendorName.equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public <T> CommandResult<T> execute() {
+        if (VendorAlreadyExist(toAdd.getName()) == true) {
+            return new CommandResult<>("No Duplicates allowed!");
+        }
+
         this.vendorsList.addNewVendor(toAdd);
         return new CommandResult<>(String.format(MESSAGE_SUCCESS, toAdd.getName()));
     }
