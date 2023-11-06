@@ -43,7 +43,8 @@ public class Messages {
     public static final String SHOW_SALES_TITLE = "| Dish Name                              |  Dish Qty    |  Total Cost Price |";
     public static final String SHOW_SALES_END_CAP = "+---------------------------------------------------------------------------+";
     public static final String SHOW_SALES_CORNER = "+----------------------------------------+--------------+-------------------+";
-    
+    public static final String SHOW_SALES_DIVIDER = "=============================================================================";
+
     /** Messages for order command */
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
             + "in the virtual kitchen of your dreams. Bon appétit!";
