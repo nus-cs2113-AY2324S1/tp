@@ -97,12 +97,13 @@ public class FinancialStatement {
 
         StringBuilder filterMessage = new StringBuilder("Here are your corresponding transactions with");
         int hasFilterCriteria = 0;
-        String[] filterCriteria = {
-                description != null && !description.isEmpty() ? " <description>: " + description : null,
-                amount.isPresent() ? " <amount>: " + amount.getAsDouble() : null,
-                date != null ? " <date>: " + date : null,
-                category != null ? " <category>: " + category : null
+        String[] filterCriteria = { (description != null && !description.isEmpty()) ?
+                " <description>: " + description : null, amount.isPresent() ?
+                " <amount>: " + amount.getAsDouble() : null, (date != null) ?
+                " <date>: " + date : null, (category != null) ?
+                " <category>: " + category : null
         };
+
 
         for (String criterion : filterCriteria) {
             if (criterion != null) {

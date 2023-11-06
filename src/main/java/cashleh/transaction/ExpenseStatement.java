@@ -4,7 +4,10 @@ import cashleh.Ui;
 import cashleh.exceptions.CashLehMissingTransactionException;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 /**
  * Represents an Expense Statement in the CashLeh application.
@@ -120,11 +123,11 @@ public class ExpenseStatement {
 
         StringBuilder filterMessage = new StringBuilder("Here are your corresponding expenses with");
         int hasFilterCriteria = 0;
-        String[] filterCriteria = {
-                description != null && !description.isEmpty() ? " <description>: " + description : null,
-                amount.isPresent() ? " <amount>: " + amount.getAsDouble() : null,
-                date != null ? " <date>: " + date : null,
-                category != null ? " <category>: " + category : null
+        String[] filterCriteria = { (description != null && !description.isEmpty()) ?
+                " <description>: " + description : null, amount.isPresent() ?
+                " <amount>: " + amount.getAsDouble() : null, (date != null) ?
+                " <date>: " + date : null, (category != null) ?
+                " <category>: " + category : null
         };
 
         for (String criterion : filterCriteria) {
