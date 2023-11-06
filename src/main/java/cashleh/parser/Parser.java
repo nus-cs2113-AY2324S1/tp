@@ -112,7 +112,7 @@ public class Parser {
     }
 
     private Expense getExpense(String input) throws CashLehParsingException {
-        String[] format = {ADD_EXPENSE, "/amt", "/date:optional", "/cat:optional"};
+        String[] format = {ADD_EXPENSE, AMT_KEYWORD, DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String expenseName = inputDetails.get(ADD_EXPENSE);
         assert expenseName != null;
@@ -165,7 +165,7 @@ public class Parser {
     }
 
     private Income getIncome(String input) throws CashLehParsingException {
-        String[] format = {ADD_INCOME, "/amt", "/date:optional", "/cat:optional"};
+        String[] format = {ADD_INCOME, AMT_KEYWORD, DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String incomeName = inputDetails.get(ADD_INCOME);
         assert incomeName != null;
@@ -243,13 +243,15 @@ public class Parser {
         String[] format = null;
         switch (transactionType) {
         case FILTER_EXPENSE:
-            format = new String[]{FILTER_EXPENSE, "/amt:optional", "/date:optional", "/cat:optional"};
+            format = new String[]{FILTER_EXPENSE, AMT_KEYWORD+":optional",
+                DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
             break;
         case FILTER_INCOME:
-            format = new String[]{FILTER_INCOME, "/amt:optional", "/date:optional", "/cat:optional"};
+            format = new String[]{FILTER_INCOME, AMT_KEYWORD+":optional",
+                DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
             break;
         case FILTER:
-            format = new String[]{FILTER, "/amt:optional", "/date:optional", "/cat:optional"};
+            format = new String[]{FILTER, AMT_KEYWORD+":optional", DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
             break;
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
