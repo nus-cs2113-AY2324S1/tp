@@ -11,7 +11,7 @@ neat overview of their financial situation.
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `CashLeh?` from [GitHub](https://github.com/AY2324S1-CS2113-W12-2/tp/releases/).
 3. Copy it into an empty folder
-4. Open the terminal and run the command `java javac- Cashleh.jar`
+4. Open the terminal and run the command `java -jar CashLeh.jar`
 5. CashLeh? should launch and you can start interacting with the application
 
 ## Features
@@ -59,7 +59,7 @@ Example of usage:
 ### Adding an expense: `addExpense`
 Adds an expense with a description, amount, date and category.
 
-Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+Format: `addExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
 * The `AMOUNT` must be a positive number.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
