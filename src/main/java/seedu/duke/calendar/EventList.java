@@ -24,13 +24,15 @@ public class EventList {
         return eventList.size();
     }
 
-    public void findEvent(String keyword) {
+    public int findEvent(String keyword) {
         int count = 0;
         for (Event event: eventList) {
             if (event.getName().contains(keyword)) {
                 System.out.println((++count) + ". " + event);
             }
         }
+
+        return count;
     }
 
     public int deleteEvent(String name) {

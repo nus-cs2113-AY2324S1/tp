@@ -12,9 +12,9 @@ public class FindEventCommand extends EventCommand {
         System.out.print("What event are you looking for?: ");
         String eventName = scanner.nextLine();
 
-        if (eventList.getSize() > 0) {
-            System.out.println("    Here are the matching events in your list:");
-            eventList.findEvent(eventName);
+        int count = eventList.findEvent(eventName);
+
+        if (count > 0) {
             System.out.println("    These events have been found");
         } else {
             System.out.println("    No such event found");

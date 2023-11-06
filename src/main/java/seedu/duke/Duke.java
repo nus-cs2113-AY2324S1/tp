@@ -31,7 +31,7 @@ public class Duke {
                 fc.processInput(input);
             } else if (cm.isResponsible(input)) {
                 cm.processInput(input);
-            } else if (input.equals("exit program")) {
+            } else if (input.equals("exit")) {
                 System.out.println("    You are exiting TaskLinker! Bye!");
                 break;
             } else if (input.startsWith("help")) {
@@ -61,6 +61,7 @@ public class Duke {
             "delete all events",
             "find event",
             "list events",
+            "exit",
         };
 
         for (String commandFormat : commandFormats) {
