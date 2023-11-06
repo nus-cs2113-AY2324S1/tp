@@ -22,7 +22,7 @@ public class AddVendorCommand extends Command {
         this.toAdd = new Vendor(name);
     }
 
-    public boolean VendorAlreadyExist(String name) {
+    public boolean vendorAlreadyExist(String name) {
         for (int i = 0; i < this.vendorsList.vendorArrayList.size(); i += 1) {
             String vendorName = vendorsList.vendorArrayList.get(i).getName();
 
@@ -35,7 +35,7 @@ public class AddVendorCommand extends Command {
 
     @Override
     public <T> CommandResult<T> execute() {
-        if (VendorAlreadyExist(toAdd.getName()) == true) {
+        if (vendorAlreadyExist(toAdd.getName()) == true) {
             return new CommandResult<>("No Duplicates allowed!");
         }
 
