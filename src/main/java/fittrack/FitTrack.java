@@ -12,6 +12,8 @@ import fittrack.storage.Storage;
 import fittrack.storage.Storage.StorageOperationException;
 import fittrack.storage.Storage.InvalidStorageFilePathException;
 
+import java.io.IOException;
+
 
 /**
  * Represents the main part of FitTrack.
@@ -72,6 +74,7 @@ public class FitTrack {
         while (!isValidInput) {
             try {
                 profileSettings();
+                storage.saveProfile(userProfile);
                 isValidInput = true;
             } catch (PatternMatchFailException e) {
                 System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
@@ -81,6 +84,9 @@ public class FitTrack {
                 System.out.println("Please enter a number greater than 0");
             } catch (WrongGenderException e) {
                 System.out.println("Please enter either M or F");
+            } catch (IOException e) {
+                System.out.println("Error occurred while saving profile.");
+                isValidInput = true;
             }
         }
     }
@@ -98,9 +104,10 @@ public class FitTrack {
     private CommandResult executeCommand(Command command) {
         try {
             command.setData(userProfile, mealList, workoutList, storage);
+            CommandResult result = command.execute();
             storage.save(userProfile, mealList, workoutList);
-            return command.execute();
-        } catch (Exception e) {
+            return result;
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException();
         }
