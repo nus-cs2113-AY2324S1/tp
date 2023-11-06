@@ -2,7 +2,6 @@ package cashleh.commands;
 
 import cashleh.transaction.IncomeStatement;
 
-import java.util.logging.Level;
 /**
  * This class extends the Command class and is
  * used to encapsulate the action of viewing incomes from the application's income statement.
@@ -18,6 +17,6 @@ public class ViewIncomes extends Command {
     public void execute() {
         assert incomeStatement != null;
         incomeStatement.printIncomes();
-        logger.log(Level.INFO, "income statement was successfully displayed");
+        logger.log(loggerLevel, "income statement was successfully displayed");
     }
 }
