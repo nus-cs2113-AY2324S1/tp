@@ -205,10 +205,8 @@ public class Duke {
             break;
 
         case "update_exchange_rate":
-            Ui.showLineDivider();
-            Command c = new UpdateExchangeRateCommand(fullCommand, exchangeRateFileHandler);
+            Command c = new UpdateExchangeRateCommand(fullCommand, exchangeRateFileHandler, ui);
             c.execute();
-            Ui.showLineDivider();
             break;
         default:
             throw new KaChinnnngException("Invalid command. Please try again."
