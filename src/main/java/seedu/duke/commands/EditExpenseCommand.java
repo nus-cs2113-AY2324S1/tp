@@ -39,6 +39,9 @@ public class EditExpenseCommand extends Command {
 
         try {
             index = getIndex(fullCommand);
+            if (index < 0) {
+                throw new KaChinnnngException("Oops! Index has to be a positive integer");
+            }
             ExpenseManager expenseCommand = new ExpenseManager(fullCommand);
             expenseCommand.execute();
             Expense newExpense = expenseCommand.getNewExpense();
