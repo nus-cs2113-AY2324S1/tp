@@ -26,7 +26,7 @@ Adds an income with a description, amount, date and category.
 
 Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `AMOUNT` must be a positive number.
+* The `AMOUNT` must be a positive number and less than the `MAX_AMT` set. If need be, larger transactions can be split into smaller transactions.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended. 
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
 (SALARY, ALLOWANCE, INVESTMENT, LOTTERY_GAMBLING)</code>, it will default to <code>OTHERS</code>
@@ -61,7 +61,7 @@ Adds an expense with a description, amount, date and category.
 
 Format: `addExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `AMOUNT` must be a positive number.
+* The `AMOUNT` must be a positive number and less than the `MAX_AMT` set. If need be, larger transactions can be split into smaller transactions.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
 (FOOD_DRINK, SHOPPING, HOUSING, TRANSPORTATION, ENTERTAINMENT, UTILITIES)</code>, it will default to <code>OTHERS</code>
@@ -121,20 +121,22 @@ Shows sum of incomes and lists each income record with its description, amount, 
 Format: `viewIncomes`  
 * Anything following the command will be ignored, i.e. `viewIncomes overview` will be interpreted just 
 like `viewIncomes`.
+* Descriptions longer than the `MAX_DESCRIPTION` length set will be replaced with "...".
 
 Example of usage:
 
 `viewIncomes`
 ```
-+-----------------------------------------------------------------------------------------------------------------------+
-|                                                   Income Statement                                                    |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    1     |    Income    |     2023-09-30     |        monthly salary        |         -          |     + $2500.0      |
-+-----------------------------------------------------------------------------------------------------------------------+
-| Total Income: $2500.0                                                                                                 |
-+-----------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------+
+|                                                        Income Statement                                                         |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    ID    |     Type     |        Date        |              Description               |      Category      |       Amount       |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    1     |    Income    |     2023-11-07     |              month salary              |         -          |     + $2500.0      |
+|    2     |    Income    |     2023-11-07     |  part time work while still study ...  |         -          |      + $500.0      |
++---------------------------------------------------------------------------------------------------------------------------------+
+| Total Income: $3000.0                                                                                                           |
++---------------------------------------------------------------------------------------------------------------------------------+
 ```
 
 ### Viewing previous expenses: `viewExpenses`
@@ -142,20 +144,22 @@ Shows sum of expenses and lists each expense record with its description, amount
 Format: `viewExpenses`
 * Anything following the command will be ignored, i.e. `viewExpenses overview` will be interpreted just
   like `viewExpenses`.
+* Descriptions longer than the `MAX_DESCRIPTION` length set will be replaced with "...".
 
 Example of usage:
 
 `viewExpenses`
 ```
-+-----------------------------------------------------------------------------------------------------------------------+
-|                                                   Expense Statement                                                   |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    1     |   Expense    |     2023-09-30     |           milk tea           |     FOOD_DRINK     |       - $2.5       |
-+-----------------------------------------------------------------------------------------------------------------------+
-| Total Expense: $2.5                                                                                                   |
-+-----------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------+
+|                                                        Expense Statement                                                        |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    ID    |     Type     |        Date        |              Description               |      Category      |       Amount       |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    1     |   Expense    |     2023-11-07     |                milk tea                |     FOOD_DRINK     |       - $2.5       |
+|    2     |   Expense    |     2023-11-07     |  a very expensive dinner that cos ...  |         -          |      - $200.0      |
++---------------------------------------------------------------------------------------------------------------------------------+
+| Total Expense: $202.5                                                                                                           |
++---------------------------------------------------------------------------------------------------------------------------------+
 ```
 
 ### Viewing the entire financial statement: `viewFinancialStatement`
@@ -164,6 +168,8 @@ Transactions in the Financial Statement will be sorted and displayed according t
 Format: `viewFinancialStatement`
 * Anything following the command will be ignored, i.e. `viewFinancialStatement overview` will be interpreted just like 
 `viewFinancialStatement`.
+* Descriptions longer than the `MAX_DESCRIPTION` length set will be replaced with "...".
+
 
 Example of usage:
 
