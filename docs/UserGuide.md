@@ -25,8 +25,6 @@ ____________________________________________________________
 
 ## Features 
 
-{Give detailed description of each feature}
-
 ### View help : help
 Shows basic commands executable by the program.
 
@@ -44,20 +42,18 @@ To add an income (with foreign currency):
 ```
 add income /de <description> /date <date> /amt [currency] <amount>
 ```
-note:
+Note:
 - fields `/de`, `/date`, and `/amt` are case-sensitive and should be in the specified order.
-- should users add additional characters behind income eg. add incomeABCDE, the system will still recognise it as add income but not addABCDE income.
-- users should not use "|" in the description as it is used as a delimiter in the storage file.
+- Users should not use "|" in the description as it is used as a delimiter in the storage file.
 
 To add an expense (with foreign currency):
 ```
 add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
-note:
-- fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
-- should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
-- should users add additional characters behind expense eg. add expenseABCDE, the system will still recognise it as add expense.
-- users should not use "|" in the description as it is used as a delimiter in the storage file.
+Note:
+- Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
+- Should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
+- Users should not use "|" in the description as it is used as a delimiter in the storage file.
 - There are only 3 categories for expenses: `Food`, `Transport`, `Utilities`.
 - There are 3 types associated with `Food` category: `Breakfast`, `Lunch`, `Dinner`, else it will default to `UNDEFINED`.
 - There are 4 types associated with `Transport` category: `Bus`, `Train`, `Taxi`, `Fuel`, else it will default to `UNDEFINED`.
@@ -66,12 +62,12 @@ note:
 
 Use case:
 - Prompts users if any of the fields are empty.
-- Amount is takes up to 2 decimal places.
+- Amount takes up to 2 decimal places.
 - format of date is `dd/mm/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 - By default, amount is set to SGD.
 - User can specify the currency. Refer to the supported currencies for valid currency.
-- Currency specified must have been updated. Refer to list exchange rates for more details
+- Currency specified must have been updated. Refer to list exchange rates for more details.
 
 Example of usage:
 ```
@@ -116,6 +112,8 @@ delete expense <index>
 delete income <index>
 ```
 
+Note: <index> must be a positive integer that coressponds to a income/expense entry
+
 ### Clear a list
 Clear all the entries on the income/expenses or both list.
 
@@ -148,6 +146,10 @@ edit income <index> /de <description> /date <date> /amt [currency] <amount>
 ```
 edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
+Note:
+- <index> must be a positive integer that coressponds to a income/expense entry
+- Format of income/expense entry applies. Refer to the "Note" of add income and add expense feature
+
 Example of usage:
 ```
 edit income 1 /de end of year bonus /date 02/10/2023 /amt HKD 3000.00
@@ -186,17 +188,21 @@ list exchange rates
 ### update exchange rate
 Update exchange rate of a specific foreign currency. Exchange rates will be saved upon
 successful update.
-
-Note: rate specified should be in SGD/{foreign currency}.
-
+  
 Format:
 ```
 update exchange rate <supported_currency> <rate>
 ```
-Example
+Example of usage:
 ```
 update exchange rate USD 0.8
 ```
+Note:
+- <currency> must be one of the foreign currencies supported by KaChinnnng.
+- User may view the supported foreign currecnies with ```list currencies```.
+- <rate> specified should be in SGD/{foreign currency}.
+- <rate> must be a positive decimal that is between 0.001 and 3,000,000.
+- The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
 
 ## FAQ
 
