@@ -25,6 +25,10 @@ ____________________________________________________________
 
 ## Features 
 
+Bryan-updatePPP
+
+
+master
 ### View help : help
 Shows basic commands executable by the program.
 
@@ -112,6 +116,60 @@ delete expense <index>
 delete income <index>
 ```
 
+
+Use case:
+- Prompts users if index is empty.
+- Index should not be negative.
+- Index should not be out of bounds.
+
+### Clear all entries: Clear
+Clearing all entries from the list of income/expenses.
+
+Format:
+```agsl
+clear income
+```
+
+```agsl
+clear expense
+```
+
+```agsl
+clear all
+```
+
+### Find an entry: find
+Find an entry from the existing list of income/expenses.
+
+Format:
+```
+find /t income /de [description] /date [date]
+```
+```
+find /t expense /cat [category] /de [description] /date [date]
+```
+
+Example of usage:
+```
+find /t income /de salary
+```
+```
+find /t expense /cat food /de sushi
+```
+
+Note:
+- fields `/t`, `/cat`, `/de`, `date` are case-sensitive and should be in the specified order.
+- field `/cat` is only applicable for expenses.
+- field `/t` is compulsory.
+- Should users add additional characters behind find eg. findABCDE, the system will still recognise it as find.
+
+Use case:
+- Prompts users if `/t <type>` field is empty.
+- Prompts users if all if the optional fields `cat`, `/de`, `/date`. are empty.
+- Format of date is `dd/mm/yyyy`. Users can also opt to search for entries by month `mm/yyyy`.
+- Date needs to be an existing date, and cannot be dates in the future.
+
+
 Note: <index> must be a positive integer that coressponds to a income/expense entry
 
 ### Clear a list
@@ -127,6 +185,7 @@ clear expenses
 ```
 clear all
 ```
+
 
 ### Check balance: balance
 Check the balance for current financial records
@@ -157,6 +216,17 @@ edit income 1 /de end of year bonus /date 02/10/2023 /amt HKD 3000.00
 ```
 edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 ```
+
+Note:
+- fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
+- should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
+
+Use case:
+- Prompts users if index is empty.
+- Index should not be negative.
+- Index should not be out of bounds.
+- Prompts users if any of the fields are empty.
+- Amount is takes up to 2 decimal places.
 
 ### List the supported currencies: list currencies
 This function allows user to see the foreign currencies supported by KaChinnnng.
@@ -220,14 +290,20 @@ and change the line in txt file to the correct format.
 
 ## Command Summary
 
-| Action | Format, Examples                                                                                                                                                                               |
-| ------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help | `help`                                                                                                                                                                                         |
-| Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                             |
-| Add Expense | `add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`        |
-| List | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`                                                                                                |
-| Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                          |
-| Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>` |
-| Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                             |
-| Clear | `clear all` <br> `clear incomes` <br> `clear expenses`                                                                                                                                         |
-| Exit | `exit`                                                                                                                                                                                         |
+
+| Action | Format, Examples                                                                                                                                                                                            |
+| ---- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help | `help`                                                                                                                                                                                                      |
+| Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                                          |
+| Add Expense | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`                    |
+| List | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`                                                                                                             |
+| Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                                       |
+| Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>`             |
+| Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                                          |
+| Clear | `clear income`<br/> `clear expense`<br/>`clear all`                                                                                                                                                         |
+| Find | `find /t income /de [description] /date [date]`<br/> e.g. `find /t income /de salary` <br/>`find /t expense /cat [category] /de [description] /date [date]`<br/> e.g. `find /t expense /cat food /de sushi` |
+| Balance| `balance` |
+| Exit | `exit`                                                                                                                                                                                                      |
+                                                                                                                                                                                              |
+
+                                                                                                                                                                                       |
