@@ -35,9 +35,9 @@ import java.util.HashMap;
 import java.util.OptionalDouble;
 
 public class Parser {
-    private static final String ADD_INCOME = "addIncome";
-    private static final String DELETE_INCOME = "deleteIncome";
-    private static final String VIEW_INCOMES = "viewIncomes";
+    private static final String ADD_INCOME = "addincome";
+    private static final String DELETE_INCOME = "deleteincome";
+    private static final String VIEW_INCOMES = "viewincomes";
 
     private static final String ADD_EXPENSE = "addExpense";
     private static final String DELETE_EXPENSE = "deleteExpense";
