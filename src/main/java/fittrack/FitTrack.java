@@ -30,6 +30,7 @@ public class FitTrack {
     private UserProfile userProfile;
     private MealList mealList;
     private WorkoutList workoutList;
+    private StepList stepList;
 
     private FitTrack() {
         ui = new Ui();
@@ -65,6 +66,7 @@ public class FitTrack {
             }
             this.mealList = storage.mealLoad();
             this.workoutList = storage.workoutLoad();
+            this.stepList = storage.stepLoad();
         } catch (StorageOperationException | InvalidStorageFilePathException e) {
             System.out.println("There was a problem with the loading of storage contents.");
             ui.printLine();
@@ -103,9 +105,9 @@ public class FitTrack {
 
     private CommandResult executeCommand(Command command) {
         try {
-            command.setData(userProfile, mealList, workoutList, storage);
+            command.setData(userProfile, mealList, workoutList, stepList, storage);
             CommandResult result = command.execute();
-            storage.save(userProfile, mealList, workoutList);
+            storage.save(userProfile, mealList, workoutList, stepList);
             return result;
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -145,7 +147,7 @@ public class FitTrack {
      */
     private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
         boolean isStorageFileSpecifiedByUser = args.length > 0;
-        return isStorageFileSpecifiedByUser ? new Storage(args[0], args[1], args[2]) : new Storage();
+        return isStorageFileSpecifiedByUser ? new Storage(args[0], args[1], args[2], args[3]) : new Storage();
     }
 
     private void end() {
