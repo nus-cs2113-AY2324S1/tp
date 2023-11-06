@@ -20,7 +20,7 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            storage.save(userProfile, mealList, workoutList);
+            storage.save(userProfile, mealList, workoutList, stepList);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
