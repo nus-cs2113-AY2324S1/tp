@@ -102,6 +102,12 @@ public class ParserTest {
     }
 
     @Test
+    public void parserViewIncomesCaseInsensitiveTest() throws CashLehException {
+        String inputString = "vIeWinComEs";
+        assertInstanceOf(ViewIncomes.class, parser.parse(inputString));
+    }
+
+    @Test
     public void parserAddExpenseTest() throws CashLehException {
         String inputString1 = "addExpense food";
         Exception exception1 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString1));
@@ -126,12 +132,12 @@ public class ParserTest {
         String inputString1 = "deleteExpense 1";
         assertInstanceOf(DeleteExpense.class, parser.parse(inputString1));
 
-        String inputString2 = "deleteExpense";
+        String inputString2 = "DELeteexpense";
         Exception exception2 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString2));
         assertEquals("Which transaction kena the chop today? Make your choice!",
                 exception2.getMessage());
 
-        String inputString3 = "deleteExpense lol";
+        String inputString3 = "deleTEEXPEnse lol";
         Exception exception3 = assertThrows(CashLehParsingException.class, () -> parser.parse(inputString3));
         assertEquals("Eh, that's not the kind of number we flaunt in CashLeh!",
                 exception3.getMessage());

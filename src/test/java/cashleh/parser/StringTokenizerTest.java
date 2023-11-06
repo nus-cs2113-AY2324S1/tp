@@ -24,13 +24,13 @@ public class StringTokenizerTest {
 
     @Test
     public void stringTokenizerNoDescriptionTest() throws CashLehParsingException {
-        HashMap<String, String> map = StringTokenizer.tokenize("addExpense /date 01/01/2020 " +
+        HashMap<String, String> map = StringTokenizer.tokenize("ADDEXPENSE /date 01/01/2020 " +
                         "/amount 200 /category pocket money",
-                new String[]{"addExpense", "/date", "/amount", "/category"});
+                new String[]{"ADDEXPENSE", "/date", "/amount", "/category"});
         assertEquals(map.get("/date"), "01/01/2020");
         assertEquals(map.get("/amount"), "200");
         assertEquals(map.get("/category"), "pocket money");
-        assertEquals(map.get("addExpense"), "");
+        assertEquals(map.get("ADDEXPENSE"), "");
     }
 
     @Test
