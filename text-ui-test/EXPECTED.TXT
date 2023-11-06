@@ -1,5 +1,6 @@
 	____________________________________________________________
-	Here is the link to the user guide:https://docs.google.com/document/d/15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link
+	Here is the link to the user guide:
+	https://ay2324s1-cs2113-w12-2.github.io/tp/UserGuide.html
 	______           __    __         __  ___
    / ____/___ ______/ /_  / /   ___  / /_/__ \
   / /   / __ `/ ___/ __ \/ /   / _ \/ __ \/ _/
