@@ -47,7 +47,7 @@ To add an income (with foreign currency):
 add income /de <description> /date <date> /amt [currency] <amount>
 ```
 Note:
-- fields `/de`, `/date`, and `/amt` are case-sensitive and should be in the specified order.
+- Fields `/de`, `/date`, and `/amt` are case-sensitive and should be in the specified order.
 - Users should not use "|" in the description as it is used as a delimiter in the storage file.
 
 To add an expense (with foreign currency):
@@ -206,7 +206,7 @@ edit income <index> /de <description> /date <date> /amt [currency] <amount>
 edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
 Note:
-- <index> must be a positive integer that corresponds to an income/expense entry
+- `index` must be a positive integer that corresponds to an income/expense entry
 - Format of income/expense entry applies. Refer to the "Note" of add income and add expense feature
 
 Example of usage:
@@ -268,10 +268,10 @@ Example of usage:
 update exchange rate USD 0.8
 ```
 Note:
-- <currency> must be one of the foreign currencies supported by KaChinnnng.
-- User may view the supported foreign currencies with ```list currencies```.
-- <rate> specified should be in SGD/{foreign currency}.
-- <rate> must be a positive decimal that is between 0.001 and 3,000,000.
+- `currency` must be one of the foreign currencies supported by KaChinnnng.
+- User may view the supported foreign currencies with `list currencies`.
+- `rate` specified should be in SGD/{foreign currency}.
+- `rate` must be a positive decimal that is between 0.001 and 3,000,000.
 - The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
 
 ## FAQ
