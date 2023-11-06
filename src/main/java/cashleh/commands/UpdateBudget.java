@@ -33,6 +33,7 @@ public class UpdateBudget extends Command {
      */
     @Override
     public void execute() throws CashLehBudgetException {
+        budget.setActive(true);
         assert budget.isActive();
         if (budget.getBudget() <= 0) {
             throw new CashLehBudgetException("Invalid budget parameter. Please provide a different budget.");

@@ -1,0 +1,40 @@
+@startuml
+
+skinparam Style strictuml
+skinparam classAttributeIconSize 0
+
+class           BudgetHandler
+class           Budget
+class           Progress
+class           FinancialStatement
+BudgetHandler -l-> "1" Budget : handles >
+BudgetHandler -r-> "0..1" Progress : measures >
+BudgetHandler --> "1" FinancialStatement : refers to >
+
+class BudgetHandler {
+    +deleteBudget(): void
+    +printBasicWarning(): void
+    +printSeriousWarning(): void
+    +printBudget(): void
+}
+
+class Budget {
+    -budget: double
+    -isActive: boolean
+}
+
+class Progress {
+    -progress: double
+    -buildProgressBar(): String
+    +displayProgressBar(): String
+}
+
+class FinancialStatement {
+    -financialStatement: ArrayList<Transaction>
+    -incomeStatement: IncomeStatement
+    -expenseStatement: ExpenseStatement
+    +getNetCash(): double
+    +printTransactions(): void
+    +findTransaction(): void
+}
+@enduml

@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
 
 public class DateParser {
     private static final DateTimeFormatterBuilder formatterBuilder = new DateTimeFormatterBuilder()
-            .append(DateTimeFormatter.ofPattern("[dd-MM-yyyy]" + "[dd/MM/yyyy]" + "[dd.MM.yyyy]" + "[dd MM yyyy]"
-            + "[d-M-yyyy]" + "[d/M/yyyy]" + "[d.M.yyyy]" + "[d M yyyy]"
+            .append(DateTimeFormatter.ofPattern("[dd-MM-yyyy]" + "[yyyy-MM-dd]"+ "[dd/MM/yyyy]" + "[dd.MM.yyyy]"
+            + "[dd MM yyyy]" + "[d-M-yyyy]" + "[d/M/yyyy]" + "[d.M.yyyy]" + "[d M yyyy]"
             + "[d-MMM-yyyy]" + "[d/MMM/yyyy]" + "[d.MMM.yyyy]" + "[d MMM yyyy]"
             + "[dd-MMM-yyyy]" + "[dd/MMM/yyyy]" + "[dd.MMM.yyyy]" + "[dd MMM yyyy]"));
     private static final DateTimeFormatter formatter = formatterBuilder.toFormatter();

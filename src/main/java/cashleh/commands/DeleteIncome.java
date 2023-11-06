@@ -26,10 +26,10 @@ public class DeleteIncome extends Command {
     @Override
     public void execute() throws CashLehMissingTransactionException {
         try {
-            int numberOfEntriesBeforeDeletion = incomeStatement.getNumberOfEntries();
+            int numberOfEntriesBeforeDeletion = incomeStatement.getNumberOfIncomes();
             String incomeBeingDeleted = incomeStatement.getIncome(incomeIndex - 1).toString();
             incomeStatement.deleteIncome(incomeIndex - 1);
-            int numberOfEntriesAfterDeletion = incomeStatement.getNumberOfEntries();
+            int numberOfEntriesAfterDeletion = incomeStatement.getNumberOfIncomes();
             assert numberOfEntriesBeforeDeletion == numberOfEntriesAfterDeletion + 1;
             Ui.printMultipleText(new String[] {
                 "Noted! CashLeh has removed the following income:",

@@ -1,0 +1,83 @@
+@startuml
+
+skinparam Style strictuml
+
+class           Command
+class           AddIncome
+class           AddExpense
+class           DeleteIncome
+class           DeleteExpense
+class           ViewIncomes
+class           ViewExpenses
+class           ViewFinancialStatement
+class           ViewBudget
+class           UpdateBudget
+class           DeleteBudget
+class           Exit
+
+Command --> "*" AddIncome : executes >
+Command --> "*" AddExpense : executes >
+Command --> "*" DeleteIncome : executes >
+Command --> "*" DeleteExpense : executes >
+Command --> "*" ViewIncomes : executes >
+Command --> "*" ViewExpenses : executes >
+Command --> "*" ViewFinancialStatement : executes >
+Command --> "*" ViewBudget : executes >
+Command --> "*" UpdateBudget : executes >
+Command --> "*" DeleteBudget : executes >
+Command --> "*" Exit : executes >
+
+class Command {
+    - index: int
+    + execute(): void
+}
+class AddIncome {
+    - incomeToAdd: Income
+    - incomeStatement: IncomeStatement
+    + execute(): void
+}
+class AddExpense {
+    - expenseToAdd: Expense
+    - expenseStatement: ExpenseStatement
+    + execute(): void
+}
+class DeleteIncome {
+    - incomeIndex: int
+    - incomeStatement: IncomeStatement
+    + execute(): void
+}
+class DeleteExpense {
+    - expenseIndex: int
+    - expenseStatement: ExpenseStatement
+    + execute(): void
+}
+class ViewIncomes {
+    - incomeStatement: IncomeStatement
+    + execute(): void
+}
+class ViewExpenses {
+    - expenseStatement: ExpenseStatement
+    + execute(): void
+}
+class ViewFinancialStatement {
+    - financialStatement: FinancialStatement
+    + execute(): void
+}
+class ViewBudget {
+    - budgetHandler: BudgetHandler
+    + execute(): void
+ }
+ class UpdateBudget {
+    - budget: Budget
+    - budgetHandler: BudgetHandler
+    + execute(): void
+ }
+ class DeleteBudget {
+    - budgetHandler: BudgetHandler
+    + execute(): void
+  }
+  class Exit {
+       + execute(): void
+   }
+
+@enduml
