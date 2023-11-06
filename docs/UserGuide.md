@@ -119,8 +119,8 @@ delete income <index>
 
 Use case:
 - Prompts users if index is empty.
-- Index should not be negative.
-- Index should not be out of bounds.
+- `<index>` should not be negative.
+- `<index>` should not be out of bounds.
 
 ### Clear all entries: Clear
 Clearing all entries from the list of income/expenses.
@@ -220,13 +220,14 @@ edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 Note:
 - Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
 - Should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
+- `<index>` should not be negative.
+- `<index>` should not be out of bounds.
+- `<amount>` takes up to 2 decimal places.
 
 Use case:
 - Prompts users if index is empty.
-- Index should not be negative.
-- Index should not be out of bounds.
 - Prompts users if any of the fields are empty.
-- Amount is takes up to 2 decimal places.
+
 
 ### List the supported currencies: list currencies
 This function allows user to see the foreign currencies supported by KaChinnnng.
@@ -268,10 +269,10 @@ Example of usage:
 update exchange rate USD 0.8
 ```
 Note:
-- `currency` must be one of the foreign currencies supported by KaChinnnng.
+- `<currency>` must be one of the foreign currencies supported by KaChinnnng.
 - User may view the supported foreign currencies with `list currencies`.
-- `rate` specified should be in SGD/{foreign currency}.
-- `rate` must be a positive decimal that is between 0.001 and 3,000,000.
+- `<rate>` specified should be in SGD/{foreign currency}.
+- `<rate>` must be a positive decimal that is between 0.001 and 3,000,000.
 - The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
 
 ## FAQ
