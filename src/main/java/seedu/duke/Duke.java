@@ -60,8 +60,8 @@ public class Duke {
      * This method runs the program.
      */
     public void run() {
-        Ui.printWelcomeMessage();
         loadData();
+        Ui.printWelcomeMessage();
 
         boolean isExit = false;
         while (!isExit) {
@@ -85,9 +85,7 @@ public class Duke {
     protected void loadData() {
         try {
             get.getFromTextFile(incomes, expenses);
-            if(!exchangeRateFileHandler.load()) {
-                Ui.showLineDivider();
-            }
+            exchangeRateFileHandler.load();
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
         } catch (KaChinnnngException e) {

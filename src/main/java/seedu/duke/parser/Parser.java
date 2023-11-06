@@ -58,11 +58,11 @@ public class Parser {
 
         if (commandLowerCase.equals("exit")) {
             resultCommand = "exit";
-        } else if (commandLowerCase.startsWith("add income")) {
+        } else if (commandLowerCase.startsWith("add income ")) {
             resultCommand = "add_income";
         } else if (commandLowerCase.equals("list income")) {
             resultCommand = "list_income";
-        } else if (commandLowerCase.startsWith("add expense")) {
+        } else if (commandLowerCase.startsWith("add expense ")) {
             resultCommand = "add_expense";
         } else if (commandLowerCase.equals(("list expense"))) {
             resultCommand = "list_expense";
