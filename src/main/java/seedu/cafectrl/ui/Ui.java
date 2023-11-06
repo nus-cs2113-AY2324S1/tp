@@ -185,6 +185,20 @@ public class Ui {
         formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
     }
 
+    public void showIngredientTop() {
+        showToUser(Messages.MENU_END_CAP, Messages.VIEW_STOCK_MESSAGE2,
+                Messages.MENU_CORNER, Messages.VIEW_STOCK_TITLE_MESSAGE, Messages.MENU_CORNER);
+    }
+
+    public void showIngredientStock(String ingredientName, int ingredientQty, String ingredientUnit) {
+        formatListIngredient(ingredientName, ingredientQty + ingredientUnit);
+    }
+
+    public void formatListIngredient(String ingredientName, String ingredientAmount) {
+        String leftAlignFormat = "| %-38s | %-12s |%n";
+        System.out.format(leftAlignFormat, ingredientName, ingredientAmount);
+    }
+
     public void showChefMessage() {
         showToUser(Messages.CHEF_MESSAGE);
     }

@@ -22,11 +22,12 @@ public class ViewTotalStockCommand extends Command {
 
     @Override
     public void execute() {
-        ui.showToUser(Messages.VIEW_STOCK);
+        ui.showIngredientTop();
         pantryStock = pantry.getPantryStock();
 
         for (Ingredient ingredient : pantryStock) {
-            ui.showToUser(ingredient.getName() + "\t\t\t" + ingredient.getQty() + ingredient.getUnit());
+            ui.showIngredientStock(ingredient.getName(), ingredient.getQty(), ingredient.getUnit());
         }
+        ui.showMenuBottom();
     }
 }
