@@ -86,25 +86,23 @@ public class IncomeStatement {
      */
     public void printIncomes() {
         int listSize = incomeStatement.size();
-        List<String> incomesDetails = new ArrayList<>();
+        List<String []> incomesDetails = new ArrayList<>();
         for (Income currentIncome : incomeStatement) {
             String type = "Income, ";
             String date = currentIncome.getDate().toString();
             String amt = String.valueOf(currentIncome.getAmount());
             String cat = currentIncome.getCategory() == null ? "-" : currentIncome.getCategory().toString();
-            incomesDetails.add(type + date + ", " + currentIncome.getDescription() + ", " + amt + ", " + cat);
+            incomesDetails.add(new String[]{type, date, currentIncome.getDescription(), amt, cat});
         }
 
         // Sort incomes based on the date of income
         Collections.sort(incomesDetails, (income1, income2) -> {
-            String[] incomeParts1 = income1.split(", ");
-            String [] incomeParts2 = income2.split(", ");
-            String date1 = incomeParts1[1];
-            String date2 = incomeParts2[1];
+            String date1 = income1[1];
+            String date2 = income2[1];
             return date1.compareTo(date2);
         });
 
-        String[] texts = incomesDetails.toArray(new String[incomesDetails.size()]);
+        String[][] texts = incomesDetails.toArray(new String[0][]);
 
         Ui.printStatement("Income Statement", texts);
     }

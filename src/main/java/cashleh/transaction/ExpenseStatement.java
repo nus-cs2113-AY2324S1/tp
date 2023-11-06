@@ -87,25 +87,23 @@ public class ExpenseStatement {
      */
     public void printExpenses() {
         int listSize = expenseStatement.size();
-        List<String> expensesDetails = new ArrayList<>();
+        List<String []> expensesDetails = new ArrayList<>();
         for (Expense currentExpense : expenseStatement) {
             String type = "Expense, ";
             String date = currentExpense.getDate().toString();
             String amt = String.valueOf(currentExpense.getAmount());
             String cat = currentExpense.getCategory() == null ? "-" : currentExpense.getCategory().toString();
-            expensesDetails.add(type + date + ", " + currentExpense.getDescription() + ", " + amt + ", " + cat);
+            expensesDetails.add(new String []{type, date, currentExpense.getDescription(), amt, cat});
         }
 
         // Sort expenses based on the date of expense
         Collections.sort(expensesDetails, (expense1, expense2) -> {
-            String[] expenseParts1 = expense1.split(", ");
-            String [] expenseParts2 = expense2.split(", ");
-            String date1 = expenseParts1[1];
-            String date2 = expenseParts2[1];
+            String date1 = expense1[1];
+            String date2 = expense2[1];
             return date1.compareTo(date2);
         });
 
-        String[] texts = expensesDetails.toArray(new String[expensesDetails.size()]);
+        String[][] texts = expensesDetails.toArray(new String[0][]);
 
         Ui.printStatement("Expense Statement", texts);
     }

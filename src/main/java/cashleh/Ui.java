@@ -10,7 +10,7 @@ public class Ui {
     private static final String VERTICAL_LINE = "|";
     private static final String CORNER_SYMBOL = "+";
     private static final int MIN_SPACE_PER_SIDE = 2;
-    private static final int MAX_DESCRIPTION = 60;
+    private static final int MAX_DESCRIPTION = 40;
 
     public static String getDateString(LocalDate date) {
         return date.format(DATE_FORMATTER);
@@ -61,7 +61,7 @@ public class Ui {
      * 
      * @param texts An array of text data containing the financial statement details in a structured format.
      */
-    public static void printStatement(String statementType, String[] texts) {
+    public static void printStatement(String statementType, String[][] texts) {
         int idSpace = 10;
         int typeSpace = 14;
         int dateSpace = 20;
@@ -70,16 +70,15 @@ public class Ui {
         int categorySpace = 20;
 
         // Dynamically change the width of each column based on longest string
-        for (String text :  texts) {
-            String[] statementDetails = text.split(", ");
+        for (String[] text :  texts) {
             idSpace = Math.max(idSpace, texts.length + 2 * MIN_SPACE_PER_SIDE);
-            typeSpace = Math.max(typeSpace, statementDetails[0].length() + 2 * MIN_SPACE_PER_SIDE);
-            dateSpace = Math.max(dateSpace, statementDetails[1].length() + 2 * MIN_SPACE_PER_SIDE);
+            typeSpace = Math.max(typeSpace, text[0].length() + 2 * MIN_SPACE_PER_SIDE);
+            dateSpace = Math.max(dateSpace, text[1].length() + 2 * MIN_SPACE_PER_SIDE);
             // Set a limit to the desccription text space
             descriptionSpace = Math.min(MAX_DESCRIPTION,
-                Math.max(descriptionSpace, statementDetails[2].length() + 2 * MIN_SPACE_PER_SIDE));
-            amountSpace = Math.max(amountSpace, statementDetails[3].length() + 2 * MIN_SPACE_PER_SIDE);
-            categorySpace = Math.max(categorySpace, statementDetails[4].length() + 2 * MIN_SPACE_PER_SIDE);
+                Math.max(descriptionSpace, text[2].length() + 2 * MIN_SPACE_PER_SIDE));
+            amountSpace = Math.max(amountSpace, text[3].length() + 2 * MIN_SPACE_PER_SIDE);
+            categorySpace = Math.max(categorySpace, text[4].length() + 2 * MIN_SPACE_PER_SIDE);
         }
 
         int totalSpace = idSpace + typeSpace + dateSpace +
@@ -93,12 +92,11 @@ public class Ui {
         double totalExpense = 0.0;
 
         for (int i = 0; i < texts.length; i++) {
-            String[] statementDetails = texts[i].split(", ");
-            String type = statementDetails[0];
-            String date = statementDetails[1];
-            String description = statementDetails[2];
-            double amount = Double.parseDouble(statementDetails[3]);
-            String cat = statementDetails[4];
+            String type = texts[i][0];
+            String date = texts[i][1];
+            String description = texts[i][2];
+            double amount = Double.parseDouble(texts[i][3]);
+            String cat = texts[i][4];
             String sign = (type.equals("Income")) ? "+" : "-";
             totalIncome += (type.equals("Income")) ? amount : 0;
             totalExpense += (type.equals("Expense")) ? amount : 0;
