@@ -246,12 +246,20 @@ public class Parser {
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
         }
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
+
         String descriptionString = inputDetails.get(transactionType);
-        //remove scenarios where there is typo in input which might lead to it being recognised as a description,
-        // for instance /cat is written as cat/
-        descriptionString = descriptionString.replaceAll("(?i)\\b(amt|date|cat)\\b", "");
+        // Create expression patterns for "/amt", "/cat", and "/date"
+        String amtFilterPattern = "(?i)(/amt|amt/|a/mt|am/t)";
+        String catFilterPattern = "(?i)(/cat|cat/|c/at|/ca/t)";
+        String dateFilterPattern = "(?i)(/date|date/|d/ate|da/te|dat/e)";
+        // Remove any instance of /amt, /cat and /date from description
+        descriptionString = descriptionString.replaceAll(amtFilterPattern, "");
+        descriptionString = descriptionString.replaceAll(catFilterPattern, "");
+        descriptionString = descriptionString.replaceAll(dateFilterPattern, "");
+        // Remove special characters and punctuations from description
         descriptionString = descriptionString.replaceAll("[^a-zA-Z0-9\\s]", "");
         descriptionString = descriptionString.trim();
+
         String amountString = inputDetails.get(AMT_KEYWORD);
         String dateString = inputDetails.get(DATE_KEYWORD);
         String categoryString = inputDetails.get(CAT_KEYWORD);
@@ -268,6 +276,9 @@ public class Parser {
         if ((amountString != null) && !amountString.isEmpty()) {
             try {
                 double amount = Double.parseDouble(amountString);
+                if (amount > MAX_AMT) {
+                    throw new CashLehParsingException("Amount entered is too large! Please enter a different amount.");
+                }
                 parsedAmount = OptionalDouble.of(amount);
             } catch (NumberFormatException e) {
                 throw new CashLehParsingException("Please enter a valid expense amount!");

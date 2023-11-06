@@ -120,18 +120,23 @@ public class IncomeStatement {
         ArrayList<String> matchingIncomes = new ArrayList<>();
         boolean isMatch = false;
 
-        StringBuilder filterMessage = new StringBuilder("Here are your corresponding incomes with ");
-        if (description != null && !description.isEmpty()) {
-            filterMessage.append("<description>: ").append(description).append(SEPARATOR);
-        }
-        if (amount.isPresent()) {
-            filterMessage.append("<amount>: ").append(amount.getAsDouble()).append(SEPARATOR);
-        }
-        if (date != null) {
-            filterMessage.append("<date>: ").append(date).append(SEPARATOR);
-        }
-        if (category != null) {
-            filterMessage.append("<category>: ").append(category).append(SEPARATOR);
+        StringBuilder filterMessage = new StringBuilder("Here are your corresponding incomes with");
+        int hasFilterCriteria = 0;
+        String[] filterCriteria = {
+                description != null && !description.isEmpty() ? " <description>: " + description : null,
+                amount.isPresent() ? " <amount>: " + amount.getAsDouble() : null,
+                date != null ? " <date>: " + date : null,
+                category != null ? " <category>: " + category : null
+        };
+
+        for (String criterion : filterCriteria) {
+            if (criterion != null) {
+                if (hasFilterCriteria > 0) {
+                    filterMessage.append(SEPARATOR);
+                }
+                filterMessage.append(criterion);
+                hasFilterCriteria++;
+            }
         }
 
         StringBuilder matchingIncomesMessage = new StringBuilder();
