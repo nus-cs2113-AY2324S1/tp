@@ -1,2 +1,0 @@
-[I] Income: income (Amount: 10000.0, Date: 06/11/2023)
-[I] Income: TA Pay (Amount: 9999999.0, Date: 06/11/2023)
