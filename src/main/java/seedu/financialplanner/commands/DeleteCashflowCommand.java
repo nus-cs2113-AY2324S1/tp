@@ -84,7 +84,7 @@ public class DeleteCashflowCommand extends Command {
             category = CashflowCategory.valueOf(stringCategory.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
-            throw new IllegalArgumentException("Entry must be either income, expense or recurring");
+            throw new IllegalArgumentException("Entry must be either income, expense or recurring.");
         }
     }
 
@@ -128,7 +128,7 @@ public class DeleteCashflowCommand extends Command {
             cashflowList.deleteRecurWithoutCategory(index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
 
@@ -141,7 +141,7 @@ public class DeleteCashflowCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
     private void handleDeleteRecurWithCategory() {
@@ -150,7 +150,7 @@ public class DeleteCashflowCommand extends Command {
             cashflowList.deleteRecurWithCategory(category, index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
     private void handleDeleteCashflowWithCategory() {
@@ -162,7 +162,7 @@ public class DeleteCashflowCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
 }

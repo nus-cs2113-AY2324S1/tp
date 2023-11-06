@@ -32,23 +32,23 @@ public class AddCashflowCommand extends Command {
             category = CashflowCategory.valueOf(categoryString.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
-            throw new IllegalArgumentException("Entry must be either income or expense");
+            throw new IllegalArgumentException("Entry must be either income or expense.");
         }
 
         if (!rawCommand.extraArgs.containsKey("a")) {
             logger.log(Level.WARNING, "Missing arguments for amount");
-            throw new IllegalArgumentException("Entry must have an amount");
+            throw new IllegalArgumentException("Entry must have an amount.");
         }
         try {
             logger.log(Level.INFO, "Parsing amount as double");
             amount = Double.parseDouble(rawCommand.extraArgs.get("a").trim());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for amount");
-            throw new IllegalArgumentException("Amount must be a number");
+            throw new IllegalArgumentException("Amount must be a number.");
         }
         if (amount < 0) {
             logger.log(Level.WARNING, "Invalid value for amount");
-            throw new IllegalArgumentException("Amount cannot be negative");
+            throw new IllegalArgumentException("Amount cannot be negative.");
         }
         if (amount > MAX_AMOUNT) {
             logger.log(Level.WARNING, "Maximum value for amount exceeded.");
@@ -89,13 +89,13 @@ public class AddCashflowCommand extends Command {
                 recur = Integer.parseInt(rawCommand.extraArgs.get("r").trim());
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for recur");
-                throw new IllegalArgumentException("Recurrence must be an integer");
+                throw new IllegalArgumentException("Recurrence must be an integer.");
             }
             rawCommand.extraArgs.remove("r");
         }
         if (recur < 0) {
             logger.log(Level.WARNING, "Invalid value for recur");
-            throw new IllegalArgumentException("Recurring value cannot be negative");
+            throw new IllegalArgumentException("Recurring value cannot be negative.");
         }
 
         if (rawCommand.extraArgs.containsKey("d")) {
