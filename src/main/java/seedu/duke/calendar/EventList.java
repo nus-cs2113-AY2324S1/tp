@@ -33,8 +33,15 @@ public class EventList {
         }
     }
 
-    public void deleteEvent(String name) {
-        eventList.removeIf(event -> event.getName().equals(name));
+    public int deleteEvent(String name) {
+        int size = eventList.size();
+        if (size > 0) {
+            eventList.removeIf(event -> event.getName().equals(name));
+        } else {
+            System.out.println("The Calendar is empty");
+        }
+
+        return size;
     }
 
     public void deleteAllEvents() {
