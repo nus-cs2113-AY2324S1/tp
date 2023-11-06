@@ -54,7 +54,7 @@ public class Parser {
     private static final String AMT_KEYWORD = "/amt";
     private static final String DATE_KEYWORD = "/date";
     private static final String CAT_KEYWORD = "/cat";
-    private static final double MAX_AMT = 9999999.0;
+    private static final double MAX_AMT = 9999999.99;
 
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
