@@ -3,6 +3,7 @@ package seedu.financialplanner.cashflow;
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
+import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.utils.Ui;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -25,15 +26,19 @@ public class CashflowList {
     }
 
     public void addIncome(double value, IncomeType type, int recur, String description) {
-        logger.log(Level.INFO, "Adding income");
-        int existingListSize = list.size();
+        try {
+            logger.log(Level.INFO, "Adding income");
+            int existingListSize = list.size();
 
-        Income toAdd = new Income(value, type, recur, description);
-        addToList(toAdd);
-        ui.printAddedCashflow(toAdd);
+            Income toAdd = new Income(value, type, recur, description);
+            addToList(toAdd);
+            ui.printAddedCashflow(toAdd);
 
-        int newListSize = list.size();
-        assert newListSize == existingListSize + 1;
+            int newListSize = list.size();
+            assert newListSize == existingListSize + 1;
+        } catch (FinancialPlannerException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     private void addToList(Cashflow toAdd) {
@@ -41,15 +46,19 @@ public class CashflowList {
     }
 
     public void addExpense(double value, ExpenseType type, int recur, String description) {
-        logger.log(Level.INFO, "Adding expense");
-        int existingListSize = list.size();
+        try {
+            logger.log(Level.INFO, "Adding expense");
+            int existingListSize = list.size();
 
-        Expense toAdd = new Expense(value, type, recur, description);
-        addToList(toAdd);
-        ui.printAddedCashflow(toAdd);
+            Expense toAdd = new Expense(value, type, recur, description);
+            addToList(toAdd);
+            ui.printAddedCashflow(toAdd);
 
-        int newListSize = list.size();
-        assert newListSize == existingListSize + 1;
+            int newListSize = list.size();
+            assert newListSize == existingListSize + 1;
+        } catch (FinancialPlannerException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     public double deleteCashflowWithoutCategory(int index) {
@@ -172,7 +181,7 @@ public class CashflowList {
     }
 
     public void load(Cashflow entry) {
-        list.add(entry);
+        addToList(entry);
     }
 
     public String getList() {

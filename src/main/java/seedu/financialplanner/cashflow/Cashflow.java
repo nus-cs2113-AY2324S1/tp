@@ -12,11 +12,14 @@ import java.time.format.DateTimeFormatter;
 public abstract class Cashflow {
 
     protected static double balance = 0;
+    protected static double incomeBalance = 0;
+    protected static double expenseBalance = 0;
     protected double amount;
     protected int recur;
     protected String description;
     protected LocalDate date;
     protected boolean hasRecurred;
+    protected final double MAX_AMOUNT = 999999999999.99;
 
     public Cashflow(double amount, int recur, String description) {
         this.amount = amount;
@@ -86,11 +89,6 @@ public abstract class Cashflow {
         return string;
     }
 
-    public String formatBalance() {
-        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
-
-        return decimalFormat.format(round(Cashflow.balance, 2));
-    }
 
     public double getAmount() {
         return this.amount;
@@ -98,6 +96,14 @@ public abstract class Cashflow {
 
     public static double getBalance() {
         return balance;
+    }
+
+    public static double getIncomeBalance() {
+        return incomeBalance;
+    }
+
+    public static double getExpenseBalance() {
+        return expenseBalance;
     }
 
     public int getRecur() {

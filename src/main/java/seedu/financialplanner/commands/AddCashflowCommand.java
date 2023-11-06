@@ -23,9 +23,10 @@ public class AddCashflowCommand extends Command {
     protected int recur = 0;
     protected String description = null;
     protected CashflowList cashflowList = CashflowList.getInstance();
+    protected final double MAX_AMOUNT = 999999999999.99;
 
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
-        String categoryString = String.join(" ", rawCommand.args);
+        String categoryString = String.join(" ", rawCommand.args).trim();
         try {
             logger.log(Level.INFO, "Parsing CashflowCategory");
             category = CashflowCategory.valueOf(categoryString.toUpperCase());
@@ -40,7 +41,7 @@ public class AddCashflowCommand extends Command {
         }
         try {
             logger.log(Level.INFO, "Parsing amount as double");
-            amount = Double.parseDouble(rawCommand.extraArgs.get("a"));
+            amount = Double.parseDouble(rawCommand.extraArgs.get("a").trim());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for amount");
             throw new IllegalArgumentException("Amount must be a number");
@@ -49,13 +50,18 @@ public class AddCashflowCommand extends Command {
             logger.log(Level.WARNING, "Invalid value for amount");
             throw new IllegalArgumentException("Amount cannot be negative");
         }
+        if (amount > MAX_AMOUNT) {
+            logger.log(Level.WARNING, "Maximum value for amount exceeded.");
+            throw new IllegalArgumentException("Amount exceeded maximum value this program can hold. " +
+                    "Please add a different cashflow.");
+        }
         rawCommand.extraArgs.remove("a");
 
         if (!rawCommand.extraArgs.containsKey("t")) {
             logger.log(Level.WARNING, "Missing arguments for type");
-            throw new IllegalArgumentException("Entry must have a type");
+            throw new IllegalArgumentException("Entry must have a type.");
         }
-        String stringType = rawCommand.extraArgs.get("t");
+        String stringType = rawCommand.extraArgs.get("t").trim();
         if (category.equals(CashflowCategory.EXPENSE)) {
             try {
                 logger.log(Level.INFO, "Parsing ExpenseType");
@@ -80,7 +86,7 @@ public class AddCashflowCommand extends Command {
         if (rawCommand.extraArgs.containsKey("r")) {
             try {
                 logger.log(Level.INFO, "Parsing recur as integer");
-                recur = Integer.parseInt(rawCommand.extraArgs.get("r"));
+                recur = Integer.parseInt(rawCommand.extraArgs.get("r").trim());
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for recur");
                 throw new IllegalArgumentException("Recurrence must be an integer");
@@ -97,7 +103,7 @@ public class AddCashflowCommand extends Command {
             String line = rawCommand.extraArgs.get("d");
             if (line.isBlank()) {
                 logger.log(Level.WARNING, "Empty description");
-                throw new IllegalArgumentException("Description cannot be left empty");
+                throw new IllegalArgumentException("Description cannot be left empty.");
             }
             description = line.trim();
         }
