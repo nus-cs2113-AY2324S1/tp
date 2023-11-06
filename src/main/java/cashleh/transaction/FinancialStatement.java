@@ -59,26 +59,24 @@ public class FinancialStatement {
      */
     public void printTransactions() {
         int listSize = financialStatement.size();
-        List<String> transactionDetails = new ArrayList<>();
+        List<String []> transactionDetails = new ArrayList<>();
 
         for (Transaction currentTransaction : financialStatement) {
-            String type = (currentTransaction instanceof Income) ? "Income, " : "Expense, ";
+            String type = (currentTransaction instanceof Income) ? "Income" : "Expense";
             String date = currentTransaction.getDate().toString();
             String amt = String.valueOf(currentTransaction.getAmount());
             String cat = currentTransaction.getCategory() == null ? "-" : currentTransaction.getCategory().toString();
-            transactionDetails.add(type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat);
+            transactionDetails.add(new String[]{type, date, currentTransaction.getDescription(), amt, cat});
         }
 
         // Sort transactions based on the date of transaction
         Collections.sort(transactionDetails, (transaction1, transaction2) -> {
-            String[] transactionParts1 = transaction1.split(", ");
-            String [] transactionParts2 = transaction2.split(", ");
-            String date1 = transactionParts1[1];
-            String date2 = transactionParts2[1];
+            String date1 = transaction1[1];
+            String date2 = transaction2[1];
             return date1.compareTo(date2);
         });
 
-        String[] texts = transactionDetails.toArray(new String[transactionDetails.size()]);
+        String[][] texts = transactionDetails.toArray(new String[0][]);
 
         Ui.printStatement("Financial Statement", texts);
     }
