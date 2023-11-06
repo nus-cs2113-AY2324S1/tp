@@ -70,13 +70,14 @@ public class Storage {
         );
         while (reader.hasNextLine()) {
             Matcher matcher = pattern.matcher(reader.nextLine());
-            if (matcher.matches() && matcher.groupCount() == 4) {
+            if (matcher.matches() && matcher.groupCount() == 5) {
                 String name = matcher.group(1);
                 String expiryDate = matcher.group(2);
                 String serialNumber = matcher.group(3); // Extract serial number
                 Long quantity = Long.parseLong(matcher.group(4));
+                double sellingPrice = Double.parseDouble(matcher.group(5));
 
-                Drug drug = new Drug(name, expiryDate);
+                Drug drug = new Drug(name, expiryDate, sellingPrice);
                 inventory.addNewDrug(name, drug, serialNumber, quantity);
             } else {
                 throw new InvalidDrugFormatException("");

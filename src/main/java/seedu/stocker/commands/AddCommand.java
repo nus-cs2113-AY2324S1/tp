@@ -13,7 +13,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new drug to the drug list. "
             + "Parameters: NAME, EXPIRY DATE, SERIAL NUMBER, QUANTITY,  " + System.lineSeparator()
             + "Example: " + COMMAND_WORD
-            + " /n Doliprane /d 12/06/2035 /s ABC123 /q 52";
+            + " /n Doliprane /d 12/06/2035 /s ABC123 /q 52 /p 12.90";
 
     public static final String MESSAGE_SUCCESS = "New drug added in the inventory: %1$s";
 
@@ -21,8 +21,8 @@ public class AddCommand extends Command {
     private final long quantity;
     private final String serialNumber;
 
-    public AddCommand(String name, String expiryDate, String serialNumber, Long quantity) {
-        this.toAdd = new Drug(name, expiryDate);
+    public AddCommand(String name, String expiryDate, String serialNumber, Long quantity, double sellingPrice) {
+        this.toAdd = new Drug(name, expiryDate, sellingPrice);
         this.serialNumber = serialNumber;
         this.quantity = quantity;
     }
