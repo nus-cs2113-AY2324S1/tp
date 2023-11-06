@@ -57,7 +57,7 @@ public class SaveToTxtTest {
         File file = new File(path);
         Scanner s = new Scanner(file);                      // Create a Scanner using the File as the source
         String line = s.nextLine();
-        assertEquals("I | Salary | 5000.0 | 2023-10-10", line);
+        assertEquals("I |de Salary |amt 5000.00 |date 2023-10-10", line);
         new ClearAll(incomes,expenses).clearAllIncomeAndExpense();
         test.saveIncomeAndExpense(incomes, expenses);
     }
@@ -80,8 +80,8 @@ public class SaveToTxtTest {
             lines[i] = s.nextLine();
             i++;
         }
-        assertEquals("I | Salary | 5000.0 | 2023-10-10", lines[0]);
-        assertEquals("I | Bonus | 1000.0 | 2023-10-15" ,lines[1]);
+        assertEquals("I |de Salary |amt 5000.00 |date 2023-10-10", lines[0]);
+        assertEquals("I |de Bonus |amt 1000.00 |date 2023-10-15" ,lines[1]);
     }
     /**
      * Test the {@link SaveToTxt#saveExpenseToTextFile(ArrayList)} method with expense of Food type only.
@@ -101,7 +101,7 @@ public class SaveToTxtTest {
             lines[i] = s.nextLine();
             i++;
         }
-        assertEquals("EF | chicken sandwich | 10.0 | 2023-10-01 | 2", lines[0]);
+        assertEquals("EF |de chicken sandwich |amt 10.00 |date 2023-10-01 |type 2", lines[0]);
     }
     /**
      * Test the {@link SaveToTxt#saveExpenseToTextFile(ArrayList)} method with expense of Transportation type only.
@@ -121,7 +121,7 @@ public class SaveToTxtTest {
             lines[i] = s.nextLine();
             i++;
         }
-        assertEquals("ET | Taxi | 50.0 | 2023-10-01 | 4", lines[0]);
+        assertEquals("ET |de Taxi |amt 50.00 |date 2023-10-01 |type 4", lines[0]);
     }
     /**
      * Test the {@link SaveToTxt#saveExpenseToTextFile(ArrayList)} method with expense of Utility type only.
@@ -141,7 +141,7 @@ public class SaveToTxtTest {
             lines[i] = s.nextLine();
             i++;
         }
-        assertEquals("EU | Electricity | 100.0 | 2023-10-03 | 2", lines[0]);
+        assertEquals("EU |de Electricity |amt 100.00 |date 2023-10-03 |type 2", lines[0]);
     }
 
     /**
@@ -164,9 +164,9 @@ public class SaveToTxtTest {
             lines[i] = s.nextLine();
             i++;
         }
-        assertEquals("EF | chicken sandwich | 10.0 | 2023-10-01 | 2", lines[0]);
-        assertEquals("ET | Taxi | 50.0 | 2023-10-01 | 4", lines[1]);
-        assertEquals("EU | Electricity | 100.0 | 2023-10-03 | 2", lines[2]);
+        assertEquals("EF |de chicken sandwich |amt 10.00 |date 2023-10-01 |type 2", lines[0]);
+        assertEquals("ET |de Taxi |amt 50.00 |date 2023-10-01 |type 4", lines[1]);
+        assertEquals("EU |de Electricity |amt 100.00 |date 2023-10-03 |type 2", lines[2]);
     }
 
     /**
@@ -191,10 +191,10 @@ public class SaveToTxtTest {
             lines[i] = s.nextLine();
             i++;
         }
-        assertEquals("I | Salary | 5000.0 | 2023-10-10", lines[0]);
-        assertEquals("I | Bonus | 1000.0 | 2023-10-15" ,lines[1]);
-        assertEquals("EF | chicken sandwich | 10.0 | 2023-10-01 | 2", lines[2]);
-        assertEquals("ET | Taxi | 50.0 | 2023-10-01 | 4", lines[3]);
-        assertEquals("EU | Electricity | 100.0 | 2023-10-03 | 2", lines[4]);
+        assertEquals("I |de Salary |amt 5000.00 |date 2023-10-10", lines[0]);
+        assertEquals("I |de Bonus |amt 1000.00 |date 2023-10-15" ,lines[1]);
+        assertEquals("EF |de chicken sandwich |amt 10.00 |date 2023-10-01 |type 2", lines[2]);
+        assertEquals("ET |de Taxi |amt 50.00 |date 2023-10-01 |type 4", lines[3]);
+        assertEquals("EU |de Electricity |amt 100.00 |date 2023-10-03 |type 2", lines[4]);
     }
 }
