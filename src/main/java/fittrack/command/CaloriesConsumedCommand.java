@@ -55,5 +55,9 @@ public class CaloriesConsumedCommand extends Command {
     Calories getCaloriesConsumed() {
         return caloriesConsumed;
     }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
 // @@author
