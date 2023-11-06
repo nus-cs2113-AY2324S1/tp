@@ -16,7 +16,7 @@ class DeleteCommandTest {
     public void executeTest() {
         // Create an inventory and add a drug to it
         Inventory inventory = new Inventory();
-        Drug doliprane = new Drug("Doliprane", "12/06/2035");
+        Drug doliprane = new Drug("Doliprane", "12/06/2035", 15.90);
         inventory.addNewDrug("doliprane", doliprane, "ABC1234", 52L);
 
         // Create a DeleteCommand for the drug

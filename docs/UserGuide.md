@@ -160,11 +160,11 @@ Adds a drug to be tracked by the system.
 
 Format:
 
-add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY
+add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY /p PRICE
 
 Example of usage:
 
-`add /n Panadol /d 12 June 2026 /s ABC123 /q 52
+`add /n Panadol /d 12 June 2026 /s ABC123 /q 52 /p 19.90
 `
 
 Expected outcome:

@@ -43,8 +43,9 @@ public class ListCommand extends Command {
                 resultMessage.append("\t").append(index).append(". ")
                         .append("Name: ").append(entry.getDrug().getName())
                         .append(", Expiry date: ").append(entry.getDrug().getExpiryDate())
-                        .append(", Serial number: ").append(entry.getSerialNumber()) // Add this line
+                        .append(", Serial number: ").append(entry.getSerialNumber())
                         .append(", Quantity: ").append(entry.getQuantity())
+                        .append(", Selling Price: ").append(entry.getDrug().getSellingPrice()) // Add this line
                         .append(System.lineSeparator());
                 index++;
             }

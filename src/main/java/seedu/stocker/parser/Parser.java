@@ -137,19 +137,20 @@ public class Parser {
      */
     private Command prepareAddCommand(String args) {
         try {
-            Pattern pattern = Pattern.compile("/n (.*) /d (.*) /s (.*) /q (.*)");
+            Pattern pattern = Pattern.compile("/n (.*) /d (.*) /s (.*) /q (.*) /p (.*)");
             Matcher matcher = pattern.matcher(args);
-            if (matcher.matches() && matcher.groupCount() == 4) {
+            if (matcher.matches() && matcher.groupCount() == 5) {
                 String name = matcher.group(1).trim();
                 String expiryDate = matcher.group(2).trim();
                 String serialNumber = matcher.group(3).trim();
                 Long quantity = Long.parseLong(matcher.group(4));
+                double sellingPrice = Double.parseDouble(matcher.group(5));
                 if (quantity < 1) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
-                } else if (name == "") {
+                } else if (name.isEmpty()) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_NAME, AddCommand.MESSAGE_USAGE));
                 }
-                return new AddCommand(name, expiryDate, serialNumber, quantity);
+                return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }

@@ -26,7 +26,7 @@ class FindCommandTest {
 
         // Create a new inventory
         Inventory inventory = new Inventory();
-        Drug drug2 = new Drug("Panadol", "04/07/2030");
+        Drug drug2 = new Drug("Panadol", "04/07/2030", 19.90);
         inventory.addNewDrug("Panadol", drug2, "PAN123", 20L);
 
         // Set the modified inventory for the command
@@ -54,7 +54,7 @@ class FindCommandTest {
 
         // Create a new inventory
         Inventory inventory = new Inventory();
-        Drug drug1 = new Drug("Paracetamol", "01/03/2027");
+        Drug drug1 = new Drug("Paracetamol", "01/03/2027", 21.90);
         inventory.addNewDrug("Paracetamol", drug1, "PARC124", 12L);
 
         // Set the modified inventory for the command
@@ -105,7 +105,7 @@ class FindCommandTest {
 
         // Create a new inventory
         Inventory inventory = new Inventory();
-        Drug drug3 = new Drug("Aspirin", "02/05/2028");
+        Drug drug3 = new Drug("Aspirin", "02/05/2028", 12.90);
         inventory.addNewDrug("Aspirin", drug3, "SER123", 15L);
 
         // Set the modified inventory for the command

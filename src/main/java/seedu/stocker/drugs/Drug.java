@@ -4,10 +4,18 @@ public class Drug {
 
     public String name;
     String expiryDate;
+    private double vendorPrice;
+    private double sellingPrice;
 
-    public Drug(String name, String expiryDate) {
+//    public Drug(String name, String expiryDate) {
+//        this.name = name;
+//        this.expiryDate = expiryDate;
+//    }
+
+    public Drug(String name, String expiryDate, double sellingPrice) {
         this.name = name;
         this.expiryDate = expiryDate;
+        this.sellingPrice = sellingPrice;
     }
 
     /**
@@ -46,6 +54,21 @@ public class Drug {
         this.expiryDate = expiryDate;
     }
 
+    public double getVendorPrice() {
+        return vendorPrice;
+    }
+
+    public void setVendorPrice(double vendorPrice) {
+        this.vendorPrice = vendorPrice;
+    }
+
+    public double getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(double sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
 
     /**
      * Returns a string representation of the drug.
@@ -54,6 +77,7 @@ public class Drug {
      */
     @Override
     public String toString() {
-        return "Name: " + name + ", Expiry Date: " + expiryDate;
+        return "Name: " + name + ", Expiry Date: " + expiryDate
+                + ", Vendor Price: $" + vendorPrice + ", Selling Price: $" + sellingPrice;
     }
 }
