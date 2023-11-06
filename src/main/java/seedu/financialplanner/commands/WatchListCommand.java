@@ -2,6 +2,7 @@ package seedu.financialplanner.commands;
 
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
+import seedu.financialplanner.storage.SaveData;
 import seedu.financialplanner.utils.Ui;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -30,6 +31,7 @@ public class WatchListCommand extends Command {
 
             logger.log(Level.INFO, "Printing watchlist");
             ui.printStocksInfo(watchList);
+            SaveData.saveWatchList();
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
         }

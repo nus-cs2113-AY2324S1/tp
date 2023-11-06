@@ -73,6 +73,11 @@ you a one-stop interface to access a plethora of features to manage your finance
 ### Notes about naming convention
 - Cashflow refers to an income or expense.
 
+### Notes about program limitations
+- Maximum amount for each cashflow and total balance that the program can hold is 999,999,999,999.99
+- Minimum amount for each cashflow and total balance that the program can hold is -999,999,999,999.99
+- Total Balance, Income balance, and Expense balance are different entities where the latter two do not have the same limitations.
+
 ### Add cashflow
 
 #### Add income: `add income`
@@ -80,9 +85,10 @@ Adds an income source to the Financial Planner.
 
 Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 
-- `/r` is used to denote a recurring income, with the period to the next addition is specified by `DAYS`.
-- `/d` is used to give a description to the income.
-- `/t` is used to specify the income type, where the list of acceptable types is given below
+- `/a` is used to specify the amount of the income, where an **integer** or **double** is expected.
+- `/r` is used to denote a recurring income, with the period to the next addition is specified by an **integer** representing the number of `DAYS`.
+- `/d` is used to give a description to the income, where any **String** is expected.
+- `/t` is used to specify the income type, where the list of acceptable types is given below.
 
 | Income Types  |
 |---------------|
@@ -99,19 +105,22 @@ Example output:
 You have added an Income
    Type: Salary
    Amount: 5000.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: work
 to the Financial Planner.
 Balance: 5000.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 #### Add expense: `add expense`
 Adds an expense to the Financial Planner
 
 Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 
-- `/r` is used to denote a recurring expense, with the period to the next addition is specified by `DAYS`.
-- `/d` is used to give a description to the expense.
+- `/a` is used to specify the amount of the expense, where an **integer** or **double** is expected.
+- `/r` is used to denote a recurring expense, with the period to the next addition is specified by an **integer** representing the number of `DAYS`.
+- `/d` is used to give a description to the expense, where any **String** is expected.
 - `/t` is used to specify the expense type, where the list of acceptable types is given below
 
 | Expense         |
@@ -131,12 +140,14 @@ Example output:
 You have added an Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
 to the Financial Planner.
 Balance: 4700.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 ### Delete cashflow: `delete`
 Deletes a cashflow from the Financial Planner.
 
@@ -266,6 +277,8 @@ Balance: -830.00
 ```
 
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 ### List
 
 #### List all: `list`
@@ -275,26 +288,28 @@ Example output:
 
 ```
 You have 4 matching cashflows:
-1: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, starting from: Oct 30 2023
-   Description: work
-2: Expense
+1: Expense
    Type: Dining
    Amount: 30.00
    Description: Genki Sushi
-3: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, starting from: Oct 30 2023
-   Description: ntuc income
-4: Expense
+2: Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
+3: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+4: Income
+   Type: Investments
+   Amount: 1000.00
+Balance: 1170.00
 ```
+
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 #### List income: `list income`
 //TODO
 
@@ -302,19 +317,20 @@ Example output:
 ```
 You have 3 matching cashflows:
 1: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, starting from: Oct 30 2023
-   Description: work
-2: Income
    Type: Allowance
    Amount: 500.00
-   Recurring every: 30 days, starting from: Oct 30 2023
-   Description: parents
-3: Income
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+2: Income
    Type: Investments
    Amount: 1000.00
+3: Income
+   Type: Salary
+   Amount: 100.00
+Income Balance: 1600.00
 ```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 #### List expense: `list expense`
 //TODO
 
@@ -326,16 +342,18 @@ You have 3 matching cashflows:
    Amount: 30.00
    Description: Genki Sushi
 2: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, starting from: Oct 30 2023
-   Description: ntuc income
-3: Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
+3: Expense
+   Type: Others
+   Amount: 0.23
+Expense Balance: 330.23
 ```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
 #### List recurring: `list recurring`
 Lists all recurring cashflows.
 
@@ -347,18 +365,28 @@ Example of usage: `list recurring`
 
 Example output:
 ```
-You have 2 matching cashflows:
+You have 4 matching cashflows:
 1: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, starting from: Oct 30 2023
-   Description: ntuc income
-2: Expense
    Type: Necessities
    Amount: 300.00
-   Recurring every: 30 days, starting from: Oct 30 2023
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
    Description: groceries
+2: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: work
+3: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+4: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
 ```
+- Note: Date displayed above is just an example. Your actual date may differ.
 
 ### Budget
 
@@ -480,6 +508,9 @@ Balance: 3790.00
 
 ### Viewing Watchlist: `watchlist`
 
+- Note: Stockcode and symbol will be used interchangeably and have the same meaning
+- Note: Watchlist feature requires a stable internet connection
+
 View your current watchlist with stocks that you are interested in with the exchanges shown as well
 
 Default watchlist: AAPL, GOOGL 
@@ -499,6 +530,8 @@ Symbol    Market    Price     Daily High     Daily Low     EquityName           
 GOOGL     NASDAQ    124.46    125.4          122.75        Alphabet Inc - Class A        Tue, Oct 31 2023 04:00:03
 AAPL      NASDAQ    170.29    171.17         168.87        Apple Inc                     Tue, Oct 31 2023 04:00:02
 ```
+
+- Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
 
 Format of watchlist output:
 
@@ -525,9 +558,10 @@ Meta Platforms Inc - Class A
 Use Watchlist to view it!
 ```
 
-- Note: Due to the free nature of the API (Alphpa Vantage and FMP), only US stock prices quote will be provided by
+- Note: Due to the free nature of the API (Alpha Vantage and FMP), only US stock prices quote will be provided by
 this application. Sorry for the inconvenience caused.
 - Note: Due to the free nature of the API, there will be a cap of **five** stocks in the watchlist
+- Note: StockCode should not have any spaces
 
 ### Deleting Stock from Watchlist: `deletestock`
 
@@ -545,7 +579,33 @@ Meta Platforms Inc - Class A
 Use watchlist command to view updated Watchlist
 ```
 
-- Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
+- Note: Delete stock command is case-sensitive. Please enter the exact stock code of the stock that you have added.
+- Note: StockCode should not have any spaces
+
+### watchlist.json 
+
+You are able to read the watchlist.json populated by the Financial Planner to see the stock prices even when
+the application is not running 
+
+Example file content of watchlist.json:
+
+![](/images/investments/watchlistjsonexample.png)
+
+**Editing of watchlist.json**
+
+WARNING: Do not edit the json file unless you are familiar with the format of the JSON file
+Incorrect format of JSON file may lead to:
+- Corrupted file (user will be prompted to repair the file if he wants to)
+- Deletion of stock entries that are erroneous (Financial Planner has a built-in method to remove
+stock entries that does not match the format specified above)
+- Incorrect information printed by Financial Planner application (eg. changing stock prices directly in JSON file)
+
+**Adding stock**
+
+If you would like to add stock directly, do provide accurate information for the symbol and stockName as shown below. If 
+the format is not followed, the stock might not be loaded to watchlist upon start up.
+
+![](images/investments/Exampleaddingstockjson.png)
 
 ### View Reminder List: `reminderlist`
 View your current reminder list with reminders that you have added.
@@ -758,6 +818,29 @@ Existing data will be automatically loaded when the program starts up.
 **Q**: How do I transfer my data to another computer? 
 
 **A**: {your answer here}
+
+**Q**: Should I edit the watchlist.json file?
+
+**A**: You should not edit the watchlist.json file unless you are very familiar with the format used.
+If you would like to edit the watchlist.json file directly to manipulate your watchlist, please follow the instructions
+above in the watchlist feature section. However, do note that there is risk of file corruption.
+
+**Q**: How is the radar chart derived? 
+
+**A**: To obtain the radar chart in our application, the income/expense category with the highest amount is noted.
+After which, amounts of all other categories are taken as a ratio of the maximum category. The ratios are then displayed
+in the radar chart
+
+**Q**: Why can't I add Singapore exchange stocks or other exchange stocks using the add stock command? 
+
+**A**: Due to the restrictions of the free API provided, only US-exchange stocks are provided. Sorry for the
+inconvenience caused
+
+**Q**: Why is it saying that API limit is reached, not working or something like that when I use watchlist 
+features? 🤬
+
+**A**: Due to the free nature of the API, there is a restriction in the number of requests allowed in a specific time
+window. Sorry for the inconvenience caused. 🥲
 
 ## Command Summary
 

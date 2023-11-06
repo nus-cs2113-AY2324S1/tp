@@ -1,11 +1,13 @@
 package seedu.financialplanner.utils;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import seedu.financialplanner.investments.Stock;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Scanner;
@@ -64,9 +66,9 @@ public class Ui {
     }
 
     public void printWatchListHeader() {
-        System.out.print("Symbol");
+        showMessage("Symbol");
         System.out.print("    ");
-        System.out.print("Market");
+        showMessage("Market");
         System.out.print("    ");
         System.out.print(YELLOW + "Price" + RESET);
         System.out.print("     ");
@@ -81,21 +83,38 @@ public class Ui {
         System.out.println();
     }
 
+    public void printWatchListAcknowledgement() {
+        showMessage("Data provided by Financial Modeling Prep and Alpha Vantage 😊");
+    }
+
+
     public void printStocksInfo(WatchList watchList) {
         for (Map.Entry<String, Stock> set : watchList.getStocks().entrySet()) {
             Stock stock = set.getValue();
+
+            if (!ObjectUtils.allNotNull(
+                    stock.getPrice(),
+                    stock.getDayHigh(),
+                    stock.getDayLow(),
+                    stock.getLastUpdated(),
+                    stock.getExchange()
+            )) {
+                showMessage(stock.getStockName() + " (" + stock.getSymbol() + ") is not found on FMP");
+                continue;
+            }
 
             String symbol = StringUtils.rightPad(stock.getSymbol(), 10);
             String market = StringUtils.rightPad(stock.getExchange(), 10);
             String price = YELLOW + StringUtils.rightPad(stock.getPrice(), 10) + RESET;
             String dayHigh = GREEN + StringUtils.rightPad(stock.getDayHigh(), 15) + RESET;
             String dayLow = RED + StringUtils.rightPad(stock.getDayLow(), 14) + RESET;
-            String name = StringUtils.rightPad(stock.getStockName(), 30);
+            String name = StringUtils.rightPad(stock.getStockName(), 33);
             String date = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss")
                     .format(stock.getLastUpdated());
             String lastUpdate = StringUtils.rightPad(date, 10);
-            System.out.println(symbol + market + price + dayHigh + dayLow + name + lastUpdate);
+            showMessage(symbol + market + price + dayHigh + dayLow + name + lastUpdate);
         }
+        printWatchListAcknowledgement();
     }
 
     public void printAddStock(String stockName) {
@@ -110,16 +129,22 @@ public class Ui {
         showMessage("Use watchlist command to view updated Watchlist");
     }
 
+    public String formatBalance(double balance) {
+        DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+
+        return decimalFormat.format(Cashflow.round(balance, 2));
+    }
+
     public void printAddedCashflow(Cashflow entry) {
         showMessage("You have added an " + entry);
         showMessage("to the Financial Planner.");
-        showMessage("Balance: " + entry.formatBalance());
+        showMessage("Balance: " + formatBalance(Cashflow.getBalance()));
     }
 
     public void printDeletedCashflow(Cashflow entry) {
         showMessage("You have removed an " + entry);
         showMessage("from the Financial Planner.");
-        showMessage("Balance: " + entry.formatBalance());
+        showMessage("Balance: " + formatBalance(Cashflow.getBalance()));
     }
 
     public void printDeletedRecur(Cashflow entry) {

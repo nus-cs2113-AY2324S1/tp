@@ -18,7 +18,7 @@ public class DeleteStockCommand extends Command {
         }
 
         logger.log(Level.INFO, "Parsing stockcode from input");
-        stockCode = rawCommand.extraArgs.get("s").toUpperCase();
+        stockCode = rawCommand.extraArgs.get("s").trim();
 
         rawCommand.extraArgs.remove("s");
         if (!rawCommand.extraArgs.isEmpty()) {

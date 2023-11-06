@@ -19,13 +19,28 @@ public class DeleteCashflowCommand extends Command {
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         String stringCategory = null;
+        int indexToDelete = 0;
+        ArrayList<Integer> blankArgsList = new ArrayList<>();
+        for (String string : rawCommand.args) {
+            if (string.isBlank()) {
+                Integer toAdd = indexToDelete;
+                blankArgsList.add(toAdd);
+            }
+            indexToDelete++;
+        }
+        int counter = 0;
+        for (Integer integer : blankArgsList) {
+            indexToDelete = integer - counter;
+            rawCommand.args.remove(indexToDelete);
+            counter++;
+        }
 
         if (rawCommand.args.size() == 1) {
-            stringIndex = rawCommand.args.get(0);
+            stringIndex = rawCommand.args.get(0).trim();
         } else if (rawCommand.args.size() == 2) {
-            stringCategory = rawCommand.args.get(0);
+            stringCategory = rawCommand.args.get(0).trim();
             handleInvalidCategory(stringCategory);
-            stringIndex = rawCommand.args.get(1);
+            stringIndex = rawCommand.args.get(1).trim();
         } else {
             throw new IllegalArgumentException("Incorrect arguments.");
         }
@@ -35,12 +50,12 @@ public class DeleteCashflowCommand extends Command {
             index = Integer.parseInt(stringIndex);
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid argument for index");
-            throw new IllegalArgumentException("Index must be an integer");
+            throw new IllegalArgumentException("Index must be an integer.");
         }
 
         if (index == 0) {
             logger.log(Level.WARNING, "Invalid value for index");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
 
         if (rawCommand.extraArgs.containsKey("r")) {
