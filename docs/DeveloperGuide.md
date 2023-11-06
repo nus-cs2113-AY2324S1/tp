@@ -45,7 +45,7 @@ the IncomeManager is facilitated by `IncomeParser`, `IncomeManager`, `IncomeList
 3. `IncomeManager` then adds the `Income` object to the `IncomeList`.
 4. `IncomeManager` then returns a `String` to `Ui` to be printed out to the user.
 
-![IncomeManager_seqdiagram.drawio.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/IncomeManager_seqdiagram.drawio.png?raw=true)
+![IncomeManager_seqdiagram.drawio.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/IncomeManager_SequenceDiagram(updated).png?raw=true)
 
 ### ExpenseManager
 
@@ -74,7 +74,7 @@ find /t <type> /cat [category] /de [description] /date [date]
 6. If users searches through the expense list, either the category or date will be used to search through the expense list.
 7. The execute method will then be called to search through the list and return the list of expenses or incomes that matches the search criteria.
 
-![FindCommand_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/FindCommand_SequenceDiagram.png?raw=true)
+![FindCommand_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/FindCommand_SequenceDiagram(updated).drawio.png?raw=true)
 
 ### GetFromTxt Command
 The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngException`, `IncomeList` and `ExpenseList`
