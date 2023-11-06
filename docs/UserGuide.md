@@ -158,9 +158,9 @@ find /t expense /cat food /de sushi
 ```
 
 Note:
-- fields `/t`, `/cat`, `/de`, `date` are case-sensitive and should be in the specified order.
-- field `/cat` is only applicable for expenses.
-- field `/t` is compulsory.
+- Fields `/t`, `/cat`, `/de`, `date` are case-sensitive and should be in the specified order.
+- Field `/cat` is only applicable for expenses.
+- Field `/t` is compulsory.
 - Should users add additional characters behind find e.g. findABCDE, the system will still recognise it as find.
 
 Use case:
@@ -218,8 +218,8 @@ edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 ```
 
 Note:
-- fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
-- should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
+- Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
+- Should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
 
 Use case:
 - Prompts users if index is empty.
