@@ -7,11 +7,6 @@ public class Drug {
     private double vendorPrice;
     private double sellingPrice;
 
-//    public Drug(String name, String expiryDate) {
-//        this.name = name;
-//        this.expiryDate = expiryDate;
-//    }
-
     public Drug(String name, String expiryDate, double sellingPrice) {
         this.name = name;
         this.expiryDate = expiryDate;

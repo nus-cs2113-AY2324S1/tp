@@ -12,7 +12,7 @@ class HelpCommandTest {
         String expectedOutput = System.getProperty("line.separator")
                 + "add: Adds a new drug to the drug list. Parameters: NAME, EXPIRY DATE, SERIAL NUMBER, QUANTITY,  "
                 + System.getProperty("line.separator")
-                + "Example: add /n Doliprane /d 12/06/2035 /s ABC123 /q 52"
+                + "Example: add /n Doliprane /d 12/06/2035 /s ABC123 /q 52 /p 12.90"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "delete: Removes a drug from drug list. Parameters: Name  "
