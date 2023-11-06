@@ -54,6 +54,7 @@ public class Parser {
     private static final String AMT_KEYWORD = "/amt";
     private static final String DATE_KEYWORD = "/date";
     private static final String CAT_KEYWORD = "/cat";
+    private static final double MAX_AMT = 9999999.99;
 
     private final ExpenseStatement expenseStatement;
     private final IncomeStatement incomeStatement;
@@ -130,6 +131,11 @@ public class Parser {
             if (expenseAmt < 0) {
                 throw new CashLehParsingException("Please enter a positive amount!");
             }
+            if (expenseAmt > MAX_AMT) {
+                throw new CashLehParsingException("Amount entered is too large! " +
+                    "Please split up your transaction into smaller ones " +
+                    "with maximum amount per transaction at $9999999");
+            }
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Please enter a valid expense amount!");
         }
@@ -176,6 +182,11 @@ public class Parser {
             incomeAmt = Double.parseDouble(incomeAmtString);
             if (incomeAmt < 0) {
                 throw new CashLehParsingException("Please enter a positive amount!");
+            }
+            if (incomeAmt > MAX_AMT) {
+                throw new CashLehParsingException("Amount entered is too large! " +
+                    "Please split up your transaction into smaller ones " +
+                    "with maximum amount per transaction at $9999999");
             }
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Please enter a valid income amount!");
