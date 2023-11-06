@@ -23,28 +23,28 @@ public class UserProfileDecoder {
             "Gender:\\s+(?<gender>\\S+)"
     );
     private static final Pattern CALORIES_PATTERN = Pattern.compile(
-                    "Daily calorie limit: (?<calLimit>\\S+)kcal"
+            "Daily calorie limit: (?<calLimit>\\S+)kcal"
     );
 
     /**
-     * Decodes {@code encodedUserProfile} into a {@code UserProile} containing the decoded data.
+     * Decodes {@code encodedUserProfile} into a {@code UserProfile} containing the decoded data.
      *
      * @throws IllegalValueException if any of the fields in any encoded person string is invalid.
      * @throws StorageOperationException if the {@code encodedUserProfile} is in an invalid format.
      */
     public static UserProfile decodeUserProfile(List<String> encodedUserProfile)
             throws IllegalValueException, StorageOperationException {
-        String[] decodedUserProfile = new String[4];
+        String[] decodedUserProfile = new String[5];
         for (int i = 0; i < encodedUserProfile.size(); i++) {
             decodedUserProfile[i] = encodedUserProfile.get(i);
         }
         final Matcher heightMatcher = HEIGHT_PATTERN.matcher(decodedUserProfile[0]);
         final Matcher weightMatcher = WEIGHT_PATTERN.matcher(decodedUserProfile[1]);
         final Matcher caloriesMatcher = CALORIES_PATTERN.matcher(decodedUserProfile[2]);
-        final Matcher genderMatcher = GENDER_PATTERN.matcher(decodedUserProfile[3]);
+        final Matcher genderMatcher = GENDER_PATTERN.matcher(decodedUserProfile[4]);
 
         if (!heightMatcher.matches() || !weightMatcher.matches()
-                || !caloriesMatcher.matches()) {
+                || !caloriesMatcher.matches() || !genderMatcher.matches()) {
             throw new StorageOperationException("File containing profile has invalid format. " +
                     "Please delete the file and run the program again");
         }
