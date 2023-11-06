@@ -44,7 +44,7 @@ add income /de <description> /date <date> /amt [currency] <amount>
 ```
 Note:
 - fields `/de`, `/date`, and `/amt` are case-sensitive and should be in the specified order.
-- users should not use "|" in the description as it is used as a delimiter in the storage file.
+- Users should not use "|" in the description as it is used as a delimiter in the storage file.
 
 To add an expense (with foreign currency):
 ```
@@ -188,9 +188,7 @@ list exchange rates
 ### update exchange rate
 Update exchange rate of a specific foreign currency. Exchange rates will be saved upon
 successful update.
-
-Note: rate specified should be in SGD/{foreign currency}.
-
+  
 Format:
 ```
 update exchange rate <supported_currency> <rate>
@@ -199,6 +197,12 @@ Example of usage:
 ```
 update exchange rate USD 0.8
 ```
+Note:
+- <currency> must be one of the foreign currencies supported by KaChinnnng.
+- User may view the supported foreign currecnies with ```list currencies```.
+- <rate> specified should be in SGD/{foreign currency}.
+- <rate> must be a positive decimal that is between 0.001 and 3,000,000.
+- The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
 
 ## FAQ
 
