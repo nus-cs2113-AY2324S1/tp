@@ -91,10 +91,17 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 ### ExchangeRateManager
 The Sequence Diagram below shows how the components interact with each other for the scenario 
 where the user issues the command `update exchange rate USD 0.8`.
+1. The user input the command `update exchange rate USD 0.8`
+2. Duke will create the `UpdateExchangeRateCommand` object with the specified currency and rate
+4. Duke will the execute the command object which will call `updateExchangeRate` in ExchangeRateManager
+5. If the currency specified is not a supported currency or the rate specified is not a decimal with 0.001 and 3,000,000,
+   a `KaChinnnningException` will be thrown
+6. Once the update is successful, Ui will be called to show the completion message
+7. Lastly, the updated exchange rates will be saved in the exchange rate file
 
 ![UpdateExchangeRate_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/UpdateExchangeRate_SequenceDiagram.png?raw=true)
 
-This is facilitated by `Duke`, `UpdateExchangeRateCommand`, `ExchangeRateManager`'and `ExchangeRateFileHandler`.
+This is facilitated by `Duke`, `Ui`, `UpdateExchangeRateCommand`, `ExchangeRateManager`'and `ExchangeRateFileHandler`.
 
 ### SaveToTxt Command
 The SaveToTxt Command is facilitated by `FileWriter` ,`IncomeList` and `ExpenseList`
@@ -110,12 +117,14 @@ The SaveToTxt Command is facilitated by `FileWriter` ,`IncomeList` and `ExpenseL
 
 ## Product scope
 ### Target user profile
+Target user profile:
+- has a need to manage one's finance and track their financial health
+- prefer desktop apps over mobile app/web app
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI applications
 
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
+### Value proposition: manage finances faster than a GUI driven app
 
 ## User Stories
 
