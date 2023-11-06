@@ -1,6 +1,10 @@
 package fittrack.storage;
 
-import fittrack.*;
+import fittrack.Ui;
+import fittrack.UserProfile;
+import fittrack.MealList;
+import fittrack.StepList;
+import fittrack.WorkoutList;
 import fittrack.data.Meal;
 import fittrack.data.Step;
 import fittrack.data.Workout;

@@ -3,7 +3,6 @@ package fittrack.command;
 import fittrack.data.Step;
 import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
-import fittrack.parser.PatternMatchFailException;
 
 public class TotalStepsCommand extends Command{
     public static final String COMMAND_WORD = "totalsteps";

@@ -27,7 +27,8 @@ public abstract class Command {
      * @param mealList meal list
      * @param workoutList work list
      */
-    public void setData(UserProfile userProfile, MealList mealList, WorkoutList workoutList, StepList stepList, Storage storage) {
+    public void setData(UserProfile userProfile, MealList mealList, WorkoutList workoutList,
+                        StepList stepList, Storage storage) {
         this.userProfile = userProfile;
         this.mealList = mealList;
         this.workoutList = workoutList;
