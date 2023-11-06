@@ -5,7 +5,7 @@ import java.util.List;
 
 public class VendorsList {
 
-    protected ArrayList<Vendor> vendorArrayList;
+    public ArrayList<Vendor> vendorArrayList;
 
     public VendorsList(){
         vendorArrayList = new ArrayList<>();
