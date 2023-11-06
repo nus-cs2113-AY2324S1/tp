@@ -13,7 +13,6 @@ import java.util.logging.SimpleFormatter;
  * parser class to parse user input
  */
 public class Parser {
-    //private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
 
     static {
