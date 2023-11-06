@@ -24,7 +24,7 @@ public class SaveCommand extends Command {
             storage.saveMeals(mealList);
             storage.saveWorkouts(workoutList);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return new CommandResult("Your data has been saved!");
     }

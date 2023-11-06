@@ -42,7 +42,7 @@ class MealTest {
 
     @Test
     void getMealDate_tm_date20231030() {
-        assertEquals(new Date("2023-10-30"), tm.getMealDate());
+        assertEquals(new Date("2023-10-30"), tm.getDate());
     }
 
     @Test

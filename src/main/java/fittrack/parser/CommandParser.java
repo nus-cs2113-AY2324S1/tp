@@ -4,9 +4,9 @@ import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
 import fittrack.command.BmiCommand;
-import fittrack.command.CalorieSumCommand;
+import fittrack.command.CaloriesConsumedCommand;
 import fittrack.command.CaloriesBurntCommand;
-import fittrack.command.CheckWeightRangeCommand;
+import fittrack.command.CheckRecommendedWeightCommand;
 import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.DeleteMealCommand;
@@ -16,9 +16,9 @@ import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
 import fittrack.command.SaveCommand;
-import fittrack.command.ViewMealsCommand;
+import fittrack.command.ViewMealCommand;
 import fittrack.command.ViewProfileCommand;
-import fittrack.command.ViewWorkoutsCommand;
+import fittrack.command.ViewWorkoutCommand;
 import fittrack.command.FindMealCommand;
 import fittrack.command.FindWorkoutCommand;
 import fittrack.data.Gender;
@@ -43,11 +43,10 @@ import java.util.regex.Pattern;
  */
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
-    public static final String ALL_COMMAND_WORDS = "help, exit, " +
-            "editprofile, viewprofile, " +
-            "addmeal, deletemeal, viewmeals, " +
-            "addworkout, deleteworkout, viewworkouts, bmi, save, " +
-            "checkweightrange, findmeal, findworkout";
+    public static final String ALL_COMMAND_WORDS = "help, exit, save,\n" +
+            "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
+            "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
+            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt";
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
@@ -120,22 +119,22 @@ public class CommandParser {
             return new AddMealCommand(commandLine);
         case DeleteMealCommand.COMMAND_WORD:
             return new DeleteMealCommand(commandLine);
-        case ViewMealsCommand.COMMAND_WORD:
-            return new ViewMealsCommand(commandLine);
+        case ViewMealCommand.COMMAND_WORD:
+            return new ViewMealCommand(commandLine);
         case AddWorkoutCommand.COMMAND_WORD:
             return new AddWorkoutCommand(commandLine);
         case DeleteWorkoutCommand.COMMAND_WORD:
             return new DeleteWorkoutCommand(commandLine);
-        case ViewWorkoutsCommand.COMMAND_WORD:
-            return new ViewWorkoutsCommand(commandLine);
+        case ViewWorkoutCommand.COMMAND_WORD:
+            return new ViewWorkoutCommand(commandLine);
         case BmiCommand.COMMAND_WORD:
             return new BmiCommand(commandLine);
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand(commandLine);
-        case CalorieSumCommand.COMMAND_WORD:
-            return new CalorieSumCommand(commandLine);
-        case CheckWeightRangeCommand.COMMAND_WORD:
-            return new CheckWeightRangeCommand(commandLine);
+        case CaloriesConsumedCommand.COMMAND_WORD:
+            return new CaloriesConsumedCommand(commandLine);
+        case CheckRecommendedWeightCommand.COMMAND_WORD:
+            return new CheckRecommendedWeightCommand(commandLine);
         case CaloriesBurntCommand.COMMAND_WORD:
             return new CaloriesBurntCommand(commandLine);
         case FindMealCommand.COMMAND_WORD:
