@@ -10,7 +10,6 @@ import java.time.LocalDate;
  */
 public class Utilities extends Expense {
     private UtilityType utilityType;
-
     /**
      * Utilities class constructor
      *
