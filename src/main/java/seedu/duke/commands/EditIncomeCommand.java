@@ -40,6 +40,9 @@ public class EditIncomeCommand extends Command {
 
         try {
             index = getIndex(fullCommand);
+            if (index < 0) {
+                throw new KaChinnnngException("Oops! Index has to be a positive integer");
+            }
             IncomeManager incomeCommand = new IncomeManager(fullCommand);
             incomeCommand.execute();
             Income newIncome = incomeCommand.getNewIncome();

@@ -112,4 +112,10 @@ public class Ui {
             }
         }
     }
+
+    public void showUpdateExchangeRateMessage(String currency, double rate) {
+        showLineDivider();
+        System.out.printf("The SGD/%s rate has been updated to %s.\n", currency, rate);
+        showLineDivider();
+    }
 }

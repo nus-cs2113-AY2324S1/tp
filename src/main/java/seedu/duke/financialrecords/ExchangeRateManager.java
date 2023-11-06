@@ -22,6 +22,11 @@ public class ExchangeRateManager {
                     "MYR", "USD", "JPY", "KRW", "EUR", "THB", "HKD", "INR", "IDR",
                     "AUD", "GBP", "CNY", "CAD", "TWD", "VND", "PHP"
             );
+    private static final String CURRENCY_NOT_SUPPORTED_ERROR
+            = "Invalid <currency>: This currency is not supported.\n" +
+            "To see the supported currencies, you can use \"list currencies\"";
+    private static final String INVALID_RATE_ERROR
+            = "Invalid <rate>: <rate> must be a positive decimal between 0.001 and 3,000,000";
     private HashMap<String, Double> exchangeRates;
 
     private ExchangeRateManager() {
@@ -119,7 +124,7 @@ public class ExchangeRateManager {
     public double convertCurrency(String currency, double amount) throws KaChinnnngException {
         currency = currency.toUpperCase();
         if (!SUPPORTED_CURRENCIES.contains(currency)) {
-            throw new KaChinnnngException("This currency is not supported");
+            throw new KaChinnnngException(CURRENCY_NOT_SUPPORTED_ERROR);
         } else if (exchangeRates.get(currency) == null) {
             throw new KaChinnnngException("Please update the exchange rate for " + currency);
         }
@@ -134,13 +139,11 @@ public class ExchangeRateManager {
      * @throws KaChinnnngException If the currency is not supported or the rate is invalid.
      */
     public void updateExchangeRate(String currency, double rate) throws KaChinnnngException {
-        currency = currency.toUpperCase();
         if (!SUPPORTED_CURRENCIES.contains(currency)) {
-            throw new KaChinnnngException("This currency is not supported");
+            throw new KaChinnnngException(CURRENCY_NOT_SUPPORTED_ERROR);
         }
         if (rate > 3000000.00 || rate < 0.001) {
-            throw new KaChinnnngException("Fail to update exchange rate, " +
-                    "the exchange rate is not between 0.001 and 3000000");
+            throw new KaChinnnngException(INVALID_RATE_ERROR);
         }
         exchangeRates.put(currency, rate);
     }
