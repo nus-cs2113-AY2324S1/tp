@@ -53,7 +53,7 @@ public class CashLeh {
         }
 
         Command command = null;
-        while (!(command instanceof Exit)) {
+        while (!(command instanceof Exit) && input.hasNextLine()) {
             String inputString = input.getInputString();
             try {
                 command = parser.parse(inputString);
