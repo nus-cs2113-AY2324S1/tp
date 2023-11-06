@@ -45,4 +45,11 @@ public class ErrorMessages {
             + "command.\n";
     public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer for the 'day' field!";
     public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, is that what you want?";
+    public static final String EMPTY_UNIT_MESSAGE = "Unit cannot be empty! Please use either g or ml :)";
+    public static final String INVALID_UNIT_MESSAGE = "Invalid unit! Please use either g or ml :)";
+    public static final String INVALID_INGREDIENT_ARGUMENTS = "Invalid arguments for ingredients!\n"
+            + "Ingredient format: ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
+            + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
+            + "Example: ingredient/milk qty/200ml, ingredient/chicken qty/100g";
+
 }

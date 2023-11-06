@@ -17,7 +17,7 @@ public class BuyIngredientCommand extends Command {
             + COMMAND_WORD + " ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example:"
-            + COMMAND_WORD + " ingredient/rice qty/200g, ingredient/chicken qty/100g";
+            + COMMAND_WORD + " ingredient/milk qty/200ml, ingredient/chicken qty/100g";
 
     protected Ui ui;
     protected Pantry pantry;
