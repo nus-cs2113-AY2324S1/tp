@@ -66,7 +66,7 @@ public class Parser {
     }
 
     public Command parse(String input) throws CashLehParsingException {
-        String command = input.contains(" ") ? input.split(" ")[0] : input;
+        String command = input.contains(" ") ? input.trim().split(" ")[0] : input.trim();
         switch (command) {
         case ADD_INCOME:
             Income income = getIncome(input);
@@ -311,9 +311,9 @@ public class Parser {
             throw new CashLehParsingException("Ayo, type in your budget amount hor!");
         }
         String newBudget = input.split(" ", 2)[1];
-        int newBudgetAmount;
+        double newBudgetAmount;
         try {
-            newBudgetAmount = Integer.parseInt(newBudget);
+            newBudgetAmount = Double.parseDouble(newBudget);
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Eh, that's not the kind of number we flaunt in CashLeh!");
         }
