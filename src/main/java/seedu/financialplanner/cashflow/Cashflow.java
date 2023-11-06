@@ -49,7 +49,7 @@ public abstract class Cashflow {
         balance = amount;
     }
 
-    public void deleteCashflowvalue() {
+    public void deleteCashflowValue() {
     }
 
     //@author mhadidg-reused

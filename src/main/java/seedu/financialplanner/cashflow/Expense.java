@@ -54,7 +54,7 @@ public class Expense extends Cashflow {
     }
 
     @Override
-    public void deleteCashflowvalue() {
+    public void deleteCashflowValue() {
         balance += this.amount;
     }
 

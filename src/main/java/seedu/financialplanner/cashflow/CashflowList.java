@@ -67,7 +67,7 @@ public class CashflowList {
 
         Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
-        toRemove.deleteCashflowvalue();
+        toRemove.deleteCashflowValue();
         ui.printDeletedCashflow(toRemove);
 
         int newListSize = list.size();
@@ -172,7 +172,7 @@ public class CashflowList {
 
         Cashflow toRemove = list.get(listIndex);
         list.remove(listIndex);
-        toRemove.deleteCashflowvalue();
+        toRemove.deleteCashflowValue();
         ui.printDeletedCashflow(toRemove);
 
         int newListSize = list.size();
