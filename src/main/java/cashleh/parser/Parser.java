@@ -128,7 +128,7 @@ public class Parser {
         try {
             expenseAmt = Double.parseDouble(expenseAmtString);
             if (expenseAmt < 0) {
-                throw new CashLehParsingException("Please enter a positive expense amount!");
+                throw new CashLehParsingException("Please enter a positive amount!");
             }
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Please enter a valid expense amount!");
@@ -175,7 +175,7 @@ public class Parser {
         try {
             incomeAmt = Double.parseDouble(incomeAmtString);
             if (incomeAmt < 0) {
-                throw new CashLehParsingException("Please enter a positive expense amount!");
+                throw new CashLehParsingException("Please enter a positive amount!");
             }
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Please enter a valid income amount!");
