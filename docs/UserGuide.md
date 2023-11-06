@@ -258,9 +258,9 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Name: panadol, Expiry Date: 12 sep, Quantity: 120
-||
-|| Listed all drugs with the keyword in the inventory.
+1. Name: panadol, Expiry Date: 12 sep, Serial number: PAN1234, Quantity: 120
+
+Listed all drugs with the keyword in the inventory.
 ```
 
 2. Finds drugs whose **expiry dates** contain any of the given keywords.
@@ -278,7 +278,27 @@ Example of usage:
 Expected outcome:
 
 ```
-1. Name: panadol, Expiry Date: 12 sep, Quantity: 120
+1. Name: panadol, Expiry Date: 12 sep, Serial number: PAN1234, Quantity: 120
+
+Listed all drugs with the keyword in the inventory.
+```
+
+3Finds drugs whose **serial number** contain any of the given keywords.
+
+Format:
+
+find /s PAN1234
+
+Example of usage:
+
+`find /s KEYWORD`
+
+- Only the drug's serial number is searched.
+
+Expected outcome:
+
+```
+1. Name: panadol, Expiry Date: 12 sep, Serial number: PAN1234, Quantity: 120
 
 Listed all drugs with the keyword in the inventory.
 ```
