@@ -8,7 +8,7 @@ Welcome to KaChinnnng a personal finance tracker that helps you keep track of yo
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `KaChinnnng` from [here](https://github.com/AY2324S1-CS2113-T18-3/tp/releases).
-3. Copy the downloaded file to the folder you want to use as the home folder that allow write access for your KaChinnnng.
+3. Copy the downloaded file to the folder you want to use as the home folder that allow to write access for your KaChinnnng.
 4. open a command terminal and navigate to the folder where you have copied the file to.
 5. type in the following to run the program
 ```
@@ -20,7 +20,7 @@ ____________________________________________________________
 Welcome to KaChinnnngggg! How may i assist you today?
 ____________________________________________________________
 ```
-7. type in desired commands and press enter to execute them. (note: commands are not case sensitive)
+7. type in desired commands and press enter to execute them. (note: commands are not case-sensitive)
 8. "[ ]" denotes optional parameters
 
 ## Features 
@@ -161,16 +161,16 @@ Note:
 - fields `/t`, `/cat`, `/de`, `date` are case-sensitive and should be in the specified order.
 - field `/cat` is only applicable for expenses.
 - field `/t` is compulsory.
-- Should users add additional characters behind find eg. findABCDE, the system will still recognise it as find.
+- Should users add additional characters behind find e.g. findABCDE, the system will still recognise it as find.
 
 Use case:
 - Prompts users if `/t <type>` field is empty.
-- Prompts users if all if the optional fields `cat`, `/de`, `/date`. are empty.
+- Prompts users if all the optional fields `cat`, `/de`, `/date`. are empty.
 - Format of date is `dd/mm/yyyy`. Users can also opt to search for entries by month `mm/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 
 
-Note: <index> must be a positive integer that coressponds to a income/expense entry
+Note: <index> must be a positive integer that corresponds to an income/expense entry
 
 ### Clear a list
 Clear all the entries on the income/expenses or both list.
@@ -206,7 +206,7 @@ edit income <index> /de <description> /date <date> /amt [currency] <amount>
 edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
 Note:
-- <index> must be a positive integer that coressponds to a income/expense entry
+- <index> must be a positive integer that corresponds to an income/expense entry
 - Format of income/expense entry applies. Refer to the "Note" of add income and add expense feature
 
 Example of usage:
@@ -243,7 +243,7 @@ These are the supported currencies:
 MYR USD JPY KRW EUR THB HKD INR IDR AUD GBP CNY CAD TWD VND PHP
 ```
 
-### List exisitng exchange rates: list exchange rates
+### List existing exchange rates: list exchange rates
 List all updated exchange rates. All exchange rates that are updated or loaded
 from ExchangeRate.txt will be shown. User can call the update exchange rates function to 
 register new exchange rates into their KaChinnnng.
@@ -269,7 +269,7 @@ update exchange rate USD 0.8
 ```
 Note:
 - <currency> must be one of the foreign currencies supported by KaChinnnng.
-- User may view the supported foreign currecnies with ```list currencies```.
+- User may view the supported foreign currencies with ```list currencies```.
 - <rate> specified should be in SGD/{foreign currency}.
 - <rate> must be a positive decimal that is between 0.001 and 3,000,000.
 - The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
@@ -282,7 +282,7 @@ Note:
 **A**: Move the txt file from the folder where the jar file located, 
 to the folder where the jar file located in the new computer 
 
-**Q**: What do i need to do when I see the `format incorrect from storage file` at the beginning of running the program
+**Q**: What do I need to do when I see the `format incorrect from storage file` at the beginning of running the program
 
 **A**: The system will automatically remove that line from the txt after you give the first command to the bot, 
 if you don't want to remove that line, just terminate the program using control/command c right after you see the error,
@@ -291,19 +291,19 @@ and change the line in txt file to the correct format.
 ## Command Summary
 
 
-| Action | Format, Examples                                                                                                                                                                                            |
-| ---- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help | `help`                                                                                                                                                                                                      |
-| Add Income | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                                          |
-| Add Expense | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`                    |
-| List | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`                                                                                                             |
-| Delete | `delete expense <index>` <br> `delete income <index>`                                                                                                                                                       |
-| Edit | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>`             |
+| Action               | Format, Examples                                                                                                                                                                                            |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                 | `help`                                                                                                                                                                                                      |
+| Add Income           | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                                          |
+| Add Expense          | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`                    |
+| List                 | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`                                                                                                             |
+| Delete               | `delete expense <index>` <br> `delete income <index>`                                                                                                                                                       |
+| Edit                 | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>`             |
 | Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                                          |
-| Clear | `clear income`<br/> `clear expense`<br/>`clear all`                                                                                                                                                         |
-| Find | `find /t income /de [description] /date [date]`<br/> e.g. `find /t income /de salary` <br/>`find /t expense /cat [category] /de [description] /date [date]`<br/> e.g. `find /t expense /cat food /de sushi` |
-| Balance| `balance` |
-| Exit | `exit`                                                                                                                                                                                                      |
+| Clear                | `clear income`<br/> `clear expense`<br/>`clear all`                                                                                                                                                         |
+| Find                 | `find /t income /de [description] /date [date]`<br/> e.g. `find /t income /de salary` <br/>`find /t expense /cat [category] /de [description] /date [date]`<br/> e.g. `find /t expense /cat food /de sushi` |
+| Balance              | `balance`                                                                                                                                                                                                   |
+| Exit                 | `exit`                                                                                                                                                                                                      |
                                                                                                                                                                                               |
 
                                                                                                                                                                                        |
