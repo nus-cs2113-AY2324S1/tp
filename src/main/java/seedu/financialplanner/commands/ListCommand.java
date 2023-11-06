@@ -14,6 +14,21 @@ public class ListCommand extends Command {
     protected CashflowCategory category = null;
     public ListCommand(RawCommand rawCommand) throws IllegalArgumentException{
         String stringCategory = null;
+        int indexToDelete = 0;
+        ArrayList<Integer> blankArgsList = new ArrayList<>();
+        for (String string : rawCommand.args) {
+            if (string.isBlank()) {
+                Integer toAdd = indexToDelete;
+                blankArgsList.add(toAdd);
+            }
+            indexToDelete++;
+        }
+        int counter = 0;
+        for (Integer integer : blankArgsList) {
+            indexToDelete = integer - counter;
+            rawCommand.args.remove(indexToDelete);
+            counter++;
+        }
 
         if (rawCommand.args.size() == 1) {
             stringCategory = rawCommand.args.get(0);
@@ -67,6 +82,13 @@ public class ListCommand extends Command {
         ui.showMessage(String.format("You have %d matching cashflows:", cashflowToBePrinted.size()));
         for (int i = 0; i < cashflowToBePrinted.size(); i += 1) {
             ui.showMessage((i + 1) + ": " + cashflowToBePrinted.get(i));
+        }
+        if (category == null) {
+            ui.showMessage("Balance: " + ui.formatBalance(Cashflow.getBalance()));
+        } else if (category.equals(CashflowCategory.INCOME)) {
+            ui.showMessage("Income Balance: " + ui.formatBalance(Cashflow.getIncomeBalance()));
+        } else if (category.equals(CashflowCategory.EXPENSE)) {
+            ui.showMessage("Expense Balance: " + ui.formatBalance(Cashflow.getExpenseBalance()));
         }
     }
 }

@@ -4,8 +4,8 @@ skinparam classFontColor automatic
 
 Class "{abstract}\nLoadData" as LoadData #HoneyDew {
     -<u>addRecurringCashflows(currentDate: LocalDate)
-    -<u>identifyRecurringCashflows(currentDate: LocalDate, cashflow: Cashflow, recur: int, dateOfAddition: LocalDate, tempCashflowList: ArrayList<Cashflow>, hasRecurred: boolean)
-    -<u>addRecurringCashflowToTempList(currentDate: LocalDate, cashflow: Cashflow, recur: int, dateOfAddition: LocalDate, tempCashflowList: ArrayList<Cashflow>)
+    -<u>identifyRecurringCashflows()
+    -<u>addRecurringCashflowToTempList()
     -<u>addToTempList(tempCashflowList: ArrayList<Cashflow>, toAdd: Cashflow)
 
 }
