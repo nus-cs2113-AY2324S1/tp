@@ -35,21 +35,21 @@ import java.util.HashMap;
 import java.util.OptionalDouble;
 
 public class Parser {
-    private static final String ADD_INCOME = "addIncome";
-    private static final String DELETE_INCOME = "deleteIncome";
-    private static final String VIEW_INCOMES = "viewIncomes";
+    private static final String ADD_INCOME = "addincome";
+    private static final String DELETE_INCOME = "deleteincome";
+    private static final String VIEW_INCOMES = "viewincomes";
 
-    private static final String ADD_EXPENSE = "addExpense";
-    private static final String DELETE_EXPENSE = "deleteExpense";
-    private static final String VIEW_EXPENSES = "viewExpenses";
+    private static final String ADD_EXPENSE = "addexpense";
+    private static final String DELETE_EXPENSE = "deleteexpense";
+    private static final String VIEW_EXPENSES = "viewexpenses";
 
-    private static final String UPDATE_BUDGET = "updateBudget";
-    private static final String DELETE_BUDGET = "deleteBudget";
-    private static final String VIEW_BUDGET = "viewBudget";
-    private static final String VIEW_FINANCIAL_STATEMENT = "viewFinancialStatement";
+    private static final String UPDATE_BUDGET = "updatebudget";
+    private static final String DELETE_BUDGET = "deletebudget";
+    private static final String VIEW_BUDGET = "viewbudget";
+    private static final String VIEW_FINANCIAL_STATEMENT = "viewfinancialstatement";
     private static final String EXIT = "exit";
-    private static final String FILTER_EXPENSE = "filterExpense";
-    private static final String FILTER_INCOME = "filterIncome";
+    private static final String FILTER_EXPENSE = "filterexpense";
+    private static final String FILTER_INCOME = "filterincome";
     private static final String FILTER = "filter";
     private static final String AMT_KEYWORD = "/amt";
     private static final String DATE_KEYWORD = "/date";
@@ -68,23 +68,26 @@ public class Parser {
 
     public Command parse(String input) throws CashLehParsingException {
         String command = input.contains(" ") ? input.trim().split(" ")[0] : input.trim();
-        switch (command) {
+
+        // Ensure commands are case-insensitive
+        String modifiedInput = input.replaceFirst(command, command.toLowerCase()).trim();
+        switch (command.toLowerCase()) {
         case ADD_INCOME:
-            Income income = getIncome(input);
+            Income income = getIncome(modifiedInput);
             return new AddIncome(income, incomeStatement);
         case DELETE_INCOME:
-            return getDeleteTransaction(input, DELETE_INCOME);
+            return getDeleteTransaction(modifiedInput, DELETE_INCOME);
         case VIEW_INCOMES:
             return new ViewIncomes(incomeStatement);
         case ADD_EXPENSE:
-            Expense expense = getExpense(input);
+            Expense expense = getExpense(modifiedInput);
             return new AddExpense(expense, expenseStatement);
         case DELETE_EXPENSE:
-            return getDeleteTransaction(input, DELETE_EXPENSE);
+            return getDeleteTransaction(modifiedInput, DELETE_EXPENSE);
         case VIEW_EXPENSES:
             return new ViewExpenses(expenseStatement);
         case UPDATE_BUDGET:
-            Budget budget = getBudget(input);
+            Budget budget = getBudget(modifiedInput);
             return new UpdateBudget(budget, budgetHandler);
         case DELETE_BUDGET:
             return new DeleteBudget(budgetHandler);
@@ -95,13 +98,13 @@ public class Parser {
         case EXIT:
             return new Exit();
         case FILTER_EXPENSE:
-            FindParser expenseToFind = filterBy(FILTER_EXPENSE, input);
+            FindParser expenseToFind = filterBy(FILTER_EXPENSE, modifiedInput);
             return new FilterExpense(expenseToFind, expenseStatement);
         case FILTER_INCOME:
-            FindParser incomeToFind = filterBy(FILTER_INCOME, input);
+            FindParser incomeToFind = filterBy(FILTER_INCOME, modifiedInput);
             return new FilterIncome(incomeToFind, incomeStatement);
         case FILTER:
-            FindParser transactionToFind = filterBy(FILTER, input);
+            FindParser transactionToFind = filterBy(FILTER, modifiedInput);
             return new FilterTransaction(transactionToFind, expenseStatement, incomeStatement);
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
@@ -109,7 +112,7 @@ public class Parser {
     }
 
     private Expense getExpense(String input) throws CashLehParsingException {
-        String[] format = {ADD_EXPENSE, "/amt", "/date:optional", "/cat:optional"};
+        String[] format = {ADD_EXPENSE, AMT_KEYWORD, DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String expenseName = inputDetails.get(ADD_EXPENSE);
         assert expenseName != null;
@@ -128,6 +131,9 @@ public class Parser {
         double expenseAmt;
         try {
             expenseAmt = Double.parseDouble(expenseAmtString);
+            if (expenseAmt < 0) {
+                throw new CashLehParsingException("Please enter a positive amount!");
+            }
             if (expenseAmt > MAX_AMT) {
                 throw new CashLehParsingException("Amount entered is too large! " +
                     "Please split up your transaction into smaller ones " +
@@ -159,7 +165,7 @@ public class Parser {
     }
 
     private Income getIncome(String input) throws CashLehParsingException {
-        String[] format = {ADD_INCOME, "/amt", "/date:optional", "/cat:optional"};
+        String[] format = {ADD_INCOME, AMT_KEYWORD, DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
         HashMap<String, String> inputDetails = StringTokenizer.tokenize(input, format);
         String incomeName = inputDetails.get(ADD_INCOME);
         assert incomeName != null;
@@ -177,6 +183,9 @@ public class Parser {
         double incomeAmt;
         try {
             incomeAmt = Double.parseDouble(incomeAmtString);
+            if (incomeAmt < 0) {
+                throw new CashLehParsingException("Please enter a positive amount!");
+            }
             if (incomeAmt > MAX_AMT) {
                 throw new CashLehParsingException("Amount entered is too large! " +
                     "Please split up your transaction into smaller ones " +
@@ -234,13 +243,15 @@ public class Parser {
         String[] format = null;
         switch (transactionType) {
         case FILTER_EXPENSE:
-            format = new String[]{FILTER_EXPENSE, "/amt:optional", "/date:optional", "/cat:optional"};
+            format = new String[]{FILTER_EXPENSE, AMT_KEYWORD+":optional",
+                DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
             break;
         case FILTER_INCOME:
-            format = new String[]{FILTER_INCOME, "/amt:optional", "/date:optional", "/cat:optional"};
+            format = new String[]{FILTER_INCOME, AMT_KEYWORD+":optional",
+                DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
             break;
         case FILTER:
-            format = new String[]{FILTER, "/amt:optional", "/date:optional", "/cat:optional"};
+            format = new String[]{FILTER, AMT_KEYWORD+":optional", DATE_KEYWORD+":optional", CAT_KEYWORD+":optional"};
             break;
         default:
             throw new CashLehParsingException("Aiyoh! Your input blur like sotong... Clean your input for CashLeh!");
@@ -336,6 +347,9 @@ public class Parser {
         double newBudgetAmount;
         try {
             newBudgetAmount = Double.parseDouble(newBudget);
+            if (newBudgetAmount < 0) {
+                throw new CashLehParsingException("Please enter a positive budget amount!");
+            }
         } catch (NumberFormatException e) {
             throw new CashLehParsingException("Eh, that's not the kind of number we flaunt in CashLeh!");
         }
