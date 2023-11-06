@@ -10,7 +10,7 @@ public class Ui {
     private static final String VERTICAL_LINE = "|";
     private static final String CORNER_SYMBOL = "+";
     private static final int MIN_SPACE_PER_SIDE = 2;
-    private static final int MAX_DESCRIPTION = 60;
+    private static final int MAX_DESCRIPTION = 40;
 
     public static String getDateString(LocalDate date) {
         return date.format(DATE_FORMATTER);
