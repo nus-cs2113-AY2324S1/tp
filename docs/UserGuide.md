@@ -55,9 +55,9 @@ Note:
 - Should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
 - Users should not use "|" in the description as it is used as a delimiter in the storage file.
 - There are only 3 categories for expenses: `Food`, `Transport`, `Utilities`.
-- There are 3 types associated with `Food` category: `Breakfast`, `Lunch`, `Dinner`, else it will default to `UNDEFINED`.
-- There are 4 types associated with `Transport` category: `Bus`, `Train`, `Taxi`, `Fuel`, else it will default to `UNDEFINED`.
-- There are 3 types associated with `Utilities` category: `Water`, `Electricity`, `Gas`, else it will default to `UNDEFINED`.
+- There are 3 types associated with `Food` category: `Breakfast`, `Lunch`, `Dinner`, else it will default to `OTHER`.
+- There are 4 types associated with `Transport` category: `Bus`, `Train`, `Taxi`, `Fuel`, else it will default to `OTHER`.
+- There are 3 types associated with `Utilities` category: `Water`, `Electricity`, `Gas`, else it will default to `OTHER`.
 
 
 Use case:
