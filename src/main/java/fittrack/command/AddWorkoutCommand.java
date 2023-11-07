@@ -2,6 +2,7 @@ package fittrack.command;
 
 import fittrack.parser.CommandParser;
 import fittrack.parser.NumberFormatException;
+import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 import fittrack.data.Workout;
 
@@ -30,9 +31,8 @@ public class AddWorkoutCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args)
-            throws PatternMatchFailException, NumberFormatException {
-        newWorkout = CommandParser.parseWorkout(args);
+    public void setArguments(String args) throws ParseException {
+        newWorkout = Workout.parseWorkout(args);
     }
 
     @Override

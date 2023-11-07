@@ -214,34 +214,6 @@ public class CommandParser {
         }
     }
 
-    public static Workout parseWorkout(String args) throws PatternMatchFailException, NumberFormatException {
-        assert args != null;
-        String workout = args.strip();
-
-        final Matcher matcher = WORKOUT_PATTERN.matcher(workout);
-        if (!matcher.matches()) {
-            throw new PatternMatchFailException();
-        }
-
-        final String name = matcher.group(NAME_CG);
-        final String calories = matcher.group(CALORIES_CG);
-        final String date = matcher.group(DATE_CG);
-
-        try {
-            double caloriesInDouble = Double.parseDouble(calories);
-
-            if (date == null) {
-                return new Workout(name, new Calories(caloriesInDouble), Date.today());
-            } else {
-                return new Workout(name, new Calories(caloriesInDouble), new Date(date));
-            }
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException();
-        } catch (DateTimeParseException e) {
-            throw new PatternMatchFailException();
-        }
-    }
-
     // @@author NgLixuanNixon
     public static int parseIndex(String args) throws ParseException {
         assert args != null;
