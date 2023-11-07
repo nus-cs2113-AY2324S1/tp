@@ -77,10 +77,18 @@ public class Parser {
             return prepareDeleteCommand(arguments);
 
         case CheckOutCommand.COMMAND_WORD:
-            return new CheckOutCommand();
+            if (arguments.isEmpty()) {
+                return new CheckOutCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckOutCommand.MESSAGE_USAGE));
+            }
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            if (arguments.isEmpty()) {
+                return new ExitCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE));
+            }
 
         case HelpCommand.COMMAND_WORD:
             return prepareHelpCommand(arguments);
@@ -89,7 +97,11 @@ public class Parser {
             return prepareListCommand(arguments);
 
         case ViewCartCommand.COMMAND_WORD:
-            return new ViewCartCommand();
+            if (arguments.isEmpty()) {
+                return new ViewCartCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCartCommand.MESSAGE_USAGE));
+            }
 
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommand();
@@ -104,22 +116,42 @@ public class Parser {
             return prepareAddVendorCommand(arguments);
 
         case ShowStockLevelCommand.COMMAND_WORD:
-            return new ShowStockLevelCommand();
+            if (arguments.isEmpty()) {
+                return new ShowStockLevelCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowStockLevelCommand.MESSAGE_USAGE));
+            }
 
         case ListVendorCommand.COMMAND_WORD:
-            return new ListVendorCommand();
+            if (arguments.isEmpty()) {
+                return new ListVendorCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListVendorCommand.MESSAGE_USAGE));
+            }
 
         case SetThresholdCommand.COMMAND_WORD:
             return prepareSetThresholdCommand(arguments);
 
         case ListThresholdCommand.COMMAND_WORD:
-            return new ListThresholdCommand();
+            if (arguments.isEmpty()) {
+                return new ListThresholdCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListThresholdCommand.MESSAGE_USAGE));
+            }
 
         case ListDescriptionsCommand.COMMAND_WORD:
-            return new ListDescriptionsCommand();
+            if (arguments.isEmpty()) {
+                return new ListDescriptionsCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDescriptionsCommand.MESSAGE_USAGE));
+            }
 
         case ListVendorSupplyCommand.COMMAND_WORD:
-            return new ListVendorSupplyCommand(arguments);
+            if (arguments.isEmpty()) {
+                return new ListVendorSupplyCommand(arguments);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListVendorSupplyCommand.MESSAGE_USAGE));
+            }
 
         case FindVendorSupplyCommand.COMMAND_WORD:
             return new FindVendorSupplyCommand(arguments);
@@ -172,7 +204,7 @@ public class Parser {
             String name = matcher.group(1);
             return new DeleteCommand(name);
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
     }
 

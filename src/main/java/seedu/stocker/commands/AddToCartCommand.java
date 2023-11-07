@@ -30,7 +30,7 @@ public class AddToCartCommand extends Command {
     public CommandResult execute() {
         StockEntry entry = inventory.get(this.serialNumber);
         if (entry == null) {
-            return new CommandResult<>("This dug is not in stock");
+            return new CommandResult<>("This drug is not in stock");
         } else if (entry.getQuantity() < this.quantity
                 + currentCart.getEntryQuantity(this.serialNumber)) {
             return new CommandResult<>("There is not enough stock on this drug. ");
