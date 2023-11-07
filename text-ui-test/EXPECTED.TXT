@@ -130,8 +130,6 @@ Total expenses is: $10.00.
 
 Total balance is: $5990.00.
 ____________________________________________________________
-Here are the matching expenses in your list:
-Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00
 ____________________________________________________________
 Noted. This income record has been deleted:
 Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
@@ -147,6 +145,8 @@ After: Income: end of year bonus | Date: 02/Oct/2023 | Amount: $3000.00
 ____________________________________________________________
 Here are the matching incomes in your list:
 Income: end of year bonus | Date: 02/Oct/2023 | Amount: $3000.00
+____________________________________________________________
+No matching expenses found.
 ____________________________________________________________
 You have cleared the income list
 ____________________________________________________________
@@ -175,13 +175,12 @@ Got it. I've added this income:
 Income: remittance from Dad | Date: 01/Oct/2023 | Amount: $1250.00
 ____________________________________________________________
 ____________________________________________________________
-We have converted HKD to SGD at the SGD/HKD rate of 1000.0
-____________________________________________________________
-____________________________________________________________
-Got it. I've added this expense:
-Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $0.01
+Please update the exchange rate for HKD
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this expense:
 Transportation Expense (OTHER): Changi to KLIA | Date: 01/Oct/2023 | Amount: $100.00
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
 ____________________________________________________________
