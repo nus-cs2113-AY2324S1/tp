@@ -7,6 +7,9 @@ Introducing FitTrack, your ultimate fitness and nutrition companion.
 FitTrack is more than just an app; 
 it's your personal tracker to help you to achieve your health and fitness goals.
 
+FitTrack is a Command Line Interface (CLI) application for tracking your fitness conveniently. 
+It is targeted at people who wish to live a healthy lifestyle. Using the CLI helps to optimise usage for 
+fast typing and one-stop interface to access a plethora of features to track your fitness.
 
 ## Quick Start
 
@@ -18,7 +21,7 @@ This step is not necessary, but recommended because the app will automatically c
 5. Type `java -jar fittrack.jar` in the terminal to open the application.
 You should see the welcome message.
 6. First time using the product, you have to enter your height, weight, gender, and daily calorie limit.
-Please type in format of `h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>`.
+Please click [here](#first-time-users) for more details.
 7. The application is now ready for you to use! 
 Type `help` to see a list of commands that you will be able to use in the application.
 
