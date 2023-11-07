@@ -10,7 +10,7 @@ import fittrack.storage.Storage.StorageOperationException;
 public class StorageTest {
 
     public static Path testFolder;
-    private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
+    private static final String TEST_DATA_FOLDER = "test/data/StorageTest";
 
     @Test
     public void constructor_nullFilePath_exceptionThrown() {
