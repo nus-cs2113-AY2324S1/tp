@@ -23,8 +23,6 @@ import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewStepsCommand;
 import fittrack.command.ViewWorkoutCommand;
 
-import fittrack.data.Date;
-import fittrack.data.Step;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -175,20 +173,4 @@ public class CommandParser {
         return str.split("\\s")[0];
     }
 
-    public Step parseStep(String steps) throws PatternMatchFailException, NumberFormatException {
-
-        final Matcher matcher = STEP_PATTERN.matcher(steps);
-        if (!matcher.matches()) {
-            throw new PatternMatchFailException();
-        }
-
-        final String step = matcher.group(STEP_CG);
-        final String date = matcher.group(DATE_CG);
-
-        try {
-            return new Step(Integer.parseInt(step), new Date(date));
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException(e.getMessage());
-        }
-    }
 }

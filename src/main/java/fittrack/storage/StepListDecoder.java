@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class StepListDecoder {
 
     private static final Pattern STEP_PATTERN = Pattern.compile(
-            "(?<steps>\\S+)kcal\\s*\\|\\s*(?<date>\\S+)"
+            "(?<steps>\\d+)\\s*\\|\\s*(?<date>\\d{4}-\\d{2}-\\d{2})"
     );
 
     /**
