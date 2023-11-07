@@ -1,6 +1,5 @@
 package fittrack.parser;
 
-import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddStepsCommand;
 import fittrack.command.AddWorkoutCommand;

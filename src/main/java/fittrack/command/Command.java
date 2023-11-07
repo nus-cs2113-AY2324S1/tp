@@ -4,7 +4,6 @@ import fittrack.MealList;
 import fittrack.StepList;
 import fittrack.UserProfile;
 import fittrack.WorkoutList;
-import fittrack.parser.CommandParser;
 import fittrack.storage.Storage;
 import fittrack.parser.ParseException;
 
