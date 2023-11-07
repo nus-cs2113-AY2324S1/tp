@@ -1,6 +1,7 @@
 package quizhub.question;
 
 public class MultipleChoiceQn extends Question {
+    public static final String IDENTIFIER = "M";
     private String option1;
     private String option2;
     private String option3;
@@ -96,5 +97,29 @@ public class MultipleChoiceQn extends Question {
         return super.getQuestionDescription().strip() + " / " + this.option1.strip() + " / " + this.option2.strip() +
                 " / " + this.option3.strip() + " / " + this.option4.strip() + " / " + this.answer + " | " +
                 super.getModule() + " | " + super.getDifficulty().toString();
+    }
+
+    @Override
+    public String toString() {
+        String questionType = "[" + IDENTIFIER + "]";
+        String isDone;
+        if (super.questionIsDone()) {
+            isDone = "[X]";
+        } else {
+            isDone = "[ ]";
+        }
+        String assembledQuestion = questionType + isDone + " " + this.getQuestionDescription();
+        return assembledQuestion.replace("\\slash", "/");
+    }
+
+    @Override
+    public String toSerializedString() {
+        String isDone;
+        if (super.questionIsDone()) {
+            isDone = "done";
+        } else {
+            isDone = "undone";
+        }
+        return IDENTIFIER + " | " + isDone + " | " + this.getQuestionDescription() + System.lineSeparator();
     }
 }

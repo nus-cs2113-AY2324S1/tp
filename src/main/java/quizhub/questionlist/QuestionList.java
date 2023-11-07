@@ -36,19 +36,21 @@ public class QuestionList {
      * @param qnDifficulty The difficulty level of the questions
      * @param showMessage If true, program will print response message on CLI after question is added.
      */
-    public void addShortAnswerQn(String description, String answer, String module,
+    public boolean addShortAnswerQn(String description, String answer, String module,
                                  Question.QnDifficulty qnDifficulty, boolean showMessage){
 
-        if(containsDuplicateQuestion(description, SHORTANSWER, module, qnDifficulty)){
-            System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
-        } else{
-            allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
-            if (showMessage) {
-                System.out.println("    I have added the following question OwO:");
-                System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
-                System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
-            }
+        boolean isDuplicate = containsDuplicateQuestion(description, SHORTANSWER, module,
+                qnDifficulty, showMessage);
+        if (isDuplicate){
+            return false;
         }
+        allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
+        if (showMessage) {
+            System.out.println("    I have added the following question OwO:");
+            System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
+            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+        }
+        return true;
     }
 
     /**
@@ -64,22 +66,24 @@ public class QuestionList {
      * @param qnDifficulty The difficulty level of the questions
      * @param showMessage If true, program will print response message on CLI after question is added.
      */
-    public void addMultipleChoiceQn(String description, String option1, String option2,
+    public boolean addMultipleChoiceQn(String description, String option1, String option2,
                                     String option3, String option4, int answer, String module,
                                     Question.QnDifficulty qnDifficulty, boolean showMessage) {
 
-        if(containsDuplicateQuestion(description, Question.QnType.MULTIPLECHOICE, module, qnDifficulty)){
-            System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
-        } else {
-            allQns.add(new MultipleChoiceQn(description, option1, option2, option3,
-                    option4, answer, module, qnDifficulty));
-            if (showMessage) {
-                System.out.println("    I have added the following question OwO:");
-                System.out.printf("      [M] %s\n", viewQuestionByIndex(getQuestionListSize()));
-                System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
-            }
-        }
 
+        boolean isDuplicate = containsDuplicateQuestion(description, MULTIPLECHOICE, module,
+                qnDifficulty, showMessage);
+        if (isDuplicate){
+            return false;
+        }
+        allQns.add(new MultipleChoiceQn(description, option1, option2, option3,
+                option4, answer, module, qnDifficulty));
+        if (showMessage) {
+            System.out.println("    I have added the following question OwO:");
+            System.out.printf("      [M] %s\n", viewQuestionByIndex(getQuestionListSize()));
+            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+        }
+        return true;
     }
 
     /**
@@ -95,13 +99,16 @@ public class QuestionList {
      * @param qnDifficulty The difficulty level of the short answer question.
      * @return true if all of the above are true
      */
-    public boolean containsDuplicateQuestion (String description, Question.QnType qnType,
-                                              String module, Question.QnDifficulty qnDifficulty) {
+    public boolean containsDuplicateQuestion (String description, Question.QnType qnType, String module,
+                                              Question.QnDifficulty qnDifficulty, boolean showMessage) {
         for (Question question : allQns) {
-            if(description.strip().equalsIgnoreCase(question.getQuestionDescription()) &&
+            if (description.strip().equalsIgnoreCase(question.getQuestionBody()) &&
                 qnType.equals(question.getQuestionType()) &&
                 module.equalsIgnoreCase(question.getModule()) &&
-                qnDifficulty.equals(question.getDifficulty()) ) {
+                qnDifficulty.equals(question.getDifficulty())) {
+                if (showMessage) {
+                    System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
+                }
                 return true;
             }
         }
@@ -118,20 +125,13 @@ public class QuestionList {
     public void printQuestion(Question question, boolean asList){
         int qnIndex = allQns.indexOf(question);
         int oneIndexed = ++qnIndex;
-        String isDone = question.questionIsDone() ? "X" : " ";
-        String questionTypeIdentifier = "";
-        if(question.getQuestionType() == SHORTANSWER){
-            questionTypeIdentifier = "S";
-        } else if(question.getQuestionType() == MULTIPLECHOICE){
-            questionTypeIdentifier = "M";
-        }
+        String indexString = "    ";
         if(asList) {
-            System.out.printf("    %d: [%s][%s] %s\n", oneIndexed, isDone,
-                questionTypeIdentifier, question.getQuestionDescription());
+            indexString += oneIndexed + ": ";
         } else {
-            System.out.printf("        [%s][%s] %s\n", isDone, questionTypeIdentifier, 
-                question.getQuestionDescription());
+            indexString += "    ";
         }
+        System.out.println(indexString + question);
     }
     
     /**

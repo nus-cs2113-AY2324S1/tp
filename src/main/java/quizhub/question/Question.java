@@ -166,4 +166,7 @@ public class Question {
     public String getOption(int i) {
         return "";
     }
+    public String toSerializedString() {
+        return "";
+    }
 }

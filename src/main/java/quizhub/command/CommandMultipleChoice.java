@@ -11,8 +11,6 @@ public class CommandMultipleChoice extends Command {
             "mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!";
     public static final String MISSING_FIELDS_MSG = "    You have one or more field missing!";
     public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! There should not be arguments after /difficulty";
-    public static final String DUPLICATED_INPUT = "    You have a duplicated input, please fill add a different input!";
-    public static final String INVALID_DIFFICULTY_MSG = "    Entry will not be added to list";
     public static final String INVALID_ANSWER_MSG = "    Ono! The answer index you entered is not a integer in the " +
             "range of the options :<";
     public static final int ARGUMENT_SIZE = 8;

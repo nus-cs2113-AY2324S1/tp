@@ -3,6 +3,7 @@ package quizhub.question;
  * Represents Short Answer Questions. This means answers are a simple string.
  */
 public class ShortAnsQn extends Question {
+    public static final String IDENTIFIER = "S";
     private String answer;
     /**
      * Creates a new question of type SHORTANSWER
@@ -59,5 +60,29 @@ public class ShortAnsQn extends Question {
     public String getQuestionDescription() {
         return super.getQuestionDescription().strip() + " / " + this.answer.strip() + " | " + super.getModule()
                 + " | " + super.getDifficulty().toString();
+    }
+
+    @Override
+    public String toString() {
+        String questionType = "[" + IDENTIFIER + "]";
+        String isDone;
+        if (super.questionIsDone()) {
+            isDone = "[X]";
+        } else {
+            isDone = "[ ]";
+        }
+        String assembledQuestion = questionType + isDone + " " + this.getQuestionDescription();
+        return assembledQuestion.replace("\\slash", "/");
+    }
+
+    @Override
+    public String toSerializedString() {
+        String isDone;
+        if (super.questionIsDone()) {
+            isDone = "done";
+        } else {
+            isDone = "undone";
+        }
+        return IDENTIFIER + " | " + isDone + " | " + this.getQuestionDescription() + System.lineSeparator();
     }
 }

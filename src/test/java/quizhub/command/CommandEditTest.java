@@ -35,9 +35,9 @@ public class CommandEditTest {
         ui = new Ui(mockStorage, questionList);
         Parser parser = new Parser(questionList);
         String[] questionsToAdd = { "short Question1 / Answer1 / Mod1 / NORMAL",
-                "mcq Question2 / Answer2a / Answer2b / Answer2c / Answer2d / 2 / Mod2 / NORMAL",
-                "short Question3 / Answer3 / Mod3 / NORMAL",
-                "short Question4 / Answer4 / Mod4 / NORMAL" };
+            "mcq Question2 / Answer2a / Answer2b / Answer2c / Answer2d / 2 / Mod2 / NORMAL",
+            "short Question3 / Answer3 / Mod3 / NORMAL",
+            "short Question4 / Answer4 / Mod4 / NORMAL" };
         boolean showMessage = false;
         for (String question : questionsToAdd) {
             parser.parseCommand(question).executeCommand(ui, mockStorage, questionList);

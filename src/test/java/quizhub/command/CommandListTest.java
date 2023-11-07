@@ -97,12 +97,15 @@ public class CommandListTest {
         questionList.markQuestionAsDone(1, false);
         questionList.markQuestionAsDone(3, false);
         String expectedOutput =
-            "1: [S][X] Question1 / Answer1 | Mod1 | HARD\n" +
-            "    2: [S][ ] Question2 / Answer2 | Mod2 | HARD\n" +
-            "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL\n" +
+            "1: [S][X] Question1 / Answer1 | Mod1 | HARD" +
+            "    2: [S][ ] Question2 / Answer2 | Mod2 | HARD" +
+            "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL" +
             "    4: [S][ ] Question4 / Answer4 | Mod4 | EASY" ;
         questionList.printQuestionList();
         String actualOutput = outputStreamCaptor.toString().trim();
+        actualOutput = actualOutput.replace(System.lineSeparator(), "");
+        actualOutput = actualOutput.replace("\n", "");
+        actualOutput = actualOutput.replace("\r", "");
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
