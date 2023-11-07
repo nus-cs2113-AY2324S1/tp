@@ -35,7 +35,8 @@ public class CafeCtrl {
         this.pantry = this.storage.loadPantryStock();
         this.sales = this.storage.loadOrderList(menu);
         this.currentDate = new CurrentDate(sales);
-        assert !sales.getOrderLists().isEmpty();
+
+        assert sales.getOrderLists().size() == currentDate.getCurrentDay() + 1;
     }
     
     /**
