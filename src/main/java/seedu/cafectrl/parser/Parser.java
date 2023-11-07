@@ -301,7 +301,7 @@ public class Parser implements ParserUtil {
     static float parsePriceToFloat(String priceText) throws ParserException {
         String trimmedPriceText = priceText.trim();
 
-        final Pattern priceTwoDecimalPlacePattern = Pattern.compile("[0-9]*\\.[0-9]{0,2}|[0-9]+");
+        final Pattern priceTwoDecimalPlacePattern = Pattern.compile("^-?[0-9]\\d*(\\.\\d{0,2})?$");
         Matcher priceMatcher = priceTwoDecimalPlacePattern.matcher(trimmedPriceText);
 
         if (!priceMatcher.matches()) {
