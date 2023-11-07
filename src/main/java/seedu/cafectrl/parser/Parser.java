@@ -69,7 +69,7 @@ public class Parser implements ParserUtil {
     /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
-    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(.*) price/(.*)";
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*) price/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
@@ -180,7 +180,8 @@ public class Parser implements ParserUtil {
         float newPrice;
 
         try {
-            dishIndex = Integer.parseInt(matcher.group(dishIndexGroup).trim());
+            String dishIndexText = matcher.group(dishIndexGroup).replaceAll("\\s", "");
+            dishIndex = Integer.parseInt(dishIndexText);
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
