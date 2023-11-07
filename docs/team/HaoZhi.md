@@ -52,6 +52,6 @@ GUI apps.
  * Kept up to date weekly deliverables during meetings
 
 **Mentoring**
- * Clarified misconceptions on workflow and application architecture in the inital few weeks 
+ * Clarified misconceptions on workflow and application architecture in the initial few weeks 
 
 
