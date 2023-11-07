@@ -56,7 +56,6 @@ public class CommandParser {
     private static final String NAME_CG = "name";
     private static final String CALORIES_CG = "calories";
     private static final String DATE_CG = "date";
-    private static final String INDEX_CG = "index";
     private static final String KEYWORD_CG = "keyword";
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<" + WORD_CG + ">\\S+)(?<" + ARGS_CG + ">.*)"
@@ -70,9 +69,6 @@ public class CommandParser {
     );
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
             "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
-    );
-    private static final Pattern INDEX_PATTERN = Pattern.compile(
-            "(?<" + INDEX_CG + ">\\S+)"
     );
     private static final Pattern DATE_PATTERN = Pattern.compile(
             "(?<" + DATE_CG + ">\\S+)"
@@ -250,18 +246,11 @@ public class CommandParser {
     }
 
     // @@author NgLixuanNixon
-    public int parseIndex(String meal) throws PatternMatchFailException, NumberFormatException {
-        final Matcher matcher = INDEX_PATTERN.matcher(meal);
-        if (!matcher.matches()) {
-            throw new PatternMatchFailException();
-        }
-
-        final String index = matcher.group(INDEX_CG);
-
+    public int parseIndex(String index) throws NumberFormatException {
         try {
             return Integer.parseInt(index);
         } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException();
+            throw new NumberFormatException("Index must be an integer.");
         }
     }
     // @@author

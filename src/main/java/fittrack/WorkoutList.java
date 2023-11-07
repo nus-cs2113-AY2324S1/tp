@@ -27,10 +27,6 @@ public class WorkoutList {
         workoutListSize--;
     }
 
-    public int getWorkoutListSize() {
-        return workoutListSize;
-    }
-
     @Override
     public String toString() {
         int counter = 1;
@@ -45,6 +41,10 @@ public class WorkoutList {
     public Workout getWorkout(int workoutIndex) {
         assert isIndexValid(workoutIndex);
         return workoutList.get(workoutIndex - 1);
+    }
+
+    public boolean isEmpty() {
+        return workoutList.isEmpty();
     }
 
     public boolean isIndexValid(int index) {

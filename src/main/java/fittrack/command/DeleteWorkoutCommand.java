@@ -23,9 +23,12 @@ public class DeleteWorkoutCommand extends Command {
     // @@author marklin2234
     @Override
     public CommandResult execute() {
-        if (!workoutList.isIndexValid(workoutIndex)) {
-            return new CommandParser()
-                    .getInvalidCommandResult(commandLine, new IndexOutOfBoundsException());
+        if (workoutList.isEmpty()) {
+            return new CommandParser().
+                    getInvalidCommandResult(commandLine, IndexOutOfBoundsException.LIST_EMPTY);
+        } else if (!workoutList.isIndexValid(workoutIndex)) {
+            return new CommandParser().
+                    getInvalidCommandResult(commandLine, IndexOutOfBoundsException.INDEX_INVALID);
         }
 
         Workout toDelete = workoutList.getWorkout(workoutIndex);
@@ -36,8 +39,7 @@ public class DeleteWorkoutCommand extends Command {
 
     // @@author marklin2234
     @Override
-    public void setArguments(String args, CommandParser parser)
-            throws PatternMatchFailException, NumberFormatException {
+    public void setArguments(String args, CommandParser parser) throws NumberFormatException {
         workoutIndex = parser.parseIndex(args);
     }
     // @@author

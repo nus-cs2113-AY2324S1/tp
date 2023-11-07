@@ -23,9 +23,12 @@ public class DeleteMealCommand extends Command {
     // @@author NgLixuanNixon
     @Override
     public CommandResult execute() {
-        if (!mealList.isIndexValid(mealIndex)) {
-            return new CommandParser()
-                    .getInvalidCommandResult(commandLine, new IndexOutOfBoundsException());
+        if (mealList.isEmpty()) {
+            return new CommandParser().
+                    getInvalidCommandResult(commandLine, IndexOutOfBoundsException.LIST_EMPTY);
+        } else if (!mealList.isIndexValid(mealIndex)) {
+            return new CommandParser().
+                    getInvalidCommandResult(commandLine, IndexOutOfBoundsException.INDEX_INVALID);
         }
 
         Meal toDelete = mealList.getMeal(mealIndex);
@@ -36,8 +39,7 @@ public class DeleteMealCommand extends Command {
 
     // @@author NgLixuanNixon
     @Override
-    public void setArguments(String args, CommandParser parser)
-            throws PatternMatchFailException, NumberFormatException {
+    public void setArguments(String args, CommandParser parser) throws NumberFormatException {
         mealIndex = parser.parseIndex(args);
     }
     // @@author

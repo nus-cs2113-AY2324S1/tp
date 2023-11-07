@@ -46,6 +46,10 @@ public class MealList {
         return mealList.get(mealIndex - 1);
     }
 
+    public boolean isEmpty() {
+        return mealList.isEmpty();
+    }
+
     public boolean isIndexValid(int index) {
         return 1 <= index && index <= mealList.size();
     }
