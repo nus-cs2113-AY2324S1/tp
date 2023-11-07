@@ -46,4 +46,12 @@ public class Ingredient {
     public String toString() {
         return  this.name + ": " + this.quantity + this.unit.getValue();
     }
+
+    public boolean equals(Ingredient i) {
+        boolean nameEqual = this.getName().equals(i.getName());
+        boolean quantityEqual = this.getQuantity().equals(i.getQuantity());
+        boolean unitEqual = this.getUnit().equals(i.getUnit());
+
+        return (nameEqual && quantityEqual && unitEqual);
+    }
 }

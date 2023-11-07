@@ -16,9 +16,9 @@ public class StartRecipeCommand extends Command {
     private IngredientList ingredients;
     private RecipeList recipes;
     private RecipeIngredientList recipeIngredients;
-    private IngredientList missingIngredients;
-    private IngredientList insufficientIngredients;
-    private IngredientList diffUnitIngredients;
+    public IngredientList missingIngredients;
+    public IngredientList insufficientIngredients;
+    public IngredientList diffUnitIngredients;
 
     public StartRecipeCommand(String input, RecipeList recipes, IngredientList ingredients) {
         this.input = input;
@@ -30,7 +30,19 @@ public class StartRecipeCommand extends Command {
         this.diffUnitIngredients = new IngredientList();
     }
 
-    private void getMissingIngredients() {
+    public IngredientList getMissingIngredients() {
+        return this.missingIngredients;
+    }
+
+    public IngredientList getInsufficientIngredients() {
+        return this.insufficientIngredients;
+    }
+
+    public IngredientList getDiffUnitIngredients() {
+        return this.diffUnitIngredients;
+    }
+
+    private void getIngredientsStillNeeded() {
         String recipeIngredientName;
         IngredientUnit recipeIngredientUnit;
 
@@ -70,7 +82,7 @@ public class StartRecipeCommand extends Command {
             String recipeTitle = recipe.getTitle();
             recipeIngredients = recipe.getRecipeIngredients();
 
-            getMissingIngredients();
+            getIngredientsStillNeeded();
 
             Ui.printStartRecipeMessage(missingIngredients, insufficientIngredients, diffUnitIngredients, recipeTitle);
         } catch (EssenOutOfRangeException e) {
