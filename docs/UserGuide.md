@@ -29,7 +29,6 @@ Type `help` to see a list of commands that you will be able to use in the applic
 ## Features 
 
 * [Viewing help guide : `help`](#viewing-help-guide-help)
-* [Exiting the application : `exit`](#exiting-the-application-exit)
 * [Editing your profile : `editprofile`](#editing-your-profile-editprofile)
 * [Viewing your profile : `viewprofile`](#viewing-your-profile-viewprofile)
 * [Checking your current bmi : `bmi`](#checking-your-current-bmi-bmi)
@@ -44,6 +43,7 @@ Type `help` to see a list of commands that you will be able to use in the applic
 * [Viewing list of workout : `viewworkout`](#viewing-list-of-all-workouts-viewworkout)
 * [Find workouts by a keyword: `findworkout`](#finding-workouts-by-a-keyword-findworkout)
 * [Checking total calories burnt on a specific date: `caloriesburnt`](#checking-total-calories-burnt-on-a-specific-date-caloriesburnt)
+* [Exiting the application : `exit`](#exiting-the-application-exit)
 
 ### First Time Users
 If you are using FitTrack for the first time, you are required to enter your height, weight, gender and daily calorie limit before being 
@@ -101,20 +101,6 @@ editprofile, viewprofile, bmi, checkrecommendedweight,
 addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed
 addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt
 Type `help` or `help <COMMAND>` to view help.
-```
-
-
-### Exiting the application: `exit`
-Exits the application.
-
-**Example of usage**
-```
-exit
-```
-
-**Expected output**
-```
-Goodbye! Hope to see you again soon!
 ```
 
 
@@ -374,6 +360,36 @@ caloriesburnt 2023-11-04
 [W] walking (30kcal, 2023-11-04)
 Total calories burnt on 2023-11-04: 230kcal
 ```
+
+### Exiting the application: `exit`
+Exits the application.
+
+**Example of usage**
+```
+exit
+```
+
+**Expected output**
+```
+Goodbye! Hope to see you again soon!
+```
+Upon exiting the application, there should be three files in the data folder will 
+that contains the profile data, meals and workouts as shown below.
+
+<img src="images/DataDirectory.png" width = 70% height = 70%>
+
+The contents of profile.txt:
+
+<img src="images/ProfileFile.png" width = 50% height = 50%>
+
+The contents of mealList.txt:
+
+<img src="images/MealFile.png" width = 50% height = 50%>
+
+The contents of workoutList.txt:
+
+<img src="images/MealFile.png" width = 50% height = 50%>
+
 
 
 ## FAQ
