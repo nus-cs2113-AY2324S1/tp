@@ -6,7 +6,9 @@
   * [**Setting up, getting started**](#setting-up-getting-started)
   * [**Design**](#design)
     * [Architecture](#architecture)
+    * [How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other)
     * [Ui Component](#ui-component)
+    * [Ui Component](#ui-component-1)
     * [Parser Component](#parser-component)
     * [Storage Component](#storage-component)
     * [Data Component](#data-component)
@@ -25,9 +27,7 @@
     * [Target user profile](#target-user-profile)
     * [Value proposition](#value-proposition)
     * [User stories](#user-stories)
-<!-- TOC -->
-
---------------------------------------------------------------------------------------------------------------------
+<!-- TOC -->--------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 [addressbook-level2](https://github.com/se-edu/addressbook-level2) <br>
@@ -63,13 +63,14 @@ The bulk of the app’s work is done by the following components:
 - `Parser` : Makes sense of user input to return the appropriate command
 - `Command` : Executes the command requested by the user.
 
-**How the architecture components interact with each other:**
+### How the Architecture Components Interact with Each Other
 
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 ![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
 *Figure 2: Architecture Encode Sequence Diagram*
 
+### Ui Component
 ### Ui Component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
 
@@ -170,7 +171,7 @@ The data are then packaged nicely in a `leftAlignFormat`, with (indexNum + ". " 
    e.g. (1. Chicken Rice $2.50) is shown.
 
 ### Add Order
-A add_order command can be used to add `order` to an `orderList` in `Sales`.
+An add_order command can be used to add `order` to an `orderList` in `Sales`.
 
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of an add_order command.
 ![Add_Order Execution](images/class/AddOrderCommandClass.png)
