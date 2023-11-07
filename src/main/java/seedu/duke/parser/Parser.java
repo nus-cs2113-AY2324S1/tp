@@ -94,6 +94,24 @@ public class Parser {
             resultCommand = "list_exchange_rates";
         } else if (commandLowerCase.startsWith("update exchange rate ")) {
             resultCommand = "update_exchange_rate";
+        } else if (commandLowerCase.startsWith("help add")) {
+            resultCommand = "help_add";
+        } else if (commandLowerCase.startsWith("help list")) {
+            resultCommand = "help_list";
+        } else if (commandLowerCase.startsWith("help delete")) {
+            resultCommand = "help_delete";
+        } else if (commandLowerCase.startsWith("help edit")) {
+            resultCommand = "help_edit";
+        } else if (commandLowerCase.startsWith("help balance")) {
+            resultCommand = "help_balance";
+        } else if (commandLowerCase.startsWith("help update exchange rate")) {
+            resultCommand = "help_update_exchange_rate";
+        } else if (commandLowerCase.startsWith("help find")) {
+            resultCommand = "help_find";
+        } else if (commandLowerCase.startsWith("help clear")) {
+            resultCommand = "help_clear";
+        } else if (commandLowerCase.startsWith("help exit")) {
+            resultCommand = "help_exit";
         } else {
             resultCommand = "invalid";
         }

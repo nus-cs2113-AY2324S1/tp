@@ -44,6 +44,7 @@ public class Duke {
     private final GetFromTxt get;
     private final ExchangeRateManager exchangeRateManager;
     private final ExchangeRateFileHandler exchangeRateFileHandler;
+    private final UsageInstructions usageInstructions;
 
     public Duke() {
         ui = new Ui();
@@ -54,6 +55,7 @@ public class Duke {
         get = new GetFromTxt(storagePath);
         exchangeRateManager = ExchangeRateManager.getInstance();
         exchangeRateFileHandler = new ExchangeRateFileHandler("./data/ExchangeRates.txt");
+        usageInstructions = new UsageInstructions();
     }
 
     /**
@@ -147,7 +149,63 @@ public class Duke {
             break;
 
         case "help":
-            new UsageInstructions(ui).getHelp();
+            Ui.showLineDivider();
+            usageInstructions.getHelp();
+            Ui.showLineDivider();
+            break;
+
+        case "help_add":
+            Ui.showLineDivider();
+            usageInstructions.getHelpAddFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_list":
+            Ui.showLineDivider();
+            usageInstructions.getHelpListFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_delete":
+            Ui.showLineDivider();
+            usageInstructions.getHelpDeleteFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_find":
+            Ui.showLineDivider();
+            usageInstructions.getHelpFindFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_edit":
+            Ui.showLineDivider();
+            usageInstructions.getHelpEditFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_update_exchange_rate":
+            Ui.showLineDivider();
+            usageInstructions.getHelpUpdateExchangeRateFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_clear":
+            Ui.showLineDivider();
+            usageInstructions.getHelpClearFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_balance":
+            Ui.showLineDivider();
+            usageInstructions.getHelpBalanceFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_exit":
+            Ui.showLineDivider();
+            usageInstructions.getHelpExitFunction();
+            Ui.showLineDivider();
             break;
 
         case "balance":
