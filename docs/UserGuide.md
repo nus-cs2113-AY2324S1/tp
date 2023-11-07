@@ -4,6 +4,7 @@
 * [User Guide](#user-guide)
   * [Introduction](#introduction)
   * [Quick Start](#quick-start)
+  * [Glossary](#glossary)
   * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a dish : `add`](#adding-a-dish--add)
@@ -26,7 +27,7 @@
 ---------------------------------------------------
 ## Introduction
 
-CafeCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
+CaféCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
 ---------------------------------------------------
 ## Quick Start
@@ -40,6 +41,7 @@ Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > 
 ```
+
 ---------------------------------------------------
 ## Features
 > **Notes about command format:**
@@ -327,8 +329,9 @@ Format: `bye`
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Known Issues
-- The application is unable to read the data text files if they have been edited directly in the wrong decoding format
-- For edit price command, special characters can be entered in the price argument
+- The application is unable to read the data text files if they have been edited directly in the wrong decoding format.
+- The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
+- The application is unable to support unit conversion, hence only ml ang g are accepted as ingredient unit.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -350,3 +353,7 @@ Format: `bye`
 | **Help**                  | `help`                                                                                                                                                                                                                                                 |
 | **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
 
+---------------------------------------------------
+## Glossary
+- **Dish index**: Index of the dish according to `list_menu`.
+- **stock**: The quantity of ingredient available in the pantry of the cafe.

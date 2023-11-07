@@ -37,12 +37,6 @@
 Refer to the guide [_UserGuide_](UserGuide.md).
 
 --------------------------------------------------------------------------------------------------------------------
-## Non-functional requirements
-
-1. This application requires the use of Java 11.
-2. This application should work on most OS environment.
-
---------------------------------------------------------------------------------------------------------------------
 ## **General notes**
 
 Only relevant attributes/associations/methods will be included in the UML diagram.
@@ -309,6 +303,13 @@ Café proprietors who ***love*** typing on CLI and are seeking for a software so
 
 Our product aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
+--------------------------------------------------------------------------------------------------------------------
+## **Requirements**
+### Non-functional requirements
+
+1. This application requires the use of Java 11.
+2. This application should work on most mainstream OS.
+
 ### User stories
 
 | Priority | As a …​                                                   | I want to …​                                            | So that I can…​                                                                         |
@@ -326,3 +327,8 @@ Our product aims to optimize managing of inventory and cash flow in a restaurant
 | `* *`    | clumsy cafe owner who works 7 days a week                 | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
 
 *{More to be added}*
+
+--------------------------------------------------------------------------------------------------------------------
+## **Glossary**
+
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
