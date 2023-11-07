@@ -36,6 +36,11 @@ public class Encoder {
             dishString.append(System.lineSeparator());
             menuStringList.add(String.valueOf(dishString));
         }
+        ArrayList<String> menuStringListHashed = hashEncoding(menuStringList);
+        return menuStringListHashed;
+    }
+
+    private static ArrayList<String> hashEncoding(ArrayList<String> menuStringList) {
         String menuStringListAsString = String.join(", ", menuStringList).trim();
         //System.out.println("Original: \n" + menuStringListAsString);
         String menuStringListAsStringWithoutLine = menuStringListAsString.replace("\n", "").replace("\r", "");
