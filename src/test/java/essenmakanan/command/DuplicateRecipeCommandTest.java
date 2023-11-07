@@ -1,7 +1,8 @@
-package essenmakanan.recipe;
+package essenmakanan.command;
 
-import essenmakanan.command.DuplicateRecipeCommand;
 import essenmakanan.ingredient.Ingredient;
+import essenmakanan.recipe.Recipe;
+import essenmakanan.recipe.RecipeList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DuplicateRecipeTest {
+public class DuplicateRecipeCommandTest {
     private RecipeList recipes;
     private Recipe recipe;
     private Recipe duplicatedRecipe;
