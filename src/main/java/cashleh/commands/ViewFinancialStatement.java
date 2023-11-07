@@ -4,8 +4,6 @@ import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.FinancialStatement;
 import cashleh.transaction.IncomeStatement;
 
-import java.util.logging.Level;
-
 /**
  * This class extends the Command class and is used to encapsulate the action of viewing
  * data relative to the financial statement. When executed, it displays
@@ -22,6 +20,6 @@ public class ViewFinancialStatement extends Command {
     public void execute() {
         assert financialStatement != null;
         financialStatement.printTransactions();
-        logger.log(Level.INFO, "financial statement was successfully displayed");
+        logger.log(loggerLevel, "financial statement was successfully displayed");
     }
 }

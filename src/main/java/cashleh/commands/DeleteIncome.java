@@ -4,7 +4,6 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.transaction.IncomeStatement;
 import cashleh.Ui;
 
-import java.util.logging.Level;
 /**
  * This class extends the Command class and is used to
  * encapsulate the action of deleting an income from the application's income statement.
@@ -35,7 +34,7 @@ public class DeleteIncome extends Command {
                 "Noted! CashLeh has removed the following income:",
                 incomeBeingDeleted
             });
-            logger.log(Level.INFO, "income entry was successfully deleted");
+            logger.log(loggerLevel, "income entry was successfully deleted");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();
         }
