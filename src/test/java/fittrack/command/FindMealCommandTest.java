@@ -6,7 +6,6 @@ import fittrack.MealList;
 import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Meal;
-import fittrack.parser.CommandParser;
 import fittrack.parser.PatternMatchFailException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
