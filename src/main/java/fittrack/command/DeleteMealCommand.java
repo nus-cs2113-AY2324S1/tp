@@ -1,10 +1,9 @@
 package fittrack.command;
 
 import fittrack.data.Meal;
-import fittrack.parser.CommandParser;
+import fittrack.parser.*;
 import fittrack.parser.IndexOutOfBoundsException;
 import fittrack.parser.NumberFormatException;
-import fittrack.parser.PatternMatchFailException;
 
 public class DeleteMealCommand extends Command {
     public static final String COMMAND_WORD = "deletemeal";
@@ -39,7 +38,7 @@ public class DeleteMealCommand extends Command {
 
     // @@author NgLixuanNixon
     @Override
-    public void setArguments(String args, CommandParser parser) throws NumberFormatException {
+    public void setArguments(String args, CommandParser parser) throws ParseException {
         mealIndex = parser.parseIndex(args);
     }
     // @@author

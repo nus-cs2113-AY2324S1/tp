@@ -240,10 +240,17 @@ public class CommandParser {
     }
 
     // @@author NgLixuanNixon
-    public int parseIndex(String index) throws NumberFormatException {
+    public int parseIndex(String index) throws ParseException {
         assert index != null;
+        if (index.isEmpty()) {
+            throw new PatternMatchFailException();
+        }
         try {
-            return Integer.parseInt(index);
+            int idx = Integer.parseInt(index);
+            if (idx <= 0) {
+                throw IndexOutOfBoundsException.INDEX_INVALID;
+            }
+            return idx;
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException("Index must be an integer.");
         }

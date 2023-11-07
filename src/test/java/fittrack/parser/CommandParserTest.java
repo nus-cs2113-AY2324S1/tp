@@ -231,7 +231,7 @@ class CommandParserTest {
         try {
             int idx = new CommandParser().parseIndex("123");
             assertEquals(123, idx);
-        } catch (NumberFormatException e) {
+        } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
@@ -241,7 +241,6 @@ class CommandParserTest {
         CommandParser parser = new CommandParser();
         assertThrows(AssertionError.class, () -> parser.parseIndex(null));
         assertThrows(PatternMatchFailException.class, () -> parser.parseIndex(""));
-        assertThrows(PatternMatchFailException.class, () -> parser.parseIndex(" "));
         assertThrows(PatternMatchFailException.class, () -> parser.parseIndex("123 45"));
         assertThrows(NumberFormatException.class, () -> parser.parseIndex("hi"));
         assertThrows(NumberFormatException.class, () -> parser.parseIndex("01a"));

@@ -1,10 +1,9 @@
 package fittrack.command;
 
-import fittrack.parser.CommandParser;
+import fittrack.parser.*;
+import fittrack.data.Workout;
 import fittrack.parser.IndexOutOfBoundsException;
 import fittrack.parser.NumberFormatException;
-import fittrack.parser.PatternMatchFailException;
-import fittrack.data.Workout;
 
 public class DeleteWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "deleteworkout";
@@ -39,7 +38,7 @@ public class DeleteWorkoutCommand extends Command {
 
     // @@author marklin2234
     @Override
-    public void setArguments(String args, CommandParser parser) throws NumberFormatException {
+    public void setArguments(String args, CommandParser parser) throws ParseException {
         workoutIndex = parser.parseIndex(args);
     }
     // @@author
