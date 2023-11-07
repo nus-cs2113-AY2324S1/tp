@@ -7,7 +7,6 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.parser.ParserUtil;
-import seedu.cafectrl.storage.CorruptedDataException;
 import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.Ui;
 
