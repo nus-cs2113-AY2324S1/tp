@@ -3,16 +3,16 @@ package fittrack.data;
 import java.util.Objects;
 import java.util.Map;
 
+// @@author J0shuaLeong
 public class Bmi {
 
     public final double value;
 
-    // @@author J0shuaLeong
+
     // Method for test
     Bmi(double bmi) {
         this.value = bmi;
     }
-    // @@author
 
     public Bmi(Height height, Weight weight) {
         assert (height != null && height.value > 0 && weight != null);
