@@ -42,7 +42,7 @@ class FindMealCommandTest {
     void assertFindCommandBehavior(String commandLine, String keyword) throws PatternMatchFailException {
         FindMealCommand findCommand = new FindMealCommand(commandLine);
         findCommand.setArguments(keyword, new CommandParser());
-        findCommand.setData(null, mealList, null, null);
+        findCommand.setData(null, mealList, null, null, null);
         CommandResult result = findCommand.execute();
         assertEquals(result1, result.getFeedback());
     }
