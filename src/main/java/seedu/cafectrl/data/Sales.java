@@ -64,14 +64,9 @@ public class Sales {
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
 
-            //ui.showSalesTop(day + 1);
-            ui.showSalesTop2(day + 1);
+            ui.showSalesTop(day + 1);
             orderList.printOrderList(menu, ui);
-            if (day < orderLists.size() - 1) {
-                ui.showSalesDivider();
-            } else {
-                ui.showSalesBottom();
-            }
+            ui.showSalesBottom();
         }
     }
 
