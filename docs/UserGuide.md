@@ -199,9 +199,7 @@ Adds one or more ingredients to the pantry
 
 Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
 
-* `INGREDIENT_QTY` must have the following format:
-  * Must be an integer
-  * Must contain the unit ml or g specifically
+* `INGREDIENT_QTY` must contain the unit ml or g specifically
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`

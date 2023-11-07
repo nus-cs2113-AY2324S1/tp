@@ -51,5 +51,5 @@ public class ErrorMessages {
             + "Ingredient format: ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example: ingredient/milk qty/200ml, ingredient/chicken qty/100g";
-
+    public static final String INVALID_INGREDIENT_QTY = "Invalid quantity! Please enter a valid quantity :)";
 }

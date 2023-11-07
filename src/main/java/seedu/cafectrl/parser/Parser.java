@@ -31,7 +31,6 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,8 +70,11 @@ public class Parser implements ParserUtil {
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(.*) price/(.*)";
+
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+
+
     private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
 
     //@@author ziyi105
@@ -274,6 +276,10 @@ public class Parser implements ParserUtil {
                 continue;
             }
 
+            if (isInvalidQty(ingredientQty)) {
+                throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY);
+            }
+
             if (isEmptyUnit(ingredientUnit)) {
                 throw new ParserException(ErrorMessages.EMPTY_UNIT_MESSAGE);
             }
@@ -289,6 +295,7 @@ public class Parser implements ParserUtil {
 
         return ingredients;
     }
+
 
     /**
      * Converts text of price to float while also checking if the price input is within reasonable range
@@ -443,6 +450,8 @@ public class Parser implements ParserUtil {
         try {
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
             return new BuyIngredientCommand(ingredients, ui, pantry);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.INVALID_INGREDIENT_QTY, ui);
         } catch (Exception e) {
             return new IncorrectCommand(e.getMessage(), ui);
         }
@@ -454,6 +463,10 @@ public class Parser implements ParserUtil {
 
     private static boolean isEmptyUnit(String ingredientUnit) {
         return ingredientUnit.equals("");
+    }
+
+    private static boolean isInvalidQty(int ingredientQty) {
+        return ingredientQty < 1;
     }
 
     //@@author ziyi105
