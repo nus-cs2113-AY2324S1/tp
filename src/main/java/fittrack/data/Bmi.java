@@ -48,7 +48,7 @@ public class Bmi {
                 return entry.getKey();
             }
         }
-        return "Unknown Category";
+        return "Obese";
     }
 
     @Override
