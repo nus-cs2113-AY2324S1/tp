@@ -23,18 +23,34 @@ public class Storage {
         this.ui = ui;
     }
 
-    private boolean isFileCorrupted(ArrayList<String> encodedMenu) {
-        int last_index = encodedMenu.size() - 1;
-        String hashString = encodedMenu.get(last_index);
+    //@@author Cazh1
+    /**
+     * Boolean to detect if the text save file has been tampered with
+     *
+     * @param encodedStringArrayList The arraylist of string read from text save file
+     * @return true is the file's hash is not normal or does not match the newly generated hash, false otherwise
+     */
+    private boolean isFileCorrupted(ArrayList<String> encodedStringArrayList) {
+        //Hash string is stored as last in the ArrayList
+        int last_index = encodedStringArrayList.size() - 1;
+        String hashString = encodedStringArrayList.get(last_index);
+
+        //Checks if the saved Hash is abnormal
         if (((!hashString.matches("^[0-9]+$")) && (!hashString.matches("^-[0-9]+$"))) ||
                 hashString.matches("^0{2,}$")) {
             //logger.log(Level.INFO, "Corrupted data file");
             return true;
         }
+
         int fileHash = Integer.parseInt(hashString);
-        encodedMenu.remove(last_index);
-        String encodedMenuAsString = String.join(", ", encodedMenu).trim();
+        //Removes the saved Hash String for decoding
+        encodedStringArrayList.remove(last_index);
+
+        //Prepares String in same format as when encoding, generates Hash from the save file content
+        String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
         int encodedMenuHash = encodedMenuAsString.hashCode();
+
+        //Checks if the generated Hash matches the saved Hash
         if (encodedMenuHash != fileHash) {
             return true;
         }

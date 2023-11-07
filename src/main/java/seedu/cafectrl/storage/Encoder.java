@@ -18,6 +18,29 @@ import java.util.ArrayList;
  */
 public class Encoder {
     private static final String DIVIDER = " | ";
+
+    //@@author Cazh1
+    /**
+     * Generates a hash for the content to be saved into text save file
+     *
+     * @param stringArrayList The arraylist of String to be saved into text save file
+     * @return arraylist of String with the generated hash
+     */
+    private static ArrayList<String> hashEncoding(ArrayList<String> stringArrayList) {
+        String stringArrayListAsString = String.join(", ", stringArrayList).trim();
+
+        //The generated String has line breaks, this removes line breaks
+        String stringArrayListAsStringInOneLine = stringArrayListAsString.replace("\n", "").replace("\r", "");
+
+        //Generate Hash from content
+        int stringArrayListHash = stringArrayListAsStringInOneLine.hashCode();
+        String stringArrayListHashAsString = String.valueOf(stringArrayListHash);
+
+        //Adds generated Hash into the original ArrayList<String>
+        stringArrayList.add(stringArrayListHashAsString);
+        return stringArrayList;
+    }
+
     //@@author ShaniceTang
     /**
      * Encodes a Menu object into a list of strings representing its contents, suitable for saving to a file.
@@ -38,18 +61,6 @@ public class Encoder {
         }
         ArrayList<String> menuStringListHashed = hashEncoding(menuStringList);
         return menuStringListHashed;
-    }
-
-    private static ArrayList<String> hashEncoding(ArrayList<String> menuStringList) {
-        String menuStringListAsString = String.join(", ", menuStringList).trim();
-        //System.out.println("Original: \n" + menuStringListAsString);
-        String menuStringListAsStringWithoutLine = menuStringListAsString.replace("\n", "").replace("\r", "");
-        //System.out.println("Replace: \n" + menuStringListAsStringWithoutLine);
-        int menuStringListHash = menuStringListAsStringWithoutLine.hashCode();
-        String menuStringListHashAsString = String.valueOf(menuStringListHash);
-        //System.out.println(menuStringListHashAsString);
-        menuStringList.add(menuStringListHashAsString);
-        return menuStringList;
     }
 
     /**
