@@ -108,7 +108,6 @@ public class Ui {
         String leftAlignFormat = "| %-38s | %-12s |%n";
         System.out.format(leftAlignFormat, dishName, dishPrice);
     }
-    //+-----------------+------+
 
     /**
      * show edit price message to user
@@ -146,10 +145,10 @@ public class Ui {
         showToUser("Available Dishes: " + numberOfDishes);
     }
 
-    public void showNeededRestock(String ingredientName, int currentQuantity, String unit, String neededIngredient){
-        showToUser("Please Restock: " + ingredientName
-                , "Current " + ingredientName + ": " + currentQuantity + unit
-                , "Needed " + ingredientName + ": " + neededIngredient);
+    public void showNeededRestock(String ingredientName, int currentQuantity, String unit, int neededIngredient) {
+        String rowFormat = "| %-38s | %-12s | %-12s |%n";
+        System.out.format(rowFormat, ingredientName, currentQuantity + unit, neededIngredient + unit);
+        showToUser(Messages.RESTOCK_END_CAP);
     }
 
     /**

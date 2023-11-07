@@ -3,6 +3,7 @@ package seedu.cafectrl.data;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -153,16 +154,21 @@ public class Pantry {
     public int calculateMaxDishes(Dish dish, Menu menu) {
         int maxNumofDish = Integer.MAX_VALUE;
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
+        boolean restockHeaderDisplayed = false;
 
         for (Ingredient dishIngredient : dishIngredients) {
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
+            if (!restockHeaderDisplayed && numOfDish == 0) {
+                ui.showToUser(Messages.RESTOCK_CORNER, Messages.RESTOCK_TITLE, Messages.RESTOCK_CORNER);
+                restockHeaderDisplayed = true;
+            }
+
             if (numOfDish == 0) {
                 handleRestock(dishIngredient);
             }
         }
-
         return maxNumofDish;
     }
 
@@ -194,8 +200,8 @@ public class Pantry {
 
         int currentQuantity = (stockIngredient == null) ? 0 : stockIngredient.getQty();
         String unit = dishIngredient.getUnit();
-        String neededIngredient = dishIngredient.toString();
-        ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededIngredient);
+        int neededQuantity = dishIngredient.getQty();
+        ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededQuantity);
     }
 
     /**
