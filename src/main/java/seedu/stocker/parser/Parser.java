@@ -80,7 +80,8 @@ public class Parser {
             if (arguments.isEmpty()) {
                 return new CheckOutCommand();
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckOutCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        CheckOutCommand.MESSAGE_USAGE));
             }
 
         case ExitCommand.COMMAND_WORD:
@@ -100,7 +101,8 @@ public class Parser {
             if (arguments.isEmpty()) {
                 return new ViewCartCommand();
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCartCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ViewCartCommand.MESSAGE_USAGE));
             }
 
         case RegisterCommand.COMMAND_WORD:
@@ -119,14 +121,16 @@ public class Parser {
             if (arguments.isEmpty()) {
                 return new ShowStockLevelCommand();
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowStockLevelCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ShowStockLevelCommand.MESSAGE_USAGE));
             }
 
         case ListVendorCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
                 return new ListVendorCommand();
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListVendorCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListVendorCommand.MESSAGE_USAGE));
             }
 
         case SetThresholdCommand.COMMAND_WORD:
@@ -136,21 +140,24 @@ public class Parser {
             if (arguments.isEmpty()) {
                 return new ListThresholdCommand();
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListThresholdCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListThresholdCommand.MESSAGE_USAGE));
             }
 
         case ListDescriptionsCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
                 return new ListDescriptionsCommand();
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDescriptionsCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListDescriptionsCommand.MESSAGE_USAGE));
             }
 
         case ListVendorSupplyCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
                 return new ListVendorSupplyCommand(arguments);
             } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListVendorSupplyCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListVendorSupplyCommand.MESSAGE_USAGE));
             }
 
         case FindVendorSupplyCommand.COMMAND_WORD:
@@ -227,7 +234,7 @@ public class Parser {
                 return new AddToCartCommand(name, quantity);
             } else {
                 return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
             }
         } catch (NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
