@@ -126,7 +126,8 @@ public class GetFromTxt {
                 if (!commandFromFile.equals("I")){
                     dateFromFile = LocalDate.parse(stringDate.split(" \\|type ")[0]);
                     expenseType = Integer.parseInt(textLine.split(" \\|type ")[1]);
-                } else{
+                }
+                else{
                     dateFromFile = LocalDate.parse(stringDate);
                 }
                 // Create appropriate objects based on the commandFromFile

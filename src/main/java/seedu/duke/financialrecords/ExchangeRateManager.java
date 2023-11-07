@@ -107,6 +107,7 @@ public class ExchangeRateManager {
      * @param currency The currency to convert.
      */
     public void showCurrencyConversionMessage(String currency) {
+        Ui.showLineDivider();
         currency = currency.toUpperCase();
         System.out.printf("We have converted %s to SGD at the SGD/%s rate of %s\n",
                 currency, currency, exchangeRates.get(currency));

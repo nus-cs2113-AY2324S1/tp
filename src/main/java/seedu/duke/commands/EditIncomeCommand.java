@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.financialrecords.Income;
-import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -49,11 +48,9 @@ public class EditIncomeCommand extends Command {
             Income newIncome = incomeCommand.getNewIncome();
             Income removedIncome = incomes.get(index);
             incomes.set(index, newIncome);
-            Ui.showLineDivider();
             System.out.println("Noted. The income record you've specified has been changed:");
             System.out.println("Before: " + removedIncome);
             System.out.println("After: " + newIncome);
-            Ui.showLineDivider();
         } catch (IndexOutOfBoundsException e) {
             throw new KaChinnnngException("Oops! Income " + (index+1) + " does not exist");
         }

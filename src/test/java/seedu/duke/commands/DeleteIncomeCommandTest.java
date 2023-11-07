@@ -38,7 +38,7 @@ public class DeleteIncomeCommandTest {
         String fullCommand = "delete income 1";
 
         // Act
-        assertDoesNotThrow(() -> deleteIncomeCommand.execute(incomes, fullCommand));
+        assertDoesNotThrow(() -> deleteIncomeCommand.execute(incomes, fullCommand, ui));
 
         // Assert
         assertEquals(0, incomes.size());
@@ -53,7 +53,7 @@ public class DeleteIncomeCommandTest {
         String fullCommand = "delete income";
 
         // Act and Assert
-        assertThrows(KaChinnnngException.class, () -> deleteIncomeCommand.execute(incomes, fullCommand));
+        assertThrows(KaChinnnngException.class, () -> deleteIncomeCommand.execute(incomes, fullCommand, ui));
     }
 
     /**
@@ -65,7 +65,7 @@ public class DeleteIncomeCommandTest {
         String fullCommand = "delete income 1";
 
         // Act and Assert
-        assertThrows(KaChinnnngException.class, () -> deleteIncomeCommand.execute(incomes, fullCommand));
+        assertThrows(KaChinnnngException.class, () -> deleteIncomeCommand.execute(incomes, fullCommand, ui));
     }
 
     /**
@@ -78,6 +78,6 @@ public class DeleteIncomeCommandTest {
         String fullCommand = "delete income 1";
 
         // Act and Assert
-        assertThrows(KaChinnnngException.class, () -> deleteIncomeCommand.execute(incomes, fullCommand));
+        assertThrows(KaChinnnngException.class, () -> deleteIncomeCommand.execute(incomes, fullCommand, ui));
     }
 }
