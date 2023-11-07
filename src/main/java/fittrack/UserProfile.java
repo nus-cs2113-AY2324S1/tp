@@ -74,8 +74,8 @@ public class UserProfile {
     public String toString() {
         return "Height: " + height.toString() + "\n" +
                 "Weight: " + weight.toString() + "\n" +
+                "Gender: " + gender.toString() + "\n" +
                 "Daily calorie limit: " + dailyCalorieLimit.toString() + "\n" +
-                "BMI: " + bmi.toString() + "\n" +
-                "Gender: " + gender.toString();
+                "BMI: " + bmi.toString();
     }
 }

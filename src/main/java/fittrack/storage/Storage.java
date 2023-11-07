@@ -5,7 +5,6 @@ import fittrack.UserProfile;
 import fittrack.WorkoutList;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
-import fittrack.Ui;
 import fittrack.parser.IllegalValueException;
 import java.io.FileNotFoundException;
 
@@ -18,14 +17,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
+// @@author J0shuaLeong
 public class Storage {
 
     private static final String FILE_DIRECTORY = "data";
     private static final String PROFILE_FILE_PATH = "./data/Profile.txt";
     private static final String MEAL_LIST_FILE_PATH = "./data/mealList.txt";
     private static final String WORKOUT_LIST_FILE_PATH = "./data/workoutList.txt";
-    private final Ui ui = new Ui();
     private File profileFile;
     private File mealFile;
     private File workoutFile;

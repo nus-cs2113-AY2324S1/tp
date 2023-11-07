@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// @@author J0shuaLeong
 public class MealListDecoder {
 
     private static final Pattern MEAL_PATTERN = Pattern.compile(

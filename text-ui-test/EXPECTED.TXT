@@ -25,9 +25,9 @@ Please enter your height (in cm), weight (in kg), gender (M or F), and daily cal
 Here are your profile settings.
 Height: Height: 180.0cm
 Weight: 80.0kg
+Gender: Male
 Daily calorie limit: 2000kcal
 BMI: 24.69
-Gender: Male
 ____________________________________________________________
 `viewprofile 123` is an invalid command.
 `viewprofile` shows all profile details.
@@ -36,16 +36,16 @@ Type `viewprofile` to view your profile.
 Your Profile:
 Height: 180.0cm
 Weight: 80.0kg
+Gender: Male
 Daily calorie limit: 2000kcal
 BMI: 24.69
-Gender: Male
 
 Here is your updated profile:
 Height: 170.0cm
 Weight: 70.0kg
+Gender: Male
 Daily calorie limit: 1500kcal
 BMI: 24.22
-Gender: Male
 
 `editprofileh/120w/80g/Ml/100` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
@@ -57,9 +57,9 @@ Type `editprofile h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CALORIE_LIMIT>` to edit.
 Your Profile:
 Height: 170.0cm
 Weight: 70.0kg
+Gender: Male
 Daily calorie limit: 1500kcal
 BMI: 24.22
-Gender: Male
 
 Your current BMI is 24.22
 BMI falls under NORMAL WEIGHT category

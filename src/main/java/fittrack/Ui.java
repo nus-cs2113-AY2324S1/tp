@@ -69,7 +69,7 @@ public class Ui {
     }
 
     public void printPrompt() {
-        System.out.println("How can I help you today?");
+        System.out.println("Welcome back! How can I help you today?");
         printLine();
     }
 

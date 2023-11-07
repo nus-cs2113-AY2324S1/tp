@@ -27,7 +27,6 @@ Type `help` to see a list of commands that you will be able to use in the applic
 
 * [Viewing help guide : `help`](#viewing-help-guide-help)
 * [Exiting the application : `exit`](#exiting-the-application-exit)
-* [Saving to File: `save`](#saving-to-file-save)
 * [Editing your profile : `editprofile`](#editing-your-profile-editprofile)
 * [Viewing your profile : `viewprofile`](#viewing-your-profile-viewprofile)
 * [Checking your current bmi : `bmi`](#checking-your-current-bmi-bmi)
@@ -42,6 +41,38 @@ Type `help` to see a list of commands that you will be able to use in the applic
 * [Viewing list of workout : `viewworkout`](#viewing-list-of-all-workouts-viewworkout)
 * [Find workouts by a keyword: `findworkout`](#finding-workouts-by-a-keyword-findworkout)
 * [Checking total calories burnt on a specific date: `caloriesburnt`](#checking-total-calories-burnt-on-a-specific-date-caloriesburnt)
+
+### First Time Users
+If you are using FitTrack for the first time, you are required to enter your height, weight, gender and daily calorie limit before being 
+able to access all features.
+
+**Format**
+- `h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CARLORIELIMIT>`
+
+**Example of usage**
+```
+Welcome to FitTrack!
+___________.__  __ ___________                     __
+\_   _____/|__|/  |\__    ___/___________    ____ |  | __
+ |    __)  |  \   __\|    |  \_  __ \__  \ _/ ___\|  |/ /
+ |     \   |  ||  |  |    |   |  | \/ __ \  \___|    <
+ \___  /   |__||__|  |____|   |__|  (____  /\___  >__|_ \
+____________________________________________________________
+Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
+h/180 w/70 g/M l/2000
+```
+
+**Expected Output**
+```
+Here are your profile settings.
+Height: Height: 180.0cm
+Weight: 70.0kg
+Gender: Male
+Daily calorie limit: 2000kcal
+BMI: 21.60
+____________________________________________________________
+
+```
 
 
 ### Viewing help guide: `help`
@@ -81,21 +112,6 @@ exit
 ```
 Goodbye! Hope to see you again soon!
 ```
-
-
-### Saving to file: `save`
-Allows user to save profile data, meals and workouts to a text file.
-
-**Example of usage**
-```
-save
-```
-
-**Expected output**
-```
-Your data has been saved!
-```
-
 
 ### Editing your profile: `editprofile`
 Allows user to edit their profile details.
