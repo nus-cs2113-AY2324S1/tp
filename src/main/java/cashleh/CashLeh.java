@@ -11,14 +11,12 @@ import cashleh.exceptions.CashLehException;
 import cashleh.commands.Command;
 import cashleh.commands.Exit;
 
-
 public class CashLeh {
-    private static final int DEFAULT_BUDGET = 1;
     private final Input input = new Input();
     private final ExpenseStatement expenseStatement = new ExpenseStatement();
     private final IncomeStatement incomeStatement = new IncomeStatement();
     private final BudgetHandler budgetHandler =
-            new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement), new Budget(DEFAULT_BUDGET));
+            new BudgetHandler(new FinancialStatement(incomeStatement, expenseStatement), new Budget());
     private final Parser parser = new Parser(expenseStatement, incomeStatement, budgetHandler);
 
     /**
@@ -26,16 +24,14 @@ public class CashLeh {
      */
     public void run() {
         
-        String logo = "    ______           __    __         __  ___\n"
+        String logo = "______           __    __         __  ___\n"
                     + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\\n"
                     + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/\n"
                     + " / /___/ /_/ (__  ) / / / /___/  __/ / / /_/\n"
                     + " \\____/\\__,_/____/_/ /_/_____/\\___/_/ /_(_)\n";
-        String userGuideLink = ("Here is the link to the user guide:"
-                + "https://docs.google.com/document/d/"
-                + "15h45BB5kMkTZ6bkwUHujpYwxVVl80tNEyNUsEVyk5AQ/edit?usp=drive_link");
-        String[] greetingLines = {userGuideLink, logo, "Welcome to 'CashLeh?'! " +
-                "Your one-stop app for managing your finances!", "What is your name?"};
+        String userGuideLink = "https://ay2324s1-cs2113-w12-2.github.io/tp/UserGuide.html";
+        String[] greetingLines = {"Here is the link to the user guide:", userGuideLink, logo,
+            "Welcome to 'CashLeh?'! Your one-stop app for managing your finances!", "What is your name?"};
 
         Ui.printMultipleText(greetingLines);
 
@@ -43,15 +39,17 @@ public class CashLeh {
         Ui.printText("Hello " + userName);
         FileStorage fileStorage = new FileStorage(userName);
 
-        Ui.printText("Please begin by setting a budget " +
-                "by using the format \"updateBudget DOUBLE\".");
-
         try {
-            fileStorage.readFromFile(incomeStatement, expenseStatement);
+            fileStorage.readFromFile(incomeStatement, expenseStatement, budgetHandler);
         } catch (CashLehException e) {
             Ui.printMultipleText(new String[] {
                 e.getMessage()
             });
+        }
+
+        if (!budgetHandler.getBudget().isActive()) {
+            Ui.printText("Please begin by setting a budget " +
+                    "by using the format \"updateBudget DOUBLE\".");
         }
 
         Command command = null;
@@ -68,7 +66,7 @@ public class CashLeh {
         }
 
         try {
-            fileStorage.writeToFile(incomeStatement, expenseStatement);
+            fileStorage.writeToFile(incomeStatement, expenseStatement, budgetHandler);
         } catch (CashLehWriteToFileException e) {
             Ui.printMultipleText(new String[]{
                 e.getMessage()

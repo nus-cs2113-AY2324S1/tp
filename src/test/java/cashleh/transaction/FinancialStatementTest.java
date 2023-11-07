@@ -53,7 +53,7 @@ class FinancialStatementTest {
     }
 
     @Test
-    void findTransaction_transactionIsNotFound_throwsException() throws CashLehMissingTransactionException {
+    void findTransaction_transactionIsNotFound_throwsException() {
         assertThrows(CashLehMissingTransactionException.class,
                 () -> financialStatement.findTransaction(
                         "black jack", OptionalDouble.of(5000), LocalDate.now(), LOTTERY_GAMBLING
