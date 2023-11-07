@@ -24,16 +24,19 @@ public class StartRecipeCommandTest {
 
         recipes = new RecipeList();
 
+        // Recipe for Fluffy Bread
         String ingredientString1 = "flour, 200, g";
         String ingredientString2 = "egg, 2, pc";
-        String[] ingredientList1 = {ingredientString1, ingredientString2};
+        String ingredientString3 = "yeast, 50, g";
+        String[] ingredientList1 = {ingredientString1, ingredientString2, ingredientString3};
         RecipeIngredientList recipeIngredientList1 = new RecipeIngredientList(ingredientList1);
         recipe0 = new Recipe("Fluffy Bread", recipeStepList, recipeIngredientList1);
 
-        String ingredientString3 = "noodles, 100, g";
-        String ingredientString4 = "egg, 1, pc";
-        String ingredientString5 = "vegetable, 4, pc";
-        String[] ingredientList2 = {ingredientString3, ingredientString4, ingredientString5};
+        // Recipe for Meatball Noodles
+        String ingredientString4 = "noodles, 100, g";
+        String ingredientString5 = "egg, 1, pc";
+        String ingredientString6 = "vegetable, 4, pc";
+        String[] ingredientList2 = {ingredientString4, ingredientString5, ingredientString6};
         RecipeIngredientList recipeIngredientList2 = new RecipeIngredientList(ingredientList2);
         recipe1 = new Recipe("Meatball Noodles", recipeStepList, recipeIngredientList2);
 
@@ -52,26 +55,16 @@ public class StartRecipeCommandTest {
     public void startRecipe_validRecipeTitle_deleteCorrectly() {
         StartRecipeCommand command = new StartRecipeCommand("Fluffy Bread", recipes, ingredients);
         command.executeCommand();
+
         IngredientList insufficientIngredients = new IngredientList();
         double ingredientQty1 = 100;
         double ingredientQty2 = 1;
         insufficientIngredients.addIngredient(new Ingredient("flour", Double.toString(ingredientQty1), IngredientUnit.GRAM));
         insufficientIngredients.addIngredient(new Ingredient("egg", Double.toString(ingredientQty2), IngredientUnit.PIECE));
-        // insufficientIngredients.addIngredient(new Ingredient("flour","100", IngredientUnit.GRAM));
-        // insufficientIngredients.addIngredient(new Ingredient("egg", "1", IngredientUnit.PIECE));
-        Ingredient checkIng1 = command.getInsufficientIngredients().getIngredient(0);
-        Ingredient checkIng2 = insufficientIngredients.getIngredient(0);
-        String name1 = checkIng1.getName();
-        String name2 = checkIng2.getName();
-
         assert command.getInsufficientIngredients().equals(insufficientIngredients) : "The insufficient quantity was not detected";
+
+        IngredientList missingIngredients = new IngredientList();
+        missingIngredients.addIngredient(new Ingredient("yeast", "50", IngredientUnit.GRAM));
+        assert command.getMissingIngredients().equals(missingIngredients) : "The missing quantity was not detected";
     }
-/*
-    @Test
-    public void startRecipe_validRecipeId_deleteCorrectly() {
-        Command deleteCommand = new DeleteRecipeCommand(recipes, "r/Fry an egg");
-        deleteCommand.executeCommand();
-        assert recipes.getRecipe(0) == recipe0 : "Wrong recipe was removed";
-        assert !recipes.recipeExist(1) : "Recipe was not removed";
-    }*/
 }

@@ -38,10 +38,6 @@ public class StartRecipeCommand extends Command {
         return this.insufficientIngredients;
     }
 
-    public IngredientList getDiffUnitIngredients() {
-        return this.diffUnitIngredients;
-    }
-
     private void getIngredientsStillNeeded() {
         String recipeIngredientName;
         IngredientUnit recipeIngredientUnit;
