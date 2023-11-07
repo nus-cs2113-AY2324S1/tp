@@ -25,6 +25,41 @@
    Amount: 123.21[0m
 [36mto the Financial Planner.[0m
 [36mBalance: 4899.91[0m
+[36mYou have 4 matching cashflows:[0m
+[36m1: Income
+   Type: Salary
+   Amount: 5000.00
+   Description: part time job[0m
+[36m2: Income
+   Type: Allowance
+   Amount: 123.12[0m
+[36m3: Expense
+   Type: Entertainment
+   Amount: 100.00
+   Description: netflix[0m
+[36m4: Expense
+   Type: Shopping
+   Amount: 123.21[0m
+[36mBalance: 4899.91[0m
+[36mYou have 2 matching cashflows:[0m
+[36m1: Income
+   Type: Salary
+   Amount: 5000.00
+   Description: part time job[0m
+[36m2: Income
+   Type: Allowance
+   Amount: 123.12[0m
+[36mIncome Balance: 5123.12[0m
+[36mYou have 2 matching cashflows:[0m
+[36m1: Expense
+   Type: Entertainment
+   Amount: 100.00
+   Description: netflix[0m
+[36m2: Expense
+   Type: Shopping
+   Amount: 123.21[0m
+[36mExpense Balance: 223.21[0m
+[36mNo matching cashflow.[0m
 [36mYou have removed an Income
    Type: Allowance
    Amount: 123.12[0m
