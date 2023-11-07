@@ -568,22 +568,6 @@ public class Parser implements ParserUtil {
         return sales.getOrderList(currentDay);
     }
 
-    //@@author Cazh1
-    /**
-     * Parses the given arguments string to identify task index number.
-     *
-     * @param userInput arguments string to parse as index number
-     * @param command expected String name of the command called
-     * @return the parsed index number
-     * @throws ParseException if no region of the args string could be found for the index
-     * @throws NumberFormatException the args string region is not a valid number
-     */
-    private static int parseArgsAsDisplayedIndex(String userInput, String command)
-            throws ParseException, NumberFormatException {
-        String formattedString = userInput.replace(command, "").trim();
-        return Integer.parseInt(formattedString);
-    }
-
     //@@author ShaniceTang
     /**
      * Extracts the quantity (numeric part) from a given string containing both quantity and unit.
