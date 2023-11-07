@@ -18,6 +18,10 @@ public class CartEntry {
         return this.quantity;
     }
 
+    public void incrQuantity(long delta) {
+        this.quantity += delta;
+    }
+
     /**
      * Returns a string representation of the stock entry.
      *

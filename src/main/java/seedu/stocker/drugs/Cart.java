@@ -24,6 +24,21 @@ public class Cart {
         return entries.isEmpty();
     }
 
+    public CartEntry getEntryBySerialNumber(String serialNumber) {
+        return this.entries.stream()
+                .filter(entry -> entry.getSerialNumber().equals(serialNumber))
+                .findAny().orElse(null);
+    }
+
+    public long getEntryQuantity(String serialNumber) {
+        return this.entries
+                .stream()
+                .filter(entry -> serialNumber.equals(entry.getSerialNumber()))
+                .findFirst()
+                .map(CartEntry::getQuantity)
+                .orElse(0L);
+    }
+
     public void checkOut(SalesList salesList, Inventory inventory) throws DrugNotFoundException {
         salesList.addSale(this);
         for (CartEntry entry : entries) {
