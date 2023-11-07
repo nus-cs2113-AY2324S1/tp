@@ -214,7 +214,6 @@ public class CommandParser {
         }
     }
 
-    public Workout parseWorkout(String workout) throws PatternMatchFailException, NumberFormatException {
     public static Workout parseWorkout(String args) throws PatternMatchFailException, NumberFormatException {
         assert args != null;
         String workout = args.strip();
@@ -259,19 +258,6 @@ public class CommandParser {
             return idx;
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException("Index must be an integer.");
-        }
-    }
-    // @@author
-
-    // @@author NgLixuanNixon
-    public static Date parseDate(String args) throws PatternMatchFailException {
-        assert args != null;
-        String date = args.strip();
-
-        try {
-            return new Date(date);
-        } catch (DateTimeParseException e) {
-            throw new PatternMatchFailException();
         }
     }
     // @@author
