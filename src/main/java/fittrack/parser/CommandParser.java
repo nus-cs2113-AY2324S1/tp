@@ -40,42 +40,16 @@ public class CommandParser {
     public static final String ALL_COMMAND_WORDS = "help, exit,\n" +
             "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
             "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
-            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt";
+            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt\n" +
+            "addsteps, viewsteps, totalsteps";
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
-    private static final String HEIGHT_CG = "height";
-    private static final String WEIGHT_CG = "weight";
-    private static final String GENDER_CG = "gender";
-    private static final String CAL_LIMIT_CG = "calLimit";
-    private static final String NAME_CG = "name";
-    private static final String CALORIES_CG = "calories";
     private static final String DATE_CG = "date";
-    private static final String INDEX_CG = "index";
-    private static final String KEYWORD_CG = "keyword";
     private static final String STEP_CG = "step";
 
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<" + WORD_CG + ">\\S+)(?<" + ARGS_CG + ">.*)"
-    );
-    private static final Pattern PROFILE_PATTERN = Pattern.compile(
-            "h/(?<" + HEIGHT_CG + ">\\S+)\\s+w/(?<" + WEIGHT_CG +
-                    ">\\S+)\\s+g/(?<" + GENDER_CG + ">\\S+)\\s+l/(?<" + CAL_LIMIT_CG + ">\\S+)"
-    );
-    private static final Pattern MEAL_PATTERN = Pattern.compile(
-            "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
-    );
-    private static final Pattern WORKOUT_PATTERN = Pattern.compile(
-            "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
-    );
-    private static final Pattern INDEX_PATTERN = Pattern.compile(
-            "(?<" + INDEX_CG + ">\\S+)"
-    );
-    private static final Pattern DATE_PATTERN = Pattern.compile(
-            "(?<" + DATE_CG + ">\\S+)"
-    );
-    private static final Pattern FIND_PATTERN = Pattern.compile(
-            "(?<" + KEYWORD_CG + ">\\S+)"
     );
     private static final Pattern STEP_PATTERN = Pattern.compile(
             "(?<" + STEP_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
