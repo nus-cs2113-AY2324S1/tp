@@ -77,9 +77,13 @@ Example of usage:
 ```
 add income /de salary /date 01/01/2020 /amt 1000
 ```
+Expected output after successfully add income to the list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)
 ```
 add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 /amt 10.00
 ```
+Expected output after successfully add expense to the list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)
 ```
 add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
@@ -89,6 +93,7 @@ add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt
 ```
 add expense /cat transport /type train /de train to school /date 10/10/2023 /amt 10.00
 ```
+
 
 ### List all entries: list
 Shows a full list of both the expenses and income created by the user.
@@ -115,7 +120,8 @@ delete expense <index>
 ```
 delete income <index>
 ```
-
+Expected output after successfully delete income from the list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)
 
 Use case:
 - Prompts users if index is empty.
@@ -185,6 +191,12 @@ clear expenses
 ```
 clear all
 ```
+Example of successfully clear income list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_income.png?raw=true)
+Example of successfully clear expense list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_expense.png?raw=true)
+Example of successfully clear both income and expense list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_all.png?raw=true)
 
 
 ### Check balance: balance
