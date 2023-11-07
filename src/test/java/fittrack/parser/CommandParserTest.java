@@ -17,7 +17,6 @@ import fittrack.command.FindMealCommand;
 import fittrack.command.FindWorkoutCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
-import fittrack.command.SaveCommand;
 import fittrack.command.ViewMealCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewWorkoutCommand;
@@ -97,7 +96,6 @@ class CommandParserTest {
         getBlankCommandTest(DeleteWorkoutCommand.class, "deleteworkout", null);
         getBlankCommandTest(ViewWorkoutCommand.class, "viewworkout", null);
         getBlankCommandTest(BmiCommand.class, "bmi", null);
-        getBlankCommandTest(SaveCommand.class, "save", null);
         getBlankCommandTest(CaloriesConsumedCommand.class, "caloriesconsumed", null);
         getBlankCommandTest(CheckRecommendedWeightCommand.class, "checkrecommendedweight", null);
         getBlankCommandTest(CaloriesBurntCommand.class, "caloriesburnt", null);

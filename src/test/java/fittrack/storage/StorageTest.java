@@ -2,14 +2,12 @@ package fittrack.storage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
-import java.nio.file.Path;
 
 import fittrack.storage.Storage.StorageOperationException;
 
 
 public class StorageTest {
 
-    public static Path testFolder;
     private static final String TEST_DATA_FOLDER = "test/data/StorageTest";
 
     @Test
