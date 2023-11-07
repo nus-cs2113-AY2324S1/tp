@@ -40,8 +40,7 @@ import java.util.regex.Pattern;
  * into a format that can be interpreted by other core classes
  */
 public class Parser implements ParserUtil {
-    //@@author ziyi105
-    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
+    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
 
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
@@ -89,7 +88,7 @@ public class Parser implements ParserUtil {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand("Incorrect command format!", ui);
+            return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -217,6 +216,7 @@ public class Parser implements ParserUtil {
             }
 
             // To retrieve specific arguments from arguments
+            //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
             float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
