@@ -46,7 +46,7 @@ public class Parser implements ParserUtil {
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
-            + "price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+"
+            + "price/(?<dishPrice>[0-9.\\s]+)\\s+"
             + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
@@ -298,14 +298,21 @@ public class Parser implements ParserUtil {
      * @throws ParserException if price is not within reasonable range
      */
     static float parsePriceToFloat(String priceText) throws ParserException {
+        String trimmedPriceText = priceText.trim();
+
+        final Pattern priceTwoDecimalPlacePattern = Pattern.compile("[0-9]*\\.[0-9]{0,2}|[0-9]+");
+        Matcher priceMatcher = priceTwoDecimalPlacePattern.matcher(trimmedPriceText);
+
+        if (!priceMatcher.matches()) {
+            throw new ParserException(ErrorMessages.PRICE_TOO_MANY_DECIMAL_PLACES);
+        }
+
         float price;
         try {
-            price = Float.parseFloat(priceText.trim());
+            price = Float.parseFloat(trimmedPriceText);
         } catch (NumberFormatException e) {
             throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
         }
-
-        // todo Dexter please help me implement check for 2dp :P
 
         // Specify max and min value for price
         float maxPriceValue = (float) 1000000.00;
