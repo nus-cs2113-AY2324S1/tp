@@ -33,6 +33,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -91,11 +92,15 @@ public class Parser implements ParserUtil {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand("Incorrect command format!", ui);
+            return new IncorrectCommand("Incorrect command format!", ui); //todo: refactor magic string
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        if (isExtraCharAfterSingleWordCommand(commandWord, arguments)) {
+            return new IncorrectCommand(ErrorMessages.INVALID_SINGLE_WORD_COMMAND_FORMAT, ui);
+        }
 
         switch (commandWord) {
 
@@ -144,6 +149,28 @@ public class Parser implements ParserUtil {
         default:
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
+    }
+
+    //@@author DextheChik3n
+    private static boolean isExtraCharAfterSingleWordCommand(String commandWord, String arguments) {
+        String[] singleWordCommands = {
+                ListMenuCommand.COMMAND_WORD,
+                ViewTotalStockCommand.COMMAND_WORD,
+                NextDayCommand.COMMAND_WORD,
+                PreviousDayCommand.COMMAND_WORD,
+                ShowSalesCommand.COMMAND_WORD,
+                HelpCommand.COMMAND_WORD,
+                ExitCommand.COMMAND_WORD
+        };
+
+        boolean isSingleWordCommand = Arrays.asList(singleWordCommands).contains(commandWord);
+        boolean isArgumentsBlank = arguments.isBlank();
+
+        if (isSingleWordCommand && !isArgumentsBlank) {
+            return true;
+        }
+
+        return false;
     }
 
     //All prepareCommand Classes

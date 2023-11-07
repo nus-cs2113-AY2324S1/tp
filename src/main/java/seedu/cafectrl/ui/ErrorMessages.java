@@ -45,4 +45,6 @@ public class ErrorMessages {
             + "command.\n";
     public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer for the 'day' field!";
     public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, is that what you want?";
+    public static final String INVALID_SINGLE_WORD_COMMAND_FORMAT = "Error: Incorrect command format, "
+            + "ensure the exact command format is entered without any extra characters";
 }
