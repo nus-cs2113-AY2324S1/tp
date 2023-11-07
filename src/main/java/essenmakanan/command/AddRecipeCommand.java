@@ -162,6 +162,17 @@ public class AddRecipeCommand extends Command {
                     throw new EssenFormatException();
                 }
 
+                // check if recipe already exist
+                int recipeIndex = recipes.getIndexOfRecipe(content.trim());
+                if (recipes.recipeExist(recipeIndex)) {
+                    if (overwriteExistingRecipe()) {
+                        recipes.deleteRecipe(recipeIndex);
+                    } else {
+                        System.out.println("Operation cancelled!");
+                        return;
+                    }
+                }
+
                 recipeTitle = RecipeParser.parseRecipeTitle(content);
 
 
@@ -227,6 +238,19 @@ public class AddRecipeCommand extends Command {
             index += subStr.length();  // Move to the end of the found substring and continue
         }
         return count;
+    }
+
+    public boolean overwriteExistingRecipe() {
+        System.out.println("Recipe already exist! Do you want to overwrite it? (Y/N)");
+        String input = Ui.readUserInput();
+        if (input.equalsIgnoreCase("Y")) {
+            return true;
+        } else if (input.equalsIgnoreCase("N")) {
+            return false;
+        } else {
+            System.out.println("Invalid input! Please enter Y or N");
+            return overwriteExistingRecipe();
+        }
     }
 
 

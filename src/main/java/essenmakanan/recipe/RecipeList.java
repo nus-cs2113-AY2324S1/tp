@@ -53,7 +53,7 @@ public class RecipeList {
     public int getIndexOfRecipe(String recipeTitle) {
         int i = 0;
         for (essenmakanan.recipe.Recipe recipe : recipes) {
-            if (recipe.getTitle().equals(recipeTitle)) {
+            if (recipe.getTitle().equalsIgnoreCase(recipeTitle)) {
                 return i;
             }
             i++;
