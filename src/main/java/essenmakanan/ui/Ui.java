@@ -114,8 +114,8 @@ public class Ui {
                 diffUnitIngredients.listIngredients();
                 printNewLine();
             }
+            System.out.println("Start your recipe again after getting the above ingredients!");
         }
-        System.out.println("Start your recipe again after getting the above ingredients!");
         drawDivider();
     }
 
