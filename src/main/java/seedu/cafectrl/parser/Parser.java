@@ -33,7 +33,6 @@ import seedu.cafectrl.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +42,7 @@ import java.util.regex.Pattern;
  * into a format that can be interpreted by other core classes
  */
 public class Parser implements ParserUtil {
-    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
+    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
 
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
