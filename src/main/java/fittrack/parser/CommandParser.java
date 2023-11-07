@@ -244,6 +244,7 @@ public class CommandParser {
 
     // @@author NgLixuanNixon
     public int parseIndex(String index) throws NumberFormatException {
+        assert index != null;
         try {
             return Integer.parseInt(index);
         } catch (java.lang.NumberFormatException e) {
@@ -268,6 +269,7 @@ public class CommandParser {
     }
 
     public String parseKeyword(String keyword) throws PatternMatchFailException {
+        assert keyword != null;
         if (keyword.isEmpty()) {
             throw new PatternMatchFailException();
         }

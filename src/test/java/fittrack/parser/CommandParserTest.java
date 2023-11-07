@@ -239,7 +239,9 @@ class CommandParserTest {
     @Test
     void parseIndex_fail() {
         CommandParser parser = new CommandParser();
+        assertThrows(AssertionError.class, () -> parser.parseIndex(null));
         assertThrows(PatternMatchFailException.class, () -> parser.parseIndex(""));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseIndex(" "));
         assertThrows(PatternMatchFailException.class, () -> parser.parseIndex("123 45"));
         assertThrows(NumberFormatException.class, () -> parser.parseIndex("hi"));
         assertThrows(NumberFormatException.class, () -> parser.parseIndex("01a"));
@@ -278,6 +280,7 @@ class CommandParserTest {
     @Test
     void parseFind_fail() {
         CommandParser parser = new CommandParser();
+        assertThrows(AssertionError.class, () -> parser.parseKeyword(null));
         assertThrows(PatternMatchFailException.class, () -> parser.parseKeyword(""));
     }
 
