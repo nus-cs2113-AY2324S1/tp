@@ -29,7 +29,7 @@ public class AddRecipeCommand extends Command {
         if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
             // only title and steps are available
             try {
-                this.addWithTitleAndStepsAndIngredients();
+                this.addValidRecipe();
             } catch (EssenFormatException e) {
                 e.handleException();
             }
@@ -67,7 +67,7 @@ public class AddRecipeCommand extends Command {
     private static void addSteps(String step, RecipeStepList recipeStepList, Tag tag) {
         String[] allSteps = step.trim().split("s/");
         for (String eachStep : allSteps) {
-            if (eachStep.length()>0 && eachStep.contains("d/")) {
+            if (eachStep.length() > 0 && eachStep.contains("d/")) {
                 try {
                     String description = eachStep.split("d/")[0].trim();
                     int duration = RecipeParser.parseStepsDuration(eachStep);
@@ -76,7 +76,7 @@ public class AddRecipeCommand extends Command {
                 } catch (EssenFormatException e) {
                     throw new RuntimeException(e);
                 }
-            } else if (eachStep.length()>0) {
+            } else if (eachStep.length() > 0) {
                 recipeStepList.addStep(new Step(eachStep.trim(), tag));
             }
         }
@@ -114,7 +114,7 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
-    public void addWithTitleAndStepsAndIngredients() throws EssenFormatException {
+    public void addValidRecipe() throws EssenFormatException {
 
         // initialisation
         int numberOfSteps = countOccurrences(toAdd, "s/");
@@ -151,12 +151,19 @@ public class AddRecipeCommand extends Command {
 
             switch (typeFlag) {
             case "r":
-                recipeTitle = RecipeParser.parseRecipeTitle(content);
-
                 if (content.isEmpty()) {
                     System.out.println("Recipe title is empty! Please enter valid title after \"r/\"");
                     throw new EssenFormatException();
                 }
+
+                if (!recipeTitle.isEmpty()) {
+                    // user input more than one recipe title
+                    System.out.println("Please only enter one recipe title!");
+                    throw new EssenFormatException();
+                }
+
+                recipeTitle = RecipeParser.parseRecipeTitle(content);
+
 
                 break;
             case "s":
