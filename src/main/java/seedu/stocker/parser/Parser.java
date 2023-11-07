@@ -112,7 +112,12 @@ public class Parser {
             return new LoginCommand();
 
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommand();
+            if (arguments.isEmpty()) {
+                return new SaveCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SaveCommand.MESSAGE_USAGE));
+            }
 
         case AddVendorCommand.COMMAND_WORD:
             return prepareAddVendorCommand(arguments);
