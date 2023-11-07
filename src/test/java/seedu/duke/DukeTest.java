@@ -136,7 +136,7 @@ class DukeTest {
     }
 
     @Test
-    void executeCommand_allHelpFunction_MakeSureCommandIsCorrectlyReturned() throws KaChinnnngException {
+    void executeCommand_allHelpFunction_makeSureCommandIsCorrectlyReturned() throws KaChinnnngException {
         duke.executeCommand("help");                // If test case passed mean all the command being accepted
         duke.executeCommand("help add");            // If one of the command not accepted then will throw
         duke.executeCommand("help delete");         // KaChinnnngException
@@ -150,7 +150,7 @@ class DukeTest {
     }
 
     @Test
-    void executeCommand_allListFunction_MakeSureCommandIsCorrectlyParsed() throws KaChinnnngException {
+    void executeCommand_allListFunction_makeSureCommandIsCorrectlyParsed() throws KaChinnnngException {
         duke.executeCommand("list");                // If test case passed mean all the command being accepted
         duke.executeCommand("list incomes");         // If one of the command not accepted then will throw
         duke.executeCommand("list expenses");        // KaChinnnngException

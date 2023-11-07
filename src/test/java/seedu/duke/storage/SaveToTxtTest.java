@@ -135,7 +135,8 @@ public class SaveToTxtTest {
      * This test case checks whether both incomes and expenses can save correctly
      */
     @Test
-    public void testSaveToTxtWithDifferentExpensesAndIncomes() throws KaChinnnngException, IOException {        // Since it's two separate function so need to test whether they work together
+    public void testSaveToTxtWithDifferentExpensesAndIncomes() throws KaChinnnngException, IOException {
+        // Since it's two separate function so need to test whether they work together
         SaveToTxt test = new SaveToTxt(path);
         new ClearAll(incomes,expenses).clearAllIncomeAndExpense();
         test.saveIncomeAndExpense(incomes, expenses);

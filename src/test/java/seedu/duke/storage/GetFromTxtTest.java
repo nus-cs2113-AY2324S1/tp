@@ -14,7 +14,6 @@ import seedu.duke.financialrecords.expensetypes.TransportationType;
 import seedu.duke.financialrecords.expensetypes.UtilityType;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;

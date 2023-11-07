@@ -87,8 +87,8 @@ public class GetFromTxt {
     }
 
     /**
-     * Reads financial records data from the text file and add to the corresponding ArrayLists
-     * with Income and Expense objects.
+     * Exception handling for file creation and file accessing, read every line of the txt file and
+     * call the execute function to store all the data in
      *
      * @param incomes   The ArrayList to store Income objects.
      * @param expenses  The ArrayList to store Expense objects.
@@ -121,6 +121,13 @@ public class GetFromTxt {
         }
     }
 
+    /**
+     * Reads financial records data from the text file and add to the corresponding ArrayLists
+     * with Income and Expense objects.
+     *
+     * @param incomes   The ArrayList to store Income objects.
+     * @param expenses  The ArrayList to store Expense objects.
+     */
     public void execute(String textLine, ArrayList<Income> incomes, ArrayList<Expense> expenses){
         try {
             // Parse the data from the text line
@@ -140,8 +147,7 @@ public class GetFromTxt {
             if (!commandFromFile.equals("I")){
                 dateFromFile = LocalDate.parse(stringDate.split(" \\|type ")[0]);
                 expenseType = Integer.parseInt(textLine.split(" \\|type ")[1]);
-            }
-            else{
+            } else{
                 dateFromFile = LocalDate.parse(stringDate);
             }
             // Create appropriate objects based on the commandFromFile
