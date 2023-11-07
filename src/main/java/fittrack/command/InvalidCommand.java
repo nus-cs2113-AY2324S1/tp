@@ -1,6 +1,5 @@
 package fittrack.command;
 
-import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
 
 public class InvalidCommand extends Command {
@@ -28,9 +27,9 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void setArguments(String inputLine, CommandParser parser) {
+    public void setArguments(String inputLine) {
         HelpCommand helpCommand = new HelpCommand(inputLine);
-        helpCommand.setArguments(inputLine.strip(), parser);
+        helpCommand.setArguments(inputLine.strip());
         String message = helpCommand.execute().getFeedback();
 
         if (helpCommand.getCommandType() == null) {

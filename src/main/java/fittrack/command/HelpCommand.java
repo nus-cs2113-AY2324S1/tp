@@ -27,15 +27,15 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) {
+    public void setArguments(String args) {
         if (args.isEmpty()) {
             helpMessage = HELP;
             return;
         }
 
-        String word = parser.getFirstWord(args);
+        String word = CommandParser.getFirstWord(args);
 
-        Command blankCommand = parser.getBlankCommand(word, commandLine);
+        Command blankCommand = CommandParser.getBlankCommand(word, commandLine);
         commandType = blankCommand.getClass();
 
         if (commandType == InvalidCommand.class) {

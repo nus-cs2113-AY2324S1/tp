@@ -1,6 +1,7 @@
 h/180 w/eighty g/M l/2000
 h/-180 w/80 g/M l/2000
-h/-180 w/-80 g/M l/-2000
+h/180 w/-80 g/M l/-2000
+h/180 w/80 g/M l/-2000
 h/ w/ g/ l/
 h/180 w/ g/M l/2000
 180 w/80 g/M l/20000
@@ -57,4 +58,8 @@ help caloriesconsumed
 help findmeal
 help findworkout
 help save
+
+foo
+foo
+ foo
 exit

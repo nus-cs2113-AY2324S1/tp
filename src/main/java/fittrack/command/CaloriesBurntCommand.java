@@ -3,7 +3,6 @@ package fittrack.command;
 import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Workout;
-import fittrack.parser.CommandParser;
 import fittrack.parser.PatternMatchFailException;
 
 // @@author NgLixuanNixon
@@ -43,8 +42,8 @@ public class CaloriesBurntCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) throws PatternMatchFailException {
-        date = parser.parseDate(args);
+    public void setArguments(String args) throws PatternMatchFailException {
+        date = Date.parseDate(args);
     }
 
     Calories getCaloriesBurnt() {

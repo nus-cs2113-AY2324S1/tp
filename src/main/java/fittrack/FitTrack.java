@@ -4,10 +4,9 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
-import fittrack.parser.NegativeNumberException;
 import fittrack.parser.NumberFormatException;
+import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
-import fittrack.parser.WrongGenderException;
 import fittrack.storage.Storage;
 import fittrack.storage.Storage.StorageOperationException;
 import fittrack.storage.Storage.InvalidStorageFilePathException;
@@ -72,21 +71,18 @@ public class FitTrack {
 
 
         while (!isValidInput) {
+            // TODO: organize here.
             try {
                 profileSettings();
                 storage.saveProfile(userProfile);
                 isValidInput = true;
             } catch (PatternMatchFailException e) {
                 System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter numbers for height, weight, and daily calorie limit.");
-            } catch (NegativeNumberException e) {
-                System.out.println("Please enter a number greater than 0");
-            } catch (WrongGenderException e) {
-                System.out.println("Please enter either M or F");
             } catch (IOException e) {
                 System.out.println("Error occurred while saving profile.");
                 isValidInput = true;
+            } catch (ParseException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -95,7 +91,7 @@ public class FitTrack {
         Command command;
         do {
             String userCommandLine = ui.scanCommandLine();
-            command = new CommandParser().parseCommand(userCommandLine);
+            command = CommandParser.parseCommand(userCommandLine);
             CommandResult commandResult = executeCommand(command);
             ui.printCommandResult(commandResult);
         } while (!ExitCommand.isExit(command));
@@ -118,11 +114,9 @@ public class FitTrack {
      *
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
-     * @throws NegativeNumberException if argument is negative
-     * @throws WrongGenderException if gender is wrong
      */
     private void profileSettings()
-            throws PatternMatchFailException, NumberFormatException, NegativeNumberException, WrongGenderException {
+            throws ParseException {
         System.out.println(
                 "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
         );
@@ -130,7 +124,7 @@ public class FitTrack {
 
         assert (input != null) : "Profile cannot be null";
 
-        UserProfile profile = new CommandParser().parseProfile(input);
+        UserProfile profile = UserProfile.parseUserProfile(input);
         userProfile.setHeight(profile.getHeight());
         userProfile.setWeight(profile.getWeight());
         userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());

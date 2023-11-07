@@ -8,11 +8,13 @@ ___________.__  __ ___________                     __
 ____________________________________________________________
 Directory created: data
 Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
-Please enter numbers for height, weight, and daily calorie limit.
+Weight must be a number.
 Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
-Please enter a number greater than 0
+Height must be a positive value.
 Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
-Please enter a number greater than 0
+Weight must be a positive value.
+Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
+Calories must not be a negative value.
 Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
 Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>
 Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
@@ -29,7 +31,7 @@ Gender: Male
 Daily calorie limit: 2000kcal
 BMI: 24.69
 ____________________________________________________________
-`viewprofile 123` is an invalid command.
+`viewprofile 123` is an invalid command. The input pattern is not valid.
 `viewprofile` shows all profile details.
 Type `viewprofile` to view your profile.
 
@@ -50,7 +52,7 @@ BMI: 24.22
 `editprofileh/120w/80g/Ml/100` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
-`editprofile h/-180 w/70 g/K l/1000` is an invalid command.
+`editprofile h/-180 w/70 g/K l/1000` is an invalid command. Height must be a positive value.
 `editprofile` allows you to edit your profile.
 Type `editprofile h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CALORIE_LIMIT>` to edit.
 
@@ -64,14 +66,14 @@ BMI: 24.22
 Your current BMI is 24.22
 BMI falls under NORMAL WEIGHT category
 
-`bmi 30f` is an invalid command.
+`bmi 30f` is an invalid command. The input pattern is not valid.
 `bmi` calculates your current BMI.
 Type `bmi` to view your BMI.
 
 I've added the following meal:
 [M] pasta (200kcal, 2023-10-22)
 
-`addmeal pizza 200` is an invalid command.
+`addmeal pizza 200` is an invalid command. The input pattern is not valid.
 `addmeal` adds your daily meal data to the list.
 Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
 Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
@@ -80,13 +82,13 @@ You should type <DATE> in format of `yyyy-MM-dd`.
 I've added the following meal:
 [M] cabonara pasta (180kcal, 2023-10-29)
 
-`addmeal pizza c/230 d/2023-11-1` is an invalid command.
+`addmeal pizza c/230 d/2023-11-1` is an invalid command. The input pattern is not valid.
 `addmeal` adds your daily meal data to the list.
 Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
 Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
 You should type <DATE> in format of `yyyy-MM-dd`.
 
-`viewmeal qw` is an invalid command.
+`viewmeal qw` is an invalid command. The input pattern is not valid.
 `viewmeal` shows the list of all meals.
 Type `viewmeal` to view the list of meals.
 
@@ -94,7 +96,7 @@ These are the meals you have consumed:
 1.[M] pasta (200kcal, 2023-10-22)
 2.[M] cabonara pasta (180kcal, 2023-10-29)
 
-`addworkout run 400 d/2023-10-22` is an invalid command.
+`addworkout run 400 d/2023-10-22` is an invalid command. The input pattern is not valid.
 `addworkout` adds your daily workout data to the list.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES>` to add today's workout.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
@@ -106,7 +108,7 @@ I've added the following workout:
 I've added the following workout:
 [W] long run (200kcal, 2023-10-29)
 
-`addworkout sprint run c/100 d/2023-11-1` is an invalid command.
+`addworkout sprint run c/100 d/2023-11-1` is an invalid command. The input pattern is not valid.
 `addworkout` adds your daily workout data to the list.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES>` to add today's workout.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
@@ -116,11 +118,11 @@ These are the workouts you have done:
 1.[W] run (100kcal, 2023-10-22)
 2.[W] long run (200kcal, 2023-10-29)
 
-`findmeal` is an invalid command.
+`findmeal` is an invalid command. The input pattern is not valid.
 `findmeal` finds the meal you are looking for in your meal list.
 Type `findmeal <KEYWORD>` to find a meal.
 
-`findworkout` is an invalid command.
+`findworkout` is an invalid command. The input pattern is not valid.
 `findworkout` finds the workout you are looking for in your workout list.
 Type `findworkout <KEYWORD>` to find a workout.
 
@@ -134,7 +136,7 @@ These workouts contain the keyword run:
 2.[W] long run (200kcal, 2023-10-29)
 There are 2 workouts that contains run.
 
-`caloriesburnt` is an invalid command.
+`caloriesburnt` is an invalid command. The input pattern is not valid.
 `caloriesburnt` shows your total calories burnt on a specific date.
 Type `caloriesburnt <DATE>` to see the total calories burnt on that date.
 You should type <DATE> in format of `yyyy-MM-dd`.
@@ -142,7 +144,7 @@ You should type <DATE> in format of `yyyy-MM-dd`.
 [W] long run (200kcal, 2023-10-29)
 Total calories burnt on 2023-10-29: 200kcal
 
-`caloriesconsumed` is an invalid command.
+`caloriesconsumed` is an invalid command. The input pattern is not valid.
 `caloriesconsumed` shows your total calories consumed on a specific date.
 Type `caloriesconsumed <DATE>` to see the total calories consumed on that date.
 You should type <DATE> in format of `yyyy-MM-dd`.
@@ -162,7 +164,7 @@ Type `help` or `help <COMMAND>` to view help.
 I've deleted the following workout:
 [W] run (100kcal, 2023-10-22)
 
-`checkrecommendedweight 1` is an invalid command.
+`checkrecommendedweight 1` is an invalid command. The input pattern is not valid.
 `checkrecommendedweight` calculates the recommended weight for your height.
 Type `checkrecommendedweight` calculate the recommended weight for your height.
 
@@ -231,6 +233,18 @@ Type `findmeal <KEYWORD>` to find a meal.
 Type `findworkout <KEYWORD>` to find a workout.
 
 `save` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`foo` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`foo` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
+
+`foo` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 Goodbye! Hope to see you soon!

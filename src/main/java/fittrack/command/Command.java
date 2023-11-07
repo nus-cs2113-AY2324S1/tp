@@ -4,7 +4,6 @@ import fittrack.MealList;
 import fittrack.UserProfile;
 import fittrack.WorkoutList;
 import fittrack.storage.Storage;
-import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
 
 public abstract class Command {
@@ -43,11 +42,9 @@ public abstract class Command {
      * Apply arguments to its field using parser.
      *
      * @param args arguments as a string
-     * @param parser parser
      * @throws ParseException if parse fails
      */
-    public abstract void setArguments(String args, CommandParser parser)
-            throws ParseException;
+    public abstract void setArguments(String args) throws ParseException;
 
     /**
      * Returns help of the command.
