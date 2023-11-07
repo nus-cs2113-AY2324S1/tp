@@ -131,9 +131,9 @@ editprofile h/170 w/70 g/M l/100
 Here is your updated profile:
 Height: 170.0cm
 Weight: 70.0kg
+Gender: Male
 Daily calorie limit: 1500kcal
 BMI: 24.22
-Gender: Male
 ```
 
 
@@ -150,9 +150,9 @@ viewprofile
 Your Profile:
 Height: 170.0cm
 Weight: 70.0kg
+Gender: Male
 Daily calorie limit: 1500kcal
 BMI: 24.22
-Gender: Male
 ```
 
 
