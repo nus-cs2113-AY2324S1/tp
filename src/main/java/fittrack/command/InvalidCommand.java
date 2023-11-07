@@ -30,7 +30,7 @@ public class InvalidCommand extends Command {
     @Override
     public void setArguments(String inputLine, CommandParser parser) {
         HelpCommand helpCommand = new HelpCommand(inputLine);
-        helpCommand.setArguments(inputLine, parser);
+        helpCommand.setArguments(inputLine.strip(), parser);
         String message = helpCommand.execute().getFeedback();
 
         if (helpCommand.getCommandType() == InvalidCommand.class) {

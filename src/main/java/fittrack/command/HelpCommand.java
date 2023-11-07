@@ -38,8 +38,8 @@ public class HelpCommand extends Command {
         Command blankCommand = parser.getBlankCommand(word, commandLine);
         commandType = blankCommand.getClass();
 
-        if (blankCommand instanceof InvalidCommand) {
-            helpMessage = InvalidCommand.getInvalidCommandMessage(word) + "\n" + USAGE;
+        if (commandType == InvalidCommand.class) {
+            helpMessage = InvalidCommand.getInvalidCommandMessage(commandLine) + "\n" + USAGE;
             return;
         }
 
