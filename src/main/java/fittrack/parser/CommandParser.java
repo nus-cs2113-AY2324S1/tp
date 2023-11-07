@@ -70,9 +70,6 @@ public class CommandParser {
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
             "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
     );
-    private static final Pattern DATE_PATTERN = Pattern.compile(
-            "(?<" + DATE_CG + ">\\S+)"
-    );
 
     public Command parseCommand(String userCommandLine) {
 
@@ -255,15 +252,9 @@ public class CommandParser {
 
     // @@author NgLixuanNixon
     public Date parseDate(String date) throws PatternMatchFailException {
-        final Matcher matcher = DATE_PATTERN.matcher(date);
-        if (!matcher.matches()) {
-            throw new PatternMatchFailException();
-        }
-
-        final String dateString = matcher.group(DATE_CG);
-
+        assert date != null;
         try {
-            return new Date(dateString);
+            return new Date(date);
         } catch (DateTimeParseException e) {
             throw new PatternMatchFailException();
         }
