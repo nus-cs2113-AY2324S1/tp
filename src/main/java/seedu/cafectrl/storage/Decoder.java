@@ -116,7 +116,13 @@ public class Decoder {
      */
     public static Sales decodeSales(ArrayList<String> textLines, Menu menu) {
         ArrayList<OrderList> orderLists = new ArrayList<>();
-        if(textLines.isEmpty()) {
+        if (textLines.isEmpty()) {
+            return new Sales();
+        }
+        if (menu.getSize() == 0) {
+            ui.showToUser("Sorry, it seems that menu has been corrupted.",
+                    "Sales will also be affected",
+                    "Sales will be reset is Menu data is not restored", System.lineSeparator());
             return new Sales();
         }
         //for each 'order' in text file

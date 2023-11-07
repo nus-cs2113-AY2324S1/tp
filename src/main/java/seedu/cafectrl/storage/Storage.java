@@ -77,7 +77,6 @@ public class Storage {
             ui.showToUser("ERROR: Menu Data file is corrupted.",
                     "Clear the Menu data file or restore data to uncorrupted state before trying again.",
                     System.lineSeparator());
-            System.out.println("Help");
             return new Menu();
         }
     }
