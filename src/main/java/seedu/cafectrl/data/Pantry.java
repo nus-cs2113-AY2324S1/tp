@@ -125,6 +125,7 @@ public class Pantry {
                 .findFirst()
                 .orElse(null);
     }
+
     //@@author NaychiMin
     /**
      * Checks the availability of dishes based on ingredient stock.

@@ -211,7 +211,6 @@ public class Ui {
     public void showDishAvailabilityMessage() {
         showToUser(Messages.AVAILABLE_DISHES);
     }
-
     public void showPreviousDay() {
         showToUser(Messages.PREVIOUS_DAY_COMMAND_MESSAGE);
     }
