@@ -19,21 +19,20 @@ public class DeleteIncomeCommand extends Command {
      * Executes the DeleteIncomeCommand to remove an income record from the list of incomes.
      *
      * @param incomes     The list of income records to be modified.
-     * @param fullCommand The full command entered by the user.
+     * @param fullcommand The full command entered by the user.
+     * @param ui          The user interface for displaying messages.
      * @throws KaChinnnngException If there is a problem with the command execution, such as missing arguments,
      *                            invalid index, or a non-existent income record.
      */
-    public void execute(ArrayList<Income> incomes, String fullCommand) throws KaChinnnngException {
+    public void execute(ArrayList<Income> incomes, String fullcommand, Ui ui) throws KaChinnnngException {
         int index = 0;
         try {
-            String[] tokens = fullCommand.split(" ", 3);
+            String[] tokens = fullcommand.split(" ", 3);
             index = Integer.parseInt(tokens[2])-1;
             Income removedIncome = incomes.get(index);
             incomes.remove(index);
-            Ui.showLineDivider();
             System.out.println("Noted. This income record has been deleted:");
             System.out.println(removedIncome);
-            Ui.showLineDivider();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new KaChinnnngException("You're missing an argument");
         } catch (NullPointerException | NumberFormatException e) {

@@ -2,7 +2,6 @@ package seedu.duke.commands;
 
 
 import seedu.duke.financialrecords.Expense;
-import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -48,11 +47,9 @@ public class EditExpenseCommand extends Command {
             Expense newExpense = expenseCommand.getNewExpense();
             Expense removedExpense = expenses.get(index);
             expenses.set(index, newExpense);
-            Ui.showLineDivider();
             System.out.println("Noted. The expense record you've specified has been changed:");
             System.out.println("Before: " + removedExpense);
             System.out.println("After: " + newExpense);
-            Ui.showLineDivider();
         } catch (IndexOutOfBoundsException e) {
             throw new KaChinnnngException("Oops! Expense " + (index+1) + " does not exist");
         }

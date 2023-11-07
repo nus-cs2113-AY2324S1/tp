@@ -256,7 +256,7 @@ Format:
 list exchange rates
 ```
 
-### Update exchange rate
+### update exchange rate
 Update exchange rate of a specific foreign currency. Exchange rates will be saved upon
 successful update.
   
@@ -274,21 +274,6 @@ Note:
 - `<rate>` specified should be in SGD/{foreign currency}.
 - `<rate>` must be a positive decimal that is between 0.001 and 3,000,000.
 - The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
-
-### Storage for income and expense entries
-Save all the income and expense entries to the KaChinnnngggg.txt
-
-All income and expense entries will be update to the file for every command input.
-
-There is no command to save to file manually since it's updating after every command
-
-### Retrieve entries from text file and save to the income and expense list
-Retrieve all the income and expense entries from the KaChinnnngggg.txt
-
-At the beginning of executing the program, KaChinnnngggg will automatically retrieve all the entries storied in the KaChinnnngggg.txt
-
-There is no command to get from file manually since it will run once at the beginning of program.
-
 
 ## FAQ
 
