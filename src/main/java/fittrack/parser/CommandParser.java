@@ -240,8 +240,10 @@ public class CommandParser {
     }
 
     // @@author NgLixuanNixon
-    public int parseIndex(String index) throws ParseException {
-        assert index != null;
+    public int parseIndex(String args) throws ParseException {
+        assert args != null;
+        String index = args.strip();
+
         if (index.isEmpty()) {
             throw new PatternMatchFailException();
         }
@@ -258,8 +260,10 @@ public class CommandParser {
     // @@author
 
     // @@author NgLixuanNixon
-    public Date parseDate(String date) throws PatternMatchFailException {
-        assert date != null;
+    public Date parseDate(String args) throws PatternMatchFailException {
+        assert args != null;
+        String date = args.strip();
+
         try {
             return new Date(date);
         } catch (DateTimeParseException e) {
@@ -269,8 +273,10 @@ public class CommandParser {
     // @@author
 
     // @@author J0shuaLeong
-    public String parseKeyword(String keyword) throws PatternMatchFailException {
-        assert keyword != null;
+    public String parseKeyword(String args) throws PatternMatchFailException {
+        assert args != null;
+        String keyword = args.strip();
+
         if (keyword.isEmpty()) {
             throw new PatternMatchFailException();
         }
