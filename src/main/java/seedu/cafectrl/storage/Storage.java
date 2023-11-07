@@ -29,18 +29,13 @@ public class Storage {
         if (((!hashString.matches("^[0-9]+$")) && (!hashString.matches("^-[0-9]+$"))) ||
                 hashString.matches("^0{2,}$")) {
             //logger.log(Level.INFO, "Corrupted data file");
-            //throw new CorruptedDataException();
             return true;
         }
         int fileHash = Integer.parseInt(hashString);
         encodedMenu.remove(last_index);
         String encodedMenuAsString = String.join(", ", encodedMenu).trim();
-        //System.out.println(encodedMenuAsString);
         int encodedMenuHash = encodedMenuAsString.hashCode();
-        //System.out.println("FileHash: " + fileHash);
-        //System.out.println("EncodedHash: " + encodedMenuHash);
         if (encodedMenuHash != fileHash) {
-            //throw new CorruptedDataException();
             return true;
         }
         return false;
@@ -57,7 +52,6 @@ public class Storage {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
             if (isFileCorrupted(encodedMenu)) {
                 throw new CorruptedDataException();
-                //System.out.println("Corrupted pls get help");
             }
             return Decoder. decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
@@ -90,7 +84,6 @@ public class Storage {
             ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
             if (isFileCorrupted(encodedPantryStock)) {
                 throw new CorruptedDataException();
-                //System.out.println("Corrupted pls get help");
             }
             return Decoder.decodePantryStockData(encodedPantryStock);
         } catch (FileNotFoundException e) {
@@ -123,7 +116,6 @@ public class Storage {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
             if (isFileCorrupted(encodedOrderList)) {
                 throw new CorruptedDataException();
-                //System.out.println("Corrupted pls get help");
             }
             return Decoder.decodeSales(encodedOrderList, menu);
         } catch (FileNotFoundException e) {
