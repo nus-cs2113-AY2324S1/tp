@@ -10,7 +10,7 @@ from all fields of study.
 - **Code Contributions:** [Link to reposense contribution](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=spinoandraptos&tabRepo=AY2324S1-CS2113-W12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false).
 - The project structure of QuizHub is adapted from Juncheng's [ip](https://github.com/spinoandraptos/ip). Juncheng is
   responsible for migrating the skeleton code structure into the team repository and aligning the team for initial
-  the integration cycle. [#6](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/6),
+  the integration cycle. [#6](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/6)
 ### New Feature 1: `Edit Question`
   [#10](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/10),
   [#20](https://github.com/AY2324S1-CS2113-W12-1/tp/issues/20)
