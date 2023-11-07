@@ -17,7 +17,7 @@ Main structure of the code and the parse feature is adapted from [here](https://
 The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. 
 Given below is a quick overview of each component.
 
-:bulb: **Tip:** The '.puml' files used to create the diagrams in this document can be found in [diagrams](./diagrams) 
+**Tip:** The '.puml' files used to create the diagrams in this document can be found in [diagrams](./diagrams) 
 folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) 
 to learn how to create and edit diagrams.
 
@@ -74,7 +74,7 @@ People who want to be healthy by managing their diet and workout.
 
 Fittrack is a health management application which allows users to record their diet and activity, and help them to reach the goal they have set.
 
-Fittrack also allows it's users to calculate their total calories spent in a day and receive suggestions
+Fittrack also allows its users to calculate their total calories spent in a day and receive suggestions
 on possible changes to their exercise, diet and lifestyle.
 
 Users will also be able to calculate key parameters of their profile like 
