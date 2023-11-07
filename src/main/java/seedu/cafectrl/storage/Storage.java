@@ -65,7 +65,7 @@ public class Storage {
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Menu();
         } catch (CorruptedDataException e) {
-        System.out.println("ERROR: Data file is corrupted. Clear all data files " +
+            System.out.println("ERROR: Data file is corrupted. Clear all data files " +
                 "or restore data to uncorrupted state before trying again.");
             return new Menu();
         }
@@ -89,9 +89,17 @@ public class Storage {
     public Pantry loadPantryStock() {
         try {
             ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
+            if (isFileCorrupted(encodedPantryStock)) {
+                throw new CorruptedDataException();
+                //System.out.println("Corrupted pls get help");
+            }
             return Decoder.decodePantryStockData(encodedPantryStock);
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.PANTRY_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            return new Pantry(ui);
+        } catch (CorruptedDataException e) {
+            System.out.println("ERROR: Data file is corrupted. Clear all data files " +
+                    "or restore data to uncorrupted state before trying again.");
             return new Pantry(ui);
         }
     }

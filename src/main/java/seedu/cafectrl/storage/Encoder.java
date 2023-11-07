@@ -88,7 +88,8 @@ public class Encoder {
             encodedIngredient.append(System.lineSeparator());
             pantryStockInString.add(encodedIngredient.toString());
         }
-        return pantryStockInString;
+        ArrayList<String> pantryStockInStringHashed = hashEncoding(pantryStockInString);
+        return pantryStockInStringHashed;
     }
 
     //@@author NaychiMin
