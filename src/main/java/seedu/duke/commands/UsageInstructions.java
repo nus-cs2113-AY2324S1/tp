@@ -61,8 +61,8 @@ public class UsageInstructions {
         System.out.println("List all updated exchange rates.\n");
         System.out.println("Format:\n" +
                 "list\n" +
-                "list income\n" +
-                "list expense\n" +
+                "list incomes\n" +
+                "list expenses\n" +
                 "list currencies\n" +
                 "list exchange rates");
     }

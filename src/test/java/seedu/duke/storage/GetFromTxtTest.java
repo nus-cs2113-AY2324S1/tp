@@ -12,6 +12,7 @@ import seedu.duke.financialrecords.Transport;
 import seedu.duke.financialrecords.expensetypes.MealType;
 import seedu.duke.financialrecords.expensetypes.TransportationType;
 import seedu.duke.financialrecords.expensetypes.UtilityType;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -146,13 +147,14 @@ public class GetFromTxtTest {
     @Test
     public void testGetFromTxtWithWrongFormat() throws KaChinnnngException, IOException {
         try (FileWriter fw = new FileWriter(path)) {
-            fw.write("nolthing special");
-            fw.write("EF | chicken sandwich | 10000000000.0 | 2023-10-01 | 2\n");
-            fw.write("EF | chicken sandwich | -1 | 2023-10/01 | 2\n");
+            fw.write("nothing special");
+            fw.write("EF |de chicken sandwich |amt 10000000000.0 |date 2023-10-01 |type 2\n");
+            fw.write("I |de Salary |amt 5000.00 |date 2023-10-\n");
+            fw.write("EF |de chicken sandwich |amt -1 |date 2023-10/01 |type 2\n");
             fw.write("EF \n");
-            fw.write("ABC | chicken sandwich | 1000.0 | 2023-10-01 | 1\n");
-            fw.write("EF | chicken sandwich | 1000.0 | 2023-10-01 | asdf\n");
-            fw.write("EF | chicken sandwich | 10000000000.0 | 2023-10-01 | 32\n");
+            fw.write("ABC |de chicken sandwich |amt 1000.0 |date 2023-10-01 |type 1\n");
+            fw.write("EF |de chicken sandwich |amt 1000.0 |date 2023-10-01 |type asdf\n");
+            fw.write("EF |de chicken sandwich |amt 10000000000.0 |date 2023-10-01 |type 32\n");
         } catch (IOException e) {
             System.out.println("Error");
         }
@@ -163,5 +165,5 @@ public class GetFromTxtTest {
         assertEquals(0, newIncomes.size());
         assertEquals(0, newExpenses.size());
     }
-
+    
 }

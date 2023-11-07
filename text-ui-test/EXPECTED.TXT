@@ -45,8 +45,8 @@ List all updated exchange rates.
 
 Format:
 list
-list income
-list expense
+list incomes
+list expenses
 list currencies
 list exchange rates
 ____________________________________________________________

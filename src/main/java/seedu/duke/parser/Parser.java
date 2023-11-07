@@ -60,12 +60,12 @@ public class Parser {
             resultCommand = "exit";
         } else if (commandLowerCase.startsWith("add income ")) {
             resultCommand = "add_income";
-        } else if (commandLowerCase.equals("list income")) {
-            resultCommand = "list_income";
+        } else if (commandLowerCase.equals("list incomes")) {
+            resultCommand = "list_incomes";
         } else if (commandLowerCase.startsWith("add expense ")) {
             resultCommand = "add_expense";
-        } else if (commandLowerCase.equals(("list expense"))) {
-            resultCommand = "list_expense";
+        } else if (commandLowerCase.equals(("list expenses"))) {
+            resultCommand = "list_expenses";
         } else if (commandLowerCase.equals("help")) {
             resultCommand = "help";
         } else if (commandLowerCase.equals("list")) {

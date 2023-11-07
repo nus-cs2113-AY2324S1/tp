@@ -132,10 +132,10 @@ Format:
 list
 ```
 ```
-list income
+list incomes
 ```
 ```
-list expense
+list expenses
 ```
 
 ### Delete an entry: delete
@@ -343,7 +343,7 @@ and change the line in txt file to the correct format.
 | Help                 | `help`                                                                                                                                                                                                      |
 | Add Income           | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                                          |
 | Add Expense          | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`                    |
-| List                 | `list` <br> `list income` <br> `list expense` <br> `list currencies` <br> `list exchange rates`                                                                                                             |
+| List                 | `list` <br> `list incomes` <br> `list expenses` <br> `list currencies` <br> `list exchange rates`                                                                                                             |
 | Delete               | `delete expense <index>` <br> `delete income <index>`                                                                                                                                                       |
 | Edit                 | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>`             |
 | Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                                          |

@@ -114,7 +114,7 @@ public class Duke {
             Ui.printIncomeAddedMessage(newIncome);
             break;
 
-        case "list_income":
+        case "list_incomes":
             new IncomeLister(incomes, ui).listIncomes();
             break;
 
@@ -126,7 +126,7 @@ public class Duke {
             Ui.printExpenseAddedMessage(newExpense);
             break;
 
-        case "list_expense":
+        case "list_expenses":
             new ExpenseLister(expenses, ui).listExpenses();
             break;
 
@@ -251,6 +251,7 @@ public class Duke {
             new EditExpenseCommand(expenses, fullCommand).execute();
             Ui.showLineDivider();
             break;
+
         case "list_currencies":
             exchangeRateManager.showSupportedCurrencies();
             break;
@@ -263,6 +264,7 @@ public class Duke {
             Command c = new UpdateExchangeRateCommand(fullCommand, exchangeRateFileHandler, ui);
             c.execute();
             break;
+
         default:
             throw new KaChinnnngException("Invalid command. Please try again."
                     + "\nType 'help' to see the list of commands available.");

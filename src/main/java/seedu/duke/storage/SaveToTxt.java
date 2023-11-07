@@ -64,6 +64,7 @@ public class SaveToTxt {
      * @param path The path to the text file where data will be saved.
      */
     public SaveToTxt(String path) {
+        assert path != null : "incomes should not be null";
         this.path = path;
     }
 
@@ -74,12 +75,10 @@ public class SaveToTxt {
      * @param expenses  The ArrayList of Expense objects to save.
      */
     public void saveIncomeAndExpense(ArrayList<Income> incomes, ArrayList<Expense> expenses){
-        try {
-            saveIncomeToTextFile(incomes);
-            saveExpenseToTextFile(expenses);
-        } catch (IOException e) {
-            System.out.println(IO_ERROR_MESSAGE);
-        }
+        assert incomes != null : "incomes should not be null";
+        assert expenses != null : "expenses should not be null";
+        saveIncomeToTextFile(incomes);
+        saveExpenseToTextFile(expenses);
     }
 
     /**
@@ -88,7 +87,8 @@ public class SaveToTxt {
      * @param incomes The ArrayList of Income objects to save.
      * @throws IOException If an IO error occurs during the file write operation.
      */
-    public void saveIncomeToTextFile(ArrayList<Income> incomes) throws IOException {
+    public void saveIncomeToTextFile(ArrayList<Income> incomes)  {
+        assert incomes != null : "incomes should not be null";
         try (FileWriter fw = new FileWriter(path)) {
             for (Income income : incomes) {
                 String incomeDescription = income.getDescription();
@@ -101,10 +101,10 @@ public class SaveToTxt {
                         incomeDescription + " with amount $ " + incomeAmount);
             }
         } catch (AccessDeniedException e){
-            LOGGER.log(Level.WARNING, "Error accessing file ", e);
+            LOGGER.log(Level.WARNING, "No access to the folder", e);
             System.out.println(INCOME_FILE_ACCESS_MESSAGE);
         } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "Error accessing file ", e);
+            LOGGER.log(Level.WARNING, "Error while saving file ", e);
             System.out.println(IO_ERROR_MESSAGE);
         }
     }
@@ -116,7 +116,8 @@ public class SaveToTxt {
      * @param expenses The ArrayList of Expense objects to save.
      * @throws IOException If an IO error occurs during the file write operation.
      */
-    public void saveExpenseToTextFile(ArrayList<Expense> expenses) throws IOException{
+    public void saveExpenseToTextFile(ArrayList<Expense> expenses){
+        assert expenses != null : "expenses should not be null";
         try (FileWriter fw = new FileWriter(path, true)) {
             for (Expense expense : expenses) {
                 String textToAdd = "";
