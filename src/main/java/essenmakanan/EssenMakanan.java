@@ -7,21 +7,16 @@ import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.storage.IngredientStorage;
 import essenmakanan.storage.RecipeStorage;
 import essenmakanan.ui.Ui;
 
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.LogManager;
 
 public class EssenMakanan {
-
-    private static Logger logger = Logger.getLogger("EssenMakanan");
 
     private final String DATA_INGREDIENT_PATH = "data/ingredients.txt";
     private final String DATA_RECIPE_PATH = "data/recipes.txt";
@@ -42,11 +37,9 @@ public class EssenMakanan {
         Command command = null;
         do {
             input = in.nextLine();
-            logger.log(Level.INFO, "Getting input");
             try {
                 command = parser.parseCommand(input, recipes, ingredients);
                 command.executeCommand();
-                logger.log(Level.INFO, "Executing");
                 ingredientStorage.saveData(ingredients.getIngredients());
                 recipeStorage.saveData(recipes.getRecipes());
             } catch (EssenCommandException exception) {
@@ -55,14 +48,12 @@ public class EssenMakanan {
                 exception.handleException();
             } catch (EssenOutOfRangeException exception) {
                 exception.handleException();
-            } catch (IOException exception) {
-                Ui.handleIOException(exception);
             }
         } while (!ExitCommand.isExitCommand(command));
-        logger.log(Level.INFO, "Exiting application");
     }
 
     public void setup() {
+        LogManager.getLogManager().reset();
         recipes = new RecipeList();
         parser = new Parser();
         ingredientStorage = new IngredientStorage(DATA_INGREDIENT_PATH);
@@ -81,8 +72,6 @@ public class EssenMakanan {
             exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_RECIPE_PATH);
             recipes = new RecipeList();
         }
-
-        EssenLogger.setup(logger);
     }
 
     public void start() {
