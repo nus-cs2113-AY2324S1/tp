@@ -190,18 +190,25 @@ public class Parser {
                 Long quantity = Long.parseLong(matcher.group(4));
                 double sellingPrice = Double.parseDouble(matcher.group(5));
 
+                if (quantity < 1 || quantity > 999999999) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
+                }
+                if (name.isEmpty()) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_NAME, AddCommand.MESSAGE_USAGE));
+                }
+                if (serialNumber.isEmpty()) {
+                    return new IncorrectCommand("Serial number cannot be empty.");
+                }
                 //check if the expiry date has a valid format
                 if (!isValidDateFormat(expiryDate)) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, AddCommand.MESSAGE_USAGE));
                 }
-
-                //check if the quantity is a negative number
-                if (quantity < 1) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
-                } else if (name.isEmpty()) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_NAME, AddCommand.MESSAGE_USAGE));
+                // Ensure sellingPrice has up to 2 decimal places
+                if (String.format("%.2f", sellingPrice).equals(Double.toString(sellingPrice))) {
+                    return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
+                } else {
+                    return new IncorrectCommand("Invalid selling price format. Please use up to 2 decimal places.");
                 }
-                return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
