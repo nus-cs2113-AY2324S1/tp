@@ -259,7 +259,7 @@ class ParserTest {
         ParserUtil parserUtil = new Parser();
         Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
         commandReturned.execute();
-        assertEquals(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+        assertEquals(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
     }
 
     @Test
@@ -307,7 +307,7 @@ class ParserTest {
         ParserUtil parserUtil = new Parser();
         Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
         commandReturned.execute();
-        assertEquals(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+        assertEquals(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
     }
 
     //@@author DextheChik3n

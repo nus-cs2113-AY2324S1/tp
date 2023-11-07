@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  * Parse everything received from the users on terminal
  * into a format that can be interpreted by other core classes
@@ -175,20 +174,29 @@ public class Parser implements ParserUtil {
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_EDIT_PRICE, ui);
         }
 
+        int dishIndexGroup = 1;
+        int newPriceGroup = 2;
+        int dishIndex;
+        float newPrice;
+
         try {
-            int dishIndexGroup = 1;
-            int newPriceGroup = 2;
-            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup).trim());
-            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
+            dishIndex = Integer.parseInt(matcher.group(dishIndexGroup).trim());
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
                 return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
             }
-            return new EditPriceCommand(dishIndex, newPrice, menu, ui);
-        } catch (NumberFormatException | ParserException e) {
-            return new IncorrectCommand(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, ui);
         }
+
+        try {
+            newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
+        } catch (ParserException e) {
+            return new IncorrectCommand(e.getMessage(), ui);
+        }
+
+        return new EditPriceCommand(dishIndex, newPrice, menu, ui);
     }
 
     //@@author DextheChik3n
@@ -287,14 +295,27 @@ public class Parser implements ParserUtil {
      * Converts text of price to float while also checking if the price input is within reasonable range
      * @param priceText text input for price argument
      * @return price in float format
-     * @throws ArithmeticException if price > 10000000000.00
+     * @throws ParserException if price is not within reasonable range
      */
     static float parsePriceToFloat(String priceText) throws ParserException {
-        float price = Float.parseFloat(priceText);
-        float maxPriceValue = (float) 10000000000.00;
+        float price;
+        try {
+            price = Float.parseFloat(priceText.trim());
+        } catch (NumberFormatException e) {
+            throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
+        }
 
+        // todo Dexter please help me implement check for 2dp :P
+
+        // Specify max and min value for price
+        float maxPriceValue = (float) 1000000.00;
+        float minPriceValue = (float) 0;
+
+        // Check whether the price has up to 2 decimal place
         if (price > maxPriceValue) {
-            throw new ParserException(ErrorMessages.INVALID_PRICE_MESSAGE);
+            throw new ParserException(ErrorMessages.LARGE_PRICE_MESSAGE);
+        } else if (price < minPriceValue) {
+            throw new ParserException(ErrorMessages.NEGATIVE_PRICE_MESSAGE);
         }
 
         return price;
