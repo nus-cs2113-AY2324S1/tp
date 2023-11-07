@@ -166,7 +166,7 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareDeleteCommand(String args) {
-        Pattern pattern = Pattern.compile("/n (.*)");
+        Pattern pattern = Pattern.compile("/s (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 1) {
             String name = matcher.group(1);
@@ -184,7 +184,7 @@ public class Parser {
      */
     private Command prepareAddToCartCommand(String args) {
         try {
-            Pattern pattern = Pattern.compile("/n (.*) /q (.*)");
+            Pattern pattern = Pattern.compile("/s (.*) /q (.*)");
             Matcher matcher = pattern.matcher(args);
             if (matcher.matches() && matcher.groupCount() == 2) {
                 String name = matcher.group(1);
@@ -228,7 +228,7 @@ public class Parser {
 
     private Command prepareSetThresholdCommand(String args) {
         try {
-            Pattern pattern = Pattern.compile("/n (.*) /tq (.*)");
+            Pattern pattern = Pattern.compile("/s (.*) /tq (.*)");
             Matcher matcher = pattern.matcher(args);
             if (matcher.matches() && matcher.groupCount() == 2) {
                 String name = matcher.group(1);

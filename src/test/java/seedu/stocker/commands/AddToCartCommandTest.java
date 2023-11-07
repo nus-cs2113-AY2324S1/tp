@@ -12,7 +12,7 @@ class AddToCartCommandTest {
     
     @Test
     public void executeTest() {
-        AddCommand command = new AddCommand("Paracetamol", "12/05/2024", "12345", 12L, 21.90);
+        AddCommand command = new AddCommand("Paracetamol", "12/05/2024", "PARA123", 12L, 21.90);
         Inventory inventory = new Inventory();
         Cart cart = new Cart();
         assertEquals(0, cart.getCurrentCart().size());
@@ -20,9 +20,10 @@ class AddToCartCommandTest {
 
         command.setData(inventory, salesList, cart, new VendorsList());
         command.execute();
-        AddToCartCommand command2 = new AddToCartCommand("paracetamol", 2L);
+        AddToCartCommand command2 = new AddToCartCommand("PARA123", 2L);
         command2.setData(inventory, salesList, cart, new VendorsList());
-        command2.execute();
-        assertEquals(command2.execute().feedbackToUser, "New drug added in the current cart: Paracetamol");
+        CommandResult<Object> result = command2.execute();
+        assertEquals("New drug added in the current cart: Paracetamol", result.feedbackToUser);
+        assertEquals(1, cart.getCurrentCart().size());
     }
 }

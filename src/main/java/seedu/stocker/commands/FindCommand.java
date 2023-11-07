@@ -4,6 +4,7 @@ import seedu.stocker.drugs.StockEntry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -44,27 +45,30 @@ public class FindCommand extends Command {
      * @param keyword   The keyword to search for in the inventory.
      */
     public FindCommand(String keyword, String criterion) {
-
-        this.keyword = keyword.toLowerCase();
+        if (criterion.equals("/s")) {
+            this.keyword = keyword;
+        } else {
+            this.keyword = keyword.toLowerCase();
+        }
         this.criterion = criterion;
     }
 
-    private String getResultString(StockEntry entry) {
-        String result = "Name: " + entry.getDrug().getName()
+    private String getResultString(StockEntry entry, String serialNumber) {
+        return "Name: " + entry.getDrug().getName()
                 + ", Expiry date: " + entry.getDrug().getExpiryDate()
-                + ", Serial number: " + entry.getSerialNumber()
+                + ", Serial number: " + serialNumber
                 + ", Quantity: " + entry.getQuantity();
-        return result;
     }
 
-    private static boolean matches(String criterion, String keyword, StockEntry entry) {
-        if (criterion.equals("/n")) {
+    private static boolean matches(String criterion, String keyword, StockEntry entry, String serialNumber) {
+        switch (criterion) {
+        case "/n":
             return entry.getDrug().getName().toLowerCase().contains(keyword);
-        } else if (criterion.equals("/d")) {
+        case "/d":
             return entry.getDrug().getExpiryDate().toLowerCase().contains(keyword);
-        } else if (criterion.equals("/s")) {
-            return entry.getSerialNumber().toLowerCase().contains(keyword);
-        } else {
+        case "/s":
+            return serialNumber.equals(keyword);
+        default:
             return false;
         }
     }
@@ -80,12 +84,12 @@ public class FindCommand extends Command {
             return new CommandResult<>(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
-        List<StockEntry> entries = inventory.getStockEntries();
+        List<Map.Entry<String, StockEntry>> entries = inventory.getStockEntries();
         List<String> foundResults = new ArrayList<>();
 
-        for (StockEntry entry : entries) {
-            if (matches(this.criterion, this.keyword, entry)) {
-                foundResults.add(getResultString(entry));
+        for (Map.Entry<String, StockEntry> entry : entries) {
+            if (matches(this.criterion, this.keyword, entry.getValue(), entry.getKey())) {
+                foundResults.add(getResultString(entry.getValue(), entry.getKey()));
             }
         }
 

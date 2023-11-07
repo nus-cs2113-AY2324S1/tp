@@ -179,11 +179,11 @@ Deletes a drug being tracked by the system.
 
 Format:
 
-delete /n DRUG_NAME
+delete /s SERIAL_NUMBER
 
 Example of usage:
 
-`delete /n Panadol
+`delete /s PANA002
 `
 
 Expected outcome:
@@ -477,11 +477,11 @@ Adds a drug in a specified quantity in the current cart.
 
 Format:
 
-addtocart /n DRUG_NAME /q QUANTITY
+addtocart /s SERIAL_NUMBER /q QUANTITY
 
 Example of usage:
 
-`addtocart /n Panadol /q 3
+`addtocart /s PANA01 /q 3
 `
 
 Expected outcome:
@@ -537,11 +537,11 @@ drug that you want to keep in stock.
 
 Format:
 
-setthreshold /n [Drug Name] /tq [Threshold Quantity]
+setthreshold /s [Serial number] /tq [Threshold Quantity]
 
 Example of usage:
 
-`setthreshold /n Doliprane /tq 50
+`setthreshold /s DOL002 /tq 50
 `
 
 Expected outcome:
@@ -648,8 +648,8 @@ Expected outcome:
 
 ## Command Summary
 
-- add : `add /n DRUG_NAME /d EXPIRY_DATE /q QUANTITY`
-- delete : `delete /n DRUG_NAME`
+- add : `add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY`
+- delete : `delete /s SERIAL_NUMBER`
 - list : `list`
 - find : `find /n KEYWORD` or `find /d KEYWORD`
 - help : `help`

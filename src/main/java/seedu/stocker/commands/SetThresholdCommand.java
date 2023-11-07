@@ -12,20 +12,20 @@ public class SetThresholdCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Set the threshold quantity for a drug. "
             + "(default 100)" + System.lineSeparator()
-            + "Example: " + COMMAND_WORD + " /n Doliprane /tq 50";
+            + "Example: " + COMMAND_WORD + " /s TC150 /tq 50";
 
     public static final String MESSAGE_SUCCESS = "Threshold quantity set for %1$s: %2$d";
 
-    private final String drugName;
+    private final String serialNumber;
     private final long threshold;
 
     /**
-     * Constructs a SetThresholdCommand with a specified drug name and threshold quantity.
-     * @param name The name of the drug.
+     * Constructs a SetThresholdCommand with a specified drug serial number and threshold quantity.
+     * @param serialNumber The serial number of the drug.
      * @param threshold The threshold quantity to set.
      */
-    public SetThresholdCommand(String name, long threshold) {
-        this.drugName = name;
+    public SetThresholdCommand(String serialNumber, long threshold) {
+        this.serialNumber = serialNumber;
         this.threshold = threshold;
     }
 
@@ -41,11 +41,11 @@ public class SetThresholdCommand extends Command {
             return new CommandResult("Inventory is empty.");
         }
 
-        StockEntry stockEntry = inventory.getStockEntry(drugName);
+        StockEntry stockEntry = inventory.get(serialNumber);
 
         if (stockEntry != null) {
             stockEntry.setThresholdQuantity(threshold);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, drugName, threshold));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, stockEntry.getDrug().getName(), threshold));
         } else {
             return new CommandResult("Drug not found.");
         }

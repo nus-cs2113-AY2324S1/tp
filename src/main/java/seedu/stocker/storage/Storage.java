@@ -66,7 +66,7 @@ public class Storage {
         Scanner reader = new Scanner(f);
 
         Pattern pattern = Pattern.compile(
-                "Name: (.*), Expiry Date: (.*), Serial Number: (.*), Quantity: (.*)"
+                "Name: (.*), Expiry Date: (.*), Serial Number: (.*), Quantity: (.*), Selling Price: (.*)"
         );
         while (reader.hasNextLine()) {
             Matcher matcher = pattern.matcher(reader.nextLine());
@@ -78,7 +78,7 @@ public class Storage {
                 double sellingPrice = Double.parseDouble(matcher.group(5));
 
                 Drug drug = new Drug(name, expiryDate, sellingPrice);
-                inventory.addNewDrug(name, drug, serialNumber, quantity);
+                inventory.addNewDrug(serialNumber, drug, quantity);
             } else {
                 throw new InvalidDrugFormatException("");
             }
