@@ -30,7 +30,7 @@ CafeCTRL aims to optimize managing of inventory and cash flow in a restaurant. O
 
 ---------------------------------------------------
 ## Quick Start
-1. Ensure that you have Java `11` or above installed. 
+1. Ensure that you have Java `11` installed. 
 2. Down the latest version of `CafeCtrl` from [here](https://github.com/AY2324S1-CS2113-T17-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Cafe Manager CLI Application.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.

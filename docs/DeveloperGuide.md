@@ -8,13 +8,11 @@
     * [Architecture](#architecture)
     * [How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other)
     * [Ui Component](#ui-component)
-    * [Ui Component](#ui-component-1)
     * [Parser Component](#parser-component)
     * [Storage Component](#storage-component)
     * [Data Component](#data-component)
   * [**Feature**](#feature)
     * [Add Dish](#add-dish)
-    * [Adding a Dish](#adding-a-dish)
     * [List Menu](#list-menu)
     * [Add Order](#add-order)
     * [Next Day](#next-day)
@@ -38,7 +36,18 @@
 
 Refer to the guide [_UserGuide_](UserGuide.md).
 
---------------------------------------------------------------------------------------------------------------------    
+--------------------------------------------------------------------------------------------------------------------
+## Non-functional requirements
+
+1. This application requires the use of Java 11.
+2. This application should work on most OS environment.
+
+--------------------------------------------------------------------------------------------------------------------
+## **General notes**
+
+Only relevant attributes/associations/methods will be included in the UML diagram.
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Design**
 
 ### Architecture
@@ -63,15 +72,14 @@ The bulk of the app’s work is done by the following components:
 - `Parser` : Makes sense of user input to return the appropriate command
 - `Command` : Executes the command requested by the user.
 
-### How the Architecture Components Interact with Each Other
+### How the architecture components interact with each other
 
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 ![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
 *Figure 2: Architecture Encode Sequence Diagram*
 
-### Ui Component
-### Ui Component
+### Ui component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
 
 ![Ui Class Diagram](images/class/Ui.png)
@@ -84,7 +92,7 @@ In the Ui component,
 - `Messages.java` consists of multiple strings that contains greeting, command, and goodbye messages to be shown to user
 - `ErrorMessages.java` consists of multiple strings that contain error messages to be shown to user when an incorrect command or exception has been returned
 
-### Parser Component
+### Parser component
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 ![Parser Class Diagram](images/class/Parser.png)
@@ -103,7 +111,7 @@ Below is the sequence diagram of a parser which shows how `Parser` parses user i
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
-### Storage Component
+### Storage component
 API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
 ![Storage Class Diagram](images/class/Storage.png)
@@ -115,7 +123,7 @@ The `Storage` class,
 - depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
-### Data Component
+### Data component
 Folder: [Data]({repoURL}src/main/java/seedu/cafectrl/data)
 ![Data Class Diagram](images/class/Data.png)
 *Figure 7: Data Package Class Diagram*
@@ -145,8 +153,6 @@ The `add_dish` command, add a dish to the `Menu` object and prints out a formatt
 when the `execute()` method from `AddDishCommand` is called in the main class `CafeCtrl`, the `addDish()` method is first called to add the `Dish` object to the `Menu`. It will then call the `printAddDishMessage()` method, which gets all the parameters of the `Dish` object (dishName, dishPrice, dishIngredients) and passes them to the `Ui` to then be printed out to the User.
 
 Separation of Concerns was applied to ensure the `Ui` is only responsible with only displaying messages while the `Menu` deals with the logic of adding dish to the menu. This implementation also encapsulates the details of adding a dish and displaying messages. For example, The `AddDishCommand` class doesn't need to know how the internal details of the dish adding and message printing are performed.
-
-### Adding a Dish
 
 ### List Menu
 A `list_menu` command can be used to display all the `Dish` objects stored in `Menu`.
