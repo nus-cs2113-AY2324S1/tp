@@ -67,7 +67,7 @@ public class Parser implements ParserUtil {
     /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
-    private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*) price/(.*)";
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*)\\sprice/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
@@ -179,7 +179,13 @@ public class Parser implements ParserUtil {
         float newPrice;
 
         try {
-            String dishIndexText = matcher.group(dishIndexGroup).replaceAll("\\s", "");
+            String dishIndexText = matcher.group(dishIndexGroup).trim();
+
+            // Check whether the index is empty
+            if (dishIndexText.equals("")) {
+                return new IncorrectCommand(ErrorMessages.MISSING_DISH_IN_EDIT_PRICE, ui);
+            }
+
             dishIndex = Integer.parseInt(dishIndexText);
 
             // Check whether the dish index is valid
@@ -304,8 +310,12 @@ public class Parser implements ParserUtil {
         final Pattern priceTwoDecimalPlacePattern = Pattern.compile("^-?[0-9]\\d*(\\.\\d{0,2})?$");
         Matcher priceMatcher = priceTwoDecimalPlacePattern.matcher(trimmedPriceText);
 
+        // Check whether price text is empty
+        if (priceText.equals("")) {
+            throw new ParserException(ErrorMessages.MISSING_PRICE);
+        }
         if (!priceMatcher.matches()) {
-            throw new ParserException(ErrorMessages.PRICE_TOO_MANY_DECIMAL_PLACES);
+            throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
         }
 
         float price;
