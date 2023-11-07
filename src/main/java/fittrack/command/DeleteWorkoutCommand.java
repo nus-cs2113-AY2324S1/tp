@@ -1,9 +1,9 @@
 package fittrack.command;
 
-import fittrack.parser.*;
 import fittrack.data.Workout;
+import fittrack.parser.CommandParser;
 import fittrack.parser.IndexOutOfBoundsException;
-import fittrack.parser.NumberFormatException;
+import fittrack.parser.ParseException;
 
 public class DeleteWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "deleteworkout";

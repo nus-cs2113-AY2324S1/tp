@@ -1,6 +1,5 @@
 package fittrack.parser;
 
-import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
 import fittrack.command.BmiCommand;
@@ -20,16 +19,7 @@ import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewWorkoutCommand;
 import fittrack.command.FindMealCommand;
 import fittrack.command.FindWorkoutCommand;
-import fittrack.data.Gender;
-import fittrack.data.Meal;
-import fittrack.data.Weight;
-import fittrack.data.Height;
-import fittrack.data.Calories;
-import fittrack.data.Workout;
-import fittrack.data.Date;
 
-
-import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

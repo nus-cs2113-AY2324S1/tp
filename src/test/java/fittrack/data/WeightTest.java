@@ -1,5 +1,7 @@
 package fittrack.data;
 
+import fittrack.parser.IllegalValueException;
+import fittrack.parser.NumberFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -36,5 +38,25 @@ class WeightTest {
     @Test
     void toString_w84o32_str84o3kg() {
         assertEquals("84.3kg", new Weight(84.32).toString());
+    }
+
+    @Test
+    void parseWeight_h184o32_success() {
+        try {
+            assertEquals(new Weight(84.32), Weight.parseWeight("84.32"));
+        } catch (IllegalValueException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void parseWeight_fail() {
+        assertThrows(AssertionError.class, () -> Weight.parseWeight(null));
+        assertThrows(NumberFormatException.class, () -> Weight.parseWeight(""));
+        assertThrows(NumberFormatException.class, () -> Weight.parseWeight(" "));
+        assertThrows(NumberFormatException.class, () -> Weight.parseWeight("hi"));
+        assertThrows(NumberFormatException.class, () -> Weight.parseWeight("54kg"));
+        assertThrows(IllegalValueException.class, () -> Weight.parseWeight("-0.01"));
+        assertThrows(IllegalValueException.class, () -> Weight.parseWeight("0"));
     }
 }

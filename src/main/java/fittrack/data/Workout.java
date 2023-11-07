@@ -1,7 +1,5 @@
 package fittrack.data;
 
-import fittrack.parser.IllegalValueException;
-import fittrack.parser.NumberFormatException;
 import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 

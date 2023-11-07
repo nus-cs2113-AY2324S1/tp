@@ -73,6 +73,7 @@ public class FitTrack {
 
 
         while (!isValidInput) {
+            // TODO: organize here.
             try {
                 profileSettings();
                 storage.saveProfile(userProfile);
@@ -89,7 +90,7 @@ public class FitTrack {
                 System.out.println("Error occurred while saving profile.");
                 isValidInput = true;
             } catch (ParseException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
         }
     }

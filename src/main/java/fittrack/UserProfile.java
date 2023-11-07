@@ -5,8 +5,8 @@ import fittrack.data.Weight;
 import fittrack.data.Height;
 import fittrack.data.Calories;
 import fittrack.data.Bmi;
-import fittrack.parser.*;
-import fittrack.parser.NumberFormatException;
+import fittrack.parser.ParseException;
+import fittrack.parser.PatternMatchFailException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

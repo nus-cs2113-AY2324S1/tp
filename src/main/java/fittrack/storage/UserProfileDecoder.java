@@ -33,7 +33,7 @@ public class UserProfileDecoder {
      * @throws StorageOperationException if the {@code encodedUserProfile} is in an invalid format.
      */
     public static UserProfile decodeUserProfile(List<String> encodedUserProfile)
-            throws IllegalValueException, StorageOperationException {
+            throws IllegalValueException, StorageOperationException, fittrack.parser.IllegalValueException {
         String[] decodedUserProfile = new String[5];
         for (int i = 0; i < encodedUserProfile.size(); i++) {
             decodedUserProfile[i] = encodedUserProfile.get(i);
@@ -57,7 +57,7 @@ public class UserProfileDecoder {
         Height heightData = new Height(height);
         Weight weightData = new Weight(weight);
         Calories caloriesData = new Calories(dailyCalorieLimit);
-        Gender genderData = new Gender(gender);
+        Gender genderData = Gender.parseGender((String.valueOf(gender)));
 
         return new UserProfile(heightData, weightData, caloriesData, genderData);
     }

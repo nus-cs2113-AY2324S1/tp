@@ -3,7 +3,6 @@ package fittrack.unused;
 
 import fittrack.command.Command;
 import fittrack.command.CommandResult;
-import fittrack.parser.CommandParser;
 import fittrack.parser.PatternMatchFailException;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class SaveCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) throws PatternMatchFailException {
+    public void setArguments(String args) throws PatternMatchFailException {
         if (!args.isEmpty()) {
             throw new PatternMatchFailException();
         }

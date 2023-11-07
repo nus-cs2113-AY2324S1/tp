@@ -1,6 +1,5 @@
 package fittrack.command;
 
-import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
 
 public class InvalidCommand extends Command {

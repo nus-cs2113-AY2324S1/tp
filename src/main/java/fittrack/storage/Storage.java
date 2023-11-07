@@ -162,6 +162,9 @@ public class Storage {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         } catch (NullPointerException npe) {
             throw new StorageOperationException("Empty Contents");
+        } catch (fittrack.parser.IllegalValueException e) {
+            // TODO: Temporary code
+            throw new RuntimeException(e);
         }
     }
 
