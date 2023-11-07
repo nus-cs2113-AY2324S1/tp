@@ -82,6 +82,7 @@ public class GetFromTxt {
      * @param path The path to the text file containing financial records data.
      */
     public GetFromTxt(String path) {
+        assert path != null: "path should not be null";
         file = new File(path);
     }
 
@@ -93,7 +94,10 @@ public class GetFromTxt {
      * @param expenses  The ArrayList to store Expense objects.
      * @throws FileNotFoundException If the file specified by the path cannot be found.
      */
-    public void getFromTextFile(ArrayList<Income> incomes, ArrayList<Expense> expenses) throws FileNotFoundException {
+    public void getFromTextFile(ArrayList<Income> incomes, ArrayList<Expense> expenses) throws FileNotFoundException,
+            KaChinnnngException {
+        assert incomes != null : "incomes should not be null";
+        assert expenses != null : "expenses should not be null";
         try {
             if (file.createNewFile()) {
                 return; // If there is no such file in the directory, create the file and return without reading data.
@@ -105,71 +109,80 @@ public class GetFromTxt {
             LOGGER.log(Level.WARNING, "Error accessing storage file ", e);
             System.out.println(FILE_CREATION_ERROR);
         }
-        Scanner s = new Scanner(file);                      // Create a Scanner using the File as the source
+        Scanner s;
+        try {
+            s = new Scanner(file);                      // Create a Scanner using the File as the source
+        } catch(IOException e){
+            throw new KaChinnnngException("Access denied when accessing KaChinnnngggg.txt");
+        }
         while (s.hasNext()) {
             String textLine = s.nextLine();
-            try {
-                // Parse the data from the text line
-                int expenseType = 0;
-                String commandFromFile = textLine.split(" \\|de ")[0];
-                String descriptionFromFile = textLine.split(" \\|de ")[1];
-                descriptionFromFile = descriptionFromFile.split(" \\|amt ")[0];
-                String stringAmount = textLine.split(" \\|amt ")[1];
-                stringAmount = stringAmount.split(" \\|date ")[0];
-                double amountFromFile = Double.parseDouble(stringAmount);
-                String stringDate = textLine.split(" \\|date ")[1];
-                LocalDate dateFromFile;
-                // Check for valid amount range
-                if (amountFromFile > 999999.99 || amountFromFile <= 0) {
-                    throw new KaChinnnngException("Expense amount must be between $0.01 and $999999.99");
-                }
-                if (!commandFromFile.equals("I")){
-                    dateFromFile = LocalDate.parse(stringDate.split(" \\|type ")[0]);
-                    expenseType = Integer.parseInt(textLine.split(" \\|type ")[1]);
-                }
-                else{
-                    dateFromFile = LocalDate.parse(stringDate);
-                }
-                // Create appropriate objects based on the commandFromFile
-                switch (commandFromFile) {
-                case "I":
-                    incomes.add(new Income(descriptionFromFile, dateFromFile, amountFromFile));
-                    LOGGER.log(Level.INFO , ("Income added: ") + descriptionFromFile + amountFromFile);
-                    break;
-                case "EF":
-                    expenses.add(new Food(descriptionFromFile, dateFromFile,
-                            amountFromFile, MealType.values()[expenseType]));
-                    LOGGER.log(Level.INFO , ("Food type Expense added: ") +
-                            descriptionFromFile + " with amount $ " + amountFromFile);
-                    break;
-                case "ET":
-                    expenses.add(new Transport(descriptionFromFile, dateFromFile,
-                            amountFromFile, TransportationType.values()[expenseType]));
-                    LOGGER.log(Level.INFO , ("Transport type Expense added: ") +
-                            descriptionFromFile + " with amount $ " + amountFromFile);
-                    break;
-                case "EU":
-                    expenses.add(new Utilities(descriptionFromFile, dateFromFile,
-                            amountFromFile, UtilityType.values()[expenseType]));
-                    LOGGER.log(Level.INFO , ("Utility type Expense added: ") +
-                            descriptionFromFile + " with amount $ " + amountFromFile);
-                    break;
-                default:
-                    System.out.println("The format of this line is incorrect " + "\"" + textLine + "\"");
-                }
-            } catch (IndexOutOfBoundsException e) {
-                LOGGER.log(Level.WARNING, "Details missed from the line of storage file ", e);
-                System.out.println(INDEX_OUT_OF_BOUND_FROM_FILE_ERROR + "\"" + textLine + "\"");
-            } catch (KaChinnnngException e) {
-                LOGGER.log(Level.WARNING, "Invalid amount in the storage file ", e);
-                System.out.println(AMOUNT_NOT_SUPPORT_ERROR + "\"" + textLine + "\"");
-            } catch (DateTimeParseException e){
-                LOGGER.log(Level.WARNING, "Invalid date format ", e);
-                System.out.println(DATE_TIME_FORMAT_ERROR + "\"" + textLine + "\"");
-            } catch(NumberFormatException e){
-                LOGGER.log(Level.WARNING, "Non-integer for the expense type ", e);
-                System.out.println(NUMBER_FROM_FILE_INCORRECT + "\"" + textLine + "\"");
+            execute(textLine, incomes, expenses);
+        }
+    }
+
+    public void execute(String textLine, ArrayList<Income> incomes, ArrayList<Expense> expenses){
+        try {
+            // Parse the data from the text line
+            int expenseType = 0;
+            String commandFromFile = textLine.split(" \\|de ")[0];
+            String descriptionFromFile = textLine.split(" \\|de ")[1];
+            descriptionFromFile = descriptionFromFile.split(" \\|amt ")[0];
+            String stringAmount = textLine.split(" \\|amt ")[1];
+            stringAmount = stringAmount.split(" \\|date ")[0];
+            double amountFromFile = Double.parseDouble(stringAmount);
+            String stringDate = textLine.split(" \\|date ")[1];
+            LocalDate dateFromFile;
+            // Check for valid amount range
+            if (amountFromFile > 999999.99 || amountFromFile <= 0) {
+                throw new KaChinnnngException("Expense amount must be between $0.01 and $999999.99");
             }
+            if (!commandFromFile.equals("I")){
+                dateFromFile = LocalDate.parse(stringDate.split(" \\|type ")[0]);
+                expenseType = Integer.parseInt(textLine.split(" \\|type ")[1]);
+            }
+            else{
+                dateFromFile = LocalDate.parse(stringDate);
+            }
+            // Create appropriate objects based on the commandFromFile
+            switch (commandFromFile) {
+            case "I":
+                incomes.add(new Income(descriptionFromFile, dateFromFile, amountFromFile));
+                LOGGER.log(Level.INFO , ("Income added: ") + descriptionFromFile + amountFromFile);
+                break;
+            case "EF":
+                expenses.add(new Food(descriptionFromFile, dateFromFile,
+                        amountFromFile, MealType.values()[expenseType]));
+                LOGGER.log(Level.INFO , ("Food type Expense added: ") +
+                        descriptionFromFile + " with amount $ " + amountFromFile);
+                break;
+            case "ET":
+                expenses.add(new Transport(descriptionFromFile, dateFromFile,
+                        amountFromFile, TransportationType.values()[expenseType]));
+                LOGGER.log(Level.INFO , ("Transport type Expense added: ") +
+                        descriptionFromFile + " with amount $ " + amountFromFile);
+                break;
+            case "EU":
+                expenses.add(new Utilities(descriptionFromFile, dateFromFile,
+                        amountFromFile, UtilityType.values()[expenseType]));
+                LOGGER.log(Level.INFO , ("Utility type Expense added: ") +
+                        descriptionFromFile + " with amount $ " + amountFromFile);
+                break;
+            default:
+                System.out.println("The format of this line is incorrect " + "\"" + textLine + "\"");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            LOGGER.log(Level.WARNING, "Details missed from the line of storage file ", e);
+            System.out.println(INDEX_OUT_OF_BOUND_FROM_FILE_ERROR + "\"" + textLine + "\"");
+        } catch (KaChinnnngException e) {
+            LOGGER.log(Level.WARNING, "Invalid amount in the storage file ", e);
+            System.out.println(AMOUNT_NOT_SUPPORT_ERROR + "\"" + textLine + "\"");
+        } catch (DateTimeParseException e){
+            LOGGER.log(Level.WARNING, "Invalid date format ", e);
+            System.out.println(DATE_TIME_FORMAT_ERROR + "\"" + textLine + "\"");
+        } catch(NumberFormatException e){
+            LOGGER.log(Level.WARNING, "Non-integer for the expense type ", e);
+            System.out.println(NUMBER_FROM_FILE_INCORRECT + "\"" + textLine + "\"");
         }
     }
 }
