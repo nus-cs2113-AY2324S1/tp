@@ -3,7 +3,6 @@ package seedu.cafectrl.ui;
 import seedu.cafectrl.command.EditPriceCommand;
 
 public class ErrorMessages {
-    /** Error messages */
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
     public static final String NULL_NAME_DETECTED_MESSAGE = "Error: Null dish name detected";
     public static final String INVALID_PRICE_MESSAGE = "Error: Price value entered is too big!";

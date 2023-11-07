@@ -43,7 +43,6 @@ import java.util.regex.Pattern;
  * into a format that can be interpreted by other core classes
  */
 public class Parser implements ParserUtil {
-    //@@author ziyi105
     private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
 
     //@@author DextheChik3n
@@ -92,7 +91,7 @@ public class Parser implements ParserUtil {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand("Incorrect command format!", ui); //todo: refactor magic string
+            return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -152,15 +151,22 @@ public class Parser implements ParserUtil {
     }
 
     //@@author DextheChik3n
+    /**
+     * Checks for extra characters after the matching command text
+     * to ensure the user enters the proper format for single word commands
+     * @param commandWord input command
+     * @param arguments text after the command word
+     * @return true if it is a single word command and there are no extra chars after the command, false otherwise
+     */
     private static boolean isExtraCharAfterSingleWordCommand(String commandWord, String arguments) {
         String[] singleWordCommands = {
-                ListMenuCommand.COMMAND_WORD,
-                ViewTotalStockCommand.COMMAND_WORD,
-                NextDayCommand.COMMAND_WORD,
-                PreviousDayCommand.COMMAND_WORD,
-                ShowSalesCommand.COMMAND_WORD,
-                HelpCommand.COMMAND_WORD,
-                ExitCommand.COMMAND_WORD
+            ListMenuCommand.COMMAND_WORD,
+            ViewTotalStockCommand.COMMAND_WORD,
+            NextDayCommand.COMMAND_WORD,
+            PreviousDayCommand.COMMAND_WORD,
+            ShowSalesCommand.COMMAND_WORD,
+            HelpCommand.COMMAND_WORD,
+            ExitCommand.COMMAND_WORD
         };
 
         boolean isSingleWordCommand = Arrays.asList(singleWordCommands).contains(commandWord);
