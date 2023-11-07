@@ -88,6 +88,7 @@ public class Parser implements ParserUtil {
             Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
+
         if (!matcher.matches()) {
             return new IncorrectCommand("Incorrect command format!", ui);
         }
@@ -225,7 +226,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
             }
 
-            if (isRepeatedName(dishName, menu)) {
+            if (isRepeatedDishName(dishName, menu)) {
                 throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
             }
 
@@ -279,7 +280,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
             }
 
-            if (isRepeatedName(ingredientName, ingredients)) {
+            if (isRepeatedIngredientName(ingredientName, ingredients)) {
                 continue;
             }
 
@@ -335,7 +336,7 @@ public class Parser implements ParserUtil {
      * @return true if dish name already exists in menu, false otherwise
      * @throws NullPointerException if the input string is null
      */
-    static boolean isRepeatedName(String inputDishName, Menu menu) throws NullPointerException {
+    static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
         if (inputDishName == null) {
             throw new NullPointerException();
         }
@@ -359,7 +360,8 @@ public class Parser implements ParserUtil {
      * @return true if ingredient name already exists in menu, false otherwise
      * @throws NullPointerException if the input string is null
      */
-    static boolean isRepeatedName(String inputName, ArrayList<Ingredient> ingredients) throws NullPointerException {
+    static boolean isRepeatedIngredientName(String inputName, ArrayList<Ingredient> ingredients)
+            throws NullPointerException {
         if (inputName == null) {
             throw new NullPointerException();
         }
