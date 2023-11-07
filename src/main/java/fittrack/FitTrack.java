@@ -6,6 +6,7 @@ import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
 import fittrack.parser.NegativeNumberException;
 import fittrack.parser.NumberFormatException;
+import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 import fittrack.parser.WrongGenderException;
 import fittrack.storage.Storage;
@@ -87,6 +88,8 @@ public class FitTrack {
             } catch (IOException e) {
                 System.out.println("Error occurred while saving profile.");
                 isValidInput = true;
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -122,7 +125,7 @@ public class FitTrack {
      * @throws WrongGenderException if gender is wrong
      */
     private void profileSettings()
-            throws PatternMatchFailException, NumberFormatException, NegativeNumberException, WrongGenderException {
+            throws ParseException {
         System.out.println(
                 "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
         );
@@ -130,7 +133,7 @@ public class FitTrack {
 
         assert (input != null) : "Profile cannot be null";
 
-        UserProfile profile = new CommandParser().parseProfile(input);
+        UserProfile profile = UserProfile.parseUserProfile(input);
         userProfile.setHeight(profile.getHeight());
         userProfile.setWeight(profile.getWeight());
         userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
