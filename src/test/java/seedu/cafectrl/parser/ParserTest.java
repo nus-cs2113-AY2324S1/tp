@@ -491,17 +491,31 @@ class ParserTest {
     }
 
     @Test
-    void parsePriceToFloat_validPriceString_exactFloatPrice() throws ParserException {
-        String inputPriceString = "3.14";
+    void parsePriceToFloat_validPriceString_exactFloatValue() throws ParserException {
+        String inputPriceString = "3.1";
 
-        assertEquals((float) 3.14, Parser.parsePriceToFloat(inputPriceString));
+        assertEquals((float) 3.1, Parser.parsePriceToFloat(inputPriceString));
     }
 
     @Test
-    void parsePriceToFloat_largePriceString_arithmeticExceptionThrown() throws ParserException {
+    void parsePriceToFloat_largePriceString_ParserExceptionThrown() {
         String inputPriceString = "99999999999.99";
 
         assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
+    void parsePriceToFloat_moreThanTwoDPPriceString_ParserExceptionThrown() {
+        String inputPriceString = "1.9999";
+
+        assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
+    void parsePriceToFloat_whitespaceInPriceString_exactFloatValue() throws ParserException {
+        String inputPriceString = " 1.99 ";
+
+        assertEquals((float) 1.99, Parser.parsePriceToFloat(inputPriceString));
     }
 
     @Test
