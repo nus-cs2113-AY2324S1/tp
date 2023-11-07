@@ -4,7 +4,6 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.transaction.ExpenseStatement;
 import cashleh.Ui;
 
-import java.util.logging.Level;
 /**
  * This class extends the Command class and is
  * used to encapsulate the action of deleting an expense from the application's expense statement.
@@ -35,7 +34,7 @@ public class DeleteExpense extends Command {
                 "Noted! CashLeh has removed the following expense:",
                 expenseBeingDeleted
             });
-            logger.log(Level.INFO, "expense entry was successfully deleted");
+            logger.log(loggerLevel, "expense entry was successfully deleted");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();
         }

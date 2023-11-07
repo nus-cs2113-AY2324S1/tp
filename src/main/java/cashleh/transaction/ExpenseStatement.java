@@ -89,7 +89,7 @@ public class ExpenseStatement {
         int listSize = expenseStatement.size();
         List<String []> expensesDetails = new ArrayList<>();
         for (Expense currentExpense : expenseStatement) {
-            String type = "Expense, ";
+            String type = "Expense";
             String date = currentExpense.getDate().toString();
             String amt = String.valueOf(currentExpense.getAmount());
             String cat = currentExpense.getCategory() == null ? "-" : currentExpense.getCategory().toString();
