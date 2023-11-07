@@ -164,7 +164,7 @@ add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY /p PRICE
 
 Example of usage:
 
-`add /n Panadol /d 12 June 2026 /s ABC123 /q 52 /p 19.90
+`add /n Panadol /d 01/02/2024 /s ABC123 /q 52 /p 19.90
 `
 
 Expected outcome:
@@ -209,7 +209,7 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Name: Panadol, Expiry Date: 12 June 2026/  Quantity: 300
+||  1. Name: Panadol, Expiry Date: 01/02/2024  Quantity: 300
 ||
 || Listed all drugs in the inventory.
 ```
@@ -230,9 +230,9 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 	1. Name: histamine, Expiry date: 101010, Quantity: 10
-|| 	2. Name: paracetamol, Expiry date: 101010, Quantity: 50
-|| 	3. Name: panadol, Expiry date: 101010, Quantity: 120
+||  1. Name: histamine, Expiry date: 01/02/2024, Quantity: 10
+||  2. Name: paracetamol, Expiry date: 01/02/2024, Quantity: 50
+||  3. Name: panadol, Expiry date: 01/02/2024, Quantity: 120
 ||
 || Stock Level Report (Sorted by Quantity)
 ```
@@ -258,9 +258,9 @@ Example of usage:
 Expected outcome:
 
 ```
-1. Name: panadol, Expiry Date: 12 sep, Serial number: PAN1234, Quantity: 120
+||  1. Name: panadol, Expiry Date: 01/02/2024, Serial number: PAN1234, Quantity: 120
 
-Listed all drugs with the keyword in the inventory.
+|| Listed all drugs with the keyword in the inventory.
 ```
 
 2. Finds drugs whose **expiry dates** contain any of the given keywords.
@@ -278,9 +278,9 @@ Example of usage:
 Expected outcome:
 
 ```
-1. Name: panadol, Expiry Date: 12 sep, Serial number: PAN1234, Quantity: 120
+||  1. Name: panadol, Expiry Date: 01/02/2024, Serial number: PAN1234, Quantity: 120
 
-Listed all drugs with the keyword in the inventory.
+|| Listed all drugs with the keyword in the inventory.
 ```
 
 3Finds drugs whose **serial number** contain any of the given keywords.
@@ -298,9 +298,9 @@ Example of usage:
 Expected outcome:
 
 ```
-1. Name: panadol, Expiry Date: 12 sep, Serial number: PAN1234, Quantity: 120
+||  1. Name: panadol, Expiry Date: 01/02/2024, Serial number: PAN1234, Quantity: 120
 
-Listed all drugs with the keyword in the inventory.
+|| Listed all drugs with the keyword in the inventory.
 ```
 
 ### `help` - List currently available commands in current version, their uses and how to format them in the command line
@@ -394,7 +394,7 @@ Example of usage:
 Expected outcome:
 
 ```
-New vendor added into the vendors list: Moderna
+|| New vendor added into the vendors list: Moderna
 ```
 
 ### `listVendors` - list all vendors currently being tracked by the system
@@ -412,9 +412,9 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Name : Moderna
+||  1. Name : Moderna
 ||
-||Listed all vendors in the list.
+|| Listed all vendors in the list.
 ```
 
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
@@ -506,9 +506,9 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Key : Panadole, Quantity: 10
+||  1. Key : Panadole, Quantity: 10
 ||
-||Listed all the content of your cart.
+|| Listed all the content of your cart.
 ```
 
 ### `checkout` - Checks out the current cart
@@ -567,7 +567,7 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Doliprane: 50
+||  1. Doliprane: 50
 ||
 || Listed all drugs by threshold level in the inventory.
 
