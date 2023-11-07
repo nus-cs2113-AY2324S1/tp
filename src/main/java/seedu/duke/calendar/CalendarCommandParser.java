@@ -19,6 +19,20 @@ import seedu.duke.calendar.Exceptions.ListEventException;
 import java.util.Scanner;
 
 public class CalendarCommandParser {
+
+    /**
+     * The manageException method is used to throw exceptions if those exceptions have
+     * been encountered. Each if case handles different exception errors. The method
+     * has one parameter (String userInput), which is used to check if the input has
+     * anything else after it.
+     * @param userInput is taken to check if the condition matches the exception.
+     * @throws AddEventException is thrown if the user only inputs add and nothing else.
+     * @throws DeleteEventException is thrown if the user only inputs delete all and nothing else.
+     * @throws DeleteAllException is thrown if the user only inputs delete and nothing else.
+     * @throws FindEventException is thrown if the user only inputs find and nothing else.
+     * @throws ListEventException is thrown if the user only inputs list and nothing else.
+     */
+
     public static void manageException(String userInput) throws AddEventException, DeleteEventException,
             DeleteAllException, FindEventException, ListEventException {
 
@@ -42,7 +56,17 @@ public class CalendarCommandParser {
         }
     }
 
+    /**
+     * The parseInput method is used to catch any exceptions that could occur. The method
+     * has one parameter (String input). The input is used for asserting that it is not null.
+     * If any exceptions are caught, then the corresponding messages are displayed.
+     * Last resort unknown command will run if the command is not recognized.
+     * @param input is used to check whether input is null or not.
+     * @return runs the commands
+     */
+
     public EventCommand parseInput(String input) {
+        // using asser to check whether the input is null.
         assert input != null : "input is null";
 
         try {
