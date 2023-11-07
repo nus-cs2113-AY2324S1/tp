@@ -219,7 +219,7 @@ class ParserTest {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/1";
+        String testUserInput = "edit_price dish/1";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {
@@ -239,11 +239,11 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_wrongArgumentsTypeForEditPrice_wrongArgMsg() {
+    void parseCommand_missingArgumentsTypeForEditPrice_wrongArgMsg() {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/ price/4";
+        String testUserInput = "edit_price dish/ price/4";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {
@@ -259,7 +259,7 @@ class ParserTest {
         ParserUtil parserUtil = new Parser();
         Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
         commandReturned.execute();
-        assertEquals(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+        assertEquals(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
     }
 
     @Test
@@ -267,7 +267,7 @@ class ParserTest {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/2 price/3";
+        String testUserInput = "edit_price dish/2 price/3";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {
@@ -291,7 +291,7 @@ class ParserTest {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/d price/3";
+        String testUserInput = "edit_price dish/d price/3";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {
@@ -307,7 +307,7 @@ class ParserTest {
         ParserUtil parserUtil = new Parser();
         Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
         commandReturned.execute();
-        assertEquals(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+        assertEquals(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
     }
 
     //@@author DextheChik3n
