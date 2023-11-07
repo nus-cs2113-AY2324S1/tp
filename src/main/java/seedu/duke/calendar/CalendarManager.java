@@ -18,6 +18,12 @@ public class CalendarManager {
 
     private EventStorage storage;
 
+    /**
+     * The CalendarManager initializes the accesses to other classes.
+     * It also loads events from the storage.
+     * @param events is used to initialize the EventList.
+     */
+
     public CalendarManager(ArrayList<Event> events) {
 
         EventDirectory eventdirectory = new EventDirectory();
@@ -39,9 +45,17 @@ public class CalendarManager {
 
     }
 
+    // getStorage is used for getting the storage
     public EventStorage getStorage(){
         return this.storage;
     }
+
+    /**
+     * validCommand is used for checking whether the command is valid, and
+     * not an instance of UnknownCommand.
+     * @param input is used for converting the input into command.
+     * @return returns whether the command is instance of UnknownCommand or not.
+     */
 
     public boolean validCommand(String input) {
         EventCommand command = calendarCommandParser.parseInput(input);
@@ -49,15 +63,22 @@ public class CalendarManager {
         return !(command instanceof UnknownCommand);
     }
 
+    // isResponsible calls the validCommand method.
     public boolean isResponsible(String input) {
         return validCommand(input);
     }
 
+    // processInput is used for saving the events in the EventList.
     public void processInput(String input) {
         startCalendar(input);
 
         storage.saveEvents(eventList.getEvent());
     }
+
+    /**
+     * startCalender starts the Calendar features and uses the input as a command.
+     * @param input is used for converting the input into command.
+     */
 
     public void startCalendar(String input) {
         EventCommand command = calendarCommandParser.parseInput(input);
@@ -66,5 +87,4 @@ public class CalendarManager {
         calendarUi.executeCommand(command);
         //calendarCommandParser.parseInput(command);
     }
-
 }

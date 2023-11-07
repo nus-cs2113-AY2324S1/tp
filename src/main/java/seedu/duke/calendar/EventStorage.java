@@ -32,9 +32,9 @@ public class EventStorage {
     }
 
     /**
-     * load a event from certain format
+     * load an event from certain format
      * Tokens includes attributes of Event
-     * @param tokens
+     * @param tokens is used to get event name
      * @return Event object
      */
     private Event loadEvent(String[] tokens){
@@ -52,7 +52,7 @@ public class EventStorage {
      * load list of events
      * from this.path
      * @return list of Events
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException is used if the file is not in the path
      */
     public EventList loadEvents() throws FileNotFoundException{
         EventList eventList = new EventList(new ArrayList<>());
@@ -65,7 +65,7 @@ public class EventStorage {
         }
 
         logger.log(Level.INFO, String.format(
-                "    There are currently %d events in the savefile",
+                "    There are currently %d events in the save file",
                 eventList.getSize()));
 
         return eventList;
@@ -75,15 +75,14 @@ public class EventStorage {
     /**
      * saveEvents method
      * save all events to file
-     * @param eventList
+     * @param eventList is used to access the list
      */
     public void saveEvents(ArrayList<Event> eventList) {
 
         try {
             FileWriter fw = new FileWriter(path);
 
-            for (int i = 0; i < eventList.size(); i++) {
-                Event event = eventList.get(i);
+            for (Event event : eventList) {
                 fw.write(String.format("%s | %s | %s \r\n",
                         event.getName(), event.getFrom(), event.getTo()));
             }
