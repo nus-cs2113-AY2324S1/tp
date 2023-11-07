@@ -3,7 +3,11 @@ package essenmakanan.parser;
 import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.recipe.*;
+import essenmakanan.recipe.RecipeIngredientList;
+import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.RecipeStepList;
+import essenmakanan.recipe.Step;
+import essenmakanan.recipe.Tag;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
