@@ -3,11 +3,11 @@ package fittrack.storage;
 /**
  * Signals that some given data does not fulfill some constraints.
  */
-public class IllegalValueException extends Exception {
+public class IllegalStorageValueException extends Exception {
     /**
      * @param message should contain relevant information on the failed constraint(s)
      */
-    public IllegalValueException(String message) {
+    public IllegalStorageValueException(String message) {
         super(message);
     }
 }

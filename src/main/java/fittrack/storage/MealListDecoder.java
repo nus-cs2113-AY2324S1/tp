@@ -20,11 +20,11 @@ public class MealListDecoder {
     /**
      * Decodes {@code encodedMealList} into a {@code MealList} containing the decoded data.
      *
-     * @throws IllegalValueException if any of the fields in any encoded person string is invalid.
+     * @throws IllegalStorageValueException if any of the fields in any encoded person string is invalid.
      * @throws StorageOperationException if the {@code encodedMealList} is in an invalid format.
      */
     public static MealList decodeMealList(List<String> encodedMealList)
-            throws IllegalValueException, StorageOperationException {
+            throws IllegalStorageValueException, StorageOperationException {
         MealList mealList = new MealList();
         for (String encodedMeal : encodedMealList) {
             mealList.addToList(decodeMealsFromString(encodedMeal));

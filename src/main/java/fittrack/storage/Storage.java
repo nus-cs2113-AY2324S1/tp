@@ -5,6 +5,7 @@ import fittrack.UserProfile;
 import fittrack.WorkoutList;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
+import fittrack.parser.IllegalValueException;
 
 import java.io.FileNotFoundException;
 
@@ -158,11 +159,11 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + profilePath);
-        } catch (IllegalValueException ive) {
+        } catch (IllegalStorageValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         } catch (NullPointerException npe) {
             throw new StorageOperationException("Empty Contents");
-        } catch (fittrack.parser.IllegalValueException e) {
+        } catch (IllegalValueException e) {
             // TODO: Temporary code
             throw new RuntimeException(e);
         }
@@ -186,7 +187,7 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + mealListPath);
-        } catch (IllegalValueException ive) {
+        } catch (IllegalStorageValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
@@ -209,7 +210,7 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + workoutListPath);
-        } catch (IllegalValueException ive) {
+        } catch (IllegalStorageValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
