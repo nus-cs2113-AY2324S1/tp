@@ -32,8 +32,8 @@ public class Storage {
      */
     private boolean isFileCorrupted(ArrayList<String> encodedStringArrayList) {
         //Hash string is stored as last in the ArrayList
-        int last_index = encodedStringArrayList.size() - 1;
-        String hashString = encodedStringArrayList.get(last_index);
+        int lastIndex = encodedStringArrayList.size() - 1;
+        String hashString = encodedStringArrayList.get(lastIndex);
 
         //Checks if the saved Hash is abnormal
         if (((!hashString.matches("^[0-9]+$")) && (!hashString.matches("^-[0-9]+$"))) ||
@@ -44,7 +44,7 @@ public class Storage {
 
         int fileHash = Integer.parseInt(hashString);
         //Removes the saved Hash String for decoding
-        encodedStringArrayList.remove(last_index);
+        encodedStringArrayList.remove(lastIndex);
 
         //Prepares String in same format as when encoding, generates Hash from the save file content
         String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
@@ -74,8 +74,10 @@ public class Storage {
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Menu();
         } catch (CorruptedDataException e) {
-            System.out.println("ERROR: Data file is corrupted. Clear all data files " +
-                "or restore data to uncorrupted state before trying again.");
+            ui.showToUser("ERROR: Menu Data file is corrupted.",
+                    "Clear the Menu data file or restore data to uncorrupted state before trying again.",
+                    System.lineSeparator());
+            System.out.println("Help");
             return new Menu();
         }
     }
@@ -106,8 +108,9 @@ public class Storage {
             ui.showToUser(ErrorMessages.PANTRY_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Pantry(ui);
         } catch (CorruptedDataException e) {
-            System.out.println("ERROR: Data file is corrupted. Clear all data files " +
-                    "or restore data to uncorrupted state before trying again.");
+            ui.showToUser("ERROR: Pantry Data file is corrupted.",
+                    "Clear the Pantry data file or restore data to uncorrupted state before trying again.",
+                    System.lineSeparator());
             return new Pantry(ui);
         }
     }
@@ -138,8 +141,9 @@ public class Storage {
             ui.showToUser(ErrorMessages.ORDER_LIST_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Sales();
         } catch (CorruptedDataException e) {
-            System.out.println("ERROR: Data file is corrupted. Clear all data files " +
-                    "or restore data to uncorrupted state before trying again.");
+            ui.showToUser("ERROR: Sales Data file is corrupted.",
+                    "Clear the Sales data file or restore data to uncorrupted state before trying again.",
+                    System.lineSeparator());
             return new Sales();
         }
     }
