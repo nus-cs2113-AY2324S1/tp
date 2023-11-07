@@ -91,7 +91,6 @@ public class IngredientParser {
         } catch (EssenFormatException e) {
             return false;
         }
-
         return true;
     }
 

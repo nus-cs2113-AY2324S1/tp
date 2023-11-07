@@ -54,15 +54,16 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 ### [Recipes Summary of Commands](#feature-recipe)
 
-| Action                                                                     | Format                                                      | Example                                                                            |
-|----------------------------------------------------------------------------|-------------------------------------------------------------|------------------------------------------------------------------------------------|
-| [View all recipes](#view-recipes)                                          | view r                                                      |                                                                                    |
-| [View specific recipe](#view-recipe)                                       | view r/RECIPE_ID                                            | view r/1                                                                           |
-| [Add recipe](#add-recipe)                                                  | add r/RECIPE_TITLE t/TAG_NAME s/STEP_DESCRIPTION d/DURATION | add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients |
-| [Edit recipe](#edit-recipe)                                                | edit r/RECIPE_TITLE n/NEW_NAME s/STEP_NUM, NEW_STEP         | edit r/scramble egg n/toast s/1,buy ingredients                                    |
-| [Delete Recipe](#delete-recipe)                                            | delete r/RECIPE_TITLE                                       |                                                                                    |
-| [Start recipe](#start-recipe) <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID                  | start dumpling noodles <br><br> start 1                                            |
-| [Filter recipe by ingredients](#filter-recipe)                             | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                  |
+| Action                                                                     | Format                                                      | Example                                                                              |
+|----------------------------------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| [View all recipes](#view-recipes)                                          | view r                                                      |                                                                                      |
+| [View specific recipe](#view-recipe)                                       | view r/RECIPE_ID                                            | view r/1                                                                             |
+| [Add recipe](#add-recipe)                                                  | add r/RECIPE_TITLE t/TAG_NAME s/STEP_DESCRIPTION d/DURATION | add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients   |
+| [Edit recipe](#edit-recipe)                                                | edit r/RECIPE_TITLE n/NEW_NAME s/STEP_NUM, NEW_STEP         | edit r/scramble egg n/toast s/1,buy ingredients                                      |
+| [Delete Recipe](#delete-recipe)                                            | delete r/RECIPE_TITLE                                       |                                                                                      |
+| [Duplicate Recipe](#duplicate-recipe)                                      | duplicate RECIPE_NAME or duplicate RECIPE_INDEX             | duplicate sandwich or duplicate 1                                                    |                                                              |                                                                                    |
+| [Start recipe](#start-recipe) <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID                  | start dumpling noodles <br><br> start 1                                              |
+| [Filter recipe by ingredients](#filter-recipe)                             | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                    |
 ---
 
 ### [Ingredient Summary of Commands](#feature-ingredient)
@@ -73,7 +74,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 | [View specific ingredient](#view-ingredient)       | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID         | view i/bread <br><br>view i/1                                                      |
 | [Add ingredient](#add-ingredient)                  | add i/INGREDIENT_NAME                                       | add i/bread                                                                        |
 | [Edit ingredient](#edit-ingredient)                | edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT | edit i/bread n/toast q/3 u/pc                                                      |
-| [Delete Ingredient](#delete-ingredient)            | delete r/INGREDIENT_NAME                                    |                                                                                    | 
+| [Delete Ingredient](#delete-ingredient)            | delete r/INGREDIENT_NAME                                    |                                                                                    |
 
 
 ----
@@ -122,7 +123,7 @@ List all recipes available inside the app.
    * `add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients`
 
 [Output of "View r/scramble egg" after the add command]
-   ![img_1.png](add_recipe_eg_1.png.png)
+   ![img_1.png](images/add_recipe_eg_1.png.png)
 
    <br>  Example 2:
 
@@ -130,7 +131,7 @@ List all recipes available inside the app.
     
 
 [Output of "View r/scramble egg" after the add command]
-![img.png](add_recipe_eg_2.png)
+![img.png](images/add_recipe_eg_2.png)
 
 
 ##### Message will appear to prompt user input for steps if only title, "r/" is provided
@@ -150,14 +151,14 @@ Example 1:
    * `edit r/bread n/toast` to change `bread` to `toast`
 
 [Output of "View r/bread" after the edit command]
-![img_3.png](edit_recipe_eg_1.png)
+![img_3.png](images/edit_recipe_eg_1.png)
 
 Example 2:
 
    * `edit r/bread s/1,buy ingredients` to change the first step to `buy ingredients`
 
    * [Output of "View r/bread" after the edit command]
-![img_4.png](edit_recipe_eg_2.png.png)
+![img_4.png](images/edit_recipe_eg_2.png.png)
 
 ---
 <a id="delete-recipe"></a>
@@ -169,6 +170,18 @@ Example 2:
    
    * `delete r/1` to delete a recipe at index ‘1’
 ---
+<a id="delete-recipe"></a> 
+### Duplicate a recipe - `duplicate RECIPE_NAME` or `duplicate RECIPE_INDEX`
+
+   Duplicate a recipe from the recipe list. The duplicated recipe with have `(copy)` within its name.
+
+   <br>  Example :
+
+   * `duplicate sandwich` to duplicate a recipe with the title `sandwich`
+   * `duplicate 1` to duplicate the first recipe on the list.
+
+![img_3.png](images/DuplicateRecipe.png)
+---    
 <a id="start-recipe"></a>
 #### Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
 
@@ -188,6 +201,7 @@ Example 2:
      To check if you have all ingredients needed for the recipe with id 1.
 
      ![img_1.png](images/StartRecipeCommand2.png)
+
 ---
 <a id="filter-recipe"></a>
 #### Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
@@ -220,6 +234,7 @@ Example 2:
 ---
 <a id="view-ingredient"></a>
 #### View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
+>>>>>>> master
 
     Check the quantity of an ingredient you have available in your kitchen/inventory.
 

@@ -192,4 +192,10 @@ public class Ui {
         System.out.println("Unable to save data");
         System.out.println(exception.getMessage());
     }
+
+    public static void printDuplicatedRecipe(String recipeTitle) {
+        drawDivider();
+        System.out.println(recipeTitle + " has been duplicated.");
+        drawDivider();
+    }
 }

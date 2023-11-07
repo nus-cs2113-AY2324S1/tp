@@ -133,7 +133,43 @@ be executed as follows:
 
   `AddRecipeCommand` will call `Ui` class to print out the title of the recently added recipe.
 
+
 <img src="images/AddNewRecipeSequenceDiagram.png" width="963" />
+
+
+### Duplicate Recipe Feature
+
+The duplicate recipe feature is facilitated by the `DuplicateRecipeCommand` class. By calling `executeCommand` on the
+class, the steps will be executed as follows:
+- **Step1**
+
+  `DuplicateRecipeCommand` will parse the selected index using `RecipeParser` with a recipe title or index.
+
+
+- **Step2**
+
+  `DuplicateRecipeCommand` will get the specified recipe which going to be duplicated.
+
+
+- **Step3**
+
+  `DuplicatedRecipeCommand` will create using the recipe's title with a copy indicate `(copy)`, the recipe's steps
+  , and the recipe's ingredients
+
+
+- **Step4**
+
+  `DuplicateRecipeCommand` will add the recently created recipe into the recipe list.
+
+
+- **Step5**
+
+  `DuplicateRecipeCommand` will call `Ui` class to print out the title of the recently duplicated recipe.
+
+
+<img src="images/DuplicateRecipeSequenceDiagram.png" width="821" />
+
+
 
 ### View Ingredients feature
 The view ingredient feature is facilitated by the `ViewIngredientCommand` class. Users can input

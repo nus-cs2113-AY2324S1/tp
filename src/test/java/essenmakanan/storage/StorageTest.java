@@ -21,19 +21,19 @@ public class StorageTest {
     private static String DATA_EMPTY_RECIPE_TEXT_PATH = "src/test/data/emptyRecipe.txt";
 
     @Test
-    public void accessIngredientDatabase_invalidPath_throwsEssenFileNotFoundException() {
+    public void accessIngredientDatabase_invalidPath_expectEssenFileNotFoundException() {
         IngredientStorage ingredientStorage = new IngredientStorage(DATA_INVALID_PATH);
         assertThrows(EssenFileNotFoundException.class, ingredientStorage::restoreSavedData);
     }
 
     @Test
-    public void accessRecipeDatabase_invalidPath_throwsEssenFileNotFoundException() {
+    public void accessRecipeDatabase_invalidPath_expectEssenFileNotFoundException() {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_PATH);
         assertThrows(EssenFileNotFoundException.class, recipeStorage::restoreSavedData);
     }
 
     @Test
-    public void restoreSavedIngredients_storedIngredients_returnsFilledIngredientList() throws Exception {
+    public void restoreSavedIngredients_storeValidIngredients_returnsFilledIngredientList() throws Exception {
         IngredientStorage ingredientStorage = new IngredientStorage(DATA_INGREDIENT_TEST_PATH);
         IngredientList ingredients = new IngredientList(ingredientStorage.restoreSavedData());
 
@@ -51,7 +51,7 @@ public class StorageTest {
     }
 
     @Test
-    public void restoreSavedRecipes_storedRecipes_returnFilledRecipeList() throws Exception {
+    public void restoreSavedRecipes_storedValidRecipes_returnFilledRecipeList() throws Exception {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_RECIPE_TEST_PATH);
         RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
 
@@ -71,7 +71,7 @@ public class StorageTest {
     }
 
     @Test
-    public void restoreEmptyRecipes_storedRecipes_returnRecipeWithEmptyAttributes() throws Exception {
+    public void restoreEmptyRecipes_storedValidRecipes_returnRecipeWithEmptyAttributes() throws Exception {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_EMPTY_RECIPE_TEXT_PATH);
         RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
 
