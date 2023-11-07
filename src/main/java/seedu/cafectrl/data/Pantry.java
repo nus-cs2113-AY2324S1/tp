@@ -99,9 +99,11 @@ public class Pantry {
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
+
             if (usedIngredientFromStock == null) {
                 return false;
             }
+
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
             int finalQuantity = stockQuantity - usedQuantity;
@@ -121,7 +123,7 @@ public class Pantry {
      */
     private Ingredient getIngredient(Ingredient dishIngredient) {
         return pantryStock.stream()
-                .filter(ingredient -> ingredient.getName().equals(dishIngredient.getName()))
+                .filter(ingredient -> ingredient.getName().trim().equals(dishIngredient.getName().trim()))
                 .findFirst()
                 .orElse(null);
     }
