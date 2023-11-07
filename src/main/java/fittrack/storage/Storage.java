@@ -5,7 +5,7 @@ import fittrack.UserProfile;
 import fittrack.WorkoutList;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
-import fittrack.parser.IllegalValueException;
+
 import java.io.FileNotFoundException;
 
 import java.io.File;

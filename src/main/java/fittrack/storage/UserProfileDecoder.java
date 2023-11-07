@@ -5,7 +5,6 @@ import fittrack.data.Calories;
 import fittrack.data.Gender;
 import fittrack.data.Height;
 import fittrack.data.Weight;
-import fittrack.parser.IllegalValueException;
 import fittrack.storage.Storage.StorageOperationException;
 
 import java.util.List;

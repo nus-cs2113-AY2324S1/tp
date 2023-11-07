@@ -1,4 +1,4 @@
-package fittrack.parser;
+package fittrack.storage;
 
 /**
  * Signals that some given data does not fulfill some constraints.

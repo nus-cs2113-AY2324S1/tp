@@ -4,7 +4,6 @@ import fittrack.MealList;
 import fittrack.data.Calories;
 import fittrack.data.Meal;
 import fittrack.data.Date;
-import fittrack.parser.IllegalValueException;
 import fittrack.storage.Storage.StorageOperationException;
 
 import java.util.List;
