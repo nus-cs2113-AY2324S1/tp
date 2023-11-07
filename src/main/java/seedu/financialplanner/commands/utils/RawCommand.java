@@ -1,4 +1,4 @@
-package seedu.financialplanner.commands;
+package seedu.financialplanner.commands.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

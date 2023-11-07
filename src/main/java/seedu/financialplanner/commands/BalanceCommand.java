@@ -1,6 +1,8 @@
 package seedu.financialplanner.commands;
 
 import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.utils.Ui;
 
 import java.text.DecimalFormat;
@@ -9,9 +11,14 @@ import java.util.ArrayList;
 /**
  * Represents a command for displaying balance.
  */
+@SuppressWarnings("unused")
 public class BalanceCommand extends Command {
+    public static final String NAME = "balance";
+
+    public static final String USAGE =
+            "balance";
     private final Ui ui = Ui.getInstance();
-    
+
     public BalanceCommand(RawCommand rawCommand) {
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new ArrayList<>(rawCommand.extraArgs.keySet()).get(0);

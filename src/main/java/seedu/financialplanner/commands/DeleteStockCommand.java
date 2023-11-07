@@ -1,5 +1,7 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.utils.Ui;
@@ -8,7 +10,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@SuppressWarnings("unused")
+
 public class DeleteStockCommand extends Command {
+    public static final String NAME = "deletestock";
+
+    public static final String USAGE =
+            "deletestock </s STOCK CODE>";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;
 

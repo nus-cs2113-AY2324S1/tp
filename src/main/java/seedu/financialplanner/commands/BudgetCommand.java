@@ -1,22 +1,33 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.utils.Ui;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.ArrayList;
 
 /**
  * Represents a command to manage the budget.
  */
+@SuppressWarnings("unused")
 public class BudgetCommand extends Command {
+    public static final String NAME = "budget";
+
+    public static final String USAGE =
+            "budget set </b BUDGET>"
+            + "\n" + "budget update </b BUDGET>"
+            + "\n" + "budget delete"
+            + "\n" + "budget reset"
+            + "\n" + "budget view";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final Ui ui = Ui.getInstance();
     private double budget;
-    private String command;
+    private final String command;
 
     /**
      * Constructs a new BudgetCommand and checks if the user input is a valid command.
@@ -36,7 +47,7 @@ public class BudgetCommand extends Command {
         validateBudget(rawCommand);
 
         assert budget > 0 && budget <= Cashflow.getBalance() : "Budget should be greater than 0 and less than " +
-                "or equal to total balance";
+                                                               "or equal to total balance";
         rawCommand.extraArgs.remove("b");
 
         if (!rawCommand.extraArgs.isEmpty()) {
@@ -80,7 +91,7 @@ public class BudgetCommand extends Command {
         if (!command.equals("set") && !command.equals("update")) {
             logger.log(Level.WARNING, "Invalid arguments for budget command");
             throw new FinancialPlannerException("Budget operation must be one of the following: set, update, " +
-                    "delete, reset, view.");
+                                                "delete, reset, view.");
         }
 
         if (command.equals("set") && Budget.hasBudget()) {
@@ -103,7 +114,7 @@ public class BudgetCommand extends Command {
     @Override
     public void execute() {
         assert command.equals("set") || command.equals("update") || command.equals("delete") ||
-                command.equals("reset") || command.equals("view");
+               command.equals("reset") || command.equals("view");
 
         switch (command) {
         case "set":

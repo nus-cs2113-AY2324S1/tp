@@ -1,12 +1,20 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.enumerations.ExpenseType;
+import seedu.financialplanner.goal.Goal;
 import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.utils.Ui;
-import seedu.financialplanner.cashflow.CashflowList;
-import seedu.financialplanner.goal.Goal;
-import seedu.financialplanner.enumerations.ExpenseType;
+
+@SuppressWarnings("unused")
 public class MarkGoalCommand extends Command {
+    public static final String NAME = "markgoal";
+
+    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
     private final int index;
+
     public MarkGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if (rawCommand.args.size() == 1) {
@@ -23,11 +31,11 @@ public class MarkGoalCommand extends Command {
         if (index == 0) {
             throw new IllegalArgumentException("Index must be within the list");
         }
-        if (index > WishList.getInstance().list.size()+1){
+        if (index > WishList.getInstance().list.size() + 1) {
             throw new IllegalArgumentException("Index exceed the list size");
         }
         rawCommand.extraArgs.remove("i");
-        if(!rawCommand.extraArgs.isEmpty()){
+        if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new java.util.ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
             throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
         }
@@ -35,7 +43,7 @@ public class MarkGoalCommand extends Command {
 
     @Override
     public void execute() {
-        Goal goal = WishList.getInstance().list.get(index-1);
+        Goal goal = WishList.getInstance().list.get(index - 1);
         goal.markAsDone();
         Ui.getInstance().showMessage("You have achieved " + goal + System.lineSeparator() + "Congratulations!");
         CashflowList.getInstance().addExpense(goal.getAmount(), ExpenseType.OTHERS, 0, goal.getLabel());

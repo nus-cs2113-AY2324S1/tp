@@ -1,15 +1,22 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@SuppressWarnings("unused")
 public class DeleteCashflowCommand extends Command {
+    public static final String NAME = "delete";
+
+    public static final String USAGE =
+            "delete [income/expense] <INDEX>";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;
     protected int index;
@@ -100,7 +107,7 @@ public class DeleteCashflowCommand extends Command {
         }
 
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
-                || category.equals(CashflowCategory.RECURRING);
+               || category.equals(CashflowCategory.RECURRING);
         assert index != 0;
 
         switch (category) {
@@ -144,6 +151,7 @@ public class DeleteCashflowCommand extends Command {
             throw new IllegalArgumentException("Index must be within the list");
         }
     }
+
     private void handleDeleteRecurWithCategory() {
         try {
             logger.log(Level.INFO, "Deleting recurrence with category");
@@ -153,6 +161,7 @@ public class DeleteCashflowCommand extends Command {
             throw new IllegalArgumentException("Index must be within the list");
         }
     }
+
     private void handleDeleteCashflowWithCategory() {
         try {
             logger.log(Level.INFO, "Deleting cashflow with category");

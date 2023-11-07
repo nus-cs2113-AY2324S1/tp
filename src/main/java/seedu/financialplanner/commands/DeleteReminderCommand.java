@@ -1,16 +1,25 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.reminder.Reminder;
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import seedu.financialplanner.reminder.Reminder;
-public class DeleteReminderCommand extends Command{
+
+@SuppressWarnings("unused")
+public class DeleteReminderCommand extends Command {
+    public static final String NAME = "deletereminder";
+
+    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
+
     public DeleteReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
-        if(rawCommand.args.size() == 1) {
+        if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
         } else {
             throw new IllegalArgumentException("Incorrect arguments.");
@@ -42,8 +51,8 @@ public class DeleteReminderCommand extends Command{
 
     @Override
     public void execute() {
-        Reminder reminderToDelete = ReminderList.getInstance().list.get(index-1);
-        ReminderList.getInstance().deleteReminder(index-1);
+        Reminder reminderToDelete = ReminderList.getInstance().list.get(index - 1);
+        ReminderList.getInstance().deleteReminder(index - 1);
         Ui.getInstance().showMessage("You have deleted " + reminderToDelete);
     }
 }

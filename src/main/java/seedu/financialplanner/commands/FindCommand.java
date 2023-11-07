@@ -1,12 +1,19 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class FindCommand extends Command {
+    public static final String NAME = "find";
+
+    public static final String USAGE =
+            "find <KEYWORD>";
     private final String description;
 
     public FindCommand(RawCommand rawCommand) {
