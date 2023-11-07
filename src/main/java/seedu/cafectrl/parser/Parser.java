@@ -97,10 +97,6 @@ public class Parser implements ParserUtil {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        if (isExtraCharAfterSingleWordCommand(commandWord, arguments)) {
-            return new IncorrectCommand(ErrorMessages.INVALID_SINGLE_WORD_COMMAND_FORMAT, ui);
-        }
-
         switch (commandWord) {
 
         case AddDishCommand.COMMAND_WORD:
@@ -148,35 +144,6 @@ public class Parser implements ParserUtil {
         default:
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
-    }
-
-    //@@author DextheChik3n
-    /**
-     * Checks for extra characters after the matching command text
-     * to ensure the user enters the proper format for single word commands
-     * @param commandWord input command
-     * @param arguments text after the command word
-     * @return true if it is a single word command and there are no extra chars after the command, false otherwise
-     */
-    private static boolean isExtraCharAfterSingleWordCommand(String commandWord, String arguments) {
-        String[] singleWordCommands = {
-            ListMenuCommand.COMMAND_WORD,
-            ViewTotalStockCommand.COMMAND_WORD,
-            NextDayCommand.COMMAND_WORD,
-            PreviousDayCommand.COMMAND_WORD,
-            ShowSalesCommand.COMMAND_WORD,
-            HelpCommand.COMMAND_WORD,
-            ExitCommand.COMMAND_WORD
-        };
-
-        boolean isSingleWordCommand = Arrays.asList(singleWordCommands).contains(commandWord);
-        boolean isArgumentsBlank = arguments.isBlank();
-
-        if (isSingleWordCommand && !isArgumentsBlank) {
-            return true;
-        }
-
-        return false;
     }
 
     //All prepareCommand Classes
@@ -242,6 +209,7 @@ public class Parser implements ParserUtil {
             }
 
             // To retrieve specific arguments from arguments
+            //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
             float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
