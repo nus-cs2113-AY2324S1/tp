@@ -8,6 +8,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.GenericDeclaration;
 import java.util.ArrayList;
 
 //@@author ziyi105
@@ -23,18 +24,49 @@ public class Storage {
         this.ui = ui;
     }
 
+    private boolean isFileCorrupted(ArrayList<String> encodedMenu) {
+        int last_index = encodedMenu.size() - 1;
+        String hashString = encodedMenu.get(last_index);
+        if (((!hashString.matches("^[0-9]+$")) && (!hashString.matches("^-[0-9]+$"))) ||
+                hashString.matches("^0{2,}$")) {
+            //logger.log(Level.INFO, "Corrupted data file");
+            //throw new CorruptedDataException();
+            return true;
+        }
+        int fileHash = Integer.parseInt(hashString);
+        encodedMenu.remove(last_index);
+        String encodedMenuAsString = String.join(", ", encodedMenu).trim();
+        //System.out.println(encodedMenuAsString);
+        int encodedMenuHash = encodedMenuAsString.hashCode();
+        //System.out.println("FileHash: " + fileHash);
+        //System.out.println("EncodedHash: " + encodedMenuHash);
+        if (encodedMenuHash != fileHash) {
+            //throw new CorruptedDataException();
+            return true;
+        }
+        return false;
+    }
+
     //@@author ShaniceTang
     /**
      * Loads menu data from a text file, decodes it, and returns it as a Menu object.
      *
      * @return A Menu object containing data from the file.
      */
-    public Menu loadMenu() {
+    public Menu loadMenu(){
         try {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-            return Decoder.decodeMenuData(encodedMenu);
+            if (isFileCorrupted(encodedMenu)) {
+                throw new CorruptedDataException();
+                //System.out.println("Corrupted pls get help");
+            }
+            return Decoder. decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            return new Menu();
+        } catch (CorruptedDataException e) {
+        System.out.println("ERROR: Data file is corrupted. Clear all data files " +
+                "or restore data to uncorrupted state before trying again.");
             return new Menu();
         }
     }

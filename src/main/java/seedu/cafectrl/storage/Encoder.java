@@ -36,6 +36,14 @@ public class Encoder {
             dishString.append(System.lineSeparator());
             menuStringList.add(String.valueOf(dishString));
         }
+        String menuStringListAsString = String.join(", ", menuStringList).trim();
+        //System.out.println("Original: \n" + menuStringListAsString);
+        String menuStringListAsStringWithoutLine = menuStringListAsString.replace("\n", "").replace("\r", "");
+        //System.out.println("Replace: \n" + menuStringListAsStringWithoutLine);
+        int menuStringListHash = menuStringListAsStringWithoutLine.hashCode();
+        String menuStringListHashAsString = String.valueOf(menuStringListHash);
+        //System.out.println(menuStringListHashAsString);
+        menuStringList.add(menuStringListHashAsString);
         return menuStringList;
     }
 
