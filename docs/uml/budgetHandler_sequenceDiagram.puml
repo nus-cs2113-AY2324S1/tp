@@ -6,44 +6,55 @@ activate ViewBudget
 ViewBudget -> BudgetHandler: printBudget()
 activate BudgetHandler
 
+BudgetHandler -> BudgetHandler: setBudgetPercentage()
+activate BudgetHandler
+BudgetHandler -> FinancialStatement: getNetCash()
+activate FinancialStatement
+FinancialStatement --> BudgetHandler
 
-BudgetHandler -> Progress: setBudgetPercentage()
+BudgetHandler -> Progress: Progress(cashOnHand, budgetAmount)
 activate Progress
+Progress --> BudgetHandler
+BudgetHandler --> BudgetHandler
+deactivate BudgetHandler
 
 
 alt budget.isActive()
 
-alt budgetHasBeenMaxedOut
-BudgetHandler -> BudgetHandler: printSeriousWarning()
-activate BudgetHandler
-BudgetHandler --> BudgetHandler
-deactivate BudgetHandler
-else budgetIsNotOnTrack
-BudgetHandler -> BudgetHandler: printBasicWarning()
-activate BudgetHandler
-BudgetHandler --> BudgetHandler
-deactivate BudgetHandler
-end
+    opt budgetHasBeenMaxedOut
+        BudgetHandler -> BudgetHandler: printSeriousWarning()
+        activate BudgetHandler
+        BudgetHandler --> BudgetHandler
+        deactivate BudgetHandler
+
+    else budgetIsNotOnTrack
+        BudgetHandler -> BudgetHandler: printBasicWarning()
+        activate BudgetHandler
+        BudgetHandler --> BudgetHandler
+        deactivate BudgetHandler
+    end
 
 
-BudgetHandler -> Ui: printMultipleText(texts)
-activate Ui
+    BudgetHandler -> Ui: printMultipleText(texts)
+    activate Ui
 
-Ui -> Budget: toString()
-activate Budget
-Budget --> Ui
-deactivate Budget
+    Ui -> Budget: toString()
+    activate Budget
+    Budget --> Ui
+    deactivate Budget
 
-Ui -> FinancialStatement: getNetCash()
-activate FinancialStatement
-FinancialStatement --> Ui
-deactivate FinancialStatement
-Ui -> Progress: displayProgressBar()
-Progress --> Ui
-Ui --> BudgetHandler
-deactivate Ui
+    Ui -> FinancialStatement: getNetCash()
+
+    FinancialStatement --> Ui
+    deactivate FinancialStatement
+    Ui -> Progress: displayProgressBar()
+    Progress --> Ui
+    Ui --> BudgetHandler
+    deactivate Ui
+
 else
-<- BudgetHandler: throw CashLehBudgetException
+    <--BudgetHandler: throw CashLehBudgetException(text)
+
 end
 BudgetHandler --> ViewBudget
 deactivate ViewBudget
