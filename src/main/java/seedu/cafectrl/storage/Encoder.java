@@ -120,6 +120,7 @@ public class Encoder {
                 encodedList.add(String.valueOf(orderString));
             }
         }
-        return encodedList;
+        ArrayList<String> encodedListHashed = hashEncoding(encodedList);
+        return encodedListHashed;
     }
 }

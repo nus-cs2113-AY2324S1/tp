@@ -122,9 +122,17 @@ public class Storage {
     public Sales loadOrderList(Menu menu) {
         try {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
+            if (isFileCorrupted(encodedOrderList)) {
+                throw new CorruptedDataException();
+                //System.out.println("Corrupted pls get help");
+            }
             return Decoder.decodeSales(encodedOrderList, menu);
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.ORDER_LIST_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
+            return new Sales();
+        } catch (CorruptedDataException e) {
+            System.out.println("ERROR: Data file is corrupted. Clear all data files " +
+                    "or restore data to uncorrupted state before trying again.");
             return new Sales();
         }
     }
