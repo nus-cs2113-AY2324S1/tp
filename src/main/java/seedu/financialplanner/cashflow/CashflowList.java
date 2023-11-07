@@ -198,7 +198,7 @@ public class CashflowList {
             int listIndex = cashflowIndexFinder(category, index);
             Cashflow toRemoveRecur = list.get(listIndex);
             if (toRemoveRecur.getRecur() == 0 || toRemoveRecur.hasRecurred) {
-                ui.showMessage("Cashflow is already not recurring or has already recurred");
+                ui.showMessage("Cashflow is already not recurring or has already recurred.");
             } else {
                 toRemoveRecur.setDate(null);
                 toRemoveRecur.setRecur(0);
