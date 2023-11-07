@@ -2,7 +2,6 @@ package fittrack.command;
 
 import fittrack.data.Date;
 import fittrack.data.Step;
-import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
 
 public class TotalStepsCommand extends Command{
@@ -14,8 +13,6 @@ public class TotalStepsCommand extends Command{
 
     private Date date;
     private Step totalSteps;
-//    private int totalSteps = 0;
-
 
     public TotalStepsCommand(String commandLine) {
         super(commandLine);
