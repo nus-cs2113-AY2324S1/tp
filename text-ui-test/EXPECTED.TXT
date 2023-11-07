@@ -168,15 +168,15 @@ Type `checkrecommendedweight` calculate the recommended weight for your height.
 
 Recommended Weight: 66.02 kg
 
-`save file 1` is an invalid command.
-`save` saves your profile, meals and workout data.
-Type `save` to save your profile, meals and workout data.
+`save` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
 
-Your data has been saved!
+`save` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
 
 `help` shows help message of the command.
 Existing commands:
-help, exit, save,
+help, exit,
 editprofile, viewprofile, bmi, checkrecommendedweight,
 addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,
 addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt
@@ -230,8 +230,8 @@ Type `findmeal <KEYWORD>` to find a meal.
 `findworkout` finds the workout you are looking for in your workout list.
 Type `findworkout <KEYWORD>` to find a workout.
 
-`save` saves your profile, meals and workout data.
-Type `save` to save your profile, meals and workout data.
+`save` is an invalid command.
+Type `help` or `help <COMMAND>` to view help.
 
 Goodbye! Hope to see you soon!
 

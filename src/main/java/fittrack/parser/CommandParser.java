@@ -15,7 +15,6 @@ import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
-import fittrack.command.SaveCommand;
 import fittrack.command.ViewMealCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewWorkoutCommand;
@@ -43,7 +42,7 @@ import java.util.regex.Pattern;
  */
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
-    public static final String ALL_COMMAND_WORDS = "help, exit, save,\n" +
+    public static final String ALL_COMMAND_WORDS = "help, exit,\n" +
             "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
             "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
             "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt";
@@ -129,8 +128,6 @@ public class CommandParser {
             return new ViewWorkoutCommand(commandLine);
         case BmiCommand.COMMAND_WORD:
             return new BmiCommand(commandLine);
-        case SaveCommand.COMMAND_WORD:
-            return new SaveCommand(commandLine);
         case CaloriesConsumedCommand.COMMAND_WORD:
             return new CaloriesConsumedCommand(commandLine);
         case CheckRecommendedWeightCommand.COMMAND_WORD:
