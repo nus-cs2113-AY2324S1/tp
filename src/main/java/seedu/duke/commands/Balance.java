@@ -17,6 +17,8 @@ public class Balance {
     private final ArrayList<Expense> expenses;
 
     public Balance(ArrayList<Income> incomes, ArrayList<Expense> expenses) {
+        assert incomes != null : "incomes should not be null";
+        assert expenses != null : "expenses should not be null";
         this.incomes = incomes;
         this.expenses = expenses;
     }

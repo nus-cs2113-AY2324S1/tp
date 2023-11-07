@@ -12,12 +12,16 @@ import seedu.duke.financialrecords.Transport;
 import seedu.duke.financialrecords.expensetypes.MealType;
 import seedu.duke.financialrecords.expensetypes.TransportationType;
 import seedu.duke.financialrecords.expensetypes.UtilityType;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GetFromTxtTest {
     private ArrayList<Income> incomes;
@@ -146,13 +150,14 @@ public class GetFromTxtTest {
     @Test
     public void testGetFromTxtWithWrongFormat() throws KaChinnnngException, IOException {
         try (FileWriter fw = new FileWriter(path)) {
-            fw.write("nolthing special");
-            fw.write("EF | chicken sandwich | 10000000000.0 | 2023-10-01 | 2\n");
-            fw.write("EF | chicken sandwich | -1 | 2023-10/01 | 2\n");
+            fw.write("nothing special");
+            fw.write("EF |de chicken sandwich |amt 10000000000.0 |date 2023-10-01 |type 2\n");
+            fw.write("I |de Salary |amt 5000.00 |date 2023-10-\n");
+            fw.write("EF |de chicken sandwich |amt -1 |date 2023-10/01 |type 2\n");
             fw.write("EF \n");
-            fw.write("ABC | chicken sandwich | 1000.0 | 2023-10-01 | 1\n");
-            fw.write("EF | chicken sandwich | 1000.0 | 2023-10-01 | asdf\n");
-            fw.write("EF | chicken sandwich | 10000000000.0 | 2023-10-01 | 32\n");
+            fw.write("ABC |de chicken sandwich |amt 1000.0 |date 2023-10-01 |type 1\n");
+            fw.write("EF |de chicken sandwich |amt 1000.0 |date 2023-10-01 |type asdf\n");
+            fw.write("EF |de chicken sandwich |amt 10000000000.0 |date 2023-10-01 |type 32\n");
         } catch (IOException e) {
             System.out.println("Error");
         }
@@ -162,6 +167,27 @@ public class GetFromTxtTest {
         getFromTxt.getFromTextFile(newIncomes, newExpenses);
         assertEquals(0, newIncomes.size());
         assertEquals(0, newExpenses.size());
+    }
+    /**
+     * Test the {@link SaveToTxt#saveIncomeToTextFile(ArrayList)} method with multiple incomes records without expenses,
+     * This test case checks whether the more than one income from the txt file save to the list correctly
+     */
+    @Test
+    public void testGetFromTxtWithoutReadAccess() throws KaChinnnngException {
+        SaveToTxt test = new SaveToTxt(path);
+        new ClearAll(incomes,expenses).clearAllIncomeAndExpense();
+        test.saveIncomeAndExpense(incomes, expenses);
+        incomes.add(new Income("Salary", LocalDate.of(2023, 10, 10), 5000.0));
+        incomes.add(new Income("Bonus", LocalDate.of(2023, 10, 15), 1000.0));
+        test.saveIncomeToTextFile(incomes);
+        ArrayList<Income> newIncomes = new ArrayList<>();
+        ArrayList<Expense> newExpenses = new ArrayList<>();
+        GetFromTxt getFromTxt = new GetFromTxt(path);
+        File file = new File(path);
+        file.setReadable(false);
+        assertThrows(KaChinnnngException.class, () -> getFromTxt.getFromTextFile(newIncomes, newExpenses));
+        file.setReadable(true);
+        assertEquals(0, newIncomes.size());
     }
 
 }
