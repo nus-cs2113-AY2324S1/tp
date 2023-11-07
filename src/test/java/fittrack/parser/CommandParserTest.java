@@ -268,7 +268,7 @@ class CommandParserTest {
     @Test
     void parseFind_key_success() {
         try {
-            String keyword = new CommandParser().parseFind("key");
+            String keyword = new CommandParser().parseKeyword("key");
             assertEquals("key", keyword);
         } catch (PatternMatchFailException e) {
             throw new RuntimeException(e);
@@ -278,7 +278,7 @@ class CommandParserTest {
     @Test
     void parseFind_fail() {
         CommandParser parser = new CommandParser();
-        assertThrows(PatternMatchFailException.class, () -> parser.parseFind(""));
+        assertThrows(PatternMatchFailException.class, () -> parser.parseKeyword(""));
     }
 
     @Test

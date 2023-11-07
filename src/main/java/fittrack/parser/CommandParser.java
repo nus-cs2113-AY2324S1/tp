@@ -56,7 +56,7 @@ public class CommandParser {
     private static final String NAME_CG = "name";
     private static final String CALORIES_CG = "calories";
     private static final String DATE_CG = "date";
-    private static final String KEYWORD_CG = "keyword";
+
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<" + WORD_CG + ">\\S+)(?<" + ARGS_CG + ">.*)"
     );
@@ -72,9 +72,6 @@ public class CommandParser {
     );
     private static final Pattern DATE_PATTERN = Pattern.compile(
             "(?<" + DATE_CG + ">\\S+)"
-    );
-    private static final Pattern FIND_PATTERN = Pattern.compile(
-            "(?<" + KEYWORD_CG + ">\\S+)"
     );
 
     public Command parseCommand(String userCommandLine) {
@@ -270,13 +267,11 @@ public class CommandParser {
         }
     }
 
-    public String parseFind(String keyword) throws PatternMatchFailException {
-        final Matcher matcher = FIND_PATTERN.matcher(keyword);
-        if (!matcher.matches()) {
+    public String parseKeyword(String keyword) throws PatternMatchFailException {
+        if (keyword.isEmpty()) {
             throw new PatternMatchFailException();
         }
-
-        return matcher.group(KEYWORD_CG);
+        return keyword;
     }
 
     public String getFirstWord(String str) {
