@@ -23,10 +23,6 @@ import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewStepsCommand;
 import fittrack.command.ViewWorkoutCommand;
 
-import fittrack.data.Date;
-import fittrack.data.Step;
-
-import java.time.DateTimeException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
