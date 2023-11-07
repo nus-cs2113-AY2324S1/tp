@@ -52,11 +52,7 @@ public class Storage {
 
             if (f.mkdir()) { // if the directory does not exist, create a new one
                 System.out.println("Directory created: " + f.getName());
-            } else {
-                System.out.println("Directory already exists.");
-                ui.printLine();
             }
-
             if (!this.profileFile.exists()) { // if file that stores profile data does not exist, create one
                 profileFile.createNewFile();
             }
