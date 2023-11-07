@@ -12,13 +12,14 @@ import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 public class StartRecipeCommand extends Command {
+
+    public IngredientList missingIngredients;
+    public IngredientList insufficientIngredients;
+    public IngredientList diffUnitIngredients;
     private String input; //either id or name of recipe
     private IngredientList ingredients;
     private RecipeList recipes;
     private RecipeIngredientList recipeIngredients;
-    public IngredientList missingIngredients;
-    public IngredientList insufficientIngredients;
-    public IngredientList diffUnitIngredients;
 
     public StartRecipeCommand(String input, RecipeList recipes, IngredientList ingredients) {
         this.input = input;

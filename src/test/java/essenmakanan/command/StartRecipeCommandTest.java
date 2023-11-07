@@ -59,9 +59,12 @@ public class StartRecipeCommandTest {
         IngredientList insufficientIngredients = new IngredientList();
         double ingredientQty1 = 100;
         double ingredientQty2 = 1;
-        insufficientIngredients.addIngredient(new Ingredient("flour", Double.toString(ingredientQty1), IngredientUnit.GRAM));
-        insufficientIngredients.addIngredient(new Ingredient("egg", Double.toString(ingredientQty2), IngredientUnit.PIECE));
-        assert command.getInsufficientIngredients().equals(insufficientIngredients) : "The insufficient quantity was not detected";
+        insufficientIngredients.addIngredient(new Ingredient("flour",
+                Double.toString(ingredientQty1), IngredientUnit.GRAM));
+        insufficientIngredients.addIngredient(new Ingredient("egg",
+                Double.toString(ingredientQty2), IngredientUnit.PIECE));
+        assert command.getInsufficientIngredients().equals(insufficientIngredients)
+                : "The insufficient quantity was not detected";
 
         IngredientList missingIngredients = new IngredientList();
         missingIngredients.addIngredient(new Ingredient("yeast", "50", IngredientUnit.GRAM));
