@@ -45,4 +45,7 @@ public class ErrorMessages {
             + "command.\n";
     public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer for the 'day' field!";
     public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, is that what you want?";
+    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer for the dish index. \n";
+    public static final String UNLISTED_DISH = "Oh no, this dish does not exist! \n"
+            + " please run the command list_menu to view the existing dishes.";
 }

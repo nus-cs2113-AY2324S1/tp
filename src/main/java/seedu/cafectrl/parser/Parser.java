@@ -68,7 +68,7 @@ public class Parser implements ParserUtil {
             + "qty/([A-Za-z0-9\\s]+)";
 
     /** The rest of Command Handler Patterns*/
-    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
+    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(.+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(.*) price/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
@@ -382,13 +382,17 @@ public class Parser implements ParserUtil {
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, ui);
         }
 
-        int dishIndex = Integer.parseInt(matcher.group(1));
+        try {
+            int dishIndex = Integer.parseInt(matcher.group(1));
 
-        if (!menu.isValidDishIndex(dishIndex)) {
-            return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
+            if (!menu.isValidDishIndex(dishIndex)) {
+                return new IncorrectCommand(ErrorMessages.UNLISTED_DISH, ui);
+            }
+
+            return new ListIngredientCommand(dishIndex, menu, ui);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX_TO_LIST, ui);
         }
-
-        return new ListIngredientCommand(dishIndex, menu, ui);
     }
 
     //@@author ShaniceTang
