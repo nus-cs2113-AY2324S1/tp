@@ -18,4 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 META-INF/MANIFEST.MF
 
 #storage
-data/
+/data/
