@@ -53,26 +53,24 @@ public class BudgetHandler {
     }
 
     /**
-     * Manages the situation in which the user spent more than 75% of its budget.
+     * Manages the situation in which the user has less than 25% of his budget left (still surplus).
      */
     public void printBasicWarning() {
-        if (budget.isActive()) {
-            String[] texts = {"Hey watch out you do not have that much cash left over according to your budget."
-                    , "Try earning some money before making any crazy expenses!"};
-            Ui.printMultipleText(texts);
-        }
+        assert budget.isActive();
+        String[] texts = {"Hey watch out you do not have that much cash left over according to your budget."
+                , "Try earning some money before making any crazy expenses!"};
+        Ui.printMultipleText(texts);
     }
 
     /**
-     * Manages the situation in which the user spent all of his budget.
+     * Manages the situation in which the user spent all of his budget (or even more and is now running a deficit).
      */
     public void printSeriousWarning() {
         double budgetDeficit = (budget.getBudget() - this.financialStatement.getNetCash());
-        if (budget.isActive()) {
-            String[] texts = new String[]{"Hey watch out you are currently below your budget by: "
-                    + budgetDeficit, "Need some financial advise? Stop spending so much!"};
-            Ui.printMultipleText(texts);
-        }
+        assert budget.isActive();
+        String[] texts = new String[]{"Hey watch out you are currently below your budget by: "
+                + budgetDeficit, "Need some financial advise? Stop spending so much!"};
+        Ui.printMultipleText(texts);
     }
 
     /**
