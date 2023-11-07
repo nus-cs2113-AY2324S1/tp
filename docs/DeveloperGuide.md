@@ -68,7 +68,16 @@ being able to continue:
 
 **Step 4**\
 Finally, a string containing information about the budget, the net cash from the financial statement and the progress bar
-is built and passed to the method printMultipleText() by the Ui.
+is built and passed to the method printMultipleText() by the Ui. A potential output example is given below.
+
+```console
+	You have set a budget of: 60.0
+	Here's a quick view of how you're doing so far:
+	You have a net cash on hand of: 10.0
+	You still have the following percent of your budget left:
+
+	[*****-------------------------] 16.67%
+```
 
 ### String Tokenizer
 
