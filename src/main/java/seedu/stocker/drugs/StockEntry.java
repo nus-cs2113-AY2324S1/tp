@@ -1,6 +1,10 @@
 package seedu.stocker.drugs;
+import seedu.stocker.ui.Ui;
+
+
 
 public class StockEntry {
+    private Ui ui;
 
     private final Drug drug;
     // private final String serialNumber;  // Add serial number field
@@ -33,6 +37,7 @@ public class StockEntry {
 
     public void setThresholdQuantity(long thresholdQuantity) {
         this.thresholdQuantity = thresholdQuantity;
+        checkThresholdAndAlert();
     }
 
     public long getThresholdQuantity() {
@@ -41,12 +46,21 @@ public class StockEntry {
 
     public void incrQuantity(long delta) {
         this.quantity += delta;
+        checkThresholdAndAlert();
     }
 
     public void decrQuantity(long delta) {
         assert(this.quantity > delta);
         this.quantity -= delta;
+        checkThresholdAndAlert();
     }
+
+    public void checkThresholdAndAlert() {
+        if (quantity < thresholdQuantity) {
+            System.out.println("|| ALERT! " + this.drug.getName() + " is below the threshold level");
+        }
+    }
+    
 
     /**
      * Returns a string representation of the stock entry.
