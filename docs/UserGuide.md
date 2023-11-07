@@ -27,7 +27,6 @@ Type `help` to see a list of commands that you will be able to use in the applic
 
 * [Viewing help guide : `help`](#viewing-help-guide-help)
 * [Exiting the application : `exit`](#exiting-the-application-exit)
-* [Saving to File: `save`](#saving-to-file-save)
 * [Editing your profile : `editprofile`](#editing-your-profile-editprofile)
 * [Viewing your profile : `viewprofile`](#viewing-your-profile-viewprofile)
 * [Checking your current bmi : `bmi`](#checking-your-current-bmi-bmi)
@@ -62,7 +61,8 @@ help
 help
 `help` shows help message of the command.
 Existing commands:
-help, exit, save, editprofile, viewprofile, bmi, checkrecommendedweight, 
+help, exit,
+editprofile, viewprofile, bmi, checkrecommendedweight, 
 addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed
 addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt
 Type `help` or `help <COMMAND>` to view help.
@@ -80,20 +80,6 @@ exit
 **Expected output**
 ```
 Goodbye! Hope to see you again soon!
-```
-
-
-### Saving to file: `save`
-Allows user to save profile data, meals and workouts to a text file.
-
-**Example of usage**
-```
-save
-```
-
-**Expected output**
-```
-Your data has been saved!
 ```
 
 
