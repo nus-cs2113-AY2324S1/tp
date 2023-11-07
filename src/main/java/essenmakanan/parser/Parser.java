@@ -37,6 +37,13 @@ public class Parser {
             break;
         case "add":
             if (inputDetail.startsWith("r/")) {
+                // check that all fields needed for recipe is present
+                if (!(inputDetail.contains("r/") && inputDetail.contains("s/") && inputDetail.contains("i/"))) {
+                    System.out.println("Recipe have to include title, steps and ingredients!");
+                    throw new EssenFormatException();
+                }
+
+
                 command = new AddRecipeCommand(inputDetail, recipes);
             } else if (inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
