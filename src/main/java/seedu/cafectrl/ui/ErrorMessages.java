@@ -5,6 +5,8 @@ import seedu.cafectrl.command.EditPriceCommand;
 public class ErrorMessages {
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
     public static final String NULL_NAME_DETECTED_MESSAGE = "Error: Null dish name detected";
+    public static final String PRICE_TOO_MANY_DECIMAL_PLACES = "Error: Price entered has too many decimal places, "
+            + "ensure the price is up to 2 decimal places";
     public static final String LARGE_PRICE_MESSAGE = "Wow! This dish must taste heavenly "
             + "to cost that much money! But it might be too expensive for normal people like me :("
             + "Maybe you should keep it below $1000000 instead?";
