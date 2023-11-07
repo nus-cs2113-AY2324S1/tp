@@ -88,7 +88,7 @@ public class IncomeStatement {
         int listSize = incomeStatement.size();
         List<String []> incomesDetails = new ArrayList<>();
         for (Income currentIncome : incomeStatement) {
-            String type = "Income, ";
+            String type = "Income";
             String date = currentIncome.getDate().toString();
             String amt = String.valueOf(currentIncome.getAmount());
             String cat = currentIncome.getCategory() == null ? "-" : currentIncome.getCategory().toString();
