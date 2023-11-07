@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PreviousDayCommandTest {
     @Test
     public void execute_setTwoDayOneRun_expectDayOne() {
