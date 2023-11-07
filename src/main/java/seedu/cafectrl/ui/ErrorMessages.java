@@ -26,7 +26,6 @@ public class ErrorMessages {
     public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Error: "
             + "Invalid argument type. \n "
             + "Make sure dish index is of type int";
-
     public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: "
             + "Invalid price! \n "
             + "Price can only have 2 decimal place and it must be "

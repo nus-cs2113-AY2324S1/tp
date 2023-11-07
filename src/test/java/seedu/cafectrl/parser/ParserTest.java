@@ -219,7 +219,7 @@ class ParserTest {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/1";
+        String testUserInput = "edit_price dish/1";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {
@@ -239,11 +239,11 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_wrongArgumentsTypeForEditPrice_wrongArgMsg() {
+    void parseCommand_missingArgumentsTypeForEditPrice_wrongArgMsg() {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/ price/4";
+        String testUserInput = "edit_price dish/ price/4";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {
@@ -267,7 +267,7 @@ class ParserTest {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/2 price/3";
+        String testUserInput = "edit_price dish/2 price/3";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {
@@ -291,7 +291,7 @@ class ParserTest {
         Menu menu = new Menu();
         Dish testDish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(testDish);
-        String testUserInput = "edit_price index/d price/3";
+        String testUserInput = "edit_price dish/d price/3";
 
         ArrayList<String> actualOutput = new ArrayList<>();
         Ui ui = new Ui() {

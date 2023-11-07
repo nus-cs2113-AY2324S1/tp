@@ -83,8 +83,8 @@ To list out all dishes on the menu: list_menu
 To delete a menu item: delete DISH_INDEX
 Example: delete 1
 
-edit_priceTo edit price of a menu item: edit_price index/DISH_INDEX price/NEW_PRICE
-Example: edit_price index/1 price/4.50
+edit_priceTo edit price of a menu item: edit_price dish/DISH_INDEX price/NEW_PRICE
+Example: edit_price dish/1 price/4.50
 ```
 <!---@@author DextheChik3n--->
 ### Adding a dish : `add`

@@ -12,7 +12,7 @@ import seedu.cafectrl.ui.Ui;
 public class EditPriceCommand extends Command {
     public static final String COMMAND_WORD = "edit_price";
     public static final String MESSAGE_USAGE = "To edit price of a menu item: \n"
-            + "edit_price index/DISH_INDEX price/NEW_PRICE\n"
+            + "edit_price dish/DISH_INDEX price/NEW_PRICE\n"
             + "Example: edit_price index/1 price/4.50";
 
     protected Menu menu;
