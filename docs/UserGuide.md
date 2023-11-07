@@ -42,6 +42,38 @@ Type `help` to see a list of commands that you will be able to use in the applic
 * [Find workouts by a keyword: `findworkout`](#finding-workouts-by-a-keyword-findworkout)
 * [Checking total calories burnt on a specific date: `caloriesburnt`](#checking-total-calories-burnt-on-a-specific-date-caloriesburnt)
 
+### First Time Users
+If you are using FitTrack for the first time, you are required to enter your height, weight, gender and daily calorie limit before being 
+able to access all features.
+
+**Format**
+- `h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CARLORIELIMIT>`
+
+**Example of usage**
+```
+Welcome to FitTrack!
+___________.__  __ ___________                     __
+\_   _____/|__|/  |\__    ___/___________    ____ |  | __
+ |    __)  |  \   __\|    |  \_  __ \__  \ _/ ___\|  |/ /
+ |     \   |  ||  |  |    |   |  | \/ __ \  \___|    <
+ \___  /   |__||__|  |____|   |__|  (____  /\___  >__|_ \
+____________________________________________________________
+Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):
+h/180 w/70 g/M l/2000
+```
+
+**Expected Output**
+```
+Here are your profile settings.
+Height: Height: 180.0cm
+Weight: 70.0kg
+Gender: Male
+Daily calorie limit: 2000kcal
+BMI: 21.60
+____________________________________________________________
+
+```
+
 
 ### Viewing help guide: `help`
 Shows the list of commands you can use.
