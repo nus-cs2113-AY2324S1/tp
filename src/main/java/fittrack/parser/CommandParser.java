@@ -1,10 +1,12 @@
 package fittrack.parser;
 
+import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
+import fittrack.command.AddStepsCommand;
 import fittrack.command.AddWorkoutCommand;
 import fittrack.command.BmiCommand;
-import fittrack.command.CaloriesConsumedCommand;
 import fittrack.command.CaloriesBurntCommand;
+import fittrack.command.CaloriesConsumedCommand;
 import fittrack.command.CheckRecommendedWeightCommand;
 import fittrack.command.Command;
 import fittrack.command.CommandResult;
@@ -12,14 +14,18 @@ import fittrack.command.DeleteMealCommand;
 import fittrack.command.DeleteWorkoutCommand;
 import fittrack.command.EditProfileCommand;
 import fittrack.command.ExitCommand;
-import fittrack.command.HelpCommand;
-import fittrack.command.InvalidCommand;
-import fittrack.command.ViewMealCommand;
-import fittrack.command.ViewProfileCommand;
-import fittrack.command.ViewWorkoutCommand;
 import fittrack.command.FindMealCommand;
 import fittrack.command.FindWorkoutCommand;
+import fittrack.command.HelpCommand;
+import fittrack.command.InvalidCommand;
+import fittrack.command.TotalStepsCommand;
+import fittrack.command.ViewMealCommand;
+import fittrack.command.ViewProfileCommand;
+import fittrack.command.ViewStepsCommand;
+import fittrack.command.ViewWorkoutCommand;
 
+import fittrack.data.Date;
+import fittrack.data.Step;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,8 +45,41 @@ public class CommandParser {
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
+    private static final String HEIGHT_CG = "height";
+    private static final String WEIGHT_CG = "weight";
+    private static final String GENDER_CG = "gender";
+    private static final String CAL_LIMIT_CG = "calLimit";
+    private static final String NAME_CG = "name";
+    private static final String CALORIES_CG = "calories";
+    private static final String DATE_CG = "date";
+    private static final String INDEX_CG = "index";
+    private static final String KEYWORD_CG = "keyword";
+    private static final String STEP_CG = "step";
+
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<" + WORD_CG + ">\\S+)(?<" + ARGS_CG + ">.*)"
+    );
+    private static final Pattern PROFILE_PATTERN = Pattern.compile(
+            "h/(?<" + HEIGHT_CG + ">\\S+)\\s+w/(?<" + WEIGHT_CG +
+                    ">\\S+)\\s+g/(?<" + GENDER_CG + ">\\S+)\\s+l/(?<" + CAL_LIMIT_CG + ">\\S+)"
+    );
+    private static final Pattern MEAL_PATTERN = Pattern.compile(
+            "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
+    );
+    private static final Pattern WORKOUT_PATTERN = Pattern.compile(
+            "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
+    );
+    private static final Pattern INDEX_PATTERN = Pattern.compile(
+            "(?<" + INDEX_CG + ">\\S+)"
+    );
+    private static final Pattern DATE_PATTERN = Pattern.compile(
+            "(?<" + DATE_CG + ">\\S+)"
+    );
+    private static final Pattern FIND_PATTERN = Pattern.compile(
+            "(?<" + KEYWORD_CG + ">\\S+)"
+    );
+    private static final Pattern STEP_PATTERN = Pattern.compile(
+            "(?<" + STEP_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
     );
 
     public static Command parseCommand(String userCommandLine) {
@@ -100,6 +139,12 @@ public class CommandParser {
             return new FindMealCommand(commandLine);
         case FindWorkoutCommand.COMMAND_WORD:
             return new FindWorkoutCommand(commandLine);
+        case AddStepsCommand.COMMAND_WORD:
+            return new AddStepsCommand(commandLine);
+        case TotalStepsCommand.COMMAND_WORD:
+            return new TotalStepsCommand(commandLine);
+        case ViewStepsCommand.COMMAND_WORD:
+            return new ViewStepsCommand(commandLine);
         default:
             return new InvalidCommand(commandLine);
 
@@ -155,5 +200,22 @@ public class CommandParser {
     public static String getFirstWord(String str) {
         assert str != null && !str.isEmpty();
         return str.split("\\s")[0];
+    }
+
+    public Step parseStep(String steps) throws PatternMatchFailException, NumberFormatException {
+
+        final Matcher matcher = STEP_PATTERN.matcher(steps);
+        if (!matcher.matches()) {
+            throw new PatternMatchFailException();
+        }
+
+        final String step = matcher.group(STEP_CG);
+        final String date = matcher.group(DATE_CG);
+
+        try {
+            return new Step(Integer.parseInt(step), new Date(date));
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException(e.getMessage());
+        }
     }
 }

@@ -26,7 +26,7 @@ public class InvalidCommand extends Command {
         return new CommandResult(helpMessage);
     }
 
-    @Override
+
     public void setArguments(String inputLine) {
         HelpCommand helpCommand = new HelpCommand(inputLine);
         helpCommand.setArguments(inputLine.strip());

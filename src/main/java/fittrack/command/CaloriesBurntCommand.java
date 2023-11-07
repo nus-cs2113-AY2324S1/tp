@@ -54,5 +54,9 @@ public class CaloriesBurntCommand extends Command {
     protected String getHelp() {
         return HELP;
     }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
 // @@author
