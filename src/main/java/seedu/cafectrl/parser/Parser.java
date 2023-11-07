@@ -14,8 +14,8 @@ import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.command.NextDayCommand;
 import seedu.cafectrl.command.PreviousDayCommand;
-import seedu.cafectrl.command.ShowSalesCommand;
-import seedu.cafectrl.command.ShowSalesByDayCommand;
+import seedu.cafectrl.command.ListTotalSales;
+import seedu.cafectrl.command.ListSaleByDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 
 import seedu.cafectrl.data.CurrentDate;
@@ -73,7 +73,7 @@ public class Parser implements ParserUtil {
     private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(.*) price/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
-    private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
+    private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(.+)";
 
     //@@author ziyi105
     /**
@@ -135,10 +135,10 @@ public class Parser implements ParserUtil {
         case PreviousDayCommand.COMMAND_WORD:
             return preparePreviousDay(ui, currentDate);
 
-        case ShowSalesCommand.COMMAND_WORD:
+        case ListTotalSales.COMMAND_WORD:
             return prepareShowSales(sales, menu, ui);
 
-        case ShowSalesByDayCommand.COMMAND_WORD:
+        case ListSaleByDayCommand.COMMAND_WORD:
             return prepareShowSalesByDay(arguments, ui, sales, menu);
 
         default:
@@ -379,7 +379,8 @@ public class Parser implements ParserUtil {
         Matcher matcher = prepareListPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, ui);
+            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS
+                    + ListSaleByDayCommand.MESSAGE_USAGE, ui);
         }
 
         try {
@@ -530,7 +531,7 @@ public class Parser implements ParserUtil {
      * @return A ShowSalesCommand instance for viewing all sales items.
      */
     private static Command prepareShowSales(Sales sale, Menu menu, Ui ui) {
-        return new ShowSalesCommand(sale, ui, menu);
+        return new ListTotalSales(sale, ui, menu);
     }
 
     /**
@@ -548,12 +549,12 @@ public class Parser implements ParserUtil {
 
         if (!matcher.matches()) {
             return new IncorrectCommand(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE
-                    + ShowSalesByDayCommand.MESSAGE_USAGE, ui);
+                    + ListSaleByDayCommand.MESSAGE_USAGE, ui);
         }
 
         try {
             int day = Integer.parseInt(matcher.group(1));
-            return new ShowSalesByDayCommand(day, ui, sales, menu);
+            return new ListSaleByDayCommand(day, ui, sales, menu);
         } catch (NumberFormatException e) {
             return new IncorrectCommand(ErrorMessages.INVALID_DAY_FORMAT, ui);
         }

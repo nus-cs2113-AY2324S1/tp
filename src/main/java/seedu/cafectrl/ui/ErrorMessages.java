@@ -48,4 +48,5 @@ public class ErrorMessages {
     public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer for the dish index. \n";
     public static final String UNLISTED_DISH = "Oh no, this dish does not exist! \n"
             + " please run the command list_menu to view the existing dishes.";
+    public static final String INVALID_SALE_DAY = "Oh no, we have not reached the day entered!";
 }

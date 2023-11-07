@@ -2,6 +2,8 @@ package seedu.cafectrl.data;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -99,7 +101,7 @@ public class Sales {
 
             orderList.printOrderList(menu, ui);
         } catch (Exception e) {
-            ui.showToUser("An error occurred while printing sales for the specified day.");
+            ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
         }
     }
     //@@author

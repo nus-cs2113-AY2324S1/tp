@@ -30,7 +30,7 @@ public class ListIngredientCommand extends Command {
             Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
             ui.printIngredients(selectedDish);
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_DISH_INDEX);
+            throw new IllegalArgumentException(ErrorMessages.UNLISTED_DISH);
         }
     }
 }
