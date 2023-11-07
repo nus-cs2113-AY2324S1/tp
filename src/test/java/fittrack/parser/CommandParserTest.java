@@ -21,6 +21,7 @@ import fittrack.command.ViewMealCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewWorkoutCommand;
 import fittrack.data.Date;
+import fittrack.data.Gender;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
 import org.junit.jupiter.api.Test;
@@ -131,7 +132,7 @@ class CommandParserTest {
             UserProfile profile = new CommandParser().parseProfile("h/180 w/80 g/M l/2000");
             assertEquals(180.0, profile.getHeight().value);
             assertEquals(80.0, profile.getWeight().value);
-            assertEquals('M', profile.getGender().getGender());
+            assertEquals(Gender.MALE, profile.getGender());
             assertEquals(2000.0, profile.getDailyCalorieLimit().value);
         } catch (PatternMatchFailException | NegativeNumberException | NumberFormatException | WrongGenderException e) {
             throw new RuntimeException(e);

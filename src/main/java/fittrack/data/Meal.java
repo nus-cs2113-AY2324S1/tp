@@ -58,21 +58,16 @@ public class Meal {
             throw new PatternMatchFailException();
         }
         final String name = matcher.group(NAME_GRP);
-        final String calories = matcher.group(CALORIES_GRP);
-        final String date = matcher.group(DATE_GRP);
+        final String caloriesData = matcher.group(CALORIES_GRP);
+        final String dateData = matcher.group(DATE_GRP);
 
-        try {
-            double caloriesInDouble = Double.parseDouble(calories);
-            if (caloriesInDouble < 0) {
-                throw new IllegalValueException("Calories must not be a negative value.");
-            }
-            if (date == null) {
-                return new Meal(name, new Calories(caloriesInDouble), Date.today());
-            } else {
-                return new Meal(name, new Calories(caloriesInDouble), new Date(date));
-            }
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException("Calories must be a number.");
+        Calories calories = Calories.parseCalories(caloriesData);
+        Date date;
+        if (dateData == null) {
+            date = Date.today();
+        } else {
+            date = Date.parseDate(dateData);
         }
+        return new Meal(name, calories, date);
     }
 }

@@ -1,5 +1,8 @@
 package fittrack.data;
 
+import fittrack.parser.IllegalValueException;
+import fittrack.parser.NumberFormatException;
+
 import java.util.Objects;
 
 public class Calories {
@@ -34,5 +37,20 @@ public class Calories {
     @Override
     public String toString() {
         return String.format("%.0fkcal", value);
+    }
+
+    public static Calories parseCalories(String s) throws IllegalValueException {
+        assert s != null;
+        String caloriesData = s.strip();
+
+        try {
+            double calories = Double.parseDouble(caloriesData);
+            if(calories < 0) {
+                throw new IllegalValueException("Calories must not be a negative value.");
+            }
+            return new Calories(calories);
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException("Calorie must be a number.");
+        }
     }
 }

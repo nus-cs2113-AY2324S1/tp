@@ -1,5 +1,8 @@
 package fittrack.data;
 
+import fittrack.parser.IllegalValueException;
+import fittrack.parser.NumberFormatException;
+
 import java.util.Objects;
 
 public class Height {
@@ -34,5 +37,20 @@ public class Height {
 
     public double calculateIdealWeight(){
         return 50 + (0.91 * (value - 152.4));
+    }
+
+    public static Height parseHeight(String s) throws IllegalValueException {
+        assert s != null;
+        String heightData = s.strip();
+
+        try {
+            double height = Double.parseDouble(heightData);
+            if (height <= 0) {
+                throw new IllegalValueException("Height must be a positive value.");
+            }
+            return new Height(height);
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException("Height must be a number.");
+        }
     }
 }

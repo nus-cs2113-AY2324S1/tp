@@ -101,27 +101,15 @@ public class UserProfile {
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }
+        final String heightData = matcher.group(HEIGHT_GRP);
+        final String weightData = matcher.group(WEIGHT_GRP);
+        final String dailyCalorieLimitData = matcher.group(CAL_LIMIT_GRP);
+        final String genderData = matcher.group(GENDER_GRP);
 
-        try {
-            final double height = Double.parseDouble(matcher.group(HEIGHT_GRP));
-            final double weight = Double.parseDouble(matcher.group(WEIGHT_GRP));
-            final String gender = matcher.group(GENDER_GRP);
-            final double dailyCalorieLimit = Double.parseDouble(matcher.group(CAL_LIMIT_GRP));
-
-            if (height <= 0 || weight <= 0) {
-                throw new IllegalValueException("Height and weight must be a positive value.");
-            } else if (dailyCalorieLimit < 0) {
-                throw new IllegalValueException("Calories must not be a negative value.");
-            }
-
-            Height heightData = new Height(height);
-            Weight weightData = new Weight(weight);
-            Calories caloriesData = new Calories(dailyCalorieLimit);
-            Gender genderData = Gender.parseGender(gender);
-
-            return new UserProfile(heightData, weightData, caloriesData, genderData);
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException("Height, weight, and calories must be numbers.");
-        }
+        Height height = Height.parseHeight(heightData);
+        Weight weight = Weight.parseWeight(weightData);
+        Calories dailyCalorieLimit = Calories.parseCalories(dailyCalorieLimitData);
+        Gender gender = Gender.parseGender(genderData);
+        return new UserProfile(height, weight, dailyCalorieLimit, gender);
     }
 }

@@ -1,5 +1,8 @@
 package fittrack.data;
 
+import fittrack.parser.IllegalValueException;
+import fittrack.parser.NumberFormatException;
+
 import java.util.Objects;
 
 public class Weight {
@@ -30,5 +33,20 @@ public class Weight {
     @Override
     public String toString() {
         return String.format("%.1fkg", value);
+    }
+
+    public static Weight parseWeight(String s) throws IllegalValueException {
+        assert s != null;
+        String weightData = s.strip();
+
+        try {
+            double weight = Double.parseDouble(weightData);
+            if (weight <= 0) {
+                throw new IllegalValueException("Weight must be a positive value.");
+            }
+            return new Weight(weight);
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException("Weight must be a number.");
+        }
     }
 }
