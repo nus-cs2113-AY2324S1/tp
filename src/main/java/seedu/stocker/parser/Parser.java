@@ -83,7 +83,7 @@ public class Parser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return prepareHelpCommand(arguments);
 
         case ListCommand.COMMAND_WORD:
             return prepareListCommand(arguments);
@@ -300,6 +300,16 @@ public class Parser {
         } else {
             // Handle the case where extra arguments are provided for "list"
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareHelpCommand(String args) {
+        // Check if there are no arguments for the "list" command
+        if (args.isEmpty()) {
+            return new HelpCommand();
+        } else {
+            // Handle the case where extra arguments are provided for "help"
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
     }
 }
