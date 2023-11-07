@@ -55,3 +55,4 @@ public class MealListDecoder {
         return new Meal(name, new Calories(caloriesInDouble), new Date(date));
     }
 }
+// @@author

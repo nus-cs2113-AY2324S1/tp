@@ -63,3 +63,4 @@ public class UserProfileDecoder {
         return new UserProfile(heightData, weightData, caloriesData, genderData);
     }
 }
+// @@author

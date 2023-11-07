@@ -93,7 +93,8 @@ help
 help
 `help` shows help message of the command.
 Existing commands:
-help, exit, save, editprofile, viewprofile, bmi, checkrecommendedweight, 
+help, exit,
+editprofile, viewprofile, bmi, checkrecommendedweight, 
 addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed
 addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt
 Type `help` or `help <COMMAND>` to view help.
@@ -113,6 +114,7 @@ exit
 Goodbye! Hope to see you again soon!
 ```
 
+
 ### Editing your profile: `editprofile`
 Allows user to edit their profile details.
 
@@ -129,9 +131,9 @@ editprofile h/170 w/70 g/M l/100
 Here is your updated profile:
 Height: 170.0cm
 Weight: 70.0kg
+Gender: Male
 Daily calorie limit: 1500kcal
 BMI: 24.22
-Gender: Male
 ```
 
 
@@ -148,9 +150,9 @@ viewprofile
 Your Profile:
 Height: 170.0cm
 Weight: 70.0kg
+Gender: Male
 Daily calorie limit: 1500kcal
 BMI: 24.22
-Gender: Male
 ```
 
 

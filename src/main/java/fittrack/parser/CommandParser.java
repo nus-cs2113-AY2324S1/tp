@@ -196,8 +196,6 @@ public class CommandParser {
             return new UserProfile(heightData, weightData, caloriesData, genderData);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
-        } catch (WrongGenderException e) {
-            throw new RuntimeException(e);
         }
     }
 

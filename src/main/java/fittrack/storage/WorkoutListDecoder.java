@@ -55,3 +55,4 @@ public class WorkoutListDecoder {
         return new Workout(name, new Calories(caloriesInDouble), new Date(date));
     }
 }
+// @@author
