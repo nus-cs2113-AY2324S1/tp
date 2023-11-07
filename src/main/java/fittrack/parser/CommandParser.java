@@ -4,9 +4,9 @@ import fittrack.UserProfile;
 import fittrack.command.AddMealCommand;
 import fittrack.command.AddWorkoutCommand;
 import fittrack.command.BmiCommand;
-import fittrack.command.CalorieSumCommand;
+import fittrack.command.CaloriesConsumedCommand;
 import fittrack.command.CaloriesBurntCommand;
-import fittrack.command.CheckWeightRangeCommand;
+import fittrack.command.CheckRecommendedWeightCommand;
 import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.DeleteMealCommand;
@@ -16,17 +16,19 @@ import fittrack.command.ExitCommand;
 import fittrack.command.HelpCommand;
 import fittrack.command.InvalidCommand;
 import fittrack.command.SaveCommand;
-import fittrack.command.ViewMealsCommand;
+import fittrack.command.ViewMealCommand;
 import fittrack.command.ViewProfileCommand;
-import fittrack.command.ViewWorkoutsCommand;
+import fittrack.command.ViewWorkoutCommand;
 import fittrack.command.FindMealCommand;
 import fittrack.command.FindWorkoutCommand;
+import fittrack.data.Gender;
 import fittrack.data.Meal;
-import fittrack.data.Workout;
-import fittrack.data.Calories;
-import fittrack.data.Date;
-import fittrack.data.Height;
 import fittrack.data.Weight;
+import fittrack.data.Height;
+import fittrack.data.Calories;
+import fittrack.data.Workout;
+import fittrack.data.Date;
+
 
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
@@ -41,16 +43,16 @@ import java.util.regex.Pattern;
  */
 public class CommandParser {
     // This constant has to be changed whenever any command is added.
-    public static final String ALL_COMMAND_WORDS = "help, exit, " +
-            "editprofile, viewprofile, " +
-            "addmeal, deletemeal, viewmeals, " +
-            "addworkout, deleteworkout, viewworkouts, bmi, save, " +
-            "checkweightrange, findmeal, findworkout";
+    public static final String ALL_COMMAND_WORDS = "help, exit, save,\n" +
+            "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
+            "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
+            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt";
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
     private static final String HEIGHT_CG = "height";
     private static final String WEIGHT_CG = "weight";
+    private static final String GENDER_CG = "gender";
     private static final String CAL_LIMIT_CG = "calLimit";
     private static final String NAME_CG = "name";
     private static final String CALORIES_CG = "calories";
@@ -61,7 +63,8 @@ public class CommandParser {
             "(?<" + WORD_CG + ">\\S+)(?<" + ARGS_CG + ">.*)"
     );
     private static final Pattern PROFILE_PATTERN = Pattern.compile(
-            "h/(?<" + HEIGHT_CG + ">\\S+)\\s+w/(?<" + WEIGHT_CG + ">\\S+)\\s+l/(?<" + CAL_LIMIT_CG + ">\\S+)"
+            "h/(?<" + HEIGHT_CG + ">\\S+)\\s+w/(?<" + WEIGHT_CG +
+                    ">\\S+)\\s+g/(?<" + GENDER_CG + ">\\S+)\\s+l/(?<" + CAL_LIMIT_CG + ">\\S+)"
     );
     private static final Pattern MEAL_PATTERN = Pattern.compile(
             "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
@@ -116,22 +119,22 @@ public class CommandParser {
             return new AddMealCommand(commandLine);
         case DeleteMealCommand.COMMAND_WORD:
             return new DeleteMealCommand(commandLine);
-        case ViewMealsCommand.COMMAND_WORD:
-            return new ViewMealsCommand(commandLine);
+        case ViewMealCommand.COMMAND_WORD:
+            return new ViewMealCommand(commandLine);
         case AddWorkoutCommand.COMMAND_WORD:
             return new AddWorkoutCommand(commandLine);
         case DeleteWorkoutCommand.COMMAND_WORD:
             return new DeleteWorkoutCommand(commandLine);
-        case ViewWorkoutsCommand.COMMAND_WORD:
-            return new ViewWorkoutsCommand(commandLine);
+        case ViewWorkoutCommand.COMMAND_WORD:
+            return new ViewWorkoutCommand(commandLine);
         case BmiCommand.COMMAND_WORD:
             return new BmiCommand(commandLine);
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand(commandLine);
-        case CalorieSumCommand.COMMAND_WORD:
-            return new CalorieSumCommand(commandLine);
-        case CheckWeightRangeCommand.COMMAND_WORD:
-            return new CheckWeightRangeCommand(commandLine);
+        case CaloriesConsumedCommand.COMMAND_WORD:
+            return new CaloriesConsumedCommand(commandLine);
+        case CheckRecommendedWeightCommand.COMMAND_WORD:
+            return new CheckRecommendedWeightCommand(commandLine);
         case CaloriesBurntCommand.COMMAND_WORD:
             return new CaloriesBurntCommand(commandLine);
         case FindMealCommand.COMMAND_WORD:
@@ -167,29 +170,37 @@ public class CommandParser {
      * @throws NumberFormatException if one of arguments is not double
      */
     public UserProfile parseProfile(String profile)
-            throws PatternMatchFailException, NumberFormatException, NegativeNumberException {
+            throws PatternMatchFailException, NumberFormatException, NegativeNumberException, WrongGenderException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }
 
         try {
-            final double height = Double.parseDouble(matcher.group(HEIGHT_CG));
-            final double weight = Double.parseDouble(matcher.group(WEIGHT_CG));
-            final double dailyCalorieLimit = Double.parseDouble(matcher.group(CAL_LIMIT_CG));
+            final double height = Double.parseDouble(matcher.group("height"));
+            final double weight = Double.parseDouble(matcher.group("weight"));
+            final double dailyCalorieLimit = Double.parseDouble(matcher.group("calLimit"));
+            final char gender = matcher.group("gender").charAt(0);
 
             // Height, weight and calories cannot be negative. Throw exception if it happens
             if (height < 0 || weight < 0 || dailyCalorieLimit < 0) {
                 throw new NegativeNumberException();
             }
 
+            if (gender != 'M' && gender != 'F') {
+                throw new WrongGenderException();
+            }
+
             Height heightData = new Height(height);
             Weight weightData = new Weight(weight);
             Calories caloriesData = new Calories(dailyCalorieLimit);
+            Gender genderData = new Gender(gender);
 
-            return new UserProfile(heightData, weightData, caloriesData);
+            return new UserProfile(heightData, weightData, caloriesData, genderData);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException();
+        } catch (WrongGenderException e) {
+            throw new RuntimeException(e);
         }
     }
 
