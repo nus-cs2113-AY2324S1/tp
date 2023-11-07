@@ -41,8 +41,8 @@ public class UserProfileDecoder {
         }
         final Matcher heightMatcher = HEIGHT_PATTERN.matcher(decodedUserProfile[0]);
         final Matcher weightMatcher = WEIGHT_PATTERN.matcher(decodedUserProfile[1]);
-        final Matcher caloriesMatcher = CALORIES_PATTERN.matcher(decodedUserProfile[2]);
-        final Matcher genderMatcher = GENDER_PATTERN.matcher(decodedUserProfile[4]);
+        final Matcher genderMatcher = GENDER_PATTERN.matcher(decodedUserProfile[2]);
+        final Matcher caloriesMatcher = CALORIES_PATTERN.matcher(decodedUserProfile[3]);
 
         if (!heightMatcher.matches() || !weightMatcher.matches()
                 || !caloriesMatcher.matches() || !genderMatcher.matches()) {
