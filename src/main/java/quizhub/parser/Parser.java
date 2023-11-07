@@ -327,10 +327,10 @@ public class Parser {
      *                          commandEditTokens[1] contains new value to change to
      * @param qnIndex           Index of question to be edited
      */
-    private static void extractEditCriteria(String userInput, int qnIdex, String[] commandEditTokens)
+    private static void extractEditCriteria(String userInput, int qnIndex, String[] commandEditTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         String[] inputSplitByCriteria = userInput.split("/");
-        QnType qnType = questions.getQuestionByIndex(qnIdex).getQuestionType();
+        QnType qnType = questions.getQuestionByIndex(qnIndex).getQuestionType();
         String editDetails = inputSplitByCriteria[1].strip();
         String editField = editDetails.split(" ")[0].strip();
         if (editField.isEmpty()) {
