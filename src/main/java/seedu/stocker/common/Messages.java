@@ -10,6 +10,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "A quantity must be an integer superior than 0.\n";
     public static final String MESSAGE_INVALID_NAME = "A drug name cannot contain only whitespaces";
+    public static final String MESSAGE_INVALID_DATE = "Invalid expiry date format. Please use 'dd/mm/yyyy' format.";
     public static final String MESSAGE_LOGIN_WELCOME = "Welcome! \n"
             + "Key in register or login based on your needs \n"
             + "1.Register user \n"

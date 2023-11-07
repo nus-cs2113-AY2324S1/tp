@@ -29,10 +29,10 @@ import seedu.stocker.commands.AddVendorSupplyCommand;
 import seedu.stocker.commands.FindVendorSupplyCommand;
 import seedu.stocker.commands.ListVendorSupplyCommand;
 
-
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_NAME;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_DATE;
 
 
 public class Parser {
@@ -189,6 +189,13 @@ public class Parser {
                 String serialNumber = matcher.group(3).trim();
                 Long quantity = Long.parseLong(matcher.group(4));
                 double sellingPrice = Double.parseDouble(matcher.group(5));
+
+                //check if the expiry date has a valid format
+                if (!isValidDateFormat(expiryDate)) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, AddCommand.MESSAGE_USAGE));
+                }
+
+                //check if the quantity is a negative number
                 if (quantity < 1) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
                 } else if (name.isEmpty()) {
@@ -202,6 +209,18 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
+
+    /**
+     * Checks if the given date string has a valid "dd/mm/yyyy" format.
+     *
+     * @param date The date string to be validated.
+     * @return True if the date has a valid format, false otherwise.
+     */
+    private boolean isValidDateFormat(String date) {
+        String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})$";
+        return date.matches(regex);
+    }
+
 
     /**
      * Parses arguments in the context of the delete command.
