@@ -243,7 +243,7 @@ Editing income/expense
 
 ### Finding an income/expense
 1. Finding income/expense:
-   1. Pre-requisite: list should already contain income/expense. this can be checked via `list income`, `list expense` or `list`
+   1. Pre-requisite: list should already contain income/expense. this can be checked via `list incomes`, `list expenses` or `list`
    2. Test case:
    - For income: `find /t income /de salary`
    - For expense: `find /t expense /cat food /de sushi /date 31/10/2023`
