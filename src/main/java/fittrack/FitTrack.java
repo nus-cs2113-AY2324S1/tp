@@ -29,6 +29,8 @@ public class FitTrack {
     private UserProfile userProfile;
     private MealList mealList;
     private WorkoutList workoutList;
+    private boolean isValidInput = false;
+
 
     private FitTrack() {
         ui = new Ui();
@@ -51,7 +53,6 @@ public class FitTrack {
     }
 
     private void start(String[] args) {
-        boolean isValidInput = false;
         ui.printVersion();
         ui.printWelcome();
 
@@ -69,21 +70,9 @@ public class FitTrack {
             ui.printLine();
         }
 
-
         while (!isValidInput) {
             // TODO: organize here.
-            try {
-                profileSettings();
-                storage.saveProfile(userProfile);
-                isValidInput = true;
-            } catch (PatternMatchFailException e) {
-                System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
-            } catch (IOException e) {
-                System.out.println("Error occurred while saving profile.");
-                isValidInput = true;
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
-            }
+            startProfile();
         }
     }
 
@@ -106,6 +95,21 @@ public class FitTrack {
         } catch (IOException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException();
+        }
+    }
+
+    private void startProfile() {
+        try {
+            profileSettings();
+            storage.saveProfile(userProfile);
+            isValidInput = true;
+        } catch (PatternMatchFailException e) {
+            System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
+        } catch (IOException e) {
+            System.out.println("Error occurred while saving profile.");
+            isValidInput = true;
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
         }
     }
 
