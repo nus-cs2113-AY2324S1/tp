@@ -1,9 +1,4 @@
 package seedu.stocker.drugs;
-
-import seedu.stocker.exceptions.DrugNotFoundException;
-
-import java.util.ArrayList;
-
 import seedu.stocker.ui.Ui;
 
 
