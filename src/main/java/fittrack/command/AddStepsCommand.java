@@ -53,6 +53,6 @@ public class AddStepsCommand extends Command{
      */
     @Override
     protected String getHelp() {
-        return null;
+        return HELP;
     }
 }
