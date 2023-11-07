@@ -21,6 +21,8 @@ enum ViewScope {
 
 public class ViewLogCommand extends Command {
     public static final String COMMAND_WORD = "view";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays exercises from the exercise log.\n"
+            + "\tExample: " + COMMAND_WORD + " exercises all" + " | " + COMMAND_WORD + "total all";
     private ViewType viewType;
     private ViewScope viewScope;
     private int month;
@@ -54,6 +56,9 @@ public class ViewLogCommand extends Command {
 
         if (viewArgs.get(1).equals("all") || viewArgs.get(1).equals("month")) {
             switch (viewArgs.size()) {
+            case 2:
+                viewScope = ViewScope.ALL;
+                break;
             case 3:
                 try {
                     viewScope = ViewScope.MONTH;

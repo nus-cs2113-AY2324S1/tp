@@ -10,6 +10,8 @@ import seedu.duke.data.exception.IncorrectFormatException;
 
 public class DeleteLogCommand extends Command {
     public static final String COMMAND_WORD = "delete";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an exercise from the exercise log.\n"
+            + "\tExample: " + COMMAND_WORD + " 1 2 Running 68";
     public String feedbackToUser;
     private List<String> exerciseDetails;
 

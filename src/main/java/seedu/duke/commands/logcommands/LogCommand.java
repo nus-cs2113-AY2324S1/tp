@@ -10,6 +10,8 @@ import seedu.duke.data.exception.IncorrectFormatException;
 
 public class LogCommand extends Command {
     public static final String COMMAND_WORD = "log";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Logs an exercise into the exercise log.\n"
+            + "\tExample: " + COMMAND_WORD + " 1 2 Football 89";
     public String feedbackToUser;
     private List<String> exerciseDetails;
 

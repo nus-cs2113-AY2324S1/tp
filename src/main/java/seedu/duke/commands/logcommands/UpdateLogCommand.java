@@ -11,6 +11,9 @@ import seedu.duke.data.exception.IncorrectFormatException;
 
 public class UpdateLogCommand extends Command {
     public static final String COMMAND_WORD = "update";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an exercise from the exercise log.\n"
+            + "\tExample: " + COMMAND_WORD + " 1 2 Football 89" + "\n" + "\tPlease specify the new exercise details:\n"
+            + "\tSquash 44";
     public String feedbackToUser;
     private List<String> exerciseDetails;
 
