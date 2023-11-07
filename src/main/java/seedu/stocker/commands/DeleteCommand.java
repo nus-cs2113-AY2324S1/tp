@@ -8,23 +8,23 @@ public class DeleteCommand  extends Command{
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a drug from drug list. "
-            + "Parameters: Name  " + System.lineSeparator()
+            + "Parameters: Serial Number  " + System.lineSeparator()
             + "Example: " + COMMAND_WORD
-            + " /n <Drug Name>";
+            + " /s <Serial Number>";
 
     public static final String MESSAGE_SUCCESS = "Drug removed from inventory: %1$s";
     public static final String MESSAGE_FAILURE = "Drug not found in the inventory. ";
 
 
 
-    private final String keyToDelete;
+    private final String serialNumber;
 
     /**
      * Constructs a DeleteCommand with the specified drug name.
      *
      */
-    public DeleteCommand(String key) {
-        this.keyToDelete = key.trim().toLowerCase();
+    public DeleteCommand(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     /**
@@ -35,7 +35,7 @@ public class DeleteCommand  extends Command{
     @Override
     public CommandResult execute() {
         try {
-            StockEntry deletedEntry = inventory.deleteDrug(this.keyToDelete);
+            StockEntry deletedEntry = inventory.deleteDrug(this.serialNumber);
             return new CommandResult<>(String.format(MESSAGE_SUCCESS, deletedEntry.getDrug().getName()));
         } catch (DrugNotFoundException e) {
             return new CommandResult<>(MESSAGE_FAILURE);

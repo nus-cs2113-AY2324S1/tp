@@ -78,7 +78,7 @@ public class Storage {
                 double sellingPrice = Double.parseDouble(matcher.group(5));
 
                 Drug drug = new Drug(name, expiryDate, sellingPrice);
-                inventory.addNewDrug(name, drug, serialNumber, quantity);
+                inventory.addNewDrug(serialNumber, drug, quantity);
             } else {
                 throw new InvalidDrugFormatException("");
             }

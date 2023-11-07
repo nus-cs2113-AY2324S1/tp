@@ -5,6 +5,8 @@ import seedu.stocker.drugs.StockEntry;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Represents a command to display a report of stock levels sorted by quantity in ascending order.
@@ -29,7 +31,9 @@ public class ShowStockLevelCommand extends Command {
         // Assertion: Check if the inventory is properly initialized
         assert inventory != null : "Inventory should be initialized before executing ShowStockLevelCommand.";
         // Retrieve the list of drugs from the inventory
-        List<StockEntry> stockEntries = inventory.getStockEntries();
+        List<StockEntry> stockEntries = inventory.getStockEntries()
+                .stream()
+                .map(Map.Entry::getValue).collect(Collectors.toList());
 
         // Check if the inventory is empty
         if (stockEntries.isEmpty()) {
@@ -39,9 +43,9 @@ public class ShowStockLevelCommand extends Command {
             // Sort the stockEntries by quantity in ascending order
             stockEntries.sort(Comparator.comparingLong(StockEntry::getQuantity));
             // Create a new list to store the sorted stockEntries
-            List<StockEntry> arrangedListbyQuantity = new ArrayList<>(stockEntries);
+            List<StockEntry> arrangedListByQuantity = new ArrayList<>(stockEntries);
 
-            return new CommandResult<>(MESSAGE_SUCCESS, arrangedListbyQuantity);
+            return new CommandResult<>(MESSAGE_SUCCESS, arrangedListByQuantity);
         }
     }
 }

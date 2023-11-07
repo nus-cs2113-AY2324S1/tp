@@ -15,9 +15,9 @@ class HelpCommandTest {
                 + "Example: add /n Doliprane /d 12/06/2035 /s ABC123 /q 52 /p 12.90"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
-                + "delete: Removes a drug from drug list. Parameters: Name  "
+                + "delete: Removes a drug from drug list. Parameters: Serial Number  "
                 + System.getProperty("line.separator")
-                + "Example: delete /n <Drug Name>"
+                + "Example: delete /s <Serial Number>"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "help: Shows program usage instructions. "
@@ -50,9 +50,9 @@ class HelpCommandTest {
                 + "Example: find /s ABC123"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
-                + "addtocart: Adds a new drug to the current cart. Parameters: NAME, QUANTITY,"
+                + "addtocart: Adds a new drug to the current cart. Parameters: SERIAL NUMBER, QUANTITY,"
                 + System.getProperty("line.separator")
-                + "Example: addtocart /n Doliprane /q 2"
+                + "Example: addtocart /s Doliprane /q 2"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "checkout: Checks out current cart. Parameters:"
@@ -95,7 +95,7 @@ class HelpCommandTest {
 
                 + "setthreshold: Set the threshold quantity for a drug. (default 100)"
                 + System.getProperty("line.separator")
-                + "Example: setthreshold /n Doliprane /tq 50"
+                + "Example: setthreshold /s TC150 /tq 50"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 

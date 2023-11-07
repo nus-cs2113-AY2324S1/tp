@@ -3,6 +3,7 @@ package seedu.stocker.commands;
 import seedu.stocker.drugs.StockEntry;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a command to list all drugs in the inventory.
@@ -29,7 +30,7 @@ public class ListCommand extends Command {
         // Assertion: Check if the inventory is properly initialized
         assert inventory != null : "Inventory should be initialized before executing ListCommand.";
         // Retrieve the list of drugs from the inventory
-        List<StockEntry> stockEntries = inventory.getStockEntries();
+        List<Map.Entry<String, StockEntry>> stockEntries = inventory.getStockEntries();
 
         // Check if the inventory is empty
         if (stockEntries.isEmpty()) {
@@ -39,13 +40,13 @@ public class ListCommand extends Command {
             // Prepare a StringBuilder to construct the output message
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
             int index = 1;
-            for (StockEntry entry : stockEntries) {
+            for (Map.Entry<String, StockEntry> entry : stockEntries) {
                 resultMessage.append("\t").append(index).append(". ")
-                        .append("Name: ").append(entry.getDrug().getName())
-                        .append(", Expiry date: ").append(entry.getDrug().getExpiryDate())
-                        .append(", Serial number: ").append(entry.getSerialNumber())
-                        .append(", Quantity: ").append(entry.getQuantity())
-                        .append(", Selling Price: ").append(entry.getDrug().getSellingPrice()) // Add this line
+                        .append("Name: ").append(entry.getValue().getDrug().getName())
+                        .append(", Expiry date: ").append(entry.getValue().getDrug().getExpiryDate())
+                        .append(", Serial number: ").append(entry.getKey())
+                        .append(", Quantity: ").append(entry.getValue().getQuantity())
+                        .append(", Selling Price: ").append(entry.getValue().getDrug().getSellingPrice())
                         .append(System.lineSeparator());
                 index++;
             }

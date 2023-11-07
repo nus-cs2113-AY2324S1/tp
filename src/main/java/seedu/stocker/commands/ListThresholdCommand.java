@@ -4,6 +4,7 @@ import seedu.stocker.drugs.StockEntry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a command to list all drugs and their threshold levels in the inventory.
@@ -28,15 +29,15 @@ public class ListThresholdCommand extends Command {
     public CommandResult execute() {
         assert inventory != null : "Inventory should be initialized before executing ListThresholdCommand.";
 
-        List<StockEntry> stockEntries = inventory.getStockEntries();
+        List<Map.Entry<String, StockEntry>> stockEntries = inventory.getStockEntries();
 
         if (stockEntries.isEmpty()) {
             return new CommandResult("The inventory is empty.");
         } else {
             List<String> resultElements = new ArrayList<>();
-            for (StockEntry entry : stockEntries) {
-                long thresholdQuantity = entry.getThresholdQuantity();
-                String drugName = entry.getDrug().getName();
+            for (Map.Entry<String, StockEntry> entry : stockEntries) {
+                long thresholdQuantity = entry.getValue().getThresholdQuantity();
+                String drugName = entry.getValue().getDrug().getName();
                 resultElements.add(drugName + ": " + thresholdQuantity);
             }
             return new CommandResult<>(MESSAGE_SUCCESS, resultElements);

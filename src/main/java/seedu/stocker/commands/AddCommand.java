@@ -31,23 +31,14 @@ public class AddCommand extends Command {
         return this.toAdd;
     }
 
-    public String getSerialNumber() {
-        return this.serialNumber;
-    }
-
     @Override
-    public CommandResult execute() {
-        StockEntry matchingEntry = inventory.getStockEntries().stream()
-            .filter(entry -> entry
-                .getDrug().getName()
-                .equalsIgnoreCase(this.toAdd.getName()))
-            .findAny()
-            .orElse(null);
-        if (matchingEntry != null) {
-            matchingEntry.incrQuantity(this.quantity);
-            return new CommandResult<>(String.format(MESSAGE_SUCCESS, matchingEntry.getDrug().getName()));
+    public <T> CommandResult<T> execute() {
+        StockEntry entry = inventory.get(serialNumber);
+        if (entry != null) {
+            entry.incrQuantity(this.quantity);
+            return new CommandResult<>(String.format(MESSAGE_SUCCESS, entry.getDrug().getName()));
         } else {
-            inventory.addNewDrug(toAdd.getName().trim().toLowerCase(), toAdd, serialNumber, quantity);
+            inventory.addNewDrug(serialNumber, toAdd, quantity);
             return new CommandResult<>(String.format(MESSAGE_SUCCESS, toAdd.getName()));
         }
     }

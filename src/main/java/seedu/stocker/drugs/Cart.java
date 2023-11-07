@@ -1,5 +1,7 @@
 package seedu.stocker.drugs;
 
+import seedu.stocker.exceptions.DrugNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +24,10 @@ public class Cart {
         return entries.isEmpty();
     }
 
-    public void checkOut(SalesList salesList, Inventory inventory) {
+    public void checkOut(SalesList salesList, Inventory inventory) throws DrugNotFoundException {
         salesList.addSale(this);
         for (CartEntry entry : entries) {
-            inventory.removeFromStock(entry.getKey(), entry.getQuantity());
+            inventory.removeFromStock(entry.getSerialNumber(), entry.getQuantity());
         }
         this.entries = new ArrayList<>();
     }

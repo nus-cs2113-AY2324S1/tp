@@ -2,16 +2,16 @@ package seedu.stocker.drugs;
 
 public class CartEntry {
 
-    private String key;
+    private String serialNumber;
     private long quantity;
 
-    public CartEntry(String key, long quantity) {
-        this.key = key;
+    public CartEntry(String serialNumber, long quantity) {
+        this.serialNumber = serialNumber;
         this.quantity = quantity;
     }
 
-    public String getKey() {
-        return this.key;
+    public String getSerialNumber() {
+        return this.serialNumber;
     }
 
     public long getQuantity() {
@@ -25,7 +25,7 @@ public class CartEntry {
      */
     @Override
     public String toString() {
-        return "Key: " + this.key
+        return "Serial number: " + this.serialNumber
             + ", Quantity: " + this.quantity;
     }
 }
