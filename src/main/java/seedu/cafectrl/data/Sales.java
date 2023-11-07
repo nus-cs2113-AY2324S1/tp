@@ -32,11 +32,6 @@ public class Sales {
         orderLists.add(orderList);
     }
 
-    //TODO: @Zhong Heng, Remove this method if not used
-    public void removeOrderList(int orderListId) {
-        orderLists.remove(orderListId);
-    }
-
     public void nextDay() {
         this.daysAccounted += 1;
     }
