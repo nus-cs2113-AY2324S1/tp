@@ -312,7 +312,7 @@ class ParserTest {
 
     //@@author DextheChik3n
     @Test
-    void parseCommand_invalidUserInput_IncorrectCommand() {
+    void parseCommand_invalidUserInput_incorrectCommand() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -584,7 +584,7 @@ class ParserTest {
     }
 
     @Test
-    void isRepeatedIngredientName_nonExistingIngredientName_False() {
+    void isRepeatedIngredientName_nonExistingIngredientName_false() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         Ingredient ingredient = new Ingredient("rice");
         ingredients.add(ingredient);
@@ -593,7 +593,7 @@ class ParserTest {
     }
 
     @Test
-    void isRepeatedIngredientName_existingIngredientName_True() {
+    void isRepeatedIngredientName_existingIngredientName_true() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         Ingredient ingredient = new Ingredient("rice");
         ingredients.add(ingredient);
