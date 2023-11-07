@@ -64,15 +64,20 @@ public class Sales {
      * @param menu The Menu object representing the cafe's menu.
      */
     public void printSales(Ui ui, Menu menu) {
-        if (orderLists.isEmpty()) {
-            ui.showToUser("No orders for the day!");
+        if(orderLists.isEmpty()) {
+            ui.showToUser("No sales made.");
             return;
         }
 
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
-
             ui.showToUser("Day " + (day + 1) + ":");
+
+            if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
+                ui.showToUser("No sales for this day.");
+                continue;
+            }
+
             ui.showToUser(String.format(HEADER_FORMAT, "Dish Name", "Dish Qty", "Total Cost Price"));
             orderList.printOrderList(menu, ui);
         }
