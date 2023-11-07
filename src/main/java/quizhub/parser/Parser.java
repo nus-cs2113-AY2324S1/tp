@@ -207,11 +207,11 @@ public class Parser {
                 return new CommandInvalid(CommandShortAnswer.TOO_MANY_ARGUMENTS_MSG);
             }
             // Extract the values for description, answer, module, and difficulty
-            String description = tokens[0].strip().replace("\\slash", "/").replace("|", "");
+            String description = tokens[0].strip().replace("|", "");
             boolean isFieldEmpty = description.isEmpty();
-            String answer = tokens[1].strip().replace("\\slash", "/").replace("|", "");
+            String answer = tokens[1].strip().replace("|", "");
             isFieldEmpty = isFieldEmpty || answer.isEmpty();
-            String module = tokens[2].strip().replace("\\slash", "/").replace("|", "");
+            String module = tokens[2].strip().replace("|", "");
             isFieldEmpty = isFieldEmpty || module.isEmpty();
             String difficulty = tokens[3].strip();
             isFieldEmpty = isFieldEmpty || difficulty.isEmpty();

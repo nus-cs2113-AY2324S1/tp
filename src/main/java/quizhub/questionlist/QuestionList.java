@@ -118,20 +118,13 @@ public class QuestionList {
     public void printQuestion(Question question, boolean asList){
         int qnIndex = allQns.indexOf(question);
         int oneIndexed = ++qnIndex;
-        String isDone = question.questionIsDone() ? "X" : " ";
-        String questionTypeIdentifier = "";
-        if(question.getQuestionType() == SHORTANSWER){
-            questionTypeIdentifier = "S";
-        } else if(question.getQuestionType() == MULTIPLECHOICE){
-            questionTypeIdentifier = "M";
-        }
+        String indexString = "    ";
         if(asList) {
-            System.out.printf("    %d: [%s][%s] %s\n", oneIndexed, isDone,
-                questionTypeIdentifier, question.getQuestionDescription());
+            indexString += oneIndexed + ": ";
         } else {
-            System.out.printf("        [%s][%s] %s\n", isDone, questionTypeIdentifier, 
-                question.getQuestionDescription());
+            indexString += "    ";
         }
+        System.out.println(indexString + question);
     }
     
     /**

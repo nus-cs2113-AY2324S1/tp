@@ -2,6 +2,8 @@ package quizhub.storage;
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
+import quizhub.question.ShortAnsQn;
+import quizhub.question.MultipleChoiceQn;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -48,7 +50,7 @@ public class Storage {
                                     String qnDoneStatus, Question.QnDifficulty difficulty,
                                     String qnModule) {
         switch (qnType) {
-        case "S":
+        case ShortAnsQn.IDENTIFIER:
             try {
                 // Split the description by "/" and check for empty fields
                 String[] qnTokens = qnDescription.split("/");
@@ -63,7 +65,7 @@ public class Storage {
             } catch (ArrayIndexOutOfBoundsException exception) {
                 return 1;
             }
-        case "MC":
+        case MultipleChoiceQn.IDENTIFIER:
             try {
                 // Split the description by "/" and check for empty fields
                 String[] qnTokens = qnDescription.split("/");
@@ -168,24 +170,6 @@ public class Storage {
         System.out.println("    You currently have the following questions uWu");
         questions.printQuestionList();
     }
-    private void storeQuestionToFile(Question question) throws IOException {
-        String isDoneString = "undone";
-        if (question.questionIsDone()) {
-            isDoneString = "done";
-        }
-        switch (question.getQuestionType()) {
-        case SHORTANSWER:
-            writeToFile(dataFile.getPath(), "S | " + isDoneString + " | " + question.getQuestionDescription()
-                    + System.lineSeparator(), true);
-            break;
-        case MULTIPLECHOICE:
-            writeToFile(dataFile.getPath(), "MC | " + isDoneString + " | " + question.getQuestionDescription()
-                    + System.lineSeparator(), true);
-            break;
-        default:
-            break;
-        }
-    }
     /**
      * Overwrites all existing data in storage with
      * the current questions in the question list.
@@ -199,7 +183,7 @@ public class Storage {
             writeToFile(dataFile.getPath(), "Latest Questions" + System.lineSeparator(), false);
             ArrayList<Question> allQuestions = questions.getAllQns();
             for (Question question : allQuestions) {
-                storeQuestionToFile(question);
+                writeToFile(dataFile.getPath(), question.toSerializedString(), true);
             }
         } catch(NullPointerException | IOException invalidFilePath) {
             System.out.println("    " + invalidFilePath.getMessage());

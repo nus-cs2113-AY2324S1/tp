@@ -28,32 +28,35 @@ public class Ui {
             "    2. short [question]/[answer]/[module]/[difficulty] - adds a short answer question and " +
             "its answer to the list," +
             System.lineSeparator() +
-            "    3. list - shows the list of questions and answers," +
+            "    3. mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]" +
+            " - adds a multiple-choice question and its answer to the list" +
             System.lineSeparator() +
-            "    4. delete [question number] - deletes the question and answer at the specified number," +
+            "    4. list - shows the list of questions and answers," +
             System.lineSeparator() +
-            "    5. find /description [description] - displays all questions containing the specified description," +
+            "    5. delete [question number] - deletes the question and answer at the specified number," +
             System.lineSeparator() +
-            "    6. find /description [module] - displays all questions that belong to the specified module," +
+            "    6. find /description [description] - displays all questions containing the specified description," +
             System.lineSeparator() +
-            "    7. edit [question number] /description [description] - edits the description of the question " +
+            "    7. find /description [module] - displays all questions that belong to the specified module," +
+            System.lineSeparator() +
+            "    8. edit [question number] /description [description] - edits the description of the question " +
             "with the specified number," +
             System.lineSeparator() +
-            "    8. edit [question number] /answer [answer] - edits the answer to the question with " +
+            "    9. edit [question number] /answer [answer] - edits the answer to the question with " +
             "the specified number," +
             System.lineSeparator() +
-            "    9. edit [question number] /option[number] [new value] - edits the option of the question with " +
+            "    10. edit [question number] /option[number] [new value] - edits the option of the question with " +
             "the specified number (MCQ only)," +
             System.lineSeparator() +
-            "    10. start /[quiz mode] [start details] /[qn mode] - " +
+            "    11. start /[quiz mode] [start details] /[qn mode] - " +
             "starts the quiz with option for /module or /all and /random or /normal," +
             System.lineSeparator() +
-            "    11. shuffle - shuffle quiz questions to a random order," +
+            "    12. shuffle - shuffle quiz questions to a random order," +
             System.lineSeparator() +
-            "    12. markdiff [question number] /[question difficulty] - sets the difficulty of question " +
+            "    13. markdiff [question number] /[question difficulty] - sets the difficulty of question " +
             "with the specified number," +
             System.lineSeparator() +
-            "    13. bye - exits the program";
+            "    14. bye - exits the program";
     public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer question index!";
 
     public static final String MISSING_QUESTION_NUMBER_MSG = "    Ono! Please enter valid question number *sobs*";
