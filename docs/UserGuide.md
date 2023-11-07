@@ -30,12 +30,41 @@ Bryan-updatePPP
 
 master
 ### View help : help
-Shows basic commands executable by the program.
+Shows basic commands executable by the program. 
+User can choose to view the help function of individual command separately as well, which shows the description and format of that command
 
 Format:
 ```
 help
 ```
+```
+help add
+```
+```
+help list
+```
+```
+help delete
+```
+```
+help edit
+```
+```
+help balance
+```
+```
+help update exchange rate
+```
+```
+help find
+```
+```
+help clear
+```
+```
+help exit
+```
+
 
 ### Add an entry: add
 Creates a new entry for income or expenses in the program.
@@ -77,13 +106,9 @@ Example of usage:
 ```
 add income /de salary /date 01/01/2020 /amt 1000
 ```
-Expected output after successfully add income to the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)
 ```
 add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 /amt 10.00
 ```
-Expected output after successfully add expense to the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)
 ```
 add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
@@ -93,7 +118,10 @@ add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt
 ```
 add expense /cat transport /type train /de train to school /date 10/10/2023 /amt 10.00
 ```
-
+Expected output after successfully add income to the list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)
+Expected output after successfully add expense to the list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)
 
 ### List all entries: list
 Shows a full list of both the expenses and income created by the user.
@@ -120,29 +148,15 @@ delete expense <index>
 ```
 delete income <index>
 ```
-Expected output after successfully delete income from the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)
 
 Use case:
 - Prompts users if index is empty.
 - `<index>` should not be negative.
 - `<index>` should not be out of bounds.
 
-### Clear all entries: Clear
-Clearing all entries from the list of income/expenses.
+Expected output after successfully delete income from the list:
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)
 
-Format:
-```agsl
-clear income
-```
-
-```agsl
-clear expense
-```
-
-```agsl
-clear all
-```
 
 ### Find an entry: find
 Find an entry from the existing list of income/expenses.
@@ -178,19 +192,23 @@ Use case:
 
 Note: <index> must be a positive integer that corresponds to an income/expense entry
 
-### Clear a list
-Clear all the entries on the income/expenses or both list.
+### Clear all entries: Clear
+Clear the expenses/income created by the user.
+User can choose to clear both list as well.
 
 Format:
+```agsl
+clear income
 ```
-clear incomes
+
+```agsl
+clear expense
 ```
-```
-clear expenses
-```
-```
+
+```agsl
 clear all
 ```
+
 Example of successfully clear income list:
 ![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_income.png?raw=true)
 Example of successfully clear expense list:
@@ -242,7 +260,7 @@ Use case:
 
 
 ### List the supported currencies: list currencies
-This function allows user to see the foreign currencies supported by KaChinnnng.
+Show the foreign currencies supported by KaChinnnngggg.
 
 Note: The default currency is SGD.
 
@@ -286,6 +304,22 @@ Note:
 - `<rate>` specified should be in SGD/{foreign currency}.
 - `<rate>` must be a positive decimal that is between 0.001 and 3,000,000.
 - The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
+
+### Storage for income and expense entries
+Save all the income and expense entries to the KaChinnnngggg.txt
+
+All income and expense entries will be update to the file for every command input.
+
+There is no command to save to file manually since it's updating after every command
+
+### Retrieve entries from text file and save to the income and expense list
+Retrieve all the income and expense entries from the KaChinnnngggg.txt
+
+At the beginning of executing the program, KaChinnnngggg will automatically retrieve all the entries storied in the KaChinnnngggg.txt
+
+There is no command to get from file manually since it will run once at the beginning of program.
+
+
 
 ## FAQ
 
