@@ -1,0 +1,29 @@
+@startuml
+!include <office/Concepts/documents>
+!include style.puml
+
+package "" as f {
+Class Ui #blue
+Class Parser #Magenta
+Class Model #DeepPink
+Class Main #PowderBlue
+Class Storage #SpringGreen
+Class Command #Grey
+}
+
+Class User #red
+Class "<$documents>" as File #Lime
+
+User -down-> Ui
+Ui --> Parser
+Ui <--> Main
+Ui <--> Storage
+Main --> Storage
+Main --> Parser
+Main --> Command
+Parser --> Command
+Command --> Model
+
+Storage -left-> File
+
+@enduml

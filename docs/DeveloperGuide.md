@@ -4,6 +4,7 @@
 
 * [Acknowledgements](#acknowledgements)
 * [Design & implementation](#design--implementation)
+  * [Architecture Diagram](#architecture-diagram)
   * [Storage Component](#storage-component)
     * [Design considerations](#design-considerations)
   * [Visualization Feature](#visualization-feature-)
@@ -70,7 +71,23 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture Diagram
+
+![](images/ArchitectureDiagram.png)
+
+The **Architecture Diagram** given above explains the high-level design of the program.
+
+#### Main components of the architecture
+
+`Main` consists of the `FinancialPlanner` class, and is in charge of starting up and shutting down the app.
+
+The program consists of five main components:
+
+* `Ui`: User interactions.
+* `Parser`: Parse user inputs.
+* `Command`: The command executor.
+* `Model`: Holds the data of the program in memory.
+* `Storage`: Reads data from, and writes data to the hard disk.
 
 ### Storage Component
 
@@ -336,7 +353,9 @@ Example: `budget view`
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Should work on main OS (Windows, Linux, Mac) that has Java 11 installed.
+* This app is meant for a single user.
+* This app targeted towards users with an above-average typing speed.
 
 ## Glossary
 
