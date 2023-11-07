@@ -12,7 +12,7 @@ public class UserProfile {
     private Calories dailyCalorieLimit;
     private Bmi bmi;
     private Gender gender;
-    
+
     public UserProfile() {
         this(new Height(1), new Weight(1), new Calories(0), new Gender('M'));
     }

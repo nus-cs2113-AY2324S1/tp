@@ -118,6 +118,8 @@ public class FitTrack {
      *
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
+     * @throws NegativeNumberException if argument is negative
+     * @throws WrongGenderException if gender is wrong
      */
     private void profileSettings()
             throws PatternMatchFailException, NumberFormatException, NegativeNumberException, WrongGenderException {
