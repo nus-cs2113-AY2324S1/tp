@@ -4,8 +4,6 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.parser.FindParser;
 import cashleh.transaction.ExpenseStatement;
 
-import java.util.logging.Level;
-
 /**
  * The FilterExpense class represents a command to filter expenses in the CashLeh application.
  * It allows users to filter expense transactions based on various criteria such as description,
@@ -35,7 +33,7 @@ public class FilterExpense extends Command {
             assert expenseStatement != null;
             expenseStatement.findExpense(expenseToFind.getDescription(), expenseToFind.getAmount(),
                     expenseToFind.getDate(), expenseToFind.getCategory());
-            logger.log(Level.INFO, "expense entry was successfully filtered");
+            logger.log(loggerLevel, "expense entry was successfully filtered");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();
         }

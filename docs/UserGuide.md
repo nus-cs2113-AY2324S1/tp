@@ -415,17 +415,17 @@ Change the password in case you believe your previous one may have been leaked.
 
 
 ## Command Summary
-* Add income `addIncome monthly salary /amt 2500 /date 30/09/2023 /cat SALARY`
-* Add expense `addExpense milk tea /amt 2.50 /date 30/09/2023 /cat FOOD_DRINK`
-* Delete income `deleteIncome 4`
-* Delete expense `deleteExpense 4`
+* Add income `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+* Add expense `addExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+* Delete income `deleteIncome INDEX`
+* Delete expense `deleteExpense INDEX`
 * View incomes `viewIncomes`
 * View expenses `viewExpenses`
 * View financial statement `viewFinancialStatement`
 * View budget `viewBudget`
-* Update budget `updateBudget 200`
+* Update budget `updateBudget AMOUNT`
 * Delete budget `deleteBudget`
-* Filter expense `filterExpense /amt 2.50`
-* Filter income `filterIncome /cat SALARY`
-* Filter transaction `filter /date 30/09/2023`
+* Filter expense `filterExpense /amt AMOUNT`
+* Filter income `filterIncome /cat CATEGORY`
+* Filter transaction `filter /date DATE`
 * Exit `exit`
