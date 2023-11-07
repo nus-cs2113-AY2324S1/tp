@@ -7,7 +7,7 @@ import fittrack.parser.PatternMatchFailException;
 
 import java.io.IOException;
 
-public class SaveCommand extends Command {
+public abstract class SaveCommand extends Command {
     public static final String COMMAND_WORD = "save";
     private static final String DESCRIPTION =
             String.format("`%s` saves your profile, meals and workout data.", COMMAND_WORD);
@@ -22,14 +22,14 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            storage.save(userProfile, mealList, workoutList);
+            storage.save(userProfile, mealList, workoutList, stepList);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         return new CommandResult("Your data has been saved!");
     }
 
-    @Override
+
     public void setArguments(String args) throws PatternMatchFailException {
         if (!args.isEmpty()) {
             throw new PatternMatchFailException();
