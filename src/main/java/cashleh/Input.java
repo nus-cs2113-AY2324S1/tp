@@ -13,6 +13,10 @@ public class Input {
         inputString = "";
     }
 
+    public boolean hasNextLine() {
+        return in.hasNextLine();
+    }
+
     /**
      * Returns the next line of input from the user
      * @return Next line of input from the user
