@@ -4,7 +4,6 @@
 * [User Guide](#user-guide)
   * [Introduction](#introduction)
   * [Quick Start](#quick-start)
-  * [Glossary](#glossary)
   * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a dish : `add`](#adding-a-dish--add)
@@ -22,6 +21,7 @@
     * [Exiting the program : `bye`](#exiting-the-program--bye)
   * [Known Issues](#known-issues)
   * [Command Summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 ---------------------------------------------------
