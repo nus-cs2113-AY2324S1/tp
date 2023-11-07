@@ -165,10 +165,5 @@ public class GetFromTxtTest {
         assertEquals(0, newIncomes.size());
         assertEquals(0, newExpenses.size());
     }
-    /**
-     * Test the {@link SaveToTxt#saveIncomeToTextFile(ArrayList)} method with multiple incomes records without expenses,
-     * This test case checks whether the more than one income from the txt file save to the list correctly
-     */
-
-
+    
 }
