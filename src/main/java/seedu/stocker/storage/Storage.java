@@ -66,7 +66,7 @@ public class Storage {
         Scanner reader = new Scanner(f);
 
         Pattern pattern = Pattern.compile(
-                "Name: (.*), Expiry Date: (.*), Serial Number: (.*), Quantity: (.*)"
+                "Name: (.*), Expiry Date: (.*), Serial Number: (.*), Quantity: (.*), Selling Price: (.*)"
         );
         while (reader.hasNextLine()) {
             Matcher matcher = pattern.matcher(reader.nextLine());

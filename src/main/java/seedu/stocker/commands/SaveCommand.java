@@ -37,8 +37,10 @@ public class SaveCommand extends Command{
             String date = entry.getValue().getDrug().getExpiryDate();
             String serialNumber = entry.getKey();
             String quantity = String.valueOf(entry.getValue().getQuantity());
+            String sellingPrice = String.valueOf(entry.getValue().getDrug().getSellingPrice());
             String toBeAppended = "Name: " + name + ", " + "Expiry Date: " + date + ", "
-                    + "Serial Number: " + serialNumber + ", " + "Quantity: " + quantity;
+                    + "Serial Number: " + serialNumber + ", " + "Quantity: " + quantity
+                    + ", " + "Selling Price: " + sellingPrice;
             storageManager.appendToFile("drugs.txt", toBeAppended);
         }
         return new CommandResult<>(MESSAGE_SUCCESS);
