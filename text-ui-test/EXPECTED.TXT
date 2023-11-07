@@ -29,7 +29,7 @@ RECIPE
 INGREDIENT
 	- View all ingredients. [view i]
 	- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]
-		Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs
+		Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pc
 	- View an Ingredient. [view i/INGREDIENT_NAME] or [view i/INGREDIENT_ID]
 	- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]
 	- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]

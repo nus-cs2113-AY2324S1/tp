@@ -1,5 +1,7 @@
 package essenmakanan.recipe;
 
+import essenmakanan.exception.EssenInvalidEnumException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,10 +32,33 @@ public class RecipeStepList {
     }
 
     public RecipeStepList(String[] inputSteps) {
-
+        String tagValue;
+        Step step = null;
         for (String stepString : inputSteps) {
-            Step step = new Step(stepString);
+            // check if step has tag
+            if (stepString.indexOf("t/") != -1) {
+                String[] stepStringSplit = stepString.split("t/");
+
+                // step description
+                stepString = stepStringSplit[0].trim();
+
+                // get tag
+                tagValue = stepStringSplit[1];
+                try {
+                    Tag tag = Tag.mapStringToTag(tagValue);
+                    step = new Step(stepString, tag);
+                } catch (EssenInvalidEnumException e) {
+                    System.out.println("No such Tag");
+                }
+
+            } else {
+                step = new Step(stepString);
+            }
+
+            // step should not be null here, either with or without tag, error handled before
+            assert (step != null) : "Step is not initialised";
             this.addStep(step);
+
         }
     }
 

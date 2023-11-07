@@ -140,7 +140,7 @@ public class Ui {
     }
 
     public static String validIngredientUnits() {
-        return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
+        return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pc");
     }
 
     public static void printEditIngredientNameSuccess(String oldName, String newName) {

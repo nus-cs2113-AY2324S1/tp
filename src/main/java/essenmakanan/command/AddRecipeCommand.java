@@ -22,29 +22,17 @@ public class AddRecipeCommand extends Command {
 
     @Override
     public void executeCommand() {
-        if (toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("t/")) {
-            // all attributes are available
-            try {
-                this.addWithTitleStepsTags();
-            } catch (EssenFormatException e) {
-                e.handleException();
-            }
-        } else if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
+        // if toAdd does not contain the necessary flag, it should have been flagged in Parser class
+        assert toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/")
+                : "Parser did not catch incomplete input";
+
+        if ((toAdd.contains("r/") && toAdd.contains("s/") && toAdd.contains("i/"))) {
             // only title and steps are available
             try {
                 this.addWithTitleAndStepsAndIngredients();
             } catch (EssenFormatException e) {
                 e.handleException();
             }
-        } else if (toAdd.contains("r/") && toAdd.contains("s/")) {
-            try {
-                this.addWithTitleAndSteps();
-            } catch (EssenFormatException e) {
-                e.handleException();
-            }
-        } else {
-            // only title is available
-            this.addWithTitle();
         }
     }
 
@@ -76,8 +64,26 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
+    private static void addSteps(String step, RecipeStepList recipeStepList, Tag tag) {
+        String[] allSteps = step.trim().split("s/");
+        for (String eachStep : allSteps) {
+            if (eachStep.length()>0 && eachStep.contains("d/")) {
+                try {
+                    String description = eachStep.split("d/")[0].trim();
+                    int duration = RecipeParser.parseStepsDuration(eachStep);
+                    Step specificStep = new Step(description, tag, duration);
+                    recipeStepList.addStep(specificStep);
+                } catch (EssenFormatException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (eachStep.length()>0) {
+                recipeStepList.addStep(new Step(eachStep.trim(), tag));
+            }
+        }
+    }
+
     public void addWithTitleStepsTags() throws EssenFormatException {
-        // add r/bread t/b s/buy ingredients s/store ingredients t/a s/cook
+        // add r/bread t/1 s/buy ingredients s/store ingredients t/2 s/cook
         String[] allToAdd = toAdd.split("t/");
         String recipeTitle = RecipeParser.parseRecipeTitle(allToAdd[0].trim());
         String[] steps = new String[allToAdd.length - 1];
@@ -108,24 +114,6 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
-    private static void addSteps(String step, RecipeStepList recipeStepList, Tag tag) {
-        String[] allSteps = step.trim().split("s/");
-        for (String eachStep : allSteps) {
-            if (eachStep.length()>0 && eachStep.contains("d/")) {
-                try {
-                    String description = eachStep.split("d/")[0].trim();
-                    int duration = RecipeParser.parseStepsDuration(eachStep);
-                    Step specificStep = new Step(description, tag, duration);
-                    recipeStepList.addStep(specificStep);
-                } catch (EssenFormatException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (eachStep.length()>0) {
-                recipeStepList.addStep(new Step(eachStep.trim(), tag));
-            }
-        }
-    }
-
     public void addWithTitleAndStepsAndIngredients() throws EssenFormatException {
 
         // initialisation
@@ -139,6 +127,7 @@ public class AddRecipeCommand extends Command {
         int ingredientsCounter = 0;
 
         String recipeTitle = "";
+        String tag = null;
 
         int flagIndex;
         String typeFlag;
@@ -176,6 +165,12 @@ public class AddRecipeCommand extends Command {
                     throw new EssenFormatException();
                 }
 
+                content = content.trim();
+
+                if (tag != null) {
+                    // this step belongs to a tag
+                    content = content + " t/" + tag;
+                }
                 stepsInString[stepsCounter] = content;
                 stepsCounter++;
                 break;
@@ -191,6 +186,20 @@ public class AddRecipeCommand extends Command {
                 }
                 ingredientsInString[ingredientsCounter] = content;
                 ingredientsCounter++;
+                break;
+            case "t":
+                if (content.isEmpty()) {
+                    System.out.println("Tag is empty! Please enter valid tag number \"t/\"");
+                    throw new EssenFormatException();
+                }
+
+                if (!Tag.tagExist(content)) {
+                    System.out.println("Tag does not exist! Please enter valid tag number \"t/\"");
+                    throw new EssenFormatException();
+                }
+
+                // steps after this tag (and before the next tag) will belong to this tag
+                tag = content;
                 break;
             default:
                 System.out.println("Please enter a valid recipe!");
@@ -212,5 +221,6 @@ public class AddRecipeCommand extends Command {
         }
         return count;
     }
+
 
 }
