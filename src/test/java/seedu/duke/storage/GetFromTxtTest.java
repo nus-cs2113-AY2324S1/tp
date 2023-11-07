@@ -13,14 +13,12 @@ import seedu.duke.financialrecords.expensetypes.MealType;
 import seedu.duke.financialrecords.expensetypes.TransportationType;
 import seedu.duke.financialrecords.expensetypes.UtilityType;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GetFromTxtTest {
     private ArrayList<Income> incomes;
