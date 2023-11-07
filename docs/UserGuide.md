@@ -3,9 +3,8 @@
 ## Introduction
 
 CashLeh? is a CLI application mainly supporting working adults and students who struggle with managing finances
-(ranging from one-time and recurring expenses, to rent, utilities, interest rates and more). It allows them to track
-both their earnings and spending habits in a seamless way to have a neat overview of their financial 
-situation.
+. It allows them to set a budget and track both their earnings and spending habits in a seamless way to have a 
+neat overview of their financial situation.
 
 ## Quick Start
 
@@ -27,7 +26,6 @@ Adds an income with a description, amount, date and category.
 
 Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `DESCRIPTION` cannot contain punctuation or any special characters.
 * The `AMOUNT` must be a positive number.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended. 
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
@@ -63,7 +61,6 @@ Adds an expense with a description, amount, date and category.
 
 Format: `addExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `DESCRIPTION` cannot contain punctuation or any special characters.
 * The `AMOUNT` must be a positive number.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
@@ -242,23 +239,38 @@ Example of usage:
 Displays expenses that match specific criteria provided by the user. 
 Expenses can be filtered based on the following criteria: description, amount, date, or category.
 
-Format: `filterExpense description /amt AMOUNT /date DATE /cat CATEGORY`
-* All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
-* If no criteria is provided, CashLeh? will display the user's input, along with an error message
+Format: `filterExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+* All criteria are optional, but at least one must be provided. User can choose to filter based on just one, 
+  or multiple criteria at the same time
+* If no criteria is provided, CashLeh? will display an error message
+* For DESCRIPTION string, special characters and punctuations in input will be removed. Any instances of other criterion
+(eg. a/mt, amt/, ca/t, cat/, da/te, d/ate, etc.) that is included under DESCRIPTION by user will not be considered 
+as part of the description, as illustrated below
+
+`filterExpense shirt a/mt`
+```
+	____________________________________________________________
+	Your input is <description>: shirt
+	____________________________________________________________
+	____________________________________________________________
+	No such transaction recorded leh!
+	____________________________________________________________
+```
 
 Examples of usage:
 
 `filterExpense milk tea`
 ```
 	____________________________________________________________
-	Here are your corresponding expenses with <description>: milk tea ||
+	Here are your corresponding expenses with <description>: milk tea 
 	Expense: milk tea (Amount: 2.5, Date: 30/09/2023, Category: FOOD_DRINK)
 	____________________________________________________________
 ```
+
 `filterExpense /amt 3.50`
 ```
 	____________________________________________________________
-	Your input is <amount>: 3.5 ||
+	Your input is <amount>: 3.5 
 	____________________________________________________________
 	____________________________________________________________
 	No such transaction recorded leh!
@@ -270,21 +282,26 @@ Examples of usage:
 
 `filterExpense milk tea /date 25/10/2023`
 
+
 ### Filtering an income: `filterIncome`
 Displays incomes that match specific criteria provided by the user.
 Incomes can be filtered based on the following criteria: description, amount, date, or category.
 
-Format: `filterIncome description /amt AMOUNT /date DATE /cat CATEGORY`
-* All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
-* If no criteria is provided, CashLeh? will display the user's input, along with an error message
+Format: `filterIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+* All criteria are optional, but at least one must be provided. User can choose to filter based on just one, 
+  or multiple criteria at the same time
+* If no criteria is provided, CashLeh? will display an error message
+* For DESCRIPTION string, special characters and punctuations in input will be removed. Any instances of other criterion
+  (eg. a/mt, amt/, ca/t, cat/, da/te, d/ate, etc.) that is included under DESCRIPTION by user will not be considered
+  as part of the description
 
 Examples of usage:
 
-`filterIncome monthly salary`
+`filterIncome monthly salary /amt 1000`
 ```
 	____________________________________________________________
-	Here are your corresponding incomes with <description>: monthly salary ||
-	Income: monthly salary (Amount: 2500.0, Date: 30/09/2023)
+	Here are your corresponding incomes with <description>: monthly salary || <amount>: 1000.0
+	Income: monthly salary (Amount: 1000.0, Date: 06/11/2023)
 	____________________________________________________________
 ```
 
@@ -295,7 +312,7 @@ Examples of usage:
 `filterIncome /date 25/10/2023`
 ```
 	____________________________________________________________
-	Your input is <date>: 2023-10-25 ||
+	Your input is <date>: 2023-10-25 
 	____________________________________________________________
 	____________________________________________________________
 	No such transaction recorded leh!
@@ -307,15 +324,19 @@ Displays expenses and incomes that match specific criteria provided by the user.
 Transactions can be filtered based on the following criteria: description, amount, date, or category.
 
 Format: `filter description /amt AMOUNT /date DATE /cat CATEGORY`
-* All criteria are optional. User can choose to filter based on just one or multiple criteria at the same time
-* If no criteria is provided, CashLeh? will display the user's input, along with an error message
+* All criteria are optional, but at least one must be provided. User can choose to filter based on just one,
+  or multiple criteria at the same time
+* If no criteria is provided, CashLeh? will display an error message
+* For DESCRIPTION string, special characters and punctuations in input will be removed. Any instances of other criterion
+  (eg. a/mt, amt/, ca/t, cat/, da/te, d/ate, etc.) that is included under DESCRIPTION by user will not be considered
+  as part of the description
 
 Examples of usage:
 
 `filter milk tea`
 ```
 	____________________________________________________________
-	Here are your corresponding transactions with <description>: milk tea ||
+	Here are your corresponding transactions with <description>: milk tea 
 	[-] Expense: milk tea (Amount: 2.5, Date: 30/09/2023, Category: FOOD_DRINK)
 	____________________________________________________________
 ```

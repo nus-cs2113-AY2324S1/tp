@@ -85,6 +85,7 @@ Delimiters can also be specified as optional by adding ":optional" to the end. T
 The tokenize function is implemented by the StringTokenizer class. It takes in the user input and the prefixes array and returns a hashmap of the user input.
 
 ![](./images/stringTokenizer.png)
+> Note: The lifeline for PrefixWithPosition should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 **Step 1**\
 Check if all necessary prefixes are present in the user input. If not, throw an exception.

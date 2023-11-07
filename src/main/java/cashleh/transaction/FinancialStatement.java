@@ -59,26 +59,24 @@ public class FinancialStatement {
      */
     public void printTransactions() {
         int listSize = financialStatement.size();
-        List<String> transactionDetails = new ArrayList<>();
+        List<String []> transactionDetails = new ArrayList<>();
 
         for (Transaction currentTransaction : financialStatement) {
-            String type = (currentTransaction instanceof Income) ? "Income, " : "Expense, ";
+            String type = (currentTransaction instanceof Income) ? "Income" : "Expense";
             String date = currentTransaction.getDate().toString();
             String amt = String.valueOf(currentTransaction.getAmount());
             String cat = currentTransaction.getCategory() == null ? "-" : currentTransaction.getCategory().toString();
-            transactionDetails.add(type + date + ", " + currentTransaction.getDescription() + ", " + amt + ", " + cat);
+            transactionDetails.add(new String[]{type, date, currentTransaction.getDescription(), amt, cat});
         }
 
         // Sort transactions based on the date of transaction
         Collections.sort(transactionDetails, (transaction1, transaction2) -> {
-            String[] transactionParts1 = transaction1.split(", ");
-            String [] transactionParts2 = transaction2.split(", ");
-            String date1 = transactionParts1[1];
-            String date2 = transactionParts2[1];
+            String date1 = transaction1[1];
+            String date2 = transaction2[1];
             return date1.compareTo(date2);
         });
 
-        String[] texts = transactionDetails.toArray(new String[transactionDetails.size()]);
+        String[][] texts = transactionDetails.toArray(new String[0][]);
 
         Ui.printStatement("Financial Statement", texts);
     }
@@ -97,18 +95,24 @@ public class FinancialStatement {
         ArrayList<String> matchingTransactions = new ArrayList<>();
         boolean isMatch = false;
 
-        StringBuilder filterMessage = new StringBuilder("Here are your corresponding transactions with ");
-        if (description != null && !description.isEmpty()) {
-            filterMessage.append("<description>: ").append(description).append(SEPARATOR);
-        }
-        if (amount.isPresent()) {
-            filterMessage.append("<amount>: ").append(amount.getAsDouble()).append(SEPARATOR);
-        }
-        if (date != null) {
-            filterMessage.append("<date>: ").append(date).append(SEPARATOR);
-        }
-        if (category != null) {
-            filterMessage.append("<category>: ").append(category).append(SEPARATOR);
+        StringBuilder filterMessage = new StringBuilder("Here are your corresponding transactions with");
+        int hasFilterCriteria = 0;
+        String[] filterCriteria = { (description != null && !description.isEmpty()) ?
+                " <description>: " + description : null, amount.isPresent() ?
+                " <amount>: " + amount.getAsDouble() : null, (date != null) ?
+                " <date>: " + date : null, (category != null) ?
+                " <category>: " + category : null
+        };
+
+
+        for (String criterion : filterCriteria) {
+            if (criterion != null) {
+                if (hasFilterCriteria > 0) {
+                    filterMessage.append(SEPARATOR);
+                }
+                filterMessage.append(criterion);
+                hasFilterCriteria++;
+            }
         }
 
         StringBuilder matchingTransactionsMessage = new StringBuilder();

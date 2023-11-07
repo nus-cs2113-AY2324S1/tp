@@ -36,6 +36,8 @@ addExpense book /amt 10 /cat other
 filter /cat other
 filter /amt 2.50
 addIncome a very long income description longer than MAX_DESCRIPTION set /amt 500
+addExpense lunch, and dinner /amt 60 /cat food_drink
 viewFinancialStatement
+addIncome gamble /amt 99999999
 bad input
 exit
