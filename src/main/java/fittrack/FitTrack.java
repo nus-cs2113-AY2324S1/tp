@@ -95,7 +95,7 @@ public class FitTrack {
         Command command;
         do {
             String userCommandLine = ui.scanCommandLine();
-            command = new CommandParser().parseCommand(userCommandLine);
+            command = CommandParser.parseCommand(userCommandLine);
             CommandResult commandResult = executeCommand(command);
             ui.printCommandResult(commandResult);
         } while (!ExitCommand.isExit(command));

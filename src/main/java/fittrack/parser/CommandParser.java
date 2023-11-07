@@ -71,7 +71,7 @@ public class CommandParser {
             "(?<" + NAME_CG + ">.+)\\s+c/(?<" + CALORIES_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
     );
 
-    public Command parseCommand(String userCommandLine) {
+    public static Command parseCommand(String userCommandLine) {
 
         final Matcher matcher = COMMAND_PATTERN.matcher(userCommandLine.strip());
         if (!matcher.matches()) {
@@ -86,7 +86,7 @@ public class CommandParser {
             return getInvalidCommand(userCommandLine);
         }
         try {
-            command.setArguments(args, this);
+            command.setArguments(args);
         } catch (ParseException e) {
             return getInvalidCommand(userCommandLine, e);
         }
@@ -94,7 +94,7 @@ public class CommandParser {
         return command;
     }
 
-    public Command getBlankCommand(String word, String commandLine) {
+    public static Command getBlankCommand(String word, String commandLine) {
         switch (word) {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand(commandLine);
@@ -134,17 +134,17 @@ public class CommandParser {
         }
     }
 
-    public InvalidCommand getInvalidCommand(String userCommandLine) {
+    public static InvalidCommand getInvalidCommand(String userCommandLine) {
         return getInvalidCommand(userCommandLine, null);
     }
 
-    public InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
+    public static InvalidCommand getInvalidCommand(String userCommandLine, ParseException e) {
         InvalidCommand invalidCommand = new InvalidCommand(userCommandLine, e);
-        invalidCommand.setArguments(userCommandLine, this);
+        invalidCommand.setArguments(userCommandLine);
         return invalidCommand;
     }
 
-    public CommandResult getInvalidCommandResult(String userCommandLine, ParseException e) {
+    public static CommandResult getInvalidCommandResult(String userCommandLine, ParseException e) {
         return getInvalidCommand(userCommandLine, e).execute();
     }
 
@@ -156,7 +156,7 @@ public class CommandParser {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    public UserProfile parseProfile(String profile)
+    public static UserProfile parseProfile(String profile)
             throws PatternMatchFailException, NumberFormatException, NegativeNumberException, WrongGenderException {
         final Matcher matcher = PROFILE_PATTERN.matcher(profile);
         if (!matcher.matches()) {
@@ -189,7 +189,7 @@ public class CommandParser {
         }
     }
 
-    public Meal parseMeal(String meal) throws PatternMatchFailException, NumberFormatException {
+    public static Meal parseMeal(String meal) throws PatternMatchFailException, NumberFormatException {
         final Matcher matcher = MEAL_PATTERN.matcher(meal);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
@@ -215,6 +215,10 @@ public class CommandParser {
     }
 
     public Workout parseWorkout(String workout) throws PatternMatchFailException, NumberFormatException {
+    public static Workout parseWorkout(String args) throws PatternMatchFailException, NumberFormatException {
+        assert args != null;
+        String workout = args.strip();
+
         final Matcher matcher = WORKOUT_PATTERN.matcher(workout);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
@@ -240,7 +244,7 @@ public class CommandParser {
     }
 
     // @@author NgLixuanNixon
-    public int parseIndex(String args) throws ParseException {
+    public static int parseIndex(String args) throws ParseException {
         assert args != null;
         String index = args.strip();
 
@@ -260,7 +264,7 @@ public class CommandParser {
     // @@author
 
     // @@author NgLixuanNixon
-    public Date parseDate(String args) throws PatternMatchFailException {
+    public static Date parseDate(String args) throws PatternMatchFailException {
         assert args != null;
         String date = args.strip();
 
@@ -273,7 +277,7 @@ public class CommandParser {
     // @@author
 
     // @@author J0shuaLeong
-    public String parseKeyword(String args) throws PatternMatchFailException {
+    public static String parseKeyword(String args) throws PatternMatchFailException {
         assert args != null;
         String keyword = args.strip();
 
@@ -284,7 +288,7 @@ public class CommandParser {
     }
     // @@author
 
-    public String getFirstWord(String str) {
+    public static String getFirstWord(String str) {
         assert str != null && !str.isEmpty();
         return str.split("\\s")[0];
     }

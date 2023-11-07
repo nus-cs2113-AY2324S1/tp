@@ -53,8 +53,8 @@ public class FindMealCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) throws PatternMatchFailException {
-        keyword = parser.parseKeyword(args);
+    public void setArguments(String args) throws PatternMatchFailException {
+        keyword = CommandParser.parseKeyword(args);
     }
 
     @Override

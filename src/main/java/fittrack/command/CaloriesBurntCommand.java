@@ -43,8 +43,8 @@ public class CaloriesBurntCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser) throws PatternMatchFailException {
-        date = parser.parseDate(args);
+    public void setArguments(String args) throws PatternMatchFailException {
+        date = CommandParser.parseDate(args);
     }
 
     Calories getCaloriesBurnt() {

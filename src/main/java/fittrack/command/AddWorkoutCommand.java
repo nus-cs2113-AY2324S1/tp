@@ -30,9 +30,9 @@ public class AddWorkoutCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser)
+    public void setArguments(String args)
             throws PatternMatchFailException, NumberFormatException {
-        newWorkout = parser.parseWorkout(args);
+        newWorkout = CommandParser.parseWorkout(args);
     }
 
     @Override

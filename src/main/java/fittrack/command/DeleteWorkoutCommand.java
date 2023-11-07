@@ -23,10 +23,10 @@ public class DeleteWorkoutCommand extends Command {
     @Override
     public CommandResult execute() {
         if (workoutList.isEmpty()) {
-            return new CommandParser().
+            return CommandParser.
                     getInvalidCommandResult(commandLine, IndexOutOfBoundsException.LIST_EMPTY);
         } else if (!workoutList.isIndexValid(workoutIndex)) {
-            return new CommandParser().
+            return CommandParser.
                     getInvalidCommandResult(commandLine, IndexOutOfBoundsException.INDEX_INVALID);
         }
 
@@ -38,8 +38,8 @@ public class DeleteWorkoutCommand extends Command {
 
     // @@author marklin2234
     @Override
-    public void setArguments(String args, CommandParser parser) throws ParseException {
-        workoutIndex = parser.parseIndex(args);
+    public void setArguments(String args) throws ParseException {
+        workoutIndex = CommandParser.parseIndex(args);
     }
     // @@author
 

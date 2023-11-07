@@ -31,9 +31,9 @@ public class EditProfileCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args, CommandParser parser)
+    public void setArguments(String args)
             throws PatternMatchFailException, NumberFormatException, NegativeNumberException, WrongGenderException {
-        newProfile = parser.parseProfile(args);
+        newProfile = CommandParser.parseProfile(args);
     }
 
     @Override
