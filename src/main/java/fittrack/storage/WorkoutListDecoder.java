@@ -20,11 +20,11 @@ public class WorkoutListDecoder {
     /**
      * Decodes {@code encodedWorkoutList} into a {@code WorkoutList} containing the decoded data.
      *
-     * @throws IllegalValueException if any of the fields in any encoded person string is invalid.
+     * @throws IllegalStorageValueException if any of the fields in any encoded person string is invalid.
      * @throws Storage.StorageOperationException if the {@code encodedWorkoutList} is in an invalid format.
      */
     public static WorkoutList decodeWorkoutList(List<String> encodedWorkoutList)
-            throws IllegalValueException, StorageOperationException {
+            throws IllegalStorageValueException, StorageOperationException {
         WorkoutList workoutList = new WorkoutList();
         for (String encodedWorkout : encodedWorkoutList) {
             workoutList.addToList(decodeWorkoutFromString(encodedWorkout));
