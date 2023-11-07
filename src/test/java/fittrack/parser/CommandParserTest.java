@@ -121,7 +121,7 @@ class CommandParserTest {
         CommandResult result = new CommandParser()
                 .getInvalidCommandResult("exit foo", new PatternMatchFailException());
         assertEquals("`exit foo` is an invalid command.\n" +
-                "`exit` makes you to exit this program.\n" +
+                "`exit` halts the app.\n" +
                 "Type `exit` to exit.", result.getFeedback());
     }
 

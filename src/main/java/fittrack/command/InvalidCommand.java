@@ -33,7 +33,9 @@ public class InvalidCommand extends Command {
         helpCommand.setArguments(inputLine.strip(), parser);
         String message = helpCommand.execute().getFeedback();
 
-        if (helpCommand.getCommandType() == InvalidCommand.class) {
+        if (helpCommand.getCommandType() == null) {
+            helpMessage = getInvalidCommandMessage(inputLine) + "\n" + HelpCommand.USAGE;
+        } else if (helpCommand.getCommandType() == InvalidCommand.class) {
             helpMessage = message;
         } else {
             String invalidCommandMessage = getInvalidCommandMessage(inputLine);

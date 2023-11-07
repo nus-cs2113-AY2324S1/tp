@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
     public static final String HELP = DESCRIPTION + "\n" + KNOWN_COMMANDS + "\n" + USAGE;
 
     private String helpMessage;
-    private Class<? extends Command> commandType;
+    private Class<? extends Command> commandType = null;
 
     public HelpCommand(String commandLine) {
         super(commandLine);
@@ -39,7 +39,7 @@ public class HelpCommand extends Command {
         commandType = blankCommand.getClass();
 
         if (commandType == InvalidCommand.class) {
-            helpMessage = InvalidCommand.getInvalidCommandMessage(commandLine) + "\n" + USAGE;
+            helpMessage = InvalidCommand.getInvalidCommandMessage(word) + "\n" + USAGE;
             return;
         }
 
