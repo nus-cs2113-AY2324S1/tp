@@ -139,7 +139,7 @@ public class AddRecipeCommandTest {
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
 
         assertThrows(EssenFormatException.class, () -> {
-            addRecipeCommand.addWithTitleAndStepsAndIngredients();
+            addRecipeCommand.addValidRecipe();
         });
     }
 
@@ -149,7 +149,7 @@ public class AddRecipeCommandTest {
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
 
         assertThrows(EssenFormatException.class, () -> {
-            addRecipeCommand.addWithTitleAndStepsAndIngredients();
+            addRecipeCommand.addValidRecipe();
         });
     }
 
@@ -160,7 +160,7 @@ public class AddRecipeCommandTest {
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
 
         assertThrows(EssenFormatException.class, () -> {
-            addRecipeCommand.addWithTitleAndStepsAndIngredients();
+            addRecipeCommand.addValidRecipe();
         });
     }
 
@@ -180,6 +180,16 @@ public class AddRecipeCommandTest {
         assertEquals("eggs", recipeIngredients.getIngredients().get(0).getName());
         assertEquals("2", recipeIngredients.getIngredients().get(0).getQuantity());
         assertEquals(IngredientUnit.PIECE, recipeIngredients.getIngredients().get(0).getUnit());
+    }
+
+    @Test
+    public void addRecipeCommand_multipleTitle_formatException() {
+        String userInput = "r/bread r/toast s/step 1 i/egg,2,pc";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addValidRecipe();
+        });
     }
 
 

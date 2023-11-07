@@ -5,6 +5,7 @@ import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.RecipeList;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Ui {
 
@@ -197,5 +198,10 @@ public class Ui {
         drawDivider();
         System.out.println(recipeTitle + " has been duplicated.");
         drawDivider();
+    }
+
+    public static String readUserInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 }
