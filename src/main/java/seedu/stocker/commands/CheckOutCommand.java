@@ -1,6 +1,5 @@
 package seedu.stocker.commands;
 
-
 import seedu.stocker.exceptions.DrugNotFoundException;
 
 /**
@@ -14,9 +13,8 @@ public class CheckOutCommand extends Command {
             + "Parameters:" + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "The current cart has been checked out. ";
+    public static final String MESSAGE_SUCCESS = "The current cart has been checked out.";
     public static final String MESSAGE_FAILURE = "An error happened, the cart hasn't been checked out. ";
-
 
     public CheckOutCommand() {
     }
