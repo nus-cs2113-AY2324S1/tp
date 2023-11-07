@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * Represents the command to add a cashflow.
+ */
 public class AddCashflowCommand extends Command {
     protected static Ui ui = Ui.getInstance();
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
@@ -25,6 +27,12 @@ public class AddCashflowCommand extends Command {
     protected CashflowList cashflowList = CashflowList.getInstance();
     protected final double MAX_AMOUNT = 999999999999.99;
 
+    /**
+     * Constructor for the command to add a cashflow.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String categoryString = String.join(" ", rawCommand.args).trim();
         try {
@@ -116,6 +124,9 @@ public class AddCashflowCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to add a cashflow.
+     */
     @Override
     public void execute() {
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)

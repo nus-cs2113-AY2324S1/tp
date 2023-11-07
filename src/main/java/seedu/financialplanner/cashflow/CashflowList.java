@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents the list containing all cashflows.
+ */
 public class CashflowList {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
@@ -18,6 +21,11 @@ public class CashflowList {
     private CashflowList() {
     }
 
+    /**
+     * Gets the single instance of CashflowList class.
+     *
+     * @return the CashflowList instance.
+     */
     public static CashflowList getInstance() {
         if (cashflowList == null) {
             cashflowList = new CashflowList();
@@ -25,6 +33,14 @@ public class CashflowList {
         return cashflowList;
     }
 
+    /**
+     * Add an income to the list.
+     *
+     * @param value The value of the income.
+     * @param type The type of the income, using the values in the enum of IncomeType.
+     * @param recur The number of days before the next automatic addition of the income.
+     * @param description The description of the income.
+     */
     public void addIncome(double value, IncomeType type, int recur, String description) {
         try {
             logger.log(Level.INFO, "Adding income");
@@ -45,6 +61,14 @@ public class CashflowList {
         list.add(toAdd);
     }
 
+    /**
+     * Adds an expense to the list.
+     *
+     * @param value The value of the expense.
+     * @param type The type of the expense, using the values in the enum of ExpenseType.
+     * @param recur The number of days before the next automatic addition of the expense.
+     * @param description The description of the expense.
+     */
     public void addExpense(double value, ExpenseType type, int recur, String description) {
         try {
             logger.log(Level.INFO, "Adding expense");
@@ -61,6 +85,12 @@ public class CashflowList {
         }
     }
 
+    /**
+     * Deletes a cashflow when its category is not specified.
+     *
+     * @param index The index of the cashflow as displayed to the user.
+     * @return The value of the cashflow to be removed.
+     */
     public double deleteCashflowWithoutCategory(int index) {
         int existingListSize = list.size();
         int listIndex = index - 1;
@@ -75,6 +105,11 @@ public class CashflowList {
         return toRemove.getAmount();
     }
 
+    /**
+     * Deletes all future recurrences of a cashflow that has an unspecified category.
+     *
+     * @param index The index of the cashflow as displayed to the user.
+     */
     public void deleteRecurWithoutCategory(int index) {
         int listIndex = index - 1;
 
@@ -88,10 +123,8 @@ public class CashflowList {
             ui.printDeletedRecur(toRemoveRecur);
         }
     }
-    //helper method to find the index of a given cashflow in the overall list
-    //given its index in its respective list. e.g. "income 3" is the third income
-    //in the overall list
-    private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) {
+
+    private int cashflowIndexFinder(CashflowCategory category, int cashflowIndex) throws FinancialPlannerException {
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
                 || category.equals(CashflowCategory.RECURRING);
 
@@ -103,7 +136,7 @@ public class CashflowList {
         case RECURRING:
             return findCashflowIndexFromRecurIndex(cashflowIndex);
         default:
-            return -1;
+            throw new FinancialPlannerException("Error in finding cashflow in the list.");
         }
     }
 
@@ -153,37 +186,70 @@ public class CashflowList {
         }
         return overallCashflowIndex;
     }
-    public void deleteRecurWithCategory(CashflowCategory category, int index) {
-        int listIndex = cashflowIndexFinder(category, index);
 
-        Cashflow toRemoveRecur = list.get(listIndex);
-        if (toRemoveRecur.getRecur() == 0 || toRemoveRecur.hasRecurred) {
-            ui.showMessage("Cashflow is already not recurring or has already recurred");
-        } else {
-            toRemoveRecur.setDate(null);
-            toRemoveRecur.setRecur(0);
-            list.set(listIndex, toRemoveRecur);
-            ui.printDeletedRecur(toRemoveRecur);
+    /**
+     * Deletes all future recurrences of a cashflow that has a specified category.
+     *
+     * @param category The type of cashflow: income, expense or recurring.
+     * @param index The index of the cashflow as displayed to the user.
+     */
+    public void deleteRecurWithCategory(CashflowCategory category, int index) {
+        try {
+            int listIndex = cashflowIndexFinder(category, index);
+            Cashflow toRemoveRecur = list.get(listIndex);
+            if (toRemoveRecur.getRecur() == 0 || toRemoveRecur.hasRecurred) {
+                ui.showMessage("Cashflow is already not recurring or has already recurred");
+            } else {
+                toRemoveRecur.setDate(null);
+                toRemoveRecur.setRecur(0);
+                list.set(listIndex, toRemoveRecur);
+                ui.printDeletedRecur(toRemoveRecur);
+            }
+        } catch (FinancialPlannerException e) {
+            ui.showMessage(e.getMessage());
         }
     }
+
+    /**
+     * Deletes a cashflow that has a specified category.
+     *
+     * @param category The type of cashflow: income, expense or recurring.
+     * @param index The index of the cashflow as displayed to the user.
+     * @return The value of the cashflow to be deleted.
+     */
     public double deleteCashflowWithCategory(CashflowCategory category, int index) {
-        int existingListSize = list.size();
-        int listIndex = cashflowIndexFinder(category, index);
+        try {
+            int existingListSize = list.size();
+            int listIndex = cashflowIndexFinder(category, index);
 
-        Cashflow toRemove = list.get(listIndex);
-        list.remove(listIndex);
-        toRemove.deleteCashflowValue();
-        ui.printDeletedCashflow(toRemove);
+            Cashflow toRemove = list.get(listIndex);
+            list.remove(listIndex);
+            toRemove.deleteCashflowValue();
+            ui.printDeletedCashflow(toRemove);
 
-        int newListSize = list.size();
-        assert newListSize == existingListSize - 1;
-        return toRemove.getAmount();
+            int newListSize = list.size();
+            assert newListSize == existingListSize - 1;
+            return toRemove.getAmount();
+        } catch (FinancialPlannerException e) {
+            ui.showMessage(e.getMessage());
+        }
+        return 0;
     }
 
+    /**
+     * Adds a saved cashflow from the storage to the list.
+     *
+     * @param entry The cashflow object to be laoded.
+     */
     public void load(Cashflow entry) {
         addToList(entry);
     }
 
+    /**
+     * Formats the list to string with each entry seperated by a newline.
+     *
+     * @return The formatted list.
+     */
     public String getList() {
         StringBuilder output = new StringBuilder();
         for (Cashflow entry : list) {

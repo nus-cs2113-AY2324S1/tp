@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents a command to delete a cashflow.
+ */
 public class DeleteCashflowCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;
@@ -16,6 +19,12 @@ public class DeleteCashflowCommand extends Command {
     protected boolean hasRecur;
     protected CashflowList cashflowList = CashflowList.getInstance();
 
+    /**
+     * Constructor of the command to delete a cashflow.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         String stringCategory = null;
@@ -88,6 +97,9 @@ public class DeleteCashflowCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to delete a cashflow.
+     */
     @Override
     public void execute() {
         if (category == null) {
