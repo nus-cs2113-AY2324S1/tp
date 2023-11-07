@@ -183,7 +183,7 @@ Format:
 list exchange rates
 ```
 
-### update exchange rate
+### Update exchange rate
 Update exchange rate of a specific foreign currency. Exchange rates will be saved upon
 successful update.
 
@@ -197,6 +197,21 @@ Example
 ```
 update exchange rate USD 0.8
 ```
+
+### Storage for income and expense entries
+Save all the income and expense entries to the KaChinnnngggg.txt
+
+All income and expense entries will be update to the file for every command input.
+
+There is no command to save to file manually since it's updating after every command
+
+### Retrieve entries from text file and save to the income and expense list
+Retrieve all the income and expense entries from the KaChinnnngggg.txt
+
+At the beginning of executing the program, KaChinnnngggg will automatically retrieve all the entries storied in the KaChinnnngggg.txt
+
+There is no command to get from file manually since it will run once at the beginning of program.
+
 
 ## FAQ
 

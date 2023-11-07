@@ -1,24 +1,21 @@
 package seedu.duke.commands;
 
-import seedu.duke.ui.Ui;
 
 public class UsageInstructions {
     // Shows a message linking the user to the user guide of our app
-    private final seedu.duke.ui.Ui ui;
 
     /**
      * The `UsageInstructions` class provides usage instructions for the application,
      * including command formats and a link to the user guide.
      */
-    public UsageInstructions(Ui ui) {
-        this.ui = ui;
+    public UsageInstructions() {
+
     }
 
     /**
      * Displays usage instructions for the application, including command formats and a link to the user guide.
      */
     public void getHelp(){
-        ui.showLineDivider();
         // Shows a message linking the user to the user guide of our app
         System.out.println("You can access our user guide by " +
                 "https://ay2324s1-cs2113-t18-3.github.io/tp/UserGuide.html\n");
@@ -47,6 +44,5 @@ public class UsageInstructions {
                 "clear all\n");
         System.out.println("Exiting the program: exit\nFormat: " + "exit");
 
-        ui.showLineDivider();
     }
 }

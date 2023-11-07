@@ -20,20 +20,21 @@ public class DeleteExpenseCommand extends Command {
      * Executes the `DeleteExpenseCommand` to remove an expense record from the list of expenses.
      *
      * @param expenses     The list of expense records to be modified.
-     * @param fullcommand  The full command entered by the user, including the index of the expense to be deleted.
-     * @param ui           The user interface for displaying messages.
+     * @param fullCommand  The full command entered by the user, including the index of the expense to be deleted.
      * @throws KaChinnnngException If there is a problem with the command execution, such as missing arguments,
      *                            an invalid index, or a non-existent expense record.
      */
-    public void execute(ArrayList<Expense> expenses, String fullcommand, Ui ui) throws KaChinnnngException {
+    public void execute(ArrayList<Expense> expenses, String fullCommand) throws KaChinnnngException {
         int index = 0;
         try {
-            String[] tokens = fullcommand.split(" ", 3);
+            String[] tokens = fullCommand.split(" ", 3);
             index = Integer.parseInt(tokens[2])-1;
             Expense removedExpense = expenses.get(index);
             expenses.remove(index);
+            Ui.showLineDivider();
             System.out.println("Noted. This expense record has been deleted:");
             System.out.println(removedExpense);
+            Ui.showLineDivider();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new KaChinnnngException("You're missing an argument");
         } catch (NullPointerException | NumberFormatException e) {

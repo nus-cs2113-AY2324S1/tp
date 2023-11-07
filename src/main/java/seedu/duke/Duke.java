@@ -137,19 +137,17 @@ public class Duke {
             break;
 
         case "delete_income":
-            Ui.showLineDivider();
-            new DeleteIncomeCommand().execute(incomes, fullCommand, ui);
-            Ui.showLineDivider();
+            new DeleteIncomeCommand().execute(incomes, fullCommand);
             break;
 
         case "delete_expense":
-            Ui.showLineDivider();
-            new DeleteExpenseCommand().execute(expenses, fullCommand, ui);
-            Ui.showLineDivider();
+            new DeleteExpenseCommand().execute(expenses, fullCommand);
             break;
 
         case "help":
-            new UsageInstructions(ui).getHelp();
+            Ui.showLineDivider();
+            new UsageInstructions().getHelp();
+            Ui.showLineDivider();
             break;
 
         case "balance":
@@ -185,15 +183,11 @@ public class Duke {
             break;
 
         case "edit_income":
-            Ui.showLineDivider();
             new EditIncomeCommand(incomes, fullCommand).execute();
-            Ui.showLineDivider();
             break;
 
         case "edit_expense":
-            Ui.showLineDivider();
             new EditExpenseCommand(expenses, fullCommand).execute();
-            Ui.showLineDivider();
             break;
         case "list_currencies":
             exchangeRateManager.showSupportedCurrencies();
