@@ -92,9 +92,9 @@ Adds a dish consisting of its ingredients to the menu
 
 Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
 
-
-* The `PRICE` must be a positive 2 decimal place number.
-* The `IMGREDIENT_QTY` must contain the unit ml or g specifically.
+* `DISH_NAME` 
+* `PRICE` must be a positive number and can be up to 2 decimal places.
+* `IMGREDIENT_QTY` must contain the unit ml or g specifically.
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example:
@@ -170,6 +170,10 @@ Okay! chicken rice is deleted! :)
 Edits the price of an existing dish on the menu
 
 Format: `edit_price index/DISH_INDEX price/NEW_PRICE`
+
+* `NEW_PRICE` must be a positive number and can be up to 2 decimal places.
+* The index refers to the index number shown in the menu list
+* The index must be a positive integer
 
 Example: `edit_price index/1 price/4.50`
 
