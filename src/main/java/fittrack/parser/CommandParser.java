@@ -189,31 +189,6 @@ public class CommandParser {
         }
     }
 
-    public static Meal parseMeal(String meal) throws PatternMatchFailException, NumberFormatException {
-        final Matcher matcher = MEAL_PATTERN.matcher(meal);
-        if (!matcher.matches()) {
-            throw new PatternMatchFailException();
-        }
-
-        final String name = matcher.group(NAME_CG);
-        final String calories = matcher.group(CALORIES_CG);
-        final String date = matcher.group(DATE_CG);
-
-        try {
-            double caloriesInDouble = Double.parseDouble(calories);
-
-            if (date == null) {
-                return new Meal(name, new Calories(caloriesInDouble), Date.today());
-            } else {
-                return new Meal(name, new Calories(caloriesInDouble), new Date(date));
-            }
-        } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException();
-        } catch (DateTimeParseException e) {
-            throw new PatternMatchFailException();
-        }
-    }
-
     // @@author NgLixuanNixon
     public static int parseIndex(String args) throws ParseException {
         assert args != null;
