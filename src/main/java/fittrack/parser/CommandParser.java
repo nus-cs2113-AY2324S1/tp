@@ -253,6 +253,7 @@ public class CommandParser {
     }
     // @@author
 
+    // @@author NgLixuanNixon
     public Date parseDate(String date) throws PatternMatchFailException {
         final Matcher matcher = DATE_PATTERN.matcher(date);
         if (!matcher.matches()) {
@@ -267,7 +268,9 @@ public class CommandParser {
             throw new PatternMatchFailException();
         }
     }
+    // @@author
 
+    // @@author J0shuaLeong
     public String parseKeyword(String keyword) throws PatternMatchFailException {
         assert keyword != null;
         if (keyword.isEmpty()) {
@@ -275,6 +278,7 @@ public class CommandParser {
         }
         return keyword;
     }
+    // @@author
 
     public String getFirstWord(String str) {
         assert str != null && !str.isEmpty();
