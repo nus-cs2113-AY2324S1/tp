@@ -2,7 +2,6 @@ package fittrack.data;
 
 import fittrack.parser.DateFormatException;
 import fittrack.parser.NumberFormatException;
-import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 
 import java.time.DateTimeException;
@@ -12,8 +11,8 @@ import java.util.regex.Pattern;
 public class Step {
     private final int steps;
     private Date date;
-    private static final String DATE_CG = "date";
     private static final String STEP_CG = "step";
+    private static final String DATE_CG = "date";
     private static final Pattern STEP_PATTERN = Pattern.compile(
             "(?<" + STEP_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
     );
@@ -24,7 +23,8 @@ public class Step {
         this.date = date;
     }
 
-    public static Step parseStep(String steps) throws PatternMatchFailException, NumberFormatException, DateFormatException {
+    public static Step parseStep(String steps) throws PatternMatchFailException,
+            NumberFormatException, DateFormatException {
 
         final Matcher matcher = STEP_PATTERN.matcher(steps);
         if (!matcher.matches()) {
