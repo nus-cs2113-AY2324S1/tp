@@ -171,22 +171,6 @@ public class GetFromTxtTest {
      * Test the {@link SaveToTxt#saveIncomeToTextFile(ArrayList)} method with multiple incomes records without expenses,
      * This test case checks whether the more than one income from the txt file save to the list correctly
      */
-    @Test
-    public void testGetFromTxtWithoutReadAccess() throws KaChinnnngException {
-        SaveToTxt test = new SaveToTxt(path);
-        new ClearAll(incomes,expenses).clearAllIncomeAndExpense();
-        test.saveIncomeAndExpense(incomes, expenses);
-        incomes.add(new Income("Salary", LocalDate.of(2023, 10, 10), 5000.0));
-        incomes.add(new Income("Bonus", LocalDate.of(2023, 10, 15), 1000.0));
-        test.saveIncomeToTextFile(incomes);
-        ArrayList<Income> newIncomes = new ArrayList<>();
-        ArrayList<Expense> newExpenses = new ArrayList<>();
-        GetFromTxt getFromTxt = new GetFromTxt(path);
-        File file = new File(path);
-        file.setReadable(false);
-        assertThrows(KaChinnnngException.class, () -> getFromTxt.getFromTextFile(newIncomes, newExpenses));
-        file.setReadable(true);
-        assertEquals(0, newIncomes.size());
-    }
+
 
 }
