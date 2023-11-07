@@ -312,6 +312,22 @@ class ParserTest {
 
     //@@author DextheChik3n
     @Test
+    void parseCommand_invalidUserInput_IncorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        Parser parser = new Parser();
+
+        String testInput = "12345";
+
+        Command outputCommand = parser.parseCommand(menu, testInput, ui, pantry, sales, currentDate);
+
+        assertTrue(outputCommand instanceof IncorrectCommand);
+    }
+
+    @Test
     void parseCommand_validDishInputForAddDish_dishAddedToMenu() {
         Menu menu = new Menu();
         Ui ui = new Ui();
@@ -498,14 +514,14 @@ class ParserTest {
     }
 
     @Test
-    void parsePriceToFloat_largePriceString_ParserExceptionThrown() {
+    void parsePriceToFloat_largePriceString_parserExceptionThrown() {
         String inputPriceString = "99999999999.99";
 
         assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
     }
 
     @Test
-    void parsePriceToFloat_moreThanTwoDPPriceString_ParserExceptionThrown() {
+    void parsePriceToFloat_moreThanTwoDPPriceString_parserExceptionThrown() {
         String inputPriceString = "1.9999";
 
         assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
@@ -519,6 +535,13 @@ class ParserTest {
     }
 
     @Test
+    void parsePriceToFloat_negativePriceString_parserExceptionThrown() {
+        String inputPriceString = "-1.99";
+
+        assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
     void isRepeatedDishName_existingDishName_true() {
         Menu menu = new Menu();
         Dish dish = new Dish("Chicken Rice", 2.50F);
@@ -526,7 +549,7 @@ class ParserTest {
 
         String inputDishName = "chicken rice";
 
-        assertTrue(Parser.isRepeatedName(inputDishName, menu));
+        assertTrue(Parser.isRepeatedDishName(inputDishName, menu));
     }
 
     @Test
@@ -537,7 +560,7 @@ class ParserTest {
 
         String inputDishName = "chicken chop";
 
-        assertFalse(Parser.isRepeatedName(inputDishName, menu));
+        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
     }
 
     @Test
@@ -546,7 +569,7 @@ class ParserTest {
         Dish dish = new Dish("Chicken Rice", 2.50F);
         menu.addDish(dish);
 
-        assertThrows(NullPointerException.class, () -> Parser.isRepeatedName(null, menu));
+        assertThrows(NullPointerException.class, () -> Parser.isRepeatedDishName(null, menu));
     }
 
     @Test
@@ -557,7 +580,32 @@ class ParserTest {
 
         String inputDishName = "";
 
-        assertFalse(Parser.isRepeatedName(inputDishName, menu));
+        assertFalse(Parser.isRepeatedDishName(inputDishName, menu));
+    }
+
+    @Test
+    void isRepeatedIngredientName_nonExistingIngredientName_False() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        Ingredient ingredient = new Ingredient("rice");
+        ingredients.add(ingredient);
+
+        assertFalse(Parser.isRepeatedIngredientName("apple", ingredients));
+    }
+
+    @Test
+    void isRepeatedIngredientName_existingIngredientName_True() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        Ingredient ingredient = new Ingredient("rice");
+        ingredients.add(ingredient);
+
+        assertTrue(Parser.isRepeatedIngredientName("rice", ingredients));
+    }
+
+    @Test
+    void isRepeatedIngredientName_nullIngredientName_nullPointerExceptionThrown() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+
+        assertThrows(NullPointerException.class, () -> Parser.isRepeatedIngredientName(null, ingredients));
     }
 
     @Test
