@@ -29,10 +29,11 @@ import seedu.stocker.commands.AddVendorSupplyCommand;
 import seedu.stocker.commands.FindVendorSupplyCommand;
 import seedu.stocker.commands.ListVendorSupplyCommand;
 
-
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_NAME;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_DATE;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_PRICE;
 
 
 public class Parser {
@@ -77,10 +78,19 @@ public class Parser {
             return prepareDeleteCommand(arguments);
 
         case CheckOutCommand.COMMAND_WORD:
-            return new CheckOutCommand();
+            if (arguments.isEmpty()) {
+                return new CheckOutCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        CheckOutCommand.MESSAGE_USAGE));
+            }
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            if (arguments.isEmpty()) {
+                return new ExitCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE));
+            }
 
         case HelpCommand.COMMAND_WORD:
             return prepareHelpCommand(arguments);
@@ -89,7 +99,12 @@ public class Parser {
             return prepareListCommand(arguments);
 
         case ViewCartCommand.COMMAND_WORD:
-            return new ViewCartCommand();
+            if (arguments.isEmpty()) {
+                return new ViewCartCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ViewCartCommand.MESSAGE_USAGE));
+            }
 
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommand();
@@ -98,28 +113,58 @@ public class Parser {
             return new LoginCommand();
 
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommand();
+            if (arguments.isEmpty()) {
+                return new SaveCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SaveCommand.MESSAGE_USAGE));
+            }
 
         case AddVendorCommand.COMMAND_WORD:
             return prepareAddVendorCommand(arguments);
 
         case ShowStockLevelCommand.COMMAND_WORD:
-            return new ShowStockLevelCommand();
+            if (arguments.isEmpty()) {
+                return new ShowStockLevelCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ShowStockLevelCommand.MESSAGE_USAGE));
+            }
 
         case ListVendorCommand.COMMAND_WORD:
-            return new ListVendorCommand();
+            if (arguments.isEmpty()) {
+                return new ListVendorCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListVendorCommand.MESSAGE_USAGE));
+            }
 
         case SetThresholdCommand.COMMAND_WORD:
             return prepareSetThresholdCommand(arguments);
 
         case ListThresholdCommand.COMMAND_WORD:
-            return new ListThresholdCommand();
+            if (arguments.isEmpty()) {
+                return new ListThresholdCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListThresholdCommand.MESSAGE_USAGE));
+            }
 
         case ListDescriptionsCommand.COMMAND_WORD:
-            return new ListDescriptionsCommand();
+            if (arguments.isEmpty()) {
+                return new ListDescriptionsCommand();
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListDescriptionsCommand.MESSAGE_USAGE));
+            }
 
         case ListVendorSupplyCommand.COMMAND_WORD:
-            return new ListVendorSupplyCommand(arguments);
+            if (arguments.isEmpty()) {
+                return new ListVendorSupplyCommand(arguments);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListVendorSupplyCommand.MESSAGE_USAGE));
+            }
 
         case FindVendorSupplyCommand.COMMAND_WORD:
             return new FindVendorSupplyCommand(arguments);
@@ -145,11 +190,25 @@ public class Parser {
                 String serialNumber = matcher.group(3).trim();
                 Long quantity = Long.parseLong(matcher.group(4));
                 double sellingPrice = Double.parseDouble(matcher.group(5));
-                if (quantity < 1) {
+
+                if (quantity < 1 || quantity > 999999999) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
-                } else if (name.isEmpty()) {
+                }
+                if (name.isEmpty()) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_NAME, AddCommand.MESSAGE_USAGE));
                 }
+                if (serialNumber.isEmpty()) {
+                    return new IncorrectCommand("Serial number cannot be empty.");
+                }
+                // Check if the expiry date has a valid format
+                if (!isValidDateFormat(expiryDate)) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, AddCommand.MESSAGE_USAGE));
+                }
+                // Check if sellingPrice is in the valid range (0.01 to 1000.00) and has up to 2 decimal places
+                if (sellingPrice < 0.01 || sellingPrice > 1000.00) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_PRICE, AddCommand.MESSAGE_USAGE));
+                }
+
                 return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -158,6 +217,20 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
+
+
+
+    /**
+     * Checks if the given date string has a valid "dd/mm/yyyy" format.
+     *
+     * @param date The date string to be validated.
+     * @return True if the date has a valid format, false otherwise.
+     */
+    private boolean isValidDateFormat(String date) {
+        String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})$";
+        return date.matches(regex);
+    }
+
 
     /**
      * Parses arguments in the context of the delete command.
@@ -172,7 +245,7 @@ public class Parser {
             String name = matcher.group(1);
             return new DeleteCommand(name);
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
     }
 
@@ -195,7 +268,7 @@ public class Parser {
                 return new AddToCartCommand(name, quantity);
             } else {
                 return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToCartCommand.MESSAGE_USAGE));
             }
         } catch (NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -207,9 +280,15 @@ public class Parser {
         if (findArgs.length == 2) {
             String criterion = findArgs[0];
             String keyword = findArgs[1];
-            if (criterion.equals("/n") || criterion.equals("/d") || criterion.equals("/s")) {
+            if (criterion.equals("/n") || criterion.equals("/s")) {
                 return new FindCommand(keyword, criterion);
-            } else {
+            } else if (criterion.equals("/d")){
+                if (isValidDateFormat(keyword)) {
+                    return new FindCommand(keyword, criterion);
+                } else {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, FindCommand.MESSAGE_USAGE));
+                }
+            } else{
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
         } else {

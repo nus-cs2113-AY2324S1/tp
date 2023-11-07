@@ -10,6 +10,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "A quantity must be an integer superior than 0.\n";
     public static final String MESSAGE_INVALID_NAME = "A drug name cannot contain only whitespaces";
+    public static final String MESSAGE_INVALID_DATE = "Invalid expiry date format. Please use 'dd/mm/yyyy' format.";
+    public static final String MESSAGE_INVALID_PRICE = "Invalid selling price format. " +
+            "Please use up to 2 decimal places.";
     public static final String MESSAGE_LOGIN_WELCOME = "Welcome! \n"
             + "Key in register or login based on your needs \n"
             + "1.Register user \n"
@@ -29,7 +32,7 @@ public class Messages {
 
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise Stocker application. Exiting...";
     public static final String MESSAGE_EXECUTION_FAILED = "Exection of the command failed because of I/O error, "
-        + "please try later.";
+            + "please try later.";
 
     public static final String MESSAGE_INVALID_LOGIN_CHARACTER = " Do not include : in the username or password, enter"
             + " another username or password";
