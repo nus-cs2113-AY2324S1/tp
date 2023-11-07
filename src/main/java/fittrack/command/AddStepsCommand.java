@@ -1,7 +1,6 @@
 package fittrack.command;
 
 import fittrack.data.Step;
-import fittrack.parser.CommandParser;
 import fittrack.parser.ParseException;
 
 public class AddStepsCommand extends Command{
@@ -9,12 +8,12 @@ public class AddStepsCommand extends Command{
     private static final String DESCRIPTION =
             String.format("`%s` shows your total number of steps on a specific date.", COMMAND_WORD);
     private static final String USAGE = String.format(
-            "Type `%s <DATE>` to see the total steps walked on that date.\n" +
+            "Type `%s <DATE>` to add an entry of the steps walked on that date.\n" +
                     "You should type <DATE> in format of `yyyy-MM-dd`.",
             COMMAND_WORD
     );
     public static final String HELP = DESCRIPTION + "\n" + USAGE;
-    private final CommandParser parser = new CommandParser();
+
     private Step newStep;
 
     public AddStepsCommand(String commandLine) {
@@ -40,7 +39,7 @@ public class AddStepsCommand extends Command{
      */
     @Override
     public void setArguments(String args) throws ParseException {
-        newStep = parser.parseStep(args);
+        newStep = Step.parseStep(args);
     }
 
     public Step getStep(){
