@@ -45,6 +45,8 @@ public class Storage {
      * @param qnDoneStatus Done status of current question.
      * @param difficulty Difficulty of current question.
      * @param qnModule Module of current question.
+     *
+     * @return 0 if added successfully, and 1 otherwise
      */
     private int addQuestionFromFile(QuestionList questions, String qnType, String qnDescription,
                                     String qnDoneStatus, Question.QnDifficulty difficulty,
@@ -57,7 +59,11 @@ public class Storage {
                 if (qnTokens[0].isEmpty() || qnTokens[1].isEmpty() || qnModule.isEmpty()) {
                     return 1;
                 }
-                questions.addShortAnswerQn(qnTokens[0].strip(), qnTokens[1].strip(), qnModule, difficulty, false);
+                boolean isAdded = questions.addShortAnswerQn(qnTokens[0].strip(), qnTokens[1].strip(), qnModule,
+                        difficulty, false);
+                if (!isAdded) {
+                    return 1;
+                }
                 if (qnDoneStatus.equalsIgnoreCase("done")) {
                     questions.markQuestionAsDone(questions.getQuestionListSize(), false);
                 }
@@ -79,8 +85,11 @@ public class Storage {
                         || option4.isEmpty() || qnModule.isEmpty()) {
                     return 1;
                 }
-                questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4, answer, qnModule,
-                        difficulty, false);
+                boolean isAdded = questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4,
+                        answer, qnModule, difficulty, false);
+                if (!isAdded) {
+                    return 1;
+                }
                 if (qnDoneStatus.equalsIgnoreCase("done")) {
                     questions.markQuestionAsDone(questions.getQuestionListSize(), false);
                 }
