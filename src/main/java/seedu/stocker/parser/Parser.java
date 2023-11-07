@@ -33,6 +33,7 @@ import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_NAME;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_DATE;
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_PRICE;
 
 
 public class Parser {
@@ -199,16 +200,16 @@ public class Parser {
                 if (serialNumber.isEmpty()) {
                     return new IncorrectCommand("Serial number cannot be empty.");
                 }
-                //check if the expiry date has a valid format
+                // Check if the expiry date has a valid format
                 if (!isValidDateFormat(expiryDate)) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, AddCommand.MESSAGE_USAGE));
                 }
-                // Ensure sellingPrice has up to 2 decimal places
-                if (String.format("%.2f", sellingPrice).equals(Double.toString(sellingPrice))) {
-                    return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
-                } else {
-                    return new IncorrectCommand("Invalid selling price format. Please use up to 2 decimal places.");
+                // Check if sellingPrice is in the valid range (0.01 to 1000.00) and has up to 2 decimal places
+                if (sellingPrice < 0.01 || sellingPrice > 1000.00) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_PRICE, AddCommand.MESSAGE_USAGE));
                 }
+
+                return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
@@ -216,6 +217,8 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
+
+
 
     /**
      * Checks if the given date string has a valid "dd/mm/yyyy" format.
@@ -277,9 +280,15 @@ public class Parser {
         if (findArgs.length == 2) {
             String criterion = findArgs[0];
             String keyword = findArgs[1];
-            if (criterion.equals("/n") || criterion.equals("/d") || criterion.equals("/s")) {
+            if (criterion.equals("/n") || criterion.equals("/s")) {
                 return new FindCommand(keyword, criterion);
-            } else {
+            } else if (criterion.equals("/d")){
+                if (isValidDateFormat(keyword)) {
+                    return new FindCommand(keyword, criterion);
+                } else {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, FindCommand.MESSAGE_USAGE));
+                }
+            } else{
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
         } else {
