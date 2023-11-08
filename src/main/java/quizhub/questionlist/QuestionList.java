@@ -459,7 +459,8 @@ public class QuestionList {
      */
     public void startQuiz(Ui ui, ArrayList<Question> questions) {
         if (questions.isEmpty()) {
-            ui.displayMessage("    No questions found! Add questions before starting the quiz.");
+            ui.displayMessage("    No question found in list / no question found pertaining to module. " +
+                    "Add questions before starting the quiz");
             return;
         }
 
@@ -469,10 +470,50 @@ public class QuestionList {
 
         for (int i = 0; i < totalQuestions; i++) {
             Question question = questions.get(i);
-
             ui.displayQuestion(question, i + 1, totalQuestions);
-            String userAnswer = ui.getUserInput().strip();
-            String correctAnswer = "";
+            String userAnswer;
+            boolean isValidAnswer;
+
+            do {
+                ui.displayMessageSameLine("  Your Answer: ");
+                userAnswer = ui.getUserInput().strip();
+                isValidAnswer = true; // Assume the answer is valid initially
+                boolean confirmationFlag = false;
+
+                // Check for blank response
+                if (userAnswer.isEmpty()) {
+                    isValidAnswer = false;
+                    ui.displayMessage("    The question cannot be left blank.");
+                    continue; // Skip the remaining checks and prompt for input again
+                }
+
+                // Check if user wants to exit the quiz
+                if ("/exitquiz".equalsIgnoreCase(userAnswer)) {
+                    ui.displayMessage("    Exiting the quiz...");
+                    return; // Exit the startQuiz method
+                }
+
+                if (question instanceof MultipleChoiceQn) {
+                    try {
+                        int answerNumber = Integer.parseInt(userAnswer);
+                        // Check for numbers not within range 1-4
+                        if (answerNumber < 1 || answerNumber > 4){
+                            isValidAnswer = false;
+                            ui.displayMessage("    Please enter a valid choice between 1 and 4.");
+                        } else {
+                            isValidAnswer = true; // The input is an integer within the valid range
+                        }
+                    } catch (NumberFormatException e) {
+                        isValidAnswer = false;
+                        ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
+                    }
+                }
+
+
+
+            } while (!isValidAnswer);
+
+            String correctAnswer;
             if (question instanceof MultipleChoiceQn) {
                 correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
             } else {
@@ -486,16 +527,11 @@ public class QuestionList {
                 correctAnswers++;
             } else {
                 ui.displayMessage("    Wrong!");
-                ui.displayMessage("    The answer is: " + correctAnswer);
-            }
-
-            int questionsLeft = totalQuestions - (i + 1);
-            if (questionsLeft > 0) {
-                ui.displayMessage("    Questions left: " + questionsLeft);
-            } else {
-                ui.displayMessage("    Quiz completed!");
+                ui.displayMessage("    The correct answer is: " + correctAnswer);
             }
         }
+
         ui.displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
+        ui.displayMessage("    Quiz completed!");
     }
 }
