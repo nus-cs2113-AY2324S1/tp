@@ -30,19 +30,21 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 2.  **Add Order** <br>
     Function: Adds an order consisting of dishes off the menu to an order list <br>
     Command Format: `add_order name/DISH_NAME qty/DISH_QTY`<br>
-    Error Handling: This command is able to detect missing argument tag, missing argument, wrong argument type, empty argument type. It will then output specific error message to prompt the user to enter the correct Command format.
-    <br/><br/>
+    Error Handling: This command is able to detect missing argument tag, missing argument, wrong argument type, empty argument type. It will then output specific error message to prompt the user to enter the correct Command format. <br>
+    Highlights: This feature required the creation of 5 classes to work together to perform the intended task. This really tested my understanding of OOP and planning to minimise overlap and manage the interactions between these classes.
+    <br/><br/> 
 3.  **Day Change Commands** <br>
     Added the ability to traverse through different days. <br>
     Function: Next Day and Previous Day commands allow the user to traverse through different days to capture sales, simulating a sales system used in a restaurant. <br>
     Command Format: `next_day` and `previous_day`<br>
-    Error Handling: Next Day command ensures that the intended traversed day has a proper orderList, preventing a NullPointerException. Previous Day command will prevent the user from traversing to days before Day 1.
+    Error Handling: Next Day command ensures that the intended traversed day has a proper orderList, preventing a NullPointerException. Previous Day command will prevent the user from traversing to days before Day 1. <br>
+    Highlights: This feature required strong understanding of ArrayLists as it worked with multiple layers of ArrayLists as well as different copies of the same ArrayList that needed to be synchronised.  
     <br/><br/>
 4.  **Hashing text save files** <br>
     Implemented Hashing for text files used to save app user input data. <br>
     What it does: Hashes the text files generated from user actions (such as Menu, Sales and PantryStock), that will be accessed to load relevant data back into the application. <br>
     Justification: This was done to detect tampering of these save files which may potentially crash or induce unexpected behaviour from the application when the data is read and loaded into the application. <br>
-    Highlights: This feature relied on knowledge learnt in CS2040C, Data Structures and Algorithms, to understand how hashing works and how to implement this feature.<br>
+    Highlights: This feature relied on knowledge learnt in CS2040C, Data Structures and Algorithms, to come up with the idea, understand how hashing works and how to implement this feature.<br>
     Credits: https://www.geeksforgeeks.org/java-string-hashcode-method-with-examples/
     <br/><br/>
 
@@ -54,7 +56,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
    Implemented skeleton class for Parser for other teammates to use. I refactored Parser such that only relevant parameters are passed into commands when executing. This removes bloat from the Command class and leaves the work to the Parser class.
    <br><br>
 3. **Command**<br>
-   Implemented skeleton class for Command for other teammates to use. I refactored most Command classes such that only relevant parameters are passed into commands when executing.
+   Implemented skeleton class for Command for other teammates to use. I refactored existing Command classes such that only relevant parameters are passed into commands when executing.
    <br><br>
 4. **Order**<br>
    Implemented class for Order, OrderList, Sales and Chef. These classes are accessed by Pantry and Menu for features relating to Orders and Sales, accounting for 1/3 of the application features.
