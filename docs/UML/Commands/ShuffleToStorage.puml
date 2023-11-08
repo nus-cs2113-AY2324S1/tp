@@ -1,5 +1,6 @@
 @startuml
 !theme plain
+hide circle
 title Shuffle to Storage Flow
 
 class QuestionList {
@@ -18,14 +19,14 @@ class Question {
   + getAnswer()
 }
 
-QuestionList --|> Question
+QuestionList --> Question : Stores "*"
 
 class Database {
-  - data: ArrayList<Question>  // Represents your data storage mechanism
+  - data: ArrayList<Question>
   + saveData(question: Question, answer: getAnswer)
   + loadData(key: Question): getAnswer
 }
 
-QuestionList --|> Database : Data Storage
+QuestionList --> Database : Data Storage "1"
 
 @enduml

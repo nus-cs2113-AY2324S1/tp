@@ -1,8 +1,16 @@
 !include Style.puml
 @startuml
-title After Command "delete 1"
+title After Command "mcq qn2/op1/op2/op3/op4/1/cs2113/hard"
 
 object "__:QuestionList__" as QuestionList
+
+object "__:Question1__" as Question1 {
+    qnType = QnType.SHORTANSWER
+    description = "qn1"
+    answer = "ans1"
+    module = "cs2113"
+    difficulty = "EASY"
+}
 
 object "__:Question2__" as Question2 {
     qnType = QnType.MULTIPLECHOICE
@@ -16,5 +24,6 @@ object "__:Question2__" as Question2 {
     difficulty = "HARD"
 }
 
-QuestionList --> Question2 : new index is 1
+QuestionList --> Question1
+QuestionList --> Question2 : Add new question
 @enduml

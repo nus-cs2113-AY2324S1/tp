@@ -1,0 +1,46 @@
+@startuml
+!theme plain
+hide footbox
+title Generalised Command Sequence Diagram
+
+actor User
+participant Ui as ":Ui"
+participant QuizHub as ":QuizHub"
+participant Parser as ":Parser"
+participant Command as "com:Command"
+participant QuestionList as ":QuestionList"
+participant Question as ":Question"
+
+activate QuizHub
+QuizHub -> Ui : getUserInput(void)
+activate Ui
+User -> Ui: userInput
+Ui --> QuizHub : userInput:String
+QuizHub -> Parser : parseCommand(userInput)
+activate Parser
+create Command
+Parser -> Command: Calls parseCommand(userInput)
+activate Command
+Command --> Parser
+deactivate Command
+Parser --> QuizHub : com
+deactivate Parser
+QuizHub -> Command: Executes executeCommand(ui, dataStorage, questions)
+activate Command
+Command -> QuestionList: QuestionList method
+activate QuestionList
+QuestionList -> Question: Question Method
+activate Question
+Question -> Question: Manipulates Data
+Question --> QuestionList: Notifies completion
+deactivate Question
+QuestionList --> Command: Notifies completion
+deactivate QuestionList
+Command --> QuizHub: Notifies completion
+deactivate Command
+QuizHub --> Ui: Displays completion message
+Ui --> User : Output
+deactivate Ui
+destroy Command
+
+@enduml

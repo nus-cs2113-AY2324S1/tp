@@ -1,23 +1,41 @@
 @startuml
 !theme plain
+hide footbox
 title Command Edit Sequence Diagram
 
 actor User
-participant Parser
-participant CommandEdit
-participant QuestionList
-participant Question
+participant QuizHub as ":QuizHub"
+participant Parser as ":Parser"
+participant CommandEdit as "c:CommandEdit"
+participant QuestionList as ":QuestionList"
+participant Question as ":Question"
 
-User -> Parser: Enters "edit [question number] /description [description] or /answer [answer]"
+User -> QuizHub: Enters "edit [question number] /description [description] or /answer [answer]"
+activate QuizHub
+QuizHub -> Parser : parseCommand(userInput)
+activate Parser
+create CommandEdit
 Parser -> CommandEdit: Calls parseEditCommand(userInput)
-CommandEdit -> Parser: Returns CommandEdit instance
-Parser -> CommandEdit: Executes executeCommand(ui, dataStorage, questions)
+
+activate CommandEdit
+CommandEdit --> Parser
+deactivate CommandEdit
+Parser --> QuizHub : c
+deactivate Parser
+QuizHub -> CommandEdit: Executes executeCommand(ui, dataStorage, questions)
+activate CommandEdit
 CommandEdit -> QuestionList: Calls editQuestionByIndex(index, newDescription, newAnswer)
+activate QuestionList
 QuestionList -> Question: Calls editQuestion(newDescription, newAnswer)
+activate Question
 Question -> Question: Edits question description and/or answer
 Question --> QuestionList: Notifies edit completion
+deactivate Question
 QuestionList --> CommandEdit: Notifies edit completion
-CommandEdit --> Parser: Notifies edit completion
-Parser --> User: Displays edit completion message
+deactivate QuestionList
+CommandEdit --> QuizHub: Notifies edit completion
+deactivate CommandEdit
+QuizHub --> User: Displays edit completion message
+destroy CommandEdit
 
 @enduml
