@@ -45,7 +45,7 @@ class FindWorkoutCommandTest {
             throws PatternMatchFailException {
         FindWorkoutCommand findCommand = new FindWorkoutCommand(commandLine);
         findCommand.setArguments(keyword);
-        findCommand.setData(null, null, workoutList, null);
+        findCommand.setData(null, null, workoutList, null, null);
         CommandResult result = findCommand.execute();
         assertEquals(expectedResult, result.getFeedback());
     }

@@ -1,6 +1,7 @@
 package fittrack.command;
 
 import fittrack.MealList;
+import fittrack.StepList;
 import fittrack.UserProfile;
 import fittrack.WorkoutList;
 import fittrack.storage.Storage;
@@ -11,6 +12,7 @@ public abstract class Command {
     protected UserProfile userProfile;
     protected MealList mealList;
     protected WorkoutList workoutList;
+    protected StepList stepList;
     protected Storage storage;
 
     public Command(String commandLine) {
@@ -24,10 +26,12 @@ public abstract class Command {
      * @param mealList meal list
      * @param workoutList work list
      */
-    public void setData(UserProfile userProfile, MealList mealList, WorkoutList workoutList, Storage storage) {
+    public void setData(UserProfile userProfile, MealList mealList, WorkoutList workoutList,
+                        StepList stepList, Storage storage) {
         this.userProfile = userProfile;
         this.mealList = mealList;
         this.workoutList = workoutList;
+        this.stepList = stepList;
         this.storage = storage;
     }
 
