@@ -175,7 +175,7 @@ public class Ui {
     }
 
     public void displayNumberOfQuestions() {
-        System.out.println("    Now you have " + questions.getQuestionListSize() + " questions in the list.");
+        System.out.println("    Now you have " + questions.getQuestionListSize() + " questions in the list! UWU");
     }
 
     public void displayCorrectAnswer(Question question) {

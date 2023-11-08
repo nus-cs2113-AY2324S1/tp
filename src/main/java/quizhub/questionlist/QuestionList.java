@@ -19,12 +19,33 @@ import static quizhub.question.Question.QnType.SHORTANSWER;
  * This list is created on program start and disposed on program termination.
  */
 public class QuestionList {
+    public static final String NO_QN_MSG = "    No questions found! Time to add some OWO";
+    public static final String INVALID_QN_MSG = "    Ono! Please enter valid question number *sobs*";
+    public static final String QN_MARKED_MSG = "    Roger that! I have marked the following question as done >w< !";
+    public static final String QN_NO_CHANGE_MSG = "    Question originally done! No changes made!";
+    public static final String EMPTY_LIST_MSG = "    Question list is empty! Time to add some OWO";
+    public static final String DELETE_QN_MSG = "    Roger that! I have deleted the following question >w< !";
+    public static final String SEARCH_RESULT_MSG = "    Here are questions that matched your search:";
+    public static final String NO_SEARCH_RESULTS_MSG = "    No results found :< Check your keyword is correct?";
+    public static final String SHUFFLE_QN_MSG = "    Questions are now shuffled!";
+    public static final String INVALID_QUIZ_START_MSG = "    No question found in list / no question found " +
+            "pertaining to module. \n    Add questions before starting the quiz";
+    public String qnListSizeMsg = "    Now you have " + getQuestionListSize() + " questions in the list! UWU";
     private ArrayList<Question> allQns; //array of inputs
     /**
      * Creates a new empty question list.
      */
     public QuestionList(){
         allQns = new ArrayList<>();
+    }
+
+    /**
+     * Prints default message on successful message addition.
+     */
+    private void printQnAddedMsg(){
+        Ui.displayMessageStatically("    I have added the following question OwO:");
+        Ui.displayMessageStatically("    " + viewQuestionByIndex(getQuestionListSize()));
+        Ui.displayMessageStatically("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
     }
 
     /**
@@ -45,9 +66,7 @@ public class QuestionList {
         }
         allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
         if (showMessage) {
-            System.out.println("    I have added the following question OwO:");
-            System.out.println("    " + viewQuestionByIndex(getQuestionListSize()));
-            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+            printQnAddedMsg();
         }
         return true;
     }
@@ -77,9 +96,7 @@ public class QuestionList {
         allQns.add(new MultipleChoiceQn(description, option1, option2, option3,
                 option4, answer, module, qnDifficulty));
         if (showMessage) {
-            System.out.println("    I have added the following question OwO:");
-            System.out.println("    " + viewQuestionByIndex(getQuestionListSize()));
-            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+            printQnAddedMsg();
         }
         return true;
     }
@@ -103,7 +120,7 @@ public class QuestionList {
                 qnType.equals(question.getQuestionType()) &&
                 module.equalsIgnoreCase(question.getModule())) {
                 if (showMessage) {
-                    System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
+                    Ui.displayMessageStatically(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
                 }
                 return true;
             }
@@ -127,7 +144,7 @@ public class QuestionList {
         } else {
             indexString += "    ";
         }
-        System.out.println(indexString + question);
+        Ui.displayMessageStatically(indexString + question);
     }
     
     /**
@@ -135,7 +152,7 @@ public class QuestionList {
      */
     public void printQuestionList(){
         if(allQns.isEmpty()){
-            System.out.println("    No questions found! Time to add some OWO");
+            Ui.displayMessageStatically(NO_QN_MSG);
             return;
         }
         for (Question question : allQns) {
@@ -155,18 +172,18 @@ public class QuestionList {
             int oneIndexed = index-1;
             question = allQns.get(oneIndexed);
         } catch (IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ono! Please enter valid question number *sobs*");
+            Ui.displayMessageStatically(INVALID_QN_MSG);
             return;
         }
         assert(question != null);
         if(!question.questionIsDone()) {
             question.markAsDone();
             if (showMessage) {
-                System.out.println("    Roger that! I have marked the following question as done >w< !");
+                Ui.displayMessageStatically(QN_MARKED_MSG);
                 printQuestion(question, false);
             }
         } else {
-            System.out.println("    Question originally done! No changes made!");
+            Ui.displayMessageStatically(QN_NO_CHANGE_MSG);
         }
     }
     /**
@@ -195,7 +212,7 @@ public class QuestionList {
         try{
             Question question = allQns.get(index-1);
             if(question.getDifficulty() == qnDifficulty){
-                System.out.println("    Question is already set as " +
+                Ui.displayMessageStatically("    Question is already set as " +
                         difficulty + " ! No changes made!");
                 return;
             }
@@ -203,11 +220,11 @@ public class QuestionList {
             if(!showMessage) {
                 return;
             }
-            System.out.println("    Roger that! I have marked the following question as " +
+            Ui.displayMessageStatically("    Roger that! I have marked the following question as " +
                     difficulty + " >w< !");
             printQuestion(question, false);
         } catch (IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ono! Please enter valid question number *sobs*");
+            Ui.displayMessageStatically(INVALID_QN_MSG);
         }
     }
     /**
@@ -219,11 +236,11 @@ public class QuestionList {
         try{
             Question question = allQns.get(index-1);
             allQns.remove(index - 1);
-            System.out.println("    Roger that! I have deleted the following question >w< !");
+            Ui.displayMessageStatically(DELETE_QN_MSG);
             printQuestion(question, false);
-            System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
+            Ui.displayMessageStatically(qnListSizeMsg);
         } catch (IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ono! Please enter valid question number *sobs*");
+            Ui.displayMessageStatically(INVALID_QN_MSG);
         }
     }
     /**
@@ -259,10 +276,10 @@ public class QuestionList {
     public void searchListByDescription(String keyword){
         ArrayList<Question> matchedQuestions = new ArrayList<>();
         if(allQns.isEmpty()) {
-            System.out.println("    Question list is empty! Time to add some OWO");
+            Ui.displayMessageStatically(EMPTY_LIST_MSG);
             return;
         }
-        System.out.println("    Here are questions that matched your search:");
+        Ui.displayMessageStatically(SEARCH_RESULT_MSG);
         for (Question question : allQns) {
             if (!question.getQuestionBody().toLowerCase().contains(keyword.toLowerCase())) {
                 continue;
@@ -271,7 +288,7 @@ public class QuestionList {
             printQuestion(question, true);
         }
         if (matchedQuestions.isEmpty()) {
-            System.out.println("    No results found :< Check your keyword is correct?");
+            Ui.displayMessageStatically(NO_SEARCH_RESULTS_MSG);
         }
     }
 
@@ -283,9 +300,9 @@ public class QuestionList {
     public void searchListByModule(String module){
         ArrayList<Question> matchedQuestions = new ArrayList<>();
         if(allQns.isEmpty()){
-            System.out.println("    Question list is empty! Time to add some OWO");
+            Ui.displayMessageStatically(EMPTY_LIST_MSG);
         } else {
-            System.out.println("    Here are questions that matched your search:");
+            Ui.displayMessageStatically(SEARCH_RESULT_MSG);
             for (Question question : allQns) {
                 if(question.getModule().toLowerCase().contains(module.toLowerCase())){
                     matchedQuestions.add(question);
@@ -293,7 +310,7 @@ public class QuestionList {
                 }
             }
             if(matchedQuestions.isEmpty()){
-                System.out.println("    No results found :< Check your module is correct?");
+                Ui.displayMessageStatically(NO_SEARCH_RESULTS_MSG);
             }
         }
     }
@@ -306,7 +323,7 @@ public class QuestionList {
     public ArrayList<Question> assembleListByModules(String[] modules) throws QuizHubExceptions{
         ArrayList<Question> matchedQuestions = new ArrayList<>();
         if (allQns.isEmpty()) {
-            throw new QuizHubExceptions("    Question list is empty! Time to add some OWO");
+            throw new QuizHubExceptions(EMPTY_LIST_MSG);
         }
         for (String module : modules) {
             assembleListByModule(module, matchedQuestions);
@@ -344,7 +361,7 @@ public class QuestionList {
      */
     public void shuffleQuestions(Ui ui) {
         Collections.shuffle(allQns);
-        ui.displayMessage("    Questions are now shuffled!");
+        ui.displayMessage(SHUFFLE_QN_MSG);
         printQuestionList();
     }
     /**
@@ -359,8 +376,7 @@ public class QuestionList {
         }
         return null; // Handle invalid index
     }
-
-
+    
     /**
      * Starts a quiz session using the provided user interface (UI).
      *
