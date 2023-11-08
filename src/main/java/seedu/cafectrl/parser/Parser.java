@@ -209,6 +209,8 @@ public class Parser implements ParserUtil {
     /**
      * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
      * @param arguments string that matches group arguments
+     * @param menu Menu of the current session
+     * @param ui Ui of the current session
      * @return new AddDishCommand
      */
     private static Command prepareAdd(String arguments, Menu menu, Ui ui) {
@@ -251,7 +253,7 @@ public class Parser implements ParserUtil {
     /**
      * Parses the user's input text ingredients.
      * @param ingredientsListString user's input string of ingredients, multiple ingredients seperated by ',' is allowed
-     * @return Ingredient objects that consists of the dish
+     * @return list of ingredients that consists of the dish
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
      * @throws ParserException if the input string does not match the constraints
      */
@@ -302,7 +304,7 @@ public class Parser implements ParserUtil {
      * Converts text of price to float while also checking if the price input is within reasonable range
      * @param priceText text input for price argument
      * @return price in float format
-     * @throws ParserException if price is not within reasonable range
+     * @throws ParserException if price is not within reasonable format and range
      */
     static float parsePriceToFloat(String priceText) throws ParserException {
         String trimmedPriceText = priceText.trim();
