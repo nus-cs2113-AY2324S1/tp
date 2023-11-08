@@ -4,6 +4,8 @@ import seedu.stocker.vendors.VendorSupplyList;
 
 import java.util.List;
 
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 /**
  * Lists the drugs supplied by a specific vendor in a case-insensitive manner.
  */
@@ -34,7 +36,7 @@ public class ListVendorSupplyCommand extends Command {
         String lowercaseVendorName = vendorName.toLowerCase();
 
         if (lowercaseVendorName.isEmpty()) {
-            return new CommandResult<>(MESSAGE_USAGE);
+            return new CommandResult<>(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         List<String> suppliedDrugs = VendorSupplyList.getDrugsSuppliedByVendor(lowercaseVendorName);
