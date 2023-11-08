@@ -257,7 +257,8 @@ public class Parser implements ParserUtil {
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
      * @throws ParserException if the input string does not match the constraints
      */
-    private static ArrayList<Ingredient> parseIngredients(String ingredientsListString, boolean excludeRepeatedIngredients)
+    private static ArrayList<Ingredient> parseIngredients(String ingredientsListString,
+                                                          boolean excludeRepeatedIngredients)
             throws IllegalArgumentException, ParserException {
         String[] inputIngredientList = {ingredientsListString};
 
