@@ -54,54 +54,87 @@ public class Storage {
                                     String qnModule) {
         switch (qnType) {
         case ShortAnsQn.IDENTIFIER:
-            try {
-                // Split the description by "/" and check for empty fields
-                String[] qnTokens = qnDescription.split("/");
-                if (qnTokens[0].isEmpty() || qnTokens[1].isEmpty() || qnModule.isEmpty()) {
-                    return 1;
-                }
-                boolean isAdded = questions.addShortAnswerQn(qnTokens[0].strip(), qnTokens[1].strip(), qnModule,
-                        difficulty, false);
-                if (!isAdded) {
-                    return 1;
-                }
-                if (qnDoneStatus.equalsIgnoreCase("done")) {
-                    questions.markQuestionAsDone(questions.getQuestionListSize(), false);
-                }
-                return 0;
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                return 1;
-            }
+            return addShortAnsFromFile(qnDescription, qnModule, questions, qnDoneStatus, difficulty);
         case MultipleChoiceQn.IDENTIFIER:
-            try {
-                // Split the description by "/" and check for empty fields
-                String[] qnTokens = qnDescription.split("/");
-                String questionString = qnTokens[0].strip();
-                String option1 = qnTokens[1].strip();
-                String option2 = qnTokens[2].strip();
-                String option3 = qnTokens[3].strip();
-                String option4 = qnTokens[4].strip();
-                int answer = Integer.parseInt(qnTokens[5].strip());
-                if (questionString.isEmpty() || option1.isEmpty() || option2.isEmpty() || option3.isEmpty()
-                        || option4.isEmpty() || qnModule.isEmpty()) {
-                    return 1;
-                }
-                boolean isAdded = questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4,
-                        answer, qnModule, difficulty, false);
-                if (!isAdded) {
-                    return 1;
-                }
-                if (qnDoneStatus.equalsIgnoreCase("done")) {
-                    questions.markQuestionAsDone(questions.getQuestionListSize(), false);
-                }
-                return 0;
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException exception) {
-                return 1;
-            }
+            return addMCQFromFile(qnDescription, qnModule, questions, qnDoneStatus, difficulty);
         default:
             return 1;
         }
     }
+
+    /**
+     * Adds a Short Answer question from storage into question list being built.
+     *
+     * @param questions The question list to be built.
+     * @param qnDescription Description of current question.
+     * @param qnDoneStatus Done status of current question.
+     * @param difficulty Difficulty of current question.
+     * @param qnModule Module of current question.
+     *
+     * @return 0 if added successfully, and 1 otherwise
+     */
+    private int addShortAnsFromFile(String qnDescription, String qnModule, QuestionList questions, String qnDoneStatus,
+                                    Question.QnDifficulty difficulty){
+        try {
+            // Split the description by "/" and check for empty fields
+            String[] qnTokens = qnDescription.split("/");
+            if (qnTokens[0].isEmpty() || qnTokens[1].isEmpty() || qnModule.isEmpty()) {
+                return 1;
+            }
+            boolean isAdded = questions.addShortAnswerQn(qnTokens[0].strip(), qnTokens[1].strip(), qnModule,
+                    difficulty, false);
+            if (!isAdded) {
+                return 1;
+            }
+            if (qnDoneStatus.equalsIgnoreCase("done")) {
+                questions.markQuestionAsDone(questions.getQuestionListSize(), false);
+            }
+            return 0;
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            return 1;
+        }
+    }
+
+    /**
+     * Adds a MCQ question from storage into question list being built.
+     *
+     * @param questions The question list to be built.
+     * @param qnDescription Description of current question.
+     * @param qnDoneStatus Done status of current question.
+     * @param difficulty Difficulty of current question.
+     * @param qnModule Module of current question.
+     *
+     * @return 0 if added successfully, and 1 otherwise
+     */
+    private int addMCQFromFile(String qnDescription, String qnModule, QuestionList questions, String qnDoneStatus,
+                                    Question.QnDifficulty difficulty){
+        try {
+            // Split the description by "/" and check for empty fields
+            String[] qnTokens = qnDescription.split("/");
+            String questionString = qnTokens[0].strip();
+            String option1 = qnTokens[1].strip();
+            String option2 = qnTokens[2].strip();
+            String option3 = qnTokens[3].strip();
+            String option4 = qnTokens[4].strip();
+            int answer = Integer.parseInt(qnTokens[5].strip());
+            if (questionString.isEmpty() || option1.isEmpty() || option2.isEmpty() || option3.isEmpty()
+                    || option4.isEmpty() || qnModule.isEmpty()) {
+                return 1;
+            }
+            boolean isAdded = questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4,
+                    answer, qnModule, difficulty, false);
+            if (!isAdded) {
+                return 1;
+            }
+            if (qnDoneStatus.equalsIgnoreCase("done")) {
+                questions.markQuestionAsDone(questions.getQuestionListSize(), false);
+            }
+            return 0;
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException exception) {
+            return 1;
+        }
+    }
+
     /**
      * Parse raw questions read from the question file and store them in the questionList
      * Used at start of program to load all questions from the file
