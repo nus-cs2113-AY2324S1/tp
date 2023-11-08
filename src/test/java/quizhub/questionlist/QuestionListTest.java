@@ -32,7 +32,7 @@ class QuestionListTest {
         qns.addShortAnswerQn("Question", "Answer",
                 "Mod1", Question.QnDifficulty.NORMAL, true);
         assertEquals("I have added the following question OwO:" +
-                "      [S] Question / Answer | Mod1 | NORMAL    Now you have 1 questions in the list! UWU",
+                "    [S][ ] Question / Answer | Mod1 | NORMAL    Now you have 1 questions in the list! UWU",
                 outputStreamCaptor.toString().strip().replaceAll("\\R", ""));
 
     }

@@ -229,8 +229,8 @@ public class CommandEditTest {
      */
     @Test
     void testEditValidDescription() {
-        String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][X] NewDescription / Answer3 | Mod3 | NORMAL";
+        String expectedOutput = "[S][X] NewDescription / Answer3 | Mod3 | NORMAL" +
+                "    Roger that! I have edited the following question >w< !";
         String userInput = "edit 3 /description NewDescription";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
@@ -241,8 +241,8 @@ public class CommandEditTest {
      */
     @Test
     void testEditValidAnswer() {
-        String expectedOutput = "Roger that! I have edited the following question >w< !" +
-                "        [S][ ] Question4 / NewAnswer | Mod4 | NORMAL";
+        String expectedOutput = "[S][ ] Question4 / NewAnswer | Mod4 | NORMAL" +
+                "    Roger that! I have edited the following question >w< !";
         String userInput = "edit 4 /answer NewAnswer";
         Parser.parseCommand(userInput).executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);

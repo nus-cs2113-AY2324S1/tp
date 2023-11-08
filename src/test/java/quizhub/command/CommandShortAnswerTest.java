@@ -60,7 +60,7 @@ public class CommandShortAnswerTest {
     public void testValidCommand(){
         String input = "short question/answer/module/easy";
         String expectedOutput = "I have added the following question OwO:" +
-                " [S] question / answer | module | EASY" +
+                " [S][ ] question / answer | module | EASY" +
                 " Now you have 1 questions in the list! UWU";
         Command command = Parser.parseCommand(input);
         command.executeCommand(ui, mockStorage, questionList);
@@ -140,7 +140,7 @@ public class CommandShortAnswerTest {
 
         // Expected output after adding the question once
         String expectedOutputOnce = "I have added the following question OwO:" +
-                " [S] duplicate_question / duplicate_answer | module | EASY" +
+                " [S][ ] duplicate_question / duplicate_answer | module | EASY" +
                 " Now you have 1 questions in the list! UWU";
 
         // Expected output after attempting to add the same question again
@@ -179,7 +179,7 @@ public class CommandShortAnswerTest {
 
         // Expected output after adding the question and creating the file
         String expectedOutput = "I have added the following question OwO:" +
-                " [S] new_question / new_answer | module | EASY" +
+                " [S][ ] new_question / new_answer | module | EASY" +
                 " Now you have 1 questions in the list! UWU";
 
         // Verify that the data was saved to the storage (file created)
