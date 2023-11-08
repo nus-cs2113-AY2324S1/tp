@@ -1,20 +1,14 @@
 @startuml
 
-autoactivate on
-
 mainframe sd ViewBudget
 participant ":BudgetCommand" as BudgetCommand
 participant "<<class>>\nBudget" as Budget
 participant ":Ui" as Ui
 
-activate BudgetCommand
-
 alt hasBudget
     BudgetCommand -> Ui: printBudget()
-    return
 else else
     BudgetCommand -> Ui: printBudgetError("view")
-    return
 end
 
 hide footbox

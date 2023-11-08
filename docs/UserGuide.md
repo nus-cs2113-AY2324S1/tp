@@ -817,7 +817,7 @@ Existing data will be automatically loaded when the program starts up.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Copy the /data/ folder from the home folder to the other computer.
 
 **Q**: Should I edit the watchlist.json file?
 
