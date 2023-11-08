@@ -300,22 +300,22 @@ public class Parser {
     }
 
     private Command prepareAddVendorCommand(String args) {
-        String[] vendorArgs = args.split(" ", 1);
-        String vendorName = vendorArgs[0];
-        if (vendorName == null || vendorName.isEmpty() || vendorName.equals(" ")) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
-        }
-        return new AddVendorCommand(vendorName);
+        Pattern pattern = Pattern.compile("/v (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String vendorName = matcher.group(1).trim();
+            return new AddVendorCommand(vendorName);
+        } return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
     }
 
     private Command prepareDeleteVendorCommand(String args) {
-        String[] vendorArgs = args.split(" ", 1);
-        String vendorName = vendorArgs[0];
-        if (vendorName == null || vendorName.isEmpty() || vendorName.equals(" ")) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        Pattern pattern = Pattern.compile("/v (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String vendorName = matcher.group(1).trim();
+            return new DeleteVendorCommand(vendorName);
+        }  return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteVendorCommand.MESSAGE_USAGE));
-        }
-        return new DeleteVendorCommand(vendorName);
     }
 
     private Command prepareSetThresholdCommand(String args) {

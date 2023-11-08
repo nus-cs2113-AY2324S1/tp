@@ -83,13 +83,13 @@ class HelpCommandTest {
 
                 + "addVendor: Adds a new vendor to the vendors list. Parameter: NAME"
                 + System.getProperty("line.separator")
-                + "Example: addVendor Moderna"
+                + "Example: addVendor /v Moderna"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
                 + "deleteVendor: Deletes a vendor from the vendors list. Parameter: NAME"
                 + System.getProperty("line.separator")
-                + "Example: deleteVendor Moderna"
+                + "Example: deleteVendor /v Moderna"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 

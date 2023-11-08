@@ -12,7 +12,7 @@ public class AddVendorCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new vendor to the vendors list. "
             + "Parameter: NAME" + System.lineSeparator()
             + "Example: " + COMMAND_WORD
-            + " Moderna";
+            + " /v Moderna";
 
     public static final String MESSAGE_SUCCESS = "New vendor added in the vendors list: %1$s";
 
@@ -35,7 +35,7 @@ public class AddVendorCommand extends Command {
 
     @Override
     public <T> CommandResult<T> execute() {
-        if (vendorAlreadyExist(toAdd.getName()) == true) {
+        if (vendorAlreadyExist(toAdd.getName())) {
             return new CommandResult<>("No Duplicates allowed!");
         }
 
