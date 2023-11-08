@@ -163,4 +163,8 @@ public class Question {
     public String toSerializedString() {
         return "";
     }
+
+    public String getCorrectAnswer() {
+        return "null";
+    }
 }
