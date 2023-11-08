@@ -11,7 +11,7 @@ public class CommandDelete extends Command {
     public static final String INVALID_FORMAT_MSG = "    Please format your input as delete [question number]";
     public static final String MISSING_INDEX_MSG = "    Ono! You did not indicate question index :<";
     public static final String EXCESSIVE_INDEX_MSG = "    Please enter only 1 question index!";
-    private int qnIndex;
+    private final int qnIndex;
 
     /**
      * Creates a new delete command for a question.

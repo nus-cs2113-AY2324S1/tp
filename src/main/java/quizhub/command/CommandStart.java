@@ -70,7 +70,7 @@ public class CommandStart extends Command{
             try {
                 matchedQuestions = questions.assembleListByModules(modules);
             } catch (QuizHubExceptions emptyList){
-                System.out.println(emptyList.getMessage());
+                ui.displayMessage(emptyList.getMessage());
                 return;
             }
             break;
@@ -99,7 +99,6 @@ public class CommandStart extends Command{
             break;
         default:
             ui.displayMessage("    Please enter a valid quiz mode :<");
-            return;
         }
     }
 }

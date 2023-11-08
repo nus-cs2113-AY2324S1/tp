@@ -26,7 +26,7 @@ public class Parser {
     private static QuestionList questions;
 
     public Parser(QuestionList questions) {
-        this.questions = questions;
+        Parser.questions = questions;
     }
 
     /**
@@ -76,8 +76,8 @@ public class Parser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
             return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
         } catch (Exception error) {
-            System.out.println(error.getMessage());
-            return new CommandInvalid(Ui.INVALID_COMMAND_FEEDBACK);
+            return new CommandInvalid(error.getMessage() + System.lineSeparator()
+                    + Ui.INVALID_COMMAND_FEEDBACK);
         }
     }
 
@@ -490,9 +490,6 @@ public class Parser {
         } else if (editValuesException instanceof QuizHubExceptions) {
             return new CommandInvalid(CommandEdit.NO_CHANGES_MADE_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
-        } else if (editValuesException instanceof NumberFormatException) {
-            return new CommandInvalid(CommandMultipleChoice.INVALID_ANSWER_MSG + System.lineSeparator() +
-                    CommandEdit.INVALID_FORMAT_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
@@ -710,10 +707,12 @@ public class Parser {
 
         if (qnTypeException instanceof ArrayIndexOutOfBoundsException) {
             // This indicates that the question type argument was missing
-            return new CommandInvalid(baseErrorMessage + "You must specify a question type ('/short', '/mcq', or '/mix').");
+            return new CommandInvalid(baseErrorMessage +
+                    "You must specify a question type ('/short', '/mcq', or '/mix').");
         } else if (qnTypeException instanceof IllegalArgumentException) {
             // This indicates that the provided question type argument was invalid
-            return new CommandInvalid(baseErrorMessage + "Invalid question type. Valid types are '/short', '/mcq', or '/mix'.");
+            return new CommandInvalid(baseErrorMessage +
+                    "Invalid question type. Valid types are '/short', '/mcq', or '/mix'.");
         } else {
             // This handles any other unexpected exceptions
             return new CommandInvalid(baseErrorMessage + qnTypeException.getMessage());
