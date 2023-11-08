@@ -7,6 +7,7 @@ import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.storage.IngredientStorage;
@@ -14,7 +15,6 @@ import essenmakanan.storage.RecipeStorage;
 import essenmakanan.ui.Ui;
 
 import java.util.Scanner;
-import java.util.logging.LogManager;
 
 public class EssenMakanan {
 
@@ -53,7 +53,7 @@ public class EssenMakanan {
     }
 
     public void setup() {
-        LogManager.getLogManager().reset();
+        EssenLogger.setup();
         recipes = new RecipeList();
         parser = new Parser();
         ingredientStorage = new IngredientStorage(DATA_INGREDIENT_PATH);
@@ -72,6 +72,7 @@ public class EssenMakanan {
             exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_RECIPE_PATH);
             recipes = new RecipeList();
         }
+
     }
 
     public void start() {

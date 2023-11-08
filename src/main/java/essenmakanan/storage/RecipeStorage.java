@@ -18,11 +18,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class RecipeStorage {
-    private static Logger logger = Logger.getLogger("RecipeStorage");
 
     private String dataPath;
 
@@ -31,7 +28,6 @@ public class RecipeStorage {
     public RecipeStorage(String path) {
         recipeListPlaceholder = new ArrayList<>();
         dataPath = path;
-        EssenLogger.setup(logger);
     }
 
     public String convertToString(Recipe recipe) {
@@ -57,7 +53,7 @@ public class RecipeStorage {
             FileWriter writer = new FileWriter(dataPath, false);
             String dataString;
 
-            logger.log(Level.INFO, "Transferring recipe data");
+            EssenLogger.logInfo("Transferring recipe data");
             for (Recipe recipe : recipes) {
                 dataString = convertToString(recipe);
                 writer.write(dataString);
@@ -65,10 +61,10 @@ public class RecipeStorage {
             }
 
             writer.close();
-            logger.log(Level.INFO, "Recipe data has been successfully saved");
+            EssenLogger.logInfo("Recipe data has been successfully saved");
         } catch (IOException exception) {
             Ui.handleIOException(exception);
-            logger.log(Level.SEVERE, "Unable to save recipe data", exception);
+            //.log(Level.SEVERE, "Unable to save recipe data", exception);
         }
     }
 
@@ -76,7 +72,7 @@ public class RecipeStorage {
         String dataString = scan.nextLine();
         String[] parsedRecipe = dataString.trim().split(" \\|\\| ");
 
-        logger.log(Level.INFO, "Retrieving recipe data");
+        EssenLogger.logInfo("Retrieving recipe data");
         try {
             if (parsedRecipe.length != 3 || parsedRecipe[1].isEmpty()) {
                 throw new EssenStorageFormatException();
@@ -103,12 +99,12 @@ public class RecipeStorage {
             recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
-            logger.log(Level.WARNING, "Data: " + dataString + " has an invalid format", exception);
+            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid format", exception);
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
-            logger.log(Level.WARNING, "Data: " + dataString + " has an invalid enum", exception);
+            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid enum", exception);
         }
-        logger.log(Level.INFO, "Saved recipe data has been received");
+        EssenLogger.logInfo("Saved recipe data has been received");
     }
 
     public ArrayList<Recipe> restoreSavedData() throws EssenFileNotFoundException {
@@ -119,7 +115,7 @@ public class RecipeStorage {
                 createNewData(scan);
             }
         } catch (FileNotFoundException exception) {
-            logger.log(Level.WARNING, "Text file not found");
+            //logger.log(Level.WARNING, "Text file not found");
             throw new EssenFileNotFoundException();
         }
 
