@@ -507,7 +507,7 @@ public class Parser {
      * @return Start Quiz command or an Invalid Command
      */
     private static Command parseStartCommand(String userInput) {
-        String[] commandStartTokens = new String[3];
+        String[] commandStartTokens = new String[CommandStart.NUM_ARGUMENTS];
         try {
             extractQuizMode(userInput, commandStartTokens);
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQuizMode) {
@@ -523,10 +523,17 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnMode) {
             return handleQuizQnModeExceptions(incorrectQnMode);
         }
+        try{
+            extractQuizQnType(userInput, commandStartTokens);
+        }catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnType){
+            return handleQnTypeExceptions(incorrectQnType);
+        }
+
         String startMode = commandStartTokens[0];
         String startDetails = commandStartTokens[1];
         String startQnMode = commandStartTokens[2];
-        return new CommandStart(startMode, startDetails, startQnMode);
+        String startQnType = commandStartTokens[3];
+        return new CommandStart(startMode, startDetails, startQnMode, startQnType);
     }
 
     /**
@@ -640,7 +647,7 @@ public class Parser {
             throw new IllegalArgumentException("Too Many Modes");
         } else if (!qnMode.equals("random") && !qnMode.equals("normal")) {
             throw new IllegalArgumentException("Invalid Mode");
-        } else if (inputSplitByArguments.length > 3) {
+        } else if (inputSplitByArguments.length > CommandStart.NUM_ARGUMENTS) {
             throw new IllegalArgumentException("Too Many Arguments");
         } else {
             commandStartTokens[2] = qnMode;
@@ -666,6 +673,50 @@ public class Parser {
             }
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
+        }
+    }
+    /**
+     * Extracts the question type from the user input and stores it in the commandStartTokens array.
+     * The question type is expected to be the fourth token in the command when split by slashes.
+     * This method validates the question type and throws exceptions if it is missing or invalid.
+     *
+     * @param userInput          The full user input string.
+     * @param commandStartTokens The array where extracted command tokens are stored.
+     * @throws ArrayIndexOutOfBoundsException if the question type argument is missing.
+     * @throws IllegalArgumentException       if the question type argument is not one of the expected values.
+     */
+    private static void extractQuizQnType(String userInput, String[] commandStartTokens)
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
+        String[] inputSplitBySlash = userInput.split("/");
+        if (inputSplitBySlash.length < CommandStart.NUM_ARGUMENTS) {
+            throw new ArrayIndexOutOfBoundsException("Missing question type for the quiz.");
+        }
+        String qnType = inputSplitBySlash[3].split(" ")[0].strip().toLowerCase();
+        if (!qnType.equals("short") && !qnType.equals("mcq") && !qnType.equals("mix")) {
+            throw new IllegalArgumentException("Invalid question type for the quiz.");
+        }
+        commandStartTokens[3] = qnType;
+    }
+
+    /**
+     * Handles exceptions related to question type extraction for the quiz start command.
+     * This method generates a CommandInvalid object with an appropriate error message based on the exception.
+     *
+     * @param qnTypeException The exception thrown during question type extraction.
+     * @return CommandInvalid containing the error message for the user.
+     */
+    private static Command handleQnTypeExceptions(Exception qnTypeException) {
+        String baseErrorMessage = "There was an error parsing the question type for the quiz: ";
+
+        if (qnTypeException instanceof ArrayIndexOutOfBoundsException) {
+            // This indicates that the question type argument was missing
+            return new CommandInvalid(baseErrorMessage + "You must specify a question type ('/short', '/mcq', or '/mix').");
+        } else if (qnTypeException instanceof IllegalArgumentException) {
+            // This indicates that the provided question type argument was invalid
+            return new CommandInvalid(baseErrorMessage + "Invalid question type. Valid types are '/short', '/mcq', or '/mix'.");
+        } else {
+            // This handles any other unexpected exceptions
+            return new CommandInvalid(baseErrorMessage + qnTypeException.getMessage());
         }
     }
 
