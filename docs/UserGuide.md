@@ -37,13 +37,13 @@ from all fields of study.
 1. [Helper command](#getting-help-on-using-the-app-help)
 2. [Add Short Answer question with modules and difficulty](#adding-short-answer-questions-and-their-answers-short)
 3. [Add MCQ question with modules and difficulty](#adding-multiple-choice-questions-and-their-answers-mcq)
-3. [Store or Edit the question/answer in local storage](#store-and-edit-question-pool-using-the-question-file)
-4. [Delete question/answer](#delete-questions-delete)
-5. [Find question/answer via question's description or via module name](#find-questionanswermodule-find)
-6. [Edit question/answer](#edit-questionanswer-edit)
-7. [Mark question difficulty](#mark-difficulty-of-questions-markdiff)
-8. [Start a quiz session, specifying category of questions and in random/normal mode](#start-quiz-start)
-9. [Permanently shuffle questions order for added challenge!](#shuffling-questions-shuffle)
+4. [Store or Edit the question/answer in local storage](#store-and-edit-question-pool-using-the-question-file)
+5. [Delete question/answer](#delete-questions-delete)
+6. [Find question/answer via question's description or via module name](#find-questionanswermodule-find)
+7. [Edit question/answer](#edit-questionanswer-edit)
+8. [Mark question difficulty](#mark-difficulty-of-questions-markdiff)
+9. [Start a quiz session, specifying category of questions and in random/normal mode](#start-quiz-start)
+10. [Permanently shuffle questions order for added challenge!](#shuffling-questions-shuffle)
 
 ### Getting help on using the app: `help`
 Assists new users in familiarising with the application. Provides a list of commands for the user to get started
@@ -56,7 +56,7 @@ Example of usage:
   **Output**: The list of commands, similar to the [Command Summary](#command-summary) <br>
 
 Notes:
-* Ver 2.1 will only list commands. Future versions will include autofilling and scrolling
+* Ver 2.1 will only list commands. Future versions will include autofill and scrolling
   (multiple pages of the help menu)
 
 ### Adding short-answer questions and their answers: `short`
@@ -216,16 +216,19 @@ The app will display the fetched questions one at a time on CLI and the user is 
 Upon every user answer entry, the app feedbacks if the user answered correctly, loads the next question and updates
 the score. When all questions are answered, the quiz terminates automatically and the final user quiz score is displayed.
 
-Format:  `start /[quiz mode] [start details] /[qn mode]`
+Format:  `start /[quiz mode] [start details] /[qn mode] /[qn type]`
+* Quiz Mode - Use `all` for all modules, or `module` with the corresponding module in `start details` for a selected module.
+* Qn Mode - Use `normal` for standard sequence or `random` for random sequence
+* Qn Type - Use `short` for `mcq` for short and mcq types, or `mix` for all types
 
 Examples of usage:
-* **Command**: `start /module num /normal` <br>
+* **Command**: `start /module num /normal /mix` <br>
   **Output**: starts the quiz - displays questions that pertains to module “num” in order defined in the list
-* **Command**: `start /module num /random` <br>
+* **Command**: `start /module num /random /mix` <br>
   **Output**: starts the quiz - displays questions that pertains to module “num” but in a randomised order
-* **Command**: `start /all /random` <br>
+* **Command**: `start /all /random /mix` <br>
   **Output**: starts the quiz - displays questions directly from the list of questions in random order
-* **Command**: `start /all /normal` <br>
+* **Command**: `start /all /normal /mix` <br>
   **Output**: starts the quiz - displays questions directly from the list of questions in the order of the list
 
 
@@ -263,7 +266,7 @@ Examples of usage:
   ```
 Notes:
 * If either the question number is invalid, or no difficulty level is provided,
-  the app will prompt you to re-enter the markdiff command
+  the app will prompt you to re-enter the mark difficulty command
 * The app only supports fixed difficulty levels, assigning any difficulty level that
   is not `easy`, `normal`, or `hard` will trigger a warning message
 * Input difficulty level is **not case-sensitive**
@@ -293,7 +296,15 @@ begin from the second line onwards, with each question taking one line
   * question/answer - Question and answer
   * module - Module for the question
   * difficulty - EASY, NORMAL or HARD
-  * Using arbitrary values may prevent the question from being loaded normally
+* Multiple Choice Question: `M | <done/undone> | <question> / <ans1> / <ans 2> / <ans 3> / <ans 4> / <correct ans> | <module> | <difficulty>`
+  * M - Format identifier for multiple choice question
+  * done/undone - Use done or undone as indication
+  * question/ans1/ans2/ans3/ans4 - Questions and choices
+  * correct ans - Index of correct answer from 1 through 4
+  * Module - Module for the question
+  * Difficulty - EASY, NORMAL or HARD
+* Using arbitrary values may prevent the question from being loaded normally,
+  please use the add question feature in the program if you are unsure.
 
 Example:
 ```
@@ -301,6 +312,9 @@ Latest Questions
 S | undone | Full name of Java? / JavaScript. | CS2113 | NORMAL
 S | undone | How many different STs are there in a complete graph with 9 vertices? / 4782969 | CS2040C | HARD
 S | undone | Does one-time-pad satisfy perfect secrecy / Yes | CS3235 | EASY
+M | undone | What is 1+1 / 1 / 2 / 3 / 4 / 2 | MA1521 | EASY
+M | undone | Should we use arrowhead code / yes / no / maybe / unsure / 2 | CS2113 | EASY
+M | undone | Name of Java mascot / duke / duck / dick / drew / 1 | CS2113 | EASY
 ```
 ## FAQ
 
@@ -323,8 +337,8 @@ computer.
 9. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number,
 10. `edit [question number] /option[number] [new value]` - edits the option of the question with the specified number (
     MCQ only),
-11. `start /[quiz mode] [start details] /[qn mode]` - starts the quiz with option for /module or /all and /random or
-    /normal,
+11. `start /[quiz mode] [start details] /[qn mode] /[qn type]` - starts the quiz with option for /module or /all and /random or
+    /normal mode, with MCQ, short answer or mixed question types.
 12. `shuffle` - shuffle quiz questions to a random order,
 13. `markdiff [question number] /[question difficulty]` - sets the difficulty of question with the specified number,
 14. `bye` - exits the program
