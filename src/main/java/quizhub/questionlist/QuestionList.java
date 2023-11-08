@@ -459,7 +459,8 @@ public class QuestionList {
      */
     public void startQuiz(Ui ui, ArrayList<Question> questions) {
         if (questions.isEmpty()) {
-            ui.displayMessage("    No questions found! Add questions before starting the quiz.");
+            ui.displayMessage("    No question found in list / no question found pertaining to module. " +
+                    "Add questions before starting the quiz");
             return;
         }
 
@@ -477,6 +478,7 @@ public class QuestionList {
                 ui.displayMessageSameLine("  Your Answer: ");
                 userAnswer = ui.getUserInput().strip();
                 isValidAnswer = true; // Assume the answer is valid initially
+                boolean confirmationFlag = false;
 
                 // Check for blank response
                 if (userAnswer.isEmpty()) {
@@ -485,11 +487,17 @@ public class QuestionList {
                     continue; // Skip the remaining checks and prompt for input again
                 }
 
+                // Check if user wants to exit the quiz
+                if ("/exitquiz".equalsIgnoreCase(userAnswer)) {
+                    ui.displayMessage("    Exiting the quiz...");
+                    return; // Exit the startQuiz method
+                }
+
                 if (question instanceof MultipleChoiceQn) {
                     try {
                         int answerNumber = Integer.parseInt(userAnswer);
                         // Check for numbers not within range 1-4
-                        if (answerNumber < 1 || answerNumber > 4) {
+                        if (answerNumber < 1 || answerNumber > 4){
                             isValidAnswer = false;
                             ui.displayMessage("    Please enter a valid choice between 1 and 4.");
                         } else {
@@ -500,6 +508,9 @@ public class QuestionList {
                         ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
                     }
                 }
+
+
+
             } while (!isValidAnswer);
 
             String correctAnswer;
