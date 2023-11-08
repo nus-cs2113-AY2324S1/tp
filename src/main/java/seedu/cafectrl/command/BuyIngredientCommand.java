@@ -22,6 +22,7 @@ public class BuyIngredientCommand extends Command {
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> ingredients;
+    private ArrayList<Ingredient> ingredientsToBePrinted = new ArrayList<>();
     private String ingredientString = ""; // Used to store the message about the bought ingredients
 
     /**
@@ -45,7 +46,7 @@ public class BuyIngredientCommand extends Command {
         try {
             addIngredient();
             ui.printBuyIngredientHeader();
-            ui.showToUser(ingredientString);
+            ui.showToUser(ingredientString.strip());
         } catch (RuntimeException e) {
             ui.showToUser(e.getMessage());
         }
@@ -61,7 +62,12 @@ public class BuyIngredientCommand extends Command {
             ingredient = pantry.addIngredientToStock(ingredient.getName(),
                     ingredient.getQty(),
                     ingredient.getUnit());
-            buildBuyIngredientMessage(ingredient, i);
+            ingredients.set(i, ingredient);
+        }
+
+        for (int i = ingredients.size() - 1; i > -1; i--) {
+            Ingredient ingredient = ingredients.get(i);
+            buildBuyIngredientMessage(ingredient);
         }
     }
 
@@ -69,17 +75,26 @@ public class BuyIngredientCommand extends Command {
      * Builds a message about the bought ingredient and appends it to the result message.
      *
      * @param ingredient The Ingredient object to build the message for.
-     * @param index The index of the ingredient in the list.
      */
-    private void buildBuyIngredientMessage(Ingredient ingredient, int index) {
+    private void buildBuyIngredientMessage(Ingredient ingredient) {
+        if (isReapeatedIngredient(ingredient)) {
+            return;
+        }
+        ingredientsToBePrinted.add(ingredient);
         ingredientString += "Ingredient: " + ingredient.getName()
                 + "\t\tQty: " + ingredient.getQty()
-                + ingredient.getUnit();
+                + ingredient.getUnit() + "\n";
+    }
 
-        //append new line if current ingredient is not last
-        if(index < ingredients.size() - ui.OFFSET_LIST_INDEX) {
-            ingredientString += "\n";
+    private boolean isReapeatedIngredient(Ingredient ingredient) {
+        for (Ingredient printedIngredient : ingredientsToBePrinted) {
+            String printedIngredientName = printedIngredient.getName();
+            String ingredientName = ingredient.getName();
+            if (printedIngredientName.equalsIgnoreCase(ingredientName)) {
+                return true;
+            }
         }
+        return false;
     }
 }
 

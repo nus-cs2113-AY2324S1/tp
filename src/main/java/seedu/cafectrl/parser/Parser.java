@@ -232,7 +232,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
             }
 
-            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true);
 
             Dish dish = new Dish(dishName, ingredients, price);
 
@@ -251,9 +251,10 @@ public class Parser implements ParserUtil {
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
      * @throws ParserException if the input string does not match the constraints
      */
-    private static ArrayList<Ingredient> parseIngredients(String ingredientsListString)
+    private static ArrayList<Ingredient> parseIngredients(String ingredientsListString, boolean excludeRepeatedIngredients)
             throws IllegalArgumentException, ParserException {
         String[] inputIngredientList = {ingredientsListString};
+
         ArrayList<Ingredient> ingredients = new ArrayList<>();
 
         //check if there is more than 1 ingredient
@@ -281,7 +282,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
             }
 
-            if (isRepeatedIngredientName(ingredientName, ingredients)) {
+            if (excludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)) {
                 continue;
             }
 
@@ -478,7 +479,7 @@ public class Parser implements ParserUtil {
         String ingredientsListString = matcher.group(0);
 
         try {
-            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString);
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, false);
             return new BuyIngredientCommand(ingredients, ui, pantry);
         } catch (NumberFormatException e) {
             return new IncorrectCommand(ErrorMessages.INVALID_INGREDIENT_QTY, ui);
