@@ -127,16 +127,21 @@ public class Decoder {
             int quantity = Integer.parseInt(orderData[2].trim());
             float totalOrderCost = Float.parseFloat(orderData[3].trim());
             boolean isComplete = "true".equals(orderData[4].trim());
+            Dish dish = menu.getDishFromName(dishName);
+            if(dish == null) {
+                ui.showToUser("oh no! " + dishName + " does not exist in our menu, "
+                        + "you might have tempered with the file and added in a non existing dish."
+                        , "don't worry, we will continue operations without " + dishName);
+            } else {
+                Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
+                //increase size of orderLists if needed
+                //this can be used in the event that the text file's first order is not day 0
+                while (orderLists.size() <= day) {
+                    orderLists.add(new OrderList());
+                }
 
-            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
-
-            //increase size of orderLists if needed
-            //this can be used in the event that the text file's first order is not day 0
-            while (orderLists.size() <= day) {
-                orderLists.add(new OrderList());
+                orderLists.get(day).addOrder(orderedDish);
             }
-
-            orderLists.get(day).addOrder(orderedDish);
         }
         return new Sales(orderLists);
     }
