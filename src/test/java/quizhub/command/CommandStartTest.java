@@ -57,8 +57,9 @@ public class CommandStartTest {
 
         @Test
         public void testStartQuizWithNoQuestions() {
-            String input  = "start /all /random";
-            String expectedOutput = "No questions found! Add questions before starting the quiz.";
+            String input  = "start /all /random /mix";
+            String expectedOutput = "No question found in list / no question found pertaining to module. " +
+                    "Add questions before starting the quiz";
             Command command = Parser.parseCommand(input);
             command.executeCommand(ui, mockStorage, questionList);
             testCliOutputCorrectness(expectedOutput);
@@ -197,7 +198,7 @@ public class CommandStartTest {
          */
         @Test
         public void testStartQuizAllModeWithDetailsWithQnModeTooManyArguments() {
-            String input = "start /all Mod2 /normal /random";
+            String input = "start /all Mod2 /normal /random /mix";
             String expectedOutput = CommandStart.TOO_MANY_ARGUMENTS_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
             Command command = Parser.parseCommand(input);
             command.executeCommand(ui, mockStorage, questionList);
@@ -208,7 +209,7 @@ public class CommandStartTest {
          */
         @Test
         public void testStartQuizModuleModeWithDetailsWithQnModeTooManyArguments() {
-            String input = "start /module Mod2 /random /normal";
+            String input = "start /module Mod2 /random /normal /mix";
             String expectedOutput = CommandStart.TOO_MANY_ARGUMENTS_MSG.strip() + CommandStart.INVALID_FORMAT_MSG;
             Command command = Parser.parseCommand(input);
             command.executeCommand(ui, mockStorage, questionList);
@@ -276,7 +277,7 @@ public class CommandStartTest {
             mockUi.setUserInput("Answer2");
             mockUi.setUserInput("Answer3");
             mockUi.setUserInput("Answer4");
-            String input = "start /all /normal";
+            String input = "start /all /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
             assertEquals("    Your score: 4/4", mockUi.getLastDisplayedMessage());
@@ -291,7 +292,7 @@ public class CommandStartTest {
             mockUi.setUserInput("Answer8");
             mockUi.setUserInput("Answer3");
             mockUi.setUserInput("Answer2");
-            String input = "start /all details /normal";
+            String input = "start /all details /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
             assertEquals("    Your score: 2/4", mockUi.getLastDisplayedMessage());
@@ -302,7 +303,7 @@ public class CommandStartTest {
         @Test
         public void testStartQuizModuleModeWithDetailsWithQnMode() {
             mockUi.setUserInput("Answer1");
-            String input = "start /module Mod3 /normal";
+            String input = "start /module Mod3 /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
             assertEquals("    Your score: 0/1", mockUi.getLastDisplayedMessage());
@@ -316,7 +317,7 @@ public class CommandStartTest {
             mockUi.setUserInput("Answer3");
             mockUi.setUserInput("Answer4");
             mockUi.setUserInput("Answer2");
-            String input = "start /module Mod3 Mod1 Mod2 /normal";
+            String input = "start /module Mod3 Mod1 Mod2 /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
             assertEquals("    Your score: 2/3", mockUi.getLastDisplayedMessage());
