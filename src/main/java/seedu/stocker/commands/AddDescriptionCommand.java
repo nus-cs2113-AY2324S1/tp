@@ -7,7 +7,7 @@ public class AddDescriptionCommand extends Command {
 
     public static final String COMMAND_WORD = "addDescription";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new description for a specific drug "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new description for a specific drug. "
             + "Parameters: NAME, DESCRIPTION" + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " /n Panadol /desc Pain Relief ";
 

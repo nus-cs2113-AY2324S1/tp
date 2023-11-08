@@ -10,7 +10,7 @@ public class AddVendorSupplyCommand extends Command {
     public static final String COMMAND_WORD = "addVendorSupply";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a drug to a vendor's supply list. "
-            + "Parameters: VENDOR_NAME DRUG_NAME" + System.lineSeparator()
+            + "Parameters: VENDOR_NAME, DRUG_NAME" + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " /v Moderna /n Paracetamol";
 
     public static final String MESSAGE_SUCCESS = "New drug added to %1$s's supply list: %2$s";

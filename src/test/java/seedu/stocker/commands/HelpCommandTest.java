@@ -111,6 +111,42 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
+                + "addDescription: Adds a new description for a specific drug. Parameters: NAME, DESCRIPTION"
+                + System.getProperty("line.separator")
+                + "Example: addDescription /n Panadol /desc Pain Relief "
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
+                + "getDescription: Gets the description of a specific drug. Parameters: NAME"
+                + System.getProperty("line.separator")
+                + "Example: getDescription /n Panadol"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
+                + "listDescriptions: Lists all the descriptions for all drugs "
+                + System.getProperty("line.separator")
+                + "Example: listDescriptions"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
+                + "addVendorSupply: Adds a drug to a vendor's supply list. Parameters: VENDOR_NAME, DRUG_NAME"
+                + System.getProperty("line.separator")
+                + "Example: addVendorSupply /v Moderna /n Paracetamol"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
+                + "listVendorSupply: Lists the drugs supplied by a specific vendor. Parameters: VENDOR_NAME"
+                + System.getProperty("line.separator")
+                + "Example: listVendorSupply /v Moderna"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
+                + "findVendorSupply: Lists the vendors that supply a specific drug. Parameters: DRUG_NAME"
+                + System.getProperty("line.separator")
+                + "Example: findVendorSupply /n Paracetamol"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
                 + "bye: Exits the program."
                 + System.getProperty("line.separator")
                 + "Example: bye";
