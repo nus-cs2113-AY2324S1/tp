@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class ListThresholdCommand extends Command {
 
-    public static final String COMMAND_WORD = "listthreshold";
+    public static final String COMMAND_WORD = "listThreshold";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all drugs and their threshold levels."
             + System.lineSeparator()

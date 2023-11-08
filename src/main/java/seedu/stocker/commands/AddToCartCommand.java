@@ -8,7 +8,7 @@ import seedu.stocker.drugs.StockEntry;
  */
 public class AddToCartCommand extends Command {
 
-    public static final String COMMAND_WORD = "addtocart";
+    public static final String COMMAND_WORD = "addToCart";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD 
             + ": Adds a new drug to the current cart. "

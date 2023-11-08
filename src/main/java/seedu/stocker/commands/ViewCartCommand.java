@@ -8,7 +8,7 @@ package seedu.stocker.commands;
  */
 public class ViewCartCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewcart";
+    public static final String COMMAND_WORD = "viewCart";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": View the current cart items." + System.lineSeparator()
