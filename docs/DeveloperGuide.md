@@ -338,18 +338,32 @@ Example: `budget view`
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Our target user profile is ...
+- a working adult with a source of income
+- someone who dislike navigating graphic user interface
+- someone who can type fast
+- someone who cannot manage their finances such as income and expenses properly
+- unable to reach their financial goals
+- is slightly interested in the equity market
+
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Our financial planner application can help individuals manage their finances effectively and achieve their financial 
+goals. The purpose of such an application is to provide users with a range of tools and features to help them better 
+understand their financial situation. This will enable them to make more informed decisions, and plan for their future 
+financial well-being. The application will allow the user to keep track of their income, expenses and overall balance.
+It also lets user view their income and expenses using visualization tool to have a better view of their cash flow based
+on categories.  It also allows the user to set the budget for the month. It also allows users to add their financial
+goals to the wishlist. Furthermore, it allows users to track the stock market if they have interest in investing in 
+equities.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+|---------|----------|---------------------------|-------------------------------------------------------------|
+| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ## Non-Functional Requirements
 
