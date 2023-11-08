@@ -71,6 +71,11 @@ public class Parser implements ParserUtil {
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
 
+    private static final int MIN_QTY = 1;
+    private static final int MAX_QTY = 1000000;
+    private static final String GRAMS_UNIT = "g";
+    private static final String ML_UNIT = "ml";
+
 
     private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(\\d+)";
 
@@ -500,7 +505,7 @@ public class Parser implements ParserUtil {
     }
 
     private static boolean isValidUnit(String ingredientUnit) {
-        return ingredientUnit.equals("g") || ingredientUnit.equals("ml");
+        return ingredientUnit.equals(GRAMS_UNIT) || ingredientUnit.equals(ML_UNIT);
     }
 
     private static boolean isEmptyUnit(String ingredientUnit) {
@@ -508,7 +513,7 @@ public class Parser implements ParserUtil {
     }
 
     private static boolean isInvalidQty(int ingredientQty) {
-        return ingredientQty < 1 || ingredientQty > 1000000;
+        return ingredientQty < MIN_QTY || ingredientQty > MAX_QTY;
     }
 
     //@@author ziyi105

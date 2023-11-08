@@ -1,4 +1,4 @@
-  @startuml
+@startuml
 !define COMMAND class ListIngredientCommand
 !define UI class Ui
 !define MENU class Menu
