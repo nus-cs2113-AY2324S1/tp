@@ -2,6 +2,10 @@ add income /a 5000 /t salary /d part time job
 add income /a 123.12 /t allowance
 add expense /a 100 /t entertainment /d netflix
 add expense /a 123.21 /t shopping
+list
+list income
+list expense
+list recurring
 delete income 2
 delete 1
 delete expense 2

@@ -42,6 +42,7 @@ public abstract class LoadData {
 
     /**
      * Loads existing data from the storage file.
+     * Adds recurrences of a cashflow if applicable.
      *
      * @param filePath The file where the data is stored.
      * @param date The current date.
