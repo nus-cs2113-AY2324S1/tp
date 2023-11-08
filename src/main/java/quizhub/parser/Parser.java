@@ -523,6 +523,11 @@ public class Parser {
 //        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnMode) {
 //            return handleQuizQnModeExceptions(incorrectQnMode);
 //        }
+//        try{
+//            extractQuizQnType(userInput, commandStartTokens); // Extract the question type
+//        }catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnType){
+//            return handleQnTypeExceptions(incorrectQnType);
+//        }
 
         try {
             extractQuizMode(userInput, commandStartTokens);
@@ -533,13 +538,16 @@ public class Parser {
             return new CommandInvalid("There was an error parsing the start command: " + e.getMessage());
         }
 
-        // insert startQnType
         String startMode = commandStartTokens[0];
         String startDetails = commandStartTokens[1];
         String startQnMode = commandStartTokens[2];
-        String startQnType = commandStartTokens[3]; // try catch this
+        String startQnType = commandStartTokens[3];
         return new CommandStart(startMode, startDetails, startQnMode, startQnType);
     }
+
+//    private static Command handleQnTypeExceptions(Exception incorrectQnType) {
+//
+//    }
 
     private static void extractQuizQnType(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {

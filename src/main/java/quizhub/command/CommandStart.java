@@ -82,14 +82,12 @@ public class CommandStart extends Command{
             return;
         }
 
-        // Ensure 'startQnType' is without slashes (e.g., "short" or "mcq")
         if (!startQnType.equals("mix")) {
             matchedQuestions = matchedQuestions.stream()
                     .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
                             (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
-                    .collect(Collectors.toCollection(ArrayList::new)); // Use this to ensure an ArrayList is returned
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
-
 
         switch(startQnMode.toLowerCase()){
         case "random":
