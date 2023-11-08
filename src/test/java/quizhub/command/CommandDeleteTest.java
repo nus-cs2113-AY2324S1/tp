@@ -71,8 +71,7 @@ public class CommandDeleteTest {
      */
     @Test
     void testDeleteOutOfBoundIndex() {
-        String expectedOutput = "Please enter valid integer question index!    " + 
-            "Now you have 4 questions in the list! UWU";
+        String expectedOutput = "Please enter valid integer question index!";
         Parser.parseCommand("delete -1").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }

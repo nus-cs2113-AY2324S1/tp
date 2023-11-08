@@ -37,7 +37,7 @@ public class Ui {
             System.lineSeparator() +
             "    6. find /description [description] - displays all questions containing the specified description," +
             System.lineSeparator() +
-            "    7. find /description [module] - displays all questions that belong to the specified module," +
+            "    7. find /module [module] - displays all questions that belong to the specified module," +
             System.lineSeparator() +
             "    8. edit [question number] /description [description] - edits the description of the question " +
             "with the specified number," +
@@ -48,8 +48,8 @@ public class Ui {
             "    10. edit [question number] /option[number] [new value] - edits the option of the question with " +
             "the specified number (MCQ only)," +
             System.lineSeparator() +
-            "    11. start /[quiz mode] [start details] /[qn mode] - " +
-            "starts the quiz with option for /module or /all and /random or /normal," +
+            "    11. start /[quiz mode] [start details] /[qn mode] /[qn type] - " +
+            "starts the quiz with option for /module or /all and /random or /normal, and /short /mcq /mix types" +
             System.lineSeparator() +
             "    12. shuffle - shuffle quiz questions to a random order," +
             System.lineSeparator() +

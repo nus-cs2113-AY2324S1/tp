@@ -120,7 +120,7 @@ public class QuestionList {
                 qnType.equals(question.getQuestionType()) &&
                 module.equalsIgnoreCase(question.getModule())) {
                 if (showMessage) {
-                    Ui.displayMessageStatically(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
+                    Ui.displayMessageStatically(CommandShortAnswer.DUPLICATED_INPUT);
                 }
                 return true;
             }

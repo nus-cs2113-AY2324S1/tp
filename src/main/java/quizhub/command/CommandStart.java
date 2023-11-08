@@ -10,7 +10,6 @@ import quizhub.question.MultipleChoiceQn;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.stream.Collectors;
 
 /**
  * Command to Start the Quiz
@@ -26,7 +25,7 @@ public class CommandStart extends Command{
             "quiz questions :<";
     public static final String INVALID_QN_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
-            "/[quiz mode] [start details] /[qn mode]!";
+            "/[quiz mode] [start details] /[qn mode] /[qn type]!";
     public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! You gave too many arguments :<";
     public static final String EXIT_QUIZ_KEYWORD = "\\exitquiz";
     public static final String NO_QN_FOUND_MSG = "    No question found in list / no question found pertaining " +
@@ -71,7 +70,7 @@ public class CommandStart extends Command{
             return;
         }
 
-        filterQuestionsByType(matchedQuestions);
+        matchedQuestions = filterQuestionsByType(matchedQuestions);
         arrangeQuestions(matchedQuestions);
 
         questions.startQuiz(ui, matchedQuestions);
@@ -95,13 +94,20 @@ public class CommandStart extends Command{
         }
     }
 
-    private void filterQuestionsByType(ArrayList<Question> matchedQuestions) {
-        if (!startQnType.equals("mix")) {
-            matchedQuestions.retainAll(matchedQuestions.stream()
-                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
-                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
-                    .collect(Collectors.toList()));
+    private ArrayList<Question> filterQuestionsByType(ArrayList<Question> matchedQuestions) {
+        if (startQnType.equals("mix")) {
+            return matchedQuestions;
         }
+        ArrayList<Question> filteredQuestions = new ArrayList<>();
+        for (Question question : matchedQuestions) {
+            if (startQnType.equals("short") && question instanceof ShortAnsQn) {
+                filteredQuestions.add(question);
+            }
+            if (startQnType.equals("mcq") && question instanceof MultipleChoiceQn) {
+                filteredQuestions.add(question);
+            }
+        }
+        return filteredQuestions;
     }
 
     private void arrangeQuestions(ArrayList<Question> matchedQuestions) {
