@@ -85,8 +85,8 @@ public class EventDirectory {
     /**
      * return directory of flashcard txt file
      * for version 2
-     * @param path
-     * @return
+     * @param path is used for storing file path
+     * @return is used to get the path to the file
      */
     public String eventDirectory(String path) {
         return this.path + path;
