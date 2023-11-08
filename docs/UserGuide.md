@@ -35,7 +35,8 @@ from all fields of study.
 ## Features
 
 1. [Helper command](#getting-help-on-using-the-app-help)
-2. [Add question/answer and group them in modules/difficulty](#adding-short-answer-questions-and-their-answers-short)
+2. [Add Short Answer question with modules and difficulty](#adding-short-answer-questions-and-their-answers-short)
+3. [Add MCQ question with modules and difficulty](#adding-multiple-choice-questions-and-their-answers-mcq)
 3. [Store or Edit the question/answer in local storage](#store-and-edit-question-pool-using-the-question-file)
 4. [Delete question/answer](#delete-questions-delete)
 5. [Find question/answer via question's description or via module name](#find-questionanswermodule-find)
@@ -55,7 +56,7 @@ Example of usage:
   **Output**: The list of commands, similar to the [Command Summary](#command-summary) <br>
 
 Notes:
-* Ver 2.0 will only list commands. Future versions will include autofilling and scrolling
+* Ver 2.1 will only list commands. Future versions will include autofilling and scrolling
   (multiple pages of the help menu)
 
 ### Adding short-answer questions and their answers: `short`
@@ -65,7 +66,7 @@ difficulty level.
 Format: `short [question]/[answer]/[module]/[difficulty]`
 * The difficulty level should only be of `easy`, `normal`, and `hard`
 * The ` / ` character should be replaced ` \slash ` keyword instead.
-* The ` | ` character is not allowed and will be removed if present in any fields.
+* The ` pipe ` character is not allowed and will be removed if present in any fields.
 
 Example of usage:
 * **Command**: `short What is the value of Pi to 2 decimal places?/3.14/math/easy` <br>
@@ -86,6 +87,32 @@ Example of usage:
 Notes:
 * If either the question or answer is left blank, the app will prompt you to re-enter the question-answer set,
   the app does not support blank questions/answers
+
+### Adding multiple-choice questions and their answers: `mcq`
+
+Adds a new mcq question and its answer to the question and answer bank along with the assigned module and
+difficulty level.
+
+Format: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
+
+* The difficulty level should only be of `easy`, `normal`, and `hard`
+* The ` / ` character should be replaced ` \slash ` keyword instead.
+* The ` pipe ` character is not allowed and will be removed if present in any fields.
+
+* **Command**: `mcq what is the value of pi?/2.71/9.81/3.14/0/3/Maths/Easy` <br>
+  **Output**: <br>
+  ```
+  I have added the following question OwO:
+  [M][ ] what is the value of pi? / 2.71 / 9.81 / 3.14 / 0 / 3 | Maths | EASY
+  Now you have 5 questions in the list! UWU
+  ```
+* **Command**: `mcq is 5 \slash 3 rational?/yes/no/maybe/all of the above/1/Maths/easy` <br>
+  **Output**: <br>
+  ```
+  I have added the following question OwO:
+  [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | Maths | EASY
+  Now you have 6 questions in the list! UWU
+  ```
 
 ### List Questions `list`
 List all the questions from the question and answer bank in the storage.
@@ -160,7 +187,7 @@ Format:
 1. Use `edit [question number] /description [newDescription]` to edit description
 2. Use `edit [question number] /answer [newAnswer]` to edit answer
 3. The ` / ` character should be replaced ` \slash ` keyword instead
-4. The ` | ` character is not allowed and will be removed if present in any fields
+4. The ` pipe ` character is not allowed and will be removed if present in any fields
 
 Examples of usage:
 * **Command**: `edit 1 /description change description!!!` <br>
@@ -286,13 +313,18 @@ computer.
 
 1. `help` - shows the list of commands you can use,
 2. `short [question]/[answer]/[module]/[difficulty]` - adds a short answer question and its answer to the list,
-3. `list` - shows the list of questions and answers,
-4. `delete [question number]` - deletes the question and answer at the specified number,
-5. `find /description [question description]` - displays all questions containing the description,
-6. `find /module [question module]` - displays all questions that belong to the specified module,
-7. `edit [question number] /description [description]` - edits the description of the question with the specified number,
-8. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number,
-9. `start /[quiz mode] [start details] /[qn mode]` - starts the quiz with option for /module or /all and /random or /normal,
-10. `shuffle` - shuffle quiz questions to a random order,
-11. `markdiff [question number] /[question difficulty]` - sets the difficulty of question with the specified number,
-12. `bye` - exits the program
+3. `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]` - adds a multiple-choice question and its answer to the list
+4. `list` - shows the list of questions and answers,
+5. `delete [question number]` - deletes the question and answer at the specified number,
+6. `find /description [description]` - displays all questions containing the specified description,
+7. `find /description [module]` - displays all questions that belong to the specified module,
+8. `edit [question number] /description [description]` - edits the description of the question with the specified
+   number,
+9. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number,
+10. `edit [question number] /option[number] [new value]` - edits the option of the question with the specified number (
+    MCQ only),
+11. `start /[quiz mode] [start details] /[qn mode]` - starts the quiz with option for /module or /all and /random or
+    /normal,
+12. `shuffle` - shuffle quiz questions to a random order,
+13. `markdiff [question number] /[question difficulty]` - sets the difficulty of question with the specified number,
+14. `bye` - exits the program
