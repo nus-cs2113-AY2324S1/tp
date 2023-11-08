@@ -16,8 +16,7 @@ import java.util.Scanner;
  * question data is stored, read and updated.
  */
 public class Storage {
-    private Ui ui;
-    private File dataFile;
+    private final File dataFile;
     /**
      * Creates a new storage for storing question data.
      *
@@ -132,7 +131,7 @@ public class Storage {
                 failedQuestions++;
             }
         }
-        ui.displayMessage("    " + failedQuestions + " questions parsed unsuccessfully from storage file\n");
+        Ui.displayMessageStatically("    " + failedQuestions + " questions parsed unsuccessfully from storage file\n");
     }
     /**
      * Build a new question list from data stored in hard disk.
@@ -143,10 +142,10 @@ public class Storage {
     public void buildCurrentListFromFile(QuestionList questions){
         try {
             if (dataFile.createNewFile()) {
-                ui.displayMessage("    Question-list created: " + dataFile.getName());
+                Ui.displayMessageStatically("    Question-list created: " + dataFile.getName());
             }
         } catch(NullPointerException | IOException invalidFilePath) {
-            ui.displayMessage("    " + invalidFilePath.getMessage());
+            Ui.displayMessageStatically("    " + invalidFilePath.getMessage());
         }
         try {
             Scanner fileScanner = new Scanner(dataFile);
@@ -163,7 +162,7 @@ public class Storage {
             parseQuestionsFromStrings(rawQuestions, questions);
             fileScanner.close();
         } catch(NullPointerException | IOException  invalidFilePath) {
-            ui.displayMessage("    " + invalidFilePath.getMessage());
+            Ui.displayMessageStatically("    " + invalidFilePath.getMessage());
         }
     }
     /**
@@ -175,10 +174,10 @@ public class Storage {
     public void loadData(QuestionList questions) {
         buildCurrentListFromFile(questions);
         if (questions.getQuestionListSize() == 0) {
-            ui.displayMessage("    You currently have no saved questions uWu");
+            Ui.displayMessageStatically("    You currently have no saved questions uWu");
             return;
         }
-        ui.displayMessage("    You currently have the following questions uWu");
+        Ui.displayMessageStatically("    You currently have the following questions uWu");
         questions.printQuestionList();
     }
     /**
@@ -197,8 +196,8 @@ public class Storage {
                 writeToFile(dataFile.getPath(), question.toSerializedString(), true);
             }
         } catch(NullPointerException | IOException invalidFilePath) {
-            ui.displayMessage("    " + invalidFilePath.getMessage());
-            ui.showLine();
+            Ui.displayMessageStatically("    " + invalidFilePath.getMessage());
+            Ui.showLine();
         }
     }
 }

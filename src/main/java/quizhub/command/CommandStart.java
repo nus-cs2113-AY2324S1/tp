@@ -61,8 +61,18 @@ public class CommandStart extends Command{
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert questions != null && ui != null && dataStorage != null;
 
-        ArrayList<Question> matchedQuestions;
+        ArrayList<Question> matchedQuestions = new ArrayList<>();
+        handleStartMode(ui, questions, matchedQuestions);
+        if (!startQnType.equals("mix")) {
+            matchedQuestions = matchedQuestions.stream()
+                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
+                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
+        handleQnMode(ui, questions, matchedQuestions);
+    }
 
+    private void handleStartMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
         switch (startMode.toLowerCase()) {
         case "module":
             assert startDetails != null;
@@ -78,17 +88,10 @@ public class CommandStart extends Command{
             matchedQuestions = questions.getAllQns();
             break;
         default:
-            ui.displayMessage("    Please enter a valid quiz mode :<");
-            return;
+            ui.displayMessage(INVALID_QUIZ_MODE_MSG);
         }
-
-        if (!startQnType.equals("mix")) {
-            matchedQuestions = matchedQuestions.stream()
-                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
-                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
-
+    }
+    private void handleQnMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
         switch(startQnMode.toLowerCase()){
         case "random":
             Collections.shuffle(matchedQuestions); // shuffles matched Questions
@@ -98,7 +101,7 @@ public class CommandStart extends Command{
             questions.startQuiz(ui, matchedQuestions);
             break;
         default:
-            ui.displayMessage("    Please enter a valid quiz mode :<");
+            ui.displayMessage(INVALID_QN_MODE_MSG);
         }
     }
 }
