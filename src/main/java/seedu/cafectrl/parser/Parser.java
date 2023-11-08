@@ -496,7 +496,7 @@ public class Parser implements ParserUtil {
     }
 
     private static boolean isInvalidQty(int ingredientQty) {
-        return ingredientQty < 1;
+        return ingredientQty < 1 || ingredientQty > 1000000;
     }
 
     //@@author ziyi105

@@ -59,7 +59,7 @@ public class ErrorMessages {
             + "Ingredient format: ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example: ingredient/milk qty/200ml, ingredient/chicken qty/100g";
-    public static final String INVALID_INGREDIENT_QTY = "Invalid quantity! Please enter a valid quantity :)";
+    public static final String INVALID_INGREDIENT_QTY = "Quantity out of range! Quantity range is 1 to 1000000 :)";
     public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: "
             + "Incorrect format for the show_sale command.\n";
     public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer "
