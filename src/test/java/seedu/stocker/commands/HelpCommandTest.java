@@ -87,6 +87,12 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
+                + "deleteVendor: Deletes a vendor from the vendors list. Parameter: NAME"
+                + System.getProperty("line.separator")
+                + "Example: deleteVendor Moderna"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
                 + "listVendors: List all vendor information that is being tracked by the system."
                 + System.getProperty("line.separator")
                 + "Example: listVendors"

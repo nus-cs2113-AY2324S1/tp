@@ -20,6 +20,10 @@ public class VendorsList {
         vendorArrayList.add(vendor);
     }
 
+    public void deleteVendor(Vendor vendor){
+        vendorArrayList.remove(vendor);
+    }
+
     /**
      * Gets details of all vendors
      * @return List vendor

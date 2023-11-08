@@ -28,6 +28,7 @@ import seedu.stocker.commands.ListDescriptionsCommand;
 import seedu.stocker.commands.AddVendorSupplyCommand;
 import seedu.stocker.commands.FindVendorSupplyCommand;
 import seedu.stocker.commands.ListVendorSupplyCommand;
+import seedu.stocker.commands.DeleteVendorCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
@@ -129,6 +130,9 @@ public class Parser {
         case AddVendorCommand.COMMAND_WORD:
             return prepareAddVendorCommand(arguments);
 
+        case DeleteVendorCommand.COMMAND_WORD:
+            return prepareDeleteVendorCommand(arguments);
+
         case ShowStockLevelCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
                 return new ShowStockLevelCommand();
@@ -220,7 +224,6 @@ public class Parser {
     }
 
 
-
     /**
      * Checks if the given date string has a valid "dd/mm/yyyy" format.
      *
@@ -283,13 +286,13 @@ public class Parser {
             String keyword = findArgs[1];
             if (criterion.equals("/n") || criterion.equals("/s")) {
                 return new FindCommand(keyword, criterion);
-            } else if (criterion.equals("/d")){
+            } else if (criterion.equals("/d")) {
                 if (isValidDateFormat(keyword)) {
                     return new FindCommand(keyword, criterion);
                 } else {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, FindCommand.MESSAGE_USAGE));
                 }
-            } else{
+            } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
         } else {
@@ -300,10 +303,20 @@ public class Parser {
     private Command prepareAddVendorCommand(String args) {
         String[] vendorArgs = args.split(" ", 1);
         String vendorName = vendorArgs[0];
-        if (vendorName.equals(null) || vendorName.equals("") || vendorName.equals(" ")) {
+        if (vendorName == null || vendorName.isEmpty() || vendorName.equals(" ")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
         }
         return new AddVendorCommand(vendorName);
+    }
+
+    private Command prepareDeleteVendorCommand(String args) {
+        String[] vendorArgs = args.split(" ", 1);
+        String vendorName = vendorArgs[0];
+        if (vendorName == null || vendorName.isEmpty() || vendorName.equals(" ")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteVendorCommand.MESSAGE_USAGE));
+        }
+        return new DeleteVendorCommand(vendorName);
     }
 
     private Command prepareSetThresholdCommand(String args) {
