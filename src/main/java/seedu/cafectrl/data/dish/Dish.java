@@ -42,15 +42,14 @@ public class Dish {
     }
 
     //@@author ziyi105
-
     /**
      * Compare the original price and new price
-     * @param newPrice
-     * @return
+     * @param otherPrice price value to be compared with
+     * @return 0 if both price values are the same, -1 if the this.price is lower, +1 otherwise
      */
-    public int comparePrice(float newPrice) {
+    public int comparePrice(float otherPrice) {
         String formattedPrice = this.dollarValue.format(price);
-        String formattedNewPrice = this.dollarValue.format(newPrice);
+        String formattedNewPrice = this.dollarValue.format(otherPrice);
         return formattedPrice.compareTo(formattedNewPrice);
     }
 }

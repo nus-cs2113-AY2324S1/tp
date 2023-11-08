@@ -29,6 +29,4 @@ public class Chef {
             ui.showToUser(e.getMessage());
         }
     }
-
-
 }

@@ -8,6 +8,9 @@ public class CurrentDate {
     public CurrentDate() {
         currentDay = 0;
     }
+    public CurrentDate(int day) {
+        currentDay = day - 1;
+    }
     public CurrentDate(Sales sales) {
         setDate(sales);
     }
