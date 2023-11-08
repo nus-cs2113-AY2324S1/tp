@@ -4,15 +4,15 @@
 
 package "" as f {
 Class Ui #blue
-Class Parser #Magenta
-Class Model #DeepPink
-Class Main #PowderBlue
-Class Storage #SpringGreen
+Class Parser #DarkMagenta
+Class Model #Crimson
+Class Main #LightSkyBlue
+Class Storage #Green
 Class Command #Grey
 }
 
-Class User #red
-Class "<$documents>" as File #Lime
+Class User #IndianRed
+Class "<$documents>" as File #DarkOliveGreen
 
 User -down-> Ui
 Ui --> Parser

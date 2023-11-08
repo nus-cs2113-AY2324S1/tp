@@ -355,7 +355,7 @@ Example: `budget view`
 
 * Should work on main OS (Windows, Linux, Mac) that has Java 11 installed.
 * This app is meant for a single user.
-* This app targeted towards users with an above-average typing speed.
+* This app is targeted towards users with an above-average typing speed.
 
 ## Glossary
 
