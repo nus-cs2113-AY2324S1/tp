@@ -42,10 +42,6 @@ public class MultipleChoiceQn extends Question {
      */
     public String getAnswerString() {
         switch(this.answer) {
-//        case 1: return option1;
-//        case 2: return option2;
-//        case 3: return option3;
-//        case 4: return option4;
         case 1: return "1";
         case 2: return "2";
         case 3: return "3";
@@ -56,8 +52,7 @@ public class MultipleChoiceQn extends Question {
 
     @Override
     public String getCorrectAnswer() {
-        // Implement this method to return the answer string for a multiple-choice question
-        return this.getAnswerString(); // Assuming getAnswerString() returns the answer in the correct format
+        return this.getAnswerString();
     }
 
     /**
