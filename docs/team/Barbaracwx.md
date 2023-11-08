@@ -22,6 +22,8 @@ GUI apps.
     * What it does: Provides a list of threshold levels for all drugs.
 6) **Alert function when a drug is below the set threshold level**
     * What it does: Sends alerts when a drug's quantity falls below the user-defined threshold.
+7) **Delete Vendor**
+    * What it does: Deletes a vendor from the vendors list.
 
 
 -**Classes implemented**
@@ -29,6 +31,7 @@ GUI apps.
 * `ShowStockLevelCommand`
 * `SetThresholdCommand`
 * `ListThresholdCommand`
+* `DeleteVendorCommand`
 
 -**Contributions to the UG**
 * Barbara added documentation for the following sections of
