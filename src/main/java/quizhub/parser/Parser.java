@@ -26,7 +26,7 @@ public class Parser {
     private static QuestionList questions;
 
     public Parser(QuestionList questions) {
-        this.questions = questions;
+        Parser.questions = questions;
     }
 
     /**
@@ -76,8 +76,8 @@ public class Parser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException invalidIndex) {
             return new CommandInvalid(Ui.INVALID_INTEGER_INDEX_MSG);
         } catch (Exception error) {
-            System.out.println(error.getMessage());
-            return new CommandInvalid(Ui.INVALID_COMMAND_FEEDBACK);
+            return new CommandInvalid(error.getMessage() + System.lineSeparator()
+                    + Ui.INVALID_COMMAND_FEEDBACK);
         }
     }
 

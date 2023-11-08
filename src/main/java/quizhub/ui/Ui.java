@@ -59,8 +59,6 @@ public class Ui {
             "    14. bye - exits the program";
     public static final String INVALID_INTEGER_INDEX_MSG = "    Please enter valid integer question index!";
 
-    public static final String MISSING_QUESTION_NUMBER_MSG = "    Ono! Please enter valid question number *sobs*";
-
     public static final String INVALID_QUESTION_DIFFICULTY_MSG = "    Ono! We only support easy, normal and hard " +
             "difficulty levels" + System.lineSeparator() + "    No changes will be made to your difficulty level";
     private final Scanner input = new Scanner(System.in);  // Create a Scanner object
