@@ -184,8 +184,8 @@ public class Ui {
     }
 
     public void displayFinalScore(int correctAnswers, int totalQuestions) {
-        displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
         displayMessage("    Quiz completed!");
+        displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
     }
 }
 

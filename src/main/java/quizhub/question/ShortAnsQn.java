@@ -89,4 +89,18 @@ public class ShortAnsQn extends Question {
         }
         return IDENTIFIER + " | " + isDone + " | " + this.getQuestionDescription() + System.lineSeparator();
     }
+
+    @Override
+    public String checkAnswerValidity(String userAnswer) {
+        if (userAnswer.isEmpty()) {
+            return Question.ANSWER_BLANK_MSG;
+        }
+        return "valid";
+    }
+
+    @Override
+    public boolean checkAnswerCorrectness(String validatedAnswer) {
+        validatedAnswer = validatedAnswer.replace("/", "\\slash");
+        return validatedAnswer.equalsIgnoreCase(this.answer);
+    }
 }

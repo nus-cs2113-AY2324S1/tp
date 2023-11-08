@@ -4,6 +4,9 @@ package quizhub.question;
  */
 public class Question {
     public static final String QN_UNCHANGED_MSG = "    No changes made to question";
+    public static final String ANSWER_BLANK_MSG = "    The question cannot be left blank, you may use \\exitquiz" +
+            " to end the ongoing quiz.";
+    public static final String VALID_ANSWER_KEYWORD = "valid";
     public enum QnType {SHORTANSWER, MULTIPLECHOICE, DEFAULT};
     public enum QnDifficulty {EASY, HARD, NORMAL, INVALID};
     private QnType qnType;
@@ -166,5 +169,12 @@ public class Question {
 
     public String getCorrectAnswer() {
         return "null";
+    }
+
+    public boolean checkAnswerCorrectness(String userAnswer) {
+        return true;
+    }
+    public String checkAnswerValidity(String validatedAnswer) {
+        return null;
     }
 }

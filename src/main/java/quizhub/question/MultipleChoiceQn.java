@@ -2,6 +2,7 @@ package quizhub.question;
 
 public class MultipleChoiceQn extends Question {
     public static final String IDENTIFIER = "M";
+    public static final String INVALID_CHOICE_MSG = "    Invalid response! Please enter a number between 1 and 4.";
     private String option1;
     private String option2;
     private String option3;
@@ -125,5 +126,27 @@ public class MultipleChoiceQn extends Question {
             isDone = "undone";
         }
         return IDENTIFIER + " | " + isDone + " | " + this.getQuestionDescription() + System.lineSeparator();
+    }
+
+    @Override
+    public String checkAnswerValidity(String userAnswer) {
+        if (userAnswer.isEmpty()) {
+            return Question.ANSWER_BLANK_MSG;
+        }
+        int answerIndex;
+        try {
+            answerIndex = Integer.parseInt(userAnswer);
+        } catch (NumberFormatException e) {
+            return INVALID_CHOICE_MSG;
+        }
+        if (answerIndex < 1 || answerIndex > 4) {
+            return INVALID_CHOICE_MSG;
+        }
+        return "valid";
+    }
+
+    @Override
+    public boolean checkAnswerCorrectness(String userAnswer) {
+        return Integer.parseInt(userAnswer) == this.answer;
     }
 }

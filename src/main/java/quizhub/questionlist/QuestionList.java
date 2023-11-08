@@ -1,6 +1,7 @@
 package quizhub.questionlist;
 
 import quizhub.command.CommandShortAnswer;
+import quizhub.command.CommandStart;
 import quizhub.question.MultipleChoiceQn;
 import quizhub.question.Question;
 import quizhub.question.ShortAnsQn;
@@ -384,8 +385,7 @@ public class QuestionList {
 
     public void startQuiz(Ui ui, ArrayList<Question> questions) {
         if (questions.isEmpty()) {
-            ui.displayMessage("    No question found in list / no question found pertaining to module. " +
-                    "Add questions before starting the quiz");
+            ui.displayMessage(CommandStart.NO_QN_FOUND_MSG);
             return;
         }
 
@@ -396,15 +396,15 @@ public class QuestionList {
         for (int i = 0; i < totalQuestions; i++) {
             Question question = questions.get(i);
             ui.displayQuestion(question, i + 1, totalQuestions);
-            String userAnswer = getUserAnswer(ui, question);
-
-            if (userAnswer.equalsIgnoreCase("\\exitquiz")) {
+            
+            String validatedAnswer = getAndValidateUserAnswer(ui, question);
+            if (validatedAnswer.equals(CommandStart.EXIT_QUIZ_KEYWORD)) {
                 ui.displayMessage("    Exiting the quiz...");
                 ui.displayFinalScore(correctAnswersCount, totalQuestions);
                 return; // Exit the quiz if the user types "\\exitquiz"
             }
 
-            if (checkAnswer(question, userAnswer)) {
+            if (question.checkAnswerCorrectness(validatedAnswer)) {
                 ui.displayMessage("    Correct!");
                 correctAnswersCount++;
             } else {
@@ -416,45 +416,30 @@ public class QuestionList {
         ui.displayFinalScore(correctAnswersCount, totalQuestions);
     }
 
-    private String getUserAnswer(Ui ui, Question question) {
+    /**
+     * Fetches and validates the user answer in a loop
+     * @author yeo-menghan
+     *
+     * @param ui The ui object for displaying messages
+     * @param question The question object related to the answer
+     *
+     * @return The validated answer, or "\exitquiz"
+     * */
+    private String getAndValidateUserAnswer(Ui ui, Question question) {
         String userAnswer;
-        boolean isValidAnswer;
+        String isValidAnswer;
         do {
             ui.displayMessageSameLine("  Your Answer: ");
             userAnswer = ui.getUserInput().strip();
-            isValidAnswer = validateAnswer(ui, userAnswer, question);
-        } while (!isValidAnswer);
+            if (userAnswer.equalsIgnoreCase(CommandStart.EXIT_QUIZ_KEYWORD)) {
+                return userAnswer;
+            }
+            isValidAnswer = question.checkAnswerValidity(userAnswer);
+            if (!isValidAnswer.equals(Question.VALID_ANSWER_KEYWORD)) {
+                ui.displayMessage(isValidAnswer);
+            }
+        } while (!isValidAnswer.equals(Question.VALID_ANSWER_KEYWORD));
 
         return userAnswer;
-    }
-
-    private boolean validateAnswer(Ui ui, String userAnswer, Question question) {
-        if (userAnswer.isEmpty()) {
-            ui.displayMessage("    The question cannot be left blank.");
-            return false;
-        }
-
-        return validateMCQAnswer(ui, userAnswer, question);
-    }
-
-    private boolean validateMCQAnswer(Ui ui, String userAnswer, Question question) {
-        if (question instanceof MultipleChoiceQn) {
-            try {
-                int answerNumber = Integer.parseInt(userAnswer);
-                if (answerNumber < 1 || answerNumber > 4) {
-                    ui.displayMessage("    Please enter a valid choice between 1 and 4.");
-                    return false;
-                }
-            } catch (NumberFormatException e) {
-                ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean checkAnswer(Question question, String userAnswer) {
-        String correctAnswer = question.getCorrectAnswer();
-        return userAnswer.equalsIgnoreCase(correctAnswer);
     }
 }
