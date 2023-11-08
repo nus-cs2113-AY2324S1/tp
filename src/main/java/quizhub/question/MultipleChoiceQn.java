@@ -10,11 +10,11 @@ public class MultipleChoiceQn extends Question {
 
     /**
      * Creates a new question of type MULTIPLECHOICE
-     * @param option1
-     * @param option2
-     * @param option3
-     * @param option4
-     * @param answer
+     * @param option1 1st answer choice
+     * @param option2 1st answer choice
+     * @param option3 1st answer choice
+     * @param option4 1st answer choice
+     * @param answer the correct answer index
      */
     public MultipleChoiceQn (String description, String option1, String option2,
                              String option3, String option4, int answer,
@@ -28,7 +28,7 @@ public class MultipleChoiceQn extends Question {
     }
 
     /**
-     * Get the Question's answerindex in String format
+     * Get the Question's answer index in String format
      * @return Integer from 1 to 4 inclusive
      */
     @Override
@@ -89,7 +89,6 @@ public class MultipleChoiceQn extends Question {
         default:
             break;
         }
-        System.out.println("    Roger that! I have edited the following question >w< !");
     }
 
     @Override

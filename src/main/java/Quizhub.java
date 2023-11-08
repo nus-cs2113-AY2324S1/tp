@@ -12,10 +12,10 @@ import quizhub.storage.Storage;
  */
 public class Quizhub {
     private static final String FILE_PATH = "questionlist.txt";
-    private Ui ui;
+    private final Ui ui;
     private Storage dataStorage;
     private QuestionList questions;
-    private Parser parser;
+    private final Parser parser;
     /**
      * Initiates the program with the necessary components.
      *
@@ -40,7 +40,7 @@ public class Quizhub {
         while(!toExit){
             String fullCommand = ui.getUserInput();
             ui.showLine();
-            Command command = parser.parseCommand(fullCommand);
+            Command command = Parser.parseCommand(fullCommand);
             toExit = command.toExit();
             command.executeCommand(ui, dataStorage, questions);
             if(!toExit){
