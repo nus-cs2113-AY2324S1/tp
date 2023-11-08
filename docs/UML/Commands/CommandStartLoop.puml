@@ -1,0 +1,41 @@
+@startuml
+!theme plain
+hide footbox
+Title: Command Start Sequence Diagram
+
+actor User
+participant Ui as ":QuizHub"
+participant CommandStart
+participant QuestionList
+
+User -> Ui : Chooses "start" with settings
+activate Ui
+create CommandStart
+Ui -> CommandStart
+activate CommandStart
+CommandStart --> Ui
+deactivate CommandStart
+
+loop questions not done | yet to /exitCommand
+    CommandStart -> QuestionList : Look for questions with condition
+    activate CommandStart
+    activate QuestionList
+    QuestionList --> CommandStart : Return question
+    deactivate QuestionList
+    CommandStart --> Ui : Return Next Question
+    Ui --> User : Next Question
+    User -> Ui : Answers Question
+    Ui -> CommandStart : Check Answer
+    CommandStart --> Ui
+    deactivate CommandStart
+    Ui --> User : Feedback
+    deactivate Ui
+    opt
+        User -> Ui : /exitCommand
+        Ui -> CommandStart : Exit
+destroy CommandStart
+    end
+end
+destroy CommandStart
+
+@enduml

@@ -167,6 +167,16 @@ exception will be thrown and handled by printing an error message to the CLI.
 
 ## Command Components
 
+The following is a detailed sequence diagram demonstrating how commands are parsed. 
+This may differ slightly for different commands.
+
+![](./UML/Commands/commandOverview.png)
+
+Essentially, the parser will create and return a Command object with appropriate 
+arguments to QuizHub, where it will be executed. When the Command executes, it 
+interacts with the QuestionList object to read / manipulate a Question /
+the QuestionList itself.
+
 ### Help Command - Display Commands
 
 When executed, this command will execute a standard Final String containing all 
@@ -196,8 +206,13 @@ to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
-![](./UML/Commands/Initial State.png)
 ![](./UML/Commands/commandAddState.png)
+
+### MCQ Command - Add Multiple Choice Question to the Quiz
+
+// TODO: Complete description for MCQ
+
+![](./UML/Commands/commandMCQ.png)
 
 ### List Command - Show all Questions with Index
 
@@ -258,8 +273,6 @@ The CommandEdit class includes the following key components:
 
 #### Implementation of Edit Command
 
-![commandEditSequence.png](UML%2FCommands%2FcommandEditSequence.png)
-
 ![commandEditStages.png](UML%2FCommands%2FcommandEditStages.png)
 
 Here are the key steps for implementing this class:
@@ -279,6 +292,10 @@ involves invoking methods in the QuestionList and Question classes to update the
 - **Error Handling**: Handle any exceptions or errors that may occur during the edit operation and provide appropriate 
 feedback to the user.
 
+![commandEditObjectDiagram.png](./UML/Commands/commandEditObjectDiagram.png)
+![commandEditObjectDiagram2.png](./UML/Commands/commandEditObjectDiagram2.png)
+![commandEditObjectDiagram3.png](./UML/Commands/commandEditObjectDiagram3.png)
+
 ### Start Command - Start Quiz
 
 #### Brief Description of Start Command
@@ -287,9 +304,9 @@ The start quiz feature allows users to start quizzing themselves with customizab
 to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
 - `start /[quiz mode] [start details] /[qn mode]`
 
-#### Class Structure of Start Command
+#### Sequence Diagram of Start Command
 
-![commandStartSequence.png](UML%2FCommands%2FcommandStartSequence.png)
+![commandStartLoop.png](./UML/Commands/commandStartLoop.png)
 
 #### Implementation of Start Command
 
@@ -321,11 +338,10 @@ The Shuffle command allows the user to shuffle quiz questions to a random order 
 - `shuffle` 
 
 #### Class Structure of Shuffle Command
-![commandShuffleSequence.png](UML%2FCommands%2FcommandShuffleSequence.png)
 
 The "shuffle" command in QuizHub is used to shuffle the order of questions within a question list. 
 This command provides users with the ability to randomize the sequence of questions, which can be useful for 
-creating randomized quizzes or study sessions. 
+creating randomized quizzes or reorganising notes permanently.
 
 ![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML%2FCommands%2FShuffleToStorage-Shuffle_to_Storage_Flow.png)
 
@@ -352,7 +368,7 @@ The CommandMarkDifficulty class includes the following key components:
 
 #### Implementation of Markdiff Command
 Developers can use the `CommandMarkDifficulty` class as a template for handling difficulty marking commands in the 
-quizhub application. Here are the key steps for implementing this class:
+QuizHub application. Here are the key steps for implementing this class:
 
 - **Parsing User Input**: Parse the user input to extract the question number and the specified difficulty level.
 
@@ -361,7 +377,7 @@ information.
 
 - **Marking Difficulty**: Implement the logic to execute the operation of marking the question with the specified 
 difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
-uestion's difficulty.
+Question's difficulty.
 
 - **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
 `dataStorage.updateData(questions)` method is used to save changes to the question list.

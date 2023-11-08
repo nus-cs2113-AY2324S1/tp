@@ -1,19 +1,16 @@
 !include Style.puml
 @startuml
-title After Command "short qn4/ans4/module/difficulty"
+title After Command "short qn1/ans1/cs2113/easy"
 
-object ":QuestionList" as QuestionList
+object "__:QuestionList__" as QuestionList
 
-object ":Question1" as Question1
+object "__:Question1__" as Question1 {
+    qnType = QnType.SHORTANSWER
+    description = "qn1"
+    answer = "ans1"
+    module = "cs2113"
+    difficulty = "EASY"
+}
 
-object ":Question2" as Question2
-
-object ":Question3" as Question3
-
-object ":Question4" as Question4
-
-QuestionList -->  Question1
-QuestionList --> Question2
-QuestionList --> Question3
-QuestionList --> Question4 : Add new question
+QuestionList --> Question1 : Add new question
 @enduml
