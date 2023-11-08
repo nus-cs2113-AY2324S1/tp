@@ -1,27 +1,6 @@
 package fittrack.parser;
 
-import fittrack.command.AddMealCommand;
-import fittrack.command.AddStepsCommand;
-import fittrack.command.AddWorkoutCommand;
-import fittrack.command.BmiCommand;
-import fittrack.command.CaloriesBurntCommand;
-import fittrack.command.CaloriesConsumedCommand;
-import fittrack.command.CheckRecommendedWeightCommand;
-import fittrack.command.Command;
-import fittrack.command.CommandResult;
-import fittrack.command.DeleteMealCommand;
-import fittrack.command.DeleteWorkoutCommand;
-import fittrack.command.EditProfileCommand;
-import fittrack.command.ExitCommand;
-import fittrack.command.FindMealCommand;
-import fittrack.command.FindWorkoutCommand;
-import fittrack.command.HelpCommand;
-import fittrack.command.InvalidCommand;
-import fittrack.command.TotalStepsCommand;
-import fittrack.command.ViewMealCommand;
-import fittrack.command.ViewProfileCommand;
-import fittrack.command.ViewStepsCommand;
-import fittrack.command.ViewWorkoutCommand;
+import fittrack.command.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +17,8 @@ public class CommandParser {
     public static final String ALL_COMMAND_WORDS = "help, exit,\n" +
             "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
             "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
-            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt";
+            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt,\n" +
+            "addsteps, deletesteps, viewsteps, totalsteps";
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
@@ -142,6 +122,8 @@ public class CommandParser {
             return new TotalStepsCommand(commandLine);
         case ViewStepsCommand.COMMAND_WORD:
             return new ViewStepsCommand(commandLine);
+        case DeleteStepsCommand.COMMAND_WORD:
+            return new DeleteStepsCommand(commandLine);
         default:
             return new InvalidCommand(commandLine);
 
