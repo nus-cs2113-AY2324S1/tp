@@ -78,6 +78,9 @@ public class Parser {
         case GetDescriptionCommand.COMMAND_WORD:
             return prepareGetDescriptionCommand(arguments);
 
+        case ListDescriptionsCommand.COMMAND_WORD:
+            return prepareListDescriptionsCommand(arguments);
+
         case AddVendorSupplyCommand.COMMAND_WORD:
             return prepareAddVendorSupplyCommand(arguments);
 
@@ -164,14 +167,6 @@ public class Parser {
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListThresholdCommand.MESSAGE_USAGE));
-            }
-
-        case ListDescriptionsCommand.COMMAND_WORD:
-            if (arguments.isEmpty()) {
-                return new ListDescriptionsCommand();
-            } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListDescriptionsCommand.MESSAGE_USAGE));
             }
 
         default:
@@ -341,9 +336,9 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*) /desc (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 2) {
-            String name = matcher.group(1);
-            String description = matcher.group(2);
-            if (name != null && !name.isEmpty() && description != null && !description.isEmpty()) {
+            String name = matcher.group(1).trim();;
+            String description = matcher.group(2).trim();;
+            if (!name.isEmpty() && !description.isEmpty()) {
                 return new AddDescriptionCommand(name, description);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -359,8 +354,8 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 1) {
-            String name = matcher.group(1);
-            if (name != null && !name.isEmpty()) {
+            String name = matcher.group(1).trim();;
+            if (!name.isEmpty()) {
                 return new GetDescriptionCommand(name);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -369,6 +364,15 @@ public class Parser {
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GetDescriptionCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareListDescriptionsCommand(String args) {
+        if (args.isEmpty()) {
+            return new ListDescriptionsCommand();
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListDescriptionsCommand.MESSAGE_USAGE));
         }
     }
 
