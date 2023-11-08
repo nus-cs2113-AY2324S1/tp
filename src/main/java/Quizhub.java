@@ -39,12 +39,12 @@ public class Quizhub {
         boolean toExit = false;
         while(!toExit){
             String fullCommand = ui.getUserInput();
-            ui.showLine();
+            Ui.showLine();
             Command command = Parser.parseCommand(fullCommand);
             toExit = command.toExit();
             command.executeCommand(ui, dataStorage, questions);
             if(!toExit){
-                ui.showLine();
+                Ui.showLine();
             }
         }
         ui.displayClosingMessage();

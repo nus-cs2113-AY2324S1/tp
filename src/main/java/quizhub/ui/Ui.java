@@ -78,7 +78,7 @@ public class Ui {
      * Print out separating line in CLI to mark
      * start and end of QuizHub output.
      */
-    public void showLine(){
+    public static void showLine(){
         System.out.println("    ____________________________________________________________\n");
     }
     /**
@@ -168,6 +168,10 @@ public class Ui {
 
     public void displayMessageSameLine(String message){
         System.out.print(message);
+    }
+
+    public static void displayMessageStatically(String message) {
+        System.out.println(message);
     }
 
     public void displayNumberOfQuestions() {
