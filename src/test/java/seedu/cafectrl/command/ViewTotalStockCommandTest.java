@@ -32,10 +32,14 @@ public class ViewTotalStockCommandTest {
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
 
-        String expectedOutput = "You have the following ingredients in pantry:\n"
-                + "Ingredients\t\tQty\n"
-                + "chicken\t\t\t500g\n"
-                + "rice\t\t\t1000g";
+        String expectedOutput = "+-------------------------------------------------------+\n"
+                + "| You have the following ingredients in pantry:         |\n"
+                + "+----------------------------------------+--------------+\n"
+                + "| Ingredients                            |  Qty         |\n"
+                + "+----------------------------------------+--------------+\n"
+                + "| chicken                                | 500g         |\n"
+                + "| rice                                   | 1000g        |\n"
+                + "+-------------------------------------------------------+\n";
 
         assertEquals(expectedOutput.trim().replaceAll("\\s+", " "),
                 actualOutput.trim().replaceAll("\\s+", " "));

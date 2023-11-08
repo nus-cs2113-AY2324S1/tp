@@ -6,13 +6,13 @@
   * [**Setting up, getting started**](#setting-up-getting-started)
   * [**Design**](#design)
     * [Architecture](#architecture)
+    * [How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other)
     * [Ui Component](#ui-component)
     * [Parser Component](#parser-component)
     * [Storage Component](#storage-component)
     * [Data Component](#data-component)
   * [**Feature**](#feature)
     * [Add Dish](#add-dish)
-    * [Adding a Dish](#adding-a-dish)
     * [List Menu](#list-menu)
     * [Add Order](#add-order)
     * [Next Day](#next-day)
@@ -25,9 +25,7 @@
     * [Target user profile](#target-user-profile)
     * [Value proposition](#value-proposition)
     * [User stories](#user-stories)
-<!-- TOC -->
-
---------------------------------------------------------------------------------------------------------------------
+<!-- TOC -->--------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 [addressbook-level2](https://github.com/se-edu/addressbook-level2) <br>
@@ -38,7 +36,12 @@
 
 Refer to the guide [_UserGuide_](UserGuide.md).
 
---------------------------------------------------------------------------------------------------------------------    
+--------------------------------------------------------------------------------------------------------------------
+## **General notes**
+
+Only relevant attributes/associations/methods will be included in the UML diagram.
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Design**
 
 ### Architecture
@@ -63,14 +66,14 @@ The bulk of the app’s work is done by the following components:
 - `Parser` : Makes sense of user input to return the appropriate command
 - `Command` : Executes the command requested by the user.
 
-**How the architecture components interact with each other:**
+### How the architecture components interact with each other
 
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 ![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
 *Figure 2: Architecture Encode Sequence Diagram*
 
-### Ui Component
+### Ui component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
 
 ![Ui Class Diagram](images/class/Ui.png)
@@ -83,7 +86,7 @@ In the Ui component,
 - `Messages.java` consists of multiple strings that contains greeting, command, and goodbye messages to be shown to user
 - `ErrorMessages.java` consists of multiple strings that contain error messages to be shown to user when an incorrect command or exception has been returned
 
-### Parser Component
+### Parser component
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 ![Parser Class Diagram](images/class/Parser.png)
@@ -102,7 +105,7 @@ Below is the sequence diagram of a parser which shows how `Parser` parses user i
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
-### Storage Component
+### Storage component
 API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
 ![Storage Class Diagram](images/class/Storage.png)
@@ -114,7 +117,7 @@ The `Storage` class,
 - depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
-### Data Component
+### Data component
 Folder: [Data]({repoURL}src/main/java/seedu/cafectrl/data)
 ![Data Class Diagram](images/class/Data.png)
 *Figure 7: Data Package Class Diagram*
@@ -145,8 +148,6 @@ when the `execute()` method from `AddDishCommand` is called in the main class `C
 
 Separation of Concerns was applied to ensure the `Ui` is only responsible with only displaying messages while the `Menu` deals with the logic of adding dish to the menu. This implementation also encapsulates the details of adding a dish and displaying messages. For example, The `AddDishCommand` class doesn't need to know how the internal details of the dish adding and message printing are performed.
 
-### Adding a Dish
-
 ### List Menu
 A `list_menu` command can be used to display all the `Dish` objects stored in `Menu`.
 
@@ -170,7 +171,7 @@ The data are then packaged nicely in a `leftAlignFormat`, with (indexNum + ". " 
    e.g. (1. Chicken Rice $2.50) is shown.
 
 ### Add Order
-A add_order command can be used to add `order` to an `orderList` in `Sales`.
+An add_order command can be used to add `order` to an `orderList` in `Sales`.
 
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of an add_order command.
 ![Add_Order Execution](images/class/AddOrderCommandClass.png)
@@ -302,6 +303,13 @@ Café proprietors who ***love*** typing on CLI and are seeking for a software so
 
 Our product aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
+--------------------------------------------------------------------------------------------------------------------
+## **Requirements**
+### Non-functional requirements
+
+1. This application requires the use of Java 11.
+2. This application should work on most mainstream OS.
+
 ### User stories
 
 | Priority | As a …​                                                   | I want to …​                                            | So that I can…​                                                                         |
@@ -319,3 +327,8 @@ Our product aims to optimize managing of inventory and cash flow in a restaurant
 | `* *`    | clumsy cafe owner who works 7 days a week                 | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
 
 *{More to be added}*
+
+--------------------------------------------------------------------------------------------------------------------
+## **Glossary**
+
+- **Mainstream OS**: Windows, Linux, Unix, OS-X

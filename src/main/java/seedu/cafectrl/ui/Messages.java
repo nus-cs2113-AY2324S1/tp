@@ -11,7 +11,7 @@ public class Messages {
     public static final String PRICE_MODIFIED_MESSAGE = "Price modified for the following dish: ";
 
     /** Messages for list menu command */
-    public static final String LIST_MENU_MESSAGE = "| Ah, behold, the grand menu of delights! |";
+    public static final String LIST_MENU_MESSAGE = "|        Ah, behold, the grand menu of delights!        |";
     public static final String MENU_EMPTY_MESSAGE = "It seems our menu is currently taking a break. "
             + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
     public static final String MENU_END_CAP = "+-------------------------------------------------------+";
@@ -23,9 +23,11 @@ public class Messages {
     public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
 
     /** Messages for view stock command */
-    public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
-            + "\nIngredients\t\tQty";
     public static final String EMPTY_STOCK = "Sorry! Pantry is currently empty!";
+
+    public static final String VIEW_STOCK_MESSAGE = "You have the following ingredients in pantry:";
+    public static final String VIEW_STOCK_MESSAGE2 = "| You have the following ingredients in pantry:         |";
+    public static final String VIEW_STOCK_TITLE_MESSAGE = "| Ingredients                            |  Qty         |";
 
     /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";

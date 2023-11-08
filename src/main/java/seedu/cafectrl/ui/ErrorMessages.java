@@ -24,13 +24,13 @@ public class ErrorMessages {
             + "for delete command.";
     public static final String MISSING_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Missing arguments "
             + "for buy ingredient command.";
-    public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Error: "
-            + "Invalid argument type. \n "
-            + "Make sure dish index is of type int";
+    public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Something is wrong with "
+            + "the dish index! Could you make sure that is it of type int \n"
+            + "and do not type in multiple dish indexes at one time!";
     public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: "
             + "Invalid price! \n "
-            + "Price can only have 2 decimal place and it must be "
-            + "within the range of 0.00 to 1000000!";
+            + "Price must be a float and within the range of "
+            + "0.00 to 1000000 with up to 2 decimal place";
     public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
             + "Type 'help' to view the accepted list of commands";
     public static final String INVALID_DISH_INDEX = "Do we even have this dish? "
@@ -66,4 +66,8 @@ public class ErrorMessages {
             + "for the 'day' field!";
     public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price,"
             + " is that what you want?";
+    public static final String MISSING_PRICE = "Did you forget to include price? Just a reminder: "
+            + "price can only have up to 2 decimal place!";
+    public static final String MISSING_DISH_IN_EDIT_PRICE = "Sorry, I didnt catch the dish index, "
+            + "did you forget to include it in your command?";
 }

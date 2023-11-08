@@ -21,16 +21,17 @@
     * [Exiting the program : `bye`](#exiting-the-program--bye)
   * [Known Issues](#known-issues)
   * [Command Summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 ---------------------------------------------------
 ## Introduction
 
-CafeCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
+CaféCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
 ---------------------------------------------------
 ## Quick Start
-1. Ensure that you have Java `11` or above installed. 
+1. Ensure that you have Java `11` installed. 
 2. Down the latest version of `CafeCtrl` from [here](https://github.com/AY2324S1-CS2113-T17-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Cafe Manager CLI Application.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.
@@ -40,6 +41,7 @@ Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > 
 ```
+
 ---------------------------------------------------
 ## Features
 > **Notes about command format:**
@@ -340,8 +342,9 @@ Format: `bye`
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Known Issues
-- The application is unable to read the data text files if they have been edited directly in the wrong decoding format
-- For edit price command, special characters can be entered in the price argument
+- The application is unable to read the data text files if they have been edited directly in the wrong decoding format.
+- The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
+- The application is unable to support unit conversion, hence only ml ang g are accepted as ingredient unit.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -363,3 +366,7 @@ Format: `bye`
 | **Help**                  | `help`                                                                                                                                                                                                                                                 |
 | **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
 
+---------------------------------------------------
+## Glossary
+- **Dish index**: Index of the dish according to `list_menu`.
+- **stock**: The quantity of ingredient available in the pantry of the cafe.

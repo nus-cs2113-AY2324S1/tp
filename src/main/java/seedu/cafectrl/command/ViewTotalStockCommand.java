@@ -2,8 +2,8 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
+import seedu.cafectrl.ui.Messages;
 
 import java.util.ArrayList;
 
@@ -24,14 +24,16 @@ public class ViewTotalStockCommand extends Command {
     @Override
     public void execute() {
         pantryStock = pantry.getPantryStock();
+
         if (pantryStock.isEmpty()) {
             ui.showToUser(Messages.EMPTY_STOCK);
             return;
         }
 
-        ui.showToUser(Messages.VIEW_STOCK);
+        ui.showIngredientTop();
         for (Ingredient ingredient : pantryStock) {
-            ui.showToUser(ingredient.getName() + "\t\t\t" + ingredient.getQty() + ingredient.getUnit());
+            ui.showIngredientStock(ingredient.getName(), ingredient.getQty(), ingredient.getUnit());
         }
+        ui.showMenuBottom();
     }
 }
