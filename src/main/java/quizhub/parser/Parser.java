@@ -168,13 +168,13 @@ public class Parser {
                 return new CommandInvalid(CommandMultipleChoice.TOO_MANY_ARGUMENTS_MSG);
             }
             // Extract the values for description, options, answer, module, and difficulty
-            String description = inputTokens[0].strip();
-            String option1 = inputTokens[1].strip();
-            String option2 = inputTokens[2].strip();
-            String option3 = inputTokens[3].strip();
-            String option4 = inputTokens[4].strip();
-            String answer = inputTokens[5].strip();
-            String module = inputTokens[6].strip();
+            String description = inputTokens[0].strip().replace("|", "");
+            String option1 = inputTokens[1].strip().replace("|", "");
+            String option2 = inputTokens[2].strip().replace("|", "");
+            String option3 = inputTokens[3].strip().replace("|", "");
+            String option4 = inputTokens[4].strip().replace("|", "");
+            String answer = inputTokens[5].strip().replace("|", "");
+            String module = inputTokens[6].strip().replace("|", "");
             String difficulty = inputTokens[7].strip();
             for (int i = 1; i < 5; i++) {
                 for (int j = i + 1; j < 5; j++) {

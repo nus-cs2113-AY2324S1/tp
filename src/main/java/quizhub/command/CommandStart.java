@@ -28,6 +28,9 @@ public class CommandStart extends Command{
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
             "/[quiz mode] [start details] /[qn mode]!";
     public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! You gave too many arguments :<";
+    public static final String EXIT_QUIZ_KEYWORD = "\\exitquiz";
+    public static final String NO_QN_FOUND_MSG = "    No question found in list / no question found pertaining " +
+            "to module. Add questions before starting the quiz";
     public static final int NUM_ARGUMENTS = 4;
     private final String startMode;
     private final String startDetails;
