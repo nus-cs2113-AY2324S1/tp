@@ -47,6 +47,12 @@ public class Parser {
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
+        //accounting for the \ character
+        String inputWithoutSpaces = userInput.replaceAll(" ", "").trim();
+        if (inputWithoutSpaces.matches("^\\\\+$")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
         String[] words = userInput.trim().split(" ", 2);  // split the input into command and arguments
         if (words.length == 0) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
