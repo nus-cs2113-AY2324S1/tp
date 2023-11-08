@@ -76,7 +76,7 @@ BMI: 21.60
 ____________________________________________________________
 
 ```
-
+**Note:** adding a space after each keyword is not accepted.
 
 ### Viewing help guide: `help`
 Shows the list of commands you can use.
