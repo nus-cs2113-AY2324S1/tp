@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * Represents the command to add a cashflow.
+ */
 public class AddCashflowCommand extends Command {
     protected static Ui ui = Ui.getInstance();
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
@@ -25,6 +27,12 @@ public class AddCashflowCommand extends Command {
     protected CashflowList cashflowList = CashflowList.getInstance();
     protected final double MAX_AMOUNT = 999999999999.99;
 
+    /**
+     * Constructor for the command to add a cashflow.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String categoryString = String.join(" ", rawCommand.args).trim();
         try {
@@ -32,23 +40,23 @@ public class AddCashflowCommand extends Command {
             category = CashflowCategory.valueOf(categoryString.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
-            throw new IllegalArgumentException("Entry must be either income or expense");
+            throw new IllegalArgumentException("Entry must be either income or expense.");
         }
 
         if (!rawCommand.extraArgs.containsKey("a")) {
             logger.log(Level.WARNING, "Missing arguments for amount");
-            throw new IllegalArgumentException("Entry must have an amount");
+            throw new IllegalArgumentException("Entry must have an amount.");
         }
         try {
             logger.log(Level.INFO, "Parsing amount as double");
             amount = Double.parseDouble(rawCommand.extraArgs.get("a").trim());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for amount");
-            throw new IllegalArgumentException("Amount must be a number");
+            throw new IllegalArgumentException("Amount must be a number.");
         }
         if (amount < 0) {
             logger.log(Level.WARNING, "Invalid value for amount");
-            throw new IllegalArgumentException("Amount cannot be negative");
+            throw new IllegalArgumentException("Amount cannot be negative.");
         }
         if (amount > MAX_AMOUNT) {
             logger.log(Level.WARNING, "Maximum value for amount exceeded.");
@@ -89,13 +97,13 @@ public class AddCashflowCommand extends Command {
                 recur = Integer.parseInt(rawCommand.extraArgs.get("r").trim());
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for recur");
-                throw new IllegalArgumentException("Recurrence must be an integer");
+                throw new IllegalArgumentException("Recurrence must be an integer.");
             }
             rawCommand.extraArgs.remove("r");
         }
         if (recur < 0) {
             logger.log(Level.WARNING, "Invalid value for recur");
-            throw new IllegalArgumentException("Recurring value cannot be negative");
+            throw new IllegalArgumentException("Recurring value cannot be negative.");
         }
 
         if (rawCommand.extraArgs.containsKey("d")) {
@@ -116,6 +124,9 @@ public class AddCashflowCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to add a cashflow.
+     */
     @Override
     public void execute() {
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)

@@ -9,10 +9,11 @@ import java.text.DecimalFormat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class CashflowListTest {
-    private CashflowList testList = CashflowList.getInstance();
-    private DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+    protected CashflowList testList = CashflowList.getInstance();
+    protected DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
     @Test
     void testAddIncomeAndExpense() {
@@ -85,5 +86,14 @@ class CashflowListTest {
         assertEquals(0, testList.list.size());
         roundedBalance = Cashflow.round(Cashflow.balance, 2);
         assertEquals("0.00", decimalFormat.format(roundedBalance));
+    }
+
+    @Test
+    void testDeleteRecur() {
+        testList.addExpense(19.999, ExpenseType.ENTERTAINMENT, 1, "netflix");
+        testList.deleteRecurWithoutCategory(1);
+        Cashflow testExpense = testList.list.get(0);
+        assertEquals(0, testExpense.getRecur());
+        assertNull(testExpense.getDate());
     }
 }

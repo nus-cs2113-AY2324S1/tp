@@ -9,6 +9,9 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an income or expense.
+ */
 public abstract class Cashflow {
 
     protected static double balance = 0;
@@ -21,6 +24,14 @@ public abstract class Cashflow {
     protected boolean hasRecurred;
     protected final double MAX_AMOUNT = 999999999999.99;
 
+    /**
+     * Constructor for a cashflow. hasRecurred variable is set to false by default and date is initialised depending
+     * on whether recur is set by the user.
+     *
+     * @param amount The value of the cashflow.
+     * @param recur The number of days before the next automatic addition of the cashflow.
+     * @param description The description of the cashflow.
+     */
     public Cashflow(double amount, int recur, String description) {
         this.amount = amount;
         this.recur = recur;
@@ -30,6 +41,16 @@ public abstract class Cashflow {
         }
         this.hasRecurred = false;
     }
+
+    /**
+     * Constructor for a cashflow.
+     *
+     * @param amount The value of the cashflow.
+     * @param recur The number of days before the next automatic addition of the cashflow.
+     * @param description The description of the cashflow.
+     * @param date The date that the cashflow is added.
+     * @param hasRecurred Whether the cashflow has recurred.
+     */
     public Cashflow(double amount, int recur, String description, LocalDate date, boolean hasRecurred) {
         this.amount = amount;
         this.recur = recur;
@@ -41,6 +62,9 @@ public abstract class Cashflow {
     protected Cashflow() {
     }
 
+    /**
+     * Sets the balance to 0.
+     */
     public static void clearBalance() {
         balance = 0;
     }
@@ -49,9 +73,18 @@ public abstract class Cashflow {
         balance = amount;
     }
 
-    public void deleteCashflowvalue() {
-    }
+    /**
+     * Deletes the value of a cashflow from the balance.
+     */
+    public abstract void deleteCashflowValue();
 
+    /**
+     * Rounds a double to the specified number of decimal places. The rounding is done half-up.
+     *
+     * @param value The double to be rounded.
+     * @param places The number of decimal places to round to.
+     * @return The rounded double.
+     */
     //@author mhadidg-reused
     //Reused from https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
     public static double round(double value, int places) {
@@ -65,6 +98,12 @@ public abstract class Cashflow {
     }
     //@author mhadidg
 
+    /**
+     * Capitalizes the first letter of a provided string.
+     *
+     * @param line The input string to be capitalized.
+     * @return The string that has been capitalized.
+     */
     //@author Nick Bolton-reused
     //Reused from
     //https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string
@@ -73,6 +112,11 @@ public abstract class Cashflow {
     }
     //@author Nick Bolton
 
+    /**
+     * Formats the cashflow into an easy-to-read format to be output to the user.
+     *
+     * @return The formatted cashflow.
+     */
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("####0.00");
 
@@ -134,6 +178,11 @@ public abstract class Cashflow {
         return description;
     }
 
+    /**
+     * Formats the cashflow into a standard format to be saved into a text file.
+     *
+     * @return The formatted cashflow.
+     */
     public String formatString() {
         String string;
         if (recur == 0) {

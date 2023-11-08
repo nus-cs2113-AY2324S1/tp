@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents a command to delete a cashflow.
+ */
 public class DeleteCashflowCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;
@@ -16,6 +19,12 @@ public class DeleteCashflowCommand extends Command {
     protected boolean hasRecur;
     protected CashflowList cashflowList = CashflowList.getInstance();
 
+    /**
+     * Constructor of the command to delete a cashflow.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         String stringCategory = null;
@@ -84,10 +93,13 @@ public class DeleteCashflowCommand extends Command {
             category = CashflowCategory.valueOf(stringCategory.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
-            throw new IllegalArgumentException("Entry must be either income, expense or recurring");
+            throw new IllegalArgumentException("Entry must be either income, expense or recurring.");
         }
     }
 
+    /**
+     * Executes the command to delete a cashflow.
+     */
     @Override
     public void execute() {
         if (category == null) {
@@ -128,7 +140,7 @@ public class DeleteCashflowCommand extends Command {
             cashflowList.deleteRecurWithoutCategory(index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
 
@@ -141,7 +153,7 @@ public class DeleteCashflowCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
     private void handleDeleteRecurWithCategory() {
@@ -150,7 +162,7 @@ public class DeleteCashflowCommand extends Command {
             cashflowList.deleteRecurWithCategory(category, index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
     private void handleDeleteCashflowWithCategory() {
@@ -162,7 +174,7 @@ public class DeleteCashflowCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
 }
