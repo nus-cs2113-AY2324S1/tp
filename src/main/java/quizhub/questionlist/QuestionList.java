@@ -39,15 +39,14 @@ public class QuestionList {
     public boolean addShortAnswerQn(String description, String answer, String module,
                                  Question.QnDifficulty qnDifficulty, boolean showMessage){
 
-        boolean isDuplicate = containsDuplicateQuestion(description, SHORTANSWER, module,
-                qnDifficulty, showMessage);
+        boolean isDuplicate = containsDuplicateQuestion(description, SHORTANSWER, module, showMessage);
         if (isDuplicate){
             return false;
         }
         allQns.add(new ShortAnsQn(description, answer, module, qnDifficulty));
         if (showMessage) {
             System.out.println("    I have added the following question OwO:");
-            System.out.printf("      [S] %s\n", viewQuestionByIndex(getQuestionListSize()));
+            System.out.println("    " + viewQuestionByIndex(getQuestionListSize()));
             System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
         }
         return true;
@@ -71,8 +70,7 @@ public class QuestionList {
                                     Question.QnDifficulty qnDifficulty, boolean showMessage) {
 
 
-        boolean isDuplicate = containsDuplicateQuestion(description, MULTIPLECHOICE, module,
-                qnDifficulty, showMessage);
+        boolean isDuplicate = containsDuplicateQuestion(description, MULTIPLECHOICE, module, showMessage);
         if (isDuplicate){
             return false;
         }
@@ -80,7 +78,7 @@ public class QuestionList {
                 option4, answer, module, qnDifficulty));
         if (showMessage) {
             System.out.println("    I have added the following question OwO:");
-            System.out.printf("      [M] %s\n", viewQuestionByIndex(getQuestionListSize()));
+            System.out.println("    " + viewQuestionByIndex(getQuestionListSize()));
             System.out.println("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
         }
         return true;
@@ -96,16 +94,14 @@ public class QuestionList {
      * @param description The description of the short answer question.
      * @param qnType The type of question (SHORTANS or MULTIPLECHOICE)
      * @param module The module of the short answer question.
-     * @param qnDifficulty The difficulty level of the short answer question.
      * @return true if all of the above are true
      */
     public boolean containsDuplicateQuestion (String description, Question.QnType qnType, String module,
-                                              Question.QnDifficulty qnDifficulty, boolean showMessage) {
+                                              boolean showMessage) {
         for (Question question : allQns) {
             if (description.strip().equalsIgnoreCase(question.getQuestionBody()) &&
                 qnType.equals(question.getQuestionType()) &&
-                module.equalsIgnoreCase(question.getModule()) &&
-                qnDifficulty.equals(question.getDifficulty())) {
+                module.equalsIgnoreCase(question.getModule())) {
                 if (showMessage) {
                     System.out.println(CommandShortAnswer.DUPLICATED_INPUT + System.lineSeparator());
                 }
