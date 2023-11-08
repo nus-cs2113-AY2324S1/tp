@@ -94,15 +94,9 @@ Adds a dish consisting of its ingredients to the menu
 
 Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
 
-<<<<<<< HEAD
-
-* The `PRICE` must be a positive 2 decimal place number.
-* The `INGREDIENT_QTY` must contain the unit ml or g specifically.
-=======
 * `DISH_NAME` 
 * `PRICE` must be a positive number and can be up to 2 decimal places.
-* `IMGREDIENT_QTY` must contain the unit ml or g specifically.
->>>>>>> 82f16561f679acc71d616f7eb76a00c2e37361bb
+* `INGREDIENT_QTY` must contain the unit ml or g specifically.
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example:
