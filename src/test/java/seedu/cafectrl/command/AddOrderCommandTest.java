@@ -33,8 +33,6 @@ class AddOrderCommandTest {
         Menu menu = new Menu(menuItems);
         assertEquals(2, menu.getSize());
 
-
-
         Order orderChickenRice = new Order(dishChickenRice, 2);
 
         ArrayList<String> commandOutput = new ArrayList<>();
@@ -119,18 +117,6 @@ class AddOrderCommandTest {
         pantryStock.add(new Ingredient("chicken", 1000, "g"));
         pantryStock.add(new Ingredient("rice", 1000, "g"));
         Pantry pantry = new Pantry(ui, pantryStock);
-
-        Ui uiPrintNothing = new Ui() {
-            @Override
-            public void showToUser(String... message) {
-
-            }
-
-            @Override
-            public void showTotalCost(String dollarCost) {
-
-            }
-        };
 
         OrderList orderList = new OrderList();
 
