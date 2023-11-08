@@ -25,10 +25,6 @@ public class CartEntry {
         return this.quantity;
     }
 
-    public double getTotalCost() {
-        return this.totalCost;
-    }
-
     public void incrQuantity(long delta) {
         this.quantity += delta;
     }
