@@ -7,6 +7,7 @@ import seedu.duke.financialrecords.Expense;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for the {@link ClearExpenses} class.
@@ -39,6 +40,12 @@ public class ClearExpensesTest {
         ClearExpenses clearExpenses = new ClearExpenses(testExpenses);
         clearExpenses.clearAllExpenses();
         assertEquals(0, testExpenses.size());
+    }
+
+    @Test
+    public void testClearExpenses_whenPassNullArrayList() {
+        ClearExpenses clearExpenses;
+        assertThrows(AssertionError.class, () -> new ClearExpenses(null));
     }
 
 

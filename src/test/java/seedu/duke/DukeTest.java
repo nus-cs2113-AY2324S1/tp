@@ -99,6 +99,64 @@ class DukeTest {
         assertEquals(sizeAfterAddition - 1, duke.getExpensesSize());
     }
 
+    @Test
+    void executeCommand_clearIncome_incomeListSizeBeZero() throws KaChinnnngException {
+        duke.executeCommand("add income /de Bonus /date 03/10/2023 /amt 1000.00");
+        duke.executeCommand("add income /de Bonus /date 03/10/2023 /amt 1000.00");
+        int sizeAfterAddition = duke.getIncomesSize();
+        assertEquals(2, sizeAfterAddition);
+        duke.executeCommand("clear incomes");  // Assuming clear income command called
+        assertEquals(0, duke.getExpensesSize());
+    }
+
+    @Test
+    void executeCommand_clearExpense_expenseListSizeBeZero() throws KaChinnnngException {
+        duke.executeCommand("add expense /cat food /type lunch" +
+                " /de chicken sandwich /date 03/10/2023 /amt 10.00");
+        duke.executeCommand("add expense /cat food /type lunch" +
+                " /de chicken sandwich /date 03/10/2023 /amt 10.00");
+        int sizeAfterAddition = duke.getExpensesSize();
+        assertEquals(2, sizeAfterAddition);
+        duke.executeCommand("clear expenses");  // Assuming clear income command called
+        assertEquals(0, duke.getExpensesSize());
+    }
+
+    @Test
+    void executeCommand_clearAll_bothExpenseAndIncomeListSizeBeZero() throws KaChinnnngException {
+        duke.executeCommand("add income /de Bonus /date 03/10/2023 /amt 1000.00");
+        duke.executeCommand("add income /de Bonus /date 03/10/2023 /amt 1000.00");
+        duke.executeCommand("add expense /cat food /type lunch" +
+                " /de chicken sandwich /date 03/10/2023 /amt 10.00");
+        duke.executeCommand("add expense /cat food /type lunch" +
+                " /de chicken sandwich /date 03/10/2023 /amt 10.00");
+        int sizeAfterAddition = duke.getExpensesSize() + duke.getIncomesSize();
+        assertEquals(4, sizeAfterAddition);
+        duke.executeCommand("clear all");  // Assuming clear income command called
+        assertEquals(0, duke.getExpensesSize());
+    }
+
+    @Test
+    void executeCommand_allHelpFunction_makeSureCommandIsCorrectlyReturned() throws KaChinnnngException {
+        duke.executeCommand("help");                // If test case passed mean all the command being accepted
+        duke.executeCommand("help add");            // If one of the command not accepted then will throw
+        duke.executeCommand("help delete");         // KaChinnnngException
+        duke.executeCommand("help list");
+        duke.executeCommand("help find");
+        duke.executeCommand("help edit");
+        duke.executeCommand("help update exchange rate");
+        duke.executeCommand("help clear");
+        duke.executeCommand("help balance");
+        duke.executeCommand("help exit");
+    }
+
+    @Test
+    void executeCommand_allListFunction_makeSureCommandIsCorrectlyParsed() throws KaChinnnngException {
+        duke.executeCommand("list");                // If test case passed mean all the command being accepted
+        duke.executeCommand("list incomes");         // If one of the command not accepted then will throw
+        duke.executeCommand("list expenses");        // KaChinnnngException
+        duke.executeCommand("list currencies");
+        duke.executeCommand("list exchange rates");
+    }
 
     @Test
     void executeCommand_balance_correctOutput() throws KaChinnnngException {

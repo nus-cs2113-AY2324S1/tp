@@ -18,11 +18,10 @@ public class ExchangeRateFileHandler {
     public  ExchangeRateFileHandler(String filePath) {
         this.filePath = filePath;
     }
-    public boolean load() throws KaChinnnngException, FileNotFoundException {
-        boolean loadedAllRows = true;
+    public void load() throws KaChinnnngException, FileNotFoundException {
         ExchangeRateManager exchangeRateManager = ExchangeRateManager.getInstance();
         if (createFile(filePath)) {
-            return true; // File not found, created new file
+            return; // File not found, created new file
         }
         File file = new File(filePath);
         Scanner s = new Scanner(file); // Create a Scanner using the File as the source
@@ -36,10 +35,8 @@ public class ExchangeRateFileHandler {
             } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException e) {
                 // Skip line if rate is not a double
                 System.out.println(WRONG_FORMAT_ERROR + " : " + textLine);
-                loadedAllRows = false;
             }
         }
-        return loadedAllRows;
     }
     public void save(HashMap<String, Double> exchangeRates) throws KaChinnnngException {
         try (FileWriter fw = new FileWriter(filePath)) {

@@ -44,6 +44,7 @@ public class Duke {
     private final GetFromTxt get;
     private final ExchangeRateManager exchangeRateManager;
     private final ExchangeRateFileHandler exchangeRateFileHandler;
+    private final UsageInstructions usageInstructions;
 
     public Duke() {
         ui = new Ui();
@@ -54,14 +55,15 @@ public class Duke {
         get = new GetFromTxt(storagePath);
         exchangeRateManager = ExchangeRateManager.getInstance();
         exchangeRateFileHandler = new ExchangeRateFileHandler("./data/ExchangeRates.txt");
+        usageInstructions = new UsageInstructions();
     }
 
     /**
      * This method runs the program.
      */
     public void run() {
-        Ui.printWelcomeMessage();
         loadData();
+        Ui.printWelcomeMessage();
 
         boolean isExit = false;
         while (!isExit) {
@@ -85,9 +87,7 @@ public class Duke {
     protected void loadData() {
         try {
             get.getFromTextFile(incomes, expenses);
-            if(!exchangeRateFileHandler.load()) {
-                Ui.showLineDivider();
-            }
+            exchangeRateFileHandler.load();
         } catch (FileNotFoundException e) {
             System.out.println("\tOOPS!!! File not found.");
         } catch (KaChinnnngException e) {
@@ -114,7 +114,7 @@ public class Duke {
             Ui.printIncomeAddedMessage(newIncome);
             break;
 
-        case "list_income":
+        case "list_incomes":
             new IncomeLister(incomes, ui).listIncomes();
             break;
 
@@ -126,7 +126,7 @@ public class Duke {
             Ui.printExpenseAddedMessage(newExpense);
             break;
 
-        case "list_expense":
+        case "list_expenses":
             new ExpenseLister(expenses, ui).listExpenses();
             break;
 
@@ -149,7 +149,63 @@ public class Duke {
             break;
 
         case "help":
-            new UsageInstructions(ui).getHelp();
+            Ui.showLineDivider();
+            usageInstructions.getHelp();
+            Ui.showLineDivider();
+            break;
+
+        case "help_add":
+            Ui.showLineDivider();
+            usageInstructions.getHelpAddFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_list":
+            Ui.showLineDivider();
+            usageInstructions.getHelpListFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_delete":
+            Ui.showLineDivider();
+            usageInstructions.getHelpDeleteFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_find":
+            Ui.showLineDivider();
+            usageInstructions.getHelpFindFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_edit":
+            Ui.showLineDivider();
+            usageInstructions.getHelpEditFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_update_exchange_rate":
+            Ui.showLineDivider();
+            usageInstructions.getHelpUpdateExchangeRateFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_clear":
+            Ui.showLineDivider();
+            usageInstructions.getHelpClearFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_balance":
+            Ui.showLineDivider();
+            usageInstructions.getHelpBalanceFunction();
+            Ui.showLineDivider();
+            break;
+
+        case "help_exit":
+            Ui.showLineDivider();
+            usageInstructions.getHelpExitFunction();
+            Ui.showLineDivider();
             break;
 
         case "balance":
@@ -195,6 +251,7 @@ public class Duke {
             new EditExpenseCommand(expenses, fullCommand).execute();
             Ui.showLineDivider();
             break;
+
         case "list_currencies":
             exchangeRateManager.showSupportedCurrencies();
             break;
@@ -207,6 +264,7 @@ public class Duke {
             Command c = new UpdateExchangeRateCommand(fullCommand, exchangeRateFileHandler, ui);
             c.execute();
             break;
+
         default:
             throw new KaChinnnngException("Invalid command. Please try again."
                     + "\nType 'help' to see the list of commands available.");

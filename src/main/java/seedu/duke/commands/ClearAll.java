@@ -10,8 +10,8 @@ import java.util.ArrayList;
  * It provides a method to clear all incomes and expenses from the corresponding list.
  */
 public class ClearAll {
-    private ArrayList<Income> incomes;
-    private ArrayList<Expense> expenses;
+    private final ArrayList<Income> incomes;
+    private final ArrayList<Expense> expenses;
 
     /**
      * Constructs a ClearAll object with the given lists of incomes and expenses.
@@ -20,6 +20,8 @@ public class ClearAll {
      * @param expenses  The list of expenses to be cleared.
      */
     public ClearAll(ArrayList<Income> incomes, ArrayList<Expense> expenses) {
+        assert incomes != null : "incomes should not be null";
+        assert expenses != null : "expenses should not be null";
         this.incomes = incomes;
         this.expenses = expenses;
     }

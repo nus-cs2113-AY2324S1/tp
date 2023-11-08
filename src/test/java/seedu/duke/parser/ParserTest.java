@@ -31,12 +31,12 @@ public class ParserTest {
 
     @Test
     public void testParse_listExpenseCommand_parsedCorrectly() {
-        assertEquals("list_expense", Parser.parse("list Expense"));
+        assertEquals("list_expenses", Parser.parse("list Expenses"));
     }
 
     @Test
     public void testParse_listIncomeCommand_parsedCorrectly() {
-        assertEquals("list_income", Parser.parse("list Income"));
+        assertEquals("list_incomes", Parser.parse("list Incomes"));
     }
 
     @Test
