@@ -176,6 +176,14 @@ public class Parser {
             String answer = inputTokens[5].strip();
             String module = inputTokens[6].strip();
             String difficulty = inputTokens[7].strip();
+            for (int i = 1; i < 5; i++) {
+                for (int j = i + 1; j < 5; j++) {
+                    if(inputTokens[i].strip().equalsIgnoreCase(inputTokens[j].strip())) {
+                        return new CommandInvalid(CommandMultipleChoice.DUPLICATE_OPTION_MSG +
+                                "\n" + CommandMultipleChoice.INVALID_FORMAT_MSG);
+                    }
+                }
+            }
             boolean isFieldEmpty = description.isEmpty() || option1.isEmpty() || option2.isEmpty() ||
                     option3.isEmpty() || option4.isEmpty() || answer.isEmpty() || module.isEmpty() ||
                     difficulty.isEmpty();

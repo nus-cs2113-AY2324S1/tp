@@ -39,6 +39,12 @@ public class ShortAnsQn extends Question {
     }
 
     @Override
+    public String getCorrectAnswer() {
+        // Implement this method to return the answer string for a short answer question
+        return this.getQuestionAnswer(); // Assuming getQuestionAnswer() returns the answer directly
+    }
+
+    @Override
     public void editQuestion(String editField, String newValue) {
         switch (editField) {
         case "description":

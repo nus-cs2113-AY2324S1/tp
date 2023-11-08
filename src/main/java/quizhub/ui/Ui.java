@@ -173,5 +173,15 @@ public class Ui {
     public void displayNumberOfQuestions() {
         System.out.println("    Now you have " + questions.getQuestionListSize() + " questions in the list.");
     }
+
+    public void displayCorrectAnswer(Question question) {
+        String correctAnswer = String.valueOf(question.getCorrectAnswer());
+        displayMessage("    The correct answer is: " + correctAnswer);
+    }
+
+    public void displayFinalScore(int correctAnswers, int totalQuestions) {
+        displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
+        displayMessage("    Quiz completed!");
+    }
 }
 
