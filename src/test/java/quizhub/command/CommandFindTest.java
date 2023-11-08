@@ -149,7 +149,7 @@ public class CommandFindTest {
     @Test
     void testFindModuleNoMatches() {
         String expectedOutput = "Here are questions that matched your search:"
-                + "    No results found :< Check your module is correct?";
+                + "    No results found :< Check your keyword is correct?";
         Parser.parseCommand("find /module no matches").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
