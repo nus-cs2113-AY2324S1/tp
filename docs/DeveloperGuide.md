@@ -345,6 +345,7 @@ Our target user profile is ...
 - someone who cannot manage their finances such as income and expenses properly
 - unable to reach their financial goals
 - is slightly interested in the equity market
+- needs reminders for tasks
 
 
 ### Value proposition
@@ -356,20 +357,50 @@ financial well-being. The application will allow the user to keep track of their
 It also lets user view their income and expenses using visualization tool to have a better view of their cash flow based
 on categories.  It also allows the user to set the budget for the month. It also allows users to add their financial
 goals to the wishlist. Furthermore, it allows users to track the stock market if they have interest in investing in 
-equities.
+equities. 
 
 ## User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ...              | I want to ...                 | So that I can ...                                                                    |
+|---------|-----------------------|-------------------------------|--------------------------------------------------------------------------------------|
+| v1.0    | user                  | Add my income                 | Store my income information and view/track them later                                |
+| v1.0    | user                  | Delete my income              | Remove the income entry that I have mistakenly added or do not keep track            |
+| v1.0    | user                  | Add my expense                | Store my expense information and view/track them later                               |
+| v1.0    | user                  | Delete my expense             | Remove the expense entry that I have mistakenly added or do not keep track           |
+| v2.0    | user                  | set my expense type           | Break down my expenses into different categories                                     |
+| v1.0    | user                  | set my income type            | Break down my income into different categories                                       |
+| v2.0    | user                  | Add recurring cash flows      | add a regular expense or income (salary, rent) easily                                |
+| v2.0    | user                  | Delete recurring cash flows   | delete a regular expense of income easily                                            |
+| v1.0    | user                  | list all cash flow entries    | view all my income and expenses in a comprehensive list                              |
+| v1.0    | user                  | list all expenses entries     | view all my expenses in a comprehensive list                                         |
+| v1.0    | user                  | list all income entries       | view all my income in a comprehensive list                                           |
+| v2.0    | user                  | list all recurring cash flows | view all my recurring income or expenses in a comprehensive list                     |
+| v2.0    | new user              | see usage instructions        | refer to them when I forget how to use the application                               |
+| v1.0    | user                  | set a budget                  | keep track of a budget together with my cash flow and ensure I do not exceed it      |
+| v1.0    | user                  | update the budget             | make changes to the budget according to my needs                                     |    
+| v1.0    | user                  | reset the budget              | return to my initial budget easily                                                   |
+| v1.0    | user                  | delete budget                 | remove the budget that I no longer want to keep track of                             |
+| v1.0    | user                  | view budget                   | keep track of the amount of budget I have left                                       |
+| v1.0    | user                  | see overview of the app       | see the overall view of all income, expense and overall balance as well as reminders |
+| v1.0    | user                  | view balance                  | see my overall balance according to the income and expenses I am keeping track       |
+| v1.0    | investment enthusiast | view my watchlist             | keep track of stocks that I am interested in                                         |
+| v2.0    | investment enthusiast | add new stocks to watchlist   | add new stock that I am interested in investing in                                   |
+| v2.0    | investment enthusiast | delete stocks from watchlist  | remove stocks that I am no longer interested in                                      |
+| v1.0    | user                  | add reminder                  | add reminders (eg to pay loans) so I will not forget                                 |
+| v1.0    | user                  | delete reminder               | delete reminders that I no longer want to keep track                                 |
+| v1.0    | user                  | mark reminder                 | set the reminder as completed                                                        |
+| v1.0    | user                  | view wishlist                 | keep track of my goals easily                                                        |
+| v1.0    | user                  | set goals                     | add a new goal to my that I think of                                                 |
+| v1.0    | user                  | delete goals                  | remove goals that I can no longer achieve                                            |
+| v1.0    | user                  | mark goal                     | that I have achieved                                                                 |
+| v1.0    | user                  | visualize my cash flow        | easily see where the distribution for my spending and earnings                       |
 
 ## Non-Functional Requirements
 
 * Should work on main OS (Windows, Linux, Mac) that has Java 11 installed.
 * This app is meant for a single user.
 * This app is targeted towards users with an above-average typing speed.
+* Watchlist should work reliably and not crash the application when the 3rd party dependencies are down (API is down)
 
 ## Glossary
 
