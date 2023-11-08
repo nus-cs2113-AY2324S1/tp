@@ -154,7 +154,7 @@ public class QuestionList {
      *                    after question is marked as done.
      */
     public void markQuestionAsDone (int index, boolean showMessage){
-        Question question = null;
+        Question question;
         try{
             int oneIndexed = index-1;
             question = allQns.get(oneIndexed);
@@ -171,23 +171,6 @@ public class QuestionList {
             }
         } else {
             System.out.println("    Question originally done! No changes made!");
-        }
-    }
-    /**
-     * Mark a question in the current question list as not done.
-     */
-    public void markQuestionAsNotDone(int index){
-        try{
-            Question question = allQns.get(index-1);
-            if(question.questionIsDone()){
-                question.markAsNotDone();
-                System.out.println("    Roger that! I have unmarked the following question as done >w< !");
-                printQuestion(question, false);
-            } else {
-                System.out.println("    Question originally not done! No changes made!");
-            }
-        } catch (IndexOutOfBoundsException invalidIndex){
-            System.out.println("    Ono! Please enter valid question number *sobs*");
         }
     }
     /**
@@ -215,19 +198,18 @@ public class QuestionList {
         }
         try{
             Question question = allQns.get(index-1);
-            if(question.getDifficulty() != qnDifficulty){
-                allQns.get(index-1).markDifficulty(qnDifficulty);
-                if(showMessage) {
-                    System.out.println("    Roger that! I have marked the following question as " +
-                            difficulty +
-                            " >w< !");
-                    printQuestion(question, false);
-                }
-            } else {
+            if(question.getDifficulty() == qnDifficulty){
                 System.out.println("    Question is already set as " +
-                        difficulty +
-                        " ! No changes made!");
+                        difficulty + " ! No changes made!");
+                return;
             }
+            allQns.get(index-1).markDifficulty(qnDifficulty);
+            if(!showMessage) {
+                return;
+            }
+            System.out.println("    Roger that! I have marked the following question as " +
+                    difficulty + " >w< !");
+            printQuestion(question, false);
         } catch (IndexOutOfBoundsException invalidIndex){
             System.out.println("    Ono! Please enter valid question number *sobs*");
         }
@@ -269,15 +251,9 @@ public class QuestionList {
      * @param index The list index of the question to be deleted.
      */
     public void editQuestionByIndex(int index, String editField, String newValue){
-        try{
-            Question question = allQns.get(index-1);
-            question.editQuestion(editField, newValue);
-            printQuestion(question, false);
-        } catch (IndexOutOfBoundsException invalidIndex){
-            if(index != 0){
-                System.out.println("    Ono! Please enter valid question number *sobs*");
-            }
-        }
+        Question question = allQns.get(index - 1);
+        question.editQuestion(editField, newValue);
+        printQuestion(question, false);
     }
     /**
      * Search for questions in the current question list using their description.
@@ -286,19 +262,20 @@ public class QuestionList {
      */
     public void searchListByDescription(String keyword){
         ArrayList<Question> matchedQuestions = new ArrayList<>();
-        if(allQns.isEmpty()){
+        if(allQns.isEmpty()) {
             System.out.println("    Question list is empty! Time to add some OWO");
-        } else {
-            System.out.println("    Here are questions that matched your search:");
-            for (Question question : allQns) {
-                if(question.getQuestionBody().toLowerCase().contains(keyword.toLowerCase())){
-                    matchedQuestions.add(question);
-                    printQuestion(question, true);
-                }
+            return;
+        }
+        System.out.println("    Here are questions that matched your search:");
+        for (Question question : allQns) {
+            if (!question.getQuestionBody().toLowerCase().contains(keyword.toLowerCase())) {
+                continue;
             }
-            if(matchedQuestions.isEmpty()){
-                System.out.println("    No results found :< Check your keyword is correct?");
-            }
+            matchedQuestions.add(question);
+            printQuestion(question, true);
+        }
+        if (matchedQuestions.isEmpty()) {
+            System.out.println("    No results found :< Check your keyword is correct?");
         }
     }
 
@@ -348,9 +325,10 @@ public class QuestionList {
      */
     public void assembleListByModule(String module, ArrayList<Question> matchedQuestions){
         for (Question question : allQns) {
-            if (question.getModule().toLowerCase().matches(module.toLowerCase())) {
-                matchedQuestions.add(question);
+            if (!question.getModule().toLowerCase().matches(module.toLowerCase())) {
+                continue;
             }
+            matchedQuestions.add(question);
         }
     }
     /**
@@ -374,41 +352,6 @@ public class QuestionList {
         printQuestionList();
     }
     /**
-     * Retrieves the answer for a question by its index in the question list.
-     * @param index The index of the question in the list.
-     * @return The answer to the question, or null if the index is invalid or the question is of a different type.
-     */
-    public String getAnswerByIndex(int index, ArrayList<Question> questions) {
-        try {
-            Question question = questions.get(index - 1);
-            if (question instanceof ShortAnsQn) {
-                return ((ShortAnsQn) question).getQuestionAnswer();
-            } else {
-                System.out.println("    This question is not a Short Answer question.");
-                return null;
-            }
-        } catch (IndexOutOfBoundsException invalidIndex) {
-            System.out.println("    Ono! Please enter a valid question number *sobs*");
-            return null;
-        }
-    }
-
-    /**
-     * Retrieves the question by its index in the question list.
-     *
-     * @param index The index of the question in the list.
-     * @return The question, or null if the index is invalid or the question is of a different type.
-     */
-    public String getQuestionTextByIndex(int index) {
-        if (index >= 0 && index < allQns.size()) {
-            Question question = allQns.get(index);
-            return question.toString(); // Use the toString() method to get the text of the question
-        }
-        return null; // Handle invalid index
-    }
-
-
-    /**
      * Retrieves the question by its index in the question list.
      *
      * @param index The index of the question in the list.
@@ -416,8 +359,7 @@ public class QuestionList {
      */
     public Question getQuestionByIndex(int index) {
         if (index > 0 && index <= allQns.size()) {
-            Question question = allQns.get(index - 1);
-            return question; // Use the toString() method to get the text of the question
+            return allQns.get(index - 1); // Use the toString() method to get the text of the question
         }
         return null; // Handle invalid index
     }
@@ -449,7 +391,6 @@ public class QuestionList {
                 ui.displayMessageSameLine("  Your Answer: ");
                 userAnswer = ui.getUserInput().strip();
                 isValidAnswer = true; // Assume the answer is valid initially
-                boolean confirmationFlag = false;
 
                 if (userAnswer.isEmpty()) {
                     isValidAnswer = false;
@@ -469,8 +410,6 @@ public class QuestionList {
                         if (answerNumber < 1 || answerNumber > 4){
                             isValidAnswer = false;
                             ui.displayMessage("    Please enter a valid choice between 1 and 4.");
-                        } else {
-                            isValidAnswer = true; // The input is an integer within the valid range
                         }
                     } catch (NumberFormatException e) {
                         isValidAnswer = false;
