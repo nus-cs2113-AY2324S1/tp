@@ -16,6 +16,16 @@ public class Cart {
         this.entries.add(new CartEntry(key, quantity));
     }
 
+    public void addEntry(String serialNumber, long quantity, Inventory inventory) {
+        StockEntry stockEntry = inventory.get(serialNumber);
+        if (stockEntry != null) {
+            Drug drug = stockEntry.getDrug();
+            double sellingPrice = drug.getSellingPrice();
+            double totalCost = sellingPrice * quantity;
+            this.entries.add(new CartEntry(serialNumber, quantity, totalCost));
+        }
+    }
+
     public List<CartEntry> getCurrentCart() {
         return this.entries;
     }

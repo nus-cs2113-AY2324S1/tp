@@ -1,5 +1,10 @@
 package seedu.stocker.commands;
 
+import seedu.stocker.drugs.CartEntry;
+import seedu.stocker.drugs.Drug;
+import seedu.stocker.drugs.StockEntry;
+
+import java.util.List;
 
 /**
  * Represents a command to list all drugs in the current cart.
@@ -11,22 +16,49 @@ public class ViewCartCommand extends Command {
     public static final String COMMAND_WORD = "viewCart";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": View the current cart items." + System.lineSeparator()
+            + ": View the current cart items and the total cost." + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Listed all the content of your cart. ";
+    public static final String MESSAGE_SUCCESS = "Listed all the content of your cart. "
+            + "Total Cost: %1$.2f";
     public static final String MESSAGE_FAILURE = "Your cart is empty. ";
 
     /**
      * Execute the ViewCartCommand
      */
-    @Override
     public CommandResult execute() {
         if (currentCart.isEmpty()) {
-            return new CommandResult<>(MESSAGE_FAILURE);
+            return new CommandResult(MESSAGE_FAILURE);
         } else {
-            return new CommandResult(MESSAGE_SUCCESS, currentCart.getCurrentCart());
+            StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
+            int index = 1;
+            double totalCost = 0.0;
+
+            for (CartEntry cartEntry : currentCart.getCurrentCart()) {
+                String serialNumber = cartEntry.getSerialNumber();
+                long quantity = cartEntry.getQuantity();
+
+                StockEntry entry = inventory.get(serialNumber);
+                if (entry != null) {
+                    Drug drug = entry.getDrug();
+                    double sellingPrice = drug.getSellingPrice();
+                    double cost = sellingPrice * quantity;
+                    totalCost += cost;
+
+                    resultMessage.append("\t").append(index).append(". ")
+                            .append("Name: ").append(drug.getName())
+                            .append(", Quantity: ").append(quantity)
+                            .append(", Selling Price: ").append(sellingPrice)
+                            .append(", Cost: ").append(cost)
+                            .append(System.lineSeparator());
+
+                    index++;
+                }
+            }
+
+            resultMessage.append("Total Cost: ").append(totalCost).append(System.lineSeparator());
+
+            return new CommandResult(resultMessage.toString());
         }
     }
-
 }

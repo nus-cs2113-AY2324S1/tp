@@ -4,10 +4,17 @@ public class CartEntry {
 
     private String serialNumber;
     private long quantity;
+    private double totalCost;
 
     public CartEntry(String serialNumber, long quantity) {
         this.serialNumber = serialNumber;
         this.quantity = quantity;
+    }
+
+    public CartEntry(String serialNumber, long quantity, double totalCost) {
+        this.serialNumber = serialNumber;
+        this.quantity = quantity;
+        this.totalCost = totalCost;
     }
 
     public String getSerialNumber() {
