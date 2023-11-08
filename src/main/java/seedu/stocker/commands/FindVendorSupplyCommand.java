@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 /**
  * Lists the vendors that supply a specific drug.
  */
@@ -14,7 +12,7 @@ public class FindVendorSupplyCommand extends Command {
     public static final String COMMAND_WORD = "findVendorSupply";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the vendors that supply a specific drug. "
             + "Parameters: DRUG_NAME" + System.lineSeparator()
-            + "Example: " + COMMAND_WORD + " Paracetamol";
+            + "Example: " + COMMAND_WORD + " /n Paracetamol";
 
     private final String drugName;
 
@@ -33,12 +31,8 @@ public class FindVendorSupplyCommand extends Command {
      * @return CommandResult indicating the vendors that supply the drug or an error message.
      */
     @Override
-    public CommandResult execute() {
+    public <T> CommandResult<T> execute() {
         String lowercaseDrugName = drugName.toLowerCase();
-
-        if (lowercaseDrugName.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-        }
 
         List<String> supplyingVendors = VendorSupplyList.getVendorSuppliedDrugs()
                 .entrySet()
