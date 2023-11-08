@@ -30,7 +30,6 @@ public class QuestionList {
     public static final String SHUFFLE_QN_MSG = "    Questions are now shuffled!";
     public static final String INVALID_QUIZ_START_MSG = "    No question found in list / no question found " +
             "pertaining to module. \n    Add questions before starting the quiz";
-    public String qnListSizeMsg = "    Now you have " + getQuestionListSize() + " questions in the list! UWU";
     private ArrayList<Question> allQns; //array of inputs
     /**
      * Creates a new empty question list.
@@ -238,7 +237,7 @@ public class QuestionList {
             allQns.remove(index - 1);
             Ui.displayMessageStatically(DELETE_QN_MSG);
             printQuestion(question, false);
-            Ui.displayMessageStatically(qnListSizeMsg);
+            Ui.displayMessageStatically("    Now you have " + getQuestionListSize() + " questions in the list! UWU");
         } catch (IndexOutOfBoundsException invalidIndex){
             Ui.displayMessageStatically(INVALID_QN_MSG);
         }
@@ -376,7 +375,7 @@ public class QuestionList {
         }
         return null; // Handle invalid index
     }
-    
+
     /**
      * Starts a quiz session using the provided user interface (UI).
      *
