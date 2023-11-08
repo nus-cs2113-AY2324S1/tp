@@ -48,6 +48,24 @@ public class VendorSupplyList {
     }
 
     /**
+     * Removes a drug from a vendor's supply list.
+     *
+     * @param vendorName The name of the vendor.
+     * @param drugName   The name of the drug to be removed from the vendor's supply list.
+     * @return true if the drug was successfully removed, false otherwise.
+     */
+    public static boolean removeDrugFromVendor(String vendorName, String drugName) {
+        List<String> suppliedDrugs = vendorSuppliedDrugs.get(vendorName);
+        if (suppliedDrugs != null) {
+            boolean removed = suppliedDrugs.remove(drugName);
+            return removed;
+        } else {
+            return false; // Vendor not found
+        }
+    }
+
+
+    /**
      * Returns the mapping of vendors to the drugs they supply.
      *
      * @return A map where each key (vendor name) is associated with a list of drugs they supply.

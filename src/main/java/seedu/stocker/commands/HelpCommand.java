@@ -60,6 +60,8 @@ public class HelpCommand extends Command {
                         + System.lineSeparator()
                         + System.lineSeparator() + FindVendorSupplyCommand.MESSAGE_USAGE
                         + System.lineSeparator()
+                        + System.lineSeparator() + DeleteVendorSupplyCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
                         + System.lineSeparator() + ExitCommand.MESSAGE_USAGE
 
         );

@@ -147,6 +147,12 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
+                + "deleteVendorSupply: Deletes a drug from a vendor's supply list. Parameters: VENDOR_NAME, DRUG_NAME"
+                + System.getProperty("line.separator")
+                + "Example: deleteVendorSupply /v Moderna /n Paracetamol"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
                 + "bye: Exits the program."
                 + System.getProperty("line.separator")
                 + "Example: bye";
