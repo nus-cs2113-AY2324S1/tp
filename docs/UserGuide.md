@@ -92,15 +92,17 @@ Displays the list of all vendors that supply a particular drug.
 
 ### Feature-add to cart
 
-Adds a drug to the current cart if the requested quantity is available in the inventory.
+Adds a drug to a virtual shopping cart if the requested quantity is available in the inventory. It keeps track of the
+drugs dispensed to customers.
 
 ### Feature-view cart
 
-List all added drugs in the current cart.
+List all drugs and their respective quantities in the current cart. It helps to review the drugs about to be dispensed.
 
 ### Feature-checkout
 
-Empty the current cart and retrieve the specified items and quantity from the inventory.
+Finalizes the dispensing process by deducting the drugs and quantities in your cart from your inventory. It ensures that
+the inventory accurately reflects the items dispensed.
 
 ### Feature-add description
 
@@ -292,7 +294,7 @@ Expected outcome:
 || Listed all drugs with the keyword in the inventory.
 ```
 
-3Finds drugs whose **serial number** contain any of the given keywords.
+3. Finds drugs whose **serial number** contain any of the given keywords.
 
 Format:
 
