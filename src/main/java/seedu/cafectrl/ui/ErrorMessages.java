@@ -53,6 +53,13 @@ public class ErrorMessages {
             + "No worries, new pantry has been created";
     public static final String ORDER_LIST_FILE_NOT_FOUND_MESSAGE = "Order list data was not found!\n"
             + "No worries, new order list has been created";
+    public static final String EMPTY_UNIT_MESSAGE = "Unit cannot be empty! Please use either g or ml :)";
+    public static final String INVALID_UNIT_MESSAGE = "Invalid unit! Please use either g or ml :)";
+    public static final String INVALID_INGREDIENT_ARGUMENTS = "Invalid arguments for ingredients!\n"
+            + "Ingredient format: ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
+            + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
+            + "Example: ingredient/milk qty/200ml, ingredient/chicken qty/100g";
+    public static final String INVALID_INGREDIENT_QTY = "Quantity out of range! Quantity range is 1 to 1000000 :)";
     public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: "
             + "Incorrect format for the show_sale command.\n";
     public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer "

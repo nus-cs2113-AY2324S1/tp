@@ -96,7 +96,7 @@ Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIE
 
 * `DISH_NAME` 
 * `PRICE` must be a positive number and can be up to 2 decimal places.
-* `IMGREDIENT_QTY` must contain the unit ml or g specifically.
+* `INGREDIENT_QTY` must contain the unit ml or g specifically.
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example:
@@ -204,6 +204,9 @@ milk			1000ml
 Adds one or more ingredients to the pantry
 
 Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
+
+* `INGREDIENT_QTY` must contain the unit ml or g specifically
+  * e.g. `qty/50g` or `qty/1000ml`
 
 Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`
 

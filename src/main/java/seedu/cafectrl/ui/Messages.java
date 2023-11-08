@@ -23,8 +23,7 @@ public class Messages {
     public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
 
     /** Messages for view stock command */
-    public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
-            + "\nIngredients\t\tQty";
+    public static final String EMPTY_STOCK = "Sorry! Pantry is currently empty!";
 
     public static final String VIEW_STOCK_MESSAGE = "You have the following ingredients in pantry:";
     public static final String VIEW_STOCK_MESSAGE2 = "| You have the following ingredients in pantry:         |";
