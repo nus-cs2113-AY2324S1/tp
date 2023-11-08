@@ -265,10 +265,8 @@ public class Parser implements ParserUtil {
      * @throws ParserException if the input string does not match the constraints
      */
     private static ArrayList<Ingredient> parseIngredients(String ingredientsListString,
-                                                          boolean excludeRepeatedIngredients)
-            throws IllegalArgumentException, ParserException {
+            boolean excludeRepeatedIngredients) throws IllegalArgumentException, ParserException {
         String[] inputIngredientList = {ingredientsListString};
-
         ArrayList<Ingredient> ingredients = new ArrayList<>();
 
         //check if there is more than 1 ingredient
@@ -289,31 +287,21 @@ public class Parser implements ParserUtil {
             String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
             String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
             String ingredientUnit = ingredientMatcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
-
             int ingredientQty = Integer.parseInt(ingredientQtyString);
 
             if (isNameLengthInvalid(ingredientName)) {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
-            }
-
-            if (excludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)) {
+            } else if (excludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)){
                 continue;
-            }
-
-            if (isInvalidQty(ingredientQty)) {
+            } else if (isInvalidQty(ingredientQty)) {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY);
-            }
-
-            if (isEmptyUnit(ingredientUnit)) {
+            } else if (isEmptyUnit(ingredientUnit)) {
                 throw new ParserException(ErrorMessages.EMPTY_UNIT_MESSAGE);
-            }
-
-            if (!isValidUnit(ingredientUnit)) {
+            } else if (!isValidUnit(ingredientUnit)) {
                 throw new ParserException(ErrorMessages.INVALID_UNIT_MESSAGE);
             }
 
             Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
-
             ingredients.add(ingredient);
         }
 
@@ -327,7 +315,7 @@ public class Parser implements ParserUtil {
      * @return price in float format
      * @throws ParserException if price is not within reasonable format and range
      */
-    static float parsePriceToFloat(String priceText) throws ParserException {
+    public static float parsePriceToFloat(String priceText) throws ParserException {
         String trimmedPriceText = priceText.trim();
 
         final Pattern pricePattern = Pattern.compile("^-?[0-9]\\d*(\\.\\d{0,2})?$");
@@ -369,7 +357,7 @@ public class Parser implements ParserUtil {
      * @return true if dish name already exists in menu, false otherwise
      * @throws NullPointerException if the input string is null
      */
-    static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
+    public static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
         if (inputDishName == null) {
             throw new NullPointerException();
         }
@@ -416,7 +404,7 @@ public class Parser implements ParserUtil {
      * @return true if the name is more than max character limit set, false otherwise
      * @throws NullPointerException if the input string is null
      */
-    static boolean isNameLengthInvalid(String inputName) throws NullPointerException {
+    public static boolean isNameLengthInvalid(String inputName) throws NullPointerException {
         int maxNameLength = 35;
 
         if (inputName == null) {
