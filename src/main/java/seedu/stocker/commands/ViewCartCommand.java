@@ -4,8 +4,6 @@ import seedu.stocker.drugs.CartEntry;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.StockEntry;
 
-import java.util.List;
-
 /**
  * Represents a command to list all drugs in the current cart.
  * This command retrieves the list of drugs from the current cart and provides it as part of the command result.

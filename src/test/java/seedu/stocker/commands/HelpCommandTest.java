@@ -60,7 +60,7 @@ class HelpCommandTest {
                 + "Example: checkout"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
-                + "viewCart: View the current cart items."
+                + "viewCart: View the current cart items and the total cost."
                 + System.getProperty("line.separator")
                 + "Example: viewCart"
                 + System.getProperty("line.separator")
