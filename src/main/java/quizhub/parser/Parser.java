@@ -162,8 +162,7 @@ public class Parser {
             // Split the input by '/' to separate the parts
             String[] inputTokens = userInput.replace(
                     CommandMultipleChoice.COMMAND_WORD, "").strip().split("/");
-            // Check if there are exactly 8 parts (description, 4 options, answer, module,
-            // difficulty)
+            // Check if there are exactly 8 parts (description, 4 options, answer, module, difficulty)
             if (inputTokens.length > CommandMultipleChoice.ARGUMENT_SIZE) {
                 return new CommandInvalid(CommandMultipleChoice.TOO_MANY_ARGUMENTS_MSG);
             }
@@ -190,6 +189,10 @@ public class Parser {
             if (isFieldEmpty) {
                 return new CommandInvalid(CommandMultipleChoice.MISSING_FIELDS_MSG +
                         "\n" + CommandMultipleChoice.INVALID_FORMAT_MSG);
+            }
+            int answerIndex = Integer.parseInt(answer);
+            if (answerIndex < 1 || answerIndex > 4) {
+                return new CommandInvalid(CommandMultipleChoice.INVALID_ANSWER_MSG);
             }
             return new CommandMultipleChoice(description, option1, option2, option3, option4,
                     Integer.parseInt(answer), module, extractQuestionDifficulty(difficulty));

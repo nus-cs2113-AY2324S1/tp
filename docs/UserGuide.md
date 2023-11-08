@@ -46,6 +46,9 @@ from all fields of study.
 10. [Permanently shuffle questions order for added challenge!](#shuffling-questions-shuffle)
 
 ### Getting help on using the app: `help`
+
+[Back to Table of Contents](#table-of-contents)
+
 Assists new users in familiarising with the application. Provides a list of commands for the user to get started
 with the essentials.
 
@@ -60,35 +63,41 @@ Notes:
   (multiple pages of the help menu)
 
 ### Adding short-answer questions and their answers: `short`
+
+[Back to Table of Contents](#table-of-contents)
+
 Adds a new short question and its answer to the question and answer bank along with the assigned module and
 difficulty level.
 
 Format: `short [question]/[answer]/[module]/[difficulty]`
 * The difficulty level should only be of `easy`, `normal`, and `hard`
-* The ` / ` character should be replaced ` \slash ` keyword instead.
-* The ` pipe ` character is not allowed and will be removed if present in any fields.
+* The "/" character should be replaced "\slash" keyword instead.
+* The "|" character is not allowed and will be removed if present in any fields.
+* The answer cannot be exactly "\exitquiz" as it is an escape sequence
 
 Example of usage:
 * **Command**: `short What is the value of Pi to 2 decimal places?/3.14/math/easy` <br>
   **Output**: <br>
   ```
   I have added the following question OwO:
-  [S] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY
-  Now you have [no. of questions] questions in the list! UWU
+  [S][ ] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY
+  Now you have 1 questions in the list! UWU
   ```
-* **Command**: `short What fish is Nemo based off?/a Clownfish/trivia/easy` <br>
+* **Command**: `short What is 0.5 in fraction?/1\slash2/fraction/easy` <br>
   **Output**: <br>
   ```
   I have added the following question OwO:
-  [S][] What fish is Nemo based off? / a Clownfish | trivia | EASY
-  Now you have [no. of questions] questions in the list! UWU
+  [S][ ] What is 0.5 in fraction? / 1/2 | fraction | EASY
+  Now you have 2 questions in the list! UWU
   ```
 
 Notes:
-* If either the question or answer is left blank, the app will prompt you to re-enter the question-answer set,
-  the app does not support blank questions/answers
+* If any fields are blank or invalid, the app will prompt you to re-enter the question-answer set,
+  the app does not support blank fields
 
 ### Adding multiple-choice questions and their answers: `mcq`
+
+[Back to Table of Contents](#table-of-contents)
 
 Adds a new mcq question and its answer to the question and answer bank along with the assigned module and
 difficulty level.
@@ -99,22 +108,25 @@ Format: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer inde
 * The ` / ` character should be replaced ` \slash ` keyword instead.
 * The ` pipe ` character is not allowed and will be removed if present in any fields.
 
-* **Command**: `mcq what is the value of pi?/2.71/9.81/3.14/0/3/Maths/Easy` <br>
+* **Command**: `mcq what is the value of pi?/2.71/9.81/3.14/0/3/math/Easy` <br>
   **Output**: <br>
   ```
   I have added the following question OwO:
-  [M][ ] what is the value of pi? / 2.71 / 9.81 / 3.14 / 0 / 3 | Maths | EASY
-  Now you have 5 questions in the list! UWU
+  [M][ ] what is the value of pi? / 2.71 / 9.81 / 3.14 / 0 / 3 | math | EASY
+  Now you have 3 questions in the list! UWU
   ```
-* **Command**: `mcq is 5 \slash 3 rational?/yes/no/maybe/all of the above/1/Maths/easy` <br>
+* **Command**: `mcq is 5 \slash 3 rational?/yes/no/maybe/all of the above/1/fraction/easy` <br>
   **Output**: <br>
   ```
   I have added the following question OwO:
-  [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | Maths | EASY
+  [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | fraction | EASY
   Now you have 6 questions in the list! UWU
   ```
 
 ### List Questions `list`
+
+[Back to Table of Contents](#table-of-contents)
+
 List all the questions from the question and answer bank in the storage.
 
 Format: `list`
@@ -123,24 +135,28 @@ Examples of usage:
 * **Command**: `list` <br>
   **Output**:<br>
  ```
-  1: [S][] 2 / 4 | num | EASY
-  2: [S][] hi / hihi | word | EASY
-  3: [S][] 6 / 12 | num | EASY
+  1: [S][ ] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY
+  2: [S][ ] What is 0.5 in fraction? / 1/2 | fraction | EASY
+  3: [M][ ] what is the value of pi? / 2.71 / 9.81 / 3.14 / 0 / 3 | math | EASY
+  4: [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | fraction | EASY
   ```
 
 ### Delete Questions `delete`
+
+[Back to Table of Contents](#table-of-contents)
+
 Deletes the question with the specified question number from the question and answer bank.
 
 Format:
 `delete [question number]`
 
 Example of usage:
-* **Command**: `delete 2` <br>
+* **Command**: `delete 4` <br>
   **Output**: <br>
   ```
-  Roger that! I have deleted the following question >w< !
-  [s][] [question description] / [answer] | [module] | [quesiton difficulty]
-  Now you have [no. of questions] questions in the list! UWU
+  Roger that! I have deleted the following question >w< ! 
+      [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | fraction | EASY
+  Now you have 3 questions in the list! UWU
   ```
 
 Notes:
@@ -148,69 +164,81 @@ Notes:
 * The program accepts only a valid integer question number within the range of the number of available questions, any other form of inputs will result in the program prompting you to re-enter a valid command.
 
 ### Find question/answer/module `find`
+
+[Back to Table of Contents](#table-of-contents)
+
 Finds and displays all questions in the poll that match the criteria, 
-either in the question/answer field (with the `/description` keyword), 
+either in the question field (with the `/description` keyword), 
 or the module field (with the `/module` keyword). You may use partial matches.
 
 Format: 
-1. `find /description [question description]` Find a question by its question or answer
+1. `find /description [question description]` Find a question by its question
 2. `find /module [question module]` Find a question by its module
 
 Examples of usage:
-* **Command**: `find /description example description` <br>
+* **Command**: `find /description Pi` <br>
   **Output**: <br>
   ```
   Here are questions that matched your search:
-  1: [S][] EXAMPLE Description / [answer] | [module] | [question difficulty]
-  2: [S][] example description1 / [answer] | [module] | [question difficulty]
-  3: [S][] example description 2/ [answer] | [module] | [question difficulty]
+  1: [S][ ] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY
+  3: [M][ ] what is the value of pi? / 2.71 / 9.81 / 3.14 / 0 / 3 | math | EASY
   ```
-* **Command**: `find /desciption example answer` <br>
+* **Command**: `find /module fraction` <br>
   **Output**: <br>
-* ```
-  Here are questions that matched your search:
-  1: [S][] [question description] / EXAMPLE Answer | [module] | [question difficulty]
-  2: [S][] [question description] / example answer1 | [module] | [question difficulty]
-  3: [S][] [question description] / example answer 2 | [module] | [question difficulty] 
+  ```
+    Here are questions that matched your search:
+    2: [S][ ] What is 0.5 in fraction? / 1/2 | fraction | EASY
   ```
 
 Notes:
-* As long as the search keyword string is a substring of the question description / answer of a question stored in the question and answer bank, it will be included in the search result. Please refer to the above examples as an illustration of this property.
+* As long as the search keyword string is a substring of the question description of a question stored in the question and answer bank, it will be included in the search result. Please refer to the above examples as an illustration of this property.
 * The search is non-case-sensitive. Please refer to the above examples as an illustration of this property.
 
 ### Edit question/answer `edit`
+
+[Back to Table of Contents](#table-of-contents)
+
 Edits the description or answer of an existing question in the question and answer bank
 by referencing the number of the question in the existing question list in the question
 and answer bank.
 
 Format:
 1. Use `edit [question number] /description [newDescription]` to edit description
-2. Use `edit [question number] /answer [newAnswer]` to edit answer
-3. The ` / ` character should be replaced ` \slash ` keyword instead
-4. The ` pipe ` character is not allowed and will be removed if present in any fields
+2. Use `edit [question number] /answer [newAnswer]` to edit answers
+3. Use `edit [question number] /option[1...4] [newAnswer]` to edit a choice of MCQ question
+4. The ` / ` character should be replaced ` \slash ` keyword instead
+5. The ` pipe ` character is not allowed and will be removed if present in any fields
 
 Examples of usage:
-* **Command**: `edit 1 /description change description!!!` <br>
+* **Command**: `edit 1 /description What is the value of Pi to 3 decimal places?` <br>
   **Output**:  <br>
-* ```
-  Roger that! I have edited the following question >w< !
-  [S][] change description!!! / [original answer] | [module] | [question difficulty]
-  Now you have [no. of questions] questions in the list! UWU
   ```
-* **Command**: `edit 2 /answer different answer???` <br>
+      [S][ ] What is the value of Pi to 3 decimal places? / 3.14 | math | EASY
+    Roger that! I have edited the following question >w< !
+  ```
+* **Command**: `edit 1 /answer 3.142` <br>
   **Output**: <br>
-* ```
-  Roger that! I have edited the following question >w< !
-  [S][] [original description] / different answer??? | [module] | [question difficulty]
-  Now you have [no. of questions] questions in the list! UWU
+  ```
+      [S][ ] What is the value of Pi to 3 decimal places? / 3.142 | math | EASY
+    Roger that! I have edited the following question >w< !
+  ```
+
+* **Command**: `edit 3 /option1 2.713` <br>
+  **Output**: <br>
+  ```
+      [M][ ] what is the value of pi? / 2.713 / 9.81 / 3.14 / 0 / 3 | math | EASY
+    Roger that! I have edited the following question >w< !
   ```
 
 Notes:
 * If either the question number is invalid, or no new description or answer is provided,
   the app will prompt you to re-enter the edit command
-* The app only supports changing either description or answer at a time, not both together
+* The app only supports changing either description, answer, or one option at a time, not both together
 
 ### Start quiz `start`
+
+[Back to Table of Contents](#table-of-contents)
+
 Starts a quiz which fetches the specified category from the question bank in normal / random order to be tested.
 The app will display the fetched questions one at a time on CLI and the user is required to enter answer through CLI.
 Upon every user answer entry, the app feedbacks if the user answered correctly, loads the next question and updates
@@ -224,12 +252,17 @@ Format:  `start /[quiz mode] [start details] /[qn mode] /[qn type]`
 Examples of usage:
 * **Command**: `start /module num /normal /mix` <br>
   **Output**: starts the quiz - displays questions that pertains to module “num” in order defined in the list
-* **Command**: `start /module num /random /mix` <br>
-  **Output**: starts the quiz - displays questions that pertains to module “num” but in a randomised order
-* **Command**: `start /all /random /mix` <br>
-  **Output**: starts the quiz - displays questions directly from the list of questions in random order
+* **Command**: `start /module num /random /short` <br>
+  **Output**: starts the quiz - displays short answer questions that pertains to module “num” but in a randomised order
+* **Command**: `start /all /random /mcq` <br>
+  **Output**: starts the quiz - displays mcq questions directly from the list of questions in random order
 * **Command**: `start /all /normal /mix` <br>
   **Output**: starts the quiz - displays questions directly from the list of questions in the order of the list
+
+Taking the quiz:
+* **Short Answer Questions**: Enter the exact case-insensitive answer and press enter
+* **Multiple Choice Questions**: Enter the index for the correct answer
+* **Terminating the Quiz**: Enter "\exitquiz" in any questions
 
 
 Notes:
@@ -237,14 +270,29 @@ Notes:
   with a prompt to write the command in the specified format.
 
 ### Shuffling Questions `shuffle`
+
+[Back to Table of Contents](#table-of-contents)
+
 Shuffle questions within question list to a random order,
 
 Format: `shuffle`
+
+**Output**:
+```
+    Questions are now shuffled!
+    1: [S][ ] What is 0.5 in fraction? / 1/2 | fraction | EASY
+    2: [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | fraction | EASY
+    3: [S][ ] What is the value of Pi to 2 decimal places? / 3.14 | math | EASY
+    4: [M][ ] what is the value of pi? / 2.71 / 9.81 / 3.14 / 0 / 3 | math | EASY
+```
 
 Notes
 * Shuffle will not work if there are no questions within the question bank
 
 ### Mark difficulty of questions `markdiff`
+
+[Back to Table of Contents](#table-of-contents)
+
 Changes the difficulty level of an existing question in the question and answer bank
 by referencing the number of the question in the existing question list in the question
 and answer bank.
@@ -256,13 +304,13 @@ Examples of usage:
   **Output**:  <br>
   ```
   Roger that! I have marked the following question as easy >w< !
-  [S][] [original description] / [original answer] | [module] | EASY
+      [S][ ] What is 0.5 in fraction? / 1/2 | fraction | EASY
   ```
 * **Command**: `markdiff 2 /Hard` <br>
   **Output**: <br>
-* ```
+  ```
   Roger that! I have marked the following question as hard >w< !
-  [S][] [original description] / [original answer] | [module] | HARD
+      [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | fraction | HARD
   ```
 Notes:
 * If either the question number is invalid, or no difficulty level is provided,
@@ -272,10 +320,15 @@ Notes:
 * Input difficulty level is **not case-sensitive**
 
 ### Exit Program `bye`
+
+[Back to Table of Contents](#table-of-contents)
+
 Exits the program <br>
 Format: `bye`
 
 ### Store and Edit Question Pool Using The Question File
+
+[Back to Table of Contents](#table-of-contents)
 
 Storage:
 * The storage operation is done automatically without the need for user input
@@ -309,14 +362,16 @@ begin from the second line onwards, with each question taking one line
 Example:
 ```
 Latest Questions
-S | undone | Full name of Java? / JavaScript. | CS2113 | NORMAL
+S | undone | Is Java Fully OOP? / yes | CS2113 | NORMAL
 S | undone | How many different STs are there in a complete graph with 9 vertices? / 4782969 | CS2040C | HARD
 S | undone | Does one-time-pad satisfy perfect secrecy / Yes | CS3235 | EASY
-M | undone | What is 1+1 / 1 / 2 / 3 / 4 / 2 | MA1521 | EASY
+M | undone | derivative of x^2 / x^2 / 2x / x / x^3 / 2 | MA1521 | EASY
 M | undone | Should we use arrowhead code / yes / no / maybe / unsure / 2 | CS2113 | EASY
 M | undone | Name of Java mascot / duke / duck / dick / drew / 1 | CS2113 | EASY
 ```
 ## FAQ
+
+[Back to Table of Contents](#table-of-contents)
 
 **Q**: How do I transfer my data to another computer?
 
@@ -325,13 +380,15 @@ computer.
 
 ## Command Summary
 
+[Back to Table of Contents](#table-of-contents)
+
 1. `help` - shows the list of commands you can use,
 2. `short [question]/[answer]/[module]/[difficulty]` - adds a short answer question and its answer to the list,
 3. `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]` - adds a multiple-choice question and its answer to the list
 4. `list` - shows the list of questions and answers,
 5. `delete [question number]` - deletes the question and answer at the specified number,
 6. `find /description [description]` - displays all questions containing the specified description,
-7. `find /description [module]` - displays all questions that belong to the specified module,
+7. `find /module [module]` - displays all questions that belong to the specified module,
 8. `edit [question number] /description [description]` - edits the description of the question with the specified
    number,
 9. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number,

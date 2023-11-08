@@ -35,7 +35,6 @@ public class CommandDelete extends Command {
         String questionName = questions.viewQuestionByIndex(qnIndex);
         if (questionName.equals("Question Not Found")) {
             ui.showInvalidCommandHelp(Ui.INVALID_INTEGER_INDEX_MSG);
-            ui.displayNumberOfQuestions();
             return;
         }
         questions.deleteQuestionByIndex(qnIndex);

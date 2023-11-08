@@ -117,6 +117,9 @@ public class Storage {
             String option3 = qnTokens[3].strip();
             String option4 = qnTokens[4].strip();
             int answer = Integer.parseInt(qnTokens[5].strip());
+            if (answer < 1 || answer > 4) {
+                return 1;
+            }
             if (questionString.isEmpty() || option1.isEmpty() || option2.isEmpty() || option3.isEmpty()
                     || option4.isEmpty() || qnModule.isEmpty()) {
                 return 1;
