@@ -90,7 +90,7 @@ public class Parser {
         case FindVendorSupplyCommand.COMMAND_WORD:
             return prepareFindVendorSupplyCommand(arguments);
 
-            case CheckOutCommand.COMMAND_WORD:
+        case CheckOutCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
                 return new CheckOutCommand();
             } else {
