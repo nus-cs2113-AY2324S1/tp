@@ -393,17 +393,26 @@ Example of usage:
 
 `editExpense 1 DESC weekly allowance`
 
+### Delete all transactions at once: `clear` [coming soon]
+Clears all previously entered incomes and expenses. This will reset the .txt file and allow you to start from scratch.
+
 ### Set Password: `setPassword` [coming soon]
-Set new password.
+Set new password to add a layer of security for the tracking of your financial transactions.
 
 ### Change Password: `changePassword` [coming soon]
-Change Password.
+Change the password in case you believe your previous one may have been leaked.
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?
+* **Q**: How do I transfer my data to another Computer?
 
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data.
+  **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data.
+
+
+* **Q**: How can I create a file containing new information without deleting the previous one?
+
+  **A**: Exit and restart CashLeh?. This time use a different name. The application is designed in such a way to create personal financial statements, so different users can create personalised entries even on the same device.
+
 
 ## Command Summary
 * Add income `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`

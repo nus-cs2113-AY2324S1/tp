@@ -31,12 +31,6 @@ public class FinancialStatement {
         this.financialStatement.addAll(expenseStatement.getExpenseStatement());
     }
 
-    /**
-     * Retrieves the transaction from the statement.
-     * @return The transaction at the specified index.
-     * @throws CashLehMissingTransactionException If the specified transaction is not found.
-     */
-
     public int getSize() {
         return financialStatement.size();
     }

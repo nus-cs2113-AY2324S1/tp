@@ -28,7 +28,9 @@ The **User** sends command which is processed by Input
 
 ![](./images/main_example.png)
 
-The Sequence Diagram above shows how the components interact with each other when the user enters a command
+The Sequence Diagram above shows how the components interact with each other when the user enters a command.
+A list of the accepted input commands is available in the [User Guide](./UserGuide.md).
+
 
 ### Setting, viewing and editing a budget feature
 
@@ -41,8 +43,8 @@ with two attributes, of type `FinancialStatement` and `Budget` respectively. It 
 which will be needed for the functioning of the overall budget feature. The BudgetHandler handles a budget which is
 initially set to not active (activated only when the budget is actually set by the user through the command
 `updateBudget`). On the other hand, the BudgetHandler is simultaneously responsible for measuring the Progress: It
-sets the Progress' percentage and calls the method to display the progress bar chart. Below you can see a simple class
-diagram summarizing these relationships.
+sets the Progress' percentage and calls the method to display the progress bar chart through its own method
+printBudget(). Below you can see a simple class diagram summarizing these relationships.
 
 ![](./images/budgetHandler_classDiagram.png)
 
@@ -55,18 +57,27 @@ The printBudget method of BudgetHandler is called.
 
 **Step 2**\
 The BudgetHandler self invokes its own method setBudgetPercentage() to retrieve the data from the
-financial statement.
+financial statement and create a new object of type Progress using the cash on hand and budget amount.
 
 **Step 3**\
 If the budget is not active (has not been initialised or deleted by the user), a CashLehBudgetException is thrown.
-If the budget is active (has been initialised or updated by the user), the BudgetHandler self-invokes two methods:
-* printBasicWarning(): checks if the user's budget still provides a good cushion (meaning that he/she still has
-more than 25% of his budget left) and prints a warning if not
-* printSeriousWarning(): checks if the user ran out of budget and prints a warning if so
+If the budget is active (has been initialised or updated by the user), two further conditions need to be checked before 
+being able to continue: 
+* in case of a budget deficit (net cash on hand <= 0) a serious warning is printed
+* in case of a small surplus (less than 25% of the budget remaining) a basic warning is printed
 
 **Step 4**\
-A string containing information about the budget, the net cash from the financial statement and the progress bar
-is built and passed to the method printMultipleText by the Ui.
+Finally, a string containing information about the budget, the net cash from the financial statement and the progress bar
+is built and passed to the method printMultipleText() by the Ui. A potential output example is given below.
+
+```console
+	You have set a budget of: 60.0
+	Here's a quick view of how you're doing so far:
+	You have a net cash on hand of: 10.0
+	You still have the following percent of your budget left:
+
+	[*****-------------------------] 16.67%
+```
 
 ### String Tokenizer
 

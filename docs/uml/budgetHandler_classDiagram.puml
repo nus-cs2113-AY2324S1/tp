@@ -12,6 +12,8 @@ BudgetHandler -r-> "0..1" Progress : measures >
 BudgetHandler --> "1" FinancialStatement : refers to >
 
 class BudgetHandler {
+    -{static} MINIMUM_BUDGET_PERCENTAGE_THRESHOLD: double
+    -{static} MAXIMUM_BUDGET_PERCENTAGE: double
     +deleteBudget(): void
     +printBasicWarning(): void
     +printSeriousWarning(): void
