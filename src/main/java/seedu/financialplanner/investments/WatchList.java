@@ -240,7 +240,7 @@ public class WatchList {
      * Method used to add a new stock to the watchlist that has the stockCode given by the parameter provided
      *
      * @param stockCode
-     * @return
+     * @return stockName
      * @throws FinancialPlannerException
      */
     public String addStock(String stockCode) throws FinancialPlannerException {
@@ -266,7 +266,7 @@ public class WatchList {
      * Method for deleting a stock from the watchlist that has the stockCode given by the parameter provided
      *
      * @param stockCode
-     * @return
+     * @return deleted stock name
      * @throws FinancialPlannerException
      */
     public String deleteStock(String stockCode) throws FinancialPlannerException {

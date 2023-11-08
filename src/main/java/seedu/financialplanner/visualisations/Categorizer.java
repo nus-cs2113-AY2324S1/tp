@@ -24,7 +24,7 @@ public class Categorizer {
      *
      * @param cashflowList
      * @param type
-     * @return
+     * @return hashmap of sorted income/expense according to category
      * @throws FinancialPlannerException
      */
     public static HashMap<String, Double> sortType(CashflowList cashflowList, String type)
