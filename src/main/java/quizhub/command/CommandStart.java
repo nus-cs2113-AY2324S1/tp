@@ -57,53 +57,6 @@ public class CommandStart extends Command{
      * @param questions Current question list in the program.
      * @param dataStorage Hard disk storage for storing question data.
      */
-//    @Override
-//    public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
-//        assert questions != null && ui != null && dataStorage != null;
-//
-//        ArrayList<Question> matchedQuestions = new ArrayList<>();
-//        handleStartMode(ui, questions, matchedQuestions);
-//        if (!startQnType.equals("mix")) {
-//            matchedQuestions = matchedQuestions.stream()
-//                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
-//                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
-//                    .collect(Collectors.toCollection(ArrayList::new));
-//        }
-//        handleQnMode(ui, questions, matchedQuestions);
-//    }
-//
-//    public void handleStartMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
-//        switch (startMode.toLowerCase()) {
-//        case "module":
-//            assert startDetails != null;
-//            String[] modules  = startDetails.split(" ");
-//            try {
-//                matchedQuestions = questions.assembleListByModules(modules);
-//            } catch (QuizHubExceptions emptyList){
-//                ui.displayMessage(emptyList.getMessage());
-//                return;
-//            }
-//            break;
-//        case "all":
-//            matchedQuestions = questions.getAllQns();
-//            break;
-//        default:
-//            ui.displayMessage(INVALID_QUIZ_MODE_MSG);
-//        }
-//    }
-//    public void handleQnMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
-//        switch(startQnMode.toLowerCase()){
-//        case "random":
-//            Collections.shuffle(matchedQuestions); // shuffles matched Questions
-//            questions.startQuiz(ui, matchedQuestions);
-//            break;
-//        case "normal":
-//            questions.startQuiz(ui, matchedQuestions);
-//            break;
-//        default:
-//            ui.displayMessage(INVALID_QN_MODE_MSG);
-//        }
-//    }
 
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
