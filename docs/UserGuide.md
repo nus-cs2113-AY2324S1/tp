@@ -340,6 +340,54 @@ These workouts contain the keyword run:
 2. [W] slow run (20kcal, 2023-10-29)
 ```
 
+### Adding steps: `addsteps`
+Allows user to add their steps walked for a particular day.
+
+**Format**
+- `addsteps <STEPS> d/<CALORIES>`
+- You should type `<DATE>` in format of `yyyy-MM-dd`.
+
+**Example of usage**
+```
+addsteps 2000 d/2023-10-23
+```
+
+**Expected output**
+```
+I've added the following steps:
+[S] 2000 steps (2023-10-23)
+```
+### Viewing list of all steps: `viewsteps`
+Lists all the steps entries made.
+
+**Example of usage:**
+```
+viewsteps
+```
+
+**Expected output:**
+```
+These are the steps you have done:
+1.[S] 100 steps (2023-10-02)
+2.[S] 100 steps (2023-10-02)
+```
+### Deleting a step entry: `deletesteps`
+Allows user to delete a step entry they have added.
+
+**Format**
+- `deletesteps <INDEX>`
+
+**Example of usage**
+```
+deletesteps 1
+```
+
+**Expected output**
+```
+I've deleted the following step entry:
+[S] 100 steps (2023-10-02)
+```
+
 
 ### Checking total calories burnt on a specific date: `caloriesburnt`
 Allows user to check total calories burnt by workouts on a specific date.
@@ -428,3 +476,8 @@ The contents of workoutList.txt:
 | Viewing list of workout                             | `viewworkout`            |
 | Find workouts by a keyword                          | `findworkout`            |
 | Checking total calories burnt on a specific date    | `caloriesburnt`          |
+| Adding a step entry                                 | `addsteps`               |
+| Deleting a step entry                               | `deletesteps`            |
+| Viewing the list of steps                           | `viewsteps`              |
+| Calculating the total steps                         | `totalsteps`              |
+
