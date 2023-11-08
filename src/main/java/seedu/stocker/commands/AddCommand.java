@@ -44,7 +44,8 @@ public class AddCommand extends Command {
                 entry.incrQuantity(this.quantity);
                 return new CommandResult<>(String.format(MESSAGE_SUCCESS_EXISTING, existingDrug.getName()));
             } else {
-                return new CommandResult<>("A drug with the same serial number but different name or expiry date already exists.");
+                return new CommandResult("A drug with the same serial number but different name "
+                        + "or expiry date already exists.");
             }
         }
 
