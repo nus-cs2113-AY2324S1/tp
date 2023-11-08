@@ -16,7 +16,8 @@ public class AddCommand extends Command {
             + " /n Doliprane /d 12/06/2035 /s ABC123 /q 52 /p 12.90";
 
     public static final String MESSAGE_SUCCESS = "New drug added in the inventory: %1$s";
-    public static final String MESSAGE_FAILURE = "A different drugs already exists with differents properties. ";
+    public static final String MESSAGE_SUCCESS_EXISTING = "Increased the quantity of an existing drug with the same " +
+            "serial number";
 
     private final String name;
     private final String expiryDate;
@@ -41,7 +42,7 @@ public class AddCommand extends Command {
             if (existingDrug.getName().equals(this.name) && existingDrug.getExpiryDate().equals(this.expiryDate)) {
                 // If the existing drug has the same name and expiry date, increment the quantity
                 entry.incrQuantity(this.quantity);
-                return new CommandResult<>(String.format(MESSAGE_SUCCESS, existingDrug.getName()));
+                return new CommandResult<>(String.format(MESSAGE_SUCCESS_EXISTING, existingDrug.getName()));
             }
         }
 
