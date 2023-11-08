@@ -10,9 +10,23 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * Class that is used to sort the cash flow list into different categories according to the type they are
+ * (Income, Expense)
+ */
 public class Categorizer {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
+    /**
+     * Method that calls the required methods to sort the cash flow based on the type is specified by the user
+     * (Income, Expense)
+     *
+     * @param cashflowList
+     * @param type
+     * @return
+     * @throws FinancialPlannerException
+     */
     public static HashMap<String, Double> sortType(CashflowList cashflowList, String type)
             throws FinancialPlannerException {
         switch (type) {
@@ -27,6 +41,12 @@ public class Categorizer {
         }
     }
 
+    /**
+     * Method to sort the expenses of the cash flow list into different categories and return the sorted hashmap
+     *
+     * @param cashflowList
+     * @return
+     */
     public static HashMap<String, Double> sortExpenses(CashflowList cashflowList) {
         HashMap<String, Double> expensesByCat = new HashMap<>();
         for (Cashflow e: cashflowList.list) {
@@ -40,6 +60,12 @@ public class Categorizer {
         return expensesByCat;
     }
 
+    /**
+     * Method to sort the incomes of the cash flow list into different categories and return the sorted hashmap
+     *
+     * @param cashflowList
+     * @return
+     */
     public static HashMap<String, Double> sortIncome(CashflowList cashflowList) {
         HashMap<String, Double> incomeByCat = new HashMap<>();
         for (Cashflow e: cashflowList.list) {

@@ -8,10 +8,20 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Command that inherits from the Command abstract class
+ * Represents that command that add stock to watchlist
+ */
 public class AddStockCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;
 
+    /**
+     * Constructor for the command add stock to watchlist
+     *
+     * @param rawCommand
+     * @throws IllegalArgumentException
+     */
     public AddStockCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("s")) {
             throw new IllegalArgumentException("Stock code cannot be empty");
@@ -28,6 +38,9 @@ public class AddStockCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to add stock to watchlist
+     */
     @Override
     public void execute() {
         Ui ui = Ui.getInstance();
