@@ -452,7 +452,7 @@ The contents of workoutList.txt:
 
 **Q**: How do I save my data that I have added?
 
-**A**: The program automatically saves all your data upon exiting, or you can type `save`.
+**A**: The program automatically saves all your data upon exiting.
 
 
 ## Command Summary
@@ -461,7 +461,6 @@ The contents of workoutList.txt:
 |:----------------------------------------------------|:-------------------------|
 | Viewing help guide                                  | `help`                   |
 | Exiting the application                             | `exit`                   |
-| Saving to File                                      | `save`                   |
 | Editing your profile                                | `editprofile`            |
 | Viewing your profile                                | `viewprofile`            |
 | Checking your current bmi                           | `bmi`                    |
