@@ -42,7 +42,6 @@ class UI {
 
 class AddOrderCommand {
 # pantry : Pantry
-# orderList : OrderList
 # menu : Menu
 - ui : Ui
 - order : Order
