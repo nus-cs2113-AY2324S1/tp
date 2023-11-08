@@ -366,6 +366,76 @@ public class QuestionList {
      *
      * @param ui The user interface to interact with the user.
      */
+//    public void startQuiz(Ui ui, ArrayList<Question> questions) {
+//        if (questions.isEmpty()) {
+//            ui.displayMessage("    No question found in list / no question found pertaining to module. " +
+//                    "Add questions before starting the quiz");
+//            return;
+//        }
+//
+//        ui.displayMessage("    Starting the quiz...");
+//        int totalQuestions = questions.size();
+//        int correctAnswers = 0;
+//
+//        for (int i = 0; i < totalQuestions; i++) {
+//            Question question = questions.get(i);
+//            ui.displayQuestion(question, i + 1, totalQuestions);
+//            String userAnswer;
+//            boolean isValidAnswer;
+//
+//            do {
+//                ui.displayMessageSameLine("  Your Answer: ");
+//                userAnswer = ui.getUserInput().strip();
+//                isValidAnswer = true; // Assume the answer is valid initially
+//
+//                if (userAnswer.isEmpty()) {
+//                    isValidAnswer = false;
+//                    ui.displayMessage("    The question cannot be left blank.");
+//                    continue; // Skip the remaining checks and prompt for input again
+//                }
+//
+//                if ("\\exitquiz".equalsIgnoreCase(userAnswer)) {
+//                    ui.displayMessage("    Exiting the quiz...");
+//                    return; // Exit the startQuiz method
+//                }
+//
+//                if (question instanceof MultipleChoiceQn) {
+//                    try {
+//                        int answerNumber = Integer.parseInt(userAnswer);
+//                        // Check for numbers not within range 1-4
+//                        if (answerNumber < 1 || answerNumber > 4){
+//                            isValidAnswer = false;
+//                            ui.displayMessage("    Please enter a valid choice between 1 and 4.");
+//                        }
+//                    } catch (NumberFormatException e) {
+//                        isValidAnswer = false;
+//                        ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
+//                    }
+//                }
+//
+//            } while (!isValidAnswer);
+//
+//            String correctAnswer;
+//            if (question instanceof MultipleChoiceQn) {
+//                correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
+//            } else {
+//                correctAnswer = ((ShortAnsQn) question).getQuestionAnswer();
+//            }
+//
+//            correctAnswer = correctAnswer.strip();
+//
+//            if (userAnswer.equalsIgnoreCase(correctAnswer)) {
+//                ui.displayMessage("    Correct!");
+//                correctAnswers++;
+//            } else {
+//                ui.displayMessage("    Wrong!");
+//                ui.displayMessage("    The correct answer is: " + correctAnswer);
+//            }
+//        }
+//
+//        ui.displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
+//        ui.displayMessage("    Quiz completed!");
+//    }
     public void startQuiz(Ui ui, ArrayList<Question> questions) {
         if (questions.isEmpty()) {
             ui.displayMessage("    No question found in list / no question found pertaining to module. " +
@@ -375,65 +445,71 @@ public class QuestionList {
 
         ui.displayMessage("    Starting the quiz...");
         int totalQuestions = questions.size();
-        int correctAnswers = 0;
+        int correctAnswersCount = 0;
 
         for (int i = 0; i < totalQuestions; i++) {
             Question question = questions.get(i);
             ui.displayQuestion(question, i + 1, totalQuestions);
-            String userAnswer;
-            boolean isValidAnswer;
+            String userAnswer = getUserAnswer(ui, question);
 
-            do {
-                ui.displayMessageSameLine("  Your Answer: ");
-                userAnswer = ui.getUserInput().strip();
-                isValidAnswer = true; // Assume the answer is valid initially
+            if (userAnswer == null) return; // Exit the quiz if the user types "\\exitquiz"
 
-                if (userAnswer.isEmpty()) {
-                    isValidAnswer = false;
-                    ui.displayMessage("    The question cannot be left blank.");
-                    continue; // Skip the remaining checks and prompt for input again
-                }
-
-                if ("\\exitquiz".equalsIgnoreCase(userAnswer)) {
-                    ui.displayMessage("    Exiting the quiz...");
-                    return; // Exit the startQuiz method
-                }
-
-                if (question instanceof MultipleChoiceQn) {
-                    try {
-                        int answerNumber = Integer.parseInt(userAnswer);
-                        // Check for numbers not within range 1-4
-                        if (answerNumber < 1 || answerNumber > 4){
-                            isValidAnswer = false;
-                            ui.displayMessage("    Please enter a valid choice between 1 and 4.");
-                        }
-                    } catch (NumberFormatException e) {
-                        isValidAnswer = false;
-                        ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
-                    }
-                }
-
-            } while (!isValidAnswer);
-
-            String correctAnswer;
-            if (question instanceof MultipleChoiceQn) {
-                correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
-            } else {
-                correctAnswer = ((ShortAnsQn) question).getQuestionAnswer();
-            }
-
-            correctAnswer = correctAnswer.strip();
-
-            if (userAnswer.equalsIgnoreCase(correctAnswer)) {
+            if (checkAnswer(question, userAnswer)) {
                 ui.displayMessage("    Correct!");
-                correctAnswers++;
+                correctAnswersCount++;
             } else {
                 ui.displayMessage("    Wrong!");
-                ui.displayMessage("    The correct answer is: " + correctAnswer);
+                ui.displayCorrectAnswer(question);
             }
         }
 
-        ui.displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
-        ui.displayMessage("    Quiz completed!");
+        ui.displayFinalScore(correctAnswersCount, totalQuestions);
+    }
+
+    private String getUserAnswer(Ui ui, Question question) {
+        String userAnswer;
+        boolean isValidAnswer;
+        do {
+            ui.displayMessageSameLine("  Your Answer: ");
+            userAnswer = ui.getUserInput().strip();
+            isValidAnswer = validateAnswer(ui, userAnswer, question);
+        } while (!isValidAnswer);
+
+        return userAnswer;
+    }
+
+    private boolean validateAnswer(Ui ui, String userAnswer, Question question) {
+        if (userAnswer.isEmpty()) {
+            ui.displayMessage("    The question cannot be left blank.");
+            return false;
+        }
+
+        if ("\\exitquiz".equalsIgnoreCase(userAnswer)) {
+            ui.displayMessage("    Exiting the quiz...");
+            return false;
+        }
+
+        return validateMCQAnswer(ui, userAnswer, question);
+    }
+
+    private boolean validateMCQAnswer(Ui ui, String userAnswer, Question question) {
+        if (question instanceof MultipleChoiceQn) {
+            try {
+                int answerNumber = Integer.parseInt(userAnswer);
+                if (answerNumber < 1 || answerNumber > 4) {
+                    ui.displayMessage("    Please enter a valid choice between 1 and 4.");
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkAnswer(Question question, String userAnswer) {
+        String correctAnswer = question.getCorrectAnswer();
+        return userAnswer.equalsIgnoreCase(correctAnswer);
     }
 }
