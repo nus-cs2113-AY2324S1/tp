@@ -83,6 +83,7 @@ public class FitTrack {
             command = CommandParser.parseCommand(userCommandLine);
             CommandResult commandResult = executeCommand(command);
             ui.printCommandResult(commandResult);
+            ui.printLine();
         } while (!ExitCommand.isExit(command));
     }
 
