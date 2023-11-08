@@ -67,7 +67,10 @@ public class Messages {
     public static final String AVAILABLE_DISHES = "Listed below are the availability of the dishes for the next order!";
     public static final String COMPLETE_ORDER = "Order is ready!";
     public static final String INCOMPLETE_ORDER = "Please restock ingredients before preparing the order :) ";
-    public static final String RESTOCK_END_CAP = "+----------------------------------------------------------------------+";
-    public static final String RESTOCK_CORNER =  "+----------------------------------------+--------------+--------------+";
-    public static final String RESTOCK_TITLE =   "| Restock                                | Current      | Needed       |";
+    public static final String RESTOCK_END_CAP = "+-----------------------------------------"
+            + "-----------------------------+";
+    public static final String RESTOCK_CORNER =  "+----------------------------------------+"
+            + "--------------+--------------+";
+    public static final String RESTOCK_TITLE =   "| Restock                                | "
+            + "Current      | Needed       |";
 }

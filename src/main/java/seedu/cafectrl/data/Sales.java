@@ -94,6 +94,7 @@ public class Sales {
             ui.showSalesTop(day);
 
             orderList.printOrderList(menu, ui);
+            ui.showSalesBottom();
         } catch (Exception e) {
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
         }

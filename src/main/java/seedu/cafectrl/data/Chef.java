@@ -1,21 +1,16 @@
 package seedu.cafectrl.data;
-
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
-
-import java.text.DecimalFormat;
 
 public class Chef {
     private final Order order;
     private final Pantry pantry;
     private final Ui ui;
-    private Menu menu;
 
-    public Chef(Order order, Pantry pantry, Ui ui, Menu menu) {
+
+    public Chef(Order order, Pantry pantry, Ui ui) {
         this.order = order;
         this.pantry = pantry;
         this.ui = ui;
-        this.menu = menu;
     }
 
     public void cookDish() {

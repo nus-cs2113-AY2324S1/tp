@@ -95,5 +95,8 @@ public class Order {
     public void setTotalOrderCost(float cost) {
         this.totalOrderCost = cost;
     }
-    public Dish getOrderedDish(){return orderedDish;}
+    public Dish getOrderedDish() {
+        return orderedDish;
+    }
+
 }

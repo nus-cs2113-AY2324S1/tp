@@ -37,7 +37,7 @@ public class AddOrderCommand extends Command {
     @Override
     public void execute() {
         orderList.addOrder(order);
-        Chef chef = new Chef(order, pantry, ui, menu);
+        Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();
         if (order.getIsComplete()) {
             orderList.addCost(order);
@@ -52,4 +52,5 @@ public class AddOrderCommand extends Command {
         }
 
     }
+
 }
