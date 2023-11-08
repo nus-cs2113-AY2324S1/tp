@@ -239,9 +239,7 @@ public class Parser implements ParserUtil {
 
             if (isNameLengthInvalid(dishName)) {
                 throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
-            }
-
-            if (isRepeatedDishName(dishName, menu)) {
+            } else if (isRepeatedDishName(dishName, menu)) {
                 throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
             }
 
@@ -324,8 +322,7 @@ public class Parser implements ParserUtil {
         // Check whether price text is empty
         if (priceText.equals("")) {
             throw new ParserException(ErrorMessages.MISSING_PRICE);
-        }
-        if (!priceMatcher.matches()) {
+        } else if (!priceMatcher.matches()) {
             throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
         }
 
@@ -386,6 +383,7 @@ public class Parser implements ParserUtil {
         if (inputName == null) {
             throw new NullPointerException();
         }
+
         for (Ingredient ingredient: ingredients) {
             String ingredientNameLowerCase = ingredient.getName().toLowerCase();
             String inputIngredientNameLowerCase = inputName.toLowerCase();
@@ -409,9 +407,7 @@ public class Parser implements ParserUtil {
 
         if (inputName == null) {
             throw new NullPointerException();
-        }
-
-        if (inputName.length() > maxNameLength) {
+        } else if (inputName.length() > maxNameLength) {
             return true;
         }
 
