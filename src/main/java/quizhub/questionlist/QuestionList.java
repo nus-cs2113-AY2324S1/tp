@@ -467,64 +467,47 @@ public class QuestionList {
         int totalQuestions = questions.size();
         int correctAnswers = 0;
 
-//        for (int i = 0; i < totalQuestions; i++) {
-//            Question question = questions.get(i);
-//
-//            ui.displayQuestion(question, i + 1, totalQuestions);
-//            String userAnswer = ui.getUserInput().strip();
-//            String correctAnswer = "";
-//            if (question instanceof MultipleChoiceQn) {
-//                correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
-//            } else {
-//                correctAnswer = ((ShortAnsQn) question).getQuestionAnswer();
-//            }
-//
-//            correctAnswer = correctAnswer.strip();
-//
-//            if (userAnswer.equalsIgnoreCase(correctAnswer)) {
-//                ui.displayMessage("    Correct!");
-//                correctAnswers++;
-//            } else {
-//                ui.displayMessage("    Wrong!");
-//                ui.displayMessage("    The answer is: " + correctAnswer);
-//            }
-//
-//            int questionsLeft = totalQuestions - (i + 1);
-//            if (questionsLeft > 0) {
-//                ui.displayMessage("    Questions left: " + questionsLeft);
-//            } else {
-//                ui.displayMessage("    Quiz completed!");
-//            }
-//        }
         for (int i = 0; i < totalQuestions; i++) {
             Question question = questions.get(i);
-
             ui.displayQuestion(question, i + 1, totalQuestions);
             String userAnswer;
             boolean isValidAnswer;
+
             do {
                 ui.displayMessageSameLine("  Your Answer: ");
                 userAnswer = ui.getUserInput().strip();
                 isValidAnswer = true; // Assume the answer is valid initially
 
+                // Check for blank response
+                if (userAnswer.isEmpty()) {
+                    isValidAnswer = false;
+                    ui.displayMessage("    The question cannot be left blank.");
+                    continue; // Skip the remaining checks and prompt for input again
+                }
+
                 if (question instanceof MultipleChoiceQn) {
-                    int numberOfChoices = 4; // Assuming a method that returns the list of choices
                     try {
-                        int userAnswerIndex = Integer.parseInt(userAnswer) - 1; // Convert to zero-based index
-                        if (userAnswerIndex < 0 || userAnswerIndex >= numberOfChoices) {
+                        int answerNumber = Integer.parseInt(userAnswer);
+                        // Check for numbers not within range 1-4
+                        if (answerNumber < 1 || answerNumber > 4) {
                             isValidAnswer = false;
-                            ui.displayMessage("    Please enter a number between 1 and " + numberOfChoices);
+                            ui.displayMessage("    Please enter a valid choice between 1 and 4.");
+                        } else {
+                            isValidAnswer = true; // The input is an integer within the valid range
                         }
                     } catch (NumberFormatException e) {
                         isValidAnswer = false;
-                        ui.displayMessage("    That's not a valid number. Try again.");
+                        ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
                     }
                 }
             } while (!isValidAnswer);
 
-            String correctAnswer = question instanceof MultipleChoiceQn ?
-                    ((MultipleChoiceQn) question).getAnswerString() :
-                    ((ShortAnsQn) question).getQuestionAnswer();
+            String correctAnswer;
+            if (question instanceof MultipleChoiceQn) {
+                correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
+            } else {
+                correctAnswer = ((ShortAnsQn) question).getQuestionAnswer();
+            }
 
             correctAnswer = correctAnswer.strip();
 
@@ -535,10 +518,9 @@ public class QuestionList {
                 ui.displayMessage("    Wrong!");
                 ui.displayMessage("    The correct answer is: " + correctAnswer);
             }
-
-            // ... (rest of your existing code)
         }
 
         ui.displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
+        ui.displayMessage("    Quiz completed!");
     }
 }
