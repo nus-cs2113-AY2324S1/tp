@@ -259,7 +259,7 @@ class ParserTest {
         ParserUtil parserUtil = new Parser();
         Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
         commandReturned.execute();
-        assertEquals(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+        assertEquals(ErrorMessages.MISSING_DISH_IN_EDIT_PRICE, actualOutput.get(0));
     }
 
     @Test
