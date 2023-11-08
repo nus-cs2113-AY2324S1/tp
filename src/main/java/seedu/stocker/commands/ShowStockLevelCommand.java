@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class ShowStockLevelCommand extends Command {
 
-    public static final String COMMAND_WORD = "stocklevel";
+    public static final String COMMAND_WORD = "stockLevel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all drugs by quantity level "
             + "tracked by the system in ascending order. " + System.lineSeparator()

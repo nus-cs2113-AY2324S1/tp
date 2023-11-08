@@ -7,7 +7,7 @@ import seedu.stocker.drugs.StockEntry;
  */
 public class SetThresholdCommand extends Command {
 
-    public static final String COMMAND_WORD = "setthreshold";
+    public static final String COMMAND_WORD = "setThreshold";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Set the threshold quantity for a drug. "

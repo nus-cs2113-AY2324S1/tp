@@ -30,9 +30,9 @@ class HelpCommandTest {
                 + "Example: list"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
-                + "stocklevel: List all drugs by quantity level tracked by the system in ascending order. "
+                + "stockLevel: List all drugs by quantity level tracked by the system in ascending order. "
                 + System.getProperty("line.separator")
-                + "Example: stocklevel"
+                + "Example: stockLevel"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "find /n: Finds drug in inventory using name."
@@ -50,9 +50,9 @@ class HelpCommandTest {
                 + "Example: find /s ABC123"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
-                + "addtocart: Adds a new drug to the current cart. Parameters: SERIAL NUMBER, QUANTITY,"
+                + "addToCart: Adds a new drug to the current cart. Parameters: SERIAL NUMBER, QUANTITY,"
                 + System.getProperty("line.separator")
-                + "Example: addtocart /s Doliprane /q 2"
+                + "Example: addToCart /s Doliprane /q 2"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "checkout: Checks out current cart. Parameters:"
@@ -60,9 +60,9 @@ class HelpCommandTest {
                 + "Example: checkout"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
-                + "viewcart: View the current cart items."
+                + "viewCart: View the current cart items."
                 + System.getProperty("line.separator")
-                + "Example: viewcart"
+                + "Example: viewCart"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "login: Login new user into system."
@@ -93,15 +93,15 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
-                + "setthreshold: Set the threshold quantity for a drug. (default 100)"
+                + "setThreshold: Set the threshold quantity for a drug. (default 100)"
                 + System.getProperty("line.separator")
-                + "Example: setthreshold /s TC150 /tq 50"
+                + "Example: setThreshold /s TC150 /tq 50"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
-                + "listthreshold: List all drugs and their threshold levels."
+                + "listThreshold: List all drugs and their threshold levels."
                 + System.getProperty("line.separator")
-                + "Example: listthreshold"
+                + "Example: listThreshold"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 

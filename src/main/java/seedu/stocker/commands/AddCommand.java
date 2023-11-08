@@ -35,20 +35,21 @@ public class AddCommand extends Command {
     @Override
     public <T> CommandResult<T> execute() {
         StockEntry entry = inventory.get(serialNumber);
+
         if (entry != null) {
             Drug existingDrug = entry.getDrug();
-            if (existingDrug.getName().equals(this.name) &
-                    existingDrug.getExpiryDate().equals(this.expiryDate) &
-                    existingDrug.getSellingPrice() == this.sellingPrice) {
+            if (existingDrug.getName().equals(this.name) && existingDrug.getExpiryDate().equals(this.expiryDate)) {
+                // If the existing drug has the same name and expiry date, increment the quantity
                 entry.incrQuantity(this.quantity);
-                return new CommandResult<>(String.format(MESSAGE_SUCCESS, entry.getDrug().getName()));
-            } else {
-                return new CommandResult<>(String.format(MESSAGE_FAILURE));
+                return new CommandResult<>(String.format(MESSAGE_SUCCESS, existingDrug.getName()));
             }
-        } else {
-            Drug newDrug = new Drug(this.name, this.expiryDate, this.sellingPrice);
-            inventory.addNewDrug(serialNumber, newDrug, quantity);
-            return new CommandResult<>(String.format(MESSAGE_SUCCESS, newDrug.getName()));
         }
+
+        // If no existing drug with the same name and expiry date is found, add a new entry
+        Drug newDrug = new Drug(this.name, this.expiryDate, this.sellingPrice);
+        inventory.addNewDrug(serialNumber, newDrug, quantity);
+        return new CommandResult<>(String.format(MESSAGE_SUCCESS, newDrug.getName()));
     }
+
 }
+
