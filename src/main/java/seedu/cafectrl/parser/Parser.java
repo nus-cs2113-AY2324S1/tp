@@ -35,19 +35,17 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  * Parse everything received from the users on terminal
  * into a format that can be interpreted by other core classes
  */
 public class Parser implements ParserUtil {
-    //@@author ziyi105
-    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>[a-z_]+)\\s*(?<arguments>.*)";
+    private static final String COMMAND_ARGUMENT_REGEX = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
 
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
-            + "price/\\s*(?<dishPrice>[0-9]*\\.[0-9]{0,2}|[0-9]+)\\s+"
+            + "price/(?<dishPrice>[0-9.\\s]+)\\s+"
             + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
@@ -69,8 +67,7 @@ public class Parser implements ParserUtil {
     /** The rest of Command Handler Patterns*/
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(\\d+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
-    private static final String EDIT_PRICE_ARGUMENT_STRING = "index/(.*) price/(.*)";
-
+    private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*) price/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
             + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
 
@@ -92,8 +89,9 @@ public class Parser implements ParserUtil {
             Pantry pantry, Sales sales, CurrentDate currentDate) {
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
+
         if (!matcher.matches()) {
-            return new IncorrectCommand("Incorrect command format!", ui);
+            return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -177,20 +175,30 @@ public class Parser implements ParserUtil {
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_EDIT_PRICE, ui);
         }
 
+        int dishIndexGroup = 1;
+        int newPriceGroup = 2;
+        int dishIndex;
+        float newPrice;
+
         try {
-            int dishIndexGroup = 1;
-            int newPriceGroup = 2;
-            int dishIndex = Integer.parseInt(matcher.group(dishIndexGroup).trim());
-            float newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
+            String dishIndexText = matcher.group(dishIndexGroup).replaceAll("\\s", "");
+            dishIndex = Integer.parseInt(dishIndexText);
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
                 return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
             }
-            return new EditPriceCommand(dishIndex, newPrice, menu, ui);
-        } catch (NumberFormatException | ParserException e) {
-            return new IncorrectCommand(ErrorMessages.WRONG_ARGUMENT_TYPE_FOR_EDIT_PRICE, ui);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, ui);
         }
+
+        try {
+            newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
+        } catch (ParserException e) {
+            return new IncorrectCommand(e.getMessage(), ui);
+        }
+
+        return new EditPriceCommand(dishIndex, newPrice, menu, ui);
     }
 
     //@@author DextheChik3n
@@ -211,6 +219,7 @@ public class Parser implements ParserUtil {
             }
 
             // To retrieve specific arguments from arguments
+            //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
             float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
@@ -219,7 +228,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
             }
 
-            if (isRepeatedName(dishName, menu)) {
+            if (isRepeatedDishName(dishName, menu)) {
                 throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
             }
 
@@ -272,7 +281,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
             }
 
-            if (isRepeatedName(ingredientName, ingredients)) {
+            if (isRepeatedIngredientName(ingredientName, ingredients)) {
                 continue;
             }
 
@@ -301,14 +310,34 @@ public class Parser implements ParserUtil {
      * Converts text of price to float while also checking if the price input is within reasonable range
      * @param priceText text input for price argument
      * @return price in float format
-     * @throws ArithmeticException if price > 10000000000.00
+     * @throws ParserException if price is not within reasonable range
      */
     static float parsePriceToFloat(String priceText) throws ParserException {
-        float price = Float.parseFloat(priceText);
-        float maxPriceValue = (float) 10000000000.00;
+        String trimmedPriceText = priceText.trim();
 
+        final Pattern priceTwoDecimalPlacePattern = Pattern.compile("^-?[0-9]\\d*(\\.\\d{0,2})?$");
+        Matcher priceMatcher = priceTwoDecimalPlacePattern.matcher(trimmedPriceText);
+
+        if (!priceMatcher.matches()) {
+            throw new ParserException(ErrorMessages.PRICE_TOO_MANY_DECIMAL_PLACES);
+        }
+
+        float price;
+        try {
+            price = Float.parseFloat(trimmedPriceText);
+        } catch (NumberFormatException e) {
+            throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
+        }
+
+        // Specify max and min value for price
+        float maxPriceValue = (float) 1000000.00;
+        float minPriceValue = (float) 0;
+
+        // Check whether the price has up to 2 decimal place
         if (price > maxPriceValue) {
-            throw new ParserException(ErrorMessages.INVALID_PRICE_MESSAGE);
+            throw new ParserException(ErrorMessages.LARGE_PRICE_MESSAGE);
+        } else if (price < minPriceValue) {
+            throw new ParserException(ErrorMessages.NEGATIVE_PRICE_MESSAGE);
         }
 
         return price;
@@ -321,7 +350,7 @@ public class Parser implements ParserUtil {
      * @return true if dish name already exists in menu, false otherwise
      * @throws NullPointerException if the input string is null
      */
-    static boolean isRepeatedName(String inputDishName, Menu menu) throws NullPointerException {
+    static boolean isRepeatedDishName(String inputDishName, Menu menu) throws NullPointerException {
         if (inputDishName == null) {
             throw new NullPointerException();
         }
@@ -345,7 +374,8 @@ public class Parser implements ParserUtil {
      * @return true if ingredient name already exists in menu, false otherwise
      * @throws NullPointerException if the input string is null
      */
-    static boolean isRepeatedName(String inputName, ArrayList<Ingredient> ingredients) throws NullPointerException {
+    static boolean isRepeatedIngredientName(String inputName, ArrayList<Ingredient> ingredients)
+            throws NullPointerException {
         if (inputName == null) {
             throw new NullPointerException();
         }
