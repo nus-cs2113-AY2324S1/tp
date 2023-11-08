@@ -218,6 +218,9 @@ public class Parser {
             String description = tokens[0].strip().replace("|", "");
             boolean isFieldEmpty = description.isEmpty();
             String answer = tokens[1].strip().replace("|", "");
+            if(answer.equals("\\exitquiz")){
+                return new CommandInvalid(CommandShortAnswer.INVALID_EXITQUIZ);
+            }
             isFieldEmpty = isFieldEmpty || answer.isEmpty();
             String module = tokens[2].strip().replace("|", "");
             isFieldEmpty = isFieldEmpty || module.isEmpty();
