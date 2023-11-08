@@ -406,6 +406,7 @@ equities.
 
 * *Cashflow* - Refers to an income or expense.
 * *WishList* - A list containing goals/targets.
+* *Watchlist* - a list of stocks that the financial planner is currently tracking
 
 ## Instructions for manual testing
 
