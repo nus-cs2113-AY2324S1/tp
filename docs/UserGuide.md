@@ -525,9 +525,9 @@ Expected outcome:
 || New drug added in the cart : Panadol
 ```
 
-### `viewcart` - Lists all the entries in the cart
+### `viewCart` - Lists all the entries in the cart
 
-Lists all the added drugs and quantity in the cart.
+Lists all the added drugs, quantity, and total cost in the cart.
 
 Format:
 
@@ -535,15 +535,16 @@ viewcart
 
 Example of usage:
 
-`viewcart
+`viewCart
 `
 
 Expected outcome:
 
 ```
-||  1. Key : Panadole, Quantity: 10
+|| 1. Key : Panadole, Quantity: 10, Total Cost: $39.90
 ||
 || Listed all the content of your cart.
+|| Total Cost of Items in Cart: $39.90
 ```
 
 ### `checkout` - Checks out the current cart
