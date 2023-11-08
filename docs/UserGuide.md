@@ -424,19 +424,19 @@ Goodbye! Hope to see you again soon!
 Upon exiting the application, there should be three files in the data folder will 
 that contains the profile data, meals and workouts as shown below.
 
-<img src="images/DataDirectory.png" width = 70% height = 70%>
+<img src="images/DataDirectory.png" width = 70% height = 70% alt="">
 
 The contents of profile.txt:
 
-<img src="images/ProfileFile.png" width = 50% height = 50%>
+<img src="images/ProfileFile.png" width = 50% height = 50% alt="">
 
 The contents of mealList.txt:
 
-<img src="images/MealFile.png" width = 50% height = 50%>
+<img src="images/MealFile.png" width = 50% height = 50% alt="">
 
 The contents of workoutList.txt:
 
-<img src="images/MealFile.png" width = 50% height = 50%>
+<img src="images/MealFile.png" width = 50% height = 50% alt="">
 
 
 
