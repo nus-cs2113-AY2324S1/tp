@@ -3,6 +3,7 @@ package seedu.cafectrl.command;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
+import seedu.cafectrl.parser.Parser;
 
 import java.util.ArrayList;
 
@@ -17,12 +18,14 @@ public class BuyIngredientCommand extends Command {
             + COMMAND_WORD + " ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY"
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example:"
-            + COMMAND_WORD + " ingredient/rice qty/200g, ingredient/chicken qty/100g";
+            + COMMAND_WORD + " ingredient/milk qty/200ml, ingredient/chicken qty/100g";
 
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> ingredients;
+    private ArrayList<Ingredient> ingredientsToBePrinted = new ArrayList<>();
     private String ingredientString = ""; // Used to store the message about the bought ingredients
+    private int FIRST_INDEX = 0;
 
     /**
      * Constructs a BuyIngredientCommand with the specified ingredients, user interface, and pantry.
@@ -45,7 +48,7 @@ public class BuyIngredientCommand extends Command {
         try {
             addIngredient();
             ui.printBuyIngredientHeader();
-            ui.showToUser(ingredientString);
+            ui.showToUser(ingredientString.strip());
         } catch (RuntimeException e) {
             ui.showToUser(e.getMessage());
         }
@@ -61,7 +64,12 @@ public class BuyIngredientCommand extends Command {
             ingredient = pantry.addIngredientToStock(ingredient.getName(),
                     ingredient.getQty(),
                     ingredient.getUnit());
-            buildBuyIngredientMessage(ingredient, i);
+            ingredients.set(i, ingredient);
+        }
+
+        for (int i = ingredients.size() - ui.OFFSET_LIST_INDEX; i >= FIRST_INDEX; i--) {
+            Ingredient ingredient = ingredients.get(i);
+            buildBuyIngredientMessage(ingredient);
         }
     }
 
@@ -69,17 +77,15 @@ public class BuyIngredientCommand extends Command {
      * Builds a message about the bought ingredient and appends it to the result message.
      *
      * @param ingredient The Ingredient object to build the message for.
-     * @param index The index of the ingredient in the list.
      */
-    private void buildBuyIngredientMessage(Ingredient ingredient, int index) {
+    private void buildBuyIngredientMessage(Ingredient ingredient) {
+        if (Parser.isRepeatedIngredientName(ingredient.getName(), ingredientsToBePrinted)) {
+            return;
+        }
+        ingredientsToBePrinted.add(ingredient);
         ingredientString += "Ingredient: " + ingredient.getName()
                 + "\t\tQty: " + ingredient.getQty()
-                + ingredient.getUnit();
-
-        //append new line if current ingredient is not last
-        if(index < ingredients.size() - ui.OFFSET_LIST_INDEX) {
-            ingredientString += "\n";
-        }
+                + ingredient.getUnit() + "\n";
     }
 }
 

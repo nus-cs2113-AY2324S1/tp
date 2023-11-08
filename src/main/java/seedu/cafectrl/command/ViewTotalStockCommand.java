@@ -3,9 +3,11 @@ package seedu.cafectrl.command;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
+import seedu.cafectrl.ui.Messages;
 
 import java.util.ArrayList;
 
+//@@author ShaniceTang
 public class ViewTotalStockCommand extends Command {
 
     public static final String COMMAND_WORD = "view_stock";
@@ -21,9 +23,14 @@ public class ViewTotalStockCommand extends Command {
 
     @Override
     public void execute() {
-        ui.showIngredientTop();
         pantryStock = pantry.getPantryStock();
 
+        if (pantryStock.isEmpty()) {
+            ui.showToUser(Messages.EMPTY_STOCK);
+            return;
+        }
+
+        ui.showIngredientTop();
         for (Ingredient ingredient : pantryStock) {
             ui.showIngredientStock(ingredient.getName(), ingredient.getQty(), ingredient.getUnit());
         }
