@@ -1,6 +1,28 @@
 package fittrack.parser;
 
-import fittrack.command.*;
+import fittrack.command.AddMealCommand;
+import fittrack.command.AddStepsCommand;
+import fittrack.command.AddWorkoutCommand;
+import fittrack.command.BmiCommand;
+import fittrack.command.CaloriesBurntCommand;
+import fittrack.command.CaloriesConsumedCommand;
+import fittrack.command.CheckRecommendedWeightCommand;
+import fittrack.command.Command;
+import fittrack.command.CommandResult;
+import fittrack.command.DeleteMealCommand;
+import fittrack.command.DeleteWorkoutCommand;
+import fittrack.command.EditProfileCommand;
+import fittrack.command.ExitCommand;
+import fittrack.command.FindMealCommand;
+import fittrack.command.FindWorkoutCommand;
+import fittrack.command.HelpCommand;
+import fittrack.command.InvalidCommand;
+import fittrack.command.TotalStepsCommand;
+import fittrack.command.ViewMealCommand;
+import fittrack.command.ViewProfileCommand;
+import fittrack.command.ViewStepsCommand;
+import fittrack.command.ViewWorkoutCommand;
+import fittrack.command.DeleteStepsCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
