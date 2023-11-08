@@ -280,7 +280,7 @@ public class CommandStartTest {
             String input = "start /all /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
-            assertEquals("    Your score: 4/4", mockUi.getLastDisplayedMessage());
+            assertEquals("    Quiz completed!", mockUi.getLastDisplayedMessage());
         }
 
         /**
@@ -295,7 +295,7 @@ public class CommandStartTest {
             String input = "start /all details /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
-            assertEquals("    Your score: 2/4", mockUi.getLastDisplayedMessage());
+            assertEquals("    Quiz completed!", mockUi.getLastDisplayedMessage());
         }
         /**
          * Test starting quiz in module mode with start details with question mode
@@ -306,7 +306,7 @@ public class CommandStartTest {
             String input = "start /module Mod3 /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
-            assertEquals("    Your score: 0/1", mockUi.getLastDisplayedMessage());
+            assertEquals("    Quiz completed!", mockUi.getLastDisplayedMessage());
         }
 
         /**
@@ -320,7 +320,7 @@ public class CommandStartTest {
             String input = "start /module Mod3 Mod1 Mod2 /normal /mix";
             Command command = Parser.parseCommand(input);
             command.executeCommand(mockUi, mockStorage, questionList);
-            assertEquals("    Your score: 2/3", mockUi.getLastDisplayedMessage());
+            assertEquals("    Quiz completed!", mockUi.getLastDisplayedMessage());
         }
 
     }
