@@ -28,9 +28,9 @@ public class CommandEdit extends Command {
             "range of the question list :<";
     public static final String NO_CHANGES_MADE_MSG = "   The value you entered is the same as the current value! " +
             "No changes made to question :>";
-    private int qnIndex;
-    private String newDescription;
-    private String newAnswer;
+    private final int qnIndex;
+    private final String newDescription;
+    private final String newAnswer;
 
     /**
      * Creates a new edit command

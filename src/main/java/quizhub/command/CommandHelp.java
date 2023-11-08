@@ -20,6 +20,6 @@ public class CommandHelp extends Command{
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert questions != null && dataStorage != null && ui != null : "Invalid null parameter";
-        System.out.println(Ui.INVALID_COMMAND_FEEDBACK);
+        ui.displayMessage(Ui.INVALID_COMMAND_FEEDBACK);
     }
 }

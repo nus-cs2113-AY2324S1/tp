@@ -14,8 +14,8 @@ public class CommandFind extends Command{
             "the keywords you are searching by :<";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as find " +
             "/description [description] or find /module [module]!";
-    private String searchCriteria;
-    private String searchDetails;
+    private final String searchCriteria;
+    private final String searchDetails;
 
     /**
      * Creates a new find command to search for a question.
