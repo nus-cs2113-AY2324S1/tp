@@ -112,7 +112,7 @@ Example of usage:
   **Output**: <br>
   ```
   Roger that! I have deleted the following question >w< !
-  [s][] [question description] / [ansewer] | [module] | [quesiton difficulty]
+  [s][] [question description] / [answer] | [module] | [quesiton difficulty]
   Now you have [no. of questions] questions in the list! UWU
   ```
 

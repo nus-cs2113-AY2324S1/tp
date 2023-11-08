@@ -3,6 +3,7 @@ package quizhub.question;
  * Represents Short Answer Questions. This means answers are a simple string.
  */
 public class ShortAnsQn extends Question {
+    public static final String IDENTIFIER = "S";
     private String answer;
     /**
      * Creates a new question of type SHORTANSWER
@@ -32,6 +33,7 @@ public class ShortAnsQn extends Question {
      * Gets question answer.
      * @return The answer
      */
+    @Override
     public String getQuestionAnswer() {
         return this.answer;
     }
@@ -40,27 +42,15 @@ public class ShortAnsQn extends Question {
     public void editQuestion(String editField, String newValue) {
         switch (editField) {
         case "description":
-            if (super.getQuestionDescription().equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             super.editQuestion(newValue, "");
             break;
         case "answer":
-            if (this.answer.equals(newValue)) {
-                displayEditErrorMessage(editField);
-                break;
-            }
             this.answer = newValue;
             break;
         default:
             break;
         }
-    }
-
-    @Override
-    public QnType getQuestionType(){
-        return QnType.SHORTANSWER;
+        System.out.println("    Roger that! I have edited the following question >w< !");
     }
 
     /**
@@ -70,5 +60,29 @@ public class ShortAnsQn extends Question {
     public String getQuestionDescription() {
         return super.getQuestionDescription().strip() + " / " + this.answer.strip() + " | " + super.getModule()
                 + " | " + super.getDifficulty().toString();
+    }
+
+    @Override
+    public String toString() {
+        String questionType = "[" + IDENTIFIER + "]";
+        String isDone;
+        if (super.questionIsDone()) {
+            isDone = "[X]";
+        } else {
+            isDone = "[ ]";
+        }
+        String assembledQuestion = questionType + isDone + " " + this.getQuestionDescription();
+        return assembledQuestion.replace("\\slash", "/");
+    }
+
+    @Override
+    public String toSerializedString() {
+        String isDone;
+        if (super.questionIsDone()) {
+            isDone = "done";
+        } else {
+            isDone = "undone";
+        }
+        return IDENTIFIER + " | " + isDone + " | " + this.getQuestionDescription() + System.lineSeparator();
     }
 }

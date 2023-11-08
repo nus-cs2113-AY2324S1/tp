@@ -16,9 +16,9 @@
 ## Acknowledgements
 
 1. For the main structure of the program, we have adapted the project structure
-from the Individual Project of Man Juncheng at [Link](https://github.com/spinoandraptos/ip/tree/master) </li>
+from the Individual Project of Man Juncheng at [Link](https://github.com/spinoandraptos/ip/tree/master)
 2. For JUnit testing, we have adapted the testing codes from the AddressBook level-2
-codes at [Link](https://github.com/se-edu/addressbook-level2)</li>
+codes at [Link](https://github.com/se-edu/addressbook-level2)
 3. For the developer's guide, we have referenced the developer's guide from AddressBook
 level-3 [Link](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 

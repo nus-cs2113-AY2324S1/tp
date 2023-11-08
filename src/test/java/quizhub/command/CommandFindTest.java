@@ -99,9 +99,9 @@ public class CommandFindTest {
     void testFindDescriptionWithMatches() {
         String expectedOutput = "Here are questions that matched your search:"
                 + "    1: [S][X] Question1 / Answer1 | Mod1 | NORMAL"
-                + "    2: [S][] Question2 / Answer2 | Mod2 | NORMAL"
+                + "    2: [S][ ] Question2 / Answer2 | Mod2 | NORMAL"
                 + "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL"
-                + "    4: [S][] Question4 / Answer4 | Mod4 | NORMAL";
+                + "    4: [S][ ] Question4 / Answer4 | Mod4 | NORMAL";
         Parser.parseCommand("find /description Question").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }
@@ -136,9 +136,9 @@ public class CommandFindTest {
     void testFindModuleWithMatches() {
         String expectedOutput = "Here are questions that matched your search:"
                 + "    1: [S][X] Question1 / Answer1 | Mod1 | NORMAL"
-                + "    2: [S][] Question2 / Answer2 | Mod2 | NORMAL"
+                + "    2: [S][ ] Question2 / Answer2 | Mod2 | NORMAL"
                 + "    3: [S][X] Question3 / Answer3 | Mod3 | NORMAL"
-                + "    4: [S][] Question4 / Answer4 | Mod4 | NORMAL";
+                + "    4: [S][ ] Question4 / Answer4 | Mod4 | NORMAL";
         Parser.parseCommand("find /module Mod").executeCommand(ui, mockStorage, questionList);
         testCliOutputCorrectness(expectedOutput);
     }

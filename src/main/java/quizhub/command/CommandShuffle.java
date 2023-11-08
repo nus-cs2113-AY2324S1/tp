@@ -11,6 +11,6 @@ public class CommandShuffle extends Command {
     }
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
-        questions.shuffleQuestions();
+        questions.shuffleQuestions(ui);
     }
 }

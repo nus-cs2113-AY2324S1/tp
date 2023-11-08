@@ -2,6 +2,8 @@ package quizhub.storage;
 import quizhub.question.Question;
 import quizhub.questionlist.QuestionList;
 import quizhub.parser.Parser;
+import quizhub.question.ShortAnsQn;
+import quizhub.question.MultipleChoiceQn;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -43,19 +45,25 @@ public class Storage {
      * @param qnDoneStatus Done status of current question.
      * @param difficulty Difficulty of current question.
      * @param qnModule Module of current question.
+     *
+     * @return 0 if added successfully, and 1 otherwise
      */
     private int addQuestionFromFile(QuestionList questions, String qnType, String qnDescription,
                                     String qnDoneStatus, Question.QnDifficulty difficulty,
                                     String qnModule) {
         switch (qnType) {
-        case "S":
+        case ShortAnsQn.IDENTIFIER:
             try {
                 // Split the description by "/" and check for empty fields
                 String[] qnTokens = qnDescription.split("/");
                 if (qnTokens[0].isEmpty() || qnTokens[1].isEmpty() || qnModule.isEmpty()) {
                     return 1;
                 }
-                questions.addShortAnswerQn(qnTokens[0], qnTokens[1], qnModule, difficulty, false);
+                boolean isAdded = questions.addShortAnswerQn(qnTokens[0].strip(), qnTokens[1].strip(), qnModule,
+                        difficulty, false);
+                if (!isAdded) {
+                    return 1;
+                }
                 if (qnDoneStatus.equalsIgnoreCase("done")) {
                     questions.markQuestionAsDone(questions.getQuestionListSize(), false);
                 }
@@ -63,22 +71,25 @@ public class Storage {
             } catch (ArrayIndexOutOfBoundsException exception) {
                 return 1;
             }
-        case "MC":
+        case MultipleChoiceQn.IDENTIFIER:
             try {
                 // Split the description by "/" and check for empty fields
                 String[] qnTokens = qnDescription.split("/");
-                String questionString = qnTokens[0];
-                String option1 = qnTokens[1];
-                String option2 = qnTokens[2];
-                String option3 = qnTokens[3];
-                String option4 = qnTokens[4];
+                String questionString = qnTokens[0].strip();
+                String option1 = qnTokens[1].strip();
+                String option2 = qnTokens[2].strip();
+                String option3 = qnTokens[3].strip();
+                String option4 = qnTokens[4].strip();
                 int answer = Integer.parseInt(qnTokens[5].strip());
                 if (questionString.isEmpty() || option1.isEmpty() || option2.isEmpty() || option3.isEmpty()
                         || option4.isEmpty() || qnModule.isEmpty()) {
                     return 1;
                 }
-                questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4, answer, qnModule,
-                        difficulty, false);
+                boolean isAdded = questions.addMultipleChoiceQn(questionString, option1, option2, option3, option4,
+                        answer, qnModule, difficulty, false);
+                if (!isAdded) {
+                    return 1;
+                }
                 if (qnDoneStatus.equalsIgnoreCase("done")) {
                     questions.markQuestionAsDone(questions.getQuestionListSize(), false);
                 }
@@ -168,24 +179,6 @@ public class Storage {
         System.out.println("    You currently have the following questions uWu");
         questions.printQuestionList();
     }
-    private void storeQuestionToFile(Question question) throws IOException {
-        String isDoneString = "undone";
-        if (question.questionIsDone()) {
-            isDoneString = "done";
-        }
-        switch (question.getQuestionType()) {
-        case SHORTANSWER:
-            writeToFile(dataFile.getPath(), "S | " + isDoneString + " | " + question.getQuestionDescription()
-                    + System.lineSeparator(), true);
-            break;
-        case MULTIPLECHOICE:
-            writeToFile(dataFile.getPath(), "MC | " + isDoneString + " | " + question.getQuestionDescription()
-                    + System.lineSeparator(), true);
-            break;
-        default:
-            break;
-        }
-    }
     /**
      * Overwrites all existing data in storage with
      * the current questions in the question list.
@@ -199,7 +192,7 @@ public class Storage {
             writeToFile(dataFile.getPath(), "Latest Questions" + System.lineSeparator(), false);
             ArrayList<Question> allQuestions = questions.getAllQns();
             for (Question question : allQuestions) {
-                storeQuestionToFile(question);
+                writeToFile(dataFile.getPath(), question.toSerializedString(), true);
             }
         } catch(NullPointerException | IOException invalidFilePath) {
             System.out.println("    " + invalidFilePath.getMessage());
