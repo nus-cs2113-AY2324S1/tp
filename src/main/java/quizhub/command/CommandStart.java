@@ -5,9 +5,12 @@ import quizhub.question.Question;
 import quizhub.storage.Storage;
 import quizhub.questionlist.QuestionList;
 import quizhub.ui.Ui;
+import quizhub.question.ShortAnsQn;
+import quizhub.question.MultipleChoiceQn;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 /**
  * Command to Start the Quiz
@@ -25,9 +28,11 @@ public class CommandStart extends Command{
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
             "/[quiz mode] [start details] /[qn mode]!";
     public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! You gave too many arguments :<";
+    public static final int NUM_ARGUMENTS = 4;
     private final String startMode;
     private final String startDetails;
     private final String startQnMode;
+    private final String startQnType;
     /**
      * Creates a new start command
      *
@@ -35,11 +40,12 @@ public class CommandStart extends Command{
      * @param startDetails Details to complement quiz mode for choosing questions for the quiz.
      * @param startQnMode Mode for arranging the questions within the quiz.
      */
-    public CommandStart(String startMode, String startDetails, String startQnMode) {
+    public CommandStart(String startMode, String startDetails, String startQnMode, String startQnType) {
         super(CommandType.START);
         this.startMode = startMode;
         this.startDetails = startDetails;
         this.startQnMode = startQnMode;
+        this.startQnType = startQnType;
     }
 
     /**
@@ -75,6 +81,15 @@ public class CommandStart extends Command{
             ui.displayMessage("    Please enter a valid quiz mode :<");
             return;
         }
+
+        // Ensure 'startQnType' is without slashes (e.g., "short" or "mcq")
+        if (!startQnType.equals("mix")) {
+            matchedQuestions = matchedQuestions.stream()
+                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
+                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
+                    .collect(Collectors.toCollection(ArrayList::new)); // Use this to ensure an ArrayList is returned
+        }
+
 
         switch(startQnMode.toLowerCase()){
         case "random":

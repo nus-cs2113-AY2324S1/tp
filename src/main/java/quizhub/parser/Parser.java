@@ -507,26 +507,51 @@ public class Parser {
      * @return Start Quiz command or an Invalid Command
      */
     private static Command parseStartCommand(String userInput) {
-        String[] commandStartTokens = new String[3];
+        String[] commandStartTokens = new String[CommandStart.NUM_ARGUMENTS];
+//        try {
+//            extractQuizMode(userInput, commandStartTokens);
+//        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQuizMode) {
+//            return handleQuizModeExceptions(incorrectQuizMode);
+//        }
+//        try {
+//            extractQuizStartDetails(userInput, commandStartTokens);
+//        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQuizDetails) {
+//            return handleQuizStartDetailsExceptions(incorrectQuizDetails);
+//        }
+//        try {
+//            extractQuizQnMode(userInput, commandStartTokens);
+//        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnMode) {
+//            return handleQuizQnModeExceptions(incorrectQnMode);
+//        }
+
         try {
             extractQuizMode(userInput, commandStartTokens);
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQuizMode) {
-            return handleQuizModeExceptions(incorrectQuizMode);
-        }
-        try {
             extractQuizStartDetails(userInput, commandStartTokens);
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQuizDetails) {
-            return handleQuizStartDetailsExceptions(incorrectQuizDetails);
-        }
-        try {
             extractQuizQnMode(userInput, commandStartTokens);
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException incorrectQnMode) {
-            return handleQuizQnModeExceptions(incorrectQnMode);
+            extractQuizQnType(userInput, commandStartTokens); // Extract the question type
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+            return new CommandInvalid("There was an error parsing the start command: " + e.getMessage());
         }
+
+        // insert startQnType
         String startMode = commandStartTokens[0];
         String startDetails = commandStartTokens[1];
         String startQnMode = commandStartTokens[2];
-        return new CommandStart(startMode, startDetails, startQnMode);
+        String startQnType = commandStartTokens[3]; // try catch this
+        return new CommandStart(startMode, startDetails, startQnMode, startQnType);
+    }
+
+    private static void extractQuizQnType(String userInput, String[] commandStartTokens)
+            throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
+        String[] inputSplitBySlash = userInput.split("/");
+        if (inputSplitBySlash.length < CommandStart.NUM_ARGUMENTS) {
+            throw new ArrayIndexOutOfBoundsException("Missing question type for the quiz.");
+        }
+        String qnType = inputSplitBySlash[3].split(" ")[0].strip().toLowerCase();
+        if (!qnType.equals("short") && !qnType.equals("mcq") && !qnType.equals("mix")) {
+            throw new IllegalArgumentException("Invalid question type for the quiz.");
+        }
+        commandStartTokens[3] = qnType;
     }
 
     /**
@@ -640,7 +665,7 @@ public class Parser {
             throw new IllegalArgumentException("Too Many Modes");
         } else if (!qnMode.equals("random") && !qnMode.equals("normal")) {
             throw new IllegalArgumentException("Invalid Mode");
-        } else if (inputSplitByArguments.length > 3) {
+        } else if (inputSplitByArguments.length > CommandStart.NUM_ARGUMENTS) {
             throw new IllegalArgumentException("Too Many Arguments");
         } else {
             commandStartTokens[2] = qnMode;
