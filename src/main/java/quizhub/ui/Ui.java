@@ -158,8 +158,6 @@ public class Ui {
                 System.out.println("    Invalid question format, please edit this question via the edit function");
             }
         }
-
-        System.out.print("  Your Answer: ");
     }
 
     public void showInvalidCommandHelp(String feedback) {
@@ -168,6 +166,10 @@ public class Ui {
 
     public void displayMessage(String message) {
         System.out.println(message);
+    }
+
+    public void displayMessageSameLine(String message){
+        System.out.print(message);
     }
 
     public void displayNumberOfQuestions() {

@@ -503,6 +503,7 @@ public class QuestionList {
             String userAnswer;
             boolean isValidAnswer;
             do {
+                ui.displayMessageSameLine("  Your Answer: ");
                 userAnswer = ui.getUserInput().strip();
                 isValidAnswer = true; // Assume the answer is valid initially
 
