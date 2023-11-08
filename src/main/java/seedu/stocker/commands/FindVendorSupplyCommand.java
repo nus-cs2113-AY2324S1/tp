@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 /**
  * Lists the vendors that supply a specific drug.
  */
@@ -35,7 +37,7 @@ public class FindVendorSupplyCommand extends Command {
         String lowercaseDrugName = drugName.toLowerCase();
 
         if (lowercaseDrugName.isEmpty()) {
-            return new CommandResult<>(MESSAGE_USAGE);
+            return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         List<String> supplyingVendors = VendorSupplyList.getVendorSuppliedDrugs()

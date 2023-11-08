@@ -15,6 +15,7 @@ public class AddVendorSupplyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New drug added to %1$s's supply list: %2$s";
     public static final String MESSAGE_VENDOR_NOT_FOUND = "Vendor not found: %1$s";
+    public static final String MESSAGE_DRUG_EXISTS = "The drug '%1$s' already exists in the inventory";
 
     private final String vendorName;
     private final String drugName;
@@ -42,10 +43,20 @@ public class AddVendorSupplyCommand extends Command {
 
         if (this.vendorsList.getVendorEntries().stream().anyMatch(vendor ->
                 vendor.getName().equalsIgnoreCase(lowercaseVendorName))) {
-            VendorSupplyList.addDrugToVendor(lowercaseVendorName, lowercaseDrugName);
-            return new CommandResult<>(String.format(MESSAGE_SUCCESS, lowercaseVendorName, lowercaseDrugName));
+            // Check if the drugName is already supplied by the specified vendor
+            boolean isDrugAlreadySupplied = VendorSupplyList.getDrugsSuppliedByVendor(lowercaseVendorName)
+                    .stream()
+                    .anyMatch(drug -> drug.equalsIgnoreCase(lowercaseDrugName));
+
+            if (isDrugAlreadySupplied) {
+                return new CommandResult<>(String.format(MESSAGE_DRUG_EXISTS, lowercaseDrugName));
+            } else {
+                VendorSupplyList.addDrugToVendor(lowercaseVendorName, lowercaseDrugName);
+                return new CommandResult<>(String.format(MESSAGE_SUCCESS, lowercaseVendorName, lowercaseDrugName));
+            }
         } else {
             return new CommandResult<>(String.format(MESSAGE_VENDOR_NOT_FOUND, lowercaseVendorName));
         }
     }
+
 }

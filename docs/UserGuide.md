@@ -389,8 +389,8 @@ Drugs successfully saved.
 
 ### `addVendor` - adds a vendor into list of vendors being tracked by system
 
-Adds a vendor to be tracked by the system. The enteries are used to form a list of summarised vendors.
-is booted up.
+- Adds a vendor to be tracked by the system. The enteries are used to form a list of summarised vendors.
+- The vendor's name is not case-sensitive, meaning 'Pfizer' and 'pfizer' are treated as the same.
 
 Format:
 
@@ -428,7 +428,8 @@ Expected outcome:
 
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
 
-Adds a drug into a vendor's supply list to be tracked by the system, and vendor must already be added into the system.
+- Adds a drug into a vendor's supply list to be tracked by the system, and vendor must already be added into the system.
+- If the drug already exists in the vendor's supply list, system will inform user
 
 Format:
 

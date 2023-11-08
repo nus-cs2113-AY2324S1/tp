@@ -165,12 +165,7 @@ public class Parser {
             }
 
         case ListVendorSupplyCommand.COMMAND_WORD:
-            if (arguments.isEmpty()) {
-                return new ListVendorSupplyCommand(arguments);
-            } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListVendorSupplyCommand.MESSAGE_USAGE));
-            }
+            return new ListVendorSupplyCommand(arguments);
 
         case FindVendorSupplyCommand.COMMAND_WORD:
             return new FindVendorSupplyCommand(arguments);
