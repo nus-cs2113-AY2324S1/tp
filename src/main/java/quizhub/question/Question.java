@@ -123,12 +123,6 @@ public class Question {
         return "";
     }
     /**
-     * Returns question timing details.
-     */
-    public String getQuestionTiming(boolean useDefaultTiming){
-        return "";
-    }
-    /**
      * Returns question type.
      */
     public QnType getQuestionType(){

@@ -257,14 +257,7 @@ public class QuestionList {
      */
     public String viewQuestionByIndex(int index){
         try{
-            switch(allQns.get(index-1).getQuestionType()) {
-            case SHORTANSWER:
-                return allQns.get(index-1).getQuestionDescription();
-            case MULTIPLECHOICE:
-                return allQns.get(index-1).getQuestionDescription();
-            default:
-                return "Question Not Found";
-            }
+            return allQns.get(index-1).toString();
         } catch(InputMismatchException |NullPointerException | IndexOutOfBoundsException invalidIndex){
             return "Question Not Found";
         }
@@ -305,28 +298,6 @@ public class QuestionList {
             }
             if(matchedQuestions.isEmpty()){
                 System.out.println("    No results found :< Check your keyword is correct?");
-            }
-        }
-    }
-    /**
-     * Search for questions in the current question list using their date and time.
-     *
-     * @param dateTime Date and time used to search for matches.
-     */
-    public void searchListByTime(String dateTime){
-        ArrayList<Question> matchedQuestions = new ArrayList<>();
-        if(allQns.isEmpty()){
-            System.out.println("    Question list is empty! Time to add some OWO");
-        } else {
-            System.out.println("    Here are questions that matched your search:");
-            for (Question question : allQns) {
-                if(question.getQuestionTiming(true).contains(dateTime)){
-                    matchedQuestions.add(question);
-                    printQuestion(question, true);
-                }
-            }
-            if(matchedQuestions.isEmpty()){
-                System.out.println("    No results found :< Check your time format is in dd-MM-yyyy HH:mm?");
             }
         }
     }
