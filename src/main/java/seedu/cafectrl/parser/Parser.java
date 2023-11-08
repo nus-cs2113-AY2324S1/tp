@@ -45,7 +45,7 @@ public class Parser implements ParserUtil {
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
     private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
-            + "price/(?<dishPrice>.+)\\s+"
+            + "price/(?<dishPrice>\\S+)\\s+"
             + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/.+"
             + "(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/.+)*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
