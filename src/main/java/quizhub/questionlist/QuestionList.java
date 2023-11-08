@@ -480,15 +480,13 @@ public class QuestionList {
                 isValidAnswer = true; // Assume the answer is valid initially
                 boolean confirmationFlag = false;
 
-                // Check for blank response
                 if (userAnswer.isEmpty()) {
                     isValidAnswer = false;
                     ui.displayMessage("    The question cannot be left blank.");
                     continue; // Skip the remaining checks and prompt for input again
                 }
 
-                // Check if user wants to exit the quiz
-                if ("/exitquiz".equalsIgnoreCase(userAnswer)) {
+                if ("\\exitquiz".equalsIgnoreCase(userAnswer)) {
                     ui.displayMessage("    Exiting the quiz...");
                     return; // Exit the startQuiz method
                 }
@@ -508,8 +506,6 @@ public class QuestionList {
                         ui.displayMessage("    That's not a valid response. Please enter a number between 1 and 4.");
                     }
                 }
-
-
 
             } while (!isValidAnswer);
 
