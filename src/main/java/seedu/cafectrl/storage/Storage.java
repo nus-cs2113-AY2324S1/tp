@@ -110,7 +110,6 @@ public class Storage {
         try {
             saveMenu(menu);
             saveOrderList(sales);
-            saveMenu(menu);
             savePantryStock(pantry);
         } catch (IOException e) {
             ui.showToUser(e.getMessage());

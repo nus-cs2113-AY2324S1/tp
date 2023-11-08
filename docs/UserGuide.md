@@ -21,16 +21,17 @@
     * [Exiting the program : `bye`](#exiting-the-program--bye)
   * [Known Issues](#known-issues)
   * [Command Summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 ---------------------------------------------------
 ## Introduction
 
-CafeCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
+CaféCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
 ---------------------------------------------------
 ## Quick Start
-1. Ensure that you have Java `11` or above installed. 
+1. Ensure that you have Java `11` installed. 
 2. Down the latest version of `CafeCtrl` from [here](https://github.com/AY2324S1-CS2113-T17-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Cafe Manager CLI Application.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.
@@ -40,6 +41,7 @@ Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > 
 ```
+
 ---------------------------------------------------
 ## Features
 > **Notes about command format:**
@@ -83,8 +85,8 @@ To list out all dishes on the menu: list_menu
 To delete a menu item: delete DISH_INDEX
 Example: delete 1
 
-edit_priceTo edit price of a menu item: edit_price index/DISH_INDEX price/NEW_PRICE
-Example: edit_price index/1 price/4.50
+edit_priceTo edit price of a menu item: edit_price dish/DISH_INDEX price/NEW_PRICE
+Example: edit_price dish/1 price/4.50
 ```
 <!---@@author DextheChik3n--->
 ### Adding a dish : `add`
@@ -92,9 +94,9 @@ Adds a dish consisting of its ingredients to the menu
 
 Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
 
-
-* The `PRICE` must be a positive 2 decimal place number.
-* The `IMGREDIENT_QTY` must contain the unit ml or g specifically.
+* `DISH_NAME` 
+* `PRICE` must be a positive number and can be up to 2 decimal places.
+* `INGREDIENT_QTY` must contain the unit ml or g specifically.
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example:
@@ -171,6 +173,10 @@ Edits the price of an existing dish on the menu
 
 Format: `edit_price index/DISH_INDEX price/NEW_PRICE`
 
+* `NEW_PRICE` must be a positive number and can be up to 2 decimal places.
+* The index refers to the index number shown in the menu list
+* The index must be a positive integer
+
 Example: `edit_price index/1 price/4.50`
 
 Output: 
@@ -198,6 +204,9 @@ milk			1000ml
 Adds one or more ingredients to the pantry
 
 Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
+
+* `INGREDIENT_QTY` must contain the unit ml or g specifically
+  * e.g. `qty/50g` or `qty/1000ml`
 
 Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`
 
@@ -327,8 +336,9 @@ Format: `bye`
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Known Issues
-- The application is unable to read the data text files if they have been edited directly in the wrong decoding format
-- For edit price command, special characters can be entered in the price argument
+- The application is unable to read the data text files if they have been edited directly in the wrong decoding format.
+- The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
+- The application is unable to support unit conversion, hence only ml ang g are accepted as ingredient unit.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -350,3 +360,7 @@ Format: `bye`
 | **Help**                  | `help`                                                                                                                                                                                                                                                 |
 | **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
 
+---------------------------------------------------
+## Glossary
+- **Dish index**: Index of the dish according to `list_menu`.
+- **stock**: The quantity of ingredient available in the pantry of the cafe.
