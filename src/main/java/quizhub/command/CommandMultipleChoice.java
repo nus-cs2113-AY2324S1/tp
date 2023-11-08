@@ -7,6 +7,7 @@ import quizhub.ui.Ui;
 
 public class CommandMultipleChoice extends Command {
     public static final String COMMAND_WORD = "mcq";
+    public static final String DUPLICATE_OPTION_MSG = "    You have duplicate options!";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as " +
             "mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!";
     public static final String MISSING_FIELDS_MSG = "    You have one or more field missing!";
