@@ -50,7 +50,6 @@ public class ShortAnsQn extends Question {
         default:
             break;
         }
-        System.out.println("    Roger that! I have edited the following question >w< !");
     }
 
     /**

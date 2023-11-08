@@ -28,6 +28,7 @@ public class CommandEdit extends Command {
             "range of the question list :<";
     public static final String NO_CHANGES_MADE_MSG = "   The value you entered is the same as the current value! " +
             "No changes made to question :>";
+    public static final String SUCCESSFUL_EDIT_MSG = "    Roger that! I have edited the following question >w< !";
     private final int qnIndex;
     private final String newDescription;
     private final String newAnswer;
@@ -53,6 +54,7 @@ public class CommandEdit extends Command {
             return;
         }
         questions.editQuestionByIndex(qnIndex, newDescription, newAnswer);
+        ui.displayMessage(SUCCESSFUL_EDIT_MSG);
         dataStorage.updateData(questions);
     }
 }

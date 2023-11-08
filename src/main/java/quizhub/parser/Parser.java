@@ -127,7 +127,7 @@ public class Parser {
      * @return Integer index of the question
      */
     private static int extractQnIndex(String userInput, String commandType) throws IllegalArgumentException,
-            ArrayIndexOutOfBoundsException, NumberFormatException, QuizHubExceptions {
+            ArrayIndexOutOfBoundsException, QuizHubExceptions {
         String editDetails = userInput.split(commandType)[1];
         String qnIndexString = editDetails.split("/")[0].strip();
         if (qnIndexString.isEmpty()) {
