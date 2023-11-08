@@ -674,4 +674,10 @@ Expected outcome:
 - add description : `addDescription /n DRUG_NAME /desc DESCRIPTION`
 - get description : `getDescription /n DRUG_NAME`
 - list descriptions : `listDescriptions`
+- list stock level : `stockLevel`
+- add drug to cart : `addToCart /s SERIAL_NUMBER /q QUANTITY`
+- checks out current cart : `checkout`
+- view current cart items : `viewCart`
+- set threshold quantity for a drug : `setThreshold /s SERIAL_NUMBER /tq THRESHOLD_QUANTITY`
+- list all drugs and threshold levels : `listThreshold`
 - bye : `bye`
