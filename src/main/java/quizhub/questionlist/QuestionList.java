@@ -467,17 +467,63 @@ public class QuestionList {
         int totalQuestions = questions.size();
         int correctAnswers = 0;
 
+//        for (int i = 0; i < totalQuestions; i++) {
+//            Question question = questions.get(i);
+//
+//            ui.displayQuestion(question, i + 1, totalQuestions);
+//            String userAnswer = ui.getUserInput().strip();
+//            String correctAnswer = "";
+//            if (question instanceof MultipleChoiceQn) {
+//                correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
+//            } else {
+//                correctAnswer = ((ShortAnsQn) question).getQuestionAnswer();
+//            }
+//
+//            correctAnswer = correctAnswer.strip();
+//
+//            if (userAnswer.equalsIgnoreCase(correctAnswer)) {
+//                ui.displayMessage("    Correct!");
+//                correctAnswers++;
+//            } else {
+//                ui.displayMessage("    Wrong!");
+//                ui.displayMessage("    The answer is: " + correctAnswer);
+//            }
+//
+//            int questionsLeft = totalQuestions - (i + 1);
+//            if (questionsLeft > 0) {
+//                ui.displayMessage("    Questions left: " + questionsLeft);
+//            } else {
+//                ui.displayMessage("    Quiz completed!");
+//            }
+//        }
         for (int i = 0; i < totalQuestions; i++) {
             Question question = questions.get(i);
 
             ui.displayQuestion(question, i + 1, totalQuestions);
-            String userAnswer = ui.getUserInput().strip();
-            String correctAnswer = "";
-            if (question instanceof MultipleChoiceQn) {
-                correctAnswer = ((MultipleChoiceQn) question).getAnswerString();
-            } else {
-                correctAnswer = ((ShortAnsQn) question).getQuestionAnswer();
-            }
+            String userAnswer;
+            boolean isValidAnswer;
+            do {
+                userAnswer = ui.getUserInput().strip();
+                isValidAnswer = true; // Assume the answer is valid initially
+
+                if (question instanceof MultipleChoiceQn) {
+                    int numberOfChoices = 4; // Assuming a method that returns the list of choices
+                    try {
+                        int userAnswerIndex = Integer.parseInt(userAnswer) - 1; // Convert to zero-based index
+                        if (userAnswerIndex < 0 || userAnswerIndex >= numberOfChoices) {
+                            isValidAnswer = false;
+                            ui.displayMessage("    Please enter a number between 1 and " + numberOfChoices);
+                        }
+                    } catch (NumberFormatException e) {
+                        isValidAnswer = false;
+                        ui.displayMessage("    That's not a valid number. Try again.");
+                    }
+                }
+            } while (!isValidAnswer);
+
+            String correctAnswer = question instanceof MultipleChoiceQn ?
+                    ((MultipleChoiceQn) question).getAnswerString() :
+                    ((ShortAnsQn) question).getQuestionAnswer();
 
             correctAnswer = correctAnswer.strip();
 
@@ -486,16 +532,12 @@ public class QuestionList {
                 correctAnswers++;
             } else {
                 ui.displayMessage("    Wrong!");
-                ui.displayMessage("    The answer is: " + correctAnswer);
+                ui.displayMessage("    The correct answer is: " + correctAnswer);
             }
 
-            int questionsLeft = totalQuestions - (i + 1);
-            if (questionsLeft > 0) {
-                ui.displayMessage("    Questions left: " + questionsLeft);
-            } else {
-                ui.displayMessage("    Quiz completed!");
-            }
+            // ... (rest of your existing code)
         }
+
         ui.displayMessage("    Your score: " + correctAnswers + "/" + totalQuestions);
     }
 }
