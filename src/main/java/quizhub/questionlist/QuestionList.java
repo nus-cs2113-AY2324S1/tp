@@ -398,7 +398,9 @@ public class QuestionList {
             ui.displayQuestion(question, i + 1, totalQuestions);
             String userAnswer = getUserAnswer(ui, question);
 
-            if (userAnswer == null) {
+            if (userAnswer.equalsIgnoreCase("\\exitquiz")) {
+                ui.displayMessage("    Exiting the quiz...");
+                ui.displayFinalScore(correctAnswersCount, totalQuestions);
                 return; // Exit the quiz if the user types "\\exitquiz"
             }
 
@@ -429,11 +431,6 @@ public class QuestionList {
     private boolean validateAnswer(Ui ui, String userAnswer, Question question) {
         if (userAnswer.isEmpty()) {
             ui.displayMessage("    The question cannot be left blank.");
-            return false;
-        }
-
-        if ("\\exitquiz".equalsIgnoreCase(userAnswer)) {
-            ui.displayMessage("    Exiting the quiz...");
             return false;
         }
 
