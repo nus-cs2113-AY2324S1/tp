@@ -72,7 +72,11 @@ File is then used to update inventory list when stocker is ran.
 
 ### Feature-add vendor
 
-Adds a vendor into a list to be tracked by the system.
+Adds a vendor into a list tracked by the system.
+
+### Feature-delete vendor
+
+Deletes a vendor into a list tracked by the system.
 
 ### Feature-list vendors
 
@@ -391,7 +395,7 @@ Drugs successfully saved.
 
 ### `addVendor` - adds a vendor into list of vendors being tracked by system
 
-- Adds a vendor to be tracked by the system. The enteries are used to form a list of summarised vendors.
+- Adds a vendor to be tracked by the system. The entries are used to form a list of summarised vendors.
 - The vendor's name is not case-sensitive, meaning 'Pfizer' and 'pfizer' are treated as the same.
 
 Format:
@@ -406,6 +410,25 @@ Expected outcome:
 
 ```
 || New vendor added into the vendors list: Moderna
+```
+
+### `deleteVendor` - deletes a vendor into list of vendors being tracked by system
+
+- Deletes a vendor to be tracked by the system.
+- The vendor's name is not case-sensitive, meaning 'Pfizer' and 'pfizer' are treated as the same.
+
+Format:
+
+deleteVendor DRUGNAME
+
+Example of usage:
+
+`deleteVendor Moderna`
+
+Expected outcome:
+
+```
+|| Vendor deleted from the vendors list: Pfizer
 ```
 
 ### `listVendors` - list all vendors currently being tracked by the system
