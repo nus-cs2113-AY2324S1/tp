@@ -386,7 +386,7 @@ public class Parser implements ParserUtil {
      * @return true if ingredient name already exists in menu, false otherwise
      * @throws NullPointerException if the input string is null
      */
-    static boolean isRepeatedIngredientName(String inputName, ArrayList<Ingredient> ingredients)
+    public static boolean isRepeatedIngredientName(String inputName, ArrayList<Ingredient> ingredients)
             throws NullPointerException {
         if (inputName == null) {
             throw new NullPointerException();

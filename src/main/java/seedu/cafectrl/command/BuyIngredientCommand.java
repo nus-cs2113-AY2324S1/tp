@@ -3,6 +3,7 @@ package seedu.cafectrl.command;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
+import seedu.cafectrl.parser.Parser;
 
 import java.util.ArrayList;
 
@@ -77,24 +78,13 @@ public class BuyIngredientCommand extends Command {
      * @param ingredient The Ingredient object to build the message for.
      */
     private void buildBuyIngredientMessage(Ingredient ingredient) {
-        if (isReapeatedIngredient(ingredient)) {
+        if (Parser.isRepeatedIngredientName(ingredient.getName(), ingredientsToBePrinted)) {
             return;
         }
         ingredientsToBePrinted.add(ingredient);
         ingredientString += "Ingredient: " + ingredient.getName()
                 + "\t\tQty: " + ingredient.getQty()
                 + ingredient.getUnit() + "\n";
-    }
-
-    private boolean isReapeatedIngredient(Ingredient ingredient) {
-        for (Ingredient printedIngredient : ingredientsToBePrinted) {
-            String printedIngredientName = printedIngredient.getName();
-            String ingredientName = ingredient.getName();
-            if (printedIngredientName.equalsIgnoreCase(ingredientName)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 
