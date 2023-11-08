@@ -57,51 +57,109 @@ public class CommandStart extends Command{
      * @param questions Current question list in the program.
      * @param dataStorage Hard disk storage for storing question data.
      */
+//    @Override
+//    public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
+//        assert questions != null && ui != null && dataStorage != null;
+//
+//        ArrayList<Question> matchedQuestions = new ArrayList<>();
+//        handleStartMode(ui, questions, matchedQuestions);
+//        if (!startQnType.equals("mix")) {
+//            matchedQuestions = matchedQuestions.stream()
+//                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
+//                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
+//                    .collect(Collectors.toCollection(ArrayList::new));
+//        }
+//        handleQnMode(ui, questions, matchedQuestions);
+//    }
+//
+//    public void handleStartMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
+//        switch (startMode.toLowerCase()) {
+//        case "module":
+//            assert startDetails != null;
+//            String[] modules  = startDetails.split(" ");
+//            try {
+//                matchedQuestions = questions.assembleListByModules(modules);
+//            } catch (QuizHubExceptions emptyList){
+//                ui.displayMessage(emptyList.getMessage());
+//                return;
+//            }
+//            break;
+//        case "all":
+//            matchedQuestions = questions.getAllQns();
+//            break;
+//        default:
+//            ui.displayMessage(INVALID_QUIZ_MODE_MSG);
+//        }
+//    }
+//    public void handleQnMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
+//        switch(startQnMode.toLowerCase()){
+//        case "random":
+//            Collections.shuffle(matchedQuestions); // shuffles matched Questions
+//            questions.startQuiz(ui, matchedQuestions);
+//            break;
+//        case "normal":
+//            questions.startQuiz(ui, matchedQuestions);
+//            break;
+//        default:
+//            ui.displayMessage(INVALID_QN_MODE_MSG);
+//        }
+//    }
+
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
         assert questions != null && ui != null && dataStorage != null;
 
-        ArrayList<Question> matchedQuestions = new ArrayList<>();
-        handleStartMode(ui, questions, matchedQuestions);
-        if (!startQnType.equals("mix")) {
-            matchedQuestions = matchedQuestions.stream()
-                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
-                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
-                    .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Question> matchedQuestions = getMatchedQuestions(questions);
+        if (matchedQuestions == null) {
+            ui.displayMessage("    Please enter a valid quiz mode :<");
+            return;
         }
-        handleQnMode(ui, questions, matchedQuestions);
+
+        filterQuestionsByType(matchedQuestions);
+        arrangeQuestions(matchedQuestions);
+
+        questions.startQuiz(ui, matchedQuestions);
     }
 
-    private void handleStartMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
+    private ArrayList<Question> getMatchedQuestions(QuestionList questions) {
         switch (startMode.toLowerCase()) {
         case "module":
             assert startDetails != null;
             String[] modules  = startDetails.split(" ");
             try {
-                matchedQuestions = questions.assembleListByModules(modules);
-            } catch (QuizHubExceptions emptyList){
-                ui.displayMessage(emptyList.getMessage());
-                return;
+                return questions.assembleListByModules(modules);
+            } catch (QuizHubExceptions emptyList) {
+                System.out.println(emptyList.getMessage());
+                return null;
             }
-            break;
         case "all":
-            matchedQuestions = questions.getAllQns();
-            break;
+            return questions.getAllQns();
         default:
-            ui.displayMessage(INVALID_QUIZ_MODE_MSG);
+            return null;
         }
     }
-    private void handleQnMode(Ui ui, QuestionList questions, ArrayList<Question> matchedQuestions){
-        switch(startQnMode.toLowerCase()){
+
+    private void filterQuestionsByType(ArrayList<Question> matchedQuestions) {
+        if (!startQnType.equals("mix")) {
+            matchedQuestions.retainAll(matchedQuestions.stream()
+                    .filter(q -> (startQnType.equals("short") && q instanceof ShortAnsQn) ||
+                            (startQnType.equals("mcq") && q instanceof MultipleChoiceQn))
+                    .collect(Collectors.toList()));
+        }
+    }
+
+    private void arrangeQuestions(ArrayList<Question> matchedQuestions) {
+        switch(startQnMode.toLowerCase()) {
         case "random":
             Collections.shuffle(matchedQuestions); // shuffles matched Questions
-            questions.startQuiz(ui, matchedQuestions);
             break;
         case "normal":
-            questions.startQuiz(ui, matchedQuestions);
+            // For 'normal', no action is needed as the list is already in order.
             break;
         default:
-            ui.displayMessage(INVALID_QN_MODE_MSG);
+            // In case of an invalid mode, it will be handled before this method is called.
+            break;
         }
     }
+
 }
