@@ -29,10 +29,6 @@ public class Messages {
     public static final String VIEW_STOCK_MESSAGE2 = "| You have the following ingredients in pantry:         |";
     public static final String VIEW_STOCK_TITLE_MESSAGE = "| Ingredients                            |  Qty         |";
 
-    public static final String VIEW_STOCK_MESSAGE = "You have the following ingredients in pantry:";
-    public static final String VIEW_STOCK_MESSAGE2 = "| You have the following ingredients in pantry:         |";
-    public static final String VIEW_STOCK_TITLE_MESSAGE = "| Ingredients                            |  Qty         |";
-
     /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";
     public static final String INSTRUCTION_ON_COMMAND_FORMAT = "- Words in UPPER_CASE are "
