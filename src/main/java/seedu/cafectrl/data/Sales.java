@@ -9,6 +9,7 @@ import seedu.cafectrl.ui.Ui;
 public class Sales {
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
+    private final int DAY_DISPLAY_OFFSET = 1;
 
     public Sales() {
         this.orderLists = new ArrayList<>();
@@ -64,7 +65,7 @@ public class Sales {
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
 
-            ui.showSalesTop(day + 1);
+            ui.showSalesTop(day + DAY_DISPLAY_OFFSET);
             orderList.printOrderList(menu, ui);
             ui.showSalesBottom();
         }

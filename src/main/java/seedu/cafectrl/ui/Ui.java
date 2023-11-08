@@ -221,7 +221,6 @@ public class Ui {
     public void showSalesCost(String front, String back) {
         String leftAlignFormat = "| %-53s | %-17s |%n";
         System.out.format(leftAlignFormat, front, back);
-        //showSalesBottom();
     }
 
     public void showSalesDivider() {
