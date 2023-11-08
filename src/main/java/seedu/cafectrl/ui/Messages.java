@@ -36,6 +36,19 @@ public class Messages {
             + " e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.\n"
             + "- Parameters in [] are optional.";
 
+    /** Messages for show_sales command */
+    public static final String SHOW_SALES_DAY_PART_1 = "| Day ";
+    public static final String SHOW_SALES_DAY_PART_2 = ":                          "
+            + "                                          |";
+    public static final String SHOW_SALES_TITLE = "| Dish Name                              "
+            + "|  Dish Qty    |  Total Cost Price |";
+    public static final String SHOW_SALES_END_CAP = "+---------------------------------------"
+            + "------------------------------------+";
+    public static final String SHOW_SALES_CORNER = "+----------------------------------------"
+            + "+--------------+-------------------+";
+    public static final String SHOW_SALES_DIVIDER = "======================================"
+            + "=======================================";
+
     /** Messages for order command */
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
             + "in the virtual kitchen of your dreams. Bon appétit!";

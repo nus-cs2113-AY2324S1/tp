@@ -199,6 +199,34 @@ public class Ui {
         System.out.format(leftAlignFormat, ingredientName, ingredientAmount);
     }
 
+    public void showSalesTop(int day) {
+        showToUser(Messages.SHOW_SALES_END_CAP, Messages.SHOW_SALES_DAY_PART_1 + day + Messages.SHOW_SALES_DAY_PART_2,
+                Messages.SHOW_SALES_CORNER, Messages.SHOW_SALES_TITLE, Messages.SHOW_SALES_CORNER);
+    }
+    public void showSalesTop2(int day) {
+        showToUser(Messages.SHOW_SALES_DAY_PART_1 + day + Messages.SHOW_SALES_DAY_PART_2,
+                Messages.SHOW_SALES_CORNER, Messages.SHOW_SALES_TITLE, Messages.SHOW_SALES_CORNER);
+    }
+    public void showSalesBottom() {
+        showToUser(Messages.SHOW_SALES_END_CAP);
+    }
+    public void showSalesAll(String dishName, int dishQty, String dishPrice) {
+        formatShowSales(dishName, dishQty, dishPrice);
+    }
+
+    public void formatShowSales(String dishName, int dishQty, String dishPrice) {
+        String leftAlignFormat = "| %-38s | %-12s | %-17s |%n";
+        System.out.format(leftAlignFormat, dishName, dishQty, dishPrice);
+    }
+    public void showSalesCost(String front, String back) {
+        String leftAlignFormat = "| %-53s | %-17s |%n";
+        System.out.format(leftAlignFormat, front, back);
+    }
+
+    public void showSalesDivider() {
+        showToUser(Messages.SHOW_SALES_DIVIDER);
+    }
+
     public void showChefMessage() {
         showToUser(Messages.CHEF_MESSAGE);
     }
