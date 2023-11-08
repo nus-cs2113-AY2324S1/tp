@@ -31,13 +31,15 @@ public class GetDescriptionCommand extends Command {
      * @return CommandResult containing the drug description if found, or an error message if not found.
      */
     @Override
-    public CommandResult execute() {
-        String description = seedu.stocker.drugs.Description.getDescription(drugName);
+    public <T> CommandResult<T> execute() {
+        String lowercaseDrugName = drugName.toLowerCase();
+
+        String description = seedu.stocker.drugs.Description.getDescription(lowercaseDrugName);
 
         if (description != null) {
             return new CommandResult<>(description);
         } else {
-            return new CommandResult<>(String.format(MESSAGE_DESCRIPTION_NOT_FOUND, drugName));
+            return new CommandResult<>(String.format(MESSAGE_DESCRIPTION_NOT_FOUND, lowercaseDrugName));
         }
     }
 }

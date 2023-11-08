@@ -337,7 +337,7 @@ public class Parser {
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 2) {
             String name = matcher.group(1).trim();;
-            String description = matcher.group(2).trim();;
+            String description = matcher.group(2).trim();
             if (!name.isEmpty() && !description.isEmpty()) {
                 return new AddDescriptionCommand(name, description);
             } else {

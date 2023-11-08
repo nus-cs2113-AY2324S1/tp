@@ -12,6 +12,6 @@ public class AddDescriptionCommandTest {
         CommandResult<String> result = command.execute();
         String feedbackMessage = result.feedbackToUser;
 
-        assertEquals("New drug description added for Panadol: Pain Relief", feedbackMessage);
+        assertEquals("New drug description added for panadol: pain relief", feedbackMessage);
     }
 }

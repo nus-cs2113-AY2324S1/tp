@@ -15,6 +15,6 @@ public class GetDescriptionCommandTest {
         CommandResult<String> result = command.execute();
         String feedbackMessage = result.feedbackToUser;
 
-        assertEquals("Pain Relief", feedbackMessage);
+        assertEquals("pain relief", feedbackMessage);
     }
 }
