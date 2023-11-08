@@ -398,7 +398,9 @@ public class QuestionList {
             ui.displayQuestion(question, i + 1, totalQuestions);
             String userAnswer = getUserAnswer(ui, question);
 
-            if (userAnswer == null) return; // Exit the quiz if the user types "\\exitquiz"
+            if (userAnswer == null) {
+                return; // Exit the quiz if the user types "\\exitquiz"
+            }
 
             if (checkAnswer(question, userAnswer)) {
                 ui.displayMessage("    Correct!");
