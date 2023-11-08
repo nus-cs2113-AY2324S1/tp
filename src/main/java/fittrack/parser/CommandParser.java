@@ -22,6 +22,7 @@ import fittrack.command.ViewMealCommand;
 import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewStepsCommand;
 import fittrack.command.ViewWorkoutCommand;
+import fittrack.command.DeleteStepsCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,8 +39,8 @@ public class CommandParser {
     public static final String ALL_COMMAND_WORDS = "help, exit,\n" +
             "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
             "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
-            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt\n" +
-            "addsteps, viewsteps, totalsteps";
+            "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt,\n" +
+            "addsteps, deletesteps, viewsteps, totalsteps";
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
@@ -116,6 +117,8 @@ public class CommandParser {
             return new TotalStepsCommand(commandLine);
         case ViewStepsCommand.COMMAND_WORD:
             return new ViewStepsCommand(commandLine);
+        case DeleteStepsCommand.COMMAND_WORD:
+            return new DeleteStepsCommand(commandLine);
         default:
             return new InvalidCommand(commandLine);
 

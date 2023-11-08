@@ -47,4 +47,8 @@ public class StepList {
     public boolean isIndexValid(int index) {
         return 1 <= index && index <= stepList.size();
     }
+
+    public boolean isEmpty() {
+        return stepListSize == 0;
+    }
 }
