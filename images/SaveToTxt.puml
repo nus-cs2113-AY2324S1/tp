@@ -1,13 +1,13 @@
 @startuml
 
-actor User
--> ":SaveToTxt" : SaveToTxt(path)
+actor Duke
 create ":SaveToTxt"
+Duke -> ":SaveToTxt" : SaveToTxt(path)
 Activate ":SaveToTxt"
-<-- ":SaveToTxt"
+":SaveToTxt" --> Duke
 Deactivate ":SaveToTxt"
 
- -> ":SaveToTxt" : saveIncomeAndExpense(incomes:IncomeList, expenses:ExpenseList)
+Duke -> ":SaveToTxt" : saveIncomeAndExpense(incomes:IncomeList, expenses:ExpenseList)
 Activate ":SaveToTxt"
 ":SaveToTxt" -> ":SaveToTxt" : saveIncomeToTextFile(incomes)
 Activate ":SaveToTxt"
