@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.ByteArrayOutputStream;

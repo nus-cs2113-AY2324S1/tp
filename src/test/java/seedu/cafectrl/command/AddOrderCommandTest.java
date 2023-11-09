@@ -7,7 +7,6 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
@@ -57,7 +56,8 @@ class AddOrderCommandTest {
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
 
-        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!"
+        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. "
+                + "Bon appétit!"
                 + "-----------------------------------------------------"
                 + "Order is ready!"
                 + "Total order cost: $5.00"
@@ -116,7 +116,8 @@ class AddOrderCommandTest {
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
 
-        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!"
+        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. "
+                + "Bon appétit!"
                 + "+----------------------------------------+--------------+--------------+"
                 + "| Restock                                | Current      | Needed       |"
                 + "+----------------------------------------+--------------+--------------+"
