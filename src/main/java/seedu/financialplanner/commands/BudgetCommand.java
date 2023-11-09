@@ -50,7 +50,7 @@ public class BudgetCommand extends Command {
         validateBudget(rawCommand);
 
         assert budget > 0 && budget <= Cashflow.getBalance() : "Budget should be greater than 0 and less than " +
-                                                               "or equal to total balance";
+                "or equal to total balance";
         rawCommand.extraArgs.remove("b");
 
         if (!rawCommand.extraArgs.isEmpty()) {
@@ -94,7 +94,7 @@ public class BudgetCommand extends Command {
         if (!command.equals("set") && !command.equals("update")) {
             logger.log(Level.WARNING, "Invalid arguments for budget command");
             throw new FinancialPlannerException("Budget operation must be one of the following: set, update, " +
-                                                "delete, reset, view.");
+                    "delete, reset, view.");
         }
 
         if (command.equals("set") && Budget.hasBudget()) {
@@ -117,7 +117,7 @@ public class BudgetCommand extends Command {
     @Override
     public void execute() {
         assert command.equals("set") || command.equals("update") || command.equals("delete") ||
-               command.equals("reset") || command.equals("view");
+                command.equals("reset") || command.equals("view");
 
         switch (command) {
         case "set":
