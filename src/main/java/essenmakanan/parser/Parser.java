@@ -5,6 +5,7 @@ import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.command.Command;
 import essenmakanan.command.DeleteIngredientCommand;
 import essenmakanan.command.DeleteRecipeCommand;
+import essenmakanan.command.DuplicateRecipeCommand;
 import essenmakanan.command.EditIngredientCommand;
 import essenmakanan.command.EditRecipeCommand;
 import essenmakanan.command.ExitCommand;
@@ -36,6 +37,13 @@ public class Parser {
             break;
         case "add":
             if (inputDetail.startsWith("r/")) {
+                // check that all fields needed for recipe is present
+                if (!(inputDetail.contains("r/") && inputDetail.contains("s/") && inputDetail.contains("i/"))) {
+                    System.out.println("Recipe have to include title, steps and ingredients!");
+                    throw new EssenFormatException();
+                }
+
+
                 command = new AddRecipeCommand(inputDetail, recipes);
             } else if (inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
@@ -82,6 +90,9 @@ public class Parser {
             } else {
                 throw new EssenFormatException();
             }
+            break;
+        case "duplicate":
+            command = new DuplicateRecipeCommand(recipes, inputDetail);
             break;
         case "help":
             command = new HelpCommand();

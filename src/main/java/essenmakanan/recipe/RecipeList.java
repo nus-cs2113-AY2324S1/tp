@@ -86,6 +86,13 @@ public class RecipeList {
 
     private static void listRecipeIngredients(essenmakanan.recipe.Recipe recipe) {
         RecipeIngredientList ingredients = recipe.getRecipeIngredients();
+
+        // if ingredient list is empty
+        if (ingredients == null) {
+            System.out.println("\tNo ingredients needed!");
+            return;
+        }
+
         int count = 1;
         for (Ingredient ingredient : ingredients.getIngredients()) {
             assert ingredients.getIngredientByIndex(count - 1).equals(ingredient)

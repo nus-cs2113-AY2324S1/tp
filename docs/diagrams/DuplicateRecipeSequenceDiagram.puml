@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":DuplicateRecipeCommand" as DuplicateRecipeCommand COMMAND_COLOR
+participant "<<class>>\n:RecipeParser" as RecipeParser RECIPE_PARSER_COLOR
+participant ":RecipeList" as RecipeList RECIPE_LIST_COLOR
+participant "copiedRecipe:Recipe" as CopiedRecipe RECIPE_COLOR
+participant "<<class>>\n:Ui" as Ui UI_COLOR
+
+[-> DuplicateRecipeCommand : executeCommand()
+activate DuplicateRecipeCommand
+
+DuplicateRecipeCommand -> RecipeParser : getRecipeIndex(recipes, toDuplicate)
+activate RecipeParser
+
+RecipeParser --> DuplicateRecipeCommand
+deactivate RecipeParser
+
+DuplicateRecipeCommand -> RecipeList : getRecipe(index)
+activate RecipeList
+
+RecipeList --> DuplicateRecipeCommand
+deactivate RecipeList
+
+create CopiedRecipe
+DuplicateRecipeCommand -> CopiedRecipe : new Recipe(recipe)
+
+activate CopiedRecipe
+CopiedRecipe --> DuplicateRecipeCommand
+deactivate CopiedRecipe
+
+DuplicateRecipeCommand -> RecipeList : add(copiedRecipe)
+activate RecipeList
+
+RecipeList --> DuplicateRecipeCommand
+deactivate RecipeList
+
+DuplicateRecipeCommand -> Ui : printDuplicatedRecipe(copiedRecipe)
+activate Ui
+
+Ui --> DuplicateRecipeCommand
+deactivate Ui
+
+[<- DuplicateRecipeCommand
+deactivate DuplicateRecipeCommand
+
+@enduml

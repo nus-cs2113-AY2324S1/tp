@@ -34,6 +34,10 @@ public class IngredientList {
         return null;
     }
 
+    public int getSize() {
+        return this.ingredients.size();
+    }
+
     public boolean isEmpty() {
         return ingredients.isEmpty();
     }
@@ -122,5 +126,19 @@ public class IngredientList {
             System.out.println(count + ". " + ingredient);
             count++;
         }
+    }
+
+    public boolean equals(IngredientList list) {
+        if (this.getSize() != list.getSize()) {
+            return false;
+        }
+
+        for (int i=0; i<this.getSize(); i++) {
+            if ( !this.getIngredient(i).equals(list.getIngredient(i)) ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

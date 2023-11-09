@@ -37,7 +37,11 @@ public class Ui {
         System.out.println("\t- View all recipes. [view r]\n"
                 + "\t- Start a recipe to see if you are missing any ingredients.\n"
                 + "\t\t [start RECIPE_TITLE] or [start RECIPE_ID]\n"
-                + "\t- Add recipe. [add r/RECIPE_TITLE s/STEP1 s/STEP2]\n"
+                + "\t- Add recipe. [add r/RECIPE_TITLE t/TAG_ID s/STEP1 s/STEP2 t/TAG_ID s/STEP3 [s/...] "
+                + "i/INGREDIENT_NAME [i/...]]\n"
+                + "\t\t Tags:\n"
+                + "\t\t\t1 - NIGHT_BEFORE\n\t\t\t2 - MORNING_OF_COOKING\n\t\t\t"
+                + "3 - MORE_THAN_ONE_DAY\n\t\t\t4 - ACTUAL_COOKING\n"
                 + "\t- View a recipe. [view r/RECIPE_TITLE]\n"
                 + "\t- Edit a recipe. [edit r/RECIPE_TITLE n/NEW_TITLE s/STEP_TO_EDIT,NEW_STEP]\n"
                 + "\t- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]\n"
@@ -114,8 +118,8 @@ public class Ui {
                 diffUnitIngredients.listIngredients();
                 printNewLine();
             }
+            System.out.println("Start your recipe again after getting the above ingredients!");
         }
-        System.out.println("Start your recipe again after getting the above ingredients!");
         drawDivider();
     }
 
@@ -136,7 +140,7 @@ public class Ui {
     }
 
     public static String validIngredientUnits() {
-        return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
+        return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pc");
     }
 
     public static void printEditIngredientNameSuccess(String oldName, String newName) {
@@ -187,5 +191,11 @@ public class Ui {
     public static void handleIOException(IOException exception) {
         System.out.println("Unable to save data");
         System.out.println(exception.getMessage());
+    }
+
+    public static void printDuplicatedRecipe(String recipeTitle) {
+        drawDivider();
+        System.out.println(recipeTitle + " has been duplicated.");
+        drawDivider();
     }
 }
