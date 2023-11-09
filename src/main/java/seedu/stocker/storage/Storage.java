@@ -5,10 +5,15 @@ import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.exceptions.InvalidDrugFormatException;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Scanner;
+
 
 /**
  * Represents an object to handle writing to txt files and appending to them.
