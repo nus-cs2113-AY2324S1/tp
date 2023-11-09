@@ -4,7 +4,6 @@ import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
-import essenmakanan.ui.Ui;
 
 public class AddIngredientCommand extends Command {
     private String toAdd;
