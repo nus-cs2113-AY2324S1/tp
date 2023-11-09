@@ -173,3 +173,8 @@ Format: `exit`
 `NEW_EXERCISE_NAME NEW_CALORIES_BURNED`
 * View existing exercises `view VIEW_TYPE VIEW_SCOPE`
 * Exit program `exit`
+
+
+## Future Development
+
+- We will update the achievement functionality such that we will have an algorithm to check whether you have achieved a particular goal by taking your exercise record and/or meal record into account.
