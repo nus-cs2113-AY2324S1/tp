@@ -1,4 +1,5 @@
 package essenmakanan.ingredient;
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ui.Ui;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,5 +35,43 @@ public class IngredientListTest {
         assertEquals("cheese", ingredient.getName());
         assertEquals(20.0, ingredient.getQuantity());
         assertEquals(IngredientUnit.GRAM, ingredient.getUnit());
+    }
+
+    @Test
+    public void updateExistingIngredient_increaseQuantity_quantityIncreased(){
+        Ingredient tomato = new Ingredient("tomato", 1.0, IngredientUnit.PIECE);
+        Ingredient tomato2 = new Ingredient("tomato", 2.0, IngredientUnit.PIECE);
+
+        ingredients.addIngredient(tomato);
+
+        try {
+            ingredients.updateIngredient(tomato2);
+        } catch (EssenFormatException e) {
+            e.handleException();
+        }
+
+        Ingredient ingredient = ingredients.getIngredient(0);
+        assertEquals("tomato", ingredient.getName());
+        assertEquals(3.0, ingredient.getQuantity());
+        assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
+    }
+
+    @Test
+    public void updateIngredient_decreaseQuantity_quantityDecreased() {
+        Ingredient tomato = new Ingredient("tomato", 2.0, IngredientUnit.PIECE);
+        Ingredient tomato2 = new Ingredient("tomato", -1.0, IngredientUnit.PIECE);
+
+        ingredients.addIngredient(tomato);
+
+        try {
+            ingredients.updateIngredient(tomato2);
+        } catch (EssenFormatException e) {
+            e.handleException();
+        }
+
+        Ingredient ingredient = ingredients.getIngredient(0);
+        assertEquals("tomato", ingredient.getName());
+        assertEquals(1.0, ingredient.getQuantity());
+        assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
     }
 }
