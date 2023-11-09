@@ -121,7 +121,8 @@ public class RecipeParser {
             int numberOfRecipesInInput = recipeInputList.length;
 
             if (numberOfRecipesInInput != numberOfRecipes) {
-                System.out.println("Number of recipes in your input marked by 'r/' does not correspond to your NUMBER_OF_RECIPES");
+                System.out.println("Number of recipes in your input marked " +
+                        "by 'r/' does not correspond to your NUMBER_OF_RECIPES");
                 throw new EssenFormatException();
             }
 

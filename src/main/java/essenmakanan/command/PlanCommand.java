@@ -7,7 +7,6 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.RecipeParser;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
@@ -33,7 +32,7 @@ public class PlanCommand extends Command {
     public void getMissingIngredients() {
         String ingredientName;
         Ingredient ingredientAvailable;
-        String missingQty = "0";
+        Double missingQuantity = 0.0;
         IngredientUnit ingredientUnit;
 
         for (Ingredient ingredientNeeded : allIngredientsNeeded.getIngredients()) {
@@ -41,10 +40,11 @@ public class PlanCommand extends Command {
             ingredientUnit = ingredientNeeded.getUnit();
             if (ingredients.exist(ingredientName)) {
                 ingredientAvailable = ingredients.getIngredient(ingredientName);
-                assert ingredientUnit == ingredientAvailable.getUnit() : "Unit must be standardised for the same ingredient";
-                missingQty = IngredientParser.getInsufficientQuantity(ingredientNeeded, ingredientAvailable);
-                if (!missingQty.equals("0")) {
-                    Ingredient lackingIngredient = new Ingredient(ingredientName, missingQty, ingredientUnit);
+                assert ingredientUnit == ingredientAvailable.getUnit() :
+                        "Unit must be standardised for the same ingredient";
+                missingQuantity = IngredientParser.getInsufficientQuantity(ingredientNeeded, ingredientAvailable);
+                if (missingQuantity != 0.0) {
+                    Ingredient lackingIngredient = new Ingredient(ingredientName, missingQuantity, ingredientUnit);
                     missingIngredients.addIngredient(lackingIngredient);
                 }
             } else {

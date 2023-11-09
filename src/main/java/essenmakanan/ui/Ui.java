@@ -205,7 +205,8 @@ public class Ui {
         return in.nextLine();
     }
 
-    public static void printPlanCommandIngredients(IngredientList allIngredientsNeeded, IngredientList missingIngredients) {
+    public static void printPlanCommandIngredients(
+            IngredientList allIngredientsNeeded, IngredientList missingIngredients) {
         System.out.println("Here is a list of all ingredients you need: ");
         allIngredientsNeeded.listIngredients();
         printNewLine();
