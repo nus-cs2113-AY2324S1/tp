@@ -1,4 +1,4 @@
-# Hao Zhi - Project Portfolio Page
+# Teo Hao Zhi - Project Portfolio Page
 
 ## Project : Stocker
 Stocker is a Command Line Interface(CLI) app for drug inventory management purposes.
