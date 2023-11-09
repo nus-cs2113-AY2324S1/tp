@@ -136,7 +136,20 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
+### `achieve` - Turn one goal as achieved
+Be careful that this funnction will mark a goal as achieved by **removing** a goal from the current goal list and **permanantly** add a new achieved goal into your achievement list. (You can only destroy the whole list if you made any errors or want to give up an achievement.)
 
+Format: `achieve Index`
+
+Example: XXXXX
+
+Expected outcome:
+
+```
+Got it. I've added this task:
+[T][ ] read book
+Now you have 2 tasks in the list.
+```
 
 ### Exiting the program: `exit`
 Exits the program.
