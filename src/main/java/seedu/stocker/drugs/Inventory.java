@@ -42,4 +42,9 @@ public class Inventory {
     public StockEntry get(String serialNumber) {
         return this.stock.get(serialNumber);
     }
+
+    public void clearInventory(){
+        stock.clear();
+    }
 }
+

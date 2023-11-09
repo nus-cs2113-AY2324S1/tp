@@ -5,13 +5,15 @@ import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.exceptions.InvalidDrugFormatException;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Represents an object to handle writing to txt files and appending to them.
@@ -80,7 +82,16 @@ public class Storage {
                 Drug drug = new Drug(name, expiryDate, sellingPrice);
                 inventory.addNewDrug(serialNumber, drug, quantity);
             } else {
-                throw new InvalidDrugFormatException("");
+                System.out.println("Malicious changes were made, overwriting old drug file,"
+                        + " please add new drugs and save again");
+                FileWriter fw = new FileWriter("./drugs.txt", false);
+                PrintWriter pw = new PrintWriter(fw, false);
+                pw.flush();
+                pw.close();
+                fw.close();
+                inventory.clearInventory();
+                break;
+
             }
         }
     }
