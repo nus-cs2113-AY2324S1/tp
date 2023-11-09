@@ -9,7 +9,7 @@ participant Storage
 
 User -> Ui: Decides to exit the application
 Ui -> CommandExit: Executes "bye" command
-CommandExit -> Ui: Signals the program to exit
+CommandExit --> Ui: Signals the program to exit
 Ui -> Storage: Saves any unsaved data
 Storage --> Ui: Data saved successfully
 Ui -> Ui: Displays exit message

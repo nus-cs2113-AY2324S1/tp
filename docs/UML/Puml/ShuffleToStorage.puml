@@ -20,12 +20,16 @@ class Question {
 
 QuestionList --> Question : Stores "*"
 
-class Database {
-  - data: ArrayList<Question>
-  + saveData(question: Question, answer: getAnswer)
-  + loadData(key: Question): getAnswer
+class Storage {
+    - **dataFile** : File
+    + **writeToFile** (filePath: String, textToAdd: String, toAppend: boolean)
+    + **loadData** (questions: QuestionList)
+    + **updateData** (questions: QuestionList)
+    + **buildCurrentListFromFile** (questions: QuestionList)
+    - **addShortAnsFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
+    - **addMCQFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
 }
 
-QuestionList --> Database : Data Storage "1"
+QuestionList --> Storage : Data Storage "1"
 
 @enduml

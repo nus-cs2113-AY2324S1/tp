@@ -4,6 +4,7 @@
 !define TEXT_THEME_COLOR Black
 <style>
     Class {
+        MaximumWidth 600
         BackgroundColor LIGHT_THEME_COLOR
         header {
                   BackgroundColor BODY_THEME_COLOR
@@ -28,8 +29,8 @@
     }
 </style>
 
+skinparam dpi 200
 skinparam BackgroundColor #FFFFFFF
-skinparam MinClassWidth 50
 skinparam ParticipantPadding 10
 skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
@@ -92,6 +93,15 @@ skinparam Participant {
 }
 
 skinparam Activity {
+    MessageAlign center
+    BackgroundColor LIGHT_THEME_COLOR
+    BorderColor BORDER_THEME_COLOR
+    BorderThickness 1.5
+    FontSize 20
+    FontName DM Sans
+}
+
+skinparam Rectangle {
     MessageAlign center
     BackgroundColor LIGHT_THEME_COLOR
     BorderColor BORDER_THEME_COLOR

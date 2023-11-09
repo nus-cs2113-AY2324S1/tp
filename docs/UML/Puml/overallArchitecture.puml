@@ -1,0 +1,16 @@
+@startuml
+!include Style.puml
+left to right direction
+rectangle Ui
+rectangle QuizHub
+rectangle Storage
+rectangle Commands
+rectangle Parser
+
+Ui --> Parser
+QuizHub <-[dotted]-> Storage
+Commands --> QuizHub
+Parser --> Commands
+QuizHub --> Ui
+
+@enduml

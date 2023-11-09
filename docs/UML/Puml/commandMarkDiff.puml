@@ -10,7 +10,7 @@ participant Question
 
 User -> Parser: Enters "markdiff [question number] /[question difficulty]"
 Parser -> CommandMarkDifficulty: Calls parseMarkDiffCommand(userInput)
-CommandMarkDifficulty -> Parser: Returns CommandMarkDifficulty instance
+CommandMarkDifficulty --> Parser: Returns CommandMarkDifficulty instance
 Parser -> CommandMarkDifficulty: Executes executeCommand(ui, dataStorage, questions)
 CommandMarkDifficulty -> QuestionList: Calls markQuestionDifficulty(index, qnDifficulty, showMessage)
 QuestionList -> Question: Calls markDifficulty(qnDifficulty)

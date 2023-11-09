@@ -28,9 +28,9 @@ level-3
 The main execution of the QuizHub application will concern 4 components which
 are the `QuizHub`, `Ui`, `Parser` and `Command` packages.
 
-![](UML/Images/architecture.jpg)
+![](UML/Images/overallArchitecture.png)
 
-`Quizhub` is the "main" class, which is responsible for starting the program,
+`QuizHub` is the "main" class, which is responsible for starting the program,
 initialising all other objects, executing commands, and shutting down.
 
 `UI` is the component that interacts with the user, taking inputs and displaying
@@ -40,10 +40,16 @@ the results of the executed commands.
 it has, based on the user input.
 
 `Commands` refer to a package of individual commands with complex and specific
-logic, which is later executed in Quizhub and displayed by `UI`.
+logic, which is later executed in QuizHub and displayed by `UI`.
 
 `Storage` is the class through which questions can be stored on the hard drive and `Utility Classes`
 refer to any miscellaneous utility classes used by all the components.
+
+The following condensed class diagram highlights the main classes involved in the execution of the 
+QuizHub application. Only the most important methods and attributes, meaning they directly
+control the flow and operation of the application, of each class is shown.
+
+![](UML/Images/overallClassInteraction.png)
 
 ## Application Lifecycle
 
@@ -201,7 +207,7 @@ It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
 *Condensed Class Diagram - Does not contain all attributes & methods
 ![](UML/Images/AddShortCommand.jpg)
 
-Thereafter, the command is returned to the Quizhub component and executed,
+Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
@@ -241,7 +247,7 @@ Afterward, the storage is updated to reflect the newest QuestionList.
 
 ### Find Command - Look for a matching question
 
-Quizhub supports searching for specific questions, by searching matching keywords
+QuizHub supports searching for specific questions, by searching matching keywords
 in the format
 
 `find /[description]` OR `find /[module]`
@@ -448,7 +454,7 @@ Upon exiting the program, the `Ui` class will call the `updateData` method and p
 
 ## UI Component
 
-The UI class in the Quizhub application is responsible for handling the user interface interactions in a command-line interface (CLI). It provides methods for displaying messages or questions as well as getting user
+The UI class in the QuizHub application is responsible for handling the user interface interactions in a command-line interface (CLI). It provides methods for displaying messages or questions as well as getting user
 input.
 
 ### Constructor

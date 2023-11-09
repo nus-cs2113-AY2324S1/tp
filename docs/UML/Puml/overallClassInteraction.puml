@@ -2,51 +2,65 @@
 !include Style.puml
 
 class QuizHub {
-    - FILE_PATH: String
-    + QuizHub (filePath: String)
-    + Run()
+    - **FILE_PATH** : String
+    + **Run** ()
 }
 
 class Parser {
-    + Parser(questions: QuestionList)
-    + {static} parseCommand(rawUserInput: String)
-    - {static} parseMCQCommand(userInput: String)
-    - {static} parseShortAnswerCommand(userInput: String)
-    - {static} parseStartCommand(userInput: String)
-    - {static} parseEditCommand(userInput: String)
-    - {static} parseDeleteCommand(userInput: String)
-    - {static} parseFindCommand(userInput: String)
-    - {static} parseMarkDiffCommand(userInput: String)
+    + {static} **parseCommand** (rawUserInput: String): Command
+    - {static} **parseMCQCommand** (userInput: String): Command
+    - {static} **parseShortAnswerCommand** (userInput: String): Command
+    - {static} **parseStartCommand** (userInput: String): Command
+    - {static} **parseEditCommand** (userInput: String): Command
+    - {static} **parseDeleteCommand** (userInput: String): Command
+    - {static} **parseFindCommand** (userInput: String): Command
+    - {static} **parseMarkDiffCommand** (userInput: String): Command
 }
 
 class Ui {
-    + Ui(dataStorage: Storage, questions: QuestionList)
-
+    - **input** : Scanner
+    + {static} **showLine** ()
+    + **getUserInput** (): String
+    + **displayQuestion** (question: Question, currentQuestionIndex: int, totalQuestions: int)
+    + **displayMessage** (message: String)
+    + **displayOpeningMessage** ()
+    + **displayClosingMessage** ()
 }
 
 class Storage {
-    - dataFile: File
-    + Storage(filePath: String)
+    - **dataFile** : File
+    + **writeToFile** (filePath: String, textToAdd: String, toAppend: boolean)
+    + **loadData** (questions: QuestionList)
+    + **updateData** (questions: QuestionList)
+    + **buildCurrentListFromFile** (questions: QuestionList)
+    - **addShortAnsFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
+    - **addMCQFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
 }
 
 class QuestionList {
-  - allQns: ArrayList<Question>
-  + addShortAnswerQn(question: Question)
-  + addMultipleChoiceQn(question: Question)
-  + shuffleQuestions()
-  + saveToFile()
-  + loadFromFile()
-  + startQuiz()
+  - **allQns** : ArrayList<Question>
+  + **addShortAnswerQn** (description: String, answer: String, module: String, qnDifficulty: Question.QnDifficulty, showMessage: boolean): boolean
+  + **addMultipleChoiceQn** (description: String, option1: String, option2: String, option3: String, option4: String, answer: int, module: String, qnDifficulty: Question.QnDifficulty, showMessage: boolean): boolean
+  + **markQuestionDifficulty** (index: int, qnDifficulty: Question.QnDifficulty, showMessage: boolean)
+  + **deleteQuestionByIndex** (index: int)
+  + **viewQuestionByIndex** (index: int): String
+  + **editQuestionByIndex** (index: int, editField: String, newValue: String)
+  + **searchListByDescription** (keyword: String): String
+  + **searchListByModule** (module: String): String
+  + **shuffleQuestions** (ui: Ui)
+  + **getQuestionListSize** (): int
+  + **getAllQns** (): ArrayList<Question>
+  + **startQuiz** (ui: Ui, questions: ArrayList<Question>)
 }
 
-QuizHub --> Parser
-QuizHub --> Ui
-QuizHub --> Storage
-QuizHub --> QuestionList
+QuizHub --> Parser: gets user command from "1"
+QuizHub --> Ui: displays message with "1"
+QuizHub --> Storage: stores data to "1"
+QuizHub --> QuestionList: manipulates data with "1"
 
-Ui --> QuestionList
-Ui --> Storage
+Ui --> QuestionList: fetches question info from "1"
+Ui --> Storage: stores data to "1"
 
-Parser --> QuestionList
+Parser --> QuestionList: manipulates data with "1"
 
 @enduml

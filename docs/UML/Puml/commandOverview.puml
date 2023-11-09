@@ -19,13 +19,13 @@ Ui --> QuizHub : userInput:String
 QuizHub -> Parser : parseCommand(userInput)
 activate Parser
 create Command
-Parser -> Command: Calls parseCommand(userInput)
+Parser -> Command:
 activate Command
 Command --> Parser
 deactivate Command
 Parser --> QuizHub : com
 deactivate Parser
-QuizHub -> Command: Executes executeCommand(ui, dataStorage, questions)
+QuizHub -> Command: executeCommand(ui, dataStorage, questions)
 activate Command
 Command -> QuestionList: QuestionList method
 activate QuestionList
