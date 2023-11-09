@@ -1,0 +1,21 @@
+@startuml
+
+class QuizHub {
+    - FILE_PATH: String
+    + QuizHub (filePath: String)
+    + Run()
+}
+
+class Parser {
+
+}
+
+class Ui {
+}
+
+class Storage {
+}
+
+class QuestionList {
+}
+@enduml
