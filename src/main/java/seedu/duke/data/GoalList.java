@@ -1,13 +1,11 @@
 package seedu.duke.data;
 
-
 import seedu.duke.Duke;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.ui.TextUi;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class GoalList extends ArrayList<Goal> {
     private static final String GOALKEYWORD = "set";
