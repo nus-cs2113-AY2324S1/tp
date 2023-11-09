@@ -20,8 +20,8 @@ public class IngredientParserTest {
     public void setUp() {
         ingredients = new IngredientList();
 
-        ingredient0 = new Ingredient("banana", "1", IngredientUnit.PIECE);
-        ingredient1 = new Ingredient("apple", "2", IngredientUnit.PIECE);
+        ingredient0 = new Ingredient("banana", 1.0, IngredientUnit.PIECE);
+        ingredient1 = new Ingredient("apple", 2.0, IngredientUnit.PIECE);
 
         ingredients.addIngredient(ingredient0);
         ingredients.addIngredient(ingredient1);

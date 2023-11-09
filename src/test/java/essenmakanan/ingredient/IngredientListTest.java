@@ -16,8 +16,8 @@ public class IngredientListTest {
     @Test
     public void addIngredient_validIngredient_addsNormally() {
 
-        Ingredient tomato = new Ingredient("tomato");
-        Ingredient cheese = new Ingredient("cheese");
+        Ingredient tomato = new Ingredient("tomato", 1.0, IngredientUnit.PIECE);
+        Ingredient cheese = new Ingredient("cheese", 20.0, IngredientUnit.GRAM);
 
         ingredients.addIngredient(tomato);
         ingredients.addIngredient(cheese);
@@ -27,8 +27,12 @@ public class IngredientListTest {
         Ingredient ingredient;
         ingredient = ingredients.getIngredient(0);
         assertEquals("tomato", ingredient.getName());
+        assertEquals(1.0, ingredient.getQuantity());
+        assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
 
         ingredient = ingredients.getIngredient(1);
         assertEquals("cheese", ingredient.getName());
+        assertEquals(20.0, ingredient.getQuantity());
+        assertEquals(IngredientUnit.GRAM, ingredient.getUnit());
     }
 }

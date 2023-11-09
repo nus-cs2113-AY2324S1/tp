@@ -89,7 +89,7 @@ public class IngredientList {
                 existingIngredient.setName(newName);
                 break;
             case "q/":
-                String newQuantity = editDetails[i].substring(2);
+                Double newQuantity = Double.parseDouble(editDetails[i].substring(2));
                 Ui.printEditIngredientQuantitySuccess(existingIngredient.getQuantity(), newQuantity);
                 existingIngredient.setQuantity(newQuantity);
                 break;

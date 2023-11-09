@@ -60,11 +60,11 @@ public class StartRecipeCommand extends Command {
                     diffUnitIngredients.addIngredient(recipeIngredient);
                 }
 
-                String missingQuantity = "0";
+                Double missingQuantity = 0.0;
                 if (isSameUnit) {
                     missingQuantity = IngredientParser.getInsufficientQuantity(recipeIngredient, inventoryIngredient);
                 }
-                if (isSameUnit && !missingQuantity.equals("0")) {
+                if (isSameUnit && !missingQuantity.equals(0.0)) {
                     Ingredient lackingIngredient = new Ingredient(
                             recipeIngredientName, missingQuantity, recipeIngredientUnit);
                     insufficientIngredients.addIngredient(lackingIngredient);
