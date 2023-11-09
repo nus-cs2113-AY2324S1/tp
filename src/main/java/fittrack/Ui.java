@@ -91,4 +91,8 @@ public class Ui {
         System.out.println("Height: " + profile.toString());
         printLine();
     }
+
+    public void printSaveFailure() {
+        System.out.println("Failed to save data.");
+    }
 }

@@ -67,15 +67,14 @@ public class FitTrack {
     }
 
     private CommandResult executeCommand(Command command) {
-        try {
-            command.setData(userProfile, mealList, workoutList, stepList, storage);
-            CommandResult result = command.execute();
-            storage.save(userProfile, mealList, workoutList, stepList);
-            return result;
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException();
-        }
+        command.setData(userProfile, mealList, workoutList, stepList);
+        CommandResult result = command.execute();
+        save();
+        return result;
+    }
+
+    private void end() {
+        save();
     }
 
     private boolean loadStorage(String[] args) {
@@ -109,6 +108,11 @@ public class FitTrack {
         return isStorageFileSpecifiedByUser ? new Storage(args[0], args[1], args[2], args[3]) : new Storage();
     }
 
-    private void end() {
+    private void save() {
+        try {
+            storage.save(userProfile, mealList, workoutList, stepList);
+        } catch (IOException e) {
+            ui.printSaveFailure();
+        }
     }
 }
