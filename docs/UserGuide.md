@@ -23,7 +23,7 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 ## Content of Command
 
-Display |    Name     |             Github Profile             | Portfolio | PPP 
+Exercise |    Meal     |             Goal             | Others  
 --------|:-----------:|:--------------------------------------:|:---------:|:----:|
 ![](https://via.placeholder.com/100.png?text=Photo) | Kevin Zhang | [Github](https://github.com/kevinz420) | [Portfolio](docs/team/johndoe.md)
 ![](https://picsum.photos/100) |   Ethan Huang   |     [Github](https://github.com/remy9926)      | [Portfolio](docs/team/johndoe.md) | [PPP](./team/remy9926.md)
