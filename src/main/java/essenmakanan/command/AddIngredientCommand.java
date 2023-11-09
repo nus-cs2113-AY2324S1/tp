@@ -28,6 +28,7 @@ public class AddIngredientCommand extends Command {
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredient);
                 ingredients.addIngredient(newIngredient);
+
             } catch (EssenFormatException e) {
                 e.handleException();
             }
