@@ -1,15 +1,15 @@
 package seedu.duke.commands.goal;
 
-import seedu.duke.Duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.ui.TextUi;
+import seedu.duke.data.GoalList;
 import seedu.duke.data.exception.IncorrectFormatException;
 
 
 public class GoalCommand extends Command {
 
     public static final String COMMAND_WORD = "set";
+    public String feedbackToUser;
 
     public GoalCommand(String cmd){
         super(cmd);
@@ -23,17 +23,14 @@ public class GoalCommand extends Command {
      */
     public CommandResult execute() {
         try{
-            Duke.goals.addGoal(this.userCommand);
-            String addGoalResultMsg = TextUi.addGoalSuccessMessage(Duke.goals);
-            return new CommandResult(addGoalResultMsg);
-
+            feedbackToUser = GoalList.addGoal(this.userCommand);
         }catch(IncorrectFormatException ife){
-            ife.handleException();
+            feedbackToUser = ife.getMessage();
         }catch(NumberFormatException nfe){
-            System.out.println("Please input a valid number for calories.");
+            feedbackToUser = "Please input a valid number for calories.";
         }
 
-        return null;
+        return new CommandResult(feedbackToUser);
     }
 
 }
