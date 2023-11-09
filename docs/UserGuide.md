@@ -17,7 +17,7 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 - For each type command, a specific `COMMAND FORMAT` is required. Please go through the following guidelines to look for the details of each command.
 
-- Both `CAPITAL LETTER` and `small letter` are acceptable. (But consecutive white space will be eliminated automatically).
+- Both `CAPITAL LETTER` and `small letter` are acceptable. But consecutive white space between words will be eliminated automatically.
   e.g. `VIEWG`, `viewG`, `viewg` will be consider the same. This is to favour the typing habits of different users.
 
 ## Command Type
