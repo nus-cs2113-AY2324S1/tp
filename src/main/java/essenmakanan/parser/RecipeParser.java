@@ -38,6 +38,111 @@ public class RecipeParser {
         return index;
     }
 
+    /**
+     * Get a RecipeList with recipes from a recipe ID list
+     *
+     * @param recipeIdList a list of ids of recipes
+     * @param recipes all recipes the user has
+     * @return RecipeList containing of all recipes that correspond to the index in the recipe ID list
+     * @throws EssenOutOfRangeException when the ID in recipe ID list is invalid
+     */
+    public static RecipeList getRecipes(int[] recipeIdList, RecipeList recipes) throws EssenOutOfRangeException {
+        RecipeList allRecipes = new RecipeList();
+        for (int id : recipeIdList) {
+            if (!recipes.recipeExist(id)) {
+                System.out.println("Your recipe Id is wrong");
+                throw new EssenOutOfRangeException();
+            }
+            allRecipes.addRecipe(recipes.getRecipe(id));
+        }
+        return allRecipes;
+    }
+
+    /**
+     * To remove the unused item at position zero after splitting the string.
+     * For example, ["", "fish", "rice"] as recipeInputString, will return ["fish", "rice"] after passing through method
+     *
+     * @param recipeInputString is the userInput in the format "r/RECIPE_ID [r/...]"
+     * @return recipeInputList which is a String[] that excludes the first unused variable
+     */
+    public static String[] getPlannedRecipesString(String recipeInputString) {
+        String[] recipeInputListTemp = recipeInputString.split("r/");
+        String[] recipeInputList = new String[recipeInputListTemp.length - 1];
+        System.arraycopy(recipeInputListTemp, 1, recipeInputList, 0, recipeInputList.length); //remove first space item
+        return recipeInputList;
+    }
+
+    /**
+     * To transform a string of input "r/... r/..." to an integer array such as [1, 4, ...]
+     *
+     * @param input is a String from the user
+     * @return an integer array consisting of index of recipes
+     */
+    public static int[] getRecipeIdList(String input) {
+        String[] recipeInputList = getPlannedRecipesString(input);
+        int[] recipeIdList = new int[recipeInputList.length];
+
+        String recipeString;
+        for (int i = 0; i < recipeInputList.length; i++) {
+            recipeString = recipeInputList[i].trim();
+            recipeIdList[i] = Integer.parseInt(recipeString) - 1;
+        }
+        return recipeIdList;
+    }
+
+
+    /**
+     * Check for errors within the plan command input by user
+     * If no error, returns an integer list
+     *
+     * @param userInput is the input by user
+     * @throws EssenFormatException when there is an error in user input
+     */
+    public static void parsePlanCommandInput(String userInput) throws EssenFormatException {
+        // to check if compulsory fields are filled in
+        if (userInput.split(" ").length < 2 || !userInput.contains("r/")) {
+            System.out.println("Note the format `plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]`\n" +
+                    "NUMBER_OF_RECIPES must be larger than or equal to 1 and it is a compulsory field\n" +
+                    "r/RECIPE_ID is a compulsory field");
+            throw new EssenFormatException();
+        }
+
+        String[] input = userInput.split(" ", 2);
+        String numberOfRecipesString = input[0];
+        String recipeInputString = input[1];
+
+        try {
+            // to check if at least 1 recipe is added
+            int numberOfRecipes = Integer.parseInt(numberOfRecipesString);
+            if (numberOfRecipes <= 0) {
+                System.out.println("NUMBER_OF_RECIPES must be larger than or equal to 1");
+                throw new EssenFormatException();
+            }
+
+            String[] recipeInputList = getPlannedRecipesString(recipeInputString);
+            for (int i = 0; i < recipeInputList.length; i++) {
+                recipeInputList[i] = recipeInputList[i].trim();
+            }
+
+            // to check if NUMBER_OF_RECIPES corresponds to the total number of recipes input
+            int numberOfRecipesInInput = recipeInputList.length;
+
+            if (numberOfRecipesInInput != numberOfRecipes) {
+                System.out.println("Number of recipes in your input marked " +
+                        "by 'r/' does not correspond to your NUMBER_OF_RECIPES");
+                throw new EssenFormatException();
+            }
+
+            // to check if each RECIPE_INDEX is an integer
+            for (String recipe : recipeInputList) {
+                Integer.parseInt(recipe); //to check if can be converted to integer, else, will throw an exception
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("NUMBER_OF_RECIPES should be an integer!");
+            throw new EssenFormatException();
+        }
+    }
+
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
             throws EssenException {
         Ui ui = new Ui();

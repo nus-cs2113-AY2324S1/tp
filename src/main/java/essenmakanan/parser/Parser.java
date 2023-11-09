@@ -11,6 +11,7 @@ import essenmakanan.command.EditRecipeCommand;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.command.FilterRecipesCommand;
 import essenmakanan.command.HelpCommand;
+import essenmakanan.command.PlanCommand;
 import essenmakanan.command.StartRecipeCommand;
 import essenmakanan.command.ViewIngredientsCommand;
 import essenmakanan.command.ViewRecipesCommand;
@@ -93,6 +94,9 @@ public class Parser {
             break;
         case "duplicate":
             command = new DuplicateRecipeCommand(recipes, inputDetail);
+            break;
+        case "plan":
+            command = new PlanCommand(ingredients, recipes, inputDetail);
             break;
         case "help":
             command = new HelpCommand();

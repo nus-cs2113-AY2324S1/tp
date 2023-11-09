@@ -204,4 +204,13 @@ public class Ui {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
+
+    public static void printPlanCommandIngredients(
+            IngredientList allIngredientsNeeded, IngredientList missingIngredients) {
+        System.out.println("Here is a list of all ingredients you need: ");
+        allIngredientsNeeded.listIngredients();
+        printNewLine();
+        System.out.println("Here are the ingredients you need to buy because your inventory is running low: ");
+        missingIngredients.listIngredients();
+    }
 }

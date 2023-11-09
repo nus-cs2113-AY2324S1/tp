@@ -5,6 +5,9 @@ import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
+import essenmakanan.recipe.Recipe;
+import essenmakanan.recipe.RecipeIngredientList;
+import essenmakanan.recipe.RecipeList;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
@@ -24,6 +27,26 @@ public class IngredientParser {
         }
 
         return index;
+    }
+
+
+    /**
+     * To get an Ingredient List of all ingredients needed for all recipes in the recipe list
+     *
+     * @param recipes is a recipe list of all recipes the user wants to process
+     * @return all ingredients in the list of recipes
+     */
+    public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
+        IngredientList allIngredients = new IngredientList();
+        RecipeIngredientList recipeIngredients;
+
+        for (Recipe recipe : recipes.getRecipes()) {
+            recipeIngredients = recipe.getRecipeIngredients();
+            for (Ingredient ingredient : recipeIngredients.getIngredients()) {
+                allIngredients.addIngredient(ingredient);
+            }
+        }
+        return allIngredients;
     }
 
     public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
