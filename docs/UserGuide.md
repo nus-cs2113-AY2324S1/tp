@@ -64,6 +64,8 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 | [Duplicate Recipe](#duplicate-recipe)                                      | duplicate RECIPE_NAME or duplicate RECIPE_INDEX             | duplicate sandwich or duplicate 1                                                  |                                                              |                                                                                    |
 | [Start recipe](#start-recipe) <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID                  | start dumpling noodles <br><br> start 1                                            |
 | [Filter recipe by ingredients](#filter-recipe)                             | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                  |
+|[Plan recipes for the week](#plan-recipe)|plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]|filter 2 r/1 r/3|
+
 ---
 
 ### [Ingredient Summary of Commands](#feature-ingredient)
@@ -255,7 +257,25 @@ Example:
    
 ![img_1.png](images/FilterRecipseByIngredientCommand.png)
 
+---
 
+<a id="plan-recipe"></a>
+#### Plan recipes for the week `plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]`
+
+Schedule recipes for a week or for as many days you want by using our plan command!
+This allows you to plan for your grocery trip in advance.
+
+Upon using the command, we will show you all the ingredients needed for all your planned recipes and ingredients that you are missing.
+
+Note:
+- `NUMBER_OF_RECIPES` must correspond to the total number of recipes ("r/...") you enter. This is a compulsory field.
+- You need to input at least 1 recipe to plan
+- To view your recipe ids, use the `view r` command
+
+Example:
+- `plan 2 r/1 r/2` 
+
+  
 
 ---
 
