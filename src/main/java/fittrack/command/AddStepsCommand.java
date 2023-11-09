@@ -3,12 +3,12 @@ package fittrack.command;
 import fittrack.data.Step;
 import fittrack.parser.ParseException;
 
-public class AddStepsCommand extends Command{
+public class AddStepsCommand extends Command {
     public static final String COMMAND_WORD = "addsteps";
     private static final String DESCRIPTION =
             String.format("`%s` adds your step data to the list.", COMMAND_WORD);
     private static final String USAGE = String.format(
-            "Type `%s <DATE>` to add an entry of the steps walked on that date.\n" +
+            "Type `%s <NUMBER_OF_STEPS> d/<DATE>` to add an entry of the steps walked on that date.\n" +
                     "You should type <DATE> in format of `yyyy-MM-dd`.",
             COMMAND_WORD
     );
@@ -42,9 +42,6 @@ public class AddStepsCommand extends Command{
         newStep = Step.parseStep(args);
     }
 
-    public Step getStep(){
-        return newStep;
-    }
     /**
      * Returns help of the command.
      *

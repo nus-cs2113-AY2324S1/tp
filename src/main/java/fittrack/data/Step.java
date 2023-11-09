@@ -13,11 +13,11 @@ public class Step {
     private static final String STEP_CG = "step";
     private static final String DATE_CG = "date";
     private static final Pattern STEP_PATTERN = Pattern.compile(
-            "(?<" + STEP_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
+            "(?<" + STEP_CG + ">\\S+)\\s+d/(?<" + DATE_CG + ">\\S+)"
     );
 
     private final int steps;
-    private Date date;
+    private final Date date;
 
     public Step(int steps, Date date) {
         assert steps >= 0 && date != null;
