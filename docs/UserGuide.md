@@ -91,6 +91,25 @@ The AMOUNT is in terms of kcal. Please use DD/MM/YYYY format for the date.
 
 Note that this function is still under development. The future features includes: delete a goal, view your goal, save your achievement, etc.
 
+### View your current goal list: `viewG`
+Look for the content of current goal list.
+
+Format: `viewG`
+
+Example:
+
+### Delete a goal from current goal list: `deleteG`
+Remove a undersired goal from the goal list. Note that it is not encouraged to remove a goal from the goal list, unless the inserted goal has error or impossible to be accomplished.
+
+Format: `deleteG Index`
+
+You can retrieve the index by showing the goal list
+
+Example:
+
+
+
+
 ### Exiting the program: `exit`
 Exits the program.
 
