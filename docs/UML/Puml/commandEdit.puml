@@ -8,8 +8,9 @@ participant Parser as ":Parser"
 participant CommandEdit as "c:CommandEdit"
 participant QuestionList as ":QuestionList"
 participant Question as ":Question"
+participant MCQOption as ":MCQOption"
 
-User -> QuizHub: Enters "edit [question number] /description [description] or /answer [answer]"
+User -> QuizHub: Enters "edit [question number] /description [description], /answer [answer], or /option[1...4] [newAnswer]"
 activate QuizHub
 QuizHub -> Parser : parseCommand(userInput)
 activate Parser
@@ -23,9 +24,30 @@ Parser --> QuizHub : c
 deactivate Parser
 QuizHub -> CommandEdit: Executes executeCommand(ui, dataStorage, questions)
 activate CommandEdit
-CommandEdit -> QuestionList: Calls editQuestionByIndex(index, newDescription, newAnswer)
+alt if editing description or answer
+    CommandEdit -> QuestionList: Calls editQuestionByIndex(index, newDescription, newAnswer)
+    activate QuestionList
+    QuestionList -> Question: Calls editQuestion(newDescription, newAnswer)
+    activate Question
+    Question -> Question: Edits question description and/or answer
+    Question --> QuestionList: Notifies edit completion
+    deactivate Question
+    QuestionList --> CommandEdit: Notifies edit completion
+    deactivate QuestionList
+else if editing MCQ option
+    CommandEdit -> QuestionList: Calls editMCQOptionByIndex(index, optionNumber, newOption)
+    activate QuestionList
+    QuestionList -> MCQOption: Calls editOption(optionNumber, newOption)
+    activate MCQOption
+    MCQOption -> MCQOption: Updates the specified option
+    MCQOption --> QuestionList: Notifies option edit completion
+    deactivate MCQOption
+    QuestionList --> CommandEdit: Notifies option edit completion
+    deactivate QuestionList
+end
+CommandEdit -> QuestionList: Calls editQuestionByIndex(index, editField, newValue)
 activate QuestionList
-QuestionList -> Question: Calls editQuestion(newDescription, newAnswer)
+QuestionList -> Question: Calls editQuestion(editField, newValue)
 activate Question
 Question -> Question: Edits question description and/or answer
 Question --> QuestionList: Notifies edit completion

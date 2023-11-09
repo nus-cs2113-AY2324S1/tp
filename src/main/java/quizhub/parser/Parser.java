@@ -560,7 +560,7 @@ public class Parser {
      */
     private static void extractQuizMode(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
-        String[] inputSplitByArguments = userInput.split("/");
+        String[] inputSplitByArguments = userInput.toLowerCase().split("/");
         String quizStartInfo = inputSplitByArguments[1].strip();
         String quizMode = quizStartInfo.split(" ")[0].strip();
         if (quizMode.equals("")) {
@@ -608,7 +608,7 @@ public class Parser {
             throw new IllegalArgumentException();
         }
         if (!commandStartTokens[0].equals("all")) {
-            String[] inputSplitByQuizMode = userInput.split("/");
+            String[] inputSplitByQuizMode = userInput.toLowerCase().split("/");
             String quizStartInfo = inputSplitByQuizMode[1].strip();
             quizStartDetails = quizStartInfo.split(commandStartTokens[0])[1].strip();
             if (!commandStartTokens[0].equals("all") && quizStartDetails.isEmpty()) {
@@ -650,7 +650,7 @@ public class Parser {
      */
     private static void extractQuizQnMode(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
-        String[] inputSplitByArguments = userInput.split("/");
+        String[] inputSplitByArguments = userInput.toLowerCase().split("/");
         String qnMode = inputSplitByArguments[2].strip();
         if (qnMode.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
@@ -698,11 +698,18 @@ public class Parser {
      */
     private static void extractQuizQnType(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
-        String[] inputSplitBySlash = userInput.split("/");
+        String[] inputSplitBySlash = userInput.toLowerCase().split("/");
+        if (inputSplitBySlash.length > CommandStart.NUM_ARGUMENTS) {
+            throw new IllegalArgumentException("Invalid command: Extra input detected after question type.");
+        }
         if (inputSplitBySlash.length < CommandStart.NUM_ARGUMENTS) {
             throw new ArrayIndexOutOfBoundsException("Missing question type for the quiz.");
         }
-        String qnType = inputSplitBySlash[3].split(" ")[0].strip().toLowerCase();
+        String[] inputSplitBySpaceAfterSlash = inputSplitBySlash[CommandStart.NUM_ARGUMENTS - 1].split(" ");
+        if (inputSplitBySpaceAfterSlash.length > 1) {
+            throw new IllegalArgumentException("Invalid command: Extra input detected after question type.");
+        }
+        String qnType = inputSplitBySpaceAfterSlash[0].strip().toLowerCase();
         if (!qnType.equals("short") && !qnType.equals("mcq") && !qnType.equals("mix")) {
             throw new IllegalArgumentException("Invalid question type for the quiz.");
         }
@@ -717,19 +724,13 @@ public class Parser {
      * @return CommandInvalid containing the error message for the user.
      */
     private static Command handleQnTypeExceptions(Exception qnTypeException) {
-        String baseErrorMessage = "There was an error parsing the question type for the quiz: ";
 
         if (qnTypeException instanceof ArrayIndexOutOfBoundsException) {
-            // This indicates that the question type argument was missing
-            return new CommandInvalid(baseErrorMessage +
-                    "You must specify a question type ('/short', '/mcq', or '/mix').");
+            return new CommandInvalid(CommandStart.INVALID_QN_TYPE_MSG);
         } else if (qnTypeException instanceof IllegalArgumentException) {
-            // This indicates that the provided question type argument was invalid
-            return new CommandInvalid(baseErrorMessage +
-                    "Invalid question type. Valid types are '/short', '/mcq', or '/mix'.");
+            return new CommandInvalid("    " + qnTypeException.getMessage() + System.lineSeparator() + CommandStart.INVALID_QN_TYPE_MSG);
         } else {
-            // This handles any other unexpected exceptions
-            return new CommandInvalid(baseErrorMessage + qnTypeException.getMessage());
+            return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
 

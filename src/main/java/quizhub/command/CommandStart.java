@@ -24,9 +24,11 @@ public class CommandStart extends Command{
     public static final String MISSING_QN_MODE_MSG = "    Ono! You did not indicate mode of arranging " +
             "quiz questions :<";
     public static final String INVALID_QN_MODE_MSG = "    Question mode must be either 'random' or 'normal'";
+    public static final String INVALID_QN_TYPE_MSG = "    Question type must be '/short', '/mcq', or '/mix'";
     public static final String INVALID_FORMAT_MSG = "    Please format your input as start " +
             "/[quiz mode] [start details] /[qn mode] /[qn type]!";
     public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! You gave too many arguments :<";
+
     public static final String EXIT_QUIZ_KEYWORD = "\\exitquiz";
     public static final String NO_QN_FOUND_MSG = "    No question found in list / no question found pertaining " +
             "to module. Add questions before starting the quiz";
