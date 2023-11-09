@@ -4,7 +4,6 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
-import fittrack.parser.NumberFormatException;
 import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 import fittrack.storage.Storage;
@@ -73,7 +72,6 @@ public class FitTrack {
         }
 
         while (!isValidInput) {
-            // TODO: organize here.
             startProfile();
         }
     }
@@ -103,7 +101,8 @@ public class FitTrack {
 
     private void startProfile() {
         try {
-            profileSettings();
+            userProfile.profileSettings();
+            ui.printProfileDetails(userProfile);
             storage.saveProfile(userProfile);
             isValidInput = true;
         } catch (PatternMatchFailException e) {
@@ -116,29 +115,6 @@ public class FitTrack {
         }
     }
 
-    /**
-     * Gets user profile details when program starts.
-     *
-     * @throws PatternMatchFailException if regex match fails
-     * @throws NumberFormatException if one of arguments is not double
-     */
-    private void profileSettings()
-            throws ParseException {
-        System.out.println(
-                "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
-        );
-        String input = ui.scanNextLine();
-
-        assert (input != null) : "Profile cannot be null";
-
-        UserProfile profile = UserProfile.parseUserProfile(input);
-        userProfile.setHeight(profile.getHeight());
-        userProfile.setWeight(profile.getWeight());
-        userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
-        userProfile.setGender(profile.getGender());
-
-        ui.printProfileDetails(userProfile);
-    }
 
     /**
      * Creates the StorageFile object based on the user specified path (if any) or the default storage path.

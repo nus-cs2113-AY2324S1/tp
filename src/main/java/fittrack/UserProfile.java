@@ -5,6 +5,7 @@ import fittrack.data.Weight;
 import fittrack.data.Height;
 import fittrack.data.Calories;
 import fittrack.data.Bmi;
+import fittrack.parser.NumberFormatException;
 import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 
@@ -26,6 +27,7 @@ public class UserProfile {
     private Gender gender;
     private Calories dailyCalorieLimit;
     private Bmi bmi;
+    private Ui ui = new Ui();
 
     public UserProfile() {
         this(new Height(1), new Weight(1), new Calories(0), Gender.MALE);
@@ -111,5 +113,26 @@ public class UserProfile {
         Calories dailyCalorieLimit = Calories.parseCalories(dailyCalorieLimitData);
         Gender gender = Gender.parseGender(genderData);
         return new UserProfile(height, weight, dailyCalorieLimit, gender);
+    }
+
+    /**
+     * Gets user profile details when program starts.
+     *
+     * @throws PatternMatchFailException if regex match fails
+     * @throws NumberFormatException if one of arguments is not double
+     */
+    public void profileSettings() throws ParseException {
+        System.out.println(
+                "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
+        );
+        String input = ui.scanNextLine();
+
+        assert (input != null) : "Profile cannot be null";
+
+        UserProfile profile = parseUserProfile(input);
+        setHeight(profile.getHeight());
+        setWeight(profile.getWeight());
+        setDailyCalorieLimit(profile.getDailyCalorieLimit());
+        setGender(profile.getGender());
     }
 }
