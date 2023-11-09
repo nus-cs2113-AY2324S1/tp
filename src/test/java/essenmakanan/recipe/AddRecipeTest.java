@@ -56,11 +56,11 @@ class AddRecipeTest {
         // check ingredients are added correctly
         RecipeIngredientList ingredients = addedRecipe.getRecipeIngredients();
         assertEquals("flour", ingredients.getIngredientByIndex(0).getName());
-        assertEquals("200", ingredients.getIngredientByIndex(0).getQuantity());
+        assertEquals(200.0, ingredients.getIngredientByIndex(0).getQuantity());
         assertEquals(IngredientUnit.GRAM, ingredients.getIngredientByIndex(0).getUnit());
 
         assertEquals("egg", ingredients.getIngredientByIndex(1).getName());
-        assertEquals("2", ingredients.getIngredientByIndex(1).getQuantity());
+        assertEquals(2.0, ingredients.getIngredientByIndex(1).getQuantity());
         assertEquals(IngredientUnit.PIECE, ingredients.getIngredientByIndex(1).getUnit());
     }
 

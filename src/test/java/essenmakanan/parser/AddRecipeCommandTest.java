@@ -38,7 +38,7 @@ public class AddRecipeCommandTest {
         // check ingredients
         RecipeIngredientList recipeIngredients = recipeList.getRecipe(0).getRecipeIngredients();
         assertEquals("eggs", recipeIngredients.getIngredients().get(0).getName());
-        assertEquals("2", recipeIngredients.getIngredients().get(0).getQuantity());
+        assertEquals(2.0, recipeIngredients.getIngredients().get(0).getQuantity());
         assertEquals(IngredientUnit.PIECE, recipeIngredients.getIngredients().get(0).getUnit());
     }
     @Test
@@ -59,7 +59,7 @@ public class AddRecipeCommandTest {
         // check ingredient is correct
         RecipeIngredientList recipeIngredients = recipeList.getRecipe(0).getRecipeIngredients();
         assertEquals("vegetable oil", recipeIngredients.getIngredients().get(0).getName());
-        assertEquals("100", recipeIngredients.getIngredients().get(0).getQuantity());
+        assertEquals(100,0, recipeIngredients.getIngredients().get(0).getQuantity());
         assertEquals(IngredientUnit.MILLILITER, recipeIngredients.getIngredients().get(0).getUnit());
 
     }
@@ -96,11 +96,11 @@ public class AddRecipeCommandTest {
         // check ingredients are correct
         RecipeIngredientList recipeIngredients = recipeList.getRecipe(0).getRecipeIngredients();
         assertEquals("vegetable oil", recipeIngredients.getIngredients().get(0).getName());
-        assertEquals("1", recipeIngredients.getIngredients().get(0).getQuantity());
+        assertEquals(1,0, recipeIngredients.getIngredients().get(0).getQuantity());
         assertEquals(IngredientUnit.LITER, recipeIngredients.getIngredients().get(0).getUnit());
 
         assertEquals("eggs", recipeIngredients.getIngredients().get(1).getName());
-        assertEquals("2", recipeIngredients.getIngredients().get(1).getQuantity());
+        assertEquals(2.0, recipeIngredients.getIngredients().get(1).getQuantity());
         assertEquals(IngredientUnit.PIECE, recipeIngredients.getIngredients().get(1).getUnit());
     }
 
@@ -178,7 +178,7 @@ public class AddRecipeCommandTest {
         // check ingredients
         RecipeIngredientList recipeIngredients = recipeList.getRecipe(0).getRecipeIngredients();
         assertEquals("eggs", recipeIngredients.getIngredients().get(0).getName());
-        assertEquals("2", recipeIngredients.getIngredients().get(0).getQuantity());
+        assertEquals(2.0, recipeIngredients.getIngredients().get(0).getQuantity());
         assertEquals(IngredientUnit.PIECE, recipeIngredients.getIngredients().get(0).getUnit());
     }
 
