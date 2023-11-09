@@ -16,19 +16,19 @@
 ## Acknowledgements
 
 1. For the main structure of the program, we have adapted the project structure
-from the Individual Project of Man Juncheng at [Link](https://github.com/spinoandraptos/ip/tree/master)
-2. For JUnit testing, we have adapted the testing codes from the AddressBook level-2
-codes at [Link](https://github.com/se-edu/addressbook-level2)
-3. For the developer's guide, we have referenced the developer's guide from AddressBook
-level-3 [Link](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+from the [Individual Project](https://github.com/spinoandraptos/ip/tree/master) of Man Juncheng
+2. For JUnit testing, we have adapted the testing codes from the [AddressBook level-2
+codes](https://github.com/se-edu/addressbook-level2)
+3. For the developer's guide, we have referenced the [developer's guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) from AddressBook
+level-3
 
 # Design & implementation
 
 ## Overall Architecture
 The main execution of the QuizHub application will concern 4 components which
-are the QuizHub, Ui, Parser and Command packages.
+are the `QuizHub`, `Ui`, `Parser` and `Command` packages.
 
-![](./UML/architecture.jpg)
+![](UML/Images/architecture.jpg)
 
 `Quizhub` is the "main" class, which is responsible for starting the program,
 initialising all other objects, executing commands, and shutting down.
@@ -47,7 +47,7 @@ refer to any miscellaneous utility classes used by all the components.
 
 ## Application Lifecycle
 
-![](./UML/lifecycle.jpg)
+![](UML/Images/lifecycle.jpg)
 
 The program begins with the `run()` call to `QuizHub` class.
 
@@ -143,7 +143,7 @@ very start of the user input.
 
 The following sequence diagram shows the implementation of `parseCommand`.
 
-![](./UML/Parser.jpg)
+![](UML/Images/Parser.jpg)
 
 `getContentAfterKeyword`
 
@@ -199,7 +199,7 @@ It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
 4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard)
 
 *Condensed Class Diagram - Does not contain all attributes & methods
-![](./UML/AddShortCommand.jpg)
+![](UML/Images/AddShortCommand.jpg)
 
 Thereafter, the command is returned to the Quizhub component and executed,
 to add a Question object to the corresponding QuestionList object
@@ -423,7 +423,7 @@ The details of the data loading and updating process are explained in details be
 
 The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below.
 
-![](./UML/Storage.jpg)
+![](UML/Images/Storage.jpg)
 
 :exclamation: This sequence diagram emphasizes the process of loading data into storage, and has therefore omitted details of more trivial and/or non-related methods as well as exception handling logic. To find out more about the details, please refer to the complete code and header comments.
 
@@ -463,7 +463,7 @@ input.
 
 #### Overall Flow
 
-![](./UML/ui_flow.jpg)
+![](UML/Images/ui_flow.jpg)
 
 When the program is first initiated, the `displayOpeningMessage()` method is called to display a welcome message while also calling the `loadData()` method of the `dataStorage` to display all the questions stored in the storage file if any.
 
@@ -473,7 +473,7 @@ Finally, the `displayClosingMessage()` method is called to display a farewell me
 
 #### Displaying Quizzes
 
-![](./UML/ui_quiz.jpg)
+![](UML/Images/ui_quiz.jpg)
 
 The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions.
 
