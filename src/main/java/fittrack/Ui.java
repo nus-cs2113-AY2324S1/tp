@@ -93,7 +93,7 @@ public class Ui {
     }
 
     public void printStoragePathSettingFailure() {
-        System.out.println("One of given storage paths is invalid.");
+        System.out.println("One of given storage paths is invalid. Proceeding with default paths.");
     }
 
     public void printSaveFailure() {

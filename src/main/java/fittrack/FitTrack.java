@@ -103,14 +103,16 @@ public class FitTrack {
      */
     // @@author J0shuaLeong
     private Storage initializeStorage(String[] args) {
-        boolean isStorageFileSpecifiedByUser = args.length == 4;
-        try {
-            if (isStorageFileSpecifiedByUser) {
+        if (args.length == 4) {
+            try {
                 return new Storage(args[0], args[1], args[2], args[3]);
-            } else {
+            } catch (InvalidStorageFilePathException e) {
+                ui.printStoragePathSettingFailure();
                 return new Storage();
             }
-        } catch (InvalidStorageFilePathException e) {
+        } else if (args.length == 0) {
+            return new Storage();
+        } else {
             ui.printStoragePathSettingFailure();
             return new Storage();
         }
