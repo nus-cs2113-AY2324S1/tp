@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
@@ -40,14 +41,14 @@ class ListIngredientCommandTest {
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
 
-        String expectedOutput = "+-------------------------------------------------------+"
+        String expectedOutput = Messages.INGREDIENTS_END_CAP
                 + "| Dish: chicken rice                                    |"
-                + "+----------------------------------------+--------------+"
-                + "| Ingredient                             + Quantity     +"
-                + "+----------------------------------------+--------------+"
+                + Messages.INGREDIENTS_CORNER
+                + Messages.INGREDIENTS_TITLE
+                + Messages.INGREDIENTS_CORNER
                 + "| rice                                   | 100g         |"
                 + "| chicken                                | 200g         |"
-                + "+-------------------------------------------------------+";
+                + Messages.INGREDIENTS_END_CAP;
 
         String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();
         String normalizedActual = actualOutput.toLowerCase().replaceAll("\\s+", "").trim();

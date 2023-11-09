@@ -53,7 +53,7 @@ public class OrderList {
         }
 
         for (Order aggregatedOrder : aggregatedOrders) {
-            if (aggregatedOrder.getQuantity()==0) {
+            if (aggregatedOrder.getQuantity() == 0) {
                 continue;
             }
 

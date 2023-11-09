@@ -118,7 +118,7 @@ class AddOrderCommandTest {
 
         String expectedOutput = Messages.CHEF_MESSAGE
                 + Messages.RESTOCK_CORNER
-                + "| Restock                                | Current      | Needed       |"
+                + Messages.RESTOCK_TITLE
                 + Messages.RESTOCK_CORNER
                 + "| chicken                                | 1000g        | 2000g        |"
                 + Messages.RESTOCK_END_CAP
