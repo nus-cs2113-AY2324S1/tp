@@ -364,7 +364,7 @@ Command will use java's system out to print out all required information with a 
 
 ---
 
-## 5. Save Command
+## 5. saveDrugs Command
 
 The save command was made as a means to backup user entered drug data into the hard drive of the computer to ensure
 previously entered data is saved and accessable whenever the app is launched.
