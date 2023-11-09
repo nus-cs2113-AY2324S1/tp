@@ -1,8 +1,8 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor UI_COLOR_T3
-skinparam classBackgroundColor UI_COLOR_T3
+skinparam arrowColor CLASS_ARROW_COLOR
+skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
 
 Class RecipeList
 Class Recipe
