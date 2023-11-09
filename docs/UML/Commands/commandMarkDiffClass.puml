@@ -1,5 +1,6 @@
 @startuml
 !theme plain
+hide circle
 class CommandMarkDifficulty {
   - qnIndex: int
   - qnDifficulty: Question.QnDifficulty
