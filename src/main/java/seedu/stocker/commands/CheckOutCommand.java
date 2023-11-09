@@ -1,6 +1,6 @@
 package seedu.stocker.commands;
 
-import seedu.stocker.exceptions.DrugNotFoundException;
+import seedu.stocker.drugs.*;
 
 /**
  * Remove a drug from inventory and add it into the sales list
@@ -21,11 +21,30 @@ public class CheckOutCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        try {
-            currentCart.checkOut(salesList, inventory);
-            return new CommandResult<>(String.format(MESSAGE_SUCCESS));
-        } catch (DrugNotFoundException e) {
-            return new CommandResult<>(String.format(MESSAGE_FAILURE));
+        if (currentCart.isEmpty()) {
+            return new CommandResult(MESSAGE_FAILURE);
+        } else {
+            StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
+            int index = 1;
+            double totalCost = 0.0;
+
+            for (CartEntry entry : currentCart.getCurrentCart()) {
+                String serialNumber = entry.getSerialNumber();
+                long quantity = entry.getQuantity();
+
+                // Assuming that the StockEntry and Drug classes have similar structures in CheckOutCommand and ViewCartCommand
+                StockEntry stockEntry = inventory.get(serialNumber);
+                if (stockEntry != null) {
+                    Drug drug = stockEntry.getDrug();
+                    double sellingPrice = drug.getSellingPrice();
+                    double cost = sellingPrice * quantity;
+                    totalCost += cost;
+                }
+            }
+
+            resultMessage.append(System.lineSeparator()).append("Total Cost: ").append(totalCost);
+
+            return new CommandResult<>(resultMessage.toString());
         }
     }
 }
