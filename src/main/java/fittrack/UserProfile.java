@@ -135,7 +135,7 @@ public class UserProfile {
     public void startProfile(UserProfile userProfile, Ui ui, Storage storage, boolean isProfileLoaded) {
         while (!isProfileLoaded) {
             try {
-                String input = ui.profileMessageAndScanner();
+                String input = ui.scanUserProfile();
                 profileSettings(input);
                 ui.printProfileDetails(userProfile);
                 storage.saveProfile(userProfile);

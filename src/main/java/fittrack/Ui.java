@@ -8,14 +8,11 @@ import java.util.Scanner;
  * Represents the user interface of FitTrack.
  */
 public class Ui {
-
     private static final String LOGO = "___________.__  __ ___________                     __\n"
                                      + "\\_   _____/|__|/  |\\__    ___/___________    ____ |  | __\n"
                                      + " |    __)  |  \\   __\\|    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n"
                                      + " |     \\   |  ||  |  |    |   |  | \\/ __ \\  \\___|    <\n"
                                      + " \\___  /   |__||__|  |____|   |__|  (____  /\\___  >__|_ \\";
-
-
     private static final String LINE = "____________________________________________________________";
 
     private final Scanner in;
@@ -45,6 +42,16 @@ public class Ui {
         return scanNextLine();
     }
 
+    // @@author J0shuaLeong
+    public String scanUserProfile() {
+        System.out.println(
+                "Please enter your height (in cm), weight (in kg), gender (M or F), " +
+                        "and daily calorie limit (in kcal):"
+        );
+        return scanNextLine();
+    }
+    // @@author
+
     public void printBlankLine() {
         System.out.println();
     }
@@ -71,13 +78,6 @@ public class Ui {
     public void printPrompt() {
         System.out.println("Welcome back! How can I help you today?");
         printLine();
-    }
-
-    public String profileMessageAndScanner() {
-        System.out.println(
-                "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
-        );
-        return scanNextLine();
     }
 
     /**
