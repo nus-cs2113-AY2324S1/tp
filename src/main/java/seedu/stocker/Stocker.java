@@ -32,8 +32,6 @@ public class Stocker {
      * Runs Login System.
      */
     public boolean startLogin() throws IOException {
-        this.ui = new Ui();
-        ui.showLoginMessage();
         LoginSystem system = new LoginSystem();
         system.run();
 

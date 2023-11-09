@@ -238,6 +238,7 @@ public class LoginSystem {
      */
     public void run() throws IOException {
         loadExistingUsers();
+        interactor.showLoginMessage();
         String choice = authenticateUserChoice();
         if (choice.equals("register")) {
             newUserCreator();
