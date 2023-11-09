@@ -4,6 +4,7 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
+import fittrack.parser.ParseException;
 import fittrack.storage.Storage;
 import fittrack.storage.Storage.StorageOperationException;
 import fittrack.storage.Storage.InvalidStorageFilePathException;
@@ -22,37 +23,34 @@ public class FitTrack {
     public static final String VERSION = "FitTrack - Version 2.1";
 
     private final Ui ui;
-    private Storage storage;
+    private final Storage storage;
     private UserProfile userProfile;
     private MealList mealList;
     private WorkoutList workoutList;
     private StepList stepList;
 
-    private FitTrack() {
-        ui = new Ui();
-        userProfile = new UserProfile();
-        mealList = new MealList();
-        workoutList = new WorkoutList();
+    private FitTrack(String[] storagePaths) {
+        this.ui = new Ui();
+        this.storage = initializeStorage(storagePaths);
     }
 
     /**
      * Main entry-point for the FitTrack application.
      */
     public static void main(String[] args) {
-        new FitTrack().run(args);
+        new FitTrack(args).run();
     }
 
-    private void run(String[] args) {
-        start(args);
+    private void run() {
+        start();
         loopCommandExecution();
         end();
     }
 
-    private void start(String[] args) {
+    private void start() {
         ui.printVersion();
         ui.printWelcome();
-        boolean isProfileLoaded = loadStorage(args);
-        userProfile.startProfile(userProfile, ui, storage, isProfileLoaded);
+        load();
     }
 
     private void loopCommandExecution() {
@@ -60,55 +58,102 @@ public class FitTrack {
         do {
             String userCommandLine = ui.scanCommandLine();
             command = CommandParser.parseCommand(userCommandLine);
+
             CommandResult commandResult = executeCommand(command);
+
             ui.printCommandResult(commandResult);
             ui.printLine();
         } while (!ExitCommand.isExit(command));
     }
 
     private CommandResult executeCommand(Command command) {
-        try {
-            command.setData(userProfile, mealList, workoutList, stepList, storage);
-            CommandResult result = command.execute();
-            storage.save(userProfile, mealList, workoutList, stepList);
-            return result;
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException();
-        }
+        command.setData(userProfile, mealList, workoutList, stepList);
+        CommandResult result = command.execute();
+        save();
+        return result;
     }
 
-    private boolean loadStorage(String[] args) {
-        boolean isFirstTime = false;
+    private void end() {
+        save();
+    }
+
+    // @@author J0shuaLeong
+    private void load() {
+        // TODO: This method will be eventually changed due to Joshua's Storage rework.
         try {
-            this.storage = initializeStorage(args);
             if (!storage.isProfileFileEmpty()) {
                 this.userProfile = storage.profileLoad();
                 ui.printPrompt();
-                isFirstTime = true;
             }
             this.mealList = storage.mealLoad();
             this.workoutList = storage.workoutLoad();
             this.stepList = storage.stepLoad();
-            return isFirstTime;
-        } catch (StorageOperationException | InvalidStorageFilePathException e) {
+        } catch (StorageOperationException e) {
+            // TODO: Use Ui.
             System.out.println("There was a problem with the loading of storage contents.");
             ui.printLine();
         }
-        return isFirstTime;
+
+        if (userProfile == null) {
+            initUserProfile();
+        }
+        if (mealList == null) {
+            mealList = new MealList();
+        }
+        if (workoutList == null) {
+            workoutList = new WorkoutList();
+        }
+        if (stepList == null) {
+            stepList = new StepList();
+        }
+        save();
     }
+    // @@author
+
+    // @@author J0shuaLeong
+    public void initUserProfile() {
+        boolean isInputValid = false;
+        while (!isInputValid) {
+            try {
+                String input = ui.scanUserProfile();
+                userProfile = UserProfile.parseUserProfile(input);
+                ui.printProfileDetails(userProfile);
+                isInputValid = true;
+            } catch (ParseException e) {
+                ui.printException(e);
+            }
+        }
+    }
+    // @@author
 
     /**
      * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
      *
      * @param args arguments supplied by the user at program launch
-     * @throws InvalidStorageFilePathException if the target file path is incorrect.
      */
-    private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
-        boolean isStorageFileSpecifiedByUser = args.length > 0;
-        return isStorageFileSpecifiedByUser ? new Storage(args[0], args[1], args[2], args[3]) : new Storage();
+    // @@author J0shuaLeong
+    private Storage initializeStorage(String[] args) {
+        if (args.length == 4) {
+            try {
+                return new Storage(args[0], args[1], args[2], args[3]);
+            } catch (InvalidStorageFilePathException e) {
+                ui.printStoragePathSettingFailure();
+                return new Storage();
+            }
+        } else if (args.length == 0) {
+            return new Storage();
+        } else {
+            ui.printStoragePathSettingFailure();
+            return new Storage();
+        }
     }
+    // @@author J0shuaLeong
 
-    private void end() {
+    private void save() {
+        try {
+            storage.save(userProfile, mealList, workoutList, stepList);
+        } catch (IOException e) {
+            ui.printSaveFailure();
+        }
     }
 }
