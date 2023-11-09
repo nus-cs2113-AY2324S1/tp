@@ -101,7 +101,8 @@ public class FitTrack {
 
     private void startProfile() {
         try {
-            userProfile.profileSettings(ui);
+            String input = ui.profileMessageAndScanner();
+            userProfile.profileSettings(input);
             ui.printProfileDetails(userProfile);
             storage.saveProfile(userProfile);
             isValidInput = true;

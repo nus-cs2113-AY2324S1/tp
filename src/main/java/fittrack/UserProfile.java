@@ -120,12 +120,7 @@ public class UserProfile {
      * @throws PatternMatchFailException if regex match fails
      * @throws NumberFormatException if one of arguments is not double
      */
-    public void profileSettings(Ui ui) throws ParseException {
-        System.out.println(
-                "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
-        );
-        String input = ui.scanNextLine();
-
+    public void profileSettings(String input) throws ParseException {
         assert (input != null) : "Profile cannot be null";
 
         UserProfile profile = parseUserProfile(input);
