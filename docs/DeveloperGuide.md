@@ -404,8 +404,21 @@ user input fields. The command is structured as follows:
 
 
 #### Expected Invalid Input for Start Command
-
-TODO
+Assuming 2 current questions: <br>
+1: [S][ ] question / answer | number | EASY <br>
+2: [M][ ] question2 / 1 / 2 / 3 / 4 / 1 | number | EASY
+- `start /modulenum /normal /mix`: 
+  - Quiz mode must be either 'all' or 'module'
+    Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
+  - Reason: invalid quiz mode
+- `start /module numbers /normal /mix`
+  - No question found in list / no question found pertaining to module. Add questions before starting the quiz
+  - Reason: Invalid start details. Expecting 'number' instead of 'numbers'
+- `start /module num /normall /mix`
+  - Question mode must be either 'random' or 'normal'
+    Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
+  - Reason: Wrong spelling for qn mode
+- 
 
 <hr>
 
@@ -419,7 +432,6 @@ Command Syntax:
 - `shuffle` 
 
 #### Class Structure of Shuffle Command
-
 
 - The Shuffle command resides within the quizhub.command package and is responsible for interacting with the QuestionList class from the quizhub.questionlist package.
 - When invoked, it permanently modifies the order of questions in the storage, thereby affecting all future accesses to the question list.

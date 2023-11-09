@@ -717,19 +717,16 @@ public class Parser {
      * @return CommandInvalid containing the error message for the user.
      */
     private static Command handleQnTypeExceptions(Exception qnTypeException) {
-        String baseErrorMessage = "There was an error parsing the question type for the quiz: ";
 
         if (qnTypeException instanceof ArrayIndexOutOfBoundsException) {
             // This indicates that the question type argument was missing
-            return new CommandInvalid(baseErrorMessage +
-                    "You must specify a question type ('/short', '/mcq', or '/mix').");
+            return new CommandInvalid(CommandStart.INVALID_QN_TYPE_MSG);
         } else if (qnTypeException instanceof IllegalArgumentException) {
             // This indicates that the provided question type argument was invalid
-            return new CommandInvalid(baseErrorMessage +
-                    "Invalid question type. Valid types are '/short', '/mcq', or '/mix'.");
+            return new CommandInvalid(CommandStart.INVALID_QN_TYPE_MSG);
         } else {
             // This handles any other unexpected exceptions
-            return new CommandInvalid(baseErrorMessage + qnTypeException.getMessage());
+            return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
 
