@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.commands.goal.AchieveGoalCommand;
+import seedu.duke.commands.goal.AchievementCommand;
 import seedu.duke.commands.goal.GoalCommand;
 import seedu.duke.commands.goal.ViewGoalCommand;
 import seedu.duke.commands.logcommands.LogCommand;
@@ -30,7 +31,8 @@ public class HelpCommand extends Command {
         HelpMsg += GoalCommand.MESSAGE_USAGE + "\n";
         HelpMsg += DeleteLogCommand.MESSAGE_USAGE + "\n";
         HelpMsg += ViewGoalCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += AchieveGoalCommand.MESSAGE_USAGE;
+        HelpMsg += AchieveGoalCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += AchievementCommand.MESSAGE_USAGE;
 
         return new CommandResult(
                 HelpMsg

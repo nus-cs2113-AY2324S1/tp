@@ -16,6 +16,7 @@ import seedu.duke.commands.goal.GoalCommand;
 import seedu.duke.commands.goal.DeleteGoalCommand;
 import seedu.duke.commands.goal.ViewGoalCommand;
 import seedu.duke.commands.goal.AchieveGoalCommand;
+import seedu.duke.commands.goal.AchievementCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.IncorrectCommand;
 import seedu.duke.commands.logcommands.LogCommand;
@@ -104,6 +105,9 @@ public class Parser {
 
         case AchieveGoalCommand.COMMAND_WORD:
             return new AchieveGoalCommand(userInput);
+
+        case AchievementCommand.COMMAND_WORD:
+            return new AchievementCommand(userInput);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
