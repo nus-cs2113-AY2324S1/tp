@@ -22,33 +22,31 @@ public class FitTrack {
     public static final String VERSION = "FitTrack - Version 2.1";
 
     private final Ui ui;
-    private Storage storage;
+    private final Storage storage;
     private UserProfile userProfile;
     private MealList mealList;
     private WorkoutList workoutList;
     private StepList stepList;
 
-    private FitTrack() {
-        ui = new Ui();
-        userProfile = new UserProfile();
-        mealList = new MealList();
-        workoutList = new WorkoutList();
+    private FitTrack(String[] storagePaths) {
+        this.ui = new Ui();
+        this.storage = initializeStorage(storagePaths);
     }
 
     /**
      * Main entry-point for the FitTrack application.
      */
     public static void main(String[] args) {
-        new FitTrack().run(args);
+        new FitTrack(args).run();
     }
 
-    private void run(String[] args) {
-        start(args);
+    private void run() {
+        start();
         loopCommandExecution();
         end();
     }
 
-    private void start(String[] args) {
+    private void start() {
         ui.printVersion();
         ui.printWelcome();
         boolean isProfileLoaded = loadStorage(args);
@@ -77,10 +75,10 @@ public class FitTrack {
         save();
     }
 
-    private boolean loadStorage(String[] args) {
+    // @@author J0shuaLeong
+    private boolean load() {
         boolean isFirstTime = false;
         try {
-            this.storage = initializeStorage(args);
             if (!storage.isProfileFileEmpty()) {
                 this.userProfile = storage.profileLoad();
                 ui.printPrompt();
@@ -90,23 +88,34 @@ public class FitTrack {
             this.workoutList = storage.workoutLoad();
             this.stepList = storage.stepLoad();
             return isFirstTime;
-        } catch (StorageOperationException | InvalidStorageFilePathException e) {
+        } catch (StorageOperationException e) {
             System.out.println("There was a problem with the loading of storage contents.");
             ui.printLine();
         }
         return isFirstTime;
     }
+    // @@author
 
     /**
      * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
      *
      * @param args arguments supplied by the user at program launch
-     * @throws InvalidStorageFilePathException if the target file path is incorrect.
      */
-    private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
-        boolean isStorageFileSpecifiedByUser = args.length > 0;
-        return isStorageFileSpecifiedByUser ? new Storage(args[0], args[1], args[2], args[3]) : new Storage();
+    // @@author J0shuaLeong
+    private Storage initializeStorage(String[] args) {
+        boolean isStorageFileSpecifiedByUser = args.length == 4;
+        try {
+            if (isStorageFileSpecifiedByUser) {
+                return new Storage(args[0], args[1], args[2], args[3]);
+            } else {
+                return new Storage();
+            }
+        } catch (InvalidStorageFilePathException e) {
+            ui.printStoragePathSettingFailure();
+            return new Storage();
+        }
     }
+    // @@author J0shuaLeong
 
     private void save() {
         try {

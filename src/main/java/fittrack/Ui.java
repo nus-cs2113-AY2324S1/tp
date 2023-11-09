@@ -92,6 +92,10 @@ public class Ui {
         printLine();
     }
 
+    public void printStoragePathSettingFailure() {
+        System.out.println("One of given storage paths is invalid.");
+    }
+
     public void printSaveFailure() {
         System.out.println("Failed to save data.");
     }
