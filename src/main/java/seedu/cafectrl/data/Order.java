@@ -42,7 +42,6 @@ public class Order {
      *
      * @return Total calculated cost
      */
-
     public float calculateTotalOrderCost() {
         float dishCost = orderedDish.getPrice();
         return dishCost * dishQty;
@@ -96,4 +95,8 @@ public class Order {
     public void setTotalOrderCost(float cost) {
         this.totalOrderCost = cost;
     }
+    public Dish getOrderedDish() {
+        return orderedDish;
+    }
+
 }

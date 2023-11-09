@@ -72,7 +72,8 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
+        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS + ListIngredientCommand.MESSAGE_USAGE,
+                feedbackToUser);
     }
 
     @Test
@@ -90,7 +91,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
+        assertEquals(ErrorMessages.INVALID_DISH_INDEX_TO_LIST, feedbackToUser);
     }
 
     @Test
@@ -108,7 +109,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.INVALID_DISH_INDEX, feedbackToUser);
+        assertEquals(ErrorMessages.UNLISTED_DISH, feedbackToUser);
     }
 
     @Test
@@ -259,7 +260,7 @@ class ParserTest {
         ParserUtil parserUtil = new Parser();
         Command commandReturned = parserUtil.parseCommand(menu, testUserInput, ui, pantry, sales, currentDate);
         commandReturned.execute();
-        assertEquals(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, actualOutput.get(0));
+        assertEquals(ErrorMessages.MISSING_DISH_IN_EDIT_PRICE, actualOutput.get(0));
     }
 
     @Test
@@ -677,8 +678,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
-                + BuyIngredientCommand.MESSAGE_USAGE, feedbackToUser);
+        assertEquals(ErrorMessages.INVALID_UNIT_MESSAGE, feedbackToUser);
     }
     //@@author
 }

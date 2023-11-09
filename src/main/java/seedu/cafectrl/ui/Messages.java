@@ -11,7 +11,7 @@ public class Messages {
     public static final String PRICE_MODIFIED_MESSAGE = "Price modified for the following dish: ";
 
     /** Messages for list menu command */
-    public static final String LIST_MENU_MESSAGE = "| Ah, behold, the grand menu of delights! |";
+    public static final String LIST_MENU_MESSAGE = "|        Ah, behold, the grand menu of delights!        |";
     public static final String MENU_EMPTY_MESSAGE = "It seems our menu is currently taking a break. "
             + "Let's give it a wake-up call and fill 'er up with delectable delights, shall we?";
     public static final String MENU_END_CAP = "+-------------------------------------------------------+";
@@ -23,8 +23,11 @@ public class Messages {
     public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
 
     /** Messages for view stock command */
-    public static final String VIEW_STOCK = "You have the following ingredients in pantry:"
-            + "\nIngredients\t\tQty";
+    public static final String EMPTY_STOCK = "Sorry! Pantry is currently empty!";
+
+    public static final String VIEW_STOCK_MESSAGE = "You have the following ingredients in pantry:";
+    public static final String VIEW_STOCK_MESSAGE2 = "| You have the following ingredients in pantry:         |";
+    public static final String VIEW_STOCK_TITLE_MESSAGE = "| Ingredients                            |  Qty         |";
 
     /** Messages for help command */
     public static final String LIST_OF_COMMANDS = "These are all the commands I recognise: ";
@@ -32,6 +35,19 @@ public class Messages {
             + "the parameters to be supplied by the user.\n"
             + " e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.\n"
             + "- Parameters in [] are optional.";
+
+    /** Messages for show_sales command */
+    public static final String SHOW_SALES_DAY_PART_1 = "| Day ";
+    public static final String SHOW_SALES_DAY_PART_2 = ":                          "
+            + "                                          |";
+    public static final String SHOW_SALES_TITLE = "| Dish Name                              "
+            + "|  Dish Qty    |  Total Cost Price |";
+    public static final String SHOW_SALES_END_CAP = "+---------------------------------------"
+            + "------------------------------------+";
+    public static final String SHOW_SALES_CORNER = "+----------------------------------------"
+            + "+--------------+-------------------+";
+    public static final String SHOW_SALES_DIVIDER = "======================================"
+            + "=======================================";
 
     /** Messages for order command */
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
@@ -47,7 +63,24 @@ public class Messages {
             + "Hold onto your hats; here we go!";
     public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
 
+    /** Messages for restocking ingredients */
     public static final String AVAILABLE_DISHES = "Listed below are the availability of the dishes for the next order!";
     public static final String COMPLETE_ORDER = "Order is ready!";
     public static final String INCOMPLETE_ORDER = "Please restock ingredients before preparing the order :) ";
+    public static final String RESTOCK_END_CAP = "+-----------------------------------------"
+            + "-----------------------------+";
+    public static final String RESTOCK_CORNER =  "+----------------------------------------+"
+            + "--------------+--------------+";
+    public static final String RESTOCK_TITLE =   "| Restock                                | "
+            + "Current      | Needed       |";
+
+    /** Messages for list ingredients */
+    public static final String INGREDIENTS_END_CAP = "+-------------------------------------------------------+";
+    public static final String INGREDIENTS_CORNER =  "+----------------------------------------+--------------+";
+    public static final String INGREDIENTS_TITLE =   "| Ingredient                             + Quantity     +";
+    /** Messages for decoder **/
+    public static final String INVALID_DISH = " does not exist in our menu. \n"
+            + "You might have tempered with the file and added in a non existing dish.\n"
+            + "Don't worry :D , we will continue operations without ";
+
 }

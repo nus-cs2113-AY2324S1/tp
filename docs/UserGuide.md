@@ -21,16 +21,17 @@
     * [Exiting the program : `bye`](#exiting-the-program--bye)
   * [Known Issues](#known-issues)
   * [Command Summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 ---------------------------------------------------
 ## Introduction
 
-CafeCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
+CaféCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers users to streamline stock inventory, menu and orders. Users will also briefly be able to gain valuable insights through comprehensive sales reporting, enabling them to analyze sales trends and calculate revenue/profit margins, eliminating the need for cross-platform management.
 
 ---------------------------------------------------
 ## Quick Start
-1. Ensure that you have Java `11` or above installed. 
+1. Ensure that you have Java `11` installed. 
 2. Down the latest version of `CafeCtrl` from [here](https://github.com/AY2324S1-CS2113-T17-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Cafe Manager CLI Application.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.
@@ -40,6 +41,7 @@ Hello! Welcome to CafeCTRL!
 -----------------------------------------------------
 > 
 ```
+
 ---------------------------------------------------
 ## Features
 > **Notes about command format:**
@@ -92,9 +94,10 @@ Adds a dish consisting of its ingredients to the menu
 
 Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
 
-* `DISH_NAME` 
+* `DISH_NAME` can contain up to 35 alphanumeric characters with whitespaces
 * `PRICE` must be a positive number and can be up to 2 decimal places.
-* `IMGREDIENT_QTY` must contain the unit ml or g specifically.
+* `INGREDIENT_QTY` must be a positive integer and contain the unit **ml** or **g** specifically.
+
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example:
@@ -136,17 +139,16 @@ Format: `list_ingredients DISH_INDEX`
 Example:
 - list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
 ```
-chicken salad Ingredients: 
-pasta - 100g
-chicken - 200g
-lettuce - 200g
-tomatoes - 100g
-feta cheese - 20g
------------------------------------------------------
++-------------------------------------------------------+
+|Dish: chicken rice                                     |
++----------------------------------------+--------------+
+| Ingredient                             + Quantity     +
++----------------------------------------+--------------+
+| rice                                   | 100g         |
+| chicken                                | 200g         |
+| soup                                   | 50ml         |
++-------------------------------------------------------+
 ```
-
-
-list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
 
 <!---@@author ShaniceTang--->
 ### Deleting a menu item : `delete`
@@ -191,10 +193,16 @@ Format: `view_stock`
 
 Output:
 ```
-You have the following ingredients in pantry:
-Ingredients		Qty
-chicken			500g
-milk			1000ml
++-------------------------------------------------------+
+| You have the following ingredients in pantry:         |
++----------------------------------------+--------------+
+| Ingredients                            |  Qty         |
++----------------------------------------+--------------+
+| chicken                                | 300g         |
+| noodles                                | 2100g        |
+| rice                                   | 2900g        |
+| bread                                  | 500g         |
++-------------------------------------------------------+
 ```
 
 
@@ -202,6 +210,9 @@ milk			1000ml
 Adds one or more ingredients to the pantry
 
 Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
+
+* `INGREDIENT_QTY` must contain the unit ml or g specifically
+  * e.g. `qty/50g` or `qty/1000ml`
 
 Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`
 
@@ -214,52 +225,65 @@ Ingredient: milk		Qty: 1000ml
 
 
 
-### Showing all sales : `show_sales`
+### Showing all sales : `list_total_sales`
 Displays the dishes sold and total sales for each from Day 1 to the current day that 
 the cafe is operating on.
 
-Format: `show_sales`
+Format: list_total_sales
 
-Example: `show_sales`
+Example: `list_total_sales`
 
 Output:
 - show_sales lists the dishes sold along with the total sales for every operating day of the cafe.
 ```
++---------------------------------------------------------------------------+
 Day 1:
-Dish Name            Dish Qty   Total Cost Price    
-
-chicken rice         4          12.0                 
-
-Total for day: $12.00
-
++---------------------------------------------------------------------------+
+| Day 1:                                                                    |
++----------------------------------------+--------------+-------------------+
+| Dish Name                              |  Dish Qty    |  Total Cost Price |
++----------------------------------------+--------------+-------------------+
+| chicken chop                           | 3            | 6.00              |
+| chicken sandwhich                      | 7            | 21.00             |
++---------------------------------------------------------------------------+
+| Total for day:                                        | $27.00            |
++---------------------------------------------------------------------------+
 Day 2:
-Dish Name            Dish Qty   Total Cost Price    
-
-chicken chop         5          21.0    
-
-chicken rice         3          9.0                
-
-Total for day: $30.00
-
++---------------------------------------------------------------------------+
+| Day 2:                                                                    |
++----------------------------------------+--------------+-------------------+
+| Dish Name                              |  Dish Qty    |  Total Cost Price |
++----------------------------------------+--------------+-------------------+
+| chicken chop                           | 2            | 4.00              |
+| chicken sandwhich                      | 2            | 6.00              |
+| chicken noodles                        | 1            | 2.00              |
++---------------------------------------------------------------------------+
+| Total for day:                                        | $12.00            |
++---------------------------------------------------------------------------+
 ```
 
 
-### Showing sales for a chosen day : `show_sale`
+### Showing sales for a chosen day : `list_sale`
 Displays the dishes sold along with the total sales for any chosen day.
 
-Format: `show_sale day/DAY_TO_DISPLAY`
+Format: `list_sale day/DAY_TO_DISPLAY`
 
-Example: `show_sale day/1`
+Example: `list_sale day/2`
 
 Output:
-- show_sale day/1 lists the dishes sold along with the total sales for day 1.
+- list_sale day/2 lists the dishes sold along with the total sales for day 2.
 ```
-Day 1:
-Dish Name            Dish Qty   Total Cost Price    
-
-chicken rice         4          12.0                 
-
-Total for day: $12.00
++---------------------------------------------------------------------------+
+| Day 2:                                                                    |
++----------------------------------------+--------------+-------------------+
+| Dish Name                              |  Dish Qty    |  Total Cost Price |
++----------------------------------------+--------------+-------------------+
+| chicken chop                           | 2            | 4.00              |
+| chicken sandwhich                      | 2            | 6.00              |
+| chicken noodles                        | 1            | 2.00              |
++---------------------------------------------------------------------------+
+| Total for day:                                        | $12.00            |
++---------------------------------------------------------------------------+
 ```
 
 <!---@@author Cazh1--->
@@ -331,8 +355,9 @@ Format: `bye`
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Known Issues
-- The application is unable to read the data text files if they have been edited directly in the wrong decoding format
-- For edit price command, special characters can be entered in the price argument
+- The application is unable to read the data text files if they have been edited directly in the wrong decoding format.
+- The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
+- The application is unable to support unit conversion, hence only ml ang g are accepted as ingredient unit.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -341,16 +366,20 @@ Format: `bye`
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY [, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`<br><br/>Example:<br/>`add name/chicken rice price/3.00 ingredient/rice qty/50g, ingredient/chicken qty/100g` |
 | **List Menu**             | `list_menu`                                                                                                                                                                                                                                            |
-| **List Ingredients**      | `list_ingredients DISH_INDEX`<br><br/>Example:<br>`list_ingredients 1`                                                                                                                                                                               |
-| **Delete**                | `delete DISH_INDEX`<br><br/>Example:<br>`delete 1`                                                                                                                                                                                                   |
-| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br><br/>Example:<br>`edit_price index/1 price/4.50`                                                                                                                                                    |
-| **Show Sale**             | `show_sales`                                                                                                                                                                                                                                           |
-| **Show Sale by Day**      | `show_sale day/DAY_TO_DISPLAY` <br><br/>Example:<br>`show_sale day/ 1`                                                                                                                                                                               |
+| **List Ingredients**      | `list_ingredients DISH_INDEX`<br><br/>Example:<br>`list_ingredients 1`                                                                                                                                                                                 |
+| **Delete**                | `delete DISH_INDEX`<br><br/>Example:<br>`delete 1`                                                                                                                                                                                                     |
+| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br><br/>Example:<br>`edit_price index/1 price/4.50`                                                                                                                                                      |
+| **List Sale**             | `list_total_sales`                                                                                                                                                                                                                                     |
+| **List Sale by Day**      | `list_sale day/DAY_TO_DISPLAY` <br><br/>Example:<br>`list_sale day/ 1`                                                                                                                                                                                 |
 | **View Ingredient Stock** | `view_stock`                                                                                                                                                                                                                                           |
-| **Buy Ingredients**       | `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`<br><br/>Example<br>`buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`                                 |
-| **Add Order**             | `add_order name/DISH_NAME qty/QUANTITY`<br><br/>Example:<br>`add_order name/chicken rice qty/2`                                                                                                                                                      |
+| **Buy Ingredients**       | `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`<br><br/>Example<br>`buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`                                   |
+| **Add Order**             | `add_order name/DISH_NAME qty/QUANTITY`<br><br/>Example:<br>`add_order name/chicken rice qty/2`                                                                                                                                                        |
 | **Previous Day**          | `previous_day`                                                                                                                                                                                                                                         |
 | **Next Day**              | `next_day`                                                                                                                                                                                                                                             |
 | **Help**                  | `help`                                                                                                                                                                                                                                                 |
 | **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
 
+---------------------------------------------------
+## Glossary
+- **Dish index**: Index of the dish according to `list_menu`.
+- **stock**: The quantity of ingredient available in the pantry of the cafe.

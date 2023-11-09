@@ -5,6 +5,7 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
+//@@author ShaniceTang
 /**
  * Deletes a menu item identified using it's last displayed index from the menu.
  */

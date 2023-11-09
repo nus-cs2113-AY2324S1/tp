@@ -3,6 +3,7 @@ package seedu.cafectrl.data;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -99,9 +100,11 @@ public class Pantry {
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
+
             if (usedIngredientFromStock == null) {
                 return false;
             }
+
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
             int finalQuantity = stockQuantity - usedQuantity;
@@ -121,20 +124,21 @@ public class Pantry {
      */
     private Ingredient getIngredient(Ingredient dishIngredient) {
         return pantryStock.stream()
-                .filter(ingredient -> ingredient.getName().equals(dishIngredient.getName()))
+                .filter(ingredient -> ingredient.getName().trim().equals(dishIngredient.getName().trim()))
                 .findFirst()
                 .orElse(null);
     }
+
     //@@author NaychiMin
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
-    public void calculateDishAvailability(Menu menu) {
+    public void calculateDishAvailability(Menu menu, Order order) {
         int menuSize = menu.getSize();
         for (int i = 0; i < menuSize; i++) {
             Dish dish = menu.getDishFromId(i);
             ui.showToUser("Dish: " + dish.getName());
-            int numberOfDishes = calculateMaxDishes(dish, menu);
+            int numberOfDishes = calculateMaxDishes(dish, menu, order);
             ui.showDishAvailability(numberOfDishes);
             if (i != menuSize - 1) {
                 ui.printLine();
@@ -147,19 +151,29 @@ public class Pantry {
      *
      * @param dish The dish being ordered.
      */
-    public int calculateMaxDishes(Dish dish, Menu menu) {
+    public int calculateMaxDishes(Dish dish, Menu menu, Order order) {
         int maxNumofDish = Integer.MAX_VALUE;
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
+        boolean isRestockHeaderDisplayed = false;
+        int dishQty = order.getQuantity();
 
         for (Ingredient dishIngredient : dishIngredients) {
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
+            if (!isRestockHeaderDisplayed && (numOfDish < dishQty)) {
+                ui.showToUser(Messages.RESTOCK_CORNER, Messages.RESTOCK_TITLE, Messages.RESTOCK_CORNER);
+                isRestockHeaderDisplayed = true;
+            }
+
+            if (numOfDish < dishQty && !order.getIsComplete()) {
+                handleRestock(dishIngredient, dishQty);
+            }
+
             if (numOfDish == 0) {
-                handleRestock(dishIngredient);
+                handleRestock(dishIngredient, 1);
             }
         }
-
         return maxNumofDish;
     }
 
@@ -185,14 +199,14 @@ public class Pantry {
      *
      * @param dishIngredient The ingredient for which restocking is needed.
      */
-    private void handleRestock(Ingredient dishIngredient) {
+    private void handleRestock(Ingredient dishIngredient, int dishQty) {
         String dishIngredientName = dishIngredient.getName();
         Ingredient stockIngredient = getIngredient(dishIngredient);
 
         int currentQuantity = (stockIngredient == null) ? 0 : stockIngredient.getQty();
         String unit = dishIngredient.getUnit();
-        String neededIngredient = dishIngredient.toString();
-        ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededIngredient);
+        int neededQuantity = dishIngredient.getQty() * dishQty;
+        ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededQuantity);
     }
 
     /**
