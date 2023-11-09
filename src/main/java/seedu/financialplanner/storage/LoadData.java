@@ -42,6 +42,7 @@ public abstract class LoadData {
 
     /**
      * Loads existing data from the storage file.
+     * Adds recurrences of a cashflow if applicable.
      *
      * @param filePath The file where the data is stored.
      * @param date The current date.
@@ -320,6 +321,11 @@ public abstract class LoadData {
         return description;
     }
 
+    /**
+     * Load the watchlist.json file into the application on startup as a hashmap.
+     *
+     * @return
+     */
     public static HashMap<String, Stock> loadWatchList() {
         Ui ui = Ui.getInstance();
         Gson gson = new Gson();

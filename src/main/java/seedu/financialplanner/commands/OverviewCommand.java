@@ -3,11 +3,9 @@ package seedu.financialplanner.commands;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.cashflow.CashflowList;
-import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.cashflow.Income;
-import seedu.financialplanner.commands.utils.Command;
-import seedu.financialplanner.commands.utils.RawCommand;
-import seedu.financialplanner.reminder.Reminder;
+import seedu.financialplanner.cashflow.Expense;
+import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
 
@@ -17,12 +15,7 @@ import java.util.ArrayList;
 /**
  * Represents a command to display overview of user's financials.
  */
-@SuppressWarnings("unused")
 public class OverviewCommand extends Command {
-    public static final String NAME = "overview";
-
-    public static final String USAGE =
-            "overview";
     private static final CashflowList cashflowList = CashflowList.getInstance();
 
     public OverviewCommand(RawCommand rawCommand) {
@@ -42,10 +35,9 @@ public class OverviewCommand extends Command {
         String highestExpense = getHighestExpense();
         String budget = getBudgetDesc();
         String reminders = getReminders();
+        String wishlist = getWishlist();
 
-        Ui.getInstance().printOverview(balance, highestIncome, highestExpense, budget, reminders);
-
-        //todo: goal disparity
+        Ui.getInstance().printOverview(balance, highestIncome, highestExpense, budget, reminders, wishlist);
     }
 
     private String getBudgetDesc() {
@@ -99,14 +91,15 @@ public class OverviewCommand extends Command {
         if (reminderList.list.isEmpty()) {
             return "No reminders added yet.";
         }
-        StringBuilder reminders = new StringBuilder();
-        int count = 1;
-        for (Reminder reminder : reminderList.list) {
-            reminders.append(count).append(". ").append(reminder.toString()).append("\n");
-            count++;
-        }
+        return reminderList.toString();
+    }
 
-        return reminders.toString();
+    private String getWishlist() {
+        WishList wishList = WishList.getInstance();
+        if (wishList.list.isEmpty()) {
+            return "No goals added yet.";
+        }
+        return wishList.toString();
     }
 
     private String getBalance() {

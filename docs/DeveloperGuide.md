@@ -4,6 +4,7 @@
 
 * [Acknowledgements](#acknowledgements)
 * [Design & implementation](#design--implementation)
+  * [Architecture Diagram](#architecture-diagram)
   * [Storage Component](#storage-component)
     * [Design considerations](#design-considerations)
   * [Visualization Feature](#visualization-feature-)
@@ -70,7 +71,23 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture Diagram
+
+![](images/ArchitectureDiagram.png)
+
+The **Architecture Diagram** given above explains the high-level design of the program.
+
+#### Main components of the architecture
+
+`Main` consists of the `FinancialPlanner` class, and is in charge of starting up and shutting down the app.
+
+The program consists of five main components:
+
+* `Ui`: User interactions.
+* `Parser`: Parse user inputs.
+* `Command`: The command executor.
+* `Model`: Holds the data of the program in memory.
+* `Storage`: Reads data from, and writes data to the hard disk.
 
 ### Storage Component
 
@@ -321,28 +338,90 @@ Example: `budget view`
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Our target user profile is ...
+- a working adult with a source of income
+- someone who dislike navigating graphic user interface
+- someone who can type fast
+- someone who cannot manage their finances such as income and expenses properly
+- unable to reach their financial goals
+- is slightly interested in the equity market
+- needs reminders for tasks
+
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Our financial planner application can help individuals manage their finances effectively and achieve their financial 
+goals. The purpose of such an application is to provide users with a range of tools and features to help them better 
+understand their financial situation. This will enable them to make more informed decisions, and plan for their future 
+financial well-being. The application will allow the user to keep track of their income, expenses and overall balance.
+It also lets the user view their income and expenses using visualization tool to have a better view of their cash flow 
+based on categories.  It also allows the user to set the budget for the month. It also allows users to add their financial
+goals to the wishlist. Furthermore, it allows users to track the stock market if they have interest in investing in 
+equities. 
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...              | I want to ...                 | So that I can ...                                                                    |
+|---------|-----------------------|-------------------------------|--------------------------------------------------------------------------------------|
+| v1.0    | user                  | Add my income                 | Store my income information and view/track them later                                |
+| v1.0    | user                  | Delete my income              | Remove the income entry that I have mistakenly added or do not keep track            |
+| v1.0    | user                  | Add my expense                | Store my expense information and view/track them later                               |
+| v1.0    | user                  | Delete my expense             | Remove the expense entry that I have mistakenly added or do not keep track           |
+| v2.0    | user                  | set my expense type           | Break down my expenses into different categories                                     |
+| v1.0    | user                  | set my income type            | Break down my income into different categories                                       |
+| v2.0    | user                  | Add recurring cash flows      | add a regular expense or income (salary, rent) easily                                |
+| v2.0    | user                  | Delete recurring cash flows   | delete a regular expense of income easily                                            |
+| v1.0    | user                  | list all cash flow entries    | view all my income and expenses in a comprehensive list                              |
+| v1.0    | user                  | list all expenses entries     | view all my expenses in a comprehensive list                                         |
+| v1.0    | user                  | list all income entries       | view all my income in a comprehensive list                                           |
+| v2.0    | user                  | list all recurring cash flows | view all my recurring income or expenses in a comprehensive list                     |
+| v2.0    | new user              | see usage instructions        | refer to them when I forget how to use the application                               |
+| v1.0    | user                  | set a budget                  | keep track of a budget together with my cash flow and ensure I do not exceed it      |
+| v1.0    | user                  | update the budget             | make changes to the budget according to my needs                                     |    
+| v1.0    | user                  | reset the budget              | return to my initial budget easily                                                   |
+| v1.0    | user                  | delete budget                 | remove the budget that I no longer want to keep track of                             |
+| v1.0    | user                  | view budget                   | keep track of the amount of budget I have left                                       |
+| v1.0    | user                  | see overview of the app       | see the overall view of all income, expense and overall balance as well as reminders |
+| v1.0    | user                  | view balance                  | see my overall balance according to the income and expenses I am keeping track       |
+| v1.0    | investment enthusiast | view my watchlist             | keep track of stocks that I am interested in                                         |
+| v2.0    | investment enthusiast | add new stocks to watchlist   | add new stock that I am interested in investing in                                   |
+| v2.0    | investment enthusiast | delete stocks from watchlist  | remove stocks that I am no longer interested in                                      |
+| v1.0    | user                  | add reminder                  | add reminders (eg to pay loans) so I will not forget                                 |
+| v1.0    | user                  | delete reminder               | delete reminders that I no longer want to keep track                                 |
+| v1.0    | user                  | mark reminder                 | set the reminder as completed                                                        |
+| v1.0    | user                  | view wishlist                 | keep track of my goals easily                                                        |
+| v1.0    | user                  | set goals                     | add a new goal to my that I think of                                                 |
+| v1.0    | user                  | delete goals                  | remove goals that I can no longer achieve                                            |
+| v1.0    | user                  | mark goal                     | that I have achieved                                                                 |
+| v1.0    | user                  | visualize my cash flow        | easily see where the distribution for my spending and earnings                       |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Should work on main OS (Windows, Linux, Mac) that has Java 11 installed.
+* This app is meant for a single user.
+* This app is targeted towards users with an above-average typing speed.
+* Watchlist should work reliably and not crash the application when the 3rd party dependencies are down (API is down)
 
 ## Glossary
 
 * *Cashflow* - Refers to an income or expense.
 * *WishList* - A list containing goals/targets.
+* *Watchlist* - A list of stocks that the financial planner is currently tracking
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually
+
+- Note: These instructions only provide a starting point for testers to work on
+
+### Launch and shutdown 
+
+1. Initial Launch
+   1. Download the jar file and copy into an empty folder
+   2. Open up the terminal and run java -jar tp.jar Expected: 
+shows you the welcome screen for the financial planner app
+2. Closing the application
+   1. Type `exit` into the terminal. 
+   2. Expected: the financial planner will exit with a goodbye message.
+Under the data newly created data directory, a watchlist.json and a data.txt file will be created
+

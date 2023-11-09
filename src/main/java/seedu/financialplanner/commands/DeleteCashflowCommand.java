@@ -1,28 +1,30 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.CashflowList;
-import seedu.financialplanner.commands.utils.Command;
-import seedu.financialplanner.commands.utils.RawCommand;
-import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@SuppressWarnings("unused")
+/**
+ * Represents a command to delete a cashflow.
+ */
 public class DeleteCashflowCommand extends Command {
-    public static final String NAME = "delete";
-
-    public static final String USAGE =
-            "delete [income/expense] <INDEX>";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;
     protected int index;
     protected boolean hasRecur;
     protected CashflowList cashflowList = CashflowList.getInstance();
 
+    /**
+     * Constructor of the command to delete a cashflow.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public DeleteCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         String stringCategory = null;
@@ -91,10 +93,13 @@ public class DeleteCashflowCommand extends Command {
             category = CashflowCategory.valueOf(stringCategory.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
-            throw new IllegalArgumentException("Entry must be either income, expense or recurring");
+            throw new IllegalArgumentException("Entry must be either income, expense or recurring.");
         }
     }
 
+    /**
+     * Executes the command to delete a cashflow.
+     */
     @Override
     public void execute() {
         if (category == null) {
@@ -107,7 +112,7 @@ public class DeleteCashflowCommand extends Command {
         }
 
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
-               || category.equals(CashflowCategory.RECURRING);
+                || category.equals(CashflowCategory.RECURRING);
         assert index != 0;
 
         switch (category) {
@@ -135,7 +140,7 @@ public class DeleteCashflowCommand extends Command {
             cashflowList.deleteRecurWithoutCategory(index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
 
@@ -148,20 +153,18 @@ public class DeleteCashflowCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
-
     private void handleDeleteRecurWithCategory() {
         try {
             logger.log(Level.INFO, "Deleting recurrence with category");
             cashflowList.deleteRecurWithCategory(category, index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
-
     private void handleDeleteCashflowWithCategory() {
         try {
             logger.log(Level.INFO, "Deleting cashflow with category");
@@ -171,7 +174,7 @@ public class DeleteCashflowCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "Index out of list");
-            throw new IllegalArgumentException("Index must be within the list");
+            throw new IllegalArgumentException("Index must be within the list.");
         }
     }
 }

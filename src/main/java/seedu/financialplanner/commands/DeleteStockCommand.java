@@ -1,7 +1,5 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.commands.utils.Command;
-import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.utils.Ui;
@@ -10,16 +8,20 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@SuppressWarnings("unused")
-
+/**
+ * Command that inherits from the Command abstract class
+ * Represents the command to delete stock from watchlist
+ */
 public class DeleteStockCommand extends Command {
-    public static final String NAME = "deletestock";
-
-    public static final String USAGE =
-            "deletestock </s STOCK CODE>";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;
 
+    /**
+     * Constructor for the command to delete stock from watchlist
+     *
+     * @param rawCommand
+     * @throws IllegalArgumentException
+     */
     public DeleteStockCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("s")) {
             throw new IllegalArgumentException("Stock code cannot be empty");
@@ -36,6 +38,11 @@ public class DeleteStockCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to delete stock from watchlist
+     *
+     * @throws Exception
+     */
     @Override
     public void execute() throws Exception {
         Ui ui = Ui.getInstance();

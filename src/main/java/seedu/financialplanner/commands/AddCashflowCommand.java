@@ -1,28 +1,23 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.cashflow.Budget;
-import seedu.financialplanner.cashflow.Cashflow;
-import seedu.financialplanner.cashflow.CashflowList;
-import seedu.financialplanner.commands.utils.Command;
-import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
+import seedu.financialplanner.cashflow.Budget;
+import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@SuppressWarnings("unused")
+/**
+ * Represents the command to add a cashflow.
+ */
 public class AddCashflowCommand extends Command {
-    public static final String NAME = "add";
-
-    public static final String USAGE =
-            "add <income/expense> </a AMOUNT> [/t TYPE] [/r RECURRENCE INTERVAL IN DAYS] [/d DESCRIPTION]";
     protected static Ui ui = Ui.getInstance();
-    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
-    protected final double MAX_AMOUNT = 999999999999.99;
+    private static Logger logger = Logger.getLogger("Financial Planner Logger");
     protected double amount;
     protected CashflowCategory category;
     protected ExpenseType expenseType;
@@ -30,7 +25,14 @@ public class AddCashflowCommand extends Command {
     protected int recur = 0;
     protected String description = null;
     protected CashflowList cashflowList = CashflowList.getInstance();
+    protected final double MAX_AMOUNT = 999999999999.99;
 
+    /**
+     * Constructor for the command to add a cashflow.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public AddCashflowCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String categoryString = String.join(" ", rawCommand.args).trim();
         try {
@@ -38,28 +40,28 @@ public class AddCashflowCommand extends Command {
             category = CashflowCategory.valueOf(categoryString.toUpperCase());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for CashflowCategory");
-            throw new IllegalArgumentException("Entry must be either income or expense");
+            throw new IllegalArgumentException("Entry must be either income or expense.");
         }
 
         if (!rawCommand.extraArgs.containsKey("a")) {
             logger.log(Level.WARNING, "Missing arguments for amount");
-            throw new IllegalArgumentException("Entry must have an amount");
+            throw new IllegalArgumentException("Entry must have an amount.");
         }
         try {
             logger.log(Level.INFO, "Parsing amount as double");
             amount = Double.parseDouble(rawCommand.extraArgs.get("a").trim());
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid arguments for amount");
-            throw new IllegalArgumentException("Amount must be a number");
+            throw new IllegalArgumentException("Amount must be a number.");
         }
         if (amount < 0) {
             logger.log(Level.WARNING, "Invalid value for amount");
-            throw new IllegalArgumentException("Amount cannot be negative");
+            throw new IllegalArgumentException("Amount cannot be negative.");
         }
         if (amount > MAX_AMOUNT) {
             logger.log(Level.WARNING, "Maximum value for amount exceeded.");
             throw new IllegalArgumentException("Amount exceeded maximum value this program can hold. " +
-                                               "Please add a different cashflow.");
+                    "Please add a different cashflow.");
         }
         rawCommand.extraArgs.remove("a");
 
@@ -75,8 +77,7 @@ public class AddCashflowCommand extends Command {
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for ExpenseType");
                 throw new IllegalArgumentException("Entry must be one of the following: " +
-                                                   "dining, entertainment, shopping, travel, " +
-                                                   "insurance, necessities, others");
+                        "dining, entertainment, shopping, travel, insurance, necessities, others");
             }
         } else if (category.equals(CashflowCategory.INCOME)) {
             try {
@@ -85,7 +86,7 @@ public class AddCashflowCommand extends Command {
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for IncomeType");
                 throw new IllegalArgumentException("Entry must be one of the following: " +
-                                                   "salary, investments, allowance, others");
+                        "salary, investments, allowance, others");
             }
         }
         rawCommand.extraArgs.remove("t");
@@ -96,13 +97,13 @@ public class AddCashflowCommand extends Command {
                 recur = Integer.parseInt(rawCommand.extraArgs.get("r").trim());
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for recur");
-                throw new IllegalArgumentException("Recurrence must be an integer");
+                throw new IllegalArgumentException("Recurrence must be an integer.");
             }
             rawCommand.extraArgs.remove("r");
         }
         if (recur < 0) {
             logger.log(Level.WARNING, "Invalid value for recur");
-            throw new IllegalArgumentException("Recurring value cannot be negative");
+            throw new IllegalArgumentException("Recurring value cannot be negative.");
         }
 
         if (rawCommand.extraArgs.containsKey("d")) {
@@ -123,29 +124,23 @@ public class AddCashflowCommand extends Command {
         }
     }
 
-    private static void deductFromBudget(Cashflow entry) {
-        double expenseAmount = entry.getAmount();
-        Budget.deduct(expenseAmount);
-        ui.printBudgetAfterDeduction();
-    }
-
+    /**
+     * Executes the command to add a cashflow.
+     */
     @Override
     public void execute() {
         assert category.equals(CashflowCategory.INCOME) || category.equals(CashflowCategory.EXPENSE)
-               || category.equals(CashflowCategory.RECURRING);
+                || category.equals(CashflowCategory.RECURRING);
         assert recur >= 0;
         assert amount >= 0;
         if (category.equals(CashflowCategory.EXPENSE)) {
             assert expenseType.equals(ExpenseType.DINING) || expenseType.equals(ExpenseType.ENTERTAINMENT)
-                   || expenseType.equals(ExpenseType.SHOPPING) || expenseType.equals(ExpenseType.TRAVEL)
-                   || expenseType.equals(ExpenseType.INSURANCE) || expenseType.equals(ExpenseType.OTHERS)
-                   || expenseType.equals(ExpenseType.NECESSITIES);
-        } else {
-            assert !category.equals(CashflowCategory.INCOME)
-                   || incomeType.equals(IncomeType.SALARY)
-                   || incomeType.equals(IncomeType.INVESTMENTS)
-                   || incomeType.equals(IncomeType.ALLOWANCE)
-                   || incomeType.equals(IncomeType.OTHERS);
+                    || expenseType.equals(ExpenseType.SHOPPING) || expenseType.equals(ExpenseType.TRAVEL)
+                    || expenseType.equals(ExpenseType.INSURANCE) || expenseType.equals(ExpenseType.OTHERS)
+                    || expenseType.equals(ExpenseType.NECESSITIES);
+        } else if (category.equals(CashflowCategory.INCOME)) {
+            assert incomeType.equals(IncomeType.SALARY) || incomeType.equals(IncomeType.INVESTMENTS)
+                    || incomeType.equals(IncomeType.ALLOWANCE) || incomeType.equals(IncomeType.OTHERS);
         }
 
         switch (category) {
@@ -163,5 +158,11 @@ public class AddCashflowCommand extends Command {
             ui.showMessage("Unidentified entry.");
             break;
         }
+    }
+
+    private static void deductFromBudget(Cashflow entry) {
+        double expenseAmount = entry.getAmount();
+        Budget.deduct(expenseAmount);
+        ui.printBudgetAfterDeduction();
     }
 }

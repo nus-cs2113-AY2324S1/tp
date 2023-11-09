@@ -39,7 +39,7 @@ public class BudgetCommand extends Command {
         if (rawCommand.args.isEmpty()) {
             throw new FinancialPlannerException("Budget operation cannot be empty.");
         }
-        command = rawCommand.args.get(0);
+        command = String.join(" ", rawCommand.args).trim();
         if (command.equals("delete") || command.equals("reset") || command.equals("view")) {
             return;
         }

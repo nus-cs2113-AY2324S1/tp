@@ -44,6 +44,10 @@ public abstract class SaveData {
         }
     }
 
+    /**
+     * Method to save the current watchlist to watchlist.json file
+     *
+     */
     public static void saveWatchList() {
         Ui ui = Ui.getInstance();
         WatchList wl = WatchList.getInstance();

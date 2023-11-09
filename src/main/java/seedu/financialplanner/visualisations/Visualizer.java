@@ -24,9 +24,22 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class the helps to output the visualization of the cash flow to the user so that the user can easily view their
+ * expense/income based on types
+ */
 public class Visualizer {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
+    /**
+     * Method that calls the appropriate method for printing the different visualizations tools based on the
+     * preference of the user (pie,bar,radar)
+     *
+     * @param chart
+     * @param cashFlowByCat
+     * @param type
+     * @throws FinancialPlannerException
+     */
     public static void displayChart(String chart, HashMap<String, Double> cashFlowByCat, String type)
             throws FinancialPlannerException {
         switch (chart) {
@@ -44,6 +57,12 @@ public class Visualizer {
         }
     }
 
+    /**
+     * Method to display the pier chart to the screen
+     *
+     * @param cashflowByCat
+     * @param type
+     */
     public static void displayPieChart (HashMap<String, Double> cashflowByCat, String type) {
         PieChart chart = new PieChartBuilder().width(800).height(600)
                 .title(StringUtils.capitalize(type) + " Chart")
@@ -72,6 +91,12 @@ public class Visualizer {
         );
     }
 
+    /**
+     * Method to display the bar chart to the screen
+     *
+     * @param cashflowByCat
+     * @param type
+     */
     public static void displayBarChart (HashMap<String, Double> cashflowByCat, String type) {
         CategoryChart chart = new CategoryChartBuilder().width(800).height(600)
                 .title(StringUtils.capitalize(type) + " Chart")
@@ -99,6 +124,13 @@ public class Visualizer {
     }
 
 
+    /**
+     * Method to display the radar chart to the screen
+     *
+     * @param cashflowByCat
+     * @param type
+     * @throws FinancialPlannerException
+     */
     public static void displayRadarChart (HashMap<String, Double> cashflowByCat, String type)
             throws FinancialPlannerException {
         RadarChart radarChart = new RadarChartBuilder().width(800).height(600)
