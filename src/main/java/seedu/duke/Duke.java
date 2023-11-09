@@ -74,13 +74,17 @@ public class Duke {
     /**
      * Reads the user command and executes it, until the user issues the exit
      * command.
+     * The command will be formatted before execution by following:
+     * 1. change to lower case
+     * 2. remove leading and ending whitespace
+     * 3. remove consecutive white space between words
      */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
             try {
                 String userCommandText = ui.getUserCommand();
-                command = new Parser().parseCommand(userCommandText.toLowerCase().trim());
+                command = new Parser().parseCommand(userCommandText.toLowerCase().trim().replaceAll("\\s+", " "));
                 CommandResult result = executeCommand(command);
                 ui.showResultToUser(result);
                 if (ExitCommand.isExit(command)) {
