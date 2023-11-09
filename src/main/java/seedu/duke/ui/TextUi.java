@@ -16,7 +16,6 @@ import java.util.Scanner;
 import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.Goal;
-import seedu.duke.data.GoalList;
 import seedu.duke.data.Printable;
 
 /**
@@ -195,11 +194,11 @@ public class TextUi {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
     }
 
-    public static String NumberofGoalMsg(int goalCount) {
+    public static String noOfGoalMsg(int goalCount) {
         return "You still have " + goalCount + " goals to accomplish. Add oil!";
     }
 
-    public static String DeleteGoalMsg(Goal deletedGoal) {
+    public static String deleteGoalMsg(Goal deletedGoal) {
 
         return "Good. I have removed this goal: " + deletedGoal + "\n"
                 + "Remember not to give up unaccomplished target! ";

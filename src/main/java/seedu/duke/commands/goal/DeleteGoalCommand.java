@@ -18,6 +18,7 @@ public class DeleteGoalCommand extends Command {
      * @return feedback to user of either success or fail
      * In case of fail, tell user the specific problem.
      */
+    @Override
     public CommandResult execute() {
         try{
             feedbackToUser = GoalList.deleteGoal(this.userCommand);

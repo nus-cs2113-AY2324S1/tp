@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.goal.*;
+import seedu.duke.commands.goal.GoalCommand;
+import seedu.duke.commands.goal.DeleteGoalCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.IncorrectCommand;
 import seedu.duke.commands.logcommands.LogCommand;

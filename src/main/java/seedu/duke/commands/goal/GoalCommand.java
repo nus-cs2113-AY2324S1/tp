@@ -21,6 +21,7 @@ public class GoalCommand extends Command {
      * incorrect format of command or invalid number is input.
      * @return result of adding goal successfully message
      */
+    @Override
     public CommandResult execute() {
         try{
             feedbackToUser = GoalList.addGoal(this.userCommand);

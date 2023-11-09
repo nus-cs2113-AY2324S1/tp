@@ -34,7 +34,8 @@ public class GoalList extends ArrayList<Goal> {
         return goalCount;
     }
 
-    /** This method removes a goal object from the global field goals list by indexing
+    /**
+     * This method removes a goal object from the global field goals list by indexing
      * It also decrements goalCount by 1
      * @param cmd Raw user Command
      * @return message of succeeding to delete goal and tell user the updated total number of goals
@@ -45,7 +46,7 @@ public class GoalList extends ArrayList<Goal> {
         int index = Integer.parseInt(cmdSplit[1]);
         Goal targetGoal = Duke.goals.remove(index);
         Duke.goals.goalCount--;
-        return TextUi.DeleteGoalMsg(targetGoal) + TextUi.NumberofGoalMsg(Duke.goals.goalCount);
+        return TextUi.deleteGoalMsg(targetGoal) + TextUi.noOfGoalMsg(Duke.goals.goalCount);
     }
 
     /**
