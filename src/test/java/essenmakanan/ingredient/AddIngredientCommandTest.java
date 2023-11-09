@@ -31,10 +31,10 @@ public class AddIngredientCommandTest {
         assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
     }
 
-    /*@Test
+    @Test
     public void addExistingIngredient_multipleIncreaseQuantity_quantityIncreased(){
 
-        String userInput = "i/tomato,2,pc, i/tomato,3,pc";
+        String userInput = "i/tomato,2,pc i/tomato,3,pc";
         addIngredientCommand = new AddIngredientCommand(userInput, ingredients);
         addIngredientCommand.executeCommand();
 
@@ -42,5 +42,5 @@ public class AddIngredientCommandTest {
         assertEquals("tomato", ingredient.getName());
         assertEquals(6.0, ingredient.getQuantity());
         assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
-    }*/
+    }
 }
