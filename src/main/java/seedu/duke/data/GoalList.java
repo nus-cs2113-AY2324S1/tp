@@ -11,6 +11,7 @@ public class GoalList extends ArrayList<Goal> {
     private static final String GOALKEYWORD = "set";
     private static final String DATEKEYWORD = "on";
     private static final String DELETEGOALKEYWORD = "deleteg";
+    private static final String VIEWGOALKEYWORD = "viewq";
 
     private ArrayList<Goal> goals;
     private int goalCount;
@@ -39,7 +40,7 @@ public class GoalList extends ArrayList<Goal> {
      * @param cmd Raw user Command
      * @return message of succeeding to delete goal and tell user the updated total number of goals
      */
-    public static String deleteGoal(String cmd) throws IncorrectFormatException, NumberFormatException{
+    public static String deleteGoal(String cmd) throws IncorrectFormatException, NumberFormatException {
         verifyDeleteGoalInput(cmd);
         String[] cmdSplit = cmd.toLowerCase().trim().split(" ");
         int index = Integer.parseInt(cmdSplit[1]);
@@ -116,7 +117,7 @@ public class GoalList extends ArrayList<Goal> {
      * @throws IncorrectFormatException if user input is in wrong format
      * @throws NumberFormatException if the user does not input a valid number
      */
-    public static String addGoal(String userCmd) throws IncorrectFormatException, NumberFormatException{
+    public static String addGoal(String userCmd) throws IncorrectFormatException, NumberFormatException {
         verifyGoalInput(userCmd); //if invalid, exceptions is thrown
 
         String[] cmdSplit = userCmd.split(" ");
@@ -127,6 +128,19 @@ public class GoalList extends ArrayList<Goal> {
         Duke.goals.goalCount++;
 
         return TextUi.addGoalSuccessMessage();
+    }
+
+    /**
+     * Exception appears if the length of view goal command does not equal to 1
+     * i.e. containing extra information
+     * @param cmd Raw user command
+     * @throws IncorrectFormatException
+     */
+    public static void verifyViewGoalInput(String cmd) throws IncorrectFormatException {
+        String[] cmdSplit = cmd.split(" ");
+        if (cmdSplit.length != 1){
+            throw new IncorrectFormatException("Use single word [viewG] to view your goal list.");
+        }
     }
 
 }
