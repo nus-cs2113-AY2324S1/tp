@@ -11,11 +11,21 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Command class that inherit from Command abstract class
+ * Represents the command to visualize your cash flow
+ */
 public class VisCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String type;
     private String chart;
 
+    /**
+     * Constructor for the command to visualize cash flow
+     *
+     * @param rawCommand
+     * @throws IllegalArgumentException
+     */
     public VisCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("t")) {
             throw new IllegalArgumentException("Entry type must be defined");
@@ -35,6 +45,11 @@ public class VisCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to visualize cash flow
+     *
+     * @throws FinancialPlannerException
+     */
     @Override
     public void execute() throws FinancialPlannerException {
         Ui ui = Ui.getInstance();

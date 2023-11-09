@@ -8,10 +8,20 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Command that inherits from the Command abstract class
+ * Represents the command to delete stock from watchlist
+ */
 public class DeleteStockCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;
 
+    /**
+     * Constructor for the command to delete stock from watchlist
+     *
+     * @param rawCommand
+     * @throws IllegalArgumentException
+     */
     public DeleteStockCommand(RawCommand rawCommand) throws IllegalArgumentException {
         if (!rawCommand.extraArgs.containsKey("s")) {
             throw new IllegalArgumentException("Stock code cannot be empty");
@@ -28,6 +38,11 @@ public class DeleteStockCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to delete stock from watchlist
+     *
+     * @throws Exception
+     */
     @Override
     public void execute() throws Exception {
         Ui ui = Ui.getInstance();
