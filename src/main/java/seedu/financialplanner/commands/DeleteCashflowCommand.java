@@ -1,5 +1,7 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.CashflowList;
@@ -12,6 +14,7 @@ import java.util.logging.Logger;
 /**
  * Represents a command to delete a cashflow.
  */
+@SuppressWarnings("unused")
 public class DeleteCashflowCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;

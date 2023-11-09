@@ -1,5 +1,7 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
@@ -15,6 +17,7 @@ import java.util.logging.Logger;
 /**
  * Represents the command to add a cashflow.
  */
+@SuppressWarnings("unused")
 public class AddCashflowCommand extends Command {
     protected static Ui ui = Ui.getInstance();
     private static Logger logger = Logger.getLogger("Financial Planner Logger");

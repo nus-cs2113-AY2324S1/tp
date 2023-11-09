@@ -1,5 +1,7 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.utils.Ui;
@@ -12,6 +14,7 @@ import java.util.logging.Logger;
  * Command that inherits from the Command abstract class
  * Represents that command that add stock to watchlist
  */
+@SuppressWarnings("unused")
 public class AddStockCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;

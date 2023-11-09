@@ -1,5 +1,7 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.utils.Ui;
@@ -15,6 +17,7 @@ import java.util.logging.Logger;
  * Command class that inherit from Command abstract class
  * Represents the command to visualize your cash flow
  */
+@SuppressWarnings("unused")
 public class VisCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String type;

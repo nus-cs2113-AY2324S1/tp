@@ -5,6 +5,8 @@ import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.cashflow.Expense;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 /**
  * Represents a command to display overview of user's financials.
  */
+@SuppressWarnings("unused")
 public class OverviewCommand extends Command {
     private static final CashflowList cashflowList = CashflowList.getInstance();
 
