@@ -73,6 +73,13 @@ public class Ui {
         printLine();
     }
 
+    public String profileMessageAndScanner() {
+        System.out.println(
+                "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
+        );
+        return scanNextLine();
+    }
+
     /**
      * Prints the profile details of the user after user has
      * entered details for the first time.

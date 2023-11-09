@@ -57,9 +57,7 @@ help caloriesburnt
 help caloriesconsumed
 help findmeal
 help findworkout
-help save
 
-foo
 foo
  foo
 exit

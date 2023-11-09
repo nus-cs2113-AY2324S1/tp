@@ -4,9 +4,6 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
-import fittrack.parser.NumberFormatException;
-import fittrack.parser.ParseException;
-import fittrack.parser.PatternMatchFailException;
 import fittrack.storage.Storage;
 import fittrack.storage.Storage.StorageOperationException;
 import fittrack.storage.Storage.InvalidStorageFilePathException;
@@ -31,8 +28,6 @@ public class FitTrack {
     private WorkoutList workoutList;
     private StepList stepList;
 
-    private boolean isValidInput = false;
-
     private FitTrack() {
         ui = new Ui();
         userProfile = new UserProfile();
@@ -56,26 +51,8 @@ public class FitTrack {
     private void start(String[] args) {
         ui.printVersion();
         ui.printWelcome();
-
-        try {
-            this.storage = initializeStorage(args);
-            if (!storage.isProfileFileEmpty()) {
-                this.userProfile = storage.profileLoad();
-                ui.printPrompt();
-                isValidInput = true;
-            }
-            this.mealList = storage.mealLoad();
-            this.workoutList = storage.workoutLoad();
-            this.stepList = storage.stepLoad();
-        } catch (StorageOperationException | InvalidStorageFilePathException e) {
-            System.out.println("There was a problem with the loading of storage contents.");
-            ui.printLine();
-        }
-
-        while (!isValidInput) {
-            // TODO: organize here.
-            startProfile();
-        }
+        boolean isProfileLoaded = loadStorage(args);
+        userProfile.startProfile(userProfile, ui, storage, isProfileLoaded);
     }
 
     private void loopCommandExecution() {
@@ -101,43 +78,24 @@ public class FitTrack {
         }
     }
 
-    private void startProfile() {
+    private boolean loadStorage(String[] args) {
+        boolean isFirstTime = false;
         try {
-            profileSettings();
-            storage.saveProfile(userProfile);
-            isValidInput = true;
-        } catch (PatternMatchFailException e) {
-            System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
-        } catch (IOException e) {
-            System.out.println("Error occurred while saving profile.");
-            isValidInput = true;
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            this.storage = initializeStorage(args);
+            if (!storage.isProfileFileEmpty()) {
+                this.userProfile = storage.profileLoad();
+                ui.printPrompt();
+                isFirstTime = true;
+            }
+            this.mealList = storage.mealLoad();
+            this.workoutList = storage.workoutLoad();
+            this.stepList = storage.stepLoad();
+            return isFirstTime;
+        } catch (StorageOperationException | InvalidStorageFilePathException e) {
+            System.out.println("There was a problem with the loading of storage contents.");
+            ui.printLine();
         }
-    }
-
-    /**
-     * Gets user profile details when program starts.
-     *
-     * @throws PatternMatchFailException if regex match fails
-     * @throws NumberFormatException if one of arguments is not double
-     */
-    private void profileSettings()
-            throws ParseException {
-        System.out.println(
-                "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
-        );
-        String input = ui.scanNextLine();
-
-        assert (input != null) : "Profile cannot be null";
-
-        UserProfile profile = UserProfile.parseUserProfile(input);
-        userProfile.setHeight(profile.getHeight());
-        userProfile.setWeight(profile.getWeight());
-        userProfile.setDailyCalorieLimit(profile.getDailyCalorieLimit());
-        userProfile.setGender(profile.getGender());
-
-        ui.printProfileDetails(userProfile);
+        return isFirstTime;
     }
 
     /**

@@ -95,6 +95,7 @@ public class Storage {
         }
     }
 
+
     /**
      * Returns true if the given path is acceptable as a storage file.
      * The file path is considered acceptable if it ends with '.txt'
