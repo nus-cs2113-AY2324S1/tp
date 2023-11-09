@@ -1,9 +1,13 @@
 package seedu.duke.commands;
 
+import seedu.duke.commands.goal.AchieveGoalCommand;
+import seedu.duke.commands.goal.GoalCommand;
+import seedu.duke.commands.goal.ViewGoalCommand;
 import seedu.duke.commands.logcommands.LogCommand;
 import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.commands.logcommands.UpdateLogCommand;
 import seedu.duke.commands.logcommands.DeleteLogCommand;
+import seedu.duke.data.Goal;
 
 /**
  * Shows help instructions.
@@ -17,10 +21,20 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        String HelpMsg = HelpCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += LogCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += DeleteLogCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += UpdateLogCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += ViewLogCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += GoalCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += GoalCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += DeleteLogCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += ViewGoalCommand.MESSAGE_USAGE + "\n";
+        HelpMsg += AchieveGoalCommand.MESSAGE_USAGE;
+
         return new CommandResult(
-                HelpCommand.MESSAGE_USAGE + "\n" + LogCommand.MESSAGE_USAGE + "\n" +
-                        DeleteLogCommand.MESSAGE_USAGE + "\n" + UpdateLogCommand.MESSAGE_USAGE + "\n" +
-                ViewLogCommand.MESSAGE_USAGE
+                HelpMsg
+
         //                        + "\n" + DeleteCommand.MESSAGE_USAGE
         //                        + "\n" + ClearCommand.MESSAGE_USAGE
         //                        + "\n" + FindCommand.MESSAGE_USAGE

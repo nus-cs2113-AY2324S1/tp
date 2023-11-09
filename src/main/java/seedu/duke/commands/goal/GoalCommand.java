@@ -10,7 +10,8 @@ public class GoalCommand extends Command {
 
     public static final String COMMAND_WORD = "set";
     public String feedbackToUser;
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a new calories consumption goal into the goal list\n"
+            + "\tExample: " + COMMAND_WORD + " 123 on 18/12/2023";
     public GoalCommand(String cmd) {
         super(cmd);
     }
