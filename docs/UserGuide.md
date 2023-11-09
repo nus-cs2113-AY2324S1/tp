@@ -21,6 +21,10 @@ In the terminal, make sure you are in the same directory (location) as the jar f
   
   e.g. `VIEWG`, `viewG`, `viewg` will be consider the same. This is to favour the typing habits of different users.
 
+## Content of Command
+
+
+
 ## Command Type
 
 ### `help` - Viewing help
