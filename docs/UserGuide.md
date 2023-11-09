@@ -112,8 +112,15 @@ Format: `deleteG Index`
 
 You can retrieve the index by showing the goal list
 
-Example:
+Example: XXXXX
 
+Expected outcome:
+
+```
+Got it. I've added this task:
+[T][ ] read book
+Now you have 2 tasks in the list.
+```
 
 
 
