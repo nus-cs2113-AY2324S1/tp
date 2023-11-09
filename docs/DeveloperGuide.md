@@ -159,7 +159,7 @@ of `parseCommand`. For simplicity, not all possible paths are covered, instead s
 parsing valid commands that can be returned immediately, parsing valid commands that require further parsing, and 
 parsing invalid commands. <br/><br/>
 
-![](UML/Images/Parser.png) <br/><br/>
+![](UML/Images/parser.png) <br/><br/>
 
 `extract` methods
 
@@ -219,10 +219,9 @@ It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
 2. `[answer]` is the answer or possible answer(s) that the user must
    input to count as correct. It is case-insensitive. (i.e. 4, four)
 3. `[module]` is the module that the question belongs in (i.e. CS2113)
-4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard)
+4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
 
-*Condensed Class Diagram - Does not contain all attributes & methods
-![](UML/Images/AddShortCommand.jpg)
+![](UML/Images/shortans.png) <br/><br/>
 
 Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
