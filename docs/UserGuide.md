@@ -32,7 +32,7 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 | [View Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#view---viewing-exercises) | [Make Achievement]        |    $1 |       |
 | zebra stripes | [View Goals](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#viewg---view-your-current-goal-list)        |    $1 |       |
 
-2. Frequently-ask-quesions([**FAQs**](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#faqs))
+2. Frequently-asked-quesions([**FAQs**](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#faqs))
 
 ## Command Type
 
