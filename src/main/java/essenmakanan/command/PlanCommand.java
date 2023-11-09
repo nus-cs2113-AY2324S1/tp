@@ -2,20 +2,23 @@ package essenmakanan.command;
 
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
+import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.ui.Ui;
 
 public class PlanCommand extends Command {
+    public IngredientList missingIngredients;
+    public IngredientList allIngredientsNeeded;
 
     private String input; //either id or name of recipe
     private IngredientList ingredients;
     private RecipeList recipes;
     private RecipeList allRecipes;
-    private IngredientList allIngredientsNeeded;
-    private IngredientList missingIngredients;
 
     public PlanCommand(IngredientList ingredients, RecipeList recipes, String input) {
         this.ingredients = ingredients;
@@ -25,6 +28,29 @@ public class PlanCommand extends Command {
         this.allRecipes = new RecipeList();
         this.allIngredientsNeeded = new IngredientList();
         this.missingIngredients = new IngredientList();
+    }
+
+    public void getMissingIngredients() {
+        String ingredientName;
+        Ingredient ingredientAvailable;
+        String missingQty = "0";
+        IngredientUnit ingredientUnit;
+
+        for (Ingredient ingredientNeeded : allIngredientsNeeded.getIngredients()) {
+            ingredientName = ingredientNeeded.getName();
+            ingredientUnit = ingredientNeeded.getUnit();
+            if (ingredients.exist(ingredientName)) {
+                ingredientAvailable = ingredients.getIngredient(ingredientName);
+                assert ingredientUnit == ingredientAvailable.getUnit() : "Unit must be standardised for the same ingredient";
+                missingQty = IngredientParser.getInsufficientQuantity(ingredientNeeded, ingredientAvailable);
+                if (!missingQty.equals("0")) {
+                    Ingredient lackingIngredient = new Ingredient(ingredientName, missingQty, ingredientUnit);
+                    missingIngredients.addIngredient(lackingIngredient);
+                }
+            } else {
+                missingIngredients.addIngredient(ingredientNeeded);
+            }
+        }
     }
 
     @Override
@@ -37,10 +63,10 @@ public class PlanCommand extends Command {
             int[] recipeIdList = RecipeParser.getRecipeIdList(inputList[1]);
 
             allRecipes = RecipeParser.getRecipes(recipeIdList, recipes);
+            allIngredientsNeeded = IngredientParser.getIngredientsFromRecipes(allRecipes);
+            getMissingIngredients();
 
-            //check all ingredients needed
-            //allIngredientsNeeded = IngredientParser.getIngredientsFromRecipes(allRecipes);
-            //check for missing ingredients
+            Ui.printPlanCommandIngredients(allIngredientsNeeded, missingIngredients);
         } catch (EssenFormatException e) {
             e.handleException();
         } catch (EssenOutOfRangeException e) {

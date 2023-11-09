@@ -29,15 +29,25 @@ public class IngredientParser {
         return index;
     }
 
-    /*public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
+
+    /**
+     * To get an Ingredient List of all ingredients needed for all recipes in the recipe list
+     *
+     * @param recipes is a recipe list of all recipes the user wants to process
+     * @return all ingredients in the list of recipes
+     */
+    public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
         IngredientList allIngredients = new IngredientList();
         RecipeIngredientList recipeIngredients;
 
         for (Recipe recipe : recipes.getRecipes()) {
             recipeIngredients = recipe.getRecipeIngredients();
-            for ()
+            for (Ingredient ingredient : recipeIngredients.getIngredients()) {
+                allIngredients.addIngredient(ingredient);
+            }
         }
-    }*/
+        return allIngredients;
+    }
 
     public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
         return ingredient1.getUnit().equals(ingredient2.getUnit());

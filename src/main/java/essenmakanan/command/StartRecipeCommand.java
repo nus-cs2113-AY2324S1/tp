@@ -39,6 +39,10 @@ public class StartRecipeCommand extends Command {
         return this.insufficientIngredients;
     }
 
+    /**
+     * Compare ingredients in a recipe and ingredients in the inventory.
+     * Update missingIngredients, diffUnitIngredients and insufficientIngredients accordingly.
+     */
     private void getIngredientsStillNeeded() {
         String recipeIngredientName;
         IngredientUnit recipeIngredientUnit;
