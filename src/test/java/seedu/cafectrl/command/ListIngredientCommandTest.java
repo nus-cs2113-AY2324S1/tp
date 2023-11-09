@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,33 +20,44 @@ class ListIngredientCommandTest {
     public void execute_validIndex_printsIngredients() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
-                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 1, "cup"),
-                        new Ingredient("Chicken", 100, "g"))), 8.0F));
+                new ArrayList<>(Arrays.asList(new Ingredient("Rice", 100, "g"),
+                        new Ingredient("Chicken", 200, "g"))), 8.0F));
         menuItems.add(new Dish("Chicken Sandwich",
                 new ArrayList<>(Arrays.asList(new Ingredient("Lettuce", 100, "g"),
                         new Ingredient("Chicken", 50, "g"))), 5.0F));
         Menu menu = new Menu(menuItems);
 
-        ArrayList<String> actualOutput = new ArrayList<>();
-        Ui ui = new Ui() {
-            @Override
-            public void showToUser(String... message) {
-                actualOutput.addAll(Arrays.asList(message));
-            }
-        };
+        Ui ui = new Ui();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream consoleStream = new PrintStream(baos);
+
+        PrintStream originalOut = System.out;
+        System.setOut(consoleStream);
 
         int indexToSelect = 1;
         ListIngredientCommand listIngredientCommand = new ListIngredientCommand(indexToSelect, menu, ui);
         listIngredientCommand.execute();
 
-        String expectedOutput = "Chicken Rice Ingredients: \n"
-                + "Rice - 1cup\n"
-                + "Chicken - 100g\n";
+        String actualOutput = baos.toString().trim();
+        System.setOut(originalOut);
 
-        assertEquals(expectedOutput.trim().replaceAll("\\s+", " "),
-                actualOutput.get(0).trim().replaceAll("\\s+", " "));
+        String expectedOutput = "+-------------------------------------------------------+"
+                + "| Dish: chicken rice                                    |"
+                + "+----------------------------------------+--------------+"
+                + "| Ingredient                             + Quantity     +"
+                + "+----------------------------------------+--------------+"
+                + "| rice                                   | 100g         |"
+                + "| chicken                                | 200g         |"
+                + "+-------------------------------------------------------+";
+
+        String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();
+        String normalizedActual = actualOutput.toLowerCase().replaceAll("\\s+", "").trim();
+
+        assertEquals(normalizedExpected, normalizedActual);
+
     }
 
+    @Test
     public void execute_invalidIndex_returnsErrorMessage() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
@@ -61,4 +75,5 @@ class ListIngredientCommandTest {
             listIngredientCommand.execute();
         });
     }
+
 }

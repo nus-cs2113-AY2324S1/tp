@@ -73,4 +73,10 @@ public class Messages {
             + "--------------+--------------+";
     public static final String RESTOCK_TITLE =   "| Restock                                | "
             + "Current      | Needed       |";
+
+    /** Messages for list ingredients */
+    public static final String INGREDIENTS_END_CAP = "+-------------------------------------------------------+";
+    public static final String INGREDIENTS_CORNER =  "+----------------------------------------+--------------+";
+    public static final String INGREDIENTS_TITLE =   "| Ingredient                             + Quantity     +";
+
 }

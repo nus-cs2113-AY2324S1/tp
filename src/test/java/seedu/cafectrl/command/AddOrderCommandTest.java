@@ -10,13 +10,15 @@ import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddOrderCommandTest {
     @Test
-    public void execute_addOneOrder_expectOneOrder() {
+    public void execute_addValidOrder_expectOneOrder() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("chicken", 100, "g"));
         ingredients.add(new Ingredient("rice", 50, "g"));
@@ -35,20 +37,12 @@ class AddOrderCommandTest {
 
         Order orderChickenRice = new Order(dishChickenRice, 2);
 
-        ArrayList<String> commandOutput = new ArrayList<>();
-        Ui ui = new Ui() {
-            @Override
-            public void showToUser(String... message) {
-                String parseString = convertArrayToString(message, ",");
-                commandOutput.add(parseString);
-            }
+        Ui ui = new Ui();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream consoleStream = new PrintStream(baos);
 
-            @Override
-            public void showTotalCost(String dollarCost) {
-                String parseString = ("Total orderList cost: $" + dollarCost);
-                commandOutput.add(parseString);
-            }
-        };
+        PrintStream originalOut = System.out;
+        System.setOut(consoleStream);
 
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         pantryStock.add(new Ingredient("chicken", 1000, "g"));
@@ -60,28 +54,33 @@ class AddOrderCommandTest {
         Command addOrderCommand = new AddOrderCommand(orderChickenRice, ui, pantry, orderList, menu);
         addOrderCommand.execute();
 
-        String actualOutput = String.join(",", commandOutput);
+        String actualOutput = baos.toString().trim();
+        System.setOut(originalOut);
 
-        String expectedOutput = Messages.CHEF_MESSAGE
-                + Messages.LINE_STRING
+        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!"
+                + "-----------------------------------------------------"
                 + "Order is ready!"
-                + "Total orderList cost: $5.00"
-                + Messages.LINE_STRING
-                + Messages.AVAILABLE_DISHES
-                + "Dish: Chicken Rice"
+                + "Total order cost: $5.00"
+                + "-----------------------------------------------------"
+                + "Listed below are the availability of the dishes for the next order!"
+                + "Dish: chicken rice"
                 + "Available Dishes: 8"
-                + Messages.LINE_STRING
-                + "Dish: Chicken Curry"
+                + "-----------------------------------------------------"
+                + "Dish: chicken curry"
                 + "Available Dishes: 4";
 
-        assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
+        String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();
+        String normalizedActual = actualOutput.toLowerCase().replaceAll("\\s+", "").trim();
+
+        assertEquals(normalizedExpected, normalizedActual);
     }
 
+    //one more test addInvalidOrder_expecterror
     @Test
-    public void execute_addTwoOrder_expectTwoOrder() {
+    public void execute_addInvalidOrder_expectRestockMessage() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("chicken", 100, "g"));
-        ingredients.add(new Ingredient("rice", 50, "g"));
+        ingredients.add(new Ingredient("chicken", 200, "g"));
+        ingredients.add(new Ingredient("rice", 100, "g"));
 
         ArrayList<Ingredient> ingredients2 = new ArrayList<>();
         ingredients2.add(new Ingredient("chicken", 200, "g"));
@@ -95,23 +94,14 @@ class AddOrderCommandTest {
         Menu menu = new Menu(menuItems);
         assertEquals(2, menu.getSize());
 
-        Order orderChickenRice = new Order(dishChickenRice, 2);
-        Order orderChickenCurry = new Order(dishChickenCurry, 3);
+        Order orderChickenRice = new Order(dishChickenRice, 10);
 
-        ArrayList<String> commandOutput = new ArrayList<>();
-        Ui ui = new Ui() {
-            @Override
-            public void showToUser(String... message) {
-                String parseString = convertArrayToString(message, ",");
-                commandOutput.add(parseString);
-            }
+        Ui ui = new Ui();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream consoleStream = new PrintStream(baos);
 
-            @Override
-            public void showTotalCost(String dollarCost) {
-                String parseString = ("Total orderList cost: $" + dollarCost);
-                commandOutput.add(parseString);
-            }
-        };
+        PrintStream originalOut = System.out;
+        System.setOut(consoleStream);
 
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         pantryStock.add(new Ingredient("chicken", 1000, "g"));
@@ -123,45 +113,22 @@ class AddOrderCommandTest {
         Command addOrderCommand = new AddOrderCommand(orderChickenRice, ui, pantry, orderList, menu);
         addOrderCommand.execute();
 
-        Command addOrderCommand2 = new AddOrderCommand(orderChickenCurry, ui, pantry, orderList, menu);
-        addOrderCommand2.execute();
+        String actualOutput = baos.toString().trim();
+        System.setOut(originalOut);
 
-        String actualOutput = String.join(",", commandOutput);
+        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!"
+                + "+----------------------------------------+--------------+--------------+"
+                + "| Restock                                | Current      | Needed       |"
+                + "+----------------------------------------+--------------+--------------+"
+                + "| chicken                                | 1000g        | 2000g        |"
+                + "+----------------------------------------------------------------------+"
+                + "Please restock ingredients before preparing the order :) ";
 
-        String expectedOutputForFirstOrder = Messages.CHEF_MESSAGE
-                + Messages.LINE_STRING
-                + "Order is ready!"
-                + "Total orderList cost: $5.00"
-                + Messages.LINE_STRING
-                + Messages.AVAILABLE_DISHES
-                + "Dish: Chicken Rice"
-                + "Available Dishes: 8"
-                + Messages.LINE_STRING
-                + "Dish: Chicken Curry"
-                + "Available Dishes: 4";
 
-        String expectedOutputForSecondOrder = Messages.CHEF_MESSAGE
-                + Messages.LINE_STRING
-                + "Order is ready!"
-                + "Total orderList cost: $12.90"
-                + Messages.LINE_STRING
-                + Messages.AVAILABLE_DISHES
-                + "Dish: Chicken Rice"
-                + "Available Dishes: 2"
-                + Messages.LINE_STRING
-                + "Dish: Chicken Curry"
-                + "Available Dishes: 1";
+        String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();
+        String normalizedActual = actualOutput.toLowerCase().replaceAll("\\s+", "").trim();
 
-        String expectedOutput = expectedOutputForFirstOrder + expectedOutputForSecondOrder;
-
-        assert (expectedOutput.trim().replaceAll(",", "").equals(actualOutput.trim().replaceAll(",", "")));
+        assertEquals(normalizedExpected, normalizedActual);
     }
 
-    private static String convertArrayToString(String[] message, String delimiter) {
-        StringBuilder sb = new StringBuilder();
-        for (String str : message) {
-            sb.append(str.toString()).append(delimiter);
-        }
-        return sb.substring(0, sb.length() - 1);
-    }
 }
