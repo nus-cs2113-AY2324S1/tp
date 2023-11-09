@@ -3,15 +3,12 @@ layout: default
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Developer Guide
 
 ## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 References
 1. Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html 
@@ -23,8 +20,6 @@ References
 ## Design
 
 ### Architecture
-
-<img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -176,11 +171,11 @@ The view ingredient feature is facilitated by the `ViewIngredientCommand` class.
 "view i" to trigger this command. Users will then be able to see all ingredients stored.
 Example: 
 
-`1. bread: 2pcs`
+``````
+1. bread: 2pcs
 
-`2. apple: 500g`
-
-`...`
+2. apple: 500g
+``````
 
 - **Step 1**
 
@@ -390,7 +385,6 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 recipes and ingredients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
