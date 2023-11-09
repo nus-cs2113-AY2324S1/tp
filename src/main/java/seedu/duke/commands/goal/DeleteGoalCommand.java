@@ -15,8 +15,8 @@ public class DeleteGoalCommand extends Command {
 
     /**
      * execute to remove a goal object from global goal list, by indexing
+     * If failed to delete a goal, tells user the specific problem.
      * @return feedback to user of either success or fail
-     * In case of fail, tell user the specific problem.
      */
     @Override
     public CommandResult execute() {

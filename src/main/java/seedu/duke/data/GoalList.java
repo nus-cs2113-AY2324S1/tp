@@ -7,6 +7,7 @@ import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.ui.TextUi;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GoalList extends ArrayList<Goal> {
     private static final String GOALKEYWORD = "set";
@@ -82,14 +83,16 @@ public class GoalList extends ArrayList<Goal> {
     }
 
     /**
-     * format usr input by change to small letter, remove leading and ending white space.
+     * Possible exceptions:
+     * 1. Missing target index or index is invalid, includes wrong range or even not a number
+     * 2. Command length not equals to 2
+     * 3. Command not start with 'deleteg'
      * @param cmd Raw User Command
      * @throws IncorrectFormatException if the input command is in incorrect format,
-     * possibles cases include: command length!=2, not start with Keyword, wrong integer, etc.
      */
     private static void verifyDeleteGoalInput(String cmd) throws IncorrectFormatException, NumberFormatException {
         String[] cmdSplit = cmd.split(" ");
-        if (cmdSplit.length == 1) {
+        if (cmdSplit.length == 1 && cmdSplit[0].equals("deleteq")) {
             throw new IncorrectFormatException("Oops! Please provide the target index.");
         }
 
