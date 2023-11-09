@@ -356,6 +356,7 @@ use the command `filter recipe i/INGREDIENT_NAME [i/...]`, where `INGREDIENT_ID`
 
 ![img.png](images/FilterRecipesSD.png)
 
+### Plan Recipe Command
 
 
 ## Product scope
