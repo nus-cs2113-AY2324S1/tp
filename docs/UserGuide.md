@@ -25,9 +25,9 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 |    Exercise | Goal  | Meal |  Others | 
 | :------------ |:---------------:| -----:| -----:|
-| col 3 is      | some wordy text | $1600 |       |
-| col 2 is      | centered        |   $12 |       |
-| zebra stripes | are neat        |    $1 |       |
+| col 3 is      | Add Goal | $1600 |       |
+| col 2 is      | Delete Goal        |   $12 |       |
+| zebra stripes | Make Achievement        |    $1 |       |
 
 
 ## Command Type
