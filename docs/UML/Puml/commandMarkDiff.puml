@@ -14,7 +14,7 @@ activate QuizHub
 QuizHub -> Parser : parseCommand(userInput)
 activate Parser
 create CommandMarkDifficulty
-Parser -> CommandMarkDifficulty: Calls parseMarkDiffCommand(userInput)
+Parser -> CommandMarkDifficulty:
 activate CommandMarkDifficulty
 CommandMarkDifficulty --> Parser
 deactivate CommandMarkDifficulty

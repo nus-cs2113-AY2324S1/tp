@@ -1,5 +1,5 @@
 @startuml
-!theme plain
+!include Style.puml
 title Shuffle Questions Sequence Diagram
 
 actor User

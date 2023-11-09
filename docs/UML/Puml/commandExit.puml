@@ -10,8 +10,6 @@ participant Storage as ":Storage"
 
 User -> QuizHub: Chooses to exit the application
 activate QuizHub
-QuizHub -> Ui : Shows exit prompt
-activate Ui
 QuizHub -> CommandExit: Executes "bye" command
 activate CommandExit
 CommandExit -> Storage: Calls saveData()
@@ -22,7 +20,8 @@ deactivate Storage
 CommandExit --> QuizHub: Signals the program to exit
 deactivate CommandExit
 QuizHub -> Ui: Shows exit message
-Ui --> User: Displays exit message
+activate Ui
+Ui --> User: displayClosingMessage()
 deactivate Ui
 deactivate QuizHub
 

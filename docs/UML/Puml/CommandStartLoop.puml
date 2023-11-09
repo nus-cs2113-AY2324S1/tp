@@ -32,7 +32,7 @@ loop questions not done | yet to /exitCommand
     opt
         User -> Ui : /exitCommand
         Ui -> CommandStart : Exit
-destroy CommandStart
+    destroy CommandStart
     end
 end
 destroy CommandStart

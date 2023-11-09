@@ -94,12 +94,6 @@ public class Question {
     public void markAsDone(){
         done = true;
     }
-    /**
-     * Mark a question as not done.
-     */
-    public void markAsNotDone(){
-        done = false;
-    }
 
     /**
      * Checks if a question has been done.
