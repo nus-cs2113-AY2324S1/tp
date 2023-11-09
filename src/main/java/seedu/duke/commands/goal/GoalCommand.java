@@ -32,6 +32,8 @@ public class GoalCommand extends Command {
             feedbackToUser = ife.getMessage();
         } catch (NumberFormatException nfe) {
             feedbackToUser = "Please input a valid number for calories.";
+        } catch (Exception e) {
+            feedbackToUser = "Sth. went wrong, please try again.";
         }
 
         return new CommandResult(feedbackToUser);

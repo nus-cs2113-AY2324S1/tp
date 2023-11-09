@@ -8,10 +8,7 @@ import seedu.duke.ui.TextUi;
 import java.util.ArrayList;
 
 public class GoalList extends ArrayList<Goal> {
-    private static final String GOALKEYWORD = "set";
     private static final String DATEKEYWORD = "on";
-    private static final String DELETEGOALKEYWORD = "deleteg";
-    private static final String VIEWGOALKEYWORD = "viewq";
 
     private ArrayList<Goal> goals;
     private int goalCount;
@@ -27,11 +24,11 @@ public class GoalList extends ArrayList<Goal> {
     }
 
     public Goal getGoal(int index) {
-        return goals.get(index);
+        return this.goals.get(index);
     }
 
     public int getGoalCount() {
-        return goalCount;
+        return this.goalCount;
     }
 
     /**
@@ -44,28 +41,28 @@ public class GoalList extends ArrayList<Goal> {
         verifyDeleteGoalInput(cmd);
         String[] cmdSplit = cmd.toLowerCase().trim().split(" ");
         int index = Integer.parseInt(cmdSplit[1]);
-        Goal targetGoal = Duke.goals.remove(index);
-        Duke.goals.goalCount--;
-        return TextUi.deleteGoalMsg(targetGoal) + TextUi.noOfGoalMsg(Duke.goals.goalCount);
+        Goal targetGoal = Duke.goalList.goals.remove(index - 1);
+        Duke.goalList.goalCount--;
+        return TextUi.deleteGoalMsg(targetGoal) + TextUi.noOfGoalMsg(Duke.goalList.goalCount);
     }
 
     public static String achieveGoal(String cmd) throws IncorrectFormatException, NumberFormatException {
         verifyAchieveGoalInput(cmd);
         String[] cmdSplit = cmd.split(" ");
         int index = Integer.parseInt(cmdSplit[1]);
-        Goal achievedGoal = Duke.goals.remove(index);
-        Duke.goals.goalCount--;
-        Duke.achievedGoals.add(achievedGoal);
+        Goal achievedGoal = Duke.goalList.goals.remove(index - 1);
+        Duke.goalList.goalCount--;
+        Duke.achievedGoals.goals.add(achievedGoal);
         Duke.achievedGoals.goalCount++;
         return "Congratulation! You have achieved one goal!\n"
-                + "[Finished]" + achievedGoal + "(:";
+                + "[Finished]" + achievedGoal + " (:";
     }
 
     /**
      * Begins to format user input by change to small letter, remove leading and
      * checks if the user Input is valid by:
      * 1. check if the length of the command equals 4
-     * 2. detect keywords "set", "on", etc.
+     * 2. detect keywords "on"
      * 3. check if user inputs a calories number at valid range
      * The userCmd should be like: set 1234 on Date
      * @param userCmd represents the raw userInput
@@ -76,10 +73,6 @@ public class GoalList extends ArrayList<Goal> {
         String[] cmdSplit = userCmd.split(" ");
         if (cmdSplit.length != 4) {
             throw new IncorrectFormatException("Oops! The goal instruction is in wrong format.");
-        }
-
-        if (!cmdSplit[0].equals(GOALKEYWORD) ) {
-            throw new IncorrectFormatException("Sorry. I cannot detect the [" + GOALKEYWORD + "] keyword." );
         }
 
         if (!cmdSplit[2].equals(DATEKEYWORD)) {
@@ -111,7 +104,7 @@ public class GoalList extends ArrayList<Goal> {
         }
 
         int index = Integer.parseInt(cmdSplit[1]); //throws number format exception if not a number string
-        if (index <= 0 || index > Duke.goals.goalCount){
+        if (index <= 0 || index > Duke.goalList.goalCount){
             throw new IllegalValueException("Please input a valid index by referring to your goals list.");
         }
     }
@@ -133,7 +126,7 @@ public class GoalList extends ArrayList<Goal> {
         }
 
         int index = Integer.parseInt(cmdSplit[1]); //throws number format exception if not a number string
-        if (index <= 0 || index > Duke.goals.goalCount){
+        if (index <= 0 || index > Duke.goalList.goalCount){
             throw new IllegalValueException("Please input a valid index by referring to your goals list.");
         }
     }
@@ -153,8 +146,8 @@ public class GoalList extends ArrayList<Goal> {
         int calories = Integer.parseInt(cmdSplit[1]);
         String date = cmdSplit[3];
 
-        Duke.goals.add(new Goal(calories, date));
-        Duke.goals.goalCount++;
+        Duke.goalList.goals.add(new Goal(calories, date));
+        Duke.goalList.goalCount++;
 
         return TextUi.addGoalSuccessMessage();
     }

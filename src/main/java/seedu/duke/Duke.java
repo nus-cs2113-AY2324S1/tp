@@ -23,7 +23,7 @@ public class Duke {
      * Version info of the program.
      */
     public static final String VERSION = "AddressBook Level 2 - Version 1.0";
-    public static GoalList goals = new GoalList();
+    public static GoalList goalList = new GoalList();
     public static GoalList achievedGoals = new GoalList();
     public static Log exerciseLog = new Log();
     public static StorageFile storage;
