@@ -2,8 +2,10 @@ package seedu.stocker.commands;
 
 import seedu.stocker.drugs.StockEntry;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a command to list all drugs in the inventory.
@@ -35,23 +37,46 @@ public class ListCommand extends Command {
         // Check if the inventory is empty
         if (stockEntries.isEmpty()) {
             // Return a CommandResult indicating that the inventory is empty
-            return new CommandResult<>("The inventory is empty.");
+            return new CommandResult("The inventory is empty.");
         } else {
             // Prepare a StringBuilder to construct the output message
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
             int index = 1;
+            LocalDate currentDate = LocalDate.now(); // Get the current date
+
             for (Map.Entry<String, StockEntry> entry : stockEntries) {
+                String inputDate = entry.getValue().getDrug().getExpiryDate();
+                LocalDate expiryDate = parseDate(inputDate);
+                boolean isExpired = currentDate.isAfter(expiryDate);
+
                 resultMessage.append("\t").append(index).append(". ")
                         .append("Name: ").append(entry.getValue().getDrug().getName())
                         .append(", Expiry date: ").append(entry.getValue().getDrug().getExpiryDate())
                         .append(", Serial number: ").append(entry.getKey())
                         .append(", Quantity: ").append(entry.getValue().getQuantity())
-                        .append(", Selling Price: ").append(entry.getValue().getDrug().getSellingPrice())
-                        .append(System.lineSeparator());
+                        .append(", Selling Price: ").append(entry.getValue().getDrug().getSellingPrice());
+
+                if (isExpired) {
+                    resultMessage.append(" (E)"); // Append (E) to indicate expiry
+                }
+
+                resultMessage.append(System.lineSeparator());
                 index++;
             }
             // Return a CommandResult with the success message and the list of drugs
             return new CommandResult<>(resultMessage.toString().trim());
         }
     }
+
+    /**
+     * Helper method to parse a date string in "dd/mm/yyyy" format to a LocalDate.
+     *
+     * @param dateStr The input date string.
+     * @return The parsed LocalDate.
+     */
+    private LocalDate parseDate(String dateStr) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(dateStr, inputFormatter);
+    }
+
 }
