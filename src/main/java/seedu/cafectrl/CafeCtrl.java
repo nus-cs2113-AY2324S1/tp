@@ -10,6 +10,13 @@ import seedu.cafectrl.parser.ParserUtil;
 import seedu.cafectrl.storage.Storage;
 import seedu.cafectrl.ui.Ui;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
+
+
 /**
  * CafeCtrl application's entry point.
  * Initializes the application and starts the interaction with the user.
@@ -22,6 +29,7 @@ public class CafeCtrl {
     private Sales sales;
     private CurrentDate currentDate;
     private Storage storage;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
@@ -35,7 +43,9 @@ public class CafeCtrl {
         this.pantry = this.storage.loadPantryStock();
         this.sales = this.storage.loadOrderList(menu);
         this.currentDate = new CurrentDate(sales);
+        initLogger();
 
+        logger.info( "CafeCtrl initialised successfully");
         assert sales.getOrderLists().size() == currentDate.getCurrentDay() + 1;
     }
     
@@ -55,13 +65,28 @@ public class CafeCtrl {
                 command = parserUtil.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
                 command.execute();
             } catch (Exception e) {
+                logger.log(Level.WARNING, "Error executing command: " + e.getMessage(), e);
                 ui.showToUser(e.getMessage());
             } finally {
                 ui.printLine();
+                logger.info(command.getClass().getName() + " executed.");
             }
         } while (!command.isExit());
 
         this.storage.saveAll(this.menu, this.sales, this.pantry);
+        logger.info("CafeCtrl terminated.");
+    }
+
+    private void initLogger() {
+        logger.setUseParentHandlers(false);
+        try {
+            FileHandler fileHandler = new FileHandler("cafeCtrl.log");
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
