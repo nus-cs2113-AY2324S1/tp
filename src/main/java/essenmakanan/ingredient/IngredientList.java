@@ -74,7 +74,43 @@ public class IngredientList {
     }
 
     public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
+        if (this.exist(ingredient.getName())) {
+            try{
+                this.updateIngredient(ingredient);
+            } catch (EssenFormatException e) {
+                e.handleException();
+            }
+        } else {
+            ingredients.add(ingredient);
+            Ui.printAddIngredientsSuccess(ingredient.getName());
+        }
+    }
+
+    public void updateIngredient(Ingredient ingredientToUpdate) throws EssenFormatException {
+        Ingredient existingIngredient = this.getIngredient(ingredientToUpdate.getName());
+        // check if unit matches
+        if (!existingIngredient.getUnit().equals(ingredientToUpdate.getUnit())) {
+            System.out.println("Existing ingredient unit is " + existingIngredient.getUnit().getValue()
+                    + " but new ingredient unit is " + ingredientToUpdate.getUnit().getValue());
+            throw new EssenFormatException();
+        }
+
+        double oldQuantity = existingIngredient.getQuantity();
+        double deltaQuantity = ingredientToUpdate.getQuantity();
+
+        if (oldQuantity < deltaQuantity) {
+            // increase quantity of existing ingredient
+            existingIngredient.setQuantity(oldQuantity + deltaQuantity);
+            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
+                    oldQuantity,
+                    ingredientToUpdate.getQuantity());
+        } else if (oldQuantity > deltaQuantity) {
+            // decrease quantity of existing ingredient
+            existingIngredient.setQuantity(oldQuantity - deltaQuantity);
+            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
+                    oldQuantity,
+                    ingredientToUpdate.getQuantity());
+        }
     }
 
     public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {

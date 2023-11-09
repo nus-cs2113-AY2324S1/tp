@@ -43,8 +43,6 @@ public class Parser {
                     System.out.println("Recipe have to include title, steps and ingredients!");
                     throw new EssenFormatException();
                 }
-
-
                 command = new AddRecipeCommand(inputDetail, recipes);
             } else if (inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
