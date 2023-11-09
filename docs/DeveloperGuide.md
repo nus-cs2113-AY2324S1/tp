@@ -187,6 +187,14 @@ to be written in.
 
 This same String is also displayed when an invalid command is used.
 
+#### Brief Description of Help Command
+
+#### Class Structure of Help Command
+
+#### Implementation details for Help Command
+
+#### Expected invalid commands for Help Command
+
 <hr>
 
 ### Short Command - Add Short Answer Question to the Quiz
@@ -291,16 +299,25 @@ For multiple choice questions:
 i.e. `edit 1 /description new description`,  `edit 2 /answer 3`, `edit 3 /option4 new option 4`
 
 #### Class Structure of Edit Command
-The CommandEdit class includes the following key components:
+The `CommandEdit` class is specialized for performing edit operations on questions in the QuizHub application. It extends the base `Command` class and carries out the modification of either a question's description or its answer based on the user's input.
 
-The `CommandEdit` class manages the following attributes:
-- `qnIndex`: The index of the question to be edited.
-- `newDescription`: The new description to be set for the question, if applicable.
-- `newAnswer`: The new answer to be set for the question, if applicable.
-- `newOptions`: An array representing new options for multiple-choice questions, if applicable.
+Attributes:
+- `qnIndex`: An integer representing the index of the question in the question list to be edited.
+- `editField`: A string indicating which field of the question to edit, such as "description", "answer", or "option[number]" for multiple-choice questions.
+- `newValue`: A string containing the new text to replace the current content of the `editField`.
 
-The class collaborates with the `QuestionList` and `Question` classes to update the desired question components.
+Constructor:
+- `CommandEdit(int qnIndex, String editField, String newValue)`: Instantiates a new `CommandEdit` object with the given question index, the field to edit, and the new value for that field.
 
+Methods:
+- `executeCommand(Ui ui, Storage dataStorage, QuestionList questions)`: Executes the edit command by updating the specified question's `editField` with `newValue`. After editing, it uses `ui` to display a success message and `dataStorage` to persist changes.
+
+The class uses the following components from the QuizHub application:
+- `Ui`: For user interaction, displaying prompts, and confirmation messages.
+- `Storage`: To save the updated state of the question list after the edit has been made.
+- `QuestionList`: To access and update the specific question based on the `qnIndex`.
+
+Upon execution, the `CommandEdit` class first checks that both `editField` and `newValue` are not null. It then calls `editQuestionByIndex` on the `QuestionList` to perform the actual edit. After a successful edit, a message is displayed to the user, and the `Storage` component is used to ensure the edited question's new state is saved.
 
 #### Implementation of Edit Command
 
