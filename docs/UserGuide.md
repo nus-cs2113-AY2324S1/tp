@@ -139,13 +139,15 @@ Format: `list_ingredients DISH_INDEX`
 Example:
 - list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
 ```
-chicken salad Ingredients: 
-pasta - 100g
-chicken - 200g
-lettuce - 200g
-tomatoes - 100g
-feta cheese - 20g
------------------------------------------------------
++-------------------------------------------------------+
+|Dish: chicken rice                                     |
++----------------------------------------+--------------+
+| Ingredient                             + Quantity     +
++----------------------------------------+--------------+
+| rice                                   | 100g         |
+| chicken                                | 200g         |
+| soup                                   | 50ml         |
++-------------------------------------------------------+
 ```
 
 <!---@@author ShaniceTang--->
@@ -191,10 +193,16 @@ Format: `view_stock`
 
 Output:
 ```
-You have the following ingredients in pantry:
-Ingredients		Qty
-chicken			500g
-milk			1000ml
++-------------------------------------------------------+
+| You have the following ingredients in pantry:         |
++----------------------------------------+--------------+
+| Ingredients                            |  Qty         |
++----------------------------------------+--------------+
+| chicken                                | 300g         |
+| noodles                                | 2100g        |
+| rice                                   | 2900g        |
+| bread                                  | 500g         |
++-------------------------------------------------------+
 ```
 
 
