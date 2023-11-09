@@ -13,7 +13,11 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 ## Features 
 
-{Give detailed description of each feature}
+### Notes about the input command format
+
+- For each type command, a specific `COMMAND FORMAT` is required. Please go through the following guidelines to look for the details of each command.
+
+- Both `CAPITAL LETTER` and `small letter` are acceptable. (But consecutive white space will be eliminated automatically).
 
 ### Viewing help: `help`
 Shows a message explaining how to access the help page.
