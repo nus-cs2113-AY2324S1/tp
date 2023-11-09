@@ -75,9 +75,9 @@ public abstract class ReviewMode {
                 "e", "m", "h"));
         String choice = scanner.nextLine();
 
-        while (!choices.contains(choice)) {
-            System.out.println("    Invalid choice! Your choice must be e, m " +
-                    "or h! Please try again.");
+        while (!choices.contains(choice.toLowerCase())) {
+            System.out.println("    Invalid choice! Your choice must be E, M " +
+                    "or H! Please try again.");
 
             choice = scanner.nextLine();
         }
