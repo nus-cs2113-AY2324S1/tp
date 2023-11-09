@@ -22,8 +22,8 @@ public class AddCashflowCommand extends Command {
     public static final String NAME = "add";
 
     public static final String USAGE =
-            "add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]" + "\n" +
-            "add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]";
+            "add income </a AMOUNT> </t TYPE> [/r DAYS] [/d DESCRIPTION]" + "\n" +
+            "add expense </a AMOUNT> </t TYPE> [/r DAYS] [/d DESCRIPTION]";
 
     public static final String EXAMPLE =
             "add income /a 5000 /t salary /r 30 /d work" + "\n" +
