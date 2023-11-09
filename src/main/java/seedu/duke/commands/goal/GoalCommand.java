@@ -11,7 +11,7 @@ public class GoalCommand extends Command {
     public static final String COMMAND_WORD = "set";
     public String feedbackToUser;
 
-    public GoalCommand(String cmd){
+    public GoalCommand(String cmd) {
         super(cmd);
     }
 
@@ -23,11 +23,11 @@ public class GoalCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        try{
+        try {
             feedbackToUser = GoalList.addGoal(this.userCommand);
-        }catch(IncorrectFormatException ife){
+        } catch (IncorrectFormatException ife) {
             feedbackToUser = ife.getMessage();
-        }catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             feedbackToUser = "Please input a valid number for calories.";
         }
 

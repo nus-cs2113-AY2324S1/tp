@@ -20,12 +20,12 @@ public class DeleteGoalCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        try{
+        try {
             feedbackToUser = GoalList.deleteGoal(this.userCommand);
 
-        }catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             feedbackToUser = "Please input a valid number for delete index.";
-        }catch(IncorrectFormatException ife){
+        } catch (IncorrectFormatException ife) {
             feedbackToUser = ife.getMessage();
         }
 
