@@ -32,34 +32,69 @@ public class RecipeStepList {
     }
 
     public RecipeStepList(String[] inputSteps) {
-        String tagValue;
         Step step = null;
         for (String stepString : inputSteps) {
-            // check if step has tag
-            if (stepString.indexOf("t/") != -1) {
-                String[] stepStringSplit = stepString.split("t/");
-
-                // step description
-                stepString = stepStringSplit[0].trim();
-
-                // get tag
-                tagValue = stepStringSplit[1];
-                try {
-                    Tag tag = Tag.mapStringToTag(tagValue);
-                    step = new Step(stepString, tag);
-                } catch (EssenInvalidEnumException e) {
-                    System.out.println("No such Tag");
-                }
-
+            if (stepString.contains("t/") && stepString.contains("d/")) {
+                step = this.createStepWithTagAndDuration(stepString);
+                assert step != null : "Step is not initialised";
+            } else if (stepString.contains("t/")) {
+                // step with tag only
+                step = this.createStepWithTag(stepString);
+                assert step != null : "Step is not initialised";
             } else {
+                // only step description
                 step = new Step(stepString);
             }
 
-            // step should not be null here, either with or without tag, error handled before
-            assert (step != null) : "Step is not initialised";
             this.addStep(step);
 
         }
+    }
+
+    public Step createStepWithTag(String stepString) {
+        String tagValue;
+
+        String[] stepStringSplit = stepString.split("t/");
+
+        // step description
+        String stepDescription = stepStringSplit[0].trim();
+
+        // get tag
+        tagValue = stepStringSplit[1];
+        Tag tag = this.obtainTag(tagValue);
+        return new Step(stepDescription, tag);
+    }
+
+    public Step createStepWithTagAndDuration(String stepString) {
+
+        // by implementation, if tag exists, it will be before duration
+        int tagFlag = stepString.indexOf("t/");
+        int durationFlag = stepString.indexOf("d/");
+
+        // step description
+        String stepDescription = stepString.substring(0, tagFlag).trim();
+
+        // get tag
+        String tagValue = stepString.substring(tagFlag + 2, durationFlag).trim();
+        Tag tag = this.obtainTag(tagValue);
+
+        // get duration
+        String durationString = stepString.substring(durationFlag + 2).trim();
+        int duration = Integer.parseInt(durationString);
+
+        return new Step(stepDescription, tag, duration);
+
+
+
+    }
+
+    public Tag obtainTag(String tagValue) {
+        try {
+            return Tag.mapStringToTag(tagValue);
+        } catch (EssenInvalidEnumException e) {
+            System.out.println("No such tag");
+        }
+        return null;
     }
 
     public void addStep(String stepString) {

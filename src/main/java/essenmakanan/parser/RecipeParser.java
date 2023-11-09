@@ -242,11 +242,8 @@ public class RecipeParser {
         return input.strip();
     }
 
-    public static int parseStepsDuration(String input) throws EssenFormatException{
-        if (!input.contains("d/")) {
-            throw new EssenFormatException();
-        }
-        String time = input.split("d/")[1];
+    public static int parseStepsDuration(String time) throws EssenFormatException{
+
         if (time.contains("minutes") || time.contains("mins")) {
             time = time.replace("minutes", "")
                 .replace("mins", "")
