@@ -53,7 +53,7 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + "addToCart: Adds a new drug to the current cart. Parameters: SERIAL NUMBER, QUANTITY,"
                 + System.getProperty("line.separator")
-                + "Example: addToCart /s Doliprane /q 2"
+                + "Example: addToCart /s ABC123 /q 2"
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
                 + "checkout: Checks out current cart. Parameters:"

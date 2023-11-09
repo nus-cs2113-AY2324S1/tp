@@ -14,7 +14,7 @@ public class AddToCartCommand extends Command {
             + ": Adds a new drug to the current cart. "
             + "Parameters: SERIAL NUMBER, QUANTITY," + System.lineSeparator()
             + "Example: " + COMMAND_WORD
-            + " /s Doliprane /q 2";
+            + " /s ABC123 /q 2";
 
     public static final String MESSAGE_SUCCESS = "New drug added in the current cart: %1$s";
 
