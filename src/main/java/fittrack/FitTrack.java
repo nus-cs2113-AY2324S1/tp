@@ -29,9 +29,7 @@ public class FitTrack {
     private MealList mealList;
     private WorkoutList workoutList;
     private StepList stepList;
-
-    private boolean isValidInput = false;
-
+    
     private FitTrack() {
         ui = new Ui();
         userProfile = new UserProfile();
@@ -55,8 +53,8 @@ public class FitTrack {
     private void start(String[] args) {
         ui.printVersion();
         ui.printWelcome();
-        loadStorage(args);
-        startProfile();
+        boolean isProfileLoaded = loadStorage(args);
+        startProfile(isProfileLoaded);
     }
 
     private void loopCommandExecution() {
@@ -82,40 +80,43 @@ public class FitTrack {
         }
     }
 
-    private void startProfile() {
-        while (!isValidInput) {
+    private void startProfile(boolean isProfileLoaded) {
+        while (!isProfileLoaded) {
             try {
                 String input = ui.profileMessageAndScanner();
                 userProfile.profileSettings(input);
                 ui.printProfileDetails(userProfile);
                 storage.saveProfile(userProfile);
-                isValidInput = true;
+                isProfileLoaded = true;
             } catch (PatternMatchFailException e) {
                 System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
             } catch (IOException e) {
                 System.out.println("Error occurred while saving profile.");
-                isValidInput = true;
+                isProfileLoaded = true;
             } catch (ParseException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private void loadStorage(String[] args) {
+    private boolean loadStorage(String[] args) {
+        boolean isFirstTime = false;
         try {
             this.storage = initializeStorage(args);
             if (!storage.isProfileFileEmpty()) {
                 this.userProfile = storage.profileLoad();
                 ui.printPrompt();
-                isValidInput = true;
+                isFirstTime = true;
             }
             this.mealList = storage.mealLoad();
             this.workoutList = storage.workoutLoad();
             this.stepList = storage.stepLoad();
+            return isFirstTime;
         } catch (StorageOperationException | InvalidStorageFilePathException e) {
             System.out.println("There was a problem with the loading of storage contents.");
             ui.printLine();
         }
+        return isFirstTime;
     }
 
     /**
