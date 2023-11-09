@@ -113,6 +113,15 @@ public class Encoder {
         return encodedList;
     }
 
+    //@@author Cazh1
+    /**
+     * Checks if the last day accessed has valid orders added
+     *
+     * @param encodedList An ArrayList of strings representing the encoded sales data.
+     * @param orderList An ArrayList of Orders of the last day accessed
+     * @param day The last day accessed
+     * @return encodedList with specific String added at the end if no valid orders were detected
+     */
     private static ArrayList<String> encodeLastSalesDay(ArrayList<String> encodedList, OrderList orderList, int day) {
         if (orderList.getSize() == 0) {
             StringBuilder orderString = new StringBuilder();

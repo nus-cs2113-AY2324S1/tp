@@ -1,7 +1,6 @@
 package seedu.cafectrl.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Messages;
