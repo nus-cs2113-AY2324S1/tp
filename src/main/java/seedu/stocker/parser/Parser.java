@@ -305,7 +305,8 @@ public class Parser {
         if (matcher.matches() && matcher.groupCount() == 1) {
             String vendorName = matcher.group(1).trim();
             return new AddVendorCommand(vendorName);
-        } return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
+        }
+        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
     }
 
     private Command prepareDeleteVendorCommand(String args) {
@@ -314,7 +315,8 @@ public class Parser {
         if (matcher.matches() && matcher.groupCount() == 1) {
             String vendorName = matcher.group(1).trim();
             return new DeleteVendorCommand(vendorName);
-        }  return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        }
+        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteVendorCommand.MESSAGE_USAGE));
     }
 
