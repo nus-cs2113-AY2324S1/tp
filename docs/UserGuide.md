@@ -27,7 +27,7 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 |    Exercise | Goal  | Meal |  Others | 
 | :------------ |:---------------:| -------------:| --------------:|
-| [Add an Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#log---adding-an-exercise)      | [Add a Goal](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#set-on---setting-up-a-calorie-goal) | $1600 | [Help](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#help---viewing-help) |
+| [Add an Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#log---adding-an-exercise)      | [Add a Goal](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#set-on---setting-up-a-calorie-goal) | [Add a Meal](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#meal_add---adding-a-meal) | [Help](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#help---viewing-help) |
 | [Update an Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#update---updating-an-exercise)      | [Delete a Goal](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#deleteg---delete-a-goal-from-current-goal-list)        |   $12 |  [Exit](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#exiting-the-program-exit)     |
 | [View Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#view---viewing-exercises) | [Make Achievement]        |    $1 |       |
 | zebra stripes | [View Goals](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#viewg---view-your-current-goal-list)        |    $1 |       |
