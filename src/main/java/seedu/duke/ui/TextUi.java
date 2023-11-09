@@ -215,4 +215,24 @@ public class TextUi {
         return "Nice! I have added the following goal to your goals list: \n\t" + newlyAddedGoal;
     }
 
+    /**
+     * This is used to show the content inside the goal list.
+     * It first checks if the list contains at least one goal,
+     * then print the goal by using string builder.
+     * @return String containing all the inserted goal in the global field goal list
+     */
+    public static String showGoalList() {
+        int numberOfGoal = Duke.goals.getGoalCount();
+        if (numberOfGoal == 0) {
+            return "Oh not! You don't have any goal to achieve currently.";
+        }
+        StringBuilder Sb = new StringBuilder();
+        Sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
+        for (int i = 0; i < numberOfGoal; i++){
+            Sb.append(i + 1).append(". ").append(Duke.goals.getGoal(i)).append("\n");
+        }
+
+        return Sb.toString();
+    }
+
 }

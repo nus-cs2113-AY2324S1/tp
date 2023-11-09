@@ -80,7 +80,7 @@ public class Duke {
         do {
             try {
                 String userCommandText = ui.getUserCommand();
-                command = new Parser().parseCommand(userCommandText);
+                command = new Parser().parseCommand(userCommandText.toLowerCase().trim());
                 CommandResult result = executeCommand(command);
                 ui.showResultToUser(result);
                 if (ExitCommand.isExit(command)) {
