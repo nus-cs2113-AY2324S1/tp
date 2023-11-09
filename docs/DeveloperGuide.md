@@ -407,18 +407,38 @@ user input fields. The command is structured as follows:
 Assuming 2 current questions: <br>
 1: [S][ ] question / answer | number | EASY <br>
 2: [M][ ] question2 / 1 / 2 / 3 / 4 / 1 | number | EASY
-- `start /modulenum /normal /mix`: 
+- `start /modulenumber /normal /mix`: 
   - Quiz mode must be either 'all' or 'module'
     Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
   - Reason: invalid quiz mode
-- `start /module numbers /normal /mix`
+- `start /module numbers /normal /mix`:
   - No question found in list / no question found pertaining to module. Add questions before starting the quiz
   - Reason: Invalid start details. Expecting 'number' instead of 'numbers'
-- `start /module num /normall /mix`
+- `start /module number /normall /mix`:
   - Question mode must be either 'random' or 'normal'
     Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
-  - Reason: Wrong spelling for qn mode
-- 
+  - Reason: Invalid spelling for qn mode
+- `start /module number /normal /essay`:
+  - Question type must be '/short', '/mcq', or '/mix'
+  - Reason: Invalid question type
+- `start /normal /module number /mix`:
+  - Quiz mode must be either 'all' or 'module'
+    Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
+  - Reason: The program is very strict on the order of the command and hence treat `normal` as the `/quiz mode` and will 
+  thus display the error message for invalid quiz mode
+- `start /module /normal`:
+  - Ono! You did not indicate start details for the quiz mode that you have chosen :<
+    Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
+  - Reason: Incomplete command
+- **After deleting the only short answer qn via `delete 1`**, call `start /module number /normal /short`:
+  - No question found in list / no question found pertaining to module. Add questions before starting the quiz
+  - Reason: No more short answer in list, hence there's no questions to be quizzed
+- `start /module number /normal /mix /extra`:
+  - Ono! You gave too many arguments :<
+    Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
+  - Reason: Extra parameters are given - hence too many arguments
+- `start /module number /normal /mix \exitquiz`
+  - TBC
 
 <hr>
 

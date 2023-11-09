@@ -560,7 +560,7 @@ public class Parser {
      */
     private static void extractQuizMode(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
-        String[] inputSplitByArguments = userInput.split("/");
+        String[] inputSplitByArguments = userInput.toLowerCase().split("/");
         String quizStartInfo = inputSplitByArguments[1].strip();
         String quizMode = quizStartInfo.split(" ")[0].strip();
         if (quizMode.equals("")) {
@@ -608,7 +608,7 @@ public class Parser {
             throw new IllegalArgumentException();
         }
         if (!commandStartTokens[0].equals("all")) {
-            String[] inputSplitByQuizMode = userInput.split("/");
+            String[] inputSplitByQuizMode = userInput.toLowerCase().split("/");
             String quizStartInfo = inputSplitByQuizMode[1].strip();
             quizStartDetails = quizStartInfo.split(commandStartTokens[0])[1].strip();
             if (!commandStartTokens[0].equals("all") && quizStartDetails.isEmpty()) {
@@ -650,7 +650,7 @@ public class Parser {
      */
     private static void extractQuizQnMode(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
-        String[] inputSplitByArguments = userInput.split("/");
+        String[] inputSplitByArguments = userInput.toLowerCase().split("/");
         String qnMode = inputSplitByArguments[2].strip();
         if (qnMode.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException();
@@ -698,7 +698,7 @@ public class Parser {
      */
     private static void extractQuizQnType(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
-        String[] inputSplitBySlash = userInput.split("/");
+        String[] inputSplitBySlash = userInput.toLowerCase().split("/");
         if (inputSplitBySlash.length < CommandStart.NUM_ARGUMENTS) {
             throw new ArrayIndexOutOfBoundsException("Missing question type for the quiz.");
         }
