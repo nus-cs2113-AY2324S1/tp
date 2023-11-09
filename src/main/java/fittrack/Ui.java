@@ -8,14 +8,11 @@ import java.util.Scanner;
  * Represents the user interface of FitTrack.
  */
 public class Ui {
-
     private static final String LOGO = "___________.__  __ ___________                     __\n"
                                      + "\\_   _____/|__|/  |\\__    ___/___________    ____ |  | __\n"
                                      + " |    __)  |  \\   __\\|    |  \\_  __ \\__  \\ _/ ___\\|  |/ /\n"
                                      + " |     \\   |  ||  |  |    |   |  | \\/ __ \\  \\___|    <\n"
                                      + " \\___  /   |__||__|  |____|   |__|  (____  /\\___  >__|_ \\";
-
-
     private static final String LINE = "____________________________________________________________";
 
     private final Scanner in;
@@ -45,6 +42,17 @@ public class Ui {
         return scanNextLine();
     }
 
+    // @@author J0shuaLeong
+    public String scanUserProfile() {
+        System.out.println(
+                "Please enter your height (in cm), weight (in kg), " +
+                        "gender (M or F), and daily calorie limit (in kcal).\n" +
+                        "Enter in format of `h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CALORIE_LIMIT>`."
+        );
+        return scanNextLine();
+    }
+    // @@author
+
     public void printBlankLine() {
         System.out.println();
     }
@@ -73,13 +81,6 @@ public class Ui {
         printLine();
     }
 
-    public String profileMessageAndScanner() {
-        System.out.println(
-                "Please enter your height (in cm), weight (in kg), gender (M or F), and daily calorie limit (in kcal):"
-        );
-        return scanNextLine();
-    }
-
     /**
      * Prints the profile details of the user after user has
      * entered details for the first time.
@@ -90,5 +91,17 @@ public class Ui {
         System.out.println("Here are your profile settings.");
         System.out.println("Height: " + profile.toString());
         printLine();
+    }
+
+    public void printStoragePathSettingFailure() {
+        System.out.println("One of given storage paths is invalid. Proceeding with default paths.");
+    }
+
+    public void printSaveFailure() {
+        System.out.println("Failed to save data.");
+    }
+
+    public void printException(Exception e) {
+        System.out.println(e.getMessage());
     }
 }

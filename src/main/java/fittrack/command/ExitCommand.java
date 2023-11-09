@@ -2,9 +2,6 @@ package fittrack.command;
 
 import fittrack.parser.PatternMatchFailException;
 
-import java.io.IOException;
-
-
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
     private static final String DESCRIPTION = "`" + COMMAND_WORD + "` halts the app.";
@@ -22,11 +19,6 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        try {
-            storage.save(userProfile, mealList, workoutList, stepList);
-        } catch (IOException e) {
-            System.out.println("Failed to save to storage.");
-        }
         return new CommandResult(MESSAGE_EXIT);
     }
 

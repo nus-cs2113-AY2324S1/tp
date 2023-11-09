@@ -27,7 +27,7 @@ public class CaloriesBurntCommandTest {
     public void testExecute() throws ParseException {
         CaloriesBurntCommand caloriesBurntCommand = new CaloriesBurntCommand(CaloriesBurntCommand.COMMAND_WORD);
         caloriesBurntCommand.setArguments("2023-10-23");
-        caloriesBurntCommand.setData(null, null, workoutList, null, null);
+        caloriesBurntCommand.setData(null, null, workoutList, null);
         CommandResult result = caloriesBurntCommand.execute();
         assertEquals("[W] workout1 (100kcal, 2023-10-23)\n" +
                         "[W] workout2 (200kcal, 2023-10-23)\n" +
