@@ -411,6 +411,28 @@ to quiz themselves on alongside whether to randomize the questions or use their 
 #### Command Syntax
 - `start /[quiz mode] [start details] /[qn mode] /[qn type]`
 
+#### Class Structure of Start Command
+The `CommandStart` class is integral to the QuizHub application, facilitating the initiation of a quiz session. It inherits from the abstract `Command` superclass and specializes in handling the 'start' command functionality.
+
+Attributes:
+- `startMode`: A string that denotes the quiz mode, which dictates how questions are selected for the quiz. It can be 'all' to include all questions or 'module' for module-specific questions.
+- `startDetails`: A string providing supplementary information for the `startMode`. If `startMode` is 'module', `startDetails` will specify the particular module.
+- `startQnMode`: A string indicating how the quiz questions should be arranged; either 'random' for a shuffled order or 'normal' for sequential order.
+- `startQnType`: A string that filters the quiz questions by type, which can be 'short' for short-answer questions, 'mcq' for multiple-choice questions, or 'mix' for a combination of both.
+
+Constructor:
+- `CommandStart(String startMode, String startDetails, String startQnMode, String startQnType)`: Constructs a new `CommandStart` instance with the specified modes and details for the quiz.
+
+Methods:
+- `executeCommand(Ui ui, Storage dataStorage, QuestionList questions)`: Executes the start quiz command by preparing the list of questions according to the specified modes and initiating the quiz through the `QuestionList`.
+
+The class utilizes the following components from the QuizHub application:
+- `Ui`: For user interaction, providing prompts, and displaying messages.
+- `Storage`: To potentially save any quiz-related data or state changes.
+- `QuestionList`: To retrieve and organize the list of questions based on the user's chosen modes.
+
+Upon execution, the `CommandStart` class will first gather the matching questions using the `startMode` and `startDetails`, filter them by `startQnType`, arrange them according to `startQnMode`, and then proceed to start the quiz session via the `QuestionList`. It handles any errors or invalid input by providing feedback through the `Ui`.
+
 #### Sequence Diagram of Start Command
 
 ![commandStartLoop.png](UML/Images/commandStartLoop.png)
@@ -544,14 +566,25 @@ The Shuffle command in QuizHub is designed to **PERMANENTLY** randomize the orde
 This contrasts with the temporary randomization available in the Start Command's /random mode.
 
 #### Command Syntax
-- `shuffle` 
+`shuffle` 
 
 #### Class Structure of Shuffle Command
+The `CommandShuffle` class is tasked with executing the shuffle operation within the QuizHub application. 
+It inherits from `Command`: As a subclass, it inherits methods and attributes from the `Command` superclass.
 
-- The Shuffle command resides within the quizhub.command package and is responsible for interacting with the QuestionList class from the quizhub.questionlist package.
-- When invoked, it permanently modifies the order of questions in the storage, thereby affecting all future accesses to the question list.
+Constructor:
+- `CommandShuffle()`: Initializes the `CommandShuffle` object with the `SHUFFLE` command type.
 
-![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML%2FCommands%2FShuffleToStorage-Shuffle_to_Storage_Flow.png)
+Methods:
+- `executeCommand(ui : Ui, dataStorage : Storage, questions : QuestionList) : void`: This method is called to execute the shuffle command. It invokes the `shuffleQuestions` method on the `QuestionList` object to randomly reorder the questions.
+
+The `CommandShuffle` class does not have its own attributes but utilizes those from its superclass. It interacts with the following components:
+
+- `Ui`: Used to interact with the user and potentially display messages or shuffle results.
+- `Storage`: If the shuffle should result in a permanent change, `Storage` would be used to persist the new question order.
+- `QuestionList`: Contains the list of questions that will be shuffled.
+
+![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML/Images/ShuffleToStorage-Shuffle_to_Storage_Flow.png)
 
 #### Operational Flow
 
@@ -597,12 +630,22 @@ This feature allows for the categorization of questions by difficulty, aiding in
 
 ![commandMarkDiffClass.png](UML/Images/commandMarkDiffClass.png)
 
-- The `CommandMarkDifficulty` class is responsible for interpreting and executing the `markdiff` command.
-- It utilizes the following key fields:
-    - `qnIndex`: An integer identifying the question number.
-    - `qnDifficulty`: An enumeration value representing the difficulty level (easy, normal, hard).
-- The class collaborates with `QuestionList` and `Question` classes to apply the difficulty level to the appropriate question.
-- The sequence and class diagrams provide a visual representation of the workflow and class relationships.
+The `CommandMarkDifficulty` class is responsible for the command operation that marks a question with a specified difficulty level in the QuizHub application. It extends the base `Command` class and includes specific attributes and methods for the marking process.
+
+- `qnIndex`: An integer representing the index of the question whose difficulty is to be marked.
+- `qnDifficulty`: An enumeration of type `Question.QnDifficulty` representing the difficulty level to be assigned to the question.
+
+The class interacts with the following components:
+
+- `Ui`: Used to interact with the user for input and to display messages.
+- `Storage`: Handles the persistence of changes made to the question list after the difficulty level has been marked.
+- `QuestionList`: Contains the list of questions and provides methods to update the difficulty level of a question.
+
+Constructor:
+- `CommandMarkDifficulty(int qnIndex, Question.QnDifficulty qnDifficulty)`: Initializes a new command with the given question index and difficulty level.
+
+Methods:
+- `executeCommand(Ui ui, Storage dataStorage, QuestionList questions)`: Executes the mark difficulty command. It validates the difficulty level and, if valid, calls the `markQuestionDifficulty` method on the `QuestionList` to update the question's difficulty. The `Storage` component is then used to save the updated question list.
 
 #### Operational Flow of Markdiff Command
 1. **Command Reception:**
@@ -617,12 +660,6 @@ This feature allows for the categorization of questions by difficulty, aiding in
     - Changes are persisted to the storage system to ensure that the new difficulty level is retained.
 6. **User Feedback:**
     - The user is provided with feedback indicating the successful marking of the question's difficulty.
-
-#### User Guide for Markdiff Command
-- Users can change the difficulty level of questions using the `markdiff` command followed by the question number and desired difficulty.
-- Difficulty level input is not case-sensitive.
-- The application supports a fixed set of difficulty levels: `easy`, `normal`, and `hard`.
-- If an invalid question number or difficulty level is entered, the user is prompted to retry the command.
 
 #### Expected Invalid Commands for Command Markdiff
 Assuming 2 current questions: <br>
