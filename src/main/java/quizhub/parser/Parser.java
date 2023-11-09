@@ -735,7 +735,8 @@ public class Parser {
         if (qnTypeException instanceof ArrayIndexOutOfBoundsException) {
             return new CommandInvalid(CommandStart.INVALID_QN_TYPE_MSG);
         } else if (qnTypeException instanceof IllegalArgumentException) {
-            return new CommandInvalid("    " + qnTypeException.getMessage() + System.lineSeparator() + CommandStart.INVALID_QN_TYPE_MSG);
+            return new CommandInvalid("    " + qnTypeException.getMessage() + System.lineSeparator() +
+                    CommandStart.INVALID_QN_TYPE_MSG);
         } else {
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }

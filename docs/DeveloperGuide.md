@@ -28,26 +28,36 @@ level-3
 The main execution of the QuizHub application will concern 4 components which
 are the `QuizHub`, `Ui`, `Parser` and `Command` packages.
 
-![](UML/Images/architecture.jpg)
+![](UML/Images/overallArchitecture.png)
 
-`Quizhub` is the "main" class, which is responsible for starting the program,
+`QuizHub` is the "main" class, which is responsible for starting the program,
 initialising all other objects, executing commands, and shutting down.
 
-`UI` is the component that interacts with the user, taking inputs and displaying
+`Ui` is the component that interacts with the user, taking inputs and displaying
 the results of the executed commands.
 
 `Parser` acts as a multiplexer to determine which command to run, and what parameters
 it has, based on the user input.
 
 `Commands` refer to a package of individual commands with complex and specific
-logic, which is later executed in Quizhub and displayed by `UI`.
+logic, which is later executed in QuizHub and displayed by `Ui`.
 
-`Storage` is the class through which questions can be stored on the hard drive and `Utility Classes`
-refer to any miscellaneous utility classes used by all the components.
+`Storage` is the class through which questions can be stored on the hard drive
+
+`UtilityClasses` refer to any miscellaneous utility classes used by all the components.
+
+While the above diagram provides a quick and simple high-level overview on the execution of QuizHub, it does not
+reflect the finer relationships between the components as well as the features within the various components. A more 
+comprehensive overview of QuizHub is provided in the following **condensed class diagram**. It describes the 
+classes corresponding to the main components of the application and their relationships. Only the **most important** 
+methods and attributes of each class are shown for simplicity. Here, "most important" means these methods and 
+attributes directly control the critical flow and operation of the application.
+
+![](UML/Images/overallClassInteraction.png)
 
 ## Application Lifecycle
 
-![](UML/Images/lifecycle.jpg)
+![](UML/Images/applicationLifecycle.png)
 
 The program begins with the `run()` call to `QuizHub` class.
 
@@ -57,7 +67,8 @@ In each iteration of the loop, `QuizHub` makes a call to `Ui.getUserInput()` and
 entire user input as a String object. Following which, `QuizHub` makes a call to
 `Parser.parseCommand()` to extract the user command from the String object and returns a
 `Command` object. Finally, `QuizHub` makes a call to `Command.executeCommand()` and performs
-the requested question.
+the requested question. Upon complete command execution, the results will be displayed to the user
+through `Ui`.
 
 If `Command` is of Exit type, the loop will exit, and the program terminates.
 
@@ -213,7 +224,7 @@ It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
 *Condensed Class Diagram - Does not contain all attributes & methods
 ![](UML/Images/AddShortCommand.jpg)
 
-Thereafter, the command is returned to the Quizhub component and executed,
+Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
@@ -257,7 +268,7 @@ Afterward, the storage is updated to reflect the newest QuestionList.
 
 ### Find Command - Look for a matching question
 
-Quizhub supports searching for specific questions, by searching matching keywords
+QuizHub supports searching for specific questions, by searching matching keywords
 in the format
 
 `find /[description]` OR `find /[module]`
@@ -785,7 +796,7 @@ Upon exiting the program, the `Ui` class will call the `updateData` method and p
 
 ## UI Component
 
-The UI class in the Quizhub application is responsible for handling the user interface interactions in a command-line interface (CLI). It provides methods for displaying messages or questions as well as getting user
+The UI class in the QuizHub application is responsible for handling the user interface interactions in a command-line interface (CLI). It provides methods for displaying messages or questions as well as getting user
 input.
 
 ### Constructor
