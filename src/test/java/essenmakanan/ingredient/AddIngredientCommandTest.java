@@ -1,10 +1,12 @@
 package essenmakanan.ingredient;
 
 import essenmakanan.command.AddIngredientCommand;
+import essenmakanan.exception.EssenFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddIngredientCommandTest {
 
@@ -42,5 +44,16 @@ public class AddIngredientCommandTest {
         assertEquals("tomato", ingredient.getName());
         assertEquals(6.0, ingredient.getQuantity());
         assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
+    }
+
+    @Test
+    public void addIngredient_negativeValue_nothingCreated(){
+
+        String userInput = "i/cheese,-2,pc";
+        addIngredientCommand = new AddIngredientCommand(userInput, ingredients);
+        addIngredientCommand.executeCommand();
+
+        // nothing should happen
+        assertEquals(1, ingredients.getSize());
     }
 }
