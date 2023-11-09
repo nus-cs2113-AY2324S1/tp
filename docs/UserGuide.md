@@ -274,8 +274,7 @@ Note:
 
 Example:
 - `plan 2 r/1 r/2` 
-
-  
+![img_1.png](images/PlanCommandImage.png)  
 
 ---
 
