@@ -12,6 +12,7 @@
     * [Delete income](#delete-income-delete-income)
     * [Delete expense](#delete-expense-delete-expense)
     * [Delete recurring cashflow](#delete-recurring-delete-recurring)
+  * [Find cashflow](#find-cashflow-find)
   * [List](#list)
     * [List all](#list-all-list)
     * [List income](#list-income-list-income)
@@ -38,6 +39,7 @@
     * [Marking Goal as Achieved](#mark-goal-as-achieved-markgoal)
   * [Visualization](#visualizing-your-cashflow-vis)
   * [Exiting the program](#exiting-the-program-exit)
+  * [Get command help and exmaple usage](#getting-command-help-and-example-usage-help)
   * [Saving data](#saving-the-data)
   * [Loading data](#loading-the-data)
 * [FAQ](#faq)
@@ -278,6 +280,13 @@ Balance: -830.00
 
 - Note: Balance displayed above is just an example. Your actual balance may differ.
 - Note: Date displayed above is just an example. Your actual date may differ.
+
+### Find cashflow: `find`
+Finds a cashflow using keywords
+
+Format: `find <keyword>`
+
+Example of usage: `find buy coffee`
 
 ### List
 
@@ -803,6 +812,14 @@ Displaying radarchart for income
 Exits the program.
 
 Format: `exit`
+
+### Getting command help and example usage: `help`
+
+Get command help and example usage. Specify the command to find help and example usage for exactly that command.
+
+Format: `help [COMMAND]`
+
+Example of usage: `help budget`
 
 ### Saving the data
 

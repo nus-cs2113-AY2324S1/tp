@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     public static final String USAGE =
             "find <KEYWORD>";
     public static final String EXAMPLE =
-            "find coffee";
+            "find buy coffee";
     private final String description;
 
     public FindCommand(RawCommand rawCommand) {
