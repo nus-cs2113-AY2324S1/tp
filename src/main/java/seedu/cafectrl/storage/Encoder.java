@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * making the data suitable for saving to a file.
  */
 public class Encoder {
+    public static final String NULL_ORDER_DAY = "the last day has no orders but please account for it";
     private static final String DIVIDER = " | ";
     //@@author ShaniceTang
     /**
@@ -105,6 +106,21 @@ public class Encoder {
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));
             }
+            if (day == sales.getDaysAccounted()) {
+                encodedList = encodeLastSalesDay(encodedList, orderList, day);
+            }
+        }
+        return encodedList;
+    }
+
+    private static ArrayList<String> encodeLastSalesDay(ArrayList<String> encodedList, OrderList orderList, int day) {
+        if (orderList.getSize() == 0) {
+            StringBuilder orderString = new StringBuilder();
+            //day of each orderList is index + 1
+            orderString.append((day + 1) + DIVIDER);
+            orderString.append(NULL_ORDER_DAY + DIVIDER);
+            orderString.append(System.lineSeparator());
+            encodedList.add(String.valueOf(orderString));
         }
         return encodedList;
     }

@@ -124,23 +124,32 @@ public class Decoder {
             String[] orderData = line.split(DIVIDER);
             int day = Integer.parseInt(orderData[0].trim()) - 1;
             String dishName = orderData[1].trim();
+            if (dishName.equals(Encoder.NULL_ORDER_DAY)) {
+                orderLists = fillOrderListSize(orderLists, day);
+                continue;
+            }
             int quantity = Integer.parseInt(orderData[2].trim());
             float totalOrderCost = Float.parseFloat(orderData[3].trim());
             boolean isComplete = "true".equals(orderData[4].trim());
             Dish dish = menu.getDishFromName(dishName);
-            if(dish == null) {
+            if (dish == null) {
                 ui.showDecodedInvalidDish(dishName);
-            } else {
-                Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
-                //increase size of orderLists if needed
-                //this can be used in the event that the text file's first order is not day 0
-                while (orderLists.size() <= day) {
-                    orderLists.add(new OrderList());
-                }
-
-                orderLists.get(day).addOrder(orderedDish);
+                continue;
             }
+            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
+            //increase size of orderLists if needed
+            //this can be used in the event that the text file's first order is not day 0
+            orderLists = fillOrderListSize(orderLists, day);
+            orderLists.get(day).addOrder(orderedDish);
         }
         return new Sales(orderLists);
     }
+
+    private static ArrayList<OrderList> fillOrderListSize(ArrayList<OrderList> orderLists, int day) {
+        while (orderLists.size() <= day) {
+            orderLists.add(new OrderList());
+        }
+        return orderLists;
+    }
+
 }
