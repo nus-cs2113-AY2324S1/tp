@@ -4,8 +4,6 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
-import fittrack.parser.ParseException;
-import fittrack.parser.PatternMatchFailException;
 import fittrack.storage.Storage;
 import fittrack.storage.Storage.StorageOperationException;
 import fittrack.storage.Storage.InvalidStorageFilePathException;
@@ -29,7 +27,7 @@ public class FitTrack {
     private MealList mealList;
     private WorkoutList workoutList;
     private StepList stepList;
-    
+
     private FitTrack() {
         ui = new Ui();
         userProfile = new UserProfile();
@@ -54,7 +52,7 @@ public class FitTrack {
         ui.printVersion();
         ui.printWelcome();
         boolean isProfileLoaded = loadStorage(args);
-        startProfile(isProfileLoaded);
+        userProfile.startProfile(userProfile, ui, storage, isProfileLoaded);
     }
 
     private void loopCommandExecution() {
@@ -77,25 +75,6 @@ public class FitTrack {
         } catch (IOException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException();
-        }
-    }
-
-    private void startProfile(boolean isProfileLoaded) {
-        while (!isProfileLoaded) {
-            try {
-                String input = ui.profileMessageAndScanner();
-                userProfile.profileSettings(input);
-                ui.printProfileDetails(userProfile);
-                storage.saveProfile(userProfile);
-                isProfileLoaded = true;
-            } catch (PatternMatchFailException e) {
-                System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
-            } catch (IOException e) {
-                System.out.println("Error occurred while saving profile.");
-                isProfileLoaded = true;
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
-            }
         }
     }
 

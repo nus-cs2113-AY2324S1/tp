@@ -8,7 +8,9 @@ import fittrack.data.Bmi;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
+import fittrack.storage.Storage;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -128,5 +130,24 @@ public class UserProfile {
         setWeight(profile.getWeight());
         setDailyCalorieLimit(profile.getDailyCalorieLimit());
         setGender(profile.getGender());
+    }
+
+    public void startProfile(UserProfile userProfile, Ui ui, Storage storage, boolean isProfileLoaded) {
+        while (!isProfileLoaded) {
+            try {
+                String input = ui.profileMessageAndScanner();
+                profileSettings(input);
+                ui.printProfileDetails(userProfile);
+                storage.saveProfile(userProfile);
+                isProfileLoaded = true;
+            } catch (PatternMatchFailException e) {
+                System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
+            } catch (IOException e) {
+                System.out.println("Error occurred while saving profile.");
+                isProfileLoaded = true;
+            } catch (ParseException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
