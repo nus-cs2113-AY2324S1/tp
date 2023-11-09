@@ -870,7 +870,14 @@ window. Sorry for the inconvenience caused. 🥲
 | **Delete from watchlist**        | `deletestock /s STOCKCODE`                                 |
 | **Visualization**                | `vis /t TYPE /c CHART`                                     |
 | **Exit program**                 | `exit`                                                     |
-
+| **Add Reminder**                 | `addreminder /t TYPE /d DATE`                              |
+| **Delete Reminder**              | `deletereminder INDEX`                                     |
+| **Mark Reminder as Done**        | `markreminder INDEX`                                       |
+| **Add Goal**                     | `set goal /g GOAL /l LABEL`                                |
+| **Delete Goal**                  | `deletegoal INDEX`                                         |
+| **Mark Goal as Achieved**        | `markgoal INDEX`                                           |
+| **List all reminders**           | `reminderlist`                                             |
+| **List all goals**               | `wishlist`                                                 |
 - Note: Cashflow is referring to an income or expense
 
 **Income and Expense types**

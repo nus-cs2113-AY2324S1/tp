@@ -12,11 +12,17 @@ public class AddReminderCommand extends Command {
             throw new IllegalArgumentException("Reminder must have a type");
         }
         type = rawCommand.extraArgs.get("t");
+        if(type.isEmpty()){
+            throw new IllegalArgumentException("Reminder type cannot be empty");
+        }
         rawCommand.extraArgs.remove("t");
         if(!rawCommand.extraArgs.containsKey("d")){
             throw new IllegalArgumentException("Reminder must have a date");
         }
         date = rawCommand.extraArgs.get("d");
+        if(date.isEmpty()){
+            throw new IllegalArgumentException("Reminder date cannot be empty");
+        }
         rawCommand.extraArgs.remove("d");
         if(!rawCommand.extraArgs.isEmpty()){
             String unknownExtraArgument = new java.util.ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
