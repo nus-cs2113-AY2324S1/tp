@@ -169,7 +169,7 @@ Adds a drug to be tracked by the system.
   existing drug in the system.
 - If the serial number is the same but either the name or expiry date is different, an error will be returned as the
   system expects consistent information for the same serial number.
-- If it has the same name or expiry date but a different serial number, a new entry will be added to the inventory for
+- If it has a different serial number, a new entry will be added to the inventory for
   that drug.
 - If none of the above conditions are met, the system will also add a new entry to the inventory.
 
