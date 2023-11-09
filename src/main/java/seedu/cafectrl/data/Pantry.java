@@ -133,12 +133,12 @@ public class Pantry {
     /**
      * Checks the availability of dishes based on ingredient stock.
      */
-    public void calculateDishAvailability(Menu menu) {
+    public void calculateDishAvailability(Menu menu, Order order) {
         int menuSize = menu.getSize();
         for (int i = 0; i < menuSize; i++) {
             Dish dish = menu.getDishFromId(i);
             ui.showToUser("Dish: " + dish.getName());
-            int numberOfDishes = calculateMaxDishes(dish, menu);
+            int numberOfDishes = calculateMaxDishes(dish, menu, order);
             ui.showDishAvailability(numberOfDishes);
             if (i != menuSize - 1) {
                 ui.printLine();
@@ -151,22 +151,27 @@ public class Pantry {
      *
      * @param dish The dish being ordered.
      */
-    public int calculateMaxDishes(Dish dish, Menu menu) {
+    public int calculateMaxDishes(Dish dish, Menu menu, Order order) {
         int maxNumofDish = Integer.MAX_VALUE;
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
         boolean restockHeaderDisplayed = false;
+        int dishQty = order.getQuantity();
 
         for (Ingredient dishIngredient : dishIngredients) {
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
-            if (!restockHeaderDisplayed && numOfDish == 0) {
+            if (!restockHeaderDisplayed && (numOfDish < dishQty)) {
                 ui.showToUser(Messages.RESTOCK_CORNER, Messages.RESTOCK_TITLE, Messages.RESTOCK_CORNER);
                 restockHeaderDisplayed = true;
             }
 
+            if (numOfDish < dishQty && !order.getIsComplete()) {
+                handleRestock(dishIngredient, dishQty);
+            }
+
             if (numOfDish == 0) {
-                handleRestock(dishIngredient);
+                handleRestock(dishIngredient, 1);
             }
         }
         return maxNumofDish;
@@ -194,13 +199,13 @@ public class Pantry {
      *
      * @param dishIngredient The ingredient for which restocking is needed.
      */
-    private void handleRestock(Ingredient dishIngredient) {
+    private void handleRestock(Ingredient dishIngredient, int dishQty) {
         String dishIngredientName = dishIngredient.getName();
         Ingredient stockIngredient = getIngredient(dishIngredient);
 
         int currentQuantity = (stockIngredient == null) ? 0 : stockIngredient.getQty();
         String unit = dishIngredient.getUnit();
-        int neededQuantity = dishIngredient.getQty();
+        int neededQuantity = dishIngredient.getQty() * dishQty;
         ui.showNeededRestock(dishIngredientName, currentQuantity, unit, neededQuantity);
     }
 

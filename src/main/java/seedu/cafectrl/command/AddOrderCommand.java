@@ -43,11 +43,11 @@ public class AddOrderCommand extends Command {
             orderList.addCost(order);
             String totalCost = dollarValue.format(order.getTotalOrderCost());
             ui.showOrderStatus(Messages.COMPLETE_ORDER, totalCost);
-            pantry.calculateDishAvailability(menu);
+            pantry.calculateDishAvailability(menu, order);
         } else {
             //pass in dish only and not entire menu
             Dish orderedDish = order.getOrderedDish();
-            pantry.calculateMaxDishes(orderedDish, menu);
+            pantry.calculateMaxDishes(orderedDish, menu, order);
             ui.showToUser(Messages.INCOMPLETE_ORDER);
         }
 
