@@ -154,16 +154,16 @@ public class Pantry {
     public int calculateMaxDishes(Dish dish, Menu menu, Order order) {
         int maxNumofDish = Integer.MAX_VALUE;
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
-        boolean restockHeaderDisplayed = false;
+        boolean isRestockHeaderDisplayed = false;
         int dishQty = order.getQuantity();
 
         for (Ingredient dishIngredient : dishIngredients) {
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
-            if (!restockHeaderDisplayed && (numOfDish < dishQty)) {
+            if (!isRestockHeaderDisplayed && (numOfDish < dishQty)) {
                 ui.showToUser(Messages.RESTOCK_CORNER, Messages.RESTOCK_TITLE, Messages.RESTOCK_CORNER);
-                restockHeaderDisplayed = true;
+                isRestockHeaderDisplayed = true;
             }
 
             if (numOfDish < dishQty && !order.getIsComplete()) {

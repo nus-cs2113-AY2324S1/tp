@@ -7,6 +7,7 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
@@ -56,16 +57,15 @@ class AddOrderCommandTest {
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
 
-        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. "
-                + "Bon appétit!"
-                + "-----------------------------------------------------"
-                + "Order is ready!"
+        String expectedOutput =  Messages.CHEF_MESSAGE
+                + Messages.LINE_STRING
+                + Messages.COMPLETE_ORDER
                 + "Total order cost: $5.00"
-                + "-----------------------------------------------------"
-                + "Listed below are the availability of the dishes for the next order!"
+                + Messages.LINE_STRING
+                + Messages.AVAILABLE_DISHES
                 + "Dish: chicken rice"
                 + "Available Dishes: 8"
-                + "-----------------------------------------------------"
+                + Messages.LINE_STRING
                 + "Dish: chicken curry"
                 + "Available Dishes: 4";
 
@@ -116,14 +116,13 @@ class AddOrderCommandTest {
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
 
-        String expectedOutput = "I'm busy crafting your selected dish in the virtual kitchen of your dreams. "
-                + "Bon appétit!"
-                + "+----------------------------------------+--------------+--------------+"
+        String expectedOutput = Messages.CHEF_MESSAGE
+                + Messages.RESTOCK_CORNER
                 + "| Restock                                | Current      | Needed       |"
-                + "+----------------------------------------+--------------+--------------+"
+                + Messages.RESTOCK_CORNER
                 + "| chicken                                | 1000g        | 2000g        |"
-                + "+----------------------------------------------------------------------+"
-                + "Please restock ingredients before preparing the order :) ";
+                + Messages.RESTOCK_END_CAP
+                + Messages.INCOMPLETE_ORDER;
 
 
         String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();

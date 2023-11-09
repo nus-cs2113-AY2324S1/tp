@@ -261,4 +261,8 @@ public class Ui {
     public void showNextDay() {
         showToUser(Messages.NEXT_DAY_COMMAND_MESSAGE);
     }
+
+    public void showDecodedInvalidDish(String dishName) {
+        showToUser(dishName + Messages.INVALID_DISH + dishName);
+    }
 }

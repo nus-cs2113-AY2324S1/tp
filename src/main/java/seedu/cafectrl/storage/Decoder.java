@@ -129,9 +129,7 @@ public class Decoder {
             boolean isComplete = "true".equals(orderData[4].trim());
             Dish dish = menu.getDishFromName(dishName);
             if(dish == null) {
-                ui.showToUser("oh no! " + dishName + " does not exist in our menu, "
-                        + "you might have tempered with the file and added in a non existing dish."
-                        , "don't worry, we will continue operations without " + dishName);
+                ui.showDecodedInvalidDish(dishName);
             } else {
                 Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
                 //increase size of orderLists if needed

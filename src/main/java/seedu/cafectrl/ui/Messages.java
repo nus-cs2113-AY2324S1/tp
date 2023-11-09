@@ -78,5 +78,9 @@ public class Messages {
     public static final String INGREDIENTS_END_CAP = "+-------------------------------------------------------+";
     public static final String INGREDIENTS_CORNER =  "+----------------------------------------+--------------+";
     public static final String INGREDIENTS_TITLE =   "| Ingredient                             + Quantity     +";
+    /** Messages for decoder **/
+    public static final String INVALID_DISH = " does not exist in our menu. \n"
+            + "You might have tempered with the file and added in a non existing dish.\n"
+            + "Don't worry :D , we will continue operations without ";
 
 }

@@ -19,7 +19,6 @@ public class ListIngredientCommand extends Command {
     protected Ui ui;
     protected Menu menu;
 
-
     public ListIngredientCommand(int listIndex, Menu menu, Ui ui) {
         this.index = listIndex;
         this.menu = menu;
