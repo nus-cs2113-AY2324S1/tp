@@ -424,7 +424,7 @@ public class Parser implements ParserUtil {
 
         if (!matcher.matches()) {
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS
-                    + ListSaleByDayCommand.MESSAGE_USAGE, ui);
+                    + ListIngredientCommand.MESSAGE_USAGE, ui);
         }
 
         try {
