@@ -60,7 +60,6 @@ public class IngredientParser {
 
         String ingredientName = ingredientDetails[0].strip();
         if (ingredientName.isEmpty()) {
-            // ingredient name cannot be empty
             System.out.println("Ingredient name should not be empty!");
             throw new EssenFormatException();
         }
