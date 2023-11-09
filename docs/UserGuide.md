@@ -151,6 +151,19 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
+### `achievement` - View your achieved goals
+The achievement can only be shown. Any modification except adding a new record is not allowed.
+
+Format: `achievement`
+
+Expected outcome:
+
+```
+Got it. I've added this task:
+[T][ ] read book
+Now you have 2 tasks in the list.
+```
+
 ### Exiting the program: `exit`
 Exits the program.
 
