@@ -66,7 +66,7 @@ public abstract class ReviewMode {
 
     protected void letUserRateReviewDifficulty(Scanner scanner,
                                                Flashcard flashcard) {
-        System.out.println("    How hard was it to remeber the back page of " +
+        System.out.println("    How hard was it to remember the back page of " +
                 "this flashcard?");
         System.out.println("    Press <E> if it was easy, <M> if it was " +
                 "moderately challenging or <H> if it was quite hard.");
