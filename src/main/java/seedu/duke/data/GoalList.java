@@ -162,7 +162,7 @@ public class GoalList extends ArrayList<Goal> {
      * Exception appears if the length of view goal command does not equal to 1
      * i.e. containing extra information
      * @param cmd Raw user command
-     * @throws IncorrectFormatException
+     * @throws IncorrectFormatException if user command format is incorrect.
      */
     public static void verifyViewGoalInput(String cmd) throws IncorrectFormatException {
         String[] cmdSplit = cmd.split(" ");
