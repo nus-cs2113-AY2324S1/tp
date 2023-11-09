@@ -4,6 +4,7 @@ import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
+import essenmakanan.ui.Ui;
 
 public class AddIngredientCommand extends Command {
     private String toAdd;
@@ -27,7 +28,14 @@ public class AddIngredientCommand extends Command {
             Ingredient newIngredient;
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredient);
-                ingredients.addIngredient(newIngredient);
+                if (this.ingredients.exist(newIngredient.getName())) {
+                    // if ingredient already exists, update the quantity
+                    this.ingredients.updateIngredient(newIngredient);
+                } else {
+                    // add new ingredient
+                    this.ingredients.addIngredient(newIngredient);
+                    Ui.printAddIngredientsSuccess(newIngredient.getName());
+                }
             } catch (EssenFormatException e) {
                 e.handleException();
             }
