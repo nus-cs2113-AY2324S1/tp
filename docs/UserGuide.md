@@ -30,7 +30,6 @@ Display |    Name     |             Github Profile             | Portfolio | PPP
 ![](https://via.placeholder.com/100.png?text=Photo) |  Jiayan Tian   |     [Github](https://github.com/j-y-yan)      | [Portfolio](docs/team/johndoe.md)
 
 
-
 ## Command Type
 
 ### `help` - Viewing help
