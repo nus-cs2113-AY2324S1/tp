@@ -5,7 +5,9 @@ import essenmakanan.exception.EssenInvalidEnumException;
 import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
+import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.IngredientParser;
+import essenmakanan.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,23 +27,31 @@ public class IngredientStorage {
         dataPath = path;
     }
 
-    public void saveData(ArrayList<Ingredient> ingredients) throws IOException  {
-        FileWriter writer = new FileWriter(dataPath, false);
-        String dataString;
+    public void saveData(ArrayList<Ingredient> ingredients) {
+        try {
+            FileWriter writer = new FileWriter(dataPath, false);
+            String dataString;
 
-        for (Ingredient ingredient: ingredients) {
-            dataString = IngredientParser.convertToString(ingredient);
-            writer.write(dataString);
-            writer.write(System.lineSeparator());
+            EssenLogger.logInfo("Transferring ingredient data");
+            for (Ingredient ingredient : ingredients) {
+                dataString = IngredientParser.convertToString(ingredient);
+                writer.write(dataString);
+                writer.write(System.lineSeparator());
+            }
+
+            writer.close();
+            EssenLogger.logInfo("Ingredient data has been successfully saved");
+        } catch (IOException exception) {
+            Ui.handleIOException(exception);
+            //logger.log(Level.SEVERE, "Unable to save ingredient data", exception);
         }
-
-        writer.close();
     }
 
     private void createNewData(Scanner scan) {
         String dataString = scan.nextLine();
         String[] parsedIngredient = dataString.trim().split(" \\| ");
 
+        EssenLogger.logInfo("Retrieving ingredient data");
         try {
             if (parsedIngredient.length != 3 || parsedIngredient[1].isBlank()) {
                 throw new EssenStorageFormatException();
@@ -54,9 +64,13 @@ public class IngredientStorage {
             ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
+            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid format", exception);
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
+            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid enum", exception);
         }
+        EssenLogger.logInfo("Saved ingredient data has been received");
+
     }
 
     public ArrayList<Ingredient> restoreSavedData() throws EssenFileNotFoundException {
@@ -67,6 +81,7 @@ public class IngredientStorage {
                 createNewData(scan);
             }
         } catch (FileNotFoundException exception) {
+            //logger.log(Level.WARNING, "Text file not found");
             throw new EssenFileNotFoundException();
         }
 
