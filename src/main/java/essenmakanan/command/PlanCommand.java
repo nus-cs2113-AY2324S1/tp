@@ -29,6 +29,9 @@ public class PlanCommand extends Command {
         this.missingIngredients = new IngredientList();
     }
 
+    /**
+     * Compare ingredients in inventory and ingredients needed for all
+     */
     public void getMissingIngredients() {
         String ingredientName;
         Ingredient ingredientAvailable;

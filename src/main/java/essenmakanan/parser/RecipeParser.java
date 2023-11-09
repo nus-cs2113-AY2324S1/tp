@@ -38,6 +38,14 @@ public class RecipeParser {
         return index;
     }
 
+    /**
+     * Get a RecipeList with recipes from a recipe ID list
+     *
+     * @param recipeIdList a list of ids of recipes
+     * @param recipes all recipes the user has
+     * @return RecipeList containing of all recipes that correspond to the index in the recipe ID list
+     * @throws EssenOutOfRangeException when the ID in recipe ID list is invalid
+     */
     public static RecipeList getRecipes(int[] recipeIdList, RecipeList recipes) throws EssenOutOfRangeException {
         RecipeList allRecipes = new RecipeList();
         for (int id : recipeIdList) {
@@ -135,18 +143,6 @@ public class RecipeParser {
             throw new EssenFormatException();
         }
     }
-
-    public static boolean isValidRecipes(int[] recipeIdList, RecipeList recipes) {
-        Recipe recipe;
-        for (int recipeId : recipeIdList) {
-            if (! recipes.recipeExist(recipeId)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
 
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
             throws EssenException {
