@@ -17,7 +17,11 @@ public class ListCommand extends Command {
     public static final String NAME = "list";
 
     public static final String USAGE =
-            "list [income/expense]";
+            "list [income/expense/recurring]";
+
+    public static final String EXAMPLE =
+            "list" + "\n" +
+            "list recurring";
     protected CashflowCategory category = null;
 
     public ListCommand(RawCommand rawCommand) throws IllegalArgumentException {

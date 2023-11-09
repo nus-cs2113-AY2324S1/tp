@@ -17,6 +17,8 @@ public class BalanceCommand extends Command {
 
     public static final String USAGE =
             "balance";
+    public static final String EXAMPLE =
+            "balance";
     private final Ui ui = Ui.getInstance();
 
     public BalanceCommand(RawCommand rawCommand) {

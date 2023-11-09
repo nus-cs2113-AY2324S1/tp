@@ -19,6 +19,16 @@ import java.util.logging.Logger;
  */
 @SuppressWarnings("unused")
 public class VisCommand extends Command {
+
+    public static final String NAME = "vis";
+
+    public static final String USAGE =
+            "vis </t TYPE> </c pie/bar/radar>";
+
+    public static final String EXAMPLE =
+            "vis /t expense /c pie" + "\n" +
+            "vis /t income /c bar";
+
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private String type;
     private String chart;

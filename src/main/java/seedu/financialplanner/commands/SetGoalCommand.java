@@ -11,7 +11,9 @@ public class SetGoalCommand extends Command {
     public static final String NAME = "set";
 
     public static final String USAGE =
-            "set </g AMOUNT> </l LABEL>";
+            "set goal </g AMOUNT> </l LABEL>";
+    public static final String EXAMPLE =
+            "set goal /g 5000 /l car";
     private final String label;
     private final int amount;
 

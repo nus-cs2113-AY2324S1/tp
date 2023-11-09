@@ -11,7 +11,10 @@ import java.util.ArrayList;
 public class HelpCommand extends Command {
     public static final String NAME = "help";
 
-    public static final String USAGE = "help";
+    public static final String USAGE = "help [COMMAND]";
+    public static final String EXAMPLE =
+            "help" + "\n" +
+            "help budget";
 
     private static final String HELP_MESSAGE_GENERAL =
             "<> denotes required arguments, [] denotes optional arguments";
@@ -48,15 +51,21 @@ public class HelpCommand extends Command {
             ui.showMessage(DELIMITER);
             for (String name : commandManager.getCommandNames()) {
                 String usage = commandManager.getCommandUsage(name);
+                String example = commandManager.getCommandExample(name);
                 ui.showMessage("Usage of " + name + ":");
                 ui.showMessage(usage);
+                ui.showMessage("Example usage of " + name + ":");
+                ui.showMessage(example);
                 ui.showMessage(DELIMITER);
             }
             return;
         }
-        String commandUsage = CommandManager.getInstance().getCommandUsage(commandName.toLowerCase());
+        String commandUsage = commandManager.getCommandUsage(commandName.toLowerCase());
+        String commandExample = commandManager.getCommandExample(commandName.toLowerCase());
         ui.showMessage(HELP_MESSAGE_GENERAL);
         ui.showMessage("Usage of " + commandName.toLowerCase() + ":");
         ui.showMessage(commandUsage);
+        ui.showMessage("Example usage of " + commandName.toLowerCase() + ":");
+        ui.showMessage(commandExample);
     }
 }

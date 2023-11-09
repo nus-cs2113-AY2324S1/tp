@@ -12,6 +12,9 @@ public class AddReminderCommand extends Command {
 
     public static final String USAGE =
             "addreminder </t TYPE> </d DATE>";
+
+    public static final String EXAMPLE =
+            "addreminder /t debt /d 2023.12.11";
     private final String type;
     private final String date;
 

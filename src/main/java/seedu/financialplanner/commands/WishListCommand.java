@@ -9,7 +9,8 @@ import seedu.financialplanner.utils.Ui;
 public class WishListCommand extends Command {
     public static final String NAME = "wishlist";
 
-    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
+    public static final String USAGE = "wishlist";
+    public static final String EXAMPLE = "wishlist";
 
     public WishListCommand(RawCommand rawCommand) throws IllegalArgumentException {
 

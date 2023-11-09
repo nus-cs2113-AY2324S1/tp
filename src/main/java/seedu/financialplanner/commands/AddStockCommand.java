@@ -16,6 +16,13 @@ import java.util.logging.Logger;
  */
 @SuppressWarnings("unused")
 public class AddStockCommand extends Command {
+
+    public static final String NAME = "addstock";
+
+    public static final String USAGE =
+            "addstock </s STOCK CODE>";
+    public static final String EXAMPLE =
+            "addstock /s META";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;
 

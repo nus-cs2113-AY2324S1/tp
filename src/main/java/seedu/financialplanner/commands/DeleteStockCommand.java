@@ -16,6 +16,15 @@ import java.util.logging.Logger;
  */
 @SuppressWarnings("unused")
 public class DeleteStockCommand extends Command {
+
+
+    public static final String NAME = "deletestock";
+
+    public static final String USAGE =
+            "deletestock </s STOCK CODE>";
+    public static final String EXAMPLE =
+            "deletestock /s META";
+
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final String stockCode;
 

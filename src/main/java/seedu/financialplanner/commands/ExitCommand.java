@@ -14,6 +14,8 @@ public class ExitCommand extends Command {
 
     public static final String USAGE =
             "exit";
+    public static final String EXAMPLE =
+            "exit";
 
     public ExitCommand(RawCommand rawCommand) {
         if (!rawCommand.extraArgs.isEmpty()) {

@@ -12,7 +12,8 @@ import seedu.financialplanner.utils.Ui;
 public class MarkGoalCommand extends Command {
     public static final String NAME = "markgoal";
 
-    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
+    public static final String USAGE = "markgoal <INDEX>";
+    public static final String EXAMPLE = "markgoal 1";
     private final int index;
 
     public MarkGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {

@@ -13,7 +13,8 @@ import java.util.logging.Logger;
 public class DeleteGoalCommand extends Command {
     public static final String NAME = "deletegoal";
 
-    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
+    public static final String USAGE = "deletegoal <INDEX>";
+    public static final String EXAMPLE = "deletegoal 1";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
 

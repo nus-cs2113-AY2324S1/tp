@@ -16,6 +16,13 @@ import java.util.logging.Logger;
  */
 @SuppressWarnings("unused")
 public class WatchListCommand extends Command {
+
+    public static final String NAME = "watchlist";
+
+    public static final String USAGE =
+            "watchlist";
+    public static final String EXAMPLE =
+            "watchlist";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
     /**

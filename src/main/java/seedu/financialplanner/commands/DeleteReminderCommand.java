@@ -13,7 +13,8 @@ import java.util.logging.Logger;
 public class DeleteReminderCommand extends Command {
     public static final String NAME = "deletereminder";
 
-    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
+    public static final String USAGE = "deletereminder <INDEX>";
+    public static final String EXAMPLE = "deletereminder 1";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
 

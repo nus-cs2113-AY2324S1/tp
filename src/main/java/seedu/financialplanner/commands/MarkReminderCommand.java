@@ -9,7 +9,8 @@ import seedu.financialplanner.utils.Ui;
 public class MarkReminderCommand extends Command {
     public static final String NAME = "markreminder";
 
-    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
+    public static final String USAGE = "markreminder <INDEX>";
+    public static final String EXAMPLE = "markreminder 1";
     private final int index;
 
     public MarkReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {

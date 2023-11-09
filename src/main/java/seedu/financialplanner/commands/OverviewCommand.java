@@ -19,6 +19,13 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("unused")
 public class OverviewCommand extends Command {
+    public static final String NAME = "overview";
+
+    public static final String USAGE =
+            "overview";
+
+    public static final String EXAMPLE =
+            "overview";
     private static final CashflowList cashflowList = CashflowList.getInstance();
 
     public OverviewCommand(RawCommand rawCommand) {

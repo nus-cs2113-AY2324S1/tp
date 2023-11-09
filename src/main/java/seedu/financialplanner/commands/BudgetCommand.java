@@ -19,11 +19,14 @@ public class BudgetCommand extends Command {
     public static final String NAME = "budget";
 
     public static final String USAGE =
-            "budget set </b BUDGET>"
-            + "\n" + "budget update </b BUDGET>"
-            + "\n" + "budget delete"
-            + "\n" + "budget reset"
-            + "\n" + "budget view";
+            "budget set </b BUDGET>" + "\n" +
+            "budget update </b BUDGET>" + "\n" +
+            "budget delete" + "\n" +
+            "budget reset" + "\n" +
+            "budget view";
+    public static final String EXAMPLE =
+            "budget set /b 500" + "\n" +
+            "budget reset";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final Ui ui = Ui.getInstance();
     private double budget;

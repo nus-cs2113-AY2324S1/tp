@@ -9,7 +9,8 @@ import seedu.financialplanner.utils.Ui;
 public class ReminderListCommand extends Command {
     public static final String NAME = "reminderlist";
 
-    public static final String USAGE = "UNDONE, PLEASE FILL THIS UP!";
+    public static final String USAGE = "reminderlist";
+    public static final String EXAMPLE = "reminderlist";
 
     public ReminderListCommand(RawCommand rawCommand) throws IllegalArgumentException {
 

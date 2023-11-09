@@ -13,6 +13,8 @@ public class CommandManager {
 
     public static final String COMMAND_CLASS_USAGE_FIELD_NAME = "USAGE";
 
+    public static final String COMMAND_CLASS_EXAMPLE_FIELD_NAME = "EXAMPLE";
+
     public static final String COMMAND_CLASS_NAME_FIELD_NAME = "NAME";
     private static final String COMMAND_PACKAGE_NAME = "seedu.financialplanner.commands";
 
@@ -60,10 +62,30 @@ public class CommandManager {
         }
     }
 
+
     @SuppressWarnings("unused")
     public String getCommandUsage(String commandName) throws NoSuchElementException {
         try {
             return getCommandUsage(getCommandClass(commandName));
+        } catch (Exception e) {
+            throw new NoSuchElementException(e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public String getCommandExample(Class<? extends Command> commandClass) throws NoSuchElementException {
+        try {
+            Field exampleField = commandClass.getField(COMMAND_CLASS_EXAMPLE_FIELD_NAME);
+            return (String) exampleField.get(null);
+        } catch (ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+            throw new IllegalArgumentException("Cannot get command example. Is there a bug?");
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public String getCommandExample(String commandName) {
+        try {
+            return getCommandExample(getCommandClass(commandName));
         } catch (Exception e) {
             throw new NoSuchElementException(e.getMessage());
         }
