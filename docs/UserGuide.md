@@ -115,7 +115,7 @@ Exits the program.
 
 Format: `exit`
 
-## FAQ
+## FAQs
 
 **Q**: How do I transfer my data to another computer? 
 
