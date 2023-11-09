@@ -49,6 +49,17 @@ public class GoalList extends ArrayList<Goal> {
         return TextUi.deleteGoalMsg(targetGoal) + TextUi.noOfGoalMsg(Duke.goals.goalCount);
     }
 
+    public static String achieveGoal(String cmd) throws IncorrectFormatException, NumberFormatException {
+        verifyAchieveGoalInput(cmd);
+        String[] cmdSplit = cmd.split(" ");
+        int index = Integer.parseInt(cmdSplit[1]);
+        Goal achievedGoal = Duke.goals.remove(index);
+        Duke.goals.goalCount--;
+        Duke.achievedGoals.add(achievedGoal);
+        return "Congratulation! You have achieved one goal!\n"
+                + "[Finished]" + achievedGoal + "✔✔✔";
+    }
+
     /**
      * Begins to format user input by change to small letter, remove leading and
      * checks if the user Input is valid by:
@@ -85,13 +96,12 @@ public class GoalList extends ArrayList<Goal> {
      * Possible exceptions:
      * 1. Missing target index or index is invalid, includes wrong range or even not a number
      * 2. Command length not equals to 2
-     * 3. Command not start with 'deleteg'
      * @param cmd Raw User Command
      * @throws IncorrectFormatException if the input command is in incorrect format,
      */
     private static void verifyDeleteGoalInput(String cmd) throws IncorrectFormatException, NumberFormatException {
         String[] cmdSplit = cmd.split(" ");
-        if (cmdSplit.length == 1 && cmdSplit[0].equals("deleteq")) {
+        if (cmdSplit.length == 1) {
             throw new IncorrectFormatException("Oops! Please provide the target index.");
         }
 
@@ -99,11 +109,29 @@ public class GoalList extends ArrayList<Goal> {
             throw new IncorrectFormatException("Oops! Wrong format of delete goal instruction.");
         }
 
-        if (!cmdSplit[0].equals(DELETEGOALKEYWORD) ) {
-            throw new IncorrectFormatException("Sorry. Please starts with [deleteG]");
+        int index = Integer.parseInt(cmdSplit[1]); //throws number format exception if not a number string
+        if (index <= 0 || index > Duke.goals.goalCount){
+            throw new IllegalValueException("Please input a valid index by referring to your goals list.");
+        }
+    }
+
+    /**
+     * This method is similar to verifyDeleteGoalInput method as the input of each command is similar
+     * @param cmd Raw User Command
+     * @throws IncorrectFormatException Either missing the target index or command contains more than 2 words
+     * @throws NumberFormatException if an invalid number string is input, e.g. achieve one
+     */
+    private static void verifyAchieveGoalInput(String cmd) throws IncorrectFormatException, NumberFormatException {
+        String[] cmdSplit = cmd.split(" ");
+        if (cmdSplit.length == 1) {
+            throw new IncorrectFormatException("Oops! Please tell me the target index.");
         }
 
-        int index = Integer.parseInt(cmdSplit[1]); //throws number exception if not a number string
+        if (cmdSplit.length != 2) {
+            throw new IncorrectFormatException("Oops! Wrong format of achieve goal instruction.");
+        }
+
+        int index = Integer.parseInt(cmdSplit[1]); //throws number format exception if not a number string
         if (index <= 0 || index > Duke.goals.goalCount){
             throw new IllegalValueException("Please input a valid index by referring to your goals list.");
         }
