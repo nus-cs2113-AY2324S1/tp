@@ -26,7 +26,7 @@ level-3
 
 ## Overall Architecture
 The execution of the QuizHub application will concern 6 main components which
-are the `QuizHub`, `Ui`, `Parser`, `Command`, `Storage` and `UtilityClasses` packages.
+are the `QuizHub`, `Ui`, `Parser`, `Commands`, `Storage` and `UtilityClasses` packages.
 
 ![](UML/Images/overallArchitecture.png)
 
@@ -123,8 +123,7 @@ design as we see a strong need of having a hierarchical command structure for ou
 
 Our final design  seeks to optimise both user experience and program effectiveness.
 We have hence chosen the following general syntax for commands to be input into the `Parser`.
-All commands require a starting commandType, but some commands do not require the subsequent arguments and payloads. One
-example is the `list` command.
+All commands require a starting commandType, but some commands do not require the subsequent arguments and payloads. 
 
 ```
 commandType [payload] [/argument1 [payload1] /argument2 [payload2] ... ]
@@ -166,13 +165,13 @@ parsing invalid commands. <br/><br/>
 Methods of this type are helper methods created to assist in extracting payloads in the user input. They are used in 
 the construction of `Command` objects when command-specific information need to be extracted from the arguments.
 
-Depending on the segment of user input they are extracting information from, these methods break up an entire 
-```commandType [payload] [/argument1 [payload1] /argument2 [payload2] ... ]``` String into segments and zone in
-on a specific segment to find the information they are looking for.
+These methods break up an entire ```commandType [payload] [/argument1 [payload1] /argument2 [payload2] ... ]``` String 
+into segments and depending on the segment of user input they are extracting information from, zone in on a 
+specific segment to find the information they are looking for.
 
 `handle` methods
 
-Methods of this type are helper methods created to handle any exceptions that can arise during nay stage of parsing.
+Methods of this type are helper methods created to handle any exceptions that can arise during any stage of parsing.
 Typically, there is one `handle` method for every `extract` method, designed to catch exceptions raised during the
 extraction of information from each segment of the user input.
 
