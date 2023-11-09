@@ -85,6 +85,12 @@ public class Ui {
         drawDivider();
     }
 
+    public static void printUpdateIngredientsSuccess(String name, Double existingQuantity, Double quantityToAdd) {
+        System.out.println("Ingredient: " + name + " has been successfully updated from: " + existingQuantity
+                + " to: " + (existingQuantity + quantityToAdd));
+        drawDivider();
+    }
+
     public static void printAllIngredients(IngredientList ingredients) {
         System.out.println("Here's a list of your ingredients!");
         ingredients.listIngredients();
