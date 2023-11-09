@@ -26,7 +26,7 @@ public class ListSaleByDayCommand extends Command {
 
     @Override
     public void execute() {
-        try{
+        try {
             sales.printSaleByDay(ui, menu, day);
         } catch (Exception e) {
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
