@@ -1,4 +1,4 @@
-//@@ kherlenbayasgalan
+//@@author kherlenbayasgalan
 
 package seedu.duke.calendar.command;
 
@@ -58,7 +58,7 @@ public class AddEventCommand extends EventCommand {
             String userInput = scanner.nextLine();
             try {
                 // checks if the acceptable format is given by the user to prevent program crash
-                return LocalDateTime.parse(userInput, DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss"));
+                return LocalDateTime.parse(userInput);
             } catch (DateTimeParseException e) {
                 System.out.println("    Invalid date and time format. Please try again.");
             }

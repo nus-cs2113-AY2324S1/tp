@@ -27,8 +27,8 @@ public class Event {
     }
 
     // getFrom is used for getting the start time of an Event.
-    public LocalDateTime getFrom() {
-        return from;
+    public String getFrom() {
+        return from.toString();
     }
 
     // setFrom is used for setting the start time of an Event.
@@ -37,8 +37,8 @@ public class Event {
     }
 
     // getFrom is used for getting the end time of an Event.
-    public LocalDateTime getTo() {
-        return to;
+    public String getTo() {
+        return to.toString();
     }
 
     // setFrom is used for setting the end time of an Event.

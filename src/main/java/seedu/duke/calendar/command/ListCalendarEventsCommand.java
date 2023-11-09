@@ -25,7 +25,7 @@ public class ListCalendarEventsCommand extends EventCommand{
             printLine();
 
             int count = 0;
-            for (Event event : eventList.getEvent()) {
+            for (Event event : eventList.getEvents()) {
                 System.out.println((++count) + ". " + event);
                 printLine();
             }
