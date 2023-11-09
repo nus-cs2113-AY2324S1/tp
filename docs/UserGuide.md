@@ -162,7 +162,7 @@ Format: `exit`
 
 **A**: It is not suggested to transfer data between machines. The purpose of the app is developed solely for personal use. Nonetheless, you can copy the folder named `data` that is created in the same directory (location) as where you are running the application into your new computer to restore your data.
 
-**Q2**: Can I edit the data inside my list? e.g. the inserted goal in the goal list
+**Q2**: Can I edit the data inside my list? e.g. change the calories consumption targets in the goal list
 
 **A**: Sorry but we do not support the function to edit a list directly. But you can remove a unwanted data from a list and insert a new data again.
 
