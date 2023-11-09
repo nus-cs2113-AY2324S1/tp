@@ -8,7 +8,6 @@ import seedu.duke.commands.logcommands.LogCommand;
 import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.commands.logcommands.UpdateLogCommand;
 import seedu.duke.commands.logcommands.DeleteLogCommand;
-import seedu.duke.data.Goal;
 
 /**
  * Shows help instructions.
