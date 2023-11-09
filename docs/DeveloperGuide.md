@@ -354,8 +354,8 @@ Our financial planner application can help individuals manage their finances eff
 goals. The purpose of such an application is to provide users with a range of tools and features to help them better 
 understand their financial situation. This will enable them to make more informed decisions, and plan for their future 
 financial well-being. The application will allow the user to keep track of their income, expenses and overall balance.
-It also lets user view their income and expenses using visualization tool to have a better view of their cash flow based
-on categories.  It also allows the user to set the budget for the month. It also allows users to add their financial
+It also lets the user view their income and expenses using visualization tool to have a better view of their cash flow 
+based on categories.  It also allows the user to set the budget for the month. It also allows users to add their financial
 goals to the wishlist. Furthermore, it allows users to track the stock market if they have interest in investing in 
 equities. 
 
@@ -406,8 +406,22 @@ equities.
 
 * *Cashflow* - Refers to an income or expense.
 * *WishList* - A list containing goals/targets.
-* *Watchlist* - a list of stocks that the financial planner is currently tracking
+* *Watchlist* - A list of stocks that the financial planner is currently tracking
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually
+
+- Note: These instructions only provide a starting point for testers to work on
+
+### Launch and shutdown 
+
+1. Initial Launch
+   1. Download the jar file and copy into an empty folder
+   2. Open up the terminal and run java -jar tp.jar Expected: 
+shows you the welcome screen for the financial planner app
+2. Closing the application
+   1. Type `exit` into the terminal. 
+   2. Expected: the financial planner will exit with a goodbye message.
+Under the data newly created data directory, a watchlist.json and a data.txt file will be created
+
