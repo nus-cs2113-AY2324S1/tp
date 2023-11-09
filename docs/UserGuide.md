@@ -106,7 +106,7 @@ Format: `viewG`
 Example:
 
 ### `deleteG` - Delete a goal from current goal list
-Remove a undersired goal from the goal list. Note that it is not encouraged to remove a goal from the goal list, unless the inserted goal has error or impossible to be accomplished.
+Remove a undersired goal from the goal list. Note that it is not encouraged to remove a goal from the goal list, unless the inserted goal contains errors or is near impossible to be accomplished.
 
 Format: `deleteG Index`
 
