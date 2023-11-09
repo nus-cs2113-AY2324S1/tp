@@ -1,5 +1,6 @@
-!include Style.puml
 @startuml
+!include Style.puml
+
 title After Command "short qn1/ans1/cs2113/easy"
 
 object "__:QuestionList__" as QuestionList

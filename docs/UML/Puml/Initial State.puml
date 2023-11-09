@@ -1,5 +1,5 @@
-!include Style.puml
 @startuml
+!include Style.puml
 title Initial State
 
 object ":QuestionList" as QuestionList

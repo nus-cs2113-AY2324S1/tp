@@ -1,6 +1,6 @@
 @startuml
-!theme plain
-hide footbox
+!include Style.puml
+
 title Generalised Command Sequence Diagram
 
 actor User

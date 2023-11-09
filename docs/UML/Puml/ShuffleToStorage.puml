@@ -1,6 +1,5 @@
 @startuml
-!theme plain
-hide circle
+!include style.puml
 title Shuffle to Storage Flow
 
 class QuestionList {

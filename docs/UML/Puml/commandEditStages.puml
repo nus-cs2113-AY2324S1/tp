@@ -1,5 +1,6 @@
 @startuml
-!theme plain
+!include Style.puml
+
 title Command Edit Flow
 start
 

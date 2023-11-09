@@ -1,5 +1,6 @@
-!include Style.puml
 @startuml
+!include Style.puml
+
 title After Command "delete 1"
 
 object "__:QuestionList__" as QuestionList

@@ -1,5 +1,5 @@
 @startuml
-!theme plain
+!include Style.puml
 class CommandMarkDifficulty {
   - qnIndex: int
   - qnDifficulty: Question.QnDifficulty

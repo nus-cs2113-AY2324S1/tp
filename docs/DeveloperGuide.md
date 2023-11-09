@@ -170,7 +170,7 @@ exception will be thrown and handled by printing an error message to the CLI.
 The following is a detailed sequence diagram demonstrating how commands are parsed. 
 This may differ slightly for different commands.
 
-![](./UML/Commands/commandOverview.png)
+![](UML/Images/commandOverview.png)
 
 Essentially, the parser will create and return a Command object with appropriate 
 arguments to QuizHub, where it will be executed. When the Command executes, it 
@@ -206,13 +206,13 @@ to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
-![](./UML/Commands/commandAddState.png)
+![](UML/Images/commandAddState.png)
 
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
 // TODO: Complete description for MCQ
 
-![](./UML/Commands/commandMCQ.png)
+![](UML/Images/commandMCQ.png)
 
 ### List Command - Show all Questions with Index
 
@@ -235,7 +235,7 @@ the index refers to a valid question, failing which it will return an error mess
 Otherwise, it will then invoke the QuestionList.deleteQuestionByIndex method to remove
 the question from the QuestionList. 
 
-![](./UML/Commands/commandDeleteQuestion.png)
+![](UML/Images/commandDeleteQuestion.png)
 
 Afterward, the storage is updated to reflect the newest QuestionList.
 
@@ -292,9 +292,9 @@ involves invoking methods in the QuestionList and Question classes to update the
 - **Error Handling**: Handle any exceptions or errors that may occur during the edit operation and provide appropriate 
 feedback to the user.
 
-![commandEditObjectDiagram.png](./UML/Commands/commandEditObjectDiagram.png)
-![commandEditObjectDiagram2.png](./UML/Commands/commandEditObjectDiagram2.png)
-![commandEditObjectDiagram3.png](./UML/Commands/commandEditObjectDiagram3.png)
+![commandEditObjectDiagram.png](UML/Images/commandEditObjectDiagram.png)
+![commandEditObjectDiagram2.png](UML/Images/commandEditObjectDiagram2.png)
+![commandEditObjectDiagram3.png](UML/Images/commandEditObjectDiagram3.png)
 
 ### Start Command - Start Quiz
 
@@ -306,7 +306,7 @@ to quiz themselves on alongside whether to randomize the questions or use their 
 
 #### Sequence Diagram of Start Command
 
-![commandStartLoop.png](./UML/Commands/commandStartLoop.png)
+![commandStartLoop.png](UML/Images/commandStartLoop.png)
 
 #### Implementation of Start Command
 
