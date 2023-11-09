@@ -104,7 +104,7 @@ whose exercises you want to view, or `month MONTH day DAY` where MONTH is the sa
 day of the month whose exercises you want to view.
 
 ### `set on` - Setting up a calorie goal
-Set up a calories goal to achieve.
+Set up a calorie goal to achieve. The goal are expected to help user accomplish a particular amount of calorie consumption before a **deadline**.
 
 Format: `set AMOUNT on Date`
 
