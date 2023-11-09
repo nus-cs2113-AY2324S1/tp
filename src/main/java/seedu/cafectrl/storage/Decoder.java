@@ -9,6 +9,7 @@ import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -121,26 +122,32 @@ public class Decoder {
         }
         //for each 'order' in text file
         for (String line : textLines) {
-            String[] orderData = line.split(DIVIDER);
-            int day = Integer.parseInt(orderData[0].trim()) - 1;
-            String dishName = orderData[1].trim();
-            if (dishName.equals(Encoder.NULL_ORDER_DAY)) {
+            try {
+                String[] orderData = line.split(DIVIDER);
+                int day = Integer.parseInt(orderData[0].trim()) - 1;
+                String dishName = orderData[1].trim();
+                if (dishName.equals(Encoder.NULL_ORDER_DAY)) {
+                    orderLists = fillOrderListSize(orderLists, day);
+                    continue;
+                }
+                int quantity = Integer.parseInt(orderData[2].trim());
+                float totalOrderCost = Float.parseFloat(orderData[3].trim());
+                boolean isComplete = "true".equals(orderData[4].trim());
+                Dish dish = menu.getDishFromName(dishName);
+                if (dish == null) {
+                    ui.showDecodedInvalidDish(dishName);
+                    continue;
+                }
+                Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
+                //increase size of orderLists if needed
+                //this can be used in the event that the text file's first order is not day 0
                 orderLists = fillOrderListSize(orderLists, day);
-                continue;
+                orderLists.get(day).addOrder(orderedDish);
+            } catch (IndexOutOfBoundsException e) {
+                ui.showToUser(Messages.SALES_LAST_DAY_TEXT_TAMPERED, System.lineSeparator());
+            } catch (NumberFormatException e) {
+                ui.showToUser(Messages.SALES_ORDER_TEXT_TAMPERED, System.lineSeparator());
             }
-            int quantity = Integer.parseInt(orderData[2].trim());
-            float totalOrderCost = Float.parseFloat(orderData[3].trim());
-            boolean isComplete = "true".equals(orderData[4].trim());
-            Dish dish = menu.getDishFromName(dishName);
-            if (dish == null) {
-                ui.showDecodedInvalidDish(dishName);
-                continue;
-            }
-            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
-            //increase size of orderLists if needed
-            //this can be used in the event that the text file's first order is not day 0
-            orderLists = fillOrderListSize(orderLists, day);
-            orderLists.get(day).addOrder(orderedDish);
         }
         return new Sales(orderLists);
     }
