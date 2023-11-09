@@ -1,5 +1,5 @@
 @startuml
-!theme plain
+!include Style.puml
 
 title Mark Difficulty Sequence Diagram
 actor User

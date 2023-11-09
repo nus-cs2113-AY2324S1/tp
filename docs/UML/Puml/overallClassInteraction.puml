@@ -1,0 +1,52 @@
+@startuml
+!include Style.puml
+
+class QuizHub {
+    - FILE_PATH: String
+    + QuizHub (filePath: String)
+    + Run()
+}
+
+class Parser {
+    + Parser(questions: QuestionList)
+    + {static} parseCommand(rawUserInput: String)
+    - {static} parseMCQCommand(userInput: String)
+    - {static} parseShortAnswerCommand(userInput: String)
+    - {static} parseStartCommand(userInput: String)
+    - {static} parseEditCommand(userInput: String)
+    - {static} parseDeleteCommand(userInput: String)
+    - {static} parseFindCommand(userInput: String)
+    - {static} parseMarkDiffCommand(userInput: String)
+}
+
+class Ui {
+    + Ui(dataStorage: Storage, questions: QuestionList)
+
+}
+
+class Storage {
+    - dataFile: File
+    + Storage(filePath: String)
+}
+
+class QuestionList {
+  - allQns: ArrayList<Question>
+  + addShortAnswerQn(question: Question)
+  + addMultipleChoiceQn(question: Question)
+  + shuffleQuestions()
+  + saveToFile()
+  + loadFromFile()
+  + startQuiz()
+}
+
+QuizHub --> Parser
+QuizHub --> Ui
+QuizHub --> Storage
+QuizHub --> QuestionList
+
+Ui --> QuestionList
+Ui --> Storage
+
+Parser --> QuestionList
+
+@enduml

@@ -1,5 +1,5 @@
 @startuml
-!theme plain
+!include Style.puml
 title Command Exit Sequence Diagram
 
 actor User
