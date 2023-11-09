@@ -411,6 +411,8 @@ public class QuestionList {
                 ui.displayMessage("    Wrong!");
                 ui.displayCorrectAnswer(question);
             }
+
+            ui.displayMessage("    Current Score: " + correctAnswersCount + "/" + totalQuestions);
         }
 
         ui.displayFinalScore(correctAnswersCount, totalQuestions);
@@ -429,7 +431,7 @@ public class QuestionList {
         String userAnswer;
         String isValidAnswer;
         do {
-            ui.displayMessageSameLine("  Your Answer: ");
+            ui.displayMessageSameLine("    Your Answer: ");
             userAnswer = ui.getUserInput().strip();
             if (userAnswer.equalsIgnoreCase(CommandStart.EXIT_QUIZ_KEYWORD)) {
                 return userAnswer;

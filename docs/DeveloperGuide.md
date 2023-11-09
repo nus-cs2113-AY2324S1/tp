@@ -343,10 +343,51 @@ user input fields. The command is structured as follows:
 - To terminate the quiz prematurely, users can input `\exitquiz` when prompted with "Your Answer: "
   - Do utilise the backslash \ before exitquiz
 
-#### Quiz Execution of Start Command
-The quiz begins with the invocation of startQuiz() from quizhub.questionlist.QuestionList. The method iterates through the 
-list of totalQuestions, concealing the answers from view. The user submits their answers through the CLI, which are then checked 
-against the correct answers, providing immediate feedback and updating the score. The quiz terminates once all questions are addressed, and the final score is presented.
+#### Operational Flow of Start Command
+
+1. **Command Invocation:**
+    - The user inputs the `start` command with the necessary options (`[quiz mode]`, `[start details]`, `[qn mode]`, `[qn type]`) into the CLI.
+
+2. **Quiz Mode Processing:**
+    - The `CommandStart` class receives the input and identifies the `[quiz mode]`:
+        - If `/module` is specified, followed by a module name, it fetches questions for that module using `categoriseListByModules`.
+        - If `/all` is specified, it retrieves all questions using `getAllQns()`.
+
+3. **Start Details Handling:**
+    - The `[start details]` provides additional specificity for the `/module`, identifying the exact category of questions to be used.
+
+4. **Question Mode Configuration:**
+    - The command processes the `[qn mode]`:
+        - `/random` applies a random shuffle to the questions using `java.util.Collections.shuffle`.
+        - `/normal` retains the existing order of questions.
+
+5. **Question Type Selection:**
+    - The `[qn type]` is evaluated to filter questions based on type:
+        - `/short` for short answers.
+        - `/mcq` for multiple-choice questions.
+        - `/mix` for a mix of both types.
+
+6. **Quiz Execution:**
+    - The `startQuiz()` method from `quizhub.questionlist.QuestionList` is called to begin the quiz.
+    - Questions are presented one by one, with the CLI hiding the answers.
+    - Users submit their answers via the CLI, receiving feedback after each submission.
+
+7. **User Responses:**
+    - For Short Answer Questions, users type the answer and press enter.
+    - For Multiple Choice Questions, users input the index of the correct answer.
+    - The command supports early termination through the `\exitquiz` command.
+
+8. **Scoring and Feedback:**
+    - Correct answers increase the user's score.
+    - Immediate feedback is provided for each answer.
+
+9. **Quiz Completion:**
+    - The quiz automatically ends after all questions are attempted.
+    - The user's final score is calculated and displayed.
+
+10. **Post-Quiz Actions:**
+    - Any actions required to finalize the quiz session, such as updating progress or logs, are performed.
+
 
 #### Expected Invalid Input for Start Command
 
@@ -355,19 +396,36 @@ TODO
 ### Shuffle Command
 
 #### Brief Description of Shuffle Command
-The Shuffle command allows the user to shuffle quiz questions to a random order PERMANENTLY
+The Shuffle command in QuizHub is designed to **PERMANENTLY** randomize the order of questions within the question list.
+This contrasts with the temporary randomization available in the Start Command's /random mode.
 - `shuffle` 
 
 #### Class Structure of Shuffle Command
 
-The "shuffle" command in QuizHub is used to shuffle the order of questions within a question list. 
-This command provides users with the ability to randomize the sequence of questions, which can be useful for 
-creating randomized quizzes or reorganising notes permanently.
+
+- The Shuffle command resides within the quizhub.command package and is responsible for interacting with the QuestionList class from the quizhub.questionlist package.
+- When invoked, it permanently modifies the order of questions in the storage, thereby affecting all future accesses to the question list.
 
 ![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML%2FCommands%2FShuffleToStorage-Shuffle_to_Storage_Flow.png)
 
-**NOTE:** The randomised sequence will be stored PERMANENTLY in storage. This is unlike /random for command start which 
-creates a temporary array to store the randomised sequence of questions
+Operational Flow:
+
+1. Command Invocation:
+   - The user issues the shuffle command through the CLI (Command Line Interface).
+   - QuizHub's main control flow receives the command and prepares to execute it.
+2. Execution:
+   - The CommandShuffle class is instantiated and invoked.
+   - It calls upon the shuffleQuestions() method from the QuestionList class.
+3. Shuffling Process:
+   - The shuffleQuestions() method utilizes java.util.Collections.shuffle to randomize the order.
+   - This method directly alters the storage list within QuestionList.
+4. Storage Update:
+   - Once shuffled, the new order of questions is written back to the persistent storage.
+   - This action ensures that the shuffled order is retained across sessions.
+5. User Feedback:
+   - Upon successful shuffling, a confirmation message is displayed to the user through the CLI.
+
+**NOTE:** Unlike the temporary array used in the Start Command's /random mode, the shuffled sequence in the Shuffle Command is committed to storage, meaning that the new order becomes the default arrangement for all subsequent quiz activities.
 
 
 ### Markdiff Command - mark difficulty of entry
