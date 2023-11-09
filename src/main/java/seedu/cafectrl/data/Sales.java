@@ -91,6 +91,10 @@ public class Sales {
         int orderListIndex = day - 1;
         try {
             OrderList orderList = orderLists.get(orderListIndex);
+            if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
+                ui.showToUser("No sales for this day.");
+                return;
+            }
             ui.showSalesTop(day);
 
             orderList.printOrderList(menu, ui);
