@@ -30,30 +30,30 @@ public class CommandEdit extends Command {
             "No changes made to question :>";
     public static final String SUCCESSFUL_EDIT_MSG = "    Roger that! I have edited the following question >w< !";
     private final int qnIndex;
-    private final String newDescription;
-    private final String newAnswer;
+    private final String editField;
+    private final String newValue;
 
     /**
      * Creates a new edit command
      *
      * @param qnIndex        Question index in current question list.
-     * @param newDescription New description to replace the current question
+     * @param editField New description to replace the current question
      *                       description with.
-     * @param newAnswer      New answer to replace the current question answer with.
+     * @param newValue      New answer to replace the current question answer with.
      */
-    public CommandEdit(int qnIndex, String newDescription, String newAnswer) {
+    public CommandEdit(int qnIndex, String editField, String newValue) {
         super(CommandType.EDIT);
         this.qnIndex = qnIndex;
-        this.newDescription = newDescription;
-        this.newAnswer = newAnswer;
+        this.editField = editField;
+        this.newValue = newValue;
     }
 
     @Override
     public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions) {
-        if (newDescription == null && newAnswer == null) {
+        if (editField == null && newValue == null) {
             return;
         }
-        questions.editQuestionByIndex(qnIndex, newDescription, newAnswer);
+        questions.editQuestionByIndex(qnIndex, editField, newValue);
         ui.displayMessage(SUCCESSFUL_EDIT_MSG);
         dataStorage.updateData(questions);
     }

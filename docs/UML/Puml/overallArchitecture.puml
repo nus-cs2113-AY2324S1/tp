@@ -6,6 +6,7 @@ rectangle QuizHub
 rectangle Storage
 rectangle Commands
 rectangle Parser
+rectangle UtilityClasses
 
 Ui --> Parser
 QuizHub <-[dotted]-> Storage
