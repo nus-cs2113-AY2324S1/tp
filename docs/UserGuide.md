@@ -19,12 +19,14 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 - Both `CAPITAL LETTER` and `small letter` are acceptable. (But consecutive white space will be eliminated automatically).
 
-### Viewing help: `help`
+## Command Type
+
+### `help` - Viewing help
 Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a meal: `meal_add`
+### `meal_add` - Adding a meal
 Adds a new item to the list of todo items.
 
 Format: `meal_add MEAL_NAME CALORIES`
@@ -38,7 +40,7 @@ Example of usage:
 
 `meal_add baked_bread 66`
 
-### Adding an exercise: `log`
+### `log` - Adding an exercise
 Adds a new exercise to the Exercise Log.
 
 Format: `log MONTH DAY EXERCISE_NAME CALORIES_BURNED`
@@ -54,7 +56,7 @@ Example of usage:
 
 `log 12 24 Volleyball 5`
 
-### Updating an exercise: `update`
+### `update` - Updating an exercise
 Updates the specified exercise within the Exercise Log if the old exercise can be found. If the old exercise is not
 found, then the user will not be prompted to provide new details.
 
@@ -75,7 +77,7 @@ Example of usage:
 `update 12 24 Volleyball 5`
 `Hockey 98`
 
-### Viewing Exercises: `view`
+### `view` - Viewing Exercises
 View the number of, or each exercise in a day, month, or the entire log.
 
 Format `view VIEW_TYPE VIEW_SCOPE`
@@ -86,7 +88,7 @@ or each exercise and its details
 whose exercises you want to view, or `month MONTH day DAY` where MONTH is the same as above, but `DAY` is the specific
 day of the month whose exercises you want to view.
 
-### Setting up a calorie goal: `set on`
+### `set on` - Setting up a calorie goal
 Set up a calories goal to achieve.
 
 Format: `set AMOUNT on Date`
@@ -95,14 +97,14 @@ The AMOUNT is in terms of **kcal**. Please use **DD/MM/YYYY** format for the dat
 
 Note that this function is still under development. The future features includes: delete a goal, view your goal, save your achievement, etc.
 
-### View your current goal list: `viewG`
+### `viewG` - View your current goal list
 Look for the content of current goal list.
 
 Format: `viewG`
 
 Example:
 
-### Delete a goal from current goal list: `deleteG`
+### `deleteG` - Delete a goal from current goal list
 Remove a undersired goal from the goal list. Note that it is not encouraged to remove a goal from the goal list, unless the inserted goal has error or impossible to be accomplished.
 
 Format: `deleteG Index`
@@ -121,11 +123,11 @@ Format: `exit`
 
 ## FAQs
 
-**Q**: How do I transfer my data to another computer? 
+**Q1**: How do I transfer my data to another computer? 
 
 **A**: It is not suggested to transfer data between machines. The purpose of the app is developed solely for personal use. Nonetheless, you can copy the folder named `data` that is created in the same directory (location) as where you are running the application into your new computer to restore your data.
 
-**Q**: Can I edit the data inside my list? e.g. the inserted goal in the goal list
+**Q2**: Can I edit the data inside my list? e.g. the inserted goal in the goal list
 
 **A**: Sorry but we do not support the function to edit a list directly. But you can remove a unwanted data from a list and insert a new data again.
 
