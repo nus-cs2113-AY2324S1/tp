@@ -83,4 +83,15 @@ public class Messages {
             + "You might have tempered with the file and added in a non existing dish.\n"
             + "Don't worry :D , we will continue operations without ";
 
+    public static final String SAVE_FILE_TAMPER_DETECTED = "Well, well, well, "
+            + "looks like someone's been playing with the save files!\n"
+            + "Just remember, editing the matrix comes with great power and responsibility.\n"
+            + "Let's keep it classy and use the prescribed format below.\n";
+
+    public static final String SAVE_FILE_FORMAT_MENU = "{Dish Name} | {Dish Price} | "
+            + "{Ingredient Name} {Ingredient Qty} {Ingredient Unit} |";
+    public static final String SAVE_FILE_FORMAT_ORDERS = "{Order Day} | {Dish Name} | {Dish Order Qty} | "
+            + "{Total Order Cost} | {Order Complete Status}";
+    public static final String SAVE_FILE_FORMAT_PANTRY_STOCK = "{Ingredient Name} | "
+            + "{Ingredient Qty} | {Ingredient Unit}";
 }

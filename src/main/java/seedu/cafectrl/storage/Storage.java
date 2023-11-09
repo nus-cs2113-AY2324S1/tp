@@ -4,6 +4,7 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -67,16 +68,13 @@ public class Storage {
         try {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
             if (isFileCorrupted(encodedMenu)) {
-                throw new CorruptedDataException();
+                ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
+                        Messages.SAVE_FILE_FORMAT_MENU,
+                        System.lineSeparator());
             }
             return Decoder. decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
-            return new Menu();
-        } catch (CorruptedDataException e) {
-            ui.showToUser("ERROR: Menu Data file is corrupted.",
-                    "Clear the Menu data file or restore data to uncorrupted state before trying again.",
-                    System.lineSeparator());
             return new Menu();
         }
     }
@@ -100,16 +98,13 @@ public class Storage {
         try {
             ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
             if (isFileCorrupted(encodedPantryStock)) {
-                throw new CorruptedDataException();
+                ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
+                        Messages.SAVE_FILE_FORMAT_PANTRY_STOCK,
+                        System.lineSeparator());
             }
             return Decoder.decodePantryStockData(encodedPantryStock);
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.PANTRY_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
-            return new Pantry(ui);
-        } catch (CorruptedDataException e) {
-            ui.showToUser("ERROR: Pantry Data file is corrupted.",
-                    "Clear the Pantry data file or restore data to uncorrupted state before trying again.",
-                    System.lineSeparator());
             return new Pantry(ui);
         }
     }
@@ -133,16 +128,13 @@ public class Storage {
         try {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
             if (isFileCorrupted(encodedOrderList)) {
-                throw new CorruptedDataException();
+                ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
+                        Messages.SAVE_FILE_FORMAT_ORDERS,
+                        System.lineSeparator());
             }
             return Decoder.decodeSales(encodedOrderList, menu);
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.ORDER_LIST_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
-            return new Sales();
-        } catch (CorruptedDataException e) {
-            ui.showToUser("ERROR: Sales Data file is corrupted.",
-                    "Clear the Sales data file or restore data to uncorrupted state before trying again.",
-                    System.lineSeparator());
             return new Sales();
         }
     }
