@@ -79,7 +79,7 @@ public class Flashcard {
     public String toString() {
         return "front text: " + frontText + System.lineSeparator()
                 + "back text: " + backText + System.lineSeparator()
-                + "id: " + id
+                + "id: " + id + System.lineSeparator()
                 + "difficulty: " + difficulty + System.lineSeparator();
     }
 
