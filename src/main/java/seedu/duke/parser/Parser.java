@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.GoalCommand;
+import seedu.duke.commands.goal.GoalCommand;
+import seedu.duke.commands.goal.DeleteGoalCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.IncorrectCommand;
 import seedu.duke.commands.logcommands.LogCommand;
@@ -91,7 +92,10 @@ public class Parser {
             return new AddCommand(Arrays.asList(arguments.trim().split(" ")));
 
         case GoalCommand.COMMAND_WORD:
-            return new GoalCommand(userInput);
+            return new GoalCommand(userInput.toLowerCase().trim());
+
+        case DeleteGoalCommand.COMMAND_WORD:
+            return new DeleteGoalCommand(userInput.toLowerCase().trim());
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

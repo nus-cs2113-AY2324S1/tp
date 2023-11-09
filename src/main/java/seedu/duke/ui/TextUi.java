@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.Goal;
-import seedu.duke.data.GoalList;
 import seedu.duke.data.Printable;
 
 /**
@@ -194,25 +194,25 @@ public class TextUi {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
     }
 
-    public void printNumberofGoal(int goalCount) {
-        System.out.println("You still have " + goalCount + " goals to accomplish. Add oil!" );
+    public static String noOfGoalMsg(int goalCount) {
+        return "You still have " + goalCount + " goals to accomplish. Add oil!";
     }
 
-    public void printDeleteGoal(Goal deletedGoal) {
-        System.out.println("Good. I have removed this goal: " + deletedGoal);
-        System.out.println("Remember not to give up unaccomplished goal! ");
+    public static String deleteGoalMsg(Goal deletedGoal) {
+
+        return "Good. I have removed this goal: " + deletedGoal + "\n"
+                + "Remember not to give up unaccomplished target! ";
+
     }
 
     /**
      * This method is used to implement Goal commend execution, when adding a new goal
-     * @param goals the goals list which is under operation
      * @return string contains information of generating a new goal successfully
      */
-    public static String addGoalSuccessMessage(GoalList goals) {
-        int currentNoOfGoal = goals.getGoalCount();
-        Goal newlyAddedGoal = goals.getGoal(currentNoOfGoal - 1);
-
-        return "Nice! I have added the following goal to your goal lists: \n\t" + newlyAddedGoal;
+    public static String addGoalSuccessMessage() {
+        int currentNoOfGoal = Duke.goals.getGoalCount();
+        Goal newlyAddedGoal = Duke.goals.getGoal(currentNoOfGoal - 1);
+        return "Nice! I have added the following goal to your goals list: \n\t" + newlyAddedGoal;
     }
 
 }
