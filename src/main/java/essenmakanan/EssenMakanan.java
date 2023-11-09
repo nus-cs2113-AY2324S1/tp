@@ -32,7 +32,7 @@ public class EssenMakanan {
         Ui.start();
 
         Scanner in = new Scanner(System.in);
-        String input = "";
+        String input;
 
         Command command = null;
         Ui.showCommands();
@@ -41,21 +41,18 @@ public class EssenMakanan {
             try {
                 command = parser.parseCommand(input, recipes, ingredients);
                 command.executeCommand();
+                ingredientStorage.saveData(ingredients.getIngredients());
+                recipeStorage.saveData(recipes.getRecipes());
             } catch (EssenCommandException exception) {
                 exception.handleException();
             } catch (EssenFormatException exception) {
                 exception.handleException();
             } catch (EssenOutOfRangeException exception) {
                 exception.handleException();
+            } catch (IOException exception) {
+                Ui.handleIOException(exception);
             }
         } while (!ExitCommand.isExitCommand(command));
-
-        try {
-            ingredientStorage.saveData(ingredients.getIngredients());
-            recipeStorage.saveData(recipes.getRecipes());
-        } catch (IOException exception) {
-            Ui.handleIOException(exception);
-        }
     }
 
     public void setup() {
@@ -68,12 +65,14 @@ public class EssenMakanan {
             ingredients = new IngredientList(ingredientStorage.restoreSavedData());
         } catch (EssenFileNotFoundException exception) {
             exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_INGREDIENT_PATH);
+            ingredients = new IngredientList();
         }
 
         try {
             recipes = new RecipeList(recipeStorage.restoreSavedData());
         } catch (EssenFileNotFoundException exception) {
             exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_RECIPE_PATH);
+            recipes = new RecipeList();
         }
     }
 

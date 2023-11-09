@@ -60,7 +60,7 @@ public class DuplicateRecipeCommandTest {
 
         assertEquals(recipe.getTitle() + " (copy)", duplicatedRecipe.getTitle());
 
-        assertEquals(recipe.getRecipeStepByIndex(0).getDescription( )
+        assertEquals(recipe.getRecipeStepByIndex(0).getDescription()
                 , duplicatedRecipe.getRecipeStepByIndex(0).getDescription());
         assertEquals(recipe.getRecipeStepByIndex(1).getDescription()
                 , duplicatedRecipe.getRecipeStepByIndex(1).getDescription());

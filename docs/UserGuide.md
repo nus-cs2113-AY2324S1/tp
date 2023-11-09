@@ -19,7 +19,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 ## Quick Start
 
 1. The app requires Java 11 to be installed into your computer or laptop.
-2. Download the latest `Essenmakanan.jar` from [here](http://link.to/EssenMakanan)
+2. Download the latest `Essenmakanan.jar` from [here](https://github.com/AY2324S1-CS2113-F11-2/tp/releases)
 3. Copy and move the file into the selected folder you want to put the app in.
 4. Open your command line and input the command below to run the app:
 `java -jar Essenmakanan.jar`
