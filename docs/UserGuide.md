@@ -65,7 +65,7 @@ Register a new user into the login system.
 
 Login an existing user into the system.
 
-### Feature-save
+### Feature-saveDrugs
 
 Save existing drugs from inventory list onto a txt file.
 File is then used to update inventory list when stocker is ran.
@@ -373,7 +373,7 @@ Login Sucessful
 Welcome Back!
 ```
 
-### `save` - save existing drugs onto hard drive of computer
+### `saveDrugs` - save existing drugs onto hard drive of computer
 
 Saves existing drugs onto hard drive of computer. The txt file
 is then used as reference to update drug inventory when stocker

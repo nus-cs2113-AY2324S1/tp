@@ -12,7 +12,7 @@ import java.util.Map;
  * Backups existing drug list inventory into txt file to be uploaded later.
  */
 public class SaveCommand extends Command{
-    public static final String COMMAND_WORD = "save";
+    public static final String COMMAND_WORD = "saveDrugs";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves existing druglist that is loaded "
             +"into inventory when system is booted up."
