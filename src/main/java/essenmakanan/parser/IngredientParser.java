@@ -30,20 +30,14 @@ public class IngredientParser {
         return ingredient1.getUnit().equals(ingredient2.getUnit());
     }
 
-    public static String getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
-        final String zeroQuantity = "0";
-        String quantityNeededString = ingredientNeeded.getQuantity();
-        String quantityAvailableString = ingredientAvailable.getQuantity();
-
-        if (quantityNeededString.matches("[a-zA-Z ]+") || quantityAvailableString.matches("[a-zA-Z ]+")) {
-            return zeroQuantity; //there is no way of comparison if quantity is a String
-        }
+    public static Double getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
+        final Double zeroQuantity = 0.0;
         
-        Double quantityNeeded = Double.parseDouble(ingredientNeeded.getQuantity());
-        Double quantityAvailable = Double.parseDouble(ingredientAvailable.getQuantity());
+        Double quantityNeeded = ingredientNeeded.getQuantity();
+        Double quantityAvailable = ingredientAvailable.getQuantity();
 
         if (quantityNeeded > quantityAvailable) {
-            return Double.toString(quantityNeeded - quantityAvailable);
+            return (quantityNeeded - quantityAvailable);
         }
 
         return zeroQuantity;
@@ -66,7 +60,7 @@ public class IngredientParser {
 
         String ingredientName = ingredientDetails[0].strip();
 
-        String ingredientQuantity = ingredientDetails[1].strip();
+        Double ingredientQuantity = Double.parseDouble(ingredientDetails[1].strip());
 
         String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
         ingredientUnit = mapIngredientUnit(ingredientUnitString);

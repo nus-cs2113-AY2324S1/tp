@@ -3,16 +3,10 @@ package essenmakanan.ingredient;
 public class Ingredient {
 
     private String name;
-    private String quantity;
+    private Double quantity;
     private IngredientUnit unit;
 
-    public Ingredient(String name) {
-        this.name = name;
-        this.quantity = "1";
-        this.unit = IngredientUnit.PIECE;
-    }
-
-    public Ingredient(String name, String qty, IngredientUnit unit) {
+    public Ingredient(String name, Double qty, IngredientUnit unit) {
         this.name = name;
         this.quantity = qty;
         this.unit = unit;
@@ -26,11 +20,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getQuantity() {
+    public Double getQuantity() {
         return this.quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
