@@ -18,6 +18,14 @@ taking.
 
 #### General explanation of flashcards
 
+The difficulty symbolizes how hard it is for you to remember this particular 
+flashcard. The higher the number, the harder.
+
+The flashcard id is used to uniquely identify each flashcard. (Flashcard ids 
+don't necessarily start at zero and are not necessarily consecutive. Don't 
+worry about this; they are for internal use only and "gaps" between 
+flashcard ids are totally fine)
+
 #### Listing all flashcards: `list flashcards`
 
 Prints out a list of all flashcards that shows each flashcard's front text 
