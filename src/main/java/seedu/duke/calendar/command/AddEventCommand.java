@@ -12,10 +12,19 @@ import java.time.format.DateTimeParseException;
 
 import java.util.Scanner;
 
-public class AddEventCommand extends EventCommand {
+public class AddEventCommand extends DualEventCommand {
 
+    //@@author Cheezeblokz
+    public AddEventCommand(String input) {
+        this.input = input;
+        beginnerCommandLength = 2;
+        expertCommandLength = 5;
+        syntaxString = "add event EVENT_NAME EVENT_START_DATE (in format yyyy-mm-ddThh:mm:ss) EVENT_END_DATE (in format yyyy-mm-ddThh:mm:ss)";
+    }
+
+    //@@author kherlenbayasgalan
     /**
-     * The execute method is used to add an event to the calendar. It has two parameters (Scanner, EventList).
+     * The executeBeginnerMode method is used to add an event to the calendar. It has two parameters (Scanner, EventList).
      * The EventList is used to add an event to the list. The scanner is used to get the user's event name input.
      * The method first takes the event name, then through parseDateTimeInput, it gets an acceptable date/time
      * from the user. If the user inserts acceptable inputs, the event will be added. If the user doesn't,
@@ -24,7 +33,8 @@ public class AddEventCommand extends EventCommand {
      * @param eventList is used to add an event to the list.
      */
 
-    public void execute(Scanner scanner, EventList eventList) {
+    @Override
+    public void executeBeginnerMode(Scanner scanner, EventList eventList) {
         System.out.print("What's the event?: ");
         String eventName = scanner.nextLine();
 
@@ -40,6 +50,28 @@ public class AddEventCommand extends EventCommand {
             System.out.println("    End time is before or equal to the start time. Please enter the correct end time.");
         }
     }
+
+    //@@author Cheezeblokz
+    @Override
+    protected void executeExpertMode(Scanner scanner, EventList eventList) {
+        String[] commandParts = input.split(" ");
+        String eventName = commandParts[2];
+        try {
+            LocalDateTime startTime = LocalDateTime.parse(commandParts[3]);
+            LocalDateTime endTime = LocalDateTime.parse(commandParts[4]);
+            if (endTime.isAfter(startTime)) {
+                Event event = new Event(eventName, startTime, endTime);
+                eventList.addEvent(event);
+                System.out.println(event + " has been added to your Calendar");
+            } else {
+                System.out.println("    End time is before or equal to the start time. Please enter the correct end time.");
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("    Invalid date and time format. Please try again.");
+        }
+    }
+
+    //@@author kherlenbayasgalan
 
     /**
      * The parseDateTimeInput takes two parameters (Scanner , String) and through those parameters

@@ -1,4 +1,4 @@
-//@@ kherlenbayasgalan & jingxizhu
+//@@author Cheezeblokz
 
 package seedu.duke.calendar;
 

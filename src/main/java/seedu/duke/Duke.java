@@ -57,6 +57,7 @@ public class Duke {
             "review flashcards",
             "help",
             "add event",
+            "add goal event",
             "delete event",
             "delete all events",
             "find event",
