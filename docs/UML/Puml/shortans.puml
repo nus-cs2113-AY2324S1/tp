@@ -1,0 +1,27 @@
+@startuml
+!include Style.puml
+
+participant ":QuizHub" as QuizHub
+participant ":CommandShort" as CommandShort
+participant ":QuestionList" as QuestionList
+participant ":ShortAnsQn" as ShortAnsQn
+
+activate QuizHub
+QuizHub -> CommandShort: executeCommand (ui, dataStorage, questions)
+activate CommandShort
+CommandShort -> QuestionList: addShortAnswerQn (description, answer, module, qnDifficulty, true)
+deactivate CommandShort
+activate QuestionList
+create ShortAnsQn
+QuestionList -> ShortAnsQn:
+destroy CommandShort
+activate ShortAnsQn
+ShortAnsQn --> QuestionList: ShortAnsQn
+deactivate ShortAnsQn
+QuestionList -> QuestionList: add (ShortAnsQn)
+activate QuestionList
+QuestionList --> QuestionList:
+deactivate QuestionList
+
+
+@enduml
