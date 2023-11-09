@@ -23,7 +23,7 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 ## Content of Command
 
-| Exercise  | Goal  | Meal |  Others | 
+|    Exercise | Goal  | Meal |  Others | 
 | :------------ |:---------------:| -----:| -----:|
 | col 3 is      | some wordy text | $1600 |       |
 | col 2 is      | centered        |   $12 |       |
