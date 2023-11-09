@@ -31,10 +31,10 @@ public class Duke {
                 fc.processInput(input);
             } else if (cm.isResponsible(input)) {
                 cm.processInput(input);
-            } else if (input.equals("exit")) {
+            } else if (input.toLowerCase().strip().equals("exit")) {
                 System.out.println("    You are exiting TaskLinker! Bye!");
                 break;
-            } else if (input.startsWith("help")) {
+            } else if (input.toLowerCase().strip().equals("help")) {
                 printHelp();
             } else {
                 System.out.println("    Invalid command! Please try again.");

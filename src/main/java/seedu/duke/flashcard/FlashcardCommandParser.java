@@ -24,6 +24,8 @@ public class FlashcardCommandParser {
     public FlashcardCommand parseInput(String input) {
         assert input != null : "input is null";
 
+        input = input.toLowerCase();
+
         if (input.startsWith("create flashcard")) {
             return new CreateFlashcardCommand();
         } else if (input.startsWith("list flashcards")) {
