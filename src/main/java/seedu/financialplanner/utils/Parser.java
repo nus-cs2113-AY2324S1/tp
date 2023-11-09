@@ -6,6 +6,7 @@ import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,10 +43,14 @@ public class Parser {
             try {
                 constructorWithNothing = commandClass.getConstructor();
                 return constructorWithNothing.newInstance();
+            } catch (InvocationTargetException e) {
+                throw new FinancialPlannerException(e.getCause().getMessage());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        } catch (Exception e) {
+        } catch (InvocationTargetException e) {
+            throw new FinancialPlannerException(e.getCause().getMessage());
+        }  catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
