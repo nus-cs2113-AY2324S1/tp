@@ -16,19 +16,19 @@
 ## Acknowledgements
 
 1. For the main structure of the program, we have adapted the project structure
-from the Individual Project of Man Juncheng at [Link](https://github.com/spinoandraptos/ip/tree/master)
-2. For JUnit testing, we have adapted the testing codes from the AddressBook level-2
-codes at [Link](https://github.com/se-edu/addressbook-level2)
-3. For the developer's guide, we have referenced the developer's guide from AddressBook
-level-3 [Link](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+from the [Individual Project](https://github.com/spinoandraptos/ip/tree/master) of Man Juncheng
+2. For JUnit testing, we have adapted the testing codes from the [AddressBook level-2
+codes](https://github.com/se-edu/addressbook-level2)
+3. For the developer's guide, we have referenced the [developer's guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) from AddressBook
+level-3
 
 # Design & implementation
 
 ## Overall Architecture
 The main execution of the QuizHub application will concern 4 components which
-are the QuizHub, Ui, Parser and Command packages.
+are the `QuizHub`, `Ui`, `Parser` and `Command` packages.
 
-![](./UML/architecture.jpg)
+![](UML/Images/architecture.jpg)
 
 `Quizhub` is the "main" class, which is responsible for starting the program,
 initialising all other objects, executing commands, and shutting down.
@@ -47,7 +47,7 @@ refer to any miscellaneous utility classes used by all the components.
 
 ## Application Lifecycle
 
-![](./UML/lifecycle.jpg)
+![](UML/Images/lifecycle.jpg)
 
 The program begins with the `run()` call to `QuizHub` class.
 
@@ -143,7 +143,7 @@ very start of the user input.
 
 The following sequence diagram shows the implementation of `parseCommand`.
 
-![](./UML/Parser.jpg)
+![](UML/Images/Parser.jpg)
 
 `getContentAfterKeyword`
 
@@ -170,7 +170,7 @@ exception will be thrown and handled by printing an error message to the CLI.
 The following is a detailed sequence diagram demonstrating how commands are parsed. 
 This may differ slightly for different commands.
 
-![](./UML/Commands/commandOverview.png)
+![](UML/Images/commandOverview.png)
 
 Essentially, the parser will create and return a Command object with appropriate 
 arguments to QuizHub, where it will be executed. When the Command executes, it 
@@ -203,20 +203,20 @@ It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
 4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard)
 
 *Condensed Class Diagram - Does not contain all attributes & methods
-![](./UML/AddShortCommand.jpg)
+![](UML/Images/AddShortCommand.jpg)
 
 Thereafter, the command is returned to the Quizhub component and executed,
 to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
-![](./UML/Commands/commandAddState.png)
+![](UML/Images/commandAddState.png)
 
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
 // TODO: Complete description for MCQ
 
-![](./UML/Commands/commandMCQ.png)
+![](UML/Images/commandMCQ.png)
 
 <hr>
 
@@ -243,7 +243,7 @@ the index refers to a valid question, failing which it will return an error mess
 Otherwise, it will then invoke the QuestionList.deleteQuestionByIndex method to remove
 the question from the QuestionList. 
 
-![](./UML/Commands/commandDeleteQuestion.png)
+![](UML/Images/commandDeleteQuestion.png)
 
 Afterward, the storage is updated to reflect the newest QuestionList.
 
@@ -267,8 +267,7 @@ new ArrayList of questions, and subsequently print them.
 
 ### Edit Command - Edit Question / Answer
 #### Brief Description of Edit Command
-The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or 
-answer of a question. The CommandEdit class supports two edit commands: 
+The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or answer of a question. The CommandEdit class supports 2 edit commands for short answer questions and 3 edit commands for multiple choice questions: 
 
 #### Command Syntax
 - `edit [question number] /description [newDescription]` - Edits the text description of the specified question.
@@ -279,6 +278,17 @@ Special Formatting Notes:
 - Use ` \slash ` instead of the `/` character within the command.
 - The `pipe` character is not allowed and will be automatically removed from any input fields.
 
+For short answer questions:
+- `edit [question number] /description [description]` - edits the description of the question with the specified number
+- `edit [question number] /answer [answer]` - edits the answer to the question with the specified number
+i.e. `edit 1 /description new description`,  `edit 2 /answer new answer`
+
+For multiple choice questions:
+
+- `edit [question number] /description [description]` - edits the description of the question with the specified number
+- `edit [question number] /answer [answer index]` - edits the answer index to the question with the specified number
+- `edit [question number] /option[option number] [new value]` - edits the option specified by the option number
+i.e. `edit 1 /description new description`,  `edit 2 /answer 3`, `edit 3 /option4 new option 4`
 
 #### Class Structure of Edit Command
 The CommandEdit class includes the following key components:
@@ -291,12 +301,14 @@ The `CommandEdit` class manages the following attributes:
 
 The class collaborates with the `QuestionList` and `Question` classes to update the desired question components.
 
+
 #### Implementation of Edit Command
 
-![commandEditStages.png](UML%2FCommands%2FcommandEditStages.png)
-![commandEditObjectDiagram.png](./UML/Commands/commandEditObjectDiagram.png)
-![commandEditObjectDiagram2.png](./UML/Commands/commandEditObjectDiagram2.png)
-![commandEditObjectDiagram3.png](./UML/Commands/commandEditObjectDiagram3.png)
+![commandEditStages.png](UML/Images/commandEditStages.png)
+
+![commandEditObjectDiagram.png](UML/Images/commandEditObjectDiagram.png)
+![commandEditObjectDiagram2.png](UML/Images/commandEditObjectDiagram2.png)
+![commandEditObjectDiagram3.png](UML/Images/commandEditObjectDiagram3.png)
 
 ### Operational Flow of Edit Command
 
@@ -401,7 +413,7 @@ to quiz themselves on alongside whether to randomize the questions or use their 
 
 #### Sequence Diagram of Start Command
 
-![commandStartLoop.png](./UML/Commands/commandStartLoop.png)
+![commandStartLoop.png](UML/Images/commandStartLoop.png)
 
 #### Implementation of Start Command
 
@@ -581,9 +593,9 @@ This feature allows for the categorization of questions by difficulty, aiding in
 - `markdiff [question number] /[question difficulty]`
 
 #### Class Structure of Markdiff Command
-![commandMarkDiffSequence.png](UML%2FCommands%2FcommandMarkDiffSequence.png)
+![commandMarkDiffSequence.png](UML/Images/commandMarkDiffSequence.png)
 
-![commandMarkDiffClass.png](UML%2FCommands%2FcommandMarkDiffClass.png)
+![commandMarkDiffClass.png](UML/Images/commandMarkDiffClass.png)
 
 - The `CommandMarkDifficulty` class is responsible for interpreting and executing the `markdiff` command.
 - It utilizes the following key fields:
@@ -667,7 +679,7 @@ Command Exit is responsible for exiting the program
 
 #### Class structure of Command Exit
 
-![commandExitSequence.png](UML%2FCommands%2FcommandExitSequence.png)
+![commandExitSequence.png](UML/Images/commandExitSequence.png)
 
 When the user initiate Command Exit, any unsaved data will be saved into storage and thereafter, the exit message will
 be displayed.
@@ -694,7 +706,7 @@ The details of the data loading and updating process are explained in details be
 
 The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below.
 
-![](./UML/Storage.jpg)
+![](UML/Images/Storage.jpg)
 
 :exclamation: This sequence diagram emphasizes the process of loading data into storage, and has therefore omitted details of more trivial and/or non-related methods as well as exception handling logic. To find out more about the details, please refer to the complete code and header comments.
 
@@ -703,7 +715,7 @@ In addition to the main `loadData` method, the process involves the following 3 
 - `private void parseQuestionsFromStrings(ArrayList<String> rawQuestions, QuestionList questions)`
 - `public void buildCurrentListFromFile(QuestionList questions)`
 
-The general idea is that when the program is first initiated, the `loadData` method is called from within the `Ui` class, which passes in an empty `QuestionList`. Within the method itself, the helper method `buildCurrentListFromFile()` will take in this empty `QuestionList` object and populate it with `question` objects according to textual information stored within the specified file. This is done by first extracting each question stored line by line into a new `Arraylist<String> rawQuestions`, then calling another helper method `parseQuestionsFromStrings()` to add each question into the `QuestionList` via a third helper method `addQuestionFromFileaddQuestionFromFile`.
+The general idea is that when the program is first initiated, the `loadData` method is called from within the `Ui` class, which passes in an empty `QuestionList`. Within the method itself, the helper method `buildCurrentListFromFile()` will take in this empty `QuestionList` object and populate it with `question` objects according to textual information stored within the specified file. This is done by first extracting each question stored line by line into a new `Arraylist<String> rawQuestions`, then calling another helper method `parseQuestionsFromStrings()` to add each question into the `QuestionList` via a third helper method `addQuestionFromFile()`.
 
 The process is refactored into these methods to avoid deep nesting of code to achieve clearer logical flow and more readability and easier debugging process.
 
@@ -734,7 +746,7 @@ input.
 
 #### Overall Flow
 
-![](./UML/ui_flow.jpg)
+![](UML/Images/ui_flow.jpg)
 
 When the program is first initiated, the `displayOpeningMessage()` method is called to display a welcome message while also calling the `loadData()` method of the `dataStorage` to display all the questions stored in the storage file if any.
 
@@ -744,7 +756,7 @@ Finally, the `displayClosingMessage()` method is called to display a farewell me
 
 #### Displaying Quizzes
 
-![](./UML/ui_quiz.jpg)
+![](UML/Images/ui_quiz.jpg)
 
 The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions.
 

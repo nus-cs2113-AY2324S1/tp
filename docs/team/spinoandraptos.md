@@ -9,8 +9,8 @@ from all fields of study.
 ### Summary of Contributions
 - **Code Contributions:** [Link to reposense contribution](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=spinoandraptos&tabRepo=AY2324S1-CS2113-W12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false).
 - The project structure of QuizHub is adapted from Juncheng's [ip](https://github.com/spinoandraptos/ip). Juncheng is
-  responsible for migrating the skeleton code structure into the team repository and aligning the team for initial
-  the integration cycle. [#6](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/6)
+  responsible for migrating the skeleton code structure into the team repository and aligning the team for the initial
+  integration cycle. [#6](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/6)
 ### New Feature 1: `Edit Question`
   [#10](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/10),
   [#20](https://github.com/AY2324S1-CS2113-W12-1/tp/issues/20)
@@ -70,12 +70,12 @@ from all fields of study.
     - [Mark Question Difficulty Command](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#mark-difficulty-of-questions-markdiff)
 ### Developer Guide Contributions:
   Juncheng added documentation and diagrams for the following sections of the developer guide, focusing on
-  readability and simplicity:
+  readability and simplicity: <br/>
     - [Parser](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#parser-component), and
-      [Sequence diagram](https://ay2324s1-cs2113-w12-1.github.io/tp/UML/Parser.jpg)
-    - [Non-functional requirements](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#non-functional-requirements)
-    - [Glossary](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#glossary)
-    - [Instructions for manual testing](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
+      [Sequence diagram](https://ay2324s1-cs2113-w12-1.github.io/tp/UML/Parser.jpg) <br/>
+    - [Non-functional requirements](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#non-functional-requirements) <br/>
+    - [Glossary](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#glossary) <br/>
+    - [Instructions for manual testing](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing) <br/>
 ### Team-Based Task Contributions:
   - Refactored code to general code enhancements
     * Performed code abstraction in `parser` class to avoid deep nesting and excessively long methods

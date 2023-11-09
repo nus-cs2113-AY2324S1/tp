@@ -1,6 +1,7 @@
-!include Style.puml
 @startuml
-title After Command "mcq qn2/op1/op2/op3/op4/1/cs2113/hard"
+!include Style.puml
+
+title After Command "edit 2 /description question2"
 
 object "__:QuestionList__" as QuestionList
 
@@ -12,9 +13,9 @@ object "__:Question1__" as Question1 {
     difficulty = "EASY"
 }
 
-object "__:Question2__" as Question2 {
+object "__:Question__" as Question2 {
     qnType = QnType.MULTIPLECHOICE
-    description = "qn2"
+    description = "question2"
     option1 = "op1"
     option2 = "op2"
     option3 = "op3"
@@ -25,5 +26,5 @@ object "__:Question2__" as Question2 {
 }
 
 QuestionList --> Question1
-QuestionList --> Question2 : Add new question
+QuestionList --> Question2 : edit option4 from op4 to I love CS
 @enduml

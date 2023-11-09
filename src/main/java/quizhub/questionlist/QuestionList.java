@@ -29,8 +29,6 @@ public class QuestionList {
     public static final String SEARCH_RESULT_MSG = "    Here are questions that matched your search:";
     public static final String NO_SEARCH_RESULTS_MSG = "    No results found :< Check your keyword is correct?";
     public static final String SHUFFLE_QN_MSG = "    Questions are now shuffled!";
-    public static final String INVALID_QUIZ_START_MSG = "    No question found in list / no question found " +
-            "pertaining to module. \n    Add questions before starting the quiz";
     private ArrayList<Question> allQns; //array of inputs
     /**
      * Creates a new empty question list.

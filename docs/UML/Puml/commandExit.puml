@@ -1,6 +1,5 @@
 @startuml
-!theme plain
-hide footbox
+!include Style.puml
 title Command Exit Sequence Diagram
 
 actor User
