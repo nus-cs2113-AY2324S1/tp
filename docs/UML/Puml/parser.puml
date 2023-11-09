@@ -1,0 +1,46 @@
+@startuml
+!include Style.puml
+participant ":QuizHub" as QuizHub
+participant ":Parser" as Parser
+
+activate QuizHub
+
+alt valid user input and does not require further parsing
+    QuizHub -> Parser: parseCommand (userInput)
+    activate Parser
+    Parser -> Parser: userInput.split(" ")
+    activate Parser
+    Parser --> Parser: commandType
+    deactivate Parser
+    Parser --> QuizHub: valid command
+    deactivate Parser
+end
+
+alt valid user input and requires further parsing
+QuizHub -> Parser: parseCommand (userInput)
+    activate Parser
+    Parser -> Parser: userInput.split(" ")
+    activate Parser
+    Parser --> Parser: commandType
+    deactivate Parser
+    Parser -> Parser: specific  parse method
+    activate Parser
+    Parser --> Parser: valid command
+    deactivate Parser
+    Parser --> QuizHub: valid command
+    deactivate Parser
+
+end
+
+alt invalid user input"
+    QuizHub -> Parser: parseCommand (userInput)
+    activate Parser
+    Parser -> Parser: userInput.split(" ")
+    activate Parser
+    Parser --> Parser: commandType
+    deactivate Parser
+    Parser --> QuizHub: CommandInvalid
+    deactivate Parser
+end
+
+@enduml

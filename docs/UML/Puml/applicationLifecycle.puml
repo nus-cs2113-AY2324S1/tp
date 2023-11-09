@@ -2,10 +2,10 @@
 !include Style.puml
 
 actor User
-participant Ui
-participant QuizHub
-participant Parser
-participant Command
+participant ":Ui" as Ui
+participant ":QuizHub" as QuizHub
+participant ":Parser" as Parser
+participant ":Command" as Command
 
 User -> QuizHub: run()
 activate QuizHub
