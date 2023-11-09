@@ -52,9 +52,8 @@ public class RecipeParser {
             if (!recipes.recipeExist(id)) {
                 System.out.println("Your recipe Id is wrong");
                 throw new EssenOutOfRangeException();
-            } else {
-                allRecipes.addRecipe(recipes.getRecipe(id));
             }
+            allRecipes.addRecipe(recipes.getRecipe(id));
         }
         return allRecipes;
     }

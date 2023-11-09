@@ -70,9 +70,7 @@ public class PlanCommand extends Command {
             getMissingIngredients();
 
             Ui.printPlanCommandIngredients(allIngredientsNeeded, missingIngredients);
-        } catch (EssenFormatException e) {
-            e.handleException();
-        } catch (EssenOutOfRangeException e) {
+        } catch (EssenFormatException | EssenOutOfRangeException e) {
             e.handleException();
         }
     }
