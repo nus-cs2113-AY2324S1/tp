@@ -177,6 +177,8 @@ arguments to QuizHub, where it will be executed. When the Command executes, it
 interacts with the QuestionList object to read / manipulate a Question /
 the QuestionList itself.
 
+<hr>
+
 ### Help Command - Display Commands
 
 When executed, this command will execute a standard Final String containing all 
@@ -184,6 +186,8 @@ the commands available for the user to use, as well as the format they are meant
 to be written in. 
 
 This same String is also displayed when an invalid command is used.
+
+<hr>
 
 ### Short Command - Add Short Answer Question to the Quiz
 
@@ -214,6 +218,8 @@ and add the Question to the appropriate list.
 
 ![](./UML/Commands/commandMCQ.png)
 
+<hr>
+
 ### List Command - Show all Questions with Index
 
 Lists all the questions in the current QuestionList. 
@@ -224,6 +230,8 @@ else it will invoke the QuestionList.printQuestion method on each Question objec
 with the asList parameter set as true. The QuestionList.printQuestion method will then
 print each question with a given index, and indicate the question's type and completion status
 (obtained through Question.getQuestionType() and Question.questionIsDone() methods)
+
+<hr>
 
 ### Delete Command - Delete a Question
 
@@ -254,6 +262,8 @@ This method go down the existing QuestionList of questions and use the Java cont
 to determine if the search term is located that question. If the contains method returns true
 for a given question, that question's contents and index will be copied to a 
 new ArrayList of questions, and subsequently print them.
+
+<hr>
 
 ### Edit Command - Edit Question / Answer
 #### Brief Description of Edit Command
@@ -296,12 +306,16 @@ feedback to the user.
 ![commandEditObjectDiagram2.png](./UML/Commands/commandEditObjectDiagram2.png)
 ![commandEditObjectDiagram3.png](./UML/Commands/commandEditObjectDiagram3.png)
 
+<hr>
+
 ### Start Command - Start Quiz
 
 #### Brief Description of Start Command
 
 The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules
 to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
+
+Command Syntax:
 - `start /[quiz mode] [start details] /[qn mode] /[qn type]`
 
 #### Sequence Diagram of Start Command
@@ -393,11 +407,15 @@ user input fields. The command is structured as follows:
 
 TODO
 
+<hr>
+
 ### Shuffle Command
 
 #### Brief Description of Shuffle Command
 The Shuffle command in QuizHub is designed to **PERMANENTLY** randomize the order of questions within the question list.
 This contrasts with the temporary randomization available in the Start Command's /random mode.
+
+Command Syntax:
 - `shuffle` 
 
 #### Class Structure of Shuffle Command
@@ -408,62 +426,104 @@ This contrasts with the temporary randomization available in the Start Command's
 
 ![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML%2FCommands%2FShuffleToStorage-Shuffle_to_Storage_Flow.png)
 
-Operational Flow:
+#### Operational Flow
 
-1. Command Invocation:
+1. **Command Invocation:**
    - The user issues the shuffle command through the CLI (Command Line Interface).
    - QuizHub's main control flow receives the command and prepares to execute it.
-2. Execution:
+2. **Execution:**
    - The CommandShuffle class is instantiated and invoked.
    - It calls upon the shuffleQuestions() method from the QuestionList class.
-3. Shuffling Process:
+3. **Shuffling Process:**
    - The shuffleQuestions() method utilizes java.util.Collections.shuffle to randomize the order.
    - This method directly alters the storage list within QuestionList.
-4. Storage Update:
+4. **Storage Update:**
    - Once shuffled, the new order of questions is written back to the persistent storage.
    - This action ensures that the shuffled order is retained across sessions.
-5. User Feedback:
+5. **User Feedback:**
    - Upon successful shuffling, a confirmation message is displayed to the user through the CLI.
 
 **NOTE:** Unlike the temporary array used in the Start Command's /random mode, the shuffled sequence in the Shuffle Command is committed to storage, meaning that the new order becomes the default arrangement for all subsequent quiz activities.
 
+<hr>
 
 ### Markdiff Command - mark difficulty of entry
 
 #### Brief Description of Markdiff Command
-The CommandMarkDifficulty class in the quizhub application is responsible for handling user commands to mark the 
-difficulty of a question. 
+The CommandMarkDifficulty class within the QuizHub application facilitates the marking of questions with a difficulty level. 
+This feature allows for the categorization of questions by difficulty, aiding in targeted quiz preparation.
 
-The CommandMarkDifficulty class supports the following command syntax:
-- `markdiff [question number] /[question difficulty]` - sets the difficulty of question
+Command Syntax
+- `markdiff [question number] /[question difficulty]`
 
 #### Class Structure of Markdiff Command
 ![commandMarkDiffSequence.png](UML%2FCommands%2FcommandMarkDiffSequence.png)
 
 ![commandMarkDiffClass.png](UML%2FCommands%2FcommandMarkDiffClass.png)
-The CommandMarkDifficulty class includes the following key components:
-- `qnIndex`: An integer representing the question number to be marked for difficulty.
-- `nDifficulty`: An enumeration representing the difficulty level to be assigned to the question.
 
-#### Implementation of Markdiff Command
-Developers can use the `CommandMarkDifficulty` class as a template for handling difficulty marking commands in the 
-QuizHub application. Here are the key steps for implementing this class:
+- The `CommandMarkDifficulty` class is responsible for interpreting and executing the `markdiff` command.
+- It utilizes the following key fields:
+    - `qnIndex`: An integer identifying the question number.
+    - `qnDifficulty`: An enumeration value representing the difficulty level (easy, normal, hard).
+- The class collaborates with `QuestionList` and `Question` classes to apply the difficulty level to the appropriate question.
+- The sequence and class diagrams provide a visual representation of the workflow and class relationships.
 
-- **Parsing User Input**: Parse the user input to extract the question number and the specified difficulty level.
+#### Operational Flow of Markdiff Command
+1. **Command Reception:**
+    - The `CommandMarkDifficulty` class receives the command input via the CLI.
+2. **Input Parsing:**
+    - The input is parsed to extract the question number (`qnIndex`) and the difficulty level (`qnDifficulty`).
+3. **Input Validation:**
+    - The extracted values are validated to ensure they match expected formats and that the difficulty level is one of the predefined options.
+4. **Difficulty Marking:**
+    - Upon validation, the specified question's difficulty is marked using the provided level by updating the `Question` object in the `QuestionList`.
+5. **Storage Update:**
+    - Changes are persisted to the storage system to ensure that the new difficulty level is retained.
+6. **User Feedback:**
+    - The user is provided with feedback indicating the successful marking of the question's difficulty.
 
-- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
-information.
+#### User Guide for Markdiff Command
+- Users can change the difficulty level of questions using the `markdiff` command followed by the question number and desired difficulty.
+- Difficulty level input is not case-sensitive.
+- The application supports a fixed set of difficulty levels: `easy`, `normal`, and `hard`.
+- If an invalid question number or difficulty level is entered, the user is prompted to retry the command.
 
-- **Marking Difficulty**: Implement the logic to execute the operation of marking the question with the specified 
-difficulty level. This typically involves invoking methods in the QuestionList and Question classes to update the 
-Question's difficulty.
+#### Expected Invalid Commands for Command Markdiff
+Assuming 2 current questions: <br>
+1: [S][ ] question / answer | number | EASY <br>
+2: [M][ ] question2 / 1 / 2 / 3 / 4 / 1 | number | EASY
+- `markdiff 1/easy` or `markdiff 1 /easy`: Question is already set as easy ! No changes made!
+  - Reason: The previous difficulty is easy, no further changes is required. Whitespace before and after the delimiter is ignored.
+- `markdiff 1/hard easy` or `markdiff 1/hard/easy`: 
+  - Ono! You tried to assign more than 1 difficulty level :<
+    Please format your input as markdiff [qn number] /[qn difficulty]!
+  - Reason: There should only be a singular difficulty mode specified after [question index]/
+- `markdiff 0/hard`: 
+  - Please enter valid integer question index!
+    Please format your input as markdiff [qn number] /[qn difficulty]!
+  - Reason: 0 is out outside of the range of question numbers. 
+- `markdiff one/easy`: 
+  - Please enter valid integer question index!
+    Please format your input as markdiff [qn number] /[qn difficulty]!
+  - Reason: the index should be specified using integer type - 1, 2 ... instead of strings
+- `markdiff 1 easy`:
+  - Ono! You tried to mark more than 1 question :<
+    Please format your input as markdiff [qn number] /[qn difficulty]!
+  - Reason: The program requires a delimeter `/` to know where to stop reading the question index
+- `markdiff 1 //easy`:
+  - Ono! You did not indicate difficulty to be assigned the question :<
+    Please format your input as markdiff [qn number] /[qn difficulty]!
+  - Reason: The field for difficulty will be read as null as there is nothing within `//`
+- `markdiff /easy` or `markdiff /easy 1`:
+  - Ono! You did not indicate index of question to be marked :<
+    Please format your input as markdiff [qn number] /[qn difficulty]!
+  - Reason: Program captured that there is a missing argument - question index
+- `markdiff 1/easy; bye`: 
+  -   Ono! You tried to assign more than 1 difficulty level :<
+      Please format your input as markdiff [qn number] /[qn difficulty]!
+  - Reason: Accidential exit commands will be ignored similar to how commands after the 2nd argument will be ignored
 
-- **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
-`dataStorage.updateData(questions)` method is used to save changes to the question list.
-
-- **Error Handling**: Handle any exceptions or errors that may occur during the marking operation and provide 
-appropriate feedback to the user.
-
+<hr>
 
 ### Command Exit - Exit Program
 
@@ -472,6 +532,12 @@ appropriate feedback to the user.
 Command Exit is responsible for exiting the program
 - `bye` - to exit program
 
+#### Expected Invalid Commands for Command Exit
+- `bye123`: Invalid Command - display help
+- `bye 123`: 123 will be ignored and the program shut down per normal
+- `<white-space> bye`: <white-space> here signify any empty blanks before bye. White-space is stripped, so it will be considered a valid command here
+
+<hr>
 
 #### Class structure of Command Exit
 
