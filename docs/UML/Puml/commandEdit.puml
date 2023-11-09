@@ -23,9 +23,9 @@ Parser --> QuizHub : c
 deactivate Parser
 QuizHub -> CommandEdit: Executes executeCommand(ui, dataStorage, questions)
 activate CommandEdit
-CommandEdit -> QuestionList: Calls editQuestionByIndex(index, newDescription, newAnswer)
+CommandEdit -> QuestionList: Calls editQuestionByIndex(index, editField, newValue)
 activate QuestionList
-QuestionList -> Question: Calls editQuestion(newDescription, newAnswer)
+QuestionList -> Question: Calls editQuestion(editField, newValue)
 activate Question
 Question -> Question: Edits question description and/or answer
 Question --> QuestionList: Notifies edit completion
