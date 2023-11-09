@@ -74,4 +74,23 @@ public class IngredientListTest {
         assertEquals(1.0, ingredient.getQuantity());
         assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
     }
+
+    @Test
+    public void updateIngredient_decreaseMoreThanExisting_quantitySame() {
+        Ingredient tomato = new Ingredient("tomato", 10.0, IngredientUnit.PIECE);
+        Ingredient tomato2 = new Ingredient("tomato", -11.0, IngredientUnit.PIECE);
+
+        ingredients.addIngredient(tomato);
+
+        try {
+            ingredients.updateIngredient(tomato2);
+        } catch (EssenFormatException e) {
+            e.handleException();
+        }
+
+        Ingredient ingredient = ingredients.getIngredient(0);
+        assertEquals("tomato", ingredient.getName());
+        assertEquals(10.0, ingredient.getQuantity());
+        assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
+    }
 }

@@ -74,6 +74,8 @@ public class IngredientList {
     }
 
     public void addIngredient(Ingredient ingredient) {
+        assert ingredient.getName() != null : "Ingredient name should not be null";
+
         ingredients.add(ingredient);
     }
 
@@ -89,6 +91,12 @@ public class IngredientList {
         double oldQuantity = existingIngredient.getQuantity();
         double deltaQuantity = ingredientToUpdate.getQuantity();
         double newQuantity = oldQuantity + deltaQuantity;
+
+        if (newQuantity < 0) {
+            // if new quantity is negative, throw exception
+            System.out.println("You do not have enough ingredients to use.");
+            return;
+        }
 
         if (oldQuantity < newQuantity) {
             // increase quantity of existing ingredient

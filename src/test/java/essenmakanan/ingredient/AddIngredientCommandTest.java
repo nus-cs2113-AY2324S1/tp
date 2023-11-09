@@ -43,4 +43,15 @@ public class AddIngredientCommandTest {
         assertEquals(6.0, ingredient.getQuantity());
         assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
     }
+
+    @Test
+    public void addIngredient_negativeValue_nothingCreated(){
+
+        String userInput = "i/cheese,-2,pc";
+        addIngredientCommand = new AddIngredientCommand(userInput, ingredients);
+        addIngredientCommand.executeCommand();
+
+        // nothing should happen
+        assertEquals(1, ingredients.getSize());
+    }
 }

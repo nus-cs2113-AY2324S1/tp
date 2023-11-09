@@ -33,6 +33,11 @@ public class AddIngredientCommand extends Command {
                     this.ingredients.updateIngredient(newIngredient);
                 } else {
                     // add new ingredient
+                    if (newIngredient.getQuantity() < 0) {
+                        System.out.println("You cannot add an ingredient with negative quantity.");
+                        return;
+                    }
+
                     this.ingredients.addIngredient(newIngredient);
                     Ui.printAddIngredientsSuccess(newIngredient.getName());
                 }
