@@ -26,13 +26,13 @@ public class FlashcardCommandParser {
 
         input = input.toLowerCase();
 
-        if (input.startsWith("create flashcard")) {
+        if (input.strip().startsWith("create flashcard")) {
             return new CreateFlashcardCommand();
-        } else if (input.startsWith("list flashcards")) {
+        } else if (input.strip().startsWith("list flashcards")) {
             return new ListFlashcardsCommand();
         } else if (input.startsWith("review flashcards")) {
             return new StartReviewCommand(input);
-        } else if (input.startsWith("delete all flashcards")) {
+        } else if (input.strip().startsWith("delete all flashcards")) {
             return new DeleteAllFlashcardsCommand();
         } else if (input.startsWith("delete flashcard")) {
             return new DeleteFlashcardCommand(input);
