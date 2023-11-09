@@ -302,7 +302,7 @@ feedback to the user.
 
 The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules
 to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
-- `start /[quiz mode] [start details] /[qn mode]`
+- `start /[quiz mode] [start details] /[qn mode] /[qn type]`
 
 #### Sequence Diagram of Start Command
 
@@ -310,26 +310,47 @@ to quiz themselves on alongside whether to randomize the questions or use their 
 
 #### Implementation of Start Command
 
-The start quiz mechanism is facilitated by CommandStart under package quizhub.command. The class utilises methods from `quizhub.questionlist.QuestionList`.  It extends Command with 2 new prompts (`/[quiz mode]` and `/[qn mode]`) and 1 user input field (`/[start details]`). It implements the following operations:
+The CommandStart class, located within the quizhub.command package, is responsible for initiating quizzes. It leverages 
+functionalities from quizhub.questionlist.QuestionList and extends the Command class with additional prompts and 
+user input fields. The command is structured as follows:
+
+`start` to initiate the start command 
 
 `/[quiz mode]`
-1. 2 configurations - `/module` and `/all`
-2.	`/module` must be followed by a category name to retrieve questions from that specific category
-- The method categoriseListByModules from the package `quizhub.questionlist.QuestionList` will be called to retrieve the questions by that are listed within the specified category from the storage list
-- `/all` will not require any input from `/[start details]`
-3.	The method `getAllQns()` from package `quizhub.questionlist.QuestionList` will be called to retrieve all questions from the storage list.
+
+- Supports two configurations: `/module` and `/all`.
+- `/module` must be followed by a module name to fetch questions from that specific category.
+  - Invokes categoriseListByModules from quizhub.questionlist.QuestionList to retrieve questions categorized under the 
+  specified module from the storage list.
+- `/all` does not require additional input and fetches all questions.
+  - Invokes getAllQns() from quizhub.questionlist.QuestionList to retrieve all questions.
+
+`[start details]`
+- Specifies the module category with `/module`, e.g., `/module number` to start a quiz using questions tagged under the "number" category.
+- When `/all` is used for `/[quiz mode]`, this field is left blank, signalling that the quiz should include all stored questions.
 
 `/[qn mode]`
-1.	2 configurations - `/random` and `/normal`
-2.	This prompt is activated after defining `/[quiz mode]` and `/[start details]`
-3.	/random will randomize the list of questions using `java.util.Collections.shuffle` and store it within a temporary array to prevent tempering with the original array in Storage
-4.	`/normal` will not requirwritee any further actions, using the previously generated list as specified by `/[quiz mode]` and `/[start details]`
+- Offers two configurations: `/random` and `/normal`.
+- `/random` shuffles the question list using java.util.Collections.shuffle and stores it in a temporary array to avoid altering the original storage list.
+- `/normal` requires no additional action, using the list as determined by `/[quiz mode]` and [start details].
 
-`/[start details]`
-1.	Define the category of `/module` i.e. `/module` number to call upon the “number” tagged modules when starting the quiz
-2.	This field can be left blank when `/all` is called for `/[quiz mode]` to tell the program to quiz the user on all questions stored within the local storage
+`/[qn type]`
+- Supports three configurations: `/short` for short answer, `/mcq` for multiple-choice questions and `/mix` for a mixed set of all question types.
 
-Thereafter the quiz is started by calling the method `startQuiz()` in package `quizhub.questionlist.QuestionList`. Within `startQuiz()`, the program iterates through the list of totalQuestions while blocking out the answers. The user can input their answer in the input field which is utilized to match with the actual answer to provide “correct” or “wrong”. Each correct answer will increment correctAnswers variable by 1. The quiz ends when all the questions are displayed and the total number of correctAnswers will be displayed.
+#### User Interactions for Start Command
+- Short Answer Questions: Users enter the case-insensitive exact answer and press enter.
+- Multiple Choice Questions: Users select the index corresponding to the correct answer.
+- To terminate the quiz prematurely, users can input `\exitquiz` when prompted with "Your Answer: "
+  - Do utilise the backslash \ before exitquiz
+
+#### Quiz Execution of Start Command
+The quiz begins with the invocation of startQuiz() from quizhub.questionlist.QuestionList. The method iterates through the 
+list of totalQuestions, concealing the answers from view. The user submits their answers through the CLI, which are then checked 
+against the correct answers, providing immediate feedback and updating the score. The quiz terminates once all questions are addressed, and the final score is presented.
+
+#### Expected Invalid Input for Start Command
+
+TODO
 
 ### Shuffle Command
 
