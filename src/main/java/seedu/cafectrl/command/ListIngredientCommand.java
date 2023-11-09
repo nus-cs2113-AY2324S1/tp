@@ -2,7 +2,9 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -18,6 +20,7 @@ public class ListIngredientCommand extends Command {
     protected Ui ui;
     protected Menu menu;
 
+
     public ListIngredientCommand(int listIndex, Menu menu, Ui ui) {
         this.index = listIndex;
         this.menu = menu;
@@ -28,9 +31,17 @@ public class ListIngredientCommand extends Command {
     public void execute() {
         try {
             Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
-            ui.printIngredients(selectedDish);
+            ui.showIngredientsHeader(selectedDish);
+
+            for (Ingredient ingredient : selectedDish.getIngredients()) {
+                ui.formatListIngredient(ingredient.getName(),
+                        ingredient.getQty()+ingredient.getUnit());
+            }
+
+            ui.showIngredientsEndCap();
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalArgumentException(ErrorMessages.UNLISTED_DISH);
         }
     }
+
 }

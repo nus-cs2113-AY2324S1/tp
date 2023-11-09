@@ -14,7 +14,6 @@ import seedu.cafectrl.command.PreviousDayCommand;
 import seedu.cafectrl.command.ListSaleByDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.data.dish.Dish;
-import seedu.cafectrl.data.dish.Ingredient;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -53,15 +52,19 @@ public class Ui {
      *
      * @param selectedDish Dish for ingredients to be listed out.
      */
-    public void printIngredients(Dish selectedDish) {
-        String ingredientsString = selectedDish.getName() + " Ingredients: \n";
-
-        for (Ingredient ingredient : selectedDish.getIngredients()) {
-            ingredientsString += ingredient.toString() + "\n";
-        }
-
-        showToUser(ingredientsString.trim());
+    public void showIngredientsHeader(Dish selectedDish) {
+        String ingredientsString = String.format("|%-55s|", " Dish: " + selectedDish.getName());
+        showToUser(Messages.INGREDIENTS_END_CAP);
+        showToUser(ingredientsString);
+        showToUser(Messages.INGREDIENTS_CORNER);
+        showToUser(Messages.INGREDIENTS_TITLE);
+        showToUser(Messages.INGREDIENTS_CORNER);
     }
+
+    public void showIngredientsEndCap() {
+        showToUser(Messages.INGREDIENTS_END_CAP);
+    }
+
 
     public void printAddDishMessage(Dish dish) {
         String dishNameString = "Dish Name: " + dish.getName();
@@ -73,7 +76,7 @@ public class Ui {
                 dishNameString,
                 dishPriceString);
 
-        printIngredients(dish);
+        showIngredientsHeader(dish);
     }
 
     /**
