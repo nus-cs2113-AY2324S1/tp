@@ -14,7 +14,7 @@ public class EditIngredientTest {
     @BeforeEach
     public void setUp() {
         ingredients = new IngredientList();
-        ingredientToEdit = new Ingredient("bread","2",IngredientUnit.PIECE);
+        ingredientToEdit = new Ingredient("bread",2.0,IngredientUnit.PIECE);
     }
     @Test
     public void editIngredientName_validInput_editSuccess() {
@@ -43,7 +43,7 @@ public class EditIngredientTest {
             e.handleException();
         }
 
-        assertEquals("3", ingredientToEdit.getQuantity());
+        assertEquals(3.0, ingredientToEdit.getQuantity());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class EditIngredientTest {
         }
 
         assertEquals("breads", ingredientToEdit.getName());
-        assertEquals("3", ingredientToEdit.getQuantity());
+        assertEquals(3.0, ingredientToEdit.getQuantity());
         assertEquals(IngredientUnit.GRAM, ingredientToEdit.getUnit());
     }
 

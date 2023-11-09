@@ -38,15 +38,15 @@ public class StorageTest {
         IngredientList ingredients = new IngredientList(ingredientStorage.restoreSavedData());
 
         assertEquals("bread", ingredients.getIngredients().get(0).getName());
-        assertEquals("2", ingredients.getIngredients().get(0).getQuantity());
+        assertEquals(2.0, ingredients.getIngredients().get(0).getQuantity());
         assertEquals("g", ingredients.getIngredients().get(0).getUnit().getValue());
 
         assertEquals("cheese", ingredients.getIngredients().get(1).getName());
-        assertEquals("10", ingredients.getIngredients().get(1).getQuantity());
+        assertEquals(10.0, ingredients.getIngredients().get(1).getQuantity());
         assertEquals("pc", ingredients.getIngredients().get(1).getUnit().getValue());
 
         assertEquals("carrot", ingredients.getIngredients().get(2).getName());
-        assertEquals("5", ingredients.getIngredients().get(2).getQuantity());
+        assertEquals(5.0, ingredients.getIngredients().get(2).getQuantity());
         assertEquals("kg", ingredients.getIngredients().get(2).getUnit().getValue());
     }
 
@@ -66,7 +66,7 @@ public class StorageTest {
         Ingredient ingredient = recipe.getRecipeIngredients().getIngredientByIndex(0);
 
         assertEquals("bread", ingredient.getName());
-        assertEquals("5", ingredient.getQuantity());
+        assertEquals(5.0, ingredient.getQuantity());
         assertEquals("kg", ingredient.getUnit().getValue());
     }
 

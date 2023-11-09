@@ -48,7 +48,7 @@ public class IngredientStorage {
             }
 
             String ingredientName = parsedIngredient[0];
-            String ingredientQuantity = parsedIngredient[1];
+            Double ingredientQuantity = Double.parseDouble(parsedIngredient[1]);
             IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
 
             ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));

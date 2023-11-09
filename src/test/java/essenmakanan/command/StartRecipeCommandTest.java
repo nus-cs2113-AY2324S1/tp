@@ -45,8 +45,8 @@ public class StartRecipeCommandTest {
 
         // For ingredients in our inventory
         ingredients = new IngredientList();
-        Ingredient ingredient1 = new Ingredient("flour", "100", IngredientUnit.GRAM);
-        Ingredient ingredient2 = new Ingredient("egg", "1", IngredientUnit.PIECE);
+        Ingredient ingredient1 = new Ingredient("flour", 100.0, IngredientUnit.GRAM);
+        Ingredient ingredient2 = new Ingredient("egg", 1.0, IngredientUnit.PIECE);
         ingredients.addIngredient(ingredient1);
         ingredients.addIngredient(ingredient2);
     }
@@ -60,14 +60,14 @@ public class StartRecipeCommandTest {
         double ingredientQty1 = 100;
         double ingredientQty2 = 1;
         insufficientIngredients.addIngredient(new Ingredient("flour",
-                Double.toString(ingredientQty1), IngredientUnit.GRAM));
+                ingredientQty1, IngredientUnit.GRAM));
         insufficientIngredients.addIngredient(new Ingredient("egg",
-                Double.toString(ingredientQty2), IngredientUnit.PIECE));
+                ingredientQty2, IngredientUnit.PIECE));
         assert command.getInsufficientIngredients().equals(insufficientIngredients)
                 : "The insufficient quantity was not detected";
 
         IngredientList missingIngredients = new IngredientList();
-        missingIngredients.addIngredient(new Ingredient("yeast", "50", IngredientUnit.GRAM));
+        missingIngredients.addIngredient(new Ingredient("yeast", 50.0, IngredientUnit.GRAM));
         assert command.getMissingIngredients().equals(missingIngredients) : "The missing quantity was not detected";
     }
 }

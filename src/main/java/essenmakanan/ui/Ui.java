@@ -150,7 +150,7 @@ public class Ui {
         drawDivider();
     }
 
-    public static void printEditIngredientQuantitySuccess(String oldQuantity, String newQuantity) {
+    public static void printEditIngredientQuantitySuccess(Double oldQuantity, Double newQuantity) {
         System.out.println("You have successfully edited the ingredient quantity from: " + oldQuantity +
                 " to: " + newQuantity);
         drawDivider();
