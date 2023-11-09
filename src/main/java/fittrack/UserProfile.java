@@ -5,12 +5,9 @@ import fittrack.data.Weight;
 import fittrack.data.Height;
 import fittrack.data.Calories;
 import fittrack.data.Bmi;
-import fittrack.parser.NumberFormatException;
 import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
-import fittrack.storage.Storage;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -114,40 +111,5 @@ public class UserProfile {
         Calories dailyCalorieLimit = Calories.parseCalories(dailyCalorieLimitData);
         Gender gender = Gender.parseGender(genderData);
         return new UserProfile(height, weight, dailyCalorieLimit, gender);
-    }
-
-    /**
-     * Gets user profile details when program starts.
-     *
-     * @throws PatternMatchFailException if regex match fails
-     * @throws NumberFormatException if one of arguments is not double
-     */
-    public void profileSettings(String input) throws ParseException {
-        assert (input != null) : "Profile cannot be null";
-
-        UserProfile profile = parseUserProfile(input);
-        setHeight(profile.getHeight());
-        setWeight(profile.getWeight());
-        setDailyCalorieLimit(profile.getDailyCalorieLimit());
-        setGender(profile.getGender());
-    }
-
-    public void startProfile(UserProfile userProfile, Ui ui, Storage storage, boolean isProfileLoaded) {
-        while (!isProfileLoaded) {
-            try {
-                String input = ui.scanUserProfile();
-                profileSettings(input);
-                ui.printProfileDetails(userProfile);
-                storage.saveProfile(userProfile);
-                isProfileLoaded = true;
-            } catch (PatternMatchFailException e) {
-                System.out.println("Wrong format. Please enter h/<height> w/<weight> g/<gender> l/<dailyCalorieLimit>");
-            } catch (IOException e) {
-                System.out.println("Error occurred while saving profile.");
-                isProfileLoaded = true;
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 }

@@ -4,6 +4,7 @@ import fittrack.command.Command;
 import fittrack.command.CommandResult;
 import fittrack.command.ExitCommand;
 import fittrack.parser.CommandParser;
+import fittrack.parser.ParseException;
 import fittrack.storage.Storage;
 import fittrack.storage.Storage.StorageOperationException;
 import fittrack.storage.Storage.InvalidStorageFilePathException;
@@ -49,8 +50,7 @@ public class FitTrack {
     private void start() {
         ui.printVersion();
         ui.printWelcome();
-        boolean isProfileLoaded = loadStorage(args);
-        userProfile.startProfile(userProfile, ui, storage, isProfileLoaded);
+        load();
     }
 
     private void loopCommandExecution() {
@@ -58,7 +58,9 @@ public class FitTrack {
         do {
             String userCommandLine = ui.scanCommandLine();
             command = CommandParser.parseCommand(userCommandLine);
+
             CommandResult commandResult = executeCommand(command);
+
             ui.printCommandResult(commandResult);
             ui.printLine();
         } while (!ExitCommand.isExit(command));
@@ -76,23 +78,51 @@ public class FitTrack {
     }
 
     // @@author J0shuaLeong
-    private boolean load() {
-        boolean isFirstTime = false;
+    private void load() {
+        // TODO: This method will be eventually changed due to Joshua's Storage rework.
         try {
             if (!storage.isProfileFileEmpty()) {
                 this.userProfile = storage.profileLoad();
                 ui.printPrompt();
-                isFirstTime = true;
             }
             this.mealList = storage.mealLoad();
             this.workoutList = storage.workoutLoad();
             this.stepList = storage.stepLoad();
-            return isFirstTime;
         } catch (StorageOperationException e) {
+            // TODO: Use Ui.
             System.out.println("There was a problem with the loading of storage contents.");
             ui.printLine();
         }
-        return isFirstTime;
+
+        if (userProfile == null) {
+            initUserProfile();
+        }
+        if (mealList == null) {
+            mealList = new MealList();
+        }
+        if (workoutList == null) {
+            workoutList = new WorkoutList();
+        }
+        if (stepList == null) {
+            stepList = new StepList();
+        }
+        save();
+    }
+    // @@author
+
+    // @@author J0shuaLeong
+    public void initUserProfile() {
+        boolean isInputValid = false;
+        while (!isInputValid) {
+            try {
+                String input = ui.scanUserProfile();
+                userProfile = UserProfile.parseUserProfile(input);
+                ui.printProfileDetails(userProfile);
+                isInputValid = true;
+            } catch (ParseException e) {
+                ui.printException(e);
+            }
+        }
     }
     // @@author
 

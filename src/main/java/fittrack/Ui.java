@@ -45,8 +45,9 @@ public class Ui {
     // @@author J0shuaLeong
     public String scanUserProfile() {
         System.out.println(
-                "Please enter your height (in cm), weight (in kg), gender (M or F), " +
-                        "and daily calorie limit (in kcal):"
+                "Please enter your height (in cm), weight (in kg), " +
+                        "gender (M or F), and daily calorie limit (in kcal).\n" +
+                        "Enter in format of `h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CALORIE_LIMIT>`."
         );
         return scanNextLine();
     }
@@ -98,5 +99,9 @@ public class Ui {
 
     public void printSaveFailure() {
         System.out.println("Failed to save data.");
+    }
+
+    public void printException(Exception e) {
+        System.out.println(e.getMessage());
     }
 }
