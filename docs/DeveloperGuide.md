@@ -769,7 +769,7 @@ The details of the data loading and updating process are explained in details be
 
 The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below.
 
-![](UML/Images/Storage.jpg)
+![](UML/Images/storageLoadDataSequence.png)
 
 :exclamation: This sequence diagram emphasizes the process of loading data into storage, and has therefore omitted details of more trivial and/or non-related methods as well as exception handling logic. To find out more about the details, please refer to the complete code and header comments.
 
@@ -809,7 +809,7 @@ input.
 
 #### Overall Flow
 
-![](UML/Images/ui_flow.jpg)
+![](UML/Images/uiFlow.png)
 
 When the program is first initiated, the `displayOpeningMessage()` method is called to display a welcome message while also calling the `loadData()` method of the `dataStorage` to display all the questions stored in the storage file if any.
 
@@ -819,7 +819,7 @@ Finally, the `displayClosingMessage()` method is called to display a farewell me
 
 #### Displaying Quizzes
 
-![](UML/Images/ui_quiz.jpg)
+![](UML/Images/uiDisplayQuiz.png)
 
 The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions.
 

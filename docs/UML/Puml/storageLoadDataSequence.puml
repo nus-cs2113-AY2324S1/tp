@@ -1,0 +1,49 @@
+@startuml
+!include Style.puml
+title Loading Questions Data from File
+
+actor Ui
+participant Storage as ":Storage"
+participant fileScanner as "fileScanner :java.util.Scanner"
+participant rawQuestions as "rawQuestions :java.util.ArrayList<String>"
+
+Ui -> Storage: loadData(void)
+
+activate Storage
+Storage -> Storage: buildCurerntListFromFile(void)
+
+activate Storage
+create fileScanner
+Storage -> fileScanner
+create rawQuestions
+Storage -> rawQuestions
+
+loop fileScanner.hasNextLine()
+    
+    Storage -> fileScanner: nextLine()
+    activate fileScanner
+    fileScanner --> Storage
+    deactivate fileScanner
+
+    Storage -> rawQuestions: add(rawQuestion)
+    activate rawQuestions
+    rawQuestions --> Storage
+    deactivate rawQuestions
+end
+
+Storage -> Storage: parseQuestionsFromStrings(void)
+activate Storage
+
+loop i < rawQuestions.size()
+    Storage -> Storage: addQuestionsFromFile(void)
+    activate Storage
+    deactivate Storage
+end
+
+destroy fileScanner
+destroy rawQuestions
+
+Storage --> Ui: return questions data
+
+deactivate Storage
+@enduml

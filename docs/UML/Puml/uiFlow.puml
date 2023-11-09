@@ -1,0 +1,38 @@
+@startuml
+!include Style.puml
+
+actor User
+participant Quizhub as ":Quizhub"
+participant Ui as ":Ui"
+participant Storage as "dataStorage :Storage"
+
+User -> Quizhub : run()
+activate Quizhub
+Quizhub -> Ui : displayOpeningMessage()
+activate Ui
+Ui -> Storage : loadData()
+activate Storage 
+Storage --> Ui 
+deactivate Storage
+Ui --> Quizhub
+deactivate Ui
+
+loop not command.isExit
+    Quizhub -> Ui : getUserInput()
+    activate Ui
+    Ui --> Quizhub : command:String
+    deactivate Ui
+    ref over Quizhub, Ui : parse and execute command
+end
+
+Quizhub -> Ui : displayClosingMessage()
+activate Ui
+Ui -> Storage : updateData()
+activate Storage 
+Storage --> Ui 
+deactivate Storage
+Ui --> Quizhub
+deactivate Ui
+Quizhub --> User
+deactivate Quizhub
+@enduml
