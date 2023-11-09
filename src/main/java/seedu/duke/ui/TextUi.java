@@ -235,4 +235,18 @@ public class TextUi {
         return Sb.toString();
     }
 
+    public static String showAchievement() {
+        int numberOfGoal = Duke.achievedGoals.getGoalCount();
+        if (numberOfGoal == 0) {
+            return "Add oil! There is no achievement found.";
+        }
+        StringBuilder Sb = new StringBuilder();
+        Sb.append("Congratulation! See your achievements below: \n");
+        for (int i = 0; i < numberOfGoal; i++){
+            Sb.append(i + 1).append(". [A]").append(Duke.achievedGoals.getGoal(i)).append("\n");
+        }
+
+        return Sb.toString();
+    }
+
 }

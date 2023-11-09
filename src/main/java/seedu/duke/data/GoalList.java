@@ -56,8 +56,9 @@ public class GoalList extends ArrayList<Goal> {
         Goal achievedGoal = Duke.goals.remove(index);
         Duke.goals.goalCount--;
         Duke.achievedGoals.add(achievedGoal);
+        Duke.achievedGoals.goalCount++;
         return "Congratulation! You have achieved one goal!\n"
-                + "[Finished]" + achievedGoal + "✔✔✔";
+                + "[Finished]" + achievedGoal + "(:";
     }
 
     /**
@@ -168,6 +169,18 @@ public class GoalList extends ArrayList<Goal> {
         String[] cmdSplit = cmd.split(" ");
         if (cmdSplit.length != 1){
             throw new IncorrectFormatException("Use single word [viewG] to view your goal list.");
+        }
+    }
+
+    /**
+     * similar implementation to verify view goal list command
+     * @param cmd Raw user command
+     * @throws IncorrectFormatException if more than one word is input
+     */
+    public static void verifyViewAchievementInput(String cmd) throws IncorrectFormatException {
+        String[] cmdSplit = cmd.split(" ");
+        if (cmdSplit.length != 1){
+            throw new IncorrectFormatException("Use single word [achievement] to view your achievement.");
         }
     }
 
