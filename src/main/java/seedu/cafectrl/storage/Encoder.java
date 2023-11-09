@@ -118,7 +118,7 @@ public class Encoder {
             StringBuilder orderString = new StringBuilder();
             //day of each orderList is index + 1
             orderString.append((day + 1) + DIVIDER);
-            orderString.append(NULL_ORDER_DAY + DIVIDER);
+            orderString.append(NULL_ORDER_DAY);
             orderString.append(System.lineSeparator());
             encodedList.add(String.valueOf(orderString));
         }

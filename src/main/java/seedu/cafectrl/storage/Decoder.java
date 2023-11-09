@@ -145,6 +145,13 @@ public class Decoder {
         return new Sales(orderLists);
     }
 
+    /**
+     * Increases the size of the orderlist when there is gap between the previous order and the next
+     *
+     * @param orderLists The current partially filled ArrayList of OrderList
+     * @param day The day of the next order
+     * @return orderLists after filling in the gaps
+     */
     private static ArrayList<OrderList> fillOrderListSize(ArrayList<OrderList> orderLists, int day) {
         while (orderLists.size() <= day) {
             orderLists.add(new OrderList());
