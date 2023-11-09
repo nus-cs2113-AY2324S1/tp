@@ -4,7 +4,6 @@ import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.parser.IngredientParser;
-import essenmakanan.ui.Ui;
 
 public class AddIngredientCommand extends Command {
     private String toAdd;
@@ -29,7 +28,6 @@ public class AddIngredientCommand extends Command {
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredient);
                 ingredients.addIngredient(newIngredient);
-                Ui.printAddIngredientsSuccess(newIngredient.getName());
             } catch (EssenFormatException e) {
                 e.handleException();
             }
