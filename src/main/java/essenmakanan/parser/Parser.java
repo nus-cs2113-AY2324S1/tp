@@ -1,21 +1,6 @@
 package essenmakanan.parser;
 
-import essenmakanan.command.AddIngredientCommand;
-import essenmakanan.command.AddRecipeCommand;
-import essenmakanan.command.Command;
-import essenmakanan.command.DeleteIngredientCommand;
-import essenmakanan.command.DeleteRecipeCommand;
-import essenmakanan.command.DuplicateRecipeCommand;
-import essenmakanan.command.EditIngredientCommand;
-import essenmakanan.command.EditRecipeCommand;
-import essenmakanan.command.ExitCommand;
-import essenmakanan.command.FilterRecipesCommand;
-import essenmakanan.command.HelpCommand;
-import essenmakanan.command.StartRecipeCommand;
-import essenmakanan.command.ViewIngredientsCommand;
-import essenmakanan.command.ViewRecipesCommand;
-import essenmakanan.command.ViewSpecificIngredientCommand;
-import essenmakanan.command.ViewSpecificRecipeCommand;
+import essenmakanan.command.*;
 import essenmakanan.exception.EssenCommandException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
@@ -93,6 +78,9 @@ public class Parser {
             break;
         case "duplicate":
             command = new DuplicateRecipeCommand(recipes, inputDetail);
+            break;
+        case "plan":
+            command = new PlanCommand(ingredients, recipes, inputDetail);
             break;
         case "help":
             command = new HelpCommand();

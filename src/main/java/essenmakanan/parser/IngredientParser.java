@@ -5,6 +5,9 @@ import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
+import essenmakanan.recipe.Recipe;
+import essenmakanan.recipe.RecipeIngredientList;
+import essenmakanan.recipe.RecipeList;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
@@ -25,6 +28,16 @@ public class IngredientParser {
 
         return index;
     }
+
+    /*public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
+        IngredientList allIngredients = new IngredientList();
+        RecipeIngredientList recipeIngredients;
+
+        for (Recipe recipe : recipes.getRecipes()) {
+            recipeIngredients = recipe.getRecipeIngredients();
+            for ()
+        }
+    }*/
 
     public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
         return ingredient1.getUnit().equals(ingredient2.getUnit());
