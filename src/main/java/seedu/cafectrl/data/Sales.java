@@ -1,6 +1,8 @@
 package seedu.cafectrl.data;
 
 import java.util.ArrayList;
+
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -57,13 +59,20 @@ public class Sales {
      * @param menu The Menu object representing the cafe's menu.
      */
     public void printSales(Ui ui, Menu menu) {
-        if (orderLists.isEmpty()) {
-            ui.showToUser("No orders for the day!");
+        if(orderLists.isEmpty()) {
+            ui.showToUser("No sales made.");
             return;
         }
         ui.showSalesBottom();
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
+
+            ui.showToUser("Day " + (day + 1) + ":");
+
+            if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
+                ui.showToUser("No sales for this day.");
+                continue;
+            }
 
             ui.showSalesTop(day + DAY_DISPLAY_OFFSET);
             orderList.printOrderList(menu, ui);
@@ -82,11 +91,16 @@ public class Sales {
         int orderListIndex = day - 1;
         try {
             OrderList orderList = orderLists.get(orderListIndex);
+            if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
+                ui.showToUser("No sales for this day.");
+                return;
+            }
             ui.showSalesTop(day);
 
             orderList.printOrderList(menu, ui);
+            ui.showSalesBottom();
         } catch (Exception e) {
-            ui.showToUser("An error occurred while printing sales for the specified day.");
+            ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
         }
     }
     //@@author

@@ -2,11 +2,12 @@ package seedu.cafectrl.command;
 
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
+import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 //@@author NaychiMin
-public class ShowSalesByDayCommand extends Command {
-    public static final String COMMAND_WORD = "show_sale";
+public class ListSaleByDayCommand extends Command {
+    public static final String COMMAND_WORD = "list_sale";
     public static final String MESSAGE_USAGE = "To show sales for a chosen day:\n"
             + COMMAND_WORD + " day/DAY_TO_DISPLAY\n"
             + "Example: " + COMMAND_WORD + " day/1";
@@ -16,7 +17,7 @@ public class ShowSalesByDayCommand extends Command {
     private final Sales sales;
     private final Menu menu;
 
-    public ShowSalesByDayCommand(int day, Ui ui, Sales sales, Menu menu) {
+    public ListSaleByDayCommand(int day, Ui ui, Sales sales, Menu menu) {
         this.day = day;
         this.ui = ui;
         this.sales = sales;
@@ -25,6 +26,11 @@ public class ShowSalesByDayCommand extends Command {
 
     @Override
     public void execute() {
-        sales.printSaleByDay(ui, menu, day);
+        try {
+            sales.printSaleByDay(ui, menu, day);
+        } catch (Exception e) {
+            ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
+        }
+
     }
 }
