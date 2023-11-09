@@ -23,11 +23,11 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 ## Content of Command
 
-Exercise |    Meal     |             Goal             | Others  
---------|:-----------:|:--------------------------------------:|:---------:|:----:|
-![](https://via.placeholder.com/100.png?text=Photo) | Kevin Zhang | [Github](https://github.com/kevinz420) | [Portfolio](docs/team/johndoe.md)
-![](https://picsum.photos/100) |   Ethan Huang   |     [Github](https://github.com/remy9926)      | [Portfolio](docs/team/johndoe.md) 
-![](https://via.placeholder.com/100.png?text=Photo) |  Jiayan Tian   |     [Github](https://github.com/j-y-yan)      | [Portfolio](docs/team/johndoe.md)
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |
 
 
 ## Command Type
