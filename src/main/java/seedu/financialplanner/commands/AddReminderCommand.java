@@ -1,13 +1,18 @@
 package seedu.financialplanner.commands;
+
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.reminder.Reminder;
 import seedu.financialplanner.utils.Ui;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 public class AddReminderCommand extends Command {
     private final String type;
-    private final String date;
+    private final LocalDate date;
 
     public AddReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         if(!rawCommand.extraArgs.containsKey("t")){
             throw new IllegalArgumentException("Reminder must have a type");
         }
@@ -19,10 +24,23 @@ public class AddReminderCommand extends Command {
         if(!rawCommand.extraArgs.containsKey("d")){
             throw new IllegalArgumentException("Reminder must have a date");
         }
-        date = rawCommand.extraArgs.get("d");
-        if(date.isEmpty()){
+
+        String dateString = rawCommand.extraArgs.get("d");
+        if(dateString.isEmpty()){
             throw new IllegalArgumentException("Reminder date cannot be empty");
         }
+
+        try {
+            date = LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Reminder date must be in the format yyyy-MM-dd");
+        }
+
+        LocalDate currentTime = LocalDate.now();
+        if(date.isBefore(currentTime)){
+            throw new IllegalArgumentException("Reminder date cannot be in the past");
+        }
+
         rawCommand.extraArgs.remove("d");
         if(!rawCommand.extraArgs.isEmpty()){
             String unknownExtraArgument = new java.util.ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
