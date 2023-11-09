@@ -283,15 +283,7 @@ ____________________________________________________________
 Type `findworkout <KEYWORD>` to find a workout.
 
 ____________________________________________________________
-`save` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-____________________________________________________________
 `` is an invalid command.
-Type `help` or `help <COMMAND>` to view help.
-
-____________________________________________________________
-`foo` is an invalid command.
 Type `help` or `help <COMMAND>` to view help.
 
 ____________________________________________________________
