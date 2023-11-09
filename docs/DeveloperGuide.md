@@ -436,6 +436,7 @@ Command Syntax:
    - It calls upon the shuffleQuestions() method from the QuestionList class.
 3. **Shuffling Process:**
    - The shuffleQuestions() method utilizes java.util.Collections.shuffle to randomize the order.
+   - The shuffling process is completely random and **THERE IS A CHANCE THAT THE RESULT IS NOT RANDOMISED**
    - This method directly alters the storage list within QuestionList.
 4. **Storage Update:**
    - Once shuffled, the new order of questions is written back to the persistent storage.
@@ -444,6 +445,14 @@ Command Syntax:
    - Upon successful shuffling, a confirmation message is displayed to the user through the CLI.
 
 **NOTE:** Unlike the temporary array used in the Start Command's /random mode, the shuffled sequence in the Shuffle Command is committed to storage, meaning that the new order becomes the default arrangement for all subsequent quiz activities.
+
+#### Expected Invalid Commands for Command Shuffle
+- `shuffle 123`: 
+  - Questions are now shuffled!
+  - Reason: Input detached and after the initial `shuffle` is ignored
+- `shuffle123` or `shuffl`:
+  - Help command shown
+  - Reason: invalid or incomplete commands that do not conform specifically to `shuffle`
 
 <hr>
 
