@@ -64,7 +64,7 @@ public class Storage {
      *
      * @return A Menu object containing data from the file.
      */
-    public Menu loadMenu(){
+    public Menu loadMenu() {
         try {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
             if (isFileCorrupted(encodedMenu)) {

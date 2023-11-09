@@ -1,4 +1,4 @@
 package seedu.cafectrl.storage;
 
-public class CorruptedDataException extends Exception{
+public class CorruptedDataException extends Exception {
 }
