@@ -6,7 +6,7 @@ import fittrack.parser.ParseException;
 public class AddStepsCommand extends Command{
     public static final String COMMAND_WORD = "addsteps";
     private static final String DESCRIPTION =
-            String.format("`%s` shows your total number of steps on a specific date.", COMMAND_WORD);
+            String.format("`%s` adds your step data to the list.", COMMAND_WORD);
     private static final String USAGE = String.format(
             "Type `%s <DATE>` to add an entry of the steps walked on that date.\n" +
                     "You should type <DATE> in format of `yyyy-MM-dd`.",
