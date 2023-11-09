@@ -10,12 +10,12 @@ public class AddVendorSupplyCommand extends Command {
     public static final String COMMAND_WORD = "addVendorSupply";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a drug to a vendor's supply list. "
-            + "Parameters: VENDOR_NAME DRUG_NAME" + System.lineSeparator()
-            + "Example: " + COMMAND_WORD + " Moderna Paracetamol";
+            + "Parameters: VENDOR_NAME, DRUG_NAME" + System.lineSeparator()
+            + "Example: " + COMMAND_WORD + " /v Moderna /n Paracetamol";
 
     public static final String MESSAGE_SUCCESS = "New drug added to %1$s's supply list: %2$s";
     public static final String MESSAGE_VENDOR_NOT_FOUND = "Vendor not found: %1$s";
-    public static final String MESSAGE_DRUG_EXISTS = "The drug '%1$s' already exists in the inventory";
+    public static final String MESSAGE_DRUG_EXISTS = "The drug '%1$s' already exists in the vendor's supply list";
 
     private final String vendorName;
     private final String drugName;
@@ -43,12 +43,7 @@ public class AddVendorSupplyCommand extends Command {
 
         if (this.vendorsList.getVendorEntries().stream().anyMatch(vendor ->
                 vendor.getName().equalsIgnoreCase(lowercaseVendorName))) {
-            // Check if the drugName is already supplied by the specified vendor
-            boolean isDrugAlreadySupplied = VendorSupplyList.getDrugsSuppliedByVendor(lowercaseVendorName)
-                    .stream()
-                    .anyMatch(drug -> drug.equalsIgnoreCase(lowercaseDrugName));
-
-            if (isDrugAlreadySupplied) {
+            if (VendorSupplyList.containsDrug(lowercaseVendorName, lowercaseDrugName)) {
                 return new CommandResult<>(String.format(MESSAGE_DRUG_EXISTS, lowercaseDrugName));
             } else {
                 VendorSupplyList.addDrugToVendor(lowercaseVendorName, lowercaseDrugName);
@@ -58,5 +53,4 @@ public class AddVendorSupplyCommand extends Command {
             return new CommandResult<>(String.format(MESSAGE_VENDOR_NOT_FOUND, lowercaseVendorName));
         }
     }
-
 }

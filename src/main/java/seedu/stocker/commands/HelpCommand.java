@@ -48,6 +48,20 @@ public class HelpCommand extends Command {
                         + System.lineSeparator()
                         + System.lineSeparator() + ListThresholdCommand.MESSAGE_USAGE
                         + System.lineSeparator()
+                        + System.lineSeparator() + AddDescriptionCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + GetDescriptionCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ListDescriptionsCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + AddVendorSupplyCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + ListVendorSupplyCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + FindVendorSupplyCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
+                        + System.lineSeparator() + DeleteVendorSupplyCommand.MESSAGE_USAGE
+                        + System.lineSeparator()
                         + System.lineSeparator() + ExitCommand.MESSAGE_USAGE
 
         );

@@ -7,8 +7,7 @@ public class GetDescriptionCommand extends Command {
 
     public static final String COMMAND_WORD = "getDescription";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets the description of a specific drug."
-            + System.lineSeparator()
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets the description of a specific drug. "
             + "Parameters: NAME" + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " /n Panadol";
 
@@ -31,13 +30,15 @@ public class GetDescriptionCommand extends Command {
      * @return CommandResult containing the drug description if found, or an error message if not found.
      */
     @Override
-    public CommandResult execute() {
-        String description = seedu.stocker.drugs.Description.getDescription(drugName);
+    public <T> CommandResult<T> execute() {
+        String lowercaseDrugName = drugName.toLowerCase();
+
+        String description = seedu.stocker.drugs.Description.getDescription(lowercaseDrugName);
 
         if (description != null) {
             return new CommandResult<>(description);
         } else {
-            return new CommandResult<>(String.format(MESSAGE_DESCRIPTION_NOT_FOUND, drugName));
+            return new CommandResult<>(String.format(MESSAGE_DESCRIPTION_NOT_FOUND, lowercaseDrugName));
         }
     }
 }

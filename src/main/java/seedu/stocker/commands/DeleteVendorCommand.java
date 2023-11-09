@@ -18,7 +18,7 @@ public class DeleteVendorCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a vendor from the vendors list. "
             + "Parameter: NAME" + System.lineSeparator()
             + "Example: " + COMMAND_WORD
-            + " Moderna";
+            + " /v Moderna";
 
     /**
      * Message for indicating successful deletion of a vendor.

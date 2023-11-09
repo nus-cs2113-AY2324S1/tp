@@ -29,6 +29,7 @@ import seedu.stocker.commands.AddVendorSupplyCommand;
 import seedu.stocker.commands.FindVendorSupplyCommand;
 import seedu.stocker.commands.ListVendorSupplyCommand;
 import seedu.stocker.commands.DeleteVendorCommand;
+import seedu.stocker.commands.DeleteVendorSupplyCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
@@ -78,11 +79,23 @@ public class Parser {
         case GetDescriptionCommand.COMMAND_WORD:
             return prepareGetDescriptionCommand(arguments);
 
+        case ListDescriptionsCommand.COMMAND_WORD:
+            return prepareListDescriptionsCommand(arguments);
+
         case AddVendorSupplyCommand.COMMAND_WORD:
             return prepareAddVendorSupplyCommand(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return prepareDeleteCommand(arguments);
+
+        case ListVendorSupplyCommand.COMMAND_WORD:
+            return prepareListVendorSupplyCommand(arguments);
+
+        case FindVendorSupplyCommand.COMMAND_WORD:
+            return prepareFindVendorSupplyCommand(arguments);
+
+        case DeleteVendorSupplyCommand.COMMAND_WORD:
+            return prepareDeleteVendorSupplyCommand(arguments);
 
         case CheckOutCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
@@ -159,20 +172,6 @@ public class Parser {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListThresholdCommand.MESSAGE_USAGE));
             }
-
-        case ListDescriptionsCommand.COMMAND_WORD:
-            if (arguments.isEmpty()) {
-                return new ListDescriptionsCommand();
-            } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListDescriptionsCommand.MESSAGE_USAGE));
-            }
-
-        case ListVendorSupplyCommand.COMMAND_WORD:
-            return new ListVendorSupplyCommand(arguments);
-
-        case FindVendorSupplyCommand.COMMAND_WORD:
-            return new FindVendorSupplyCommand(arguments);
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -301,22 +300,22 @@ public class Parser {
     }
 
     private Command prepareAddVendorCommand(String args) {
-        String[] vendorArgs = args.split(" ", 1);
-        String vendorName = vendorArgs[0];
-        if (vendorName == null || vendorName.isEmpty() || vendorName.equals(" ")) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
-        }
-        return new AddVendorCommand(vendorName);
+        Pattern pattern = Pattern.compile("/v (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String vendorName = matcher.group(1).trim();
+            return new AddVendorCommand(vendorName);
+        } return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
     }
 
     private Command prepareDeleteVendorCommand(String args) {
-        String[] vendorArgs = args.split(" ", 1);
-        String vendorName = vendorArgs[0];
-        if (vendorName == null || vendorName.isEmpty() || vendorName.equals(" ")) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        Pattern pattern = Pattern.compile("/v (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String vendorName = matcher.group(1).trim();
+            return new DeleteVendorCommand(vendorName);
+        }  return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteVendorCommand.MESSAGE_USAGE));
-        }
-        return new DeleteVendorCommand(vendorName);
     }
 
     private Command prepareSetThresholdCommand(String args) {
@@ -341,9 +340,9 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*) /desc (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 2) {
-            String name = matcher.group(1);
-            String description = matcher.group(2);
-            if (name != null && !name.isEmpty() && description != null && !description.isEmpty()) {
+            String name = matcher.group(1).trim();;
+            String description = matcher.group(2).trim();
+            if (!name.isEmpty() && !description.isEmpty()) {
                 return new AddDescriptionCommand(name, description);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -359,8 +358,8 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 1) {
-            String name = matcher.group(1);
-            if (name != null && !name.isEmpty()) {
+            String name = matcher.group(1).trim();;
+            if (!name.isEmpty()) {
                 return new GetDescriptionCommand(name);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -372,17 +371,82 @@ public class Parser {
         }
     }
 
+    private Command prepareListDescriptionsCommand(String args) {
+        if (args.isEmpty()) {
+            return new ListDescriptionsCommand();
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListDescriptionsCommand.MESSAGE_USAGE));
+        }
+    }
+
     private Command prepareAddVendorSupplyCommand(String args) {
-        String[] parts = args.trim().split(" ", 2);
-
-        if (parts.length == 2) {
-            String vendorName = parts[0];
-            String drugName = parts[1];
-
-            return new AddVendorSupplyCommand(vendorName, drugName);
+        Pattern pattern = Pattern.compile("/v (.*) /n (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 2) {
+            String vendor = matcher.group(1).trim();
+            String drug = matcher.group(2).trim();
+            if (!vendor.isEmpty() && !drug.isEmpty()) {
+                return new AddVendorSupplyCommand(vendor, drug);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddVendorSupplyCommand.MESSAGE_USAGE));
+            }
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddVendorSupplyCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareListVendorSupplyCommand(String args) {
+        Pattern pattern = Pattern.compile("/v (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String vendor = matcher.group(1).trim();
+            if (!vendor.isEmpty()) {
+                return new ListVendorSupplyCommand(vendor);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListVendorSupplyCommand.MESSAGE_USAGE));
+            }
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListVendorSupplyCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareFindVendorSupplyCommand(String args) {
+        Pattern pattern = Pattern.compile("/n (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 1) {
+            String drug = matcher.group(1).trim();
+            if (!drug.isEmpty()) {
+                return new FindVendorSupplyCommand(drug);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindVendorSupplyCommand.MESSAGE_USAGE));
+            }
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindVendorSupplyCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareDeleteVendorSupplyCommand(String args) {
+        Pattern pattern = Pattern.compile("/v (.*) /n (.*)");
+        Matcher matcher = pattern.matcher(args);
+        if (matcher.matches() && matcher.groupCount() == 2) {
+            String vendor = matcher.group(1).trim();
+            String drug = matcher.group(2).trim();
+            if (!vendor.isEmpty() && !drug.isEmpty()) {
+                return new DeleteVendorSupplyCommand(vendor, drug);
+            } else {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteVendorSupplyCommand.MESSAGE_USAGE));
+            }
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteVendorSupplyCommand.MESSAGE_USAGE));
         }
     }
 

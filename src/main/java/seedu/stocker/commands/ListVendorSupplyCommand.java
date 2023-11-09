@@ -4,8 +4,6 @@ import seedu.stocker.vendors.VendorSupplyList;
 
 import java.util.List;
 
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 /**
  * Lists the drugs supplied by a specific vendor in a case-insensitive manner.
  */
@@ -13,7 +11,7 @@ public class ListVendorSupplyCommand extends Command {
     public static final String COMMAND_WORD = "listVendorSupply";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the drugs supplied by a specific vendor. "
             + "Parameters: VENDOR_NAME" + System.lineSeparator()
-            + "Example: " + COMMAND_WORD + " Moderna";
+            + "Example: " + COMMAND_WORD + " /v Moderna";
 
     private final String vendorName;
 
@@ -32,19 +30,16 @@ public class ListVendorSupplyCommand extends Command {
      * @return CommandResult containing the list of supplied drugs or a message indicating none were supplied.
      */
     @Override
-    public CommandResult execute() {
+    public <T> CommandResult<T> execute() {
         String lowercaseVendorName = vendorName.toLowerCase();
-
-        if (lowercaseVendorName.isEmpty()) {
-            return new CommandResult<>(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-        }
 
         List<String> suppliedDrugs = VendorSupplyList.getDrugsSuppliedByVendor(lowercaseVendorName);
 
         if (suppliedDrugs.isEmpty()) {
             return new CommandResult<>("No drugs supplied by " + vendorName);
         } else {
-            return new CommandResult<>("Drugs supplied by " + vendorName + ": " + String.join(", ", suppliedDrugs));
+            return new CommandResult<>("Drugs supplied by " + vendorName + ": "
+                    + String.join(", ", suppliedDrugs));
         }
     }
 }

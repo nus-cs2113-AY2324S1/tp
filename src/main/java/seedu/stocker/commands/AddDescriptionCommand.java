@@ -7,7 +7,7 @@ public class AddDescriptionCommand extends Command {
 
     public static final String COMMAND_WORD = "addDescription";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new description for a specific drug "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new description for a specific drug. "
             + "Parameters: NAME, DESCRIPTION" + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " /n Panadol /desc Pain Relief ";
 
@@ -33,8 +33,13 @@ public class AddDescriptionCommand extends Command {
      * @return CommandResult indicating the success of adding the description.
      */
     @Override
-    public CommandResult execute() {
-        seedu.stocker.drugs.Description.addDescription(drugName, drugDescription);
-        return new CommandResult<>(String.format(MESSAGE_SUCCESS, drugName, drugDescription));
+    public <T> CommandResult<T>  execute() {
+        String lowercaseDrugName = drugName.toLowerCase();
+        String lowercaseDrugDescription = drugDescription.toLowerCase();
+
+        seedu.stocker.drugs.Description.addDescription(lowercaseDrugName, lowercaseDrugDescription);
+        return new CommandResult<>(String.format(MESSAGE_SUCCESS, lowercaseDrugName, lowercaseDrugDescription));
+
+
     }
 }
