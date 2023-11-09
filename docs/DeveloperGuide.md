@@ -255,21 +255,29 @@ to determine if the search term is located that question. If the contains method
 for a given question, that question's contents and index will be copied to a 
 new ArrayList of questions, and subsequently print them.
 
-### Edit Command - Edit Question / Answer
+### Edit Command - Edit Question / Answer / Option
 #### Brief Description of Edit Command
-The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or 
-answer of a question. The CommandEdit class supports two edit commands: 
+The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or answer of a question. The CommandEdit class supports 2 edit commands for short answer questions and 3 edit commands for multiple choice questions: 
+
+For short answer questions:
 
 - `edit [question number] /description [description]` - edits the description of the question with the specified number
-
 - `edit [question number] /answer [answer]` - edits the answer to the question with the specified number
+i.e. `edit 1 /description new description`,  `edit 2 /answer new answer`
+
+For multiple choice questions:
+
+- `edit [question number] /description [description]` - edits the description of the question with the specified number
+- `edit [question number] /answer [answer index]` - edits the answer index to the question with the specified number
+- `edit [question number] /option[option number] [new value]` - edits the option specified by the option number
+i.e. `edit 1 /description new description`,  `edit 2 /answer 3`, `edit 3 /option4 new option 4`
 
 #### Class Structure of Edit Command
 The CommandEdit class includes the following key components:
 
 - `qnIndex`: An integer representing the question number to be edited.
-- `newDescription`: A string representing the new description for the question (or null if not edited).
-- `newAnswer`: A string representing the new answer for the question (or null if not edited).
+- `editField`: A string representing the field of the question to be edited.
+- `newValue`: A string representing the new value to be edited into the field.
 
 #### Implementation of Edit Command
 
@@ -277,20 +285,16 @@ The CommandEdit class includes the following key components:
 
 Here are the key steps for implementing this class:
 
-- **Parsing User Input**: Parse the user input to extract the question number, edit criteria (/description or /answer), 
-and new values (description or answer).
+- **Parsing User Input**: Parse the user input to extract the question number, edit field (/description or /answer or /option[option number]), and new values (description or answer or option).
 
-- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
-information.
+- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid information.
 
-- **Edit Operation**: Implement the logic to execute the edit operation based on the provided criteria. This typically 
-involves invoking methods in the QuestionList and Question classes to update the question's description or answer.
+- **Edit Operation**: Implement the logic to execute the edit operation based on the provided edit field. This typically involves invoking methods in the QuestionList and Question classes to update the question's description, answer or option.
 
 - **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
 `dataStorage.updateData(questions)` method is used to save changes to the question list.
 
-- **Error Handling**: Handle any exceptions or errors that may occur during the edit operation and provide appropriate 
-feedback to the user.
+- **Error Handling**: Handle any exceptions or errors that may occur during the edit operation and provide appropriate feedback to the user.
 
 ![commandEditObjectDiagram.png](UML/Images/commandEditObjectDiagram.png)
 ![commandEditObjectDiagram2.png](UML/Images/commandEditObjectDiagram2.png)
@@ -432,7 +436,7 @@ In addition to the main `loadData` method, the process involves the following 3 
 - `private void parseQuestionsFromStrings(ArrayList<String> rawQuestions, QuestionList questions)`
 - `public void buildCurrentListFromFile(QuestionList questions)`
 
-The general idea is that when the program is first initiated, the `loadData` method is called from within the `Ui` class, which passes in an empty `QuestionList`. Within the method itself, the helper method `buildCurrentListFromFile()` will take in this empty `QuestionList` object and populate it with `question` objects according to textual information stored within the specified file. This is done by first extracting each question stored line by line into a new `Arraylist<String> rawQuestions`, then calling another helper method `parseQuestionsFromStrings()` to add each question into the `QuestionList` via a third helper method `addQuestionFromFileaddQuestionFromFile`.
+The general idea is that when the program is first initiated, the `loadData` method is called from within the `Ui` class, which passes in an empty `QuestionList`. Within the method itself, the helper method `buildCurrentListFromFile()` will take in this empty `QuestionList` object and populate it with `question` objects according to textual information stored within the specified file. This is done by first extracting each question stored line by line into a new `Arraylist<String> rawQuestions`, then calling another helper method `parseQuestionsFromStrings()` to add each question into the `QuestionList` via a third helper method `addQuestionFromFile()`.
 
 The process is refactored into these methods to avoid deep nesting of code to achieve clearer logical flow and more readability and easier debugging process.
 
