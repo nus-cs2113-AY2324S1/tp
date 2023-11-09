@@ -3,8 +3,6 @@ package cashleh.commands;
 import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehBudgetException;
 
-import java.util.logging.Level;
-
 /**
  * This class extends the Command class and is
  * used to encapsulate the action of viewing the budget and its progress.
@@ -26,6 +24,6 @@ public class ViewBudget extends Command {
     @Override
     public void execute() throws CashLehBudgetException {
         budgetHandler.printBudget();
-        logger.log(Level.INFO, "viewBudget was successfully executed.");
+        logger.log(loggerLevel, "viewBudget was successfully executed.");
     }
 }

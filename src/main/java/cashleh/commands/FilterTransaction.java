@@ -6,8 +6,6 @@ import cashleh.transaction.ExpenseStatement;
 import cashleh.transaction.FinancialStatement;
 import cashleh.transaction.IncomeStatement;
 
-import java.util.logging.Level;
-
 /**
  * The FilterTransaction class represents a command to filter expenses and incomes in the CashLeh application.
  * It allows users to filter expense and income transactions based on various criteria such as description,
@@ -38,7 +36,7 @@ public class FilterTransaction extends Command{
         try {
             financialStatement.findTransaction(transactionToFind.getDescription(), transactionToFind.getAmount(),
                     transactionToFind.getDate(), transactionToFind.getCategory());
-            logger.log(Level.INFO, "transaction entry was successfully filtered");
+            logger.log(loggerLevel, "transaction entry was successfully filtered");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();
         }

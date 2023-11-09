@@ -2,8 +2,8 @@
 
 ## Introduction
 
-CashLeh? is a CLI application mainly supporting working adults and students who struggle with managing finances
-. It allows them to set a budget and track both their earnings and spending habits in a seamless way to have a 
+CashLeh? is a CLI application mainly supporting working adults and students who struggle with managing finances.
+It allows them to set a budget and track both their earnings and spending habits in a seamless way to have a
 neat overview of their financial situation.
 
 ## Quick Start
@@ -26,7 +26,7 @@ Adds an income with a description, amount, date and category.
 
 Format: `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `AMOUNT` must be a positive number.
+* The `AMOUNT` must be a positive number and less than the `MAX_AMT` set. If need be, larger transactions can be split into smaller transactions.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended. 
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
 (SALARY, ALLOWANCE, INVESTMENT, LOTTERY_GAMBLING)</code>, it will default to <code>OTHERS</code>
@@ -61,7 +61,7 @@ Adds an expense with a description, amount, date and category.
 
 Format: `addExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
 
-* The `AMOUNT` must be a positive number.
+* The `AMOUNT` must be a positive number and less than the `MAX_AMT` set. If need be, larger transactions can be split into smaller transactions.
 * The `DATE` is optional, it will default to the current date if not provided. It accepts a range of formats, `dd/mm/yyyy` is recommended.
 * THE `CATEGORY` is optional, if the provided input does not correspond to any of the preset categories <code>
 (FOOD_DRINK, SHOPPING, HOUSING, TRANSPORTATION, ENTERTAINMENT, UTILITIES)</code>, it will default to <code>OTHERS</code>
@@ -121,20 +121,22 @@ Shows sum of incomes and lists each income record with its description, amount, 
 Format: `viewIncomes`  
 * Anything following the command will be ignored, i.e. `viewIncomes overview` will be interpreted just 
 like `viewIncomes`.
+* Descriptions longer than the `MAX_DESCRIPTION` length set will be replaced with "...".
 
 Example of usage:
 
 `viewIncomes`
 ```
-+-----------------------------------------------------------------------------------------------------------------------+
-|                                                   Income Statement                                                    |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    1     |    Income    |     2023-09-30     |        monthly salary        |         -          |     + $2500.0      |
-+-----------------------------------------------------------------------------------------------------------------------+
-| Total Income: $2500.0                                                                                                 |
-+-----------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------+
+|                                                        Income Statement                                                         |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    ID    |     Type     |        Date        |              Description               |      Category      |       Amount       |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    1     |    Income    |     2023-11-07     |              month salary              |         -          |     + $2500.0      |
+|    2     |    Income    |     2023-11-07     |  part time work while still study ...  |         -          |      + $500.0      |
++---------------------------------------------------------------------------------------------------------------------------------+
+| Total Income: $3000.0                                                                                                           |
++---------------------------------------------------------------------------------------------------------------------------------+
 ```
 
 ### Viewing previous expenses: `viewExpenses`
@@ -142,20 +144,22 @@ Shows sum of expenses and lists each expense record with its description, amount
 Format: `viewExpenses`
 * Anything following the command will be ignored, i.e. `viewExpenses overview` will be interpreted just
   like `viewExpenses`.
+* Descriptions longer than the `MAX_DESCRIPTION` length set will be replaced with "...".
 
 Example of usage:
 
 `viewExpenses`
 ```
-+-----------------------------------------------------------------------------------------------------------------------+
-|                                                   Expense Statement                                                   |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    ID    |     Type     |        Date        |         Description          |      Category      |       Amount       |
-+----------+--------------+--------------------+------------------------------+--------------------+--------------------+
-|    1     |   Expense    |     2023-09-30     |           milk tea           |     FOOD_DRINK     |       - $2.5       |
-+-----------------------------------------------------------------------------------------------------------------------+
-| Total Expense: $2.5                                                                                                   |
-+-----------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------+
+|                                                        Expense Statement                                                        |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    ID    |     Type     |        Date        |              Description               |      Category      |       Amount       |
++----------+--------------+--------------------+----------------------------------------+--------------------+--------------------+
+|    1     |   Expense    |     2023-11-07     |                milk tea                |     FOOD_DRINK     |       - $2.5       |
+|    2     |   Expense    |     2023-11-07     |  a very expensive dinner that cos ...  |         -          |      - $200.0      |
++---------------------------------------------------------------------------------------------------------------------------------+
+| Total Expense: $202.5                                                                                                           |
++---------------------------------------------------------------------------------------------------------------------------------+
 ```
 
 ### Viewing the entire financial statement: `viewFinancialStatement`
@@ -164,6 +168,8 @@ Transactions in the Financial Statement will be sorted and displayed according t
 Format: `viewFinancialStatement`
 * Anything following the command will be ignored, i.e. `viewFinancialStatement overview` will be interpreted just like 
 `viewFinancialStatement`.
+* Descriptions longer than the `MAX_DESCRIPTION` length set will be replaced with "...".
+
 
 Example of usage:
 
@@ -387,30 +393,39 @@ Example of usage:
 
 `editExpense 1 DESC weekly allowance`
 
+### Delete all transactions at once: `clear` [coming soon]
+Clears all previously entered incomes and expenses. This will reset the .txt file and allow you to start from scratch.
+
 ### Set Password: `setPassword` [coming soon]
-Set new password.
+Set new password to add a layer of security for the tracking of your financial transactions.
 
 ### Change Password: `changePassword` [coming soon]
-Change Password.
+Change the password in case you believe your previous one may have been leaked.
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?
+* **Q**: How do I transfer my data to another Computer?
 
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data.
+  **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data.
+
+
+* **Q**: How can I create a file containing new information without deleting the previous one?
+
+  **A**: Exit and restart CashLeh?. This time use a different name. The application is designed in such a way to create personal financial statements, so different users can create personalised entries even on the same device.
+
 
 ## Command Summary
-* Add income `addIncome monthly salary /amt 2500 /date 30/09/2023 /cat SALARY`
-* Add expense `addExpense milk tea /amt 2.50 /date 30/09/2023 /cat FOOD_DRINK`
-* Delete income `deleteIncome 4`
-* Delete expense `deleteExpense 4`
+* Add income `addIncome DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+* Add expense `addExpense DESCRIPTION /amt AMOUNT /date DATE /cat CATEGORY`
+* Delete income `deleteIncome INDEX`
+* Delete expense `deleteExpense INDEX`
 * View incomes `viewIncomes`
 * View expenses `viewExpenses`
 * View financial statement `viewFinancialStatement`
 * View budget `viewBudget`
-* Update budget `updateBudget 200`
+* Update budget `updateBudget AMOUNT`
 * Delete budget `deleteBudget`
-* Filter expense `filterExpense /amt 2.50`
-* Filter income `filterIncome /cat SALARY`
-* Filter transaction `filter /date 30/09/2023`
+* Filter expense `filterExpense /amt AMOUNT`
+* Filter income `filterIncome /cat CATEGORY`
+* Filter transaction `filter /date DATE`
 * Exit `exit`

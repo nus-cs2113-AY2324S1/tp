@@ -5,8 +5,6 @@ import cashleh.budget.Budget;
 import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehBudgetException;
 
-import java.util.logging.Level;
-
 /**
  * This class extends the Command class and is used to
  * encapsulate the action of updating a budget.
@@ -40,7 +38,7 @@ public class UpdateBudget extends Command {
         }
         budgetHandler.setBudget(budget);
         Ui.printMultipleText(new String[] {"The budget was updated to:", String.valueOf(budget.getBudget())});
-        logger.log(Level.INFO, "budget was successfully updated");
+        logger.log(loggerLevel, "budget was successfully updated");
     }
 
 }

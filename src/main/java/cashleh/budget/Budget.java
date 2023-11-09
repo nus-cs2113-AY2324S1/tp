@@ -11,6 +11,9 @@ public class Budget {
     private boolean isActive;
     public Budget() {
         this.budget = 1; // dummy value
+        /*
+        Set isActive to false by default as when the app is run the dummy budget is not supposed to interfere.
+         */
         this.isActive = false;
     }
     public Budget(double budget) {

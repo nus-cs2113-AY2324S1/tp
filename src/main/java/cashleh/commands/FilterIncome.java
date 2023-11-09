@@ -4,8 +4,6 @@ import cashleh.exceptions.CashLehMissingTransactionException;
 import cashleh.parser.FindParser;
 import cashleh.transaction.IncomeStatement;
 
-import java.util.logging.Level;
-
 /**
  * The FilterIncome class represents a command to filter incomes in the CashLeh application.
  * It allows users to filter income transactions based on various criteria such as description,
@@ -35,7 +33,7 @@ public class FilterIncome extends Command{
             assert incomeStatement != null;
             incomeStatement.findIncome(incomeToFind.getDescription(), incomeToFind.getAmount(),
                     incomeToFind.getDate(), incomeToFind.getCategory());
-            logger.log(Level.INFO, "income entry was successfully filtered");
+            logger.log(loggerLevel, "income entry was successfully filtered");
         } catch (CashLehMissingTransactionException e) {
             throw new CashLehMissingTransactionException();
         }

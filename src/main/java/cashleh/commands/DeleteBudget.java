@@ -4,8 +4,6 @@ import cashleh.Ui;
 import cashleh.budget.BudgetHandler;
 import cashleh.exceptions.CashLehBudgetException;
 
-import java.util.logging.Level;
-
 /**
  * This class extends the Command class and is used to
  * encapsulate the action of deleting a budget previously set on the application.
@@ -29,7 +27,7 @@ public class DeleteBudget extends Command {
             assert !budgetHandler.getBudget().isActive();
             Ui.printMultipleText(new String[] {"Alright, CashLeh has just deleted your previous budget!", "Watch out "
                     + "though as spending without budget ain't smart..."});
-            logger.log(Level.INFO, "budget was successfully deleted");
+            logger.log(loggerLevel, "budget was successfully deleted");
         } else {
             String text = "Please create a new budget as you haven't"
                     + " set one yet or deleted the previous one.";
