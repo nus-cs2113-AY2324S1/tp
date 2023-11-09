@@ -270,42 +270,123 @@ new ArrayList of questions, and subsequently print them.
 The CommandEdit class in the quizhub application is responsible for handling user commands to edit the description or 
 answer of a question. The CommandEdit class supports two edit commands: 
 
-- `edit [question number] /description [description]` - edits the description of the question with the specified number
+#### Command Syntax
+- `edit [question number] /description [newDescription]` - Edits the text description of the specified question.
+- `edit [question number] /answer [newAnswer]` - Updates the answer for the specified question.
+- `edit [question number] /option[1...4] [newAnswer]` - Edits a specified option of a multiple-choice question.
 
-- `edit [question number] /answer [answer]` - edits the answer to the question with the specified number
+Special Formatting Notes:
+- Use ` \slash ` instead of the `/` character within the command.
+- The `pipe` character is not allowed and will be automatically removed from any input fields.
+
 
 #### Class Structure of Edit Command
 The CommandEdit class includes the following key components:
 
-- `qnIndex`: An integer representing the question number to be edited.
-- `newDescription`: A string representing the new description for the question (or null if not edited).
-- `newAnswer`: A string representing the new answer for the question (or null if not edited).
+The `CommandEdit` class manages the following attributes:
+- `qnIndex`: The index of the question to be edited.
+- `newDescription`: The new description to be set for the question, if applicable.
+- `newAnswer`: The new answer to be set for the question, if applicable.
+- `newOptions`: An array representing new options for multiple-choice questions, if applicable.
+
+The class collaborates with the `QuestionList` and `Question` classes to update the desired question components.
 
 #### Implementation of Edit Command
 
 ![commandEditStages.png](UML%2FCommands%2FcommandEditStages.png)
-
-Here are the key steps for implementing this class:
-
-- **Parsing User Input**: Parse the user input to extract the question number, edit criteria (/description or /answer), 
-and new values (description or answer).
-
-- **Validation**: Implement validation logic to ensure that the user input is correctly formatted and contains valid 
-information.
-
-- **Edit Operation**: Implement the logic to execute the edit operation based on the provided criteria. This typically 
-involves invoking methods in the QuestionList and Question classes to update the question's description or answer.
-
-- **Data Persistence**: If necessary, update the data storage to save the changes. In the provided code, the 
-`dataStorage.updateData(questions)` method is used to save changes to the question list.
-
-- **Error Handling**: Handle any exceptions or errors that may occur during the edit operation and provide appropriate 
-feedback to the user.
-
 ![commandEditObjectDiagram.png](./UML/Commands/commandEditObjectDiagram.png)
 ![commandEditObjectDiagram2.png](./UML/Commands/commandEditObjectDiagram2.png)
 ![commandEditObjectDiagram3.png](./UML/Commands/commandEditObjectDiagram3.png)
 
+### Operational Flow of Edit Command
+
+1. **User Initiation:**
+    - The user enters the `edit` command along with the question number and either a new description or answer into the QuizHub application.
+
+2. **Command Parsing:**
+    - QuizHub passes the user input to the `Parser` component to interpret the command.
+    - The `Parser` creates an instance of `CommandEdit` and invokes the `parseEditCommand` method with the user's input.
+
+3. **Command Execution:**
+    - Once the command is parsed, `Parser` returns the `CommandEdit` object to QuizHub.
+    - QuizHub calls the `executeCommand` method on the `CommandEdit` instance, providing the necessary UI, data storage, and question list.
+
+4. **Editing Process:**
+    - `CommandEdit` communicates with `QuestionList` to locate the specific question by index.
+    - `QuestionList` then calls the `editQuestion` method on the relevant `Question` instance, passing the new description or answer.
+
+5. **Question Modification:**
+    - The `Question` object updates its state with the new information provided.
+    - Upon successful update, `Question` notifies `QuestionList` of the edit completion.
+
+6. **Completion Acknowledgement:**
+    - `QuestionList` sends an acknowledgment back to `CommandEdit` confirming the completion of the edit operation.
+
+7. **User Feedback:**
+    - `CommandEdit` reports back to QuizHub that the editing process is complete.
+    - QuizHub then communicates the successful edit to the user via the UI.
+
+8. **Resource Cleanup:**
+    - After the edit is complete and the user has been notified, the `CommandEdit` object is destroyed to free up resources.
+
+Each step in the flow ensures that the user's request to edit a question is processed accurately and efficiently, with the system providing feedback at the end of the operation.
+
+#### User Interaction Examples
+- Editing the description of a question:
+    - Command: `edit 1 /description What is the value of Pi to 3 decimal places?`
+    - Output: Acknowledgment that the question has been edited.
+- Updating the answer to a question:
+    - Command: `edit 1 /answer 3.142`
+    - Output: Confirmation message with the updated question details.
+- Changing an MCQ option:
+    - Command: `edit 3 /option1 2.713`
+    - Output: Confirmation message with the updated MCQ question details.
+
+#### Notes for Developers
+- The application restricts edits to one attribute of the question at a time.
+- Validation checks must be robust to handle user errors and prevent incorrect data entry.
+- Special character rules must be enforced to maintain command syntax integrity.
+
+#### Expected Invalid Input for Command Edit
+Assuming 2 current questions: <br>
+1: [S][ ] question / answer | number | EASY <br>
+2: [M][ ] question2 / 1 / 2 / 3 / 4 / 1 | number | EASY
+- `edit 999 /description New description`
+  - Ono! The question index you entered is not in the range of the question list :<
+    Please format your input as:
+    edit [question number] /description [new description] or /answer [new answer]! for short answer questions and
+    edit [question number] /description [new description] or /answer [new answer] or /option[number] [new value] for multiple choice questions
+  - Reason: Invalid question number (out of range)
+- `edit two /answer New answer`
+  - Please enter valid integer question index!
+    Please format your input as:
+    edit [question number] /description [new description] or /answer [new answer]! for short answer questions and
+    edit [question number] /description [new description] or /answer [new answer] or /option[number] [new value] for multiple choice questions
+  - Reason: Non-numeric question number not allowed for this program
+- `edit 1/description` or `edit 1/answer`
+  - Ono! You did not enter the new value :<
+    Please format your input as:
+    edit [question number] /description [new description] or /answer [new answer]! for short answer questions and
+    edit [question number] /description [new description] or /answer [new answer] or /option[number] [new value] for multiple choice questions
+  - Reason: No changes specified
+- `edit 1 /description New description /answer New answer`
+  - Ono! You tried to edit using more than 1 question fields :<
+    Please format your input as:
+    edit [question number] /description [new description] or /answer [new answer]! for short answer questions and
+    edit [question number] /description [new description] or /answer [new answer] or /option[number] [new value] for multiple choice questions
+  - Reason: Multiple edits in one command is not allowed
+- `edit 1 /answer \exitquiz`
+  - TBC ~ Fixing
+  - should not allow \exitquiz to be an answer field
+- `edit 2 /option5 New option`
+  - Ono! You tried to edit by an unknown criteria :<
+    Please format your input as:
+    edit [question number] /description [new description] or /answer [new answer]! for short answer questions and
+    edit [question number] /description [new description] or /answer [new answer] or /option[number] [new value] for multiple choice questions
+  - Reason: Limited to only option1-4
+- `edit 2/ option4 1.9` or `edit 1 / description New de`
+  - TBC ~ Fixing
+  - white space after / is not ignored
 <hr>
 
 ### Start Command - Start Quiz
@@ -315,7 +396,7 @@ feedback to the user.
 The start quiz feature allows users to start quizzing themselves with customizable characters to define which modules
 to quiz themselves on alongside whether to randomize the questions or use their pre-defined question order.
 
-Command Syntax:
+#### Command Syntax
 - `start /[quiz mode] [start details] /[qn mode] /[qn type]`
 
 #### Sequence Diagram of Start Command
@@ -438,7 +519,9 @@ Assuming 2 current questions: <br>
     Please format your input as start /[quiz mode] [start details] /[qn mode] /[qn type]!
   - Reason: Extra parameters are given - hence too many arguments
 - `start /module number /normal /mix \exitquiz`
-  - TBC
+  - Invalid command: Extra input detected after question type.
+    Question type must be '/short', '/mcq', or '/mix'
+  - Reason: Extra input after qn type is not allowed
 
 <hr>
 
@@ -448,7 +531,7 @@ Assuming 2 current questions: <br>
 The Shuffle command in QuizHub is designed to **PERMANENTLY** randomize the order of questions within the question list.
 This contrasts with the temporary randomization available in the Start Command's /random mode.
 
-Command Syntax:
+#### Command Syntax
 - `shuffle` 
 
 #### Class Structure of Shuffle Command
@@ -494,7 +577,7 @@ Command Syntax:
 The CommandMarkDifficulty class within the QuizHub application facilitates the marking of questions with a difficulty level. 
 This feature allows for the categorization of questions by difficulty, aiding in targeted quiz preparation.
 
-Command Syntax
+#### Command Syntax
 - `markdiff [question number] /[question difficulty]`
 
 #### Class Structure of Markdiff Command
@@ -571,6 +654,8 @@ Assuming 2 current questions: <br>
 #### Brief Description of Command Exit
 
 Command Exit is responsible for exiting the program
+
+#### Command Syntax
 - `bye` - to exit program
 
 #### Expected Invalid Commands for Command Exit
