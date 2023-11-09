@@ -1,0 +1,45 @@
+@startuml
+!include Style.puml
+Title: Command Start Class Diagram
+
+' Abstract class Command from which CommandStart inherits
+abstract class Command {
+    {abstract} +executeCommand(ui : Ui, dataStorage : Storage, questions : QuestionList) : void
+}
+
+' CommandStart class with visibility indicators for members
+class CommandStart {
+    -startMode : String
+    -startDetails : String
+    -startQnMode : String
+    -startQnType : String
+    +executeCommand(ui : Ui, dataStorage : Storage, questions : QuestionList) : void
+    -getMatchedQuestions(questions : QuestionList) : ArrayList<Question>
+    -filterQuestionsByType(matchedQuestions : ArrayList<Question>) : ArrayList<Question>
+    -arrangeQuestions(matchedQuestions : ArrayList<Question>) : void
+    +CommandStart(startMode : String, startDetails : String, startQnMode : String, startQnType : String)
+}
+
+' Other classes used by CommandStart
+class Ui {
+}
+
+class Storage {
+}
+
+class QuestionList {
+}
+
+class Question {
+}
+
+' Inheritance relationship
+Command <|-- CommandStart
+
+' Dependency relationships
+CommandStart ..> Ui : uses
+CommandStart ..> Storage : uses
+CommandStart ..> QuestionList : uses
+CommandStart ..> Question : uses
+
+@enduml

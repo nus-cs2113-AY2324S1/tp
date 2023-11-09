@@ -392,6 +392,9 @@ public class Parser {
             if (newVal.equals(qn.getQuestionAnswer())) {
                 throw new QuizHubExceptions();
             }
+            if (newVal.equals("\\exitquiz")) {
+                throw new IllegalArgumentException("    Invalid new value: \\exitquiz");
+            }
             if (qn.getQuestionType().equals(QnType.MULTIPLECHOICE)) {
                 try {
                     int newAnswer = Integer.parseInt(newVal);
@@ -494,13 +497,17 @@ public class Parser {
     private static Command handleEditNewValuesExceptions(Exception editValuesException) {
         if (editValuesException instanceof IllegalArgumentException || 
             editValuesException instanceof ArrayIndexOutOfBoundsException) {
+            if(editValuesException.getMessage().equals("    Invalid new value: \\exitquiz")){
+                return new CommandInvalid(editValuesException.getMessage() + System.lineSeparator() +
+                        CommandEdit.INVALID_FORMAT_MSG);
+            }
             if (editValuesException.getMessage().equals("Invalid Integer Answer")) {
                 return new CommandInvalid(CommandMultipleChoice.INVALID_ANSWER_MSG + System.lineSeparator() +
                         CommandEdit.INVALID_FORMAT_MSG);
-            } else {
+            }else {
                 return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
-            }     
+            }
         } else if (editValuesException instanceof QuizHubExceptions) {
             return new CommandInvalid(CommandEdit.NO_CHANGES_MADE_MSG + System.lineSeparator() +
                     CommandEdit.INVALID_FORMAT_MSG);
