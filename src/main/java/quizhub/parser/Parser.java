@@ -699,10 +699,17 @@ public class Parser {
     private static void extractQuizQnType(String userInput, String[] commandStartTokens)
             throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         String[] inputSplitBySlash = userInput.toLowerCase().split("/");
+        if (inputSplitBySlash.length > CommandStart.NUM_ARGUMENTS) {
+            throw new IllegalArgumentException("Invalid command: Extra input detected after question type.");
+        }
         if (inputSplitBySlash.length < CommandStart.NUM_ARGUMENTS) {
             throw new ArrayIndexOutOfBoundsException("Missing question type for the quiz.");
         }
-        String qnType = inputSplitBySlash[3].split(" ")[0].strip().toLowerCase();
+        String[] inputSplitBySpaceAfterSlash = inputSplitBySlash[CommandStart.NUM_ARGUMENTS - 1].split(" ");
+        if (inputSplitBySpaceAfterSlash.length > 1) {
+            throw new IllegalArgumentException("Invalid command: Extra input detected after question type.");
+        }
+        String qnType = inputSplitBySpaceAfterSlash[0].strip().toLowerCase();
         if (!qnType.equals("short") && !qnType.equals("mcq") && !qnType.equals("mix")) {
             throw new IllegalArgumentException("Invalid question type for the quiz.");
         }
@@ -719,13 +726,10 @@ public class Parser {
     private static Command handleQnTypeExceptions(Exception qnTypeException) {
 
         if (qnTypeException instanceof ArrayIndexOutOfBoundsException) {
-            // This indicates that the question type argument was missing
             return new CommandInvalid(CommandStart.INVALID_QN_TYPE_MSG);
         } else if (qnTypeException instanceof IllegalArgumentException) {
-            // This indicates that the provided question type argument was invalid
-            return new CommandInvalid(CommandStart.INVALID_QN_TYPE_MSG);
+            return new CommandInvalid("    " + qnTypeException.getMessage() + System.lineSeparator() + CommandStart.INVALID_QN_TYPE_MSG);
         } else {
-            // This handles any other unexpected exceptions
             return new CommandInvalid(CommandEdit.INVALID_FORMAT_MSG);
         }
     }
