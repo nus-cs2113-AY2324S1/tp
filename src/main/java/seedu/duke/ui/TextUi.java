@@ -195,13 +195,13 @@ public class TextUi {
     }
 
     public static String noOfGoalMsg(int goalCount) {
-        return "You still have " + goalCount + " goals to accomplish. Add oil!";
+        return "You now have " + goalCount + "goals to accomplish.";
     }
 
     public static String deleteGoalMsg(Goal deletedGoal) {
 
         return "Good. I have removed this goal: " + deletedGoal + "\n"
-                + "Remember not to give up unaccomplished target! ";
+                + "Remember not to give up unaccomplished target!" + "\n";
 
     }
 
@@ -210,8 +210,8 @@ public class TextUi {
      * @return string contains information of generating a new goal successfully
      */
     public static String addGoalSuccessMessage() {
-        int currentNoOfGoal = Duke.goals.getGoalCount();
-        Goal newlyAddedGoal = Duke.goals.getGoal(currentNoOfGoal - 1);
+        int currentNoOfGoal = Duke.goalList.getGoalCount();
+        Goal newlyAddedGoal = Duke.goalList.getGoal(currentNoOfGoal - 1);
         return "Nice! I have added the following goal to your goals list: \n\t" + newlyAddedGoal;
     }
 
@@ -222,14 +222,14 @@ public class TextUi {
      * @return String containing all the inserted goal in the global field goal list
      */
     public static String showGoalList() {
-        int numberOfGoal = Duke.goals.getGoalCount();
+        int numberOfGoal = Duke.goalList.getGoalCount();
         if (numberOfGoal == 0) {
             return "Oh not! You don't have any goal to achieve currently.";
         }
         StringBuilder Sb = new StringBuilder();
         Sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
         for (int i = 0; i < numberOfGoal; i++){
-            Sb.append(i + 1).append(". ").append(Duke.goals.getGoal(i)).append("\n");
+            Sb.append(i + 1).append(". ").append(Duke.goalList.getGoal(i)).append("\n");
         }
 
         return Sb.toString();
