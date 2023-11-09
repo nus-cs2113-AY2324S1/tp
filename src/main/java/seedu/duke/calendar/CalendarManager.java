@@ -38,7 +38,7 @@ public class CalendarManager {
             eventList = new EventList(events);
         }
 
-        calendar = new Calendar();
+        calendar = new Calendar(eventList);
         calendarUi = new CalendarUi(eventList);
         calendarCommandParser = new CalendarCommandParser();
         scanner = new Scanner(System.in);
@@ -72,7 +72,7 @@ public class CalendarManager {
     public void processInput(String input) {
         startCalendar(input);
 
-        storage.saveEvents(eventList.getEvent());
+        storage.saveEvents(eventList.getEvents());
     }
 
     /**

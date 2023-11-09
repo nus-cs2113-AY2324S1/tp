@@ -2,13 +2,7 @@
 
 package seedu.duke.calendar;
 
-import seedu.duke.calendar.command.AddEventCommand;
-import seedu.duke.calendar.command.DeleteAllEventsCommand;
-import seedu.duke.calendar.command.DeleteEventCommand;
-import seedu.duke.calendar.command.EventCommand;
-import seedu.duke.calendar.command.UnknownCommand;
-import seedu.duke.calendar.command.FindEventCommand;
-import seedu.duke.calendar.command.ListCalendarEventsCommand;
+import seedu.duke.calendar.command.*;
 
 import seedu.duke.calendar.Exceptions.AddEventException;
 import seedu.duke.calendar.Exceptions.DeleteEventException;
@@ -73,6 +67,8 @@ public class CalendarCommandParser {
             manageException(input);
             if (input.startsWith("add event")) {
                 return new AddEventCommand();
+            } else if (input.startsWith("add goal event")) {
+                return new AddGoalEventCommand();
             } else if (input.startsWith("delete event")) {
                 return new DeleteEventCommand();
             } else if (input.startsWith("list events")) {

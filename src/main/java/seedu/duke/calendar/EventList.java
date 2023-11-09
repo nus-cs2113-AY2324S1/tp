@@ -18,7 +18,7 @@ public class EventList {
     }
 
     // getEvent is used to get an event from the EventList.
-    public ArrayList<Event> getEvent() {
+    public ArrayList<Event> getEvents() {
         return eventList;
     }
 

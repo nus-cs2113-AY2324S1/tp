@@ -39,13 +39,18 @@ public class EventStorage {
      */
     private Event loadEvent(String[] tokens){
 
-        assert tokens.length == 3: "Token length should be 3";
-
+        assert tokens.length == 3 || tokens.length == 4: "Token length should be 3 or 4";
+        if(tokens.length == 3) {
+            String name = tokens[0].trim();
+            LocalDateTime from = LocalDateTime.parse(tokens[1].trim());
+            LocalDateTime to = LocalDateTime.parse(tokens[2].trim());
+            return new Event(name, from, to);
+        }
         String name = tokens[0].trim();
-        LocalDateTime from = LocalDateTime.parse(tokens[1].trim());
-        LocalDateTime to = LocalDateTime.parse(tokens[2].trim());
-
-        return new Event(name, from, to);
+        LocalDateTime by = LocalDateTime.parse(tokens[1].trim());
+        int goal = Integer.parseInt(tokens[2].trim());
+        int completed = Integer.parseInt(tokens[3].trim());
+        return new Goal(name, by, goal, completed);
     }
 
     /**
@@ -83,8 +88,13 @@ public class EventStorage {
             FileWriter fw = new FileWriter(path);
 
             for (Event event : eventList) {
-                fw.write(String.format("%s | %s | %s \r\n",
-                        event.getName(), event.getFrom(), event.getTo()));
+                if (event.getClass() == Goal.class) {
+                    fw.write(String.format("%s | %s | %s | %s \r\n",
+                            event.getName(), event.getTo(), ((Goal) event).getGoal(), ((Goal) event).getCompleted()));
+                } else {
+                    fw.write(String.format("%s | %s | %s \r\n",
+                            event.getName(), event.getFrom(), event.getTo()));
+                }
             }
             fw.close();
         } catch (IOException e){
