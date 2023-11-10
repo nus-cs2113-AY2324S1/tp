@@ -19,13 +19,13 @@ public class AddReminderCommand extends Command {
             "addreminder </t TYPE> </d DATE>";
 
     public static final String EXAMPLE =
-            "addreminder /t debt /d 2023.12.11";
+            "addreminder /t debt /d 11/12/2023";
     private final String type;
     private final LocalDate date;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public AddReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         if (!rawCommand.extraArgs.containsKey("t")) {
             throw new IllegalArgumentException("Reminder must have a type");
         }
