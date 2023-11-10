@@ -15,7 +15,7 @@ public class ExecuteRecipeCommand extends Command {
     private String recipeTitleToStart;
     private RecipeList recipes;
     private IngredientList allIngredientsList;
-    private StartRecipeCommand startRecipeCommand;
+    private CheckRecipeCommand checkRecipeCommand;
     private IngredientList recipeIngredients;
 
 
@@ -24,7 +24,7 @@ public class ExecuteRecipeCommand extends Command {
         this.recipeTitleToStart = recipeTitleToStart;
         this.recipes = recipes;
         this.allIngredientsList = allIngredientsList;
-        this.startRecipeCommand = new StartRecipeCommand(recipeTitleToStart, recipes, allIngredientsList);
+        this.checkRecipeCommand = new CheckRecipeCommand(recipeTitleToStart, recipes, allIngredientsList);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ExecuteRecipeCommand extends Command {
         }
 
         RecipeIngredientList recipeIngredients = recipe.getRecipeIngredients();
-        if (startRecipeCommand.allIngredientsReady(recipeIngredients)){
+        if (checkRecipeCommand.allIngredientsReady(recipeIngredients)){
             assert recipe != null : "Recipe should not be null";
             updateAllIngredientQuantity(recipeIngredients);
             Ui.printExecuteRecipeSuccess(recipe.getTitle());
