@@ -25,26 +25,30 @@ public class UseIngredientCommand extends Command {
                 continue;
             }
 
-            Ingredient newIngredient;
-            try {
-                newIngredient = IngredientParser.parseIngredient(ingredient);
+            updateIngredientQuantity(ingredient);
 
-                if (newIngredient.getQuantity() < 0) {
-                    Ui.printNegativeIngredientQuantity();
-                    return;
-                }
+        }
+    }
 
-                if (this.ingredients.exist(newIngredient.getName())) {
-                    // if ingredient already exists, update the quantity by changing quantity to negative
-                    newIngredient.setQuantity(-newIngredient.getQuantity());
-                    this.ingredients.updateIngredient(newIngredient);
-                } else {
-                    // do nothing
-                    Ui.printIngredientDoesNotExist(newIngredient.getName());
-                }
-            } catch (EssenFormatException e) {
-                e.handleException();
+    public void updateIngredientQuantity(String ingredientString) {
+        try {
+            Ingredient newIngredient = IngredientParser.parseIngredient(ingredientString);
+
+            if (newIngredient.getQuantity() < 0) {
+                Ui.printNegativeIngredientQuantity();
+                return;
             }
+
+            if (this.ingredients.exist(newIngredient.getName())) {
+                // if ingredient already exists, update the quantity by changing quantity to negative
+                newIngredient.setQuantity(-newIngredient.getQuantity());
+                this.ingredients.updateIngredient(newIngredient);
+            } else {
+                // do nothing
+                Ui.printIngredientDoesNotExist(newIngredient.getName());
+            }
+        } catch (EssenFormatException e) {
+            e.handleException();
         }
     }
 }
