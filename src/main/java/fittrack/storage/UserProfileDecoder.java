@@ -8,6 +8,9 @@ import fittrack.data.Weight;
 import fittrack.parser.IllegalValueException;
 import fittrack.storage.Storage.StorageOperationException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,12 +36,19 @@ public class UserProfileDecoder {
      * @throws IllegalStorageValueException if any of the fields in any encoded person string is invalid.
      * @throws StorageOperationException if the {@code encodedUserProfile} is in an invalid format.
      */
-    public static UserProfile decodeUserProfile(List<String> encodedUserProfile)
-            throws IllegalStorageValueException, StorageOperationException, IllegalValueException {
+    public static UserProfile decodeUserProfile(List<String> encodedUserProfile, Path profilePath)
+            throws IllegalStorageValueException, StorageOperationException, IllegalValueException, IOException {
+        if (encodedUserProfile.size() < 4) {
+            handleCorruptedProfileFile(profilePath);
+            throw new StorageOperationException("File containing profile has invalid format. " +
+                    "Creating new profile file...");
+        }
+
         String[] decodedUserProfile = new String[5];
         for (int i = 0; i < encodedUserProfile.size(); i++) {
             decodedUserProfile[i] = encodedUserProfile.get(i);
         }
+
         final Matcher heightMatcher = HEIGHT_PATTERN.matcher(decodedUserProfile[0]);
         final Matcher weightMatcher = WEIGHT_PATTERN.matcher(decodedUserProfile[1]);
         final Matcher genderMatcher = GENDER_PATTERN.matcher(decodedUserProfile[2]);
@@ -46,8 +56,9 @@ public class UserProfileDecoder {
 
         if (!heightMatcher.matches() || !weightMatcher.matches()
                 || !caloriesMatcher.matches() || !genderMatcher.matches()) {
+            handleCorruptedProfileFile(profilePath);
             throw new StorageOperationException("File containing profile has invalid format. " +
-                    "Please delete the file and run the program again");
+                    "Creating new profile file...");
         }
 
         final double height = Double.parseDouble(heightMatcher.group("height"));
@@ -61,6 +72,11 @@ public class UserProfileDecoder {
         Gender genderData = Gender.parseGender((String.valueOf(gender)));
 
         return new UserProfile(heightData, weightData, caloriesData, genderData);
+    }
+
+    public static void handleCorruptedProfileFile(Path profilePath) throws IOException {
+        String newFileContent = "";
+        Files.write(profilePath, newFileContent.getBytes());
     }
 }
 // @@author

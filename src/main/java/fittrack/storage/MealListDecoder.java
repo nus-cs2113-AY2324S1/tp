@@ -6,6 +6,9 @@ import fittrack.data.Meal;
 import fittrack.data.Date;
 import fittrack.storage.Storage.StorageOperationException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,11 +26,11 @@ public class MealListDecoder {
      * @throws IllegalStorageValueException if any of the fields in any encoded person string is invalid.
      * @throws StorageOperationException if the {@code encodedMealList} is in an invalid format.
      */
-    public static MealList decodeMealList(List<String> encodedMealList)
-            throws IllegalStorageValueException, StorageOperationException {
+    public static MealList decodeMealList(List<String> encodedMealList, Path mealListPath)
+            throws IllegalStorageValueException, StorageOperationException, IOException {
         MealList mealList = new MealList();
         for (String encodedMeal : encodedMealList) {
-            mealList.addToList(decodeMealsFromString(encodedMeal));
+            mealList.addToList(decodeMealsFromString(encodedMeal, mealListPath));
         }
         return mealList;
     }
@@ -37,12 +40,13 @@ public class MealListDecoder {
      *
      * @throws StorageOperationException if {@code encodedPerson} is in an invalid format.
      */
-    public static Meal decodeMealsFromString(String encodedMeal)
-            throws StorageOperationException {
+    public static Meal decodeMealsFromString(String encodedMeal, Path mealListPath)
+            throws StorageOperationException, IOException {
         final Matcher matcher = MEAL_PATTERN.matcher(encodedMeal);
         if (!matcher.matches()) {
+            handleCorruptedFile(mealListPath);
             throw new StorageOperationException("File containing meals has invalid format. " +
-                    "Please delete the file and run the program again");
+                    "Creating new meal list file...");
         }
 
         final String name = matcher.group("name");
@@ -52,6 +56,11 @@ public class MealListDecoder {
         double caloriesInDouble = Double.parseDouble(calories);
 
         return new Meal(name, new Calories(caloriesInDouble), new Date(date));
+    }
+
+    public static void handleCorruptedFile(Path filePath) throws IOException {
+        String newFileContent = "";
+        Files.write(filePath, newFileContent.getBytes());
     }
 }
 // @@author

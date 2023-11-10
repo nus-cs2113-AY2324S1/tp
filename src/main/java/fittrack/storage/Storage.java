@@ -29,10 +29,9 @@ public class Storage {
     private static final String MEAL_LIST_FILE_PATH = "./data/mealList.txt";
     private static final String WORKOUT_LIST_FILE_PATH = "./data/workoutList.txt";
     private static final String STEP_LIST_FILE_PATH = "./data/stepList.txt";
+    private Ui ui = new Ui();
 
-    private final Ui ui = new Ui();
-
-    private File profileFile;
+    private File profileFile = new File(PROFILE_FILE_PATH);
     private File mealFile;
     private File workoutFile;
     private File stepFile;
@@ -47,7 +46,7 @@ public class Storage {
      * in a directory called data if none exist.
      */
     public Storage() {
-        this.profileFile = new File(PROFILE_FILE_PATH);
+        //this.profileFile = new File(PROFILE_FILE_PATH);
         this.mealFile = new File(MEAL_LIST_FILE_PATH);
         this.workoutFile = new File(WORKOUT_LIST_FILE_PATH);
         this.stepFile = new File(STEP_LIST_FILE_PATH);
@@ -94,7 +93,6 @@ public class Storage {
             throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
         }
     }
-
 
     /**
      * Returns true if the given path is acceptable as a storage file.
@@ -186,15 +184,13 @@ public class Storage {
         }
 
         try {
-            return UserProfileDecoder.decodeUserProfile(Files.readAllLines(profilePath));
+            return UserProfileDecoder.decodeUserProfile(Files.readAllLines(profilePath), profilePath);
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + profilePath);
         } catch (IllegalStorageValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
-        } catch (NullPointerException npe) {
-            throw new StorageOperationException("Empty Contents");
         } catch (IllegalValueException e) {
             // TODO: Temporary code
             throw new RuntimeException(e);
@@ -214,7 +210,7 @@ public class Storage {
         }
 
         try {
-            return MealListDecoder.decodeMealList(Files.readAllLines(mealListPath));
+            return MealListDecoder.decodeMealList(Files.readAllLines(mealListPath), mealListPath);
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
@@ -237,7 +233,7 @@ public class Storage {
         }
 
         try {
-            return WorkoutListDecoder.decodeWorkoutList(Files.readAllLines(workoutListPath));
+            return WorkoutListDecoder.decodeWorkoutList(Files.readAllLines(workoutListPath), workoutListPath);
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
@@ -260,7 +256,7 @@ public class Storage {
         }
 
         try {
-            return StepListDecoder.decodeStepList(Files.readAllLines(stepListPath));
+            return StepListDecoder.decodeStepList(Files.readAllLines(stepListPath), stepListPath);
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
@@ -285,6 +281,16 @@ public class Storage {
             System.out.println(e.getMessage());
             return false; // Consider it non-empty if there's an exception
         }
+    }
+
+    public boolean createNewFile() {
+        String line = ui.scanNextLine().trim();
+        while (!line.equalsIgnoreCase("y") && !line.equalsIgnoreCase("n")) {
+            System.out.println("Unknown input. Please enter Y or N only.");
+            line = ui.scanNextLine().trim();
+        }
+
+        return line.equalsIgnoreCase("y");
     }
 
     /**

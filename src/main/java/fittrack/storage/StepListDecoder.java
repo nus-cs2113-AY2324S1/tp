@@ -6,6 +6,9 @@ import fittrack.data.Step;
 import fittrack.parser.IllegalValueException;
 import fittrack.storage.Storage.StorageOperationException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,11 +25,11 @@ public class StepListDecoder {
      * @throws IllegalValueException if any of the fields in any encoded person string is invalid.
      * @throws StorageOperationException if the {@code encodedStepList} is in an invalid format.
      */
-    public static StepList decodeStepList(List<String> encodedStepList)
-            throws IllegalValueException, StorageOperationException {
+    public static StepList decodeStepList(List<String> encodedStepList, Path stepListPath)
+            throws IllegalValueException, StorageOperationException, IOException {
         StepList mealList = new StepList();
         for (String encodedMeal : encodedStepList) {
-            mealList.addToList(decodeStepsFromString(encodedMeal));
+            mealList.addToList(decodeStepsFromString(encodedMeal, stepListPath));
         }
         return mealList;
     }
@@ -36,12 +39,13 @@ public class StepListDecoder {
      *
      * @throws StorageOperationException if {@code encodedPerson} is in an invalid format.
      */
-    public static Step decodeStepsFromString(String encodedMeal)
-            throws StorageOperationException {
+    public static Step decodeStepsFromString(String encodedMeal, Path stepListPath)
+            throws StorageOperationException, IOException {
         final Matcher matcher = STEP_PATTERN.matcher(encodedMeal);
         if (!matcher.matches()) {
-            throw new StorageOperationException("File containing meals has invalid format. " +
-                    "Please delete the file and run the program again");
+            handleCorruptedFile(stepListPath);
+            throw new StorageOperationException("File containing steps has invalid format. " +
+                    "Creating new step list file.");
         }
 
         final String steps = matcher.group("steps");
@@ -50,5 +54,10 @@ public class StepListDecoder {
         int caloriesInInt = Integer.parseInt(steps);
 
         return new Step(caloriesInInt, new Date(date));
+    }
+
+    public static void handleCorruptedFile(Path filePath) throws IOException {
+        String newFileContent = "";
+        Files.write(filePath, newFileContent.getBytes());
     }
 }
