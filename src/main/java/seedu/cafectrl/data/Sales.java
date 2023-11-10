@@ -63,12 +63,12 @@ public class Sales {
             ui.showToUser("No sales made.");
             return;
         }
-        ui.showSalesBottom();
+        //ui.showSalesBottom();
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
 
             if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
-                ui.showToUser("No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".");
+                ui.showToUser("", "No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".", "");
                 continue;
             }
 
