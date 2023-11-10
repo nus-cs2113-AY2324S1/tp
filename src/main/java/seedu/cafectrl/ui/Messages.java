@@ -85,7 +85,7 @@ public class Messages {
 
     public static final String SALES_LAST_DAY_TEXT_TAMPERED = "Well, well, well! "
             + "It seems someone's been playing digital detective and tampered with the last line in the text file.\n"
-            + "Unfortunately, any empty order lists from the latest valid order have been wiped from my memory banks."
+            + "Unfortunately, any empty order lists after the latest valid order have been wiped from my memory banks."
             + " Poof!" ;
 
     public static final String SALES_ORDER_TEXT_TAMPERED = "Well, well, well! "

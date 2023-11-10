@@ -116,6 +116,7 @@ public class Decoder {
      * @return Sales object containing OrderList objects decoded from the provided strings.
      */
     public static Sales decodeSales(ArrayList<String> textLines, Menu menu) {
+        boolean salesOrderTextTamperDetectionMessagePrinted = false;
         ArrayList<OrderList> orderLists = new ArrayList<>();
         if(textLines.isEmpty()) {
             return new Sales();
@@ -146,7 +147,10 @@ public class Decoder {
             } catch (IndexOutOfBoundsException e) {
                 ui.showToUser(Messages.SALES_LAST_DAY_TEXT_TAMPERED, System.lineSeparator());
             } catch (NumberFormatException e) {
-                ui.showToUser(Messages.SALES_ORDER_TEXT_TAMPERED, System.lineSeparator());
+                if (!salesOrderTextTamperDetectionMessagePrinted) {
+                    ui.showToUser(Messages.SALES_ORDER_TEXT_TAMPERED, System.lineSeparator());
+                    salesOrderTextTamperDetectionMessagePrinted = true;
+                }
             }
         }
         return new Sales(orderLists);
