@@ -74,16 +74,9 @@ public class IngredientList {
     }
 
     public void addIngredient(Ingredient ingredient) {
-        if (this.exist(ingredient.getName())) {
-            try{
-                this.updateIngredient(ingredient);
-            } catch (EssenFormatException e) {
-                e.handleException();
-            }
-        } else {
-            ingredients.add(ingredient);
-            Ui.printAddIngredientsSuccess(ingredient.getName());
-        }
+        assert ingredient.getName() != null : "Ingredient name should not be null";
+
+        ingredients.add(ingredient);
     }
 
     public void updateIngredient(Ingredient ingredientToUpdate) throws EssenFormatException {
@@ -97,16 +90,23 @@ public class IngredientList {
 
         double oldQuantity = existingIngredient.getQuantity();
         double deltaQuantity = ingredientToUpdate.getQuantity();
+        double newQuantity = oldQuantity + deltaQuantity;
 
-        if (oldQuantity < deltaQuantity) {
+        if (newQuantity < 0) {
+            // if new quantity is negative, throw exception
+            System.out.println("You do not have enough ingredients to use.");
+            return;
+        }
+
+        if (oldQuantity < newQuantity) {
             // increase quantity of existing ingredient
-            existingIngredient.setQuantity(oldQuantity + deltaQuantity);
+            existingIngredient.setQuantity(newQuantity);
             Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
                     oldQuantity,
                     ingredientToUpdate.getQuantity());
-        } else if (oldQuantity > deltaQuantity) {
+        } else if (oldQuantity > newQuantity) {
             // decrease quantity of existing ingredient
-            existingIngredient.setQuantity(oldQuantity - deltaQuantity);
+            existingIngredient.setQuantity(newQuantity);
             Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
                     oldQuantity,
                     ingredientToUpdate.getQuantity());
