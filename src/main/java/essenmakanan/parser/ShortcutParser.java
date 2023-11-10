@@ -33,7 +33,7 @@ public class ShortcutParser {
         return new Shortcut(ingredientName, quantity);
     }
 
-    public static Shortcut getSpecificShortcut(ShortcutList shortcuts, String input)
+    public static int getShortcutIndex(ShortcutList shortcuts, String input)
                     throws EssenOutOfRangeException {
         int index;
 
@@ -43,6 +43,6 @@ public class ShortcutParser {
             index = shortcuts.getIndex(input);
         }
 
-        return shortcuts.getShortcut(index);
+        return index;
     }
 }

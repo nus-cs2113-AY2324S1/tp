@@ -28,7 +28,8 @@ public class UseShortcutCommand extends Command {
         Ui.drawDivider();
 
         try {
-            Shortcut shortcut = ShortcutParser.getSpecificShortcut(shortcuts, input);
+            int shortcutIndex = ShortcutParser.getShortcutIndex(shortcuts, input);
+            Shortcut shortcut = shortcuts.getShortcut(shortcutIndex);
             String ingredientName = shortcut.getIngredientName();
             double quantity = shortcut.getQuantity();
 
@@ -38,6 +39,7 @@ public class UseShortcutCommand extends Command {
             ingredients.updateIngredient(new Ingredient(ingredientName, quantity, unit));
         } catch (EssenOutOfRangeException exception) {
             exception.handleException();
+            Ui.drawDivider();
         } catch (EssenFormatException exception) {
             exception.handleException();
         }
