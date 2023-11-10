@@ -7,8 +7,6 @@ import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
