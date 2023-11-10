@@ -81,7 +81,6 @@ public class ListTotalSalesCommandCommandTest {
         System.setOut(originalOut);
 
         String expectedOutput = Messages.SHOW_SALES_END_CAP
-                + Messages.SHOW_SALES_END_CAP
                 + Messages.SHOW_SALES_DAY_PART_1
                 + "1"
                 + Messages.SHOW_SALES_DAY_PART_2
