@@ -1,18 +1,22 @@
 package seedu.financialplanner.reminder;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
 public class Reminder {
     private String type;
-    private String date;
+    private LocalDate date;
     private boolean isDone = false;
 
-    public Reminder(String type, String date) {
+    public Reminder(String type, LocalDate date) {
         this.type = type;
         this.date = date;
     }
 
     public Reminder(String type, String date, String status) {
         this.type = type;
-        this.date = date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.date = LocalDate.parse(date, formatter);
         if (status.equals("Done")) {
             this.isDone = true;
         } else {
@@ -21,15 +25,15 @@ public class Reminder {
     }
     public String toString() {
         String status = isDone ? "Done" : "Not Done";
+        LocalDate currentTime = LocalDate.now();
+        Duration duration = Duration.between(currentTime.atStartOfDay(), date.atStartOfDay());
         return "Reminder " + System.lineSeparator() + "   Type: " + type + System.lineSeparator()
-                + "   Date: " + date + System.lineSeparator() + "   Status: " + status;
+                + "   Date: " + date + System.lineSeparator() + "   Status: " + status
+                + System.lineSeparator() + "   Left Days: " + duration.toDays();
     }
 
     public void markAsDone() {
         this.isDone = true;
-    }
-    public void unmark() {
-        this.isDone = false;
     }
     /*
         * Returns a string that can be saved to a file.
