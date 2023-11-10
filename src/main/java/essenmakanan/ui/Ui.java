@@ -55,12 +55,21 @@ public class Ui {
     public static void showIngredientCommands() {
         System.out.println("INGREDIENT");
         System.out.println("\t- View all ingredients. [view i]\n"
-                + "\t- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]\n"
+                + "\t- Add an ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]\n"
                 + "\t\t" + validIngredientUnits() + "\n"
                 + "\t- View an Ingredient. [view i/INGREDIENT_NAME] or [view i/INGREDIENT_ID]\n"
                 + "\t- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME]"
                 + " [q/NEW_QUANTITY] [u/NEW_UNIT]\n"
                 + "\t- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]\n");
+    }
+
+    public static void showShortcutCommands() {
+        System.out.println("SHORTCUT");
+        System.out.println("\t- View all shortcuts. [view sc]\n"
+                + "\t- Add a shortcut. [add i/INGREDIENT_NAME,QUANTITY]\n"
+                + "\t- Edit a shortcut. [edit i/INGREDIENT_NAME [n/NEW_NAME]"
+                + " [q/NEW_QUANTITY]\n"
+                + "\t- Delete a shortcut. [delete i/SHORTCUT_INDEX] OR [delete i/INGREDIENT_NAME]\n");
     }
 
     public static void showOtherCommands() {
@@ -73,6 +82,7 @@ public class Ui {
         System.out.println("Here are the commands currently available:\n");
         showRecipeCommands();
         showIngredientCommands();
+        showShortcutCommands();
         showOtherCommands();
         drawDivider();
     }
