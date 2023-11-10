@@ -22,10 +22,6 @@ public class ShortcutList {
     }
 
     public Shortcut getShortcut(int index) throws EssenOutOfRangeException {
-        if (index == -1) {
-            throw new EssenOutOfRangeException();
-        }
-
         Shortcut shortcut;
 
         try {
@@ -66,8 +62,12 @@ public class ShortcutList {
         return -1;
     }
 
-    public boolean findShortcutInList(int index) {
-
-        return false;
+    public void deleteShortcut(int index) throws EssenOutOfRangeException {
+        try {
+            Ui.printDeletedShortcut(getShortcut(index).getIngredientName());
+            shortcuts.remove(index);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new EssenOutOfRangeException();
+        }
     }
 }

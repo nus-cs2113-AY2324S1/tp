@@ -1,7 +1,6 @@
 package essenmakanan.parser;
 
 import essenmakanan.exception.EssenFormatException;
-import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.shortcut.Shortcut;
@@ -33,8 +32,7 @@ public class ShortcutParser {
         return new Shortcut(ingredientName, quantity);
     }
 
-    public static int getShortcutIndex(ShortcutList shortcuts, String input)
-                    throws EssenOutOfRangeException {
+    public static int getShortcutIndex(ShortcutList shortcuts, String input) {
         int index;
 
         if (input.matches("\\d+")) { //if input only contains numbers

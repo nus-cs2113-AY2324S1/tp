@@ -28,7 +28,9 @@ public class AddShortcutCommand extends Command {
             shortcuts.addShortcut(shortcut);
             Ui.printAddShortcutSuccess(shortcut);
         } catch (EssenFormatException exception) {
+            Ui.drawDivider();
             exception.handleException();
+            Ui.drawDivider();
         } catch (EssenShortcutException exception) {
             exception.handleException();
         } catch (NumberFormatException exception) {

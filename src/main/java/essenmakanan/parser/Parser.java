@@ -42,6 +42,8 @@ public class Parser {
                 command = new DeleteRecipeCommand(recipes, inputDetail);
             } else if (inputDetail.startsWith("i/")) {
                 command = new DeleteIngredientCommand(ingredients, inputDetail);
+            } else if (inputDetail.startsWith("sc/")) {
+                command = new DeleteShortcutCommand(shortcuts, inputDetail);
             } else {
                 throw new EssenFormatException();
             }

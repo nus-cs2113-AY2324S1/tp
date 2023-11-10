@@ -42,6 +42,7 @@ public class UseShortcutCommand extends Command {
             Ui.drawDivider();
         } catch (EssenFormatException exception) {
             exception.handleException();
+            Ui.drawDivider();
         }
     }
 }

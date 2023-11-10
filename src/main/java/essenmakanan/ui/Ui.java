@@ -224,6 +224,7 @@ public class Ui {
     }
 
     public static void printAllShortcuts(ShortcutList shortcuts) {
+        Ui.drawDivider();
         System.out.println("Here's a list of your shortcuts!");
         shortcuts.listShortcuts();
         drawDivider();
@@ -235,9 +236,10 @@ public class Ui {
         Ui.drawDivider();
     }
 
-    public static void printNoShortcutInList(String ingredientName) {
+    public static void printDeletedShortcut(String ingredientName) {
         Ui.drawDivider();
-        System.out.println("Shortcut to add '" + ingredientName + "' has been created!");
+        System.out.println("Shortcut to add '" + ingredientName + "' has been deleted!");
         Ui.drawDivider();
     }
+
 }
