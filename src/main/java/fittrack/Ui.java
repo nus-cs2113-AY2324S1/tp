@@ -76,8 +76,13 @@ public class Ui {
         printBlankLine();
     }
 
-    public void printPrompt() {
+    public void printWelcomeBackPrompt() {
         System.out.println("Welcome back! How can I help you today?");
+        printLine();
+    }
+
+    public void printPrompt() {
+        System.out.println("Welcome to FitTrack! How can I help you today?");
         printLine();
     }
 
@@ -91,6 +96,10 @@ public class Ui {
         System.out.println("Here are your profile settings.");
         System.out.println("Height: " + profile.toString());
         printLine();
+    }
+
+    public void printOverwriteCorruptedFile() {
+        System.out.println("The existing data file is corrupted. Would you like to create a new one? (Y/N)");
     }
 
     public void printStoragePathSettingFailure() {

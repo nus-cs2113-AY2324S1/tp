@@ -40,6 +40,8 @@ Gender: Male
 Daily calorie limit: 2000kcal
 BMI: 24.69
 ____________________________________________________________
+Welcome to FitTrack! How can I help you today?
+____________________________________________________________
 `viewprofile 123` is an invalid command. The input pattern is not valid.
 `viewprofile` shows all profile details.
 Type `viewprofile` to view your profile.

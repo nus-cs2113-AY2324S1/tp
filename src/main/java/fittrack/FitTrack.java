@@ -81,21 +81,36 @@ public class FitTrack {
     private void load() {
         // TODO: This method will be eventually changed due to Joshua's Storage rework.
         try {
-            if (!storage.isProfileFileEmpty()) {
-                this.userProfile = storage.profileLoad();
-                ui.printPrompt();
-            }
             this.mealList = storage.mealLoad();
+        } catch (StorageOperationException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
             this.workoutList = storage.workoutLoad();
+        } catch (StorageOperationException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
             this.stepList = storage.stepLoad();
         } catch (StorageOperationException e) {
-            // TODO: Use Ui.
-            System.out.println("There was a problem with the loading of storage contents.");
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            if (!storage.isProfileFileEmpty()) {
+                this.userProfile = storage.profileLoad();
+                ui.printWelcomeBackPrompt();
+            }
+        } catch (StorageOperationException e) {
+            System.out.println(e.getMessage());
             ui.printLine();
         }
 
         if (userProfile == null) {
             initUserProfile();
+            ui.printPrompt();
         }
         if (mealList == null) {
             mealList = new MealList();
