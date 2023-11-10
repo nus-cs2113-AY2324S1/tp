@@ -3,7 +3,7 @@
 
 -----------------------------------------------------------------------------------------------
 ### **Overview**
-CaféCTRL is a software engineering project for CS2113. The user interacts with the application through CLI. It has around 6 kLoC, and it is done in a team of 5.
+CaféCTRL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform also empowers users to streamline stock inventory, menu and orders. The user interacts with it using a CLI. It is written in Java, and has about 6 kLoC.
 
 -----------------------------------------------------------------------------------------------
 
@@ -14,24 +14,46 @@ CaféCTRL is a software engineering project for CS2113. The user interacts with 
 
 ### Enhancements implemented
 #### Feature
-
-1.  **Add Dish** <br>
-
+* **Add Dish** <br>
+    Function: To allow the user to add a dish with the price and its ingredients to the menu<br>
+  * The most crucial feature in the application in order for all the other features to perform their functions, which had to handle many arguments such as the names, price and quantity.
+* **Exit** <br>
+    Function: To exit from the application
+  * Implemented the backend logic in the main class in order to detect the user entered the `bye` keyword in order to exit from the application which was important to allow the storage to text file functionality to work
 
 ### Enhancement
-1. 
+* Created the methods for reading and writing files in FileManager.java
+* Created the regex patterns for most of the command features <br>
+  * Required effort in learning how to format the regex string in order to get the specific intended user inputs 
+* Created a ParserException class to allow for the use of handling specific errors<br>
+e.g checking for repeated dish/ingredient name, invalid price type, missing arguments, etc.
 
 ### Contributions to the UG
-
+* Added documentation for the features: "add dish" and "exit" application
+* Added "Quick Start", "Notes about command format" and "Known Issues" section
 
 ### Contributions to the DG
-
+* Add implementation for "Add dish" feature
+* Add implementation for the Storage class
 
 ### Contributions to team-based tasks
-
+* Setting up the GitHub team org/repo
+* Created the main `CafeCtrl` class and the basic data objects such as `Menu`, `Ingredient` and `Dish`
+* Maintaining a bit of Gradle file
+* Maintaining the issue tracker, specifically creating the tags and assigning issues to team members with Zi Yi
+* Managed releases v1.0, v2.0
+* Approving and merging PRs
 
 ### Review/mentoring contributions
-
+* Examples of PRs reviewed:
+[#98](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/98), [#119](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/119), [#190](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/190)
+* Managed the project team discussions by providing a meeting outline
+![Screenshot of Project Outline 1](../images_PPP/dexter/project_discussion1.png)<br>
+![Screenshot of Project Outline 2](../images_PPP/dexter/project_discussion2.png)<br>
+* Provided a summary of the division of labour after meetings
+![Notion Screenshot](../images_PPP/dexter/division_of_labour1.png)<br>
+![Telegram Screenshot](../images_PPP/dexter/division_of_labour.png)<br>
 
 ### Contributions beyond the project team
-
+Reported bugs and suggestions for other teams in the class <br>
+(example: [#19](https://github.com/nus-cs2113-AY2324S1/tp/pull/19))
