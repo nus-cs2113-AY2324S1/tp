@@ -15,7 +15,7 @@ public class Reminder {
 
     public Reminder(String type, String date, String status) {
         this.type = type;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.date = LocalDate.parse(date, formatter);
         if (status.equals("Done")) {
             this.isDone = true;

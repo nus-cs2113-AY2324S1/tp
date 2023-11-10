@@ -12,7 +12,7 @@ public class AddReminderCommand extends Command {
 
     public AddReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         if(!rawCommand.extraArgs.containsKey("t")){
             throw new IllegalArgumentException("Reminder must have a type");
         }
@@ -33,7 +33,7 @@ public class AddReminderCommand extends Command {
         try {
             date = LocalDate.parse(dateString, formatter);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Reminder date must be in the format yyyy-MM-dd");
+            throw new IllegalArgumentException("Reminder date must be in the format dd/MM/yyyy");
         }
 
         LocalDate currentTime = LocalDate.now();
