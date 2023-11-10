@@ -3,6 +3,7 @@ package essenmakanan.ui;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.shortcut.ShortcutList;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -219,5 +220,11 @@ public class Ui {
         drawDivider();
         System.out.println("Here are the ingredients you need to buy because your inventory is running low: ");
         missingIngredients.listIngredients();
+    }
+
+    public static void printAllShortcuts(ShortcutList shortcuts) {
+        System.out.println("Here's a list of your shortcuts!");
+        shortcuts.listShortcuts();
+        drawDivider();
     }
 }

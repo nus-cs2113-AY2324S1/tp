@@ -51,6 +51,8 @@ public class Parser {
                 command = new ViewRecipesCommand(recipes);
             } else if (inputDetail.equals("i")) {
                 command = new ViewIngredientsCommand(ingredients);
+            } else if (inputDetail.equals("sc")) {
+                command = new ViewShortcutsCommand(shortcuts);
             } else if (inputDetail.startsWith("r/")) {
                 assert (!inputDetail.equals("")) : "To view a recipe, make sure title is not empty";
                 command = new ViewSpecificRecipeCommand(recipes, inputDetail);
