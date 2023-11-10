@@ -1,11 +1,8 @@
 package essenmakanan.command;
 
-import essenmakanan.ingredient.Ingredient;
 import essenmakanan.recipe.Recipe;
-import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.recipe.RecipeStepList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +51,8 @@ public class PlanRecipesCommandTest {
         PlanRecipesCommand command = new PlanRecipesCommand(myIngredientInventory, myRecipeList, "2 r/1 r/2");
         command.executeCommand();
 
-        String[] allIngredientsNeededString = {"flour,200,g", "egg,2,pc", "noodles,100,g", "egg,1,pc", "vegetable,4,pc"};
+        String[] allIngredientsNeededString = {"flour,200,g",
+            "egg,2,pc", "noodles,100,g", "egg,1,pc", "vegetable,4,pc"};
         IngredientList allIngredientsNeeded = new IngredientList(allIngredientsNeededString);
         assert command.getAllIngredientsNeeded().equals(allIngredientsNeeded) : "Failed to plan recipe 1";
 
@@ -65,10 +63,12 @@ public class PlanRecipesCommandTest {
 
     @Test
     public void planRecipeCommand_extraWhiteSpaces_correctOutput() {
-        PlanRecipesCommand command = new PlanRecipesCommand(myIngredientInventory, myRecipeList, "2    r/1      r/2");
+        PlanRecipesCommand command = new PlanRecipesCommand(myIngredientInventory,
+                myRecipeList, "2    r/1      r/2");
         command.executeCommand();
 
-        String[] allIngredientsNeededString = {"flour,200,g", "egg,2,pc", "noodles,100,g", "egg,1,pc", "vegetable,4,pc"};
+        String[] allIngredientsNeededString = {"flour,200,g", "egg,2,pc",
+            "noodles,100,g", "egg,1,pc", "vegetable,4,pc"};
         IngredientList allIngredientsNeeded = new IngredientList(allIngredientsNeededString);
         assert command.getAllIngredientsNeeded().equals(allIngredientsNeeded) : "Failed to plan recipe 1";
 
