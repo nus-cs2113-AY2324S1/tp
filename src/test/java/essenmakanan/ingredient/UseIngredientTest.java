@@ -1,6 +1,5 @@
 package essenmakanan.ingredient;
 
-import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.UseIngredientCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
