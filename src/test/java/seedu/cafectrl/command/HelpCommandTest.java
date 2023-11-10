@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class HelpCommandTest {
 
     @Test
-    void execute_validInput_editPrice() {
+    void execute_validInput_displayHelp() {
 
         ArrayList<String> actualOutputs = new ArrayList<>();
         Menu menu = new Menu();
