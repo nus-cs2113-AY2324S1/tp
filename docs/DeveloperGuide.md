@@ -33,6 +33,22 @@ Given below is a quick overview of main components and how they interact with ea
 
 ### Model component
 
+### Recipe component
+
+1. Upon booting up the application, `RecipeList` will retrieve past recipe data by calling `restoreSavedData` in the Storage class.
+The restored `recipes` will then be stored in `RecipeList`.
+If the `recipes.txt` file does not exist, no data is retrieved and RecipeList will be empty.
+2. Each `RecipeList` consists of zero to as many Recipe in it's ArrayList. 
+3. Each `Recipe` in RecipeList consists of exactly one `RecipeIngredientList`, up to four `Tag` and exactly one `RecipeStepList`.
+4. `RecipeIngredientList` consists of at least one Ingredient while `RecipeStepList` consists of at least one step.
+
+
+<img src="images/RecipeListClassDiagram.png" width="400"/>
+
+### Ingredient component
+
+
+
 ### Storage component
 
 In this application, it uses text files to store all data, i.e, recipes and ingredients. 
@@ -356,6 +372,7 @@ use the command `filter recipe i/INGREDIENT_NAME [i/...]`, where `INGREDIENT_ID`
 
 ![img.png](images/FilterRecipesSD.png)
 
+### Plan Recipe Command
 
 
 ## Product scope

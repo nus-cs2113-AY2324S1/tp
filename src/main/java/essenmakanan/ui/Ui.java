@@ -212,10 +212,11 @@ public class Ui {
     }
 
     public static void printPlanCommandIngredients(
-            IngredientList allIngredientsNeeded, IngredientList missingIngredients) {
+            IngredientList allIngredientsNeeded, IngredientList missingIngredients, RecipeList recipes) {
+        printAllRecipes(recipes);
         System.out.println("Here is a list of all ingredients you need: ");
         allIngredientsNeeded.listIngredients();
-        printNewLine();
+        drawDivider();
         System.out.println("Here are the ingredients you need to buy because your inventory is running low: ");
         missingIngredients.listIngredients();
     }

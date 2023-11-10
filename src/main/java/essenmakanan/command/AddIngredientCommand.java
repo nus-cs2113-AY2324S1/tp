@@ -28,6 +28,7 @@ public class AddIngredientCommand extends Command {
             Ingredient newIngredient;
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredient);
+
                 if (newIngredient.getQuantity() < 0) {
                     Ui.printNegativeIngredientQuantity();
                     return;
