@@ -8,6 +8,7 @@ import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.ui.Ui;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
@@ -72,6 +73,7 @@ public class IngredientParser {
         IngredientUnit ingredientUnit;
 
         if (!isValidIngredient(inputDetail)) {
+            Ui.printValidIngredientExample();
             throw new EssenFormatException();
         }
 
@@ -84,6 +86,12 @@ public class IngredientParser {
         String ingredientName = ingredientDetails[0].strip();
         if (ingredientName.isEmpty()) {
             System.out.println("Ingredient name should not be empty!");
+            throw new EssenFormatException();
+        }
+
+        if (ingredientDetails[1].isBlank()) {
+            // check if quantity is a null
+            System.out.println("Ingredient quantity should not be empty!");
             throw new EssenFormatException();
         }
 
@@ -144,6 +152,7 @@ public class IngredientParser {
             ingredientUnit = IngredientUnit.PIECE;
             break;
         default:
+            System.out.println(Ui.validIngredientUnits());
             throw new EssenFormatException();
         }
 

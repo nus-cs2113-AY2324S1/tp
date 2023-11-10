@@ -219,4 +219,8 @@ public class Ui {
         System.out.println("Here are the ingredients you need to buy because your inventory is running low: ");
         missingIngredients.listIngredients();
     }
+
+    public static void printValidIngredientExample() {
+        System.out.println("Invalid Ingredient! Example of valid ingredient: i/Chicken,1,kg");
+    }
 }
