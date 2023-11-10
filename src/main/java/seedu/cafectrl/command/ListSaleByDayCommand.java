@@ -31,6 +31,9 @@ public class ListSaleByDayCommand extends Command {
         } catch (Exception e) {
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
         }
+    }
 
+    public int getDay() {
+        return day;
     }
 }
