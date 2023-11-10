@@ -1,5 +1,6 @@
 package fittrack.data;
 
+import fittrack.parser.DateFormatException;
 import fittrack.parser.NumberFormatException;
 import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
@@ -92,7 +93,7 @@ class MealTest {
         assertThrows(PatternMatchFailException.class, () -> Meal.parseMeal("name c/"));
         assertThrows(PatternMatchFailException.class, () -> Meal.parseMeal("name c/123 d/"));
         assertThrows(PatternMatchFailException.class, () -> Meal.parseMeal("c/123 d/2023-10-31"));
-        assertThrows(PatternMatchFailException.class, () -> Meal.parseMeal("name c/100 d/oct31"));
+        assertThrows(DateFormatException.class, () -> Meal.parseMeal("name c/100 d/oct31"));
         assertThrows(NumberFormatException.class, () -> Meal.parseMeal("name c/hundred"));
     }
 }

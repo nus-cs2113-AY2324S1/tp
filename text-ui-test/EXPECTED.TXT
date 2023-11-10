@@ -104,7 +104,7 @@ I've added the following meal:
 [M] cabonara pasta (180kcal, 2023-10-29)
 
 ____________________________________________________________
-`addmeal pizza c/230 d/2023-11-1` is an invalid command. The input pattern is not valid.
+`addmeal pizza c/230 d/2023-11-1` is an invalid command. The date format is not valid.
 `addmeal` adds your daily meal data to the list.
 Type `addmeal <MEAL_NAME> c/<CALORIES>` to add today's meal.
 Type `addmeal <MEAL_NAME> c/<CALORIES> d/<DATE>` to add a meal.
@@ -136,7 +136,7 @@ I've added the following workout:
 [W] long run (200kcal, 2023-10-29)
 
 ____________________________________________________________
-`addworkout sprint run c/100 d/2023-11-1` is an invalid command. The input pattern is not valid.
+`addworkout sprint run c/100 d/2023-11-1` is an invalid command. The date format is not valid.
 `addworkout` adds your daily workout data to the list.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES>` to add today's workout.
 Type `addworkout <WORKOUT_NAME> c/<CALORIES> d/<DATE>` to add a workout.
@@ -170,7 +170,7 @@ These workouts contain the keyword run:
 There are 2 workouts that contains run.
 
 ____________________________________________________________
-`caloriesburnt` is an invalid command. The input pattern is not valid.
+`caloriesburnt` is an invalid command. The date format is not valid.
 `caloriesburnt` shows your total calories burnt on a specific date.
 Type `caloriesburnt <DATE>` to see the total calories burnt on that date.
 You should type <DATE> in format of `yyyy-MM-dd`.
@@ -180,7 +180,7 @@ ____________________________________________________________
 Total calories burnt on 2023-10-29: 200kcal
 
 ____________________________________________________________
-`caloriesconsumed` is an invalid command. The input pattern is not valid.
+`caloriesconsumed` is an invalid command. The date format is not valid.
 `caloriesconsumed` shows your total calories consumed on a specific date.
 Type `caloriesconsumed <DATE>` to see the total calories consumed on that date.
 You should type <DATE> in format of `yyyy-MM-dd`.

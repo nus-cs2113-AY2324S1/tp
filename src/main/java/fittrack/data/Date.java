@@ -1,6 +1,6 @@
 package fittrack.data;
 
-import fittrack.parser.PatternMatchFailException;
+import fittrack.parser.DateFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,12 +56,12 @@ public class Date implements Comparable<Date> {
         return new Date(LocalDate.now());
     }
 
-    public static Date parseDate(String s) throws PatternMatchFailException {
+    public static Date parseDate(String s) throws DateFormatException {
         assert s != null;
         try {
             return new Date(s.strip());
         } catch (DateTimeParseException e) {
-            throw new PatternMatchFailException();
+            throw new DateFormatException();
         }
     }
 }
