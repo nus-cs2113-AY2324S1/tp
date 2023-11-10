@@ -10,8 +10,8 @@ import seedu.cafectrl.ui.Ui;
  */
 public class Sales {
     private static ArrayList<OrderList> orderLists;
+    private static final int DAY_DISPLAY_OFFSET = 1;
     private int daysAccounted;
-    private final int DAY_DISPLAY_OFFSET = 1;
 
     public Sales() {
         this.orderLists = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Sales {
 
     public Sales(ArrayList<OrderList> orderLists) {
         this.orderLists = orderLists;
-        this.daysAccounted = 0;
+        this.daysAccounted = orderLists.size() - 1;
     }
 
     //TODO: @Zhong Heng, Remove this method if not used
@@ -63,12 +63,12 @@ public class Sales {
             ui.showToUser("No sales made.");
             return;
         }
-        ui.showSalesBottom();
+        //ui.showSalesBottom();
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
 
             if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
-                ui.showToUser("No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".");
+                ui.showToUser("", "No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".", "");
                 continue;
             }
 
