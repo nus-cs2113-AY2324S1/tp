@@ -5,6 +5,9 @@ import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
+import essenmakanan.recipe.Recipe;
+import essenmakanan.recipe.RecipeIngredientList;
+import essenmakanan.recipe.RecipeList;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
@@ -26,24 +29,38 @@ public class IngredientParser {
         return index;
     }
 
+
+    /**
+     * To get an Ingredient List of all ingredients needed for all recipes in the recipe list
+     *
+     * @param recipes is a recipe list of all recipes the user wants to process
+     * @return all ingredients in the list of recipes
+     */
+    public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
+        IngredientList allIngredients = new IngredientList();
+        RecipeIngredientList recipeIngredients;
+
+        for (Recipe recipe : recipes.getRecipes()) {
+            recipeIngredients = recipe.getRecipeIngredients();
+            for (Ingredient ingredient : recipeIngredients.getIngredients()) {
+                allIngredients.addIngredient(ingredient);
+            }
+        }
+        return allIngredients;
+    }
+
     public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
         return ingredient1.getUnit().equals(ingredient2.getUnit());
     }
 
-    public static String getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
-        final String zeroQuantity = "0";
-        String quantityNeededString = ingredientNeeded.getQuantity();
-        String quantityAvailableString = ingredientAvailable.getQuantity();
-
-        if (quantityNeededString.matches("[a-zA-Z ]+") || quantityAvailableString.matches("[a-zA-Z ]+")) {
-            return zeroQuantity; //there is no way of comparison if quantity is a String
-        }
+    public static Double getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
+        final Double zeroQuantity = 0.0;
         
-        Double quantityNeeded = Double.parseDouble(ingredientNeeded.getQuantity());
-        Double quantityAvailable = Double.parseDouble(ingredientAvailable.getQuantity());
+        Double quantityNeeded = ingredientNeeded.getQuantity();
+        Double quantityAvailable = ingredientAvailable.getQuantity();
 
         if (quantityNeeded > quantityAvailable) {
-            return Double.toString(quantityNeeded - quantityAvailable);
+            return (quantityNeeded - quantityAvailable);
         }
 
         return zeroQuantity;
@@ -65,8 +82,12 @@ public class IngredientParser {
         assert (ingredientDetails.length == 3) : "Ingredient details should have 3 parts";
 
         String ingredientName = ingredientDetails[0].strip();
+        if (ingredientName.isEmpty()) {
+            System.out.println("Ingredient name should not be empty!");
+            throw new EssenFormatException();
+        }
 
-        String ingredientQuantity = ingredientDetails[1].strip();
+        Double ingredientQuantity = Double.parseDouble(ingredientDetails[1].strip());
 
         String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
         ingredientUnit = mapIngredientUnit(ingredientUnitString);
@@ -91,7 +112,6 @@ public class IngredientParser {
         } catch (EssenFormatException e) {
             return false;
         }
-
         return true;
     }
 

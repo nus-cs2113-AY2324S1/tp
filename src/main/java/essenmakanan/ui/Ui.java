@@ -5,6 +5,7 @@ import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.RecipeList;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Ui {
 
@@ -84,6 +85,12 @@ public class Ui {
         drawDivider();
     }
 
+    public static void printUpdateIngredientsSuccess(String name, Double existingQuantity, Double quantityToAdd) {
+        System.out.println("Ingredient: " + name + " has been successfully updated from: " + existingQuantity
+                + " to: " + (existingQuantity + quantityToAdd));
+        drawDivider();
+    }
+
     public static void printAllIngredients(IngredientList ingredients) {
         System.out.println("Here's a list of your ingredients!");
         ingredients.listIngredients();
@@ -118,8 +125,8 @@ public class Ui {
                 diffUnitIngredients.listIngredients();
                 printNewLine();
             }
+            System.out.println("Start your recipe again after getting the above ingredients!");
         }
-        System.out.println("Start your recipe again after getting the above ingredients!");
         drawDivider();
     }
 
@@ -140,7 +147,7 @@ public class Ui {
     }
 
     public static String validIngredientUnits() {
-        return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");
+        return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pc");
     }
 
     public static void printEditIngredientNameSuccess(String oldName, String newName) {
@@ -149,7 +156,7 @@ public class Ui {
         drawDivider();
     }
 
-    public static void printEditIngredientQuantitySuccess(String oldQuantity, String newQuantity) {
+    public static void printEditIngredientQuantitySuccess(Double oldQuantity, Double newQuantity) {
         System.out.println("You have successfully edited the ingredient quantity from: " + oldQuantity +
                 " to: " + newQuantity);
         drawDivider();
@@ -191,5 +198,25 @@ public class Ui {
     public static void handleIOException(IOException exception) {
         System.out.println("Unable to save data");
         System.out.println(exception.getMessage());
+    }
+
+    public static void printDuplicatedRecipe(String recipeTitle) {
+        drawDivider();
+        System.out.println(recipeTitle + " has been duplicated.");
+        drawDivider();
+    }
+
+    public static String readUserInput() {
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
+    }
+
+    public static void printPlanCommandIngredients(
+            IngredientList allIngredientsNeeded, IngredientList missingIngredients) {
+        System.out.println("Here is a list of all ingredients you need: ");
+        allIngredientsNeeded.listIngredients();
+        printNewLine();
+        System.out.println("Here are the ingredients you need to buy because your inventory is running low: ");
+        missingIngredients.listIngredients();
     }
 }

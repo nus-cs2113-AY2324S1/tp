@@ -3,16 +3,10 @@ package essenmakanan.ingredient;
 public class Ingredient {
 
     private String name;
-    private String quantity;
+    private Double quantity;
     private IngredientUnit unit;
 
-    public Ingredient(String name) {
-        this.name = name;
-        this.quantity = "1";
-        this.unit = IngredientUnit.PIECE;
-    }
-
-    public Ingredient(String name, String qty, IngredientUnit unit) {
+    public Ingredient(String name, Double qty, IngredientUnit unit) {
         this.name = name;
         this.quantity = qty;
         this.unit = unit;
@@ -26,11 +20,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getQuantity() {
+    public Double getQuantity() {
         return this.quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
@@ -44,6 +38,20 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return  this.name + ": " + this.quantity + this.unit.getValue();
+        if (String.valueOf(this.quantity).endsWith(".0")) {
+            // if quantity is a whole number, remove the decimal point
+            String qtyString = String.valueOf(this.quantity);
+            qtyString = qtyString.substring(0, qtyString.length() - 2);
+            return  this.name + ": " + Integer.parseInt(qtyString) + this.unit.getValue();
+        }
+        return this.name + ": " + this.quantity + this.unit.getValue();
+    }
+
+    public boolean equals(Ingredient i) {
+        boolean nameEqual = this.getName().equals(i.getName());
+        boolean quantityEqual = this.getQuantity().equals(i.getQuantity());
+        boolean unitEqual = this.getUnit().equals(i.getUnit());
+
+        return (nameEqual && quantityEqual && unitEqual);
     }
 }

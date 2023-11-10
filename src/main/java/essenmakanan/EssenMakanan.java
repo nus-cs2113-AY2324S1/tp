@@ -7,13 +7,13 @@ import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.storage.IngredientStorage;
 import essenmakanan.storage.RecipeStorage;
 import essenmakanan.ui.Ui;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class EssenMakanan {
@@ -32,15 +32,16 @@ public class EssenMakanan {
         Ui.start();
 
         Scanner in = new Scanner(System.in);
-        String input = "";
+        String input;
 
         Command command = null;
-        Ui.showCommands();
         do {
             input = in.nextLine();
             try {
                 command = parser.parseCommand(input, recipes, ingredients);
                 command.executeCommand();
+                ingredientStorage.saveData(ingredients.getIngredients());
+                recipeStorage.saveData(recipes.getRecipes());
             } catch (EssenCommandException exception) {
                 exception.handleException();
             } catch (EssenFormatException exception) {
@@ -49,16 +50,10 @@ public class EssenMakanan {
                 exception.handleException();
             }
         } while (!ExitCommand.isExitCommand(command));
-
-        try {
-            ingredientStorage.saveData(ingredients.getIngredients());
-            recipeStorage.saveData(recipes.getRecipes());
-        } catch (IOException exception) {
-            Ui.handleIOException(exception);
-        }
     }
 
     public void setup() {
+        EssenLogger.setup();
         recipes = new RecipeList();
         parser = new Parser();
         ingredientStorage = new IngredientStorage(DATA_INGREDIENT_PATH);
@@ -68,13 +63,16 @@ public class EssenMakanan {
             ingredients = new IngredientList(ingredientStorage.restoreSavedData());
         } catch (EssenFileNotFoundException exception) {
             exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_INGREDIENT_PATH);
+            ingredients = new IngredientList();
         }
 
         try {
             recipes = new RecipeList(recipeStorage.restoreSavedData());
         } catch (EssenFileNotFoundException exception) {
             exception.handleFileNotFoundException(DATA_DIRECTORY, DATA_RECIPE_PATH);
+            recipes = new RecipeList();
         }
+
     }
 
     public void start() {

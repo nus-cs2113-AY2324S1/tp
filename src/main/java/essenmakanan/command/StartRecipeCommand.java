@@ -12,13 +12,14 @@ import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 public class StartRecipeCommand extends Command {
+
+    public IngredientList missingIngredients;
+    public IngredientList insufficientIngredients;
+    public IngredientList diffUnitIngredients;
     private String input; //either id or name of recipe
     private IngredientList ingredients;
     private RecipeList recipes;
     private RecipeIngredientList recipeIngredients;
-    private IngredientList missingIngredients;
-    private IngredientList insufficientIngredients;
-    private IngredientList diffUnitIngredients;
 
     public StartRecipeCommand(String input, RecipeList recipes, IngredientList ingredients) {
         this.input = input;
@@ -30,7 +31,19 @@ public class StartRecipeCommand extends Command {
         this.diffUnitIngredients = new IngredientList();
     }
 
-    private void getMissingIngredients() {
+    public IngredientList getMissingIngredients() {
+        return this.missingIngredients;
+    }
+
+    public IngredientList getInsufficientIngredients() {
+        return this.insufficientIngredients;
+    }
+
+    /**
+     * Compare ingredients in a recipe and ingredients in the inventory.
+     * Update missingIngredients, diffUnitIngredients and insufficientIngredients accordingly.
+     */
+    private void getIngredientsStillNeeded() {
         String recipeIngredientName;
         IngredientUnit recipeIngredientUnit;
 
@@ -47,11 +60,11 @@ public class StartRecipeCommand extends Command {
                     diffUnitIngredients.addIngredient(recipeIngredient);
                 }
 
-                String missingQuantity = "0";
+                Double missingQuantity = 0.0;
                 if (isSameUnit) {
                     missingQuantity = IngredientParser.getInsufficientQuantity(recipeIngredient, inventoryIngredient);
                 }
-                if (isSameUnit && !missingQuantity.equals("0")) {
+                if (isSameUnit && !missingQuantity.equals(0.0)) {
                     Ingredient lackingIngredient = new Ingredient(
                             recipeIngredientName, missingQuantity, recipeIngredientUnit);
                     insufficientIngredients.addIngredient(lackingIngredient);
@@ -70,7 +83,7 @@ public class StartRecipeCommand extends Command {
             String recipeTitle = recipe.getTitle();
             recipeIngredients = recipe.getRecipeIngredients();
 
-            getMissingIngredients();
+            getIngredientsStillNeeded();
 
             Ui.printStartRecipeMessage(missingIngredients, insufficientIngredients, diffUnitIngredients, recipeTitle);
         } catch (EssenOutOfRangeException e) {

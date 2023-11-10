@@ -1,4 +1,0 @@
-bread || step1 | ACTUAL_COOKING | 5 , step2 | ACTUAL_COOKING | 5 || flour | 200.0 | GRAM , egg | 1.0 | PIECE
-scrambled egg || buy egg | ACTUAL_COOKING | 5 , cook egg | ACTUAL_COOKING | 5 || egg | 1.0 | PIECE
-white bread || mix yeast into bowl | ACTUAL_COOKING | 5 , add water | ACTUAL_COOKING | 5 || flour | 200.0 | GRAM , yeast | 10.0 | GRAM
-brown bread || mix yeast into bowl | MORNING_OF_COOKING | 5 , add water | MORE_THAN_ONE_DAY | 5 || flour | 200.0 | GRAM , yeast | 10.0 | GRAM

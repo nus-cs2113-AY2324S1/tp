@@ -4,11 +4,13 @@ import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenInvalidEnumException;
 import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.ingredient.Ingredient;
+import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeStepList;
 import essenmakanan.recipe.Step;
+import essenmakanan.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,23 +48,31 @@ public class RecipeStorage {
         return recipe.getTitle() + " || " + recipeStepString + " || " + ingredientString;
     }
 
-    public void saveData(ArrayList<Recipe> recipes) throws IOException {
-        FileWriter writer = new FileWriter(dataPath, false);
-        String dataString;
+    public void saveData(ArrayList<Recipe> recipes)  {
+        try {
+            FileWriter writer = new FileWriter(dataPath, false);
+            String dataString;
 
-        for (Recipe recipe : recipes) {
-            dataString = convertToString(recipe);
-            writer.write(dataString);
-            writer.write(System.lineSeparator());
+            EssenLogger.logInfo("Transferring recipe data");
+            for (Recipe recipe : recipes) {
+                dataString = convertToString(recipe);
+                writer.write(dataString);
+                writer.write(System.lineSeparator());
+            }
+
+            writer.close();
+            EssenLogger.logInfo("Recipe data has been successfully saved");
+        } catch (IOException exception) {
+            Ui.handleIOException(exception);
+            //.log(Level.SEVERE, "Unable to save recipe data", exception);
         }
-
-        writer.close();
     }
 
     private void createNewData(Scanner scan) {
         String dataString = scan.nextLine();
         String[] parsedRecipe = dataString.trim().split(" \\|\\| ");
 
+        EssenLogger.logInfo("Retrieving recipe data");
         try {
             if (parsedRecipe.length != 3 || parsedRecipe[1].isEmpty()) {
                 throw new EssenStorageFormatException();
@@ -88,10 +98,13 @@ public class RecipeStorage {
 
             recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
         } catch (EssenStorageFormatException exception) {
-            exception.handleException(dataString); // this is here due to unavailable feature of creating custom tags
+            exception.handleException(dataString);
+            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid format", exception);
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
+            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid enum", exception);
         }
+        EssenLogger.logInfo("Saved recipe data has been received");
     }
 
     public ArrayList<Recipe> restoreSavedData() throws EssenFileNotFoundException {
@@ -102,6 +115,7 @@ public class RecipeStorage {
                 createNewData(scan);
             }
         } catch (FileNotFoundException exception) {
+            //logger.log(Level.WARNING, "Text file not found");
             throw new EssenFileNotFoundException();
         }
 

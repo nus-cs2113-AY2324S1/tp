@@ -21,37 +21,37 @@ public class StorageTest {
     private static String DATA_EMPTY_RECIPE_TEXT_PATH = "src/test/data/emptyRecipe.txt";
 
     @Test
-    public void accessIngredientDatabase_invalidPath_throwsEssenFileNotFoundException() {
+    public void accessIngredientDatabase_invalidPath_expectEssenFileNotFoundException() {
         IngredientStorage ingredientStorage = new IngredientStorage(DATA_INVALID_PATH);
         assertThrows(EssenFileNotFoundException.class, ingredientStorage::restoreSavedData);
     }
 
     @Test
-    public void accessRecipeDatabase_invalidPath_throwsEssenFileNotFoundException() {
+    public void accessRecipeDatabase_invalidPath_expectEssenFileNotFoundException() {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_PATH);
         assertThrows(EssenFileNotFoundException.class, recipeStorage::restoreSavedData);
     }
 
     @Test
-    public void restoreSavedIngredients_storedIngredients_returnsFilledIngredientList() throws Exception {
+    public void restoreSavedIngredients_storeValidIngredients_returnsFilledIngredientList() throws Exception {
         IngredientStorage ingredientStorage = new IngredientStorage(DATA_INGREDIENT_TEST_PATH);
         IngredientList ingredients = new IngredientList(ingredientStorage.restoreSavedData());
 
         assertEquals("bread", ingredients.getIngredients().get(0).getName());
-        assertEquals("2", ingredients.getIngredients().get(0).getQuantity());
+        assertEquals(2.0, ingredients.getIngredients().get(0).getQuantity());
         assertEquals("g", ingredients.getIngredients().get(0).getUnit().getValue());
 
         assertEquals("cheese", ingredients.getIngredients().get(1).getName());
-        assertEquals("10", ingredients.getIngredients().get(1).getQuantity());
+        assertEquals(10.0, ingredients.getIngredients().get(1).getQuantity());
         assertEquals("pc", ingredients.getIngredients().get(1).getUnit().getValue());
 
         assertEquals("carrot", ingredients.getIngredients().get(2).getName());
-        assertEquals("5", ingredients.getIngredients().get(2).getQuantity());
+        assertEquals(5.0, ingredients.getIngredients().get(2).getQuantity());
         assertEquals("kg", ingredients.getIngredients().get(2).getUnit().getValue());
     }
 
     @Test
-    public void restoreSavedRecipes_storedRecipes_returnFilledRecipeList() throws Exception {
+    public void restoreSavedRecipes_storedValidRecipes_returnFilledRecipeList() throws Exception {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_RECIPE_TEST_PATH);
         RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
 
@@ -66,12 +66,12 @@ public class StorageTest {
         Ingredient ingredient = recipe.getRecipeIngredients().getIngredientByIndex(0);
 
         assertEquals("bread", ingredient.getName());
-        assertEquals("5", ingredient.getQuantity());
+        assertEquals(5.0, ingredient.getQuantity());
         assertEquals("kg", ingredient.getUnit().getValue());
     }
 
     @Test
-    public void restoreEmptyRecipes_storedRecipes_returnRecipeWithEmptyAttributes() throws Exception {
+    public void restoreEmptyRecipes_storedValidRecipes_returnRecipeWithEmptyAttributes() throws Exception {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_EMPTY_RECIPE_TEXT_PATH);
         RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
 

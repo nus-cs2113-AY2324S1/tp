@@ -34,6 +34,10 @@ public class IngredientList {
         return null;
     }
 
+    public int getSize() {
+        return this.ingredients.size();
+    }
+
     public boolean isEmpty() {
         return ingredients.isEmpty();
     }
@@ -70,7 +74,43 @@ public class IngredientList {
     }
 
     public void addIngredient(Ingredient ingredient) {
+        assert ingredient.getName() != null : "Ingredient name should not be null";
+
         ingredients.add(ingredient);
+    }
+
+    public void updateIngredient(Ingredient ingredientToUpdate) throws EssenFormatException {
+        Ingredient existingIngredient = this.getIngredient(ingredientToUpdate.getName());
+        // check if unit matches
+        if (!existingIngredient.getUnit().equals(ingredientToUpdate.getUnit())) {
+            System.out.println("Existing ingredient unit is " + existingIngredient.getUnit().getValue()
+                    + " but new ingredient unit is " + ingredientToUpdate.getUnit().getValue());
+            throw new EssenFormatException();
+        }
+
+        double oldQuantity = existingIngredient.getQuantity();
+        double deltaQuantity = ingredientToUpdate.getQuantity();
+        double newQuantity = oldQuantity + deltaQuantity;
+
+        if (newQuantity < 0) {
+            // if new quantity is negative, throw exception
+            System.out.println("You do not have enough ingredients to use.");
+            return;
+        }
+
+        if (oldQuantity < newQuantity) {
+            // increase quantity of existing ingredient
+            existingIngredient.setQuantity(newQuantity);
+            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
+                    oldQuantity,
+                    ingredientToUpdate.getQuantity());
+        } else if (oldQuantity > newQuantity) {
+            // decrease quantity of existing ingredient
+            existingIngredient.setQuantity(newQuantity);
+            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
+                    oldQuantity,
+                    ingredientToUpdate.getQuantity());
+        }
     }
 
     public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
@@ -85,7 +125,7 @@ public class IngredientList {
                 existingIngredient.setName(newName);
                 break;
             case "q/":
-                String newQuantity = editDetails[i].substring(2);
+                Double newQuantity = Double.parseDouble(editDetails[i].substring(2));
                 Ui.printEditIngredientQuantitySuccess(existingIngredient.getQuantity(), newQuantity);
                 existingIngredient.setQuantity(newQuantity);
                 break;
@@ -122,5 +162,19 @@ public class IngredientList {
             System.out.println(count + ". " + ingredient);
             count++;
         }
+    }
+
+    public boolean equals(IngredientList list) {
+        if (this.getSize() != list.getSize()) {
+            return false;
+        }
+
+        for (int i=0; i<this.getSize(); i++) {
+            if ( !this.getIngredient(i).equals(list.getIngredient(i)) ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
