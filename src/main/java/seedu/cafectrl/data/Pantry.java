@@ -167,26 +167,43 @@ public class Pantry {
         int maxNumofDish = Integer.MAX_VALUE;
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
         boolean isRestockHeaderDisplayed = false;
-        int dishQty = order.getQuantity();
 
         for (Ingredient dishIngredient : dishIngredients) {
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
 
-            if (!isRestockHeaderDisplayed && (numOfDish < dishQty)) {
-                ui.showToUser(Messages.RESTOCK_CORNER, Messages.RESTOCK_TITLE, Messages.RESTOCK_CORNER);
-                isRestockHeaderDisplayed = true;
-            }
-
-            if (numOfDish < dishQty && !order.getIsComplete()) {
-                handleRestock(dishIngredient, dishQty);
-            }
-
-            if (numOfDish == 0) {
-                handleRestock(dishIngredient, 1);
+            if (!order.getIsComplete()) {
+                isRestockHeaderDisplayed = showRestockHeaderIfNeeded(isRestockHeaderDisplayed);
+                handleIncompleteDishCase(dishIngredient, order);
+            } else {
+                if (numOfDish == 0) {
+                    isRestockHeaderDisplayed = showRestockHeaderIfNeeded(isRestockHeaderDisplayed);
+                }
+                handleZeroDishCase(dishIngredient);
             }
         }
+
         return maxNumofDish;
+    }
+
+    private boolean showRestockHeaderIfNeeded(boolean isRestockHeaderDisplayed) {
+        if (!isRestockHeaderDisplayed) {
+            ui.showToUser(Messages.RESTOCK_CORNER, Messages.RESTOCK_TITLE, Messages.RESTOCK_CORNER);
+            isRestockHeaderDisplayed = true;
+        }
+        return isRestockHeaderDisplayed;
+    }
+
+    private void handleIncompleteDishCase(Ingredient dishIngredient, Order order) {
+        int orderQuantity = order.getQuantity();
+        if (calculateMaxDishForEachIngredient(dishIngredient) < orderQuantity) {
+            handleRestock(dishIngredient, orderQuantity);
+        }
+    }
+    private void handleZeroDishCase(Ingredient dishIngredient) {
+        if (calculateMaxDishForEachIngredient(dishIngredient) == 0) {
+            handleRestock(dishIngredient, 1);
+        }
     }
 
     /**
