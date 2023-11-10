@@ -12,7 +12,7 @@ import essenmakanan.command.ExitCommand;
 import essenmakanan.command.FilterRecipesCommand;
 import essenmakanan.command.HelpCommand;
 import essenmakanan.command.PlanRecipesCommand;
-import essenmakanan.command.StartRecipeCommand;
+import essenmakanan.command.CheckRecipeCommand;
 import essenmakanan.command.ViewIngredientsCommand;
 import essenmakanan.command.ViewRecipesCommand;
 import essenmakanan.command.ViewSpecificIngredientCommand;
@@ -33,8 +33,8 @@ public class Parser {
         String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
 
         switch (commandType) {
-        case "start":
-            command = new StartRecipeCommand(inputDetail, recipes, ingredients);
+        case "check":
+            command = new CheckRecipeCommand(inputDetail, recipes, ingredients);
             break;
         case "add":
             if (inputDetail.startsWith("r/")) {

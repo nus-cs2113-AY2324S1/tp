@@ -10,7 +10,7 @@ import essenmakanan.recipe.RecipeStepList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class StartRecipeCommandTest {
+public class CheckRecipeCommandTest {
     private RecipeList recipes;
     private Recipe recipe0;
     private Recipe recipe1;
@@ -54,7 +54,7 @@ public class StartRecipeCommandTest {
 
     @Test
     public void startRecipe_validIngredients_comparesCorrectly() {
-        StartRecipeCommand command = new StartRecipeCommand("Fluffy Bread", recipes, ingredients);
+        CheckRecipeCommand command = new CheckRecipeCommand("Fluffy Bread", recipes, ingredients);
         command.executeCommand();
 
         // Check if insufficientIngredients list is correct
