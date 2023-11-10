@@ -1,15 +1,20 @@
 # Developer Guide
 
+---
 ## Acknowledgements
+
+---
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 Main structure of the code and the parse feature is adapted from [here](https://github.com/se-edu/addressbook-level2).
 
+---
 ## Design & implementation
 
-### Main structure
+___
 
+### Main structure
 
 ### Architecture
 {insert diagram to show architecture of code}
@@ -23,15 +28,6 @@ to learn how to create and edit diagrams.
 
 The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.java)
 
-The App consists of eight components.
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-* [**`MealList`**](#meal-list-component): Stores all meals.
-* [**`UserProfile`**](#user-profile-component): The class which handles all profile data.
-* [**`WorkoutList`**](#workout-list-component): Stores all workouts.
-* [**`Parser`**](#parser-component): Handles user input.
-* [**`Data`**](#data-component): Holds the data of the app in memory.
-* [**`Command`**](#command-component): The command executor.
 
 ### Core sequence
 Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTrack.java) class.
@@ -48,10 +44,17 @@ classes.
 
 ![Sequence of invalid command](images/InvalidCommand.svg "Sequence of invalid command")
 
-Given below is the Sequence Diagram for interactions within the Logic component for the execute("deletemeal 1") call.
-![Deletemeal command sequence](images/DeleteSequence.svg)
+
+The App consists of five components.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Parser`**](#parser-component): Handles user input.
+* [**`Model`**](#data-component): Holds the data of the app in memory.
+* [**`Command`**](#command-component): The command executor.
 
 ### Storage Component
+API: `Storage.java`
+
 Storage load and save functions are written in [`Storage`](../src/main/java/fittrack/storage/Storage.java) class.
 
 ![Structure of Storage Load](images/StorageLoad.svg)
@@ -65,7 +68,259 @@ The `Storage` component,
 * can save meals in text format and load it back
 * can save workouts in text format and load it back
 
+**Design Considerations**
+* There are two methods to implement saving of data. Either save data after every command or save everything upon exiting the program.
+* Option 1 (Currently implemented): Saving data after every command
+  * Advantage: Data does not get lost if program suddenly exits. Changes are saved after every command.
+  * Disadvantage: Slows the program down when there is large amount of data to be saved.
+* Option 2: Save data once upon exit
+  * Advantage: More efficient and better performance of the program.
+  * Disadvantage: If program crashes, no data is saved.
+
+### Parser Component
+API: `CommandParser.java`
+
+The [`CommandParser`](../src/main/java/fittrack/parser/CommandParser.java) is responsible for interpreting user inputs and converting it into executable commands.
+It plays the role of connecting the user interface and the command execution components.
+
+{sequence diagram of command parser}
+
+**Design Considerations**
+* Write design considerations here
+
+
+### Command Component
+API: `Command.java`
+
+The command component is responsible for executing specific commands and return a command result.
+
+{sequence or class diagram}
+
+**Design Considerations**
+* Write considerations here
+
+Given below is the Sequence Diagram for interactions within the Logic component for the execute("deletemeal 1") call.
+![Deletemeal command sequence](images/DeleteSequence.svg)
+
+
+---
+## Main Data Structures
+
+---
+### Implementation
+
+**User Profile**
+
+The user profile class basic deals with all profile settings and data. Storing, organising and calculating data related 
+to the user's personal data is done in this class. All first time users are required to enter their height, weight, max 
+daily calorie intake and gender before they can begin. For the categorisation of BMI, a hashmap is used.
+
+**MealList**
+
+The meal list class is used to keep track of meals and calories consumed by the user. It uses an arraylist to store the 
+meals that the user has eaten, including the calories and the date.
+
+**WorkoutList**
+
+Similar to the meal list class, the workoutlist class is used to keep track of all workouts done by the user. It also uses an
+arraylist to store the workouts, including the calories burnt and the date of the workout.
+
+**StepList**
+
+The steplist keeps track of the steps the user has made and store it in an arraylist. The user
+inputs the number of steps as well as the date.
+
+---
+## Commmands
+
+---
+### 1. Add Function
+The add function has three commands - `addmeal`, `addworkout` and `addsteps`. The three commands allows
+the user to add their meals, workouts and number of steps respectively.
+
+**Design Considerations**
+
+**Implementation**
+
+Here is an example of addmeal command which has 2 compulsory arguments `name` and `c/` and one optional argument `d/`.
+
+Example:
+```
+addmeal chicken c/200 d/2023-11-11
+```
+
+Below are the steps that shows the implementation of addmeal/workout/steps.
+
+*Step 1:*
+
+The addmeal command instance calls ...
+
+Example:
+```
+{insert code snippet}
+```
+*Step 2:*
+
+Meal is added to mealList...
+
+*Step 3:*
+
+The added meal is then displayed to the user through the Ui
+
+
+The diagram below shows the class/sequence structure of the {add} mechanism:
+{Insert sequence or class diagram}
+
+### 2. Delete Function
+The delete function has three commands - `deletemeal`, `deleteworkout` and `deletesteps`. The three commands allows
+the user to delete their meals, workouts and number of steps respectively.
+
+**Design Considerations**
+
+**Implementation**
+
+Here is an example of deletemeal command which has 1 compulsory argument `index`.
+
+Example:
+```
+deletemeal 1
+```
+
+Below are the steps that shows the implementation of deletemeal/workout/steps.
+
+*Step 1:*
+
+The deletemeal command instance calls ...
+
+Example:
+```
+{insert code snippet}
+```
+*Step 2:*
+
+Meal is deleted from mealList...
+
+*Step 3:*
+
+The deleted meal is then displayed to the user through the Ui
+
+
+The diagram below shows the class/sequence structure of the {delete} mechanism:
+{Insert sequence or class diagram}
+
+### 3. View Function
+The view function has four commands - `viewmeal`, `viewworkout`, `viewsteps` and `viewprofile`. The four commands allows
+the user to view their meals, workouts, number of steps and user profile respectively.
+
+**Design Considerations**
+
+**Implementation**
+Here is an example of viewmeal command.
+
+Example:
+```
+viewmeal
+```
+
+Below are the steps that shows the implementation of viewmeal/workout/steps/profile.
+
+*Step 1:*
+
+The viewmeal command instance calls ...
+
+Example:
+```
+{insert code snippet}
+```
+*Step 2:*
+
+The list of meals are displayed to the user through the Ui.
+
+
+The diagram below shows the class/sequence structure of the {view} mechanism:
+{Insert sequence or class diagram}
+
+### 4. Find Function
+The find function has two commands - `findmeal` and `findworkout`. The two commands allows
+the user to view their meals, workouts, number of steps and user profile respectively.
+
+**Design Considerations**
+
+**Implementation**
+Here is an example of findmeal command which has 1 compulsory argument `keyword`. The keyword is the word
+the user wishes to search for.
+
+Example:
+```
+findmeal chicken
+```
+
+Below are the steps that shows the implementation of findmeal/workout.
+
+*Step 1:*
+
+The findmeal command instance calls ...
+
+Example:
+```
+{insert code snippet}
+```
+
+*Step 2:*
+
+Search mealList for the keyword...
+
+*Step 3:*
+
+The list of meals with the keyword will be shown to the user through the Ui.
+
+The diagram below shows the class/sequence structure of the {find} mechanism:
+{Insert sequence or class diagram}
+
+### 5. Calories Function
+{description}
+
+**Design Considerations**
+
+**Implementation**
+
+{description of the command}
+
+{example of input} 
+
+*Step 1:*
+
+*Step 2:*
+
+*Step 3:*
+
+The diagram below shows the class/sequence structure of the {caloriesburnt/sum} mechanism:
+{Insert sequence or class diagram}
+
+### 6. Help Function
+{description}
+
+**Design Considerations**
+
+**Implementation**
+
+{description of the command}
+
+{example of input}
+
+*Step 1:*
+
+*Step 2:*
+
+*Step 3:*
+
+The diagram below shows the class/sequence structure of the {help} mechanism:
+{Insert sequence or class diagram}
+
+---
 ## Product scope
+
+---
 ### Target user profile
 
 People who want to be healthy by managing their diet and workout.
@@ -80,8 +335,10 @@ on possible changes to their exercise, diet and lifestyle.
 Users will also be able to calculate key parameters of their profile like 
 BMI, ideal weight for their height and so on.
 
+---
 ## User Stories
 
+---
 | Version | As a ... | I want to ...                                               | So that I can ...                                             |
 |---------|----------|-------------------------------------------------------------|---------------------------------------------------------------|
 | v1.0    | new user | know how to use the product                                 | use the product                                               |
