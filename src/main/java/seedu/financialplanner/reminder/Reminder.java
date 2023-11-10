@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 public class Reminder {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String type;
     private LocalDate date;
     private boolean isDone = false;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Reminder(String type, LocalDate date) {
         this.type = type;
@@ -16,7 +16,7 @@ public class Reminder {
 
     public Reminder(String type, String date, String status) {
         this.type = type;
-        this.date = LocalDate.parse(date, formatter);
+        this.date = LocalDate.parse(date, FORMATTER);
         if (status.equals("Done")) {
             this.isDone = true;
         } else {
@@ -28,7 +28,7 @@ public class Reminder {
         LocalDate currentTime = LocalDate.now();
         Duration duration = Duration.between(currentTime.atStartOfDay(), date.atStartOfDay());
         return "Reminder " + System.lineSeparator() + "   Type: " + type + System.lineSeparator()
-                + "   Date: " + date.format(formatter) + System.lineSeparator() + "   Status: " + status
+                + "   Date: " + date.format(FORMATTER) + System.lineSeparator() + "   Status: " + status
                 + System.lineSeparator() + "   Left Days: " + duration.toDays();
     }
 
@@ -42,6 +42,6 @@ public class Reminder {
      */
     public String formatString() {
         String status = isDone ? "Done" : "Not Done";
-        return "R" + " | " + this.type + " | " + this.date.format(formatter) + " | " + status;
+        return "R" + " | " + this.type + " | " + this.date.format(FORMATTER) + " | " + status;
     }
 }

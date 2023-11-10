@@ -20,9 +20,9 @@ public class AddReminderCommand extends Command {
 
     public static final String EXAMPLE =
             "addreminder /t debt /d 11/12/2023";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final String type;
     private final LocalDate date;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public AddReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
@@ -44,7 +44,7 @@ public class AddReminderCommand extends Command {
         }
 
         try {
-            date = LocalDate.parse(dateString, formatter);
+            date = LocalDate.parse(dateString, FORMATTER);
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Reminder date must be in the format dd/MM/yyyy");
         }
