@@ -291,7 +291,11 @@ Example of usage: `find buy coffee`
 ### List
 
 #### List all: `list`
-// TODO
+Lists all cashflows.
+
+Format: `list`
+
+Example of usage: `list`
 
 Example output:
 
@@ -320,7 +324,11 @@ Balance: 1170.00
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List income: `list income`
-//TODO
+Lists all incomes.
+
+Format: `list income`
+
+Example of usage: `list income`
 
 Example output:
 ```
@@ -341,7 +349,11 @@ Income Balance: 1600.00
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List expense: `list expense`
-//TODO
+Lists all expenses.
+
+Format: `list expense`
+
+Example of usage: `list expense`
 
 Example output:
 ```
@@ -598,7 +610,7 @@ the application is not running
 
 Example file content of watchlist.json:
 
-![](/images/investments/watchlistjsonexample.png)
+![](images/investments/watchlistjsonexample.png)
 
 **Editing of watchlist.json**
 
@@ -607,7 +619,7 @@ Incorrect format of JSON file may lead to:
 - Corrupted file (user will be prompted to repair the file if he wants to)
 - Deletion of stock entries that are erroneous (Financial Planner has a built-in method to remove
 stock entries that does not match the format specified above)
-- Incorrect information printed by Financial Planner application (eg. changing stock prices directly in JSON file)
+- Incorrect information printed by Financial Planner application (e.g. changing stock prices directly in JSON file)
 
 **Adding stock**
 
@@ -870,7 +882,7 @@ window. Sorry for the inconvenience caused. 🥲
 | **Delete cashflow**              | `delete INDEX [/r]`                                        |
 | **Delete income**                | `delete income INDEX [/r]`                                 |
 | **Delete expense**               | `delete expense INDEX [/r]`                                |
-| **Delete recurrence**            | `delete recurrence INDEX [/r]`                             |
+| **Delete recurrence**            | `delete recurring INDEX [/r]`                              |
 | **list all cashflows**           | `list`                                                     |
 | **list all incomes**             | `list income`                                              |
 | **list all expenses**            | `list expense`                                             |
