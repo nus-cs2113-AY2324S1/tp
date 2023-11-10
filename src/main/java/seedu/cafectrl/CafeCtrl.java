@@ -64,12 +64,12 @@ public class CafeCtrl {
                 ParserUtil parserUtil = new Parser();
                 command = parserUtil.parseCommand(menu, fullUserInput, ui, pantry, sales, currentDate);
                 command.execute();
+                logger.info(command.getClass().getName() + " executed.");
             } catch (Exception e) {
                 logger.log(Level.WARNING, "Error executing command: " + e.getMessage(), e);
                 ui.showToUser(e.getMessage());
             } finally {
                 ui.printLine();
-                logger.info(command.getClass().getName() + " executed.");
             }
         } while (!command.isExit());
 
