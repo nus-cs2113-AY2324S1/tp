@@ -601,7 +601,7 @@ the application is not running
 
 Example file content of watchlist.json:
 
-![](/images/investments/watchlistjsonexample.png)
+![](images/investments/watchlistjsonexample.png)
 
 **Editing of watchlist.json**
 
@@ -610,7 +610,7 @@ Incorrect format of JSON file may lead to:
 - Corrupted file (user will be prompted to repair the file if he wants to)
 - Deletion of stock entries that are erroneous (Financial Planner has a built-in method to remove
 stock entries that does not match the format specified above)
-- Incorrect information printed by Financial Planner application (eg. changing stock prices directly in JSON file)
+- Incorrect information printed by Financial Planner application (e.g. changing stock prices directly in JSON file)
 
 **Adding stock**
 
