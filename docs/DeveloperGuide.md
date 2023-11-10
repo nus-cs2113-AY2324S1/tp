@@ -309,37 +309,37 @@ be executed as follows:
 
 ### Delete feature
 
-### Start recipe feature
+### Check recipe feature
 
-The start recipe feature is used by the `StartRecipeCommand` class.
+The check recipe feature is used by the `CheckRecipeCommand` class.
 
 To view if you have all ingredients needed to start on a recipe, use the following command
-`start recipe RECIPE_TITLE` or `start recipe RECIPE_ID`
+`check recipe RECIPE_TITLE` or `check recipe RECIPE_ID`
 
 By calling `executeCommand` on the class, the steps will
 be executed as follows:
 * **Step1**
 
-  `StartRecipeCommand` will get the index of recipe by calling method `getRecipeIndex()` in the `Parser` class. 
+  `CheckRecipeCommand` will get the index of recipe by calling method `getRecipeIndex()` in the `Parser` class. 
   This method will throw an error if the recipe entered is invalid or does not exist in the recipe database.
 
 
 * **Step2**
 
-  `StartRecipeCommand` will then call its own `getMissingIngredients()` method which will create 3 different array lists - `missingIngredeints`, `insufficientIngredients` and `diffUnitIngredients`. 
+  `CheckRecipeCommand` will then call its own `getMissingIngredients()` method which will create 3 different array lists - `missingIngredeints`, `insufficientIngredients` and `diffUnitIngredients`. 
   They account for ingredients that are missing, ingredients that you currently don't have enough of in your inventory, and ingredients that cannot be compared because of the difference in unit respectively.
 
 
 * **Step3**
 
-  `StartRecipeCommand` then call the static method `printRecipeMessage()` in `UI` class to print missing ingredients, ingredients that are insufficient, and ingredients of different units. 
+  `CheckRecipeCommand` then call the static method `printRecipeMessage()` in `UI` class to print missing ingredients, ingredients that are insufficient, and ingredients of different units. 
 
 
 * **Step4**
 
   `Ui` will call `listIngredients()` method in `IngredientList` class to print the 3 different array lists.
 
-![img_1.png](images/StartRecipeSD.png)
+![img_1.png](images/CheckRecipeSD.png)
 
 ### Filter recipe feature
 
