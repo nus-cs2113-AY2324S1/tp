@@ -51,16 +51,16 @@ public class OrderList {
     public void printOrderList(Menu menu, Ui ui) {
         logger.info("Printing order list...");
         ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
-        if (orderList.isEmpty()) {
-            ui.showToUser("No sales for this day.");
-            return;
-        }
 
-        for (Order order : getOrderList()) {
+        for (Order order : orderList) {
             aggregateOrder(order, aggregatedOrders);
         }
 
         for (Order aggregatedOrder : aggregatedOrders) {
+            if (aggregatedOrder.getQuantity() == 0) {
+                continue;
+            }
+
             ui.showSalesAll(aggregatedOrder.getDishName(),
                     aggregatedOrder.getQuantity(),
                     dollarValue.format(aggregatedOrder.calculateTotalOrderCost()));
@@ -120,5 +120,17 @@ public class OrderList {
             logger.info("Total cost: " + totalCost);
         }
         return totalCost;
+    }
+    public boolean isEmpty() {
+        return orderList.isEmpty();
+    }
+
+    public boolean hasCompletedOrders() {
+        for (Order order : orderList) {
+            if (order.getIsComplete()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

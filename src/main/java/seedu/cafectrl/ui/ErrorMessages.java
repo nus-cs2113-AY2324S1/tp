@@ -52,6 +52,16 @@ public class ErrorMessages {
             + "No worries, new pantry has been created";
     public static final String ORDER_LIST_FILE_NOT_FOUND_MESSAGE = "Order list data was not found!\n"
             + "No worries, new order list has been created";
+    public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: " +
+            "Incorrect format for the show_sale command.\n";
+    public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer "
+            + "for the 'day' field!";
+    public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, "
+            + "is that what you want?";
+    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer for the dish index. \n";
+    public static final String UNLISTED_DISH = "Oh no, this dish does not exist! \n"
+            + " please run the command list_menu to view the existing dishes.";
+    public static final String INVALID_SALE_DAY = "Oh no, we have not reached the day entered!";
     public static final String EMPTY_UNIT_MESSAGE = "Unit cannot be empty! Please use either g or ml :)";
     public static final String INVALID_UNIT_MESSAGE = "Invalid unit! Please use either g or ml :)";
     public static final String INVALID_INGREDIENT_ARGUMENTS = "Invalid arguments for ingredients!\n"
@@ -59,14 +69,10 @@ public class ErrorMessages {
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example: ingredient/milk qty/200ml, ingredient/chicken qty/100g";
     public static final String INVALID_INGREDIENT_QTY = "Quantity out of range! Quantity range is 1 to 1000000 :)";
-    public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: "
-            + "Incorrect format for the show_sale command.\n";
-    public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer "
-            + "for the 'day' field!";
-    public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price,"
-            + " is that what you want?";
+
     public static final String MISSING_PRICE = "Did you forget to include price? Just a reminder: "
             + "price can only have up to 2 decimal place!";
     public static final String MISSING_DISH_IN_EDIT_PRICE = "Sorry, I didnt catch the dish index, "
             + "did you forget to include it in your command?";
+
 }

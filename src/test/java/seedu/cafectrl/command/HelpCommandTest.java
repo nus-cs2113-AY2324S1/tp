@@ -49,7 +49,7 @@ class HelpCommandTest {
         expectedOutputs.add(NextDayCommand.MESSAGE_USAGE);
         expectedOutputs.add(PreviousDayCommand.MESSAGE_USAGE);
         expectedOutputs.add(ViewTotalStockCommand.MESSAGE_USAGE);
-        expectedOutputs.add(ShowSalesByDayCommand.MESSAGE_USAGE);
+        expectedOutputs.add(ListSaleByDayCommand.MESSAGE_USAGE);
 
         for (int i = 0; i < expectedOutputs.size(); i++) {
             assertEquals(expectedOutputs.get(i), actualOutputs.get(i));

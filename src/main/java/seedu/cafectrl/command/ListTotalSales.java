@@ -7,15 +7,15 @@ import seedu.cafectrl.ui.Ui;
 
 import java.util.logging.Logger;
 
-public class ShowSalesCommand extends Command {
-    public static final String COMMAND_WORD = "show_sales";
+public class ListTotalSales extends Command {
+    public static final String COMMAND_WORD = "list_total_sales";
     public static final String MESSAGE_USAGE = "To show sales for all days:\n" + COMMAND_WORD;
     private Sales sales;
     private Ui ui;
     private Menu menu;
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
-    public ShowSalesCommand(Sales sales, Ui ui, Menu menu) {
+    public ListTotalSales(Sales sales, Ui ui, Menu menu) {
         this.sales = sales;
         this.ui = ui;
         this.menu = menu;

@@ -7,9 +7,12 @@ import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Chef;
 
+import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.logging.Logger;
+import java.text.DecimalFormat;
 
 public class AddOrderCommand extends Command {
     public static final String COMMAND_WORD = "add_order";
@@ -25,6 +28,7 @@ public class AddOrderCommand extends Command {
     private final Ui ui;
     private final Order order;
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
     public AddOrderCommand(Order order, Ui ui, Pantry pantry, OrderList orderList, Menu menu) {
         this.order  = order;
@@ -37,11 +41,20 @@ public class AddOrderCommand extends Command {
     public void execute() {
         logger.info("Executing AddOrderCommand...");
         orderList.addOrder(order);
-        Chef chef = new Chef(order, pantry, ui, menu);
+        Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();
         if (order.getIsComplete()) {
             orderList.addCost(order);
+            String totalCost = dollarValue.format(order.getTotalOrderCost());
+            ui.showOrderStatus(Messages.COMPLETE_ORDER, totalCost);
+            pantry.calculateDishAvailability(menu, order);
+        } else {
+            //pass in dish only and not entire menu
+            Dish orderedDish = order.getOrderedDish();
+            pantry.calculateMaxDishes(orderedDish, menu, order);
+            ui.showToUser(Messages.INCOMPLETE_ORDER);
         }
 
     }
+
 }
