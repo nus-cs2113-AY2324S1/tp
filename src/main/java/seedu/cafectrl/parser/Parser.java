@@ -238,6 +238,8 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
             } else if (isRepeatedDishName(dishName, menu)) {
                 throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
+            } else if (containsSpecialChar(dishName)) {
+                throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
             }
 
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true);
@@ -294,6 +296,8 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.EMPTY_UNIT_MESSAGE);
             } else if (!isValidUnit(ingredientUnit)) {
                 throw new ParserException(ErrorMessages.INVALID_UNIT_MESSAGE);
+            } else if (containsSpecialChar(ingredientName)) {
+                throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
             }
 
             Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
@@ -492,16 +496,28 @@ public class Parser implements ParserUtil {
         }
     }
 
-    private static boolean isValidUnit(String ingredientUnit) {
+    public static boolean isValidUnit(String ingredientUnit) {
         return ingredientUnit.equals(GRAMS_UNIT) || ingredientUnit.equals(ML_UNIT);
     }
 
-    private static boolean isEmptyUnit(String ingredientUnit) {
+    public static boolean isEmptyUnit(String ingredientUnit) {
         return ingredientUnit.equals("");
     }
 
-    private static boolean isInvalidQty(int ingredientQty) {
+    public static boolean isInvalidQty(int ingredientQty) {
         return ingredientQty < MIN_QTY || ingredientQty > MAX_QTY;
+    }
+
+    //@@author ziyi105
+    /**
+     * Check whether a text contains special character
+     * @param text text to be checked
+     * @return true if it contains special character, false otherwise
+     */
+    public static boolean containsSpecialChar(String text) {
+        Pattern pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        return matcher.find();
     }
 
     //@@author ziyi105
