@@ -1,8 +1,7 @@
 package essenmakanan.storage;
 
-import essenmakanan.exception.EssenFileNotFoundException;
-import essenmakanan.exception.EssenStorageDuplicateException;
-import essenmakanan.exception.EssenStorageFormatException;
+import essenmakanan.exception.*;
+import essenmakanan.ingredient.IngredientList;
 import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.ShortcutParser;
 import essenmakanan.shortcut.Shortcut;
@@ -19,10 +18,12 @@ public class ShortcutStorage {
     private String dataPath;
 
     private ArrayList<Shortcut> shortcutListPlaceholder;
+    private IngredientList ingredients;
 
-    public ShortcutStorage(String path) {
+    public ShortcutStorage(String path, IngredientList ingredients) {
         shortcutListPlaceholder = new ArrayList<>();
         dataPath = path;
+        this.ingredients = ingredients;
     }
 
     public void saveData(ArrayList<Shortcut> shortcuts) {
@@ -66,10 +67,17 @@ public class ShortcutStorage {
             }
 
             String shortcutName = parsedShortcut[0];
-            double shortcutQuantity = Double.parseDouble(parsedShortcut[1]);
-
             if (searchDuplicate(shortcutName)) {
                 throw new EssenStorageDuplicateException();
+            }
+
+            if (!ingredients.exist(shortcutName)) {
+                throw new EssenStorageInvalidShortcutException();
+            }
+
+            double shortcutQuantity = Double.parseDouble(parsedShortcut[1]);
+            if ((int) shortcutQuantity < 0) {
+                throw new EssenStorageInvalidQuantityException();
             }
 
             shortcutListPlaceholder.add(new Shortcut(shortcutName, shortcutQuantity));
@@ -81,7 +89,21 @@ public class ShortcutStorage {
             exception.handleException(dataString);
             String message = "Data: " + dataString + " cannot be created due to duplicates";
             EssenLogger.logWarning(message, exception);
+        } catch (EssenStorageInvalidQuantityException exception) {
+            exception.handleException(dataString);
+            String message = "Data: " + dataString + " cannot be created due to invalid quantity";
+            EssenLogger.logWarning(message, exception);
+        } catch (NumberFormatException exception) {
+            EssenStorageNumberException.handleException(dataString);
+            String message = "Data: " + dataString + " cannot be created due to non-numerical quantity";
+            EssenLogger.logWarning(message, exception);
+        } catch (EssenStorageInvalidShortcutException exception) {
+            exception.handleException(dataString);
+            String message = "Data: " + dataString + " cannot be created due to shortcut not attached to "
+                    + "any ingredient in the list";
+            EssenLogger.logWarning(message, exception);
         }
+
         EssenLogger.logInfo("Saved shortcut data has been received");
     }
 

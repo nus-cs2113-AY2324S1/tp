@@ -64,7 +64,6 @@ public class EssenMakanan {
         parser = new Parser();
         ingredientStorage = new IngredientStorage(DATA_INGREDIENT_PATH);
         recipeStorage = new RecipeStorage(DATA_RECIPE_PATH);
-        shortcutStorage = new ShortcutStorage(DATA_SHORTCUT_PATH);
 
         try {
             ingredients = new IngredientList(ingredientStorage.restoreSavedData());
@@ -80,6 +79,7 @@ public class EssenMakanan {
             recipes = new RecipeList();
         }
 
+        shortcutStorage = new ShortcutStorage(DATA_SHORTCUT_PATH, ingredients);
         try {
             shortcuts = new ShortcutList(shortcutStorage.restoreSavedData());
         } catch (EssenFileNotFoundException exception) {
