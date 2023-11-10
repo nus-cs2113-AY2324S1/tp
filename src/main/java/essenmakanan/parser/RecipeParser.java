@@ -138,7 +138,7 @@ public class RecipeParser {
                 Integer.parseInt(recipe); //to check if can be converted to integer, else, will throw an exception
             }
         } catch (NumberFormatException e) {
-            System.out.println("NUMBER_OF_RECIPES should be an integer!");
+            System.out.println("NUMBER_OF_RECIPES and RECIPE_INDEX should be integers!");
             throw new EssenFormatException();
         }
     }

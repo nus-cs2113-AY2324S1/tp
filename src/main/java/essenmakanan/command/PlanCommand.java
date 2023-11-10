@@ -62,14 +62,13 @@ public class PlanCommand extends Command {
             RecipeParser.parsePlanCommandInput(input);
 
             String[] inputList = input.split(" ", 2);
-            int numberOfRecipes = Integer.parseInt(inputList[0]);
             int[] recipeIdList = RecipeParser.getRecipeIdList(inputList[1]);
 
             allRecipes = RecipeParser.getRecipes(recipeIdList, recipes);
             allIngredientsNeeded = IngredientParser.getIngredientsFromRecipes(allRecipes);
             getMissingIngredients();
 
-            Ui.printPlanCommandIngredients(allIngredientsNeeded, missingIngredients);
+            Ui.printPlanCommandIngredients(allIngredientsNeeded, missingIngredients, allRecipes);
         } catch (EssenFormatException | EssenOutOfRangeException e) {
             e.handleException();
         }

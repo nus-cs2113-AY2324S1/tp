@@ -28,6 +28,7 @@ public class AddIngredientCommand extends Command {
             Ingredient newIngredient;
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredient);
+
                 if (this.ingredients.exist(newIngredient.getName())) {
                     // if ingredient already exists, update the quantity
                     this.ingredients.updateIngredient(newIngredient);
