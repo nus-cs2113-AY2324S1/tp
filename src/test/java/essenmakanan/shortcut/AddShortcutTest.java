@@ -2,6 +2,7 @@ package essenmakanan.shortcut;
 
 import essenmakanan.command.AddShortcutCommand;
 import essenmakanan.exception.EssenOutOfRangeException;
+import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 
@@ -21,13 +22,12 @@ public class AddShortcutTest {
     public void setup() {
         shortcuts = new ShortcutList();
         ingredients = new IngredientList();
+        Ingredient ingredient = new Ingredient("bread", 2.0, IngredientUnit.PIECE);
+        ingredients.addIngredient(ingredient);
     }
 
     @Test
     public void addShortcut_validShortcut_expectShortcutInList() throws EssenOutOfRangeException {
-        Ingredient ingredient = new Ingredient("bread", 2.0, IngredientUnit.PIECE);
-        ingredients.addIngredient(ingredient);
-
         String userInput = "sc/bread,2";
         addshortcutcommand = new AddShortcutCommand(shortcuts, ingredients, userInput);
         addshortcutcommand.executeCommand();
