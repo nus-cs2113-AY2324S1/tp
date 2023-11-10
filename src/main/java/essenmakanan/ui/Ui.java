@@ -223,4 +223,8 @@ public class Ui {
     public static void printValidIngredientExample() {
         System.out.println("Invalid Ingredient! Example of valid ingredient: i/Chicken,1,kg");
     }
+
+    public static void printNegativeIngredientQuantity() {
+        System.out.println("You cannot add an ingredient with negative quantity.");
+    }
 }
