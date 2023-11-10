@@ -7,6 +7,7 @@ import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ingredient.ShortcutList;
 import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;
@@ -24,6 +25,7 @@ public class EssenMakanan {
 
     private RecipeList recipes;
     private IngredientList ingredients;
+    private ShortcutList shortcuts;
     private Parser parser;
     private IngredientStorage ingredientStorage;
     private RecipeStorage recipeStorage;
@@ -73,6 +75,7 @@ public class EssenMakanan {
             recipes = new RecipeList();
         }
 
+        shortcuts = new ShortcutList();
     }
 
     public void start() {
