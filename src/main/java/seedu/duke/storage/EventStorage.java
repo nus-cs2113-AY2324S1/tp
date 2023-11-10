@@ -3,6 +3,8 @@ package seedu.duke.storage;
 import seedu.duke.calendar.Event;
 import seedu.duke.calendar.EventList;
 import seedu.duke.calendar.Goal;
+import seedu.duke.flashcard.FlashcardList;
+import seedu.duke.storage.exceptions.EventFileFormatException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static seedu.duke.storage.EventStorageParser.eventFileChecker;
 
 
 /**
@@ -45,10 +49,19 @@ public class EventStorage {
         File f = new File (this.path);
         Scanner s = new Scanner(f);
 
-        while(s.hasNext()){
-            String[] eventTokens = s.nextLine().split(" \\| ");
-            eventList.addEvent(EventStorageParser.loadEvent(eventTokens));
+        try{
+            while(s.hasNext()){
+                String[] eventTokens = s.nextLine().split(" \\| ");
+                eventFileChecker(eventTokens);
+                eventList.addEvent(EventStorageParser.loadEvent(eventTokens));
+            }
+        } catch (EventFileFormatException e) {
+            System.out.println("The flashcard save file is corrupted");
+            System.out.println("Automatically making new file");
+            eventList = new EventList(new ArrayList<>());
+            saveEvents(eventList.getEvents());
         }
+
 
         logger.log(Level.INFO, String.format(
                 "    There are currently %d events in the save file",
