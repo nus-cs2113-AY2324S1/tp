@@ -18,11 +18,13 @@ public final class FlashcardStorageParser {
      * check the saved file format
      * token length should be 4
      * type should be integer, string, string, integer
-     * @param tokens
+     * @param tokens is a split txt line
      * @throws FlashcardFileFormatException
      */
     public static void flashcardFileChecker(String[] tokens) throws FlashcardFileFormatException {
-        if(tokens.length != 4) throw new FlashcardFileFormatException();
+        if(tokens.length != 4) {
+            throw new FlashcardFileFormatException();
+        }
 
         try {
             Integer.parseInt(tokens[0].trim());

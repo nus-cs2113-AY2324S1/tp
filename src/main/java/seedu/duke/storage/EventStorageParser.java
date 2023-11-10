@@ -2,14 +2,44 @@ package seedu.duke.storage;
 
 import seedu.duke.calendar.Event;
 import seedu.duke.calendar.Goal;
+import seedu.duke.storage.exceptions.EventFileFormatException;
+import seedu.duke.storage.exceptions.FlashcardFileFormatException;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EventStorageParser {
 
     private static Logger logger; // for logging
+
+    /**
+     * check the saved file format
+     * token length should be 3 or 4
+     * if token length is 3, format should be string, localdatetime, localdatetime
+     * if token length is 4, format should be string, localdatetime, int, int
+     * @param tokens is a split txt line
+     * @throws EventFileFormatException
+     */
+    public static void eventFileChecker(String[] tokens) throws EventFileFormatException {
+        if(tokens.length != 3 && tokens.length != 4) {
+            throw new EventFileFormatException();
+        }
+
+        try {
+            LocalDateTime.parse(tokens[1].trim());
+            if(tokens.length == 3){
+                LocalDateTime.parse(tokens[2].trim());
+            }
+            if(tokens.length == 4){
+                Integer.parseInt(tokens[2].trim());
+                Integer.parseInt(tokens[3].trim());
+            }
+        } catch (DateTimeParseException | NumberFormatException e) {
+            throw new EventFileFormatException();
+        }
+    }
 
 
     /**
