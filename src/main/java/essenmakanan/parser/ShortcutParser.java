@@ -102,4 +102,8 @@ public class ShortcutParser {
             }
         }
     }
+
+    public static String convertToString(Shortcut shortcut) {
+        return shortcut.getIngredientName() + " | " + shortcut.getQuantity();
+    }
 }

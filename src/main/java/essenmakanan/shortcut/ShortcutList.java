@@ -13,6 +13,10 @@ public class ShortcutList {
         shortcuts = new ArrayList<>();
     }
 
+    public ShortcutList(ArrayList<Shortcut> shortcuts) {
+        this.shortcuts = shortcuts;
+    }
+
     public ArrayList<Shortcut> getShortcuts() {
         return shortcuts;
     }

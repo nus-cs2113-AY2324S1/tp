@@ -72,7 +72,6 @@ public class IngredientStorage {
             EssenLogger.logWarning(message, exception);
         }
         EssenLogger.logInfo("Saved ingredient data has been received");
-
     }
 
     public ArrayList<Ingredient> restoreSavedData() throws EssenFileNotFoundException {
