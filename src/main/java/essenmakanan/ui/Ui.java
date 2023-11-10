@@ -228,4 +228,8 @@ public class Ui {
     public static void printNegativeIngredientQuantity() {
         System.out.println("You cannot add an ingredient with negative quantity.");
     }
+
+    public static void printIngredientDoesNotExist(String name) {
+        System.out.println("You do not have any " + name + " to use.");
+    }
 }
