@@ -1,10 +1,12 @@
 package essenmakanan.parser;
 
+import essenmakanan.exception.EssenEditShortcutException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.shortcut.Shortcut;
 import essenmakanan.shortcut.ShortcutList;
+import essenmakanan.ui.Ui;
 
 public class ShortcutParser {
 
@@ -42,5 +44,62 @@ public class ShortcutParser {
         }
 
         return index;
+    }
+
+
+    private static void editShortcutName(Shortcut shortcut, IngredientList ingredients, String editDetail
+            , boolean hasEditName) throws EssenShortcutException, EssenEditShortcutException {
+        String newName = editDetail.substring(2).strip();
+        String oldName = shortcut.getIngredientName();
+
+        if (!ingredients.exist(newName)) {
+            throw new EssenShortcutException();
+        }
+
+        if (hasEditName) {
+            throw new EssenEditShortcutException("usage");
+        }
+
+        if (newName.equals(oldName)) {
+            throw new EssenEditShortcutException("same name");
+        }
+
+        Ui.printEditShortcutName(shortcut.getIngredientName(), newName);
+        shortcut.setIngredientName(newName);
+    }
+
+    private static void editShortcutQuantity(Shortcut shortcut, String editDetail, boolean hasEditQuantity)
+            throws EssenEditShortcutException {
+        double newQuantity = Double.parseDouble(editDetail.substring(2).strip());
+
+        if (hasEditQuantity) {
+            throw new EssenEditShortcutException("usage");
+        }
+
+        Ui.printEditShortcutQuantity(shortcut.getQuantity(), newQuantity);
+        shortcut.setQuantity(newQuantity);
+    }
+
+    public static void editShortcut(Shortcut shortcut, IngredientList ingredients, String[] editDetails)
+            throws EssenFormatException, EssenShortcutException, EssenEditShortcutException {
+        boolean hasEditName = false;
+        boolean hasEditQuantity = false;
+
+        for (int i = 1; i < editDetails.length; i++) {
+            String flag = editDetails[i].substring(0, 2).strip();
+
+            switch (flag) {
+            case "n/":
+                editShortcutName(shortcut, ingredients, editDetails[i], hasEditName);
+                hasEditName = true;
+                break;
+            case "q/":
+                editShortcutQuantity(shortcut, editDetails[i], hasEditQuantity);
+                hasEditQuantity = true;
+                break;
+            default:
+                throw new EssenFormatException();
+            }
+        }
     }
 }

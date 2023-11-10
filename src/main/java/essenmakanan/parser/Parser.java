@@ -77,6 +77,8 @@ public class Parser {
                 command = new EditIngredientCommand(inputDetail, ingredients);
             } else if (inputDetail.startsWith("r/")) {
                 command = new EditRecipeCommand(inputDetail, recipes);
+            } else if (inputDetail.startsWith("sc/")) {
+                command = new EditShortcutCommand(shortcuts, ingredients, inputDetail);
             } else {
                 throw new EssenFormatException();
             }

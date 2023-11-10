@@ -242,4 +242,15 @@ public class Ui {
         Ui.drawDivider();
     }
 
+    public static void printEditShortcutName(String oldName, String newName) {
+        Ui.drawDivider();
+        System.out.println("Shortcut to ingredient '" + oldName + "' has changed to ingredient '" + newName + "'.");
+        Ui.drawDivider();
+    }
+
+    public static void printEditShortcutQuantity(double oldQuantity, double newQuantity) {
+        Ui.drawDivider();
+        System.out.println("Shortcut's quantity has beed changed from " + oldQuantity + " to " + newQuantity + ".");
+        Ui.drawDivider();
+    }
 }
