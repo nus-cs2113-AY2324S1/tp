@@ -1,5 +1,6 @@
 package essenmakanan.command;
 
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.RecipeList;
@@ -21,7 +22,7 @@ public class ViewSpecificRecipeCommand extends Command {
         try {
             int recipeIndex = RecipeParser.getRecipeIndex(recipes, input);
             Ui.printSpecificRecipe(this.recipes, recipeIndex);
-        } catch (EssenOutOfRangeException e) {
+        } catch (EssenOutOfRangeException | EssenFormatException e) {
             e.getMessage();
         }
     }

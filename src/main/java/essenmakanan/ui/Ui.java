@@ -220,4 +220,16 @@ public class Ui {
         System.out.println("Here are the ingredients you need to buy because your inventory is running low: ");
         missingIngredients.listIngredients();
     }
+
+    public static void printExecuteRecipeFail(String title) {
+        System.out.println("You are missing some ingredients to execute " + title +
+                "\nPlease use the [start] command to check what you are missing");
+        drawDivider();
+    }
+
+    public static void printExecuteRecipeSuccess(String title) {
+        System.out.println("You have successfully executed " + title);
+        drawDivider();
+    }
+
 }

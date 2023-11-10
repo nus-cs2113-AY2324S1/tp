@@ -20,7 +20,11 @@ import java.util.StringJoiner;
 public class RecipeParser {
 
     public static int getRecipeIndex(RecipeList recipes, String input)
-            throws EssenOutOfRangeException {
+            throws EssenOutOfRangeException, EssenFormatException {
+        if (input.isEmpty()) {
+            throw new EssenFormatException();
+        }
+
         int index;
         input = input.replace("r/", "");
 
