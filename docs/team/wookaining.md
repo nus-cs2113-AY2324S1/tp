@@ -21,7 +21,7 @@ neat overview of their financial situation.
         * Added expected output for usage examples throughout the entire UG
     * Developer Guide:
         * Added implementation details for the Filter class and included sequence diagram
-          ![](./images/FilterTransaction.png)
+          ![](../images/FilterSequenceDiagram.png)
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [#33](https://github.com/AY2324S1-CS2113-W12-2/tp/pull/33), [#46](https://github.com/AY2324S1-CS2113-W12-2/tp/pull/46)
     * Report bugs and suggestions for other teams in the class (refer to [repo](https://github.com/WooKaiNing/ped/issues))
