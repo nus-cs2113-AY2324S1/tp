@@ -3,6 +3,7 @@ package essenmakanan.ui;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.shortcut.Shortcut;
 import essenmakanan.shortcut.ShortcutList;
 
 import java.io.IOException;
@@ -226,5 +227,11 @@ public class Ui {
         System.out.println("Here's a list of your shortcuts!");
         shortcuts.listShortcuts();
         drawDivider();
+    }
+
+    public static void printAddShortcutSuccess(Shortcut shortcut) {
+        Ui.drawDivider();
+        System.out.println("Shortcut to add '" + shortcut.getIngredientName() + "' has been created!");
+        Ui.drawDivider();
     }
 }

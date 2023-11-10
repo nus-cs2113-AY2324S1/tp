@@ -7,6 +7,7 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.shortcut.Shortcut;
 import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.parser.ShortcutParser;
+import essenmakanan.ui.Ui;
 
 public class AddShortcutCommand extends Command {
 
@@ -25,6 +26,7 @@ public class AddShortcutCommand extends Command {
         try {
             Shortcut shortcut = ShortcutParser.parseShortcut(ingredients, input);
             shortcuts.addShortcut(shortcut);
+            Ui.printAddShortcutSuccess(shortcut);
         } catch (EssenFormatException exception) {
             exception.handleException();
         } catch (EssenShortcutException exception) {
