@@ -1,11 +1,14 @@
 package seedu.cafectrl.data;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Menu {
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private ArrayList<Dish> menuItems;
 
     public Menu() {
@@ -51,6 +54,7 @@ public class Menu {
     }
 
     public boolean isValidDishIndex(int dishIndex) {
+        logger.info("Checking if dish index " + dishIndex + " is valid...");
         int offSetDishIndex = dishIndex - Ui.OFFSET_LIST_INDEX;
         return offSetDishIndex >= 0 && offSetDishIndex < this.getSize();
     }
@@ -64,6 +68,7 @@ public class Menu {
      * @return An ArrayList of Order objects representing aggregated orders for each menu item.
      */
     public ArrayList<Order> getAggregatedOrders() {
+        logger.info("Getting aggregated orders...");
         ArrayList<Order> aggregatedOrders = new ArrayList<>();
         for (int i = 0; i < menuItems.size(); i++) {
             Order order = new Order(menuItems.get(i), 0);

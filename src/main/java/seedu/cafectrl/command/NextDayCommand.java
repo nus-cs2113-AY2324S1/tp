@@ -1,16 +1,19 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.ui.Ui;
 
-public class NextDayCommand extends Command {
+import java.util.logging.Logger;
 
+public class NextDayCommand extends Command {
     public static final String COMMAND_WORD = "next_day";
     public static final String MESSAGE_USAGE = "To travel to next day:\n"
             + COMMAND_WORD;
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Ui ui;
     private final Sales sales;
     private final CurrentDate currentDate;
@@ -31,6 +34,7 @@ public class NextDayCommand extends Command {
      */
     @Override
     public void execute() {
+        logger.info("Executing NextDayCommand...");
         ui.printLine();
         currentDate.nextDay();
         int nextDay = currentDate.getCurrentDay();

@@ -1,6 +1,7 @@
 package seedu.cafectrl.parser;
 
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.command.AddDishCommand;
 import seedu.cafectrl.command.AddOrderCommand;
 import seedu.cafectrl.command.BuyIngredientCommand;
@@ -34,6 +35,8 @@ import seedu.cafectrl.ui.Ui;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Parse everything received from the users on terminal
@@ -75,6 +78,7 @@ public class Parser implements ParserUtil {
     private static final int MAX_QTY = 1000000;
     private static final String GRAMS_UNIT = "g";
     private static final String ML_UNIT = "ml";
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author ziyi105
     /**
@@ -89,10 +93,12 @@ public class Parser implements ParserUtil {
      */
     public Command parseCommand(Menu menu, String userInput, Ui ui,
             Pantry pantry, Sales sales, CurrentDate currentDate) {
+        logger.info("Received user input: " + userInput);
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
 
         if (!matcher.matches()) {
+            logger.warning("Unmatching regex!");
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
 
@@ -224,6 +230,7 @@ public class Parser implements ParserUtil {
         try {
             // Checks whether the overall pattern of add arguments is correct
             if (!matcher.matches()) {
+                logger.log(Level.WARNING, "Unmatching regex!");
                 return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
                         + AddDishCommand.MESSAGE_USAGE, ui);
             }
@@ -235,8 +242,10 @@ public class Parser implements ParserUtil {
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
             if (isNameLengthInvalid(dishName)) {
+                logger.warning("Invalid name length!");
                 throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
             } else if (isRepeatedDishName(dishName, menu)) {
+                logger.warning("Repeated dish!");
                 throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
             }
 
@@ -246,8 +255,10 @@ public class Parser implements ParserUtil {
 
             return new AddDishCommand(dish, menu, ui);
         } catch (NullPointerException e) {
+            logger.log(Level.WARNING, e.getMessage(), e);
             return new IncorrectCommand(ErrorMessages.NULL_NAME_DETECTED_MESSAGE, ui);
         } catch (Exception e) {
+            logger.log(Level.WARNING, e.getMessage(), e);
             return new IncorrectCommand(e.getMessage(), ui);
         }
     }
@@ -261,6 +272,7 @@ public class Parser implements ParserUtil {
      */
     private static ArrayList<Ingredient> parseIngredients(String ingredientsListString,
             boolean excludeRepeatedIngredients) throws IllegalArgumentException, ParserException {
+        logger.info("Parsing ingredients...");
         String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
 
@@ -423,6 +435,7 @@ public class Parser implements ParserUtil {
         Matcher matcher = prepareListPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
+            logger.warning("Unmatching regex!");
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS
                     + ListIngredientCommand.MESSAGE_USAGE, ui);
         }
@@ -454,6 +467,7 @@ public class Parser implements ParserUtil {
 
         // Checks whether the overall pattern of delete price arguments is correct
         if (!matcher.matches()) {
+            logger.warning("Unmatching regex!");
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_DELETE, ui);
         }
 
@@ -476,6 +490,7 @@ public class Parser implements ParserUtil {
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
+            logger.warning("Unmatching regex!");
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT
                     + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
@@ -525,6 +540,7 @@ public class Parser implements ParserUtil {
 
         // Checks whether the overall pattern of add order arguments is correct
         if (!matcher.matches()) {
+            logger.warning("Unmatching regex!");
             return new IncorrectCommand(ErrorMessages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE, ui);
         }
@@ -604,6 +620,7 @@ public class Parser implements ParserUtil {
         Matcher matcher = showSaleByDayPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
+            logger.warning("Unmatching regex!");
             return new IncorrectCommand(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE
                     + ListSaleByDayCommand.MESSAGE_USAGE, ui);
         }
