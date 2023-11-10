@@ -282,7 +282,11 @@ Balance: -830.00
 ### List
 
 #### List all: `list`
-// TODO
+Lists all cashflows.
+
+Format: `list`
+
+Example of usage: `list`
 
 Example output:
 
@@ -311,7 +315,11 @@ Balance: 1170.00
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List income: `list income`
-//TODO
+Lists all incomes.
+
+Format: `list income`
+
+Example of usage: `list income`
 
 Example output:
 ```
@@ -332,7 +340,11 @@ Income Balance: 1600.00
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List expense: `list expense`
-//TODO
+Lists all expenses.
+
+Format: `list expense`
+
+Example of usage: `list expense`
 
 Example output:
 ```
