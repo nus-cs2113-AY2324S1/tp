@@ -1,13 +1,15 @@
 package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.cafectrl.command.Command;
 import seedu.cafectrl.command.AddDishCommand;
-import seedu.cafectrl.command.ListIngredientCommand;
-import seedu.cafectrl.command.IncorrectCommand;
-import seedu.cafectrl.command.DeleteDishCommand;
-import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.command.BuyIngredientCommand;
+import seedu.cafectrl.command.DeleteDishCommand;
+import seedu.cafectrl.command.ListIngredientCommand;
+import seedu.cafectrl.command.ListSaleByDayCommand;
+import seedu.cafectrl.command.ListTotalSalesCommand;
+import seedu.cafectrl.command.Command;
+import seedu.cafectrl.command.IncorrectCommand;
+import seedu.cafectrl.command.ViewTotalStockCommand;
 
 import seedu.cafectrl.data.CurrentDate;
 import seedu.cafectrl.data.Menu;
@@ -32,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class ParserTest {
     @Test
-    public void parseCommand_validCommand_successfulCommandParse() {
+    public void parseCommand_validListIngredientsCommand_successfulCommandParse() {
         ArrayList<Dish> menuItems = new ArrayList<>();
         menuItems.add(new Dish("Chicken Rice",
                 new ArrayList<>(Arrays.asList(new Ingredient("Rice", 50, "g"),
@@ -58,7 +60,7 @@ class ParserTest {
     }
 
     @Test
-    public void parseCommand_missingIndex_returnsErrorMessage() {
+    public void parseCommand_missingListIngredientsIndex_returnsErrorMessage() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -77,7 +79,7 @@ class ParserTest {
     }
 
     @Test
-    public void parseCommand_invalidIndex_returnsErrorMessage() {
+    public void parseCommand_invalidListIngredientsIndex_returnsErrorMessage() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -95,7 +97,7 @@ class ParserTest {
     }
 
     @Test
-    public void parseCommand_indexOutOfBounds_returnsErrorMessage() {
+    public void parseCommand_listIngredientIndexOutOfBounds_returnsErrorMessage() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -681,4 +683,96 @@ class ParserTest {
         assertEquals(ErrorMessages.INVALID_UNIT_MESSAGE, feedbackToUser);
     }
     //@@author
+
+    @Test
+    void parseCommand_listTotalSalesCommand_returnInstanceOfListTotalSalesCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        String userInput = "list_total_sales";
+        ParserUtil parserUtil = new Parser();
+        Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        assertTrue(result instanceof ListTotalSalesCommand);
+    }
+
+    @Test
+    void parseCommand_validListSaleIndex_returnInstanceOfListSaleByDayCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        String userInput = "list_sale day/1";
+
+        ParserUtil parserUtil = new Parser();
+        Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        assertTrue(result instanceof ListSaleByDayCommand);
+
+        ListSaleByDayCommand listSaleByDayCommand = (ListSaleByDayCommand) result;
+        int day = listSaleByDayCommand.getDay();
+        assertEquals(1, day);
+    }
+
+    @Test
+    void parseCommand_invalidListSaleIndex_showErrorMessage() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        String userInput = "list_sale day/a";
+
+        ParserUtil parserUtil = new Parser();
+        Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(ErrorMessages.INVALID_DAY_FORMAT, feedbackToUser);
+    }
+
+    @Test
+    void parseCommand_missingListSaleIndex_showErrorMessage() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        String userInput = "list_sale day/";
+
+        ParserUtil parserUtil = new Parser();
+        Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE
+                + ListSaleByDayCommand.MESSAGE_USAGE, feedbackToUser);
+    }
+
+    @Test
+    void parseCommand_invalidListSaleFormat_showErrorMessage() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        String userInput = "list_sale /1";
+
+        ParserUtil parserUtil = new Parser();
+        Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(ErrorMessages.INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE
+                + ListSaleByDayCommand.MESSAGE_USAGE, feedbackToUser);
+    }
 }
