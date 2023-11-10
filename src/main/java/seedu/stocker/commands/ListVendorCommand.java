@@ -11,7 +11,7 @@ public class ListVendorCommand extends Command {
 
     public static final String COMMAND_WORD = "listVendors";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all vendor information that is being "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all vendors that are being "
             + "tracked by the system." + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
