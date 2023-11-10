@@ -10,6 +10,33 @@
 Main structure of the code and the parse feature is adapted from [here](https://github.com/se-edu/addressbook-level2).
 
 ---
+### Table of Contents
+
+---
+
+* [Design & implementation](#design--implementation)
+  * [Architecture](#architecture)
+  * [Core Sequence](#core-sequence)
+  * [Storage Component](#storage-component)
+  * [Parser Component](#parser-component)
+  * [Command Component](#command-component)
+* [Main Data Structures](#main-data-structures)
+* [Commands](#commmands)
+  * [Add Function](#1-add-function)
+  * [Delete Function](#2-delete-function)
+  * [View Function](#3-view-function)
+  * [Find Function](#4-find-function)
+  * [Calories Function](#5-calories-function)
+  * [Help Function](#6-help-function)
+* [Product Scope](#product-scope)
+  * [Target user profile](#target-user-profile)
+  * [Value proposition](#value-proposition)
+* [User stories](#user-stories)
+* [Non-functional requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
+
+---
 ## Design & implementation
 
 ___
@@ -380,4 +407,16 @@ easier.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are the instructions to test the app manually.
+
+Note: These instructions only provide a foundation for testers to work on.
+
+### Launch and Shutdown
+1. Initial Launch
+   1. Download the jar file and copy the file into an empty folder.
+   2. Open up a terminal or command prompt and run the command `java -jar fittrack.jar`.
+      You should see a welcome message with the large FitTrack word.
+2. Closing the Application
+   1. Type `exit` into the terminal
+   2. Expected: FitTrack will exit with a goodbye message and save your data.
+      Inside the data directory is where the files are stored.
