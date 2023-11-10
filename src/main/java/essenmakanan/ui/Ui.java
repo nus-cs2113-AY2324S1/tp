@@ -234,4 +234,10 @@ public class Ui {
         System.out.println("Shortcut to add '" + shortcut.getIngredientName() + "' has been created!");
         Ui.drawDivider();
     }
+
+    public static void printNoShortcutInList(String ingredientName) {
+        Ui.drawDivider();
+        System.out.println("Shortcut to add '" + ingredientName + "' has been created!");
+        Ui.drawDivider();
+    }
 }

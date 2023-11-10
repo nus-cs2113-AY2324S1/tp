@@ -85,6 +85,9 @@ public class Parser {
         case "plan":
             command = new PlanCommand(ingredients, recipes, inputDetail);
             break;
+        case "sc":
+            command = new UseShortcutCommand(shortcuts, ingredients, inputDetail);
+            break;
         case "help":
             command = new HelpCommand();
             break;
