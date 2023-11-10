@@ -9,26 +9,22 @@ Welcome to KaChinnnng a personal finance tracker that helps you keep track of yo
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `KaChinnnng` from [here](https://github.com/AY2324S1-CS2113-T18-3/tp/releases).
 3. Copy the downloaded file to the folder you want to use as the home folder that allow to write access for your KaChinnnng.
-4. open a command terminal and navigate to the folder where you have copied the file to.
-5. type in the following to run the program
+4. Open a command terminal and navigate to the folder where you have copied the file to.
+5. Type in the following to run the program
 ```
 java -jar tp.jar
 ```
-6. if successful you should see the following output
+6. If successful you should see the following output
 ```
 ____________________________________________________________
 Welcome to KaChinnnngggg! How may i assist you today?
 ____________________________________________________________
 ```
-7. type in desired commands and press enter to execute them. (note: commands are not case-sensitive)
+7. Type in desired commands and press enter to execute them. (note: commands are not case-sensitive)
 8. "[ ]" denotes optional parameters
 
 ## Features 
 
-Bryan-updatePPP
-
-
-master
 ### View help : help
 Shows basic commands executable by the program. 
 User can choose to view the help function of individual command separately as well, which shows the description and format of that command
@@ -96,7 +92,7 @@ Note:
 Use case:
 - Prompts users if any of the fields are empty.
 - Amount takes up to 2 decimal places.
-- format of date is `dd/mm/yyyy`.
+- format of date is `dd/MM/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 - By default, amount is set to SGD.
 - User can specify the currency. Refer to the supported currencies for valid currency.
@@ -286,7 +282,7 @@ Format:
 list exchange rates
 ```
 
-### update exchange rate
+### Update exchange rate
 Update exchange rate of a specific foreign currency. Exchange rates will be saved upon
 successful update.
   
