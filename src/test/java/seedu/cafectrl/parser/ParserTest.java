@@ -72,7 +72,8 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
+        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS + ListIngredientCommand.MESSAGE_USAGE,
+                feedbackToUser);
     }
 
     @Test
@@ -90,7 +91,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS, feedbackToUser);
+        assertEquals(ErrorMessages.INVALID_DISH_INDEX_TO_LIST, feedbackToUser);
     }
 
     @Test
@@ -108,7 +109,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.INVALID_DISH_INDEX, feedbackToUser);
+        assertEquals(ErrorMessages.UNLISTED_DISH, feedbackToUser);
     }
 
     @Test

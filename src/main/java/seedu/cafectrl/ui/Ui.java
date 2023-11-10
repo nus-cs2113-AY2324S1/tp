@@ -11,10 +11,9 @@ import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.command.NextDayCommand;
 import seedu.cafectrl.command.PreviousDayCommand;
-import seedu.cafectrl.command.ShowSalesByDayCommand;
+import seedu.cafectrl.command.ListSaleByDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.data.dish.Dish;
-import seedu.cafectrl.data.dish.Ingredient;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -53,15 +52,19 @@ public class Ui {
      *
      * @param selectedDish Dish for ingredients to be listed out.
      */
-    public void printIngredients(Dish selectedDish) {
-        String ingredientsString = selectedDish.getName() + " Ingredients: \n";
-
-        for (Ingredient ingredient : selectedDish.getIngredients()) {
-            ingredientsString += ingredient.toString() + "\n";
-        }
-
-        showToUser(ingredientsString.trim());
+    public void showIngredientsHeader(Dish selectedDish) {
+        String ingredientsString = String.format("|%-55s|", " Dish: " + selectedDish.getName());
+        showToUser(Messages.INGREDIENTS_END_CAP);
+        showToUser(ingredientsString);
+        showToUser(Messages.INGREDIENTS_CORNER);
+        showToUser(Messages.INGREDIENTS_TITLE);
+        showToUser(Messages.INGREDIENTS_CORNER);
     }
+
+    public void showIngredientsEndCap() {
+        showToUser(Messages.INGREDIENTS_END_CAP);
+    }
+
 
     public void printAddDishMessage(Dish dish) {
         String dishNameString = "Dish Name: " + dish.getName();
@@ -73,7 +76,7 @@ public class Ui {
                 dishNameString,
                 dishPriceString);
 
-        printIngredients(dish);
+        showIngredientsHeader(dish);
     }
 
     /**
@@ -108,7 +111,6 @@ public class Ui {
         String leftAlignFormat = "| %-38s | %-12s |%n";
         System.out.format(leftAlignFormat, dishName, dishPrice);
     }
-    //+-----------------+------+
 
     /**
      * show edit price message to user
@@ -133,7 +135,7 @@ public class Ui {
                 NextDayCommand.MESSAGE_USAGE,
                 PreviousDayCommand.MESSAGE_USAGE,
                 ViewTotalStockCommand.MESSAGE_USAGE,
-                ShowSalesByDayCommand.MESSAGE_USAGE);
+                ListSaleByDayCommand.MESSAGE_USAGE);
     }
 
     public void showToUserWithSpaceBetweenLines(String... message) {
@@ -146,10 +148,10 @@ public class Ui {
         showToUser("Available Dishes: " + numberOfDishes);
     }
 
-    public void showNeededRestock(String ingredientName, int currentQuantity, String unit, String neededIngredient){
-        showToUser("Please Restock: " + ingredientName
-                , "Current " + ingredientName + ": " + currentQuantity + unit
-                , "Needed " + ingredientName + ": " + neededIngredient);
+    public void showNeededRestock(String ingredientName, int currentQuantity, String unit, int neededIngredient) {
+        String rowFormat = "| %-38s | %-12s | %-12s |%n";
+        System.out.format(rowFormat, ingredientName, currentQuantity + unit, neededIngredient + unit);
+        showToUser(Messages.RESTOCK_END_CAP);
     }
 
     /**
@@ -253,11 +255,14 @@ public class Ui {
     public void showDishAvailabilityMessage() {
         showToUser(Messages.AVAILABLE_DISHES);
     }
-
     public void showPreviousDay() {
         showToUser(Messages.PREVIOUS_DAY_COMMAND_MESSAGE);
     }
     public void showNextDay() {
         showToUser(Messages.NEXT_DAY_COMMAND_MESSAGE);
+    }
+
+    public void showDecodedInvalidDish(String dishName) {
+        showToUser(dishName + Messages.INVALID_DISH + dishName);
     }
 }

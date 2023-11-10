@@ -80,12 +80,12 @@ Café proprietors who prefer typing on CLI than any other interaction method and
    Some examples of PR reviewed: [#167](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/167), [#106](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/106), [#57](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/57),
    [#96](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/96)
 2. Created a tp howto to guide teammates on how to start coding tp 
-   ![Telegram screenshot of tp howto](docs/Images_PPP/tp_howto.png)
+   ![Telegram screenshot of tp howto](../images_PPP/ziyi/tp_howto.png)
 3. Shared my opinions in Telegram group.
-   ![Relevant Telegram screenshot 1](docs/Images_PPP/telegram_chef_text.png)
-   ![Relevant Telegram screenshot 2](docs/Images_PPP/relevant_telegram_screenshot_2.png)
-   ![Relevant Telegram screenshot 3](docs/Images_PPP/relevant_telegram_screenshot_3.png)
-   ![Relevant Telegram screenshot 3](docs/Images_PPP/relevant_telegram_screenshot_4.png)
+   ![Relevant Telegram screenshot 1](../images_PPP/ziyi/telegram_chef_text.png)
+   ![Relevant Telegram screenshot 2](../images_PPP/ziyi/relevant_telegram_screenshot_2.png)
+   ![Relevant Telegram screenshot 3](../images_PPP/ziyi/relevant_telegram_screenshot_3.png)
+   ![Relevant Telegram screenshot 4](../images_PPP/ziyi/relevant_telagram_screenshot_4.png)
 
 ### Contributions beyond the Project Team
 1. Posted 8 posts in the forum.
