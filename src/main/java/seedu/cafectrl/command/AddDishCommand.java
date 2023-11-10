@@ -1,8 +1,11 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
+
+import java.util.logging.Logger;
 //@@author DextheChik3n
 /**
  * Adds a menu item to the user
@@ -17,6 +20,7 @@ public class AddDishCommand extends Command {
 
     protected Menu menu;
     protected Ui ui;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     private final Dish dish;
     public AddDishCommand(Dish dish, Menu menu, Ui ui) {
@@ -26,6 +30,7 @@ public class AddDishCommand extends Command {
     }
     @Override
     public void execute() {
+        logger.info("Executing AddDishCommand...");
         menu.addDish(dish);
         ui.printAddDishMessage(dish);
     }

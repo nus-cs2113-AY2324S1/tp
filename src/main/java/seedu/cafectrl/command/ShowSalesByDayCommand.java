@@ -1,8 +1,11 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
+
+import java.util.logging.Logger;
 
 //@@author NaychiMin
 public class ShowSalesByDayCommand extends Command {
@@ -15,6 +18,7 @@ public class ShowSalesByDayCommand extends Command {
     private final Ui ui;
     private final Sales sales;
     private final Menu menu;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public ShowSalesByDayCommand(int day, Ui ui, Sales sales, Menu menu) {
         this.day = day;
@@ -25,6 +29,7 @@ public class ShowSalesByDayCommand extends Command {
 
     @Override
     public void execute() {
+        logger.info("Excecuting ShowSalesByDayCommand...");
         sales.printSaleByDay(ui, menu, day);
     }
 }

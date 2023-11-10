@@ -1,10 +1,12 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
 
 import java.text.DecimalFormat;
+import java.util.logging.Logger;
 
 /**
  * Lists all dishes in the menu to the user.
@@ -17,6 +19,7 @@ public class ListMenuCommand extends Command {
 
     private final Menu menu;
     private final Ui ui;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     /**
      * Constructor for the ListMenuCommand
@@ -35,6 +38,7 @@ public class ListMenuCommand extends Command {
      */
     @Override
     public void execute() {
+        logger.info("Executing ListMenuCommand...");
         if (menu.getSize() == 0) {
             printEmptyMenu(ui);
         } else {

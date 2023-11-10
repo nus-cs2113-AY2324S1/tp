@@ -1,11 +1,13 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 import seedu.cafectrl.ui.Messages;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 //@@author ShaniceTang
 public class ViewTotalStockCommand extends Command {
@@ -15,6 +17,7 @@ public class ViewTotalStockCommand extends Command {
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> pantryStock;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public ViewTotalStockCommand(Pantry pantry, Ui ui) {
         this.pantry = pantry;
@@ -23,6 +26,7 @@ public class ViewTotalStockCommand extends Command {
 
     @Override
     public void execute() {
+        logger.info("Executing ViewTotalStockCommand...");
         pantryStock = pantry.getPantryStock();
 
         if (pantryStock.isEmpty()) {

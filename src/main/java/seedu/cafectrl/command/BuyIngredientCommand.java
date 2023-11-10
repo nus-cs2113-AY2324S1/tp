@@ -1,11 +1,14 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 import seedu.cafectrl.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@@author ShaniceTang
 /**
@@ -26,6 +29,7 @@ public class BuyIngredientCommand extends Command {
     private ArrayList<Ingredient> ingredientsToBePrinted = new ArrayList<>();
     private String ingredientString = ""; // Used to store the message about the bought ingredients
     private int FIRST_INDEX = 0;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     /**
      * Constructs a BuyIngredientCommand with the specified ingredients, user interface, and pantry.
@@ -45,11 +49,13 @@ public class BuyIngredientCommand extends Command {
      */
     @Override
     public void execute() {
+        logger.info("Executing BuyIngredientCommand...");
         try {
             addIngredient();
             ui.printBuyIngredientHeader();
             ui.showToUser(ingredientString.strip());
         } catch (RuntimeException e) {
+            logger.log(Level.WARNING, "BuyIngredientCommand unsuccessful: " + e.getMessage(), e);
             ui.showToUser(e.getMessage());
         }
     }
