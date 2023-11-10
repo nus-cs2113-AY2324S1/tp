@@ -9,4 +9,12 @@ public class Shortcut {
         this.ingredientName = ingredientName;
         this.quantity = quantity;
     }
+
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public Double getQuantity() {
+        return quantity;
+    }
 }

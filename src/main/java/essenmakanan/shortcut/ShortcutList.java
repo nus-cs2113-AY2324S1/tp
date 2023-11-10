@@ -13,4 +13,8 @@ public class ShortcutList {
     public void addShortcut(Shortcut shortcut) {
         shortcuts.add(shortcut);
     }
+
+    public Shortcut getShortcut(int index) {
+        return shortcuts.get(index);
+    }
 }

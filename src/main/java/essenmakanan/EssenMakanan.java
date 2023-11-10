@@ -40,7 +40,7 @@ public class EssenMakanan {
         do {
             input = in.nextLine();
             try {
-                command = parser.parseCommand(input, recipes, ingredients);
+                command = parser.parseCommand(input, recipes, ingredients, shortcuts);
                 command.executeCommand();
                 ingredientStorage.saveData(ingredients.getIngredients());
                 recipeStorage.saveData(recipes.getRecipes());

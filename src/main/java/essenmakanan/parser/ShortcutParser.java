@@ -9,7 +9,8 @@ public class ShortcutParser {
 
     public static Shortcut parseShortcut(IngredientList ingredients, String input) throws EssenFormatException
             , EssenShortcutException, NumberFormatException {
-        String[] shortcutDetails = input.split(" , ");
+        input = input.replace("sc/", "");
+        String[] shortcutDetails = input.split(",");
 
         if (shortcutDetails.length != 2) {
             throw new EssenFormatException();
@@ -17,7 +18,7 @@ public class ShortcutParser {
 
         String ingredientName = shortcutDetails[0].strip();
 
-        if (ingredients.exist(ingredientName)) {
+        if (!ingredients.exist(ingredientName)) {
             throw new EssenShortcutException();
         }
 
