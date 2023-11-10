@@ -7,6 +7,8 @@ import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
@@ -155,7 +157,6 @@ public class Pantry {
         int maxNumofDish = Integer.MAX_VALUE;
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
         boolean isRestockHeaderDisplayed = false;
-
         for (Ingredient dishIngredient : dishIngredients) {
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
