@@ -47,9 +47,11 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 
 ### [System Summary of Commands](#feature-system)
+
 | Action                                         | Format                                                      | Example                                                                            |
 |------------------------------------------------|-------------------------------------------------------------|------------------------------------------------------------------------------------|
 | [Help](#help)<br>(list all commands available) | help                                                        | help                                                                               |
+
 ---
 
 ### [Recipes Summary of Commands](#feature-recipe)
@@ -62,9 +64,9 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 | [Edit recipe](#edit-recipe)                                                | edit r/RECIPE_TITLE n/NEW_NAME s/STEP_NUM, NEW_STEP         | edit r/scramble egg n/toast s/1,buy ingredients                                    |
 | [Delete Recipe](#delete-recipe)                                            | delete r/RECIPE_TITLE OR delete r/RECIPE_INDEX              | delete r/meatball noodles OR delete r/2                                            |
 | [Duplicate Recipe](#duplicate-recipe)                                      | duplicate RECIPE_NAME or duplicate RECIPE_INDEX             | duplicate sandwich or duplicate 1                                                  |                                                              |                                                                                    |
-| [Start recipe](#start-recipe) <br>(view missing ingredients from a recipe) | start RECIPE_TITLE <br><br>start RECIPE_ID                  | start dumpling noodles <br><br> start 1                                            |
+| [Check recipe](#check-recipe) <br>(view missing ingredients from a recipe) | check RECIPE_TITLE <br><br>check RECIPE_ID                  | check dumpling noodles <br><br> check 1                                            |
 | [Filter recipe by ingredients](#filter-recipe)                             | filter recipe i/INGREDIENT_NAME [i/...]                     | filter recipe i/chicken i/noodles                                                  |
-|[Plan recipes for the week](#plan-recipe)|plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]|filter 2 r/1 r/3|
+| [Plan recipes for the week](#plan-recipe)                                  | plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]                  | filter 2 r/1 r/3                                                                   |
 
 ---
 
@@ -82,6 +84,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 ----
 <a id="tags"></a>
 ### Tags
+
 | Tag Index | Tag Description    |
 |-----------|--------------------|
 | 1         | NIGHT_BEFORE       |
@@ -92,16 +95,17 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 ----
 <a id="units"></a>
 ### Units
+
 | Unit (to be used) | Full Unit Description |
 |-------------------|-----------------------|
-| g                 | gram                  |
-| kg                | kilogram              |
-| ml                | mililitre             |
-| l                 | litres                |
-| tsp               | teaspoon              |
-| tbsp              | tablespoon            |
-| cup               | cup                   |
-| pc                | piece                 |
+| g                 | Gram                  |
+| kg                | Kilogram              |
+| ml                | Mililitre             |
+| l                 | Litres                |
+| tsp               | Teaspoon              |
+| tbsp              | Tablespoon            |
+| cup               | Cup                   |
+| pc                | Piece                 |
 
 ----
 <a id="feature-system"></a>
@@ -132,7 +136,9 @@ View the steps of a specified recipe with RECIPE_ID
   
 Examples :
   
-* `view r/1` to show a recipe at index ‘1’ of the list.
+* `view r/1` 
+
+  to show a recipe at index ‘1’ of the list.
 ---
 
 <a id="add-recipe"></a>
@@ -216,31 +222,34 @@ Example :
 * `duplicate 1` to duplicate the first recipe on the list.
 
 ![img_3.png](images/DuplicateRecipe.png)
----    
-<a id="start-recipe"></a>
-#### Start a recipe - `start RECIPE_TITLE` or `start RECIPE_ID`
 
-Use the start command to check if you are all set to start on the recipe.This command will list all missing ingredients from the recipe you want to start on.
+---    
+
+<a id="check-recipe"></a>
+#### Check a recipe - `check RECIPE_TITLE` or `check RECIPE_ID`
+
+Use the check command to check if you are all set to start on the recipe.This command will list all missing ingredients from the recipe you want to start on.
 
 <br>
 
 Example:
 
-* `start bread`
+* `check bread`
       
     To check if you have all ingredients needed for the recipe named "bread".
    
-![img.png](images/StartRecipeCommand1.png)
+![img.png](images/CheckRecipeCommand1.png)
    
 
-* `start 1`
+* `check 1`
 
     To check if you have all ingredients needed for the recipe with id 1.
 
-![img_1.png](images/StartRecipeCommand2.png)
+![img_1.png](images/CheckRecipeCommand2.png)
 
 
 ---
+
 <a id="filter-recipe"></a>
 #### Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
 
@@ -287,6 +296,7 @@ Example:
    List all ingredients available inside the app.
 
 ---
+
 <a id="view-ingredient"></a>
 #### View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
 
@@ -301,7 +311,6 @@ Example:
 * `view i/1` to view the quantity of your ingredient with id 1
 
 ---
-<br>
 
 <a id="add-ingredient"></a>
 #### Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
@@ -328,8 +337,6 @@ Example :
 * `edit i/bread n/toast` to change `bread` to `toast`
 * `edit i/egg q/10 u/kg` to change the quantity to `10` and the unit to `kg`
 
-<br>
-
 ---
 <a id="delete-ingredient"></a>
 #### Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
@@ -341,8 +348,8 @@ Example :
 * `delete i/2` to delete the `second` ingredient on the list
 * `delete i/egg` to delete `egg` ingredient
 
-
 ---
+
 ## FAQ
 
 **Q**: Why are there 2 methods to add a recipe? 

@@ -17,6 +17,19 @@ public class IngredientList {
         this.ingredients = ingredients;
     }
 
+    public IngredientList(String[] inputIngredients) {
+        ingredients = new ArrayList<>();
+        for (String ingredientString : inputIngredients) {
+            assert !ingredientString.isEmpty() : "Ingredient must be valid and present";
+            try {
+                Ingredient ingredient = IngredientParser.parseIngredient(ingredientString);
+                ingredients.add(ingredient);
+            } catch (EssenFormatException e) {
+                e.handleException();
+            }
+        }
+    }
+
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }

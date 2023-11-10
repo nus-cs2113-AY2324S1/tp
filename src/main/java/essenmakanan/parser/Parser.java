@@ -14,9 +14,9 @@ import essenmakanan.command.EditShortcutCommand;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.command.FilterRecipesCommand;
 import essenmakanan.command.HelpCommand;
-import essenmakanan.command.PlanCommand;
-import essenmakanan.command.StartRecipeCommand;
 import essenmakanan.command.UseShortcutCommand;
+import essenmakanan.command.PlanRecipesCommand;
+import essenmakanan.command.CheckRecipeCommand;
 import essenmakanan.command.ViewIngredientsCommand;
 import essenmakanan.command.ViewRecipesCommand;
 import essenmakanan.command.ViewShortcutsCommand;
@@ -39,8 +39,8 @@ public class Parser {
         String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
 
         switch (commandType) {
-        case "start":
-            command = new StartRecipeCommand(inputDetail, recipes, ingredients);
+        case "check":
+            command = new CheckRecipeCommand(inputDetail, recipes, ingredients);
             break;
         case "add":
             if (inputDetail.startsWith("r/")) {
@@ -108,7 +108,7 @@ public class Parser {
             command = new DuplicateRecipeCommand(recipes, inputDetail);
             break;
         case "plan":
-            command = new PlanCommand(ingredients, recipes, inputDetail);
+            command = new PlanRecipesCommand(ingredients, recipes, inputDetail);
             break;
         case "sc":
             command = new UseShortcutCommand(shortcuts, ingredients, inputDetail);
