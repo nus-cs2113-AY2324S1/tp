@@ -1,0 +1,12 @@
+Nov 10, 2023 10:23:26 AM essenmakanan.logger.EssenLogger logInfo
+INFO: Retrieving ingredient data
+Nov 10, 2023 10:23:26 AM essenmakanan.logger.EssenLogger logInfo
+INFO: Saved ingredient data has been received
+Nov 10, 2023 10:23:26 AM essenmakanan.logger.EssenLogger logInfo
+INFO: Retrieving recipe data
+Nov 10, 2023 10:23:26 AM essenmakanan.logger.EssenLogger logInfo
+INFO: Saved recipe data has been received
+Nov 10, 2023 10:23:26 AM essenmakanan.logger.EssenLogger logInfo
+INFO: Retrieving recipe data
+Nov 10, 2023 10:23:26 AM essenmakanan.logger.EssenLogger logInfo
+INFO: Saved recipe data has been received
