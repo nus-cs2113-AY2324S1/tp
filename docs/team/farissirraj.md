@@ -18,11 +18,6 @@
     - Justification: Allows the user to keep track of their fitness goals.
 
 
-* **Feature 3:** Calculate the calories burned
-    - What it does: Calculate the calories burned based on the workout done.
-    - Justification: Allows the user to keep track of their fitness goals.
-
-
 * **Other Adhoc code maintenance as required for the project**
 
 
@@ -39,4 +34,4 @@
 * **Documentation:**
     - User Guide:
         - Documented my added features to the user guide.
-        - Added documentation for the features `addsteps`, `deletesteps`, `viewsteps`, `caloriesconsumed`, `caloriesburned`.
+        - Added documentation for the features `addsteps`, `deletesteps`, `viewsteps`, `caloriesconsumed`.
