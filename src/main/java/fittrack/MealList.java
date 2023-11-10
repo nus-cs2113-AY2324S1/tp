@@ -5,8 +5,6 @@ import fittrack.data.Meal;
 import java.util.ArrayList;
 
 public class MealList {
-
-    private int mealListSize = 0;
     private final ArrayList<Meal> mealList;
 
     public MealList() {
@@ -19,27 +17,30 @@ public class MealList {
 
     public void addToList(Meal newMeal) {
         mealList.add(newMeal);
-        mealListSize++;
     }
 
     // @@author NgLixuanNixon
     public void deleteMeal(int mealIndex) {
         assert isIndexValid(mealIndex);
         mealList.remove((mealIndex - 1));
-        mealListSize--;
     }
     // @@author
 
+    // @@author NgLixuanNixon
     @Override
     public String toString() {
-        int counter = 1;
         StringBuilder output = new StringBuilder();
+
+        int index = 1;
         for (Meal meal : mealList) {
-            output.append(counter).append(".").append(meal.toString()).append("\n");
-            counter += 1;
+            // Example: `1.[M] meal (100kcal, 2000-01-01)`
+            String mealWithIndex = index + "." + meal;
+            output.append(mealWithIndex).append("\n");
+            index += 1;
         }
         return output.toString().strip();
     }
+    // @@author
 
     public Meal getMeal(int mealIndex) {
         assert isIndexValid(mealIndex);

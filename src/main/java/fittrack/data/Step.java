@@ -1,10 +1,9 @@
 package fittrack.data;
 
-import fittrack.parser.DateFormatException;
 import fittrack.parser.NumberFormatException;
+import fittrack.parser.ParseException;
 import fittrack.parser.PatternMatchFailException;
 
-import java.time.DateTimeException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,26 +24,25 @@ public class Step {
         this.date = date;
     }
 
-    public static Step parseStep(String steps) throws PatternMatchFailException,
-            NumberFormatException, DateFormatException {
+    public static Step parseStep(String steps) throws ParseException {
 
         final Matcher matcher = STEP_PATTERN.matcher(steps);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }
 
-        final String step = matcher.group(STEP_CG);
-        final String date = matcher.group(DATE_CG);
+        final String stepData = matcher.group(STEP_CG);
+        final String dateData = matcher.group(DATE_CG);
 
         try {
-            if (Integer.parseInt(step) <= 0) {
+            int step = Integer.parseInt(stepData);
+            if (step <= 0) {
                 throw new NumberFormatException("Steps must be a positive integer.");
             }
-            return new Step(Integer.parseInt(step), new Date(date));
+            Date date = Date.parseDate(dateData);
+            return new Step(step, date);
         } catch (java.lang.NumberFormatException e) {
-            throw new NumberFormatException(e.getMessage());
-        } catch (DateTimeException e) {
-            throw new DateFormatException();
+            throw new NumberFormatException("Steps must be a positive integer.");
         }
     }
 

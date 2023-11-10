@@ -1,6 +1,6 @@
 package fittrack.data;
 
-import fittrack.parser.PatternMatchFailException;
+import fittrack.parser.DateFormatException;
 import org.junit.jupiter.api.Test;
 
 import java.time.DateTimeException;
@@ -53,7 +53,7 @@ class DateTest {
         try {
             Date date = Date.parseDate("2023-10-31");
             assertEquals(new Date(2023, 10, 31), date);
-        } catch (PatternMatchFailException e) {
+        } catch (DateFormatException e) {
             throw new RuntimeException(e);
         }
     }
@@ -61,10 +61,10 @@ class DateTest {
     @Test
     void parseDate_fail() {
         assertThrows(AssertionError.class, () -> Date.parseDate(null));
-        assertThrows(PatternMatchFailException.class, () -> Date.parseDate(""));
-        assertThrows(PatternMatchFailException.class, () -> Date.parseDate(" "));
-        assertThrows(PatternMatchFailException.class, () -> Date.parseDate("10-31"));
-        assertThrows(PatternMatchFailException.class, () -> Date.parseDate("Oct 31"));
-        assertThrows(PatternMatchFailException.class, () -> Date.parseDate("10.31."));
+        assertThrows(DateFormatException.class, () -> Date.parseDate(""));
+        assertThrows(DateFormatException.class, () -> Date.parseDate(" "));
+        assertThrows(DateFormatException.class, () -> Date.parseDate("10-31"));
+        assertThrows(DateFormatException.class, () -> Date.parseDate("Oct 31"));
+        assertThrows(DateFormatException.class, () -> Date.parseDate("10.31."));
     }
 }

@@ -5,7 +5,7 @@ import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Meal;
 
-import fittrack.parser.PatternMatchFailException;
+import fittrack.parser.DateFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +30,7 @@ public class CaloriesConsumedCommandTest {
         caloriesConsumedCommand.mealList = mealList;
         try {
             caloriesConsumedCommand.setArguments("2023-10-23");
-        } catch (PatternMatchFailException e) {
+        } catch (DateFormatException e) {
             throw new RuntimeException(e);
         }
         caloriesConsumedCommand.execute();

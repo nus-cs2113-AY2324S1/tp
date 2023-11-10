@@ -3,7 +3,7 @@ package fittrack.command;
 import fittrack.data.Calories;
 import fittrack.data.Date;
 import fittrack.data.Meal;
-import fittrack.parser.PatternMatchFailException;
+import fittrack.parser.DateFormatException;
 
 // @@author farissirraj
 public class CaloriesConsumedCommand extends Command {
@@ -42,7 +42,7 @@ public class CaloriesConsumedCommand extends Command {
     }
 
     @Override
-    public void setArguments(String args) throws PatternMatchFailException {
+    public void setArguments(String args) throws DateFormatException {
         date = Date.parseDate(args);
     }
 
