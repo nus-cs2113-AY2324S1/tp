@@ -4,7 +4,7 @@
 actor Quizhub
 participant CommandStart as "commandStart :CommandStart"
 participant QuestionList as ":QuestionList"
-participant ui as ":UI"
+participant ui as ":Ui"
 
 
 Quizhub -> CommandStart : executeCommand()
