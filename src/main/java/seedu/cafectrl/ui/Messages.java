@@ -83,4 +83,13 @@ public class Messages {
             + "You might have tempered with the file and added in a non existing dish.\n"
             + "Don't worry :D , we will continue operations without ";
 
+    public static final String SALES_LAST_DAY_TEXT_TAMPERED = "Well, well, well! "
+            + "It seems someone's been playing digital detective and tampered with the last line in the text file.\n"
+            + "Unfortunately, any empty order lists after the latest valid order have been wiped from my memory banks."
+            + " Poof!" ;
+
+    public static final String SALES_ORDER_TEXT_TAMPERED = "Well, well, well! "
+            + "It seems someone's been playing digital detective and tampered with the orders in the text file.\n"
+            + "Unfortunately, any such orders have been wiped from my memory banks. Poof!" ;
+
 }
