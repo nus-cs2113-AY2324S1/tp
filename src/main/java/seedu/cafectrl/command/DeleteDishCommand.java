@@ -20,9 +20,9 @@ public class DeleteDishCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Menu menu;
     protected Ui ui;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public DeleteDishCommand(int listIndex, Menu menu, Ui ui) {
         this.index = listIndex;

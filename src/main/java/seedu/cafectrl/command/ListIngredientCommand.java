@@ -20,9 +20,9 @@ public class ListIngredientCommand extends Command {
             + "Parameters: DISH_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Ui ui;
     protected Menu menu;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public ListIngredientCommand(int listIndex, Menu menu, Ui ui) {
         this.index = listIndex;

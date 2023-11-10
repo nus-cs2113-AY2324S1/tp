@@ -9,12 +9,12 @@ import java.util.logging.Logger;
 
 
 public class Chef {
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Order order;
     private final Pantry pantry;
     private final Ui ui;
     private Menu menu;
     private final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
 
     public Chef(Order order, Pantry pantry, Ui ui) {

@@ -21,13 +21,12 @@ public class AddOrderCommand extends Command {
             + " name/DISH_NAME qty/QUANTITY\n"
             + "Example: " + COMMAND_WORD
             + "name/chicken rice qty/2";
-
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Pantry pantry;
     protected OrderList orderList;
     protected Menu menu;
     private final Ui ui;
     private final Order order;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
     public AddOrderCommand(Order order, Ui ui, Pantry pantry, OrderList orderList, Menu menu) {

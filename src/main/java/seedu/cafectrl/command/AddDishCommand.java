@@ -17,10 +17,9 @@ public class AddDishCommand extends Command {
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example:"
             + COMMAND_WORD + " name/chicken rice price/3.00 ingredient/rice qty/200g, ingredient/chicken qty/100g";
-
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Menu menu;
     protected Ui ui;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     private final Dish dish;
     public AddDishCommand(Dish dish, Menu menu, Ui ui) {

@@ -18,9 +18,10 @@ import java.util.logging.Logger;
  * Handles loading and saving data for menu, orderList, pantryStock
  */
 public class Storage {
+
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected FileManager fileManager;
     protected Ui ui;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);

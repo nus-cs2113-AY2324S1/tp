@@ -22,14 +22,13 @@ public class BuyIngredientCommand extends Command {
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example:"
             + COMMAND_WORD + " ingredient/milk qty/200ml, ingredient/chicken qty/100g";
-
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final int FIRST_INDEX = 0;
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Ingredient> ingredientsToBePrinted = new ArrayList<>();
     private String ingredientString = ""; // Used to store the message about the bought ingredients
-    private int FIRST_INDEX = 0;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     /**
      * Constructs a BuyIngredientCommand with the specified ingredients, user interface, and pantry.

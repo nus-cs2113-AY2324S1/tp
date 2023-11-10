@@ -9,9 +9,9 @@ import java.util.logging.Logger;
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
  */
 public class IncorrectCommand extends Command{
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     public final String feedbackToUser;
     protected Ui ui;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public IncorrectCommand(String feedbackToUser, Ui ui) {
         this.feedbackToUser = feedbackToUser;

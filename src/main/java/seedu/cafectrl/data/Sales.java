@@ -12,10 +12,11 @@ import seedu.cafectrl.ui.Ui;
  * The Sales class represents sales data over a period of time, maintaining a collection of order lists.
  */
 public class Sales {
+
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final int DAY_DISPLAY_OFFSET = 1;
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
-    private final int DAY_DISPLAY_OFFSET = 1;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public Sales() {
         this.orderLists = new ArrayList<>();

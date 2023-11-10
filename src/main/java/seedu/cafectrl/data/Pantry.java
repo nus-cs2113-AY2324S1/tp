@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Pantry {
+
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private ArrayList<Ingredient> pantryStock;
     private Ui ui;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {

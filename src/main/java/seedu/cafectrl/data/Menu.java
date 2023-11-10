@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Menu {
-    private ArrayList<Dish> menuItems;
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private ArrayList<Dish> menuItems;
 
     public Menu() {
         this.menuItems = new ArrayList<>();

@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 
 //@@author ShaniceTang
 public class ViewTotalStockCommand extends Command {
-
     public static final String COMMAND_WORD = "view_stock";
     public static final String MESSAGE_USAGE = "To view pantry stock:\n" + COMMAND_WORD;
+
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> pantryStock;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public ViewTotalStockCommand(Pantry pantry, Ui ui) {
         this.pantry = pantry;

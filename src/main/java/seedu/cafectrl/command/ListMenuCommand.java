@@ -17,9 +17,9 @@ public class ListMenuCommand extends Command {
             + COMMAND_WORD;
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Menu menu;
     private final Ui ui;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     /**
      * Constructor for the ListMenuCommand

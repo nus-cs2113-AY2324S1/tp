@@ -22,6 +22,8 @@ import java.util.logging.SimpleFormatter;
  * Initializes the application and starts the interaction with the user.
  */
 public class CafeCtrl {
+
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Ui ui;
     private Menu menu;
     private Command command;
@@ -29,7 +31,6 @@ public class CafeCtrl {
     private Sales sales;
     private CurrentDate currentDate;
     private Storage storage;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.

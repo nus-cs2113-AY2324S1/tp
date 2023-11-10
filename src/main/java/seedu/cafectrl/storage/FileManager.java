@@ -19,8 +19,9 @@ import java.util.logging.Logger;
  * Manage everything related to file such as writing, reading, opening and creating file
  */
 public class FileManager {
-    private final Ui ui;
+
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private final Ui ui;
 
     public FileManager(Ui ui) {
         this.ui = ui;

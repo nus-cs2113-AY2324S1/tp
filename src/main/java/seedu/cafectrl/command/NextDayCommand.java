@@ -9,15 +9,14 @@ import seedu.cafectrl.ui.Ui;
 import java.util.logging.Logger;
 
 public class NextDayCommand extends Command {
-
     public static final String COMMAND_WORD = "next_day";
     public static final String MESSAGE_USAGE = "To travel to next day:\n"
             + COMMAND_WORD;
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Ui ui;
     private final Sales sales;
     private final CurrentDate currentDate;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public NextDayCommand(Ui ui, Sales sales, CurrentDate currentDate) {
         this.ui = ui;

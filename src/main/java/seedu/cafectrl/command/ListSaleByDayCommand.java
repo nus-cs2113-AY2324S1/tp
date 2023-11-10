@@ -15,11 +15,11 @@ public class ListSaleByDayCommand extends Command {
             + COMMAND_WORD + " day/DAY_TO_DISPLAY\n"
             + "Example: " + COMMAND_WORD + " day/1";
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final int day;
     private final Ui ui;
     private final Sales sales;
     private final Menu menu;
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public ListSaleByDayCommand(int day, Ui ui, Sales sales, Menu menu) {
         this.day = day;
