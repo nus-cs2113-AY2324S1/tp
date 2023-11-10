@@ -1,15 +1,18 @@
 package seedu.cafectrl.data;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Pantry {
     private ArrayList<Ingredient> pantryStock;
     private Ui ui;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
@@ -41,11 +44,13 @@ public class Pantry {
      * @return The Ingredient object that was added or updated in the pantry stock.
      */
     public Ingredient addIngredientToStock (String name, int qty, String unit) {
+        logger.info("Adding ingredients to stock...")
         pantryStock = getPantryStock(); //get latest pantry stock from pantry.txt
         int ingredientIndex = getIndexOfIngredient(name);
 
         //if ingredient exists in pantry, add quantity of that ingredient
         if (ingredientIndex != -1) {
+            logger.info(name + " exists in pantry, current quantity: "+ qty);
             return addIngredientQuantity(qty, ingredientIndex, unit);
         }
 
@@ -65,11 +70,13 @@ public class Pantry {
     private Ingredient addIngredientQuantity(int qty, int ingredientIndex, String unit) {
         Ingredient ingredient = pantryStock.get(ingredientIndex);
         if (!unit.equalsIgnoreCase(ingredient.getUnit())) {
+            logger.warning("Unit does not match previous unit");
             throw new RuntimeException(ErrorMessages.UNIT_NOT_MATCHING
                 + "\nUnit used previously: " + ingredient.getUnit());
         }
         qty += ingredient.getQty(); //adds new qty to current qty
         ingredient.setQty(qty);
+        logger.info("New quantity: " + qty);
         return ingredient;
     }
 
@@ -96,6 +103,7 @@ public class Pantry {
      * @param dishIngredients Array of ingredients used to make the dish order.
      */
     public boolean isDishCooked(ArrayList<Ingredient> dishIngredients) {
+        logger.info("Checking if dish can be cooked");
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
@@ -130,6 +138,7 @@ public class Pantry {
      * Checks the availability of dishes based on ingredient stock.
      */
     public void calculateDishAvailability(Menu menu) {
+        logger.info("Calculating dish availability...");
         int menuSize = menu.getSize();
         for (int i = 0; i < menuSize; i++) {
             Dish dish = menu.getDishFromId(i);
@@ -148,6 +157,7 @@ public class Pantry {
      * @param dish The dish being ordered.
      */
     public int calculateMaxDishes(Dish dish, Menu menu) {
+        logger.info("Calculating max number of dishes possible...");
         int maxNumofDish = Integer.MAX_VALUE;
         ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
 
@@ -170,6 +180,7 @@ public class Pantry {
      * @return The number of dishes that can be prepared.
      */
     private int calculateMaxDishForEachIngredient(Ingredient dishIngredient) {
+        logger.info("Calculating max dish for each ingredient...");
         Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
         if (usedIngredientFromStock == null) {
             return 0;

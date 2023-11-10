@@ -1,6 +1,10 @@
 package seedu.cafectrl.data;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.ui.Ui;
 
 /**
@@ -10,6 +14,7 @@ public class Sales {
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
     private final int DAY_DISPLAY_OFFSET = 1;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public Sales() {
         this.orderLists = new ArrayList<>();
@@ -22,7 +27,6 @@ public class Sales {
         this.daysAccounted = 0;
     }
 
-    //TODO: @Zhong Heng, Remove this method if not used
     public Sales(OrderList orderList) {
         this.orderLists = new ArrayList<>();
         orderLists.add(orderList);
@@ -58,9 +62,11 @@ public class Sales {
      */
     public void printSales(Ui ui, Menu menu) {
         if (orderLists.isEmpty()) {
+            logger.info("Printing empty sales...");
             ui.showToUser("No orders for the day!");
             return;
         }
+        logger.info("Printing sales...");
         ui.showSalesBottom();
         for (int day = 0; day < orderLists.size(); day++) {
             OrderList orderList = orderLists.get(day);
@@ -79,6 +85,7 @@ public class Sales {
      * @param day The day for which sales data is to be printed.
      */
     public void printSaleByDay(Ui ui, Menu menu, int day) {
+        logger.info("Printing sales by day...");
         int orderListIndex = day - 1;
         try {
             OrderList orderList = orderLists.get(orderListIndex);
@@ -86,6 +93,7 @@ public class Sales {
 
             orderList.printOrderList(menu, ui);
         } catch (Exception e) {
+            logger.log(Level.WARNING, "Unable to print sales for day " + day + "\n" + e.getMessage(), e);
             ui.showToUser("An error occurred while printing sales for the specified day.");
         }
     }
