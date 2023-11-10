@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DecoderTest {
     @Test
-    void decodePantryStockData_validData_PantryFilledWithStock() {
+    void decodePantryStockData_validData_pantryFilledWithStock() {
         Ui ui = new Ui();
         ArrayList<Ingredient> validPantryStockList = new ArrayList<>();
         validPantryStockList.add(new Ingredient("egg", 1, "g"));
