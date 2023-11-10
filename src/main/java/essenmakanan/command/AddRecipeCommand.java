@@ -157,7 +157,7 @@ public class AddRecipeCommand extends Command {
             }
             slashIndex = nextSlashIndex;
         }
-        if (recipeTitle.length() == 0) {
+        if (recipeTitle.isEmpty()) {
             System.out.println("The title of the recipe shouldn't be empty! Please give a valid title!");
             return;
         }
