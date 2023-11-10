@@ -2,7 +2,6 @@ package essenmakanan.shortcut;
 
 import essenmakanan.command.AddShortcutCommand;
 import essenmakanan.exception.EssenOutOfRangeException;
-import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 
