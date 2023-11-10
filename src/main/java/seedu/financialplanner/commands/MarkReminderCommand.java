@@ -1,12 +1,21 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
-public class MarkReminderCommand extends Command{
+
+@SuppressWarnings("unused")
+public class MarkReminderCommand extends Command {
+    public static final String NAME = "markreminder";
+
+    public static final String USAGE = "markreminder <INDEX>";
+    public static final String EXAMPLE = "markreminder 1";
     private final int index;
+
     public MarkReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
-        if(rawCommand.args.size() == 1) {
+        if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
         } else {
             throw new IllegalArgumentException("Incorrect arguments.");
@@ -20,11 +29,11 @@ public class MarkReminderCommand extends Command{
         if (index == 0) {
             throw new IllegalArgumentException("Index must be within the list");
         }
-        if (index > ReminderList.getInstance().list.size()+1){
+        if (index > ReminderList.getInstance().list.size() + 1) {
             throw new IllegalArgumentException("Index exceed the list size");
         }
         rawCommand.extraArgs.remove("i");
-        if(!rawCommand.extraArgs.isEmpty()){
+        if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new java.util.ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
             throw new IllegalArgumentException(String.format("Unknown extra argument: %s", unknownExtraArgument));
         }
@@ -32,8 +41,8 @@ public class MarkReminderCommand extends Command{
 
     @Override
     public void execute() {
-        ReminderList.getInstance().list.get(index-1).markAsDone();
-        Ui.getInstance().showMessage("You have marked "+ReminderList.getInstance().list.get(index-1));
+        ReminderList.getInstance().list.get(index - 1).markAsDone();
+        Ui.getInstance().showMessage("You have marked " + ReminderList.getInstance().list.get(index - 1));
     }
 
 
