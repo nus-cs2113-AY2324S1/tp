@@ -147,8 +147,8 @@ public class RecipeList {
 
                     Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
                     existingStep.setDescription(newStep);
-                    break;
                 }
+                break;
             default:
                 throw new EssenFormatException();
             }
