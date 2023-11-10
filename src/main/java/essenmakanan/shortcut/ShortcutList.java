@@ -1,4 +1,4 @@
-package essenmakanan.ingredient;
+package essenmakanan.shortcut;
 
 import java.util.ArrayList;
 

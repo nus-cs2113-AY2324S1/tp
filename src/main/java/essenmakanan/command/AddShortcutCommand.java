@@ -4,8 +4,8 @@ import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenInvalidQuantityException;
 import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.ingredient.Shortcut;
-import essenmakanan.ingredient.ShortcutList;
+import essenmakanan.shortcut.Shortcut;
+import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.parser.ShortcutParser;
 
 public class AddShortcutCommand extends Command {

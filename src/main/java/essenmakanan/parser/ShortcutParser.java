@@ -3,7 +3,7 @@ package essenmakanan.parser;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.ingredient.Shortcut;
+import essenmakanan.shortcut.Shortcut;
 
 public class ShortcutParser {
 

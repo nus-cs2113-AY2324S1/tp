@@ -7,7 +7,7 @@ import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.ingredient.ShortcutList;
+import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.Parser;
 import essenmakanan.recipe.RecipeList;

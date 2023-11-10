@@ -5,7 +5,7 @@ import essenmakanan.exception.EssenCommandException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
-import essenmakanan.ingredient.ShortcutList;
+import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.recipe.RecipeList;
 
 public class Parser {

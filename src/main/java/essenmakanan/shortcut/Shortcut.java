@@ -1,4 +1,4 @@
-package essenmakanan.ingredient;
+package essenmakanan.shortcut;
 
 public class Shortcut {
 
