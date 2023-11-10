@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ListTotalSalesCommandTest {
+public class ListTotalSalesCommandCommandTest {
 
     @Test
     public void execute_existingSales_listTotalSales() {
@@ -73,9 +73,9 @@ public class ListTotalSalesCommandTest {
         PrintStream originalOut = System.out;
         System.setOut(consoleStream);
 
-        ListTotalSales listTotalSales =
-                new ListTotalSales(sales, ui, menu);
-        listTotalSales.execute();
+        ListTotalSalesCommand listTotalSalesCommand =
+                new ListTotalSalesCommand(sales, ui, menu);
+        listTotalSalesCommand.execute();
 
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
@@ -127,9 +127,9 @@ public class ListTotalSalesCommandTest {
         PrintStream originalOut = System.out;
         System.setOut(consoleStream);
 
-        ListTotalSales listTotalSales =
-                new ListTotalSales(sales, ui, menu);
-        listTotalSales.execute();
+        ListTotalSalesCommand listTotalSalesCommand =
+                new ListTotalSalesCommand(sales, ui, menu);
+        listTotalSalesCommand.execute();
 
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
