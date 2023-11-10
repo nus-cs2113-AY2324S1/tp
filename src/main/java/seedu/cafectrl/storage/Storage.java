@@ -18,6 +18,10 @@ import java.util.ArrayList;
 public class Storage {
     protected FileManager fileManager;
     protected Ui ui;
+    private boolean isHashingEnabled = true;
+    private boolean isMenuTampered = false;
+    private boolean isOrdersTampered = false;
+    private boolean isPantryStockTampered = false;
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
@@ -58,6 +62,23 @@ public class Storage {
         return false;
     }
 
+    public void detectTamper() {
+        if (!isMenuTampered && !isOrdersTampered && !isPantryStockTampered) {
+            return;
+        }
+        ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED);
+        if (isMenuTampered) {
+            ui.showToUser(Messages.SAVE_FILE_FORMAT_MENU);
+        }
+        if (isOrdersTampered) {
+            ui.showToUser(Messages.SAVE_FILE_FORMAT_ORDERS);
+        }
+        if (isPantryStockTampered) {
+            ui.showToUser(Messages.SAVE_FILE_FORMAT_PANTRY_STOCK);
+        }
+        ui.showToUser(System.lineSeparator());
+    }
+
     //@@author ShaniceTang
     /**
      * Loads menu data from a text file, decodes it, and returns it as a Menu object.
@@ -67,10 +88,11 @@ public class Storage {
     public Menu loadMenu() {
         try {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-            if (isFileCorrupted(encodedMenu)) {
-                ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
+            if (isFileCorrupted(encodedMenu) && isHashingEnabled) {
+                isMenuTampered = true;
+                /*ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
                         Messages.SAVE_FILE_FORMAT_MENU,
-                        System.lineSeparator());
+                        System.lineSeparator());*/
             }
             return Decoder. decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
@@ -97,10 +119,11 @@ public class Storage {
     public Pantry loadPantryStock() {
         try {
             ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
-            if (isFileCorrupted(encodedPantryStock)) {
-                ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
+            if (isFileCorrupted(encodedPantryStock) && isHashingEnabled) {
+                isPantryStockTampered = true;
+                /*ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
                         Messages.SAVE_FILE_FORMAT_PANTRY_STOCK,
-                        System.lineSeparator());
+                        System.lineSeparator());*/
             }
             return Decoder.decodePantryStockData(encodedPantryStock);
         } catch (FileNotFoundException e) {
@@ -127,10 +150,11 @@ public class Storage {
     public Sales loadOrderList(Menu menu) {
         try {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
-            if (isFileCorrupted(encodedOrderList)) {
-                ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
+            if (isFileCorrupted(encodedOrderList) && isHashingEnabled) {
+                isOrdersTampered = true;
+                /*ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED,
                         Messages.SAVE_FILE_FORMAT_ORDERS,
-                        System.lineSeparator());
+                        System.lineSeparator());*/
             }
             return Decoder.decodeSales(encodedOrderList, menu);
         } catch (FileNotFoundException e) {
