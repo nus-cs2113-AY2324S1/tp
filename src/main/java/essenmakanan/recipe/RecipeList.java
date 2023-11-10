@@ -140,6 +140,10 @@ public class RecipeList {
                 break;
             case "s/":
                 String[] stepDetails = editDetails[i].substring(2).split(",");
+                if (stepDetails.length <= 1) {
+                    System.out.println("The description is empty! You have to provide details to edit this step!");
+                    return;
+                }
                 int stepIndex = Integer.parseInt(stepDetails[0])-1;
                 Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
                 String newStep = stepDetails[1];

@@ -11,13 +11,13 @@ public class Step {
     public Step(String description, Tag tag) {
         this.description = description;
         this.tag = tag;
-        this.estimatedDuration = 5;
+        this.estimatedDuration = 0;
     }
 
     public Step(String description) {
         // the parameter time has to follow the format "hours:minutes"
         this.description = description;
-        this.estimatedDuration = 5;
+        this.estimatedDuration = 0;
         this.tag = Tag.ACTUAL_COOKING;
     }
 
@@ -59,6 +59,11 @@ public class Step {
 
     @Override
     public String toString() {
-        return "You need to " + getDescription() + " for " + estimatedDuration + " minutes.";
+        String detailedStep = "You need to " + getDescription();
+        if (estimatedDuration == 0) {
+            return detailedStep;
+        } else {
+            return detailedStep + " for " + estimatedDuration + " minutes.";
+        }
     }
 }
