@@ -29,6 +29,7 @@ public class BuyIngredientCommand extends Command {
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Ingredient> ingredientsToBePrinted = new ArrayList<>();
     private String ingredientString = ""; // Used to store the message about the bought ingredients
+    private int finalIndex = 0;
 
     /**
      * Constructs a BuyIngredientCommand with the specified ingredients, user interface, and pantry.
@@ -72,7 +73,7 @@ public class BuyIngredientCommand extends Command {
             ingredients.set(i, ingredient);
         }
 
-        for (int i = ingredients.size() - ui.OFFSET_LIST_INDEX; i >= FIRST_INDEX; i--) {
+        for (int i = ingredients.size() - ui.OFFSET_LIST_INDEX; i >= finalIndex; i--) {
             Ingredient ingredient = ingredients.get(i);
             buildBuyIngredientMessage(ingredient);
         }

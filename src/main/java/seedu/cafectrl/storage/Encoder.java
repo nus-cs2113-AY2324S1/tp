@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  * making the data suitable for saving to a file.
  */
 public class Encoder {
+    public static final String NULL_ORDER_DAY = "the last day has no orders but please account for it";
     private static final String DIVIDER = " | ";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
@@ -113,6 +114,30 @@ public class Encoder {
                 encodedList.add(String.valueOf(orderString));
                 logger.info("Encoded order: " + orderString);
             }
+            if (day == sales.getDaysAccounted()) {
+                encodedList = encodeLastSalesDay(encodedList, orderList, day);
+            }
+        }
+        return encodedList;
+    }
+
+    //@@author Cazh1
+    /**
+     * Checks if the last day accessed has valid orders added
+     *
+     * @param encodedList An ArrayList of strings representing the encoded sales data.
+     * @param orderList An ArrayList of Orders of the last day accessed
+     * @param day The last day accessed
+     * @return encodedList with specific String added at the end if no valid orders were detected
+     */
+    private static ArrayList<String> encodeLastSalesDay(ArrayList<String> encodedList, OrderList orderList, int day) {
+        if (orderList.getSize() == 0) {
+            StringBuilder orderString = new StringBuilder();
+            //day of each orderList is index + 1
+            orderString.append((day + 1) + DIVIDER);
+            orderString.append(NULL_ORDER_DAY);
+            orderString.append(System.lineSeparator());
+            encodedList.add(String.valueOf(orderString));
         }
         return encodedList;
     }

@@ -26,7 +26,7 @@ public class Sales {
 
     public Sales(ArrayList<OrderList> orderLists) {
         this.orderLists = orderLists;
-        this.daysAccounted = 0;
+        this.daysAccounted = orderLists.size() - 1;
     }
 
     public Sales(OrderList orderList) {
@@ -63,20 +63,18 @@ public class Sales {
      * @param menu The Menu object representing the cafe's menu.
      */
     public void printSales(Ui ui, Menu menu) {
-        if(orderLists.isEmpty()) {
+        if(isOrderListsEmpty()) {
             logger.info("Printing empty sales...");
             ui.showToUser("No sales made.");
             return;
         }
-        logger.info("Printing sales...");
-        ui.showSalesBottom();
+        //ui.showSalesBottom();
         for (int day = 0; day < orderLists.size(); day++) {
+            logger.info("Printing sales for day " + day + "...");
             OrderList orderList = orderLists.get(day);
 
-            ui.showToUser("Day " + (day + 1) + ":");
-
             if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
-                ui.showToUser("No sales for this day.");
+                ui.showToUser("", "No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".", "");
                 continue;
             }
 
@@ -110,6 +108,15 @@ public class Sales {
             logger.log(Level.WARNING, "Unable to print sales for day " + day + "\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
         }
+    }
+
+    public boolean isOrderListsEmpty() {
+        for (OrderList orderList : orderLists) {
+            if (!orderList.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
     //@@author
 }

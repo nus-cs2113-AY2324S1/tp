@@ -15,7 +15,7 @@ import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
 import seedu.cafectrl.command.NextDayCommand;
 import seedu.cafectrl.command.PreviousDayCommand;
-import seedu.cafectrl.command.ListTotalSales;
+import seedu.cafectrl.command.ListTotalSalesCommand;
 import seedu.cafectrl.command.ListSaleByDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 
@@ -143,7 +143,7 @@ public class Parser implements ParserUtil {
         case PreviousDayCommand.COMMAND_WORD:
             return preparePreviousDay(ui, currentDate);
 
-        case ListTotalSales.COMMAND_WORD:
+        case ListTotalSalesCommand.COMMAND_WORD:
             return prepareShowSales(sales, menu, ui);
 
         case ListSaleByDayCommand.COMMAND_WORD:
@@ -603,7 +603,7 @@ public class Parser implements ParserUtil {
      * @return A ShowSalesCommand instance for viewing all sales items.
      */
     private static Command prepareShowSales(Sales sale, Menu menu, Ui ui) {
-        return new ListTotalSales(sale, ui, menu);
+        return new ListTotalSalesCommand(sale, ui, menu);
     }
 
     /**
