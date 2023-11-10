@@ -1,10 +1,13 @@
-package seedu.duke.calendar;
+package seedu.duke.storage;
+
+import seedu.duke.calendar.Event;
+import seedu.duke.calendar.EventList;
+import seedu.duke.calendar.Goal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -32,28 +35,6 @@ public class EventStorage {
     }
 
     /**
-     * load an event from certain format
-     * Tokens includes attributes of Event
-     * @param tokens is used to get event name
-     * @return Event object
-     */
-    private Event loadEvent(String[] tokens){
-
-        assert tokens.length == 3 || tokens.length == 4: "Token length should be 3 or 4";
-        if(tokens.length == 3) {
-            String name = tokens[0].trim();
-            LocalDateTime from = LocalDateTime.parse(tokens[1].trim());
-            LocalDateTime to = LocalDateTime.parse(tokens[2].trim());
-            return new Event(name, from, to);
-        }
-        String name = tokens[0].trim();
-        LocalDateTime by = LocalDateTime.parse(tokens[1].trim());
-        int goal = Integer.parseInt(tokens[2].trim());
-        int completed = Integer.parseInt(tokens[3].trim());
-        return new Goal(name, by, goal, completed);
-    }
-
-    /**
      * load list of events
      * from this.path
      * @return list of Events
@@ -66,7 +47,7 @@ public class EventStorage {
 
         while(s.hasNext()){
             String[] eventTokens = s.nextLine().split(" \\| ");
-            eventList.addEvent(loadEvent(eventTokens));
+            eventList.addEvent(EventStorageParser.loadEvent(eventTokens));
         }
 
         logger.log(Level.INFO, String.format(
