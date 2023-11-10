@@ -105,10 +105,10 @@ public class AddRecipeCommandTest {
     }
 
 
-    /*@Test
+    @Test
     public void addWithTitleStepsTags_validInput_duration() {
-        String userInput = "r/bread t/1 s/buy ingredients d/30minutes s/store ingredients " +
-            "t/2 s/wash the ingredients s/cut the ingredients d/20mins t/4 s/cook d/1.6h ";
+        String userInput = "r/bread t/1 s/buy ingredients d/30mins " +
+            "t/2 s/wash the ingredients d/20mins t/4 s/cook d/1.6h i/egg,2,pc";
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
         addRecipeCommand.executeCommand();
 
@@ -116,22 +116,15 @@ public class AddRecipeCommandTest {
         Step step1 = recipeStepList.getStepByIndex(0);
         Step step2 = recipeStepList.getStepByIndex(1);
         Step step3 = recipeStepList.getStepByIndex(2);
-        Step step4 = recipeStepList.getStepByIndex(3);
-        Step step5 = recipeStepList.getStepByIndex(4);
 
         assertEquals("buy ingredients", step1.getDescription());
-        assertEquals("store ingredients", step2.getDescription());
-        assertEquals("wash the ingredients", step3.getDescription());
-        assertEquals("cut the ingredients", step4.getDescription());
-        assertEquals("cook", step5.getDescription());
+        assertEquals("wash the ingredients", step2.getDescription());
+        assertEquals("cook", step3.getDescription());
 
         assertEquals(30, step1.getEstimatedDuration());
-        assertEquals(5, step2.getEstimatedDuration());
-        assertEquals(5, step3.getEstimatedDuration());
-        assertEquals(20, step4.getEstimatedDuration());
-        assertEquals(96, step5.getEstimatedDuration());
-
-    }*/
+        assertEquals(20, step2.getEstimatedDuration());
+        assertEquals(96, step3.getEstimatedDuration());
+    }
 
     @Test
     public void addRecipeWithInvalidInput_invalidIngredient_errorThrown() {
@@ -185,6 +178,16 @@ public class AddRecipeCommandTest {
     @Test
     public void addRecipeCommand_multipleTitle_formatException() {
         String userInput = "r/bread r/toast s/step 1 i/egg,2,pc";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addValidRecipe();
+        });
+    }
+
+    @Test
+    public void addRecipe_stepsWithMultipleDuration_exceptionThrown() {
+        String userInput = "r/bread s/wash eggs d/1min d/1min i/egg,2,pc";
         addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
 
         assertThrows(EssenFormatException.class, () -> {
