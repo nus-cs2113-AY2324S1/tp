@@ -865,7 +865,7 @@ window. Sorry for the inconvenience caused. 🥲
 | **Delete cashflow**              | `delete INDEX [/r]`                                        |
 | **Delete income**                | `delete income INDEX [/r]`                                 |
 | **Delete expense**               | `delete expense INDEX [/r]`                                |
-| **Delete recurrence**            | `delete recurrence INDEX [/r]`                             |
+| **Delete recurrence**            | `delete recurring INDEX [/r]`                              |
 | **list all cashflows**           | `list`                                                     |
 | **list all incomes**             | `list income`                                              |
 | **list all expenses**            | `list expense`                                             |
