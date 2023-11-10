@@ -37,6 +37,7 @@ public class CafeCtrl {
      */
 
     private CafeCtrl() {
+        initLogger();
         this.ui = new Ui();
         this.storage = new Storage(this.ui);
         this.sales = new Sales();
@@ -44,7 +45,6 @@ public class CafeCtrl {
         this.pantry = this.storage.loadPantryStock();
         this.sales = this.storage.loadOrderList(menu);
         this.currentDate = new CurrentDate(sales);
-        initLogger();
 
         logger.info( "CafeCtrl initialised successfully");
         assert sales.getOrderLists().size() == currentDate.getCurrentDay() + 1;

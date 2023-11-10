@@ -41,6 +41,7 @@ public class DeleteDishCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "DeleteDishCommand unsuccessful: " + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_DISH_INDEX);
+            throw new IndexOutOfBoundsException();
         }
     }
 }

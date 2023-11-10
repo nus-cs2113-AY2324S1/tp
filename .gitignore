@@ -19,3 +19,4 @@ META-INF/MANIFEST.MF
 data/
 
 cafeCtrl.log
+cafeCtrl.log.lck
