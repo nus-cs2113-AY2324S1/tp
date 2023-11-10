@@ -24,13 +24,15 @@ public class FlashcardCommandParser {
     public FlashcardCommand parseInput(String input) {
         assert input != null : "input is null";
 
-        if (input.startsWith("create flashcard")) {
+        input = input.toLowerCase().strip();
+
+        if (input.equals("create flashcard")) {
             return new CreateFlashcardCommand();
-        } else if (input.startsWith("list flashcards")) {
+        } else if (input.equals("list flashcards")) {
             return new ListFlashcardsCommand();
         } else if (input.startsWith("review flashcards")) {
             return new StartReviewCommand(input);
-        } else if (input.startsWith("delete all flashcards")) {
+        } else if (input.equals("delete all flashcards")) {
             return new DeleteAllFlashcardsCommand();
         } else if (input.startsWith("delete flashcard")) {
             return new DeleteFlashcardCommand(input);

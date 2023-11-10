@@ -18,6 +18,14 @@ taking.
 
 #### General explanation of flashcards
 
+The difficulty symbolizes how hard it is for you to remember this particular 
+flashcard. The higher the number, the harder.
+
+The flashcard id is used to uniquely identify each flashcard. (Flashcard ids 
+don't necessarily start at zero and are not necessarily consecutive. Don't 
+worry about this; they are for internal use only and "gaps" between 
+flashcard ids are totally fine)
+
 #### Listing all flashcards: `list flashcards`
 
 Prints out a list of all flashcards that shows each flashcard's front text 
@@ -30,8 +38,8 @@ Format: `list flashcards`
 Starts the process of adding a new flashcard.
 
 After entering this command, you are prompted to first input the front page
-text (once you have typed it out, submit it by pressing <ENTER>) and then the
-back page text (once you have typed it out, submit it by pressing <ENTER>) of
+text (once you have typed it out, submit it by pressing ENTER) and then the
+back page text (once you have typed it out, submit it by pressing ENTER) of
 your new flashcard.
 
 After you've done this, a success message will be printed out. This
@@ -58,7 +66,7 @@ mode`.
 Once you've selected a review mode, the actual review begins: the front page
 of a flashcard is shown to you. You should now try and think of the answer
 (the text on the back page of the flashcard); and once you're ready, press
-<ENTER> to compare it to the actual back page.
+ENTER to compare it to the actual back page.
 
 In spaced repetition mode, after you have revealed the back page of a 
 flashcard, you are prompted to rate how to difficult it was to remember. 
@@ -69,7 +77,7 @@ flashcard you just reviewed.
 Now, the process repeats and the next flashcard is shown to you.
 
 If you want to quit the review process, simply input `q` or `quit` instead
-of pressing <ENTER> to reveal the back page.
+of pressing ENTER to reveal the back page.
 
 Format: `create flashcard`
 
@@ -81,7 +89,7 @@ After entering this command, you are prompted to input the id of the
 flashcard you want to delete. Input it into the terminal and then press enter.
 
 If it was a valid id, the flashcard with that id is deleted; otherwise, an 
-error message is shown and you are prompted to retry.
+error message is shown, and you are prompted to retry.
 
 Format: `delete flashcard`
 
@@ -90,9 +98,6 @@ Format: `delete flashcard`
 Deletes all flashcards that you have added so far.
 
 Format: `delete all flashcards`
-
-
-
 
 ### General Explanation of Calendar Features
 

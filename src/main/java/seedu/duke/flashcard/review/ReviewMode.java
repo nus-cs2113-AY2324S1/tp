@@ -66,7 +66,7 @@ public abstract class ReviewMode {
 
     protected void letUserRateReviewDifficulty(Scanner scanner,
                                                Flashcard flashcard) {
-        System.out.println("    How hard was it to remeber the back page of " +
+        System.out.println("    How hard was it to remember the back page of " +
                 "this flashcard?");
         System.out.println("    Press <E> if it was easy, <M> if it was " +
                 "moderately challenging or <H> if it was quite hard.");
@@ -75,9 +75,9 @@ public abstract class ReviewMode {
                 "e", "m", "h"));
         String choice = scanner.nextLine();
 
-        while (!choices.contains(choice)) {
-            System.out.println("    Invalid choice! Your choice must be e, m " +
-                    "or h! Please try again.");
+        while (!choices.contains(choice.toLowerCase())) {
+            System.out.println("    Invalid choice! Your choice must be E, M " +
+                    "or H! Please try again.");
 
             choice = scanner.nextLine();
         }
