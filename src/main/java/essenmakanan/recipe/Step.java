@@ -15,7 +15,6 @@ public class Step {
     }
 
     public Step(String description) {
-        // the parameter time has to follow the format "hours:minutes"
         this.description = description;
         this.estimatedDuration = 0;
         this.tag = Tag.ACTUAL_COOKING;

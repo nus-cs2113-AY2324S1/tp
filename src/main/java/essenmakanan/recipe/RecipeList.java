@@ -140,18 +140,15 @@ public class RecipeList {
                 break;
             case "s/":
                 String[] stepDetails = editDetails[i].substring(2).split(",");
-                if (stepDetails.length <= 1) {
-                    System.out.println("The description is empty! You have to provide details to edit this step!");
-                    return;
+                if (!noDescriptionExists(stepDetails)) {
+                    int stepIndex = Integer.parseInt(stepDetails[0])-1;
+                    Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
+                    String newStep = stepDetails[1];
+
+                    Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
+                    existingStep.setDescription(newStep);
+                    break;
                 }
-                int stepIndex = Integer.parseInt(stepDetails[0])-1;
-                Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
-                String newStep = stepDetails[1];
-
-                Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
-                existingStep.setDescription(newStep);
-                break;
-
             default:
                 throw new EssenFormatException();
             }
@@ -159,6 +156,13 @@ public class RecipeList {
 
     }
 
+    private static boolean noDescriptionExists(String[] stepDetails) {
+        if (stepDetails.length <= 1) {
+            System.out.println("The description is empty! You have to provide details to edit this step!");
+            return true;
+        }
+        return false;
+    }
     public boolean isEmpty() {
         return recipes.isEmpty();
     }

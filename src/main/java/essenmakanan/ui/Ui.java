@@ -138,11 +138,11 @@ public class Ui {
         if (recipes.getRecipes().size() == 0) {
             System.out.println("Your Recipe List is empty right now, please create your own recipe first :D!");
             drawDivider();
-            return;
+        } else {
+            System.out.println("Here's a list of your recipes!");
+            recipes.listRecipeTitles();
+            drawDivider();
         }
-        System.out.println("Here's a list of your recipes!");
-        recipes.listRecipeTitles();
-        drawDivider();
     }
 
     public static void printDeleteIngredientsSuccess(String ingredientName) {
