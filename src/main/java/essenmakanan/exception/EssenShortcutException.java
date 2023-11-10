@@ -6,7 +6,8 @@ public class EssenShortcutException extends Exception {
 
     public void handleException() {
         Ui.drawDivider();
-        System.out.println("Shortcut cannot be created for a non-existing ingredient");
+        System.out.println("Shortcut cannot be created for a non-existing ingredient or an ingredient that has"
+                + "a shortcut assigned to it.");
         Ui.drawDivider();
     }
 }

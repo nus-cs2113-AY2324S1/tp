@@ -70,4 +70,14 @@ public class ShortcutList {
             throw new EssenOutOfRangeException();
         }
     }
+
+    public boolean exist(String ingredientName) {
+        for (Shortcut shortcut : shortcuts) {
+            if (shortcut.getIngredientName().equals(ingredientName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -25,6 +25,11 @@ public class AddShortcutCommand extends Command {
     public void executeCommand() {
         try {
             Shortcut shortcut = ShortcutParser.parseShortcut(ingredients, input);
+
+            if (shortcuts.exist(shortcut.getIngredientName())) {
+                throw new EssenShortcutException();
+            }
+
             shortcuts.addShortcut(shortcut);
             Ui.printAddShortcutSuccess(shortcut);
         } catch (EssenFormatException exception) {
