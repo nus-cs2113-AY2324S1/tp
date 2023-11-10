@@ -1,5 +1,6 @@
 package seedu.cafectrl.storage;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
@@ -9,6 +10,7 @@ import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.data.Menu;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * The Encoder class provides methods to encode various data structures into string representations to
@@ -18,6 +20,7 @@ import java.util.ArrayList;
  */
 public class Encoder {
     private static final String DIVIDER = " | ";
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
     /**
      * Encodes a Menu object into a list of strings representing its contents, suitable for saving to a file.
@@ -26,6 +29,7 @@ public class Encoder {
      * @return An ArrayList of strings, where each string represents a Dish in the Menu.
      */
     public static ArrayList<String> encodeMenu(Menu menu) {
+        logger.info("Encoding Menu to menu.txt...");
         ArrayList<String> menuStringList = new ArrayList<>();
         ArrayList<Dish> menuDishList = menu.getMenuItemsList();
         for(Dish dish : menuDishList) {
@@ -35,6 +39,7 @@ public class Encoder {
             dishString.append(encodeIngredientList(dish.getIngredients()));
             dishString.append(System.lineSeparator());
             menuStringList.add(String.valueOf(dishString));
+            logger.info("Encoded dish: " + dishString);
         }
         return menuStringList;
     }
@@ -87,10 +92,12 @@ public class Encoder {
      * @return An ArrayList of strings representing the encoded sales data.
      */
     public static ArrayList<String> encodeSales(Sales sales) {
+        logger.info("Encoding Sales to orders.txt...");
         ArrayList<String> encodedList = new ArrayList<>();
         ArrayList<OrderList> orderLists = sales.getOrderLists();
 
         for (int day = 0; day < orderLists.size(); day++) {
+            logger.info("Encoding sales of day " + day);
             //get orderList for each day from list of sales
             OrderList orderList = sales.getOrderList(day);
             //get order from each orderList obtained
@@ -104,6 +111,7 @@ public class Encoder {
                 orderString.append(order.getIsComplete());
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));
+                logger.info("Encoded order: " + orderString);
             }
         }
         return encodedList;

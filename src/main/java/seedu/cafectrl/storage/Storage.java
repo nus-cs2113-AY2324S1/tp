@@ -1,5 +1,6 @@
 package seedu.cafectrl.storage;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
@@ -9,6 +10,8 @@ import seedu.cafectrl.ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@@author ziyi105
 /**
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 public class Storage {
     protected FileManager fileManager;
     protected Ui ui;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
@@ -30,10 +34,12 @@ public class Storage {
      * @return A Menu object containing data from the file.
      */
     public Menu loadMenu() {
+        logger.info("Loading menu...");
         try {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
             return Decoder.decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
+            logger.log(Level.WARNING, "menu.txt not found!\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Menu();
         }
@@ -46,6 +52,7 @@ public class Storage {
      * @throws IOException if the file is not found in the specified file path.
      */
     private void saveMenu(Menu menu) throws IOException {
+        logger.info("Saving menu...");
         fileManager.overwriteFile(FilePath.MENU_FILE_PATH, Encoder.encodeMenu(menu));
     }
 
@@ -80,10 +87,12 @@ public class Storage {
      * @return An OrderList object containing data from the file.
      */
     public Sales loadOrderList(Menu menu) {
+        logger.info("Loading orders...");
         try {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
             return Decoder.decodeSales(encodedOrderList, menu);
         } catch (FileNotFoundException e) {
+            logger.log(Level.WARNING, "orders.txt not found!\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.ORDER_LIST_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Sales();
         }
@@ -96,6 +105,7 @@ public class Storage {
      * @throws IOException if the file is not found in the specified file path.
      */
     private void saveOrderList(Sales sales) throws IOException {
+        logger.info("Saving orders...");
         this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
 
@@ -112,6 +122,7 @@ public class Storage {
             saveOrderList(sales);
             savePantryStock(pantry);
         } catch (IOException e) {
+            logger.log(Level.WARNING, "Saving unsuccessful!\n" + e.getMessage(), e);
             ui.showToUser(e.getMessage());
         }
     }

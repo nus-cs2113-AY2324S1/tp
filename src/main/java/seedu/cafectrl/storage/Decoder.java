@@ -1,6 +1,7 @@
 package seedu.cafectrl.storage;
 
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
@@ -13,6 +14,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 
 /**
@@ -24,6 +26,7 @@ public class Decoder {
 
     private static final String DIVIDER = "\\| ";
     private static final Ui ui = new Ui();
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
     /**
      * Decodes an ArrayList of string lines into a Menu object, reconstructing its content.
@@ -32,8 +35,10 @@ public class Decoder {
      * @return A Menu object containing the decoded Menu data.
      */
     public static Menu decodeMenuData(ArrayList<String> textLines) {
+        logger.info("Decoding menu.txt to Menu...");
         ArrayList<Dish> menuDishList = new ArrayList<>();
         for(String dishString : textLines) {
+            logger.info("Line to decode: " + dishString);
             String[] dishStringArray = dishString.split(DIVIDER);
             String dishName = dishStringArray[0].trim();
             float dishPrice = Float.parseFloat(dishStringArray[1]);
@@ -53,6 +58,7 @@ public class Decoder {
     private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
         for(String ingredientString : ingredientsStringArray) {
+            logger.info("Ingredient to decode: " + ingredientString);
             String[] array = ingredientString.split(" ");
             String name = array[0].trim();
             int qty = Integer.parseInt(array[1]);
@@ -115,12 +121,14 @@ public class Decoder {
      * @return Sales object containing OrderList objects decoded from the provided strings.
      */
     public static Sales decodeSales(ArrayList<String> textLines, Menu menu) {
+        logger.info("Decoding orders.txt to Sales...");
         ArrayList<OrderList> orderLists = new ArrayList<>();
         if(textLines.isEmpty()) {
             return new Sales();
         }
         //for each 'order' in text file
         for (String line : textLines) {
+            logger.info("Line to decode: " + line);
             String[] orderData = line.split(DIVIDER);
             int day = Integer.parseInt(orderData[0].trim()) - 1;
             String dishName = orderData[1].trim();

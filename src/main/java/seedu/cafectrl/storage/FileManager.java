@@ -1,5 +1,6 @@
 package seedu.cafectrl.storage;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -12,12 +13,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
 //@@author DextheChik3n
 /**
  * Manage everything related to file such as writing, reading, opening and creating file
  */
 public class FileManager {
     private final Ui ui;
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     public FileManager(Ui ui) {
         this.ui = ui;
@@ -30,6 +33,7 @@ public class FileManager {
      * @throws FileNotFoundException if text file at the specified file path does not exist
      */
     public ArrayList<String> readTextFile(String filePath) throws FileNotFoundException {
+        logger.info("Reading text file...");
         String userWorkingDirectory = System.getProperty("user.dir");
         Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
         File textFile = new File(String.valueOf(dataFilePath));
@@ -51,6 +55,7 @@ public class FileManager {
      * @param filePath the specified path location of the file
      */
     public void checkFileExists(String filePath) throws IOException {
+        logger.info("Checking if " + filePath + " exists...");
         String userWorkingDirectory = System.getProperty("user.dir");
         Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
         Path dataFolderPath = dataFilePath.getParent();
@@ -59,12 +64,14 @@ public class FileManager {
 
         //Check if data folder exists
         if (!Files.exists(dataFolderPath)) {
+            logger.info("Creating directory " + dataFolderPath + "...");
             folder.mkdir();
             ui.showToUser(ErrorMessages.DATA_FOLDER_NOT_FOUND_MESSAGE, System.lineSeparator());
         }
 
         //Check if the file at the specified file path exists
         if (!Files.exists(dataFilePath)) {
+            logger.info(filePath + " does not exist, creating new file...");
             textFile.createNewFile();
         }
     }
@@ -81,6 +88,7 @@ public class FileManager {
         checkFileExists(filePath);
         FileWriter fw = new FileWriter(filePath);
         for (String line : listOfTextToAdd) {
+            logger.info("Overwriting " + filePath + " with " + line + "...");
             fw.write(line);
         }
         fw.close();
