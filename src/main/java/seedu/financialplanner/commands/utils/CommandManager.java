@@ -1,6 +1,7 @@
 package seedu.financialplanner.commands.utils;
 
 import org.reflections.Reflections;
+import org.slf4j.simple.SimpleLogger;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class CommandManager {
     private final Map<String, Class<? extends Command>> nameCommandMap = new HashMap<>();
 
     private CommandManager() {
+        System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "ERROR");
         Reflections reflections = new Reflections(COMMAND_PACKAGE_NAME);
         Set<Class<? extends Command>> commandClasses = reflections.getSubTypesOf(Command.class);
         for (Class<? extends Command> c : commandClasses) {
