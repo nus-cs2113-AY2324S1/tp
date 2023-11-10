@@ -1,7 +1,6 @@
 package essenmakanan.storage;
 
 import essenmakanan.exception.EssenFileNotFoundException;
-import essenmakanan.exception.EssenInvalidEnumException;
 import essenmakanan.exception.EssenStorageDuplicateException;
 import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.logger.EssenLogger;
@@ -77,10 +76,6 @@ public class ShortcutStorage {
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
             String message = "Data: " + dataString + " has an invalid format";
-            EssenLogger.logWarning(message, exception);
-        } catch (IllegalArgumentException exception) {
-            EssenInvalidEnumException.handleException(dataString);
-            String message = "Data: " + dataString + " has an invalid enum";
             EssenLogger.logWarning(message, exception);
         } catch (EssenStorageDuplicateException exception) {
             exception.handleException(dataString);
