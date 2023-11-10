@@ -29,19 +29,20 @@ public class UserProfileDecoder {
     private static final Pattern CALORIES_PATTERN = Pattern.compile(
             "Daily calorie limit: (?<calLimit>\\S+)kcal"
     );
+    private static final StorageOperationException CONTENT_CORRUPTION_EXCEPTION = new StorageOperationException(
+            "File containing profile has invalid format. Creating new profile file..."
+    );
 
     /**
      * Decodes {@code encodedUserProfile} into a {@code UserProfile} containing the decoded data.
      *
-     * @throws IllegalStorageValueException if any of the fields in any encoded person string is invalid.
      * @throws StorageOperationException if the {@code encodedUserProfile} is in an invalid format.
      */
     public static UserProfile decodeUserProfile(List<String> encodedUserProfile, Path profilePath)
-            throws IllegalStorageValueException, StorageOperationException, IllegalValueException, IOException {
+            throws StorageOperationException, IOException {
         if (encodedUserProfile.size() < 4) {
             handleCorruptedProfileFile(profilePath);
-            throw new StorageOperationException("File containing profile has invalid format. " +
-                    "Creating new profile file...");
+            throw CONTENT_CORRUPTION_EXCEPTION;
         }
 
         String[] decodedUserProfile = new String[5];
@@ -57,21 +58,25 @@ public class UserProfileDecoder {
         if (!heightMatcher.matches() || !weightMatcher.matches()
                 || !caloriesMatcher.matches() || !genderMatcher.matches()) {
             handleCorruptedProfileFile(profilePath);
-            throw new StorageOperationException("File containing profile has invalid format. " +
-                    "Creating new profile file...");
+            throw CONTENT_CORRUPTION_EXCEPTION;
         }
 
-        final double height = Double.parseDouble(heightMatcher.group("height"));
-        final double weight = Double.parseDouble(weightMatcher.group("weight"));
-        final double dailyCalorieLimit = Double.parseDouble(caloriesMatcher.group("calLimit"));
-        final char gender = genderMatcher.group("gender").charAt(0);
+        final String heightData = heightMatcher.group("height");
+        final String weightData = weightMatcher.group("weight");
+        final String dailyCalorieLimitData = caloriesMatcher.group("calLimit");
+        final String genderData = genderMatcher.group("gender");
 
-        Height heightData = new Height(height);
-        Weight weightData = new Weight(weight);
-        Calories caloriesData = new Calories(dailyCalorieLimit);
-        Gender genderData = Gender.parseGender((String.valueOf(gender)));
+        try {
+            Height height = Height.parseHeight(heightData);
+            Weight weight = Weight.parseWeight(weightData);
+            Calories dailyCalorieLimit = Calories.parseCalories(dailyCalorieLimitData);
+            Gender gender = Gender.parseGender(genderData);
+            return new UserProfile(height, weight, dailyCalorieLimit, gender);
+        } catch (IllegalValueException e) {
+            handleCorruptedProfileFile(profilePath);
+            throw CONTENT_CORRUPTION_EXCEPTION;
+        }
 
-        return new UserProfile(heightData, weightData, caloriesData, genderData);
     }
 
     public static void handleCorruptedProfileFile(Path profilePath) throws IOException {

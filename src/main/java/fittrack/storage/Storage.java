@@ -189,11 +189,6 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + profilePath);
-        } catch (IllegalStorageValueException ive) {
-            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
-        } catch (IllegalValueException e) {
-            // TODO: Temporary code
-            throw new RuntimeException(e);
         }
     }
 
@@ -215,8 +210,6 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + mealListPath);
-        } catch (IllegalStorageValueException ive) {
-            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
 
@@ -238,8 +231,6 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + workoutListPath);
-        } catch (IllegalStorageValueException ive) {
-            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
 
@@ -261,8 +252,6 @@ public class Storage {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + stepListPath);
-        } catch (IllegalValueException ive) {
-            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
 
