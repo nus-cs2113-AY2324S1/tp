@@ -234,6 +234,7 @@ public class RecipeParser {
         return new RecipeIngredientList(ingredientList);
     }
 
+
     public static String parseFilterRecipeInput(String input) throws EssenFormatException {
         input = input.replace("recipe ", "");
         if (!input.contains("i/")) {
@@ -242,11 +243,18 @@ public class RecipeParser {
         return input.strip();
     }
 
+    /**
+     * Parse duration of a step from user input to minutes
+     * @param time duration of a step, in min/h
+     * @return int duration in minutes
+     * @throws EssenFormatException if unit of duration is not specified
+     */
     public static int parseStepsDuration(String time) throws EssenFormatException{
 
-        if (time.contains("minutes") || time.contains("mins")) {
+        if (time.contains("minutes") || time.contains("mins") || time.contains("min")) {
             time = time.replace("minutes", "")
                 .replace("mins", "")
+                .replace("min", "")
                 .trim();
             return Integer.parseInt(time);
         } else if (time.contains("hours") || time.contains("h") || time.contains("hour")) {
@@ -256,6 +264,7 @@ public class RecipeParser {
                 .trim();
             return (int) (Double.parseDouble(time)*60);
         } else {
+            System.out.println("Please specify unit of duration (min/h)");
             throw new EssenFormatException();
         }
 

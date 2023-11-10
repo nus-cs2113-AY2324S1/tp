@@ -41,7 +41,11 @@ public class RecipeStepList {
                 // step with tag only
                 step = this.createStepWithTag(stepString);
                 assert step != null : "Step is not initialised";
-            } else {
+            } else if (stepString.contains("d/")) {
+                // step with duration only
+                step = this.createStepWithDuration(stepString);
+                assert step != null : "Step is not initialised";
+            }else {
                 // only step description
                 step = new Step(stepString);
             }
@@ -65,6 +69,19 @@ public class RecipeStepList {
         return new Step(stepDescription, tag);
     }
 
+    public Step createStepWithDuration(String stepString) {
+
+        String[] stepStringSplit = stepString.split("d/");
+
+        // step description
+        String stepDescription = stepStringSplit[0].trim();
+
+        // get duration (in minutes)
+        String durationString = stepStringSplit[1];
+        int duration = Integer.parseInt(durationString);
+        return new Step(stepDescription, duration);
+    }
+
     public Step createStepWithTagAndDuration(String stepString) {
 
         // by implementation, if tag exists, it will be before duration
@@ -78,7 +95,7 @@ public class RecipeStepList {
         String tagValue = stepString.substring(tagFlag + 2, durationFlag).trim();
         Tag tag = this.obtainTag(tagValue);
 
-        // get duration
+        // get duration (in minutes)
         String durationString = stepString.substring(durationFlag + 2).trim();
         int duration = Integer.parseInt(durationString);
 

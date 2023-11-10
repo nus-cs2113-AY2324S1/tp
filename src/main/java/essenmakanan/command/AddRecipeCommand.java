@@ -48,6 +48,7 @@ public class AddRecipeCommand extends Command {
 
         String recipeTitle = "";
         String tag = null;
+        int recipeIndexToOverwrite = -1;
 
         int flagIndex;
         String typeFlag;
@@ -86,7 +87,7 @@ public class AddRecipeCommand extends Command {
                 int recipeIndex = recipes.getIndexOfRecipe(content.trim());
                 if (recipes.recipeExist(recipeIndex)) {
                     if (overwriteExistingRecipe()) {
-                        recipes.deleteRecipe(recipeIndex);
+                        recipeIndexToOverwrite = recipeIndex;
                     } else {
                         System.out.println("Operation cancelled!");
                         return;
@@ -142,6 +143,13 @@ public class AddRecipeCommand extends Command {
             case "d":
                 // add duration to the latest step
                 int duration = RecipeParser.parseStepsDuration(content);
+
+                // if step has 2 specified duration, throw error
+                if (stepsInString[stepsCounter-1].contains("d/")) {
+                    System.out.println("Please only enter one duration per step!");
+                    throw new EssenFormatException();
+                }
+
                 stepsInString[stepsCounter-1] = stepsInString[stepsCounter-1] + " d/" + duration;
                 break;
             default:
@@ -151,6 +159,9 @@ public class AddRecipeCommand extends Command {
         }
 
         Recipe newRecipe = new Recipe(recipeTitle, stepsInString, ingredientsInString);
+        if (recipeIndexToOverwrite != -1) {
+            recipes.deleteRecipe(recipeIndexToOverwrite);
+        }
         recipes.addRecipe(newRecipe);
         Ui.printAddRecipeSuccess(recipeTitle);
     }

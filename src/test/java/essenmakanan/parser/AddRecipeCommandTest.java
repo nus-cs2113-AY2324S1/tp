@@ -185,5 +185,15 @@ public class AddRecipeCommandTest {
         });
     }
 
+    @Test
+    public void addRecipe_stepsWithMultipleDuration_exceptionThrown() {
+        String userInput = "r/bread s/wash eggs d/1min d/1min i/egg,2,pc";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addValidRecipe();
+        });
+    }
+
 
 }
