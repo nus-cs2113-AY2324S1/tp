@@ -22,7 +22,11 @@ public class ShortcutParser {
             throw new EssenShortcutException();
         }
 
-        Double quantity = Double.parseDouble(shortcutDetails[1].strip());
+        double quantity = Double.parseDouble(shortcutDetails[1].strip());
+
+        if (quantity < 0 || (int) quantity == 0) {
+            throw new NumberFormatException();
+        }
 
         return new Shortcut(ingredientName, quantity);
     }

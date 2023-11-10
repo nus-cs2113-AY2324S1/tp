@@ -3,9 +3,9 @@ package essenmakanan.shortcut;
 public class Shortcut {
 
     private String ingredientName;
-    private Double quantity;
+    private double quantity;
 
-    public Shortcut(String ingredientName, Double quantity) {
+    public Shortcut(String ingredientName, double quantity) {
         this.ingredientName = ingredientName;
         this.quantity = quantity;
     }
@@ -14,7 +14,7 @@ public class Shortcut {
         return ingredientName;
     }
 
-    public Double getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
