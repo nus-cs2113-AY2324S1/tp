@@ -117,7 +117,16 @@ Set up a calorie goal to achieve. The goal are expected to help user accomplish 
 
 Format: `set AMOUNT on Date`
 
-The AMOUNT is in terms of **kcal**. Please use **DD/MM/YYYY** format for the date.
+The AMOUNT is in terms of **kcal**. Please follows the provided formats at the beginning of this guide.
+
+Example: set 1000 on 11/11/2023
+
+Expected outcome:
+```
+[Command entered:set 1000 on 11/11/2023]
+Nice! I have added the following goal to your goals list: 
+Consume 1000 kcal on Nov 11, 2023
+```
 
 
 ### `viewG` - View your current goal list
@@ -125,7 +134,11 @@ Look for the content of current goal list.
 
 Format: `viewG`
 
-Example:
+```
+Got it. I've added this task:
+[T][ ] read book
+Now you have 2 tasks in the list.
+```
 
 ### `deleteG` - Delete a goal from current goal list
 Remove a undersired goal from the goal list. Note that it is not encouraged to remove a goal from the goal list, unless the inserted goal contains errors or is near impossible to be accomplished.
