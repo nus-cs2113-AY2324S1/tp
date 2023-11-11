@@ -43,6 +43,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 ### Contributions to team-based tasks:
 
 * Submission of first draft of UG
+* Creating of demo video
 * Creating and assigning relevant issues in the issue tracker to teammates
 * Approving pull requests by team members
 
