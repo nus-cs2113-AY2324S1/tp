@@ -275,7 +275,7 @@ public class Parser implements ParserUtil {
      * @throws ParserException          if the input string does not match the constraints
      */
     private static ArrayList<Ingredient> parseIngredients(String ingredientsListString,
-                                                          boolean excludeRepeatedIngredients, Menu menu) throws IllegalArgumentException, ParserException {
+            boolean excludeRepeatedIngredients, Menu menu) throws IllegalArgumentException, ParserException {
         logger.info("Parsing ingredients...");
         String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -538,7 +538,8 @@ public class Parser implements ParserUtil {
         }
     }
 
-    private static void compareIngredientName(Ingredient newIngredient, Ingredient currentIngredient) throws ParserException {
+    private static void compareIngredientName(Ingredient newIngredient,
+            Ingredient currentIngredient) throws ParserException {
         if (currentIngredient.getName().equalsIgnoreCase(newIngredient.getName())) {
             compareUnits(newIngredient, currentIngredient);
         }

@@ -1,10 +1,8 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.CafeCtrl;
-import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
-import seedu.cafectrl.parser.exception.ParserException;
 import seedu.cafectrl.ui.Ui;
 import seedu.cafectrl.parser.Parser;
 
