@@ -2,15 +2,18 @@ package seedu.stocker.authentication;
 
 import seedu.stocker.ui.Ui;
 
-import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents a login system used for authentication of users.
@@ -74,7 +77,7 @@ public class LoginSystem {
             username = in.nextLine();
         }
 
-        while (username.trim().contains(":")){
+        while (username.trim().contains(":")) {
             interactor.showInvalidLoginCharacterMessage();
             username = in.nextLine();
         }
@@ -87,7 +90,7 @@ public class LoginSystem {
             password = in.nextLine();
         }
 
-        while(password.trim().contains(":")){
+        while (password.trim().contains(":")) {
             interactor.showInvalidLoginCharacterMessage();
             password = in.nextLine();
         }
@@ -198,14 +201,32 @@ public class LoginSystem {
     public void loadExistingUsers() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("./users.txt"));
         String line;
+
+        Pattern pattern = Pattern.compile(
+                "(.*):(.*)");
+
         while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(":", 2);
-            if (parts.length >= 2) {
-                String key = parts[0];
-                String value = parts[1];
-                users.put(key, value);
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.matches()) {
+                String[] parts = line.split(":", 2);
+                if (parts.length >= 2) {
+                    String key = parts[0];
+                    String value = parts[1];
+                    users.put(key, value);
+                }
+            } else {
+                System.out.println("Malicious changes were made, overwriting old user file,"
+                        + " please register new user to proceed");
+                FileWriter fw = new FileWriter("./users.txt", false);
+                PrintWriter pw = new PrintWriter(fw, false);
+                pw.flush();
+                pw.close();
+                fw.close();
+                users.clear();
+                break;
             }
         }
+
     }
 
     /**
@@ -217,6 +238,7 @@ public class LoginSystem {
      */
     public void run() throws IOException {
         loadExistingUsers();
+        interactor.showLoginMessage();
         String choice = authenticateUserChoice();
         if (choice.equals("register")) {
             newUserCreator();

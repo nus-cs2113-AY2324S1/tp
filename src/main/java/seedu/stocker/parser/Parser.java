@@ -30,12 +30,12 @@ import seedu.stocker.commands.FindVendorSupplyCommand;
 import seedu.stocker.commands.ListVendorSupplyCommand;
 import seedu.stocker.commands.DeleteVendorCommand;
 import seedu.stocker.commands.DeleteVendorSupplyCommand;
+import seedu.stocker.commands.ListSalesCommand;
+import seedu.stocker.commands.SaveSalesCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_NAME;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_DATE;
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_PRICE;
 
 
 public class Parser {
@@ -96,6 +96,12 @@ public class Parser {
 
         case DeleteVendorSupplyCommand.COMMAND_WORD:
             return prepareDeleteVendorSupplyCommand(arguments);
+
+        case ListSalesCommand.COMMAND_WORD:
+            return prepareListSalesCommand(arguments);
+
+        case SaveSalesCommand.COMMAND_WORD:
+            return prepareSaveSalesCommand(arguments);
 
         case CheckOutCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
@@ -196,21 +202,24 @@ public class Parser {
                 double sellingPrice = Double.parseDouble(matcher.group(5));
 
                 if (quantity < 1 || quantity > 999999999) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format("Quantity should be between 1 and 999999999."));
                 }
                 if (name.isEmpty()) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_NAME, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 if (serialNumber.isEmpty()) {
-                    return new IncorrectCommand("Serial number cannot be empty.");
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 // Check if the expiry date has a valid format
                 if (!isValidDateFormat(expiryDate)) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 // Check if sellingPrice is in the valid range (0.01 to 1000.00) and has up to 2 decimal places
                 if (sellingPrice < 0.01 || sellingPrice > 1000.00) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_PRICE, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format("Selling price should be between 0.01 and 1000.00."));
                 }
 
                 return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
@@ -305,7 +314,8 @@ public class Parser {
         if (matcher.matches() && matcher.groupCount() == 1) {
             String vendorName = matcher.group(1).trim();
             return new AddVendorCommand(vendorName);
-        } return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
+        }
+        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE));
     }
 
     private Command prepareDeleteVendorCommand(String args) {
@@ -314,8 +324,9 @@ public class Parser {
         if (matcher.matches() && matcher.groupCount() == 1) {
             String vendorName = matcher.group(1).trim();
             return new DeleteVendorCommand(vendorName);
-        }  return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteVendorCommand.MESSAGE_USAGE));
+        }
+        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteVendorCommand.MESSAGE_USAGE));
     }
 
     private Command prepareSetThresholdCommand(String args) {
@@ -340,7 +351,8 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*) /desc (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 2) {
-            String name = matcher.group(1).trim();;
+            String name = matcher.group(1).trim();
+            ;
             String description = matcher.group(2).trim();
             if (!name.isEmpty() && !description.isEmpty()) {
                 return new AddDescriptionCommand(name, description);
@@ -358,7 +370,8 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 1) {
-            String name = matcher.group(1).trim();;
+            String name = matcher.group(1).trim();
+            ;
             if (!name.isEmpty()) {
                 return new GetDescriptionCommand(name);
             } else {
@@ -467,6 +480,26 @@ public class Parser {
         } else {
             // Handle the case where extra arguments are provided for "help"
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareListSalesCommand(String args) {
+        // Check if there are no arguments for the "listSales" command
+        if (args.isEmpty()) {
+            return new ListSalesCommand();
+        } else {
+            // Handle the case where extra arguments are provided for "listSales"
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListSalesCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareSaveSalesCommand(String args) {
+        // Check if there are no arguments for the "saveSales" command
+        if (args.isEmpty()) {
+            return new SaveSalesCommand();
+        } else {
+            // Handle the case where extra arguments are provided for "saveSales"
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveSalesCommand.MESSAGE_USAGE));
         }
     }
 }

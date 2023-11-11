@@ -5,10 +5,12 @@ public class CartEntry {
     private String serialNumber;
     private long quantity;
     private double totalCost;
+    private Drug drug;
 
     public CartEntry(String serialNumber, long quantity) {
         this.serialNumber = serialNumber;
         this.quantity = quantity;
+        this.totalCost = calculateTotalCost();
     }
 
     public CartEntry(String serialNumber, long quantity, double totalCost) {
@@ -19,6 +21,23 @@ public class CartEntry {
 
     public String getSerialNumber() {
         return this.serialNumber;
+    }
+
+    public double getSellingPrice() {
+        if (drug != null) {
+            return this.drug.getSellingPrice();
+        } else {
+            // Handle the case where drug is null (you can return a default value or throw an exception).
+            return 0.0; // Default value, please adjust as needed.
+        }
+    }
+
+    public double calculateTotalCost() {
+        if (this.drug != null) {
+            return this.quantity * this.drug.getSellingPrice();
+        } else {
+            return 0.0;
+        }
     }
 
     public long getQuantity() {

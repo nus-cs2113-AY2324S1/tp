@@ -18,8 +18,6 @@ can get your inventory management tasks done faster than traditional GUI apps.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Stocker` from [here](https://github.com/AY2324S1-CS2113-T17-3/tp/releases).
 3. Copy the absolute filepath to where the jar file is
@@ -204,13 +202,14 @@ Example of usage:
 Expected outcome:
 
 ```
-|| removed : Panadol
-|| There are now 0 drugs in the system
+|| Drug removed from inventory: Panadol
 ```
 
 ### `list` - List all drug information that is being tracked by the system
 
 List all drug information that is being tracked by the system.
+
+- If a drug has an expired expiry date at any time, it will be indicated with an (E) next to its entry.
 
 Format:
 
@@ -224,22 +223,22 @@ Example of usage:
 Expected outcome:
 
 ```
-||  1. Name: Panadol, Expiry Date: 01/02/2024  Quantity: 300
-||
 || Listed all drugs in the inventory.
+|| 	1. Name: Panadol, Expiry date: 01/02/2023, Serial number: ABC123, Quantity: 52, Selling Price: 19.9 (E)
+|| 	2. Name: Dol, Expiry date: 01/02/2024, Serial number: DOL124, Quantity: 52, Selling Price: 19.9
 ```
 
-### `stocklevel` - List all drugs by quantity level in ascending order
+### `stockLevel` - List all drugs by quantity level in ascending order
 
 List all drugs by quantity level in ascending order.
 
 Format:
 
-stocklevel
+stockLevel
 
 Example of usage:
 
-`stocklevel
+`stockLevel
 `
 
 Expected outcome:
@@ -262,11 +261,9 @@ find /n panadol
 
 Example of usage:
 
-`find /n KEYWORD `
+`find /n Panadol `
 
 - The search is case-insensitive, meaning that "aspirin" will match "Aspirin."
-
-- The order of the keywords does not matter. For example, "Painkiller Relief" will match "Relief Painkiller."
 
 - Only the drug name is searched.
 
@@ -282,11 +279,11 @@ Expected outcome:
 
 Format:
 
-find /d sep
+find /d DATE
 
 Example of usage:
 
-`find /d KEYWORD`
+`find /d 01/02/2024`
 
 - Only the drug's expiry date is searched.
 
@@ -381,11 +378,11 @@ is booted up.
 
 Format:
 
-save
+saveDrugs
 
 Example of usage:
 
-`save`
+`saveDrugs`
 
 Expected outcome:
 
@@ -400,11 +397,11 @@ Drugs successfully saved.
 
 Format:
 
-addVendor DRUGNAME
+addVendor /v VENDOR_NAME
 
 Example of usage:
 
-`addVendor Moderna`
+`addVendor /v Moderna`
 
 Expected outcome:
 
@@ -412,18 +409,18 @@ Expected outcome:
 || New vendor added into the vendors list: Moderna
 ```
 
-### `deleteVendor` - deletes a vendor into list of vendors being tracked by system
+### `deleteVendor` - deletes a vendor from list of vendors tracked by the system
 
 - Deletes a vendor to be tracked by the system.
 - The vendor's name is not case-sensitive, meaning 'Pfizer' and 'pfizer' are treated as the same.
 
 Format:
 
-deleteVendor DRUGNAME
+deleteVendor /v VENDOR_NAME
 
 Example of usage:
 
-`deleteVendor Moderna`
+`deleteVendor /v Moderna`
 
 Expected outcome:
 
@@ -453,22 +450,26 @@ Expected outcome:
 
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
 
-- Adds a drug into a vendor's supply list to be tracked by the system, and vendor must already be added into the system.
-- If the drug already exists in the vendor's supply list, system will inform user
+- Adds a drug into a vendor's supply list to be tracked by the system
+  - Vendor must already be added into the system.
+  - If the drug already exists in the vendor's supply list, system will inform user
 
 Format:
 
-addVendorSupply VENDOR_NAME DRUG_NAME
+addVendorSupply /v VENDOR_NAME /n DRUG_NAME
 
 Example of usage:
 
-`addVendorSupply Moderna Paracetamol`
+`addVendorSupply /v Moderna /n Paracetamol`
 
 Expected outcome:
 
 ```
 || New drug added to moderna's supply list: paracetamol
 ```
+
+Note : As this serves as a catalogue for information related to vendor supply lists, drugs not currently tracked by the
+inventory can be added into the supply list.
 
 ### `listVendorSupply` - Displays the list of all drugs being supplied by a particular vendor.
 
@@ -480,12 +481,12 @@ listVendorSupply VENDOR_NAME
 
 Example of usage:
 
-`listVendorSupply Moderna`
+`listVendorSupply /v Moderna`
 
 Expected outcome:
 
 ```
-|| Drugs supplied by Moderna: paracetamol, panadol
+|| Drugs supplied by moderna: paracetamol, panadol
 ```
 
 ### `findVendorSupply` -Displays the list of all vendors that supply a particular drug.
@@ -494,11 +495,11 @@ Displays the list of all vendors that supply a particular drug.
 
 Format:
 
-findVendorSupply DRUG_NAME
+findVendorSupply /n DRUG_NAME
 
 Example of usage:
 
-`findVendorSupply paracetamol`
+`findVendorSupply /n paracetamol`
 
 Expected outcome:
 
@@ -506,17 +507,17 @@ Expected outcome:
 || Vendors supplying the drug paracetamol: moderna, apotheca
 ```
 
-### `addtocart` - Adds drug into current cart
+### `addToCart` - Adds drug into current cart
 
 Adds a drug in a specified quantity in the current cart.
 
 Format:
 
-addtocart /s SERIAL_NUMBER /q QUANTITY
+addToCart /s SERIAL_NUMBER /q QUANTITY
 
 Example of usage:
 
-`addtocart /s PANA01 /q 3
+`addToCart /s PANA01 /q 3
 `
 
 Expected outcome:
@@ -531,7 +532,7 @@ Lists all the added drugs, quantity, and total cost in the cart.
 
 Format:
 
-viewcart
+viewCart
 
 Example of usage:
 
@@ -541,7 +542,7 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Key : Panadole, Quantity: 10, Total Cost: $39.90
+|| 1. Key : Panadole, Quantity: 10
 ||
 || Listed all the content of your cart.
 || Total Cost of Items in Cart: $39.90
@@ -550,6 +551,9 @@ Expected outcome:
 ### `checkout` - Checks out the current cart
 
 Empty the current cart and retrieve all the specified drugs and quantity from the inventory
+
+- If after checkout, the quantity of a specific drug falls below the set threshold level, it triggers an
+  alert.
 
 Format:
 
@@ -566,18 +570,25 @@ Expected outcome:
 || The current cart has been checked out.
 ```
 
-### `setthreshold` - Set the threshold quantity for a drug
+Expected outcome with alert:
+
+```
+|| ALERT! Panadol is below the threshold level
+|| The current cart has been checked out.
+```
+
+### `setThreshold` - Set the threshold quantity for a drug
 
 Set the threshold quantity for a specific drug in your inventory. The threshold quantity is the minimum quantity of the
 drug that you want to keep in stock.
 
 Format:
 
-setthreshold /s [Serial number] /tq [Threshold Quantity]
+setThreshold /s [Serial number] /tq [Threshold Quantity]
 
 Example of usage:
 
-`setthreshold /s DOL002 /tq 50
+`setThreshold /s DOL002 /tq 50
 `
 
 Expected outcome:
@@ -586,18 +597,20 @@ Expected outcome:
 || Threshold quantity set for Doliprane: 50
 ```
 
-### `listthreshold` - List all drugs and their threshold levels
+### `listThreshold` - List all drugs and their threshold levels
 
 Retrieve a list of all drugs in your inventory and their corresponding threshold levels. The threshold level is the
-minimum quantity of each drug that you want to keep in stock.
+minimum quantity of each drug that you want to keep in stock. By default, if the user hasn't specified individual
+threshold levels for each
+drug, the standard threshold level for all drugs is set at 100.
 
 Format:
 
-listthreshold
+listThreshold
 
 Example of usage:
 
-`listthreshold
+`listThreshold
 `
 
 Expected outcome:
@@ -627,6 +640,9 @@ Expected outcome:
 ```
 || New drug description added for Panadol: Pain Relief
 ```
+
+Note : As this serves as a catalogue for information related to drug usage and their respective descriptions,
+drugs not currently tracked by the inventory can be added with a description here. Both lists are separate.
 
 ### `getDescription` - Retrieves the description of a particular drug.
 
@@ -684,19 +700,20 @@ Expected outcome:
 
 ## Command Summary
 
-- add : `add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY`
+- register : `register`
+- login : `login`
+- save : `saveDrugs`
+- help : `help`
+- add : `add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY /p PRICE`
 - delete : `delete /s SERIAL_NUMBER`
 - list : `list`
 - find : `find /n KEYWORD` or `find /d KEYWORD`
-- help : `help`
-- register : `register`
-- login : `login`
-- save : `save`
 - add Vendor : `addVendor`
 - list Vendor : `listVendors`
-- add Vendor Supply : `addVendorSupply VENDOR_NAME DRUG_NAME`
-- list Vendor Supply : `listVendorSupply VENDOR_NAME`
-- find Vendor Supply : `findVendorSupply DRUG_NAME`
+- add Vendor Supply : `addVendorSupply /v VENDOR_NAME /n DRUG_NAME`
+- list Vendor Supply : `listVendorSupply /v VENDOR_NAME`
+- find Vendor Supply : `findVendorSupply /n DRUG_NAME`
+- delete Vendor Supply : `deleteVendorSupply /v VENDOR_NAME /n DRUG_NAME`
 - add description : `addDescription /n DRUG_NAME /desc DESCRIPTION`
 - get description : `getDescription /n DRUG_NAME`
 - list descriptions : `listDescriptions`
