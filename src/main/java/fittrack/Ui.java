@@ -2,6 +2,7 @@ package fittrack;
 
 import fittrack.command.CommandResult;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -30,7 +31,12 @@ public class Ui {
      * @return user input as a line of string
      */
     public String scanNextLine() {
-        return in.nextLine();
+        try {
+            return in.nextLine();
+        } catch (NoSuchElementException e) {
+            // When user interrupts or inputs EOF
+            throw new ForceExitException();
+        }
     }
 
     /**
@@ -112,5 +118,12 @@ public class Ui {
 
     public void printException(Exception e) {
         System.out.println(e.getMessage());
+    }
+
+    public void printForceExit() {
+        System.out.println("You forced to quit. Exiting the app...");
+    }
+
+    public static class ForceExitException extends RuntimeException {
     }
 }

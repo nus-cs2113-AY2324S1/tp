@@ -42,9 +42,14 @@ public class FitTrack {
     }
 
     private void run() {
-        start();
-        loopCommandExecution();
-        end();
+        try {
+            start();
+            loopCommandExecution();
+            end();
+        } catch (Ui.ForceExitException e) {
+            save();
+            ui.printForceExit();
+        }
     }
 
     private void start() {
