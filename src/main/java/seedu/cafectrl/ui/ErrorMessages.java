@@ -44,8 +44,11 @@ public class ErrorMessages {
             + "it hasn't even made it to our menu yet!";
     public static final String ERROR_IN_PANTRY_STOCK_DATA = "Error in pantry stock data file! "
             + "Skipping this particular ingredient!";
-    public static final String UNIT_NOT_MATCHING = "Sorry, you have used a "
-            + "different unit for this ingredient!";
+    public static final String UNIT_NOT_MATCHING = ": Sorry, you have used a "
+            + "different unit for this ingredient!"
+            + "\nUnit used previously: ";
+    public static final String IGNORE_REMAINING_INGREDIENTS = "\nRemaining ingredients after this not added";
+    public static final String RETYPE_COMMAND_MESSAGE = "\nPlease re-enter command with appropriate units.";
     public static final String MENU_FILE_NOT_FOUND_MESSAGE = "Menu data was not found!\n"
             + "No worries, new menu has been created";
     public static final String PANTRY_FILE_NOT_FOUND_MESSAGE = "Pantry stock data was not found!\n"

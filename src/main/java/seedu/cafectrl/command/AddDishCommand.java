@@ -3,6 +3,7 @@ package seedu.cafectrl.command;
 import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.logging.Logger;

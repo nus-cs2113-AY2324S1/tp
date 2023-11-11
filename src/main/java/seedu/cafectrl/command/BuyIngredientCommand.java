@@ -1,8 +1,10 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.CafeCtrl;
+import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.parser.exception.ParserException;
 import seedu.cafectrl.ui.Ui;
 import seedu.cafectrl.parser.Parser;
 
@@ -54,7 +56,7 @@ public class BuyIngredientCommand extends Command {
             addIngredient();
             ui.printBuyIngredientHeader();
             ui.showToUser(ingredientString.strip());
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             logger.log(Level.WARNING, "BuyIngredientCommand unsuccessful: " + e.getMessage(), e);
             ui.showToUser(e.getMessage());
         }
