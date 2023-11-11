@@ -42,7 +42,7 @@ public class Visualizer {
      */
     public static void displayChart(String chart, HashMap<String, Double> cashFlowByCat, String type)
             throws FinancialPlannerException {
-        switch (chart) {
+        switch (chart.toLowerCase()) {
         case "pie":
             displayPieChart(cashFlowByCat, type);
             break;
@@ -145,7 +145,7 @@ public class Visualizer {
         radarChart.getStyler().setSeriesColors(sliceColors);
 
         String[] keys;
-        switch (type) {
+        switch (type.toLowerCase()) {
         case "income":
             keys = IncomeType.getNames(IncomeType.class);
             break;

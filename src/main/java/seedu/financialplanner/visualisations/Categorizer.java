@@ -29,7 +29,7 @@ public class Categorizer {
      */
     public static HashMap<String, Double> sortType(CashflowList cashflowList, String type)
             throws FinancialPlannerException {
-        switch (type) {
+        switch (type.toLowerCase()) {
         case "expense":
             logger.log(Level.INFO, "categorizing expenses");
             return sortExpenses(cashflowList);
