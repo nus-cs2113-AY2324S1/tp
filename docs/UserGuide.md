@@ -409,7 +409,7 @@ Expected outcome:
 || New vendor added into the vendors list: Moderna
 ```
 
-### `deleteVendor` - deletes a vendor into list of vendors being tracked by system
+### `deleteVendor` - deletes a vendor from list of vendors tracked by the system
 
 - Deletes a vendor to be tracked by the system.
 - The vendor's name is not case-sensitive, meaning 'Pfizer' and 'pfizer' are treated as the same.
@@ -451,8 +451,8 @@ Expected outcome:
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
 
 - Adds a drug into a vendor's supply list to be tracked by the system
-    - Vendor must already be added into the system.
-    - If the drug already exists in the vendor's supply list, system will inform user
+  - Vendor must already be added into the system.
+  - If the drug already exists in the vendor's supply list, system will inform user
 
 Format:
 
