@@ -443,12 +443,14 @@ List of questions: <br>
 
 ### Find Command - Look for a matching question
 
-QuizHub supports searching for specific questions, by searching matching keywords
-in the format
+#### Brief Description of Find Command
+QuizHub supports searching for specific questions, by searching matching keywords. 
 
+#### Command Syntax of Find Command
 `find /[description]` OR `find /[module]`
-i.e. `find /water buffalo`, `find /CS2113`
+i.e. `find /description buffalo`, `find /module CS2113`
 
+#### Implementation of Find Command
 This command is passed to the corresponding QuestionList where the `searchList` method
 is called. 
 This method go down the existing QuestionList of questions and use the Java contains method
@@ -457,6 +459,28 @@ to determine if the search term is located that question. If the contains method
 for a given question, that question's contents and index will be copied to a 
 new ArrayList of questions, and subsequently print them.
 
+#### Expected invalid commands for Find Command
+List of questions: <br>
+1: [S][ ] New description / \\exitquiz | number | EASY <br>
+2: [M][ ] question2 / 1.4 / 2 / 3 / 1.6 / 3 | number | EASY <br>
+3: [S][ ] What is 2+2? / 4 | Math | EASY <br>
+4: [S][ ] Who wrote Hamlet? / Shakespeare | Literature | HARD <br>
+5: [S][ ] easy / easy | easy | EASY <br>
+- `find /topic Literature` 
+  - Please format your input as find /description [description] or find /module [module]!
+  - Reason: using incorrect keyword `/topic` instead of `/module`
+- `find /module Literature extraArgument`
+  - Here are questions that matched your search:
+    No results found :< Check your keyword is correct?
+  - Reason: the module that's read will be `Literature extraArgument` and there's none matching that
+- `find description question2`
+  - Ono! You did not indicate if you are searching by description or module :<
+    Please format your input as find /description [description] or find /module [module]!
+  - Reason: The command does not use the required prefix '/' before the criteria ('description').
+- `find /description /module Literature`
+  - Here are questions that matched your search:
+    No results found :< Check your keyword is correct?
+  - Reason: Program does not support find using both /module and /description simultaneously
 <hr>
 
 ### Edit Command - Edit Question / Answer
