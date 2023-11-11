@@ -21,20 +21,18 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        String HelpMsg = HelpCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += LogCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += DeleteLogCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += UpdateLogCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += ViewLogCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += GoalCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += GoalCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += DeleteLogCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += ViewGoalCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += AchieveGoalCommand.MESSAGE_USAGE + "\n";
-        HelpMsg += AchievementCommand.MESSAGE_USAGE;
 
         return new CommandResult(
-                HelpMsg
+                HelpCommand.MESSAGE_USAGE
+                + " \n" + LogCommand.MESSAGE_USAGE
+                + "\n" + DeleteLogCommand.MESSAGE_USAGE
+                + "\n" + UpdateLogCommand.MESSAGE_USAGE
+                + "\n" + ViewLogCommand.MESSAGE_USAGE
+                + "\n" + GoalCommand.MESSAGE_USAGE
+                + "\n" + DeleteLogCommand.MESSAGE_USAGE
+                + "\n" + ViewGoalCommand.MESSAGE_USAGE
+                + "\n" + AchieveGoalCommand.MESSAGE_USAGE
+                + "\n" + AchievementCommand.MESSAGE_USAGE
 
         //                        + "\n" + DeleteCommand.MESSAGE_USAGE
         //                        + "\n" + ClearCommand.MESSAGE_USAGE

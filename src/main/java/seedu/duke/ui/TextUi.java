@@ -16,6 +16,7 @@ import java.util.Scanner;
 import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.Goal;
+import seedu.duke.data.GoalList;
 import seedu.duke.data.Printable;
 
 /**
@@ -226,13 +227,13 @@ public class TextUi {
         if (numberOfGoal == 0) {
             return "Oh not! You don't have any goal to achieve currently.";
         }
-        StringBuilder Sb = new StringBuilder();
-        Sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
         for (int i = 0; i < numberOfGoal; i++){
-            Sb.append(i + 1).append(". ").append(Duke.goalList.getGoal(i)).append("\n");
+            sb.append(i + 1).append(". ").append(Duke.goalList.getGoal(i)).append("\n");
         }
 
-        return Sb.toString();
+        return sb.toString();
     }
 
     /**
@@ -244,13 +245,34 @@ public class TextUi {
         if (numberOfGoal == 0) {
             return "Add oil! There is no achievement found.";
         }
-        StringBuilder Sb = new StringBuilder();
-        Sb.append("Congratulation! See your achievements below: \n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Congratulation! See your achievements below: \n");
         for (int i = 0; i < numberOfGoal; i++){
-            Sb.append(i + 1).append(". [A]").append(Duke.achievedGoals.getGoal(i)).append("\n");
+            sb.append(i + 1).append(". [A]").append(Duke.achievedGoals.getGoal(i)).append("\n");
         }
 
-        return Sb.toString();
+        return sb.toString();
+    }
+
+    /**
+     * This method return content of goal list in any goalList object
+     * It is typically used to overwrite save file whenever change in goal records
+     * @param goals a GoalList object
+     * @return String containing goal information of the goal object
+     */
+    public static String contentOfGoalList(GoalList goals) {
+        if (goals.getGoalCount() == 0) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < goals.getGoalCount(); i++){
+            sb.append(goals.getGoal(i)).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public static String buildingFileMsg() {
+        return "Building new save file...\n" + "Building new file succeed!";
     }
 
 }

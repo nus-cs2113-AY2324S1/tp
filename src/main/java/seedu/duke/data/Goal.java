@@ -1,6 +1,5 @@
 package seedu.duke.data;
 
-import seedu.duke.data.Date;
 import seedu.duke.data.exception.InvalidDateException;
 
 
