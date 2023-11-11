@@ -34,8 +34,6 @@ public class ErrorMessages {
             + "Type 'help' to view the accepted list of commands";
     public static final String INVALID_DISH_INDEX = "Do we even have this dish? "
             + "Double check the index of the dish you wanna modify!";
-    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
-            + "for buy ingredient command.";
     public static final String INVALID_ADD_ORDER_FORMAT_MESSAGE = "Error: Incorrect format "
             + "for the add order command.";
     public static final String DATA_FOLDER_NOT_FOUND_MESSAGE = "Data Folder was not found!\nIt's ok... "
