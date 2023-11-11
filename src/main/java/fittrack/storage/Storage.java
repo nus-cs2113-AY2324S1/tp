@@ -108,8 +108,9 @@ public class Storage {
      * @throws IOException error
      */
     public void saveProfile(UserProfile userProfile) throws IOException {
+        assert userProfile != null;
         FileWriter file = new FileWriter(PROFILE_FILE_PATH);
-        file.write(userProfile.toString() + "\n");
+        file.write(userProfile + "\n");
         file.close();
     }
 
@@ -119,6 +120,7 @@ public class Storage {
      * @throws IOException error
      */
     public void saveMeals(MealList mealList) throws IOException {
+        assert mealList != null;
         ArrayList<Meal> mealArr = mealList.getMealList();
         FileWriter file = new FileWriter(MEAL_LIST_FILE_PATH);
         for (Meal m : mealArr) {
@@ -133,6 +135,7 @@ public class Storage {
      * @throws IOException error
      */
     public void saveWorkouts(WorkoutList workoutList) throws IOException {
+        assert workoutList != null;
         ArrayList<Workout> workoutArr = workoutList.getWorkoutList();
         FileWriter file = new FileWriter(WORKOUT_LIST_FILE_PATH);
         for (Workout w : workoutArr) {
@@ -147,6 +150,7 @@ public class Storage {
      * @throws IOException error
      */
     public void saveSteps(StepList stepList) throws IOException {
+        assert stepList != null;
         ArrayList<Step> stepArr = stepList.getStepList();
         FileWriter file = new FileWriter(STEP_LIST_FILE_PATH);
         for (Step s : stepArr) {
@@ -165,10 +169,18 @@ public class Storage {
      */
     public void save(UserProfile userProfile, MealList mealList, WorkoutList workoutList, StepList stepList)
             throws IOException {
-        saveProfile(userProfile);
-        saveMeals(mealList);
-        saveWorkouts(workoutList);
-        saveSteps(stepList);
+        if (userProfile != null) {
+            saveProfile(userProfile);
+        }
+        if (mealList != null) {
+            saveMeals(mealList);
+        }
+        if (workoutList != null) {
+            saveWorkouts(workoutList);
+        }
+        if (stepList != null) {
+            saveSteps(stepList);
+        }
     }
 
     /**

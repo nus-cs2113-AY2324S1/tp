@@ -25,11 +25,11 @@ public class StorageTest {
     }
 
     @Test
-    public void save_nullAddressBook_exceptionThrown() throws Exception {
+    public void save_nullAddressBook_exceptionThrown() {
         Storage storage = new Storage();
-        assertThrows(NullPointerException.class, () -> storage.saveProfile(null));
-        assertThrows(NullPointerException.class, () -> storage.saveMeals(null));
-        assertThrows(NullPointerException.class, () -> storage.saveWorkouts(null));
+        assertThrows(AssertionError.class, () -> storage.saveProfile(null));
+        assertThrows(AssertionError.class, () -> storage.saveMeals(null));
+        assertThrows(AssertionError.class, () -> storage.saveWorkouts(null));
     }
 
     private Storage getStorage(String profileFileName, String mealFileName, String workoutFileName, String stepFileName)
