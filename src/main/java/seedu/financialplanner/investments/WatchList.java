@@ -62,7 +62,7 @@ public class WatchList {
      *
      * @param key
      * @param stockToCheck
-     * @return
+     * @return isValid
      */
     public boolean checkValidStock(String key, Stock stockToCheck) {
         boolean isValid = true;
@@ -81,7 +81,7 @@ public class WatchList {
     /**
      * Initialize a new watchlist stocks hashmap with base stocks (AAPL and GOOGL)
      *
-     * @return
+     * @return Hashmap of base stocks
      */
     public HashMap<String, Stock> initalizeNewWatchlist() {
         HashMap<String, Stock> baseStocks = new HashMap<>();
@@ -101,7 +101,7 @@ public class WatchList {
     /**
      * Method to get the watchlist singleton or create one if it does not exist and returns it
      *
-     * @return
+     * @return watchlist singleton
      */
     public static WatchList getInstance() {
         if (watchlist == null) {
@@ -124,7 +124,7 @@ public class WatchList {
      * Checks the watchlist stocks hashmap for stocks that are expired meaning their data should be refreshed using
      * the api. Returns a string of stocks that are expired separated by a comma
      *
-     * @return
+     * @return String containing stocks that needs to be queried
      */
     public StringBuilder getExpiredStocks() {
         StringBuilder queryStocks = new StringBuilder();

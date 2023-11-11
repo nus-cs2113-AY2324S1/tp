@@ -323,7 +323,7 @@ public abstract class LoadData {
     /**
      * Load the watchlist.json file into the application on startup as a hashmap.
      *
-     * @return
+     * @return Hashmap of loaded stocks
      */
     public static HashMap<String, Stock> loadWatchList(String filePath) {
         Ui ui = Ui.getInstance();

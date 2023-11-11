@@ -148,7 +148,7 @@ public class Stock {
     /**
      * toString method is override to output its symbol appended with a comma
      *
-     * @return
+     * @return string representing stock
      */
     @Override
     public String toString() {
