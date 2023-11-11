@@ -47,7 +47,7 @@ public class AddIngredientCommandTest {
     }
 
     @Test
-    public void addIngredient_negativeValue_nothingCreated(){
+    public void addIngredient_negativeQuantity_nothingCreated(){
 
         String userInput = "i/cheese,-2,pc";
         addIngredientCommand = new AddIngredientCommand(userInput, ingredients);
