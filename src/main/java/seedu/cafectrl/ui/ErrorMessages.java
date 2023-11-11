@@ -5,6 +5,8 @@ import seedu.cafectrl.command.EditPriceCommand;
 public class ErrorMessages {
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
     public static final String NULL_NAME_DETECTED_MESSAGE = "Error: Null dish name detected";
+    public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
+
     public static final String LARGE_PRICE_MESSAGE = "Wow! This dish must taste heavenly "
             + "to cost that much money!\nBut it might be too expensive for normal people like me :(\n"
             + "Maybe you should keep it below $1000000 instead?";
@@ -13,7 +15,8 @@ public class ErrorMessages {
             + "the minimum price acceptable is $0.00!";
     public static final String INVALID_DISH_NAME_LENGTH_MESSAGE = "Error: Your dish name length is too long!\n"
             + "Please ensure your dish name is less than 35 characters.";
-    public static final String INVALID_INGREDIENT_NAME_LENGTH_MESSAGE = "Error: Your dish name length is too long!";
+    public static final String INVALID_INGREDIENT_NAME_LENGTH_MESSAGE = "Error: Your ingredient name length is "
+            + "too long!\nPlease ensure your ingredient name is less than 35 characters.";
     public static final String MISSING_ARGUMENT_FOR_EDIT_PRICE = "Error: Missing arguments "
             + "for edit price command.\n"
             + EditPriceCommand.MESSAGE_USAGE;
@@ -76,7 +79,6 @@ public class ErrorMessages {
             + "did you forget to include it in your command?";
     public static final String INVALID_MENU_DATA = "menu.txt: Invalid format, this dish will be removed -> ";
 
-    public static final String NAME_CANNOT_CONTAIN_SPECIAL_CHAR = "Is there a special character"
-            + "in the name?\n I have poor memory and am unable to remember names with special characters"
-            + ",\nso could you remove them?";
+    public static final String NAME_CANNOT_CONTAIN_SPECIAL_CHAR = "Is there a special character in the name?\n"
+            + "I have poor memory and am unable to remember names with special characters, could you remove them?";
 }
