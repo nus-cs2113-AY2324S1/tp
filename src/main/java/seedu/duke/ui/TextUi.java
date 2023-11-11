@@ -235,6 +235,10 @@ public class TextUi {
         return Sb.toString();
     }
 
+    /**
+     * Similar to show Goal List. This method is used to list out all achieved goal in record.
+     * @return String containing all achieved goal
+     */
     public static String showAchievement() {
         int numberOfGoal = Duke.achievedGoals.getGoalCount();
         if (numberOfGoal == 0) {

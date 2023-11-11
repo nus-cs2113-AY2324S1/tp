@@ -59,7 +59,7 @@ public class DeleteLogCommand extends Command {
             feedbackToUser = Duke.exerciseLog.removeExercise(month, day, exerciseName.trim(), caloriesBurned) ?
                     "Successfully removed exercise!" :
                     "Could not find the specified exercise!";
-            Duke.storage.removeExerciseFromFile(month, day, exerciseName.trim().split(" "), caloriesBurned);
+            Duke.exerciseLogStorage.removeExerciseFromFile(month, day, exerciseName.trim().split(" "), caloriesBurned);
 
             return new CommandResult(feedbackToUser);
         } catch (NumberFormatException e) {

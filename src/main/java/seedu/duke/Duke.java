@@ -26,11 +26,11 @@ public class Duke {
     public static GoalList goalList = new GoalList();
     public static GoalList achievedGoals = new GoalList();
     public static Log exerciseLog = new Log();
-    public static StorageFile storage;
+    public static StorageFile exerciseLogStorage;
     static ArrayList<Meal> meals = new ArrayList<Meal>();
     private TextUi ui;
     private String dirPath = "data";
-    private String textFilePath = "./data/ExerciseLog.txt";
+    private String exerciseLogFilePath = "./data/ExerciseLog.txt";
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
     }
@@ -54,8 +54,8 @@ public class Duke {
     private void start(String[] launchArgs) {
         try {
             this.ui = new TextUi();
-            this.storage = StorageFile.initializeStorage(dirPath, textFilePath);
-            storage.checkForTextFile(exerciseLog);
+            this.exerciseLogStorage = StorageFile.initializeStorage(dirPath, exerciseLogFilePath);
+            exerciseLogStorage.checkForTextFile(exerciseLog);
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
             MealCommand.setMeals(meals);
         } catch (Exception e) { // TODO: change to specific storage exceptions later
