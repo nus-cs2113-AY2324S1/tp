@@ -127,7 +127,7 @@ public class RecipeList {
     }
 
     public void editRecipe(Recipe existingRecipe, String[] editDetails) throws EssenFormatException {
-        for (int i = 1; i < editDetails.length; i++) {
+        for (int i = 0; i < editDetails.length; i++) {
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
 
@@ -147,7 +147,6 @@ public class RecipeList {
                 Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
                 existingStep.setDescription(newStep);
                 break;
-
             default:
                 throw new EssenFormatException();
             }

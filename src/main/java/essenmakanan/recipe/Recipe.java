@@ -99,4 +99,10 @@ public class Recipe {
 
     }
 
+    public static Recipe createRecipeStub(String title) {
+        String[] recipeSteps = {"step1", "step2"};
+        String[] recipeIngredients = {"i/flour,200,g", "i/egg,2,pc"};
+        return new Recipe(title, recipeSteps, recipeIngredients);
+    }
+
 }

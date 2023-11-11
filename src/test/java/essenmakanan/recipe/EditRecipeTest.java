@@ -15,13 +15,14 @@ public class EditRecipeTest {
     @BeforeEach
     public void setUp() {
         recipes = new RecipeList();
-        recipeToEdit = new Recipe("Bread", new String[]{"Prepare", "Bake"});
+        recipeToEdit = new Recipe("Bread", new String[]{"Prepare", "Bake"},
+                new String[]{"i,Flour,200,g", "i,Egg,2,pc"});
         recipes.addRecipe(recipeToEdit);
     }
 
     @Test
     public void editRecipeName_validInput_editSuccess() {
-        String[] editDetails = {"edit", "n/Breads"};
+        String[] editDetails = {"n/Breads"};
         try {
             recipes.editRecipe(recipeToEdit, editDetails);
         } catch (EssenFormatException e) {
@@ -33,7 +34,7 @@ public class EditRecipeTest {
 
     @Test
     public void editRecipeStep_validInput_editSuccess() {
-        String[] editDetails = {"edit", "s/1,Prepare the dough"};
+        String[] editDetails = {"s/1,Prepare the dough"};
         try {
             recipes.editRecipe(recipeToEdit, editDetails);
         } catch (EssenFormatException e) {
@@ -46,7 +47,8 @@ public class EditRecipeTest {
 
     @Test
     public void editRecipeNameAndStep_validInput_editSuccess() {
-        String[] editDetails = {"edit", "n/Breads", "s/1,Prepare the dough"};
+        // recipe title with one word
+        String[] editDetails = {"n/Breads", "s/1,Prepare the dough"};
         try {
             recipes.editRecipe(recipeToEdit, editDetails);
         } catch (EssenFormatException e) {
@@ -66,4 +68,22 @@ public class EditRecipeTest {
             recipes.editRecipe(recipeToEdit, editDetails);
         });
     }
+
+
+    /*@Test
+    public void editRecipeNameAndSteps_validInput_editSuccess() {
+        // recipe title with multiple word
+        String[] editDetails = {"edit", "n/white bread", "s/1,Prepare the dough"};
+        try {
+            recipes.editRecipe(recipeToEdit, editDetails);
+        } catch (EssenFormatException e) {
+            e.handleException();
+        }
+
+        String newStep = recipeToEdit.getRecipeSteps().getStepByIndex(0).getDescription();
+        assertEquals("Prepare the dough", newStep);
+        assertEquals("Breads", recipeToEdit.getTitle());
+    }*/
+
+
 }
