@@ -228,17 +228,17 @@ Expected outcome:
 || Listed all drugs in the inventory.
 ```
 
-### `stocklevel` - List all drugs by quantity level in ascending order
+### `stockLevel` - List all drugs by quantity level in ascending order
 
 List all drugs by quantity level in ascending order.
 
 Format:
 
-stocklevel
+stockLevel
 
 Example of usage:
 
-`stocklevel
+`stockLevel
 `
 
 Expected outcome:
@@ -281,11 +281,11 @@ Expected outcome:
 
 Format:
 
-find /d sep
+find /d DATE
 
 Example of usage:
 
-`find /d KEYWORD`
+`find /d 01/02/2024`
 
 - Only the drug's expiry date is searched.
 
@@ -380,11 +380,11 @@ is booted up.
 
 Format:
 
-save
+saveDrugs
 
 Example of usage:
 
-`save`
+`saveDrugs`
 
 Expected outcome:
 
@@ -399,11 +399,11 @@ Drugs successfully saved.
 
 Format:
 
-addVendor DRUGNAME
+addVendor /v VENDOR_NAME
 
 Example of usage:
 
-`addVendor Moderna`
+`addVendor /v Moderna`
 
 Expected outcome:
 
@@ -418,11 +418,11 @@ Expected outcome:
 
 Format:
 
-deleteVendor DRUGNAME
+deleteVendor /v VENDOR_NAME
 
 Example of usage:
 
-`deleteVendor Moderna`
+`deleteVendor /v Moderna`
 
 Expected outcome:
 
@@ -508,17 +508,17 @@ Expected outcome:
 || Vendors supplying the drug paracetamol: moderna, apotheca
 ```
 
-### `addtocart` - Adds drug into current cart
+### `addToCart` - Adds drug into current cart
 
 Adds a drug in a specified quantity in the current cart.
 
 Format:
 
-addtocart /s SERIAL_NUMBER /q QUANTITY
+addToCart /s SERIAL_NUMBER /q QUANTITY
 
 Example of usage:
 
-`addtocart /s PANA01 /q 3
+`addToCart /s PANA01 /q 3
 `
 
 Expected outcome:
@@ -533,7 +533,7 @@ Lists all the added drugs, quantity, and total cost in the cart.
 
 Format:
 
-viewcart
+viewCart
 
 Example of usage:
 
@@ -568,18 +568,18 @@ Expected outcome:
 || The current cart has been checked out.
 ```
 
-### `setthreshold` - Set the threshold quantity for a drug
+### `setThreshold` - Set the threshold quantity for a drug
 
 Set the threshold quantity for a specific drug in your inventory. The threshold quantity is the minimum quantity of the
 drug that you want to keep in stock.
 
 Format:
 
-setthreshold /s [Serial number] /tq [Threshold Quantity]
+setThreshold /s [Serial number] /tq [Threshold Quantity]
 
 Example of usage:
 
-`setthreshold /s DOL002 /tq 50
+`setThreshold /s DOL002 /tq 50
 `
 
 Expected outcome:
@@ -588,18 +588,18 @@ Expected outcome:
 || Threshold quantity set for Doliprane: 50
 ```
 
-### `listthreshold` - List all drugs and their threshold levels
+### `listThreshold` - List all drugs and their threshold levels
 
 Retrieve a list of all drugs in your inventory and their corresponding threshold levels. The threshold level is the
 minimum quantity of each drug that you want to keep in stock.
 
 Format:
 
-listthreshold
+listThreshold
 
 Example of usage:
 
-`listthreshold
+`listThreshold
 `
 
 Expected outcome:
@@ -688,14 +688,14 @@ Expected outcome:
 
 ## Command Summary
 
-- add : `add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY`
+- add : `add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY /p PRICE`
 - delete : `delete /s SERIAL_NUMBER`
 - list : `list`
 - find : `find /n KEYWORD` or `find /d KEYWORD`
 - help : `help`
 - register : `register`
 - login : `login`
-- save : `save`
+- save : `saveDrugs`
 - add Vendor : `addVendor`
 - list Vendor : `listVendors`
 - add Vendor Supply : `addVendorSupply /v VENDOR_NAME /n DRUG_NAME`
