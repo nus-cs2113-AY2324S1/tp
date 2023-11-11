@@ -33,9 +33,7 @@ import seedu.stocker.commands.DeleteVendorSupplyCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_NAME;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_DATE;
-import static seedu.stocker.common.Messages.MESSAGE_INVALID_PRICE;
 
 
 public class Parser {
@@ -196,21 +194,24 @@ public class Parser {
                 double sellingPrice = Double.parseDouble(matcher.group(5));
 
                 if (quantity < 1 || quantity > 999999999) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_QUANTITY, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format("Quantity should be between 1 and 999999999."));
                 }
                 if (name.isEmpty()) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_NAME, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 if (serialNumber.isEmpty()) {
-                    return new IncorrectCommand("Serial number cannot be empty.");
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 // Check if the expiry date has a valid format
                 if (!isValidDateFormat(expiryDate)) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 // Check if sellingPrice is in the valid range (0.01 to 1000.00) and has up to 2 decimal places
                 if (sellingPrice < 0.01 || sellingPrice > 1000.00) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_PRICE, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format("Selling price should be between 0.01 and 1000.00."));
                 }
 
                 return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
@@ -317,7 +318,7 @@ public class Parser {
             return new DeleteVendorCommand(vendorName);
         }
         return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteVendorCommand.MESSAGE_USAGE));
+                DeleteVendorCommand.MESSAGE_USAGE));
     }
 
     private Command prepareSetThresholdCommand(String args) {
@@ -342,7 +343,8 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*) /desc (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 2) {
-            String name = matcher.group(1).trim();;
+            String name = matcher.group(1).trim();
+            ;
             String description = matcher.group(2).trim();
             if (!name.isEmpty() && !description.isEmpty()) {
                 return new AddDescriptionCommand(name, description);
@@ -360,7 +362,8 @@ public class Parser {
         Pattern pattern = Pattern.compile("/n (.*)");
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 1) {
-            String name = matcher.group(1).trim();;
+            String name = matcher.group(1).trim();
+            ;
             if (!name.isEmpty()) {
                 return new GetDescriptionCommand(name);
             } else {
