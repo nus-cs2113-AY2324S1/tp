@@ -64,7 +64,7 @@ public class Categorizer {
      * Method to sort the incomes of the cash flow list into different categories and return the sorted hashmap
      *
      * @param cashflowList
-     * @return Hashmap containing income sorted according to categories
+     * @return Hashmap containing income sorted according to category
      */
     public static HashMap<String, Double> sortIncome(CashflowList cashflowList) {
         HashMap<String, Double> incomeByCat = new HashMap<>();
