@@ -30,6 +30,8 @@ import seedu.stocker.commands.FindVendorSupplyCommand;
 import seedu.stocker.commands.ListVendorSupplyCommand;
 import seedu.stocker.commands.DeleteVendorCommand;
 import seedu.stocker.commands.DeleteVendorSupplyCommand;
+import seedu.stocker.commands.ListSalesCommand;
+import seedu.stocker.commands.SaveSalesCommand;
 
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.stocker.common.Messages.MESSAGE_INVALID_QUANTITY;
@@ -94,6 +96,12 @@ public class Parser {
 
         case DeleteVendorSupplyCommand.COMMAND_WORD:
             return prepareDeleteVendorSupplyCommand(arguments);
+
+        case ListSalesCommand.COMMAND_WORD:
+            return prepareListSalesCommand(arguments);
+
+        case SaveSalesCommand.COMMAND_WORD:
+            return prepareSaveSalesCommand(arguments);
 
         case CheckOutCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
@@ -472,6 +480,26 @@ public class Parser {
         } else {
             // Handle the case where extra arguments are provided for "help"
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareListSalesCommand(String args) {
+        // Check if there are no arguments for the "listSales" command
+        if (args.isEmpty()) {
+            return new ListSalesCommand();
+        } else {
+            // Handle the case where extra arguments are provided for "listSales"
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListSalesCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command prepareSaveSalesCommand(String args) {
+        // Check if there are no arguments for the "saveSales" command
+        if (args.isEmpty()) {
+            return new SaveSalesCommand();
+        } else {
+            // Handle the case where extra arguments are provided for "saveSales"
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveSalesCommand.MESSAGE_USAGE));
         }
     }
 }
