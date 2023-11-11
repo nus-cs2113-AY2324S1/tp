@@ -3,10 +3,20 @@ package seedu.cafectrl.ui;
 import seedu.cafectrl.command.EditPriceCommand;
 
 public class ErrorMessages {
-    public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
+    public static final String INVALID_ADD_DISH_FORMAT = "Error: Incorrect format for the add command.\n";
+    public static final String INVALID_INGREDIENT_QTY_FORMAT = "Ingredient Qty is in the wrong format, "
+            + "please use the format qty/<VALUE><UNIT> where VALUE is an integer";
     public static final String NULL_NAME_DETECTED_MESSAGE = "Error: Null dish name detected";
     public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
-
+    public static final String REPEATED_NAME_ARGUMENT = "Error: multiple 'name/' argument detected";
+    public static final String REPEATED_PRICE_ARGUMENT = "Error: multiple 'price/' argument detected";
+    public static final String REPEATED_INGREDIENT_ARGUMENT = "Error: multiple 'ingredient/' argument detected, "
+            + "perhaps you forgot to put a ',' somewhere";
+    public static final String REPEATED_QTY_ARGUMENT = "Error: multiple 'qty/' argument detected, "
+            + "perhaps you forgot to put a ',' somewhere";
+    public static final String MISSING_DISH_NAME = "Seems like you forgot to add the dish name";
+    public static final String MISSING_INGREDIENT_NAME = "Seems like you forgot to add the ingredient name "
+            + "for the ingredient(s)";
     public static final String LARGE_PRICE_MESSAGE = "Wow! This dish must taste heavenly "
             + "to cost that much money!\nBut it might be too expensive for normal people like me :(\n"
             + "Maybe you should keep it below $1000000 instead?";

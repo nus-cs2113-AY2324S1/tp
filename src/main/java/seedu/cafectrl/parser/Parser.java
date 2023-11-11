@@ -47,14 +47,20 @@ public class Parser implements ParserUtil {
 
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
-    private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>.*) price/(?<dishPrice>\\s*\\S*)\\s+(?<ingredients>ingredient/.*)";
+    private static final String ADD_ARGUMENT_FORMAT_REGEX = "name/(?<dishName>.*) price/(?<dishPrice>\\s*\\S*)\\s+(?<ingredients>ingredient/.*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
     private static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
     private static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    private static final String INGREDIENT_ARGUMENT_STRING = "\\s*ingredient/(?<ingredientName>.*) qty/\\s*(?<ingredientQty>.*)\\s*";
+    private static final String INGREDIENT_ARGUMENT_FORMAT_REGEX = "\\s*ingredient/(?<ingredientName>.*) qty/\\s*(?<ingredientQty>.*)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
+    public static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)(?<unit>[a-zA-z]*)\\s*$";
+    private static final String INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL = "value";
+    private static final String INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL = "unit";
+    public static final String ADD_DISH_NAME_ARGUMENT = "name/";
+    public static final String ADD_DISH_PRICE_ARGUMENT = "price/";
+    public static final String INGREDIENT_ARGUMENT = "ingredient/";
+    public static final String QTY_ARGUMENT = "qty/";
     private static final String INGREDIENT_DIVIDER_REGEX = ",";
 
     /** Add Order Command Handler Patterns*/
@@ -74,6 +80,7 @@ public class Parser implements ParserUtil {
     private static final int MAX_QTY = 1000000;
     private static final String GRAMS_UNIT = "g";
     private static final String ML_UNIT = "ml";
+    public static final String PRICE_INPUT_REGEX = "^-?[0-9]\\d*(\\.\\d{0,2})?$";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author ziyi105
@@ -222,52 +229,19 @@ public class Parser implements ParserUtil {
      */
     private static Command prepareAdd(String arguments, Menu menu, Ui ui) {
         try {
-            //check for multiple use of name/ and price/
-            Pattern addArgumentPattern = Pattern.compile("name/");
-            Matcher matcher = addArgumentPattern.matcher(arguments);
-
-            long nameArgumentMatches = matcher.results().count();
-            if (nameArgumentMatches > 1) {
-                return new IncorrectCommand("multiple 'name/' format detected", ui);
-            }
-
-            addArgumentPattern = Pattern.compile("price/");
-            matcher = addArgumentPattern.matcher(arguments);
-            long priceArgumentMatches = matcher.results().count();
-            if (priceArgumentMatches > 1) {
-                return new IncorrectCommand("multiple 'price/' format detected", ui);
-            }
-
-            addArgumentPattern = Pattern.compile(ADD_ARGUMENT_STRING);
-            matcher = addArgumentPattern.matcher(arguments);
-
-            // Checks whether the overall pattern of add arguments is correct
-            if (!matcher.matches()) {
-                logger.log(Level.WARNING, "Unmatching regex!");
-                return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
-                        + AddDishCommand.MESSAGE_USAGE, ui);
-            }
+            Matcher matcher = detectErrorInPreAddParse(arguments);
 
             // To retrieve specific arguments from arguments
             //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
-            float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
+            float dishPrice = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
-            if (dishName.equals("")) {
-                throw new ParserException("Missing dish name");
-            } else if (isNameLengthInvalid(dishName)) {
-                logger.warning("Invalid name length!");
-                throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
-            } else if (isRepeatedDishName(dishName, menu)) {
-                logger.warning("Repeated dish!");
-                throw new ParserException(ErrorMessages.REPEATED_DISH_MESSAGE);
-            } else if (containsSpecialChar(dishName)) {
-                throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
-            }
+
+            detectErrorPostDishNameParse(dishName, menu);
 
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true);
 
-            Dish dish = new Dish(dishName, ingredients, price);
+            Dish dish = new Dish(dishName, ingredients, dishPrice);
 
             return new AddDishCommand(dish, menu, ui);
         } catch (NullPointerException e) {
@@ -279,6 +253,39 @@ public class Parser implements ParserUtil {
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage(), e);
             return new IncorrectCommand(e.getMessage(), ui);
+        }
+    }
+
+    private static Matcher detectErrorInPreAddParse(String arguments) throws ParserException {
+        if (isRepeatedArgument(arguments, ADD_DISH_NAME_ARGUMENT)) {
+            throw new ParserException(ErrorMessages.REPEATED_NAME_ARGUMENT);
+        } else if (isRepeatedArgument(arguments, ADD_DISH_PRICE_ARGUMENT)) {
+            throw new ParserException(ErrorMessages.REPEATED_PRICE_ARGUMENT);
+        }
+
+        // Checks whether the overall pattern of add arguments is correct
+        Pattern addArgumentPattern = Pattern.compile(ADD_ARGUMENT_FORMAT_REGEX);
+        Matcher matcher = addArgumentPattern.matcher(arguments);
+
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Unmatched regex!");
+            throw new ParserException(ErrorMessages.INVALID_ADD_DISH_FORMAT + AddDishCommand.MESSAGE_USAGE);
+        }
+
+        return matcher;
+    }
+
+    private static void detectErrorPostDishNameParse(String dishName, Menu menu) throws ParserException {
+        if (dishName.isEmpty()) {
+            throw new ParserException(ErrorMessages.MISSING_DISH_NAME);
+        } else if (isNameLengthInvalid(dishName)) {
+            logger.warning("Invalid name length!");
+            throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
+        } else if (isRepeatedDishName(dishName, menu)) {
+            logger.warning("Repeated dish!");
+            throw new ParserException(ErrorMessages.REPEATED_DISH_MESSAGE);
+        } else if (containsSpecialChar(dishName)) {
+            throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
         }
     }
 
@@ -304,23 +311,15 @@ public class Parser implements ParserUtil {
 
         //Parsing each ingredient
         for (String inputIngredient: inputIngredientList) {
-            //check for multiple use of ingredient/ and qty/
-            Pattern ingredientArgumentPattern = Pattern.compile("ingredient/");
-            Matcher matcher = ingredientArgumentPattern.matcher(inputIngredient);
-
-            long ingredientArgumentMatches = matcher.results().count();
-            if (ingredientArgumentMatches > 1) {
-                throw new ParserException("multiple 'ingredient/' format detected, perhaps you forgot to put a ',' somewhere");
+            if (isRepeatedArgument(inputIngredient, INGREDIENT_ARGUMENT)) {
+                throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_ARGUMENT);
             }
 
-            ingredientArgumentPattern = Pattern.compile("qty/");
-            matcher = ingredientArgumentPattern.matcher(inputIngredient);
-            long qtyArgumentMatches = matcher.results().count();
-            if (qtyArgumentMatches > 1) {
-                throw new ParserException("multiple 'qty/' format detected, perhaps you forgot to put a ',' somewhere");
+            if (isRepeatedArgument(inputIngredient, QTY_ARGUMENT)) {
+                throw new ParserException(ErrorMessages.REPEATED_QTY_ARGUMENT);
             }
 
-            final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
+            final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_FORMAT_REGEX);
             Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredient);
 
             if (!ingredientMatcher.matches()) {
@@ -332,16 +331,16 @@ public class Parser implements ParserUtil {
             String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
 
             //check the formatting of ingredient qty
-            final Pattern ingredientQtyFormatPattern = Pattern.compile("^\\s*(?<value>[0-9]*)(?<unit>[a-zA-z]*)\\s*$");
+            final Pattern ingredientQtyFormatPattern = Pattern.compile(INGREDIENT_QTY_FORMAT_REGEX);
             Matcher ingredientQtyMatcher = ingredientQtyFormatPattern.matcher(ingredientQtyString);
             if (!ingredientQtyMatcher.matches()) {
-                throw new ParserException("the ingredient qty is in the wrong format, please use the format qty/<VALUE><UNIT> where VALUE is an integer");
+                throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY_FORMAT);
             }
 
-            String ingredientUnit = ingredientQtyMatcher.group("unit");
-            int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group("value"));
-            if (ingredientName.equals("")) {
-                throw new ParserException("Missing ingredient Name for ingredient(s)");
+            String ingredientUnit = ingredientQtyMatcher.group(INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL);
+            int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
+            if (ingredientName.isEmpty()) {
+                throw new ParserException(ErrorMessages.MISSING_INGREDIENT_NAME);
             } else if (isNameLengthInvalid(ingredientName)) {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
             } else if (isExcludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)) {
@@ -373,11 +372,11 @@ public class Parser implements ParserUtil {
     public static float parsePriceToFloat(String priceText) throws ParserException {
         String trimmedPriceText = priceText.trim();
 
-        final Pattern pricePattern = Pattern.compile("^-?[0-9]\\d*(\\.\\d{0,2})?$");
+        final Pattern pricePattern = Pattern.compile(PRICE_INPUT_REGEX);
         Matcher priceMatcher = pricePattern.matcher(trimmedPriceText);
 
         // Check whether price text is empty
-        if (priceText.equals("")) {
+        if (priceText.isEmpty()) {
             throw new ParserException(ErrorMessages.MISSING_PRICE);
         } else if (!priceMatcher.matches()) {
             throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
@@ -464,6 +463,25 @@ public class Parser implements ParserUtil {
         if (inputName == null) {
             throw new NullPointerException();
         } else if (inputName.length() > maxNameLength) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the argument is entered more than once.
+     * @param inputText text to be checked
+     * @param argument argument to be checked for multiple occurrences
+     * @return true if there is > 1 match of the argument, false otherwise
+     */
+    public static boolean isRepeatedArgument(String inputText, String argument) {
+        Pattern argumentPattern = Pattern.compile(argument);
+        Matcher matcher = argumentPattern.matcher(inputText);
+        int maxNumberOfMatches = 1;
+
+        long argumentMatches = matcher.results().count();
+        if (argumentMatches > maxNumberOfMatches) {
             return true;
         }
 
