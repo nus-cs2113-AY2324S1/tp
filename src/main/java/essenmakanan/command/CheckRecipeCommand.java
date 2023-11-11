@@ -1,5 +1,6 @@
 package essenmakanan.command;
 
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
@@ -74,6 +75,19 @@ public class CheckRecipeCommand extends Command {
         }
     }
 
+    public boolean allIngredientsReady(RecipeIngredientList recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
+        this.getIngredientsStillNeeded();
+        boolean allEmpty = this.missingIngredients.isEmpty()
+                && this.insufficientIngredients.isEmpty()
+                && this.diffUnitIngredients.isEmpty();
+        if (allEmpty) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public void executeCommand() {
         try {
@@ -86,8 +100,9 @@ public class CheckRecipeCommand extends Command {
             getIngredientsStillNeeded();
 
             Ui.printStartRecipeMessage(missingIngredients, insufficientIngredients, diffUnitIngredients, recipeTitle);
-        } catch (EssenOutOfRangeException e) {
+        } catch (EssenOutOfRangeException | EssenFormatException e) {
             e.handleException();
         }
     }
+
 }

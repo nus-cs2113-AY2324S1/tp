@@ -245,6 +245,17 @@ public class Ui {
         System.out.println("You do not have any " + name + " to use.");
     }
 
+    public static void printExecuteRecipeFail(String title) {
+        System.out.println("You are missing some ingredients to execute " + title +
+                "\nPlease use the [start] command to check what you are missing");
+        drawDivider();
+    }
+
+    public static void printExecuteRecipeSuccess(String title) {
+        System.out.println("You have successfully executed " + title);
+        drawDivider();
+    }
+
     public static void printAllShortcuts(ShortcutList shortcuts) {
         Ui.drawDivider();
         System.out.println("Here's a list of your shortcuts!");

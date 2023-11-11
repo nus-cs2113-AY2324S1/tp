@@ -10,6 +10,7 @@ import essenmakanan.command.DeleteShortcutCommand;
 import essenmakanan.command.DuplicateRecipeCommand;
 import essenmakanan.command.EditIngredientCommand;
 import essenmakanan.command.EditRecipeCommand;
+import essenmakanan.command.ExecuteRecipeCommand;
 import essenmakanan.command.EditShortcutCommand;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.command.FilterRecipesCommand;
@@ -110,6 +111,9 @@ public class Parser {
             break;
         case "plan":
             command = new PlanRecipesCommand(ingredients, recipes, inputDetail);
+            break;
+        case "execute":
+            command = new ExecuteRecipeCommand(ingredients, recipes, inputDetail);
             break;
         case "sc":
             command = new UseShortcutCommand(shortcuts, ingredients, inputDetail);

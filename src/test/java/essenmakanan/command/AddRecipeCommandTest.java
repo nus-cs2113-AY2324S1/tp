@@ -1,6 +1,5 @@
-package essenmakanan.parser;
+package essenmakanan.command;
 
-import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.RecipeIngredientList;
