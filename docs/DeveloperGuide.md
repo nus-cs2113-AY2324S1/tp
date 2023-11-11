@@ -341,7 +341,8 @@ and add the Question to the appropriate list.
   - Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
   - Reason: missing fields
 - `mcq What is 2+2? /2 /4 /3 /1 /1 /Math /Easy ExtraArgument`
-  - ???
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: ExtraArgument will be treated as the same string as Difficulty and hence be invalidated. The program is very strict with difficulty: Easy, Normal or Hard
 - `mcq [What is the capital of France?]/[Paris]/[London]/[Berlin]/[Madrid]/[1]/[Geography]/[Easy]`
   - Please enter valid integer question index!
   - Reason: The inputs for question, options and module allow for [] but not the answer index which requires a integer and not the difficulty level which only accepts Easy, Normal or Hard

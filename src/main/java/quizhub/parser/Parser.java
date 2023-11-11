@@ -194,6 +194,10 @@ public class Parser {
             if (answerIndex < 1 || answerIndex > 4) {
                 return new CommandInvalid(CommandMultipleChoice.INVALID_ANSWER_MSG);
             }
+            Question.QnDifficulty qnDifficulty = extractQuestionDifficulty(difficulty);
+            if (qnDifficulty.equals(Question.QnDifficulty.INVALID)) {
+                return new CommandInvalid(CommandMultipleChoice.INVALID_DIFFICULTY_MSG);
+            }
             return new CommandMultipleChoice(description, option1, option2, option3, option4,
                     Integer.parseInt(answer), module, extractQuestionDifficulty(difficulty));
         } catch (ArrayIndexOutOfBoundsException exception) {
