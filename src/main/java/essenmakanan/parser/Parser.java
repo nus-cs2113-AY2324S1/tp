@@ -2,30 +2,36 @@ package essenmakanan.parser;
 
 import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.AddRecipeCommand;
+import essenmakanan.command.AddShortcutCommand;
 import essenmakanan.command.Command;
 import essenmakanan.command.DeleteIngredientCommand;
 import essenmakanan.command.DeleteRecipeCommand;
+import essenmakanan.command.DeleteShortcutCommand;
 import essenmakanan.command.DuplicateRecipeCommand;
 import essenmakanan.command.EditIngredientCommand;
 import essenmakanan.command.EditRecipeCommand;
+import essenmakanan.command.EditShortcutCommand;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.command.FilterRecipesCommand;
 import essenmakanan.command.HelpCommand;
-import essenmakanan.command.PlanCommand;
-import essenmakanan.command.StartRecipeCommand;
+import essenmakanan.command.UseShortcutCommand;
+import essenmakanan.command.PlanRecipesCommand;
+import essenmakanan.command.CheckRecipeCommand;
 import essenmakanan.command.UseIngredientCommand;
 import essenmakanan.command.ViewIngredientsCommand;
 import essenmakanan.command.ViewRecipesCommand;
+import essenmakanan.command.ViewShortcutsCommand;
 import essenmakanan.command.ViewSpecificIngredientCommand;
 import essenmakanan.command.ViewSpecificRecipeCommand;
 import essenmakanan.exception.EssenCommandException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.recipe.RecipeList;
 
 public class Parser {
-    public Command parseCommand(String input, RecipeList recipes, IngredientList ingredients)
+    public Command parseCommand(String input, RecipeList recipes, IngredientList ingredients, ShortcutList shortcuts)
             throws EssenCommandException, EssenFormatException, EssenOutOfRangeException {
         Command command;
 
@@ -34,8 +40,8 @@ public class Parser {
         String inputDetail = parsedInput.length == 1 ? "" : parsedInput[1].trim();
 
         switch (commandType) {
-        case "start":
-            command = new StartRecipeCommand(inputDetail, recipes, ingredients);
+        case "check":
+            command = new CheckRecipeCommand(inputDetail, recipes, ingredients);
             break;
         case "add":
             if (inputDetail.startsWith("r/")) {
@@ -47,6 +53,8 @@ public class Parser {
                 command = new AddRecipeCommand(inputDetail, recipes);
             } else if (inputDetail.startsWith("i/")) {
                 command = new AddIngredientCommand(inputDetail, ingredients);
+            } else if (inputDetail.startsWith("sc/")) {
+                command = new AddShortcutCommand(shortcuts, ingredients, inputDetail);
             } else {
                 throw new EssenFormatException();
             }
@@ -56,6 +64,8 @@ public class Parser {
                 command = new DeleteRecipeCommand(recipes, inputDetail);
             } else if (inputDetail.startsWith("i/")) {
                 command = new DeleteIngredientCommand(ingredients, inputDetail);
+            } else if (inputDetail.startsWith("sc/")) {
+                command = new DeleteShortcutCommand(shortcuts, inputDetail);
             } else {
                 throw new EssenFormatException();
             }
@@ -65,6 +75,8 @@ public class Parser {
                 command = new ViewRecipesCommand(recipes);
             } else if (inputDetail.equals("i")) {
                 command = new ViewIngredientsCommand(ingredients);
+            } else if (inputDetail.equals("sc")) {
+                command = new ViewShortcutsCommand(shortcuts);
             } else if (inputDetail.startsWith("r/")) {
                 assert (!inputDetail.equals("")) : "To view a recipe, make sure title is not empty";
                 command = new ViewSpecificRecipeCommand(recipes, inputDetail);
@@ -87,6 +99,8 @@ public class Parser {
                 command = new EditIngredientCommand(inputDetail, ingredients);
             } else if (inputDetail.startsWith("r/")) {
                 command = new EditRecipeCommand(inputDetail, recipes);
+            } else if (inputDetail.startsWith("sc/")) {
+                command = new EditShortcutCommand(shortcuts, ingredients, inputDetail);
             } else {
                 throw new EssenFormatException();
             }
@@ -95,7 +109,10 @@ public class Parser {
             command = new DuplicateRecipeCommand(recipes, inputDetail);
             break;
         case "plan":
-            command = new PlanCommand(ingredients, recipes, inputDetail);
+            command = new PlanRecipesCommand(ingredients, recipes, inputDetail);
+            break;
+        case "sc":
+            command = new UseShortcutCommand(shortcuts, ingredients, inputDetail);
             break;
         case "use":
             if (inputDetail.startsWith("i/")) {
