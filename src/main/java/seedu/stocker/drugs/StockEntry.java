@@ -7,21 +7,21 @@ public class StockEntry {
     private Ui ui;
 
     private final Drug drug;
-    // private final String serialNumber;  // Add serial number field
+    private final String serialNumber;  // Add serial number field
 
     private long quantity;
     private long thresholdQuantity;
 
-    public StockEntry(Drug drug, long quantity) {
+    public StockEntry(Drug drug, long quantity, String serialNumber) {
         this.drug = drug;
         this.quantity = quantity;
-        // this.serialNumber = serialNumber; // Initialise serial number
+        this.serialNumber = serialNumber; // Initialise serial number
         this.thresholdQuantity = 100;
     }
 
-    // public String getSerialNumber() {
-    //     return this.serialNumber; // Getter for serial number
-    // }
+    public String getSerialNumber() {
+        return this.serialNumber; // Getter for serial number
+    }
 
     public Drug getDrug() {
         return this.drug;
@@ -71,6 +71,7 @@ public class StockEntry {
     public String toString() {
         return "Name: " + this.drug.getName()
             + ", Expiry date: " + this.drug.getExpiryDate()
+            + ", Serial number: " + this.getSerialNumber()
             + ", Quantity: " + this.quantity;
     }
 }
