@@ -212,18 +212,44 @@ to be written in.
 
 ### Short Command - Add Short Answer Question to the Quiz
 
+#### Brief Description of Short Command
 One of the supported question formats is the Short Answer Question, in which a question
 can be answered with a phrase of a few words, which will be matched to a corresponding answer
 of sufficient similarity.
 
-It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
+#### Command Syntax of Short Command
+`short [question]/[answer]/[module]/[difficulty]`
 1. `[question]` is the question, phrased as asking the user (i.e. What is 2 + 2? )
 2. `[answer]` is the answer or possible answer(s) that the user must
    input to count as correct. It is case-insensitive. (i.e. 4, four)
 3. `[module]` is the module that the question belongs in (i.e. CS2113)
 4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
 
-![](UML/Images/shortans.png) <br/><br/>
+#### Class Structure of Short Command
+Attributes
+- `description`: A `String` representing the description or text of the question to be added.
+- `answer`: A `String` representing the answer to the question.
+- `module`: A `String` indicating the module or category that the question belongs to.
+- `qnDifficulty`: An `enum` of type `Question.QnDifficulty` representing the difficulty level of the question.
+
+Constructor
+- `public CommandShortAnswer(String description, String answer, String module, Question.QnDifficulty qnDifficulty)`:
+    - Initializes a new instance of `CommandShortAnswer` with the provided question description, answer, module, and difficulty level.
+
+Methods
+- `public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions)`:
+    - Implements the abstract method from the base `Command` class.
+    - Adds a new short answer question to the `QuestionList`.
+    - Updates the `Storage` with the new question list.
+
+Usage in the QuizHub Application
+- **User Interface (`Ui`) Interaction**: Utilizes `Ui` for any user interaction required during the execution of the command.
+- **Data Storage (`Storage`) Interaction**: Interacts with `Storage` to update the saved data whenever a new question is added.
+- **Question List Management (`QuestionList`)**: Modifies the `QuestionList` by adding the new short answer question.
+
+
+#### Implementation of Short Command
+![](UML/Images/shortans.png) <br/>
 
 Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
@@ -231,6 +257,36 @@ using the `addToQuestionList` method. This method will analyse the arguments abo
 and add the Question to the appropriate list.
 
 ![](UML/Images/commandAddState.png)
+
+#### Expected invalid commands for Short Command 
+- `short What is the capital of France?`
+  - Please format your input as short [question]/[answer]/[module]/[difficulty]! 
+  - Reason: Missing fields
+- `short What is 2+2? /4 /Math /Easy ExtraArgument`
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: Too many arguments. The proper input should be without the ExtraArgument
+- `short [What is the capital of France?]/[Paris]/[Geography]/[Easy]`
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: The command uses square brackets, which deviates from the expected format
+- `short What is 2+2? /4 /Math`
+  - Please format your input as short [question]/[answer]/[module]/[difficulty]!
+  - Reason: The difficulty level of the question is missing in this command.
+- `short Who wrote Hamlet? /Shakespeare /Literature /VeryHard` or `short What is H2O? /Water /Chemistry /Water`
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: VeryHard and Water are invalid difficulty
+- `short What is the capital of Japan, Tokyo, Geography, Easy`
+  - Please format your input as short [question]/[answer]/[module]/[difficulty]!
+  - Reason: Incorrect separators
+- `short What is 2+2? /4 /Math /Easy` then `short What is 2+2? /5 /Math /Easy`
+  - You have a duplicated input, please fill add a different input!
+  - Reason: The program does not allow duplicated questions regardless of the other
+- `short /Easy /Paris /Geography What is the capital of France?`
+  - You have one or more field missing!
+    Please format your input as short [question]/[answer]/[module]/[difficulty]!
+  - Reason: The program strictly conforms to the order of question/answer/module/difficulty
+- `short easy / easy / easy /easy`
+  - This is not an invalid command because it conforms to the structure.
+<hr> 
 
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
