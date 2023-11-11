@@ -550,6 +550,7 @@ AAPL      NASDAQ    170.29    171.17         168.87        Apple Inc            
 ```
 
 - Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
+- Note: the watchlist in memory is saved to the file whenever you run `watchlist` command or `exit` command
 
 Format of watchlist output:
 
@@ -557,7 +558,7 @@ Format of watchlist output:
 |--------------------------------------------------------|---------------------------------------|------------------------------------------------|--------------------------------|-------------------------------|------------------------|-------------------------------------------------------------------------|
 | Ticker Symbol<br/>(Abbreviation for Company 's Stocks) | Exchange at which the stock is traded | Current latest price of stock (before closing) | Intraday Highest trading price | Intraday Lowest trading price | Name of equity product | Last time at which the information of the stocks was updated by the API |
 
-- Note: To prevent overloading of the stock API, we will only be allowing watchlist updates every 5 minutes. 
+- Note: To prevent overloading of the stock API, we will only be making watchlist updates every 5 minutes. 
 Any request within the 5-minute window will only show the last updated watchlist
 
 ### Adding Stock to Watchlist: `addstock`
@@ -611,17 +612,18 @@ Example file content of watchlist.json:
 
 **Editing of watchlist.json**
 
-WARNING: Do not edit the json file unless you are familiar with the format of the JSON file
+WARNING: Do not edit the json file unless you are familiar with the format of the JSON file.
 Incorrect format of JSON file may lead to:
 - Corrupted file (user will be prompted to repair the file if he wants to)
 - Deletion of stock entries that are erroneous (Financial Planner has a built-in method to remove
 stock entries that does not match the format specified above)
-- Incorrect information printed by Financial Planner application (e.g. changing stock prices directly in JSON file)
+- erroneous entries present in the watchlist
 
 **Adding stock**
 
-If you would like to add stock directly, do provide accurate information for the symbol and stockName as shown below. If 
-the format is not followed, the stock might not be loaded to watchlist upon start up.
+If you would like to add stock directly, do provide accurate (we do not check for accuracy of information due to 
+free nature of api) information for the symbol and stockName as shown below. If the format is not followed, the stock 
+might not be loaded to watchlist upon start up.
 
 ![](images/investments/Exampleaddingstockjson.png)
 

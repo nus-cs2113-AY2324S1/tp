@@ -29,7 +29,7 @@ public class Categorizer {
      */
     public static HashMap<String, Double> sortType(CashflowList cashflowList, String type)
             throws FinancialPlannerException {
-        switch (type) {
+        switch (type.toLowerCase()) {
         case "expense":
             logger.log(Level.INFO, "categorizing expenses");
             return sortExpenses(cashflowList);
@@ -45,7 +45,7 @@ public class Categorizer {
      * Method to sort the expenses of the cash flow list into different categories and return the sorted hashmap
      *
      * @param cashflowList
-     * @return
+     * @return Hashmap of sorted expenses according to category
      */
     public static HashMap<String, Double> sortExpenses(CashflowList cashflowList) {
         HashMap<String, Double> expensesByCat = new HashMap<>();
@@ -64,7 +64,7 @@ public class Categorizer {
      * Method to sort the incomes of the cash flow list into different categories and return the sorted hashmap
      *
      * @param cashflowList
-     * @return
+     * @return Hashmap containing income sorted according to category
      */
     public static HashMap<String, Double> sortIncome(CashflowList cashflowList) {
         HashMap<String, Double> incomeByCat = new HashMap<>();
