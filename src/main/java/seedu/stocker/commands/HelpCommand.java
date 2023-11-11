@@ -21,9 +21,11 @@ public class HelpCommand extends Command {
 
                         + System.lineSeparator() + AddCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + DeleteCommand.MESSAGE_USAGE + System.lineSeparator()
-                        + System.lineSeparator() + FindCommand.MESSAGE_USAGE + System.lineSeparator()
+
                         + System.lineSeparator() + ListCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + ShowStockLevelCommand.MESSAGE_USAGE + System.lineSeparator()
+
+                        + System.lineSeparator() + FindCommand.MESSAGE_USAGE + System.lineSeparator()
 
                         + System.lineSeparator() + SetThresholdCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + ListThresholdCommand.MESSAGE_USAGE + System.lineSeparator()

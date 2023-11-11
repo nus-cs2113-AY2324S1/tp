@@ -197,14 +197,17 @@ public class Parser {
                     return new IncorrectCommand(String.format("Quantity should be between 1 and 999999999."));
                 }
                 if (name.isEmpty()) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 if (serialNumber.isEmpty()) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 // Check if the expiry date has a valid format
                 if (!isValidDateFormat(expiryDate)) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddCommand.MESSAGE_USAGE));
                 }
                 // Check if sellingPrice is in the valid range (0.01 to 1000.00) and has up to 2 decimal places
                 if (sellingPrice < 0.01 || sellingPrice > 1000.00) {
