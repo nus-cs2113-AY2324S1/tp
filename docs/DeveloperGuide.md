@@ -231,9 +231,24 @@ and add the Question to the appropriate list.
 
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
-// TODO: Complete description for MCQ
+One of the supported question formats is the Multiple Choice Question (MCQ), 
+in which a question can be answered from 4 available options, by answering the 
+index of the corresponding option. 
 
-![](UML/Images/commandMCQ.png)
+It is parsed as: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
+1. `[question]` is the question, phrased as asking the user (i.e. What is the capital of Australia? )
+2. `[optionX]` is a String storing a possible answer. 
+Three of the options has to be incorrect, and one option correct. (i.e. Option1: Melbourne, Option2: Canberra, etc.)
+3. `[answer index]` is an integer from 1 to 4 corresponding to the correct option. (i.e. 2)
+4. `[module]` is the module that the question belongs in (i.e. CS2113)
+5. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
+
+Thereafter, the command is returned to the QuizHub component and executed,
+to add a Question object to the corresponding QuestionList object
+using the `addToQuestionList` method. This method will analyse the arguments above
+and add the Question to the appropriate list.
+
+![commandMCQ.png](UML/Images/commandMCQ.png)
 
 <hr>
 
