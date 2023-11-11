@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.data.exception.InvalidDateException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -11,9 +13,8 @@ import java.util.Locale;
  */
 public class Date {
     private static DateTimeFormatter[] formatters = new DateTimeFormatter[] {
-            DateTimeFormatter.ofPattern("yyyy-M-d"),
-            DateTimeFormatter.ofPattern("M-d-yyyy"),
-            DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH), };
+            DateTimeFormatter.ofPattern("yyyy/M/d"),
+            DateTimeFormatter.ofPattern("d/M/yyyy"),};
     private static DateTimeFormatter toStringFormatter = formatters[formatters.length - 1];
     public String standardString;
     transient LocalDate date;
@@ -30,7 +31,7 @@ public class Date {
      *                       information about this exception and the possible
      *                       solution.
      */
-    public Date(String rawData) throws Exception {
+    public Date(String rawData) throws InvalidDateException {
         setRawData(rawData);
     }
 
@@ -44,17 +45,22 @@ public class Date {
      *                       information about this exception and the possible
      *                       solution.
      */
-    public void setRawData(String rawData) throws Exception {
+    public void setRawData(String rawData) throws InvalidDateException {
         for (DateTimeFormatter formatter : formatters) {
             try {
                 date = LocalDate.parse(rawData, formatter);
+                if (date.isBefore(LocalDate.now())) {
+                    throw new InvalidDateException("Target Deadline has passed! ");
+                }
                 standardString = this.toString();
                 return;
+            } catch (InvalidDateException ide) {
+                throw new InvalidDateException("Target Deadline has passed! ");
             } catch (Exception exception) {
                 continue;
             }
         }
-        throw new Exception("Unable to parse date time!");
+        throw new InvalidDateException("Please use a valid date with correct format!");
     }
 
     @Override

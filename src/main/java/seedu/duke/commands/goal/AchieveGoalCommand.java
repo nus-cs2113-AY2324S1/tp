@@ -25,6 +25,8 @@ public class AchieveGoalCommand extends Command {
             feedbackToUser = "Please use a valid arabic number as index.";
         } catch (IncorrectFormatException ife) {
             feedbackToUser = ife.getMessage();
+        } catch (Exception e) {
+            feedbackToUser = "Something went wrong, please try again.";
         }
 
         return new CommandResult(feedbackToUser);
