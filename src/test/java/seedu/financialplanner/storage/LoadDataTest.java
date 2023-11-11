@@ -7,11 +7,17 @@ import seedu.financialplanner.cashflow.Income;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.enumerations.IncomeType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
+import seedu.financialplanner.investments.Stock;
+import seedu.financialplanner.investments.WatchList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class LoadDataTest {
@@ -31,8 +37,27 @@ class LoadDataTest {
     }
 
     @Test
-    void loadWatchList() {
+    void loadWatchListBasic() {
+        HashMap<String, Stock> stocks = LoadData.loadWatchList("src/test/testData/basicwatchlist.json");
+        assertEquals(2, stocks.size());
+        assertNotNull(stocks.get("AAPL"));
+        assertNotNull(stocks.get("GOOGL"));
     }
+
+    @Test
+    void loadWatchListExceedSize() {
+        Exception exception = assertThrows(NoSuchElementException.class, () -> {
+            HashMap<String, Stock> stocks = LoadData.loadWatchList("src/test/testData/exceedwatchlist.json");
+        });
+    }
+
+    @Test
+    void loadWatchListIncorrectHashCode() {
+        Exception exception = assertThrows(NoSuchElementException.class, () -> {
+            HashMap<String, Stock> stocks = LoadData.loadWatchList("src/test/testData/incorrectwatchlist.json");
+        });
+    }
+
     private LocalDate stringToDate(String string) {
         return LocalDate.parse(string, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }

@@ -25,6 +25,7 @@ import java.util.logging.Logger;
  */
 public class WatchList {
     private static WatchList watchlist = null;
+    private static final String FILE_PATH = "data/watchlist.json";
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private static final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private static final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
@@ -35,7 +36,7 @@ public class WatchList {
      * any erroneous inputs
      */
     private WatchList() {
-        stocks = LoadData.loadWatchList();
+        stocks = LoadData.loadWatchList(FILE_PATH);
         cleanUpLoadedWatchList();
     }
 
@@ -63,7 +64,7 @@ public class WatchList {
      * @param stockToCheck
      * @return
      */
-    private boolean checkValidStock(String key, Stock stockToCheck) {
+    public boolean checkValidStock(String key, Stock stockToCheck) {
         boolean isValid = true;
         if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
             isValid = false;
