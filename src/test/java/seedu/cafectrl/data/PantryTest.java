@@ -29,7 +29,8 @@ public class PantryTest {
             pantry.addIngredientToStock("chicken", 500, "ml");
         });
 
-        String expectedErrorMessage = ErrorMessages.UNIT_NOT_MATCHING + "\nUnit used previously: g";
+        String expectedErrorMessage = "chicken" + ErrorMessages.UNIT_NOT_MATCHING
+                + "g" + ErrorMessages.IGNORE_REMAINING_INGREDIENTS;
         assertEquals(expectedErrorMessage, exception.getMessage());
     }
 
