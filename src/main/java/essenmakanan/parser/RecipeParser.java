@@ -204,9 +204,9 @@ public class RecipeParser {
                 throw new EssenStorageFormatException();
             }
 
-            String stepDescription = parsedStep[0];
-            Tag stepTag = Tag.valueOf(parsedStep[1]);
-            int stepDuration = Integer.parseInt(parsedStep[2]);
+            String stepDescription = parsedStep[0].trim();
+            Tag stepTag = Tag.valueOf(parsedStep[1].trim());
+            int stepDuration = Integer.parseInt(parsedStep[2].trim());
             stepList.add(new Step(stepDescription, stepTag, stepDuration));
         }
 
@@ -218,16 +218,23 @@ public class RecipeParser {
         String[] parsedIngredients = ingredientsString.split(" , ");
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
-        for (String ingredient : parsedIngredients) {
-            String[] parsedIngredient = ingredient.split(" \\| ");
+        for (String ingredientData : parsedIngredients) {
+            String[] parsedIngredient = ingredientData.split(" \\| ");
 
             if (parsedIngredient.length != 3 || parsedIngredient[1].isBlank()) {
                 throw new EssenStorageFormatException();
             }
 
-            String ingredientName = parsedIngredient[0];
-            Double ingredientQuantity = Double.parseDouble(parsedIngredient[1]);
-            IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
+            String ingredientName = parsedIngredient[0].trim();
+
+            for (Ingredient ingredient : ingredientList) {
+                if (ingredient.getName().equals(ingredientName)) {
+                    throw new EssenStorageFormatException();
+                }
+            }
+
+            Double ingredientQuantity = Double.parseDouble(parsedIngredient[1].trim());
+            IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2].trim());
             ingredientList.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
         }
 

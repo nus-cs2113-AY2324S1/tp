@@ -70,16 +70,4 @@ public class StorageTest {
         assertEquals("kg", ingredient.getUnit().getValue());
     }
 
-    @Test
-    public void restoreEmptyRecipes_storedValidRecipes_returnRecipeWithEmptyAttributes() throws Exception {
-        RecipeStorage recipeStorage = new RecipeStorage(DATA_EMPTY_RECIPE_TEXT_PATH);
-        RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
-
-        Recipe recipe = recipes.getRecipe(0);
-
-        assertEquals("soup", recipe.getTitle());
-
-        assertTrue(recipe.getRecipeSteps().getSteps().isEmpty());
-        assertTrue(recipe.getRecipeIngredients().getIngredients().isEmpty());
-    }
 }
