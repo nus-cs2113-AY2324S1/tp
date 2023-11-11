@@ -57,9 +57,11 @@ public class AchmStorage extends GoalStorage {
     }
 
     /**
-     *
+     * This is used to restore achievement by
+     * adding achieved goal into achieved goal list
+     * It has similar mechanism as restoring goal records
      * @param goalRecord refers to saved goal record
-     * @throws Exception
+     * @throws Exception if failed to restore records
      */
     @Override
     protected void textToGoalObject(String goalRecord) throws Exception {
