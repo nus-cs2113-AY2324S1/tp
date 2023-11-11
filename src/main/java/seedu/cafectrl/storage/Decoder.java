@@ -68,7 +68,7 @@ public class Decoder {
      * @param ingredientsStringArray An array of strings containing encoded ingredient data.
      * @return An ArrayList of Ingredient objects containing the decoded ingredient information.
      */
-    private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) throws Exception{
+    private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) throws Exception {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
         for(String ingredientString : ingredientsStringArray) {
             logger.info("Ingredient to decode: " + ingredientString);
