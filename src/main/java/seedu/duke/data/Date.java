@@ -20,31 +20,20 @@ public class Date {
     public String standardString;
     transient LocalDate date;
 
-    // @SerializedName("rawData")
-
     /**
-     * Create a new date.
      *
-     * @param rawData A String that needs to comply with a supported format and
-     *                indicates a correct date that will be recorded by this Date
-     *                instance.
-     * @throws TipsException Any excption will be throw in this type, which contains
-     *                       information about this exception and the possible
-     *                       solution.
+     * @param rawData refers to the date String
+     * @throws InvalidDateException if failed to parse date string input
      */
     public Date(String rawData) throws InvalidDateException {
         setRawData(rawData);
     }
 
     /**
-     * Modifying an existing date with a rawData String.
-     *
-     * @param rawData A String that needs to comply with a supported format and
-     *                indicates a correct date that will be recorded by this Date
-     *                instance.
-     * @throws TipsException Any excption will be throw in this type, which contains
-     *                       information about this exception and the possible
-     *                       solution.
+     * The method is used to set up the date field of a Date object
+     * It contains the actual implementation to parse date information from a string
+     * @param rawData refers to a date string
+     * @throws InvalidDateException if failed to parse date string input
      */
     public void setRawData(String rawData) throws InvalidDateException {
         for (DateTimeFormatter formatter : formatters) {
