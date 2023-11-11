@@ -233,6 +233,18 @@ public class Ui {
         missingIngredients.listIngredients();
     }
 
+    public static void printValidIngredientExample() {
+        System.out.println("Invalid Ingredient! Example of valid ingredient: i/Chicken,1,kg");
+    }
+
+    public static void printNegativeIngredientQuantity() {
+        System.out.println("You cannot add an ingredient with negative quantity.");
+    }
+
+    public static void printIngredientDoesNotExist(String name) {
+        System.out.println("You do not have any " + name + " to use.");
+    }
+
     public static void printExecuteRecipeFail(String title) {
         System.out.println("You are missing some ingredients to execute " + title +
                 "\nPlease use the [start] command to check what you are missing");

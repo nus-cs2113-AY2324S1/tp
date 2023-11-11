@@ -18,6 +18,7 @@ import essenmakanan.command.HelpCommand;
 import essenmakanan.command.UseShortcutCommand;
 import essenmakanan.command.PlanRecipesCommand;
 import essenmakanan.command.CheckRecipeCommand;
+import essenmakanan.command.UseIngredientCommand;
 import essenmakanan.command.ViewIngredientsCommand;
 import essenmakanan.command.ViewRecipesCommand;
 import essenmakanan.command.ViewShortcutsCommand;
@@ -116,6 +117,13 @@ public class Parser {
             break;
         case "sc":
             command = new UseShortcutCommand(shortcuts, ingredients, inputDetail);
+            break;
+        case "use":
+            if (inputDetail.startsWith("i/")) {
+                command = new UseIngredientCommand(ingredients, inputDetail);
+            } else {
+                throw new EssenCommandException();
+            }
             break;
         case "help":
             command = new HelpCommand();
