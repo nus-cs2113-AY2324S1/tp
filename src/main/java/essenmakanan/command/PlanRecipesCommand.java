@@ -10,7 +10,7 @@ import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
-public class PlanCommand extends Command {
+public class PlanRecipesCommand extends Command {
     public IngredientList missingIngredients;
     public IngredientList allIngredientsNeeded;
 
@@ -19,7 +19,7 @@ public class PlanCommand extends Command {
     private RecipeList recipes;
     private RecipeList allRecipes;
 
-    public PlanCommand(IngredientList ingredients, RecipeList recipes, String input) {
+    public PlanRecipesCommand(IngredientList ingredients, RecipeList recipes, String input) {
         this.ingredients = ingredients;
         this.recipes = recipes;
         this.input = input;
@@ -29,10 +29,18 @@ public class PlanCommand extends Command {
         this.missingIngredients = new IngredientList();
     }
 
+    public IngredientList getMissingIngredients() {
+        return this.missingIngredients;
+    }
+
+    public IngredientList getAllIngredientsNeeded() {
+        return this.allIngredientsNeeded;
+    }
+
     /**
      * Compare ingredients in inventory and ingredients needed for all
      */
-    public void getMissingIngredients() {
+    public void setMissingIngredients() {
         String ingredientName;
         Ingredient ingredientAvailable;
         Double missingQuantity = 0.0;
@@ -62,14 +70,13 @@ public class PlanCommand extends Command {
             RecipeParser.parsePlanCommandInput(input);
 
             String[] inputList = input.split(" ", 2);
-            int numberOfRecipes = Integer.parseInt(inputList[0]);
             int[] recipeIdList = RecipeParser.getRecipeIdList(inputList[1]);
 
-            allRecipes = RecipeParser.getRecipes(recipeIdList, recipes);
-            allIngredientsNeeded = IngredientParser.getIngredientsFromRecipes(allRecipes);
-            getMissingIngredients();
+            this.allRecipes = RecipeParser.getRecipes(recipeIdList, recipes);
+            this.allIngredientsNeeded = IngredientParser.getIngredientsFromRecipes(allRecipes);
+            setMissingIngredients();
 
-            Ui.printPlanCommandIngredients(allIngredientsNeeded, missingIngredients);
+            Ui.printPlanCommandIngredients(allIngredientsNeeded, missingIngredients, allRecipes);
         } catch (EssenFormatException | EssenOutOfRangeException e) {
             e.handleException();
         }

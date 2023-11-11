@@ -8,6 +8,7 @@ import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.ui.Ui;
 
 public class IngredientParser {
     public static int getIngredientIndex(IngredientList ingredients, String input)
@@ -33,7 +34,7 @@ public class IngredientParser {
     /**
      * To get an Ingredient List of all ingredients needed for all recipes in the recipe list
      *
-     * @param recipes is a recipe list of all recipes the user wants to process
+     * @param recipes : RecipeList is a recipe list of all recipes the user wants to process
      * @return all ingredients in the list of recipes
      */
     public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
@@ -72,6 +73,7 @@ public class IngredientParser {
         IngredientUnit ingredientUnit;
 
         if (!isValidIngredient(inputDetail)) {
+            Ui.printValidIngredientExample();
             throw new EssenFormatException();
         }
 
@@ -82,6 +84,16 @@ public class IngredientParser {
         assert (ingredientDetails.length == 3) : "Ingredient details should have 3 parts";
 
         String ingredientName = ingredientDetails[0].strip();
+        if (ingredientName.isEmpty()) {
+            System.out.println("Ingredient name should not be empty!");
+            throw new EssenFormatException();
+        }
+
+        if (ingredientDetails[1].isBlank()) {
+            // check if quantity is a null
+            System.out.println("Ingredient quantity should not be empty!");
+            throw new EssenFormatException();
+        }
 
         Double ingredientQuantity = Double.parseDouble(ingredientDetails[1].strip());
 
@@ -140,6 +152,7 @@ public class IngredientParser {
             ingredientUnit = IngredientUnit.PIECE;
             break;
         default:
+            System.out.println(Ui.validIngredientUnits());
             throw new EssenFormatException();
         }
 

@@ -41,4 +41,12 @@ public class EssenLogger {
     public static void logInfo(String message) {
         logger.log(Level.INFO, message);
     }
+
+    public static void logWarning(String message, Exception exception) {
+        logger.log(Level.WARNING, message, exception);
+    }
+
+    public static void logSevere(String message, Exception exception) {
+        logger.log(Level.SEVERE, message, exception);
+    }
 }

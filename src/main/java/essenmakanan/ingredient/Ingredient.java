@@ -38,7 +38,13 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return  this.name + ": " + this.quantity + this.unit.getValue();
+        if (String.valueOf(this.quantity).endsWith(".0")) {
+            // if quantity is a whole number, remove the decimal point
+            String qtyString = String.valueOf(this.quantity);
+            qtyString = qtyString.substring(0, qtyString.length() - 2);
+            return  this.name + ": " + Integer.parseInt(qtyString) + this.unit.getValue();
+        }
+        return this.name + ": " + this.quantity + this.unit.getValue();
     }
 
     public boolean equals(Ingredient i) {

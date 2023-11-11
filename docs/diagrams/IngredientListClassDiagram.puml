@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor CLASS_ARROW_COLOR
+skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
+
+Class IngredientList
+Class Ingredient
+Class RecipeIngredientList
+
+
+@enduml
