@@ -119,7 +119,7 @@ Format: `set AMOUNT on Date`
 
 The AMOUNT is in terms of **kcal**. Please follows the provided formats at the beginning of this guide.
 
-Expected outcome:
+Example of outcome:
 ```
 [Command entered:set 1000 on 11/11/2023]
 Nice! I have added the following goal to your goals list: 
