@@ -27,6 +27,7 @@ public class Storage {
     private boolean isMenuTampered = false;
     private boolean isOrdersTampered = false;
     private boolean isPantryStockTampered = false;
+    private boolean isTamperedMessagePrinted = false;
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
@@ -96,6 +97,8 @@ public class Storage {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
             if (isFileCorrupted(encodedMenu) && isHashingEnabled) {
                 isMenuTampered = true;
+                logger.log(Level.INFO, "Tampered Menu file");
+                detectTamper();
             }
             return Decoder. decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
@@ -126,6 +129,8 @@ public class Storage {
             ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
             if (isFileCorrupted(encodedPantryStock) && isHashingEnabled) {
                 isPantryStockTampered = true;
+                logger.log(Level.INFO, "Tampered Pantry Stock file");
+                detectTamper();
             }
             return Decoder.decodePantryStockData(encodedPantryStock);
         } catch (FileNotFoundException e) {
@@ -155,6 +160,8 @@ public class Storage {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
             if (isFileCorrupted(encodedOrderList) && isHashingEnabled) {
                 isOrdersTampered = true;
+                logger.log(Level.INFO, "Tampered Order file");
+                detectTamper();
             }
             return Decoder.decodeSales(encodedOrderList, menu);
         } catch (FileNotFoundException e) {

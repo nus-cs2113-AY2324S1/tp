@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class Encoder {
     public static final String NULL_ORDER_DAY = "the last day has no orders but please account for it";
     private static final String DIVIDER = " | ";
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author Cazh1
     /**
@@ -44,7 +45,6 @@ public class Encoder {
         return stringArrayList;
     }
 
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
     /**
      * Encodes a Menu object into a list of strings representing its contents, suitable for saving to a file.
