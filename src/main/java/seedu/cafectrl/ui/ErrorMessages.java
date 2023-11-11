@@ -91,4 +91,6 @@ public class ErrorMessages {
 
     public static final String NAME_CANNOT_CONTAIN_SPECIAL_CHAR = "Is there a special character in the name?\n"
             + "I have poor memory and am unable to remember names with special characters, could you remove them?";
+    public static final String REPEATED_INGREDIENT_NAME = "Error: there's a repeat in ingredient name "
+            + "for the add command input";
 }

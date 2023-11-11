@@ -337,14 +337,13 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY_FORMAT);
             }
 
+            ///error cases
             String ingredientUnit = ingredientQtyMatcher.group(INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL);
             int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
             if (ingredientName.isEmpty()) {
                 throw new ParserException(ErrorMessages.MISSING_INGREDIENT_NAME);
             } else if (isNameLengthInvalid(ingredientName)) {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
-            } else if (isExcludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)) {
-                continue;
             } else if (isInvalidQty(ingredientQty)) {
                 throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY);
             } else if (isEmptyUnit(ingredientUnit)) {
@@ -353,6 +352,12 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.INVALID_UNIT_MESSAGE);
             } else if (containsSpecialChar(ingredientName)) {
                 throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
+            }
+
+            //unusual case
+            //user input repeated ingredient name for add dish command
+            if (isExcludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)) {
+                throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_NAME);
             }
 
             Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
@@ -404,7 +409,7 @@ public class Parser implements ParserUtil {
     }
 
     /**
-     * Checks in the menu if the dish name already exists in the menu.
+     * Checks in the menu if the dish name already exists.
      * @param inputDishName dish name entered by the user
      * @param menu contains all the existing Dishes
      * @return true if dish name already exists in menu, false otherwise
@@ -427,7 +432,7 @@ public class Parser implements ParserUtil {
     }
 
     /**
-     * Checks in the menu if the dish name already exists in the menu.
+     * Checks in the ingredient list if the ingredient name already exists.
      * @param inputName dish name entered by the user
      * @param ingredients contains all the existing Ingredients
      * @return true if ingredient name already exists in menu, false otherwise
