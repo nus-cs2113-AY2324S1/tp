@@ -21,6 +21,14 @@ In the terminal, make sure you are in the same directory (location) as the jar f
   
   e.g. `VIEWG`, `viewG`, `viewg` will be consider the same. This is to favour the typing habits of different users.
 
+- In some cases, you may need to input a date information. FitNus app provides the following supported formats.
+  
+  1. Format: "yyyy/MM/dd" (e.g., "2023/08/22")
+  2. Format: "dd/MM/yyyy" (e.g., "22/08/2023")
+  3. Format: "MMM d, yyyy" (e.g., "Nov 11, 2023")
+ 
+  Command example: set 1000 on 22/08/2023 (For setting a new goal command)
+
 ## Content of Command
 
 1. Quick link to particular command.
