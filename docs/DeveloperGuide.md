@@ -4,9 +4,10 @@
 ## Acknowledgements
 
 ---
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+<!--
+    {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries 
+    -- include links to the original source as well} 
+-->
 Main structure of the code and the parse feature is adapted from [here](https://github.com/se-edu/addressbook-level2).
 
 ---
@@ -53,7 +54,7 @@ Given below is a quick overview of each component.
 folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) 
 to learn how to create and edit diagrams.
 
-The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.java)
+The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.java).
 
 
 ### Core sequence
@@ -62,15 +63,6 @@ Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTr
 ![Core structure](images/FitTrackOuter.svg "Outer Structure")
 
 ![Inner structure](images/FitTrackCore.svg "Core Structure")
-
-### Creating a feedback for an invalid input
-Refer to [`CommandParser`](../src/main/java/fittrack/parser/CommandParser.java),
-[`InvalidCommand`](../src/main/java/fittrack/command/InvalidCommand.java),
-[`HelpCommand`](../src/main/java/fittrack/command/HelpCommand.java)
-classes.
-
-![Sequence of invalid command](images/InvalidCommand.svg "Sequence of invalid command")
-
 
 The App consists of five components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
@@ -343,6 +335,32 @@ The diagram below shows the class/sequence structure of the {caloriesburnt/sum} 
 
 The diagram below shows the class/sequence structure of the {help} mechanism:
 {Insert sequence or class diagram}
+
+### 7. Handling an Invalid Input
+If user enters invalid input, the app uses `InvalidCommand` class to handle it.
+
+**Design Considerations**
+
+Designed to provide an information why the user input is invalid.
+Also, help of command is provided if the input command is known.
+
+**Implementation**
+
+*Step 1:*
+If input command fails matching, command word is invalid, or any of command arguments is invalid,
+CommandParser.getInvalidCommand() method is called.
+
+*Step 2:*
+Create `HelpCommand` instance to get a help message for the invalid input.
+
+*Step 3:*
+Use `HelpCommand`'s execution result and exception message to make a feedback to user.
+
+Refer to [`CommandParser`](../src/main/java/fittrack/parser/CommandParser.java), [`InvalidCommand`](../src/main/java/fittrack/command/InvalidCommand.java),[`HelpCommand`](../src/main/java/fittrack/command/HelpCommand.java) classes for more information.
+
+The diagram below shows the class/sequence structure of the {help} mechanism:
+
+![Sequence of invalid command](images/InvalidCommand.svg "Sequence of invalid command")
 
 ---
 ## Product scope
