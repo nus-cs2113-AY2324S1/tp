@@ -14,7 +14,8 @@ import java.util.Locale;
 public class Date {
     private static DateTimeFormatter[] formatters = new DateTimeFormatter[] {
             DateTimeFormatter.ofPattern("yyyy/M/d"),
-            DateTimeFormatter.ofPattern("d/M/yyyy"),};
+            DateTimeFormatter.ofPattern("d/M/yyyy"),
+            DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH)};
     private static DateTimeFormatter toStringFormatter = formatters[formatters.length - 1];
     public String standardString;
     transient LocalDate date;
