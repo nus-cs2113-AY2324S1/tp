@@ -16,7 +16,6 @@ import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -65,12 +64,13 @@ public class Ui {
         String dishNameString = String.format("|%-55s|", " Dish: " + dish.getName());
         showToUser(Messages.INGREDIENTS_END_CAP,
                 dishNameString,
-                Messages.INGREDIENTS_CORNER,
-                Messages.INGREDIENTS_TITLE,
                 Messages.INGREDIENTS_CORNER);
     }
 
-    private void showIngredientList(Dish dish) {
+    public void showIngredientList(Dish dish) {
+        showToUser(Messages.INGREDIENTS_TITLE,
+                Messages.INGREDIENTS_CORNER);
+
         ArrayList<Ingredient> ingredients = dish.getIngredients();
         for (Ingredient ingredient : ingredients) {
             formatListIngredient(ingredient.getName(), ingredient.getQty() + ingredient.getUnit());
@@ -83,16 +83,16 @@ public class Ui {
 
     //@@author DextheChik3n
     public void printAddDishMessage(Dish dish) {
-        String dishNameString = "Dish Name: " + dish.getName();
-        DecimalFormat dollarValue = new DecimalFormat("0.00");
-        float dishPrice = dish.getPrice();
-        String dishPriceString = "Dish Price: $" + dollarValue.format(dishPrice);
+        showToUser(Messages.ADD_DISH_MESSAGE + "\n");
+        showDishNameHeader(dish);
+        showDishPrice(dish);
+        showIngredientList(dish);
+        showIngredientsEndCap();
+    }
 
-        showToUser(Messages.ADD_DISH_MESSAGE,
-                dishNameString,
-                dishPriceString);
-
-        showIngredientsHeader(dish);
+    public void showDishPrice(Dish dish) {
+        String dishPriceString = String.format("|%-55s|", " Price: $" + dish.getPriceString());
+        showToUser(dishPriceString, Messages.INGREDIENTS_CORNER);
     }
 
     //@@author
