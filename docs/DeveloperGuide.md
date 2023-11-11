@@ -290,11 +290,13 @@ and add the Question to the appropriate list.
 
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
+#### Brief Description of MCQ Command
 One of the supported question formats is the Multiple Choice Question (MCQ), 
 in which a question can be answered from 4 available options, by answering the 
 index of the corresponding option. 
 
-It is parsed as: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
+#### Command Syntax of MCQ Command
+`mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
 1. `[question]` is the question, phrased as asking the user (i.e. What is the capital of Australia? )
 2. `[optionX]` is a String storing a possible answer. 
 Three of the options has to be incorrect, and one option correct. (i.e. Option1: Melbourne, Option2: Canberra, etc.)
@@ -302,6 +304,31 @@ Three of the options has to be incorrect, and one option correct. (i.e. Option1:
 4. `[module]` is the module that the question belongs in (i.e. CS2113)
 5. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
 
+
+#### Class Structure of MCQ Command
+Attributes
+- `description`: A `String` representing the text of the question to be added.
+- `option1`, `option2`, `option3`, `option4`: Strings representing the four options for the multiple-choice question.
+- `answer`: An `int` indicating the index of the correct answer (1, 2, 3, or 4).
+- `module`: A `String` indicating the module or category that the question belongs to.
+- `qnDifficulty`: An `enum` of type `Question.QnDifficulty` representing the difficulty level of the question.
+
+Constructor
+- `public CommandMultipleChoice(String description, String option1, String option2, String option3, String option4, int answer, String module, Question.QnDifficulty qnDifficulty)`:
+    - Initializes a new instance of `CommandMultipleChoice` with the specified question details, options, correct answer index, module, and difficulty level.
+
+Methods
+- `public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions)`:
+    - Implements the abstract method from the `Command` superclass.
+    - Adds a new multiple-choice question to the `QuestionList`.
+    - Updates the `Storage` with the new question list.
+
+Usage in the QuizHub Application
+- **User Interface (`Ui`) Interaction**: Utilizes `Ui` for user interactions required during the execution of the command.
+- **Data Storage (`Storage`) Interaction**: Interacts with `Storage` to update the saved data when a new question is added.
+- **Question List Management (`QuestionList`)**: Adds the new multiple-choice question to the `QuestionList`.
+
+#### Implementation of MCQ Command
 Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
@@ -309,6 +336,37 @@ and add the Question to the appropriate list.
 
 ![commandMCQ.png](UML/Images/commandMCQ.png)
 
+#### Expected invalid commands for MCQ Command
+- `mcq What is the capital of France?`
+  - Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: missing fields
+- `mcq What is 2+2? /2 /4 /3 /1 /1 /Math /Easy ExtraArgument`
+  - ???
+- `mcq [What is the capital of France?]/[Paris]/[London]/[Berlin]/[Madrid]/[1]/[Geography]/[Easy]`
+  - Please enter valid integer question index!
+  - Reason: The inputs for question, options and module allow for [] but not the answer index which requires a integer and not the difficulty level which only accepts Easy, Normal or Hard
+- `mcq What is 2+2? /2 /4 /3 /1 /1 /Math`
+  - Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: no difficulty input
+- `mcq Who wrote Hamlet? /Shakespeare /Marlowe /Chaucer /Milton /5 /Literature /Medium`
+  - Ono! The answer index you entered is not a integer in the range of the options
+  - Reason: invalid answer index (1-4). 5' is not a valid answer index as there are only four options.
+- `mcq What is H2O? /Water /Aqua /Water /Liquid /1 /Chemistry /Easy`
+  - You have duplicate options!
+    Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: Duplicated water options
+- `mcq What is the capital of Japan, Tokyo, Kyoto, Osaka, Sapporo, 1, Geography, Easy`
+  - Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: Invalid separators
+- `mcq What is 2+2? /4# /4 /3 /2 /1 /Math /Easy`
+  - This is a valid command
+- `mcq What is 2+2? /4# /4 /3 /2 /1# /Math /Easy`
+  - Please enter valid integer question index!
+  - Reason: 1# is not a valid integer
+- `mcq /Easy /1 /Geography What is the capital of France? /Paris /London /Berlin /Madrid`
+  - You have one or more field missing!
+    Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: The program takes in input via a very strict order. Users must conform to this.
 <hr>
 
 ### List Command - Show all Questions with Index
