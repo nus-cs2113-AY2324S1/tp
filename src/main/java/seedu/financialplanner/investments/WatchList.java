@@ -262,7 +262,7 @@ public class WatchList {
         }
 
         Stock newStock;
-        newStock = new Stock(stockCode);
+        newStock = new Stock(stockCode.toUpperCase());
 
         assert newStock.getSymbol() != null && newStock.getStockName() != null;
         stocks.put(newStock.getSymbol(), newStock);
