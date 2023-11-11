@@ -53,8 +53,6 @@ you a one-stop interface to access a plethora of features to manage your finance
 
 ## Quick Start
 
-{TO BE UPDATED WHEN V2.1 IS COMPLETED!!!}
-
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Financial Planner` from [here](https://github.com/AY2324S1-CS2113-T18-2/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for Financial Planner.
@@ -63,7 +61,6 @@ you a one-stop interface to access a plethora of features to manage your finance
 
 ## Features
 
-{Give detailed description of each feature}
 ### Notes about the command format
 - Words in `UPPER_CASE` are parameters to be supplied by the user.
 
@@ -873,8 +870,6 @@ window. Sorry for the inconvenience caused. 🥲
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
 | Action                           | Format                                                     |
 |----------------------------------|------------------------------------------------------------|
 | **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`  |
@@ -907,6 +902,7 @@ window. Sorry for the inconvenience caused. 🥲
 | **Mark Goal as Achieved**        | `markgoal INDEX`                                           |
 | **List all reminders**           | `reminderlist`                                             |
 | **List all goals**               | `wishlist`                                                 |
+
 - Note: Cashflow is referring to an income or expense
 
 **Income and Expense types**
