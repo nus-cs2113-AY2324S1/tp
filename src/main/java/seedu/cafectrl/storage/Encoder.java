@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class Encoder {
     public static final String NULL_ORDER_DAY = "the last day has no orders but please account for it";
     private static final String DIVIDER = " | ";
+    private static final String INGREDIENT_DIVIDER = " - ";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
     /**
@@ -36,7 +37,7 @@ public class Encoder {
         for(Dish dish : menuDishList) {
             StringBuilder dishString = new StringBuilder();
             dishString.append(dish.getName() + DIVIDER);
-            dishString.append(dish.getPrice() + DIVIDER);
+            dishString.append(dish.getPrice());
             dishString.append(encodeIngredientList(dish.getIngredients()));
             dishString.append(System.lineSeparator());
             menuStringList.add(String.valueOf(dishString));
@@ -54,9 +55,10 @@ public class Encoder {
     private static StringBuilder encodeIngredientList(ArrayList<Ingredient> ingredientList) {
         StringBuilder ingredientListString = new StringBuilder();
         for(Ingredient ingredient : ingredientList) {
-            ingredientListString.append(ingredient.getName() + " ");
-            ingredientListString.append(ingredient.getQty() + " ");
-            ingredientListString.append(ingredient.getUnit() + DIVIDER);
+            ingredientListString.append(DIVIDER);
+            ingredientListString.append(ingredient.getName() + INGREDIENT_DIVIDER);
+            ingredientListString.append(ingredient.getQty() + INGREDIENT_DIVIDER);
+            ingredientListString.append(ingredient.getUnit());
         }
         return ingredientListString;
     }
