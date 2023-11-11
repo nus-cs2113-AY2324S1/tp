@@ -33,7 +33,7 @@ public class Duke {
     private TextUi ui;
     private String dirPath = "data";
     private String exerciseLogFilePath = "./data/ExerciseLog.txt";
-    private String GoalFilePath = "./data/GoalRecord.txt";
+    private String goalFilePath = "./data/GoalRecord.txt";
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
     }
@@ -59,7 +59,7 @@ public class Duke {
             this.ui = new TextUi();
             this.exerciseLogStorage = StorageFile.initializeStorage(dirPath, exerciseLogFilePath);
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
-            this.goalStorage = GoalStorage.initializeGoalStorage(dirPath, GoalFilePath);
+            this.goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
             goalStorage.restoreGoalRecord();
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
             MealCommand.setMeals(meals);

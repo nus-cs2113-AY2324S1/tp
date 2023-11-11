@@ -21,7 +21,6 @@ public class Date {
     transient LocalDate date;
 
     /**
-     *
      * @param rawData refers to the date String
      * @throws InvalidDateException if failed to parse date string input
      */

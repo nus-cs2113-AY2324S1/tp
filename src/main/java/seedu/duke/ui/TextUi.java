@@ -227,13 +227,13 @@ public class TextUi {
         if (numberOfGoal == 0) {
             return "Oh not! You don't have any goal to achieve currently.";
         }
-        StringBuilder Sb = new StringBuilder();
-        Sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
         for (int i = 0; i < numberOfGoal; i++){
-            Sb.append(i + 1).append(". ").append(Duke.goalList.getGoal(i)).append("\n");
+            sb.append(i + 1).append(". ").append(Duke.goalList.getGoal(i)).append("\n");
         }
 
-        return Sb.toString();
+        return sb.toString();
     }
 
     /**
@@ -245,13 +245,13 @@ public class TextUi {
         if (numberOfGoal == 0) {
             return "Add oil! There is no achievement found.";
         }
-        StringBuilder Sb = new StringBuilder();
-        Sb.append("Congratulation! See your achievements below: \n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Congratulation! See your achievements below: \n");
         for (int i = 0; i < numberOfGoal; i++){
-            Sb.append(i + 1).append(". [A]").append(Duke.achievedGoals.getGoal(i)).append("\n");
+            sb.append(i + 1).append(". [A]").append(Duke.achievedGoals.getGoal(i)).append("\n");
         }
 
-        return Sb.toString();
+        return sb.toString();
     }
 
     /**
@@ -264,11 +264,11 @@ public class TextUi {
         if (goals.getGoalCount() == 0) {
             return null;
         }
-        StringBuilder Sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < goals.getGoalCount(); i++){
-            Sb.append(goals.getGoal(i)).append("\n");
+            sb.append(goals.getGoal(i)).append("\n");
         }
-        return Sb.toString();
+        return sb.toString();
     }
 
     public static String buildingFileMsg() {

@@ -4,9 +4,7 @@ import seedu.duke.Duke;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.data.exception.InvalidDateException;
-import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
-import seedu.duke.data.DateTime;
 
 import java.io.IOException;
 import java.util.ArrayList;
