@@ -68,7 +68,7 @@ public class Decoder {
      * @param ingredientsStringArray An array of strings containing encoded ingredient data.
      * @return An ArrayList of Ingredient objects containing the decoded ingredient information.
      */
-    private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) {
+    private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) throws Exception{
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
         for(String ingredientString : ingredientsStringArray) {
             logger.info("Ingredient to decode: " + ingredientString);
@@ -76,9 +76,16 @@ public class Decoder {
             String name = array[0].trim();
             int qty = Integer.parseInt(array[1].trim());
             String unit = array[2].trim();
+            checkUnitValidity(unit);
             ingredientList.add(new Ingredient(name, qty, unit));
         }
         return ingredientList;
+    }
+
+    private static void checkUnitValidity(String unit) throws Exception {
+        if (!Parser.isValidUnit(unit) || Parser.isEmptyUnit(unit)) {
+            throw new Exception();
+        }
     }
 
     //@@author ziyi105
