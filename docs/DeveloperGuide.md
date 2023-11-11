@@ -25,8 +25,8 @@ level-3
 # Design & implementation
 
 ## Overall Architecture
-The main execution of the QuizHub application will concern 4 components which
-are the `QuizHub`, `Ui`, `Parser` and `Command` packages.
+The execution of the QuizHub application will concern 6 main components which
+are the `QuizHub`, `Ui`, `Parser`, `Commands`, `Storage` and `UtilityClasses` packages.
 
 ![](UML/Images/overallArchitecture.png)
 
@@ -37,23 +37,23 @@ initialising all other objects, executing commands, and shutting down.
 the results of the executed commands.
 
 `Parser` acts as a multiplexer to determine which command to run, and what parameters
-it has, based on the user input.
+it has, based on the user input read in.
 
 `Commands` refer to a package of individual commands with complex and specific
-logic, which is later executed in QuizHub and displayed by `Ui`.
+logic, which are executed by `QuizHub` and which results are displayed by `Ui`.
 
-`Storage` is the class through which questions can be stored on the hard drive
+`Storage` takes care of saving questions data onto and loading questions data from the hard drive.
 
-`UtilityClasses` refer to any miscellaneous utility classes used by all the components.
+`UtilityClasses` refer to any other miscellaneous classes used by the components for program execution.
 
-While the above diagram provides a quick and simple high-level overview on the execution of QuizHub, it does not
+While the above diagram provides a quick and simple high-level overview of the execution of QuizHub, it does not
 reflect the finer relationships between the components as well as the features within the various components. A more 
-comprehensive overview of QuizHub is provided in the following **condensed class diagram**. It describes the 
-classes corresponding to the main components of the application and their relationships. Only the **most important** 
-methods and attributes of each class are shown for simplicity. Here, "most important" means these methods and 
-attributes directly control the critical flow and operation of the application.
+comprehensive description of QuizHub is provided in the following **condensed class diagram**. It describes the 
+classes corresponding to the main components of the application and their relationships with each other. Only the 
+**most important** methods and attributes of each class are shown for simplicity. Here, "most important" means 
+these methods and attributes directly control the critical flow and operation of the application. <br/><br/>
 
-![](UML/Images/overallClassInteraction.png)
+![](UML/Images/overallClassInteraction.png)<br/><br/>
 
 ## Application Lifecycle
 
@@ -67,10 +67,10 @@ In each iteration of the loop, `QuizHub` makes a call to `Ui.getUserInput()` and
 entire user input as a String object. Following which, `QuizHub` makes a call to
 `Parser.parseCommand()` to extract the user command from the String object and returns a
 `Command` object. Finally, `QuizHub` makes a call to `Command.executeCommand()` and performs
-the requested question. Upon complete command execution, the results will be displayed to the user
+the requested action. Upon complete command execution, the results will be displayed to the user
 through `Ui`.
 
-If `Command` is of Exit type, the loop will exit, and the program terminates.
+If `Command` is of `Exit` type, the loop will exit, and the program terminates.
 
 ## Parser Component
 
@@ -103,7 +103,7 @@ following point for inputs taken in by the `Parser`.
 
 In designing the `Parser`, an alternative design we considered is to follow that of `Unix`
 command interface. The `Unix` parser is designed such that input commands are required to
-have the syntax of ```command -(options) argument1 argument2 ...``` where the order of arguments
+have the syntax of ```command -[option1] [argument1] -[option2] [argument2] ...``` where the order of arguments
 does not matter. While this is a clean and neat parser design, we have decided not to adopt this
 design as we see a strong need of having a hierarchical command structure for our program.
 
@@ -116,14 +116,14 @@ design as we see a strong need of having a hierarchical command structure for ou
    follow a structure instead of entering such details without a fixed order, which can easily
    lead to confusion. <br><br>
 2. The use of the delimiter `/` also better helps to introduce the concept of hierarchy than the
-   delimiter `--` used in `Unix` commands as `/` can be more easily associated with layering and
-   stacking, which create structures possessing hierarchy.
+   delimiter `-` used in `Unix` commands as `/` can be more easily associated with layering and
+   stacking, processes which create structures possessing hierarchy.
 
 ### Parser Command Syntax
 
 Our final design  seeks to optimise both user experience and program effectiveness.
 We have hence chosen the following general syntax for commands to be input into the `Parser`.
-All commands require a starting payload, but some commands do not require the subsequent arguments.
+All commands require a starting commandType, but some commands do not require the subsequent arguments and payloads. 
 
 ```
 commandType [payload] [/argument1 [payload1] /argument2 [payload2] ... ]
@@ -141,44 +141,43 @@ efficient checks.
 ### Implementation
 
 The main function of `Parser` is to decode user input and extract relevant information to be
-used by other classes. Hence, it supports 3 main methods as listed below.
-1. `parseCommand`
-2. `getContentAfterKeyword`
-3. `extractQuestionDifficulty`
+used by other classes. Hence, it supports 3 main method types as listed below.
+1. `parseCommand` and other `parse` methods to assemble specific commands 
+2. `extract` methods which extract information from different segments of user input
+3. `handle` methods which handle exceptions thrown during parsing <br/><br/>
 
 `parseCommand`
 
-This method processes raw user input from CLI to extract information to be assembled into a
-`Command` object. It determines the type of command by reading the commandType from the
-very start of the user input.
+This is arguably the most critical method of the `Parser` component. It processes raw user input from CLI to extract 
+information to be assembled into a `Command` object. Where necessary, this is accomplished by calling the other `parse` 
+methods. It determines the type of `Command` to be created by reading the commandType from the very start of the user 
+input.
 
-The following sequence diagram shows the implementation of `parseCommand`.
+The following sequence diagram builds upon the application lifecycle sequence diagram to show the different behaviours
+of `parseCommand`. For simplicity, not all possible paths are covered, instead showing the 3 main pathways possible: 
+parsing valid commands that can be returned immediately, parsing valid commands that require further parsing, and 
+parsing invalid commands. <br/><br/>
 
-![](UML/Images/Parser.jpg)
+![](UML/Images/parser.png) <br/><br/>
 
-`getContentAfterKeyword`
+`extract` methods
 
-This method acts as a helper method to assist in extracting the payload following an argument
-in the user input. It is used in the constructing of `Command` objects when command-specific
-information need to be extracted from arguments in the user input.
+Methods of this type are helper methods created to assist in extracting payloads in the user input. They are used in 
+the construction of `Command` objects when command-specific information need to be extracted from the arguments.
 
-It simply breaks up an entire ```/argument [payload]``` String into ```/argument``` and
-```[payload]``` and returns the `[payload]`. Hence, any String passed into this method must
-take on the form of ```/argument [payload]``` or an exception will be thrown and handled by
-printing an error message to the CLI.
+These methods break up an entire ```commandType [payload] [/argument1 [payload1] /argument2 [payload2] ... ]``` String 
+into segments and depending on the segment of user input they are extracting information from, zone in on a 
+specific segment to find the information they are looking for.
 
-`extractQuestionDifficulty`
+`handle` methods
 
-This method acts as a helper method for extracting an `QnDifficulty` enum type from a user
-text input. This is used for setting question difficulty during the construction of a
-`Question` , or the execution of a `CommandMarkDifficulty`.
-
-If the string passed to this method does not describe an existing question difficulty level, an
-exception will be thrown and handled by printing an error message to the CLI.
+Methods of this type are helper methods created to handle any exceptions that can arise during any stage of parsing.
+Typically, there is one `handle` method for every `extract` method, designed to catch exceptions raised during the
+extraction of information from each segment of the user input.
 
 ## Command Components
 
-The following is a detailed sequence diagram demonstrating how commands are parsed. 
+The following is a detailed sequence diagram demonstrating how commands are executed after the parsing stage.
 This may differ slightly for different commands.
 
 ![](UML/Images/commandOverview.png)
@@ -219,10 +218,9 @@ It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
 2. `[answer]` is the answer or possible answer(s) that the user must
    input to count as correct. It is case-insensitive. (i.e. 4, four)
 3. `[module]` is the module that the question belongs in (i.e. CS2113)
-4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard)
+4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
 
-*Condensed Class Diagram - Does not contain all attributes & methods
-![](UML/Images/AddShortCommand.jpg)
+![](UML/Images/shortans.png) <br/><br/>
 
 Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
@@ -233,9 +231,24 @@ and add the Question to the appropriate list.
 
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
-// TODO: Complete description for MCQ
+One of the supported question formats is the Multiple Choice Question (MCQ), 
+in which a question can be answered from 4 available options, by answering the 
+index of the corresponding option. 
 
-![](UML/Images/commandMCQ.png)
+It is parsed as: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
+1. `[question]` is the question, phrased as asking the user (i.e. What is the capital of Australia? )
+2. `[optionX]` is a String storing a possible answer. 
+Three of the options has to be incorrect, and one option correct. (i.e. Option1: Melbourne, Option2: Canberra, etc.)
+3. `[answer index]` is an integer from 1 to 4 corresponding to the correct option. (i.e. 2)
+4. `[module]` is the module that the question belongs in (i.e. CS2113)
+5. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
+
+Thereafter, the command is returned to the QuizHub component and executed,
+to add a Question object to the corresponding QuestionList object
+using the `addToQuestionList` method. This method will analyse the arguments above
+and add the Question to the appropriate list.
+
+![commandMCQ.png](UML/Images/commandMCQ.png)
 
 <hr>
 
@@ -771,7 +784,7 @@ The details of the data loading and updating process are explained in details be
 
 The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below.
 
-![](UML/Images/Storage.jpg)
+![](UML/Images/storageLoadDataSequence.png)
 
 :exclamation: This sequence diagram emphasizes the process of loading data into storage, and has therefore omitted details of more trivial and/or non-related methods as well as exception handling logic. To find out more about the details, please refer to the complete code and header comments.
 
@@ -811,7 +824,7 @@ input.
 
 #### Overall Flow
 
-![](UML/Images/ui_flow.jpg)
+![](UML/Images/uiFlow.png)
 
 When the program is first initiated, the `displayOpeningMessage()` method is called to display a welcome message while also calling the `loadData()` method of the `dataStorage` to display all the questions stored in the storage file if any.
 
@@ -821,7 +834,7 @@ Finally, the `displayClosingMessage()` method is called to display a farewell me
 
 #### Displaying Quizzes
 
-![](UML/Images/ui_quiz.jpg)
+![](UML/Images/uiDisplayQuiz.png)
 
 The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions.
 

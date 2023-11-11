@@ -2,7 +2,6 @@
 !include Style.puml
 
 class QuizHub {
-    - **FILE_PATH** : String
     + **Run** ()
 }
 
@@ -29,7 +28,7 @@ class Ui {
 
 class Storage {
     - **dataFile** : File
-    + **writeToFile** (filePath: String, textToAdd: String, toAppend: boolean)
+    - **writeToFile** (filePath: String, textToAdd: String, toAppend: boolean)
     + **loadData** (questions: QuestionList)
     + **updateData** (questions: QuestionList)
     + **buildCurrentListFromFile** (questions: QuestionList)
@@ -44,8 +43,8 @@ class QuestionList {
     + **deleteQuestionByIndex** (index: int)
     + **viewQuestionByIndex** (index: int): String
     + **editQuestionByIndex** (index: int, editField: String, newValue: String)
-    + **searchListByDescription** (keyword: String): String
-    + **searchListByModule** (module: String): String
+    + **searchListByDescription** (keyword: String)
+    + **searchListByModule** (module: String)
     + **shuffleQuestions** (ui: Ui)
     + **getQuestionListSize** (): int
     + **getAllQns** (): ArrayList<Question>
@@ -63,7 +62,7 @@ class Question {
     + **getDifficulty** (): QnDifficulty
     + **editQuestion** (newDescription: String, newAnswer: String)
     + **markDifficulty** (qnDifficulty: QnDifficulty)
-    + **checkAnswerCorrectness** (): boolean
+    + **checkAnswerCorrectness** (userAnswer: String): boolean
 }
 
 class Command {

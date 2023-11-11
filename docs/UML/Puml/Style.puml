@@ -81,6 +81,8 @@ skinparam Sequence {
     FontName DM Sans
     GroupBorderColor BORDER_THEME_COLOR
     GroupBackgroundColor BODY_THEME_COLOR
+    ReferenceBorderColor BORDER_THEME_COLOR
+    ReferenceHeaderBackgroundColor BODY_THEME_COLOR
 }
 
 skinparam Participant {
