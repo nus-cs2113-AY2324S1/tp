@@ -10,6 +10,7 @@ import seedu.duke.data.GoalList;
 import seedu.duke.data.meal.Meal;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
+import seedu.duke.storagefile.AchmStorage;
 import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
 import seedu.duke.storagefile.StorageFile;
@@ -29,11 +30,13 @@ public class Duke {
     public static Log exerciseLog = new Log();
     public static StorageFile exerciseLogStorage;
     public static GoalStorage goalStorage;
+    public static AchmStorage achmStorage;
     static ArrayList<Meal> meals = new ArrayList<Meal>();
     private TextUi ui;
     private final String dirPath = "data";
     private final String exerciseLogFilePath = "./data/ExerciseLog.txt";
     private final String goalFilePath = "./data/GoalRecord.txt";
+    private final String achmFilePath = "./data/Achievement.txt";
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
     }
@@ -61,6 +64,8 @@ public class Duke {
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
             goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
             goalStorage.restoreGoalRecord();
+            achmStorage = AchmStorage.initializeGoalStorage(dirPath, achmFilePath);
+            achmStorage.restoreGoalRecord();
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
             MealCommand.setMeals(meals);
         } catch (Exception e) { // TODO: change to specific storage exceptions later

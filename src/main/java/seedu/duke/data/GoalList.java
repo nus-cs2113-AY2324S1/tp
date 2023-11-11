@@ -4,6 +4,8 @@ import seedu.duke.Duke;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.data.exception.InvalidDateException;
+import seedu.duke.storagefile.GoalStorage;
+import seedu.duke.storagefile.StorageFile;
 import seedu.duke.ui.TextUi;
 
 import java.io.IOException;
@@ -46,19 +48,22 @@ public class GoalList extends ArrayList<Goal> {
         int index = Integer.parseInt(cmdSplit[1]);
         Goal targetGoal = Duke.goalList.goals.remove(index - 1);
         Duke.goalList.goalCount--;
-        Duke.goalStorage.overwriteGoalToFile();
+        Duke.goalStorage.overwriteGoalToFile(Duke.goalList);
 
         return TextUi.deleteGoalMsg(targetGoal) + TextUi.noOfGoalMsg(Duke.goalList.goalCount);
     }
 
-    public static String achieveGoal(String cmd) throws IncorrectFormatException, NumberFormatException {
+    public static String achieveGoal(String cmd) throws IncorrectFormatException,
+            NumberFormatException, IOException {
         verifyAchieveGoalInput(cmd);
         String[] cmdSplit = cmd.split(" ");
         int index = Integer.parseInt(cmdSplit[1]);
         Goal achievedGoal = Duke.goalList.goals.remove(index - 1);
         Duke.goalList.goalCount--;
+        Duke.goalStorage.overwriteGoalToFile(Duke.goalList); //update goal file
         Duke.achievedGoals.goals.add(achievedGoal);
         Duke.achievedGoals.goalCount++;
+        Duke.achmStorage.overwriteGoalToFile(Duke.achievedGoals); // update achievement file
         return "Congratulation! You have achieved one goal!\n"
                 + "[Finished]" + achievedGoal + " (:";
     }
@@ -141,10 +146,12 @@ public class GoalList extends ArrayList<Goal> {
      * If not, terminate the method and throws error message.
      * If yes, continue to add a new goal object into the goals list.
      * @param userCmd represents raw user input
+     * @param Targetlist represents to target list to add new goal
+     * @param storage represents the target storage to update goal data
      * @throws IncorrectFormatException if user input is in wrong format
      * @throws NumberFormatException if the user does not input a valid number
      */
-    public static String addGoal(String userCmd) throws IncorrectFormatException, NumberFormatException,
+    public static String addGoal(String userCmd, GoalList Targetlist, GoalStorage storage) throws IncorrectFormatException, NumberFormatException,
             InvalidDateException, IOException {
         verifyGoalInput(userCmd); //if invalid, exceptions is thrown
 
@@ -152,9 +159,9 @@ public class GoalList extends ArrayList<Goal> {
         int calories = Integer.parseInt(cmdSplit[1]);
         String date = cmdSplit[3];
 
-        Duke.goalList.goals.add(new Goal(calories, date));
-        Duke.goalList.goalCount++;
-        Duke.goalStorage.overwriteGoalToFile();
+        Targetlist.goals.add(new Goal(calories, date));
+        Targetlist.goalCount++;
+        storage.overwriteGoalToFile(Targetlist);
 
         return TextUi.addGoalSuccessMessage();
     }

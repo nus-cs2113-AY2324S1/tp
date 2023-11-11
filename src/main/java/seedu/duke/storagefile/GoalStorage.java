@@ -62,14 +62,15 @@ public class GoalStorage extends StorageFile {
     }
 
     /**
-     * This method update the content of output Goal File by overwriting the file
-     *  with all data saved in the current goalList
+     * This method update the content of this.textFile by using content from
+     * source goalList goals
      * Note that in the following implementation, the field writeFile in not used
      * Instead, everytime a new file writer is created to update content of file
+     * @param goals represents source of goalList to retrieve content
      * @throws IOException if failed to access file
      */
-    public void overwriteGoalToFile() throws IOException {
-        String content = TextUi.contentOfGoalList(Duke.goalList);
+    public void overwriteGoalToFile(GoalList goals) throws IOException {
+        String content = TextUi.contentOfGoalList(goals);
         if (content == null) {
             return;
         }
@@ -78,14 +79,18 @@ public class GoalStorage extends StorageFile {
         fw.close();
     }
 
-    private static void textToGoalObject(String goalRecord) throws Exception {
+    protected void textToGoalObject(String goalRecord) throws Exception {
+        String restoredCommand = restoreOrigionalCommand(goalRecord);
+        GoalList.addGoal(restoredCommand, Duke.goalList, Duke.goalStorage);
+    }
+
+    protected static String restoreOrigionalCommand(String goalRecord) {
         String[] goalRecordParts = goalRecord.split(" ", 5);
         //example of saved record: Consume 1230 kcal on Nov 11, 2023
         int amount =Integer.parseInt(goalRecordParts[1]);
         String savedDateString = goalRecordParts[4];
         String date = convertDateFormat(savedDateString);
-        String restoredCommand = "set " + amount + " on " + date;
-        GoalList.addGoal(restoredCommand);
+        return "set " + amount + " on " + date;
     }
 
 
