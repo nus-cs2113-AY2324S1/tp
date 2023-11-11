@@ -121,7 +121,7 @@ The AMOUNT is in terms of **kcal**. Please follows the provided formats at the b
 
 Expected outcome:
 ```
-[Command entered:`set 1000 on 11/11/2023`]
+[Command entered:set 1000 on 11/11/2023]
 Nice! I have added the following goal to your goals list: 
 Consume 1000 kcal on Nov 11, 2023
 ```
@@ -134,7 +134,7 @@ Format: `viewG`
 
 Example of outcome:
 ```
-[Command entered:`viewg`]
+[Command entered:viewg]
 Here you go! Remember to stick to your exercise and meal plans.
 1. Consume 1000 kcal on Nov 11, 2023
 2. Consume 1500 kcal on Nov 25, 2023
@@ -150,7 +150,7 @@ You can retrieve the index by showing the goal list
 Example of outcome:
 
 ```
-[Command entered:`deleteg 2`]
+[Command entered:deleteg 2]
 Good. I have removed this goal: Consume 1500 kcal on Nov 25, 2023
 Remember not to give up unaccomplished target!
 You now have 1 goals to accomplish.
@@ -164,7 +164,7 @@ Format: `achieve Index`
 Example of outcome:
 
 ```
-[Command entered:`achieve 1`]
+[Command entered:achieve 1]
 Congratulation! You have achieved one goal!
 [Finished]Consume 1000 kcal on Nov 11, 2023 (:
 ```
@@ -177,7 +177,7 @@ Format: `achievement`
 Expected outcome:
 
 ```
-[Command entered:`achievement`]
+[Command entered:achievement]
 Congratulation! See your achievements below: 
 1. [A]Consume 1000 kcal on Nov 11, 2023
 ```
