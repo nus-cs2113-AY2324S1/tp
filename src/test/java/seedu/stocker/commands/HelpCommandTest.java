@@ -94,7 +94,7 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
-                + "listVendors: List all vendor information that is being tracked by the system."
+                + "listVendors: List all vendors that are being tracked by the system."
                 + System.getProperty("line.separator")
                 + "Example: listVendors"
                 + System.getProperty("line.separator")

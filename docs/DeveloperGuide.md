@@ -499,18 +499,20 @@ The following sequence diagram shows how the Command Result function works.
 
 Priorities: High (must have) - \* \* _, Medium (nice to have) - _ _, Low (unlikely to have) - _
 
-| Priority | Version | As a ...             | I want to ...                                        | So that I can ...                                           |
-|----------|---------|----------------------|------------------------------------------------------|-------------------------------------------------------------|
-| \* \* \* | v1.0    | Pharmacist           | Add drugs to track what drugs are available in stock | Reduce manual errors                                        |
-| \* \* \* | v1.0    | Pharmacist           | Remove drugs to track what are no longer in used     | Ensure compliance                                           |
-| \* \* \* | v1.0    | Receptionist         | View a list of products of that category             | Easily obtain an overview of the products                   |
-| \* \* \* | v1.0    | First-time user      | See a list of all available actions                  | Better understand how to use the application                |
-| \* \* \* | v1.0    | Inventory Manager    | Find a specific drug currently in the system         | Check up its details and quantities specifically            |
-| \* \* \* | v2.0    | user                 | Find a to-do item by name                            | Locate a to-do without having to go through the entire list |
-| \* \* \* | v1.0    | user                 | Have a way to login to the system                    | Access the system only if i am allowed to                   |
-| \* \*    | v2.0    | System Administrator | Perfrom regular backup of inventory database         | Safeguard against data loss and system failure              |
-| \* \* \* | v2.0    | Receptionist         | Add vendors supplying drugs into the system          | Keep track of what vendors i am working with                |
-| \* \* \* | v2.0    | Receptionist         | View a list of vendors                               | Easily know who to contact if drugs need to be restocked    |
+| Priority | Version | As a ...             | I want to ...                                        | So that I can ...                                              |
+|----------|---------|----------------------|------------------------------------------------------|----------------------------------------------------------------|
+| \* \* \* | v1.0    | Pharmacist           | Add drugs to track what drugs are available in stock | Reduce manual errors                                           |
+| \* \* \* | v1.0    | Pharmacist           | Remove drugs to track what are no longer in used     | Ensure compliance                                              |
+| \* \* \* | v1.0    | Receptionist         | View a list of products of that category             | Easily obtain an overview of the products                      |
+| \* \* \* | v1.0    | First-time user      | See a list of all available actions                  | Better understand how to use the application                   |
+| \* \* \* | v1.0    | Inventory Manager    | Find a specific drug currently in the system         | Check up its details and quantities specifically               |
+| \* \* \* | v1.0    | user                 | Have a way to login to the system                    | Access the system only if i am allowed to                      |
+| \* \*    | v2.0    | System Administrator | Perform regular backup of inventory database         | Safeguard against data loss and system failure                 |
+| \* \* \* | v2.0    | Receptionist         | Add vendors supplying drugs into the system          | Keep track of what vendors i am working with                   |
+| \* \* \* | v2.0    | Receptionist         | View a list of vendors                               | Easily access a list of contacts for current and future orders |
+| \* \* \* | v2.0    | Receptionist         | Add and view vendors' supply lists                   | Keep track of what each vendors' supply                        |
+| \* \* \* | v2.0    | Receptionist         | Find which drugs are supplied by which vendors       | Easily access a list of vendors to contact for drug reordering |
+| \* \*    | v2.0    | Receptionist         | Add and view descriptions of various drugs           | Easily access usage of products for quick reference            |
 
 _(More to be added)_
 

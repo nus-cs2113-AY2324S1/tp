@@ -18,8 +18,7 @@ can get your inventory management tasks done faster than traditional GUI apps.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
+ 
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Stocker` from [here](https://github.com/AY2324S1-CS2113-T17-3/tp/releases).
 3. Copy the absolute filepath to where the jar file is
@@ -453,22 +452,25 @@ Expected outcome:
 
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
 
-- Adds a drug into a vendor's supply list to be tracked by the system, and vendor must already be added into the system.
-- If the drug already exists in the vendor's supply list, system will inform user
+- Adds a drug into a vendor's supply list to be tracked by the system
+  - Vendor must already be added into the system.
+  - If the drug already exists in the vendor's supply list, system will inform user
 
 Format:
 
-addVendorSupply VENDOR_NAME DRUG_NAME
+addVendorSupply /v VENDOR_NAME /n DRUG_NAME
 
 Example of usage:
 
-`addVendorSupply Moderna Paracetamol`
+`addVendorSupply /v Moderna /n Paracetamol`
 
 Expected outcome:
 
 ```
 || New drug added to moderna's supply list: paracetamol
 ```
+Note : As this serves as a catalogue for information related to vendor supply lists, drugs not currently tracked by the 
+inventory can be added into the supply list. 
 
 ### `listVendorSupply` - Displays the list of all drugs being supplied by a particular vendor.
 
@@ -480,12 +482,12 @@ listVendorSupply VENDOR_NAME
 
 Example of usage:
 
-`listVendorSupply Moderna`
+`listVendorSupply /v Moderna`
 
 Expected outcome:
 
 ```
-|| Drugs supplied by Moderna: paracetamol, panadol
+|| Drugs supplied by moderna: paracetamol, panadol
 ```
 
 ### `findVendorSupply` -Displays the list of all vendors that supply a particular drug.
@@ -494,11 +496,11 @@ Displays the list of all vendors that supply a particular drug.
 
 Format:
 
-findVendorSupply DRUG_NAME
+findVendorSupply /n DRUG_NAME
 
 Example of usage:
 
-`findVendorSupply paracetamol`
+`findVendorSupply /n paracetamol`
 
 Expected outcome:
 
@@ -627,6 +629,8 @@ Expected outcome:
 ```
 || New drug description added for Panadol: Pain Relief
 ```
+Note : As this serves as a catalogue for information related to drug usage and their respective descriptions, 
+drugs not currently tracked by the inventory can be added with a description here. Both lists are separate. 
 
 ### `getDescription` - Retrieves the description of a particular drug.
 
@@ -694,9 +698,10 @@ Expected outcome:
 - save : `save`
 - add Vendor : `addVendor`
 - list Vendor : `listVendors`
-- add Vendor Supply : `addVendorSupply VENDOR_NAME DRUG_NAME`
-- list Vendor Supply : `listVendorSupply VENDOR_NAME`
-- find Vendor Supply : `findVendorSupply DRUG_NAME`
+- add Vendor Supply : `addVendorSupply /v VENDOR_NAME /n DRUG_NAME`
+- list Vendor Supply : `listVendorSupply /v VENDOR_NAME`
+- find Vendor Supply : `findVendorSupply /n DRUG_NAME`
+- delete Vendor Supply : `deleteVendorSupply /v VENDOR_NAME /n DRUG_NAME`
 - add description : `addDescription /n DRUG_NAME /desc DESCRIPTION`
 - get description : `getDescription /n DRUG_NAME`
 - list descriptions : `listDescriptions`
