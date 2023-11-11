@@ -21,7 +21,7 @@ public class StorageTest {
         // The file contains valid txt data, but does not match the format
         Storage storage = getStorage("InvalidProfileData.txt",
                 "InvalidMealListData.txt", "InvalidWorkoutListData.txt", "InvalidStepListData.txt");
-        assertThrows(StorageOperationException.class, () -> storage.profileLoad());
+        assertThrows(StorageOperationException.class, () -> storage.loadProfile());
     }
 
     @Test

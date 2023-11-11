@@ -189,7 +189,7 @@ public class Storage {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public UserProfile profileLoad() throws StorageOperationException {
+    public UserProfile loadProfile() throws StorageOperationException {
         profilePath = Paths.get(PROFILE_FILE_PATH);
         if (!Files.exists(profilePath) || !Files.isRegularFile(profilePath)) {
             return new UserProfile();
@@ -210,7 +210,7 @@ public class Storage {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public MealList mealLoad() throws StorageOperationException {
+    public MealList loadMeals() throws StorageOperationException {
         mealListPath = Paths.get(MEAL_LIST_FILE_PATH);
         if (!Files.exists(mealListPath) || !Files.isRegularFile(mealListPath)) {
             return new MealList();
@@ -231,7 +231,7 @@ public class Storage {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public WorkoutList workoutLoad() throws StorageOperationException {
+    public WorkoutList loadWorkouts() throws StorageOperationException {
         workoutListPath = Paths.get(WORKOUT_LIST_FILE_PATH);
         if (!Files.exists(workoutListPath) || !Files.isRegularFile(workoutListPath)) {
             return new WorkoutList();
@@ -252,7 +252,7 @@ public class Storage {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public StepList stepLoad() throws StorageOperationException {
+    public StepList loadSteps() throws StorageOperationException {
         stepListPath = Paths.get(STEP_LIST_FILE_PATH);
         if (!Files.exists(stepListPath) || !Files.isRegularFile(stepListPath)) {
             return new StepList();
