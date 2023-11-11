@@ -98,8 +98,12 @@ public class ShortcutParser {
         boolean hasEditQuantity = false;
 
         for (int i = 1; i < editDetails.length; i++) {
-            String flag = editDetails[i].substring(0, 2).strip();
 
+            if (editDetails[i].isBlank()) {
+                continue;
+            }
+
+            String flag = editDetails[i].substring(0, 2).strip();
             switch (flag) {
             case "n/":
                 editShortcutName(shortcut, ingredients, editDetails[i], hasEditName);
