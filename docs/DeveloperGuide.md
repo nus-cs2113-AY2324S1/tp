@@ -2,7 +2,7 @@
 
 ## Acknowledgements
 
-We first give acknowledgement to Module Coordinator, Dr Akshay Narayan, and Teaching Assistant, Aditi Chadha for guidance and supervision over the KaChinnnng project.
+We first give acknowledgement to Module Coordinator, Dr Akshay Narayan, and Teaching Assistant, Irving for guidance and supervision over the KaChinnnng project.
 
 We utilised the following resources to aid us in the development of KaChinnnng:
 -  [tp project](https://github.com/nus-cs2113-AY2324S1/tp) of the nus-cs2113-AY2324S1 organisation
@@ -19,7 +19,7 @@ The architectural diagram of KaChinnnng is as follows:
 
 ![ArchitectureDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/ArchitectureDiagram.png?raw=true)
 
-The kaChinnnng program will first enter the `run` state where the `storage` class will be accessed and data will be retrieved if the application has been used before.
+The KaChinnnng program will first enter the `run` state where the `storage` class will be accessed and data will be retrieved if the application has been used before. If the application has not been used before, the `storage` class will create a new file to store the data.
 
 Next, the `User` will input various `commands` via the `Ui` class. The `commands` will then be parsed by the `Parser` class and the relevant `managers` will be called to execute the `commands`.
 
@@ -32,7 +32,7 @@ When the `User` exits the program, the `storage` class will be called to save th
 ### Expense Class Overview
 
 The Expenses are divided into three categories. Transport, Utilities and Food.
-Each of the categories inherit from a base Expense class which in turn
+Each of the categories inherits from a base Expense class which in turn
 inherits from the FinancialRecord class.
 
 ![expense_class_diagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_class_diagram.png?raw=true)
@@ -54,9 +54,9 @@ The ExpenseManager is facilitated by `ExpenseParser`,  `ExpenseManager`, `Expens
 1. The user inputs the command to add expense.
 2. This command is used to instantiate a ExpenseManager object which is executed.
 3. During execution, the command is passed to ExpenseParser which extracts and parses the input fields.
-4. Input field information is passed to the relevant Expense constructor which returns a Expense object.
+4. Input field information is passed to the relevant Expense constructor which returns an Expense object.
 5. Expense object is returned to ExpenseManager from ExpenseParser.
-6. Expense obejct is returned to Duke from ExpenseManager.
+6. Expense object is returned to Duke from ExpenseManager.
 
 ![expenseManager_sequence_diagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expenseManager_sequence_diagram.png?raw=true)
 
@@ -70,8 +70,8 @@ find /t <type> /cat [category] /de [description] /date [date]
 2. The inputs will then be passed to `FindParser` to get the necessary fields such as type, category, description and date.
 3. The FindCommand is then instantiated with the necessary fields.
 4. Users can choose to search through the expense list or income list.
-5. If users searches through the income list, either the description or date will be used to search through the income list.
-6. If users searches through the expense list, either the category or date will be used to search through the expense list.
+5. If users searches through the income list, either the description or date will be used to search through the income list, category will be ignored.
+6. If users searches through the expense list, either the category, description or date will be used to search through the expense list.
 7. The execute method will then be called to search through the list and return the list of expenses or incomes that matches the search criteria.
 
 ![FindCommand_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/FindCommand_SequenceDiagram(updated).drawio.png?raw=true)
@@ -79,7 +79,7 @@ find /t <type> /cat [category] /de [description] /date [date]
 ### GetFromTxt Command
 The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngException`, `IncomeList` and `ExpenseList`
 1. The user start the program and the command will start automatically with a default path
-2. Once the command executed, it will try to create an txt file on the default path
+2. Once the command executed, it will try to create a txt file on the default path
 3. If file failed to create, throw an `IOException`
 4. Catch the `IOExceotion` and print error messages
 5. Create a `Scanner` Object s to get content from txt file
@@ -93,11 +93,11 @@ The Sequence Diagram below shows how the components interact with each other for
 where the user issues the command `update exchange rate USD 0.8`.
 1. The user input the command `update exchange rate USD 0.8`
 2. Duke will create the `UpdateExchangeRateCommand` object with the specified currency and rate
-4. Duke will the execute the command object which will call `updateExchangeRate` in ExchangeRateManager
-5. If the currency specified is not a supported currency or the rate specified is not a decimal with 0.001 and 3,000,000,
+3. Duke will the execute the command object which will call `updateExchangeRate` in ExchangeRateManager
+4. If the currency specified is not a supported currency or the rate specified is not a decimal with 0.001 and 3,000,000,
    a `KaChinnnningException` will be thrown
-6. Once the update is successful, Ui will be called to show the completion message
-7. Lastly, the updated exchange rates will be saved in the exchange rate file
+5. Once the update is successful, Ui will be called to show the completion message
+6. Lastly, the updated exchange rates will be saved in the exchange rate file
 
 ![UpdateExchangeRate_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/UpdateExchangeRate_SequenceDiagram.png?raw=true)
 
@@ -130,23 +130,23 @@ Target user profile:
 
 | Version | As a ... | I want to ...                      | So that I can ...                                                     |
 |---------|----------|------------------------------------|-----------------------------------------------------------------------|
-| v1.0    |new user| see usage instructions             | refer to them when I forget how to use the application                |
-| v1.0    |user| add new income entry               | track all my incomes                                                  |
-| v1.0    |user| add new expense entry              | track all of my expenses                                              |
-| v1.0    |user| delete income entry                | remove incomes that I no longer want to track                         |
-| v1.0    |user| delete expense entry               | remove expenses that I no longer want to track                        |
-| v1.0    |user| list both income and expense entry | view all my expenses and incomes                                      |
-| v1.0    |user| check my balace                    | better bugdet my expenditures                                         |
-| v2.0    |user| search for past inputs             | better find and track my past expenses                                |
-| v2.0    |user| be able to change the currency     | better track my expenses in different currencies when i am travelling |
-| v2.0    |user| be able to edit my inputs          | make necessary changes to my inputs when a mistake is made            |
-| v2.0    |user| be able to save and load my inputs | save my inputs so that I can access them the next time I use the app  |
-| v2.0    |user| reset my inputs                    | start afresh                            |
+| v1.0    | new user | see usage instructions             | refer to them when I forget how to use the application                |
+| v1.0    | user     | add new income entry               | track all my incomes                                                  |
+| v1.0    | user     | add new expense entry              | track all of my expenses                                              |
+| v1.0    | user     | delete income entry                | remove incomes that I no longer want to track                         |
+| v1.0    | user     | delete expense entry               | remove expenses that I no longer want to track                        |
+| v1.0    | user     | list both income and expense entry | view all my expenses and incomes                                      |
+| v1.0    | user     | check my balance                   | better budget my expenditures                                         |
+| v2.0    | user     | search for past inputs             | better find and track my past expenses                                |
+| v2.0    | user     | be able to change the currency     | better track my expenses in different currencies when i am travelling |
+| v2.0    | user     | be able to edit my inputs          | make necessary changes to my inputs when a mistake is made            |
+| v2.0    | user     | be able to save and load my inputs | save my inputs so that I can access them the next time I use the app  |
+| v2.0    | user     | reset my inputs                    | start afresh                                                          |
 
 ## Non-Functional Requirements
 - Domain rules:
     - The application should not crash under normal circumstances.
-    - Dates can be entered in the format of dd/mmm/yyyy or dd/mm/yyyy and should not be in the future.
+    - Dates can be entered in the format dd/mm/yyyy and should not be in the future.
     - Amount added should be in the format of 0.00 and should not be negative.
     - The application only accepts commands in English.
     - Users should refrain from using special characters in the description/category/type/date field.
@@ -154,27 +154,27 @@ Target user profile:
  
 - Constraints:
   - the total number of entries for Expense and Income should not exceed 10 000 each.
-  - the amount input should be less than 1 billion.
+  - the amount input should be less than 1000000.
 
 - Technical Requirements:
-  - The application must be able to run on Windows, MacOS and Linux.
+  - The application must be able to run on Windows, macOS and Linux.
 - Technical Requirements:
   - KaChinnnng should be able to be used by users of all skill levels.
 - Others:
   - Arguments should follow the format specified in the user guide.
-  - Should the arguments not be in  the provided format, the application will not execute the command.
+  - Should the arguments not be in the provided format, the application will not execute the command.
 
 
 
 ## Glossary
 
-| Term    | Definition |
-|---------|------------|
-| Income  | debit entry of user|
-| Expense | credit entry of user|
-| Balance | Net Amount|
-| Ui      | User Interface, where user inputs commands and sees output|
-| Parser  | Parses user input into commands|
+| Term    | Definition                                                 |
+|---------|------------------------------------------------------------|
+| Income  | debit entry of user                                        |
+| Expense | credit entry of user                                       |
+| Balance | Net Amount                                                 |
+| Ui      | User Interface, where user inputs commands and sees output |
+| Parser  | Parses user input into commands                            |
 
 
 ## Instructions for manual testing
@@ -182,53 +182,93 @@ Target user profile:
 Given below are the instructions for manual testing of KaChinnnng.
 
 ### Launching and exiting the application
-1. lauching the application
+1. launching the application
    1. download the jar file from the release page.
    2. open a terminal and navigate to the directory where the jar file is located.
-   3. run the command `java -jar KaChinnnng.jar`
+   3. run the command `java -jar tp.jar`
 2. exiting the application
    1. type `exit` in the command box and press enter.
    2. the application will exit.
 
 ### Adding an income/expense
-1. adding an income/expense
-   1. Test case:
-   - To add an income: `add income /de <description> /date <DD/MM/YYYY> /amt <amount>`
+adding an income/expense
+1. Test case:
+   - To add an income: `add income /de salary /date 31/10/2023 /amt 5000.00`
    - To add an expense: `add expense /cat food /type lunch /de sushi /date 31/10/2023 /amt 20.00`
-   - /type for expense includes (`UNDEFINED`, `BREAKFAST`, `LUNCH`, `DINNER`) for the `food` category, (`TRAIN`, `BUS`, `TAXI`, `FUEL`, `UNDEFINED`) for the `TRANSPORT` category and (`UNDEFINED`,  `WATER`, `ELECTRICITY`, `GAS`) for the `UTILITIES` category.
+   - `/type` for expense includes (`OTHER`, `BREAKFAST`, `LUNCH`, `DINNER`) for the `food` category, (`TRAIN`, `BUS`, `TAXI`, `FUEL`, `OTHER`) for the `TRANSPORT` category and (`OTHER`,  `WATER`, `ELECTRICITY`, `GAS`) for the `UTILITIES` category.
    - Expected outcome: the income/expense will be added to the list and the balance will be updated accordingly and the user will be notified.
    
-   2. Test case:
-    - income: `add income /de salary`
-    - expense: `add expense /cat food /type lunnch`
-    - Expected outcome: the income/expense will not be added to the list and the user will be notified with an error message.
+2. Test case:
+   - income: `add income /de salary`
+   - expense: `add expense /cat food /type lunnch`
+   - Expected outcome: the income/expense will not be added to the list and the user will be notified with an error message.
    
-    3. Test case:
+3. Test case:
    - Other invalid test cases includes:
-   - income: `add income /de salary /date 31/11/2023 /amt 5000.00` where the date is in the future.
+   - income: `add income /de salary /date 31/11/2024 /amt 5000.00` where the date is in the future.
    - income: `add income /de salary /date 31-10-2023 /amt 5000.00` where the date is in the wrong format.
    - income: `add income /de salary /date 31/10/2023 /amt -5000.00` where the amount is negative.
    - expense: `add expense /cat food /type lunch /de lunch  /amt 5000.00` where there is missing fields
 
+### updating exchange rate
+updating exchange rate
+To check the supported currencies, type `list currencies`
+1. Test case:
+   - To update exchange rate: `update exchange rate USD 0.8`
+   - Expected outcome: the exchange rate will be updated and the user will be notified.
+
+### Listing all incomes/expenses
+pre-requisite: list should already contain income/expense.
+1. Test case: If there is no income/expense
+   - For income: `list incomes`
+   - For expense: `list expenses`
+   - Expected outcome: no income/expense should be listed.
+2. Test case: If there is income/expense
+    - For income: `list incomes`
+    - For expense: `list expenses`
+    - Expected outcome: all income/expense should be listed.
+3. Test case: to list both income and expense
+    - `list`
+    - Expected outcome: all income/expense should be listed.
+
 ### Deleting an income/expense
 Deleting income/expense
-1. Test case: If there the index specified invalid
+pre-requisite: list should already contain income/expense. this can be checked via `list incomes`, `list expenses` or `list`
+1. Test case: If there is index specified
+   - For income/expense: `delete income <index>`
+   - Expected outcome: the income/expense will be deleted from the list and the balance will be updated accordingly and the user will be notified.
+2. Test case: If the index specified is invalid
     - For income/expense: `delete income <invalid_index>`
     - Expected outcome: `Oops! Income <invaldi_index> does not exist`
-2. Test case: If the index is missing
+3. Test case: If the index is missing
     - For income/expense: `delete income`
     - Expected outcome: `You're missing an argument`
-3. Test case: If there index is not an integer
+4. Test case: If there index is not an integer
     - For income/expense: `delete income abc`
     - Expected outcome: `Oops! An integer index is expected`
 
+### Clearing all incomes/expenses
+Clearing all income/expense
+pre-requisite: list should already contain income/expense. this can be checked via `list incomes`, `list expenses` or `list`
+1. Test case: If there is income/expense
+   - For income: `clear incomes`
+   - For expense: `clear expenses`
+   - Expected outcome: all income/expense will be deleted from the list and the balance will be updated accordingly and the user will be notified.
 
+2. Test case: To clear both income and expense
+   - `clear all`
+   - Expected outcome: all income/expense will be deleted from the list and the balance will be updated accordingly and the user will be notified.
 ### Editing an income/expense
 Editing income/expense
-1. Test case: If there the index specified invalid
+pre-requisite: list should already contain income/expense. this can be checked via `list incomes`, `list expenses` or `list`
+
+1. Test case: If there is index specified
+   - For income/expense: `edit income <index> income /de <description> /date <DD/MM/YYYY> /amt <amount>`
+   - Expected outcome: the income/expense will be edited and the balance will be updated accordingly and the user will be notified.
+2. Test case: If there is index specified invalid
    - For income/expense: `edit income <invalid_index> income /de <description> /date <DD/MM/YYYY> /amt <amount>`
    - Expected outcome: `Oops! Income <invaldi_index> does not exist`
-2. Test case: Missing arguments
+3. Test case: Missing arguments
     Assuming Income 1 and Expense 1 exist:
     - income: `edit income 1 /de salary`
     - expense: `edit expense 1 /cat food /type lunnch`
@@ -242,14 +282,16 @@ Editing income/expense
     - expense: `edit expense 1 /cat food /type lunch /de lunch /amt 5000.00` where there is missing fields
 
 ### Finding an income/expense
-1. Finding income/expense:
-   1. Pre-requisite: list should already contain income/expense. this can be checked via `list incomes`, `list expenses` or `list`
-   2. Test case:
+Finding income/expense:
+1. Pre-requisite: list should already contain income/expense. this can be checked via `list incomes`, `list expenses` or `list`
+2. For income, at least one of the 2 optional fields have to be used to search for the income.
+3. For expense, at least one of the 3 optional fields have to be used to search for the expense.
+4. Test case:
    - For income: `find /t income /de salary`
    - For expense: `find /t expense /cat food /de sushi /date 31/10/2023`
    - Expected outcome: all income with description containing "salary" should be listed. all expense containing "food" in the category, "sushi" in the description and "31/10/2023" in the date should be listed.
-   
-    3. Test case: If there is no matching income/expenses
+   - 
+5. Test case: If there is no matching income/expenses
    - Income: `find /t income /de bonus`
    - Expense: `find /t expense /cat food /de burger /date 31/10/2023`
-   - expected: no income/expense should be listed.
+   - Expected outcome: no income/expense should be listed.

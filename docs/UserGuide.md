@@ -22,6 +22,7 @@ ____________________________________________________________
 ```
 7. Type in desired commands and press enter to execute them. (note: commands are not case-sensitive)
 8. "[ ]" denotes optional parameters
+9. Do not add additional characters behind the command e.g. `add incomeabc /de salary /date 01/01/2020 /amt 1000`.
 
 ## Features 
 
