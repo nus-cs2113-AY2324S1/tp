@@ -49,7 +49,6 @@ public class Storage {
         //Checks if the saved Hash is abnormal
         if (((!hashString.matches("^[0-9]+$")) && (!hashString.matches("^-[0-9]+$"))) ||
                 hashString.matches("^0{2,}$")) {
-            //logger.log(Level.INFO, "Corrupted data file");
             return true;
         }
 
@@ -72,17 +71,23 @@ public class Storage {
         if (!isMenuTampered && !isOrdersTampered && !isPantryStockTampered) {
             return;
         }
-        ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED);
+        if (!isTamperedMessagePrinted) {
+            ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED);
+            isTamperedMessagePrinted = true;
+        }
         if (isMenuTampered) {
             ui.showToUser(Messages.SAVE_FILE_FORMAT_MENU);
-        }
-        if (isOrdersTampered) {
-            ui.showToUser(Messages.SAVE_FILE_FORMAT_ORDERS);
+            isMenuTampered = false;
         }
         if (isPantryStockTampered) {
             ui.showToUser(Messages.SAVE_FILE_FORMAT_PANTRY_STOCK);
+            isPantryStockTampered = false;
         }
-        ui.showToUser(System.lineSeparator());
+        if (isOrdersTampered) {
+            ui.showToUser(Messages.SAVE_FILE_FORMAT_ORDERS);
+            isOrdersTampered = false;
+        }
+        ui.showToUser("");
     }
 
     //@@author ShaniceTang
