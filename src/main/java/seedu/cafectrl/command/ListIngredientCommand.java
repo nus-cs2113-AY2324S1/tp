@@ -3,7 +3,6 @@ package seedu.cafectrl.command;
 import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
-import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -35,14 +34,7 @@ public class ListIngredientCommand extends Command {
         logger.info("Executing ListIngredientCommand...");
         try {
             Dish selectedDish = menu.getMenuItemsList().get(index - Ui.OFFSET_LIST_INDEX);
-            ui.showIngredientsHeader(selectedDish);
-
-            for (Ingredient ingredient : selectedDish.getIngredients()) {
-                ui.formatListIngredient(ingredient.getName(),
-                        ingredient.getQty()+ingredient.getUnit());
-            }
-
-            ui.showIngredientsEndCap();
+            ui.showListIngredientsMessage(selectedDish);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, "ListIngredientCommand unsuccessful: " + e.getMessage(), e);
             throw new IllegalArgumentException(ErrorMessages.UNLISTED_DISH);

@@ -14,8 +14,9 @@ import seedu.cafectrl.command.PreviousDayCommand;
 import seedu.cafectrl.command.ListSaleByDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.data.dish.Dish;
+import seedu.cafectrl.data.dish.Ingredient;
 
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -46,39 +47,55 @@ public class Ui {
         showToUser(Messages.GOODBYE_MESSAGE);
     }
 
+    //@@author NaychiMin
     /**
      * Prints out the quantity of each ingredient needed for the
-     * dish that the user selects.
+     * dish in a table format.
      *
-     * @param selectedDish Dish for ingredients to be listed out.
+     * @param dish Dish for ingredients to be listed out.
      */
-    public void showIngredientsHeader(Dish selectedDish) {
-        String ingredientsString = String.format("|%-55s|", " Dish: " + selectedDish.getName());
-        showToUser(Messages.INGREDIENTS_END_CAP);
-        showToUser(ingredientsString);
-        showToUser(Messages.INGREDIENTS_CORNER);
-        showToUser(Messages.INGREDIENTS_TITLE);
-        showToUser(Messages.INGREDIENTS_CORNER);
+    public void showListIngredientsMessage(Dish dish) {
+        showDishNameHeader(dish);
+        showIngredientList(dish);
+        showIngredientsEndCap();
+    }
+
+    public void showDishNameHeader(Dish dish) {
+        String dishNameString = String.format("|%-55s|", " Dish: " + dish.getName());
+        showToUser(Messages.INGREDIENTS_END_CAP,
+                dishNameString,
+                Messages.INGREDIENTS_CORNER);
+    }
+
+    public void showIngredientList(Dish dish) {
+        showToUser(Messages.INGREDIENTS_TITLE,
+                Messages.INGREDIENTS_CORNER);
+
+        ArrayList<Ingredient> ingredients = dish.getIngredients();
+        for (Ingredient ingredient : ingredients) {
+            formatListIngredient(ingredient.getName(), ingredient.getQty() + ingredient.getUnit());
+        }
     }
 
     public void showIngredientsEndCap() {
         showToUser(Messages.INGREDIENTS_END_CAP);
     }
 
-
+    //@@author DextheChik3n
     public void printAddDishMessage(Dish dish) {
-        String dishNameString = "Dish Name: " + dish.getName();
-        DecimalFormat dollarValue = new DecimalFormat("0.00");
-        float dishPrice = dish.getPrice();
-        String dishPriceString = "Dish Price: $" + dollarValue.format(dishPrice);
-
-        showToUser(Messages.ADD_DISH_MESSAGE,
-                dishNameString,
-                dishPriceString);
-
-        showIngredientsHeader(dish);
+        showToUser(Messages.ADD_DISH_MESSAGE + "\n");
+        showDishNameHeader(dish);
+        showDishPrice(dish);
+        showIngredientList(dish);
+        showIngredientsEndCap();
     }
 
+    public void showDishPrice(Dish dish) {
+        String dishPriceString = String.format("|%-55s|", " Price: $" + dish.getPriceString());
+        showToUser(dishPriceString, Messages.INGREDIENTS_CORNER);
+    }
+
+    //@@author
     /**
      * Shows delete message to user
      *
