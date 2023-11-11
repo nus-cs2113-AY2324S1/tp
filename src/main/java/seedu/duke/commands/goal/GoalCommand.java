@@ -1,5 +1,6 @@
 package seedu.duke.commands.goal;
 
+import seedu.duke.Duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.GoalList;
@@ -30,7 +31,7 @@ public class GoalCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            feedbackToUser = GoalList.addGoal(this.userCommand);
+            feedbackToUser = GoalList.addGoal(this.userCommand, Duke.goalList, Duke.goalStorage);
         } catch (IncorrectFormatException ife) {
             feedbackToUser = ife.getMessage();
         } catch (NumberFormatException nfe) {
