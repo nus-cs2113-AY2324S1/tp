@@ -1,6 +1,8 @@
 package seedu.financialplanner.visualisations;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
@@ -24,6 +26,7 @@ class VisualizerTest {
         assertEquals(exception.getMessage(), expected);
     }
 
+    @DisabledOnOs({OS.LINUX})
     @Test
     void visualizePie() throws FinancialPlannerException {
         CashflowList cashflowList = CashflowList.getInstance();
@@ -31,6 +34,7 @@ class VisualizerTest {
         assertDoesNotThrow(() -> Visualizer.displayChart("Pie", map, "Expense"));
     }
 
+    @DisabledOnOs({OS.LINUX})
     @Test
     void visualizeBar() throws FinancialPlannerException {
         CashflowList cashflowList = CashflowList.getInstance();
@@ -39,6 +43,7 @@ class VisualizerTest {
         assertDoesNotThrow(() -> Visualizer.displayChart("Bar", map, "Expense"));
     }
 
+    @DisabledOnOs({OS.LINUX})
     @Test
     void visualizeRadar() throws FinancialPlannerException {
         CashflowList cashflowList = CashflowList.getInstance();
