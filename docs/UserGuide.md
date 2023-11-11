@@ -651,15 +651,15 @@ Adds a reminder to the Financial Planner.
 
 Format: `addreminder /t TYPE /d DATE`
 - `/t` is used to specify the reminder type, which describes what is the reminder used for.
-- `/d` is used to give a deadline date to the reminder.
+- `/d` is used to give a deadline date to the reminder. The date must be in the format of `DD/MM/YYYY`.
 
-Example of usage: `addreminder /t debt /d 2023.12.11`
+Example of usage: `addreminder /t debt /d 11/12/2023`
 
 Example output:
 ```
 You have added Reminder 
    Type: debt
-   Date: 2023.12.11
+   Date: 11/12/2023
    Status: Not Done
 ```
 
