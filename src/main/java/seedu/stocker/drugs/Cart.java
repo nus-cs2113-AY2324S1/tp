@@ -12,15 +12,17 @@ public class Cart {
         this.entries = new ArrayList<>();
     }
 
+    public Cart(List<CartEntry> cartEntries) {
+        this.entries = new ArrayList<>(cartEntries);
+    }
+
     public void addEntry(String key, long quantity) {
         this.entries.add(new CartEntry(key, quantity));
     }
 
-    public void addEntry(String serialNumber, long quantity, Inventory inventory) {
+    public void addEntry(String serialNumber, long quantity, double sellingPrice, Inventory inventory) {
         StockEntry stockEntry = inventory.get(serialNumber);
         if (stockEntry != null) {
-            Drug drug = stockEntry.getDrug();
-            double sellingPrice = drug.getSellingPrice();
             double totalCost = sellingPrice * quantity;
             this.entries.add(new CartEntry(serialNumber, quantity, totalCost));
         }

@@ -1,6 +1,11 @@
 package seedu.stocker.commands;
+import seedu.stocker.drugs.Cart;
+import seedu.stocker.drugs.CartEntry;
+import seedu.stocker.drugs.Drug;
+import seedu.stocker.drugs.StockEntry;
 
-import seedu.stocker.exceptions.DrugNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Remove a drug from inventory and add it into the sales list
@@ -21,11 +26,38 @@ public class CheckOutCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        try {
-            currentCart.checkOut(salesList, inventory);
-            return new CommandResult<>(String.format(MESSAGE_SUCCESS));
-        } catch (DrugNotFoundException e) {
-            return new CommandResult<>(String.format(MESSAGE_FAILURE));
+        if (currentCart.isEmpty()) {
+            return new CommandResult(MESSAGE_FAILURE);
+        } else {
+            StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
+            int index = 1;
+            double totalCost = 0.0;
+
+            // Create a temporary holder for sold items
+            List<CartEntry> soldItems = new ArrayList<>();
+
+            for (CartEntry entry : currentCart.getCurrentCart()) {
+                String serialNumber = entry.getSerialNumber();
+                long quantity = entry.getQuantity();
+
+                StockEntry stockEntry = inventory.get(serialNumber);
+                if (stockEntry != null) {
+                    Drug drug = stockEntry.getDrug();
+                    double sellingPrice = drug.getSellingPrice();
+                    double cost = sellingPrice * quantity;
+                    totalCost += cost;
+
+                    // Add the sold item to the temporary holder
+                    soldItems.add(new CartEntry(serialNumber, quantity, sellingPrice));
+                }
+            }
+
+            // Add the temporary holder to the sales list
+            salesList.addSale(new Cart(soldItems));
+
+            resultMessage.append(System.lineSeparator()).append("Total Cost: ").append(totalCost);
+
+            return new CommandResult<>(resultMessage.toString());
         }
     }
 }

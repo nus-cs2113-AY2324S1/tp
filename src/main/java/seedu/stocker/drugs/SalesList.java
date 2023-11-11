@@ -19,4 +19,9 @@ public class SalesList {
         return this.validatedCarts;
     }
 
+    public void addSoldItem(String serialNumber, long quantity, double sellingPrice, Inventory inventory) {
+        Cart cart = new Cart();
+        cart.addEntry(serialNumber, quantity, sellingPrice, inventory);
+        this.validatedCarts.add(cart);
+    }
 }

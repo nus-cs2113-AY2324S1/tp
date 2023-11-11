@@ -60,6 +60,7 @@ public class Stocker {
             this.vendorsList = new VendorsList();
             Storage storage = new Storage(inventory);
             storage.loadFileContents("drugs.txt");
+            storage.loadSoldItems("soldItems.txt", salesList);
             boolean checker = startLogin();
             assert checker;
             ui.showWelcomeMessage();
