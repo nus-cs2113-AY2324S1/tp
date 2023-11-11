@@ -64,10 +64,17 @@ public class WatchList {
      * @return
      */
     private boolean checkValidStock(String key, Stock stockToCheck) {
+        boolean isValid = true;
         if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
-            return false;
+            isValid = false;
         }
-        return key.equals(stockToCheck.getSymbol());
+        if(!key.equals(stockToCheck.getSymbol())) {
+            isValid = false;
+        }
+        if (!isValid) {
+            Ui.getInstance().printInvalidStockLoaded(key);
+        }
+        return isValid;
     }
 
     /**

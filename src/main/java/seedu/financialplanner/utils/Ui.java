@@ -237,4 +237,8 @@ public class Ui {
     public void printEmptyCashFlow(String type) {
         showMessage(StringUtils.capitalize(type) + " is empty... Nothing to visualize");
     }
+
+    public void printInvalidStockLoaded(String key) {
+        showMessage(RED + "Could not load " + key  + " due to incorrect format. Check the UG for correct format");
+    }
 }
