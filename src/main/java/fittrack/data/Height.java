@@ -6,10 +6,12 @@ import fittrack.parser.NumberFormatException;
 import java.util.Objects;
 
 public class Height {
+    public static final double MAX_VALUE = 1000;
+
     public final double value;
 
     public Height(double height) {
-        assert height > 0;
+        assert height > 0 && height <= MAX_VALUE;
         this.value = height;
     }
 
@@ -47,6 +49,8 @@ public class Height {
             double height = Double.parseDouble(heightData);
             if (height <= 0) {
                 throw new IllegalValueException("Height must be a positive value.");
+            } else if (height > MAX_VALUE) {
+                throw new IllegalValueException("Height value is too large.");
             }
             return new Height(height);
         } catch (java.lang.NumberFormatException e) {

@@ -6,10 +6,12 @@ import fittrack.parser.NumberFormatException;
 import java.util.Objects;
 
 public class Calories {
+    public static final double MAX_VALUE = 1e6;
+
     public final double value;
 
     public Calories(double calories) {
-        assert calories >= 0;
+        assert calories >= 0 && calories <= MAX_VALUE;
         this.value = calories;
     }
 
@@ -45,8 +47,10 @@ public class Calories {
 
         try {
             double calories = Double.parseDouble(caloriesData);
-            if(calories < 0) {
+            if (calories < 0) {
                 throw new IllegalValueException("Calories must not be a negative value.");
+            } else if (calories > MAX_VALUE) {
+                throw new IllegalValueException("Calories value is too large.");
             }
             return new Calories(calories);
         } catch (java.lang.NumberFormatException e) {

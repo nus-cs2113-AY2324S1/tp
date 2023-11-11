@@ -16,11 +16,13 @@ class CaloriesTest {
     void constructor_zero_success() {
         assertDoesNotThrow(() -> new Calories(0));
         assertDoesNotThrow(() -> new Calories(1));
+        assertDoesNotThrow(() -> new Calories(Calories.MAX_VALUE));
     }
 
     @Test
     void constructor_belowZero_assert() {
         assertThrows(AssertionError.class, () -> new Calories(-1));
+        assertThrows(AssertionError.class, () -> new Calories(Calories.MAX_VALUE + 1));
     }
 
     @Test
@@ -57,5 +59,6 @@ class CaloriesTest {
         assertThrows(NumberFormatException.class, () -> Calories.parseCalories("hi"));
         assertThrows(NumberFormatException.class, () -> Calories.parseCalories("344kcal"));
         assertThrows(IllegalValueException.class, () -> Calories.parseCalories("-0.01"));
+        assertThrows(IllegalValueException.class, () -> Calories.parseCalories("9999999999"));
     }
 }

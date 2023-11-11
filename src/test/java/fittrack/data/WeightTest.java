@@ -21,6 +21,7 @@ class WeightTest {
     void constructor_zero_assert() {
         assertThrows(AssertionError.class, () -> new Weight(0));
         assertThrows(AssertionError.class, () -> new Weight(-1));
+        assertThrows(AssertionError.class, () -> new Weight(Weight.MAX_VALUE + 1));
     }
 
     @Test
@@ -58,5 +59,6 @@ class WeightTest {
         assertThrows(NumberFormatException.class, () -> Weight.parseWeight("54kg"));
         assertThrows(IllegalValueException.class, () -> Weight.parseWeight("-0.01"));
         assertThrows(IllegalValueException.class, () -> Weight.parseWeight("0"));
+        assertThrows(IllegalValueException.class, () -> Weight.parseWeight("99999"));
     }
 }

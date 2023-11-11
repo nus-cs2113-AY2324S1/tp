@@ -6,10 +6,12 @@ import fittrack.parser.NumberFormatException;
 import java.util.Objects;
 
 public class Weight {
+    public static final double MAX_VALUE = 1000;
+
     public final double value;
 
     public Weight(double weight) {
-        assert weight > 0;
+        assert weight > 0 && weight <= MAX_VALUE;
         this.value = weight;
     }
 
@@ -43,6 +45,8 @@ public class Weight {
             double weight = Double.parseDouble(weightData);
             if (weight <= 0) {
                 throw new IllegalValueException("Weight must be a positive value.");
+            } else if (weight > MAX_VALUE) {
+                throw new IllegalValueException("Weight value is too large.");
             }
             return new Weight(weight);
         } catch (java.lang.NumberFormatException e) {

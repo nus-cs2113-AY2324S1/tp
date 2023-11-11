@@ -21,6 +21,7 @@ class HeightTest {
     void constructor_zero_assert() {
         assertThrows(AssertionError.class, () -> new Height(0));
         assertThrows(AssertionError.class, () -> new Height(-1));
+        assertThrows(AssertionError.class, () -> new Height(Height.MAX_VALUE + 1));
     }
 
     @Test
@@ -64,5 +65,6 @@ class HeightTest {
         assertThrows(NumberFormatException.class, () -> Height.parseHeight("188cm"));
         assertThrows(IllegalValueException.class, () -> Height.parseHeight("-0.01"));
         assertThrows(IllegalValueException.class, () -> Height.parseHeight("0"));
+        assertThrows(IllegalValueException.class, () -> Height.parseHeight("99999"));
     }
 }
