@@ -31,9 +31,9 @@ public class Duke {
     public static GoalStorage goalStorage;
     static ArrayList<Meal> meals = new ArrayList<Meal>();
     private TextUi ui;
-    private String dirPath = "data";
-    private String exerciseLogFilePath = "./data/ExerciseLog.txt";
-    private String goalFilePath = "./data/GoalRecord.txt";
+    private final String dirPath = "data";
+    private final String exerciseLogFilePath = "./data/ExerciseLog.txt";
+    private final String goalFilePath = "./data/GoalRecord.txt";
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
     }
@@ -57,9 +57,9 @@ public class Duke {
     private void start(String[] launchArgs) {
         try {
             this.ui = new TextUi();
-            this.exerciseLogStorage = StorageFile.initializeStorage(dirPath, exerciseLogFilePath);
+            exerciseLogStorage = StorageFile.initializeStorage(dirPath, exerciseLogFilePath);
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
-            this.goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
+            goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
             goalStorage.restoreGoalRecord();
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
             MealCommand.setMeals(meals);
