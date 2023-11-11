@@ -119,11 +119,9 @@ Format: `set AMOUNT on Date`
 
 The AMOUNT is in terms of **kcal**. Please follows the provided formats at the beginning of this guide.
 
-Example: set 1000 on 11/11/2023
-
 Expected outcome:
 ```
-[Command entered:set 1000 on 11/11/2023]
+[Command entered:`set 1000 on 11/11/2023`]
 Nice! I have added the following goal to your goals list: 
 Consume 1000 kcal on Nov 11, 2023
 ```
@@ -134,10 +132,12 @@ Look for the content of current goal list.
 
 Format: `viewG`
 
+Example of outcome:
 ```
-Got it. I've added this task:
-[T][ ] read book
-Now you have 2 tasks in the list.
+[Command entered:`viewg`]
+Here you go! Remember to stick to your exercise and meal plans.
+1. Consume 1000 kcal on Nov 11, 2023
+2. Consume 1500 kcal on Nov 25, 2023
 ```
 
 ### `deleteG` - Delete a goal from current goal list
@@ -147,14 +147,13 @@ Format: `deleteG Index`
 
 You can retrieve the index by showing the goal list
 
-Example: XXXXX
-
-Expected outcome:
+Example of outcome:
 
 ```
-Got it. I've added this task:
-[T][ ] read book
-Now you have 2 tasks in the list.
+[Command entered:`deleteg 2`]
+Good. I have removed this goal: Consume 1500 kcal on Nov 25, 2023
+Remember not to give up unaccomplished target!
+You now have 1 goals to accomplish.
 ```
 
 ### `achieve` - Turn one goal as achieved
@@ -162,14 +161,12 @@ Be careful that this funnction will mark a goal as achieved by **removing** a go
 
 Format: `achieve Index`
 
-Example: XXXXX
-
-Expected outcome:
+Example of outcome:
 
 ```
-Got it. I've added this task:
-[T][ ] read book
-Now you have 2 tasks in the list.
+[Command entered:`achieve 1`]
+Congratulation! You have achieved one goal!
+[Finished]Consume 1000 kcal on Nov 11, 2023 (:
 ```
 
 ### `achievement` - View your achieved goals
@@ -180,9 +177,9 @@ Format: `achievement`
 Expected outcome:
 
 ```
-Got it. I've added this task:
-[T][ ] read book
-Now you have 2 tasks in the list.
+[Command entered:`achievement`]
+Congratulation! See your achievements below: 
+1. [A]Consume 1000 kcal on Nov 11, 2023
 ```
 
 ### Exiting the program: `exit`
