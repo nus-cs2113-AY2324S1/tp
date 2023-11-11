@@ -18,7 +18,6 @@ can get your inventory management tasks done faster than traditional GUI apps.
 
 ## Quick Start
 
- 
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Stocker` from [here](https://github.com/AY2324S1-CS2113-T17-3/tp/releases).
 3. Copy the absolute filepath to where the jar file is
@@ -203,13 +202,14 @@ Example of usage:
 Expected outcome:
 
 ```
-|| removed : Panadol
-|| There are now 0 drugs in the system
+|| Drug removed from inventory: Panadol
 ```
 
 ### `list` - List all drug information that is being tracked by the system
 
 List all drug information that is being tracked by the system.
+
+- If a drug has an expired expiry date at any time, it will be indicated with an (E) next to its entry.
 
 Format:
 
@@ -223,9 +223,9 @@ Example of usage:
 Expected outcome:
 
 ```
-||  1. Name: Panadol, Expiry Date: 01/02/2024  Quantity: 300
-||
 || Listed all drugs in the inventory.
+|| 	1. Name: Panadol, Expiry date: 01/02/2023, Serial number: ABC123, Quantity: 52, Selling Price: 19.9 (E)
+|| 	2. Name: Dol, Expiry date: 01/02/2024, Serial number: DOL124, Quantity: 52, Selling Price: 19.9
 ```
 
 ### `stockLevel` - List all drugs by quantity level in ascending order
@@ -261,11 +261,9 @@ find /n panadol
 
 Example of usage:
 
-`find /n KEYWORD `
+`find /n Panadol `
 
 - The search is case-insensitive, meaning that "aspirin" will match "Aspirin."
-
-- The order of the keywords does not matter. For example, "Painkiller Relief" will match "Relief Painkiller."
 
 - Only the drug name is searched.
 
@@ -453,8 +451,8 @@ Expected outcome:
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
 
 - Adds a drug into a vendor's supply list to be tracked by the system
-  - Vendor must already be added into the system.
-  - If the drug already exists in the vendor's supply list, system will inform user
+    - Vendor must already be added into the system.
+    - If the drug already exists in the vendor's supply list, system will inform user
 
 Format:
 
@@ -469,8 +467,9 @@ Expected outcome:
 ```
 || New drug added to moderna's supply list: paracetamol
 ```
-Note : As this serves as a catalogue for information related to vendor supply lists, drugs not currently tracked by the 
-inventory can be added into the supply list. 
+
+Note : As this serves as a catalogue for information related to vendor supply lists, drugs not currently tracked by the
+inventory can be added into the supply list.
 
 ### `listVendorSupply` - Displays the list of all drugs being supplied by a particular vendor.
 
@@ -543,7 +542,7 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Key : Panadole, Quantity: 10, Total Cost: $39.90
+|| 1. Key : Panadole, Quantity: 10
 ||
 || Listed all the content of your cart.
 || Total Cost of Items in Cart: $39.90
@@ -552,6 +551,9 @@ Expected outcome:
 ### `checkout` - Checks out the current cart
 
 Empty the current cart and retrieve all the specified drugs and quantity from the inventory
+
+- If after checkout, the quantity of a specific drug falls below the set threshold level, it triggers an
+  alert.
 
 Format:
 
@@ -565,6 +567,13 @@ Example of usage:
 Expected outcome:
 
 ```
+|| The current cart has been checked out.
+```
+
+Expected outcome with alert:
+
+```
+|| ALERT! Panadol is below the threshold level
 || The current cart has been checked out.
 ```
 
@@ -591,7 +600,9 @@ Expected outcome:
 ### `listThreshold` - List all drugs and their threshold levels
 
 Retrieve a list of all drugs in your inventory and their corresponding threshold levels. The threshold level is the
-minimum quantity of each drug that you want to keep in stock.
+minimum quantity of each drug that you want to keep in stock. By default, if the user hasn't specified individual
+threshold levels for each
+drug, the standard threshold level for all drugs is set at 100.
 
 Format:
 
@@ -629,8 +640,9 @@ Expected outcome:
 ```
 || New drug description added for Panadol: Pain Relief
 ```
-Note : As this serves as a catalogue for information related to drug usage and their respective descriptions, 
-drugs not currently tracked by the inventory can be added with a description here. Both lists are separate. 
+
+Note : As this serves as a catalogue for information related to drug usage and their respective descriptions,
+drugs not currently tracked by the inventory can be added with a description here. Both lists are separate.
 
 ### `getDescription` - Retrieves the description of a particular drug.
 
@@ -688,14 +700,14 @@ Expected outcome:
 
 ## Command Summary
 
+- register : `register`
+- login : `login`
+- save : `saveDrugs`
+- help : `help`
 - add : `add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY /p PRICE`
 - delete : `delete /s SERIAL_NUMBER`
 - list : `list`
 - find : `find /n KEYWORD` or `find /d KEYWORD`
-- help : `help`
-- register : `register`
-- login : `login`
-- save : `saveDrugs`
 - add Vendor : `addVendor`
 - list Vendor : `listVendors`
 - add Vendor Supply : `addVendorSupply /v VENDOR_NAME /n DRUG_NAME`

@@ -17,8 +17,7 @@ public class ViewCartCommand extends Command {
             + ": View the current cart items and the total cost." + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Listed all the content of your cart. "
-            + "Total Cost: %1$.2f";
+    public static final String MESSAGE_SUCCESS = "Listed all the content of your cart.";
     public static final String MESSAGE_FAILURE = "Your cart is empty. ";
 
     /**
