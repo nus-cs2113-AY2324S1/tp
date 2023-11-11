@@ -77,14 +77,14 @@ public class Ui {
         System.out.print(RED + "Daily Low" + RESET);
         System.out.print("     ");
         System.out.print("EquityName");
-        System.out.print("                    ");
+        System.out.print("                       ");
         System.out.print("Last Updated");
         System.out.print("     ");
         System.out.println();
     }
 
     public void printWatchListAcknowledgement() {
-        showMessage("Data provided by Financial Modeling Prep and Alpha Vantage 😊");
+        showMessage("Data provided by Financial Modeling Prep and Alpha Vantage =)");
     }
 
 
