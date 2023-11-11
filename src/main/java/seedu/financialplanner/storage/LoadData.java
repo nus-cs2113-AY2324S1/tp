@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -38,7 +39,6 @@ public abstract class LoadData {
     private static final Ui ui = Ui.getInstance();
     private static final ReminderList reminderList = ReminderList.getInstance();
     private static final WishList wishList = WishList.getInstance();
-
 
     /**
      * Loads existing data from the storage file.
@@ -128,7 +128,6 @@ public abstract class LoadData {
         }
         for (Cashflow cashflow : tempCashflowList) {
             cashflowList.load(cashflow);
-            ui.printAddedCashflow(cashflow);
         }
     }
 
@@ -294,7 +293,8 @@ public abstract class LoadData {
     private static LocalDate getDate(String[] split, int recur) {
         LocalDate date;
         if (recur != 0) {
-            date = LocalDate.parse(split[5].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            date = LocalDate.parse(split[5].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                    .withResolverStyle(ResolverStyle.STRICT));
         } else {
             date = null;
         }
