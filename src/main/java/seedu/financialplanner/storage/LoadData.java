@@ -293,7 +293,7 @@ public abstract class LoadData {
     private static LocalDate getDate(String[] split, int recur) {
         LocalDate date;
         if (recur != 0) {
-            date = LocalDate.parse(split[5].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            date = LocalDate.parse(split[5].trim(), DateTimeFormatter.ofPattern("dd/MM/uuuu")
                     .withResolverStyle(ResolverStyle.STRICT));
         } else {
             date = null;
