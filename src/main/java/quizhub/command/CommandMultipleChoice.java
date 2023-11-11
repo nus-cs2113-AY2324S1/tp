@@ -14,6 +14,8 @@ public class CommandMultipleChoice extends Command {
     public static final String TOO_MANY_ARGUMENTS_MSG = "    Ono! There should not be arguments after /difficulty";
     public static final String INVALID_ANSWER_MSG = "    Ono! The answer index you entered is not a integer in the " +
             "range of the options :<";
+    public static final String INVALID_DIFFICULTY_MSG = "    Invalid Difficulty, Entry will not be added to list!";
+
     public static final int ARGUMENT_SIZE = 8;
     private final String description;
     private final String module;

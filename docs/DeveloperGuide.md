@@ -191,36 +191,65 @@ the QuestionList itself.
 
 ### Help Command - Display Commands
 
-When executed, this command will execute a standard Final String containing all 
-the commands available for the user to use, as well as the format they are meant
-to be written in. 
-
-This same String is also displayed when an invalid command is used.
-
 #### Brief Description of Help Command
+- When executed, this command will execute a standard Final String containing all
+the commands available for the user to use, as well as the format they are meant
+to be written in.
+- This same String is also displayed when an invalid command is used.
 
-#### Class Structure of Help Command
-
-#### Implementation details for Help Command
+#### Command Syntax
+`help`
 
 #### Expected invalid commands for Help Command
+- `help 123`
+  - Shows help string
+  - Reason: the help command ignores the string after the initial `help` command
+- `hep` or `help123`
+  - Please enter a valid command. Shows help string
+  - Reason: Treated as an invalid command - shows the invalid command string which happens to be the help command
 
 <hr>
 
 ### Short Command - Add Short Answer Question to the Quiz
 
+#### Brief Description of Short Command
 One of the supported question formats is the Short Answer Question, in which a question
 can be answered with a phrase of a few words, which will be matched to a corresponding answer
 of sufficient similarity.
 
-It is parsed as: `short [question]/[answer]/[module]/[difficulty]`
+#### Command Syntax of Short Command
+`short [question]/[answer]/[module]/[difficulty]`
 1. `[question]` is the question, phrased as asking the user (i.e. What is 2 + 2? )
 2. `[answer]` is the answer or possible answer(s) that the user must
    input to count as correct. It is case-insensitive. (i.e. 4, four)
 3. `[module]` is the module that the question belongs in (i.e. CS2113)
 4. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
 
-![](UML/Images/shortans.png) <br/><br/>
+#### Class Structure of Short Command
+Attributes
+- `description`: A `String` representing the description or text of the question to be added.
+- `answer`: A `String` representing the answer to the question.
+- `module`: A `String` indicating the module or category that the question belongs to.
+- `qnDifficulty`: An `enum` of type `Question.QnDifficulty` representing the difficulty level of the question.
+
+Constructor
+- `public CommandShortAnswer(String description, String answer, String module, Question.QnDifficulty qnDifficulty)`:
+    - Initializes a new instance of `CommandShortAnswer` with the provided question description, answer, module, and difficulty level.
+
+Methods
+- `public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions)`:
+    - Implements the abstract method from the base `Command` class.
+    - Adds a new short answer question to the `QuestionList`.
+    - Updates the `Storage` with the new question list.
+
+Usage in the QuizHub Application
+- **User Interface (`Ui`) Interaction**: Utilizes `Ui` for any user interaction required during the execution of the command.
+- **Data Storage (`Storage`) Interaction**: Interacts with `Storage` to update the saved data whenever a new question is added.
+- **Question List Management (`QuestionList`)**: Modifies the `QuestionList` by adding the new short answer question.
+
+
+#### Implementation of Short Command
+![](UML/Images/shortans.png) <br/>
 
 Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
@@ -229,13 +258,45 @@ and add the Question to the appropriate list.
 
 ![](UML/Images/commandAddState.png)
 
+#### Expected invalid commands for Short Command 
+- `short What is the capital of France?`
+  - Please format your input as short [question]/[answer]/[module]/[difficulty]! 
+  - Reason: Missing fields
+- `short What is 2+2? /4 /Math /Easy ExtraArgument`
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: Too many arguments. The proper input should be without the ExtraArgument
+- `short [What is the capital of France?]/[Paris]/[Geography]/[Easy]`
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: The command uses square brackets, which deviates from the expected format
+- `short What is 2+2? /4 /Math`
+  - Please format your input as short [question]/[answer]/[module]/[difficulty]!
+  - Reason: The difficulty level of the question is missing in this command.
+- `short Who wrote Hamlet? /Shakespeare /Literature /VeryHard` or `short What is H2O? /Water /Chemistry /Water`
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: VeryHard and Water are invalid difficulty
+- `short What is the capital of Japan, Tokyo, Geography, Easy`
+  - Please format your input as short [question]/[answer]/[module]/[difficulty]!
+  - Reason: Incorrect separators
+- `short What is 2+2? /4 /Math /Easy` then `short What is 2+2? /5 /Math /Easy`
+  - You have a duplicated input, please fill add a different input!
+  - Reason: The program does not allow duplicated questions regardless of the other
+- `short /Easy /Paris /Geography What is the capital of France?`
+  - You have one or more field missing!
+    Please format your input as short [question]/[answer]/[module]/[difficulty]!
+  - Reason: The program strictly conforms to the order of question/answer/module/difficulty
+- `short easy / easy / easy /easy`
+  - This is not an invalid command because it conforms to the structure.
+<hr> 
+
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
+#### Brief Description of MCQ Command
 One of the supported question formats is the Multiple Choice Question (MCQ), 
 in which a question can be answered from 4 available options, by answering the 
 index of the corresponding option. 
 
-It is parsed as: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
+#### Command Syntax of MCQ Command
+`mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
 1. `[question]` is the question, phrased as asking the user (i.e. What is the capital of Australia? )
 2. `[optionX]` is a String storing a possible answer. 
 Three of the options has to be incorrect, and one option correct. (i.e. Option1: Melbourne, Option2: Canberra, etc.)
@@ -243,6 +304,31 @@ Three of the options has to be incorrect, and one option correct. (i.e. Option1:
 4. `[module]` is the module that the question belongs in (i.e. CS2113)
 5. `[difficulty]` is the difficulty of the question for sorting later (i.e. Hard) <br/><br/>
 
+
+#### Class Structure of MCQ Command
+Attributes
+- `description`: A `String` representing the text of the question to be added.
+- `option1`, `option2`, `option3`, `option4`: Strings representing the four options for the multiple-choice question.
+- `answer`: An `int` indicating the index of the correct answer (1, 2, 3, or 4).
+- `module`: A `String` indicating the module or category that the question belongs to.
+- `qnDifficulty`: An `enum` of type `Question.QnDifficulty` representing the difficulty level of the question.
+
+Constructor
+- `public CommandMultipleChoice(String description, String option1, String option2, String option3, String option4, int answer, String module, Question.QnDifficulty qnDifficulty)`:
+    - Initializes a new instance of `CommandMultipleChoice` with the specified question details, options, correct answer index, module, and difficulty level.
+
+Methods
+- `public void executeCommand(Ui ui, Storage dataStorage, QuestionList questions)`:
+    - Implements the abstract method from the `Command` superclass.
+    - Adds a new multiple-choice question to the `QuestionList`.
+    - Updates the `Storage` with the new question list.
+
+Usage in the QuizHub Application
+- **User Interface (`Ui`) Interaction**: Utilizes `Ui` for user interactions required during the execution of the command.
+- **Data Storage (`Storage`) Interaction**: Interacts with `Storage` to update the saved data when a new question is added.
+- **Question List Management (`QuestionList`)**: Adds the new multiple-choice question to the `QuestionList`.
+
+#### Implementation of MCQ Command
 Thereafter, the command is returned to the QuizHub component and executed,
 to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
@@ -250,10 +336,43 @@ and add the Question to the appropriate list.
 
 ![commandMCQ.png](UML/Images/commandMCQ.png)
 
+#### Expected invalid commands for MCQ Command
+- `mcq What is the capital of France?`
+  - Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: missing fields
+- `mcq What is 2+2? /2 /4 /3 /1 /1 /Math /Easy ExtraArgument`
+  - Invalid Difficulty, Entry will not be added to list!
+  - Reason: ExtraArgument will be treated as the same string as Difficulty and hence be invalidated. The program is very strict with difficulty: Easy, Normal or Hard
+- `mcq [What is the capital of France?]/[Paris]/[London]/[Berlin]/[Madrid]/[1]/[Geography]/[Easy]`
+  - Please enter valid integer question index!
+  - Reason: The inputs for question, options and module allow for [] but not the answer index which requires a integer and not the difficulty level which only accepts Easy, Normal or Hard
+- `mcq What is 2+2? /2 /4 /3 /1 /1 /Math`
+  - Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: no difficulty input
+- `mcq Who wrote Hamlet? /Shakespeare /Marlowe /Chaucer /Milton /5 /Literature /Medium`
+  - Ono! The answer index you entered is not a integer in the range of the options
+  - Reason: invalid answer index (1-4). 5' is not a valid answer index as there are only four options.
+- `mcq What is H2O? /Water /Aqua /Water /Liquid /1 /Chemistry /Easy`
+  - You have duplicate options!
+    Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: Duplicated water options
+- `mcq What is the capital of Japan, Tokyo, Kyoto, Osaka, Sapporo, 1, Geography, Easy`
+  - Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: Invalid separators
+- `mcq What is 2+2? /4# /4 /3 /2 /1 /Math /Easy`
+  - This is a valid command
+- `mcq What is 2+2? /4# /4 /3 /2 /1# /Math /Easy`
+  - Please enter valid integer question index!
+  - Reason: 1# is not a valid integer
+- `mcq /Easy /1 /Geography What is the capital of France? /Paris /London /Berlin /Madrid`
+  - You have one or more field missing!
+    Please format your input as mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]!
+  - Reason: The program takes in input via a very strict order. Users must conform to this.
 <hr>
 
 ### List Command - Show all Questions with Index
 
+#### Brief Description of List Command
 Lists all the questions in the current QuestionList. 
 
 When executed, the command will invoke the QuestionList.printQuestionList method. 
@@ -263,11 +382,27 @@ with the asList parameter set as true. The QuestionList.printQuestion method wil
 print each question with a given index, and indicate the question's type and completion status
 (obtained through Question.getQuestionType() and Question.questionIsDone() methods)
 
+#### Expected invalid commands for List Command
+- `list all` or `list 1` or any string input after `list`
+  - Valid command. The program ignores all input after the valid command `list`
+- `listall` or `list1` or `lst`
+  - Invalid command. Triggers help string
+  - Reason: Invalid command word, mispelled. 
+- `list /module CS1010`
+  - Valid command but will not show intended module. Will list all modules
+  - If user wants to list just module CS1010 (assuming that it's in the storage), make use of `find /module CS1010`
+
 <hr>
 
 ### Delete Command - Delete a Question
 
+#### Brief Description of Delete Command
 Deletes a question by its index.
+
+#### Command Syntax of Delete Command
+`delete [question index]`
+
+#### Implementation of Delete Command
 
 The Command first invokes the QuestionList.viewQuestionByIndex method to determine if 
 the index refers to a valid question, failing which it will return an error message.
@@ -279,14 +414,43 @@ the question from the QuestionList.
 
 Afterward, the storage is updated to reflect the newest QuestionList.
 
+#### Expected invalid commands for Delete Command
+List of questions: <br>
+1: [S][ ] New description / \\exitquiz | number | EASY <br>
+2: [M][ ] question2 / 1.4 / 2 / 3 / 1.6 / 3 | number | EASY <br> 
+3: [S][ ] What is 2+2? / 4 | Math | EASY <br> 
+4: [S][ ] Who wrote Hamlet? / Shakespeare | Literature | HARD <br>
+5: [S][ ] easy / easy | easy | EASY <br>
+- `delete /1` or `delete 1!`
+  - Please enter valid integer question index!
+  - Reason: Adding a slash prefix to the index (like '/1') or special characters is not the expected format for the delete command.
+- `delete 0`
+  - Please enter valid integer question index!
+  - Reason: 1-based input. a 1-based index system, using '0' as an index is invalid
+- `delete easy`
+  - Please enter valid integer question index!
+  - Reason: Does not support deleting questions as we do not discriminate mcq / short type questions
+- `delete 1 extraArgument` or `delete 1, 2` or `delete 1 2`
+  - Please enter only 1 question index!
+  - Reason: Program only support deleting 1 question at a time. 
+- `delete 999` - if there's less than 999 questions in list
+  -  Please enter valid integer question index!
+  - Reason: No question index 999 in list
+- `delete three`
+  - Please enter valid integer question index!
+  - The command uses a non-numeric index ('three'). The index should be a number.
+<hr>
+
 ### Find Command - Look for a matching question
 
-QuizHub supports searching for specific questions, by searching matching keywords
-in the format
+#### Brief Description of Find Command
+QuizHub supports searching for specific questions, by searching matching keywords. 
 
+#### Command Syntax of Find Command
 `find /[description]` OR `find /[module]`
-i.e. `find /water buffalo`, `find /CS2113`
+i.e. `find /description buffalo`, `find /module CS2113`
 
+#### Implementation of Find Command
 This command is passed to the corresponding QuestionList where the `searchList` method
 is called. 
 This method go down the existing QuestionList of questions and use the Java contains method
@@ -295,6 +459,28 @@ to determine if the search term is located that question. If the contains method
 for a given question, that question's contents and index will be copied to a 
 new ArrayList of questions, and subsequently print them.
 
+#### Expected invalid commands for Find Command
+List of questions: <br>
+1: [S][ ] New description / \\exitquiz | number | EASY <br>
+2: [M][ ] question2 / 1.4 / 2 / 3 / 1.6 / 3 | number | EASY <br>
+3: [S][ ] What is 2+2? / 4 | Math | EASY <br>
+4: [S][ ] Who wrote Hamlet? / Shakespeare | Literature | HARD <br>
+5: [S][ ] easy / easy | easy | EASY <br>
+- `find /topic Literature` 
+  - Please format your input as find /description [description] or find /module [module]!
+  - Reason: using incorrect keyword `/topic` instead of `/module`
+- `find /module Literature extraArgument`
+  - Here are questions that matched your search:
+    No results found :< Check your keyword is correct?
+  - Reason: the module that's read will be `Literature extraArgument` and there's none matching that
+- `find description question2`
+  - Ono! You did not indicate if you are searching by description or module :<
+    Please format your input as find /description [description] or find /module [module]!
+  - Reason: The command does not use the required prefix '/' before the criteria ('description').
+- `find /description /module Literature`
+  - Here are questions that matched your search:
+    No results found :< Check your keyword is correct?
+  - Reason: Program does not support find using both /module and /description simultaneously
 <hr>
 
 ### Edit Command - Edit Question / Answer
@@ -625,8 +811,6 @@ The `CommandShuffle` class does not have its own attributes but utilizes those f
 - `Storage`: If the shuffle should result in a permanent change, `Storage` would be used to persist the new question order.
 - `QuestionList`: Contains the list of questions that will be shuffled.
 
-![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML/Images/ShuffleToStorage-Shuffle_to_Storage_Flow.png)
-
 #### Operational Flow
 
 1. **Command Invocation:**
@@ -667,8 +851,6 @@ This feature allows for the categorization of questions by difficulty, aiding in
 - `markdiff [question number] /[question difficulty]`
 
 #### Class Structure of Markdiff Command
-![commandMarkDiffSequence.png](UML/Images/commandMarkDiffSequence.png)
-
 ![commandMarkDiffClass.png](UML/Images/commandMarkDiffClass.png)
 
 The `CommandMarkDifficulty` class is responsible for the command operation that marks a question with a specified difficulty level in the QuizHub application. It extends the base `Command` class and includes specific attributes and methods for the marking process.
@@ -754,13 +936,6 @@ Command Exit is responsible for exiting the program
 - `<white-space> bye`: <white-space> here signify any empty blanks before bye. White-space is stripped, so it will be considered a valid command here
 
 <hr>
-
-#### Class structure of Command Exit
-
-![commandExitSequence.png](UML/Images/commandExitSequence.png)
-
-When the user initiate Command Exit, any unsaved data will be saved into storage and thereafter, the exit message will
-be displayed.
 
 ## Storage Component
 
