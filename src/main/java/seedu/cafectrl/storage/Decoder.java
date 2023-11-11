@@ -9,6 +9,7 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
@@ -77,6 +78,7 @@ public class Decoder {
      */
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
+        Ingredient ingredient;
 
         if (encodedPantryStock.isEmpty()) {
             return new Pantry(ui);
@@ -85,10 +87,31 @@ public class Decoder {
             String[] decodedData = encodedData.split(DIVIDER);
             if (!isValidPantryStockFormat(decodedData)) {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
-            } else {
-                Ingredient ingredient = new Ingredient(decodedData[0],
-                        Integer.parseInt(decodedData[1].trim()), decodedData[2]);
+                continue;
+            }
+            String ingredientName = decodedData[0].trim();
+            String qtyText = decodedData[1].trim();
+            String unit = decodedData[2].trim();
+
+            // Check whether qty is an integer
+            int qty;
+            try {
+                qty = Integer.parseInt(qtyText);
+            } catch (NumberFormatException e) {
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
+                continue;
+            }
+
+            // Check whether the parameters are correct
+            if (!Parser.containsSpecialChar(ingredientName)
+                    && !Parser.isRepeatedIngredientName(ingredientName, pantryStock)
+                    && !Parser.isInvalidQty(qty)
+                    && !Parser.isEmptyUnit(unit)
+                    && Parser.isValidUnit(unit)) {
+                ingredient = new Ingredient(ingredientName, qty, unit);
                 pantryStock.add(ingredient);
+            } else {
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
             }
         }
         return new Pantry(ui, pantryStock);

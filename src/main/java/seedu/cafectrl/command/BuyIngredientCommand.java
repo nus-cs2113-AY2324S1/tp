@@ -23,7 +23,7 @@ public class BuyIngredientCommand extends Command {
             + "Example:"
             + COMMAND_WORD + " ingredient/milk qty/200ml, ingredient/chicken qty/100g";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
-    private static final int FIRST_INDEX = 0;
+
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> ingredients;
