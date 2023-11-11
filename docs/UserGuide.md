@@ -190,3 +190,4 @@ Format: `exit`
 ## Future Development
 
 - We will update the achievement functionality such that we will have an algorithm to check whether you have achieved a particular goal by taking your exercise record and/or meal record into account.
+- The goal list record will be updated at the start of the application to check if some current goals are not finished. It will mark such unfinished goal as failed automatically. User will also be allowed to delete such records by command.
