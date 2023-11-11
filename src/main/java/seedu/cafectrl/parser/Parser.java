@@ -498,7 +498,7 @@ public class Parser implements ParserUtil {
 
         if (!matcher.matches()) {
             logger.warning("Unmatching regex!");
-            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT
+            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                     + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
 
@@ -524,29 +524,33 @@ public class Parser implements ParserUtil {
         return ingredientQty < MIN_QTY || ingredientQty > MAX_QTY;
     }
 
-    public static void checkForMismatchUnit(Menu menu, Ingredient ingredientToBuy) throws ParserException {
+    public static void checkForMismatchUnit(Menu menu, Ingredient newIngredient) throws ParserException {
+        logger.info("Checking for mismatched units...");
         ArrayList<Dish> dishArrayList = menu.getMenuItemsList();
         for (Dish dish : dishArrayList) {
-            traverseIngredientsOfDish(ingredientToBuy, dish);
+            traverseIngredientsOfDish(newIngredient, dish);
         }
     }
 
-    private static void traverseIngredientsOfDish(Ingredient ingredientToBuy, Dish dish) throws ParserException {
+    private static void traverseIngredientsOfDish(Ingredient newIngredient, Dish dish) throws ParserException {
         ArrayList<Ingredient> ingredientArrayList = dish.getIngredients();
-        for (Ingredient ingredient : ingredientArrayList) {
-            compareIngredientName(ingredientToBuy, ingredient);
+        for (Ingredient currentIngredient : ingredientArrayList) {
+            logger.info("Comparing name: " + newIngredient.getName() + " and " + currentIngredient.getName());
+            compareIngredientName(newIngredient, currentIngredient);
         }
     }
 
     private static void compareIngredientName(Ingredient newIngredient,
             Ingredient currentIngredient) throws ParserException {
         if (currentIngredient.getName().equalsIgnoreCase(newIngredient.getName())) {
+            logger.info("Comparing units: " + newIngredient.getUnit() + " and " + currentIngredient.getUnit());
             compareUnits(newIngredient, currentIngredient);
         }
     }
 
     private static void compareUnits(Ingredient newIngredient, Ingredient currentIngredient) throws ParserException {
         if (!currentIngredient.getUnit().equalsIgnoreCase(newIngredient.getUnit())) {
+            logger.warning("Units not matching!");
             throw new ParserException(newIngredient.getName()
                     + ErrorMessages.UNIT_NOT_MATCHING
                     + currentIngredient.getUnit()
