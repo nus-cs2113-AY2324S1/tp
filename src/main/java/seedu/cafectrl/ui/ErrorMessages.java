@@ -76,4 +76,7 @@ public class ErrorMessages {
             + "did you forget to include it in your command?";
     public static final String INVALID_MENU_DATA = "menu.txt: Invalid format, this dish will be removed -> ";
 
+    public static final String NAME_CANNOT_CONTAIN_SPECIAL_CHAR = "Is there a special character"
+            + "in the name?\n I have poor memory and am unable to remember names with special characters"
+            + ",\nso could you remove them?";
 }
