@@ -66,9 +66,9 @@ public class Ui {
     }
 
     public void printWatchListHeader() {
-        showMessage("Symbol");
+        System.out.print(CYAN + "Symbol" + RESET);
         System.out.print("    ");
-        showMessage("Market");
+        System.out.print(CYAN + "Market" + RESET);
         System.out.print("    ");
         System.out.print(YELLOW + "Price" + RESET);
         System.out.print("     ");
@@ -77,14 +77,14 @@ public class Ui {
         System.out.print(RED + "Daily Low" + RESET);
         System.out.print("     ");
         System.out.print("EquityName");
-        System.out.print("                    ");
+        System.out.print("                       ");
         System.out.print("Last Updated");
         System.out.print("     ");
         System.out.println();
     }
 
     public void printWatchListAcknowledgement() {
-        showMessage("Data provided by Financial Modeling Prep and Alpha Vantage 😊");
+        showMessage("Data provided by Financial Modeling Prep and Alpha Vantage =)");
     }
 
 
@@ -201,10 +201,12 @@ public class Ui {
         String expense = args[2];
         String budget = args[3];
         String reminders = args[4];
+        String wishlist = args[5];
 
         showMessage("Here is an overview of your financials:\n" +  "Total balance: " + balance + "\n" +
                 "Highest income: " + income + "\n" + "Highest expense: " + expense + "\n" +
-                "Remaining budget for the month: " + budget + "\n\n" + "Reminders:\n" + reminders);
+                "Remaining budget for the month: " + budget + "\n\n" + "Reminders:\n" + reminders +
+                "\n\nWishlist:\n" + wishlist);
     }
 
     public void printSetBudget() {

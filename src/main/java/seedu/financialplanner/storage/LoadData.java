@@ -321,6 +321,11 @@ public abstract class LoadData {
         return description;
     }
 
+    /**
+     * Load the watchlist.json file into the application on startup as a hashmap.
+     *
+     * @return
+     */
     public static HashMap<String, Stock> loadWatchList() {
         Ui ui = Ui.getInstance();
         Gson gson = new Gson();

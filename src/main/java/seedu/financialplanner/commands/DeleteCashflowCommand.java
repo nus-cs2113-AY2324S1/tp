@@ -1,5 +1,7 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.CashflowList;
@@ -12,7 +14,22 @@ import java.util.logging.Logger;
 /**
  * Represents a command to delete a cashflow.
  */
+@SuppressWarnings("unused")
 public class DeleteCashflowCommand extends Command {
+    public static final String NAME = "delete";
+
+    public static final String USAGE =
+            "delete INDEX [/r]" + "\n" +
+            "delete income INDEX [/r]" + "\n" +
+            "delete expense INDEX [/r]" + "\n" +
+            "delete recurring INDEX [/r]";
+
+    public static final String EXAMPLE =
+            "delete 1" + "\n" +
+            "delete income 2 /r" + "\n" +
+            "delete expense 2 /r" + "\n" +
+            "delete recurring 2";
+
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     protected CashflowCategory category = null;
     protected int index;

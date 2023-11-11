@@ -12,6 +12,7 @@
     * [Delete income](#delete-income-delete-income)
     * [Delete expense](#delete-expense-delete-expense)
     * [Delete recurring cashflow](#delete-recurring-delete-recurring)
+  * [Find cashflow](#find-cashflow-find)
   * [List](#list)
     * [List all](#list-all-list)
     * [List income](#list-income-list-income)
@@ -38,6 +39,7 @@
     * [Marking Goal as Achieved](#mark-goal-as-achieved-markgoal)
   * [Visualization](#visualizing-your-cashflow-vis)
   * [Exiting the program](#exiting-the-program-exit)
+  * [Get command help and exmaple usage](#getting-command-help-and-example-usage-help)
   * [Saving data](#saving-the-data)
   * [Loading data](#loading-the-data)
 * [FAQ](#faq)
@@ -51,8 +53,6 @@ you a one-stop interface to access a plethora of features to manage your finance
 
 ## Quick Start
 
-{TO BE UPDATED WHEN V2.1 IS COMPLETED!!!}
-
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Financial Planner` from [here](https://github.com/AY2324S1-CS2113-T18-2/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for Financial Planner.
@@ -61,7 +61,6 @@ you a one-stop interface to access a plethora of features to manage your finance
 
 ## Features
 
-{Give detailed description of each feature}
 ### Notes about the command format
 - Words in `UPPER_CASE` are parameters to be supplied by the user.
 
@@ -279,10 +278,21 @@ Balance: -830.00
 - Note: Balance displayed above is just an example. Your actual balance may differ.
 - Note: Date displayed above is just an example. Your actual date may differ.
 
+### Find cashflow: `find`
+Finds a cashflow using keywords
+
+Format: `find <keyword>`
+
+Example of usage: `find buy coffee`
+
 ### List
 
 #### List all: `list`
-// TODO
+Lists all cashflows.
+
+Format: `list`
+
+Example of usage: `list`
 
 Example output:
 
@@ -311,7 +321,11 @@ Balance: 1170.00
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List income: `list income`
-//TODO
+Lists all incomes.
+
+Format: `list income`
+
+Example of usage: `list income`
 
 Example output:
 ```
@@ -332,7 +346,11 @@ Income Balance: 1600.00
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 #### List expense: `list expense`
-//TODO
+Lists all expenses.
+
+Format: `list expense`
+
+Example of usage: `list expense`
 
 Example output:
 ```
@@ -589,7 +607,7 @@ the application is not running
 
 Example file content of watchlist.json:
 
-![](/images/investments/watchlistjsonexample.png)
+![](images/investments/watchlistjsonexample.png)
 
 **Editing of watchlist.json**
 
@@ -598,7 +616,7 @@ Incorrect format of JSON file may lead to:
 - Corrupted file (user will be prompted to repair the file if he wants to)
 - Deletion of stock entries that are erroneous (Financial Planner has a built-in method to remove
 stock entries that does not match the format specified above)
-- Incorrect information printed by Financial Planner application (eg. changing stock prices directly in JSON file)
+- Incorrect information printed by Financial Planner application (e.g. changing stock prices directly in JSON file)
 
 **Adding stock**
 
@@ -633,16 +651,17 @@ Adds a reminder to the Financial Planner.
 
 Format: `addreminder /t TYPE /d DATE`
 - `/t` is used to specify the reminder type, which describes what is the reminder used for.
-- `/d` is used to give a deadline date to the reminder.
+- `/d` is used to give a deadline date to the reminder. The date must be in the format of `DD/MM/YYYY`.
 
-Example of usage: `addreminder /t debt /d 2023.12.11`
+Example of usage: `addreminder /t debt /d 11/12/2023`
 
 Example output:
 ```
 You have added Reminder 
    Type: debt
-   Date: 2023.12.11
+   Date: 11/12/2023
    Status: Not Done
+   Left Days: 30
 ```
 
 ### Delete reminder: `deletereminder`
@@ -804,6 +823,14 @@ Exits the program.
 
 Format: `exit`
 
+### Getting command help and example usage: `help`
+
+Get command help and example usage. Specify the command to find help and example usage for exactly that command.
+
+Format: `help [COMMAND]`
+
+Example of usage: `help budget`
+
 ### Saving the data
 
 Data is automatically saved upon exiting the program using the `exit` command. Closing the program without exiting 
@@ -817,7 +844,7 @@ Existing data will be automatically loaded when the program starts up.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Copy the /data/ folder from the home folder to the other computer.
 
 **Q**: Should I edit the watchlist.json file?
 
@@ -844,8 +871,6 @@ window. Sorry for the inconvenience caused. 🥲
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
 | Action                           | Format                                                     |
 |----------------------------------|------------------------------------------------------------|
 | **Add income**                   | `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`  |
@@ -853,7 +878,7 @@ window. Sorry for the inconvenience caused. 🥲
 | **Delete cashflow**              | `delete INDEX [/r]`                                        |
 | **Delete income**                | `delete income INDEX [/r]`                                 |
 | **Delete expense**               | `delete expense INDEX [/r]`                                |
-| **Delete recurrence**            | `delete recurrence INDEX [/r]`                             |
+| **Delete recurrence**            | `delete recurring INDEX [/r]`                              |
 | **list all cashflows**           | `list`                                                     |
 | **list all incomes**             | `list income`                                              |
 | **list all expenses**            | `list expense`                                             |
@@ -870,6 +895,14 @@ window. Sorry for the inconvenience caused. 🥲
 | **Delete from watchlist**        | `deletestock /s STOCKCODE`                                 |
 | **Visualization**                | `vis /t TYPE /c CHART`                                     |
 | **Exit program**                 | `exit`                                                     |
+| **Add Reminder**                 | `addreminder /t TYPE /d DATE`                              |
+| **Delete Reminder**              | `deletereminder INDEX`                                     |
+| **Mark Reminder as Done**        | `markreminder INDEX`                                       |
+| **Add Goal**                     | `set goal /g GOAL /l LABEL`                                |
+| **Delete Goal**                  | `deletegoal INDEX`                                         |
+| **Mark Goal as Achieved**        | `markgoal INDEX`                                           |
+| **List all reminders**           | `reminderlist`                                             |
+| **List all goals**               | `wishlist`                                                 |
 
 - Note: Cashflow is referring to an income or expense
 

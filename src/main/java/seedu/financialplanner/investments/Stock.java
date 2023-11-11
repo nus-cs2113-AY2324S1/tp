@@ -16,6 +16,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents a stock within the financial planner app
+ */
 public class Stock {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private static final String API_ENDPOINT = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=";
@@ -30,11 +33,24 @@ public class Stock {
     private Date lastUpdated = null;
     private long lastFetched = 0;
 
+    /**
+     * Constructor for stock that sets the symbol and searches the api
+     * for stock name for it
+     *
+     * @param symbol
+     * @throws FinancialPlannerException
+     */
     public Stock(String symbol) throws FinancialPlannerException {
         this.symbol = symbol;
         this.stockName = getStockNameFromAPI(symbol);
     }
 
+    /**
+     * Constructor that sets the symbol and stock name directly
+     *
+     * @param symbol
+     * @param stockName
+     */
     public Stock(String symbol, String stockName) {
         this.symbol = symbol;
         this.stockName = stockName;
@@ -44,6 +60,14 @@ public class Stock {
         return stockName;
     }
 
+    /**
+     * Method that gets the stock name from the Alpha vantage api. Will throw financial planner exception for any errors
+     * when attempting this. If succuessful, will return the stock name for the symbol provided
+     *
+     * @param symbol
+     * @return stock name
+     * @throws FinancialPlannerException
+     */
     public String getStockNameFromAPI(String symbol) throws FinancialPlannerException {
         String requestURI = String.format("%s%s&apikey=%s", API_ENDPOINT,symbol,API_KEY);
         HttpClient client = HttpClient.newHttpClient();
@@ -102,6 +126,11 @@ public class Stock {
         this.symbol = symbol;
     }
 
+    /**
+     * toString method is override to output its symbol appended with a comma
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return symbol + ",";

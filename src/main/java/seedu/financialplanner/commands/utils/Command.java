@@ -1,4 +1,4 @@
-package seedu.financialplanner.commands;
+package seedu.financialplanner.commands.utils;
 
 /**
  * Represents a generic command that can be inherited.

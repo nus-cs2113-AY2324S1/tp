@@ -36,6 +36,10 @@ you a one-stop interface to access a plethora of features to manage your finance
     * Implementation
     * Class Diagram
     * Sequence Diagrams
+* Value Proposition
+* User Profile
+* USer Stories
+* Manual Testing
 
 ### Contributions to team-based tasks:
 

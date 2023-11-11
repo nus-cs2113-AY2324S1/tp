@@ -1,22 +1,36 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.utils.Ui;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.ArrayList;
 
 /**
  * Represents a command to manage the budget.
  */
+@SuppressWarnings("unused")
 public class BudgetCommand extends Command {
+    public static final String NAME = "budget";
+
+    public static final String USAGE =
+            "budget set </b BUDGET>" + "\n" +
+            "budget update </b BUDGET>" + "\n" +
+            "budget delete" + "\n" +
+            "budget reset" + "\n" +
+            "budget view";
+    public static final String EXAMPLE =
+            "budget set /b 500" + "\n" +
+            "budget reset";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final Ui ui = Ui.getInstance();
     private double budget;
-    private String command;
+    private final String command;
 
     /**
      * Constructs a new BudgetCommand and checks if the user input is a valid command.
@@ -28,7 +42,7 @@ public class BudgetCommand extends Command {
         if (rawCommand.args.isEmpty()) {
             throw new FinancialPlannerException("Budget operation cannot be empty.");
         }
-        command = rawCommand.args.get(0);
+        command = String.join(" ", rawCommand.args).trim();
         if (command.equals("delete") || command.equals("reset") || command.equals("view")) {
             return;
         }

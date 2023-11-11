@@ -1,7 +1,7 @@
 package seedu.financialplanner;
 
 import seedu.financialplanner.cashflow.CashflowList;
-import seedu.financialplanner.commands.Command;
+import seedu.financialplanner.commands.utils.Command;
 import seedu.financialplanner.commands.ExitCommand;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.investments.WatchList;

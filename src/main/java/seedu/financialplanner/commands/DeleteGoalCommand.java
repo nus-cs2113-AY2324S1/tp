@@ -1,13 +1,23 @@
 package seedu.financialplanner.commands;
 
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.goal.Goal;
 import seedu.financialplanner.goal.WishList;
 import seedu.financialplanner.utils.Ui;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import seedu.financialplanner.goal.Goal;
+
+@SuppressWarnings("unused")
 public class DeleteGoalCommand extends Command {
+    public static final String NAME = "deletegoal";
+
+    public static final String USAGE = "deletegoal <INDEX>";
+    public static final String EXAMPLE = "deletegoal 1";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
+
     public DeleteGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if (rawCommand.args.size() == 1) {
@@ -43,8 +53,8 @@ public class DeleteGoalCommand extends Command {
 
     @Override
     public void execute() {
-        Goal goalToDelete = WishList.getInstance().list.get(index-1);
-        WishList.getInstance().deleteGoal(index-1);
+        Goal goalToDelete = WishList.getInstance().list.get(index - 1);
+        WishList.getInstance().deleteGoal(index - 1);
         Ui.getInstance().showMessage("You have deleted " + goalToDelete);
     }
 }
