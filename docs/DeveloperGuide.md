@@ -372,6 +372,7 @@ and add the Question to the appropriate list.
 
 ### List Command - Show all Questions with Index
 
+#### Brief Description of List Command
 Lists all the questions in the current QuestionList. 
 
 When executed, the command will invoke the QuestionList.printQuestionList method. 
@@ -380,6 +381,16 @@ else it will invoke the QuestionList.printQuestion method on each Question objec
 with the asList parameter set as true. The QuestionList.printQuestion method will then
 print each question with a given index, and indicate the question's type and completion status
 (obtained through Question.getQuestionType() and Question.questionIsDone() methods)
+
+#### Expected invalid commands for List Command
+- `list all` or `list 1` or any string input after `list`
+  - Valid command. The program ignores all input after the valid command `list`
+- `listall` or `list1` or `lst`
+  - Invalid command. Triggers help string
+  - Reason: Invalid command word, mispelled. 
+- `list /module CS1010`
+  - Valid command but will not show intended module. Will list all modules
+  - If user wants to list just module CS1010 (assuming that it's in the storage), make use of `find /module CS1010`
 
 <hr>
 
