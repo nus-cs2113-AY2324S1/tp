@@ -28,7 +28,8 @@ public class Reminder {
         LocalDate currentTime = LocalDate.now();
         Duration duration = Duration.between(currentTime.atStartOfDay(), date.atStartOfDay());
         return "Reminder " + System.lineSeparator() + "   Type: " + type + System.lineSeparator()
-                + "   Date: " + date.format(FORMATTER) + System.lineSeparator() + "   Status: " + status
+                + "   Date: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + System.lineSeparator() + "   Status: " + status
                 + System.lineSeparator() + "   Left Days: " + duration.toDays();
     }
 
