@@ -34,7 +34,7 @@ public class FindCommand extends Command {
         ArrayList<String> foundedFinancialList = new ArrayList<>();
         ArrayList<String> foundedWatchList = new ArrayList<>();
         for (int i = 0; i < cashflowList.list.size(); i++) {
-            if (cashflowList.list.get(i).toString().contains(description)) {
+            if (cashflowList.list.get(i).toString().toLowerCase().contains(description.toLowerCase())) {
                 String output = cashflowList.list.get(i).toString() + " | Index: " + (i + 1);
                 foundedFinancialList.add(output);
             }
@@ -48,18 +48,5 @@ public class FindCommand extends Command {
             ui.showMessage(foundedFinancialRecord);
         }
 
-        for (int i = 0; i < watchList.size(); i++) {
-            if (watchList.get(i).toString().contains(description)) {
-                foundedWatchList.add(watchList.get(i).toString() + " | Index: " + (i + 1));
-            }
-        }
-        if (!foundedWatchList.isEmpty()) {
-            ui.showMessage("Here are the matching stock records in your stock list:");
-        } else {
-            ui.showMessage("There is no matching stock record in your stock list.");
-        }
-        for (String foundedStockRecord : foundedWatchList) {
-            ui.showMessage(foundedStockRecord);
-        }
     }
 }
