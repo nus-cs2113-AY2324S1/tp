@@ -1,11 +1,14 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.ui.Ui;
 import seedu.cafectrl.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@@author ShaniceTang
 /**
@@ -19,13 +22,14 @@ public class BuyIngredientCommand extends Command {
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example:"
             + COMMAND_WORD + " ingredient/milk qty/200ml, ingredient/chicken qty/100g";
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     protected Ui ui;
     protected Pantry pantry;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Ingredient> ingredientsToBePrinted = new ArrayList<>();
     private String ingredientString = ""; // Used to store the message about the bought ingredients
-    private int FIRST_INDEX = 0;
+    private int finalIndex = 0;
 
     /**
      * Constructs a BuyIngredientCommand with the specified ingredients, user interface, and pantry.
@@ -45,11 +49,13 @@ public class BuyIngredientCommand extends Command {
      */
     @Override
     public void execute() {
+        logger.info("Executing BuyIngredientCommand...");
         try {
             addIngredient();
             ui.printBuyIngredientHeader();
             ui.showToUser(ingredientString.strip());
         } catch (RuntimeException e) {
+            logger.log(Level.WARNING, "BuyIngredientCommand unsuccessful: " + e.getMessage(), e);
             ui.showToUser(e.getMessage());
         }
     }
@@ -67,7 +73,7 @@ public class BuyIngredientCommand extends Command {
             ingredients.set(i, ingredient);
         }
 
-        for (int i = ingredients.size() - ui.OFFSET_LIST_INDEX; i >= FIRST_INDEX; i--) {
+        for (int i = ingredients.size() - ui.OFFSET_LIST_INDEX; i >= finalIndex; i--) {
             Ingredient ingredient = ingredients.get(i);
             buildBuyIngredientMessage(ingredient);
         }

@@ -1,6 +1,7 @@
 package seedu.cafectrl.storage;
 
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
@@ -8,11 +9,14 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 
 /**
@@ -24,6 +28,7 @@ public class Decoder {
 
     private static final String DIVIDER = "\\| ";
     private static final Ui ui = new Ui();
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
     /**
      * Decodes an ArrayList of string lines into a Menu object, reconstructing its content.
@@ -32,8 +37,10 @@ public class Decoder {
      * @return A Menu object containing the decoded Menu data.
      */
     public static Menu decodeMenuData(ArrayList<String> textLines) {
+        logger.info("Decoding menu.txt to Menu...");
         ArrayList<Dish> menuDishList = new ArrayList<>();
         for(String dishString : textLines) {
+            logger.info("Line to decode: " + dishString);
             String[] dishStringArray = dishString.split(DIVIDER);
             String dishName = dishStringArray[0].trim();
             float dishPrice = Float.parseFloat(dishStringArray[1]);
@@ -53,6 +60,7 @@ public class Decoder {
     private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
         for(String ingredientString : ingredientsStringArray) {
+            logger.info("Ingredient to decode: " + ingredientString);
             String[] array = ingredientString.split(" ");
             String name = array[0].trim();
             int qty = Integer.parseInt(array[1]);
@@ -70,6 +78,7 @@ public class Decoder {
      */
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
+        Ingredient ingredient;
 
         if (encodedPantryStock.isEmpty()) {
             return new Pantry(ui);
@@ -78,10 +87,31 @@ public class Decoder {
             String[] decodedData = encodedData.split(DIVIDER);
             if (!isValidPantryStockFormat(decodedData)) {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
-            } else {
-                Ingredient ingredient = new Ingredient(decodedData[0],
-                        Integer.parseInt(decodedData[1].trim()), decodedData[2]);
+                continue;
+            }
+            String ingredientName = decodedData[0].trim();
+            String qtyText = decodedData[1].trim();
+            String unit = decodedData[2].trim();
+
+            // Check whether qty is an integer
+            int qty;
+            try {
+                qty = Integer.parseInt(qtyText);
+            } catch (NumberFormatException e) {
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
+                continue;
+            }
+
+            // Check whether the parameters are correct
+            if (!Parser.containsSpecialChar(ingredientName)
+                    && !Parser.isRepeatedIngredientName(ingredientName, pantryStock)
+                    && !Parser.isInvalidQty(qty)
+                    && !Parser.isEmptyUnit(unit)
+                    && Parser.isValidUnit(unit)) {
+                ingredient = new Ingredient(ingredientName, qty, unit);
                 pantryStock.add(ingredient);
+            } else {
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
             }
         }
         return new Pantry(ui, pantryStock);
@@ -115,32 +145,61 @@ public class Decoder {
      * @return Sales object containing OrderList objects decoded from the provided strings.
      */
     public static Sales decodeSales(ArrayList<String> textLines, Menu menu) {
+        logger.info("Decoding orders.txt to Sales...");
+        boolean salesOrderTextTamperDetectionMessagePrinted = false;
         ArrayList<OrderList> orderLists = new ArrayList<>();
         if (textLines.isEmpty()) {
             return new Sales();
         }
         //for each 'order' in text file
         for (String line : textLines) {
-            String[] orderData = line.split(DIVIDER);
-            int day = Integer.parseInt(orderData[0].trim()) - 1;
-            String dishName = orderData[1].trim();
-            int quantity = Integer.parseInt(orderData[2].trim());
-            float totalOrderCost = Float.parseFloat(orderData[3].trim());
-            boolean isComplete = "true".equals(orderData[4].trim());
-            Dish dish = menu.getDishFromName(dishName);
-            if(dish == null) {
-                ui.showDecodedInvalidDish(dishName);
-            } else {
+            logger.info("Line to decode: " + line);
+            try {
+                String[] orderData = line.split(DIVIDER);
+                int day = Integer.parseInt(orderData[0].trim()) - 1;
+                String dishName = orderData[1].trim();
+                if (dishName.equals(Encoder.NULL_ORDER_DAY)) {
+                    orderLists = fillOrderListSize(orderLists, day);
+                    continue;
+                }
+                int quantity = Integer.parseInt(orderData[2].trim());
+                float totalOrderCost = Float.parseFloat(orderData[3].trim());
+                boolean isComplete = "true".equals(orderData[4].trim());
+                Dish dish = menu.getDishFromName(dishName);
+                if (dish == null) {
+                    ui.showDecodedInvalidDish(dishName);
+                    continue;
+                }
                 Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
                 //increase size of orderLists if needed
                 //this can be used in the event that the text file's first order is not day 0
-                while (orderLists.size() <= day) {
-                    orderLists.add(new OrderList());
-                }
-
+                orderLists = fillOrderListSize(orderLists, day);
                 orderLists.get(day).addOrder(orderedDish);
+            } catch (IndexOutOfBoundsException e) {
+                ui.showToUser(Messages.SALES_LAST_DAY_TEXT_TAMPERED, System.lineSeparator());
+            } catch (NumberFormatException e) {
+                if (!salesOrderTextTamperDetectionMessagePrinted) {
+                    ui.showToUser(Messages.SALES_ORDER_TEXT_TAMPERED, System.lineSeparator());
+                    salesOrderTextTamperDetectionMessagePrinted = true;
+                }
             }
         }
         return new Sales(orderLists);
     }
+
+    //@@author Cazh1
+    /**
+     * Increases the size of the orderlist when there is gap between the previous order and the next
+     *
+     * @param orderLists The current partially filled ArrayList of OrderList
+     * @param day The day of the next order
+     * @return orderLists after filling in the gaps
+     */
+    private static ArrayList<OrderList> fillOrderListSize(ArrayList<OrderList> orderLists, int day) {
+        while (orderLists.size() <= day) {
+            orderLists.add(new OrderList());
+        }
+        return orderLists;
+    }
+
 }

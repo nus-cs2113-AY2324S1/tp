@@ -1,9 +1,11 @@
 package seedu.cafectrl.data;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.ui.Ui;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * The OrderList class represents a list of orders for a specific day.
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 public class OrderList {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private ArrayList<Order> orderList;
     private float totalOrderListCost;
 
@@ -46,6 +49,7 @@ public class OrderList {
      * @param menu The Menu object representing the cafe's menu.
      */
     public void printOrderList(Menu menu, Ui ui) {
+        logger.info("Printing order list...");
         ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
 
         for (Order order : orderList) {
@@ -73,6 +77,7 @@ public class OrderList {
      * @param aggregatedOrders The ArrayList of aggregated orders.
      */
     private void aggregateOrder(Order order, ArrayList<Order> aggregatedOrders) {
+        logger.info("Aggregating order...");
         if (order.getIsComplete()) {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
             aggregatedOrders.get(index).setQuantity(aggregatedOrders.get(index).getQuantity()
@@ -108,9 +113,11 @@ public class OrderList {
      * @return The total cost of all orders for the day.
      */
     private float calculateTotalCost(ArrayList<Order> orders) {
+        logger.info("Calculating total cost...");
         float totalCost = 0;
         for (Order order : orders) {
             totalCost += order.getTotalOrderCost();
+            logger.info("Total cost: " + totalCost);
         }
         return totalCost;
     }

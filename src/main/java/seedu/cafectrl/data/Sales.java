@@ -1,7 +1,10 @@
 package seedu.cafectrl.data;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -9,9 +12,10 @@ import seedu.cafectrl.ui.Ui;
  * The Sales class represents sales data over a period of time, maintaining a collection of order lists.
  */
 public class Sales {
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final int DAY_DISPLAY_OFFSET = 1;
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
-    private final int DAY_DISPLAY_OFFSET = 1;
 
     public Sales() {
         this.orderLists = new ArrayList<>();
@@ -21,10 +25,9 @@ public class Sales {
 
     public Sales(ArrayList<OrderList> orderLists) {
         this.orderLists = orderLists;
-        this.daysAccounted = 0;
+        this.daysAccounted = orderLists.size() - 1;
     }
 
-    //TODO: @Zhong Heng, Remove this method if not used
     public Sales(OrderList orderList) {
         this.orderLists = new ArrayList<>();
         orderLists.add(orderList);
@@ -60,15 +63,17 @@ public class Sales {
      */
     public void printSales(Ui ui, Menu menu) {
         if(isOrderListsEmpty()) {
+            logger.info("Printing empty sales...");
             ui.showToUser("No sales made.");
             return;
         }
-        ui.showSalesBottom();
+        //ui.showSalesBottom();
         for (int day = 0; day < orderLists.size(); day++) {
+            logger.info("Printing sales for day " + day + "...");
             OrderList orderList = orderLists.get(day);
 
             if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
-                ui.showToUser("No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".");
+                ui.showToUser("", "No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".", "");
                 continue;
             }
 
@@ -86,6 +91,7 @@ public class Sales {
      * @param day The day for which sales data is to be printed.
      */
     public void printSaleByDay(Ui ui, Menu menu, int day) {
+        logger.info("Printing sales by day...");
         int orderListIndex = day - 1;
         try {
             OrderList orderList = orderLists.get(orderListIndex);
@@ -98,6 +104,7 @@ public class Sales {
             orderList.printOrderList(menu, ui);
             ui.showSalesBottom();
         } catch (Exception e) {
+            logger.log(Level.WARNING, "Unable to print sales for day " + day + "\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
         }
     }

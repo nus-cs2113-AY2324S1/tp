@@ -1,5 +1,6 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
@@ -10,6 +11,7 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
+import java.util.logging.Logger;
 import java.text.DecimalFormat;
 
 public class AddOrderCommand extends Command {
@@ -19,7 +21,7 @@ public class AddOrderCommand extends Command {
             + " name/DISH_NAME qty/QUANTITY\n"
             + "Example: " + COMMAND_WORD
             + "name/chicken rice qty/2";
-
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Pantry pantry;
     protected OrderList orderList;
     protected Menu menu;
@@ -36,6 +38,7 @@ public class AddOrderCommand extends Command {
     }
     @Override
     public void execute() {
+        logger.info("Executing AddOrderCommand...");
         orderList.addOrder(order);
         Chef chef = new Chef(order, pantry, ui);
         chef.cookDish();

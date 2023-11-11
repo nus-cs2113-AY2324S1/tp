@@ -1,5 +1,6 @@
 package seedu.cafectrl.storage;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Order;
 import seedu.cafectrl.data.OrderList;
 import seedu.cafectrl.data.Pantry;
@@ -9,6 +10,7 @@ import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.data.Menu;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * The Encoder class provides methods to encode various data structures into string representations to
@@ -17,6 +19,7 @@ import java.util.ArrayList;
  * making the data suitable for saving to a file.
  */
 public class Encoder {
+    public static final String NULL_ORDER_DAY = "the last day has no orders but please account for it";
     private static final String DIVIDER = " | ";
 
     //@@author Cazh1
@@ -41,6 +44,7 @@ public class Encoder {
         return stringArrayList;
     }
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
     /**
      * Encodes a Menu object into a list of strings representing its contents, suitable for saving to a file.
@@ -49,6 +53,7 @@ public class Encoder {
      * @return An ArrayList of strings, where each string represents a Dish in the Menu.
      */
     public static ArrayList<String> encodeMenu(Menu menu) {
+        logger.info("Encoding Menu to menu.txt...");
         ArrayList<String> menuStringList = new ArrayList<>();
         ArrayList<Dish> menuDishList = menu.getMenuItemsList();
         for(Dish dish : menuDishList) {
@@ -58,6 +63,7 @@ public class Encoder {
             dishString.append(encodeIngredientList(dish.getIngredients()));
             dishString.append(System.lineSeparator());
             menuStringList.add(String.valueOf(dishString));
+            logger.info("Encoded dish: " + dishString);
         }
         ArrayList<String> menuStringListHashed = hashEncoding(menuStringList);
         return menuStringListHashed;
@@ -112,10 +118,12 @@ public class Encoder {
      * @return An ArrayList of strings representing the encoded sales data.
      */
     public static ArrayList<String> encodeSales(Sales sales) {
+        logger.info("Encoding Sales to orders.txt...");
         ArrayList<String> encodedList = new ArrayList<>();
         ArrayList<OrderList> orderLists = sales.getOrderLists();
 
         for (int day = 0; day < orderLists.size(); day++) {
+            logger.info("Encoding sales of day " + day);
             //get orderList for each day from list of sales
             OrderList orderList = sales.getOrderList(day);
             //get order from each orderList obtained
@@ -129,9 +137,34 @@ public class Encoder {
                 orderString.append(order.getIsComplete());
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));
+                logger.info("Encoded order: " + orderString);
+            }
+            if (day == sales.getDaysAccounted()) {
+                encodedList = encodeLastSalesDay(encodedList, orderList, day);
             }
         }
         ArrayList<String> encodedListHashed = hashEncoding(encodedList);
         return encodedListHashed;
+    }
+
+    //@@author Cazh1
+    /**
+     * Checks if the last day accessed has valid orders added
+     *
+     * @param encodedList An ArrayList of strings representing the encoded sales data.
+     * @param orderList An ArrayList of Orders of the last day accessed
+     * @param day The last day accessed
+     * @return encodedList with specific String added at the end if no valid orders were detected
+     */
+    private static ArrayList<String> encodeLastSalesDay(ArrayList<String> encodedList, OrderList orderList, int day) {
+        if (orderList.getSize() == 0) {
+            StringBuilder orderString = new StringBuilder();
+            //day of each orderList is index + 1
+            orderString.append((day + 1) + DIVIDER);
+            orderString.append(NULL_ORDER_DAY);
+            orderString.append(System.lineSeparator());
+            encodedList.add(String.valueOf(orderString));
+        }
+        return encodedList;
     }
 }

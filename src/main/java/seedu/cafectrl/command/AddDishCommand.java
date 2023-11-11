@@ -1,8 +1,11 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.Ui;
+
+import java.util.logging.Logger;
 //@@author DextheChik3n
 /**
  * Adds a menu item to the user
@@ -14,7 +17,7 @@ public class AddDishCommand extends Command {
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example:"
             + COMMAND_WORD + " name/chicken rice price/3.00 ingredient/rice qty/200g, ingredient/chicken qty/100g";
-
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Menu menu;
     protected Ui ui;
 
@@ -26,6 +29,7 @@ public class AddDishCommand extends Command {
     }
     @Override
     public void execute() {
+        logger.info("Executing AddDishCommand...");
         menu.addDish(dish);
         ui.printAddDishMessage(dish);
     }

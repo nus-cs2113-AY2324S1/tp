@@ -3,6 +3,7 @@ package seedu.cafectrl.command;
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.dish.Ingredient;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
@@ -32,16 +33,16 @@ public class ViewTotalStockCommandTest {
         String actualOutput = baos.toString().trim();
         System.setOut(originalOut);
 
-        String expectedOutput = "+-------------------------------------------------------+\n"
-                + "| You have the following ingredients in pantry:         |\n"
-                + "+----------------------------------------+--------------+\n"
-                + "| Ingredients                            |  Qty         |\n"
-                + "+----------------------------------------+--------------+\n"
+        String expectedOutput = Messages.MENU_END_CAP
+                + Messages.VIEW_STOCK_MESSAGE2
+                + Messages.MENU_CORNER
+                + Messages.VIEW_STOCK_TITLE_MESSAGE
+                + Messages.MENU_CORNER
                 + "| chicken                                | 500g         |\n"
                 + "| rice                                   | 1000g        |\n"
-                + "+-------------------------------------------------------+\n";
+                + Messages.MENU_END_CAP;
 
-        assertEquals(expectedOutput.trim().replaceAll("\\s+", " "),
-                actualOutput.trim().replaceAll("\\s+", " "));
+        assertEquals(expectedOutput.trim().replaceAll("\\s+", ""),
+                actualOutput.trim().replaceAll("\\s+", ""));
     }
 }
