@@ -396,7 +396,13 @@ print each question with a given index, and indicate the question's type and com
 
 ### Delete Command - Delete a Question
 
+#### Brief Description of Delete Command
 Deletes a question by its index.
+
+#### Command Syntax of Delete Command
+`delete [question index]`
+
+#### Implementation of Delete Command
 
 The Command first invokes the QuestionList.viewQuestionByIndex method to determine if 
 the index refers to a valid question, failing which it will return an error message.
@@ -407,6 +413,33 @@ the question from the QuestionList.
 ![](UML/Images/commandDeleteQuestion.png)
 
 Afterward, the storage is updated to reflect the newest QuestionList.
+
+#### Expected invalid commands for Delete Command
+List of questions: <br>
+1: [S][ ] New description / \\exitquiz | number | EASY <br>
+2: [M][ ] question2 / 1.4 / 2 / 3 / 1.6 / 3 | number | EASY <br> 
+3: [S][ ] What is 2+2? / 4 | Math | EASY <br> 
+4: [S][ ] Who wrote Hamlet? / Shakespeare | Literature | HARD <br>
+5: [S][ ] easy / easy | easy | EASY <br>
+- `delete /1` or `delete 1!`
+  - Please enter valid integer question index!
+  - Reason: Adding a slash prefix to the index (like '/1') or special characters is not the expected format for the delete command.
+- `delete 0`
+  - Please enter valid integer question index!
+  - Reason: 1-based input. a 1-based index system, using '0' as an index is invalid
+- `delete easy`
+  - Please enter valid integer question index!
+  - Reason: Does not support deleting questions as we do not discriminate mcq / short type questions
+- `delete 1 extraArgument` or `delete 1, 2` or `delete 1 2`
+  - Please enter only 1 question index!
+  - Reason: Program only support deleting 1 question at a time. 
+- `delete 999` - if there's less than 999 questions in list
+  -  Please enter valid integer question index!
+  - Reason: No question index 999 in list
+- `delete three`
+  - Please enter valid integer question index!
+  - The command uses a non-numeric index ('three'). The index should be a number.
+<hr>
 
 ### Find Command - Look for a matching question
 
