@@ -1,18 +1,30 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.cashflow.Cashflow;
 import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.cashflow.Expense;
 import seedu.financialplanner.cashflow.Income;
+import seedu.financialplanner.commands.utils.Command;
+import seedu.financialplanner.commands.utils.RawCommand;
+import seedu.financialplanner.enumerations.CashflowCategory;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class ListCommand extends Command {
+    public static final String NAME = "list";
+
+    public static final String USAGE =
+            "list [income/expense/recurring]";
+
+    public static final String EXAMPLE =
+            "list" + "\n" +
+            "list recurring";
     protected CashflowCategory category = null;
-    public ListCommand(RawCommand rawCommand) throws IllegalArgumentException{
+
+    public ListCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringCategory = null;
         int indexToDelete = 0;
         ArrayList<Integer> blankArgsList = new ArrayList<>();

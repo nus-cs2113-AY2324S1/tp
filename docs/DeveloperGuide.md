@@ -67,8 +67,6 @@
 
 * [Addressbook-level3](https://github.com/se-edu/addressbook-level3)
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
 ## Design & implementation
 
 ### Architecture Diagram
@@ -140,7 +138,7 @@ VisCommand's Role:
 - `/t` Reads the type of cashflow that the user wants to visualize (income/expense)
 - `/c` Reads the type of visualization tools the user wants (piechart/barchart)
 
-2) Calls the Cateorgizer to sort cashflow (Income/Expense) according to type
+2) Calls the Categorizer to sort cashflow (Income/Expense) according to type
 
 3) Calls the Visualizer to display the chart to the user
 
@@ -149,7 +147,7 @@ takes RawCommand as parameter. The RawCommand would provide the arguments (chart
 for the VisCommand provided. 
 
 The VisCommand also inherits from the abstract Command class which would provide the execute() abstract method
-that would be called in main()
+that would be called in main().
 
 Categorizer's Role: 
 
