@@ -16,6 +16,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
 public class Decoder {
 
     private static final String DIVIDER = "\\| ";
+    private static final String INGREDIENT_DIVIDER = " - ";
     private static final Ui ui = new Ui();
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     //@@author ShaniceTang
@@ -41,14 +43,23 @@ public class Decoder {
         ArrayList<Dish> menuDishList = new ArrayList<>();
         for(String dishString : textLines) {
             logger.info("Line to decode: " + dishString);
+            decodeDishString(dishString, menuDishList);
+        }
+        return new Menu(menuDishList);
+    }
+
+    private static void decodeDishString(String dishString, ArrayList<Dish> menuDishList) {
+        try {
             String[] dishStringArray = dishString.split(DIVIDER);
             String dishName = dishStringArray[0].trim();
             float dishPrice = Float.parseFloat(dishStringArray[1]);
             String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
             ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
             menuDishList.add(new Dish(dishName, ingredientsList, dishPrice));
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
+            ui.showToUser(ErrorMessages.INVALID_MENU_DATA + dishString);
         }
-        return new Menu(menuDishList);
     }
 
     /**
@@ -57,17 +68,24 @@ public class Decoder {
      * @param ingredientsStringArray An array of strings containing encoded ingredient data.
      * @return An ArrayList of Ingredient objects containing the decoded ingredient information.
      */
-    private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) {
+    private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) throws Exception {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
         for(String ingredientString : ingredientsStringArray) {
             logger.info("Ingredient to decode: " + ingredientString);
-            String[] array = ingredientString.split(" ");
+            String[] array = ingredientString.split(INGREDIENT_DIVIDER);
             String name = array[0].trim();
-            int qty = Integer.parseInt(array[1]);
+            int qty = Integer.parseInt(array[1].trim());
             String unit = array[2].trim();
+            checkUnitValidity(unit);
             ingredientList.add(new Ingredient(name, qty, unit));
         }
         return ingredientList;
+    }
+
+    private static void checkUnitValidity(String unit) throws Exception {
+        if (!Parser.isValidUnit(unit) || Parser.isEmptyUnit(unit)) {
+            throw new Exception();
+        }
     }
 
     //@@author ziyi105
