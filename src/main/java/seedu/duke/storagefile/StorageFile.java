@@ -9,9 +9,9 @@ import java.util.Scanner;
 import seedu.duke.exerciselog.Log;
 
 public class StorageFile {
-    private static File dir;
-    private static File textFile;
-    private static FileWriter writeFile;
+    protected File dir;
+    protected File textFile;
+    protected FileWriter writeFile;
 
     public StorageFile(String dirName, String textFileName) {
         dir = new File(dirName);
@@ -22,7 +22,7 @@ public class StorageFile {
         return new StorageFile(dirName, textFilePath);
     }
 
-    public void checkForTextFile(Log exerciseLog) throws IOException {
+    public void checkForLogTextFile(Log exerciseLog) throws IOException {
         if (dir.exists() && textFile.exists()) {
             try {
                 Scanner s = new Scanner(textFile);
@@ -64,6 +64,7 @@ public class StorageFile {
 
     public void removeExerciseFromFile(int month, int day, String[] exerciseName, int caloriesBurned)
             throws IOException {
+        //duplicated code
         Scanner readFile = new Scanner(textFile);
         File tempFile = new File("./data/temp.txt");
         FileWriter tempWriter = new FileWriter(tempFile.toPath().toString());

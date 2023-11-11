@@ -16,6 +16,7 @@ import java.util.Scanner;
 import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.Goal;
+import seedu.duke.data.GoalList;
 import seedu.duke.data.Printable;
 
 /**
@@ -251,6 +252,27 @@ public class TextUi {
         }
 
         return Sb.toString();
+    }
+
+    /**
+     * This method return content of goal list in any goalList object
+     * It is typically used to overwrite save file whenever change in goal records
+     * @param goals a GoalList object
+     * @return String containing goal information of the goal object
+     */
+    public static String contentOfGoalList(GoalList goals) {
+        if (goals.getGoalCount() == 0) {
+            return null;
+        }
+        StringBuilder Sb = new StringBuilder();
+        for (int i = 0; i < goals.getGoalCount(); i++){
+            Sb.append(goals.getGoal(i)).append("\n");
+        }
+        return Sb.toString();
+    }
+
+    public static String buildingFileMsg() {
+        return "Building new save file...\n" + "Building new file succeed!";
     }
 
 }

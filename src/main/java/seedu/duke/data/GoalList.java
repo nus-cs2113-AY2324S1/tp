@@ -4,9 +4,11 @@ import seedu.duke.Duke;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.data.exception.InvalidDateException;
+import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
 import seedu.duke.data.DateTime;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GoalList extends ArrayList<Goal> {
@@ -39,12 +41,15 @@ public class GoalList extends ArrayList<Goal> {
      * @param cmd Raw user Command
      * @return message of succeeding to delete goal and tell user the updated total number of goals
      */
-    public static String deleteGoal(String cmd) throws IncorrectFormatException, NumberFormatException {
+    public static String deleteGoal(String cmd) throws IncorrectFormatException,
+            NumberFormatException, IOException {
         verifyDeleteGoalInput(cmd);
         String[] cmdSplit = cmd.toLowerCase().trim().split(" ");
         int index = Integer.parseInt(cmdSplit[1]);
         Goal targetGoal = Duke.goalList.goals.remove(index - 1);
         Duke.goalList.goalCount--;
+        Duke.goalStorage.overwriteGoalToFile();
+
         return TextUi.deleteGoalMsg(targetGoal) + TextUi.noOfGoalMsg(Duke.goalList.goalCount);
     }
 
@@ -142,7 +147,7 @@ public class GoalList extends ArrayList<Goal> {
      * @throws NumberFormatException if the user does not input a valid number
      */
     public static String addGoal(String userCmd) throws IncorrectFormatException, NumberFormatException,
-            InvalidDateException {
+            InvalidDateException, IOException {
         verifyGoalInput(userCmd); //if invalid, exceptions is thrown
 
         String[] cmdSplit = userCmd.split(" ");
@@ -151,6 +156,7 @@ public class GoalList extends ArrayList<Goal> {
 
         Duke.goalList.goals.add(new Goal(calories, date));
         Duke.goalList.goalCount++;
+        Duke.goalStorage.overwriteGoalToFile();
 
         return TextUi.addGoalSuccessMessage();
     }
