@@ -58,8 +58,7 @@ public class GoalStorage extends StorageFile {
             textFile.createNewFile();
             Duke.goalList = new GoalList(); //start with an empty goal list
         }
-
-        writeFile = new FileWriter(textFile.toPath().toString(), false);
+        
     }
 
     /**
