@@ -661,6 +661,7 @@ You have added Reminder
    Type: debt
    Date: 11/12/2023
    Status: Not Done
+   Left Days: 30
 ```
 
 ### Delete reminder: `deletereminder`
