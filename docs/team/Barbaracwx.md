@@ -22,7 +22,11 @@ GUI apps.
     * What it does: Provides a list of threshold levels for all drugs.
 6) **Alert function when a drug is below the set threshold level**
     * What it does: Sends alerts when a drug's quantity falls below the user-defined threshold.
-7) **Delete Vendor**
+7) **Prevent Adding Expired Drugs to Cart**
+    * What it does: Displays an error alert when a user attempts to add an expired drug to their cart.
+8) **Indicate Expired Drugs in the List**
+    * What it does: Adds an (E) next to the entry of any drug with an expired expiration date
+9) **Delete Vendor**
     * What it does: Deletes a vendor from the vendors list.
 
 
@@ -36,7 +40,11 @@ GUI apps.
 -**Contributions to the UG**
 * Barbara added documentation for the following sections of
   the user guide:
-    *
+    * [FindCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date)
+    * [ShowStockLevelCommand]()
+    * [SetThresholdCommand]()
+    * [ListThresholdCommand]()
+    * [DeleteVendorCommand]()
 
 
 -**Contributions to the DG**
@@ -51,6 +59,10 @@ GUI apps.
 * Updated portions of user/developer docs not specific to a feature eg: user stories, target user profile,
   value proposition
 * Kept up to date weekly deliverables during meetings
+
+**Providing Assistance**
+- Offered support by explaining concepts and providing help with code to group mates facing challenges.
+
 
 
 
