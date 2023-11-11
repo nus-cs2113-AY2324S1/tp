@@ -191,19 +191,22 @@ the QuestionList itself.
 
 ### Help Command - Display Commands
 
-When executed, this command will execute a standard Final String containing all 
-the commands available for the user to use, as well as the format they are meant
-to be written in. 
-
-This same String is also displayed when an invalid command is used.
-
 #### Brief Description of Help Command
+- When executed, this command will execute a standard Final String containing all
+the commands available for the user to use, as well as the format they are meant
+to be written in.
+- This same String is also displayed when an invalid command is used.
 
-#### Class Structure of Help Command
-
-#### Implementation details for Help Command
+#### Command Syntax
+`help`
 
 #### Expected invalid commands for Help Command
+- `help 123`
+  - Shows help string
+  - Reason: the help command ignores the string after the initial `help` command
+- `hep` or `help123`
+  - Please enter a valid command. Shows help string
+  - Reason: Treated as an invalid command - shows the invalid command string which happens to be the help command
 
 <hr>
 
@@ -625,8 +628,6 @@ The `CommandShuffle` class does not have its own attributes but utilizes those f
 - `Storage`: If the shuffle should result in a permanent change, `Storage` would be used to persist the new question order.
 - `QuestionList`: Contains the list of questions that will be shuffled.
 
-![ShuffleToStorage-Shuffle_to_Storage_Flow.png](UML/Images/ShuffleToStorage-Shuffle_to_Storage_Flow.png)
-
 #### Operational Flow
 
 1. **Command Invocation:**
@@ -667,8 +668,6 @@ This feature allows for the categorization of questions by difficulty, aiding in
 - `markdiff [question number] /[question difficulty]`
 
 #### Class Structure of Markdiff Command
-![commandMarkDiffSequence.png](UML/Images/commandMarkDiffSequence.png)
-
 ![commandMarkDiffClass.png](UML/Images/commandMarkDiffClass.png)
 
 The `CommandMarkDifficulty` class is responsible for the command operation that marks a question with a specified difficulty level in the QuizHub application. It extends the base `Command` class and includes specific attributes and methods for the marking process.
@@ -754,13 +753,6 @@ Command Exit is responsible for exiting the program
 - `<white-space> bye`: <white-space> here signify any empty blanks before bye. White-space is stripped, so it will be considered a valid command here
 
 <hr>
-
-#### Class structure of Command Exit
-
-![commandExitSequence.png](UML/Images/commandExitSequence.png)
-
-When the user initiate Command Exit, any unsaved data will be saved into storage and thereafter, the exit message will
-be displayed.
 
 ## Storage Component
 
