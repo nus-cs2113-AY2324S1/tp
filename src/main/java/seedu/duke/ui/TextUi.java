@@ -195,7 +195,7 @@ public class TextUi {
     }
 
     public static String noOfGoalMsg(int goalCount) {
-        return "You now have " + goalCount + "goals to accomplish.";
+        return "You now have " + goalCount + " goals to accomplish.";
     }
 
     public static String deleteGoalMsg(Goal deletedGoal) {
