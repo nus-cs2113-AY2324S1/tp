@@ -33,7 +33,6 @@ import java.util.Scanner;
  * Represents the loading of data from storage.
  */
 public abstract class LoadData {
-    private static final String FILE_PATH = "data/watchlist.json";
     private static final CashflowList cashflowList = CashflowList.getInstance();
     private static final Ui ui = Ui.getInstance();
     private static final ReminderList reminderList = ReminderList.getInstance();
@@ -326,13 +325,13 @@ public abstract class LoadData {
      *
      * @return
      */
-    public static HashMap<String, Stock> loadWatchList() {
+    public static HashMap<String, Stock> loadWatchList(String filePath) {
         Ui ui = Ui.getInstance();
         Gson gson = new Gson();
         HashMap<String, Stock> stocksData = null;
         ui.showMessage("Loading existing watchlist..");
         try {
-            JsonReader reader = new JsonReader(new FileReader(FILE_PATH));
+            JsonReader reader = new JsonReader(new FileReader(filePath));
             stocksData = gson.fromJson(reader, new TypeToken<HashMap<String,Stock>>(){}.getType());
             if (stocksData.size() > 5) {
                 throw new FinancialPlannerException("You have more than 5 entries in watchlist.json");
