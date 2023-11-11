@@ -29,7 +29,7 @@ In the terminal, make sure you are in the same directory (location) as the jar f
  
   Command example: `set 1000 on 22/08/2023` (For setting a new goal command)
 
-  Please note that some **unexisting date with correct format** will be treated as last day of the month. If you find the input date is wrong, please use a delete command to help you. (31 Feb will be treated as 28 Feb, depends on the year.)
+  Please note that some **unexisting date with correct format** will be treated as last day of the month. If you find the input date is wrong, please use a delete command to help you. (e.g. 31 Feb will be treated as 28 Feb, depends on the year.)
   
 ## Content of Command
 
