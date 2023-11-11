@@ -23,6 +23,29 @@ public class Encoder {
     private static final String DIVIDER = " | ";
     private static final String INGREDIENT_DIVIDER = " - ";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+
+    //@@author Cazh1
+    /**
+     * Generates a hash for the content to be saved into text save file
+     *
+     * @param stringArrayList The arraylist of String to be saved into text save file
+     * @return arraylist of String with the generated hash
+     */
+    private static ArrayList<String> hashEncoding(ArrayList<String> stringArrayList) {
+        String stringArrayListAsString = String.join(", ", stringArrayList).trim();
+
+        //The generated String has line breaks, this removes line breaks
+        String stringArrayListAsStringInOneLine = stringArrayListAsString.replace("\n", "").replace("\r", "");
+
+        //Generate Hash from content
+        int stringArrayListHash = stringArrayListAsStringInOneLine.hashCode();
+        String stringArrayListHashAsString = String.valueOf(stringArrayListHash);
+
+        //Adds generated Hash into the original ArrayList<String>
+        stringArrayList.add(stringArrayListHashAsString);
+        return stringArrayList;
+    }
+
     //@@author ShaniceTang
     /**
      * Encodes a Menu object into a list of strings representing its contents, suitable for saving to a file.
@@ -43,7 +66,8 @@ public class Encoder {
             menuStringList.add(String.valueOf(dishString));
             logger.info("Encoded dish: " + dishString);
         }
-        return menuStringList;
+        ArrayList<String> menuStringListHashed = hashEncoding(menuStringList);
+        return menuStringListHashed;
     }
 
     /**
@@ -83,7 +107,8 @@ public class Encoder {
             encodedIngredient.append(System.lineSeparator());
             pantryStockInString.add(encodedIngredient.toString());
         }
-        return pantryStockInString;
+        ArrayList<String> pantryStockInStringHashed = hashEncoding(pantryStockInString);
+        return pantryStockInStringHashed;
     }
 
     //@@author NaychiMin
@@ -120,7 +145,8 @@ public class Encoder {
                 encodedList = encodeLastSalesDay(encodedList, orderList, day);
             }
         }
-        return encodedList;
+        ArrayList<String> encodedListHashed = hashEncoding(encodedList);
+        return encodedListHashed;
     }
 
     //@@author Cazh1
