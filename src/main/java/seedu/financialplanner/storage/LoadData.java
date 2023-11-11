@@ -337,6 +337,9 @@ public abstract class LoadData {
             if (stocksData.size() > 5) {
                 throw new FinancialPlannerException("You have more than 5 entries in watchlist.json");
             }
+            if (!checkHashCode(stocksData)) {
+                throw new FinancialPlannerException("watchlist.json values were edited");
+            }
         } catch (FileNotFoundException e) {
             ui.showMessage("Watchlist file not found... Creating");
         } catch (JsonSyntaxException e) {
@@ -362,5 +365,17 @@ public abstract class LoadData {
         if (value < 0 || recur < 0) {
             throw new FinancialPlannerException("Amount and number of days cannot be negative");
         }
+    }
+
+    private static boolean checkHashCode(HashMap<String, Stock> stocksData) {
+        for (HashMap.Entry<String, Stock> stock : stocksData.entrySet()) {
+            if (stock.getValue().getHashCode() == 0) {
+                continue;
+            }
+            if (stock.getValue().checkHashCode() != stock.getValue().getHashCode()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

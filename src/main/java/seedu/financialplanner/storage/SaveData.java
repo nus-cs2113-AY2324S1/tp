@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import seedu.financialplanner.exceptions.FinancialPlannerException;
 import seedu.financialplanner.goal.WishList;
+import seedu.financialplanner.investments.Stock;
 import seedu.financialplanner.investments.WatchList;
 import seedu.financialplanner.cashflow.Budget;
 import seedu.financialplanner.cashflow.Cashflow;
@@ -13,6 +14,7 @@ import seedu.financialplanner.utils.Ui;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Represents the saving of data to storage.
@@ -51,14 +53,20 @@ public abstract class SaveData {
     public static void saveWatchList() {
         Ui ui = Ui.getInstance();
         WatchList wl = WatchList.getInstance();
+        setHashCode(wl.getStocks());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
         try {
             FileWriter fileWriter = new FileWriter(FILE_PATH);
             gson.toJson(wl.getStocks(), fileWriter);
             fileWriter.close();
         } catch (IOException e) {
             ui.showMessage("Unable to save watchlist to file");
+        }
+    }
+
+    private static void setHashCode(HashMap<String, Stock> stocks) {
+        for (HashMap.Entry<String, Stock> stock : stocks.entrySet()) {
+            stock.getValue().setHashCode();
         }
     }
 }
