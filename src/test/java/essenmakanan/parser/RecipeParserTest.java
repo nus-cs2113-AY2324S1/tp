@@ -17,8 +17,15 @@ public class RecipeParserTest {
 
     @BeforeEach
     public void setUp() {
+
         recipeParser = new RecipeParser();
         recipes = new RecipeList();
+
+        String[] recipeSteps = {"step1", "step2"};
+        String[] recipeIngredients = {"i/flour,200,g", "i/egg,2,pc"};
+        Recipe banana = new Recipe("banana", recipeSteps, recipeIngredients);
+
+        recipes.addRecipe(banana);
     }
 
     @Test
@@ -96,6 +103,14 @@ public class RecipeParserTest {
         String userInput4 = "no bread";
         assertThrows(EssenOutOfRangeException.class, () -> {
             RecipeParser.getRecipeIndex(myRecipes, userInput4);
+        });
+    }
+
+    @Test
+    public void viewRecipe_invalidRecipe_errorThrown() {
+        String input = "r/apple";
+        assertThrows(EssenOutOfRangeException.class, () -> {
+            RecipeParser.getRecipeIndex(recipes, input);
         });
     }
 

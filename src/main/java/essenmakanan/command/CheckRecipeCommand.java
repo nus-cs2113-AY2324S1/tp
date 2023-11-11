@@ -11,7 +11,7 @@ import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
-public class StartRecipeCommand extends Command {
+public class CheckRecipeCommand extends Command {
 
     public IngredientList missingIngredients;
     public IngredientList insufficientIngredients;
@@ -21,7 +21,7 @@ public class StartRecipeCommand extends Command {
     private RecipeList recipes;
     private RecipeIngredientList recipeIngredients;
 
-    public StartRecipeCommand(String input, RecipeList recipes, IngredientList ingredients) {
+    public CheckRecipeCommand(String input, RecipeList recipes, IngredientList ingredients) {
         this.input = input;
         this.ingredients = ingredients;
         this.recipes = recipes;
