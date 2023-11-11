@@ -1,12 +1,20 @@
 package seedu.duke.data;
 
+import seedu.duke.data.Date;
+import seedu.duke.data.exception.InvalidDateException;
+
+
 public class Goal {
     private int calories;
-    private String date;
+    private Date date;
 
-    public Goal(int calories, String date){
+    public Goal(int calories, String date) throws InvalidDateException {
         this.calories = calories;
-        this.date = date;
+        this.date = setGoalDateTime(date);
+    }
+
+    private Date setGoalDateTime(String date) throws InvalidDateException {
+        return new Date(date);
     }
 
     public String toString() {

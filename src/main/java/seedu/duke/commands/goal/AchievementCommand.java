@@ -24,6 +24,8 @@ public class AchievementCommand extends Command {
 
         } catch (IncorrectFormatException ife) {
             feedbackToUser = ife.getMessage();
+        } catch (Exception e) {
+            feedbackToUser = "Something went wrong, please try again.";
         }
 
         return new CommandResult(feedbackToUser);

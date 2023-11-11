@@ -29,6 +29,8 @@ public class DeleteGoalCommand extends Command {
             feedbackToUser = "Please input a valid number for delete index.";
         } catch (IncorrectFormatException ife) {
             feedbackToUser = ife.getMessage();
+        } catch (Exception e) {
+            feedbackToUser = "Something went wrong, please try again.";
         }
 
         return new CommandResult(feedbackToUser);
