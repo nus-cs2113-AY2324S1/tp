@@ -33,7 +33,7 @@ public class IngredientParser {
     /**
      * To get an Ingredient List of all ingredients needed for all recipes in the recipe list
      *
-     * @param recipes is a recipe list of all recipes the user wants to process
+     * @param recipes : RecipeList is a recipe list of all recipes the user wants to process
      * @return all ingredients in the list of recipes
      */
     public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {

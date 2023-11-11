@@ -3,6 +3,8 @@ package essenmakanan.ui;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.shortcut.Shortcut;
+import essenmakanan.shortcut.ShortcutList;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -53,12 +55,21 @@ public class Ui {
     public static void showIngredientCommands() {
         System.out.println("INGREDIENT");
         System.out.println("\t- View all ingredients. [view i]\n"
-                + "\t- Add ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]\n"
+                + "\t- Add an ingredient. [add i/INGREDIENT_NAME,QUANTITY,UNIT [i/...] ]\n"
                 + "\t\t" + validIngredientUnits() + "\n"
                 + "\t- View an Ingredient. [view i/INGREDIENT_NAME] or [view i/INGREDIENT_ID]\n"
                 + "\t- Edit an ingredient. [edit i/INGREDIENT_NAME [n/NEW_NAME]"
                 + " [q/NEW_QUANTITY] [u/NEW_UNIT]\n"
                 + "\t- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]\n");
+    }
+
+    public static void showShortcutCommands() {
+        System.out.println("SHORTCUT");
+        System.out.println("\t- View all shortcuts. [view sc]\n"
+                + "\t- Add a shortcut. [add i/INGREDIENT_NAME,QUANTITY]\n"
+                + "\t- Edit a shortcut. [edit i/INGREDIENT_NAME [n/NEW_NAME]"
+                + " [q/NEW_QUANTITY]\n"
+                + "\t- Delete a shortcut. [delete i/SHORTCUT_INDEX] OR [delete i/INGREDIENT_NAME]\n");
     }
 
     public static void showOtherCommands() {
@@ -71,6 +82,7 @@ public class Ui {
         System.out.println("Here are the commands currently available:\n");
         showRecipeCommands();
         showIngredientCommands();
+        showShortcutCommands();
         showOtherCommands();
         drawDivider();
     }
@@ -232,4 +244,34 @@ public class Ui {
         drawDivider();
     }
 
+    public static void printAllShortcuts(ShortcutList shortcuts) {
+        Ui.drawDivider();
+        System.out.println("Here's a list of your shortcuts!");
+        shortcuts.listShortcuts();
+        drawDivider();
+    }
+
+    public static void printAddShortcutSuccess(Shortcut shortcut) {
+        Ui.drawDivider();
+        System.out.println("Shortcut to add '" + shortcut.getIngredientName() + "' has been created!");
+        Ui.drawDivider();
+    }
+
+    public static void printDeletedShortcut(String ingredientName) {
+        Ui.drawDivider();
+        System.out.println("Shortcut to add '" + ingredientName + "' has been deleted!");
+        Ui.drawDivider();
+    }
+
+    public static void printEditShortcutName(String oldName, String newName) {
+        Ui.drawDivider();
+        System.out.println("Shortcut to ingredient '" + oldName + "' has changed to ingredient '" + newName + "'.");
+        Ui.drawDivider();
+    }
+
+    public static void printEditShortcutQuantity(double oldQuantity, double newQuantity) {
+        Ui.drawDivider();
+        System.out.println("Shortcut's quantity has beed changed from " + oldQuantity + " to " + newQuantity + ".");
+        Ui.drawDivider();
+    }
 }
