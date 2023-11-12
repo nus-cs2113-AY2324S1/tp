@@ -214,7 +214,7 @@ public class RecipeParser {
     }
 
     public static RecipeIngredientList parseDataRecipeIngredients(String ingredientsString)
-            throws EssenStorageFormatException {
+            throws EssenStorageFormatException, NumberFormatException {
         String[] parsedIngredients = ingredientsString.split(" , ");
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
@@ -233,7 +233,12 @@ public class RecipeParser {
                 }
             }
 
-            Double ingredientQuantity = Double.parseDouble(parsedIngredient[1].trim());
+            double ingredientQuantity = Double.parseDouble(parsedIngredient[1].trim());
+
+            if (!IngredientParser.checkForValidQuantity(ingredientQuantity)) {
+                throw new NumberFormatException();
+            }
+
             IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2].trim());
             ingredientList.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
         }

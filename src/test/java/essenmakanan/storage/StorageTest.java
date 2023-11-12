@@ -16,7 +16,6 @@ public class StorageTest {
     private static String DATA_INVALID_PATH = "src/test/data/invalid.txt";
     private static String DATA_RECIPE_TEST_PATH = "src/test/data/recipes.txt";
     private static String DATA_INGREDIENT_TEST_PATH = "src/test/data/ingredients.txt";
-    private static String DATA_EMPTY_RECIPE_TEXT_PATH = "src/test/data/emptyRecipe.txt";
 
     @Test
     public void accessIngredientDatabase_invalidPath_expectEssenFileNotFoundException() {

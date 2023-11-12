@@ -3,6 +3,7 @@ package essenmakanan.storage;
 import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenInvalidEnumException;
 import essenmakanan.exception.EssenStorageFormatException;
+import essenmakanan.exception.EssenStorageNumberException;
 import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
@@ -87,7 +88,11 @@ public class RecipeStorage {
             recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
-            String message =  "Data: " + dataString + " has an invalid format";
+            String message = "Data: " + dataString + " has an invalid format";
+            EssenLogger.logWarning(message, exception);
+        } catch (NumberFormatException exception) {
+            EssenStorageNumberException.handleException(dataString);
+            String message = "Data: " + dataString + " has an invalid quantity";
             EssenLogger.logWarning(message, exception);
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
