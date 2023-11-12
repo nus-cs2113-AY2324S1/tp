@@ -16,6 +16,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Starts a REPL session where commands are inputted and then processed.
+     */
     private void run() {
         Calendar calendar = new Calendar();
         FlashcardComponent fc = new FlashcardComponent(calendar);
@@ -31,9 +34,13 @@ public class Duke {
 
             if (fc.isResponsible(input)) {
                 fc.processInput(input);
+                continue;
             } else if (cm.isResponsible(input)) {
                 cm.processInput(input);
-            } else if (input.toLowerCase().strip().equals("exit")) {
+                continue;
+            }
+
+            if (input.toLowerCase().strip().equals("exit")) {
                 System.out.println("    You are exiting TaskLinker! Bye!");
                 break;
             } else if (input.toLowerCase().strip().equals("help")) {
@@ -57,6 +64,8 @@ public class Duke {
             "list flashcards",
             "create flashcard",
             "review flashcards",
+            "delete flashcard",
+            "delete all flashcards",
             "help",
             "add event",
             "add goal event",

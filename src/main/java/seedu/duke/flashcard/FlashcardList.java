@@ -47,6 +47,8 @@ public class FlashcardList {
      */
     public void deleteAllFlashcards() {
         flashcards.clear();
+
+        assert flashcards.size() == 0 : "flashcardList should be empty now";
     }
 
     /**

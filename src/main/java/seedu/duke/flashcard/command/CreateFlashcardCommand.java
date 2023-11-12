@@ -21,27 +21,12 @@ public class CreateFlashcardCommand extends FlashcardCommand {
      * @param flashcardList Which flashcards to perform actions on.
      */
     public void execute(Scanner scanner, FlashcardList flashcardList) {
-        System.out.print("    Enter the front page text: ");
-        String frontPageText = scanner.nextLine();
+        assert scanner != null : "Must be a valid Scanner instance";
+        assert flashcardList != null : "Must be a valid FlashcardList " +
+                "instance";
 
-        while (frontPageText.strip().equals("")) {
-            System.out.println("        Invalid input! The front text must " +
-                    "contain at least one letter or digit!");
-
-            System.out.print("    Enter the front page text: ");
-            frontPageText = scanner.nextLine();
-        }
-
-        System.out.print("    Enter the back page text: ");
-        String backPageText = scanner.nextLine();
-
-        while (backPageText.strip().equals("")) {
-            System.out.println("        Invalid input! The back text must " +
-                    "contain at least one letter or digit!");
-
-            System.out.print("    Enter the back page text: ");
-            backPageText = scanner.nextLine();
-        }
+        String frontPageText = getInputUntilNonEmptyString(scanner, "front");
+        String backPageText = getInputUntilNonEmptyString(scanner, "back");
 
         Flashcard flashcard = new Flashcard(frontPageText, backPageText);
 
@@ -50,5 +35,32 @@ public class CreateFlashcardCommand extends FlashcardCommand {
         System.out.println();
         System.out.println("    Success! Flashcard has been added to your " +
                 "collection.");
+    }
+
+    /**
+     * Gets a user input for a flashcard, making sure that it is non-empty.
+     *
+     * @param scanner To get user input.
+     * @param flashcardSide Which side of the flashcard (front or back) is
+     *                      targeted.
+     * @return The user input for the specified flashcardSide.
+     */
+    private String getInputUntilNonEmptyString(Scanner scanner,
+                                               String flashcardSide) {
+        System.out.print("    Enter the " + flashcardSide + " page text: ");
+        String text = scanner.nextLine();
+
+        while (text.strip().equals("")) {
+            System.out.println("        Invalid input! The " + flashcardSide +
+                    " text must contain at least one letter or digit!");
+
+            System.out.print("    Enter the " + flashcardSide
+                    + " page text: ");
+            text = scanner.nextLine();
+        }
+
+        assert text != null : "Must be a non-null string";
+        assert (!text.strip().equals("")) : "Must be a non-empty string";
+        return text;
     }
 }

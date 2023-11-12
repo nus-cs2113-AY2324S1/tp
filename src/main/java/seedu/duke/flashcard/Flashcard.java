@@ -28,6 +28,8 @@ public class Flashcard {
 
         globalMaxId += 1;
         id = globalMaxId;
+
+        assert globalMaxId >= id : "No id must be bigger than globalMaxId";
     }
 
     /**

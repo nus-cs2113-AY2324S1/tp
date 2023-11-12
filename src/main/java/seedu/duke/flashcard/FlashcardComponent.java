@@ -66,7 +66,10 @@ public class FlashcardComponent {
      * @return Whether FlashcardComponent is responsible for handling the input.
      */
     public boolean isResponsible(String input) {
+        assert input != null : "input must not be null";
+
         FlashcardCommand command = parser.parseInput(input, calendar);
+
 
         if (command instanceof UnknownCommand) {
             return false;
@@ -81,6 +84,8 @@ public class FlashcardComponent {
      * @param input The text inputted by the user.
      */
     public void processInput(String input) {
+        assert input != null : "input must not be null";
+
         FlashcardCommand command = parser.parseInput(input, calendar);
         assert !(command instanceof UnknownCommand) : "Command cannot be " +
                 "unknown";
