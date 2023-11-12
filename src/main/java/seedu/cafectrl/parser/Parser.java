@@ -54,7 +54,7 @@ public class Parser implements ParserUtil {
     private static final String INGREDIENT_ARGUMENT_FORMAT_REGEX = "\\s*ingredient/(?<ingredientName>.*) qty/\\s*(?<ingredientQty>.*)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    public static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)(?<unit>[a-zA-z]*)\\s*$";
+    public static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
     private static final String INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL = "value";
     private static final String INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL = "unit";
     public static final String ADD_DISH_NAME_ARGUMENT = "name/";
@@ -442,7 +442,7 @@ public class Parser implements ParserUtil {
         for (Dish dish: menu.getMenuItemsList()) {
             String menuDishName = dish.getName();
 
-            if (menuDishName.equals(inputDishName)) {
+            if (menuDishName.equalsIgnoreCase(inputDishName)) {
                 return true;
             }
         }
