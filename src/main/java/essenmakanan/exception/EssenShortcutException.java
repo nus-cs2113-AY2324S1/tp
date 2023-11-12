@@ -2,7 +2,7 @@ package essenmakanan.exception;
 
 import essenmakanan.ui.Ui;
 
-public class EssenShortcutException extends Exception {
+public class EssenShortcutException extends EssenException {
 
     public void handleException() {
         Ui.drawDivider();
