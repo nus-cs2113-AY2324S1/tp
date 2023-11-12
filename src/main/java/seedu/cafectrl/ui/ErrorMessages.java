@@ -1,6 +1,7 @@
 package seedu.cafectrl.ui;
 
 import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.HelpCommand;
 
 public class ErrorMessages {
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
@@ -81,4 +82,6 @@ public class ErrorMessages {
     public static final String NAME_CANNOT_CONTAIN_SPECIAL_CHAR = "Is there a special character"
             + "in the name?\n I have poor memory and am unable to remember names with special characters"
             + ",\nso could you remove them?";
+    public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
+            + HelpCommand.MESSAGE_USAGE;
 }
