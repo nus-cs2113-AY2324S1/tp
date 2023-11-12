@@ -156,8 +156,6 @@ Expected outcome:
 Login Successful.
 ```
 
-Note
-
 ### `add` - Adds drug into inventory list
 
 Adds a drug to be tracked by the system.
