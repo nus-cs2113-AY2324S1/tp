@@ -1,5 +1,7 @@
 package seedu.financialplanner.goal;
 
+import seedu.financialplanner.utils.Ui;
+
 import java.util.ArrayList;
 public class WishList {
     private static WishList wishList = null;
@@ -34,8 +36,13 @@ public class WishList {
         int existingListSize = list.size();
         int listIndex = index;
         assert listIndex >= 0  && listIndex < existingListSize;
-        Goal toRemove = list.get(listIndex);
         list.remove(listIndex);
+    }
+
+    public void addGoal(String label, int amount){
+        Goal goal = new Goal(label, amount);
+        list.add(goal);
+        Ui.getInstance().showMessage("You have added " + goal);
     }
 
 

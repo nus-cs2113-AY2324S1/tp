@@ -36,7 +36,7 @@ public class SetGoalCommand extends Command {
         try {
             amount = Integer.parseInt(amountString);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Amount must be a number");
+            throw new IllegalArgumentException("Amount must be a valid integer");
         }
 
         if (amount<= 0) {
@@ -65,8 +65,6 @@ public class SetGoalCommand extends Command {
     @Override
     public void execute() {
         assert amount > 0;
-        Goal goal = new Goal(label, amount);
-        WishList.getInstance().list.add(goal);
-        Ui.getInstance().showMessage("You have added " + goal);
+        WishList.getInstance().addGoal(label, amount);
     }
 }

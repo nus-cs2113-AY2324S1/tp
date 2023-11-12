@@ -4,7 +4,7 @@ import seedu.financialplanner.commands.utils.Command;
 import seedu.financialplanner.commands.utils.RawCommand;
 import seedu.financialplanner.reminder.ReminderList;
 import seedu.financialplanner.utils.Ui;
-
+import java.util.logging.Logger;
 import java.util.logging.Level;
 
 @SuppressWarnings("unused")
@@ -14,7 +14,7 @@ public class ReminderListCommand extends Command {
     public static final String USAGE = "reminderlist";
     public static final String EXAMPLE = "reminderlist";
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.
+    private static final Logger logger = java.util.logging.Logger.
             getLogger("Financial Planner Logger");
 
     /**

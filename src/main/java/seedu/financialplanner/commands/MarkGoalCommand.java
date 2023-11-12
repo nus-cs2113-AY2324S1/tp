@@ -31,7 +31,7 @@ public class MarkGoalCommand extends Command {
         if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
         } else {
-            throw new IllegalArgumentException("Incorrect arguments.");
+            throw new IllegalArgumentException("Please specify a valid index of goal");
         }
 
         try {
