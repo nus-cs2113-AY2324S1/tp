@@ -255,6 +255,27 @@ Although it may seem tedious the steps are essentially as listed below:
 - There is a loop that iterates through each ingredient in the list. The `Ui` class interacts with the `Ingredients` class, to obtain the name, quantity and unit of the ingredient.
 - The `Ui` class showcases the information to the user through the `formatListIngredient()` method.
 
+### List Sale By Day
+![List_Sale Execution](images/sequence/ShowSaleByDayCommand_execute.png)
+
+
+*Figure 14: Execution of list_sale command*
+
+API: [ListSaleByDay.java]({repoURL}src/main/java/seedu/cafectrl/command/ListSaleByDayCommand.java)
+
+The diagram above omits the showToUser() function in the Ui class to prevent unnecessary sophistication.
+The steps are essentially as listed below:
+- The sequence starts with the invocation of the `execute()` method in the `ListSaleByDayCommand` class, which the invokes the `sales.printSaleByDay()` method.
+- The `Sales` class interacts with the `OrderList` class to check if there are completed orders to be displayed.
+- If there are no completed orders or no orders at all, a message is shown to the user via the Ui class and the command's execution ends.
+- If there are completed orders, the process continues to display it in a table format.
+  - showSalesTop(): Display table header
+  - orderList.printOrderList: The OrderList iterates over each order, aggregates orders, and prints details for each aggregated order. For each aggregated order, details like dish name, quantity, and total order cost are retrieved from the Order class and shown to the user via the Ui class.
+  - showSalesCost(): Displays the total sales cost for the aggregated orders.
+  - showSalesBottom(): Displays the bottom of the table
+
+* The List Total Sales command follows a comparable sequence, and as such, it will be excluded to avoid the repetition of multiple similar diagrams.
+
 ### Delete Dish
 
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
