@@ -64,20 +64,24 @@ from all fields of study.
     * CommandList
     * CommandMarkDifficulty
     * CommandStart
-- ### User Guide Contributions:
-  Apart from proofreading the document, Juncheng added documentation for the following sections of the user guide:
-    - [Edit Question Command](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#edit-questionanswer-edit)
+### User Guide Contributions:
+  Apart from proofreading the document, Juncheng added documentation for the following sections of the user guide: <br/>
+    - [Edit Question Command](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#edit-questionanswer-edit) <br/>
     - [Mark Question Difficulty Command](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#mark-difficulty-of-questions-markdiff)
 ### Developer Guide Contributions:
   Juncheng added documentation and diagrams for the following sections of the developer guide, focusing on
   readability and simplicity: <br/>
-    - [Parser](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#parser-component), and
-      [Sequence diagram](https://ay2324s1-cs2113-w12-1.github.io/tp/UML/Parser.jpg) <br/>
-    - [Non-functional requirements](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#non-functional-requirements) <br/>
+    - [Overall Class Architecture Diagram](https://ay2324s1-cs2113-w12-1.github.io/tp/UML/Images/overallClassInteraction.png)<br/>
+    - [Application Lifecycle diagram](https://ay2324s1-cs2113-w12-1.github.io/tp/UML/Images/applicationLifecycle.png) (adapted from Sizhuang's original diagram) <br/> 
+    - [Parser Documentation](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#parser-component) <br/>
+    - [Parser Sequence Diagram](https://ay2324s1-cs2113-w12-1.github.io/tp/UML/Images/parser.png) <br/>
+    - [Non-functional Requirements](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#non-functional-requirements) <br/>
     - [Glossary](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#glossary) <br/>
-    - [Instructions for manual testing](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing) <br/>
+
 ### Team-Based Task Contributions:
-  - Refactored code to general code enhancements
+  - Helped to standardise the style of all UML diagrams through the creation of a `Styles.puml` template file which is applied
+    to all UML diagrams created using PlantUML extension
+  - Refactored code for general code enhancements
     * Performed code abstraction in `parser` class to avoid deep nesting and excessively long methods
     * Broke down methods which parse long and complicated user commands, such as `edit` and `start` into distinct 
     shorter methods that handles different segments of the user input and different exceptions
@@ -86,6 +90,6 @@ from all fields of study.
     * Refactored code to meet checkstyle requirements
   - Assisted in issue tracker maintenance to ensure team members are assigned to the right issues and avoid 
   potential work conflict
-  - Added documentation on non-functional requirements and instructions for manual testing in the developer guide.
+
 - ### Community Contributions
-    - **Reviewing other team's UG and software program**: [Reported a total of 18 bugs for T17-3](https://github.com/spinoandraptos/ped)
+    - **Reviewing other team's UG and software program**: [Reported a total of 18 bugs for T17-3 (Top 10%)](https://github.com/spinoandraptos/ped)

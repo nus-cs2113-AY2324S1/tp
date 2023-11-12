@@ -29,7 +29,7 @@ QuizHub -> Parser: parseCommand (userInput)
     Parser --> QuizHub: valid command
     deactivate Parser
 
-else invalid user input"
+else invalid user input
     QuizHub -> Parser: parseCommand (userInput)
     activate Parser
     Parser -> Parser: userInput.split(" ")
