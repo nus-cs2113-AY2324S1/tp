@@ -23,6 +23,7 @@ import fittrack.command.ViewProfileCommand;
 import fittrack.command.ViewStepsCommand;
 import fittrack.command.ViewWorkoutCommand;
 import fittrack.command.DeleteStepsCommand;
+import fittrack.command.GetStepsSuggestion;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -119,6 +120,8 @@ public class CommandParser {
             return new ViewStepsCommand(commandLine);
         case DeleteStepsCommand.COMMAND_WORD:
             return new DeleteStepsCommand(commandLine);
+        case GetStepsSuggestion.COMMAND_WORD:
+            return new GetStepsSuggestion(commandLine);
         default:
             return new InvalidCommand(commandLine);
 

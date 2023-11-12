@@ -436,6 +436,28 @@ These are the steps you have done:
 2.[S] 100 steps (2023-10-02)
 ```
 
+### Getting a suggestion based on the steps walked: `viewsteps`
+This will give you a suggestion on how many steps you need to walk in order to reach your daily calorie goal.
+This looks at meeting your calorie goal through walking only.
+
+**Example of usage:**
+```
+getstepssuggestion 2023-10-10
+```
+
+**Expected output:**
+```
+You have not exceeded your daily calorie limit. You should walk 49900.0 more steps.
+```
+OR
+```
+You have exceeded your daily calorie limit. You can take a break.
+```
+If no steps have been walked, then:
+```
+You have not walked any steps on this day.
+```
+
 
 ### Exiting the application: `exit`
 Exits the application.
@@ -507,4 +529,4 @@ The contents of workoutList.txt:
 | Deleting a step entry                                | `deletesteps`            |
 | Viewing the total number of steps on a specific date | `totalsteps`             |
 | Viewing the list of steps                            | `viewsteps`              |
-
+| Getting a suggestion on your steps walked            | `getstepssuggestion`     |
