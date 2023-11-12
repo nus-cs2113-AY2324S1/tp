@@ -104,7 +104,7 @@ public class AddRecipeCommand extends Command {
 
                 break;
             case "s":
-                if (content.isEmpty()) {
+                if (content.isBlank()) {
                     System.out.println("Step is empty! Please enter valid step after \"s/\"");
                     throw new EssenFormatException();
                 }
@@ -119,7 +119,7 @@ public class AddRecipeCommand extends Command {
                 stepsCounter++;
                 break;
             case "i":
-                if (content.isEmpty()) {
+                if (content.isBlank()) {
                     System.out.println("Ingredient is empty! Please enter valid ingredient after \"i/\"");
                     throw new EssenFormatException();
                 }
