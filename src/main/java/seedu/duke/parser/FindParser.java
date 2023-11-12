@@ -78,7 +78,7 @@ public class FindParser {
         if (fullCommand.contains("/date")) {
             int dateIndex = indexOf(tokens, "/date");
             if (dateIndex == tokens.length - 1 || tokens[dateIndex + 1].startsWith("/")) {
-                throw new KaChinnnngException("The value for /da DATE cannot be empty.");
+                throw new KaChinnnngException("The value for /date DATE cannot be empty.");
             }
             parsedParameters[3] = tokens[dateIndex + 1];
         }
@@ -86,7 +86,7 @@ public class FindParser {
         // Check that at least one optional field is provided
         if (parsedParameters[1] == null && parsedParameters[2] == null && parsedParameters[3] == null) {
             throw new KaChinnnngException("At least one of the optional fields [/c CATEGORY], " +
-                                            "[/de DESCRIPTION], [/da DATE] must be provided.");
+                                            "[/de DESCRIPTION], [/date DATE] must be provided.");
         }
         return parsedParameters;
     }
