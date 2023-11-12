@@ -114,7 +114,7 @@ Create a hashmap of the user input by splitting the string using the prefixes' p
 The filter function assists in filtering both expenses and incomes according to the specified criterion from user's input.
 
 #### Implementation
-![](./images/FilterTransaction.png)
+![](./images/FilterSequenceDiagram.png)
 
 **Step 1**\
 The filterBy() method is called, returning a FindParser object
