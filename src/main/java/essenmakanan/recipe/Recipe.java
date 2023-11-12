@@ -1,5 +1,6 @@
 package essenmakanan.recipe;
 
+import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ui.Ui;
 
 import java.util.List;
@@ -53,6 +54,10 @@ public class Recipe {
         return recipeSteps.getStepByIndex(index);
     }
 
+    public Ingredient getRecipeIngredientByIndex(int index) {
+        return recipeIngredients.getIngredientByIndex(index);
+    }
+
     public String getTitle() {
         return title;
     }
@@ -97,6 +102,12 @@ public class Recipe {
         }
         Ui.drawDivider();
 
+    }
+
+    public static Recipe createRecipeStub(String title) {
+        String[] recipeSteps = {"step1", "step2"};
+        String[] recipeIngredients = {"i/flour,200,g", "i/egg,2,pc"};
+        return new Recipe(title, recipeSteps, recipeIngredients);
     }
 
 }

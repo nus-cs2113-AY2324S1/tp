@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class IngredientListTest {
 
@@ -92,5 +93,15 @@ public class IngredientListTest {
         assertEquals("tomato", ingredient.getName());
         assertEquals(10.0, ingredient.getQuantity());
         assertEquals(IngredientUnit.PIECE, ingredient.getUnit());
+    }
+
+    @Test
+    public void editIngredient_quantityNotDouble_errorThrown() {
+        Ingredient tomato = new Ingredient("tomato", 10.0, IngredientUnit.PIECE);
+
+        ingredients.addIngredient(tomato);
+        assertThrows(EssenFormatException.class, () -> {
+            ingredients.editIngredient(tomato, new String[]{"i/tomato", "q/ten", "u/pc"});
+        });
     }
 }
