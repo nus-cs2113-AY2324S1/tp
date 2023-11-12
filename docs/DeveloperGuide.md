@@ -267,12 +267,12 @@ The diagram above omits the showToUser() function in the Ui class to prevent unn
 The steps are essentially as listed below:
 - The sequence starts with the invocation of the `execute()` method in the `ListSaleByDayCommand` class, which the invokes the `sales.printSaleByDay()` method.
 - The `Sales` class interacts with the `OrderList` class to check if there are completed orders to be displayed.
-- If there are no completed orders or no orders at all, a message is shown to the user via the Ui class and the command's execution ends.
+- If there are no completed orders or no orders at all, a message is shown to the user via the `Ui` class and the command's execution ends.
 - If there are completed orders, the process continues to display it in a table format.
-  - showSalesTop(): Display table header
-  - orderList.printOrderList: The OrderList iterates over each order, aggregates orders, and prints details for each aggregated order. For each aggregated order, details like dish name, quantity, and total order cost are retrieved from the Order class and shown to the user via the Ui class.
-  - showSalesCost(): Displays the total sales cost for the aggregated orders.
-  - showSalesBottom(): Displays the bottom of the table
+  - `showSalesTop()`: Display table header
+  - `orderList.printOrderList()`: The OrderList iterates over each order, aggregates orders, and prints details for each aggregated order. For each aggregated order, details like dish name, quantity, and total order cost are retrieved from the Order class and shown to the user via the Ui class.
+  - `showSalesCost()`: Displays the total sales cost for the aggregated orders.
+  - `showSalesBottom()`: Displays the bottom of the table
 
 * The List Total Sales command follows a comparable sequence, and as such, it will be excluded to avoid the repetition of multiple similar diagrams.
 
@@ -280,11 +280,11 @@ The steps are essentially as listed below:
 ![isDishCooked_function](images/sequence/Pantry_IsDishCooked.png)
 
 
-*Figure 15: Data processing of isDishCooked() function used in add_order command*
+*Figure 15: Data processing of `isDishCooked()` function used in add_order command*
 
 API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
 
-This section briefly explains how add_order checks if the order added is successfully cooked.
+This section briefly explains how `add_order` checks if the order added is successfully cooked.
 The steps are essentially as listed below:
 - The sequence starts with the invocation of `isDishCooked()` to the `Pantry` class, with a list of ingredients needed for the order.
 - For each ingredient in the dish, `isDishCooked()` first obtains the quantity of the ingredients needed (`usedQty`) for the order as shown in step 4 and 5.
@@ -293,6 +293,24 @@ The steps are essentially as listed below:
   - If `usedIngredientFromStock` exists but the quantity is insufficient, 
   - If `usedIngredientFromStock` is found and the quantity is sufficient, the used quantity is deducted from the stock quantity in the Pantry and the sequence ends with a `true` being returned.
 - A `false` indicates that the order was unsuccessful while a `true` indicates that the order was successful.
+
+### Pantry - calculateMaxDish()
+![calculateMaxDish_function](images/sequence/Pantry_CalculateMaxDish.png)
+
+
+*Figure 16: Data processing of `calculateMaxDish()` function used in add_order command*
+
+API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
+
+This section briefly explains how `add_order` checks if restocking of ingredients is needed.
+The steps are essentially as listed below:
+- The sequence starts with the invocation of `calculateMaxDish()` to the `Pantry` class.
+- Steps 2 to 6 involves retrieving the ingredients used to make the dish.
+- The function `calculateMaxDishForEachIngredient` returns an integer and assigns it to the variable `numOfDish` which is the maximum number of dishes that can be cooked.
+- If the order is incomplete
+  - ingredients that need restocking will be passed into the `handleRestock` function.
+- If the order is complete, 
+  - ingredients that are unable to prep the next dish will be passed into the `handleRestock` function.
 
 ### Delete Dish
 
