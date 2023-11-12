@@ -3,7 +3,6 @@ package seedu.duke.storage;
 import seedu.duke.calendar.Event;
 import seedu.duke.calendar.Goal;
 import seedu.duke.storage.exceptions.EventFileFormatException;
-import seedu.duke.storage.exceptions.FlashcardFileFormatException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;

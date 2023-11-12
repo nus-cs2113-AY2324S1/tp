@@ -2,7 +2,6 @@
 
 package seedu.duke.calendar.command;
 
-import seedu.duke.calendar.Event;
 import seedu.duke.calendar.EventList;
 
 import java.util.Scanner;

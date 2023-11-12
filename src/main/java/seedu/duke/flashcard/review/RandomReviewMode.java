@@ -7,7 +7,6 @@ import seedu.duke.flashcard.FlashcardList;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class RandomReviewMode extends ReviewMode {
     public RandomReviewMode(FlashcardList flashcardList) {

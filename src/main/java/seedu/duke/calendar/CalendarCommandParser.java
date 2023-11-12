@@ -2,13 +2,20 @@
 
 package seedu.duke.calendar;
 
-import seedu.duke.calendar.command.*;
+import seedu.duke.calendar.command.AddEventCommand;
+import seedu.duke.calendar.command.AddGoalEventCommand;
+import seedu.duke.calendar.command.DeleteEventCommand;
+import seedu.duke.calendar.command.EventCommand;
+import seedu.duke.calendar.command.FindEventCommand;
+import seedu.duke.calendar.command.DeleteAllEventsCommand;
+import seedu.duke.calendar.command.ListCalendarEventsCommand;
+import seedu.duke.calendar.command.UnknownCommand;
 
-import seedu.duke.calendar.Exceptions.AddEventException;
-import seedu.duke.calendar.Exceptions.DeleteEventException;
-import seedu.duke.calendar.Exceptions.DeleteAllException;
-import seedu.duke.calendar.Exceptions.FindEventException;
-import seedu.duke.calendar.Exceptions.ListEventException;
+import seedu.duke.calendar.exceptions.AddEventException;
+import seedu.duke.calendar.exceptions.DeleteEventException;
+import seedu.duke.calendar.exceptions.DeleteAllException;
+import seedu.duke.calendar.exceptions.FindEventException;
+import seedu.duke.calendar.exceptions.ListEventException;
 
 import java.util.Scanner;
 
