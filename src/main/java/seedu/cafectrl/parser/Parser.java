@@ -207,7 +207,7 @@ public class Parser implements ParserUtil {
                 return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
             }
         } catch (NumberFormatException e) {
-            logger.warning("Invalid dish index type!");
+            logger.log(Level.WARNING, "Invalid dish index type!", e);
             return new IncorrectCommand(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, ui);
         }
 
