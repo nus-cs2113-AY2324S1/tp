@@ -206,17 +206,18 @@ public class Decoder {
 
             int quantity = Integer.parseInt(orderData[2].trim());
             float decodedTotalOrderCost = Float.parseFloat(orderData[3].trim());
-            boolean isComplete = "true".equals(orderData[4].trim());
-
+            String completeStatus = orderData[4].trim();
             Dish dish = menu.getDishFromName(dishName);
 
-            boolean isDataAccurate = isDishValid(orderLine, dish) &&
-                    isOrderCostAccurate(orderLine, dish, quantity, decodedTotalOrderCost);
+            boolean isDataAccurate = isDishValid(orderLine, dish)
+                    && isOrderCostAccurate(orderLine, dish, quantity, decodedTotalOrderCost)
+                    && isCompleteStatusAccurate(orderLine, completeStatus);
             if (!isDataAccurate) {
                 return;
             }
 
             //creates new order and adds to orderList for specific day
+            boolean isComplete = Boolean.parseBoolean(completeStatus.toLowerCase());
             Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, decodedTotalOrderCost, isComplete);
             fillOrderListSize(orderLists, day);
             orderLists.get(day).addOrder(orderedDish);
@@ -234,11 +235,11 @@ public class Decoder {
      * @return True if the Dish is valid, false otherwise.
      */
     private static boolean isDishValid(String orderLine, Dish dish) {
-        if (dish == null) {
-            ui.showToUser(ErrorMessages.INVALID_ORDER_DATA + orderLine);
-            return false;
+        if (dish != null) {
+            return true;
         }
-        return true;
+        ui.showToUser(ErrorMessages.INVALID_ORDER_DATA + orderLine);
+        return false;
     }
 
     /**
@@ -254,13 +255,23 @@ public class Decoder {
             int quantity, float decodedTotalOrderCost) {
         float costOfDish = dish.getPrice();
         float expectedTotalOrderCost = quantity * costOfDish;
-        if (decodedTotalOrderCost != expectedTotalOrderCost) {
-            String messageToUser = String.format(ErrorMessages.INACCURATE_ORDER_COST_DATA,
-                    orderLine, decodedTotalOrderCost, expectedTotalOrderCost );
-            ui.showToUser(messageToUser);
-            return false;
+        if (decodedTotalOrderCost == expectedTotalOrderCost) {
+            return true;
         }
-        return true;
+        String messageToUser = String.format(ErrorMessages.INACCURATE_ORDER_COST_DATA,
+                orderLine, decodedTotalOrderCost, expectedTotalOrderCost );
+        ui.showToUser(messageToUser);
+        return false;
+
+    }
+
+    private static boolean isCompleteStatusAccurate(String orderLine, String completeStatus) {
+        if (completeStatus.equalsIgnoreCase("true")
+                || completeStatus.equalsIgnoreCase("false")) {
+            return true;
+        }
+        ui.showToUser(ErrorMessages.INVALID_ORDER_STATUS + orderLine);
+        return false;
     }
 
 
