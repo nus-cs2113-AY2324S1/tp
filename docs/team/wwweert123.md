@@ -36,6 +36,10 @@ you a one-stop interface to access a plethora of features to manage your finance
     * Implementation
     * Class Diagram
     * Sequence Diagrams
+* Watchlist Component
+  * Implementation
+  * Class Diagram
+  * Sequence Diagram
 * Value Proposition
 * User Profile
 * USer Stories
