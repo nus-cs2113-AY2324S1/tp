@@ -2,62 +2,74 @@
 
 skinparam Style strictuml
 
-activate ViewBudget
-ViewBudget -> BudgetHandler: printBudget()
-activate BudgetHandler
+-> ":ViewBudget": execute()
+activate ":ViewBudget" #40e0d0
+":ViewBudget" -> ":BudgetHandler": printBudget()
+activate ":BudgetHandler" #1e90ff
 
-BudgetHandler -> BudgetHandler: setBudgetPercentage()
-activate BudgetHandler
-BudgetHandler -> FinancialStatement: getNetCash()
-activate FinancialStatement
-FinancialStatement --> BudgetHandler
+":BudgetHandler" -> ":BudgetHandler": setBudgetPercentage()
+activate ":BudgetHandler" #000080
+":BudgetHandler" -> ":Budget": getBudget()
+activate ":Budget" #6495ed
+":Budget" --> ":BudgetHandler"
+deactivate ":Budget"
 
-BudgetHandler -> Progress: Progress(cashOnHand, budgetAmount)
-activate Progress
-Progress --> BudgetHandler
-BudgetHandler --> BudgetHandler
-deactivate BudgetHandler
+":BudgetHandler" -> ":FinancialStatement": getNetCash()
+activate ":FinancialStatement" #5f9ea0
+":FinancialStatement" --> ":BudgetHandler"
+deactivate ":FinancialStatement"
 
+create ":Progress"
+":BudgetHandler" -> ":Progress": Progress(cashOnHand, budgetAmount)
+activate ":Progress" #00bfff
+":Progress" --> ":BudgetHandler"
+deactivate ":Progress"
+":BudgetHandler" --> ":BudgetHandler"
+deactivate ":BudgetHandler"
 
-alt budget.isActive()
+alt #f0ffff budget.isActive()
 
-    opt budgetHasBeenMaxedOut
-        BudgetHandler -> BudgetHandler: printSeriousWarning()
-        activate BudgetHandler
-        BudgetHandler --> BudgetHandler
-        deactivate BudgetHandler
+    opt #e6e6fa budgetHasBeenMaxedOut
+        ":BudgetHandler" -> ":BudgetHandler": printSeriousWarning()
+        activate ":BudgetHandler" #000080
+        ":BudgetHandler" --> ":BudgetHandler"
+        deactivate ":BudgetHandler"
 
     else budgetIsNotOnTrack
-        BudgetHandler -> BudgetHandler: printBasicWarning()
-        activate BudgetHandler
-        BudgetHandler --> BudgetHandler
-        deactivate BudgetHandler
+        ":BudgetHandler" -> ":BudgetHandler": printBasicWarning()
+        activate ":BudgetHandler" #000080
+        ":BudgetHandler" --> ":BudgetHandler"
+        deactivate ":BudgetHandler"
     end
 
+    ":BudgetHandler" -> ":Ui": printMultipleText(texts)
+    activate ":Ui" #ffd700
 
-    BudgetHandler -> Ui: printMultipleText(texts)
-    activate Ui
+    ":Ui" -> ":Budget": toString()
+    activate ":Budget" #6495ed
+    ":Budget" --> ":Ui"
+    deactivate ":Budget"
 
-    Ui -> Budget: toString()
-    activate Budget
-    Budget --> Ui
-    deactivate Budget
+    ":Ui" -> ":FinancialStatement": getNetCash()
+    activate ":FinancialStatement" #5f9ea0
+    ":FinancialStatement" --> ":Ui"
+    deactivate ":FinancialStatement"
 
-    Ui -> FinancialStatement: getNetCash()
-
-    FinancialStatement --> Ui
-    deactivate FinancialStatement
-    Ui -> Progress: displayProgressBar()
-    Progress --> Ui
-    Ui --> BudgetHandler
-    deactivate Ui
+    ":Ui" -> ":Progress": displayProgressBar()
+    activate ":Progress" #00bfff
+    ":Progress" --> ":Ui"
+    deactivate ":Progress"
+    ":Ui" --> ":BudgetHandler"
+    deactivate ":Ui"
 
 else
-    <--BudgetHandler: throw CashLehBudgetException(text)
+    <--":BudgetHandler": throw CashLehBudgetException(text)
 
 end
-BudgetHandler --> ViewBudget
-deactivate ViewBudget
-deactivate BudgetHandler
+
+":BudgetHandler" --> ":ViewBudget"
+deactivate ":BudgetHandler"
+<-- ":ViewBudget"
+deactivate ":ViewBudget"
 
 @enduml
