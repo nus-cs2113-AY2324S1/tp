@@ -40,13 +40,14 @@ Café proprietors who prefer typing on CLI than any other interaction method and
     Error Handling: Next Day command ensures that the intended traversed day has a proper orderList, preventing a NullPointerException. Previous Day command will prevent the user from traversing to days before Day 1. <br>
     Highlights: This feature required strong understanding of ArrayLists as it worked with multiple layers of ArrayLists as well as different copies of the same ArrayList that needed to be synchronised.  
     <br/><br/>
-4.  **Hashing text save files** <br>
-    Implemented Hashing for text files used to save app user input data. <br>
-    What it does: Hashes the text files generated from user actions (such as Menu, Sales and PantryStock), that will be accessed to load relevant data back into the application. <br>
-    Justification: This was done to detect tampering of these save files which may potentially crash or induce unexpected behaviour from the application when the data is read and loaded into the application. <br>
-    Highlights: This feature relied on knowledge learnt in CS2040C, Data Structures and Algorithms, to come up with the idea, understand how hashing works and how to implement this feature.<br>
-    Credits: https://www.geeksforgeeks.org/java-string-hashcode-method-with-examples/
-    <br/><br/>
+   4.  **Hashing text save files** <br>
+       Implemented Hashing for text files used to save app user input data. <br>
+       What it does: Hashes the text files generated from user actions (such as Menu, Sales and PantryStock), that will be accessed to load relevant data back into the application. When tampering has been detected, the syntax is shown to the user to ensure that the user is able to adjust the data saved while maintaining the format that the application is able to process.<br>
+       Justification: This was done to detect tampering of these save files which may potentially crash or induce unexpected behaviour from the application when the data is read and loaded into the application. <br>
+       Highlights: This feature relied on knowledge learnt in CS2040C, Data Structures and Algorithms, to come up with the idea, understand how hashing works and how to implement this feature.<br>
+       Credits: https://www.geeksforgeeks.org/java-string-hashcode-method-with-examples/ <br>
+       Implemented in PRs: [#283](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/283), [#324](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/324)
+       <br/><br/>
 
 ### Enhancement
 1. **Main**<br>
@@ -88,5 +89,17 @@ Café proprietors who prefer typing on CLI than any other interaction method and
    ![Bugs Found](../images_PPP/zhongheng/Bug_reporting.png)
    ![Bugs Found](../images_PPP/zhongheng/Pantry_load_from_file_bug.png)
    ![Bugs Found](../images_PPP/zhongheng/Pantry_restock_bug.png)
-
-
+3. Implemented bug fixes for PED bugs
+   [#212](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/212),
+   [#278](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/278),
+   [#297](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/297)
+### Review/Mentoring Contributions
+1. Reviewed and approved PRs.
+   Some examples of PR reviewed: [#321](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/321), 
+                                 [#296](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/296), 
+                                 [#57](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/57),
+                                 [#96](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/96)
+2. Assist teammates with their acclimation to the project's workflow, particularly using GitHub's branching workflow.
+   ![Assist_workflow](../images_PPP/zhongheng/Assist_workflow.png)
+### Contributions beyond the Project Team
+1. Reported a total of [16 program bugs](https://github.com/Cazh1/ped/issues) for another team during the module's PED.
