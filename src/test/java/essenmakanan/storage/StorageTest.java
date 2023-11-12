@@ -21,6 +21,9 @@ public class StorageTest {
     private static String DATA_RECIPE_TEST_PATH = "src/test/data/recipes.txt";
     private static String DATA_INGREDIENT_TEST_PATH = "src/test/data/ingredients.txt";
     private static String DATA_SHORTCUT_TEST_PATH = "src/test/data/shortcuts.txt";
+    private static String DATA_INVALID_RECIPE_PATH = "src/test/data/invalid_recipes.txt";
+    private static String DATA_INVALID_INGREDIENT_PATH = "src/test/data/invalid_ingredients.txt";
+    private static String DATA_INVALID_SHORTCUT_PATH = "src/test/data/invalid_shortcuts.txt";
 
     @Test
     public void accessIngredientDatabase_invalidPath_expectEssenFileNotFoundException() {
@@ -41,7 +44,7 @@ public class StorageTest {
     }
 
     @Test
-    public void restoreSavedIngredients_storeValidIngredients_returnsFilledIngredientList() throws Exception {
+    public void restoreSavedIngredients_storeValidIngredients_expectFilledIngredientList() throws Exception {
         IngredientStorage ingredientStorage = new IngredientStorage(DATA_INGREDIENT_TEST_PATH);
         IngredientList ingredients = new IngredientList(ingredientStorage.restoreSavedData());
 
@@ -59,7 +62,15 @@ public class StorageTest {
     }
 
     @Test
-    public void restoreSavedRecipes_storedValidRecipes_returnFilledRecipeList() throws Exception {
+    public void restoreSavedIngredients_invalidDataFormat_expectEmptyList() throws Exception {
+        IngredientStorage ingredientStorage = new IngredientStorage(DATA_INVALID_INGREDIENT_PATH);
+        IngredientList ingredients = new IngredientList(ingredientStorage.restoreSavedData());
+
+        assertTrue(ingredients.getIngredients().isEmpty());
+    }
+
+    @Test
+    public void restoreSavedRecipes_storedValidRecipes_expectFilledRecipeList() throws Exception {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_RECIPE_TEST_PATH);
         RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
 
@@ -79,7 +90,15 @@ public class StorageTest {
     }
 
     @Test
-    public void restoreSavedShortcuts_storedValidShortcuts_returnFilledShortcutList() throws Exception {
+    public void restoreSavedRecipes_invalidDataFormat_expectEmptyList() throws Exception {
+        RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_RECIPE_PATH);
+        RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
+
+        assertTrue(recipes.getRecipes().isEmpty());
+    }
+
+    @Test
+    public void restoreSavedShortcuts_storedValidShortcuts_expectFilledShortcutList() throws Exception {
         IngredientList ingredientList = new IngredientList();
         ingredientList.addIngredient(new Ingredient("bread", 2.0, IngredientUnit.PIECE));
         ingredientList.addIngredient(new Ingredient("egg", 2.0, IngredientUnit.PIECE));
@@ -97,7 +116,7 @@ public class StorageTest {
     }
 
     @Test
-    public void restoreSavedShortcuts_storedShortcutsWithNoMatchingIngredient_returnEmptyList()
+    public void restoreSavedShortcuts_storedShortcutsWithNoMatchingIngredient_expectEmptyList()
             throws Exception {
         IngredientList ingredientList = new IngredientList();
 
@@ -105,5 +124,13 @@ public class StorageTest {
         ShortcutList shortcutList = new ShortcutList(shortcutStorage.restoreSavedData());
 
         assertTrue(shortcutList.getShortcuts().isEmpty());
+    }
+
+    @Test
+    public void restoreSavedShortcuts_invalidDataFormat_expectEmptyList() throws Exception {
+        ShortcutStorage shortcutStorage = new ShortcutStorage(DATA_INVALID_SHORTCUT_PATH, new IngredientList());
+        ShortcutList shortcuts = new ShortcutList(shortcutStorage.restoreSavedData());
+
+        assertTrue(shortcuts.getShortcuts().isEmpty());
     }
 }
