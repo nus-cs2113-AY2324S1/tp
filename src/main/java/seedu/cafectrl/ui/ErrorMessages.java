@@ -94,4 +94,5 @@ public class ErrorMessages {
             + "I have poor memory and am unable to remember names with special characters, could you remove them?";
     public static final String REPEATED_INGREDIENT_NAME = "Error: there's a repeat in ingredient name "
             + "for the add command input";
+    public static final String NULL_STRING_IN_REPEAT_ARGUMENT = "Null string detected in isRepeatedArgument function";
 }

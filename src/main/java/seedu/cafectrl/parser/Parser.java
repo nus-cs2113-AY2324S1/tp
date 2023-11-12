@@ -500,6 +500,10 @@ public class Parser implements ParserUtil {
      * @return true if there is > 1 match of the argument, false otherwise
      */
     public static boolean isRepeatedArgument(String inputText, String argument) {
+        if (inputText == null || argument == null) {
+            throw new NullPointerException(ErrorMessages.NULL_STRING_IN_REPEAT_ARGUMENT);
+        }
+
         Pattern argumentPattern = Pattern.compile(argument);
         Matcher matcher = argumentPattern.matcher(inputText);
         int maxNumberOfMatches = 1;
