@@ -51,7 +51,6 @@ from all fields of study.
   - **Justification:** Parsing long and complicated user commands in a single method results in excessively long methods
     which not only violates OOP principles but also makes debugging challenging
 ### Code Testing and Improvement:
-  [#128](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/128),
   [#125](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/125),
   [#101](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/101),
   [#62](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/62),
