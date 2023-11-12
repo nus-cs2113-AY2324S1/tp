@@ -15,7 +15,11 @@ activate WatchListCommand
         WatchList -> WatchList : fetchLatestWatchListInfo()
     return
     WatchListCommand -> Ui: printStocksInfo(watchlist)
+    activate Ui
+    return
     WatchListCommand -> SaveData: saveWatchList()
+    activate SaveData
+    return
 
 return
 

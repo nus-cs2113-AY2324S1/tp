@@ -7,7 +7,7 @@ participant "<<class>>\nVisualizer"
 
 ":VisCommand"-> "<<class>>\nVisualizer": displayChart(chart, sortedCashFlow, type)
 
-activate "<<class>>\nVisualizer"
+
 
 alt "pie"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayPieChart(cashflowList, type)
@@ -17,7 +17,7 @@ else "radar"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayRadarChart(cashflowList, type)
 end
 
-return
+
 
 hide footbox
 
