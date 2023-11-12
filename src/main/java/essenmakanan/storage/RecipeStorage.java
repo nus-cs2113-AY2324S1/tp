@@ -3,13 +3,12 @@ package essenmakanan.storage;
 import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenInvalidEnumException;
 import essenmakanan.exception.EssenStorageFormatException;
-import essenmakanan.ingredient.Ingredient;
+import essenmakanan.exception.EssenStorageNumberException;
 import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeStepList;
-import essenmakanan.recipe.Step;
 import essenmakanan.ui.Ui;
 
 import java.io.File;
@@ -81,25 +80,19 @@ public class RecipeStorage {
             String recipeDescription = parsedRecipe[0];
 
             RecipeStepList steps;
-            if (parsedRecipe[1].equals("EMPTY")) {
-                ArrayList<Step> emptyStepList = new ArrayList<>();
-                steps = new RecipeStepList(emptyStepList);
-            } else {
-                steps = RecipeParser.parseDataSteps(parsedRecipe[1]);
-            }
+            steps = RecipeParser.parseDataSteps(parsedRecipe[1].trim());
 
             RecipeIngredientList ingredientList;
-            if (parsedRecipe[2].equals("EMPTY")) {
-                ArrayList<Ingredient> emptyIngredientList = new ArrayList<>();
-                ingredientList = new RecipeIngredientList(emptyIngredientList);
-            } else {
-                ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2]);
-            }
+            ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2].trim());
 
             recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
-            String message =  "Data: " + dataString + " has an invalid format";
+            String message = "Data: " + dataString + " has an invalid format";
+            EssenLogger.logWarning(message, exception);
+        } catch (NumberFormatException exception) {
+            EssenStorageNumberException.handleException(dataString);
+            String message = "Data: " + dataString + " has an invalid quantity";
             EssenLogger.logWarning(message, exception);
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);

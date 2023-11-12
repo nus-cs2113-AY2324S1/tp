@@ -20,6 +20,10 @@ public class ViewSpecificRecipeCommand extends Command {
     @Override
     public void executeCommand() {
         try {
+            if (recipes.getRecipes().size() == 0) {
+                System.out.println("You haven't added any recipes yet, please add some recipes first!");
+                return;
+            }
             int recipeIndex = RecipeParser.getRecipeIndex(recipes, input);
             Ui.printSpecificRecipe(this.recipes, recipeIndex);
         } catch (EssenOutOfRangeException | EssenFormatException e) {

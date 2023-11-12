@@ -7,6 +7,9 @@ import essenmakanan.exception.EssenNullInputException;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EditRecipeCommand extends Command {
 
     private String editDetails;
@@ -36,6 +39,7 @@ public class EditRecipeCommand extends Command {
         try {
             existingRecipe = recipes.getRecipe(recipeTitle);
             if (existingRecipe == null) {
+                System.out.println("Recipe not found!");
                 throw new EssenDoesNotExistException();
             }
         } catch (EssenDoesNotExistException e){
@@ -138,4 +142,15 @@ public class EditRecipeCommand extends Command {
 
         return false;
     }
+
+    private static List<String> removeWhiteSpaces(String[] splitDetails) {
+        List<String> detailList = new ArrayList();
+        for (String detail : splitDetails) {
+            if (detail.length() > 0) {
+                detailList.add(detail);
+            }
+        }
+        return detailList;
+    }
+
 }

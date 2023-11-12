@@ -11,6 +11,11 @@ import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 public class IngredientParser {
+
+    public static boolean checkForValidQuantity(double quantity) {
+        return ((int) quantity != 0 && Math.ceil(quantity) > 0) || quantity > 0;
+    }
+
     public static int getIngredientIndex(IngredientList ingredients, String input)
             throws EssenOutOfRangeException {
         int index;

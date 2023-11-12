@@ -104,6 +104,10 @@ public class Ui {
     }
 
     public static void printAllIngredients(IngredientList ingredients) {
+        if (ingredients.getIngredients().size() == 0) {
+            System.out.println("The Inventory of Ingredients is empty now, please add something first!");
+            return;
+        }
         System.out.println("Here's a list of your ingredients!");
         ingredients.listIngredients();
         drawDivider();
@@ -143,9 +147,14 @@ public class Ui {
     }
 
     public static void printAllRecipes(RecipeList recipes) {
-        System.out.println("Here's a list of your recipes!");
-        recipes.listRecipeTitles();
-        drawDivider();
+        if (recipes.getRecipes().size() == 0) {
+            System.out.println("Your Recipe List is empty right now, please create your own recipe first :D!");
+            drawDivider();
+        } else {
+            System.out.println("Here's a list of your recipes!");
+            recipes.listRecipeTitles();
+            drawDivider();
+        }
     }
 
     public static void printDeleteIngredientsSuccess(String ingredientName) {
