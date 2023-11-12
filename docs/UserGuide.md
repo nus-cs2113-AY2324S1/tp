@@ -116,9 +116,9 @@ add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt
 add expense /cat transport /type train /de train to school /date 10/10/2023 /amt 10.00
 ```
 Expected output after successfully add income to the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)<br>
+![add_income_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)<br>
 Expected output after successfully add expense to the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)<br>
+![add_expense_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)<br>
 
 ### List all entries: list
 Shows a full list of both the expenses and income created by the user.
@@ -152,7 +152,7 @@ Use case:
 - `<index>` should not be out of bounds.
 
 Expected output after successfully delete income from the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)<br>
+![delete_income_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)<br>
 
 
 ### Find an entry: find
@@ -206,12 +206,12 @@ clear expenses
 clear all
 ```
 
-Example of successfully clear income list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_income.png?raw=true)<br>
-Example of successfully clear expense list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_expense.png?raw=true)<br>
+Example of successfully clear incomes list:
+![clear_incomes_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_income.png?raw=true)<br>
+Example of successfully clear expenses list:
+![clear_expenses_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_expense.png?raw=true)<br>
 Example of successfully clear both income and expense list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_all.png?raw=true)<br>
+![clear_all_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_all.png?raw=true)<br>
 
 
 ### Check balance: balance
@@ -243,6 +243,10 @@ edit income 1 /de end of year bonus /date 02/10/2023 /amt HKD 3000.00
 ```
 edit expense 2 /cat food /type dinner /de dinner /date 01/10/2023 /amt 10.00
 ```
+Example of successfully edit an income with foreign currency:
+![clear_incomes_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/edit_income_expected.png?raw=true)<br>
+Example of successfully edit an expense:
+![edit_expense_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/edit_expense_expected.png?raw=true)<br>
 
 Note:
 - Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
