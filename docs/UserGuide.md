@@ -3,8 +3,8 @@
 ## Introduction
 
 TaskLinker is a CLI-tool for helping university students memorize flashcards 
-and track their flashcard and general academic progress in the courses they are
-taking.
+and track their flashcard progress as well as general academic progress in 
+the courses they are taking.
 
 ## Quick Start
 
@@ -18,13 +18,20 @@ taking.
 
 #### General explanation of flashcards
 
-The difficulty symbolizes how hard it is for you to remember this particular 
-flashcard. The higher the number, the harder.
+Flashcards are two-sided cards that have a question on the front and its 
+answer on the back. They are used for revising information and helping with 
+memorization. As such, they are often used by students; e.g. medicine students often use 
+flashcards to memorize the anatomy of the human body.
 
-The flashcard id is used to uniquely identify each flashcard. (Flashcard ids 
-don't necessarily start at zero and are not necessarily consecutive. Don't 
-worry about this; they are for internal use only and "gaps" between 
-flashcard ids are totally fine)
+TaskLinker implements virtual flashcards that you can create, review and 
+delete on the go, without being bound to physical copies.
+
+In TaskLinker, every flashcard has a front text (the question) and a back 
+text (the answer). Also, every flashcard has a difficulty attribute that shows 
+how hard it is for you to remember this particular flashcard (The higher the
+difficulty number, the harder). Every flashcard is identified by a unique id 
+(Flashcard ids don't necessarily start at zero and are not necessarily
+consecutive. Don't worry, this is totally fine and the planned behavior!).
 
 #### Listing all flashcards: `list flashcards`
 
@@ -33,9 +40,29 @@ and back text as well as its id and current difficulty level.
 
 Format: `list flashcards`
 
+Example of usage: 
+```
+Enter your command: list flashcards
+    Here is a list of all your flashcards: 
+
+--------------------------------------------------------------------------------
+front text: How long is a meter in cm?
+back text: 100
+id: 20
+difficulty: 4
+--------------------------------------------------------------------------------
+front text: What does UML stand for?
+back text: Unified Modelling Language
+id: 21
+difficulty: 6
+--------------------------------------------------------------------------------
+
+    Those were all your flashcards.
+```
+
 #### Creating a new flashcard: `create flashcard`
 
-Starts the process of adding a new flashcard.
+Starts the process of creating a new flashcard.
 
 After entering this command, you are prompted to first input the front page
 text (once you have typed it out, submit it by pressing ENTER) and then the
@@ -43,9 +70,15 @@ back page text (once you have typed it out, submit it by pressing ENTER) of
 your new flashcard.
 
 After you've done this, a success message will be printed out. This
-indicates that a new flashcard has been successfully created and saved.
+indicates that your new flashcard has been successfully created and saved.
 
 Format: `create flashcard`
+
+Example of usage:
+<pre>
+sample <b>sample</b> sample
+</pre>
+
 
 #### Reviewing your flashcards: `review flashcards`
 
@@ -81,7 +114,7 @@ of pressing ENTER to reveal the back page.
 
 Format: `create flashcard`
 
-#### Deleting a flashcard
+#### Deleting a flashcard: `delete flashcard`
 
 Starts the process of deleting a flashcard.
 
@@ -198,7 +231,7 @@ Example of usage:
 
 ## FAQ
 
-**Q**: Where can I find my flashcard and caldendar data?
+**Q**: Where can I find my flashcard and calendar data?
 
 **A**: You can find it in `data/flashcards` and `data/events` folder.
 
@@ -210,9 +243,16 @@ Every event and flashcard are automatically save after each command.
 
 ## Command Summary
 
-* List all flashcards: `list flashcards`
-* Create a new flashcard: `create flashcard`
-* Review your flashcards: `review flashcards`
+* [Listing all flashcards](#listing-all-flashcards-list-flashcards): `list 
+  flashcards`
+* [Creating a new flashcard](#creating-a-new-flashcard-create-flashcard): 
+  `create flashcard`
+* [Reviewing your flashcards](#reviewing-your-flashcards-review-flashcards): 
+  `review flashcards`
+* [Deleting a flashcard](#deleting-a-flashcard-delete-flashcard) `delete 
+  flashcard`
+* [Deleting all flashcards](#deleting-all-flashcards-delete-all-flashcards) 
+  `delete all flashcards`
 * Create an event: `add event`
 * Delete an event: `delete event`
 * Delete all events: `delete all events`

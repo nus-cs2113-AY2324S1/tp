@@ -23,8 +23,7 @@ public class SpacedRepetitionReviewMode extends ReviewMode {
     /**
      * Identifies the instance as a spaced repetition review mode instance.
      *
-     * @return Textual description that this is the spaced repetition review
-     * mode.
+     * @return Textual description that this is the spaced repetition mode.
      */
     public String getReviewModeName() {
         return "spaced repetition mode";
@@ -33,8 +32,7 @@ public class SpacedRepetitionReviewMode extends ReviewMode {
     /**
      * Chooses the flashcard with the highest difficulty to be reviewed next.
      *
-     * @return The next flashcard to review (i.e. the one with the highest
-     * difficulty).
+     * @return The next flashcard to review.
      */
     protected Flashcard pickFlashcard() {
         ArrayList<Flashcard> flashcards = flashcardList.getFlashcards();

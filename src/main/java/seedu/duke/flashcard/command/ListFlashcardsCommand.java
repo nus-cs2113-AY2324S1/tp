@@ -25,6 +25,8 @@ public class ListFlashcardsCommand extends FlashcardCommand {
             return;
         }
 
+        assert flashcardList.isEmpty() == false : "must contain flashcards";
+
         System.out.println("    Here is a list of all your flashcards: ");
         System.out.println();
 

@@ -38,7 +38,7 @@ public abstract class ReviewMode {
      *
      * @param scanner For getting input from user.
      */
-    public void startReviewSession(Scanner scanner) {
+    public void startReviewSession(Scanner scanner, Calendar calendar) {
         assert scanner != null : "must be a valid Scanner instance";
 
         System.out.println("    You have started a review session in "
@@ -62,12 +62,14 @@ public abstract class ReviewMode {
                 break;
             }
 
-            System.out.println("    The actual back text is: " + flashcardToReview.getBackText());
+            System.out.println("    The actual back text is: "
+                    + flashcardToReview.getBackText());
             System.out.println();
 
             if (getReviewModeName().equals("spaced repetition mode")) {
                 letUserRateReviewDifficulty(scanner, flashcardToReview);
             }
+
             calendar.incrementFlashcardCount();
         }
 
@@ -87,7 +89,7 @@ public abstract class ReviewMode {
      * @param flashcardToReview The flashcard currently being reviewed.
      */
     protected void printFlashcardFrontTextPrompt(Flashcard flashcardToReview) {
-        assert flashcardToReview != null : "must be a valid Flashcard instance";
+        assert flashcardToReview != null : "must be valid Flashcard instance";
 
         System.out.println("    " + "-".repeat(76));
         System.out.println("    The front text is: "
@@ -118,18 +120,18 @@ public abstract class ReviewMode {
         assert flashcard != null : "must be a valid Flashcard instance";
         assert scanner != null : "must be a valid Scanner instance";
 
-        System.out.println("    How hard was it to remember the back page of " +
-                "this flashcard?");
-        System.out.println("    Press <E> if it was easy, <M> if it was " +
-                "moderately challenging or <H> if it was quite hard.");
+        System.out.println("    How hard was it to remember the back page of "
+                + "this flashcard?");
+        System.out.println("    Press <E> if it was easy, <M> if it was "
+                + "moderately challenging or <H> if it was quite hard.");
 
         final ArrayList<String> choices = new ArrayList<>(Arrays.asList(
                 "e", "m", "h"));
         String choice = scanner.nextLine();
 
         while (!choices.contains(choice.toLowerCase())) {
-            System.out.println("    Invalid choice! Your choice must be E, M " +
-                    "or H! Please try again.");
+            System.out.println("    Invalid choice! Your choice must be E, M "
+                    + "or H! Please try again.");
 
             choice = scanner.nextLine();
         }
