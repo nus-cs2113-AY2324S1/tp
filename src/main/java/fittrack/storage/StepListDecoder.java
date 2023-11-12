@@ -1,6 +1,7 @@
 package fittrack.storage;
 
 import fittrack.StepList;
+import fittrack.Ui;
 import fittrack.data.Date;
 import fittrack.data.Step;
 import fittrack.parser.DateFormatException;
@@ -18,8 +19,10 @@ public class StepListDecoder {
             "(?<steps>\\d+)\\s*\\|\\s*(?<date>\\d{4}-\\d{2}-\\d{2})"
     );
     private static final StorageOperationException CONTENT_CORRUPTION_EXCEPTION = new StorageOperationException(
-            "File containing steps has invalid format. Creating new step list file."
+            "Creating new step list file..."
     );
+    private static final String FILE_NAME = "stepList.txt";
+
 
     /**
      * Decodes {@code encodedStepList} into a {@code StepList} containing the decoded data.
@@ -67,6 +70,11 @@ public class StepListDecoder {
 
     public static void handleCorruptedFile(Path filePath) throws IOException {
         String newFileContent = "";
-        Files.write(filePath, newFileContent.getBytes());
+        Ui.printPromptForCreateNewFile(FILE_NAME);
+        if (Ui.createNewFile()) {
+            Files.write(filePath, newFileContent.getBytes());
+        } else {
+            throw new Ui.ForceExitException();
+        }
     }
 }

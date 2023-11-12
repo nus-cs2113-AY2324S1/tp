@@ -1,6 +1,7 @@
 package fittrack.storage;
 
 import fittrack.MealList;
+import fittrack.Ui;
 import fittrack.data.Calories;
 import fittrack.data.Meal;
 import fittrack.data.Date;
@@ -21,8 +22,9 @@ public class MealListDecoder {
             "(?<name>\\S+)\\s*\\|\\s*(?<calories>\\S+)kcal\\s*\\|\\s*(?<date>\\S+)"
     );
     private static final StorageOperationException CONTENT_CORRUPTION_EXCEPTION = new StorageOperationException(
-            "File containing meals has invalid format. Creating new meal list file..."
+            "Creating new meal list file..."
     );
+    private static final String FILE_NAME = "mealList.txt";
 
     /**
      * Decodes {@code encodedMealList} into a {@code MealList} containing the decoded data.
@@ -67,7 +69,12 @@ public class MealListDecoder {
 
     public static void handleCorruptedFile(Path filePath) throws IOException {
         String newFileContent = "";
-        Files.write(filePath, newFileContent.getBytes());
+        Ui.printPromptForCreateNewFile(FILE_NAME);
+        if (Ui.createNewFile()) {
+            Files.write(filePath, newFileContent.getBytes());
+        } else {
+            throw new Ui.ForceExitException();
+        }
     }
 }
 // @@author

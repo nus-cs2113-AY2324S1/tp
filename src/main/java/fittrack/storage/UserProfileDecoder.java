@@ -1,5 +1,6 @@
 package fittrack.storage;
 
+import fittrack.Ui;
 import fittrack.UserProfile;
 import fittrack.data.Calories;
 import fittrack.data.Gender;
@@ -30,9 +31,10 @@ public class UserProfileDecoder {
             "Daily calorie limit: (?<calLimit>\\S+)kcal"
     );
     private static final StorageOperationException CONTENT_CORRUPTION_EXCEPTION = new StorageOperationException(
-            "File containing profile has invalid format. Creating new profile file..."
+            "Creating new profile file..."
     );
 
+    private static final String FILE_NAME = "profile.txt";
     /**
      * Decodes {@code encodedUserProfile} into a {@code UserProfile} containing the decoded data.
      *
@@ -41,7 +43,7 @@ public class UserProfileDecoder {
     public static UserProfile decodeUserProfile(List<String> encodedUserProfile, Path profilePath)
             throws StorageOperationException, IOException {
         if (encodedUserProfile.size() < 4) {
-            handleCorruptedProfileFile(profilePath);
+            handleCorruptedFile(profilePath);
             throw CONTENT_CORRUPTION_EXCEPTION;
         }
 
@@ -57,7 +59,7 @@ public class UserProfileDecoder {
 
         if (!heightMatcher.matches() || !weightMatcher.matches()
                 || !caloriesMatcher.matches() || !genderMatcher.matches()) {
-            handleCorruptedProfileFile(profilePath);
+            handleCorruptedFile(profilePath);
             throw CONTENT_CORRUPTION_EXCEPTION;
         }
 
@@ -73,15 +75,21 @@ public class UserProfileDecoder {
             Gender gender = Gender.parseGender(genderData);
             return new UserProfile(height, weight, dailyCalorieLimit, gender);
         } catch (IllegalValueException e) {
-            handleCorruptedProfileFile(profilePath);
+            handleCorruptedFile(profilePath);
             throw CONTENT_CORRUPTION_EXCEPTION;
         }
 
     }
 
-    public static void handleCorruptedProfileFile(Path profilePath) throws IOException {
+    public static void handleCorruptedFile(Path filePath) throws IOException {
         String newFileContent = "";
-        Files.write(profilePath, newFileContent.getBytes());
+        Ui.printPromptForCreateNewFile(FILE_NAME);
+        if (Ui.createNewFile()) {
+            Files.write(filePath, newFileContent.getBytes());
+        } else {
+            throw new Ui.ForceExitException();
+        }
     }
+
 }
 // @@author

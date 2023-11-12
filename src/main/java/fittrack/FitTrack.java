@@ -84,7 +84,6 @@ public class FitTrack {
 
     // @@author J0shuaLeong
     private void load() {
-        // TODO: This method will be eventually changed due to Joshua's Storage rework.
         try {
             this.mealList = storage.loadMeals();
         } catch (StorageOperationException e) {
