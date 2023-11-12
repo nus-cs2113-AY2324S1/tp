@@ -15,7 +15,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 ## Summary of Contributions
 
 ### Code Contribution
-[Follow here to see code written by me](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=functional-code~test-code~docs&since=2023-09-22&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=NaychiMin&tabRepo=AY2324S1-CS2113-T17-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code~docs&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+[Click here to see my code contribution!](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=functional-code~test-code~docs&since=2023-09-22&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=NaychiMin&tabRepo=AY2324S1-CS2113-T17-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code~docs&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 ### Enhancements implemented
 
@@ -23,7 +23,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 
 1. **List Ingredient**
     - Function: Allow the user to view the ingredients of the desired dish from the menu.
-    - Command Format: `list_ingredient INDEX_OF_DISH_TO_LIST`
+    - Command Format: `list_ingredient index/INDEX_OF_DISH_TO_LIST`
     - Error Handling:
         - If the specified index is out of range, to prevent index out of bounds error.
         - If the specified index is of a wrong argument type to prevent number format exception.
@@ -32,6 +32,9 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 2. **List Total Sales**
     - Function: Allow the user to view the sale for each day across every day since the cafe has operated.
     - Command Format: `list_total_sales`
+    - Error Handling:
+      - If the command has unnecessary arguments after the command.
+      - Specific error messages will then be output to user along with recommended command format.
 3. **Show Sale By Day** 
     - Function: Allow the user to view the sale for the desired day. <br>
     - Command Format: `list_sale day/DAY_TO_LIST` <br>
@@ -42,9 +45,9 @@ Café proprietors who prefer typing on CLI than any other interaction method and
       - Specific error messages will then be output to user along with recommended command format.
 4. **Data processing of 'add_order'**
    - My group mate (Cazh1) did the parsing of the command, along with the implementation of needed classes such as Order, OrderList and Chef.
-   - My role was to handle the logic of the data being processed after an order was added to an orderList for the following purposes:
-     - Determine if the order can be completed
-     - Determine which ingredients need to be restocked
+   - My role was to seamlessly handle the logic of the data being processed after an order was added to an orderList for the following purposes:
+     - Order completion determination
+     - Restocking ingredient identification
    - This will be elaborated on in the section below.
 
 #### Enhancements
@@ -53,16 +56,31 @@ Café proprietors who prefer typing on CLI than any other interaction method and
     - ShaniceTang focused on the buying and restocking of pantry ingredients, as detailed in her PPP.
     - My role, outlined in point 4 above, involved implementing key functions, including:
         - `isDishCooked`:
-            - Returns a boolean, indicating the success of the order.
-            - Manages the decrease and update of ingredient quantities in the Pantry Stock.
+            - Implemented to determine the success of an order.
+              - Returns a boolean, indicating the success of the order.
+            - Manages the process of retrieving necessary ingredients from the `Menu` class, along with the retrieval of the quantity of ingredients in the current `Pantry` class.
+            - Decreasing and updating the correct ingredient quantities in the Pantry Stock and not mixing it with the ingredients in the `Menu` class.
+            - The accurate execution of this function is crucial for the overall success of order processing
+              - which also affects other operations of the cafe, such as the amount of total sales to be displayed to users.
         - `calculateDishAvailability`:
             - Informs the user of the available quantity for each dish in the menu after each order.
+            - Provides essential insights into the real-time status of dish availability, alerting users of the availability of each dish in the menu
+              - Enables the target user(cafe manager) to keep track of dish availability and stay alerted of the dishes that are unavailable for the next order following an order being marked as successful.
         - `calculateMaxDishes`:
             - Handles the logic for calculating the number of dishes made.
-            - Manages the logic for determining restocked ingredients and their required quantities.
-            - Presents the information neatly in a table for the user.
-    - Initially unfamiliar with OOP concepts, this class's creation, which interacts with various classes (menu, order, chef, dish, and ingredients), presented a challenging learning opportunity.
-    - Explored the use of Java stream filter, a concept introduced in lectures.
+            - Manages the complex logic for determining restocked ingredients and their required quantities.
+            - Presents the information in a structured table format for user clarity and comprehension.
+    - Pantry Class Development:
+      - Creating the Pantry class was a significant learning opportunity, especially given my initial unfamiliarity with Object-Oriented Programming (OOP) concepts. 
+      - Developing the Pantry class presented a dual challenge – not only did I navigate a crucial learning curve of OOP, but I also ensured the modularity of functions to adhere to coding standards. 
+      - Interacting with various classes like Menu, Order, Chef, Dish, and Ingredients, the Pantry class played a pivotal role in the seamless functioning of our project. 
+      - The exploration of Java stream filter, a concept introduced in lectures, notably enhanced the efficiency of implemented functionality and prevented arrow-head style code.
+    - Order and Pantry Coordination:
+      - My role served as the link between the add_order and buy_ingredients commands, serving as a cohesive link that unified the data(ingredients) processing aspect of order management.
+         - Order Processing: Seamlessly integrating logic for order success determination and the need for Pantry's ingredient stock management.
+         - Pantry Stock Management: My active contribution to the Pantry class connected the use of add_order command with subsequent use of the buy_ingredients command, making it a central hub for order processing, dish availability checks, and ingredient restocking prompts.
+         - Dish Coordination: I ensured smooth coordination across various dish-related elements, covering determination of success of order to ingredient availability and restocking.
+      - Ensuring the accuracy of the dish management process, my role provided a seamless flow from adding orders to procuring required ingredients. This critical link facilitated the effective functioning of the project, ensuring a cohesive and integrated approach to order handling.
 
 2. **Encoding of Sales**
     - Implemented encoding for the Sales object, involving:
@@ -89,11 +107,24 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 3. List Sale by day
 
 ### Contributions to DG
-1. Worked on ShaniceTang with the following:
-   - Architecture diagram and overall description of the architecture
-   - Sequence diagram of interactions of various components shown in the architecture diagram
-   - Data Component class diagram and description
-2. List Ingredient
+[DeveloperGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html)
+1. Worked with ShaniceTang on the following:
+   - [Architecture diagram](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#architecture) and overall description of the architecture. 
+   - Sequence diagram of [interactions of various components](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#how-the-architecture-components-interact-with-each-other) shown in the architecture diagram
+   - Drafting data Component class diagram and [description](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#data-component)
+2. [List Ingredient](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#list-ingredients) 
+3. [List Sale By Day](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#list-sale-by-day)
+4. [Pantry - isDishCooked()](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#pantry---isdishcooked)
+5. [Pantry - calculateMaxDish()](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#pantry---calculatemaxdish)
 
 ### Other Contributions to Team-based Task
-1. Maintain issue tracker
+1. Maintaining the issue tracker
+2. Testing of application and reporting bugs found.
+
+### Review / Mentoring Contributions
+1. Reviewed and merged some PRs such as [#313](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/313), ...
+2. Consulting the group when clarification is needed and actively participating in weekly meetings.
+
+### Contributions Beyond the Project Team
+1. Reported bugs in other teams' application: [#157](https://github.com/AY2324S1-CS2113T-W11-2/tp/issues/157), [#141](https://github.com/AY2324S1-CS2113T-W11-2/tp/issues/141), [#172](https://github.com/AY2324S1-CS2113T-W11-2/tp/issues/172), [#145](https://github.com/AY2324S1-CS2113T-W11-2/tp/issues/145)
+2. Reviewed other groups tp PRs : [#11](https://github.com/nus-cs2113-AY2324S1/tp/pull/11/files)
