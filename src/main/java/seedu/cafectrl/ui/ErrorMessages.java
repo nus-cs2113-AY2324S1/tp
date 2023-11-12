@@ -107,4 +107,5 @@ public class ErrorMessages {
             + HelpCommand.MESSAGE_USAGE;
     public static final String WRONG_LIST_TOTAL_SALES_FORMAT = "Invalid list_total_sales command format!\n"
             + ListTotalSalesCommand.MESSAGE_USAGE;
+    public static final String MISSING_FILEPATH = "Error in FileManager: No File Path entered";
 }
