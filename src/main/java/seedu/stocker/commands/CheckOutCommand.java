@@ -37,7 +37,6 @@ public class CheckOutCommand extends Command {
             for (CartEntry entry : currentCart.getCurrentCart()) {
                 String serialNumber = entry.getSerialNumber();
                 long quantity = entry.getQuantity();
-                // Assuming that the StockEntry and Drug classes have similar structures in CheckOutCommand and ViewCartCommand
                 StockEntry stockEntry = inventory.get(serialNumber);
                 if (stockEntry != null) {
                     Drug drug = stockEntry.getDrug();
