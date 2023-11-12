@@ -205,24 +205,27 @@ public class Decoder {
             //@@author
 
             int quantity = Integer.parseInt(orderData[2].trim());
-            float decodedTotalOrderCost = Float.parseFloat(orderData[3].trim());
-            String completeStatus = orderData[4].trim();
+            float decodedDishPrice = Float.parseFloat(orderData[3].trim());
+            float decodedTotalOrderCost = Float.parseFloat(orderData[4].trim());
+            String completeStatus = orderData[5].trim();
             Dish dish = menu.getDishFromName(dishName);
 
             boolean isDataAccurate = isDishValid(orderLine, dish)
-                    && isOrderCostAccurate(orderLine, dish, quantity, decodedTotalOrderCost)
+                    && isOrderCostAccurate(orderLine, quantity, decodedDishPrice, decodedTotalOrderCost)
                     && isCompleteStatusAccurate(orderLine, completeStatus);
             if (!isDataAccurate) {
                 return;
             }
 
+            Dish dishToAdd = new Dish(dishName, decodedDishPrice);
             //creates new order and adds to orderList for specific day
             boolean isComplete = Boolean.parseBoolean(completeStatus.toLowerCase());
-            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, decodedTotalOrderCost, isComplete);
+            Order orderedDish = new Order(dishToAdd, quantity, decodedTotalOrderCost, isComplete);
             fillOrderListSize(orderLists, day);
             orderLists.get(day).addOrder(orderedDish);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
+            System.out.println(e.getMessage());
             ui.showToUser(ErrorMessages.INVALID_SALES_DATA + orderLine);
         }
     }
@@ -251,10 +254,9 @@ public class Decoder {
      * @param decodedTotalOrderCost The decoded total order cost from the order line.
      * @return True if the decoded total order cost matches the expected total order cost, false otherwise.
      */
-    private static boolean isOrderCostAccurate(String orderLine, Dish dish,
-            int quantity, float decodedTotalOrderCost) {
-        float costOfDish = dish.getPrice();
-        float expectedTotalOrderCost = quantity * costOfDish;
+    private static boolean isOrderCostAccurate(String orderLine, int quantity,
+            float decodedDishPrice, float decodedTotalOrderCost) {
+        float expectedTotalOrderCost = quantity * decodedDishPrice;
         if (decodedTotalOrderCost == expectedTotalOrderCost) {
             return true;
         }

@@ -79,7 +79,8 @@ public class ErrorMessages {
     public static final String INVALID_MENU_DATA = "menu.txt: Invalid format, this dish will be removed -> ";
 
     public static final String INVALID_SALES_DATA = "orders.txt: Invalid format, this order will be removed -> ";
-    public static final String INVALID_ORDER_DATA = "orders.txt: Invalid dish, this order will be removed -> ";
+    public static final String INVALID_ORDER_DATA = "orders.txt: Dish is not in current menu, "
+            + "this order will be removed -> ";
     public static final String INVALID_ORDER_STATUS = "orders.txt: Invalid status, this order will be removed -> ";
     public static final String INACCURATE_ORDER_COST_DATA = "orders.txt: The total order cost of this order -> \"%s\" "
             + "is inaccurate and will hence be updated from %.2f to %.2f instead.";
