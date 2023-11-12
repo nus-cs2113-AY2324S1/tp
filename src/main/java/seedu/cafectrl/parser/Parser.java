@@ -271,8 +271,10 @@ public class Parser implements ParserUtil {
 
     private static Matcher detectErrorInPreAddParse(String arguments) throws ParserException {
         if (isRepeatedArgument(arguments, ADD_DISH_NAME_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated dish/ argument!");
             throw new ParserException(ErrorMessages.REPEATED_NAME_ARGUMENT);
         } else if (isRepeatedArgument(arguments, ADD_DISH_PRICE_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated price/ argument!");
             throw new ParserException(ErrorMessages.REPEATED_PRICE_ARGUMENT);
         }
 
@@ -290,6 +292,7 @@ public class Parser implements ParserUtil {
 
     private static void detectErrorPostDishNameParse(String dishName, Menu menu) throws ParserException {
         if (dishName.isEmpty()) {
+            logger.warning("Dish name empty!");
             throw new ParserException(ErrorMessages.MISSING_DISH_NAME);
         } else if (isNameLengthInvalid(dishName)) {
             logger.warning("Invalid name length!");
@@ -298,6 +301,7 @@ public class Parser implements ParserUtil {
             logger.warning("Repeated dish!");
             throw new ParserException(ErrorMessages.REPEATED_DISH_MESSAGE);
         } else if (containsSpecialChar(dishName)) {
+            logger.warning("Special character in dish name!");
             throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
         }
     }
@@ -363,8 +367,10 @@ public class Parser implements ParserUtil {
 
     private static Matcher detectErrorPreIngredientParse(String inputIngredient) throws ParserException {
         if (isRepeatedArgument(inputIngredient, INGREDIENT_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated ingredient/ argument!");
             throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_ARGUMENT);
         } else if (isRepeatedArgument(inputIngredient, QTY_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated qty/ argument!");
             throw new ParserException(ErrorMessages.REPEATED_QTY_ARGUMENT);
         }
 
@@ -372,6 +378,7 @@ public class Parser implements ParserUtil {
         Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredient);
 
         if (!ingredientMatcher.matches()) {
+            logger.log(Level.WARNING, "Mismatched ingredient arguments!");
             throw new ParserException(ErrorMessages.INVALID_INGREDIENT_ARGUMENTS);
         }
 
@@ -384,22 +391,29 @@ public class Parser implements ParserUtil {
 
         //error case
         if (ingredientName.isEmpty()) {
+            logger.log(Level.WARNING, "Missing ingredient name!");
             throw new ParserException(ErrorMessages.MISSING_INGREDIENT_NAME);
         } else if (isNameLengthInvalid(ingredientName)) {
+            logger.log(Level.WARNING, "Exceed max ingredient name length!");
             throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
         } else if (isInvalidQty(ingredientQty)) {
+            logger.log(Level.WARNING, "Exceed ingredient qty range!");
             throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY);
         } else if (isEmptyUnit(ingredientUnit)) {
+            logger.log(Level.WARNING, "Missing ingredient qty unit!");
             throw new ParserException(ErrorMessages.EMPTY_UNIT_MESSAGE);
         } else if (!isValidUnit(ingredientUnit)) {
+            logger.log(Level.WARNING, "Invalid ingredient qty unit!");
             throw new ParserException(ErrorMessages.INVALID_UNIT_MESSAGE);
         } else if (containsSpecialChar(ingredientName)) {
+            logger.log(Level.WARNING, "Special character in ingredient name!");
             throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
         }
 
         //unusual case
         //user input repeated ingredient name for add dish command
         if (isExcludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)) {
+            logger.log(Level.WARNING, "Repeated ingredient name for AddDishCommand!");
             throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_NAME);
         }
     }
@@ -418,8 +432,10 @@ public class Parser implements ParserUtil {
 
         // Check whether price text is empty
         if (priceText.isEmpty()) {
+            logger.log(Level.WARNING, "Missing dish price!");
             throw new ParserException(ErrorMessages.MISSING_PRICE);
         } else if (!priceMatcher.matches()) {
+            logger.log(Level.WARNING, "Exceed price valid range!");
             throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
         }
 
@@ -427,6 +443,7 @@ public class Parser implements ParserUtil {
         try {
             price = Float.parseFloat(trimmedPriceText);
         } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, e.getMessage(), e);
             throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
         }
 
