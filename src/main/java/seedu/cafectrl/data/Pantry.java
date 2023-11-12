@@ -133,7 +133,7 @@ public class Pantry {
      */
     private Ingredient getIngredient(Ingredient dishIngredient) {
         return pantryStock.stream()
-                .filter(ingredient -> ingredient.getName().trim().equals(dishIngredient.getName().trim()))
+                .filter(ingredient -> ingredient.getName().trim().equalsIgnoreCase(dishIngredient.getName().trim()))
                 .findFirst()
                 .orElse(null);
     }
