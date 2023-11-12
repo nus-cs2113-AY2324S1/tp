@@ -27,21 +27,24 @@ class AddReminderCommandTest {
         }
 
         try {
-            AddReminderCommand testEntry = new AddReminderCommand(Parser.parseRawCommand("addreminder /t debt /d 11/12/2020"));
+            AddReminderCommand testEntry = new AddReminderCommand(
+                    Parser.parseRawCommand("addreminder /t debt /d 11/12/2020"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Reminder date cannot be in the past", e.getMessage());
         }
 
         try {
-            AddReminderCommand testEntry = new AddReminderCommand(Parser.parseRawCommand("addreminder /t debt /d 2023/12/12"));
+            AddReminderCommand testEntry = new AddReminderCommand(
+                    Parser.parseRawCommand("addreminder /t debt /d 2023/12/12"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Reminder date must be in the format dd/MM/yyyy", e.getMessage());
         }
 
         try {
-            AddReminderCommand testEntry = new AddReminderCommand(Parser.parseRawCommand("addreminder /t    /d 11/12/2023"));
+            AddReminderCommand testEntry = new AddReminderCommand(
+                    Parser.parseRawCommand("addreminder /t    /d 11/12/2023"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Reminder type cannot be empty", e.getMessage());
