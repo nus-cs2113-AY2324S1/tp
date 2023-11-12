@@ -491,7 +491,70 @@ shows you the welcome screen for the financial planner app
    1. Type `exit` into the terminal. 
    2. Expected: the financial planner will exit with a goodbye message.
 Under the data newly created data directory, a watchlist.json and a data.txt file will be created
-3. WatchList Feature
+
+### View Balance
+
+Test case: `balance`
+
+Expected: Balance is displayed. Details of balance are shown in the status message.
+
+### Budget Feature
+
+1. Setting a monthly budget
+
+Test case: `budget set /b 100`
+
+Expected: A monthly budget of 100 is set. Details of the budget are shown in the status message.
+
+Test case: `budget set /b`
+
+Expected: No budget is set. Error details shown in status message.
+
+Other incorrect set budget commands to try: `budget set`, `budget set /b x`, `...` (where x is negative)
+
+2. Updating budget
+
+Test case: `budget update /b 300`
+
+Expected: Monthly budget is updated to 300. Details of the budget are shown in the status message.
+
+Test case: `budget update /b`
+
+Expected: Budget is not updated. Error details shown in status message.
+
+Other incorrect set budget commands to try: `budget update`, `budget update /b x`, `...` (where x is negative)
+
+3. Resetting budget
+
+Test case: `budget reset`
+
+Expected (Current budget is lower than initial budget): Budget is reset. Details of reset budget are shown in status message.
+
+Expected (Budget has not been spent): Budget is not reset. Error details shown in the status message.
+
+4. Deleting budget
+
+Test case: `budget delete`
+
+Expected (Budget exists): Budget is deleted. Details of deletion are shown in status message.
+
+Expected (Budget does not exist): No budget to delete. Error details shown in the status message.
+
+5. Viewing budget
+
+Test case: `budget view`
+
+Expected (Budget exists): Budget is displayed. Details of budget are shown in status message.
+
+Expected (Budget does not exist): No budget to display. Error details shown in the status message.
+
+### Displaying overview
+
+Test case: `overview`
+
+Expected: Displays overview of user's financials. Details of financials are shown in the status message.
+
+### WatchList Feature
 
 To test the watchlist feature, you can copy the text below into the watchlist.json file under data directory
 ```
@@ -541,7 +604,7 @@ as you have no more stocks left in your watchlist
 Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
 Empty Watchlist. Nothing to display...
 ```
-4. Visualization Feature
+### Visualization Feature
 
 We can use the visualization feature to visualize your income and expenses.
 
@@ -573,3 +636,38 @@ vis /t income /c pie
 vis /t income /c bar
 vis /t income /c radar
 ```
+
+### Saving data
+
+Dealing with missing/corrupted data files:
+
+Example of a valid `data.txt` file:
+
+```
+I | 5000.0 | SALARY | 30 | false | 31/10/2023
+E | 50.0 | OTHERS | 0 | false
+I | 500.0 | OTHERS | 0 | false
+I | 5.0 | OTHERS | 0 | false
+E | 5.0 | OTHERS | 0 | false
+```
+
+The first column specifies the type of data being saved, and the subsequent columns contain the data to be saved. 
+For example, `I` and `E` represent `income` and `expense` respectively, and there are other types, such as `B` for `budget`. 
+
+For incomes and expenses, the second column represent the amount, which is a `double`. To simulate a corrupted data, you 
+can change the number in the column to a string for example.
+
+Example of corrupted `data.txt` file in the third row:
+
+```
+I | 5000.0 | SALARY | 30 | false | 31/10/2023
+E | 50.0 | OTHERS | 0 | false
+I | sdf | OTHERS | 0 | false
+I | 5.0 | OTHERS | 0 | false
+E | 5.0 | OTHERS | 0 | false
+```
+
+When starting the program:
+
+Expected: Data fails to load. Error details shown in status message. Program asks user if he/she wants to create a new file
+(by clearing all data) or fix it manually.
