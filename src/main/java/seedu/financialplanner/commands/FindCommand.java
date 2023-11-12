@@ -18,6 +18,12 @@ public class FindCommand extends Command {
             "find buy coffee";
     private final String description;
 
+    /**
+     * Constructor of the command to find cashflow.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public FindCommand(RawCommand rawCommand) {
         this.description = String.join(" ", rawCommand.args);
         if (!rawCommand.extraArgs.isEmpty()) {
@@ -26,6 +32,9 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to find.
+     */
     @Override
     public void execute() {
         CashflowList cashflowList = CashflowList.getInstance();

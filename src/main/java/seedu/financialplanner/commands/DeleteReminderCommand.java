@@ -18,6 +18,12 @@ public class DeleteReminderCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
 
+    /**
+     * Constructor of the command to delete a reminder.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public DeleteReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if (rawCommand.args.size() == 1) {
@@ -50,6 +56,9 @@ public class DeleteReminderCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to delete a reminder.
+     */
     @Override
     public void execute() {
         assert index > 0 && index <= ReminderList.getInstance().list.size();

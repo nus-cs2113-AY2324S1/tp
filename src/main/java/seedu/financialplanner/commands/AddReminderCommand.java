@@ -24,6 +24,12 @@ public class AddReminderCommand extends Command {
     private final String type;
     private final LocalDate date;
 
+    /**
+     * Constructor for the command to add a reminder.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public AddReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
         if (!rawCommand.extraArgs.containsKey("t")) {
@@ -61,6 +67,9 @@ public class AddReminderCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to add a reminder.
+     */
     @Override
     public void execute() {
         assert type != null;

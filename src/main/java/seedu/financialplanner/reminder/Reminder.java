@@ -1,5 +1,7 @@
 package seedu.financialplanner.reminder;
 
+import seedu.financialplanner.exceptions.FinancialPlannerException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
@@ -9,11 +11,24 @@ public class Reminder {
     private LocalDate date;
     private boolean isDone = false;
 
+    /**
+     * Constructor for a reminder.
+     *
+     * @param type The description of the reminder.
+     * @param date The deadline of the reminder.
+     */
     public Reminder(String type, LocalDate date) {
         this.type = type;
         this.date = date;
     }
 
+    /**
+     * Constructor for a reminder. Used for loading from a file.
+     *
+     * @param type The description of the reminder.
+     * @param date The deadline of the reminder.
+     * @param status The status of the reminder.
+     */
     public Reminder(String type, String date, String status) {
         this.type = type;
         this.date = LocalDate.parse(date, FORMATTER);
@@ -23,6 +38,12 @@ public class Reminder {
             this.isDone = false;
         }
     }
+
+    /**
+     * Formats the reminder into an easy-to-read format to be output to the user.
+     *
+     * @return The formatted reminder.
+     */
     public String toString() {
         String status = isDone ? "Done" : "Not Done";
         LocalDate currentTime = LocalDate.now();
@@ -32,13 +53,17 @@ public class Reminder {
                 + System.lineSeparator() + "   Left Days: " + duration.toDays();
     }
 
+    /**
+     * Marks the reminder as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
-    /*
-        * Returns a string that can be saved to a file.
-        * Format: type | date | isDone
-        * Example: "Reminder: Birthday | 2020-10-10 | false"
+
+    /**
+     * Formats the reminder into a standard format to be saved into a text file.
+     *
+     * @return The formatted reminder.
      */
     public String formatString() {
         String status = isDone ? "Done" : "Not Done";

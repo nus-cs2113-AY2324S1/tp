@@ -17,6 +17,12 @@ public class SetGoalCommand extends Command {
     private final String label;
     private final int amount;
 
+    /**
+     * Constructor for the command to set a goal.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public SetGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String labelString = String.join(" ", rawCommand.args);
         if (!rawCommand.extraArgs.containsKey("g")) {
@@ -53,6 +59,9 @@ public class SetGoalCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to set a goal.
+     */
     @Override
     public void execute() {
         assert amount > 0;

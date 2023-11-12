@@ -18,6 +18,12 @@ public class DeleteGoalCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
 
+    /**
+     * Constructor of the command to delete a goal.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public DeleteGoalCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if (rawCommand.args.size() == 1) {
@@ -51,6 +57,9 @@ public class DeleteGoalCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to delete a goal.
+     */
     @Override
     public void execute() {
         assert index > 0 && index <= WishList.getInstance().list.size();

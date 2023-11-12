@@ -17,6 +17,12 @@ public class MarkReminderCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
 
+    /**
+     * Constructor of the command to mark a reminder as done.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public MarkReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if (rawCommand.args.size() == 1) {
@@ -48,6 +54,9 @@ public class MarkReminderCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to mark the reminder.
+     */
     @Override
     public void execute() {
         assert index > 0 && index <= ReminderList.getInstance().list.size();

@@ -14,10 +14,22 @@ public class WishList {
         return wishList;
     }
 
+
+    /**
+     * Loads a goal to the wish list from file.
+     *
+     * @param goal The goal to be added.
+     */
     public void load(Goal goal) {
         list.add(goal);
     }
 
+
+    /**
+     * Deletes a goal from the wish list.
+     *
+     * @param index
+     */
     public void deleteGoal(int index) {
         int existingListSize = list.size();
         int listIndex = index;
@@ -25,6 +37,13 @@ public class WishList {
         Goal toRemove = list.get(listIndex);
         list.remove(listIndex);
     }
+
+
+    /**
+     * Formats the reminder list into an easy-to-read format to be output to the user.
+     *
+     * @return The formatted reminder list.
+     */
     public String toString() {
         String result = "";
         for (int i = 0; i < list.size(); i++) {
