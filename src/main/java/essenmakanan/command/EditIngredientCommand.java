@@ -1,6 +1,7 @@
 package essenmakanan.command;
 
 import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenInvalidQuantityException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 

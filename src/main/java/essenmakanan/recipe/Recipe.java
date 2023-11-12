@@ -1,5 +1,6 @@
 package essenmakanan.recipe;
 
+import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ui.Ui;
 
 import java.util.List;
@@ -51,6 +52,10 @@ public class Recipe {
 
     public Step getRecipeStepByIndex(int index) {
         return recipeSteps.getStepByIndex(index);
+    }
+
+    public Ingredient getRecipeIngredientByIndex(int index) {
+        return recipeIngredients.getIngredientByIndex(index);
     }
 
     public String getTitle() {

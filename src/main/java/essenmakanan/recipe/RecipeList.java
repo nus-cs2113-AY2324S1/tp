@@ -1,6 +1,10 @@
 package essenmakanan.recipe;
 
 import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenInvalidEditException;
+import essenmakanan.exception.EssenInvalidQuantityException;
+import essenmakanan.ingredient.IngredientList;
+import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 import essenmakanan.ingredient.Ingredient;
 
@@ -140,18 +144,94 @@ public class RecipeList {
                 break;
             case "s/":
                 String[] stepDetails = editDetails[i].substring(2).split(",");
-                int stepIndex = Integer.parseInt(stepDetails[0])-1;
+                int stepIndex = -1;
+
+                try {
+                    stepIndex = Integer.parseInt(stepDetails[0])-1;
+                } catch (NumberFormatException e) {
+                    System.out.println("Step index must be a number!");
+                    throw new EssenFormatException();
+                }
                 Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
                 String newStep = stepDetails[1];
 
                 Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
                 existingStep.setDescription(newStep);
                 break;
+            case "i/":
+                int firstSlash = editDetails[i].indexOf("/");
+                int firstComma = editDetails[i].indexOf(",");
+                int ingredientIndex = -1;
+
+                try {
+                    ingredientIndex = Integer.parseInt(editDetails[i].substring(firstSlash+1,firstComma))-1;
+                } catch (NumberFormatException e) {
+                    System.out.println("Ingredient index must be a number!");
+                    throw new EssenFormatException();
+                }
+
+                assert (ingredientIndex >= 0) : "Ingredient index must be positive";
+
+                Ingredient existingIngredient = null;
+                try {
+                    existingIngredient = existingRecipe.getRecipeIngredientByIndex(ingredientIndex);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Make sure ingredient index is valid!");
+                    throw new EssenFormatException();
+                }
+
+                String ingredientEditDetailsString = editDetails[i].substring(firstComma+1);
+                String[] ingredientDetails = null;
+                try {
+                    ingredientDetails = getIngredientEditDetails(ingredientEditDetailsString);
+                } catch (EssenInvalidEditException e) {
+                    e.handleException();
+                }
+
+                assert ingredientDetails != null : "Ingredient details is null";
+
+                try {
+                    IngredientList.editIngredient(existingIngredient, ingredientDetails);
+                } catch (EssenFormatException e) {
+                    e.handleException();
+                }
+
+                // Ui.printEditRecipeIngredientSuccess(existingIngredient.getName(), newIngredient);
+                break;
             default:
                 throw new EssenFormatException();
             }
         }
 
+    }
+
+    public String[] getIngredientEditDetails(String ingrdientEditString) throws EssenInvalidEditException{
+        int totalDashes = ingrdientEditString.split("-").length-1;
+        String[] ingredientEditDetails = new String[totalDashes];
+        int counter = 0;
+
+        int firstDash = ingrdientEditString.indexOf("-");
+
+        while (firstDash != -1) {
+            if ((firstDash + 1) >= ingrdientEditString.length()) {
+                System.out.println("Please provide details to edit");
+                throw new EssenInvalidEditException();
+            }
+
+            int nextDash = ingrdientEditString.indexOf("-", firstDash+1);
+
+            if (nextDash != -1) {
+                String stringToReplaceDash = ingrdientEditString.substring(firstDash - 1, nextDash - 2).trim();
+                ingredientEditDetails[counter] = stringToReplaceDash.replace("-", "/");
+            } else {
+                String stringToReplaceDash = ingrdientEditString.substring(firstDash-1).trim();
+                ingredientEditDetails[counter] = stringToReplaceDash.replace("-", "/");
+            }
+            counter++;
+            firstDash = nextDash;
+        }
+
+        return ingredientEditDetails;
     }
 
     public boolean isEmpty() {

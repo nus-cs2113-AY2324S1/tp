@@ -3,6 +3,7 @@ package essenmakanan.ingredient;
 import java.util.ArrayList;
 
 import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenInvalidQuantityException;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
@@ -126,26 +127,35 @@ public class IngredientList {
         }
     }
 
-    public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
-        for (int i = 1; i < editDetails.length; i++) {
+    public static void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
+        for (int i = 0; i < editDetails.length; i++) {
+            if (editDetails[i].isEmpty()) {
+                continue;
+            }
+
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
+            String content = editDetails[i].substring(2);
 
             switch (flag) {
             case "n/":
-                String newName = editDetails[i].substring(2);
-                Ui.printEditIngredientNameSuccess(existingIngredient.getName(), newName);
-                existingIngredient.setName(newName);
+                Ui.printEditIngredientNameSuccess(existingIngredient.getName(), content);
+                existingIngredient.setName(content);
                 break;
             case "q/":
-                Double newQuantity = Double.parseDouble(editDetails[i].substring(2));
+                Double newQuantity = null;
+                try {
+                    newQuantity = Double.parseDouble(content);
+                } catch (NumberFormatException e) {
+                    System.out.println("Quantity must be a double!");
+                    throw new EssenFormatException();
+                }
                 Ui.printEditIngredientQuantitySuccess(existingIngredient.getQuantity(), newQuantity);
                 existingIngredient.setQuantity(newQuantity);
                 break;
             case "u/":
                 try {
-                    String newUnitString = editDetails[i].substring(2);
-                    IngredientUnit newUnit = IngredientParser.mapIngredientUnit(newUnitString);
+                    IngredientUnit newUnit = IngredientParser.mapIngredientUnit(content);
                     Ui.printEditIngredientUnitSuccess(existingIngredient.getUnit(), newUnit);
                     existingIngredient.setUnit(newUnit);
                 } catch (EssenFormatException e) {
