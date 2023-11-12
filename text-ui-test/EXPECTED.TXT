@@ -143,10 +143,13 @@ Noted. The income record you've specified has been changed:
 Before: Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
 After: Income: end of year bonus | Date: 02/Oct/2023 | Amount: $3000.00
 ____________________________________________________________
+____________________________________________________________
 Here are the matching incomes in your list:
 Income: end of year bonus | Date: 02/Oct/2023 | Amount: $3000.00
 ____________________________________________________________
+____________________________________________________________
 No matching expenses found.
+____________________________________________________________
 ____________________________________________________________
 You have cleared the income list
 ____________________________________________________________

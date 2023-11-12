@@ -3,11 +3,11 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import seedu.duke.financialrecords.Expense;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ExpenseManagerTest {
     private ExpenseManager expenseManager;
 
