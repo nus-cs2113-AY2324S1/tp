@@ -1,6 +1,5 @@
 package seedu.financialplanner.reminder;
 
-import seedu.financialplanner.exceptions.FinancialPlannerException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
