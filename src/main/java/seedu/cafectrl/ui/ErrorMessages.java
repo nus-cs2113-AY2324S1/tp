@@ -1,6 +1,7 @@
 package seedu.cafectrl.ui;
 
 import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.HelpCommand;
 
 public class ErrorMessages {
     public static final String INVALID_ADD_DISH_FORMAT = "Error: Incorrect format for the add command.\n";
@@ -37,12 +38,13 @@ public class ErrorMessages {
     public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
             + "for buy ingredient command.";
     public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Something is wrong with "
-            + "the dish index! Could you make sure that is it of type int \n"
-            + "and do not type in multiple dish indexes at one time!";
+            + "the arguments! The types for dish and price are integer and float respectively, \n"
+            + "and do not type in duplicated arguments at one time!";
     public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: "
             + "Invalid price!\n"
             + "Price must be a float and within the range of "
-            + "0.00 to 1000000 with up to 2 decimal place";
+            + "0.00 to 1000000 with up to 2 decimal place. \n"
+            + "Special characters such as $ are not allowed!";
     public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
             + "Type 'help' to view the accepted list of commands";
     public static final String INVALID_DISH_INDEX = "Do we even have this dish? "
@@ -68,13 +70,14 @@ public class ErrorMessages {
             + "No worries, new order list has been created";
     public static final String INVALID_SHOW_SALE_DAY_FORMAT_MESSAGE = "Error: " +
             "Incorrect format for the show_sale command.\n";
-    public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer "
+    public static final String INVALID_DAY_FORMAT = "Sorry, please enter a valid integer(>0)"
             + "for the 'day' field!";
     public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, "
             + "is that what you want?";
-    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer for the dish index. \n";
+    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer(>0) "
+            + "for the 'index' field.";
     public static final String UNLISTED_DISH = "Oh no, this dish does not exist! \n"
-            + " please run the command list_menu to view the existing dishes.";
+            + "Please run the command list_menu to view the existing dishes.";
     public static final String INVALID_SALE_DAY = "Oh no, we have not reached the day entered!";
     public static final String EMPTY_UNIT_MESSAGE = "Unit cannot be empty! Please use either g or ml :)";
     public static final String INVALID_UNIT_MESSAGE = "Invalid unit! Please use either g or ml :)";
@@ -83,16 +86,22 @@ public class ErrorMessages {
             + "[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]\n"
             + "Example: ingredient/milk qty/200ml, ingredient/chicken qty/100g";
     public static final String INVALID_INGREDIENT_QTY = "Quantity out of range! Quantity range is 1 to 1000000 :)";
-
     public static final String MISSING_PRICE = "Did you forget to include price? Just a reminder: "
             + "price can only have up to 2 decimal place!";
     public static final String MISSING_DISH_IN_EDIT_PRICE = "Sorry, I didnt catch the dish index, "
             + "did you forget to include it in your command?";
     public static final String INVALID_MENU_DATA = "menu.txt: Invalid format, this dish will be removed -> ";
-
     public static final String NAME_CANNOT_CONTAIN_SPECIAL_CHAR = "Is there a special character in the name?\n"
             + "I have poor memory and am unable to remember names with special characters, could you remove them?";
     public static final String REPEATED_INGREDIENT_NAME = "Error: there's a repeat in ingredient name "
             + "for the add command input";
     public static final String NULL_STRING_IN_REPEAT_ARGUMENT = "Null string detected in isRepeatedArgument function";
+    public static final String INVALID_SALES_DATA = "orders.txt: Invalid format, this order will be removed -> ";
+    public static final String INVALID_ORDER_DATA = "orders.txt: Dish is not in current menu, "
+            + "this order will be removed -> ";
+    public static final String INVALID_ORDER_STATUS = "orders.txt: Invalid status, this order will be removed -> ";
+    public static final String INACCURATE_ORDER_COST_DATA = "orders.txt: The total order cost of this order -> \"%s\" "
+            + "is inaccurate and will hence be updated from %.2f to %.2f instead.";
+    public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
+            + HelpCommand.MESSAGE_USAGE;
 }

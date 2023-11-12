@@ -63,7 +63,7 @@ public class OrderList {
 
             ui.showSalesAll(aggregatedOrder.getDishName(),
                     aggregatedOrder.getQuantity(),
-                    dollarValue.format(aggregatedOrder.calculateTotalOrderCost()));
+                    dollarValue.format(aggregatedOrder.getTotalOrderCost()));
         }
 
         ui.showSalesBottom();
@@ -80,10 +80,10 @@ public class OrderList {
         logger.info("Aggregating order...");
         if (order.getIsComplete()) {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
-            aggregatedOrders.get(index).setQuantity(aggregatedOrders.get(index).getQuantity()
-                    + order.getQuantity());
-            aggregatedOrders.get(index).setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost()
-                    + order.getTotalOrderCost());
+            aggregatedOrders.get(index)
+                    .setQuantity(aggregatedOrders.get(index).getQuantity() + order.getQuantity());
+            aggregatedOrders.get(index)
+                    .setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost() + order.getTotalOrderCost());
         }
     }
 

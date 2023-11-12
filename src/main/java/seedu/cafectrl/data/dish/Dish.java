@@ -12,12 +12,12 @@ public class Dish {
     public Dish(String name, ArrayList<Ingredient> ingredients, float price) {
         this.name = name;
         this.ingredients = ingredients;
-        this.price = price;
+        this.price = Math.abs(price);
     }
     public Dish(String name, float price) {
         this.name = name;
-        this.ingredients = null;
-        this.price = price;
+        this.ingredients = new ArrayList<>();
+        this.price = Math.abs(price);
     }
 
     public String getName() {
@@ -36,7 +36,7 @@ public class Dish {
     }
 
     public void setPrice(float newPrice) {
-        this.price = newPrice;
+        this.price = Math.abs(newPrice);
     }
 
     @Override
