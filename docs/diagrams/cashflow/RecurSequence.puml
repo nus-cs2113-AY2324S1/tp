@@ -24,7 +24,17 @@ end
 end
 loop for each cashflow in tempCashflowList
     LoadData -> CashflowList: load(cashflow)
-    LoadData -> Ui: printAddedCashflow(cashflow)
+    activate CashflowList
+    return
+    LoadData -> Ui: printAddedCashflowWithoutBalance(cashflow)
+    activate Ui
+    return
+end
+
+opt tempCashflowList is not empty
+    LoadData -> Ui: printBalance()
+    activate Ui
+    return
 end
 return
 hide footbox
