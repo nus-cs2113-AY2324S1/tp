@@ -38,10 +38,7 @@ public class Storage {
     //@@author Cazh1
 
     private boolean isFileEmpty(ArrayList<String> encodedStringArrayList) {
-        if (encodedStringArrayList.isEmpty()) {
-            return true;
-        }
-        return false;
+        return encodedStringArrayList.isEmpty();
     }
 
     /**
