@@ -214,4 +214,24 @@ public class AddRecipeCommandTest {
         });
     }
 
+
+    @Test
+    public void addRecipe_stepBlankSpaces_exceptionThrown() {
+        String userInput = "r/toast s/   i/bread,2,kg";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addValidRecipe();
+        });
+    }
+
+    @Test
+    public void addRecipe_ingredientBlankSpaces_exceptionThrown() {
+        String userInput = "r/toast s/step1   i/   ";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addValidRecipe();
+        });
+    }
 }
