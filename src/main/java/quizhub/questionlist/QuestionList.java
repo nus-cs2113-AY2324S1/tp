@@ -57,6 +57,8 @@ public class QuestionList {
      */
     public boolean addShortAnswerQn(String description, String answer, String module,
                                  Question.QnDifficulty qnDifficulty, boolean showMessage){
+        assert !allQns.contains(new ShortAnsQn(description, answer, module, qnDifficulty)) :
+                "Duplicate question found!";
 
         boolean isDuplicate = containsDuplicateQuestion(description, SHORTANSWER, module, showMessage);
         if (isDuplicate){
@@ -85,7 +87,9 @@ public class QuestionList {
     public boolean addMultipleChoiceQn(String description, String option1, String option2,
                                     String option3, String option4, int answer, String module,
                                     Question.QnDifficulty qnDifficulty, boolean showMessage) {
-
+        assert !allQns.contains(new MultipleChoiceQn(description, option1, option2, option3,
+                option4, answer, module, qnDifficulty)) :
+                "Duplicate question found!";
 
         boolean isDuplicate = containsDuplicateQuestion(description, MULTIPLECHOICE, module, showMessage);
         if (isDuplicate){
