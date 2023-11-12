@@ -1,7 +1,6 @@
-## Zhong Heng - Project Portfolio Page
+### Zhong Heng - Project Portfolio Page
 **Project: CafeCRTL**
 
------------------------------------------------------------------------------------------------
 ### **Overview**
 CaféCTRL is a software engineering project for CS2113. The user interacts with the application through CLI. It has around 6 kLoC, and it is done in a team of 5.
 
@@ -10,8 +9,6 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
 
 ### **Target User**
 Café proprietors who prefer typing on CLI than any other interaction method and are seeking for a software solution to optimize the management of their café's operations.
-
------------------------------------------------------------------------------------------------
 
 ### Summary of Contributions
 
@@ -85,8 +82,8 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 ### Other Contributions to Team-based Task
 1. Maintain issue tracker
 2. Bug testing for the application and providing detailed steps to recreate found bugs. <br>
-   ![Bugs Found](../images_PPP/zhongheng/Bug_reporting.png)
    ![Bugs Found](../images_PPP/zhongheng/Pantry_load_from_file_bug.png)
+   ![Bugs Found](../images_PPP/zhongheng/Bug_reporting.png)
    ![Bugs Found](../images_PPP/zhongheng/Pantry_restock_bug.png)
 3. Implemented bug fixes for PED bugs
    [#212](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/212),
@@ -98,7 +95,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
                                  [#296](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/296), 
                                  [#57](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/57),
                                  [#96](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/96)
-2. Assist teammates with their acclimation to the project's workflow, particularly using GitHub's branching workflow.
+2. Assist teammates with their acclimation to the project's workflow, particularly using GitHub's branching workflow. <br>
    ![Assist_workflow](../images_PPP/zhongheng/Assist_workflow.png)
 ### Contributions beyond the Project Team
 1. Reported a total of [16 program bugs](https://github.com/Cazh1/ped/issues) for another team during the module's PED.
