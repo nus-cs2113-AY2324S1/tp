@@ -25,6 +25,9 @@ public class WatchListCommand extends Command {
             "watchlist";
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
+    protected Ui ui = Ui.getInstance();
+    protected WatchList watchList = WatchList.getInstance();
+
     /**
      * Constructor for the command to fetch and display watchlist data
      *
@@ -45,9 +48,6 @@ public class WatchListCommand extends Command {
      */
     @Override
     public void execute() {
-        Ui ui = Ui.getInstance();
-        WatchList watchList = WatchList.getInstance();
-
         ui.printWatchListHeader();
         try {
             watchList.getLatestWatchlistInfo();

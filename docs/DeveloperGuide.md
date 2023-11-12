@@ -10,6 +10,9 @@
   * [Visualization Feature](#visualization-feature-)
     * [Class diagram](#class-diagram)
     * [Sequence diagram](#sequence-diagram-)
+  * [WatchList Feature](#watchlist-feature)
+    * [Class diagram](#watchlist-class-diagram-simplified)
+    * [Sequence diagram](#watchlist-sequence-diagram-simplified)
   * [Add Income/Expense Feature](#add-incomeexpense-feature)
     * [Class Diagram](#add-incomeexpense-class-diagram)
     * [Sequence Diagram](#add-incomeexpense-sequence-diagram)
@@ -21,13 +24,13 @@
     * [Delete budget](#delete-budget)
     * [Reset budget](#reset-budget)
     * [View budget](#view-budget)
-  * [Product Scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
-  * [User Stories](#user-stories)
-  * [Non-Functional Requirements](#non-functional-requirements)
-  * [Glossary](#glossary)
-  * [Instructions for manual testing](#instructions-for-manual-testing)
+* [Product Scope](#product-scope)
+  * [Target user profile](#target-user-profile)
+  * [Value proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -176,6 +179,72 @@ Categorizer (`sort cashflow entries` ref from overall sequence diagram above)
 Visualizer (`displaying chart` ref from overall sequence diagram above)
 
 ![](images/vis/visualizerSequence.png)
+
+### Watchlist Feature
+
+The watchlist in financial planner is similar to that of other common watchlist online.
+It contains a list of stocks that the user watches with an eye toward taking advantage of prices. It allows
+users to track real time data on the stocks that they are interested in.
+
+Simply type `watchlist` into the command line without any arguments and the watchlist will be displayed.
+
+Example Output:
+
+![](images/investments/watchlistOutput.png)
+
+Below are the various classes involved in the implementation of watchlist.
+
+#### WatchlistCommand
+
+1. The WatchlistCommand instance calls the `getLatestWatchListInfo()` method from the watchlist class to update the 
+stocks data in the watchlist.
+2. It then calls the `printStocksInfo()` method of the Ui class to print out the watchlist.
+3. Finally, it calls the static `saveWatchList()` method of the SaveData class to save the watchlist info to
+watchlist.json.
+
+#### Watchlist
+
+The watchlist class keeps a record of the stocks that the user is interested in using a hashmap as shown.
+```
+private HashMap<String, Stock> stocks;
+```
+
+1. When its method `getLatestWatchListInfo()` is invoked, it calls `getExpiredStocks` to get the list
+of stocks that has expired and should be renewed with latest info.
+2. With the list of expired stocks, it calls `fetchFMPStockPrices` which connects to Financial Modeling API to retrieve
+the latest stock prices and calls `extractWatchListInfoFromJSONArray` to update the stocks in the Hashmap 
+with the latest stock data.
+
+### Stock
+
+Stocks class objects are the values that make up the stocks hashmap in the watchlist. They cache the stock data obtained
+from the API as attributes of the class.
+
+```
+private String symbol;
+private String exchange;
+private String stockName;
+private String price;
+private String dayHigh;
+private String dayLow;
+private Date lastUpdated = null;
+private long lastFetched = 0;
+private int hashCode = 0;
+```
+
+Shown above is a complete list of attribute of the stock class.
+
+`lastFetched` and `hashCode` are attributes that are not related to the stock financial data.
+`lastFetched` is used for caching validity checking and `hashCode` is used to tell whether saved values on disk 
+are corrupted.
+
+#### Watchlist Class Diagram (Simplified)
+
+![](images/investments/watchlistClassDiagram.png)
+
+#### Watchlist sequence Diagram (Simplified)
+
+![](images/investments/watchlistSequence.png)
 
 ### Add Income/Expense Feature
 
@@ -422,4 +491,3 @@ shows you the welcome screen for the financial planner app
    1. Type `exit` into the terminal. 
    2. Expected: the financial planner will exit with a goodbye message.
 Under the data newly created data directory, a watchlist.json and a data.txt file will be created
-
