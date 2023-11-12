@@ -141,6 +141,15 @@ public class Ui {
         showMessage("Balance: " + formatBalance(Cashflow.getBalance()));
     }
 
+    public void printAddedCashflowWithoutBalance(Cashflow entry) {
+        showMessage("You have added an " + entry);
+        showMessage("to the Financial Planner.");
+    }
+
+    public void printBalance() {
+        showMessage("Balance: " + formatBalance(Cashflow.getBalance()));
+    }
+
     public void printDeletedCashflow(Cashflow entry) {
         showMessage("You have removed an " + entry);
         showMessage("from the Financial Planner.");
