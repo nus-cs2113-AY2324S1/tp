@@ -56,8 +56,9 @@ public abstract class ReviewMode {
             printFlashcardFrontTextPrompt(flashcardToReview);
 
             String input = scanner.nextLine();
-            boolean shouldTerminate =
-                    input.strip().equals("quit") || input.strip().equals("q");
+            input = input.toLowerCase();
+            boolean shouldTerminate = input.strip().equals("quit")
+                    || input.strip().equals("q");
             if (shouldTerminate) {
                 break;
             }
@@ -96,11 +97,12 @@ public abstract class ReviewMode {
                 + flashcardToReview.getFrontText());
         System.out.println();
 
-        System.out.println("    [Think of the answer (the back text) in " +
-                "your head]");
-        System.out.println("    [Press <ENTER> when you are ready to " +
-                "compare it, or enter 'q'/'quit' to end this " +
-                "review session]");
+        System.out.println("    Think of the answer (the back text) in " +
+                "your head.");
+        System.out.println("    Press ENTER when you are ready to compare " +
+                "it,");
+        System.out.println("    or enter q or quit to end this review " +
+                "session.");
     }
 
     /**
@@ -122,8 +124,9 @@ public abstract class ReviewMode {
 
         System.out.println("    How hard was it to remember the back page of "
                 + "this flashcard?");
-        System.out.println("    Press <E> if it was easy, <M> if it was "
-                + "moderately challenging or <H> if it was quite hard.");
+        System.out.println("    Input E if it was easy, M if it was "
+                + "moderately challenging ");
+        System.out.println("    or H if it was quite hard.");
 
         final ArrayList<String> choices = new ArrayList<>(Arrays.asList(
                 "e", "m", "h"));
