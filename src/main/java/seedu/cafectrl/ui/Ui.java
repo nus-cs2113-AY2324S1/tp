@@ -9,9 +9,10 @@ import seedu.cafectrl.command.ExitCommand;
 import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListMenuCommand;
+import seedu.cafectrl.command.ListSaleByDayCommand;
+import seedu.cafectrl.command.ListTotalSalesCommand;
 import seedu.cafectrl.command.NextDayCommand;
 import seedu.cafectrl.command.PreviousDayCommand;
-import seedu.cafectrl.command.ListSaleByDayCommand;
 import seedu.cafectrl.command.ViewTotalStockCommand;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
@@ -139,25 +140,39 @@ public class Ui {
 
     public void showHelp() {
         showToUserWithSpaceBetweenLines(Messages.LIST_OF_COMMANDS,
-                Messages.INSTRUCTION_ON_COMMAND_FORMAT,
-                AddDishCommand.MESSAGE_USAGE,
-                AddOrderCommand.MESSAGE_USAGE,
-                BuyIngredientCommand.MESSAGE_USAGE,
-                DeleteDishCommand.MESSAGE_USAGE,
-                EditPriceCommand.MESSAGE_USAGE,
-                ExitCommand.MESSAGE_USAGE,
-                HelpCommand.MESSAGE_USAGE,
-                ListIngredientCommand.MESSAGE_USAGE,
-                ListMenuCommand.MESSAGE_USAGE,
-                NextDayCommand.MESSAGE_USAGE,
-                PreviousDayCommand.MESSAGE_USAGE,
-                ViewTotalStockCommand.MESSAGE_USAGE,
-                ListSaleByDayCommand.MESSAGE_USAGE);
+                Messages.INSTRUCTION_ON_COMMAND_FORMAT);
+
+        showToUser(Messages.LINE_STRING);
+        ArrayList<String> usagesTexts = new ArrayList<>();
+
+        usagesTexts.add(ExitCommand.MESSAGE_USAGE);
+        usagesTexts.add(HelpCommand.MESSAGE_USAGE);
+        usagesTexts.add(AddDishCommand.MESSAGE_USAGE);
+        usagesTexts.add(DeleteDishCommand.MESSAGE_USAGE);
+        usagesTexts.add(EditPriceCommand.MESSAGE_USAGE);
+        usagesTexts.add(ListMenuCommand.MESSAGE_USAGE);
+        usagesTexts.add(ListIngredientCommand.MESSAGE_USAGE);
+        usagesTexts.add(BuyIngredientCommand.MESSAGE_USAGE);
+        usagesTexts.add(ViewTotalStockCommand.MESSAGE_USAGE);
+        usagesTexts.add(AddOrderCommand.MESSAGE_USAGE);
+        usagesTexts.add(ListTotalSalesCommand.MESSAGE_USAGE);
+        usagesTexts.add(ListSaleByDayCommand.MESSAGE_USAGE);
+        usagesTexts.add(NextDayCommand.MESSAGE_USAGE);
+        usagesTexts.add(PreviousDayCommand.MESSAGE_USAGE);
+
+        showToUserWithSpaceBetweenLines(usagesTexts);
     }
 
     public void showToUserWithSpaceBetweenLines(String... message) {
         for (String m: message) {
             System.out.println(m + "\n");
+        }
+    }
+
+    public void showToUserWithSpaceBetweenLines(ArrayList<String> message) {
+        for (String m: message) {
+            System.out.println(m);
+            System.out.println(Messages.LINE_STRING);
         }
     }
 
@@ -205,7 +220,7 @@ public class Ui {
     }
 
     public void showIngredientTop() {
-        showToUser(Messages.MENU_END_CAP, Messages.VIEW_STOCK_MESSAGE2,
+        showToUser(Messages.MENU_END_CAP, Messages.VIEW_STOCK_MESSAGE,
                 Messages.MENU_CORNER, Messages.VIEW_STOCK_TITLE_MESSAGE, Messages.MENU_CORNER);
     }
 
@@ -242,15 +257,9 @@ public class Ui {
         System.out.format(leftAlignFormat, front, back);
     }
 
-    public void showSalesDivider() {
-        showToUser(Messages.SHOW_SALES_DIVIDER);
-    }
-
     public void showChefMessage() {
         showToUser(Messages.CHEF_MESSAGE);
     }
-
-
 
     /**
      * Shows the total cost in the order list, formatted in the proper format

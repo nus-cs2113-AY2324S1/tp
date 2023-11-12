@@ -106,6 +106,7 @@ public class Encoder {
             encodedIngredient.append(ingredient.getUnit());
             encodedIngredient.append(System.lineSeparator());
             pantryStockInString.add(encodedIngredient.toString());
+            logger.info("Encoded ingredient: " + ingredient.getName());
         }
         ArrayList<String> pantryStockInStringHashed = hashEncoding(pantryStockInString);
         return pantryStockInStringHashed;

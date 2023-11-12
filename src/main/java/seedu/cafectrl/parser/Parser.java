@@ -98,7 +98,7 @@ public class Parser implements ParserUtil {
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
 
         if (!matcher.matches()) {
-            logger.warning("Unmatching regex!");
+            logger.warning("Unmatched regex!");
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
 
@@ -129,7 +129,7 @@ public class Parser implements ParserUtil {
             return prepareBuyIngredient(arguments, ui, pantry, menu);
 
         case HelpCommand.COMMAND_WORD:
-            return prepareHelpCommand(ui);
+            return prepareHelpCommand(ui, arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(ui, pantry);
@@ -150,6 +150,7 @@ public class Parser implements ParserUtil {
             return prepareShowSalesByDay(arguments, ui, sales, menu);
 
         default:
+            logger.warning(ErrorMessages.UNKNOWN_COMMAND_MESSAGE);
             return new IncorrectCommand(ErrorMessages.UNKNOWN_COMMAND_MESSAGE, ui);
         }
     }
@@ -180,6 +181,7 @@ public class Parser implements ParserUtil {
 
         // Checks whether the overall pattern of edit price arguments is correct
         if (!matcher.find()) {
+            logger.log(Level.WARNING, "Unmatched regex!");
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_EDIT_PRICE, ui);
         }
 
@@ -192,7 +194,8 @@ public class Parser implements ParserUtil {
             String dishIndexText = matcher.group(dishIndexGroup).trim();
 
             // Check whether the index is empty
-            if (dishIndexText.equals("")) {
+            if (dishIndexText.isEmpty()) {
+                logger.warning("Empty dish index!");
                 return new IncorrectCommand(ErrorMessages.MISSING_DISH_IN_EDIT_PRICE, ui);
             }
 
@@ -200,15 +203,18 @@ public class Parser implements ParserUtil {
 
             // Check whether the dish index is valid
             if (!menu.isValidDishIndex(dishIndex)) {
+                logger.warning("Invalid dish index!");
                 return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
             }
         } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "Invalid dish index type!", e);
             return new IncorrectCommand(ErrorMessages.WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE, ui);
         }
 
         try {
             newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
         } catch (ParserException e) {
+            logger.log(Level.WARNING, "Invalid price!", e);
             return new IncorrectCommand(e.getMessage(), ui);
         }
 
@@ -230,7 +236,7 @@ public class Parser implements ParserUtil {
         try {
             // Checks whether the overall pattern of add arguments is correct
             if (!matcher.matches()) {
-                logger.log(Level.WARNING, "Unmatching regex!");
+                logger.log(Level.WARNING, "Unmatched regex!");
                 return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
                         + AddDishCommand.MESSAGE_USAGE, ui);
             }
@@ -575,8 +581,12 @@ public class Parser implements ParserUtil {
     }
 
     //@@author ziyi105
-    private static Command prepareHelpCommand(Ui ui) {
-        return new HelpCommand(ui);
+    private static Command prepareHelpCommand(Ui ui, String arguments) {
+        if (arguments.isEmpty()) {
+            return new HelpCommand(ui);
+        } else {
+            return new IncorrectCommand(ErrorMessages.WRONG_HELP_FORMAT, ui);
+        }
     }
 
     //@@author Cazh1

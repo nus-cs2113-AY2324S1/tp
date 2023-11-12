@@ -31,7 +31,7 @@ public class Sales {
     public Sales(OrderList orderList) {
         this.orderLists = new ArrayList<>();
         orderLists.add(orderList);
-        this.daysAccounted = 0;
+        this.daysAccounted = orderLists.size() - 1;
     }
 
     public void addOrderList(OrderList orderList) {
