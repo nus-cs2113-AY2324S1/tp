@@ -168,13 +168,16 @@ public class Decoder {
         boolean salesOrderTextTamperDetectionMessagePrinted = false;
         ArrayList<OrderList> orderLists = new ArrayList<>();
 
-        if(textLines.isEmpty()) {
+        if (textLines.isEmpty()) {
             return new Sales();
         }
 
         //for each 'order' in text file
         for (String line : textLines) {
             logger.info("Line to decode: " + line);
+            if (line.isEmpty()) {
+                continue;
+            }
             decodeSalesData(line, orderLists, menu);
         }
         return new Sales(orderLists);

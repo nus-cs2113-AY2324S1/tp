@@ -73,8 +73,10 @@ public class Pantry {
         Ingredient ingredient = pantryStock.get(ingredientIndex);
         if (!unit.equalsIgnoreCase(ingredient.getUnit())) {
             logger.warning("Unit does not match previous unit");
-            throw new RuntimeException(ErrorMessages.UNIT_NOT_MATCHING
-                + "\nUnit used previously: " + ingredient.getUnit());
+            throw new RuntimeException(ingredient.getName()
+                + ErrorMessages.UNIT_NOT_MATCHING
+                + ingredient.getUnit()
+                + ErrorMessages.IGNORE_REMAINING_INGREDIENTS);
         }
         qty += ingredient.getQty(); //adds new qty to current qty
         ingredient.setQty(qty);

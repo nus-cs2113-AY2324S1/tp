@@ -5,6 +5,7 @@ import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -22,10 +23,71 @@ public class Storage {
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected FileManager fileManager;
     protected Ui ui;
+    private boolean isHashingEnabled = true;
+    private boolean isMenuTampered = false;
+    private boolean isOrdersTampered = false;
+    private boolean isPantryStockTampered = false;
+    private boolean isTamperedMessagePrinted = false;
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
         this.ui = ui;
+    }
+
+    //@@author Cazh1
+    /**
+     * Boolean to detect if the text save file has been tampered with
+     *
+     * @param encodedStringArrayList The arraylist of string read from text save file
+     * @return true is the file's hash is not normal or does not match the newly generated hash, false otherwise
+     */
+    private boolean isFileCorrupted(ArrayList<String> encodedStringArrayList) {
+        //Hash string is stored as last in the ArrayList
+        int lastIndex = encodedStringArrayList.size() - 1;
+        String hashString = encodedStringArrayList.get(lastIndex);
+
+        //Checks if the saved Hash is abnormal
+        if (((!hashString.matches("^[0-9]+$")) && (!hashString.matches("^-[0-9]+$"))) ||
+                hashString.matches("^0{2,}$")) {
+            return true;
+        }
+
+        int fileHash = Integer.parseInt(hashString);
+        //Removes the saved Hash String for decoding
+        encodedStringArrayList.remove(lastIndex);
+
+        //Prepares String in same format as when encoding, generates Hash from the save file content
+        String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
+        int encodedMenuHash = encodedMenuAsString.hashCode();
+
+        //Checks if the generated Hash matches the saved Hash
+        if (encodedMenuHash != fileHash) {
+            return true;
+        }
+        return false;
+    }
+
+    public void detectTamper() {
+        if (!isMenuTampered && !isOrdersTampered && !isPantryStockTampered) {
+            return;
+        }
+        if (!isTamperedMessagePrinted) {
+            ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED);
+            isTamperedMessagePrinted = true;
+        }
+        if (isMenuTampered) {
+            ui.showToUser(Messages.SAVE_FILE_FORMAT_MENU);
+            isMenuTampered = false;
+        }
+        if (isPantryStockTampered) {
+            ui.showToUser(Messages.SAVE_FILE_FORMAT_PANTRY_STOCK);
+            isPantryStockTampered = false;
+        }
+        if (isOrdersTampered) {
+            ui.showToUser(Messages.SAVE_FILE_FORMAT_ORDERS);
+            isOrdersTampered = false;
+        }
+        ui.showToUser("");
     }
 
     //@@author ShaniceTang
@@ -38,7 +100,12 @@ public class Storage {
         logger.info("Loading menu...");
         try {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-            return Decoder.decodeMenuData(encodedMenu);
+            if (isFileCorrupted(encodedMenu) && isHashingEnabled) {
+                isMenuTampered = true;
+                logger.log(Level.INFO, "Tampered Menu file");
+                detectTamper();
+            }
+            return Decoder. decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
             logger.log(Level.WARNING, "menu.txt not found!\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
@@ -65,6 +132,11 @@ public class Storage {
     public Pantry loadPantryStock() {
         try {
             ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
+            if (isFileCorrupted(encodedPantryStock) && isHashingEnabled) {
+                isPantryStockTampered = true;
+                logger.log(Level.INFO, "Tampered Pantry Stock file");
+                detectTamper();
+            }
             return Decoder.decodePantryStockData(encodedPantryStock);
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.PANTRY_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
@@ -91,6 +163,11 @@ public class Storage {
         logger.info("Loading orders...");
         try {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
+            if (isFileCorrupted(encodedOrderList) && isHashingEnabled) {
+                isOrdersTampered = true;
+                logger.log(Level.INFO, "Tampered Order file");
+                detectTamper();
+            }
             return Decoder.decodeSales(encodedOrderList, menu);
         } catch (FileNotFoundException e) {
             logger.log(Level.WARNING, "orders.txt not found!\n" + e.getMessage(), e);

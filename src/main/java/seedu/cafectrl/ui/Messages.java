@@ -83,13 +83,21 @@ public class Messages {
             + "You might have tempered with the file and added in a non existing dish.\n"
             + "Don't worry :D , we will continue operations without ";
 
-    public static final String SALES_LAST_DAY_TEXT_TAMPERED = "Well, well, well! "
-            + "It seems someone's been playing digital detective and tampered with the last line in the text file.\n"
-            + "Unfortunately, any empty order lists after the latest valid order have been wiped from my memory banks."
+    public static final String SAVE_FILE_TAMPER_DETECTED = "Well, well, well, "
+            + "looks like someone's been playing with the save files!\n"
+            + "Let's keep it classy and use the prescribed format below.\n";
+
+    public static final String SAVE_FILE_FORMAT_MENU = "Format for Menu.txt: \n"
+            + "{Dish Name} | {Dish Price} | {Ingredient Name} {Ingredient Qty} {Ingredient Unit} |";
+    public static final String SAVE_FILE_FORMAT_ORDERS = "Format for Orders.txt: \n"
+            + "{Order Day} | {Dish Name} | {Dish Order Qty} | {Total Order Cost} | {Order Complete Status}";
+    public static final String SAVE_FILE_FORMAT_PANTRY_STOCK = "Format for Pantry_stock.txt: \n"
+            + "{Ingredient Name} | {Ingredient Qty} | {Ingredient Unit}";
+    public static final String SALES_LAST_DAY_TEXT_TAMPERED = "Unfortunately, any empty order lists after "
+            + "the latest valid order have been wiped from my memory banks."
             + " Poof!" ;
 
-    public static final String SALES_ORDER_TEXT_TAMPERED = "Well, well, well! "
-            + "It seems someone's been playing digital detective and tampered with the orders in the text file.\n"
-            + "Unfortunately, any such orders have been wiped from my memory banks. Poof!" ;
+    public static final String SALES_ORDER_TEXT_TAMPERED = "Unfortunately, any orders not following the format "
+            + "and invalid have been wiped from my memory banks. Poof!" ;
 
 }

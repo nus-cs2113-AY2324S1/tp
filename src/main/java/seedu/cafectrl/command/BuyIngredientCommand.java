@@ -54,7 +54,7 @@ public class BuyIngredientCommand extends Command {
             addIngredient();
             ui.printBuyIngredientHeader();
             ui.showToUser(ingredientString.strip());
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             logger.log(Level.WARNING, "BuyIngredientCommand unsuccessful: " + e.getMessage(), e);
             ui.showToUser(e.getMessage());
         }
