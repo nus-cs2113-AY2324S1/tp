@@ -34,7 +34,7 @@ public class ErrorMessages {
             + "for list ingredients command.";
     public static final String MISSING_ARGUMENT_FOR_DELETE = "Error: Missing arguments "
             + "for delete command.";
-    public static final String MISSING_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Missing arguments "
+    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
             + "for buy ingredient command.";
     public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Something is wrong with "
             + "the dish index! Could you make sure that is it of type int \n"
@@ -47,8 +47,6 @@ public class ErrorMessages {
             + "Type 'help' to view the accepted list of commands";
     public static final String INVALID_DISH_INDEX = "Do we even have this dish? "
             + "Double check the index of the dish you wanna modify!";
-    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
-            + "for buy ingredient command.";
     public static final String INVALID_ADD_ORDER_FORMAT_MESSAGE = "Error: Incorrect format "
             + "for the add order command.";
     public static final String DATA_FOLDER_NOT_FOUND_MESSAGE = "Data Folder was not found!\nIt's ok... "
@@ -57,8 +55,11 @@ public class ErrorMessages {
             + "it hasn't even made it to our menu yet!";
     public static final String ERROR_IN_PANTRY_STOCK_DATA = "Error in pantry stock data file! "
             + "Skipping this particular ingredient!";
-    public static final String UNIT_NOT_MATCHING = "Sorry, you have used a "
-            + "different unit for this ingredient!";
+    public static final String UNIT_NOT_MATCHING = ": Sorry, you have used a "
+            + "different unit for this ingredient!"
+            + "\nUnit used previously: ";
+    public static final String IGNORE_REMAINING_INGREDIENTS = "\nRemaining ingredients after this not added";
+    public static final String RETYPE_COMMAND_MESSAGE = "\nPlease re-enter command with appropriate units.";
     public static final String MENU_FILE_NOT_FOUND_MESSAGE = "Menu data was not found!\n"
             + "No worries, new menu has been created";
     public static final String PANTRY_FILE_NOT_FOUND_MESSAGE = "Pantry stock data was not found!\n"

@@ -166,7 +166,7 @@ public class Decoder {
         logger.info("Decoding orders.txt to Sales...");
         boolean salesOrderTextTamperDetectionMessagePrinted = false;
         ArrayList<OrderList> orderLists = new ArrayList<>();
-        if(textLines.isEmpty()) {
+        if (textLines.isEmpty()) {
             return new Sales();
         }
         //for each 'order' in text file
