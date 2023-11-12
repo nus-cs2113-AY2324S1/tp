@@ -12,7 +12,8 @@ public class GetStepsSuggestion extends Command{
     private static final String DESCRIPTION =
             String.format("`%s` checks if you are meeting your daily calorie goals through " +
                     "the number of steps walked.", COMMAND_WORD);
-    private static final String USAGE = String.format("Type `%s` to check if you have met your daily calorie goals through the steps walked.\n" +
+    private static final String USAGE = String.format("Type `%s` to check if you have met " +
+                    "your daily calorie goals through the steps walked.\n" +
                     "Type `%s <DATE>` to check.\n" +
                     "You should type <DATE> in format of `yyyy-MM-dd`.",
             COMMAND_WORD, COMMAND_WORD
