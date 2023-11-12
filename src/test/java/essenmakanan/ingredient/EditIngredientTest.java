@@ -20,7 +20,7 @@ public class EditIngredientTest {
     public void editIngredientName_validInput_editSuccess() {
 
         ingredients.addIngredient(ingredientToEdit);
-        String[] editDetails = {"edit", "n/breads"};
+        String[] editDetails = {"n/breads"};
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
@@ -35,7 +35,7 @@ public class EditIngredientTest {
     public void editIngredientQuantity_validInput_editSuccess() {
 
         ingredients.addIngredient(ingredientToEdit);
-        String[] editDetails = {"edit", "q/3"};
+        String[] editDetails = {"q/3"};
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
@@ -50,7 +50,7 @@ public class EditIngredientTest {
     public void editIngredientUnit_validInput_editSuccess() {
 
         ingredients.addIngredient(ingredientToEdit);
-        String[] editDetails = {"edit", "u/g"};
+        String[] editDetails = {"u/g"};
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
@@ -65,7 +65,7 @@ public class EditIngredientTest {
     public void editIngredientAll_validInput_editSuccess() {
 
         ingredients.addIngredient(ingredientToEdit);
-        String[] editDetails = {"edit", "n/breads", "q/3", "u/g"};
+        String[] editDetails = {"n/breads", "q/3", "u/g"};
 
         try {
             ingredients.editIngredient(ingredientToEdit, editDetails);
@@ -82,7 +82,7 @@ public class EditIngredientTest {
     public void editIngredientName_invalidInput_editError() {
 
         ingredients.addIngredient(ingredientToEdit);
-        String[] editDetails = {"edit", "/nbreads"};
+        String[] editDetails = {"/nbreads"};
 
         assertThrows(EssenFormatException.class, () -> {
             ingredients.editIngredient(ingredientToEdit, editDetails);
