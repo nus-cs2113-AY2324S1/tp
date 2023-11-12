@@ -13,7 +13,7 @@ import seedu.cafectrl.ui.Ui;
  */
 public class Sales {
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
-    private static final int DAY_DISPLAY_OFFSET = 1;
+    public static final int DAY_DISPLAY_OFFSET = 1;
     private static ArrayList<OrderList> orderLists;
     private int daysAccounted;
 

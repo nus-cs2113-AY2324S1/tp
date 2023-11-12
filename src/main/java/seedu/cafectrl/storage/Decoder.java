@@ -11,7 +11,6 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.ErrorMessages;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ public class Decoder {
     private static final String INGREDIENT_DIVIDER = " - ";
     private static final Ui ui = new Ui();
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+
     //@@author ShaniceTang
     /**
      * Decodes an ArrayList of string lines into a Menu object, reconstructing its content.
@@ -87,6 +87,7 @@ public class Decoder {
             throw new Exception();
         }
     }
+    //@@author
 
     //@@author ziyi105
     /**
@@ -166,44 +167,115 @@ public class Decoder {
         logger.info("Decoding orders.txt to Sales...");
         boolean salesOrderTextTamperDetectionMessagePrinted = false;
         ArrayList<OrderList> orderLists = new ArrayList<>();
+
         if(textLines.isEmpty()) {
             return new Sales();
         }
+
         //for each 'order' in text file
         for (String line : textLines) {
             logger.info("Line to decode: " + line);
-            try {
-                String[] orderData = line.split(DIVIDER);
-                int day = Integer.parseInt(orderData[0].trim()) - 1;
-                String dishName = orderData[1].trim();
-                if (dishName.equals(Encoder.NULL_ORDER_DAY)) {
-                    orderLists = fillOrderListSize(orderLists, day);
-                    continue;
-                }
-                int quantity = Integer.parseInt(orderData[2].trim());
-                float totalOrderCost = Float.parseFloat(orderData[3].trim());
-                boolean isComplete = "true".equals(orderData[4].trim());
-                Dish dish = menu.getDishFromName(dishName);
-                if (dish == null) {
-                    ui.showDecodedInvalidDish(dishName);
-                    continue;
-                }
-                Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, totalOrderCost, isComplete);
-                //increase size of orderLists if needed
-                //this can be used in the event that the text file's first order is not day 0
-                orderLists = fillOrderListSize(orderLists, day);
-                orderLists.get(day).addOrder(orderedDish);
-            } catch (IndexOutOfBoundsException e) {
-                ui.showToUser(Messages.SALES_LAST_DAY_TEXT_TAMPERED, System.lineSeparator());
-            } catch (NumberFormatException e) {
-                if (!salesOrderTextTamperDetectionMessagePrinted) {
-                    ui.showToUser(Messages.SALES_ORDER_TEXT_TAMPERED, System.lineSeparator());
-                    salesOrderTextTamperDetectionMessagePrinted = true;
-                }
-            }
+            decodeSalesData(line, orderLists, menu);
         }
         return new Sales(orderLists);
     }
+
+    /**
+     * Decodes the sales data from a single order line and adds it to the list of OrderList objects.
+     *
+     * @param orderLine   The order line in the format "day|dishName|quantity|totalOrderCost|isComplete".
+     * @param orderLists  The list of OrderList objects to which the decoded order will be added.
+     * @param menu        Menu instance to retrieve Dish objects based on dishName.
+     */
+    private static void decodeSalesData(String orderLine, ArrayList<OrderList> orderLists, Menu menu) {
+        try {
+            String[] orderData = orderLine.split(DIVIDER);
+            int day = Integer.parseInt(orderData[0].trim()) - Sales.DAY_DISPLAY_OFFSET;
+            String dishName = orderData[1].trim();
+
+            //@@author Cazh1
+            //keeps track of the number of days cafe has been operating for
+            if (dishName.equals(Encoder.NULL_ORDER_DAY)) {
+                fillOrderListSize(orderLists, day);
+                return;
+            }
+            //@@author
+
+            int quantity = Integer.parseInt(orderData[2].trim());
+            float decodedTotalOrderCost = Float.parseFloat(orderData[3].trim());
+            boolean isComplete = "true".equals(orderData[4].trim());
+
+            boolean isDataAccurate = isOrderDataAccurate(orderLine, menu, dishName, quantity, decodedTotalOrderCost);
+            if (!isDataAccurate) {
+                return;
+            }
+
+            //creates new order and adds to orderList for specific day
+            Order orderedDish = new Order(menu.getDishFromName(dishName), quantity, decodedTotalOrderCost, isComplete);
+            fillOrderListSize(orderLists, day);
+            orderLists.get(day).addOrder(orderedDish);
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
+            ui.showToUser(ErrorMessages.INVALID_SALES_DATA + orderLine);
+        }
+    }
+
+    /**
+     * Checks if the order data is accurate by checking if dish exists and
+     * if the decoded total order cost corresponds to the calculated order cost
+     *
+     * @param orderLine            The order line in the format "day|dishName|quantity|totalOrderCost|isComplete".
+     * @param menu                 Menu instance to retrieve Dish objects based on dishName.
+     * @param dishName             The name of the dish in the order.
+     * @param quantity             The quantity of the dish in the order.
+     * @param decodedTotalOrderCost The decoded total order cost from the order line.
+     * @return True if the order data is accurate, false otherwise.
+     */
+    private static boolean isOrderDataAccurate(String orderLine, Menu menu, String dishName,
+            int quantity, float decodedTotalOrderCost) {
+        Dish dish = menu.getDishFromName(dishName);
+        boolean isAccurateData = isDishValid(orderLine, dish) &&
+                isOrderCostAccurate(orderLine, dish, quantity, decodedTotalOrderCost);
+        return isAccurateData;
+    }
+
+    /**
+     * Checks if the Dish is valid (exists in menu) and shows an error message if it's not.
+     *
+     * @param orderLine The order line in the format "day|dishName|quantity|totalOrderCost|isComplete".
+     * @param dish      The Dish object to be validated.
+     * @return True if the Dish is valid, false otherwise.
+     */
+    private static boolean isDishValid(String orderLine, Dish dish) {
+        if (dish == null) {
+            ui.showToUser(ErrorMessages.INVALID_ORDER_DATA + orderLine);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the decoded total order cost matches the expected total order cost and shows an error message if not.
+     *
+     * @param orderLine            The order line in the format "day|dishName|quantity|totalOrderCost|isComplete".
+     * @param dish                 The Dish object in the order.
+     * @param quantity             The quantity of the dish in the order.
+     * @param decodedTotalOrderCost The decoded total order cost from the order line.
+     * @return True if the decoded total order cost matches the expected total order cost, false otherwise.
+     */
+    private static boolean isOrderCostAccurate(String orderLine, Dish dish,
+            int quantity, float decodedTotalOrderCost) {
+        float costOfDish = dish.getPrice();
+        float expectedTotalOrderCost = quantity * costOfDish;
+        if (decodedTotalOrderCost != expectedTotalOrderCost) {
+            String messageToUser = String.format(ErrorMessages.INACCURATE_ORDER_COST_DATA,
+                    orderLine, decodedTotalOrderCost, expectedTotalOrderCost );
+            ui.showToUser(messageToUser);
+            return false;
+        }
+        return true;
+    }
+
 
     //@@author Cazh1
     /**
@@ -213,11 +285,10 @@ public class Decoder {
      * @param day The day of the next order
      * @return orderLists after filling in the gaps
      */
-    private static ArrayList<OrderList> fillOrderListSize(ArrayList<OrderList> orderLists, int day) {
+    private static void fillOrderListSize(ArrayList<OrderList> orderLists, int day) {
         while (orderLists.size() <= day) {
             orderLists.add(new OrderList());
         }
-        return orderLists;
     }
 
 }
