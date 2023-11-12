@@ -194,5 +194,24 @@ public class AddRecipeCommandTest {
         });
     }
 
+    @Test
+    public void addRecipe_flagsTooClose_exceptionThrown() {
+        String userInput = "r/t/1 s/STEP1 s/STEP2 d/30h t/2 s/STEP3 i/bread,2,kg";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addValidRecipe();
+        });
+    }
+
+    @Test
+    public void addRecipe_titleBlankSpaces_exceptionThrown() {
+        String userInput = "r/     t/1 s/STEP1 s/STEP2 d/30h t/2 s/STEP3 i/bread,2,kg";
+        addRecipeCommand = new AddRecipeCommand(userInput, recipeList);
+
+        assertThrows(EssenFormatException.class, () -> {
+            addRecipeCommand.addValidRecipe();
+        });
+    }
 
 }

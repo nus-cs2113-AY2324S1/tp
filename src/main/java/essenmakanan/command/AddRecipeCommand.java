@@ -62,6 +62,11 @@ public class AddRecipeCommand extends Command {
             typeFlag = toAdd.substring(flagIndex, flagIndex+1);
             nextSlashIndex = toAdd.indexOf("/",slashIndex+1);
 
+            if ((flagIndex + 2 > nextSlashIndex - 2) && nextSlashIndex!=-1){
+                System.out.println("Please enter valid input! Make sure flags are spaced out. Examples on user guide.");
+                throw new EssenFormatException();
+            }
+
             if (nextSlashIndex != -1) {
                 // obtain content after each flag until the next flag
                 content = toAdd.substring(flagIndex + 2, nextSlashIndex-2);
@@ -72,7 +77,7 @@ public class AddRecipeCommand extends Command {
 
             switch (typeFlag) {
             case "r":
-                if (content.isEmpty()) {
+                if (content.isBlank()) {
                     System.out.println("Recipe title is empty! Please enter valid title after \"r/\"");
                     throw new EssenFormatException();
                 }
