@@ -97,7 +97,7 @@ public class Parser implements ParserUtil {
     public Command parseCommand(Menu menu, String userInput, Ui ui,
             Pantry pantry, Sales sales, CurrentDate currentDate) {
         logger.info("Received user input: " + userInput);
-        userInput = userInput.toLowerCase();
+
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
 
@@ -240,7 +240,6 @@ public class Parser implements ParserUtil {
             detectErrorPostDishNameParse(dishName, menu);
 
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true, menu);
-
             Dish dish = new Dish(dishName, ingredients, dishPrice);
 
             return new AddDishCommand(dish, menu, ui);
@@ -313,37 +312,42 @@ public class Parser implements ParserUtil {
 
         //Parsing each ingredient
         for (String inputIngredient: inputIngredientList) {
-            Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
-
-            String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
-            //ingredientQtyString contains the input text after the "qty/" argument
-            String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
-
-            //check the formatting of ingredient qty
-            final Pattern ingredientQtyFormatPattern = Pattern.compile(INGREDIENT_QTY_FORMAT_REGEX);
-            Matcher ingredientQtyMatcher = ingredientQtyFormatPattern.matcher(ingredientQtyString);
-            if (!ingredientQtyMatcher.matches()) {
-                throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY_FORMAT);
-            }
-
-            String ingredientUnit = ingredientQtyMatcher.group(INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL);
-            int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
-            detectErrorPostIngredientParse(isExcludeRepeatedIngredients, ingredientName, ingredientQty, ingredientUnit, ingredients);
-
-            Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
-            checkForMismatchUnit(menu, ingredient);
-            ingredients.add(ingredient);
+            parseIngredient(isExcludeRepeatedIngredients, menu, inputIngredient, ingredients);
         }
 
         return ingredients;
     }
 
+    private static void parseIngredient(boolean isExcludeRepeatedIngredients, Menu menu, String inputIngredient, ArrayList<Ingredient> ingredients) throws ParserException {
+        Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
+
+        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+        //ingredientQtyString contains the input text after the "qty/" argument
+        String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
+
+        //check the formatting of text after ingredient qty argument (qty/)
+        final Pattern ingredientQtyFormatPattern = Pattern.compile(INGREDIENT_QTY_FORMAT_REGEX);
+        Matcher ingredientQtyMatcher = ingredientQtyFormatPattern.matcher(ingredientQtyString);
+        if (!ingredientQtyMatcher.matches()) {
+            throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY_FORMAT);
+        }
+
+        String ingredientUnit = ingredientQtyMatcher.group(INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL);
+        int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
+
+        detectErrorPostIngredientParse(isExcludeRepeatedIngredients, ingredientName, ingredientQty, ingredientUnit, ingredients);
+
+        Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
+
+        checkForMismatchUnit(menu, ingredient);
+
+        ingredients.add(ingredient);
+    }
+
     private static Matcher detectErrorPreIngredientParse(String inputIngredient) throws ParserException {
         if (isRepeatedArgument(inputIngredient, INGREDIENT_ARGUMENT)) {
             throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_ARGUMENT);
-        }
-
-        if (isRepeatedArgument(inputIngredient, QTY_ARGUMENT)) {
+        } else if (isRepeatedArgument(inputIngredient, QTY_ARGUMENT)) {
             throw new ParserException(ErrorMessages.REPEATED_QTY_ARGUMENT);
         }
 
@@ -361,6 +365,7 @@ public class Parser implements ParserUtil {
             boolean isExcludeRepeatedIngredients, String ingredientName, int ingredientQty,
             String ingredientUnit, ArrayList<Ingredient> ingredients) throws ParserException {
 
+        //error case
         if (ingredientName.isEmpty()) {
             throw new ParserException(ErrorMessages.MISSING_INGREDIENT_NAME);
         } else if (isNameLengthInvalid(ingredientName)) {
