@@ -2,6 +2,7 @@ package essenmakanan.parser;
 
 import essenmakanan.exception.EssenEditShortcutException;
 import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenInvalidQuantityException;
 import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.shortcut.Shortcut;
@@ -9,10 +10,6 @@ import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.ui.Ui;
 
 public class ShortcutParser {
-
-    public static boolean checkForValidQuantity(double quantity) {
-        return ((int) quantity != 0 && Math.ceil(quantity) > 0) || quantity > 0;
-    }
 
     public static Shortcut parseShortcut(IngredientList ingredients, String input) throws EssenFormatException
             , EssenShortcutException, NumberFormatException {
@@ -31,7 +28,7 @@ public class ShortcutParser {
 
         double quantity = Double.parseDouble(shortcutDetails[1].strip());
 
-        if (!checkForValidQuantity(quantity)) {
+        if (!IngredientParser.checkForValidQuantity(quantity)) {
             throw new NumberFormatException();
         }
 
@@ -52,48 +49,59 @@ public class ShortcutParser {
 
 
     private static void editShortcutName(Shortcut shortcut, IngredientList ingredients, String editDetail
-            , boolean hasEditName) throws EssenShortcutException, EssenEditShortcutException {
+            , boolean hasEditName) {
         String newName = editDetail.substring(2).strip();
         String oldName = shortcut.getIngredientName();
 
-        if (!ingredients.exist(newName)) {
-            throw new EssenShortcutException();
-        }
+        try {
+            if (!ingredients.exist(newName)) {
+                throw new EssenShortcutException();
+            }
 
-        if (hasEditName) {
-            throw new EssenEditShortcutException("usage");
-        }
+            if (hasEditName) {
+                throw new EssenEditShortcutException("usage");
+            }
 
-        if (newName.equals(oldName)) {
-            throw new EssenEditShortcutException("same name");
-        }
+            if (newName.equals(oldName)) {
+                throw new EssenEditShortcutException("same name");
+            }
 
-        Ui.printEditShortcutName(shortcut.getIngredientName(), newName);
-        shortcut.setIngredientName(newName);
+            Ui.printEditShortcutName(shortcut.getIngredientName(), newName);
+            shortcut.setIngredientName(newName);
+        } catch (EssenShortcutException exception) {
+            exception.handleException();
+        } catch (EssenEditShortcutException exception) {
+            exception.handleException();
+        }
     }
 
-    private static void editShortcutQuantity(Shortcut shortcut, String editDetail, boolean hasEditQuantity)
-            throws EssenEditShortcutException, NumberFormatException {
+    private static void editShortcutQuantity(Shortcut shortcut, String editDetail, boolean hasEditQuantity) {
         double newQuantity = Double.parseDouble(editDetail.substring(2).strip());
 
-        if (hasEditQuantity) {
-            throw new EssenEditShortcutException("usage");
-        }
+        try {
+            if (hasEditQuantity) {
+                throw new EssenEditShortcutException("usage");
+            }
 
-        if (!checkForValidQuantity(newQuantity)) {
-            throw new NumberFormatException();
-        }
+            if (!IngredientParser.checkForValidQuantity(newQuantity)) {
+                throw new NumberFormatException();
+            }
 
-        if (newQuantity == shortcut.getQuantity()) {
-            throw new EssenEditShortcutException("same quantity");
-        }
+            if (newQuantity == shortcut.getQuantity()) {
+                throw new EssenEditShortcutException("same quantity");
+            }
 
-        Ui.printEditShortcutQuantity(shortcut.getQuantity(), newQuantity);
-        shortcut.setQuantity(newQuantity);
+            Ui.printEditShortcutQuantity(shortcut.getQuantity(), newQuantity);
+            shortcut.setQuantity(newQuantity);
+        } catch (NumberFormatException exception) {
+            EssenInvalidQuantityException.handleException();
+        } catch (EssenEditShortcutException exception) {
+            exception.handleException();
+        }
     }
 
     public static void editShortcut(Shortcut shortcut, IngredientList ingredients, String[] editDetails)
-            throws EssenFormatException, EssenShortcutException, EssenEditShortcutException, NumberFormatException {
+            throws EssenFormatException {
         boolean hasEditName = false;
         boolean hasEditQuantity = false;
 
