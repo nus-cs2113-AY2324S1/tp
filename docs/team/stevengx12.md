@@ -70,8 +70,7 @@ from all fields of study.
     - [UI](https://github.com/AY2324S1-CS2113-W12-1/tp/blob/master/docs/DeveloperGuide.md#ui-component)
 
   [#229](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/229)
-  * Modified `CommandEdit` component:
-    - [CommandEdit](https://github.com/AY2324S1-CS2113-W12-1/tp/blob/master/docs/DeveloperGuide.md#edit-command---edit-question--answer)
+  * Modified `CommandEdit` component: [CommandEdit](https://github.com/AY2324S1-CS2113-W12-1/tp/blob/master/docs/DeveloperGuide.md#edit-command---edit-question--answer)
 
 ### Team-Based Task Contributions:
   - Refactored code to general code enhancements
