@@ -621,9 +621,9 @@ stock entries that does not match the format specified above)
 
 **Adding stock**
 
-If you would like to add stock directly, do provide accurate (we do not check for accuracy of information due to 
-free nature of api) information for the symbol and stockName as shown below. If the format is not followed, the stock 
-might not be loaded to watchlist upon start up.
+If you would like to add stock directly using the file, do provide accurate (we do not check for accuracy of information 
+due to free nature of api) information for only the symbol and stockName as shown below. If the format is not followed, 
+the stock might not be loaded to watchlist upon start up.
 
 ![](images/investments/Exampleaddingstockjson.png)
 

@@ -1,5 +1,6 @@
 package seedu.financialplanner.investments;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -71,6 +72,16 @@ public class WatchList {
         }
         if(!key.equals(stockToCheck.getSymbol())) {
             isValid = false;
+        }
+        if (stockToCheck.getHashCode() == 0) {
+            if (!ObjectUtils.allNull(
+                    stockToCheck.getPrice(),
+                    stockToCheck.getDayHigh(),
+                    stockToCheck.getDayLow(),
+                    stockToCheck.getLastUpdated(),
+                    stockToCheck.getExchange()) || stockToCheck.getLastFetched() != 0) {
+                isValid = false;
+            }
         }
         if (!isValid) {
             Ui.getInstance().printInvalidStockLoaded(key);
