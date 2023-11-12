@@ -9,11 +9,17 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * The class that handles logging of the application.
+ */
 public class EssenLogger {
     private static final String LOG_PATH = "data/essenmakanan.log";
 
     private static Logger logger = Logger.getLogger("Storage");
 
+    /**
+     * Sets up the application with the selected configurations.
+     */
     public static void setup() {
         LogManager.getLogManager().reset();
         logger.setLevel(Level.FINE);
@@ -38,14 +44,31 @@ public class EssenLogger {
         }
     }
 
+    /**
+     * Logs out a log with level info.
+     *
+     * @param message The given message.
+     */
     public static void logInfo(String message) {
         logger.log(Level.INFO, message);
     }
 
+    /**
+     * Logs out a log with level warning.
+     *
+     * @param message The given message.
+     * @param exception The triggered exception that relates to the message.
+     */
     public static void logWarning(String message, Exception exception) {
         logger.log(Level.WARNING, message, exception);
     }
 
+    /**
+     * Logs out a log with level severe.
+     *
+     * @param message The given message.
+     * @param exception The triggered exception that relates to the message.
+     */
     public static void logSevere(String message, Exception exception) {
         logger.log(Level.SEVERE, message, exception);
     }
