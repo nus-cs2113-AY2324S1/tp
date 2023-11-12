@@ -1,6 +1,10 @@
 # Li Sizhuang - Project Portfolio Page
 
 ## Project: QuizHub
+QuizHUB is a local desktop app designed to help NUS students easily record examinable questions and generate quizzes
+from their very own question bank to test their understanding via a Command Line Interface (CLI). Easily launch-able
+on the go, QuizHUB is a versatile tool that aims to streamline and optimize the revision experience for NUS students
+from all fields of study.
 
 ## My Contributions
 [Link to RepoSense](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=w12&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=lisizhuang-0121&tabRepo=AY2324S1-CS2113-W12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
@@ -29,6 +33,9 @@ classes necessary for handling invalid commands [PR #16](https://github.com/AY23
   * Add testing for invalid command handling [PR #29](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/29/)
   * Fix test cases to pass CI checks [PR #89](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/89/)
   * Fix line separator issues in tests [PR #95](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/95/)
+
+<div style="page-break-after: always;"></div>
+
 * Regularly conduct integration tests with various test cases to find and fix bugs
   * Use equivalence partition, system testing technique and debugging to locate possible bugs
   * Ensure that the user guide complies with the current features
@@ -50,9 +57,11 @@ classes necessary for handling invalid commands [PR #16](https://github.com/AY23
   * Abstract displaying of questions to improve code reuse 
   [PR #201](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/201)
   * Improve code quality in question-list class [PR #203](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/203)
-* Conduct checks on JUnit tests
-  * Ensure JUnit test pass under different platforms
-  * Modify and update tests for compatibility
+
+### Design Guide Contributions
+* Formulated the design guide template
+* Formatted and added user stories
+* Added diagrams for overall execution of the program
 
 ### Community Contributions
 * Reported bugs and suggested fixes during the practical exam dry run
