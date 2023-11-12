@@ -83,7 +83,7 @@ add expense /cat <category> /type <type> /de <description> /date <date> /amt [cu
 Note:
 - Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
 - Should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
-- Users should not use "|" in the description as it is used as a delimiter in the storage file.
+- Users should not use `|` in the description as it is used as a delimiter in the storage file.
 - There are only 3 categories for expenses: `Food`, `Transport`, `Utilities`.
 - There are 3 types associated with `Food` category: `Breakfast`, `Lunch`, `Dinner`, else it will default to `OTHER`.
 - There are 4 types associated with `Transport` category: `Bus`, `Train`, `Taxi`, `Fuel`, else it will default to `OTHER`.
@@ -116,9 +116,9 @@ add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt
 add expense /cat transport /type train /de train to school /date 10/10/2023 /amt 10.00
 ```
 Expected output after successfully add income to the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)<br>
 Expected output after successfully add expense to the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)<br>
 
 ### List all entries: list
 Shows a full list of both the expenses and income created by the user.
@@ -152,7 +152,7 @@ Use case:
 - `<index>` should not be out of bounds.
 
 Expected output after successfully delete income from the list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)<br>
 
 
 ### Find an entry: find
@@ -160,10 +160,10 @@ Find an entry from the existing list of income/expenses.
 
 Format:
 ```
-find /t income /de [description] /date [date]
+find /t income [/de description] [/date date]
 ```
 ```
-find /t expense /cat [category] /de [description] /date [date]
+find /t expense [/cat category] [/de description] [/date date]
 ```
 
 Example of usage:
@@ -195,11 +195,11 @@ User can choose to clear both list as well.
 
 Format:
 ```agsl
-clear income
+clear incomes
 ```
 
 ```agsl
-clear expense
+clear expenses
 ```
 
 ```agsl
@@ -207,11 +207,11 @@ clear all
 ```
 
 Example of successfully clear income list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_income.png?raw=true)
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_income.png?raw=true)<br>
 Example of successfully clear expense list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_expense.png?raw=true)
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_expense.png?raw=true)<br>
 Example of successfully clear both income and expense list:
-![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_all.png?raw=true)
+![clear_all.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/clear_all.png?raw=true)<br>
 
 
 ### Check balance: balance
@@ -335,12 +335,13 @@ and change the line in txt file to the correct format.
 ## Command Summary
 
 
+
 | Action               | Format, Examples                                                                                                                                                                                            |
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help                 | `help`                                                                                                                                                                                                      |
+| Help                 | `help` `help add` `help list` `help list` `help delete` `help edit` `help balance` `help update exchange rate` `help clear` `help find` `help balance`                                                      |
 | Add Income           | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                                          |
 | Add Expense          | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`                    |
-| List                 | `list` <br> `list incomes` <br> `list expenses` <br> `list currencies` <br> `list exchange rates`                                                                                                             |
+| List                 | `list` <br> `list incomes` <br> `list expenses` <br> `list currencies` <br> `list exchange rates`                                                                                                           |
 | Delete               | `delete expense <index>` <br> `delete income <index>`                                                                                                                                                       |
 | Edit                 | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>`             |
 | Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                                          |
