@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan
+//@@author Brian030601
 
 package seedu.duke.calendar.command;
 
@@ -15,8 +15,9 @@ public class DeleteEventCommand extends DualEventCommand {
         syntaxString = "delete event EVENT_NAME";
     }
 
+    //@@author Brian030601
     /**
-     * The execute method is used to delete an specified event from the EventList.
+     * The execute method is used to delete a specified event from the EventList.
      * It takes two parameters (Scanner , EventList). The method takes in the event name,
      * then calls the deleteEvent function to search and delete the event.
      * If the event is not in the EventList, then "event doesn't exist" message will be displayed.

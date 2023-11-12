@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan & Cheezeblokz
+//@@author Brian030601
 
 package seedu.duke.calendar;
 
@@ -21,6 +21,7 @@ import java.util.Scanner;
 
 public class CalendarCommandParser {
 
+    //@@author Brian030601
     /**
      * The manageException method is used to throw exceptions if those exceptions have
      * been encountered. Each if case handles different exception errors. The method
@@ -57,6 +58,7 @@ public class CalendarCommandParser {
         }
     }
 
+    //@@author Brian030601
     /**
      * The parseInput method is used to catch any exceptions that could occur. The method
      * has one parameter (String input). The input is used for asserting that it is not null.

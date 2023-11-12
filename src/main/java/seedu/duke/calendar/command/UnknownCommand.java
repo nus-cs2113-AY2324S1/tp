@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan & Cheezeblokz
+//@@author Brian030601
 
 package seedu.duke.calendar.command;
 
@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class UnknownCommand extends EventCommand{
 
+    //@@author Brian030601
     /**
      * The execute method prints an unknown command message when an unknown command
      * is entered by the user. The two parameters (Scanner , EventList) are not

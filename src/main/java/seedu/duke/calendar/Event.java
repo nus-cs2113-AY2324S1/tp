@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan & Cheezeblokz
+//@@author Brian030601 & Cheezeblokz
 
 package seedu.duke.calendar;
 
@@ -31,6 +31,7 @@ public class Event {
         return from.toString();
     }
 
+    //@@author Brian030601
     // setFrom is used for setting the start time of an Event.
     public void setFrom(LocalDateTime from) {
         this.from = from;
@@ -41,6 +42,7 @@ public class Event {
         return to.toString();
     }
 
+    //@@author Brian030601
     // setFrom is used for setting the end time of an Event.
     public void setTo(LocalDateTime to) {
         this.to = to;
