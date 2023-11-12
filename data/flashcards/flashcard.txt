@@ -1,9 +1,14 @@
 3 | cs2113 | software enginnering | 3 
 5 | Hello | Duke | 4 
 7 | Hello | Duke | 4 
-9 | id | checker | 6 
+9 | id | checker | 5 
 10 | id increases | correctly | 5 
 11 | f | dfdf | 5 
 12 | dfdf |  | 5 
 13 | 1 | j | 5 
 14 | Hello | Duke | 5 
+15 | Hello | Duke | 5 
+16 | Hello | Duke | 5 
+17 | Hello | Duke | 5 
+18 | Hello | Duke | 5 
+19 | Hello | Duke | 5 

@@ -3,8 +3,8 @@
 ## Introduction
 
 TaskLinker is a CLI-tool for helping university students memorize flashcards 
-and track their flashcard and general academic progress in the courses they are
-taking.
+and track their flashcard progress as well as general academic progress in 
+the courses they are taking.
 
 ## Quick Start
 
@@ -17,6 +17,16 @@ taking.
 ### Flashcard-related features
 
 #### General explanation of flashcards
+
+Flashcards are two-sided cards that have a question on the front and its 
+answer on the back. They are used for revising information and helping with 
+memorization.
+
+As such, they are often used by students; e.g. medicine students often use 
+flashcards to memorize the anatomy of the human body.
+
+TaskLinker implements virtual flashcards that you can create, review and 
+delete on the go, without being bound to physical copies.
 
 The difficulty symbolizes how hard it is for you to remember this particular 
 flashcard. The higher the number, the harder.
@@ -81,7 +91,7 @@ of pressing ENTER to reveal the back page.
 
 Format: `create flashcard`
 
-#### Deleting a flashcard
+#### Deleting a flashcard: `delete flashcard`
 
 Starts the process of deleting a flashcard.
 
@@ -198,7 +208,7 @@ Example of usage:
 
 ## FAQ
 
-**Q**: Where can I find my flashcard and caldendar data?
+**Q**: Where can I find my flashcard and calendar data?
 
 **A**: You can find it in `data/flashcards` and `data/events` folder.
 
@@ -210,9 +220,16 @@ Every event and flashcard are automatically save after each command.
 
 ## Command Summary
 
-* List all flashcards: `list flashcards`
-* Create a new flashcard: `create flashcard`
-* Review your flashcards: `review flashcards`
+* [Listing all flashcards](#listing-all-flashcards-list-flashcards): `list 
+  flashcards`
+* [Creating a new flashcard](#creating-a-new-flashcard-create-flashcard): 
+  `create flashcard`
+* [Reviewing your flashcards](#reviewing-your-flashcards-review-flashcards): 
+  `review flashcards`
+* [Deleting a flashcard](#deleting-a-flashcard-delete-flashcard) `delete 
+  flashcard`
+* [Deleting all flashcards](#deleting-all-flashcards-delete-all-flashcards) 
+  `delete all flashcards`
 * Create an event: `add event`
 * Delete an event: `delete event`
 * Delete all events: `delete all events`
