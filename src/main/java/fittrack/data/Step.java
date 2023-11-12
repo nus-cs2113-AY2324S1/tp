@@ -12,9 +12,8 @@ public class Step {
     private static final String STEP_CG = "step";
     private static final String DATE_CG = "date";
     private static final Pattern STEP_PATTERN = Pattern.compile(
-            "(?<" + STEP_CG + ">\\S+)\\s+d/(?<" + DATE_CG + ">\\S+)"
+        "(?<" + STEP_CG + ">.+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
     );
-
     private final int steps;
     private final Date date;
 
@@ -24,7 +23,9 @@ public class Step {
         this.date = date;
     }
 
-    public static Step parseStep(String steps) throws ParseException {
+    public static Step parseStep(String s) throws ParseException {
+        assert s != null;
+        String steps = s.strip();
 
         final Matcher matcher = STEP_PATTERN.matcher(steps);
         if (!matcher.matches()) {
@@ -39,7 +40,12 @@ public class Step {
             if (step <= 0) {
                 throw new NumberFormatException("Steps must be a positive integer.");
             }
-            Date date = Date.parseDate(dateData);
+            Date date;
+            if (dateData == null) {
+                date = Date.today();
+            } else {
+                date = Date.parseDate(dateData);
+            }
             return new Step(step, date);
         } catch (java.lang.NumberFormatException e) {
             throw new NumberFormatException("Steps must be a positive integer.");

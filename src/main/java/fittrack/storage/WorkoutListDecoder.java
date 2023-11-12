@@ -1,5 +1,6 @@
 package fittrack.storage;
 
+import fittrack.Ui;
 import fittrack.WorkoutList;
 import fittrack.data.Calories;
 import fittrack.data.Date;
@@ -18,11 +19,12 @@ import java.util.regex.Pattern;
 // @@author J0shuaLeong
 public class WorkoutListDecoder {
     private static final Pattern WORKOUT_PATTERN = Pattern.compile(
-            "(?<name>\\S+)\\s*\\|\\s*(?<calories>\\S+)kcal\\s*\\|\\s*(?<date>\\S+)" // add \\d+\\.\\d+ if got decimal
+            "(?<name>\\S+)\\s*\\|\\s*(?<calories>\\S+)kcal\\s*\\|\\s*(?<date>\\S+)"
     );
     private static final StorageOperationException CONTENT_CORRUPTION_EXCEPTION = new StorageOperationException(
-            "File containing workouts has invalid format. Creating new workout list file."
+            "Creating new workout list file..."
     );
+    private static final String FILE_NAME = "workoutList.txt";
 
     /**
      * Decodes {@code encodedWorkoutList} into a {@code WorkoutList} containing the decoded data.
@@ -67,7 +69,12 @@ public class WorkoutListDecoder {
 
     public static void handleCorruptedFile(Path filePath) throws IOException {
         String newFileContent = "";
-        Files.write(filePath, newFileContent.getBytes());
+        Ui.printPromptForCreateNewFile(FILE_NAME);
+        if (Ui.createNewFile()) {
+            Files.write(filePath, newFileContent.getBytes());
+        } else {
+            throw new Ui.ForceExitException();
+        }
     }
 }
 // @@author

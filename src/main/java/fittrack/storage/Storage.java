@@ -25,13 +25,14 @@ import java.util.ArrayList;
 public class Storage {
 
     private static final String FILE_DIRECTORY = "data";
-    private static final String PROFILE_FILE_PATH = "./data/Profile.txt";
+    private static final String PROFILE_FILE_PATH = "./data/profile.txt";
     private static final String MEAL_LIST_FILE_PATH = "./data/mealList.txt";
     private static final String WORKOUT_LIST_FILE_PATH = "./data/workoutList.txt";
     private static final String STEP_LIST_FILE_PATH = "./data/stepList.txt";
+    private static final String FILE_TYPE = ".txt";
     private Ui ui = new Ui();
 
-    private File profileFile = new File(PROFILE_FILE_PATH);
+    private File profileFile;
     private File mealFile;
     private File workoutFile;
     private File stepFile;
@@ -46,7 +47,7 @@ public class Storage {
      * in a directory called data if none exist.
      */
     public Storage() {
-        //this.profileFile = new File(PROFILE_FILE_PATH);
+        this.profileFile = new File(PROFILE_FILE_PATH);
         this.mealFile = new File(MEAL_LIST_FILE_PATH);
         this.workoutFile = new File(WORKOUT_LIST_FILE_PATH);
         this.stepFile = new File(STEP_LIST_FILE_PATH);
@@ -99,7 +100,7 @@ public class Storage {
      * The file path is considered acceptable if it ends with '.txt'
      */
     private static boolean isValidPath(Path filePath) {
-        return filePath.toString().endsWith(".txt");
+        return filePath.toString().endsWith(FILE_TYPE);
     }
 
     /**
@@ -282,16 +283,6 @@ public class Storage {
             System.out.println(e.getMessage());
             return false; // Consider it non-empty if there's an exception
         }
-    }
-
-    public boolean createNewFile() {
-        String line = ui.scanNextLine().trim();
-        while (!line.equalsIgnoreCase("y") && !line.equalsIgnoreCase("n")) {
-            System.out.println("Unknown input. Please enter Y or N only.");
-            line = ui.scanNextLine().trim();
-        }
-
-        return line.equalsIgnoreCase("y");
     }
 
     /**

@@ -51,17 +51,13 @@ public class Ui {
     // @@author J0shuaLeong
     public String scanUserProfile() {
         System.out.println(
-                "Please enter your height (in cm), weight (in kg), " +
+                "\nPlease enter your height (in cm), weight (in kg), " +
                         "gender (M or F), and daily calorie limit (in kcal).\n" +
                         "Enter in format of `h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CALORIE_LIMIT>`."
         );
         return scanNextLine();
     }
     // @@author
-
-    public void printBlankLine() {
-        System.out.println();
-    }
 
     public void printLine() {
         System.out.println(LINE);
@@ -79,7 +75,6 @@ public class Ui {
 
     public void printCommandResult(CommandResult commandResult) {
         System.out.println(commandResult.getFeedback());
-        printBlankLine();
     }
 
     public void printWelcomeBackPrompt() {
@@ -88,7 +83,7 @@ public class Ui {
     }
 
     public void printPrompt() {
-        System.out.println("Welcome to FitTrack! How can I help you today?");
+        System.out.println("Hello and welcome! How can I help you today?");
         printLine();
     }
 
@@ -104,10 +99,6 @@ public class Ui {
         printLine();
     }
 
-    public void printOverwriteCorruptedFile() {
-        System.out.println("The existing data file is corrupted. Would you like to create a new one? (Y/N)");
-    }
-
     public void printStoragePathSettingFailure() {
         System.out.println("One of given storage paths is invalid. Proceeding with default paths.");
     }
@@ -121,7 +112,24 @@ public class Ui {
     }
 
     public void printForceExit() {
-        System.out.println("You forced to quit. Exiting the app...");
+        System.out.println("Please fix the corrupted file which can be found in" +
+                " data directory. Exiting the app...");
+    }
+
+    public static boolean createNewFile() {
+        Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine().trim();
+        while (!line.equalsIgnoreCase("y") && !line.equalsIgnoreCase("n")) {
+            System.out.println("Unknown input. Please enter Y or N only.");
+            line = scanner.nextLine().trim();
+        }
+
+        return line.equalsIgnoreCase("y");
+    }
+
+    public static void printPromptForCreateNewFile(String fileName) {
+        System.out.println(String.format(
+                "\nThe %s file is corrupted. Would you like to create a new one? (Y/N)", fileName));
     }
 
     public static class ForceExitException extends RuntimeException {

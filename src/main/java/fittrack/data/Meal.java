@@ -49,9 +49,9 @@ public class Meal {
 
     public static Meal parseMeal(String s) throws ParseException {
         assert s != null;
-        String workout = s.strip();
+        String meal = s.strip();
 
-        final Matcher matcher = MEAL_PATTERN.matcher(workout);
+        final Matcher matcher = MEAL_PATTERN.matcher(meal);
         if (!matcher.matches()) {
             throw new PatternMatchFailException();
         }

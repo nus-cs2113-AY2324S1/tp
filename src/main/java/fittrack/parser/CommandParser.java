@@ -45,14 +45,8 @@ public class CommandParser {
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
-    private static final String DATE_CG = "date";
-    private static final String STEP_CG = "step";
-
     private static final Pattern COMMAND_PATTERN = Pattern.compile(
             "(?<" + WORD_CG + ">\\S+)(?<" + ARGS_CG + ">.*)"
-    );
-    private static final Pattern STEP_PATTERN = Pattern.compile(
-            "(?<" + STEP_CG + ">\\S+)(\\s+d/(?<" + DATE_CG + ">\\S+))?"
     );
 
     public static Command parseCommand(String userCommandLine) {
