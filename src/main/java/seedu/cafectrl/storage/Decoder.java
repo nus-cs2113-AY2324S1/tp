@@ -202,16 +202,14 @@ public class Decoder {
                 fillOrderListSize(orderLists, day);
                 return;
             }
-            //@@author
 
             int quantity = Integer.parseInt(orderData[2].trim());
             float decodedDishPrice = Float.parseFloat(orderData[3].trim());
-            float decodedTotalOrderCost = Float.parseFloat(orderData[4].trim());
-            String completeStatus = orderData[5].trim();
-            Dish dish = menu.getDishFromName(dishName);
+            String completeStatus = orderData[4].trim();
+            float totalOrderCost = quantity * decodedDishPrice;
 
+            Dish dish = menu.getDishFromName(dishName);
             boolean isDataAccurate = isDishValid(orderLine, dish)
-                    && isOrderCostAccurate(orderLine, quantity, decodedDishPrice, decodedTotalOrderCost)
                     && isCompleteStatusAccurate(orderLine, completeStatus);
             if (!isDataAccurate) {
                 return;
@@ -220,7 +218,7 @@ public class Decoder {
             Dish dishToAdd = new Dish(dishName, decodedDishPrice);
             //creates new order and adds to orderList for specific day
             boolean isComplete = Boolean.parseBoolean(completeStatus.toLowerCase());
-            Order orderedDish = new Order(dishToAdd, quantity, decodedTotalOrderCost, isComplete);
+            Order orderedDish = new Order(dishToAdd, quantity, totalOrderCost, isComplete);
             fillOrderListSize(orderLists, day);
             orderLists.get(day).addOrder(orderedDish);
         } catch (Exception e) {
@@ -243,28 +241,6 @@ public class Decoder {
         }
         ui.showToUser(ErrorMessages.INVALID_ORDER_DATA + orderLine);
         return false;
-    }
-
-    /**
-     * Checks if the decoded total order cost matches the expected total order cost and shows an error message if not.
-     *
-     * @param orderLine            The order line in the format "day|dishName|quantity|totalOrderCost|isComplete".
-     * @param dish                 The Dish object in the order.
-     * @param quantity             The quantity of the dish in the order.
-     * @param decodedTotalOrderCost The decoded total order cost from the order line.
-     * @return True if the decoded total order cost matches the expected total order cost, false otherwise.
-     */
-    private static boolean isOrderCostAccurate(String orderLine, int quantity,
-            float decodedDishPrice, float decodedTotalOrderCost) {
-        float expectedTotalOrderCost = quantity * decodedDishPrice;
-        if (decodedTotalOrderCost == expectedTotalOrderCost) {
-            return true;
-        }
-        String messageToUser = String.format(ErrorMessages.INACCURATE_ORDER_COST_DATA,
-                orderLine, decodedTotalOrderCost, expectedTotalOrderCost );
-        ui.showToUser(messageToUser);
-        return false;
-
     }
 
     private static boolean isCompleteStatusAccurate(String orderLine, String completeStatus) {

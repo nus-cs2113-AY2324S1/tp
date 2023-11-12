@@ -136,7 +136,6 @@ public class Encoder {
                 orderString.append(order.getDishName() + DIVIDER);
                 orderString.append(order.getQuantity() + DIVIDER);
                 orderString.append(order.getOrderedDish().getPrice() + DIVIDER);
-                orderString.append(order.calculateTotalOrderCost() + DIVIDER);
                 orderString.append(order.getIsComplete());
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));

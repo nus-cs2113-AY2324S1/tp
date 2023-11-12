@@ -63,7 +63,7 @@ public class OrderList {
 
             ui.showSalesAll(aggregatedOrder.getDishName(),
                     aggregatedOrder.getQuantity(),
-                    dollarValue.format(calculateTotalCost(aggregatedOrders)));
+                    dollarValue.format(aggregatedOrder.getTotalOrderCost()));
         }
 
         ui.showSalesBottom();
