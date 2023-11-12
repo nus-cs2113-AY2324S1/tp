@@ -8,16 +8,17 @@
   * [Add cashflow](#add-cashflow)
     * [Add income](#add-income-add-income)
     * [Add expense](#add-expense-add-expense)
-  * [Delete cashflow](#delete-cashflow-delete)
-    * [Delete income](#delete-income-delete-income)
-    * [Delete expense](#delete-expense-delete-expense)
-    * [Delete recurring cashflow](#delete-recurring-delete-recurring)
-  * [Find cashflow](#find-cashflow-find)
   * [List](#list)
     * [List all](#list-all-list)
     * [List income](#list-income-list-income)
     * [List expense](#list-expense-list-expense)
     * [List recurring](#list-recurring-list-recurring)
+  * [Delete cashflow](#delete-cashflow-delete)
+    * [Delete income](#delete-income-delete-income)
+    * [Delete expense](#delete-expense-delete-expense)
+    * [Delete recurring cashflow](#delete-recurring-delete-recurring)
+  * [Find cashflow](#find-cashflow-find)
+  * [View Balance](#viewing-balance-balance)
   * [Budget](#budget)
     * [Setting budget](#setting-a-budget-budget-set)
     * [Updating budget](#updating-budget-budget-update)
@@ -25,7 +26,6 @@
     * [Deleting budget](#deleting-budget-budget-delete)
     * [Viewing budget](#viewing-budget-budget-view)
   * [Displaying Overview](#displaying-overview-overview)
-  * [View Balance](#viewing-balance-balance)
   * [WatchList](#viewing-watchlist-watchlist)
     * [Adding Stock](#adding-stock-to-watchlist-addstock)
     * [Deleting Stock](#deleting-budget-budget-delete)
@@ -39,7 +39,7 @@
     * [Marking Goal as Achieved](#mark-goal-as-achieved-markgoal)
   * [Visualization](#visualizing-your-cashflow-vis)
   * [Exiting the program](#exiting-the-program-exit)
-  * [Get command help and exmaple usage](#getting-command-help-and-example-usage-help)
+  * [Get command help and example usage](#getting-command-help-and-example-usage-help)
   * [Saving data](#saving-the-data)
   * [Loading data](#loading-the-data)
 * [FAQ](#faq)
@@ -76,6 +76,8 @@ you a one-stop interface to access a plethora of features to manage your finance
 - Maximum amount for each cashflow and total balance that the program can hold is 999,999,999,999.99
 - Minimum amount for each cashflow and total balance that the program can hold is -999,999,999,999.99
 - Total Balance, Income balance, and Expense balance are different entities where the latter two do not have the same limitations.
+
+**Important:** Data is automatically loaded on start up and saved when exited. You must exit the program using the `exit` command in order to save your changes.
 
 ### Add cashflow
 
@@ -145,6 +147,127 @@ to the Financial Planner.
 Balance: 4700.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+### List
+
+#### List all: `list`
+Lists all cashflows.
+
+Format: `list`
+
+Example of usage: `list`
+
+Example output:
+
+```
+You have 4 matching cashflows:
+1: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+2: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+3: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+4: Income
+   Type: Investments
+   Amount: 1000.00
+Balance: 1170.00
+```
+
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+#### List income: `list income`
+Lists all incomes.
+
+Format: `list income`
+
+Example of usage: `list income`
+
+Example output:
+```
+You have 3 matching cashflows:
+1: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+2: Income
+   Type: Investments
+   Amount: 1000.00
+3: Income
+   Type: Salary
+   Amount: 100.00
+Income Balance: 1600.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+#### List expense: `list expense`
+Lists all expenses.
+
+Format: `list expense`
+
+Example of usage: `list expense`
+
+Example output:
+```
+You have 3 matching cashflows:
+1: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+2: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+3: Expense
+   Type: Others
+   Amount: 0.23
+Expense Balance: 330.23
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+#### List recurring: `list recurring`
+Lists all recurring cashflows.
+
+Format: `list recurring`
+
+- This list will not include any cashflow that has already recurred.
+
+Example of usage: `list recurring`
+
+Example output:
+```
+You have 4 matching cashflows:
+1: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+2: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: work
+3: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+4: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+```
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 ### Delete cashflow: `delete`
@@ -285,126 +408,19 @@ Format: `find <keyword>`
 
 Example of usage: `find buy coffee`
 
-### List
+### Viewing balance: `balance`
 
-#### List all: `list`
-Lists all cashflows.
+View user's current balance.
 
-Format: `list`
+Format: `balance`
 
-Example of usage: `list`
-
-Example output:
-
-```
-You have 4 matching cashflows:
-1: Expense
-   Type: Dining
-   Amount: 30.00
-   Description: Genki Sushi
-2: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-3: Income
-   Type: Allowance
-   Amount: 500.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-4: Income
-   Type: Investments
-   Amount: 1000.00
-Balance: 1170.00
-```
-
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-- Note: Date displayed above is just an example. Your actual date may differ.
-
-#### List income: `list income`
-Lists all incomes.
-
-Format: `list income`
-
-Example of usage: `list income`
+Example of usage: `balance`
 
 Example output:
+
 ```
-You have 3 matching cashflows:
-1: Income
-   Type: Allowance
-   Amount: 500.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-2: Income
-   Type: Investments
-   Amount: 1000.00
-3: Income
-   Type: Salary
-   Amount: 100.00
-Income Balance: 1600.00
+Balance: 3790.00
 ```
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-- Note: Date displayed above is just an example. Your actual date may differ.
-
-#### List expense: `list expense`
-Lists all expenses.
-
-Format: `list expense`
-
-Example of usage: `list expense`
-
-Example output:
-```
-You have 3 matching cashflows:
-1: Expense
-   Type: Dining
-   Amount: 30.00
-   Description: Genki Sushi
-2: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-3: Expense
-   Type: Others
-   Amount: 0.23
-Expense Balance: 330.23
-```
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-- Note: Date displayed above is just an example. Your actual date may differ.
-
-#### List recurring: `list recurring`
-Lists all recurring cashflows.
-
-Format: `list recurring`
-
-- This list will not include any cashflow that has already recurred.
-
-Example of usage: `list recurring`
-
-Example output:
-```
-You have 4 matching cashflows:
-1: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-2: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: work
-3: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-4: Income
-   Type: Allowance
-   Amount: 500.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-```
-- Note: Date displayed above is just an example. Your actual date may differ.
 
 ### Budget
 
@@ -426,7 +442,8 @@ A monthly budget of 500.00 has been set.
 
 #### Updating budget: `budget update`
 
-Updates budget to a new value.
+Updates initial budget to a new value. Current(remaining) budget will be updated accordingly. If new initial budget is 
+lower(higher), the new current budget will be lower(higher) by the same amount.
 
 Format: `budget update /b BUDGET`
 
@@ -501,27 +518,16 @@ Example output:
 
 ```
 Here is an overview of your financials:
-Total balance: 3790.00
+Total balance: 5450.00
 Highest income: 5000.00    Category: Salary
-Highest expense: 500.00    Category: Others
-Remaining budget for the month: 1000.00
+Highest expense: 50.00    Category: Others
+Remaining budget for the month: 50.00
 
 Reminders:
 No reminders added yet.
-```
 
-### Viewing balance: `balance`
-
-View user's current balance.
-
-Format: `balance`
-
-Example of usage: `balance`
-
-Example output:
-
-```
-Balance: 3790.00
+Wishlist:
+No goals added yet.
 ```
 
 ### Viewing Watchlist: `watchlist`
@@ -835,7 +841,7 @@ Example of usage: `help budget`
 
 ### Saving the data
 
-Data is automatically saved upon exiting the program using the `exit` command. Closing the program without exiting 
+Data is automatically saved upon exiting the program using the `exit` command. Closing the program inappropriately 
 will not save the data.
 
 ### Loading the data
