@@ -276,6 +276,24 @@ The steps are essentially as listed below:
 
 * The List Total Sales command follows a comparable sequence, and as such, it will be excluded to avoid the repetition of multiple similar diagrams.
 
+### Pantry - isDishCooked()
+![isDishCooked_function](images/sequence/Pantry_IsDishCooked.png)
+
+
+*Figure 15: Data processing of isDishCooked() function used in add_order command*
+
+API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
+
+This section briefly explains how add_order checks if the order added is successfully cooked.
+The steps are essentially as listed below:
+- The sequence starts with the invocation of `isDishCooked()` to the `Pantry` class, with a list of ingredients needed for the order.
+- For each ingredient in the dish, `isDishCooked()` first obtains the quantity of the ingredients needed (`usedQty`) for the order as shown in step 4 and 5.
+- The function then attempts to get the Ingredient used from the current stock in the Pantry (`stockQty`) as shown in steps 11 and 12. 
+  - If `usedIngredientFromStock` is null, it means that the ingredient does not exist in the Pantry and the sequence ends with a `false` being returned.
+  - If `usedIngredientFromStock` exists but the quantity is insufficient, 
+  - If `usedIngredientFromStock` is found and the quantity is sufficient, the used quantity is deducted from the stock quantity in the Pantry and the sequence ends with a `true` being returned.
+- A `false` indicates that the order was unsuccessful while a `true` indicates that the order was successful.
+
 ### Delete Dish
 
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
