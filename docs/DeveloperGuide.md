@@ -491,3 +491,219 @@ shows you the welcome screen for the financial planner app
    1. Type `exit` into the terminal. 
    2. Expected: the financial planner will exit with a goodbye message.
 Under the data newly created data directory, a watchlist.json and a data.txt file will be created
+
+### Add cashflow
+
+To test the add cashflow feature, you can use the following command:
+```
+add income /a 5000 /t salary /r 30 /d work
+```
+You should see the following output:
+```
+You have added an Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+to the Financial Planner.
+Balance: 5000.00
+```
+You can also use the following command to test the optional arguments:
+```
+add expense /a 1000 /t necessities
+```
+You should see the following output:
+```
+You have added an Expense
+   Type: Necessities
+   Amount: 1000.00
+to the Financial Planner.
+Balance: 4000.00
+```
+
+### List
+
+To test the list feature, you can add these test inputs to the program first:
+
+Make sure there is no existing cashflows in the program in order to achieve the exact outputs below. You can clear the inputs by exiting the program and deleting the data.txt file found in data folder.
+
+Make sure to add each command line by line.
+
+```
+add income /a 5000 /t salary /r 30 /d work
+add expense /a 1000 /t necessities
+add income /a 500 /t investments /d stocks
+add expense /a 800 /t insurance /r 365 /d insurance
+```
+
+After which you can test the following commands:
+
+Input: `list`
+
+Output:
+```
+You have 4 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+2: Expense
+   Type: Necessities
+   Amount: 1000.00
+3: Income
+   Type: Investments
+   Amount: 500.00
+   Description: stocks
+4: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+Balance: 3700.00
+```
+
+Input: `list income`
+
+Output:
+```
+You have 2 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+2: Income
+   Type: Investments
+   Amount: 500.00
+   Description: stocks
+Income Balance: 5500.00
+```
+
+Input: `list expense`
+
+Output:
+```
+You have 2 matching cashflows:
+1: Expense
+   Type: Necessities
+   Amount: 1000.00
+2: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+Expense Balance: 1800.00
+```
+
+Input: `list recurring`
+
+Output:
+```
+You have 2 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+2: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+```
+
+### Delete cashflow
+
+You are recommended to test this feature after testing the list feature as they share the same test inputs.
+
+If you have not done so, please follow the instructions to test the list feature [here](#list).
+
+To test the delete cashflow feature, you can use the following commands:
+
+Use the list command before each delete command to confirm that the cashflow at the index stated in the delete command matches the expected output.
+
+Input: `list` followed by `delete 3`
+
+Output:
+```
+You have removed an Income
+   Type: Investments
+   Amount: 500.00
+   Description: stocks
+from the Financial Planner.
+Balance: 3200.00
+```
+
+Input: `list income` followed by `delete income 1 /r`
+
+Output:
+```
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
+```
+
+Input: `list income` followed by `delete income 1`
+
+Output:
+```
+You have removed an Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
+from the Financial Planner.
+Balance: -1800.00
+```
+
+Input: `list expense` followed by `delete expense 1`
+
+Output:
+```
+You have removed an Expense
+   Type: Necessities
+   Amount: 1000.00
+from the Financial Planner.
+Balance: -800.00
+```
+
+Input: `list recurring` followed by `delete recurring 1`
+
+Output:
+```
+You have removed an Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+from the Financial Planner.
+Balance: 0.00
+```
+
+### Recurring cashflow
+
+You can test the recurring cashflow feature by manually changing your system time.
+
+First add a cashflow that has a recurrence value. You can use the following example command:
+
+```
+add income /a 5000 /t salary /r 1 /d work
+```
+
+Next, exit the program and change the system time to be ahead by the specified days in the cashflow.
+
+In the case of the example command, you can bring forward the system time by 1 day.
+
+Finally, start the program again and you should see this output:
+```
+You have added an Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 1 days, date added: Nov 13 2023, recurring on: Nov 14 2023
+   Description: work
+to the Financial Planner.
+Balance: 10000.00
+```
