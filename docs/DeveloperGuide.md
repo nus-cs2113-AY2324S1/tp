@@ -491,3 +491,85 @@ shows you the welcome screen for the financial planner app
    1. Type `exit` into the terminal. 
    2. Expected: the financial planner will exit with a goodbye message.
 Under the data newly created data directory, a watchlist.json and a data.txt file will be created
+3. WatchList Feature
+
+To test the watchlist feature, you can copy the text below into the watchlist.json file under data directory
+```
+{
+  "BB": {
+    "symbol": "BB",
+    "stockName": "BlackBerry Ltd"
+  },
+  "TSLA": {
+    "symbol": "TSLA",
+    "stockName": "Tesla Inc"
+  }
+}
+```
+Start Financial Planner app and you should be able to see this output (although prices will differ)
+```
+watchlist
+Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
+BB        NYSE      3.64      3.67           3.55          BlackBerry Ltd                   Sat, Nov 11 2023 05:00:02
+TSLA      NASDAQ    214.65    215.38         205.69        Tesla Inc                        Sat, Nov 11 2023 05:00:00
+Data provided by Financial Modeling Prep and Alpha Vantage =)
+```
+
+You can then add a stock using the command below
+```
+addstock /s NET
+```
+You should see a message stating that Cloudflare was added. After running the watchlist command again and exiting the 
+application, your watchlist output should look like this 
+```
+Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
+BB        NYSE      3.64      3.67           3.55          BlackBerry Ltd                   Sat, Nov 11 2023 05:00:02
+TSLA      NASDAQ    214.65    215.38         205.69        Tesla Inc                        Sat, Nov 11 2023 05:00:00
+NET       NYSE      63.08     63.31          61.34         Cloudflare Inc - Class A         Sat, Nov 11 2023 05:00:02
+Data provided by Financial Modeling Prep and Alpha Vantage =)
+```
+
+You can also remove stocks from the command. Run these commands separately
+```
+deletestock /s BB
+deletestock /s TSLA
+deletestock /s NET
+```
+After deleting all the stocks and running the watchlist command again, the output should look like this
+as you have no more stocks left in your watchlist
+```
+Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
+Empty Watchlist. Nothing to display...
+```
+4. Visualization Feature
+
+We can use the visualization feature to visualize your income and expenses.
+
+First we will add some expenses 
+```
+add expense /a 1000 /t necessities /d Iphone 15 pro max
+add expense /a 4 /t others /d cai png
+add expense /a 100 /t travel /d JB
+```
+
+Now we can visualize these expenses using 3 different charts (pie/bar/radar)
+```
+vis /t expense /c pie
+vis /t expense /c bar
+vis /t expense /c radar
+```
+You can run the 3 commands separately to see different charts
+
+We can do the same the income
+```
+add income /a 1800 /t salary /d mcd
+add income /a 400 /t investments /d Gamestop
+add income /a 100 /t allowance /d parents
+```
+
+Again we can visualize these income using 3 different charts in separate commands (pie/bar/radar)
+```
+vis /t income /c pie
+vis /t income /c bar
+vis /t income /c radar
+```
