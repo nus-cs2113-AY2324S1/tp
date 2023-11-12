@@ -47,20 +47,22 @@ public class Parser implements ParserUtil {
 
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
-    private static final String ADD_ARGUMENT_FORMAT_REGEX = "name/(?<dishName>.*) price/(?<dishPrice>\\s*\\S*)\\s+(?<ingredients>ingredient/.*)";
+    private static final String ADD_ARGUMENT_FORMAT_REGEX = "name/(?<dishName>.*) "
+            + "price/(?<dishPrice>\\s*\\S*)\\s+(?<ingredients>ingredient/.*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
     private static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
     private static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    private static final String INGREDIENT_ARGUMENT_FORMAT_REGEX = "\\s*ingredient/(?<ingredientName>.*) qty/\\s*(?<ingredientQty>.*)\\s*";
+    private static final String INGREDIENT_ARGUMENT_FORMAT_REGEX = "\\s*ingredient/(?<ingredientName>.*) "
+            + "qty/\\s*(?<ingredientQty>.*)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    public static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
+    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
     private static final String INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL = "value";
     private static final String INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL = "unit";
-    public static final String ADD_DISH_NAME_ARGUMENT = "name/";
-    public static final String ADD_DISH_PRICE_ARGUMENT = "price/";
-    public static final String INGREDIENT_ARGUMENT = "ingredient/";
-    public static final String QTY_ARGUMENT = "qty/";
+    private static final String ADD_DISH_NAME_ARGUMENT = "name/";
+    private static final String ADD_DISH_PRICE_ARGUMENT = "price/";
+    private static final String INGREDIENT_ARGUMENT = "ingredient/";
+    private static final String QTY_ARGUMENT = "qty/";
     private static final String INGREDIENT_DIVIDER_REGEX = ",";
 
     /** Add Order Command Handler Patterns*/
@@ -80,7 +82,7 @@ public class Parser implements ParserUtil {
     private static final int MAX_QTY = 1000000;
     private static final String GRAMS_UNIT = "g";
     private static final String ML_UNIT = "ml";
-    public static final String PRICE_INPUT_REGEX = "^-?[0-9]\\d*(\\.\\d{0,2})?$";
+    private static final String PRICE_INPUT_REGEX = "^-?[0-9]\\d*(\\.\\d{0,2})?$";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author ziyi105
@@ -318,7 +320,9 @@ public class Parser implements ParserUtil {
         return ingredients;
     }
 
-    private static void parseIngredient(boolean isExcludeRepeatedIngredients, Menu menu, String inputIngredient, ArrayList<Ingredient> ingredients) throws ParserException {
+    private static void parseIngredient(
+            boolean isExcludeRepeatedIngredients, Menu menu, String inputIngredient, ArrayList<Ingredient> ingredients)
+            throws ParserException {
         Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
 
         String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
@@ -335,7 +339,8 @@ public class Parser implements ParserUtil {
         String ingredientUnit = ingredientQtyMatcher.group(INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL);
         int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
 
-        detectErrorPostIngredientParse(isExcludeRepeatedIngredients, ingredientName, ingredientQty, ingredientUnit, ingredients);
+        detectErrorPostIngredientParse(isExcludeRepeatedIngredients,
+                ingredientName, ingredientQty, ingredientUnit, ingredients);
 
         Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
 

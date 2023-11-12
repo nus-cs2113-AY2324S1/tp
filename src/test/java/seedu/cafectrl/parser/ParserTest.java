@@ -773,35 +773,35 @@ class ParserTest {
     }
 
     @Test
-    void isRepeatedArgument_noRepeatArgument_False() {
+    void isRepeatedArgument_noRepeatArgument_false() {
         String inputString = "name/christmas Ham price/50.00 ingredient/Ham qty/1000g";
         String inputArgument = "price/";
         assertFalse(Parser.isRepeatedArgument(inputString, inputArgument));
     }
 
     @Test
-    void isRepeatedArgument_RepeatArgument_True() {
+    void isRepeatedArgument_repeatArgument_true() {
         String inputString = "name/christmas Ham price/50.00 price/12.00 ingredient/Ham qty/1000g";
         String inputArgument = "price/";
         assertTrue(Parser.isRepeatedArgument(inputString, inputArgument));
     }
 
     @Test
-    void isRepeatedArgument_emptyString_True() {
+    void isRepeatedArgument_emptyString_true() {
         String inputString = "";
         String inputArgument = "price/";
         assertFalse(Parser.isRepeatedArgument(inputString, inputArgument));
     }
 
     @Test
-    void isRepeatedArgument_emptyArgument_True() {
+    void isRepeatedArgument_emptyArgument_true() {
         String inputString = "name/christmas Ham price/50.00 price/12.00 ingredient/Ham qty/1000g";
         String inputArgument = "";
         assertTrue(Parser.isRepeatedArgument(inputString, inputArgument));
     }
 
     @Test
-    void isRepeatedArgument_nullInput_True() throws NullPointerException {
+    void isRepeatedArgument_nullInput_true() throws NullPointerException {
         String inputString = "name/christmas Ham price/50.00 price/12.00 ingredient/Ham qty/1000g";
         String inputArgument = "price/";
         assertThrows(NullPointerException.class, () -> Parser.isRepeatedArgument(null, inputArgument));
