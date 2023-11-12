@@ -72,11 +72,12 @@ public class EditShortcutTest {
         Shortcut shortcut = shortcuts.getShortcut(0);
         assertEquals("egg", shortcut.getIngredientName());
 
-        userInput = "sc/egg q/3 q/4";
+        userInput = "sc/bread q/3 q/4";
         command = new EditShortcutCommand(shortcuts, ingredients, userInput);
         command.executeCommand();
 
         shortcut = shortcuts.getShortcut(0);
-        assertEquals(3, shortcut.getQuantity());
+        assertEquals("egg", shortcut.getIngredientName());
+        assertEquals(2, shortcut.getQuantity());
     }
 }
