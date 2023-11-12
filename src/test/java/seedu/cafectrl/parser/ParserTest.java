@@ -315,7 +315,7 @@ class ParserTest {
 
     //@@author DextheChik3n
     @Test
-    void parseCommand_invalidUserInput_incorrectCommand() {
+    void parseCommand_noArgumentsUserInput_incorrectCommand() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -331,7 +331,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_validDishInputForAddDish_dishAddedToMenu() {
+    void parseCommand_dishWithOneIngredientForAddDish_dishAddedToMenu() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -382,7 +382,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_invalidDishInputForAddDish_noDishAddedToMenu() {
+    void parseCommand_invalidArgumentInputForAddDish_incorrectCommand() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -395,7 +395,7 @@ class ParserTest {
         Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
 
         //Test for incorrect Command type returned
-        assertFalse(outputCommand instanceof AddDishCommand);
+        assertTrue(outputCommand instanceof IncorrectCommand);
 
         //Test for no dish added in menu
         outputCommand.execute();
@@ -403,7 +403,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_missingArgumentDishInputForAddDish_noDishAddedToMenu() {
+    void parseCommand_missingArgumentDishInputForAddDish_incorrectCommand() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -416,7 +416,7 @@ class ParserTest {
         Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
 
         //Test for incorrect Command type returned
-        assertFalse(outputCommand instanceof AddDishCommand);
+        assertTrue(outputCommand instanceof IncorrectCommand);
 
         //Test for no dish added in menu
         outputCommand.execute();
@@ -424,7 +424,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_invalidQuantityUnitForAddDish_noDishAddedToMenu() {
+    void parseCommand_invalidQuantityUnitForAddDish_incorrectCommand() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -436,7 +436,7 @@ class ParserTest {
         Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
 
         //Test for incorrect Command type returned
-        assertFalse(outputCommand instanceof AddDishCommand);
+        assertTrue(outputCommand instanceof IncorrectCommand);
 
         //Test for no dish added in menu
         outputCommand.execute();
@@ -444,7 +444,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_negativeDishPriceForAddDish_noDishAddedToMenu() {
+    void parseCommand_negativeDishPriceForAddDish_incorrectCommand() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -456,7 +456,7 @@ class ParserTest {
         Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
 
         //Test for incorrect Command type returned
-        assertFalse(outputCommand instanceof AddDishCommand);
+        assertTrue(outputCommand instanceof IncorrectCommand);
 
         //Test for no dish added in menu
         outputCommand.execute();
@@ -464,7 +464,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_negativeIngredientQtyForAddDish_noDishAddedToMenu() {
+    void parseCommand_negativeIngredientQtyForAddDish_incorrectCommand() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -476,11 +476,97 @@ class ParserTest {
         Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
 
         //Test for incorrect Command type returned
-        assertFalse(outputCommand instanceof AddDishCommand);
+        assertTrue(outputCommand instanceof IncorrectCommand);
 
         //Test for no dish added in menu
         outputCommand.execute();
         assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_emptyDishNameForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/ price/2.50 ingredient/rice qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_tooLongDishNameForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/this dish name is probably too long for the test to pass oh noes "
+                + "price/2.50 ingredient/rice qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_specialCharInDishNameForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/Ch1k3m R!ce price/2.50 ingredient/rice qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_repeatedDishNameForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        Ingredient ingredient = new Ingredient("rice");
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(ingredient);
+        menu.addDish(new Dish("chicken rice", ingredients, (float) 2.13));
+
+        String addDishTestInput = "add name/Chicken Rice price/2.50 ingredient/rice qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(1, menu.getSize());
     }
 
     @Test
@@ -507,6 +593,219 @@ class ParserTest {
         assertEquals("Christmas Ham", getOutputDish.getName());
         assertEquals((float) 50.0, getOutputDish.getPrice());
         assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString());
+    }
+
+    @Test
+    void parseCommand_repeatedIngredientArgumentForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/rice ingredient/rice qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_repeatedQtyArgumentForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/rice qty/100g qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_missingIngredientNameForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/chicken qty/300g, ingredient/ qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_veryLongIngredientNameForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/chicken qty/300g "
+                + ", ingredient/this ingredient name is too long to fit inside the menu table qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_invalidIngredientQtyForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        //Test for negative ingredient qty
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/chicken qty/300g "
+                + ", ingredient/rice qty/-100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+
+        //Test for more than max limit ingredient qty
+        addDishTestInput = "add name/chicken rice price/2.50 ingredient/chicken qty/300g "
+                + ", ingredient/rice qty/99999999g";
+        outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_missingIngredientQtyUnitForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/chicken qty/300 "
+                + ", ingredient/rice qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_specialCharInIngredientNameForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/chicken qty/300g "
+                + ", ingredient/r!ce qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void parseCommand_repeatedIngredientNameInputForAddDish_incorrectCommand() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+
+        String addDishTestInput = "add name/chicken rice price/2.50 ingredient/chicken qty/300g "
+                + ", ingredient/chicken qty/100g";
+        ParserUtil parserUtil = new Parser();
+        Command outputCommand = parserUtil.parseCommand(menu, addDishTestInput, ui, pantry, sales, currentDate);
+
+        //Test for incorrect Command type returned
+        assertTrue(outputCommand instanceof IncorrectCommand);
+
+        //Test for no dish added in menu
+        outputCommand.execute();
+        assertEquals(0, menu.getSize());
+    }
+
+    @Test
+    void isRepeatedArgument_noRepeatArgument_false() {
+        String inputString = "name/christmas Ham price/50.00 ingredient/Ham qty/1000g";
+        String inputArgument = "price/";
+        assertFalse(Parser.isRepeatedArgument(inputString, inputArgument));
+    }
+
+    @Test
+    void isRepeatedArgument_repeatArgument_true() {
+        String inputString = "name/christmas Ham price/50.00 price/12.00 ingredient/Ham qty/1000g";
+        String inputArgument = "price/";
+        assertTrue(Parser.isRepeatedArgument(inputString, inputArgument));
+    }
+
+    @Test
+    void isRepeatedArgument_emptyString_true() {
+        String inputString = "";
+        String inputArgument = "price/";
+        assertFalse(Parser.isRepeatedArgument(inputString, inputArgument));
+    }
+
+    @Test
+    void isRepeatedArgument_emptyArgument_true() {
+        String inputString = "name/christmas Ham price/50.00 price/12.00 ingredient/Ham qty/1000g";
+        String inputArgument = "";
+        assertTrue(Parser.isRepeatedArgument(inputString, inputArgument));
+    }
+
+    @Test
+    void isRepeatedArgument_nullInput_true() throws NullPointerException {
+        String inputString = "name/christmas Ham price/50.00 price/12.00 ingredient/Ham qty/1000g";
+        String inputArgument = "price/";
+        assertThrows(NullPointerException.class, () -> Parser.isRepeatedArgument(null, inputArgument));
+        assertThrows(NullPointerException.class, () -> Parser.isRepeatedArgument(inputString, null));
     }
 
     @Test
@@ -540,6 +839,13 @@ class ParserTest {
     @Test
     void parsePriceToFloat_negativePriceString_parserExceptionThrown() {
         String inputPriceString = "-1.99";
+
+        assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
+    }
+
+    @Test
+    void parsePriceToFloat_emptyPriceString_parserExceptionThrown() {
+        String inputPriceString = "";
 
         assertThrows(ParserException.class, () -> Parser.parsePriceToFloat(inputPriceString));
     }
