@@ -749,7 +749,7 @@ Expected outcome:
 - delete : `delete /s SERIAL_NUMBER`
 - list : `list`
 - find : `find /n KEYWORD` or `find /d KEYWORD`
-- add Vendor : `addVendor`
+- add Vendor : `addVendor /v VENDOR_NAME`
 - list Vendor : `listVendors`
 - add Vendor Supply : `addVendorSupply /v VENDOR_NAME /n DRUG_NAME`
 - list Vendor Supply : `listVendorSupply /v VENDOR_NAME`
