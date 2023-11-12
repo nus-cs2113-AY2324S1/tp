@@ -1,4 +1,4 @@
-//@@ kherlenbayasgalan & jingxizhu
+//@@author kherlenbayasgalan & Cheezeblokz
 
 package seedu.duke.calendar;
 
@@ -70,13 +70,13 @@ public class CalendarCommandParser {
             } else if (input.startsWith("add goal event")) {
                 return new AddGoalEventCommand(input);
             } else if (input.startsWith("delete event")) {
-                return new DeleteEventCommand();
+                return new DeleteEventCommand(input);
             } else if (input.startsWith("list events")) {
                 return new ListCalendarEventsCommand();
             } else if (input.startsWith("delete all events")) {
                 return new DeleteAllEventsCommand();
             } else if (input.startsWith("find event")) {
-                return new FindEventCommand();
+                return new FindEventCommand(input);
             }
 
         } catch (AddEventException exception) {

@@ -3,7 +3,6 @@
 package seedu.duke.calendar.command;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import seedu.duke.calendar.Event;
 import seedu.duke.calendar.EventList;
