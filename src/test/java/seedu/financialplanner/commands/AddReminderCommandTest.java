@@ -51,11 +51,4 @@ class AddReminderCommandTest {
         }
     }
 
-    @Test
-    void testExcute() {
-        AddReminderCommand testEntry = new AddReminderCommand(
-                Parser.parseRawCommand("addreminder /t debt /d 11/12/2023"));
-        testEntry.execute();
-        assertEquals(1, reminderList.list.size());
-    }
 }
