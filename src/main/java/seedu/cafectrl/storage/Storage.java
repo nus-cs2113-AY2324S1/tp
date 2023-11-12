@@ -27,6 +27,7 @@ public class Storage {
     private boolean isMenuTampered = false;
     private boolean isOrdersTampered = false;
     private boolean isPantryStockTampered = false;
+    private boolean isHashStringTampered = false;
     private boolean isTamperedMessagePrinted = false;
 
     public Storage (Ui ui) {
@@ -35,6 +36,11 @@ public class Storage {
     }
 
     //@@author Cazh1
+
+    private boolean isFileEmpty(ArrayList<String> encodedStringArrayList) {
+        return encodedStringArrayList.isEmpty();
+    }
+
     /**
      * Boolean to detect if the text save file has been tampered with
      *
@@ -52,28 +58,41 @@ public class Storage {
             return true;
         }
 
-        int fileHash = Integer.parseInt(hashString);
-        //Removes the saved Hash String for decoding
-        encodedStringArrayList.remove(lastIndex);
+        try {
+            int fileHash = Integer.parseInt(hashString);
+            //Removes the saved Hash String for decoding
+            encodedStringArrayList.remove(lastIndex);
 
-        //Prepares String in same format as when encoding, generates Hash from the save file content
-        String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
-        int encodedMenuHash = encodedMenuAsString.hashCode();
+            //Prepares String in same format as when encoding, generates Hash from the save file content
+            String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
+            int encodedMenuHash = encodedMenuAsString.hashCode();
 
-        //Checks if the generated Hash matches the saved Hash
-        if (encodedMenuHash != fileHash) {
+            //Checks if the generated Hash matches the saved Hash
+            if (encodedMenuHash != fileHash) {
+                return true;
+            }
+        } catch (Exception e) {
+            isHashStringTampered = true;
             return true;
         }
         return false;
     }
 
+    /**
+     * Detects the areas of the save files that are tampered with
+     * and prints out respective messages to the user, while minimizing repeats
+     */
     public void detectTamper() {
-        if (!isMenuTampered && !isOrdersTampered && !isPantryStockTampered) {
+        if (!isMenuTampered && !isOrdersTampered && !isPantryStockTampered && !isHashStringTampered) {
             return;
         }
         if (!isTamperedMessagePrinted) {
             ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED);
             isTamperedMessagePrinted = true;
+        }
+        if (isHashStringTampered) {
+            ui.showToUser(Messages.HASH_STRING_TAMPERED, Messages.HASH_STRING_MESSAGE, "");
+            isHashStringTampered = false;
         }
         if (isMenuTampered) {
             ui.showToUser(Messages.SAVE_FILE_FORMAT_MENU);
@@ -100,7 +119,7 @@ public class Storage {
         logger.info("Loading menu...");
         try {
             ArrayList<String> encodedMenu = fileManager.readTextFile(FilePath.MENU_FILE_PATH);
-            if (isFileCorrupted(encodedMenu) && isHashingEnabled) {
+            if (!isFileEmpty(encodedMenu) && isFileCorrupted(encodedMenu) && isHashingEnabled) {
                 isMenuTampered = true;
                 logger.log(Level.INFO, "Tampered Menu file");
                 detectTamper();
@@ -132,7 +151,7 @@ public class Storage {
     public Pantry loadPantryStock() {
         try {
             ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
-            if (isFileCorrupted(encodedPantryStock) && isHashingEnabled) {
+            if (!isFileEmpty(encodedPantryStock) && isFileCorrupted(encodedPantryStock) && isHashingEnabled) {
                 isPantryStockTampered = true;
                 logger.log(Level.INFO, "Tampered Pantry Stock file");
                 detectTamper();
@@ -163,7 +182,7 @@ public class Storage {
         logger.info("Loading orders...");
         try {
             ArrayList<String> encodedOrderList = fileManager.readTextFile(FilePath.ORDERS_FILE_PATH);
-            if (isFileCorrupted(encodedOrderList) && isHashingEnabled) {
+            if (!isFileEmpty(encodedOrderList) && isFileCorrupted(encodedOrderList) && isHashingEnabled) {
                 isOrdersTampered = true;
                 logger.log(Level.INFO, "Tampered Order file");
                 detectTamper();
