@@ -13,8 +13,8 @@
     * [Editing price of menu item : `edit_price`](#editing-price-of-menu-item--editprice)
     * [Viewing the total stock of ingredients : `view_stock`](#viewing-the-total-stock-of-ingredients--viewstock)
     * [Buying an ingredient : `buy_ingredient`](#buying-an-ingredient--buyingredient)
-    * [Showing all sales : `show_sales`](#showing-all-sales--showsales)
-    * [Showing sales for a chosen day : `show_sale`](#showing-sales-for-a-chosen-day--showsale)
+    * [Showing all sales : `list_total_sales`](#showing-all-sales--showsales)
+    * [Showing sales for a chosen day : `list_sale`](#showing-sales-for-a-chosen-day--showsale)
     * [Adding an order : `add_order`](#adding-an-order--addorder)
     * [Returning to the previous day: `previous_day`](#returning-to-the-previous-day-previousday)
     * [Advancing to the next day: `next_day`](#advancing-to-the-next-day-nextday)
@@ -134,10 +134,10 @@ Example:
 ### Listing ingredients needed for the selected dish : `list_ingredients`
 Lists out the ingredients needed along with the quantity for a specific dish
 
-Format: `list_ingredients DISH_INDEX`
+Format: `list_ingredients index/DISH_INDEX`
 
 Example:
-- list followed by list_ingredients 1 lists the ingredients of the 1st dish on the menu
+- list followed by list_ingredients index/1 lists the ingredients of the 1st dish on the menu
 ```
 +-------------------------------------------------------+
 |Dish: chicken rice                                     |
@@ -234,7 +234,7 @@ Format: list_total_sales
 Example: `list_total_sales`
 
 Output:
-- show_sales lists the dishes sold along with the total sales for every operating day of the cafe.
+- list_total_sales lists the dishes sold along with the total sales for every operating day of the cafe.
 ```
 +---------------------------------------------------------------------------+
 Day 1:
@@ -366,7 +366,7 @@ Format: `bye`
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY [, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`<br><br/>Example:<br/>`add name/chicken rice price/3.00 ingredient/rice qty/50g, ingredient/chicken qty/100g` |
 | **List Menu**             | `list_menu`                                                                                                                                                                                                                                            |
-| **List Ingredients**      | `list_ingredients DISH_INDEX`<br><br/>Example:<br>`list_ingredients 1`                                                                                                                                                                                 |
+| **List Ingredients**      | `list_ingredients index/DISH_INDEX`<br><br/>Example:<br>`list_ingredients index/1`                                                                                                                                                                     |
 | **Delete**                | `delete DISH_INDEX`<br><br/>Example:<br>`delete 1`                                                                                                                                                                                                     |
 | **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br><br/>Example:<br>`edit_price index/1 price/4.50`                                                                                                                                                      |
 | **List Sale**             | `list_total_sales`                                                                                                                                                                                                                                     |
