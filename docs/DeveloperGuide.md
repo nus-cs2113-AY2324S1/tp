@@ -435,7 +435,7 @@ To illustrate how the `ListCommand` works, consider the following example usage:
 The "ListCommand" enhances the user's ability to access inventory information efficiently and is designed to handle
 various inventory sizes while providing a user-friendly experience.
 
-The following sequence diagram shows how the Find Command function works.
+The following sequence diagram shows how the List Command function works.
 
 <img src="UML Diagrams/ListCommandDiagram.png" width="350">
 
@@ -623,7 +623,31 @@ not found.
 
 ---
 
-## 13. ListSales Command
+## 13. Checkout Command
+
+The Checkout Command allows users to remove items from the current cart and record the corresponding sales transactions. This command helps manage the checkout process efficiently and maintain accurate records of sales.
+
+### Design Considerations
+- Ensure that the command handles scenarios where the cart is empty or there are no matching items in the inventory.
+- Calculate the total cost of the checked-out items to provide users with a clear understanding of the transaction.
+
+### Implementation
+In the execute method of the CheckOutCommand class:
+- Check if the current cart is empty. If it is, return a message indicating that the cart is empty, and the checkout process cannot proceed.
+- If the cart is not empty, create a temporary holder to store the sold items, which include the serial number, quantity, and selling price.
+- For each item in the current cart, retrieve the corresponding StockEntry from the inventory.
+- Calculate the total cost of the item based on the selling price and quantity.
+- Add the sold item to the temporary holder, and update the total cost.
+- Create a new Cart containing the sold items and add it to the SalesList.
+- Return a message to the user indicating the successful checkout and the total cost of the transaction.
+
+The following sequence diagram illustrates how the Checkout Command function works:
+
+<img src="UML Diagrams/CheckoutCommandDiagram.png" width="500">
+
+---
+
+## 14. ListSales Command
 
 The ListSalesCommand is designed to list all sales transactions tracked by the system. This command provides users with a clear and organized view of the sales data, making it easier to review and manage sales transactions.
 
@@ -640,9 +664,13 @@ In the execute method of the ListSalesCommand class:
 - Organize and present the sales data in a structured format, including details such as serial numbers, quantities, and selling prices for each transaction.
 - Ensure that the sales data is neatly formatted and clearly presented to the user.
 
+The following sequence diagram shows how the listSales Command function works.
+
+<img src="UML Diagrams/ListSalesCommand.png" width="350">
+
 ---
 
-## 14. SaveSales Command
+## 15. SaveSales Command
 
 The SaveSalesCommand is responsible for saving the current sales data to an external file. This file serves as a record-keeping mechanism and a reference for past sales transactions.
 
@@ -658,6 +686,9 @@ In the execute method of the SaveSalesCommand class:
 - Implement error handling to address any potential file writing failures.
 - Confirm the successful save operation by returning a message indicating that the sales data has been saved.
 
+The following sequence diagram shows how the saveSales Command function works.
+
+<img src="UML Diagrams/SaveSalesCommand.png" width="350">
 ---
 
 ## Product scope

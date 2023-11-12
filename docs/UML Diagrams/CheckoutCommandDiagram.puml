@@ -1,0 +1,44 @@
+@startuml
+hide footbox
+actor User
+participant CheckOutCommand
+participant Cart
+participant StockEntry
+participant Drug
+participant CartEntry
+participant SalesList
+participant CommandResult
+
+User -> CheckOutCommand: execute()
+activate User
+activate CheckOutCommand
+
+alt Cart is not empty
+  CheckOutCommand -> Cart: getCurrentCart()
+  activate Cart
+  Cart -> Cart: Retrieve current cart
+  Cart -> Cart: Create temporary holder (List<CartEntry>)
+  Cart -> StockEntry: Get StockEntry for each entry
+  loop over entries
+    activate StockEntry
+    StockEntry -> Drug: Get Drug
+    activate Drug
+    Drug -> Drug: Get SellingPrice
+    Drug --> StockEntry
+    StockEntry --> CartEntry: Create CartEntry with quantity and selling price
+    deactivate Drug
+    deactivate StockEntry
+  end
+  Cart -> SalesList: Add temporary holder to sold items
+  Cart -> CommandResult: Create result message
+  deactivate Cart
+  Cart --> User: Message with total cost
+  else
+  Cart -> CommandResult: Cart is empty
+  Cart --> User: Message failure
+end
+
+User --> CheckOutCommand: CommandResult
+deactivate User
+deactivate CheckOutCommand
+@enduml

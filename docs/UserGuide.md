@@ -549,16 +549,18 @@ Example of usage:
 Expected outcome:
 
 ```
-|| 1. Key : Panadole, Quantity: 10
-||
 || Listed all the content of your cart.
-|| Total Cost of Items in Cart: $39.90
+|| 	1. Name: Histamine, Quantity: 1, Selling Price: 15.9, Cost: 15.9
+|| 	2. Name: Doliprane, Quantity: 2, Selling Price: 12.9, Cost: 25.8
+|| 
+|| Total Cost: 41.7
 ```
 
 ### `checkout` - Checks out the current cart
 
 Empty the current cart and retrieve all the specified drugs and quantity from the inventory
 
+- Shows the total amount to be paid upon checkout
 - If after checkout, the quantity of a specific drug falls below the set threshold level, it triggers an
   alert.
 
@@ -575,6 +577,8 @@ Expected outcome:
 
 ```
 || The current cart has been checked out.
+|| 
+|| Total Cost: 15.9
 ```
 
 Expected outcome with alert:
