@@ -37,19 +37,14 @@ public class FitTrack {
     /**
      * Main entry-point for the FitTrack application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws StorageOperationException {
         new FitTrack(args).run();
     }
 
-    private void run() {
-        try {
-            start();
-            loopCommandExecution();
-            end();
-        } catch (Ui.ForceExitException e) {
-            save();
-            ui.printForceExit();
-        }
+    private void run() throws StorageOperationException {
+        start();
+        loopCommandExecution();
+        end();
     }
 
     private void start() {
@@ -58,7 +53,7 @@ public class FitTrack {
         load();
     }
 
-    private void loopCommandExecution() {
+    private void loopCommandExecution() throws StorageOperationException {
         Command command;
         do {
             String userCommandLine = ui.scanCommandLine();
@@ -86,26 +81,26 @@ public class FitTrack {
     private void load() {
         // TODO: This method will be eventually changed due to Joshua's Storage rework.
         try {
-            this.mealList = storage.loadMeals();
+            this.mealList = storage.mealLoad();
         } catch (StorageOperationException e) {
             System.out.println(e.getMessage());
         }
 
         try {
-            this.workoutList = storage.loadWorkouts();
+            this.workoutList = storage.workoutLoad();
         } catch (StorageOperationException e) {
             System.out.println(e.getMessage());
         }
 
         try {
-            this.stepList = storage.loadSteps();
+            this.stepList = storage.stepLoad();
         } catch (StorageOperationException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             if (!storage.isProfileFileEmpty()) {
-                this.userProfile = storage.loadProfile();
+                this.userProfile = storage.profileLoad();
                 ui.printWelcomeBackPrompt();
             }
         } catch (StorageOperationException e) {
