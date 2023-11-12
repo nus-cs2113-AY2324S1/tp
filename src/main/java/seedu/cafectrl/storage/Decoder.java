@@ -208,7 +208,10 @@ public class Decoder {
             float decodedTotalOrderCost = Float.parseFloat(orderData[3].trim());
             boolean isComplete = "true".equals(orderData[4].trim());
 
-            boolean isDataAccurate = isOrderDataAccurate(orderLine, menu, dishName, quantity, decodedTotalOrderCost);
+            Dish dish = menu.getDishFromName(dishName);
+
+            boolean isDataAccurate = isDishValid(orderLine, dish) &&
+                    isOrderCostAccurate(orderLine, dish, quantity, decodedTotalOrderCost);
             if (!isDataAccurate) {
                 return;
             }
@@ -221,25 +224,6 @@ public class Decoder {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_SALES_DATA + orderLine);
         }
-    }
-
-    /**
-     * Checks if the order data is accurate by checking if dish exists and
-     * if the decoded total order cost corresponds to the calculated order cost
-     *
-     * @param orderLine            The order line in the format "day|dishName|quantity|totalOrderCost|isComplete".
-     * @param menu                 Menu instance to retrieve Dish objects based on dishName.
-     * @param dishName             The name of the dish in the order.
-     * @param quantity             The quantity of the dish in the order.
-     * @param decodedTotalOrderCost The decoded total order cost from the order line.
-     * @return True if the order data is accurate, false otherwise.
-     */
-    private static boolean isOrderDataAccurate(String orderLine, Menu menu, String dishName,
-            int quantity, float decodedTotalOrderCost) {
-        Dish dish = menu.getDishFromName(dishName);
-        boolean isAccurateData = isDishValid(orderLine, dish) &&
-                isOrderCostAccurate(orderLine, dish, quantity, decodedTotalOrderCost);
-        return isAccurateData;
     }
 
     /**
