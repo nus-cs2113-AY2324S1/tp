@@ -16,8 +16,8 @@ public class ExpenseLister extends Command {
     /**
      * Constructor for ExpenseLister.
      *
-     * @param expenses
-     * @param ui
+     * @param expenses expenses list to print out
+     * @param ui User interface to print messages
      */
     public ExpenseLister(ArrayList<Expense> expenses, Ui ui) {
         this.expenses = expenses;
@@ -37,17 +37,13 @@ public class ExpenseLister extends Command {
      */
     public void listExpenses() {
         if (expenses.isEmpty()) {
-            ui.showLineDivider();
-            System.out.println("You have no recorded expenses.");
-            ui.showLineDivider();
+            ui.printMessage("You have no recorded expenses.");
             return;
         }
 
-        ui.showLineDivider();
-        System.out.println("Here are your expenses:");
+        ui.printMessage("Here are your expenses:");
         for (int i = 0; i < expenses.size(); i++) {
-            System.out.println((i + 1) + ". " + expenses.get(i).toString());
+            ui.printMessage((i + 1) + ". " + expenses.get(i).toString());
         }
-        ui.showLineDivider();
     }
 }

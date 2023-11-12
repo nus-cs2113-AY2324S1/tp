@@ -146,7 +146,7 @@ Target user profile:
 ## Non-Functional Requirements
 - Domain rules:
     - The application should not crash under normal circumstances.
-    - Dates can be entered in the format dd/mm/yyyy and should not be in the future.
+    - Dates can be entered in the format dd/MM/yyyy and should not be in the future.
     - Amount added should be in the format of 0.00 and should not be negative.
     - The application only accepts commands in English.
     - Users should refrain from using special characters in the description/category/type/date field.

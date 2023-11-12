@@ -157,6 +157,7 @@ class DukeTest {
         duke.executeCommand("list currencies");
         duke.executeCommand("list exchange rates");
     }
+    
 
     @Test
     void executeCommand_balance_correctOutput() throws KaChinnnngException {

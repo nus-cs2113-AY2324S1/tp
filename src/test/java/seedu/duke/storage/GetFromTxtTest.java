@@ -24,7 +24,6 @@ public class GetFromTxtTest {
     private ArrayList<Income> incomes;
     private ArrayList<Expense> expenses;
     private String path;
-    private String []lines = new String[10];
     /**
      * Sets up the test fixture.
      * Called before every test case method.

@@ -42,16 +42,16 @@ public class ListCommand extends Command {
     @Override
     public void execute() {
         if (incomes.isEmpty() && expenses.isEmpty()) {
-            System.out.println("You do not have any records.");
+            ui.printMessage("You do not have any records.");
             return;
         }
         // Print incomes
         if (incomes.isEmpty()) {
-            System.out.println("You have no recorded incomes.");
+            ui.printMessage("You have no recorded incomes.");
         } else {
-            System.out.println("Here are your incomes:");
+            ui.printMessage("Here are your incomes:");
             for (int i = 0; i < incomes.size(); i++) {
-                System.out.println((i + 1) + ". " + incomes.get(i).toString());
+                ui.printMessage((i + 1) + ". " + incomes.get(i).toString());
                 totalIncome += incomes.get(i).getAmount();
             }
             System.out.printf("Total income is: $%.2f.\n", totalIncome);
@@ -59,11 +59,11 @@ public class ListCommand extends Command {
         System.out.println();
         // Print expenses
         if (expenses.isEmpty()) {
-            System.out.println("You have no recorded expenses.");
+            ui.printMessage("You have no recorded expenses.");
         } else {
-            System.out.println("Here are your expenses:");
+            ui.printMessage("Here are your expenses:");
             for (int i = 0; i < expenses.size(); i++) {
-                System.out.println((i + 1) + ". " + expenses.get(i).toString());
+                ui.printMessage((i + 1) + ". " + expenses.get(i).toString());
                 totalExpenses += expenses.get(i).getAmount();
             }
             System.out.printf("Total expenses is: $%.2f.\n", totalExpenses);

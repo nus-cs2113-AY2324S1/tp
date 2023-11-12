@@ -94,23 +94,23 @@ public class Parser {
             resultCommand = "list_exchange_rates";
         } else if (commandLowerCase.startsWith("update exchange rate ")) {
             resultCommand = "update_exchange_rate";
-        } else if (commandLowerCase.startsWith("help add")) {
+        } else if (commandLowerCase.equals("help add")) {
             resultCommand = "help_add";
-        } else if (commandLowerCase.startsWith("help list")) {
+        } else if (commandLowerCase.equals("help list")) {
             resultCommand = "help_list";
-        } else if (commandLowerCase.startsWith("help delete")) {
+        } else if (commandLowerCase.equals("help delete")) {
             resultCommand = "help_delete";
-        } else if (commandLowerCase.startsWith("help edit")) {
+        } else if (commandLowerCase.equals("help edit")) {
             resultCommand = "help_edit";
-        } else if (commandLowerCase.startsWith("help balance")) {
+        } else if (commandLowerCase.equals("help balance")) {
             resultCommand = "help_balance";
-        } else if (commandLowerCase.startsWith("help update exchange rate")) {
+        } else if (commandLowerCase.equals("help update exchange rate")) {
             resultCommand = "help_update_exchange_rate";
-        } else if (commandLowerCase.startsWith("help find")) {
+        } else if (commandLowerCase.equals("help find")) {
             resultCommand = "help_find";
-        } else if (commandLowerCase.startsWith("help clear")) {
+        } else if (commandLowerCase.equals("help clear")) {
             resultCommand = "help_clear";
-        } else if (commandLowerCase.startsWith("help exit")) {
+        } else if (commandLowerCase.equals("help exit")) {
             resultCommand = "help_exit";
         } else {
             resultCommand = "invalid";
