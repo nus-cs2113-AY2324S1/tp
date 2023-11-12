@@ -242,15 +242,9 @@ public class Ui {
         System.out.format(leftAlignFormat, front, back);
     }
 
-    public void showSalesDivider() {
-        showToUser(Messages.SHOW_SALES_DIVIDER);
-    }
-
     public void showChefMessage() {
         showToUser(Messages.CHEF_MESSAGE);
     }
-
-
 
     /**
      * Shows the total cost in the order list, formatted in the proper format
