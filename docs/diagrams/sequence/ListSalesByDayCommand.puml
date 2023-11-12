@@ -15,12 +15,6 @@ activate Sales
 Sales -> OrderList: orderList.hasCompleteOrders()
 
 activate OrderList
-loop orderList
-OrderList -> Order ** : order.getIsComplete()
-activate Order
-return :Boolean
-destroy Order
-end loop
 return :Boolean
 
 alt no complete order || no orders
@@ -44,9 +38,9 @@ return
 end loop
 
 loop aggregatedOrder
-OrderList -> Order **:create
+OrderList -> Order **:
 activate Order
-return
+return aggregatedOrder: Order
 OrderList -> Order: aggregatedOrder.getDishName()
 activate Order
 return :String
