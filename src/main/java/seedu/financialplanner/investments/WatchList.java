@@ -1,5 +1,6 @@
 package seedu.financialplanner.investments;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -71,6 +72,16 @@ public class WatchList {
         }
         if(!key.equals(stockToCheck.getSymbol())) {
             isValid = false;
+        }
+        if (stockToCheck.getHashCode() == 0) {
+            if (!ObjectUtils.allNull(
+                    stockToCheck.getPrice(),
+                    stockToCheck.getDayHigh(),
+                    stockToCheck.getDayLow(),
+                    stockToCheck.getLastUpdated(),
+                    stockToCheck.getExchange()) || stockToCheck.getLastFetched() != 0) {
+                isValid = false;
+            }
         }
         if (!isValid) {
             Ui.getInstance().printInvalidStockLoaded(key);
@@ -192,23 +203,30 @@ public class WatchList {
     /**
      * Method to extract out required information from the full JSON array received from the API
      *
-     * @param jsonstocks
+     * @param jsonStocks
      * @throws FinancialPlannerException
      */
-    public void extractWatchlistInfoFromJSONArray(JSONArray jsonstocks) throws FinancialPlannerException {
-        if (jsonstocks == null) {
+    public void extractWatchlistInfoFromJSONArray(JSONArray jsonStocks) throws FinancialPlannerException {
+        if (jsonStocks == null) {
             throw new FinancialPlannerException("Incorrect API Response Received. Please try again");
         }
-        if (jsonstocks.isEmpty()) {
+        if (jsonStocks.isEmpty()) {
             return;
         }
         long fetchTime = System.currentTimeMillis();
-        for (Object jo : jsonstocks) {
+        for (Object jo : jsonStocks) {
             JSONObject stock = (JSONObject) jo;
             if (stocks.containsKey(stock.get("symbol").toString().toUpperCase())) {
                 Stock stockLocal = stocks.get(stock.get("symbol").toString().toUpperCase());
-                extractStockInfoFromJSONObject(stock, stockLocal, fetchTime);
+                extractStockInfoFromJSONObject(stock, stockLocal);
             }
+        }
+        setLastFetched(fetchTime);
+    }
+
+    public void setLastFetched(long fetchTime) {
+        for (Stock stock : stocks.values()) {
+            stock.setLastFetched(fetchTime);
         }
     }
 
@@ -218,10 +236,9 @@ public class WatchList {
      *
      * @param stock
      * @param stockLocal
-     * @param fetchTime
      */
-    public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal, long fetchTime) {
-        stockLocal.setLastFetched(fetchTime);
+    public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal) {
+        //stockLocal.setLastFetched(fetchTime);
 
         String price = stock.get("price").toString();
         assert price != null;

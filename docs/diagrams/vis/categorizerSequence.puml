@@ -7,14 +7,16 @@ autoactivate on
 participant ":VisCommand"
 participant "<<class>>\nCategorizer"
 
-":VisCommand"-> "<<class>>\nCategorizer": Categorizer.sortType(cashflowList, type)
+activate ":VisCommand"
+
+":VisCommand"-> "<<class>>\nCategorizer": sortType(cashflowList, type)
 
 alt "expense"
     "<<class>>\nCategorizer" -> "<<class>>\nCategorizer": sortExpenses(cashflowList)
-    return
+    return expenseByCat
 else "income"
     "<<class>>\nCategorizer" -> "<<class>>\nCategorizer": sortIncome(cashflowList)
-    return
+    return incomeByCat
 end
 
 return sortedCashflow: Map<String,Double>

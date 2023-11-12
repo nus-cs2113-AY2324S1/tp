@@ -341,7 +341,8 @@ public abstract class LoadData {
                 throw new FinancialPlannerException("You have more than 5 entries in watchlist.json");
             }
             if (!checkHashCode(stocksData)) {
-                throw new FinancialPlannerException("watchlist.json values were edited");
+                throw new FinancialPlannerException("watchlist.json values were edited. " +
+                        "Please do not change the generated values!");
             }
         } catch (FileNotFoundException e) {
             ui.showMessage("Watchlist file not found... Creating");

@@ -5,9 +5,7 @@ mainframe sd displaying chart
 participant ":VisCommand"
 participant "<<class>>\nVisualizer"
 
-":VisCommand"-> "<<class>>\nVisualizer": Visualizer.displayChart(chart, sortedCashFlow, type)
-
-activate "<<class>>\nVisualizer"
+":VisCommand"-> "<<class>>\nVisualizer": displayChart(chart, sortedCashFlow, type)
 
 alt "pie"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayPieChart(cashflowList, type)
@@ -16,8 +14,6 @@ else "bar"
 else "radar"
     "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayRadarChart(cashflowList, type)
 end
-
-return
 
 hide footbox
 
