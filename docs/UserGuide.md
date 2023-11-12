@@ -342,7 +342,7 @@ and change the line in txt file to the correct format.
 
 | Action               | Format, Examples                                                                                                                                                                                            |
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help                 | `help` `help add` `help list` `help list` `help delete` `help edit` `help balance` `help update exchange rate` `help clear` `help find` `help balance`                                                      |
+| Help                 | `help` <br> `help add` <br> `help list` <br> `help list` <br> `help delete` <br> `help edit` <br> `help balance` <br> `help update exchange rate` <br> `help clear` <br> `help find` <br> `help balance`                                                      |
 | Add Income           | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                                          |
 | Add Expense          | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`                    |
 | List                 | `list` <br> `list incomes` <br> `list expenses` <br> `list currencies` <br> `list exchange rates`                                                                                                           |
