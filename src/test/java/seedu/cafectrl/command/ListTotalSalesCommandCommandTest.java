@@ -53,7 +53,7 @@ public class ListTotalSalesCommandCommandTest {
         Order order4 = new Order(dishChickenChop, 1);
         order4.setComplete(true);
         Order order5 = new Order(dishChickenChop, 1);
-        order5.setComplete(true); 
+        order5.setComplete(true);
 
         // Create a dummy order list for day 3
         OrderList orderList3 = new OrderList();
