@@ -45,7 +45,7 @@ public class Flashcard {
             }
         }
 
-        globalMaxId = currentMax + 1;
+        globalMaxId = currentMax;
     }
 
     public int getId() {

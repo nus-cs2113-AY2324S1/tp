@@ -23,8 +23,25 @@ public class CreateFlashcardCommand extends FlashcardCommand {
     public void execute(Scanner scanner, FlashcardList flashcardList) {
         System.out.print("    Enter the front page text: ");
         String frontPageText = scanner.nextLine();
+
+        while (frontPageText.strip().equals("")) {
+            System.out.println("        Invalid input! The front text must " +
+                    "contain at least one letter or digit!");
+
+            System.out.print("    Enter the front page text: ");
+            frontPageText = scanner.nextLine();
+        }
+
         System.out.print("    Enter the back page text: ");
         String backPageText = scanner.nextLine();
+
+        while (backPageText.strip().equals("")) {
+            System.out.println("        Invalid input! The back text must " +
+                    "contain at least one letter or digit!");
+
+            System.out.print("    Enter the back page text: ");
+            backPageText = scanner.nextLine();
+        }
 
         Flashcard flashcard = new Flashcard(frontPageText, backPageText);
 

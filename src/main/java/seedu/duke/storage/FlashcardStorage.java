@@ -1,4 +1,8 @@
-package seedu.duke.flashcard;
+package seedu.duke.storage;
+
+import seedu.duke.flashcard.Flashcard;
+import seedu.duke.flashcard.FlashcardList;
+import seedu.duke.storage.exceptions.FlashcardFileFormatException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static seedu.duke.storage.FlashcardStorageParser.flashcardFileChecker;
 
 /**
  * storage for flashcards
@@ -47,11 +53,19 @@ public class FlashcardStorage {
         File f = new File (this.path);
         Scanner s = new Scanner(f);
 
-        while(s.hasNext()){
-            String[] flashTokens = s.nextLine().split(" \\| ");
-            flashcardList.add(FlashcardStorageParser.loadFlashcard(flashTokens));
-            flashlogger.log(Level.INFO, "added flashcard");
+        try{
+            while(s.hasNext()){
+                String[] flashTokens = s.nextLine().split(" \\| ");
+                flashcardFileChecker(flashTokens);
+                flashcardList.add(FlashcardStorageParser.loadFlashcard(flashTokens));
+                flashlogger.log(Level.INFO, "added flashcard");
 
+            }
+        } catch (FlashcardFileFormatException e) {
+            System.out.println("The flashcard save file is corrupted");
+            System.out.println("Automatically making new file");
+            flashcardList = new FlashcardList(new ArrayList<>());
+            saveFlashcards(flashcardList.getFlashcards());
         }
 
         flashlogger.log(Level.INFO, String.format(
