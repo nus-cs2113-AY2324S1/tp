@@ -2,7 +2,7 @@
 !include Style.puml
 
 class QuizHub {
-    + **Run** ()
+    + **Run** (): void
 }
 
 class Parser {
@@ -18,20 +18,20 @@ class Parser {
 
 class Ui {
     - **input** : Scanner
-    + {static} **showLine** ()
+    + {static} **showLine** (): void
     + **getUserInput** (): String
-    + **displayQuestion** (question: Question, currentQuestionIndex: int, totalQuestions: int)
-    + **displayMessage** (message: String)
-    + **displayOpeningMessage** ()
-    + **displayClosingMessage** ()
+    + **displayQuestion** (question: Question, currentQuestionIndex: int, totalQuestions: int): void
+    + **displayMessage** (message: String): void
+    + **displayOpeningMessage** (): void
+    + **displayClosingMessage** (): void
 }
 
 class Storage {
     - **dataFile** : File
-    - **writeToFile** (filePath: String, textToAdd: String, toAppend: boolean)
-    + **loadData** (questions: QuestionList)
-    + **updateData** (questions: QuestionList)
-    + **buildCurrentListFromFile** (questions: QuestionList)
+    - **writeToFile** (filePath: String, textToAdd: String, toAppend: boolean): void
+    + **loadData** (questions: QuestionList): void
+    + **updateData** (questions: QuestionList): void
+    + **buildCurrentListFromFile** (questions: QuestionList): void
     - **addShortAnsFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
     - **addMCQFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
 }
@@ -39,16 +39,16 @@ class Storage {
 class QuestionList {
     + **addShortAnswerQn** (description: String, answer: String, module: String, qnDifficulty: Question.QnDifficulty, showMessage: boolean): boolean
     + **addMultipleChoiceQn** (description: String, option1: String, option2: String, option3: String, option4: String, answer: int, module: String, qnDifficulty: Question.QnDifficulty, showMessage: boolean): boolean
-    + **markQuestionDifficulty** (index: int, qnDifficulty: Question.QnDifficulty, showMessage: boolean)
-    + **deleteQuestionByIndex** (index: int)
+    + **markQuestionDifficulty** (index: int, qnDifficulty: Question.QnDifficulty, showMessage: boolean): void
+    + **deleteQuestionByIndex** (index: int): void
     + **viewQuestionByIndex** (index: int): String
-    + **editQuestionByIndex** (index: int, editField: String, newValue: String)
-    + **searchListByDescription** (keyword: String)
-    + **searchListByModule** (module: String)
-    + **shuffleQuestions** (ui: Ui)
+    + **editQuestionByIndex** (index: int, editField: String, newValue: String): void
+    + **searchListByDescription** (keyword: String): void
+    + **searchListByModule** (module: String): void
+    + **shuffleQuestions** (ui: Ui): void
     + **getQuestionListSize** (): int
     + **getAllQns** (): ArrayList<Question>
-    + **startQuiz** (ui: Ui, questions: ArrayList<Question>)
+    + **startQuiz** (ui: Ui, questions: ArrayList<Question>): void
 }
 
 class Question {
@@ -60,13 +60,13 @@ class Question {
     + **getQuestionType** (): QnType
     + **getModule** (): String
     + **getDifficulty** (): QnDifficulty
-    + **editQuestion** (newDescription: String, newAnswer: String)
-    + **markDifficulty** (qnDifficulty: QnDifficulty)
+    + **editQuestion** (newDescription: String, newAnswer: String): void
+    + **markDifficulty** (qnDifficulty: QnDifficulty): void
     + **checkAnswerCorrectness** (userAnswer: String): boolean
 }
 
 class Command {
-  + **executeCommand** (ui: Ui, dataStorage: Storage, questions: QuestionList)
+  + **executeCommand** (ui: Ui, dataStorage: Storage, questions: QuestionList): void
   + **toExit** (): boolean
 }
 
