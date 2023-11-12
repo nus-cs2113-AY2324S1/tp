@@ -22,7 +22,7 @@ public class FlashcardCommandParser {
      * @return The FlashcardCommand corresponding to input
      */
     public FlashcardCommand parseInput(String input) {
-        assert input != null : "input is null";
+        assert input != null : "input must not be null";
 
         input = input.toLowerCase().strip();
 
