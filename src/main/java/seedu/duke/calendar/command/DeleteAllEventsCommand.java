@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan
+//@@author Brian030601
 
 package seedu.duke.calendar.command;
 
@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class DeleteAllEventsCommand extends EventCommand {
 
+    //@@author Brian030601
     /**
      * The execute method is used to delete all events from the EventList. The method takes two
      * parameters (Scanner , EventList). However, scanner is not used here. It's given because

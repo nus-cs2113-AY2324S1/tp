@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan
+//@@author Brian030601
 
 package seedu.duke.calendar.command;
 
@@ -22,7 +22,7 @@ public class AddEventCommand extends DualEventCommand {
                 "EVENT_END_DATE (in format yyyy-mm-ddThh:mm:ss)";
     }
 
-    //@@author kherlenbayasgalan
+    //@@author Brian030601
     /**
      * The executeBeginnerMode method is used to add an event to the calendar.
      * It has two parameters (Scanner, EventList). The EventList is used to add an
@@ -76,8 +76,8 @@ public class AddEventCommand extends DualEventCommand {
         }
     }
 
-    //@@author kherlenbayasgalan
 
+    //@@author Brian030601
     /**
      * The parseDateTimeInput takes two parameters (Scanner , String) and through those parameters
      * the method gets user's input. Using exception handling of LocalDateTime, the user checks if the
