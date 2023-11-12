@@ -332,7 +332,7 @@ to the folder where the jar file located in the new computer
 **Q**: What do I need to do when I see the `format incorrect from storage file` at the beginning of running the program
 
 **A**: The system will automatically remove that line from the txt after you give the first command to the bot, 
-if you don't want to remove that line, just terminate the program using control/command c right after you see the error,
+if you don't want to remove that line, just terminate the program using control c right after you see the error,
 and change the line in txt file to the correct format.
 
 ## Command Summary
