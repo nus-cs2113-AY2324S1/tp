@@ -68,7 +68,7 @@ public class Parser implements ParserUtil {
             + "qty/([A-Za-z0-9\\s]+)";
 
     /** The rest of Command Handler Patterns*/
-    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "(.+)";
+    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "index/(.+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*)\\sprice/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
@@ -445,14 +445,18 @@ public class Parser implements ParserUtil {
         }
 
         try {
-            int dishIndex = Integer.parseInt(matcher.group(1));
+            int dishIndex = Integer.parseInt(matcher.group(1).trim());
+
+            if (dishIndex < 0) {
+                throw new Exception();
+            }
 
             if (!menu.isValidDishIndex(dishIndex)) {
                 return new IncorrectCommand(ErrorMessages.UNLISTED_DISH, ui);
             }
 
             return new ListIngredientCommand(dishIndex, menu, ui);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX_TO_LIST, ui);
         }
     }
@@ -642,9 +646,12 @@ public class Parser implements ParserUtil {
         }
 
         try {
-            int day = Integer.parseInt(matcher.group(1));
+            int day = Integer.parseInt(matcher.group(1).trim());
+            if (day < 0) {
+                throw new Exception();
+            }
             return new ListSaleByDayCommand(day, ui, sales, menu);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_DAY_FORMAT, ui);
         }
     }
