@@ -119,7 +119,8 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 
 ### Other Contributions to Team-based Task
 1. Maintaining the issue tracker
-2. Testing of application and reporting bugs found.
+2. Testing of application and reporting bugs found. 
+   - example:  ![Relevant Telegram screenshot](../images_PPP/naychi/exampleOfBugReport.png)
 
 ### Review / Mentoring Contributions
 1. Reviewed and merged some PRs such as [#313](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/313), ...
