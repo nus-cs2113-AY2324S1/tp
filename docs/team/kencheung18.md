@@ -24,9 +24,9 @@ Given below are contributions that I made to this project.
 - Created the Balance function which allow user to check the balance on current financial record.
 - Contributed to the Duke class to allow user's command actually execute the way they expected.
 - Contributed to the Parser class to make sure user's input is parse to a command that the Duke class can understand.
-- Contributed to the EditIncomeCommand and EditExpenseCommand to create a better UI.
-- Done up JUnit tests for `SaveToTxt`, `GetFromTxt`, `UsageInstruction`, `ClearIncomes`, `ClearExpenses`, `ClearAll`, `Balance`.
-- Contributed to JUnit tests for `Duke`, `DeleteExpenseCommand`, `DeleteIncomeCommand`.
+- Contributed to different classes to create a better UI and fix typos.
+- Done up JUnit tests for `SaveToTxt`, `GetFromTxt`, `UsageInstruction`, `ClearIncomes`, `ClearExpenses`, `ClearAll`, `Balance`, `ExpenseLister`, `UpdateExchangeRateCommand`, `ListCommand`.
+- Contributed to JUnit tests for `Duke`, `DeleteExpenseCommand`, `DeleteIncomeCommand`, ``
 
 ### Contributions to UserGuide:
 - Checked and improve the grammar and typo for UG..
