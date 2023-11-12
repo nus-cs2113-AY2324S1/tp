@@ -218,8 +218,15 @@ public class WatchList {
             JSONObject stock = (JSONObject) jo;
             if (stocks.containsKey(stock.get("symbol").toString().toUpperCase())) {
                 Stock stockLocal = stocks.get(stock.get("symbol").toString().toUpperCase());
-                extractStockInfoFromJSONObject(stock, stockLocal, fetchTime);
+                extractStockInfoFromJSONObject(stock, stockLocal);
             }
+        }
+        setLastFetched(fetchTime);
+    }
+
+    public void setLastFetched(long fetchTime) {
+        for (Stock stock : stocks.values()) {
+            stock.setLastFetched(fetchTime);
         }
     }
 
@@ -229,10 +236,9 @@ public class WatchList {
      *
      * @param stock
      * @param stockLocal
-     * @param fetchTime
      */
-    public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal, long fetchTime) {
-        stockLocal.setLastFetched(fetchTime);
+    public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal) {
+        //stockLocal.setLastFetched(fetchTime);
 
         String price = stock.get("price").toString();
         assert price != null;
