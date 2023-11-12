@@ -205,7 +205,7 @@ public class Ui {
     }
 
     public void showIngredientTop() {
-        showToUser(Messages.MENU_END_CAP, Messages.VIEW_STOCK_MESSAGE2,
+        showToUser(Messages.MENU_END_CAP, Messages.VIEW_STOCK_MESSAGE,
                 Messages.MENU_CORNER, Messages.VIEW_STOCK_TITLE_MESSAGE, Messages.MENU_CORNER);
     }
 
@@ -242,15 +242,9 @@ public class Ui {
         System.out.format(leftAlignFormat, front, back);
     }
 
-    public void showSalesDivider() {
-        showToUser(Messages.SHOW_SALES_DIVIDER);
-    }
-
     public void showChefMessage() {
         showToUser(Messages.CHEF_MESSAGE);
     }
-
-
 
     /**
      * Shows the total cost in the order list, formatted in the proper format

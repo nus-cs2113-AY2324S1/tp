@@ -35,6 +35,10 @@ public class CurrentDate {
     public void setDate(Sales sales) {
         ArrayList<OrderList> orderLists = sales.getOrderLists();
         int orderListsSize = orderLists.size();
-        currentDay = orderListsSize - 1;
+        if (orderListsSize > 0) {
+            currentDay = orderListsSize - 1;
+        } else {
+            currentDay = 0;
+        }
     }
 }

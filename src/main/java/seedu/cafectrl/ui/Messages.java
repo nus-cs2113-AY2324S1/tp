@@ -32,9 +32,7 @@ public class Messages {
 
     /** Messages for view stock command */
     public static final String EMPTY_STOCK = "Sorry! Pantry is currently empty!";
-
-    public static final String VIEW_STOCK_MESSAGE = "You have the following ingredients in pantry:";
-    public static final String VIEW_STOCK_MESSAGE2 = "| You have the following ingredients in pantry:         |";
+    public static final String VIEW_STOCK_MESSAGE = "| You have the following ingredients in pantry:         |";
     public static final String VIEW_STOCK_TITLE_MESSAGE = "| Ingredients                            |  Qty         |";
 
     /** Messages for help command */
@@ -54,8 +52,6 @@ public class Messages {
             + "------------------------------------+";
     public static final String SHOW_SALES_CORNER = "+----------------------------------------"
             + "+--------------+-------------------+";
-    public static final String SHOW_SALES_DIVIDER = "======================================"
-            + "=======================================";
 
     /** Messages for order command */
     public static final String CHEF_MESSAGE = "I'm busy crafting your selected dish "
@@ -107,5 +103,9 @@ public class Messages {
 
     public static final String SALES_ORDER_TEXT_TAMPERED = "Unfortunately, any orders not following the format "
             + "and invalid have been wiped from my memory banks. Poof!" ;
+
+    public static final String HASH_STRING_TAMPERED = "Alert! It appears the hash string "
+            + "got a makeover without permission.";
+    public static final String HASH_STRING_MESSAGE = "Please resist the temptation to play Picasso with this string.";
 
 }

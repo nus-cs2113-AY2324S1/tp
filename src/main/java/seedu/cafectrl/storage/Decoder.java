@@ -95,6 +95,7 @@ public class Decoder {
      * @return a new pantry object with data from the pantry stock data file
      */
     public static Pantry decodePantryStockData(ArrayList<String> encodedPantryStock) {
+        logger.info("Decoding Pantry_stock.txt to PantryStock...");
         ArrayList<Ingredient> pantryStock = new ArrayList<>();
         Ingredient ingredient;
 
@@ -102,6 +103,7 @@ public class Decoder {
             return new Pantry(ui);
         }
         for (String encodedData : encodedPantryStock) {
+            logger.info("Line to decode: " + encodedData);
             String[] decodedData = encodedData.split(DIVIDER);
             if (!isValidPantryStockFormat(decodedData)) {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
@@ -116,6 +118,7 @@ public class Decoder {
             try {
                 qty = Integer.parseInt(qtyText);
             } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
                 continue;
             }
@@ -129,6 +132,7 @@ public class Decoder {
                 ingredient = new Ingredient(ingredientName, qty, unit);
                 pantryStock.add(ingredient);
             } else {
+                logger.info(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
             }
         }
@@ -201,6 +205,9 @@ public class Decoder {
                     salesOrderTextTamperDetectionMessagePrinted = true;
                 }
             }
+        }
+        if (orderLists.isEmpty()) {
+            return new Sales();
         }
         return new Sales(orderLists);
     }
