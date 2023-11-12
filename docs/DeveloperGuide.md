@@ -491,4 +491,3 @@ shows you the welcome screen for the financial planner app
    1. Type `exit` into the terminal. 
    2. Expected: the financial planner will exit with a goodbye message.
 Under the data newly created data directory, a watchlist.json and a data.txt file will be created
-
