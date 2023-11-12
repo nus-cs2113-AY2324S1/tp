@@ -183,7 +183,7 @@ Note:
 Use case:
 - Prompts users if `/t <type>` field is empty.
 - Prompts users if all the optional fields `cat`, `/de`, `/date`. are empty.
-- Format of date is `dd/mm/yyyy`. Users can also opt to search for entries by month `mm/yyyy`.
+- Format of date is `dd/MM/yyyy`. Users can also opt to search for entries by month `mm/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 
 
