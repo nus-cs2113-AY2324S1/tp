@@ -3,9 +3,18 @@ package seedu.cafectrl.ui;
 public class Messages {
 
     /** Greeting messages */
-    public static final String LINE_STRING = "----------------------------------------------------------";
-    public static final String WELCOME_MESSAGE = "Hello! Welcome to CafeCTRL!";
+    public static final String LINE_STRING = "------------------------------------------------------------------------";
+
     public static final String GOODBYE_MESSAGE = "Goodbye <3 Have a great day ahead!";
+
+    public static final String LOGO =
+            "     _/_/_/                _/_/              _/_/_/    _/                _/   \n" +
+            "  _/          _/_/_/    _/        _/_/    _/        _/_/_/_/  _/  _/_/  _/    \n" +
+            " _/        _/    _/  _/_/_/_/  _/_/_/_/  _/          _/      _/_/      _/     \n" +
+            "_/        _/    _/    _/      _/        _/          _/      _/        _/      \n" +
+            " _/_/_/    _/_/_/    _/        _/_/_/    _/_/_/      _/_/  _/        _/       ";
+
+    public static final String WELCOME_MESSAGE = "Hello! Welcome to \n" + LOGO;
 
     /** Messages for edit price command */
     public static final String PRICE_MODIFIED_MESSAGE = "Price modified for the following dish: ";
@@ -20,7 +29,6 @@ public class Messages {
 
     /** Messages for add dish command */
     public static final String ADD_DISH_MESSAGE = "You have added the following dish...";
-    public static final String REPEATED_DISH_MESSAGE = "Sorry, this dish name already exists.";
 
     /** Messages for view stock command */
     public static final String EMPTY_STOCK = "Sorry! Pantry is currently empty!";
@@ -73,7 +81,7 @@ public class Messages {
     /** Messages for list ingredients */
     public static final String INGREDIENTS_END_CAP = "+-------------------------------------------------------+";
     public static final String INGREDIENTS_CORNER =  "+----------------------------------------+--------------+";
-    public static final String INGREDIENTS_TITLE =   "| Ingredient                             + Quantity     +";
+    public static final String INGREDIENTS_TITLE =   "| Ingredient                             + Quantity     |";
     /** Messages for decoder **/
     public static final String INVALID_DISH = " does not exist in our menu. \n"
             + "You might have tempered with the file and added in a non existing dish.\n"
