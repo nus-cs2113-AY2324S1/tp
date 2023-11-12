@@ -76,7 +76,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 - Maximum amount for each cashflow and total balance that the program can hold is 999,999,999,999.99
 - Minimum amount for each cashflow and total balance that the program can hold is -999,999,999,999.99
 - Total Balance, Income balance, and Expense balance are different entities where the latter two do not have the same limitations.
-- Maximum value for recurrence is 2,147,483,647, the maximum number an `int` can hold.
+- Maximum value for recurrences and indexes is 2,147,483,647, the maximum number an `int` can hold.
 
 ### Add cashflow
 
