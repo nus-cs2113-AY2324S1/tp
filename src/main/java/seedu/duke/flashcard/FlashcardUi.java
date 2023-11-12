@@ -21,6 +21,8 @@ public class FlashcardUi {
      */
     public FlashcardUi(FlashcardList flashcardList) {
         scanner = new Scanner(System.in);
+
+        assert flashcardList != null : "flashcardList cannot be null";
         this.flashcardList = flashcardList;
     }
 
