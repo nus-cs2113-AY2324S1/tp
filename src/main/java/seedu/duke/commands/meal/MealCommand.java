@@ -8,7 +8,6 @@ import seedu.duke.commands.CommandResult;
 import seedu.duke.data.meal.Meal;
 
 public class MealCommand extends Command {
-    public static final String COMMAND_WORD = "test";
     protected static ArrayList<Meal> meals;
 
     public MealCommand() {
@@ -23,14 +22,28 @@ public class MealCommand extends Command {
         MealCommand.meals = new ArrayList<>(meals);
     }
 
-    protected void checkArgument(String[] arguments, int validArgumentAmount) throws Exception {
-        if (arguments == null || arguments.length != 2) {
+    protected void checkArgument(List<String> arguments, int[] validArgumentAmounts) throws Exception {
+        Boolean isValid = false;
+        if (arguments != null) {
+            int size = arguments.size();
+            if (arguments.get(0) == "") {
+                size = 0;
+            }
+            for (int i = 0; i < validArgumentAmounts.length; i++) {
+                if (size == validArgumentAmounts[i]) {
+                    isValid = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isValid) {
             throw new Exception("Incorrect amount of the arguments.");
         }
     }
 
     @Override
     public CommandResult execute() throws Exception {
-        throw new UnsupportedOperationException("meal command");
+        throw new UnsupportedOperationException("Meal command that hasn't been implemented.");
     }
 }
