@@ -31,6 +31,7 @@ public class Decoder {
     private static final String INGREDIENT_DIVIDER = " - ";
     private static final Ui ui = new Ui();
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+
     //@@author ShaniceTang
     /**
      * Decodes an ArrayList of string lines into a Menu object, reconstructing its content.
@@ -125,6 +126,7 @@ public class Decoder {
 
             // Check whether the parameters are correct
             if (!Parser.containsSpecialChar(ingredientName)
+                    && !Parser.isNameLengthInvalid(ingredientName)
                     && !Parser.isRepeatedIngredientName(ingredientName, pantryStock)
                     && !Parser.isInvalidQty(qty)
                     && !Parser.isEmptyUnit(unit)
@@ -226,5 +228,4 @@ public class Decoder {
         }
         return orderLists;
     }
-
 }
