@@ -267,8 +267,9 @@ The following sequence diagram shows how the Command Result function works.
 
 ##### Drug
 
-The Drug class is very basic class for now. It only contains the product name as well as it's expiry date, but we will
-soon add some new properties such as product description, etc...
+The Drug class is a basic class that holds information related to drug stock management for users. It contains the 
+product name, its serial number, its quantity, expiry date and price. These are the most necessary inputs needed, to 
+allow for proper distribution, selling or storing of the drug. 
 
 ##### Inventory
 
@@ -280,12 +281,20 @@ StockEntry" class.
 
 The Cart class is used to represent an ongoing transaction : to perform a sale, the vendor can add different products
 with their respective quantities in a cart which will be deducted from the inventory at the checkout.
-To represent this, we chose to use an arraylist of "CartEntry" classes which reprensent a product/quantity tuple.
+To represent this, we chose to use an arraylist of "CartEntry" classes which represent a product/quantity tuple.
 
 ##### SalesList
 
 The SalesList is used to represent every past sales in order to create some statistics and reports. This class is only a
 list of subclasses representing validated carts.
+
+##### Vendors
+
+The VendorsList class and VendorSupplyList class is used to keep track of all information related to the vendors who 
+supply the drugs. The VendorsList uses an arrayList to store the vendor names, and the VendorSupplyList manages and 
+stores the association between the vendor names and their respective supplies using the HashMap. 
+However, the supply list is only associated with the VendorsList, and not the drug class, as it is a catalogue more 
+relevant to the buying and re-ordering of drugs from vendors. 
 
 ---
 
@@ -729,16 +738,19 @@ Priorities: High (must have) - \* \* _, Medium (nice to have) - _ _, Low (unlike
 | \* \* \* | v1.0    | Pharmacist           | Remove drugs to track what are no longer in used     | Ensure compliance                                              |
 | \* \* \* | v1.0    | Receptionist         | View a list of products of that category             | Easily obtain an overview of the products                      |
 | \* \* \* | v1.0    | First-time user      | See a list of all available actions                  | Better understand how to use the application                   |
-| \* \* \* | v1.0    | Inventory Manager    | Find a specific drug currently in the system         | Check up its details and quantities specifically               |
+| \* \* \* | v1.0    | Inventory Staff      | Find a specific drug currently in the system         | Check up its details and quantities specifically               |
 | \* \* \* | v1.0    | user                 | Have a way to login to the system                    | Access the system only if i am allowed to                      |
 | \* \*    | v2.0    | System Administrator | Perform regular backup of inventory database         | Safeguard against data loss and system failure                 |
 | \* \* \* | v2.0    | Receptionist         | Add vendors supplying drugs into the system          | Keep track of what vendors i am working with                   |
 | \* \* \* | v2.0    | Receptionist         | View a list of vendors                               | Easily access a list of contacts for current and future orders |
-| \* \* \* | v2.0    | Receptionist         | Add and view vendors' supply lists                   | Keep track of what each vendors' supply                        |
-| \* \* \* | v2.0    | Receptionist         | Find which drugs are supplied by which vendors       | Easily access a list of vendors to contact for drug reordering |
-| \* \*    | v2.0    | Receptionist         | Add and view descriptions of various drugs           | Easily access usage of products for quick reference            |
+| \* \* \* | v2.0    | Inventory Staff      | Add and view vendors' supply lists                   | Keep track of what each vendors' supply                        |
+| \* \* \* | v2.0    | Inventory Staff      | Find which drugs are supplied by which vendors       | Easily access a list of vendors to contact for drug reordering |
+| \* \*    | v2.0    | Pharmacist           | Add and view descriptions of various drugs           | Easily access usage of products for quick reference            |
+| \* \*    | v2.0    | Receptionist         | Add drugs to cart and checkout                       | facilitate the selling of those drugs to clients               |
+| \* \*    | v2.0    | Receptionist         | View total price of drugs in cart                    | Easily keep track of what clients would pay and the revenue    |
+| \* \* \* | v2.0    | Inventory Staff      | Get alerts for low stock                             | Replenish the drugs in low quantity                            |
 
-_(More to be added)_
+
 
 ## Non-Functional Requirements
 
