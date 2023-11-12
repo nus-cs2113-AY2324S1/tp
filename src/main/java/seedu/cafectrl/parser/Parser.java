@@ -47,18 +47,22 @@ public class Parser implements ParserUtil {
 
     //@@author DextheChik3n
     /** Add Dish Command Handler Patterns*/
-    private static final String ADD_ARGUMENT_STRING = "name/(?<dishName>[A-Za-z0-9\\s]+) "
-            + "price/(?<dishPrice>\\s*\\S+)\\s+"
-            + "(?<ingredients>ingredient/[A-Za-z0-9\\s]+ qty/.+"
-            + "(?:,\\s*ingredient/[A-Za-z0-9\\s]+ qty/.+)*)";
+    private static final String ADD_ARGUMENT_FORMAT_REGEX = "name/(?<dishName>.*) "
+            + "price/(?<dishPrice>\\s*\\S*)\\s+(?<ingredients>ingredient/.*)";
     private static final String DISH_NAME_MATCHER_GROUP_LABEL = "dishName";
     private static final String PRICE_MATCHER_GROUP_LABEL = "dishPrice";
     private static final String INGREDIENTS_MATCHER_GROUP_LABEL = "ingredients";
-    private static final String INGREDIENT_ARGUMENT_STRING = "\\s*ingredient/(?<ingredientName>[A-Za-z0-9\\s]+) "
-            + "qty/\\s*(?<ingredientQty>[0-9]+)\\s*(?<ingredientUnit>[A-Za-z]*)\\s*";
+    private static final String INGREDIENT_ARGUMENT_FORMAT_REGEX = "\\s*ingredient/(?<ingredientName>.*) "
+            + "qty/\\s*(?<ingredientQty>.*)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    private static final String INGREDIENT_UNIT_REGEX_GROUP_LABEL = "ingredientUnit";
+    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
+    private static final String INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL = "value";
+    private static final String INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL = "unit";
+    private static final String ADD_DISH_NAME_ARGUMENT = "name/";
+    private static final String ADD_DISH_PRICE_ARGUMENT = "price/";
+    private static final String INGREDIENT_ARGUMENT = "ingredient/";
+    private static final String QTY_ARGUMENT = "qty/";
     private static final String INGREDIENT_DIVIDER_REGEX = ",";
 
     /** Add Order Command Handler Patterns*/
@@ -78,6 +82,7 @@ public class Parser implements ParserUtil {
     private static final int MAX_QTY = 1000000;
     private static final String GRAMS_UNIT = "g";
     private static final String ML_UNIT = "ml";
+    private static final String PRICE_INPUT_REGEX = "^-?[0-9]\\d*(\\.\\d{0,2})?$";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author ziyi105
@@ -94,6 +99,7 @@ public class Parser implements ParserUtil {
     public Command parseCommand(Menu menu, String userInput, Ui ui,
             Pantry pantry, Sales sales, CurrentDate currentDate) {
         logger.info("Received user input: " + userInput);
+
         Pattern userInputPattern = Pattern.compile(COMMAND_ARGUMENT_REGEX);
         final Matcher matcher = userInputPattern.matcher(userInput.trim());
 
@@ -230,44 +236,73 @@ public class Parser implements ParserUtil {
      * @return new AddDishCommand
      */
     private static Command prepareAdd(String arguments, Menu menu, Ui ui) {
-        final Pattern addArgumentPatter = Pattern.compile(ADD_ARGUMENT_STRING);
-        Matcher matcher = addArgumentPatter.matcher(arguments);
-
         try {
+            Matcher matcher = detectErrorInPreAddParse(arguments);
             // Checks whether the overall pattern of add arguments is correct
             if (!matcher.matches()) {
                 logger.log(Level.WARNING, "Unmatched regex!");
-                return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT_MESSAGE
+                return new IncorrectCommand(ErrorMessages.INVALID_ADD_DISH_FORMAT
                         + AddDishCommand.MESSAGE_USAGE, ui);
             }
 
             // To retrieve specific arguments from arguments
             //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
             String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
-            float price = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
+            float dishPrice = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
-            if (isNameLengthInvalid(dishName)) {
-                logger.warning("Invalid name length!");
-                throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
-            } else if (isRepeatedDishName(dishName, menu)) {
-                logger.warning("Repeated dish!");
-                throw new ParserException(Messages.REPEATED_DISH_MESSAGE);
-            } else if (containsSpecialChar(dishName)) {
-                throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
-            }
+            detectErrorPostDishNameParse(dishName, menu);
 
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true, menu);
-
-            Dish dish = new Dish(dishName, ingredients, price);
+            Dish dish = new Dish(dishName, ingredients, dishPrice);
 
             return new AddDishCommand(dish, menu, ui);
         } catch (NullPointerException e) {
             logger.log(Level.WARNING, e.getMessage(), e);
             return new IncorrectCommand(ErrorMessages.NULL_NAME_DETECTED_MESSAGE, ui);
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, e.getMessage(), e);
+            return new IncorrectCommand(ErrorMessages.INVALID_INGREDIENT_QTY, ui);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage(), e);
             return new IncorrectCommand(e.getMessage(), ui);
+        }
+    }
+
+    private static Matcher detectErrorInPreAddParse(String arguments) throws ParserException {
+        if (isRepeatedArgument(arguments, ADD_DISH_NAME_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated dish/ argument!");
+            throw new ParserException(ErrorMessages.REPEATED_NAME_ARGUMENT);
+        } else if (isRepeatedArgument(arguments, ADD_DISH_PRICE_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated price/ argument!");
+            throw new ParserException(ErrorMessages.REPEATED_PRICE_ARGUMENT);
+        }
+
+        // Checks whether the overall pattern of add arguments is correct
+        Pattern addArgumentPattern = Pattern.compile(ADD_ARGUMENT_FORMAT_REGEX);
+        Matcher matcher = addArgumentPattern.matcher(arguments);
+
+        if (!matcher.matches()) {
+            logger.log(Level.WARNING, "Unmatched regex!");
+            throw new ParserException(ErrorMessages.INVALID_ADD_DISH_FORMAT + AddDishCommand.MESSAGE_USAGE);
+        }
+
+        return matcher;
+    }
+
+    private static void detectErrorPostDishNameParse(String dishName, Menu menu) throws ParserException {
+        if (dishName.isEmpty()) {
+            logger.warning("Dish name empty!");
+            throw new ParserException(ErrorMessages.MISSING_DISH_NAME);
+        } else if (isNameLengthInvalid(dishName)) {
+            logger.warning("Invalid name length!");
+            throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
+        } else if (isRepeatedDishName(dishName, menu)) {
+            logger.warning("Repeated dish!");
+            throw new ParserException(ErrorMessages.REPEATED_DISH_MESSAGE);
+        } else if (containsSpecialChar(dishName)) {
+            logger.warning("Special character in dish name!");
+            throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
         }
     }
 
@@ -277,11 +312,12 @@ public class Parser implements ParserUtil {
      * @param ingredientsListString user's input string of ingredients, multiple ingredients seperated by ',' is allowed
      * @param menu
      * @return list of ingredients that consists of the dish
-     * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
-     * @throws ParserException          if the input string does not match the constraints
+     * @throws ParserException if the input string does not match the constraints
+     * @throws NumberFormatException if the string value of the ingredient qty does not contain a parsable integer.
      */
-    private static ArrayList<Ingredient> parseIngredients(String ingredientsListString,
-            boolean excludeRepeatedIngredients, Menu menu) throws IllegalArgumentException, ParserException {
+    private static ArrayList<Ingredient> parseIngredients(
+            String ingredientsListString, boolean isExcludeRepeatedIngredients, Menu menu)
+            throws ParserException, NumberFormatException {
         logger.info("Parsing ingredients...");
         String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -294,40 +330,93 @@ public class Parser implements ParserUtil {
 
         //Parsing each ingredient
         for (String inputIngredient: inputIngredientList) {
-            final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_STRING);
-            Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredient);
-
-            if (!ingredientMatcher.matches()) {
-                throw new ParserException(ErrorMessages.INVALID_INGREDIENT_ARGUMENTS);
-            }
-
-            String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
-            String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL);
-            String ingredientUnit = ingredientMatcher.group(INGREDIENT_UNIT_REGEX_GROUP_LABEL);
-            int ingredientQty = Integer.parseInt(ingredientQtyString);
-
-            if (isNameLengthInvalid(ingredientName)) {
-                throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
-            } else if (excludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)){
-                continue;
-            } else if (isInvalidQty(ingredientQty)) {
-                throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY);
-            } else if (isEmptyUnit(ingredientUnit)) {
-                throw new ParserException(ErrorMessages.EMPTY_UNIT_MESSAGE);
-            } else if (!isValidUnit(ingredientUnit)) {
-                throw new ParserException(ErrorMessages.INVALID_UNIT_MESSAGE);
-            } else if (containsSpecialChar(ingredientName)) {
-                throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
-            }
-
-            Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
-            checkForMismatchUnit(menu, ingredient);
-            ingredients.add(ingredient);
+            parseIngredient(isExcludeRepeatedIngredients, menu, inputIngredient, ingredients);
         }
 
         return ingredients;
     }
 
+    private static void parseIngredient(
+            boolean isExcludeRepeatedIngredients, Menu menu, String inputIngredient, ArrayList<Ingredient> ingredients)
+            throws ParserException {
+        Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
+
+        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+        //ingredientQtyString contains the input text after the "qty/" argument
+        String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
+
+        //check the formatting of text after ingredient qty argument (qty/)
+        final Pattern ingredientQtyFormatPattern = Pattern.compile(INGREDIENT_QTY_FORMAT_REGEX);
+        Matcher ingredientQtyMatcher = ingredientQtyFormatPattern.matcher(ingredientQtyString);
+        if (!ingredientQtyMatcher.matches()) {
+            throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY_FORMAT);
+        }
+
+        String ingredientUnit = ingredientQtyMatcher.group(INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL);
+        int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
+
+        detectErrorPostIngredientParse(isExcludeRepeatedIngredients,
+                ingredientName, ingredientQty, ingredientUnit, ingredients);
+
+        Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
+
+        checkForMismatchUnit(menu, ingredient);
+
+        ingredients.add(ingredient);
+    }
+
+    private static Matcher detectErrorPreIngredientParse(String inputIngredient) throws ParserException {
+        if (isRepeatedArgument(inputIngredient, INGREDIENT_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated ingredient/ argument!");
+            throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_ARGUMENT);
+        } else if (isRepeatedArgument(inputIngredient, QTY_ARGUMENT)) {
+            logger.log(Level.WARNING, "Repeated qty/ argument!");
+            throw new ParserException(ErrorMessages.REPEATED_QTY_ARGUMENT);
+        }
+
+        final Pattern ingredientPattern = Pattern.compile(INGREDIENT_ARGUMENT_FORMAT_REGEX);
+        Matcher ingredientMatcher = ingredientPattern.matcher(inputIngredient);
+
+        if (!ingredientMatcher.matches()) {
+            logger.log(Level.WARNING, "Mismatched ingredient arguments!");
+            throw new ParserException(ErrorMessages.INVALID_INGREDIENT_ARGUMENTS);
+        }
+
+        return ingredientMatcher;
+    }
+
+    private static void detectErrorPostIngredientParse(
+            boolean isExcludeRepeatedIngredients, String ingredientName, int ingredientQty,
+            String ingredientUnit, ArrayList<Ingredient> ingredients) throws ParserException {
+
+        //error case
+        if (ingredientName.isEmpty()) {
+            logger.log(Level.WARNING, "Missing ingredient name!");
+            throw new ParserException(ErrorMessages.MISSING_INGREDIENT_NAME);
+        } else if (isNameLengthInvalid(ingredientName)) {
+            logger.log(Level.WARNING, "Exceed max ingredient name length!");
+            throw new ParserException(ErrorMessages.INVALID_INGREDIENT_NAME_LENGTH_MESSAGE);
+        } else if (isInvalidQty(ingredientQty)) {
+            logger.log(Level.WARNING, "Exceed ingredient qty range!");
+            throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY);
+        } else if (isEmptyUnit(ingredientUnit)) {
+            logger.log(Level.WARNING, "Missing ingredient qty unit!");
+            throw new ParserException(ErrorMessages.EMPTY_UNIT_MESSAGE);
+        } else if (!isValidUnit(ingredientUnit)) {
+            logger.log(Level.WARNING, "Invalid ingredient qty unit!");
+            throw new ParserException(ErrorMessages.INVALID_UNIT_MESSAGE);
+        } else if (containsSpecialChar(ingredientName)) {
+            logger.log(Level.WARNING, "Special character in ingredient name!");
+            throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
+        }
+
+        //unusual case
+        //user input repeated ingredient name for add dish command
+        if (isExcludeRepeatedIngredients && isRepeatedIngredientName(ingredientName, ingredients)) {
+            logger.log(Level.WARNING, "Repeated ingredient name for AddDishCommand!");
+            throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_NAME);
+        }
+    }
 
     /**
      * Converts text of price to float while also checking if the price input is within reasonable range
@@ -338,13 +427,15 @@ public class Parser implements ParserUtil {
     public static float parsePriceToFloat(String priceText) throws ParserException {
         String trimmedPriceText = priceText.trim();
 
-        final Pattern pricePattern = Pattern.compile("^-?[0-9]\\d*(\\.\\d{0,2})?$");
+        final Pattern pricePattern = Pattern.compile(PRICE_INPUT_REGEX);
         Matcher priceMatcher = pricePattern.matcher(trimmedPriceText);
 
         // Check whether price text is empty
-        if (priceText.equals("")) {
+        if (priceText.isEmpty()) {
+            logger.log(Level.WARNING, "Missing dish price!");
             throw new ParserException(ErrorMessages.MISSING_PRICE);
         } else if (!priceMatcher.matches()) {
+            logger.log(Level.WARNING, "Exceed price valid range!");
             throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
         }
 
@@ -352,6 +443,7 @@ public class Parser implements ParserUtil {
         try {
             price = Float.parseFloat(trimmedPriceText);
         } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, e.getMessage(), e);
             throw new ParserException(ErrorMessages.WRONG_PRICE_TYPE_FOR_EDIT_PRICE);
         }
 
@@ -370,7 +462,7 @@ public class Parser implements ParserUtil {
     }
 
     /**
-     * Checks in the menu if the dish name already exists in the menu.
+     * Checks in the menu if the dish name already exists.
      * @param inputDishName dish name entered by the user
      * @param menu contains all the existing Dishes
      * @return true if dish name already exists in menu, false otherwise
@@ -382,10 +474,9 @@ public class Parser implements ParserUtil {
         }
 
         for (Dish dish: menu.getMenuItemsList()) {
-            String menuDishNameLowerCase = dish.getName().toLowerCase();
-            String inputDishNameLowerCase = inputDishName.toLowerCase();
+            String menuDishName = dish.getName();
 
-            if (menuDishNameLowerCase.equals(inputDishNameLowerCase)) {
+            if (menuDishName.equalsIgnoreCase(inputDishName)) {
                 return true;
             }
         }
@@ -394,7 +485,7 @@ public class Parser implements ParserUtil {
     }
 
     /**
-     * Checks in the menu if the dish name already exists in the menu.
+     * Checks in the ingredient list if the ingredient name already exists.
      * @param inputName dish name entered by the user
      * @param ingredients contains all the existing Ingredients
      * @return true if ingredient name already exists in menu, false otherwise
@@ -430,6 +521,29 @@ public class Parser implements ParserUtil {
         if (inputName == null) {
             throw new NullPointerException();
         } else if (inputName.length() > maxNameLength) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the argument is entered more than once.
+     * @param inputText text to be checked
+     * @param argument argument to be checked for multiple occurrences
+     * @return true if there is > 1 match of the argument, false otherwise
+     */
+    public static boolean isRepeatedArgument(String inputText, String argument) {
+        if (inputText == null || argument == null) {
+            throw new NullPointerException(ErrorMessages.NULL_STRING_IN_REPEAT_ARGUMENT);
+        }
+
+        Pattern argumentPattern = Pattern.compile(argument);
+        Matcher matcher = argumentPattern.matcher(inputText);
+        int maxNumberOfMatches = 1;
+
+        long argumentMatches = matcher.results().count();
+        if (argumentMatches > maxNumberOfMatches) {
             return true;
         }
 

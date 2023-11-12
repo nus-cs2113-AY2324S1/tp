@@ -125,12 +125,9 @@ public class Decoder {
             }
 
             // Check whether the parameters are correct
-            if (!Parser.containsSpecialChar(ingredientName)
-                    && !Parser.isNameLengthInvalid(ingredientName)
-                    && !Parser.isRepeatedIngredientName(ingredientName, pantryStock)
+            if (isValidIngredientName(ingredientName, pantryStock)
                     && !Parser.isInvalidQty(qty)
-                    && !Parser.isEmptyUnit(unit)
-                    && Parser.isValidUnit(unit)) {
+                    && isValidUnit(unit)) {
                 ingredient = new Ingredient(ingredientName, qty, unit);
                 pantryStock.add(ingredient);
             } else {
@@ -139,6 +136,16 @@ public class Decoder {
             }
         }
         return new Pantry(ui, pantryStock);
+    }
+
+    private static boolean isValidIngredientName(String ingredientName, ArrayList<Ingredient> pantryStock) {
+        return !Parser.containsSpecialChar(ingredientName)
+                && !Parser.isNameLengthInvalid(ingredientName)
+                && !Parser.isRepeatedIngredientName(ingredientName, pantryStock);
+    }
+
+    private static boolean isValidUnit(String unit) {
+        return !Parser.isEmptyUnit(unit) && Parser.isValidUnit(unit);
     }
 
     /**

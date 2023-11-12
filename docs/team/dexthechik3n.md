@@ -47,12 +47,13 @@ e.g checking for repeated dish/ingredient name, invalid price type, missing argu
 ### Review/mentoring contributions
 * Examples of PRs reviewed:
 [#98](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/98), [#119](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/119), [#190](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/190)
-* Managed the project team discussions by providing a meeting outline
-![Screenshot of Project Outline 1](../images_PPP/dexter/project_discussion1.png)<br>
+* Managed the project team discussions by providing a meeting outline <br>
+  <img alt="Screenshot of Project Outline 1" src="../images_PPP/dexter/project_discussion1.png" height="200" width="250"/>
 ![Screenshot of Project Outline 2](../images_PPP/dexter/project_discussion2.png)<br>
-* Provided a summary of the division of labour after meetings
-![Notion Screenshot](../images_PPP/dexter/division_of_labour1.png)<br>
-![Telegram Screenshot](../images_PPP/dexter/division_of_labour.png)<br>
+* Provided a summary of the division of labour after meetings <br>
+* <img alt="Telegram Screenshot" height="325" src="../images_PPP/dexter/division_of_labour.png" width="200"/>
+  <img alt="Notion Screenshot" height="100" src="../images_PPP/dexter/division_of_labour1.png" width="300"/>
+  <br>
 
 ### Contributions beyond the project team
 Reported bugs and suggestions for other teams in the class <br>
