@@ -86,7 +86,7 @@ public class BudgetCommandTest {
         try {
             BudgetCommand testSetAndHasBudget = new BudgetCommand(Parser.parseRawCommand("budget set /b 55"));
         } catch (FinancialPlannerException e) {
-            assertEquals("There is an existing budget, did you mean update?", e.getMessage());
+            assertEquals("There is an existing budget, try budget update instead.", e.getMessage());
         }
         Budget.deleteBudget();
 
@@ -94,7 +94,7 @@ public class BudgetCommandTest {
             BudgetCommand testUpdateAndNoBudget = new BudgetCommand(Parser.parseRawCommand("budget update " +
                     "/b 500"));
         } catch (FinancialPlannerException e) {
-            assertEquals("There is no budget set yet, did you mean set?", e.getMessage());
+            assertEquals("There is no budget set yet, try budget set instead.", e.getMessage());
         }
 
         try {

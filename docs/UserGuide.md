@@ -18,6 +18,7 @@
     * [List income](#list-income-list-income)
     * [List expense](#list-expense-list-expense)
     * [List recurring](#list-recurring-list-recurring)
+  * [View Balance](#viewing-balance-balance)
   * [Budget](#budget)
     * [Setting budget](#setting-a-budget-budget-set)
     * [Updating budget](#updating-budget-budget-update)
@@ -25,7 +26,6 @@
     * [Deleting budget](#deleting-budget-budget-delete)
     * [Viewing budget](#viewing-budget-budget-view)
   * [Displaying Overview](#displaying-overview-overview)
-  * [View Balance](#viewing-balance-balance)
   * [WatchList](#viewing-watchlist-watchlist)
     * [Adding Stock](#adding-stock-to-watchlist-addstock)
     * [Deleting Stock](#deleting-budget-budget-delete)
@@ -39,7 +39,7 @@
     * [Marking Goal as Achieved](#mark-goal-as-achieved-markgoal)
   * [Visualization](#visualizing-your-cashflow-vis)
   * [Exiting the program](#exiting-the-program-exit)
-  * [Get command help and exmaple usage](#getting-command-help-and-example-usage-help)
+  * [Get command help and example usage](#getting-command-help-and-example-usage-help)
   * [Saving data](#saving-the-data)
   * [Loading data](#loading-the-data)
 * [FAQ](#faq)
@@ -76,6 +76,8 @@ you a one-stop interface to access a plethora of features to manage your finance
 - Maximum amount for each cashflow and total balance that the program can hold is 999,999,999,999.99
 - Minimum amount for each cashflow and total balance that the program can hold is -999,999,999,999.99
 - Total Balance, Income balance, and Expense balance are different entities where the latter two do not have the same limitations.
+
+**Important:** Data is automatically loaded on start up and saved when exited. You must exit the program using the `exit` command in order to save your changes.
 
 ### Add cashflow
 
@@ -406,6 +408,20 @@ You have 4 matching cashflows:
 ```
 - Note: Date displayed above is just an example. Your actual date may differ.
 
+### Viewing balance: `balance`
+
+View user's current balance.
+
+Format: `balance`
+
+Example of usage: `balance`
+
+Example output:
+
+```
+Balance: 3790.00
+```
+
 ### Budget
 
 #### Setting a budget: `budget set`
@@ -426,7 +442,8 @@ A monthly budget of 500.00 has been set.
 
 #### Updating budget: `budget update`
 
-Updates budget to a new value.
+Updates initial budget to a new value. Current(remaining) budget will be updated accordingly. If new initial budget is 
+lower(higher), the new current budget will be lower(higher) by the same amount.
 
 Format: `budget update /b BUDGET`
 
@@ -501,27 +518,16 @@ Example output:
 
 ```
 Here is an overview of your financials:
-Total balance: 3790.00
+Total balance: 5450.00
 Highest income: 5000.00    Category: Salary
-Highest expense: 500.00    Category: Others
-Remaining budget for the month: 1000.00
+Highest expense: 50.00    Category: Others
+Remaining budget for the month: 50.00
 
 Reminders:
 No reminders added yet.
-```
 
-### Viewing balance: `balance`
-
-View user's current balance.
-
-Format: `balance`
-
-Example of usage: `balance`
-
-Example output:
-
-```
-Balance: 3790.00
+Wishlist:
+No goals added yet.
 ```
 
 ### Viewing Watchlist: `watchlist`
@@ -835,7 +841,7 @@ Example of usage: `help budget`
 
 ### Saving the data
 
-Data is automatically saved upon exiting the program using the `exit` command. Closing the program without exiting 
+Data is automatically saved upon exiting the program using the `exit` command. Closing the program inappropriately 
 will not save the data.
 
 ### Loading the data
