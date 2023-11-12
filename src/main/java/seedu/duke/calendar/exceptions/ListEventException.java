@@ -1,4 +1,4 @@
-package seedu.duke.calendar.Exceptions;
+package seedu.duke.calendar.exceptions;
 
 /**
  * The ListEventException class is used for handling exceptions related with listing events.

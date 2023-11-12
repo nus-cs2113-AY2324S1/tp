@@ -1,4 +1,4 @@
-package seedu.duke.calendar.Exceptions;
+package seedu.duke.calendar.exceptions;
 
 /**
  * The AddEventException class is used for handling exceptions related with adding an event

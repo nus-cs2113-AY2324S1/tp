@@ -1,4 +1,4 @@
-package seedu.duke.calendar.Exceptions;
+package seedu.duke.calendar.exceptions;
 
 /**
  * The DeleteAllException class is used for handling exceptions related with deleting all events.

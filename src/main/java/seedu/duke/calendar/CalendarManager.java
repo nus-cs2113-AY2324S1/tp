@@ -25,7 +25,7 @@ public class CalendarManager {
      * @param events is used to initialize the EventList.
      */
 
-    public CalendarManager(ArrayList<Event> events) {
+    public CalendarManager(Calendar calendar, ArrayList<Event> events) {
 
         EventDirectory eventdirectory = new EventDirectory();
         eventdirectory.listEventFiles();
@@ -39,7 +39,8 @@ public class CalendarManager {
             eventList = new EventList(events);
         }
 
-        calendar = new Calendar(eventList);
+        calendar.setEventList(eventList);
+        this.calendar = calendar;
         calendarUi = new CalendarUi(eventList);
         calendarCommandParser = new CalendarCommandParser();
         scanner = new Scanner(System.in);

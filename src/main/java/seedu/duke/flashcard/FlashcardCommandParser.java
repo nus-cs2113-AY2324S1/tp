@@ -2,6 +2,7 @@
 
 package seedu.duke.flashcard;
 
+import seedu.duke.calendar.Calendar;
 import seedu.duke.flashcard.command.FlashcardCommand;
 import seedu.duke.flashcard.command.CreateFlashcardCommand;
 import seedu.duke.flashcard.command.ListFlashcardsCommand;
@@ -21,7 +22,7 @@ public class FlashcardCommandParser {
      * @param input The text inputted by the user.
      * @return The FlashcardCommand corresponding to input
      */
-    public FlashcardCommand parseInput(String input) {
+    public FlashcardCommand parseInput(String input, Calendar calendar) {
         assert input != null : "input is null";
 
         input = input.toLowerCase().strip();
@@ -31,7 +32,7 @@ public class FlashcardCommandParser {
         } else if (input.equals("list flashcards")) {
             return new ListFlashcardsCommand();
         } else if (input.startsWith("review flashcards")) {
-            return new StartReviewCommand(input);
+            return new StartReviewCommand(input, calendar);
         } else if (input.equals("delete all flashcards")) {
             return new DeleteAllFlashcardsCommand();
         } else if (input.startsWith("delete flashcard")) {
