@@ -375,27 +375,39 @@ M | undone | Name of Java mascot / duke / duck / dick / drew / 1 | CS2113 | EASY
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Transfer the `questionlist.txt` generated to the same local directory as the jar file of the program in another
-computer.
+**A**: Transfer the `questionlist.txt` generated to the same local directory as the .jar file of the program in another
+computer. The .jar file should be in its own directory.
+
+**Q**: Why does my `questionlist.txt` look slightly different from when I run `list`?
+
+**A**: The `questionlist.txt` generated is not originally designed to be seen by 
+the user. The different format is used in order to parse questions without error.
+
+**Q**: What's the difference between shuffle and /random mode in `start`?
+
+**A**: During user testing, it was found that users sometimes will 
+revise by looking at all the questions with `list`, as such functionality to 
+shuffle the questions permanently was added.
 
 ## Command Summary
 
 [Back to Table of Contents](#table-of-contents)
 
-1. `help` - shows the list of commands you can use,
-2. `short [question]/[answer]/[module]/[difficulty]` - adds a short answer question and its answer to the list,
-3. `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]` - adds a multiple-choice question and its answer to the list
-4. `list` - shows the list of questions and answers,
-5. `delete [question number]` - deletes the question and answer at the specified number,
-6. `find /description [description]` - displays all questions containing the specified description,
-7. `find /module [module]` - displays all questions that belong to the specified module,
+1. `help` - shows the list of commands you can use
+2. `short [question]/[answer]/[module]/[difficulty]` - adds a short answer question and its answer to the list
+3. `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]` - 
+ adds a multiple-choice question and its answer to the list
+4. `list` - shows the list of questions and answers
+5. `delete [question number]` - deletes the question and answer at the specified number
+6. `find /description [description]` - displays all questions containing the specified description
+7. `find /module [module]` - displays all questions that belong to the specified module
 8. `edit [question number] /description [description]` - edits the description of the question with the specified
-   number,
-9. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number,
+   number
+9. `edit [question number] /answer [answer]` - edits the answer to the question with the specified number
 10. `edit [question number] /option[number] [new value]` - edits the option of the question with the specified number (
-    MCQ only),
+    MCQ only)
 11. `start /[quiz mode] [start details] /[qn mode] /[qn type]` - starts the quiz with option for /module or /all and /random or
-    /normal mode, with MCQ, short answer or mixed question types.
-12. `shuffle` - shuffle quiz questions to a random order,
-13. `markdiff [question number] /[question difficulty]` - sets the difficulty of question with the specified number,
+    /normal mode, with MCQ, short answer or mixed question types
+12. `shuffle` - shuffle quiz questions to a random order
+13. `markdiff [question number] /[question difficulty]` - sets the difficulty of question with the specified number
 14. `bye` - exits the program
