@@ -92,4 +92,5 @@ public class ErrorMessages {
             + ",\nso could you remove them?";
     public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
             + HelpCommand.MESSAGE_USAGE;
+    public static final String MISSING_FILEPATH = "Error in FileManager: No File Path entered";
 }

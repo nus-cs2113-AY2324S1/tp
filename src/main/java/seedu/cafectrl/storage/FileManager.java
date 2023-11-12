@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -55,8 +56,13 @@ public class FileManager {
      * Checks if the text file and folder exists in the user's system and creates them (if needed)
      * @param filePath the specified path location of the file
      */
-    public void checkFileExists(String filePath) throws IOException {
+    public void checkFileExists(String filePath) throws Exception {
         logger.info("Checking if " + filePath + " exists...");
+
+        if (filePath.isEmpty()) {
+            throw new Exception(ErrorMessages.MISSING_FILEPATH);
+        }
+
         String userWorkingDirectory = System.getProperty("user.dir");
         Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
         Path dataFolderPath = dataFilePath.getParent();
@@ -83,45 +89,19 @@ public class FileManager {
      *
      * @param filePath file path of the text file.
      * @param listOfTextToAdd text to be written to the text file.
-     * @throws IOException If I/O operations are interrupted.
      */
-    public void overwriteFile(String filePath, ArrayList<String> listOfTextToAdd) throws IOException {
-        checkFileExists(filePath);
-        FileWriter fw = new FileWriter(filePath);
-        for (String line : listOfTextToAdd) {
-            logger.info("Overwriting " + filePath + " with " + line + "...");
-            fw.write(line);
+    public void overwriteFile(String filePath, ArrayList<String> listOfTextToAdd) {
+        try {
+            checkFileExists(filePath);
+            FileWriter fw = new FileWriter(filePath);
+            for (String line : listOfTextToAdd) {
+                logger.info("Overwriting " + filePath + " with " + line + "...");
+                fw.write(line);
+            }
+
+            fw.close();
+        } catch (Exception e) {
+            ui.showToUser(e.getMessage());
         }
-        fw.close();
-    }
-
-    /**
-     * Writes text to the text file at the specified file path.
-     * Will overwrite all text in text file.
-     *
-     * @param filePath file path of the text file.
-     * @param textToAdd text to be written to the text file.
-     * @throws IOException If I/O operations are interrupted.
-     */
-    public void overwriteFile(String filePath, String textToAdd) throws IOException {
-        checkFileExists(filePath);
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    /**
-     * Appends text to the text file at the specified file path.
-     * Will add text to text file.
-     *
-     * @param filePath file path of the text file.
-     * @param textToAdd text to be added to the text file.
-     * @throws IOException If I/O operations are interrupted.
-     */
-    public void appendToFile(String filePath, String textToAdd) throws IOException {
-        checkFileExists(filePath);
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAdd);
-        fw.close();
     }
 }
