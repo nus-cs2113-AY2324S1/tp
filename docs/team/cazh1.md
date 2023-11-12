@@ -1,18 +1,17 @@
-# Zhong Heng - Project Portfolio Page
+## Zhong Heng - Project Portfolio Page
 **Project: CafeCRTL**
 
 -----------------------------------------------------------------------------------------------
-## **Overview**
+### **Overview**
 CaféCTRL is a software engineering project for CS2113. The user interacts with the application through CLI. It has around 6 kLoC, and it is done in a team of 5.
 
-## **Value Proposition**
+### **Value Proposition**
 CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
 
-## **Target User**
+### **Target User**
 Café proprietors who prefer typing on CLI than any other interaction method and are seeking for a software solution to optimize the management of their café's operations.
 
 -----------------------------------------------------------------------------------------------
-
 
 ### Summary of Contributions
 
@@ -26,20 +25,20 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 1.  **List Menu** <br>
     Function: Allow user to view all dishes added to menu <br>
     Command Format: `list_menu`
-    <br/><br/>
+    <br/>
 2.  **Add Order** <br>
     Function: Adds an order consisting of dishes off the menu to an order list <br>
     Command Format: `add_order name/DISH_NAME qty/DISH_QTY`<br>
     Error Handling: This command is able to detect missing argument tag, missing argument, wrong argument type, empty argument type. It will then output specific error message to prompt the user to enter the correct Command format. <br>
     Highlights: This feature required the creation of 5 classes to work together to perform the intended task. This really tested my understanding of OOP and planning to minimise overlap and manage the interactions between these classes.
-    <br/><br/> 
+    <br/>
 3.  **Day Change Commands** <br>
     Added the ability to traverse through different days. <br>
     Function: Next Day and Previous Day commands allow the user to traverse through different days to capture sales, simulating a sales system used in a restaurant. <br>
     Command Format: `next_day` and `previous_day`<br>
     Error Handling: Next Day command ensures that the intended traversed day has a proper orderList, preventing a NullPointerException. Previous Day command will prevent the user from traversing to days before Day 1. <br>
     Highlights: This feature required strong understanding of ArrayLists as it worked with multiple layers of ArrayLists as well as different copies of the same ArrayList that needed to be synchronised.  
-    <br/><br/>
+    <br/>
    4.  **Hashing text save files** <br>
        Implemented Hashing for text files used to save app user input data. <br>
        What it does: Hashes the text files generated from user actions (such as Menu, Sales and PantryStock), that will be accessed to load relevant data back into the application. When tampering has been detected, the syntax is shown to the user to ensure that the user is able to adjust the data saved while maintaining the format that the application is able to process.<br>
@@ -47,27 +46,27 @@ Café proprietors who prefer typing on CLI than any other interaction method and
        Highlights: This feature relied on knowledge learnt in CS2040C, Data Structures and Algorithms, to come up with the idea, understand how hashing works and how to implement this feature.<br>
        Credits: https://www.geeksforgeeks.org/java-string-hashcode-method-with-examples/ <br>
        Implemented in PRs: [#283](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/283), [#324](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/324)
-       <br/><br/>
+       <br/>
 
 ### Enhancement
 1. **Main**<br>
    Implemented skeleton code for Main for other teammates to use.
-   <br><br>
+   <br>
 2. **Parser**<br>
    Implemented skeleton class for Parser for other teammates to use. I refactored Parser such that only relevant parameters are passed into commands when executing. This removes bloat from the Command class and leaves the work to the Parser class.
-   <br><br>
+   <br>
 3. **Command**<br>
    Implemented skeleton class for Command for other teammates to use. I refactored existing Command classes such that only relevant parameters are passed into commands when executing.
-   <br><br>
+   <br>
 4. **Order**<br>
    Implemented class for Order, OrderList, Sales and Chef. These classes are accessed by Pantry and Menu for features relating to Orders and Sales, accounting for 1/3 of the application features.
-   <br><br>
+   <br>
 5. **Printing**<br>
    Implemented the printing style of auto formatting box used by `list_menu`, `view_stock` and `show_sales`.
-   <br><br>
+   <br>
 6. **Order**<br>
    Implemented class for CurrentDate. This class is used to facilitate the day changes and sales.
-   <br><br>
+   <br>
 
 ### Contributions to UG
 [UserGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html)
