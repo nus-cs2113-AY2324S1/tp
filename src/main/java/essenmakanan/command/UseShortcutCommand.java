@@ -11,18 +11,31 @@ import essenmakanan.shortcut.Shortcut;
 import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.ui.Ui;
 
+/**
+ * Creates a use shortcut command.
+ */
 public class UseShortcutCommand extends Command {
     
     private ShortcutList shortcuts;
     private IngredientList ingredients;
     private String input;
 
+    /**
+     * Creates a use shortcut command.
+     *
+     * @param shortcuts The shortcut list.
+     * @param ingredients The ingredient list.
+     * @param input The given input.
+     */
     public UseShortcutCommand(ShortcutList shortcuts, IngredientList ingredients, String input) {
         this.shortcuts = shortcuts;
         this.ingredients = ingredients;
         this.input = input;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void executeCommand() {
         Ui.drawDivider();
