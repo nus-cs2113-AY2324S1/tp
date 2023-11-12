@@ -20,21 +20,18 @@ the courses they are taking.
 
 Flashcards are two-sided cards that have a question on the front and its 
 answer on the back. They are used for revising information and helping with 
-memorization.
-
-As such, they are often used by students; e.g. medicine students often use 
+memorization. As such, they are often used by students; e.g. medicine students often use 
 flashcards to memorize the anatomy of the human body.
 
 TaskLinker implements virtual flashcards that you can create, review and 
 delete on the go, without being bound to physical copies.
 
-The difficulty symbolizes how hard it is for you to remember this particular 
-flashcard. The higher the number, the harder.
-
-The flashcard id is used to uniquely identify each flashcard. (Flashcard ids 
-don't necessarily start at zero and are not necessarily consecutive. Don't 
-worry about this; they are for internal use only and "gaps" between 
-flashcard ids are totally fine)
+In TaskLinker, every flashcard has a front text (the question) and a back 
+text (the answer). Also, every flashcard has a difficulty attribute that shows 
+how hard it is for you to remember this particular flashcard (The higher the
+difficulty number, the harder). Every flashcard is identified by a unique id 
+(Flashcard ids don't necessarily start at zero and are not necessarily
+consecutive. Don't worry, this is totally fine and the planned behavior!).
 
 #### Listing all flashcards: `list flashcards`
 
@@ -43,9 +40,29 @@ and back text as well as its id and current difficulty level.
 
 Format: `list flashcards`
 
+Example of usage: 
+```
+Enter your command: list flashcards
+    Here is a list of all your flashcards: 
+
+--------------------------------------------------------------------------------
+front text: How long is a meter in cm?
+back text: 100
+id: 20
+difficulty: 4
+--------------------------------------------------------------------------------
+front text: What does UML stand for?
+back text: Unified Modelling Language
+id: 21
+difficulty: 6
+--------------------------------------------------------------------------------
+
+    Those were all your flashcards.
+```
+
 #### Creating a new flashcard: `create flashcard`
 
-Starts the process of adding a new flashcard.
+Starts the process of creating a new flashcard.
 
 After entering this command, you are prompted to first input the front page
 text (once you have typed it out, submit it by pressing ENTER) and then the
@@ -53,9 +70,15 @@ back page text (once you have typed it out, submit it by pressing ENTER) of
 your new flashcard.
 
 After you've done this, a success message will be printed out. This
-indicates that a new flashcard has been successfully created and saved.
+indicates that your new flashcard has been successfully created and saved.
 
 Format: `create flashcard`
+
+Example of usage:
+<pre>
+sample <b>sample</b> sample
+</pre>
+
 
 #### Reviewing your flashcards: `review flashcards`
 
