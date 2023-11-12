@@ -74,7 +74,7 @@ add income /de <description> /date <date> /amt [currency] <amount>
 ```
 Note:
 - Fields `/de`, `/date`, and `/amt` are case-sensitive and should be in the specified order.
-- Users should not use "|" in the description as it is used as a delimiter in the storage file.
+- Users should not use `|` in the description as it is used as a delimiter in the storage file.
 
 To add an expense (with foreign currency):
 ```
