@@ -237,10 +237,6 @@ public class Ui {
         showToUser(Messages.SHOW_SALES_END_CAP, Messages.SHOW_SALES_DAY_PART_1 + day + Messages.SHOW_SALES_DAY_PART_2,
                 Messages.SHOW_SALES_CORNER, Messages.SHOW_SALES_TITLE, Messages.SHOW_SALES_CORNER);
     }
-    public void showSalesTop2(int day) {
-        showToUser(Messages.SHOW_SALES_DAY_PART_1 + day + Messages.SHOW_SALES_DAY_PART_2,
-                Messages.SHOW_SALES_CORNER, Messages.SHOW_SALES_TITLE, Messages.SHOW_SALES_CORNER);
-    }
     public void showSalesBottom() {
         showToUser(Messages.SHOW_SALES_END_CAP);
     }
