@@ -288,6 +288,13 @@ To represent this, we chose to use an arraylist of "CartEntry" classes which rep
 The SalesList is used to represent every past sales in order to create some statistics and reports. This class is only a
 list of subclasses representing validated carts.
 
+##### Description
+
+The Description class is used to keep track of the descriptions for various drugs. It is a simple class that can be 
+customised by the user to either store drugs' usages, specific instructions or more. It utilises a static map for the 
+association between drug names and their descriptions. However, these drugs are not related to the existing drugs in 
+the inventory. 
+
 ##### Vendors
 
 The VendorsList class and VendorSupplyList class is used to keep track of all information related to the vendors who 
@@ -622,13 +629,21 @@ what vendors supply what products.
 
 ### Design Considerations
 
-This method checks if the specified vendor exists and, if so, adds the drug to their supply list.
+This method checks if the specified vendor exists and, if so, adds the drug to their supply list. However, it does not 
+check if the drug already exists in the inventory system. Not only does this serve the intended purpose of a catalogue 
+for potential buying or reordering, but it helps with separation of concerns. It is only concerned with a vendor's 
+supply list and adding to it, and not the existing drug inventory. 
 
 ### Implementation
 
-The execute method in the AddVendorSupplyCommand class checks if a specified vendor exists, adds a drug to their supply
-list, and returns a success message. If the vendor is not found, it returns a message indicating that the vendor was
-not found.
+The `AddVendorSupplyCommand` class extends a generic `Command` and implements the command pattern. It includes the 
+`execute` method, which first checks the existence of the specified vendor, utilizing case-insensitive comparison for
+robustness. It then verifies if the drug is not already present in the vendor's supply list. If conditions are met, 
+the command adds the drug using the `addDrugToVendor` method from `VendorSupplyList`. The `VendorSupplyList` class 
+employs a static `Map<String, List<String>>` named `vendorSuppliedDrugs` to store associations between vendors and the 
+drugs they supply. The `addDrugToVendor` method uses `computeIfAbsent` to ensure that each vendor has an associated 
+drug list, preventing null pointer issues.
+
 
 ---
 
