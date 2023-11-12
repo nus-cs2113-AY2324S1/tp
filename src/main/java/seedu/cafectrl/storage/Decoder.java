@@ -202,6 +202,9 @@ public class Decoder {
                 }
             }
         }
+        if (orderLists.isEmpty()) {
+            return new Sales();
+        }
         return new Sales(orderLists);
     }
 
