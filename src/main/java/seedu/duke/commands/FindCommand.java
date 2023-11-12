@@ -128,8 +128,11 @@ public class FindCommand extends Command {
             if (matchingExpenses.isEmpty()) {
                 Ui.showLineDivider();
                 ui.printMessage("No matching expenses found.");
+                Ui.showLineDivider();
             } else {
+                Ui.showLineDivider();
                 ui.showMatchingExpenses(matchingExpenses);
+                Ui.showLineDivider();
             }
         } else if ("income".equalsIgnoreCase(type)) {
             for (Income i : incomes) {
@@ -141,8 +144,11 @@ public class FindCommand extends Command {
             if (matchingIncomes.isEmpty()) {
                 Ui.showLineDivider();
                 ui.printMessage("No matching incomes found.");
+                Ui.showLineDivider();
             } else {
+                Ui.showLineDivider();
                 ui.showMatchingIncomes(matchingIncomes);
+                Ui.showLineDivider();
             }
         } else {
             LOGGER.log(Level.WARNING, "Invalid type: " + type);
