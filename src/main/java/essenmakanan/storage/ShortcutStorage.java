@@ -81,7 +81,7 @@ public class ShortcutStorage {
             }
 
             double shortcutQuantity = Double.parseDouble(parsedShortcut[1]);
-            if ((int) shortcutQuantity < 0) {
+            if (!ShortcutParser.checkForValidQuantity(shortcutQuantity)) {
                 throw new EssenStorageInvalidQuantityException();
             }
 

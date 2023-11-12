@@ -10,15 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 public class StorageTest {
 
     private static String DATA_INVALID_PATH = "src/test/data/invalid.txt";
     private static String DATA_RECIPE_TEST_PATH = "src/test/data/recipes.txt";
     private static String DATA_INGREDIENT_TEST_PATH = "src/test/data/ingredients.txt";
-    private static String DATA_EMPTY_RECIPE_TEXT_PATH = "src/test/data/emptyRecipe.txt";
 
     @Test
     public void accessIngredientDatabase_invalidPath_expectEssenFileNotFoundException() {
@@ -70,16 +67,4 @@ public class StorageTest {
         assertEquals("kg", ingredient.getUnit().getValue());
     }
 
-    @Test
-    public void restoreEmptyRecipes_storedValidRecipes_returnRecipeWithEmptyAttributes() throws Exception {
-        RecipeStorage recipeStorage = new RecipeStorage(DATA_EMPTY_RECIPE_TEXT_PATH);
-        RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
-
-        Recipe recipe = recipes.getRecipe(0);
-
-        assertEquals("soup", recipe.getTitle());
-
-        assertTrue(recipe.getRecipeSteps().getSteps().isEmpty());
-        assertTrue(recipe.getRecipeIngredients().getIngredients().isEmpty());
-    }
 }

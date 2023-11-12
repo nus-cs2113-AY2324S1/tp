@@ -2,6 +2,7 @@ package essenmakanan.command;
 
 import essenmakanan.exception.EssenEditShortcutException;
 import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenInvalidQuantityException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.IngredientList;
@@ -44,6 +45,8 @@ public class EditShortcutCommand extends Command {
             exception.handleException();
         } catch (EssenEditShortcutException exception) {
             exception.handleException();
+        } catch (NumberFormatException exception) {
+            EssenInvalidQuantityException.handleException();
         }
     }
 }

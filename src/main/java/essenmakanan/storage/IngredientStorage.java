@@ -3,6 +3,7 @@ package essenmakanan.storage;
 import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenInvalidEnumException;
 import essenmakanan.exception.EssenStorageFormatException;
+import essenmakanan.exception.EssenStorageNumberException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.logger.EssenLogger;
@@ -58,13 +59,21 @@ public class IngredientStorage {
             }
 
             String ingredientName = parsedIngredient[0];
-            Double ingredientQuantity = Double.parseDouble(parsedIngredient[1]);
+            double ingredientQuantity = Double.parseDouble(parsedIngredient[1]);
             IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
+
+            if (!IngredientParser.checkForValidQuantity(ingredientQuantity)) {
+                throw new NumberFormatException();
+            }
 
             ingredientListPlaceholder.add(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
             String message = "Data: " + dataString + " has an invalid format";
+            EssenLogger.logWarning(message, exception);
+        } catch (NumberFormatException exception) {
+            EssenStorageNumberException.handleException(dataString);
+            String message = "Data: " + dataString + " has an invalid quantity";
             EssenLogger.logWarning(message, exception);
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
