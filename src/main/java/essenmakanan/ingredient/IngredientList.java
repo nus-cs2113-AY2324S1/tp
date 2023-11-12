@@ -3,7 +3,6 @@ package essenmakanan.ingredient;
 import java.util.ArrayList;
 
 import essenmakanan.exception.EssenFormatException;
-import essenmakanan.exception.EssenInvalidQuantityException;
 import essenmakanan.parser.IngredientParser;
 import essenmakanan.ui.Ui;
 
