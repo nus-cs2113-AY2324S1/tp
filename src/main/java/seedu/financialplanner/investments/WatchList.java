@@ -203,18 +203,18 @@ public class WatchList {
     /**
      * Method to extract out required information from the full JSON array received from the API
      *
-     * @param jsonstocks
+     * @param jsonStocks
      * @throws FinancialPlannerException
      */
-    public void extractWatchlistInfoFromJSONArray(JSONArray jsonstocks) throws FinancialPlannerException {
-        if (jsonstocks == null) {
+    public void extractWatchlistInfoFromJSONArray(JSONArray jsonStocks) throws FinancialPlannerException {
+        if (jsonStocks == null) {
             throw new FinancialPlannerException("Incorrect API Response Received. Please try again");
         }
-        if (jsonstocks.isEmpty()) {
+        if (jsonStocks.isEmpty()) {
             return;
         }
         long fetchTime = System.currentTimeMillis();
-        for (Object jo : jsonstocks) {
+        for (Object jo : jsonStocks) {
             JSONObject stock = (JSONObject) jo;
             if (stocks.containsKey(stock.get("symbol").toString().toUpperCase())) {
                 Stock stockLocal = stocks.get(stock.get("symbol").toString().toUpperCase());
