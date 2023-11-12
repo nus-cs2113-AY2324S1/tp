@@ -109,6 +109,10 @@ public class AddCashflowCommand extends Command {
             try {
                 logger.log(Level.INFO, "Parsing recur as integer");
                 recur = Integer.parseInt(rawCommand.extraArgs.get("r").trim());
+            } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Value for recur out of bounds");
+                throw new IllegalArgumentException("Recur value exceeded maximum value this program can hold. " +
+                        "Please add a different cashflow.");
             } catch (IllegalArgumentException e) {
                 logger.log(Level.WARNING, "Invalid arguments for recur");
                 throw new IllegalArgumentException("Recurrence must be an integer.");
