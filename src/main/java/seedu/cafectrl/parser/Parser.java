@@ -214,7 +214,7 @@ public class Parser implements ParserUtil {
         try {
             newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
         } catch (ParserException e) {
-            logger.warning("Invalid price!");
+            logger.log(Level.WARNING, "Invalid price!", e);
             return new IncorrectCommand(e.getMessage(), ui);
         }
 
