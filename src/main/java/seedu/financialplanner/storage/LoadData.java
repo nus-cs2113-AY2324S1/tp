@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -37,7 +38,6 @@ public abstract class LoadData {
     private static final Ui ui = Ui.getInstance();
     private static final ReminderList reminderList = ReminderList.getInstance();
     private static final WishList wishList = WishList.getInstance();
-
 
     /**
      * Loads existing data from the storage file.
@@ -76,7 +76,7 @@ public abstract class LoadData {
                     wishList.load(goal);
                     break;
                 default:
-                    throw new FinancialPlannerException("Error loading file");
+                    throw new FinancialPlannerException("Error loading file.");
                 }
             }
             inputFile.close();
@@ -85,11 +85,11 @@ public abstract class LoadData {
         } catch (IOException e) {
             ui.showMessage("File not found. Creating new file...");
         } catch (IndexOutOfBoundsException e) {
-            handleCorruptedFile("Empty/Missing arguments detected");
+            handleCorruptedFile("Empty/Missing arguments detected.");
         } catch (IllegalArgumentException | FinancialPlannerException e) {
             handleCorruptedFile(e.getMessage());
         } catch (DateTimeParseException e) {
-            handleCorruptedFile("Erroneous date format or Wrong position of date detected");
+            handleCorruptedFile("Erroneous date format or Wrong position of date detected.");
         }
     }
 
@@ -127,7 +127,10 @@ public abstract class LoadData {
         }
         for (Cashflow cashflow : tempCashflowList) {
             cashflowList.load(cashflow);
-            ui.printAddedCashflow(cashflow);
+            ui.printAddedCashflowWithoutBalance(cashflow);
+        }
+        if (!tempCashflowList.isEmpty()) {
+            ui.printBalance();
         }
     }
 
@@ -151,7 +154,7 @@ public abstract class LoadData {
             } else if (cashflow instanceof Expense) {
                 toAdd = new Expense((Expense) cashflow);
             } else {
-                throw new FinancialPlannerException("Error adding recurring cashflows");
+                throw new FinancialPlannerException("Error adding recurring cashflows.");
             }
             toAdd.setDate(dateOfAddition);
             addToTempList(tempCashflowList, toAdd);
@@ -188,17 +191,17 @@ public abstract class LoadData {
             return;
         }
         if (initial < 0 || current < 0) {
-            throw new IllegalArgumentException("Negative values for budget");
+            throw new IllegalArgumentException("Negative values for budget.");
         }
         if (initial > Cashflow.getBalance() || current > Cashflow.getBalance()) {
-            throw new IllegalArgumentException("Budget exceeds balance");
+            throw new IllegalArgumentException("Budget exceeds balance.");
         }
         if (initial < current) {
-            throw new IllegalArgumentException("Current budget exceeds initial budget");
+            throw new IllegalArgumentException("Current budget exceeds initial budget.");
         }
         LocalDate date = LocalDate.parse(split[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (LocalDate.now().isBefore(date)) {
-            throw new IllegalArgumentException("Current date is before saved date");
+            throw new IllegalArgumentException("Current date is before saved date.");
         }
         Budget.load(initial, current, date);
     }
@@ -238,11 +241,11 @@ public abstract class LoadData {
                 entry = new Expense(value, expenseType, recur, description, date, hasRecurred);
                 break;
             default:
-                throw new FinancialPlannerException("Error loading file");
+                throw new FinancialPlannerException("Error loading file.");
             }
             return entry;
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Erroneous arguments detected");
+            throw new IllegalArgumentException("Erroneous arguments detected.");
         }
     }
 
@@ -256,9 +259,9 @@ public abstract class LoadData {
             entry = new Reminder(type, date, status);
             return entry;
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Erroneous arguments detected");
+            throw new IllegalArgumentException("Erroneous arguments detected.");
         } catch (IndexOutOfBoundsException e) {
-            throw new FinancialPlannerException("There should be three data members for reminder");
+            throw new FinancialPlannerException("There should be three data members for reminder.");
         }
     }
 
@@ -271,7 +274,7 @@ public abstract class LoadData {
             entry = new Goal(type, amount, status);
             return entry;
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Erroneous arguments detected");
+            throw new IllegalArgumentException("Erroneous arguments detected.");
         }
     }
 
@@ -293,7 +296,8 @@ public abstract class LoadData {
     private static LocalDate getDate(String[] split, int recur) {
         LocalDate date;
         if (recur != 0) {
-            date = LocalDate.parse(split[5].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            date = LocalDate.parse(split[5].trim(), DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                    .withResolverStyle(ResolverStyle.STRICT));
         } else {
             date = null;
         }
@@ -337,7 +341,8 @@ public abstract class LoadData {
                 throw new FinancialPlannerException("You have more than 5 entries in watchlist.json");
             }
             if (!checkHashCode(stocksData)) {
-                throw new FinancialPlannerException("watchlist.json values were edited");
+                throw new FinancialPlannerException("watchlist.json values were edited. " +
+                        "Please do not change the generated values!");
             }
         } catch (FileNotFoundException e) {
             ui.showMessage("Watchlist file not found... Creating");
@@ -345,14 +350,14 @@ public abstract class LoadData {
             ui.showMessage("Watchlist JSON is corrupted!");
             ui.showMessage("Would you like to create new file? (Y/N)");
             if (!createNewFile()) {
-                ui.showMessage("Exiting... Please fix the file");
+                ui.showMessage("Exiting... Please fix the file.");
                 System.exit(1);
             }
         } catch (FinancialPlannerException e) {
             ui.showMessage(e.getMessage());
             ui.showMessage("Would you like to create new watchlist? (Y/N)");
             if (!createNewFile()) {
-                ui.showMessage("Exiting... Please fix the file");
+                ui.showMessage("Exiting... Please fix the file.");
                 System.exit(1);
             }
             stocksData = null;
@@ -361,8 +366,14 @@ public abstract class LoadData {
     }
 
     private static void checkValidInput(double value, int recur) throws FinancialPlannerException {
-        if (value < 0 || recur < 0) {
-            throw new FinancialPlannerException("Amount and number of days cannot be negative");
+        if (value < 0) {
+            throw new FinancialPlannerException("Amount cannot be negative.");
+        }
+        if (value > 999999999999.99) {
+            throw new FinancialPlannerException("Amount exceeded maximum value this program can hold.");
+        }
+        if (recur < 0) {
+            throw new FinancialPlannerException("Recurring value cannot be negative.");
         }
     }
 

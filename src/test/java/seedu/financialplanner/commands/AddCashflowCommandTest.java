@@ -72,7 +72,8 @@ class AddCashflowCommandTest {
                     parseRawCommand("add income /a 1 /t salary /r "));
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Recurrence must be an integer.", e.getMessage());
+            assertEquals("Recurrence must be an integer and be within the " +
+                    "maximum value this program can hold.", e.getMessage());
         }
         try {
             AddCashflowCommand testEntry = new AddCashflowCommand(Parser.
