@@ -1,12 +1,12 @@
 # KaChinnnng User Guide
 
 ## Introduction
-Welcome to KaChinnnng a personal finance tracker that helps you keep track of your expenses and income.
+Welcome to KaChinnnng, a personal finance tracker that helps you keep track of your expenses and income.
 
 ## Quick Start
 
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you have Java 11 installed.
 2. Download the latest version of `KaChinnnng` from [here](https://github.com/AY2324S1-CS2113-T18-3/tp/releases).
 3. Copy the downloaded file to the folder you want to use as the home folder that allow to write access for your KaChinnnng.
 4. Open a command terminal and navigate to the folder where you have copied the file to.
@@ -175,19 +175,18 @@ find /t expense /cat food /de sushi
 ```
 
 Note:
-- Fields `/t`, `/cat`, `/de`, `date` are case-sensitive and should be in the specified order.
+- Fields `/t`, `/cat`, `/de`, `/date` are case-sensitive and should be in the specified order.
 - Field `/cat` is only applicable for expenses.
 - Field `/t` is compulsory.
+- At least one of the optional fields [/c CATEGORY], [/de DESCRIPTION], [/da DATE] must be provided.
 - Should users add additional characters behind find e.g. findABCDE, the system will still recognise it as find.
 
 Use case:
 - Prompts users if `/t <type>` field is empty.
-- Prompts users if all the optional fields `cat`, `/de`, `/date`. are empty.
-- Format of date is `dd/MM/yyyy`. Users can also opt to search for entries by month `mm/yyyy`.
+- Prompts users if all the optional fields `/cat`, `/de`, `/date`. are empty.
+- Format of date is `dd/MM/yyyy`. Users can also opt to search for entries by month `MM/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 
-
-Note: <index> must be a positive integer that corresponds to an income/expense entry
 
 ### Clear all entries: Clear
 Clear the expenses/income created by the user.
@@ -249,7 +248,7 @@ Example of successfully edit an expense:
 ![edit_expense_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/edit_expense_expected.png?raw=true)<br>
 
 Note:
-- Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
+- Fields `/cat`, `/type`, `/de`, `/date`, and `/amt` are case-sensitive and should be in the specified order.
 - Should users enter `/cat`, `/type` or the other fields that is case-sensitive, system will take it as missing field.
 - `<index>` should not be negative.
 - `<index>` should not be out of bounds.
@@ -261,7 +260,7 @@ Use case:
 
 
 ### List the supported currencies: list currencies
-Show the foreign currencies supported by KaChinnnngggg.
+Show the foreign currencies supported by KaChinnnng.
 
 Note: The default currency is SGD.
 
@@ -316,7 +315,7 @@ There is no command to save to file manually since it's updating after every com
 ### Retrieve entries from text file and save to the income and expense list
 Retrieve all the income and expense entries from the KaChinnnngggg.txt
 
-At the beginning of executing the program, KaChinnnngggg will automatically retrieve all the entries storied in the KaChinnnngggg.txt
+At the beginning of executing the program, KaChinnnng will automatically retrieve all the entries storied in the KaChinnnngggg.txt
 
 There is no command to get from file manually since it will run once at the beginning of program.
 
@@ -352,7 +351,4 @@ and change the line in txt file to the correct format.
 | Clear                | `clear income`<br/> `clear expense`<br/>`clear all`                                                                                                                                                         |
 | Find                 | `find /t income /de [description] /date [date]`<br/> e.g. `find /t income /de salary` <br/>`find /t expense /cat [category] /de [description] /date [date]`<br/> e.g. `find /t expense /cat food /de sushi` |
 | Balance              | `balance`                                                                                                                                                                                                   |
-| Exit                 | `exit`                                                                                                                                                                                                      |
-                                                                                                                                                                                              |
-
-                                                                                                                                                                                       |
+| Exit                 | `exit`                                                                                                                                                                                                                                                                                                                                                             |
