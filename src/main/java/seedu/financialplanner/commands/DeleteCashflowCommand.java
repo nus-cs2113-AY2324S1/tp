@@ -74,13 +74,10 @@ public class DeleteCashflowCommand extends Command {
         try {
             logger.log(Level.INFO, "Parsing index as integer");
             index = Integer.parseInt(stringIndex);
-        } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "Value for index out of bounds");
-            throw new IllegalArgumentException("Index exceeded maximum value this program can hold. " +
-                    "Please select a different index.");
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid argument for index");
-            throw new IllegalArgumentException("Index must be an integer.");
+            throw new IllegalArgumentException("Index must be an integer and be " +
+                    "within the maximum value this program can hold.");
         }
 
         if (index == 0) {

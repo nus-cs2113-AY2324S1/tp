@@ -27,7 +27,8 @@ class DeleteCashflowCommandTest {
             DeleteCashflowCommand testEntry = new DeleteCashflowCommand(Parser.parseRawCommand("delete a"));
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Index must be an integer.", e.getMessage());
+            assertEquals("Index must be an integer and be within the " +
+                    "maximum value this program can hold.", e.getMessage());
         }
         try {
             DeleteCashflowCommand testEntry = new DeleteCashflowCommand(Parser.parseRawCommand("delete 0"));
