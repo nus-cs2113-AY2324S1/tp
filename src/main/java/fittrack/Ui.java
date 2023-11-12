@@ -59,10 +59,6 @@ public class Ui {
     }
     // @@author
 
-    public void printBlankLine() {
-        System.out.println();
-    }
-
     public void printLine() {
         System.out.println(LINE);
     }
@@ -132,7 +128,8 @@ public class Ui {
     }
 
     public static void printPromptForCreateNewFile(String fileName) {
-        System.out.println(String.format("\nThe %s file is corrupted. Would you like to create a new one? (Y/N)", fileName));
+        System.out.println(String.format(
+                "\nThe %s file is corrupted. Would you like to create a new one? (Y/N)", fileName));
     }
 
     public static class ForceExitException extends RuntimeException {
