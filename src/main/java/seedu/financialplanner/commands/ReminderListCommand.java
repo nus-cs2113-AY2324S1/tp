@@ -20,6 +20,10 @@ public class ReminderListCommand extends Command {
     public void execute() {
         Ui ui = Ui.getInstance();
         ReminderList reminderList = ReminderList.getInstance();
+        if (reminderList.list.isEmpty()) {
+            ui.showMessage("You have no reminders.");
+            return;
+        }
         ui.showMessage("Here is your reminder list:");
         ui.showMessage(reminderList.toString());
     }

@@ -31,7 +31,7 @@ public class DeleteGoalCommand extends Command {
             index = Integer.parseInt(stringIndex);
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid argument for index");
-            throw new IllegalArgumentException("Index must be an integer");
+            throw new IllegalArgumentException("Index must be a valid integer");
         }
 
         if (index <= 0) {
@@ -39,7 +39,7 @@ public class DeleteGoalCommand extends Command {
             throw new IllegalArgumentException("Index must be within the list");
         }
 
-        if (index > WishList.getInstance().list.size() + 1) {
+        if (index > WishList.getInstance().list.size()) {
             logger.log(Level.WARNING, "Invalid value for index");
             throw new IllegalArgumentException("Index exceed the list size");
         }
@@ -53,6 +53,7 @@ public class DeleteGoalCommand extends Command {
 
     @Override
     public void execute() {
+        assert index > 0 && index <= WishList.getInstance().list.size();
         Goal goalToDelete = WishList.getInstance().list.get(index - 1);
         WishList.getInstance().deleteGoal(index - 1);
         Ui.getInstance().showMessage("You have deleted " + goalToDelete);

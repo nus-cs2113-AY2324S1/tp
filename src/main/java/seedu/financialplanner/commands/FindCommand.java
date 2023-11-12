@@ -32,7 +32,6 @@ public class FindCommand extends Command {
         Ui ui = Ui.getInstance();
         WatchList watchList = WatchList.getInstance();
         ArrayList<String> foundedFinancialList = new ArrayList<>();
-        ArrayList<String> foundedWatchList = new ArrayList<>();
         for (int i = 0; i < cashflowList.list.size(); i++) {
             if (cashflowList.list.get(i).toString().toLowerCase().contains(description.toLowerCase())) {
                 String output = cashflowList.list.get(i).toString() + " | Index: " + (i + 1);

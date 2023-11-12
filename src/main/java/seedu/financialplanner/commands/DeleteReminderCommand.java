@@ -31,7 +31,7 @@ public class DeleteReminderCommand extends Command {
             index = Integer.parseInt(stringIndex);
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid argument for index");
-            throw new IllegalArgumentException("Index must be an integer");
+            throw new IllegalArgumentException("Index must be a valid integer");
         }
 
         if (index <= 0) {
@@ -39,7 +39,7 @@ public class DeleteReminderCommand extends Command {
             throw new IllegalArgumentException("Index must be within the list");
         }
 
-        if (index > ReminderList.getInstance().list.size() + 1) {
+        if (index > ReminderList.getInstance().list.size()) {
             logger.log(Level.WARNING, "Invalid value for index");
             throw new IllegalArgumentException("Index exceed the list size");
         }
@@ -52,6 +52,7 @@ public class DeleteReminderCommand extends Command {
 
     @Override
     public void execute() {
+        assert index > 0 && index <= ReminderList.getInstance().list.size();
         Reminder reminderToDelete = ReminderList.getInstance().list.get(index - 1);
         ReminderList.getInstance().deleteReminder(index - 1);
         Ui.getInstance().showMessage("You have deleted " + reminderToDelete);

@@ -22,16 +22,30 @@ public class SetGoalCommand extends Command {
         if (!rawCommand.extraArgs.containsKey("g")) {
             throw new IllegalArgumentException("Goal must have an amount");
         }
+
+        String amountString = rawCommand.extraArgs.get("g");
+        if (amountString.trim().isEmpty()) {
+            throw new IllegalArgumentException("Amount must be specified");
+        }
         try {
-            amount = Integer.parseInt(rawCommand.extraArgs.get("g"));
+            amount = Integer.parseInt(amountString);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Amount must be a number");
         }
+
+        if (amount<= 0) {
+            throw new IllegalArgumentException("Amount must be positive");
+        }
+
         rawCommand.extraArgs.remove("g");
         if (!rawCommand.extraArgs.containsKey("l")) {
             throw new IllegalArgumentException("Please specify the content of the goal");
         }
         label = rawCommand.extraArgs.get("l");
+
+        if (label.trim().isEmpty()) {
+            throw new IllegalArgumentException("Please specify the content of the goal");
+        }
         rawCommand.extraArgs.remove("l");
         if (!rawCommand.extraArgs.isEmpty()) {
             String unknownExtraArgument = new java.util.ArrayList<>(rawCommand.extraArgs.keySet()).get(0);
@@ -41,6 +55,7 @@ public class SetGoalCommand extends Command {
 
     @Override
     public void execute() {
+        assert amount > 0;
         Goal goal = new Goal(label, amount);
         WishList.getInstance().list.add(goal);
         Ui.getInstance().showMessage("You have added " + goal);

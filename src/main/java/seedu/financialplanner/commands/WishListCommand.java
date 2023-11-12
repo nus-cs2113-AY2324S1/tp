@@ -20,6 +20,10 @@ public class WishListCommand extends Command {
     public void execute() {
         Ui ui = Ui.getInstance();
         WishList wishList = WishList.getInstance();
+        if (wishList.list.isEmpty()) {
+            ui.showMessage("You have no wish list.");
+            return;
+        }
         ui.showMessage("Here is your wish list:");
         ui.showMessage(wishList.toString());
     }

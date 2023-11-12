@@ -30,7 +30,7 @@ public class AddReminderCommand extends Command {
             throw new IllegalArgumentException("Reminder must have a type");
         }
         type = rawCommand.extraArgs.get("t");
-        if(type.isEmpty()){
+        if(type.trim().isEmpty()){
             throw new IllegalArgumentException("Reminder type cannot be empty");
         }
         rawCommand.extraArgs.remove("t");
@@ -39,7 +39,7 @@ public class AddReminderCommand extends Command {
         }
 
         String dateString = rawCommand.extraArgs.get("d");
-        if(dateString.isEmpty()){
+        if(dateString.trim().isEmpty()){
             throw new IllegalArgumentException("Reminder date cannot be empty");
         }
 
@@ -63,6 +63,8 @@ public class AddReminderCommand extends Command {
 
     @Override
     public void execute() {
+        assert type != null;
+        assert LocalDate.now().isBefore(date);
         Reminder reminder = new Reminder(type, date);
         ReminderList.getInstance().list.add(reminder);
         Ui.getInstance().showMessage("You have added " + reminder);
