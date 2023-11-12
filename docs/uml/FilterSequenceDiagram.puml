@@ -4,33 +4,35 @@ title FilterTransaction Sequence Diagram
 hide footbox
 
 opt FILTER
-[-> Parser: filter
-activate Parser #FFBBBB
+[-> ":Parser" : filter
+activate ":Parser" #FFBBBB
 
-Parser -> Parser: filterBy()
-activate Parser
-Parser -> Parser: parseCategory()
-activate Parser
-Parser --> Parser: parsedCategory: Categories
-deactivate Parser
-Parser -> FindParser: new FindParser()
-activate FindParser
-FindParser --> Parser: transactionToFind: FindParser
-deactivate FindParser
-Parser --> Parser: transactionToFind: FindParser
-deactivate Parser
+":Parser" -> ":Parser": filterBy()
+activate ":Parser"
+":Parser" -> ":Parser": parseCategory()
+activate ":Parser"
+":Parser" --> ":Parser": parsedCategory: Categories
+deactivate ":Parser"
+
+create ":FindParser"
+":Parser" -> ":FindParser": new FindParser()
+activate ":FindParser"
+":FindParser" --> ":Parser": transactionToFind: FindParser
+deactivate ":FindParser"
+":Parser" --> ":Parser": transactionToFind: FindParser
+deactivate ":Parser"
 
 
-Parser -> FilterTransaction: new FilterTransaction(transactionToFind: FindParser, \nexpenseStatement: ExpenseStatement, \nincomeStatement: IncomeStatement)
-destroy Parser
+":Parser" -> ":FilterTransaction": new FilterTransaction(transactionToFind: FindParser, \nexpenseStatement: ExpenseStatement, \nincomeStatement: IncomeStatement)
+destroy ":Parser"
 
-activate FilterTransaction #yellow
-FilterTransaction -> FinancialStatement: new FinancialStatement()
-activate FinancialStatement #orange
-return :FinancialStatement
+activate ":FilterTransaction" #yellow
+":FilterTransaction" -> ":FinancialStatement": new FinancialStatement()
+activate ":FinancialStatement" #orange
+return FinancialStatement
 
-FilterTransaction -> FinancialStatement: findTransaction()
-activate FinancialStatement #gold
+":FilterTransaction" -> ":FinancialStatement": findTransaction()
+activate ":FinancialStatement" #gold
 return
 
 return
