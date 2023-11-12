@@ -1,14 +1,12 @@
 package essenmakanan.storage;
 
-import essenmakanan.exception.EssenFileNotFoundException;
-import essenmakanan.exception.EssenInvalidEnumException;
-import essenmakanan.exception.EssenStorageFormatException;
-import essenmakanan.exception.EssenStorageNumberException;
+import essenmakanan.exception.*;
 import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeStepList;
+import essenmakanan.shortcut.Shortcut;
 import essenmakanan.ui.Ui;
 
 import java.io.File;
@@ -67,6 +65,16 @@ public class RecipeStorage {
         }
     }
 
+    private boolean searchDuplicate(String recipeName) {
+        for (Recipe recipe : recipeListPlaceholder) {
+            if (recipe.getTitle().equals(recipeName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void createNewData(Scanner scan) {
         String dataString = scan.nextLine();
         String[] parsedRecipe = dataString.trim().split(" \\|\\| ");
@@ -78,6 +86,9 @@ public class RecipeStorage {
             }
 
             String recipeDescription = parsedRecipe[0];
+            if (searchDuplicate(recipeDescription)) {
+                throw new EssenStorageDuplicateException();
+            }
 
             RecipeStepList steps;
             steps = RecipeParser.parseDataSteps(parsedRecipe[1].trim());
@@ -97,6 +108,10 @@ public class RecipeStorage {
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
             String message = "Data: " + dataString + " has an invalid enum";
+            EssenLogger.logWarning(message, exception);
+        } catch (EssenStorageDuplicateException exception) {
+            exception.handleException(dataString);
+            String message = "Data: " + dataString + " cannot be created due to duplicates";
             EssenLogger.logWarning(message, exception);
         }
         EssenLogger.logInfo("Saved recipe data has been received");
