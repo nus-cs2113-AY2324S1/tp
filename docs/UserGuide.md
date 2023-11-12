@@ -8,16 +8,16 @@
   * [Add cashflow](#add-cashflow)
     * [Add income](#add-income-add-income)
     * [Add expense](#add-expense-add-expense)
-  * [Delete cashflow](#delete-cashflow-delete)
-    * [Delete income](#delete-income-delete-income)
-    * [Delete expense](#delete-expense-delete-expense)
-    * [Delete recurring cashflow](#delete-recurring-delete-recurring)
-  * [Find cashflow](#find-cashflow-find)
   * [List](#list)
     * [List all](#list-all-list)
     * [List income](#list-income-list-income)
     * [List expense](#list-expense-list-expense)
     * [List recurring](#list-recurring-list-recurring)
+  * [Delete cashflow](#delete-cashflow-delete)
+    * [Delete income](#delete-income-delete-income)
+    * [Delete expense](#delete-expense-delete-expense)
+    * [Delete recurring cashflow](#delete-recurring-delete-recurring)
+  * [Find cashflow](#find-cashflow-find)
   * [View Balance](#viewing-balance-balance)
   * [Budget](#budget)
     * [Setting budget](#setting-a-budget-budget-set)
@@ -98,6 +98,8 @@ Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 | `allowance`   | 
 | `others`      |
 
+**Note:** Income types are case-insensitive.
+
 Example of usage: `add income /a 5000 /t salary /r 30 /d work`
 
 Example output:
@@ -147,6 +149,127 @@ to the Financial Planner.
 Balance: 4700.00
 ```
 - Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+### List
+
+#### List all: `list`
+Lists all cashflows.
+
+Format: `list`
+
+Example of usage: `list`
+
+Example output:
+
+```
+You have 4 matching cashflows:
+1: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+2: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+3: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+4: Income
+   Type: Investments
+   Amount: 1000.00
+Balance: 1170.00
+```
+
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+#### List income: `list income`
+Lists all incomes.
+
+Format: `list income`
+
+Example of usage: `list income`
+
+Example output:
+```
+You have 3 matching cashflows:
+1: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+2: Income
+   Type: Investments
+   Amount: 1000.00
+3: Income
+   Type: Salary
+   Amount: 100.00
+Income Balance: 1600.00
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+#### List expense: `list expense`
+Lists all expenses.
+
+Format: `list expense`
+
+Example of usage: `list expense`
+
+Example output:
+```
+You have 3 matching cashflows:
+1: Expense
+   Type: Dining
+   Amount: 30.00
+   Description: Genki Sushi
+2: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+3: Expense
+   Type: Others
+   Amount: 0.23
+Expense Balance: 330.23
+```
+- Note: Balance displayed above is just an example. Your actual balance may differ.
+- Note: Date displayed above is just an example. Your actual date may differ.
+
+#### List recurring: `list recurring`
+Lists all recurring cashflows.
+
+Format: `list recurring`
+
+- This list will not include any cashflow that has already recurred.
+
+Example of usage: `list recurring`
+
+Example output:
+```
+You have 4 matching cashflows:
+1: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+2: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: work
+3: Expense
+   Type: Necessities
+   Amount: 300.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+   Description: groceries
+4: Income
+   Type: Allowance
+   Amount: 500.00
+   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
+```
 - Note: Date displayed above is just an example. Your actual date may differ.
 
 ### Delete cashflow: `delete`
@@ -286,127 +409,6 @@ Finds a cashflow using keywords
 Format: `find <keyword>`
 
 Example of usage: `find buy coffee`
-
-### List
-
-#### List all: `list`
-Lists all cashflows.
-
-Format: `list`
-
-Example of usage: `list`
-
-Example output:
-
-```
-You have 4 matching cashflows:
-1: Expense
-   Type: Dining
-   Amount: 30.00
-   Description: Genki Sushi
-2: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-3: Income
-   Type: Allowance
-   Amount: 500.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-4: Income
-   Type: Investments
-   Amount: 1000.00
-Balance: 1170.00
-```
-
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-- Note: Date displayed above is just an example. Your actual date may differ.
-
-#### List income: `list income`
-Lists all incomes.
-
-Format: `list income`
-
-Example of usage: `list income`
-
-Example output:
-```
-You have 3 matching cashflows:
-1: Income
-   Type: Allowance
-   Amount: 500.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-2: Income
-   Type: Investments
-   Amount: 1000.00
-3: Income
-   Type: Salary
-   Amount: 100.00
-Income Balance: 1600.00
-```
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-- Note: Date displayed above is just an example. Your actual date may differ.
-
-#### List expense: `list expense`
-Lists all expenses.
-
-Format: `list expense`
-
-Example of usage: `list expense`
-
-Example output:
-```
-You have 3 matching cashflows:
-1: Expense
-   Type: Dining
-   Amount: 30.00
-   Description: Genki Sushi
-2: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-3: Expense
-   Type: Others
-   Amount: 0.23
-Expense Balance: 330.23
-```
-- Note: Balance displayed above is just an example. Your actual balance may differ.
-- Note: Date displayed above is just an example. Your actual date may differ.
-
-#### List recurring: `list recurring`
-Lists all recurring cashflows.
-
-Format: `list recurring`
-
-- This list will not include any cashflow that has already recurred.
-
-Example of usage: `list recurring`
-
-Example output:
-```
-You have 4 matching cashflows:
-1: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-2: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: work
-3: Expense
-   Type: Necessities
-   Amount: 300.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-   Description: groceries
-4: Income
-   Type: Allowance
-   Amount: 500.00
-   Recurring every: 30 days, date added: Nov 04 2023, recurring on: Dec 04 2023
-```
-- Note: Date displayed above is just an example. Your actual date may differ.
 
 ### Viewing balance: `balance`
 
