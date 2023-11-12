@@ -370,7 +370,8 @@ Total calories burnt on 2023-11-04: 230kcal
 Allows user to add their steps walked for a particular day.
 
 **Format**
-- `addsteps <NUMBER_OF_STEPS> d/<CALORIES>`
+- `addsteps <NUMBER_OF_STEPS>`
+- `addsteps <NUMBER_OF_STEPS> d/<DATE>`
 - You should type `<DATE>` in format of `yyyy-MM-dd`.
 
 **Example of usage**
@@ -474,19 +475,19 @@ Goodbye! Hope to see you again soon!
 Upon exiting the application, there should be three files in the data folder will 
 that contains the profile data, meals and workouts as shown below.
 
-<img src="images/DataDirectory.png" width = 70% height = 70% alt="">
+<img src="./images/DataDirectory.png" width = 70% height = 70% alt="">
 
 The contents of profile.txt:
 
-<img src="images/ProfileFile.png" width = 50% height = 50% alt="">
+<img src="./images/ProfileFile.png" width = 50% height = 50% alt="">
 
 The contents of mealList.txt:
 
-<img src="images/MealFile.png" width = 50% height = 50% alt="">
+<img src="./images/MealFile.png" width = 50% height = 50% alt="">
 
 The contents of workoutList.txt:
 
-<img src="images/MealFile.png" width = 50% height = 50% alt="">
+<img src="./images/MealFile.png" width = 50% height = 50% alt="">
 
 
 
