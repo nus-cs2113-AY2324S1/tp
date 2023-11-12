@@ -25,6 +25,7 @@ import java.util.logging.Logger;
  */
 public class WatchList {
     private static WatchList watchlist = null;
+    private static final String FILE_PATH = "data/watchlist.json";
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private static final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private static final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
@@ -35,7 +36,7 @@ public class WatchList {
      * any erroneous inputs
      */
     private WatchList() {
-        stocks = LoadData.loadWatchList();
+        stocks = LoadData.loadWatchList(FILE_PATH);
         cleanUpLoadedWatchList();
     }
 
@@ -61,19 +62,26 @@ public class WatchList {
      *
      * @param key
      * @param stockToCheck
-     * @return
+     * @return isValid
      */
-    private boolean checkValidStock(String key, Stock stockToCheck) {
+    public boolean checkValidStock(String key, Stock stockToCheck) {
+        boolean isValid = true;
         if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
-            return false;
+            isValid = false;
         }
-        return key.equals(stockToCheck.getSymbol());
+        if(!key.equals(stockToCheck.getSymbol())) {
+            isValid = false;
+        }
+        if (!isValid) {
+            Ui.getInstance().printInvalidStockLoaded(key);
+        }
+        return isValid;
     }
 
     /**
      * Initialize a new watchlist stocks hashmap with base stocks (AAPL and GOOGL)
      *
-     * @return
+     * @return Hashmap of base stocks
      */
     public HashMap<String, Stock> initalizeNewWatchlist() {
         HashMap<String, Stock> baseStocks = new HashMap<>();
@@ -93,7 +101,7 @@ public class WatchList {
     /**
      * Method to get the watchlist singleton or create one if it does not exist and returns it
      *
-     * @return
+     * @return watchlist singleton
      */
     public static WatchList getInstance() {
         if (watchlist == null) {
@@ -116,7 +124,7 @@ public class WatchList {
      * Checks the watchlist stocks hashmap for stocks that are expired meaning their data should be refreshed using
      * the api. Returns a string of stocks that are expired separated by a comma
      *
-     * @return
+     * @return String containing stocks that needs to be queried
      */
     public StringBuilder getExpiredStocks() {
         StringBuilder queryStocks = new StringBuilder();
@@ -255,7 +263,7 @@ public class WatchList {
         }
 
         Stock newStock;
-        newStock = new Stock(stockCode);
+        newStock = new Stock(stockCode.toUpperCase());
 
         assert newStock.getSymbol() != null && newStock.getStockName() != null;
         stocks.put(newStock.getSymbol(), newStock);

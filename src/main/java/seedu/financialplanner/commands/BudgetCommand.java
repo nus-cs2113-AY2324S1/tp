@@ -99,10 +99,10 @@ public class BudgetCommand extends Command {
 
         if (command.equals("set") && Budget.hasBudget()) {
             logger.log(Level.WARNING, "Invalid command: Trying to set existing budget");
-            throw new FinancialPlannerException("There is an existing budget, did you mean update?");
+            throw new FinancialPlannerException("There is an existing budget, try budget update instead.");
         } else if (command.equals("update") && !Budget.hasBudget()) {
             logger.log(Level.WARNING, "Invalid command: Trying to update non-existent budget");
-            throw new FinancialPlannerException("There is no budget set yet, did you mean set?");
+            throw new FinancialPlannerException("There is no budget set yet, try budget set instead.");
         }
 
         if (!rawCommand.extraArgs.containsKey("b")) {

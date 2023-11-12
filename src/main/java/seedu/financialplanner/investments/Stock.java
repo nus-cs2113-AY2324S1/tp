@@ -13,6 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Date;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +33,7 @@ public class Stock {
     private String dayLow;
     private Date lastUpdated = null;
     private long lastFetched = 0;
+    private int hashCode = 0;
 
     /**
      * Constructor for stock that sets the symbol and searches the api
@@ -118,6 +120,23 @@ public class Stock {
         }
     }
 
+    public void setHashCode() {
+        if (lastFetched == 0) {
+            return;
+        }
+        this.hashCode = Objects.hashCode(symbol + exchange + stockName + price + dayHigh
+                + dayLow + lastUpdated + lastFetched);
+    }
+
+    public int checkHashCode() {
+        return Objects.hashCode(symbol + exchange + stockName + price + dayHigh
+                + dayLow + lastUpdated + lastFetched);
+    }
+
+    public int getHashCode() {
+        return this.hashCode;
+    }
+
     public String getSymbol() {
         return symbol;
     }
@@ -129,7 +148,7 @@ public class Stock {
     /**
      * toString method is override to output its symbol appended with a comma
      *
-     * @return
+     * @return string representing stock
      */
     @Override
     public String toString() {
