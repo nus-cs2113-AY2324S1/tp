@@ -100,4 +100,7 @@ public class Messages {
     public static final String SALES_ORDER_TEXT_TAMPERED = "Unfortunately, any orders not following the format "
             + "and invalid have been wiped from my memory banks. Poof!" ;
 
+    public static final String HASH_STRING_TAMPERED = "Alert! It appears the hash string "
+            + "got a makeover without permission.";
+
 }

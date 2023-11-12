@@ -27,6 +27,7 @@ public class Storage {
     private boolean isMenuTampered = false;
     private boolean isOrdersTampered = false;
     private boolean isPantryStockTampered = false;
+    private boolean isHashStringTampered = false;
     private boolean isTamperedMessagePrinted = false;
 
     public Storage (Ui ui) {
@@ -52,28 +53,37 @@ public class Storage {
             return true;
         }
 
-        int fileHash = Integer.parseInt(hashString);
-        //Removes the saved Hash String for decoding
-        encodedStringArrayList.remove(lastIndex);
+        try {
+            int fileHash = Integer.parseInt(hashString);
+            //Removes the saved Hash String for decoding
+            encodedStringArrayList.remove(lastIndex);
 
-        //Prepares String in same format as when encoding, generates Hash from the save file content
-        String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
-        int encodedMenuHash = encodedMenuAsString.hashCode();
+            //Prepares String in same format as when encoding, generates Hash from the save file content
+            String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
+            int encodedMenuHash = encodedMenuAsString.hashCode();
 
-        //Checks if the generated Hash matches the saved Hash
-        if (encodedMenuHash != fileHash) {
+            //Checks if the generated Hash matches the saved Hash
+            if (encodedMenuHash != fileHash) {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            isHashStringTampered = true;
             return true;
         }
         return false;
     }
 
     public void detectTamper() {
-        if (!isMenuTampered && !isOrdersTampered && !isPantryStockTampered) {
+        if (!isMenuTampered && !isOrdersTampered && !isPantryStockTampered && !isHashStringTampered) {
             return;
         }
         if (!isTamperedMessagePrinted) {
             ui.showToUser(Messages.SAVE_FILE_TAMPER_DETECTED);
             isTamperedMessagePrinted = true;
+        }
+        if (isHashStringTampered) {
+            ui.showToUser(Messages.HASH_STRING_TAMPERED);
+            isHashStringTampered = false;
         }
         if (isMenuTampered) {
             ui.showToUser(Messages.SAVE_FILE_FORMAT_MENU);
