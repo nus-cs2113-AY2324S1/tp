@@ -132,7 +132,7 @@ public class Duke {
 
         case "list":
             Ui.showLineDivider();
-            new ListCommand(incomes, expenses, ui).execute();
+            new ListCommand(incomes, expenses).execute();
             Ui.showLineDivider();
             break;
 

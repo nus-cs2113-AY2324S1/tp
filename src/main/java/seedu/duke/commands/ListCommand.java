@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     private ArrayList<Income> incomes;
     private ArrayList<Expense> expenses;
-    private Ui ui;
 
     private double totalIncome;
     private double totalExpenses;
@@ -24,13 +23,11 @@ public class ListCommand extends Command {
      *
      * @param incomes   The list of income records to be displayed.
      * @param expenses  The list of expense records to be displayed.
-     * @param ui        The user interface for displaying messages and financial records.
      */
 
-    public ListCommand(ArrayList<Income> incomes, ArrayList<Expense> expenses, Ui ui) {
+    public ListCommand(ArrayList<Income> incomes, ArrayList<Expense> expenses) {
         this.incomes = incomes;
         this.expenses = expenses;
-        this.ui = ui;
         totalIncome = 0;
         totalExpenses = 0;
     }
