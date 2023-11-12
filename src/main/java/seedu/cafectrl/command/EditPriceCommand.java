@@ -1,9 +1,12 @@
 package seedu.cafectrl.command;
 
+import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
+
+import java.util.logging.Logger;
 
 //@@author ziyi105
 /**
@@ -15,6 +18,7 @@ public class EditPriceCommand extends Command {
             + "edit_price dish/DISH_INDEX price/NEW_PRICE\n"
             + "Example: edit_price dish/1 price/4.50";
 
+    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Menu menu;
     protected Ui ui;
     private final int menuID;
@@ -32,6 +36,7 @@ public class EditPriceCommand extends Command {
      * Set new price of the dish and show edit price message
      */
     public void execute() {
+        logger.info("Executing EditPriceCommand...");
         Dish dish = menu.getDishFromId(this.menuID - Ui.OFFSET_LIST_INDEX);
 
         // Checks for original price
