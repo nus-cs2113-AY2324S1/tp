@@ -1,2 +1,2 @@
-Do you choose flashcard or calendar? 
+Enter your command:     Invalid command! Please try again.
 Enter your command: 
