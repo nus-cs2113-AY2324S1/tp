@@ -24,13 +24,13 @@
     * [Delete budget](#delete-budget)
     * [Reset budget](#reset-budget)
     * [View budget](#view-budget)
-  * [Product Scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
-  * [User Stories](#user-stories)
-  * [Non-Functional Requirements](#non-functional-requirements)
-  * [Glossary](#glossary)
-  * [Instructions for manual testing](#instructions-for-manual-testing)
+* [Product Scope](#product-scope)
+  * [Target user profile](#target-user-profile)
+  * [Value proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
