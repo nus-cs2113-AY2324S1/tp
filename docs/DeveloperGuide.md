@@ -508,6 +508,9 @@ You have added an Income
 to the Financial Planner.
 Balance: 5000.00
 ```
+
+Note: The date displayed will differ based on your system time.
+
 You can also use the following command to test the optional arguments:
 ```
 add expense /a 1000 /t necessities
@@ -537,6 +540,8 @@ add expense /a 800 /t insurance /r 365 /d insurance
 ```
 
 After which you can test the following commands:
+
+Note: The dates displayed will differ based on your system time.
 
 Input: `list`
 
@@ -622,6 +627,8 @@ If you have not done so, please follow the instructions to test the list feature
 To test the delete cashflow feature, you can use the following commands:
 
 Use the list command before each delete command to confirm that the cashflow at the index stated in the delete command matches the expected output.
+
+Note: The dates displayed will differ based on your system time.
 
 Input: `list` followed by `delete 3`
 
