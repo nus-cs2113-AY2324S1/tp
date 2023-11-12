@@ -11,10 +11,6 @@ import essenmakanan.ui.Ui;
 
 public class ShortcutParser {
 
-    public static boolean checkForValidQuantity(double quantity) {
-        return ((int) quantity != 0 && Math.ceil(quantity) > 0) || quantity > 0;
-    }
-
     public static Shortcut parseShortcut(IngredientList ingredients, String input) throws EssenFormatException
             , EssenShortcutException, NumberFormatException {
         input = input.replace("sc/", "");
@@ -32,7 +28,7 @@ public class ShortcutParser {
 
         double quantity = Double.parseDouble(shortcutDetails[1].strip());
 
-        if (!checkForValidQuantity(quantity)) {
+        if (!IngredientParser.checkForValidQuantity(quantity)) {
             throw new NumberFormatException();
         }
 
@@ -87,7 +83,7 @@ public class ShortcutParser {
                 throw new EssenEditShortcutException("usage");
             }
 
-            if (!checkForValidQuantity(newQuantity)) {
+            if (!IngredientParser.checkForValidQuantity(newQuantity)) {
                 throw new NumberFormatException();
             }
 
