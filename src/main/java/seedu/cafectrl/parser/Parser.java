@@ -129,7 +129,7 @@ public class Parser implements ParserUtil {
             return prepareBuyIngredient(arguments, ui, pantry, menu);
 
         case HelpCommand.COMMAND_WORD:
-            return prepareHelpCommand(ui);
+            return prepareHelpCommand(ui, arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(ui, pantry);
@@ -577,8 +577,12 @@ public class Parser implements ParserUtil {
     }
 
     //@@author ziyi105
-    private static Command prepareHelpCommand(Ui ui) {
-        return new HelpCommand(ui);
+    private static Command prepareHelpCommand(Ui ui, String arguments) {
+        if (arguments.isEmpty()) {
+            return new HelpCommand(ui);
+        } else {
+            return new IncorrectCommand(ErrorMessages.WRONG_HELP_FORMAT, ui);
+        }
     }
 
     //@@author Cazh1

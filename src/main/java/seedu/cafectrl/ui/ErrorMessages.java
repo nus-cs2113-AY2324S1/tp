@@ -1,6 +1,7 @@
 package seedu.cafectrl.ui;
 
 import seedu.cafectrl.command.EditPriceCommand;
+import seedu.cafectrl.command.HelpCommand;
 
 public class ErrorMessages {
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
@@ -14,7 +15,7 @@ public class ErrorMessages {
     public static final String INVALID_DISH_NAME_LENGTH_MESSAGE = "Error: Your dish name length is too long!\n"
             + "Please ensure your dish name is less than 35 characters.";
     public static final String INVALID_INGREDIENT_NAME_LENGTH_MESSAGE = "Error: Your dish name length is too long!";
-    public static final String MISSING_ARGUMENT_FOR_EDIT_PRICE = "Error: Missing arguments "
+    public static final String MISSING_ARGUMENT_FOR_EDIT_PRICE = "Error: Invalid arguments "
             + "for edit price command.\n"
             + EditPriceCommand.MESSAGE_USAGE;
     public static final String MISSING_ARGUMENT_FOR_LIST_INGREDIENTS = "Error: Missing arguments "
@@ -24,12 +25,13 @@ public class ErrorMessages {
     public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
             + "for buy ingredient command.";
     public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Something is wrong with "
-            + "the dish index! Could you make sure that is it of type int \n"
-            + "and do not type in multiple dish indexes at one time!";
+            + "the arguments! The types for dish and price are integer and float respectively, \n"
+            + "and do not type in duplicated arguments at one time!";
     public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: "
             + "Invalid price!\n"
             + "Price must be a float and within the range of "
-            + "0.00 to 1000000 with up to 2 decimal place";
+            + "0.00 to 1000000 with up to 2 decimal place. \n"
+            + "Special characters such as $ are not allowed!";
     public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
             + "Type 'help' to view the accepted list of commands";
     public static final String INVALID_DISH_INDEX = "Do we even have this dish? "
@@ -80,4 +82,6 @@ public class ErrorMessages {
     public static final String NAME_CANNOT_CONTAIN_SPECIAL_CHAR = "Is there a special character"
             + "in the name?\n I have poor memory and am unable to remember names with special characters"
             + ",\nso could you remove them?";
+    public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
+            + HelpCommand.MESSAGE_USAGE;
 }
