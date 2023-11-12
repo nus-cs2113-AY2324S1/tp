@@ -74,6 +74,10 @@ The following sequence diagram shows how the login system class works when the p
 
 <img src="UML Diagrams/StockerToLoginSystem.png" width="350">
 
+Another consideration that was considered was the situation that the user maliciously edited the users txt file to
+prevent it from loading properly into the app when it is booted up. In that case the list of old users would be deleted
+and the user would have to register as a new user to access the system once again.
+
 ---
 
 ### Parser Component
@@ -499,7 +503,7 @@ Command will use java's system out to print out all required information with a 
 
 ## 6. saveDrugs Command
 
-The save command was made as a means to backup user entered drug data into the hard drive of the computer to ensure
+The saveDrugs command was made as a means to backup user entered drug data into the hard drive of the computer to ensure
 previously entered data is saved and accessable whenever the app is launched.
 
 ### Design Considerations
@@ -516,6 +520,10 @@ write the contents of these drugs back to the txt file for saving. This is depic
 
 Upon booting up the system, a method from the inventory class goes through the contents of the txt file and copies it to
 the inventory drug list.
+
+The implementation of this class also considered the possibility of the user accidentally editing the saved drug list 
+txt file causing it to become unable to be loaded into the app. In that case the previous drug list will be deleted and 
+the drugs have to be added again into the drug list.
 
 ---
 

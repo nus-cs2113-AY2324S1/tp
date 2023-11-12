@@ -16,7 +16,7 @@ public class Inventory {
     }
 
     public void addNewDrug(String serialNumber, Drug drug, long quantity) {
-        this.stock.put(serialNumber, new StockEntry(drug, quantity));
+        this.stock.put(serialNumber, new StockEntry(drug, quantity, serialNumber));
     }
 
     public void removeFromStock(String serialNumber, long quantity) throws DrugNotFoundException {

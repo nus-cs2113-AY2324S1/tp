@@ -45,6 +45,9 @@ public class ShowStockLevelCommand extends Command {
             // Create a new list to store the sorted stockEntries
             List<StockEntry> arrangedListByQuantity = new ArrayList<>(stockEntries);
 
+
+
+
             return new CommandResult<>(MESSAGE_SUCCESS, arrangedListByQuantity);
         }
     }

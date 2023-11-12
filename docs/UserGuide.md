@@ -244,9 +244,9 @@ Example of usage:
 Expected outcome:
 
 ```
-||  1. Name: histamine, Expiry date: 01/02/2024, Quantity: 10
-||  2. Name: paracetamol, Expiry date: 01/02/2024, Quantity: 50
-||  3. Name: panadol, Expiry date: 01/02/2024, Quantity: 120
+|| 1. Name: histamine, Expiry date: 09/05/2070, Serial number: HIS9447, Quantity: 10
+|| 2. Name: paracetamol, Expiry date: 01/07/2020, Serial number: PARC347, Quantity: 50
+|| 3. Name: Panadol, Expiry date: 04/07/2030, Serial number: PAN947, Quantity: 120
 ||
 || Stock Level Report (Sorted by Quantity)
 ```
@@ -451,8 +451,8 @@ Expected outcome:
 ### `addVendorSupply` - Adds a drug into a vendor's supply list to be tracked by the system.
 
 - Adds a drug into a vendor's supply list to be tracked by the system
-  - Vendor must already be added into the system.
-  - If the drug already exists in the vendor's supply list, system will inform user
+    - Vendor must already be added into the system.
+    - If the drug already exists in the vendor's supply list, system will inform user
 
 Format:
 
@@ -509,7 +509,8 @@ Expected outcome:
 
 ### `addToCart` - Adds drug into current cart
 
-Adds a drug in a specified quantity in the current cart.
+Adds a drug in a specified quantity in the current cart. If the drug is past its expired date, it is unable to add to
+cart
 
 Format:
 
@@ -524,6 +525,12 @@ Expected outcome:
 
 ```
 || New drug added in the cart : Panadol
+```
+
+Expected outcome with expired drug:
+
+```
+|| This drug is expired. Unable to add to cart
 ```
 
 ### `viewCart` - Lists all the entries in the cart
