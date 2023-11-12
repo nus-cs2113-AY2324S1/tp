@@ -972,15 +972,18 @@ The general idea is that when the program is first initiated, the `loadData` met
 
 The process is refactored into these methods to avoid deep nesting of code to achieve clearer logical flow and more readability and easier debugging process.
 
+**Note**: 
+Due to the different formats of storage for short answer questions and multiple choice questions, `addQuestionFromFile()` method actually serves as a multiuplexer of two helper method `addShortAnsFromFile()` and  `addMCQFromFile()`, each designed to add a short answer question and a multiple choice quesiton specifically. They also help to check if the question data stored is corrupted, and will increment the count of invalid data upon detecting a data corruption.
+
 ### Updating data
 
 The process of updating data is done in a similar fashion compared to that of loading data, but in the reverse order logically.
 
-Apart from the main `updateData` method, it involves the use of 2 other helper methods:
+Apart from the main `updateData()` method, it involves the use of 2 other helper methods:
 - `private void writeToFile(String filePath, String textToAdd, boolean toAppend)`
 - `private void storeQuestionToFile(Question question)`
 
-Upon exiting the program, the `Ui` class will call the `updateData` method and passing in the current `QuestionList` of the program. Within the method, the `writeToFile` helper method is first called to determine whether texts are to replace existing content of the file or to be appended at the back. Then, each question is stored in the appropriate format into the destination file using the method `storeQuestionToFile` which parses a `Question` object into the correct string format for storage.
+Upon exiting the program, the `Ui` class will call the `updateData()` method and passing in the current `QuestionList` of the program. Within the method, the `writeToFile()` helper method is first called to determine whether texts are to replace existing content of the file or to be appended at the back. Then, each question is stored in the appropriate format into the destination file using the method `storeQuestionToFile()` which parses a `Question` object into the correct string format for storage.
 
 ## UI Component
 
@@ -997,6 +1000,11 @@ input.
 
 ### Implementation Details
 
+#### Design Coniderations
+The `Ui` class is meticulously designed to serve as the exclusive channel for displaying information on the screen in the QuizHub application. This design choice ensures a clean and organized separation of concerns, centralizing the responsibility of user interface interactions within this class. By encapsulating display functionality, it imposes a clear interface for other classes to communicate with the user. Any information that needs to be presented on the screen, whether it be opening or closing messages, the display of questions, feedback on user commands, or updates on the number of questions, must go through the Ui class. This class offers a set of pre-designed methods like `displayMessage()` and `displayCorrectAnswer()` that provide a standardized way for other components to present information to the user, thus enhanceing maintainability, readability, and modularity, as changes to the user interface can be localized to the Ui class without affecting the internal logic of other components.
+
+In addition, the class defines numerous string literals and constants for various feedback messages, error notifications, and command instructions. By encapsulating these generic messages  within constants like `INVALID_COMMAND_MSG` and `INVALID_QUESTION_DIFFICULTY_MSG`, it not only bolsters code readability and maintainability but also facilitates effortless updates to the user interface while preventing repetitive hard-coding of these messages.   
+
 #### Overall Flow
 
 ![](UML/Images/uiFlow.png)
@@ -1011,7 +1019,7 @@ Finally, the `displayClosingMessage()` method is called to display a farewell me
 
 ![](UML/Images/uiDisplayQuiz.png)
 
-The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions.
+The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions. For each question, the `Ui` class will display `"Correct!"` if the answer matches that of the correct answer using the  `displayMessage()` method, or display `"Wrong!"` along with the correct answer by calling the helper method `displayCorrectAnswer()`. At the end of the quiz, the `displayFinalScore()` method will be called to display the final score obtained by the user in that particular quiz.
 
 # Product scope
 
