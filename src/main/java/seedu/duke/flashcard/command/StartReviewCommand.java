@@ -2,6 +2,7 @@
 
 package seedu.duke.flashcard.command;
 
+import seedu.duke.calendar.Calendar;
 import seedu.duke.flashcard.FlashcardList;
 import seedu.duke.flashcard.review.RandomReviewMode;
 import seedu.duke.flashcard.review.ReviewMode;
@@ -14,9 +15,11 @@ import java.util.Scanner;
 public class StartReviewCommand extends DualFlashcardCommand {
     private final ArrayList<String> choices = new ArrayList<>(Arrays.asList(
             "a", "b"));
+    private Calendar calendar;
 
-    public StartReviewCommand(String input) {
+    public StartReviewCommand(String input, Calendar calendar) {
         this.input = input;
+        this.calendar = calendar;
         beginnerCommandLength = 2;
         expertCommandLength = 3;
         syntaxString = "review flashcards REVIEW_MODE";
@@ -70,7 +73,7 @@ public class StartReviewCommand extends DualFlashcardCommand {
                              String choice) {
         ReviewMode reviewMode = createReviewMode(choice.toLowerCase(), flashcardList);
 
-        reviewMode.startReviewSession(scanner);
+        reviewMode.startReviewSession(scanner, calendar);
 
     }
 
