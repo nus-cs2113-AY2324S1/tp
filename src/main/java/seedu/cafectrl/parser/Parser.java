@@ -126,7 +126,7 @@ public class Parser implements ParserUtil {
             return prepareViewTotalStock(ui, pantry);
 
         case BuyIngredientCommand.COMMAND_WORD:
-            return prepareBuyIngredient(arguments, ui, pantry);
+            return prepareBuyIngredient(arguments, ui, pantry, menu);
 
         case HelpCommand.COMMAND_WORD:
             return prepareHelpCommand(ui);
@@ -251,7 +251,7 @@ public class Parser implements ParserUtil {
                 throw new ParserException(ErrorMessages.NAME_CANNOT_CONTAIN_SPECIAL_CHAR);
             }
 
-            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true);
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true, menu);
 
             Dish dish = new Dish(dishName, ingredients, price);
 
@@ -267,13 +267,15 @@ public class Parser implements ParserUtil {
 
     /**
      * Parses the user's input text ingredients.
+     *
      * @param ingredientsListString user's input string of ingredients, multiple ingredients seperated by ',' is allowed
+     * @param menu
      * @return list of ingredients that consists of the dish
      * @throws IllegalArgumentException if the input string of ingredients is in an incorrect format.
-     * @throws ParserException if the input string does not match the constraints
+     * @throws ParserException          if the input string does not match the constraints
      */
     private static ArrayList<Ingredient> parseIngredients(String ingredientsListString,
-            boolean excludeRepeatedIngredients) throws IllegalArgumentException, ParserException {
+            boolean excludeRepeatedIngredients, Menu menu) throws IllegalArgumentException, ParserException {
         logger.info("Parsing ingredients...");
         String[] inputIngredientList = {ingredientsListString};
         ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -313,6 +315,7 @@ public class Parser implements ParserUtil {
             }
 
             Ingredient ingredient = new Ingredient(ingredientName, ingredientQty, ingredientUnit);
+            checkForMismatchUnit(menu, ingredient);
             ingredients.add(ingredient);
         }
 
@@ -489,23 +492,21 @@ public class Parser implements ParserUtil {
         return new ViewTotalStockCommand(pantry, ui);
     }
 
-    private static Command prepareBuyIngredient(String arguments, Ui ui, Pantry pantry) {
+    private static Command prepareBuyIngredient(String arguments, Ui ui, Pantry pantry, Menu menu) {
         Pattern buyIngredientArgumentsPattern = Pattern.compile(BUY_INGREDIENT_ARGUMENT_STRING);
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
             logger.warning("Unmatching regex!");
-            return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT
+            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                     + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
 
         String ingredientsListString = matcher.group(0);
 
         try {
-            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, false);
+            ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, false, menu);
             return new BuyIngredientCommand(ingredients, ui, pantry);
-        } catch (NumberFormatException e) {
-            return new IncorrectCommand(ErrorMessages.INVALID_INGREDIENT_QTY, ui);
         } catch (Exception e) {
             return new IncorrectCommand(e.getMessage(), ui);
         }
@@ -521,6 +522,40 @@ public class Parser implements ParserUtil {
 
     public static boolean isInvalidQty(int ingredientQty) {
         return ingredientQty < MIN_QTY || ingredientQty > MAX_QTY;
+    }
+
+    public static void checkForMismatchUnit(Menu menu, Ingredient newIngredient) throws ParserException {
+        logger.info("Checking for mismatched units...");
+        ArrayList<Dish> dishArrayList = menu.getMenuItemsList();
+        for (Dish dish : dishArrayList) {
+            traverseIngredientsOfDish(newIngredient, dish);
+        }
+    }
+
+    private static void traverseIngredientsOfDish(Ingredient newIngredient, Dish dish) throws ParserException {
+        ArrayList<Ingredient> ingredientArrayList = dish.getIngredients();
+        for (Ingredient currentIngredient : ingredientArrayList) {
+            logger.info("Comparing name: " + newIngredient.getName() + " and " + currentIngredient.getName());
+            compareIngredientName(newIngredient, currentIngredient);
+        }
+    }
+
+    private static void compareIngredientName(Ingredient newIngredient,
+            Ingredient currentIngredient) throws ParserException {
+        if (currentIngredient.getName().equalsIgnoreCase(newIngredient.getName())) {
+            logger.info("Comparing units: " + newIngredient.getUnit() + " and " + currentIngredient.getUnit());
+            compareUnits(newIngredient, currentIngredient);
+        }
+    }
+
+    private static void compareUnits(Ingredient newIngredient, Ingredient currentIngredient) throws ParserException {
+        if (!currentIngredient.getUnit().equalsIgnoreCase(newIngredient.getUnit())) {
+            logger.warning("Units not matching!");
+            throw new ParserException(newIngredient.getName()
+                    + ErrorMessages.UNIT_NOT_MATCHING
+                    + currentIngredient.getUnit()
+                    + ErrorMessages.RETYPE_COMMAND_MESSAGE);
+        }
     }
 
     //@@author ziyi105

@@ -661,7 +661,7 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_BUY_INGREDIENT
+        assertEquals(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                 + BuyIngredientCommand.MESSAGE_USAGE, feedbackToUser);
     }
 
