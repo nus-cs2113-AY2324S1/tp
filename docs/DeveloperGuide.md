@@ -246,20 +246,20 @@ The user is also shown the receded day number.
 
 API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
 
-| No | Step                          | Description                                                                                                                                                                                                                                                                                                                                                                              |
-|----|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | Initialization                | The sequence begins with the `Main` class invoking the `execute` method of the `ListIngredientCommand` after parsing a user command.                                                                                                                                                                                                                                                     |
-| 2-3  | Interaction with 'Menu'       | The `ListIngredientCommand` communicates with the `Menu` class, invoking the `getMenuItemsList()` method to retrieve a list of menu items. The function returns an ArrayList of objects of 'Dish' type.                                                                                                                                                                                  |
-| 4  | Interaction with 'Ui'         | The `ListIngredientCommand` communicates with the `Ui` class, invoking the `printIngredients()` method to print out the list of ingredients used for the selected dish. <br/> * The function returns an ArrayList of objects of 'Dish' type. The `get()` method is then invoked to get the dish of the specified index. However, this is ommitted to prevent unnecessary sophistication. |
-| 5-6  | Interaction with 'Dish'       | The `Ui` class communicates with the `Dish` class, invoking the `getIngredients()` method to obtain the list of ingredients for the selected dish. The `Dish` class responds with an ArrayList of objects of 'Ingredient' type to the `Ui` class.                                                                                                                                        |
-| 7-8  | Iteration through Ingredients | There is a loop that iterates through each ingredient in the list. The `Ui` class interacts with the `Ingredients` class, converting each ingredient to a string containing the ingredient and quantity needed.                                                                                                                                                                          |
-| 9-10  | Display to User               | The `Ui` class showcases the information to the user through the `showToUser()` method.                                                                                                                                                                                                                                                                                                  |
+The diagram above omits the showToUser() function in the Ui class to prevent unnecessary sophistication.
+Although it may seem tedious the steps are essentially as listed below:
+- The sequence begins with the `Main` class invoking the `execute` method of the `ListIngredientCommand` after using a parser command.
+- The `ListIngredientCommand` communicates with the `Menu` class, invoking the `getMenuItemsList()` method to retrieve a list of menu items. The function returns an ArrayList of objects of 'Dish' type.
+- The `ListIngredientCommand` communicates with the `Ui` class, invoking the `showListIngredients()` method to print out the list of ingredients used for the selected dish. 
+- The `Ui` class communicates with the `Dish` class, invoking the `getIngredients()` method to obtain the list of ingredients for the selected dish. The `Dish` class responds with an ArrayList of objects of 'Ingredient' type to the `Ui` class.
+- There is a loop that iterates through each ingredient in the list. The `Ui` class interacts with the `Ingredients` class, to obtain the name, quantity and unit of the ingredient.
+- The `Ui` class showcases the information to the user through the `formatListIngredient()` method.
 
 ### Delete Dish
 
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
 
-*Figure 14: Execution of delete dish command*
+*Figure 17: Execution of delete dish command*
 
 API: [DeleteDishCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
 
@@ -277,7 +277,7 @@ This sequence of actions orchestrates the flow of information and operations bet
 
 ![Edit Price Execution](images/sequence/EditPriceCommand_execute.png)
 
-*Figure 15: Execution of edit_price command*
+*Figure 18: Execution of edit_price command*
 
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
@@ -287,7 +287,7 @@ When the `execute()` method of `EditPriceCommand` is invoked in `Main`, it subse
 
 ![Help Execution](images/sequence/HelpCommand_execute.png)
 
-*Figure 16: Execution of help command*
+*Figure 19: Execution of help command*
 
 API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpCommand.java)
 
