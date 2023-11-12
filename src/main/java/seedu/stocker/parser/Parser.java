@@ -208,9 +208,9 @@ public class Parser {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             AddCommand.MESSAGE_USAGE));
                 }
-                if (serialNumber.isEmpty()) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            AddCommand.MESSAGE_USAGE));
+                if (!isValidSerialNumber(serialNumber)) {
+                    return new IncorrectCommand(String.format("Serial number should be in the format " +
+                            "of three capital letters followed by three numbers (e.g., ABC123)."));
                 }
                 // Check if the expiry date has a valid format
                 if (!isValidDateFormat(expiryDate)) {
@@ -229,6 +229,17 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+    }
+
+    /**
+     * Checks if the given serial number string has a valid format.
+     *
+     * @param serialNumber The serial number string to be validated.
+     * @return True if the serial number has a valid format, false otherwise.
+     */
+    private boolean isValidSerialNumber(String serialNumber) {
+        String regex = "^[A-Z]{3}\\d{3}$";
+        return serialNumber.matches(regex);
     }
 
 

@@ -42,11 +42,11 @@ class StockLevelCommandTest {
         CommandResult result = command.execute();
 
 
-        String expectedOutput = "1. Name: histamine, Expiry date: 09/05/2070, Quantity: 10" +
+        String expectedOutput = "1. Name: histamine, Expiry date: 09/05/2070, Serial number: HIS9447, Quantity: 10" +
                 System.lineSeparator() +
-                "2. Name: paracetamol, Expiry date: 01/07/2020, Quantity: 50" +
+                "2. Name: paracetamol, Expiry date: 01/07/2020, Serial number: PARC347, Quantity: 50" +
                 System.lineSeparator() +
-                "3. Name: Panadol, Expiry date: 04/07/2030, Quantity: 120" +
+                "3. Name: Panadol, Expiry date: 04/07/2030, Serial number: PAN947, Quantity: 120" +
                 System.lineSeparator() +
                 System.lineSeparator() +
                 "Stock Level Report (Sorted by Quantity)";
