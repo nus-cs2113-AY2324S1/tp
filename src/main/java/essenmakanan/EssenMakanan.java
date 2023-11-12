@@ -18,6 +18,9 @@ import essenmakanan.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * The entry point for EssenMakanan application.
+ */
 public class EssenMakanan {
 
     private final String DATA_INGREDIENT_PATH = "data/ingredients.txt";
@@ -33,6 +36,9 @@ public class EssenMakanan {
     private RecipeStorage recipeStorage;
     private ShortcutStorage shortcutStorage;
 
+    /**
+     * Runs the application until termination.
+     */
     public void run() {
         Ui.start();
 
@@ -58,6 +64,9 @@ public class EssenMakanan {
         } while (!ExitCommand.isExitCommand(command));
     }
 
+    /**
+     * Initializes all class members in EssenMakanan.
+     */
     public void setup() {
         EssenLogger.setup();
         recipes = new RecipeList();
@@ -88,6 +97,9 @@ public class EssenMakanan {
         }
     }
 
+    /**
+     * Starts the application.
+     */
     public void start() {
         setup();
         run();
