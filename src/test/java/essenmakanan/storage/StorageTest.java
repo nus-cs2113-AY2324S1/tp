@@ -3,19 +3,24 @@ package essenmakanan.storage;
 import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ingredient.IngredientUnit;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.recipe.Step;
+import essenmakanan.shortcut.Shortcut;
+import essenmakanan.shortcut.ShortcutList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StorageTest {
 
     private static String DATA_INVALID_PATH = "src/test/data/invalid.txt";
     private static String DATA_RECIPE_TEST_PATH = "src/test/data/recipes.txt";
     private static String DATA_INGREDIENT_TEST_PATH = "src/test/data/ingredients.txt";
+    private static String DATA_SHORTCUT_TEST_PATH = "src/test/data/shortcuts.txt";
 
     @Test
     public void accessIngredientDatabase_invalidPath_expectEssenFileNotFoundException() {
@@ -27,6 +32,12 @@ public class StorageTest {
     public void accessRecipeDatabase_invalidPath_expectEssenFileNotFoundException() {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_PATH);
         assertThrows(EssenFileNotFoundException.class, recipeStorage::restoreSavedData);
+    }
+
+    @Test
+    public void accessShortcutDatabase_invalidPath_expectEssenFileNotFoundException() {
+        ShortcutStorage shortcutStorage = new ShortcutStorage(DATA_INVALID_PATH, new IngredientList());
+        assertThrows(EssenFileNotFoundException.class, shortcutStorage::restoreSavedData);
     }
 
     @Test
@@ -67,4 +78,32 @@ public class StorageTest {
         assertEquals("kg", ingredient.getUnit().getValue());
     }
 
+    @Test
+    public void restoreSavedShortcuts_storedValidShortcuts_returnFilledShortcutList() throws Exception {
+        IngredientList ingredientList = new IngredientList();
+        ingredientList.addIngredient(new Ingredient("bread", 2.0, IngredientUnit.PIECE));
+        ingredientList.addIngredient(new Ingredient("egg", 2.0, IngredientUnit.PIECE));
+
+        ShortcutStorage shortcutStorage = new ShortcutStorage(DATA_SHORTCUT_TEST_PATH, ingredientList);
+        ShortcutList shortcutList = new ShortcutList(shortcutStorage.restoreSavedData());
+
+        Shortcut shortcut = shortcutList.getShortcut(0);
+        assertEquals("bread", shortcut.getIngredientName());
+        assertEquals(1, shortcut.getQuantity());
+
+        shortcut = shortcutList.getShortcut(1);
+        assertEquals("egg", shortcut.getIngredientName());
+        assertEquals(0.1, shortcut.getQuantity());
+    }
+
+    @Test
+    public void restoreSavedShortcuts_storedShortcutsWithNoMatchingIngredient_returnEmptyList()
+            throws Exception {
+        IngredientList ingredientList = new IngredientList();
+
+        ShortcutStorage shortcutStorage = new ShortcutStorage(DATA_SHORTCUT_TEST_PATH, ingredientList);
+        ShortcutList shortcutList = new ShortcutList(shortcutStorage.restoreSavedData());
+
+        assertTrue(shortcutList.getShortcuts().isEmpty());
+    }
 }
