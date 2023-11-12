@@ -98,8 +98,6 @@ Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 | `allowance`   | 
 | `others`      |
 
-**Note:** Income types are case-insensitive.
-
 Example of usage: `add income /a 5000 /t salary /r 30 /d work`
 
 Example output:
