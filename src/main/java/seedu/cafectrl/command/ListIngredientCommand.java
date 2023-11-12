@@ -16,8 +16,8 @@ public class ListIngredientCommand extends Command {
     public static final String COMMAND_WORD = "list_ingredients";
     public static final String MESSAGE_USAGE = "To list out the ingredients needed "
             + "along with the quantity for a specific dish:\n"
-            + "Parameters: DISH_INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: index/DISH_INDEX\n"
+            + "Example: " + COMMAND_WORD + " index/1";
 
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Ui ui;

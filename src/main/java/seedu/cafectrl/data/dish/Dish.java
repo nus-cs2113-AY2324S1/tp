@@ -16,7 +16,7 @@ public class Dish {
     }
     public Dish(String name, float price) {
         this.name = name;
-        this.ingredients = null;
+        this.ingredients = new ArrayList<>();
         this.price = Math.abs(price);
     }
 
