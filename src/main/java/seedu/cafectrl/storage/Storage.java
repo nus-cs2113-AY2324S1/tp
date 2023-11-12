@@ -82,7 +82,7 @@ public class Storage {
             isTamperedMessagePrinted = true;
         }
         if (isHashStringTampered) {
-            ui.showToUser(Messages.HASH_STRING_TAMPERED);
+            ui.showToUser(Messages.HASH_STRING_TAMPERED, Messages.HASH_STRING_MESSAGE, "");
             isHashStringTampered = false;
         }
         if (isMenuTampered) {

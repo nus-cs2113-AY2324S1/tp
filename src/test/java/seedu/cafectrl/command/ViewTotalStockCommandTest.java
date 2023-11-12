@@ -34,7 +34,7 @@ public class ViewTotalStockCommandTest {
         System.setOut(originalOut);
 
         String expectedOutput = Messages.MENU_END_CAP
-                + Messages.VIEW_STOCK_MESSAGE2
+                + Messages.VIEW_STOCK_MESSAGE
                 + Messages.MENU_CORNER
                 + Messages.VIEW_STOCK_TITLE_MESSAGE
                 + Messages.MENU_CORNER
