@@ -560,7 +560,7 @@ vis /t expense /c radar
 ```
 You can run the 3 commands separately to see different charts
 
-We can do the same the income
+We can do the same for income. Add some entries
 ```
 add income /a 1800 /t salary /d mcd
 add income /a 400 /t investments /d Gamestop
