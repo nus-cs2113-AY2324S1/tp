@@ -35,6 +35,7 @@ public class EditRecipeCommand extends Command {
             return;
         }
 
+        // getting recipe from recipe list based on title
         Recipe existingRecipe = null;
         try {
             existingRecipe = recipes.getRecipe(recipeTitle);
