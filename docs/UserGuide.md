@@ -76,6 +76,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 - Maximum amount for each cashflow and total balance that the program can hold is 999,999,999,999.99
 - Minimum amount for each cashflow and total balance that the program can hold is -999,999,999,999.99
 - Total Balance, Income balance, and Expense balance are different entities where the latter two do not have the same limitations.
+- Maximum value for recurrence is 2,147,483,647, the maximum number an `int` can hold.
 
 ### Add cashflow
 
@@ -87,7 +88,7 @@ Format: `add income /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 - `/a` is used to specify the amount of the income, where an **integer** or **double** is expected.
 - `/r` is used to denote a recurring income, with the period to the next addition is specified by an **integer** representing the number of `DAYS`.
 - `/d` is used to give a description to the income, where any **String** is expected.
-- `/t` is used to specify the income type, where the list of acceptable types is given below.
+- `/t` is used to specify the income type, where the list of acceptable types is given below. The types are case-insensitive.
 
 | Income Types  |
 |---------------|
@@ -120,7 +121,7 @@ Format: `add expense /a AMOUNT /t TYPE [/r DAYS] [/d DESCRIPTION]`
 - `/a` is used to specify the amount of the expense, where an **integer** or **double** is expected.
 - `/r` is used to denote a recurring expense, with the period to the next addition is specified by an **integer** representing the number of `DAYS`.
 - `/d` is used to give a description to the expense, where any **String** is expected.
-- `/t` is used to specify the expense type, where the list of acceptable types is given below
+- `/t` is used to specify the expense type, where the list of acceptable types is given below. The types are case-insensitive.
 
 | Expense         |
 |-----------------|
