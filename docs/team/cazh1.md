@@ -86,9 +86,9 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 ### Other Contributions to Team-based Task
 1. Maintain issue tracker
 2. Bug testing for the application and providing detailed steps to recreate found bugs. <br>
-   ![Bugs Found](../images_PPP/zhongheng/Bug_reporting1.png)
-   ![Bugs Found](../images_PPP/zhongheng/Pantry_load_from_file_bug1.png)
-   ![Bugs Found](../images_PPP/zhongheng/Pantry_restock_bug1.png)
+   ![Bugs Found](../images_PPP/zhongheng/Bug_reporting.png)
+   ![Bugs Found](../images_PPP/zhongheng/Pantry_load_from_file_bug.png)
+   ![Bugs Found](../images_PPP/zhongheng/Pantry_restock_bug.png)
 3. Implemented bug fixes for PED bugs
    [#212](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/212),
    [#278](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/278),
