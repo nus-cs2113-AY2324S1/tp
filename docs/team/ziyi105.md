@@ -30,16 +30,28 @@ Café proprietors who prefer typing on CLI than any other interaction method and
     <br/><br/>
 2.  **Help** <br>
     Function: Print out a list of commands and their usages to the user<br>
+<br/><br/>
+3.  **Encoding & Decoding of Pantry Stock Storage File** <br>
+    Function: When the user calls bye command, all the ingredients stored in pantry will be encoded into format of `INGREDIENT_NAME | QUANTITY | UNIT`. The encoded data will be written in Pantry_stock.txt file. When the user starts a new session, the data in the text file will be extracted out and be decoded to load the ingredients back to PantryStock class.<br>
+    Error Handling: This command will still check for the validity of each argument (e.g., length of ingredient name, type of unit), and skip the particular ingredient if any of the arguments is not valid. This can prevent the user from accidentally adding invalid ingredients to the text file.
 
-### Enhancement
+### Enhancements
 1. **Storage**<br>
-   Implemented Encoding.java, Decoding.java and Storage.java with skeleton methods for my teammates to implement. I spent quite some time trying to make sense of the storage system in addressbook level 3 and adopt it in our project. 
+   [Relevant PR](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/143) <br>
+   - Read and learned from the storage system in addressbook level 3 and adopted it in our project.
+   - Implemented `Encoding.java`, `Decoding.java` and `Storage.java` with skeleton methods for my teammates to implement. 
     <br><br>
 2. **Parser**<br>
-   Implemented skeleton class for Parser for other teammates to use. I also implemented ParserUtil interface to reduce coupling of Parser.java and CafeCRTL.java.
+   Created `Parser.java` for other teammates to use. Implemented ParserUtil interface to reduce coupling of Parser.java and CafeCRTL.java.
    <br><br>
 3. **Messages & ErrorMessages**<br>
    Created classes to store all messages to the user as static constant.
+    <br><br>
+4. **Parser Regex** <br>
+   [Relevant PR](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51) <br>
+   - Learned `Pattern` and `Matcher` API by referring to addressbook and online documentations.
+   - Created regex `COMMAND_ARGUMENT_FORMAT`, `ADD_ARGUMENT_STRING`, `LIST_INGREDIENT_ARGUMENT_STRING`, `DELETE_ARGUMENT_STRING` and `EDIT_PRICE_ARGUMENT_STRING`. 
+   - Created a skeleton method body of `prepare_add` method using patter and matcher, and added some basic explanations on how to use them for Dexter to follow and implement the feature.
 
 ### Contributions to UG
 [UserGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html)
@@ -85,6 +97,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
    ![Relevant Telegram screenshot 1](../images_PPP/ziyi/telegram_chef_text.png)
    ![Relevant Telegram screenshot 2](../images_PPP/ziyi/relevant_telegram_screenshot_2.png)
    ![Relevant Telegram screenshot 3](../images_PPP/ziyi/relevant_telegram_screenshot_3.png)
+4. Read and compile important information on course website
    ![Relevant Telegram screenshot 4](../images_PPP/ziyi/relevant_telagram_screenshot_4.png)
 
 ### Contributions beyond the Project Team
