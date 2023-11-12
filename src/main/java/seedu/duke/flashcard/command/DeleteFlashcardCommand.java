@@ -29,7 +29,7 @@ public class DeleteFlashcardCommand extends DualFlashcardCommand {
         assert flashcardList != null : "Must be a valid flashcardList " +
                 "instance";
 
-        System.out.println("    Enter id of the flashcard you want to " +
+        System.out.print("    Enter id of the flashcard you want to " +
                 "delete: ");
 
         String input = scanner.nextLine();
