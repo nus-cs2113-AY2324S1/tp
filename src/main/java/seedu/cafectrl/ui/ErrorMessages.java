@@ -2,6 +2,7 @@ package seedu.cafectrl.ui;
 
 import seedu.cafectrl.command.EditPriceCommand;
 import seedu.cafectrl.command.HelpCommand;
+import seedu.cafectrl.command.ListTotalSalesCommand;
 
 public class ErrorMessages {
     public static final String INVALID_ADD_DISH_FORMAT_MESSAGE = "Error: Incorrect format for the add command.\n";
@@ -92,4 +93,6 @@ public class ErrorMessages {
             + ",\nso could you remove them?";
     public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
             + HelpCommand.MESSAGE_USAGE;
+    public static final String WRONG_LIST_TOTAL_SALES_FORMAT = "Invalid list_total_sales command format!\n"
+            + ListTotalSalesCommand.MESSAGE_USAGE;
 }
