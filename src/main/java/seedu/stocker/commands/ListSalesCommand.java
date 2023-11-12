@@ -9,7 +9,7 @@ import seedu.stocker.drugs.CartEntry;
 public class ListSalesCommand extends Command {
     public static final String COMMAND_WORD = "listSales";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all items in the sales list."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all sold items."
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 

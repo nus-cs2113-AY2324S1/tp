@@ -32,14 +32,11 @@ public class CheckOutCommand extends Command {
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
             int index = 1;
             double totalCost = 0.0;
-
             // Create a temporary holder for sold items
             List<CartEntry> soldItems = new ArrayList<>();
-
             for (CartEntry entry : currentCart.getCurrentCart()) {
                 String serialNumber = entry.getSerialNumber();
                 long quantity = entry.getQuantity();
-
                 StockEntry stockEntry = inventory.get(serialNumber);
                 if (stockEntry != null) {
                     Drug drug = stockEntry.getDrug();

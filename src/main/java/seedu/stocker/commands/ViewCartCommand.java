@@ -53,9 +53,9 @@ public class ViewCartCommand extends Command {
                 }
             }
 
-            resultMessage.append("Total Cost: ").append(totalCost).append(System.lineSeparator());
+            resultMessage.append(System.lineSeparator()).append("Total Cost: ").append(totalCost);
 
-            return new CommandResult(resultMessage.toString());
+            return new CommandResult<>(resultMessage.toString());
         }
     }
 }

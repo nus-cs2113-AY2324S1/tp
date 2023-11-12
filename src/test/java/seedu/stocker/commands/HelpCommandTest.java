@@ -107,6 +107,18 @@ class HelpCommandTest {
                 + System.getProperty("line.separator")
                 + System.getProperty("line.separator")
 
+                + "saveSales: Saves the current sold items to a file."
+                + System.getProperty("line.separator")
+                + "Example: saveSales"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
+                + "listSales: Lists all sold items."
+                + System.getProperty("line.separator")
+                + "Example: listSales"
+                + System.getProperty("line.separator")
+                + System.getProperty("line.separator")
+
                 + "addVendor: Adds a new vendor to the vendors list. Parameter: NAME"
                 + System.getProperty("line.separator")
                 + "Example: addVendor /v Moderna"

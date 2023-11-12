@@ -604,6 +604,38 @@ Expected outcome:
 || Threshold quantity set for Doliprane: 50
 ```
 
+### `saveSales` - Save the current sold items
+
+The saveSales command allows you to save the sales transactions onto your computer's hard drive. The saved file can serve as a historical record of sales transactions and can be used for reference in the future.
+
+Example of usage:
+
+`saveSales`
+
+Expected outcome:
+
+```
+|| Sales data successfully saved.
+
+```
+
+### `listSales` - List the description of sold items saved
+
+The listSales command is designed to provide you with a clear and organized list of all sales transactions that have been tracked by the system. It helps you review and manage sales data efficiently.
+
+Example of usage:
+
+`listSales`
+
+Expected outcome:
+
+```
+Listed all sales transactions:
+|| 1. Serial Number: DOL123, Quantity: 7, Selling Price: $0.0
+|| 2. Serial Number: HIS526, Quantity: 4, Selling Price: $0.0
+
+```
+
 ### `listThreshold` - List all drugs and their threshold levels
 
 Retrieve a list of all drugs in your inventory and their corresponding threshold levels. The threshold level is the
@@ -728,6 +760,8 @@ Expected outcome:
 - add drug to cart : `addToCart /s SERIAL_NUMBER /q QUANTITY`
 - checks out current cart : `checkout`
 - view current cart items : `viewCart`
+- save current sold items : `saveSales`
+- view all sold items : `listSales`
 - set threshold quantity for a drug : `setThreshold /s SERIAL_NUMBER /tq THRESHOLD_QUANTITY`
 - list all drugs and threshold levels : `listThreshold`
 - bye : `bye`

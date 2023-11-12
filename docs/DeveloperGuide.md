@@ -623,6 +623,43 @@ not found.
 
 ---
 
+## 13. ListSales Command
+
+The ListSalesCommand is designed to list all sales transactions tracked by the system. This command provides users with a clear and organized view of the sales data, making it easier to review and manage sales transactions.
+
+### Design Considerations
+The command should account for scenarios where there are no sales transactions to display.
+The output should be presented in a user-friendly and organized format for better user experience.
+
+## Implementation
+
+In the execute method of the ListSalesCommand class:
+- Retrieve the list of sales transactions from the system.
+- Check if there are any sales transactions to display. If the list is empty, return a message indicating that there are no sales.
+- If sales transactions are available, process and format the data for presentation.
+- Organize and present the sales data in a structured format, including details such as serial numbers, quantities, and selling prices for each transaction.
+- Ensure that the sales data is neatly formatted and clearly presented to the user.
+
+---
+
+## 14. SaveSales Command
+
+The SaveSalesCommand is responsible for saving the current sales data to an external file. This file serves as a record-keeping mechanism and a reference for past sales transactions.
+
+### Design Considerations
+The command should handle the process of writing sales data to an external file.
+It should ensure data integrity and include error handling in case of write failures.
+
+### Implementation
+
+In the execute method of the SaveSalesCommand class:
+- Check if there are any sales transactions to save. If the list is empty, return a message indicating that there are no sales to save.
+- If sales transactions exist, write the data to a specified file in a structured and well-organized format.
+- Implement error handling to address any potential file writing failures.
+- Confirm the successful save operation by returning a message indicating that the sales data has been saved.
+
+---
+
 ## Product scope
 
 ---

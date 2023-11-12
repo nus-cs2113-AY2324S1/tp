@@ -13,7 +13,7 @@ import java.io.IOException;
 public class SaveSalesCommand extends Command {
     public static final String COMMAND_WORD = "saveSales";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves the current sales list to a file."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves the current sold items to a file."
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
 

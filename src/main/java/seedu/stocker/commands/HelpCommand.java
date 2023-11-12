@@ -1,5 +1,6 @@
 package seedu.stocker.commands;
 //@@author TeoHaoZhi
+
 /**
  * Shows help instructions.
  */
@@ -14,7 +15,7 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute() {
         return new CommandResult<>(
-                        System.lineSeparator() + LoginCommand.MESSAGE_USAGE + System.lineSeparator()
+                System.lineSeparator() + LoginCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + RegisterCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + SaveCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + HelpCommand.MESSAGE_USAGE + System.lineSeparator()
@@ -33,6 +34,9 @@ public class HelpCommand extends Command {
                         + System.lineSeparator() + AddToCartCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + ViewCartCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + CheckOutCommand.MESSAGE_USAGE + System.lineSeparator()
+
+                        + System.lineSeparator() + SaveSalesCommand.MESSAGE_USAGE + System.lineSeparator()
+                        + System.lineSeparator() + ListSalesCommand.MESSAGE_USAGE + System.lineSeparator()
 
                         + System.lineSeparator() + AddVendorCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + DeleteVendorCommand.MESSAGE_USAGE + System.lineSeparator()
