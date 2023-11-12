@@ -66,7 +66,7 @@ public class Storage {
             if (encodedMenuHash != fileHash) {
                 return true;
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             isHashStringTampered = true;
             return true;
         }
