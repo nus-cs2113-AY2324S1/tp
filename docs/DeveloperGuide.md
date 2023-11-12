@@ -21,6 +21,8 @@
     * [Delete budget](#delete-budget)
     * [Reset budget](#reset-budget)
     * [View budget](#view-budget)
+  * [Mark Goal Feature](#mark-goal-feature)
+    * [Sequence Diagram](#mark-goal-sequence-diagram)
   * [Product Scope](#product-scope)
     * [Target user profile](#target-user-profile)
     * [Value proposition](#value-proposition)
@@ -331,6 +333,30 @@ Example: `budget reset`
 The `currentBudget` will be shown to the user through the `Ui`.
 
 Example: `budget view`
+
+### Mark Goal Feature
+
+The mark goal command has 1 compulsory argument `INDEX`.
+
+Example:
+```
+markgoal 1
+```
+Below are the steps that shows the implementation of set goal.
+
+#### Step 1
+The MarkGoalCommand instance calls `markGoal(INDEX)` function of wish list.
+#### Step 2
+Wish list finds the corresponding goal and calls `markAsDone()` function of corresponding goal.
+#### Step 3
+The marked goal is then displayed to the user through the Ui.
+#### Step 4
+The wish list calls `addExpense(amount, type, label)` function of cashflow list to add corresponding expense.
+#### Step 5
+The added expense is then displayed to the user through the Ui.
+#### Mark goal Sequence Diagram
+Given below is the sequence diagram showing the markgoal mechanism:
+![](images/MarkGoalSequence.png)
 
 
 ## Product scope

@@ -1,4 +1,4 @@
-# Neo Min Wei - Project Portfolio Page
+# Shi, Haochen - Project Portfolio Page
 
 ## Overview
 
@@ -12,38 +12,31 @@ you a one-stop interface to access a plethora of features to manage your finance
 
 ### Enhancements Implemented:
 
-* Add Cashflow Feature
-    * Keep track of total balance
-    * Ability to set a recurring cashflow
-* Delete Cashflow Feature
-    * Ability to delete a cashflow based on its respective index in overall list, income list, expense list or recur list.
-    * Ability to delete the recurrence portion of a cashflow, making it a one-time entry only.
-* Recurring Cashflow Feature
-    * Ability to automatically add cashflows based on the system date.
-* List Recurring Cashflows Feature
+* Add Reminder feature
+* List Reminder feature
+* Delete Reminder feature
+* Mark Reminder as Done feature
+* Find Cashflow feature
+    * Ability to find a cashflow based on its description.
+* Set Goal feature
+* List Goal feature
+* Delete Goal feature
+* Mark Goal as Achieved feature
 
 ### Contributions to the UG:
 
-* Feature guide for add and delete cashflow feature
-* Provide quick start guide
-* Command summary for add, delete and listing of cashflow
+* Feature guide for reminder related feature
+* Feature guide for find command feature
+* Feature guide for goal related feature
 
 ### Contributions to the DG
 
-* Acknowledgements of reused code found in add/delete cashflow feature
-* Add/Delete Cashflow Feature
+* Mark Goal Feature
     * Implementation
-    * Class Diagram
-    * Sequence Diagram
-* Recurring Cashflow Feature
-    * Implementation
-    * Class Diagram
     * Sequence Diagram
 
 ### Contributions to team-based tasks:
 
-* Submission of first draft of UG
-* Creating and assigning relevant issues in the issue tracker to teammates
 * Approving pull requests by team members
 
 ### Review/ Mentoring contributions:

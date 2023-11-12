@@ -1,5 +1,7 @@
 package seedu.financialplanner.goal;
 
+import seedu.financialplanner.cashflow.CashflowList;
+import seedu.financialplanner.enumerations.ExpenseType;
 import seedu.financialplanner.utils.Ui;
 
 import java.util.ArrayList;
@@ -45,7 +47,12 @@ public class WishList {
         Ui.getInstance().showMessage("You have added " + goal);
     }
 
-
+    public void markGoal(int index) {
+        Goal goal = list.get(index - 1);
+        goal.markAsDone();
+        Ui.getInstance().showMessage("You have achieved " + goal + System.lineSeparator() + "Congratulations!");
+        CashflowList.getInstance().addExpense(goal.getAmount(), ExpenseType.OTHERS, 0, goal.getLabel());
+    }
     /**
      * Formats the reminder list into an easy-to-read format to be output to the user.
      *

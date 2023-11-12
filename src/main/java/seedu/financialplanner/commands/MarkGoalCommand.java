@@ -1,12 +1,8 @@
 package seedu.financialplanner.commands;
 
-import seedu.financialplanner.cashflow.CashflowList;
 import seedu.financialplanner.commands.utils.Command;
 import seedu.financialplanner.commands.utils.RawCommand;
-import seedu.financialplanner.enumerations.ExpenseType;
-import seedu.financialplanner.goal.Goal;
 import seedu.financialplanner.goal.WishList;
-import seedu.financialplanner.utils.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,9 +59,6 @@ public class MarkGoalCommand extends Command {
     @Override
     public void execute() {
         assert index > 0 && index <= WishList.getInstance().list.size();
-        Goal goal = WishList.getInstance().list.get(index - 1);
-        goal.markAsDone();
-        Ui.getInstance().showMessage("You have achieved " + goal + System.lineSeparator() + "Congratulations!");
-        CashflowList.getInstance().addExpense(goal.getAmount(), ExpenseType.OTHERS, 0, goal.getLabel());
+        WishList.getInstance().markGoal(index);
     }
 }

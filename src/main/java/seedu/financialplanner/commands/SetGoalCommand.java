@@ -2,9 +2,7 @@ package seedu.financialplanner.commands;
 
 import seedu.financialplanner.commands.utils.Command;
 import seedu.financialplanner.commands.utils.RawCommand;
-import seedu.financialplanner.goal.Goal;
 import seedu.financialplanner.goal.WishList;
-import seedu.financialplanner.utils.Ui;
 
 @SuppressWarnings("unused")
 public class SetGoalCommand extends Command {
