@@ -5,7 +5,7 @@ mainframe sd displaying chart
 participant ":VisCommand"
 participant "<<class>>\nVisualizer"
 
-":VisCommand"-> "<<class>>\nVisualizer": Visualizer.displayChart(chart, sortedCashFlow, type)
+":VisCommand"-> "<<class>>\nVisualizer": displayChart(chart, sortedCashFlow, type)
 
 activate "<<class>>\nVisualizer"
 

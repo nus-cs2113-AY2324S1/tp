@@ -7,7 +7,7 @@ autoactivate on
 participant ":VisCommand"
 participant "<<class>>\nCategorizer"
 
-":VisCommand"-> "<<class>>\nCategorizer": Categorizer.sortType(cashflowList, type)
+":VisCommand"-> "<<class>>\nCategorizer": sortType(cashflowList, type)
 
 alt "expense"
     "<<class>>\nCategorizer" -> "<<class>>\nCategorizer": sortExpenses(cashflowList)
