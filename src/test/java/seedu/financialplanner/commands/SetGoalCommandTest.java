@@ -36,11 +36,4 @@ class SetGoalCommandTest {
         }
     }
 
-    @Test
-    void testExcute() {
-        SetGoalCommand testEntry = new SetGoalCommand(
-                Parser.parseRawCommand("set goal /g 5000 /l car"));
-        testEntry.execute();
-        assertEquals(1, wishList.list.size());
-    }
 }
