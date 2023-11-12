@@ -3,7 +3,6 @@ package seedu.duke.storage;
 import seedu.duke.calendar.Event;
 import seedu.duke.calendar.EventList;
 import seedu.duke.calendar.Goal;
-import seedu.duke.flashcard.FlashcardList;
 import seedu.duke.storage.exceptions.EventFileFormatException;
 
 import java.io.File;

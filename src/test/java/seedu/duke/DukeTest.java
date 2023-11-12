@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.calendar.Calendar;
 import seedu.duke.calendar.CalendarManager;
 import seedu.duke.storage.EventStorage;
 import seedu.duke.flashcard.FlashcardComponent;
@@ -25,7 +26,7 @@ class DukeTest {
 
     @Test
     public void testFlashcardComponent_isResponsible_notResponsible() {
-        FlashcardComponent flashcardComponent = new FlashcardComponent();
+        FlashcardComponent flashcardComponent = new FlashcardComponent(new Calendar());
 
         assertFalse(flashcardComponent.isResponsible("dfdfdfdfdf"));
         assertFalse(flashcardComponent.isResponsible("help me"));
@@ -34,7 +35,7 @@ class DukeTest {
 
     @Test
     public void testFlashcardComponent_isResponsible_responsible() {
-        FlashcardComponent flashcardComponent = new FlashcardComponent();
+        FlashcardComponent flashcardComponent = new FlashcardComponent(new Calendar());
 
         assertTrue(flashcardComponent.isResponsible("create flashcard"));
         assertTrue(flashcardComponent.isResponsible("create flashcard  "));
@@ -43,14 +44,14 @@ class DukeTest {
 
     @Test
     public void testFlashcardStorage_isAvailable(){
-        FlashcardComponent flashcardComponent = new FlashcardComponent();
+        FlashcardComponent flashcardComponent = new FlashcardComponent(new Calendar());
         FlashcardStorage storage = flashcardComponent.getStorage();
         assertTrue(storage.isStorageAvailable());
     }
 
     @Test
     public void testEventStorage_isAvailable(){
-        CalendarManager calendarManager = new CalendarManager(new ArrayList<>());
+        CalendarManager calendarManager = new CalendarManager(new Calendar(), new ArrayList<>());
         EventStorage storage = calendarManager.getStorage();
         assertTrue(storage.isStorageAvailable());
     }
@@ -65,7 +66,7 @@ class DukeTest {
 
         Scanner scanner = new Scanner(System.in);
 
-        FlashcardComponent flashcardComponent = new FlashcardComponent();
+        FlashcardComponent flashcardComponent = new FlashcardComponent(new Calendar());
         FlashcardStorage storage = flashcardComponent.getStorage();
 
         FlashcardUi ui = flashcardComponent.getUi();

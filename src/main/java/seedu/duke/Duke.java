@@ -2,6 +2,7 @@
 
 package seedu.duke;
 
+import seedu.duke.calendar.Calendar;
 import seedu.duke.calendar.CalendarManager;
 import seedu.duke.flashcard.FlashcardComponent;
 
@@ -19,8 +20,9 @@ public class Duke {
      * Starts a REPL session where commands are inputted and then processed.
      */
     private void run() {
-        FlashcardComponent fc = new FlashcardComponent();
-        CalendarManager cm = new CalendarManager(new ArrayList<>());
+        Calendar calendar = new Calendar();
+        FlashcardComponent fc = new FlashcardComponent(calendar);
+        CalendarManager cm = new CalendarManager(calendar, new ArrayList<>());
 
         Scanner scanner = new Scanner(System.in);
         String input;

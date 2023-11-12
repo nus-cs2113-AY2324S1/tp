@@ -2,6 +2,7 @@
 
 package seedu.duke.flashcard.review;
 
+import seedu.duke.calendar.Calendar;
 import seedu.duke.flashcard.Flashcard;
 import seedu.duke.flashcard.FlashcardList;
 
@@ -30,6 +31,7 @@ public abstract class ReviewMode {
      * @return Textual description of what kind of review mode this class is.
      */
     public abstract String getReviewModeName();
+
 
     /**
      * Starts and executes a flashcard review session.
@@ -66,6 +68,7 @@ public abstract class ReviewMode {
             if (getReviewModeName().equals("spaced repetition mode")) {
                 letUserRateReviewDifficulty(scanner, flashcardToReview);
             }
+            calendar.incrementFlashcardCount();
         }
 
         System.out.println("    Success! You have ended this review session.");

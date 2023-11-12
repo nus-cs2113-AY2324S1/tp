@@ -7,7 +7,6 @@ import seedu.duke.flashcard.FlashcardList;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Review mode that randomly picks flashcards to review.

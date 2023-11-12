@@ -2,6 +2,7 @@
 
 package seedu.duke.flashcard;
 
+import seedu.duke.calendar.Calendar;
 import seedu.duke.flashcard.command.FlashcardCommand;
 import seedu.duke.flashcard.command.UnknownCommand;
 import seedu.duke.storage.FlashcardStorage;
@@ -18,9 +19,10 @@ public class FlashcardComponent {
     private FlashcardList flashcardList;
     private FlashcardUi ui;
     private FlashcardStorage storage;
+    private Calendar calendar;
 
     //@@author junhyeong0411
-    public FlashcardComponent() {
+    public FlashcardComponent(Calendar calendar) {
         parser = new FlashcardCommandParser();
 
         FlashcardDirectory flashcarddirectory = new FlashcardDirectory();
@@ -36,6 +38,7 @@ public class FlashcardComponent {
 
         Flashcard.calculateAndUpdateGlobalMaxId(flashcardList);
         ui = new FlashcardUi(flashcardList);
+        this.calendar = calendar;
     }
 
     public FlashcardStorage getStorage(){
@@ -65,7 +68,8 @@ public class FlashcardComponent {
     public boolean isResponsible(String input) {
         assert input != null : "input must not be null";
 
-        FlashcardCommand command = parser.parseInput(input);
+        FlashcardCommand command = parser.parseInput(input, calendar);
+
 
         if (command instanceof UnknownCommand) {
             return false;
@@ -82,7 +86,7 @@ public class FlashcardComponent {
     public void processInput(String input) {
         assert input != null : "input must not be null";
 
-        FlashcardCommand command = parser.parseInput(input);
+        FlashcardCommand command = parser.parseInput(input, calendar);
         assert !(command instanceof UnknownCommand) : "Command cannot be " +
                 "unknown";
 

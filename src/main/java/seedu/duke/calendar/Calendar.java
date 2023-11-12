@@ -9,7 +9,10 @@ public class Calendar {
      */
     EventList eventList;
 
-    public Calendar(EventList eventList) {
+    public Calendar() {
+    }
+
+    public void setEventList(EventList eventList) {
         this.eventList = eventList;
     }
 
