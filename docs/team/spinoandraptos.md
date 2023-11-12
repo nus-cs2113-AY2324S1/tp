@@ -90,6 +90,8 @@ readability and simplicity: <br/>
 - [Non-functional Requirements](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#non-functional-requirements) <br/>
 - [Glossary](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#glossary) <br/>
 
+<div style="page-break-after: always;"></div>
+
 ### Team-Based Task Contributions:
 - Helped to standardise the style of all UML diagrams through the creation of a `Styles.puml` template file which is applied
   to all UML diagrams created using PlantUML extension
