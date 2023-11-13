@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class OrderList {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
     private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private ArrayList<Order> orderList;
     private float totalOrderListCost;
 
@@ -78,6 +78,7 @@ public class OrderList {
      */
     private void aggregateOrder(Order order, ArrayList<Order> aggregatedOrders) {
         logger.info("Aggregating order...");
+
         if (order.getIsComplete()) {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
             aggregatedOrders.get(index)
@@ -99,6 +100,7 @@ public class OrderList {
             Order order = aggregatedOrders.get(i);
             String orderDishName = order.getDishName().trim();
             dishName = dishName.trim();
+
             if (orderDishName.equalsIgnoreCase(dishName)) {
                 return i;
             }
@@ -115,6 +117,7 @@ public class OrderList {
     private float calculateTotalCost(ArrayList<Order> orders) {
         logger.info("Calculating total cost...");
         float totalCost = 0;
+
         for (Order order : orders) {
             totalCost += order.getTotalOrderCost();
             logger.info("Total cost: " + totalCost);

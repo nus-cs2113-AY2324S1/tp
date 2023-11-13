@@ -1,20 +1,20 @@
 package seedu.cafectrl.data.dish;
 
 public class Ingredient {
-    private String name;
+    private final String name;
+    private final String unit;
     private int qty;
-    private String unit;
 
     public Ingredient(String name) {
         this.name = name;
-        this.qty = 0;
         this.unit = null;
+        this.qty = 0;
     }
 
     public Ingredient(String name, int qty, String unit) {
         this.name = name;
-        this.qty = qty;
         this.unit = unit;
+        this.qty = qty;
     }
 
     public String getName() {
@@ -38,8 +38,16 @@ public class Ingredient {
         return name + " - " + qty + unit;
     }
 
+    /**
+     * Compare the name of this ingredient to the other ingredient
+     * @param obj the other ingredient to be compared with
+     * @return true if they have the same name, false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
-        return this.toString().equals(obj.toString());
+        if (obj instanceof Ingredient) {
+            return this.name.equals(((Ingredient) obj).name);
+        }
+        return false;
     }
 }

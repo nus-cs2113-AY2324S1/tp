@@ -12,9 +12,9 @@ import java.util.logging.Logger;
 
 public class Pantry {
 
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private final Ui ui;
     private ArrayList<Ingredient> pantryStock;
-    private Ui ui;
 
     //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
@@ -71,6 +71,7 @@ public class Pantry {
      */
     private Ingredient addIngredientQuantity(int qty, int ingredientIndex, String unit) {
         Ingredient ingredient = pantryStock.get(ingredientIndex);
+
         if (!unit.equalsIgnoreCase(ingredient.getUnit())) {
             logger.warning("Unit does not match previous unit");
             throw new RuntimeException(ingredient.getName()
@@ -81,6 +82,7 @@ public class Pantry {
         qty += ingredient.getQty(); //adds new qty to current qty
         ingredient.setQty(qty);
         logger.info("New quantity: " + qty);
+
         return ingredient;
     }
 
@@ -93,6 +95,7 @@ public class Pantry {
     private int getIndexOfIngredient(String name) {
         for (int i = 0; i < pantryStock.size(); i++) {
             String ingredientName = pantryStock.get(i).getName().trim();
+
             if (name.equalsIgnoreCase(ingredientName)) {
                 return i;
             }
@@ -108,6 +111,7 @@ public class Pantry {
      */
     public boolean isDishCooked(ArrayList<Ingredient> dishIngredients) {
         logger.info("Checking if dish can be cooked");
+
         //for each ingredient that is used in the dish, update the stock of ingredient left.
         for (Ingredient dishIngredient : dishIngredients) {
             Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
@@ -119,6 +123,7 @@ public class Pantry {
             int stockQuantity = usedIngredientFromStock.getQty();
             int usedQuantity = dishIngredient.getQty();
             int finalQuantity = stockQuantity - usedQuantity;
+
             if (finalQuantity < 0) {
                 return false;
             }
@@ -148,11 +153,13 @@ public class Pantry {
     public void calculateDishAvailability(Menu menu, Order order) {
         logger.info("Calculating dish availability...");
         int menuSize = menu.getSize();
+
         for (int i = 0; i < menuSize; i++) {
             Dish dish = menu.getDishFromId(i);
             ui.showToUser("Dish: " + dish.getName());
             int numberOfDishes = calculateMaxDishes(dish, menu, order);
             ui.showDishAvailability(numberOfDishes);
+
             if (i != menuSize - 1) {
                 ui.printLine();
             }
@@ -167,8 +174,9 @@ public class Pantry {
     public int calculateMaxDishes(Dish dish, Menu menu, Order order) {
         logger.info("Calculating max number of dishes possible...");
         int maxNumofDish = Integer.MAX_VALUE;
-        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
         boolean isRestockHeaderDisplayed = false;
+        ArrayList<Ingredient> dishIngredients = retrieveIngredientsForDish(dish.getName(), menu);
+
         for (Ingredient dishIngredient : dishIngredients) {
             int numOfDish = calculateMaxDishForEachIngredient(dishIngredient);
             maxNumofDish = Math.min(numOfDish, maxNumofDish);
@@ -197,6 +205,7 @@ public class Pantry {
 
     private void handleIncompleteDishCase(Ingredient dishIngredient, Order order) {
         int orderQuantity = order.getQuantity();
+
         if (calculateMaxDishForEachIngredient(dishIngredient) < orderQuantity) {
             handleRestock(dishIngredient, orderQuantity);
         }
@@ -216,6 +225,7 @@ public class Pantry {
     private int calculateMaxDishForEachIngredient(Ingredient dishIngredient) {
         logger.info("Calculating max dish for each ingredient...");
         Ingredient usedIngredientFromStock = getIngredient(dishIngredient);
+
         if (usedIngredientFromStock == null) {
             return 0;
         }
@@ -259,5 +269,3 @@ public class Pantry {
         return dishIngredients;
     }
 }
-
-

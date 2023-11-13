@@ -3,24 +3,26 @@ package seedu.cafectrl.data;
 import java.util.ArrayList;
 
 public class CurrentDate {
+    private final static int ZERO = 0;
+    private final static int ONE = 1;
     private int currentDay;
 
     public CurrentDate() {
-        currentDay = 0;
+        currentDay = ZERO;
     }
     public CurrentDate(int day) {
-        currentDay = day - 1;
+        currentDay = day - ONE;
     }
     public CurrentDate(Sales sales) {
         setDate(sales);
     }
 
     public void nextDay() {
-        currentDay += 1;
+        currentDay += ONE;
     }
 
     public void previousDay() {
-        currentDay -= 1;
+        currentDay -= ONE;
     }
 
     public int getCurrentDay() {
@@ -30,15 +32,16 @@ public class CurrentDate {
     /**
      * Sets the current date to the latest date the user left off
      *
-     * @param sales Used to access the number of orderlist created
+     * @param sales Used to access the number of order list created
      */
     public void setDate(Sales sales) {
         ArrayList<OrderList> orderLists = sales.getOrderLists();
         int orderListsSize = orderLists.size();
-        if (orderListsSize > 0) {
-            currentDay = orderListsSize - 1;
+
+        if (orderListsSize > ZERO) {
+            currentDay = orderListsSize - ONE;
         } else {
-            currentDay = 0;
+            currentDay = ZERO;
         }
     }
 }
