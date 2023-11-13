@@ -110,7 +110,7 @@ difficulty level.
 Format: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
 
 * The difficulty level should only be of `easy`, `normal`, and `hard`
-* The "/" character should be replaced "/slash" keyword instead.
+* The "/" character should be replaced "\slash" keyword instead.
 * The "pipe" character is not allowed and will be removed if present in any fields.
 
 * **Command**: `mcq what is the value of pi?/2.71/9.81/3.14/0/3/math/Easy` <br>
@@ -178,11 +178,12 @@ Notes:
 
 Finds and displays all questions in the poll that match the criteria, 
 either in the question field (with the `/description` keyword), 
-or the module field (with the `/module` keyword). You may use partial matches.
+or the module field (with the `/module` keyword) but not both. You may use partial matches.
 
 Format: 
 1. `find /description [question description]` Find a question by its question
 2. `find /module [question module]` Find a question by its module
+3. The "/" character is not allowed should be replaced "\slash" keyword instead.
 
 Examples of usage:
 * **Command**: `find /description Pi` <br>

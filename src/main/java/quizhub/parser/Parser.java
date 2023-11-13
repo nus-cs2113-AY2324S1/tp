@@ -331,7 +331,8 @@ public class Parser {
             return handleEditNewValuesExceptions(invalidEditCriteria);
         }
         String editField = commandEditTokens[0];
-        String newValue = commandEditTokens[1].replace("\\slash", "/").replace("|", "");
+        String newValue = commandEditTokens[1].replace("\\slash", "/").replace(
+                "|", "").replace("/", "");
         return new CommandEdit(qnIndex, editField, newValue);
     }
 
