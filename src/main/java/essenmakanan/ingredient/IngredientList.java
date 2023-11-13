@@ -64,6 +64,11 @@ public class IngredientList {
         return false;
     }
 
+    /**
+     * To check if an id is valid
+     * @param id of the ingredient
+     * @return a boolean of whether the id is valid
+     */
     public boolean exist(int id) {
         if (id >= 0 && id < ingredients.size()) {
             return true;
@@ -75,6 +80,12 @@ public class IngredientList {
         return ingredients.indexOf(ingredient);
     }
 
+    /**
+     * Get the index of the ingredient from the ingredient name
+     *
+     * @param ingredientName is a string
+     * @return the index of the ingredient
+     */
     public int getIndex(String ingredientName) {
         int i = 0;
         for (Ingredient ingredient : ingredients) {
@@ -86,6 +97,11 @@ public class IngredientList {
         return -1;
     }
 
+    /**
+     * To add an ingredient object into the ingredient list if the ingredient does not already exist
+     *
+     * @param ingredient to be added
+     */
     public void addIngredient(Ingredient ingredient) {
         assert ingredient.getName() != null : "Ingredient name should not be null";
 
@@ -168,11 +184,19 @@ public class IngredientList {
 
     }
 
+    /**
+     * Delete ingredient by index
+     *
+     * @param index
+     */
     public void deleteIngredient(int index) {
         Ui.printDeleteIngredientsSuccess(ingredients.get(index).getName());
         ingredients.remove(index);
     }
 
+    /**
+     * Print all ingredients in the ingredient list
+     */
     public void listIngredients() {
         Ui.drawDivider();
         int count = 1;
@@ -186,6 +210,12 @@ public class IngredientList {
         }
     }
 
+    /**
+     * To check if ingredient lists are the same
+     *
+     * @param list is an IngredientList ingredients
+     * @return boolean value of whether the ingredient lists are the same
+     */
     public boolean equals(IngredientList list) {
         if (this.getSize() != list.getSize()) {
             return false;

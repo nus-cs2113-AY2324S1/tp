@@ -97,15 +97,53 @@ public class PlanRecipesCommand extends Command {
         return allIngredients;
     }
 
+    /**
+     * To transform a string of input "r/... r/..." to an integer array such as [1, 4, ...]
+     *
+     * @param input is a String from the user
+     * @return an integer array consisting of index of recipes
+     */
+    public static int[] getRecipeIdList(String input) {
+        String[] recipeInputList = RecipeParser.getPlannedRecipesString(input);
+        int[] recipeIdList = new int[recipeInputList.length];
+
+        String recipeString;
+        for (int i = 0; i < recipeInputList.length; i++) {
+            recipeString = recipeInputList[i].trim();
+            recipeIdList[i] = Integer.parseInt(recipeString) - 1;
+        }
+        return recipeIdList;
+    }
+
+    /**
+     * Get a RecipeList with recipes from a recipe ID list
+     *
+     * @param recipeIdList a list of ids of recipes
+     * @param recipes all recipes the user has
+     * @return RecipeList containing of all recipes that correspond to the index in the recipe ID list
+     * @throws EssenOutOfRangeException when the ID in recipe ID list is invalid
+     */
+    public static RecipeList getRecipes(int[] recipeIdList, RecipeList recipes) throws EssenOutOfRangeException {
+        RecipeList allRecipes = new RecipeList();
+        for (int id : recipeIdList) {
+            if (!recipes.recipeExist(id)) {
+                System.out.println("Your recipe Id is wrong");
+                throw new EssenOutOfRangeException();
+            }
+            allRecipes.addRecipe(recipes.getRecipe(id));
+        }
+        return allRecipes;
+    }
+
     @Override
     public void executeCommand() {
         try {
             RecipeParser.parsePlanCommandInput(input);
 
             String[] inputList = input.split(" ", 2);
-            int[] recipeIdList = RecipeParser.getRecipeIdList(inputList[1]);
+            int[] recipeIdList = getRecipeIdList(inputList[1]);
 
-            this.allRecipes = RecipeParser.getRecipes(recipeIdList, recipes);
+            this.allRecipes = getRecipes(recipeIdList, recipes);
             this.allIngredientsNeeded = getIngredientsFromRecipes(allRecipes);
             setMissingIngredients();
 
