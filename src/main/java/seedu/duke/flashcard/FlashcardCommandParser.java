@@ -42,11 +42,21 @@ public class FlashcardCommandParser {
         } else if (input.equals("list flashcards")) {
             return new ListFlashcardsCommand();
         } else if (input.startsWith("review flashcards")) {
-            return new StartReviewCommand(input, calendar);
+            String[] commandParts = input.split(" ");
+
+            if (commandParts[0].equals("review") && commandParts[1].equals(
+                    "flashcards")) {
+                return new StartReviewCommand(input, calendar);
+            }
         } else if (input.equals("delete all flashcards")) {
             return new DeleteAllFlashcardsCommand();
         } else if (input.startsWith("delete flashcard")) {
-            return new DeleteFlashcardCommand(input);
+            String[] commandParts = input.split(" ");
+
+            if (commandParts[0].equals("delete") && commandParts[1].equals(
+                    "flashcard")) {
+                return new DeleteFlashcardCommand(input);
+            }
         }
 
         logger.log(Level.INFO, "input doesn't match any know command");
