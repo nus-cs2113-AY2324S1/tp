@@ -8,7 +8,7 @@ ____________________________________________________________
 ____________________________________________________________
 You can access our user guide by https://ay2324s1-cs2113-t18-3.github.io/tp/UserGuide.html
 
-Available functions for KaChinnnngggg:
+Available functions for KaChinnnng:
 Adding an entry: add
 Listing all entries: list
 Deleting an entry: delete
@@ -40,7 +40,7 @@ ____________________________________________________________
 ____________________________________________________________
 Shows a full list of both the expenses and income created by the user.
 User can choose to view the list of income/expenses separately as well.
-Show the foreign currencies supported by KaChinnnngggg.
+Show the foreign currencies supported by KaChinnnng.
 List all updated exchange rates.
 
 Format:
