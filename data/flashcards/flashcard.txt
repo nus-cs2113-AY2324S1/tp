@@ -1,3 +1,1 @@
-20 | How long is a meter in cm? | 100 | 4 
-21 | What does UML stand for? | Unified Modelling Language | 6 
-22 | What is a banana? | A kind of fruit | 5 
+3 | dfdf | dfdf | 5 

@@ -18,7 +18,7 @@ public class DeleteAllFlashcardsCommand extends FlashcardCommand {
         flashcardList.deleteAllFlashcards();
 
         System.out.println("    All your flashcards have been successfully " +
-                "deleted .");
+                "deleted.");
 
         assert flashcardList.isEmpty() : "flashcardList must be empty";
     }
