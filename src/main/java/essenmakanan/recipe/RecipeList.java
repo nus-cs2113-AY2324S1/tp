@@ -33,16 +33,33 @@ public class RecipeList {
         recipes.add(new essenmakanan.recipe.Recipe(title, steps));
     }
 
+    /**
+     * To delete a recipe by index
+     *
+     * @param index of the recipe to be deleted
+     */
     public void deleteRecipe(int index) {
         Ui.printDeleteRecipeSuccess(recipes.get(index).getTitle());
         recipes.remove(index);
     }
 
+    /**
+     * Get recipe using index
+     *
+     * @param index of recipe
+     * @return Recipe
+     */
     public Recipe getRecipe(int index) {
         assert recipeExist(index) : "Index is out of bounds";
         return recipes.get(index);
     }
 
+    /**
+     * Get recipe using title of recipe
+     *
+     * @param name is the title o fthe recipe
+     * @return recipe if exists, otherwise, null
+     */
     public Recipe getRecipe(String name) {
         for (Recipe recipe : recipes) {
             if (recipe.getTitle().equals(name)) {
@@ -52,6 +69,12 @@ public class RecipeList {
         return null;
     }
 
+    /**
+     * Get the index of the recipeu sing recipeTitle
+     *
+     * @param recipeTitle the title of the recipe
+     * @return index of recipe if recipe is found, otherwise, returns -1
+     */
     public int getIndexOfRecipe(String recipeTitle) {
         int i = 0;
         for (essenmakanan.recipe.Recipe recipe : recipes) {
@@ -62,6 +85,13 @@ public class RecipeList {
         }
         return -1;
     }
+
+    /**
+     * To check if the recipe exists using recipe index
+     *
+     * @param index of recipe
+     * @return true if recipe index is within range
+     */
     public boolean recipeExist(int index) {
         if (index >= 0 && index < recipes.size()) {
             return true;
@@ -69,7 +99,9 @@ public class RecipeList {
         return false;
     }
 
-
+    /**
+     * Print all recipe titles in the recipe list
+     */
     public void listRecipeTitles() {
         int count = 1;
 
