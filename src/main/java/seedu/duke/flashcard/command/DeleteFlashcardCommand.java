@@ -3,6 +3,7 @@
 package seedu.duke.flashcard.command;
 
 import seedu.duke.flashcard.FlashcardList;
+import seedu.duke.flashcard.exceptions.InvalidFlashcardIdException;
 
 import java.util.Scanner;
 
@@ -42,7 +43,25 @@ public class DeleteFlashcardCommand extends DualFlashcardCommand {
             return;
         }
 
-        deleteFlashcardById(flashcardId, flashcardList);
+        tryDeleteFlashcardById(flashcardId, flashcardList);
+    }
+
+    /**
+     * Tries to delete a flashcard given its id and prints whether it worked.
+     *
+     * @param flashcardId The id of the flashcard to delete.
+     * @param flashcardList The list of flashcards to operate on.
+     */
+    public void tryDeleteFlashcardById(int flashcardId,
+                                       FlashcardList flashcardList) {
+        try {
+            deleteFlashcardById(flashcardId, flashcardList);
+        } catch (InvalidFlashcardIdException e) {
+            System.out.println("    Couldn't find a flashcard with id "
+                    + flashcardId);
+            System.out.println("    No deletion has been performed. Please "
+                    + "try again with a valid id.");
+        }
     }
 
     /**
@@ -61,20 +80,25 @@ public class DeleteFlashcardCommand extends DualFlashcardCommand {
 
         try {
             int flashcardId = Integer.parseInt(commandParts[2]);
-            deleteFlashcardById(flashcardId, flashcardList);
+            tryDeleteFlashcardById(flashcardId, flashcardList);
         } catch (NumberFormatException e) {
             System.out.println("    Invalid id! Id must be an integer");
         }
     }
 
     /**
-     * Tries to delete a flashcard by id and prints whether it succeeded.
+     * Tries to delete a flashcard by id.
+     *
+     * If the deletion is successful, a success message is printed;
+     * otherwise, an exception is thrown.
      *
      * @param flashcardId The id of the flashcard to delete.
      * @param flashcardList The list of all known flashcards.
+     * @throws InvalidFlashcardIdException if flashcardId is invalid.
      */
     private void deleteFlashcardById(int flashcardId,
-                                     FlashcardList flashcardList) {
+                                     FlashcardList flashcardList)
+            throws InvalidFlashcardIdException {
         boolean deletionWasSuccessful =
                 flashcardList.deleteFlashcardById(flashcardId);
 
@@ -82,10 +106,7 @@ public class DeleteFlashcardCommand extends DualFlashcardCommand {
             System.out.println("    Flashcard with id " + flashcardId
                     + " has been successfully deleted.");
         } else {
-            System.out.println("    Couldn't find a flashcard with id "
-                    + flashcardId);
-            System.out.println("    No deletion has been performed. Please "
-                    + "try again with a valid id.");
+            throw new InvalidFlashcardIdException();
         }
     }
 }
