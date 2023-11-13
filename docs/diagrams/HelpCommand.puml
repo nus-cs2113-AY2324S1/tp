@@ -1,0 +1,32 @@
+@startuml
+
+title Help Function\n
+
+participant ": HelpCommand" as helpCmd
+participant "<i><<class>></i>\nCommandParser" as parser
+participant ": XXXCommand" as xCmd
+
+[-> helpCmd ++: command.setArguments(args: String)
+note left: e.g. setArguments("addmeal")
+
+helpCmd -> parser ++: CommandParser.getFirstWord(args: String)
+return word: String
+note left: e.g. "addmeal"
+
+helpCmd -> parser ++: CommandParser.getBlankCommand(word, ...)
+create xCmd
+parser -> xCmd ++: new XXXCommand(...)
+return : XXXCommand
+return blankCommand: XXXCommand
+note left: e.g. AddMealCommand
+
+helpCmd -> xCmd ++: blankCommand.getHelp()
+return helpMessage: String
+note left: e.g. "`addmeal` command adds your\ndaily meal data to the list. (...omit)"
+
+return
+
+[-> helpCmd ++: command.execute()
+return new CommandResult(helpMessage)
+
+@enduml
