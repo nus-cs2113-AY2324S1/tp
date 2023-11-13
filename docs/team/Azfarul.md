@@ -37,7 +37,7 @@ GUI apps.
 
 Azfarul Matin added documentation for the following sections of
 the user guide:
-* [Add Command]()
+* [Add Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date:~:text=to%20the%20inventory.-,Note%3A,-The%20expiry%20date)
 * [Find Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date:~:text=Finds%20drugs%20whose%20serial%20number%20contain%20any%20of%20the%20given%20keywords.)
 * [saveSales Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date:~:text=saveSales%20%2D%20Save%20the%20current%20sold%20items)
 * [listSaLes Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date:~:text=listSales%20%2D%20List%20the%20description%20of%20sold%20items%20saved)
@@ -53,7 +53,7 @@ the user guide:
 * UML Diagrams
     * [ListCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/ListSalesCommand.png)
     * [CheckoutCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/CheckoutCommandDiagram.png)
-      * [SaveSalesCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveSalesCommand.png)
+    * [SaveSalesCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveSalesCommand.png)
     * [ListSalesCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/ListSalesCommand.png)
 
 -Contributions to team-based tasks
