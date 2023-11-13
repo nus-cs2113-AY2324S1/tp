@@ -92,6 +92,10 @@ Displays the list of all drugs being supplied by a particular vendor.
 
 Displays the list of all vendors that supply a particular drug.
 
+### Feature-delete vendor supply
+
+Deletes a drug from a vendor's supply list.
+
 ### Feature-add to cart
 
 Adds a drug to a virtual shopping cart if the requested quantity is available in the inventory. It keeps track of the
@@ -503,6 +507,24 @@ Expected outcome:
 
 ```
 || Vendors supplying the drug paracetamol: moderna, apotheca
+```
+
+### `deleteVendorSupply` -Deletes a drug from a vendor's supply list.
+
+Removes a specified drug from a particular vendor's supply list. Not related to drug class. 
+
+Format:
+
+deleteVendorSupply /v VENDOR_NAME /n DRUG_NAME
+
+Example of usage:
+
+`deleteVendorSupply /v moderna /n paracetamol`
+
+Expected outcome:
+
+```
+|| Drug 'paracetamol' removed from moderna's supply list
 ```
 
 ### `addToCart` - Adds drug into current cart
