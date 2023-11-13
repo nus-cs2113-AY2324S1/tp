@@ -107,7 +107,7 @@ public class Decoder {
             logger.info("Line to decode: " + encodedData);
             String[] decodedData = encodedData.split(DIVIDER);
             if (!isValidPantryStockFormat(decodedData)) {
-                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_S346TOCK_DATA + encodedData);
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
                 continue;
             }
             String ingredientName = decodedData[0].trim();
