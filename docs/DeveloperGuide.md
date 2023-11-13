@@ -57,6 +57,9 @@ exactly one `RecipeStepList`.
 
 ![ShortcutListClassDiagram.png](images%2FShortcutListClassDiagram.png)
 
+![ShortcutListObjectDiagram.png](images%2FShortcutListObjectDiagram.png)
+
+
 ### Storage component
 
 In this application, it uses text files to store all data, i.e, recipes and ingredients. 
