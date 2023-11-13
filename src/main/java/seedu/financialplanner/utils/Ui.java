@@ -65,6 +65,14 @@ public class Ui {
         return scanner.nextLine().trim();
     }
 
+    public String userInput() {
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine().trim();
+        }
+        System.exit(1);
+        return "";
+    }
+
     public void printWatchListHeader() {
         System.out.print(CYAN + "Symbol" + RESET);
         System.out.print("    ");

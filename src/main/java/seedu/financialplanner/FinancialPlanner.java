@@ -53,7 +53,7 @@ public class FinancialPlanner {
         Command command = null;
 
         while (!(command instanceof ExitCommand)) {
-            input = ui.input();
+            input = ui.userInput();
             try {
                 command = Parser.parseCommand(input);
                 command.execute();
