@@ -23,6 +23,10 @@ public class Encoder {
     private static final String DIVIDER = " | ";
     private static final String INGREDIENT_DIVIDER = " - ";
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final String LINE_BREAK = "\n";
+    private static final String EMPTY_STRING = "";
+    private static final String CARRIAGE_RETURN = "\r";
+    private static final String TWO_DECIMAL_PLACE_FORMAT = "%.2f";
 
     //@@author Cazh1
     /**
@@ -35,7 +39,9 @@ public class Encoder {
         String stringArrayListAsString = String.join(", ", stringArrayList).trim();
 
         //The generated String has line breaks, this removes line breaks
-        String stringArrayListAsStringInOneLine = stringArrayListAsString.replace("\n", "").replace("\r", "");
+        String stringArrayListAsStringInOneLine = stringArrayListAsString
+                .replace(LINE_BREAK, EMPTY_STRING)
+                .replace(CARRIAGE_RETURN, EMPTY_STRING);
 
         //Generate Hash from content
         int stringArrayListHash = stringArrayListAsStringInOneLine.hashCode();
@@ -138,15 +144,19 @@ public class Encoder {
                 StringBuilder orderString = new StringBuilder();
 
                 //day of each orderList is index + 1
+                float orderedDishPrice = order.getOrderedDish().getPrice();
+                String orderedDishPriceString = String.format(TWO_DECIMAL_PLACE_FORMAT, orderedDishPrice);
+
                 orderString.append((day + 1) + DIVIDER);
                 orderString.append(order.getDishName() + DIVIDER);
                 orderString.append(order.getQuantity() + DIVIDER);
-                orderString.append(String.format("%.2f", order.getOrderedDish().getPrice()) + DIVIDER);
+                orderString.append(orderedDishPriceString + DIVIDER);
                 orderString.append(order.getIsComplete());
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));
                 logger.info("Encoded order: " + orderString);
             }
+
             if (day == sales.getDaysAccounted()) {
                 encodedList = encodeLastSalesDay(encodedList, orderList, day);
             }

@@ -56,7 +56,7 @@ public class Parser implements ParserUtil {
             + "qty/\\s*(?<ingredientQty>.*)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
+    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[+-]*[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
     private static final String INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL = "value";
     private static final String INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL = "unit";
     private static final String ADD_DISH_NAME_ARGUMENT = "name/";
@@ -68,8 +68,7 @@ public class Parser implements ParserUtil {
     /** Add Order Command Handler Patterns*/
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
-    private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
-            + "qty/([A-Za-z0-9\\s]+)";
+    private static final String ADD_ORDER_ARGUMENT_STRING = "name/(.*) qty/(.*)";
 
     /** The rest of Command Handler Patterns*/
 
@@ -250,11 +249,11 @@ public class Parser implements ParserUtil {
 
             // To retrieve specific arguments from arguments
             //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim().toLowerCase();
             float dishPrice = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
-            detectErrorPostDishNameParse(dishName, menu);
+            detectErrorPostDishNameParse(dishName, menu, true);
 
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true, menu);
             Dish dish = new Dish(dishName, ingredients, dishPrice);
@@ -293,14 +292,15 @@ public class Parser implements ParserUtil {
         return matcher;
     }
 
-    private static void detectErrorPostDishNameParse(String dishName, Menu menu) throws ParserException {
+    private static void detectErrorPostDishNameParse(String dishName, Menu menu, boolean isCheckRepeatedDishName)
+            throws ParserException {
         if (dishName.isEmpty()) {
             logger.warning("Dish name empty!");
             throw new ParserException(ErrorMessages.MISSING_DISH_NAME);
         } else if (isNameLengthInvalid(dishName)) {
             logger.warning("Invalid name length!");
             throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
-        } else if (isRepeatedDishName(dishName, menu)) {
+        } else if (isCheckRepeatedDishName && isRepeatedDishName(dishName, menu)) {
             logger.warning("Repeated dish!");
             throw new ParserException(ErrorMessages.REPEATED_DISH_MESSAGE);
         } else if (containsSpecialChar(dishName)) {
@@ -346,7 +346,7 @@ public class Parser implements ParserUtil {
             throws ParserException {
         Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
 
-        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim().toLowerCase();
 
         //ingredientQtyString contains the input text after the "qty/" argument
         String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
@@ -769,8 +769,10 @@ public class Parser implements ParserUtil {
 
         try {
             // To retrieve specific arguments from arguments
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
-            int dishQty = Integer.parseInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM));
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM).trim();
+            int dishQty = parseQtyToInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM).trim());
+
+            detectErrorPostDishNameParse(dishName, menu, false);
 
             Dish orderedDish = menu.getDishFromName(dishName);
             if (orderedDish == null) {
@@ -780,6 +782,10 @@ public class Parser implements ParserUtil {
             Order order = new Order(orderedDish, dishQty);
 
             return new AddOrderCommand(order, ui, pantry, orderList, menu);
+        } catch (ParserException e) {
+            return new IncorrectCommand(e.getMessage(), ui);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.INVALID_INT_ORDER_QTY, ui);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
@@ -811,6 +817,33 @@ public class Parser implements ParserUtil {
      */
     private static Command prepareNextDay(Ui ui, Sales sales, CurrentDate currentDate) {
         return new NextDayCommand(ui, sales, currentDate);
+    }
+
+    //@@author DextheChik3n
+    /**
+     * Parses the quantity text string into integer and checks if the input is valid
+     *
+     * @param qtyText text that consist of the order dish quantity
+     * @return int value of the quantity
+     * @throws ParserException if the input string does not match the constraints
+     */
+    public static int parseQtyToInt(String qtyText) throws ParserException {
+        if (qtyText.isEmpty()) {
+            throw new ParserException(ErrorMessages.MISSING_ORDER_QTY);
+        }
+
+        int dishQty = Integer.parseInt(qtyText);
+
+        int maxDishQty = 10000;
+        int minDishQty = 1;
+
+        if (dishQty < minDishQty) {
+            throw new ParserException(ErrorMessages.BELOW_MIN_ORDER_QTY);
+        } else if (dishQty > maxDishQty) {
+            throw new ParserException(ErrorMessages.EXCEED_MAX_ORDER_QTY);
+        }
+
+        return dishQty;
     }
 
     //@@author NaychiMin

@@ -369,9 +369,9 @@ class ParserTest {
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
 
-        assertEquals("Christmas Ham", getOutputDish.getName());
+        assertEquals("christmas ham", getOutputDish.getName());
         assertEquals((float) 50.0, getOutputDish.getPrice());
-        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString());
+        assertEquals("[ham - 1000g]", getOutputDish.getIngredients().toString());
     }
 
     @Test
@@ -394,7 +394,7 @@ class ParserTest {
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
 
-        assertEquals("Chicken Rice", getOutputDish.getName());
+        assertEquals("chicken rice", getOutputDish.getName());
         assertEquals((float) 2.0, getOutputDish.getPrice());
         assertEquals("[rice - 100g, chicken - 200g, water - 100ml]", getOutputDish.getIngredients().toString());
     }
@@ -608,9 +608,9 @@ class ParserTest {
         //Test for correct parsing of dish arguments
         Dish getOutputDish = menu.getDishFromId(0);
 
-        assertEquals("Christmas Ham", getOutputDish.getName());
+        assertEquals("christmas ham", getOutputDish.getName());
         assertEquals((float) 50.0, getOutputDish.getPrice());
-        assertEquals("[Ham - 1000g]", getOutputDish.getIngredients().toString());
+        assertEquals("[ham - 1000g]", getOutputDish.getIngredients().toString());
     }
 
     @Test
