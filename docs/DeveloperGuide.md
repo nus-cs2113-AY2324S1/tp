@@ -748,7 +748,8 @@ To test the watchlist feature, you can copy the text below into the watchlist.js
   }
 }
 ```
-Start Financial Planner app and you should be able to see this output (although prices will differ)
+Start Financial Planner app and you should be able to see this output (although prices will differ) after running the
+watchlist command
 
 ![](images/investments/watchlistMT1.png)
 
