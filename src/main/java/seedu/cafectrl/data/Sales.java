@@ -72,7 +72,7 @@ public class Sales {
             OrderList orderList = orderLists.get(day);
 
             if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
-                ui.showToUser("", "No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".", "");
+                ui.showToUser("No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".");
                 continue;
             }
 
