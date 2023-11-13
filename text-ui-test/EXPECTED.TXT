@@ -111,7 +111,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	You have set a budget of: 60.0
-	Here's a quick view of how you're doing so far:
+	Here's a quick view of how you're dogit ting so far:
 	You have a net cash on hand of: 10.0
 	You still have the following percent of your budget left:
 
