@@ -26,6 +26,7 @@
     * [Value proposition](#value-proposition)
     * [User stories](#user-stories)
 <!-- TOC -->
+
 --------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
@@ -72,7 +73,7 @@ The bulk of the app’s work is done by the following components:
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 ![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
-*Figure 2: Architecture Encode Sequence Diagram*
+<br>*Figure 2: Architecture Encode Sequence Diagram*
 
 ### Ui component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
@@ -139,7 +140,7 @@ A summary of the class diagram is as listed below:
 ### Add Dish
 
 ![Add Dish Execution](images/sequence/AddDishCommand_execute.png)
-*Figure 8: Execution of add_dish command*
+<br>*Figure 8: Execution of add_dish command*
 
 API: [AddDishCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/AddDishCommand.java)
 
