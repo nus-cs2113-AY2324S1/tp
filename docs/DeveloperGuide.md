@@ -20,8 +20,8 @@
     * [Previous Day](#previous-day)
     * [List Ingredients](#list-ingredients)
     * [List Sale By Day](#list-sale-by-day)
-    * [Pantry-isDishCooked()](#pantry---isdishcooked)
-    * [Pantry-calculateMaxDish()](#pantry---calculatemaxdish)
+    * [Pantry - isDishCooked()](#pantry---isdishcooked)
+    * [Pantry - calculateMaxDish()](#pantry---calculatemaxdish)
     * [Delete Dish](#delete-dish)
     * [Edit Price](#edit-price)
     * [View Total Stock](#view-total-stock)
@@ -38,7 +38,6 @@
     * [User stories](#user-stories)
   * [**Glossary**](#glossary)
 <!-- TOC -->
---------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
