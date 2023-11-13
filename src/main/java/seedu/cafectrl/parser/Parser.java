@@ -136,7 +136,7 @@ public class Parser implements ParserUtil {
             return prepareBuyIngredient(arguments, ui, pantry, menu);
 
         case HelpCommand.COMMAND_WORD:
-            return prepareHelpCommand(ui, arguments);
+            return prepareHelpCommand(ui);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(ui, pantry);
@@ -740,8 +740,8 @@ public class Parser implements ParserUtil {
     }
 
     //@@author ziyi105
-    private static Command prepareHelpCommand(Ui ui, String arguments) {
-        return new IncorrectCommand(ErrorMessages.WRONG_HELP_FORMAT, ui);
+    private static Command prepareHelpCommand(Ui ui) {
+        return new HelpCommand(ui);
     }
 
     //@@author Cazh1
