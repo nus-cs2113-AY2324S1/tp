@@ -178,7 +178,7 @@ Note:
 - Fields `/t`, `/cat`, `/de`, `/date` are case-sensitive and should be in the specified order.
 - Field `/cat` is only applicable for expenses.
 - Field `/t` is compulsory.
-- At least one of the optional fields [/c CATEGORY], [/de DESCRIPTION], [/da DATE] must be provided.
+- At least one of the optional fields [/c CATEGORY], [/de DESCRIPTION], [/date DATE] must be provided.
 - Should users add additional characters behind find e.g. findABCDE, the system will still recognise it as find.
 
 Use case:
@@ -341,14 +341,14 @@ and change the line in txt file to the correct format.
 
 | Action               | Format, Examples                                                                                                                                                                                            |
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help                 | `help` <br> `help add` <br> `help list` <br> `help list` <br> `help delete` <br> `help edit` <br> `help balance` <br> `help update exchange rate` <br> `help clear` <br> `help find` <br> `help balance`                                                      |
+| Help                 | `help` <br> `help add` <br> `help list` <br> `help list` <br> `help delete` <br> `help edit` <br> `help balance` <br> `help update exchange rate` <br> `help clear` <br> `help find` <br> `help balance`    |
 | Add Income           | `add income /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add income /de salary /date 01/01/2020 /amt 1000`                                                                          |
 | Add Expense          | `add expense /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>` <br> e.g., `add expense /cat Food /type lunch /de sushi /date 01/01/2020 /amt 10.50`                    |
 | List                 | `list` <br> `list incomes` <br> `list expenses` <br> `list currencies` <br> `list exchange rates`                                                                                                           |
 | Delete               | `delete expense <index>` <br> `delete income <index>`                                                                                                                                                       |
 | Edit                 | `edit income <index> /de <description> /date <date> /amt [currency] <amount>` <br> `edit expense <index> /cat <catergory> /type <type> /de <description> /date <date> /amt [currency] <amount>`             |
 | Update Exchange Rate | `update exchange rate <supported_currency> <rate>`                                                                                                                                                          |
-| Clear                | `clear income`<br/> `clear expense`<br/>`clear all`                                                                                                                                                         |
+| Clear                | `clear incomes`<br/> `clear expenses`<br/>`clear all`                                                                                                                                                       |
 | Find                 | `find /t income /de [description] /date [date]`<br/> e.g. `find /t income /de salary` <br/>`find /t expense /cat [category] /de [description] /date [date]`<br/> e.g. `find /t expense /cat food /de sushi` |
 | Balance              | `balance`                                                                                                                                                                                                   |
-| Exit                 | `exit`                                                                                                                                                                                                                                                                                                                                                             |
+| Exit                 | `exit`                                                                                                                                                                                                      |
