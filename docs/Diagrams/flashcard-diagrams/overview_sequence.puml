@@ -1,10 +1,73 @@
 @startuml
 
+hide footbox
+
 actor Actor as user
+participant ":Duke" as duke
 participant ":FlashcardComponent" as component
 participant ":FlashcardCommandParser" as parser
 participant ":FlashcardUi" as ui
 
-user --> component
+user -> duke : list flashcards
+activate duke
+
+duke -> component : isResponsible("list flashcards")
+activate component
+
+component -> parser : parseInput("list flashcards", calendar)
+activate parser
+
+participant "lfc1:ListFlashcardsCommand" as lfc1
+
+create lfc1
+
+parser -> lfc1
+activate lfc1
+
+lfc1 --> parser : lfc1
+deactivate lfc1
+
+parser --> component : lfc1
+deactivate parser
+
+component --> duke : true
+deactivate component
+
+duke -> component : processInput("list flashcards")
+activate component
+
+component -> parser : parseInput("list flashcards", calendar)
+activate parser
+
+participant "lfc2:ListFlashcardsCommand" as lfc2
+
+create lfc2
+
+parser -> lfc2
+activate lfc2
+
+lfc2 --> parser : lfc2
+deactivate lfc2
+
+parser --> component : lfc2
+deactivate parser
+
+component -> ui : executeCommand(lfc2)
+activate ui
+
+ui -> lfc2 : execute(scanner, flashcardList)
+activate lfc2
+
+lfc2 --> ui
+deactivate lfc2
+
+ui --> component
+deactivate ui
+
+component --> duke
+deactivate component
+
+duke --> user
+deactivate duke
 
 @enduml

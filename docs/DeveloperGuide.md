@@ -8,6 +8,8 @@
 
 ### `flashcard` package
 
+#### Package structure overview 
+
 The API of the `flashcard` package is defined in [`FlashcardComponent.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardComponent.java).
 
 The flashcard package is structured into multiple parts:
@@ -29,26 +31,42 @@ The flashcard package is structured into multiple parts:
 - [`FlashcardUi.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardUi.java):
   Responsible for interfacing with the user: dispatches commands to be 
   executed and shows their output to the user.
-- [`command` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/command):
+- [`flashcard.command` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/command):
   Contains classes representing the different kinds of commands (`list 
   flashcards`, `create flashcard` etc.).
-- [`exceptions` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/exceptions):
+- [`flashcard.exceptions` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/exceptions):
   Contains classes representing custom exceptions that are specific to the 
   `flashcards` package.
-- [`review` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/review):
+- [`flashcard.review` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/review):
   Contains classes representing the different flashcard review modes (random 
   mode and spaced repetition mode).
 
-See this high-level overview of the classes involved in providing the 
-flashcard functionality:
+This class diagram provides a high-level overview of how the classes in the 
+top-level `flashcard` package integrate with each other:
 
 ![class diagram of classes providing flashcard functionality](Diagrams/flashcard-diagrams/overview_classes.svg)
 
-This sequence diagram illustrates how they work together to process user 
-input and execute the corresponding command:
+#### Rough control flow overview
 
+The process of processing the initial user input and figuring out which 
+command to  execute based on this user input is handled by the 
+`FlashcardComponent`, `FlashcardCommandParser` and `FlashcardUi` classes.
 
+During their operation, they create an instance of the appropriate 
+`FlashcardCommand` (from the `flashcard.command` package) and then execute 
+it; thereby performing the action the user wanted.
 
+Put into a sequence diagram flow, the above-mentioned workflow looks like this:
+
+![sequence diagram of processing the list flashcards input](Diagrams/flashcard-diagrams/overview_sequence.svg)
+
+##### `flashcard.command` package
+
+The `flashcard.command` package contains the classes representing the 
+different flashcard commands, e.g. the `ListFlashcardCommand` class 
+represents the "list flashcards" command and so on.
+
+![class diagram of flashcard.command package](Diagrams/flashcard-diagrams/command_package_classes.svg)
 
 ### Storage Components
 
