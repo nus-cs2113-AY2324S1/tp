@@ -71,6 +71,7 @@ public class Menu {
     //@@author ziyi105
     /**
      * Checks whether the dish index can be found in the menu
+     *
      * @param dishIndex dish index to be checked
      * @return true if it is valid, false otherwise
      */

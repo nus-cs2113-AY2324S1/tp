@@ -20,15 +20,15 @@ import java.util.logging.Logger;
  */
 public class Storage {
 
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
-    protected FileManager fileManager;
-    protected Ui ui;
-    private boolean isHashingEnabled = true;
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private final boolean isHashingEnabled = true;
     private boolean isMenuTampered = false;
     private boolean isOrdersTampered = false;
     private boolean isPantryStockTampered = false;
     private boolean isHashStringTampered = false;
     private boolean isTamperedMessagePrinted = false;
+    protected FileManager fileManager;
+    protected Ui ui;
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
@@ -36,7 +36,6 @@ public class Storage {
     }
 
     //@@author Cazh1
-
     private boolean isFileEmpty(ArrayList<String> encodedStringArrayList) {
         return encodedStringArrayList.isEmpty();
     }
@@ -146,6 +145,7 @@ public class Storage {
     //@@author ziyi105
     /**
      * Read and decode pantryStock data from text file and pass it to the menu
+     *
      * @return pantryStock with data from the file
      */
     public Pantry loadPantryStock() {
@@ -165,6 +165,7 @@ public class Storage {
 
     /**
      * Encode and write the data from PantryStock to the text file
+     *
      * @param pantry pantry from current session
      * @throws IOException if the file is not found in the specified file path
      */
@@ -209,6 +210,7 @@ public class Storage {
     //@@author ziyi105
     /**
      * Encode and write the data from menu, orderList and pantry to the respective text files
+     *
      * @param menu menu from current session
      * @param sales sale object from current session
      * @param pantry pantry from current session

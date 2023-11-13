@@ -87,11 +87,11 @@ public class Decoder {
             throw new Exception();
         }
     }
-    //@@author
 
     //@@author ziyi105
     /**
      * Decodes raw string from pantry stock data file and create ingredient object from the data
+     *
      * @param encodedPantryStock raw string from pantry stock data file
      * @return a new pantry object with data from the pantry stock data file
      */
@@ -150,6 +150,7 @@ public class Decoder {
 
     /**
      * Checks whether the pantry stock is in the format of ingredient name | quantity (int) | unit
+     *
      * @param decodedPantryStock string array of the raw data string from pantry stock data file
      *                           split with "|"
      * @return true if the format is correct, false otherwise
@@ -267,14 +268,12 @@ public class Decoder {
         return false;
     }
 
-
     //@@author Cazh1
     /**
      * Increases the size of the orderlist when there is gap between the previous order and the next
      *
      * @param orderLists The current partially filled ArrayList of OrderList
      * @param day The day of the next order
-     * @return orderLists after filling in the gaps
      */
     private static void fillOrderListSize(ArrayList<OrderList> orderLists, int day) {
         while (orderLists.size() <= day) {
