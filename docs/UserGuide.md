@@ -217,8 +217,8 @@ Format:
 1. Use `edit [question number] /description [newDescription]` to edit description
 2. Use `edit [question number] /answer [newAnswer]` to edit answers
 3. Use `edit [question number] /option[1...4] [newAnswer]` to edit a choice of MCQ question
-4. The ` / ` character should be replaced ` \slash ` keyword instead
-5. The ` pipe ` character is not allowed and will be removed if present in any fields
+4. The "/" character should be replaced "\slash" keyword instead
+5. The "pipe" character is not allowed and will be removed if present in any fields
 
 Examples of usage:
 * **Command**: `edit 1 /description What is the value of Pi to 3 decimal places?` <br>
