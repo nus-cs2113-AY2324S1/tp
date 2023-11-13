@@ -1,0 +1,33 @@
+@startuml
+!import style.puml
+hide members
+hide circle
+
+enum ExpenseCategory <<enumeration>>
+enum AllowanceCategory <<enumeration>>
+interface TransactionCategory <<interface>>
+
+abstract class Command {
+    +abstract void execute(TransactionList)
+}
+
+
+class Parser {
+}
+
+class Transaction {
+}
+
+Parser ..> Command : creates
+Parser ..> Transaction : creates
+
+Command ..> Transaction : uses
+
+Parser ..> TransactionCategory : uses
+Parser ..> AllowanceCategory : uses
+Parser ..> ExpenseCategory : uses
+
+ExpenseCategory ..|> TransactionCategory
+AllowanceCategory ..|> TransactionCategory
+
+@enduml

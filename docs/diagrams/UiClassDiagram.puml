@@ -1,0 +1,39 @@
+@startuml
+!import style.puml
+hide members
+hide circle
+skinparam classAttributeIconSize 0
+package Ui as UI{
+class Ui {
+- Scanner input
++ String getUserCommand()
++ {static} void showLine()
++ {static} void showWelcomeMessage()
++ {static} void showGoodbyeMessage()
++ {static} void showException(Exception)
++ {static} void showTransactionCount()
++ {static} void showTransactionAddedMessage(Transaction)
++ {static} void showTransactionRemovedMessage(Transaction)
++ {static} void showTransactionList(TransactionList)
+- {static} String getNote(String)
+- {static} String getDescription(Transaction)
++ {static} void showReadDataError()
++ {static} void showTransactionViewMessage(Transaction)
++ {static} void showFilterMessage(ArrayList<Transaction>,TransactionCategory)
++ {static} void showFilterNotFoundMessage(TransactionCategory)
++ {static} void showBudgetSet(TransactionList)
++ {static} void showBudgetExpense(TransactionList)
++ {static} void showHelpMenu()
++ {static} void showFileAccessErrorMessage()
++ {static} void showFatalErrorMessage()
++ {static} void showDataCorruptedError()
+}
+class Messages
+}
+
+TransactionList ..> Ui
+Storage ..> Ui
+Nuscents --> Ui
+Command ..> Ui
+Ui ..> Messages
+@enduml

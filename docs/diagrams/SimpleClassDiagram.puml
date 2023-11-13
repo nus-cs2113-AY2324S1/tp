@@ -1,0 +1,36 @@
+@startuml
+hide members
+hide circle
+
+class Transaction
+class Expense
+class Allowance
+enum ExpenseCategory <<enumeration>> implements TransactionCategory
+enum AllowanceCategory <<enumeration>> implements TransactionCategory
+class Storage
+interface TransactionCategory <<interface>>
+class Parser
+class Nuscents
+class TransactionList
+abstract class Command
+
+TransactionList *-- Transaction : contains
+Transaction <|-- Expense
+Transaction <|-- Allowance
+Transaction "*"--> "1" TransactionCategory
+
+Nuscents "1" --> "1" Storage
+Nuscents "1" --> "1" TransactionList
+Nuscents "1" ..> "1" Parser
+Nuscents "1" ..> "1" Command
+
+Storage ..> TransactionList : uses
+
+Parser ..> Command : creates
+Parser ..> Transaction : creates
+Parser ..> TransactionCategory : uses
+
+Command ..> TransactionList : uses
+
+
+@enduml

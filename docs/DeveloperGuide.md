@@ -84,14 +84,23 @@ The bulk of the app's work is done by the following five components:
 - **Storage Interaction with Data:**
     - The Storage component access the Data to store/read to file.
 
+Below is a simplified class diagram of the system:
 
-**UI Component**   
+<img src="images/SimpleClassDiagram.png" width="500" />
+
+### UI Component
+
+<img src="images/UiClassDiagram.png" width="500" />
+
 The `ui` packages consists of the `Ui` class and the `Messages` class.
 
-The UI component prompts and reads commands from the user and sends the command to `Parser` package to be executed.
-The UI component is also responsible for printing output to the user.
+The `UI` component prompts and reads commands from the user. 
 
-**Data Component**
+The `UI` component is also responsible for printing output to the user.
+
+`TransactionList`, `Storage`, `Nuscents`, and `Command` use `Ui` to print output (including errors) to the user.
+
+### Data Component
 
 <img src="images/DataClassDiagram.png" width="500" />
 
@@ -99,7 +108,7 @@ The Data component stores the transaction data i.e., all `Transaction` objects i
 
 Each `Transaction` object stores the information for an `Allowance` or an `Expense`.
 
-**Command Component**
+### Command Component
 
 <img src="images/CommandClassDiagram.png" width="500" />
 
@@ -110,6 +119,25 @@ The `ListOfCommands` is used by `Parser` to determine if the entered command is 
 If it is not valid, an object of class `InvalidCommand` will be constructed. The `execute` method of the 
 `InvalidCommand` class simply raises an exception that an invalid command has been entered, which will be shown 
 to the user.
+
+### Parser component
+
+<img src="images/ParserClassDiagram.png" width="500" />
+
+The `Parser` component creates various `Command` and `Transaction` objects based on the user's input.
+For example, if the user input is to add an expense, an `Expense` and `AddCommand` object will be created. 
+
+`Parser` also uses `ExpenseCategory`, `AllowanceCategory`, and `TransactionCategory` for creating expenses, 
+creating allowances, and filtering transactions respectively.
+
+### Storage component
+
+<img src="images/StorageClassDiagram.png" width="500" />
+
+The `Storage` component reads/writes from/to the ArrayList in `TransactionList` depending on if the application is 
+starting or if a command has just been executed. 
+
+`Storage` also uses `Parser` to parse data from the storage file when the application starts up. 
 
 ## **Implementation**
 
