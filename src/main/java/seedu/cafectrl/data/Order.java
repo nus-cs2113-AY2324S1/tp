@@ -11,19 +11,19 @@ public class Order {
     private final Dish orderedDish;
     private int dishQty;
     private final ArrayList<Ingredient> ingredientList;
-    private boolean isComplete = false;
     private float totalOrderCost;
+    private boolean isComplete = false;
 
     public Order(Dish orderedDish, int dishQty) {
-        this.dishQty = dishQty;
         this.orderedDish = orderedDish;
+        this.dishQty = dishQty;
         this.ingredientList = setIngredientList();
         this.totalOrderCost = calculateTotalOrderCost();
     }
 
     public Order(Dish orderedDish, int dishQty, float orderCost, boolean isComplete) {
-        this.dishQty = dishQty;
         this.orderedDish = orderedDish;
+        this.dishQty = dishQty;
         this.ingredientList = setIngredientList();
         this.totalOrderCost = orderCost;
         this.isComplete = isComplete;
@@ -59,6 +59,7 @@ public class Order {
             String ingredientName = ingredient.getName();
             int ingredientQty = ingredient.getQty() * dishQty;
             String ingredientUnit = ingredient.getUnit();
+
             dishIngredient.add(new Ingredient(ingredientName, ingredientQty, ingredientUnit));
         }
         return dishIngredient;

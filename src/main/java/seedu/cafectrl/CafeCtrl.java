@@ -23,26 +23,25 @@ import java.util.logging.SimpleFormatter;
  */
 public class CafeCtrl {
 
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Ui ui;
-    private Menu menu;
+    private final Storage storage;
+    private final Pantry pantry;
+    private final Menu menu;
+    private final Sales sales;
+    private final CurrentDate currentDate;
+
     private Command command;
-    private Pantry pantry;
-    private Sales sales;
-    private CurrentDate currentDate;
-    private Storage storage;
 
     /**
      * Private constructor for the CafeCtrl class, used for initializing the user interface and menu list.
      */
-
     private CafeCtrl() {
         initLogger();
         this.ui = new Ui();
         this.storage = new Storage(this.ui);
-        this.sales = new Sales();
-        this.menu = this.storage.loadMenu();
         this.pantry = this.storage.loadPantryStock();
+        this.menu = this.storage.loadMenu();
         this.sales = this.storage.loadOrderList(menu);
         this.currentDate = new CurrentDate(sales);
 
@@ -59,6 +58,7 @@ public class CafeCtrl {
     private void run() {
         ui.showWelcome();
         ui.printLine();
+
         do {
             try {
                 String fullUserInput = ui.receiveUserInput();
@@ -82,8 +82,9 @@ public class CafeCtrl {
         logger.setUseParentHandlers(false);
         try {
             FileHandler fileHandler = new FileHandler("cafeCtrl.log");
-            logger.addHandler(fileHandler);
             SimpleFormatter formatter = new SimpleFormatter();
+
+            logger.addHandler(fileHandler);
             fileHandler.setFormatter(formatter);
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,6 +95,4 @@ public class CafeCtrl {
         CafeCtrl cafeCtrl = new CafeCtrl();
         cafeCtrl.run();
     }
-
 }
-

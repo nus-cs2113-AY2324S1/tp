@@ -161,7 +161,6 @@ public class Parser implements ParserUtil {
         }
     }
 
-    //All prepareCommand Classes
     //@@author Cazh1
     /**
      * Prepares the ListMenuCommand
@@ -177,6 +176,7 @@ public class Parser implements ParserUtil {
     //@@author ziyi105
     /**
      * Parse argument in the context of edit price command
+     *
      * @param menu menu of the current session
      * @param arguments string that matches group arguments
      * @return new EditDishCommand
@@ -229,7 +229,9 @@ public class Parser implements ParserUtil {
 
     //@@author DextheChik3n
     /**
-     * Parses the user input text into ingredients to form a <code>Dish</code> that is added to the <code>Menu</code>
+     * Parses the user input text into ingredients to form a <code>Dish</code>
+     * that is added to the <code>Menu</code>
+     *
      * @param arguments string that matches group arguments
      * @param menu Menu of the current session
      * @param ui Ui of the current session
@@ -309,7 +311,8 @@ public class Parser implements ParserUtil {
     /**
      * Parses the user's input text ingredients.
      *
-     * @param ingredientsListString user's input string of ingredients, multiple ingredients seperated by ',' is allowed
+     * @param ingredientsListString user's input string of ingredients,
+     *                              multiple ingredients seperated by ',' is allowed
      * @param menu
      * @return list of ingredients that consists of the dish
      * @throws ParserException if the input string does not match the constraints
@@ -337,23 +340,27 @@ public class Parser implements ParserUtil {
     }
 
     private static void parseIngredient(
-            boolean isExcludeRepeatedIngredients, Menu menu, String inputIngredient, ArrayList<Ingredient> ingredients)
+            boolean isExcludeRepeatedIngredients, Menu menu,
+            String inputIngredient, ArrayList<Ingredient> ingredients)
             throws ParserException {
         Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
 
         String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+
         //ingredientQtyString contains the input text after the "qty/" argument
         String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
 
         //check the formatting of text after ingredient qty argument (qty/)
         final Pattern ingredientQtyFormatPattern = Pattern.compile(INGREDIENT_QTY_FORMAT_REGEX);
         Matcher ingredientQtyMatcher = ingredientQtyFormatPattern.matcher(ingredientQtyString);
+
         if (!ingredientQtyMatcher.matches()) {
             throw new ParserException(ErrorMessages.INVALID_INGREDIENT_QTY_FORMAT);
         }
 
         String ingredientUnit = ingredientQtyMatcher.group(INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL);
-        int ingredientQty = Integer.parseInt(ingredientQtyMatcher.group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
+        int ingredientQty = Integer.parseInt(ingredientQtyMatcher
+                .group(INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL));
 
         detectErrorPostIngredientParse(isExcludeRepeatedIngredients,
                 ingredientName, ingredientQty, ingredientUnit, ingredients);
@@ -365,7 +372,8 @@ public class Parser implements ParserUtil {
         ingredients.add(ingredient);
     }
 
-    private static Matcher detectErrorPreIngredientParse(String inputIngredient) throws ParserException {
+    private static Matcher detectErrorPreIngredientParse(String inputIngredient)
+            throws ParserException {
         if (isRepeatedArgument(inputIngredient, INGREDIENT_ARGUMENT)) {
             logger.log(Level.WARNING, "Repeated ingredient/ argument!");
             throw new ParserException(ErrorMessages.REPEATED_INGREDIENT_ARGUMENT);
@@ -420,6 +428,7 @@ public class Parser implements ParserUtil {
 
     /**
      * Converts text of price to float while also checking if the price input is within reasonable range
+     *
      * @param priceText text input for price argument
      * @return price in float format
      * @throws ParserException if price is not within reasonable format and range
@@ -463,6 +472,7 @@ public class Parser implements ParserUtil {
 
     /**
      * Checks in the menu if the dish name already exists.
+     *
      * @param inputDishName dish name entered by the user
      * @param menu contains all the existing Dishes
      * @return true if dish name already exists in menu, false otherwise
@@ -486,6 +496,7 @@ public class Parser implements ParserUtil {
 
     /**
      * Checks in the ingredient list if the ingredient name already exists.
+     *
      * @param inputName dish name entered by the user
      * @param ingredients contains all the existing Ingredients
      * @return true if ingredient name already exists in menu, false otherwise
@@ -511,6 +522,7 @@ public class Parser implements ParserUtil {
 
     /**
      * Checks the length of the name is too long
+     *
      * @param inputName name
      * @return true if the name is more than max character limit set, false otherwise
      * @throws NullPointerException if the input string is null
@@ -529,6 +541,7 @@ public class Parser implements ParserUtil {
 
     /**
      * Checks if the argument is entered more than once.
+     *
      * @param inputText text to be checked
      * @param argument argument to be checked for multiple occurrences
      * @return true if there is > 1 match of the argument, false otherwise
@@ -552,17 +565,18 @@ public class Parser implements ParserUtil {
 
     //@@author NaychiMin
     /**
-    * Parses arguments in the context of the ListIngredient command.
-    * @param menu menu of the current session
-    * @param arguments string that matches group arguments
-    * @return the prepared command
+     * Parses arguments in the context of the ListIngredient command.
+     *
+     * @param menu menu of the current session
+     * @param arguments string that matches group arguments
+     * @return the prepared command
     */
     private static Command prepareListIngredient(Menu menu, String arguments, Ui ui) {
         final Pattern prepareListPattern = Pattern.compile(LIST_INGREDIENTS_ARGUMENT_STRING);
         Matcher matcher = prepareListPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            logger.warning("Unmatching regex!");
+            logger.warning("Unmatched regex!");
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_LIST_INGREDIENTS
                     + ListIngredientCommand.MESSAGE_USAGE, ui);
         }
@@ -598,7 +612,7 @@ public class Parser implements ParserUtil {
 
         // Checks whether the overall pattern of delete price arguments is correct
         if (!matcher.matches()) {
-            logger.warning("Unmatching regex!");
+            logger.warning("Unmatched regex!");
             return new IncorrectCommand(ErrorMessages.MISSING_ARGUMENT_FOR_DELETE, ui);
         }
 
@@ -637,7 +651,7 @@ public class Parser implements ParserUtil {
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
 
         if (!matcher.matches()) {
-            logger.warning("Unmatching regex!");
+            logger.warning("Unmatched regex!");
             return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
                     + BuyIngredientCommand.MESSAGE_USAGE, ui);
         }
@@ -674,6 +688,7 @@ public class Parser implements ParserUtil {
     public static void checkForMismatchUnit(Menu menu, Ingredient newIngredient) throws ParserException {
         logger.info("Checking for mismatched units...");
         ArrayList<Dish> dishArrayList = menu.getMenuItemsList();
+
         for (Dish dish : dishArrayList) {
             traverseIngredientsOfDish(newIngredient, dish);
         }
@@ -681,6 +696,7 @@ public class Parser implements ParserUtil {
 
     private static void traverseIngredientsOfDish(Ingredient newIngredient, Dish dish) throws ParserException {
         ArrayList<Ingredient> ingredientArrayList = dish.getIngredients();
+
         for (Ingredient currentIngredient : ingredientArrayList) {
             logger.info("Comparing name: " + newIngredient.getName() + " and " + currentIngredient.getName());
             compareIngredientName(newIngredient, currentIngredient);
@@ -708,6 +724,7 @@ public class Parser implements ParserUtil {
     //@@author ziyi105
     /**
      * Check whether a text contains special character
+     *
      * @param text text to be checked
      * @return true if it contains special character, false otherwise
      */
