@@ -16,17 +16,18 @@ Given below is a quick overview of main components and how they interact with ea
 
 ![High-level Design of TaskLinker](photo/OverallDesign.png)
 
-**Duke components of the architecture**
+**Main components of the architecture**
 
 The two main classes of Duke are FlashcardComponent and CalendarManager.
 Those two classes carry out the bulk of the application. 
 
-Duke prompts for user input. Duke also accesses and uses FlashcardComponent
+Duke prompts for user input. Duke also has accesses to FlashcardComponent
 and CalendarManager. So, when the user input is given, duke decided which one
 to call based on the input.
 
 As the input is processed and called by one of the two main classes, 
-subsequent methods and features are called by children classes.
+subsequent methods and features are called by children classes. The 
+low-class explanations will be given below.
 
 ### `flashcard` package
 
@@ -112,10 +113,10 @@ The classes are associated with one another through instant accesses and other m
 CalendarManager directs the events and event list, which then are run on Duke.
 
 Calendar package Class Diagram:
-[Calendar package Class Diagram](photo/CalendarManagerClassDiagram.drawio.png)
+![Calendar package Class Diagram](photo/CalendarManagerClassDiagram.drawio.png)
 
 CalendarManager Sequence Diagram:
-[CalendarManager Sequence Diagram](photo/CalendarManagerSequenceDiagram.drawio.png)
+![CalendarManager Sequence Diagram](photo/CalendarManagerSequenceDiagram.drawio.png)
 
 ## Product scope
 
