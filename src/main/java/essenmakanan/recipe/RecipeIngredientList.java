@@ -30,7 +30,7 @@ public class RecipeIngredientList {
         System.out.println("Finished adding ingredients!");
     }
 
-    public RecipeIngredientList(ArrayList<Ingredient>  ingredients) {
+    public RecipeIngredientList(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

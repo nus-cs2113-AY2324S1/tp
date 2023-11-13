@@ -10,7 +10,7 @@ import essenmakanan.recipe.RecipeStepList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class StartRecipeCommandTest {
+public class CheckRecipeCommandTest {
     private RecipeList recipes;
     private Recipe recipe0;
     private Recipe recipe1;
@@ -40,6 +40,7 @@ public class StartRecipeCommandTest {
         RecipeIngredientList recipeIngredientList2 = new RecipeIngredientList(ingredientList2);
         recipe1 = new Recipe("Meatball Noodles", recipeStepList, recipeIngredientList2);
 
+        // Add both recipes to recipes
         recipes.addRecipe(recipe0);
         recipes.addRecipe(recipe1);
 
@@ -52,10 +53,11 @@ public class StartRecipeCommandTest {
     }
 
     @Test
-    public void startRecipe_validRecipeTitle_deleteCorrectly() {
-        StartRecipeCommand command = new StartRecipeCommand("Fluffy Bread", recipes, ingredients);
+    public void startRecipe_validIngredients_comparesCorrectly() {
+        CheckRecipeCommand command = new CheckRecipeCommand("Fluffy Bread", recipes, ingredients);
         command.executeCommand();
 
+        // Check if insufficientIngredients list is correct
         IngredientList insufficientIngredients = new IngredientList();
         double ingredientQty1 = 100;
         double ingredientQty2 = 1;
@@ -66,6 +68,7 @@ public class StartRecipeCommandTest {
         assert command.getInsufficientIngredients().equals(insufficientIngredients)
                 : "The insufficient quantity was not detected";
 
+        // Check if missingIngredient list is correct
         IngredientList missingIngredients = new IngredientList();
         missingIngredients.addIngredient(new Ingredient("yeast", 50.0, IngredientUnit.GRAM));
         assert command.getMissingIngredients().equals(missingIngredients) : "The missing quantity was not detected";

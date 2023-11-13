@@ -28,16 +28,17 @@ public class AddIngredientCommand extends Command {
             Ingredient newIngredient;
             try {
                 newIngredient = IngredientParser.parseIngredient(ingredient);
+
+                if (newIngredient.getQuantity() < 0) {
+                    Ui.printNegativeIngredientQuantity();
+                    return;
+                }
+
                 if (this.ingredients.exist(newIngredient.getName())) {
                     // if ingredient already exists, update the quantity
                     this.ingredients.updateIngredient(newIngredient);
                 } else {
                     // add new ingredient
-                    if (newIngredient.getQuantity() < 0) {
-                        System.out.println("You cannot add an ingredient with negative quantity.");
-                        return;
-                    }
-
                     this.ingredients.addIngredient(newIngredient);
                     Ui.printAddIngredientsSuccess(newIngredient.getName());
                 }

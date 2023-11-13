@@ -56,4 +56,40 @@ public class IngredientParserTest {
             IngredientParser.getIngredientIndex(ingredients, input);
         });
     }
+
+    @Test
+    public void addIngredient_emptyName_errorThrown(){
+
+        String input = "i/,2,pc";
+        assertThrows(EssenFormatException.class, () -> {
+            IngredientParser.parseIngredient(input);
+        });
+    }
+
+    @Test
+    public void addIngredient_emptyQuantity_errorThrown(){
+
+        String input = "i/cheese,,pc";
+        assertThrows(EssenFormatException.class, () -> {
+            IngredientParser.parseIngredient(input);
+        });
+    }
+
+    @Test
+    public void addIngredient_emptyUnit_errorThrown(){
+
+        String input = "i/cheese,2,";
+        assertThrows(EssenFormatException.class, () -> {
+            IngredientParser.parseIngredient(input);
+        });
+    }
+
+    @Test
+    public void addIngredient_incompleteIngredient_errorThrown(){
+
+        String input = "i/cheese,2";
+        assertThrows(EssenFormatException.class, () -> {
+            IngredientParser.parseIngredient(input);
+        });
+    }
 }

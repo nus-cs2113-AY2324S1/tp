@@ -1,5 +1,6 @@
 package essenmakanan.command;
 
+import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
@@ -26,7 +27,7 @@ public class DuplicateRecipeCommand extends Command {
                     , recipe.getRecipeIngredients());
             recipes.addRecipe(copiedRecipe);
             Ui.printDuplicatedRecipe(recipe.getTitle());
-        } catch(EssenOutOfRangeException exception) {
+        } catch(EssenOutOfRangeException | EssenFormatException exception) {
             exception.handleException();
         }
     }

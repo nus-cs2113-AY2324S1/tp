@@ -5,11 +5,22 @@ import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.recipe.Recipe;
-import essenmakanan.recipe.RecipeIngredientList;
-import essenmakanan.recipe.RecipeList;
+import essenmakanan.ui.Ui;
 
 public class IngredientParser {
+
+    public static boolean checkForValidQuantity(double quantity) {
+        return ((int) quantity != 0 && Math.ceil(quantity) > 0) || quantity > 0;
+    }
+
+    /**
+     * Validates the input of ingredient ID or ingredient name.
+     *
+     * @param ingredients is the ingredient inventory
+     * @param input is the input of ingredient ID or ingredient name
+     * @return the index of the ingredient
+     * @throws EssenOutOfRangeException when the ingredient name or ingredient ID does not exist
+     */
     public static int getIngredientIndex(IngredientList ingredients, String input)
             throws EssenOutOfRangeException {
         int index;
@@ -27,30 +38,6 @@ public class IngredientParser {
         }
 
         return index;
-    }
-
-
-    /**
-     * To get an Ingredient List of all ingredients needed for all recipes in the recipe list
-     *
-     * @param recipes is a recipe list of all recipes the user wants to process
-     * @return all ingredients in the list of recipes
-     */
-    public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
-        IngredientList allIngredients = new IngredientList();
-        RecipeIngredientList recipeIngredients;
-
-        for (Recipe recipe : recipes.getRecipes()) {
-            recipeIngredients = recipe.getRecipeIngredients();
-            for (Ingredient ingredient : recipeIngredients.getIngredients()) {
-                allIngredients.addIngredient(ingredient);
-            }
-        }
-        return allIngredients;
-    }
-
-    public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
-        return ingredient1.getUnit().equals(ingredient2.getUnit());
     }
 
     public static Double getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
@@ -72,6 +59,7 @@ public class IngredientParser {
         IngredientUnit ingredientUnit;
 
         if (!isValidIngredient(inputDetail)) {
+            Ui.printValidIngredientExample();
             throw new EssenFormatException();
         }
 
@@ -81,15 +69,21 @@ public class IngredientParser {
 
         assert (ingredientDetails.length == 3) : "Ingredient details should have 3 parts";
 
-        String ingredientName = ingredientDetails[0].strip();
+        String ingredientName = ingredientDetails[0].trim();
         if (ingredientName.isEmpty()) {
             System.out.println("Ingredient name should not be empty!");
             throw new EssenFormatException();
         }
 
-        Double ingredientQuantity = Double.parseDouble(ingredientDetails[1].strip());
+        if (ingredientDetails[1].isBlank()) {
+            // check if quantity is a null
+            System.out.println("Ingredient quantity should not be empty!");
+            throw new EssenFormatException();
+        }
 
-        String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
+        Double ingredientQuantity = Double.parseDouble(ingredientDetails[1].trim());
+
+        String ingredientUnitString = ingredientDetails[2].trim().toLowerCase();
         ingredientUnit = mapIngredientUnit(ingredientUnitString);
 
         Ingredient newIngredient = new Ingredient(ingredientName, ingredientQuantity, ingredientUnit);
@@ -106,7 +100,7 @@ public class IngredientParser {
             return false;
         }
 
-        String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
+        String ingredientUnitString = ingredientDetails[2].trim().toLowerCase();
         try {
             mapIngredientUnit(ingredientUnitString);
         } catch (EssenFormatException e) {
@@ -144,6 +138,7 @@ public class IngredientParser {
             ingredientUnit = IngredientUnit.PIECE;
             break;
         default:
+            System.out.println(Ui.validIngredientUnits());
             throw new EssenFormatException();
         }
 

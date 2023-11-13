@@ -15,6 +15,12 @@ public class FilterRecipesCommand extends Command {
         this.recipes = recipes;
     }
 
+    /**
+     * To filter out all recipes containing a specific ingredient
+     *
+     * @param ingredientName the name of ingredient we want to find in recipes
+     * @return recipes with the specific ingredient
+     */
     private RecipeList filterRecipes(String ingredientName) {
         RecipeList filteredRecipes = new RecipeList();
 

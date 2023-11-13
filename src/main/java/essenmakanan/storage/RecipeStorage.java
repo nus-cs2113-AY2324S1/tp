@@ -2,14 +2,14 @@ package essenmakanan.storage;
 
 import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenInvalidEnumException;
+import essenmakanan.exception.EssenStorageDuplicateException;
 import essenmakanan.exception.EssenStorageFormatException;
-import essenmakanan.ingredient.Ingredient;
+import essenmakanan.exception.EssenStorageNumberException;
 import essenmakanan.logger.EssenLogger;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeStepList;
-import essenmakanan.recipe.Step;
 import essenmakanan.ui.Ui;
 
 import java.io.File;
@@ -64,8 +64,18 @@ public class RecipeStorage {
             EssenLogger.logInfo("Recipe data has been successfully saved");
         } catch (IOException exception) {
             Ui.handleIOException(exception);
-            //.log(Level.SEVERE, "Unable to save recipe data", exception);
+            EssenLogger.logSevere("Unable to save recipe data", exception);
         }
+    }
+
+    private boolean searchDuplicate(String recipeName) {
+        for (Recipe recipe : recipeListPlaceholder) {
+            if (recipe.getTitle().equals(recipeName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void createNewData(Scanner scan) {
@@ -79,30 +89,33 @@ public class RecipeStorage {
             }
 
             String recipeDescription = parsedRecipe[0];
+            if (searchDuplicate(recipeDescription)) {
+                throw new EssenStorageDuplicateException();
+            }
 
             RecipeStepList steps;
-            if (parsedRecipe[1].equals("EMPTY")) {
-                ArrayList<Step> emptyStepList = new ArrayList<>();
-                steps = new RecipeStepList(emptyStepList);
-            } else {
-                steps = RecipeParser.parseDataSteps(parsedRecipe[1]);
-            }
+            steps = RecipeParser.parseDataSteps(parsedRecipe[1].trim());
 
             RecipeIngredientList ingredientList;
-            if (parsedRecipe[2].equals("EMPTY")) {
-                ArrayList<Ingredient> emptyIngredientList = new ArrayList<>();
-                ingredientList = new RecipeIngredientList(emptyIngredientList);
-            } else {
-                ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2]);
-            }
+            ingredientList = RecipeParser.parseDataRecipeIngredients(parsedRecipe[2].trim());
 
             recipeListPlaceholder.add(new Recipe(recipeDescription, steps, ingredientList));
         } catch (EssenStorageFormatException exception) {
             exception.handleException(dataString);
-            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid format", exception);
+            String message = "Data: " + dataString + " has an invalid format";
+            EssenLogger.logWarning(message, exception);
+        } catch (NumberFormatException exception) {
+            EssenStorageNumberException.handleException(dataString);
+            String message = "Data: " + dataString + " has an invalid quantity";
+            EssenLogger.logWarning(message, exception);
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
-            //logger.log(Level.WARNING, "Data: " + dataString + " has an invalid enum", exception);
+            String message = "Data: " + dataString + " has an invalid enum";
+            EssenLogger.logWarning(message, exception);
+        } catch (EssenStorageDuplicateException exception) {
+            exception.handleException(dataString);
+            String message = "Data: " + dataString + " cannot be created due to duplicates";
+            EssenLogger.logWarning(message, exception);
         }
         EssenLogger.logInfo("Saved recipe data has been received");
     }
@@ -115,7 +128,7 @@ public class RecipeStorage {
                 createNewData(scan);
             }
         } catch (FileNotFoundException exception) {
-            //logger.log(Level.WARNING, "Text file not found");
+            EssenLogger.logWarning("Text file not found", exception);
             throw new EssenFileNotFoundException();
         }
 

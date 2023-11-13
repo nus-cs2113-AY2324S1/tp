@@ -4,6 +4,9 @@ Data text file successfully created
 Creating database
 Directory located
 Data text file successfully created
+Creating database
+Directory located
+Data text file successfully created
 ------------------------------------------------
 Welcome to Essen Makanan!!! A one-stop place to track the
 ingredients in your kitchen and store your favourite recipes

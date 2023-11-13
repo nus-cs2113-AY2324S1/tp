@@ -1,6 +1,8 @@
 package essenmakanan.recipe;
 
 import essenmakanan.exception.EssenFormatException;
+import essenmakanan.exception.EssenInvalidEditException;
+import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ui.Ui;
 import essenmakanan.ingredient.Ingredient;
 
@@ -31,16 +33,33 @@ public class RecipeList {
         recipes.add(new essenmakanan.recipe.Recipe(title, steps));
     }
 
+    /**
+     * To delete a recipe by index
+     *
+     * @param index of the recipe to be deleted
+     */
     public void deleteRecipe(int index) {
         Ui.printDeleteRecipeSuccess(recipes.get(index).getTitle());
         recipes.remove(index);
     }
 
+    /**
+     * Get recipe using index
+     *
+     * @param index of recipe
+     * @return Recipe
+     */
     public Recipe getRecipe(int index) {
         assert recipeExist(index) : "Index is out of bounds";
         return recipes.get(index);
     }
 
+    /**
+     * Get recipe using title of recipe
+     *
+     * @param name is the title o fthe recipe
+     * @return recipe if exists, otherwise, null
+     */
     public Recipe getRecipe(String name) {
         for (Recipe recipe : recipes) {
             if (recipe.getTitle().equals(name)) {
@@ -50,6 +69,12 @@ public class RecipeList {
         return null;
     }
 
+    /**
+     * Get the index of the recipeu sing recipeTitle
+     *
+     * @param recipeTitle the title of the recipe
+     * @return index of recipe if recipe is found, otherwise, returns -1
+     */
     public int getIndexOfRecipe(String recipeTitle) {
         int i = 0;
         for (essenmakanan.recipe.Recipe recipe : recipes) {
@@ -60,6 +85,13 @@ public class RecipeList {
         }
         return -1;
     }
+
+    /**
+     * To check if the recipe exists using recipe index
+     *
+     * @param index of recipe
+     * @return true if recipe index is within range
+     */
     public boolean recipeExist(int index) {
         if (index >= 0 && index < recipes.size()) {
             return true;
@@ -67,7 +99,9 @@ public class RecipeList {
         return false;
     }
 
-
+    /**
+     * Print all recipe titles in the recipe list
+     */
     public void listRecipeTitles() {
         int count = 1;
 
@@ -108,11 +142,12 @@ public class RecipeList {
 
         assert recipeExist(index) : "Index is out of bounds";
         Recipe recipe = recipes.get(index);
-        System.out.println("To make: [" + recipe.getTitle().toUpperCase() + "]");
-
-        System.out.println("Ingredients needed: ");
+        System.out.println("<<To Make: " + recipe.getTitle().toUpperCase() + ">>");
+        Ui.drawDivider();
+        System.out.println("<<Ingredients Needed>>");
         listRecipeIngredients(recipe);
-        System.out.println("Steps to follow: ");
+        Ui.drawDivider();
+        System.out.println("<<Steps To Follow>>");
         listRecipeSteps(recipe);
     }
 
@@ -127,7 +162,7 @@ public class RecipeList {
     }
 
     public void editRecipe(Recipe existingRecipe, String[] editDetails) throws EssenFormatException {
-        for (int i = 1; i < editDetails.length; i++) {
+        for (int i = 0; i < editDetails.length; i++) {
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
 
@@ -140,14 +175,65 @@ public class RecipeList {
                 break;
             case "s/":
                 String[] stepDetails = editDetails[i].substring(2).split(",");
-                int stepIndex = Integer.parseInt(stepDetails[0])-1;
-                Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
-                String newStep = stepDetails[1];
 
-                Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
-                existingStep.setDescription(newStep);
+                int stepIndex = -1;
+
+                try {
+                    stepIndex = Integer.parseInt(stepDetails[0])-1;
+                } catch (NumberFormatException e) {
+                    System.out.println("Step index must be a number!");
+                    throw new EssenFormatException();
+                }
+
+                if (!noDescriptionExists(stepDetails)) {
+                    stepIndex = Integer.parseInt(stepDetails[0])-1;
+                    Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
+                    String newStep = stepDetails[1];
+                    newStep = Step.convertToStepIdTemplate(newStep, stepIndex+1);
+                    Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
+                    existingStep.setDescription(newStep);
+                }
                 break;
+            case "i/":
+                int firstSlash = editDetails[i].indexOf("/");
+                int firstComma = editDetails[i].indexOf(",");
+                int ingredientIndex = -1;
 
+                try {
+                    ingredientIndex = Integer.parseInt(editDetails[i].substring(firstSlash+1,firstComma))-1;
+                } catch (NumberFormatException e) {
+                    System.out.println("Ingredient index must be a number!");
+                    throw new EssenFormatException();
+                }
+
+                assert (ingredientIndex >= 0) : "Ingredient index must be positive";
+
+                Ingredient existingIngredient = null;
+                try {
+                    existingIngredient = existingRecipe.getRecipeIngredientByIndex(ingredientIndex);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Make sure ingredient index is valid!");
+                    throw new EssenFormatException();
+                }
+
+                String ingredientEditDetailsString = editDetails[i].substring(firstComma+1);
+                String[] ingredientDetails = null;
+                try {
+                    ingredientDetails = getIngredientEditDetails(ingredientEditDetailsString);
+                } catch (EssenInvalidEditException e) {
+                    e.handleException();
+                }
+
+                assert ingredientDetails != null : "Ingredient details is null";
+
+                try {
+                    IngredientList.editIngredient(existingIngredient, ingredientDetails);
+                } catch (EssenFormatException e) {
+                    e.handleException();
+                }
+
+                // Ui.printEditRecipeIngredientSuccess(existingIngredient.getName(), newIngredient);
+                break;
             default:
                 throw new EssenFormatException();
             }
@@ -155,6 +241,42 @@ public class RecipeList {
 
     }
 
+    public String[] getIngredientEditDetails(String ingrdientEditString) throws EssenInvalidEditException{
+        int totalDashes = ingrdientEditString.split("-").length-1;
+        String[] ingredientEditDetails = new String[totalDashes];
+        int counter = 0;
+
+        int firstDash = ingrdientEditString.indexOf("-");
+
+        while (firstDash != -1) {
+            if ((firstDash + 1) >= ingrdientEditString.length()) {
+                System.out.println("Please provide details to edit");
+                throw new EssenInvalidEditException();
+            }
+
+            int nextDash = ingrdientEditString.indexOf("-", firstDash+1);
+
+            if (nextDash != -1) {
+                String stringToReplaceDash = ingrdientEditString.substring(firstDash - 1, nextDash - 2).trim();
+                ingredientEditDetails[counter] = stringToReplaceDash.replace("-", "/");
+            } else {
+                String stringToReplaceDash = ingrdientEditString.substring(firstDash-1).trim();
+                ingredientEditDetails[counter] = stringToReplaceDash.replace("-", "/");
+            }
+            counter++;
+            firstDash = nextDash;
+        }
+
+        return ingredientEditDetails;
+    }
+
+    private static boolean noDescriptionExists(String[] stepDetails) {
+        if (stepDetails.length <= 1) {
+            System.out.println("The description is empty! You have to provide details to edit this step!");
+            return true;
+        }
+        return false;
+    }
     public boolean isEmpty() {
         return recipes.isEmpty();
     }

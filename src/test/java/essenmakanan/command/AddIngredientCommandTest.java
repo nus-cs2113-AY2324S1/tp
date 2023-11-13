@@ -1,6 +1,8 @@
-package essenmakanan.ingredient;
+package essenmakanan.command;
 
-import essenmakanan.command.AddIngredientCommand;
+import essenmakanan.ingredient.Ingredient;
+import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ingredient.IngredientUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +47,7 @@ public class AddIngredientCommandTest {
     }
 
     @Test
-    public void addIngredient_negativeValue_nothingCreated(){
+    public void addIngredient_negativeQuantity_nothingCreated(){
 
         String userInput = "i/cheese,-2,pc";
         addIngredientCommand = new AddIngredientCommand(userInput, ingredients);
