@@ -212,7 +212,7 @@ public class RecipeParser {
             Tag stepTag = Tag.valueOf(parsedStep[1].trim());
             int stepDuration = Integer.parseInt(parsedStep[2].trim());
 
-            if (stepDuration <= 0) {
+            if (stepDuration < 0) {
                 throw new EssenStorageFormatException();
             }
 
