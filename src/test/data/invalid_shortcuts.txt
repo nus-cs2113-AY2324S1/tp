@@ -1,0 +1,5 @@
+bread  1.0
+ | 0.1
+bread |
+bread | -1
+egg | 0

@@ -197,7 +197,7 @@ public class RecipeParser {
     }
 
     public static RecipeStepList parseDataSteps(String stepsString) throws EssenStorageFormatException
-            ,IllegalArgumentException {
+            , IllegalArgumentException {
         String[] parsedSteps = stepsString.split(" , ");
         ArrayList<Step> stepList = new ArrayList<>();
 
@@ -211,6 +211,11 @@ public class RecipeParser {
             String stepDescription = parsedStep[0].trim();
             Tag stepTag = Tag.valueOf(parsedStep[1].trim());
             int stepDuration = Integer.parseInt(parsedStep[2].trim());
+
+            if (stepDuration <= 0) {
+                throw new EssenStorageFormatException();
+            }
+
             stepList.add(new Step(stepDescription, stepTag, stepDuration));
         }
 
