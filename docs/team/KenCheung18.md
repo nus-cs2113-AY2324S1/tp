@@ -39,6 +39,7 @@ Given below are contributions that I made to this project.
 - Improved and finalised the `Clear` feature..
 - Contributed to `add expense` and `edit expense` feature.
 - Contributed to the `Command Summary` section.
+- Contributed to the typo and grammar checking
 
 ### Contributions to DeveloperGuide:
 - Fixed bug on image not showing up on DG webpage
