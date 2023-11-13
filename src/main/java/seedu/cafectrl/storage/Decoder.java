@@ -41,17 +41,26 @@ public class Decoder {
     public static Menu decodeMenuData(ArrayList<String> textLines) {
         logger.info("Decoding menu.txt to Menu...");
         ArrayList<Dish> menuDishList = new ArrayList<>();
+
         for(String dishString : textLines) {
             logger.info("Line to decode: " + dishString);
             decodeDishString(dishString, menuDishList);
         }
+
         return new Menu(menuDishList);
     }
 
+    /**
+     * Decodes a string representation of a dish and adds it to the menu's list of dishes.
+     *
+     * @param dishString      The string containing dish information.
+     * @param menuDishList    The list to which the decoded dish will be added.
+     */
     private static void decodeDishString(String dishString, ArrayList<Dish> menuDishList) {
         try {
             String[] dishStringArray = dishString.split(DIVIDER);
             String dishName = dishStringArray[0].trim();
+            checkNameValidity(dishName);
             float dishPrice = Float.parseFloat(dishStringArray[1]);
             String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
             ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
@@ -59,6 +68,12 @@ public class Decoder {
         } catch (Exception e) {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_MENU_DATA + dishString);
+        }
+    }
+
+    private static void checkNameValidity(String name) throws Exception {
+        if (Parser.isNameLengthInvalid(name) || name.isEmpty() || Parser.containsSpecialChar(name)) {
+            throw new Exception();
         }
     }
 
@@ -74,7 +89,9 @@ public class Decoder {
             logger.info("Ingredient to decode: " + ingredientString);
             String[] array = ingredientString.split(INGREDIENT_DIVIDER);
             String name = array[0].trim();
+            checkNameValidity(name);
             int qty = Integer.parseInt(array[1].trim());
+            checkQtyValidity(qty);
             String unit = array[2].trim();
             checkUnitValidity(unit);
             ingredientList.add(new Ingredient(name, qty, unit));
@@ -82,16 +99,22 @@ public class Decoder {
         return ingredientList;
     }
 
+    private static void checkQtyValidity(int qty) throws Exception {
+        if (Parser.isInvalidQty(qty)) {
+            throw new Exception();
+        }
+    }
+
     private static void checkUnitValidity(String unit) throws Exception {
         if (!Parser.isValidUnit(unit) || Parser.isEmptyUnit(unit)) {
             throw new Exception();
         }
     }
-    //@@author
 
     //@@author ziyi105
     /**
      * Decodes raw string from pantry stock data file and create ingredient object from the data
+     *
      * @param encodedPantryStock raw string from pantry stock data file
      * @return a new pantry object with data from the pantry stock data file
      */
@@ -135,6 +158,7 @@ public class Decoder {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
             }
         }
+
         return new Pantry(ui, pantryStock);
     }
 
@@ -157,6 +181,7 @@ public class Decoder {
 
     /**
      * Checks whether the pantry stock is in the format of ingredient name | quantity (int) | unit
+     *
      * @param decodedPantryStock string array of the raw data string from pantry stock data file
      *                           split with "|"
      * @return true if the format is correct, false otherwise
@@ -199,6 +224,7 @@ public class Decoder {
             }
             decodeSalesData(line, orderLists, menu);
         }
+
         if (orderLists.isEmpty()) {
             return new Sales();
         }
@@ -273,14 +299,12 @@ public class Decoder {
         return false;
     }
 
-
     //@@author Cazh1
     /**
      * Increases the size of the orderlist when there is gap between the previous order and the next
      *
      * @param orderLists The current partially filled ArrayList of OrderList
      * @param day The day of the next order
-     * @return orderLists after filling in the gaps
      */
     private static void fillOrderListSize(ArrayList<OrderList> orderLists, int day) {
         while (orderLists.size() <= day) {

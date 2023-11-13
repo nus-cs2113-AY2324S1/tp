@@ -11,10 +11,9 @@ import java.util.logging.Logger;
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
-    public static final String MESSAGE_USAGE = "To view all commands:\n"
-            + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = "To view all commands:\n" + COMMAND_WORD;
 
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected Ui ui;
 
 
@@ -28,6 +27,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute() {
         logger.info("Executing HelpCommand...");
+
         ui.printLine();
         ui.showHelp();
     }
