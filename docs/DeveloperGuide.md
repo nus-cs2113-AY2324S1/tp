@@ -366,10 +366,11 @@ The steps command will specifically interact with the `stepList` in the supercla
 - `getstepssuggestions` will calculate the calories burnt based on the steps taken and the user's weight. It 
 will then suggest how many more steps they need to take to meet their daily calorie goal.
 
-The diagram below shows the class diagram to show the inheritance from the `Command` superclass:
-![Step command class diagram](images/AddStepsCommand.png "Step command class diagram")
+The below sequence diagram shows the sequence of the `addsteps` command: 
+![Sequence of adding steps](images/AddStepCommand-0.png)
 
-The structure is very similar to the other commands albeit for a few attributes and the logic is implemented in the `execute()` method.
+...and `deletesteps` command.
+![Sequence of deleting steps](images/DeleteStepsCommand-0.png)
 
 ### 8. Handling an Invalid Input
 If user enters invalid input, the app uses `InvalidCommand` class to handle it.

@@ -1,0 +1,35 @@
+@startuml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CommandParser" as CommandParser LOGIC_COLOR
+participant ":DeleteStepsCommand" as DeleteStepsCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":StepList" as StepList MODEL_COLOR
+end box
+
+-> LogicManager ++: execute ("deletesteps 1")
+LogicManager -> CommandParser ++: parseCommand("deletesteps 1")
+create DeleteStepsCommand
+CommandParser -> DeleteStepsCommand ++:
+return
+CommandParser -> DeleteStepsCommand ++: setArguments("1", userCommandLine:String)
+return command:Command
+return command:Command
+LogicManager -> LogicManager ++: executeCommand()
+LogicManager -> DeleteStepsCommand ++: execute()
+DeleteStepsCommand -> StepList ++: deleteSteps(1)
+return
+create CommandResult
+DeleteStepsCommand -> CommandResult ++:
+return result
+return result
+return result
+return
+
+@enduml
