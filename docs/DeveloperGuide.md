@@ -20,6 +20,8 @@
     * [List Ingredients](#list-ingredients)
     * [Delete Dish](#delete-dish)
     * [Edit Price](#edit-price)
+    * [View Total Stock](#view-total-stock)
+    * [Buy Ingredient](#buy-ingredient)
     * [Help](#help)
   * [**Product scope**](#product-scope)
     * [Target user profile](#target-user-profile)
@@ -292,6 +294,31 @@ This sequence of actions orchestrates the flow of information and operations bet
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
 When the `execute()` method of `EditPriceCommand` is invoked in `Main`, it subsequently calls the `setPrice()` method on the `Dish` object to modify the price of the specific dish. Following this, the `showEditPriceMessages()` method in the `Ui` component is triggered to retrieve and display a message from `Messages` related to the successful execution of the price modification process. This sequence of actions orchestrates the flow of information and operations between the `Main`, `EditPriceCommand`, `Dish`, and `Ui` components, ensuring the seamless handling of the price editing functionality within the application.
+
+### View Total Stock
+![View Total Stock Execution](images/sequence/ViewTotalStockCommand_execute.png)
+
+*Figure 16: Execution of view_stock command*
+
+API: [ViewTotalStockCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ViewTotalStockCommand.java)
+
+When the `execute()` method of `ViewTotalStock` is invoked, an ArrayList of Ingredients are retrieved through the method `getPantryStock`. For each ingredient in the ArrayList, `ViewTotalStock` calls `showIngredientStock` from `Ui` to print out the list of ingredients in the ArrayList.
+
+### Buy Ingredient
+![Buy Ingredient Execution](images/sequence/BuyIngredientCommand_execute.png)
+
+*Figure 17: Execution of buy_ingredient command*
+
+API: [BuyIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/BuyIngredientCommand.java)
+
+When the `execute()` method is invoked
+1. `addIngredient` in `BuyIngredientCommand` is called
+2. Looping from the **first to the last** element in an ArrayList of Ingredients called `ingredients`, `addIngredientToStock` from `Pantry` is invoked
+3. First, `pantryStock` is retrieved and `getIndexOfIngredient` is called to check if the new ingredient exists in `pantryStock`
+4. If ingredient exists (`ingredientIndex != -1`), `addIngredientQuantity` is called to update the quantity of the existing ingredient
+5. Else, a new `ingredient` object is returned
+6. Looping from the **last to the first** element in `ingredients`, the ingredient is added to the string to be printed `ingredientString` using the `buildBuyIngredientMessage` method which ignores repeated ingredients in the list
+7. Finally, `ingredientString` is shown to the user through `showToUser` method of `Ui`
 
 ### Help
 
