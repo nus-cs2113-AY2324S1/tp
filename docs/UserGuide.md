@@ -68,6 +68,16 @@ Login an existing user into the system.
 Save existing drugs from inventory list onto a txt file.
 File is then used to update inventory list when stocker is ran.
 
+### Feature-saveSales
+
+Save existing checked out items onto a txt file.
+File is then used to update sold drugs when stocker is ran.
+
+### Feature-listSales
+
+Displays the list of all sold drugs being tracked by the system.
+It also shows the total amount earned so far.
+
 ### Feature-add vendor
 
 Adds a vendor into a list tracked by the system.
@@ -399,6 +409,42 @@ Expected outcome:
 Drugs successfully saved.
 ```
 
+### `saveSales` - Save the current sold items
+
+The saveSales command allows you to save the sales transactions onto your computer's hard drive. The saved file can serve as a historical record of sales transactions and can be used for reference in the future.
+
+Example of usage:
+
+`saveSales`
+
+Expected outcome:
+
+```
+|| Sales data successfully saved.
+
+```
+
+**Note:** It is recommended to use `saveSales` and `saveDrugs` before you exit the program to keep a record of your sales transactions.
+
+Example of usage:
+
+`saveSales`
+
+Expected outcome:
+
+```
+|| Sales data successfully saved.
+
+```
+
+`saveDrugs`
+
+Expected outcome:
+
+```
+Drugs successfully saved.
+```
+
 ### `addVendor` - adds a vendor into list of vendors being tracked by system
 
 - Adds a vendor to be tracked by the system. The entries are used to form a list of summarised vendors.
@@ -635,28 +681,6 @@ Expected outcome:
 || Threshold quantity set for Doliprane: 50
 ```
 
-### `saveSales` - Save the current sold items
-
-The saveSales command allows you to save the sales transactions onto your computer's hard drive. The saved file can serve as a historical record of sales transactions and can be used for reference in the future.
-
-Example of usage:
-
-`saveSales`
-
-Expected outcome:
-
-```
-|| Sales data successfully saved.
-
-```
-
-Expected outcome if there are no sales transactions to save:
-
-```
-|| The sales list is empty. Nothing to save.
-
-```
-
 ### `listSales` - List the description of sold items saved
 
 The listSales command is designed to provide you with a clear and organized list of all sales transactions that have been tracked by the system. It helps you review and manage sales data efficiently.
@@ -806,7 +830,7 @@ Expected outcome:
 - add drug to cart : `addToCart /s SERIAL_NUMBER /q QUANTITY`
 - checks out current cart : `checkout`
 - view current cart items : `viewCart`
-- save current sold items : `saveSales`
+- save current checked out items : `saveSales`
 - view all sold items : `listSales`
 - set threshold quantity for a drug : `setThreshold /s SERIAL_NUMBER /tq THRESHOLD_QUANTITY`
 - list all drugs and threshold levels : `listThreshold`
