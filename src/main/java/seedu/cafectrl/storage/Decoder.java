@@ -10,6 +10,7 @@ import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.parser.Parser;
+import seedu.cafectrl.parser.exception.ParserException;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
 
@@ -57,14 +58,18 @@ public class Decoder {
      * @param menuDishList    The list to which the decoded dish will be added.
      */
     private static void decodeDishString(String dishString, ArrayList<Dish> menuDishList) {
+        String dishName = "";
         try {
             String[] dishStringArray = dishString.split(DIVIDER);
-            String dishName = dishStringArray[0].trim();
+            dishName = dishStringArray[0].trim();
             checkNameValidity(dishName);
             float dishPrice = Float.parseFloat(dishStringArray[1]);
             String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
             ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
             menuDishList.add(new Dish(dishName, ingredientsList, dishPrice));
+        } catch (ParserException e) {
+            logger.log(Level.WARNING, "Dish has no ingredients: " + e.getMessage(), e);
+            ui.showToUser(e.getMessage() + dishName);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_MENU_DATA + dishString);
@@ -85,6 +90,11 @@ public class Decoder {
      */
     private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) throws Exception {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
+
+        if (ingredientsStringArray.length < 1) {
+            throw new ParserException(ErrorMessages.MISSING_INGREDIENT_MENU_DATA);
+        }
+
         for(String ingredientString : ingredientsStringArray) {
             logger.info("Ingredient to decode: " + ingredientString);
             String[] array = ingredientString.split(INGREDIENT_DIVIDER);
