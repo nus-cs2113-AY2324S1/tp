@@ -26,12 +26,14 @@ Github Repository
 
 
 ### Recipes
+
 | Command                       | User Story                                                                                                                     | Command                                         | Output                                                                                                                                                |
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Delete a Recipe               |
 | Filter Recipes by Ingredients | User has cravings for a ingredient item (such as rice or fish) and wants to see which recipes contain that specific ingredient | filter recipe i/INGREDIENT_NAME [i/...]         | Recipes that contain ingredients specified by command                                                                                                 |
 | Check Recipe                  |User wants to check if they have all the ingredients needed to start a recipe| check RECIPE_TITLE <br> OR <br> check RECIPE_ID | If there are missing ingredients, we will indicate the amount of each missing ingredient still needed. Otherwise, a good to go message will be shown! |
 | Plan Recipe                   |User wants to plan their groccery shopping for the week and wants to know ingredients needed for the week|plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]| All ingredients needed for recipes will be displayed and insufficient ingredients that need to be purchased will be shown too                         |
+| View All Available Recipes| User wants to see what which recipes they can execute based on availability of ingredients in the ingredient inventory|view ar|A list of all recipes that can be executed with current ingredients|
 
 ---
 
@@ -74,7 +76,4 @@ Here are some links to PRs I have reviewed:
 To view more of my comments on PRs, do take a look at this [tp comments dashboard](https://nus-cs2113-ay2324s1.github.io/dashboards/contents/tp-comments.html) and search for `charkty`.
 
 ---
-
-## Contributions beyond the project team
-
 
