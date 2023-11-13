@@ -23,10 +23,7 @@ public class ExecuteRecipeCommandTest {
         ingredients = new IngredientList();
         Ingredient egg = new Ingredient("egg", 4.0, IngredientUnit.PIECE);
         ingredients.addIngredient(egg);
-    }
 
-    @Test
-    public void executeRecipeCommand_oneIngredient_recipeExecuted() {
         // setting up recipe
         recipes = new RecipeList();
         String recipeTitle = "bread";
@@ -34,6 +31,10 @@ public class ExecuteRecipeCommandTest {
         String[] recipeIngredients = {"i/egg,2,pc"};
         Recipe newRecipe = new Recipe(recipeTitle, recipeSteps, recipeIngredients);
         recipes.addRecipe(newRecipe);
+    }
+
+    @Test
+    public void executeRecipeCommand_oneIngredient_recipeExecuted() {
 
         String userInput = "bread";
         executeRecipeCommand = new ExecuteRecipeCommand(ingredients, recipes, userInput);
@@ -57,8 +58,8 @@ public class ExecuteRecipeCommandTest {
     public void executeRecipeCommand_multipleIngredient_recipeExecuted() {
         // setting up recipe
         recipes = new RecipeList();
-        String recipeTitle = "bread";
-        String[] recipeSteps = {"step1", "step2"};
+        String recipeTitle = "toast";
+        String[] recipeSteps = {"butter the bread", "bake"};
         String[] recipeIngredients = {"i/egg,2,pc", "i/cheese,0.2,kg", "i/milk,400,ml" ,"i/sugar,100,g"};
         Recipe newRecipe = new Recipe(recipeTitle, recipeSteps, recipeIngredients);
         recipes.addRecipe(newRecipe);
@@ -71,7 +72,7 @@ public class ExecuteRecipeCommandTest {
         Ingredient sugar = new Ingredient("sugar", 150.0, IngredientUnit.GRAM);
         ingredients.addIngredient(sugar);
 
-        String userInput = "bread";
+        String userInput = "toast";
         executeRecipeCommand = new ExecuteRecipeCommand(ingredients, recipes, userInput);
         executeRecipeCommand.executeCommand();
 

@@ -97,9 +97,9 @@ public class Ui {
         drawDivider();
     }
 
-    public static void printUpdateIngredientsSuccess(String name, Double existingQuantity, Double quantityToAdd) {
+    public static void printUpdateIngredientsSuccess(String name, Double existingQuantity, Double newQuantity) {
         System.out.println("Ingredient: " + name + " has been successfully updated from: " + existingQuantity
-                + " to: " + (existingQuantity + quantityToAdd));
+                + " to: " + newQuantity);
         drawDivider();
     }
 
@@ -256,7 +256,7 @@ public class Ui {
 
     public static void printExecuteRecipeFail(String title) {
         System.out.println("You are missing some ingredients to execute " + title +
-                "\nPlease use the [start] command to check what you are missing");
+                "\nPlease use the [check] command to check what you are missing: \"check " + title +"\"");
         drawDivider();
     }
 
