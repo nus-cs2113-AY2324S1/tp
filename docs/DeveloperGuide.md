@@ -81,7 +81,7 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 1. The user start the program and the command will start automatically with a default path
 2. Once the command executed, it will try to create a txt file on the default path
 3. If file failed to create, throw an `IOException`
-4. Catch the `IOExceotion` and print error messages
+4. Catch the `IOException` and print error messages
 5. Create a `Scanner` Object s to get content from txt file
 6. If amount in txt file exceed limit or incorrect, throw `KaChinnnningException`
 7. Read the content on the file and add corresponding object to incomes or expenses list
