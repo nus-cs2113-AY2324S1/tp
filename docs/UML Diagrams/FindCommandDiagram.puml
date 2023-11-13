@@ -5,8 +5,8 @@
 
 hide footbox
 actor User
-participant "FindCommand" as FindCmd LOGIC_COLOR_T1
-participant "Inventory" as Inventory LOGIC_COLOR
+participant ": FindCommand" as FindCmd LOGIC_COLOR_T1
+participant ": Inventory" as Inventory LOGIC_COLOR
 
 User -> FindCmd: Execute 'Find' Command
 activate FindCmd

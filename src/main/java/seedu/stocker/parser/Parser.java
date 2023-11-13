@@ -198,19 +198,19 @@ public class Parser {
                 String name = matcher.group(1).trim();
                 String expiryDate = matcher.group(2).trim();
                 String serialNumber = matcher.group(3).trim();
-                Long quantity = Long.parseLong(matcher.group(4));
+                long quantity = Long.parseLong(matcher.group(4));
                 double sellingPrice = Double.parseDouble(matcher.group(5));
 
                 if (quantity < 1 || quantity > 999999999) {
-                    return new IncorrectCommand(String.format("Quantity should be between 1 and 999999999."));
+                    return new IncorrectCommand("Quantity should be between 1 and 999999999.");
                 }
                 if (name.isEmpty()) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             AddCommand.MESSAGE_USAGE));
                 }
                 if (!isValidSerialNumber(serialNumber)) {
-                    return new IncorrectCommand(String.format("Serial number should be in the format " +
-                            "of three capital letters followed by three numbers (e.g., ABC123)."));
+                    return new IncorrectCommand("Serial number should be in the format " +
+                            "of three capital letters followed by three numbers (e.g., ABC123).");
                 }
                 // Check if the expiry date has a valid format
                 if (!isValidDateFormat(expiryDate)) {
@@ -219,7 +219,7 @@ public class Parser {
                 }
                 // Check if sellingPrice is in the valid range (0.01 to 1000.00) and has up to 2 decimal places
                 if (sellingPrice < 0.01 || sellingPrice > 1000.00) {
-                    return new IncorrectCommand(String.format("Selling price should be between 0.01 and 1000.00."));
+                    return new IncorrectCommand("Selling price should be between 0.01 and 1000.00.");
                 }
 
                 return new AddCommand(name, expiryDate, serialNumber, quantity, sellingPrice);
@@ -346,7 +346,7 @@ public class Parser {
             Matcher matcher = pattern.matcher(args);
             if (matcher.matches() && matcher.groupCount() == 2) {
                 String name = matcher.group(1);
-                Long threshold = Long.parseLong(matcher.group(2));
+                long threshold = Long.parseLong(matcher.group(2));
                 return new SetThresholdCommand(name, threshold);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -363,7 +363,6 @@ public class Parser {
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 2) {
             String name = matcher.group(1).trim();
-            ;
             String description = matcher.group(2).trim();
             if (!name.isEmpty() && !description.isEmpty()) {
                 return new AddDescriptionCommand(name, description);
@@ -382,7 +381,6 @@ public class Parser {
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches() && matcher.groupCount() == 1) {
             String name = matcher.group(1).trim();
-            ;
             if (!name.isEmpty()) {
                 return new GetDescriptionCommand(name);
             } else {
