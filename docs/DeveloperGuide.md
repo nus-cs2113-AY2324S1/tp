@@ -4,13 +4,14 @@
 * [Developer Guide](#developer-guide)
   * [**Acknowledgements**](#acknowledgements)
   * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**General notes**](#general-notes)
   * [**Design**](#design)
     * [Architecture](#architecture)
-    * [How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other)
-    * [Ui Component](#ui-component)
-    * [Parser Component](#parser-component)
-    * [Storage Component](#storage-component)
-    * [Data Component](#data-component)
+    * [How the architecture components interact with each other](#how-the-architecture-components-interact-with-each-other)
+    * [Ui component](#ui-component)
+    * [Parser component](#parser-component)
+    * [Storage component](#storage-component)
+    * [Data component](#data-component)
   * [**Feature**](#feature)
     * [Add Dish](#add-dish)
     * [List Menu](#list-menu)
@@ -21,10 +22,16 @@
     * [Delete Dish](#delete-dish)
     * [Edit Price](#edit-price)
     * [Help](#help)
+  * [**Future Enhancements**](#future-enhancements)
+    * [Create an interface for `Pantry`](#create-an-interface-for-pantry)
+    * [Make `Ui` class singleton](#make-ui-class-singleton)
   * [**Product scope**](#product-scope)
     * [Target user profile](#target-user-profile)
     * [Value proposition](#value-proposition)
+  * [**Requirements**](#requirements)
+    * [Non-functional requirements](#non-functional-requirements)
     * [User stories](#user-stories)
+  * [**Glossary**](#glossary)
 <!-- TOC -->
 --------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
@@ -294,6 +301,19 @@ API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpComman
 
 When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequently calls the `showHelp()` method in `Ui`. In `showHelp()`, messages related to command usage will be retrieved and be printed out using by self-invoking `showToUserWithSpaceInBetweenLines(messages: String...)`.
 
+--------------------------------------------------------------------------------------------------------------------
+## **Future Enhancements**
+### Create an interface for `Pantry`
+   - **Problem**: `Pantry` class is used in testing of methods such as `addOrder`. With this implementation, we are unable to test the `addOrder` feature in isolation as any bugs in `Pantry` class could potentially affect the behaviour of `addOrder` feature.
+   - **Solution**: Instead of using the concrete `Pantry` class, `addOrder` could use an interface `PantryUtil` to access the required methods. A hard coded class that is less prone to bugs can be used to substitute the actual `Pantry` class by implementing a `PantryUtil` interface. <br>With this, we are able to test the method in isolation as we have removed the dependency on the actual `Pantry` class.
+### Make `Ui` class singleton
+   - **Problem**: As we need to use the same `Ui` instance for all methods to avoid repeated instantiation of `Scanner` which could slow down the application, the same `Ui` instance is being passed to the constructor for all `Command` classes. This makes the parameters for the constructor looks too long.
+   - **Solution**: Implement a static `getInstance` method in `Ui` class which, when it is called for the first time, creates a new instance of `Ui` and store it in a static constant in the `Ui` object. The method will return the `ui` object in the constant for subsequent `getInstance` call.<br>With this implementation, we no longer need to pass `ui` around as we can access the same `ui` object by calling `getInstance`.
+   <br>![Class diagram for singleton Ui](images/class/ui_singleton.png)
+   <br>*Figure 17: Class diagram for singleton Ui*
+   <br>![Sequence diagram for singleton Ui](images/sequence/ui_singleton.png)
+   <br>*Figure 18: Sequence diagram for `getinstance` call on `Ui`*
+   
 --------------------------------------------------------------------------------------------------------------------
 ## **Product scope**
 ### Target user profile
