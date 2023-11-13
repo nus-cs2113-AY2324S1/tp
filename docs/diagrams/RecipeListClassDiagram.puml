@@ -7,7 +7,7 @@ skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
 Class RecipeList
 Class Recipe
 Class RecipeIngredientList
-Class Tag
+Class "<<enumeration>>\nTag" as Tag
 Class RecipeStepList
 Class Ingredient
 Class Step
@@ -15,7 +15,7 @@ Class Step
 RecipeList -down-> "*" Recipe
 
 Recipe -down-> "1" RecipeIngredientList
-Recipe -down-> "0...4" Tag
+Recipe *-down-> "0...4" Tag
 Recipe -down-> "1" RecipeStepList
 
 RecipeIngredientList -down-> "1...*" Ingredient

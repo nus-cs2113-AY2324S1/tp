@@ -32,7 +32,7 @@ public class AddRecipeCommandTest {
         addRecipeCommand.executeCommand();
         assertEquals("bread", recipeList.getRecipe(0).getTitle());
         String step1 = recipeList.getRecipe(0).getRecipeSteps().getStepByIndex(0).getDescription();
-        assertEquals("step 1 instructions", step1);
+        assertEquals(Step.convertToStepIdTemplate("step 1 instructions",1), step1);
 
         // check ingredients
         RecipeIngredientList recipeIngredients = recipeList.getRecipe(0).getRecipeIngredients();
@@ -50,7 +50,8 @@ public class AddRecipeCommandTest {
         Step step1 = recipeStepList.getStepByIndex(0);
 
         // check step is correct
-        assertEquals("buy ingredients", step1.getDescription());
+
+        assertEquals(Step.convertToStepIdTemplate("buy ingredients",1), step1.getDescription());
 
         // check tag is correct
         assertEquals(Tag.NIGHT_BEFORE, step1.getTag());
@@ -78,12 +79,13 @@ public class AddRecipeCommandTest {
         Step step4 = recipeStepList.getStepByIndex(3);
         Step step5 = recipeStepList.getStepByIndex(4);
         Step step6 = recipeStepList.getStepByIndex(5);
-        assertEquals("buy ingredients", step1.getDescription());
-        assertEquals("store ingredients", step2.getDescription());
-        assertEquals("wash the ingredients", step3.getDescription());
-        assertEquals("cut the ingredients", step4.getDescription());
-        assertEquals("marinade", step5.getDescription());
-        assertEquals("cook", step6.getDescription());
+
+        assertEquals(Step.convertToStepIdTemplate("buy ingredients",1), step1.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("store ingredients",2), step2.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("wash the ingredients",3), step3.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("cut the ingredients",4), step4.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("marinade",5), step5.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("cook",6), step6.getDescription());
 
         assertEquals(Tag.NIGHT_BEFORE, step1.getTag());
         assertEquals(Tag.NIGHT_BEFORE, step2.getTag());
@@ -116,9 +118,9 @@ public class AddRecipeCommandTest {
         Step step2 = recipeStepList.getStepByIndex(1);
         Step step3 = recipeStepList.getStepByIndex(2);
 
-        assertEquals("buy ingredients", step1.getDescription());
-        assertEquals("wash the ingredients", step2.getDescription());
-        assertEquals("cook", step3.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("buy ingredients",1), step1.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("wash the ingredients",2), step2.getDescription());
+        assertEquals(Step.convertToStepIdTemplate("cook",3), step3.getDescription());
 
         assertEquals(30, step1.getEstimatedDuration());
         assertEquals(20, step2.getEstimatedDuration());
@@ -164,8 +166,9 @@ public class AddRecipeCommandTest {
         assertEquals("bread", recipeList.getRecipe(0).getTitle());
         String step1 = recipeList.getRecipe(0).getRecipeSteps().getStepByIndex(0).getDescription();
         String step2 = recipeList.getRecipe(0).getRecipeSteps().getStepByIndex(1).getDescription();
-        assertEquals("step 1 instructions", step1);
-        assertEquals("step 2 instructions", step2);
+
+        assertEquals(Step.convertToStepIdTemplate("step 1 instructions",1), step1);
+        assertEquals(Step.convertToStepIdTemplate("step 2 instructions",2), step2);
 
         // check ingredients
         RecipeIngredientList recipeIngredients = recipeList.getRecipe(0).getRecipeIngredients();

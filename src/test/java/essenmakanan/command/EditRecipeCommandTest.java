@@ -4,6 +4,7 @@ import essenmakanan.exception.EssenInvalidEditException;
 import essenmakanan.exception.EssenNullInputException;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +44,8 @@ public class EditRecipeCommandTest {
         editRecipeCommand = new EditRecipeCommand(userInput, recipes);
         editRecipeCommand.executeCommand();
 
-        assertEquals("new step 1", recipes.getRecipe(0).getRecipeStepByIndex(0).getDescription());
+        assertEquals(Step.convertToStepIdTemplate("new step 1",1),
+                recipes.getRecipe(0).getRecipeStepByIndex(0).getDescription());
     }
 
     @Test
@@ -55,8 +57,10 @@ public class EditRecipeCommandTest {
         editRecipeCommand.executeCommand();
 
         assertEquals("bread", recipes.getRecipe(0).getTitle());
-        assertEquals("new step 1", recipes.getRecipe(0).getRecipeStepByIndex(0).getDescription());
-        assertEquals("new step 2", recipes.getRecipe(0).getRecipeStepByIndex(1).getDescription());
+        assertEquals(Step.convertToStepIdTemplate("new step 1",1),
+                recipes.getRecipe(0).getRecipeStepByIndex(0).getDescription());
+        assertEquals(Step.convertToStepIdTemplate("new step 2",2),
+                recipes.getRecipe(0).getRecipeStepByIndex(1).getDescription());
     }
 
     @Test
@@ -68,8 +72,10 @@ public class EditRecipeCommandTest {
         editRecipeCommand.executeCommand();
 
         assertEquals("bread", recipes.getRecipe(0).getTitle());
-        assertEquals("new step 1", recipes.getRecipe(0).getRecipeStepByIndex(0).getDescription());
-        assertEquals("new step 2", recipes.getRecipe(0).getRecipeStepByIndex(1).getDescription());
+        assertEquals(Step.convertToStepIdTemplate("new step 1",1),
+                recipes.getRecipe(0).getRecipeStepByIndex(0).getDescription());
+        assertEquals(Step.convertToStepIdTemplate("new step 2",2),
+                recipes.getRecipe(0).getRecipeStepByIndex(1).getDescription());
     }
 
     @Test

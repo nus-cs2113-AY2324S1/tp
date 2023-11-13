@@ -56,6 +56,10 @@ public class Step {
         this.estimatedDuration = estimatedDuration;
     }
 
+    public static String convertToStepIdTemplate(String stepDescription, int id) {
+        return stepDescription + (" (step id = " + id + ")");
+    }
+
     @Override
     public String toString() {
         String detailedStep = "You need to " + getDescription();

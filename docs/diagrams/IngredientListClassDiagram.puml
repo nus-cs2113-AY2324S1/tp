@@ -4,9 +4,55 @@ skinparam arrowThickness 1.1
 skinparam arrowColor CLASS_ARROW_COLOR
 skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
 
-Class IngredientList
-Class Ingredient
-Class RecipeIngredientList
+Class IngredientList {
+    - ingredients: Ingredient[]
+
+    + getIngredients(): Ingredient[]
+    + getIngredient(index: Integer): Ingredient
+    + getSize(): Integer
+    + isEmpty(): Boolean
+    + exist(name: String): Boolean
+    + exist(index: Integer): Boolean
+    + getIndex(ingredient: Ingredient): Integer
+    + getIndex(name: String): Integer
+    + addIngredient(ingredient: Ingredient): Void
+    + updateIngredient(ingredient: Ingredient): Void
+    + {static}editIngredient(ingredient: Ingredient, details: String[]): Void
+    + deleteIngredient(index: Integer): Void
+    + listIngredients(): Void
+    + equals(list: IngredientList): Boolean
+
+}
 
 
+Class Ingredient {
+    - name: String
+    - quantity: Double
+
+    + getName(): String
+    + setName(name: String): Void
+    + getQuantity(): Double
+    + setQuantity(quantity: Double): Void
+    + getUnit(): IngredientUnit
+    + setUnit(unit: IngredientUnit): Void
+    + toString(): String
+    + equals(ingredient: Ingredient): Boolean
+}
+
+Class "<<enumeration>>\nIngredientUnit" as IngredientUnit {
+    GRAM
+    KILOGRAM
+    MILLILITER
+    LITER
+    TEASPOON
+    TABLESPOON
+    CUP
+    PIECE
+
+    + getValue(): String
+}
+
+IngredientList -down-> "*" Ingredient
+
+Ingredient "*" *-down-> "1" IngredientUnit
 @enduml

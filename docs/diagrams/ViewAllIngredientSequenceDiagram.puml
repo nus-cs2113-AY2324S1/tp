@@ -42,6 +42,8 @@ deactivate Ui
 ViewIngredientCommand --> EssenMakanan
 deactivate ViewIngredientCommand
 
+EssenMakanan --> User: output: list of ingredients
+
 deactivate EssenMakanan
 
 @enduml

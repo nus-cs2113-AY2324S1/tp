@@ -46,7 +46,7 @@ If the `recipes.txt` file does not exist, no data is retrieved and RecipeList wi
 <img src="images/RecipeListClassDiagram.png" width="400"/>
 
 ### Ingredient component
-
+![IngredientListClassDiagram.png](images%2FIngredientListClassDiagram.png)
 
 
 ### Storage component
