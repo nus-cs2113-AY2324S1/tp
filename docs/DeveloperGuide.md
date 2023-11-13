@@ -1,6 +1,6 @@
-# Developer Guide
+# **Developer Guide**
 
-## Acknowledgements
+## **Acknowledgements**
 
 + Acknowledgement to the [CS2113 Website](https://nus-cs2113-ay2324s1.github.io/website/admin/tp-deliverables.html#deliverable-project-portfolio-page-ppp) for giving us design guidelines.
 + Acknowledgement to [Dr Akshay Narayan](https://www.comp.nus.edu.sg/cs/people/anarayan/), and Teaching Assistant for their guidance.
@@ -8,9 +8,9 @@
 + Acknowledgement to the [diagram tool](https://app.diagrams.net) for facilitating drawing of diagrams
 + Acknowledgement to [Developer Guide Example](https://se-education.org/addressbook-level3/DeveloperGuide.html#acknowledgements) for illustration.
 
-## Design & implementation
+## **Design & implementation**
 
-### Design & Architecture
+### **Design & Architecture**
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -29,9 +29,9 @@ As the input is processed and called by one of the two main classes,
 subsequent methods and features are called by children classes. The 
 low-class explanations will be given below.
 
-### `flashcard` package
+### **`flashcard` package**
 
-#### Package structure overview 
+#### **Package structure overview** 
 
 The API of the `flashcard` package is defined in [`FlashcardComponent.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardComponent.java).
 
@@ -69,7 +69,7 @@ top-level `flashcard` package integrate with each other:
 
 ![class diagram of classes providing flashcard functionality](Diagrams/flashcard-diagrams/overview_classes.svg)
 
-#### Rough control flow overview
+#### **Rough control flow overview**
 
 The process of processing the initial user input and figuring out which 
 command to  execute based on this user input is handled by the 
@@ -83,15 +83,64 @@ Put into a sequence diagram flow, the above-mentioned workflow looks like this:
 
 ![sequence diagram of processing the list flashcards input](Diagrams/flashcard-diagrams/overview_sequence.svg)
 
-##### `flashcard.command` package
+ghgh
+
+#### **`flashcard.command` package**
 
 The `flashcard.command` package contains the classes representing the 
-different flashcard commands, e.g. the `ListFlashcardCommand` class 
-represents the "list flashcards" command and so on.
+different flashcard commands.
+
+These are the classes representing the different commands:
+- [`CreateFlashcardCommand.java`]()
+- [`DeleteAllFlashcardsCommand.java`]()
+- [`DeleteFlashcardCommand.java`]()
+- [`ListFlashcardsCommand.java`]()
+- [`StartReviewCommand.java`]()
+
+All these classes inherit from the abstract class `FlashcardCommand` and 
+define its `execute` method. This method serves as the entire API of a 
+`FlashcardCommand`: The `execute` method is passed a scanner and an instance 
+of `FlashcardList` that represents the currently used flashcards and then 
+performs any actions necessary to execute the respective command.
+
+Subclasses of `FlashcardCommand` are free to implement any additional 
+private or protected fields and/or methods that are required for their 
+internal operation. In this regard, because the commands all achieve very 
+different goals (listing flashcards vs creating new flashcards), the different 
+subclasses of `FlashcardCommand` can vary quite heavily. Therefore, in the 
+interest of brevity, the individual subclasses are not explained in furhter 
+detail and the reader is instead referred to their respective source code in 
+the `src/main/java/seedu.duke/flashcard/command` directory.
+
+##### "Dual Commands": Offering different input options for beginner vs expert users
+
+As already explained in the user guide, there are so-called "Dual Commands" 
+that can be invoked in two different ways: an easy, but more time-consuming way
+for  beginner users who want as much guidance as possible; or a less
+time-consuming, but more complicated way for expert users who don't need
+additional guidance. Such "dual commands" are implemented as subclasses of 
+the abstract class `DualFlashcardCommand`
 
 ![class diagram of flashcard.command package](Diagrams/flashcard-diagrams/command_package_classes.svg)
 
-### Storage Components
+#### **`flashcard.review` package**
+
+#### **`flashcard.exceptions` package**
+
+This package contains the `FlashcardException` base class from which all 
+flashcard-specific exceptions are derived.
+
+Individual, flashcard-specific exceptions are implemented as subclasses of 
+the `FlashcardException` class. For further details, you can see the Javadoc
+comments in their source code.
+
+Currently, the flashcard-specific exceptions are:
+
+- []
+
+
+
+### **Storage Components**
 
 API: `FlashcardStorage.java`
 
@@ -106,12 +155,11 @@ The `FlashcardStorage` component,
 
 `EventStorage` has similar structure. (It was omitted to avoid redundancy.)
 
-
-### Calendar Components
+### **Calendar Components**
 
 API: `CalendarManager.java`
 
-#### Command Package
+#### **Command Package**
 
 The package has 7 files in it for users to command their calendar. Those files are 
 AddEventCommand, DeleteAllEventsCommand, DeleteEventCommand, EventCommand, FindEventCommand
@@ -122,7 +170,7 @@ an abstract class that forces other 6 commands to have an execute method.
 Each command files execute its own commands. The UnknownCommand file handles the exceptions,
 such as if the user commands something that doesn't exist
 
-#### Calendar Package
+#### **Calendar Package**
 
 The calendar package excluding the command package has 8 classes.
 The Calendar class integrates flashcards and calendar events, allowing for interactions between the 2 packages.
@@ -136,9 +184,9 @@ Calendar package Class Diagram:
 CalendarManager Sequence Diagram:
 ![CalendarManager Sequence Diagram](photo/CalendarManagerSequenceDiagram.drawio.png)
 
-## Product scope
+## **Product scope**
 
-### Target user profile
+### **Target user profile**
 
 TaskLinker is tailored towards university students who use flashcards to 
 study for their courses and need an easy way to schedule and plan the 
@@ -150,13 +198,13 @@ terminal over a GUI that looks more impressive but is slower to use.
 
 As such, computer science students represent good target users of TaskLinker.
 
-### Value proposition
+### **Value proposition**
 
 TaskLinker is a CLI-tool for helping university students memorize flashcards
 and track their flashcard progress as well as general academic progress in
 the courses they are taking.
 
-## User Stories
+## **User Stories**
 
 | Version | As a ...                  | I want to ...                                                  | So that I can ...                                                                             |
 |---------|---------------------------|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
@@ -173,7 +221,7 @@ the courses they are taking.
 | v2.0    | user                      | delete all events from my Calendar                             | don't need to remove events one by one                                                        |
 | v2.0    | user                      | add a goal event to my Calendar                                | remember how many flashcards needs to be reviewed by a certain deadline                       |
 
-## Non-Functional Requirements
+## **Non-Functional Requirements**
 
 + Software Requirements:
   1. The TaskLinker should be able to run on one of Windows, macOS, or Linux operating systems.
@@ -193,7 +241,7 @@ the courses they are taking.
   5. The application can be used by anyone who can read and type.
 
 
-## Glossary
+## **Glossary**
 
 * *TaskLinker* - CLI-tool for helping university students memorize flashcards
   and track their flashcard and general academic progress in the courses they are
@@ -209,11 +257,11 @@ the courses they are taking.
 * *DeveloperGuide* - A guide for other developers to read to understand the application.
 * *UserGuide* - A guide for the users  to read to understand the application.
 
-## Instructions for manual testing
+## **Instructions for manual testing**
 
 *Given below are the instructions for manual testing the TaskLinker.*
 
-### Testing launching and exiting the application
+### **Testing launching and exiting the application**
 Launching the application
   1. download the jar file from the release page.
   2. open a terminal and navigate to the directory where the jar file is located.
@@ -223,7 +271,7 @@ Exiting the application
   1. type `exit` in the command box and press enter.
   2. the application will exit.
 
-#### Testing adding an event to the calendar
+#### **Testing adding an event to the calendar**
 
 Test Case #1 (Everything Works):
 
@@ -245,7 +293,7 @@ When does it end?: <b>2023-12-20T11:40:30</b>
   End time is before or equal to the start time. Please enter the correct end time.
 </pre>
 
-#### Testing adding a goal event to the calendar
+#### **Testing adding a goal event to the calendar**
 
 Test Case #1 (Everything Works):
 
@@ -269,7 +317,7 @@ How many flashcard to review by then?: <b>r</b>
     Invalid integer input. Please try again.
 </pre>
 
-#### Testing deleting an event from the calendar
+#### **Testing deleting an event from the calendar**
 
 Test Case #1 (Everything Works):
 
@@ -287,7 +335,7 @@ Enter your command: <b>delete</b>
     Invalid integer input. Please try again.
 </pre>
 
-#### Testing finding an event from the Calendar
+#### **Testing finding an event from the Calendar**
 
 Test Case #1 (Everything Works):
 
@@ -306,7 +354,7 @@ Enter your command: <b>find</b>
     Invalid integer input. Please try again.
 </pre>
 
-#### Testing listing all events from the Calendar
+#### **Testing listing all events from the Calendar**
 
 Test Case #1 (Everything Works):
 

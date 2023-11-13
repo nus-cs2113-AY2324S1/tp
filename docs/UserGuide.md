@@ -70,6 +70,23 @@ difficulty number, the harder). Every flashcard is identified by a unique id
 (Flashcard ids don't necessarily start at zero and are not necessarily
 consecutive. Don't worry, this is totally fine and the planned behavior!).
 
+#### **"Dual Commands": Different input options for beginner vs expert users**
+
+We know that not all users want the same. Same want more simplicity, whilst 
+others want more sophisticated tools that speed up their working speed.
+To cater to both groups of users, TaskLinker's flashcards features offer
+so-called "dual commands" that can be invoked in two different ways: an easy,
+but more time-consuming way for beginner users who want as much guidance as
+possible; or a less time-consuming, but more complicated way for expert users
+who don't need additional guidance.
+
+Currently, the following commands are dual commands:
+
+- [`review flashcards`](#reviewing-your-flashcards-review-flashcards)
+- [`delete flashcard`](#deleting-a-flashcard-delete-flashcard)
+
+For more information, see the respective sections explaining their usage.
+
 #### **Listing all flashcards: `list flashcards`**
 
 Prints out a list of all flashcards that shows each flashcard's front text 
@@ -306,9 +323,9 @@ Enter your command: <b>delete all flashcards</b>
     All your flashcards have been successfully deleted.
 </pre>
 
-### Calendar-related features
+### **Calendar-related features**
 
-#### General explanation of flashcards
+#### **General explanation of flashcards**
 
 TaskLinker's calendar feature allows users to manage their time effectively 
 by adding, listing, finding, and deleting events. Events in the calendar have a 
@@ -328,7 +345,7 @@ Here is your features list:
 
 Users can use the above features to handle their events`
 
-#### Adding an event to the calendar: `add event`
+#### **Adding an event to the calendar: `add event`**
 
 Adds an event to the calendar with start and end time. 
 
@@ -364,7 +381,7 @@ Event 'Do HW' From: 2023-12-20T12:30:30, To: 2023-12-20T13:40:30
 has been added to your Calendar
 </pre>
 
-#### Adding a goal event to the calendar: `add goal event`
+#### **Adding a goal event to the calendar: `add goal event`**
 
 Adds a goal of reviewing flashcards as an event to the calendar.
 
@@ -396,7 +413,7 @@ Goal 'Do Flashcards' review 20 flashcards by: 2023-12-20T12:30:30 (Reviewed: 0)
 has been added to your Calendar
 </pre>
 
-#### Delete an event from the calendar: `delete event`
+#### **Delete an event from the calendar: `delete event`**
 
 Deletes an event from the calendar with event name.
 
@@ -423,7 +440,7 @@ What's the event?: <b>hello</b>
     hello has been deleted from your Calendar!
 </pre>
 
-#### Delete all events from the Calendar: `delete all events`
+#### **Delete all events from the Calendar: `delete all events`**
 
 Deletes all events from the calendar.
 
@@ -437,7 +454,7 @@ Enter your command: <b>delete all events</b>
     All your events have been successfully deleted from the Calendar.
 </pre>
 
-#### Find an event from the Calendar: `find event`
+#### **Find an event from the Calendar: `find event`**
 
 Finds an event from the calendar.
 
@@ -465,7 +482,7 @@ What's the event?: <b>Do HW</b>
     These events have been found
 </pre>
 
-#### List all events from the Calendar: `list events`
+#### **List all events from the Calendar: `list events`**
 
 Lists all events from the calendar
 
@@ -482,7 +499,7 @@ Enter your command: <b>list events</b>
 --------------------------------------------------------------------------------
 </pre>
 
-## FAQ
+## **FAQ**
 
 **Q**: Where can I find my flashcard and calendar data?
 
@@ -506,7 +523,7 @@ Every event and flashcard are automatically save after each command.
 
 **A**: Enter "exit" for the command.
 
-## Command Summary
+## **Command Summary**
 
 * [Listing all flashcards](#listing-all-flashcards-list-flashcards): `list 
   flashcards`
