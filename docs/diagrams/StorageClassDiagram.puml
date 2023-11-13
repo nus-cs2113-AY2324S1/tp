@@ -1,0 +1,11 @@
+@startuml
+!import style.puml
+hide members
+hide circle
+
+Storage ..> "1" TransactionList : read/write
+Storage ..> Parser : uses >
+
+TransactionList *-- Transaction : contains >
+
+@enduml
