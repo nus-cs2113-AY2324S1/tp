@@ -1061,12 +1061,6 @@ which they could use to take quizzes to ensure their understanding of the topic.
 | v2.0    | User aiming for improvement           | I can mark a question as "difficult" or "easy" for later review                   | optimize my learning.                                                     |
 | v2.0    | User seeking a challenge              | I can practice questions in a random order                                        | test my knowledge comprehensively.                                        |
 | v2.0    | User seeking structure                | I can practice questions in a sequential order                                    | follow a specific learning path.                                          |
-| v2.1    | user aiming for accuracy              | I can see how many questions I've answered correctly                              | track my proficiency.                                                     |
-| v2.1    | user tracking progress                | I can reset the progress of a specific flashcard deck                             | start fresh.                                                              |
-| v2.1    | time-conscious user                   | I can set a timer for each flashcard question during practice                     | manage my study sessions effectively.                                     |
-| v2.1    | goal-oriented user                    | I can view my overall progress and performance statistics                         | gauge my improvement.                                                     |
-| v2.1    | user aiming for improvement           | I can see how many questions I've answered incorrectly                            | focus on weak areas.                                                      |
-| v2.1    | user committed to learning            | I can review the questions I've answered incorrectly                              | reinforce my knowledge.                                                   |
 
 ## Non-Functional Requirements
 
@@ -1090,7 +1084,7 @@ provide information for executing complex instructions.
 ### Launch
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest `tp_version_2.0.jar` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases/download/Version_2_0/tp_version_2.0.jar).
+2. Download the latest `QuizHub.jar` from [here](https://github.com/AY2324S1-CS2113-W12-1/tp/releases/).
 3. Copy the file to the folder you want to use as the home folder for your QuizHub.
-4. Open a command terminal, cd into the folder you put the `tp_version_2.0.jar` file in, and use the java -jar 
-`tp_version_2.0.jar` command to run the application and launch the CLI.
+4. Open a command terminal, cd into the folder you put the `QuizHub.jar` file in
+5. Use the `java -jar QuizHub.jar` command to run the application in the command-line interface.

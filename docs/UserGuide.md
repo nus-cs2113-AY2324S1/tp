@@ -31,6 +31,7 @@ from all fields of study.
    * `[question]` would indicate that you should replace the placeholder with a question
    * Specific requirements of the values would be found in the details in [Features](#features) section
 
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -62,6 +63,8 @@ Notes:
 * Ver 2.1 will only list commands. Future versions will include autofill and scrolling
   (multiple pages of the help menu)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding short-answer questions and their answers: `short`
 
 [Back to Table of Contents](#table-of-contents)
@@ -72,7 +75,7 @@ difficulty level.
 Format: `short [question]/[answer]/[module]/[difficulty]`
 * The difficulty level should only be of `easy`, `normal`, and `hard`
 * The "/" character should be replaced "\slash" keyword instead.
-* The "|" character is not allowed and will be removed if present in any fields.
+* The "pipe" character is not allowed and will be removed if present in any fields.
 * The answer cannot be exactly "\exitquiz" as it is an escape sequence
 
 Example of usage:
@@ -95,6 +98,8 @@ Notes:
 * If any fields are blank or invalid, the app will prompt you to re-enter the question-answer set,
   the app does not support blank fields
 
+<div style="page-break-after: always;"></div>
+
 ### Adding multiple-choice questions and their answers: `mcq`
 
 [Back to Table of Contents](#table-of-contents)
@@ -105,8 +110,8 @@ difficulty level.
 Format: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer index]/[module]/[difficulty]`
 
 * The difficulty level should only be of `easy`, `normal`, and `hard`
-* The ` / ` character should be replaced ` \slash ` keyword instead.
-* The ` pipe ` character is not allowed and will be removed if present in any fields.
+* The "/" character should be replaced "/slash" keyword instead.
+* The "pipe" character is not allowed and will be removed if present in any fields.
 
 * **Command**: `mcq what is the value of pi?/2.71/9.81/3.14/0/3/math/Easy` <br>
   **Output**: <br>
@@ -122,6 +127,8 @@ Format: `mcq [question]/[option 1]/[option 2]/[option 3]/[option 4]/[answer inde
   [M][ ] is 5 / 3 rational? / yes / no / maybe / all of the above / 1 | fraction | EASY
   Now you have 6 questions in the list! UWU
   ```
+
+<div style="page-break-after: always;"></div>
 
 ### List Questions `list`
 
@@ -163,6 +170,8 @@ Notes:
 * The program only supports deleting one question at a time, so entering multiple question numbers will result in the program prompting you to enter only 1 question number.
 * The program accepts only a valid integer question number within the range of the number of available questions, any other form of inputs will result in the program prompting you to re-enter a valid command.
 
+<div style="page-break-after: always;"></div>
+
 ### Find question/answer/module `find`
 
 [Back to Table of Contents](#table-of-contents)
@@ -193,6 +202,8 @@ Examples of usage:
 Notes:
 * As long as the search keyword string is a substring of the question description of a question stored in the question and answer bank, it will be included in the search result. Please refer to the above examples as an illustration of this property.
 * The search is non-case-sensitive. Please refer to the above examples as an illustration of this property.
+
+<div style="page-break-after: always;"></div>
 
 ### Edit question/answer `edit`
 
@@ -235,6 +246,8 @@ Notes:
   the app will prompt you to re-enter the edit command
 * The app only supports changing either description, answer, or one option at a time, not both together
 
+<div style="page-break-after: always;"></div>
+
 ### Start quiz `start`
 
 [Back to Table of Contents](#table-of-contents)
@@ -268,6 +281,8 @@ Taking the quiz:
 Notes:
 * If the specified module is not part of the list, an exception will be thrown and the user will be notified
   with a prompt to write the command in the specified format.
+
+<div style="page-break-after: always;"></div>
 
 ### Shuffling Questions `shuffle`
 
@@ -326,6 +341,8 @@ Notes:
 Exits the program <br>
 Format: `bye`
 
+<div style="page-break-after: always;"></div>
+
 ### Store and Edit Question Pool Using The Question File
 
 [Back to Table of Contents](#table-of-contents)
@@ -369,6 +386,9 @@ M | undone | derivative of x^2 / x^2 / 2x / x / x^3 / 2 | MA1521 | EASY
 M | undone | Should we use arrowhead code / yes / no / maybe / unsure / 2 | CS2113 | EASY
 M | undone | Name of Java mascot / duke / duck / dick / drew / 1 | CS2113 | EASY
 ```
+
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 [Back to Table of Contents](#table-of-contents)
@@ -388,6 +408,8 @@ the user. The different format is used in order to parse questions without error
 **A**: During user testing, it was found that users sometimes will 
 revise by looking at all the questions with `list`, as such functionality to 
 shuffle the questions permanently was added.
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
