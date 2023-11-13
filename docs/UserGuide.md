@@ -255,8 +255,11 @@ Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml
 Output:
 ```
 Added to stock:
-Ingredient: chicken		Qty: 500g
-Ingredient: milk		Qty: 1000ml
+Ingredient: milk
+Total Qty: 1000ml
+
+Ingredient: chicken
+Total Qty: 500g
 ```
 
 
