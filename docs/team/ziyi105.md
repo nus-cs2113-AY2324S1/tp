@@ -67,6 +67,8 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 3. Known Issues
 4. Glossary
 5. General formatting
+   - Ensure consistency of features descriptions and table formatting
+   - Correct typos and grammar error
 
 ### Contributions to DG
 [DeveloperGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html)
@@ -84,12 +86,14 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 5. Non-Functional Requirements
 6. Glossary
 7. General formatting
+   - Ensure consistency of features descriptions and diagrams
+   - Correct typos and grammar error
 
 ### Other Contributions to Team-based Task
 1. Maintaining issue tracker with Dexter by labeling issues
 2. Adding theme to UG & DG
 3. Approving and merging PRs
-4. Reminding team members to use Github effectively (although some of my reminders got ignored :")
+4. Reminding team members to use github effectively (although some of my reminders were ignored :")
     - I encouraged my team members to report bugs using issue tracker on Github instead of using Telegram. (e.g., [#323](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/323))
     - I requested PR reviews from my team members as I noticed they haven't had a chance to do any review. (e.g., [PR #51](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51))
 
