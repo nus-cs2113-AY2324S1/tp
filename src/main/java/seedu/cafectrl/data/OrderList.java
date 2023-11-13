@@ -88,8 +88,8 @@ public class OrderList {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
             //if dish is not found in aggregated orders, add the dish into it
             if (index == -1) {
-                aggregatedOrders.add(new Order(order.getOrderedDish(), order.getQuantity(), order.getTotalOrderCost()
-                        , true));
+                aggregatedOrders.add(new Order(order.getOrderedDish(), order.getQuantity(), order.getTotalOrderCost(),
+                        true));
             } else {
                 //else add the quantities and totalCost accordingly
                 aggregatedOrders.get(index)
