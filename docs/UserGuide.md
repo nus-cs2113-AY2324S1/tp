@@ -812,6 +812,8 @@ Displaying piechart for expense
 
 Example of usage: `vis /t income /c bar`
 
+Example of output:
+
 ```
 Displaying barchart for income
 ```
@@ -819,6 +821,8 @@ Displaying barchart for income
 ![](images/vis/barOuput.png)
 
 Example of usage: `vis /t income /c radar`
+
+Example of output:
 
 ```
 Displaying radarchart for income
