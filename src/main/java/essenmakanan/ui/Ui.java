@@ -191,7 +191,6 @@ public class Ui {
 
     public static void printSpecificRecipe(RecipeList recipes, int recipeIndex) {
         recipes.viewRecipe(recipeIndex);
-        drawDivider();
     }
 
     public static void printFilteredRecipes(RecipeList filteredRecipes, String ingredientName) {
