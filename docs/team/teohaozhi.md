@@ -38,8 +38,8 @@ GUI apps.
 -**Contributions to the DG**
  * Hao Zhi came up with the inital template of the developer guide and added documentation for the following section of 
    the developer guide:
-   * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#login-system-component),[Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#5-help-command), [SaveDrugs Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-savedrugs-command), [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-addvendor-command),
-     [listVendors Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#7-listvendors-command)
+   * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#login-system-component),[Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#5-help-command), [SaveDrugs Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-savedrugs-command), [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#9-addvendor-command),
+     [listVendors Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#11-listvendors-command)
  * UML Diagrams
    * [Architecture Diagram under Design & Implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/Architecture_Diagram.png),[Login System Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/StockerToLoginSystem.png),
      [SaveDrugs Command Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveDrugsCommandDiagram.png)  
