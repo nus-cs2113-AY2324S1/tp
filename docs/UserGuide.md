@@ -378,7 +378,8 @@ begin from the second line onwards, with each question taking one line
   * Module - Module for the question
   * Difficulty - EASY, NORMAL or HARD
 * Using arbitrary values may prevent the question from being loaded normally,
-  please use the add question feature in the program if you are unsure.
+  questions that cannot be loaded will be removed from the storage file.
+  Please use the add question feature in the program if you are unsure.
 * You may find a sample of the storage file in the next page
 
 <div style="page-break-after: always;"></div>

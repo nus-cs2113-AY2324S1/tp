@@ -333,6 +333,9 @@ public class Parser {
         String editField = commandEditTokens[0];
         String newValue = commandEditTokens[1].replace("\\slash", "/").replace(
                 "|", "").replace("/", "");
+        if (newValue.isEmpty()) {
+            return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG);
+        }
         return new CommandEdit(qnIndex, editField, newValue);
     }
 
