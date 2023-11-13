@@ -39,7 +39,7 @@ public class CafeCtrl {
     private CafeCtrl() {
         initLogger();
         this.ui = new Ui();
-        this.storage = new Storage(this.ui);
+        this.storage = new Storage(ui);
         this.pantry = this.storage.loadPantryStock();
         this.menu = this.storage.loadMenu();
         this.sales = this.storage.loadOrderList(menu);
@@ -74,7 +74,7 @@ public class CafeCtrl {
             }
         } while (!command.isExit());
 
-        this.storage.saveAll(this.menu, this.sales, this.pantry);
+        storage.saveAll(menu, sales, pantry);
         logger.info("CafeCtrl terminated.");
     }
 
