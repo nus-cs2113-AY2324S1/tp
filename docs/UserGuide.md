@@ -50,8 +50,8 @@ _/        _/    _/    _/      _/        _/          _/      _/        _/
 ---------------------------------------------------
 <!---@@author ziyi105--->
 ## Summary
-In CaféCTRL, the user is able to craft and `add dish` to the menu. If needed, he/she can `delete` or `edit` the price of the dish that is already in the menu. 
-When there is a new order, the user can `add the order` and prepare it. If there is insufficient stock of ingredients, the user can `buy ingredients`. At the end of the day, the user can check the `sales of the day` or the `total sales` since day one. The user can advance to the `next day` or go back to the `previous day` to take in orders of the day. 
+In CaféCTRL, the user is able to craft and **add dish** to the menu. If needed, he/she can **delete** a dish or *edit* the price of the dish that is already in the menu.
+When there is a new order, the user can **add the order** and prepare it. If there is insufficient stock of ingredients, the user can **buy ingredients**. At the end of the day, the user can check the **sales of the day** or the **total sales** since day one. The user can advance to the **next day** or go back to the **previous day** to take in orders of the day.
 
 ---------------------------------------------------
 <!---@@author DextheChik3n--->
@@ -67,6 +67,10 @@ When there is a new order, the user can `add the order` and prepare it. If there
     `add name/Christmas Ham price/50.00 ingredient/Ham qty/1000g`<br>
     or as <br>
     `add name/chicken rice price/2.00 ingredient/rice qty/100g, ingredient/chicken qty/200g, ingredient/garlic qty/100g`
+> - Items in angle brackets shows the different arguments that must be used at least once.<br>
+    e.g. `qty/INGREDIENT2_QTY<g/ml>`<br>
+    can be used as<br>
+    `qty/100g` or `qty/100ml`
 > - Extraneous parameters for commands that do not take in parameters (such as `help`, `list_menu`, `bye`) will be ignored. <br>
     e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -140,24 +144,29 @@ help
 ### Adding a dish : `add`
 Adds a dish consisting of its ingredients to the menu
 
-Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
+Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY<g/ml>[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY<g/ml>, ...]`
 
 * `DISH_NAME` can contain up to 35 alphanumeric characters with whitespaces
 * `PRICE` must be a positive number and can be up to 2 decimal places.
 * `INGREDIENT_QTY` must be a positive integer and contain the unit **ml** or **g** specifically.
-
   * e.g. `qty/50g` or `qty/1000ml`
+  * Ingredients that are solid should use the `g` unit while ingredients that are liquid should use the `ml` unit
 
 Example:
 ```
 > add name/chicken rice price/2.00 ingredient/rice qty/100g, ingredient/chicken qty/200g, ingredient/soup qty/50ml
 You have added the following dish...
-Dish Name: chicken rice
-Dish Price: $2.00
-chicken rice Ingredients: 
-rice - 100g
-chicken - 200g
-soup - 50ml
++-------------------------------------------------------+
+| Dish: chicken rice                                    |
++----------------------------------------+--------------+
+| Price: $2.00                                          |
++----------------------------------------+--------------+
+| Ingredient                             + Quantity     |
++----------------------------------------+--------------+
+| rice                                   | 100g         |
+| chicken                                | 200g         |
+| soup                                   | 50ml         |
++-------------------------------------------------------+
 ```
 
 <!---@@author ShaniceTang--->
@@ -236,9 +245,9 @@ Example:
 ### Buying an ingredient : `buy_ingredient`
 Adds one or more ingredients to the pantry
 
-Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
+Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY<g/ml>[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY<g/ml>, ...]`
 
-* `INGREDIENT_QTY` must contain the unit ml or g specifically
+* `INGREDIENT_QTY` must be a positive integer and contain the unit ml or g specifically
     * e.g. `qty/50g` or `qty/1000ml`
 
 Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`
@@ -404,6 +413,7 @@ Format: `bye`
 - The application is unable to decode the data text files if they have been edited in the wrong decoding format.
 - The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
 - The application is unable to support unit conversion, hence only ml and g are accepted as ingredient unit and the use of unit must be constant for the same ingredient.
+- The application is unable to save data for `Menu`, `Pantry` and `OrderList` if it is force exited using Ctrl+C command.
 - The application currently accepts any valid dish name from orders.txt as a valid dish made on a given day, regardless of its presence in the current menu. 
   - This decision ensures that orders remain intact even if dishes are removed from the menu, allowing for a comprehensive record of all transactions.
   - Restricting orders to only those present in the current menu would lead to unintentional deletion of orders containing dishes no longer available.
@@ -413,22 +423,22 @@ Format: `bye`
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
-| Action                    | Format, Examples                                                                                                                                                                                                                                       |
-|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                   | `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY [, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`<br><br/>Example:<br/>`add name/chicken rice price/3.00 ingredient/rice qty/50g, ingredient/chicken qty/100g` |
-| **List Menu**             | `list_menu`                                                                                                                                                                                                                                            |
-| **List Ingredients**      | `list_ingredients index/DISH_INDEX`<br><br/>Example:<br>`list_ingredients index/1`                                                                                                                                                                     |
-| **Delete**                | `delete DISH_INDEX`<br><br/>Example:<br>`delete 1`                                                                                                                                                                                                     |
-| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br><br/>Example:<br>`edit_price index/1 price/4.50`                                                                                                                                                      |
-| **List Sale**             | `list_total_sales`                                                                                                                                                                                                                                     |
-| **List Sale by Day**      | `list_sale day/DAY_TO_DISPLAY` <br><br/>Example:<br>`list_sale day/ 1`                                                                                                                                                                                 |
-| **View Ingredient Stock** | `view_stock`                                                                                                                                                                                                                                           |
-| **Buy Ingredients**       | `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`<br><br/>Example<br>`buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`                                   |
-| **Add Order**             | `add_order name/DISH_NAME qty/QUANTITY`<br><br/>Example:<br>`add_order name/chicken rice qty/2`                                                                                                                                                        |
-| **Previous Day**          | `previous_day`                                                                                                                                                                                                                                         |
-| **Next Day**              | `next_day`                                                                                                                                                                                                                                             |
-| **Help**                  | `help`                                                                                                                                                                                                                                                 |
-| **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
+| Action                    | Format, Examples                                                                                                                                                                                                                                                  |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY<g/ml> [, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY<g/ml>, ...]`<br><br/>Example:<br/>`add name/chicken rice price/3.00 ingredient/rice qty/50g, ingredient/chicken qty/100g` |
+| **List Menu**             | `list_menu`                                                                                                                                                                                                                                                       |
+| **List Ingredients**      | `list_ingredients index/DISH_INDEX`<br><br/>Example:<br>`list_ingredients index/1`                                                                                                                                                                                |
+| **Delete**                | `delete DISH_INDEX`<br><br/>Example:<br>`delete 1`                                                                                                                                                                                                                |
+| **Edit Price**            | `edit_price index/DISH_INDEX price/NEW_PRICE`<br><br/>Example:<br>`edit_price index/1 price/4.50`                                                                                                                                                                 |
+| **List Sale**             | `list_total_sales`                                                                                                                                                                                                                                                |
+| **List Sale by Day**      | `list_sale day/DAY_TO_DISPLAY` <br><br/>Example:<br>`list_sale day/1`                                                                                                                                                                                             |
+| **View Ingredient Stock** | `view_stock`                                                                                                                                                                                                                                                      |
+| **Buy Ingredients**       | `buy_ingredient ingredient/INGREDIENT1_NAME<g/ml> qty/INGREDIENT1_QTY<g/ml>[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY<g/ml>, ...]`<br><br/>Example<br>`buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`                                  |
+| **Add Order**             | `add_order name/DISH_NAME qty/QUANTITY`<br><br/>Example:<br>`add_order name/chicken rice qty/2`                                                                                                                                                                   |
+| **Previous Day**          | `previous_day`                                                                                                                                                                                                                                                    |
+| **Next Day**              | `next_day`                                                                                                                                                                                                                                                        |
+| **Help**                  | `help`                                                                                                                                                                                                                                                            |
+| **Exit Program**          | `bye`                                                                                                                                                                                                                                                             |
 
 ---------------------------------------------------
 <!---@@author ziyi105--->

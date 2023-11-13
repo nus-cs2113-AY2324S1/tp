@@ -38,7 +38,8 @@
     * [User stories](#user-stories)
   * [**Glossary**](#glossary)
 <!-- TOC -->
-<br>--------------------------------------------------------------------------------------------------------------
+<br>
+--------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 [addressbook-level2](https://github.com/se-edu/addressbook-level2) <br>
@@ -59,8 +60,7 @@ Only relevant attributes/associations/methods will be included in the UML diagra
 
 ### Architecture
 ![Architecture Diagram](images/ArchitectureDiagram.png)
-
-*Figure 1: Architecture Diagram*
+<br>*Figure 1: Architecture Diagram*
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 Listed below is a brief summary outlining the primary components and their interrelationships.
@@ -112,8 +112,7 @@ In the Ui component,
 API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 ![Parser Class Diagram](images/class/Parser.png)
-
-*Figure 4: Parser Class Diagram*
+<br>*Figure 4: Parser Class Diagram*
 
 The `Parser` component is responsible for interpreting the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
 
@@ -122,8 +121,7 @@ The `Parser` component is responsible for interpreting the user's input and retu
 Below is the sequence diagram of a parser which shows how `Parser` parses user input:
 
 ![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
-
-*Figure 5: Parser Parsing User Input Sequence Diagram*
+<br>*Figure 5: Parser Parsing User Input Sequence Diagram*
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
@@ -131,18 +129,18 @@ When user input a string to `Main`,  it passes the full user input to `Parser` v
 API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
 ![Storage Class Diagram](images/class/Storage.png)
-
-*Figure 6: Storage Class Diagram*
+<br>*Figure 6: Storage Class Diagram*
 
 The `Storage` class,
 - loads and saves the list of dishes on the `Menu`, available ingredient stock in `Pantry` and orders for the day in `OrderList` in a text file.
+- detects if the file is tampered by the user by reading the hash number in the storage text files
 - depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
 ### Data component
 Folder: [Data]({repoURL}src/main/java/seedu/cafectrl/data)
 ![Data Class Diagram](images/class/Data.png)
-*Figure 7: Data Package Class Diagram*
+<br>*Figure 7: Data Package Class Diagram*
 
 The 'Data' package consists of all the classes that the commands interact with to perform various functions.
 A summary of the class diagram is as listed below:
@@ -160,11 +158,11 @@ A summary of the class diagram is as listed below:
 ### Add Dish
 
 ![Add Dish Execution](images/sequence/AddDishCommand_execute.png)
-*Figure 8: Execution of add_dish command*
+<br>*Figure 8: Execution of `add` Command Sequence Diagram*
 
 API: [AddDishCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/AddDishCommand.java)
 
-The `add_dish` command, add a dish to the `Menu` object and prints out a formatted message to state the name, price and ingredients entered for the dish.
+The `add` command, add a dish to the `Menu` object and prints out a formatted message to state the name, price and ingredients entered for the dish.
 
 when the `execute()` method from `AddDishCommand` is called in the main class `CafeCtrl`, the `addDish()` method is first called to add the `Dish` object to the `Menu`. It will then call the `printAddDishMessage()` method, which gets all the parameters of the `Dish` object (dishName, dishPrice, dishIngredients) and passes them to the `Ui` to then be printed out to the User.
 
@@ -175,10 +173,10 @@ A `list_menu` command can be used to display all the `Dish` objects stored in `M
 
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a list_menu command.
 ![List Menu Execution](images/class/ListMenuCommandClass.png)
+<br>*Figure 9: Execution of `list_menu` Command Class Diagram*
 
 ![List Menu Execution](images/sequence/ListMenuCommand_execute.png)
-
-Figure 9: Execution of list_menu command
+<br>*Figure 10: Execution of `list_menu` Command Sequence Diagram*
 
 API: [ListMenuCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -197,10 +195,10 @@ An add_order command can be used to add `order` to an `orderList` in `Sales`.
 
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of an add_order command.
 ![Add_Order Execution](images/class/AddOrderCommandClass.png)
+<br>*Figure 11: Execution of `add_order` Command Class Diagram*
 
 ![Add_order Execution](images/sequence/AddOrderCommand_execute.png)
-
-*Figure 10: Execution of add_order command*
+<br>*Figure 12: Execution of `add_order` Command Sequence Diagram*
 
 API: [AddOrderCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -225,10 +223,10 @@ A `next_day` command can be used advance the current day.
 
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a next_day command.
 ![Next_Day Execution](images/class/NextDayCommandClass.png)
+<br>*Figure 13: Execution of `next_day` Command Class Diagram*
 
 ![Next_Day Execution](images/sequence/NextDayCommand_execute.png)
-
-*Figure 11: Execution of next_day command*
+<br>*Figure 14: Execution of `next_day` Command Sequence Diagram*
 
 API: [NextDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -249,10 +247,10 @@ A `previous_day` command can be used to recede the current day.
 
 The following class diagram illustrates the relationship between the respective classes involved in the creation and execution of a next_day command.
 ![Previous_Day Execution](images/class/PreviousDayCommandClass.png)
+<br>*Figure 15: Execution of `previous_day` Command Class Diagram*
 
 ![Previous_Day Execution](images/sequence/PreviousDayCommand_execute.png)
-
-*Figure 12: Execution of previous_day command*
+<br>*Figure 16: Execution of `previous_day` Command Sequence Diagram*
 
 API: [PreviousDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
@@ -263,8 +261,7 @@ The user is also shown the receded day number.
 
 ### List Ingredients
 ![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)
-
-*Figure 13: Execution of list_ingredient command*
+<br>*Figure 17: Execution of `list_ingredient` Command Sequence Diagram*
 
 API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
 
@@ -279,9 +276,7 @@ Although it may seem tedious the steps are essentially as listed below:
 
 ### List Sale By Day
 ![List_Sale Execution](images/sequence/ShowSaleByDayCommand_execute.png)
-
-
-*Figure 14: Execution of list_sale command*
+<br>*Figure 18: Execution of `list_sale` Command Sequence Diagram*
 
 API: [ListSaleByDay.java]({repoURL}src/main/java/seedu/cafectrl/command/ListSaleByDayCommand.java)
 
@@ -300,9 +295,7 @@ The steps are essentially as listed below:
 
 ### Pantry - isDishCooked()
 ![isDishCooked_function](images/sequence/Pantry_IsDishCooked.png)
-
-
-*Figure 15: Data processing of `isDishCooked()` function used in add_order command*
+<br>*Figure 19: Data Processing of `isDishCooked()` Function Used in `add_order` Command Sequence Diagram*
 
 API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
 
@@ -318,9 +311,7 @@ The steps are essentially as listed below:
 
 ### Pantry - calculateMaxDish()
 ![calculateMaxDish_function](images/sequence/Pantry_CalculateMaxDish.png)
-
-
-*Figure 16: Data processing of `calculateMaxDish()` function used in add_order command*
+<br>*Figure 20: Data Processing of `calculateMaxDish()` Function Used in `add_order` Command Sequence Diagram*
 
 API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
 
@@ -337,8 +328,7 @@ The steps are essentially as listed below:
 ### Delete Dish
 
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
-
-*Figure 17: Execution of delete dish command*
+<br>*Figure 21: Execution of `delete` Command Sequence Diagram*
 
 API: [DeleteDishCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
 
@@ -355,8 +345,7 @@ This sequence of actions orchestrates the flow of information and operations bet
 ### Edit Price
 
 ![Edit Price Execution](images/sequence/EditPriceCommand_execute.png)
-
-*Figure 18: Execution of edit_price command*
+<br>*Figure 22: Execution of `edit_price` Command Sequence Diagram*
 
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
@@ -390,8 +379,7 @@ When the `execute()` method is invoked
 ### Help
 
 ![Help Execution](images/sequence/HelpCommand_execute.png)
-
-*Figure 19: Execution of help command*
+<br>*Figure 23: Execution of `help` Command Sequence Diagram*
 
 API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpCommand.java)
 
@@ -405,10 +393,12 @@ When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequent
 ### Make `Ui` class singleton
    - **Problem**: As we need to use the same `Ui` instance for all methods to avoid repeated instantiation of `Scanner` which could slow down the application, the same `Ui` instance is being passed to the constructor for all `Command` classes. This makes the parameters for the constructor looks too long.
    - **Solution**: Implement a static `getInstance` method in `Ui` class which, when it is called for the first time, creates a new instance of `Ui` and store it in a static constant in the `Ui` object. The method will return the `ui` object in the constant for subsequent `getInstance` call.<br>With this implementation, we no longer need to pass `ui` around as we can access the same `ui` object by calling `getInstance`.
-   <br>![Class diagram for singleton Ui](images/class/ui_singleton.png)
-   <br>*Figure 17: Class diagram for singleton Ui*
-   <br>![Sequence diagram for singleton Ui](images/sequence/ui_singleton.png)
-   <br>*Figure 18: Sequence diagram for `getinstance` call on `Ui`*
+     
+     <br>![Class diagram for singleton Ui](images/class/ui_singleton.png)
+     <br>*Figure 24:  singleton Ui Class Diagram*
+
+     <br>![Sequence diagram for singleton Ui](images/sequence/ui_singleton.png)
+     <br>*Figure 25: `getinstance` call on `Ui` Sequence diagram*
    
 --------------------------------------------------------------------------------------------------------------------
 ## **Product scope**
