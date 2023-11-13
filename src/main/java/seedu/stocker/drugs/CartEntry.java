@@ -13,10 +13,10 @@ public class CartEntry {
         this.totalCost = calculateTotalCost();
     }
 
-    public CartEntry(String serialNumber, long quantity, double totalCost) {
+    public CartEntry(String serialNumber, long quantity, Drug drug) {
         this.serialNumber = serialNumber;
         this.quantity = quantity;
-        this.totalCost = totalCost;
+        this.drug = drug;
     }
 
     public String getSerialNumber() {

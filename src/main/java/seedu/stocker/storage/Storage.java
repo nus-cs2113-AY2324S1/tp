@@ -4,6 +4,7 @@ package seedu.stocker.storage;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
+import seedu.stocker.drugs.StockEntry;
 import seedu.stocker.exceptions.InvalidDrugFormatException;
 
 import java.io.BufferedWriter;
@@ -105,20 +106,24 @@ public class Storage {
 
         Scanner reader = new Scanner(file);
         Pattern pattern = Pattern.compile(
-                "Serial Number: (.*), Quantity: (.*), Selling Price: (.*)"
+                "Name: (.*), Serial Number: (.*), Quantity: (.*), Selling Price: (.*)"
         );
 
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
             Matcher matcher = pattern.matcher(line);
 
-            if (matcher.matches() && matcher.groupCount() == 3) {
-                String serialNumber = matcher.group(1); // Extract serial number
-                long quantity = Long.parseLong(matcher.group(2)); // Extract quantity
-                double sellingPrice = Double.parseDouble(matcher.group(3)); // Extract selling price
+            if (matcher.matches() && matcher.groupCount() == 4) {
+                String name = matcher.group(1);
+                String serialNumber = matcher.group(2); // Extract serial number
+                long quantity = Long.parseLong(matcher.group(3)); // Extract quantity
+                double sellingPrice = Double.parseDouble(matcher.group(4)); // Extract selling price
+
+                StockEntry stockEntry = inventory.get(serialNumber);
+                Drug drug = stockEntry.getDrug();
 
                 // Add the sold item to the sales list
-                salesList.addSoldItem(serialNumber, quantity, sellingPrice, inventory);
+                salesList.addSoldItem(drug, serialNumber, quantity, sellingPrice, inventory);
             } else {
                 System.out.println("Malicious changes were made in soldItems.txt.");
                 // Handle any malicious changes

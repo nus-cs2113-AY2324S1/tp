@@ -44,7 +44,7 @@ public class CheckOutCommand extends Command {
                     totalCost += cost;
 
                     // Add the sold item to the temporary holder
-                    soldItems.add(new CartEntry(serialNumber, quantity, sellingPrice));
+                    soldItems.add(new CartEntry(serialNumber, quantity, drug));
                 }
             }
 
