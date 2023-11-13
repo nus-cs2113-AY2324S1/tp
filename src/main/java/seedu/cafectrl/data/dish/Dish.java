@@ -32,6 +32,7 @@ public class Dish {
     public float getPrice() {
         return price;
     }
+
     public String getPriceString() {
         return this.dollarValue.format(this.price);
     }
