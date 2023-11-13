@@ -37,6 +37,10 @@ than 44% of functional code produced by the entire team.
 Also, I ensured that the build process runs without errors and that the 
 text-ui-test passes.
 
+Additionally, I implemented tests for the `flashcard` package and achieved 
+100% class coverage with my tests, see here:
+![img.png](img.png)
+
 ### Contributions to the UG
 
 I documented all flashcard-related features: I documented each single 
@@ -94,12 +98,8 @@ activities dashboard, see [link](https://nus-cs2113-ay2324s1.github.io/dashboard
 
 ### Contributions to the User Guide (Extracts)
 
-```markdown
-
-```
+See all of my contributions to the UG [here](wendelinwemhoener-ug.md)
 
 ### Contributions to the Developer Guide (Extracts)
 
-```markdown
-
-```
+See all of my contributions to the DG [here](wendelinwemhoener-dg.md)

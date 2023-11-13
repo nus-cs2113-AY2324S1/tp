@@ -1,11 +1,18 @@
 package seedu.duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.calendar.Calendar;
 import seedu.duke.calendar.CalendarManager;
+import seedu.duke.flashcard.exceptions.FlashcardException;
+import seedu.duke.flashcard.exceptions.InvalidFlashcardIdException;
+import seedu.duke.flashcard.exceptions.InvalidReviewModeException;
+import seedu.duke.flashcard.review.RandomReviewMode;
+import seedu.duke.flashcard.review.ReviewMode;
+import seedu.duke.flashcard.review.SpacedRepetitionReviewMode;
 import seedu.duke.storage.EventStorage;
 import seedu.duke.flashcard.FlashcardComponent;
 import seedu.duke.flashcard.FlashcardList;
@@ -20,11 +27,6 @@ import java.util.Scanner;
 
 class DukeTest {
     @Test
-    public void sampleTest() {
-        assertTrue(true);
-    }
-
-    @Test
     public void testFlashcardComponent_isResponsible_notResponsible() {
         FlashcardComponent flashcardComponent = new FlashcardComponent(new Calendar());
 
@@ -35,11 +37,41 @@ class DukeTest {
 
     @Test
     public void testFlashcardComponent_isResponsible_responsible() {
-        FlashcardComponent flashcardComponent = new FlashcardComponent(new Calendar());
+        FlashcardComponent flashcardComponent = new FlashcardComponent(
+                new Calendar());
 
         assertTrue(flashcardComponent.isResponsible("create flashcard"));
-        assertTrue(flashcardComponent.isResponsible("create flashcard  "));
+        assertTrue(flashcardComponent.isResponsible("delete flashcard  b"));
         assertTrue(flashcardComponent.isResponsible("list flashcards"));
+        assertTrue(flashcardComponent.isResponsible("delete all flashcards"));
+        assertTrue(flashcardComponent.isResponsible("review flashcards"));
+        assertTrue(flashcardComponent.isResponsible("review flashcards c"));
+    }
+
+    @Test
+    public void testReviewMode_getReviewModeName_RandomReviewMode() {
+        FlashcardList fl = new FlashcardList(new ArrayList<>());
+        ReviewMode rm = new RandomReviewMode(fl);
+
+        assertEquals(rm.getReviewModeName(), "random review mode");
+    }
+
+    @Test
+    public void testFlashcardException_initializeException() {
+        InvalidFlashcardIdException e1 = new InvalidFlashcardIdException();
+        InvalidReviewModeException e2 = new InvalidReviewModeException();
+
+        assertTrue(e1 instanceof FlashcardException);
+        assertTrue(e2 instanceof FlashcardException);
+        assertTrue(e1 instanceof Exception);
+    }
+
+    @Test
+    public void testReviewMode_getReviewModeName_SpacedRepetitionReviewMode() {
+        FlashcardList fl = new FlashcardList(new ArrayList<>());
+        ReviewMode rm = new SpacedRepetitionReviewMode(fl);
+
+        assertEquals(rm.getReviewModeName(), "spaced repetition mode");
     }
 
     @Test
