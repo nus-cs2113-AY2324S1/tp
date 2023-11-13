@@ -113,8 +113,7 @@ add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 /amt 1
 add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
 ```
-add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 
-/amt USD 10.50
+add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt USD 10.50
 ```
 ```
 add expense /cat transport /type train /de train to school /date 10/10/2023 
