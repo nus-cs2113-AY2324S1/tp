@@ -24,6 +24,6 @@ public class ListTotalSalesCommand extends Command {
     @Override
     public void execute() {
         logger.info("Executing ShowSalesCommand...");
-        sales.printSales(ui, menu);
+        sales.printSales(ui);
     }
 }

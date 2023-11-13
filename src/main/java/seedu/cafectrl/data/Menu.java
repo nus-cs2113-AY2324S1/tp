@@ -41,9 +41,8 @@ public class Menu {
         String formattedDishName = dishName.toLowerCase().trim();
         for (int i = 0; i < getSize(); i++) {
             String menuDishName = getDishFromId(i).getName();
-            String formattedMenuDishName = menuDishName.toLowerCase().trim();
-
-            if (formattedMenuDishName.equals(formattedDishName)){
+            String formattedMenuDishName = menuDishName.trim();
+            if (formattedMenuDishName.equalsIgnoreCase(formattedDishName)) {
                 return getDishFromId(i);
             }
         }
