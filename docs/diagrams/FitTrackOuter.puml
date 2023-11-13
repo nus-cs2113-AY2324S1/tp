@@ -2,12 +2,12 @@
 
 title Outer Structure of FitTrack\n
 
-participant "<<class>>\nFitTrack" as main
+participant "<<class>>\nFitTrack\na.k.a. <b>main</b>" as main
 participant ": FitTrack" as core
 
 
 create core
-main -> core ++: new
+main -> core ++: new FitTrack()
 
 return : FitTrack
 

@@ -2,11 +2,11 @@
 
 title Sequence of InvalidCommand\n
 
-participant ": CommandParser" as parser
+participant "<i><<class>></i>\nCommandParser" as parser
 participant ": InvalidCommand" as invalidCmd
 participant ": HelpCommand" as helpCmd
 
-[-> parser ++: parser.getInvalidCommand(\n    inputLine: String, e: ParseException\n)
+[-> parser ++: CommandParser.getInvalidCommand(\n    inputLine: String, e: ParseException\n)
 note left
 getInvalidCommand method is called when
   1. input command fails matching, or
@@ -15,17 +15,17 @@ getInvalidCommand method is called when
 end note
 
 create invalidCmd
-parser -> invalidCmd ++: new
+parser -> invalidCmd ++: new InvalidCommand(inputLine, e)
 note left: Construct InvalidCommand using\nuser input and exception (optional).
 return : InvalidCommand
 
-parser -> invalidCmd ++: .setArguments(inputLine: String, ...)
+parser -> invalidCmd ++: .setArguments(inputLine: String)
 note right: Create HelpCommand instance to get help message.
 
 create helpCmd
-invalidCmd -> helpCmd ++: new
+invalidCmd -> helpCmd ++: new HelpCommand(...)
 return : HelpCommand
-invalidCmd -> helpCmd ++: .setArguments(inputLine: String, ...)
+invalidCmd -> helpCmd ++: .setArguments(inputLine: String)
 return
 invalidCmd -> helpCmd ++: .execute()
 return : CommandResult

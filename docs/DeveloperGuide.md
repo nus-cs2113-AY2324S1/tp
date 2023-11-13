@@ -316,24 +316,36 @@ The diagram below shows the class/sequence structure of the caloriebalance mecha
 ![CalorieBalance Sequence Diagram](images/CalorieBalanceSequenceDiagram.svg)
 
 ### 6. Help Function
-{description}
+Help command outputs general help message if there's no argument,
+and outputs the help of the given command if certain command is given as an argument.
+
+For example, `help` outputs general help message, and `help addmeal` outputs
+help message for `addmeal` command.
 
 **Design Considerations**
 
+The design has to differentiate between the cases which has no argument and has an argument
+looking for help. Also, when developer adds more commands, it's better to work less.
+So I wanted the help function to behave well if a developer writes only a description and
+a usage of the command.
+
 **Implementation**
 
-{description of the command}
-
-{example of input}
-
 *Step 1:*
+From the given argument, get the first word of the argument, which is the command word.
 
 *Step 2:*
+Get the blank command instance based on the command word.
 
 *Step 3:*
+Get the help message from the blank command instance. It uses getHelp() method. If you want to
+add new command, then you have to implement getHelp() method for the help function.
 
-The diagram below shows the class/sequence structure of the {help} mechanism:
-{Insert sequence or class diagram}
+*Step 4:*
+The result of command execution is the help message in step 3.
+
+The diagram below shows part of the class/sequence structure of the {help} mechanism:
+![Help Function](images/HelpCommand.svg)
 
 ### 7. Step Function
 The step functionality has a suite of commands namely `addsteps`, `deletesteps`, `viewsteps`, `totalsteps`
