@@ -10,6 +10,9 @@ class Storage {
     + loadOrderList(menu: menu): Sales
     - saveOrderList(sales: Sales): void
     + saveAll(menu: Menu, sales: Sales, pantry: Pantry): void
+    + detectTamper(): void
+    - isFileEmpty(encodedStringArrayList: ArrayList<String>): boolean
+    - isFileCorrupted(encodedStringArrayList: ArrayList<String>): boolean
 }
 
 class Data
