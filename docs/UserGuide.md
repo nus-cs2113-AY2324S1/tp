@@ -345,15 +345,14 @@ Thank you for using NUScents. Hope to see you again soon!
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: There are 2 files used for storage, `./data/nuscents.txt` and `./data/hmac`. Copy both files over to the target
+**A**: There are 2 files used for storage, `./data/nuscents.txt` and `./data/budget.txt`. Copy both files over to the target
 computer.
 
 **Q**: What happens if I modify the storage file ?
 
-**A**: The application is programmed to exit immediately if it detects that the storage file has been tampered with.
-You will either need to revert the storage file back to the last known 'good state', or delete both the
-`./data/nuscents.txt` and `./data/hmac` files and run the program again. Note that deleting the files will cause a loss
-of previously stored data.
+**A**: The application is programmed to handle modification of the storage file, however, no support is guaranteed if 
+you choose to do so. Unexpected behaviour will occur if you modify the storage file in an unsupported way. If a particular 
+transaction entry is corrupted, the program will try to skip it and read the next transaction entry. 
 
 ## Command Summary 💡
 
