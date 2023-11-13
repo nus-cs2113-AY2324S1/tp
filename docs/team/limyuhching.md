@@ -20,6 +20,14 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete`, `edit`, `update exchange rate`, `list currencies`, `list exchange rates`
+    * Added documentation for the `delete` feature, `edit`, `update exchange rate`, `list currencies`, `list exchange rates`
+    * Added documentation for the `edit` feature
+    * Added documentation for the `update exchange rate` feature
+    * Added documentation for the `list currencies` feature
+    * Added documentation for the `list exchange rates` feature
   * Developer Guide:
-    * Added implementation details of the `ExchangeRateManager` feature.
+    * Added implementation details of the `ExchangeRateManager` feature
+    * Added target audience and value proposition
+    * Added Manual testing for `delete income/expense` feature
+    * Added Manual testing for `edit income/expense` feature
+    * Added Manual testing for `updating exchange rate` feature
