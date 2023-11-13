@@ -9,8 +9,21 @@ import essenmakanan.shortcut.Shortcut;
 import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.ui.Ui;
 
+/**
+ * Represents a parser related to shortcuts
+ */
 public class ShortcutParser {
 
+    /**
+     * Parse a shortcut based on the input and the ingredient list.
+     *
+     * @param ingredients The ingredient list.
+     * @param input The given input.
+     * @return A shortcut based on the input.
+     * @throws EssenFormatException If the format is incorrect.
+     * @throws EssenShortcutException If the shortcut refers to a non-existing ingredient.
+     * @throws NumberFormatException If the quantity is invalid.
+     */
     public static Shortcut parseShortcut(IngredientList ingredients, String input) throws EssenFormatException
             , EssenShortcutException, NumberFormatException {
         input = input.replace("sc/", "");
@@ -35,6 +48,13 @@ public class ShortcutParser {
         return new Shortcut(ingredientName, quantity);
     }
 
+    /**
+     * Gets shortcut index based on the input.
+     *
+     * @param shortcuts The shortcut list.
+     * @param input The given input.
+     * @return The index of the shortcut in the list.
+     */
     public static int getShortcutIndex(ShortcutList shortcuts, String input) {
         int index;
 
@@ -47,7 +67,14 @@ public class ShortcutParser {
         return index;
     }
 
-
+    /**
+     * Changes the shortcut's name into a new name based on the ingredient list.
+     *
+     * @param shortcut The shortcut that is going to be edited.
+     * @param ingredients The ingredient list.
+     * @param editDetail The new name.
+     * @param hasEditName The status if the user has edited the name once in one line.
+     */
     private static void editShortcutName(Shortcut shortcut, IngredientList ingredients, String editDetail
             , boolean hasEditName) {
         String newName = editDetail.substring(2).strip();
@@ -75,6 +102,13 @@ public class ShortcutParser {
         }
     }
 
+    /**
+     * Changes the shortcut's quantity into a new quantity.
+     *
+     * @param shortcut The shortcut that is going to be edited.
+     * @param editDetail The new quantity.
+     * @param hasEditQuantity The status if the user has edited the quantity once in one line.
+     */
     private static void editShortcutQuantity(Shortcut shortcut, String editDetail, boolean hasEditQuantity) {
         double newQuantity = Double.parseDouble(editDetail.substring(2).strip());
 
@@ -100,6 +134,14 @@ public class ShortcutParser {
         }
     }
 
+    /**
+     * Edits the shortcut's properties based on the flags.
+     *
+     * @param shortcut The shortcut that is going to be edited.
+     * @param ingredients The ingredient list.
+     * @param editDetails A string filled with changes to be made.
+     * @throws EssenFormatException If the format is incorrect.
+     */
     public static void editShortcut(Shortcut shortcut, IngredientList ingredients, String[] editDetails)
             throws EssenFormatException {
         boolean hasEditName = false;
@@ -127,6 +169,12 @@ public class ShortcutParser {
         }
     }
 
+    /**
+     * Converts a shortcut into string form.
+     *
+     * @param shortcut A shortcut
+     * @return A shortcut that has been converted into a string.
+     */
     public static String convertToString(Shortcut shortcut) {
         return shortcut.getIngredientName() + " | " + shortcut.getQuantity();
     }
