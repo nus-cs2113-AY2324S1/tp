@@ -9,16 +9,16 @@
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a dish : `add`](#adding-a-dish--add)
     * [Deleting a dish : `delete`](#deleting-a-dish--delete)
-    * [Editing price of a dish : `edit_price`](#editing-price-of-a-dish--editprice)
-    * [Listing all dishes : `list_menu`](#listing-all-dishes--listmenu)
-    * [Listing ingredients needed for the selected dish : `list_ingredients`](#listing-ingredients-needed-for-the-selected-dish--listingredients)
-    * [Buying an ingredient : `buy_ingredient`](#buying-an-ingredient--buyingredient)
-    * [Viewing the total stock of ingredients : `view_stock`](#viewing-the-total-stock-of-ingredients--viewstock)
-    * [Adding an order : `add_order`](#adding-an-order--addorder)
-    * [Showing total sales : `list_total_sales`](#showing-total-sales--listtotalsales)
-    * [Showing sales for a chosen day : `list_sale`](#showing-sales-for-a-chosen-day--listsale)
-    * [Advancing to the next day: `next_day`](#advancing-to-the-next-day-nextday)
-    * [Returning to the previous day: `previous_day`](#returning-to-the-previous-day-previousday)
+    * [Editing price of a dish : `edit_price`](#editing-price-of-a-dish--edit_price)
+    * [Listing all dishes : `list_menu`](#listing-all-dishes--list_menu)
+    * [Listing ingredients needed for the selected dish : `list_ingredients`](#listing-ingredients-needed-for-the-selected-dish--list_ingredients)
+    * [Buying an ingredient : `buy_ingredient`](#buying-an-ingredient--buy_ingredient)
+    * [Viewing the total stock of ingredients : `view_stock`](#viewing-the-total-stock-of-ingredients--view_stock)
+    * [Adding an order : `add_order`](#adding-an-order--add_order)
+    * [Showing total sales : `list_total_sales`](#showing-total-sales--list_total_sales)
+    * [Showing sales for a chosen day : `list_sale`](#showing-sales-for-a-chosen-day--list_sale)
+    * [Advancing to the next day: `next_day`](#advancing-to-the-next-day-next_day)
+    * [Returning to the previous day: `previous_day`](#returning-to-the-previous-day-previous_day)
     * [Exiting the program : `bye`](#exiting-the-program--bye)
   * [Known Issues](#known-issues)
   * [Command Summary](#command-summary)
@@ -437,9 +437,7 @@ Format: `bye`
      Done loading pantry_stock.txt!
      ------------------------------------------------------------------------
      ```
-7. The hyperlinks in table of contents do not work sometimes.
-   - We are still unable to identify the root cause as it is very inconsistent.
-
+7. 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
