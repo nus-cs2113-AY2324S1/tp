@@ -61,12 +61,13 @@ API: `FlashcardStorage.java`
 ![Flashcard Storage Sequance Diagram](photo/FlashcardStorage-0.png)
 
 The `FlashcardStorage` component,
+* can creates data directory and flashcards directory.
 * can save flashcards in `flashcard.txt` in specific text format
 * saves automatically when changes occur.
 * component loads automatically when the program starts.  
 * component can check if the saved txt file has been damaged.
 
-`EventStorage` has same structure.
+`EventStorage` has similar structure. (It was omitted to avoid redundancy.)
 
 
 ### Calendar Components
