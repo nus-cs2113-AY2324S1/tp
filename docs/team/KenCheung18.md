@@ -29,9 +29,9 @@ Given below are contributions that I made to this project.
 - Contributed to JUnit tests for `Duke`, `DeleteExpenseCommand`, `DeleteIncomeCommand`, ``
 
 ### Contributions to UserGuide:
-- Checked and improve the grammar and typo for UG..
 - Added expected output image for add, delete and clear feature.
-- Bug fix for the links.
+- Checked and improve the grammar and typo for UG.
+- Bug fix for the jar file links.
 - Added the `Balance` feature.
 - Added the `storage` feature.
 - Added the Q & A section.
@@ -39,9 +39,8 @@ Given below are contributions that I made to this project.
 - Improved and finalised the `Clear` feature..
 - Contributed to `add expense` and `edit expense` feature.
 - Contributed to the `Command Summary` section.
-- Contributed to the typo and grammar checking
 
 ### Contributions to DeveloperGuide:
-- Fixed bug on image not showing up on DG webpage
+- Fixed bug on image not showing up on DG webpage.
 - Added implementation detail and sequence diagram for `GetFromTxt`.
 - Added implementation detail and sequence diagram for `SaveToTxt`.
