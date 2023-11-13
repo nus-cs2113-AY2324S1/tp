@@ -336,7 +336,43 @@ The diagram below shows the class/sequence structure of the {caloriesburnt/sum} 
 The diagram below shows the class/sequence structure of the {help} mechanism:
 {Insert sequence or class diagram}
 
-### 7. Handling an Invalid Input
+### 7. Step Function
+The step functionality has a suite of commands namely `addsteps`, `deletesteps`, `viewsteps`, `totalsteps`
+and `getstepssuggestions`. 
+
+The commands allow the user to add, delete, view, get total steps and get suggestions (based on the calories
+they walk and their daily calorie goal) respectively.
+
+**Design Considerations**
+
+**Implementation**
+
+Here is an example of the step command. For `addsteps` and `viewsteps`, the command has 2 compulsory arguments `steps` and `date`.
+If a date is not provided, it will default to the current date.
+
+```
+addsteps 2000 d/2023-10-23
+totalsteps 2023-10-23
+viewsteps
+deletesteps 1
+getstepssuggestions 2023-10-23
+```
+As all of these are commands that perform a specific task, they inherit the Command class (like all other commands).
+The steps command will specifically interact with the `stepList` in the superclass
+
+- `addsteps` will add a new `Step` object to the `stepList`.
+- `totalsteps` will iterate through the list and sum up all the steps taken on the specified date.
+- `viewsteps` will iterate through the stepList and display all the steps taken in a list form.
+- `deletesteps` will remove a specified step from the `stepList` based on its index.
+- `getstepssuggestions` will calculate the calories burnt based on the steps taken and the user's weight. It 
+will then suggest how many more steps they need to take to meet their daily calorie goal.
+
+The diagram below shows the class diagram to show the inheritance from the `Command` superclass:
+![Step command class diagram](images/AddStepsCommand.png "Step command class diagram")
+
+The structure is very similar to the other commands albeit for a few attributes and the logic is implemented in the `execute()` method.
+
+### 8. Handling an Invalid Input
 If user enters invalid input, the app uses `InvalidCommand` class to handle it.
 
 **Design Considerations**
@@ -384,24 +420,30 @@ BMI, ideal weight for their height and so on.
 ## User Stories
 
 ---
-| Version | As a ... | I want to ...                                               | So that I can ...                                             |
-|---------|----------|-------------------------------------------------------------|---------------------------------------------------------------|
-| v1.0    | new user | know how to use the product                                 | use the product                                               |
-| v1.0    | new user | add my height and weight                                    | keep track of my height and weight                            |
-| v1.0    | new user | add my calorie intake for a meal                            | record my calorie intake                                      |
-| v1.0    | new user | add my daily workout                                        | track my calories burnt                                       |
-| v1.0    | new user | set my daily calorie surplus limit                          | know whether my calorie surplus has exceeded the limit or not |
-| v1.0    | new user | delete my daily workout                                     | track my calorie usage                                        |
-| v1.0    | new user | delete my calorie intake for a meal                         | track my calorie intake                                       |
-| v1.0    | new user | edit my height and weight information                       | apply my changed height and weight                            |
-| v1.0    | new user | view my calorie intake for a meal                           | know my calorie intake                                        |
-| v1.0    | new user | view my daily workout                                       | know my previous daily workouts                               |
-| v1.0    | new user | view my height, weight, and daily calorie surplus limit     | know my height, weight and calorie surplus limit              |
-| v2.0    | user     | find a to-do item by name                                   | locate a to-do without having to go through the entire list   |
-| v2.0    | user     | Calculate my ideal weight for my height                     | maintain my weight in the healthy range                       |
-| v2.0    | user     | see the total calories I have consumed on a particular date | track my daily calories intake                                |
-| v2.0    | user     | see the total calories I have burnt on a particular date    | track my daily calories burnt                                 |
-| v2.0    | user     | find a meal or workout                                      | quickly search my past meals or workouts                      |
+| Version | As a ... | I want to ...                                                                                     | So that I can ...                                            |
+|---------|----------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| v1.0    | new user | know how to use the product                                                                       | use the product                                              |
+| v1.0    | new user | add my height and weight                                                                          | keep track of my height and weight                           |
+| v1.0    | new user | add my calorie intake for a meal                                                                  | record my calorie intake                                     |
+| v1.0    | new user | add my daily workout                                                                              | track my calories burnt                                      |
+| v1.0    | new user | set my daily calorie surplus limit                                                                | know whether my calorie surplus has exceeded the limit or not |
+| v1.0    | new user | delete my daily workout                                                                           | track my calorie usage                                       |
+| v1.0    | new user | delete my calorie intake for a meal                                                               | track my calorie intake                                      |
+| v1.0    | new user | edit my height and weight information                                                             | apply my changed height and weight                           |
+| v1.0    | new user | view my calorie intake for a meal                                                                 | know my calorie intake                                       |
+| v1.0    | new user | view my daily workout                                                                             | know my previous daily workouts                              |
+| v1.0    | new user | view my height, weight, and daily calorie surplus limit                                           | know my height, weight and calorie surplus limit             |
+| v2.0    | user     | find a to-do item by name                                                                         | locate a to-do without having to go through the entire list  |
+| v2.0    | user     | Calculate my ideal weight for my height                                                           | maintain my weight in the healthy range                      |
+| v2.0    | user     | see the total calories I have consumed on a particular date                                       | track my daily calories intake                               |
+| v2.0    | user     | see the total calories I have burnt on a particular date                                          | track my daily calories burnt                                |
+| v2.0    | user     | find a meal or workout                                                                            | quickly search my past meals or workouts                     |
+| v2.1    | user     | add my daily step count                                                                           | record my daily steps walked                                 |
+| v2.1    | user     | delete my daily step count                                                                        | remove the entry of my daily steps walked                    |
+| v2.1    | user     | view daily step count                                                                             | view the total number of daily steps walked in a list        |
+| v2.1    | user     | Get a suggestion to walk more steps based on my calories burned walking and my daily calorie goal | see how my walking is helping me meet my calorie goals       |
+
+
 
 
 
