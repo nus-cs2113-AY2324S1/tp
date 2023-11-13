@@ -20,11 +20,11 @@ public class Cart {
         this.entries.add(new CartEntry(key, quantity));
     }
 
-    public void addEntry(String serialNumber, long quantity, double sellingPrice, Inventory inventory) {
+    public void addEntry(Drug drug, String serialNumber, long quantity, double sellingPrice, Inventory inventory) {
         StockEntry stockEntry = inventory.get(serialNumber);
         if (stockEntry != null) {
             double totalCost = sellingPrice * quantity;
-            this.entries.add(new CartEntry(serialNumber, quantity, totalCost));
+            this.entries.add(new CartEntry(serialNumber, quantity, drug));
         }
     }
 

@@ -632,9 +632,10 @@ Example of usage:
 Expected outcome:
 
 ```
-Listed all sales transactions:
-|| 1. Serial Number: DOL123, Quantity: 7, Selling Price: $0.0
-|| 2. Serial Number: HIS526, Quantity: 4, Selling Price: $0.0
+|| Listed all items in the sales list.
+|| 	1. Name: Histamine, Serial Number: HIS526, Quantity: 2, Selling Price: 15.9, Cost: 31.8
+|| 	2. Name: Doliprane, Serial Number: DOL123, Quantity: 2, Selling Price: 12.9, Cost: 25.8
+|| Total Cost: 57.6
 
 ```
 

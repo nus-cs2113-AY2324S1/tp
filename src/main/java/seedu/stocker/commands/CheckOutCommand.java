@@ -3,6 +3,7 @@ import seedu.stocker.drugs.Cart;
 import seedu.stocker.drugs.CartEntry;
 import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.StockEntry;
+import seedu.stocker.exceptions.DrugNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,7 @@ public class CheckOutCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (currentCart.isEmpty()) {
-            return new CommandResult(MESSAGE_FAILURE);
-        } else {
+        try {
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
             int index = 1;
             double totalCost = 0.0;
@@ -45,16 +44,21 @@ public class CheckOutCommand extends Command {
                     totalCost += cost;
 
                     // Add the sold item to the temporary holder
-                    soldItems.add(new CartEntry(serialNumber, quantity, sellingPrice));
+                    soldItems.add(new CartEntry(serialNumber, quantity, drug));
                 }
             }
 
             // Add the temporary holder to the sales list
             salesList.addSale(new Cart(soldItems));
 
+            // Call the checkOut function to update inventory quantities
+            currentCart.checkOut(salesList, inventory);
+
             resultMessage.append(System.lineSeparator()).append("Total Cost: ").append(totalCost);
 
             return new CommandResult<>(resultMessage.toString());
+        } catch (DrugNotFoundException e ) {
+            return new CommandResult<>(String.format(MESSAGE_FAILURE));
         }
     }
 }

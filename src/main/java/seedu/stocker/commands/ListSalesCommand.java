@@ -2,6 +2,7 @@ package seedu.stocker.commands;
 
 import seedu.stocker.drugs.Cart;
 import seedu.stocker.drugs.CartEntry;
+import seedu.stocker.drugs.StockEntry;
 
 /**
  * Represents a command to list all items in the sales list.
@@ -20,6 +21,7 @@ public class ListSalesCommand extends Command {
     public CommandResult execute() {
         StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
         int index = 1;
+        double totalCost = 0.0;
 
         if (salesList.getAllSales().isEmpty()) {
             return new CommandResult(MESSAGE_FAILURE);
@@ -27,14 +29,27 @@ public class ListSalesCommand extends Command {
 
         for (Cart cart : salesList.getAllSales()) {
             for (CartEntry entry : cart.getCurrentCart()) {
-                resultMessage.append("\t").append(index).append(". ")
-                        .append("Serial Number: ").append(entry.getSerialNumber())
-                        .append(", Quantity: ").append(entry.getQuantity())
-                        .append(", Selling Price: ").append(entry.getSellingPrice())
-                        .append(System.lineSeparator());
-                index++;
+                String serialNumber = entry.getSerialNumber();
+                StockEntry stockEntry = inventory.get(serialNumber);
+                if (stockEntry != null) {
+                    String name = stockEntry.getDrug().getName();
+                    double sellingPrice = entry.getSellingPrice();
+                    double cost = sellingPrice * entry.getQuantity();
+                    totalCost += cost;
+
+                    resultMessage.append("\t").append(index).append(". ")
+                            .append("Name: ").append(name)
+                            .append(", Serial Number: ").append(serialNumber)
+                            .append(", Quantity: ").append(entry.getQuantity())
+                            .append(", Selling Price: ").append(sellingPrice)
+                            .append(", Cost: ").append(cost)
+                            .append(System.lineSeparator());
+                    index++;
+                }
             }
         }
+
+        resultMessage.append("Total Sales: ").append(totalCost);
 
         return new CommandResult(resultMessage.toString().trim());
     }

@@ -673,7 +673,7 @@ The following sequence diagram illustrates how the Checkout Command function wor
 
 ## 14. ListSales Command
 
-The ListSalesCommand is designed to list all sales transactions tracked by the system. This command provides users with a clear and organized view of the sales data, making it easier to review and manage sales transactions.
+The ListSalesCommand is designed to list all sales transactions tracked by the system. This command provides users with a clear and organised view of the sales data, making it easier to review and manage sales transactions.
 
 ### Design Considerations
 The command should account for scenarios where there are no sales transactions to display.
@@ -685,7 +685,7 @@ In the execute method of the ListSalesCommand class:
 - Retrieve the list of sales transactions from the system.
 - Check if there are any sales transactions to display. If the list is empty, return a message indicating that there are no sales.
 - If sales transactions are available, process and format the data for presentation.
-- Organize and present the sales data in a structured format, including details such as serial numbers, quantities, and selling prices for each transaction.
+- Organise and present the sales data in a structured format, including details such as serial numbers, quantities, and selling prices for each transaction.
 - Ensure that the sales data is neatly formatted and clearly presented to the user.
 
 The following sequence diagram shows how the listSales Command function works.
