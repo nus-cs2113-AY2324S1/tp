@@ -77,6 +77,8 @@ through `Ui`.
 
 If `Command` is of `Exit` type, the loop will exit, and the program terminates.
 
+<div style="page-break-after: always"></div>
+
 ## Parser Component
 
 The `Parser` component is the backbone behind the program, functioning as the API
@@ -199,6 +201,8 @@ the QuestionList itself.
 
 <hr>
 
+<div style="page-break-after: always"></div>
+
 ### Help Command - Display Commands
 
 #### Brief Description of Help Command
@@ -219,6 +223,8 @@ to be written in.
   - Reason: Treated as an invalid command - shows the invalid command string which happens to be the help command
 
 <hr>
+
+<div style="page-break-after: always"></div>
 
 ### Short Command - Add Short Answer Question to the Quiz
 
@@ -297,6 +303,8 @@ and add the Question to the appropriate list.
 - `short easy / easy / easy /easy`
   - This is not an invalid command because it conforms to the structure.
 <hr> 
+
+<div style="page-break-after: always"></div>
 
 ### MCQ Command - Add Multiple Choice Question to the Quiz
 
@@ -380,6 +388,8 @@ and add the Question to the appropriate list.
   - Reason: The program takes in input via a very strict order. Users must conform to this.
 <hr>
 
+<div style="page-break-after: always"></div>
+
 ### List Command - Show all Questions with Index
 
 #### Brief Description of List Command
@@ -403,6 +413,8 @@ print each question with a given index, and indicate the question's type and com
   - If user wants to list just module CS1010 (assuming that it's in the storage), make use of `find /module CS1010`
 
 <hr>
+
+<div style="page-break-after: always"></div>
 
 ### Delete Command - Delete a Question
 
@@ -451,6 +463,8 @@ List of questions: <br>
   - The command uses a non-numeric index ('three'). The index should be a number.
 <hr>
 
+<div style="page-break-after: always"></div>
+
 ### Find Command - Look for a matching question
 
 #### Brief Description of Find Command
@@ -492,6 +506,8 @@ List of questions: <br>
     No results found :< Check your keyword is correct?
   - Reason: Program does not support find using both /module and /description simultaneously
 <hr>
+
+<div style="page-break-after: always"></div>
 
 ### Edit Command - Edit Question / Answer
 #### Brief Description of Edit Command
@@ -634,6 +650,8 @@ Assuming 2 current questions: <br>
   - Ono! You did not enter the new value :<
   - Reason: white space after / is not ignored
 <hr>
+
+<div style="page-break-after: always"></div>
 
 ### Start Command - Start Quiz
 
@@ -793,6 +811,8 @@ Assuming 2 current questions: <br>
 
 <hr>
 
+<div style="page-break-after: always"></div>
+
 ### Shuffle Command
 
 #### Brief Description of Shuffle Command
@@ -847,6 +867,8 @@ The `CommandShuffle` class does not have its own attributes but utilizes those f
   - Reason: invalid or incomplete commands that do not conform specifically to `shuffle`
 
 <hr>
+
+<div style="page-break-after: always"></div>
 
 ### Markdiff Command - mark difficulty of entry
 
@@ -927,6 +949,8 @@ Assuming 2 current questions: <br>
 
 <hr>
 
+<div style="page-break-after: always"></div>
+
 ### Command Exit - Exit Program
 
 #### Brief Description of Command Exit
@@ -944,7 +968,6 @@ Command Exit is responsible for exiting the program
 <hr>
 
 <div style="page-break-after: always"></div>
-
 
 ## Storage Component
 
@@ -1057,6 +1080,8 @@ generate quizzes to test their knowledge of understanding. By using the
 QuizHub application, students can input notes taken in class in a question form,
 which they could use to take quizzes to ensure their understanding of the topic.
 
+<div style="page-break-after: always"></div>
+
 ## User Stories
 
 | Version |                As a ...               |                                   I want to ...                                   |                             So that I can ...                             |
@@ -1074,6 +1099,8 @@ which they could use to take quizzes to ensure their understanding of the topic.
 | v2.0    | User aiming for improvement           | I can mark a question as "difficult" or "easy" for later review                   | optimize my learning.                                                     |
 | v2.0    | User seeking a challenge              | I can practice questions in a random order                                        | test my knowledge comprehensively.                                        |
 | v2.0    | User seeking structure                | I can practice questions in a sequential order                                    | follow a specific learning path.                                          |
+
+<div style="page-break-after: always"></div>
 
 ## Non-Functional Requirements
 
