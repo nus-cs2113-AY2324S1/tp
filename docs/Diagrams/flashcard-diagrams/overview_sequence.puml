@@ -1,0 +1,10 @@
+@startuml
+
+actor Actor as user
+participant ":FlashcardComponent" as component
+participant ":FlashcardCommandParser" as parser
+participant ":FlashcardUi" as ui
+
+user --> component
+
+@enduml
