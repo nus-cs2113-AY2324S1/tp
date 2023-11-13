@@ -179,7 +179,7 @@ public class Ui {
     }
 
     public void showDishAvailability(int numberOfDishes){
-        showToUser("Available Dishes: " + numberOfDishes);
+        showToUser("Available quantity: " + numberOfDishes);
     }
 
     public void showNeededRestock(String ingredientName, int currentQuantity, String unit, int neededIngredient) {
