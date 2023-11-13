@@ -161,27 +161,46 @@ The following sequence diagram shows how the add transaction operation works:
 
 ### `list` Transactions Feature
 
-The list transaction feature is facilitated by the `Parser` class which parses user input and creates a new
-`ListCommand` object. The `ListCommand` object will get all the transactions in the `TransactionList` and display them
-to the user.
+#### I. Architecture-Level Design
+This section lists the components involved in the `list` transactions feature:
+1. **Parser**: Responsible for interpreting user input and generating a ListCommand object.
+2. **ListCommand**: A subclass of the Command class, created by the Parser to represent the "list" command.
+3. **Nuscents**: The main application class that receives and executes commands. It invokes the execute() method of the ListCommand.
+4. **UI**: Handles application input/output.
+5. **TransactionList**: A data structure to store and manage transactions.
+6. **Transaction**: Represents individual transactions.
 
-Given below is the example usage scenario and how the list transaction mechanism behaves at each step.
+#### II. Component-Level Design
+This section describes each component's role for the `list` transaction feature:
+1. **Parser**: The Parser class identifies the "list" command.
+2. **ListCommand**: The ListCommand object is created by the Parser. This object is passed to the Nuscents class for execution.
+3. **Nuscents**: In the Nuscents class, the execute() method of the ListCommand is called. It then calls the `showTransactionList()` method from `Ui`.
+4. **UI**: The UI class displays the transaction details by calling `TransactionList.getTransactions()`, which gets the Transactions in the `TransactionList`.
+5. **TransactionList**: The TransactionList contains a list of Transaction objects. The `getTransactions()` method returns all the Transactions in the `TransactionList`.
+6. **Transaction**: The Transaction class represents an individual transaction, and it contains all the relevant details of a transaction.
 
-**Step 1**: The user launches the application. The `TransactionList` will be initialized with the transactions stored in
-the `nuscents.txt` file. If the file is empty or does not exist, the `TransactionList` will be empty.
+#### III. Alternatives Considered
+An alternative would be to list all the transactions directly in `Parser` upon receiving a list command, however, to 
+promote separation of concerns and to keep code more readable, we decided not to take up this approach.
 
-**Step 2**: The user executes `list` command to list the transactions. The `list` command calls `ListCommand#execute()`,
-which gets the transactions from the `TransactionList` and displays them to the user.
+#### IV. Usage Scenario Example
+**Step 1**: User launches the application. `TransactionList` is initialized.   
+**Step 2**: User inputs `list` to list all transactions. The Parser identifies the command.   
+**Step 3**: A `ListCommand` is created. This command is passed to `Nuscents`.   
+**Step 4**: `Nuscents` executes the `ListCommand`, which invokes `Ui.showTransactionList()` and `Ui.showBudgetExpense()`.   
+**Step 5**: `Ui.showTransactionList()` calls `TransactionList.getTransactions()`, which gets the Transactions in the TransactionList.   
+**Step 6**: The transactions in `TransactionList` are displayed to the user.
+**Step 6**: `Ui.showBudgetExpense()` calls `TransactionList.getBudget()`, which gets the current budget set in the TransactionList.
+**Step 7**: The budget details in `TransactionList` are displayed to the user.
 
 The following sequence diagram shows how the list transaction operation works:
 
 <img src="images/ListTransactionSequenceDiagram.png" width="500" />
 
-In addition to that, the list transaction feature further computes and displays the net balance amount based on the
+Additionally, the list transaction feature further computes and displays the net balance amount based on the
 following formula (net balance = total allowance amount - total expense amount). The `showTransactionList()` method in
-the `Ui` class, it utilizes the float `netBalance` to store the net balance amount. When the `TransactionList` is
-iterated to print the transactions, it does a simple calculation based on whether it is an allowance or expense, to add
-or minus off respectively from the net balance.
+the `Ui` class calls `TransactionList.getNetBalance()`, which iterates through the list of transactions in the list to determine the net balance.
+The net balance is then shown to the user.
 
 ### `view` Transaction Feature
 
