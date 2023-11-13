@@ -615,8 +615,8 @@ Assuming 2 current questions: <br>
     edit [question number] /description [new description] or /answer [new answer] or /option[number] [new value] for multiple choice questions
   - Reason: Multiple edits in one command is not allowed
 - `edit 1 /answer \exitquiz`
-  - TBC ~ Fixing
-  - should not allow \exitquiz to be an answer field
+  - Invalid new value: \exitquiz
+  - Reason: should not allow \exitquiz to be an answer field
 - `edit 2 /option5 New option`
   - Ono! You tried to edit by an unknown criteria :<
     Please format your input as:
