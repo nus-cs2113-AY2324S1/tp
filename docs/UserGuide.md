@@ -140,24 +140,28 @@ help
 ### Adding a dish : `add`
 Adds a dish consisting of its ingredients to the menu
 
-Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
+Format: `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY<g/ml>[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY<g/ml>, ...]`
 
 * `DISH_NAME` can contain up to 35 alphanumeric characters with whitespaces
 * `PRICE` must be a positive number and can be up to 2 decimal places.
 * `INGREDIENT_QTY` must be a positive integer and contain the unit **ml** or **g** specifically.
-
   * e.g. `qty/50g` or `qty/1000ml`
 
 Example:
 ```
 > add name/chicken rice price/2.00 ingredient/rice qty/100g, ingredient/chicken qty/200g, ingredient/soup qty/50ml
 You have added the following dish...
-Dish Name: chicken rice
-Dish Price: $2.00
-chicken rice Ingredients: 
-rice - 100g
-chicken - 200g
-soup - 50ml
++-------------------------------------------------------+
+| Dish: chicken rice                                    |
++----------------------------------------+--------------+
+| Price: $2.00                                          |
++----------------------------------------+--------------+
+| Ingredient                             + Quantity     |
++----------------------------------------+--------------+
+| rice                                   | 100g         |
+| chicken                                | 200g         |
+| soup                                   | 50ml         |
++-------------------------------------------------------+
 ```
 
 <!---@@author ShaniceTang--->
@@ -404,6 +408,7 @@ Format: `bye`
 - The application is unable to decode the data text files if they have been edited in the wrong decoding format.
 - The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
 - The application is unable to support unit conversion, hence only ml and g are accepted as ingredient unit and the use of unit must be constant for the same ingredient.
+- The application is unable to save data for `Menu`, `Pantry` and `OrderList` if it is force exited using Ctrl + C command.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
