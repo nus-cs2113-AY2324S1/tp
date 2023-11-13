@@ -14,8 +14,7 @@ public class ReminderListCommand extends Command {
     public static final String USAGE = "reminderlist";
     public static final String EXAMPLE = "reminderlist";
 
-    private static final Logger logger = java.util.logging.Logger.
-            getLogger("Financial Planner Logger");
+    private static final Logger logger = Logger.getLogger("Financial Planner Logger");
 
     /**
      * Constructor of the command to list goals.
