@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * A handler for storing recipes.
+ * A handler for storing shortcuts.
  */
 public class ShortcutStorage {
     private String dataPath;
@@ -42,7 +42,7 @@ public class ShortcutStorage {
     }
 
     /**
-     * Saves ingredient data into a text file.
+     * Saves shortcut data into a text file.
      *
      * @param shortcuts The shortcut list.
      */

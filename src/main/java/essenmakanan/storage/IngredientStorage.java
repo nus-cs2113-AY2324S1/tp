@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * A handler for storing ingredient.
+ * A handler for storing ingredients.
  */
 public class IngredientStorage {
 
