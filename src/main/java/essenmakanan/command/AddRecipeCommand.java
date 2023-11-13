@@ -5,6 +5,7 @@ import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.RecipeParser;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
+import essenmakanan.recipe.Step;
 import essenmakanan.ui.Ui;
 import essenmakanan.recipe.Tag;
 
@@ -110,6 +111,7 @@ public class AddRecipeCommand extends Command {
                 }
 
                 content = content.trim();
+                content = Step.convertToStepIdTemplate(content, stepsCounter+1);
 
                 if (tag != null) {
                     // this step belongs to a tag

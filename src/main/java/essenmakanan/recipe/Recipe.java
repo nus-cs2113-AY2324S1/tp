@@ -95,12 +95,11 @@ public class Recipe {
 
         for (Tag tag : Tag.values()) {
             if (categorizedSteps.get(tag) != null && categorizedSteps.get(tag).size() > 0) {
-                Ui.drawDivider();
                 System.out.println("Steps that you have to do: " + tag);
                 categorizedSteps.get(tag).forEach(step -> System.out.println("    " + step));
+                Ui.drawDivider();
             }
         }
-        Ui.drawDivider();
 
     }
 
