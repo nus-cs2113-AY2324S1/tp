@@ -40,7 +40,7 @@ public class Menu {
         for (int i = 0; i < getSize(); i++) {
             String menuDishName = getDishFromId(i).getName();
             String formattedMenuDishName = menuDishName.trim();
-            if (formattedMenuDishName.equalsIgnoreCase(formattedDishName)){
+            if (formattedMenuDishName.equalsIgnoreCase(formattedDishName)) {
                 return getDishFromId(i);
             }
         }
