@@ -550,11 +550,7 @@ Example of usage: `watchlist`
 
 Example of output:
 
-```
-Symbol    Market    Price     Daily High     Daily Low     EquityName                    Last Updated     
-GOOGL     NASDAQ    124.46    125.4          122.75        Alphabet Inc - Class A        Tue, Oct 31 2023 04:00:03
-AAPL      NASDAQ    170.29    171.17         168.87        Apple Inc                     Tue, Oct 31 2023 04:00:02
-```
+![](images/investments/watchlistOutputUG.png)
 
 - Note: Your watchlist information is saved under the file path `data/watchlist.json` in JSON format
 - Note: the watchlist in memory is saved to the file whenever you run `watchlist` command or `exit` command
@@ -670,9 +666,9 @@ Example output:
 ```
 You have added Reminder 
    Type: debt
-   Date: 11/12/2023
+   Date: Dec 11 2023
    Status: Not Done
-   Left Days: 30
+   Left Days: 28
 ```
 
 ### Delete reminder: `deletereminder`
@@ -688,8 +684,9 @@ Example output:
 ```
 You have deleted Reminder 
    Type: debt
-   Date: 2023.12.11
+   Date: Dec 12 2023
    Status: Not Done
+   Left Days: 29
 ```
 
 ### Mark reminder as done: `markreminder`
@@ -705,8 +702,9 @@ Example output:
 ```
 You have marked Reminder 
    Type: debt
-   Date: 2023.12.11
+   Date: Dec 12 2023
    Status: Done
+   Left Days: 29
 ```
 
 ### View Goal List: `wishlist`
@@ -897,7 +895,7 @@ window. Sorry for the inconvenience caused. 🥲
 | **list all cashflows**           | `list`                                                     |
 | **list all incomes**             | `list income`                                              |
 | **list all expenses**            | `list expense`                                             |
-| **list all recurring cashflows** | `list recurrence`                                          |
+| **list all recurring cashflows** | `list recurring`                                           |
 | **Set budget**                   | `budget set /b BUDGET`                                     |
 | **Update budget**                | `budget update /b BUDGET`                                  |
 | **Reset budget**                 | `budget reset`                                             |

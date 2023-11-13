@@ -525,15 +525,8 @@ To test the add cashflow feature, you can use the following command:
 add income /a 5000 /t salary /r 30 /d work
 ```
 You should see the following output:
-```
-You have added an Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
-   Description: work
-to the Financial Planner.
-Balance: 5000.00
-```
+
+![](images/cashflow/AddCashflow.png)
 
 Note: The date displayed will differ based on your system time.
 
@@ -572,77 +565,26 @@ Note: The dates displayed will differ based on your system time.
 Input: `list`
 
 Output:
-```
-You have 4 matching cashflows:
-1: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
-   Description: work
-2: Expense
-   Type: Necessities
-   Amount: 1000.00
-3: Income
-   Type: Investments
-   Amount: 500.00
-   Description: stocks
-4: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
-   Description: insurance
-Balance: 3700.00
-```
+
+![](images/cashflow/List.png)
 
 Input: `list income`
 
 Output:
-```
-You have 2 matching cashflows:
-1: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
-   Description: work
-2: Income
-   Type: Investments
-   Amount: 500.00
-   Description: stocks
-Income Balance: 5500.00
-```
+
+![](images/cashflow/ListIncome.png)
 
 Input: `list expense`
 
 Output:
-```
-You have 2 matching cashflows:
-1: Expense
-   Type: Necessities
-   Amount: 1000.00
-2: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
-   Description: insurance
-Expense Balance: 1800.00
-```
+
+![](images/cashflow/ListExpense.png)
 
 Input: `list recurring`
 
 Output:
-```
-You have 2 matching cashflows:
-1: Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
-   Description: work
-2: Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
-   Description: insurance
-```
+
+![](images/cashflow/ListRecurring.png)
 
 ### Delete cashflow
 
@@ -706,15 +648,8 @@ Balance: -800.00
 Input: `list recurring` followed by `delete recurring 1`
 
 Output:
-```
-You have removed an Expense
-   Type: Insurance
-   Amount: 800.00
-   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
-   Description: insurance
-from the Financial Planner.
-Balance: 0.00
-```
+
+![](images/cashflow/ListDeleteRecurring.png)
 
 ### Recurring cashflow
 
@@ -731,15 +666,10 @@ Next, exit the program and change the system time to be ahead by the specified d
 In the case of the example command, you can bring forward the system time by 1 day.
 
 Finally, start the program again and you should see this output:
-```
-You have added an Income
-   Type: Salary
-   Amount: 5000.00
-   Recurring every: 1 days, date added: Nov 13 2023, recurring on: Nov 14 2023
-   Description: work
-to the Financial Planner.
-Balance: 10000.00
-```
+
+![](images/cashflow/RecurringIncome.png)
+
+Note: The dates displayed will differ based on your system time.
 
 ### View Balance
 
@@ -818,28 +748,19 @@ To test the watchlist feature, you can copy the text below into the watchlist.js
   }
 }
 ```
-Start Financial Planner app and you should be able to see this output (although prices will differ)
-```
-watchlist
-Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
-BB        NYSE      3.64      3.67           3.55          BlackBerry Ltd                   Sat, Nov 11 2023 05:00:02
-TSLA      NASDAQ    214.65    215.38         205.69        Tesla Inc                        Sat, Nov 11 2023 05:00:00
-Data provided by Financial Modeling Prep and Alpha Vantage =)
-```
+Start Financial Planner app and you should be able to see this output (although prices will differ) after running the
+watchlist command
+
+![](images/investments/watchlistMT1.png)
 
 You can then add a stock using the command below
 ```
 addstock /s NET
 ```
 You should see a message stating that Cloudflare was added. After running the watchlist command again and exiting the 
-application, your watchlist output should look like this 
-```
-Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
-BB        NYSE      3.64      3.67           3.55          BlackBerry Ltd                   Sat, Nov 11 2023 05:00:02
-TSLA      NASDAQ    214.65    215.38         205.69        Tesla Inc                        Sat, Nov 11 2023 05:00:00
-NET       NYSE      63.08     63.31          61.34         Cloudflare Inc - Class A         Sat, Nov 11 2023 05:00:02
-Data provided by Financial Modeling Prep and Alpha Vantage =)
-```
+application, your watchlist output should look like this
+
+![](images/investments/watchlistMT2.png)
 
 You can also remove stocks from the command. Run these commands separately
 ```
@@ -849,10 +770,8 @@ deletestock /s NET
 ```
 After deleting all the stocks and running the watchlist command again, the output should look like this
 as you have no more stocks left in your watchlist
-```
-Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
-Empty Watchlist. Nothing to display...
-```
+![!](images/investments/watchlistMT3.png)
+
 ### Using Visualization
 
 We can use the visualization feature to visualize your income and expenses.
