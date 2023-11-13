@@ -25,7 +25,8 @@
     * [Target user profile](#target-user-profile)
     * [Value proposition](#value-proposition)
     * [User stories](#user-stories)
-<!-- TOC -->--------------------------------------------------------------------------------------------------------------
+<!-- TOC -->
+--------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 [addressbook-level2](https://github.com/se-edu/addressbook-level2) <br>

@@ -104,4 +104,5 @@ public class ErrorMessages {
             + "is inaccurate and will hence be updated from %.2f to %.2f instead.";
     public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
             + HelpCommand.MESSAGE_USAGE;
+    public static final String MISSING_FILEPATH = "Error in FileManager: No File Path entered";
 }
