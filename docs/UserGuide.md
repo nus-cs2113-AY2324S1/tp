@@ -367,6 +367,8 @@ Example: `list_sale day/2`
 
 Output:
 - list_sale day/2 lists the dishes sold along with the total sales for day 2.
+
+
 ```
 +---------------------------------------------------------------------------+
 | Day 2:                                                                    |
