@@ -205,17 +205,21 @@ When the `execute()` method of AddOrderCommand is invoked in Main, the parsed `o
 
 A `Chef` object is then created to process the order by running `cookDish()`. 
 This method first checks if the order has already been completed by running `order.getIsCompleted()`.
-If the order has not been completed, the `showDeleteMesage()` in the Ui component is triggered to display a message to show the user that the dish is being 'prepared'.
+If the order has not been completed, the `showChefMesage()` in the Ui component is triggered to display a message to show the user that the dish is being 'prepared'.
 An ArrayList of Ingredients, ingredientList, is retrieved from the `order` object by `order.getIngredientList()`. 
-This ingredientList is passed into the `pantry` object in `pantry.decreaseIngredientsStock()` to process the ingredients used from the pantry stock.
-The order is then marked as completed by `order.setComplete()`
+This ingredientList is passed into the `pantry` object in `pantry.isDishCook()` to process the ingredients used from the pantry stock.
+This method returns a boolean, true if there is sufficient ingredients in the pantry, false is insufficient.
+The order completeness status is updated by the boolean method, passing it into `order.setComplete()`
 
 Returning to the AddOrderCommand, the `order` object is checked to be completed again by running `order.getIsCompleted()`.
-This verifies that the ingredientList has been successfully retrieved and passed into `pantry.decreaseIngredientsStock()` to run without errors.
+This verifies that the has been successfully completed.
 After verifying that the order has been completed, the cost of the order is added to the total order by `orderList.addCost()`. 
+The total cost is the shown to the user using `ui.showOrderStatus`.
+Lastly, the pantry checks on the remaining ingredients in stock and calculates the potential future dishes able to be made with the remaining stock, using `pantry.calculateDishAvailability()`.
 
-The total sum of orders in the `orderList` object is retrieved using `orderList.getTotalCost()`.
-This is then passed into Ui using `ui.showTotalCost()` to display a message to the user with the total order cost.
+If the order has been marked incomplete, the details of the orderedDish is retrieved from `Order` using `order.getOrderedDish()`.
+This is then passed on to the `Pantry` to figure out the missing ingredients, by `pantry.calculateMaxDishes()`.
+Lastly, the user is shown a message informing that the order has not been completed due to the lack of ingredients using `ui.showIncompleteOrder()`.
 
 ### Next Day
 A `next_day` command can be used advance the current day.

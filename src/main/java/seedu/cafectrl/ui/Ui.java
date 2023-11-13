@@ -268,12 +268,15 @@ public class Ui {
         showToUser("Total order cost: $" + dollarCost);
     }
 
-    public void showOrderStatus(String orderStatus, String totalCost) {
+    public void showOrderStatus(String totalCost) {
         printLine();
-        showToUser(orderStatus);
+        showToUser(Messages.COMPLETE_ORDER);
         showTotalCost(totalCost);
         printLine();
         showDishAvailabilityMessage();
+    }
+    public void showIncompleteOrder() {
+        showToUser(Messages.INCOMPLETE_ORDER);
     }
 
     public void showDishAvailabilityMessage() {

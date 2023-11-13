@@ -40,10 +40,24 @@ autonumber
             activate ":Pantry"
             return
         return
-    opt order.getIsComplete()
+        destroy ":Chef"
+    alt order.getIsComplete()
         ":AddOrderCommand" -> ":OrderList" : addCost(order : Order)
-        activate ":OrderList"
-        return
+            activate ":OrderList"
+            return
+        ":AddOrderCommand" -> ":Ui" : showOrderStatus(totalCost : String)
+            activate ":Ui"
+            return
+    else
+        ":AddOrderCommand" -> ":Order" : getOrderedDish()
+            activate ":Order"
+            return orderedDish : Dish
+        ":AddOrderCommand" -> ":Pantry" : calculateMaxDishes(orderedDish : Dish, menu : Menu, order : Order)
+            activate ":Pantry"
+            return
+        ":AddOrderCommand" -> ":Ui" : showIncompleteOrder()
+            activate ":Ui"
+            return
     end
 return
 @enduml

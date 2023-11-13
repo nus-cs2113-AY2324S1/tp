@@ -151,10 +151,10 @@ public class Parser implements ParserUtil {
             return preparePreviousDay(ui, currentDate);
 
         case ListTotalSalesCommand.COMMAND_WORD:
-            return prepareShowSales(sales, menu, ui, arguments);
+            return prepareShowSales(sales, ui, arguments);
 
         case ListSaleByDayCommand.COMMAND_WORD:
-            return prepareShowSalesByDay(arguments, ui, sales, menu);
+            return prepareShowSalesByDay(arguments, ui, sales);
 
         default:
             logger.warning(ErrorMessages.UNKNOWN_COMMAND_MESSAGE);
@@ -195,7 +195,7 @@ public class Parser implements ParserUtil {
         int dishIndexGroup = 1;
         int newPriceGroup = 2;
         int dishIndex;
-        float newPrice;
+        float newDishPrice;
 
         try {
             String dishIndexText = matcher.group(dishIndexGroup).trim();
@@ -219,13 +219,13 @@ public class Parser implements ParserUtil {
         }
 
         try {
-            newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
+            newDishPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
         } catch (ParserException e) {
             logger.log(Level.WARNING, "Invalid price!", e);
             return new IncorrectCommand(e.getMessage(), ui);
         }
 
-        return new EditPriceCommand(dishIndex, newPrice, menu, ui);
+        return new EditPriceCommand(dishIndex, newDishPrice, menu, ui);
     }
 
     //@@author DextheChik3n
@@ -818,13 +818,12 @@ public class Parser implements ParserUtil {
      * Prepares a command to display all sales items.
      *
      * @param sale The Sales object containing sales data.
-     * @param menu The Menu object representing the cafe's menu.
      * @param ui   The Ui object for user interface interactions.
      * @return A ShowSalesCommand instance for viewing all sales items.
      */
-    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui, String arguments) {
+    private static Command prepareShowSales(Sales sale, Ui ui, String arguments) {
         if (arguments.isEmpty()) {
-            return new ListTotalSalesCommand(sale, ui, menu);
+            return new ListTotalSalesCommand(sale, ui);
         } else {
             return new IncorrectCommand(ErrorMessages.WRONG_LIST_TOTAL_SALES_FORMAT, ui);
         }
@@ -837,10 +836,9 @@ public class Parser implements ParserUtil {
      * @param arguments The arguments containing the day for which sales are to be displayed.
      * @param ui        The Ui object for user interface interactions.
      * @param sales     The Sales object containing sales data.
-     * @param menu      The Menu object representing the cafe's menu.
      * @return A ShowSalesByDayCommand instance for viewing sales items on a specific day.
      */
-    private static Command prepareShowSalesByDay(String arguments, Ui ui, Sales sales, Menu menu) {
+    private static Command prepareShowSalesByDay(String arguments, Ui ui, Sales sales) {
         final Pattern showSaleByDayPattern = Pattern.compile(SHOW_SALE_BY_DAY_ARGUMENT_STRING);
         Matcher matcher = showSaleByDayPattern.matcher(arguments.trim());
 
@@ -855,7 +853,7 @@ public class Parser implements ParserUtil {
             if (day < 0) {
                 throw new Exception();
             }
-            return new ListSaleByDayCommand(day, ui, sales, menu);
+            return new ListSaleByDayCommand(day, ui, sales);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_DAY_FORMAT, ui);
         }

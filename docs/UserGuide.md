@@ -211,14 +211,14 @@ Format: `list_menu`
 
 Example:
 ```
-+-----------------------------------------+
-| Ah, behold, the grand menu of delights! |
-+--------------------------+--------------+
-| Dish Name                |  Price       |
-+--------------------------+--------------+
-| 1. chicken rice          |  $2.50       |
-| 2. chicken curry         |  $4.30       |
-+-----------------------------------------+
++-------------------------------------------------------+
+|        Ah, behold, the grand menu of delights!        |
++----------------------------------------+--------------+
+| Dish Name                              |  Price       |
++----------------------------------------+--------------+
+| 1. chicken rice                        |  $2.50       |
+| 2. chicken curry                       |  $4.30       |
++-------------------------------------------------------+
 ```
 
 <!---@@author NaychiMin--->
@@ -289,6 +289,8 @@ Adds an order consisting of dishes off the menu to an order list
 
 Format: `add_order name/DISH_NAME qty/DISH_QTY`
 
+* The `DISH_QTY` must be a positive integer number.
+
 Example:
 ```
 > add_order name/chicken rice qty/2
@@ -304,21 +306,22 @@ Available Dishes: 8
 Dish: chicken curry
 Available Dishes: 4
 ```
-* The `DISH_QTY` must be a positive integer number.
 
-Adds an order to the current business day
+However, if there is insufficient ingredients in the pantry required for the desired dish quantity,
+the following message will be shown, prompting the user to `buy_ingredient`
 
-Format: `add_order name/DISH_NAME qty/QUANTITY`
-
-Example: `add_order name/chicken rice qty/2`
-
-Output:
-```
+```agsl
+> add_order name/chicken rice qty/2
 I'm busy crafting your selected dish in the virtual kitchen of your dreams. Bon appétit!
-Is order completed?: true
-Total orderList cost: $4.00
++----------------------------------------+--------------+--------------+
+| Restock                                | Current      | Needed       |
++----------------------------------------+--------------+--------------+
+| chicken                                | 0g           | 200g         |
++----------------------------------------------------------------------+
+| rice                                   | 0g           | 100g         |
++----------------------------------------------------------------------+
+Please restock ingredients before preparing the order :) 
 ```
-
 
 ### Showing total sales : `list_total_sales`
 Displays the dishes sold and total sales for each from Day 1 to the current day that 
@@ -364,6 +367,8 @@ Example: `list_sale day/2`
 
 Output:
 - list_sale day/2 lists the dishes sold along with the total sales for day 2.
+
+
 ```
 +---------------------------------------------------------------------------+
 | Day 2:                                                                    |
@@ -377,6 +382,7 @@ Output:
 | Total for day:                                        | $12.00            |
 +---------------------------------------------------------------------------+
 ```
+
 ### Advancing to the next day: `next_day`
 
 Proceeds to the next business day
