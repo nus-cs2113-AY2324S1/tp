@@ -16,15 +16,17 @@ EssenMakanan -> Parser : parseCommand()
 activate Parser
 
 create ViewShortcutCommand
-Parser -> ViewShortcutCommand: ViewShortcutCommand()
+Parser -> ViewShortcutCommand: new ViewShortcutCommand()
 activate ViewShortcutCommand
 
 ViewShortcutCommand --> Parser : command object
+deactivate ViewShortcutCommand
 
 Parser -> EssenMakanan: command object
 deactivate Parser
 
 EssenMakanan -> ViewShortcutCommand: executeCommand()
+activate ViewShortcutCommand
 
 ViewShortcutCommand -> Ui: printAllShortcuts(shortcuts)
 activate Ui
