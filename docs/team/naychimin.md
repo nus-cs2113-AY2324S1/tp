@@ -80,7 +80,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
          - Order Processing: Seamlessly integrating logic for order success determination and the need for Pantry's ingredient stock management.
          - Pantry Stock Management: My active contribution to the Pantry class connected the use of add_order command with subsequent use of the buy_ingredients command, making it a central hub for order processing, dish availability checks, and ingredient restocking prompts.
          - Dish Coordination: I ensured smooth coordination across various dish-related elements, covering determination of success of order to ingredient availability and restocking.
-      - Ensuring the accuracy of the dish management process, my role provided a seamless flow from adding orders to procuring required ingredients. This critical link facilitated the effective functioning of the project, ensuring a cohesive and integrated approach to order handling.
+      - Ensuring the accuracy of the dish management process, my role ensures a cohesive and integrated approach to order handling.
 
 2. **Encoding of Sales**
     - Implemented encoding for the Sales object, involving:
