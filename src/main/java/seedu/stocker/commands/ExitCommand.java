@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting Stocker as requested ...";
 
     @Override
-    public CommandResult execute() {
+    public  <T> CommandResult<T> execute() {
         return new CommandResult<>(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 

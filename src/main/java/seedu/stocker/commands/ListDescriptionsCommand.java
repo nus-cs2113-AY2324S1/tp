@@ -25,7 +25,7 @@ public class ListDescriptionsCommand extends Command {
      * @return CommandResult that displays the list of drug descriptions.
      */
     @Override
-    public CommandResult execute() {
+    public  <T> CommandResult<T> execute() {
         Map<String, String> descriptions = seedu.stocker.drugs.Description.getAllDescriptions();
         StringBuilder result = new StringBuilder(MESSAGE_SUCCESS);
 

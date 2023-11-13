@@ -17,7 +17,7 @@ public class LoginCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Welcome back!";
 
-    public CommandResult execute() throws IOException {
+    public  <T> CommandResult<T> execute() throws IOException {
         LoginSystem system = new LoginSystem();
         system.loadExistingUsers();
         system.loginExistingUser();

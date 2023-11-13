@@ -32,7 +32,7 @@ public class ListThresholdCommand extends Command {
         List<Map.Entry<String, StockEntry>> stockEntries = inventory.getStockEntries();
 
         if (stockEntries.isEmpty()) {
-            return new CommandResult("The inventory is empty.");
+            return new CommandResult<>("The inventory is empty.");
         } else {
             List<String> resultElements = new ArrayList<>();
             for (Map.Entry<String, StockEntry> entry : stockEntries) {

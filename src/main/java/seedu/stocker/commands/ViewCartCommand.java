@@ -23,9 +23,9 @@ public class ViewCartCommand extends Command {
     /**
      * Execute the ViewCartCommand
      */
-    public CommandResult execute() {
+    public  <T> CommandResult<T> execute() {
         if (currentCart.isEmpty()) {
-            return new CommandResult(MESSAGE_FAILURE);
+            return new CommandResult<>(MESSAGE_FAILURE);
         } else {
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
             int index = 1;

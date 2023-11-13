@@ -2,9 +2,10 @@
 
 hide footbox
 actor User
-participant AddVendorSupplyCommand
-participant VendorSupplyList
-participant VendorsList
+participant ":AddVendorSupplyCommand" as AddVendorSupplyCommand
+participant ":VendorSupplyList" as VendorSupplyList
+participant ":VendorsList" as VendorsList
+participant ":CommandResult" as CommandResult
 
 User -> AddVendorSupplyCommand: initiate AddVendorSupply
 Activate AddVendorSupplyCommand

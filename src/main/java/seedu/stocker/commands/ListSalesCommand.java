@@ -18,13 +18,13 @@ public class ListSalesCommand extends Command {
     public static final String MESSAGE_FAILURE = "The sales list is empty.";
 
     @Override
-    public CommandResult execute() {
+    public  <T> CommandResult<T> execute() {
         StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
         int index = 1;
         double totalCost = 0.0;
 
         if (salesList.getAllSales().isEmpty()) {
-            return new CommandResult(MESSAGE_FAILURE);
+            return new CommandResult<>(MESSAGE_FAILURE);
         }
 
         for (Cart cart : salesList.getAllSales()) {
@@ -51,6 +51,6 @@ public class ListSalesCommand extends Command {
 
         resultMessage.append("Total Sales: ").append(totalCost);
 
-        return new CommandResult(resultMessage.toString().trim());
+        return new CommandResult<>(resultMessage.toString().trim());
     }
 }

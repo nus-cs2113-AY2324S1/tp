@@ -37,7 +37,7 @@ public class ListCommand extends Command {
         // Check if the inventory is empty
         if (stockEntries.isEmpty()) {
             // Return a CommandResult indicating that the inventory is empty
-            return new CommandResult("The inventory is empty.");
+            return new CommandResult<>("The inventory is empty.");
         } else {
             // Prepare a StringBuilder to construct the output message
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
