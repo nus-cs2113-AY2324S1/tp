@@ -245,7 +245,6 @@ public class Decoder {
             orderLists.get(day).addOrder(orderedDish);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
-            System.out.println(e.getMessage());
             ui.showToUser(ErrorMessages.INVALID_SALES_DATA + orderLine);
         }
     }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Pantry {
-
+    public static final int DEFAULT_ORDER_QTY = 1;
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private ArrayList<Ingredient> pantryStock;
     private Ui ui;
@@ -175,12 +175,11 @@ public class Pantry {
 
             if (!order.getIsComplete()) {
                 isRestockHeaderDisplayed = showRestockHeaderIfNeeded(isRestockHeaderDisplayed);
-                handleIncompleteDishCase(dishIngredient, order);
+                handleIncompleteDishCase(dishIngredient, order, numOfDish);
             } else {
-                if (numOfDish == 0) {
-                    isRestockHeaderDisplayed = showRestockHeaderIfNeeded(isRestockHeaderDisplayed);
-                }
-                handleZeroDishCase(dishIngredient);
+                isRestockHeaderDisplayed = (numOfDish == 0) ? showRestockHeaderIfNeeded(isRestockHeaderDisplayed)
+                        : isRestockHeaderDisplayed;
+                handleZeroDishCase(dishIngredient, numOfDish);
             }
         }
 
@@ -195,15 +194,15 @@ public class Pantry {
         return isRestockHeaderDisplayed;
     }
 
-    private void handleIncompleteDishCase(Ingredient dishIngredient, Order order) {
+    private void handleIncompleteDishCase(Ingredient dishIngredient, Order order, int numOfDish) {
         int orderQuantity = order.getQuantity();
-        if (calculateMaxDishForEachIngredient(dishIngredient) < orderQuantity) {
+        if (numOfDish < orderQuantity) {
             handleRestock(dishIngredient, orderQuantity);
         }
     }
-    private void handleZeroDishCase(Ingredient dishIngredient) {
-        if (calculateMaxDishForEachIngredient(dishIngredient) == 0) {
-            handleRestock(dishIngredient, 1);
+    private void handleZeroDishCase(Ingredient dishIngredient, int numOfDish) {
+        if (numOfDish == 0) {
+            handleRestock(dishIngredient, DEFAULT_ORDER_QTY);
         }
     }
 

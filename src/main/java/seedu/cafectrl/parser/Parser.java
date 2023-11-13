@@ -150,7 +150,7 @@ public class Parser implements ParserUtil {
             return preparePreviousDay(ui, currentDate);
 
         case ListTotalSalesCommand.COMMAND_WORD:
-            return prepareShowSales(sales, menu, ui);
+            return prepareShowSales(sales, menu, ui, arguments);
 
         case ListSaleByDayCommand.COMMAND_WORD:
             return prepareShowSalesByDay(arguments, ui, sales, menu);
@@ -781,8 +781,13 @@ public class Parser implements ParserUtil {
      * @param ui   The Ui object for user interface interactions.
      * @return A ShowSalesCommand instance for viewing all sales items.
      */
-    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui) {
-        return new ListTotalSalesCommand(sale, ui, menu);
+    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui, String arguments) {
+        if (arguments.isEmpty()) {
+            return new ListTotalSalesCommand(sale, ui, menu);
+        } else {
+            return new IncorrectCommand(ErrorMessages.WRONG_LIST_TOTAL_SALES_FORMAT, ui);
+        }
+
     }
 
     /**
