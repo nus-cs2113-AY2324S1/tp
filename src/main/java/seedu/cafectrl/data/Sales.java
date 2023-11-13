@@ -78,8 +78,7 @@ public class Sales {
             }
 
             ui.showSalesTop(day + DAY_DISPLAY_OFFSET);
-            orderList.printOrderList(menu, ui);
-            ui.showSalesBottom();
+            orderList.printOrderList(ui);
         }
     }
 
@@ -101,8 +100,7 @@ public class Sales {
             }
             ui.showSalesTop(day);
 
-            orderList.printOrderList(menu, ui);
-            ui.showSalesBottom();
+            orderList.printOrderList(ui);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to print sales for day " + day + "\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);

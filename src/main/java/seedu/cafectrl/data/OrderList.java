@@ -46,11 +46,16 @@ public class OrderList {
     /**
      * Prints the order list for a specific day, including dish names, quantities, and total cost prices.
      *
-     * @param menu The Menu object representing the cafe's menu.
      */
-    public void printOrderList(Menu menu, Ui ui) {
+    public void printOrderList(Ui ui) {
         logger.info("Printing order list...");
-        ArrayList<Order> aggregatedOrders = menu.getAggregatedOrders();
+
+        if (orderList.isEmpty() || !hasCompletedOrders()) {
+            ui.showToUser("No sales for this day.");
+            return;
+        }
+
+        ArrayList<Order> aggregatedOrders = new ArrayList<>();
 
         for (Order order : orderList) {
             aggregateOrder(order, aggregatedOrders);
@@ -68,25 +73,34 @@ public class OrderList {
 
         ui.showSalesBottom();
         ui.showSalesCost("Total for day: ", "$" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
+        ui.showSalesBottom();
     }
 
     /**
      * Aggregates orders by updating quantities and total order costs for the same dish.
      *
-     * @param order           The Order object to be aggregated.
+     * @param order The Order object to be aggregated.
      * @param aggregatedOrders The ArrayList of aggregated orders.
      */
     private void aggregateOrder(Order order, ArrayList<Order> aggregatedOrders) {
         logger.info("Aggregating order...");
         if (order.getIsComplete()) {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
-            aggregatedOrders.get(index)
-                    .setQuantity(aggregatedOrders.get(index).getQuantity() + order.getQuantity());
-            aggregatedOrders.get(index)
-                    .setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost() + order.getTotalOrderCost());
+            //if dish is not found in aggregated orders, add the dish into it
+            if (index == -1) {
+                aggregatedOrders.add(new Order(order.getOrderedDish(), order.getQuantity(), order.getTotalOrderCost()
+                        , true));
+            } else {
+                //else add the quantities and totalCost accordingly
+                aggregatedOrders.get(index)
+                        .setQuantity(aggregatedOrders.get(index).getQuantity() + order.getQuantity());
+                aggregatedOrders.get(index)
+                        .setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost() + order.getTotalOrderCost());
+            }
         }
     }
 
+    //@@author Shanice Tang
     /**
      * Finds the index of an order in the aggregated orders list based on the dish name.
      *
@@ -105,6 +119,7 @@ public class OrderList {
         }
         return -1;
     }
+    //@@author
 
     /**
      * Calculates the total cost of all orders for a specific day.
