@@ -163,7 +163,9 @@ of `parseCommand`. For simplicity, not all possible paths are covered, instead s
 parsing valid commands that can be returned immediately, parsing valid commands that require further parsing, and 
 parsing invalid commands. <br/><br/>
 
-![](UML/Images/parser.png) <br/><br/>
+<img src="UML/Images/parser.png" alt="" width="350" />
+<br/><br/>
+
 
 `extract` methods
 
@@ -264,7 +266,7 @@ to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
-<img src="UML/Images/commandAddState.png" alt="short1" width="350" />
+<img src="UML/Images/commandAddState.png" alt="short1" width="500" />
 
 #### Expected invalid commands for Short Command 
 - `short What is the capital of France?`
@@ -342,7 +344,7 @@ to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
-![commandMCQ.png](UML/Images/commandMCQ.png)
+<img src="UML/Images/commandMCQ.png" alt="" width="500" />
 
 #### Expected invalid commands for MCQ Command
 - `mcq What is the capital of France?`
@@ -668,7 +670,7 @@ Upon execution, the `CommandStart` class will first gather the matching question
 
 #### Sequence Diagram of Start Command
 
-![commandStartLoop.png](UML/Images/commandStartLoop.png)
+<img src="UML/Images/commandStartLoop.png" alt="commandStartLoop.png" width="500" />
 
 #### Implementation of Start Command
 
@@ -967,7 +969,7 @@ The details of the data loading and updating process are explained in details be
 
 The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below.
 
-![](UML/Images/storageLoadDataSequence.png)
+<img src="UML/Images/storageLoadDataSequence.png" alt="" width="500" />
 
 :exclamation: This sequence diagram emphasizes the process of loading data into storage, and has therefore omitted details of more trivial and/or non-related methods as well as exception handling logic. To find out more about the details, please refer to the complete code and header comments.
 
