@@ -25,13 +25,13 @@ public class Sales {
 
     public Sales(ArrayList<OrderList> orderLists) {
         this.orderLists = orderLists;
-        this.daysAccounted = orderLists.size() - 1;
+        this.daysAccounted = orderLists.size() - DAY_DISPLAY_OFFSET;
     }
 
     public Sales(OrderList orderList) {
         this.orderLists = new ArrayList<>();
         orderLists.add(orderList);
-        this.daysAccounted = orderLists.size() - 1;
+        this.daysAccounted = orderLists.size() - DAY_DISPLAY_OFFSET;
     }
 
     public void addOrderList(OrderList orderList) {
@@ -39,7 +39,7 @@ public class Sales {
     }
 
     public void nextDay() {
-        this.daysAccounted += 1;
+        this.daysAccounted += DAY_DISPLAY_OFFSET;
     }
 
     public int getDaysAccounted() {
@@ -91,7 +91,7 @@ public class Sales {
      */
     public void printSaleByDay(Ui ui, Menu menu, int day) {
         logger.info("Printing sales by day...");
-        int orderListIndex = day - 1;
+        int orderListIndex = day - DAY_DISPLAY_OFFSET;
         try {
             OrderList orderList = orderLists.get(orderListIndex);
             if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
@@ -115,5 +115,4 @@ public class Sales {
         }
         return true;
     }
-    //@@author
 }

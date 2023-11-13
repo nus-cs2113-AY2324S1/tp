@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Menu {
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private ArrayList<Dish> menuItems;
 
     public Menu() {
@@ -22,9 +22,11 @@ public class Menu {
     public ArrayList<Dish> getMenuItemsList() {
         return menuItems;
     }
+
     public int getSize() {
         return menuItems.size();
     }
+
     public Dish getDishFromId(int menuID) {
         return menuItems.get(menuID);
     }
@@ -40,23 +42,12 @@ public class Menu {
         for (int i = 0; i < getSize(); i++) {
             String menuDishName = getDishFromId(i).getName();
             String formattedMenuDishName = menuDishName.toLowerCase().trim();
+
             if (formattedMenuDishName.equals(formattedDishName)){
                 return getDishFromId(i);
             }
         }
         return null;
-    }
-    public void removeDish(int menuID) {
-        menuItems.remove(menuID);
-    }
-    public void addDish(Dish dish) {
-        menuItems.add(dish);
-    }
-
-    public boolean isValidDishIndex(int dishIndex) {
-        logger.info("Checking if dish index " + dishIndex + " is valid...");
-        int offSetDishIndex = dishIndex - Ui.OFFSET_LIST_INDEX;
-        return offSetDishIndex >= 0 && offSetDishIndex < this.getSize();
     }
 
     //@@author NaychiMin
@@ -75,5 +66,27 @@ public class Menu {
             aggregatedOrders.add(order);
         }
         return aggregatedOrders;
+    }
+
+    //@@author ziyi105
+    /**
+     * Checks whether the dish index can be found in the menu
+     *
+     * @param dishIndex dish index to be checked
+     * @return true if it is valid, false otherwise
+     */
+    public boolean isValidDishIndex(int dishIndex) {
+        logger.info("Checking if dish index " + dishIndex + " is valid...");
+
+        int offSetDishIndex = dishIndex - Ui.OFFSET_LIST_INDEX;
+        return offSetDishIndex >= 0 && offSetDishIndex < this.getSize();
+    }
+
+    //@@author DextheChik3n
+    public void removeDish(int menuID) {
+        menuItems.remove(menuID);
+    }
+    public void addDish(Dish dish) {
+        menuItems.add(dish);
     }
 }

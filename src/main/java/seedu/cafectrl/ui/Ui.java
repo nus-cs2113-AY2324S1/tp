@@ -96,7 +96,7 @@ public class Ui {
         showToUser(dishPriceString, Messages.INGREDIENTS_CORNER);
     }
 
-    //@@author
+    //@@author ShaniceTang
     /**
      * Shows delete message to user
      *
@@ -122,6 +122,7 @@ public class Ui {
 
     /**
      * Shows menu to user is table format
+     *
      * @param dishName
      * @param dishPrice
      */
@@ -132,6 +133,7 @@ public class Ui {
 
     /**
      * show edit price message to user
+     *
      * @param menuItem menuItem that has been modified
      */
     public void showEditPriceMessage(String menuItem) {
@@ -282,9 +284,5 @@ public class Ui {
     }
     public void showNextDay() {
         showToUser(Messages.NEXT_DAY_COMMAND_MESSAGE);
-    }
-
-    public void showDecodedInvalidDish(String dishName) {
-        showToUser(dishName + Messages.INVALID_DISH + dishName);
     }
 }
