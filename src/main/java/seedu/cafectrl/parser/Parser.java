@@ -56,7 +56,7 @@ public class Parser implements ParserUtil {
             + "qty/\\s*(?<ingredientQty>.*)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
+    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[+-]*[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
     private static final String INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL = "value";
     private static final String INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL = "unit";
     private static final String ADD_DISH_NAME_ARGUMENT = "name/";
