@@ -26,6 +26,8 @@ classes necessary for handling invalid commands [PR #16](https://github.com/AY23
 * Standardize methods to check answer validity and correctness 
 [#221](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/221)
 
+<div style="page-break-after: always;"></div>
+
 ### Code Testing and Improvement
 * Initialize and maintain Unit testing with Junit
   * Ensure cross-platform compatibility
@@ -33,8 +35,6 @@ classes necessary for handling invalid commands [PR #16](https://github.com/AY23
   * Add testing for invalid command handling [PR #29](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/29/)
   * Fix test cases to pass CI checks [PR #89](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/89/)
   * Fix line separator issues in tests [PR #95](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/95/)
-
-<div style="page-break-after: always;"></div>
 
 * Regularly conduct integration tests with various test cases to find and fix bugs
   * Use equivalence partition, system testing technique and debugging to locate possible bugs
