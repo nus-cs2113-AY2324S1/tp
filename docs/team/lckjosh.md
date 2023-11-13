@@ -13,13 +13,31 @@ View my code contributions here: [Reposense](https://nus-cs2113-ay2324s1.github.
 
 ### Enhancements implemented
 - Feature: Added the ability to add expenses
+  - Creation of Transaction, Expense classes
+  - Created methods in Parser to validate user input for adding expenses
+  - Created methods in Storage to load expenses from data file
+  - Created TransactionList to store and manipulate transactions
 - Feature: Added the ability to add allowances
+    - Creation of Transaction, Allowance classes
+    - Created methods in Parser to validate user input for adding allowances
+    - Created methods in Storage to load allowances from data file
+    - Created TransactionList to store and manipulate transactions
 - Feature: Added the ability to categorise allowances
-- Bugfix: Allow modification of storage file and handle improper file input
+  - Created AllowanceCategory 
+  - Modified Parser to parse valid allowance categories
+  - Modified Ui to print allowance category in relevant outputs
+- Bugfix: Log to file instead of console: [#44](https://github.com/AY2324S1-CS2113-T18-4/tp/issues/44)
+- Bugfix: Allow modification of storage file and handle improper file input. 
+Github issues:
+[#63](https://github.com/AY2324S1-CS2113-T18-4/tp/issues/63),[#92](https://github.com/AY2324S1-CS2113-T18-4/tp/issues/92),
+[#99](https://github.com/AY2324S1-CS2113-T18-4/tp/issues/99),[#104](https://github.com/AY2324S1-CS2113-T18-4/tp/issues/104)
+- Explored using HMAC to verify integrity of storage file [#64](https://github.com/AY2324S1-CS2113-T18-4/tp/pull/64)
+  - Eventually removed to align with tP constraints of human-editable file
 
 ### Contributions to the UG
 - Created the format for commands in the Features section
 - Ideated the example outputs given
+- FAQ
 
 ### Contributions to the DG
 - Acknowledgements
@@ -30,4 +48,13 @@ View my code contributions here: [Reposense](https://nus-cs2113-ay2324s1.github.
 - Storage Component
 - Implementation: `list` Transactions Feature
 
+### Contributions to team-based tasks
+- Set up the team repository
+- Heavily refactored code from original [Spaceman Task Manager](https://github.com/spaceman03/ip/)
+in the initial phase of the project (when developing the basic adding allowance/expense feature)
+- Reviewed non-trivial PRs [#24](https://github.com/AY2324S1-CS2113-T18-4/tp/pull/24), [#74](https://github.com/AY2324S1-CS2113-T18-4/tp/pull/74) 
+- Assisted team members with help if needed (e.g. edit command feature syntax and implementation)
+- Developed JUnit tests for the methods used in Parser when adding transactions
+
 ### Contributions beyond the project team
+Reported 7 bugs in the PE-D on [GitHub](https://github.com/lckjosh/ped/issues)
