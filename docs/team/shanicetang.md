@@ -13,15 +13,13 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
 Café proprietors who prefer typing on CLI than any other interaction method and are seeking for a software solution to optimize the management of their café's operations.
 
 -----------------------------------------------------------------------------------------------
-
 ## Summary of Contributions
+
 ### Code Contributed
 [Click here to see my code contribution :)](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=ShaniceTang&tabRepo=AY2324S1-CS2113-T17-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 ### Enhancements Implemented
-
 #### Features
-
 1.  **Delete Dish** <br>
    - Function: Allow user to delete a specific dish on the menu
    - Command Format: `delete DISH_INDEX`<br>
@@ -34,7 +32,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
      - Missing argument tag / Missing arguments
      - Quantity value less than 1 or greater than 1,000,000
      - Empty / Invalid Units
-
+       <br/><br/>
 3.  **View Total Stock** <br>
    - Function: Allows user to view the total stock currently in the Pantry
    - Command Format: `view_stock`
@@ -43,15 +41,16 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 1. **Storage**<br>
 - Encoding of Menu object to a readable text file menu.txt
 - Decoding of data in menu.txt to Menu object
-   <br><br>
+  <br><br>
 2. **Parser**<br>
 - Implemented parsing for the features listed above
 - Improved precision of error handling by adding some checking methods: `isInvalidQty`, `isEmptyUnit`, `isValidUnit`, `checkForMismatchUnit`
-     <br><br>
+  <br><br>
 3. **Pantry**<br>
 - Implemented pantry class together with @NaychiMin which helps user to keep track of their current stock. This enhancement plays a huge role to several commands as it allows the user to smoothly interact with the pantry, hence it is important to ensure its completeness by ensuring it is able to seamlessly handle pantry-related operations. For example, for my contribution to pantry class (adding of ingredients to stock), I had to consider the user adding the same ingredients within an input or using a different unit and handle those possibilities elegantly.
 - Allows user to add ingredients to pantry (through `buy_ingredient`) and updates the quantity of existing ingredients. This was a challenge to implement mostly due to the need to upkeep to coding quality. I had to achieve this without involving arrowhead code (which would have been the trivial solution) through abstraction and understanding what parameters I need to pass in and return.
 - Ensures user uses the same unit for existing ingredients. To allow this to be implemented, I modified the Ingredient class upon approval from my team members to accept units as a separate attribute and helped modify other classes/methods that instantiates an Ingredient object.
+  <br><br>
 4. **Messages & ErrorMessages**<br>
 - Provided meaningful messages that can be easily understood by the user
 
@@ -66,10 +65,10 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 - Added descriptions for Ui component, Delete Command, View Total Stock Command, and Buy Ingredient Command
 
 #### Team-based Task
-1. **Logging**
+1. Logging
    - This was challenging as I encountered the issue of the log messages being printed out to system console which ruined the Ui. :( The CS2113 textbook did not mention how to rectify this issue, so I had to do external research and eventually found a solution to store log messages into a log file without displaying at runtime. :)
-2. **Maintaining issue tracker**
-3. **Testing application and report bugs found**
+2. Maintaining issue tracker
+3. Testing application and report bugs found
     ![](../images_PPP/shanice/bug_reporting.png)
 
 ### Review / Mentoring Contributions
