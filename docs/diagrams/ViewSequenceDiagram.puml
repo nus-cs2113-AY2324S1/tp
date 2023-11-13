@@ -47,4 +47,5 @@ deactivate ViewCommand
 
 nuscents --> user
 deactivate nuscents
+destroy ViewCommand
 @enduml

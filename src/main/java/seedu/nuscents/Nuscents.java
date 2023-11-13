@@ -61,7 +61,7 @@ public class Nuscents {
         while (!isExit) {
             try {
                 String fullCommand = ui.getUserCommand();
-                Command command = Parser.parseCommand(fullCommand, transactions);
+                Command command = Parser.parseCommand(fullCommand);
                 command.execute(transactions);
                 isExit = ExitCommand.isExit(command);
                 storage.writeToFile(transactions);
@@ -69,9 +69,7 @@ public class Nuscents {
             } catch (NuscentsException e) {
                 ui.showException(e);
             } catch (IOException | ParseException e) {
-                Ui.showLine();
-                System.out.println("Something went wrong: " + e.getMessage());
-                Ui.showLine();
+                Ui.showFatalErrorMessage();
             } catch (IndexOutOfBoundsException e) {
                 ui.showException(e);
             }

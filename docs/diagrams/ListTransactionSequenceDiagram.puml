@@ -8,6 +8,7 @@ Participant ":Nuscents" as nuscents MAIN_COLOR
 Participant ":Parser" as parser PARSER_COLOR
 Participant ":ListCommand" as ListCommand COMMAND_COLOR
 Participant ":TransactionList" as TransactionList UI_COLOR
+Participant ":UI" as UI
 
 user -[USER_COLOR]> nuscents
 activate nuscents MAIN_COLOR
@@ -29,15 +30,35 @@ deactivate parser
 nuscents -> ListCommand : execute()
 activate ListCommand
 
-ListCommand -> TransactionList : getTransactions()
+ListCommand -> UI : showTransactionList()
+activate UI
+
+UI -> TransactionList : getTransactions()
 activate TransactionList
 
-TransactionList --> ListCommand
+TransactionList --> UI
 deactivate TransactionList
+
+UI --> ListCommand
+deactivate UI
+
+ListCommand -> UI : showBudgetExpense()
+activate UI
+
+UI -> TransactionList : getBudget()
+activate TransactionList
+
+TransactionList --> UI
+deactivate TransactionList
+
+UI --> ListCommand
+deactivate UI
+
 
 ListCommand --> nuscents
 deactivate ListCommand
 
 nuscents --> user
 deactivate nuscents
+destroy ListCommand
 @enduml

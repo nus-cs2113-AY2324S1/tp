@@ -50,25 +50,25 @@ public class ParserTest {
 
     @Test
     public void parseCommand_invalidCommand_invalidCommandReturned() throws Exception {
-        Command result = Parser.parseCommand("asdf", null);
+        Command result = Parser.parseCommand("asdf");
         assertTrue(result instanceof InvalidCommand);
     }
     @Test
     public void parseCommand_exitCommand_success() throws Exception {
-        Command result = Parser.parseCommand("exit", null);
+        Command result = Parser.parseCommand("exit");
         assertTrue(result instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_listCommand_success() throws Exception {
-        Command result = Parser.parseCommand("list", null);
+        Command result = Parser.parseCommand("list");
         assertTrue(result instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_deleteCommand_success() throws Exception {
         String input = "delete 1";
-        Command result = Parser.parseCommand(input, null);
+        Command result = Parser.parseCommand(input);
         assertTrue(result instanceof DeleteCommand);
         assertEquals(1, Parser.parseTaskIndex("1"));
     }
@@ -76,7 +76,7 @@ public class ParserTest {
     @Test
     public void parseCommand_viewCommand_success() throws Exception {
         String input = "view 1";
-        Command result = Parser.parseCommand(input, null);
+        Command result = Parser.parseCommand(input);
         assertTrue(result instanceof ViewCommand);
         assertEquals(1, Parser.parseTaskIndex("1"));
     }
@@ -84,7 +84,7 @@ public class ParserTest {
     @Test
     public void parseCommand_filterCommand_success() throws Exception {
         String input = "filter food";
-        Command result = Parser.parseCommand(input, null);
+        Command result = Parser.parseCommand(input);
         assertTrue(result instanceof FilterCommand);
         assertEquals(ExpenseCategory.FOOD, Parser.parseFilterCategory("food"));
     }
@@ -117,7 +117,7 @@ public class ParserTest {
     public void parseAllowance_emptyArguments_exceptionThrown() {
         String input = "allowance";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals("OOPS!!! Invalid input format for adding an allowance.", exception.getMessage());
     }
@@ -126,7 +126,7 @@ public class ParserTest {
     public void parseAllowance_missingArguments_exceptionThrown() {
         String input = "allowance /amt 50.0 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals(Messages.MESSAGE_EMPTY_ALLOWANCE, exception.getMessage());
     }
@@ -135,7 +135,7 @@ public class ParserTest {
     public void parseAllowance_invalidAmount_exceptionThrown() {
         String input = "allowance /amt fifty /date 14-02-2023 /desc Gift";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals(Messages.MESSAGE_INVALID_AMOUNT, exception.getMessage());
     }
@@ -144,7 +144,7 @@ public class ParserTest {
     public void parseExpense_missingArguments_exceptionThrown() {
         String input = "expense /amt 50.0 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals("OOPS!!! Invalid input format for adding an expense.", exception.getMessage());
     }
@@ -153,7 +153,7 @@ public class ParserTest {
     public void parseExpense_emptyArguments_exceptionThrown() {
         String input = "expense";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals(Messages.MESSAGE_EMPTY_EXPENSE, exception.getMessage());
     }
@@ -162,7 +162,7 @@ public class ParserTest {
     public void parseExpense_invalidAmount_exceptionThrown() {
         String input = "expense /amt fifty /date 15-02-2023 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals(Messages.MESSAGE_INVALID_AMOUNT, exception.getMessage());
     }
@@ -171,7 +171,7 @@ public class ParserTest {
     public void parseAllowance_invalidDateTime_exceptionThrown() {
         String input = "allowance /amt 100.0 /date 15/10/2023 /desc Lunch";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals("OOPS!!! The format of the date is invalid.", exception.getMessage());
     }
@@ -180,7 +180,7 @@ public class ParserTest {
     public void parseExpense_invalidDateTime_exceptionThrown() {
         String input = "expense /amt 50.0 /date 16-13-2023 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand(input, null);
+            Parser.parseCommand(input);
         });
         assertEquals("OOPS!!! The format of the date is invalid.", exception.getMessage());
     }
@@ -301,19 +301,19 @@ public class ParserTest {
 
     @Test
     public void parseCommand_helpCommandWithCorrectInput_returnsHelpCommand() throws Exception {
-        Command result = Parser.parseCommand("help", null);
+        Command result = Parser.parseCommand("help");
         assertTrue(result instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_helpCommandWithIncorrectInput_throwsException() {
         Exception exceptionWithSpace = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand("help ", null);
+            Parser.parseCommand("help ");
         });
         assertEquals("OOPS!!! The correct format is 'help' alone.", exceptionWithSpace.getMessage());
 
         Exception exceptionWithExtraChars = assertThrows(NuscentsException.class, () -> {
-            Parser.parseCommand("help extra", null);
+            Parser.parseCommand("help extra");
         });
         assertEquals("OOPS!!! The correct format is 'help' alone.", exceptionWithExtraChars.getMessage());
     }

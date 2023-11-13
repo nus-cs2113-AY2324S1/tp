@@ -20,11 +20,8 @@ import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.transaction.TransactionCategory;
 import seedu.nuscents.data.exception.NuscentsException;
 
-import java.time.Instant;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -44,6 +41,8 @@ import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_HELP;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_LIST;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX_ARGUMENTS;
 import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_EXPENSE_CATEGORY;
 import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY;
@@ -64,7 +63,7 @@ public class Parser {
     private static final String NOTE_PATTERN = "/note ([^/]+)";
     private static final String CATEGORY_PATTERN = "/cat ([^/]+)";
 
-    public static <TransactionList> Command parseCommand(String text, TransactionList transactions)
+    public static <TransactionList> Command parseCommand(String text)
             throws NuscentsException, ParseException {
         String[] commandTypeAndArgs = text.split(" ", 2);
         String commandType = commandTypeAndArgs[0].toLowerCase();
@@ -79,6 +78,7 @@ public class Parser {
             case COMMAND_EXIT:
                 return new ExitCommand();
             case COMMAND_LIST:
+                isArgumentEmpty(arguments, MESSAGE_INVALID_LIST);
                 return new ListCommand();
             case COMMAND_ALLOWANCE:
                 return new AddCommand(parseAllowance(arguments));
@@ -95,15 +95,19 @@ public class Parser {
             case COMMAND_EDIT:
                 return parseEdit(arguments);
             case COMMAND_HELP:
-                if (arguments != null) {
-                    throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
-                }
+                isArgumentEmpty(arguments, MESSAGE_INVALID_HELP);
                 return new HelpCommand();
             default:
                 return new InvalidCommand();
             }
         } catch (NuscentsException | ParseException e) {
             throw e;
+        }
+    }
+
+    private static void isArgumentEmpty(String arguments, String message) throws NuscentsException {
+        if (arguments != null) {
+            throw new NuscentsException(message);
         }
     }
 
@@ -126,6 +130,19 @@ public class Parser {
             throw new NuscentsException(MESSAGE_INVALID_DATE);
         }
         return formatter.parse(date);
+    }
+
+    private static boolean isDateValid(String date, String format, Date formattedDate) {
+        String[] dateMonthYear = date.split("-");
+        SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+        String dayAsString = dayFormat.format(formattedDate);
+        int day = Integer.parseInt(dayAsString);
+        if (format.equals("yyyy-M-d") && day != Integer.parseInt(dateMonthYear[2])) {
+            return false;
+        } else if (format.equals("d-M-yyyy") && day != Integer.parseInt(dateMonthYear[0])) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -210,19 +227,6 @@ public class Parser {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
         }
-    }
-
-    private static boolean isDateValid(String date, String format, Date formattedDate) {
-        String[] dateMonthYear = date.split("-");
-        Instant instant = formattedDate.toInstant();
-        // Convert Instant to LocalDate
-        LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        if (format.equals(DATE_PATTERN1) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
-            return false;
-        } else if (format.equals(DATE_PATTERN2) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[2])) {
-            return false;
-        }
-        return true;
     }
 
     public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws NuscentsException {

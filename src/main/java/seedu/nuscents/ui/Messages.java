@@ -38,6 +38,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! This is an invalid transaction index.";
     public static final String MESSAGE_INVALID_INDEX_ARGUMENTS = "OOPS!!! The input should consist only of digits.";
     public static final String MESSAGE_EMPTY_LIST = "You have not made any transactions!";
+    public static final String MESSAGE_INVALID_LIST = "OOPS!!! The correct format is 'list' alone.";
+    public static final String MESSAGE_INVALID_HELP = "OOPS!!! The correct format is 'help' alone.";
     public static final String MESSAGE_EMPTY_BUDGET = "OOPS!!! The budget amount cannot be empty.";
     public static final String MESSAGE_INVALID_BUDGET = "OOPS!!! The budget amount requires a +ve valid float value";
     public static final String MESSAGE_INVALID_BUDGET_FLOAT_DP = "OOPS!!! The budget amount cannot exceed 2 d.p.";
@@ -47,10 +49,6 @@ public class Messages {
     public static final String MESSAGE_FATAL_ERROR = "OOPS!!! Fatal error occurred...";
     public static final String MESSAGE_FILE_ACCESS_ERROR = "OOPS!!! A problem occurred while accessing the data file."
             + " Ensure you have the correct permissions.";
-    public static final String MESSAGE_FILE_PARSE_ERROR = "OOPS!!! A problem occurred while accessing the data file."
-            + " Ensure you have the correct permissions.";
-    public static final String MESSAGE_FILE_TAMPERED_ERROR = "OOPS!!! The data file has been tampered with. "
-            + "Exiting immediately...";
     public static final String MESSAGE_UNKNOWN_EXPENSE_CATEGORY = "OOPS!!! The category you provided is not a "
             + "valid category.\n"
             + "Valid categories are FOOD/ENTERTAINMENT/TRANSPORTATION/UTILITY/RENT/OTHERS.";
