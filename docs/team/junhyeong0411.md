@@ -22,7 +22,7 @@ Given below are my contributions to the project.
 6. **Clean up wrong files** : If the saved file has been corrupted, deletes it and make a new file
 
 #### Enhancements implemented
-- Storage
+- **Storage**
   - What it does:  It automatically saves the data during the program runs. When the User restarts the program, it automatically retrieves the data. Data is stored along a specific format as a txt file. If someone forcibly changes the data and goes against the format, notify the user and create a new file.
   - Justification: The storage function is essential because the User cannot always turn on the program. Now, users can edit their flashcard and events lists at any time. In addition, the process of inspecting data files is essential because damage may occur in the process of moving or opening them.
   - Enhancements: In v1.0, only flashcards were saved, and the format was simple. In v2.0, events are also saved, and flashcard and events directory were splited. Also, the saving format kept changed because the structure of flashcard and events were changed according to the degree of implementation.
