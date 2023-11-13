@@ -118,7 +118,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 
 <a id="help"></a>
 #### Viewing help – `help`
-(<a href="#system-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#system-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 List all commands and the format and brief description of each command.
 
@@ -129,7 +129,7 @@ List all commands and the format and brief description of each command.
 <a id="view-recipes"></a>
 
 #### View all recipes -  `view r` 
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 List all recipes available inside the app.
 
@@ -137,7 +137,7 @@ List all recipes available inside the app.
 
 <a id="view-recipe"></a>
 #### View specific recipe - `view r/RECIPE_ID`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 View the steps of a specified recipe with RECIPE_ID
   
@@ -150,7 +150,7 @@ Examples :
 
 <a id="add-recipe"></a>
 #### Add new recipe - `add r/RECIPE_TITLE [t/TAG] s/STEP_DESCRIPTION [s/...] [d/DURATION] i/INGREDIENT_NAME,QUANTITY,UNIT [i/...]`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Add a new recipe to the list of recipes. A user is able to add more than one
 step and ingredient to a recipe in 1 line.
@@ -183,7 +183,7 @@ Examples :
 
 <a id="delete-recipe"></a>
 #### Delete a specific recipe - `delete r/RECIPE_ID` or `delete r/RECIPE_TITLE`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Delete the recipe from the recipe list.
 
@@ -202,7 +202,7 @@ Example :
 ---
 <a id="edit-recipe"></a>
 #### Edit a recipe - `edit r/RECIPE_TITLE [n/NEW_TITLE] [s/STEP_INDEX,NEW_STEP_DESCRIPTION] [ i/INGREDIENT_INDEX, [n-NEW_INGREDIENT_NAME], [q-NEW_INGREDIENT_QUANTITY], [u-NEW_INGREDIENT_UNIT] ]`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Edit a recipe to change the name, steps or ingredients of a recipe. 
 
@@ -233,7 +233,7 @@ Full Example :
 
 <a id="duplicate-recipe"></a> 
 #### Duplicate a recipe - `duplicate RECIPE_NAME` or `duplicate RECIPE_INDEX`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Duplicate a recipe from the recipe list. The duplicated recipe with have `(copy)` within its name.
 
@@ -241,14 +241,13 @@ Example :
 
 * `duplicate sandwich` to duplicate a recipe with the title `sandwich`
 * `duplicate 1` to duplicate the first recipe on the list.
-
-![img_3.png](images/DuplicateRecipe.png)
+![DuplicateRecipeEg.png](images%2FDuplicateRecipeEg.png)
 
 ---    
 
 <a id="check-recipe"></a>
 #### Check a recipe - `check RECIPE_TITLE` or `check RECIPE_ID`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Use the check command to check if you are all set to start on the recipe.This command will list all missing ingredients from the recipe you want to start on.
 
@@ -274,7 +273,7 @@ Example:
 
 <a id="filter-recipe"></a>
 #### Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Filter your recipes by ingredients you are craving for that meal.
 
@@ -293,7 +292,7 @@ Example:
 
 <a id="plan-recipe"></a>
 #### Plan recipes for the week - `plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Schedule recipes for a week or for as many days you want by using our plan command!
 This allows you to plan for your grocery trip in advance.
@@ -312,7 +311,7 @@ Example:
 
 <a id="execute-recipe"></a>
 #### Execute a recipe `execute RECIPE_TITLE`
-(<a href="#recipe-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Use this command to start a recipe and automatically remove the ingredients used from the inventory.
 
@@ -335,7 +334,7 @@ Example:
 
 <a id="view-ingredients"></a>
 #### View all ingredients - `view i`
-(<a href="#ingredient-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
     
    List all ingredients available inside the app.
 
@@ -343,7 +342,7 @@ Example:
 
 <a id="view-ingredient"></a>
 #### View a specific ingredient - `view i/INGREDIENT_NAME` or `view i/INGREDIENT_ID`
-(<a href="#ingredient-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Check the quantity of an ingredient you have available in your kitchen/inventory.
 
@@ -359,7 +358,7 @@ Example :
 
 <a id="add-ingredient"></a>
 #### Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
-(<a href="#ingredient-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Adds a new item to the list of todo items. [Registered units in our app](#units)
    
@@ -379,7 +378,7 @@ Example :
 
 <a id="edit-ingredient"></a>
 #### Edit ingredient - `edit i/INGREDIENT_NAME edit i/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY u/NEW_UNIT`
-(<a href="#ingredient-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Edit an ingredient to change the name, quantity or unit. A user is able to edit more than one property of an 
 ingredient.
@@ -392,7 +391,7 @@ Example :
 ---
 <a id="delete-ingredient"></a>
 #### Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
-(<a href="#ingredient-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Delete an ingredient based on the selected index in the list or the ingredient's name.
 
@@ -404,7 +403,7 @@ Example :
 ---
 <a id="use-ingredient"></a>
 #### Use ingredient - `use i/chicken,1,kg`
-(<a href="#ingredient-command-anchor"><img src="img_2.png" alt="Back to Top" width="20" height="15"/></a>)
+(<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Use ingredients in inventory, decrease the quantity of the ingredient by the amount used.
 
