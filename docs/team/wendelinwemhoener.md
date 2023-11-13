@@ -14,10 +14,13 @@ See my code contribution [here on the tP Code Dashboard](https://nus-cs2113-ay23
 - implemented architecture that my team reused
 - made sure that build check and ui text testcase passed
 - javadoc for all methods (except getters/setters and constructors)
+- Team modeled everything in calendar package after the work I did with the 
+  flashcards package
 
 ### Contributions to the UG
 
 - wrote the general sections
+- implemented structure and formatting that my team reused
 
 ### Contributions to the DG
 
