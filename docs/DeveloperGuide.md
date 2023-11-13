@@ -2,7 +2,11 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
++ Acknowledgement to the [CS2113 Website](https://nus-cs2113-ay2324s1.github.io/website/admin/tp-deliverables.html#deliverable-project-portfolio-page-ppp) for giving us design guidelines.
++ Acknowledgement to [Dr Akshay Narayan](https://www.comp.nus.edu.sg/cs/people/anarayan/), and Teaching Assistant for their guidance.
++ Acknowledgement to [team members](AboutUs.md) for their hard work.
++ Acknowledgement to the [diagram tool](https://app.diagrams.net) for facilitating drawing of diagrams
++ Acknowledgement to [Developer Guide Example](https://se-education.org/addressbook-level3/DeveloperGuide.html#acknowledgements) for illustration.
 
 ## Design & implementation
 
@@ -121,15 +125,157 @@ the courses they are taking.
 | v2.0    | experienced user          | use the delete and review feature by typing a one-line command | be faster than having to go through the prompt-answer workflow these features usually require |
 | v2.0    | user                      | find events from my Calendar                                   | find events without listing them all                                                          |
 | v2.0    | user                      | delete all events from my Calendar                             | don't need to remove events one by one                                                        |
+| v2.0    | user                      | add a goal event to my Calendar                                | remember how many flashcards needs to be reviewed by a certain deadline                       |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
++ Software Requirements:
+  1. The TaskLinker should be able to run on one of Windows, macOS, or Linux operating systems.
+  2. The TaskLinker must be able to run on Java 11 or above Java versions.
+
++ Technical Requirements:
+  1. Users should not manually interact with storage files.
+  2. If the input is not in acceptable format, the program shouldn't execute anything
+  3. If the correct command is not given, the program should not execute any command.
+  4. The application should only work with English language.
+
++ General Requirements:
+  1. The application should not crash on any given exceptions due to exceptions handling.
+  2. The dates/time should always be in yyyy-MM-ddTHH:mm:ss format.
+  3. The application must be able to support as many events as needed.
+  4. The application must be able to support as many flashcards as needed.
+  5. The application can be used by anyone who can read and type.
+
 
 ## Glossary
 
-* *glossary item* - Definition
+* *TaskLinker* - CLI-tool for helping university students memorize flashcards
+  and track their flashcard and general academic progress in the courses they are
+  taking.
+* *Calendar* - A place where all the events are listed with start and end time.
+* *Event* - A task to be done from a given time to end time.
+* *Flashcard* - A study tool to memorize a given word.
+* *Storage* - A file where the calendar and flashcards are stored.
+* *Goal* - A goal to be accomplished by a given date/time on the calendar.
+* *Review* - Study flashcards
+* *Exception* - Something abnormal that should not happen.
+* *UML Diagram* - A diagram where the design of the application is explained.
+* *DeveloperGuide* - A guide for other developers to read to understand the application.
+* *UserGuide* - A guide for the users  to read to understand the application.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+*Given below are the instructions for manual testing the TaskLinker.*
+
+### Testing launching and exiting the application
+Launching the application
+  1. download the jar file from the release page.
+  2. open a terminal and navigate to the directory where the jar file is located.
+  3. run the command `java -jar TaskLinker.jar`
+
+Exiting the application
+  1. type `exit` in the command box and press enter.
+  2. the application will exit.
+
+#### Testing adding an event to the calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>add event</b>
+What's the event?: <b>Do HW</b>
+When does it start?: <b>2023-12-20T12:30:30</b>
+When does it end?: <b>2023-12-20T13:40:30</b>
+</pre>
+
+Test Case #2 (Start Time, End Time Error):
+
+<pre>
+Enter your command: <b>add event</b>
+What's the event?: <b>Do HW</b>
+When does it start?: <b>2023-12-20T12:30:30</b>
+When does it end?: <b>2023-12-20T11:40:30</b>
+
+  End time is before or equal to the start time. Please enter the correct end time.
+</pre>
+
+#### Testing adding a goal event to the calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>add goal event</b>
+What's the event?: <b>Do Flashcards</b>
+When does it end?: <b>2023-12-20T12:30:30</b>
+
+Goal 'Do Flashcards' review 20 flashcards by: 2023-12-20T12:30:30 (Reviewed: 0) 
+has been added to your Calendar
+</pre>
+
+Test Case #2 (Not an integer for # of flashcards):
+
+<pre>
+Enter your command: <b>add goal event</b>
+What's the event?: <b>Do Flashcards</b>
+When does it end?: <b>2023-12-20T12:30:30</b>
+How many flashcard to review by then?: <b>r</b>
+
+    Invalid integer input. Please try again.
+</pre>
+
+#### Testing deleting an event from the calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>delete event</b>
+What's the event?: <b>hello</b>
+    hello has been deleted from your Calendar!
+</pre>
+
+Test Case #2 (Incomplete command):
+
+<pre>
+Enter your command: <b>delete</b>
+☹ OOPS!!! The description of a delete cannot be empty.
+    Invalid integer input. Please try again.
+</pre>
+
+#### Testing finding an event from the Calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>find event</b>
+What's the event?: <b>Do HW</b>
+1. Event 'Do HW' From: 2023-12-20T12:30:30, To: 2023-12-20T13:30:30
+    These events have been found
+</pre>
+
+Test Case #2 (Incomplete Command):
+
+<pre>
+Enter your command: <b>find</b>
+☹ OOPS!!! The description of a find cannot be empty.
+    Invalid integer input. Please try again.
+</pre>
+
+#### Testing listing all events from the Calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>list events</b>
+    Here is a list of all your events: 
+--------------------------------------------------------------------------------
+1. Event 'Do User' From: 2023-12-20T12:30:30, To: 2023-12-20T13:30:30
+--------------------------------------------------------------------------------
+</pre>
+
+Test Case #2 (Incomplete command):
+
+<pre>
+Enter your command: <b>list</b>
+☹ OOPS!!! The description of a list cannot be empty.
+    Invalid integer input. Please try again.
+</pre>

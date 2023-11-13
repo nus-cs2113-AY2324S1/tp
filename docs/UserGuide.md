@@ -502,6 +502,10 @@ Every event and flashcard are automatically save after each command.
 
 **A**: Yes, they have different command based on their features.
 
+**Q**: How to exit the program?
+
+**A**: Enter "exit" for the command.
+
 ## Command Summary
 
 * [Listing all flashcards](#listing-all-flashcards-list-flashcards): `list 
