@@ -1,27 +1,24 @@
-package seedu.duke.flashcard;
+package seedu.duke.storage;
 
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * directory for flashcards
+ * directory for directory
  * can list-up txt files in text folder
- * In version 1, using only flashcard.txt
+ * In version 1, using only event.txt
  * In version 2, can select or create
  */
 
-public class FlashcardDirectory {
+public class EventDirectory {
     private static Logger logger; // for logging
     String path;
     File file;
 
-    public FlashcardDirectory(){
-
+    public EventDirectory(){
         logger = Logger.getLogger("flashDir");
         logger.setLevel(Level.WARNING);
-
-        path = "./data/flashcards";
 
         String dataPath = "./data";
 
@@ -39,18 +36,20 @@ public class FlashcardDirectory {
             //System.out.println("    Using data/events directory");
         }
 
+        path = "./data/events";
+
         file = new File(path);
         if(!file.exists()){
             if(file.mkdir()){
-                logger.log(Level.INFO, "Created flashcards directory");
-                //System.out.println("    Created flashcards directory");
+                logger.log(Level.INFO, "Created events directory");
+                //System.out.println("    Created events directory");
             } else{
                 logger.log(Level.INFO, "Failed to create directory");
                 //System.out.println("    Failed to create directory");
             }
         } else{
-            logger.log(Level.INFO, "Using data/flashcards directory");
-            //System.out.println("    Using data/flashcards directory");
+            logger.log(Level.INFO, "Using data/events directory");
+            //System.out.println("    Using data/events directory");
         }
     }
 
@@ -58,18 +57,18 @@ public class FlashcardDirectory {
      * list-up saved files
      * selecting file is for version 2
      */
-    public void listFlashcardFiles(){
-        String[] flashcardFiles = file.list();
-        if(flashcardFiles == null){
+    public void listEventFiles(){
+        String[] eventFiles = file.list();
+        if(eventFiles == null){
             logger.log(Level.INFO, "Failed to find files");
             //System.out.println("Failed to find files");
-        } else if(flashcardFiles.length == 0){
+        } else if(eventFiles.length == 0){
             logger.log(Level.INFO, "No files exist");
             //System.out.println("No files exist");
         } else{
-            for(String flashcardFile : flashcardFiles){
-                logger.log(Level.INFO, flashcardFile);
-                //System.out.println("        "+flashcardFile);
+            for(String eventFile : eventFiles){
+                logger.log(Level.INFO, eventFile);
+                //System.out.println("        "+eventFile);
             }
         }
     }
@@ -80,16 +79,16 @@ public class FlashcardDirectory {
      * @return directory for flashcard txt file
      */
     public String defaultDirectory() {
-        return this.path + "/flashcard.txt";
+        return this.path + "/event.txt";
     }
 
     /**
      * return directory of flashcard txt file
      * for version 2
-     * @param path
-     * @return
+     * @param path is used for storing file path
+     * @return is used to get the path to the file
      */
-    public String flashcardDirectory(String path) {
+    public String eventDirectory(String path) {
         return this.path + path;
     }
 

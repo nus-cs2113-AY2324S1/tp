@@ -5,6 +5,7 @@ package seedu.duke.flashcard;
 import seedu.duke.calendar.Calendar;
 import seedu.duke.flashcard.command.FlashcardCommand;
 import seedu.duke.flashcard.command.UnknownCommand;
+import seedu.duke.storage.FlashcardDirectory;
 import seedu.duke.storage.FlashcardStorage;
 
 import java.io.FileNotFoundException;
