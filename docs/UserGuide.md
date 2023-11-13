@@ -24,6 +24,8 @@ ____________________________________________________________
 8. "[ ]" denotes optional parameters
 9. Do not add additional characters behind the command e.g. `add incomeabc /de salary /date 01/01/2020 /amt 1000`.
 
+<div style="page-break-after: always;"></div>
+
 ## Features 
 
 ### View help : help
@@ -62,6 +64,7 @@ help clear
 help exit
 ```
 
+<div style="page-break-after: always;"></div>
 
 ### Add an entry: add
 Creates a new entry for income or expenses in the program.
@@ -124,6 +127,8 @@ Expected output after successfully add income to the list:
 Expected output after successfully add expense to the list:
 ![add_expense_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/expense_expected.png?raw=true)<br>
 
+<div style="page-break-after: always;"></div>
+
 ### List all entries: list
 Shows a full list of both the expenses and income created by the user.
 User can choose to view the list of income/expenses separately as well.
@@ -164,6 +169,7 @@ Use case:
 Expected output after successfully delete income from the list:
 ![delete_income_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)<br>
 
+<div style="page-break-after: always;"></div>
 
 ### Find an entry: find
 Find an entry from the existing list of income/expenses.
@@ -205,6 +211,7 @@ Use case:
 - Format of date is `dd/MM/yyyy`. Users can also opt to search for entries by month `MM/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 
+<div style="page-break-after: always;"></div>
 
 ### Clear all entries: Clear
 Clear the expenses/income created by the user.
@@ -238,6 +245,7 @@ Format:
 ```
 balance
 ```
+<div style="page-break-after: always;"></div>
 
 ### Edit an entry: edit 
 Edit an entry from the list of income/expenses.
@@ -277,6 +285,7 @@ Use case:
 - Prompts users if index is empty.
 - Prompts users if any of the fields are empty.
 
+<div style="page-break-after: always;"></div>
 
 ### List the supported currencies: list currencies
 Show the foreign currencies supported by KaChinnnng.
@@ -324,6 +333,8 @@ Note:
 - `<rate>` must be a positive decimal that is between 0.001 and 3,000,000.
 - The update of a previously used exchange rate will not retroactively affect entries made prior to the update.
 
+<div style="page-break-after: always;"></div>
+
 ### Storage for income and expense entries
 Save all the income and expense entries to the KaChinnnngggg.txt
 
@@ -353,6 +364,8 @@ to the folder where the jar file located in the new computer
 **A**: The system will automatically remove that line from the txt after you give the first command to the bot, 
 if you don't want to remove that line, just terminate the program using control c right after you see the error,
 and change the line in txt file to the correct format.
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
