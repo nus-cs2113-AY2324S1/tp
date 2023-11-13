@@ -218,7 +218,7 @@ After verifying that the order has been completed, the cost of the order is adde
 The total cost is the shown to the user using `ui.showOrderStatus`.
 Lastly, the pantry checks on the remaining ingredients in stock and calculates the potential future dishes able to be made with the remaining stock, using `pantry.calculateDishAvailability()`.
 
-If the order has been marked incomplete, the details of the orderedDish is retrieved from `Order` using ``order.getOrderedDish()`.
+If the order has been marked incomplete, the details of the orderedDish is retrieved from `Order` using `order.getOrderedDish()`.
 This is then passed on to the `Pantry` to figure out the missing ingredients, by `pantry.calculateMaxDishes()`.
 Lastly, the user is shown a message informing that the order has not been completed due to the lack of ingredients using `ui.showIncompleteOrder()`.
 
