@@ -413,16 +413,30 @@ Format: `bye`
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 <!---@@author ziyi105--->
 ## Known Issues
-- The application is unable to decode the data text files if they have been edited in the wrong decoding format.
-- The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
-- The application is unable to support unit conversion, hence only ml and g are accepted as ingredient unit and the use of unit must be constant for the same ingredient.
-- The application is unable to save data for `Menu`, `Pantry` and `OrderList` if it is force exited using Ctrl+C command.
-- The application currently accepts any valid dish name from orders.txt as a valid dish made on a given day, regardless of its presence in the current menu. 
-  - This decision ensures that orders remain intact even if dishes are removed from the menu, allowing for a comprehensive record of all transactions.
-  - Restricting orders to only those present in the current menu would lead to unintentional deletion of orders containing dishes no longer available.
-  - Consideration was given to storing the names of dishes in the menu at the time the order was made in orders.txt. 
-  - However, concerns about orders.txt becoming bloated with data were acknowledged.
-  - As this does not affect the functionality of any aspects of our application nor the logic of functions related to the content stored in orders.txt, we have decided that this can be considered in future improvements. 
+1. The application is unable to decode the data text files if they have been edited in the wrong decoding format.
+2. The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
+3. The application is unable to support unit conversion, hence only ml and g are accepted as ingredient unit and the use of unit must be constant for the same ingredient.
+4. The application is unable to save data for `Menu`, `Pantry` and `OrderList` if it is force exited using Ctrl+C command.
+5. The application currently accepts any valid dish name from orders.txt as a valid dish made on a given day, regardless of its presence in the current menu. 
+   - This decision ensures that orders remain intact even if dishes are removed from the menu, allowing for a comprehensive record of all transactions.
+   - Restricting orders to only those present in the current menu would lead to unintentional deletion of orders containing dishes no longer available.
+   - Consideration was given to storing the names of dishes in the menu at the time the order was made in orders.txt. 
+   - However, concerns about orders.txt becoming bloated with data were acknowledged.
+   - As this does not affect the functionality of any aspects of our application nor the logic of functions related to the content stored in orders.txt, we have decided that this can be considered in future improvements.
+6. The application is unable to differentiate hash string that has been modified by user in the text file with normal data text.
+   - This leads the decoder of the text file to attempt to decode the modified hash string, hence resulting in an error message. 
+   - This example illustrates the error message shown when the hash string in pantry_stock.txt is modified to 000000 
+   - ```
+     Well, well, well, looks like someone's been playing with the save files!
+     Let's keep it classy and use the prescribed format below.
+
+     Format for Pantry_stock.txt:
+     {Ingredient Name} | {Ingredient Qty} | {Ingredient Unit}
+
+     pantry_stock.txt: Invalid format, this pantry stock will be removed -> 000000
+     Done loading pantry_stock.txt!
+     ------------------------------------------------------------------------
+     ```
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
