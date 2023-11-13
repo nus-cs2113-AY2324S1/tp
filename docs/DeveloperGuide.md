@@ -10,6 +10,8 @@
 
 ## Design & implementation
 
+### Design
+
 ### `flashcard` package
 
 The API of the `flashcard` package is defined in [`FlashcardComponent.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardComponent.java).
