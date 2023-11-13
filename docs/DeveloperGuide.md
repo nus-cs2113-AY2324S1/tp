@@ -555,10 +555,14 @@ The class uses the following components from the QuizHub application:
 
 Upon execution, the `CommandEdit` class first checks that both `editField` and `newValue` are not null. It then calls `editQuestionByIndex` on the `QuestionList` to perform the actual edit. After a successful edit, a message is displayed to the user, and the `Storage` component is used to ensure the edited question's new state is saved.
 
+<div style="page-break-after: always"></div>
+
 #### Implementation of Edit Command
 <img src="UML/Images/commandEditObjectDiagram.png" alt="" width="500" />
 <img src="UML/Images/commandEditObjectDiagram2.png" alt="" width="500" />
 <img src="UML/Images/commandEditObjectDiagram3.png" alt="" width="500" />
+
+<div style="page-break-after: always"></div>
 
 ### Operational Flow of Edit Command
 
@@ -987,6 +991,8 @@ The details of the data loading and updating process are explained in details be
 - **Parameters:**
   - `filePath`: The path to the file where question data is stored and read from.
 
+<div style="page-break-after: always"></div>
+
 ### Loading data
 
 The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below.
@@ -1039,6 +1045,8 @@ The `Ui` class is meticulously designed to serve as the exclusive channel for di
 
 In addition, the class defines numerous string literals and constants for various feedback messages, error notifications, and command instructions. By encapsulating these generic messages  within constants like `INVALID_COMMAND_MSG` and `INVALID_QUESTION_DIFFICULTY_MSG`, it not only bolsters code readability and maintainability but also facilitates effortless updates to the user interface while preventing repetitive hard-coding of these messages.   
 
+<div style="page-break-after: always"></div>
+
 #### Overall Flow
 
 <img src="UML/Images/uiFlow.png" alt="" width="650" />
@@ -1048,6 +1056,8 @@ When the program is first initiated, the `displayOpeningMessage()` method is cal
 Afterward, in the main loop of the program execution, the `getUserInput()` method is called at the start of the loop to capture user input as a `String` object, which is then used by the `Parser` and various `Command` classes to parse and execute the appropriate commands. This process is terminated only upon execution of a `CommandExit`.
 
 Finally, the `displayClosingMessage()` method is called to display a farewell message while also calling the `updateData()` method of the `dataStorage` to update the data stored in the storage file with the latest ones.
+
+<div style="page-break-after: always"></div>
 
 #### Displaying Quizzes
 
