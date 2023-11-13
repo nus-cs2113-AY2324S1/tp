@@ -77,7 +77,7 @@ find /t <type> /cat [category] /de [description] /date [date]
 ![FindCommand_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/FindCommand_SequenceDiagram(updated).drawio.png?raw=true)
 
 ### GetFromTxt Command
-The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngException`, `IncomeList` and `ExpenseList`
+The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnngException`, `IncomeList` and `ExpenseList`
 1. The user start the program and the command will start automatically with a default path
 2. Once the command executed, it will try to create a txt file on the default path
 3. If file failed to create, throw an `IOException`
