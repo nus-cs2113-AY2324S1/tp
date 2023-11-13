@@ -124,7 +124,8 @@ Target user profile:
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI applications
 
-### Value proposition: manage finances faster than a GUI driven app
+### Value proposition: 
+The value proposition is KaChinnnng allow user to manage their finances faster than a GUI driven app. 
 
 ## User Stories
 
@@ -210,7 +211,7 @@ adding an income/expense
    - income: `add income /de salary /date 31/10/2023 /amt -5000.00` where the amount is negative.
    - expense: `add expense /cat food /type lunch /de lunch  /amt 5000.00` where there is missing fields
 
-### updating exchange rate
+### Updating exchange rate
 updating exchange rate
 To check the supported currencies, type `list currencies`
 1. Test case:
