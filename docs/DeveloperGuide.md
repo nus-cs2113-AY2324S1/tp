@@ -1,4 +1,4 @@
-# Developer Guide
+mT# Developer Guide
 
 ## Acknowledgements
 
@@ -83,7 +83,7 @@ The GetFromTxt Command is facilitated by `IOException`,`Scanner`, `KaChinnnnngEx
 3. If file failed to create, throw an `IOException`
 4. Catch the `IOException` and print error messages
 5. Create a `Scanner` Object s to get content from txt file
-6. If amount in txt file exceed limit or incorrect, throw `KaChinnnningException`
+6. If amount in txt file exceed limit or incorrect, throw `KaChinnnnngException`
 7. Read the content on the file and add corresponding object to incomes or expenses list
 
 ![GetFromTxtCommands_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/GetFromTxt.png?raw=true)
@@ -201,7 +201,7 @@ adding an income/expense
    
 2. Test case:
    - income: `add income /de salary`
-   - expense: `add expense /cat food /type lunnch`
+   - expense: `add expense /cat food /type lunch`
    - Expected outcome: the income/expense will not be added to the list and the user will be notified with an error message.
    
 3. Test case:
@@ -240,7 +240,7 @@ pre-requisite: list should already contain income/expense. this can be checked v
    - Expected outcome: the income/expense will be deleted from the list and the balance will be updated accordingly and the user will be notified.
 2. Test case: If the index specified is invalid
     - For income/expense: `delete income <invalid_index>`
-    - Expected outcome: `Oops! Income <invaldi_index> does not exist`
+    - Expected outcome: `Oops! Income <invalid_index> does not exist`
 3. Test case: If the index is missing
     - For income/expense: `delete income`
     - Expected outcome: `You're missing an argument`
@@ -272,7 +272,7 @@ pre-requisite: list should already contain income/expense. this can be checked v
 3. Test case: Missing arguments
     Assuming Income 1 and Expense 1 exist:
     - income: `edit income 1 /de salary`
-    - expense: `edit expense 1 /cat food /type lunnch`
+    - expense: `edit expense 1 /cat food /type lunch`
     - Expected outcome: the income/expense will not be edited and the user will be notified with an error message.
    
 4. Test case: Other invalid test cases includes:
