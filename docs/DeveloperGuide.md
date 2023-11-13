@@ -70,8 +70,8 @@ find /t <type> /cat [category] /de [description] /date [date]
 2. The inputs will then be passed to `FindParser` to get the necessary fields such as type, category, description and date.
 3. The FindCommand is then instantiated with the necessary fields.
 4. Users can choose to search through the expense list or income list.
-5. If users searches through the income list, either the description or date will be used to search through the income list, category will be ignored.
-6. If users searches through the expense list, either the category, description or date will be used to search through the expense list.
+5. If users searches through the income list, either the `/de description` or `/date date` will be used to search through the income list, category will be ignored.
+6. If users searches through the expense list, either the `/cat category`, `/de description` or `/date date` will be used to search through the expense list.
 7. The execute method will then be called to search through the list and return the list of expenses or incomes that matches the search criteria.
 
 ![FindCommand_SequenceDiagram.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/FindCommand_SequenceDiagram(updated).drawio.png?raw=true)
@@ -141,20 +141,20 @@ KaChinnnng is a financial planner for users to track and improve their financial
 | v2.0    | user     | search for past inputs             | better find and track my past expenses                                |
 | v2.0    | user     | be able to change the currency     | better track my expenses in different currencies when i am travelling |
 | v2.0    | user     | be able to edit my inputs          | make necessary changes to my inputs when a mistake is made            |
-| v2.0    | user     | be able to save and load my inputs | save my inputs so that I can access them the next time I use the app  |
+| v2.0    | user     | be able to save and load my inputs | access them the next time I use the app                               |
 | v2.0    | user     | reset my inputs                    | start afresh                                                          |
 
 ## Non-Functional Requirements
 - Domain rules:
     - The application should not crash under normal circumstances.
     - Dates can be entered in the format dd/MM/yyyy and should not be in the future.
-    - Amount added should be in the format of 0.00 and should not be negative.
+    - Amount added should be in the format of 0.00 up to 2 decimal places and should not be negative.
     - The application only accepts commands in English.
-    - Users should refrain from using special characters in the description/category/type/date field.
+    - Users should refrain from using special characters in the description/category/type/date field or in general.
     - Users should refrain from tampering with the storage and log files as it may result in unexpected issues.
  
 - Constraints:
-  - the total number of entries for Expense and Income should not exceed 10 000 each.
+  - the total number of entries for Expense and Income should not exceed 100 each.
   - the amount input should be less than 1000000.
 
 - Technical Requirements:
@@ -291,7 +291,7 @@ Finding income/expense:
    - For income: `find /t income /de salary`
    - For expense: `find /t expense /cat food /de sushi /date 31/10/2023`
    - Expected outcome: all income with description containing "salary" should be listed. all expense containing "food" in the category, "sushi" in the description and "31/10/2023" in the date should be listed.
-   - 
+   
 5. Test case: If there is no matching income/expenses
    - Income: `find /t income /de bonus`
    - Expense: `find /t expense /cat food /de burger /date 31/10/2023`
