@@ -78,7 +78,8 @@ Note:
 
 To add an expense (with foreign currency):
 ```
-add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
+add expense /cat <category> /type <type> /de <description> /date <date> 
+/amt [currency] <amount>
 ```
 Note:
 - Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
@@ -104,16 +105,19 @@ Example of usage:
 add income /de salary /date 01/01/2020 /amt 1000
 ```
 ```
-add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 /amt 10.00
+add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 
+/amt 10.00
 ```
 ```
 add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 ```
 ```
-add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt USD 10.50
+add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 
+/amt USD 10.50
 ```
 ```
-add expense /cat transport /type train /de train to school /date 10/10/2023 /amt 10.00
+add expense /cat transport /type train /de train to school /date 10/10/2023 
+/amt 10.00
 ```
 Expected output after successfully add income to the list:
 ![add_income_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)<br>
@@ -243,7 +247,8 @@ Format:
 edit income <index> /de <description> /date <date> /amt [currency] <amount>
 ```
 ```
-edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
+edit expense <index> /cat <category> /type <type> /de <description> /date <date> 
+/amt [currency] <amount>
 ```
 Note:
 - `index` must be a positive integer that corresponds to an income/expense entry
