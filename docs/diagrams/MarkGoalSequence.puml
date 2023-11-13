@@ -1,0 +1,38 @@
+@startuml
+
+participant ":MarkGoalCommand" as MarkGoalCommand
+participant ":WishList" as WishList
+participant ":Goal" as Goal
+participant ":Ui" as Ui
+participant ":CashflowList" as CashflowList
+participant ":Expense" as Expense
+
+-> MarkGoalCommand: execute()
+activate MarkGoalCommand
+MarkGoalCommand -> WishList: markGoal(index)
+activate WishList
+WishList -> Goal: markAsDone()
+activate Goal
+return
+WishList -> Ui: showMessage(AddGoalMessage)
+WishList -> Goal: getAmount()
+activate Goal
+return amount
+WishList -> Goal: getLabel()
+activate Goal
+return label
+WishList -> CashflowList: addExpense(amount, ExpenseType, label)
+activate CashflowList
+create Expense
+CashflowList -> Expense: Expense(amount, ExpenseType, label)
+activate Expense
+Expense -> Expense: addExpenseValue()
+return
+CashflowList -> CashflowList: addToList(toAdd)
+CashflowList -> Ui: printAddedCashflow(toAdd)
+return
+return
+return
+
+hide footbox
+@enduml

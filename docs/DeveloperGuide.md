@@ -7,9 +7,12 @@
   * [Architecture Diagram](#architecture-diagram)
   * [Storage Component](#storage-component)
     * [Design considerations](#design-considerations)
-  * [Visualization Feature](#visualization-feature-)
+  * [Visualization Feature](#visualization-feature)
     * [Class diagram](#class-diagram)
-    * [Sequence diagram](#sequence-diagram-)
+    * [Sequence diagram](#sequence-diagram)
+  * [WatchList Feature](#watchlist-feature)
+    * [Class diagram](#watchlist-class-diagram-simplified)
+    * [Sequence diagram](#watchlist-sequence-diagram-simplified)
   * [Add Income/Expense Feature](#add-incomeexpense-feature)
     * [Class Diagram](#add-incomeexpense-class-diagram)
     * [Sequence Diagram](#add-incomeexpense-sequence-diagram)
@@ -21,13 +24,15 @@
     * [Delete budget](#delete-budget)
     * [Reset budget](#reset-budget)
     * [View budget](#view-budget)
-  * [Product Scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
-  * [User Stories](#user-stories)
-  * [Non-Functional Requirements](#non-functional-requirements)
-  * [Glossary](#glossary)
-  * [Instructions for manual testing](#instructions-for-manual-testing)
+  * [Mark Goal Feature](#mark-goal-feature)
+    * [Sequence Diagram](#mark-goal-sequence-diagram)
+* [Product Scope](#product-scope)
+  * [Target user profile](#target-user-profile)
+  * [Value proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -53,15 +58,15 @@
 
 **Financial Modeling Prep Stock API**
 - author: Financial Modeling Prep
-- source: https://site.financialmodelingprep.com/
+- source: [https://site.financialmodelingprep.com/](https://site.financialmodelingprep.com/)
 
 **round() method in Cashflow.java**
   - author: mhadidg
-  - source: [https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places]()
+  - source: [https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places](https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places)
 
 **capitalize() method in Cashflow.java**
   - author: Nick Bolton
-  - source: [https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string]()
+  - source: [https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string](https://stackoverflow.com/questions/1892765/how-to-capitalize-the-first-character-of-each-word-in-a-string)
     
 **DG adapted from**
 
@@ -112,7 +117,7 @@ the data one upon exiting the program with the `exit` command.
 
 Option 1 is chosen to prioritise the performance of the program.
 
-### Visualization Feature 
+### Visualization Feature
 
 This feature is implemented with the help of [XChart](https://knowm.org/open-source/xchart/), a simple charting library for Java by Knowm.
 
@@ -163,7 +168,7 @@ the visualizer displays the specified visualization chart by calling the chartin
 
 ![](images/vis/visualisationClass.png)
 
-### Sequence Diagram 
+### Sequence Diagram
 
 Overall 
 
@@ -176,6 +181,72 @@ Categorizer (`sort cashflow entries` ref from overall sequence diagram above)
 Visualizer (`displaying chart` ref from overall sequence diagram above)
 
 ![](images/vis/visualizerSequence.png)
+
+### Watchlist Feature
+
+The watchlist in financial planner is similar to that of other common watchlist online.
+It contains a list of stocks that the user watches with an eye toward taking advantage of prices. It allows
+users to track real time data on the stocks that they are interested in.
+
+Simply type `watchlist` into the command line without any arguments and the watchlist will be displayed.
+
+Example Output:
+
+![](images/investments/watchlistOutput.png)
+
+Below are the various classes involved in the implementation of watchlist.
+
+#### WatchlistCommand
+
+1. The WatchlistCommand instance calls the `getLatestWatchListInfo()` method from the watchlist class to update the 
+stocks data in the watchlist.
+2. It then calls the `printStocksInfo()` method of the Ui class to print out the watchlist.
+3. Finally, it calls the static `saveWatchList()` method of the SaveData class to save the watchlist info to
+watchlist.json.
+
+#### Watchlist
+
+The watchlist class keeps a record of the stocks that the user is interested in using a hashmap as shown.
+```
+private HashMap<String, Stock> stocks;
+```
+
+1. When its method `getLatestWatchListInfo()` is invoked, it calls `getExpiredStocks` to get the list
+of stocks that has expired and should be renewed with latest info.
+2. With the list of expired stocks, it calls `fetchFMPStockPrices` which connects to Financial Modeling API to retrieve
+the latest stock prices and calls `extractWatchListInfoFromJSONArray` to update the stocks in the Hashmap 
+with the latest stock data.
+
+### Stock
+
+Stocks class objects are the values that make up the stocks hashmap in the watchlist. They cache the stock data obtained
+from the API as attributes of the class.
+
+```
+private String symbol;
+private String exchange;
+private String stockName;
+private String price;
+private String dayHigh;
+private String dayLow;
+private Date lastUpdated = null;
+private long lastFetched = 0;
+private int hashCode = 0;
+```
+
+Shown above is a complete list of attribute of the stock class.
+
+`lastFetched` and `hashCode` are attributes that are not related to the stock financial data.
+`lastFetched` is used for caching validity checking and `hashCode` is used to tell whether saved values on disk 
+are corrupted.
+
+#### Watchlist Class Diagram (Simplified)
+
+![](images/investments/watchlistClassDiagram.png)
+
+#### Watchlist sequence Diagram (Simplified)
+
+![](images/investments/watchlistSequence.png)
 
 ### Add Income/Expense Feature
 
@@ -332,6 +403,30 @@ The `currentBudget` will be shown to the user through the `Ui`.
 
 Example: `budget view`
 
+### Mark Goal Feature
+
+The mark goal command has 1 compulsory argument `INDEX`.
+
+Example:
+```
+markgoal 1
+```
+Below are the steps that shows the implementation of set goal.
+
+#### Step 1
+The MarkGoalCommand instance calls `markGoal(INDEX)` function of wish list.
+#### Step 2
+Wish list finds the corresponding goal and calls `markAsDone()` function of corresponding goal.
+#### Step 3
+The marked goal is then displayed to the user through the Ui.
+#### Step 4
+The wish list calls `addExpense(amount, type, label)` function of cashflow list to add corresponding expense.
+#### Step 5
+The added expense is then displayed to the user through the Ui.
+#### Mark goal Sequence Diagram
+Given below is the sequence diagram showing the markgoal mechanism:
+![](images/MarkGoalSequence.png)
+
 
 ## Product scope
 ### Target user profile
@@ -423,3 +518,405 @@ shows you the welcome screen for the financial planner app
    2. Expected: the financial planner will exit with a goodbye message.
 Under the data newly created data directory, a watchlist.json and a data.txt file will be created
 
+### Add cashflow
+
+To test the add cashflow feature, you can use the following command:
+```
+add income /a 5000 /t salary /r 30 /d work
+```
+You should see the following output:
+```
+You have added an Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+to the Financial Planner.
+Balance: 5000.00
+```
+
+Note: The date displayed will differ based on your system time.
+
+You can also use the following command to test the optional arguments:
+```
+add expense /a 1000 /t necessities
+```
+You should see the following output:
+```
+You have added an Expense
+   Type: Necessities
+   Amount: 1000.00
+to the Financial Planner.
+Balance: 4000.00
+```
+
+### List
+
+To test the list feature, you can add these test inputs to the program first:
+
+Make sure there is no existing cashflows in the program in order to achieve the exact outputs below. You can clear the inputs by exiting the program and deleting the data.txt file found in data folder.
+
+Make sure to add each command line by line.
+
+```
+add income /a 5000 /t salary /r 30 /d work
+add expense /a 1000 /t necessities
+add income /a 500 /t investments /d stocks
+add expense /a 800 /t insurance /r 365 /d insurance
+```
+
+After which you can test the following commands:
+
+Note: The dates displayed will differ based on your system time.
+
+Input: `list`
+
+Output:
+```
+You have 4 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+2: Expense
+   Type: Necessities
+   Amount: 1000.00
+3: Income
+   Type: Investments
+   Amount: 500.00
+   Description: stocks
+4: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+Balance: 3700.00
+```
+
+Input: `list income`
+
+Output:
+```
+You have 2 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+2: Income
+   Type: Investments
+   Amount: 500.00
+   Description: stocks
+Income Balance: 5500.00
+```
+
+Input: `list expense`
+
+Output:
+```
+You have 2 matching cashflows:
+1: Expense
+   Type: Necessities
+   Amount: 1000.00
+2: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+Expense Balance: 1800.00
+```
+
+Input: `list recurring`
+
+Output:
+```
+You have 2 matching cashflows:
+1: Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 30 days, date added: Nov 12 2023, recurring on: Dec 12 2023
+   Description: work
+2: Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+```
+
+### Delete cashflow
+
+You are recommended to test this feature after testing the list feature as they share the same test inputs.
+
+If you have not done so, please follow the instructions to test the list feature [here](#list).
+
+To test the delete cashflow feature, you can use the following commands provided below:
+
+Use the list command before each delete command to confirm that the cashflow at the index stated in the delete command matches the expected output.
+
+Note: The dates displayed will differ based on your system time.
+
+Input: `list` followed by `delete 3`
+
+Output:
+```
+You have removed an Income
+   Type: Investments
+   Amount: 500.00
+   Description: stocks
+from the Financial Planner.
+Balance: 3200.00
+```
+
+Input: `list income` followed by `delete income 1 /r`
+
+Output:
+```
+You have removed future recurrences of this cashflow.
+Updated cashflow:
+Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
+```
+
+Input: `list income` followed by `delete income 1`
+
+Output:
+```
+You have removed an Income
+   Type: Salary
+   Amount: 5000.00
+   Description: work
+from the Financial Planner.
+Balance: -1800.00
+```
+
+Input: `list expense` followed by `delete expense 1`
+
+Output:
+```
+You have removed an Expense
+   Type: Necessities
+   Amount: 1000.00
+from the Financial Planner.
+Balance: -800.00
+```
+
+Input: `list recurring` followed by `delete recurring 1`
+
+Output:
+```
+You have removed an Expense
+   Type: Insurance
+   Amount: 800.00
+   Recurring every: 365 days, date added: Nov 12 2023, recurring on: Nov 11 2024
+   Description: insurance
+from the Financial Planner.
+Balance: 0.00
+```
+
+### Recurring cashflow
+
+You can test the recurring cashflow feature by manually changing your system time.
+
+First add a cashflow that has a recurrence value. You can use the following example command:
+
+```
+add income /a 5000 /t salary /r 1 /d work
+```
+
+Next, exit the program and change the system time to be ahead by the specified days in the cashflow.
+
+In the case of the example command, you can bring forward the system time by 1 day.
+
+Finally, start the program again and you should see this output:
+```
+You have added an Income
+   Type: Salary
+   Amount: 5000.00
+   Recurring every: 1 days, date added: Nov 13 2023, recurring on: Nov 14 2023
+   Description: work
+to the Financial Planner.
+Balance: 10000.00
+```
+
+### View Balance
+
+Test case: `balance`
+
+Expected: Balance is displayed. Details of balance are shown in the status message.
+
+### Budget Feature
+
+1. Setting a monthly budget
+
+Test case: `budget set /b 100`
+
+Expected: A monthly budget of 100 is set. Details of the budget are shown in the status message.
+
+Test case: `budget set /b`
+
+Expected: No budget is set. Error details shown in status message.
+
+Other incorrect set budget commands to try: `budget set`, `budget set /b x`, `...` (where x is negative)
+
+2. Updating budget
+
+Test case: `budget update /b 300`
+
+Expected: Monthly budget is updated to 300. Details of the budget are shown in the status message.
+
+Test case: `budget update /b`
+
+Expected: Budget is not updated. Error details shown in status message.
+
+Other incorrect set budget commands to try: `budget update`, `budget update /b x`, `...` (where x is negative)
+
+3. Resetting budget
+
+Test case: `budget reset`
+
+Expected (Current budget is lower than initial budget): Budget is reset. Details of reset budget are shown in status message.
+
+Expected (Budget has not been spent): Budget is not reset. Error details shown in the status message.
+
+4. Deleting budget
+
+Test case: `budget delete`
+
+Expected (Budget exists): Budget is deleted. Details of deletion are shown in status message.
+
+Expected (Budget does not exist): No budget to delete. Error details shown in the status message.
+
+5. Viewing budget
+
+Test case: `budget view`
+
+Expected (Budget exists): Budget is displayed. Details of budget are shown in status message.
+
+Expected (Budget does not exist): No budget to display. Error details shown in the status message.
+
+### Displaying overview
+
+Test case: `overview`
+
+Expected: Displays overview of user's financials. Details of financials are shown in the status message.
+
+### Using Watchlist
+
+To test the watchlist feature, you can copy the text below into the watchlist.json file under data directory
+```
+{
+  "BB": {
+    "symbol": "BB",
+    "stockName": "BlackBerry Ltd"
+  },
+  "TSLA": {
+    "symbol": "TSLA",
+    "stockName": "Tesla Inc"
+  }
+}
+```
+Start Financial Planner app and you should be able to see this output (although prices will differ)
+```
+watchlist
+Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
+BB        NYSE      3.64      3.67           3.55          BlackBerry Ltd                   Sat, Nov 11 2023 05:00:02
+TSLA      NASDAQ    214.65    215.38         205.69        Tesla Inc                        Sat, Nov 11 2023 05:00:00
+Data provided by Financial Modeling Prep and Alpha Vantage =)
+```
+
+You can then add a stock using the command below
+```
+addstock /s NET
+```
+You should see a message stating that Cloudflare was added. After running the watchlist command again and exiting the 
+application, your watchlist output should look like this 
+```
+Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
+BB        NYSE      3.64      3.67           3.55          BlackBerry Ltd                   Sat, Nov 11 2023 05:00:02
+TSLA      NASDAQ    214.65    215.38         205.69        Tesla Inc                        Sat, Nov 11 2023 05:00:00
+NET       NYSE      63.08     63.31          61.34         Cloudflare Inc - Class A         Sat, Nov 11 2023 05:00:02
+Data provided by Financial Modeling Prep and Alpha Vantage =)
+```
+
+You can also remove stocks from the command. Run these commands separately
+```
+deletestock /s BB
+deletestock /s TSLA
+deletestock /s NET
+```
+After deleting all the stocks and running the watchlist command again, the output should look like this
+as you have no more stocks left in your watchlist
+```
+Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
+Empty Watchlist. Nothing to display...
+```
+### Using Visualization
+
+We can use the visualization feature to visualize your income and expenses.
+
+First we will add some expenses 
+```
+add expense /a 1000 /t necessities /d Iphone 15 pro max
+add expense /a 4 /t others /d cai png
+add expense /a 100 /t travel /d JB
+```
+
+Now we can visualize these expenses using 3 different charts (pie/bar/radar)
+```
+vis /t expense /c pie
+vis /t expense /c bar
+vis /t expense /c radar
+```
+You can run the 3 commands separately to see different charts
+
+We can do the same for income. Add some entries
+```
+add income /a 1800 /t salary /d mcd
+add income /a 400 /t investments /d Gamestop
+add income /a 100 /t allowance /d parents
+```
+
+Again we can visualize these income using 3 different charts in separate commands (pie/bar/radar)
+```
+vis /t income /c pie
+vis /t income /c bar
+vis /t income /c radar
+```
+
+### Saving data
+
+Dealing with missing/corrupted data files:
+
+Example of a valid `data.txt` file:
+
+```
+I | 5000.0 | SALARY | 30 | false | 31/10/2023
+E | 50.0 | OTHERS | 0 | false
+I | 500.0 | OTHERS | 0 | false
+I | 5.0 | OTHERS | 0 | false
+E | 5.0 | OTHERS | 0 | false
+```
+
+The first column specifies the type of data being saved, and the subsequent columns contain the data to be saved. 
+For example, `I` and `E` represent `income` and `expense` respectively, and there are other types, such as `B` for `budget`. 
+
+For incomes and expenses, the second column represent the amount, which is a `double`. To simulate a corrupted data, you 
+can change the number in the column to a string for example.
+
+Example of corrupted `data.txt` file in the third row:
+
+```
+I | 5000.0 | SALARY | 30 | false | 31/10/2023
+E | 50.0 | OTHERS | 0 | false
+I | sdf | OTHERS | 0 | false
+I | 5.0 | OTHERS | 0 | false
+E | 5.0 | OTHERS | 0 | false
+```
+
+When starting the program:
+
+Expected: Data fails to load. Error details shown in status message. Program asks user if he/she wants to create a new file
+(by clearing all data) or fix it manually.

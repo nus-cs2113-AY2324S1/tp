@@ -5,6 +5,7 @@ participant ":Ui"
 participant "<<class>>\nCategorizer"
 participant "<<class>>\nVisualizer"
 
+-> ":VisCommand": execute()
 ":VisCommand"-> ":Ui": printDisplayChartMessages(type)
 
 ref over "<<class>>\nCategorizer", ":VisCommand" : sort cashflow entries

@@ -15,9 +15,16 @@ alt income
     CashflowList -> Income: Income(value, type, recur, description)
     activate Income
     Income -> Income: addIncomeValue()
+    activate Income
+    return
+
     return
     CashflowList -> CashflowList: addToList(toAdd)
+    activate CashflowList
+    return
     CashflowList -> Ui: printAddedCashflow(toAdd)
+    activate Ui
+    return
     return
 
 else expense
@@ -27,12 +34,18 @@ else expense
     CashflowList -> Expense: Expense(value, type, recur, description)
     activate Expense
     Expense -> Expense: addExpenseValue()
+    activate Expense
+    return
+
     return
     CashflowList -> CashflowList: addToList(toAdd)
+    activate CashflowList
+    return
     CashflowList -> Ui: printAddedCashflow(toAdd)
+    activate Ui
+    return
     return
 end
 return
-
 hide footbox
 @enduml

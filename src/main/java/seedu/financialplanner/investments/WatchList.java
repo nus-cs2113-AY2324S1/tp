@@ -1,5 +1,6 @@
 package seedu.financialplanner.investments;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,6 +26,7 @@ import java.util.logging.Logger;
  */
 public class WatchList {
     private static WatchList watchlist = null;
+    private static final String FILE_PATH = "data/watchlist.json";
     private static Logger logger = Logger.getLogger("Financial Planner Logger");
     private static final String API_ENDPOINT = "https://financialmodelingprep.com/api/v3/quote/";
     private static final String API_KEY = "iFumtYryBCbHpS3sDqLdVKi2SdP63vSV";
@@ -35,7 +37,7 @@ public class WatchList {
      * any erroneous inputs
      */
     private WatchList() {
-        stocks = LoadData.loadWatchList();
+        stocks = LoadData.loadWatchList(FILE_PATH);
         cleanUpLoadedWatchList();
     }
 
@@ -61,19 +63,39 @@ public class WatchList {
      *
      * @param key
      * @param stockToCheck
-     * @return
+     * @return isValid
      */
-    private boolean checkValidStock(String key, Stock stockToCheck) {
-        if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
-            return false;
+    public boolean checkValidStock(String key, Stock stockToCheck) {
+        boolean isValid = true;
+        if (!key.toUpperCase().equals(key)) {
+            isValid = false;
         }
-        return key.equals(stockToCheck.getSymbol());
+        if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
+            isValid = false;
+        }
+        if(!key.equals(stockToCheck.getSymbol())) {
+            isValid = false;
+        }
+        if (stockToCheck.getHashCode() == 0) {
+            if (!ObjectUtils.allNull(
+                    stockToCheck.getPrice(),
+                    stockToCheck.getDayHigh(),
+                    stockToCheck.getDayLow(),
+                    stockToCheck.getLastUpdated(),
+                    stockToCheck.getExchange()) || stockToCheck.getLastFetched() != 0) {
+                isValid = false;
+            }
+        }
+        if (!isValid) {
+            Ui.getInstance().printInvalidStockLoaded(key);
+        }
+        return isValid;
     }
 
     /**
      * Initialize a new watchlist stocks hashmap with base stocks (AAPL and GOOGL)
      *
-     * @return
+     * @return Hashmap of base stocks
      */
     public HashMap<String, Stock> initalizeNewWatchlist() {
         HashMap<String, Stock> baseStocks = new HashMap<>();
@@ -93,7 +115,7 @@ public class WatchList {
     /**
      * Method to get the watchlist singleton or create one if it does not exist and returns it
      *
-     * @return
+     * @return watchlist singleton
      */
     public static WatchList getInstance() {
         if (watchlist == null) {
@@ -116,7 +138,7 @@ public class WatchList {
      * Checks the watchlist stocks hashmap for stocks that are expired meaning their data should be refreshed using
      * the api. Returns a string of stocks that are expired separated by a comma
      *
-     * @return
+     * @return String containing stocks that needs to be queried
      */
     public StringBuilder getExpiredStocks() {
         StringBuilder queryStocks = new StringBuilder();
@@ -184,23 +206,30 @@ public class WatchList {
     /**
      * Method to extract out required information from the full JSON array received from the API
      *
-     * @param jsonstocks
+     * @param jsonStocks
      * @throws FinancialPlannerException
      */
-    public void extractWatchlistInfoFromJSONArray(JSONArray jsonstocks) throws FinancialPlannerException {
-        if (jsonstocks == null) {
+    public void extractWatchlistInfoFromJSONArray(JSONArray jsonStocks) throws FinancialPlannerException {
+        if (jsonStocks == null) {
             throw new FinancialPlannerException("Incorrect API Response Received. Please try again");
         }
-        if (jsonstocks.isEmpty()) {
+        if (jsonStocks.isEmpty()) {
             return;
         }
         long fetchTime = System.currentTimeMillis();
-        for (Object jo : jsonstocks) {
+        for (Object jo : jsonStocks) {
             JSONObject stock = (JSONObject) jo;
             if (stocks.containsKey(stock.get("symbol").toString().toUpperCase())) {
                 Stock stockLocal = stocks.get(stock.get("symbol").toString().toUpperCase());
-                extractStockInfoFromJSONObject(stock, stockLocal, fetchTime);
+                extractStockInfoFromJSONObject(stock, stockLocal);
             }
+        }
+        setLastFetched(fetchTime);
+    }
+
+    public void setLastFetched(long fetchTime) {
+        for (Stock stock : stocks.values()) {
+            stock.setLastFetched(fetchTime);
         }
     }
 
@@ -210,10 +239,9 @@ public class WatchList {
      *
      * @param stock
      * @param stockLocal
-     * @param fetchTime
      */
-    public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal, long fetchTime) {
-        stockLocal.setLastFetched(fetchTime);
+    public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal) {
+        //stockLocal.setLastFetched(fetchTime);
 
         String price = stock.get("price").toString();
         assert price != null;
@@ -255,7 +283,7 @@ public class WatchList {
         }
 
         Stock newStock;
-        newStock = new Stock(stockCode);
+        newStock = new Stock(stockCode.toUpperCase());
 
         assert newStock.getSymbol() != null && newStock.getStockName() != null;
         stocks.put(newStock.getSymbol(), newStock);
