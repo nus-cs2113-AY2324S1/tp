@@ -52,4 +52,5 @@ deactivate FilterCommand
 
 nuscents --> user
 deactivate nuscents
+destroy FilterCommand
 @enduml

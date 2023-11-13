@@ -22,6 +22,12 @@ View my code contributions here: [Reposense](https://nus-cs2113-ay2324s1.github.
 - Ideated the example outputs given
 
 ### Contributions to the DG
-Which sections did you contribute to the DG? Which UML diagrams did you add/updated?
+- Acknowledgements
+- Interaction Flow simplified class diagram
+- UI Component
+- Command Component
+- Parser Component
+- Storage Component
+- Implementation: `list` Transactions Feature
 
 ### Contributions beyond the project team
