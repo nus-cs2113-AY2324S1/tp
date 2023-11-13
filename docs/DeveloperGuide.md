@@ -116,6 +116,7 @@ API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
 The `Storage` class,
 - loads and saves the list of dishes on the `Menu`, available ingredient stock in `Pantry` and orders for the day in `OrderList` in a text file.
+- detects if the file is tampered by the user by reading the hash number in the storage text files
 - depends on `Menu`, `Pantry` and `Sales` objects (which are found in the data package).
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
