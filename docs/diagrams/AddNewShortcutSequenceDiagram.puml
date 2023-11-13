@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddShortcutCommand" as AddShortcutCommand COMMAND_COLOR
+participant "<<class>>\nShortcutParser" as ShortcutParser SHORTCUT_PARSER_COLOR
+participant "shortcut:Shortcut" as Shortcut SHORTCUT_COLOR
+participant "shortcuts:ShortcutList" as Shortcuts SHORTCUT_LIST_COLOR
+participant "<<class>>\nUi" as Ui UI_COLOR
+
+[-> AddShortcutCommand : executeCommand()
+activate AddShortcutCommand
+
+AddShortcutCommand -> ShortcutParser : parseShortcut(ingredients,input)
+activate ShortcutParser
+
+create Shortcut
+ShortcutParser -> Shortcut : new Shortcut(name, quantity)
+activate Shortcut
+
+Shortcut --> ShortcutParser
+deactivate Shortcut
+
+ShortcutParser --> AddShortcutCommand : shortcut
+deactivate ShortcutParser
+
+AddShortcutCommand -> Shortcuts : addShortcut(shortcut)
+activate Shortcuts
+
+Shortcuts --> AddShortcutCommand
+deactivate Shortcuts
+
+AddShortcutCommand -> Ui : printAddShortcutSuccess(shortcut)
+activate Ui
+
+Ui --> AddShortcutCommand
+deactivate Ui
+
+[<-- AddShortcutCommand
+deactivate AddShortcutCommand
+
+@enduml

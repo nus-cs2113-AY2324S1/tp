@@ -13,7 +13,6 @@ title: Developer Guide
 References
 1. Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html 
 2. User Guide: https://se-education.org/addressbook-level3/UserGuide.html
-3. 
 
 ## Design & implementation
 

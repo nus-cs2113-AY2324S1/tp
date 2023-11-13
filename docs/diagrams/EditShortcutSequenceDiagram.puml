@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":EditShortcutCommand" as EditShortcutCommand COMMAND_COLOR
+participant "<<class>>\nShortcutParser" as ShortcutParser SHORTCUT_PARSER_COLOR
+participant "shortcut:Shortcut" as Shortcut SHORTCUT_COLOR
+participant "shortcuts:ShortcutList" as Shortcuts SHORTCUT_LIST_COLOR
+participant "<<class>>\nUi" as Ui UI_COLOR
+
+[-> EditShortcutCommand : executeCommand()
+activate EditShortcutCommand
+
+EditShortcutCommand -> ShortcutParser : getShortcutIndex(shortcut, shortcutDetail)
+activate ShortcutParser
+
+ShortcutParser --> EditShortcutCommand
+deactivate ShortcutParser
+
+EditShortcutCommand -> Shortcuts : getShortcut(index)
+activate Shortcuts
+
+Shortcuts --> EditShortcutCommand
+deactivate Shortcuts
+
+EditShortcutCommand -> ShortcutParser : editShortcut(shortcut, ingredients, shortcutDetail)
+activate ShortcutParser
+
+loop number of flags remaining
+alt name
+ShortcutParser -> ShortcutParser : editShortcutName()
+activate ShortcutParser
+
+ShortcutParser -> Ui : printEditShortcutName(oldName, newName);
+activate Ui
+
+Ui --> ShortcutParser
+deactivate Ui
+
+ShortcutParser -> Shortcut : setIngredientName(newName)
+activate Shortcut
+
+Shortcut --> ShortcutParser
+deactivate Shortcut
+
+ShortcutParser --> ShortcutParser
+deactivate ShortcutParser
+
+ShortcutParser -[hidden]-> ShortcutParser
+
+else quantity
+ShortcutParser -> ShortcutParser : editShortcutQuantity()
+activate ShortcutParser
+
+ShortcutParser -> Ui : printEditShortcutQuantity(oldQuantity, newQuantity);
+activate Ui
+
+Ui --> ShortcutParser
+deactivate Ui
+
+ShortcutParser -> Shortcut : setQuantity(newQuantity)
+activate Shortcut
+
+Shortcut --> ShortcutParser
+deactivate Shortcut
+
+ShortcutParser --> ShortcutParser
+deactivate ShortcutParser
+
+ShortcutParser -[hidden]-> ShortcutParser
+
+end
+end
+
+ShortcutParser --> EditShortcutCommand
+deactivate ShortcutParser
+
+[<-- EditShortcutCommand
+deactivate EditShortcutCommand
+@enduml

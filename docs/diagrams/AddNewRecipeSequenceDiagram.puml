@@ -32,7 +32,7 @@ AddRecipeCommand -> Recipes : addRecipe(newRecipe)
 activate Recipes
 
 Recipes -> Recipes: recipes.add(newRecipe)
-activate Recipes RECIPE_LIST_COLOR_T1
+activate Recipes
 deactivate Recipes
 
 Recipes --> AddRecipeCommand
@@ -43,7 +43,7 @@ AddRecipeCommand -> Ui : showRecentAddedRecipe(recipeTitle)
 activate Ui
 
 Ui -> Ui: print recent added recipe
-activate Ui UI_COLOR_T1
+activate Ui
 deactivate Ui
 
 Ui --> AddRecipeCommand
