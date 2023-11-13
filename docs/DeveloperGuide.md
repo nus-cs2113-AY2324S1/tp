@@ -91,11 +91,16 @@ The `flashcard.command` package contains the classes representing the
 different flashcard commands.
 
 These are the classes representing the different commands:
-- [`CreateFlashcardCommand.java`]()
-- [`DeleteAllFlashcardsCommand.java`]()
-- [`DeleteFlashcardCommand.java`]()
-- [`ListFlashcardsCommand.java`]()
-- [`StartReviewCommand.java`]()
+- [`CreateFlashcardCommand.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/command/CreateFlashcardCommand.java)
+  corresponds to the `create flashcards` command
+- [`DeleteAllFlashcardsCommand.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/command/DeleteAllFlashcardsCommand.java)
+  corresponds to the `delete all flashcards` command
+- [`DeleteFlashcardCommand.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/command/ListFlashcardsCommand.java)
+  corresponds to the `delete flashcard` command
+- [`ListFlashcardsCommand.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/command/ListFlashcardsCommand.java)
+  corresponds to the `list flashcards` command
+- [`StartReviewCommand.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/command/StartReviewCommand.java)
+  corresponds to the `review flashcards` command
 
 All these classes inherit from the abstract class `FlashcardCommand` and 
 define its `execute` method. This method serves as the entire API of a 
@@ -108,7 +113,7 @@ private or protected fields and/or methods that are required for their
 internal operation. In this regard, because the commands all achieve very 
 different goals (listing flashcards vs creating new flashcards), the different 
 subclasses of `FlashcardCommand` can vary quite heavily. Therefore, in the 
-interest of brevity, the individual subclasses are not explained in furhter 
+interest of brevity, the individual subclasses are not explained in further 
 detail and the reader is instead referred to their respective source code in 
 the `src/main/java/seedu.duke/flashcard/command` directory.
 
@@ -119,7 +124,19 @@ that can be invoked in two different ways: an easy, but more time-consuming way
 for  beginner users who want as much guidance as possible; or a less
 time-consuming, but more complicated way for expert users who don't need
 additional guidance. Such "dual commands" are implemented as subclasses of 
-the abstract class `DualFlashcardCommand`
+the abstract class `DualFlashcardCommand`.
+
+Currently, the following commands are dual commands (and as such inherit 
+from `DualFlashcardCommand`):
+
+- [`DeleteFlashcardCommand.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/command/ListFlashcardsCommand.java)
+- [`StartReviewCommand.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/command/StartReviewCommand.java)
+
+The abstract `DualFlashcardCommand` mode contains two methods that need to 
+be implemented by its subclasses:
+
+- `executeBeginnerMode`: 
+- `executeExpertMode`: 
 
 ![class diagram of flashcard.command package](Diagrams/flashcard-diagrams/command_package_classes.svg)
 
@@ -136,9 +153,11 @@ comments in their source code.
 
 Currently, the flashcard-specific exceptions are:
 
-- []
-
-
+- [`InvalidFlashcardIdException`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/exceptions/InvalidFlashcardIdException.java):
+  Signifies that a given flashcardId is not valid, i.e. that no flashcard with
+  that id appears in the list of flashcards which are currently being worked on.
+- [`InvalidReviewModeException`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/exceptions/InvalidReviewModeException.java):
+  Signifies that an invalid, i.e. non-existent review mode has been chosen.
 
 ### **Storage Components**
 
