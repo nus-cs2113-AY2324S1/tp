@@ -6,15 +6,17 @@ public class Meal {
     public String name;
     public int calories;
     public Date time;
+    public Category category;
 
-    public Meal(String name, int calories, Date time) throws Exception {
+    public Meal(String name, int calories, String category, Date time) throws Exception {
         this.name = name;
         this.calories = calories;
         this.time = time;
+        this.category = CategoryParser.Parse(category);
     }
 
     @Override
     public String toString() {
-        return name + "(" + calories + " calories, " + time.toString() + ")";
+        return name + "(" + calories + " calories, " + category + ", on " + time.toString() + ")";
     }
 }

@@ -11,6 +11,7 @@ import seedu.duke.data.meal.Meal;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
 import seedu.duke.storagefile.AchmStorage;
+import seedu.duke.storagefile.DataManager;
 import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
 import seedu.duke.storagefile.StorageFile;
@@ -24,19 +25,20 @@ public class Duke {
     /**
      * Version info of the program.
      */
-    public static final String VERSION = "AddressBook Level 2 - Version 1.0";
+    public static final String VERSION = "Version-2.0";
     public static GoalList goalList = new GoalList();
     public static GoalList achievedGoals = new GoalList();
     public static Log exerciseLog = new Log();
     public static StorageFile exerciseLogStorage;
     public static GoalStorage goalStorage;
     public static AchmStorage achmStorage;
-    static ArrayList<Meal> meals = new ArrayList<Meal>();
-    private TextUi ui;
+    private static ArrayList<Meal> meals = new ArrayList<Meal>();
+    public static TextUi ui;
     private final String dirPath = "data";
     private final String exerciseLogFilePath = "./data/ExerciseLog.txt";
     private final String goalFilePath = "./data/GoalRecord.txt";
     private final String achmFilePath = "./data/Achievement.txt";
+    private final String mealSavePath = "Meal.json";
 
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
@@ -60,7 +62,7 @@ public class Duke {
      */
     private void start(String[] launchArgs) {
         try {
-            this.ui = new TextUi();
+            ui = new TextUi();
             exerciseLogStorage = StorageFile.initializeStorage(dirPath, exerciseLogFilePath);
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
             goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
@@ -68,6 +70,12 @@ public class Duke {
             achmStorage = AchmStorage.initializeGoalStorage(dirPath, achmFilePath);
             achmStorage.restoreGoalRecord();
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
+            DataManager.setRelativePath(mealSavePath);
+            String dataJson = DataManager.readData();
+            ArrayList<Meal> data = DataManager.convertFromJsonToMealList(dataJson);
+            if (data != null) {
+                meals = data;
+            }
             MealCommand.setMeals(meals);
         } catch (Exception e) { // TODO: change to specific storage exceptions later
             ui.showInitFailedMessage();
@@ -80,6 +88,12 @@ public class Duke {
      */
     private void exit() {
         ui.showGoodbyeMessage();
+        try {
+            System.err.println(meals.size());
+            DataManager.saveData(DataManager.convertToJson(meals));
+        } catch (Exception exception) {
+            ui.showToUser(exception.toString());
+        }
         System.exit(0);
     }
 

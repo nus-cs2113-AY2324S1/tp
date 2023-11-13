@@ -5,22 +5,25 @@ import seedu.duke.data.meal.Meal;
 import seedu.duke.data.Date;
 
 import java.util.List;
+import java.util.Locale.Category;
 
 public class AddCommand extends MealCommand {
     public static final String COMMAND_WORD = "meal_add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a meal and record the amount of calories.\n"
             + "Example: " + COMMAND_WORD + " potato 15";
-    private static final int[] validArgumentAmounts = new int[] { 2, 3 };
+    private static final int[] validArgumentAmounts = new int[] { 3, 4 };
     private final String name;
     private final int calories;
+    private final String category;
     private final Date time;
 
     public AddCommand(List<String> arguments) throws Exception {
         checkArgument(arguments, validArgumentAmounts);
         name = arguments.get(0);
         calories = Integer.parseInt(arguments.get(1));
-        if (arguments.size() >= 3) {
-            time = new Date(arguments.get(2));
+        category = arguments.get(2);
+        if (arguments.size() >= 4) {
+            time = new Date(arguments.get(3));
         } else {
             time = Date.Now();
         }
@@ -28,7 +31,7 @@ public class AddCommand extends MealCommand {
 
     @Override
     public CommandResult execute() throws Exception {
-        meals.add(new Meal(name, calories, time));
+        meals.add(new Meal(name, calories, category, time));
         return new CommandResult("Successfully add meal " + meals.get(meals.size() - 1) + "!");
     }
 }
