@@ -2,7 +2,6 @@ package seedu.cafectrl.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.cafectrl.command.AddDishCommand;
-import seedu.cafectrl.command.BuyIngredientCommand;
 import seedu.cafectrl.command.DeleteDishCommand;
 import seedu.cafectrl.command.ListIngredientCommand;
 import seedu.cafectrl.command.ListSaleByDayCommand;
@@ -158,7 +157,7 @@ class ParserTest {
     }
 
     @Test
-    public void parseCommand_invalidDeleteIndex_returnsErrorMessage() {
+    public void parseCommand_notIntDeleteIndex_returnsErrorMessage() {
         Menu menu = new Menu();
         Ui ui = new Ui();
         Pantry pantry = new Pantry(ui);
@@ -172,7 +171,25 @@ class ParserTest {
 
         IncorrectCommand incorrectCommand = (IncorrectCommand) result;
         String feedbackToUser = incorrectCommand.feedbackToUser;
-        assertEquals(ErrorMessages.MISSING_ARGUMENT_FOR_DELETE, feedbackToUser);
+        assertEquals(ErrorMessages.DISH_INDEX_NOT_INT, feedbackToUser);
+    }
+
+    @Test
+    public void parseCommand_invalidDeleteIndex_returnsErrorMessage() {
+        Menu menu = new Menu();
+        Ui ui = new Ui();
+        Pantry pantry = new Pantry(ui);
+        Sales sales = new Sales();
+        CurrentDate currentDate = new CurrentDate();
+        String userInput = "delete -1";
+        ParserUtil parserUtil = new Parser();
+        Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
+
+        assertTrue(result instanceof IncorrectCommand);
+
+        IncorrectCommand incorrectCommand = (IncorrectCommand) result;
+        String feedbackToUser = incorrectCommand.feedbackToUser;
+        assertEquals(ErrorMessages.INVALID_DISH_INDEX, feedbackToUser);
     }
 
     @Test
