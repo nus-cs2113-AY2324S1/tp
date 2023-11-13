@@ -48,7 +48,7 @@ class ParserTest {
         Sales sales = new Sales();
         CurrentDate currentDate = new CurrentDate();
 
-        String userInput = "list_ingredients index/1";
+        String userInput = "list_ingredients dish/1";
         ParserUtil parserUtil = new Parser();
         Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
 
@@ -85,7 +85,7 @@ class ParserTest {
         Pantry pantry = new Pantry(ui);
         Sales sales = new Sales();
         CurrentDate currentDate = new CurrentDate();
-        String userInput = "list_ingredients index/a";
+        String userInput = "list_ingredients dish/a";
         ParserUtil parserUtil = new Parser();
         Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
 
@@ -103,7 +103,7 @@ class ParserTest {
         Pantry pantry = new Pantry(ui);
         Sales sales = new Sales();
         CurrentDate currentDate = new CurrentDate();
-        String userInput = "list_ingredients index/1";
+        String userInput = "list_ingredients dish/1";
         ParserUtil parserUtil = new Parser();
         Command result = parserUtil.parseCommand(menu, userInput, ui, pantry, sales, currentDate);
 

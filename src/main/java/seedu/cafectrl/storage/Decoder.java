@@ -271,7 +271,9 @@ public class Decoder {
             float totalOrderCost = quantity * decodedDishPrice;
 
             checkNameValidity(dishName);
-            boolean isDataAccurate = isCompleteStatusAccurate(orderLine, completeStatus);
+            boolean isDataAccurate = isCompleteStatusAccurate(orderLine, completeStatus)
+                    && isValidQty(orderLine, quantity)
+                    && isValidPrice(orderLine, decodedDishPrice);
             if (!isDataAccurate) {
                 return;
             }
@@ -294,6 +296,22 @@ public class Decoder {
             return true;
         }
         ui.showToUser(ErrorMessages.INVALID_ORDER_STATUS + orderLine);
+        return false;
+    }
+
+    private static boolean isValidPrice(String orderLine, Float decodedDishPrice) {
+        if (decodedDishPrice >= 0) {
+            return true;
+        }
+        ui.showToUser(ErrorMessages.INVALID_DISH_PRICE + orderLine);
+        return false;
+    }
+
+    private static boolean isValidQty(String orderLine, int quantity) {
+        if (quantity > 0) {
+            return true;
+        }
+        ui.showToUser(ErrorMessages.INVALID_ORDER_QTY + orderLine);
         return false;
     }
 
