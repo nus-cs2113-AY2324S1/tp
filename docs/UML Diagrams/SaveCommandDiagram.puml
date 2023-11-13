@@ -3,7 +3,7 @@
 
 hide footbox
 actor User
-Participant ":SaveCommand" as SaveCommand
+Participant ":SaveDrugsCommand" as SaveCommand
 Participant ":CommandResult" as CommandResult
 Participant ":Inventory" as inventory
 Participant ":Storage" as storage
