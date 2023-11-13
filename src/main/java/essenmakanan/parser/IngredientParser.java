@@ -69,7 +69,7 @@ public class IngredientParser {
 
         assert (ingredientDetails.length == 3) : "Ingredient details should have 3 parts";
 
-        String ingredientName = ingredientDetails[0].strip();
+        String ingredientName = ingredientDetails[0].trim();
         if (ingredientName.isEmpty()) {
             System.out.println("Ingredient name should not be empty!");
             throw new EssenFormatException();
@@ -81,9 +81,9 @@ public class IngredientParser {
             throw new EssenFormatException();
         }
 
-        Double ingredientQuantity = Double.parseDouble(ingredientDetails[1].strip());
+        Double ingredientQuantity = Double.parseDouble(ingredientDetails[1].trim());
 
-        String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
+        String ingredientUnitString = ingredientDetails[2].trim().toLowerCase();
         ingredientUnit = mapIngredientUnit(ingredientUnitString);
 
         Ingredient newIngredient = new Ingredient(ingredientName, ingredientQuantity, ingredientUnit);
@@ -100,7 +100,7 @@ public class IngredientParser {
             return false;
         }
 
-        String ingredientUnitString = ingredientDetails[2].strip().toLowerCase();
+        String ingredientUnitString = ingredientDetails[2].trim().toLowerCase();
         try {
             mapIngredientUnit(ingredientUnitString);
         } catch (EssenFormatException e) {

@@ -49,6 +49,7 @@ public class Ui {
                 + "\t- Edit a recipe. [edit r/RECIPE_TITLE n/NEW_TITLE s/STEP_TO_EDIT,NEW_STEP]\n"
                 + "\t- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]\n"
                 + "\t- Filter recipes based on ingredients. [filter recipe i/INGREDIENTNAME [i/...] ]\n"
+                + "\t- View all available recipes. [view ar]\n"
         );
     }
 
@@ -123,6 +124,8 @@ public class Ui {
                 && diffUnitIngredients.isEmpty();
         if (allEmpty) {
             System.out.println("You have all the ingredients you need! You are ready to go!");
+            System.out.println("(Use the execute command after you've executed your recipe " +
+                    "- this is to update your ingredients inventory)");
         } else {
             if (!missingIngredients.isEmpty()) {
                 System.out.println("You are missing these ingredient(s): ");
@@ -155,6 +158,17 @@ public class Ui {
             recipes.listRecipeTitles();
             drawDivider();
         }
+    }
+
+    public static void printAllAvailableRecipes(RecipeList recipes) {
+        if (recipes.getRecipes().size() == 0) {
+            System.out.println("You don't have sufficient ingredients for any recipes at the moment :(");
+        } else {
+            System.out.println("Here are the recipes you can execute with your current ingredients!");
+            recipes.listRecipeTitles();
+            System.out.println("Use the execute command after executing any of these recipes!");
+        }
+        drawDivider();
     }
 
     public static void printDeleteIngredientsSuccess(String ingredientName) {

@@ -98,7 +98,7 @@ public class CheckRecipeCommand extends Command {
     }
 
     /**
-     * To check if all ingredients needed are in the ingredient inventory
+     * To check if all ingredients needed  for a recipe are in the ingredient inventory
      *
      * @param recipeIngredients that we want to check if it is available in our ingredient inventory
      * @return boolean of whether user has all ingredients
