@@ -259,7 +259,7 @@ To end off the command, `ui.showPreviousDay()` is run to display a message to th
 The user is also shown the receded day number.
 
 ### List Ingredients
-![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)
+![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.svg)
 <br>*Figure 17: Execution of `list_ingredient` Command Sequence Diagram*
 
 API: [ListIngredientCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
@@ -274,7 +274,7 @@ Although it may seem tedious the steps are essentially as listed below:
 - The `Ui` class showcases the information to the user through the `formatListIngredient()` method.
 
 ### List Sale By Day
-![List_Sale Execution](images/sequence/ShowSaleByDayCommand_execute.png)
+![List_Sale Execution](images/sequence/ListSaleByDayCommand_execute.svg)
 <br>*Figure 18: Execution of `list_sale` Command Sequence Diagram*
 
 API: [ListSaleByDayCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/ListSaleByDayCommand.java)
@@ -293,7 +293,7 @@ The steps are essentially as listed below:
 * The List Total Sales command follows a comparable sequence, and as such, it will be excluded to avoid the repetition of multiple similar diagrams.
 
 ### Pantry - isDishCooked()
-![isDishCooked_function](images/sequence/Pantry_IsDishCooked.png)
+![isDishCooked_function](images/sequence/Pantry_IsDishCooked.svg)
 <br>*Figure 19: Data Processing of `isDishCooked()` Function Used in `add_order` Command Sequence Diagram*
 
 API: [Pantry.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/data/Pantry.java)
@@ -309,7 +309,7 @@ The steps are essentially as listed below:
 - A `false` indicates that the order was unsuccessful while a `true` indicates that the order was successful.
 
 ### Pantry - calculateMaxDish()
-![calculateMaxDish_function](images/sequence/Pantry_CalculateMaxDish.png)
+![calculateMaxDish_function](images/sequence/Pantry_CalculateMaxDish.svg)
 <br>*Figure 20: Data Processing of `calculateMaxDish()` Function Used in `add_order` Command Sequence Diagram*
 
 API: [Pantry.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/data/Pantry.java)
