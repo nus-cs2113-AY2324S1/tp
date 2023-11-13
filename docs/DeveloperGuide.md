@@ -446,6 +446,7 @@ BMI, ideal weight for their height and so on.
 ## User Stories
 
 ---
+
 | Version | As a ... | I want to ...                                                                                     | So that I can ...                                            |
 |---------|----------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | v1.0    | new user | know how to use the product                                                                       | use the product                                              |
