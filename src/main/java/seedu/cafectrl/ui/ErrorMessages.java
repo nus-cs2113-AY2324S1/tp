@@ -108,5 +108,5 @@ public class ErrorMessages {
     public static final String WRONG_LIST_TOTAL_SALES_FORMAT = "Invalid list_total_sales command format!\n"
             + ListTotalSalesCommand.MESSAGE_USAGE;
     public static final String MISSING_FILEPATH = "Error in FileManager: No File Path entered";
-    public static final String MISSING_INGREDIENT_MENU_DATA = " dish has no ingredients, this dish will be removed";
+    public static final String MISSING_INGREDIENT_MENU_DATA = "menu.txt: Missing ingredients, this dish will be removed -> ";;
 }

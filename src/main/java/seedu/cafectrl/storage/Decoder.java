@@ -69,7 +69,7 @@ public class Decoder {
             menuDishList.add(new Dish(dishName, ingredientsList, dishPrice));
         } catch (ParserException e) {
             logger.log(Level.WARNING, "Dish has no ingredients: " + e.getMessage(), e);
-            ui.showToUser(dishName + e.getMessage());
+            ui.showToUser(e.getMessage() + dishName);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_MENU_DATA + dishString);
