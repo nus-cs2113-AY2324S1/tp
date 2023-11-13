@@ -104,7 +104,6 @@ public class OrderList {
         }
     }
 
-    //@@author ShaniceTang
     /**
      * Finds the index of an order in the aggregated orders list based on the dish name.
      *
