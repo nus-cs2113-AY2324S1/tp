@@ -988,6 +988,29 @@ class ParserTest {
         String feedbackToUser = incorrectCommand.feedbackToUser;
         assertEquals(ErrorMessages.INVALID_UNIT_MESSAGE, feedbackToUser);
     }
+
+    @Test
+    void isValidUnit_invalidUnit_returnFalse() {
+        assertFalse(Parser.isValidUnit("kg"));
+    }
+
+    @Test
+    void isEmptyUnit_emptyUnit_returnTrue() {
+        assertTrue(Parser.isEmptyUnit(""));
+    }
+
+    @Test
+    void checkForMismatchUnit_mismatchingUnit_throwParserException() {
+        Menu menu = new Menu();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(new Ingredient("chicken", 500, "g"));
+        Dish dish = new Dish("chicken rice", ingredients, 3.00F);
+        menu.addDish(dish);
+
+        Ingredient ingredient = new Ingredient("chicken", 500, "ml");
+
+        assertThrows(ParserException.class, () -> Parser.checkForMismatchUnit(menu, ingredient));
+    }
     //@@author
 
     @Test
