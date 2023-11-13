@@ -1,10 +1,10 @@
 @startuml
 hide footbox
 actor User
-participant SaveSalesCommand
-participant SalesList
-participant CommandResult
-participant Storage
+participant ":SaveSalesCommand" as SaveSalesCommand
+participant ":SalesList" as SalesList
+participant ":CommandResult" as CommandResult
+participant ":Storage" as Storage
 
 User -> SaveSalesCommand: execute()
 activate User
@@ -15,15 +15,15 @@ alt SalesList is not empty
   activate SalesList
   SalesList -> Storage: Save sales data to file
   activate Storage
-  Storage --> SalesList: Success message
+  Storage -> SalesList: Success message
   deactivate Storage
   deactivate SalesList
-  SaveSalesCommand --> CommandResult: Success message
+  SaveSalesCommand -> CommandResult: Success message
   else
-  SaveSalesCommand --> CommandResult: SalesList is empty
+  SaveSalesCommand -> CommandResult: SalesList is empty
 end
 
-User --> SaveSalesCommand: CommandResult
+User -> SaveSalesCommand: CommandResult
 deactivate User
 deactivate SaveSalesCommand
 @enduml
