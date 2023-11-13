@@ -116,8 +116,7 @@ add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
 add expense /cat Food /type breakfast /de chicken sandwich /date 01/01/2020 /amt USD 10.50
 ```
 ```
-add expense /cat transport /type train /de train to school /date 10/10/2023 
-/amt 10.00
+add expense /cat transport /type train /de train to school /date 10/10/2023 /amt 10.00
 ```
 Expected output after successfully add income to the list:
 ![add_income_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/income_expected.png?raw=true)<br>
