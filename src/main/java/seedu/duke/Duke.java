@@ -66,13 +66,13 @@ public class Duke {
             "review flashcards",
             "delete flashcard",
             "delete all flashcards",
+            "help",
             "add event",
             "add goal event",
             "delete event",
             "delete all events",
             "find event",
             "list events",
-            "help",
             "exit",
         };
 
