@@ -7,9 +7,9 @@
   * [Architecture Diagram](#architecture-diagram)
   * [Storage Component](#storage-component)
     * [Design considerations](#design-considerations)
-  * [Visualization Feature](#visualization-feature-)
+  * [Visualization Feature](#visualization-feature)
     * [Class diagram](#class-diagram)
-    * [Sequence diagram](#sequence-diagram-)
+    * [Sequence diagram](#sequence-diagram)
   * [WatchList Feature](#watchlist-feature)
     * [Class diagram](#watchlist-class-diagram-simplified)
     * [Sequence diagram](#watchlist-sequence-diagram-simplified)
@@ -117,7 +117,7 @@ the data one upon exiting the program with the `exit` command.
 
 Option 1 is chosen to prioritise the performance of the program.
 
-### Visualization Feature 
+### Visualization Feature
 
 This feature is implemented with the help of [XChart](https://knowm.org/open-source/xchart/), a simple charting library for Java by Knowm.
 
@@ -168,7 +168,7 @@ the visualizer displays the specified visualization chart by calling the chartin
 
 ![](images/vis/visualisationClass.png)
 
-### Sequence Diagram 
+### Sequence Diagram
 
 Overall 
 
@@ -803,7 +803,7 @@ Test case: `overview`
 
 Expected: Displays overview of user's financials. Details of financials are shown in the status message.
 
-### WatchList Feature
+### Using Watchlist
 
 To test the watchlist feature, you can copy the text below into the watchlist.json file under data directory
 ```
@@ -853,7 +853,7 @@ as you have no more stocks left in your watchlist
 Symbol    Market    Price     Daily High     Daily Low     EquityName                       Last Updated     
 Empty Watchlist. Nothing to display...
 ```
-### Visualization Feature
+### Using Visualization
 
 We can use the visualization feature to visualize your income and expenses.
 
