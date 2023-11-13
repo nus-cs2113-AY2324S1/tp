@@ -584,7 +584,7 @@ Input: `list recurring`
 
 Output:
 
-![ListRecurring.png](images/cashflow/ListRecurring.png)
+![](images/cashflow/ListRecurring.png)
 
 ### Delete cashflow
 
@@ -769,7 +769,7 @@ deletestock /s NET
 ```
 After deleting all the stocks and running the watchlist command again, the output should look like this
 as you have no more stocks left in your watchlist
-![](images/investments/watchlistMT3.png)
+![!](images/investments/watchlistMT3.png)
 
 ### Using Visualization
 
