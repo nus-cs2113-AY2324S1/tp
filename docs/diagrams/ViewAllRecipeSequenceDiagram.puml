@@ -2,12 +2,13 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+
 actor User
-participant ":EssenMakanan" as EssenMakanan LOGIC_COLOR
-participant ":Parser" as Parser LOGIC_COLOR
-participant ":ViewRecipeCommand" as ViewRecipeCommand LOGIC_COLOR
-participant "<<class>>\nUi" as Ui INTERFACE_COLOR
-participant "recipes:RecipeList" as Recipes LOGIC_COLOR
+participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant ":ViewRecipeCommand" as ViewRecipeCommand COMMAND_COLOR
+participant "<<class>>\nUi" as Ui UI_COLOR
+participant "recipes:RecipeList" as Recipes RECIPE_LIST_COLOR
 
 User -> EssenMakanan: input: view r
 activate EssenMakanan
@@ -42,6 +43,7 @@ deactivate Ui
 ViewRecipeCommand --> EssenMakanan
 deactivate ViewRecipeCommand
 
+EssenMakanan --> User: output: list of recipes
 deactivate EssenMakanan
 
 @enduml
