@@ -32,7 +32,7 @@ Type `help` to see a list of commands that you will be able to use in the applic
 * [Editing your profile: `editprofile`](#editing-your-profile-editprofile)
 * [Viewing your profile: `viewprofile`](#viewing-your-profile-viewprofile)
 * [Checking your current bmi: `bmi`](#checking-your-current-bmi-bmi)
-* [Checking your recommended weight: `checkrecommendedweight`](#checking-your-recommended-weight-checkrecommendedweight)
+* [Checking your ideal weight range given height: `checkrecommendedweight`](#checking-your-ideal-weight-range-given-current-height-checkrecommendedweight)
 * [Adding a meal: `addmeal`](#adding-a-meal-addmeal)
 * [Deleting a meal: `deletemeal`](#deleting-a-meal-deletemeal)
 * [Viewing list of all meals: `viewmeal`](#viewing-list-of-all-meals-viewmeal)
@@ -165,8 +165,9 @@ BMI falls under NORMAL WEIGHT category
 ```
 
 
-### Checking your recommended weight: `checkrecommendedweight`
-Allows user to check their recommended weight.
+### Checking your ideal weight range given current height: `checkrecommendedweight`
+Allows the user to check the ideal weight range given their current height. This is calculate based
+on a standard formula.
 
 **Example of usage**
 ```
@@ -405,7 +406,6 @@ caloriebalance 2023-11-04
 Allows user to add their steps walked for a particular day.
 
 **Format**
-- `addsteps <NUMBER_OF_STEPS>`
 - `addsteps <NUMBER_OF_STEPS> d/<DATE>`
 - You should type `<DATE>` in format of `yyyy-MM-dd`.
 
@@ -419,7 +419,6 @@ addsteps 2000 d/2023-10-23
 I've added the following steps:
 [S] 2000 steps (2023-10-23)
 ```
-
 
 ### Deleting a step entry: `deletesteps`
 Allows user to delete a step entry they have added.
