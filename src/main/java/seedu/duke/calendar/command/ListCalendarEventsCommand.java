@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan & Cheezeblokz
+//@@author Brian030601
 
 package seedu.duke.calendar.command;
 
@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class ListCalendarEventsCommand extends EventCommand{
 
+    //@@author Brian030601
     /**
      * The execute method is used to list all the events in the EventList. The method
      * has two parameters (Scanner , EventList). The scanner doesn't do anything here

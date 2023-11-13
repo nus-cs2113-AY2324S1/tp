@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan
+//@@author Brian030601
 
 package seedu.duke.calendar.command;
 
@@ -17,7 +17,7 @@ public class FindEventCommand extends DualEventCommand {
         syntaxString = "find event EVENT_NAME";
     }
 
-    //@@author kherlenbayasgalan
+    //@@author Brian030601
     /**
      * The execute method is to search and find an event from the EventList. The method has two
      * parameters (Scanner , EventList). Scanner takes the name of the event that the user

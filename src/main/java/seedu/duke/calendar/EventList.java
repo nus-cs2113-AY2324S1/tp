@@ -1,10 +1,11 @@
-//@@author kherlenbayasgalan
+//@@author Brian030601
 
 package seedu.duke.calendar;
 
 import java.util.ArrayList;
 
 public class EventList {
+    //@@author Brian030601
     private ArrayList<Event> eventList;
 
     // EventList is a constructor method

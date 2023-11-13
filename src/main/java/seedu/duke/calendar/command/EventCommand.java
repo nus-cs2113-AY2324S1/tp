@@ -1,4 +1,4 @@
-//@@author kherlenbayasgalan & Cheezeblokz
+//@@author Brian030601 & Cheezeblokz
 
 package seedu.duke.calendar.command;
 
@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public abstract class EventCommand {
 
+    //@@author Brian030601
     /**
      * The execute method is an abstract class that must be implemented by
      * its children classes. That way, its children will be able to execute

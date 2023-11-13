@@ -3,8 +3,8 @@
 ## Introduction
 
 TaskLinker is a CLI-tool for helping university students memorize flashcards 
-and track their flashcard and general academic progress in the courses they are
-taking.
+and track their flashcard progress as well as general academic progress in 
+the courses they are taking.
 
 ## Quick Start
 
@@ -14,28 +14,92 @@ taking.
 
 ## Features
 
+### Notes about the command format and sample output format:
+
+#### Command format
+
+In the command format, words in UPPER_CASE are the parameters to be 
+supplied by the user. e.g. in `delete flashcard FLASHCARD_ID`, FLASHCARD_ID 
+is a parameter whose value shall be supplied by the user, e.g. as `delete 
+flashcard 3`.
+
+#### Sample output format
+
+When sample output is provided, it is shown as a code block.
+
+User input within the example is shown in bold, text printed by the program 
+is shown in normal thickness.
+
+E.g. in the following example, the user inputted the command "list 
+flashcards" and the program printed out a list of the available flashcards.
+<pre>
+Enter your command: <b>list flashcards</b>
+    Here is a list of all your flashcards: 
+
+--------------------------------------------------------------------------------
+front text: How long is a meter in cm?
+back text: 100
+id: 20
+difficulty: 4
+--------------------------------------------------------------------------------
+front text: What does UML stand for?
+back text: Unified Modelling Language
+id: 21
+difficulty: 6
+--------------------------------------------------------------------------------
+
+    Those were all your flashcards.
+</pre>
+
 ### Flashcard-related features
 
 #### General explanation of flashcards
 
-The difficulty symbolizes how hard it is for you to remember this particular 
-flashcard. The higher the number, the harder.
+Flashcards are two-sided cards that have a question on the front and its 
+answer on the back. They are used for revising information and helping with 
+memorization. As such, they are often used by students; e.g. medicine students often use 
+flashcards to memorize the anatomy of the human body.
 
-The flashcard id is used to uniquely identify each flashcard. (Flashcard ids 
-don't necessarily start at zero and are not necessarily consecutive. Don't 
-worry about this; they are for internal use only and "gaps" between 
-flashcard ids are totally fine)
+TaskLinker implements virtual flashcards that you can create, review and 
+delete on the go, without being bound to physical copies.
+
+In TaskLinker, every flashcard has a front text (the question) and a back 
+text (the answer). Also, every flashcard has a difficulty attribute that shows 
+how hard it is for you to remember this particular flashcard (The higher the
+difficulty number, the harder). Every flashcard is identified by a unique id 
+(Flashcard ids don't necessarily start at zero and are not necessarily
+consecutive. Don't worry, this is totally fine and the planned behavior!).
 
 #### Listing all flashcards: `list flashcards`
 
 Prints out a list of all flashcards that shows each flashcard's front text 
 and back text as well as its id and current difficulty level.
 
-Format: `list flashcards`
+Command Format: `list flashcards`
+
+Example of usage: 
+<pre>
+Enter your command: <b>list flashcards</b>
+    Here is a list of all your flashcards: 
+
+--------------------------------------------------------------------------------
+front text: How long is a meter in cm?
+back text: 100
+id: 20
+difficulty: 4
+--------------------------------------------------------------------------------
+front text: What does UML stand for?
+back text: Unified Modelling Language
+id: 21
+difficulty: 6
+--------------------------------------------------------------------------------
+
+    Those were all your flashcards.
+</pre>
 
 #### Creating a new flashcard: `create flashcard`
 
-Starts the process of adding a new flashcard.
+Starts the process of creating a new flashcard.
 
 After entering this command, you are prompted to first input the front page
 text (once you have typed it out, submit it by pressing ENTER) and then the
@@ -43,30 +107,60 @@ back page text (once you have typed it out, submit it by pressing ENTER) of
 your new flashcard.
 
 After you've done this, a success message will be printed out. This
-indicates that a new flashcard has been successfully created and saved.
+indicates that your new flashcard has been successfully created and saved.
 
-Format: `create flashcard`
+Command Format: `create flashcard`
+
+Example of usage:
+<pre>
+Enter your command: <b>create flashcard</b>
+Enter the front page text: <b>What is a banana?</b>
+Enter the back page text: <b>A kind of fruit</b>
+
+Success! Flashcard has been added to your collection.
+</pre>
 
 #### Reviewing your flashcards: `review flashcards`
 
-Starts the process of reviewing flashcard.
+Starts the process of reviewing your flashcards.
 
-After entering this command, you are prompted to select your exact review
-mode from two choices:
+The `review flashcards` command is a so-called "Dual Command" that can be 
+invoked in two different ways: an easy, but more time-consuming way for 
+beginner users who want as much guidance as possible; or a less 
+time-consuming, but more complicated way for expert users who don't need 
+additional guidance.
 
-- `random mode`: Randomly selects flashcards to review
-- `spaced repetition mode`: Which flashcards are shown depends on how well
-  you previously knew them. Flashcards which you couldn't remember well are
-  shown more often, while flashcards which you remembered well are shown
-  less often.
+There are two review modes to choose from: 
 
-Input `a` to choose `random mode`, or input `b` to choose `spaced repetition
-mode`.
+- **random mode:** The flashcards to be reviewed are randomly chosen.
+- **spaced repetition mode:** Which flashcards are chosen to be reviewed 
+  depends on 
+  how well you previously knew their contents. Flashcards which you couldn't 
+  remember well are shown more often, while flashcards which you remembered well
+  are shown less often.
 
-Once you've selected a review mode, the actual review begins: the front page
-of a flashcard is shown to you. You should now try and think of the answer
-(the text on the back page of the flashcard); and once you're ready, press
-ENTER to compare it to the actual back page.
+How you chose your review mode differs between the beginner mode and expert 
+mode:
+
+- **Choosing review mode in beginner mode:** After you've inputted the 
+  `review flashcards` command, in a separate step, you are prompted to select 
+  your desired review mode by inputting its respective letter: Input `a` to 
+  choose random mode, or input `b` to choose spaced repetition mode.
+- **Choosing review mode in expert mode:** You have to already choose the 
+  review mode when you input the `review flashcards` command. Thus, you have 
+  to use the `review flashcards REVIEW_MODE` format, where REVIEW_MODE has 
+  to be either an `a` (for random mode) or a `b` (for spaced repetition mode)
+  . Unlike in the beginner mode, there is no separate step for you to 
+  choose a review mode from a list of available options as you have already 
+  supplied which review mode you want to use via the REVIEW_MODE parameter 
+  of the `review flashcards REVIEW_MODE` command format; thus saving you time.
+
+Once you've selected a review mode, the actual review begins.
+
+Firstly, the front page of a flashcard is shown to you. You should now try and
+think of the answer (the text on the back page of the flashcard); and once 
+you're ready, press ENTER to be shown the back page of the flashcard so you can
+compare what you expected to be the answer to the actual answer.
 
 In spaced repetition mode, after you have revealed the back page of a 
 flashcard, you are prompted to rate how to difficult it was to remember. 
@@ -74,30 +168,143 @@ Select `E` if it was easy, `M` if it was moderately hard and `H` if it was
 quite hard. This information is used to adjust the difficulty of the 
 flashcard you just reviewed.
 
-Now, the process repeats and the next flashcard is shown to you.
+(In random mode, no such process of rating the flashcard's difficulty takes 
+place.)
 
-If you want to quit the review process, simply input `q` or `quit` instead
+Now, the process repeats and the front page of the next flashcard is shown to 
+you.
+
+If you ever want to quit the review process, simply input `q` or `quit` instead
 of pressing ENTER to reveal the back page.
 
-Format: `create flashcard`
+##### Command format and example of usage in beginner mode
 
-#### Deleting a flashcard
+Command Format: `review flashcards`
+
+Example of usage:
+<pre>
+Enter your command: <b>review flashcards</b>
+    How do you want to review your flashcards?
+        a) random mode
+        b) spaced repetition mode
+<b>a</b>
+    You have started a review session in random review mode
+
+    ----------------------------------------------------------------------------
+    The front text is: What is the boiling point of water?
+
+    Think of the answer (the back text) in your head.
+    Press ENTER when you are ready to compare it,
+    or enter q or quit to end this review session.
+
+    The actual back text is: 100 degrees Celsius
+
+    ----------------------------------------------------------------------------
+    The front text is: What is the boiling point of water?
+
+    Think of the answer (the back text) in your head.
+    Press ENTER when you are ready to compare it,
+    or enter q or quit to end this review session.
+<b>quit</b>
+    Success! You have ended this review session.
+</pre>
+
+##### Command format and example of usage in expert mode
+
+Command Format: `review flashcards REVIEW_MODE` (where REVIEW_MODE has to be 
+either an `a` or a `b`)
+
+Example of usage:
+<pre>
+Enter your command: <b>review flashcards b</b>
+    You have started a review session in spaced repetition mode
+
+    ----------------------------------------------------------------------------
+    The front text is: What is the boiling point of water?
+
+    Think of the answer (the back text) in your head.
+    Press ENTER when you are ready to compare it,
+    or enter q or quit to end this review session.
+
+    The actual back text is: 100 degrees Celsius
+
+    How hard was it to remember the back page of this flashcard?
+    Input E if it was easy, M if it was moderately challenging 
+    or H if it was quite hard.
+<b>H</b>
+    ----------------------------------------------------------------------------
+    The front text is: What is the boiling point of water?
+
+    Think of the answer (the back text) in your head.
+    Press ENTER when you are ready to compare it,
+    or enter q or quit to end this review session.
+<b>q</b>
+    Success! You have ended this review session.
+</pre>
+
+#### Deleting a flashcard: `delete flashcard`
 
 Starts the process of deleting a flashcard.
 
-After entering this command, you are prompted to input the id of the 
-flashcard you want to delete. Input it into the terminal and then press enter.
+The `delete flashcard` command is a so-called "Dual Command" that can be
+invoked in two different ways: an easy, but more time-consuming way for
+beginner users who want as much guidance as possible; or a less
+time-consuming, but more complicated way for expert users who don't need
+additional guidance.
 
-If it was a valid id, the flashcard with that id is deleted; otherwise, an 
-error message is shown, and you are prompted to retry.
+How you chose which flashcard to delete differs between the beginner mode and
+expert mode:
 
-Format: `delete flashcard`
+- **Choosing review mode in beginner mode:** After you've inputted the
+  `delete flashcard` command, in a separate step, you are prompted to select
+  the flashcard you want to delete by inputting its id.
+- **Choosing review mode in expert mode:** You have to already choose the
+  flashcard you want to delete when you input the `delete flashcard` command.
+  Thus, you have to use the `delete flashcards FLASHCARD_ID` format, where
+  FLASHCARD_ID is the id of the flashcard you want to delete. Unlike in the
+  beginner mode, there is no separate step for you to choose which flashcard you
+  want to delete as you have already informed TaskLinker about which flashcard
+  you want to delete via the FLASHCARD_ID parameter of the
+  `delete flashcards FLASHCARD_ID` command format; thus saving you time.
+
+
+If the id you provided was a valid id, the flashcard with that id is deleted; 
+otherwise, an error message is shown, and you are prompted to retry.
+
+##### Command format and example of usage in beginner mode
+
+Command format: `delete flashcard` 
+
+Example of usage:
+<pre>
+Enter your command: <b>delete flashcard</b>
+    Enter id of the flashcard you want to delete: <b>2</b>
+    Flashcard with id 2 has been successfully deleted.
+</pre>
+
+##### Command format and example of usage in expert mode
+
+Command format: `delete flashcard FLASHCARD_ID` (where FLASHCARD_ID is the 
+id of the flashcard you want to delete)
+
+Example of usage:
+<pre>
+Enter your command: <b>delete flashcard 34</b>
+    Couldn't find a flashcard with id 34
+    No deletion has been performed. Please try again with a valid id.
+</pre>
 
 #### Deleting all flashcards: `delete all flashcards`
 
-Deletes all flashcards that you have added so far.
+Deletes all flashcards currently stored by TaskLinker.
 
 Format: `delete all flashcards`
+
+Example of usage:
+<pre>
+Enter your command: <b>delete all flashcards</b>
+    All your flashcards have been successfully deleted.
+</pre>
 
 ### General Explanation of Calendar Features
 
@@ -198,7 +405,7 @@ Example of usage:
 
 ## FAQ
 
-**Q**: Where can I find my flashcard and caldendar data?
+**Q**: Where can I find my flashcard and calendar data?
 
 **A**: You can find it in `data/flashcards` and `data/events` folder.
 
@@ -210,9 +417,16 @@ Every event and flashcard are automatically save after each command.
 
 ## Command Summary
 
-* List all flashcards: `list flashcards`
-* Create a new flashcard: `create flashcard`
-* Review your flashcards: `review flashcards`
+* [Listing all flashcards](#listing-all-flashcards-list-flashcards): `list 
+  flashcards`
+* [Creating a new flashcard](#creating-a-new-flashcard-create-flashcard): 
+  `create flashcard`
+* [Reviewing your flashcards](#reviewing-your-flashcards-review-flashcards): 
+  `review flashcards`
+* [Deleting a flashcard](#deleting-a-flashcard-delete-flashcard) `delete 
+  flashcard`
+* [Deleting all flashcards](#deleting-all-flashcards-delete-all-flashcards) 
+  `delete all flashcards`
 * Create an event: `add event`
 * Delete an event: `delete event`
 * Delete all events: `delete all events`

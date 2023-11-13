@@ -29,7 +29,7 @@ public class DeleteFlashcardCommand extends DualFlashcardCommand {
         assert flashcardList != null : "Must be a valid flashcardList " +
                 "instance";
 
-        System.out.println("    Enter id of the flashcard you want to " +
+        System.out.print("    Enter id of the flashcard you want to " +
                 "delete: ");
 
         String input = scanner.nextLine();
@@ -46,7 +46,7 @@ public class DeleteFlashcardCommand extends DualFlashcardCommand {
     }
 
     /**
-     * Allows deleting a flashcard whose id is already known.
+     * Allows deleting a flashcard whose id has already been inputted.
      *
      * @param scanner Scanner for getting user input.
      * @param flashcardList FlashcardList from which to delete.
@@ -73,18 +73,19 @@ public class DeleteFlashcardCommand extends DualFlashcardCommand {
      * @param flashcardId The id of the flashcard to delete.
      * @param flashcardList The list of all known flashcards.
      */
-    private void deleteFlashcardById(int flashcardId, FlashcardList flashcardList) {
+    private void deleteFlashcardById(int flashcardId,
+                                     FlashcardList flashcardList) {
         boolean deletionWasSuccessful =
                 flashcardList.deleteFlashcardById(flashcardId);
 
         if (deletionWasSuccessful) {
-            System.out.println("    Flashcard with id " + flashcardId +
-                    " has been successfully deleted.");
+            System.out.println("    Flashcard with id " + flashcardId
+                    + " has been successfully deleted.");
         } else {
             System.out.println("    Couldn't find a flashcard with id "
                     + flashcardId);
-            System.out.println("    No deletion has been performed. Please " +
-                    "try again with a valid id.");
+            System.out.println("    No deletion has been performed. Please "
+                    + "try again with a valid id.");
         }
     }
 }

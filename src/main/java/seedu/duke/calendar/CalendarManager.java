@@ -1,4 +1,4 @@
-//@@ kherlenbayasgalan & jingxizhu
+//@@author Brian030601 & jingxizhu
 
 package seedu.duke.calendar;
 
@@ -52,6 +52,7 @@ public class CalendarManager {
         return this.storage;
     }
 
+    //@@author Brian030601
     /**
      * validCommand is used for checking whether the command is valid, and
      * not an instance of UnknownCommand.
@@ -65,6 +66,7 @@ public class CalendarManager {
         return !(command instanceof UnknownCommand);
     }
 
+    //@@author Brian030601
     // isResponsible calls the validCommand method.
     public boolean isResponsible(String input) {
         return validCommand(input);
@@ -77,6 +79,7 @@ public class CalendarManager {
         storage.saveEvents(eventList.getEvents());
     }
 
+    //@@author Brian030601
     /**
      * startCalender starts the Calendar features and uses the input as a command.
      * @param input is used for converting the input into command.
