@@ -178,7 +178,7 @@ public class Decoder {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
                 continue;
             }
-            String ingredientName = decodedData[NAME_INDEX_PANTRY].trim();
+            String ingredientName = decodedData[NAME_INDEX_PANTRY].trim().toLowerCase();
             String qtyText = decodedData[QTY_INDEX_PANTRY].trim();
             String unit = decodedData[UNIT_INDEX_PANTRY].trim();
 
@@ -287,7 +287,7 @@ public class Decoder {
         try {
             String[] orderData = orderLine.split(DIVIDER);
             int day = Integer.parseInt(orderData[DAY_INDEX_SALES].trim()) - Sales.DAY_DISPLAY_OFFSET;
-            String dishName = orderData[DISH_NAME_INDEX_SALES].trim();
+            String dishName = orderData[DISH_NAME_INDEX_SALES].trim().toLowerCase();
 
             //@@author Cazh1
             //keeps track of the number of days cafe has been operating for

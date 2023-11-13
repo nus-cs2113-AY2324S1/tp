@@ -249,7 +249,7 @@ public class Parser implements ParserUtil {
 
             // To retrieve specific arguments from arguments
             //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim().toLowerCase();
             float dishPrice = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
@@ -346,7 +346,7 @@ public class Parser implements ParserUtil {
             throws ParserException {
         Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
 
-        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim().toLowerCase();
 
         //ingredientQtyString contains the input text after the "qty/" argument
         String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
