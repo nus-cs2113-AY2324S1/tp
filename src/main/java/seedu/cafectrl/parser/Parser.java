@@ -72,7 +72,7 @@ public class Parser implements ParserUtil {
             + "qty/([A-Za-z0-9\\s]+)";
 
     /** The rest of Command Handler Patterns*/
-    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "index/(.+)";
+    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "dish/(.+)";
     private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*)\\sprice/(.*)";
     private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
