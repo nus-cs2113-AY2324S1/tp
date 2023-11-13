@@ -33,14 +33,14 @@ Café proprietors who prefer typing on CLI than any other interaction method and
        Extra info: This feature requires constant updating whenever a new feature is added. It is also very tedious to implement Junit test as the output is very long and keeps changing. Hence, I removed the Junit test in the last iteration as I feel that it is not necessary to have Junit test for a trivial `help` command.
    <br/><br/>
 3.  **Encoding & Decoding of Pantry Stock Storage File** <br>
-    Function: When the user calls bye command, all the ingredients stored in pantry will be encoded into format of `INGREDIENT_NAME | QUANTITY | UNIT`. The encoded data will be written in Pantry_stock.txt file. When the user starts a new session, the data in the text file will be extracted out and be decoded to load the ingredients back to PantryStock class.<br>
+    Function: When the user calls bye command, all the ingredients stored in pantry will be encoded into format of `INGREDIENT_NAME | QUANTITY | UNIT`. The encoded data will be written in pantry_stock.txt file. When the user starts a new session, the data in the text file will be extracted out and be decoded to load the ingredients back to PantryStock class.<br>
     Error Handling: This command will still check for the validity of each argument (e.g., length of ingredient name, type of unit), and skip the particular ingredient if any of the arguments is not valid. This can prevent the user from accidentally adding invalid ingredients to the text file.
 
 ### Enhancements
 1. **Storage**<br>
    [Relevant PR](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/143) <br>
    - Read and learned from the storage system in addressbook level 3 and adopted it in our project.
-   - Implemented `Encoding.java`, `Decoding.java` and `Storage.java` with skeleton methods for my teammates to implement. 
+   - Implemented `Encoder.java`, `Decoder.java` and `Storage.java` with skeleton methods for my teammates to implement. 
     <br><br>
 2. **Parser**<br>
    Created `Parser.java` for other teammates to use. Implemented ParserUtil interface to reduce coupling of Parser.java and CafeCRTL.java.
@@ -111,6 +111,6 @@ Café proprietors who prefer typing on CLI than any other interaction method and
    ![Relevant Telegram screenshot 4](../images_PPP/ziyi/relevant_telagram_screenshot_4.png)
 
 ### Contributions beyond the Project Team
-1. Posted 8 posts in the forum.
+1. Posted 9 posts in the forum.
    Examples of forum posts: [#37](https://github.com/nus-cs2113-AY2324S1/forum/issues/37), [#19](https://github.com/nus-cs2113-AY2324S1/forum/issues/19), [#31](https://github.com/nus-cs2113-AY2324S1/forum/issues/31)
 2. Reviews on PR from other teams: [T18-1](https://github.com/nus-cs2113-AY2324S1/tp/pull/19#discussion_r1379823357)
