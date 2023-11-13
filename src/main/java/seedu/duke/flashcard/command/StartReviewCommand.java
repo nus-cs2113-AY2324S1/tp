@@ -4,6 +4,7 @@ package seedu.duke.flashcard.command;
 
 import seedu.duke.calendar.Calendar;
 import seedu.duke.flashcard.FlashcardList;
+import seedu.duke.flashcard.exceptions.InvalidReviewModeException;
 import seedu.duke.flashcard.review.RandomReviewMode;
 import seedu.duke.flashcard.review.ReviewMode;
 import seedu.duke.flashcard.review.SpacedRepetitionReviewMode;
@@ -90,12 +91,14 @@ public class StartReviewCommand extends DualFlashcardCommand {
             String choice = commandParts[2].toLowerCase();
 
             if (!choices.contains(choice)) {
-                System.out.println("    Invalid choice! Your choice must be a"
-                        + " or b! Please try again.");
-                return;
+                throw new InvalidReviewModeException();
             }
 
             startReview(scanner, flashcardList, choice);
+        } catch (InvalidReviewModeException e) {
+            System.out.println("    Invalid choice! Your choice must be a"
+                    + " or b! Please try again.");
+            return;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("    Invalid syntax! The syntax is 'review " +
                     "flashcards REVIEW_MODE'");

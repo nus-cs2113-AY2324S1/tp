@@ -5,6 +5,8 @@ package seedu.duke.flashcard;
 import seedu.duke.flashcard.command.FlashcardCommand;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Responsible for interfacing with the user by managing the dispatching of
@@ -13,6 +15,7 @@ import java.util.Scanner;
 public class FlashcardUi {
     private Scanner scanner;
     private FlashcardList flashcardList;
+    private Logger logger;
 
     /**
      * Instantiates and returns a new FlashcardUi.
@@ -24,6 +27,9 @@ public class FlashcardUi {
 
         assert flashcardList != null : "flashcardList cannot be null";
         this.flashcardList = flashcardList;
+
+        logger = Logger.getLogger("FlashcardUi");
+        logger.setLevel(Level.WARNING);
     }
 
     /**
@@ -34,7 +40,11 @@ public class FlashcardUi {
      * @param command The command that shall be executed.
      */
     public void executeCommand(FlashcardCommand command) {
+        logger.log(Level.INFO, "executing the command");
+
         command.execute(scanner, flashcardList);
+
+        logger.log(Level.INFO, "execution of command finished");
     }
 
     /**
