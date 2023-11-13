@@ -10,7 +10,23 @@
 
 ## Design & implementation
 
-### Design
+### Design & Architecture
+
+Given below is a quick overview of main components and how they interact with each other.
+
+![High-level Design of TaskLinker](photo/OverallDesign.png)
+
+**Duke components of the architecture**
+
+The two main classes of Duke are FlashcardComponent and CalendarManager.
+Those two classes carry out the bulk of the application. 
+
+Duke prompts for user input. Duke also accesses and uses FlashcardComponent
+and CalendarManager. So, when the user input is given, duke decided which one
+to call based on the input.
+
+As the input is processed and called by one of the two main classes, 
+subsequent methods and features are called by children classes.
 
 ### `flashcard` package
 
