@@ -119,7 +119,7 @@ The `Parser` component is responsible for interpreting the user's input and retu
 
 Below is the sequence diagram of a parser which shows how `Parser` parses user input:
 
-![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
+![Parser Parsing User Input Sequence Diagram](images/sequence/Parser_execute_command.svg)
 <br>*Figure 5: Parser Parsing User Input Sequence Diagram*
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
