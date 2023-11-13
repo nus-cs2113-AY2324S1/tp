@@ -670,9 +670,9 @@ Example output:
 ```
 You have added Reminder 
    Type: debt
-   Date: 11/12/2023
+   Date: Dec 11 2023
    Status: Not Done
-   Left Days: 30
+   Left Days: 28
 ```
 
 ### Delete reminder: `deletereminder`
@@ -688,8 +688,9 @@ Example output:
 ```
 You have deleted Reminder 
    Type: debt
-   Date: 2023.12.11
+   Date: Dec 12 2023
    Status: Not Done
+   Left Days: 29
 ```
 
 ### Mark reminder as done: `markreminder`
@@ -705,8 +706,9 @@ Example output:
 ```
 You have marked Reminder 
    Type: debt
-   Date: 2023.12.11
+   Date: Dec 12 2023
    Status: Done
+   Left Days: 29
 ```
 
 ### View Goal List: `wishlist`
