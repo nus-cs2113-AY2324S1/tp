@@ -63,6 +63,7 @@ class AddOrderCommandTest {
                 + "Total order cost: $5.00"
                 + Messages.LINE_STRING
                 + Messages.AVAILABLE_DISHES
+                + Messages.LINE_STRING
                 + "Dish: chicken rice"
                 + "Available Dishes: 8"
                 + Messages.LINE_STRING
