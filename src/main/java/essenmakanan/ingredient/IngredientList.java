@@ -111,19 +111,11 @@ public class IngredientList {
             return;
         }
 
-        if (oldQuantity < newQuantity) {
-            // increase quantity of existing ingredient
-            existingIngredient.setQuantity(newQuantity);
-            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
-                    oldQuantity,
-                    ingredientToUpdate.getQuantity());
-        } else if (oldQuantity > newQuantity) {
-            // decrease quantity of existing ingredient
-            existingIngredient.setQuantity(newQuantity);
-            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
-                    oldQuantity,
-                    ingredientToUpdate.getQuantity());
-        }
+        existingIngredient.setQuantity(newQuantity);
+        Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
+                oldQuantity,
+                newQuantity);
+
     }
 
     public static void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
