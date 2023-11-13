@@ -72,6 +72,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 1. Parser component
 2. Edit Price
 3. Help
+4. Future Enhancements
 
 #### Team-based Task
 1. Table of Contents
