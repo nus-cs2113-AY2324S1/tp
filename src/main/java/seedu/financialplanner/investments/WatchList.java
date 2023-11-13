@@ -67,6 +67,9 @@ public class WatchList {
      */
     public boolean checkValidStock(String key, Stock stockToCheck) {
         boolean isValid = true;
+        if (!key.toUpperCase().equals(key)) {
+            isValid = false;
+        }
         if (stockToCheck.getStockName() == null || stockToCheck.getSymbol() == null) {
             isValid = false;
         }
