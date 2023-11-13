@@ -40,7 +40,7 @@ Refer to the guide [_UserGuide_](UserGuide.md).
 --------------------------------------------------------------------------------------------------------------------
 ## **General notes**
 
-Only relevant attributes/associations/methods will be included in the UML diagram.
+Only relevant attributes/associations/methods will be included in the UML diagram. Some of them are omitted to avoid confusion.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Design**
@@ -72,7 +72,7 @@ The bulk of the app’s work is done by the following components:
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 ![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
-*Figure 2: Architecture Encode Sequence Diagram*
+<br>*Figure 2: Architecture Encode Sequence Diagram*
 
 ### Ui component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
@@ -94,7 +94,7 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 *Figure 4: Parser Class Diagram*
 
-The `Parser` component is respnsible for making sense of the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
+The `Parser` component is responsible for interpreting the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
 
 <div markdown="span" class="alert alert-info">**Note:** `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies.</div>
 
@@ -310,22 +310,24 @@ Our product aims to optimize managing of inventory and cash flow in a restaurant
 
 1. This application requires the use of Java 11.
 2. This application should work on most mainstream OS.
+3. This application should be able to work offline
 
 ### User stories
 
-| Priority | As a …​                                                   | I want to …​                                            | So that I can…​                                                                         |
-|----------|-----------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| `* * *`  | cafe owner who is responsible for coming up with new dish | add dish to the menu                                    | add new dish to the menu                                                                |
-| `* * *`  | cafe manager is responsible for managing pantry stock     | track the inventory levels for ingredients and supplies | know what ingredients I need to restock                                                 |
-| `* * *`  | cafe manager is responsible for managing pantry stock     | buy ingredients                                         | restock low stock ingredients                                                           |
-| `* * *`  | cafe owner who is also the chef                           | view the ingredients needed for a dish                  | know what ingredients to use when cooking a dish                                        |
-| `* * *`  | cafe owner who wants to maximise profit                   | edit the price of the dish                              | increase the price of the dish when there is inflation                                  |
-| `* * *`  | cafe owner who cares about the sales of the cafe          | view the sales of the cafe                              | know whether my cafe is profiting                                                       |
-| `* * *`  | cafe owner who works 7 days a week                        | save the menu, pantry stock and order                   | have access to the same menu, pantry stock and orders when I go back to work            |
-| `* * *`  | cafe owner who is responsible for placing order           | add order                                               | ask the chef to cook the order                                                          |
-| `* *`    | cafe manager who is responsible for drafting the menu     | view the menu                                           | keep track of what dish we have                                                         |
-| `* *`    | cafe owner who working 7 days a week                      | fast forward to the next day                            | close the cafe and call it a day when I am tired                                        |
-| `* *`    | clumsy cafe owner who works 7 days a week                 | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
+| Priority                      | As a …​                                                               | I want to …​                                            | So that I can…​                                                                         |
+|-------------------------------|-----------------------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`                       | cafe owner who is responsible for coming up with new dish             | add dish to the menu                                    | add new dish to the menu                                                                |
+| `* * *`                       | cafe manager is responsible for managing pantry stock                 | track the inventory levels for ingredients and supplies | know what ingredients I need to restock                                                 |
+| `* * *`                       | cafe manager is responsible for managing pantry stock                 | buy ingredients                                         | restock low stock ingredients                                                           |
+| `* * *`                       | cafe owner who is also the chef                                       | view the ingredients needed for a dish                  | know what ingredients to use when cooking a dish                                        |
+| `* * *`                       | cafe owner who wants to maximise profit                               | edit the price of the dish                              | increase the price of the dish when there is inflation                                  |
+| `* * *`                       | cafe owner who cares about the sales of the cafe                      | view the sales of the cafe                              | know whether my cafe is profiting                                                       |
+| `* * *`                       | cafe owner who works 7 days a week                                    | save the menu, pantry stock and order                   | have access to the same menu, pantry stock and orders when I go back to work            |
+| `* * *`                       | cafe owner who is responsible for placing order                       | add order                                               | ask the chef to cook the order                                                          |
+| `* *`                         | cafe manager who is responsible for drafting the menu                 | view the menu                                           | keep track of what dish we have                                                         |
+| `* *`                         | cafe owner who working 7 days a week                                  | fast forward to the next day                            | close the cafe and call it a day when I am tired                                        |
+| `* *`                         | clumsy cafe owner who works 7 days a week                             | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
+| `* *` <br>(to be implemented) | cafe owner who is interested to know the popularity of the menu items | view the rank of popularity based on order history      | adjust the pricing or remove the dish that is not popular                               |
 
 *{More to be added}*
 
