@@ -124,7 +124,7 @@ public class Storage {
                 logger.log(Level.INFO, "Tampered Menu file");
                 detectTamper();
             }
-            return Decoder. decodeMenuData(encodedMenu);
+            return Decoder.decodeMenuData(encodedMenu);
         } catch (FileNotFoundException e) {
             logger.log(Level.WARNING, "menu.txt not found!\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
