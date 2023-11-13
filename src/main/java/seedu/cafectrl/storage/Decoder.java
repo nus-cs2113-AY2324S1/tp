@@ -107,7 +107,7 @@ public class Decoder {
             logger.info("Line to decode: " + encodedData);
             String[] decodedData = encodedData.split(DIVIDER);
             if (!isValidPantryStockFormat(decodedData)) {
-                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_S346TOCK_DATA + encodedData);
                 continue;
             }
             String ingredientName = decodedData[0].trim();
@@ -120,7 +120,7 @@ public class Decoder {
                 qty = Integer.parseInt(qtyText);
             } catch (NumberFormatException e) {
                 logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
-                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
                 continue;
             }
 
@@ -131,8 +131,8 @@ public class Decoder {
                 ingredient = new Ingredient(ingredientName, qty, unit);
                 pantryStock.add(ingredient);
             } else {
-                logger.info(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
-                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA);
+                logger.info(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
+                ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
             }
         }
         return new Pantry(ui, pantryStock);

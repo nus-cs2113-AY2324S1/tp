@@ -55,8 +55,8 @@ public class ErrorMessages {
             + "a new data folder has been created.";
     public static final String DISH_NOT_FOUND = "I'm sorry, but it appears that dish is so exclusive "
             + "it hasn't even made it to our menu yet!";
-    public static final String ERROR_IN_PANTRY_STOCK_DATA = "Error in pantry stock data file! "
-            + "Skipping this particular ingredient!";
+    public static final String ERROR_IN_PANTRY_STOCK_DATA = "pantry_stock.txt: Invalid format, "
+            + "this pantry stock will be removed -> ";
     public static final String UNIT_NOT_MATCHING = ": Sorry, you have used a "
             + "different unit for this ingredient!"
             + "\nUnit used previously: ";
