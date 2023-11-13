@@ -19,8 +19,13 @@ import java.util.logging.Logger;
  * Handles loading and saving data for menu, orderList, pantryStock
  */
 public class Storage {
-    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final int INDEX_OFFSET_VALUE = 1;
+    private static final String HASH_REGEX_1 = "^[0-9]+$";
+    private static final String HASH_REGEX_2 = "^-[0-9]+$";
+    private static final String HASH_REGEX_3 = "^0{2,}$";
+    private static final String ENCODE_DELIMITER = ", ";
 
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected FileManager fileManager;
     protected Ui ui;
     private final boolean isHashingEnabled = true;
@@ -29,13 +34,6 @@ public class Storage {
     private boolean isPantryStockTampered = false;
     private boolean isHashStringTampered = false;
     private boolean isTamperedMessagePrinted = false;
-    
-    private static final int INDEX_OFFSET_VALUE = 1;
-    private static final String HASH_REGEX_1 = "^[0-9]+$";
-    private static final String HASH_REGEX_2 = "^-[0-9]+$";
-    private static final String HASH_REGEX_3 = "^0{2,}$";
-    private static final String ENCODE_DELIMITER = ", ";
-
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
