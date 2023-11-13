@@ -1,4 +1,4 @@
-//@@author Brian030601 & Cheezeblokz
+//@@author Brian030601
 
 package seedu.duke.calendar;
 
@@ -9,6 +9,7 @@ public class Event {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    //@@author Cheezeblokz
     // Event is a constructor method for Event class.
     public Event(String name, LocalDateTime from, LocalDateTime to) {
         this.name = name;
@@ -16,6 +17,7 @@ public class Event {
         this.to = to;
     }
 
+    //@@author Cheezeblokz
     // getName returns the name of the event.
     public String getName() {
         return name;

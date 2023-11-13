@@ -49,7 +49,7 @@ public class AddEventCommand extends DualEventCommand {
         if (endTime.isAfter(startTime)) {
             Event event = new Event(eventName, startTime, endTime);
             eventList.addEvent(event);
-            System.out.println(event + " has been added to your Calendar");
+            System.out.println("    " + event + " has been added to your Calendar");
         } else {
             System.out.println("    End time is before or equal to the start time. Please enter the correct end time.");
         }
@@ -66,7 +66,7 @@ public class AddEventCommand extends DualEventCommand {
             if (endTime.isAfter(startTime)) {
                 Event event = new Event(eventName, startTime, endTime);
                 eventList.addEvent(event);
-                System.out.println(event + " has been added to your Calendar");
+                System.out.println("    " + event + " has been added to your Calendar");
             } else {
                 System.out.println("    End time is before or equal to the start time. " +
                         "Please enter the correct end time.");
