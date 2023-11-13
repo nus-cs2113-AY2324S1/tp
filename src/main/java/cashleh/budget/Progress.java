@@ -15,14 +15,14 @@ public class Progress {
         if (this.progress <= 0) {
             /*
             Progress below zero implies a negative cash on hand. Accordingly, we set the progress
-            equal to one (or 100%), so to imply that the budget has been fully used
+            equal to zero (or 0%), so to imply that the budget has been fully used
             and the user has a budget deficit.
              */
             this.progress = 0;
         } else if (this.progress > 1) {
             /*
             Progress larger than one implies that the net cash on hand in larger than the
-            budget. Accordingly, we set the progress equal to 0 (0%), so to imply that the
+            budget. Accordingly, we set the progress equal to one (100%), so to imply that the
             full amount of the budget is still available for spending (and more...).
              */
             this.progress = 1;
