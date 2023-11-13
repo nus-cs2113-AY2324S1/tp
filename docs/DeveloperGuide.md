@@ -110,7 +110,7 @@ In the Ui component,
 ### Parser component
 API: [Parser.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/parser/Parser.java)
 
-![Parser Class Diagram](images/class/Parser.png)
+![Parser Class Diagram](images/class/Parser.svg)
 <br>*Figure 4: Parser Class Diagram*
 
 The `Parser` component is responsible for interpreting the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
@@ -119,7 +119,7 @@ The `Parser` component is responsible for interpreting the user's input and retu
 
 Below is the sequence diagram of a parser which shows how `Parser` parses user input:
 
-![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.png)
+![Parser Parsing User Input Sequence Diagram](images/sequence/Parser_execute_command.svg)
 <br>*Figure 5: Parser Parsing User Input Sequence Diagram*
 
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
