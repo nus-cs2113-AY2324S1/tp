@@ -8,7 +8,6 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Chef;
 
 import seedu.cafectrl.data.dish.Dish;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.logging.Logger;
@@ -45,13 +44,13 @@ public class AddOrderCommand extends Command {
         if (order.getIsComplete()) {
             orderList.addCost(order);
             String totalCost = dollarValue.format(order.getTotalOrderCost());
-            ui.showOrderStatus(Messages.COMPLETE_ORDER, totalCost);
+            ui.showOrderStatus(totalCost);
             pantry.calculateDishAvailability(menu, order);
         } else {
             //pass in dish only and not entire menu
             Dish orderedDish = order.getOrderedDish();
             pantry.calculateMaxDishes(orderedDish, menu, order);
-            ui.showToUser(Messages.INCOMPLETE_ORDER);
+            ui.showIncompleteOrder();
         }
 
     }
