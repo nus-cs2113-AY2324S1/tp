@@ -8,7 +8,6 @@ import seedu.cafectrl.data.Pantry;
 import seedu.cafectrl.data.Chef;
 
 import seedu.cafectrl.data.dish.Dish;
-import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.logging.Logger;

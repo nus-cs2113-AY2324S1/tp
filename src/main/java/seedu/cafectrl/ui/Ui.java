@@ -275,9 +275,9 @@ public class Ui {
         printLine();
         showDishAvailabilityMessage();
     }
-     public void showIncompleteOrder() {
+    public void showIncompleteOrder() {
         showToUser(Messages.INCOMPLETE_ORDER);
-     }
+    }
 
     public void showDishAvailabilityMessage() {
         showToUser(Messages.AVAILABLE_DISHES);
