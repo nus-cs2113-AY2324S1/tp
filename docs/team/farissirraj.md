@@ -6,36 +6,41 @@
 #### Key Contributions
 
 
-* **Feature 1:**  Steps Class
+* **Steps Class**
     - Wrote the class for `Step` which was used to store the steps taken by the user as an object.
     - Wrote the methods to enable parsing, formatting and other operations required within the object.
     - Added on to the Parser and Storage classes to integrate this feature with the existing functionality of the codebase.
 
 
-* **Feature 2:**  Add and Delete steps
+* **Add and Delete steps**  
     - What it does: allows user to add in their steps and view their steps for the day.
     - Calculate the number of steps taken in a particular day.
     - Delete steps that were added by mistake.
     - Justification: this feature helps user to track their steps and compare it with their daily goals.
 
 
-* **Feature 3:**  List Steps
+* **List Steps**  
     - What it does: allows user to view the steps in a list. 
     - Delete steps that were added by mistake.
     - Justification: Enables the user to better decide on what operation they want to do. For example, deleting a step uses the index in the list as a reference and viewing the list of steps will allow them to carefully select which entry to delete.
 
 
-* **Feature 4:** Calculate the calories consumed
+* **Calculate the calories consumed** 
     - What it does: Calculate the calories consumed based on the meals eaten.
     - Justification: Allows the user to keep track of their fitness goals through the calories consumed from meals.
 
 
-* **Feature 5:** Provide suggestions on how many more steps need to be walked to reach the daily calorie goal.
+* **Calculate the total number of steps walked**
+  - What it does: Calculate the total number of steps walked in a given day.
+  - Justification: Allows the user to keep track of their daily step count. This will allow the user to analyse their walking habits just as they do for their meals and workouts.
+
+
+* **Provide suggestions on how many more steps need to be walked to reach the daily calorie goal.** 
     - What it does: Calculate the calories consumed based on the number of steps walked.
     - Justification: Allows the user to keep track of their calorie expenses through walking alone.
 
 
-* **Feature 6:** Provide a suggestion on the ideal weight range for the user.
+* **Provide a suggestion on the ideal weight range for the user.** 
   - What it does: Calculates the ideal weight range for the user provided their height as entered in the user profile.
   - Justification: Allows the user to be mindful of their weight as they are on the journey to becoming fit.
   
@@ -66,3 +71,4 @@
     - Developer Guide:
         - Documented my added features to the developer guide.
         - Added documentation for the commands pertaining to the `Step` suite of commands which all inherit from the Command superclass to explain the functionality of the commands to another developer.
+        - Added sequence diagrams for some of the commands to explain the flow of the code.
