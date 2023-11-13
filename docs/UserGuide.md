@@ -437,7 +437,8 @@ Format: `bye`
      Done loading pantry_stock.txt!
      ------------------------------------------------------------------------
      ```
-7. 
+7. If the user manually adds an order of dish that does not exist in menu to orders.txt, the order will still be generated but the new dish will not be added to the menu.
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
