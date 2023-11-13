@@ -47,6 +47,7 @@ _/        _/    _/    _/      _/        _/          _/      _/        _/
 ------------------------------------------------------------------------
 > 
 ```
+
 ---------------------------------------------------
 <!---@@author ziyi105--->
 ## Summary
@@ -229,6 +230,7 @@ Format: `list_ingredients index/DISH_INDEX`
 
 Example:
 - list followed by list_ingredients index/1 lists the ingredients of the 1st dish on the menu
+
 ```
 +-------------------------------------------------------+
 |Dish: chicken rice                                     |
@@ -240,7 +242,6 @@ Example:
 | soup                                   | 50ml         |
 +-------------------------------------------------------+
 ```
-
 
 ### Buying an ingredient : `buy_ingredient`
 Adds one or more ingredients to the pantry
@@ -258,7 +259,6 @@ Added to stock:
 Ingredient: chicken		Qty: 500g
 Ingredient: milk		Qty: 1000ml
 ```
-
 
 <!---@@author ShaniceTang--->
 ### Viewing the total stock of ingredients : `view_stock`
@@ -361,6 +361,7 @@ Example: `list_sale day/2`
 
 Output:
 - list_sale day/2 lists the dishes sold along with the total sales for day 2.
+
 ```
 +---------------------------------------------------------------------------+
 | Day 2:                                                                    |

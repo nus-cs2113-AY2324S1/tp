@@ -62,12 +62,12 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 
 2. **Encoding of Sales**
     - Implemented encoding for the Sales object, involving:
-        - Parsing through various attributes of the Sales object using the delimiter '|'.
+        - Parsing through various attributes of the Sales object using the delimiter `|`.
         - Storing the data in a text file.
 
 3. **Decoding of Sales**
     - Executed decoding for the Sales object, encompassing:
-        - Parsing through the text file and separating contents using the delimiter '|'.
+        - Parsing through the text file and separating contents using the delimiter `|`.
         - Using parsed attributes to instantiate the Sales object for use in other command classes.
     - Implemented error handling during decoding: lines with missing delimiters or incorrect formatting in the text file are filtered out (collaboration with Cazh1).
 
