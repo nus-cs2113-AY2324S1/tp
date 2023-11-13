@@ -225,10 +225,10 @@ Example:
 ### Listing ingredients needed for the selected dish : `list_ingredients`
 Lists out the ingredients needed along with the quantity for a specific dish
 
-Format: `list_ingredients index/DISH_INDEX`
+Format: `list_ingredients dish/DISH_INDEX`
 
 Example:
-- list followed by list_ingredients index/1 lists the ingredients of the 1st dish on the menu
+- list followed by list_ingredients dish/1 lists the ingredients of the 1st dish on the menu
 ```
 +-------------------------------------------------------+
 |Dish: chicken rice                                     |
@@ -419,7 +419,8 @@ Format: `bye`
   - Restricting orders to only those present in the current menu would lead to unintentional deletion of orders containing dishes no longer available.
   - Consideration was given to storing the names of dishes in the menu at the time the order was made in orders.txt. 
   - However, concerns about orders.txt becoming bloated with data were acknowledged.
-  - As this does not affect the functionality of any aspects of our application nor the logic of functions related to the content stored in orders.txt, we have decided that this can be considered in future improvements.
+  - As this does not affect the functionality of any aspects of our application nor the logic of functions related to the content stored in orders.txt, we have decided that this can be considered in future improvements. 
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
