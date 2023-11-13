@@ -16,6 +16,14 @@ public class IngredientParser {
         return ((int) quantity != 0 && Math.ceil(quantity) > 0) || quantity > 0;
     }
 
+    /**
+     * Validates the input of ingredient ID or ingredient name.
+     *
+     * @param ingredients is the ingredient inventory
+     * @param input is the input of ingredient ID or ingredient name
+     * @return the index of the ingredient
+     * @throws EssenOutOfRangeException when the ingredient name or ingredient ID does not exist
+     */
     public static int getIngredientIndex(IngredientList ingredients, String input)
             throws EssenOutOfRangeException {
         int index;
@@ -33,30 +41,6 @@ public class IngredientParser {
         }
 
         return index;
-    }
-
-
-    /**
-     * To get an Ingredient List of all ingredients needed for all recipes in the recipe list
-     *
-     * @param recipes : RecipeList is a recipe list of all recipes the user wants to process
-     * @return all ingredients in the list of recipes
-     */
-    public static IngredientList getIngredientsFromRecipes(RecipeList recipes) {
-        IngredientList allIngredients = new IngredientList();
-        RecipeIngredientList recipeIngredients;
-
-        for (Recipe recipe : recipes.getRecipes()) {
-            recipeIngredients = recipe.getRecipeIngredients();
-            for (Ingredient ingredient : recipeIngredients.getIngredients()) {
-                allIngredients.addIngredient(ingredient);
-            }
-        }
-        return allIngredients;
-    }
-
-    public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
-        return ingredient1.getUnit().equals(ingredient2.getUnit());
     }
 
     public static Double getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
