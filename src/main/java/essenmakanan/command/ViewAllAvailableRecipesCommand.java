@@ -33,6 +33,6 @@ public class ViewAllAvailableRecipesCommand extends Command {
                 allAvailableRecipes.addRecipe(recipe);
             }
         }
-        Ui.printAllRecipes(allAvailableRecipes);
+        Ui.printAllAvailableRecipes(allAvailableRecipes);
     }
 }
