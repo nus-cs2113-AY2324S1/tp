@@ -670,7 +670,7 @@ Upon execution, the `CommandStart` class will first gather the matching question
 
 #### Sequence Diagram of Start Command
 
-<img src="UML/Images/commandStartLoop.png" alt="commandStartLoop.png" width="500" />
+<img src="UML/Images/commandStartLoop.png" alt="" width="650" />
 
 #### Implementation of Start Command
 
@@ -969,7 +969,7 @@ The details of the data loading and updating process are explained in details be
 
 The process of loading data from the storage file specified in the constructor takes places in a few steps. To illustrate the overall flow on loading data, refer to the sequence diagram below.
 
-<img src="UML/Images/storageLoadDataSequence.png" alt="" width="500" />
+<img src="UML/Images/storageLoadDataSequence.png" alt="" width="650" />
 
 :exclamation: This sequence diagram emphasizes the process of loading data into storage, and has therefore omitted details of more trivial and/or non-related methods as well as exception handling logic. To find out more about the details, please refer to the complete code and header comments.
 
@@ -1019,7 +1019,7 @@ In addition, the class defines numerous string literals and constants for variou
 
 #### Overall Flow
 
-![](UML/Images/uiFlow.png)
+<img src="UML/Images/uiFlow.png" alt="" width="650" />
 
 When the program is first initiated, the `displayOpeningMessage()` method is called to display a welcome message while also calling the `loadData()` method of the `dataStorage` to display all the questions stored in the storage file if any.
 
@@ -1029,7 +1029,7 @@ Finally, the `displayClosingMessage()` method is called to display a farewell me
 
 #### Displaying Quizzes
 
-![](UML/Images/uiDisplayQuiz.png)
+<img src="UML/Images/uiDisplayQuiz.png" alt="" width="650" />
 
 The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions. For each question, the `Ui` class will display `"Correct!"` if the answer matches that of the correct answer using the  `displayMessage()` method, or display `"Wrong!"` along with the correct answer by calling the helper method `displayCorrectAnswer()`. At the end of the quiz, the `displayFinalScore()` method will be called to display the final score obtained by the user in that particular quiz.
 
