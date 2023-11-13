@@ -202,10 +202,11 @@ Examples of usage:
 Notes:
 * As long as the search keyword string is a substring of the question description of a question stored in the question and answer bank, it will be included in the search result. Please refer to the above examples as an illustration of this property.
 * The search is non-case-sensitive. Please refer to the above examples as an illustration of this property.
+* Ver 2.1 does not support finding by answer. 
 
 <div style="page-break-after: always;"></div>
 
-### Edit question/answer `edit`
+### Edit question/answer/option `edit`
 
 [Back to Table of Contents](#table-of-contents)
 
