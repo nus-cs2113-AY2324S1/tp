@@ -403,8 +403,7 @@ I've deleted the following step entry:
 [S] 100 steps (2023-10-02)
 ```
 
-
-### Viewing the total number of steps on a specific date: `totalsteps`
+### Calculating the total number of steps on a specific date: `totalsteps`
 Calculates the total number of steps on a specific date and shows to user.
 
 **Format**
