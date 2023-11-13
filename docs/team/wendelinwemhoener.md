@@ -21,6 +21,8 @@ See my code contribution [here on the tP Code Dashboard](https://nus-cs2113-ay23
 
 ### Contributions to the DG
 
+product scope
+
 
 ### Contributions to team-based tasks
 
