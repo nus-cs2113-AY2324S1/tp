@@ -558,9 +558,9 @@ Upon execution, the `CommandEdit` class first checks that both `editField` and `
 <div style="page-break-after: always"></div>
 
 #### Implementation of Edit Command
-<img src="UML/Images/commandEditObjectDiagram.png" alt="" width="500" />
-<img src="UML/Images/commandEditObjectDiagram2.png" alt="" width="500" />
-<img src="UML/Images/commandEditObjectDiagram3.png" alt="" width="500" />
+<img src="UML/Images/commandEditObjectDiagram.png" alt="" width="450" />
+<img src="UML/Images/commandEditObjectDiagram2.png" alt="" width="450" />
+<img src="UML/Images/commandEditObjectDiagram3.png" alt="" width="450" />
 
 <div style="page-break-after: always"></div>
 
