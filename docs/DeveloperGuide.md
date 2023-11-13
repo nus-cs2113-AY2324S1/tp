@@ -349,8 +349,6 @@ Our product aims to optimize managing of inventory and cash flow in a restaurant
 | `* *`                         | clumsy cafe owner who works 7 days a week                             | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
 | `* *` <br>(to be implemented) | cafe owner who is interested to know the popularity of the menu items | view the rank of popularity based on order history      | adjust the pricing or remove the dish that is not popular                               |
 
-*{More to be added}*
-
 --------------------------------------------------------------------------------------------------------------------
 ## **Glossary**
 
