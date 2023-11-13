@@ -24,4 +24,8 @@ public class SalesList {
         cart.addEntry(drug, serialNumber, quantity, sellingPrice, inventory);
         this.validatedCarts.add(cart);
     }
+
+    public void clearSales(){
+        validatedCarts.clear();
+    }
 }
