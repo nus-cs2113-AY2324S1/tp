@@ -18,12 +18,18 @@ public class DeleteReminderCommand extends Command {
     private static final Logger logger = Logger.getLogger("Financial Planner Logger");
     private final int index;
 
+    /**
+     * Constructor of the command to delete a reminder.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public DeleteReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String stringIndex;
         if (rawCommand.args.size() == 1) {
             stringIndex = rawCommand.args.get(0);
         } else {
-            throw new IllegalArgumentException("Incorrect arguments.");
+            throw new IllegalArgumentException("Please specify a valid index of reminder");
         }
 
         try {
@@ -31,7 +37,7 @@ public class DeleteReminderCommand extends Command {
             index = Integer.parseInt(stringIndex);
         } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "Invalid argument for index");
-            throw new IllegalArgumentException("Index must be an integer");
+            throw new IllegalArgumentException("Index must be a valid integer");
         }
 
         if (index <= 0) {
@@ -39,7 +45,7 @@ public class DeleteReminderCommand extends Command {
             throw new IllegalArgumentException("Index must be within the list");
         }
 
-        if (index > ReminderList.getInstance().list.size() + 1) {
+        if (index > ReminderList.getInstance().list.size()) {
             logger.log(Level.WARNING, "Invalid value for index");
             throw new IllegalArgumentException("Index exceed the list size");
         }
@@ -50,8 +56,12 @@ public class DeleteReminderCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to delete a reminder.
+     */
     @Override
     public void execute() {
+        assert index > 0 && index <= ReminderList.getInstance().list.size();
         Reminder reminderToDelete = ReminderList.getInstance().list.get(index - 1);
         ReminderList.getInstance().deleteReminder(index - 1);
         Ui.getInstance().showMessage("You have deleted " + reminderToDelete);

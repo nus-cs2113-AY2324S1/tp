@@ -24,13 +24,19 @@ public class AddReminderCommand extends Command {
     private final String type;
     private final LocalDate date;
 
+    /**
+     * Constructor for the command to add a reminder.
+     *
+     * @param rawCommand The input from the user.
+     * @throws IllegalArgumentException if erroneous inputs are detected.
+     */
     public AddReminderCommand(RawCommand rawCommand) throws IllegalArgumentException {
         String typeString = String.join(" ", rawCommand.args);
         if (!rawCommand.extraArgs.containsKey("t")) {
             throw new IllegalArgumentException("Reminder must have a type");
         }
         type = rawCommand.extraArgs.get("t");
-        if(type.isEmpty()){
+        if(type.trim().isEmpty()){
             throw new IllegalArgumentException("Reminder type cannot be empty");
         }
         rawCommand.extraArgs.remove("t");
@@ -39,7 +45,7 @@ public class AddReminderCommand extends Command {
         }
 
         String dateString = rawCommand.extraArgs.get("d");
-        if(dateString.isEmpty()){
+        if(dateString.trim().isEmpty()){
             throw new IllegalArgumentException("Reminder date cannot be empty");
         }
 
@@ -61,8 +67,13 @@ public class AddReminderCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to add a reminder.
+     */
     @Override
     public void execute() {
+        assert type != null;
+        assert LocalDate.now().isBefore(date);
         Reminder reminder = new Reminder(type, date);
         ReminderList.getInstance().list.add(reminder);
         Ui.getInstance().showMessage("You have added " + reminder);
