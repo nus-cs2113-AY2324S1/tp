@@ -420,7 +420,7 @@ the index refers to a valid question, failing which it will return an error mess
 Otherwise, it will then invoke the QuestionList.deleteQuestionByIndex method to remove
 the question from the QuestionList.
 
-<img src="UML/Images/commandDeleteQuestion.png" alt="delete1" width="250" />
+<img src="UML/Images/commandDeleteQuestion.png" alt="delete1" width="350" />
 
 Afterward, the storage is updated to reflect the newest QuestionList.
 
@@ -540,10 +540,9 @@ The class uses the following components from the QuizHub application:
 Upon execution, the `CommandEdit` class first checks that both `editField` and `newValue` are not null. It then calls `editQuestionByIndex` on the `QuestionList` to perform the actual edit. After a successful edit, a message is displayed to the user, and the `Storage` component is used to ensure the edited question's new state is saved.
 
 #### Implementation of Edit Command
-
-![commandEditObjectDiagram.png](UML/Images/commandEditObjectDiagram.png)
-![commandEditObjectDiagram2.png](UML/Images/commandEditObjectDiagram2.png)
-![commandEditObjectDiagram3.png](UML/Images/commandEditObjectDiagram3.png)
+<img src="UML/Images/commandEditObjectDiagram.png" alt="" width="500" />
+<img src="UML/Images/commandEditObjectDiagram2.png" alt="" width="500" />
+<img src="UML/Images/commandEditObjectDiagram3.png" alt="" width="500" />
 
 ### Operational Flow of Edit Command
 
