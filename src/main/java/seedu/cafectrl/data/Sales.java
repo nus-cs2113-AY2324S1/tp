@@ -59,15 +59,14 @@ public class Sales {
      * Prints all sales data, organized by day, including dish names, quantities, and total cost prices.
      *
      * @param ui   The Ui object for user interface interactions.
-     * @param menu The Menu object representing the cafe's menu.
      */
-    public void printSales(Ui ui, Menu menu) {
+    public void printSales(Ui ui) {
         if(isOrderListsEmpty()) {
             logger.info("Printing empty sales...");
             ui.showToUser("No sales made.");
             return;
         }
-        //ui.showSalesBottom();
+
         for (int day = 0; day < orderLists.size(); day++) {
             logger.info("Printing sales for day " + day + "...");
             OrderList orderList = orderLists.get(day);
@@ -86,10 +85,9 @@ public class Sales {
      * Prints sales data for a specific day, including dish names, quantities, and total cost prices.
      *
      * @param ui  The Ui object for user interface interactions.
-     * @param menu The Menu object representing the cafe's menu.
      * @param day The day for which sales data is to be printed.
      */
-    public void printSaleByDay(Ui ui, Menu menu, int day) {
+    public void printSaleByDay(Ui ui, int day) {
         logger.info("Printing sales by day...");
         int orderListIndex = day - 1;
         try {
@@ -98,8 +96,8 @@ public class Sales {
                 ui.showToUser("No sales for this day.");
                 return;
             }
-            ui.showSalesTop(day);
 
+            ui.showSalesTop(day);
             orderList.printOrderList(ui);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to print sales for day " + day + "\n" + e.getMessage(), e);

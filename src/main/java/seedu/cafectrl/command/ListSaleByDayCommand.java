@@ -32,7 +32,7 @@ public class ListSaleByDayCommand extends Command {
     public void execute() {
         logger.info("Executing ShowSalesByDayCommand...");
         try {
-            sales.printSaleByDay(ui, menu, day);
+            sales.printSaleByDay(ui, day);
         } catch (Exception e) {
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
         }
