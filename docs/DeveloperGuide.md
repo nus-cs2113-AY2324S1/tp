@@ -57,12 +57,12 @@ to learn how to create and edit diagrams.
 The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.java).
 
 
-### Core sequence
+### Core Sequence
 Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTrack.java) class.
 
-![Core structure](images/FitTrackOuter.svg "Outer Structure")
+![Outer structure](images/FitTrackOuter.svg "Outer Structure")
 
-![Inner structure](images/FitTrackCore.svg "Core Structure")
+![Core structure](images/FitTrackCore.svg "Core Structure")
 
 The App consists of five components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
@@ -102,10 +102,23 @@ API: `CommandParser.java`
 The [`CommandParser`](../src/main/java/fittrack/parser/CommandParser.java) is responsible for interpreting user inputs and converting it into executable commands.
 It plays the role of connecting the user interface and the command execution components.
 
-{sequence diagram of command parser}
+Refer to the core structure diagram in [Core Sequence](#core-sequence).
 
 **Design Considerations**
-* Write design considerations here
+* Had to make general methods for all commands.
+  * CommandParser.parseCommand()
+  * CommandParser.getBlankCommand()
+  * Command.setArguments()
+  * Command.execute()
+* Method for parsing the data is written in each data classes.
+  * Height.parseHeight()
+  * Meal.parseMeal()
+  * ...
+* But not all methods.
+  * CommandParser.parseIndex()
+  * CommandParser.parseKeyword()
+* Exception handling is crucial.
+  * Users can type literally **anything** in CLI, so all possibilities must be checked.
 
 
 ### Command Component
@@ -333,6 +346,7 @@ a usage of the command.
 
 *Step 1:*
 From the given argument, get the first word of the argument, which is the command word.
+If the argument is an empty string, set help message with a general help message.
 
 *Step 2:*
 Get the blank command instance based on the command word.
