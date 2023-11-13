@@ -1,7 +1,7 @@
 @startuml
 !define COMMAND class ListIngredientCommand
 !define UI class Ui
-!define MAIN class Main
+!define MAIN class CafeCtrl
 !define STORAGE class Storage
 !define DATA class Data
 !define PARSER class Parser
@@ -10,29 +10,26 @@
 autonumber
 Actor user
 
-loop userInput != "bye"
-user->Ui : 'delete 1'
-activate Ui
-Ui-> Main : userInput : String
-activate Main
-Main -> Parser : parseCommand()
-Activate Parser
-Parser -> Main : command: Command
-Deactivate Parser
-Main -> Command : delete.execute()
-Activate Command
-Command -> Data : menu.remove()
-Activate Data
-return
-return
 user -> Ui: 'bye'
-Ui-> Main : userInput : String
-end loop
-Main->Storage : saveMenu()
+Activate Ui
+Ui-> CafeCtrl : receiveUserInput('bye')
+Activate CafeCtrl
+CafeCtrl -> Parser : parseCommand('bye')
+Activate Parser
+return exitCommand: Command
+CafeCtrl -> Command : exitCommand.execute()
+Activate Command
+return
+CafeCtrl->Storage : saveAll()
 Activate Storage
-Storage -> Storage: encodeMenu()
+Storage -> Storage: saveMenu()
 Activate Storage
 return
+Storage -> Storage: saveOrderList()
+Activate Storage
+return
+Storage -> Storage: savePantryStock()
+Activate Storage
 return
 return
 return

@@ -68,10 +68,19 @@ The bulk of the app’s work is done by the following components:
 
 ### How the architecture components interact with each other
 
-The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `bye`.
 
 ![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
-*Figure 2: Architecture Encode Sequence Diagram*
+<br>*Figure 2: Architecture Encode Sequence Diagram*
+
+1. User enters the command `bye` to the `Ui`
+2. `Ui` passes the command as a string through the method `receiveUserInput('bye')` in `CafeCtrl`
+3. `CafeCtrl` passes the string to `Parser` through the method `parseCommand('bye')`
+4. `Parser` returns a new `exitCommand` object
+5. `CafeCtrl` calls the `execute()` method of `Command` and returns after execution is completed (Step 6)
+6. `CafeCtrl` calls the `saveAll()` command in `Storage` before terminating the application
+7. `saveMenu()`, `saveOrderList()`, and `savePantryStock` are executed within the `saveAll()` method (Steps 8 - 13)
+8. Application terminates.
 
 ### Ui component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
