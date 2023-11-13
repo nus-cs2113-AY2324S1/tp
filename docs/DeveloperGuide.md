@@ -72,6 +72,8 @@ The `FlashcardStorage` component,
 
 ### Calendar Components
 
+API: `CalendarManager.java`
+
 #### Command Package
 
 The package has 7 files in it for users to command their calendar. Those files are 
@@ -92,7 +94,10 @@ The classes are associated with one another through instant accesses and other m
 CalendarManager directs the events and event list, which then are run on Duke.
 
 Calendar package Class Diagram:
-[Calendar package Class Diagram](photo/EventManager.drawio.png)
+[Calendar package Class Diagram](photo/CalendarManagerClassDiagram.drawio.png)
+
+CalendarManager Sequence Diagram:
+[CalendarManager Sequence Diagram](photo/CalendarManagerSequenceDiagram.drawio.png)
 
 ## Product scope
 
