@@ -1,0 +1,30 @@
+@startuml
+!include Style.puml
+
+title After Command "edit 2 /option4 I Love Software"
+
+object "__:QuestionList__" as QuestionList
+
+object "__:Question1__" as Question1 {
+    qnType = QnType.SHORTANSWER
+    description = "qn1"
+    answer = "ans1"
+    module = "cs2113"
+    difficulty = "EASY"
+}
+
+object "__:Question__" as Question2 {
+    qnType = QnType.MULTIPLECHOICE
+    description = "I Love CS"
+    option1 = "op1"
+    option2 = "op2"
+    option3 = "op3"
+    option4 = "I Love Software"
+    answer = "1"
+    module = "cs2113"
+    difficulty = "HARD"
+}
+
+QuestionList --> Question1
+QuestionList --> Question2 : edit option4 from op4 to I Love Software
+@enduml

@@ -1,9 +1,9 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+| Display                                                                                                                                                                                                                  |      Name      |                Github Profile                |               Portfolio                |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------:|:--------------------------------------------:|:--------------------------------------:|
+| <img src="https://avatars.githubusercontent.com/u/65319271?s=400&u=f8775005f8736523258d78700d8b4d8b730b9447&v=4" alt="James Hong Jey" width="200"/>                                                                      | James Hong Jey | [Github](https://github.com/James-Hong-Jey)  | [Portfolio](team/james-hong-jey.html)  |
+| <img src="https://media.licdn.com/dms/image/D5603AQEqqxzcOc77HA/profile-displayphoto-shrink_800_800/0/1698640764442?e=1705536000&v=beta&t=TE95jAxe31g7QDjqLTYHHgWRea_D6kIOurus7XHkSc8" alt="Guan Xiao" width="200" />                                                                                                                                 |   Guan Xiao    |   [Github](https://github.com/StevenGX12)    |   [Portfolio](team/stevengx12.html)    |
+| <img src="https://media.licdn.com/dms/image/D5603AQEGcMuYekqSlg/profile-displayphoto-shrink_800_800/0/1692439455447?e=1705536000&v=beta&t=E4SrLPGoDQGJfLV2j65fFhkc9S3tTirvd5rPgyOGT9k" alt="Man Juncheng" width="200"/>  |  Man Juncheng  | [Github](https://github.com/spinoandraptos)  | [Portfolio](team/spinoandraptos.html)  |
+| <img src="https://media.licdn.com/dms/image/C4E03AQFU8Dh39HcpXA/profile-displayphoto-shrink_400_400/0/1622561971788?e=1704931200&v=beta&t=xgnSGF2qNJ2PSgIHtY1HIDvuYaVXQJQgSsGNMkKDIZQ" alt="Li Sizhuang" width="200"/>   |  Li Sizhuang   | [Github](https://github.com/lisizhuang-0121) | [Portfolio](team/lisizhuang-0121.html) |
+| <img src="https://media.licdn.com/dms/image/D5603AQFX_LEhZds-qA/profile-displayphoto-shrink_400_400/0/1692369832580?e=1704931200&v=beta&t=ZTwQOyMZI2NFu1cA1WqxkhhIMDei89ls6TSmo3NhOpw" alt="Yeo Meng Han" width="200" /> |  Yeo Meng Han  |   [Github](https://github.com/yeo-menghan)   |   [Portfolio](team/yeo-menghan.html)   |

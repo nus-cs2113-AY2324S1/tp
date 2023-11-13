@@ -1,0 +1,38 @@
+@startuml
+!include Style.puml
+
+actor User
+participant ":Ui" as Ui
+participant ":QuizHub" as QuizHub
+participant ":Parser" as Parser
+participant ":Command" as Command
+
+User -> QuizHub: run()
+activate QuizHub
+loop not command.isExit
+    QuizHub -> Ui: getUserInput ()
+    activate Ui
+    Ui --> QuizHub: userInput: String
+    deactivate Ui
+    QuizHub -> Parser: parseCommand (userInput)
+    activate Parser
+    create Command
+    Parser -> Command:
+    activate Command
+    Command --> Parser: command: Command
+    deactivate Command
+    Parser --> QuizHub: command: Command
+    deactivate Parser
+    QuizHub -> Command: executeCommand (ui, dataStorage, questions)
+        activate Command
+    Command --> Ui: Returns results
+    deactivate Command
+    Ui --> User: Display results
+    destroy Command
+
+  end
+  destroy Ui
+  destroy Parser
+  destroy QuizHub
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+title Shuffle to Storage Flow
+
+class QuestionList {
+  - allQns: List<Question>
+  + addQuestion(question: Question)
+  + removeQuestion(question: Question)
+  + shuffleQuestions()
+  + saveToFile()
+  + loadFromFile()
+}
+
+class Question {
+  - text: String
+  - answer: String
+  + getText()
+  + getAnswer()
+}
+
+QuestionList --> Question : Stores "*"
+
+class Storage {
+    - **dataFile** : File
+    + **writeToFile** (filePath: String, textToAdd: String, toAppend: boolean)
+    + **loadData** (questions: QuestionList)
+    + **updateData** (questions: QuestionList)
+    + **buildCurrentListFromFile** (questions: QuestionList)
+    - **addShortAnsFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
+    - **addMCQFromFile** (questions: QuestionList, qnDescription: String,  qnDoneStatus: String, difficulty: Question.QnDifficulty, qnModule: String): int
+}
+
+QuestionList --> Storage : Data Storage "1"
+
+@enduml

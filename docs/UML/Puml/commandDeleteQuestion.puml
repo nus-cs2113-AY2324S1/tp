@@ -1,0 +1,21 @@
+@startuml
+!include Style.puml
+
+title After Command "delete 1"
+
+object "__:QuestionList__" as QuestionList
+
+object "__:Question2__" as Question2 {
+    qnType = QnType.MULTIPLECHOICE
+    description = "qn2"
+    option1 = "op1"
+    option2 = "op2"
+    option3 = "op3"
+    option4 = "op4"
+    answer = "1"
+    module = "cs2113"
+    difficulty = "HARD"
+}
+
+QuestionList --> Question2 : new index is 1
+@enduml

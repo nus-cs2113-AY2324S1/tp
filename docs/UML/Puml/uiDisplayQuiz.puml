@@ -1,0 +1,45 @@
+@startuml
+!include Style.puml
+
+actor Quizhub
+participant CommandStart as "commandStart :CommandStart"
+participant QuestionList as ":QuestionList"
+participant ui as ":Ui"
+
+
+Quizhub -> CommandStart : executeCommand()
+activate CommandStart
+CommandStart -> QuestionList : startQuiz()
+activate QuestionList
+loop i < questions.size()
+    QuestionList -> ui : displayQuestion()
+    activate ui
+    ui --> QuestionList
+    deactivate ui
+    QuestionList -> QuestionList : getAndValidateAnswer()
+    alt answer is correct
+        QuestionList -> ui : display "Correct!"
+        activate ui
+        ui --> QuestionList
+        deactivate ui
+    else answer is incorrect
+        QuestionList -> ui : displayCorrectAnswer()
+        activate ui
+        ui --> QuestionList
+        deactivate ui
+    end
+    QuestionList -> ui : display current score
+    activate ui
+    ui --> QuestionList
+    deactivate ui
+end
+QuestionList -> ui : displayFinalScore()
+activate ui
+ui --> QuestionList
+deactivate ui
+QuestionList --> CommandStart
+deactivate QuestionList
+CommandStart --> Quizhub
+deactivate CommandStart
+destroy CommandStart
+@enduml

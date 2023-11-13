@@ -1,0 +1,30 @@
+@startuml
+!include Style.puml
+
+title After Command "mcq qn2/op1/op2/op3/op4/1/cs2113/hard"
+
+object "__:QuestionList__" as QuestionList
+
+object "__:Question1__" as Question1 {
+    qnType = QnType.SHORTANSWER
+    description = "qn1"
+    answer = "ans1"
+    module = "cs2113"
+    difficulty = "EASY"
+}
+
+object "__:Question2__" as Question2 {
+    qnType = QnType.MULTIPLECHOICE
+    description = "qn2"
+    option1 = "op1"
+    option2 = "op2"
+    option3 = "op3"
+    option4 = "op4"
+    answer = "1"
+    module = "cs2113"
+    difficulty = "HARD"
+}
+
+QuestionList --> Question1
+QuestionList --> Question2 : Add new question
+@enduml

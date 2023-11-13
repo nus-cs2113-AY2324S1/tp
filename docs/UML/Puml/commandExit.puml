@@ -1,0 +1,28 @@
+@startuml
+!include Style.puml
+title Command Exit Sequence Diagram
+
+actor User
+participant QuizHub as ":QuizHub"
+participant Ui as ":Ui"
+participant CommandExit as "c:CommandExit"
+participant Storage as ":Storage"
+
+User -> QuizHub: Chooses to exit the application
+activate QuizHub
+QuizHub -> CommandExit: Executes "bye" command
+activate CommandExit
+CommandExit -> Storage: Calls saveData()
+activate Storage
+Storage -> Storage: Saves any unsaved data
+Storage --> CommandExit: Data saved successfully
+deactivate Storage
+CommandExit --> QuizHub: Signals the program to exit
+deactivate CommandExit
+QuizHub -> Ui: Shows exit message
+activate Ui
+Ui --> User: displayClosingMessage()
+deactivate Ui
+deactivate QuizHub
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+!include Style.puml
+
+title After Command "short qn1/ans1/cs2113/easy"
+
+object "__:QuestionList__" as QuestionList
+
+object "__:Question1__" as Question1 {
+    qnType = QnType.SHORTANSWER
+    description = "qn1"
+    answer = "ans1"
+    module = "cs2113"
+    difficulty = "EASY"
+}
+
+QuestionList --> Question1 : Add new question
+@enduml

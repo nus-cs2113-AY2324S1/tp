@@ -1,0 +1,116 @@
+!define BODY_THEME_COLOR fff3b8
+!define BORDER_THEME_COLOR DarkRed
+!define LIGHT_THEME_COLOR #fffded
+!define TEXT_THEME_COLOR Black
+<style>
+    Class {
+        MaximumWidth 600
+        BackgroundColor LIGHT_THEME_COLOR
+        header {
+                  BackgroundColor BODY_THEME_COLOR
+                  FontStyle bold
+                }
+    }
+    Object {
+        BackgroundColor LIGHT_THEME_COLOR
+        header {
+              FontColor TEXT_THEME_COLOR
+              FontSize 20
+              FontStyle bold
+              BackgroundColor BODY_THEME_COLOR
+        }
+    }
+    LifeLine {
+      LineColor BORDER_THEME_COLOR
+      LineThickness 2
+      BorderColor BORDER_THEME_COLOR
+      BorderThickness 2
+      BackgroundColor LIGHT_THEME_COLOR
+    }
+</style>
+
+skinparam dpi 200
+skinparam BackgroundColor #FFFFFFF
+skinparam ParticipantPadding 10
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+skinparam Shadowing false
+skinparam DefaultFontSize 18
+skinparam DefaultFontName DM Sans
+skinparam TitleFontColor BORDER_THEME_COLOR
+skinparam TitleFontSize 30
+skinparam TitleFontName DM Sans
+
+skinparam Class {
+    BorderColor BORDER_THEME_COLOR
+    FontColor automatic
+    AttributeFontSize 20
+    AttributeIconSize 0
+    BorderThickness 2
+    FontName DM Sans
+}
+
+skinparam Object {
+    BorderColor BORDER_THEME_COLOR
+    AttributeFontSize 20
+    BorderThickness 2
+    FontName DM Sans
+}
+
+skinparam Arrow {
+    Thickness 1.5
+    Color BORDER_THEME_COLOR
+}
+
+skinparam Actor {
+    BorderColor BORDER_THEME_COLOR
+    BackgroundColor BODY_THEME_COLOR
+    BorderThickness 2
+    FontColor BORDER_THEME_COLOR
+    FontSize 20
+    FontName DM Sans
+    FontStyle Bold
+}
+
+skinparam Sequence {
+    MessageAlign center
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    FontSize 20
+    FontName DM Sans
+    GroupBorderColor BORDER_THEME_COLOR
+    GroupBackgroundColor BODY_THEME_COLOR
+    ReferenceBorderColor BORDER_THEME_COLOR
+    ReferenceHeaderBackgroundColor BODY_THEME_COLOR
+}
+
+skinparam Participant {
+    BorderColor BORDER_THEME_COLOR
+    BackgroundColor BODY_THEME_COLOR
+    AttributeFontSize 20
+    BorderThickness 1.5
+    FontName DM Sans
+    FontStyle Bold
+}
+
+skinparam Activity {
+    MessageAlign center
+    BackgroundColor LIGHT_THEME_COLOR
+    BorderColor BORDER_THEME_COLOR
+    BorderThickness 1.5
+    FontSize 20
+    FontName DM Sans
+}
+
+skinparam Rectangle {
+    MessageAlign center
+    BackgroundColor LIGHT_THEME_COLOR
+    BorderColor BORDER_THEME_COLOR
+    BorderThickness 1.5
+    FontSize 20
+    FontName DM Sans
+}
+
+'hide footbox
+hide circle

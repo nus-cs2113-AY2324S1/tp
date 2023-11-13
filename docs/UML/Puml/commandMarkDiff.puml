@@ -1,0 +1,39 @@
+@startuml
+!include Style.puml
+title Mark Difficulty Sequence Diagram
+
+actor User
+participant QuizHub as ":QuizHub"
+participant Parser as ":Parser"
+participant CommandMarkDifficulty as "cmd:CommandMarkDifficulty"
+participant QuestionList as ":QuestionList"
+participant Question as ":Question"
+
+User -> QuizHub: Enters "markdiff [question number] /[question difficulty]"
+activate QuizHub
+QuizHub -> Parser : parseCommand(userInput)
+activate Parser
+create CommandMarkDifficulty
+Parser -> CommandMarkDifficulty:
+activate CommandMarkDifficulty
+CommandMarkDifficulty --> Parser
+deactivate CommandMarkDifficulty
+Parser --> QuizHub : cmd
+deactivate Parser
+QuizHub -> CommandMarkDifficulty: Executes executeCommand(ui, dataStorage, questions)
+activate CommandMarkDifficulty
+CommandMarkDifficulty -> QuestionList: Calls markQuestionDifficulty(index, qnDifficulty, showMessage)
+activate QuestionList
+QuestionList -> Question: Calls markDifficulty(qnDifficulty)
+activate Question
+Question -> Question: Marks question difficulty
+Question --> QuestionList: Notifies difficulty marked
+deactivate Question
+QuestionList --> CommandMarkDifficulty: Notifies difficulty marked
+deactivate QuestionList
+CommandMarkDifficulty --> QuizHub: Notifies difficulty marked
+deactivate CommandMarkDifficulty
+QuizHub --> User: Displays confirmation message
+destroy CommandMarkDifficulty
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+!include Style.puml
+
+title Command Edit Flow
+start
+
+:User initiates question edit;
+:Retrieve the question to edit;
+if (Edit Description) then (yes)
+  :User selects "Edit Description";
+  :Enter new description;
+elseif (Edit Answer) then (yes)
+  :User selects "Edit Answer";
+  :Enter new answer;
+else (Edit MCQ Option)
+  :User selects "Edit MCQ Option";
+  :Choose option number (1...4);
+  :Enter new option text;
+endif
+
+:Update the question with new information;
+:Display confirmation message;
+stop
+
+@enduml
