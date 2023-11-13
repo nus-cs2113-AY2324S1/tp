@@ -62,7 +62,11 @@ public class Ui {
     }
 
     public String input() {
-        return scanner.nextLine().trim();
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine().trim();
+        }
+        System.exit(1);
+        return "";
     }
 
     public void printWatchListHeader() {
