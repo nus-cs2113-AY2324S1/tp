@@ -250,11 +250,11 @@ are corrupted.
 
 ### Add Income/Expense Feature
 
-The add income/expense command has 2 compulsory arguments `/t` and `/a` and 1 optional argument `/r`.
+The add income/expense command has 2 compulsory arguments `/t` and `/a` and 2 optional argument `/r` and  `/d`.
 
 Example:
 ```
-add income /a 100 /t salary /r 30
+add income /a 100 /t salary /r 30 /d work
 ```
 Below are the steps that shows the implementation of add income/expense.
 
@@ -266,16 +266,16 @@ addIncome() or addExpense() instantiates an Income or Expense object respectivel
 Example:
 ```
 switch (category) {
-        case INCOME:
-            cashflowList.addIncome(amount, incomeType, recur);
-            break;
-        case EXPENSE:
-            cashflowList.addExpense(amount, expenseType, recur);
-            break;
-        default:
-            ui.showMessage("Unidentified entry.");
-            break;
-        }
+case INCOME:
+    cashflowList.addIncome(amount, incomeType, recur, description);
+    break;
+case EXPENSE:
+    cashflowList.addExpense(amount, expenseType, recur, description);
+    break;
+default:
+    ui.showMessage("Unidentified entry.");
+    break;
+}         
 ```
 #### Step 2
 The instantiated income/expense then updates the overall balance through addIncomeValue() or addExpenseValue().
