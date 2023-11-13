@@ -22,11 +22,11 @@ public class EditPriceCommand extends Command {
     protected Menu menu;
     protected Ui ui;
     private final int menuID;
-    private final float newPrice;
+    private final float newDishPrice;
 
-    public EditPriceCommand(int menuID, float newPrice, Menu menu, Ui ui) {
+    public EditPriceCommand(int menuID, float newDishPrice, Menu menu, Ui ui) {
         this.menuID = menuID;
-        this.newPrice = newPrice;
+        this.newDishPrice = newDishPrice;
         this.menu = menu;
         this.ui = ui;
     }
@@ -37,13 +37,13 @@ public class EditPriceCommand extends Command {
      */
     public void execute() {
         logger.info("Executing EditPriceCommand...");
-        Dish dish = menu.getDishFromId(this.menuID - Ui.OFFSET_LIST_INDEX);
+        Dish dish = menu.getDishFromId(menuID - Ui.OFFSET_LIST_INDEX);
 
         // Checks for original price
-        if (dish.comparePrice(this.newPrice) == 0) {
-            this.ui.showToUser(ErrorMessages.EDIT_SAME_PRICE);
+        if (dish.comparePrice(newDishPrice) == 0) {
+            ui.showToUser(ErrorMessages.EDIT_SAME_PRICE);
         } else {
-            dish.setPrice(this.newPrice);
+            dish.setPrice(newDishPrice);
             ui.showEditPriceMessage(dish.toString());
         }
     }
