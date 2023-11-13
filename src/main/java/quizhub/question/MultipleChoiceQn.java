@@ -75,7 +75,7 @@ public class MultipleChoiceQn extends Question {
     public void editQuestion(String editField, String newValue) {
         switch (editField) {
         case "description":
-            super.editQuestion(editField, newValue);
+            super.editQuestion(newValue, "");
             break;
         case "option1":
             this.option1 = newValue;
