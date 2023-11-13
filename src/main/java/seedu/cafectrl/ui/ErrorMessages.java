@@ -41,10 +41,8 @@ public class ErrorMessages {
     public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Something is wrong with "
             + "the arguments! The types for dish and price are integer and float respectively, \n"
             + "and do not type in duplicated arguments at one time!";
-    public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: "
-            + "Invalid price!\n"
-            + "Price must be a float and within the range of "
-            + "0.00 to 1000000 with up to 2 decimal place. \n"
+    public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: Invalid price!\n"
+            + "Price must be a float and within the range of 0.00 to 1000000.00 with up to 2 decimal place. \n"
             + "Special characters such as $ are not allowed!";
     public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
             + "Type 'help' to view the accepted list of commands";
