@@ -18,8 +18,8 @@ public class MealCommand extends Command {
 
     }
 
-    public static void setMeals(List<Meal> meals) {
-        MealCommand.meals = new ArrayList<>(meals);
+    public static void setMeals(ArrayList<Meal> meals) {
+        MealCommand.meals = meals;
     }
 
     protected void checkArgument(List<String> arguments, int[] validArgumentAmounts) throws Exception {

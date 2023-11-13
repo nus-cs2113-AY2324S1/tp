@@ -13,7 +13,10 @@ public class DeleteCommand extends MealCommand {
 
     public DeleteCommand(List<String> arguments) throws Exception {
         checkArgument(arguments, validArgumentAmounts);
-        index = Integer.parseInt(arguments.get(0));
+        index = Integer.parseInt(arguments.get(0)) - 1;
+        if (index <= 0) {
+            throw new Exception("Invalid index!");
+        }
     }
 
     @Override
