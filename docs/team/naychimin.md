@@ -23,7 +23,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 
 1. **List Ingredient**
     - Function: Allow the user to view the ingredients of the desired dish from the menu.
-    - Command Format: `list_ingredient index/INDEX_OF_DISH_TO_LIST`
+    - Command Format: `list_ingredient dish/INDEX_OF_DISH_TO_LIST`
     - Error Handling: If the specified index is out of range, of a wrong argument type or is empty.
 2. **List Total Sales**
     - Function: Allow the user to view the sale for each day across every day since the cafe has operated.
@@ -77,9 +77,9 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 ### Contributions to UG
 [UserGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html)
 
-1. List Ingredient
-2. List Total Sales
-3. List Sale by day
+1. [List Ingredients](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html#listing-ingredients-needed-for-the-selected-dish--list_ingredients)
+2. [List Total Sales](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html#showing-total-sales--list_total_sales)
+3. [List Sale by day](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html#showing-sales-for-a-chosen-day--list_sale)
 
 ### Contributions to DG
 [DeveloperGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html)
