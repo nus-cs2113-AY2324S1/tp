@@ -71,7 +71,7 @@ public class ErrorMessages {
             + "for the 'day' field!";
     public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, "
             + "is that what you want?";
-    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer(>0) "
+    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer (>0) "
             + "for the 'index' field.";
     public static final String UNLISTED_DISH = "Oh no, this dish does not exist! \n"
             + "Please run the command list_menu to view the existing dishes.";
@@ -106,4 +106,11 @@ public class ErrorMessages {
     public static final String MISSING_INGREDIENT_MENU_DATA = "menu.txt: Missing ingredients, "
             + "this dish will be removed -> ";
     public static final String DISH_INDEX_NOT_INT = "Sorry! Dish index has to be an int!";
+    public static final String EXCEED_MAX_ORDER_QTY = "Order quantity too high! "
+            + "(order quantity has to be between 1 - 10000)";
+    public static final String BELOW_MIN_ORDER_QTY = "Order quantity cannot be less than 1! "
+            + "(order quantity has to be between 1 - 10000)";
+    public static final String MISSING_ORDER_QTY = "Seems like you forgot to add the order quantity";
+    public static final String INVALID_INT_ORDER_QTY = "Order quantity is invalid! "
+            + "(order quantity has to be between 1 - 10000)";
 }
