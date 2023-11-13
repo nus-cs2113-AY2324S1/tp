@@ -81,8 +81,7 @@ Note:
 
 To add an expense (with foreign currency):
 ```
-add expense /cat <category> /type <type> /de <description> /date <date> 
-/amt [currency] <amount>
+add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 ```
 Note:
 - Fields `/cat`, `/type`, `/de`, `date`, and `amt` are case-sensitive and should be in the specified order.
@@ -108,8 +107,7 @@ Example of usage:
 add income /de salary /date 01/01/2020 /amt 1000
 ```
 ```
-add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 
-/amt 10.00
+add expense /cat transport /type taxi /de taxi to school /date 10/10/2023 /amt 10.00
 ```
 ```
 add expense /cat Food /type lunch /de lunch /date 01/01/2020 /amt 10.50
