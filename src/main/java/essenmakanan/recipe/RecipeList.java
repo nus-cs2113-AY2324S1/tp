@@ -142,11 +142,12 @@ public class RecipeList {
 
         assert recipeExist(index) : "Index is out of bounds";
         Recipe recipe = recipes.get(index);
-        System.out.println("To make: [" + recipe.getTitle().toUpperCase() + "]");
-
-        System.out.println("Ingredients needed: ");
+        System.out.println("<<To Make: " + recipe.getTitle().toUpperCase() + ">>");
+        Ui.drawDivider();
+        System.out.println("<<Ingredients Needed>>");
         listRecipeIngredients(recipe);
-        System.out.println("Steps to follow: ");
+        Ui.drawDivider();
+        System.out.println("<<Steps To Follow>>");
         listRecipeSteps(recipe);
     }
 
@@ -188,6 +189,7 @@ public class RecipeList {
                     stepIndex = Integer.parseInt(stepDetails[0])-1;
                     Step existingStep = existingRecipe.getRecipeStepByIndex(stepIndex);
                     String newStep = stepDetails[1];
+                    newStep = Step.convertToStepIdTemplate(newStep, stepIndex+1);
                     Ui.printEditRecipeStepSuccess(existingStep.getDescription(), newStep);
                     existingStep.setDescription(newStep);
                 }

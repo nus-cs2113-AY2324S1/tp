@@ -43,7 +43,7 @@ public class EditRecipeTest {
         }
 
         String newStep = recipeToEdit.getRecipeSteps().getStepByIndex(0).getDescription();
-        assertEquals("Prepare the dough", newStep);
+        assertEquals(Step.convertToStepIdTemplate("Prepare the dough",1), newStep);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class EditRecipeTest {
         }
 
         String newStep = recipeToEdit.getRecipeSteps().getStepByIndex(0).getDescription();
-        assertEquals("Prepare the dough", newStep);
+        assertEquals(Step.convertToStepIdTemplate("Prepare the dough",1), newStep);
         assertEquals("Breads", recipeToEdit.getTitle());
     }
 
@@ -82,7 +82,7 @@ public class EditRecipeTest {
         }
 
         String newStep = recipeToEdit.getRecipeSteps().getStepByIndex(0).getDescription();
-        assertEquals("Prepare the dough", newStep);
+        assertEquals(Step.convertToStepIdTemplate("Prepare the dough",1), newStep);
         assertEquals("white bread", recipeToEdit.getTitle());
     }
 
