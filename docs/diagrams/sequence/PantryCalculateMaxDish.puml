@@ -1,0 +1,52 @@
+@startuml
+!define FUNCTION class calculateMaxDish
+!define PANTRY class ":Pantry"
+!define INGREDIENT class ":Ingredient"
+!define DISH class ":Dish"
+
+autonumber
+
+-> ":Pantry": calculateMaxDish(dish: ":Dish", menu: Menu, order: Order)
+activate ":Pantry"
+
+":Pantry" -> ":Dish" : dish.getName()
+activate ":Dish"
+return dishName:String
+
+":Pantry" -> ":Pantry" : retrieveIngredientsForDish(dishName: String)
+activate ":Pantry"
+return dishIngredients: ArrayList<":Ingredient">
+
+loop dishIngredients
+":Pantry" -> ":Ingredient" **:
+activate ":Ingredient"
+return dishIngredient: ":Ingredient"
+
+":Pantry" -> ":Pantry" : calculateMaxDishForEachIngredient(dishIngredient: Ingredient)
+activate ":Pantry"
+return numOfDish: int
+
+alt !order.getIsComplete()
+":Pantry" -> ":Pantry" : handleIncompleteDishCase(dishIngredient: Ingredient), order: Order, numOfDish: int)
+activate ":Pantry"
+
+alt lacking ingredients (numOfDish < orderQty)
+":Pantry" -> ":Pantry": handleRestock(dishIngredient: ":Ingredient", orderQty: int)
+activate ":Pantry"
+return
+end alt
+return
+
+else order.getIsComplete()
+":Pantry" -> ":Pantry" : handleZeroDishCase(dishIngredient: Ingredient), order: Order, numOfDish: int)
+activate ":Pantry"
+alt lacking ingredients (numOfDish == 0)
+":Pantry" -> ":Pantry": handleRestock(dishIngredient: ":Ingredient", orderQty: int)
+activate ":Pantry"
+return
+end alt
+return
+end loop
+return maxNumOfDish: int
+
+@enduml

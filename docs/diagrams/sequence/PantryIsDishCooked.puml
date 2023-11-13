@@ -1,0 +1,50 @@
+@startuml
+!define FUNCTION class isDishCooked
+!define PANTRY class ":Pantry"
+!define INGREDIENT class ":Ingredient"
+!define DISH class Dish
+
+autonumber
+
+ -> ":Pantry": isDishCooked(dishIngredients: ArrayList<Ingredient>)
+ activate ":Pantry"
+
+ loop dishIngredients
+ ":Pantry" -> ":Ingredient" **:
+ activate ":Ingredient"
+ ":Ingredient" --> ":Pantry": ingredient: ":Ingredient"
+ deactivate ":Ingredient"
+
+  ":Pantry" -> ":Ingredient": getQty()
+  activate ":Ingredient"
+  return usedQty: int
+
+ ":Pantry" -> ":Pantry": getIngredient(dishIngredient: Ingredient))
+ activate ":Pantry"
+ return :":Ingredient"
+
+ ":Pantry" -> ":Ingredient" **:
+ activate ":Ingredient"
+ return usedIngredientFromStock: ":Ingredient"
+
+ alt usedIngredientFromStock == null
+ <-- ":Pantry": :boolean
+ end alt
+
+ ":Pantry" -> ":Ingredient": getQty()
+ activate ":Ingredient"
+ return stockQty: int
+
+ alt not enough ":Ingredient" (stockQty-usedQty<0)
+ <-- ":Pantry": :boolean
+ end alt
+ ":Pantry" -> ":Ingredient" : setQty(quantity: int)
+ activate ":Ingredient"
+ return
+ end loop
+
+ return :boolean
+
+
+
+@enduml

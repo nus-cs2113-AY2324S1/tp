@@ -67,19 +67,18 @@ public class Sales {
             ui.showToUser("No sales made.");
             return;
         }
-        //ui.showSalesBottom();
+
         for (int day = 0; day < orderLists.size(); day++) {
             logger.info("Printing sales for day " + day + "...");
             OrderList orderList = orderLists.get(day);
 
             if (orderList.isEmpty() || !orderList.hasCompletedOrders()) {
-                ui.showToUser("", "No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".", "");
+                ui.showToUser("No sales for day " + (day + DAY_DISPLAY_OFFSET) + ".");
                 continue;
             }
 
             ui.showSalesTop(day + DAY_DISPLAY_OFFSET);
             orderList.printOrderList(menu, ui);
-            ui.showSalesBottom();
         }
     }
 
@@ -102,7 +101,6 @@ public class Sales {
             ui.showSalesTop(day);
 
             orderList.printOrderList(menu, ui);
-            ui.showSalesBottom();
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to print sales for day " + day + "\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_SALE_DAY);
