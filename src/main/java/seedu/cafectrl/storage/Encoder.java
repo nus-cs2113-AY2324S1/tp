@@ -89,7 +89,7 @@ public class Encoder {
 
     //@@author ziyi105
     /**
-     * Encodes the pantry stock into format ingredient name | quantity | unit
+     * Encodes the pantry stock into format ingredient name | quantity | unit for storage.
      * @param pantry the pantry from current session
      * @return an arrayList of string of ecoded pantry stock
      */
@@ -136,7 +136,7 @@ public class Encoder {
                 orderString.append((day + 1) + DIVIDER);
                 orderString.append(order.getDishName() + DIVIDER);
                 orderString.append(order.getQuantity() + DIVIDER);
-                orderString.append(order.getOrderedDish().getPrice() + DIVIDER);
+                orderString.append(String.format("%.2f", order.getOrderedDish().getPrice()) + DIVIDER);
                 orderString.append(order.getIsComplete());
                 orderString.append(System.lineSeparator());
                 encodedList.add(String.valueOf(orderString));

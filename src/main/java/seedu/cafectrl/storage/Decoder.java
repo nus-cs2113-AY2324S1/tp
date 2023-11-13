@@ -138,6 +138,13 @@ public class Decoder {
         return new Pantry(ui, pantryStock);
     }
 
+    /**
+     * Checks whether the ingredient name is valid in terms of length, containment of
+     * special character and whether it is a repeated ingredient
+     * @param ingredientName name of the ingredient
+     * @param pantryStock pantry stock with data from previous lines in the text file
+     * @return true if the name is valid, false otherwise
+     */
     private static boolean isValidIngredientName(String ingredientName, ArrayList<Ingredient> pantryStock) {
         return !Parser.containsSpecialChar(ingredientName)
                 && !Parser.isNameLengthInvalid(ingredientName)
@@ -238,7 +245,6 @@ public class Decoder {
             orderLists.get(day).addOrder(orderedDish);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
-            System.out.println(e.getMessage());
             ui.showToUser(ErrorMessages.INVALID_SALES_DATA + orderLine);
         }
     }

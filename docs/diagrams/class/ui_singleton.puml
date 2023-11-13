@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Ui << singleton >> {
+- {static} theOneUi: Ui
+- scanner: Scanner
+- Ui(): Ui
++ getInstance(): Ui
+}
+@enduml
