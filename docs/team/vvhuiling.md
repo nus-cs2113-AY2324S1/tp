@@ -1,7 +1,4 @@
----
-layout: page
-title: Huang Huiling's Project Portfolio Page
----
+# Huang Huiling - Project Portfolio Page
 ## Project: NUScents
 ### Overview
 
