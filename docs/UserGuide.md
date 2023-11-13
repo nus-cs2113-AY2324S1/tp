@@ -158,7 +158,8 @@ Note
 - Multiple steps and ingredients can be added
 - `RECIPE_TITLE`, `STEPS` and `INGREDIENT` are compulsory fields and at least 1 field must be entered
 - `DURATION (d/)` and `TAGS (t/)` is optional. [Registered tags in our app](#tags)
-- `d/` must come immediately after `s/`
+- `t/` must come immediately after `s/`, else defaulted as tag 4
+![AddRecipeTagExample.png](images%2FAddRecipeTagExample.png)
 
 Examples :
 
