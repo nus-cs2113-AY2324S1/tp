@@ -11,10 +11,18 @@ taking.
 ### Code Contribution
 
 See my code contribution [here on the tP Code Dashboard](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=wendelinwemhoener&breakdown=true)
+- implemented architecture that my team reused
+- made sure that build check and ui text testcase passed
+- javadoc for all methods (except getters/setters and constructors)
 
 ### Contributions to the UG
 
+- wrote the general sections
+
 ### Contributions to the DG
+
+product scope
+
 
 ### Contributions to team-based tasks
 
@@ -26,5 +34,5 @@ See my code contribution [here on the tP Code Dashboard](https://nus-cs2113-ay23
 - I documented target user profile and value proposition in UG/DG
 - I set up the Google Doc we used for coordinating the project in the 
   initial phase
-- I set up and administrated our Telegram chat group to allow for easy and 
-  efficient communication
+- I set up and administrated our Telegram chat group to allow for 
+  efficient communication and coordinated our weekly meetings

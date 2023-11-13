@@ -24,7 +24,7 @@ public class AddGoalEventCommand extends DualEventCommand{
         String eventName = scanner.nextLine();
 
         LocalDateTime endTime = parseDateTimeInput(scanner,
-                "When does it end? (yyyy-MM-ddTHH:mm:ss) (e.g., 2023-12-20T12:30:30): ");
+                "What is the deadline? (yyyy-MM-ddTHH:mm:ss) (e.g., 2023-12-20T12:30:30): ");
         int goal = parseIntegerInput(scanner,
                 "How many flashcard to review by then?: ");
 

@@ -22,7 +22,7 @@ public class ListCalendarEventsCommand extends EventCommand{
 
     public void execute(Scanner scanner, EventList eventList) {
         if (eventList.getSize() > 0) {
-            System.out.println("Here is a list of all your events: ");
+            System.out.println("    Here is a list of all your events: ");
             printLine();
 
             int count = 0;

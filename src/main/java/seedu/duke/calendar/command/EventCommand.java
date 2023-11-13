@@ -1,4 +1,4 @@
-//@@author Brian030601 & Cheezeblokz
+//@@author Brian030601
 
 package seedu.duke.calendar.command;
 

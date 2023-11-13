@@ -9,8 +9,8 @@ the courses they are taking.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest jar from [the latest release on GitHub](https://github.com/AY2324S1-CS2113-F11-3/tp/releases).
-3. Run the jar via `java -jar duke.jar`
+2. Download the latest jar from [the latest release on GitHub](https://github.com/AY2324S1-CS2113-F11-3/tp/releases).
+3. Run the jar file via `java -jar duke.jar`
 
 ## Features
 
@@ -306,102 +306,181 @@ Enter your command: <b>delete all flashcards</b>
     All your flashcards have been successfully deleted.
 </pre>
 
-### General Explanation of Calendar Features
+### Calendar-related features
+
+#### General explanation of flashcards
+
+TaskLinker's calendar feature allows users to manage their time effectively 
+by adding, listing, finding, and deleting events. Events in the calendar have a 
+specified start and end time, making it easy for users to plan their schedules. 
+This feature is particularly useful for individuals with busy schedules or 
+those who want to keep track of their upcoming appointments or tasks.
+
+The TaskLinker is also integrated with the flashcards and can be used for setting
+a goal to review flashcards. Add goal event can be used to take user input for 
+setting a goal to review flashcards.
 
 Here is your features list:
 
 + `add event` , `delete event`
 + `list events` , `find event`
-+ `delete all events`
++ `delete all events` , `add goal event`
 
-Users can use the above features to handle their events
+Users can use the above features to handle their events`
 
-#### Adding a todo: `todo`
+#### Adding an event to the calendar: `add event`
 
-Adds a new item to the list of todo items.
+Adds an event to the calendar with start and end time. 
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+After entering this command, the user is asked to enter the event name on the calendar.
+Once the name is given, the user should press ENTER to continue. Once the name is entered,
+the user is prompted to give a start time and an end time for the event. 
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+The start and the end time should be in an acceptable format (`yyyy-mm-ddThh:mm:ss`.)
+If it is not in an acceptable format, (`Invalid date and time format. Please try again.`)
+message will appear and prompt the user to enter a new start time.
+
+Furthermore, the end time should be later than the start time as an event cannot
+end before it's start time. If an earlier time is given for the end time than the
+start time, the TaskLinker displays (`End time is before or equal to the start time. Please enter the correct end time.`)
+message and starts over from (`Enter your command:`).
+
+Format:
+<pre>
+Enter your command: <b>add event</b>
+What's the event?: <b>Name [Event Name]</b>
+When does it start?: <b>yyyy-mm-ddThh:mm:ss [Start Time]</b>
+When does it end?: <b>yyyy-mm-ddThh:mm:ss [End Time]</b>
+</pre>
 
 Example of usage:
+<pre>
+Enter your command: <b>add event</b>
+What's the event?: <b>Do HW</b>
+When does it start?: <b>2023-12-20T12:30:30</b>
+When does it end?: <b>2023-12-20T13:40:30</b>
 
-`todo n/Write the rest of the User Guide d/next week`
+Event 'Do HW' From: 2023-12-20T12:30:30, To: 2023-12-20T13:40:30 
+has been added to your Calendar
+</pre>
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+#### Adding a goal event to the calendar: `add goal event`
 
+Adds a goal of reviewing flashcards as an event to the calendar.
 
+After entering (`add goal event`) command, the user is asked to provide a name
+for this goal event. After the name, the user is prompted to give an end time 
+for the event. The end time serves as a deadline for the goal.
 
-#### Add an Event to the Calendar
+After the deadline has been given, then the goal should be given. Goal of reviewing
+some number of flashcards by the given deadline. Same as adding an event, if an unacceptable
+format of end time is given, the TaskLinker will display (`Invalid date and time format. Please try again.`)
+message. 
 
-**Adds an event to the calendar with start and end time** 
+Format:
+<pre>
+Enter your command: <b>add goal event</b>
+What's the event?: <b>Name [Goal Name]</b>
+When does it end?: <b>yyyy-mm-ddThh:mm:ss [End Time]</b>
+How many flashcard to review by then?: <b>Number [# of flashcards to review]</b>
+</pre>
 
-#### Usage
+Example of usage:
+<pre>
+Enter your command: <b>add goal event</b>
+What's the event?: <b>Do Flashcards</b>
+When does it end?: <b>2023-12-20T12:30:30</b>
+How many flashcard to review by then?: <b>20</b>
 
-+ Format: `add event` [Command]
-+ What's the event?: `Event name` [Event name]
-+ When does it start?: `yyyy-mm-ddThh:mm:ss` [Start time]
-+ When does it end?: `yyyy-mm-ddThh:mm:ss` [End time]
+Goal 'Do Flashcards' review 20 flashcards by: 2023-12-20T12:30:30 (Reviewed: 0) 
+has been added to your Calendar
+</pre>
 
-**Example of usage**:
+#### Delete an event from the calendar: `delete event`
 
-+ `Enter your command: add event`
-+ `What's the event?: Do HW`
-+ `When does it start?: 2023-12-20T12:30:30`
-+ `When does it end?: 2023-12-20T12:40:30`
+Deletes an event from the calendar with event name.
 
-#### Delete an Event From the Calendar
+After the (`delete event`) command has been given, the user is prompted to give
+the name of the event he/she wants to delete from the calendar. If the given
+event exist in the calendar, then TaskLinker will display (`[Event Name] has been deleted from your Calendar!`).
+Then the event gets deleted from the event list.
 
-**deletes an event from the calendar with event name**
+However, if the given event name doesn't exist in the calendar. Then the event
+doesn't exist in the calendar message will display (`[Event Name] doesn't exist in your Calendar!`).
+The user then enter a different command.
 
-#### Usage
+Format:
+<pre>
+Enter your command: <b>delete event</b>
+What's the event?: <b>Name [Event Name]</b>
+    [Event Name] has been deleted from your Calendar!
+</pre>
 
-+ Format: `delete event` 
-+ Enter the event name: `Event name` [Event name]
+Example of usage:
+<pre>
+Enter your command: <b>delete event</b>
+What's the event?: <b>hello</b>
+    hello has been deleted from your Calendar!
+</pre>
 
-**Example of usage**:
+#### Delete all events from the Calendar: `delete all events`
 
-+ `Enter your command: delete event`
-+ `Enter the event name: Do HW`
+Deletes all events from the calendar.
 
-#### Delete All Events From the Calendar
+Once the (`delete all events`) command has been given by the user,
+the TaskLinker will clear all events in the calendar. If the exact 
+command is not entered, the feature will not work.
 
-**deletes all events from the calendar**
+Format & Example:
+<pre>
+Enter your command: <b>delete all events</b>
+    All your events have been successfully deleted from the Calendar.
+</pre>
 
-#### Usage
+#### Find an event from the Calendar: `find event`
 
-+ Format: `delete all events`
+Finds an event from the calendar.
 
-**Example of usage**:
+Once the (`find event`) command has been entered, the user is prompted to
+give the name of the event he/she is looking for. The input user gives can
+just be partial name of the event. If so, the feature will list all
+events that included the given input.
 
-+ `Enter your command: delete all events`
+However, if the given input is not found from the events in the Calendar, 
+then the (`No such event found`) message will be displayed.
 
-#### Find an Event From the Calendar
+Format:
+<pre>
+Enter your command: <b>find event</b>
+What's the event?: <b>Name [Event Name]</b>
+1. Event 'Event Name' From: yyyy-mm-ddThh:mm:ss, To: yyyy-mm-ddThh:mm:ss
+    These events have been found
+</pre>
 
-**finds an event from the calendar**
+Example of usage:
+<pre>
+Enter your command: <b>find event</b>
+What's the event?: <b>Do HW</b>
+1. Event 'Do HW' From: 2023-12-20T12:30:30, To: 2023-12-20T13:30:30
+    These events have been found
+</pre>
 
-##### Usage
+#### List all events from the Calendar: `list events`
 
-+ Format: `find event`
-+ What event are you looking for?: `event name`
+Lists all events from the calendar
 
-**Example of usage**:
+Once the (`list events`) command has been entered, the TaskLinker lists
+all the events in the event list. If there is no event in the event list,
+the (`The Calendar is empty!`) message will be displayed.
 
-+ `Enter your command: find event`
-+ `What event are you looking for?: Do HW`
-
-#### List All Events From the Calendar
-
-**Lists all events from the calendar**
-
-#### Usage
-
-+ Format: `list events`
-
-**Example of usage**:
-
-+ `Enter your command: find event`
+Format & Example:
+<pre>
+Enter your command: <b>list events</b>
+    Here is a list of all your events: 
+--------------------------------------------------------------------------------
+1. Event 'Do User' From: 2023-12-20T12:30:30, To: 2023-12-20T13:30:30
+--------------------------------------------------------------------------------
+</pre>
 
 ## FAQ
 
@@ -415,6 +494,14 @@ Every event and flashcard are automatically save after each command.
 
 **A**: You can transfer your data by copying & pasting the data folder.
 
+**Q**: Why is the calendar features needed?
+
+**A**: The calendar features are used for adding a flashcard review and other goals.
+
+**Q**: Are the flashcard and the calendar use different commands?
+
+**A**: Yes, they have different command based on their features.
+
 ## Command Summary
 
 * [Listing all flashcards](#listing-all-flashcards-list-flashcards): `list 
@@ -427,8 +514,15 @@ Every event and flashcard are automatically save after each command.
   flashcard`
 * [Deleting all flashcards](#deleting-all-flashcards-delete-all-flashcards) 
   `delete all flashcards`
-* Create an event: `add event`
-* Delete an event: `delete event`
-* Delete all events: `delete all events`
-* Find an event: `find event`
-* List events: `list events` 
+* [Create an event](#adding-an-event-to-the-calendar-add-event): 
+  `add event`
+* [Add a goal event](#adding-a-goal-event-to-the-calendar-add-goal-event): 
+  `add goal event`
+* [Delete an event](#delete-an-event-from-the-calendar-delete-event): 
+  `delete event`
+* [Delete all events](#delete-all-events-from-the-calendar-delete-all-events): 
+  `delete all events`
+* [Find an event](#find-an-event-from-the-calendar-find-event): 
+  `find event`
+* [List all events](#list-all-events-from-the-calendar-list-events): 
+  `list events` 
