@@ -333,6 +333,7 @@ a usage of the command.
 
 *Step 1:*
 From the given argument, get the first word of the argument, which is the command word.
+If the argument is an empty string, set help message with a general help message.
 
 *Step 2:*
 Get the blank command instance based on the command word.
