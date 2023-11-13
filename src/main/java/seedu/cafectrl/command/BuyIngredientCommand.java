@@ -69,7 +69,7 @@ public class BuyIngredientCommand extends Command {
     private void addIngredient() {
         for(int i = 0; i < ingredients.size(); i++) {
             Ingredient ingredient = ingredients.get(i);
-            ingredient = pantry.addIngredientToStock(ingredient.getName(),
+            ingredient = pantry.addIngredientToStock(ingredient.getName().toLowerCase(),
                     ingredient.getQty(),
                     ingredient.getUnit());
             ingredients.set(i, ingredient);
@@ -92,7 +92,7 @@ public class BuyIngredientCommand extends Command {
         }
         ingredientsToBePrinted.add(ingredient);
         ingredientString += "Ingredient: " + ingredient.getName()
-                + "\nQty: " + ingredient.getQty()
+                + "\nTotal Qty: " + ingredient.getQty()
                 + ingredient.getUnit() + "\n\n";
     }
 }

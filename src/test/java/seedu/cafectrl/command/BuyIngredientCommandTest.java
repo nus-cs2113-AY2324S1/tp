@@ -36,9 +36,9 @@ public class BuyIngredientCommandTest {
         System.setOut(originalOut);
 
         String expectedOutput = "Added to stock: \n"
-                + "Ingredient: milk\t\tQty: 100ml\n"
-                + "Ingredient: rice\t\tQty: 1000g\n"
-                + "Ingredient: chicken\t\tQty: 500g";
+                + "Ingredient: milk\nTotal Qty: 100ml\n\n"
+                + "Ingredient: rice\nTotal Qty: 1000g\n\n"
+                + "Ingredient: chicken\nTotal Qty: 500g\n\n";
 
         assertEquals(expectedOutput.trim().replaceAll("\\s+", " "),
                 actualOutput.trim().replaceAll("\\s+", " "));
@@ -65,7 +65,7 @@ public class BuyIngredientCommandTest {
         System.setOut(originalOut);
 
         String expectedOutput = "Added to stock: \n"
-                + "Ingredient: chicken\t\tQty: 1000g\n";
+                + "Ingredient: chicken\nTotal Qty: 1000g\n";
 
         assertEquals(expectedOutput.trim().replaceAll("\\s+", " "),
                 actualOutput.trim().replaceAll("\\s+", " "));

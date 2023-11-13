@@ -36,8 +36,6 @@ public class ErrorMessages {
             + "for list ingredients command.";
     public static final String MISSING_ARGUMENT_FOR_DELETE = "Error: Missing arguments "
             + "for delete command.";
-    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
-            + "for buy ingredient command.";
     public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Something is wrong with "
             + "the arguments! The types for dish and price are integer and float respectively, \n"
             + "and do not type in duplicated arguments at one time!";
@@ -111,4 +109,5 @@ public class ErrorMessages {
     public static final String MISSING_FILEPATH = "Error in FileManager: No File Path entered";
     public static final String MISSING_INGREDIENT_MENU_DATA = "menu.txt: Missing ingredients, "
             + "this dish will be removed -> ";
+    public static final String DISH_INDEX_NOT_INT = "Sorry! Dish index has to be an int!";
 }

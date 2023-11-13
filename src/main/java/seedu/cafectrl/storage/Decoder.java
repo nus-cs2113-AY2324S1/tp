@@ -61,13 +61,16 @@ public class Decoder {
         String dishName = "";
         try {
             String[] dishStringArray = dishString.split(DIVIDER);
-            dishName = dishStringArray[0].trim();
+            dishName = dishStringArray[0].trim().toLowerCase();
             checkNameValidity(dishName);
-            float dishPrice = Float.parseFloat(dishStringArray[1]);
+            float dishPrice = Parser.parsePriceToFloat(dishStringArray[1]);
             String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
             ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
             menuDishList.add(new Dish(dishName, ingredientsList, dishPrice));
         } catch (ParserException e) {
+            logger.log(Level.WARNING, "Dish has invalid price: " + e.getMessage(), e);
+            ui.showToUser(ErrorMessages.INVALID_MENU_DATA + dishString);
+        } catch (RuntimeException e) {
             logger.log(Level.WARNING, "Dish has no ingredients: " + e.getMessage(), e);
             ui.showToUser(e.getMessage() + dishName);
         } catch (Exception e) {
@@ -92,13 +95,13 @@ public class Decoder {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
         if (ingredientsStringArray.length < 1) {
-            throw new ParserException(ErrorMessages.MISSING_INGREDIENT_MENU_DATA);
+            throw new RuntimeException(ErrorMessages.MISSING_INGREDIENT_MENU_DATA);
         }
 
         for(String ingredientString : ingredientsStringArray) {
             logger.info("Ingredient to decode: " + ingredientString);
             String[] array = ingredientString.split(INGREDIENT_DIVIDER);
-            String name = array[0].trim();
+            String name = array[0].trim().toLowerCase();
             checkNameValidity(name);
             int qty = Integer.parseInt(array[1].trim());
             checkQtyValidity(qty);
