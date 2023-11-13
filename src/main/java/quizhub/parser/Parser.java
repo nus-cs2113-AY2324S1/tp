@@ -331,8 +331,7 @@ public class Parser {
             return handleEditNewValuesExceptions(invalidEditCriteria);
         }
         String editField = commandEditTokens[0];
-        String newValue = commandEditTokens[1].replace("\\slash", "/").replace(
-                "|", "").replace("/", "");
+        String newValue = commandEditTokens[1].replace("|", "").replace("/", "");
         if (newValue.isEmpty()) {
             return new CommandInvalid(CommandEdit.MISSING_KEYWORD_MSG);
         }
