@@ -149,6 +149,7 @@ The Parser is a crucial component that forms the bridge between user intentions 
 management system.
 
 The following sequence diagram shows how the parser class works when the program is running.
+
 <img src="UML Diagrams/ParserDiagram.png" width="500">
 
 ---
@@ -644,6 +645,7 @@ employs a static `Map<String, List<String>>` named `vendorSuppliedDrugs` to stor
 drugs they supply. The `addDrugToVendor` method uses `computeIfAbsent` to ensure that each vendor has an associated 
 drug list, preventing null pointer issues.
 
+<img src="UML Diagrams/AddVendorSupplyDiagram.png" width="350" alt="">
 
 ---
 
@@ -715,6 +717,32 @@ The following sequence diagram shows how the saveSales Command function works.
 <img src="UML Diagrams/SaveSalesCommand.png" width="350">
 ---
 
+## 16. AddDescription Command
+
+The `AddDescriptionCommand` is responsible for adding drug descriptions to the `Description` class. This command is 
+an integral part of the command pattern employed in the application, providing a modular approach to managing
+less critical drug-related information .
+
+### Design Considerations
+The command should manage the associations between the description and drugs properly, and ensure that the descriptions
+can be updated if needed. However, it does not access the drug class directly similar to the vendor supply commands, as 
+this is intended as a catalogue. Moreover, it adheres to the principle of separation of concerns better. 
+
+### Implementation
+The command requires two parameters during instantiation: the drug name (`drugName`) and its corresponding description
+(`drugDescription`).
+The `execute` method initiates the addition of the drug description by calling the static method `addDescription` 
+from the `Description` class. It converts the drug name and description to lowercase for case-insensitive handling. 
+To update the description, users can call this command again, and the description will show the most recent addition.
+Upon successful execution, the command returns a `CommandResult` with a formatted success message indicating the drug 
+name and description that have been added.
+
+The following  diagram shows how the addDescription Command function works.
+
+<img src="UML Diagrams/AddDescriptionDiagram.png" width="350" alt="">
+
+---
+
 ## Product scope
 
 ---
@@ -764,6 +792,7 @@ Priorities: High (must have) - \* \* _, Medium (nice to have) - _ _, Low (unlike
 | \* \*    | v2.0    | Receptionist         | Add drugs to cart and checkout                       | facilitate the selling of those drugs to clients               |
 | \* \*    | v2.0    | Receptionist         | View total price of drugs in cart                    | Easily keep track of what clients would pay and the revenue    |
 | \* \* \* | v2.0    | Inventory Staff      | Get alerts for low stock                             | Replenish the drugs in low quantity                            |
+| \* \* \* | v2.0    | Manager              | View past sales of drugs                             | Keep track of drug turnover                                    |
 
 
 
@@ -775,6 +804,3 @@ Priorities: High (must have) - \* \* _, Medium (nice to have) - _ _, Low (unlike
 
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
-
-_(More to be added)_
-
