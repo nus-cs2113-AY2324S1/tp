@@ -2,7 +2,11 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
++ Acknowledgement to the [CS2113 Website](https://nus-cs2113-ay2324s1.github.io/website/admin/tp-deliverables.html#deliverable-project-portfolio-page-ppp) for giving us design guidelines.
++ Acknowledgement to [Dr Akshay Narayan](https://www.comp.nus.edu.sg/cs/people/anarayan/), and Teaching Assistant for their guidance.
++ Acknowledgement to [team members](AboutUs.md) for their hard work.
++ Acknowledgement to the [diagram tool](https://app.diagrams.net) for facilitating drawing of diagrams
++ Acknowledgement to [Developer Guide Example](https://se-education.org/addressbook-level3/DeveloperGuide.html#acknowledgements) for illustration.
 
 ## Design & implementation
 
@@ -163,7 +167,7 @@ the courses they are taking.
 
 *Given below are the instructions for manual testing the TaskLinker.*
 
-### Launching and exiting the application
+### Testing launching and exiting the application
 Launching the application
   1. download the jar file from the release page.
   2. open a terminal and navigate to the directory where the jar file is located.
@@ -173,4 +177,105 @@ Exiting the application
   1. type `exit` in the command box and press enter.
   2. the application will exit.
 
+#### Testing adding an event to the calendar
 
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>add event</b>
+What's the event?: <b>Do HW</b>
+When does it start?: <b>2023-12-20T12:30:30</b>
+When does it end?: <b>2023-12-20T13:40:30</b>
+</pre>
+
+Test Case #2 (Start Time, End Time Error):
+
+<pre>
+Enter your command: <b>add event</b>
+What's the event?: <b>Do HW</b>
+When does it start?: <b>2023-12-20T12:30:30</b>
+When does it end?: <b>2023-12-20T11:40:30</b>
+
+  End time is before or equal to the start time. Please enter the correct end time.
+</pre>
+
+#### Testing adding a goal event to the calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>add goal event</b>
+What's the event?: <b>Do Flashcards</b>
+When does it end?: <b>2023-12-20T12:30:30</b>
+
+Goal 'Do Flashcards' review 20 flashcards by: 2023-12-20T12:30:30 (Reviewed: 0) 
+has been added to your Calendar
+</pre>
+
+Test Case #2 (Not an integer for # of flashcards):
+
+<pre>
+Enter your command: <b>add goal event</b>
+What's the event?: <b>Do Flashcards</b>
+When does it end?: <b>2023-12-20T12:30:30</b>
+How many flashcard to review by then?: <b>r</b>
+
+    Invalid integer input. Please try again.
+</pre>
+
+#### Testing deleting an event from the calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>delete event</b>
+What's the event?: <b>hello</b>
+    hello has been deleted from your Calendar!
+</pre>
+
+Test Case #2 (Incomplete command):
+
+<pre>
+Enter your command: <b>delete</b>
+☹ OOPS!!! The description of a delete cannot be empty.
+    Invalid integer input. Please try again.
+</pre>
+
+#### Testing finding an event from the Calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>find event</b>
+What's the event?: <b>Do HW</b>
+1. Event 'Do HW' From: 2023-12-20T12:30:30, To: 2023-12-20T13:30:30
+    These events have been found
+</pre>
+
+Test Case #2 (Incomplete Command):
+
+<pre>
+Enter your command: <b>find</b>
+☹ OOPS!!! The description of a find cannot be empty.
+    Invalid integer input. Please try again.
+</pre>
+
+#### Testing listing all events from the Calendar
+
+Test Case #1 (Everything Works):
+
+<pre>
+Enter your command: <b>list events</b>
+    Here is a list of all your events: 
+--------------------------------------------------------------------------------
+1. Event 'Do User' From: 2023-12-20T12:30:30, To: 2023-12-20T13:30:30
+--------------------------------------------------------------------------------
+</pre>
+
+Test Case #2 (Incomplete command):
+
+<pre>
+Enter your command: <b>list</b>
+☹ OOPS!!! The description of a list cannot be empty.
+    Invalid integer input. Please try again.
+</pre>
