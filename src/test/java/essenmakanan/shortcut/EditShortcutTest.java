@@ -10,12 +10,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Executes tests related to editing shortcut.
+ */
 public class EditShortcutTest {
 
     private ShortcutList shortcuts;
     private IngredientList ingredients;
     private EditShortcutCommand command;
 
+    /**
+     * Sets up attributes before each test.
+     */
     @BeforeEach
     public void setup() {
         shortcuts = new ShortcutList();
@@ -25,6 +31,11 @@ public class EditShortcutTest {
         shortcuts.addShortcut(new Shortcut("bread", 2.0));
     }
 
+    /**
+     * Executes a test related to editing a shortcut.
+     *
+     * @throws EssenOutOfRangeException If application tries to access out of bounds data.
+     */
     @Test
     public void editShortcut_validInput_expectEditedShortcut() throws EssenOutOfRangeException {
         String userInput = "sc/bread n/egg q/3";
@@ -44,6 +55,11 @@ public class EditShortcutTest {
         assertEquals(0.1, shortcut.getQuantity());
     }
 
+    /**
+     * Executes a test related to editing a shortcut with no changes.
+     *
+     * @throws EssenOutOfRangeException If application tries to access out of bounds data.
+     */
     @Test
     public void editShortcut_sameProperty_expectShortcutWithUnchangedProperty() throws EssenOutOfRangeException {
         String userInput = "sc/bread n/bread q/3";
@@ -63,6 +79,11 @@ public class EditShortcutTest {
         assertEquals(3, shortcut.getQuantity());
     }
 
+    /**
+     * Executes a test related to editing a shortcut with multiple of the same flags.
+     *
+     * @throws EssenOutOfRangeException If application tries to access out of bounds data.
+     */
     @Test
     public void editShortcut_moreThanOneSameFlag_expectShortcutWithOneChange() throws EssenOutOfRangeException {
         String userInput = "sc/bread n/egg n/bread";
