@@ -254,7 +254,7 @@ help, exit,
 editprofile, viewprofile, bmi, checkrecommendedweight,
 addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,
 addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt,
-caloriebalance, addsteps, deletesteps, viewsteps, totalsteps
+caloriebalance, addsteps, deletesteps, viewsteps, totalsteps, getstepssuggestion
 Type `help` or `help <COMMAND>` to view help.
 ____________________________________________________________
 `editprofile` allows you to edit your profile.
