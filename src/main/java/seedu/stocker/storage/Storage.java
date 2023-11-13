@@ -5,7 +5,6 @@ import seedu.stocker.drugs.Drug;
 import seedu.stocker.drugs.Inventory;
 import seedu.stocker.drugs.SalesList;
 import seedu.stocker.drugs.StockEntry;
-import seedu.stocker.exceptions.InvalidDrugFormatException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -61,7 +60,7 @@ public class Storage {
      * @param filePath Relative path to file containing list of drugs to be loaded.
      * @throws IOException if file is not found
      */
-    public void loadFileContents(String filePath) throws IOException, InvalidDrugFormatException {
+    public void loadFileContents(String filePath) throws IOException {
         File holder = new File("./drugs.txt");
         if (!holder.exists()) {
             holder.createNewFile();
