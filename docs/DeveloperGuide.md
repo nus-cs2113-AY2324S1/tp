@@ -175,16 +175,12 @@ inherits from `FlashcardCommand`:
 
 ![class diagram of flashcard.command package](Diagrams/flashcard-diagrams/command_package_classes.svg)
 
-#### **`flashcard.review` package**
-
-
-
 #### **`flashcard.exceptions` package**
 
-This package contains the `FlashcardException` base class from which all 
+This package contains the `FlashcardException` base class from which all
 flashcard-specific exceptions are derived.
 
-Individual, flashcard-specific exceptions are implemented as subclasses of 
+Individual, flashcard-specific exceptions are implemented as subclasses of
 the `FlashcardException` class. For further details, you can see the Javadoc
 comments in their source code.
 
@@ -195,6 +191,25 @@ Currently, the flashcard-specific exceptions are:
   that id appears in the list of flashcards which are currently being worked on.
 - [`InvalidReviewModeException`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/exceptions/InvalidReviewModeException.java):
   Signifies that an invalid, i.e. non-existent review mode has been chosen.
+
+#### **`flashcard.review` package**
+
+This package contains all classes related to review modes for flashcards.
+
+It contains the `ReviewMode` base class that provides functionalities to 
+easily review flashcards that can be used by subclasses as building blocks to
+implement specific kinds of reviews (e.g. random or spaced repetition reviews). 
+
+There are two subclasses which inherit from `ReviewMode`, namely 
+`RandomReviewMode` and `SpacedRepetitionReviewMode`.
+
+In this regard, because the different review modes all use very
+different revision strategies (random picking vs difficulty-based picking of 
+flashcards), the different subclasses of `ReviewMode` can vary quite heavily. 
+Therefore, in the interest of brevity, the individual subclasses are not
+explained in further detail and the reader is instead referred to their
+respective source code in the `src/main/java/seedu.duke/flashcard/review`
+directory.
 
 ### **Storage Components**
 
