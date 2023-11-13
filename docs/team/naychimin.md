@@ -69,7 +69,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
         - `calculateMaxDishes`:
             - Handles the logic for calculating the number of dishes made.
             - Manages the complex logic for determining restocked ingredients and their required quantities.
-            - Presents the information in a structured table format for user clarity and comprehension.
+            - Presents the information in a table format for user clarity and comprehension.
     - Pantry Class Development:
       - Creating the Pantry class was a significant learning opportunity, especially given my initial unfamiliarity with Object-Oriented Programming (OOP) concepts. 
       - Developing the Pantry class presented a dual challenge – not only did I navigate a crucial learning curve of OOP, but I also ensured the modularity of functions to adhere to coding standards. 
