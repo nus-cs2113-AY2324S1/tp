@@ -12,17 +12,8 @@ public class Command {
     protected Logger logger = Logger.getLogger("CommandLogger");
     protected Level loggerLevel = Level.OFF;
 
-    private int index;
-
-    public Command(int index) {
-        this.index = index;
-    }
-
     public Command() {
-    }
-
-    public int getIndex() {
-        return this.index;
+        this.logger.setLevel(loggerLevel);
     }
 
     public void execute() throws CashLehException {}
