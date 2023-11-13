@@ -56,7 +56,7 @@ public class Parser implements ParserUtil {
             + "qty/\\s*(?<ingredientQty>.*)\\s*";
     private static final String INGREDIENT_NAME_REGEX_GROUP_LABEL = "ingredientName";
     private static final String INGREDIENT_QTY_REGEX_GROUP_LABEL = "ingredientQty";
-    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
+    private static final String INGREDIENT_QTY_FORMAT_REGEX = "^\\s*(?<value>[+-]*[0-9]*)\\s*(?<unit>[a-zA-z]*)\\s*$";
     private static final String INGREDIENT_QTY_VALUE_REGEX_GROUP_LABEL = "value";
     private static final String INGREDIENT_QTY_UNIT_REGEX_GROUP_LABEL = "unit";
     private static final String ADD_DISH_NAME_ARGUMENT = "name/";
@@ -68,15 +68,15 @@ public class Parser implements ParserUtil {
     /** Add Order Command Handler Patterns*/
     private static final int DISH_NAME_MATCHER_GROUP_NUM = 1;
     private static final int ORDER_QTY_MATCHER_GROUP_NUM = 2;
-    private static final String ADD_ORDER_ARGUMENT_STRING = "name/([A-Za-z0-9\\s]+) "
-            + "qty/([A-Za-z0-9\\s]+)";
+    private static final String ADD_ORDER_ARGUMENT_STRING = "name/(.*) qty/(.*)";
 
     /** The rest of Command Handler Patterns*/
-    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "index/(.+)";
-    private static final String DELETE_ARGUMENT_STRING = "(\\d+)";
+
+    private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "dish/(.+)";
+    private static final String DELETE_ARGUMENT_STRING = "(.+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*)\\sprice/(.*)";
-    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+"
-            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/[A-Za-z0-9\\s]+)*)";
+    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\s]+ qty/.+"
+            + "(?:, ingredient/[A-Za-z0-9\\s]+ qty/.+)*)";
     private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(.+)";
     private static final int MIN_QTY = 1;
     private static final int MAX_QTY = 1000000;
@@ -135,7 +135,7 @@ public class Parser implements ParserUtil {
             return prepareBuyIngredient(arguments, ui, pantry, menu);
 
         case HelpCommand.COMMAND_WORD:
-            return prepareHelpCommand(ui, arguments);
+            return prepareHelpCommand(ui);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(ui, pantry);
@@ -150,10 +150,10 @@ public class Parser implements ParserUtil {
             return preparePreviousDay(ui, currentDate);
 
         case ListTotalSalesCommand.COMMAND_WORD:
-            return prepareShowSales(sales, menu, ui, arguments);
+            return prepareShowSales(sales, ui, arguments);
 
         case ListSaleByDayCommand.COMMAND_WORD:
-            return prepareShowSalesByDay(arguments, ui, sales, menu);
+            return prepareShowSalesByDay(arguments, ui, sales);
 
         default:
             logger.warning(ErrorMessages.UNKNOWN_COMMAND_MESSAGE);
@@ -194,7 +194,7 @@ public class Parser implements ParserUtil {
         int dishIndexGroup = 1;
         int newPriceGroup = 2;
         int dishIndex;
-        float newPrice;
+        float newDishPrice;
 
         try {
             String dishIndexText = matcher.group(dishIndexGroup).trim();
@@ -218,13 +218,13 @@ public class Parser implements ParserUtil {
         }
 
         try {
-            newPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
+            newDishPrice = parsePriceToFloat(matcher.group(newPriceGroup).trim());
         } catch (ParserException e) {
             logger.log(Level.WARNING, "Invalid price!", e);
             return new IncorrectCommand(e.getMessage(), ui);
         }
 
-        return new EditPriceCommand(dishIndex, newPrice, menu, ui);
+        return new EditPriceCommand(dishIndex, newDishPrice, menu, ui);
     }
 
     //@@author DextheChik3n
@@ -249,11 +249,11 @@ public class Parser implements ParserUtil {
 
             // To retrieve specific arguments from arguments
             //the dishName needs .trim() because the regex accepts whitespaces in the "name/" argument
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim();
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_LABEL).trim().toLowerCase();
             float dishPrice = parsePriceToFloat(matcher.group(PRICE_MATCHER_GROUP_LABEL));
             String ingredientsListString = matcher.group(INGREDIENTS_MATCHER_GROUP_LABEL);
 
-            detectErrorPostDishNameParse(dishName, menu);
+            detectErrorPostDishNameParse(dishName, menu, true);
 
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, true, menu);
             Dish dish = new Dish(dishName, ingredients, dishPrice);
@@ -292,14 +292,15 @@ public class Parser implements ParserUtil {
         return matcher;
     }
 
-    private static void detectErrorPostDishNameParse(String dishName, Menu menu) throws ParserException {
+    private static void detectErrorPostDishNameParse(String dishName, Menu menu, boolean isCheckRepeatedDishName)
+            throws ParserException {
         if (dishName.isEmpty()) {
             logger.warning("Dish name empty!");
             throw new ParserException(ErrorMessages.MISSING_DISH_NAME);
         } else if (isNameLengthInvalid(dishName)) {
             logger.warning("Invalid name length!");
             throw new ParserException(ErrorMessages.INVALID_DISH_NAME_LENGTH_MESSAGE);
-        } else if (isRepeatedDishName(dishName, menu)) {
+        } else if (isCheckRepeatedDishName && isRepeatedDishName(dishName, menu)) {
             logger.warning("Repeated dish!");
             throw new ParserException(ErrorMessages.REPEATED_DISH_MESSAGE);
         } else if (containsSpecialChar(dishName)) {
@@ -345,7 +346,7 @@ public class Parser implements ParserUtil {
             throws ParserException {
         Matcher ingredientMatcher = detectErrorPreIngredientParse(inputIngredient);
 
-        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim();
+        String ingredientName = ingredientMatcher.group(INGREDIENT_NAME_REGEX_GROUP_LABEL).trim().toLowerCase();
 
         //ingredientQtyString contains the input text after the "qty/" argument
         String ingredientQtyString = ingredientMatcher.group(INGREDIENT_QTY_REGEX_GROUP_LABEL).trim();
@@ -617,13 +618,16 @@ public class Parser implements ParserUtil {
         }
 
         int listIndexArgGroup = 1;
-        int dishIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
 
-        if (!menu.isValidDishIndex(dishIndex)) {
-            return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
+        try {
+            int dishIndex = Integer.parseInt(matcher.group(listIndexArgGroup));
+            if (!menu.isValidDishIndex(dishIndex)) {
+                return new IncorrectCommand(ErrorMessages.INVALID_DISH_INDEX, ui);
+            }
+            return new DeleteDishCommand(dishIndex, menu, ui);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.DISH_INDEX_NOT_INT, ui);
         }
-
-        return new DeleteDishCommand(dishIndex, menu, ui);
     }
 
     /**
@@ -652,8 +656,7 @@ public class Parser implements ParserUtil {
 
         if (!matcher.matches()) {
             logger.warning("Unmatched regex!");
-            return new IncorrectCommand(ErrorMessages.INVALID_ARGUMENT_FOR_BUY_INGREDIENT
-                    + BuyIngredientCommand.MESSAGE_USAGE, ui);
+            return new IncorrectCommand(ErrorMessages.INVALID_INGREDIENT_ARGUMENTS, ui);
         }
 
         String ingredientsListString = matcher.group(0);
@@ -661,6 +664,8 @@ public class Parser implements ParserUtil {
         try {
             ArrayList<Ingredient> ingredients = parseIngredients(ingredientsListString, false, menu);
             return new BuyIngredientCommand(ingredients, ui, pantry);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.INVALID_INGREDIENT_ARGUMENTS, ui);
         } catch (Exception e) {
             return new IncorrectCommand(e.getMessage(), ui);
         }
@@ -735,8 +740,8 @@ public class Parser implements ParserUtil {
     }
 
     //@@author ziyi105
-    private static Command prepareHelpCommand(Ui ui, String arguments) {
-        return new IncorrectCommand(ErrorMessages.WRONG_HELP_FORMAT, ui);
+    private static Command prepareHelpCommand(Ui ui) {
+        return new HelpCommand(ui);
     }
 
     //@@author Cazh1
@@ -764,8 +769,10 @@ public class Parser implements ParserUtil {
 
         try {
             // To retrieve specific arguments from arguments
-            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM);
-            int dishQty = Integer.parseInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM));
+            String dishName = matcher.group(DISH_NAME_MATCHER_GROUP_NUM).trim();
+            int dishQty = parseQtyToInt(matcher.group(ORDER_QTY_MATCHER_GROUP_NUM).trim());
+
+            detectErrorPostDishNameParse(dishName, menu, false);
 
             Dish orderedDish = menu.getDishFromName(dishName);
             if (orderedDish == null) {
@@ -775,6 +782,10 @@ public class Parser implements ParserUtil {
             Order order = new Order(orderedDish, dishQty);
 
             return new AddOrderCommand(order, ui, pantry, orderList, menu);
+        } catch (ParserException e) {
+            return new IncorrectCommand(e.getMessage(), ui);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand(ErrorMessages.INVALID_INT_ORDER_QTY, ui);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_ADD_ORDER_FORMAT_MESSAGE
                     + AddOrderCommand.MESSAGE_USAGE + e.getMessage(), ui);
@@ -808,18 +819,44 @@ public class Parser implements ParserUtil {
         return new NextDayCommand(ui, sales, currentDate);
     }
 
+    //@@author DextheChik3n
+    /**
+     * Parses the quantity text string into integer and checks if the input is valid
+     *
+     * @param qtyText text that consist of the order dish quantity
+     * @return int value of the quantity
+     * @throws ParserException if the input string does not match the constraints
+     */
+    public static int parseQtyToInt(String qtyText) throws ParserException {
+        if (qtyText.isEmpty()) {
+            throw new ParserException(ErrorMessages.MISSING_ORDER_QTY);
+        }
+
+        int dishQty = Integer.parseInt(qtyText);
+
+        int maxDishQty = 10000;
+        int minDishQty = 1;
+
+        if (dishQty < minDishQty) {
+            throw new ParserException(ErrorMessages.BELOW_MIN_ORDER_QTY);
+        } else if (dishQty > maxDishQty) {
+            throw new ParserException(ErrorMessages.EXCEED_MAX_ORDER_QTY);
+        }
+
+        return dishQty;
+    }
+
     //@@author NaychiMin
     /**
      * Prepares a command to display all sales items.
      *
      * @param sale The Sales object containing sales data.
-     * @param menu The Menu object representing the cafe's menu.
      * @param ui   The Ui object for user interface interactions.
      * @return A ShowSalesCommand instance for viewing all sales items.
      */
-    private static Command prepareShowSales(Sales sale, Menu menu, Ui ui, String arguments) {
+    private static Command prepareShowSales(Sales sale, Ui ui, String arguments) {
         if (arguments.isEmpty()) {
-            return new ListTotalSalesCommand(sale, ui, menu);
+            return new ListTotalSalesCommand(sale, ui);
         } else {
             return new IncorrectCommand(ErrorMessages.WRONG_LIST_TOTAL_SALES_FORMAT, ui);
         }
@@ -832,10 +869,9 @@ public class Parser implements ParserUtil {
      * @param arguments The arguments containing the day for which sales are to be displayed.
      * @param ui        The Ui object for user interface interactions.
      * @param sales     The Sales object containing sales data.
-     * @param menu      The Menu object representing the cafe's menu.
      * @return A ShowSalesByDayCommand instance for viewing sales items on a specific day.
      */
-    private static Command prepareShowSalesByDay(String arguments, Ui ui, Sales sales, Menu menu) {
+    private static Command prepareShowSalesByDay(String arguments, Ui ui, Sales sales) {
         final Pattern showSaleByDayPattern = Pattern.compile(SHOW_SALE_BY_DAY_ARGUMENT_STRING);
         Matcher matcher = showSaleByDayPattern.matcher(arguments.trim());
 
@@ -850,7 +886,7 @@ public class Parser implements ParserUtil {
             if (day < 0) {
                 throw new Exception();
             }
-            return new ListSaleByDayCommand(day, ui, sales, menu);
+            return new ListSaleByDayCommand(day, ui, sales);
         } catch (Exception e) {
             return new IncorrectCommand(ErrorMessages.INVALID_DAY_FORMAT, ui);
         }

@@ -115,10 +115,10 @@ public class PantryTest {
         System.setOut(originalOut);
 
         String expectedOutput = "Dish: Chicken Rice"
-                + "Available Dishes: 2"
+                + "Available quantity: 2"
                 + Messages.LINE_STRING
                 + "Dish: Chicken Chop"
-                + "Available Dishes: 2" ;
+                + "Available quantity: 2" ;
 
         String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();
         String normalizedActual = actualOutput.toLowerCase().replaceAll("\\s+", "").trim();

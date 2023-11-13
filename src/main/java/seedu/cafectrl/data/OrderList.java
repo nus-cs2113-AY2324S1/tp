@@ -13,7 +13,6 @@ import java.util.logging.Logger;
  */
 public class OrderList {
     private static final DecimalFormat dollarValue = new DecimalFormat("0.00");
-    private static final String HEADER_FORMAT = "%-20s %-10s %-20s\n";
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private ArrayList<Order> orderList;
     private float totalOrderListCost;

@@ -26,11 +26,35 @@ import java.util.logging.Logger;
  * Pantry stock, and OrderList, allowing retrieval of data stored in a file.
  */
 public class Decoder {
-
+    private static final Ui ui = new Ui();
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private static final String DIVIDER = "\\| ";
     private static final String INGREDIENT_DIVIDER = " - ";
-    private static final Ui ui = new Ui();
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+
+    /** For menu decoder */
+    private static final int MAX_INGREDIENTS_STRING_ARRAY_SIZE = 1;
+    private static final int DISH_NAME_INDEX_DISH_ARRAY = 0;
+    private static final int DISH_PRICE_INDEX_DISH_ARRAY = 1;
+    private static final int DISH_INGREDIENT_START_INDEX = 2;
+    private static final int NAME_INDEX_INGREDIENT_ARRAY = 0;
+    private static final int QTY_INDEX_INGREDIENT_ARRAY = 1;
+    private static final int UNIT_INDEX_INGREDIENT_ARRAY = 2;
+
+    /** for stock pantry decoder */
+    private static final int NAME_INDEX_PANTRY = 0;
+    private static final int QTY_INDEX_PANTRY = 1;
+    private static final int UNIT_INDEX_PANTRY = 2;
+    private static final int MAX_PANTRY_ARRAY_SIZE = 3;
+
+    /** for sales decoder */
+    private static final int DAY_INDEX_SALES = 0;
+    private static final int DISH_NAME_INDEX_SALES = 1;
+    private static final int QTY_INDEX_SALES = 2;
+    private static final int DISH_PRICE_INDEX_SALES = 3;
+    private static final int STATUS_INDEX_SALES = 4;
+    private static final String TRUE_STRING = "true";
+    private static final String FALSE_STRING = "false";
+    private static final int MIN_DISH_PRICE = 0;
 
     //@@author ShaniceTang
     /**
@@ -61,13 +85,20 @@ public class Decoder {
         String dishName = "";
         try {
             String[] dishStringArray = dishString.split(DIVIDER);
-            dishName = dishStringArray[0].trim();
+            dishName = dishStringArray[DISH_NAME_INDEX_DISH_ARRAY].trim().toLowerCase();
+
             checkNameValidity(dishName);
-            float dishPrice = Float.parseFloat(dishStringArray[1]);
-            String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
+
+            float dishPrice = Parser.parsePriceToFloat(dishStringArray[DISH_PRICE_INDEX_DISH_ARRAY]);
+            String[] ingredientStringArray = Arrays.copyOfRange(
+                    dishStringArray, DISH_INGREDIENT_START_INDEX, dishStringArray.length);
             ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
+
             menuDishList.add(new Dish(dishName, ingredientsList, dishPrice));
         } catch (ParserException e) {
+            logger.log(Level.WARNING, "Dish has invalid price: " + e.getMessage(), e);
+            ui.showToUser(ErrorMessages.INVALID_MENU_DATA + dishString);
+        } catch (RuntimeException e) {
             logger.log(Level.WARNING, "Dish has no ingredients: " + e.getMessage(), e);
             ui.showToUser(e.getMessage() + dishName);
         } catch (Exception e) {
@@ -91,19 +122,23 @@ public class Decoder {
     private static ArrayList<Ingredient> decodeIngredientData(String[] ingredientsStringArray) throws Exception {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
-        if (ingredientsStringArray.length < 1) {
-            throw new ParserException(ErrorMessages.MISSING_INGREDIENT_MENU_DATA);
+        if (ingredientsStringArray.length < MAX_INGREDIENTS_STRING_ARRAY_SIZE) {
+            throw new RuntimeException(ErrorMessages.MISSING_INGREDIENT_MENU_DATA);
         }
 
         for(String ingredientString : ingredientsStringArray) {
             logger.info("Ingredient to decode: " + ingredientString);
+
             String[] array = ingredientString.split(INGREDIENT_DIVIDER);
-            String name = array[0].trim();
+            String name = array[NAME_INDEX_INGREDIENT_ARRAY].trim().toLowerCase();
             checkNameValidity(name);
-            int qty = Integer.parseInt(array[1].trim());
+
+            int qty = Integer.parseInt(array[QTY_INDEX_INGREDIENT_ARRAY].trim());
             checkQtyValidity(qty);
-            String unit = array[2].trim();
+
+            String unit = array[UNIT_INDEX_INGREDIENT_ARRAY].trim();
             checkUnitValidity(unit);
+
             ingredientList.add(new Ingredient(name, qty, unit));
         }
         return ingredientList;
@@ -143,9 +178,9 @@ public class Decoder {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
                 continue;
             }
-            String ingredientName = decodedData[0].trim();
-            String qtyText = decodedData[1].trim();
-            String unit = decodedData[2].trim();
+            String ingredientName = decodedData[NAME_INDEX_PANTRY].trim().toLowerCase();
+            String qtyText = decodedData[QTY_INDEX_PANTRY].trim();
+            String unit = decodedData[UNIT_INDEX_PANTRY].trim();
 
             // Check whether qty is an integer
             int qty;
@@ -197,11 +232,11 @@ public class Decoder {
      * @return true if the format is correct, false otherwise
      */
     private static boolean isValidPantryStockFormat(String[] decodedPantryStock) {
-        if (decodedPantryStock.length != 3) {
+        if (decodedPantryStock.length != MAX_PANTRY_ARRAY_SIZE) {
             return false;
         } else {
             try {
-                Integer.parseInt(decodedPantryStock[1].trim());
+                Integer.parseInt(decodedPantryStock[QTY_INDEX_PANTRY].trim());
             } catch (NumberFormatException e) {
                 return false;
             }
@@ -251,8 +286,8 @@ public class Decoder {
     private static void decodeSalesData(String orderLine, ArrayList<OrderList> orderLists, Menu menu) {
         try {
             String[] orderData = orderLine.split(DIVIDER);
-            int day = Integer.parseInt(orderData[0].trim()) - Sales.DAY_DISPLAY_OFFSET;
-            String dishName = orderData[1].trim();
+            int day = Integer.parseInt(orderData[DAY_INDEX_SALES].trim()) - Sales.DAY_DISPLAY_OFFSET;
+            String dishName = orderData[DISH_NAME_INDEX_SALES].trim().toLowerCase();
 
             //@@author Cazh1
             //keeps track of the number of days cafe has been operating for
@@ -262,13 +297,15 @@ public class Decoder {
             }
             //@@author
 
-            int quantity = Integer.parseInt(orderData[2].trim());
-            float decodedDishPrice = Float.parseFloat(orderData[3].trim());
-            String completeStatus = orderData[4].trim();
+            int quantity = Integer.parseInt(orderData[QTY_INDEX_SALES].trim());
+            float decodedDishPrice = Float.parseFloat(orderData[DISH_PRICE_INDEX_SALES].trim());
+            String completeStatus = orderData[STATUS_INDEX_SALES].trim();
             float totalOrderCost = quantity * decodedDishPrice;
 
             checkNameValidity(dishName);
-            boolean isDataAccurate = isCompleteStatusAccurate(orderLine, completeStatus);
+            boolean isDataAccurate = isCompleteStatusAccurate(orderLine, completeStatus)
+                    && isValidQty(orderLine, quantity)
+                    && isValidPrice(orderLine, decodedDishPrice);
             if (!isDataAccurate) {
                 return;
             }
@@ -286,11 +323,27 @@ public class Decoder {
     }
 
     private static boolean isCompleteStatusAccurate(String orderLine, String completeStatus) {
-        if (completeStatus.equalsIgnoreCase("true")
-                || completeStatus.equalsIgnoreCase("false")) {
+        if (completeStatus.equalsIgnoreCase(TRUE_STRING)
+                || completeStatus.equalsIgnoreCase(FALSE_STRING)) {
             return true;
         }
         ui.showToUser(ErrorMessages.INVALID_ORDER_STATUS + orderLine);
+        return false;
+    }
+
+    private static boolean isValidPrice(String orderLine, Float decodedDishPrice) {
+        if (decodedDishPrice >= MIN_DISH_PRICE) {
+            return true;
+        }
+        ui.showToUser(ErrorMessages.INVALID_DISH_PRICE + orderLine);
+        return false;
+    }
+
+    private static boolean isValidQty(String orderLine, int quantity) {
+        if (quantity > 0) {
+            return true;
+        }
+        ui.showToUser(ErrorMessages.INVALID_ORDER_QTY + orderLine);
         return false;
     }
 

@@ -28,8 +28,8 @@ class AddOrderCommandTest {
         ingredients2.add(new Ingredient("rice", 50, "g"));
 
         ArrayList<Dish> menuItems = new ArrayList<>();
-        Dish dishChickenRice = new Dish("Chicken Rice", ingredients, 2.50F);
-        Dish dishChickenCurry = new Dish("Chicken Curry", ingredients2, 4.30F);
+        Dish dishChickenRice = new Dish("chicken rice", ingredients, 2.50F);
+        Dish dishChickenCurry = new Dish("chicken curry", ingredients2, 4.30F);
         menuItems.add(dishChickenRice);
         menuItems.add(dishChickenCurry);
         Menu menu = new Menu(menuItems);
@@ -63,11 +63,12 @@ class AddOrderCommandTest {
                 + "Total order cost: $5.00"
                 + Messages.LINE_STRING
                 + Messages.AVAILABLE_DISHES
+                + Messages.EQUAL_LINE_STRING
                 + "Dish: chicken rice"
-                + "Available Dishes: 8"
+                + "Available quantity: 8"
                 + Messages.LINE_STRING
                 + "Dish: chicken curry"
-                + "Available Dishes: 4";
+                + "Available quantity: 4";
 
         String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();
         String normalizedActual = actualOutput.toLowerCase().replaceAll("\\s+", "").trim();

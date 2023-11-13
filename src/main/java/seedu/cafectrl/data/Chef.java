@@ -6,7 +6,6 @@ import seedu.cafectrl.ui.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class Chef {
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Order order;

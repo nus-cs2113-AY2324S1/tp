@@ -19,6 +19,11 @@ import java.util.logging.Logger;
  * Handles loading and saving data for menu, orderList, pantryStock
  */
 public class Storage {
+    private static final int INDEX_OFFSET_VALUE = 1;
+    private static final String HASH_REGEX_1 = "^[0-9]+$";
+    private static final String HASH_REGEX_2 = "^-[0-9]+$";
+    private static final String HASH_REGEX_3 = "^0{2,}$";
+    private static final String ENCODE_DELIMITER = ", ";
 
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     protected FileManager fileManager;
@@ -29,7 +34,6 @@ public class Storage {
     private boolean isPantryStockTampered = false;
     private boolean isHashStringTampered = false;
     private boolean isTamperedMessagePrinted = false;
-
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
@@ -49,12 +53,12 @@ public class Storage {
      */
     private boolean isFileCorrupted(ArrayList<String> encodedStringArrayList) {
         //Hash string is stored as last in the ArrayList
-        int lastIndex = encodedStringArrayList.size() - 1;
+        int lastIndex = encodedStringArrayList.size() - INDEX_OFFSET_VALUE;
         String hashString = encodedStringArrayList.get(lastIndex);
 
         //Checks if the saved Hash is abnormal
-        if (((!hashString.matches("^[0-9]+$")) && (!hashString.matches("^-[0-9]+$"))) ||
-                hashString.matches("^0{2,}$")) {
+        if (((!hashString.matches(HASH_REGEX_1)) && (!hashString.matches(HASH_REGEX_2))) ||
+                hashString.matches(HASH_REGEX_3)) {
             return true;
         }
 
@@ -64,7 +68,7 @@ public class Storage {
             encodedStringArrayList.remove(lastIndex);
 
             //Prepares String in same format as when encoding, generates Hash from the save file content
-            String encodedMenuAsString = String.join(", ", encodedStringArrayList).trim();
+            String encodedMenuAsString = String.join(ENCODE_DELIMITER, encodedStringArrayList).trim();
             int encodedMenuHash = encodedMenuAsString.hashCode();
 
             //Checks if the generated Hash matches the saved Hash
@@ -73,6 +77,7 @@ public class Storage {
             }
         } catch (Exception e) {
             isHashStringTampered = true;
+            logger.log(Level.INFO, "Tampered Hash string");
             return true;
         }
         return false;
@@ -91,7 +96,7 @@ public class Storage {
             isTamperedMessagePrinted = true;
         }
         if (isHashStringTampered) {
-            ui.showToUser(Messages.HASH_STRING_TAMPERED, Messages.HASH_STRING_MESSAGE, "");
+            ui.showToUser(Messages.HASH_STRING_TAMPERED, Messages.HASH_STRING_MESSAGE);
             isHashStringTampered = false;
         }
         if (isMenuTampered) {
@@ -154,7 +159,7 @@ public class Storage {
      */
     public Pantry loadPantryStock() {
         try {
-            ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
+            ArrayList<String> encodedPantryStock = fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
             if (!isFileEmpty(encodedPantryStock) && isFileCorrupted(encodedPantryStock) && isHashingEnabled) {
                 isPantryStockTampered = true;
                 logger.log(Level.INFO, "Tampered Pantry Stock file");
@@ -177,7 +182,7 @@ public class Storage {
      * @throws IOException if the file is not found in the specified file path
      */
     private void savePantryStock(Pantry pantry) throws IOException {
-        this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
+        fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
     }
 
     //@@author NaychiMin
@@ -214,7 +219,7 @@ public class Storage {
      */
     private void saveOrderList(Sales sales) throws IOException {
         logger.info("Saving orders...");
-        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
+        fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
 
     //@@author ziyi105

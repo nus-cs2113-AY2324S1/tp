@@ -1,7 +1,6 @@
 package seedu.cafectrl.ui;
 
 import seedu.cafectrl.command.EditPriceCommand;
-import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.ListTotalSalesCommand;
 
 public class ErrorMessages {
@@ -36,15 +35,11 @@ public class ErrorMessages {
             + "for list ingredients command.";
     public static final String MISSING_ARGUMENT_FOR_DELETE = "Error: Missing arguments "
             + "for delete command.";
-    public static final String INVALID_ARGUMENT_FOR_BUY_INGREDIENT = "Error: Invalid arguments "
-            + "for buy ingredient command.";
     public static final String WRONG_DISH_INDEX_TYPE_FOR_EDIT_PRICE = "Something is wrong with "
             + "the arguments! The types for dish and price are integer and float respectively, \n"
             + "and do not type in duplicated arguments at one time!";
-    public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: "
-            + "Invalid price!\n"
-            + "Price must be a float and within the range of "
-            + "0.00 to 1000000 with up to 2 decimal place. \n"
+    public static final String WRONG_PRICE_TYPE_FOR_EDIT_PRICE = "Error: Invalid price!\n"
+            + "Price must be a float and within the range of 0.00 to 1000000.00 with up to 2 decimal place. \n"
             + "Special characters such as $ are not allowed!";
     public static final String UNKNOWN_COMMAND_MESSAGE = "Error: Unknown command. "
             + "Type 'help' to view the accepted list of commands";
@@ -75,7 +70,7 @@ public class ErrorMessages {
             + "for the 'day' field!";
     public static final String EDIT_SAME_PRICE = "New price is exactly the same as old price, "
             + "is that what you want?";
-    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer(>0) "
+    public static final String INVALID_DISH_INDEX_TO_LIST = "Please enter a valid integer (>0) "
             + "for the 'index' field.";
     public static final String UNLISTED_DISH = "Oh no, this dish does not exist! \n"
             + "Please run the command list_menu to view the existing dishes.";
@@ -98,16 +93,21 @@ public class ErrorMessages {
             + "for the add command input";
     public static final String NULL_STRING_IN_REPEAT_ARGUMENT = "Null string detected in isRepeatedArgument function";
     public static final String INVALID_SALES_DATA = "orders.txt: Invalid format, this order will be removed -> ";
-    public static final String INVALID_ORDER_DATA = "orders.txt: Dish is not in current menu, "
-            + "this order will be removed -> ";
     public static final String INVALID_ORDER_STATUS = "orders.txt: Invalid status, this order will be removed -> ";
-    public static final String INACCURATE_ORDER_COST_DATA = "orders.txt: The total order cost of this order -> \"%s\" "
-            + "is inaccurate and will hence be updated from %.2f to %.2f instead.";
-    public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
-            + HelpCommand.MESSAGE_USAGE;
+    public static final String INVALID_ORDER_QTY = "orders.txt: Invalid quantity (order quantity has to be more than 0)"
+            + ", this order will be removed -> ";
+    public static final String INVALID_DISH_PRICE = "orders.txt: Invalid dish price, this order will be removed -> ";
     public static final String WRONG_LIST_TOTAL_SALES_FORMAT = "Invalid list_total_sales command format!\n"
             + ListTotalSalesCommand.MESSAGE_USAGE;
     public static final String MISSING_FILEPATH = "Error in FileManager: No File Path entered";
     public static final String MISSING_INGREDIENT_MENU_DATA = "menu.txt: Missing ingredients, "
             + "this dish will be removed -> ";
+    public static final String DISH_INDEX_NOT_INT = "Sorry! Dish index has to be an int!";
+    public static final String EXCEED_MAX_ORDER_QTY = "Order quantity too high! "
+            + "(order quantity has to be between 1 - 10000)";
+    public static final String BELOW_MIN_ORDER_QTY = "Order quantity cannot be less than 1! "
+            + "(order quantity has to be between 1 - 10000)";
+    public static final String MISSING_ORDER_QTY = "Seems like you forgot to add the order quantity";
+    public static final String INVALID_INT_ORDER_QTY = "Order quantity is invalid! "
+            + "(order quantity has to be between 1 - 10000)";
 }
