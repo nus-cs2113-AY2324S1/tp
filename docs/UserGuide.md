@@ -200,7 +200,7 @@ Example: `edit_price index/1 price/4.50`
 Output:
 ```
 Price modified for the following dish: 
-Chicken rice - $4.50
+chicken rice $4.50
 ```
 
 <!---@@author Cazh1--->
@@ -371,7 +371,7 @@ Output:
 | Dish Name                              |  Dish Qty    |  Total Cost Price |
 +----------------------------------------+--------------+-------------------+
 | chicken chop                           | 2            | 4.00              |
-| chicken sandwhich                      | 2            | 6.00              |
+| chicken sandwich                       | 2            | 6.00              |
 | chicken noodles                        | 1            | 2.00              |
 +---------------------------------------------------------------------------+
 | Total for day:                                        | $12.00            |
