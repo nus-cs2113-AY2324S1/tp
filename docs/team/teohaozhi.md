@@ -42,7 +42,7 @@ GUI apps.
      [listVendors Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#7-listvendors-command)
  * UML Diagrams
    * [Architecture Diagram under Design & Implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/Architecture_Diagram.png),[Login System Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/StockerToLoginSystem.png),
-     [SaveDrugs Command Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveCommandDiagram.png)  
+     [SaveDrugs Command Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveDrugsCommandDiagram.png)  
 
 -**Contributions to team-based tasks**
  * Set up GitHub team org/repo
