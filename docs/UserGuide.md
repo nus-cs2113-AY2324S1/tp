@@ -24,6 +24,7 @@ You should see the welcome message.
 Please click [here](#first-time-users) for more details.
 7. The application is now ready for you to use! 
 Type `help` to see a list of commands that you will be able to use in the application.
+8. Please follow the format given in the user guide. If the format is `bmi`, just use `bmi` and not `BMI`.
 
 
 ## Features 
@@ -81,7 +82,7 @@ BMI: 21.60
 ____________________________________________________________
 
 ```
-**Note:** adding a space after each keyword is not accepted.
+**Note:** Adding a space after each keyword is not accepted.
 
 ### Viewing help guide: `help`
 Shows the list of commands you can use.
@@ -129,7 +130,6 @@ Gender: Male
 Daily calorie limit: 1500kcal
 BMI: 24.22
 ```
-
 
 ### Viewing your profile: `viewprofile`
 Lists all profile settings and details.
@@ -437,7 +437,7 @@ I've deleted the following step entry:
 [S] 100 steps (2023-10-02)
 ```
 
-### Calculating the total number of steps on a specific date: `totalsteps`
+### Viewing the total number of steps on a specific date: `totalsteps`
 Calculates the total number of steps on a specific date and shows to user.
 
 **Format**
@@ -470,7 +470,7 @@ These are the steps you have done:
 2.[S] 100 steps (2023-10-02)
 ```
 
-### Getting a suggestion based on the steps walked: `viewsteps`
+### Getting a suggestion based on the steps walked: `getstepssuggestion`
 This will give you a suggestion on how many steps you need to walk in order to reach your daily calorie goal.
 This looks at meeting your calorie goal through walking only.
 
