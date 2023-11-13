@@ -365,6 +365,14 @@ caloriesburnt 2023-11-04
 Total calories burnt on 2023-11-04: 230kcal
 ```
 
+### Check the ideal weight range given current height: `checkrecommendedweight`
+Allows the user to check the ideal weight range given their current height. This is calculate based
+on a standard formula.
+
+**Example of usage**
+```
+checkrecommendedweight
+```
 
 ### Adding steps: `addsteps`
 Allows user to add their steps walked for a particular day.
@@ -384,7 +392,6 @@ addsteps 2000 d/2023-10-23
 I've added the following steps:
 [S] 2000 steps (2023-10-23)
 ```
-
 
 ### Deleting a step entry: `deletesteps`
 Allows user to delete a step entry they have added.
