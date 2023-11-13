@@ -1,4 +1,4 @@
-mT# Developer Guide
+# Developer Guide
 
 ## Acknowledgements
 
