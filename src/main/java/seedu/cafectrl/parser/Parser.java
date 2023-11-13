@@ -736,11 +736,7 @@ public class Parser implements ParserUtil {
 
     //@@author ziyi105
     private static Command prepareHelpCommand(Ui ui, String arguments) {
-        if (arguments.isEmpty()) {
-            return new HelpCommand(ui);
-        } else {
-            return new IncorrectCommand(ErrorMessages.WRONG_HELP_FORMAT, ui);
-        }
+        return new IncorrectCommand(ErrorMessages.WRONG_HELP_FORMAT, ui);
     }
 
     //@@author Cazh1
