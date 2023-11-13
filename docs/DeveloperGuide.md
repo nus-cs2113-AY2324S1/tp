@@ -22,6 +22,8 @@ codes](https://github.com/se-edu/addressbook-level2)
 3. For the developer's guide, we have referenced the [developer's guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) from AddressBook
 level-3
 
+<div style="page-break-after: always"></div>
+
 # Design & implementation
 
 ## Overall Architecture
@@ -55,9 +57,12 @@ these methods and attributes directly control the critical flow and operation of
 
 ![](UML/Images/overallClassInteraction.png)<br/><br/>
 
+<div style="page-break-after: always"></div>
+
 ## Application Lifecycle
 
 ![](UML/Images/applicationLifecycle.png)
+
 
 The program begins with the `run()` call to `QuizHub` class.
 
@@ -175,6 +180,9 @@ Methods of this type are helper methods created to handle any exceptions that ca
 Typically, there is one `handle` method for every `extract` method, designed to catch exceptions raised during the
 extraction of information from each segment of the user input.
 
+<div style="page-break-after: always"></div>
+
+
 ## Command Components
 
 The following is a detailed sequence diagram demonstrating how commands are executed after the parsing stage.
@@ -256,7 +264,7 @@ to add a Question object to the corresponding QuestionList object
 using the `addToQuestionList` method. This method will analyse the arguments above
 and add the Question to the appropriate list.
 
-![](UML/Images/commandAddState.png)
+<img src="UML/Images/commandAddState.png" alt="short1" width="350" />
 
 #### Expected invalid commands for Short Command 
 - `short What is the capital of France?`
@@ -408,9 +416,9 @@ The Command first invokes the QuestionList.viewQuestionByIndex method to determi
 the index refers to a valid question, failing which it will return an error message.
 
 Otherwise, it will then invoke the QuestionList.deleteQuestionByIndex method to remove
-the question from the QuestionList. 
+the question from the QuestionList.
 
-![](UML/Images/commandDeleteQuestion.png)
+<img src="UML/Images/commandDeleteQuestion.png" alt="delete1" width="250" />
 
 Afterward, the storage is updated to reflect the newest QuestionList.
 
@@ -530,8 +538,6 @@ The class uses the following components from the QuizHub application:
 Upon execution, the `CommandEdit` class first checks that both `editField` and `newValue` are not null. It then calls `editQuestionByIndex` on the `QuestionList` to perform the actual edit. After a successful edit, a message is displayed to the user, and the `Storage` component is used to ensure the edited question's new state is saved.
 
 #### Implementation of Edit Command
-
-![commandEditStages.png](UML/Images/commandEditStages.png)
 
 ![commandEditObjectDiagram.png](UML/Images/commandEditObjectDiagram.png)
 ![commandEditObjectDiagram2.png](UML/Images/commandEditObjectDiagram2.png)
@@ -851,7 +857,6 @@ This feature allows for the categorization of questions by difficulty, aiding in
 - `markdiff [question number] /[question difficulty]`
 
 #### Class Structure of Markdiff Command
-![commandMarkDiffClass.png](UML/Images/commandMarkDiffClass.png)
 
 The `CommandMarkDifficulty` class is responsible for the command operation that marks a question with a specified difficulty level in the QuizHub application. It extends the base `Command` class and includes specific attributes and methods for the marking process.
 
@@ -937,6 +942,9 @@ Command Exit is responsible for exiting the program
 
 <hr>
 
+<div style="page-break-after: always"></div>
+
+
 ## Storage Component
 
 The Storage class is a critical component of the QuizHub application, responsible for managing the storage, retrieval, and updating of question data. It represents a hard disk storage system for storing, reading, and updating question data. It interacts with question data in a file specified by the user and integrates with the `QuestionList` class for effective storage and retrieval of questions.
@@ -985,6 +993,8 @@ Apart from the main `updateData()` method, it involves the use of 2 other helper
 
 Upon exiting the program, the `Ui` class will call the `updateData()` method and passing in the current `QuestionList` of the program. Within the method, the `writeToFile()` helper method is first called to determine whether texts are to replace existing content of the file or to be appended at the back. Then, each question is stored in the appropriate format into the destination file using the method `storeQuestionToFile()` which parses a `Question` object into the correct string format for storage.
 
+<div style="page-break-after: always"></div>
+
 ## UI Component
 
 The UI class in the QuizHub application is responsible for handling the user interface interactions in a command-line interface (CLI). It provides methods for displaying messages or questions as well as getting user
@@ -1020,6 +1030,8 @@ Finally, the `displayClosingMessage()` method is called to display a farewell me
 ![](UML/Images/uiDisplayQuiz.png)
 
 The `Ui` class also has a `displayQuestion(Question question, int currentQuestionIndex, int totalQuestions)` method, which is used to render a question from the list of stored questions in the specific format and prompt the user for an answer when a `CommandStart` is executed to signal the start of a quiz. This method will be called in a loop for each question until the end of the list of questions. For each question, the `Ui` class will display `"Correct!"` if the answer matches that of the correct answer using the  `displayMessage()` method, or display `"Wrong!"` along with the correct answer by calling the helper method `displayCorrectAnswer()`. At the end of the quiz, the `displayFinalScore()` method will be called to display the final score obtained by the user in that particular quiz.
+
+<div style="page-break-after: always"></div>
 
 # Product scope
 
