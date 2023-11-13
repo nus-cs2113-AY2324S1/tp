@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static seedu.cafectrl.ui.Ui.OFFSET_LIST_INDEX;
+
 //@@author ShaniceTang
 /**
  * The BuyIngredientCommand class represents a command to buy ingredients and add them to the pantry.
@@ -73,7 +75,7 @@ public class BuyIngredientCommand extends Command {
             ingredients.set(i, ingredient);
         }
 
-        for (int i = ingredients.size() - ui.OFFSET_LIST_INDEX; i >= finalIndex; i--) {
+        for (int i = ingredients.size() - OFFSET_LIST_INDEX; i >= finalIndex; i--) {
             Ingredient ingredient = ingredients.get(i);
             buildBuyIngredientMessage(ingredient);
         }

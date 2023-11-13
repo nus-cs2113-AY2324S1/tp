@@ -74,7 +74,7 @@ public class ListTotalSalesCommandCommandTest {
         System.setOut(consoleStream);
 
         ListTotalSalesCommand listTotalSalesCommand =
-                new ListTotalSalesCommand(sales, ui, menu);
+                new ListTotalSalesCommand(sales, ui);
         listTotalSalesCommand.execute();
 
         String actualOutput = baos.toString().trim();
@@ -127,7 +127,7 @@ public class ListTotalSalesCommandCommandTest {
         System.setOut(consoleStream);
 
         ListTotalSalesCommand listTotalSalesCommand =
-                new ListTotalSalesCommand(sales, ui, menu);
+                new ListTotalSalesCommand(sales, ui);
         listTotalSalesCommand.execute();
 
         String actualOutput = baos.toString().trim();

@@ -1,7 +1,6 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.CafeCtrl;
-import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.ErrorMessages;
 import seedu.cafectrl.ui.Ui;
@@ -19,13 +18,11 @@ public class ListSaleByDayCommand extends Command {
     private final int day;
     private final Ui ui;
     private final Sales sales;
-    private final Menu menu;
 
-    public ListSaleByDayCommand(int day, Ui ui, Sales sales, Menu menu) {
+    public ListSaleByDayCommand(int day, Ui ui, Sales sales) {
         this.day = day;
         this.ui = ui;
         this.sales = sales;
-        this.menu = menu;
     }
 
     @Override

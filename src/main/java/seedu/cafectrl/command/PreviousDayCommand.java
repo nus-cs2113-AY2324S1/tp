@@ -6,6 +6,7 @@ import seedu.cafectrl.ui.Ui;
 
 import java.util.logging.Logger;
 
+//@@author Cazh1
 public class PreviousDayCommand extends Command{
     public static final String COMMAND_WORD = "previous_day";
     public static final String MESSAGE_USAGE = "To go back to previous day:\n" + COMMAND_WORD;

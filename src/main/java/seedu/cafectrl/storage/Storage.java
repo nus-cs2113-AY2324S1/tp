@@ -73,6 +73,7 @@ public class Storage {
             }
         } catch (Exception e) {
             isHashStringTampered = true;
+            logger.log(Level.INFO, "Tampered Hash string");
             return true;
         }
         return false;

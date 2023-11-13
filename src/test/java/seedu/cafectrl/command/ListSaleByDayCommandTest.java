@@ -69,7 +69,7 @@ public class ListSaleByDayCommandTest {
 
         int dayToListSale = 1;
         ListSaleByDayCommand listSaleByDayCommand =
-                new ListSaleByDayCommand(dayToListSale, ui, sales, menu);
+                new ListSaleByDayCommand(dayToListSale, ui, sales);
         listSaleByDayCommand.execute();
 
         String actualOutput = baos.toString().trim();
@@ -130,7 +130,7 @@ public class ListSaleByDayCommandTest {
 
         int dayToListSale = 200;
         ListSaleByDayCommand listSaleByDayCommand =
-                new ListSaleByDayCommand(dayToListSale, ui, sales, menu);
+                new ListSaleByDayCommand(dayToListSale, ui, sales);
         listSaleByDayCommand.execute();
 
         String actualOutput = baos.toString().trim();
@@ -184,7 +184,7 @@ public class ListSaleByDayCommandTest {
 
         int dayToListSale = 2;
         ListSaleByDayCommand listSaleByDayCommand =
-                new ListSaleByDayCommand(dayToListSale, ui, sales, menu);
+                new ListSaleByDayCommand(dayToListSale, ui, sales);
         listSaleByDayCommand.execute();
 
         String actualOutput = baos.toString().trim();
