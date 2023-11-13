@@ -58,6 +58,7 @@ public class Decoder {
         try {
             String[] dishStringArray = dishString.split(DIVIDER);
             String dishName = dishStringArray[0].trim();
+            checkNameValidity(dishName);
             float dishPrice = Float.parseFloat(dishStringArray[1]);
             String[] ingredientStringArray = Arrays.copyOfRange(dishStringArray, 2, dishStringArray.length);
             ArrayList<Ingredient> ingredientsList = decodeIngredientData(ingredientStringArray);
@@ -65,6 +66,12 @@ public class Decoder {
         } catch (Exception e) {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_MENU_DATA + dishString);
+        }
+    }
+
+    private static void checkNameValidity(String name) throws Exception {
+        if (Parser.isNameLengthInvalid(name) || name.isEmpty() || Parser.containsSpecialChar(name)) {
+            throw new Exception();
         }
     }
 
@@ -80,12 +87,20 @@ public class Decoder {
             logger.info("Ingredient to decode: " + ingredientString);
             String[] array = ingredientString.split(INGREDIENT_DIVIDER);
             String name = array[0].trim();
+            checkNameValidity(name);
             int qty = Integer.parseInt(array[1].trim());
+            checkQtyValidity(qty);
             String unit = array[2].trim();
             checkUnitValidity(unit);
             ingredientList.add(new Ingredient(name, qty, unit));
         }
         return ingredientList;
+    }
+
+    private static void checkQtyValidity(int qty) throws Exception {
+        if (Parser.isInvalidQty(qty)) {
+            throw new Exception();
+        }
     }
 
     private static void checkUnitValidity(String unit) throws Exception {
