@@ -1,29 +1,29 @@
-# User Guide
+# **User Guide**
 
-## Introduction
+## **Introduction**
 
 TaskLinker is a CLI-tool for helping university students memorize flashcards 
 and track their flashcard progress as well as general academic progress in 
 the courses they are taking.
 
-## Quick Start
+## **Quick Start**
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest jar from [the latest release on GitHub](https://github.com/AY2324S1-CS2113-F11-3/tp/releases).
 3. Run the jar file via `java -jar duke.jar`
 
-## Features
+## **Features**
 
-### Notes about the command format and sample output format:
+### **Notes about the command format and sample output format:**
 
-#### Command format
+#### **Command format**
 
 In the command format, words in UPPER_CASE are the parameters to be 
 supplied by the user. e.g. in `delete flashcard FLASHCARD_ID`, FLASHCARD_ID 
 is a parameter whose value shall be supplied by the user, e.g. as `delete 
 flashcard 3`.
 
-#### Sample output format
+#### **Sample output format**
 
 When sample output is provided, it is shown as a code block.
 
@@ -51,9 +51,9 @@ difficulty: 6
     Those were all your flashcards.
 </pre>
 
-### Flashcard-related features
+### **Flashcard-related features**
 
-#### General explanation of flashcards
+#### **General explanation of flashcards**
 
 Flashcards are two-sided cards that have a question on the front and its 
 answer on the back. They are used for revising information and helping with 
@@ -70,7 +70,7 @@ difficulty number, the harder). Every flashcard is identified by a unique id
 (Flashcard ids don't necessarily start at zero and are not necessarily
 consecutive. Don't worry, this is totally fine and the planned behavior!).
 
-#### Listing all flashcards: `list flashcards`
+#### **Listing all flashcards: `list flashcards`**
 
 Prints out a list of all flashcards that shows each flashcard's front text 
 and back text as well as its id and current difficulty level.
@@ -97,7 +97,7 @@ difficulty: 6
     Those were all your flashcards.
 </pre>
 
-#### Creating a new flashcard: `create flashcard`
+#### **Creating a new flashcard: `create flashcard`**
 
 Starts the process of creating a new flashcard.
 
@@ -120,7 +120,7 @@ Enter the back page text: <b>A kind of fruit</b>
 Success! Flashcard has been added to your collection.
 </pre>
 
-#### Reviewing your flashcards: `review flashcards`
+#### **Reviewing your flashcards: `review flashcards`**
 
 Starts the process of reviewing your flashcards.
 
@@ -177,7 +177,7 @@ you.
 If you ever want to quit the review process, simply input `q` or `quit` instead
 of pressing ENTER to reveal the back page.
 
-##### Command format and example of usage in beginner mode
+##### **Command format and example of usage in beginner mode**
 
 Command Format: `review flashcards`
 
@@ -209,7 +209,7 @@ Enter your command: <b>review flashcards</b>
     Success! You have ended this review session.
 </pre>
 
-##### Command format and example of usage in expert mode
+##### **Command format and example of usage in expert mode**
 
 Command Format: `review flashcards REVIEW_MODE` (where REVIEW_MODE has to be 
 either an `a` or a `b`)
@@ -242,7 +242,7 @@ Enter your command: <b>review flashcards b</b>
     Success! You have ended this review session.
 </pre>
 
-#### Deleting a flashcard: `delete flashcard`
+#### **Deleting a flashcard: `delete flashcard`**
 
 Starts the process of deleting a flashcard.
 
@@ -271,7 +271,7 @@ expert mode:
 If the id you provided was a valid id, the flashcard with that id is deleted; 
 otherwise, an error message is shown, and you are prompted to retry.
 
-##### Command format and example of usage in beginner mode
+##### **Command format and example of usage in beginner mode**
 
 Command format: `delete flashcard` 
 
@@ -282,7 +282,7 @@ Enter your command: <b>delete flashcard</b>
     Flashcard with id 2 has been successfully deleted.
 </pre>
 
-##### Command format and example of usage in expert mode
+##### **Command format and example of usage in expert mode**
 
 Command format: `delete flashcard FLASHCARD_ID` (where FLASHCARD_ID is the 
 id of the flashcard you want to delete)
@@ -294,7 +294,7 @@ Enter your command: <b>delete flashcard 34</b>
     No deletion has been performed. Please try again with a valid id.
 </pre>
 
-#### Deleting all flashcards: `delete all flashcards`
+#### **Deleting all flashcards: `delete all flashcards`**
 
 Deletes all flashcards currently stored by TaskLinker.
 
@@ -501,6 +501,10 @@ Every event and flashcard are automatically save after each command.
 **Q**: Are the flashcard and the calendar use different commands?
 
 **A**: Yes, they have different command based on their features.
+
+**Q**: How to exit the program?
+
+**A**: Enter "exit" for the command.
 
 ## Command Summary
 

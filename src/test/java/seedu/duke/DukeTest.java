@@ -81,7 +81,25 @@ class DukeTest {
 
 
     @Test
-    public void testCalendar() {
+    public void SampleTestCalendar() {
         assertTrue(true);
+    }
+
+    @Test
+    public void testCalendar_isResponsible_True() {
+        CalendarManager calendarManager = new CalendarManager(new Calendar(), new ArrayList<>());
+
+        assertTrue(calendarManager.isResponsible("add event"));
+        assertTrue(calendarManager.isResponsible("list events  "));
+        assertTrue(calendarManager.isResponsible("delete event"));
+    }
+
+    @Test
+    public void testCalendar_isResponsible_False() {
+        CalendarManager calendarManager = new CalendarManager(new Calendar(), new ArrayList<>());
+
+        assertFalse(calendarManager.isResponsible("add"));
+        assertFalse(calendarManager.isResponsible("hello"));
+        assertFalse(calendarManager.isResponsible("event"));
     }
 }
