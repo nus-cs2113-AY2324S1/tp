@@ -40,13 +40,15 @@ public class Ingredient {
 
     /**
      * Compare the name of this ingredient to the other ingredient
+     *
      * @param obj the other ingredient to be compared with
      * @return true if they have the same name, false otherwise
      */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Ingredient) {
-            return this.name.equals(((Ingredient) obj).name);
+            String otherName = ((Ingredient) obj).name;
+            return this.name.equals(otherName);
         }
         return false;
     }
