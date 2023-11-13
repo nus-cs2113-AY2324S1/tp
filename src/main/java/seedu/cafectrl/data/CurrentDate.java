@@ -10,21 +10,21 @@ public class CurrentDate {
     private int currentDay;
 
     public CurrentDate() {
-        currentDay = ZERO;
+        currentDay = DAY_BASE_NUMBER;
     }
     public CurrentDate(int day) {
-        currentDay = day - ONE;
+        currentDay = day - DAY_OFFSET;
     }
     public CurrentDate(Sales sales) {
         setDate(sales);
     }
 
     public void nextDay() {
-        currentDay += ONE;
+        currentDay += DAY_OFFSET;
     }
 
     public void previousDay() {
-        currentDay -= ONE;
+        currentDay -= DAY_OFFSET;
     }
 
     public int getCurrentDay() {
@@ -40,10 +40,10 @@ public class CurrentDate {
         ArrayList<OrderList> orderLists = sales.getOrderLists();
         int orderListsSize = orderLists.size();
 
-        if (orderListsSize > ZERO) {
-            currentDay = orderListsSize - ONE;
+        if (orderListsSize > MIN_ORDER_LIST_SIZE) {
+            currentDay = orderListsSize - ORDER_LIST_SIZE_OFFSET;
         } else {
-            currentDay = ZERO;
+            currentDay = DAY_BASE_NUMBER;
         }
     }
 }
