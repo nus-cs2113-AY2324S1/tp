@@ -6,6 +6,7 @@ import fittrack.command.AddWorkoutCommand;
 import fittrack.command.BmiCommand;
 import fittrack.command.CaloriesBurntCommand;
 import fittrack.command.CaloriesConsumedCommand;
+import fittrack.command.CalorieBalanceCommand;
 import fittrack.command.CheckRecommendedWeightCommand;
 import fittrack.command.Command;
 import fittrack.command.CommandResult;
@@ -41,7 +42,7 @@ public class CommandParser {
             "editprofile, viewprofile, bmi, checkrecommendedweight,\n" +
             "addmeal, deletemeal, viewmeal, findmeal, caloriesconsumed,\n" +
             "addworkout, deleteworkout, viewworkout, findworkout, caloriesburnt,\n" +
-            "addsteps, deletesteps, viewsteps, totalsteps";
+            "caloriebalance, addsteps, deletesteps, viewsteps, totalsteps, getstepssuggestion";
 
     private static final String WORD_CG = "word";
     private static final String ARGS_CG = "args";
@@ -98,6 +99,8 @@ public class CommandParser {
             return new BmiCommand(commandLine);
         case CaloriesConsumedCommand.COMMAND_WORD:
             return new CaloriesConsumedCommand(commandLine);
+        case CalorieBalanceCommand.COMMAND_WORD:
+            return new CalorieBalanceCommand(commandLine);
         case CheckRecommendedWeightCommand.COMMAND_WORD:
             return new CheckRecommendedWeightCommand(commandLine);
         case CaloriesBurntCommand.COMMAND_WORD:

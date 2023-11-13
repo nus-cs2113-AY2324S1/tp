@@ -66,9 +66,9 @@ Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTr
 
 The App consists of five components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-* [**`UI`**](#ui-component): The UI of the App.
+* **`UI`**: The UI of the App.
 * [**`Parser`**](#parser-component): Handles user input.
-* [**`Model`**](#data-component): Holds the data of the app in memory.
+* **`Model`**: Holds the data of the app in memory.
 * [**`Command`**](#command-component): The command executor.
 
 ### Storage Component
@@ -80,7 +80,7 @@ Storage load and save functions are written in [`Storage`](../src/main/java/fitt
 The sequence diagram of the code for loading the file contents into each class.
 
 ![Structure of Storage Save](images/StorageSave.svg)
-The sequence diagram of the code for saving data into file
+The sequence diagram of the code for saving meal list data into mealList.txt file
 
 The `Storage` component,
 * can save user profile data in text format and load it back
@@ -187,8 +187,8 @@ Meal is added to mealList...
 The added meal is then displayed to the user through the Ui
 
 
-The diagram below shows the class/sequence structure of the {add} mechanism:
-{Insert sequence or class diagram}
+The diagram below shows the class/sequence structure of the addmeal mechanism:
+![AddMeal Sequence Diagram](images/AddMealSequenceDiagram.svg)
 
 ### 2. Delete Function
 The delete function has three commands - `deletemeal`, `deleteworkout` and `deletesteps`. The three commands allows
@@ -224,8 +224,7 @@ Meal is deleted from mealList...
 The deleted meal is then displayed to the user through the Ui
 
 
-The diagram below shows the class/sequence structure of the {delete} mechanism:
-{Insert sequence or class diagram}
+The sequence diagram for deletemeal mechanism is shown [here](#command-component):
 
 ### 3. View Function
 The view function has four commands - `viewmeal`, `viewworkout`, `viewsteps` and `viewprofile`. The four commands allows
@@ -313,8 +312,8 @@ The diagram below shows the class/sequence structure of the {find} mechanism:
 
 *Step 3:*
 
-The diagram below shows the class/sequence structure of the {caloriesburnt/sum} mechanism:
-{Insert sequence or class diagram}
+The diagram below shows the class/sequence structure of the caloriebalance mechanism:
+![CalorieBalance Sequence Diagram](images/CalorieBalanceSequenceDiagram.svg)
 
 ### 6. Help Function
 {description}
@@ -450,7 +449,7 @@ BMI, ideal weight for their height and so on.
 
 ## Non-Functional Requirements
 
-- Should be OS agnostic as long as it runs Java 11
+- Should be OS diagnostic as long as it runs Java 11
 - Should be able to handle 1000+ workouts and meals
 - Does not require internet connection to run
 - Should be usable for an average typist.
