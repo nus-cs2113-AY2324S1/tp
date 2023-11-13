@@ -19,6 +19,15 @@ import java.util.StringJoiner;
 
 public class RecipeParser {
 
+    /**
+     * Validate the recipe id or the recipe title.
+     *
+     * @param recipes is a RecipeList of all recipes the user has
+     * @param input is the recipe title or recipe id
+     * @return the index of the recipe
+     * @throws EssenOutOfRangeException when the recipe id or recipe title does not exist
+     * @throws EssenFormatException when there is no input of recipe id or recipe title
+     */
     public static int getRecipeIndex(RecipeList recipes, String input)
             throws EssenOutOfRangeException, EssenFormatException {
         if (input.isEmpty()) {
@@ -34,32 +43,12 @@ public class RecipeParser {
             index = recipes.getIndexOfRecipe(input);
         }
 
-        if (!recipes.recipeExist(index)) {
+        if (!recipes.recipeExist(index) || index < 0) {
             System.out.println("Your recipe name or id does not exist or it is invalid.");
             throw new EssenOutOfRangeException();
         }
 
         return index;
-    }
-
-    /**
-     * Get a RecipeList with recipes from a recipe ID list
-     *
-     * @param recipeIdList a list of ids of recipes
-     * @param recipes all recipes the user has
-     * @return RecipeList containing of all recipes that correspond to the index in the recipe ID list
-     * @throws EssenOutOfRangeException when the ID in recipe ID list is invalid
-     */
-    public static RecipeList getRecipes(int[] recipeIdList, RecipeList recipes) throws EssenOutOfRangeException {
-        RecipeList allRecipes = new RecipeList();
-        for (int id : recipeIdList) {
-            if (!recipes.recipeExist(id)) {
-                System.out.println("Your recipe Id is wrong");
-                throw new EssenOutOfRangeException();
-            }
-            allRecipes.addRecipe(recipes.getRecipe(id));
-        }
-        return allRecipes;
     }
 
     /**
@@ -75,25 +64,6 @@ public class RecipeParser {
         System.arraycopy(recipeInputListTemp, 1, recipeInputList, 0, recipeInputList.length); //remove first space item
         return recipeInputList;
     }
-
-    /**
-     * To transform a string of input "r/... r/..." to an integer array such as [1, 4, ...]
-     *
-     * @param input is a String from the user
-     * @return an integer array consisting of index of recipes
-     */
-    public static int[] getRecipeIdList(String input) {
-        String[] recipeInputList = getPlannedRecipesString(input);
-        int[] recipeIdList = new int[recipeInputList.length];
-
-        String recipeString;
-        for (int i = 0; i < recipeInputList.length; i++) {
-            recipeString = recipeInputList[i].trim();
-            recipeIdList[i] = Integer.parseInt(recipeString) - 1;
-        }
-        return recipeIdList;
-    }
-
 
     /**
      * Check for errors within the plan command input by user
@@ -212,7 +182,7 @@ public class RecipeParser {
             Tag stepTag = Tag.valueOf(parsedStep[1].trim());
             int stepDuration = Integer.parseInt(parsedStep[2].trim());
 
-            if (stepDuration <= 0) {
+            if (stepDuration < 0) {
                 throw new EssenStorageFormatException();
             }
 
@@ -256,6 +226,13 @@ public class RecipeParser {
     }
 
 
+    /**
+     * To check if filter recipes contains "i/"
+     *
+     * @param input the filter recipe command input
+     * @return a String of the input stripped of whitespaces
+     * @throws EssenFormatException when "i/" is not found in input
+     */
     public static String parseFilterRecipeInput(String input) throws EssenFormatException {
         input = input.replace("recipe ", "");
         if (!input.contains("i/")) {
@@ -266,6 +243,7 @@ public class RecipeParser {
 
     /**
      * Parse duration of a step from user input to minutes
+     *
      * @param time duration of a step, in min/h
      * @return int duration in minutes
      * @throws EssenFormatException if unit of duration is not specified

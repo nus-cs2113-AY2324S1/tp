@@ -93,7 +93,7 @@ public class StorageTest {
     public void restoreSavedRecipes_invalidDataFormat_expectEmptyList() throws Exception {
         RecipeStorage recipeStorage = new RecipeStorage(DATA_INVALID_RECIPE_PATH);
         RecipeList recipes = new RecipeList(recipeStorage.restoreSavedData());
-
+        System.out.println(recipes.getRecipes().size());
         assertTrue(recipes.getRecipes().isEmpty());
     }
 

@@ -32,6 +32,9 @@ public class ExecuteRecipeCommand extends Command {
         Recipe recipe = null;
         try {
             recipe = this.getRecipe();
+            if (recipe == null) {
+                return;
+            }
         } catch (EssenNullInputException e) {
             e.handleException();
         }
@@ -67,8 +70,10 @@ public class ExecuteRecipeCommand extends Command {
         for (Ingredient ingredient: recipeIngredients.getIngredients()) {
             try {
                 // Decrease ingredient quantity in allIngredientsList
-                ingredient.setQuantity(-ingredient.getQuantity());
-                allIngredientsList.updateIngredient(ingredient);
+                Ingredient tempIngredient = new Ingredient(ingredient.getName(), ingredient.getQuantity(),
+                                                            ingredient.getUnit());
+                tempIngredient.setQuantity(-tempIngredient.getQuantity());
+                allIngredientsList.updateIngredient(tempIngredient);
             } catch (EssenFormatException e) {
                 e.handleException();
             }
