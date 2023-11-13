@@ -51,12 +51,12 @@ class FlashcardUi {
 }
 
 
-FlashcardComponent --> "1" FlashcardList : flashcardList
-FlashcardComponent --> "1" FlashcardCommandParser : parser
-FlashcardComponent --> "1" FlashcardUi : ui
+FlashcardComponent o--> "1" FlashcardList : flashcardList
+FlashcardComponent o--> "1" FlashcardCommandParser : parser
+FlashcardComponent o--> "1" FlashcardUi : ui
 
-FlashcardUi --> "1" FlashcardList : flashcardList
+FlashcardUi o--> "1" FlashcardList : flashcardList
 
-FlashcardList --> "*" Flashcard : flashcards
+FlashcardList o--> "*" Flashcard : flashcards
 
 @enduml

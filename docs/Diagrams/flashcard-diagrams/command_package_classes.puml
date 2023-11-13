@@ -1,24 +1,21 @@
 @startuml
 
-!theme plain
-top to bottom direction
-skinparam linetype ortho
+hide circle
+skinparam classAttributeIconSize 0
 
 class CreateFlashcardCommand
 class DeleteAllFlashcardsCommand
 class DeleteFlashcardCommand
-class DualFlashcardCommand {
-  # expertCommandLength: int
-  # syntaxString: String
-  # input: String
-  # beginnerCommandLength: int
+abstract class DualFlashcardCommand {
+  + execute(scanner: Scanner, flashcardList: FlashcardList): void
+  # {abstract} executeBeginnerMode(scanner: Scanner, flashcardList: FlashcardList): void
+  # {abstract} executeBeginnerMode(scanner: Scanner, flashcardList: FlashcardList): void
 }
-class FlashcardCommand
+abstract class FlashcardCommand {
+  + {abstract} execute(scanner: Scanner, flashcardList: FlashcardList): void
+}
 class ListFlashcardsCommand
-class StartReviewCommand {
-  - calendar: Calendar
-  - choices: ArrayList<String>
-}
+class StartReviewCommand
 class UnknownCommand
 
 CreateFlashcardCommand      -[#000082,plain]-^  FlashcardCommand
@@ -28,4 +25,5 @@ DualFlashcardCommand        -[#000082,plain]-^  FlashcardCommand
 ListFlashcardsCommand       -[#000082,plain]-^  FlashcardCommand
 StartReviewCommand          -[#000082,plain]-^  DualFlashcardCommand
 UnknownCommand              -[#000082,plain]-^  FlashcardCommand
+
 @enduml
