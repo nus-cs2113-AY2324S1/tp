@@ -30,12 +30,12 @@ Income and Expense values take up to 2 decimal places.
 
 Format:
 add income /de <description> /date <date> /amt [currency] <amount>
-add expense /cat <category> /type <type> /de <description> /date <date> /amt <amount>
+add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
 
 There are only 3 categories for expenses: Food, Transport, Utilities.
 There are 3 types associated with Food category: Breakfast, Lunch, Dinner, else it will default to OTHER.
 There are 4 types associated with Transport category: Bus, Train, Taxi, Fuel, else it will default to OTHER.
-There are 3 types associated with Food category: Breakfast, Lunch, Dinner, else it will default to OTHER.
+There are 3 types associated with Utilities category: Water, Electricity, Gas, else it will default to OTHER.
 ____________________________________________________________
 ____________________________________________________________
 Shows a full list of both the expenses and income created by the user.
@@ -76,16 +76,18 @@ Format: update exchange rate <supported_currency> <rate>
 ____________________________________________________________
 ____________________________________________________________
 Find an entry from the existing list of income/expenses.
+At least one of the optional fields must be provided.
 
 Format:
-find /t income /de [description] /date [date]
-find /t expense /cat [category] /de [description] /date [date]
+find /t income [/de description] [/date date]
+find /t expense [/cat category] [/de description] [/date date]
 ____________________________________________________________
 ____________________________________________________________
 Clearing all entries from the list of income/expenses.
 
 Format:
-clear incomes/expenses
+clear incomes
+clear expenses
 clear all
 ____________________________________________________________
 ____________________________________________________________
