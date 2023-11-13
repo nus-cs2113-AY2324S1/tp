@@ -89,7 +89,6 @@ public class Duke {
     private void exit() {
         ui.showGoodbyeMessage();
         try {
-            System.err.println(meals.size());
             DataManager.saveData(DataManager.convertToJson(meals));
         } catch (Exception exception) {
             ui.showToUser(exception.toString());
