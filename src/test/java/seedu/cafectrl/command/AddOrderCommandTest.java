@@ -63,11 +63,12 @@ class AddOrderCommandTest {
                 + "Total order cost: $5.00"
                 + Messages.LINE_STRING
                 + Messages.AVAILABLE_DISHES
+                + Messages.LINE_STRING
                 + "Dish: chicken rice"
-                + "Available Dishes: 8"
+                + "Available quantity: 8"
                 + Messages.LINE_STRING
                 + "Dish: chicken curry"
-                + "Available Dishes: 4";
+                + "Available quantity: 4";
 
         String normalizedExpected = expectedOutput.toLowerCase().replaceAll("\\s+", "").trim();
         String normalizedActual = actualOutput.toLowerCase().replaceAll("\\s+", "").trim();

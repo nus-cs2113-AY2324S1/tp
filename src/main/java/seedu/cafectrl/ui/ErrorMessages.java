@@ -101,8 +101,9 @@ public class ErrorMessages {
     public static final String INVALID_ORDER_DATA = "orders.txt: Dish is not in current menu, "
             + "this order will be removed -> ";
     public static final String INVALID_ORDER_STATUS = "orders.txt: Invalid status, this order will be removed -> ";
-    public static final String INACCURATE_ORDER_COST_DATA = "orders.txt: The total order cost of this order -> \"%s\" "
-            + "is inaccurate and will hence be updated from %.2f to %.2f instead.";
+    public static final String INVALID_ORDER_QTY = "orders.txt: Invalid quantity (order quantity has to be more than 0)"
+            + ", this order will be removed -> ";
+    public static final String INVALID_DISH_PRICE = "orders.txt: Invalid dish price, this order will be removed -> ";
     public static final String WRONG_HELP_FORMAT = "Invalid help command format!\n"
             + HelpCommand.MESSAGE_USAGE;
     public static final String WRONG_LIST_TOTAL_SALES_FORMAT = "Invalid list_total_sales command format!\n"

@@ -179,7 +179,7 @@ public class Ui {
     }
 
     public void showDishAvailability(int numberOfDishes){
-        showToUser("Available Dishes: " + numberOfDishes);
+        showToUser("Available quantity: " + numberOfDishes);
     }
 
     public void showNeededRestock(String ingredientName, int currentQuantity, String unit, int neededIngredient) {
@@ -281,6 +281,7 @@ public class Ui {
 
     public void showDishAvailabilityMessage() {
         showToUser(Messages.AVAILABLE_DISHES);
+        showToUser(Messages.LINE_STRING);
     }
     public void showPreviousDay() {
         showToUser(Messages.PREVIOUS_DAY_COMMAND_MESSAGE);
