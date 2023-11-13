@@ -66,3 +66,4 @@
     - Developer Guide:
         - Documented my added features to the developer guide.
         - Added documentation for the commands pertaining to the `Step` suite of commands which all inherit from the Command superclass to explain the functionality of the commands to another developer.
+        - Added sequence diagrams for some of the commands to explain the flow of the code.
