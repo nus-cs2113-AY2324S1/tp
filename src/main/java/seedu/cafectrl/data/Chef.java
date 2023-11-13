@@ -3,7 +3,6 @@ package seedu.cafectrl.data;
 import seedu.cafectrl.CafeCtrl;
 import seedu.cafectrl.ui.Ui;
 
-import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

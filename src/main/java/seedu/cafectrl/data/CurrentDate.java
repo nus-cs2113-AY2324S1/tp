@@ -3,8 +3,8 @@ package seedu.cafectrl.data;
 import java.util.ArrayList;
 
 public class CurrentDate {
-    private final static int ZERO = 0;
-    private final static int ONE = 1;
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
     private int currentDay;
 
     public CurrentDate() {

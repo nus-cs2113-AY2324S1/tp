@@ -19,10 +19,10 @@ public class EditPriceCommand extends Command {
             + "Example: edit_price dish/1 price/4.50";
 
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
-    private final int menuID;
-    private final float newPrice;
     protected Menu menu;
     protected Ui ui;
+    private final int menuID;
+    private final float newPrice;
 
     public EditPriceCommand(int menuID, float newPrice, Menu menu, Ui ui) {
         this.menuID = menuID;

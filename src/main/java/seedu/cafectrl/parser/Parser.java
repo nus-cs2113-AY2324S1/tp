@@ -161,7 +161,6 @@ public class Parser implements ParserUtil {
         }
     }
 
-    /** All prepareCommand Classes **/
     //@@author Cazh1
     /**
      * Prepares the ListMenuCommand

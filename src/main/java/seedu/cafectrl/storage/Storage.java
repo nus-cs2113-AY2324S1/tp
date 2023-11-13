@@ -21,14 +21,15 @@ import java.util.logging.Logger;
 public class Storage {
 
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    protected FileManager fileManager;
+    protected Ui ui;
     private final boolean isHashingEnabled = true;
     private boolean isMenuTampered = false;
     private boolean isOrdersTampered = false;
     private boolean isPantryStockTampered = false;
     private boolean isHashStringTampered = false;
     private boolean isTamperedMessagePrinted = false;
-    protected FileManager fileManager;
-    protected Ui ui;
+
 
     public Storage (Ui ui) {
         this.fileManager = new FileManager(ui);
