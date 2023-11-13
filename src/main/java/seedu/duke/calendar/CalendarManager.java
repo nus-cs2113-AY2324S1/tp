@@ -4,6 +4,7 @@ package seedu.duke.calendar;
 
 import seedu.duke.calendar.command.EventCommand;
 import seedu.duke.calendar.command.UnknownCommand;
+import seedu.duke.storage.EventDirectory;
 import seedu.duke.storage.EventStorage;
 
 import java.io.FileNotFoundException;
