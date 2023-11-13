@@ -84,7 +84,7 @@ public class Ui {
 
     //@@author DextheChik3n
     public void printAddDishMessage(Dish dish) {
-        showToUser(Messages.ADD_DISH_MESSAGE + "\n");
+        showToUser(Messages.ADD_DISH_MESSAGE);
         showDishNameHeader(dish);
         showDishPrice(dish);
         showIngredientList(dish);
