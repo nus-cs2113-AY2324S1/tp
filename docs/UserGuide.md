@@ -79,10 +79,24 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 |----------------------------------------------------|-------------------------------------------------------------------|-------------------------------|
 | [View all ingredients](#view-ingredients)          | view i                                                            | view i                        |
 | [View specific ingredient](#view-ingredient)       | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID               | view i/bread <br><br>view i/1 |
-| [Add ingredient](#add-ingredient)                  | add i/INGREDIENT_NAME,QUANITY,VALID_UNIT                          | add i/eggs,2,pc               |
+| [Add ingredient](#add-ingredient)                  | add i/INGREDIENT_NAME,QUANTITY,VALID_UNIT                         | add i/eggs,2,pc               |
 | [Edit ingredient](#edit-ingredient)                | edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT] | edit i/bread n/toast q/3 u/pc |
 | [Delete Ingredient](#delete-ingredient)            | delete r/INGREDIENT_NAME OR delete r/INGREDIENT_ID                | delete i/EGG OR delete i/1    |
 | [Use Ingredient](#use-ingredient)                  | use i/INGREDIENT_NAME,QUANTITY,VALID_UNIT [i/...]                 | use i/chicken,1,kg            |
+
+
+----
+
+<a id="shortcut-command-anchor"></a>
+### [Shortcut Summary of Commands](#feature-shortcut)
+
+| Action                                | Format                                                | Example                      |
+|---------------------------------------|-------------------------------------------------------|------------------------------|
+| [View all shortcuts](#view-shortcuts) | view sc                                               | view sc                      |
+| [Add shortcut](#add-shortcut)         | add sc/INGREDIENT_NAME,QUANTITY                       | add sc/eggs,2                |
+| [Edit shortcut](#edit-shortcut)       | edit sc/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] | edit sc/bread n/eggs q/3     |
+| [Delete shortcut](#delete-shortcut)   | delete sc/INGREDIENT_NAME OR delete sc/SHORTCUT_ID    | delete sc/egg OR delete sc/1 |
+| [Use shortcut](#use-shortcut)         | sc INGREDIENT_NAME or sc SHORTCUT_ID                  | sc chicken OR sc 1           |
 
 
 ----
@@ -336,7 +350,7 @@ Example:
 #### View all ingredients - `view i`
 (<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
     
-   List all ingredients available inside the app.
+List all ingredients available inside the app.
 
 ---
 
@@ -360,7 +374,7 @@ Example :
 #### Add ingredients - `add i/INGREDIENT_NAME,QUANTITY,UNIT`
 (<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-Adds a new item to the list of todo items. [Registered units in our app](#units)
+Adds a new item to the list of ingredients. [Registered units in our app](#units)
    
 When entering your unit, a user is required to use any one of the units above.
 
@@ -411,10 +425,81 @@ Note :
 * Make sure units match when you are trying to use an ingredient.
 ![UseIngredientInvalidUnit.png](images%2FUseIngredientInvalidUnit.png)
 
-Example :
+Examples :
 * use i/chicken,1,kg to use 1kg of chicken from the inventory
 * use i/egg,2,pc i/chicken,1,kg to use 2 pieces of egg and 1g of chicken from the inventory
 ![UseIngredientValid.png](images%2FUseIngredientValid.png)
+
+---
+
+<a id="feature-shortcut"></a>
+### Shortcut Commands
+
+<a id="view-shortcuts"></a>
+#### View All Shortcuts - `view sc`
+(<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+List all shortcuts available inside the app.
+
+---
+<a id="add-shortcut"></a>
+#### Add Shortcut - `add sc/INGREDIENT_NAME,QUANTITY`
+(<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+Add a shortcut into the app with specified ingredient name and quantity. 
+
+Note :
+* The ingredient name must be in the ingredient list beforehand.
+
+![AddShortcutInvalid.png](images%2FAddShortcutInvalid.png)
+
+Example:
+* `add sc/bread,2` to add a shortcut to ingredient bread that have quantity of `2`
+
+![AddShortcutExample.png](images%2FAddShortcutExample.png)
+
+---
+<a id="edit-shortcut"></a>
+#### Edit Shortcut - `edit sc/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY or edit sc/SHORTCUT_INDEX n/NEW_NAME q/NEW_QUANTITY`
+(<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+Edits a shortcut with the given changes. These changes can include a new name, a new quantity or both.
+
+Notes:
+* Only one of each flag is allowed for each input.
+
+![EditShortcutMoreThanOneFlag.png](images%2FEditShortcutMoreThanOneFlag.png)
+
+* The new ingredient name must be in the ingredient list.
+
+Example:
+* `edit sc/bread n/egg q/3` to edit shortcut `bread` to ingredient `egg` and the quantity to `3`
+
+![EditShortcutExample.png](images%2FEditShortcutExample.png)
+
+---
+<a id="delete-shortcut"></a>
+#### Delete Shortcut - `delete sc/INGREDIENT_NAME OR delete sc/SHORTCUT_INDEX`
+(<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+Deletes a shortcut with the given name or index.
+
+Example:
+* `delete sc/bread` to delete shortcut to ingredient `bread`
+
+![DeleteShortcutExample.png](images%2FDeleteShortcutExample.png)
+
+---
+<a id="use-shortcut"></a>
+#### Use Shortcut - `sc INGREDIENT_NAME or sc SHORTCUT_ID`
+(<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+Uses a shortcut to add quantity to the ingredient based on the shortcut's name and quantity.
+
+Example:
+* `sc egg` to add quantity to ingredient `egg`
+
+![UseShortcutExample.png](images%2FUseShortcutExample.png)
 
 ---
 

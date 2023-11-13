@@ -7,9 +7,6 @@ import essenmakanan.exception.EssenNullInputException;
 import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeList;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EditRecipeCommand extends Command {
 
     private String editDetails;
@@ -143,15 +140,4 @@ public class EditRecipeCommand extends Command {
 
         return false;
     }
-
-    private static List<String> removeWhiteSpaces(String[] splitDetails) {
-        List<String> detailList = new ArrayList();
-        for (String detail : splitDetails) {
-            if (detail.length() > 0) {
-                detailList.add(detail);
-            }
-        }
-        return detailList;
-    }
-
 }
