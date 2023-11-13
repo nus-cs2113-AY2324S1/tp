@@ -4,6 +4,8 @@ import essenmakanan.exception.EssenFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 
+import java.util.Arrays;
+
 public class EditIngredientCommand extends Command {
     private String editDetails;
     private IngredientList ingredients;
@@ -22,6 +24,7 @@ public class EditIngredientCommand extends Command {
 
         String[] splitDetails = this.editDetails.split(" ");
         String ingredientName = splitDetails[0];
+        String[] ingredientEditDetails = Arrays.copyOfRange(splitDetails, 1, splitDetails.length);
 
         existingIngredient = ingredients.getIngredient(ingredientName);
 
@@ -32,7 +35,7 @@ public class EditIngredientCommand extends Command {
             System.out.println("Ingredient not found!");
         } else {
             try {
-                ingredients.editIngredient(existingIngredient, splitDetails);
+                ingredients.editIngredient(existingIngredient, ingredientEditDetails);
             } catch (EssenFormatException e) {
                 e.handleException();
             }

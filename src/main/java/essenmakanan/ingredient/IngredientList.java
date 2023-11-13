@@ -170,6 +170,8 @@ public class IngredientList {
                 }
                 break;
             default:
+                System.out.println("See user guide for correct edit format and example: " +
+                        "edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
                 throw new EssenFormatException();
             }
         }
