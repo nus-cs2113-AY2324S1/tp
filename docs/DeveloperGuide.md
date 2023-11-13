@@ -56,14 +56,17 @@ In this application, it uses text files to store all data, i.e, recipes and ingr
 When booting up the application, `restoreSavedData` will be called to get both recipes and ingredients 
 from the previous session.
 
-<img src="images/RestoreIngredientStorageSequenceDiagram.png" width="347" />
-<img src="images/RestoreRecipeStorageSequenceDiagram.png" width="347" />
+![img.png](images/RestoreIngredientStorageSequenceDiagram.png)
+![img.png](images/RestoreRecipeStorageSequenceDiagram.png)
+![img.png](images/RestoreShortcutStorageSequenceDiagram.png)
 
 When a user exits the application, `saveData` will be called and it will convert all data from recipes and
 ingredients into a string which will be put in their own respective text files.
 
-<img src="images/StoreIngredientStorageSequenceDiagram.png" width="525" />
-<img src="images/StoreRecipeStorageSequenceDiagram.png" width="706" />
+![img.png](images/StoreIngredientStorageSequenceDiagram.png)
+![img.png](images/StoreRecipeStorageSequenceDiagram.png)
+![img.png](images/StoreShortcutStorageSequenceDiagram.png)
+
 
 
 ## Implementation

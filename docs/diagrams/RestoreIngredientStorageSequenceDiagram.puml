@@ -23,6 +23,6 @@ IngredientStorage --> IngredientStorage
 deactivate IngredientStorage
 end
 
-[<- IngredientStorage
+[<-- IngredientStorage
 deactivate IngredientStorage
 @enduml
