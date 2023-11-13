@@ -129,6 +129,9 @@ public class Storage {
             logger.log(Level.WARNING, "menu.txt not found!\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.MENU_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Menu();
+        } finally {
+            ui.showToUser(Messages.DONE_LOADING_MENU);
+            ui.printLine();
         }
     }
 
@@ -161,6 +164,9 @@ public class Storage {
         } catch (FileNotFoundException e) {
             ui.showToUser(ErrorMessages.PANTRY_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Pantry(ui);
+        } finally {
+            ui.showToUser(Messages.DONE_LOADING_PANTRY_STOCK);
+            ui.printLine();
         }
     }
 
@@ -194,6 +200,9 @@ public class Storage {
             logger.log(Level.WARNING, "orders.txt not found!\n" + e.getMessage(), e);
             ui.showToUser(ErrorMessages.ORDER_LIST_FILE_NOT_FOUND_MESSAGE, System.lineSeparator());
             return new Sales();
+        } finally {
+            ui.showToUser(Messages.DONE_LOADING_SALES);
+            ui.printLine();
         }
     }
 

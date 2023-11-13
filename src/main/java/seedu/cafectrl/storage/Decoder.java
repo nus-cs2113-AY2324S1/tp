@@ -11,6 +11,7 @@ import seedu.cafectrl.data.dish.Dish;
 import seedu.cafectrl.data.dish.Ingredient;
 import seedu.cafectrl.parser.Parser;
 import seedu.cafectrl.ui.ErrorMessages;
+import seedu.cafectrl.ui.Messages;
 import seedu.cafectrl.ui.Ui;
 
 import java.util.ArrayList;
@@ -41,10 +42,12 @@ public class Decoder {
     public static Menu decodeMenuData(ArrayList<String> textLines) {
         logger.info("Decoding menu.txt to Menu...");
         ArrayList<Dish> menuDishList = new ArrayList<>();
+
         for(String dishString : textLines) {
             logger.info("Line to decode: " + dishString);
             decodeDishString(dishString, menuDishList);
         }
+
         return new Menu(menuDishList);
     }
 
@@ -135,6 +138,7 @@ public class Decoder {
                 ui.showToUser(ErrorMessages.ERROR_IN_PANTRY_STOCK_DATA + encodedData);
             }
         }
+
         return new Pantry(ui, pantryStock);
     }
 
@@ -193,6 +197,7 @@ public class Decoder {
             }
             decodeSalesData(line, orderLists, menu);
         }
+
         if (orderLists.isEmpty()) {
             return new Sales();
         }

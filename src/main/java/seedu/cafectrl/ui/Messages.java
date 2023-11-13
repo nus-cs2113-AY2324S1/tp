@@ -108,4 +108,7 @@ public class Messages {
             + "got a makeover without permission.";
     public static final String HASH_STRING_MESSAGE = "Please resist the temptation to play Picasso with this string.";
 
+    public static final String DONE_LOADING_MENU = "Done loading menu.txt!";
+    public static final String DONE_LOADING_PANTRY_STOCK = "Done loading pantry_stock.txt!";
+    public static final String DONE_LOADING_SALES = "Done loading orders.txt!";
 }
