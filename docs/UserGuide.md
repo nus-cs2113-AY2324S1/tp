@@ -43,6 +43,7 @@ Type `help` to see a list of commands that you will be able to use in the applic
 * [Viewing list of workout: `viewworkout`](#viewing-list-of-all-workouts-viewworkout)
 * [Finding workouts by a keyword: `findworkout`](#finding-workouts-by-a-keyword-findworkout)
 * [Checking total calories burnt on a specific date: `caloriesburnt`](#checking-total-calories-burnt-on-a-specific-date-caloriesburnt)
+* [Checking calorie balance on a specific date: `caloriebalance`](#checking-calorie-balance-on-a-specific-date-caloriebalance)
 * [Adding steps: `addsteps`](#Adding-steps-addsteps)
 * [Deleting a step entry: `deletesteps`](#Deleting-a-step-entry-deletesteps)
 * [Viewing the total number of steps on a specific date: `totalsteps`](#Viewing-the-total-number-of-steps-on-a-specific-date-totalsteps)
@@ -365,6 +366,40 @@ caloriesburnt 2023-11-04
 Total calories burnt on 2023-11-04: 230kcal
 ```
 
+### Checking calorie balance on a specific date: `caloriebalance`
+Allows user to check their calorie balance (surplus/deficit) on a specific date.
+
+Format
+- caloriebalance <DATE>
+- You should type <DATE> in format of yyyy-MM-dd.
+
+**Example of usage**
+```
+caloriebalance 2023-11-04
+```
+
+**Expected output**
+
+- If the user is in a calorie surplus:
+```
+  You have exceeded your calorie limit on 2023-11-07 by: 4910.0kcal
+  You are in a calorie surplus!
+  Try doing more exercises if you want to eat!
+```
+
+- If the user is left with 0 in his calorie balance:
+```
+  Your calorie balance on 2023-11-07 is: 0.0kcal
+  Try doing more exercise if you want to eat!
+```
+
+- If the user is in a calorie deficit:
+```
+  Your calorie balance on 2023-11-07 is: 200.0kcal
+  You are in a calorie deficit!
+  You can try to eat more!
+```
+
 
 ### Adding steps: `addsteps`
 Allows user to add their steps walked for a particular day.
@@ -507,26 +542,27 @@ The contents of workoutList.txt:
 
 ## Command Summary
 
-| Features                                             | Commands                 |
-|:-----------------------------------------------------|:-------------------------|
-| Viewing help guide                                   | `help`                   |
-| Exiting the application                              | `exit`                   |
-| Editing your profile                                 | `editprofile`            |
-| Viewing your profile                                 | `viewprofile`            |
-| Checking your current bmi                            | `bmi`                    |
-| Checking your recommended weight                     | `checkrecommendedweight` |
-| Adding a Meal                                        | `addmeal`                |
-| Deleting a Meal                                      | `deletemeal`             |
-| Viewing list of all meals                            | `viewmeal`               |
-| Finding meals by a keyword                           | `findmeal`               |
-| Checking total calories consumed on a specific date  | `caloriesconsumed`       |
-| Adding a workout                                     | `addworkout`             |
-| Deleting a Workout                                   | `deleteworkout`          |
-| Viewing list of workout                              | `viewworkout`            |
-| Find workouts by a keyword                           | `findworkout`            |
-| Checking total calories burnt on a specific date     | `caloriesburnt`          |
-| Adding a step entry                                  | `addsteps`               |
-| Deleting a step entry                                | `deletesteps`            |
-| Viewing the total number of steps on a specific date | `totalsteps`             |
-| Viewing the list of steps                            | `viewsteps`              |
-| Getting a suggestion on your steps walked            | `getstepssuggestion`     |
+| Features                                             | Commands                                                    |
+|:-----------------------------------------------------|:------------------------------------------------------------|
+| Viewing help guide                                   | `help`                                                      |
+| Exiting the application                              | `exit`                                                      |
+| Editing your profile                                 | `editprofile h/<HEIGHT> w/<WEIGHT> g/<GENDER> l/<CALORIES>` |
+| Viewing your profile                                 | `viewprofile`                                               |
+| Checking your current bmi                            | `bmi`                                                       |
+| Checking your recommended weight                     | `checkrecommendedweight`                                    |
+| Adding a Meal                                        | `addmeal <NAME> c/<CALORIES> d/<DATE>`                      |
+| Deleting a Meal                                      | `deletemeal <INDEX>`                                        |
+| Viewing list of all meals                            | `viewmeal`                                                  |
+| Finding meals by a keyword                           | `findmeal <KEYWORD>`                                        |
+| Checking total calories consumed on a specific date  | `caloriesconsumed <DATE>`                                   |
+| Adding a workout                                     | `addworkout <NAME> c/<CALORIES> d/<DATE>`                   |
+| Deleting a Workout                                   | `deleteworkout <INDEX>`                                     |
+| Viewing list of workout                              | `viewworkout`                                               |
+| Find workouts by a keyword                           | `findworkout <KEYWORD>`                                     |
+| Checking total calories burnt on a specific date     | `caloriesburnt <DATE>`                                      |
+| Checking calorie balance on a specific date          | `caloriebalance <DATE>`                                     |
+| Adding a step entry                                  | `addsteps <NUM_OF_STEPS> d/<DATE>`                          |
+| Deleting a step entry                                | `deletesteps <INDEX>`                                       |
+| Viewing the total number of steps on a specific date | `totalsteps <DATE>`                                         |
+| Viewing the list of steps                            | `viewsteps`                                                 |
+| Getting a suggestion on your steps walked            | `getstepssuggestion <DATE>`                                 |
