@@ -22,6 +22,10 @@ import java.util.Scanner;
 
 public class Ui {
     public static final int OFFSET_LIST_INDEX = 1;
+    public static final String DECIMAL_POINT_STRING = ". ";
+    public static final String DOLLAR_SIGH_STRING = " $";
+    public static final String DISH_LEFT_ALIGN_FORMAT = "|%-55s|";
+    public static final String USER_INPUT_CHARACTER = "> ";
     private final Scanner scanner;
 
     /**
@@ -36,7 +40,7 @@ public class Ui {
     }
 
     public String receiveUserInput() {
-        System.out.print("> ");
+        System.out.print(USER_INPUT_CHARACTER);
         return scanner.nextLine();
     }
 
@@ -62,7 +66,7 @@ public class Ui {
     }
 
     public void showDishNameHeader(Dish dish) {
-        String dishNameString = String.format("|%-55s|", " Dish: " + dish.getName());
+        String dishNameString = String.format(DISH_LEFT_ALIGN_FORMAT, " Dish: " + dish.getName());
         showToUser(Messages.INGREDIENTS_END_CAP,
                 dishNameString,
                 Messages.INGREDIENTS_CORNER);
@@ -92,7 +96,7 @@ public class Ui {
     }
 
     public void showDishPrice(Dish dish) {
-        String dishPriceString = String.format("|%-55s|", " Price: $" + dish.getPriceString());
+        String dishPriceString = String.format(DISH_LEFT_ALIGN_FORMAT, " Price: $" + dish.getPriceString());
         showToUser(dishPriceString, Messages.INGREDIENTS_CORNER);
     }
 
@@ -107,7 +111,7 @@ public class Ui {
     }
 
     public void printBuyIngredientHeader() {
-        showToUser("Added to stock:");
+        showToUser(Messages.BUY_INGREDIENT_HEADER);
     }
 
     /**
@@ -123,8 +127,8 @@ public class Ui {
     /**
      * Shows menu to user is table format
      *
-     * @param dishName
-     * @param dishPrice
+     * @param dishName name text of the dish
+     * @param dishPrice price text of the dish
      */
     public void formatListMenu(String dishName, String dishPrice) {
         String leftAlignFormat = "| %-38s | %-12s |%n";
@@ -218,7 +222,7 @@ public class Ui {
      * @param dishPrice The price of the dish in the menu
      */
     public void showMenuDish(String indexNum, String dishName, String dishPrice) {
-        formatListMenu(indexNum + ". " + dishName," $" + dishPrice);
+        formatListMenu(indexNum + DECIMAL_POINT_STRING + dishName, DOLLAR_SIGH_STRING + dishPrice);
     }
 
     public void showIngredientTop() {

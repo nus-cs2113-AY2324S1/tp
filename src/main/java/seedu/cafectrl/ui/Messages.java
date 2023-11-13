@@ -67,7 +67,6 @@ public class Messages {
     public static final String NEXT_DAY_COMMAND_MESSAGE = "Prepare for liftoff! "
             + "We're about to fast-forward to the next day. "
             + "Hold onto your hats; here we go!";
-    public static final String INITIALISE_STORAGE_MESSAGE = "...Downloading data...";
 
     /** Messages for restocking ingredients */
     public static final String AVAILABLE_DISHES = "Listed below are the availability of the dishes for the next order!";
@@ -85,10 +84,6 @@ public class Messages {
     public static final String INGREDIENTS_CORNER =  "+----------------------------------------+--------------+";
     public static final String INGREDIENTS_TITLE =   "| Ingredient                             + Quantity     |";
     /** Messages for decoder **/
-    public static final String INVALID_DISH = " does not exist in our menu. \n"
-            + "You might have tempered with the file and added in a non existing dish.\n"
-            + "Don't worry :D , we will continue operations without ";
-
     public static final String SAVE_FILE_TAMPER_DETECTED = "Well, well, well, "
             + "looks like someone's been playing with the save files!\n"
             + "Let's keep it classy and use the prescribed format below.\n";
@@ -99,12 +94,6 @@ public class Messages {
             + "{Order Day} | {Dish Name} | {Dish Order Qty} | {Dish Price} | {Order Complete Status}";
     public static final String SAVE_FILE_FORMAT_PANTRY_STOCK = "Format for Pantry_stock.txt: \n"
             + "{Ingredient Name} | {Ingredient Qty} | {Ingredient Unit}";
-    public static final String SALES_LAST_DAY_TEXT_TAMPERED = "Unfortunately, any empty order lists after "
-            + "the latest valid order have been wiped from my memory banks."
-            + " Poof!" ;
-
-    public static final String SALES_ORDER_TEXT_TAMPERED = "Unfortunately, any orders not following the format "
-            + "and invalid have been wiped from my memory banks. Poof!" ;
 
     public static final String HASH_STRING_TAMPERED = "Alert! It appears the hash string "
             + "got a makeover without permission.";
@@ -113,4 +102,7 @@ public class Messages {
     public static final String DONE_LOADING_MENU = "Done loading menu.txt!";
     public static final String DONE_LOADING_PANTRY_STOCK = "Done loading pantry_stock.txt!";
     public static final String DONE_LOADING_SALES = "Done loading orders.txt!";
+
+    /** Messages for buy ingredients command */
+    public static final String BUY_INGREDIENT_HEADER = "Added to stock:";
 }
