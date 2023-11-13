@@ -4,13 +4,14 @@
 * [Developer Guide](#developer-guide)
   * [**Acknowledgements**](#acknowledgements)
   * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**General notes**](#general-notes)
   * [**Design**](#design)
     * [Architecture](#architecture)
-    * [How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other)
-    * [Ui Component](#ui-component)
-    * [Parser Component](#parser-component)
-    * [Storage Component](#storage-component)
-    * [Data Component](#data-component)
+    * [How the architecture components interact with each other](#how-the-architecture-components-interact-with-each-other)
+    * [Ui component](#ui-component)
+    * [Parser component](#parser-component)
+    * [Storage component](#storage-component)
+    * [Data component](#data-component)
   * [**Feature**](#feature)
     * [Add Dish](#add-dish)
     * [List Menu](#list-menu)
@@ -24,10 +25,16 @@
     * [Delete Dish](#delete-dish)
     * [Edit Price](#edit-price)
     * [Help](#help)
+  * [**Future Enhancements**](#future-enhancements)
+    * [Create an interface for `Pantry`](#create-an-interface-for-pantry)
+    * [Make `Ui` class singleton](#make-ui-class-singleton)
   * [**Product scope**](#product-scope)
     * [Target user profile](#target-user-profile)
     * [Value proposition](#value-proposition)
+  * [**Requirements**](#requirements)
+    * [Non-functional requirements](#non-functional-requirements)
     * [User stories](#user-stories)
+  * [**Glossary**](#glossary)
 <!-- TOC -->
 --------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
@@ -43,7 +50,7 @@ Refer to the guide [_UserGuide_](UserGuide.md).
 --------------------------------------------------------------------------------------------------------------------
 ## **General notes**
 
-Only relevant attributes/associations/methods will be included in the UML diagram.
+Only relevant attributes/associations/methods will be included in the UML diagram. Some of them are omitted to avoid confusion.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Design**
@@ -75,7 +82,7 @@ The bulk of the app’s work is done by the following components:
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 ![Architecture Encode Data](images/sequence/Architecture_Encode_Data.png)
-*Figure 2: Architecture Encode Sequence Diagram*
+<br>*Figure 2: Architecture Encode Sequence Diagram*
 
 ### Ui component
 API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
@@ -97,7 +104,7 @@ API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 *Figure 4: Parser Class Diagram*
 
-The `Parser` component is respnsible for making sense of the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
+The `Parser` component is responsible for interpreting the user's input and return appropriate `Command` for execution. If the input is unrecognisable, `Parser` will return an `IncorrectCommand` which will display error message to the user through `Ui`.
 
 <div markdown="span" class="alert alert-info">**Note:** `CafeCtrl` only have access to the interface `ParserUtil` although the run-time type object is `Parser`. With this, we are able to decrease coupling between `CafeCtrl` and `Parser`, allowing for easier maintenance. This also ensures the testability as we could provide mock or stub dependencies during testing, we could isolate the behavior of the class and focus on unit testing without external dependencies.</div>
 
@@ -355,6 +362,19 @@ API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpComman
 When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequently calls the `showHelp()` method in `Ui`. In `showHelp()`, messages related to command usage will be retrieved and be printed out using by self-invoking `showToUserWithSpaceInBetweenLines(messages: String...)`.
 
 --------------------------------------------------------------------------------------------------------------------
+## **Future Enhancements**
+### Create an interface for `Pantry`
+   - **Problem**: `Pantry` class is used in testing of methods such as `addOrder`. With this implementation, we are unable to test the `addOrder` feature in isolation as any bugs in `Pantry` class could potentially affect the behaviour of `addOrder` feature.
+   - **Solution**: Instead of using the concrete `Pantry` class, `addOrder` could use an interface `PantryUtil` to access the required methods. A hard coded class that is less prone to bugs can be used to substitute the actual `Pantry` class by implementing a `PantryUtil` interface. <br>With this, we are able to test the method in isolation as we have removed the dependency on the actual `Pantry` class.
+### Make `Ui` class singleton
+   - **Problem**: As we need to use the same `Ui` instance for all methods to avoid repeated instantiation of `Scanner` which could slow down the application, the same `Ui` instance is being passed to the constructor for all `Command` classes. This makes the parameters for the constructor looks too long.
+   - **Solution**: Implement a static `getInstance` method in `Ui` class which, when it is called for the first time, creates a new instance of `Ui` and store it in a static constant in the `Ui` object. The method will return the `ui` object in the constant for subsequent `getInstance` call.<br>With this implementation, we no longer need to pass `ui` around as we can access the same `ui` object by calling `getInstance`.
+   <br>![Class diagram for singleton Ui](images/class/ui_singleton.png)
+   <br>*Figure 17: Class diagram for singleton Ui*
+   <br>![Sequence diagram for singleton Ui](images/sequence/ui_singleton.png)
+   <br>*Figure 18: Sequence diagram for `getinstance` call on `Ui`*
+   
+--------------------------------------------------------------------------------------------------------------------
 ## **Product scope**
 ### Target user profile
 
@@ -370,24 +390,24 @@ Our product aims to optimize managing of inventory and cash flow in a restaurant
 
 1. This application requires the use of Java 11.
 2. This application should work on most mainstream OS.
+3. This application should be able to work offline
 
 ### User stories
 
-| Priority | As a …​                                                   | I want to …​                                            | So that I can…​                                                                         |
-|----------|-----------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| `* * *`  | cafe owner who is responsible for coming up with new dish | add dish to the menu                                    | add new dish to the menu                                                                |
-| `* * *`  | cafe manager is responsible for managing pantry stock     | track the inventory levels for ingredients and supplies | know what ingredients I need to restock                                                 |
-| `* * *`  | cafe manager is responsible for managing pantry stock     | buy ingredients                                         | restock low stock ingredients                                                           |
-| `* * *`  | cafe owner who is also the chef                           | view the ingredients needed for a dish                  | know what ingredients to use when cooking a dish                                        |
-| `* * *`  | cafe owner who wants to maximise profit                   | edit the price of the dish                              | increase the price of the dish when there is inflation                                  |
-| `* * *`  | cafe owner who cares about the sales of the cafe          | view the sales of the cafe                              | know whether my cafe is profiting                                                       |
-| `* * *`  | cafe owner who works 7 days a week                        | save the menu, pantry stock and order                   | have access to the same menu, pantry stock and orders when I go back to work            |
-| `* * *`  | cafe owner who is responsible for placing order           | add order                                               | ask the chef to cook the order                                                          |
-| `* *`    | cafe manager who is responsible for drafting the menu     | view the menu                                           | keep track of what dish we have                                                         |
-| `* *`    | cafe owner who working 7 days a week                      | fast forward to the next day                            | close the cafe and call it a day when I am tired                                        |
-| `* *`    | clumsy cafe owner who works 7 days a week                 | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
-
-*{More to be added}*
+| Priority                      | As a …​                                                               | I want to …​                                            | So that I can…​                                                                         |
+|-------------------------------|-----------------------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`                       | cafe owner who is responsible for coming up with new dish             | add dish to the menu                                    | add new dish to the menu                                                                |
+| `* * *`                       | cafe manager is responsible for managing pantry stock                 | track the inventory levels for ingredients and supplies | know what ingredients I need to restock                                                 |
+| `* * *`                       | cafe manager is responsible for managing pantry stock                 | buy ingredients                                         | restock low stock ingredients                                                           |
+| `* * *`                       | cafe owner who is also the chef                                       | view the ingredients needed for a dish                  | know what ingredients to use when cooking a dish                                        |
+| `* * *`                       | cafe owner who wants to maximise profit                               | edit the price of the dish                              | increase the price of the dish when there is inflation                                  |
+| `* * *`                       | cafe owner who cares about the sales of the cafe                      | view the sales of the cafe                              | know whether my cafe is profiting                                                       |
+| `* * *`                       | cafe owner who works 7 days a week                                    | save the menu, pantry stock and order                   | have access to the same menu, pantry stock and orders when I go back to work            |
+| `* * *`                       | cafe owner who is responsible for placing order                       | add order                                               | ask the chef to cook the order                                                          |
+| `* *`                         | cafe manager who is responsible for drafting the menu                 | view the menu                                           | keep track of what dish we have                                                         |
+| `* *`                         | cafe owner who working 7 days a week                                  | fast forward to the next day                            | close the cafe and call it a day when I am tired                                        |
+| `* *`                         | clumsy cafe owner who works 7 days a week                             | go back to the previous day                             | still accept order from the previous day if I accidentally fast forward to the next day | 
+| `* *` <br>(to be implemented) | cafe owner who is interested to know the popularity of the menu items | view the rank of popularity based on order history      | adjust the pricing or remove the dish that is not popular                               |
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Glossary**

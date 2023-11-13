@@ -4,20 +4,21 @@
 * [User Guide](#user-guide)
   * [Introduction](#introduction)
   * [Quick Start](#quick-start)
+  * [Summary](#summary)
   * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a dish : `add`](#adding-a-dish--add)
-    * [Listing all menu items : `list_menu`](#listing-all-menu-items--listmenu)
+    * [Deleting a dish : `delete`](#deleting-a-dish--delete)
+    * [Editing price of a dish : `edit_price`](#editing-price-of-a-dish--editprice)
+    * [Listing all dishes : `list_menu`](#listing-all-dishes--listmenu)
     * [Listing ingredients needed for the selected dish : `list_ingredients`](#listing-ingredients-needed-for-the-selected-dish--listingredients)
-    * [Deleting a menu item : `delete`](#deleting-a-menu-item--delete)
-    * [Editing price of menu item : `edit_price`](#editing-price-of-menu-item--editprice)
-    * [Viewing the total stock of ingredients : `view_stock`](#viewing-the-total-stock-of-ingredients--viewstock)
     * [Buying an ingredient : `buy_ingredient`](#buying-an-ingredient--buyingredient)
-    * [Showing all sales : `list_total_sales`](#showing-all-sales--showsales)
-    * [Showing sales for a chosen day : `list_sale`](#showing-sales-for-a-chosen-day--showsale)
+    * [Viewing the total stock of ingredients : `view_stock`](#viewing-the-total-stock-of-ingredients--viewstock)
     * [Adding an order : `add_order`](#adding-an-order--addorder)
-    * [Returning to the previous day: `previous_day`](#returning-to-the-previous-day-previousday)
+    * [Showing total sales : `list_total_sales`](#showing-total-sales--listtotalsales)
+    * [Showing sales for a chosen day : `list_sale`](#showing-sales-for-a-chosen-day--listsale)
     * [Advancing to the next day: `next_day`](#advancing-to-the-next-day-nextday)
+    * [Returning to the previous day: `previous_day`](#returning-to-the-previous-day-previousday)
     * [Exiting the program : `bye`](#exiting-the-program--bye)
   * [Known Issues](#known-issues)
   * [Command Summary](#command-summary)
@@ -37,12 +38,23 @@ CaféCTRL aims to optimize managing of inventory and cash flow in a restaurant. 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.
 5. If the setup is correct, you should see something like the below as the output:
 ```
-Hello! Welcome to CafeCTRL!
------------------------------------------------------
+Hello! Welcome to 
+     _/_/_/                _/_/              _/_/_/    _/                _/   
+  _/          _/_/_/    _/        _/_/    _/        _/_/_/_/  _/  _/_/  _/    
+ _/        _/    _/  _/_/_/_/  _/_/_/_/  _/          _/      _/_/      _/     
+_/        _/    _/    _/      _/        _/          _/      _/        _/      
+ _/_/_/    _/_/_/    _/        _/_/_/    _/_/_/      _/_/  _/        _/       
+------------------------------------------------------------------------
 > 
 ```
+---------------------------------------------------
+<!---@@author ziyi105--->
+## Summary
+In CaféCTRL, the user is able to craft and `add dish` to the menu. If needed, he/she can `delete` or `edit` the price of the dish that is already in the menu. 
+When there is a new order, the user can `add the order` and prepare it. If there is insufficient stock of ingredients, the user can `buy ingredients`. At the end of the day, the user can check the `sales of the day` or the `total sales` since day one. The user can advance to the `next day` or go back to the `previous day` to take in orders of the day. 
 
 ---------------------------------------------------
+<!---@@author DextheChik3n--->
 ## Features
 > **Notes about command format:**
 > - Words in `UPPER_CASE` are the arguments to be supplied by user. <br>
@@ -58,35 +70,71 @@ Hello! Welcome to CafeCTRL!
 > - Extraneous parameters for commands that do not take in parameters (such as `help`, `list_menu`, `bye`) will be ignored. <br>
     e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+<!---@@author ziyi105--->
 ### Viewing help : `help`
 Shows a message explaining how to use all the commands
 
 Format: `help`
 Output:
 ```
+------------------------------------------------------------------------
 These are all the commands I recognise: 
 
-(- Words in UPPER_CASE are the parameters to be supplied by the user.
-e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.
-- Parameters in [] are optional.)
+- Words in UPPER_CASE are the parameters to be supplied by the user.
+ e.g. in add name/NAME, NAME is a parameter that can be used as add name/Chicken.
+- Parameters in [] are optional.
 
-Command Format:
+------------------------------------------------------------------------
+To add a new dish to the menu: 
 add name/DISH_NAME price/DISH_PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]
-(Items in square brackets [] are optional)
-Example:
-add name/chicken rice price/3.00 ingredient/rice qty/200g, ingredient/chicken qty/100g
-
-list_ingredients: Lists out the ingredients needed along with the quantity for a specific dish.
-Parameters: INDEX
-Example: list_ingredients 1
-
-To list out all dishes on the menu: list_menu
-
-To delete a menu item: delete DISH_INDEX
+Example:add name/chicken rice price/3.00 ingredient/rice qty/200g, ingredient/chicken qty/100g
+------------------------------------------------------------------------
+To delete a menu item:
+deleteParameters: INDEX
 Example: delete 1
-
-edit_priceTo edit price of a menu item: edit_price dish/DISH_INDEX price/NEW_PRICE
+------------------------------------------------------------------------
+To edit price of a menu item: 
+edit_price dish/DISH_INDEX price/NEW_PRICE
 Example: edit_price dish/1 price/4.50
+------------------------------------------------------------------------
+To view menu:
+list_menu
+------------------------------------------------------------------------
+To list out the ingredients needed along with the quantity for a specific dish:
+Parameters: index/DISH_INDEX
+Example: list_ingredients index/1
+------------------------------------------------------------------------
+To buy ingredient:
+buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]
+Example:buy_ingredient ingredient/milk qty/200ml, ingredient/chicken qty/100g
+------------------------------------------------------------------------
+To view pantry stock:
+view_stock
+------------------------------------------------------------------------
+To add a new order: 
+add_order name/DISH_NAME qty/QUANTITY
+Example: add_ordername/chicken rice qty/2
+------------------------------------------------------------------------
+To show sales for all days:
+list_total_sales
+------------------------------------------------------------------------
+To show sales for a chosen day:
+list_sale day/DAY_TO_DISPLAY
+Example: list_sale day/1
+------------------------------------------------------------------------
+To travel to next day:
+next_day
+------------------------------------------------------------------------
+To go back to previous day:
+previous_day
+------------------------------------------------------------------------
+To exit:
+bye
+------------------------------------------------------------------------
+To view all commands:
+help
+------------------------------------------------------------------------
+------------------------------------------------------------------------
 ```
 <!---@@author DextheChik3n--->
 ### Adding a dish : `add`
@@ -112,8 +160,42 @@ chicken - 200g
 soup - 50ml
 ```
 
+<!---@@author ShaniceTang--->
+### Deleting a dish : `delete`
+Deletes a specific dish from the menu
+
+Format: `delete DISH_INDEX`
+
+* Deletes the dish at the specified DISH_INDEX
+* The index refers to the index number shown in the menu list
+* The index must be a positive integer
+
+Example: `delete 1`
+
+Output:
+```
+Okay! chicken rice is deleted! :)
+```
+<!---@@author ziyi105--->
+### Editing price of a dish : `edit_price`
+Edits the price of an existing dish on the menu
+
+Format: `edit_price index/DISH_INDEX price/NEW_PRICE`
+
+* `NEW_PRICE` must be a positive number and can have up to 2 decimal places.
+* The index refers to the index number shown in the menu list
+* The index must be a positive integer
+
+Example: `edit_price index/1 price/4.50`
+
+Output:
+```
+Price modified for the following dish: 
+Chicken rice - $4.50
+```
+
 <!---@@author Cazh1--->
-### Listing all menu items : `list_menu`
+### Listing all dishes : `list_menu`
 Shows a list of all dishes on the menu
 
 Format: `list_menu`
@@ -150,40 +232,24 @@ Example:
 +-------------------------------------------------------+
 ```
 
-<!---@@author ShaniceTang--->
-### Deleting a menu item : `delete`
-Deletes a specific dish from the menu
 
-Format: `delete DISH_INDEX`
+### Buying an ingredient : `buy_ingredient`
+Adds one or more ingredients to the pantry
 
-* Deletes the dish at the specified DISH_INDEX
-* The index refers to the index number shown in the menu list 
-* The index must be a positive integer
+Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
 
-Example: `delete 1`
+* `INGREDIENT_QTY` must contain the unit ml or g specifically
+    * e.g. `qty/50g` or `qty/1000ml`
+
+Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`
 
 Output:
 ```
-Okay! chicken rice is deleted! :)
+Added to stock:
+Ingredient: chicken		Qty: 500g
+Ingredient: milk		Qty: 1000ml
 ```
 
-<!---@@author ziyi105--->
-### Editing price of menu item : `edit_price`
-Edits the price of an existing dish on the menu
-
-Format: `edit_price index/DISH_INDEX price/NEW_PRICE`
-
-* `NEW_PRICE` must be a positive number and can be up to 2 decimal places.
-* The index refers to the index number shown in the menu list
-* The index must be a positive integer
-
-Example: `edit_price index/1 price/4.50`
-
-Output: 
-```
-Price modified for the following dish: 
-Chicken rice - $4.50
-```
 
 <!---@@author ShaniceTang--->
 ### Viewing the total stock of ingredients : `view_stock`
@@ -203,87 +269,6 @@ Output:
 | rice                                   | 2900g        |
 | bread                                  | 500g         |
 +-------------------------------------------------------+
-```
-
-
-### Buying an ingredient : `buy_ingredient`
-Adds one or more ingredients to the pantry
-
-Format: `buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY, ...]`
-
-* `INGREDIENT_QTY` must contain the unit ml or g specifically
-  * e.g. `qty/50g` or `qty/1000ml`
-
-Example: `buy_ingredient ingredient/chicken qty/500g, ingredient/milk qty/1000ml`
-
-Output:
-```
-Added to stock:
-Ingredient: chicken		Qty: 500g
-Ingredient: milk		Qty: 1000ml
-```
-
-
-
-### Showing all sales : `list_total_sales`
-Displays the dishes sold and total sales for each from Day 1 to the current day that 
-the cafe is operating on.
-
-Format: list_total_sales
-
-Example: `list_total_sales`
-
-Output:
-- list_total_sales lists the dishes sold along with the total sales for every operating day of the cafe.
-```
-+---------------------------------------------------------------------------+
-Day 1:
-+---------------------------------------------------------------------------+
-| Day 1:                                                                    |
-+----------------------------------------+--------------+-------------------+
-| Dish Name                              |  Dish Qty    |  Total Cost Price |
-+----------------------------------------+--------------+-------------------+
-| chicken chop                           | 3            | 6.00              |
-| chicken sandwhich                      | 7            | 21.00             |
-+---------------------------------------------------------------------------+
-| Total for day:                                        | $27.00            |
-+---------------------------------------------------------------------------+
-Day 2:
-+---------------------------------------------------------------------------+
-| Day 2:                                                                    |
-+----------------------------------------+--------------+-------------------+
-| Dish Name                              |  Dish Qty    |  Total Cost Price |
-+----------------------------------------+--------------+-------------------+
-| chicken chop                           | 2            | 4.00              |
-| chicken sandwhich                      | 2            | 6.00              |
-| chicken noodles                        | 1            | 2.00              |
-+---------------------------------------------------------------------------+
-| Total for day:                                        | $12.00            |
-+---------------------------------------------------------------------------+
-```
-
-
-### Showing sales for a chosen day : `list_sale`
-Displays the dishes sold along with the total sales for any chosen day.
-
-Format: `list_sale day/DAY_TO_DISPLAY`
-
-Example: `list_sale day/2`
-
-Output:
-- list_sale day/2 lists the dishes sold along with the total sales for day 2.
-```
-+---------------------------------------------------------------------------+
-| Day 2:                                                                    |
-+----------------------------------------+--------------+-------------------+
-| Dish Name                              |  Dish Qty    |  Total Cost Price |
-+----------------------------------------+--------------+-------------------+
-| chicken chop                           | 2            | 4.00              |
-| chicken sandwhich                      | 2            | 6.00              |
-| chicken noodles                        | 1            | 2.00              |
-+---------------------------------------------------------------------------+
-| Total for day:                                        | $12.00            |
-+---------------------------------------------------------------------------+
 ```
 
 <!---@@author Cazh1--->
@@ -323,6 +308,78 @@ Total orderList cost: $4.00
 ```
 
 
+### Showing total sales : `list_total_sales`
+Displays the dishes sold and total sales for each from Day 1 to the current day that 
+the cafe is operating on.
+
+Format: `list_total_sales`
+
+Example: `list_total_sales`
+
+Output:
+- list_total_sales lists the dishes sold along with the total sales for every operating day of the cafe.
+
+```
++---------------------------------------------------------------------------+
+Day 1:
++---------------------------------------------------------------------------+
+| Day 1:                                                                    |
++----------------------------------------+--------------+-------------------+
+| Dish Name                              |  Dish Qty    |  Total Cost Price |
++----------------------------------------+--------------+-------------------+
+| chicken chop                           | 3            | 6.00              |
+| chicken sandwhich                      | 7            | 21.00             |
++---------------------------------------------------------------------------+
+| Total for day:                                        | $27.00            |
++---------------------------------------------------------------------------+
+Day 2:
++---------------------------------------------------------------------------+
+| Day 2:                                                                    |
++----------------------------------------+--------------+-------------------+
+| Dish Name                              |  Dish Qty    |  Total Cost Price |
++----------------------------------------+--------------+-------------------+
+| chicken chop                           | 2            | 4.00              |
+| chicken sandwhich                      | 2            | 6.00              |
+| chicken noodles                        | 1            | 2.00              |
++---------------------------------------------------------------------------+
+| Total for day:                                        | $12.00            |
++---------------------------------------------------------------------------+
+```
+
+### Showing sales for a chosen day : `list_sale`
+Displays the dishes sold along with the total sales for any chosen day.
+
+Format: `list_sale day/DAY_TO_DISPLAY`
+
+Example: `list_sale day/2`
+
+Output:
+- list_sale day/2 lists the dishes sold along with the total sales for day 2.
+```
++---------------------------------------------------------------------------+
+| Day 2:                                                                    |
++----------------------------------------+--------------+-------------------+
+| Dish Name                              |  Dish Qty    |  Total Cost Price |
++----------------------------------------+--------------+-------------------+
+| chicken chop                           | 2            | 4.00              |
+| chicken sandwhich                      | 2            | 6.00              |
+| chicken noodles                        | 1            | 2.00              |
++---------------------------------------------------------------------------+
+| Total for day:                                        | $12.00            |
++---------------------------------------------------------------------------+
+```
+### Advancing to the next day: `next_day`
+
+Proceeds to the next business day
+
+Format: `next_day`
+
+Output:
+```
+Prepare for liftoff! We're about to fast-forward to the next day. Hold onto your hats; here we go!
+Today is Day 2
+```
+
 ### Returning to the previous day: `previous_day`
 
 Goes back to the previous business day
@@ -335,29 +392,18 @@ Sure thing! Let's rev up the virtual DeLorean and take a spin to the previous da
 Today is Day 1
 ```
 
-### Advancing to the next day: `next_day`
-
-Proceeds to the next business day
-
-Format: `next_day`
-
-Output:
-```
-Prepare for liftoff! We're about to fast-forward to the next day. Hold onto your hats; here we go!
-Today is Day 2
-```
 <!---@@author--->
-
 ### Exiting the program : `bye`
 Exits the program.
 
 Format: `bye`
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<!---@@author ziyi105--->
 ## Known Issues
-- The application is unable to read the data text files if they have been edited directly in the wrong decoding format.
+- The application is unable to decode the data text files if they have been edited in the wrong decoding format.
 - The application is unable to detect wrong argument tag, a general incorrect command format will be printed out for wrong argument tag.
-- The application is unable to support unit conversion, hence only ml ang g are accepted as ingredient unit.
+- The application is unable to support unit conversion, hence only ml and g are accepted as ingredient unit and the use of unit must be constant for the same ingredient.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -380,6 +426,7 @@ Format: `bye`
 | **Exit Program**          | `bye`                                                                                                                                                                                                                                                  |
 
 ---------------------------------------------------
+<!---@@author ziyi105--->
 ## Glossary
 - **Dish index**: Index of the dish according to `list_menu`.
-- **stock**: The quantity of ingredient available in the pantry of the cafe.
+- **Stock**: The quantity of ingredient available in the pantry of the cafe.
