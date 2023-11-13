@@ -7,7 +7,7 @@ rectangle {
 rectangle Ui
 rectangle Parser
 rectangle Command
-rectangle Main
+rectangle CafeCtrl
 rectangle Data
 rectangle Storage
 }
@@ -22,10 +22,10 @@ Command --> Data
 Command ..> Ui
 Storage --> Data
 Storage ...> TextFiles
-Ui <- Main
-Main --> Parser
-Main --> Data
-Main --> Storage
+Ui <- CafeCtrl
+CafeCtrl --> Parser
+CafeCtrl --> Data
+CafeCtrl --> Storage
 
 
 @enduml

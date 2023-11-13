@@ -92,9 +92,9 @@ public class Messages {
             + "Let's keep it classy and use the prescribed format below.\n";
 
     public static final String SAVE_FILE_FORMAT_MENU = "Format for Menu.txt: \n"
-            + "{Dish Name} | {Dish Price} | {Ingredient Name} {Ingredient Qty} {Ingredient Unit} |";
+            + "{Dish Name} | {Dish Price} | {Ingredient Name} - {Ingredient Qty} - {Ingredient Unit} |";
     public static final String SAVE_FILE_FORMAT_ORDERS = "Format for Orders.txt: \n"
-            + "{Order Day} | {Dish Name} | {Dish Order Qty} | {Total Order Cost} | {Order Complete Status}";
+            + "{Order Day} | {Dish Name} | {Dish Order Qty} | {Dish Price} | {Order Complete Status}";
     public static final String SAVE_FILE_FORMAT_PANTRY_STOCK = "Format for Pantry_stock.txt: \n"
             + "{Ingredient Name} | {Ingredient Qty} | {Ingredient Unit}";
     public static final String SALES_LAST_DAY_TEXT_TAMPERED = "Unfortunately, any empty order lists after "

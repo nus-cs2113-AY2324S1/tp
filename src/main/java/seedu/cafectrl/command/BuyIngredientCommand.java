@@ -90,8 +90,8 @@ public class BuyIngredientCommand extends Command {
         }
         ingredientsToBePrinted.add(ingredient);
         ingredientString += "Ingredient: " + ingredient.getName()
-                + "\t\tQty: " + ingredient.getQty()
-                + ingredient.getUnit() + "\n";
+                + "\nQty: " + ingredient.getQty()
+                + ingredient.getUnit() + "\n\n";
     }
 }
 
