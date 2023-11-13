@@ -30,10 +30,12 @@ Given below are my contributions to the project.
   - **Highlights**: It was difficult to maintain the developement of storage code because the format of the stored data had to be continuously changed. 
 
 #### Contributions to the UG
+[User Guide](https://ay2324s1-cs2113-f11-3.github.io/tp/UserGuide.html)
 - Contributed for Q&A session about storage
 - Gave an explanation how to move the data to other computers
 
 #### Contributions to the DG:
+[Developer Guide](https://ay2324s1-cs2113-f11-3.github.io/tp/DeveloperGuide.html)
 - Described about FlashcardStorage and EventStorage classes.
 - Added Sequance Diagram for FlashcardStorage
 
