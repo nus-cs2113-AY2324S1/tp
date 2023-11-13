@@ -77,7 +77,7 @@ smoother experience for users under the stress of exam revisions
     
 ### User Guide Contributions:
 Apart from proofreading the document, Juncheng added documentation for the following sections of the user guide: <br/>
-- [Edit Question Command](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#edit-questionanswer-edit) <br/>
+- [Edit Question Command](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#edit-questionansweroption-edit) <br/>
 - [Mark Question Difficulty Command](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#mark-difficulty-of-questions-markdiff)
 
 ### Developer Guide Contributions:
