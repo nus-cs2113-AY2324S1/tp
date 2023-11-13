@@ -1,7 +1,7 @@
 	____________________________________________________________
 	Here is the link to the user guide:
 	https://ay2324s1-cs2113-w12-2.github.io/tp/UserGuide.html
-	______           __    __         __  ___
+	    ______           __    __         __  ___
    / ____/___ ______/ /_  / /   ___  / /_/__ \
   / /   / __ `/ ___/ __ \/ /   / _ \/ __ \/ _/
  / /___/ /_/ (__  ) / / / /___/  __/ / / /_/
@@ -111,7 +111,7 @@
 	____________________________________________________________
 	____________________________________________________________
 	You have set a budget of: 60.0
-	Here's a quick view of how you're dogit ting so far:
+	Here's a quick view of how you're doing so far:
 	You have a net cash on hand of: 10.0
 	You still have the following percent of your budget left:
 
