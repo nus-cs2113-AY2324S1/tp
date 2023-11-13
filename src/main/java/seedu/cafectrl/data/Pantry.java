@@ -177,9 +177,8 @@ public class Pantry {
                 isRestockHeaderDisplayed = showRestockHeaderIfNeeded(isRestockHeaderDisplayed);
                 handleIncompleteDishCase(dishIngredient, order, numOfDish);
             } else {
-                if (numOfDish == 0) {
-                    isRestockHeaderDisplayed = showRestockHeaderIfNeeded(isRestockHeaderDisplayed);
-                }
+                isRestockHeaderDisplayed = (numOfDish == 0) ? showRestockHeaderIfNeeded(isRestockHeaderDisplayed)
+                        : isRestockHeaderDisplayed;
                 handleZeroDishCase(dishIngredient, numOfDish);
             }
         }
