@@ -28,9 +28,10 @@ Café proprietors who prefer typing on CLI than any other interaction method and
     Command Format: `edit_price dish/DISH_INDEX price/NEW_PRICE`<br>
     Error Handling: This command is able to detect missing argument tag, missing argument, wrong argument type, empty argument type and same price. It will then output specific error message to give user hint.
     <br/><br/>
-2.  **Help** <br>
-    Function: Print out a list of commands and their usages to the user<br>
-<br/><br/>
+   2.  **Help** <br>
+       Function: Print out a list of commands and their usages to the user<br> 
+       Extra info: This feature requires constant updating whenever a new feature is added. It is also very tedious to implement Junit test as the output is very long and keeps changing. Hence, I removed the Junit test in the last iteration as I feel that it is not necessary to have Junit test for a trivial `help` command.
+   <br/><br/>
 3.  **Encoding & Decoding of Pantry Stock Storage File** <br>
     Function: When the user calls bye command, all the ingredients stored in pantry will be encoded into format of `INGREDIENT_NAME | QUANTITY | UNIT`. The encoded data will be written in Pantry_stock.txt file. When the user starts a new session, the data in the text file will be extracted out and be decoded to load the ingredients back to PantryStock class.<br>
     Error Handling: This command will still check for the validity of each argument (e.g., length of ingredient name, type of unit), and skip the particular ingredient if any of the arguments is not valid. This can prevent the user from accidentally adding invalid ingredients to the text file.
@@ -51,7 +52,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
    [Relevant PR](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51) <br>
    - Learned `Pattern` and `Matcher` API by referring to addressbook and online documentations.
    - Created regex `COMMAND_ARGUMENT_FORMAT`, `ADD_ARGUMENT_STRING`, `LIST_INGREDIENT_ARGUMENT_STRING`, `DELETE_ARGUMENT_STRING` and `EDIT_PRICE_ARGUMENT_STRING`. 
-   - Created a skeleton method body of `prepare_add` method using patter and matcher, and added some basic explanations on how to use them for Dexter to follow and implement the feature.
+   - Created a skeleton method body of `prepare_add` method using pattern and matcher, and added some basic explanations on how to use them for Dexter to follow and implement the feature.
 
 ### Contributions to UG
 [UserGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html)
@@ -66,12 +67,16 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 3. Known Issues
 4. Glossary
 5. General formatting
+   - Ensure consistency of features descriptions and table formatting
+   - Correct typos and grammar error
 
 ### Contributions to DG
+[DeveloperGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html)
 #### Individual Task
 1. Parser component
 2. Edit Price
 3. Help
+4. Future Enhancements
 
 #### Team-based Task
 1. Table of Contents
@@ -81,11 +86,16 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 5. Non-Functional Requirements
 6. Glossary
 7. General formatting
+   - Ensure consistency of features descriptions and diagrams
+   - Correct typos and grammar error
 
 ### Other Contributions to Team-based Task
 1. Maintaining issue tracker with Dexter by labeling issues
 2. Adding theme to UG & DG
 3. Approving and merging PRs
+4. Reminding team members to use github effectively (although some of my reminders were ignored :")
+    - I encouraged my team members to report bugs using issue tracker on Github instead of using Telegram. (e.g., [#323](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/323))
+    - I requested PR reviews from my team members as I noticed they haven't had a chance to do any review. (e.g., [PR #51](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51))
 
 ### Review/Mentoring Contributions
 1. Reviewed and approved 52 PRs in total.
@@ -103,4 +113,4 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 ### Contributions beyond the Project Team
 1. Posted 8 posts in the forum.
    Examples of forum posts: [#37](https://github.com/nus-cs2113-AY2324S1/forum/issues/37), [#19](https://github.com/nus-cs2113-AY2324S1/forum/issues/19), [#31](https://github.com/nus-cs2113-AY2324S1/forum/issues/31)
-2. Reviews on PR from other teams: [T18-1]https://github.com/nus-cs2113-AY2324S1/tp/pull/19#discussion_r1379823357, {will add more in the future}
+2. Reviews on PR from other teams: [T18-1](https://github.com/nus-cs2113-AY2324S1/tp/pull/19#discussion_r1379823357)

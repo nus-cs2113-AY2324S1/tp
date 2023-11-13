@@ -147,8 +147,6 @@ public class Ui {
         showToUser(Messages.LINE_STRING);
         ArrayList<String> usagesTexts = new ArrayList<>();
 
-        usagesTexts.add(ExitCommand.MESSAGE_USAGE);
-        usagesTexts.add(HelpCommand.MESSAGE_USAGE);
         usagesTexts.add(AddDishCommand.MESSAGE_USAGE);
         usagesTexts.add(DeleteDishCommand.MESSAGE_USAGE);
         usagesTexts.add(EditPriceCommand.MESSAGE_USAGE);
@@ -161,6 +159,8 @@ public class Ui {
         usagesTexts.add(ListSaleByDayCommand.MESSAGE_USAGE);
         usagesTexts.add(NextDayCommand.MESSAGE_USAGE);
         usagesTexts.add(PreviousDayCommand.MESSAGE_USAGE);
+        usagesTexts.add(ExitCommand.MESSAGE_USAGE);
+        usagesTexts.add(HelpCommand.MESSAGE_USAGE);
 
         showToUserWithSpaceBetweenLines(usagesTexts);
     }

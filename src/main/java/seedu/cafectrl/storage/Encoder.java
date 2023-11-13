@@ -89,7 +89,7 @@ public class Encoder {
 
     //@@author ziyi105
     /**
-     * Encodes the pantry stock into format ingredient name | quantity | unit
+     * Encodes the pantry stock into format ingredient name | quantity | unit for storage
      *
      * @param pantry the pantry from current session
      * @return an arrayList of string of ecoded pantry stock
