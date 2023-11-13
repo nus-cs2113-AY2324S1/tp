@@ -125,7 +125,7 @@ Target user profile:
 - is reasonably comfortable using CLI applications
 
 ### Value proposition: 
-The value proposition is KaChinnnng allow user to manage their finances faster than a GUI driven app. 
+KaChinnnng is financial planner for user to track and improve their financial health. It allows user that are more comfortable with Command Line Interface (CLI) applications to record and track their financials faster than other Graphical User Interface (GUI) applications. Additionally, it provides a quick and easy currency conversion feature that allows user to convert their overseas expenses into SGD. By tracking one's finacial health, one can make more informed finanical decision in the future.
 
 ## User Stories
 
