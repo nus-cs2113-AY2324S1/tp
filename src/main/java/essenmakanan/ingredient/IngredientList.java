@@ -64,6 +64,11 @@ public class IngredientList {
         return false;
     }
 
+    /**
+     * To check if an id is valid
+     * @param id of the ingredient
+     * @return a boolean of whether the id is valid
+     */
     public boolean exist(int id) {
         if (id >= 0 && id < ingredients.size()) {
             return true;
@@ -75,6 +80,12 @@ public class IngredientList {
         return ingredients.indexOf(ingredient);
     }
 
+    /**
+     * Get the index of the ingredient from the ingredient name
+     *
+     * @param ingredientName is a string
+     * @return the index of the ingredient
+     */
     public int getIndex(String ingredientName) {
         int i = 0;
         for (Ingredient ingredient : ingredients) {
@@ -86,6 +97,11 @@ public class IngredientList {
         return -1;
     }
 
+    /**
+     * To add an ingredient object into the ingredient list if the ingredient does not already exist
+     *
+     * @param ingredient to be added
+     */
     public void addIngredient(Ingredient ingredient) {
         assert ingredient.getName() != null : "Ingredient name should not be null";
 
@@ -111,41 +127,42 @@ public class IngredientList {
             return;
         }
 
-        if (oldQuantity < newQuantity) {
-            // increase quantity of existing ingredient
-            existingIngredient.setQuantity(newQuantity);
-            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
-                    oldQuantity,
-                    ingredientToUpdate.getQuantity());
-        } else if (oldQuantity > newQuantity) {
-            // decrease quantity of existing ingredient
-            existingIngredient.setQuantity(newQuantity);
-            Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
-                    oldQuantity,
-                    ingredientToUpdate.getQuantity());
-        }
+        existingIngredient.setQuantity(newQuantity);
+        Ui.printUpdateIngredientsSuccess(existingIngredient.getName(),
+                oldQuantity,
+                newQuantity);
+
     }
 
-    public void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
-        for (int i = 1; i < editDetails.length; i++) {
+    public static void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
+        for (int i = 0; i < editDetails.length; i++) {
+            if (editDetails[i].isEmpty()) {
+                continue;
+            }
+
             // get flag of input to know which field to edit
             String flag = editDetails[i].substring(0, 2);
+            String content = editDetails[i].substring(2);
 
             switch (flag) {
             case "n/":
-                String newName = editDetails[i].substring(2);
-                Ui.printEditIngredientNameSuccess(existingIngredient.getName(), newName);
-                existingIngredient.setName(newName);
+                Ui.printEditIngredientNameSuccess(existingIngredient.getName(), content);
+                existingIngredient.setName(content);
                 break;
             case "q/":
-                Double newQuantity = Double.parseDouble(editDetails[i].substring(2));
+                Double newQuantity = null;
+                try {
+                    newQuantity = Double.parseDouble(content);
+                } catch (NumberFormatException e) {
+                    System.out.println("Quantity must be a double!");
+                    throw new EssenFormatException();
+                }
                 Ui.printEditIngredientQuantitySuccess(existingIngredient.getQuantity(), newQuantity);
                 existingIngredient.setQuantity(newQuantity);
                 break;
             case "u/":
                 try {
-                    String newUnitString = editDetails[i].substring(2);
-                    IngredientUnit newUnit = IngredientParser.mapIngredientUnit(newUnitString);
+                    IngredientUnit newUnit = IngredientParser.mapIngredientUnit(content);
                     Ui.printEditIngredientUnitSuccess(existingIngredient.getUnit(), newUnit);
                     existingIngredient.setUnit(newUnit);
                 } catch (EssenFormatException e) {
@@ -153,17 +170,27 @@ public class IngredientList {
                 }
                 break;
             default:
+                System.out.println("See user guide for correct edit format and example: " +
+                        "edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]");
                 throw new EssenFormatException();
             }
         }
 
     }
 
+    /**
+     * Delete ingredient by index
+     *
+     * @param index
+     */
     public void deleteIngredient(int index) {
         Ui.printDeleteIngredientsSuccess(ingredients.get(index).getName());
         ingredients.remove(index);
     }
 
+    /**
+     * Print all ingredients in the ingredient list
+     */
     public void listIngredients() {
         Ui.drawDivider();
         int count = 1;
@@ -177,6 +204,12 @@ public class IngredientList {
         }
     }
 
+    /**
+     * To check if ingredient lists are the same
+     *
+     * @param list is an IngredientList ingredients
+     * @return boolean value of whether the ingredient lists are the same
+     */
     public boolean equals(IngredientList list) {
         if (this.getSize() != list.getSize()) {
             return false;

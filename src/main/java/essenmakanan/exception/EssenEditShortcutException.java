@@ -17,6 +17,9 @@ public class EssenEditShortcutException extends Exception {
         case "same name":
             System.out.println("You can't edit shortcut's name with the same name.");
             break;
+        case "same quantity":
+            System.out.println("You can't edit shortcut's quantity with the same quantity.");
+            break;
         case "usage":
             System.out.println("You can't edit a shortcut's property more than once in a single line.");
             break;

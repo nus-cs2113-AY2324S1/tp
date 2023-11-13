@@ -38,7 +38,7 @@
 !define UI_COLOR_T3 #166800
 !define UI_COLOR_T4 #0E4100
 
-!define CLASS_DIAGRAM_COLOR #AA336A
+!define CLASS_DIAGRAM_COLOR #E5CFFB
 !define CLASS_ARROW_COLOR #483248
 
 !define INTERFACE_COLOR #C24641
@@ -70,10 +70,10 @@ skinparam Package {
 }
 
 skinparam Class {
-    FontColor #FFFFFF
+    FontColor #000000
     FontSize 15
     BorderThickness 1
-    BorderColor #FFFFFF
+    BorderColor #000000
     StereotypeFontColor #FFFFFF
     FontName Arial
 }
@@ -104,6 +104,6 @@ skinparam Shadowing false
 skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
-hide footbox
-hide members
+'hide footbox
+'hide members
 hide circle

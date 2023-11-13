@@ -8,6 +8,7 @@ import essenmakanan.exception.EssenStorageInvalidShortcutException;
 import essenmakanan.exception.EssenStorageNumberException;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.logger.EssenLogger;
+import essenmakanan.parser.IngredientParser;
 import essenmakanan.parser.ShortcutParser;
 import essenmakanan.shortcut.Shortcut;
 import essenmakanan.ui.Ui;
@@ -81,7 +82,7 @@ public class ShortcutStorage {
             }
 
             double shortcutQuantity = Double.parseDouble(parsedShortcut[1]);
-            if ((int) shortcutQuantity < 0) {
+            if (!IngredientParser.checkForValidQuantity(shortcutQuantity)) {
                 throw new EssenStorageInvalidQuantityException();
             }
 

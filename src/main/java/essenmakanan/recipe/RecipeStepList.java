@@ -131,6 +131,15 @@ public class RecipeStepList {
         return steps.get(index);
     }
 
+    public int getStepIndexByName(String name) {
+        for (int i = 0; i < steps.size(); i++) {
+            if (steps.get(i).getDescription().equals(name)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void deleteStep(Step step) {
         steps.remove(step);
     }

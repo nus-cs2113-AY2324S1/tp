@@ -114,4 +114,12 @@ public class RecipeParserTest {
         });
     }
 
+    @Test
+    public void executeRecipeCommand_titleDoNotExist_errorThrown() {
+        String userInput = "recipeThatDoesNotExist";
+        assertThrows(EssenOutOfRangeException.class, () -> {
+            RecipeParser.getRecipeIndex(recipes, userInput);
+        });
+    }
+
 }

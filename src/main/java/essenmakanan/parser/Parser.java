@@ -3,6 +3,7 @@ package essenmakanan.parser;
 import essenmakanan.command.AddIngredientCommand;
 import essenmakanan.command.AddRecipeCommand;
 import essenmakanan.command.AddShortcutCommand;
+import essenmakanan.command.CheckRecipeCommand;
 import essenmakanan.command.Command;
 import essenmakanan.command.DeleteIngredientCommand;
 import essenmakanan.command.DeleteRecipeCommand;
@@ -10,15 +11,15 @@ import essenmakanan.command.DeleteShortcutCommand;
 import essenmakanan.command.DuplicateRecipeCommand;
 import essenmakanan.command.EditIngredientCommand;
 import essenmakanan.command.EditRecipeCommand;
-import essenmakanan.command.ExecuteRecipeCommand;
 import essenmakanan.command.EditShortcutCommand;
+import essenmakanan.command.ExecuteRecipeCommand;
 import essenmakanan.command.ExitCommand;
 import essenmakanan.command.FilterRecipesCommand;
 import essenmakanan.command.HelpCommand;
-import essenmakanan.command.UseShortcutCommand;
 import essenmakanan.command.PlanRecipesCommand;
-import essenmakanan.command.CheckRecipeCommand;
 import essenmakanan.command.UseIngredientCommand;
+import essenmakanan.command.UseShortcutCommand;
+import essenmakanan.command.ViewAllAvailableRecipesCommand;
 import essenmakanan.command.ViewIngredientsCommand;
 import essenmakanan.command.ViewRecipesCommand;
 import essenmakanan.command.ViewShortcutsCommand;
@@ -83,6 +84,8 @@ public class Parser {
                 command = new ViewSpecificRecipeCommand(recipes, inputDetail);
             } else if (inputDetail.startsWith("i/")) {
                 command = new ViewSpecificIngredientCommand(ingredients, inputDetail);
+            } else if (inputDetail.startsWith("ar")) {
+                command = new ViewAllAvailableRecipesCommand(recipes, ingredients, inputDetail);
             } else {
                 throw new EssenFormatException();
             }

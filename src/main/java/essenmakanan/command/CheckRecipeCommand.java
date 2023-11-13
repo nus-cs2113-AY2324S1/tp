@@ -32,12 +32,34 @@ public class CheckRecipeCommand extends Command {
         this.diffUnitIngredients = new IngredientList();
     }
 
+    /**
+     * To get the missing ingredient list (ingredients that are not in the inventory)
+     *
+     * @return IngredientList of missing ingredients
+     */
     public IngredientList getMissingIngredients() {
         return this.missingIngredients;
     }
 
+    /**
+     * To get the list of insufficient ingredients (ingredients in the inventory that have insufficient quantity)
+     *
+     * @return IngredientList of insufficient ingredients
+     */
     public IngredientList getInsufficientIngredients() {
         return this.insufficientIngredients;
+    }
+
+
+    /**
+     * To check if two ingredients have the same unit
+     *
+     * @param ingredient1 first ingredient to compare
+     * @param ingredient2 second ingredient to compare
+     * @return boolean of if the units of both ingredients are the same
+     */
+    public static boolean sameUnit(Ingredient ingredient1, Ingredient ingredient2) {
+        return ingredient1.getUnit().equals(ingredient2.getUnit());
     }
 
     /**
@@ -55,7 +77,7 @@ public class CheckRecipeCommand extends Command {
                 missingIngredients.addIngredient(recipeIngredient);
             } else {
                 Ingredient inventoryIngredient = ingredients.getIngredient(recipeIngredientName);
-                boolean isSameUnit = IngredientParser.sameUnit(inventoryIngredient, recipeIngredient);
+                boolean isSameUnit = sameUnit(inventoryIngredient, recipeIngredient);
 
                 if (!isSameUnit) {
                     diffUnitIngredients.addIngredient(recipeIngredient);
@@ -75,6 +97,12 @@ public class CheckRecipeCommand extends Command {
         }
     }
 
+    /**
+     * To check if all ingredients needed  for a recipe are in the ingredient inventory
+     *
+     * @param recipeIngredients that we want to check if it is available in our ingredient inventory
+     * @return boolean of whether user has all ingredients
+     */
     public boolean allIngredientsReady(RecipeIngredientList recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
         this.getIngredientsStillNeeded();

@@ -15,7 +15,7 @@ public class AddShortcutTest {
 
     private ShortcutList shortcuts;
     private IngredientList ingredients;
-    private AddShortcutCommand addshortcutcommand;
+    private AddShortcutCommand command;
 
     @BeforeEach
     public void setup() {
@@ -28,9 +28,8 @@ public class AddShortcutTest {
     @Test
     public void addShortcut_validShortcut_expectShortcutInList() throws EssenOutOfRangeException {
         String userInput = "sc/bread,2";
-        addshortcutcommand = new AddShortcutCommand(shortcuts, ingredients, userInput);
-        addshortcutcommand.executeCommand();
-
+        command = new AddShortcutCommand(shortcuts, ingredients, userInput);
+        command.executeCommand();
 
         assertEquals("bread", shortcuts.getShortcut(0).getIngredientName());
         assertEquals(2.0, shortcuts.getShortcut(0).getQuantity());

@@ -47,10 +47,16 @@ public class Ingredient {
         return this.name + ": " + this.quantity + this.unit.getValue();
     }
 
-    public boolean equals(Ingredient i) {
-        boolean nameEqual = this.getName().equals(i.getName());
-        boolean quantityEqual = this.getQuantity().equals(i.getQuantity());
-        boolean unitEqual = this.getUnit().equals(i.getUnit());
+    /**
+     * To check if 2 ingredients are the same
+     *
+     * @param ingredient the other ingredient to check against
+     * @return a boolean of whether the ingredients have the same name, quantity and unit
+     */
+    public boolean equals(Ingredient ingredient) {
+        boolean nameEqual = this.getName().equals(ingredient.getName());
+        boolean quantityEqual = this.getQuantity().equals(ingredient.getQuantity());
+        boolean unitEqual = this.getUnit().equals(ingredient.getUnit());
 
         return (nameEqual && quantityEqual && unitEqual);
     }

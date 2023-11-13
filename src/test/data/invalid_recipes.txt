@@ -1,0 +1,16 @@
+  || step1 | NIGHT_BEFORE | 50 || bread | 5 | KILOGRAM
+bread ||   || bread | 5 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 50 ||
+bread ||  | NIGHT_BEFORE | 50 || bread | 5 | KILOGRAM
+bread || step1 |  | 50 || bread | 5 | KILOGRAM
+bread || step1 | NIGHT_BEFORE |  || bread | 5 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 50 ||  | 5 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 50 || bread |  | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 50 || bread | 5 |
+bread || step1 | sfasvc asvsa | 50 || bread | 5 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | -1 || bread | 5 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | sfasfsaf || bread | 5 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 0 || bread | -1 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 0 || bread | 0 | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 0 || bread | sfasfsaf | KILOGRAM
+bread || step1 | NIGHT_BEFORE | 0 || bread | 5 | sfgasdfsafasf

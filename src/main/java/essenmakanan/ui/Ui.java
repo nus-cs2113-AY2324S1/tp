@@ -49,6 +49,7 @@ public class Ui {
                 + "\t- Edit a recipe. [edit r/RECIPE_TITLE n/NEW_TITLE s/STEP_TO_EDIT,NEW_STEP]\n"
                 + "\t- Delete a recipe. [delete r/RECIPE_INDEX] OR [delete r/RECIPE_TITLE]\n"
                 + "\t- Filter recipes based on ingredients. [filter recipe i/INGREDIENTNAME [i/...] ]\n"
+                + "\t- View all available recipes. [view ar]\n"
         );
     }
 
@@ -97,13 +98,17 @@ public class Ui {
         drawDivider();
     }
 
-    public static void printUpdateIngredientsSuccess(String name, Double existingQuantity, Double quantityToAdd) {
+    public static void printUpdateIngredientsSuccess(String name, Double existingQuantity, Double newQuantity) {
         System.out.println("Ingredient: " + name + " has been successfully updated from: " + existingQuantity
-                + " to: " + (existingQuantity + quantityToAdd));
+                + " to: " + newQuantity);
         drawDivider();
     }
 
     public static void printAllIngredients(IngredientList ingredients) {
+        if (ingredients.getIngredients().size() == 0) {
+            System.out.println("The Inventory of Ingredients is empty now, please add something first!");
+            return;
+        }
         System.out.println("Here's a list of your ingredients!");
         ingredients.listIngredients();
         drawDivider();
@@ -119,6 +124,8 @@ public class Ui {
                 && diffUnitIngredients.isEmpty();
         if (allEmpty) {
             System.out.println("You have all the ingredients you need! You are ready to go!");
+            System.out.println("(Use the execute command after you've executed your recipe " +
+                    "- this is to update your ingredients inventory)");
         } else {
             if (!missingIngredients.isEmpty()) {
                 System.out.println("You are missing these ingredient(s): ");
@@ -143,8 +150,24 @@ public class Ui {
     }
 
     public static void printAllRecipes(RecipeList recipes) {
-        System.out.println("Here's a list of your recipes!");
-        recipes.listRecipeTitles();
+        if (recipes.getRecipes().size() == 0) {
+            System.out.println("Your Recipe List is empty right now, please create your own recipe first :D!");
+            drawDivider();
+        } else {
+            System.out.println("Here's a list of your recipes!");
+            recipes.listRecipeTitles();
+            drawDivider();
+        }
+    }
+
+    public static void printAllAvailableRecipes(RecipeList recipes) {
+        if (recipes.getRecipes().size() == 0) {
+            System.out.println("You don't have sufficient ingredients for any recipes at the moment :(");
+        } else {
+            System.out.println("Here are the recipes you can execute with your current ingredients!");
+            recipes.listRecipeTitles();
+            System.out.println("Use the execute command after executing any of these recipes!");
+        }
         drawDivider();
     }
 
@@ -182,7 +205,6 @@ public class Ui {
 
     public static void printSpecificRecipe(RecipeList recipes, int recipeIndex) {
         recipes.viewRecipe(recipeIndex);
-        drawDivider();
     }
 
     public static void printFilteredRecipes(RecipeList filteredRecipes, String ingredientName) {
@@ -247,7 +269,7 @@ public class Ui {
 
     public static void printExecuteRecipeFail(String title) {
         System.out.println("You are missing some ingredients to execute " + title +
-                "\nPlease use the [start] command to check what you are missing");
+                "\nPlease use the [check] command to check what you are missing: \"check " + title +"\"");
         drawDivider();
     }
 
