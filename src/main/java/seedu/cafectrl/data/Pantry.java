@@ -14,9 +14,9 @@ public class Pantry {
 
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Ui ui;
-
-    private ArrayList<Ingredient> pantryStock;
+    
     public static final int DEFAULT_ORDER_QTY = 1;
+    private ArrayList<Ingredient> pantryStock;
 
     //@@author NaychiMin
     public Pantry(Ui ui, ArrayList<Ingredient> pantryStock) {
