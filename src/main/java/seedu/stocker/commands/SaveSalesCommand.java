@@ -2,7 +2,10 @@ package seedu.stocker.commands;
 
 import seedu.stocker.drugs.Cart;
 import seedu.stocker.drugs.CartEntry;
+import seedu.stocker.drugs.StockEntry;
 import seedu.stocker.storage.Storage;
+import seedu.stocker.drugs.Drug;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +43,11 @@ public class SaveSalesCommand extends Command {
                     long quantity = entry.getQuantity();
                     double sellingPrice = entry.getSellingPrice();
 
-                    String toBeAppended = "Serial Number: " + serialNumber + ", "
+                    StockEntry stockEntry = inventory.get(serialNumber);
+                    Drug drug = stockEntry.getDrug();
+
+                    String toBeAppended = "Name: " + drug + ", "
+                            + "Serial Number: " + serialNumber + ", "
                             + "Quantity: " + quantity + ", "
                             + "Selling Price: " + sellingPrice;
                     storageManager.appendToFile("soldItems.txt", toBeAppended);
