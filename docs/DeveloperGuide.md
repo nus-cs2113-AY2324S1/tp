@@ -136,4 +136,16 @@ taking.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+*Given below are the instructions for manual testing the TaskLinker.*
+
+### Launching and exiting the application
+Launching the application
+  1. download the jar file from the release page.
+  2. open a terminal and navigate to the directory where the jar file is located.
+  3. run the command `java -jar TaskLinker.jar`
+
+Exiting the application
+  1. type `exit` in the command box and press enter.
+  2. the application will exit.
+
+
