@@ -1,0 +1,31 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class CreateFlashcardCommand
+class DeleteAllFlashcardsCommand
+class DeleteFlashcardCommand
+class DualFlashcardCommand {
+  # expertCommandLength: int
+  # syntaxString: String
+  # input: String
+  # beginnerCommandLength: int
+}
+class FlashcardCommand
+class ListFlashcardsCommand
+class StartReviewCommand {
+  - calendar: Calendar
+  - choices: ArrayList<String>
+}
+class UnknownCommand
+
+CreateFlashcardCommand      -[#000082,plain]-^  FlashcardCommand
+DeleteAllFlashcardsCommand  -[#000082,plain]-^  FlashcardCommand
+DeleteFlashcardCommand      -[#000082,plain]-^  DualFlashcardCommand
+DualFlashcardCommand        -[#000082,plain]-^  FlashcardCommand
+ListFlashcardsCommand       -[#000082,plain]-^  FlashcardCommand
+StartReviewCommand          -[#000082,plain]-^  DualFlashcardCommand
+UnknownCommand              -[#000082,plain]-^  FlashcardCommand
+@enduml

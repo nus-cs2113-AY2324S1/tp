@@ -6,21 +6,47 @@
 
 ## Design & implementation
 
-### flashcard package
+### `flashcard` package
 
-The API of the flashcard package is defined in [FlashcardComponent.java](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardComponent.java).
+The API of the `flashcard` package is defined in [`FlashcardComponent.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardComponent.java).
 
 The flashcard package is structured into multiple parts:
 
-- [Flashcard.java](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/Flashcard.java)
-- [FlashcardCommandParser.java](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardCommandParser.java)
-- [FlashcardComponent.java](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardComponent.java)
-- [FlashcardDirectory.java](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardDirectory.java)
-- [FlashcardList.java](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardList.java)
-- [FlashcardUi.java](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardUi.java)
-- [command package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/command)
-- [exceptions package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/exceptions)
-- [review package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/review)
+- [`Flashcard.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/Flashcard.java):
+  Represents a single flashcard with front text, back text as well as 
+  its unique id and current difficulty level.
+- [`FlashcardCommandParser.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardCommandParser.java):
+  Parses user inputs into the corresponding commands.
+- [`FlashcardComponent.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardComponent.java):
+  Encapsulates all functionality of the `flashcard` package and exposes it 
+  in one single, unified API.
+- [`FlashcardDirectory.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardDirectory.java):
+  Helper class needed for storing flashcards after TaskLinker has been 
+  exited; see [the DG section about storage components](#storage-components).
+- [`FlashcardList.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardList.java):
+  Container class for a list of flashcards. Exposes a simple, unified API 
+  for dealing with a list of flashcards.
+- [`FlashcardUi.java`](https://github.com/AY2324S1-CS2113-F11-3/tp/blob/master/src/main/java/seedu/duke/flashcard/FlashcardUi.java):
+  Responsible for interfacing with the user: dispatches commands to be 
+  executed and shows their output to the user.
+- [`command` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/command):
+  Contains classes representing the different kinds of commands (`list 
+  flashcards`, `create flashcard` etc.).
+- [`exceptions` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/exceptions):
+  Contains classes representing custom exceptions that are specific to the 
+  `flashcards` package.
+- [`review` package](https://github.com/AY2324S1-CS2113-F11-3/tp/tree/master/src/main/java/seedu/duke/flashcard/review):
+  Contains classes representing the different flashcard review modes (random 
+  mode and spaced repetition mode).
+
+See this high-level overview of the classes involved in providing the 
+flashcard functionality:
+
+![class diagram of classes providing flashcard functionality](Diagrams/flashcard-diagrams/overview_classes.svg)
+
+This sequence diagram illustrates how they work together to process user 
+input and execute the corresponding command:
+
 
 
 
@@ -77,9 +103,8 @@ As such, computer science students represent good target users of TaskLinker.
 ### Value proposition
 
 TaskLinker is a CLI-tool for helping university students memorize flashcards
-and track their flashcard and general academic progress in the courses they are
-taking. 
-
+and track their flashcard progress as well as general academic progress in
+the courses they are taking.
 
 ## User Stories
 
