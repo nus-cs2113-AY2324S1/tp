@@ -31,6 +31,8 @@ their own quizzes and benefit from the application.
 - **Justification:** Users may have many questions and being able to locate specific questions
 may help their learning.
 
+<div style="page-break-after: always;"></div>
+
 ### New Feature 3: `CommandShuffle`
 [#51](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/51)
 
@@ -47,6 +49,7 @@ The shuffle feature hence provides the option to randomise it instead.
 - **Justification:** This enables the option for a more streamlined, accessible question type
 in addition to the short answer questions. MCQ also allows the user to test for common mistakes.
 
+
 ### Code Testing
 [#32](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/32),
 [#76](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/76),
@@ -57,12 +60,15 @@ Wrote multiple JUnit test cases and assertions for the features implemented abov
 ### User Guide Contributions
 [#70](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/70)
 
-Responsible for writing these sections:
+Responsible for editing these sections:
 * [`short`](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#features)
 * [`find`](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#features)
 * [`shuffle`](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#features)
+* [Frequently Asked Questions](https://ay2324s1-cs2113-w12-1.github.io/tp/UserGuide.html#faq)
 
-### Developer Guide Contrbutions 
+<div style="page-break-after: always;"></div>
+
+### Developer Guide Contributions 
 [#55](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/55),
 [#70](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/70),
 [#72](https://github.com/AY2324S1-CS2113-W12-1/tp/pull/72),
@@ -77,8 +83,8 @@ Responsible for writing these sections:
 * [Command Shuffle](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#command-component)
 * [Command Find](https://ay2324s1-cs2113-w12-1.github.io/tp/DeveloperGuide.html#command-component)
 
-Created and standardised the object diagrams for most of the Commands, 
-and created the sequence diagram for the overview.
+Also created and standardised the object diagrams for most of the Commands, 
+and created the sequence diagram for the Command overview.
 
 ### Community Contributions
  * Reviewing other teams' Developer Guides 
