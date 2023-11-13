@@ -30,7 +30,7 @@ GUI apps.
    the user guide:
    * [Login System](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#login-system--create-new-user-or-login-existing-user)
    * [Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#help---list-currently-available-commands-in-current-version-their-uses-and-how-to-format-them-in-the-command-line)
-   * [Save Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#save---save-existing-drugs-onto-hard-drive-of-computer)
+   * [SaveDrugs Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#savedrugs---save-existing-drugs-onto-hard-drive-of-computer)
    * [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#addvendor---adds-a-vendor-into-list-of-vendors-being-tracked-by-system)
    * [listVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#listvendors---list-all-vendors-currently-being-tracked-by-the-system)
 
@@ -38,11 +38,11 @@ GUI apps.
 -**Contributions to the DG**
  * Hao Zhi came up with the inital template of the developer guide and added documentation for the following section of 
    the developer guide:
-   * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#login-system-component),[Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#4-help-command), [Save Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#5-save-command), [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-addvendor-command),
+   * [Design & implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#design--implementation),[Login System Component](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#login-system-component),[Help Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#5-help-command), [SaveDrugs Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-savedrugs-command), [addVendor Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#6-addvendor-command),
      [listVendors Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide.html#7-listvendors-command)
  * UML Diagrams
    * [Architecture Diagram under Design & Implementation](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/Architecture_Diagram.png),[Login System Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/StockerToLoginSystem.png),
-     [Save Command Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveCommandDiagram.png)  
+     [SaveDrugs Command Sequence Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveCommandDiagram.png)  
 
 -**Contributions to team-based tasks**
  * Set up GitHub team org/repo

@@ -533,7 +533,7 @@ to be made to load said file back into the drug inventory upon starting the appl
 There is a method to access the drugs within the inventory class. a separate method from the inventory class would then
 write the contents of these drugs back to the txt file for saving. This is depicted by the sequence diagram shown below.
 
-<img src="UML Diagrams/SaveCommandDiagram.png" width="350">
+<img src="UML%20Diagrams/SaveDrugsCommandDiagram.png" width="350">
 
 Upon booting up the system, a method from the inventory class goes through the contents of the txt file and copies it to
 the inventory drug list.
