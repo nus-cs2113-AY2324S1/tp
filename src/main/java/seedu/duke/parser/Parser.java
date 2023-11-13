@@ -24,8 +24,7 @@ import seedu.duke.commands.logcommands.DeleteLogCommand;
 import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.commands.logcommands.UpdateLogCommand;
 import seedu.duke.data.exception.IllegalValueException;
-import seedu.duke.commands.meal.AddCommand;
-
+import seedu.duke.commands.meal.*;
 
 public class Parser {
 
@@ -57,65 +56,71 @@ public class Parser {
 
         switch (commandWord) {
 
-        // case AddCommand.COMMAND_WORD:
-        // return prepareAdd(arguments);
-        //
-        // case DeleteCommand.COMMAND_WORD:
-        // return prepareDelete(arguments);
-        //
-        // case ClearCommand.COMMAND_WORD:
-        // return new ClearCommand();
-        //
-        // case FindCommand.COMMAND_WORD:
-        // return prepareFind(arguments);
-        //
-        // case ListCommand.COMMAND_WORD:
-        // return new ListCommand();
-        //
-        // case ViewCommand.COMMAND_WORD:
-        // return prepareView(arguments);
-        //
-        // case ViewAllCommand.COMMAND_WORD:
-        // return prepareViewAll(arguments);
-        //
+            // case AddCommand.COMMAND_WORD:
+            // return prepareAdd(arguments);
+            //
+            // case DeleteCommand.COMMAND_WORD:
+            // return prepareDelete(arguments);
+            //
+            // case ClearCommand.COMMAND_WORD:
+            // return new ClearCommand();
+            //
+            // case FindCommand.COMMAND_WORD:
+            // return prepareFind(arguments);
+            //
+            // case ListCommand.COMMAND_WORD:
+            // return new ListCommand();
+            //
+            // case ViewCommand.COMMAND_WORD:
+            // return prepareView(arguments);
+            //
+            // case ViewAllCommand.COMMAND_WORD:
+            // return prepareViewAll(arguments);
+            //
 
-        case LogCommand.COMMAND_WORD:
-            return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case LogCommand.COMMAND_WORD:
+                return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case DeleteLogCommand.COMMAND_WORD:
-            return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case DeleteLogCommand.COMMAND_WORD:
+                return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case ViewLogCommand.COMMAND_WORD:
-            return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case ViewLogCommand.COMMAND_WORD:
+                return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case UpdateLogCommand.COMMAND_WORD:
-            return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case UpdateLogCommand.COMMAND_WORD:
+                return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommand(Arrays.asList(arguments.trim().split(" ")));
+            case AddCommand.COMMAND_WORD:
+                return new AddCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case GoalCommand.COMMAND_WORD:
-            return new GoalCommand(userInput);
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case DeleteGoalCommand.COMMAND_WORD:
-            return new DeleteGoalCommand(userInput);
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case ViewGoalCommand.COMMAND_WORD:
-            return new ViewGoalCommand(userInput);
+            case GoalCommand.COMMAND_WORD:
+                return new GoalCommand(userInput);
 
-        case AchieveGoalCommand.COMMAND_WORD:
-            return new AchieveGoalCommand(userInput);
+            case DeleteGoalCommand.COMMAND_WORD:
+                return new DeleteGoalCommand(userInput);
 
-        case AchievementCommand.COMMAND_WORD:
-            return new AchievementCommand(userInput);
+            case ViewGoalCommand.COMMAND_WORD:
+                return new ViewGoalCommand(userInput);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case AchieveGoalCommand.COMMAND_WORD:
+                return new AchieveGoalCommand(userInput);
 
-        case HelpCommand.COMMAND_WORD: // Fallthrough
+            case AchievementCommand.COMMAND_WORD:
+                return new AchievementCommand(userInput);
 
-        default:
-            return new HelpCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case HelpCommand.COMMAND_WORD: // Fallthrough
+
+            default:
+                return new HelpCommand();
         }
     }
     // /**

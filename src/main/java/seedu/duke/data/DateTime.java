@@ -49,6 +49,7 @@ public class DateTime {
      *                       solution.
      */
     public void setRawData(String rawData) throws Exception {
+        System.out.println(rawData);
         for (DateTimeFormatter formatter : formatters) {
             try {
                 dateTime = LocalDateTime.parse(rawData, formatter);
@@ -104,5 +105,10 @@ public class DateTime {
             return 1;
         }
         return 0;
+    }
+
+    public static DateTime Now() throws Exception {
+        DateTime now = new DateTime(LocalDateTime.now().format(toStringFormatter));
+        return now;
     }
 }

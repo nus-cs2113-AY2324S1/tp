@@ -37,6 +37,7 @@ public class Duke {
     private final String exerciseLogFilePath = "./data/ExerciseLog.txt";
     private final String goalFilePath = "./data/GoalRecord.txt";
     private final String achmFilePath = "./data/Achievement.txt";
+
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
     }

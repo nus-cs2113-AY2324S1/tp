@@ -47,7 +47,8 @@ public class TextUi {
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
     /**
-     * Format of a comment input line. Comment lines are silently consumed when reading user input.
+     * Format of a comment input line. Comment lines are silently consumed when
+     * reading user input.
      */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
@@ -65,7 +66,8 @@ public class TextUi {
 
     /**
      * Returns true if the user input line should be ignored.
-     * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
+     * Input should be ignored if it is parsed as a comment, is only whitespace, or
+     * is empty.
      *
      * @param rawInputLine full raw user input line.
      * @return true if the entire user input line should be ignored.
@@ -126,24 +128,29 @@ public class TextUi {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 
-
     public void showInitFailedMessage() {
         showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 
     /**
      * Shows message(s) to the user
+     * 
      * @param message
      */
     public void showToUser(String... message) {
         for (String m : message) {
+            if (m == null) {
+                continue;
+            }
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
     }
 
     /**
-     * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
+     * Shows the result of a command execution to the user. Includes additional
+     * formatting to demarcate different
      * command execution segments.
+     * 
      * @param result
      */
     public void showResultToUser(CommandResult result) {
@@ -207,7 +214,9 @@ public class TextUi {
     }
 
     /**
-     * This method is used to implement Goal commend execution, when adding a new goal
+     * This method is used to implement Goal commend execution, when adding a new
+     * goal
+     * 
      * @return string contains information of generating a new goal successfully
      */
     public static String addGoalSuccessMessage() {
@@ -220,6 +229,7 @@ public class TextUi {
      * This is used to show the content inside the goal list.
      * It first checks if the list contains at least one goal,
      * then print the goal by using string builder.
+     * 
      * @return String containing all the inserted goal in the global field goal list
      */
     public static String showGoalList() {
@@ -229,7 +239,7 @@ public class TextUi {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
-        for (int i = 0; i < numberOfGoal; i++){
+        for (int i = 0; i < numberOfGoal; i++) {
             sb.append(i + 1).append(". ").append(Duke.goalList.getGoal(i)).append("\n");
         }
 
@@ -237,7 +247,9 @@ public class TextUi {
     }
 
     /**
-     * Similar to show Goal List. This method is used to list out all achieved goal in record.
+     * Similar to show Goal List. This method is used to list out all achieved goal
+     * in record.
+     * 
      * @return String containing all achieved goal
      */
     public static String showAchievement() {
@@ -247,7 +259,7 @@ public class TextUi {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Congratulation! See your achievements below: \n");
-        for (int i = 0; i < numberOfGoal; i++){
+        for (int i = 0; i < numberOfGoal; i++) {
             sb.append(i + 1).append(". [A]").append(Duke.achievedGoals.getGoal(i)).append("\n");
         }
 
@@ -257,6 +269,7 @@ public class TextUi {
     /**
      * This method return content of goal list in any goalList object
      * It is typically used to overwrite save file whenever change in goal records
+     * 
      * @param goals a GoalList object
      * @return String containing goal information of the goal object
      */
@@ -265,7 +278,7 @@ public class TextUi {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < goals.getGoalCount(); i++){
+        for (int i = 0; i < goals.getGoalCount(); i++) {
             sb.append(goals.getGoal(i)).append("\n");
         }
         return sb.toString();
