@@ -363,7 +363,9 @@ public class QuestionList {
      */
     public void shuffleQuestions(Ui ui) {
         Collections.shuffle(allQns);
-        ui.displayMessage(SHUFFLE_QN_MSG);
+        if(!allQns.isEmpty()){
+            ui.displayMessage(SHUFFLE_QN_MSG);
+        }
         printQuestionList();
     }
     /**
