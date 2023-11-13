@@ -82,11 +82,11 @@ public class FitTrack {
         save();
     }
 
-    // @@author J0shuaLeong
 
     /**
      * Load all files into the program data if any and check if file corrupted.
      */
+    // @@author J0shuaLeong
     private void load() {
         try {
             this.mealList = storage.loadMeals();
@@ -133,11 +133,11 @@ public class FitTrack {
     }
     // @@author
 
-    // @@author J0shuaLeong
 
     /**
      * Prompt user to enter profile settings if they are first time user.
      */
+    // @@author J0shuaLeong
     public void initUserProfile() {
         boolean isInputValid = false;
         while (!isInputValid) {
@@ -174,7 +174,7 @@ public class FitTrack {
             return new Storage();
         }
     }
-    // @@author J0shuaLeong
+    // @@author
 
     private void save() {
         try {

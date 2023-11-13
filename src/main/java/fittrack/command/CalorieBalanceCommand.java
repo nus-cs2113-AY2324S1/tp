@@ -1,12 +1,12 @@
 package fittrack.command;
 
-
 import fittrack.data.Date;
 import fittrack.data.Meal;
 import fittrack.data.Workout;
 import fittrack.parser.ParseException;
 
 public class CalorieBalanceCommand extends Command {
+
     public static final String COMMAND_WORD = "caloriebalance";
     private static final String DESCRIPTION =
             String.format("%s will take your calorie limit you set " +
