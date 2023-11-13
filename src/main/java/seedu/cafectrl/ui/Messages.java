@@ -4,6 +4,8 @@ public class Messages {
 
     /** Greeting messages */
     public static final String LINE_STRING = "------------------------------------------------------------------------";
+    public static final String EQUAL_LINE_STRING = "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
+            + "= = = =";
 
     public static final String GOODBYE_MESSAGE = "Goodbye <3 Have a great day ahead!";
 

@@ -280,8 +280,8 @@ public class Ui {
     }
 
     public void showDishAvailabilityMessage() {
-        showToUser(Messages.AVAILABLE_DISHES);
-        showToUser(Messages.LINE_STRING);
+        showToUser(Messages.AVAILABLE_DISHES,
+                Messages.EQUAL_LINE_STRING);
     }
     public void showPreviousDay() {
         showToUser(Messages.PREVIOUS_DAY_COMMAND_MESSAGE);
