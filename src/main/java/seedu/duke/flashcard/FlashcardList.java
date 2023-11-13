@@ -3,6 +3,8 @@
 package seedu.duke.flashcard;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Container class for a list of flashcards.
@@ -10,6 +12,7 @@ import java.util.ArrayList;
  */
 public class FlashcardList {
     private ArrayList<Flashcard> flashcards;
+    private Logger logger;
 
     /**
      * Instantiates and returns a FlashcardList holding the passed flashcards.
@@ -18,6 +21,9 @@ public class FlashcardList {
      */
     public FlashcardList(ArrayList<Flashcard> flashcards) {
         this.flashcards = flashcards;
+
+        logger = Logger.getLogger("FlashcardUi");
+        logger.setLevel(Level.WARNING);
     }
 
     public ArrayList<Flashcard> getFlashcards() {
@@ -46,6 +52,8 @@ public class FlashcardList {
      * Deletes all flashcards in the FlashcardList, effectively emptying it.
      */
     public void deleteAllFlashcards() {
+        logger.log(Level.INFO, "clearing the list of flashcards");
+
         flashcards.clear();
 
         assert flashcards.size() == 0 : "flashcardList should be empty now";
@@ -68,6 +76,8 @@ public class FlashcardList {
      * @return Whether the deletion was successful (true if successful).
      */
     public boolean deleteFlashcardById(int flashcardId) {
+        logger.log(Level.INFO, "trying to delete flashcard by id");
+
         int indexToDeleteAt = -1;
 
         for (int i = 0; i < flashcards.size(); i++) {
@@ -77,9 +87,11 @@ public class FlashcardList {
         }
 
         if (indexToDeleteAt == -1) {
+            logger.log(Level.INFO, "deletion was unsuccessful");
             return false;
         } else {
             flashcards.remove(indexToDeleteAt);
+            logger.log(Level.INFO, "successfully deleted flashcard");
             return true;
         }
     }

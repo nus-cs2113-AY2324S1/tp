@@ -11,11 +11,16 @@ import seedu.duke.flashcard.command.DeleteAllFlashcardsCommand;
 import seedu.duke.flashcard.command.DeleteFlashcardCommand;
 import seedu.duke.flashcard.command.UnknownCommand;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Parses input entered by the user into a FlashcardCommand for further
  * processing.
  */
 public class FlashcardCommandParser {
+    private Logger logger;
+
     /**
      * Returns the FlashcardCommand corresponding to the passed input.
      *
@@ -25,7 +30,12 @@ public class FlashcardCommandParser {
     public FlashcardCommand parseInput(String input, Calendar calendar) {
         assert input != null : "input must not be null";
 
+        logger = Logger.getLogger("FlashcardCommandParser");
+        logger.setLevel(Level.WARNING);
+
         input = input.toLowerCase().strip();
+
+        logger.log(Level.INFO, "trying to find matching FlashcardCommand");
 
         if (input.equals("create flashcard")) {
             return new CreateFlashcardCommand();
@@ -38,6 +48,8 @@ public class FlashcardCommandParser {
         } else if (input.startsWith("delete flashcard")) {
             return new DeleteFlashcardCommand(input);
         }
+
+        logger.log(Level.INFO, "input doesn't match any know command");
 
         return new UnknownCommand();
     }
