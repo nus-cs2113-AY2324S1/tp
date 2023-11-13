@@ -1,13 +1,13 @@
 @startuml
 hide footbox
 actor User
-participant CheckOutCommand
-participant Cart
-participant StockEntry
-participant Drug
-participant CartEntry
-participant SalesList
-participant CommandResult
+participant ":CheckOutCommand" as CheckOutCommand
+participant ":Cart" as Cart
+participant ":StockEntry" as StockEntry
+participant ":Drug" as Drug
+participant ":CartEntry" as CartEntry
+participant ":SalesList" as SalesList
+participant ":CommandResult" as CommandResult
 
 User -> CheckOutCommand: execute()
 activate User
@@ -19,8 +19,9 @@ alt Cart is not empty
   Cart -> Cart: Retrieve current cart
   Cart -> Cart: Create temporary holder (List<CartEntry>)
   Cart -> StockEntry: Get StockEntry for each entry
+  activate StockEntry
   loop over entries
-    activate StockEntry
+    activate Drug
     StockEntry -> Drug: Get Drug
     activate Drug
     Drug -> Drug: Get SellingPrice
@@ -28,6 +29,7 @@ alt Cart is not empty
     StockEntry --> CartEntry: Create CartEntry with quantity and selling price
     deactivate Drug
     deactivate StockEntry
+    deactivate CartEntry
   end
   Cart -> SalesList: Add temporary holder to sold items
   Cart -> CommandResult: Create result message

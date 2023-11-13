@@ -35,19 +35,26 @@ GUI apps.
 
 -Contributions to the UG
 
-* Matin added documentation for the following sections of
-  the user guide:
-    * [Find Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date)
-    * [saveSales Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#setthreshold---set-the-threshold-quantity-for-a-drug)
-    * [listSaLes Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#listthreshold---list-all-drugs-and-their-threshold-levels)
+Azfarul Matin added documentation for the following sections of
+the user guide:
+* [Add Command]()
+* [Find Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date:~:text=Finds%20drugs%20whose%20serial%20number%20contain%20any%20of%20the%20given%20keywords.)
+* [saveSales Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date:~:text=saveSales%20%2D%20Save%20the%20current%20sold%20items)
+* [listSaLes Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#find---finds-drugs-using-their-name-or-expiry-date:~:text=listSales%20%2D%20List%20the%20description%20of%20sold%20items%20saved)
 
 -Contributions to the DG
 
 * Matin added documentation for the following section of
   the developer guide:
-    *
+    * [List Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide#:~:text=Command%20function%20works.-,2.%20ListCommand,-The%20ListCommand%20is)
+    * [Checkout Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide#:~:text=13.%20Checkout%20Command)
+    * [saveSales Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide#:~:text=15.%20SaveSales%20Command)
+    * [listSales Command](https://ay2324s1-cs2113-t17-3.github.io/tp/DeveloperGuide#:~:text=14.%20ListSales%20Command)
 * UML Diagrams
-    *
+    * [ListCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/ListSalesCommand.png)
+    * [CheckoutCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/CheckoutCommandDiagram.png)
+      * [SaveSalesCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/SaveSalesCommand.png)
+    * [ListSalesCommand Diagram](https://ay2324s1-cs2113-t17-3.github.io/tp/UML%20Diagrams/ListSalesCommand.png)
 
 -Contributions to team-based tasks
 

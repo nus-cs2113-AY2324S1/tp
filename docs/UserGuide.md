@@ -173,6 +173,13 @@ Adds a drug to be tracked by the system.
   that drug.
 - If none of the above conditions are met, the system will also add a new entry to the inventory.
 
+Note:
+
+- The expiry date should be entered in the format "dd/MM/yyyy" (e.g., 01/02/2024).
+- The quantity should be between 1 and 999,999,999.
+- The price (selling price) should be between 0.01 and 1,000.00 and can have up to 2 decimal places.
+- The serial number should be in the format of three capital letters followed by three numbers (e.g., ABC123).
+
 Format:
 
 add /n DRUG_NAME /d EXPIRY_DATE /s SERIAL_NUMBER /q QUANTITY /p PRICE
@@ -643,6 +650,13 @@ Expected outcome:
 
 ```
 
+Expected outcome if there are no sales transactions to save:
+
+```
+|| The sales list is empty. Nothing to save.
+
+```
+
 ### `listSales` - List the description of sold items saved
 
 The listSales command is designed to provide you with a clear and organized list of all sales transactions that have been tracked by the system. It helps you review and manage sales data efficiently.
@@ -658,6 +672,13 @@ Expected outcome:
 || 	1. Name: Histamine, Serial Number: HIS526, Quantity: 2, Selling Price: 15.9, Cost: 31.8
 || 	2. Name: Doliprane, Serial Number: DOL123, Quantity: 2, Selling Price: 12.9, Cost: 25.8
 || Total Cost: 57.6
+
+```
+
+Expected outcome if the list is empty:
+
+```
+|| The sales list is empty.
 
 ```
 
