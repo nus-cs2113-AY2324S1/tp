@@ -64,6 +64,8 @@ Make sure you have Java `11` or above installed on your system.
   as `allowance /amt 1000`.
 - Items in square brackets are optional.
   e.g. `allowance` can be used with or without `/note`.
+- All parameters are case-insensitive, i.e. `/amt` and `/AMT` are the same.
+- All categories are case-insensitive, i.e. `food` and `FOOD` are the same.
 - The commands provided in the following examples are presented in a sequential order, and their expected outputs are for illustrative purposes only. It is important to note that using these commands in a different order may result in outputs that do not exactly match those shown in this guide. However, any such variations would still be consistent with the logical use of the application.
 
 ### Viewing help: `help`
@@ -101,7 +103,8 @@ Expected output:
 To add a new allowance entry to the financial tracker, please adhere to the given format!  
 
 > 📑 Note   
-> Fields in square brackets `[ ]` can be omitted. 
+> Fields in square brackets `[ ]` can be omitted.   
+> The categories are case-insensitive, i.e. `SALARY` and `salary` are the same.
 
 Possible categories for allowance are:
 - SALARY
@@ -109,8 +112,7 @@ Possible categories for allowance are:
 - INVESTMENTS
 - GIFTS
 - OTHER_ALLOWANCE
-- NO_ALLOWANCE_CATEGORY: "" or "no_allowance_category"
-Note that letter case doesn't matter.
+- NO_ALLOWANCE_CATEGORY
 
 Format:   
 1) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
@@ -140,7 +142,8 @@ Now you have 2 transactions in the list.
 To add a new expense entry to the financial tracker, please adhere to the given format!
 
 > 📑 Note   
-> Fields in square brackets `[ ]` can be omitted.
+> Fields in square brackets `[ ]` can be omitted.   
+> The categories are case-insensitive, i.e. `FOOD` and `food` are the same.
 
 Possible categories for allowance are:
 - FOOD
@@ -233,6 +236,10 @@ Remaining budget: $160.00
 ### Filtering entries by category: `filter`
 
 To filter entries in the financial tracker by category.
+
+> 📑 Note
+> The categories are case-insensitive, i.e. `SALARY` and `salary` are the same.
+
 The current supported categories are:
 - Allowance:
    - SALARY
