@@ -11,17 +11,6 @@ main -> main ++: executeCommand()
 activate main MODEL_COLOR
 note left: Save data to all three files \n upon each command execution
 main -[MODEL_COLOR]> storage ++: save(userProfile:UserProfile, mealList:MealList, workoutList:WorkoutList)
-activate storage STORAGE_COLOR
-storage -> storage ++: saveProfile(userProfile:UserProfile)
-activate storage STORAGE_COLOR
-create fileWriter
-storage -[STORAGE_COLOR]> fileWriter ++: FileWriter(PROFILE_FILE_PATH:String)
-return file:FileWriter
-storage -[STORAGE_COLOR]> fileWriter ++: write(profile.String():String)
-return
-destroy fileWriter
-return
-deactivate storage
 
 storage -> storage ++: saveMeal(mealList:MealList)
 activate storage STORAGE_COLOR
@@ -30,19 +19,6 @@ storage -[STORAGE_COLOR]> fileWriter ++: FileWriter(MEAL_LIST_FILE_PATH:String)
 return file:FileWriter
 group loop [for all elements in mealArr]
     storage -[STORAGE_COLOR]> fileWriter ++: write(m.String():String)
-    return
-destroy fileWriter
-end
-return
-deactivate storage
-
-storage -> storage ++: saveWorkout(workoutList:WorkoutList)
-activate storage STORAGE_COLOR
-create fileWriter
-storage -[STORAGE_COLOR]> fileWriter ++: FileWriter(WORKOUT_LIST_FILE_PATH:String)
-return file:FileWriter
-group loop [for all elements in workoutArr]
-    storage -[STORAGE_COLOR]> fileWriter ++: write(w.String():String)
     return
 destroy fileWriter
 end
