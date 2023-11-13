@@ -2,6 +2,7 @@ package essenmakanan.storage;
 
 import essenmakanan.exception.EssenFileNotFoundException;
 import essenmakanan.exception.EssenInvalidEnumException;
+import essenmakanan.exception.EssenStorageDuplicateException;
 import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.exception.EssenStorageNumberException;
 import essenmakanan.ingredient.Ingredient;
@@ -48,6 +49,16 @@ public class IngredientStorage {
         }
     }
 
+    private boolean searchDuplicate(String ingredientName) {
+        for (Ingredient ingredient : ingredientListPlaceholder) {
+            if (ingredient.getName().equals(ingredientName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void createNewData(Scanner scan) {
         String dataString = scan.nextLine();
         String[] parsedIngredient = dataString.trim().split(" \\| ");
@@ -59,6 +70,11 @@ public class IngredientStorage {
             }
 
             String ingredientName = parsedIngredient[0];
+            if (searchDuplicate(ingredientName)) {
+                throw new EssenStorageDuplicateException();
+            }
+
+
             double ingredientQuantity = Double.parseDouble(parsedIngredient[1]);
             IngredientUnit ingredientUnit = IngredientUnit.valueOf(parsedIngredient[2]);
 
@@ -78,6 +94,10 @@ public class IngredientStorage {
         } catch (IllegalArgumentException exception) {
             EssenInvalidEnumException.handleException(dataString);
             String message = "Data: " + dataString + " has an invalid enum";
+            EssenLogger.logWarning(message, exception);
+        } catch (EssenStorageDuplicateException exception) {
+            exception.handleException(dataString);
+            String message = "Data: " + dataString + " cannot be created due to duplicates";
             EssenLogger.logWarning(message, exception);
         }
         EssenLogger.logInfo("Saved ingredient data has been received");

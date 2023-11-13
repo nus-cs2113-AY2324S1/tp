@@ -1,21 +1,20 @@
 package essenmakanan.shortcut;
 
-import essenmakanan.command.AddShortcutCommand;
-import essenmakanan.exception.EssenOutOfRangeException;
+import essenmakanan.command.UseShortcutCommand;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
-
 import essenmakanan.ingredient.IngredientUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AddShortcutTest {
+public class UseShortcutTest {
 
     private ShortcutList shortcuts;
     private IngredientList ingredients;
-    private AddShortcutCommand command;
+
+    private UseShortcutCommand command;
 
     @BeforeEach
     public void setup() {
@@ -26,12 +25,14 @@ public class AddShortcutTest {
     }
 
     @Test
-    public void addShortcut_validShortcut_expectShortcutInList() throws EssenOutOfRangeException {
-        String userInput = "sc/bread,2";
-        command = new AddShortcutCommand(shortcuts, ingredients, userInput);
+    public void useShortcut_availableShortcut_expectUpdatedIngredient() {
+        shortcuts.addShortcut(new Shortcut("bread", 2.0));
+
+        String userInput = "1";
+        command = new UseShortcutCommand(shortcuts, ingredients, userInput);
         command.executeCommand();
 
-        assertEquals("bread", shortcuts.getShortcut(0).getIngredientName());
-        assertEquals(2.0, shortcuts.getShortcut(0).getQuantity());
+        Ingredient ingredient = ingredients.getIngredient(0);
+        assertEquals(4, ingredient.getQuantity());
     }
 }

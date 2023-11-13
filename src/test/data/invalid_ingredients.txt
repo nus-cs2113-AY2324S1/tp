@@ -1,0 +1,9 @@
+    | 2 | GRAM
+cheese | 10 |
+bread |    | GRAM
+lettuce | -1 | PIECE
+lettuce | dasfasfsaf | PIECE
+lettuce | 1.0 | asfasgsadsd
+carrot | 5  KILOGRAM
+carrot  5 | KILOGRAM
+lettuce | 0 | PIECE
