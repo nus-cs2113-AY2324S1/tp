@@ -34,11 +34,12 @@ Given below is a quick overview of main components and how they interact with ea
 
 ### Recipe component
 
-1. Upon booting up the application, `RecipeList` will retrieve past recipe data by calling `restoreSavedData` in the Storage class.
-The restored `recipes` will then be stored in `RecipeList`.
-If the `recipes.txt` file does not exist, no data is retrieved and RecipeList will be empty.
+1. Upon booting up the application, `RecipeList` will retrieve past recipe data by calling `restoreSavedData` 
+in the Storage class. The restored `recipes` will then be stored in `RecipeList`. If the `recipes.txt` file does 
+not exist, no data is retrieved and RecipeList will be empty.
 2. Each `RecipeList` consists of zero to as many Recipe in it's ArrayList. 
-3. Each `Recipe` in RecipeList consists of exactly one `RecipeIngredientList`, up to four `Tag` and exactly one `RecipeStepList`.
+3. Each `Recipe` in RecipeList consists of exactly one `RecipeIngredientList`, up to four `Tag` and 
+exactly one `RecipeStepList`.
 4. `RecipeIngredientList` consists of at least one Ingredient while `RecipeStepList` consists of at least one step.
 
 
@@ -47,6 +48,14 @@ If the `recipes.txt` file does not exist, no data is retrieved and RecipeList wi
 ### Ingredient component
 ![IngredientListClassDiagram.png](images%2FIngredientListClassDiagram.png)
 
+### Shortcut component
+
+1. Upon booting up the application, `ShortcutList` will retrieve past recipe data by calling `restoreSavedData` 
+   in the Storage class. The restored `shortcuts` will then be stored in `ShortcutList`. If the `shortcuts.txt`
+   file does not exist, no data is retrieved and RecipeList will be empty.
+2. Each `ShortcutList` consists of zero to as many Shortcut in it's ArrayList.
+
+![ShortcutListClassDiagram.png](images%2FShortcutListClassDiagram.png)
 
 ### Storage component
 
