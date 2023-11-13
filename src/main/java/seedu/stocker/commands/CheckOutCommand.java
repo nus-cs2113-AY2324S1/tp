@@ -26,7 +26,7 @@ public class CheckOutCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public  <T> CommandResult<T> execute() {
         try {
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS + System.lineSeparator());
             int index = 1;

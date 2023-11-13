@@ -29,7 +29,7 @@ public class AddToCartCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public <T> CommandResult<T> execute() {
         StockEntry entry = inventory.get(this.serialNumber);
         if (entry == null) {
             return new CommandResult<>("This drug is not in stock");
@@ -41,7 +41,7 @@ public class AddToCartCommand extends Command {
             if (currentDate.isAfter(expiryDate)) {
                 return new CommandResult<>("This drug is expired. Unable to add to cart");
             } else if (entry.getQuantity() < this.quantity + currentCart.getEntryQuantity(this.serialNumber)) {
-                return new CommandResult("There is not enough stock on this drug.");
+                return new CommandResult<>("There is not enough stock on this drug.");
             } else {
                 CartEntry cartEntry = currentCart.getEntryBySerialNumber(this.serialNumber);
                 if (cartEntry == null) {
@@ -49,7 +49,7 @@ public class AddToCartCommand extends Command {
                 } else {
                     cartEntry.incrQuantity(this.quantity);
                 }
-                return new CommandResult(String.format(MESSAGE_SUCCESS, entry.getDrug().getName()));
+                return new CommandResult<>(String.format(MESSAGE_SUCCESS, entry.getDrug().getName()));
             }
         }
     }

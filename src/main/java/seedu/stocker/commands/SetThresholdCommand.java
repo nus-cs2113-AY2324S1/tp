@@ -35,19 +35,19 @@ public class SetThresholdCommand extends Command {
      * @return A CommandResult indicating the success or failure of the command.
      */
     @Override
-    public CommandResult execute() {
+    public  <T> CommandResult<T> execute() {
 
         if (inventory.getStockEntries().isEmpty()) {
-            return new CommandResult("Inventory is empty.");
+            return new CommandResult<>("Inventory is empty.");
         }
 
         StockEntry stockEntry = inventory.get(serialNumber);
 
         if (stockEntry != null) {
             stockEntry.setThresholdQuantity(threshold);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, stockEntry.getDrug().getName(), threshold));
+            return new CommandResult<>(String.format(MESSAGE_SUCCESS, stockEntry.getDrug().getName(), threshold));
         } else {
-            return new CommandResult("Drug not found.");
+            return new CommandResult<>("Drug not found.");
         }
     }
 }

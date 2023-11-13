@@ -2,8 +2,10 @@
 
 hide footbox
 actor User
-participant AddDescriptionCommand
-participant CommandResult
+participant ":AddDescriptionCommand" as AddDescriptionCommand
+participant ":CommandResult" as CommandResult
+participant ":Description" as Description
+
 
 User -> AddDescriptionCommand: initiate AddDescription
 Activate AddDescriptionCommand

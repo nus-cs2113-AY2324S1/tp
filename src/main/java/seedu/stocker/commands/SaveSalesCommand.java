@@ -55,8 +55,8 @@ public class SaveSalesCommand extends Command {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return new CommandResult("Error: Failed to save sales data.");
+            return new CommandResult<>("Error: Failed to save sales data.");
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult<>(MESSAGE_SUCCESS);
     }
 }

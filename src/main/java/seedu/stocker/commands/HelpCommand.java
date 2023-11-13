@@ -13,7 +13,7 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public CommandResult execute() {
+    public  <T> CommandResult<T> execute() {
         return new CommandResult<>(
                 System.lineSeparator() + LoginCommand.MESSAGE_USAGE + System.lineSeparator()
                         + System.lineSeparator() + RegisterCommand.MESSAGE_USAGE + System.lineSeparator()

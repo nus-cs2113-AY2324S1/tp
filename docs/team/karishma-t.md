@@ -38,13 +38,28 @@ GUI apps.
 -**Contributions to the UG**
 * Karishma added documentation for the following sections of
   the user guide:
-    *
+* `DeleteCommand`
+* `AddVendorSupplyCommand`
+* `DeleteVendorSupplyCommand`
+* `ListVendorSupplyCommand`
+* `FindVendorSupplyCommand`
+* `AddDescriptionCommand`
+* `ListDescriptionsCommand`
+* `GetDescriptionCommand`
 
 
 -**Contributions to the DG**
 * Karishma added documentation for the following section of
   the developer guide:
-    *
+  * [Delete Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#delete---Deletes-a-drug-being-tracked-by-the-system:~:text=the%20inventory%3A%20Panadol-,delete,-%2D%20Deletes%20a%20drug)
+  * [AddVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#delete---Deletes-a-drug-being-tracked-by-the-system:~:text=addVendorSupply%20%2D%20Adds%20a%20drug%20into%20a%20vendor%E2%80%99s%20supply%20list%20to%20be%20tracked%20by%20the%20system.)
+  * [DeleteVendorSupplyCommand]() 
+* `ListVendorSupplyCommand`
+* `FindVendorSupplyCommand`
+* `AddDescriptionCommand`
+* `ListDescriptionsCommand`
+* `GetDescriptionCommand`
+
 * UML Diagrams
     *
 
