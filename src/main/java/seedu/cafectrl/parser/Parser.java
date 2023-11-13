@@ -76,7 +76,8 @@ public class Parser implements ParserUtil {
     private static final String LIST_INGREDIENTS_ARGUMENT_STRING = "dish/(.+)";
     private static final String DELETE_ARGUMENT_STRING = "(.+)";
     private static final String EDIT_PRICE_ARGUMENT_STRING = "dish/(.*)\\sprice/(.*)";
-    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\\\s]+ qty/.+(?:, ingredient/[A-Za-z0-9\\\\s]+ qty/.+)*)";
+    private static final String BUY_INGREDIENT_ARGUMENT_STRING = "(ingredient/[A-Za-z0-9\\\\s]+ qty/.+"
+            + "(?:, ingredient/[A-Za-z0-9\\\\s]+ qty/.+)*)";
     private static final String SHOW_SALE_BY_DAY_ARGUMENT_STRING = "day/(.+)";
     private static final int MIN_QTY = 1;
     private static final int MAX_QTY = 1000000;
