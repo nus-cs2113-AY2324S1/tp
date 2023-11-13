@@ -1,7 +1,6 @@
 package seedu.cafectrl.command;
 
 import seedu.cafectrl.CafeCtrl;
-import seedu.cafectrl.data.Menu;
 import seedu.cafectrl.data.Sales;
 import seedu.cafectrl.ui.Ui;
 
@@ -13,12 +12,10 @@ public class ListTotalSalesCommand extends Command {
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private Sales sales;
     private Ui ui;
-    private Menu menu;
 
-    public ListTotalSalesCommand(Sales sales, Ui ui, Menu menu) {
+    public ListTotalSalesCommand(Sales sales, Ui ui) {
         this.sales = sales;
         this.ui = ui;
-        this.menu = menu;
     }
 
     @Override
