@@ -96,7 +96,7 @@ The Sequence Diagram below shows how the components interact with each other for
 8. Application terminates.
 
 ### Ui component
-API: [Ui.java](blob/master/src/main/java/seedu/cafectrl/ui/Ui.java)
+API: [Ui.java]({repoURL}src/main/java/seedu/cafectrl/ui/Ui.java)
 
 ![Ui Class Diagram](images/class/Ui.png)
 <br>*Figure 3: Ui Class Diagram*
@@ -109,7 +109,7 @@ In the Ui component,
 - `ErrorMessages.java` consists of multiple strings that contain error messages to be shown to user when an incorrect command or exception has been returned
 
 ### Parser component
-API: [Parser.java](blob/master/src/main/java/seedu/cafectrl/parser/Parser.java)
+API: [Parser.java]({repoURL}src/main/java/seedu/cafectrl/parser/Parser.java)
 
 ![Parser Class Diagram](images/class/Parser.png)
 <br>*Figure 4: Parser Class Diagram*
@@ -126,7 +126,7 @@ Below is the sequence diagram of a parser which shows how `Parser` parses user i
 When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
 ### Storage component
-API: [Storage.java](blob/master/src/main/java/seedu/cafectrl/storage/Storage.java)
+API: [Storage.java]({repoURL}src/main/java/seedu/cafectrl/storage/Storage.java)
 
 ![Storage Class Diagram](images/class/Storage.png)
 <br>*Figure 6: Storage Class Diagram*
@@ -138,7 +138,7 @@ The `Storage` class,
 - is composed of `FileManager` object as the text file needs to be located first before reading or writing.
 
 ### Data component
-Folder: [Data](blob/master/src/main/java/seedu/cafectrl/data)
+Folder: [Data]({repoURL}src/main/java/seedu/cafectrl/data)
 ![Data Class Diagram](images/class/Data.png)
 <br>*Figure 7: Data Package Class Diagram*
 
@@ -158,7 +158,7 @@ A summary of the class diagram is as listed below:
 ### Add Dish
 
 ![Add Dish Execution](images/sequence/AddDishCommand_execute.png)
-<br><br>*Figure 8: Execution of `add` Command Sequence Diagram*
+<br>*Figure 8: Execution of `add` Command Sequence Diagram*
 
 API: [AddDishCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/AddDishCommand.java)
 
@@ -178,7 +178,7 @@ The following class diagram illustrates the relationship between the respective 
 ![List Menu Execution](images/sequence/ListMenuCommand_execute.png)
 <br>*Figure 10: Execution of `list_menu` Command Sequence Diagram*
 
-API: [ListMenuCommand.java](blob/master/src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+API: [ListMenuCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
 When the `execute()` method of ListMenuCommand is invoked in Main, it checks if the size of the menu by running `menu.getSize()`. 
 
@@ -200,7 +200,7 @@ The following class diagram illustrates the relationship between the respective 
 ![Add_order Execution](images/sequence/AddOrderCommand_execute.png)
 <br>*Figure 12: Execution of `add_order` Command Sequence Diagram*
 
-API: [AddOrderCommand.java](blob/master/src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+API: [AddOrderCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
 When the `execute()` method of AddOrderCommand is invoked in Main, the parsed `order` object is added to the `orderList`.
 
@@ -228,7 +228,7 @@ The following class diagram illustrates the relationship between the respective 
 ![Next_Day Execution](images/sequence/NextDayCommand_execute.png)
 <br>*Figure 14: Execution of `next_day` Command Sequence Diagram*
 
-API: [NextDayCommand.java](blob/master/src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+API: [NextDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
 When the `execute()` method of NextDayCommand is invoked in Main, the day in the program is advanced by 1 day, by running `currentDate.nextDay()`.
 
@@ -252,7 +252,7 @@ The following class diagram illustrates the relationship between the respective 
 ![Previous_Day Execution](images/sequence/PreviousDayCommand_execute.png)
 <br>*Figure 16: Execution of `previous_day` Command Sequence Diagram*
 
-API: [PreviousDayCommand.java](blob/master/src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
+API: [PreviousDayCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListMenuCommand.java)
 
 When the `execute()` method of PreviousDayCommand is invoked in Main, the day in the program is receded by 1 day, by running `currentDate.previousDay()`.
 
@@ -263,7 +263,7 @@ The user is also shown the receded day number.
 ![List Ingredient Execution](images/sequence/ListIngredientCommand_execute.png)
 <br>*Figure 17: Execution of `list_ingredient` Command Sequence Diagram*
 
-API: [ListIngredientCommand.java](blob/master/src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
+API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
 
 The diagram above omits the showToUser() function in the Ui class to prevent unnecessary sophistication.
 Although it may seem tedious the steps are essentially as listed below:
@@ -278,7 +278,7 @@ Although it may seem tedious the steps are essentially as listed below:
 ![List_Sale Execution](images/sequence/ShowSaleByDayCommand_execute.png)
 <br>*Figure 18: Execution of `list_sale` Command Sequence Diagram*
 
-API: [ListSaleByDay.java](blob/master/src/main/java/seedu/cafectrl/command/ListSaleByDayCommand.java)
+API: [ListSaleByDay.java]({repoURL}src/main/java/seedu/cafectrl/command/ListSaleByDayCommand.java)
 
 The diagram above omits the showToUser() function in the Ui class to prevent unnecessary sophistication.
 The steps are essentially as listed below:
@@ -297,7 +297,7 @@ The steps are essentially as listed below:
 ![isDishCooked_function](images/sequence/Pantry_IsDishCooked.png)
 <br>*Figure 19: Data Processing of `isDishCooked()` Function Used in `add_order` Command Sequence Diagram*
 
-API: [Pantry.java](blob/master/src/main/java/seedu/cafectrl/data/Pantry.java)
+API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
 
 This section briefly explains how `add_order` checks if the order added is successfully cooked.
 The steps are essentially as listed below:
@@ -313,7 +313,7 @@ The steps are essentially as listed below:
 ![calculateMaxDish_function](images/sequence/Pantry_CalculateMaxDish.png)
 <br>*Figure 20: Data Processing of `calculateMaxDish()` Function Used in `add_order` Command Sequence Diagram*
 
-API: [Pantry.java](blob/master/src/main/java/seedu/cafectrl/data/Pantry.java)
+API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
 
 This section briefly explains how `add_order` checks if restocking of ingredients is needed.
 The steps are essentially as listed below:
@@ -330,7 +330,7 @@ The steps are essentially as listed below:
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
 <br>*Figure 21: Execution of `delete` Command Sequence Diagram*
 
-API: [DeleteDishCommand.java](blob/master/src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
+API: [DeleteDishCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
 
 When the `execute()` method of `DeleteDishCommand` is invoked in `Main`, it subsequently calls `getMenuItemsList().get(dishIndexToBeDeleted)` method on the `Menu` object to retrieve the `Dish` object to be deleted.
 Following this, the `showDeleteMesage()` method in the Ui component is triggered to display a message to show the user which dish is about to be deleted.
@@ -347,25 +347,25 @@ This sequence of actions orchestrates the flow of information and operations bet
 ![Edit Price Execution](images/sequence/EditPriceCommand_execute.png)
 <br>*Figure 22: Execution of `edit_price` Command Sequence Diagram*
 
-API: [EditPriceCommand.java](blob/master/src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
+API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
 When the `execute()` method of `EditPriceCommand` is invoked in `Main`, it subsequently calls the `setPrice()` method on the `Dish` object to modify the price of the specific dish. Following this, the `showEditPriceMessages()` method in the `Ui` component is triggered to retrieve and display a message from `Messages` related to the successful execution of the price modification process. This sequence of actions orchestrates the flow of information and operations between the `Main`, `EditPriceCommand`, `Dish`, and `Ui` components, ensuring the seamless handling of the price editing functionality within the application.
 
 ### View Total Stock
 ![View Total Stock Execution](images/sequence/ViewTotalStockCommand_execute.png)
 
-*Figure 23: Execution of view_stock command*
+*Figure 16: Execution of view_stock command*
 
-API: [ViewTotalStockCommand.java](blob/master/src/main/java/seedu/cafectrl/command/ViewTotalStockCommand.java)
+API: [ViewTotalStockCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ViewTotalStockCommand.java)
 
 When the `execute()` method of `ViewTotalStock` is invoked, an ArrayList of Ingredients are retrieved through the method `getPantryStock`. For each ingredient in the ArrayList, `ViewTotalStock` calls `showIngredientStock` from `Ui` to print out the list of ingredients in the ArrayList.
 
 ### Buy Ingredient
 ![Buy Ingredient Execution](images/sequence/BuyIngredientCommand_execute.png)
 
-*Figure 24: Execution of buy_ingredient command*
+*Figure 17: Execution of buy_ingredient command*
 
-API: [BuyIngredientCommand.java](blob/master/src/main/java/seedu/cafectrl/command/BuyIngredientCommand.java)
+API: [BuyIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/BuyIngredientCommand.java)
 
 When the `execute()` method is invoked
 1. `addIngredient` in `BuyIngredientCommand` is called
@@ -379,9 +379,9 @@ When the `execute()` method is invoked
 ### Help
 
 ![Help Execution](images/sequence/HelpCommand_execute.png)
-<br>*Figure 25: Execution of `help` Command Sequence Diagram*
+<br>*Figure 23: Execution of `help` Command Sequence Diagram*
 
-API: [HelpCommand.java](blob/master/src/main/java/seedu/cafectrl/command/HelpCommand.java)
+API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpCommand.java)
 
 When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequently calls the `showHelp()` method in `Ui`. In `showHelp()`, messages related to command usage will be retrieved and be printed out using by self-invoking `showToUserWithSpaceInBetweenLines(messages: String...)`.
 
@@ -395,10 +395,10 @@ When the `execute()` method of `HelpCommand` is invoked in `Main`, it subsequent
    - **Solution**: Implement a static `getInstance` method in `Ui` class which, when it is called for the first time, creates a new instance of `Ui` and store it in a static constant in the `Ui` object. The method will return the `ui` object in the constant for subsequent `getInstance` call.<br>With this implementation, we no longer need to pass `ui` around as we can access the same `ui` object by calling `getInstance`.
      
      <br>![Class diagram for singleton Ui](images/class/ui_singleton.png)
-     <br>*Figure 26:  singleton Ui Class Diagram*
+     <br>*Figure 24:  singleton Ui Class Diagram*
 
      <br>![Sequence diagram for singleton Ui](images/sequence/ui_singleton.png)
-     <br>*Figure 27: `getinstance` call on `Ui` Sequence diagram*
+     <br>*Figure 25: `getinstance` call on `Ui` Sequence diagram*
    
 --------------------------------------------------------------------------------------------------------------------
 ## **Product scope**
