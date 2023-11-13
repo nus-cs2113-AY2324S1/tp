@@ -250,15 +250,15 @@ public class Decoder {
                 fillOrderListSize(orderLists, day);
                 return;
             }
+            //@@author
 
             int quantity = Integer.parseInt(orderData[2].trim());
             float decodedDishPrice = Float.parseFloat(orderData[3].trim());
             String completeStatus = orderData[4].trim();
             float totalOrderCost = quantity * decodedDishPrice;
 
-            Dish dish = menu.getDishFromName(dishName);
-            boolean isDataAccurate = isDishValid(orderLine, dish)
-                    && isCompleteStatusAccurate(orderLine, completeStatus);
+            checkNameValidity(dishName);
+            boolean isDataAccurate = isCompleteStatusAccurate(orderLine, completeStatus);
             if (!isDataAccurate) {
                 return;
             }
@@ -273,21 +273,6 @@ public class Decoder {
             logger.log(Level.WARNING, "Line corrupted: " + e.getMessage(), e);
             ui.showToUser(ErrorMessages.INVALID_SALES_DATA + orderLine);
         }
-    }
-
-    /**
-     * Checks if the Dish is valid (exists in menu) and shows an error message if it's not.
-     *
-     * @param orderLine The order line in the format "day|dishName|quantity|totalOrderCost|isComplete".
-     * @param dish      The Dish object to be validated.
-     * @return True if the Dish is valid, false otherwise.
-     */
-    private static boolean isDishValid(String orderLine, Dish dish) {
-        if (dish != null) {
-            return true;
-        }
-        ui.showToUser(ErrorMessages.INVALID_ORDER_DATA + orderLine);
-        return false;
     }
 
     private static boolean isCompleteStatusAccurate(String orderLine, String completeStatus) {
