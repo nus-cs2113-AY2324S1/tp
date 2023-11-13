@@ -19,6 +19,9 @@
     * [Next Day](#next-day)
     * [Previous Day](#previous-day)
     * [List Ingredients](#list-ingredients)
+    * [List Sale By Day](#list-sale-by-day)
+    * [Pantry-isDishCooked()](#pantry---isdishcooked)
+    * [Pantry-calculateMaxDish()](#pantry---calculatemaxdish)
     * [Delete Dish](#delete-dish)
     * [Edit Price](#edit-price)
     * [Help](#help)
@@ -254,20 +257,77 @@ The user is also shown the receded day number.
 
 API: [ListIngredientCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/ListIngredientCommand.java)
 
-| No | Step                          | Description                                                                                                                                                                                                                                                                                                                                                                              |
-|----|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | Initialization                | The sequence begins with the `Main` class invoking the `execute` method of the `ListIngredientCommand` after parsing a user command.                                                                                                                                                                                                                                                     |
-| 2-3  | Interaction with 'Menu'       | The `ListIngredientCommand` communicates with the `Menu` class, invoking the `getMenuItemsList()` method to retrieve a list of menu items. The function returns an ArrayList of objects of 'Dish' type.                                                                                                                                                                                  |
-| 4  | Interaction with 'Ui'         | The `ListIngredientCommand` communicates with the `Ui` class, invoking the `printIngredients()` method to print out the list of ingredients used for the selected dish. <br/> * The function returns an ArrayList of objects of 'Dish' type. The `get()` method is then invoked to get the dish of the specified index. However, this is ommitted to prevent unnecessary sophistication. |
-| 5-6  | Interaction with 'Dish'       | The `Ui` class communicates with the `Dish` class, invoking the `getIngredients()` method to obtain the list of ingredients for the selected dish. The `Dish` class responds with an ArrayList of objects of 'Ingredient' type to the `Ui` class.                                                                                                                                        |
-| 7-8  | Iteration through Ingredients | There is a loop that iterates through each ingredient in the list. The `Ui` class interacts with the `Ingredients` class, converting each ingredient to a string containing the ingredient and quantity needed.                                                                                                                                                                          |
-| 9-10  | Display to User               | The `Ui` class showcases the information to the user through the `showToUser()` method.                                                                                                                                                                                                                                                                                                  |
+The diagram above omits the showToUser() function in the Ui class to prevent unnecessary sophistication.
+Although it may seem tedious the steps are essentially as listed below:
+- The sequence begins with the `Main` class invoking the `execute` method of the `ListIngredientCommand` after using a parser command.
+- The `ListIngredientCommand` communicates with the `Menu` class, invoking the `getMenuItemsList()` method to retrieve a list of menu items. The function returns an ArrayList of objects of 'Dish' type.
+- The `ListIngredientCommand` communicates with the `Ui` class, invoking the `showListIngredients()` method to print out the list of ingredients used for the selected dish. 
+- The `Ui` class communicates with the `Dish` class, invoking the `getIngredients()` method to obtain the list of ingredients for the selected dish. The `Dish` class responds with an ArrayList of objects of 'Ingredient' type to the `Ui` class.
+- There is a loop that iterates through each ingredient in the list. The `Ui` class interacts with the `Ingredients` class, to obtain the name, quantity and unit of the ingredient.
+- The `Ui` class showcases the information to the user through the `formatListIngredient()` method.
+
+### List Sale By Day
+![List_Sale Execution](images/sequence/ShowSaleByDayCommand_execute.png)
+
+
+*Figure 14: Execution of list_sale command*
+
+API: [ListSaleByDay.java]({repoURL}src/main/java/seedu/cafectrl/command/ListSaleByDayCommand.java)
+
+The diagram above omits the showToUser() function in the Ui class to prevent unnecessary sophistication.
+The steps are essentially as listed below:
+- The sequence starts with the invocation of the `execute()` method in the `ListSaleByDayCommand` class, which the invokes the `sales.printSaleByDay()` method.
+- The `Sales` class interacts with the `OrderList` class to check if there are completed orders to be displayed.
+- If there are no completed orders or no orders at all, a message is shown to the user via the `Ui` class and the command's execution ends.
+- If there are completed orders, the process continues to display it in a table format.
+  - `showSalesTop()`: Display table header
+  - `orderList.printOrderList()`: The OrderList iterates over each order, aggregates orders, and prints details for each aggregated order. For each aggregated order, details like dish name, quantity, and total order cost are retrieved from the Order class and shown to the user via the Ui class.
+  - `showSalesCost()`: Displays the total sales cost for the aggregated orders.
+  - `showSalesBottom()`: Displays the bottom of the table
+
+* The List Total Sales command follows a comparable sequence, and as such, it will be excluded to avoid the repetition of multiple similar diagrams.
+
+### Pantry - isDishCooked()
+![isDishCooked_function](images/sequence/Pantry_IsDishCooked.png)
+
+
+*Figure 15: Data processing of `isDishCooked()` function used in add_order command*
+
+API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
+
+This section briefly explains how `add_order` checks if the order added is successfully cooked.
+The steps are essentially as listed below:
+- The sequence starts with the invocation of `isDishCooked()` to the `Pantry` class, with a list of ingredients needed for the order.
+- For each ingredient in the dish, `isDishCooked()` first obtains the quantity of the ingredients needed (`usedQty`) for the order as shown in step 4 and 5.
+- The function then attempts to get the Ingredient used from the current stock in the Pantry (`stockQty`) as shown in steps 11 and 12. 
+  - If `usedIngredientFromStock` is null, it means that the ingredient does not exist in the Pantry and the sequence ends with a `false` being returned.
+  - If `usedIngredientFromStock` exists but the quantity is insufficient, 
+  - If `usedIngredientFromStock` is found and the quantity is sufficient, the used quantity is deducted from the stock quantity in the Pantry and the sequence ends with a `true` being returned.
+- A `false` indicates that the order was unsuccessful while a `true` indicates that the order was successful.
+
+### Pantry - calculateMaxDish()
+![calculateMaxDish_function](images/sequence/Pantry_CalculateMaxDish.png)
+
+
+*Figure 16: Data processing of `calculateMaxDish()` function used in add_order command*
+
+API: [Pantry.java]({repoURL}src/main/java/seedu/cafectrl/data/Pantry.java)
+
+This section briefly explains how `add_order` checks if restocking of ingredients is needed.
+The steps are essentially as listed below:
+- The sequence starts with the invocation of `calculateMaxDish()` to the `Pantry` class.
+- Steps 2 to 6 involves retrieving the ingredients used to make the dish.
+- The function `calculateMaxDishForEachIngredient` returns an integer and assigns it to the variable `numOfDish` which is the maximum number of dishes that can be cooked.
+- If the order is incomplete
+  - ingredients that need restocking will be passed into the `handleRestock` function.
+- If the order is complete, 
+  - ingredients that are unable to prep the next dish will be passed into the `handleRestock` function.
 
 ### Delete Dish
 
 ![Delete Dish Execution](images/sequence/DeleteDishCommand_execute.png)
 
-*Figure 14: Execution of delete dish command*
+*Figure 17: Execution of delete dish command*
 
 API: [DeleteDishCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/DeleteDishCommand.java)
 
@@ -285,7 +345,7 @@ This sequence of actions orchestrates the flow of information and operations bet
 
 ![Edit Price Execution](images/sequence/EditPriceCommand_execute.png)
 
-*Figure 15: Execution of edit_price command*
+*Figure 18: Execution of edit_price command*
 
 API: [EditPriceCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/EditPriceCommand.java)
 
@@ -295,7 +355,7 @@ When the `execute()` method of `EditPriceCommand` is invoked in `Main`, it subse
 
 ![Help Execution](images/sequence/HelpCommand_execute.png)
 
-*Figure 16: Execution of help command*
+*Figure 19: Execution of help command*
 
 API: [HelpCommand.java]({repoURL}src/main/java/seedu/cafectrl/command/HelpCommand.java)
 

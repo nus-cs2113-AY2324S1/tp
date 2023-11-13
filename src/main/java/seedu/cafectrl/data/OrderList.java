@@ -68,6 +68,7 @@ public class OrderList {
 
         ui.showSalesBottom();
         ui.showSalesCost("Total for day: ", "$" + dollarValue.format(calculateTotalCost(aggregatedOrders)));
+        ui.showSalesBottom();
     }
 
     /**

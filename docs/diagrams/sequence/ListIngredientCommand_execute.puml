@@ -1,41 +1,61 @@
 @startuml
-!define COMMAND class ListIngredientCommand
-!define UI class Ui
-!define MENU class Menu
-!define DISH class Dish
+!define COMMAND class ":ListIngredientCommand"
+!define UI class ":Ui"
+!define MENU class ":Menu"
+!define DISH class ":Dish"
 !define PARSER class Parser
 
 autonumber
- -> ListIngredientCommand: execute()
 
-activate ListIngredientCommand
-ListIngredientCommand -> Menu : getMenuItemsList()
-activate Menu
-Menu --> ListIngredientCommand: selectedDish : Dish
-deactivate Menu
+ -> ":ListIngredientCommand": execute()
 
-ListIngredientCommand -> Ui : printIngredients(selectedDish: Dish)
-activate Ui
-Ui -> Dish : selectedDish.getIngredients()
-activate Dish
-Dish --> Ui : ingredients: Ingredient
-deactivate Dish
+activate ":ListIngredientCommand"
+":ListIngredientCommand" -> ":Menu" : getMenuItemsList()
+activate ":Menu"
+":Menu" --> ":ListIngredientCommand": selectedDish : ":Dish"
+deactivate ":Menu"
+
+":ListIngredientCommand" -> ":Ui" : showListIngredientsMessage(selectedDish: Dish)
+activate ":Ui"
+
+":Ui" -> ":Ui" : showDishName(dish: Dish)
+activate ":Ui"
+":Ui" -> ":Dish" : dish.getName()
+activate ":Dish"
+return : String
+return
+
+":Ui" -> ":Ui" : showIngredientList(dish : Dish)
+activate ":Ui"
+
+":Ui" -> ":Dish" : selectedDish.getIngredients()
+activate ":Dish"
+return ingredients: ArrayList<Ingredient>
+
 
 
 loop ingredients
-Ui -> Ingredients: ingredient.toString()
-activate Ingredients
-Ingredients --> Ui
-deactivate Ingredients
+":Ui" -> ":Ingredients": ingredient.getName()
+activate ":Ingredients"
+":Ingredients" --> ":Ui" :String
+deactivate ":Ingredients"
+":Ui" -> ":Ingredients": ingredient.getQty()
+activate ":Ingredients"
+":Ingredients" --> ":Ui" :int
+deactivate ":Ingredients"
+":Ui" -> ":Ingredients": ingredient.getUnit()
+activate ":Ingredients"
+":Ingredients" --> ":Ui" :String
+deactivate ":Ingredients"
+":Ui" -> ":Ui" : formatListIngredient(ingredientName: String, ingredientAmount: String)
+activate ":Ui"
+return
 end loop
 
-Ui -> Ui: showToUser(message: String)
-activate Ui
-Ui --> Ui
-deactivate Ui
-Ui --> ListIngredientCommand
-deactivate Ui
-deactivate ListIngredientCommand
-<-- ListIngredientCommand
+":Ui" -> ":Ui": showIngredientsEndCap()
+activate ":Ui"
+return
+return
+return
 
 @enduml
