@@ -154,7 +154,7 @@ public class Storage {
      */
     public Pantry loadPantryStock() {
         try {
-            ArrayList<String> encodedPantryStock = this.fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
+            ArrayList<String> encodedPantryStock = fileManager.readTextFile(FilePath.PANTRY_STOCK_FILE_PATH);
             if (!isFileEmpty(encodedPantryStock) && isFileCorrupted(encodedPantryStock) && isHashingEnabled) {
                 isPantryStockTampered = true;
                 logger.log(Level.INFO, "Tampered Pantry Stock file");
@@ -177,7 +177,7 @@ public class Storage {
      * @throws IOException if the file is not found in the specified file path
      */
     private void savePantryStock(Pantry pantry) throws IOException {
-        this.fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
+        fileManager.overwriteFile(FilePath.PANTRY_STOCK_FILE_PATH, Encoder.encodePantryStock(pantry));
     }
 
     //@@author NaychiMin
@@ -214,7 +214,7 @@ public class Storage {
      */
     private void saveOrderList(Sales sales) throws IOException {
         logger.info("Saving orders...");
-        this.fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
+        fileManager.overwriteFile(FilePath.ORDERS_FILE_PATH, Encoder.encodeSales(sales));
     }
 
     //@@author ziyi105
