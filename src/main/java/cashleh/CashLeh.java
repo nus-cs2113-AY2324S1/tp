@@ -25,10 +25,10 @@ public class CashLeh {
     public void run() {
         
         String logo = "    ______           __    __         __  ___\n"
-                    + "   / ____/___ ______/ /_  / /   ___  / /_/__ \\\n"
-                    + "  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/\n"
-                    + " / /___/ /_/ (__  ) / / / /___/  __/ / / /_/\n"
-                    + " \\____/\\__,_/____/_/ /_/_____/\\___/_/ /_(_)\n";
+                    + "\t   / ____/___ ______/ /_  / /   ___  / /_/__ \\\n"
+                    + "\t  / /   / __ `/ ___/ __ \\/ /   / _ \\/ __ \\/ _/\n"
+                    + "\t / /___/ /_/ (__  ) / / / /___/  __/ / / /_/\n"
+                    + "\t \\____/\\__,_/____/_/ /_/_____/\\___/_/ /_(_)\n";
         String userGuideLink = "https://ay2324s1-cs2113-w12-2.github.io/tp/UserGuide.html";
         String[] greetingLines = {"Here is the link to the user guide:", userGuideLink, logo,
             "Welcome to 'CashLeh?'! Your one-stop app for managing your finances!", "What is your name?"};
