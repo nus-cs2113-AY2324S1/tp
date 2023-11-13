@@ -84,7 +84,7 @@ public class Storage {
                 Drug drug = new Drug(name, expiryDate, sellingPrice);
                 inventory.addNewDrug(serialNumber, drug, quantity);
             } else {
-                System.out.println("Malicious changes were made, overwriting old drug file,"
+                System.out.println("Malicious changes were made in drugs.txt, overwriting old drug file,"
                         + " please add new drugs and save again");
                 FileWriter fw = new FileWriter("./drugs.txt", false);
                 PrintWriter pw = new PrintWriter(fw, false);
@@ -125,8 +125,16 @@ public class Storage {
                 // Add the sold item to the sales list
                 salesList.addSoldItem(drug, serialNumber, quantity, sellingPrice, inventory);
             } else {
-                System.out.println("Malicious changes were made in soldItems.txt.");
+                System.out.println("Malicious changes were made in soldItems.txt, overwriting old drug file,"
+                        + " please add new drugs and save again");
                 // Handle any malicious changes
+                FileWriter fw = new FileWriter("./soldItems.txt", false);
+                PrintWriter pw = new PrintWriter(fw, false);
+                pw.flush();
+                pw.close();
+                fw.close();
+                salesList.clearSales();
+                break;
             }
         }
     }
