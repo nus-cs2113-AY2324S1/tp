@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class FileManager {
 
+    public static final String USER_BASE_DIRECTORY = "user.dir";
     private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
     private final Ui ui;
 
@@ -35,7 +36,7 @@ public class FileManager {
      */
     public ArrayList<String> readTextFile(String filePath) throws FileNotFoundException {
         logger.info("Reading text file...");
-        String userWorkingDirectory = System.getProperty("user.dir");
+        String userWorkingDirectory = System.getProperty(USER_BASE_DIRECTORY);
         Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
         File textFile = new File(String.valueOf(dataFilePath));
         ArrayList<String> textLines = new ArrayList<>();
@@ -62,7 +63,7 @@ public class FileManager {
             throw new Exception(ErrorMessages.MISSING_FILEPATH);
         }
 
-        String userWorkingDirectory = System.getProperty("user.dir");
+        String userWorkingDirectory = System.getProperty(USER_BASE_DIRECTORY);
         Path dataFilePath = Paths.get(userWorkingDirectory, filePath);
         Path dataFolderPath = dataFilePath.getParent();
         File textFile = new File(String.valueOf(dataFilePath));
