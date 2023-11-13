@@ -5,9 +5,6 @@ import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientList;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.recipe.Recipe;
-import essenmakanan.recipe.RecipeIngredientList;
-import essenmakanan.recipe.RecipeList;
 import essenmakanan.ui.Ui;
 
 public class IngredientParser {
