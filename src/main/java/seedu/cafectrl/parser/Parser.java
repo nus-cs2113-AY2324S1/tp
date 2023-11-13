@@ -612,10 +612,26 @@ public class Parser implements ParserUtil {
         return new DeleteDishCommand(dishIndex, menu, ui);
     }
 
+    /**
+     * Prepares a command to view the total stock in the pantry.
+     *
+     * @param ui     The user interface to interact with the user.
+     * @param pantry The pantry containing ingredient stock information.
+     * @return A command to view the total stock.
+     */
     private static Command prepareViewTotalStock(Ui ui, Pantry pantry) {
         return new ViewTotalStockCommand(pantry, ui);
     }
 
+    /**
+     * Prepares a command to buy ingredients based on the provided arguments.
+     *
+     * @param arguments The user input arguments for buying ingredients.
+     * @param ui        The user interface to interact with the user.
+     * @param pantry    The pantry to update with bought ingredients.
+     * @param menu      The menu containing information about available dishes.
+     * @return A command to buy ingredients or an incorrect command if arguments are invalid.
+     */
     private static Command prepareBuyIngredient(String arguments, Ui ui, Pantry pantry, Menu menu) {
         Pattern buyIngredientArgumentsPattern = Pattern.compile(BUY_INGREDIENT_ARGUMENT_STRING);
         Matcher matcher = buyIngredientArgumentsPattern.matcher(arguments.trim());
@@ -648,6 +664,13 @@ public class Parser implements ParserUtil {
         return ingredientQty < MIN_QTY || ingredientQty > MAX_QTY;
     }
 
+    /**
+     * Checks for mismatched units between a new ingredient and existing ingredients in the menu.
+     *
+     * @param menu          The menu containing information about available dishes.
+     * @param newIngredient The new ingredient to check for mismatched units.
+     * @throws ParserException If a mismatch in units is detected.
+     */
     public static void checkForMismatchUnit(Menu menu, Ingredient newIngredient) throws ParserException {
         logger.info("Checking for mismatched units...");
         ArrayList<Dish> dishArrayList = menu.getMenuItemsList();

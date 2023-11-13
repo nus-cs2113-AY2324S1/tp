@@ -48,6 +48,12 @@ public class Decoder {
         return new Menu(menuDishList);
     }
 
+    /**
+     * Decodes a string representation of a dish and adds it to the menu's list of dishes.
+     *
+     * @param dishString      The string containing dish information.
+     * @param menuDishList    The list to which the decoded dish will be added.
+     */
     private static void decodeDishString(String dishString, ArrayList<Dish> menuDishList) {
         try {
             String[] dishStringArray = dishString.split(DIVIDER);
