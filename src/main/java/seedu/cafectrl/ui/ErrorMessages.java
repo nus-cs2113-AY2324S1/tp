@@ -1,7 +1,6 @@
 package seedu.cafectrl.ui;
 
 import seedu.cafectrl.command.EditPriceCommand;
-import seedu.cafectrl.command.HelpCommand;
 import seedu.cafectrl.command.ListTotalSalesCommand;
 
 public class ErrorMessages {
@@ -94,8 +93,6 @@ public class ErrorMessages {
             + "for the add command input";
     public static final String NULL_STRING_IN_REPEAT_ARGUMENT = "Null string detected in isRepeatedArgument function";
     public static final String INVALID_SALES_DATA = "orders.txt: Invalid format, this order will be removed -> ";
-    public static final String INVALID_ORDER_DATA = "orders.txt: Dish is not in current menu, "
-            + "this order will be removed -> ";
     public static final String INVALID_ORDER_STATUS = "orders.txt: Invalid status, this order will be removed -> ";
     public static final String INVALID_ORDER_QTY = "orders.txt: Invalid quantity (order quantity has to be more than 0)"
             + ", this order will be removed -> ";

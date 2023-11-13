@@ -32,29 +32,29 @@ public class Decoder {
     private static final String INGREDIENT_DIVIDER = " - ";
 
     /** For menu decoder */
-    public static final int MAX_INGREDIENTS_STRING_ARRAY_SIZE = 1;
-    public static final int DISH_NAME_INDEX_DISH_ARRAY = 0;
-    public static final int DISH_PRICE_INDEX_DISH_ARRAY = 1;
-    public static final int DISH_INGREDIENT_START_INDEX = 2;
-    public static final int NAME_INDEX_INGREDIENT_ARRAY = 0;
-    public static final int QTY_INDEX_INGREDIENT_ARRAY = 1;
-    public static final int UNIT_INDEX_INGREDIENT_ARRAY = 2;
+    private static final int MAX_INGREDIENTS_STRING_ARRAY_SIZE = 1;
+    private static final int DISH_NAME_INDEX_DISH_ARRAY = 0;
+    private static final int DISH_PRICE_INDEX_DISH_ARRAY = 1;
+    private static final int DISH_INGREDIENT_START_INDEX = 2;
+    private static final int NAME_INDEX_INGREDIENT_ARRAY = 0;
+    private static final int QTY_INDEX_INGREDIENT_ARRAY = 1;
+    private static final int UNIT_INDEX_INGREDIENT_ARRAY = 2;
 
     /** for stock pantry decoder */
-    public static final int NAME_INDEX_PANTRY = 0;
-    public static final int QTY_INDEX_PANTRY = 1;
-    public static final int UNIT_INDEX_PANTRY = 2;
-    public static final int MAX_PANTRY_ARRAY_SIZE = 3;
+    private static final int NAME_INDEX_PANTRY = 0;
+    private static final int QTY_INDEX_PANTRY = 1;
+    private static final int UNIT_INDEX_PANTRY = 2;
+    private static final int MAX_PANTRY_ARRAY_SIZE = 3;
 
     /** for sales decoder */
-    public static final int DAY_INDEX_SALES = 0;
-    public static final int DISH_NAME_INDEX_SALES = 1;
-    public static final int QTY_INDEX_SALES = 2;
-    public static final int DISH_PRICE_INDEX_SALES = 3;
-    public static final int STATUS_INDEX_SALES = 4;
-    public static final String TRUE_STRING = "true";
-    public static final String FALSE_STRING = "false";
-    public static final int MIN_DISH_PRICE = 0;
+    private static final int DAY_INDEX_SALES = 0;
+    private static final int DISH_NAME_INDEX_SALES = 1;
+    private static final int QTY_INDEX_SALES = 2;
+    private static final int DISH_PRICE_INDEX_SALES = 3;
+    private static final int STATUS_INDEX_SALES = 4;
+    private static final String TRUE_STRING = "true";
+    private static final String FALSE_STRING = "false";
+    private static final int MIN_DISH_PRICE = 0;
 
     //@@author ShaniceTang
     /**

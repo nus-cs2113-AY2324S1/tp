@@ -23,10 +23,10 @@ public class Encoder {
     private static final String DIVIDER = " | ";
     private static final String INGREDIENT_DIVIDER = " - ";
     private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
-    public static final String LINE_BREAK = "\n";
-    public static final String EMPTY_STRING = "";
-    public static final String CARRIAGE_RETURN = "\r";
-    public static final String TWO_DECIMAL_PLACE_FORMAT = "%.2f";
+    private static final String LINE_BREAK = "\n";
+    private static final String EMPTY_STRING = "";
+    private static final String CARRIAGE_RETURN = "\r";
+    private static final String TWO_DECIMAL_PLACE_FORMAT = "%.2f";
 
     //@@author Cazh1
     /**
