@@ -65,7 +65,7 @@ help exit
 
 ### Add an entry: add
 Creates a new entry for income or expenses in the program.
-Values of income and expense added has to be lower than 1000000.
+Values of income and expense added has to be lower than 1 000 000.
 Income and Expense values takes up to 2 decimal places.
 
 To add an income (with foreign currency):
@@ -96,7 +96,7 @@ Use case:
 - format of date is `dd/MM/yyyy`.
 - Date needs to be an existing date, and cannot be dates in the future.
 - By default, amount is set to SGD.
-- User can specify the currency. Refer to the supported currencies for valid currency.
+- User can specify the currency by using the `update exchange rate` command before using the desired currency. Refer to the supported currencies for valid currency.
 - Currency specified must have been updated. Refer to list exchange rates for more details.
 
 Example of usage:
@@ -123,20 +123,25 @@ Expected output after successfully add expense to the list:
 ### List all entries: list
 Shows a full list of both the expenses and income created by the user.
 User can choose to view the list of income/expenses separately as well.
+There must be at least one entry in the list before using this command else it will show an error message.
 
 Format:
 ```
 list
 ```
+List all entries in the list.
 ```
 list incomes
 ```
+List all income entries in the list.
 ```
 list expenses
 ```
+list all expense entries in the list.
 
 ### Delete an entry: delete
 Deletes an entry from the list of income/expenses.
+There must be at least one entry in the list before using this command else it will show an error message.
 
 Format:
 ```
@@ -150,6 +155,7 @@ Use case:
 - Prompts users if index is empty.
 - `<index>` should not be negative.
 - `<index>` should not be out of bounds.
+- `<index>` should be a positive integer that corresponds to an income/expense entry.
 
 Expected output after successfully delete income from the list:
 ![delete_income_expected.png](https://github.com/AY2324S1-CS2113-T18-3/tp/blob/master/images/delete_expected.png?raw=true)<br>
@@ -167,12 +173,20 @@ find /t expense [/cat category] [/de description] [/date date]
 ```
 
 Example of usage:
+
 ```
 find /t income /de salary
 ```
+Finding income with description
+```
+find /t income /date 01/01/2020
+```
+Finding income with date
 ```
 find /t expense /cat food /de sushi
 ```
+Finding expense with category and description
+
 
 Note:
 - Fields `/t`, `/cat`, `/de`, `/date` are case-sensitive and should be in the specified order.
@@ -214,7 +228,7 @@ Example of successfully clear both income and expense list:
 
 
 ### Check balance: balance
-Check the balance for current financial records
+Check the balance for current financial records where balance = total income - total expenses.
 
 Format:
 ```
@@ -308,7 +322,7 @@ Note:
 ### Storage for income and expense entries
 Save all the income and expense entries to the KaChinnnngggg.txt
 
-All income and expense entries will be update to the file for every command input.
+All income and expense entries will be updated to the file for every command input.
 
 There is no command to save to file manually since it's updating after every command
 
