@@ -62,6 +62,10 @@ public class Ui {
     }
 
     public String input() {
+        return scanner.nextLine().trim();
+    }
+
+    public String userInput() {
         if (scanner.hasNextLine()) {
             return scanner.nextLine().trim();
         }
