@@ -78,7 +78,7 @@ you a one-stop interface to access a plethora of features to manage your finance
 - Total Balance, Income balance, and Expense balance are different entities where the latter two do not have the same limitations.
 - Maximum value for recurrences and indexes is 2,147,483,647, the maximum number an `int` can hold.
 
-**Important:** Data is automatically loaded on start up and saved when exited. You must exit the program using the `exit` command in order to save your changes.
+**Important:** Data is automatically loaded on start up and saved when exited. You must exit the program using the `exit` command in order to save your data.
 
 ### Add cashflow
 
@@ -573,6 +573,8 @@ Any request within the 5-minute window will only show the last updated watchlist
 Add a stock that you are interested in monitoring into your personal WatchList
 
 Format: `addstock /s STOCKCODE`
+
+- `STOCKCODE` is case-insensitive.
 
 Example of usage: `addstock /s META`
 
