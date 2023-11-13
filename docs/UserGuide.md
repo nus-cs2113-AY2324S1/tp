@@ -304,6 +304,8 @@ Format: `shuffle`
 Notes
 * Shuffle will not work if there are no questions within the question bank
 
+<div style="page-break-after: always;"></div>
+
 ### Mark difficulty of questions `markdiff`
 
 [Back to Table of Contents](#table-of-contents)
@@ -375,8 +377,11 @@ begin from the second line onwards, with each question taking one line
   * Difficulty - EASY, NORMAL or HARD
 * Using arbitrary values may prevent the question from being loaded normally,
   please use the add question feature in the program if you are unsure.
+* You may find a sample of the storage file in the next page
 
-Example:
+<div style="page-break-after: always;"></div>
+
+Example of storage file:
 ```
 Latest Questions
 S | undone | Is Java Fully OOP? / yes | CS2113 | NORMAL
