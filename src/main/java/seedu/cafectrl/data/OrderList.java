@@ -89,19 +89,21 @@ public class OrderList {
             int index = getIndexByDishName(aggregatedOrders, order.getDishName());
             //if dish is not found in aggregated orders, add the dish into it
             if (index == -1) {
-                aggregatedOrders.add(new Order(order.getOrderedDish(), order.getQuantity(), order.getTotalOrderCost(),
-                        true));
+                Order newOrderedDish = new Order(order.getOrderedDish(), order.getQuantity(), order.getTotalOrderCost(),
+                        true);
+                aggregatedOrders.add(newOrderedDish);
             } else {
                 //else add the quantities and totalCost accordingly
-                aggregatedOrders.get(index)
-                        .setQuantity(aggregatedOrders.get(index).getQuantity() + order.getQuantity());
-                aggregatedOrders.get(index)
-                        .setTotalOrderCost(aggregatedOrders.get(index).getTotalOrderCost() + order.getTotalOrderCost());
+                int currentTotalDishQty = aggregatedOrders.get(index).getQuantity();
+                int orderedQty = order.getQuantity();
+                float currentTotalDishCost = aggregatedOrders.get(index).getTotalOrderCost();
+                float orderCost = order.getTotalOrderCost();
+                aggregatedOrders.get(index).setQuantity(currentTotalDishQty + orderedQty);
+                aggregatedOrders.get(index).setTotalOrderCost(currentTotalDishCost + orderCost);
             }
         }
     }
 
-    //@@author Shanice Tang
     /**
      * Finds the index of an order in the aggregated orders list based on the dish name.
      *
