@@ -22,7 +22,7 @@ public class Encoder {
     public static final String NULL_ORDER_DAY = "the last day has no orders but please account for it";
     private static final String DIVIDER = " | ";
     private static final String INGREDIENT_DIVIDER = " - ";
-    private static Logger logger = Logger.getLogger(CafeCtrl.class.getName());
+    private static final Logger logger = Logger.getLogger(CafeCtrl.class.getName());
 
     //@@author Cazh1
     /**
@@ -89,7 +89,8 @@ public class Encoder {
 
     //@@author ziyi105
     /**
-     * Encodes the pantry stock into format ingredient name | quantity | unit for storage.
+     * Encodes the pantry stock into format ingredient name | quantity | unit for storage
+     *
      * @param pantry the pantry from current session
      * @return an arrayList of string of ecoded pantry stock
      */
@@ -97,6 +98,7 @@ public class Encoder {
         // Convert pantry stock to a list of String
         ArrayList<String> pantryStockInString = new ArrayList<>();
         ArrayList<Ingredient> pantryStock = pantry.getPantryStock();
+
         for (Ingredient ingredient : pantryStock) {
             StringBuilder encodedIngredient = new StringBuilder();
             encodedIngredient.append(ingredient.getName().trim());
@@ -127,11 +129,14 @@ public class Encoder {
 
         for (int day = 0; day < orderLists.size(); day++) {
             logger.info("Encoding sales of day " + day);
+
             //get orderList for each day from list of sales
             OrderList orderList = sales.getOrderList(day);
+
             //get order from each orderList obtained
             for (Order order : orderList.getOrderList()) {
                 StringBuilder orderString = new StringBuilder();
+
                 //day of each orderList is index + 1
                 orderString.append((day + 1) + DIVIDER);
                 orderString.append(order.getDishName() + DIVIDER);
@@ -162,6 +167,7 @@ public class Encoder {
     private static ArrayList<String> encodeLastSalesDay(ArrayList<String> encodedList, OrderList orderList, int day) {
         if (orderList.getSize() == 0) {
             StringBuilder orderString = new StringBuilder();
+
             //day of each orderList is index + 1
             orderString.append((day + 1) + DIVIDER);
             orderString.append(NULL_ORDER_DAY);
