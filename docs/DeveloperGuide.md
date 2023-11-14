@@ -45,9 +45,8 @@ ___
 ### Main structure
 
 ### Architecture
-{insert diagram to show architecture of code}
-
-The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. 
+![](diagrams/ArchitectureDiagram.puml)
+The ***Architecture Diagram*** shows the high-level overview and design of the FitTrack app. 
 Given below is a quick overview of each component.
 
 **Tip:** The '.puml' files used to create the diagrams in this document can be found in [diagrams](./diagrams) 
