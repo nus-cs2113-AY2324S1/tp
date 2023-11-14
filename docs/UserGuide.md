@@ -64,8 +64,9 @@ Make sure you have Java `11` or above installed on your system.
   as `allowance /amt 1000`.
 - Items in square brackets are optional.
   e.g. `allowance` can be used with or without `/note`.
-- All parameters are case-insensitive, i.e. `/amt` and `/AMT` are the same.
-- All categories are case-insensitive, i.e. `food` and `FOOD` are the same.
+- All parameters are case-insensitive, i.e. `/amt` and `/AMT` are the same.   
+- All categories are case-insensitive, i.e. `food` and `FOOD` are the same.   
+- Please refrain from using characters `\ ` and `|` in the `/description` and `/note` field.
 - The commands provided in the following examples are presented in a sequential order, and their expected outputs are for illustrative purposes only. It is important to note that using these commands in a different order may result in outputs that do not exactly match those shown in this guide. However, any such variations would still be consistent with the logical use of the application.
 
 ### Viewing help: `help`
@@ -104,7 +105,8 @@ To add a new allowance entry to the financial tracker, please adhere to the give
 
 > 📑 Note   
 > Fields in square brackets `[ ]` can be omitted.   
-> The categories are case-insensitive, i.e. `SALARY` and `salary` are the same.
+> The categories are case-insensitive, i.e. `SALARY` and `salary` are the same.   
+> Please refrain from using characters `/` and `|` in the `/desc` and `/note` field.
 
 Possible categories for allowance are:
 - SALARY
@@ -143,7 +145,8 @@ To add a new expense entry to the financial tracker, please adhere to the given 
 
 > 📑 Note   
 > Fields in square brackets `[ ]` can be omitted.   
-> The categories are case-insensitive, i.e. `FOOD` and `food` are the same.
+> The categories are case-insensitive, i.e. `FOOD` and `food` are the same.   
+> Please refrain from using characters `/` and `|` in the `/desc` and `/note` field.
 
 Possible categories for allowance are:
 - FOOD
@@ -294,6 +297,11 @@ CATEGORY: FOOD
 ### Editing an entry: `edit`
 
 To edit an entry in the financial tracker, which can be either an allowance or an expense.
+
+> 📑 Note   
+> Fields in square brackets `[ ]` can be omitted.   
+> The categories are case-insensitive, i.e. `FOOD` and `food` are the same.   
+> Please refrain from using characters `/` and `|` in the `/desc` and `/note` field.
 
 Format:
 1) `edit INDEX allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
