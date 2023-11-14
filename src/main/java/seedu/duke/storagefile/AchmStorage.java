@@ -57,9 +57,9 @@ public class AchmStorage extends GoalStorage {
     }
 
     /**
-     *
+     * This method convert the saved text command into the goal object
      * @param goalRecord refers to saved goal record
-     * @throws Exception
+     * @throws Exception if failed to access file
      */
     @Override
     protected void textToGoalObject(String goalRecord) throws Exception {
