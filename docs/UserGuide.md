@@ -255,6 +255,11 @@ Format: `exit`
 * Update an existing exercise `update MONTH DAY OLD_EXERCISE_NAME OLD_CALORIES_BURNED`
 `NEW_EXERCISE_NAME NEW_CALORIES_BURNED`
 * View existing exercises `view VIEW_TYPE VIEW_SCOPE`
+* Insert a new calorie consumption goal `set AMOUNT on DD/MM/YYYY`
+* Delete a calorie goal `deleteG Index`
+* View the input calories goal `viewG`
+* Achieve a calories goal `achieve Index`
+* View achievement `achievement`
 * Exit program `exit`
 
 
