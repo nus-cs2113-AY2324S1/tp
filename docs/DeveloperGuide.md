@@ -185,13 +185,20 @@ promote separation of concerns and to keep code more readable, we decided not to
 
 #### IV. Usage Scenario Example
 **Step 1**: User launches the application. `TransactionList` is initialized.   
-**Step 2**: User inputs `list` to list all transactions. The Parser identifies the command.   
+
+**Step 2**: User inputs `list` to list all transactions. The Parser identifies the command.
+
 **Step 3**: A `ListCommand` is created. This command is passed to `Nuscents`.   
+
 **Step 4**: `Nuscents` executes the `ListCommand`, which invokes `Ui.showTransactionList()` and `Ui.showBudgetExpense()`.   
+
 **Step 5**: `Ui.showTransactionList()` calls `TransactionList.getTransactions()`, which gets the Transactions in the TransactionList.   
+
 **Step 6**: The transactions in `TransactionList` are displayed to the user.
-**Step 6**: `Ui.showBudgetExpense()` calls `TransactionList.getBudget()`, which gets the current budget set in the TransactionList.
-**Step 7**: The budget details in `TransactionList` are displayed to the user.
+
+**Step 7**: `Ui.showBudgetExpense()` calls `TransactionList.getBudget()`, which gets the current budget set in the TransactionList.
+
+**Step 8**: The budget details in `TransactionList` are displayed to the user.
 
 The following sequence diagram shows how the list transaction operation works:
 
