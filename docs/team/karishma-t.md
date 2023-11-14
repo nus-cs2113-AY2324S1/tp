@@ -54,14 +54,14 @@ GUI apps.
 -**Contributions to the UG**
 * Karishma added documentation for the following sections of
   the user guide:
-* [Delete Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#delete---Deletes-a-drug-being-tracked-by-the-system:~:text=the%20inventory%3A%20Panadol-,delete,-%2D%20Deletes%20a%20drug)
-* [AddVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=addVendorSupply%20%2D%20Adds%20a%20drug%20into%20a%20vendor%E2%80%99s%20supply%20list%20to%20be%20tracked%20by%20the%20system.)
-* [DeleteVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=deleteVendorSupply%20%2DDeletes%20a%20drug%20from%20a%20vendor%E2%80%99s%20supply%20list.)
-* [ListVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=listVendorSupply%20%2D%20Displays%20the%20list%20of%20all%20drugs%20being%20supplied%20by%20a%20particular%20vendor.)
-* [FindVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=findVendorSupply%20%2DDisplays%20the%20list%20of%20all%20vendors%20that%20supply%20a%20particular%20drug.)
-* [AddDescriptionCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=addDescription%20%2D%20Adds%20a%20drug%E2%80%99s%20description%20into%20a%20list%20to%20be%20tracked%20by%20the%20system.)
-* [ListDescriptionsCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=listDescriptions%20%2D%20Displays%20a%20list%20of%20all%20the%20descriptions%20for%20all%20corresponding%20drugs)
-* [GetDescriptionCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=getDescription%20%2D%20Retrieves%20the%20description%20of%20a%20particular%20drug.)
+  * [Delete Command](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide.html#delete---Deletes-a-drug-being-tracked-by-the-system:~:text=the%20inventory%3A%20Panadol-,delete,-%2D%20Deletes%20a%20drug)
+  * [AddVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=addVendorSupply%20%2D%20Adds%20a%20drug%20into%20a%20vendor%E2%80%99s%20supply%20list%20to%20be%20tracked%20by%20the%20system.)
+  * [DeleteVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=deleteVendorSupply%20%2DDeletes%20a%20drug%20from%20a%20vendor%E2%80%99s%20supply%20list.)
+  * [ListVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=listVendorSupply%20%2D%20Displays%20the%20list%20of%20all%20drugs%20being%20supplied%20by%20a%20particular%20vendor.)
+  * [FindVendorSupplyCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=findVendorSupply%20%2DDisplays%20the%20list%20of%20all%20vendors%20that%20supply%20a%20particular%20drug.)
+  * [AddDescriptionCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=addDescription%20%2D%20Adds%20a%20drug%E2%80%99s%20description%20into%20a%20list%20to%20be%20tracked%20by%20the%20system.)
+  * [ListDescriptionsCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=listDescriptions%20%2D%20Displays%20a%20list%20of%20all%20the%20descriptions%20for%20all%20corresponding%20drugs)
+  * [GetDescriptionCommand](https://ay2324s1-cs2113-t17-3.github.io/tp/UserGuide#:~:text=getDescription%20%2D%20Retrieves%20the%20description%20of%20a%20particular%20drug.)
 
 -**Contributions to the DG**
 * Karishma added documentation for the following section of
