@@ -1,11 +1,14 @@
 package seedu.duke.commands.meal;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
+import seedu.duke.data.meal.Meal;
 
 public class MealCommand extends Command {
+    protected static ArrayList<Meal> meals;
 
     public MealCommand() {
         super();
@@ -15,6 +18,9 @@ public class MealCommand extends Command {
 
     }
 
+    public static void setMeals(ArrayList<Meal> meals) {
+        MealCommand.meals = meals;
+    }
 
     protected void checkArgument(List<String> arguments, int[] validArgumentAmounts) throws Exception {
         Boolean isValid = false;

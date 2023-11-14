@@ -20,6 +20,7 @@ import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.commands.logcommands.UpdateLogCommand;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.meal.*;
 
 public class Parser {
 
@@ -50,42 +51,51 @@ public class Parser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        case LogCommand.COMMAND_WORD:
-            return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case LogCommand.COMMAND_WORD:
+                return new LogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case DeleteLogCommand.COMMAND_WORD:
-            return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case DeleteLogCommand.COMMAND_WORD:
+                return new DeleteLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case ViewLogCommand.COMMAND_WORD:
-            return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case ViewLogCommand.COMMAND_WORD:
+                return new ViewLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case UpdateLogCommand.COMMAND_WORD:
-            return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
+            case UpdateLogCommand.COMMAND_WORD:
+                return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case GoalCommand.COMMAND_WORD:
-            return new GoalCommand(userInput);
+            case AddCommand.COMMAND_WORD:
+                return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case DeleteGoalCommand.COMMAND_WORD:
-            return new DeleteGoalCommand(userInput);
+            case DeleteCommand.COMMAND_WORD:
+                return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case ViewGoalCommand.COMMAND_WORD:
-            return new ViewGoalCommand(userInput);
+            case ListCommand.COMMAND_WORD:
+                return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
-        case AchieveGoalCommand.COMMAND_WORD:
-            return new AchieveGoalCommand(userInput);
+            case GoalCommand.COMMAND_WORD:
+                return new GoalCommand(userInput);
 
-        case AchievementCommand.COMMAND_WORD:
-            return new AchievementCommand(userInput);
+            case DeleteGoalCommand.COMMAND_WORD:
+                return new DeleteGoalCommand(userInput);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case ViewGoalCommand.COMMAND_WORD:
+                return new ViewGoalCommand(userInput);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case AchieveGoalCommand.COMMAND_WORD:
+                return new AchieveGoalCommand(userInput);
 
-        default:
-            return new IncorrectCommand("The command you inputted does not exist. Run `help` to see a" +
-                    "list of available commands.");
+            case AchievementCommand.COMMAND_WORD:
+                return new AchievementCommand(userInput);
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            default:
+                return new IncorrectCommand("The command you inputted does not exist. Run `help` to see a" +
+                        "list of available commands.");
         }
     }
 
