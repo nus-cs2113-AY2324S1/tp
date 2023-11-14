@@ -1,0 +1,115 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'autonumber
+'autoactivate on
+
+
+actor Student
+
+participant ":TimetableView" as TV
+
+participant "currentDayEvents\n:ArrayList<Event>" as CDE #white
+
+participant "moduleService\nController\n:ModuleService\nController" as MSC #white
+
+box "Model" #LightBlue
+participant "student:\nStudent" as S #white
+participant "timetable:\nTimetable" as T #white
+end box
+
+activate S
+
+opt timetableCommandWord == "SHOW"
+    'timetable.getCurrentSemesterModulesWeekly()
+    S -> T: getCurrent\nSemester\nModulesWeekly()
+    activate T
+    T --> S: currentSem\nModulesWeekly
+    deactivate T
+
+    S -> MSC: showTimetable\n(currentSem\nModulesWeekly)
+    activate MSC
+
+
+    MSC -> TV: printTimetable(currentSemesterModuleWeekly);
+    activate TV
+
+    'createDailyEvents(currentSemesterModules)
+    TV -> TV: createDailyEvents(currentSemesterModules)
+    activate TV
+    note left
+    createDailyEvents converts
+    the ArrayList<ModuleWeekly>
+    to a List of ArrayList<Events>
+    for different days
+    end note
+    TV --> TV: weeklyTimetableByDay:List<ArrayList<Event>>
+    deactivate TV
+
+
+    loop currentDayEvents
+        TV -> TV: sortByTime(currentDayEvents)
+        activate TV
+        note left
+        sortByTime sorts Events
+        in currentDayEvents by
+        start time, duration,
+        then module code, in
+        ascending order
+        end note
+        TV --> TV: currentDayEvents:ArrayList<Event> (sorted)
+        deactivate TV
+    end
+
+    TV -> TV: printTimetableHeader()
+    activate TV
+    TV --> Student: display Timetable Header
+    TV --> TV
+    deactivate TV
+
+    loop day
+    TV -> TV: printlnHorizontalLine()
+    activate TV
+    TV --> Student: display Horizontal Line
+    TV --> TV
+    deactivate TV
+
+    TV -> CDE: weeklyTimetableByDay.get(day)
+    CDE --> TV: currentDayEvents:ArrayList<Event>
+
+    TV -> TV: printCurrentDayEvents(currentDayEvents, day)
+    activate TV
+    loop !currentDayEvents.isEmpty()
+    TV -> TV: printCurrentDayOneEvent(currentEvent, day, isFirstLine)
+    activate TV
+    note left
+        printCurrentDayOneEvent displays
+        one event with table formatting.
+        isFirstLine is a boolean variable
+        to determine if the Day header
+        needs to be printed out
+    end note
+    TV --> Student: display one event of one \nday with table formatting
+    TV --> TV:
+    deactivate TV
+    end
+    TV --> TV:
+    deactivate TV
+    end
+
+    TV -> TV: printlnHorizontalLine()
+    activate TV
+    TV --> Student: display Horizontal Line
+    TV --> TV
+    deactivate TV
+
+
+    TV --> MSC
+    destroy TV
+    MSC --> S
+    deactivate MSC
+end
+
+
+
+@enduml

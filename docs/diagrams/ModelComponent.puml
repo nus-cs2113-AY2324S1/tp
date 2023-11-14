@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+@startuml
+
+
+component ModulePlannerController
+
+package "Student Data" {
+component Student
+component Schedule
+component Timetable
+[ModuleList] as modulesPlanned
+}
+
+component NUSModsAPI
+
+ModulePlannerController -> "1" Student
+
+
+
+Student *-down-> "1"  Schedule
+Schedule --> "modulesPlanned 1" modulesPlanned
+Schedule .right.> NUSModsAPI: calls
+
+Student *-right-> "1" Timetable
+
+@enduml
