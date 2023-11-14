@@ -1,0 +1,29 @@
+@startuml
+
+participant ":WatchlistCommand" as WatchListCommand
+participant ":WatchList" as WatchList
+participant ":Ui" as Ui
+participant "<<class>>\nSaveData" as SaveData
+
+-> WatchListCommand: execute()
+activate WatchListCommand
+    WatchListCommand -> WatchList: getLatestWatchlistInfo()
+    activate WatchList
+        WatchList -> WatchList : getExpiredStocks()
+        activate WatchList
+        return queryStocks
+        WatchList -> WatchList : fetchFMPStockPrices()
+        activate WatchList
+        return
+    return
+    WatchListCommand -> Ui: printStocksInfo(watchlist)
+    activate Ui
+    return
+    WatchListCommand -> SaveData: saveWatchList()
+    activate SaveData
+    return
+
+return
+
+hide footbox
+@enduml

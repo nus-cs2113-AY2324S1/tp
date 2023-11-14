@@ -1,0 +1,2 @@
+I | 123.12 | ALLOWANCE | 0 | false
+E | 100.0 | SHOPPING | 0 | false | shopee

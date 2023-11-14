@@ -1,0 +1,20 @@
+@startuml
+
+mainframe sd displaying chart
+
+participant ":VisCommand"
+participant "<<class>>\nVisualizer"
+
+":VisCommand"-> "<<class>>\nVisualizer": displayChart(chart, sortedCashFlow, type)
+
+alt "pie"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayPieChart(cashflowList, type)
+else "bar"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayBarChart(cashflowList, type)
+else "radar"
+    "<<class>>\nVisualizer" -> "<<class>>\nVisualizer": displayRadarChart(cashflowList, type)
+end
+
+hide footbox
+
+@enduml

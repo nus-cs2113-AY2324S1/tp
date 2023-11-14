@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classFontColor automatic
+
+Class Ui  #Cornsilk {
+    +printStocksInfo(watchlist: WatchList)
+}
+
+Class WatchList #Cornsilk {
+    +getLatestWatchlistInfo()
+    +getExpiredStocks() : StringBuilder
+    +fetchFMPStockPrices(queryStocks : StringBuilder)
+    +extractWatchlistInfoFromJSONArray(jsonStocks: JSONArray)
+}
+
+Class WatchListCommand #HoneyDew {
+    +execute()
+}
+
+Class SaveData #LightPink {
+    +<u>saveWatchList()
+}
+
+Class Stock #LightBlue {
+    +getStockNameFromAPI(symbol: String)
+    +setHashCode()
+    +checkHashCode()
+}
+
+WatchListCommand .right.> SaveData
+WatchListCommand -right-> "1" Ui
+WatchListCommand --> "1" WatchList
+WatchList --> "0..5" Stock
+
+note right: attributes are shown in DG
+
+hide Circle
+skinparam classAttributeIconSize 0
+
+@enduml

@@ -1,0 +1,9 @@
+I | 123.12 | ALLOWANCE | 10 | false | 01/01/2023
+I | 123.12 | ALLOWANCE | 0 | false | parents
+E | 100.0 | SHOPPING | 30 | false | 01/01/2023 | shopee
+E | 100.0 | INSURANCE | 10 | true | 01/01/2023 | ntuc
+E | 100.0 | INSURANCE | 10 | false | 11/01/2023 | ntuc
+I | 123.12 | ALLOWANCE | 10 | false | 01/02/2023
+I | 123.12 | ALLOWANCE | 10 | false | 01/03/2023
+I | 123.12 | ALLOWANCE | 10 | false | 01/04/2023
+B | 0.0 | 0.0

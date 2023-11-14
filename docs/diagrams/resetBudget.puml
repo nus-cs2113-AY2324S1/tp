@@ -1,0 +1,22 @@
+@startuml
+
+mainframe sd ResetBudget
+participant ":BudgetCommand" as BudgetCommand
+participant "<<class>>\nBudget" as Budget
+participant ":Ui" as Ui
+
+alt spentBudget
+    opt initialBudgetExceedBalance
+        BudgetCommand -> Budget: setInitialBudget(balance)
+        BudgetCommand -> Ui: printBudgetExceedBalance()
+    end
+    BudgetCommand -> Budget: resetBudget()
+    BudgetCommand -> Ui: printResetBudget()
+else Does not have Budget
+    BudgetCommand -> Ui: printBudgetError("delete")
+else else
+    BudgetCommand -> Ui: printBudgetError("reset")
+end
+
+hide footbox
+@enduml

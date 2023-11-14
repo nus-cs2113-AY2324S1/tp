@@ -1,0 +1,41 @@
+@startuml
+
+participant ":LoadData" as LoadData
+participant ":Cashflow" as Cashflow
+participant ":Income" as Income
+participant ":Expense" as Expense
+participant ":CashflowList" as CashflowList
+participant ":Ui" as Ui
+
+LoadData -> LoadData: addRecurringCashflows(date);
+activate LoadData
+loop for each cashflow in cashflowList
+    LoadData -> LoadData: identifyRecurringCashflows()
+    activate LoadData
+opt is Recurring and has not Recurred
+    LoadData -> LoadData: addRecurringCashflowToTempList()
+    activate LoadData
+ref over LoadData, Expense: add recurring cashflows to templist
+return
+
+return
+end
+
+end
+loop for each cashflow in tempCashflowList
+    LoadData -> CashflowList: load(cashflow)
+    activate CashflowList
+    return
+    LoadData -> Ui: printAddedCashflowWithoutBalance(cashflow)
+    activate Ui
+    return
+end
+
+opt tempCashflowList is not empty
+    LoadData -> Ui: printBalance()
+    activate Ui
+    return
+end
+return
+hide footbox
+@enduml

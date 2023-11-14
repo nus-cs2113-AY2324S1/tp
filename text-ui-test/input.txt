@@ -1,1 +1,23 @@
-James Gosling
+add income /a 5000 /t salary /d part time job
+add income /a 123.12 /t allowance
+add expense /a 100 /t entertainment /d netflix
+add expense /a 123.21 /t shopping
+list
+list income
+list expense
+list recurring
+delete income 2
+delete 1
+delete expense 2
+delete 1
+addstock /s MSFT
+addstock /s GME
+add income /a 5000 /t salary
+budget set /b 3000
+budget update /b 1000
+add expense /a 200 /t shopping
+budget view
+budget reset
+budget delete
+sdf
+exit

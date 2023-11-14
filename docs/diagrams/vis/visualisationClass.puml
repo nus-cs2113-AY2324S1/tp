@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classFontColor automatic
+
+class VisCommand #MistyRose {
+-type: String
+-chart: String
++execute()
+}
+
+class RawCommand #Cornsilk {
+-args: List<String>
+-extraArgs: Map<String, String>
+#commandName: String
+}
+
+class Categorizer #HoneyDew {
++<u>sortType(cashflowList: CashflowList, type: String)
++<u>sortExpenses(cashflowList: CashflowList)
++<u>sortIncome(cashflowList: CashflowList)
+}
+
+class Visualizer #Beige {
++<u>displayChart(chart: String, cashflowByCat: HashMap, type: String)
++ <u>displayPieChart(cashflowByCat: HashMap, type: String)
++ <u>displayBarChart(cashflowByCat: HashMap, type: String)
++ <u>displayRadarChart (cashflowByCat: HashMap, type: String)
+}
+
+class "{abstract}\nCommand"  #MintCream {
++execute() {abstract}
+}
+
+"{abstract}\nCommand" <|-- VisCommand
+RawCommand <.. VisCommand
+Categorizer <.. VisCommand
+Visualizer <.. VisCommand
+
+hide Circle
+skinparam classAttributeIconSize 0
+
+@enduml

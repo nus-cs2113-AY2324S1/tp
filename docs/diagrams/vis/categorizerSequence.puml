@@ -1,0 +1,26 @@
+@startuml
+
+mainframe sd sort cashflow entries
+
+autoactivate on
+
+participant ":VisCommand"
+participant "<<class>>\nCategorizer"
+
+activate ":VisCommand"
+
+":VisCommand"-> "<<class>>\nCategorizer": sortType(cashflowList, type)
+
+alt "expense"
+    "<<class>>\nCategorizer" -> "<<class>>\nCategorizer": sortExpenses(cashflowList)
+    return expenseByCat
+else "income"
+    "<<class>>\nCategorizer" -> "<<class>>\nCategorizer": sortIncome(cashflowList)
+    return incomeByCat
+end
+
+return sortedCashflow: Map<String,Double>
+
+hide footbox
+
+@enduml
