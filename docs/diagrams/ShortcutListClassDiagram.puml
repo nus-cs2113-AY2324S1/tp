@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor CLASS_ARROW_COLOR
+skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
+
+Class ShortcutList {
+    + getShortcuts(): Shortcut[]
+    + addShortcut(shortcut: Shortcut)
+    + getShortcut(index: int): Shortcut
+    + listShortcuts()
+    + getIndex(ingredientName: String): int
+    + deleteShortcut(index: int)
+    + exist(ingredientName: String)
+}
+
+
+Class Shortcut {
+    - ingredientName: String
+    - quantity: Double
+
+    + getIngredientName(): String
+    + getQuantity(): double
+    + setIngredientName()
+    + setQuantity()
+    + toString(): String
+}
+
+ShortcutList -down-> "*" Shortcut
+
+@enduml

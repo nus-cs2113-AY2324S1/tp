@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+participant ":Essenmakanan" as EssenMakanan MAIN_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant ":ViewShortcutCommand" as ViewShortcutCommand COMMAND_COLOR
+participant "<<class>>\nUi" as Ui INTERFACE_COLOR
+participant "shortcuts:ShortcutList" as Shortcuts SHORTCUT_LIST_COLOR
+
+User -> EssenMakanan : input: view sc
+activate EssenMakanan
+
+EssenMakanan -> Parser : parseCommand()
+activate Parser
+
+create ViewShortcutCommand
+Parser -> ViewShortcutCommand: new ViewShortcutCommand()
+activate ViewShortcutCommand
+
+ViewShortcutCommand --> Parser : command object
+deactivate ViewShortcutCommand
+
+Parser -> EssenMakanan: command object
+deactivate Parser
+
+EssenMakanan -> ViewShortcutCommand: executeCommand()
+activate ViewShortcutCommand
+
+ViewShortcutCommand -> Ui: printAllShortcuts(shortcuts)
+activate Ui
+
+Ui -> Shortcuts: listShortcuts()
+activate Shortcuts
+
+Shortcuts --> Ui
+deactivate Shortcuts
+
+Ui --> ViewShortcutCommand
+deactivate Ui
+
+ViewShortcutCommand --> EssenMakanan
+deactivate ViewShortcutCommand
+
+EssenMakanan --> User
+deactivate EssenMakanan
+@enduml
