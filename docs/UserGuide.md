@@ -36,12 +36,12 @@ In the terminal, make sure you are in the same directory (location) as the jar f
 
 |    Exercise | Goal  | Meal |  Others | 
 | :------------ |:---------------:| -------------:| --------------:|
-| [Add an Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#log---adding-an-exercise)      | [Add a Goal](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#set-on---setting-up-a-calorie-goal) | [Add a Meal](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#meal_add---adding-a-meal) | [Help](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#help---viewing-help) |
-| [Update an Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#update---updating-an-exercise)      | [Delete a Goal](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#deleteg---delete-a-goal-from-current-goal-list)        |   $12 |  [Exit](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#exiting-the-program-exit)     |
-| [View Exercise](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#view---viewing-exercises) | [Make Achievement](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#achieve---turn-one-goal-as-achieved)        |    $1 |[View Achievement](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#achievement---view-your-achieved-goals)       |
-| zebra stripes | [View Goals](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#viewg---view-your-current-goal-list)        |    $1 |       |
+| [Add an Exercise](#log---adding-an-exercise)      | [Add a Goal](#set-on---setting-up-a-calorie-goal) | [Add a Meal](#meal_add---adding-a-meal) | [Help](#help---viewing-help) |
+| [Update an Exercise](#update---updating-an-exercise)      | [Delete a Goal](#deleteg---delete-a-goal-from-current-goal-list)        |   [Delete a Meal](#meal_delete---deleting-a-meal) |  [Exit](#exiting-the-program-exit)     |
+| [View Exercise](#view---viewing-exercises) | [Make Achievement](#achieve---turn-one-goal-as-achieved)        |    [List a Meal](#meal_list---listing-meals) |[View Achievement](#achievement---view-your-achieved-goals)       |
+| zebra stripes | [View Goals](#viewg---view-your-current-goal-list)        |     |       |
 
-2. Frequently-asked-quesions([**FAQs**](https://github.com/AY2324S1-CS2113-F11-1/tp/blob/master/docs/UserGuide.md#faqs))
+2. Frequently-asked-quesions([**FAQs**](#faqs))
 
 ## Command Type
 
@@ -51,18 +51,48 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ### `meal_add` - Adding a meal
-Adds a new item to the list of todo items.
+Adds a new item to the meal list.
 
-Format: `meal_add MEAL_NAME CALORIES`
+Format: `meal_add MEAL_NAME CALORIES CATEGORY [DATE]`
 
 * The `CALORIES` should be a standard number.
 * The `MEAL_NAME` cannot contain space, use "_" as replacement.
+* The `CATEGORY` should be a number of {0, 1, 2} or a string of {"staple_food", "snack", "beverage"}.
+* The `DATE` should be a standard string that indicates a valid date, conforming with any format of {"yyyy/M/d", "d/M/yyyy", "yyyy-M-d", "d-M-yyyy"}.
 
 Example of usage: 
 
 `meal_add potatoes 100`
 
 `meal_add baked_bread 66`
+
+### `meal_delete` - Deleting a meal
+Delete a meal from the existing list.
+
+Format: `meal_delete INDEX`
+
+* The `INDEX` should be a standard and positive number.
+
+Example of usage: 
+
+`meal_delete 1`
+
+`meal_delete 100`
+
+### `meal_list` - Listing meals
+List all the meals that have been recorded.
+
+Format: `meal_list [CATEGORY]`
+
+* The `CATEGORY` should be a number of {0, 1, 2} or a string of {"staple_food", "snack", "beverage"} and can be omitted.
+
+Example of usage: 
+
+`meal_list`
+
+`meal_list 1`
+
+`meal_list snack`
 
 ### `log` - Adding an exercise
 Adds a new exercise to the Exercise Log.
