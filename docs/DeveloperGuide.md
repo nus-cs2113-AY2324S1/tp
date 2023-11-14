@@ -852,28 +852,28 @@ All recipe titles can be seen using `view r` command.
 
 
 
-<a id="edit-r"></a>
-### Edit a specific recipe
+<a id="edit-r"></a> 
+### Edit a specific recipe 
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-- Edit recipe title `edit r/scrambled eggs n/poached eggs`<br>
-**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
-All recipe titles can be seen using `view r` command.
+- Edit recipe title `edit r/scrambled eggs n/poached eggs`<br>  
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title. 
+All recipe titles can be seen using `view r` command. 
 
-  **Expected**: Recipe title will be changed to "poached eggs"
-
-
-- Edit recipe step `edit r/poached eggs s/1,whisk the eggs`<br>
-**Prerequisites**: view recipe using `view r/poached eggs` command to see step id.<br>
-  **Expected**: Step 1 of recipe will be changed to "whisk the eggs"
+  **Expected**: Recipe title will be changed to "poached eggs" 
 
 
-- Edit recipe title `edit r/poached eggs i/1,n-duck eggs,q-3`<br>
-**Prerequisites**: view recipe using `view r/poached eggs` command to see ingredient id.<br>
-  **Expected**: Ingredient 1's name will be changed to "duck eggs" and quantity to "3"
+- Edit recipe step `edit r/poached eggs s/1,whisk the eggs`<br> 
+**Prerequisites**: view recipe using `view r/poached eggs` command to see step id.<br> 
+ **Expected**: Step 1 of recipe will be changed to "whisk the eggs"
 
-<a id="delete-r"></a>
-### Delete a specific recipe
+
+- Edit recipe title `edit r/poached eggs i/1,n-duck eggs,q-3`<br> 
+**Prerequisites**: view recipe using `view r/poached eggs` command to see ingredient id.<br> 
+  **Expected**: Ingredient 1's name will be changed to "duck eggs" and quantity to "3" 
+
+<a id="delete-r"></a> 
+### Delete a specific recipe 
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
@@ -884,19 +884,19 @@ All recipe titles can be seen using `view r` command.
 
 
 
-<a id="check-r"></a>
-### Check Recipe Functions
-(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+<a id="check-r"></a> 
+### Check Recipe Functions 
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>) 
 
-**Prerequisites**:
+**Prerequisites**:  
 
-- Ensure that you have the recipe `dumpling soup` added to your list of recipes already
-  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
-- Ensure that you don't have "chicken broth" ingredient in your ingredient inventory
-- Ensure that you have 2 dumplings in your inventory
-  - `add i/dumpling,2,pc`
+- Ensure that you have the recipe `dumpling soup` added to your list of recipes already 
+  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water` 
+- Ensure that you don't have "chicken broth" ingredient in your ingredient inventory 
+- Ensure that you have 2 dumplings in your inventory 
+  - `add i/dumpling,2,pc` 
 
-**Test Cases**:
+**Test Cases**: 
 - `check dumpling soup` <br>
   **Expected:** A message will appear, indicating that you need to get 3 more pieces of dumplings and taht you are missing chicken broth from your ingredient inventory
 - `check 1` <br>
