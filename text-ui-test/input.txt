@@ -1,1 +1,43 @@
-James Gosling
+Benedict
+
+deleteBudget
+ viewBudget
+updateBudget 10.50
+addIncome job /amt 3000 /date 01 Jan 2020
+addIncome side hustle /amt 500 /date 19/10/2023
+addExpense vacation /amt 4000
+viewIncomes
+viewFinancialStatement
+viewBudget
+addExpense dinner /amt 50 /date 19.10.2023
+deleteBudget
+addIncome job /amt 600
+viewBudget
+updateBudget 0
+viewBudget
+updateBudget 60
+addExpense tax /amt 40
+viewBudget
+addIncome black jack /amt 80
+updateBudget 150.0
+viewBudget
+deleteIncome 5
+deleteIncome 2
+viewFinancialStatement
+addExpense milk tea /amt 2.50
+addExpense milk tea /amt 4.50 /cat food_drink
+filterExpense milk tea
+filterExpense /amt 2.50
+filterExpense milk
+filter /cat food_drink
+addIncome CPF /amt 500 /cat other
+addIncome toto prize money /amt 2.50 /cat lottery
+addExpense book /amt 10 /cat other
+filter /cat other
+filter /amt 2.50
+addIncome a very long income description longer than MAX_DESCRIPTION set /amt 500
+addExpense lunch, and dinner /amt 60 /cat food_drink
+viewFinancialStatement
+addIncome gamble /amt 99999999
+bad input
+exit

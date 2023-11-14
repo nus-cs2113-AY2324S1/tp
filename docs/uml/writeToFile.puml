@@ -1,0 +1,32 @@
+@startuml
+
+actor User
+participant FileStorage
+database File as "User's File"
+participant IncomeStatement
+participant ExpenseStatement
+
+User -> FileStorage: writeToFile(incomeStatement, expenseStatement)
+
+FileStorage -> File: Open the file for writing
+File -> FileStorage: File is open
+
+FileStorage -> IncomeStatement: Get income transactions
+FileStorage -> ExpenseStatement: Get expense transactions
+
+loop for each income data
+    FileStorage -> FileStorage: Extract income information and format string
+    FileStorage -> File: Write income data
+    File -> FileStorage: Data written
+end
+
+loop for each expense data
+    File -> FileStorage: Extract expense information and format string
+    FileStorage -> File: Write expense data
+    File -> FileStorage: Data written
+end
+
+FileStorage -> File: Close the file
+File -> FileStorage: File closed
+
+@enduml

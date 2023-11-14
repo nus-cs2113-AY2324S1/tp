@@ -1,0 +1,75 @@
+@startuml
+
+skinparam Style strictuml
+
+-> ":ViewBudget": execute()
+activate ":ViewBudget" #40e0d0
+":ViewBudget" -> ":BudgetHandler": printBudget()
+activate ":BudgetHandler" #1e90ff
+
+":BudgetHandler" -> ":BudgetHandler": setBudgetPercentage()
+activate ":BudgetHandler" #000080
+":BudgetHandler" -> ":Budget": getBudget()
+activate ":Budget" #6495ed
+":Budget" --> ":BudgetHandler"
+deactivate ":Budget"
+
+":BudgetHandler" -> ":FinancialStatement": getNetCash()
+activate ":FinancialStatement" #5f9ea0
+":FinancialStatement" --> ":BudgetHandler"
+deactivate ":FinancialStatement"
+
+create ":Progress"
+":BudgetHandler" -> ":Progress": Progress(cashOnHand, budgetAmount)
+activate ":Progress" #00bfff
+":Progress" --> ":BudgetHandler"
+deactivate ":Progress"
+":BudgetHandler" --> ":BudgetHandler"
+deactivate ":BudgetHandler"
+
+alt #f0ffff budget.isActive()
+
+    opt #e6e6fa budgetHasBeenMaxedOut
+        ":BudgetHandler" -> ":BudgetHandler": printSeriousWarning()
+        activate ":BudgetHandler" #000080
+        ":BudgetHandler" --> ":BudgetHandler"
+        deactivate ":BudgetHandler"
+
+    else budgetIsNotOnTrack
+        ":BudgetHandler" -> ":BudgetHandler": printBasicWarning()
+        activate ":BudgetHandler" #000080
+        ":BudgetHandler" --> ":BudgetHandler"
+        deactivate ":BudgetHandler"
+    end
+
+    ":BudgetHandler" -> ":Ui": printMultipleText(texts)
+    activate ":Ui" #ffd700
+
+    ":Ui" -> ":Budget": toString()
+    activate ":Budget" #6495ed
+    ":Budget" --> ":Ui"
+    deactivate ":Budget"
+
+    ":Ui" -> ":FinancialStatement": getNetCash()
+    activate ":FinancialStatement" #5f9ea0
+    ":FinancialStatement" --> ":Ui"
+    deactivate ":FinancialStatement"
+
+    ":Ui" -> ":Progress": displayProgressBar()
+    activate ":Progress" #00bfff
+    ":Progress" --> ":Ui"
+    deactivate ":Progress"
+    ":Ui" --> ":BudgetHandler"
+    deactivate ":Ui"
+
+else
+    <--":BudgetHandler": throw CashLehBudgetException(text)
+
+end
+
+":BudgetHandler" --> ":ViewBudget"
+deactivate ":BudgetHandler"
+<-- ":ViewBudget"
+deactivate ":ViewBudget"
+
+@enduml
