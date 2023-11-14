@@ -110,7 +110,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
    ![Relevant Telegram screenshot 1](../images_PPP/ziyi/telegram_chef_text.png)
    ![Relevant Telegram screenshot 2](../images_PPP/ziyi/relevant_telegram_screenshot_2.png)
    ![Relevant Telegram screenshot 3](../images_PPP/ziyi/relevant_telegram_screenshot_3.png)
-4. Read and compile important information on course website
+4. Read and compile important information on course website<br>
    ![Relevant Telegram screenshot 4](../images_PPP/ziyi/relevant_telagram_screenshot_4.png)
 
 ### Contributions beyond the Project Team
