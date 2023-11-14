@@ -4,6 +4,9 @@
 !include <office/Users/user>
 !include <office/Concepts/documents>
 
+hide footbox
+hide members
+
 
 Package " "<<Rectangle>>{
     Class UI UI_COLOR
