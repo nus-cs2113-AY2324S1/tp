@@ -12,8 +12,8 @@
         * [Command Component](#command-component)
         * [Storage Component](#storage-component)
     * [Implementation](#implementation--return-to-contents)
-        * [Find Resources](#find-resource-feature--return-to-contents)
         * [Add Resources](#add-resource-feature--return-to-contents)
+        * [Find Resources](#find-resource-feature--return-to-contents)
         * [Show Resources](#show-resources-feature--return-to-contents)
         * [List Resources](#listing-resources-feature--return-to-contents)
         * [Edit Resources](#edit-command-feature--return-to-contents)
@@ -250,7 +250,7 @@ There are seven types of `Resource`:
 - **ENewspaper** has two options:
     - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link]`
     - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link] /s [status]`
-    - 
+  
 #### Implementation
 
 It implements the following operations:
@@ -987,7 +987,7 @@ should be able to accomplish most of the tasks faster using commands than using 
 
 * *Resource* - A generic term for items in library inventory.
   * Further divided into: Book, EBook, Magazines, EMagazines, Newspapers, ENewspapers, and CDs. 
-  * 
+  
 <div style="page-break-after: always;"></div>
 
 ## Instructions for Manual Testing | [Return to contents](#table-of-contents)
