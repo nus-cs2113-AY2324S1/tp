@@ -523,7 +523,10 @@ Example:
 
 ## FAQ
 
-**Q**: Why are there 2 methods to add a recipe? 
+**Q**: Why can't I execute a recipe? 
 
-**A**: We are exploring the best way to add a recipe, for now users can 
-choose to add a recipe with steps and ingredients or add a recipe with steps duration.
+**A**: Use `check` command to ensure that you have all the ingredients needed for the recipe.
+
+**Q**: Why is there a step ID??
+
+**A**: Enable easy referencing when editing steps
