@@ -23,14 +23,14 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
 1.  **Edit Price** <br>
     Function: Allow user to edit price of the dish on the menu
     Command Format: `edit_price dish/DISH_INDEX price/NEW_PRICE`<br>
-    Error Handling: This command is able to detect missing argument tag, argument, wrong argument type, empty argument and same price. Specific error message will be shown to give user hint.
+    Error Handling: This command is able to detect several wrong command formats and output specific error message.
     <br/>
    2.  **Help** <br>
        Function: Print out a list of commands and their usages to the user<br> 
-       Extra info: This feature requires constant updating whenever a new feature is added. It is also very tedious to implement Junit test as the output is very long and keeps changing. Hence, I removed the Junit test in the last iteration as I feel that it is not necessary to have Junit test for a trivial `help` command.
+       Extra info: This feature requires constant updating whenever a new feature is added. 
    <br/><br/>
 3.  **Encoding & Decoding of Pantry Stock Storage File** <br>
-    Error Handling: This command will still check for the validity of each argument (e.g., length of ingredient name, type of unit), and skip the particular ingredient if any of the arguments is not valid. This can prevent the user from accidentally adding invalid ingredients to the text file.
+    Error Handling: This command will still check for the validity of each argument, and skip the particular ingredient if any of the arguments is not valid. 
 
 ### Enhancements
 1. **Storage**<br>
@@ -48,21 +48,19 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
    [Relevant PR](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51) <br>
    - Learned `Pattern` and `Matcher` API by referring to addressbook and online documentations.
    - Created regex `COMMAND_ARGUMENT_FORMAT`, `ADD_ARGUMENT_STRING`, `LIST_INGREDIENT_ARGUMENT_STRING`, `DELETE_ARGUMENT_STRING` and `EDIT_PRICE_ARGUMENT_STRING`. 
-   - Created a skeleton method body of `prepare_add` method using pattern and matcher, and added some basic explanations on how to use them for Dexter to follow and implement the feature.
+   - Created a skeleton method body of `prepare_add` method using pattern and matcher, and added some basic explanations on how to use them.
 
 ### Contributions to UG
 [UserGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/UserGuide.html)
 
 #### Individual Task
-1. Edit price
-2. Help
+1. Edit price, Help
 
 #### Team-based Task
 1. Table of Contents
 2. Introduction
 3. Known Issues
 4. Glossary
-5. General formatting
 
 ### Contributions to DG
 [DeveloperGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html)
@@ -73,16 +71,12 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
 4. Future Enhancements
 
 #### Team-based Task
-1. Table of Contents
-2. Acknowledgement
-3. Setting up, getting started
-4. Product Scope
-5. Non-Functional Requirements
-6. Glossary
-7. General formatting
-   - Ensure consistency of features descriptions and diagrams
-   - Correct typos and grammar errors
-8. Manual testing guide
+1. Acknowledgement
+2. Setting up, getting started
+3. Product Scope
+4. Non-Functional Requirements
+5. Glossary
+6. Manual testing guide
 
 ### Other Contributions to Team-based Task
 1. Maintaining issue tracker with Dexter by labeling issues
@@ -105,6 +99,5 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
    <img height="100" src="../images_PPP/ziyi/relevant_telagram_screenshot_4.png" width="100"/>
 
 ### Contributions beyond the Project Team
-1. Posted 9 posts in the forum.
-   Examples of forum posts: [#37](https://github.com/nus-cs2113-AY2324S1/forum/issues/37), [#19](https://github.com/nus-cs2113-AY2324S1/forum/issues/19), [#31](https://github.com/nus-cs2113-AY2324S1/forum/issues/31)
+1. Posted 9 posts in the forum. Examples of forum posts: [#37](https://github.com/nus-cs2113-AY2324S1/forum/issues/37), [#19](https://github.com/nus-cs2113-AY2324S1/forum/issues/19), [#31](https://github.com/nus-cs2113-AY2324S1/forum/issues/31)
 2. Reviews on PR from other teams: [T18-1](https://github.com/nus-cs2113-AY2324S1/tp/pull/19#discussion_r1379823357), [F11-3](https://github.com/nus-cs2113-AY2324S1/tp/pull/28)
