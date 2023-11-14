@@ -17,8 +17,9 @@ class AddRecipeTest {
     public void addRecipes_validRecipeWithNameAndStep_fullyConstructedRecipes() {
         String[] recipe1Steps = {"step1", "step2", "step3"};
         String[] recipe2Steps = {"step1", "step2"};
-        recipes.addRecipe(new Recipe("Recipe1", recipe1Steps));
-        recipes.addRecipe(new Recipe("Recipe2", recipe2Steps));
+        String[] ingredients = {"egg,2,pc", "flour,200,g"};
+        recipes.addRecipe(new Recipe("Recipe1", recipe1Steps, ingredients));
+        recipes.addRecipe(new Recipe("Recipe2", recipe2Steps, ingredients));
 
         Recipe recipe = recipes.getRecipe(0);
         assertEquals("Recipe1", recipe.getTitle());

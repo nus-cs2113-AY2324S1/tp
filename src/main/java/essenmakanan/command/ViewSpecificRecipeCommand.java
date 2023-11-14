@@ -17,6 +17,9 @@ public class ViewSpecificRecipeCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Check if structure of command is valid and execute command by printing the recipe
+     */
     @Override
     public void executeCommand() {
         try {

@@ -16,6 +16,9 @@ public class UseIngredientCommand extends Command {
         this.ingredients = ingredients;
     }
 
+    /**
+     * Iterate through the ingredients to use and update the quantity of the ingredients in the list
+     */
     @Override
     public void executeCommand() {
         String[] allIngredients = toUse.split("i/");
@@ -30,10 +33,16 @@ public class UseIngredientCommand extends Command {
         }
     }
 
+    /**
+     * Update the quantity of the ingredient in the list
+     *
+     * @param ingredientString String containing ingredient name, quantity and unit
+     */
     public void updateIngredientQuantity(String ingredientString) {
         try {
             Ingredient newIngredient = IngredientParser.parseIngredient(ingredientString);
 
+            // you cannot use negative quantity of ingredients
             if (newIngredient.getQuantity() < 0) {
                 Ui.printNegativeIngredientQuantity();
                 return;

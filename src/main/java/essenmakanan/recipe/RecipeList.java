@@ -29,10 +29,6 @@ public class RecipeList {
                 : "Recipe is not successfully added into the list.";
     }
 
-    public void addRecipe(String title, String[] steps) {
-        recipes.add(new Recipe(title, steps));
-    }
-
     /**
      * To delete a recipe by index
      *
@@ -142,6 +138,11 @@ public class RecipeList {
         }
     }
 
+    /**
+     * To view a recipe by index
+     *
+     * @param index of the recipe
+     */
     public void viewRecipe(int index) {
         Ui.drawDivider();
 
@@ -156,6 +157,11 @@ public class RecipeList {
         listRecipeSteps(recipe);
     }
 
+    /**
+     * To view a recipe by title
+     *
+     * @param title of the recipe
+     */
     public void viewRecipe(String title) {
         Ui.drawDivider();
         Recipe recipe = recipes.stream()
@@ -166,6 +172,13 @@ public class RecipeList {
         listRecipeSteps(recipe);
     }
 
+    /**
+     * To edit a recipe
+     *
+     * @param existingRecipe is the recipe to be edited
+     * @param editDetails    is the details to be edited
+     * @throws EssenFormatException if the format is invalid
+     */
     public void editRecipe(Recipe existingRecipe, String[] editDetails) throws EssenFormatException {
         for (int i = 0; i < editDetails.length; i++) {
             // get flag of input to know which field to edit
@@ -246,26 +259,33 @@ public class RecipeList {
 
     }
 
-    public String[] getIngredientEditDetails(String ingrdientEditString) throws EssenInvalidEditException{
-        int totalDashes = ingrdientEditString.split("-").length-1;
+    /**
+     * To get the details of the ingredient to be edited
+     *
+     * @param ingredientEditString is the string of the ingredient to be edited
+     * @return String array of the ingredient details
+     * @throws EssenInvalidEditException if the format is invalid
+     */
+    public String[] getIngredientEditDetails(String ingredientEditString) throws EssenInvalidEditException{
+        int totalDashes = ingredientEditString.split("-").length-1;
         String[] ingredientEditDetails = new String[totalDashes];
         int counter = 0;
 
-        int firstDash = ingrdientEditString.indexOf("-");
+        int firstDash = ingredientEditString.indexOf("-");
 
         while (firstDash != -1) {
-            if ((firstDash + 1) >= ingrdientEditString.length()) {
+            if ((firstDash + 1) >= ingredientEditString.length()) {
                 System.out.println("Please provide details to edit");
                 throw new EssenInvalidEditException();
             }
 
-            int nextDash = ingrdientEditString.indexOf("-", firstDash+1);
+            int nextDash = ingredientEditString.indexOf("-", firstDash+1);
 
             if (nextDash != -1) {
-                String stringToReplaceDash = ingrdientEditString.substring(firstDash - 1, nextDash - 2).trim();
+                String stringToReplaceDash = ingredientEditString.substring(firstDash - 1, nextDash - 2).trim();
                 ingredientEditDetails[counter] = stringToReplaceDash.replace("-", "/");
             } else {
-                String stringToReplaceDash = ingrdientEditString.substring(firstDash-1).trim();
+                String stringToReplaceDash = ingredientEditString.substring(firstDash-1).trim();
                 ingredientEditDetails[counter] = stringToReplaceDash.replace("-", "/");
             }
             counter++;

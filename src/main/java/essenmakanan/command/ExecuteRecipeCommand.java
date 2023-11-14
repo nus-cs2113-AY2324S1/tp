@@ -27,6 +27,9 @@ public class ExecuteRecipeCommand extends Command {
         this.checkRecipeCommand = new CheckRecipeCommand(recipeTitleToStart, recipes, allIngredientsList);
     }
 
+    /**
+     * Check if structure of command is valid and execute recipe by decreasing quantity of ingredients used for recipe
+     */
     @Override
     public void executeCommand() {
         Recipe recipe = null;
@@ -41,6 +44,7 @@ public class ExecuteRecipeCommand extends Command {
 
         RecipeIngredientList recipeIngredients = recipe.getRecipeIngredients();
         if (checkRecipeCommand.allIngredientsReady(recipeIngredients)){
+            // if recipe is null, program should have terminated before this
             assert recipe != null : "Recipe should not be null";
             updateAllIngredientQuantity(recipeIngredients);
             Ui.printExecuteRecipeSuccess(recipe.getTitle());
@@ -50,6 +54,12 @@ public class ExecuteRecipeCommand extends Command {
 
     }
 
+    /**
+     * Get recipe from recipe list based on title
+     *
+     * @return Recipe object
+     * @throws EssenNullInputException if recipe title is empty
+     */
     public Recipe getRecipe() throws EssenNullInputException {
         try {
             if (recipeTitleToStart.isEmpty()) {
@@ -66,6 +76,11 @@ public class ExecuteRecipeCommand extends Command {
         return null;
     }
 
+    /**
+     * Update quantity of ingredients used for recipe by decreasing the quantity used.
+     *
+     * @param recipeIngredients
+     */
     public void updateAllIngredientQuantity(RecipeIngredientList recipeIngredients) {
         for (Ingredient ingredient: recipeIngredients.getIngredients()) {
             try {

@@ -154,6 +154,14 @@ public class AddRecipeCommand extends Command {
         Ui.printAddRecipeSuccess(recipeTitle);
     }
 
+    /**
+     * Obtain recipe index from user input
+     *
+     * @param content user input
+     * @param recipeTitle recipe title
+     * @return recipe index
+     * @throws EssenFormatException if input is invalid
+     */
     public int obtainRecipeIndex(String content, String recipeTitle) throws EssenFormatException {
         if (content.isBlank()) {
             System.out.println("Recipe title is empty! Please enter valid title after \"r/\"");
@@ -170,6 +178,15 @@ public class AddRecipeCommand extends Command {
         return recipes.getIndexOfRecipe(content.trim());
     }
 
+    /**
+     * Obtain steps content from user input
+     *
+     * @param content user input
+     * @param tag tag of the step
+     * @param stepsCounter number of steps
+     * @return steps content
+     * @throws EssenFormatException if input is invalid
+     */
     public String getStepsContent(String content, String tag, int stepsCounter) throws EssenFormatException  {
         if (content.isBlank()) {
             System.out.println("Step is empty! Please enter valid step after \"s/\"");
@@ -187,6 +204,13 @@ public class AddRecipeCommand extends Command {
         return content;
     }
 
+    /**
+     * Obtain ingredient content from user input
+     *
+     * @param content user input
+     * @return ingredient content
+     * @throws EssenFormatException if input is invalid
+     */
     public String getIngredientContent(String content) throws EssenFormatException {
         if (content.isBlank()) {
             System.out.println("Ingredient is empty! Please enter valid ingredient after \"i/\"");
@@ -201,6 +225,13 @@ public class AddRecipeCommand extends Command {
         return content;
     }
 
+    /**
+     * Count the number of occurrences of a substring in a string
+     *
+     * @param mainStr main string to count from
+     * @param subStr substring to count
+     * @return number of occurrences
+     */
     public static int countOccurrences(String mainStr, String subStr) {
         int count = 0;
         int index = 0;
@@ -211,6 +242,11 @@ public class AddRecipeCommand extends Command {
         return count;
     }
 
+    /**
+     * Ask user if they want to overwrite existing recipe. If yes, delete existing recipe
+     *
+     * @return true if user wants to overwrite existing recipe, false otherwise
+     */
     public boolean overwriteExistingRecipe() {
         System.out.println("Recipe already exist! Do you want to overwrite it? (Y/N)");
         String input = Ui.readUserInput();

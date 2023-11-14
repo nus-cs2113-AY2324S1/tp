@@ -1,18 +1,15 @@
 package essenmakanan.parser;
 
-import essenmakanan.exception.EssenException;
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.exception.EssenStorageFormatException;
 import essenmakanan.ingredient.Ingredient;
 import essenmakanan.ingredient.IngredientUnit;
-import essenmakanan.recipe.Recipe;
 import essenmakanan.recipe.RecipeIngredientList;
 import essenmakanan.recipe.RecipeList;
 import essenmakanan.recipe.RecipeStepList;
 import essenmakanan.recipe.Step;
 import essenmakanan.recipe.Tag;
-import essenmakanan.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
@@ -114,26 +111,6 @@ public class RecipeParser {
         } catch (NumberFormatException e) {
             System.out.println("NUMBER_OF_RECIPES and RECIPE_INDEX should be integers!");
             throw new EssenFormatException();
-        }
-    }
-
-    public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
-            throws EssenException {
-        switch(command) {
-        case "add":
-            String recipeName = inputDetail.substring(2);
-            assert !recipeName.contains("r/") : "Recipe name should not contain key characters";
-
-            Recipe newRecipe = new Recipe(recipeName);
-            recipes.addRecipe(newRecipe);
-
-            Ui.printAddRecipeSuccess(recipeName);
-            break;
-        case "view":
-            Ui.printAllRecipes(recipes);
-            break;
-        default:
-            throw new EssenException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
 

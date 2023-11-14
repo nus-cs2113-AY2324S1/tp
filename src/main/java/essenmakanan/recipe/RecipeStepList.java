@@ -31,6 +31,11 @@ public class RecipeStepList {
         this.steps = steps;
     }
 
+    /**
+     * To add step by as a string of array into the recipe steps
+     *
+     * @param inputSteps total steps for a recipe
+     */
     public RecipeStepList(String[] inputSteps) {
         Step step = null;
         for (String stepString : inputSteps) {
@@ -55,6 +60,12 @@ public class RecipeStepList {
         }
     }
 
+    /**
+     * To create step that only has a tag
+     *
+     * @param stepString is the step with tag
+     * @return step with tag
+     */
     public Step createStepWithTag(String stepString) {
         String tagValue;
 
@@ -69,6 +80,12 @@ public class RecipeStepList {
         return new Step(stepDescription, tag);
     }
 
+    /**
+     * To create step that only has a duration
+     *
+     * @param stepString is the step with duration
+     * @return step with duration
+     */
     public Step createStepWithDuration(String stepString) {
 
         String[] stepStringSplit = stepString.split("d/");
@@ -82,6 +99,12 @@ public class RecipeStepList {
         return new Step(stepDescription, duration);
     }
 
+    /**
+     * To create step that has a tag and duration
+     *
+     * @param stepString is the step with tag and duration
+     * @return step with tag and duration
+     */
     public Step createStepWithTagAndDuration(String stepString) {
 
         // by implementation, if tag exists, it will be before duration
@@ -100,11 +123,14 @@ public class RecipeStepList {
         int duration = Integer.parseInt(durationString);
 
         return new Step(stepDescription, tag, duration);
-
-
-
     }
 
+    /**
+     * To obtain tag from string
+     *
+     * @param tagValue is the tag value
+     * @return tag
+     */
     public Tag obtainTag(String tagValue) {
         try {
             return Tag.mapStringToTag(tagValue);
@@ -114,11 +140,21 @@ public class RecipeStepList {
         return null;
     }
 
+    /**
+     * To add step by string into the recipe steps
+     *
+     * @param stepString is the step
+     */
     public void addStep(String stepString) {
         Step step = new Step(stepString);
         this.steps.add(step);
     }
 
+    /**
+     * To add step object into the recipe steps
+     *
+     * @param step is the step object
+     */
     public void addStep(Step step) {
         this.steps.add(step);
     }
@@ -127,10 +163,20 @@ public class RecipeStepList {
         return steps;
     }
 
+    /**
+     * To get step by index
+     *
+     * @param index of the step to be retrieved
+     */
     public Step getStepByIndex(int index) {
         return steps.get(index);
     }
 
+    /**
+     * To get step by name
+     *
+     * @param name of the step to be retrieved
+     */
     public int getStepIndexByName(String name) {
         for (int i = 0; i < steps.size(); i++) {
             if (steps.get(i).getDescription().equals(name)) {

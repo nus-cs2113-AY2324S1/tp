@@ -36,6 +36,11 @@ public class Ingredient {
         this.unit = unit;
     }
 
+    /**
+     * To print the ingredient in the format of "name: quantity unit"
+     *
+     * @return formatted string of the ingredient
+     */
     @Override
     public String toString() {
         if (String.valueOf(this.quantity).endsWith(".0")) {
