@@ -13,7 +13,6 @@ title: Developer Guide
 References
 1. Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html 
 2. User Guide: https://se-education.org/addressbook-level3/UserGuide.html
-3. 
 
 ## Design & implementation
 
@@ -35,11 +34,12 @@ Given below is a quick overview of main components and how they interact with ea
 
 ### Recipe component
 
-1. Upon booting up the application, `RecipeList` will retrieve past recipe data by calling `restoreSavedData` in the Storage class.
-The restored `recipes` will then be stored in `RecipeList`.
-If the `recipes.txt` file does not exist, no data is retrieved and RecipeList will be empty.
+1. Upon booting up the application, `RecipeList` will retrieve past recipe data by calling `restoreSavedData` 
+in the Storage class. The restored `recipes` will then be stored in `RecipeList`. If the `recipes.txt` file does 
+not exist, no data is retrieved and RecipeList will be empty.
 2. Each `RecipeList` consists of zero to as many Recipe in it's ArrayList. 
-3. Each `Recipe` in RecipeList consists of exactly one `RecipeIngredientList`, up to four `Tag` and exactly one `RecipeStepList`.
+3. Each `Recipe` in RecipeList consists of exactly one `RecipeIngredientList`, up to four `Tag` and 
+exactly one `RecipeStepList`.
 4. `RecipeIngredientList` consists of at least one Ingredient while `RecipeStepList` consists of at least one step.
 
 
@@ -47,6 +47,17 @@ If the `recipes.txt` file does not exist, no data is retrieved and RecipeList wi
 
 ### Ingredient component
 ![IngredientListClassDiagram.png](images%2FIngredientListClassDiagram.png)
+
+### Shortcut component
+
+1. Upon booting up the application, `ShortcutList` will retrieve past recipe data by calling `restoreSavedData` 
+   in the Storage class. The restored `shortcuts` will then be stored in `ShortcutList`. If the `shortcuts.txt`
+   file does not exist, no data is retrieved and RecipeList will be empty.
+2. Each `ShortcutList` consists of zero to as many Shortcut in it's ArrayList.
+
+![ShortcutListClassDiagram.png](images%2FShortcutListClassDiagram.png)
+
+![ShortcutListObjectDiagram.png](images%2FShortcutListObjectDiagram.png)
 
 
 ### Storage component
@@ -57,14 +68,17 @@ In this application, it uses text files to store all data, i.e, recipes and ingr
 When booting up the application, `restoreSavedData` will be called to get both recipes and ingredients 
 from the previous session.
 
-<img src="images/RestoreIngredientStorageSequenceDiagram.png" width="347" />
-<img src="images/RestoreRecipeStorageSequenceDiagram.png" width="347" />
+![img.png](images/RestoreIngredientStorageSequenceDiagram.png)
+![img.png](images/RestoreRecipeStorageSequenceDiagram.png)
+![img.png](images/RestoreShortcutStorageSequenceDiagram.png)
 
 When a user exits the application, `saveData` will be called and it will convert all data from recipes and
 ingredients into a string which will be put in their own respective text files.
 
-<img src="images/StoreIngredientStorageSequenceDiagram.png" width="525" />
-<img src="images/StoreRecipeStorageSequenceDiagram.png" width="706" />
+![img.png](images/StoreIngredientStorageSequenceDiagram.png)
+![img.png](images/StoreRecipeStorageSequenceDiagram.png)
+![img.png](images/StoreShortcutStorageSequenceDiagram.png)
+
 
 
 ## Implementation
@@ -372,7 +386,141 @@ use the command `filter recipe i/INGREDIENT_NAME [i/...]`, where `INGREDIENT_ID`
 
 ![img.png](images/FilterRecipesSequenceDiagram.png)
 
-### Plan Recipe Command
+### View Shortcuts Feature
+
+The view shortcuts feature is used by the `ViewShortcutsCommand`. By using `view sc`, users are able to see al the
+current shortcuts in the application.
+
+* **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
+
+
+* **Step 2**
+
+  A new `ViewShortcutsCommand` object will be created and will be sent back to main
+
+
+* **Step 3**
+
+  `commandObject#executeCommand()` will be called which in turn calls `Ui#printAllShortcuts()`
+
+
+* **Step 4**
+
+  Finally, `ShortcutList#listShortcuts()` will be called to print all the ingredients
+  to standard output.
+
+![img.png](images/ViewAllShortcutSequenceDiagram.png)
+
+
+### Add Shortcut Feature
+
+The add shortcut feature is used by the `AddShortcutCommand`. Users can input `add sc/INGREDIENT_NAME,QUANTITY` to
+add a shortcut with a specified ingredient that is **in the list** and a specified quantity to add every time 
+the shortcut is used.
+
+By calling `executeCommand` on the class, the steps will
+be executed as follows:
+* **Step1**
+
+  `AddShortcutCommand` will parse a shortcut from a string. The parser will refer to the ingredient list for checking
+  matching ingredient name and checks if the quantity is valid.
+
+* **Step2**
+
+  `AddShortcutCommand` will get a new `Shortcut` if all specifications are met, i.e. valid ingredient name and quantity.
+
+* **Step3**
+
+  `AddShortcutCommand` will add the newly created `Shortcut` into `ShortcutList`. Then, the ingredient will be 
+  added into an`ArrayList` inside `ShortcutList`.
+
+
+* **Step4**
+
+  `AddShortcutCommand` will call `Ui` class to print out the name of the recently added shortcut.
+
+
+![img.png](images/AddNewShortcutSequenceDiagram.png)
+
+
+### Edit Shortcut Feature
+
+The edit shortcut feature is used by the `EditShortcutCommand`. Users can input `edit sc/INGREDIENT_NAME or 
+SHORTCUT_INDEX n/INGREDIENT_NAME q/QUANTITY` to edit a shortcut with new ingredient name or new quantity. However, the 
+changes for each attribute can only be done once per input line.
+
+By calling `executeCommand` on the class, the steps will
+be executed as follows:
+* **Step1**
+
+  `EditShortcutCommand` will parse an index of the shortcut that the input refers to. Then, `EditShortcutCommand` will
+  get the shortcut from the list based on the index.
+
+* **Step2**
+
+  If the shortcut is found, `EditShortcutCommand` will parse the changes indicated by flags. It will go through all the
+  flags and make changes based on the flags and whether the changes are valid, i.e. valid name or valid quantity.
+
+* **Step3**
+
+  After the changes has been made, `EditShortcutCommand` will call `Ui` class to 
+  print out the changes made on the shortcut. 
+
+
+![img.png](images/EditShortcutSequenceDiagram.png)
+
+
+### Delete Shortcut Feature
+
+The delete shortcut feature is used by the `DeleteShortcutCommand`. Users can input `delete sc/INGREDIENT_NAME or
+SHORTCUT_INDEX` to delete a shortcut on the list.
+
+By calling `executeCommand` on the class, the steps will
+be executed as follows:
+* **Step1**
+
+  `DeleteShortcutCommand` will parse an index of the shortcut that the input refers to. Then, `DeleteShortcutCommand` 
+  will get the shortcut from the list based on the index.
+
+* **Step2**
+
+  If the shortcut is found, `DeleteShortcutCommand` will call `ShortcutList#deleteShortcut`. Then, it will remove the
+  specified shortcut from the arraylist.
+
+* **Step3**
+
+  `ShortcutList#deleteShortcut` will call `Ui` class to print out the deleted shortcut.
+
+
+![img.png](images/DeleteShortcutSequenceDiagram.png)
+
+
+### Use Shortcut Feature
+
+The use shortcut feature is used by the `UseShortcutCommand`. Users can input `sc INGREDIENT_NAME or SHORTCUT_INDEX` to
+use the shortcut. After using the shortcut, the ingredient that is being referred to will have its quantity added by
+the specified amount in the shortcut.
+
+By calling `executeCommand` on the class, the steps will
+be executed as follows:
+* **Step1**
+
+  `UseShortcutCommand` will parse an index of the shortcut that the input refers to. Then, `UseShortcutCommand`
+  will get the shortcut from the list based on the index.
+
+* **Step2**
+
+  If the shortcut is found, `UseShortcutCommand` will get the ingredient name and quantity from the shortcut. Then,
+  `UseShortcutCommand` will get the unit based on the ingredient from the shortcut.
+
+* **Step3**
+
+  `UseShortcutCommand` will create a new ingredient with the acquired attributes. Then, `UseShortcutCommand` will call
+  `IngredientList#updateIngredient` which will manage the ingredient data based on the name and quantity.
+
+![img.png](images/UseShortcutSequenceDiagram.png)
 
 
 ## Product scope

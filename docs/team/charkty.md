@@ -19,27 +19,31 @@ Github Repository
 
 ### Ingredients
 
-| Command                    | User Story                                                                                  | Command                                                     | Output                                                |
-|----------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------|-------------------------------------------------------|
-| View a specific ingredient | For user to check how much ingredient is available in their ingredient inventory            | view i/INGREDIENT_NAME <br> OR <br> view i/INGREDIENT_ID    | Ingredient name with quantity                         |
-| Delete an ingredient       | For user to remove an ingredient when added wrongly or when it has been used up completely  | delete r/INGREDIENT_NAME <br/>OR<br/> delete r/INGREDIENT_ID | A message indicating that ingredient has been deleted| 
+- Implemented Ingredient, IngredientList and IngredientParser classes
+
+| Command                    | User Story                                                                                  | 
+|----------------------------|---------------------------------------------------------------------------------------------|
+| View a specific ingredient | For user to check how much ingredient is available in their ingredient inventory            | 
+| Delete an ingredient       | For user to remove an ingredient when added wrongly or when it has been used up completely  | 
 
 
 ### Recipes
 
-| Command                       | User Story                                                                                                                     | Command                                         | Output                                                                                                                                                |
-|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Delete a Recipe               |
-| Filter Recipes by Ingredients | User has cravings for a ingredient item (such as rice or fish) and wants to see which recipes contain that specific ingredient | filter recipe i/INGREDIENT_NAME [i/...]         | Recipes that contain ingredients specified by command                                                                                                 |
-| Check Recipe                  |User wants to check if they have all the ingredients needed to start a recipe| check RECIPE_TITLE <br> OR <br> check RECIPE_ID | If there are missing ingredients, we will indicate the amount of each missing ingredient still needed. Otherwise, a good to go message will be shown! |
-| Plan Recipe                   |User wants to plan their groccery shopping for the week and wants to know ingredients needed for the week|plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]| All ingredients needed for recipes will be displayed and insufficient ingredients that need to be purchased will be shown too                         |
-| View All Available Recipes| User wants to see what which recipes they can execute based on availability of ingredients in the ingredient inventory|view ar|A list of all recipes that can be executed with current ingredients|
+- Contributed to Recipe, RecipeList and RecipeParser classes
+
+| Command                       | User Story                                                                                                                     | 
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Delete a Recipe               |User wants to delete a recipe added| delete r/RECIPE_TITLE<br/>OR<br/> delete r/RECIPE_ID | Recipe deleted from database|
+| Filter Recipes by Ingredients | User has cravings for a ingredient item (such as rice or fish) and wants to see which recipes contain that specific ingredient | 
+| Check Recipe                  |User wants to check if they have all the ingredients needed to start a recipe| 
+| Plan Recipe                   |User wants to plan their groccery shopping for the week and wants to know ingredients needed for the week|
+| View All Available Recipes| User wants to see what which recipes they can execute based on availability of ingredients in the ingredient inventory| 
 
 ---
 
 ## Contributions to UG and DG
 
-Standardisation work that I did:
+### Standardisation work that I did:
 - Set up the skeleton of both UG and DG
   - Identified and added all sections needed to the skeleton
   - Ensured the consistent flow of UG and DG 
@@ -51,15 +55,30 @@ Standardisation work that I did:
   - Class diagram format standardisation of arrows, boxes and words
   - Sequence diagram format standardiation of formatting by referencing AddressBook3
 
+### Documentation Guide implementation work:
 
-Implementation work that I did:
-- UG and DG sections of the following commands (includes Sequence diagrams in DG and screenshots in UG for each command)
-  - CheckRecipe, PlanRecipe, FilterRecipe, ViewSpecificIngredient, DeleteIngredient, DeleteRecipe
-  - An example of a Sequence Diagram I made
-    ![Filter Recipes By Ingredients](../images/FilterRecipesSequenceDiagram.png)
-- RecipeList Class Diagram in DG
-  ![RecipeList class diagram](../images/RecipeListClassDiagram.png)
-- Summary table in UG 
+- Sequence diagram for my commands (below is an example)
+
+![Filter Recipes By Ingredients](../images/FilterRecipesSequenceDiagram.png)
+
+- RecipeList Class Diagram
+- RecipeList Object Diagram
+- Architecture Diagram
+
+
+### User Guide implementation work:
+
+- CheckRecipe, PlanRecipe, FilterRecipe, ViewSpecificIngredient, DeleteIngredient, DeleteRecipe Commands (including screenshots)
+- Summary table 
+
+---
+
+## Contributions to team based tasks
+
+- Set up Github Team Org and Repo together with the team
+- Assisted in maintaining the issue tracker
+- Assisted in planning for meetings and distributing work
+- Assisted in checking PRs frequently
 
 ---
 

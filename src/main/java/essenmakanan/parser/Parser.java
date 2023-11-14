@@ -32,7 +32,23 @@ import essenmakanan.ingredient.IngredientList;
 import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.recipe.RecipeList;
 
+/**
+ * Represents parser to parse user's input.
+ */
 public class Parser {
+
+    /**
+     * Parses a command based on the user's input.
+     *
+     * @param input The user input.
+     * @param recipes The recipe list.
+     * @param ingredients The ingredient list.
+     * @param shortcuts The shortcut list.
+     * @return A command.
+     * @throws EssenCommandException If the command type is invalid.
+     * @throws EssenFormatException If the format is incorrect.
+     * @throws EssenOutOfRangeException If the application access is out of range.
+     */
     public Command parseCommand(String input, RecipeList recipes, IngredientList ingredients, ShortcutList shortcuts)
             throws EssenCommandException, EssenFormatException, EssenOutOfRangeException {
         Command command;
