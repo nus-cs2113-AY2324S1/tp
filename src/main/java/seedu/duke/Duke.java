@@ -5,8 +5,12 @@ import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
+import seedu.duke.storagefile.AchmStorage;
+import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
 import seedu.duke.storagefile.ExerciseLogStorage;
+
+import java.util.ArrayList;
 
 /**
  * Entry point of the Address Book application.
@@ -19,14 +23,18 @@ public class Duke {
      */
     public static final String VERSION = "Version-2.1";
     public static Log exerciseLog = new Log();
+    public static GoalList goalList = new GoalList();
+    public static GoalList achievedGoals = new GoalList();
     public static ExerciseLogStorage exerciseLogStorage;
     public static TextUi ui;
+    public static GoalStorage goalStorage;
+    public static AchmStorage achmStorage;
     private final String dirPath = "data";
     private final String exerciseLogFilePath = "./data/ExerciseLog.txt";
     private final String goalFilePath = "./data/GoalRecord.txt";
     private final String achmFilePath = "./data/Achievement.txt";
     private final String mealSavePath = "Meal.json";
-
+    
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
     }
@@ -52,6 +60,10 @@ public class Duke {
             ui = new TextUi();
             exerciseLogStorage = ExerciseLogStorage.initializeStorage(dirPath, exerciseLogFilePath);
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
+            goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
+            goalStorage.restoreGoalRecord();
+            achmStorage = AchmStorage.initializeGoalStorage(dirPath, achmFilePath);
+            achmStorage.restoreGoalRecord();
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
         } catch (Exception e) { // TODO: change to specific storage exceptions later
             ui.showInitFailedMessage();
