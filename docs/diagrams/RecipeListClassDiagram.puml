@@ -60,9 +60,50 @@ Class "<<enumeration>>\nTag" as Tag {
     + mapStringToTag(input: String): Tag
 }
 
-Class RecipeStepList
-Class Ingredient
-Class Step
+Class RecipeStepList {
+    - steps: ArrayList<Step>
+
+    + createStepWithTag(stepString: String): Step
+    + createStepWithDuration(stepString: String): Step
+    + createStepWithTagAndDuration(stepString: String): Step
+    + obtainTag(tagValue: String): Tag
+    + addStep(stepString: String): Void
+    + addStep(step Step): Void
+    + getSteps(): ArrayList<Step>
+    + getStepByIndex(index: int): Step
+}
+
+
+Class Ingredient {
+    - name: String
+    - quantity: Double
+    - unit: IngredientUnit
+
+    + getName(): String
+    + setName(name: String): Void
+    + getQuantity(): Void
+    + setQuantity(quantity: Double): Double
+    + getUnit(): IngredientUnit
+    + setUnit(): Void
+    + toString(): String
+    + equals(ingredient: Ingredient): Boolean
+
+}
+
+Class Step {
+    - description: String
+    - tag: Tag
+    - estimatedDuration: Integer
+
+    + getDescription(): String
+    + setDescription(description: String)
+    + getTag(): Tag
+    + setTag(tag Tag): Void
+    + getEstimatedDuration(): Integer
+    + setEstimatedDuration(estimatedDuration: Integer): Void;
+    + convertToStepIdTemplate(stepDescription: String, id: Integer): String
+    + toString(): String
+}
 
 RecipeList -down-> "*" Recipe
 
