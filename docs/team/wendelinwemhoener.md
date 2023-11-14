@@ -41,6 +41,29 @@ Additionally, I implemented tests for the `flashcard` package and achieved
 100% class coverage with my tests, see here:
 ![img.png](img.png)
 
+#### Enhancements implemented
+
+- **Flashcards**
+  - **What it does**: Gives the ability to create, delete, list, and review 
+    user-generated flashcards. Spaced repetition review mode allows even 
+    more efficient studying than analog flashcards because more difficult 
+    flashcards are automatically shown more often until, while easier 
+    flashcards are shown fewer times. Handles invalid user input and other 
+    potentially occuring exceptions to prevent program crash and allow for 
+    graceful recovery. So-called "dual commands" give users the ability to 
+    choose between entering commands in an easier, but more time-consuming way
+    (for beginner users who want as much guidance as possible) or in a less
+    time-consuming, but more complicated way (for expert users who don't need
+    additional guidance).
+  - **Justification**: Flashcards are first feature we thought of and agreed 
+    upon when we planned out TaskLinker. The efficient use of flashcards is 
+    the main value proposition of our app and greatly influenced our target 
+    user profile. As such, flashcards are the primary component of TaskLinker.
+  - **Highlights**: Integrating "dual commands" and ensuring that the 
+    program could process the different syntax for beginner and expert mode 
+    without duplicating code was challenging, but using inheritance and 
+    abstract base classes allowed me to find a neat solution.
+
 ### Contributions to the UG
 
 I documented all flashcard-related features: I documented each single 
@@ -52,21 +75,38 @@ Also, I implemented a structure and formatting that the other team members
 reused.
 
 Moreover, I wrote parts of the UG that are not specific to a feature: I 
-wrote the `Introduction`, `Quick Start` and `Notes about the command format and 
-sample output format` sections and started the `Command Summary` 
+wrote the "Introduction", "Quick Start" and "Notes about the command format and 
+sample output format" sections and started the "Command Summary". 
 
 In total, I wrote 335 lines of the UG, thus accounting for over 60% of the 
 entire user guide.
 
+All in all, the sections written by me are:
+
+- "Introduction"
+- "Quick Start"
+- "Notes about the command format and sample output format"
+- "Flashcard-related features"
+- part of "Command Summary"
+
 ### Contributions to the DG
 
-did hyperlinks to make navigation easier
+I documented all flashcard-related features.
 
-product scope
+I created three UML diagrams to visualize the structure of the `flashcards` 
+package (two class diagrams and one sequence diagram); thus accounting for 
+about 43% of UML diagrams in the developer guide.
 
+I also wrote all the flashcard-related user stories.
 
+All in all, the sections written by me are:
 
-posted on the forum repeatedly: https://nus-cs2113-ay2324s1.github.io/dashboards/contents/forum-activities.html
+- "`flashcard` package" section with all its subsections: "Package structure
+  overview", "Rough control flow overview", "`flashcard.command` package",
+  "`flashcard.exceptions` package" and "`flashcard.review` package" subsections
+- "Target user profile"
+- "Value proposition"
+- part of "User Stories" 
 
 ### Contributions to team-based tasks
 
@@ -95,11 +135,3 @@ feedback on it (or fixed it myself for them).
 I have created multiple forum posts to clarify questions and allow others to 
 also profit from the answers. I currently sit at spot 8 on the forum 
 activities dashboard, see [link](https://nus-cs2113-ay2324s1.github.io/dashboards/contents/forum-activities.html).
-
-### Contributions to the User Guide (Extracts)
-
-See all of my contributions to the UG [here](wendelinwemhoener-ug.md)
-
-### Contributions to the Developer Guide (Extracts)
-
-See all of my contributions to the DG [here](wendelinwemhoener-dg.md)
