@@ -1,9 +1,191 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+Welcome to KaChinnnngggg! How may i assist you today?
+____________________________________________________________
+____________________________________________________________
+Invalid command. Please try again.
+Type 'help' to see the list of commands available.
+____________________________________________________________
+____________________________________________________________
+You can access our user guide by https://ay2324s1-cs2113-t18-3.github.io/tp/UserGuide.html
 
-What is your name?
-Hello James Gosling
+Available functions for KaChinnnng:
+Adding an entry: add
+Listing all entries: list
+Deleting an entry: delete
+Edit an entry: edit
+Check balance: balance
+Update exchange rate: update exchange rate
+Finding an entry: find
+Clearing all entries: clear
+Exit the program: exit
+All the date input is in the format dd/MM/yyyy
+
+If you need assistance with individual commands, use the help function
+Format: help <command>
+____________________________________________________________
+____________________________________________________________
+Creates a new entry for income or expenses in the program.
+Values of income and expense added have to be lower than 1000000.
+Income and Expense values take up to 2 decimal places.
+
+Format:
+add income /de <description> /date <date> /amt [currency] <amount>
+add expense /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
+
+There are only 3 categories for expenses: Food, Transport, Utilities.
+There are 3 types associated with Food category: Breakfast, Lunch, Dinner, else it will default to OTHER.
+There are 4 types associated with Transport category: Bus, Train, Taxi, Fuel, else it will default to OTHER.
+There are 3 types associated with Utilities category: Water, Electricity, Gas, else it will default to OTHER.
+____________________________________________________________
+____________________________________________________________
+Shows a full list of both the expenses and income created by the user.
+User can choose to view the list of income/expenses separately as well.
+Show the foreign currencies supported by KaChinnnng.
+List all updated exchange rates.
+
+Format:
+list
+list incomes
+list expenses
+list currencies
+list exchange rates
+____________________________________________________________
+____________________________________________________________
+Deletes an entry from the list of income/expenses.
+
+Format:
+delete income <index_pos>
+delete expense <index_pos>
+____________________________________________________________
+____________________________________________________________
+Edit an entry from the list of income/expenses.
+
+Format:
+edit income <index> /de <description> /date <date> /amt [currency] <amount>
+edit expense <index> /cat <category> /type <type> /de <description> /date <date> /amt [currency] <amount>
+____________________________________________________________
+____________________________________________________________
+Check the balance for current financial records
+
+Format: balance
+____________________________________________________________
+____________________________________________________________
+Update exchange rate of a specific foreign currency.
+
+Format: update exchange rate <supported_currency> <rate>
+____________________________________________________________
+____________________________________________________________
+Find an entry from the existing list of income/expenses.
+At least one of the optional fields must be provided.
+
+Format:
+find /t income [/de description] [/date date]
+find /t expense [/cat category] [/de description] [/date date]
+____________________________________________________________
+____________________________________________________________
+Clearing all entries from the list of income/expenses.
+
+Format:
+clear incomes
+clear expenses
+clear all
+____________________________________________________________
+____________________________________________________________
+Format: exit
+____________________________________________________________
+____________________________________________________________
+Both income and expense lists cleared
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this income:
+Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+____________________________________________________________
+____________________________________________________________
+Expected fields `/de`, `/date`, and `/amt` are missing or improperly formatted.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this income:
+Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this expense:
+Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00
+____________________________________________________________
+____________________________________________________________
+Here are your incomes:
+1. Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+2. Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
+____________________________________________________________
+____________________________________________________________
+Here are your expenses:
+1. Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00
+____________________________________________________________
+____________________________________________________________
+Here are your incomes:
+1. Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+2. Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
+Total income is: $6000.00.
+
+Here are your expenses:
+1. Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00
+Total expenses is: $10.00.
+
+Total balance is: $5990.00.
+____________________________________________________________
+____________________________________________________________
+Noted. This income record has been deleted:
+Income: salary for October | Date: 01/Oct/2023 | Amount: $5000.00
+____________________________________________________________
+____________________________________________________________
+Noted. This expense record has been deleted:
+Food Expense (LUNCH): chicken sandwich | Date: 01/Oct/2023 | Amount: $10.00
+____________________________________________________________
+____________________________________________________________
+Noted. The income record you've specified has been changed:
+Before: Income: end of year bonus | Date: 02/Oct/2023 | Amount: $1000.00
+After: Income: end of year bonus | Date: 02/Oct/2023 | Amount: $3000.00
+____________________________________________________________
+____________________________________________________________
+Here are the matching incomes in your list:
+Income: end of year bonus | Date: 02/Oct/2023 | Amount: $3000.00
+____________________________________________________________
+____________________________________________________________
+No matching expenses found.
+____________________________________________________________
+____________________________________________________________
+You have cleared the income list
+____________________________________________________________
+____________________________________________________________
+You have cleared the expense list
+____________________________________________________________
+____________________________________________________________
+Both income and expense lists cleared
+____________________________________________________________
+____________________________________________________________
+____________________________________________________________
+Missing fields detected
+____________________________________________________________
+____________________________________________________________
+____________________________________________________________
+Oops! Expense 1 does not exist
+____________________________________________________________
+____________________________________________________________
+The SGD/USD rate has been updated to 0.8.
+____________________________________________________________
+____________________________________________________________
+We have converted USD to SGD at the SGD/USD rate of 0.8
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this income:
+Income: remittance from Dad | Date: 01/Oct/2023 | Amount: $1250.00
+____________________________________________________________
+____________________________________________________________
+Please update the exchange rate for HKD
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this expense:
+Transportation Expense (OTHER): Changi to KLIA | Date: 01/Oct/2023 | Amount: $100.00
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________

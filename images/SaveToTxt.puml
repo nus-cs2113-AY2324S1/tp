@@ -1,0 +1,68 @@
+@startuml
+
+actor Duke
+create ":SaveToTxt"
+Duke -> ":SaveToTxt" : SaveToTxt(path)
+Activate ":SaveToTxt"
+":SaveToTxt" --> Duke
+Deactivate ":SaveToTxt"
+
+Duke -> ":SaveToTxt" : saveIncomeAndExpense(incomes:IncomeList, expenses:ExpenseList)
+Activate ":SaveToTxt"
+":SaveToTxt" -> ":SaveToTxt" : saveIncomeToTextFile(incomes)
+Activate ":SaveToTxt"
+create "fw:FileWriter"
+":SaveToTxt" -> "fw:FileWriter" : FileWriter(path)
+activate "fw:FileWriter"
+"fw:FileWriter" --> ":SaveToTxt"
+deactivate "fw:FileWriter"
+loop income : incomes
+    ":SaveToTxt" -> "incomes:IncomeList" : income.getDescription()
+    activate "incomes:IncomeList"
+    "incomes:IncomeList" --> ":SaveToTxt"
+    deactivate "incomes:IncomeList"
+    ":SaveToTxt" -> "incomes:IncomeList" : income.getDate()
+    activate "incomes:IncomeList"
+    "incomes:IncomeList" --> ":SaveToTxt"
+    deactivate "incomes:IncomeList"
+    ":SaveToTxt" -> "incomes:IncomeList" : income.getAmount()
+    activate "incomes:IncomeList"
+    "incomes:IncomeList" --> ":SaveToTxt"
+    deactivate "incomes:IncomeList"
+    ":SaveToTxt" -> "fw:FileWriter": write(textToAdd)
+end loop
+Deactivate ":SaveToTxt"
+destroy "fw:FileWriter"
+
+
+":SaveToTxt" -> ":SaveToTxt" : saveExpenseToTextFile(expenses)
+Activate ":SaveToTxt"
+create "fwe:FileWriter"
+":SaveToTxt" -> "fwe:FileWriter" : FileWriter(path)
+activate "fwe:FileWriter"
+"fwe:FileWriter" --> ":SaveToTxt"
+deactivate "fwe:FileWriter"
+loop expense : expenses
+    ":SaveToTxt" -> "expenses:ExpenseList" : expense.getDescription()
+    activate "expenses:ExpenseList"
+    "expenses:ExpenseList" --> ":SaveToTxt"
+    deactivate "expenses:ExpenseList"
+    ":SaveToTxt" -> "expenses:ExpenseList" : expense.getDate()
+    activate "expenses:ExpenseList"
+    "expenses:ExpenseList" --> ":SaveToTxt"
+    deactivate "expenses:ExpenseList"
+    ":SaveToTxt" -> "expenses:ExpenseList" : expense.getAmount()
+    activate "expenses:ExpenseList"
+    "expenses:ExpenseList" --> ":SaveToTxt"
+    deactivate "expenses:ExpenseList"
+    ":SaveToTxt" -> "expenses:ExpenseList" : expense.getType()
+    activate "expenses:ExpenseList"
+    "expenses:ExpenseList" -> ":SaveToTxt"
+    deactivate "expenses:ExpenseList"
+
+    ":SaveToTxt" -> "fwe:FileWriter": write(textToAdd)
+end loop
+Deactivate ":SaveToTxt"
+destroy "fwe:FileWriter"
+
+@enduml

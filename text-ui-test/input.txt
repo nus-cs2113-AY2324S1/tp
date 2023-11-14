@@ -1,1 +1,34 @@
 James Gosling
+help
+help add
+help list
+help delete
+help edit
+help balance
+help update exchange rate
+help find
+help clear
+help exit
+clear all
+add income /de salary for October /date 01/10/2023 /amt 5000.00
+add income salary for October /date 01/10/2023 /amt 5000.00
+add income /de end of year bonus /date 02/10/2023 /amt 1000.00
+add expense /cat food /type lunch /de chicken sandwich /date 01/10/2023 /amt 10.00
+list incomes
+list expenses
+list
+delete income 1
+delete expense 1
+edit income 1 /de end of year bonus /date 02/10/2023 /amt 3000.00
+find /t income /de end of year
+find /t expense /cat food
+clear incomes
+clear expenses
+clear all
+edit expense 1 /cat food /de dinner /date 01/10/2023 /amt 10.00
+edit expense 1 /cat food /type dinner /de hotpot /date 11/10/2023 /amt 10.00
+update exchange rate USD 0.8
+add income /de remittance from Dad /date 01/10/2023 /amt USD 1000.00
+add expense /cat food /type lunch /de chicken sandwich /date 01/10/2023 /amt HKD 10.00
+add expense /cat transport /type airplane /de Changi to KLIA /date 01/10/2023 /amt 100.00
+exit
