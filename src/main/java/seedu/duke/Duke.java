@@ -11,8 +11,6 @@ import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
 import seedu.duke.storagefile.ExerciseLogStorage;
 
-import java.util.ArrayList;
-
 /**
  * Entry point of the Address Book application.
  * Initializes the application and starts the interaction with the user.
