@@ -11,8 +11,8 @@ title: Developer Guide
 ## Acknowledgements
 
 References
-1. Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html 
-2. User Guide: https://se-education.org/addressbook-level3/UserGuide.html
+1. [Developer Guide] (https://se-education.org/addressbook-level3/DeveloperGuide.html) 
+2. [User Guide] (https://se-education.org/addressbook-level3/UserGuide.html)
 
 ## Design & implementation
 
@@ -37,10 +37,6 @@ Given below is a quick overview of main components and how they interact with ea
 - `Ingredient`: Ingredients in inventory and recipe ingredients
 - `Recipe`: Recipes created by user
 - `Logger`: A logger that logs the activities done in storage
-
-### UI component
-
-### Main component
 
 ### Recipe component
 
@@ -608,7 +604,7 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 | v2.0a          | 	new user                                                                                                     |	be greeted with an instruction manual	| learn how to navigate through the app                              |
 | v2.0a          | beginner user	                                                                                                | view specific recipe                 |
 | v2.0a          | beginner user	                                                                                                | add ingredients to recipe            |
-|v2.0a| 	amateur	|edit ingredients of recipe	                                                                          |edit a recipe I have created| change recipe ingredients                                          |                                          |
+|v2.0a| 	amateur	|edit ingredients of recipe	                                                                          |edit a recipe I have created| change recipe ingredients                                          |
 |v2.0a	| amateur	edit steps of recipe                                                                                  | 	edit a recipe I have created        | change recipe steps                                                |
 |v2.0a| 	beginner user                                                                                                |	type the quantity of ingredients as well as the unit of measurement| 	add an item with the quantity to my kitchen inventory             |
 |v2.0a| 	amateur	                                                                                                     |change the quantity of ingredient available	| remove a fixed quantity of an ingredient from the list             |
@@ -633,6 +629,3 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 * *glossary item* - Definition
 - Mainstream OS: Windows, Linux, Unix, OS-X
 
-
-## Instructions for manual testing
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
