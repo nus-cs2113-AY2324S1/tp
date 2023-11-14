@@ -1,0 +1,29 @@
+@startuml
+hide footbox
+actor User
+participant ":SaveSalesCommand" as SaveSalesCommand
+participant ":SalesList" as SalesList
+participant ":CommandResult" as CommandResult
+participant ":Storage" as Storage
+
+User -> SaveSalesCommand: execute()
+activate User
+activate SaveSalesCommand
+
+alt SalesList is not empty
+  SaveSalesCommand -> SalesList: Get sales data
+  activate SalesList
+  SalesList -> Storage: Save sales data to file
+  activate Storage
+  Storage -> SalesList: Success message
+  deactivate Storage
+  deactivate SalesList
+  SaveSalesCommand -> CommandResult: Success message
+  else
+  SaveSalesCommand -> CommandResult: SalesList is empty
+end
+
+User -> SaveSalesCommand: CommandResult
+deactivate User
+deactivate SaveSalesCommand
+@enduml

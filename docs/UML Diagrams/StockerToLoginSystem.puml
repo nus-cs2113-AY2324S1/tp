@@ -1,0 +1,65 @@
+   @startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+actor User
+Participant ":Stocker" as Stocker
+Participant ":Ui" as Ui
+Participant ":LoginSystem" as LoginSystem
+
+Create Stocker
+User -> Stocker
+activate Stocker
+Stocker -> Stocker : run()
+activate Stocker
+Stocker -> Stocker :start()
+Create Ui
+Stocker -> Ui :  Ui()
+deactivate Stocker
+
+activate Ui
+Ui -> Ui : showLoginMessage()
+activate Ui
+Ui -> Ui : ShowToUser()
+activate Ui
+deactivate Ui
+Ui --> User : LoginMessage
+
+Create LoginSystem
+Stocker -> LoginSystem :LoginSystem()
+activate LoginSystem
+LoginSystem -> LoginSystem : run()
+activate LoginSystem
+LoginSystem -> LoginSystem : loadExistingUsers()
+activate LoginSystem
+LoginSystem -> LoginSystem: authenticateUserChoice()
+activate LoginSystem
+User -> LoginSystem : register or login input
+
+alt  Register
+
+LoginSystem -> LoginSystem : newUserCreator()
+activate LoginSystem
+LoginSystem --> Ui : showSuccessfulRegistrationMessage()
+
+else Login
+LoginSystem ->LoginSystem : loginExistingUser()
+activate LoginSystem
+LoginSystem --> Ui: showSuccessfulLoginMessage()
+
+end
+deactivate Ui
+deactivate Ui
+deactivate LoginSystem
+
+deactivate LoginSystem
+
+deactivate LoginSystem
+
+deactivate LoginSystem
+
+deactivate LoginSystem
+
+deactivate LoginSystem
+
+@enduml

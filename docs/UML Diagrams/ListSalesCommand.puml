@@ -1,0 +1,25 @@
+@startuml
+hide footbox
+actor User
+participant ":ListSalesCommand" as ListSalesCommand
+participant ":SalesList" as SalesList
+participant ":CommandResult" as CommandResult
+
+User -> ListSalesCommand: execute()
+activate User
+activate ListSalesCommand
+
+alt SalesList is not empty
+  ListSalesCommand -> SalesList: Get sales data
+  activate SalesList
+  SalesList -> ListSalesCommand: List of sales
+  deactivate SalesList
+  ListSalesCommand -> CommandResult: List of sales
+  else
+  ListSalesCommand -> CommandResult: SalesList is empty
+end
+
+User -> ListSalesCommand: CommandResult
+deactivate User
+deactivate ListSalesCommand
+@enduml

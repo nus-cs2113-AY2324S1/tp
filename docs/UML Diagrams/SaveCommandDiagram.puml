@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+actor User
+Participant ":SaveDrugsCommand" as SaveCommand
+Participant ":CommandResult" as CommandResult
+Participant ":Inventory" as inventory
+Participant ":Storage" as storage
+
+
+Create SaveCommand
+activate SaveCommand
+User -> SaveCommand
+
+
+Create CommandResult
+
+SaveCommand -> CommandResult
+activate CommandResult
+
+Create inventory
+CommandResult -> inventory
+activate inventory
+inventory -> inventory : getStockEnteries()
+activate inventory
+deactivate inventory
+
+
+Create storage
+inventory -> storage
+activate storage
+deactivate inventory
+
+loop inventory.size() times
+
+storage -> storage :appendToFile()
+activate storage
+deactivate storage
+end
+deactivate storage
+
+CommandResult --> User: Message_Success
+deactivate CommandResult
+deactivate SaveCommand
+
+
+@enduml

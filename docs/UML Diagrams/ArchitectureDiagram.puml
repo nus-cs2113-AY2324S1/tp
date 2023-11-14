@@ -1,0 +1,25 @@
+@startuml
+
+title Architecture Diagram
+
+skinparam component {
+BackgroundColor lightblue
+}
+
+
+[Parser]
+[Commands]
+[CommandResult]
+[LoginSystem and Ui] as  interactor
+interface "user"
+
+user -[hidden]- Parser
+CommandResult -[hidden]- Parser
+
+interactor --> Parser : Makes sense of input
+Parser -> Commands : Searches for inputted command
+Commands -> CommandResult : Executes relevant command
+CommandResult -> interactor : Return control
+user -[#red]-> interactor : Logs in or Register
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+
+hide footbox
+actor User
+participant ":AddVendorSupplyCommand" as AddVendorSupplyCommand
+participant ":VendorSupplyList" as VendorSupplyList
+participant ":VendorsList" as VendorsList
+participant ":CommandResult" as CommandResult
+
+User -> AddVendorSupplyCommand: initiate AddVendorSupply
+Activate AddVendorSupplyCommand
+
+AddVendorSupplyCommand -> VendorsList: getVendorEntries()
+Activate VendorsList
+
+VendorsList --> AddVendorSupplyCommand: vendor entries
+Deactivate VendorsList
+
+AddVendorSupplyCommand -> VendorsList: getName()
+Activate VendorsList
+
+VendorsList --> AddVendorSupplyCommand: vendor existence check result
+Deactivate VendorsList
+AddVendorSupplyCommand -> VendorSupplyList: containsDrug()
+Activate VendorSupplyList
+
+VendorSupplyList --> AddVendorSupplyCommand: containsDrug result
+Deactivate VendorSupplyList
+
+AddVendorSupplyCommand -> VendorSupplyList: addDrugToVendor()
+Activate VendorSupplyList
+
+VendorSupplyList --> CommandResult: generateSuccessMessage()
+Activate CommandResult
+
+AddVendorSupplyCommand --> User: return success message
+Deactivate CommandResult
+
+Deactivate AddVendorSupplyCommand
+@enduml

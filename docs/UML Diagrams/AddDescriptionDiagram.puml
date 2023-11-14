@@ -1,0 +1,38 @@
+@startuml
+
+hide footbox
+actor User
+participant ":AddDescriptionCommand" as AddDescriptionCommand
+participant ":CommandResult" as CommandResult
+participant ":Description" as Description
+
+
+User -> AddDescriptionCommand: initiate AddDescription
+Activate AddDescriptionCommand
+
+AddDescriptionCommand -> AddDescriptionCommand : Convert to lowercase
+
+AddDescriptionCommand -> Description: addDescription(drug, description)
+Activate Description
+
+Description --> CommandResult: generate success message
+Activate CommandResult
+
+AddDescriptionCommand --> User: return success message
+Deactivate CommandResult
+
+User -> AddDescriptionCommand: initiate AddDescription with invalid data
+Activate AddDescriptionCommand
+
+AddDescriptionCommand -> Description: addDescription(InvalidDrug, InvalidDescription)
+Activate Description
+
+Description --> CommandResult: generate error message
+Activate CommandResult
+
+AddDescriptionCommand --> User: return error message
+Deactivate CommandResult
+
+Deactivate Description
+Deactivate AddDescriptionCommand
+@enduml

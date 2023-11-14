@@ -1,0 +1,26 @@
+@startuml FindCommandArchitectureDiagram
+
+!define LOGIC_COLOR #3333C4
+
+!define ARROW_STYLE [-[#LOGIC_COLOR]->]
+
+actor User as U
+package "Your Application" {
+  [User Interface] as UI
+  [FindCommand] as FindCmd
+  [Inventory] as Inv
+  [StockEntry] as Entry
+  [CommandResult] as CmdResult
+}
+
+U -down-> UI: Initiates 'Find' Command
+UI -down-> FindCmd: Invokes 'FindCommand'
+UI -down-> Inv: Accesses 'Inventory'
+FindCmd -down-> Entry: Iterates Through Entries
+Entry -down-> Entry: Checks Each Entry
+Entry --> FindCmd: Match/No Match
+FindCmd --> CmdResult: Prepares Result
+CmdResult -up-> UI: Returns Result
+CmdResult -up-> U: Displays Search Results
+
+@enduml
