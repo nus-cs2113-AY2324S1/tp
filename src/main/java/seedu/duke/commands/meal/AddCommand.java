@@ -20,7 +20,7 @@ public class AddCommand extends MealCommand {
         calories = Integer.parseInt(arguments.get(1));
         category = arguments.get(2);
         if (arguments.size() >= 4) {
-            time = new Date(arguments.get(3));
+            time = new Date(arguments.get(3), false);
         } else {
             time = Date.now();
         }

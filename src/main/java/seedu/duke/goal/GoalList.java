@@ -194,7 +194,7 @@ public class GoalList extends ArrayList<GoalList.Goal> {
         }
 
         private Date setGoalDateTime(String date) throws IncorrectFormatException {
-            return new Date(date);
+            return new Date(date, true);
         }
 
         public String toString() {
