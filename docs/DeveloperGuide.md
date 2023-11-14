@@ -744,11 +744,11 @@ Here are the instructions for launching the app:
 * [Recipe: View Specific](#view-r)
 * [Recipe: Edit](#edit-r)
 * [Recipe: Delete](#delete-r)
-* [Recipe: Filter](#filter-r)
-* [Recipe: Duplicate](#duplicate-r)
 * [Recipe: Check](#check-r)
-* [Recipe: Plan](#plan-r)
+* [Recipe: Filter](#filter-r)
 * [Recipe: Execute](#execute-r)
+* [Recipe: Plan](#plan-r)
+* [Recipe: Duplicate](#duplicate-r)
 
 ---
 * [Shortcut: Add](#add-s)
@@ -843,35 +843,37 @@ The recipe will have 1 step and 1 ingredient.
 ### Viewing a specific recipe
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-**Prerequisites**: There should be at least 1 recipe in the list, and you know the title. 
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
 All recipe titles can be seen using `view r` command.
 
 **Test Case**:
 - `view r/scrambled eggs`<br>
-**Expected**: Recipe with title `scrambled eggs` will be displayed along with its steps and ingredients
+  **Expected**: Recipe with title `scrambled eggs` will be displayed along with its steps and ingredients
 
-<a id="edit-r"></a>
-### Edit a specific recipe
+
+
+<a id="edit-r"></a> 
+### Edit a specific recipe 
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-- Edit recipe title `edit r/scrambled eggs n/poached eggs`<br>
-**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
-All recipe titles can be seen using `view r` command.
+- Edit recipe title `edit r/scrambled eggs n/poached eggs`<br>  
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title. 
+All recipe titles can be seen using `view r` command. 
 
-  **Expected**: Recipe title will be changed to "poached eggs"
-
-
-- Edit recipe step `edit r/poached eggs s/1,whisk the eggs`<br>
-**Prerequisites**: view recipe using `view r/poached eggs` command to see step id.<br>
-  **Expected**: Step 1 of recipe will be changed to "whisk the eggs"
+  **Expected**: Recipe title will be changed to "poached eggs" 
 
 
-- Edit recipe title `edit r/poached eggs i/1,n-duck eggs,q-3`<br>
-**Prerequisites**: view recipe using `view r/poached eggs` command to see ingredient id.<br>
-  **Expected**: Ingredient 1's name will be changed to "duck eggs" and quantity to "3"
+- Edit recipe step `edit r/poached eggs s/1,whisk the eggs`<br> 
+**Prerequisites**: view recipe using `view r/poached eggs` command to see step id.<br> 
+ **Expected**: Step 1 of recipe will be changed to "whisk the eggs"
 
-<a id="delete-r"></a>
-### Delete a specific recipe
+
+- Edit recipe title `edit r/poached eggs i/1,n-duck eggs,q-3`<br> 
+**Prerequisites**: view recipe using `view r/poached eggs` command to see ingredient id.<br> 
+  **Expected**: Ingredient 1's name will be changed to "duck eggs" and quantity to "3" 
+
+<a id="delete-r"></a> 
+### Delete a specific recipe 
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
@@ -880,15 +882,25 @@ All recipe titles can be seen using `view r` command.
 - `delete r/poached eggs`<br>
 **Expected**: Recipe with title `poached eggs` will be deleted.
 
-<a id="duplicate-r"></a>
-### Duplicate Recipe
-(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
-All recipe titles can be seen using `view r` command.
 
-- `duplicate r/poached eggs`<br>
-**Expected**: Recipe with title `poached eggs (copy)` will be created.
+<a id="check-r"></a> 
+### Check Recipe Functions 
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>) 
+
+**Prerequisites**:  
+
+- Ensure that you have the recipe `dumpling soup` added to your list of recipes already 
+  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water` 
+- Ensure that you don't have "chicken broth" ingredient in your ingredient inventory 
+- Ensure that you have 2 dumplings in your inventory 
+  - `add i/dumpling,2,pc` 
+
+**Test Cases**: 
+- `check dumpling soup` <br>
+  **Expected:** A message will appear, indicating that you need to get 3 more pieces of dumplings and taht you are missing chicken broth from your ingredient inventory
+- `check 1` <br>
+  **Expected:** A message will appear indicating the ingredients you need for recipe with index 1. To check which recipe it is, use `view r` command
 
 
 <a id="filter-r"></a>
@@ -906,23 +918,21 @@ All recipe titles can be seen using `view r` command.
 - `filter recipe i/bread` <br>
   **Expected:** A message showing all recipes containing bread as an ingredient. In this case, `sausage bread` will definitely be on the list.
 
-<a id="check-r"></a>
-### Check Recipe Functions
+
+<a id="execute-r"></a>
+### Execute Recipe Functions
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**:
 
-- Ensure that you have the recipe `dumpling soup` added to your list of recipes already
+- Ensure that you have sufficient ingredients for "dumpling soup" recipe
+  - `add i/chicken broth,100,g i/water,200,g i/dumpling,5,pc`
+- Ensure that you have added the recipe "dumpling soup"
   - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
-- Ensure that you don't have "chicken broth" ingredient in your ingredient inventory
-- Ensure that you have 2 dumplings in your inventory
-  - `add i/dumpling,2,pc`
 
 **Test Cases**:
-- `check dumpling soup` <br>
-  **Expected:** A message will appear, indicating that you need to get 3 more pieces of dumplings and taht you are missing chicken broth from your ingredient inventory
-- `check 1` <br>
-  **Expected:** A message will appear indicating the ingredients you need for recipe with index 1. To check which recipe it is, use `view r` command
+- `execute dumpling soup` <br>
+  **Expected:** A message on the updated quantity of your ingredients will be shown
 
 
 <a id="plan-r"></a>
@@ -940,20 +950,16 @@ All recipe titles can be seen using `view r` command.
   **Expected:** A message showing all reicpes you have chosen, all ingredients needed for all recipes, and ingredients that you need to buy as you don't have sufficient
 
 
-<a id="execute-r"></a>
-### Execute Recipe Functions
+<a id="duplicate-r"></a>
+### Duplicate Recipe
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-**Prerequisites**:
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
+All recipe titles can be seen using `view r` command.
 
-- Ensure that you have sufficient ingredients for "dumpling soup" recipe
-  - `add i/chicken broth,100,g i/water,200,g i/dumpling,5,pc`
-- Ensure that you have added the recipe "dumpling soup"
-  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
+- `duplicate r/poached eggs`<br>
+  **Expected**: Recipe with title `poached eggs (copy)` will be created.
 
-**Test Cases**:
-- `execute dumpling soup` <br>
-  **Expected:** A message on the updated quantity of your ingredients will be shown
 
 <a id="add-s"></a>
 ### Adding a shortcut
