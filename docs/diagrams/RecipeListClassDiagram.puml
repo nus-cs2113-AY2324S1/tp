@@ -4,13 +4,106 @@ skinparam arrowThickness 1.1
 skinparam arrowColor CLASS_ARROW_COLOR
 skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
 
-Class RecipeList
-Class Recipe
-Class RecipeIngredientList
-Class "<<enumeration>>\nTag" as Tag
-Class RecipeStepList
-Class Ingredient
-Class Step
+Class RecipeList {
+    - recipes: ArrayList<Recipe>
+
+    - listRecipeSteps(recipe: ArrayList<Recipe>): Void
+    - listRecipeIngredients(recipe: Recipe): Void
+    - noDescriptionExists(stepDetails: String[]): boolean
+    + getRecipes(): ArrayList<Recipe>
+    + addRecipe(recipe: Recipe): Void
+    + addRecipe(title: String, steps: String[]): Void
+    + deleteRecipe(index: Integer): Void
+    + getRecipe(index: Integer): Recipe
+    + getRecipe(name: String): Recipe
+    + getIndexOfRecipe(recipeTitle: String): Integer
+    + recipeExist(index: Integer): Boolean
+    + listRecipeTitles(): Void
+    + viewRecipe(index: Integer): Void
+    + editRecipe(existingRecipe: Recipe, editDetails:String[]): Void
+    + getIngredientEditDetails(ingredientEditString: String): String[]
+}
+Class Recipe {
+    - title: String
+    - recipeSteps: RecipeStepList
+    - recipeIngredients: RecipeIngredientList
+
+    + getRecipeSteps(): RecipeStepList
+    + getRecipeIngredients(): RecipeIngredientList
+    + getRecipeStepByIndex(index: Integer): Step
+    + getTitle(): String
+    + setTitle(title: String): Void
+    + toString(): String
+    + viewTimeLine(): Void
+    + createRecipeStub(title: String): Recipe
+}
+
+Class RecipeIngredientList {
+    - ingredients: ArrayList<Ingredient>
+
+    + addIngredient(input: String): Void
+    + addIngredient(ingredient: Ingredient): Void
+    + getIngredients(): ArrayList<Ingredient>
+    + getIngredientByIndex(index: Integer): Ingredient
+    + ingredientExist(ingredientName: String) Boolean
+}
+
+Class "<<enumeration>>\nTag" as Tag {
+    NIGHT_BEFORE
+    MORNING_OF_COOKING
+    MORE_THAN_ONE_DAY
+    ACTUAL_COOKING
+
+    + getPriority(): Integer
+    + hasHigherPriorityThan(otherTag: Tag): Integer
+    + tagExist(tagString: String): Boolean
+    + mapStringToTag(input: String): Tag
+}
+
+Class RecipeStepList {
+    - steps: ArrayList<Step>
+
+    + createStepWithTag(stepString: String): Step
+    + createStepWithDuration(stepString: String): Step
+    + createStepWithTagAndDuration(stepString: String): Step
+    + obtainTag(tagValue: String): Tag
+    + addStep(stepString: String): Void
+    + addStep(step Step): Void
+    + getSteps(): ArrayList<Step>
+    + getStepByIndex(index: int): Step
+}
+
+
+Class Ingredient {
+    - name: String
+    - quantity: Double
+    - unit: IngredientUnit
+
+    + getName(): String
+    + setName(name: String): Void
+    + getQuantity(): Void
+    + setQuantity(quantity: Double): Double
+    + getUnit(): IngredientUnit
+    + setUnit(): Void
+    + toString(): String
+    + equals(ingredient: Ingredient): Boolean
+
+}
+
+Class Step {
+    - description: String
+    - tag: Tag
+    - estimatedDuration: Integer
+
+    + getDescription(): String
+    + setDescription(description: String)
+    + getTag(): Tag
+    + setTag(tag Tag): Void
+    + getEstimatedDuration(): Integer
+    + setEstimatedDuration(estimatedDuration: Integer): Void;
+    + convertToStepIdTemplate(stepDescription: String, id: Integer): String
+    + toString(): String
+}
 
 RecipeList -down-> "*" Recipe
 
