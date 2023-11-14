@@ -1,0 +1,25 @@
+@startuml
+
+title Sequence of CalorieBalance\n
+
+
+participant ": CalorieBalanceCommand" as CalorieBalanceCommand
+participant ": Date" as Date
+participant ": MealList" as MealList
+participant ": WorkoutList" as WorkoutList
+
+[-> CalorieBalanceCommand ++: setArgument(args: String)
+CalorieBalanceCommand -> Date ++: Date.parseDate(args)
+return
+CalorieBalanceCommand -> MealList ++: execute()
+return calorieBalance: double
+CalorieBalanceCommand -> WorkoutList ++: execute()
+return calorieBalance: double
+
+
+
+
+
+return : CommandResult
+
+@enduml

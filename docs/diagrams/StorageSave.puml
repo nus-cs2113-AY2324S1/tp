@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+
+title Main Structure of Storage Save\n
+
+participant ":FitTrack" as main MODEL_COLOR
+participant ":Storage" as storage STORAGE_COLOR
+participant ":FileWriter" as fileWriter
+
+main -> main ++: executeCommand()
+activate main MODEL_COLOR
+note left: Save data to all three files \n upon each command execution
+main -[MODEL_COLOR]> storage ++: save(userProfile:UserProfile, mealList:MealList, workoutList:WorkoutList)
+
+storage -> storage ++: saveMeal(mealList:MealList)
+activate storage STORAGE_COLOR
+create fileWriter
+storage -[STORAGE_COLOR]> fileWriter ++: FileWriter(MEAL_LIST_FILE_PATH:String)
+return file:FileWriter
+group loop [for all elements in mealArr]
+    storage -[STORAGE_COLOR]> fileWriter ++: write(m.String():String)
+    return
+destroy fileWriter
+end
+return
+deactivate storage
+return
+deactivate storage
+
+@enduml

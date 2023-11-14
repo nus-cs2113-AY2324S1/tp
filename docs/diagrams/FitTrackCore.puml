@@ -1,0 +1,54 @@
+@startuml
+
+title Core Structure of FitTrack\n
+
+participant ": FitTrack" as main
+participant "ui: Ui" as ui
+participant "<i><<class>></i>\nCommandParser" as parser
+participant "command: XXXCommand" as cmd
+
+
+main -> main ++: loopCommandExecution()
+
+group do-while [!ExitCommand.isExit(command)]
+    main -> ui ++: ui.scanCommandLine()
+    note left: Get user input from UI
+    return userCommandLine: String
+
+    main -> parser ++: CommandParser.parseCommand(userCommandLine: String)
+    note left: Parse user input
+    note right: All exceptions during parsing are omitted
+
+    parser -> parser ++: getBlankCommand(word: String, ...)
+    note left: Create Command instance with no data \n using command word
+    create cmd
+    parser -> cmd ++: new XXXCommand(...)
+    return command: XXXCommand
+    return command: Command
+
+    parser -> cmd ++: command.setArguments(args: String, ...)
+    note left: Fill the Command instance \n using command arguments
+    return
+
+    return command: Command
+
+
+    main -> cmd ++: command.setData(...)
+    note left: Provide data to command
+    return
+
+    main -> cmd ++: command.execute()
+    note left: Execute the command
+    note right: Manipulate the data provided\n and create result
+    return: commandResult: CommandResult
+    destroy cmd
+
+    main -> ui ++: ui.printCR(commandResult: CR)
+    note left: Print the result of execution
+    note right: CR for CommandResult
+    return
+end
+
+return
+
+@enduml

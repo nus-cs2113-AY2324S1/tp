@@ -1,0 +1,35 @@
+@startuml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CommandParser" as CommandParser LOGIC_COLOR
+participant ":AddMealCommand" as AddMealCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":MealList" as MealList MODEL_COLOR
+end box
+
+-> LogicManager ++: execute ("addmeal chicken c/100 2023-11-13")
+LogicManager -> CommandParser ++: parseCommand("addmeal chicken c/100 2023-11-13")
+create AddMealCommand
+CommandParser -> AddMealCommand ++:
+return
+CommandParser -> AddMealCommand ++: setArguments("chicken c/100 2023-11-13"), userCommandLine:String)
+return command:Command
+return command:Command
+LogicManager -> LogicManager ++: executeCommand()
+LogicManager -> AddMealCommand ++: execute()
+AddMealCommand -> MealList ++: AddMealCommand()
+return
+create CommandResult
+AddMealCommand -> CommandResult ++:
+return result
+return result
+return result
+return
+
+@enduml
