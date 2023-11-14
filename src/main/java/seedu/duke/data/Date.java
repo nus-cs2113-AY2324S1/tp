@@ -47,12 +47,9 @@ public class Date {
                     if (date.isBefore(LocalDate.now())) {
                         throw new IncorrectFormatException("Target Deadline has passed! ");
                     }
-                    standardString = this.toString();
-                    return;
-                } else {
-                    standardString = this.toString();
-                    return;
                 }
+                standardString = this.toString();
+                return;
             } catch (IncorrectFormatException ide) {
                 throw new IncorrectFormatException("Target Deadline has passed! ");
             } catch (Exception exception) {
