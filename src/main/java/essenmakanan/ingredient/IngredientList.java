@@ -38,6 +38,12 @@ public class IngredientList {
         return ingredients.get(index);
     }
 
+    /**
+     * Get the ingredient object from the ingredient name
+     *
+     * @param name of the ingredient
+     * @return the ingredient object
+     */
     public Ingredient getIngredient(String name) {
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(name)) {
@@ -55,6 +61,11 @@ public class IngredientList {
         return ingredients.isEmpty();
     }
 
+    /**
+     * To check if an ingredient name exists in the ingredient list
+     * @param ingredientName is a string
+     * @return a boolean of whether the ingredient name is valid
+     */
     public boolean exist(String ingredientName) {
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().equals(ingredientName)) {
@@ -67,7 +78,7 @@ public class IngredientList {
     /**
      * To check if an id is valid
      * @param id of the ingredient
-     * @return a boolean of whether the id is valid
+     * @return a boolean of whether the id exists
      */
     public boolean exist(int id) {
         if (id >= 0 && id < ingredients.size()) {
@@ -108,6 +119,13 @@ public class IngredientList {
         ingredients.add(ingredient);
     }
 
+    /**
+     * To update the quantity of an ingredient in the ingredient list. If ingredient quantity is negative,
+     * subtract from existing quantity, else, add to the existing quantity
+     *
+     * @param ingredientToUpdate is an ingredient object
+     * @throws EssenFormatException if the unit of the ingredient to update does not match the existing ingredient
+     */
     public void updateIngredient(Ingredient ingredientToUpdate) throws EssenFormatException {
         Ingredient existingIngredient = this.getIngredient(ingredientToUpdate.getName());
         // check if unit matches
@@ -134,6 +152,13 @@ public class IngredientList {
 
     }
 
+    /**
+     * To edit the ingredient in the ingredient list. Details of what to edit can be found in editDetails
+     *
+     * @param existingIngredient is an ingredient object
+     * @param editDetails is a string array of the details to edit
+     * @throws EssenFormatException if the edit details are not in the correct format
+     */
     public static void editIngredient(Ingredient existingIngredient, String[] editDetails) throws EssenFormatException {
         for (int i = 0; i < editDetails.length; i++) {
             if (editDetails[i].isEmpty()) {

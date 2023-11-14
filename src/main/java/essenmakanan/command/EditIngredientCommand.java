@@ -16,6 +16,9 @@ public class EditIngredientCommand extends Command {
         this.ingredients = ingredients;
     }
 
+    /**
+     * Check if command and its contents are valid. Parse a valid Ingredient and edit the ingredient in the list
+     */
     @Override
     public void executeCommand() {
         Ingredient existingIngredient;

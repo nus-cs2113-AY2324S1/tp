@@ -120,6 +120,13 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * Prints out the updated ingredient, and its quantity.
+     *
+     * @param name name of ingredient
+     * @param existingQuantity quantity of ingredient before update
+     * @param newQuantity quantity of ingredient after update
+     */
     public static void printUpdateIngredientsSuccess(String name, Double existingQuantity, Double newQuantity) {
         System.out.println("Ingredient: " + name + " has been successfully updated from: " + existingQuantity
                 + " to: " + newQuantity);
@@ -193,6 +200,11 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * Message to say ingredient was deleted successfully.
+     *
+     * @param ingredientName Ingredient name that was deleted.
+     */
     public static void printDeleteIngredientsSuccess(String ingredientName) {
         System.out.println("You have deleted the following ingredient: " + ingredientName);
         drawDivider();
@@ -203,22 +215,45 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * String which contains valid ingredient units which maps to our IngredientUnit enum.
+     *
+     * @return String containing valid ingredient units.
+     */
     public static String validIngredientUnits() {
         return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pc");
     }
 
+    /**
+     * Message that shows successful edit of ingredient name
+     *
+     * @param oldName The name of ingredient before edit.
+     * @param newName The name of ingredient after edit.
+     */
     public static void printEditIngredientNameSuccess(String oldName, String newName) {
         System.out.println("You have successfully edited the ingredient name from: " + oldName +
                 " to: " + newName);
         drawDivider();
     }
 
+    /**
+     * Message that shows successful edit of ingredient quantity
+     *
+     * @param oldQuantity The quantity of ingredient before edit.
+     * @param newQuantity The quantity of ingredient after edit.
+     */
     public static void printEditIngredientQuantitySuccess(Double oldQuantity, Double newQuantity) {
         System.out.println("You have successfully edited the ingredient quantity from: " + oldQuantity +
                 " to: " + newQuantity);
         drawDivider();
     }
 
+    /**
+     * Message that shows successful edit of ingredient unit
+     *
+     * @param oldUnit The unit of ingredient before edit.
+     * @param newUnit The unit of ingredient after edit.
+     */
     public static void printEditIngredientUnitSuccess(IngredientUnit oldUnit, IngredientUnit newUnit) {
         System.out.println("You have successfully edited the ingredient unit from: " + oldUnit +
                 " to: " + newUnit);
@@ -239,12 +274,24 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * Message that shows successful edit of recipe name
+     *
+     * @param oldName The name of recipe before edit.
+     * @param newName The name of recipe after edit.
+     */
     public static void printEditRecipeNameSuccess (String oldName, String newName) {
         System.out.println("You have successfully edited the recipe name from: " + oldName +
                 " to: " + newName);
         drawDivider();
     }
 
+    /**
+     * Message that shows successful edit of recipe steps
+     *
+     * @param oldSteps The step of recipe before edit.
+     * @param newSteps The step of recipe after edit.
+     */
     public static void printEditRecipeStepSuccess (String oldSteps, String newSteps) {
         System.out.println("You have successfully edited the recipe steps\nfrom: " + oldSteps +
                 "\nto: " + newSteps);
@@ -327,9 +374,10 @@ public class Ui {
      *
      * @param shortcut A shortcut.
      */
-    public static void printAddShortcutSuccess(Shortcut shortcut) {
+    public static void printAddShortcutSuccess(Shortcut shortcut, IngredientUnit unit) {
         Ui.drawDivider();
-        System.out.println("Shortcut to add '" + shortcut.getIngredientName() + "' has been created!");
+        System.out.println("Shortcut to add " + shortcut.getQuantity() + unit.getValue() + " of '"
+                + shortcut.getIngredientName() + "' has been created!");
         Ui.drawDivider();
     }
 

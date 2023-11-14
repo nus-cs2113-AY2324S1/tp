@@ -18,6 +18,9 @@ public class EditRecipeCommand extends Command {
         this.recipes = recipes;
     }
 
+    /**
+     * Check if command and its contents are valid. Parse a valid Recipe and edit the recipe in the list
+     */
     @Override
     public void executeCommand() {
 

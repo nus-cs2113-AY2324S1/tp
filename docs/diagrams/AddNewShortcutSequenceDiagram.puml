@@ -6,6 +6,9 @@ participant ":AddShortcutCommand" as AddShortcutCommand COMMAND_COLOR
 participant "<<class>>\nShortcutParser" as ShortcutParser SHORTCUT_PARSER_COLOR
 participant "shortcut:Shortcut" as Shortcut SHORTCUT_COLOR
 participant "shortcuts:ShortcutList" as Shortcuts SHORTCUT_LIST_COLOR
+participant "<<class>\nIngredientParser" as IngredientParser INGREDIENT_PARSER_COLOR
+participant "ingredients:IngredientList" as Ingredients INGREDIENT_LIST_COLOR
+participant ":Ingredient" as Ingredient INGREDIENT_COLOR
 participant "<<class>>\nUi" as Ui UI_COLOR
 
 [-> AddShortcutCommand : executeCommand()
@@ -24,13 +27,31 @@ deactivate Shortcut
 ShortcutParser --> AddShortcutCommand : shortcut
 deactivate ShortcutParser
 
+AddShortcutCommand -> IngredientParser : getIngredientIndex(ingredients, ingredientName)
+activate IngredientParser
+
+IngredientParser --> AddShortcutCommand
+deactivate IngredientParser
+
+AddShortcutCommand -> Ingredients : getIngredient(index)
+activate Ingredients
+
+Ingredients --> AddShortcutCommand
+deactivate Ingredients
+
+AddShortcutCommand -> Ingredient : getUnit()
+activate Ingredient
+
+Ingredient --> AddShortcutCommand
+deactivate Ingredient
+
 AddShortcutCommand -> Shortcuts : addShortcut(shortcut)
 activate Shortcuts
 
 Shortcuts --> AddShortcutCommand
 deactivate Shortcuts
 
-AddShortcutCommand -> Ui : printAddShortcutSuccess(shortcut)
+AddShortcutCommand -> Ui : printAddShortcutSuccess(shortcut, unit)
 activate Ui
 
 Ui --> AddShortcutCommand

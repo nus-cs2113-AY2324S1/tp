@@ -2,8 +2,11 @@ package essenmakanan.command;
 
 import essenmakanan.exception.EssenFormatException;
 import essenmakanan.exception.EssenInvalidQuantityException;
+import essenmakanan.exception.EssenOutOfRangeException;
 import essenmakanan.exception.EssenShortcutException;
 import essenmakanan.ingredient.IngredientList;
+import essenmakanan.ingredient.IngredientUnit;
+import essenmakanan.parser.IngredientParser;
 import essenmakanan.shortcut.Shortcut;
 import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.parser.ShortcutParser;
@@ -43,8 +46,11 @@ public class AddShortcutCommand extends Command {
                 throw new EssenShortcutException();
             }
 
+            int ingredientIndex = IngredientParser.getIngredientIndex(ingredients, shortcut.getIngredientName());
+            IngredientUnit unit = ingredients.getIngredient(ingredientIndex).getUnit();
+
             shortcuts.addShortcut(shortcut);
-            Ui.printAddShortcutSuccess(shortcut);
+            Ui.printAddShortcutSuccess(shortcut, unit);
         } catch (EssenFormatException exception) {
             Ui.drawDivider();
             exception.handleException();
@@ -53,6 +59,8 @@ public class AddShortcutCommand extends Command {
             exception.handleException();
         } catch (NumberFormatException exception) {
             EssenInvalidQuantityException.handleException();
+        } catch (EssenOutOfRangeException exception) {
+            exception.handleException();
         }
     }
 }

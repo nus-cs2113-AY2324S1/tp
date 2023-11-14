@@ -92,7 +92,7 @@ Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the c
 
 ### Storage component
 
-In this application, it uses text files to store all data, i.e, recipes and ingredients. 
+In this application, it uses text files to store all data, i.e, recipes, ingredients and shortcuts. 
 
 
 When booting up the application, `restoreSavedData` will be called to get both recipes and ingredients 
