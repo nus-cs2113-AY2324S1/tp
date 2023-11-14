@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide circle
+
+
+interface Findable<<interface>> {
+    + find(date: LocalDate): ArrayList<T>
+}
+
+abstract class StorableList<T> {
+    - path: String
+    + save()
+    + load()
+    + {abstract} parse(s: String): T
+    + {abstract} unparse(t: T): String
+}
+
+
+class Sleep {
+    - startDateTime: LocalDateTime
+    - endDateTime: LocalDateTime
+    - sleepingDuration: Duration
+    - sleepDate: LocalDate
+
+    + Sleep(startDateTime: LocalDateTime, toDateTime: LocalDateTime)
+    + getStartDateTime(): LocalDateTime
+    + getEndDateTime(): LocalDateTime
+    + getSleepDate(): LocalDate
+    + getSleepingTime(): LocalTime
+    + toString(): String
+
+    - calculateSleepingDuration(): Duration
+    - calculateSleepDate(): LocalDate
+    - generateSleepingDurationStringOutput(): String
+    - generateStartDateTimeStringOutput(): String
+    - generateEndDateTimeStringOutput(): String
+    - generateSleepDateStringOutput(): String
+}
+
+class SleepList {
+    + sort()
+    + filterByTimespan(timeSpan: Goal.TimeSpan): ArrayList<Sleep>
+    + getTotalSleepDuration(timeSpan: Goal.TimeSpan): int
+}
+
+SleepList --|> StorableList: extends
+SleepList "1" o-l- "*" Sleep :contains >
+SleepList ..|>  Findable : implements
+@enduml
