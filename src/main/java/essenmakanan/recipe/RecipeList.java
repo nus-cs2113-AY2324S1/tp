@@ -9,13 +9,13 @@ import essenmakanan.ingredient.Ingredient;
 import java.util.ArrayList;
 
 public class RecipeList {
-    private ArrayList<essenmakanan.recipe.Recipe> recipes;
+    private ArrayList<Recipe> recipes;
 
     public RecipeList() {
         recipes = new ArrayList<>();
     }
 
-    public RecipeList(ArrayList<essenmakanan.recipe.Recipe> recipes) {
+    public RecipeList(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
     }
 
@@ -30,7 +30,7 @@ public class RecipeList {
     }
 
     public void addRecipe(String title, String[] steps) {
-        recipes.add(new essenmakanan.recipe.Recipe(title, steps));
+        recipes.add(new Recipe(title, steps));
     }
 
     /**
@@ -77,7 +77,7 @@ public class RecipeList {
      */
     public int getIndexOfRecipe(String recipeTitle) {
         int i = 0;
-        for (essenmakanan.recipe.Recipe recipe : recipes) {
+        for (Recipe recipe : recipes) {
             if (recipe.getTitle().equalsIgnoreCase(recipeTitle)) {
                 return i;
             }
@@ -105,7 +105,7 @@ public class RecipeList {
     public void listRecipeTitles() {
         int count = 1;
 
-        for (essenmakanan.recipe.Recipe recipe : recipes) {
+        for (Recipe recipe : recipes) {
             assert recipes.get(count - 1).getTitle().equals(recipe.getTitle())
                     : "Title is not matching with the current index";
 
@@ -114,11 +114,11 @@ public class RecipeList {
         }
     }
 
-    private static void listRecipeSteps(essenmakanan.recipe.Recipe recipe) {
+    private static void listRecipeSteps(Recipe recipe) {
         recipe.viewTimeLine();
     }
 
-    private static void listRecipeIngredients(essenmakanan.recipe.Recipe recipe) {
+    private static void listRecipeIngredients(Recipe recipe) {
         RecipeIngredientList ingredients = recipe.getRecipeIngredients();
 
         // if ingredient list is empty
@@ -153,7 +153,7 @@ public class RecipeList {
 
     public void viewRecipe(String title) {
         Ui.drawDivider();
-        essenmakanan.recipe.Recipe recipe = recipes.stream()
+        Recipe recipe = recipes.stream()
             .filter(recipe1 -> recipe1.getTitle().equals(title))
             .findFirst()
             .orElse(null);
