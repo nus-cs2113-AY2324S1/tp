@@ -16,9 +16,10 @@ This gives the user full CRUD functionality of the exercise log.
 I contributed to the UG in the parts that are related to the ExerciseLog class and the introduction. In the DG, I contributed to the `Update Exercises from Log feature` section and all the diagrams in that section.
 
 ### Team-Based Tasks
-* Set up milestone v1.0
-* Upload v1.0 and v2.0 jar files to Github
+* Release various issues about improvement and bug reports of the app
 * Enable assertions in gradle
-* Update UG for ExerciseLog-related functionality
-* Fix errors whenever CI/CD checks were not passed
-* Correct grammar errors in documentation
+* Correct coding style problems for all classes before v2.1 
+* Update UG for calorie goal related functionality
+* Add table of content with markdowns for all parts in UG
+* Change the title style, add features and future developments in UG to enhance completeness
+* Add more detailed method documentations to improve readibility
