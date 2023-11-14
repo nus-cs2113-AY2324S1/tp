@@ -8,6 +8,7 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.meal.MealCommand;
 import seedu.duke.data.GoalList;
 import seedu.duke.data.meal.Meal;
+import seedu.duke.exerciselog.Exercise;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
 import seedu.duke.storagefile.AchmStorage;
