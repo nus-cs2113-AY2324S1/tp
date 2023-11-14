@@ -483,4 +483,24 @@ Managing and monitoring financial activities can sometimes be a hassle for stude
 **Transaction Logs:** Define a logging mechanism that captures relevant information for storage functions. Logs should be stored securely and be available for auditing purposes.
 
 ## Instructions for manual testing
-Please refer to [User Guide](UserGuide.md) for instructions on testing.
+Please refer to [User Guide](UserGuide.md) for example user inputs.
+You may also vary the user input to an invalid one to see that the program handles it correctly.
+
+Here are some example invalid inputs to test:
+
+`foo bar`
+
+`allowance /amt -100 /desc negative /date 10-10-2010`
+
+`expense /amt 100 /desc missing date`
+
+`filter non-existent-category`
+
+`delete 0`
+
+`budget -100`
+
+`view first index`
+
+`edit first index`
+
