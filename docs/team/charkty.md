@@ -56,7 +56,7 @@ Implementation work that I did:
 - UG and DG sections of the following commands (includes Sequence diagrams in DG and screenshots in UG for each command)
   - CheckRecipe, PlanRecipe, FilterRecipe, ViewSpecificIngredient, DeleteIngredient, DeleteRecipe
   - An example of a Sequence Diagram I made
-    ![Filter Recipes By Ingredients](../images/FilterRecipesSD.png)
+    ![Filter Recipes By Ingredients](../images/FilterRecipesSequenceDiagram.png)
 - RecipeList Class Diagram in DG
   ![RecipeList class diagram](../images/RecipeListClassDiagram.png)
 - Summary table in UG 

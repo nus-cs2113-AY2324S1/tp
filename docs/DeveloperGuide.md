@@ -43,7 +43,7 @@ If the `recipes.txt` file does not exist, no data is retrieved and RecipeList wi
 4. `RecipeIngredientList` consists of at least one Ingredient while `RecipeStepList` consists of at least one step.
 
 
-<img src="images/RecipeListClassDiagram.png" width="400"/>
+<img src="images/RecipeListClassDiagram.png" width="800"/>
 
 ### Ingredient component
 ![IngredientListClassDiagram.png](images%2FIngredientListClassDiagram.png)
@@ -92,7 +92,7 @@ The help feature is facilitated by the `HelpCommand` class. By calling `executeC
   Finally `Ui#showCommands()` will call `Ui#showRecipeCommands()`, `Ui#showIngredientCommands()`, `Ui#showOtherCommands()` to print all commands for recipe, ingredient and others respectively
 
 
-<img src="images/HelpFunctionSD.png" width="732" />
+<img src="images/HelpFunctionSequenceDiagram.png" width="732" />
 
 ### Exit feature
 The help feature is facilitated by the `ExitCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the exit command.
@@ -339,7 +339,7 @@ be executed as follows:
 
   `Ui` will call `listIngredients()` method in `IngredientList` class to print the 3 different array lists.
 
-![img_1.png](images/CheckRecipeSD.png)
+![img_1.png](images/CheckRecipeSequenceDiagram.png)
 
 ### Filter recipe feature
 
@@ -370,7 +370,7 @@ use the command `filter recipe i/INGREDIENT_NAME [i/...]`, where `INGREDIENT_ID`
 
 
 
-![img.png](images/FilterRecipesSD.png)
+![img.png](images/FilterRecipesSequenceDiagram.png)
 
 ### Plan Recipe Command
 
