@@ -82,7 +82,7 @@ To provent user from making mistakes, we could design an algorithm to detect whe
 ## Product scope
 ### Target user profile
 
-    Our target users are NUS students who are looking to get in shape and live a healthier lifestyle. We want to provide fitness and eating recommendations that are near the NUS campus which will be easily accessible to our end users.
+Our target users are NUS students who are looking to get in shape and live a healthier lifestyle. We want to provide fitness and eating recommendations that are near the NUS campus which will be easily accessible to our end users.
 
 ### Value proposition
 
