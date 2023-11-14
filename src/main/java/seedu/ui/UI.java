@@ -52,6 +52,7 @@ public class UI {
 
     public void showWelcomeMessage() {
         showLine();
+        System.out.println("Syslib v2.1");
         System.out.println(LOGO);
         System.out.println("Hello! What would you like to do?");
         showLine();
