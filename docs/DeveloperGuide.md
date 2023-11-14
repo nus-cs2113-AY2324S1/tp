@@ -161,6 +161,31 @@ be executed as follows:
 
 <img src="images/AddNewRecipeSequenceDiagram.png" width="963" />
 
+### Edit Recipe feature
+The edit recipe feature is facilitated by the `EditRecipeCommand` class. By calling `executeCommand` on the class, the steps will
+be executed as follows:
+
+- **Step1**
+
+  Recipe title will be obtained parsed and obtained using the `getRecipeTitle()` method
+
+
+- **Step2**
+
+  The `Recipe` object to edit will be retrieved from the `RecipeList` using the `getRecipe()` method
+
+
+- **Step3**
+
+  The details to be edited will be obtained with the `getAttributesToEdit()` method
+
+
+- **Step4**
+
+  The `Recipe` object and the array of details will to be passed to the `editRecipe()` method in the `RecipeList` class.
+Every detail in the array will be checked and edited accordingly. Output message will be printed to the user.
+
+![EditRecipeSequenceDiagram.png](images%2FEditRecipeSequenceDiagram.png)
 
 ### Duplicate Recipe Feature
 
@@ -320,6 +345,31 @@ be executed as follows:
 
 <img src="images/AddNewIngredientSequenceDiagram.png" width="1676" />
 
+### Edit Ingredient feature
+The edit Ingredient feature is used by a `EditIngredientCommand` class.
+Multiple attributes can be edited at the same time using the syntax
+`edit i/INGREDIENT_NAME [n/NEW_INGREDIENT_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT]`
+
+By calling `executeCommand` on the class, the steps will
+be executed as follows:
+* **Step1**
+
+  Obtain ingredient to edit by name
+
+
+* **Step2**
+
+  Send ingredient and the details to edit to `IngredientList`
+
+
+* **Step3**
+  Switch case that will check the flag, whether to edit name, quantity or unit
+
+
+* **Step4**
+  Perform the update and print the output message
+
+![EditIngredientSequenceDiagram.png](images%2FEditIngredientSequenceDiagram.png)
 
 ### Delete feature
 

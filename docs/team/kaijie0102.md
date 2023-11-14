@@ -44,8 +44,9 @@ quantities will add up instead of being ingredient being duplicated
 #### Contributions to DG
 - Elaborated the following:
   - IngredientList class diagram
-  - View Recipe sequence diagram
-  - View Ingredient sequence diagram
+  - View Recipe explanation and sequence diagram
+  - View Ingredient explanation and sequence diagram
+  - Edit recipe explanation and sequence diagram
 
 - Formatting
   - Figured out how to make puml to look the same as what we have learnt in module
