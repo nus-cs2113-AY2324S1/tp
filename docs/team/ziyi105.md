@@ -101,7 +101,7 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
    <img height="100" src="../images_PPP/ziyi/telegram_chef_text.png" width="100"/>
    <img height="100" src="../images_PPP/ziyi/relevant_telegram_screenshot_2.png" width="100"/>
    <img height="100" src="../images_PPP/ziyi/relevant_telegram_screenshot_3.png" width="100"/>
-3. Read and compile important information on course website
+3. Read and compile important information on course website. <br>
    <img height="100" src="../images_PPP/ziyi/relevant_telagram_screenshot_4.png" width="100"/>
 
 ### Contributions beyond the Project Team
