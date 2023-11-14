@@ -111,9 +111,8 @@ public class ShortcutParser {
      * @param hasEditQuantity The status if the user has edited the quantity once in one line.
      */
     private static void editShortcutQuantity(Shortcut shortcut, String editDetail, boolean hasEditQuantity) {
-        double newQuantity = Double.parseDouble(editDetail.substring(2).strip());
-
         try {
+            double newQuantity = Double.parseDouble(editDetail.substring(2).strip());
             if (hasEditQuantity) {
                 throw new EssenEditShortcutException("usage");
             }
