@@ -580,14 +580,10 @@ be executed as follows:
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
-
 This product is for people who share kitchen space and ingredients with other cooks.
 
 
 ### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
 
 Easy and intuitive way to keep track of ingredients you have in your kitchen. This helps avoid buying duplicated ingredients, reminds you of the ingredients you need, and gives a visualisation of the recipe timeline to ensure that advance preparation is done in time, eg marinating.
 
