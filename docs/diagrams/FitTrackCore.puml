@@ -4,7 +4,7 @@ title Core Structure of FitTrack\n
 
 participant ": FitTrack" as main
 participant "ui: Ui" as ui
-participant ": CommandParser" as parser
+participant "<i><<class>></i>\nCommandParser" as parser
 participant "command: XXXCommand" as cmd
 
 
@@ -15,19 +15,14 @@ group do-while [!ExitCommand.isExit(command)]
     note left: Get user input from UI
     return userCommandLine: String
 
-    create parser
-    main -> parser ++: new
-    return : CommandParser
-
-
-    main -> parser ++: .parseCommand(userCommandLine: String)
+    main -> parser ++: CommandParser.parseCommand(userCommandLine: String)
     note left: Parse user input
     note right: All exceptions during parsing are omitted
 
     parser -> parser ++: getBlankCommand(word: String, ...)
     note left: Create Command instance with no data \n using command word
     create cmd
-    parser -> cmd ++: new
+    parser -> cmd ++: new XXXCommand(...)
     return command: XXXCommand
     return command: Command
 
@@ -36,7 +31,6 @@ group do-while [!ExitCommand.isExit(command)]
     return
 
     return command: Command
-    destroy parser
 
 
     main -> cmd ++: command.setData(...)

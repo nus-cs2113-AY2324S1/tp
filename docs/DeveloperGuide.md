@@ -57,12 +57,12 @@ to learn how to create and edit diagrams.
 The **`Main`** class is called [`FitTrack`](../src/main/java/fittrack/FitTrack.java).
 
 
-### Core sequence
+### Core Sequence
 Core sequence of code is written in [`FitTrack`](../src/main/java/fittrack/FitTrack.java) class.
 
-![Core structure](images/FitTrackOuter.svg "Outer Structure")
+![Outer structure](images/FitTrackOuter.svg "Outer Structure")
 
-![Inner structure](images/FitTrackCore.svg "Core Structure")
+![Core structure](images/FitTrackCore.svg "Core Structure")
 
 The App consists of five components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
@@ -102,10 +102,23 @@ API: `CommandParser.java`
 The [`CommandParser`](../src/main/java/fittrack/parser/CommandParser.java) is responsible for interpreting user inputs and converting it into executable commands.
 It plays the role of connecting the user interface and the command execution components.
 
-{sequence diagram of command parser}
+Refer to the core structure diagram in [Core Sequence](#core-sequence).
 
 **Design Considerations**
-* Write design considerations here
+* Had to make general methods for all commands.
+  * CommandParser.parseCommand()
+  * CommandParser.getBlankCommand()
+  * Command.setArguments()
+  * Command.execute()
+* Method for parsing the data is written in each data classes.
+  * Height.parseHeight()
+  * Meal.parseMeal()
+  * ...
+* But not all methods.
+  * CommandParser.parseIndex()
+  * CommandParser.parseKeyword()
+* Exception handling is crucial.
+  * Users can type literally **anything** in CLI, so all possibilities must be checked.
 
 
 ### Command Component
@@ -172,15 +185,11 @@ Below are the steps that shows the implementation of addmeal/workout/steps.
 
 *Step 1:*
 
-The addmeal command instance calls ...
+The addmeal command instance calls the commandParser where the arguments are split - name, calories and date.
 
-Example:
-```
-{insert code snippet}
-```
 *Step 2:*
 
-Meal is added to mealList...
+The name of the meal, calories and date will be added to the mealList.
 
 *Step 3:*
 
@@ -196,7 +205,7 @@ the user to delete their meals, workouts and number of steps respectively.
 
 **Design Considerations**
 
-When choosing an item to delete, we decided to let the user delete based on the index of the workout/meal based on the workoutList/mealList.
+When choosing an item to delete, the team decided to let the user delete based on the index of the workout/meal based on the workoutList/mealList.
 This is because it is likely the user has been referring to the mealList/workoutList before deciding to delete an item off it.
 Furthermore, the using of index (numbers) will be much easier to input for the users than the full name of the meal/workout.
 
@@ -314,7 +323,7 @@ caloriebalance 2023-11-13
 ```
 
 *Step 1:*
-The commandparser will make sure that the date inputted is in the correct format.
+The commandParser will make sure that the date inputted is in the correct format.
 
 *Step 2:*
 The program will then retrieve the daily calorie limit set by the user.
@@ -326,25 +335,39 @@ on the specific date. The same will be done for workoutList.
 The diagram below shows the class/sequence structure of the caloriebalance mechanism:
 ![CalorieBalance Sequence Diagram](images/CalorieBalanceSequenceDiagram.svg)
 
+
 ### 5. Help Function
-{description}
+Help command outputs general help message if there's no argument,
+and outputs the help of the given command if certain command is given as an argument.
+
+For example, `help` outputs general help message, and `help addmeal` outputs
+help message for `addmeal` command.
 
 **Design Considerations**
 
+The design has to differentiate between the cases which has no argument and has an argument
+looking for help. Also, when developer adds more commands, it's better to work less.
+So I wanted the help function to behave well if a developer writes only a description and
+a usage of the command.
+
 **Implementation**
 
-{description of the command}
-
-{example of input}
-
 *Step 1:*
+From the given argument, get the first word of the argument, which is the command word.
+If the argument is an empty string, set help message with a general help message.
 
 *Step 2:*
+Get the blank command instance based on the command word.
 
 *Step 3:*
+Get the help message from the blank command instance. It uses getHelp() method. If you want to
+add new command, then you have to implement getHelp() method for the help function.
 
-The diagram below shows the class/sequence structure of the {help} mechanism:
-{Insert sequence or class diagram}
+*Step 4:*
+The result of command execution is the help message in step 3.
+
+The diagram below shows part of the class/sequence structure of the {help} mechanism:
+![Help Function](images/HelpCommand.svg)
 
 ### 6. Step Function
 The step functionality has a suite of commands namely `addsteps`, `deletesteps`, `viewsteps`, `totalsteps`
