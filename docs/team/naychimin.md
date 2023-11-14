@@ -1,22 +1,16 @@
-# Naychi Min - Project Portfolio Page
+### Saung Naychi Min - Project Portfolio Page
 **Project: CafeCRTL**
 
------------------------------------------------------------------------------------------------
-## **Overview**
-CaféCTRL is a software engineering project for CS2113. The user interacts with the application through CLI. It has around 6 kLoC, and it is done in a team of 5.
+**Overview** - CaféCTRL is a software engineering project for CS2113. The user interacts with the application through CLI. It has around 6 kLoC, and it is done in a team of 5.
 
-## **Value Proposition**
-CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
+**Value Proposition** - CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
 
-## **Target User**
-Café proprietors who prefer typing on CLI than any other interaction method and are seeking for a software solution to optimize the management of their café's operations.
+**Target User** - Café proprietors who prefer typing on CLI than any other interaction method and are seeking for a software solution to optimize the management of their café's operations.
 
------------------------------------------------------------------------------------------------
-## Summary of Contributions
+### Summary of Contributions
 
 ### Code Contribution
 [Click here to see my code contribution!](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=functional-code~test-code~docs&since=2023-09-22&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=NaychiMin&tabRepo=AY2324S1-CS2113-T17-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code~docs&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
-
 ### Enhancements implemented
 
 #### Feature
@@ -52,13 +46,9 @@ Café proprietors who prefer typing on CLI than any other interaction method and
         - `calculateMaxDishes`:
             - Handles the logic for calculating the number of dishes made.
             - Manages the complex logic for determining restocked ingredients and their required quantities.
-    - Pantry Class Development:
-      - Creating the Pantry class was a significant learning opportunity, especially given my initial unfamiliarity with Object-Oriented Programming (OOP) concepts. Developing the Pantry class presented a challenge as I had to navigate a crucial learning curve of OOP, and try to ensure the modularity of functions while interacting with various classes. 
-      - The exploration of Java stream filter, a concept introduced in lectures, notably enhanced the efficiency of implemented functionality and prevented arrow-head style code.
-    - Order and Pantry Coordination:
-      - My role served as the link between the add_order and buy_ingredients commands, serving as a cohesive link that unified the data(ingredients) processing aspect of order management.
-         - Order Processing: Seamlessly integrating logic for order success determination and the need for Pantry's ingredient stock management.
-         - Pantry Stock Management: My active contribution to the Pantry class connected the use of add_order command with subsequent use of the buy_ingredients command, making it a central hub for order processing, dish availability checks, and ingredient restocking prompts.
+    - The implementations as stated above served as the link between the add_order and buy_ingredients commands unified the data(ingredients) processing aspect of order management.
+       - Order Processing: Seamlessly integrating logic for order success determination and the need for Pantry's ingredient stock management.
+       - Pantry Stock Management: My active contribution to the Pantry class connected the use of add_order command with subsequent use of the buy_ingredients command, making it a central hub for order processing, dish availability checks, and ingredient restocking prompts.
 
 2. **Encoding of Sales**
     - Implemented encoding for the Sales object, involving:
@@ -85,8 +75,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 [DeveloperGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html)
 1. Worked with ShaniceTang on the following:
    - [Architecture diagram](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#architecture) and overall description of the architecture. 
-   - Sequence diagram of [interactions of various components](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#how-the-architecture-components-interact-with-each-other) shown in the architecture diagram
-   - Drafting data Component class diagram and [description](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#data-component)
+   - Drafting `Data` Component class diagram and [description](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#data-component)
 2. [List Ingredient](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#list-ingredients) 
 3. [List Sale By Day](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#list-sale-by-day)
 4. [Pantry - isDishCooked()](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html#pantry---isdishcooked)
@@ -94,8 +83,8 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 
 ### Other Contributions to Team-based Task
 1. Maintaining the issue tracker
-2. Testing of application and reporting bugs found. 
-   - example:  ![Relevant Telegram screenshot](../images_PPP/naychi/exampleOfBugReport.png)
+2. Testing of application and reporting bugs found. Example shown below: <br>
+   <img alt="Telegram Screenshot" height="325" src="../images_PPP/naychi/exampleOfBugReport.png" width="200"/>
 
 ### Review / Mentoring Contributions
 1. Reviewed and merged some PRs such as [#313](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/313), ...
