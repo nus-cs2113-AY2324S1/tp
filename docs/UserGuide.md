@@ -515,9 +515,11 @@ The contents of profile.txt:
 ![](images/ProfileFile.png)
 
 The contents of mealList.txt:
+
 ![](images/MealFile.png)
 
 The contents of workoutList.txt:
+
 ![](images/WorkoutFile.png)
 
 
