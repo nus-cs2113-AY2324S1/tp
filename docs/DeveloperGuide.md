@@ -843,12 +843,14 @@ The recipe will have 1 step and 1 ingredient.
 ### Viewing a specific recipe
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-**Prerequisites**: There should be at least 1 recipe in the list, and you know the title. 
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
 All recipe titles can be seen using `view r` command.
 
 **Test Case**:
 - `view r/scrambled eggs`<br>
-**Expected**: Recipe with title `scrambled eggs` will be displayed along with its steps and ingredients
+  **Expected**: Recipe with title `scrambled eggs` will be displayed along with its steps and ingredients
+
+
 
 <a id="edit-r"></a>
 ### Edit a specific recipe
@@ -954,6 +956,8 @@ All recipe titles can be seen using `view r` command.
 **Test Cases**:
 - `execute dumpling soup` <br>
   **Expected:** A message on the updated quantity of your ingredients will be shown
+
+
 
 <a id="add-s"></a>
 ### Adding a shortcut
