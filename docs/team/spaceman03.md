@@ -20,12 +20,17 @@ Given below are my contributions to the project.
     * What it does: *Categorise expenses in NUScents.*
     * Justification: *Possible categories include `FOOD`, `ENTERTAINMENT`, `TRANSPORTATION`, `UTILITY`, `RENT`, 
   `OTHER_EXPENSE`.*
-  
+
+
+* **Bug fix**: *Ensure program detects invalid date*
+  * Ensure a correct error message is displayed when an invalid date is provided by the user.
+
 
 * **Code Contributed**: [RepoSense Link](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=spaceman03&tabRepo=AY2324S1-CS2113-T18-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 
-* **Project management**:
+* **Project management & Contrubutions to team-based tasks**:
+    * Imported code base from [Spaceman Task Manager](https://github.com/spaceman03/ip/) during the initial setup
     * Setup issues and milestones for v1.0
 
 
@@ -42,6 +47,8 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added architecture diagram for NUScents (Pull request [\#65](https://github.com/AY2324S1-CS2113-T18-4/tp/pull/65))
         * Added implementation details for `add` transaction feature (Pull request [\#45](https://github.com/AY2324S1-CS2113-T18-4/tp/pull/45))
+        * Documented the Ui component and the Data component
+        * Added class diagram for the Data component
         * Added user stories for v1.0 and v2.0
 
 
