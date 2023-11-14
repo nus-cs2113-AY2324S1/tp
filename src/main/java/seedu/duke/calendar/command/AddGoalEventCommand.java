@@ -72,7 +72,7 @@ public class AddGoalEventCommand extends DualEventCommand{
         }
     }
 
-    //@@author Brian030601
+    //@@author Brian030601-reused
 
     /**
      * The parseDateTimeInput takes two parameters (Scanner , String) and through those parameters
