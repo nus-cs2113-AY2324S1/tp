@@ -5,7 +5,6 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.GoalList;
 import seedu.duke.data.exception.IncorrectFormatException;
-import seedu.duke.data.exception.InvalidDateException;
 
 import java.io.IOException;
 
@@ -36,8 +35,6 @@ public class GoalCommand extends Command {
             feedbackToUser = ife.getMessage();
         } catch (NumberFormatException nfe) {
             feedbackToUser = "Please input a valid number for calories.";
-        } catch (InvalidDateException ide) {
-            feedbackToUser = ide.getMessage();
         } catch (IOException io) {
             feedbackToUser = "Failed to save data. Please check the output file and restart the app.";
         } catch (Exception e) {

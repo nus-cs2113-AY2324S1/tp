@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.data.exception.InvalidDateException;
+import seedu.duke.data.exception.IncorrectFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +26,7 @@ public class Date {
      * @param rawData refers to the date String
      * @throws InvalidDateException if failed to parse date string input
      */
-    public Date(String rawData) throws InvalidDateException {
+    public Date(String rawData) throws IncorrectFormatException {
         setRawData(rawData);
     }
 
@@ -37,7 +37,7 @@ public class Date {
      * @param rawData refers to a date string
      * @throws InvalidDateException if failed to parse date string input
      */
-    public void setRawData(String rawData) throws InvalidDateException {
+    public void setRawData(String rawData) throws IncorrectFormatException {
         for (DateTimeFormatter formatter : formatters) {
             try {
                 date = LocalDate.parse(rawData, formatter);
@@ -47,7 +47,7 @@ public class Date {
                 continue;
             }
         }
-        throw new InvalidDateException("Please use a valid date with correct format!");
+        throw new IncorrectFormatException("Please use a valid date with correct format!");
     }
 
     @Override
