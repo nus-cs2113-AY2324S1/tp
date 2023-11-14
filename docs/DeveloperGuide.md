@@ -729,6 +729,7 @@ Here are the instructions for launching the app:
 ### Summary of Commands for testing
 * [Help](#help)
 * [Exit](#exit)
+
 ---
 * [Ingredient: Add](#add-i)
 * [Ingredient: View All](#view-all-i)
@@ -736,6 +737,7 @@ Here are the instructions for launching the app:
 * [Ingredient: Edit](#edit-i)
 * [Ingredient: Delete](#delete-i)
 * [Ingredient: Use](#use-i)
+
 ---
 * [Recipe: Add](#add-r)
 * [Recipe: View All](#view-all-r)
@@ -747,6 +749,7 @@ Here are the instructions for launching the app:
 * [Recipe: Check](#check-r)
 * [Recipe: Plan](#plan-r)
 * [Recipe: Execute](#execute-r)
+
 ---
 * [Shortcut: Add](#add-s)
 * [Shortcut: View All](#view-all-s)
