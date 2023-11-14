@@ -351,7 +351,31 @@ be executed as follows:
 <img src="images/AddNewIngredientSequenceDiagram.png" width="1676" />
 
 
-### Delete feature
+### Delete recipe feature
+
+The delete recipe feature is facilitated by the `DeleteRecipeCommand` class. Users can input
+"delete r/RECIPE_ID" or "delete r/RECIPE_TITLE" to trigger this command
+
+* **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
+
+
+* **Step 2**
+
+  A new `DeleteRecipeCommand` object will be created and will be sent back to main
+
+
+* **Step 3**
+
+  `commandObject#executeCommand()` will be called which will call `RecipeList#deleteRecipe()` using `recipeIndex`
+
+
+* **Step 4**
+
+  Finally, `RecipeList#deleteRecipe()` will print the recipe being deleted
+  to standard output
+
 
 ### Check recipe feature
 
