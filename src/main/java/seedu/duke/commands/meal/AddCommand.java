@@ -10,7 +10,7 @@ import java.util.Locale.Category;
 public class AddCommand extends MealCommand {
     public static final String COMMAND_WORD = "meal_add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a meal and record the amount of calories.\n"
-            + "Example: " + COMMAND_WORD + " potato 15";
+            + "\tExample: " + COMMAND_WORD + " potato 15";
     private static final int[] validArgumentAmounts = new int[] { 3, 4 };
     private final String name;
     private final int calories;

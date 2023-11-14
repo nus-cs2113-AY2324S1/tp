@@ -1,12 +1,17 @@
 package seedu.duke;
 
+import java.util.ArrayList;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.meal.MealCommand;
 import seedu.duke.goal.GoalList;
+import seedu.duke.meal.Meal;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
 import seedu.duke.storagefile.AchmStorage;
+import seedu.duke.storagefile.DataManager;
 import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
 import seedu.duke.storagefile.ExerciseLogStorage;
@@ -33,6 +38,7 @@ public class Duke {
     private final String goalFilePath = "./data/GoalRecord.txt";
     private final String achmFilePath = "./data/Achievement.txt";
     private final String mealSavePath = "Meal.json";
+    private static ArrayList<Meal> meals = new ArrayList<Meal>();
 
     public static void main(String... launchArgs) {
         new Duke().run(launchArgs);
@@ -60,6 +66,13 @@ public class Duke {
             exerciseLogStorage = ExerciseLogStorage.initializeStorage(dirPath, exerciseLogFilePath);
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
+            DataManager.setRelativePath(mealSavePath);
+            String dataJson = DataManager.readData();
+            ArrayList<Meal> data = DataManager.convertFromJsonToMealList(dataJson);
+            if (data != null) {
+                meals = data;
+            }
+            MealCommand.setMeals(meals);
         } catch (Exception e) { // TODO: change to specific storage exceptions later
             ui.showInitFailedMessage();
             throw new RuntimeException(e);
@@ -71,6 +84,11 @@ public class Duke {
      */
     private void exit() {
         ui.showGoodbyeMessage();
+        try {
+            DataManager.saveData(DataManager.convertToJson(meals));
+        } catch (Exception exception) {
+            ui.showToUser(exception.toString());
+        }
         System.exit(0);
     }
 
