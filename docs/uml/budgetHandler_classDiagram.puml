@@ -3,40 +3,36 @@
 skinparam Style strictuml
 skinparam classAttributeIconSize 0
 
-class           BudgetHandler
-class           Budget
-class           Progress
-class           FinancialStatement
 BudgetHandler -l-> "1" Budget : handles >
 BudgetHandler -r-> "0..1" Progress : measures >
 BudgetHandler --> "1" FinancialStatement : refers to >
 
-class BudgetHandler {
-    -{static} MINIMUM_BUDGET_PERCENTAGE_THRESHOLD: double
-    -{static} MAXIMUM_BUDGET_PERCENTAGE: double
-    +deleteBudget(): void
-    +printBasicWarning(): void
-    +printSeriousWarning(): void
-    +printBudget(): void
+class BudgetHandler #1e90ff {
+    -{static} MINIMUM_BUDGET_PERCENTAGE_THRESHOLD: double = 0.25
+    -{static} MAXIMUM_BUDGET_PERCENTAGE: double = 1.00
+    +deleteBudget()
+    +printBasicWarning()
+    +printSeriousWarning()
+    +printBudget()
 }
 
-class Budget {
+class Budget #6495ed {
     -budget: double
     -isActive: boolean
 }
 
-class Progress {
+class Progress #4169e1 {
     -progress: double
     -buildProgressBar(): String
     +displayProgressBar(): String
 }
 
-class FinancialStatement {
+class FinancialStatement #5f9ea0 {
     -financialStatement: ArrayList<Transaction>
     -incomeStatement: IncomeStatement
     -expenseStatement: ExpenseStatement
     +getNetCash(): double
-    +printTransactions(): void
-    +findTransaction(): void
+    +printTransactions()
+    +findTransaction()
 }
 @enduml

@@ -222,7 +222,7 @@ unnecessary expenses.
 
 ## Proposed implementations of future features
 
-* Create periodic income and expenses (subscription fees, salaty etc.)
+* Create periodic income and expenses (subscription fees, salary etc.)
 * View sum of income and expenses base on specified time range
 * Password protection when starting app
 * Able to reset password

@@ -77,9 +77,9 @@ public class BudgetHandler {
      * Prints an overview of the budget situation containing some text, the net
      * cash on hand and a progress bar indicating how much money is available in terms
      * of budgeting.
-     * An empty bar chart means that the user is doing well and has not used up his budget yet
+     * A full bar chart means that the user is doing well and has not used up his budget yet
      * as he/she has more cash on hand than the set budget (meaning that income is larger than the expenses)
-     * A full bar chart implies that the user has used up all his budget and may now find himself in a deficit.
+     * An empty bar chart implies that the user has used up all his budget and may now find himself in a deficit.
      * @throws CashLehBudgetException when user has not set a budget yet.
      */
     public void printBudget() throws CashLehBudgetException {
