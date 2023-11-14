@@ -1,7 +1,7 @@
 || ===================================================
 || ===================================================
 || Welcome to your FITNUS journey!
-|| AddressBook Level 2 - Version 1.0
+|| FitNUS - Version 1.0
 || Launch command format: java seedu.duke.Duke [STORAGE_FILE_PATH]
 || Using storage file : storage.getPath()
 || ===================================================

@@ -30,7 +30,7 @@ public class TextUi {
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     /**
-     * A decorative prefix added to the beginning of lines printed by AddressBook
+     * A decorative prefix added to the beginning of lines printed by FitNUS
      */
     private static final String LINE_PREFIX = "|| ";
 
