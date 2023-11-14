@@ -1,1 +1,5 @@
-James Gosling
+James
+help
+allowance not following format
+expense not following format
+exit

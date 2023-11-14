@@ -1,0 +1,56 @@
+@startuml
+hide footbox
+!include Style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":Nuscents" as nuscents MAIN_COLOR
+Participant ":Parser" as parser PARSER_COLOR
+Participant ":FilterCommand" as FilterCommand COMMAND_COLOR
+Participant ":TransactionList" as TransactionList UI_COLOR
+Participant ":UI" as UI
+
+user -[USER_COLOR]> nuscents : filter entertainment
+activate nuscents MAIN_COLOR
+
+nuscents -> parser : parseCommand("filter entertainment")
+activate parser PARSER_COLOR
+
+create FilterCommand
+parser -> FilterCommand : category = "entertainment"
+activate FilterCommand
+
+FilterCommand --> parser
+deactivate FilterCommand
+
+parser --> nuscents
+deactivate parser
+
+nuscents -> FilterCommand : execute()
+activate FilterCommand
+
+FilterCommand -> TransactionList : filterTransaction("entertainment")
+activate TransactionList
+
+alt transactions found
+    TransactionList -> UI : showFilterMessage(transactions)
+    activate UI
+    UI --> TransactionList
+    deactivate UI
+else no transactions found
+    TransactionList -> UI : showFilterNotFoundMessage("entertainment")
+    activate UI
+    UI --> TransactionList
+    deactivate UI
+end
+
+TransactionList --> FilterCommand
+deactivate TransactionList
+
+FilterCommand --> nuscents
+deactivate FilterCommand
+
+nuscents --> user
+deactivate nuscents
+destroy FilterCommand
+@enduml

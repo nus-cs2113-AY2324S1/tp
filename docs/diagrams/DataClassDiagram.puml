@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+hide circle
+hide member
+skinparam arrowThickness 1.1
+
+Package Data as DataPackage <<Rectangle>>{
+    Package Transaction as TransactionPackage <<Rectangle>>{
+    Class Transaction
+    Class Allowance
+    Class Expense
+    Interface TransactionCategory <<interface>>
+    Enum ExpenseCategory <<enumeration>>
+    Enum AllowanceCategory <<enumeration>>
+    }
+Class TransactionList
+}
+
+Allowance -up-|> Transaction
+Expense -up-|> Transaction
+ExpenseCategory .up.> TransactionCategory
+AllowanceCategory .up.> TransactionCategory
+TransactionList *-- "*" Transaction
+Transaction -> "1" TransactionCategory
+
+@enduml
