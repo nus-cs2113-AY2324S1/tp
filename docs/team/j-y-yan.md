@@ -19,6 +19,7 @@ I contributed to the UG in the parts that are related to goal related classes. I
 * Correct coding style problems for all classes before v2.1 
 * Update UG for calorie goal related functionality
 * Add table of content with markdowns for all parts in UG
+* Add questions and answers for FAQs part in UG
 * Add features and future developments in UG to enhance completeness
 * Add more detailed method documentations to improve readibility
 * Change the overall user input processing to allow more flexible inputs for all functionalities
