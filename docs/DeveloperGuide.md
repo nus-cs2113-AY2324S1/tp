@@ -56,18 +56,26 @@ As one of the commands input by user, the goal class should be inherited from th
 Implementation:
 The goalist class has some helper functions, including checkGoalInput to ensure the validity of user input, addGoal to add a new goal record into the goal list. The execution of goal command simply create a new goal record by first validating the user input, and create a goal record and finally return the result of creating the goal.
 
-Future Enhancement:
+1. View Goal function and Delete Goal function
 
-1. List function and delete function
+The view function is vital in visualization of the goal list while delete function helps to remove some redundant, incorrect, or achieved goals. 
 
-The list function is vital in visualization of the goal list while delete function helps to remove some redundant, incorrect, or achieved goals. Note that since other command classes may also need a list function or delete function, these two functions can be created for a general use and applicable for all commands. Alternative method is to create an interface class including both methods. Those commands which inherited the interface class should override all methods.
+- Implementation 1: 
+  Note that since other command classes may also need a list function or delete function, these two functions can be created for a general use and applicable for all commands. 
 
-2. Achievement List function
+- Implementation 2 (Current Implementation):
 
-This aims to keep the record of achieved goals. Once the user marks a goal as finished, the record will be automatically backed 
-up into the history list. All records in the history list should be sorted according to their finish time and in alphabetical order. A simple copy function with proper file input output maintenance should be good enough to achieve this function.
+  Since the user need different input to differentiate type of objects to delete, it is acceptable to implement different delete classes, with some common implementation of interface(if any). 
 
-3. Achieve goal function: allow users to mark a goal as achieved and saved the record into backup history.
+2. Achieve Goal function
+
+This aims to keep the record of achieved goals. Once the user marks a goal as finished, the record will be automatically backed up into the history list, with supported view function. Also, it is designed not to allow user to modify any achivement. If user made any mistakes, either he starts a new achievement files, or he keeps the false record.
+
+Potential Improvements:
+
+All records in the history list(and general goal list) should be sorted according to their finish time and in alphabetical order.
+
+To provent user from making mistakes, we could design an algorithm to detect whether an achievement is accomplished.
 
 
 ## Product scope
