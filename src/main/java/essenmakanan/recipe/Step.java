@@ -56,6 +56,13 @@ public class Step {
         this.estimatedDuration = estimatedDuration;
     }
 
+    /**
+     * Converts step description to step id template. Eg: "Wash vegetables" -> "Wash vegetables (step id = 1)"
+     *
+     * @param stepDescription step description
+     * @param id              step id
+     * @return step id template
+     */
     public static String convertToStepIdTemplate(String stepDescription, int id) {
         return stepDescription + (" (step id = " + id + ")");
     }
