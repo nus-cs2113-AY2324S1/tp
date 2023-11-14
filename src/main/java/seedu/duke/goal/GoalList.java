@@ -32,11 +32,11 @@ public class GoalList extends ArrayList<GoalList.Goal> {
     /**
      * This method removes a goal object from the global field goals list by indexing
      * It also decrements goalCount by 1
-     * @param cmd Raw user Command
+     * @param cmd Raw user command
+     * @return message of succeeding to delete goal and tell user the updated total number of goals
      * @throws IOException if failed to access output file
      * @throws NumberFormatException if index is invalid number
      * @throws IncorrectFormatException is user command is in incorrect format
-     * @return message of succeeding to delete goal and tell user the updated total number of goals
      */
     public static String deleteGoal(String cmd) throws IncorrectFormatException,
             NumberFormatException, IOException {
@@ -145,10 +145,10 @@ public class GoalList extends ArrayList<GoalList.Goal> {
      * @param userCmd represents raw user input
      * @param target represents to target list to add new goal
      * @param storage represents the target storage to update goal data
+     * @return String about succeeding to create goal object
      * @throws IncorrectFormatException if user input is in wrong format
      * @throws NumberFormatException if the user does not input a valid number
      * @throws IOException if failed to access and update output file
-     * @return String about succeeding to create goal object
      */
     public static String addGoal(String userCmd, GoalList target, GoalStorage storage) throws IncorrectFormatException,
             NumberFormatException, IOException {
@@ -207,5 +207,4 @@ public class GoalList extends ArrayList<GoalList.Goal> {
             return "Consume " + this.calories + " kcal on " + this.date;
         }
     }
-
 }

@@ -30,5 +30,4 @@ public class ViewGoalCommand extends Command {
 
         return new CommandResult(feedbackToUser);
     }
-
 }

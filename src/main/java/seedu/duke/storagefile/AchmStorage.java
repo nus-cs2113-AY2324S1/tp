@@ -66,8 +66,4 @@ public class AchmStorage extends GoalStorage {
         String restoredCommand = restoreOrigionalCommand(goalRecord);
         GoalList.addGoal(restoredCommand, Duke.achievedGoals, Duke.achmStorage);
     }
-
-
-
 }
-

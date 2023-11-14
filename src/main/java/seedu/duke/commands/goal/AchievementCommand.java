@@ -30,6 +30,4 @@ public class AchievementCommand extends Command {
 
         return new CommandResult(feedbackToUser);
     }
-
-
 }

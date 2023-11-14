@@ -11,8 +11,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
-import seedu.duke.commands.goal.*;
 import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.goal.GoalCommand;
+import seedu.duke.commands.goal.DeleteGoalCommand;
+import seedu.duke.commands.goal.ViewGoalCommand;
+import seedu.duke.commands.goal.AchievementCommand;
+import seedu.duke.commands.goal.AchieveGoalCommand;
 import seedu.duke.commands.IncorrectCommand;
 import seedu.duke.commands.logcommands.LogCommand;
 import seedu.duke.commands.logcommands.DeleteLogCommand;
@@ -146,5 +150,4 @@ public class Parser {
             super(message);
         }
     }
-
 }
