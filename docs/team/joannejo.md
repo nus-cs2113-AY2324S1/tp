@@ -30,42 +30,11 @@ Implementation: `Book`, `EBook`, `CD`, `Magazine`, `EMagazine`, `Newspaper`, `EN
 
 Implemented the different resource classes for each resource has different attributes.
 
-Resources and attributes supported:  
-- **Book**
-  - ID, Tag, Title, ISBN, Status, Author, Genres
-- **EBook**
-  - ID, Tag, Title, ISBN, Status, Author, Genres, Link
-- **CD**
-  - ID, Tag, Title, ISBN, Status, Creator, Type
-- **Magazine**
-  - ID, Tag, Title, ISBN, Status, Brand, Issue
-- **EMagazine**
-  - ID, Tag, Title, ISBN, Status, Brand, Issue, Link
-- **Newspaper**
-  - ID, Tag, Title, ISBN, Status, Publisher, Edition
-- **ENewspaper**
-  - ID, Tag, Title, ISBN, Status, Publisher, Edition, Link
-
 **2. Add feature for resources**
 
 Implementation: `AddCommand`, `CreateResource` classes
 
 Implemented the **add** feature to add resources into a list of all the resources in the library.
-
-Add feature supports the addition of:
-- **Resources**
-  - Book
-  - EBook
-  - CD
-  - Magazine
-  - EMagazine
-  - Newspaper
-  - ENewspaper
-- **Attributes**
-  - Required for all: Title, ISBN
-  - Required for electronic versions (E*): Link
-  - Others required: Author, Creator, Type, Brand, Issue, Publisher, Edition
-  - Optional: Genres, Status
 
 **3. Parser for adding resources**
 
@@ -73,26 +42,14 @@ Implementation: `ParseResource`, `ParseAttribute`, `ParseBook`, `ParseEBook`, `P
 `parseAddCommand()`, `checkFirstItem()` in `Parser` class
 
 Implemented the validation and error handling of user input for the **add** feature.
-Checks the user input for all attributes in all resources. Returns error messages to suggest valid input.
+Checks the user input for all attributes in all resources. Returns error messages when invalid.
 
 **Validation checks for**:
 - **Valid input**
-  - Valid arguments
-  - Valid data 
 - **Optional data**
-  - Presence of data
-  - Breaking down of large data to smaller valid data 
-    - Via comma (and spaces)
-- **Reduce limitations of input**
-  - Allow almost all characters in input 
-- **Limitations**
-  - ISBN has to be 13 digits
-  - "[" and "]" are not allowed in genres
-  - Allow the use of slashes in data under certain conditions
-    - To specify argument and when it is wrapped with words
-- **Keywords**
-  - Types of data are checked with arguments 
-    - Arguments are in the format: "/ARGUMENT"
+  - Breaks down large data to smaller valid data  
+
+Limitations of input were reduced.
 
 **4. Exception class**
 
