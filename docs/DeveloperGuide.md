@@ -11,11 +11,11 @@ title: Developer Guide
 * [Logger Component](#logger-component)
 * [Implementation](#implementation-component)
 * [Appendix](#appendix)
-  * [Appendix A - Product Scope](#product-scope)
-  * [Appendix B - User Stories](#user-stories)
-  * [Appendix C - Non-Functional Requirements](#non-functional)
-  * [Appendix D - Glossary](#glossary)
-  * [Appendix E - Instructions for Manual Testing](#testing)
+* [Appendix A - Product Scope](#product-scope)
+* [Appendix B - User Stories](#user-stories)
+* [Appendix C - Non-Functional Requirements](#non-functional)
+* [Appendix D - Glossary](#glossary)
+* [Appendix E - Instructions for Manual Testing](#testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -725,7 +725,169 @@ Here are the instructions for launching the app:
 * Expected: A welcome message should appear. If this is your first time running the jar, there will be a few messages
   related to the app creating a folder, text files for storage and a log file.
 
+* <a id="summary-anchor"></a>
+### Summary of Commands for testing
+* [Help](#help)
+* [Exit](#exit)
+---
+* [Ingredient: Add](#add-i)
+* [Ingredient: View All](#view-all-i)
+* [Ingredient: View Specific](#view-i)
+* [Ingredient: Edit](#edit-i)
+* [Ingredient: Delete](#delete-i)
+* [Ingredient: Use](#use-i)
+---
+* [Recipe: Add](#add-r)
+* [Recipe: View All](#view-all-r)
+* [Recipe: View Specific](#view-r)
+* [Recipe: Edit](#edit-r)
+* [Recipe: Delete](#delete-r)
+* [Recipe: Check](#check-r)
+* [Recipe: Filter](#filter-r)
+* [Recipe: Duplicate](#duplicate-r)
+---
+* [Shortcut: Add](#add-s)
+* [Shortcut: View All](#view-all-s)
+* [Shortcut: Edit](#edit-s)
+* [Shortcut: Delete](#delete-s)
+* [Shortcut: Use](#use-s)
+
+<a id="help"></a>
+### Help
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+- `help`<br>
+**Expected**: All commands will be displayed.
+
+<a id="add-i"></a>
+### Adding a ingredient
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Prerequisites**: Know the valid units of measurement. Some valid units of measurement are: `kg`, `g`, `l`, `ml`, `pc`, 
+see [full list](https://ay2324s1-cs2113-f11-2.github.io/tp/UserGuide.html#units) in User Guide.
+- Add ingredient to inventory: `add i/bread,2,pc` <br>
+**Expected**: An ingredient with the name `bread` and quantity `2` and unit "pc" will be added into the inventory.
+
+<a id="view-all-i"></a>
+### Viewing all ingredients
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+- `view i`<br>
+**Expected**: All ingredients will be displayed.
+
+<a id="view-i"></a>
+### Viewing a specific ingredient
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Prerequisites**: There should be at least 1 ingredient in the list, and you know the name.
+All ingredient names can be seen using `view i` command.
+- `view i/bread`<br>
+**Expected**: Ingredient with name `bread` will be displayed, along with its quantity and unit.
+
+<a id="edit-i"></a>
+### Edit a specific ingredient
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Pre-requisites**: There should be at least 1 ingredient in the list, and you know the name.
+All ingredient names can be seen using `view i` command.
+- `edit i/bread n/apple q/3`<br>
+**Expected**: Ingredient with name `bread` will be changed to `apple` and its quantity to `3`
+
+<a id="delete-i"></a>
+### Delete a specific ingredient
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Pre-requisites**: There should be at least 1 ingredient in the list, and you know the name.
+All ingredient names can be seen using `view i` command.
+- `delete i/bread`<br>
+**Expected**: Ingredient with name `bread` will be deleted.
+
+<a id="use-i"></a>
+### Use Ingredient
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Note**: The ingredients for recipes are different from the ingredients that you have in the inventory
+
+**Pre-requisites**: There should be at least 1 ingredient in the list, and you know the name.
+All ingredient names can be seen using `view i` command.
+- `use i/bread,1,pc`<br>
+**Expected**: Ingredient with name `bread` will be used and its quantity will be reduced by 1.
+
+<a id="add-r"></a>
+### Adding a recipe
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Note**: The ingredients for recipes are different from the ingredients that you have in the inventory
+
+- Add basic recipe: `add r/scrambled eggs s/beat the eggs i/egg,2,pc` <br>
+**Expected**: A recipe with the title `scrambled eggs` will be added into the recipe list. 
+The recipe will have 1 step and 1 ingredient.
+- Adding a recipe with duration(optional): `add r/scrambled eggs s/beat the eggs d/5min i/egg,2,pc`<br>
+**Expected**: Same as basic recipe but step will have a duration of 5 min "beat the eggs for 5 min"
+- Adding a recipe with tag(optional): `add r/scrambled eggs t/1 s/beat the eggs d/5min i/egg,2,pc`<br>
+**Expected**: Same as add step with duration but step will belong to tag 1: `NIGHT_BEFORE`
+
+<a id="view-all-r"></a>
+### Viewing all recipes
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+- `view r`<br>
+**Expected**: All recipes will be displayed.
+
+<a id="view-r"></a>
+### Viewing a specific recipe
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title. 
+All recipe titles can be seen using `view r` command.
+
+**Test Case**:
+- `view r/scrambled eggs`<br>
+**Expected**: Recipe with title `scrambled eggs` will be displayed along with its steps and ingredients
+
+<a id="edit-r"></a>
+### Edit a specific recipe
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+- Edit recipe title `edit r/scrambled eggs n/poached eggs`<br>
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
+All recipe titles can be seen using `view r` command.
+
+  **Expected**: Recipe title will be changed to "poached eggs"
+
+
+- Edit recipe step `edit r/poached eggs s/1,whisk the eggs`<br>
+**Prerequisites**: view recipe using `view r/poached eggs` command to see step id.<br>
+  **Expected**: Step 1 of recipe will be changed to "whisk the eggs"
+
+
+- Edit recipe title `edit r/poached eggs i/1,n-duck eggs,q-3`<br>
+**Prerequisites**: view recipe using `view r/poached eggs` command to see ingredient id.<br>
+  **Expected**: Ingredient 1's name will be changed to "duck eggs" and quantity to "3"
+
+<a id="delete-r"></a>
+### Delete a specific recipe
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
+All recipe titles can be seen using `view r` command.
+
+- `delete r/poached eggs`<br>
+**Expected**: Recipe with title `poached eggs` will be deleted.
+
+<a id="duplicate-r"></a>
+### Duplicate Recipe
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
+All recipe titles can be seen using `view r` command.
+
+- `duplicate r/poached eggs`<br>
+**Expected**: Recipe with title `poached eggs (copy)` will be created.
+
+<a id="add-s"></a>
 ### Adding a shortcut
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**:
 
@@ -734,14 +896,15 @@ Here are the instructions for launching the app:
 
 **Test Cases**:
 
-- `add sc/bread,2`
-  Expected: A shortcut for adding `2` quantity of ingredient `bread` will be added into the shortcut list.
+- `add sc/bread,2`<br>
+  **Expected**: A shortcut for adding `2` quantity of ingredient `bread` will be added into the shortcut list.
 
-- `add sc/apple,2`
-  Expected: Exception will be thrown due to not available ingredient.
+- `add sc/apple,2`<br>
+  **Expected**: Exception will be thrown due to not available ingredient.
 
-
+<a id="view-all-s"></a>
 ### Viewing shortcuts
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**:
 
@@ -749,11 +912,12 @@ Here are the instructions for launching the app:
 
 **Test Case**:
 
-- `view sc`
-  Expected: All available shortcuts will be displayed.
+- `view sc`<br>
+  **Expected**: All available shortcuts will be displayed.
 
-
+<a id="edit-s"></a>
 ### Editing shortcuts
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**:
 
@@ -762,20 +926,21 @@ Here are the instructions for launching the app:
 
 **Test Cases**:
 
-- `edit i/bread n/apple q/3`
-  Expected: Shortcut for `bread` will be changed to `apple` and its quantity will be changed to `3`.
+- `edit i/bread n/apple q/3`<br>
+  **Expected**: Shortcut for `bread` will be changed to `apple` and its quantity will be changed to `3`.
 
-- `edit i/apple q/4 n/bread`
-  Expected: Shortcut for `apple` will be changed to `bread` and its quantity will be changed to `4`.
+- `edit i/apple q/4 n/bread`<br>
+  **Expected**: Shortcut for `apple` will be changed to `bread` and its quantity will be changed to `4`.
 
-- `edit i/bread q/-3`
-  Expected: Exception thrown due to invalid quantity.
+- `edit i/bread q/-3`<br>
+  **Expected**: Exception thrown due to invalid quantity.
 
-- `edit i/egg q/3`
-  Expected: Exception thrown due to non-existing shortcut.
+- `edit i/egg q/3`<br>
+  **Expected**: Exception thrown due to non-existing shortcut.
 
-
+<a id="delete-s"></a>
 ### Deleting shortcuts
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**:
 
@@ -785,17 +950,18 @@ Here are the instructions for launching the app:
 
 **Test Cases**:
 
-- `delete sc/apple`
-  Expected: Shortcut for `apple` will be deleted.
+- `delete sc/apple`<br>
+  **Expected**: Shortcut for `apple` will be deleted.
 
-- `delete sc/1`
-  Expected: Shortcut for `bread` will be deleted.
+- `delete sc/1`<br>
+  **Expected**: Shortcut for `bread` will be deleted.
 
-- `delete sc/10000`
-  Expected: Exception will be thrown due to accessing out of bounds data.
+- `delete sc/10000`<br>
+  **Expected**: Exception will be thrown due to accessing out of bounds data.
 
-
+<a id="use-s"></a>
 ### Using shortcuts
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**:
 
@@ -804,11 +970,11 @@ Here are the instructions for launching the app:
 
 **Test Cases**:
 
-- `sc bread`
-  Expected: Quantity for ingredient `bread` will be added by `2`.
+- `sc bread`<br>
+  **Expected**: Quantity for ingredient `bread` will be added by `2`.
 
-- `sc invalid`
-  Expected: Exception thrown because shortcut does not exist.
+- `sc invalid`<br>
+  **Expected**: Exception thrown because shortcut does not exist.
 
 ### Filter Recipe Functions
 

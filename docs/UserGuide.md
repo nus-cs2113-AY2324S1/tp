@@ -6,6 +6,9 @@ title: User Guide
 EssenMakanan is a **desktop app for managing recipes and ingredients in your inventory, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, EssenMakanan can get your recipes and ingredients management tasks done faster than traditional GUI apps.
 
+ **Important Note Before Starting**:<br> 
+ Ingredients refer to the items in your inventory, while recipes' ingredients refer to the ingredients needed to cook the recipe.
+
 --------------------------------------------------------------------------------------------------------------------
 # User Guide
 
