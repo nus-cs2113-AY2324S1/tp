@@ -9,6 +9,8 @@
 
 !define MAIN_COLOR #DBA800
 
+!define PERSON_COLOR #ffb6c1
+
 !define COMMAND_COLOR #728FCE
 
 !define PARSER_COLOR #00A36C

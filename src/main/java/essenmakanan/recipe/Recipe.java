@@ -12,17 +12,6 @@ public class Recipe {
     private RecipeStepList recipeSteps;
     private RecipeIngredientList recipeIngredients;
 
-    public Recipe(String title) {
-        this.title = title;
-        recipeSteps = new RecipeStepList();
-        recipeIngredients = new RecipeIngredientList();
-    }
-
-    public Recipe(String title, String[] steps) {
-        this.title = title;
-        recipeSteps = new RecipeStepList(steps);
-
-    }
 
     public Recipe(String title, RecipeStepList recipeSteps, RecipeIngredientList recipeIngredients) {
         this.title = title;
@@ -103,6 +92,12 @@ public class Recipe {
 
     }
 
+    /**
+     * Recipe stub for testing purposes
+     *
+     * @param title name of the stub
+     * @return a Recipe stub object for testing
+     */
     public static Recipe createRecipeStub(String title) {
         String[] recipeSteps = {"step1", "step2"};
         String[] recipeIngredients = {"i/flour,200,g", "i/egg,2,pc"};

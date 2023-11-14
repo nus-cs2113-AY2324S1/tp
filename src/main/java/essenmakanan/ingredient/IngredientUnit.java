@@ -15,6 +15,11 @@ public enum IngredientUnit {
         this.unit = unit;
     }
 
+    /**
+     * To get the value of the enum for more natural user interaction
+     *
+     * @return the value of the enum
+     */
     public String getValue() {
         return this.unit;
     }
