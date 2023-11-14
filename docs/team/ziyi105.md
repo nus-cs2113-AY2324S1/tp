@@ -9,9 +9,6 @@ CaféCTRL is a software engineering project for CS2113. The user interacts with 
 ## **Value Proposition**
 CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. Our CLI platform empowers Café proprietors to streamline inventory and menu management.
 
-## **Target User**
-Café proprietors who prefer typing on CLI than any other interaction method and are seeking for a software solution to optimize the management of their café's operations.
-
 -----------------------------------------------------------------------------------------------
 
 ## **Summary of Contributions**
@@ -94,7 +91,7 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 2. Adding theme to UG & DG
 3. Approving and merging PRs
 4. Checking coding standard for most of the classes ([PR #351](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/351))
-5. Reminding team members to use github effectively (although some of my reminders were ignored :")
+5. Reminding team members to use Github effectively (although some of my reminders were ignored :")
     - I encouraged my team members to report bugs using issue tracker on Github instead of using Telegram. (e.g., [#323](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/323))
     - I requested PR reviews from my team members as I noticed they haven't had a chance to do any review. (e.g., [PR #51](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51))
 6. Testing of features done my other team members
@@ -104,14 +101,12 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 1. Reviewed and approved 52 PRs in total.
    Some examples of PR reviewed: [#167](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/167), [#106](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/106), [#57](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/57),
    [#96](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/96)
-2. Created a tp howto to guide teammates on how to start coding tp 
-   ![Telegram screenshot of tp howto](../images_PPP/ziyi/tp_howto.png)
-3. Shared my opinions in Telegram group.
-   ![Relevant Telegram screenshot 1](../images_PPP/ziyi/telegram_chef_text.png)
-   ![Relevant Telegram screenshot 2](../images_PPP/ziyi/relevant_telegram_screenshot_2.png)
-   ![Relevant Telegram screenshot 3](../images_PPP/ziyi/relevant_telegram_screenshot_3.png)
-4. Read and compile important information on course website
-   ![Relevant Telegram screenshot 4](../images_PPP/ziyi/relevant_telagram_screenshot_4.png)
+2. Shared my opinions in Telegram group.<br>
+   <img height="100" src="../images_PPP/ziyi/telegram_chef_text.png" width="100"/>
+   <img height="100" src="../images_PPP/ziyi/relevant_telegram_screenshot_2.png" width="100"/>
+   <img height="100" src="../images_PPP/ziyi/relevant_telegram_screenshot_3.png" width="100"/>
+3. Read and compile important information on course website
+   <img height="100" src="../images_PPP/ziyi/relevant_telagram_screenshot_4.png" width="100"/>
 
 ### Contributions beyond the Project Team
 1. Posted 9 posts in the forum.
