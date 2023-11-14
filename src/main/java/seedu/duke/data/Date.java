@@ -33,7 +33,6 @@ public class Date {
     /**
      * The method is used to set up the date field of a Date object
      * It contains the actual implementation to parse date information from a string
-     * 
      * @param rawData refers to a date string
      * @throws IncorrectFormatException if failed to parse date string input
      */
@@ -41,8 +40,13 @@ public class Date {
         for (DateTimeFormatter formatter : formatters) {
             try {
                 date = LocalDate.parse(rawData, formatter);
+                if (date.isBefore(LocalDate.now())) {
+                    throw new IncorrectFormatException("Target Deadline has passed! ");
+                }
                 standardString = this.toString();
                 return;
+            } catch (IncorrectFormatException ide) {
+                throw new IncorrectFormatException("Target Deadline has passed! ");
             } catch (Exception exception) {
                 continue;
             }
