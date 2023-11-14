@@ -55,7 +55,28 @@ exactly one `RecipeStepList`.
 
 <img src="images/RecipeListClassDiagram.png" width="800"/>
 
+Two main functionalities that we have are to `add` and `delete` a recipe from the recipeList. Below is an object diagram to illustrate how the add and delete function works.
+
+1. The initial state of `recipes:RecipeList` stores 2 `Recipe`, namely, 'chicken pizza' and 'meatball noodles'
+![RecipeListInitialState](images/RecipeListInitialState.png)
+
+
+2. `Add` a new recipe 
+
+A new recipe titled "dumpings" will be added to `recipes:RecipeList`. The number of `recipe` stored in `recipes:RecipeList` will increase from 2 to 3.
+
+![RecipeListAdd](images/RecipeListAdd.png)
+
+3. `Delete` an existing recipe
+
+Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the command `delete r/2`, `recipes:RecipeList` will remove `chicken pizza:Recipe` from the ArrayList of recipes.
+
+![RecipeListDelete](images/RecipeListDelete.png)
+
+---
+
 ### Ingredient component
+
 ![IngredientListClassDiagram.png](images%2FIngredientListClassDiagram.png)
 
 ### Shortcut component
@@ -337,7 +358,31 @@ be executed as follows:
 <img src="images/AddNewIngredientSequenceDiagram.png" width="1676" />
 
 
-### Delete feature
+### Delete recipe feature
+
+The delete recipe feature is facilitated by the `DeleteRecipeCommand` class. Users can input
+"delete r/RECIPE_ID" or "delete r/RECIPE_TITLE" to trigger this command
+
+* **Step 1**
+
+  Input will be sent from the main `EssenMakanan` class to the `Parser` to identify the command type.
+
+
+* **Step 2**
+
+  A new `DeleteRecipeCommand` object will be created and will be sent back to main
+
+
+* **Step 3**
+
+  `commandObject#executeCommand()` will be called which will call `RecipeList#deleteRecipe()` using `recipeIndex`
+
+
+* **Step 4**
+
+  Finally, `RecipeList#deleteRecipe()` will print the recipe being deleted
+  to standard output
+
 
 ### Check recipe feature
 
@@ -542,14 +587,10 @@ be executed as follows:
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
-
 This product is for people who share kitchen space and ingredients with other cooks.
 
 
 ### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
 
 Easy and intuitive way to keep track of ingredients you have in your kitchen. This helps avoid buying duplicated ingredients, reminds you of the ingredients you need, and gives a visualisation of the recipe timeline to ensure that advance preparation is done in time, eg marinating.
 

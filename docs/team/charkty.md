@@ -63,7 +63,7 @@ Github Repository
 
 - RecipeList Class Diagram
 - RecipeList Object Diagram
-- Architecture Diagram
+- Architecture Diagrams for my commands
 - User Story Table
 
 
