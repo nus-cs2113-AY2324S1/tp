@@ -23,14 +23,13 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
 1.  **Edit Price** <br>
     Function: Allow user to edit price of the dish on the menu
     Command Format: `edit_price dish/DISH_INDEX price/NEW_PRICE`<br>
-    Error Handling: This command is able to detect missing argument tag, missing argument, wrong argument type, empty argument type and same price. It will then output specific error message to give user hint.
-    <br/><br/>
+    Error Handling: This command is able to detect missing argument tag, argument, wrong argument type, empty argument and same price. Specific error message will be shown to give user hint.
+    <br/>
    2.  **Help** <br>
        Function: Print out a list of commands and their usages to the user<br> 
        Extra info: This feature requires constant updating whenever a new feature is added. It is also very tedious to implement Junit test as the output is very long and keeps changing. Hence, I removed the Junit test in the last iteration as I feel that it is not necessary to have Junit test for a trivial `help` command.
    <br/><br/>
 3.  **Encoding & Decoding of Pantry Stock Storage File** <br>
-    Function: When the user calls bye command, all the ingredients stored in pantry will be encoded into format of `INGREDIENT_NAME | QUANTITY | UNIT`. The encoded data will be written in pantry_stock.txt file. When the user starts a new session, the data in the text file will be extracted out and be decoded to load the ingredients back to PantryStock class.<br>
     Error Handling: This command will still check for the validity of each argument (e.g., length of ingredient name, type of unit), and skip the particular ingredient if any of the arguments is not valid. This can prevent the user from accidentally adding invalid ingredients to the text file.
 
 ### Enhancements
@@ -38,13 +37,13 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
    [Relevant PR](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/143) <br>
    - Read and learned from the storage system in addressbook level 3 and adopted it in our project.
    - Implemented `Encoder.java`, `Decoder.java` and `Storage.java` with skeleton methods for my teammates to implement. 
-    <br><br>
+    <br>
 2. **Parser**<br>
    Created `Parser.java` for other teammates to use. Implemented ParserUtil interface to reduce coupling of Parser.java and CafeCRTL.java.
-   <br><br>
+   <br>
 3. **Messages & ErrorMessages**<br>
    Created classes to store all messages to the user as static constant.
-    <br><br>
+    <br>
 4. **Parser Regex** <br>
    [Relevant PR](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51) <br>
    - Learned `Pattern` and `Matcher` API by referring to addressbook and online documentations.
@@ -64,8 +63,6 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
 3. Known Issues
 4. Glossary
 5. General formatting
-   - Ensure consistency of features descriptions and table formatting
-   - Correct typos and grammar error
 
 ### Contributions to DG
 [DeveloperGuide](https://ay2324s1-cs2113-t17-2.github.io/tp/DeveloperGuide.html)
@@ -85,16 +82,15 @@ CaféCRTL aims to optimize managing of inventory and cash flow in a restaurant. 
 7. General formatting
    - Ensure consistency of features descriptions and diagrams
    - Correct typos and grammar errors
+8. Manual testing guide
 
 ### Other Contributions to Team-based Task
 1. Maintaining issue tracker with Dexter by labeling issues
-2. Adding theme to UG & DG
-3. Approving and merging PRs
-4. Checking coding standard for most of the classes ([PR #351](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/351))
-5. Reminding team members to use Github effectively (although some of my reminders were ignored :")
+2. Approving and merging PRs
+3. Checking coding standard for most of the classes ([PR #351](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/351))
+4. Reminding team members to use github effectively (although some of my reminders were ignored :")
     - I encouraged my team members to report bugs using issue tracker on Github instead of using Telegram. (e.g., [#323](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/323))
-    - I requested PR reviews from my team members as I noticed they haven't had a chance to do any review. (e.g., [PR #51](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51))
-6. Testing of features done my other team members
+5. Testing of features done my other team members
     - [#382](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/382), [#381](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/381). [#372](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/372), [#349](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/349)
 
 ### Review/Mentoring Contributions
