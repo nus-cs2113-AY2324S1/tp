@@ -440,6 +440,7 @@ Format: `bye`
      ------------------------------------------------------------------------
      ```
 7. If the user manually adds an order of dish that does not exist in menu to orders.txt, the order will still be generated but the new dish will not be added to the menu.
+8. The decoder of orders.txt will use the string **the last day has no orders but please account for it** as keywords to mark the end of the order history. If the user moves the string, any orders after it will be discarded. 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
