@@ -37,6 +37,9 @@
     * [Non-functional requirements](#non-functional-requirements)
     * [User stories](#user-stories)
   * [**Glossary**](#glossary)
+  * [**Instruction for manual testing**](#instruction-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Editing the price of a dish](#editing-the-price-of-a-dish)
 <!-- TOC -->
 
 ## **Acknowledgements**
@@ -442,3 +445,42 @@ Our product aims to optimize managing of inventory and cash flow in a restaurant
 ## **Glossary**
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Qty**: Quantity
+- **CLI**: Command Line Interface
+
+--------------------------------------------------------------------------------------------------------------------
+## **Instruction for manual testing**
+**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing. 
+
+### Launch and shutdown
+1. Initial launch
+   1. Download the jar file and copy into an empty folder
+   2. Double-click the jar file Expected: 
+      ```
+      Hello! Welcome to 
+      _/_/_/                _/_/              _/_/_/    _/                _/   
+      _/          _/_/_/    _/        _/_/    _/        _/_/_/_/  _/  _/_/  _/    
+      _/        _/    _/  _/_/_/_/  _/_/_/_/  _/          _/      _/_/      _/     
+      _/        _/    _/    _/      _/        _/          _/      _/        _/      
+      _/_/_/    _/_/_/    _/        _/_/_/    _/_/_/      _/_/  _/        _/
+      ------------------------------------------------------------------------
+      >
+      ```
+2. To exit the application, input `bye` in the CLI
+
+### Editing the price of a dish
+1. Prerequisites: Have at least one dish in the menu. Dish can be added with the following command:<br>
+    ```add name/chicken rice price/3.00 ingredient/rice qty/200g, ingredient/chicken qty/100g```
+2. Edit price of the dish by using the following command:<br>
+   ```edit_price dish/1 price/4.50```
+3. Expected outcome: <br>
+    ```
+   Price modified for the following dish: 
+   chicken rice $4.50
+    ```
+3. Exit the application with command: <br>
+   ```bye```
+4. In the menu.txt file under data folder, the following data can be found:<br>
+   ```
+    chicken rice | 4.5 | rice - 50 - g | chicken - 100 - g
+    ```
