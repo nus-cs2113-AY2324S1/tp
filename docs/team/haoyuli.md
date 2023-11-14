@@ -22,6 +22,10 @@ New Feature:
   - Print them out
 
 
+SequenceDiagram:
+- [AddNewRecipeSequenceDiagram.puml](docs/diagrams/AddNewRecipeSequenceDiagram.puml)
+
+
 The following are some relevant links
 
 - [EssenMakanan]
