@@ -25,9 +25,16 @@
 
 !define USER_COLOR #000000
 
-skinparam BackgroundColor #FFFFFFF
-
 skinparam Shadowing false
+
+skinparam Package {
+    BackgroundColor #FFFFFF
+    FontSize 15
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
 
 skinparam Class {
     FontColor #FFFFFF

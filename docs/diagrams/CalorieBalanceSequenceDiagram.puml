@@ -1,38 +1,25 @@
 @startuml
 
-!include style.puml
+title Sequence of CalorieBalance\n
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":CommandParser" as CommandParser LOGIC_COLOR
-participant ":CalorieBalanceCommand" as CalorieBalance LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
-end box
 
-box Model MODEL_COLOR_T1
-participant ":WorkoutList" as WorkoutList MODEL_COLOR
-participant ":MealList" as MealList MODEL_COLOR
-end box
+participant ": CalorieBalanceCommand" as CalorieBalanceCommand
+participant ": Date" as Date
+participant ": MealList" as MealList
+participant ": WorkoutList" as WorkoutList
 
--> LogicManager ++: execute ("caloriebalance 2023-11-13")
-LogicManager -> CommandParser ++: parseCommand("caloriebalance 2023-11-13")
-create CalorieBalance
-CommandParser -> CalorieBalance ++:
+[-> CalorieBalanceCommand ++: setArgument(args: String)
+CalorieBalanceCommand -> Date ++: Date.parseDate(args)
 return
-CommandParser -> CalorieBalance ++: setArguments("2023-11-13"), userCommandLine:String)
-return command:Command
-return command:Command
-LogicManager -> LogicManager ++: executeCommand()
-LogicManager -> CalorieBalance ++: execute()
-CalorieBalance -> WorkoutList ++: CalorieBalance()
-WorkoutList -> MealList ++: CalorieBalance()
+CalorieBalanceCommand -> MealList ++: execute()
+return calorieBalance: double
+CalorieBalanceCommand -> WorkoutList ++: execute()
+return calorieBalance: double
 
 
-return
-return
-create CommandResult
-CalorieBalance -> CommandResult ++:
-return result
-return result
+
+
+
+return : CommandResult
 
 @enduml

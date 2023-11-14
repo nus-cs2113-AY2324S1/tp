@@ -45,9 +45,8 @@ ___
 ### Main structure
 
 ### Architecture
-{insert diagram to show architecture of code}
-
-The ***Architecture Diagram*** above shows the high-level overview and design of the FitTrack app. 
+![](diagrams/ArchitectureDiagram.puml)
+The ***Architecture Diagram*** shows the high-level overview and design of the FitTrack app. 
 Given below is a quick overview of each component.
 
 **Tip:** The '.puml' files used to create the diagrams in this document can be found in [diagrams](./diagrams) 
@@ -174,7 +173,7 @@ the user to add their meals, workouts and number of steps respectively.
 
 **Implementation**
 
-Here is an example of addmeal command which has 2 compulsory arguments `name` and `c/` and one optional argument `d/`.
+Here is an example of `addmeal` command which has 2 compulsory arguments `name` and `c/` and one optional argument `d/`.
 
 Example:
 ```
@@ -185,22 +184,18 @@ Below are the steps that shows the implementation of addmeal/workout/steps.
 
 *Step 1:*
 
-The addmeal command instance calls ...
+The `addmeal` command instance calls the commandParser where the arguments are split - name, calories and date.
 
-Example:
-```
-{insert code snippet}
-```
 *Step 2:*
 
-Meal is added to mealList...
+The name of the meal, calories and date will be added to the mealList.
 
 *Step 3:*
 
 The added meal is then displayed to the user through the Ui
 
 
-The diagram below shows the class/sequence structure of the addmeal mechanism:
+The diagram below shows the class/sequence structure of the `addmeal` mechanism:
 ![AddMeal Sequence Diagram](images/AddMealSequenceDiagram.svg)
 
 ### 2. Delete Function
@@ -209,9 +204,13 @@ the user to delete their meals, workouts and number of steps respectively.
 
 **Design Considerations**
 
+When choosing an item to delete, the team decided to let the user delete based on the index of the workout/meal based on the workoutList/mealList.
+This is because it is likely the user has been referring to the mealList/workoutList before deciding to delete an item off it.
+Furthermore, the using of index (numbers) will be much easier to input for the users than the full name of the meal/workout.
+
 **Implementation**
 
-Here is an example of deletemeal command which has 1 compulsory argument `index`.
+Here is an example of `deletemeal` command which has 1 compulsory argument `index`.
 
 Example:
 ```
@@ -222,66 +221,40 @@ Below are the steps that shows the implementation of deletemeal/workout/steps.
 
 *Step 1:*
 
-The deletemeal command instance calls ...
+The `deletemeal` command instance calls DeleteMealCommand class.
 
 Example:
 ```
-{insert code snippet}
+Meal toDelete = mealList.getMeal(mealIndex);
+mealList.deleteMeal(mealIndex);
+return new CommandResult("I've deleted the following meal:" + "\n" + toDelete.toString());
 ```
 *Step 2:*
 
-Meal is deleted from mealList...
+The code above is a snippet of how a meal is deleted.
 
 *Step 3:*
 
 The deleted meal is then displayed to the user through the Ui
 
 
-The sequence diagram for deletemeal mechanism is shown [here](#command-component):
-
-### 3. View Function
-The view function has four commands - `viewmeal`, `viewworkout`, `viewsteps` and `viewprofile`. The four commands allows
-the user to view their meals, workouts, number of steps and user profile respectively.
-
-**Design Considerations**
-
-**Implementation**
-Here is an example of viewmeal command.
-
-Example:
-```
-viewmeal
-```
-
-Below are the steps that shows the implementation of viewmeal/workout/steps/profile.
-
-*Step 1:*
-
-The viewmeal command instance calls ...
-
-Example:
-```
-{insert code snippet}
-```
-*Step 2:*
-
-The list of meals are displayed to the user through the Ui.
+The sequence diagram for `deletemeal` mechanism is shown [here](#command-component):
 
 
-The diagram below shows the class/sequence structure of the {view} mechanism:
-{Insert sequence or class diagram}
-
-### 4. Find Function
+### 3. Find Function
 The find function has two commands - `findmeal` and `findworkout`. The two commands allows
 the user to view their meals, workouts, number of steps and user profile respectively.
 
 **Design Considerations**
+- Search Criteria: The function must allow the user to specify each keyword to filter items they are looking for.
+- Speed: To optimise and enhance the user experience, the search speed should be quick and responsive to reduce wait time of receiving search results.
 
 **Implementation**
-Here is an example of findmeal command which has 1 compulsory argument `keyword`. The keyword is the word
+
+Here is an example of `findmeal` command which has 1 compulsory argument `keyword`. The keyword is the word
 the user wishes to search for.
 
-Example:
+Example of usage:
 ```
 findmeal chicken
 ```
@@ -290,45 +263,79 @@ Below are the steps that shows the implementation of findmeal/workout.
 
 *Step 1:*
 
-The findmeal command instance calls ...
+The `findmeal` command instance calls FindMealCommand class where the keyword is parsed into setArguments to check its validity.
 
 Example:
 ```
-{insert code snippet}
+for (Meal meal : meals) {
+    if (meal.getName().contains(keyword)) {
+        if (!mealFound) {
+            mealFound = true;
+            String foundMessage = "These meals contain the keyword " + keyword + ":";
+            feedbackBuilder.append(foundMessage).append("\n");
+        }
+        String mealWithNumber = (mealNum + 1) + "." + meal;
+        feedbackBuilder.append(mealWithNumber).append("\n");
+        numFound++;
+    }
+    mealNum++;
+}
+if (!mealFound) {
+    return new CommandResult("Sorry, there are no such meals found.");
+}
 ```
 
 *Step 2:*
 
-Search mealList for the keyword...
+The code above shows the algorithm to search for the keyword. This is executed in the `execute()` function and the command result is returned.
 
 *Step 3:*
 
 The list of meals with the keyword will be shown to the user through the Ui.
 
-The diagram below shows the class/sequence structure of the {find} mechanism:
-{Insert sequence or class diagram}
+The diagram below shows the class/sequence structure of the `findmeal` mechanism:
+![Find Function Sequence Diagram](images/FindCommandSequenceDiagram.svg)
 
-### 5. Calories Function
-{description}
+### 4. Calories Function
+The calories function has three commands - `caloriesconsumed`, `caloriesBurnt` and `caloriebalance`. The commands allow the user to monitor the amount of calories they consumed/burnt from meals/workouts
+on a specified date. `caloriebalance` also allows them to monitor their net calorie gain daily 
+compared to their daily calorie limit that they set in their profile.
 
 **Design Considerations**
 
+The team have decided to come out with all three different features so the user can monitor these data separately.
+The data are then collated based on dates so that the users can monitor their intakes based on specific days,
+which aligns well with the daily calorie intake they have set for themselves.
+
+The creation of such features also will help in the convenience for the users as they do not have to manually
+count from the mealList/workoutList. Furthermore, caloriebalance will also aid users who are aiming for
+calorie deficit/surplus!
+
 **Implementation**
 
-{description of the command}
+Here is an example of `caloriebalance` command which has 1 compulsory argument date. The date is the specific date
+that the user wants to see his calorie balance for.
 
-{example of input} 
+Example of usage:
+```
+caloriebalance 2023-11-13
+```
 
 *Step 1:*
+The commandParser will make sure that the date inputted is in the correct format.
 
 *Step 2:*
+The program will then retrieve the daily calorie limit set by the user.
 
 *Step 3:*
+The current mealList is iterated through and subtract the daily calorie limit with whatever meals that are consumed
+on the specific date. The same will be done for workoutList.
 
-The diagram below shows the class/sequence structure of the caloriebalance mechanism:
+The diagram below shows the class/sequence structure of the `caloriebalance` mechanism:
 ![CalorieBalance Sequence Diagram](images/CalorieBalanceSequenceDiagram.svg)
 
-### 6. Help Function
+
+### 5. Help Function
 Help command outputs general help message if there's no argument,
 and outputs the help of the given command if certain command is given as an argument.
 
@@ -361,7 +368,7 @@ The result of command execution is the help message in step 3.
 The diagram below shows part of the class/sequence structure of the {help} mechanism:
 ![Help Function](images/HelpCommand.svg)
 
-### 7. Step Function
+### 6. Step Function
 The step functionality has a suite of commands namely `addsteps`, `deletesteps`, `viewsteps`, `totalsteps`
 and `getstepssuggestions`. 
 
@@ -369,6 +376,8 @@ The commands allow the user to add, delete, view, get total steps and get sugges
 they walk and their daily calorie goal) respectively.
 
 **Design Considerations**
+- The input of steps must be use-friendly and easy for user to input the number of steps. This would enhance user experience.
+- The presentation of steps has to be clear and fast.
 
 **Implementation**
 
@@ -398,7 +407,7 @@ The below sequence diagram shows the sequence of the `addsteps` command:
 ...and `deletesteps` command.
 ![Sequence of deleting steps](images/DeleteStepsCommand-0.png)
 
-### 8. Handling an Invalid Input
+### 7. Handling an Invalid Input
 If user enters invalid input, the app uses `InvalidCommand` class to handle it.
 
 **Design Considerations**
