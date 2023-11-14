@@ -11,24 +11,6 @@ import java.util.Scanner;
 public class RecipeIngredientList {
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-    public RecipeIngredientList() {
-        Scanner in = new Scanner(System.in);
-        String input;
-        boolean isAddingIngredients = true;
-
-        do {
-            System.out.println("Add ingredient (name,quantity,unit) of your recipe, type \"end\" to finish");
-            input = in.nextLine();
-
-            if (input.equals("end")) {
-                isAddingIngredients = false;
-            } else {
-                assert (input != null) : "Input is null";
-                this.addIngredient(input);
-            }
-        } while (isAddingIngredients);
-        System.out.println("Finished adding ingredients!");
-    }
 
     public RecipeIngredientList(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
@@ -45,6 +27,11 @@ public class RecipeIngredientList {
         }
     }
 
+    /**
+     * To add ingredient by name into the recipe
+     *
+     * @param input is the input of the ingredient
+     */
     public void addIngredient(String input) {
         try{
             Ingredient ingredient = IngredientParser.parseIngredient(input);
@@ -54,6 +41,11 @@ public class RecipeIngredientList {
         }
     }
 
+    /**
+     * To add ingredient object into the recipe
+     *
+     * @param ingredient is the name of the ingredient
+     */
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
@@ -62,10 +54,20 @@ public class RecipeIngredientList {
         return ingredients;
     }
 
+    /**
+     * To get ingredient by index
+     *
+     * @param index of the ingredient to be retrieved
+     */
     public Ingredient getIngredientByIndex(int index) {
         return ingredients.get(index);
     }
 
+    /**
+     * To check if ingredient exist using its name
+     * @param ingredientName is the name of the ingredient to check
+     * @return true if ingredient exist
+     */
     public boolean ingredientExist(String ingredientName) {
         String recipeIngredientName;
         for (Ingredient recipeIngredient : ingredients) {

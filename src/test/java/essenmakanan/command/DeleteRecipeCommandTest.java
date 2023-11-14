@@ -16,9 +16,10 @@ public class DeleteRecipeCommandTest {
         recipes = new RecipeList();
 
         String[] steps = {"step1", "step2"};
+        String[] ingredients = {"egg,2,pc"};
 
-        recipe0 = new Recipe("Bake a cake", steps);
-        recipe1 = new Recipe("Fry an egg", steps);
+        recipe0 = new Recipe("Bake a cake", steps, ingredients);
+        recipe1 = new Recipe("Fry an egg", steps, ingredients);
 
         recipes.addRecipe(recipe0);
         recipes.addRecipe(recipe1);

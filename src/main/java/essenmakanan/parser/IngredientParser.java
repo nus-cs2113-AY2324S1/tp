@@ -46,6 +46,13 @@ public class IngredientParser {
         return index;
     }
 
+    /**
+     * Get the difference between the needed ingredients and the available ingredients
+     *
+     * @param ingredientNeeded is the quantity needed
+     * @param ingredientAvailable is the quantity available
+     * @return quantity needed
+     */
     public static Double getInsufficientQuantity(Ingredient ingredientNeeded, Ingredient ingredientAvailable) {
         final Double zeroQuantity = 0.0;
         
@@ -59,6 +66,13 @@ public class IngredientParser {
         return zeroQuantity;
     }
 
+    /**
+     * Parses the ingredient input. Name, quantity and unit should be valid
+     *
+     * @param inputDetail The given input.
+     * @return A valid ingredient.
+     * @throws EssenFormatException If the input is invalid.
+     */
     public static Ingredient parseIngredient(String inputDetail)
             throws EssenFormatException {
 
@@ -97,6 +111,12 @@ public class IngredientParser {
         return newIngredient;
     }
 
+    /**
+     * Checks if the ingredient is valid. True of ingredient has valid structure.
+     *
+     * @param inputDetail The given input.
+     * @return Confirmation if the ingredient is valid.
+     */
     public static boolean isValidIngredient(String inputDetail) {
         inputDetail = inputDetail.replace("i/", "");
 
@@ -115,6 +135,13 @@ public class IngredientParser {
         return true;
     }
 
+    /**
+     * Maps the ingredient unit to the enum. For users to use the app more easily
+     *
+     * @param ingredientUnitString The given ingredient unit in natural language
+     * @return The mapped ingredient unit based on our enum
+     * @throws EssenFormatException If the ingredient unit is invalid or missing
+     */
     public static IngredientUnit mapIngredientUnit(String ingredientUnitString) throws EssenFormatException {
         IngredientUnit ingredientUnit;
         // return("Valid ingredient units are: g, kg, ml, l, tsp, tbsp, cup, pcs");

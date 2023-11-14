@@ -16,6 +16,9 @@ public class AddIngredientCommand extends Command {
         this.ingredients = ingredients;
     }
 
+    /**
+     * Check if command and its contents are valid. Parse a valid Ingredient and add to list
+     */
     @Override
     public void executeCommand() {
         String[] allIngredients = toAdd.split("i/");

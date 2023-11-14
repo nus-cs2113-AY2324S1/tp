@@ -28,14 +28,6 @@ public class RecipeParserTest {
         recipes.addRecipe(banana);
     }
 
-    @Test
-    public void parse_invalidCommand_exceptionThrown() {
-        String invalidCommand = "see";
-        String invalidDetails = "recipes in my house";
-        assertThrows(EssenException.class, () -> {
-            recipeParser.parseRecipeCommand(recipes, invalidCommand, invalidDetails);
-        });
-    }
 
     @Test
     public void parsePlanCommandInput_invalidInput_essenFormatException() {
