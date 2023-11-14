@@ -744,11 +744,11 @@ Here are the instructions for launching the app:
 * [Recipe: View Specific](#view-r)
 * [Recipe: Edit](#edit-r)
 * [Recipe: Delete](#delete-r)
-* [Recipe: Filter](#filter-r)
-* [Recipe: Duplicate](#duplicate-r)
 * [Recipe: Check](#check-r)
-* [Recipe: Plan](#plan-r)
+* [Recipe: Filter](#filter-r)
 * [Recipe: Execute](#execute-r)
+* [Recipe: Plan](#plan-r)
+* [Recipe: Duplicate](#duplicate-r)
 
 ---
 * [Shortcut: Add](#add-s)
@@ -882,31 +882,7 @@ All recipe titles can be seen using `view r` command.
 - `delete r/poached eggs`<br>
 **Expected**: Recipe with title `poached eggs` will be deleted.
 
-<a id="duplicate-r"></a>
-### Duplicate Recipe
-(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
-**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
-All recipe titles can be seen using `view r` command.
-
-- `duplicate r/poached eggs`<br>
-  **Expected**: Recipe with title `poached eggs (copy)` will be created.
-
-
-<a id="filter-r"></a>
-### Filter Recipe Functions
-(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
-
-**Prerequisites**:
-
-- Ensure that the following recipes are added to your `RecipeList` beforehand.
-  - A recipe with bread ingredient: `add r/sausage bread i/bread,1,pc i/sausage,1,pc s/fry sausage in pan s/place sausage in bread`
-  - A recipe without bread ingredient: `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
-
-**Test Cases**:
-
-- `filter recipe i/bread` <br>
-  **Expected:** A message showing all recipes containing bread as an ingredient. In this case, `sausage bread` will definitely be on the list.
 
 <a id="check-r"></a>
 ### Check Recipe Functions
@@ -927,19 +903,20 @@ All recipe titles can be seen using `view r` command.
   **Expected:** A message will appear indicating the ingredients you need for recipe with index 1. To check which recipe it is, use `view r` command
 
 
-<a id="plan-r"></a>
-### Plan Recipe Functions
+<a id="filter-r"></a>
+### Filter Recipe Functions
 (<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 **Prerequisites**:
 
-- Ensure that you have at least 2 recipes in your `RecipeList`, if not, use the following commands
-  - `add r/sausage bread i/bread,1,pc i/sausage,1,pc s/fry sausage in pan s/place sausage in bread`
-  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
+- Ensure that the following recipes are added to your `RecipeList` beforehand.
+  - A recipe with bread ingredient: `add r/sausage bread i/bread,1,pc i/sausage,1,pc s/fry sausage in pan s/place sausage in bread`
+  - A recipe without bread ingredient: `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
 
 **Test Cases**:
-- `plan 2 r/1 r/2` <br>
-  **Expected:** A message showing all reicpes you have chosen, all ingredients needed for all recipes, and ingredients that you need to buy as you don't have sufficient
+
+- `filter recipe i/bread` <br>
+  **Expected:** A message showing all recipes containing bread as an ingredient. In this case, `sausage bread` will definitely be on the list.
 
 
 <a id="execute-r"></a>
@@ -957,6 +934,31 @@ All recipe titles can be seen using `view r` command.
 - `execute dumpling soup` <br>
   **Expected:** A message on the updated quantity of your ingredients will be shown
 
+
+<a id="plan-r"></a>
+### Plan Recipe Functions
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Prerequisites**:
+
+- Ensure that you have at least 2 recipes in your `RecipeList`, if not, use the following commands
+  - `add r/sausage bread i/bread,1,pc i/sausage,1,pc s/fry sausage in pan s/place sausage in bread`
+  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
+
+**Test Cases**:
+- `plan 2 r/1 r/2` <br>
+  **Expected:** A message showing all reicpes you have chosen, all ingredients needed for all recipes, and ingredients that you need to buy as you don't have sufficient
+
+
+<a id="duplicate-r"></a>
+### Duplicate Recipe
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+**Prerequisites**: There should be at least 1 recipe in the list, and you know the title.
+All recipe titles can be seen using `view r` command.
+
+- `duplicate r/poached eggs`<br>
+  **Expected**: Recipe with title `poached eggs (copy)` will be created.
 
 
 <a id="add-s"></a>
