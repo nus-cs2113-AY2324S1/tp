@@ -381,7 +381,7 @@ When the `execute()` method is invoked
 
 ### Help
 
-![Help Execution](images/sequence/HelpCommand_execute.png)
+![Help Execution](images/sequence/HelpCommand_execute.svg)
 <br>*Figure 25: Execution of `help` Command Sequence Diagram*
 
 API: [HelpCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/HelpCommand.java)
