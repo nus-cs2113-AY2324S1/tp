@@ -421,6 +421,7 @@ Managing and monitoring financial activities can sometimes be a hassle for stude
 | v2.0    | university student | filter income based on categories                         | I can view my income from a specific source              |
 | v2.0    | university student | filter expenses based on categories                       | I can view my expense on a specific category             |
 | v2.0    | university student | view details of income or expenses                        | I can have a better understanding of my financial habit  |
+
 ## Appendix A: Product Scope
 ### Target user profile:
 * **Primary Users:** University students with a need to track and manage their financial activities.
