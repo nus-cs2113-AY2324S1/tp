@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":EditIngredientCommand" as EditIngredientCommand COMMAND_COLOR
+participant "ingredients:IngredientList" as Ingredients INGREDIENT_LIST_COLOR
+participant "<<class>>\nUi" as Ui UI_COLOR
+
+[-> EditIngredientCommand : executeCommand()
+activate EditIngredientCommand
+
+EditIngredientCommand --> Ingredients: getIngredient(ingredientName)
+activate Ingredients
+Ingredients --> EditIngredientCommand: ingredient object to edit
+
+
+EditIngredientCommand -[hidden]> Ingredients
+EditIngredientCommand -> Ingredients : editIngredient(ingredientToEdit, editDetails)
+
+loop for each editDetail
+alt edit name
+Ingredients -> Ingredients : setName(newName)
+activate Ingredients
+deactivate Ingredients
+
+else edit quantity
+Ingredients -> Ingredients : setQuantity(newQuantity)
+activate Ingredients
+deactivate Ingredients
+
+else edit unit
+Ingredients -> Ingredients : setUnit(newUnit)
+activate Ingredients
+deactivate Ingredients
+
+end alt
+
+Ingredients --> Ui : printMessage()
+activate Ui
+Ui --> Ingredients: output
+deactivate Ui
+end
+
+deactivate Ui
+Ingredients --> EditIngredientCommand
+deactivate Ingredients
+
+
+[<--EditIngredientCommand
+deactivate EditIngredientCommand
+@enduml

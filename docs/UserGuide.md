@@ -56,19 +56,21 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 ---
 
 <a id="recipe-command-anchor"></a>
-### [Recipes Summary of Commands](#feature-recipe)
+
+### [Recipes Summary of Commands](#feature-recipe) 
+
 | Action                                                                     | Format                                                                                                                                                                      | Example                                                                                                       |
 |----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | [View all recipes](#view-recipes)                                          | view r                                                                                                                                                                      | view r                                                                                                        |
 | [View specific recipe](#view-recipe)                                       | view r/RECIPE_ID                                                                                                                                                            | view r/1                                                                                                      |
-| [View all available recipes](#available-recipe)| view ar|view ar|
+| [View all available recipes](#view-available-recipe)                       | view ar| view ar                                                                                                       |
 | [Add recipe](#add-recipe)                                                  | add r/RECIPE_TITLE [t/TAG] s/STEP_DESCRIPTION [s/...] [d/DURATION] i/INGREDIENT_NAME,QUANTITY,UNIT [i/...]                                                                  | add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients i/egg,2,pc                 |
 | [Edit recipe](#edit-recipe)                                                | edit r/RECIPE_TITLE [n/NEW_TITLE] [s/STEP_INDEX,NEW_STEP_DESCRIPTION] [ i/INGREDIENT_INDEX, [n-NEW_INGREDIENT_NAME], [q-NEW_INGREDIENT_QUANTITY], [u-NEW_INGREDIENT_UNIT] ] | edit r/bread n/white bread s/1,new step i/1,n-new ingredient name,q-new ingredient quantity, u-new ingredient |
 | [Delete Recipe](#delete-recipe)                                            | delete r/RECIPE_TITLE OR delete r/RECIPE_INDEX                                                                                                                              | delete r/meatball noodles OR delete r/2                                                                       |
 | [Duplicate Recipe](#duplicate-recipe)                                      | duplicate RECIPE_NAME or duplicate RECIPE_INDEX                                                                                                                             | duplicate sandwich or duplicate 1                                                                             |                                                                                                                                           
 | [Check recipe](#check-recipe) <br>(view missing ingredients from a recipe) | check RECIPE_TITLE <br><br>check RECIPE_ID                                                                                                                                  | check dumpling noodles <br><br> check 1                                                                       |
 | [Filter recipe by ingredients](#filter-recipe)                             | filter recipe i/INGREDIENT_NAME [i/...]                                                                                                                                     | filter recipe i/chicken i/noodles                                                                             |
-| [Plan recipes for the week](#plan-recipe)                                  | plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]                                                                                                                                  | filter 2 r/1 r/3                                                                                              |
+| [Plan recipes for the week](#plan-recipe)                                  | plan NUMBER_OF_RECIPES r/RECIPE_ID [r/...]                                                                                                                                  | plan 2 r/1 r/3                                                                                                |
 | [Execute recipe](#execute-recipe)                                          | execute RECIPE_TITLE                                                                                                                                                        | execute dumpling noodles                                                                                      |
 
 ---
@@ -162,7 +164,7 @@ Examples :
 to show a recipe at index ‘1’ of the list.
 ---
 
-<a id="view-ar"></a>
+<a id="view-available-recipe"></a>
 ### View all available recipes - `view ar`
 (<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
@@ -405,6 +407,7 @@ Example :
 * `add i/bread,2,pc` to add `2 pieces of bread` into the list
 * `add i/cooking oil,5,l` to add `5 liters of cooking oil` into the list
 ![AddToIngredientQuantityExample.png](images%2FAddToIngredientQuantityExample.png)
+* `add i/cooking oil,5,l i/bread,2,pc` to add 2 ingredients in one command
 
 ---
 
@@ -422,7 +425,7 @@ Example :
 
 ---
 <a id="delete-ingredient"></a>
-#### Delete ingredient - `delete i/INGREDIENT_INDEX` OR `[delete i/INGREDIENT_NAME]`
+#### Delete ingredient - `delete i/INGREDIENT_INDEX` OR `delete i/INGREDIENT_NAME`
 (<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Delete an ingredient based on the selected index in the list or the ingredient's name.
@@ -523,7 +526,10 @@ Example:
 
 ## FAQ
 
-**Q**: Why are there 2 methods to add a recipe? 
+**Q**: Why can't I execute a recipe? 
 
-**A**: We are exploring the best way to add a recipe, for now users can 
-choose to add a recipe with steps and ingredients or add a recipe with steps duration.
+**A**: Use `check` command to ensure that you have all the ingredients needed for the recipe.
+
+**Q**: Why is there a step ID??
+
+**A**: Enable easy referencing when editing steps
