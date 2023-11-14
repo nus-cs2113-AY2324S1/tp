@@ -249,6 +249,11 @@ Format: `exit`
 
 **A**: Sorry but we do not support the function to edit a list directly. But you can remove a unwanted data from a list and insert a new data again.
 
+**Q3**: I have accidentally mark an uncompolished goal as achieved. Could I change the achievement?
+
+**A**: Sorry but we do not allow user to modify achievement list. If you really want to destory a false record, then you must remove all the achievements and start a new save file. One way of doing this is to delete the file achievement.txt under the folder "data" in your jar file repository.
+
+
 ## Command Summary
 
 * Log an exercise `log MONTH DAY EXERCISE_NAME CALORIES_BURNED`
