@@ -64,6 +64,7 @@ Github Repository
 - RecipeList Class Diagram
 - RecipeList Object Diagram
 - Architecture Diagram
+- User Story Table
 
 
 ### User Guide implementation work:

@@ -61,6 +61,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 |----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | [View all recipes](#view-recipes)                                          | view r                                                                                                                                                                      | view r                                                                                                        |
 | [View specific recipe](#view-recipe)                                       | view r/RECIPE_ID                                                                                                                                                            | view r/1                                                                                                      |
+| [View all available recipes](#available-recipe)| view ar|view ar|
 | [Add recipe](#add-recipe)                                                  | add r/RECIPE_TITLE [t/TAG] s/STEP_DESCRIPTION [s/...] [d/DURATION] i/INGREDIENT_NAME,QUANTITY,UNIT [i/...]                                                                  | add r/scramble egg t/1 s/buy ingredients t/2 s/wash ingredients s/bake ingredients i/egg,2,pc                 |
 | [Edit recipe](#edit-recipe)                                                | edit r/RECIPE_TITLE [n/NEW_TITLE] [s/STEP_INDEX,NEW_STEP_DESCRIPTION] [ i/INGREDIENT_INDEX, [n-NEW_INGREDIENT_NAME], [q-NEW_INGREDIENT_QUANTITY], [u-NEW_INGREDIENT_UNIT] ] | edit r/bread n/white bread s/1,new step i/1,n-new ingredient name,q-new ingredient quantity, u-new ingredient |
 | [Delete Recipe](#delete-recipe)                                            | delete r/RECIPE_TITLE OR delete r/RECIPE_INDEX                                                                                                                              | delete r/meatball noodles OR delete r/2                                                                       |
@@ -160,6 +161,23 @@ Examples :
 * `view r/1` 
 to show a recipe at index ‘1’ of the list.
 ---
+
+<a id="view-ar"></a>
+### View all available recipes - `view ar`
+(<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+View all recipes you are able to execute given the ingredients you have in your ingredient inventory. 
+
+For example
+- With the following ingredients in my inventory,
+
+![img_1.png](images/ViewARCommand1.png)
+
+- I am able to see which recipes only require at most 200g of flour and 1 egg using the `view ar` command
+
+![img_2.png](images/ViewARCommand2.png)
+
+- As seen, I am able to cook recipes "bread" and "scrambled egg" with my current inventory ingredients!
 
 <a id="add-recipe"></a>
 #### Add new recipe - `add r/RECIPE_TITLE [t/TAG] s/STEP_DESCRIPTION [s/...] [d/DURATION] i/INGREDIENT_NAME,QUANTITY,UNIT [i/...]`
