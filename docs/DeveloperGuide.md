@@ -15,6 +15,33 @@ This project has been heavily modified from [Spaceman Task Manager](https://gith
 Thanks to Dr Akshay Narayan (module coordinator) and Irving (TA) for their guidance 
 throughout the course of this project.
 
+## Table of Contents
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [Main Components](#main-components)
+  - [Interaction Flow](#interaction-flow)
+  - [UI Component](#ui-component)
+  - [Data Component](#data-component)
+  - [Command Component](#command-component)
+  - [Parser Component](#parser-component)
+  - [Storage Component](#storage-component)
+- [Implementation](#implementation)
+  - [`add` Transaction Feature](#add-transaction-feature)
+  - [`list` Transactions Feature](#list-transactions-feature)
+  - [`view` Transactions Feature](#view-transaction-feature)
+  - [`edit` Transaction Feature](#edit-transaction-feature)
+  - [`help` Feature](#help-feature)
+  - [`filter` Feature](#filter-feature)
+  - [`budget` Feature](#budget-feature)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Instructions for manual testing](#appendix-d-instructions-for-manual-testing)
+
+-----------------------------------------------------------------------------------------------------------------------
+
 ## Design
 
 ### Architecture
@@ -120,7 +147,7 @@ If it is not valid, an object of class `InvalidCommand` will be constructed. The
 `InvalidCommand` class simply raises an exception that an invalid command has been entered, which will be shown 
 to the user.
 
-### Parser component
+### Parser Component
 
 <img src="images/ParserClassDiagram.png" width="500" />
 
@@ -130,7 +157,7 @@ For example, if the user input is to add an expense, an `Expense` and `AddComman
 `Parser` also uses `ExpenseCategory`, `AllowanceCategory`, and `TransactionCategory` for creating expenses, 
 creating allowances, and filtering transactions respectively.
 
-### Storage component
+### Storage Component
 
 <img src="images/StorageClassDiagram.png" width="500" />
 
@@ -376,40 +403,22 @@ To ensure the persistence of the budget and proper initialization, the following
 2. **Storage:** Manages the reading and writing of the budget to the `budget.txt` file. It ensures that the budget is persistently stored and can be retrieved when needed.
 These additions provide users with a warning feature, enhancing the financial tracking capabilities of 🪙NUScents🪙. Users can now set a budget, and the application will inform them about their spending status concerning the budget within the `list` feature.
 
-## Product scope
+## Appendix A: Product Scope
 
-### Target user profile
-SOC students at NUS who are tech-savvy, with limited allowance to monitor their finances and expense management
-while balancing aspects of university-life, academics and social activities. SOC students are known to be familiar with 
-CLI applications, which are often built to be efficient and clutter-free.
+### Target user profile:
+* **Primary Users:** University students with a need to track and manage their financial activities.
+* **Preference for Desktop Applications:** Users who prefer desktop apps over other types.
+* **Typing Proficiency:** Those who possess swift typing skills and prefer keyboard commands for efficiency.
+* **Command Line Interface (CLI) Affinity:** Users who are not only comfortable with but also prefer CLI applications for their speed and minimalism.
 
-### Value proposition
+### Value proposition: 
+* **Enhance Transaction Management:** Facilitate quick tracking and management of financial transactions, surpassing the efficiency of traditional mouse or GUI-based applications.
+* **Optimize User Experience:** Provide a user-centric solution that aligns with the fast-paced lifestyle of university students, enabling them to manage their finances with ease and precision.
+* **Efficiency:** Users can perform financial tasks quickly and easily via the CLI, reducing the time and effort required for financial management.
+* **Clutter-Free Interface:** The design minimizes distractions, providing a focused environment for users to concentrate on their financial activities.
+* **Tailored to Student Needs:** Addressing the specific requirements of SOC students ensures relevance and practicality for the target user base.
 
-**Problem:**
-Managing and monitoring financial activities can sometimes be a hassle for students. With various transactions and expenses throughout the semester, it's possible to lose track and struggle with financial organization.
-
-**Solution:**
-🪙NUScents🪙 offers a tailor-made financial tracking solution for SOC students at NUS. It streamlines financial management through a Command Line Interface (CLI), providing a clutter-free solution for users to efficiently manage and monitor their financial activities.
-
-**Key Features:**
-
-- **Optimized CLI:** A user-friendly CLI ensures a seamless and efficient experience for inputting and retrieving financial data.
-
-- **Customization:** Tailored specifically for SOC students at NUS, the application aligns with the unique financial needs and challenges of the user base.
-
-- **Simplified Financial Tracking:** Through intuitive commands, users can effortlessly add, query, and manage financial transactions, enhancing overall financial organization.
-
-**Benefits:**
-
-- **Efficiency:** Users can perform financial tasks quickly and easily via the CLI, reducing the time and effort required for financial management.
-
-- **Clutter-Free Interface:** The design minimizes distractions, providing a focused environment for users to concentrate on their financial activities.
-
-- **Tailored to Student Needs:** Addressing the specific requirements of SOC students ensures relevance and practicality for the target user base.
-
-🪙NUScents🪙 is not just a financial tracker; it's a streamlined solution crafted to simplify the financial lives of SOC students at NUS, offering efficiency,
-
-## User Stories
+## Appendix B: User Stories
 
 | Version | As a ...           | I want to ...                                             | So that I can ...                                        |
 |---------|--------------------|-----------------------------------------------------------|----------------------------------------------------------|
@@ -429,15 +438,6 @@ Managing and monitoring financial activities can sometimes be a hassle for stude
 | v2.0    | university student | filter expenses based on categories                       | I can view my expense on a specific category             |
 | v2.0    | university student | view details of income or expenses                        | I can have a better understanding of my financial habit  |
 
-## Appendix A: Product Scope
-### Target user profile:
-* **Primary Users:** University students with a need to track and manage their financial activities.
-* **Preference for Desktop Applications:** Users who prefer desktop apps over other types.
-* **Typing Proficiency:** Those who possess swift typing skills and prefer keyboard commands for efficiency.
-* **Command Line Interface (CLI) Affinity:** Users who are not only comfortable with but also prefer CLI applications for their speed and minimalism.
-### Value proposition: 
-* **Enhance Transaction Management:** Facilitate quick tracking and management of financial transactions, surpassing the efficiency of traditional mouse or GUI-based applications.
-* **Optimize User Experience:** Provide a user-centric solution that aligns with the fast-paced lifestyle of university students, enabling them to manage their finances with ease and precision.
 ## Appendix C: Non-Functional Requirements
 
 ### Performance
@@ -482,6 +482,7 @@ Managing and monitoring financial activities can sometimes be a hassle for stude
 
 **Transaction Logs:** Define a logging mechanism that captures relevant information for storage functions. Logs should be stored securely and be available for auditing purposes.
 
+
 ## Instructions for manual testing
 Please refer to [User Guide](UserGuide.md) for example user inputs.
 You may also vary the user input to an invalid one to see that the program handles it correctly.
@@ -503,4 +504,3 @@ Here are some example invalid inputs to test:
 `view first index`
 
 `edit first index`
-
