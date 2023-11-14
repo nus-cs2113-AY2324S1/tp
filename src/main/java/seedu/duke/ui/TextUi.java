@@ -15,6 +15,7 @@ import java.util.Scanner;
 import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.Goal;
+import seedu.duke.data.GoalList;
 import seedu.duke.data.Printable;
 
 /**
@@ -217,6 +218,61 @@ public class TextUi {
         int currentNoOfGoal = Duke.goalList.getGoalCount();
         Goal newlyAddedGoal = Duke.goalList.getGoal(currentNoOfGoal - 1);
         return "Nice! I have added the following goal to your goals list: \n\t" + newlyAddedGoal;
+    }
+
+    /**
+     * This is used to show the content inside the goal list.
+     * It first checks if the list contains at least one goal,
+     * then print the goal by using string builder.
+     * @return String containing all the inserted goal in the global field goal list
+     */
+    public static String showGoalList() {
+        int numberOfGoal = Duke.goalList.getGoalCount();
+        if (numberOfGoal == 0) {
+            return "Oh not! You don't have any goal to achieve currently.";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here you go! Remember to stick to your exercise and meal plans.\n");
+        for (int i = 0; i < numberOfGoal; i++){
+            sb.append(i + 1).append(". ").append(Duke.goalList.getGoal(i)).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Similar to show Goal List. This method is used to list out all achieved goal in record.
+     * @return String containing all achieved goal
+     */
+    public static String showAchievement() {
+        int numberOfGoal = Duke.achievedGoals.getGoalCount();
+        if (numberOfGoal == 0) {
+            return "Add oil! There is no achievement found.";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Congratulation! See your achievements below: \n");
+        for (int i = 0; i < numberOfGoal; i++){
+            sb.append(i + 1).append(". [A]").append(Duke.achievedGoals.getGoal(i)).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * This method return content of goal list in any goalList object
+     * It is typically used to overwrite save file whenever change in goal records
+     * @param goals a GoalList object
+     * @return String containing goal information of the goal object
+     */
+    public static String contentOfGoalList(GoalList goals) {
+        if (goals.getGoalCount() == 0) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < goals.getGoalCount(); i++){
+            sb.append(goals.getGoal(i)).append("\n");
+        }
+        return sb.toString();
     }
 
     public static String buildingFileMsg() {
