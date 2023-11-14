@@ -1,5 +1,7 @@
-Creating database
 Directory successfully created
+Log file successfully created
+Creating database
+Directory located
 Data text file successfully created
 Creating database
 Directory located
