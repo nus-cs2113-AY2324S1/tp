@@ -82,16 +82,16 @@ public class ShortcutParser {
         String oldName = shortcut.getIngredientName();
 
         try {
-            if (!ingredients.exist(newName) || shortcuts.exist(newName)) {
-                throw new EssenShortcutException();
-            }
-
             if (hasEditName) {
                 throw new EssenEditShortcutException("usage");
             }
 
             if (newName.equals(oldName)) {
                 throw new EssenEditShortcutException("same name");
+            }
+
+            if (!ingredients.exist(newName) || shortcuts.exist(newName)) {
+                throw new EssenShortcutException();
             }
 
             Ui.printEditShortcutName(shortcut.getIngredientName(), newName);
