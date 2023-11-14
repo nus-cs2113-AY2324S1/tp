@@ -12,7 +12,9 @@ activate WatchListCommand
         WatchList -> WatchList : getExpiredStocks()
         activate WatchList
         return queryStocks
-        WatchList -> WatchList : fetchLatestWatchListInfo()
+        WatchList -> WatchList : fetchFMPStockPrices()
+        activate WatchList
+        return
     return
     WatchListCommand -> Ui: printStocksInfo(watchlist)
     activate Ui

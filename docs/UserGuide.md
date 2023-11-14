@@ -561,8 +561,8 @@ Format of watchlist output:
 |--------------------------------------------------------|---------------------------------------|------------------------------------------------|--------------------------------|-------------------------------|------------------------|-------------------------------------------------------------------------|
 | Ticker Symbol<br/>(Abbreviation for Company 's Stocks) | Exchange at which the stock is traded | Current latest price of stock (before closing) | Intraday Highest trading price | Intraday Lowest trading price | Name of equity product | Last time at which the information of the stocks was updated by the API |
 
-- Note: To prevent overloading of the stock API, we will only be making watchlist updates every 5 minutes. 
-Any request within the 5-minute window will only show the last updated watchlist
+- Note: To prevent overloading of the stock API, we will only be making watchlist updates every 10 minutes. 
+Any request within the 10-minute window will only show the last updated watchlist
 
 ### Adding Stock to Watchlist: `addstock`
 
