@@ -695,8 +695,11 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 ## Appendix - C Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. Should be able to hold up to 1000 recipes and ingredients without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 recipes, ingredients and shortcuts without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The app is free for all users.
+5. Should be able to work on a typical CLI and not require any third-party software.
+6. Should response no more than 5 seconds for any user interactions
 
 <a id="glossary"></a>
 ## Appendix - D Glossary
@@ -705,3 +708,8 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 
 <a id="testing"></a>
 ## Appendix - E Instructions for Manual Testing
+Below are instructions for users who want to test the app manually.
+
+```
+Note: These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing. 
+```
