@@ -33,7 +33,7 @@ Github Repository
 
 | Command                       | User Story                                                                                                                     | 
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| Delete a Recipe               |User wants to delete a recipe added| delete r/RECIPE_TITLE<br/>OR<br/> delete r/RECIPE_ID | Recipe deleted from database|
+| Delete a Recipe               |User wants to delete a recipe added|
 | Filter Recipes by Ingredients | User has cravings for a ingredient item (such as rice or fish) and wants to see which recipes contain that specific ingredient | 
 | Check Recipe                  |User wants to check if they have all the ingredients needed to start a recipe| 
 | Plan Recipe                   |User wants to plan their groccery shopping for the week and wants to know ingredients needed for the week|
@@ -57,10 +57,7 @@ Github Repository
 
 ### Documentation Guide implementation work:
 
-- Sequence diagram for my commands (below is an example)
-
-![Filter Recipes By Ingredients](../images/FilterRecipesSequenceDiagram.png)
-
+- Sequence diagram for my commands
 - RecipeList Class Diagram
 - RecipeList Object Diagram
 - Architecture Diagrams for my commands
