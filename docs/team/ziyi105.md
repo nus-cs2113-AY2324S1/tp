@@ -97,6 +97,8 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 5. Reminding team members to use github effectively (although some of my reminders were ignored :")
     - I encouraged my team members to report bugs using issue tracker on Github instead of using Telegram. (e.g., [#323](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/323))
     - I requested PR reviews from my team members as I noticed they haven't had a chance to do any review. (e.g., [PR #51](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/51))
+6. Testing of features done my other team members
+    - [#382](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/382), [#381](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/381). [#372](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/372), [#349](https://github.com/AY2324S1-CS2113-T17-2/tp/issues/349)
 
 ### Review/Mentoring Contributions
 1. Reviewed and approved 52 PRs in total.
