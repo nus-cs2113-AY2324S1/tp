@@ -29,6 +29,8 @@ Github Repository
 
 ### Recipes
 
+- Contributed to Recipe, RecipeList and RecipeParser classes
+
 | Command                       | User Story                                                                                                                     | 
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | Delete a Recipe               |User wants to delete a recipe added| delete r/RECIPE_TITLE<br/>OR<br/> delete r/RECIPE_ID | Recipe deleted from database|
@@ -57,7 +59,7 @@ Github Repository
 
 - Sequence diagram for my commands (below is an example)
 
-![Filter Recipes By Ingredients](../images/FilterRecipesSD.png)
+![Filter Recipes By Ingredients](../images/FilterRecipesSequenceDiagram.png)
 
 - RecipeList Class Diagram
 - RecipeList Object Diagram

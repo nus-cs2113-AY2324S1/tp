@@ -5,9 +5,9 @@ skinparam arrowColor CLASS_ARROW_COLOR
 skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
 
 Class IngredientList {
-    - ingredients: Ingredient[]
+    - ingredients: ArrayList<Ingredient>
 
-    + getIngredients(): Ingredient[]
+    + getIngredients(): ArrayList<Ingredient>
     + getIngredient(index: Integer): Ingredient
     + getSize(): Integer
     + isEmpty(): Boolean
