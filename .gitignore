@@ -13,5 +13,18 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
+
+text-ui-test/runtest.bat
+text-ui-test/runtest.sh
+WildWatch.log
+text-ui-test/ACTUAL.TXT
+META-INF/MANIFEST.MF
 text-ui-test/EXPECTED-UNIX.TXT
+WildWatch.log.1
+WildWatch.log.1.lck
+WildWatch.log.lck
+WildWatch.txt
+WildWatch Entry Collection.txt
+~$System Architecture.pptx
+System Architecture.pptx
+*.csv

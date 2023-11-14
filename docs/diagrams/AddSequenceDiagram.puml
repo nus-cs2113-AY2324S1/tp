@@ -1,0 +1,57 @@
+@startuml
+!include Style.puml
+
+box
+participant "CommandHandler" <<class>>
+participant ":EntryHandler" as EntryHandler
+participant ":AddCommandParser" as AddCommandParser
+participant ":AddCommand" as AddCommand
+end box
+
+-> CommandHandler : processCommand(inputBuffer)
+activate CommandHandler
+CommandHandler -> EntryHandler
+
+activate EntryHandler
+
+create AddCommandParser
+EntryHandler -> AddCommandParser : AddCommandParser()
+activate AddCommandParser
+
+AddCommandParser --> EntryHandler
+deactivate AddCommandParser
+
+EntryHandler -> AddCommandParser : parse(input)
+activate AddCommandParser
+
+AddCommandParser -> AddCommandParser : performChecks(input)
+activate AddCommandParser
+
+deactivate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(entry)
+activate AddCommand
+
+AddCommand --> AddCommandParser : command
+deactivate AddCommand
+
+AddCommandParser --> EntryHandler : command
+deactivate AddCommandParser
+
+EntryHandler --> CommandHandler : command
+deactivate EntryHandler
+
+CommandHandler -> CommandHandler : executeCommand(command)
+activate CommandHandler
+
+CommandHandler -> AddCommand : execute()
+activate AddCommand
+
+deactivate AddCommand
+deactivate CommandHandler
+
+<-- CommandHandler
+deactivate CommandHandler
+
+@enduml

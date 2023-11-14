@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+title Help Command
+
+participant a as "WildWatch"
+participant b as "InputHandler"
+participant c as "Ui"
+participant d as "LOGGER"
+participant e as "CommandHandler"
+participant f as "EntryHandler"
+participant g as "HelpCommand"
+
+a->b: handleInput()
+b->c: inputPromptPrinter()
+c-->b: return void
+b->c: inputRetriever()
+c-->b: return input
+b->d: log(..)
+d-->b: return void
+b->e: processCommand(input)
+deactivate b
+deactivate c
+e->f: handleEntry(input)
+f->g: constructor HelpCommand(..)
+activate g
+deactivate g
+f-->e: return command
+e->e: executeCommand(command)
+e->c: printHorizontalLines()
+c-->e: return void
+e->g: execute()
+g-->e: return void
+e->c: printHorizontalLines()
+c-->e: return void
+@enduml

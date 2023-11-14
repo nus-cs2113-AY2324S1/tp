@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+title Delete Command
+
+participant a as "WildWatch"
+participant b as "InputHandler"
+participant c as "Ui"
+participant d as "LOGGER"
+participant e as "CommandHandler"
+participant f as "EntryHandler"
+participant g as "DeleteCommand"
+participant h as "EntryList"
+
+a->b: handleInput()
+b->c: inputPromptPrinter()
+c-->b: return void
+b->c: inputRetriever()
+c-->b: return input
+b->d: log(..)
+d-->b: return void
+b->e: processCommand(input)
+deactivate b
+deactivate c
+e->f: handleEntry(input)
+f->g: constructor DeleteCommand(..)
+activate g
+deactivate g
+f-->e: return command
+e->e: executeCommand(command)
+e->c: printHorizontalLines()
+c-->e: return void
+e->g: execute()
+activate g
+g->c: prompt for confirmation
+c-->g: user confirmation
+g->h: deleteEntry(index) [if confirmed]
+h-->g: return void [after deletion]
+deactivate g
+g-->e: return void
+e->c: printHorizontalLines()
+c-->e: return void
+@enduml
