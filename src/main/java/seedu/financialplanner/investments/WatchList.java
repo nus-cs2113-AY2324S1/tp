@@ -143,10 +143,10 @@ public class WatchList {
     public StringBuilder getExpiredStocks() {
         StringBuilder queryStocks = new StringBuilder();
         long currentTime = System.currentTimeMillis();
-        long fiveMin = 300000;
+        long tenMin = 600000;
         for (Map.Entry<String, Stock> set: stocks.entrySet()) {
             Stock currentStock = set.getValue();
-            if (currentStock.getLastFetched() + fiveMin < currentTime) {
+            if (currentStock.getLastFetched() + tenMin < currentTime) {
                 queryStocks.append(set.getKey());
                 queryStocks.append(",");
             }
@@ -241,8 +241,6 @@ public class WatchList {
      * @param stockLocal
      */
     public void extractStockInfoFromJSONObject(JSONObject stock, Stock stockLocal) {
-        //stockLocal.setLastFetched(fetchTime);
-
         String price = stock.get("price").toString();
         assert price != null;
         stockLocal.setPrice(price);
