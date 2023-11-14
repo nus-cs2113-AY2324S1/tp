@@ -49,7 +49,7 @@ class DukeTest {
     }
 
     @Test
-    public void testReviewMode_getReviewModeName_RandomReviewMode() {
+    public void testReviewMode_getReviewModeName_randomReviewMode() {
         FlashcardList fl = new FlashcardList(new ArrayList<>());
         ReviewMode rm = new RandomReviewMode(fl);
 
@@ -67,7 +67,7 @@ class DukeTest {
     }
 
     @Test
-    public void testReviewMode_getReviewModeName_SpacedRepetitionReviewMode() {
+    public void testReviewMode_getReviewModeName_spacedRepetitionReviewMode() {
         FlashcardList fl = new FlashcardList(new ArrayList<>());
         ReviewMode rm = new SpacedRepetitionReviewMode(fl);
 
@@ -113,12 +113,12 @@ class DukeTest {
 
 
     @Test
-    public void SampleTestCalendar() {
+    public void sampleTestCalendar() {
         assertTrue(true);
     }
 
     @Test
-    public void testCalendar_isResponsible_True() {
+    public void testCalendar_isResponsible_true() {
         CalendarManager calendarManager = new CalendarManager(new Calendar(), new ArrayList<>());
 
         assertTrue(calendarManager.isResponsible("add event"));
@@ -127,7 +127,7 @@ class DukeTest {
     }
 
     @Test
-    public void testCalendar_isResponsible_False() {
+    public void testCalendar_isResponsible_false() {
         CalendarManager calendarManager = new CalendarManager(new Calendar(), new ArrayList<>());
 
         assertFalse(calendarManager.isResponsible("add"));
