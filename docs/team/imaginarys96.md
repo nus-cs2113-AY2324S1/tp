@@ -63,6 +63,10 @@ To view the codes that I have contributed to the team project WildWatch, click [
 1. Constructive comments and reviews were given in the various issues
 2. When giving the feedback, visual aids [(example here)](https://github.com/AY2324S1-CS2113T-W11-2/tp/issues/171) were also attached to provide greater clarity of information
 
+### Contributions beyond the project team
+1. Participated in the code review of other team's DG during tutorial
+2. Found bugs in other team's DG/UG/Product/Application during PE-D
+
 [⬆ Back to top](#table-of-contents)
   
 --------------------------------------------------------------------------------------------------------------------------------------  
