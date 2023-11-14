@@ -61,6 +61,7 @@ The goalist class has some helper functions, including checkGoalInput to ensure 
 The view function is vital in visualization of the goal list while delete function helps to remove some redundant, incorrect, or achieved goals. 
 
 - Implementation 1: 
+
   Note that since other command classes may also need a list function or delete function, these two functions can be created for a general use and applicable for all commands. 
 
 - Implementation 2 (Current Implementation):
