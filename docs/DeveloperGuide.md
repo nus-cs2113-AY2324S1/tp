@@ -36,6 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 - `Shortcut`: Shortcuts to be used by user
 - `Ingredient`: Ingredients in inventory and recipe ingredients
 - `Recipe`: Recipes created by user
+- `Logger`: A logger that logs the activities done in storage
 
 ### UI component
 
@@ -92,8 +93,8 @@ Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the c
 
 ### Storage component
 
-In this application, it uses text files to store all data, i.e, recipes, ingredients and shortcuts. 
-
+In this application, it uses text files to store all data, i.e, recipes, ingredients and shortcuts. The data will be
+kept in `recipes.txt`, `ingredients.txt` and `shortcuts.txt` in the `data` folder.
 
 When booting up the application, `restoreSavedData` will be called to get both recipes and ingredients 
 from the previous session.
@@ -109,6 +110,12 @@ ingredients into a string which will be put in their own respective text files.
 ![img.png](images/StoreRecipeStorageSequenceDiagram.png)
 ![img.png](images/StoreShortcutStorageSequenceDiagram.png)
 
+
+### Logger component
+
+In this application, a customised logger is used by recipe, ingredient and shortcut storage. This logger will log
+all activity done and errors in the storages. The logger will use `INFO`, `WARNING` or `SEVERE` levels for the logs.
+The logs will be saved in `essenmakanan.log` inside the `data` folder.
 
 
 ## Implementation
