@@ -1,9 +1,9 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+| Name                                 | ID        | Github        |
+|--------------------------------------|-----------|---------------|
+| [Antriksh Dhand](team/antrikshdhand.md) | A0278458J | antrikshdhand |
+| [Oh Ken Wei](team/ken-ruster.md)     | A0251850J | ken-ruster    |
+| [Ou Ningxiang ](team/onx001.md)      | A0249445W | onx001        |
+| [Tong Zheng Hong](team/tongzhenghong.md) | A0251819Y | TongZhengHong |
+| [Tricia Boo Koh](team/triciabk.md)   | A0264665U | TriciaBK      |

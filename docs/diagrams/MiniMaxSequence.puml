@@ -1,0 +1,73 @@
+@startuml MiniMaxSequenceDiagram
+
+actor CPU as user #BlanchedAlmond
+participant ":MiniMax" as MM #IndianRed
+participant "Board :ChessBoard" as CB #LightPink
+participant ":Move" as M #Orange
+participant ":BoardScoreTuple" as BST #SkyBlue
+participant ":ChessMasterException" as E #PaleTurquoise
+
+create MM
+activate MM #AliceBlue
+user -> MM : getBestMove()
+
+
+MM -> MM : mostPoints()
+
+loop "depth < maxDepth"
+
+    MM -> CB : getBoard()
+    deactivate MM
+    activate CB
+    CB --> MM : ChessBoard
+    activate MM
+    deactivate CB
+
+    MM -> MM : Initialize variables
+    MM -> CB : getPoints()
+    deactivate MM
+    activate CB
+    CB --> MM : points
+    activate MM
+    deactivate CB
+    MM -> CB : Clone board
+    activate CB
+
+    CB --> CB : board.clone()
+    activate CB
+
+    CB -> M** : setPiece()
+    activate M
+    M -> CB : Execute move
+    deactivate M
+    CB -> CB : Calculate new score
+    CB -> BST** : Create BoardScoreTuple
+    activate BST
+    BST --> BST : BoardScoreTuple
+    deactivate BST
+    CB -> E : Handle exception (if any)
+    deactivate CB
+    CB -> MM : Continue loop
+    deactivate CB
+    loop "depth < maxDepth"
+        activate MM
+        MM -> MM : Recursively call mostPoints() while incrementing depth
+        MM --> MM : bestTuple
+        deactivate MM
+    end
+    MM -> MM : Update bestScore based on player turn
+    MM -> MM : Update bestTuple with bestScore and bestMove
+
+end
+
+MM -> BST : getBestMove()
+activate BST
+BST --> MM : bestMove
+deactivate BST
+
+MM -> user : Return bestMove
+deactivate MM
+destroy MM
+destroy BST
+
+@enduml
