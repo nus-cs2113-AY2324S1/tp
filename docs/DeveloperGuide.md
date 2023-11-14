@@ -212,13 +212,20 @@ promote separation of concerns and to keep code more readable, we decided not to
 
 #### IV. Usage Scenario Example
 **Step 1**: User launches the application. `TransactionList` is initialized.   
-**Step 2**: User inputs `list` to list all transactions. The Parser identifies the command.   
+
+**Step 2**: User inputs `list` to list all transactions. The Parser identifies the command.
+
 **Step 3**: A `ListCommand` is created. This command is passed to `Nuscents`.   
+
 **Step 4**: `Nuscents` executes the `ListCommand`, which invokes `Ui.showTransactionList()` and `Ui.showBudgetExpense()`.   
+
 **Step 5**: `Ui.showTransactionList()` calls `TransactionList.getTransactions()`, which gets the Transactions in the TransactionList.   
+
 **Step 6**: The transactions in `TransactionList` are displayed to the user.
-**Step 6**: `Ui.showBudgetExpense()` calls `TransactionList.getBudget()`, which gets the current budget set in the TransactionList.
-**Step 7**: The budget details in `TransactionList` are displayed to the user.
+
+**Step 7**: `Ui.showBudgetExpense()` calls `TransactionList.getBudget()`, which gets the current budget set in the TransactionList.
+
+**Step 8**: The budget details in `TransactionList` are displayed to the user.
 
 The following sequence diagram shows how the list transaction operation works:
 
@@ -475,5 +482,25 @@ These additions provide users with a warning feature, enhancing the financial tr
 
 **Transaction Logs:** Define a logging mechanism that captures relevant information for storage functions. Logs should be stored securely and be available for auditing purposes.
 
-## Appendix D: Instructions for manual testing
-Please refer to [User Guide](UserGuide.md) for instructions on testing.
+
+## Instructions for manual testing
+Please refer to [User Guide](UserGuide.md) for example user inputs.
+You may also vary the user input to an invalid one to see that the program handles it correctly.
+
+Here are some example invalid inputs to test:
+
+`foo bar`
+
+`allowance /amt -100 /desc negative /date 10-10-2010`
+
+`expense /amt 100 /desc missing date`
+
+`filter non-existent-category`
+
+`delete 0`
+
+`budget -100`
+
+`view first index`
+
+`edit first index`
