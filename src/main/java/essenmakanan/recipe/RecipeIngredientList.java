@@ -6,7 +6,6 @@ import essenmakanan.parser.IngredientParser;
 import essenmakanan.exception.EssenFormatException;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RecipeIngredientList {
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
