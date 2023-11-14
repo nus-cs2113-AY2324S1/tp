@@ -19,8 +19,12 @@ The `Command` class serves as the parent class for all commands supported by our
 implemented some general purpose commands such as `ExitCommand` and `HelpCommand` so that the rest of the team can successfully run
 a barebone implementation of our application.
 
-### Documentation
+## Documentation
 * User Guide:
     * Added documentation for the features help and exit
 * Developer Guide:
-  * Added implementation details about handling user input and displaying output.
+  * Added implementation details about handling user input and displaying output. 
+## Team-Based Tasks:
+  * Making bug fixes from bugs found by other students from the PE-D
+  * Communicating with other members of the team to clarify how my features can be integrated with theirs
+  * Helping other members of the team with the debugging process and suggesting methods to fix the problems they encounter
