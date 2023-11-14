@@ -70,18 +70,19 @@ public class ShortcutParser {
     /**
      * Changes the shortcut's name into a new name based on the ingredient list.
      *
+     * @param shortcuts The shortcut list.
      * @param shortcut The shortcut that is going to be edited.
      * @param ingredients The ingredient list.
      * @param editDetail The new name.
      * @param hasEditName The status if the user has edited the name once in one line.
      */
-    private static void editShortcutName(Shortcut shortcut, IngredientList ingredients, String editDetail
-            , boolean hasEditName) {
+    private static void editShortcutName(ShortcutList shortcuts, Shortcut shortcut, IngredientList ingredients
+            , String editDetail , boolean hasEditName) {
         String newName = editDetail.substring(2).strip();
         String oldName = shortcut.getIngredientName();
 
         try {
-            if (!ingredients.exist(newName)) {
+            if (!ingredients.exist(newName) || shortcuts.exist(newName)) {
                 throw new EssenShortcutException();
             }
 
@@ -137,13 +138,14 @@ public class ShortcutParser {
     /**
      * Edits the shortcut's properties based on the flags.
      *
+     * @param shortcuts The shortcut list.
      * @param shortcut The shortcut that is going to be edited.
      * @param ingredients The ingredient list.
      * @param editDetails A string filled with changes to be made.
      * @throws EssenFormatException If the format is incorrect.
      */
-    public static void editShortcut(Shortcut shortcut, IngredientList ingredients, String[] editDetails)
-            throws EssenFormatException {
+    public static void editShortcut(ShortcutList shortcuts, Shortcut shortcut, IngredientList ingredients
+            , String[] editDetails) throws EssenFormatException {
         boolean hasEditName = false;
         boolean hasEditQuantity = false;
 
@@ -156,7 +158,7 @@ public class ShortcutParser {
             String flag = editDetails[i].substring(0, 2).strip();
             switch (flag) {
             case "n/":
-                editShortcutName(shortcut, ingredients, editDetails[i], hasEditName);
+                editShortcutName(shortcuts, shortcut, ingredients, editDetails[i], hasEditName);
                 hasEditName = true;
                 break;
             case "q/":
