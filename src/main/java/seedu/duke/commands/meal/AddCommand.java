@@ -1,11 +1,8 @@
 package seedu.duke.commands.meal;
 
-import seedu.duke.commands.CommandResult;
-import seedu.duke.data.meal.Meal;
 import seedu.duke.data.Date;
 
 import java.util.List;
-import java.util.Locale.Category;
 
 public class AddCommand extends MealCommand {
     public static final String COMMAND_WORD = "meal_add";
@@ -25,13 +22,7 @@ public class AddCommand extends MealCommand {
         if (arguments.size() >= 4) {
             time = new Date(arguments.get(3));
         } else {
-            time = Date.Now();
+            time = Date.now();
         }
-    }
-
-    @Override
-    public CommandResult execute() throws Exception {
-        meals.add(new Meal(name, calories, category, time));
-        return new CommandResult("Successfully add meal " + meals.get(meals.size() - 1) + "!");
     }
 }

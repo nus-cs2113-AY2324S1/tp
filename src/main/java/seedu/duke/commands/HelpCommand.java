@@ -2,7 +2,6 @@ package seedu.duke.commands;
 
 import seedu.duke.commands.goal.AchieveGoalCommand;
 import seedu.duke.commands.goal.AchievementCommand;
-import seedu.duke.commands.goal.GoalCommand;
 import seedu.duke.commands.goal.ViewGoalCommand;
 import seedu.duke.commands.logcommands.LogCommand;
 import seedu.duke.commands.logcommands.ViewLogCommand;
@@ -21,15 +20,14 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        String HelpMsg = HelpCommand.MESSAGE_USAGE + "\n";
+        String helpMsg = HelpCommand.MESSAGE_USAGE + "\n";
 
         return new CommandResult(
-                HelpMsg
+                helpMsg
                                 + "\n" + LogCommand.MESSAGE_USAGE
                                 + "\n" + DeleteLogCommand.MESSAGE_USAGE
                                 + "\n" + UpdateLogCommand.MESSAGE_USAGE
                                 + "\n" + ViewLogCommand.MESSAGE_USAGE
-                                + "\n" + GoalCommand.MESSAGE_USAGE
                                 + "\n" + DeleteLogCommand.MESSAGE_USAGE
                                 + "\n" + ViewGoalCommand.MESSAGE_USAGE
                                 + "\n" + AchieveGoalCommand.MESSAGE_USAGE

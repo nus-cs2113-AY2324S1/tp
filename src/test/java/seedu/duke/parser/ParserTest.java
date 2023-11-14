@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -67,20 +66,5 @@ public class ParserTest {
             final IncorrectCommand result = parseAndAssertCommandType(input, IncorrectCommand.class);
             assertEquals(result.feedbackToUser, feedbackMessage);
         }
-    }
-
-    /**
-     * Parses input and asserts the class/type of the returned command object.
-     *
-     * @param input                to be parsed
-     * @param expectedCommandClass expected class of returned command
-     * @return the parsed command object
-     * @throws Exception
-     */
-    private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
-            throws Exception {
-        final Command result = parser.parseCommand(input);
-        assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
-        return (T) result;
     }
 }

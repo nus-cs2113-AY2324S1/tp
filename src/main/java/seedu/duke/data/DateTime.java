@@ -85,7 +85,7 @@ public class DateTime {
         return 0;
     }
 
-    public static DateTime Now() throws Exception {
+    public static DateTime now() throws Exception {
         DateTime now = new DateTime(LocalDateTime.now().format(toStringFormatter));
         return now;
     }
