@@ -174,7 +174,7 @@ the user to add their meals, workouts and number of steps respectively.
 
 **Implementation**
 
-Here is an example of addmeal command which has 2 compulsory arguments `name` and `c/` and one optional argument `d/`.
+Here is an example of `addmeal` command which has 2 compulsory arguments `name` and `c/` and one optional argument `d/`.
 
 Example:
 ```
@@ -185,7 +185,7 @@ Below are the steps that shows the implementation of addmeal/workout/steps.
 
 *Step 1:*
 
-The addmeal command instance calls the commandParser where the arguments are split - name, calories and date.
+The `addmeal` command instance calls the commandParser where the arguments are split - name, calories and date.
 
 *Step 2:*
 
@@ -196,7 +196,7 @@ The name of the meal, calories and date will be added to the mealList.
 The added meal is then displayed to the user through the Ui
 
 
-The diagram below shows the class/sequence structure of the addmeal mechanism:
+The diagram below shows the class/sequence structure of the `addmeal` mechanism:
 ![AddMeal Sequence Diagram](images/AddMealSequenceDiagram.svg)
 
 ### 2. Delete Function
@@ -211,7 +211,7 @@ Furthermore, the using of index (numbers) will be much easier to input for the u
 
 **Implementation**
 
-Here is an example of deletemeal command which has 1 compulsory argument `index`.
+Here is an example of `deletemeal` command which has 1 compulsory argument `index`.
 
 Example:
 ```
@@ -222,7 +222,7 @@ Below are the steps that shows the implementation of deletemeal/workout/steps.
 
 *Step 1:*
 
-The deletemeal command instance calls DeleteMealCommand class.
+The `deletemeal` command instance calls DeleteMealCommand class.
 
 Example:
 ```
@@ -239,7 +239,7 @@ The code above is a snippet of how a meal is deleted.
 The deleted meal is then displayed to the user through the Ui
 
 
-The sequence diagram for deletemeal mechanism is shown [here](#command-component):
+The sequence diagram for `deletemeal` mechanism is shown [here](#command-component):
 
 
 ### 3. Find Function
@@ -252,7 +252,7 @@ the user to view their meals, workouts, number of steps and user profile respect
 
 **Implementation**
 
-Here is an example of findmeal command which has 1 compulsory argument `keyword`. The keyword is the word
+Here is an example of `findmeal` command which has 1 compulsory argument `keyword`. The keyword is the word
 the user wishes to search for.
 
 Example of usage:
@@ -264,7 +264,7 @@ Below are the steps that shows the implementation of findmeal/workout.
 
 *Step 1:*
 
-The findmeal command instance calls FindMealCommand class where the keyword is parsed into setArguments to check its validity.
+The `findmeal` command instance calls FindMealCommand class where the keyword is parsed into setArguments to check its validity.
 
 Example:
 ```
@@ -294,8 +294,8 @@ The code above shows the algorithm to search for the keyword. This is executed i
 
 The list of meals with the keyword will be shown to the user through the Ui.
 
-The diagram below shows the class/sequence structure of the findmeal mechanism:
-{Insert sequence or class diagram}
+The diagram below shows the class/sequence structure of the `findmeal` mechanism:
+![Find Function Sequence Diagram](images/FindCommandSequenceDiagram.svg)
 
 ### 4. Calories Function
 The calories function has three commands - `caloriesconsumed`, `caloriesBurnt` and `caloriebalance`. The commands allow the user to monitor the amount of calories they consumed/burnt from meals/workouts
@@ -314,7 +314,7 @@ calorie deficit/surplus!
 
 **Implementation**
 
-Here is an example of caloriebalance command which has 1 compulsory argument date. The date is the specific date
+Here is an example of `caloriebalance` command which has 1 compulsory argument date. The date is the specific date
 that the user wants to see his calorie balance for.
 
 Example of usage:
@@ -332,7 +332,7 @@ The program will then retrieve the daily calorie limit set by the user.
 The current mealList is iterated through and subtract the daily calorie limit with whatever meals that are consumed
 on the specific date. The same will be done for workoutList.
 
-The diagram below shows the class/sequence structure of the caloriebalance mechanism:
+The diagram below shows the class/sequence structure of the `caloriebalance` mechanism:
 ![CalorieBalance Sequence Diagram](images/CalorieBalanceSequenceDiagram.svg)
 
 
@@ -377,6 +377,8 @@ The commands allow the user to add, delete, view, get total steps and get sugges
 they walk and their daily calorie goal) respectively.
 
 **Design Considerations**
+- The input of steps must be use-friendly and easy for user to input the number of steps. This would enhance user experience.
+- The presentation of steps has to be clear and fast.
 
 **Implementation**
 
