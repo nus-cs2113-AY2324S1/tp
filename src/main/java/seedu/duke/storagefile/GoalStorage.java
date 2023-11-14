@@ -1,7 +1,7 @@
 package seedu.duke.storagefile;
 
 import seedu.duke.Duke;
-import seedu.duke.data.GoalList;
+import seedu.duke.goal.GoalList;
 import seedu.duke.ui.TextUi;
 
 import java.io.FileNotFoundException;

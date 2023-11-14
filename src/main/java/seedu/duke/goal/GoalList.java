@@ -1,6 +1,7 @@
-package seedu.duke.data;
+package seedu.duke.goal;
 
 import seedu.duke.Duke;
+import seedu.duke.data.Date;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.storagefile.GoalStorage;
