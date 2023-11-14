@@ -651,9 +651,10 @@ be executed as follows:
 <a id="product-scope"></a>
 ## Appendix A - Product scope
 ### Target user profile
-
-This product is for people who share kitchen space and ingredients with other cooks.
-
+* shares kitchen space and ingredients with other cooks.
+* can type fast
+* is comfortable using CLI apps
+* prefers typing
 
 ### Value proposition
 
