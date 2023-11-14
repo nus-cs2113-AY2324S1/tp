@@ -309,7 +309,7 @@ Example:
 ---
 
 <a id="filter-recipe"></a>
-#### Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME` or `filter recipe i/INGREDIENT_ID`
+#### Filter recipe based by ingredients - `filter recipe i/INGREDIENT_NAME`
 (<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 Filter your recipes by ingredients you are craving for that meal.

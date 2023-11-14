@@ -703,11 +703,13 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 
 <a id="glossary"></a>
 ## Appendix - D Glossary
+
 * *Mainstream OS*: Windows, Linux, Unix, OS-X
 * *CLI* - Command Line Interface
 
 <a id="testing"></a>
 ## Appendix - E Instructions for Manual Testing
+
 Below are instructions for users who want to test the app manually.
 
 ```
@@ -974,3 +976,65 @@ All recipe titles can be seen using `view r` command.
 - `sc invalid`<br>
   **Expected**: Exception thrown because shortcut does not exist.
 
+### Filter Recipe Functions
+
+**Prerequisites**:
+
+- Ensure that the following recipes are added to your `RecipeList` beforehand. 
+  - A recipe with bread ingredient: `add r/sausage bread i/bread,1,pc i/sausage,1,pc s/fry sausage in pan s/place sausage in bread`
+  - A recipe without bread ingredient: `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
+
+**Test Cases**:
+
+- `filter recipe i/bread` <br>
+**Expected:** A message showing all recipes containing bread as an ingredient. In this case, `sausage bread` will definitely be on the list.
+
+### Check Recipe Functions
+
+**Prerequisites**:
+
+- Ensure that you have the recipe `dumpling soup` added to your list of recipes already
+  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
+- Ensure that you don't have "chicken broth" ingredient in your ingredient inventory
+- Ensure that you have 2 dumplings in your inventory
+  - `add i/dumpling,2,pc`
+
+**Test Cases**:
+- `check dumpling soup` <br>
+  **Expected:** A message will appear, indicating that you need to get 3 more pieces of dumplings and taht you are missing chicken broth from your ingredient inventory
+- `check 1` <br>
+  **Expected:** A message will appear indicating the ingredients you need for recipe with index 1. To check which recipe it is, use `view r` command
+
+### Plan Recipe Functions
+
+**Prerequisites**:
+
+- Ensure that you have at least 2 recipes in your `RecipeList`, if not, use the following commands
+  - `add r/sausage bread i/bread,1,pc i/sausage,1,pc s/fry sausage in pan s/place sausage in bread`
+  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
+
+**Test Cases**:
+- `plan 2 r/1 r/2` <br>
+  **Expected:** A message showing all reicpes you have chosen, all ingredients needed for all recipes, and ingredients that you need to buy as you don't have sufficient
+
+
+
+### Execute Recipe Functions
+
+**Prerequisites**:
+
+- Ensure that you have sufficient ingredients for "dumpling soup" recipe
+  - `add i/chicken broth,100,g i/water,200,g i/dumpling,5,pc`
+- Ensure that you have added the recipe "dumpling soup"
+  - `add r/dumpling soup i/chicken broth,100,g i/water,200,g i/dumpling,5,pc s/put broth into boiling water s/boil dumping in water`
+
+**Test Cases**:
+- `execute dumpling soup` <br>
+  **Expected:** A message on the updated quantity of your ingredients will be shown
+
+
+### Exit
+
+**Test Cases**:
+- `exit`
+- **Expected:** An exit message will be shown and your recipes and ingredients will be saved in your text files
