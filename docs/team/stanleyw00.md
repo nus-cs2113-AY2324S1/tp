@@ -3,7 +3,8 @@
 ### Project: EssenMakanan
 
 EssenMakanan is an app that keeps track of ingredients that a user has in the kitchen, stores recipes and provides 
-steps on how to cook a specific recipe. This app will include a CLI to use the available commands in the app.
+steps on how to cook a specific recipe. This app will include a CLI to use the available commands in the app. This app 
+is created in Java and has around 8kLoC.
 
 ### Code Contributed 
 [Link to Code Contribution](https://tinyurl.com/5n88n476)
@@ -25,6 +26,14 @@ steps on how to cook a specific recipe. This app will include a CLI to use the a
    * Load data with storage
 
 ### Contributions to the UG
+* Added and explained the following section in the UG:
+  * Adding a shortcut
+  * Editing a shortcut
+  * Deleting a shortcut
+  * Using a shortcut
+  * Viewing shortcuts
+* Create table of contents for shortcut commands
+* Added hyperlinks for shortcut commands
 
 ### Contributions to the DG
 
@@ -37,5 +46,3 @@ steps on how to cook a specific recipe. This app will include a CLI to use the a
 
 ### Review/Mentoring Contributions
 [Link to PRs Reviewed](https://tinyurl.com/yc6c3sr2)
-
-### Contributions Beyond The Project Team
