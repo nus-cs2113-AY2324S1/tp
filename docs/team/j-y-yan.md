@@ -11,7 +11,7 @@ FITNUS is a desktop fitness tracking application that allows NUS students to set
 The way that I contributed to the project is by creating and implementing the Goal class and its associated classes including the various goal command classes, goal and goalList data type classes, and goal storage class. The app now allows user to input a new calories consumption target on a particular date. It is able to spot errors if the user input a wrong date that is passed or not in the designated format. It also allows user to make achievement from goals, with supported view function and delete function.
 
 ### Documentation
-I contributed to the UG in the parts that are related to goal related classes. In the DG, I contributed to the `Adding a new calorie goal` section.
+I contributed to the UG in the parts that are related to goal related classes. In the DG, I contributed to the `Adding a new exercise goal` section.
 
 ### Team-Based Tasks
 * Release various issues about improvement and bug reports of the app
@@ -22,3 +22,4 @@ I contributed to the UG in the parts that are related to goal related classes. I
 * Add features and future developments in UG to enhance completeness
 * Add more detailed method documentations to improve readibility
 * Change the overall user input processing to allow more flexible inputs for all functionalities
+* Review code contributed by teammates
