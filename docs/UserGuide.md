@@ -56,7 +56,8 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 ---
 
 <a id="recipe-command-anchor"></a>
-### [Recipes Summary of Commands](#feature-recipe)
+
+### [Recipes Summary of Commands](#feature-recipe) 
 
 | Action                                                                     | Format                                                                                                                                                                      | Example                                                                                                       |
 |----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|

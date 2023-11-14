@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":EditRecipeCommand" as EditRecipeCommand COMMAND_COLOR
+participant "recipes:RecipeList" as Recipes RECIPE_LIST_COLOR
+participant "<<class>>\nUi" as Ui UI_COLOR
+
+[-> EditRecipeCommand : executeCommand()
+activate EditRecipeCommand
+
+EditRecipeCommand -> EditRecipeCommand : getRecipeTitle()
+activate EditRecipeCommand
+deactivate EditRecipeCommand
+
+EditRecipeCommand -> Recipes : getRecipe(recipeTitle)
+activate Recipes
+Recipes --> EditRecipeCommand : Recipe object
+
+EditRecipeCommand -> EditRecipeCommand : getAttributesToEdit()
+activate EditRecipeCommand
+deactivate EditRecipeCommand
+
+
+EditRecipeCommand -[hidden]> Recipes
+EditRecipeCommand -> Recipes : editRecipe(recipeToEdit, editDetails)
+
+loop for each editDetail
+    Recipes -> Recipes : editAttribute()
+
+note right
+    editAttribute() calls reuses and calls methods from other classes.
+    For example, editIngredient method that is in the IngredientList class,
+    but for brevity purposes, these details are omitted
+end note
+
+activate Recipes
+deactivate Recipes
+Recipes --> Ui : printMessage()
+activate Ui
+Ui --> Recipes: output
+deactivate Ui
+end
+
+deactivate Ui
+Recipes --> EditRecipeCommand
+deactivate Recipes
+
+
+[<--EditRecipeCommand
+deactivate EditRecipeCommand
+@enduml
