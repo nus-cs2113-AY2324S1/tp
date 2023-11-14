@@ -9,6 +9,12 @@ import essenmakanan.ui.Ui;
 
 public class IngredientParser {
 
+    /**
+     * Checks if the quantity is valid.
+     *
+     * @param quantity The given quantity.
+     * @return Confirmation if the quantity is valid.
+     */
     public static boolean checkForValidQuantity(double quantity) {
         return ((int) quantity != 0 && Math.ceil(quantity) > 0) || quantity > 0;
     }
@@ -145,6 +151,12 @@ public class IngredientParser {
         return ingredientUnit;
     }
 
+    /**
+     * Converts an ingredient into string form.
+     *
+     * @param ingredient The ingredient.
+     * @return An ingredient that has been converted into string.
+     */
     public static String convertToString(Ingredient ingredient) {
         return ingredient.getName() + " | " + ingredient.getQuantity() + " | " + ingredient.getUnit();
     }

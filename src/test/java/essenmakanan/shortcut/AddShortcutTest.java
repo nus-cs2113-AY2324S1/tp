@@ -11,12 +11,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Executes tests related to adding shortcuts.
+ */
 public class AddShortcutTest {
 
     private ShortcutList shortcuts;
     private IngredientList ingredients;
     private AddShortcutCommand command;
 
+    /**
+     * Sets up attributes before each test.
+     */
     @BeforeEach
     public void setup() {
         shortcuts = new ShortcutList();
@@ -25,6 +31,11 @@ public class AddShortcutTest {
         ingredients.addIngredient(ingredient);
     }
 
+    /**
+     * Executes test related to adding shortcuts with valid input.
+     *
+     * @throws EssenOutOfRangeException If application tries to access out of bounds data.
+     */
     @Test
     public void addShortcut_validShortcut_expectShortcutInList() throws EssenOutOfRangeException {
         String userInput = "sc/bread,2";

@@ -9,18 +9,31 @@ import essenmakanan.shortcut.ShortcutList;
 import essenmakanan.parser.ShortcutParser;
 import essenmakanan.ui.Ui;
 
+/**
+ * Represents an add shortcut command.
+ */
 public class AddShortcutCommand extends Command {
 
     private ShortcutList shortcuts;
     private IngredientList ingredients;
     private String input;
 
+    /**
+     * Creates an add shortcut command.
+     *
+     * @param shortcuts The shortcut list.
+     * @param ingredients The ingredient list.
+     * @param input The given input.
+     */
     public AddShortcutCommand(ShortcutList shortcuts, IngredientList ingredients, String input) {
         this.shortcuts = shortcuts;
         this.ingredients = ingredients;
         this.input = input;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void executeCommand() {
         try {

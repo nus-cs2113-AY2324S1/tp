@@ -20,18 +20,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A handler for storing shortcuts.
+ */
 public class ShortcutStorage {
     private String dataPath;
 
     private ArrayList<Shortcut> shortcutListPlaceholder;
     private IngredientList ingredients;
 
+    /**
+     * Creates a shortcut storage handler.
+     *
+     * @param path The path for storing shortcut data.
+     * @param ingredients The ingredient list.
+     */
     public ShortcutStorage(String path, IngredientList ingredients) {
         shortcutListPlaceholder = new ArrayList<>();
         dataPath = path;
         this.ingredients = ingredients;
     }
 
+    /**
+     * Saves shortcut data into a text file.
+     *
+     * @param shortcuts The shortcut list.
+     */
     public void saveData(ArrayList<Shortcut> shortcuts) {
         try {
             FileWriter writer = new FileWriter(dataPath, false);
@@ -52,6 +66,12 @@ public class ShortcutStorage {
         }
     }
 
+    /**
+     * Searches duplicates in the data.
+     *
+     * @param shortcutName The shortcut name.
+     * @return Confirmation if there is a duplicate in the list of data.
+     */
     private boolean searchDuplicate(String shortcutName) {
         for (Shortcut shortcut : shortcutListPlaceholder) {
             if (shortcut.getIngredientName().equals(shortcutName)) {
@@ -62,6 +82,11 @@ public class ShortcutStorage {
         return false;
     }
 
+    /**
+     * Creates a new data based on the current line of data.
+     *
+     * @param scan The scanner that refers to the text file.
+     */
     private void createNewData(Scanner scan) {
         String dataString = scan.nextLine();
         String[] parsedShortcut = dataString.trim().split(" \\| ");
@@ -113,6 +138,12 @@ public class ShortcutStorage {
         EssenLogger.logInfo("Saved shortcut data has been received");
     }
 
+    /**
+     * Restores saved data from the previous session.
+     *
+     * @return The shortcut list.
+     * @throws EssenFileNotFoundException If the test file is not found.
+     */
     public ArrayList<Shortcut> restoreSavedData() throws EssenFileNotFoundException {
         try {
             File file = new File(dataPath);
