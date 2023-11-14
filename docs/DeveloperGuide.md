@@ -700,8 +700,8 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 
 <a id="glossary"></a>
 ## Appendix - D Glossary
-* *glossary item* - Definition
 - Mainstream OS: Windows, Linux, Unix, OS-X
+- CLI - Command Line Interface
 
 <a id="testing"></a>
 ## Appendix - E Instructions for Manual Testing
