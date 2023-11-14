@@ -18,25 +18,25 @@ Given below are contributions that I made to this project.
 - Created the SaveToTxt class that store all the incomes and expenses from the incomes and expenses list.
 - Created the GetFromTxt class that retrieve all the financial record stored in the file to the incomes and expenses list.
 - Created the UsageInstruction class that help the user to use our product when facing difficulties.
-- Created the ClearIncomes class that allow user to clear all the financial records stored in the income list.
+- Created the ClearIncomes class that allow user to clear all the financial records stored in the incomes list.
 - Created the ClearExpenses class that allow user to clear all the financial records stored in the expenses list.
 - Created the ClearAll class that allow user to clear all the entries stored in both incomes and expenses list.
 - Created the Balance function which allow user to check the balance on current financial record.
-- Contributed to the Duke class to allow user's command actually execute the way they expected.
+- Contributed to the Duke class to allow user's command execute the way they expected.
 - Contributed to the Parser class to make sure user's input is parse to a command that the Duke class can understand.
 - Contributed to different classes to create a better UI and fix typos.
 - Done up JUnit tests for `SaveToTxt`, `GetFromTxt`, `UsageInstruction`, `ClearIncomes`, `ClearExpenses`, `ClearAll`, `Balance`, `ExpenseLister`, `UpdateExchangeRateCommand`, `ListCommand`.
-- Contributed to JUnit tests for `Duke`, `DeleteExpenseCommand`, `DeleteIncomeCommand`, ``
+- Contributed to JUnit tests for `Duke`, `DeleteExpenseCommand`, `DeleteIncomeCommand`.
 
 ### Contributions to UserGuide:
-- Added expected output image for add, delete and clear feature.
+- Added expected output image for add, delete, clear and edit feature.
 - Checked and improve the grammar and typo for UG.
 - Bug fix for the jar file links.
 - Added the `Balance` feature.
-- Added the `storage` feature.
-- Added the Q & A section.
+- Added the `Storage` feature.
+- Added the Q&A section.
 - Improved the `Help` feature.
-- Improved and finalised the `Clear` feature..
+- Improved and finalised the `Clear` feature.
 - Contributed to `add expense` and `edit expense` feature.
 - Contributed to the `Command Summary` section.
 
