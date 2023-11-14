@@ -714,7 +714,7 @@ Below are instructions for users who want to test the app manually.
 Note: These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing. 
 ```
 
-# Launch 
+### Launch 
 
 Here are the instructions for launching the app:
 * Download the jar file and copy into an empty folder
@@ -723,7 +723,7 @@ Here are the instructions for launching the app:
 * Expected: A welcome message should appear. If this is your first time running the jar, there will be a few messages
   related to the app creating a folder, text files for storage and a log file.
 
-# Adding a shortcut
+### Adding a shortcut
 
 **Prerequisites**:
 
@@ -739,7 +739,7 @@ Here are the instructions for launching the app:
   Expected: Exception will be thrown due to not available ingredient.
 
 
-# Viewing shortcuts
+### Viewing shortcuts
 
 **Prerequisites**:
 
@@ -751,7 +751,7 @@ Here are the instructions for launching the app:
   Expected: All available shortcuts will be displayed.
 
 
-# Editing shortcuts
+### Editing shortcuts
 
 **Prerequisites**:
 
@@ -762,3 +762,49 @@ Here are the instructions for launching the app:
 
 - `edit i/bread n/apple q/3`
   Expected: Shortcut for `bread` will be changed to `apple` and its quantity will be changed to `3`.
+
+- `edit i/apple q/4 n/bread`
+  Expected: Shortcut for `apple` will be changed to `bread` and its quantity will be changed to `4`.
+
+- `edit i/bread q/-3`
+  Expected: Exception thrown due to invalid quantity.
+
+- `edit i/egg q/3`
+  Expected: Exception thrown due to non-existing shortcut.
+
+
+### Deleting shortcuts
+
+**Prerequisites**:
+
+- Ingredient `bread` and `apple` should be added into the ingredient list beforehand using `add i/bread,2,pc` and
+  `add i/apple,1,kg`. Then, shortcuts should be created using `add sc/bread,2` and `add sc/apple,2`. Shortcut for 
+  `bread` should be made first.
+
+**Test Cases**:
+
+- `delete sc/apple`
+  Expected: Shortcut for `apple` will be deleted.
+
+- `delete sc/1`
+  Expected: Shortcut for `bread` will be deleted.
+
+- `delete sc/10000`
+  Expected: Exception will be thrown due to accessing out of bounds data.
+
+
+### Using shortcuts
+
+**Prerequisites**:
+
+- Ingredient `bread` should be added into the ingredient list beforehand using `add i/bread,2,pc`. Then, shortcut 
+  should be created using `add sc/bread,2`.
+
+**Test Cases**:
+
+- `sc bread`
+  Expected: Quantity for ingredient `bread` will be added by `2`.
+
+- `sc invalid`
+  Expected: Exception thrown because shortcut does not exist.
+
