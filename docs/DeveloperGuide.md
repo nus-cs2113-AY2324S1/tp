@@ -699,12 +699,12 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The app is free for all users.
 5. Should be able to work on a typical CLI and not require any third-party software.
-6. Should response no more than 5 seconds for any user interactions
+6. Should response no more than 5 seconds for any user interactions.
 
 <a id="glossary"></a>
 ## Appendix - D Glossary
-- Mainstream OS: Windows, Linux, Unix, OS-X
-- CLI - Command Line Interface
+* *Mainstream OS*: Windows, Linux, Unix, OS-X
+* *CLI* - Command Line Interface
 
 <a id="testing"></a>
 ## Appendix - E Instructions for Manual Testing
@@ -713,3 +713,54 @@ Below are instructions for users who want to test the app manually.
 ```
 Note: These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing. 
 ```
+
+# Launch 
+
+Here are the instructions for launching the app:
+* Download the jar file and copy into an empty folder
+* Go to your terminal and make sure the directory is the one with the jar file.
+* Type `java -jar EssenMakanan.jar` and run the command.
+* Expected: A welcome message should appear. If this is your first time running the jar, there will be a few messages
+  related to the app creating a folder, text files for storage and a log file.
+
+# Adding a shortcut
+
+**Prerequisites**:
+
+- Ingredient `bread` should be added into the ingredient list beforehand using `add i/bread,2,pc`. Ingredient called
+  `apple` should not be in the list.
+
+**Test Cases**:
+
+- `add sc/bread,2`
+  Expected: A shortcut for adding `2` quantity of ingredient `bread` will be added into the shortcut list.
+
+- `add sc/apple,2`
+  Expected: Exception will be thrown due to not available ingredient.
+
+
+# Viewing shortcuts
+
+**Prerequisites**:
+
+- There should be at least 1 shortcut in the list.
+
+**Test Case**:
+
+- `view sc`
+  Expected: All available shortcuts will be displayed.
+
+
+# Editing shortcuts
+
+**Prerequisites**:
+
+- There should be at least 1 shortcut in the list.
+
+**Test Cases**:
+
+- Ingredient `bread` and `apple` should be added into the ingredient list beforehand using `add i/bread,2,pc` and
+  `add i/apple,1,kg`. 
+
+- `edit i/bread n/apple q/3`
+  Expected: Shortcut for `bread`.
