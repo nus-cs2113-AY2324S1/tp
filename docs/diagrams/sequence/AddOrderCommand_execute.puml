@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> ":AddOrderCommand" : execute()
+    activate ":AddOrderCommand"
+    ":AddOrderCommand" -> ":OrderList" : addOrder(order : Order)
+        activate ":OrderList"
+        return
+    ":AddOrderCommand" -> ":Chef" : new Chef(order : Order, pantry : Pantry, ui : Ui)
+        activate ":Chef"
+        return chef : Chef
+    ":AddOrderCommand" -> ":Chef" : cookDish()
+        activate ":Chef"
+        opt !order.getIsComplete()
+            ":Chef" -> ":Ui" : showChefMessage()
+                activate ":Ui"
+                ":Ui" -> ":Ui" : showToUser(args : String)
+                    activate ":Ui"
+                return
+            return
+            ":Chef" -> ":Order" : getIngredientList()
+                activate ":Order"
+            return :ArrayList<Ingredient>
+            ":Chef" -> ":Pantry" : isDishCooked(:ArrayList<Ingredient>)
+                activate ":Pantry"
+            return isComplete : boolean
+            ":Chef" -> ":Order" : setComplete(isComplete : boolean)
+                activate ":Order"
+            return
+        end
+        ":Chef" -> ":Ui" : showOrderStatus(args : String)
+            activate ":Ui"
+            ":Ui" -> ":Ui" : showToUser(args : String)
+                activate ":Ui"
+            return
+        return
+        ":Chef" -> ":Pantry" : calculateDishAvailability(menu : Menu)
+            activate ":Pantry"
+            return
+        return
+        destroy ":Chef"
+    alt order.getIsComplete()
+        ":AddOrderCommand" -> ":OrderList" : addCost(order : Order)
+            activate ":OrderList"
+            return
+        ":AddOrderCommand" -> ":Ui" : showOrderStatus(totalCost : String)
+            activate ":Ui"
+            return
+    else
+        ":AddOrderCommand" -> ":Order" : getOrderedDish()
+            activate ":Order"
+            return orderedDish : Dish
+        ":AddOrderCommand" -> ":Pantry" : calculateMaxDishes(orderedDish : Dish, menu : Menu, order : Order)
+            activate ":Pantry"
+            return
+        ":AddOrderCommand" -> ":Ui" : showIncompleteOrder()
+            activate ":Ui"
+            return
+    end
+return
+@enduml

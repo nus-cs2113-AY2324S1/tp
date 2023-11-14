@@ -1,0 +1,38 @@
+@startuml
+!define UI class ":Ui"
+!define MAIN class ":CafeCtrl"
+!define STORAGE class ":Storage"
+!define DATA class ":Data"
+!define PARSER class ":Parser"
+!define COMMAND class ":Command"
+
+autonumber
+Actor user
+
+user -> ":Ui": 'bye'
+Activate ":Ui"
+":Ui"-> ":CafeCtrl" : receiveUserInput('bye')
+loop !exitCommand
+Activate ":CafeCtrl"
+":CafeCtrl" -> ":Parser" : parseCommand('bye')
+Activate ":Parser"
+return exitCommand: ":Command"
+":CafeCtrl" -> ":Command" : exitCommand.execute()
+Activate ":Command"
+return
+end loop
+":CafeCtrl"->":Storage" : saveAll()
+Activate ":Storage"
+":Storage" -> ":Storage": saveMenu()
+Activate ":Storage"
+return
+":Storage" -> ":Storage": saveOrderList()
+Activate ":Storage"
+return
+":Storage" -> ":Storage": savePantryStock()
+Activate ":Storage"
+return
+return
+return
+
+@enduml

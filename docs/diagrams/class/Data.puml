@@ -1,0 +1,104 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Menu {
++ getMenuItemsList(): ArrayList<Dish>
++ getSize(): int
++ getDishFromId(menuID: int): Dish
++ getDishFromName(dishName: String): Dish
++ removeDish(menuID: int): void
++ addDish(dish: Dish): void
++ isValidDishIndex(dishIndex: int): boolean
+}
+
+class Dish {
+- name: String
+- price: float
++ getName(): String
++ getIngredients(): ArrayList<Ingredient>
++ getPrice(): float
++ setPrice(newPrice: float): void
+}
+
+class Ingredient {
+- name: String
+- qty: int
+- unit: String
++ getName(): String
++ getQty(): int
++ getUnit(): String
++ setQty(qty:int): void
+}
+
+class Pantry {
++ getPantryStock():ArrayList<Ingredient>
++ addIngredientToStock(name: String, qty: int, unit: String): Ingredient
++ isDishCooked(dishIngredients: ArrayList<Ingredient>): boolean
+- getIngredient(dishIngredient: Ingredient): Ingredient
++ calculateDishAvailability(menu: Menu): void
++ calculateMaxDishes(dish: Dish, menu: Menu)
+- calculateMaxDishForEachIngredient(dishIngredient: Ingredient): int
+- handleRestock(dishIngredient: Ingredient): void
++ retrieveIngredientsForDish(orderedDish: String, menu: Menu): ArrayList<Ingredient>
+}
+
+class Chef {
+- dollarValue: DecimalFormat
++ cookDish(): void
+}
+
+class Order {
+- dollarValue: DecimalFormat
+- dishQty: int
+- isComplete: boolean
+- totalOrderCost: float
++ calculateTotalOrderCost(): float
+}
+
+class OrderList {
+- dollarValue: DecimalFormat
+- HEADER_FORMAT: String
+- totalOrderListCost
++ addOrder(order: Order): void
++ addCost(order: Order): void
++ printOrderList(menu: Menu, ui: Ui): void
+- aggregateOrder(order: Order, aggregatedOrder: ArrayList<Order>): void
+- getIndexByDishName(aggregatedOrders: ArrayList<Order>, dishName: String): int
+- calculateTotalCost(orders: ArrayList<Order>): float
+}
+
+class Sales {
+- HEADER_FORMAT: String
+- daysAccounted: int
++ addOrderList(orderList: OrderList): void
++ nextDay(): void
++ printSales(ui: Ui, menu Menu): void
++ printSaleByDay(ui: Ui, menu: Menu, day: int): void
+}
+
+class CurrentDate {
+- currentDay: int
++ nextDay(): void
++ previousDay(): void
++ getCurrentDay(): int
+}
+
+class Ui
+note bottom of Ui: Classes in ui package: \nUi, Messages, and ErrorMessages
+
+Ingredient "*" <--* "1" Dish : ingredients
+Dish "*" <--* "1" Menu : menuItems
+
+Ingredient "*" <--* "1" Pantry : pantryStock
+Dish <.. Pantry
+Chef "1" <-- Pantry : pantry
+Pantry ..> Ui
+Chef ..> Ui
+
+Ingredient "*" <--* "1" Order : ingredientList
+Order "*" <--* "1" OrderList : orderList
+Order "1" <-- Chef : order
+OrderList "*" <--* "1" Sales : orderLists
+
+
+@enduml

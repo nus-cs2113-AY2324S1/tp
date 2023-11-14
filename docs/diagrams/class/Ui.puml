@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Ui {
++ OFFSET_LIST_INDEX: int
+- scanner: Scanner
++ receiveUserInput(): String
++ showToUser(message: String)
++ printAddDishMessage(dish: Dish): void
++ printIngredients(selectedDish: Dish): void
++ printDeleteMessage(selectedDish: Dish): void
++ showEditPriceMessage(menuItem: String): void
++ showHelp(): void
+}
+
+class Messages
+class ErrorMessages
+class Parser
+class Command
+class Main
+class Data
+class Storage
+
+Messages <. Ui : prints <
+Ui .> ErrorMessages : prints >
+Parser ..> Ui : uses >
+Ui "1" <-- "*" Command : ui
+Ui "1" <-- "1" Main : ui
+Ui "1" <-- "*" Data : ui
+Ui "1" <-- "*" Storage :ui
+
+@enduml

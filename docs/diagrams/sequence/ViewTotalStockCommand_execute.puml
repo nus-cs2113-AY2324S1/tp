@@ -1,0 +1,25 @@
+@startuml
+!define COMMAND class ":ViewTotalStockCommand"
+!define UI class ":Ui"
+!define PANTRY class ":Pantry"
+
+autonumber
+
+-> ":ViewTotalStockCommand" : execute()
+activate ":ViewTotalStockCommand"
+
+":ViewTotalStockCommand" -> ":Pantry" : getPantryStock().get(dishIndexToBeDeleted: int)
+activate ":Pantry"
+return (pantryStock: ArrayList<Ingredients>)
+loop Ingredient ingredient : pantryStock
+":ViewTotalStockCommand" -> ":Ui" : showIngredientStock(name: String, qty: int, unit: String)
+activate ":Ui"
+":Ui" -> ":Ui" : showToUser(message: String)
+activate ":Ui"
+return
+return
+end loop
+return
+
+
+@enduml

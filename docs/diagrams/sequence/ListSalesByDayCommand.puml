@@ -1,0 +1,74 @@
+@startuml
+!define COMMAND class ":ListSaleByDayCommand"
+!define SALES class ":Sales"
+!define ORDERLIST class ":OrderList"
+!define ORDER class ":Order"
+!define UI class ":Ui"
+
+autonumber
+
+ -> ":ListSaleByDayCommand": execute()
+
+activate ":ListSaleByDayCommand"
+":ListSaleByDayCommand" -> ":Sales": sales.printSaleByDay(ui: ":Ui", menu: Menu, day: int)
+activate ":Sales"
+":Sales" -> ":OrderList": orderList.hasCompleteOrders()
+
+activate ":OrderList"
+return :boolean
+
+alt no complete order || no orders
+":Sales" -> ":Ui" : showToUser(message: String)
+activate ":Ui"
+return
+":Sales" --> ":ListSaleByDayCommand"
+<-- ":ListSaleByDayCommand"
+end alt
+
+":Sales" -> ":Ui": showSalesTop()
+activate ":Ui"
+return
+":Sales" -> ":OrderList": orderList.printOrderList()
+activate ":OrderList"
+
+loop order
+":OrderList" -> ":OrderList": aggregateOrders()
+activate ":OrderList"
+return
+end loop
+
+loop aggregatedOrder
+":OrderList" -> ":Order" **:
+activate ":Order"
+return aggregatedOrder: ":Order"
+":OrderList" -> ":Order": aggregatedOrder.getDishName()
+activate ":Order"
+return :String
+":OrderList" -> ":Order": aggregatedOrder.getQty()
+activate ":Order"
+return :String
+":OrderList" -> ":Order": aggregatedOrder.getTotalOrderCost()
+activate ":Order"
+return :float
+destroy ":Order"
+":OrderList" -> ":Ui": showSalesAll(dishName: String, dishQty: int, dishPrice: String)
+activate ":Ui"
+":Ui" -> ":Ui": formatShowSales(dishName: String, dishQty: int, dishPrice: String)
+activate ":Ui"
+return
+return
+end loop
+":OrderList" -> ":Ui": showSalesBottom()
+activate ":Ui"
+return
+":OrderList" -> ":Ui": showSalesCost()
+activate ":Ui"
+return
+":OrderList" -> ":Ui": showSalesBottom()
+activate ":Ui"
+return
+return
+return
+return
+
+@enduml

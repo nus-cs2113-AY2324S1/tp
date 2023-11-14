@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+actor User
+
+rectangle {
+rectangle Ui
+rectangle Parser
+rectangle Command
+rectangle CafeCtrl
+rectangle Data
+rectangle Storage
+}
+
+folder TextFiles
+
+User ..> Ui
+Ui --> Parser
+Parser --> Command
+Parser ..> Data
+Command --> Data
+Command ..> Ui
+Storage --> Data
+Storage ...> TextFiles
+Ui <- CafeCtrl
+CafeCtrl --> Parser
+CafeCtrl --> Data
+CafeCtrl --> Storage
+
+
+@enduml

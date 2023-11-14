@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant ":Command" as Command
+participant "Ui" as Ui <<class>>
+
+Command -> Ui: getInstance()
+alt Ui.theOneUi != null
+    return theOneui: Ui
+else
+    Ui -> Ui: Ui()
+    Ui --> Ui: theOneUi: Ui
+    Ui -> Ui: setTheOneUi(theOneUi: Ui)
+    Ui -> Command: theOneUi: Ui
+end
+@enduml

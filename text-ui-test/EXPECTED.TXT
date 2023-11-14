@@ -1,9 +1,21 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Menu data was not found!
+No worries, new menu has been created
 
-What is your name?
-Hello James Gosling
+
+Pantry stock data was not found!
+No worries, new pantry has been created
+
+
+Order list data was not found!
+No worries, new order list has been created
+
+
+Hello! Welcome to CafeCTRL!
+-----------------------------------------------------
+> -----------------------------------------------------
+Goodbye <3 Have a great day ahead!
+-----------------------------------------------------
+Data Folder was not found!
+It's ok... a new data folder has been created.
+
+

@@ -1,0 +1,48 @@
+@startuml
+!define COMMAND class ":BuyIngredientCommand"
+!define UI class ":Ui"
+!define MENU class ":Menu"
+!define PANTRY class ":Pantry"
+
+autonumber
+
+-> ":BuyIngredientCommand" : execute()
+activate ":BuyIngredientCommand"
+
+":BuyIngredientCommand" -> ":BuyIngredientCommand" : addIngredient()
+activate ":BuyIngredientCommand"
+loop i < ingredients.size()
+":BuyIngredientCommand" -> ":Pantry" : addIngredientToStock(name: String, qty: int, unit: String)
+activate ":Pantry"
+":Pantry" -> ":Pantry" : getPantryStock()
+activate ":Pantry"
+return pantryStock: ArrayList<Ingredient>
+
+":Pantry" -> ":Pantry" : getIndexOfIngredient(name: String)
+activate ":Pantry"
+return ingredientIndex: int
+alt ingredientIndex != -1
+":Pantry" -> ":Pantry" : addIngredientQuantity(qty: int, ingredientIndex: int, unit: String)
+activate ":Pantry"
+return ingredient: Ingredient
+":Pantry" --> ":BuyIngredientCommand" : ingredient: Ingredient
+else
+return ingredient: Ingredient
+end
+end loop
+
+loop i >= 0
+":BuyIngredientCommand" -> ":BuyIngredientCommand" : buildBuyIngredientMessage(ingredient: Ingredient)
+activate ":BuyIngredientCommand"
+return ingredientString: String
+end loop
+
+return
+":BuyIngredientCommand" -> ":Ui" : showToUser(ingredientString: String)
+activate ":Ui"
+return
+return
+
+
+
+@enduml
