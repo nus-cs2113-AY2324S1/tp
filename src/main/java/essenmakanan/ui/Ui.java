@@ -327,9 +327,10 @@ public class Ui {
      *
      * @param shortcut A shortcut.
      */
-    public static void printAddShortcutSuccess(Shortcut shortcut) {
+    public static void printAddShortcutSuccess(Shortcut shortcut, IngredientUnit unit) {
         Ui.drawDivider();
-        System.out.println("Shortcut to add '" + shortcut.getIngredientName() + "' has been created!");
+        System.out.println("Shortcut to add " + shortcut.getQuantity() + unit.getValue() + " of '"
+                + shortcut.getIngredientName() + "' has been created!");
         Ui.drawDivider();
     }
 
