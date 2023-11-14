@@ -1,0 +1,61 @@
+@startuml
+
+participant ":FlashcardComponent" as fc
+participant ":FlashcardDirectory" as fd
+participant ":FlashcardStorage" as fs
+participant ":FlashcardList" as fl2
+participant ":FlashcardList" as fl
+participant ":FlashcardStorageParser" as fp
+
+
+activate fc
+
+create fd
+fc->fd ++: new
+
+return directory:FlashcardDirectory()
+
+destroy fd
+
+create fs
+fc->fs ++: FlashcardStorage(directory)
+
+return : FlashcardStorage
+
+fc->fs++ : loadFlashcards()
+
+alt default
+
+create fl
+fs->fl ++: FlashcardList()
+
+return :FlashcardList
+
+
+
+    loop for all lines in file
+
+        fs->fp++ : loadFlashcard()
+
+        return flashcard:Flashcard
+
+        fs->fl ++: add(flashcard)
+        return
+
+    end
+
+    return :FlashcardList
+
+else FileNotFoundException
+
+
+    fs-->fc
+    create fl2
+    fc->fl2 ++: FlashcardList(emptyArray)
+    return :FlashcardList
+
+
+
+end
+
+@enduml

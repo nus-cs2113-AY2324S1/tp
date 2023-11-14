@@ -1,0 +1,62 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+
+class Flashcard {
+  - backText: String
+  - difficulty: int
+  - frontText: String
+  - {static} globalMaxId: int
+  - id: int
+  + applyDifficultyChange(difficultyChange: int): void
+  + calculateAndUpdateGlobalMaxId(flashcardList: FlashcardList): void
+  + getBackText(): String
+  + getDifficulty(): int
+  + getFrontText(): String
+  + getId(): int
+  + setDifficulty(difficulty: int): void
+  + setId(id: int): void
+  + toString(): String
+}
+
+class FlashcardCommandParser {
+  + parseInput(input: String, calendar: Calendar): FlashcardCommand
+}
+
+class FlashcardComponent {
+  - calendar: Calendar
+  - storage: FlashcardStorage
+  + getFlashcardList(): FlashcardList
+  + getStorage(): FlashcardStorage
+  + getUi(): FlashcardUi
+  + isResponsible(input: String): boolean
+  + processInput(input: String): void
+}
+
+class FlashcardList {
+  + add(flashcard: Flashcard): void
+  + deleteAllFlashcards(): void
+  + deleteFlashcardById(flashcardId: int): boolean
+  + getFlashcards(): ArrayList<Flashcard>
+  + getSize(): int
+  + isEmpty(): boolean
+}
+
+class FlashcardUi {
+  - scanner: Scanner
+  + executeCommand(command: FlashcardCommand): void
+  + setScanner(scanner: Scanner): void
+}
+
+
+FlashcardComponent o--> "1" FlashcardList : flashcardList
+FlashcardComponent o--> "1" FlashcardCommandParser : parser
+FlashcardComponent o--> "1" FlashcardUi : ui
+
+FlashcardUi o--> "1" FlashcardList : flashcardList
+
+FlashcardList o--> "*" Flashcard : flashcards
+
+@enduml

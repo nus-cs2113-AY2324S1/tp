@@ -1,0 +1,29 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class CreateFlashcardCommand
+class DeleteAllFlashcardsCommand
+class DeleteFlashcardCommand
+abstract class DualFlashcardCommand {
+  + execute(scanner: Scanner, flashcardList: FlashcardList): void
+  # {abstract} executeBeginnerMode(scanner: Scanner, flashcardList: FlashcardList): void
+  # {abstract} executeBeginnerMode(scanner: Scanner, flashcardList: FlashcardList): void
+}
+abstract class FlashcardCommand {
+  + {abstract} execute(scanner: Scanner, flashcardList: FlashcardList): void
+}
+class ListFlashcardsCommand
+class StartReviewCommand
+class UnknownCommand
+
+CreateFlashcardCommand      -[#000082,plain]-^  FlashcardCommand
+DeleteAllFlashcardsCommand  -[#000082,plain]-^  FlashcardCommand
+DeleteFlashcardCommand      -[#000082,plain]-^  DualFlashcardCommand
+DualFlashcardCommand        -[#000082,plain]-^  FlashcardCommand
+ListFlashcardsCommand       -[#000082,plain]-^  FlashcardCommand
+StartReviewCommand          -[#000082,plain]-^  DualFlashcardCommand
+UnknownCommand              -[#000082,plain]-^  FlashcardCommand
+
+@enduml
