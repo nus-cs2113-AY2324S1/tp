@@ -1,9 +1,7 @@
 package seedu.duke.commands.meal;
 
 import seedu.duke.commands.CommandResult;
-import seedu.duke.data.meal.Category;
-import seedu.duke.data.meal.CategoryParser;
-import seedu.duke.data.meal.Meal;
+import seedu.duke.meal.*;
 
 import java.util.ArrayList;
 import java.util.List;
