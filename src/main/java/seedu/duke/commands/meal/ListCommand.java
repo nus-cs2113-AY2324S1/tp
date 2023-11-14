@@ -11,7 +11,7 @@ import java.util.List;
 public class ListCommand extends MealCommand {
     public static final String COMMAND_WORD = "meal_list";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all the meals that have been recorded.\n"
-            + "Example: " + COMMAND_WORD;
+            + "\tExample: " + COMMAND_WORD;
     private static final int[] validArgumentAmounts = new int[] { 0, 1 };
     private final Category category;
 
