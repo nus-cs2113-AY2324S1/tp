@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+hide footbox
+hide members
+
+title 'delete r/2' or 'delete r/chicken pizza'
+
+class State1 as "<u>meatball noodles:Recipe</u>"
+class State2 as "<u>chicken pizza:Recipe</u>"
+class State3 as "<u>dumplings:Recipe</u>"
+
+class RecipeList as "recipes:RecipeList" #FFFFFF
+RecipeList -up-> State1
+RecipeList -up-> State2
+RecipeList -up-> State3
+
+hide State2
+
+@end
