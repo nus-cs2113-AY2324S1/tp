@@ -46,7 +46,7 @@ public class EditShortcutCommand extends Command {
             int shortcutIndex = ShortcutParser.getShortcutIndex(shortcuts, splitDetails[0]);
             Shortcut shortcut = shortcuts.getShortcut(shortcutIndex);
 
-            ShortcutParser.editShortcut(shortcut, ingredients, splitDetails);
+            ShortcutParser.editShortcut(shortcuts, shortcut, ingredients, splitDetails);
         } catch (EssenOutOfRangeException exception) {
             exception.handleException();
         } catch (EssenFormatException exception) {
