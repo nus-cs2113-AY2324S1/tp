@@ -8,18 +8,32 @@ participant ": IncorrectCommand" as IncorrectCommand
 User -> UserInput: Enter command
 UserInput -> Parser: parseCommand(userInput)
 activate Parser
+
 Parser -> Parser: Split the input into command and arguments
+activate Parser
+deactivate Parser
 alt Command found
 Parser -> Parser: commandWord = Extract command word
+activate Parser
+deactivate Parser
 Parser -> Parser: arguments = Extract arguments
+activate Parser
+deactivate Parser
 else Command not found
 Parser -> IncorrectCommand: Create IncorrectCommand
 activate IncorrectCommand
 Parser --> Parser: return IncorrectCommand
+activate Parser
+deactivate Parser
 end
 Parser -> IncorrectCommand: Create IncorrectCommand
 deactivate IncorrectCommand
 
 Parser --> Parser: return IncorrectCommand
+activate Parser
+deactivate Parser
+
+deactivate Parser
+
 
 @enduml
