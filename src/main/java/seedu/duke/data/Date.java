@@ -24,7 +24,7 @@ public class Date {
 
     /**
      * @param rawData refers to the date String
-     * @throws InvalidDateException if failed to parse date string input
+     * @throws IncorrectFormatException if failed to parse date string input
      */
     public Date(String rawData) throws IncorrectFormatException {
         setRawData(rawData);
@@ -35,7 +35,7 @@ public class Date {
      * It contains the actual implementation to parse date information from a string
      * 
      * @param rawData refers to a date string
-     * @throws InvalidDateException if failed to parse date string input
+     * @throws IncorrectFormatException if failed to parse date string input
      */
     public void setRawData(String rawData) throws IncorrectFormatException {
         for (DateTimeFormatter formatter : formatters) {
