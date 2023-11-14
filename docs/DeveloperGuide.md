@@ -20,17 +20,26 @@ References
 
 ### Architecture
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of our EssenMakanan CLI.
 
 Given below is a quick overview of main components and how they interact with each other.
 
+![ArchitectureDiagram.png](images/ArchitectureDiagram.png)
+
 **Main components of the architecture**
+
+- `UI`: The user interface of the app that handles all print and output commands
+- `Main`: EssenMakanan main code which handles `Storage`, `Parser` and `Ui`
+- `Storage`: Handles stored all `recipe`, `ingredient` and `shortcut` that the user has input
+- `Parser`: Handles user input and checks for formatting/command errors and throws relevant exceptions
+- `Command`: Command handles the user functionality of Essenmakanan
+- `Shortcut`: Shortcuts to be used by user
+- `Ingredient`: Ingredients in inventory and recipe ingredients
+- `Recipe`: Recipes created by user
 
 ### UI component
 
-### Logic component
-
-### Model component
+### Main component
 
 ### Recipe component
 
