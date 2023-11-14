@@ -11,9 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
-import seedu.duke.commands.goal.DeleteGoalCommand;
-import seedu.duke.commands.goal.ViewGoalCommand;
-import seedu.duke.commands.goal.AchieveGoalCommand;
+import seedu.duke.commands.goal.*;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.IncorrectCommand;
 import seedu.duke.commands.logcommands.LogCommand;
@@ -64,6 +62,9 @@ public class Parser {
         case UpdateLogCommand.COMMAND_WORD:
             return new UpdateLogCommand(Arrays.asList(arguments.trim().split(" ")));
 
+        case GoalCommand.COMMAND_WORD:
+            return new GoalCommand(userInput);
+
         case DeleteGoalCommand.COMMAND_WORD:
             return new DeleteGoalCommand(userInput);
 
@@ -72,6 +73,9 @@ public class Parser {
 
         case AchieveGoalCommand.COMMAND_WORD:
             return new AchieveGoalCommand(userInput);
+
+        case AchievementCommand.COMMAND_WORD:
+            return new AchievementCommand(userInput);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
