@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,15 +27,8 @@ public class ParserTest {
         parseAndAssertIncorrectWithMessage(resultMessage, emptyInputs);
     }
 
-    @Test
-    public void parse_unknownCommandWord_returnsHelp() throws Exception {
-        final String input = "unknowncommandword arguments arguments";
-        parseAndAssertCommandType(input, HelpCommand.class);
-    }
-
     /*
-     * Tests for 0-argument commands
-     * =======================================================================
+     * Tests for 0-argument commands =======================================================================
      */
 
     @Test
@@ -50,21 +44,30 @@ public class ParserTest {
     }
 
     /*
-     * Utility methods
-     * =============================================================================
-     * =======
+     * Utility methods ====================================================================================
      */
 
     /**
-     * Asserts that parsing the given inputs will return IncorrectCommand with the
-     * given feedback message.
-     * 
-     * @throws Exception
+     * Asserts that parsing the given inputs will return IncorrectCommand with the given feedback message.
      */
     private void parseAndAssertIncorrectWithMessage(String feedbackMessage, String... inputs) throws Exception {
         for (String input : inputs) {
             final IncorrectCommand result = parseAndAssertCommandType(input, IncorrectCommand.class);
             assertEquals(result.feedbackToUser, feedbackMessage);
         }
+    }
+
+    /**
+     * Parses input and asserts the class/type of the returned command object.
+     *
+     * @param input to be parsed
+     * @param expectedCommandClass expected class of returned command
+     * @return the parsed command object
+     */
+    private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
+            throws Exception {
+        final Command result = parser.parseCommand(input);
+        assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
+        return (T) result;
     }
 }

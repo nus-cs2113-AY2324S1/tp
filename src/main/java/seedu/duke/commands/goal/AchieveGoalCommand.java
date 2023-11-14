@@ -28,8 +28,6 @@ public class AchieveGoalCommand extends Command {
         } catch (Exception e) {
             feedbackToUser = "Something went wrong, please try again.";
         }
-
         return new CommandResult(feedbackToUser);
     }
-
 }

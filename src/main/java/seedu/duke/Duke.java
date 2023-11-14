@@ -59,10 +59,6 @@ public class Duke {
             ui = new TextUi();
             exerciseLogStorage = ExerciseLogStorage.initializeStorage(dirPath, exerciseLogFilePath);
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
-            goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
-            goalStorage.restoreGoalRecord();
-            achmStorage = AchmStorage.initializeGoalStorage(dirPath, achmFilePath);
-            achmStorage.restoreGoalRecord();
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
         } catch (Exception e) { // TODO: change to specific storage exceptions later
             ui.showInitFailedMessage();

@@ -41,10 +41,6 @@ public class GoalCommand extends Command {
             feedbackToUser = "Something went wrong, please try again.";
         }
 
-
-
-
         return new CommandResult(feedbackToUser);
     }
-
 }

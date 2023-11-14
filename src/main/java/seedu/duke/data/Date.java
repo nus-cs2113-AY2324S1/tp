@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-// import com.google.gson.annotations.SerializedName;
-
 /**
  * Customized class for showing date and parsing supported string to date.
  */
@@ -29,22 +27,22 @@ public class Date {
      * @param NotAllowPast true for all goal related commands only
      * @throws IncorrectFormatException if failed to parse date string input
      */
-    public Date(String rawData, Boolean NotAllowPast) throws IncorrectFormatException {
-        setRawData(rawData, NotAllowPast);
+    public Date(String rawData, Boolean  notAllowPast) throws IncorrectFormatException {
+        setRawData(rawData, notAllowPast);
     }
 
     /**
      * The method is used to set up the date field of a Date object
      * It contains the actual implementation to parse date information from a string
      * @param rawData refers to a date string
-     * @param NotAllowPast if past is not allowed, for example for goal functions
+     * @param notAllowPast if past is not allowed, for example for goal functions
      * @throws IncorrectFormatException if failed to parse date string input
      */
-    public void setRawData(String rawData, boolean NotAllowPast) throws IncorrectFormatException {
+    public void setRawData(String rawData, boolean notAllowPast) throws IncorrectFormatException {
         for (DateTimeFormatter formatter : formatters) {
             try {
                 date = LocalDate.parse(rawData, formatter);
-                if (NotAllowPast) {
+                if (notAllowPast) {
                     if (date.isBefore(LocalDate.now())) {
                         throw new IncorrectFormatException("Target Deadline has passed! ");
                     }

@@ -40,6 +40,4 @@ public class DeleteGoalCommand extends Command {
 
         return new CommandResult(feedbackToUser);
     }
-
-
 }
