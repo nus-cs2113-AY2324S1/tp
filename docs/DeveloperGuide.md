@@ -725,13 +725,16 @@ Here are the instructions for launching the app:
 
 * <a id="summary-anchor"></a>
 ### Summary of Commands for testing
+* [Help](#help)
+* [Exit](#exit)
+---
 * [Ingredient: Add](#add-i)
 * [Ingredient: View All](#view-all-i)
 * [Ingredient: View Specific](#view-i)
 * [Ingredient: Edit](#edit-i)
 * [Ingredient: Delete](#delete-i)
 * [Ingredient: Use](#use-i)
-
+---
 * [Recipe: Add](#add-r)
 * [Recipe: View All](#view-all-r)
 * [Recipe: View Specific](#view-r)
@@ -740,12 +743,19 @@ Here are the instructions for launching the app:
 * [Recipe: Check](#check-r)
 * [Recipe: Filter](#filter-r)
 * [Recipe: Duplicate](#duplicate-r)
-
+---
 * [Shortcut: Add](#add-s)
 * [Shortcut: View All](#view-all-s)
 * [Shortcut: Edit](#edit-s)
 * [Shortcut: Delete](#delete-s)
 * [Shortcut: Use](#use-s)
+
+<a id="help"></a>
+### Help
+(<a href="#summary-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
+
+- `help`<br>
+**Expected**: All commands will be displayed.
 
 <a id="add-i"></a>
 ### Adding a ingredient
