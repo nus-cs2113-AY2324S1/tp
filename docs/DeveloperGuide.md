@@ -261,7 +261,8 @@ CalendarManager Sequence Diagram:
 
 TaskLinker is tailored towards university students who use flashcards to 
 study for their courses and need an easy way to schedule and plan the 
-studying of their flashcards.
+studying of their flashcards as well as track some other tasks in their 
+calendar.
 
 TaskLinker is a CLI tool and as such, it is tailored towards students who 
 type fast and prefer a functional, but bare-bones app that runs in the 
