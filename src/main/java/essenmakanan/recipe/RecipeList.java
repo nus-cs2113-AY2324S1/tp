@@ -118,6 +118,11 @@ public class RecipeList {
         recipe.viewTimeLine();
     }
 
+    /**
+     * Print all recipe ingredients in the recipe list
+     *
+     * @param recipe
+     */
     private static void listRecipeIngredients(essenmakanan.recipe.Recipe recipe) {
         RecipeIngredientList ingredients = recipe.getRecipeIngredients();
 
