@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":ShortcutStorage" as ShortcutStorage STORAGE_COLOR
+participant "scan:Scanner" as Scanner SCANNER_COLOR
+
+[-> ShortcutStorage : restoreSavedData()
+activate ShortcutStorage
+
+create Scanner
+ShortcutStorage -> Scanner
+activate Scanner
+
+Scanner --> ShortcutStorage : new Scanner(file:File)
+deactivate Scanner
+
+loop#FFAEAE #FFE6E6 scan.hasNext()
+ShortcutStorage -> ShortcutStorage : createNewData(scan)
+activate ShortcutStorage
+
+ShortcutStorage --> ShortcutStorage
+deactivate ShortcutStorage
+end
+
+[<-- ShortcutStorage
+deactivate ShortcutStorage
+@enduml

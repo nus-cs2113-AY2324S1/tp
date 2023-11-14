@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":ShortcutStorage" as ShortcutStorage STORAGE_COLOR
+participant "<<class>>\n:ShortcutParser" as ShortcutParser SHORTCUT_PARSER_COLOR
+participant ":FileWriter" as FileWriter FILE_WRITER_COLOR
+
+[-> ShortcutStorage : saveData(shortcuts)
+activate ShortcutStorage
+
+create FileWriter
+ShortcutStorage -> FileWriter : new FileWriter(dataPath, false)
+activate FileWriter
+
+FileWriter --> ShortcutStorage
+deactivate FileWriter
+
+loop#FFAEAE #FFE6E6  shortcuts
+ShortcutStorage -> ShortcutParser : convertToString(shortcut)
+activate ShortcutParser
+
+ShortcutParser --> ShortcutStorage : return string
+deactivate ShortcutParser
+
+ShortcutStorage -[hidden]> FileWriter
+ShortcutStorage -> FileWriter : write(dataString)
+activate FileWriter
+
+FileWriter --> ShortcutStorage
+deactivate FileWriter
+end
+
+[<---ShortcutStorage
+deactivate ShortcutStorage
+
+@enduml

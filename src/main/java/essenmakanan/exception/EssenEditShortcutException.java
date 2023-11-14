@@ -2,14 +2,25 @@ package essenmakanan.exception;
 
 import essenmakanan.ui.Ui;
 
+/**
+ * Indicates an error during editing a shortcut.
+ */
 public class EssenEditShortcutException extends Exception {
 
     private String scenario;
 
+    /**
+     * Creates the exception.
+     *
+     * @param scenario The type of scenario.
+     */
     public EssenEditShortcutException(String scenario) {
         this.scenario = scenario;
     }
 
+    /**
+     * Sends out the message based on the scenario.
+     */
     public void handleException() {
         Ui.drawDivider();
 

@@ -11,6 +11,9 @@ import java.util.Scanner;
 
 public class Ui {
 
+    /**
+     * Prints out a welcome message.
+     */
     public static void start() {
         drawDivider();
         System.out.println("Welcome to Essen Makanan!!! A one-stop place " +
@@ -20,12 +23,18 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * Prints out a goodbye message.
+     */
     public static void bye() {
         drawDivider();
         System.out.println("Hope you had fun! See you again!");
         drawDivider();
     }
 
+    /**
+     * Prints out a divider.
+     */
     public static void drawDivider() {
         String divider = "------------------------------------------------";
         System.out.println(divider);
@@ -64,6 +73,9 @@ public class Ui {
                 + "\t- Delete an ingredient. [delete i/INGREDIENT_INDEX] OR [delete i/INGREDIENT_NAME]\n");
     }
 
+    /**
+     * Prints out the list of shortcut commands.
+     */
     public static void showShortcutCommands() {
         System.out.println("SHORTCUT");
         System.out.println("\t- View all shortcuts. [view sc]\n"
@@ -88,11 +100,21 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * Prints out recent added recipe title.
+     *
+     * @param recipeTitle The recipe title.
+     */
     public static void printAddRecipeSuccess(String recipeTitle) {
         System.out.println("Recipe: " + recipeTitle + " has been successfully created!");
         drawDivider();
     }
 
+    /**
+     * Prints out recent added ingredient title.
+     *
+     * @param ingredientTitle The ingredient title.
+     */
     public static void printAddIngredientsSuccess(String ingredientTitle) {
         System.out.println("Ingredient: " + ingredientTitle + " has been successfully created!");
         drawDivider();
@@ -229,11 +251,21 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * Prints out IO exception message.
+     *
+     * @param exception IO exception.
+     */
     public static void handleIOException(IOException exception) {
         System.out.println("Unable to save data");
         System.out.println(exception.getMessage());
     }
 
+    /**
+     * Prints out recent duplicated recipe.
+     *
+     * @param recipeTitle The recipe title.
+     */
     public static void printDuplicatedRecipe(String recipeTitle) {
         drawDivider();
         System.out.println(recipeTitle + " has been duplicated.");
@@ -278,6 +310,11 @@ public class Ui {
         drawDivider();
     }
 
+    /**
+     * Prints out all shortcuts in the list.
+     *
+     * @param shortcuts The shortcut list.
+     */
     public static void printAllShortcuts(ShortcutList shortcuts) {
         Ui.drawDivider();
         System.out.println("Here's a list of your shortcuts!");
@@ -285,24 +322,47 @@ public class Ui {
         drawDivider();
     }
 
-    public static void printAddShortcutSuccess(Shortcut shortcut) {
+    /**
+     * Prints out recent added shortcut.
+     *
+     * @param shortcut A shortcut.
+     */
+    public static void printAddShortcutSuccess(Shortcut shortcut, IngredientUnit unit) {
         Ui.drawDivider();
-        System.out.println("Shortcut to add '" + shortcut.getIngredientName() + "' has been created!");
+        System.out.println("Shortcut to add " + shortcut.getQuantity() + unit.getValue() + " of '"
+                + shortcut.getIngredientName() + "' has been created!");
         Ui.drawDivider();
     }
 
+    /**
+     * Prints out deleted shortcut.
+     *
+     * @param ingredientName The name that shortcut refers to.
+     */
     public static void printDeletedShortcut(String ingredientName) {
         Ui.drawDivider();
         System.out.println("Shortcut to add '" + ingredientName + "' has been deleted!");
         Ui.drawDivider();
     }
 
+    /**
+     * Prints out successful name edit on a shortcut.
+     *
+     * @param oldName The old shortcut name.
+     * @param newName The new shortcut name.
+     */
     public static void printEditShortcutName(String oldName, String newName) {
         Ui.drawDivider();
         System.out.println("Shortcut to ingredient '" + oldName + "' has changed to ingredient '" + newName + "'.");
         Ui.drawDivider();
     }
 
+    /**
+     * Prints out successful quantity edit on a shortcut.
+     *
+     * @param oldQuantity The old shortcut quantity.
+     * @param newQuantity The new shortcut quantity.
+     */
     public static void printEditShortcutQuantity(double oldQuantity, double newQuantity) {
         Ui.drawDivider();
         System.out.println("Shortcut's quantity has beed changed from " + oldQuantity + " to " + newQuantity + ".");

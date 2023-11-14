@@ -9,10 +9,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Execute tests related to shortcut parser.
+ */
 public class ShortcutParserTest {
 
     private IngredientList ingredients;
 
+    /**
+     * Sets up attributes before each test.
+     */
     @BeforeEach
     public void setup() {
         ingredients = new IngredientList();
@@ -20,6 +26,9 @@ public class ShortcutParserTest {
         ingredients.addIngredient(ingredient);
     }
 
+    /**
+     * Execute tests for parsing a shortcut with invalid format.
+     */
     @Test
     public void parseShortcut_invalidFormat_expectEssenFormatException() {
         String shortcutWithMissingQuantity = "bread,";
@@ -38,6 +47,9 @@ public class ShortcutParserTest {
         });
     }
 
+    /**
+     * Execute tests for parsing a shortcut with invalid quantity.
+     */
     @Test
     public void parseShortcut_invalidQuantity_expectNumberFormatException() {
         String shortcutWithNegativeQuantity = "bread,-1";

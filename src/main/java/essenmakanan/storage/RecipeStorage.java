@@ -19,35 +19,46 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A handler for storing recipes.
+ */
 public class RecipeStorage {
 
     private String dataPath;
 
     private ArrayList<Recipe> recipeListPlaceholder;
 
+    /**
+     * Creates a recipe storage handler.
+     *
+     * @param path The path for storing recipe data.
+     */
     public RecipeStorage(String path) {
         recipeListPlaceholder = new ArrayList<>();
         dataPath = path;
     }
 
+    /**
+     * Converts a recipe into string form.
+     *
+     * @param recipe A recipe.
+     * @return A recipe that has been converted into a string.
+     */
     public String convertToString(Recipe recipe) {
         String recipeStepString;
-        if (recipe.getRecipeSteps().getSteps().isEmpty()) {
-            recipeStepString = "EMPTY";
-        } else {
-            recipeStepString = RecipeParser.convertSteps(recipe.getRecipeSteps().getSteps());
-        }
+        recipeStepString = RecipeParser.convertSteps(recipe.getRecipeSteps().getSteps());
 
         String ingredientString;
-        if (recipe.getRecipeIngredients().getIngredients().isEmpty()) {
-            ingredientString = "EMPTY";
-        } else {
-            ingredientString = RecipeParser.convertIngredient(recipe.getRecipeIngredients().getIngredients());
-        }
+        ingredientString = RecipeParser.convertIngredient(recipe.getRecipeIngredients().getIngredients());
 
         return recipe.getTitle() + " || " + recipeStepString + " || " + ingredientString;
     }
 
+    /**
+     * Saves recipe data into a text file.
+     *
+     * @param recipes The recipe list.
+     */
     public void saveData(ArrayList<Recipe> recipes)  {
         try {
             FileWriter writer = new FileWriter(dataPath, false);
@@ -68,6 +79,12 @@ public class RecipeStorage {
         }
     }
 
+    /**
+     * Searches duplicates in the data.
+     *
+     * @param recipeName The recipe name.
+     * @return Confirmation if there is a duplicate in the list of data.
+     */
     private boolean searchDuplicate(String recipeName) {
         for (Recipe recipe : recipeListPlaceholder) {
             if (recipe.getTitle().equals(recipeName)) {
@@ -78,6 +95,11 @@ public class RecipeStorage {
         return false;
     }
 
+    /**
+     * Creates a new data based on the current line of data.
+     *
+     * @param scan The scanner that refers to the text file.
+     */
     private void createNewData(Scanner scan) {
         String dataString = scan.nextLine();
         String[] parsedRecipe = dataString.trim().split(" \\|\\| ");
@@ -120,6 +142,12 @@ public class RecipeStorage {
         EssenLogger.logInfo("Saved recipe data has been received");
     }
 
+    /**
+     * Restores saved data from the previous session.
+     *
+     * @return The recipe list.
+     * @throws EssenFileNotFoundException If the text file is not found.
+     */
     public ArrayList<Recipe> restoreSavedData() throws EssenFileNotFoundException {
         try {
             File file = new File(dataPath);

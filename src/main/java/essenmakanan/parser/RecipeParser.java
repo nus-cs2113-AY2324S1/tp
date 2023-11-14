@@ -119,7 +119,6 @@ public class RecipeParser {
 
     public void parseRecipeCommand(RecipeList recipes, String command, String inputDetail)
             throws EssenException {
-        Ui ui = new Ui();
         switch(command) {
         case "add":
             String recipeName = inputDetail.substring(2);
@@ -128,24 +127,42 @@ public class RecipeParser {
             Recipe newRecipe = new Recipe(recipeName);
             recipes.addRecipe(newRecipe);
 
-            ui.printAddRecipeSuccess(recipeName);
+            Ui.printAddRecipeSuccess(recipeName);
             break;
         case "view":
-            ui.printAllRecipes(recipes);
+            Ui.printAllRecipes(recipes);
             break;
         default:
             throw new EssenException("Invalid command! Valid commands are: 'add', 'view'");
         }
     }
 
+    /**
+     * Parse a recipe title.
+     *
+     * @param toAdd The given input.
+     * @return A title for the recipe.
+     */
     public static String parseRecipeTitle(String toAdd) {
         return toAdd.replace("r/", "");
     }
 
+    /**
+     * Converts a step into string form.
+     *
+     * @param step A step.
+     * @return A step that has been converted into string.
+     */
     private static String convertStep(Step step)  {
         return step.getDescription() + " | " + step.getTag() + " | " + step.getEstimatedDuration();
     }
 
+    /**
+     * Joins all the steps into string form.
+     *
+     * @param steps The step list.
+     * @return Steps that has been converted into string.
+     */
     public static String convertSteps(ArrayList<Step> steps) {
         StringJoiner joiner = new StringJoiner(" , ");
 
@@ -156,6 +173,12 @@ public class RecipeParser {
         return joiner.toString();
     }
 
+    /**
+     * Joins all the ingredients into string form.
+     *
+     * @param ingredients The ingredient list.
+     * @return Ingredients that has been converted into string.
+     */
     public static String convertIngredient(ArrayList<Ingredient> ingredients) {
         StringJoiner joiner = new StringJoiner(" , ");
 
@@ -166,6 +189,14 @@ public class RecipeParser {
         return joiner.toString();
     }
 
+    /**
+     * Parse steps from a string.
+     *
+     * @param stepsString The string containing steps.
+     * @return The list of recipe steps.
+     * @throws EssenStorageFormatException If the storage format is invalid.
+     * @throws IllegalArgumentException If the data cannot be converted into enum.
+     */
     public static RecipeStepList parseDataSteps(String stepsString) throws EssenStorageFormatException
             , IllegalArgumentException {
         String[] parsedSteps = stepsString.split(" , ");
@@ -192,6 +223,14 @@ public class RecipeParser {
         return new RecipeStepList(stepList);
     }
 
+    /**
+     * Parse ingredient list from string.
+     *
+     * @param ingredientsString The string containing ingredients.
+     * @return The list of ingredients of a recipe.
+     * @throws EssenStorageFormatException If the storage format is invalid.
+     * @throws NumberFormatException If the data cannot be converted into enum.
+     */
     public static RecipeIngredientList parseDataRecipeIngredients(String ingredientsString)
             throws EssenStorageFormatException, NumberFormatException {
         String[] parsedIngredients = ingredientsString.split(" , ");

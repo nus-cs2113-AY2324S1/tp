@@ -19,6 +19,9 @@ public class AddRecipeCommand extends Command {
         this.recipes = recipes;
     }
 
+    /**
+     * Check if structure of command is valid
+     */
     @Override
     public void executeCommand() {
         // if toAdd does not contain the necessary flag, it should have been flagged in Parser class
@@ -35,6 +38,11 @@ public class AddRecipeCommand extends Command {
         }
     }
 
+    /**
+     * Add a valid recipe to the list
+     *
+     * @throws EssenFormatException if input is invalid
+     */
     public void addValidRecipe() throws EssenFormatException {
 
         // initialisation
@@ -78,19 +86,9 @@ public class AddRecipeCommand extends Command {
 
             switch (typeFlag) {
             case "r":
-                if (content.isBlank()) {
-                    System.out.println("Recipe title is empty! Please enter valid title after \"r/\"");
-                    throw new EssenFormatException();
-                }
-
-                if (!recipeTitle.isEmpty()) {
-                    // user input more than one recipe title
-                    System.out.println("Please only enter one recipe title!");
-                    throw new EssenFormatException();
-                }
+                int recipeIndex = this.obtainRecipeIndex(content, recipeTitle);
 
                 // check if recipe already exist
-                int recipeIndex = recipes.getIndexOfRecipe(content.trim());
                 if (recipes.recipeExist(recipeIndex)) {
                     if (overwriteExistingRecipe()) {
                         recipeIndexToOverwrite = recipeIndex;
@@ -102,34 +100,14 @@ public class AddRecipeCommand extends Command {
 
                 recipeTitle = RecipeParser.parseRecipeTitle(content);
 
-
                 break;
             case "s":
-                if (content.isBlank()) {
-                    System.out.println("Step is empty! Please enter valid step after \"s/\"");
-                    throw new EssenFormatException();
-                }
-
-                content = content.trim();
-                content = Step.convertToStepIdTemplate(content, stepsCounter+1);
-
-                if (tag != null) {
-                    // this step belongs to a tag
-                    content = content + " t/" + tag;
-                }
+                content = this.getStepsContent(content, tag, stepsCounter);
                 stepsInString[stepsCounter] = content;
                 stepsCounter++;
                 break;
             case "i":
-                if (content.isBlank()) {
-                    System.out.println("Ingredient is empty! Please enter valid ingredient after \"i/\"");
-                    throw new EssenFormatException();
-                }
-
-                if (!IngredientParser.isValidIngredient(content)) {
-                    System.out.println("Ingredient is not valid! Please enter valid ingredient after \"i/\"");
-                    throw new EssenFormatException();
-                }
+                content = this.getIngredientContent(content);
                 ingredientsInString[ingredientsCounter] = content;
                 ingredientsCounter++;
                 break;
@@ -174,6 +152,53 @@ public class AddRecipeCommand extends Command {
         }
         recipes.addRecipe(newRecipe);
         Ui.printAddRecipeSuccess(recipeTitle);
+    }
+
+    public int obtainRecipeIndex(String content, String recipeTitle) throws EssenFormatException {
+        if (content.isBlank()) {
+            System.out.println("Recipe title is empty! Please enter valid title after \"r/\"");
+            throw new EssenFormatException();
+        }
+
+        if (!recipeTitle.isEmpty()) {
+            // user input more than one recipe title
+            System.out.println("Please only enter one recipe title!");
+            throw new EssenFormatException();
+        }
+
+        // return recipe index
+        return recipes.getIndexOfRecipe(content.trim());
+    }
+
+    public String getStepsContent(String content, String tag, int stepsCounter) throws EssenFormatException  {
+        if (content.isBlank()) {
+            System.out.println("Step is empty! Please enter valid step after \"s/\"");
+            throw new EssenFormatException();
+        }
+
+        content = content.trim();
+        content = Step.convertToStepIdTemplate(content, stepsCounter+1);
+
+        if (tag != null) {
+            // this step belongs to a tag
+            content = content + " t/" + tag;
+        }
+
+        return content;
+    }
+
+    public String getIngredientContent(String content) throws EssenFormatException {
+        if (content.isBlank()) {
+            System.out.println("Ingredient is empty! Please enter valid ingredient after \"i/\"");
+            throw new EssenFormatException();
+        }
+
+        if (!IngredientParser.isValidIngredient(content)) {
+            System.out.println("Ingredient is not valid! Please enter valid ingredient after \"i/\"");
+            throw new EssenFormatException();
+        }
+
+        return content;
     }
 
     public static int countOccurrences(String mainStr, String subStr) {

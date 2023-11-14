@@ -24,6 +24,6 @@ RecipeStorage --> RecipeStorage
 deactivate RecipeStorage
 end
 
-[<- RecipeStorage
+[<-- RecipeStorage
 deactivate RecipeStorage
 @enduml

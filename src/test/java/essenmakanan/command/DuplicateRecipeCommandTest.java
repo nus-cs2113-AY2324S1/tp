@@ -10,11 +10,17 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Executes tests related to duplicate recipe command.
+ */
 public class DuplicateRecipeCommandTest {
     private RecipeList recipes;
     private Recipe recipe;
     private Recipe duplicatedRecipe;
 
+    /**
+     * Sets up attributes before each test.
+     */
     @BeforeEach
     public void setup() {
         recipes = new RecipeList();
@@ -25,6 +31,9 @@ public class DuplicateRecipeCommandTest {
         recipes.addRecipe(recipe);
     }
 
+    /**
+     * Execute test for duplicating a recipe with index.
+     */
     @Test
     public void duplicateRecipe_numericalIndex_expectSimilarRecipe() {
         DuplicateRecipeCommand command = new DuplicateRecipeCommand(recipes, "1");
@@ -51,6 +60,9 @@ public class DuplicateRecipeCommandTest {
         assertEquals(recipeIngredients.get(1).getUnit(), duplicatedIngredients.get(1).getUnit());
     }
 
+    /**
+     * Execute test for duplicating a recipe with recipe name.
+     */
     @Test
     public void duplicateRecipe_recipeName_expectSimilarRecipe() {
         DuplicateRecipeCommand command = new DuplicateRecipeCommand(recipes, "sandwich");

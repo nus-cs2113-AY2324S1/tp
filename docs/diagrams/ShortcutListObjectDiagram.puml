@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+skinparam objectBackgroundColor OBJECT_DIAGRAM_COLOR
+
+object "<u>shortcuts:ShortcutList" as ShortcutList
+object "<u>:Shortcut" as Shortcut
+
+hide ShortcutList members
+hide Shortcut members
+
+ShortcutList-[#000000]-Shortcut
+@enduml

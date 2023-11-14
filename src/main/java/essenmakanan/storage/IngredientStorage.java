@@ -18,17 +18,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A handler for storing ingredients.
+ */
 public class IngredientStorage {
 
     private String dataPath;
 
     private ArrayList<Ingredient> ingredientListPlaceholder;
 
+    /**
+     * Creates an ingredient storage handler.
+     *
+     * @param path The path for storing ingredient data.
+     */
     public IngredientStorage(String path) {
         ingredientListPlaceholder = new ArrayList<>();
         dataPath = path;
     }
 
+    /**
+     * Saves ingredient data into a text file.
+     *
+     * @param ingredients The ingredient list.
+     */
     public void saveData(ArrayList<Ingredient> ingredients) {
         try {
             FileWriter writer = new FileWriter(dataPath, false);
@@ -49,6 +62,12 @@ public class IngredientStorage {
         }
     }
 
+    /**
+     * Searches duplicates in the data.
+     *
+     * @param ingredientName The ingredient name
+     * @return Confirmation if there is a duplicate in the list of data.
+     */
     private boolean searchDuplicate(String ingredientName) {
         for (Ingredient ingredient : ingredientListPlaceholder) {
             if (ingredient.getName().equals(ingredientName)) {
@@ -59,6 +78,11 @@ public class IngredientStorage {
         return false;
     }
 
+    /**
+     * Creates a new data based on the current line of data.
+     *
+     * @param scan The scanner that refers to the text file.
+     */
     private void createNewData(Scanner scan) {
         String dataString = scan.nextLine();
         String[] parsedIngredient = dataString.trim().split(" \\| ");
@@ -103,6 +127,12 @@ public class IngredientStorage {
         EssenLogger.logInfo("Saved ingredient data has been received");
     }
 
+    /**
+     * Restores saved data from the previous session.
+     *
+     * @return The ingredient list.
+     * @throws EssenFileNotFoundException If the text file is not found.
+     */
     public ArrayList<Ingredient> restoreSavedData() throws EssenFileNotFoundException {
         try {
             File file = new File(dataPath);
