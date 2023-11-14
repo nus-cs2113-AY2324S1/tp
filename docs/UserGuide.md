@@ -229,7 +229,6 @@ ____________________________________________________________
 > **📚 Note:**
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma `,`.  
 > e.g. Sci-Fi, Fantasy, Comedy
-> - '[' and ']' are not allowed in genres.
 
 <div style="page-break-after: always;"></div>
 
@@ -254,7 +253,6 @@ ____________________________________________________________
 > **📚 Note:**
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma `,`.
 > - e.g. Sci-Fi, Fantasy, Comedy
-> - '[' and ']' are not allowed in genres.
 
 ### Add CD
 Format: `add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS]`
