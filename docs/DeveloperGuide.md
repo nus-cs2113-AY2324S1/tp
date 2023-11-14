@@ -10,10 +10,12 @@ title: Developer Guide
 * [Storage Component](#storage-component)
 * [Logger Component](#logger-component)
 * [Implementation](#implementation-component)
-* [Product Scope](#product-scope)
-* [User Stories](#user-stories)
-* [Non-Functional Requirements](#non-functional)
-* [Glossary](#glossary)
+* [Appendix](#appendix)
+  * [Appendix A - Product Scope](#product-scope)
+  * [Appendix B - User Stories](#user-stories)
+  * [Appendix C - Non-Functional Requirements](#non-functional)
+  * [Appendix D - Glossary](#glossary)
+  * [Appendix E - Instructions for Manual Testing](#testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -643,8 +645,11 @@ be executed as follows:
 
 ![img.png](images/UseShortcutSequenceDiagram.png)
 
+<a id="appendix"></a>
+# Appendix
+
 <a id="product-scope"></a>
-## Product scope
+## Appendix A - Product scope
 ### Target user profile
 
 This product is for people who share kitchen space and ingredients with other cooks.
@@ -655,7 +660,7 @@ This product is for people who share kitchen space and ingredients with other co
 Easy and intuitive way to keep track of ingredients you have in your kitchen. This helps avoid buying duplicated ingredients, reminds you of the ingredients you need, and gives a visualisation of the recipe timeline to ensure that advance preparation is done in time, eg marinating.
 
 <a id="user-stories"></a>
-## User Stories
+## Appendix B - User Stories
 
 | Version        | As a ...                                                                                                      | I want to ...                     | So that I can ...                                                  |
 |----------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------------------------------------|
@@ -684,14 +689,16 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 |v2.1| 	Expert|	Can categorise recipes based on ingredients I have	| cook without purchasing new ingredients                            |    
 
 <a id="non-functional"></a>
-## Non-Functional Requirements
+## Appendix - C Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 recipes and ingredients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 <a id="glossary"></a>
-## Glossary
+## Appendix - D Glossary
 * *glossary item* - Definition
 - Mainstream OS: Windows, Linux, Unix, OS-X
 
+<a id="testing"></a>
+## Appendix - E Instructions for Manual Testing
