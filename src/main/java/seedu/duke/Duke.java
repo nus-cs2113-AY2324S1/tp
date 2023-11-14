@@ -1,19 +1,10 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.meal.MealCommand;
-import seedu.duke.data.GoalList;
-import seedu.duke.data.meal.Meal;
-import seedu.duke.exerciselog.Exercise;
 import seedu.duke.parser.Parser;
 import seedu.duke.exerciselog.Log;
-import seedu.duke.storagefile.AchmStorage;
-import seedu.duke.storagefile.DataManager;
-import seedu.duke.storagefile.GoalStorage;
 import seedu.duke.ui.TextUi;
 import seedu.duke.storagefile.ExerciseLogStorage;
 
@@ -27,13 +18,8 @@ public class Duke {
      * Version info of the program.
      */
     public static final String VERSION = "Version-2.1";
-    public static GoalList goals = new GoalList();
-    public static GoalList achievedGoals = new GoalList();
     public static Log exerciseLog = new Log();
     public static ExerciseLogStorage exerciseLogStorage;
-    public static GoalStorage goalStorage;
-    public static AchmStorage achmStorage;
-    private static ArrayList<Meal> meals = new ArrayList<Meal>();
     public static TextUi ui;
     private final String dirPath = "data";
     private final String exerciseLogFilePath = "./data/ExerciseLog.txt";
@@ -63,21 +49,10 @@ public class Duke {
      */
     private void start(String[] launchArgs) {
         try {
-            this.ui = new TextUi();
-            exerciseLogStorage = StorageFile.initializeStorage(dirPath, exerciseLogFilePath);
+            ui = new TextUi();
+            exerciseLogStorage = ExerciseLogStorage.initializeStorage(dirPath, exerciseLogFilePath);
             exerciseLogStorage.checkForLogTextFile(exerciseLog);
-            goalStorage = GoalStorage.initializeGoalStorage(dirPath, goalFilePath);
-            goalStorage.restoreGoalRecord();
-            achmStorage = AchmStorage.initializeGoalStorage(dirPath, achmFilePath);
-            achmStorage.restoreGoalRecord();
             ui.showWelcomeMessage(VERSION, "storage.getPath()");
-            DataManager.setRelativePath(mealSavePath);
-            String dataJson = DataManager.readData();
-            ArrayList<Meal> data = DataManager.convertFromJsonToMealList(dataJson);
-            if (data != null) {
-                meals = data;
-            }
-            MealCommand.setMeals(meals);
         } catch (Exception e) { // TODO: change to specific storage exceptions later
             ui.showInitFailedMessage();
             throw new RuntimeException(e);
@@ -89,11 +64,6 @@ public class Duke {
      */
     private void exit() {
         ui.showGoodbyeMessage();
-        try {
-            DataManager.saveData(DataManager.convertToJson(meals));
-        } catch (Exception exception) {
-            ui.showToUser(exception.toString());
-        }
         System.exit(0);
     }
 
@@ -131,10 +101,8 @@ public class Duke {
     private CommandResult executeCommand(Command command) {
         try {
             CommandResult result = command.execute();
-            // storage.save(addressBook);
             return result;
         } catch (Exception e) {
-            ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
     }

@@ -55,7 +55,7 @@ public class Date {
         return date.format(toStringFormatter);
     }
 
-    public static Date Now() throws Exception {
+    public static Date now() throws Exception {
         Date now = new Date(LocalDate.now().format(toStringFormatter));
         return now;
     }

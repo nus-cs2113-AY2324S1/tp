@@ -1,7 +1,5 @@
 package seedu.duke.commands.meal;
 
-import seedu.duke.commands.CommandResult;
-
 import java.util.List;
 
 public class DeleteCommand extends MealCommand {
@@ -17,16 +15,5 @@ public class DeleteCommand extends MealCommand {
         if (index <= 0) {
             throw new Exception("Invalid index!");
         }
-    }
-
-    @Override
-    public CommandResult execute() throws Exception {
-        if (meals.size() <= index) {
-            return new CommandResult("Exceeded index!");
-        }
-        CommandResult result = new CommandResult(
-                "Successfully delete meal at index " + index + "!\n" + meals.get(index));
-        meals.remove(index);
-        return result;
     }
 }
