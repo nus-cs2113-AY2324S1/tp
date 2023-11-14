@@ -888,7 +888,7 @@ All recipe titles can be seen using `view r` command.
 All recipe titles can be seen using `view r` command.
 
 - `duplicate r/poached eggs`<br>
-**Expected**: Recipe with title `poached eggs (copy)` will be created.
+  **Expected**: Recipe with title `poached eggs (copy)` will be created.
 
 
 <a id="filter-r"></a>
