@@ -1,6 +1,7 @@
-package seedu.duke.data;
+package seedu.duke.goal;
 
 import seedu.duke.Duke;
+import seedu.duke.data.Date;
 import seedu.duke.data.exception.IllegalValueException;
 import seedu.duke.data.exception.IncorrectFormatException;
 import seedu.duke.storagefile.GoalStorage;
@@ -32,6 +33,9 @@ public class GoalList extends ArrayList<GoalList.Goal> {
      * This method removes a goal object from the global field goals list by indexing
      * It also decrements goalCount by 1
      * @param cmd Raw user Command
+     * @throws IOException if failed to access output file
+     * @throws NumberFormatException if index is invalid number
+     * @throws IncorrectFormatException is user command is in incorrect format
      * @return message of succeeding to delete goal and tell user the updated total number of goals
      */
     public static String deleteGoal(String cmd) throws IncorrectFormatException,
@@ -139,12 +143,14 @@ public class GoalList extends ArrayList<GoalList.Goal> {
      * If not, terminate the method and throws error message.
      * If yes, continue to add a new goal object into the goals list.
      * @param userCmd represents raw user input
-     * @param Targetlist represents to target list to add new goal
+     * @param target represents to target list to add new goal
      * @param storage represents the target storage to update goal data
      * @throws IncorrectFormatException if user input is in wrong format
      * @throws NumberFormatException if the user does not input a valid number
+     * @throws IOException if failed to access and update output file
+     * @return String about succeeding to create goal object
      */
-    public static String addGoal(String userCmd, GoalList Targetlist, GoalStorage storage) throws IncorrectFormatException,
+    public static String addGoal(String userCmd, GoalList target, GoalStorage storage) throws IncorrectFormatException,
             NumberFormatException, IOException {
         verifyGoalInput(userCmd); //if invalid, exceptions is thrown
 
@@ -152,9 +158,9 @@ public class GoalList extends ArrayList<GoalList.Goal> {
         int calories = Integer.parseInt(cmdSplit[1]);
         String date = cmdSplit[3];
 
-        Targetlist.goals.add(new Goal(calories, date));
-        Targetlist.goalCount++;
-        storage.overwriteGoalToFile(Targetlist);
+        target.goals.add(new Goal(calories, date));
+        target.goalCount++;
+        storage.overwriteGoalToFile(target);
 
         return TextUi.addGoalSuccessMessage();
     }
@@ -201,5 +207,5 @@ public class GoalList extends ArrayList<GoalList.Goal> {
             return "Consume " + this.calories + " kcal on " + this.date;
         }
     }
-}
 
+}

@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.data.GoalList;
+import seedu.duke.goal.GoalList;
 import seedu.duke.data.Printable;
 
 /**

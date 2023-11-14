@@ -1,7 +1,7 @@
 package seedu.duke.storagefile;
 
 import seedu.duke.Duke;
-import seedu.duke.data.GoalList;
+import seedu.duke.goal.GoalList;
 import seedu.duke.ui.TextUi;
 
 import java.io.FileNotFoundException;
@@ -57,9 +57,9 @@ public class AchmStorage extends GoalStorage {
     }
 
     /**
-     *
+     * This method convert the saved text command into the goal object
      * @param goalRecord refers to saved goal record
-     * @throws Exception
+     * @throws Exception if failed to access file
      */
     @Override
     protected void textToGoalObject(String goalRecord) throws Exception {

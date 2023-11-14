@@ -1,7 +1,7 @@
 package seedu.duke.storagefile;
 
 import seedu.duke.Duke;
-import seedu.duke.data.GoalList;
+import seedu.duke.goal.GoalList;
 import seedu.duke.ui.TextUi;
 
 import java.io.FileNotFoundException;
@@ -28,6 +28,7 @@ public class GoalStorage extends Storage {
      * if error occurs in loading saved date, the app will start with empty list immediately
      * without loading part of data
      * Note that this method also set up the file writer into overwrite mode
+     * @throws IOException if failed to access file or create file
      */
     public void restoreGoalRecord() throws IOException {
         if (dir.exists() && textFile.exists()) {
