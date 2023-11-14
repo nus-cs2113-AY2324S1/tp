@@ -35,6 +35,8 @@
 
 !define SCANNER_COLOR #3E732E
 
+!define LOGGER_COLOR #FCBE85
+
 !define UI_COLOR #C24641
 !define UI_COLOR_T1 #C11B17
 
