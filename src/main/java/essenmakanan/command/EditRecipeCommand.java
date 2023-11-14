@@ -45,6 +45,7 @@ public class EditRecipeCommand extends Command {
             }
         } catch (EssenDoesNotExistException e){
             e.handleException();
+            return;
         }
 
         // getting the attributes to edit
