@@ -10,10 +10,12 @@ title: Developer Guide
 * [Storage Component](#storage-component)
 * [Logger Component](#logger-component)
 * [Implementation](#implementation-component)
-* [Product Scope](#product-scope)
-* [User Stories](#user-stories)
-* [Non-Functional Requirements](#non-functional)
-* [Glossary](#glossary)
+* [Appendix](#appendix)
+  * [Appendix A - Product Scope](#product-scope)
+  * [Appendix B - User Stories](#user-stories)
+  * [Appendix C - Non-Functional Requirements](#non-functional)
+  * [Appendix D - Glossary](#glossary)
+  * [Appendix E - Instructions for Manual Testing](#testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -643,55 +645,166 @@ be executed as follows:
 
 ![img.png](images/UseShortcutSequenceDiagram.png)
 
+<a id="appendix"></a>
+# Appendix
+
 <a id="product-scope"></a>
-## Product scope
+## Appendix A - Product scope
 ### Target user profile
-
-This product is for people who share kitchen space and ingredients with other cooks.
-
+* shares kitchen space and ingredients with other cooks.
+* can type fast
+* is comfortable using CLI apps
+* prefers typing
 
 ### Value proposition
 
 Easy and intuitive way to keep track of ingredients you have in your kitchen. This helps avoid buying duplicated ingredients, reminds you of the ingredients you need, and gives a visualisation of the recipe timeline to ensure that advance preparation is done in time, eg marinating.
 
 <a id="user-stories"></a>
-## User Stories
+## Appendix B - User Stories
 
-| Version        | As a ...                                                                                                      | I want to ...                     | So that I can ...                                                  |
-|----------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------|--------------------------------------------------------------------|
-| v1.0           | beginner user                                                                                                 | see all recipes                   | learn and try all recipes                                          |
-| v1.0           | beginner user                                                                                                 | add new recipes into the list     | learn and try out new recipes                                      |
-| v1.0           | beginner user                                                                                                 | see all ingredient I have         |                                                                    |
-| v1.0           | beginner user                                                                                                 | add ingredients to the empty list | add an item to my kitchen inventory                                |
-| v2.0a          | amateur                                                                                                       | delete some recipes               | remove a recipe that I no longer want to use                       |
-| v2.0a          | amateur                                                                                                       |delete ingredients| remove an ingredient from the list                                 |
-| v2.0a          | 	new user                                                                                                     |	be greeted with an instruction manual	| learn how to navigate through the app                              |
-| v2.0a          | beginner user	                                                                                                | view specific recipe                 |
-| v2.0a          | beginner user	                                                                                                | add ingredients to recipe            |
-|v2.0a| 	amateur	|edit ingredients of recipe	                                                                          |edit a recipe I have created| change recipe ingredients                                          |
-|v2.0a	| amateur	edit steps of recipe                                                                                  | 	edit a recipe I have created        | change recipe steps                                                |
-|v2.0a| 	beginner user                                                                                                |	type the quantity of ingredients as well as the unit of measurement| 	add an item with the quantity to my kitchen inventory             |
-|v2.0a| 	amateur	                                                                                                     |change the quantity of ingredient available	| remove a fixed quantity of an ingredient from the list             |
-|v2.0b| 	beginner user                                                                                                |	add milestones with tags on the steps| 	see the overview of steps to execute in the recipe                |
-|v2.0b| 	Amateur	                                                                                                     |View a timeline of the cooking process, from preparation all the way till actual cooking time	| do preparations that are necessary at the time needed              |
-|v2.0b| 	Amateur	                                                                                                     |See all ingredients I am lacking for a specific recipe	| get an overview of ingredients i need to buy                       |
-|v2.0b| new user                                                                                                      |exploring the app	see default recipes pre-placed in the app	| get started with cooking and learn the recipe’s format             |
-|v2.0b| 	Amateur	                                                                                                     |find recipes by ingredients| to give user options on what they can cook based on their cravings |
-|v2.1| 	Expert|	Duplicate a recipe	| Save time for creating similar recipes                             |                                           
-|v2.1| 	advanced user|	Schedule recipes for a week| 	plan for weekly grocery shopping                                  |                                  
-|v2.1| 	advanced user|	cook for more if necessary| 	scale recipe based on number of pax                               |                             
-|v2.1| 	advanced user|	subtract ingredients automatically when i use it| 	indicate that i have used an ingredient                           |     
-|v2.1| 	Expert|	Can categorise recipes based on ingredients I have	| cook without purchasing new ingredients                            |    
+| Version        | As a ...                     | I want to ...                                                                                  | So that I can ...                                                  |
+|----------------|------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| v1.0           | beginner user                | see all recipes                                                                                | learn and try all recipes                                          |
+| v1.0           | beginner user                | add new recipes into the list                                                                  | learn and try out new recipes                                      |
+| v1.0           | beginner user                | see all ingredient I have                                                                      |                                                                    |
+| v1.0           | beginner user                | add ingredients to the empty list                                                              | add an item to my kitchen inventory                                |
+| v2.0a          | amateur                      | delete some recipes                                                                            | remove a recipe that I no longer want to use                       |
+| v2.0a          | amateur                      | delete ingredients                                                                             | remove an ingredient from the list                                 |
+| v2.0a          | 	new user                    | 	be greeted with an instruction manual	                                                        | learn how to navigate through the app                              |
+| v2.0a          | beginner user	               | view specific recipe                                                                           |
+| v2.0a          | beginner user	               | add ingredients to recipe                                                                      |
+|v2.0a| 	amateur	                    | edit ingredients of recipe	                                                                    |edit a recipe I have created| change recipe ingredients                                          |
+|v2.0a	| amateur	edit steps of recipe | 	edit a recipe I have created                                                                  | change recipe steps                                                |
+|v2.0a| 	beginner user               | 	type the quantity of ingredients as well as the unit of measurement                           | 	add an item with the quantity to my kitchen inventory             |
+|v2.0a| 	amateur	                    | change the quantity of ingredient available	                                                   | remove a fixed quantity of an ingredient from the list             |
+|v2.0b| 	beginner user               | 	add milestones with tags on the steps                                                         | 	see the overview of steps to execute in the recipe                |
+|v2.0b| 	amateur	                    | view a timeline of the cooking process, from preparation all the way till actual cooking time	 | do preparations that are necessary at the time needed              |
+|v2.0b| 	amateur	                    | See all ingredients I am lacking for a specific recipe	                                        | get an overview of ingredients i need to buy                       |
+|v2.0b| new user                     | exploring the app	see default recipes pre-placed in the app	                                   | get started with cooking and learn the recipe’s format             |
+|v2.0b| 	amateur	                    | find recipes by ingredients                                                                    | to give user options on what they can cook based on their cravings |
+|v2.1| 	expert                      | 	Duplicate a recipe	                                                                           | Save time for creating similar recipes                             |                                           
+|v2.1| 	advanced user               | 	Schedule recipes for a week                                                                   | 	plan for weekly grocery shopping                                  |                                  
+|v2.1| 	advanced user               | 	cook for more if necessary                                                                    | 	scale recipe based on number of pax                               |                             
+|v2.1| 	advanced user               | 	subtract ingredients automatically when i use it                                              | 	indicate that i have used an ingredient                           |     
+|v2.1| 	expert                      | 	can categorise recipes based on ingredients I have	                                           | cook without purchasing new ingredients                            |    
+|v2.1| 	advanced user               | 	add shortcuts to add commonly used ingredients	                                               | make the process of adding ingredients more efficient.                            |    
+
 
 <a id="non-functional"></a>
-## Non-Functional Requirements
+## Appendix - C Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. Should be able to hold up to 1000 recipes and ingredients without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 recipes, ingredients and shortcuts without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The app is free for all users.
+5. Should be able to work on a typical CLI and not require any third-party software.
+6. Should response no more than 5 seconds for any user interactions.
 
 <a id="glossary"></a>
-## Glossary
-* *glossary item* - Definition
-- Mainstream OS: Windows, Linux, Unix, OS-X
+## Appendix - D Glossary
+* *Mainstream OS*: Windows, Linux, Unix, OS-X
+* *CLI* - Command Line Interface
+
+<a id="testing"></a>
+## Appendix - E Instructions for Manual Testing
+Below are instructions for users who want to test the app manually.
+
+```
+Note: These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing. 
+```
+
+### Launch 
+
+Here are the instructions for launching the app:
+* Download the jar file and copy into an empty folder
+* Go to your terminal and make sure the directory is the one with the jar file.
+* Type `java -jar EssenMakanan.jar` and run the command.
+* Expected: A welcome message should appear. If this is your first time running the jar, there will be a few messages
+  related to the app creating a folder, text files for storage and a log file.
+
+### Adding a shortcut
+
+**Prerequisites**:
+
+- Ingredient `bread` should be added into the ingredient list beforehand using `add i/bread,2,pc`. Ingredient called
+  `apple` should not be in the list.
+
+**Test Cases**:
+
+- `add sc/bread,2`
+  Expected: A shortcut for adding `2` quantity of ingredient `bread` will be added into the shortcut list.
+
+- `add sc/apple,2`
+  Expected: Exception will be thrown due to not available ingredient.
+
+
+### Viewing shortcuts
+
+**Prerequisites**:
+
+- There should be at least 1 shortcut in the list.
+
+**Test Case**:
+
+- `view sc`
+  Expected: All available shortcuts will be displayed.
+
+
+### Editing shortcuts
+
+**Prerequisites**:
+
+- Ingredient `bread` and `apple` should be added into the ingredient list beforehand using `add i/bread,2,pc` and
+  `add i/apple,1,kg`.
+
+**Test Cases**:
+
+- `edit i/bread n/apple q/3`
+  Expected: Shortcut for `bread` will be changed to `apple` and its quantity will be changed to `3`.
+
+- `edit i/apple q/4 n/bread`
+  Expected: Shortcut for `apple` will be changed to `bread` and its quantity will be changed to `4`.
+
+- `edit i/bread q/-3`
+  Expected: Exception thrown due to invalid quantity.
+
+- `edit i/egg q/3`
+  Expected: Exception thrown due to non-existing shortcut.
+
+
+### Deleting shortcuts
+
+**Prerequisites**:
+
+- Ingredient `bread` and `apple` should be added into the ingredient list beforehand using `add i/bread,2,pc` and
+  `add i/apple,1,kg`. Then, shortcuts should be created using `add sc/bread,2` and `add sc/apple,2`. Shortcut for 
+  `bread` should be made first.
+
+**Test Cases**:
+
+- `delete sc/apple`
+  Expected: Shortcut for `apple` will be deleted.
+
+- `delete sc/1`
+  Expected: Shortcut for `bread` will be deleted.
+
+- `delete sc/10000`
+  Expected: Exception will be thrown due to accessing out of bounds data.
+
+
+### Using shortcuts
+
+**Prerequisites**:
+
+- Ingredient `bread` should be added into the ingredient list beforehand using `add i/bread,2,pc`. Then, shortcut 
+  should be created using `add sc/bread,2`.
+
+**Test Cases**:
+
+- `sc bread`
+  Expected: Quantity for ingredient `bread` will be added by `2`.
+
+- `sc invalid`
+  Expected: Exception thrown because shortcut does not exist.
 
