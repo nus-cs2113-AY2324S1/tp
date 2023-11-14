@@ -107,7 +107,7 @@ list_menu
 ------------------------------------------------------------------------
 To list out the ingredients needed along with the quantity for a specific dish:
 Parameters: index/DISH_INDEX
-Example: list_ingredients index/1
+Example: list_ingredients dish/1
 ------------------------------------------------------------------------
 To buy ingredient:
 buy_ingredient ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY[, ingredient/INGREDIENT2_NAME, qty/INGREDIENT2_QTY...]
@@ -190,13 +190,13 @@ Okay! chicken rice is deleted! :)
 ### Editing price of a dish : `edit_price`
 Edits the price of an existing dish on the menu
 
-Format: `edit_price index/DISH_INDEX price/NEW_PRICE`
+Format: `edit_price dish/DISH_INDEX price/NEW_PRICE`
 
 * `NEW_PRICE` must be a positive number and can have up to 2 decimal places.
 * The index refers to the index number shown in the menu list
 * The index must be a positive integer
 
-Example: `edit_price index/1 price/4.50`
+Example: `edit_price dish/1 price/4.50`
 
 Output:
 ```
@@ -229,7 +229,7 @@ Lists out the ingredients needed along with the quantity for a specific dish
 Format: `list_ingredients dish/DISH_INDEX`
 
 Example:
-- list followed by list_ingredients index/1 lists the ingredients of the 1st dish on the menu
+- list followed by list_ingredients dish/1 lists the ingredients of the 1st dish on the menu
 
 ```
 +-------------------------------------------------------+
@@ -440,6 +440,7 @@ Format: `bye`
      ------------------------------------------------------------------------
      ```
 7. If the user manually adds an order of dish that does not exist in menu to orders.txt, the order will still be generated but the new dish will not be added to the menu.
+8. The decoder of orders.txt will use the string **the last day has no orders but please account for it** as keywords to mark the end of the order history. If the user moves the string, any orders after it will be discarded. 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -448,7 +449,7 @@ Format: `bye`
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add name/DISH_NAME price/PRICE ingredient/INGREDIENT1_NAME qty/INGREDIENT1_QTY<g/ml> [, ingredient/INGREDIENT2_NAME qty/INGREDIENT2_QTY<g/ml>, ...]`<br><br/>Example:<br/>`add name/chicken rice price/3.00 ingredient/rice qty/50g, ingredient/chicken qty/100g` |
 | **List Menu**             | `list_menu`                                                                                                                                                                                                                                                        |
-| **List Ingredients**      | `list_ingredients index/DISH_INDEX`<br><br/>Example:<br>`list_ingredients index/1`                                                                                                                                                                                 |
+| **List Ingredients**      | `list_ingredients dish/DISH_INDEX`<br><br/>Example:<br>`list_ingredients index/1`                                                                                                                                                                                  |
 | **Delete**                | `delete DISH_INDEX`<br><br/>Example:<br>`delete 1`                                                                                                                                                                                                                 |
 | **Edit Price**            | `edit_price dish/DISH_INDEX price/NEW_PRICE`<br><br/>Example:<br>`edit_price dish/1 price/4.50`                                                                                                                                                                    |
 | **List Sale**             | `list_total_sales`                                                                                                                                                                                                                                                 |
@@ -466,3 +467,4 @@ Format: `bye`
 ## Glossary
 - **Dish index**: Index of the dish according to `list_menu`.
 - **Stock**: The quantity of ingredient available in the pantry of the cafe.
+- **Qty**: Quantity

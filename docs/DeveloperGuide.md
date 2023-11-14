@@ -119,10 +119,10 @@ The `Parser` component is responsible for interpreting the user's input and retu
 
 Below is the sequence diagram of a parser which shows how `Parser` parses user input:
 
-![Parser Parsing User Input Sequence Diagram](images/sequence/Parser_execute_command.svg)
+![Parser Parsing User Input Sequence Diagram](images/sequence/Parser.svg)
 <br>*Figure 5: Parser Parsing User Input Sequence Diagram*
 
-When user input a string to `Main`,  it passes the full user input to `Parser` via `parseCommand`. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
+When user input string is received through `Ui`, which passes the full user input to `Main`. `Main` then passes it to `Parser` via `parseCommand` for interpretation. In `parseCommand`,  it finds the matching keyword for different command from the user input, it calls the respective `prepareCommand` method within itself. `prepareCommand` then generates the corresponding command class and return it to `parseCommand`, which returns the `Command` back to `Main` for execution.
 
 ### Storage component
 API: [Storage.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/storage/Storage.java)
@@ -381,7 +381,7 @@ When the `execute()` method is invoked
 
 ### Help
 
-![Help Execution](images/sequence/HelpCommand_execute.png)
+![Help Execution](images/sequence/HelpCommand_execute.svg)
 <br>*Figure 25: Execution of `help` Command Sequence Diagram*
 
 API: [HelpCommand.java](https://github.com/AY2324S1-CS2113-T17-2/tp/blob/master/src/main/java/seedu/cafectrl/command/HelpCommand.java)
