@@ -1,6 +1,7 @@
 package seedu.duke.commands.meal;
 
 import seedu.duke.commands.CommandResult;
+import seedu.duke.meal.*;
 
 import java.util.List;
 

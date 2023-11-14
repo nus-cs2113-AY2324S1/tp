@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.data.meal.Meal;
+import seedu.duke.meal.*;
 
 public class MealCommand extends Command {
     protected static ArrayList<Meal> meals;
