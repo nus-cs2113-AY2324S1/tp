@@ -43,7 +43,7 @@ This is a document about Joshua's contribution to the project.
 
 **Contributions to the DG:**
 - Created the initial template and main structure:
-  - Design & implementation, Main components, Storage component, Main Data Sturctures, Commands
+  - Design & implementation, Main components, Storage component, Main Data Structures, Commands
 - UML Diagrams:
   - Storage save and load sequence diagram, deletemeal sequence diagram
 
