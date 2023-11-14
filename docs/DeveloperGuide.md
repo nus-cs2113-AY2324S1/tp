@@ -82,27 +82,26 @@ To provent user from making mistakes, we could design an algorithm to detect whe
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+    Our target users are NUS students who are looking to get in shape and live a healthier lifestyle. We want to provide fitness and eating recommendations that are near the NUS campus which will be easily accessible to our end users.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+* track calories consumption vs usage
+* set fitness goals and monitor their progress towards these goals
+
 
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|New User|see usage instructions|refer to them when I forget how to use the application|
+|v2.0|Obesity Victim|set up my work out plan|lose weight|
+|v2.0|Health Enthusiasts|set up fitness goals|follow and keep myself healthy in a systematic way|
+|v2.1|Dieter|record everyday diet|monitor the amount of calories taking in and check total amount|
+
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Java 17 is the most recommended version to use.
+* Make sure the login user of your pc keeps the same, otherwise the storage address might differ, resulting in the loss of precious data.
 
-## Glossary
-
-* *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
