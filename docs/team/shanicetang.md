@@ -1,7 +1,6 @@
 # Shanice Tang - Project Portfolio Page
 
 **Project: CafeCRTL**
-
 -----------------------------------------------------------------------------------------------
 ## **Overview**
 CaféCTRL is a software engineering project for CS2113. The user interacts with the application through CLI. It has around 6 kLoC, and it is done in a team of 5.
@@ -47,9 +46,9 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 - Improved precision of error handling by adding some checking methods: `isInvalidQty`, `isEmptyUnit`, `isValidUnit`, `checkForMismatchUnit`
   <br><br>
 3. **Pantry**<br>
-- Implemented pantry class together with @NaychiMin which helps user to keep track of their current stock. This enhancement plays a huge role to several commands as it allows the user to smoothly interact with the pantry, hence it is important to ensure its completeness by ensuring it is able to seamlessly handle pantry-related operations. For example, for my contribution to pantry class (adding of ingredients to stock), I had to consider the user adding the same ingredients within an input or using a different unit and handle those possibilities elegantly.
-- Allows user to add ingredients to pantry (through `buy_ingredient`) and updates the quantity of existing ingredients. This was a challenge to implement mostly due to the need to upkeep to coding quality. I had to achieve this without involving arrowhead code (which would have been the trivial solution) through abstraction and understanding what parameters I need to pass in and return.
-- Ensures user uses the same unit for existing ingredients. To allow this to be implemented, I modified the Ingredient class upon approval from my team members to accept units as a separate attribute and helped modify other classes/methods that instantiates an Ingredient object.
+- Implemented pantry class together with @NaychiMin which helps user to keep track of their current stock. This enhancement plays a huge role to several commands as it allows the user to smoothly interact with the pantry, hence it is important to ensure its completeness by ensuring it is able to seamlessly handle pantry-related operations.
+- Allows user to add ingredients to pantry (through `buy_ingredient`) and updates the quantity of existing ingredients.
+- Ensures user uses the same unit for existing ingredients as well as the menu. To allow this to be implemented, I helped modified the Ingredient class to accept units as a separate attribute and helped modify other classes/methods that instantiates an Ingredient object and create a method in Parser `checkForMismatchUnit` to reject mismatching units.
   <br><br>
 4. **Messages & ErrorMessages**<br>
 - Provided meaningful messages that can be easily understood by the user
@@ -66,19 +65,16 @@ Café proprietors who prefer typing on CLI than any other interaction method and
 
 #### Team-based Task
 1. Logging
-   - This was challenging as I encountered the issue of the log messages being printed out to system console which ruined the Ui. :( The CS2113 textbook did not mention how to rectify this issue, so I had to do external research and eventually found a solution to store log messages into a log file without displaying at runtime. :)
+   - This was challenging as I encountered the issue of the log messages being printed out to system console which ruined the Ui. :( I had to do external research and found a solution to store log messages into a log file without displaying at runtime. :)
 2. Maintaining issue tracker
 3. Testing application and report bugs found
-    ![](../images_PPP/shanice/bug_reporting.png)
+    <br>![](../images_PPP/shanice/bug_reporting.png)
 
 ### Review / Mentoring Contributions
 1. Reviewed and merged some PRs [#300](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/300), [#322](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/322), [#283](https://github.com/AY2324S1-CS2113-T17-2/tp/pull/283), ...
 2. Clarified and updated the team before making major changes to ensure everyone is on the same page <3
    - Ensuring unused methods can be safely deleted with permission from the team member who wrote it
    ![](../images_PPP/shanice/deleting_unused_method.png)
-   ![](../images_PPP/shanice/deleting_unused_method2.png)
-   - Ensuring team members give their permission before implementing
-   ![](../images_PPP/shanice/ensure_permission_given.png)
 
 ### Contributions Beyond the Project Team
 1. Reported bugs in other teams' application: [#105](https://github.com/AY2324S1-CS2113-W12-3/tp/issues/105), [#101](https://github.com/AY2324S1-CS2113-W12-3/tp/issues/101)
