@@ -8,13 +8,10 @@ import java.util.Scanner;
 import seedu.duke.exerciselog.Log;
 
 public class ExerciseLogStorage extends Storage {
-    protected File dir;
-    protected File textFile;
-    protected FileWriter writeFile;
+
 
     public ExerciseLogStorage(String dirName, String textFileName) {
-        dir = new File(dirName);
-        textFile = new File(textFileName);
+        super(dirName, textFileName);
     }
 
     public static ExerciseLogStorage initializeStorage(String dirName, String textFilePath) {

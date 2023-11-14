@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.data.Goal;
 import seedu.duke.data.Printable;
@@ -206,6 +207,16 @@ public class TextUi {
         return "Good. I have removed this goal: " + deletedGoal + "\n"
                 + "Remember not to give up unaccomplished target!" + "\n";
 
+    }
+
+    /**
+     * This method is used to implement Goal commend execution, when adding a new goal
+     * @return string contains information of generating a new goal successfully
+     */
+    public static String addGoalSuccessMessage() {
+        int currentNoOfGoal = Duke.goalList.getGoalCount();
+        Goal newlyAddedGoal = Duke.goalList.getGoal(currentNoOfGoal - 1);
+        return "Nice! I have added the following goal to your goals list: \n\t" + newlyAddedGoal;
     }
 
     public static String buildingFileMsg() {

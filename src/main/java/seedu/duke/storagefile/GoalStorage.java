@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class GoalStorage extends StorageFile {
+public class GoalStorage extends Storage {
 
     public GoalStorage(String dirName, String textFileName) {
         super(dirName, textFileName);
