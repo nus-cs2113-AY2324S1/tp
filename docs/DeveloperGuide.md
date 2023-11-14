@@ -2,7 +2,18 @@
 layout: default
 title: Developer Guide
 ---
-* Table of Contents
+# Table of Contents
+* [Design & Implementation](#design--implementation)
+* [Recipe Component](#recipe-component)
+* [Ingredient Component](#ingredient-component)
+* [Shortcut Component](#shortcut-component)
+* [Storage Component](#storage-component)
+* [Logger Component](#logger-component)
+* [Implementation](#implementation-component)
+* [Product Scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional)
+* [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,6 +25,7 @@ References
 1. [Developer Guide] (https://se-education.org/addressbook-level3/DeveloperGuide.html) 
 2. [User Guide] (https://se-education.org/addressbook-level3/UserGuide.html)
 
+<a id="design-implementation"></a>
 ## Design & implementation
 
 ## Design
@@ -38,6 +50,7 @@ Given below is a quick overview of main components and how they interact with ea
 - `Recipe`: Recipes created by user
 - `Logger`: A logger that logs the activities done in storage
 
+<a id="recipe-component"></a>
 ### Recipe component
 
 1. Upon booting up the application, `RecipeList` will retrieve past recipe data by calling `restoreSavedData` 
@@ -70,11 +83,12 @@ Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the c
 ![RecipeListDelete](images/RecipeListDelete.png)
 
 ---
-
+<a id="ingredient-component"></a>
 ### Ingredient component
 
 ![IngredientListClassDiagram.png](images%2FIngredientListClassDiagram.png)
 
+<a id="shortcut-component"></a>
 ### Shortcut component
 
 1. Upon booting up the application, `ShortcutList` will retrieve past recipe data by calling `restoreSavedData` 
@@ -86,7 +100,7 @@ Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the c
 
 ![ShortcutListObjectDiagram.png](images%2FShortcutListObjectDiagram.png)
 
-
+<a id="storage-component"></a>
 ### Storage component
 
 In this application, it uses text files to store all data, i.e, recipes, ingredients and shortcuts. The data will be
@@ -106,14 +120,14 @@ ingredients into a string which will be put in their own respective text files.
 ![img.png](images/StoreRecipeStorageSequenceDiagram.png)
 ![img.png](images/StoreShortcutStorageSequenceDiagram.png)
 
-
+<a id="logger-component"></a>
 ### Logger component
 
 In this application, a customised logger is used by recipe, ingredient and shortcut storage. This logger will log
 all activity done and errors in the storages. The logger will use `INFO`, `WARNING` or `SEVERE` levels for the logs.
 The logs will be saved in `essenmakanan.log` inside the `data` folder.
 
-
+<a id="implementation-component"></a>
 ## Implementation
 ### Help Feature
 The help feature is facilitated by the `HelpCommand` class. By calling `executeCommand` on the class, it will invoke the `Ui` class to print the user help commands.
@@ -629,7 +643,7 @@ be executed as follows:
 
 ![img.png](images/UseShortcutSequenceDiagram.png)
 
-
+<a id="product-scope"></a>
 ## Product scope
 ### Target user profile
 
@@ -640,7 +654,7 @@ This product is for people who share kitchen space and ingredients with other co
 
 Easy and intuitive way to keep track of ingredients you have in your kitchen. This helps avoid buying duplicated ingredients, reminds you of the ingredients you need, and gives a visualisation of the recipe timeline to ensure that advance preparation is done in time, eg marinating.
 
-
+<a id="user-stories"></a>
 ## User Stories
 
 | Version        | As a ...                                                                                                      | I want to ...                     | So that I can ...                                                  |
@@ -669,12 +683,14 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 |v2.1| 	advanced user|	subtract ingredients automatically when i use it| 	indicate that i have used an ingredient                           |     
 |v2.1| 	Expert|	Can categorise recipes based on ingredients I have	| cook without purchasing new ingredients                            |    
 
+<a id="non-functional"></a>
 ## Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 recipes and ingredients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+<a id="glossary"></a>
 ## Glossary
 * *glossary item* - Definition
 - Mainstream OS: Windows, Linux, Unix, OS-X

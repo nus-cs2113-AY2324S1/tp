@@ -34,6 +34,7 @@ Ui --> ExitCommand : exit message
 deactivate Ui
 
 ExitCommand --> EssenMakanan : exit message
+EssenMakanan --> User
 deactivate ExitCommand
 
 deactivate EssenMakanan

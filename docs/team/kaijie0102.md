@@ -47,6 +47,7 @@ quantities will add up instead of being ingredient being duplicated
   - View Recipe explanation and sequence diagram
   - View Ingredient explanation and sequence diagram
   - Edit recipe explanation and sequence diagram
+  - Edit ingredient explanation and sequence diagram
 
 - Formatting
   - Figured out how to make puml to look the same as what we have learnt in module
@@ -54,6 +55,7 @@ quantities will add up instead of being ingredient being duplicated
 #### Contributions to team-based tasks
 - Led and facilitated discussions during team meetings, delegating and splitting work to make sure we are on schedule
 - Tried my best to make my teammates and my code elegant and clean. Some code may follow the checkstyle but it is inefficient and ugly.
+- Note taking during discussions
 - Created a [Workflow and Standard Protocols](https://docs.google.com/document/d/11t6wNnOsvHWzN7rnr147CM5kjIGrAWzUtY4v-1XRwt0/edit#heading=h.5qwu1w5b5xrt)
 to ensure that the team is on the same page and everyone follows a similar process.
 - Standardised issue trackers and pull requests format. Issues now look similar and PR will close the relevant issues using keywords.
