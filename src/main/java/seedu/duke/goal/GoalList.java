@@ -9,7 +9,7 @@ import seedu.duke.ui.TextUi;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GoalList extends ArrayList<Goal> {
+public class GoalList extends ArrayList<GoalList.Goal> {
     private static final String DATEKEYWORD = "on";
 
     private ArrayList<Goal> goals;
@@ -184,5 +184,22 @@ public class GoalList extends ArrayList<Goal> {
         }
     }
 
+    public static class Goal {
+        private int calories;
+        private Date date;
+
+        public Goal(int calories, String date) throws IncorrectFormatException {
+            this.calories = calories;
+            this.date = setGoalDateTime(date);
+        }
+
+        private Date setGoalDateTime(String date) throws IncorrectFormatException {
+            return new Date(date);
+        }
+
+        public String toString() {
+            return "Consume " + this.calories + " kcal on " + this.date;
+        }
+    }
 }
 

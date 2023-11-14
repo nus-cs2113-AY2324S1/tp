@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 import seedu.duke.Duke;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.data.Goal;
 import seedu.duke.data.GoalList;
 import seedu.duke.data.Printable;
 
@@ -203,7 +202,7 @@ public class TextUi {
         return "You now have " + goalCount + " goals to accomplish.";
     }
 
-    public static String deleteGoalMsg(Goal deletedGoal) {
+    public static String deleteGoalMsg(GoalList.Goal deletedGoal) {
 
         return "Good. I have removed this goal: " + deletedGoal + "\n"
                 + "Remember not to give up unaccomplished target!" + "\n";
@@ -216,7 +215,7 @@ public class TextUi {
      */
     public static String addGoalSuccessMessage() {
         int currentNoOfGoal = Duke.goalList.getGoalCount();
-        Goal newlyAddedGoal = Duke.goalList.getGoal(currentNoOfGoal - 1);
+        GoalList.Goal newlyAddedGoal = Duke.goalList.getGoal(currentNoOfGoal - 1);
         return "Nice! I have added the following goal to your goals list: \n\t" + newlyAddedGoal;
     }
 
