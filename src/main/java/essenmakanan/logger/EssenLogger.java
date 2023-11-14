@@ -14,6 +14,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class EssenLogger {
     private static final String LOG_PATH = "data/essenmakanan.log";
+    private static final String LOG_DIRECTORY = "data";
 
     private static Logger logger = Logger.getLogger("Storage");
 
@@ -29,8 +30,13 @@ public class EssenLogger {
         logger.addHandler(consoleHandler);
 
         File newLogger = new File(LOG_PATH);
+        File directory = new File(LOG_DIRECTORY);
 
         try {
+            if (!directory.isDirectory() && directory.mkdir()) {
+                System.out.println("Directory successfully created");
+            }
+
             if (!newLogger.isFile() && newLogger.createNewFile()) {
                 System.out.println("Log file successfully created");
             }
