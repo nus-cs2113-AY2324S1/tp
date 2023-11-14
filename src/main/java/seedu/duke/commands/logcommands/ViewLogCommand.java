@@ -20,7 +20,7 @@ enum ViewScope {
 }
 
 public class ViewLogCommand extends Command {
-    public static final String COMMAND_WORD = "view";
+    public static final String COMMAND_WORD = "viewlog";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays exercises from the exercise log.\n"
             + "\tExample: " + COMMAND_WORD + " exercises all" + " | " + COMMAND_WORD + "total all";
     private ViewType viewType;

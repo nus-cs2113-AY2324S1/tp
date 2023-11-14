@@ -9,15 +9,11 @@ import seedu.duke.Duke;
 import seedu.duke.data.exception.IncorrectFormatException;
 
 public class DeleteLogCommand extends Command {
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deletelog";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an exercise from the exercise log.\n"
             + "\tExample: " + COMMAND_WORD + " 1 2 Running 68";
     public String feedbackToUser;
     private List<String> exerciseDetails;
-
-    public DeleteLogCommand() {
-        super();
-    }
 
     public DeleteLogCommand(List<String> exerciseDetails) {
         super();
@@ -59,7 +55,7 @@ public class DeleteLogCommand extends Command {
             feedbackToUser = Duke.exerciseLog.removeExercise(month, day, exerciseName.trim(), caloriesBurned) ?
                     "Successfully removed exercise!" :
                     "Could not find the specified exercise!";
-            Duke.exerciseLogStorage.removeExerciseFromFile(month, day, exerciseName.trim().split(" "), caloriesBurned);
+            Duke.exerciseLogStorage.deleteFromStorage(month, day, exerciseName.trim().split(" "), caloriesBurned);
 
             return new CommandResult(feedbackToUser);
         } catch (NumberFormatException e) {

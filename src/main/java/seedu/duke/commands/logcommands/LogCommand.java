@@ -59,7 +59,7 @@ public class LogCommand extends Command {
             }
 
             String exerciseDescription = Duke.exerciseLog.addExercise(month, day, exerciseName.trim(), caloriesBurned);
-            Duke.exerciseLogStorage.writeExerciseToFile(month, day, exerciseName.trim().split(" "), caloriesBurned);
+            Duke.exerciseLogStorage.writeToStorage(month, day, exerciseName.trim().split(" "), caloriesBurned);
 
             return new CommandResult((feedbackToUser + exerciseDescription).trim());
         } catch (NumberFormatException e) {
