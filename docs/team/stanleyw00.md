@@ -32,7 +32,7 @@ is created in Java and has around 8kLoC.
   * Deleting a shortcut
   * Using a shortcut
   * Viewing shortcuts
-* Create table of contents for shortcut commands
+* Created table of contents for shortcut commands
 * Added hyperlinks for shortcut commands
 
 ### Contributions to the DG
@@ -41,7 +41,7 @@ is created in Java and has around 8kLoC.
 * Set up GitHub Team Organisation and Repository
 * Set up issue tracker and milestones 
 * Set up releases for v1.0, v1.5, v2.0 and v2.1
-* Creating and managing issues in the issue tracker
+* Created and managed issues in the issue tracker
 * Instances of help other team members in online and offline meetings.
 
 ### Review/Mentoring Contributions
