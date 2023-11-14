@@ -23,18 +23,19 @@ public class Date {
     transient LocalDate date;
 
     /**
-     * @param rawData refers to the date String
+     * @param rawData      refers to the date String
      * @param NotAllowPast true for all goal related commands only
      * @throws IncorrectFormatException if failed to parse date string input
      */
-    public Date(String rawData, Boolean  notAllowPast) throws IncorrectFormatException {
+    public Date(String rawData, Boolean notAllowPast) throws IncorrectFormatException {
         setRawData(rawData, notAllowPast);
     }
 
     /**
      * The method is used to set up the date field of a Date object
      * It contains the actual implementation to parse date information from a string
-     * @param rawData refers to a date string
+     * 
+     * @param rawData      refers to a date string
      * @param notAllowPast if past is not allowed, for example for goal functions
      * @throws IncorrectFormatException if failed to parse date string input
      */
