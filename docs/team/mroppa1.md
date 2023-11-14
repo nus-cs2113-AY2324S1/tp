@@ -9,7 +9,7 @@ We support features that allowe students to track their eating, exercise, and fi
 ## Contributions
 
 ### The Meal Class
-I take responsibility to implement the Meal class and its associated classes.Meal-related functionailty enables user to record every meal they consume at a specific time, with unique categories and the amount of calories.Also, user can search recorded meals with the specific category and get the total amount of calories of all meals.
+I take responsibility to implement the Meal class and its associated classes.Meal-related functionailty enables user to record every meal they consume at a specific time, with unique categories and the amount of calories. Also, user can search recorded meals with the specific category and get the total amount of calories of all meals.
 
 ### Documentation
 1. UG
