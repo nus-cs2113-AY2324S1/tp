@@ -755,12 +755,10 @@ Here are the instructions for launching the app:
 
 **Prerequisites**:
 
-- There should be at least 1 shortcut in the list.
+- Ingredient `bread` and `apple` should be added into the ingredient list beforehand using `add i/bread,2,pc` and
+  `add i/apple,1,kg`.
 
 **Test Cases**:
 
-- Ingredient `bread` and `apple` should be added into the ingredient list beforehand using `add i/bread,2,pc` and
-  `add i/apple,1,kg`. 
-
 - `edit i/bread n/apple q/3`
-  Expected: Shortcut for `bread`.
+  Expected: Shortcut for `bread` will be changed to `apple` and its quantity will be changed to `3`.
