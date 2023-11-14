@@ -1,8 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.commands.goal.AchieveGoalCommand;
-import seedu.duke.commands.goal.AchievementCommand;
-import seedu.duke.commands.goal.ViewGoalCommand;
+import seedu.duke.commands.goal.*;
 import seedu.duke.commands.logcommands.LogCommand;
 import seedu.duke.commands.logcommands.ViewLogCommand;
 import seedu.duke.commands.logcommands.UpdateLogCommand;
