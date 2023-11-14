@@ -21,3 +21,4 @@ I contributed to the UG in the parts that are related to goal related classes. I
 * Add table of content with markdowns for all parts in UG
 * Add features and future developments in UG to enhance completeness
 * Add more detailed method documentations to improve readibility
+* Change the overall user input processing to allow more flexible inputs for all functionalities
