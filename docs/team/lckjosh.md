@@ -47,6 +47,7 @@ Github issues:
 - Parser Component
 - Storage Component
 - Implementation: `list` Transactions Feature
+- Instructions for manual testing
 
 ### Contributions to team-based tasks
 - Set up the team repository
