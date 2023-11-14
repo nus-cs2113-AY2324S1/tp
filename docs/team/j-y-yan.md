@@ -21,5 +21,5 @@ I contributed to the UG in the parts that are related to the ExerciseLog class a
 * Correct coding style problems for all classes before v2.1 
 * Update UG for calorie goal related functionality
 * Add table of content with markdowns for all parts in UG
-* Change the title style, add features and future developments in UG to enhance completeness
+* Add features and future developments in UG to enhance completeness
 * Add more detailed method documentations to improve readibility
