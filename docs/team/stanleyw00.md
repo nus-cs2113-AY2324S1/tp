@@ -36,6 +36,22 @@ is created in Java and has around 8kLoC.
 * Added hyperlinks for shortcut commands
 
 ### Contributions to the DG
+* Added and explained the following features in the DG:
+  * Adding a shortcut
+  * Editing a shortcut
+  * Deleting a shortcut
+  * Using a shortcut
+  * Viewing shortcuts
+  * Storage
+  * Logging
+* Created and added UML diagrams for the following:
+  * Shortcut classes
+  * Adding a shortcut
+  * Editing a shortcut
+  * Deleting a shortcut
+  * Using a shortcut
+  * Viewing shortcuts
+  * Storage
 
 ### Contributions to Team-Based Tasks 
 * Set up GitHub Team Organisation and Repository
