@@ -78,6 +78,7 @@ A new recipe titled "dumpings" will be added to `recipes:RecipeList`. The number
 
 ![RecipeListAdd](images/RecipeListAdd.png)
 
+
 3. `Delete` an existing recipe
 
 Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the command `delete r/2`, `recipes:RecipeList` will remove `chicken pizza:Recipe` from the ArrayList of recipes.
