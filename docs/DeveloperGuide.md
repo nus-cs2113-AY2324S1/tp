@@ -674,7 +674,7 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 | v2.0a          | 	new user                    | 	be greeted with an instruction manual	                                                        | learn how to navigate through the app                              |
 | v2.0a          | beginner user	               | view specific recipe                                                                           |
 | v2.0a          | beginner user	               | add ingredients to recipe                                                                      |
-|v2.0a| 	amateur	                    | edit ingredients of recipe	                                                                    |edit a recipe I have created| change recipe ingredients                                          |
+|v2.0a| 	amateur	                    | edit ingredients of recipe	                                                                    | change recipe ingredients|                                          |                                         
 |v2.0a	| amateur	edit steps of recipe | 	edit a recipe I have created                                                                  | change recipe steps                                                |
 |v2.0a| 	beginner user               | 	type the quantity of ingredients as well as the unit of measurement                           | 	add an item with the quantity to my kitchen inventory             |
 |v2.0a| 	amateur	                    | change the quantity of ingredient available	                                                   | remove a fixed quantity of an ingredient from the list             |
@@ -688,7 +688,7 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 |v2.1| 	advanced user               | 	cook for more if necessary                                                                    | 	scale recipe based on number of pax                               |                             
 |v2.1| 	advanced user               | 	subtract ingredients automatically when i use it                                              | 	indicate that i have used an ingredient                           |     
 |v2.1| 	expert                      | 	can categorise recipes based on ingredients I have	                                           | cook without purchasing new ingredients                            |    
-|v2.1| 	advanced user               | 	add shortcuts to add commonly used ingredients	                                               | make the process of adding ingredients more efficient.                            |    
+|v2.1| 	advanced user               | 	add shortcuts to add commonly used ingredients	                                               | make the process of adding ingredients more efficient.             |    
 
 
 <a id="non-functional"></a>
