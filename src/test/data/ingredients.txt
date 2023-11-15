@@ -1,0 +1,3 @@
+bread | 2 | GRAM
+cheese | 10 | PIECE
+carrot | 5 | KILOGRAM

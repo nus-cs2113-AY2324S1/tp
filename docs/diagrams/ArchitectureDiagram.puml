@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+!include <office/Users/user>
+!include <office/Concepts/documents>
+
+hide footbox
+hide members
+
+
+Package " "<<Rectangle>>{
+    Class UI UI_COLOR
+    Class Main MAIN_COLOR
+    Class Storage STORAGE_COLOR
+    Class Parser PARSER_COLOR
+    Class Command COMMAND_COLOR
+    Class Shortcut SHORTCUT_COLOR
+    Class Ingredient INGREDIENT_COLOR
+    Class Recipe RECIPE_COLOR
+    Class Logger LOGGER_COLOR
+}
+
+Class "<$user>" as User PERSON_COLOR
+Class "<$documents>" as File UI_COLOR
+
+
+UI -[#red]> Main
+
+Main -right[#black]-> UI
+Main -[#black]-> Storage
+Main -[#black]-> Parser
+
+Logger -[#orange].>File
+
+Parser -[#green]-> Command
+Parser -[#green]-> Main
+
+Command -[#blue]-> Recipe
+Command -[#blue]-> Ingredient
+Command -[#blue]-> Shortcut
+
+Storage -[STORAGE_COLOR].> Main
+Storage -[STORAGE_COLOR]-> Logger
+
+Storage .right[STORAGE_COLOR].>File
+User ..> UI
+@enduml

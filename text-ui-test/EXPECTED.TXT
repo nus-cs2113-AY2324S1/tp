@@ -1,9 +1,19 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-What is your name?
-Hello James Gosling
+Directory successfully created
+Log file successfully created
+Creating database
+Directory located
+Data text file successfully created
+Creating database
+Directory located
+Data text file successfully created
+Creating database
+Directory located
+Data text file successfully created
+------------------------------------------------
+Welcome to Essen Makanan!!! A one-stop place to track the
+ingredients in your kitchen and store your favourite recipes
+To get started, type [help] for list of commands
+------------------------------------------------
+------------------------------------------------
+Hope you had fun! See you again!
+------------------------------------------------

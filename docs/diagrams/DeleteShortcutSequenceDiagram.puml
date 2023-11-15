@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":DeleteShortcutCommand" as DeleteShortcutCommand COMMAND_COLOR
+participant "<<class>>\nShortcutParser" as ShortcutParser SHORTCUT_PARSER_COLOR
+participant "shortcut:Shortcut" as Shortcut SHORTCUT_COLOR
+participant "shortcuts:ShortcutList" as Shortcuts SHORTCUT_LIST_COLOR
+participant "<<class>>\nUi" as Ui UI_COLOR
+
+[-> DeleteShortcutCommand : executeCommand()
+activate DeleteShortcutCommand
+
+DeleteShortcutCommand -> ShortcutParser : getShortcutIndex(shortcuts, inputDetail);
+activate ShortcutParser
+
+ShortcutParser --> DeleteShortcutCommand
+deactivate ShortcutParser
+
+DeleteShortcutCommand -> Shortcuts : deleteShortcut(index)
+activate Shortcuts
+
+Shortcuts -> Ui : printDeletedShortcut()
+activate Ui
+
+Ui --> Shortcuts
+deactivate Ui
+
+Shortcuts -> DeleteShortcutCommand
+deactivate Shortcuts
+
+[<-- DeleteShortcutCommand
+deactivate DeleteShortcutCommand
+
+@enduml

@@ -1,9 +1,8 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+| Display                                                                                                                                   |         Name         |              Github Profile              |            Portfolio             |
+|-------------------------------------------------------------------------------------------------------------------------------------------|:--------------------:|:----------------------------------------:|:--------------------------------:|
+| <img src="https://avatars.githubusercontent.com/u/110610562?v=4" alt="Avatar" width="100" height="100">                                   |    Stanley Wijaya    | [Github](https://github.com/StanleyW00)  | [Portfolio](team/stanleyw00.md)  |
+| <img src="images/charkty.png" alt="charkty" width="100" height="100">                                                                     | Charlyn Kwan Ting Yu |   [Github](https://github.com/charkty)   |   [Portfolio](team/charkty.md)   |
+| <img src="images/golden_retriever.jpg" alt="kaijie0102" width="100" height="100"> |     Leow Kai Jie     | [Github](https://github.com/kaijie0102)  | [Portfolio](team/kaijie0102.md)  |
+| ![](https://via.placeholder.com/100.png?text=Photo)                                                                                       |       Li Haoyu       | [Github](https://github.com/Haoyuli2002) | [Portfolio](team/haoyuli2002.md) |

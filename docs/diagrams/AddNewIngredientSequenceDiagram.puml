@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddIngredientCommand" as AddIngredientCommand COMMAND_COLOR
+participant "<<class>>\n:IngredientParser" as IngredientParser INGREDIENT_PARSER_COLOR
+participant ":Ingredient" as Ingredient INGREDIENT_COLOR
+participant "ingredients:IngredientList" as ingredients INGREDIENT_LIST_COLOR
+participant "<<class>>\n:Ui" as Ui UI_COLOR
+
+[-> AddIngredientCommand: executeCommand()
+
+activate AddIngredientCommand
+
+loop //all ingredients//
+  AddIngredientCommand -> IngredientParser: parseIngredient(ingredients, newIngredientDetails)
+  activate IngredientParser
+
+  IngredientParser -> IngredientParser : mapIngredientUnit(ingredientUnitValue)
+  activate IngredientParser
+  deactivate IngredientParser
+
+
+  IngredientParser -[hidden]> Ingredient
+  create Ingredient
+  IngredientParser -> Ingredient : new Ingredient(ingredientName, ingredientQuantity, ingredientUnit)
+  activate Ingredient
+
+  Ingredient --> IngredientParser : newIngredient
+  deactivate Ingredient
+
+  IngredientParser --> AddIngredientCommand : newIngredient
+  deactivate IngredientParser
+
+  AddIngredientCommand -> ingredients: addIngredient(newIngredient)
+
+  activate ingredients
+  ingredients -> ingredients: ingredients.add(newIngredient)
+  activate ingredients RECIPE_LIST_COLOR_T1
+  deactivate ingredients
+
+  ingredients --> AddIngredientCommand
+  deactivate ingredients
+
+
+  AddIngredientCommand -> Ui: printAddIngredientsSuccess(newIngredient.getname())
+
+  activate Ui
+
+  Ui -> Ui: print ingredient added success message
+  activate Ui
+  deactivate Ui
+
+  Ui -> Ui: print divider
+    activate Ui
+
+  deactivate Ui
+
+  Ui --> AddIngredientCommand
+  deactivate Ui
+
+end
+
+
+
+[<--AddIngredientCommand
+
+deactivate AddIngredientCommand
+
+
+@enduml

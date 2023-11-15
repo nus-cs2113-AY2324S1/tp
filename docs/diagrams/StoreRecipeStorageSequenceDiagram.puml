@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":RecipeStorage" as RecipeStorage STORAGE_COLOR
+participant "<<class>>\n:RecipeParser" as RecipeParser RECIPE_PARSER_COLOR
+participant "<<class>>\n:IngredientParser" as IngredientParser INGREDIENT_PARSER_COLOR
+participant ":FileWriter" as FileWriter FILE_WRITER_COLOR
+
+[-> RecipeStorage : saveData(recipes)
+activate RecipeStorage
+
+create FileWriter
+RecipeStorage -> FileWriter : new FileWriter(dataPath, false)
+activate FileWriter
+
+FileWriter --> RecipeStorage
+deactivate FileWriter
+
+loop#FFAEAE #FFE6E6  recipes
+RecipeStorage -> RecipeStorage : convertToString(recipe)
+activate RecipeStorage
+
+RecipeStorage -> RecipeParser : convertSteps(steps)
+activate RecipeParser
+
+RecipeParser --> RecipeStorage : return string
+deactivate RecipeParser
+
+RecipeStorage -> RecipeParser : convertIngredient(ingredients)
+activate RecipeParser
+
+loop ingredients
+RecipeParser -> IngredientParser : convertToString(ingredient)
+activate IngredientParser
+
+IngredientParser --> RecipeParser : return string
+deactivate IngredientParser
+end
+
+RecipeParser --> RecipeStorage : return string
+deactivate RecipeParser
+
+RecipeStorage --> RecipeStorage : return string
+deactivate RecipeStorage
+
+RecipeStorage -[hidden]> FileWriter
+RecipeStorage -> FileWriter : write(dataString)
+activate FileWriter
+
+FileWriter --> RecipeStorage
+deactivate FileWriter
+end
+
+[<---RecipeStorage
+deactivate RecipeStorage
+
+@enduml

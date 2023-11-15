@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+participant ":EssenMakanan" as EssenMakanan MAIN_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant "command:ViewSpecificIngredientCommand" as Command COMMAND_COLOR
+participant "<<class>>\n:IngredientParser" as IngredientParser INGREDIENT_PARSER_COLOR
+participant "ingredients:IngredientList" as Ingredients INGREDIENT_COLOR
+
+User -> EssenMakanan: input: view i/bread
+activate EssenMakanan
+
+EssenMakanan -> Parser : parseCommand()
+activate Parser
+
+create Command
+Parser -> Command
+activate Command
+
+Command --> Parser : command
+
+Parser -> EssenMakanan: command
+deactivate Parser
+
+EssenMakanan -> Command: executeCommand()
+
+Command -> IngredientParser : getIngredientIndex()
+activate IngredientParser
+
+IngredientParser --> Command
+deactivate IngredientParser
+
+Command -> Ingredients: getIngredient()
+activate Ingredients
+
+Ingredients --> Command : ingredient
+deactivate Ingredients
+
+Command --> EssenMakanan
+deactivate Command
+
+EssenMakanan --> User
+deactivate EssenMakanan
+
+@enduml

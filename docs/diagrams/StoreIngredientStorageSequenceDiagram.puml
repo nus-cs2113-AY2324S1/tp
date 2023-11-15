@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":IngredientStorage" as IngredientStorage STORAGE_COLOR
+participant "<<class>>\n:IngredientParser" as IngredientParser INGREDIENT_PARSER_COLOR
+participant ":FileWriter" as FileWriter FILE_WRITER_COLOR
+
+[-> IngredientStorage : saveData(ingredients)
+activate IngredientStorage
+
+create FileWriter
+IngredientStorage -> FileWriter : new FileWriter(dataPath, false)
+activate FileWriter
+
+FileWriter --> IngredientStorage
+deactivate FileWriter
+
+loop#FFAEAE #FFE6E6  ingredients
+IngredientStorage -> IngredientParser : convertToString(ingredient)
+activate IngredientParser
+
+IngredientParser --> IngredientStorage : return string
+deactivate IngredientParser
+
+IngredientStorage -[hidden]> FileWriter
+IngredientStorage -> FileWriter : write(dataString)
+activate FileWriter
+
+FileWriter --> IngredientStorage
+deactivate FileWriter
+end
+
+[<---IngredientStorage
+deactivate IngredientStorage
+
+@enduml
