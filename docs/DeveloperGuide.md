@@ -663,32 +663,32 @@ Easy and intuitive way to keep track of ingredients you have in your kitchen. Th
 <a id="user-stories"></a>
 ## Appendix B - User Stories
 
-| Version        | As a ...                     | I want to ...                                                                                  | So that I can ...                                                  |
-|----------------|------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
-| v1.0           | beginner user                | see all recipes                                                                                | learn and try all recipes                                          |
-| v1.0           | beginner user                | add new recipes into the list                                                                  | learn and try out new recipes                                      |
-| v1.0           | beginner user                | see all ingredient I have                                                                      |                                                                    |
-| v1.0           | beginner user                | add ingredients to the empty list                                                              | add an item to my kitchen inventory                                |
-| v2.0a          | amateur                      | delete some recipes                                                                            | remove a recipe that I no longer want to use                       |
-| v2.0a          | amateur                      | delete ingredients                                                                             | remove an ingredient from the list                                 |
-| v2.0a          | 	new user                    | 	be greeted with an instruction manual	                                                        | learn how to navigate through the app                              |
-| v2.0a          | beginner user	               | view specific recipe                                                                           |
-| v2.0a          | beginner user	               | add ingredients to recipe                                                                      |
-|v2.0a| 	amateur	                    | edit ingredients of recipe	                                                                    | change recipe ingredients|                                          |                                         
-|v2.0a	| amateur	edit steps of recipe | 	edit a recipe I have created                                                                  | change recipe steps                                                |
-|v2.0a| 	beginner user               | 	type the quantity of ingredients as well as the unit of measurement                           | 	add an item with the quantity to my kitchen inventory             |
-|v2.0a| 	amateur	                    | change the quantity of ingredient available	                                                   | remove a fixed quantity of an ingredient from the list             |
-|v2.0b| 	beginner user               | 	add milestones with tags on the steps                                                         | 	see the overview of steps to execute in the recipe                |
-|v2.0b| 	amateur	                    | view a timeline of the cooking process, from preparation all the way till actual cooking time	 | do preparations that are necessary at the time needed              |
-|v2.0b| 	amateur	                    | See all ingredients I am lacking for a specific recipe	                                        | get an overview of ingredients i need to buy                       |
-|v2.0b| new user                     | exploring the app	see default recipes pre-placed in the app	                                   | get started with cooking and learn the recipe’s format             |
-|v2.0b| 	amateur	                    | find recipes by ingredients                                                                    | to give user options on what they can cook based on their cravings |
-|v2.1| 	expert                      | 	Duplicate a recipe	                                                                           | Save time for creating similar recipes                             |                                           
-|v2.1| 	advanced user               | 	Schedule recipes for a week                                                                   | 	plan for weekly grocery shopping                                  |                                  
-|v2.1| 	advanced user               | 	cook for more if necessary                                                                    | 	scale recipe based on number of pax                               |                             
-|v2.1| 	advanced user               | 	subtract ingredients automatically when i use it                                              | 	indicate that i have used an ingredient                           |     
-|v2.1| 	expert                      | 	can categorise recipes based on ingredients I have	                                           | cook without purchasing new ingredients                            |    
-|v2.1| 	advanced user               | 	add shortcuts to add commonly used ingredients	                                               | make the process of adding ingredients more efficient.             |    
+| Version | As a ...      | I want to ...                                                                         | So that I can ...                                             |
+|---------|---------------|---------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| v1.0    | beginner user | see all recipes                                                                       | learn and try all recipes                                     |
+| v1.0    | beginner user | add new recipes into the list                                                         | learn and try out new recipes                                 |
+| v1.0    | beginner user | see all ingredient I have                                                             |                                                               |
+| v1.0    | beginner user | add ingredients to the empty list                                                     | add an item to my kitchen inventory                           |
+| v2.0a   | amateur       | delete some recipes                                                                   | remove a recipe that I no longer want to use                  |
+| v2.0a   | amateur       | delete ingredients                                                                    | remove an ingredient from the list                            |
+| v2.0a   | new user      | be greeted with an instruction manual	                                                | learn how to navigate through the app|
+| v2.0a   | beginner user | view specific recipe                                                                  ||
+| v2.0a   | beginner user | add ingredients to recipe                                                             ||
+| v2.0a   | amateur       | edit ingredients of recipe	                                                           | change recipe ingredients                                     |
+| v2.0a   | amateur       | edit steps of recipe                                                                  | change recipe steps                                           |
+| v2.0a   | beginner user | type the quantity of ingredients as well as the unit of measurement                   | 	add an item with the quantity to my kitchen inventory        |
+| v2.0a   | amateur       | change the quantity of ingredient available	                                          | remove a fixed quantity of an ingredient from the list        |
+| v2.0b   | beginner user | add milestones with tags on the steps                                                 | see the overview of steps to execute in the recipe            |
+| v2.0b   | amateur       | view a timeline of the cooking process, from preparation all the way till actual cooking time	 | do preparations that are necessary at the time needed         |
+| v2.0b   | amateur       | See all ingredients I am lacking for a specific recipe	                               | get an overview of ingredients i need to buy                  |
+| v2.0b   | new user      | exploring the app	see default recipes pre-placed in the app	                          | get started with cooking and learn the recipe’s format        |
+| v2.0b   | amateur       | find recipes by ingredients                                                           | to give user options on what they can cook based on their cravings |
+| v2.1    | expert        | Duplicate a recipe	                                                                   | Save time for creating similar recipes                        |
+| v2.1    | advanced user | Schedule recipes for a week                                                           | plan for weekly grocery shopping                              |
+| v2.1    | advanced user | cook for more if necessary                                                            | scale recipe based on number of pax                           |
+| v2.1    | advanced user | subtract ingredients automatically when i use it                                      | indicate that i have used an ingredient                       |
+| v2.1    | expert        | can categorise recipes based on ingredients I have	                                   | cook without purchasing new ingredients                       |
+| v2.1    | advanced user | add shortcuts to add commonly used ingredients	                                       | make the process of adding ingredients more efficient         |
 
 
 <a id="non-functional"></a>
