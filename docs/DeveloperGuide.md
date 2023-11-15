@@ -68,18 +68,18 @@ exactly one `RecipeStepList`.
 
 Two main functionalities that we have are to `add` and `delete` a recipe from the recipeList. Below is an object diagram to illustrate how the add and delete function works.
 
-1. The initial state of `recipes:RecipeList` stores 2 `Recipe`, namely, 'chicken pizza' and 'meatball noodles'
+ 1. The initial state of `recipes:RecipeList` stores 2 `Recipe`, namely, 'chicken pizza' and 'meatball noodles'
 
 ![RecipeListInitialState](images/RecipeListInitialState.png)
 
 
-2. `Add` a new recipe
+ 2. `Add` a new recipe
 A new recipe titled "dumpings" will be added to `recipes:RecipeList`. The number of `recipe` stored in `recipes:RecipeList` will increase from 2 to 3.
 
 ![RecipeListAdd](images/RecipeListAdd.png)
 
 
-3. `Delete` an existing recipe
+ 3. `Delete` an existing recipe
 Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the command `delete r/2`, `recipes:RecipeList` will remove `chicken pizza:Recipe` from the ArrayList of recipes.
 
 ![RecipeListDelete](images/RecipeListDelete.png)
