@@ -72,17 +72,13 @@ Two main functionalities that we have are to `add` and `delete` a recipe from th
 ![RecipeListInitialState](images/RecipeListInitialState.png)
 
 
-2. `Add` a new recipe 
-
+2. `Add` a new recipe
 A new recipe titled "dumpings" will be added to `recipes:RecipeList`. The number of `recipe` stored in `recipes:RecipeList` will increase from 2 to 3.
-
 ![RecipeListAdd](images/RecipeListAdd.png)
 
 
 3. `Delete` an existing recipe
-
 Recipe titled "chicken pizza" is at index 2 of the `RecipeList`. By giving the command `delete r/2`, `recipes:RecipeList` will remove `chicken pizza:Recipe` from the ArrayList of recipes.
-
 ![RecipeListDelete](images/RecipeListDelete.png)
 
 ---
