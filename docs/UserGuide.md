@@ -87,7 +87,7 @@ EssenMakanan is an app that keeps track of ingredients that a user has in the ki
 | [View specific ingredient](#view-ingredient)       | view i/INGREDIENT_NAME <br><br>view i/INGREDIENT_ID               | view i/bread <br><br>view i/1 |
 | [Add ingredient](#add-ingredient)                  | add i/INGREDIENT_NAME,QUANTITY,VALID_UNIT                         | add i/eggs,2,pc               |
 | [Edit ingredient](#edit-ingredient)                | edit i/INGREDIENT_NAME [n/NEW_NAME] [q/NEW_QUANTITY] [u/NEW_UNIT] | edit i/bread n/toast q/3 u/pc |
-| [Delete Ingredient](#delete-ingredient)            | delete r/INGREDIENT_NAME OR delete r/INGREDIENT_ID                | delete i/EGG OR delete i/1    |
+| [Delete Ingredient](#delete-ingredient)            | delete r/INGREDIENT_NAME OR delete r/INGREDIENT_ID                | delete i/egg OR delete i/1    |
 | [Use Ingredient](#use-ingredient)                  | use i/INGREDIENT_NAME,QUANTITY,VALID_UNIT [i/...]                 | use i/chicken,1,kg            |
 
 
@@ -147,8 +147,7 @@ List all commands and the format and brief description of each command.
 ### Recipe Commands
 
 <a id="view-recipes"></a>
-
-#### View all recipes -  `view r` 
+#### View all recipes -  `view r`
 (<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
 
 List all recipes available inside the app.
@@ -165,6 +164,7 @@ Examples :
   
 * `view r/1` 
 to show a recipe at index ‘1’ of the list.
+
 ---
 
 <a id="view-available-recipe"></a>
@@ -183,6 +183,8 @@ For example
 ![img_2.png](images/ViewARCommand2.png)
 
 - As seen, I am able to cook recipes "bread" and "scrambled egg" with my current inventory ingredients!
+
+---
 
 <a id="add-recipe"></a>
 #### Add new recipe - `add r/RECIPE_TITLE [t/TAG] s/STEP_DESCRIPTION [s/...] [d/DURATION] i/INGREDIENT_NAME,QUANTITY,UNIT [i/...]`
@@ -216,6 +218,7 @@ Examples :
 - **Full Example 2 (default tag = 4 = ACTUAL_COOKING)** :<br>
   `add r/meatball pasta t/1 s/defrost meatballs d/30mins t/2 s/Boil pasta s/fry meatballs i/pasta,100,g i/meatball,3,pc`
 ![AddRecipeFullEg2.png](images%2FAddRecipeFullEg2.png)
+
 ---
 
 <a id="delete-recipe"></a>
@@ -237,6 +240,7 @@ Example :
     to delete recipe titled "meatball pasta"
 
 ---
+
 <a id="edit-recipe"></a>
 #### Edit a recipe - `edit r/RECIPE_TITLE [n/NEW_TITLE] [s/STEP_INDEX,NEW_STEP_DESCRIPTION] [ i/INGREDIENT_INDEX, [n-NEW_INGREDIENT_NAME], [q-NEW_INGREDIENT_QUANTITY], [u-NEW_INGREDIENT_UNIT] ]`
 (<a href="#recipe-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
@@ -344,6 +348,7 @@ Note:
 Example:
 - `plan 2 r/1 r/2` 
 ![img_1.png](images/PlanCommandImage.png)  
+
 ---
 
 <a id="execute-recipe"></a>
@@ -361,8 +366,6 @@ Note:
 Example:
 - `execute bread`
 ![ExecuteRecipeExample.png](images%2FExecuteRecipeExample.png)
-
-
 
 ---
 
@@ -439,6 +442,7 @@ Example :
 * `delete i/egg` to delete `egg` ingredient
 
 ---
+
 <a id="use-ingredient"></a>
 #### Use ingredient - `use i/chicken,1,kg`
 (<a href="#ingredient-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
@@ -483,6 +487,7 @@ Example:
 ![AddShortcutExample.png](images%2FAddShortcutExample.png)
 
 ---
+
 <a id="edit-shortcut"></a>
 #### Edit Shortcut - `edit sc/INGREDIENT_NAME n/NEW_NAME q/NEW_QUANTITY or edit sc/SHORTCUT_INDEX n/NEW_NAME q/NEW_QUANTITY`
 (<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
@@ -502,6 +507,7 @@ Example:
 ![EditShortcutExample.png](images%2FEditShortcutExample.png)
 
 ---
+
 <a id="delete-shortcut"></a>
 #### Delete Shortcut - `delete sc/INGREDIENT_NAME OR delete sc/SHORTCUT_INDEX`
 (<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
@@ -514,6 +520,7 @@ Example:
 ![DeleteShortcutExample.png](images%2FDeleteShortcutExample.png)
 
 ---
+
 <a id="use-shortcut"></a>
 #### Use Shortcut - `sc INGREDIENT_NAME or sc SHORTCUT_ID`
 (<a href="#shortcut-command-anchor"><img src="images/BackToTopImage.png" alt="Back to Top" width="20" height="15"/></a>)
