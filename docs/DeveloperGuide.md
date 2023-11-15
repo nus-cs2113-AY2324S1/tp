@@ -24,8 +24,8 @@ title: Developer Guide
 ## Acknowledgements
 
 References
-1. [Developer Guide] (https://se-education.org/addressbook-level3/DeveloperGuide.html) 
-2. [User Guide] (https://se-education.org/addressbook-level3/UserGuide.html)
+1. [Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) 
+2. [User Guide](https://se-education.org/addressbook-level3/UserGuide.html)
 
 <a id="design-implementation"></a>
 ## Design & implementation
