@@ -55,7 +55,7 @@ Please follows the steps below to start your Fitnus journey.
 | [Add an Exercise](#log---adding-an-exercise)      | [Add a Goal](#set-on---setting-up-a-calorie-goal) | [Add a Meal](#meal_add---adding-a-meal) | [Help](#help---viewing-help) |
 | [Update an Exercise](#update---updating-an-exercise)      | [Delete a Goal](#deleteg---delete-a-goal-from-current-goal-list)        |   [Delete a Meal](#meal_delete---deleting-a-meal) |  [Exit](#exiting-the-program-exit)     |
 | [View Exercise](#view---viewing-exercises) | [Make Achievement](#achieve---turn-one-goal-as-achieved)        |    [List a Meal](#meal_list---listing-meals) |[View Achievement](#achievement---view-your-achieved-goals)       |
-|  | [View Goals](#viewg---view-your-current-goal-list)        |     |       |
+| [Delete Exercise]() | [View Goals](#viewg---view-your-current-goal-list)        |     |       |
 
 2. Frequently-asked-quesions([**FAQs**](#faqs))
 
