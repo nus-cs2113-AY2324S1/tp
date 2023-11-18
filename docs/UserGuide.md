@@ -19,7 +19,7 @@ Please follows the steps below to start your Fitnus journey.
    
       A simple example as below, with downloaded file name "Fitnus":
 
-      ![image](https://github.com/AY2324S1-CS2113-F11-1/tp/assets/142566176/5f48a750-2078-4cc3-9410-1c5cca94f992)
+      ![image](https://github.com/AY2324S1-CS2113-F11-1/tp/assets/142566176/5f48a750-2078-4cc3-9410-1c5cca94f992 = 250x250)
 
 
 
