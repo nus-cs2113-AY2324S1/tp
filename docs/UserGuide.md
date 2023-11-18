@@ -9,7 +9,7 @@ Welcome to the FITNUS UserGuide! We're glad you're here and if you have any ques
 Please follows the steps below to start your Fitnus journey.
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Duke` from [here](https://github.com/AY2324S1-CS2113-F11-1/tp/releases).
+2. Down the latest version of `FITNUS` from [here](https://github.com/AY2324S1-CS2113-F11-1/tp/releases).
 3. Put the downloaded jar file into any directory you prefer. This directory should allow read and write of any files inside the directory.
 4. Open the command terminal on your device. Run the jar file using command `java -jar ABSOLUTE_PATH_OF_JAR_FILE`. If it failed, please try steps 5 and 6.
 5. Make sure that you start the terminal from the same position/directory where the jar file is stored. Below is an example on Windows.
