@@ -17,10 +17,9 @@ Please follows the steps below to start your Fitnus journey.
 
 5. Run the FITNUS app using command  `java -jar JAR_FILE_NAME.jar` where `JAR_FILE_NAME` is the name of the jar file as stored on your local computer
    
+      A simple example as below, with downloaded file name "Fitnus":
 
-A simple example as below, with downloaded file name "Fitnus":
-
-![image](https://github.com/AY2324S1-CS2113-F11-1/tp/assets/142566176/5f48a750-2078-4cc3-9410-1c5cca94f992)
+      ![image](https://github.com/AY2324S1-CS2113-F11-1/tp/assets/142566176/5f48a750-2078-4cc3-9410-1c5cca94f992)
 
 
 
