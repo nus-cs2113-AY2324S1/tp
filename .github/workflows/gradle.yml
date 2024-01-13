@@ -13,11 +13,6 @@ jobs:
       - name: Set up repository
         uses: actions/checkout@master
 
-      - name: Set up repository
-        uses: actions/checkout@master
-        with:
-          ref: master
-
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
 
@@ -29,6 +24,16 @@ jobs:
         with:
           java-version: '11'
           java-package: jdk+fx
+
+      # Install dos2unix on Linux
+      - name: Install dos2unix (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y dos2unix
+
+      # Install dos2unix on macOS
+      - name: Install dos2unix (macOS)
+        if: runner.os == 'macOS'
+        run: brew install dos2unix
 
       - name: Build and check with Gradle
         run: ./gradlew check

@@ -1,0 +1,14 @@
+@startuml
+!define WILDWATCH_COLOR #006368
+!define MAIN_COLOR #FF0000
+!define PARSER_COLOR #ED7D31
+!define STORAGE_COLOR #FFC000
+!define COMMAND_COLOR #00B050
+!define ENTRY_COLOR #00B0F0
+!define ENTRYLIST_COLOR #4472C4
+!define UI_COLOR #7030A0
+!define LOCALSTORAGE_COLOR #000000
+
+hide footbox
+
+@enduml
