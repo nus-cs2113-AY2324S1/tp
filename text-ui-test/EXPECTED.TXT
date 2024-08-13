@@ -1,9 +1,81 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+Hello there! Welcome to WildWatch!
+____________________________________________________________
+____    __    ____  __   __       _______
+\   \  /  \  /   / |  | |  |     |       \
+ \   \/    \/   /  |  | |  |     |  .--.  |
+  \            /   |  | |  |     |  |  |  |
+   \    /\    /    |  | |  `----.|  '--'  |
+    \__/  \__/     |__| |_______||_______/
+____    __    ____  ___   .___________.  ______  __    __
+\   \  /  \  /   / /   \  |           | /      ||  |  |  |
+ \   \/    \/   / /  ^  \ `---|  |----`|  ,----'|  |__|  |
+  \            / /  /_\  \    |  |     |  |     |   __   |
+   \    /\    / /  _____  \   |  |     |  `----.|  |  |  |
+    \__/  \__/ /__/     \__\  |__|      \______||__|  |__|
+____________________________________________________________
+What would you like to do?
+____________________________________________________________
+____________________________________________________________
+The following entry has been added:
+Date: [02-03-2023] | Species: [Annam Leaf Turtle] | Name: [Ariel_2] | Remark: [Injured left flipper]
+____________________________________________________________
+____________________________________________________________
+The following entry has been added:
+Date: [02-03-2023] | Species: [Annam Leaf Turtle] | Name: [Ariel_2] | Remark: [Injured left flipper]
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid Date input :-(
+____________________________________________________________
 
-What is your name?
-Hello James Gosling
+
+---------------------------HELP PAGE----------------------------
+
+
+    ____________________________________________________________
+1.  Get help - show the list of commands available for this app
+     Format: help
+     Examples:
+       help
+    ____________________________________________________________
+
+
+
+
+    ____________________________________________________________
+2.  To add a new wildlife
+     Format: add D/DATE S/SPECIES N/NAME R/REMARKS
+       DATE should be in the format DD-MM-YY
+     Examples:
+       add D/02-03-2023 S/Annam Leaf Turtle N/Ariel R/Injured left flipper
+       add D/10-11-20 S/Bali Myna N/Myna_1 R/ S/Malayan Water Monitor N/Monitor_1 R/Aggressive
+    ____________________________________________________________
+
+
+
+
+    ____________________________________________________________
+3.  To list all wildlife,
+     Format: list
+     Examples:
+       list
+    ____________________________________________________________
+
+
+
+
+    ____________________________________________________________
+4.  To delete a wildlife
+     Format: delete INDEX
+       The index refers to the index number shown in the displayed observation list.
+       Note:
+           - The index must be a positive integer:
+           - Deleted items may not be recoverable:
+     Examples:
+       delete 1
+       delete 6
+    ____________________________________________________________
+
+-------------------------HELP PAGE END--------------------------
+
+____________________________________________________________
